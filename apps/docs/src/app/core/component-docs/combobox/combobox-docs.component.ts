@@ -12,6 +12,10 @@ import * as comboboxTemplateH from '!raw-loader!./examples/combobox-template-exa
 import * as comboboxTemplateT from '!raw-loader!./examples/combobox-template-example.component.ts';
 import * as comboboxDisabledTemplateH from '!raw-loader!./examples/combobox-disabled-example.component.html';
 import * as comboboxDisabledTemplateT from '!raw-loader!./examples/combobox-disabled-example.component.ts';
+import * as comboboxColumnsTemplateH from '!raw-loader!./examples/combobox-columns-example.component.html';
+import * as comboboxColumnsTemplateT from '!raw-loader!./examples/combobox-columns-example.component.ts';
+import * as comboboxGroupTemplateH from '!raw-loader!./examples/combobox-group-example.component.html';
+import * as comboboxGroupTemplateT from '!raw-loader!./examples/combobox-group-example.component.ts';
 import * as comboboxDisabledTemplateScss from '!raw-loader!./examples/combobox-disabled-example.component.scss';
 import * as comboboxFormT from '!raw-loader!./examples/combobox-forms-example.component.ts';
 import * as comboboxFormH from '!raw-loader!./examples/combobox-forms-example.component.html';
@@ -124,6 +128,34 @@ export class ComboboxDocsComponent {
             component: 'ComboboxDisabledExampleComponent',
             code: comboboxDisabledTemplateT,
             fileName: 'combobox-disabled-example'
+        }
+    ];
+
+    comboboxColumnsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxColumnsTemplateH,
+            fileName: 'combobox-columns-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxColumnsExampleComponent',
+            code: comboboxColumnsTemplateT,
+            fileName: 'combobox-columns-example'
+        }
+    ];
+
+    comboboxGroupExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxGroupTemplateH,
+            fileName: 'combobox-group-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxGroupExampleComponent',
+            code: comboboxGroupTemplateT,
+            fileName: 'combobox-group-example'
         }
     ];
 

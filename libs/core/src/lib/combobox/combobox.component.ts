@@ -1,7 +1,7 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy, ChangeDetectorRef,
-    Component,
+    Component, ContentChildren,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -18,7 +18,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MenuItemDirective } from '../menu/menu-item.directive';
+import { ListItemDirective } from '../list/list-item.directive';
+import { ListMessageDirective } from '../list/list-message.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';
@@ -26,6 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
+import { GroupFunction } from '../utils/pipes/list-group.pipe';
 
 /**
  * Allows users to filter through results and select a value.
@@ -67,7 +69,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** Filter function. Accepts an array of objects and a search term as arguments
      * and returns a string. See search input examples for details. */
     @Input()
-    filterFn: Function = this.defaultFilter;
+    filterFn: Function = this._defaultFilter;
 
     /** Whether the search input is disabled. **/
     @Input()
@@ -117,13 +119,19 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     itemTemplate: TemplateRef<any>;
 
+    /**
+     * Function used to handle grouping of items.
+     */
+    @Input()
+    groupFn: GroupFunction;
+
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight: string = '200px';
 
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
-    searchFunction: Function;
+    searchFn: Function;
 
     /** Whether the search input should be displayed in compact mode. */
     @Input()
@@ -152,7 +160,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See search input examples for details. */
     @Input()
-    displayFn: Function = this.defaultDisplay;
+    displayFn: Function = this._defaultDisplay;
 
     /** Whether AddOn Button should be focusable, set to false by default */
     @Input()
@@ -172,20 +180,20 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
 
     /** @hidden */
-    @ViewChildren(MenuItemDirective)
-    menuItems: QueryList<MenuItemDirective>;
+    @ViewChildren(ListItemDirective)
+    listItems: QueryList<ListItemDirective>;
 
     /** @hidden */
     @ViewChild('searchInputElement')
     searchInputElement: ElementRef;
 
     /** @hidden */
-    @ViewChild('comboboxMenuElement')
-    comboboxMenuElement: ElementRef;
-
-    /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
     popoverComponent: PopoverComponent;
+
+    /** @hidden */
+    @ContentChildren(ListMessageDirective)
+    listMessages: QueryList<ListMessageDirective>;
 
     /** @hidden */
     displayedValues: any[] = [];
@@ -213,16 +221,14 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.dropdownValues) {
-            this.displayedValues = this.dropdownValues;
-        }
-        this.setupFocusTrap();
+        this._refreshDisplayedValues();
+        this._setupFocusTrap();
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
-            this.refreshDisplayedValues();
+            this._refreshDisplayedValues();
         }
     }
 
@@ -233,34 +239,43 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._setupKeyboardService();
+        this._addShellbarClass();
+    }
+
+    /** @hidden */
+    private _setupKeyboardService(): void {
         this.menuKeyboardService.itemClicked
             .pipe(takeUntil(this.onDestroy$))
             .subscribe(index => this.onMenuClickHandler(index));
         this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
         this.menuKeyboardService.focusEscapeAfterList = () => { };
+    }
 
+    /** @hidden */
+    private _addShellbarClass(): void {
         if (this.inShellbar) {
             this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group__input');
         }
     }
 
     /** @hidden */
-    onInputKeydownHandler(event: KeyboardEvent) {
-        if (event.key === 'Enter' && this.searchFunction) {
-            this.searchFunction();
+    onInputKeydownHandler(event: KeyboardEvent): void {
+        if (event.key === 'Enter' && this.searchFn) {
+            this.searchFn();
         } else if (event.key === 'ArrowDown') {
             if (event.altKey) {
                 this.isOpenChangeHandle(true);
             }
             event.preventDefault();
-            if (this.menuItems && this.menuItems.first) {
-                this.menuItems.first.focus();
+            if (this.listItems && this.listItems.first) {
+                this.listItems.first.focus();
             }
         }
     }
 
     /** @hidden */
-    onInputKeyupHandler(event: KeyboardEvent) {
+    onInputKeyupHandler(event: KeyboardEvent): void {
         if (this.openOnKeyboardEvent &&
             this.inputText &&
             this.inputText.length &&
@@ -273,15 +288,15 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     /** @hidden */
-    onMenuKeydownHandler(event: KeyboardEvent, index: number) {
-        this.menuKeyboardService.keyDownHandler(event, index, this.menuItems.toArray());
+    onListKeydownHandler(event: KeyboardEvent, index: number): void {
+        this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
     }
 
     /** @hidden */
-    onMenuClickHandler(index: number) {
+    onMenuClickHandler(index: number): void {
         const selectedItem = this.displayedValues[index];
         if (selectedItem) {
-            this.handleClickActions(selectedItem);
+            this._handleClickActions(selectedItem);
             this.itemClicked.emit({ item: selectedItem, index: index });
         }
     }
@@ -295,7 +310,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     set inputText(value) {
         this.inputTextValue = value;
         if (this.communicateByObject) {
-            this.onChange(this.getOptionObjectByDisplayedValue(value));
+            this.onChange(this._getOptionObjectByDisplayedValue(value));
         } else {
             this.onChange(value);
         }
@@ -313,18 +328,24 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     /** @hidden */
-    registerOnChange(fn) {
+    registerOnChange(fn): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn) {
+    registerOnTouched(fn): void {
         this.onTouched = fn;
     }
 
     /** @hidden */
     handleSearchTermChange(): void {
-        this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+        let foundMatch = false;
+        this.dropdownValues.forEach(value => {
+            if (this.displayFn(value) === this.inputText) {
+                foundMatch = true;
+            }
+        });
+        foundMatch ? this.displayedValues = this.dropdownValues : this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
         if (this.popoverComponent) {
             this.popoverComponent.updatePopover();
         }
@@ -332,8 +353,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onPrimaryButtonClick(): void {
-        if (this.searchFunction) {
-            this.searchFunction();
+        if (this.searchFn) {
+            this.searchFn();
         }
     }
 
@@ -362,34 +383,42 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         this.displayedValues = this.dropdownValues;
     }
 
-    private defaultDisplay(str: any): string {
+    private _defaultDisplay(str: any): string {
         return str;
     }
 
-    private defaultFilter(contentArray: any[], searchTerm: string): any[] {
-        const searchLower = searchTerm.toLocaleLowerCase();
-        return contentArray.filter(item => {
-            if (item) {
-                return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
-            }
-        });
+    private _defaultFilter(contentArray: any[], searchTerm: any): any[] {
+        if (typeof searchTerm === 'string') {
+            const searchLower = searchTerm.toLocaleLowerCase();
+            return contentArray.filter(item => {
+                if (item) {
+                    return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
+                }
+            });
+        } else if (typeof searchTerm === 'object') {
+            return contentArray.filter(item => {
+                if (item === searchTerm) {
+                    return item;
+                }
+            })
+        }
     }
 
-    private handleClickActions(term): void {
+    private _handleClickActions(term): void {
         if (this.closeOnSelect) {
             this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
             this.inputText = this.displayFn(term);
-            this.handleSearchTermChange();
         }
+        this.handleSearchTermChange();
     }
 
-    private getOptionObjectByDisplayedValue(displayValue: string): any {
+    private _getOptionObjectByDisplayedValue(displayValue: string): any {
         return this.dropdownValues.find(value => this.displayFn(value) === displayValue);
     }
 
-    private setupFocusTrap(): void {
+    private _setupFocusTrap(): void {
         try {
             this.focusTrap = focusTrap(this.elRef.nativeElement, {
                 clickOutsideDeactivates: true,
@@ -401,7 +430,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
     }
 
-    private refreshDisplayedValues(): void {
+    private _refreshDisplayedValues(): void {
         if (this.inputText) {
             this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
         } else {
