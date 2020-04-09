@@ -25,9 +25,9 @@
     Mobile Calendar
 </fd-docs-section-title>
 <description>
-    Calendar component has dedicated mode for mobile devices. To achieve mobile mode, it should be wrapper inside the
-    dialog and bar component, example of various dialog usages can be found <a fd-link [routerLink]="'/core/dialog'">here</a> .
-    Also it supports landscape and portrait mode.
+    Calendar component has a dedicated mode for mobile devices. When used in mobile mode, the calendar should be wrapped
+    inside a dialog component. Examples of various dialog usages can be found <a fd-link [routerLink]="'/core/dialog'">here</a>.
+    The mobile calendar can be used in landscape or portrait mode.
 </description>
 <component-example>
     <fd-calendar-mobile-example></fd-calendar-mobile-example>
@@ -40,9 +40,8 @@
     Calendar Options
 </fd-docs-section-title>
 <description>
-    Calendar has a lot of different options, there is way to change visibility of week counter, user
-    can applied compact mode, to adjust view for desktop devices. Weekend also can be marked with additional class, which
-    has different styling.
+    Calendar has an extensive set of customization options, such as displaying the week number or applying compact mode
+    for desktop devices. Weekends also can be marked with additional styling classes.
 </description>
 <component-example>
     <fd-calendar-options-example></fd-calendar-options-example>
@@ -55,8 +54,8 @@
     Mark Range Days on Hover
 </fd-docs-section-title>
 <description>
-    To enable marking days on hover, there should be passed <code>[rangeHoverEffect]="true"</code>. Also it is available,
-    only when the one day is selected on range calendar mode.
+    Use <code>[rangeHoverEffect]="true"</code> to set hover styles on dates when selecting a date range. It can also be
+    used when only one day is selected on range calendar mode.
 </description>
 <component-example>
     <fd-calendar-mark-hover></fd-calendar-mark-hover>
@@ -69,12 +68,12 @@
     Calendar with Special Days
 </fd-docs-section-title>
 <description>
-    Grid days can have applied additional classes, by passing proper object to <code>[specialDaysRules]</code>
-    List of special day numbers can be found
+    Special coloring classes can be applied to grid days by passing an object to <code>[specialDaysRules]</code>.
+    A list of special day numbers can be found
     <a fd-link href="https://sap.github.io/fundamental-styles/components/calendar.html">
         here
     </a>.
-    The rules have the same format as block function, it takes FdDate object as a parameter and returns true/false.
+    Similar to the block function, <code>[specialDaysRules]</code> takes an FdDate object as a parameter and returns true/false.
 </description>
 <component-example>
     <fd-calendar-special-day-example></fd-calendar-special-day-example>
@@ -87,8 +86,8 @@
     Calendar Years Grid
 </fd-docs-section-title>
 <description>
-    Year Grid and Aggregated Year Grid can be customized, by passing <code>[yearGrid]</code> and <code>[aggregatedYearGrid]</code>
-    properties. The columns and rows amount can be modified, same as the way how year is displayed.
+    Year Grid and Aggregated Year Grid can be customized by passing <code>[yearGrid]</code> and <code>[aggregatedYearGrid]</code>
+    properties. The column and row amounts can be modified, similar to how the year is displayed.
 </description>
 <component-example>
     <fd-calendar-grid-example></fd-calendar-grid-example>
@@ -132,8 +131,8 @@
 <fd-docs-section-title [id]="'calendar-mondayStart'" [componentName]="'calendar'">
     Monday Start Calendar
 </fd-docs-section-title>
-<description
-    >Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 1 is for
+<description>
+    Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 1 is for
     Sunday, 2 is Monday, 3 is Tuesday, etc.
 </description>
 <component-example>
