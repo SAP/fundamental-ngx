@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.73...v0.16.0-rc.74) (2020-04-09)
+
+
+### Bug Fixes
+
+* side navigation selected state on parent/child ([#2279](https://github.com/SAP/fundamental-ngx/issues/2279)) ([7415493](https://github.com/SAP/fundamental-ngx/commit/74154931858cc18e330db04847036f21a3edccb0))
+
 ## [0.16.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.72...v0.16.0-rc.73) (2020-04-09)
 
 ## [0.16.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.71...v0.16.0-rc.72) (2020-04-08)
