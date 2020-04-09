@@ -236,74 +236,79 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
 
     /** @hidden */
     private _collapseTokens(side?: string): void {
-        if (this.compact) {
-            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-            let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
-            let i = 0;
-            /*
-             When resizing, we want to collapse the tokens on the left first. However when the user is navigating through a
-             a group of overflowing tokens using the arrow left key, we may need to hide tokens on the right. So if this
-             function has been called with the param 'right' it will collapse tokens from the right side of the list rather
-             than the (default) left side.
-             */
-            if (side === 'right') {
-                i = this.tokenList.length - 1;
+        let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+        let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
+        let i = 0;
+        /*
+         When resizing, we want to collapse the tokens on the left first. However when the user is navigating through a
+         a group of overflowing tokens using the arrow left key, we may need to hide tokens on the right. So if this
+         function has been called with the param 'right' it will collapse tokens from the right side of the list rather
+         than the (default) left side.
+         */
+        if (side === 'right') {
+            i = this.tokenList.length - 1;
+        }
+        while (combinedTokenWidth > elementWidth && (side === 'right' ? i >= 0 : i < this.tokenList.length)) {
+            // loop through the tokens and hide them until the combinedTokenWidth fits in the elementWidth
+            const token = this.tokenList.filter((item, index) => index === i)[0];
+            const moreTokens = side === 'right' ? this.moreTokensRight : this.moreTokensLeft;
+            if (moreTokens.indexOf(token) === -1) {
+                moreTokens.push(token);
             }
-            while (combinedTokenWidth > elementWidth && (side === 'right' ? i >= 0 : i < this.tokenList.length)) {
-                // loop through the tokens and hide them until the combinedTokenWidth fits in the elementWidth
-                const token = this.tokenList.filter((item, index) => index === i)[0];
-                const moreTokens = side === 'right' ? this.moreTokensRight : this.moreTokensLeft;
-                if (moreTokens.indexOf(token) === -1) {
-                    moreTokens.push(token);
-                }
+            if (this.compact) {
+                // we only want to hide the token on desktop/compact view - token list can be swiped on mobile/cozy
                 token.elementRef.nativeElement.style.display = 'none';
-                // get the new elementWidth and combinedTokenWidth as these will have changed after setting a token display to 'none'
-                elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-                combinedTokenWidth = this.getCombinedTokenWidth();
-                side === 'right' ? i-- : i++;
-                this.cdRef.markForCheck();
             }
+            // get the new elementWidth and combinedTokenWidth as these will have changed after setting a token display to 'none'
+            elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            combinedTokenWidth = this.getCombinedTokenWidth();
+            side === 'right' ? i-- : i++;
+            this.cdRef.markForCheck();
         }
     }
 
     /** @hidden */
     private _expandTokens(): void {
-        if (this.compact) {
-            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-            let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
+        let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+        let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
 
-            let breakLoop = false;
-            let i = this.moreTokensLeft.length - 1 + this.moreTokensRight.length;
-            while (combinedTokenWidth < elementWidth && i >= 0 && !breakLoop) {
-                // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
-                const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[i];
-                /*
-                  set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
-                  contain the width of the token we might display, without actually making the token visible to the user
-                 */
+        let breakLoop = false;
+        let i = this.moreTokensLeft.length - 1 + this.moreTokensRight.length;
+        while (combinedTokenWidth < elementWidth && i >= 0 && !breakLoop) {
+            // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
+            const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[i];
+            /*
+              set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
+              contain the width of the token we might display, without actually making the token visible to the user
+             */
+            if (this.compact) {
                 tokenToCheck.elementRef.nativeElement.style.display = 'inline-block';
                 tokenToCheck.elementRef.nativeElement.style.visibility = 'hidden';
-                elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-                combinedTokenWidth = this.getCombinedTokenWidth();
-                /*
-                  if the width of the inner tokenizer component is still smaller than the whole tokenizer component, we'll
-                  make the token visible and reduce the hidden count
-                */
-                if (combinedTokenWidth < elementWidth) {
-                    tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
-                    if (this.moreTokensLeft.length) {
-                        this.moreTokensLeft.pop();
-                    } else if (this.moreTokensRight.length) {
-                        this.moreTokensRight.pop();
-                    }
-                } else {
-                    // otherwise, stop looping and set the token's display back to 'none'
-                    tokenToCheck.elementRef.nativeElement.style.display = 'none';
-                    breakLoop = true;
-                }
-                i--;
-                this.cdRef.markForCheck();
             }
+            elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            combinedTokenWidth = this.getCombinedTokenWidth();
+            /*
+              if the width of the inner tokenizer component is still smaller than the whole tokenizer component, we'll
+              make the token visible and reduce the hidden count
+            */
+            if (combinedTokenWidth < elementWidth) {
+                if (this.compact) {
+                    tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
+                }
+                if (this.moreTokensLeft.length) {
+                    this.moreTokensLeft.pop();
+                } else if (this.moreTokensRight.length) {
+                    this.moreTokensRight.pop();
+                }
+            } else {
+                // otherwise, stop looping and set the token's display back to 'none'
+                if (this.compact) {
+                    tokenToCheck.elementRef.nativeElement.style.display = 'none';
+                }
+                breakLoop = true;
+            }
+            i--;
+            this.cdRef.markForCheck();
         }
     }
 
