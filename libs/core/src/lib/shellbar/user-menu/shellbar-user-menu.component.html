@@ -36,11 +36,13 @@
             </fd-popover-control>
             <fd-popover-body>
                 <fd-menu>
-                    <ul fd-menu-list>
-                        <li fd-menu-item *ngFor="let item of userMenu" (click)="itemClick(item, $event)">
-                            {{ item.text }}
-                        </li>
-                    </ul>
+                    <li fd-menu-item
+                        *ngFor="let item of userMenu"
+                        (click)="itemClick(item, $event)">
+                        <div fd-menu-link>
+                            <span fd-menu-title>{{ item.text }}</span>
+                        </div>
+                    </li>
                 </fd-menu>
             </fd-popover-body>
         </fd-popover>

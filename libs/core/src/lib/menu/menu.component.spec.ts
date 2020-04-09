@@ -4,7 +4,7 @@ import { MenuComponent } from './menu.component';
 import { AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MenuModule } from './menu.module';
 import { MenuKeyboardService } from './menu-keyboard.service';
-import { MenuItemDirective } from './directives/menu-item.directive';
+import { MenuItemComponent } from './menu-item/menu-item.component';
 
 @Component({
     selector: 'fd-menu-test',
@@ -12,7 +12,7 @@ import { MenuItemDirective } from './directives/menu-item.directive';
         <fd-menu fd-menu-addon>
             <ul fd-menu-list>
                 <li fd-menu-item #element1>
-                    <div fd-menu-item-addon></div>
+                    <div fd-menu-addon></div>
                     Option 1
                 </li>
                 <li fd-menu-item #element2>
@@ -37,13 +37,13 @@ export class TestMenuComponent implements AfterViewInit {
     @ViewChild('element3') element3: ElementRef;
     @ViewChild('element4') element4: ElementRef;
     @ViewChild('elementOutOfScope') elementOutOfScope: ElementRef;
-    @ViewChildren(MenuItemDirective)
-    menuItems: QueryList<MenuItemDirective>;
+    @ViewChildren(MenuItemComponent)
+    menuItems: QueryList<MenuItemComponent>;
     public ngAfterViewInit(): void {}
 }
 
 describe('MenuComponent', () => {
-    let items: QueryList<MenuItemDirective>;
+    let items: QueryList<MenuItemComponent>;
     let fixture: ComponentFixture<TestMenuComponent>;
     let elements: ElementRef[];
     let elementOutOfScope: ElementRef;

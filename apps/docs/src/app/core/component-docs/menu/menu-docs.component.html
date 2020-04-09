@@ -2,7 +2,7 @@
     Simple menu
 </fd-docs-section-title>
 <description>
-    To create simple menu compose you menu items using following directives:
+    To create simple menu use following directives:
     <ul>
         <li><code>fd-menu-item</code> - menu list element</li>
         <li><code>fd-menu-link</code> - menu interactive element</li>
@@ -20,11 +20,11 @@
     Menu with icons
 </fd-docs-section-title>
 <description>
-    Menu item can be extended with additional content using following directives:
+    Menu items can be extended with additional content using the following directives:
     <ul>
-        <li><code>fd-menu-icon</code> - to add icon to menu item. If you use <code>fd-menu-icon</code> after
-            menu item title remember to add set <code>[position]="'after'"</code></li>
-        <li><code>fd-menu-shortcut</code> - to add information about useful shortcuts</li>
+        <li><code>fd-menu-addon</code> - adds icon to menu item. If you want to add the icon after the menu item title,
+            remember to add the <code>[position]="'after'"</code></li>
+        <li><code>fd-menu-shortcut</code> - adds information about useful shortcuts</li>
     </ul>
 </description>
 <component-example>
@@ -38,7 +38,7 @@
     Menu with separator and compact mode
 </fd-docs-section-title>
 <description>
-    To add visual separation line between menu items use <code>fd-menu-separator</code> component.<br/>
+    To add a visual separation line between menu items, use the <code>fd-menu-separator</code> component.<br/>
     To display Menu in compact mode use <code>[compact]="true"</code>.
 </description>
 <component-example>
@@ -52,7 +52,7 @@
     Menu with submenu
 </fd-docs-section-title>
 <description>
-    Each Menu item can have its submenu. To create submenu:
+    Each Menu item can have its submenu. To create a submenu, do the following:
     <ul>
         <li>create <code>ng-template</code> containing menu items, using standard menu item markup</li>
         <li>attach created template to parent menu item by passing <code>TemplateRef</code> to its
@@ -76,15 +76,14 @@
     To open Menu in mobile mode use <code>[mobile]="true"</code> option.
     In mobile mode the Menu is opened inside Dialog component taking whole viewport of the device.
     When going through nested levels of the Menu, name of the parent menu item will display in Dialogs header.
-    To add initial header visible in the Dialogs header at the first level on the Menu use
-    <code>[mobileMenuTitle]</code>.
+    To add an initial header in first level on the Menu use <code>[mobileMenuTitle]</code>.
 </description>
 <component-example>
     <fd-menu-mobile-example></fd-menu-mobile-example>
 </component-example>
 <code-example [exampleFiles]="menuMobile"></code-example>
 
-<!--<separator></separator>-->
+<separator></separator>
 
 <!--<fd-docs-section-title [id]="'keyboard'" [componentName]="'menu'">-->
 <!--    Keyboard Support-->

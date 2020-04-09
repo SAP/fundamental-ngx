@@ -5,6 +5,7 @@ import { DefaultMenuItem } from '../default-menu-item.class';
  * The directive that represents a menu item.
  */
 @Directive({
+    // TODO to be discussed
     // tslint:disable-next-line:directive-selector
     selector: '[fd-menu-item]'
 })
@@ -14,13 +15,13 @@ export class MenuItemDirective implements DefaultMenuItem {
     fdMenuItemClass: boolean = true;
 
     /** @hidden */
-    constructor (public elementRef: ElementRef) {}
+    constructor (public itemEl: ElementRef) {}
 
     public focus(): void {
-        this.elementRef.nativeElement.focus();
+        this.itemEl.nativeElement.focus();
     }
 
     public click(): void {
-        this.elementRef.nativeElement.click();
+        this.itemEl.nativeElement.click();
     }
 }
