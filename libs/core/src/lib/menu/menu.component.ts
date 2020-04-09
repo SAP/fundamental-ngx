@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
@@ -20,7 +19,8 @@ import { PopoverComponent } from '../popover/popover.component';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { MenuItemComponent } from './menu-item/menu-item.component';
-import { DialogConfig, MenuKeyboardService } from '../..';
+import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
+import { MenuKeyboardService } from './menu-keyboard.service';
 
 interface DialogContent {
     title: string,
