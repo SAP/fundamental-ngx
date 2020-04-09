@@ -176,6 +176,13 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
         yearMapping: (num: number) => num.toString()
     };
 
+    /**
+     * Whether user wants to mark day cells on hover.
+     * Works only on range mode, when start date is selected on Day View.
+     */
+    @Input()
+    rangeHoverEffect: boolean = false;
+
     /** Event thrown every time active view is changed */
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
@@ -246,13 +253,13 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /** @hidden */
     constructor(
         public calendarI18n: CalendarI18n,
-        private changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef
     ) {
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this.prepareDisplayedView();
+        this._prepareDisplayedView();
     }
 
     /**
@@ -269,7 +276,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
                 this.selectedDate = selected;
 
                 if (selected.isDateValid()) {
-                    this.prepareDisplayedView();
+                    this._prepareDisplayedView();
                 }
             } else if (this.calType === 'range') {
                 selected = <FdRangeDate>selected;
@@ -285,11 +292,11 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
                 }
                 this.selectedRangeDate = { start: selected.start, end: selected.end };
                 if (valid) {
-                    this.prepareDisplayedView();
+                    this._prepareDisplayedView();
                 }
             }
         }
-        this.changeDetectorRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
         this.isValidDateChange.emit(valid);
     }
 
@@ -457,21 +464,21 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
         this.currentlyDisplayed = { month: month, year: this.currentlyDisplayed.year };
         this.activeView = 'day';
         this.activeViewChange.emit(this.activeView);
-        this.changeDetectorRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
         this.dayViewComponent.focusActiveDay();
     }
 
     public selectedYear(yearSelected: number) {
         this.activeView = 'day';
         this.currentlyDisplayed.year = yearSelected;
-        this.changeDetectorRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
         this.dayViewComponent.focusActiveDay();
     }
 
     public selectedYears(yearsSelected: AggregatedYear) {
         this.activeView = 'year';
         this.currentlyDisplayed.year = yearsSelected.startYear;
-        this.changeDetectorRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
@@ -499,7 +506,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * Method that sets up the currently displayed variables, like shown month and year.
      * Day grid is based on currently displayed month and year
      */
-    private prepareDisplayedView(): void {
+    private _prepareDisplayedView(): void {
         if (this.calType === 'single' && this.selectedDate && this.selectedDate.month && this.selectedDate.year) {
             this.currentlyDisplayed = { month: this.selectedDate.month, year: this.selectedDate.year };
         } else if (this.selectedRangeDate && this.selectedRangeDate.start) {

@@ -35,7 +35,7 @@ import { compareObjects } from '../../../utils/public_api';
 export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
     private readonly _amountOfCols: number = 7; // Days per week
-    private isOnRangePick: boolean = false;
+    private _isOnRangePick: boolean = false;
 
     /** @hidden */
     newFocusedDayIndex: number;
@@ -43,7 +43,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     /** Actual day grid with previous/current/next month days */
     public dayViewGrid: CalendarDay[][];
 
-    /**  */
+    /** Array of week numbers displayed for current month/year */
     public weeks: number[];
 
     /** @hidden */
@@ -55,7 +55,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     public set currentlyDisplayed(currentlyDisplayed: CalendarCurrent) {
         if (!compareObjects(currentlyDisplayed, this._currentlyDisplayed)) {
             this._currentlyDisplayed = currentlyDisplayed;
-            this.buildDayViewGrid();
+            this._buildDayViewGrid();
         }
     }
 
@@ -70,7 +70,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     public set selectedDate(fdDate: FdDate) {
         if (!CalendarService.datesEqual(fdDate, this.selectedDate)) {
             this._selectedDate = fdDate;
-            this.buildDayViewGrid();
+            this._buildDayViewGrid();
         }
     }
 
@@ -85,7 +85,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     public set selectedRangeDate(fdDateRange: FdRangeDate) {
         if (!CalendarService.rangeDatesEqual(fdDateRange, this.selectedRangeDate)) {
             this._selectedRangeDate = fdDateRange;
-            this.buildDayViewGrid();
+            this._buildDayViewGrid();
         }
     }
 
@@ -104,7 +104,15 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     calType: CalendarType = 'single';
 
     /** Id of the calendar. If none is provided, one will be generated. */
-    @Input() id: string;
+    @Input()
+    id: string;
+
+    /**
+     * Whether user wants to mark day cells on hover.
+     * Works only on range mode, when start date is selected.
+     */
+    @Input()
+    rangeHoverEffect: boolean = false;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
@@ -190,11 +198,33 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         private changeDetRef: ChangeDetectorRef,
         private calendarService: CalendarService
     ) {
-        this.calendarService.colAmount = this._amountOfCols;
         this.calendarI18n.i18nChange
             .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.refreshShortWeekDays())
+            .subscribe(() => this._refreshShortWeekDays())
         ;
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._setupKeyboardService();
+        this._refreshShortWeekDays();
+        this._buildDayViewGrid();
+    }
+
+    /** @hidden */
+    public ngOnChanges(changes: SimpleChanges): void {
+        /** Changes of those properties are done inside its setters */
+        if (!changes['selectedDate'] &&
+            !changes['selectedRangeDate'] &&
+            !changes['currentlyDisplayed']) {
+            this._buildDayViewGrid();
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
     }
 
     /**
@@ -209,7 +239,10 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             event.stopPropagation();
             event.preventDefault();
             this.newFocusedDayIndex = day.index;
-            this.isOnRangePick = !this.isOnRangePick;
+
+            if (this.calType === 'range' && this.rangeHoverEffect) {
+                this._isOnRangePick = !this._isOnRangePick;
+            }
         }
         if (!day.disabled) {
             if (this.calType === 'single') {
@@ -235,7 +268,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     refreshHoverRange(day: CalendarDay): void {
-        if (this.isOnRangePick) {
+        if (this._isOnRangePick) {
             if (day.date.getTimeStamp() < this.selectedRangeDate.start.getTimeStamp()) {
                 this.calendarDayList.forEach(_day => {
                     _day.hoverRange = (
@@ -252,51 +285,6 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
                 });
             }
         }
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.refreshShortWeekDays();
-        this.buildDayViewGrid();
-
-        this.calendarService.onFocusIdChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedDayIndex = index;
-                this.focusActiveElement();
-            })
-        ;
-        this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
-
-        this.calendarService.onKeySelect
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedDayIndex = index;
-                this.selectDate(this.calendarDayList[index]);
-            })
-        ;
-
-        this.calendarService.onListStartApproach
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedDayIndex = index;
-                this.selectPreviousMonth();
-            })
-        ;
-
-        this.calendarService.onListEndApproach
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedDayIndex = index;
-                this.selectNextMonth();
-            })
-        ;
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
     }
 
     /** @hidden
@@ -322,6 +310,24 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /**
+     * Method that returns first letter of every weekday, basing on CalendarI18nDefault. Can be changed by user by
+     * providing other class which implements CalendarI18n
+     */
+    get shortWeekDays(): string[] {
+        return this._shortWeekDays;
+    }
+
+    /** Function that gives array of all displayed CalendarDays */
+    public get calendarDayList(): CalendarDay[] {
+        return this.dayViewGrid.reduce((totalCalendarRows: CalendarDay[], calendarRow: CalendarDay[]) => {
+            if (!calendarRow) {
+                calendarRow = [];
+            }
+            return totalCalendarRows.concat(calendarRow);
+        });
+    }
+
+    /**
      * @hidden
      * Method that handles day cells keydown events,
      * @param event KeyboardEvent
@@ -336,16 +342,6 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             }
         } else {
             this.calendarService.onKeydownHandler(event, index);
-        }
-    }
-
-    /** @hidden */
-    public ngOnChanges(changes: SimpleChanges): void {
-        /** Changes of those properties are done inside its setters */
-        if (!changes['selectedDate'] &&
-            !changes['selectedRangeDate'] &&
-            !changes['currentlyDisplayed']) {
-            this.buildDayViewGrid();
         }
     }
 
@@ -364,20 +360,10 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
     /** Active day means that with tabindex = 0, it's selected day or today or first day */
     public focusActiveDay(): void {
-        this.newFocusedDayIndex = this.getActiveCell(
+        this.newFocusedDayIndex = this._getActiveCell(
             this.calendarDayList.filter(cell => cell.monthStatus === 'current')
         ).index;
         this.focusActiveElement();
-    }
-
-    /** Function that gives array of all displayed CalendarDays */
-    public get calendarDayList(): CalendarDay[] {
-        return this.dayViewGrid.reduce((totalCalendarRows: CalendarDay[], calendarRow: CalendarDay[]) => {
-            if (!calendarRow) {
-                calendarRow = [];
-            }
-            return totalCalendarRows.concat(calendarRow);
-        });
     }
 
     /**
@@ -392,14 +378,14 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * Triggered only when the month is changed during changing focus
      * Also triggers event to parent calendar component and rebuilds day view grid
      */
-    private selectPreviousMonth(): void {
+    private _selectPreviousMonth(): void {
         const prevMonth = this._getPreviousMonth();
         this.newFocusedDayIndex -= (
             FdDate.GetAmountOfWeeks(this._currentlyDisplayed.year, this._currentlyDisplayed.month, this.startingDayOfWeek) -
             FdDate.GetAmountOfWeeks(prevMonth.year, prevMonth.month, this.startingDayOfWeek)
         ) * 7;
         this._currentlyDisplayed = prevMonth;
-        this.buildDayViewGrid();
+        this._buildDayViewGrid();
         this.previousMonthSelect.emit();
     }
 
@@ -408,9 +394,9 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * Triggered only when the month is changed during changing focus
      * Also triggers event to parent calendar component and rebuilds day view grid
      */
-    private selectNextMonth(): void {
+    private _selectNextMonth(): void {
         this._currentlyDisplayed = this._getNextMonth();
-        this.buildDayViewGrid();
+        this._buildDayViewGrid();
         this.nextMonthSelect.emit();
     }
 
@@ -418,12 +404,12 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * Method that creates array of CalendarDay models which will be shown on day grid,
      * depending on current month and year.
      */
-    private populateCalendar(): CalendarDay[] {
+    private _populateCalendar(): CalendarDay[] {
         let calendar: CalendarDay[] = [];
 
-        calendar = this.getPreviousMonthDays(calendar);
-        calendar = calendar.concat(this.getCurrentMonthDays());
-        calendar = this.getNextMonthDays(calendar);
+        calendar = this._getPreviousMonthDays(calendar);
+        calendar = calendar.concat(this._getCurrentMonthDays());
+        calendar = this._getNextMonthDays(calendar);
 
         calendar.forEach((call, index: number) => {
             call.id = this._getId(index);
@@ -437,7 +423,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * Method that builds 2 dimensions day view grid, also sets up currently displayed month, or year,
      * when there is not any.
      */
-    private buildDayViewGrid(): void {
+    private _buildDayViewGrid(): void {
         if (!this.currentlyDisplayed) {
             if (this.selectedDate) {
                 this._currentlyDisplayed = { month: this.selectedDate.month, year: this.selectedDate.year };
@@ -446,7 +432,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             }
         }
 
-        const calendarDays = this.populateCalendar();
+        const calendarDays = this._populateCalendar();
         const dayViewGrid: CalendarDay[][] = [];
 
         while (calendarDays.length > 0) {
@@ -456,7 +442,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         this.calendarService.rowAmount = dayViewGrid.length;
 
         this.dayViewGrid = dayViewGrid;
-        this.weeks = this.refreshWeekCount();
+        this.weeks = this._refreshWeekCount();
         this.changeDetRef.detectChanges();
         this.focusActiveElement();
         return;
@@ -470,7 +456,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     /**
      * Method which provides array of CalendarDay, which contains every single day of currently shown month/year.
      */
-    private getCurrentMonthDays(): CalendarDay[] {
+    private _getCurrentMonthDays(): CalendarDay[] {
         const month = this.currentlyDisplayed.month;
         const year = this.currentlyDisplayed.year;
         const calendarDays: CalendarDay[] = [];
@@ -478,12 +464,12 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         for (let dayNumber = 1; dayNumber <= amountOfDaysInCurrentMonth; dayNumber++) {
             const fdDate: FdDate = new FdDate(year, month, dayNumber);
             calendarDays.push({
-                ...this.getDay(fdDate),
+                ...this._getDay(fdDate),
                 monthStatus: 'current',
                 today: CalendarService.datesEqual(FdDate.getToday(), fdDate)
             });
         }
-        this.getActiveCell(calendarDays).isTabIndexed = true;
+        this._getActiveCell(calendarDays).isTabIndexed = true;
         return calendarDays;
     }
 
@@ -493,7 +479,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * if there is no selected day, but there is today day, return today day
      * if there is no today, or selected, return first one
      */
-    private getActiveCell(calendarDays: CalendarDay[]): CalendarDay {
+    private _getActiveCell(calendarDays: CalendarDay[]): CalendarDay {
         if (calendarDays.find(cell => cell.selected)) {
             return calendarDays.find(cell => cell.selected);
         } else if (calendarDays.find(cell => cell.today)) {
@@ -507,7 +493,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * Method which provides array of CalendarDay, which contains last 0-6 days of previous month/year. Theses days
      * fills the gap between starting startingDayOfWeek and first day of current month
      */
-    private getPreviousMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
+    private _getPreviousMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
         const month = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.month - 1 : 12;
         const year = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year - 1;
         const amountOfDaysInCurrentMonth: number = CalendarService.getDaysInMonth(month, year);
@@ -526,7 +512,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             while (prevMonthLastWeekDay >= 0) {
                 const prevMonthDay = prevMonthLastDay - prevMonthLastWeekDay;
                 const fdDate = new FdDate(year, month, prevMonthDay);
-                calendarDays.push({ ...this.getDay(fdDate), monthStatus: 'previous' });
+                calendarDays.push({ ...this._getDay(fdDate), monthStatus: 'previous' });
                 prevMonthLastWeekDay--;
             }
         }
@@ -537,7 +523,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * Method which provides array of CalendarDay, which contains first days of next month/year. Theses days
      * fills the gap between last day of current day and end of 6-weeks calendar grid.
      */
-    private getNextMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
+    private _getNextMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
         const month = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.month + 1 : 1;
         const year = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year + 1;
 
@@ -546,7 +532,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
         for (let nextD = 1; nextD <= nextMonthDisplayedDays; nextD++) {
             const fdDate = new FdDate(year, month, nextD);
-            calendarDays.push({ ...this.getDay(fdDate), monthStatus: 'next' });
+            calendarDays.push({ ...this._getDay(fdDate), monthStatus: 'next' });
         }
         return calendarDays;
     }
@@ -555,7 +541,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * Method that generates whole day model basing on fdDate, disabling functions, block functions, and actually
      * chosen range / single date.
      */
-    private getDay(fdDate: FdDate): CalendarDay {
+    private _getDay(fdDate: FdDate): CalendarDay {
         const day: CalendarDay = {
             date: fdDate,
             weekDay: fdDate.getDay(),
@@ -573,7 +559,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
                 (this.selectedRangeDate.end && (this.selectedRangeDate.end.getTimeStamp() > fdDate.getTimeStamp()))
             )),
             ariaLabel: this.calendarI18n.getDayAriaLabel(fdDate.toDate()),
-            specialNumber: this.getSpecialDay(fdDate)
+            specialNumber: this._getSpecialDay(fdDate)
         };
 
         if (this.calType === 'range' && (this.selectCounter === 0 || this.selectCounter === 2)) {
@@ -590,17 +576,9 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /**
-     * Method that returns first letter of every weekday, basing on CalendarI18nDefault. Can be changed by user by
-     * providing other class which implements CalendarI18n
-     */
-    get shortWeekDays(): string[] {
-        return this._shortWeekDays;
-    }
-
-    /**
      * Method that is called to refresh i18n short week days.
      */
-    private refreshShortWeekDays(): void {
+    private _refreshShortWeekDays(): void {
         this._shortWeekDays = this.calendarI18n.getAllShortWeekdays()
             .slice(this.startingDayOfWeek - 1)
             .concat(this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1))
@@ -609,7 +587,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** Gets special day number of specified fdDate model */
-    private getSpecialDay(fdDate: FdDate): number | null {
+    private _getSpecialDay(fdDate: FdDate): number | null {
         const specialDay = this.specialDaysRules.find(specialDayRule => specialDayRule.rule(fdDate));
         if (specialDay) {
             return specialDay.specialDayNumber;
@@ -619,7 +597,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** Method that returns array of week's count */
-    private refreshWeekCount(): number[] {
+    private _refreshWeekCount(): number[] {
         const calendarDayList = this.calendarDayList;
         const weekNumbers: number[] = [];
         for (let index = 6; index < calendarDayList.length; index = index + 6) {
@@ -644,5 +622,44 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         } else {
             return { year: this._currentlyDisplayed.year + 1, month: 1 };
         }
+    }
+
+    /** Method to put configuration and listeners on calendar keyboard service */
+    private _setupKeyboardService(): void {
+        this.calendarService.colAmount = this._amountOfCols;
+
+        this.calendarService.onFocusIdChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => {
+                this.newFocusedDayIndex = index;
+                this.focusActiveElement();
+            })
+        ;
+        this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
+
+        this.calendarService.onKeySelect
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => {
+                this.newFocusedDayIndex = index;
+                this.selectDate(this.calendarDayList[index]);
+            })
+        ;
+
+        this.calendarService.onListStartApproach
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => {
+                this.newFocusedDayIndex = index;
+                this._selectPreviousMonth();
+            })
+        ;
+
+        this.calendarService.onListEndApproach
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => {
+                this.newFocusedDayIndex = index;
+                this._selectNextMonth();
+            })
+        ;
+
     }
 }

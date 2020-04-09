@@ -71,49 +71,17 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     constructor(
-        private eRef: ElementRef,
-        private changeDetectorRef: ChangeDetectorRef,
-        private calendarService: CalendarService) {
+        private _eRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _calendarService: CalendarService) {
     }
 
 
     /** @hidden */
     ngOnInit(): void {
-        this.calendarService.rowAmount = this.aggregatedYearsViewGrid.rows;
-        this.calendarService.colAmount = this.aggregatedYearsViewGrid.cols;
-        // TODO
+        this._setupKeyboardService();
         this.firstYearInList = this.yearSelected - this._yearsInOnePeriod();
         this._constructYearsGrid();
-
-        this.calendarService.onFocusIdChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedYearId = this.getId(index);
-                this.focusYearElement();
-            })
-        ;
-        this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
-
-        this.calendarService.onKeySelect
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => this.selectYear(this.getYearsList()[index]))
-        ;
-
-        this.calendarService.onListStartApproach
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe((index) => {
-                this.newFocusedYearId = this.getId(index);
-                this.loadPreviousYearsList();
-            })
-        ;
-
-        this.calendarService.onListEndApproach
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe((index) => {
-                this.newFocusedYearId = this.getId(index);
-                this.loadNextYearsList();
-            })
-        ;
     }
 
 
@@ -134,7 +102,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
 
     /** Method for handling the keyboard navigation. */
     onKeydownYearHandler(event, index: number): void {
-        this.calendarService.onKeydownHandler(event, index);
+        this._calendarService.onKeydownHandler(event, index);
     }
 
     /** Method used to load the previous 12 years to be displayed. */
@@ -156,14 +124,14 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
      * if there is no current year, or selected, return first one
      */
     private getActiveYear(): AggregatedYear {
-        const selectedYear: AggregatedYear = this.getYearsList()
+        const selectedYear: AggregatedYear = this._getYearsList()
             .find(aggregatedYears => this.isBetween(aggregatedYears, this.yearSelected))
         ;
         if (selectedYear) {
             return selectedYear;
         }
 
-        const currentYear: AggregatedYear = this.getYearsList()
+        const currentYear: AggregatedYear = this._getYearsList()
             .find(aggregatedYears => this.isBetween(aggregatedYears, this.currentYear))
         ;
         if (currentYear) {
@@ -176,7 +144,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
     /** Method allowing focusing on elements within this component. */
     focusYearElement(): void {
         if (this.newFocusedYearId) {
-            const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + this.newFocusedYearId);
+            const elementToFocus: HTMLElement = this._eRef.nativeElement.querySelector('#' + this.newFocusedYearId);
             this.newFocusedYearId = '';
             if (elementToFocus) {
                 elementToFocus.focus();
@@ -186,7 +154,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
 
     /** Method returning index of aggregated year index cell */
     getIndex(rowIndex: number, colIndex: number): number {
-        return this.calendarService.getId(rowIndex, colIndex);
+        return this._calendarService.getId(rowIndex, colIndex);
     }
 
     /** Get id of calendar's aggregated year item */
@@ -219,7 +187,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         }
         this.yearsSelected = calendarYearList.find(years => this.isBetween(years, this.yearSelected));
         this.activeYear = this.getActiveYear();
-        this.changeDetectorRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
         this.focusYearElement();
     }
 
@@ -238,7 +206,44 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
     }
 
     /** Returns transformed 1d array from 2d year grid. */
-    private getYearsList(): AggregatedYear[] {
+    private _getYearsList(): AggregatedYear[] {
         return [].concat.apply([], this.calendarYearListGrid);
+    }
+
+    /** Method to put configuration and listeners on calendar keyboard service */
+    private _setupKeyboardService(): void {
+        this._calendarService.rowAmount = this.aggregatedYearsViewGrid.rows;
+        this._calendarService.colAmount = this.aggregatedYearsViewGrid.cols;
+
+        this._calendarService.onFocusIdChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => {
+                this.newFocusedYearId = this.getId(index);
+                this.focusYearElement();
+            })
+        ;
+        this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
+
+        this._calendarService.onKeySelect
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => this.selectYear(this._getYearsList()[index]))
+        ;
+
+        this._calendarService.onListStartApproach
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe((index) => {
+                this.newFocusedYearId = this.getId(index);
+                this.loadPreviousYearsList();
+            })
+        ;
+
+        this._calendarService.onListEndApproach
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe((index) => {
+                this.newFocusedYearId = this.getId(index);
+                this.loadNextYearsList();
+            })
+        ;
+
     }
 }

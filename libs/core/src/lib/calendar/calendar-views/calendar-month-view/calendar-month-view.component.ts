@@ -39,7 +39,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     private _fullMonthNames: string[];
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** The id of the calendar passed from the parent component */
     @Input()
@@ -58,40 +58,22 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
 
     constructor(
-        private eRef: ElementRef,
-        private cdRef: ChangeDetectorRef,
-        private calendarI18n: CalendarI18n,
-        private calendarService: CalendarService
-    ) {
-        this.calendarService.rowAmount = this._amountOfRows;
-        this.calendarService.colAmount = this._amountOfColPerRow;
-    }
+        private _eRef: ElementRef,
+        private _cdRef: ChangeDetectorRef,
+        private _calendarI18n: CalendarI18n,
+        private _calendarService: CalendarService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
-        this.refreshShortMonthNames();
-
-        this.calendarService.onFocusIdChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => this.focusElement('#' + this.getId(index)))
-        ;
-
-        this.calendarService.onKeySelect
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => this.selectMonth(index))
-        ;
-
-        this.calendarI18n.i18nChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.refreshShortMonthNames())
-        ;
+        this._refreshShortMonthNames();
+        this._setupKeyboardService();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** Get a number (1-12) representing the current month  */
@@ -115,12 +97,12 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** Method for handling the keyboard events (a11y) */
     onKeydownMonthHandler(event, index: number): void {
-        this.calendarService.onKeydownHandler(event, index);
+        this._calendarService.onKeydownHandler(event, index);
     }
 
     /** Method that allows to focus elements inside this component */
     focusElement(elementSelector: string): void {
-        const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector(elementSelector);
+        const elementToFocus: HTMLElement = this._eRef.nativeElement.querySelector(elementSelector);
         if (elementToFocus) {
             elementToFocus.focus();
         }
@@ -128,7 +110,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** Method returning id of month cell */
     getIndex(rowIndex: number, colIndex: number): number {
-        return this.calendarService.getId(rowIndex, colIndex);
+        return this._calendarService.getId(rowIndex, colIndex);
     }
 
     /** Get id of calendar's month item */
@@ -158,15 +140,38 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     }
 
     /** Method that rewrite short month names, used mostly in case of i18n service language change */
-    private refreshShortMonthNames(): void {
-        const monthNames: string[] = [...this.calendarI18n.getAllShortMonthNames()];
-        this._fullMonthNames = [...this.calendarI18n.getAllFullMonthNames()];
+    private _refreshShortMonthNames(): void {
+        const monthNames: string[] = [...this._calendarI18n.getAllShortMonthNames()];
+        this._fullMonthNames = [...this._calendarI18n.getAllFullMonthNames()];
         const twoDimensionMonthNames: string[][] = [];
         /** Creating 2d grid */
         while (monthNames.length) {
             twoDimensionMonthNames.push(monthNames.splice(0, this._amountOfColPerRow));
         }
         this._shortMonthNames = twoDimensionMonthNames;
-        this.cdRef.markForCheck();
+        this._cdRef.markForCheck();
+    }
+
+    /** Method to put configuration and listeners on calendar keyboard service */
+    private _setupKeyboardService(): void {
+        this._calendarService.rowAmount = this._amountOfRows;
+        this._calendarService.colAmount = this._amountOfColPerRow;
+        this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
+
+
+        this._calendarService.onFocusIdChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(index => this.focusElement('#' + this.getId(index)))
+        ;
+
+        this._calendarService.onKeySelect
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(index => this.selectMonth(index))
+        ;
+
+        this._calendarI18n.i18nChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => this._refreshShortMonthNames())
+        ;
     }
 }

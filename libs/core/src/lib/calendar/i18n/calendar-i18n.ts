@@ -43,35 +43,35 @@ export abstract class CalendarI18n {
 @Injectable()
 export class CalendarI18nDefault extends CalendarI18n {
 
-    private weekdaysShort: string[];
-    private monthsShort: string[];
-    private monthsFull: string[];
+    private _weekdaysShort: string[];
+    private _monthsShort: string[];
+    private _monthsFull: string[];
 
-    private weekdaysFallback: string[] = [
+    private _weekdaysFallback: string[] = [
         'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
     ];
 
-    private monthsFullFallback: string[] = [
+    private _monthsFullFallback: string[] = [
         'January', 'February', 'March', 'April', 'May', 'June', 'July',
         'August', 'September', 'October', 'November', 'December'
     ];
 
-    private monthsShortFallback: string[] = [
+    private _monthsShortFallback: string[] = [
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
         'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     ];
 
     /** Constructor takes in a locale_id and gets the appropriate data from Angular. */
-    constructor(@Optional() @Inject(LOCALE_ID) private locale: string) {
+    constructor(@Optional() @Inject(LOCALE_ID) private _locale: string) {
         super();
-        if (locale) {
-            const sundayStartWeekdays = getLocaleDayNames(locale, FormStyle.Standalone, TranslationWidth.Short);
-            this.weekdaysShort = sundayStartWeekdays.map((day, index) => sundayStartWeekdays[index % 7]);
-            this.monthsShort = getLocaleMonthNames(locale, FormStyle.Standalone, TranslationWidth.Abbreviated);
-            this.monthsFull = getLocaleMonthNames(locale, FormStyle.Standalone, TranslationWidth.Wide);
+        if (_locale) {
+            const sundayStartWeekdays = getLocaleDayNames(_locale, FormStyle.Standalone, TranslationWidth.Short);
+            this._weekdaysShort = sundayStartWeekdays.map((day, index) => sundayStartWeekdays[index % 7]);
+            this._monthsShort = getLocaleMonthNames(_locale, FormStyle.Standalone, TranslationWidth.Abbreviated);
+            this._monthsFull = getLocaleMonthNames(_locale, FormStyle.Standalone, TranslationWidth.Wide);
         }
 
-        this.checkForFallback();
+        this._checkForFallback();
     }
 
     /**
@@ -80,36 +80,36 @@ export class CalendarI18nDefault extends CalendarI18n {
      * @param date Native date object to use for the label.
      */
     getDayAriaLabel(date: Date): string {
-        return date.getDate() + ' ' + this.monthsFull[date.getMonth()] + ' ' + date.getFullYear();
+        return date.getDate() + ' ' + this._monthsFull[date.getMonth()] + ' ' + date.getFullYear();
     }
 
     /** Get all full month names. */
     getAllFullMonthNames(): string[] {
-        return this.monthsFull;
+        return this._monthsFull;
     }
 
     /** Get all short month names, such as Nov for November. */
     getAllShortMonthNames(): string[] {
-        return this.monthsShort;
+        return this._monthsShort;
     }
 
     /** Get all short week day names, such as Mo for Monday. */
     getAllShortWeekdays(): string[] {
-        return this.weekdaysShort;
+        return this._weekdaysShort;
     }
 
     /** Checks if a fallback is needed. Older versions of Angular may need this. */
-    private checkForFallback(): void {
-        if (!this.weekdaysShort || this.weekdaysShort.length === 0) {
-            this.weekdaysShort = this.weekdaysFallback;
+    private _checkForFallback(): void {
+        if (!this._weekdaysShort || this._weekdaysShort.length === 0) {
+            this._weekdaysShort = this._weekdaysFallback;
         }
 
-        if (!this.monthsShort || this.monthsShort.length === 0) {
-            this.monthsShort = this.monthsShortFallback;
+        if (!this._monthsShort || this._monthsShort.length === 0) {
+            this._monthsShort = this._monthsShortFallback;
         }
 
-        if (!this.monthsFull || this.monthsFull.length === 0) {
-            this.monthsFull = this.monthsFullFallback;
+        if (!this._monthsFull || this._monthsFull.length === 0) {
+            this._monthsFull = this._monthsFullFallback;
         }
     }
 
