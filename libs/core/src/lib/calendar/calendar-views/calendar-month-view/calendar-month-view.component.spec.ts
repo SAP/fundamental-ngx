@@ -42,17 +42,17 @@ describe('CalendarMonthViewComponent', () => {
         expect(component.selectMonth).toHaveBeenCalled();
     });
 
-    it('Should have is-selected class when the month is selected', () => {
+    it('Should have is-active class when the month is selected', () => {
         const element = fixture.debugElement.query(By.css('td')).nativeElement;
 
         (component as any)._cdRef.detectChanges();
-        expect(element.classList.contains('is-selected')).toBe(false);
+        expect(element.classList.contains('is-active')).toBe(false);
 
         component.selectMonth(0);
         fixture.detectChanges();
         (component as any)._cdRef.detectChanges();
         const selectedElement = fixture.debugElement.query(By.css('td')).nativeElement;
-        expect(selectedElement.classList.contains('is-selected')).toBe(true);
+        expect(selectedElement.classList.contains('is-active')).toBe(true);
     });
 
 
