@@ -2,7 +2,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-  selector: '[fd-menu-addon]'
+    selector: '[fd-menu-addon]'
 })
 export class MenuAddonDirective {
     /** Whether addon is used before or after text */
@@ -14,13 +14,13 @@ export class MenuAddonDirective {
     /** Whether is used as submenu indicator */
     @Input()
     @HostBinding('class.fd-menu__addon-after--submenu')
-    submenu: boolean = false;
-
-    /** @hidden */
-    @HostBinding('class.fd-menu__addon-before')
-    fdAddonBeforeClass: boolean = true;
+    submenuIndicator: boolean = false;
 
     /** @hidden */
     @HostBinding('class.fd-menu__addon-after')
-    fdAddonAfterClass: boolean = false;
+    fdAddonAfterClass: boolean = true;
+
+    /** @hidden */
+    @HostBinding('class.fd-menu__addon-before')
+    fdAddonBeforeClass: boolean = false;
 }

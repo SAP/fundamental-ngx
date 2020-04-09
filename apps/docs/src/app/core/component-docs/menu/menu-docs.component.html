@@ -22,8 +22,8 @@
 <description>
     Menu items can be extended with additional content using the following directives:
     <ul>
-        <li><code>fd-menu-addon</code> - adds icon to menu item. If you want to add the icon after the menu item title,
-            remember to add the <code>[position]="'after'"</code></li>
+        <li><code>fd-menu-addon</code> - adds icon to menu item. If you want to add the icon before the menu item title,
+            remember to add the <code>[position]="'before'"</code></li>
         <li><code>fd-menu-shortcut</code> - adds information about useful shortcuts</li>
     </ul>
 </description>
@@ -59,6 +59,7 @@
             <code>[subMenu]</code>
         </li>
     </ul>
+    If you are using <code>fd-menu-addon</code> to create icon indicating submenu level, remember to add <code>[submenuIndicator]="true"</code>.
     The important thing is to create templates with submenu items inside the <code>fd-menu</code> tag, so Angular correctly
     attaches them to the DI tree.
 </description>
