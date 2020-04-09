@@ -5,5 +5,12 @@
 
     .fd-nested-list__link {
         cursor: pointer;
+
+        &:focus {
+            outline-offset: -.125rem;
+            outline-width: var(--sapContent_FocusWidth, .0625rem);
+            outline-color: var(--sapContent_FocusColor, #000);
+            outline-style: var(--sapContent_FocusStyle, dotted);
+        }
     }
 }
