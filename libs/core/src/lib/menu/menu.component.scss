@@ -4,6 +4,10 @@
     .fd-menu__list,
     .fd-menu__sublist {
         .fd-menu__item {
+            &:focus {
+                background-color: #00b0e8;
+            }
+
             border-radius: 0;
 
             &:first-child {
@@ -19,13 +23,10 @@
             .fd-menu__link {
                 text-decoration: none;
 
-                .fd-menu__addon-after {
-                    margin: auto;
-                    justify-content: flex-end;
-                }
-
                 .fd-menu__shortcut {
                     @extend .fd-menu__addon-after;
+                    margin: auto;
+                    justify-content: flex-end;
                     font-size: var(--sapFontMediumSize);
                     font-weight: normal;
                     white-space: nowrap;

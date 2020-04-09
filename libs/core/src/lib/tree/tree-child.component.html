@@ -42,8 +42,16 @@
                     <fd-popover-body>
                         <fd-menu>
                             <ul fd-menu-list>
-                                <li fd-menu-item (click)="editTreeItem(row)">Edit</li>
-                                <li fd-menu-item (click)="deleteTreeItem(row)">Delete</li>
+                                <li fd-menu-item (click)="editTreeItem(row)">
+                                    <div fd-menu-link>
+                                        <span fd-menu-title>Edit</span>
+                                    </div>
+                                </li>
+                                <li fd-menu-item (click)="deleteTreeItem(row)">
+                                    <div fd-menu-link>
+                                        <span fd-menu-title>Delete</span>
+                                    </div>
+                                </li>
                             </ul>
                         </fd-menu>
                     </fd-popover-body>

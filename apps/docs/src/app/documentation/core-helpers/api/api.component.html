@@ -7,7 +7,7 @@
         </fd-popover-control>
         <fd-popover-body>
             <fd-menu>
-                <li fd-menu-item-component *ngFor="let file of files"
+                <li fd-menu-item *ngFor="let file of files"
                     [ngClass]="{'is-selected': file === activeFile}"
                     (click)="getFile(file)">
                     <div fd-menu-link>

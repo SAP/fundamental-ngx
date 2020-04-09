@@ -1,31 +1,34 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ContentChild,
+    ContentChild, ContentChildren,
     ElementRef, Host,
     HostListener,
-    Input,
+    Input, QueryList,
     TemplateRef
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { MenuComponent } from '../menu.component';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
+import { DefaultMenuItem } from '../default-menu-item.class';
+import { MenuLinkDirective } from '../directives/menu-link.directive';
 
 let menuUniqueId: number = 0;
 
 @Component({
     // tslint:disable-next-line:component-selector
-    selector: 'li[fd-menu-item-component]',
-    exportAs: 'fd-menu-item-component',
+    selector: 'li[fd-menu-item]',
+    exportAs: 'fd-menu-item',
     templateUrl: './menu-item.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-menu__item]': 'true',
         '[attr.aria-controls]': 'itemId',
-        '[attr.aria-haspopup]': 'hasPopup'
+        '[attr.aria-haspopup]': 'hasPopup',
+        '[attr.aria-expanded]': 'subLevelVisible$.value'
     }
 })
-export class MenuItemComponent {
+export class MenuItemComponent implements DefaultMenuItem {
 
     /** Menu item id attribute value */
     @Input()
@@ -39,8 +42,16 @@ export class MenuItemComponent {
     @ContentChild(MenuTitleDirective)
     menuItemTitle: MenuTitleDirective;
 
+    /** @hidden Reference to menu item title */
+    @ContentChild(MenuLinkDirective)
+    menuLink: MenuLinkDirective;
+
+    /** @hidden Reference to menu item title */
+    @ContentChildren(MenuItemComponent)
+    subMenuItems: QueryList<MenuItemComponent>;
+
     /** @hidden */
-    public subLevelVisible$ = new BehaviorSubject<boolean>(false);
+    subLevelVisible$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden Close sub menus when any parent element clicked */
     @HostListener('document:click', ['$event'])
@@ -66,5 +77,17 @@ export class MenuItemComponent {
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
         return this.subMenu && !this._menuComponent.mobile;
+    }
+
+    focus(): void {
+        if (this.menuLink) {
+            this.menuLink.elementRef.nativeElement.focus();
+        }
+    }
+
+    click(): void {
+        if (this.menuLink) {
+            this.menuLink.elementRef.nativeElement.click();
+        }
     }
 }

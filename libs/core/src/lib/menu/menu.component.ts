@@ -1,11 +1,15 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    ContentChildren,
     ElementRef,
+    HostListener,
     Input,
     OnDestroy,
     Optional,
+    QueryList,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -15,6 +19,8 @@ import { DialogService } from '../dialog/dialog-service/dialog.service';
 import { PopoverComponent } from '../popover/popover.component';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { MenuItemComponent } from './menu-item/menu-item.component';
+import { DialogConfig, MenuKeyboardService } from '../..';
 
 interface DialogContent {
     title: string,
@@ -52,9 +58,9 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     @Input()
     mobileMenuTitle: string;
 
-    // TODO REMOVE INPUT
+    /** Custom config used to open the Dialog */
     @Input()
-    separator: boolean = false;
+    dialogConfig: DialogConfig;
 
     /** @hidden */
     @ViewChild('dialog')
@@ -63,6 +69,10 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     @ViewChild('menuTemplate')
     menuTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ContentChildren(MenuItemComponent)
+    menuItems: QueryList<MenuItemComponent>;
 
     /** Reference to Dialog used in mobile mode */
     dialogRef: DialogRef;
@@ -73,8 +83,43 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _subscription = new Subscription();
 
-    constructor(private _dialogService: DialogService,
-                private _elementRef: ElementRef,
+    @HostListener('keydown', ['$event'])
+    keydownHandler(event: KeyboardEvent): void {
+        switch (event.code || event.keyCode) {
+            case 'ArrowUp':
+            case 38: {
+                this._focus('previous');
+                event.preventDefault();
+                break;
+            }
+            case 'ArrowDown':
+            case 40: {
+                this._focus('next');
+                event.preventDefault();
+                break;
+            }
+            case 'ArrowRight':
+            case 39: {
+                this._focus('childList');
+                event.preventDefault();
+                break;
+            }
+            case 'ArrowLeft':
+            case 37: {
+                this._focus('parentList');
+                event.preventDefault();
+                break;
+            }
+            case 'Space':
+            case 32: {
+                break;
+            }
+        }
+    }
+
+    constructor(private _elementRef: ElementRef,
+                private _dialogService: DialogService,
+                private _menuKeyboardService: MenuKeyboardService,
                 @Optional() private _popoverComponent: PopoverComponent) {}
 
     /** @hidden */
@@ -103,18 +148,19 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
         return this._popoverComponent && this.mobile;
     }
 
-    /** Open the Dialog to display Menu in mobile mode */
+    /** @hidden Open the Dialog to display Menu in mobile mode */
     openDialog(): void {
         this._dialogService.open(
             this.dialogTemplate,
             {
                 mobile: true,
-                verticalPadding: false
+                verticalPadding: false,
+                escKeyCloseable: false
             }
         )
     }
 
-    /** Close mobile Menu mode Dialog */
+    /** @hidden Close mobile Menu mode Dialog */
     closeDialog(dialogRef: DialogRef) {
         dialogRef.close();
         if (this.isUsingPopoverAndMobileMode) {
@@ -147,5 +193,34 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     /** @hidden Setup Popover to make it work with Menu in mobile mode */
     private _setPopoverToMobileMode(): void {
         this._popoverComponent.closeOnOutsideClick = false;
+    }
+
+    private _focus(direction: 'next' | 'previous' | 'parentList' | 'childList'): void {
+        let activeIndex: number;
+        let menuItemsArray: MenuItemComponent[];
+        const findActiveIndex = (items: MenuItemComponent[], activeOption: Element): number => items
+            .map(item => item.menuLink.elementRef.nativeElement)
+            .indexOf(activeOption);
+
+        switch (direction) {
+            case 'next':
+                menuItemsArray = this.menuItems.toArray();
+                activeIndex = findActiveIndex(menuItemsArray, document.activeElement);
+                if (activeIndex < this.menuItems.length - 1) {
+                    menuItemsArray[++activeIndex].focus();
+                }
+                break;
+            case 'previous':
+                menuItemsArray = this.menuItems.toArray();
+                activeIndex = findActiveIndex(this.menuItems.toArray(), document.activeElement);
+                if (activeIndex > 0) {
+                    menuItemsArray[--activeIndex].focus();
+                }
+                break;
+            case 'parentList':
+                break;
+            case 'childList':
+                break;
+        }
     }
 }
