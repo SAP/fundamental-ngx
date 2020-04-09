@@ -362,6 +362,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             !this.containerRef.location.nativeElement.contains(event.target)) {
             event.preventDefault();
             event.stopPropagation();
+            console.log('close on outside click');
             this.close();
         }
     }

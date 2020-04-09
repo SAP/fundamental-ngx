@@ -251,6 +251,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** @hidden */
     public closeFromCalendar(): void {
+        console.log('close from calendar');
         if (this.type === 'single') {
             this.closeCalendar();
         }
@@ -267,6 +268,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** Toggles the calendar open or closed */
     public toggleCalendar(): void {
         this.onTouched();
+        console.log('toggle');
         this.isOpen = !this.isOpen;
     }
 

@@ -21,6 +21,9 @@ export class CalendarService {
     /** Event thrown, when the focus is changed. */
     public onFocusIdChange: Subject<number> = new Subject<number>();
 
+    /** TODO */
+    public leftArrowId: string;
+
     /** Function that is called when the focus would escape the element. */
     focusEscapeFunction: Function;
 
@@ -131,11 +134,18 @@ export class CalendarService {
                 break;
             }
             case 'Tab': {
-                if (this.focusEscapeFunction && !event.shiftKey) {
+                if (!event.shiftKey) {
+                    if (this.focusEscapeFunction) {
+                        this.focusEscapeFunction();
+                    } else {
+                        const element: HTMLElement = document.getElementById(this.leftArrowId);
+                        if (element) {
+                            element.focus();
+                        }
+                    }
                     event.preventDefault();
-                    this.focusEscapeFunction();
+                    break;
                 }
-                break;
             }
         }
     }

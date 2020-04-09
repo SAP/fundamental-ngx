@@ -7,7 +7,7 @@
                 [compact]="compact"
                 [fdType]="'transparent'"
                 [glyph]="'slim-arrow-left'"
-                [attr.id]="id + '-left-arrow'"
+                [id]="id + '-left-arrow'"
                 [attr.aria-label]="previousLabel"
                 [attr.aria-disabled]="false"
                 type="button"
@@ -22,7 +22,7 @@
                     [fdType]="'transparent'"
                     [attr.aria-label]="calendarI18nLabels.monthSelectionLabel + ' ' + monthLabel"
                     [attr.aria-selected]="isOnMonthView()"
-                    (click)="processViewChange('month')"
+                    (click)="processViewChange('month', $event);"
                     type="button"
                 >
                     {{ monthLabel }}
@@ -35,7 +35,7 @@
                     [fdType]="'transparent'"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
                     [attr.aria-selected]="isOnYearView()"
-                    (click)="processViewChange('year')"
+                    (click)="processViewChange('year', $event)"
                     type="button"
                 >
                     {{ currentlyDisplayed.year }}
@@ -51,7 +51,7 @@
                     [fdType]="'transparent'"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
                     [attr.aria-selected]="isOnYearView()"
-                    (click)="processViewChange('aggregatedYear')"
+                    (click)="processViewChange('aggregatedYear', $event)"
                     type="button"
                 >
                     {{ currentlyDisplayed.year }} -

@@ -15,6 +15,7 @@ import { CalendarCurrent } from '../models/calendar-current';
 import { takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
+import { CalendarService } from '../calendar.service';
 
 /**
  * Internal use only.
@@ -30,7 +31,7 @@ import { CalendarYearGrid } from '../models/calendar-year-grid';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarHeaderComponent implements OnDestroy {
+export class CalendarHeaderComponent implements OnDestroy, OnInit {
 
     /** Currently active view. Needed for a11y labels. */
     @Input()
@@ -84,14 +85,15 @@ export class CalendarHeaderComponent implements OnDestroy {
     constructor(
         public calendarI18nLabels: CalendarI18nLabels,
         public calendarI18n: CalendarI18n,
-        private changeDetRef: ChangeDetectorRef
+        private _changeDetRef: ChangeDetectorRef,
+        private _calendarService: CalendarService
     ) {
         /** Merging 18n observables */
         const i18nObservables = merge(this.calendarI18n.i18nChange, this.calendarI18nLabels.labelsChange);
 
         /** Called to trigger change detection */
         i18nObservables.pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.changeDetRef.markForCheck())
+            .subscribe(() => this._changeDetRef.markForCheck())
         ;
     }
 
@@ -99,6 +101,11 @@ export class CalendarHeaderComponent implements OnDestroy {
     ngOnDestroy(): void {
         this.onDestroy$.next();
         this.onDestroy$.complete();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._calendarService.leftArrowId = this.id + '-left-arrow';
     }
 
     /** Get the aria label for the previous button. Depends on the active view. */
@@ -133,11 +140,14 @@ export class CalendarHeaderComponent implements OnDestroy {
         return this.calendarYearGrid.cols * this.calendarYearGrid.rows
     }
 
-    processViewChange(type: FdCalendarView): void {
+    processViewChange(type: FdCalendarView, event?: MouseEvent): void {
         if (type === this.activeView) {
             this.activeView = 'day';
         } else {
             this.activeView = type;
+        }
+        if (event) {
+            event.stopPropagation();
         }
         this.activeViewChange.emit(this.activeView);
     }
