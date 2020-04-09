@@ -17,6 +17,7 @@ import { CalendarMobileExampleComponent } from './examples/calendar-mobile-examp
 import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
 import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
 import { CalendarSpecialDayExampleComponent } from './examples/calendar-special-day-example/calendar-special-day-example.component';
+import { CalendarMarkHoverComponent } from './examples/calendar-mark-hover/calendar-mark-hover.component';
 
 const routes: Routes = [
     {
@@ -52,7 +53,8 @@ const routes: Routes = [
         CalendarMobileExampleComponent,
         CalendarOptionsExampleComponent,
         CalendarGridExampleComponent,
-        CalendarSpecialDayExampleComponent
+        CalendarSpecialDayExampleComponent,
+        CalendarMarkHoverComponent
     ],
 })
 export class CalendarDocsModule {

@@ -100,6 +100,13 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     startingDayOfWeek: DaysOfWeek = 1;
 
+    /**
+     * Whether user wants to mark day cells on hover.
+     * Works only on range mode, when start date is selected on Day View.
+     */
+    @Input()
+    rangeHoverEffect: boolean = false;
+
     /** Whether to validate the date picker input. */
     @Input()
     useValidation: boolean = true;

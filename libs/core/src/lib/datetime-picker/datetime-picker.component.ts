@@ -7,7 +7,6 @@ import {
     forwardRef,
     HostListener,
     Input,
-    OnDestroy,
     OnInit,
     Optional,
     Output,

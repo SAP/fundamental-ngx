@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
 import * as calendarOptionHtml from '!raw-loader!./examples/calendar-options-example/calendar-options-example.component.html';
 import * as calendarOptionSrc from '!raw-loader!./examples/calendar-options-example/calendar-options-example.component.ts';
+import * as calendarMarkHoverSrc from '!raw-loader!./examples/calendar-mark-hover/calendar-mark-hover.component.ts';
+import * as calendarMarkHoverHtml from '!raw-loader!./examples/calendar-mark-hover/calendar-mark-hover.component.html';
 import * as calendarSpecialSrc from '!raw-loader!./examples/calendar-special-day-example/calendar-special-day-example.component.ts';
 import * as calendarSpecialHtml from '!raw-loader!./examples/calendar-special-day-example/calendar-special-day-example.component.html';
 import * as calendarGridSrc from '!raw-loader!./examples/calendar-grid-example/calendar-grid-example.component.ts';
@@ -199,6 +201,23 @@ specialDay: SpecialDayRule[] = [
             component: 'CalendarOptionsExampleComponent',
             fileName: 'calendar-options-example',
             code: calendarOptionHtml
+        }
+    ];
+
+
+
+    calendarMarkHoverSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarMarkHoverComponent',
+            fileName: 'calendar-mark-hover',
+            code: calendarMarkHoverSrc
+        },
+        {
+            language: 'html',
+            component: 'CalendarMarkHoverComponent',
+            fileName: 'calendar-mark-hover',
+            code: calendarMarkHoverHtml
         }
     ];
 
