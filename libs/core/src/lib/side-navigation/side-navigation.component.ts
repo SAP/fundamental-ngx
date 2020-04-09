@@ -76,12 +76,6 @@ export class SideNavigationComponent implements AfterContentInit, OnInit {
     /** @hidden */
     ngAfterContentInit(): void {
         this.keyboardService.refreshItems(this.getLists());
-        this.getLists().forEach(list => this.nestedListState.propagateSelected(list));
-
-        this.nestedListState.refresh$.subscribe(() =>
-            /** Refresh selected state for links */
-            this.getLists().forEach(list => this.nestedListState.propagateSelected(list))
-        );
     }
 
     /**
