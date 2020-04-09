@@ -9,7 +9,7 @@
                 *ngFor="let month of colMonths; let colIndex = index"
                 [ngClass]="{
                     'fd-calendar__item--current': isCurrent(getIndex(rowIndex, colIndex)),
-                    'is-selected': isSelected(getIndex(rowIndex, colIndex))
+                    'is-active': isSelected(getIndex(rowIndex, colIndex))
                 }"
                 [attr.tabIndex]="isSelected(getIndex(rowIndex, colIndex)) ? 0 : -1"
                 [attr.id]="getId(getIndex(rowIndex, colIndex))"

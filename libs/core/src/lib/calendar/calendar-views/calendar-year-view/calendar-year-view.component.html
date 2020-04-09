@@ -7,8 +7,8 @@
             <td class="fd-calendar__item"
                 *ngFor="let year of colYears; let colIndex = index"
                 [ngClass]="{
-                    'is-selected': (year == yearSelected),
-                    'fd-calendar__item--current': (year == currentYear)
+                    'fd-calendar__item--current': (year == currentYear),
+                    'is-active': (year == yearSelected)
                 }"
                 role="gridcell"
                 [attr.id]="getId(getIndex(rowIndex, colIndex))"

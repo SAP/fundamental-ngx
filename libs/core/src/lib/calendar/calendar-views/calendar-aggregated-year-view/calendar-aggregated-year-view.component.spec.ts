@@ -31,8 +31,7 @@ describe('CalendarAggregatedYearViewComponent', () => {
     });
 
     it('Should select the year when Enter key is clicked', () => {
-        let event: { key: string; preventDefault: () => void };
-        event = {
+        const event: any = {
             key: 'Enter', preventDefault: () => {}
         };
         component.onKeydownYearHandler(event, 6);

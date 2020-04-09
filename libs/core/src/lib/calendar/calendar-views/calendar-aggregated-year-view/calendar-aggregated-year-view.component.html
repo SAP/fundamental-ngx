@@ -7,8 +7,8 @@
                 role="gridcell"
                 *ngFor="let year of colYears; let colIndex = index"
                 [ngClass]="{
-                    'is-selected': yearsSelected && (year.startYear === yearsSelected.startYear),
-                    'fd-calendar__item--current': isBetween(year, currentYear)
+                    'fd-calendar__item--current': isBetween(year, currentYear),
+                    'is-active': isBetween(year, yearSelected)
                 }"
                 [attr.id]="getId(getIndex(rowIndex, colIndex))"
                 [attr.tabindex]="year === activeYear ? 0 : -1"

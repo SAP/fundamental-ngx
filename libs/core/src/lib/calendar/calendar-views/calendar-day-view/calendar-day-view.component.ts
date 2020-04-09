@@ -233,16 +233,13 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      */
     selectDate(day: CalendarDay, event?: MouseEvent): void {
         if (event) {
+            this._isOnRangePick = false;
             /**
              * There are some problems with popup integration. After clicking inside day component, the popover closes.
              */
             event.stopPropagation();
             event.preventDefault();
             this.newFocusedDayIndex = day.index;
-
-            if (this.calType === 'range' && this.rangeHoverEffect && this.selectCounter === 1) {
-                this._isOnRangePick = !this._isOnRangePick;
-            }
         }
         if (!day.disabled) {
             if (this.calType === 'single') {
@@ -263,6 +260,10 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
                 }
 
             }
+        }
+
+        if (this.calType === 'range' && this.rangeHoverEffect && this.selectCounter === 1) {
+            this._isOnRangePick = !this._isOnRangePick;
         }
     }
 
