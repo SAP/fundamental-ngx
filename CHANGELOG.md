@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.77...v0.16.0-rc.78) (2020-04-09)
+
+
+### Bug Fixes
+
+* make tokenizer/multiinput responsive ([#2086](https://github.com/SAP/fundamental-ngx/issues/2086)) ([35d50ec](https://github.com/SAP/fundamental-ngx/commit/35d50ec2eb679edd9f9bbfeeab604caca224a006))
+
 ## [0.16.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.76...v0.16.0-rc.77) (2020-04-09)
 
 ## [0.16.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.75...v0.16.0-rc.76) (2020-04-09)
