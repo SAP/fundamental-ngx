@@ -52,11 +52,11 @@ describe('TokenizerComponent', () => {
 
     await whenStable(fixture);
 
-    component.input.elementRef.nativeElement.focus();
+    component.input.elementRef().nativeElement.focus();
     const event = new KeyboardEvent('keydown', {
       'code': 'ArrowLeft'
     });
-    component.input.elementRef.nativeElement.dispatchEvent(event);
+    component.input.elementRef().nativeElement.dispatchEvent(event);
 
     await whenStable(fixture);
 
@@ -64,26 +64,26 @@ describe('TokenizerComponent', () => {
   });
 
   it('should handleKeyDown on ArrowLeft when last token is focused', () => {
-    spyOn(component.input.elementRef.nativeElement, 'focus');
+    spyOn(component.input.elementRef().nativeElement, 'focus');
     spyOn(component, 'focusTokenElement');
     const event = new KeyboardEvent('keydown', {
       'code': 'ArrowLeft'
     });
     component.handleKeyDown(event, component.tokenList.length - 1);
 
-    expect(component.input.elementRef.nativeElement.focus).not.toHaveBeenCalled();
+    expect(component.input.elementRef().nativeElement.focus).not.toHaveBeenCalled();
     expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 2);
   });
 
   it('should handleKeyDown on ArrowRight when last token is focused', () => {
-    spyOn(component.input.elementRef.nativeElement, 'focus');
+    spyOn(component.input.elementRef().nativeElement, 'focus');
     spyOn(component, 'focusTokenElement');
     const event = new KeyboardEvent('keydown', {
       'code': 'ArrowRight'
     });
     component.handleKeyDown(event, component.tokenList.length - 1);
 
-    expect(component.input.elementRef.nativeElement.focus).toHaveBeenCalled();
+    expect(component.input.elementRef().nativeElement.focus).toHaveBeenCalled();
     expect(component.focusTokenElement).not.toHaveBeenCalled();
   });
 
@@ -130,5 +130,59 @@ describe('TokenizerComponent', () => {
     expect(mockElement.addEventListener).toHaveBeenCalled();
     expect(mockElement.setAttribute).toHaveBeenCalled();
     expect(mockElement.removeEventListener).toHaveBeenCalled();
+  });
+
+  it('should handle resize - getting smaller', () => {
+    component.compact = true;
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
+    component.previousElementWidth = 2;
+    component.onResize();
+    component.moreTokensLeft.length = 0;
+    component.onResize();
+
+    component.tokenList.forEach(token => {
+      expect(token.elementRef.nativeElement.style.display).toBe('none');
+    });
+    expect(component.moreTokensLeft.length).toBe(3);
+    expect(component.previousElementWidth).toBe(1);
+  });
+
+  it('should handle resize - getting bigger', () => {
+    component.compact = true;
+    // need to collapse the tokens before running expand
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
+    component.onResize();
+    component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({width: 3});
+    component.previousElementWidth = 1;
+    component.onResize();
+
+    expect(component.previousElementWidth).toBe(3);
+    component.tokenList.forEach(token => {
+      expect(token.elementRef.nativeElement.style.display).toBe('inline-block');
+    });
+    expect(component.moreTokensLeft.length).toBe(0);
+  });
+
+  it('should get the combined token width', () => {
+    component.tokenList.forEach(token => {
+      spyOn(token.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1})
+    });
+    spyOn(component.input.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+
+    const retVal = component.getCombinedTokenWidth();
+
+    expect(retVal).toBe(4);
+  });
+
+  it('should handle ngAfterContentInit', () => {
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component, 'onResize');
+
+    component.ngAfterContentInit();
+
+    expect(component.previousElementWidth).toBe(1);
+    expect(component.onResize).toHaveBeenCalled();
   });
 });

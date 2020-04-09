@@ -95,7 +95,7 @@ export class InputGroupAddOnDirective extends AbstractFdNgxClass implements Afte
 
     /** @hidden */
     constructor(
-        private elementRef: ElementRef,
+        public elementRef: ElementRef,
         private renderer: Renderer2
     ) {
         super(elementRef);

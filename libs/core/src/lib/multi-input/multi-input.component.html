@@ -8,32 +8,35 @@
                     [fillControlMode]="fillControlMode"
                     class="fd-multi-input-popover-custom">
             <fd-popover-control>
-                <fd-input-group
-                    [state]="state"
-                    [buttonFocusable]="buttonFocusable"
-                    [button]="true"
-                    [glyph]="glyph"
-                    [compact]="compact"
-                    [disabled]="disabled"
-                    (click)="openChangeHandle(!open)">
-                    <fd-tokenizer [compact]="compact" class="fd-multi-input-tokenizer">
-                        <fd-token
-                            *ngFor="let token of selected"
-                            [compact]="compact"
-                            [disabled]=this.disabled
-                            (onCloseClick)="handleSelect(false, token, null)">
-                            <span [innerHtml]="token | displayFnPipe:displayFn"></span>
-                        </fd-token>
-                        <input type="text" class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
-                               fd-form-control fd-input-group-input
-                               #searchInputElement
-                               [placeholder]="placeholder"
-                               [(ngModel)]="searchTerm"
-                               [ngClass]="{'fd-input--compact': compact}"
-                               (ngModelChange)="handleSearchTermChange()"
-                               (keydown)="handleInputKeydown($event)">
-                    </fd-tokenizer>
-                </fd-input-group>
+                <form (submit)="onSubmit()">
+                    <fd-input-group
+                        [state]="state"
+                        [buttonFocusable]="buttonFocusable"
+                        [button]="true"
+                        [compact]="compact"
+                        [disabled]="disabled"
+                        (click)="openChangeHandle(!open)">
+                        <fd-tokenizer [compact]="compact" class="fd-multi-input-tokenizer" [glyph]="glyph">
+                            <fd-token
+                                *ngFor="let token of selected"
+                                [compact]="compact"
+                                [disabled]=this.disabled
+                                (onCloseClick)="handleSelect(false, token, null)">
+                                <span [innerHtml]="token | displayFnPipe:displayFn"></span>
+                            </fd-token>
+                            <input type="text" class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
+                                   fd-form-control fd-input-group-input
+                                   #searchInputElement
+                                   [placeholder]="placeholder"
+                                   [(ngModel)]="searchTerm"
+                                   [compact]="compact"
+                                   [ngClass]="{'fd-input--compact': compact}"
+                                   (ngModelChange)="handleSearchTermChange()"
+                                   (keydown)="handleInputKeydown($event)"
+                                   [ngModelOptions]="{standalone: true}">
+                        </fd-tokenizer>
+                    </fd-input-group>
+                </form>
             </fd-popover-control>
             <fd-popover-body [attr.aria-hidden]="!open">
                 <ul fd-list class="fd-multi-input-menu-overflow" *ngIf="displayedValues && displayedValues.length" [style.maxHeight]="maxHeight">
@@ -44,7 +47,7 @@
                         </fd-checkbox>
                     </li>
                     <li fd-list-item class="fd-multi-input-show-all">
-                        <a class="fd-link" (click)="showAllClicked($event)" href>Show All ({{dropdownValues.length}})</a>
+                        <a fd-link (click)="showAllClicked($event)" href>Show All ({{dropdownValues.length}})</a>
                     </li>
                 </ul>
                 <ng-content></ng-content>

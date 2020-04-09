@@ -1,8 +1,8 @@
-<span class="fd-token" role="button"
+<span class="fd-token" role="button" (click)="tokenClickHandler($event)"
       [ngClass]="{'fd-token__disabled': disabled, 'fd-token--compact': compact, 'fd-token--selected': selected,
         'fd-token--readonly': readOnly}">
     <span class="fd-token__text">
         <ng-content></ng-content>
     </span>
-    <span (click)="clickHandler($event)" *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></span>
+    <span (click)="closeClickHandler($event)" *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></span>
 </span>
