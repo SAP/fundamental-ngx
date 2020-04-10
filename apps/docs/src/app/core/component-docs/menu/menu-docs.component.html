@@ -60,8 +60,8 @@
         </li>
     </ul>
     If you are using <code>fd-menu-addon</code> to create icon indicating submenu level, remember to add <code>[submenuIndicator]="true"</code>.
-    The important thing is to create templates with submenu items inside the <code>fd-menu</code> tag, so Angular correctly
-    attaches them to the DI tree.
+    The important thing is to create templates with submenu items inside the <code>fd-menu</code> tag, so Angular
+    correctly attaches them to the DI tree.
 </description>
 <component-example>
     <fd-menu-with-submenu-example></fd-menu-with-submenu-example>
@@ -74,10 +74,15 @@
     Menu in mobile mode
 </fd-docs-section-title>
 <description>
-    To open Menu in mobile mode use <code>[mobile]="true"</code> option.
-    In mobile mode the Menu is opened inside Dialog component taking whole viewport of the device.
-    When going through nested levels of the Menu, name of the parent menu item will display in Dialogs header.
-    To add an initial header in first level on the Menu use <code>[mobileMenuTitle]</code>.
+    To open Menu in mobile mode compose the Menu Component together with the Dialog Component.
+    The Menu provides necessary features to build Fiori3 mobile experience like:
+    <ul>
+        <li><code>mobileMenuTitle$</code> - title of current menu level</li>
+        <li><code>backToParentLevel</code> - method navigating to previous menu level</li>
+        <li><code>isInSubmenu</code> - indicates if currently displayed menu level is submenu</li>
+        <li><code>[mobile]</code> - menu option determining the visual appearance of the Menu</li>
+        <li><code>[mobileMenuTitle]</code> - menu option setting initial mobile menu title at first level of menu</li>
+    </ul>
 </description>
 <component-example>
     <fd-menu-mobile-example></fd-menu-mobile-example>

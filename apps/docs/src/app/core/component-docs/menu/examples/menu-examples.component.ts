@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RtlService } from '@fundamental-ngx/core';
+import { Component, TemplateRef } from '@angular/core';
+import { DialogService, RtlService } from '@fundamental-ngx/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -20,11 +20,17 @@ export class MenuSeparatorExampleComponent {}
     templateUrl: './menu-mobile-example.component.html'
 })
 export class MenuMobileExampleComponent {
-    submenuIcon$: Observable<string>;
 
-    constructor(private _rtlService: RtlService) {
-        this.submenuIcon$ = this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'navigation-left-arrow' : 'navigation-right-arrow'))
+    constructor(private _dialogService: DialogService) {
     }
+
+    openDialog(dialogTemplate: TemplateRef<any>): void {
+        this._dialogService.open(dialogTemplate, {
+            mobile: true,
+            verticalPadding: false
+        })
+    }
+
 }
 
 @Component({

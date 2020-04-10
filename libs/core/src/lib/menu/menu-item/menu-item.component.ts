@@ -70,8 +70,8 @@ export class MenuItemComponent implements DefaultMenuItem {
     };
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef,
-                @Host() private _menuComponent: MenuComponent) {
+    constructor(@Host() private _menuComponent: MenuComponent,
+                private _elementRef: ElementRef) {
     }
 
     /** Whether menu item has popup (desktop mode)  */
