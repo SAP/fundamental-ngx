@@ -21,7 +21,7 @@ export class CalendarService {
     /** Event thrown, when the focus is changed. */
     onFocusIdChange: Subject<number> = new Subject<number>();
 
-    /** TODO */
+    /** Left Arrow Id, which will be focused by default on focus escape */
     leftArrowId: string;
 
     /** Function that is called when the focus would escape the element. */
