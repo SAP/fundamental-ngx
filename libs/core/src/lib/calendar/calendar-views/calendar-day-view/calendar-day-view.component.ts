@@ -576,6 +576,11 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             specialNumber: this._getSpecialDay(fdDate)
         };
 
+        /** Apply disabled state to days marked with passed function */
+        if (this.disableFunction) {
+            day.disabled = this.disableFunction(fdDate);
+        }
+
         return day;
     }
 
