@@ -9,12 +9,10 @@ import { MenuSeparatorComponent } from './menu-separator/menu-separator.componen
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
-import { DialogModule } from '../dialog/dialog.module';
-import { ButtonModule } from '../button/button.module';
 import { MenuItemDirective } from './directives/menu-item.directive';
 
 @NgModule({
-    imports: [CommonModule, DialogModule, ButtonModule],
+    imports: [CommonModule],
     declarations: [
         MenuComponent,
         MenuItemComponent,

@@ -1,26 +1,22 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
     HostListener,
     Input,
-    OnDestroy,
-    Optional,
+    OnInit,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogRef } from '../dialog/dialog-utils/dialog-ref.class';
-import { DialogService } from '../dialog/dialog-service/dialog.service';
-import { PopoverComponent } from '../popover/popover.component';
-import { filter } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MenuKeyboardService } from './menu-keyboard.service';
+import { BehaviorSubject } from 'rxjs';
 
 interface DialogContent {
     title: string,
@@ -37,34 +33,23 @@ interface DialogContent {
     styleUrls: ['menu.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuComponent implements AfterViewInit, OnDestroy {
+export class MenuComponent implements OnInit {
 
     /** Display menu in compact mode */
     @Input()
     compact: boolean = false;
 
     /** Display menu in mobile mode */
-    @Input('mobile') set setMobileMode(value: boolean) {
-        this.mobile = value;
-        if (this.isUsingPopoverAndMobileMode) {
-            this._setPopoverToMobileMode();
-        }
-    }
-
-    /** @hidden */
+    @Input()
     mobile: boolean = false;
 
     /** Dialog title used for menu in mobile mode */
     @Input()
-    mobileMenuTitle: string;
+    mainMenuTitle: string;
 
     /** Custom config used to open the Dialog */
     @Input()
     dialogConfig: DialogConfig;
-
-    /** @hidden */
-    @ViewChild('dialog')
-    dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ViewChild('menuTemplate')
@@ -74,14 +59,10 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     @ContentChildren(MenuItemComponent)
     menuItems: QueryList<MenuItemComponent>;
 
-    /** Reference to Dialog used in mobile mode */
-    dialogRef: DialogRef;
+    mobileMenuTitle$: BehaviorSubject<string>;
 
     /** @hidden */
-    private _menuTemplates: DialogContent[] = [];
-
-    /** @hidden */
-    private _subscription = new Subscription();
+    private _subMenuTemplates: DialogContent[] = [];
 
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
@@ -118,81 +99,44 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     }
 
     constructor(private _elementRef: ElementRef,
-                private _dialogService: DialogService,
-                private _menuKeyboardService: MenuKeyboardService,
-                @Optional() private _popoverComponent: PopoverComponent) {}
+                private _changeDetectorRef: ChangeDetectorRef,
+                private _menuKeyboardService: MenuKeyboardService) {}
 
-    /** @hidden */
-    ngAfterViewInit() {
-        this._menuTemplates.push({title: this.mobileMenuTitle, template: this.menuTemplate});
-        this._listenOnPopoverOpen();
-    }
-
-    /** @hidden */
-    ngOnDestroy() {
-        this._subscription.unsubscribe();
+    ngOnInit() {
+        this.mobileMenuTitle$ = new BehaviorSubject<string>(this.mainMenuTitle)
     }
 
     /** @hidden */
     get dialogContent(): DialogContent {
-        return this._menuTemplates[this._menuTemplates.length - 1];
+        return this._subMenuTemplates[this._subMenuTemplates.length - 1];
     }
 
     /** @hidden */
-    get isOnNestedLevel(): boolean {
-        return this._menuTemplates.length > 1;
+    get isInSubmenu(): boolean {
+        return !!this._subMenuTemplates.length;
     }
 
-    /** @hidden */
-    get isUsingPopoverAndMobileMode(): boolean {
-        return this._popoverComponent && this.mobile;
-    }
-
-    /** @hidden Open the Dialog to display Menu in mobile mode */
-    openDialog(): void {
-        this._dialogService.open(
-            this.dialogTemplate,
-            {
-                mobile: true,
-                verticalPadding: false,
-                escKeyCloseable: false
-            }
-        )
-    }
-
-    /** @hidden Close mobile Menu mode Dialog */
-    closeDialog(dialogRef: DialogRef) {
-        dialogRef.close();
-        if (this.isUsingPopoverAndMobileMode) {
-            this._popoverComponent.close();
+    /** Navigate back to parent level of submenu */
+    backToParentLevel(): void {
+        if (this._subMenuTemplates.length) {
+            this._subMenuTemplates.pop();
+            this._updateMenuTitle();
         }
     }
 
-    /** @hidden */
-    goToPreviousMenuLevel(): void {
-        this._menuTemplates.pop();
-    }
-
-    /** @hidden */
+    /** @hidden Adds new view to menu templates */
     loadView(view: DialogContent): void {
-        this._menuTemplates.push(view);
+        this._subMenuTemplates.push(view);
+        this._updateMenuTitle();
+        this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden If Menu is in mobile mode and it is used inside Popover,
-     * automatically open Dialog when popover has been opened */
-    private _listenOnPopoverOpen(): void {
-        if (this._popoverComponent) {
-            this._subscription.add(
-                this._popoverComponent.isOpenChange.pipe(
-                    filter(isOpen => this.mobile && isOpen)
-                ).subscribe(_ => this.openDialog())
-            )
-        }
-    }
-
-    /** @hidden Setup Popover to make it work with Menu in mobile mode */
-    private _setPopoverToMobileMode(): void {
-        this._popoverComponent.closeOnOutsideClick = false;
+    private _updateMenuTitle(): void {
+        this.mobileMenuTitle$.next(
+            this.isInSubmenu
+                ? this.dialogContent.title
+                : this.mainMenuTitle
+        );
     }
 
     private _focus(direction: 'next' | 'previous' | 'parentList' | 'childList'): void {

@@ -1,102 +1,130 @@
-<fd-popover>
-    <fd-popover-control>
-        <button fd-button>Open menu</button>
-    </fd-popover-control>
-    <fd-popover-body>
-        <fd-menu [mobile]="true" mobileMenuTitle="Fresh Market Products">
-            <li fd-menu-item [subMenu]="fruits">
-                <div fd-menu-link>
-                    <span fd-menu-title>Fruits</span>
-                    <fd-icon fd-menu-addon [submenuIndicator]="true" [glyph]="submenuIcon$ | async"></fd-icon>
+<button fd-button (click)="openDialog(dialogTemplate)">Open Mobile Menu</button>
+
+<ng-template #dialogTemplate let-dialog let-dialogConfig="dialogConfig">
+    <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
+        <fd-dialog-header>
+            <ng-template fdTemplate="header">
+                <div fd-bar-left>
+                    <fd-bar-element *ngIf="menu.isInSubmenu">
+                        <button fd-button
+                                fdType="transparent"
+                                glyph="nav-back"
+                                (click)="menu.backToParentLevel()">
+                        </button>
+                    </fd-bar-element>
+                    <fd-bar-element>
+                        <h1 fd-dialog-title>{{menu.mobileMenuTitle$ | async}}</h1>
+                    </fd-bar-element>
                 </div>
-            </li>
-
-            <li fd-menu-item [subMenu]="vegetables">
-                <div fd-menu-link>
-                    <span fd-menu-title>Vegetables</span>
-                    <fd-icon fd-menu-addon [submenuIndicator]="true" [glyph]="submenuIcon$ | async"></fd-icon>
-                </div>
-            </li>
-
-            <li fd-menu-item [subMenu]="milkProducts">
-                <div fd-menu-link>
-                    <span fd-menu-title>Milk products</span>
-                    <fd-icon fd-menu-addon [submenuIndicator]="true" [glyph]="submenuIcon$ | async"></fd-icon>
-                </div>
-            </li>
-
-            <ng-template #fruits>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-link>
-                        <span fd-menu-title>Pineapple</span>
-                    </a>
-                </li>
-
-                <li fd-menu-item>
-                    <a href="#" fd-menu-link>
-                        <span fd-menu-title>Banana</span>
-                    </a>
-                </li>
             </ng-template>
-
-            <ng-template #vegetables>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-link>
-                        <span fd-menu-title>Cucumber</span>
-                    </a>
-                </li>
-
-                <li fd-menu-item>
-                    <a href="#" fd-menu-link>
-                        <span fd-menu-title>Onion</span>
-                    </a>
-                </li>
-            </ng-template>
-
-            <ng-template #milkProducts>
-                <li fd-menu-item [subMenu]="cheeses">
+        </fd-dialog-header>
+        <fd-dialog-body>
+            <fd-menu #menu [mobile]="true" mainMenuTitle="Fresh Market Products">
+                <li fd-menu-item [subMenu]="fruits">
                     <div fd-menu-link>
-                        <span fd-menu-title>Cheese</span>
-                        <fd-icon fd-menu-addon [submenuIndicator]="true" [glyph]="submenuIcon$ | async"></fd-icon>
+                        <span fd-menu-title>Fruits</span>
+                        <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
                     </div>
                 </li>
 
-                <li fd-menu-item [subMenu]="yogurts">
+                <li fd-menu-item [subMenu]="vegetables">
                     <div fd-menu-link>
-                        <span fd-menu-title>Yogurts</span>
-                        <fd-icon fd-menu-addon [submenuIndicator]="true" [glyph]="submenuIcon$ | async"></fd-icon>
+                        <span fd-menu-title>Vegetables</span>
+                        <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
                     </div>
                 </li>
-            </ng-template>
 
-
-            <ng-template #cheeses>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-link>
-                        <span fd-menu-title>Parmesan</span>
-                    </a>
+                <li fd-menu-item [subMenu]="milkProducts">
+                    <div fd-menu-link>
+                        <span fd-menu-title>Milk products</span>
+                        <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
+                    </div>
                 </li>
 
-                <li fd-menu-item>
-                    <a href="#" fd-menu-link>
-                        <span fd-menu-title>Brie</span>
-                    </a>
-                </li>
-            </ng-template>
+                <ng-template #fruits>
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-link>
+                            <span fd-menu-title>Pineapple</span>
+                        </a>
+                    </li>
 
-            <ng-template #yogurts>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-link>
-                        <span fd-menu-title>Greek</span>
-                    </a>
-                </li>
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-link>
+                            <span fd-menu-title>Banana</span>
+                        </a>
+                    </li>
+                </ng-template>
 
-                <li fd-menu-item>
-                    <a href="#" fd-menu-link>
-                        <span fd-menu-title>Natural</span>
-                    </a>
-                </li>
-            </ng-template>
-        </fd-menu>
-    </fd-popover-body>
-</fd-popover>
+                <ng-template #vegetables>
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-link>
+                            <span fd-menu-title>Cucumber</span>
+                        </a>
+                    </li>
+
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-link>
+                            <span fd-menu-title>Onion</span>
+                        </a>
+                    </li>
+                </ng-template>
+
+                <ng-template #milkProducts>
+                    <li fd-menu-item [subMenu]="cheeses">
+                        <div fd-menu-link>
+                            <span fd-menu-title>Cheese</span>
+                            <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
+                        </div>
+                    </li>
+
+                    <li fd-menu-item [subMenu]="yogurts">
+                        <div fd-menu-link>
+                            <span fd-menu-title>Yogurts</span>
+                            <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
+                        </div>
+                    </li>
+                </ng-template>
+
+
+                <ng-template #cheeses>
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-link>
+                            <span fd-menu-title>Parmesan</span>
+                        </a>
+                    </li>
+
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-link>
+                            <span fd-menu-title>Brie</span>
+                        </a>
+                    </li>
+                </ng-template>
+
+                <ng-template #yogurts>
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-link>
+                            <span fd-menu-title>Greek</span>
+                        </a>
+                    </li>
+
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-link>
+                            <span fd-menu-title>Natural</span>
+                        </a>
+                    </li>
+                </ng-template>
+            </fd-menu>
+        </fd-dialog-body>
+        <fd-dialog-footer>
+            <fd-dialog-footer-button>
+                <button
+                    fd-button
+                    fdType="transparent"
+                    fd-dialog-decisive-button
+                    (click)="dialog.close()">
+                    Cancel
+                </button>
+            </fd-dialog-footer-button>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
