@@ -171,8 +171,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      */
     @Input()
     yearGrid: CalendarYearGrid = {
-        rows: 5,
-        cols: 6,
+        rows: 4,
+        cols: 5,
         yearMapping: (num: number) => num.toString()
     };
 
@@ -182,8 +182,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      */
     @Input()
     aggregatedYearGrid: CalendarYearGrid = {
-        rows: 6,
-        cols: 2,
+        rows: 4,
+        cols: 3,
         yearMapping: (num: number) => num.toString()
     };
 
