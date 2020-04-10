@@ -1,30 +1,59 @@
-import { AfterContentInit, Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import {
+    AfterContentInit,
+    Directive,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnInit,
+    Renderer2
+} from '@angular/core';
 import { InputGroupPlacement } from './input-group.component';
 import { FormStates } from '../form/form-control/form-states';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-input-group-input]',
 })
-export class InputGroupInputDirective extends AbstractFdNgxClass {
+export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChanges {
+    /** user's custom classes */
+    @Input()
+    class: string;
 
     @Input()
     compact: boolean = false;
 
     /** @hidden */
-    _setProperties() {
-        this._addClassToElement('fd-input');
-        this._addClassToElement('fd-input-group__input');
-        if (this.compact) {
-            this._addClassToElement('fd-input--compact');
-        }
-    }
-
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            'fd-input',
+            'fd-input-group__input',
+            this.compact ? 'fd-input--compact' : ''
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 
 }
@@ -41,7 +70,10 @@ export class InputGroupTextareaDirective  {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-input-group-addon]'
 })
-export class InputGroupAddOnDirective extends AbstractFdNgxClass implements AfterContentInit {
+export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuilder, AfterContentInit {
+    /** user's custom classes */
+    @Input()
+    class: string;
 
     /** @hidden */
     @HostBinding('class.fd-input-group__addon')
@@ -77,37 +109,46 @@ export class InputGroupAddOnDirective extends AbstractFdNgxClass implements Afte
     button: boolean = false;
 
     /** @hidden */
-    _setProperties() {
-        this._addClassToElement('fd-input-group__addon');
-        if (this.button) {
-            this._addClassToElement('fd-input-group__addon--button');
-        }
-        if (this.type) {
-            this._addClassToElement('fd-input-group__addon--' + this.type);
-        }
-        if (this.state) {
-            this._addClassToElement('is-' + this.state);
-        }
-        if (this.compact) {
-            this._addClassToElement('fd-input-group__addon--compact')
-        }
-    }
-
-    /** @hidden */
-    constructor(
-        public elementRef: ElementRef,
-        private renderer: Renderer2
-    ) {
-        super(elementRef);
-    }
+    constructor(private _elementRef: ElementRef, private renderer: Renderer2) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
         /** Add fd-input-group__button to button child element */
-        const button = this.elementRef.nativeElement.querySelector('button');
+        const button = this.elementRef().nativeElement.querySelector('button');
         if (button) {
             this.renderer.addClass(button, 'fd-input-group__button');
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            'fd-input-group__addon',
+            this.button ? 'fd-input-group__addon--button' : '',
+            this.type ? 'fd-input-group__addon--' + this.type : '',
+            this.state ? 'is-' + this.state : '',
+            this.compact ? 'fd-input-group__addon--compact' : ''
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 
 }
