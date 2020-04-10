@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { MenuComponent } from './menu.component';
 import { MenuTitleDirective } from './directives/menu-title.directive';
-import { MenuListDirective } from './directives/menu-list.directive';
 import { MenuLinkDirective } from './directives/menu-link.directive';
 import { MenuSeparatorComponent } from './menu-separator/menu-separator.component';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
@@ -21,7 +20,6 @@ import { MenuItemDirective } from './directives/menu-item.directive';
         MenuShortcutDirective,
         MenuLinkDirective,
         MenuTitleDirective,
-        MenuListDirective,
         MenuItemDirective
     ],
     exports: [
@@ -31,7 +29,6 @@ import { MenuItemDirective } from './directives/menu-item.directive';
         MenuShortcutDirective,
         MenuLinkDirective,
         MenuTitleDirective,
-        MenuListDirective,
         MenuAddonDirective,
         MenuItemDirective
     ]

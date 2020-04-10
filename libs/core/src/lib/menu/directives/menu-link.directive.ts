@@ -4,7 +4,10 @@ import { Subscription } from 'rxjs';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-menu-link]'
+    selector: '[fd-menu-link]',
+    host: {
+        '[tabindex]': 'disabled ? -1 : 0'
+    }
 })
 export class MenuLinkDirective implements OnInit, OnDestroy {
 

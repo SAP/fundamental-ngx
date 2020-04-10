@@ -1,10 +1,13 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ContentChild, ContentChildren,
-    ElementRef, Host,
+    ContentChild,
+    ContentChildren,
+    ElementRef,
+    Host,
     HostListener,
-    Input, QueryList,
+    Input,
+    QueryList,
     TemplateRef
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -65,7 +68,11 @@ export class MenuItemComponent implements DefaultMenuItem {
     @HostListener('click')
     onMobileItemClicked() {
         if (this.subMenu && this._menuComponent.mobile) {
-            this._menuComponent.loadView({title: this.menuItemTitle.title, template: this.subMenu})
+            this._menuComponent.loadView(
+                {
+                    title: this.menuItemTitle ? this.menuItemTitle.title : '',
+                    template: this.subMenu
+                })
         }
     };
 
