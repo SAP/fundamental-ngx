@@ -69,12 +69,10 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     /** The currently selected FdDate model in single mode. */
     @Input()
     set selectedDate(fdDate: FdDate) {
-        if (!CalendarService.datesEqual(fdDate, this.selectedDate)) {
-            this._selectedDate = fdDate;
-            if (this.dayViewGrid) {
-                const dayFromFdDate: CalendarDay = this.calendarDayList.find(day => CalendarService.datesEqual(day.date, fdDate));
-                this._changeSelectedSingleDay(dayFromFdDate, this.calendarDayList);
-            }
+        this._selectedDate = fdDate;
+        if (this.dayViewGrid) {
+            const dayFromFdDate: CalendarDay = this.calendarDayList.find(day => CalendarService.datesEqual(day.date, fdDate));
+            this._changeSelectedSingleDay(dayFromFdDate, this.calendarDayList);
         }
     }
 
@@ -246,8 +244,8 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
              */
             event.stopPropagation();
             event.preventDefault();
-            this.newFocusedDayIndex = day.index;
         }
+        this.newFocusedDayIndex = null;
         if (!day.disabled) {
             if (this.calType === 'single') {
                 /** Remove selections from other day and put selection to chosen day */
@@ -674,10 +672,11 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
     /** Change selection flag on days to false, besides the selected one */
     private _changeSelectedSingleDay(day: CalendarDay, calendar: CalendarDay[]): void {
+        calendar.forEach(_day => _day.selected = false);
         if (day) {
-            calendar.forEach(_day => _day.selected = false);
             day.selected = true;
         }
+        this.refreshTabIndex(calendar);
     }
 
     /**
@@ -690,7 +689,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         const calendarList = calendar;
 
         /** Reset changing properties */
-        calendarList.forEach(_day => _day.selected = _day.disabled = _day.hoverRange = _day.selectedRange = false);
+        calendarList.forEach(_day => _day.selected = _day.isTabIndexed = _day.disabled = _day.hoverRange = _day.selectedRange = false);
 
         if (dates) {
             let startDay: CalendarDay;
@@ -715,17 +714,24 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
                 .filter(_day => _day.selectedRange = CalendarService.isBetween(_day.date, dates))
                 .forEach(_day => _day.selectedRange = true)
             ;
-
-            /** Apply disabled state to days marked with passed function */
-            if (this.disableFunction) {
-                calendarList.forEach(_day => _day.disabled = this.disableFunction(_day.date));
-            }
-
-            if ((this.selectCounter === 0 || this.selectCounter === 2 ) && this.disableRangeStartFunction) {
-                calendarList.forEach(_day => _day.disabled = _day.disabled || this.disableRangeStartFunction(_day.date));
-            } else if (this.selectCounter === 1 && this.disableRangeEndFunction) {
-                calendarList.forEach(_day => _day.disabled = _day.disabled || this.disableRangeEndFunction(_day.date));
-            }
         }
+
+        this.refreshTabIndex(calendarList);
+
+        /** Apply disabled state to days marked with passed function */
+        if (this.disableFunction) {
+            calendarList.forEach(_day => _day.disabled = this.disableFunction(_day.date));
+        }
+
+        if ((this.selectCounter === 0 || this.selectCounter === 2 ) && this.disableRangeStartFunction) {
+            calendarList.forEach(_day => _day.disabled = _day.disabled || this.disableRangeStartFunction(_day.date));
+        } else if (this.selectCounter === 1 && this.disableRangeEndFunction) {
+            calendarList.forEach(_day => _day.disabled = _day.disabled || this.disableRangeEndFunction(_day.date));
+        }
+    }
+
+    private refreshTabIndex(calendar: CalendarDay[]): void {
+        calendar.forEach(_day => _day.isTabIndexed = false);
+        this._getActiveCell(calendar.filter(_day => _day.monthStatus === 'current')).isTabIndexed = true;
     }
 }
