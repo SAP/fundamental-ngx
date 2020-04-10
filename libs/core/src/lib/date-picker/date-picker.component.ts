@@ -138,6 +138,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     disabled: boolean;
 
+    /** Defines if date picker should be closed after date choose */
+    @Input()
+    closeOnDateChoose: boolean = true;
+
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -252,7 +256,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** @hidden */
     public closeFromCalendar(): void {
         console.log('close from calendar');
-        if (this.type === 'single') {
+        if (this.type === 'single' && this.closeOnDateChoose) {
             this.closeCalendar();
         }
     }

@@ -76,6 +76,16 @@ export class CalendarService {
     }
 
     /**
+     *
+     */
+    static isBetween(dateToCheck: FdDate, dateRange: FdRangeDate): boolean {
+        return (
+            (dateRange.start && (dateRange.start.getTimeStamp() < dateToCheck.getTimeStamp())) &&
+            (dateRange.end && (dateRange.end.getTimeStamp() > dateToCheck.getTimeStamp()))
+        );
+    }
+
+    /**
      * Standardized method to calculate grid [x][y] to index number
      */
     public getId(row: number, col: number): number {

@@ -3,8 +3,8 @@ import { FdDate } from './fd-date';
 export interface CalendarDay {
     date: FdDate;
     weekDay: number;
-    disabled: boolean;
     weekend: boolean;
+    disabled?: boolean;
     monthStatus?: string;
     blocked?: boolean;
     selected?: boolean;
