@@ -40,9 +40,10 @@
             </fd-popover-control>
             <fd-popover-body [attr.aria-hidden]="!open">
                 <ul fd-list class="fd-multi-input-menu-overflow" *ngIf="displayedValues && displayedValues.length" [style.maxHeight]="maxHeight">
-                    <li fd-list-item *ngFor="let value of displayedValues; let ind  = index" [selected]="selected.indexOf(value) !== -1">
+                    <li (click)="handleSelect(selected.indexOf(value) === -1, value, $event)" fd-list-item class="fd-multi-input-item"
+                        *ngFor="let value of displayedValues; let ind  = index" [selected]="selected.indexOf(value) !== -1">
                         <fd-checkbox [ngModel]="selected ? selected.indexOf(value) !== -1 : false" class="fd-multi-input-checkbox"
-                                 (click)="handleSelect(selected.indexOf(value) === -1, value, $event)" (keydown)="handleKeyDown($event, ind)">
+                                 (keydown)="handleKeyDown($event, ind)">
                             <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
                         </fd-checkbox>
                     </li>
