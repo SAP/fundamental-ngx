@@ -135,7 +135,7 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
     }
 
     /** Get id of calendar's year item */
-    public getId(index: number): string {
+    getId(index: number): string {
         return this.id + '-fd-year-' + index;
     }
 

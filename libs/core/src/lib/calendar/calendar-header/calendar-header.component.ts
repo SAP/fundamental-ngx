@@ -57,7 +57,7 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
 
     /** Whether compact mode should be included into calendar */
     @Input()
-    public compact: boolean = false;
+    compact: boolean = false;
 
     /** Event emitted when the active view should change. */
     @Output()
@@ -83,13 +83,13 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
-        public calendarI18nLabels: CalendarI18nLabels,
-        public calendarI18n: CalendarI18n,
+        public  calendarI18nLabels: CalendarI18nLabels,
+        private  _calendarI18n: CalendarI18n,
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService
     ) {
         /** Merging 18n observables */
-        const i18nObservables = merge(this.calendarI18n.i18nChange, this.calendarI18nLabels.labelsChange);
+        const i18nObservables = merge(this._calendarI18n.i18nChange, this.calendarI18nLabels.labelsChange);
 
         /** Called to trigger change detection */
         i18nObservables.pipe(takeUntil(this.onDestroy$))
@@ -122,7 +122,7 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
 
     /** Get aria label for the month shown. */
     get monthLabel(): string {
-        return this.calendarI18n.getAllFullMonthNames()[this.currentlyDisplayed.month - 1];
+        return this._calendarI18n.getAllFullMonthNames()[this.currentlyDisplayed.month - 1];
     }
 
     /** Get information is calendar is on month view */

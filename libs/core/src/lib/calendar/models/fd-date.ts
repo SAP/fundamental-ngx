@@ -8,17 +8,17 @@ export class FdDate {
     /**
      * The year of the date.
      */
-    public year: number;
+    year: number;
 
     /**
      * The month of the date. 1 = January, 12 = December.
      */
-    public month: number;
+    month: number;
 
     /**
      * Day of the date. Starts at 1.
      */
-    public day: number;
+    day: number;
 
     /**
      * Static function to get the current date in FdDate form.
@@ -67,7 +67,7 @@ export class FdDate {
     /**
      * Get Luxon date object converted to string from FdDate.
      */
-    public toDateString(): string {
+    toDateString(): string {
         if (this.year && this.month && this.day && this.isDateValid()) {
             return this.toDate().toDateString();
         } else {
@@ -79,7 +79,7 @@ export class FdDate {
      * Get amount of milliseconds from 01.01.1970
      * -1 is thrown when some some of properties (day,month,year) are not defined
      */
-    public getTimeStamp(): number {
+    getTimeStamp(): number {
         if (this.year && this.month && this.day) {
             return this.toDate().getTime();
         } else {
@@ -93,7 +93,7 @@ export class FdDate {
      * Native javascript date getDay() function returns Sunday as 0, Monday as 1, etc, to it's needed to increment value
      *
      */
-    public getDay(): number {
+    getDay(): number {
         if (this.year && this.month && this.day) {
             return this.toDate().getDay() + 1;
         } else {
@@ -102,7 +102,7 @@ export class FdDate {
     }
 
     /** Get next day */
-    public nextDay(): FdDate {
+    nextDay(): FdDate {
         const maxDays = CalendarService.getDaysInMonth(this.month, this.year);
         const isNextMonth = this.day >= maxDays;
         const isNextYear = isNextMonth && this.month === 12;
@@ -114,7 +114,7 @@ export class FdDate {
     }
 
     /** Get previous day  */
-    public previousDay(): FdDate {
+    previousDay(): FdDate {
 
         /** Check if should switch month to previous one */
         const prevMonth: boolean = this.day === 1;
@@ -136,14 +136,14 @@ export class FdDate {
     /**
      * Get native date object from FdDate.
      */
-    public toDate(): Date {
+    toDate(): Date {
         return new Date(this.year, this.month - 1, this.day);
     }
 
     /*
     * Get week number from a date
     */
-    public getWeekNumber(): number {
+    getWeekNumber(): number {
         const date = this.toDate();
         date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
 
@@ -158,7 +158,7 @@ export class FdDate {
     /**
      * Method that checks validity of current FdDate object.
      */
-    public isDateValid(): boolean {
+    isDateValid(): boolean {
         if (!this) {
             return false;
         }

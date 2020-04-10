@@ -134,12 +134,12 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
     }
 
     /** Get id of calendar's aggregated year item */
-    public getId(index: number): string {
+    getId(index: number): string {
         return this.id + '-fd-aggregated-year-' + index;
     }
 
     /** Check if specified year is between start year and end year) */
-    public isBetween(aggregatedYear: AggregatedYear, yearToCheck: number): boolean {
+    isBetween(aggregatedYear: AggregatedYear, yearToCheck: number): boolean {
         return aggregatedYear.endYear >= yearToCheck && aggregatedYear.startYear <= yearToCheck;
     }
 

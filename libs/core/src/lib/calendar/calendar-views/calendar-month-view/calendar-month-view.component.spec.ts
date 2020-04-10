@@ -31,8 +31,8 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should have 12 months', () => {
-        expect(component.shortMonthNames).toBeDefined();
-        const monthList: string[] = [].concat.apply([], component.shortMonthNames);
+        expect(component.monthNames).toBeDefined();
+        const monthList: string[] = [].concat.apply([], component.monthNames);
         expect(monthList.length).toBe(12);
     });
 
@@ -110,9 +110,9 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should generate grid', () => {
-        expect(component.shortMonthNames).toBeDefined();
+        expect(component.monthNames).toBeDefined();
 
-        const sizes: number[] = component.shortMonthNames.map(list => list.length);
+        const sizes: number[] = component.monthNames.map(list => list.length);
 
         expect(sizes).toEqual([3, 3, 3, 3]);
 

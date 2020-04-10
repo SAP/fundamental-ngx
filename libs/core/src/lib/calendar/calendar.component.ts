@@ -95,12 +95,12 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /** The currently selected FdDate model in single mode. */
     @Input()
-    public selectedDate: FdDate = FdDate.getToday();
+    selectedDate: FdDate = FdDate.getToday();
 
     /** Whether compact mode should be included into calendar */
     @Input()
     @HostBinding('class.fd-calendar--compact')
-    public compact: boolean = false;
+    compact: boolean = false;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
@@ -126,19 +126,19 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
-    public selectedRangeDate: FdRangeDate;
+    selectedRangeDate: FdRangeDate;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' */
     @Input()
-    public activeView: FdCalendarView = 'day';
+    activeView: FdCalendarView = 'day';
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
-    public startingDayOfWeek: DaysOfWeek = 1;
+    startingDayOfWeek: DaysOfWeek = 1;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
-    public calType: CalendarType = 'single';
+    calType: CalendarType = 'single';
 
     /** Id of the calendar. If none is provided, one will be generated. */
     @Input()
@@ -185,23 +185,23 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /** Event thrown every time active view is changed */
     @Output()
-    public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
+    readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** Event thrown every time selected date in single mode is changed */
     @Output()
-    public readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();
+    readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    public readonly selectedRangeDateChange: EventEmitter<FdRangeDate> = new EventEmitter<FdRangeDate>();
+    readonly selectedRangeDateChange: EventEmitter<FdRangeDate> = new EventEmitter<FdRangeDate>();
 
     /** Event thrown every time when value is overwritten from outside and throw back isValid */
     @Output()
-    public readonly isValidDateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly isValidDateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event thrown every time when calendar should be closed */
     @Output()
-    public readonly closeCalendar: EventEmitter<void> = new EventEmitter<void>();
+    readonly closeCalendar: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event thrown, when close button is clicked */
     @Output()
@@ -252,7 +252,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /** @hidden */
     constructor(
-        public calendarI18n: CalendarI18n,
+        calendarI18n: CalendarI18n,
         private _changeDetectorRef: ChangeDetectorRef
     ) {}
 
@@ -331,7 +331,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /**
      * Method that handle active view change and throws event.
      */
-    public handleActiveViewChange(activeView: FdCalendarView): void {
+    handleActiveViewChange(activeView: FdCalendarView): void {
         this.activeView = activeView;
         this.activeViewChange.emit(activeView);
     }
@@ -352,7 +352,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * @hidden
      * Method that is triggered by events from day view component, when there is selected range date changed
      */
-    public selectedRangeDateChanged(dates: FdRangeDate): void {
+    selectedRangeDateChanged(dates: FdRangeDate): void {
         if (dates) {
             this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
@@ -363,7 +363,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     }
 
     /** Function that handles next arrow icon click, depending on current view it changes month, year or list of years */
-    public handleNextArrowClick(): void {
+    handleNextArrowClick(): void {
         switch (this.activeView) {
             case 'day':
                 this.displayNextMonth();
@@ -382,7 +382,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     }
 
     /** Function that handles previous arrow icon click, depending on current view it changes month, year or list of years */
-    public handlePreviousArrowClick(): void {
+    handlePreviousArrowClick(): void {
         switch (this.activeView) {
             case 'day':
                 this.displayPreviousMonth();
@@ -401,7 +401,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     }
 
     /** Function that allows to switch actual view to next month */
-    public displayNextMonth(): void {
+    displayNextMonth(): void {
         if (this.currentlyDisplayed.month === 12) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
         } else {
@@ -410,7 +410,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     }
 
     /** Function that allows to switch actual view to previous month */
-    public displayPreviousMonth(): void {
+    displayPreviousMonth(): void {
         if (this.currentlyDisplayed.month <= 1) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
         } else {
@@ -419,39 +419,39 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     }
 
     /** Function that allows to switch actual view to next year */
-    public displayNextYear(): void {
+    displayNextYear(): void {
         this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year + 1 };
     }
 
     /** Function that allows to switch actual view to previous year */
-    public displayPreviousYear(): void {
+    displayPreviousYear(): void {
         this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year - 1 };
     }
 
     /** Function that allows to switch actually displayed list of year to next year list*/
-    public displayNextYearList(): void {
+    displayNextYearList(): void {
         this.yearViewComponent.loadNextYearList();
     }
 
     /** Function that allows to switch actually displayed list of year to previous year list*/
-    public displayPreviousYearList(): void {
+    displayPreviousYearList(): void {
         this.yearViewComponent.loadPreviousYearList();
     }
 
     /** Function that allows to switch actually displayed list of year to next year list*/
-    public displayNextYearsList(): void {
+    displayNextYearsList(): void {
         this.aggregatedYearViewComponent.loadNextYearsList();
     }
 
     /** Function that allows to switch actually displayed list of year to previous year list*/
-    public displayPreviousYearsList(): void {
+    displayPreviousYearsList(): void {
         this.aggregatedYearViewComponent.loadPreviousYearsList();
     }
 
     /** Function that allows to change currently displayed month/year configuration,
      * which are connected to days displayed
      */
-    public setCurrentlyDisplayed(fdDate: FdDate): void {
+    setCurrentlyDisplayed(fdDate: FdDate): void {
         this.currentlyDisplayed = { month: fdDate.month, year: fdDate.year };
     }
 
@@ -459,7 +459,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * @hidden
      * Function that handles changes from month view child component, changes actual view and changes currently displayed month
      */
-    public handleMonthViewChange(month: number): void {
+    handleMonthViewChange(month: number): void {
         this.currentlyDisplayed = { month: month, year: this.currentlyDisplayed.year };
         this.activeView = 'day';
         this.activeViewChange.emit(this.activeView);
@@ -467,21 +467,21 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
         this.dayViewComponent.focusActiveDay();
     }
 
-    public selectedYear(yearSelected: number): void {
+    selectedYear(yearSelected: number): void {
         this.activeView = 'day';
         this.currentlyDisplayed.year = yearSelected;
         this._changeDetectorRef.detectChanges();
         this.dayViewComponent.focusActiveDay();
     }
 
-    public selectedYears(yearsSelected: AggregatedYear): void {
+    selectedYears(yearsSelected: AggregatedYear): void {
         this.activeView = 'year';
         this.currentlyDisplayed.year = yearsSelected.startYear;
         this._changeDetectorRef.detectChanges();
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
-    public isModelValid(): boolean {
+    isModelValid(): boolean {
         if (this.calType === 'single') {
             return this.selectedDate &&
                 this.selectedDate instanceof FdDate &&

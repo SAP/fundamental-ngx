@@ -3,7 +3,7 @@
         <tbody class="fd-calendar__group" role="rowgroup">
         <tr class="fd-calendar__row"
             role="row"
-            *ngFor="let colMonths of shortMonthNames; let rowIndex = index">
+            *ngFor="let colMonths of monthNames; let rowIndex = index">
             <td class="fd-calendar__item"
                 role="gridcell"
                 *ngFor="let month of colMonths; let colIndex = index"
@@ -15,7 +15,7 @@
                 [attr.id]="getId(getIndex(rowIndex, colIndex))"
                 (keydown)="onKeydownMonthHandler($event, getIndex(rowIndex, colIndex))"
                 (click)="selectMonth(getIndex(rowIndex, colIndex), $event)">
-                <span role="button" class="fd-calendar__text" [attr.aria-label]="getFullMonthName(rowIndex, colIndex)">
+                <span role="button" class="fd-calendar__text" [attr.aria-label]="month">
                     {{ month }}
                 </span>
             </td>

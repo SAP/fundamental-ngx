@@ -6,23 +6,23 @@ import { FdRangeDate } from './models/fd-range-date';
 @Injectable()
 export class CalendarService {
 
-    public rowAmount: number = 3;
-    public colAmount: number = 4;
+    rowAmount: number = 3;
+    colAmount: number = 4;
 
     /** Event thrown, when the element is selected by space or enter keys */
-    public onKeySelect: Subject<number> = new Subject<number>();
+    onKeySelect: Subject<number> = new Subject<number>();
 
     /** Event thrown, when the focus goes after list of elements */
-    public onListEndApproach: Subject<number> = new Subject<number>();
+    onListEndApproach: Subject<number> = new Subject<number>();
 
     /** Event thrown, when the focus goes before list of elements */
-    public onListStartApproach: Subject<number> = new Subject<number>();
+    onListStartApproach: Subject<number> = new Subject<number>();
 
     /** Event thrown, when the focus is changed. */
-    public onFocusIdChange: Subject<number> = new Subject<number>();
+    onFocusIdChange: Subject<number> = new Subject<number>();
 
     /** TODO */
-    public leftArrowId: string;
+    leftArrowId: string;
 
     /** Function that is called when the focus would escape the element. */
     focusEscapeFunction: Function;
@@ -88,7 +88,7 @@ export class CalendarService {
     /**
      * Standardized method to calculate grid [x][y] to index number
      */
-    public getId(row: number, col: number): number {
+    getId(row: number, col: number): number {
         return row * this.colAmount + col;
     }
 
@@ -99,7 +99,7 @@ export class CalendarService {
      * @param event KeyboardEvent
      * @param index which is number (0 - 11)
      */
-    public onKeydownHandler(event: KeyboardEvent, index: number): void {
+    onKeydownHandler(event: KeyboardEvent, index: number): void {
         switch (event.key) {
             case 'Enter':
             case ' ': {

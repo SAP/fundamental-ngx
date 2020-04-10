@@ -35,8 +35,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     private readonly _amountOfColPerRow: number = 3;
     private readonly _amountOfRows: number = 4;
 
-    private _shortMonthNames: string[][];
-    private _fullMonthNames: string[];
+    private _monthNames: string[][];
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -66,7 +65,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        this._refreshShortMonthNames();
+        this._refreshMonthNames();
         this._setupKeyboardService();
     }
 
@@ -114,7 +113,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     }
 
     /** Get id of calendar's month item */
-    public getId(index: number): string {
+    getId(index: number): string {
         return this.id + '-fd-month-' + index;
     }
 
@@ -129,26 +128,19 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     }
 
     /** Method that returns grid of short month names from currently provided calendarI18n service */
-    get shortMonthNames(): string[][] {
-        return this._shortMonthNames;
-    }
-
-    /** Method that returns the full name of month for grid element. */
-    getFullMonthName(rowIndex: number, colIndex: number): string {
-        const index = this.getIndex(rowIndex, colIndex);
-        return this._fullMonthNames[index];
+    get monthNames(): string[][] {
+        return this._monthNames;
     }
 
     /** Method that rewrite short month names, used mostly in case of i18n service language change */
-    private _refreshShortMonthNames(): void {
-        const monthNames: string[] = [...this._calendarI18n.getAllShortMonthNames()];
-        this._fullMonthNames = [...this._calendarI18n.getAllFullMonthNames()];
+    private _refreshMonthNames(): void {
+        const monthNames: string[] = [...this._calendarI18n.getAllFullMonthNames()];
         const twoDimensionMonthNames: string[][] = [];
         /** Creating 2d grid */
         while (monthNames.length) {
             twoDimensionMonthNames.push(monthNames.splice(0, this._amountOfColPerRow));
         }
-        this._shortMonthNames = twoDimensionMonthNames;
+        this._monthNames = twoDimensionMonthNames;
         this._cdRef.markForCheck();
     }
 
@@ -171,7 +163,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
         this._calendarI18n.i18nChange
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._refreshShortMonthNames())
+            .subscribe(() => this._refreshMonthNames())
         ;
     }
 }

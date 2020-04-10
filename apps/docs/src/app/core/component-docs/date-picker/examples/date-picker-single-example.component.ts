@@ -4,7 +4,7 @@ import { FdDate } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-date-picker-single-example',
     template: `
-        <fd-date-picker [closeOnDateChoose]="false" [type]="'single'" [(ngModel)]="date"></fd-date-picker>
+        <fd-date-picker [type]="'single'" [(ngModel)]="date"></fd-date-picker>
         <br/>
         <div>Selected Date: {{date ? date.toDateString() : 'null'}}</div>
         <br/>
