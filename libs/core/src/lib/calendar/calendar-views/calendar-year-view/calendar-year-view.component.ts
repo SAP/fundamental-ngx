@@ -6,7 +6,6 @@ import {
     Input,
     EventEmitter,
     ElementRef,
-    AfterViewChecked,
     OnDestroy,
     ChangeDetectionStrategy, ChangeDetectorRef
 } from '@angular/core';
@@ -14,6 +13,7 @@ import { FdDate } from '../../models/fd-date';
 import { takeUntil } from 'rxjs/operators';
 import { CalendarService } from '../../calendar.service';
 import { Subject } from 'rxjs';
+import { CalendarYearGrid } from '../../models/calendar-year-grid';
 
 /** Component representing the YearView of the Calendar Component. */
 @Component({
@@ -26,9 +26,7 @@ import { Subject } from 'rxjs';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDestroy {
-
-    private readonly _amountOfColPerRow: number = 4;
+export class CalendarYearViewComponent implements OnInit, OnDestroy {
 
     /** @hidden
      *  This variable is used to define which year from calendarYearList should be focusable by tab key
@@ -45,10 +43,10 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
     firstYearInList: number = this.currentYear;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    private newFocusedYearId: string;
+    private _newFocusedYearId: string;
 
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */
     @Input()
@@ -62,106 +60,62 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
     @Input()
     yearSelected: number;
 
+    /**
+     * Object to customize year grid
+     */
+    @Input()
+    yearViewGrid: CalendarYearGrid;
+
     /** Event fired when a year is selected. */
     @Output()
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
 
     /** @hidden */
     constructor(
-        private eRef: ElementRef,
-        private changeDetectorRef: ChangeDetectorRef,
-        private calendarService: CalendarService) {
-    }
-
-    /** @hidden */
-    ngAfterViewChecked(): void {
-        if (this.newFocusedYearId) {
-            this.focusElement(this.newFocusedYearId);
-            this.newFocusedYearId = null;
-        }
+        private _eRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _calendarService: CalendarService) {
     }
 
     /** @hidden */
     ngOnInit(): void {
+        this._setupKeyboardService();
         this.firstYearInList = this.yearSelected;
-        this.constructYearGrid();
-
-        this.calendarService.onFocusIdChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedYearId = this.id + '-fd-year-' + index;
-                this.focusElement(this.newFocusedYearId);
-            })
-        ;
-        this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
-
-        this.calendarService.onKeySelect
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => this.selectYear(this.getYearList()[index]))
-        ;
-
-        this.calendarService.onListStartApproach
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.loadPreviousYearList())
-        ;
-
-        this.calendarService.onListEndApproach
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.loadNextYearList())
-        ;
+        this._constructYearGrid();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
-    }
-
-    /**
-     * Method that returns active cell, which means:
-     * if there is any selected year, return selected year
-     * if there is no selected year, but there is current year, return current year
-     * if there is no current year, or selected, return first one
-     */
-    private getActiveYear(): number {
-        const selectedYear: number = this.getYearList().find(year => year === this.yearSelected);
-        if (selectedYear) {
-            return selectedYear;
-        }
-
-        const currentYear: number = this.getYearList().find(year => year === this.currentYear);
-        if (currentYear) {
-            return currentYear;
-        }
-
-        return this.calendarYearListGrid[0][0];
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** Method for handling the keyboard navigation. */
-    onKeydownYearHandler(event, index: number): void {
-        this.calendarService.onKeydownHandler(event, index);
+    onKeydownYearHandler(event: KeyboardEvent, index: number): void {
+        this._calendarService.onKeydownHandler(event, index);
     }
 
-    /** Method used to load the previous 12 years to be displayed. */
+    /** Method used to load the previous {{col * row}} years to be displayed. */
     loadNextYearList(): void {
-        this.firstYearInList += 12;
-        this.constructYearGrid();
+        this.firstYearInList += this._getAmountOfYearsShownAtOnce();
+        this._constructYearGrid();
     }
 
-    /** Method used to load the next 12 years to be displayed. */
+    /** Method used to load the next {{col * row}} years to be displayed. */
     loadPreviousYearList(): void {
-        this.firstYearInList -= 12;
-        this.constructYearGrid();
+        this.firstYearInList -= this._getAmountOfYearsShownAtOnce();
+        this._constructYearGrid();
     }
 
     /** Method allowing focusing on elements within this component. */
-    focusElement(elementSelector: string): void {
-        setTimeout(() => {
-            const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + elementSelector);
+    focusYearElement(): void {
+        if (this._newFocusedYearId) {
+            const elementToFocus: HTMLElement = this._eRef.nativeElement.querySelector('#' + this._newFocusedYearId);
+            this._newFocusedYearId = '';
             if (elementToFocus) {
-                this.eRef.nativeElement.querySelector('#' + elementSelector).focus();
+                elementToFocus.focus();
             }
-        }, 0);
+        }
     }
 
     /** Method that sends the year to the parent component when it is clicked. */
@@ -173,13 +127,41 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
         this.yearClicked.emit(this.yearSelected);
     }
 
-    getId(rowIndex: number, colIndex: number): number {
-        return rowIndex * this._amountOfColPerRow + colIndex;
+    /**
+     * Standardized method to calculate grid [x][y] to index number of flatten list
+     */
+    getIndex(rowIndex: number, colIndex: number): number {
+        return this._calendarService.getId(rowIndex, colIndex);
+    }
+
+    /** Get id of calendar's year item */
+    getId(index: number): string {
+        return this.id + '-fd-year-' + index;
+    }
+
+    /**
+     * Method that returns active cell, which means:
+     * if there is any selected year, return selected year
+     * if there is no selected year, but there is current year, return current year
+     * if there is no current year, or selected, return first one
+     */
+    private _getActiveYear(): number {
+        const selectedYear: number = this._getYearList().find(year => year === this.yearSelected);
+        if (selectedYear) {
+            return selectedYear;
+        }
+
+        const currentYear: number = this._getYearList().find(year => year === this.currentYear);
+        if (currentYear) {
+            return currentYear;
+        }
+
+        return this.calendarYearListGrid[0][0];
     }
 
     /** @hidden */
-    private constructYearGrid(): void {
-        const displayedYearsAmount: number = 12;
+    private _constructYearGrid(): void {
+        const displayedYearsAmount: number = this.yearViewGrid.cols * this.yearViewGrid.rows;
         const calendarYearList = [];
         this.calendarYearListGrid = [];
         for (let x = 0; x < displayedYearsAmount; ++x) {
@@ -187,14 +169,56 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
         }
         /** Creating 2d grid */
         while (calendarYearList.length) {
-            this.calendarYearListGrid.push(calendarYearList.splice(0, this._amountOfColPerRow));
+            this.calendarYearListGrid.push(calendarYearList.splice(0, this.yearViewGrid.cols));
         }
-        this.activeYear = this.getActiveYear();
-        this.changeDetectorRef.markForCheck();
+        this.activeYear = this._getActiveYear();
+        this._changeDetectorRef.detectChanges();
+        this.focusYearElement();
     }
 
     /** Returns transformed 1d array from 2d year grid. */
-    private getYearList(): number[] {
+    private _getYearList(): number[] {
         return [].concat.apply([], this.calendarYearListGrid);
+    }
+
+    /** Amount of years displayed in year view */
+    private _getAmountOfYearsShownAtOnce(): number {
+        return this.yearViewGrid.rows * this.yearViewGrid.cols
+    }
+
+    /** Method to put configuration and listeners on calendar keyboard service */
+    private _setupKeyboardService(): void {
+        this._calendarService.colAmount = this.yearViewGrid.cols;
+        this._calendarService.rowAmount = this.yearViewGrid.rows;
+        this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
+
+        this._calendarService.onFocusIdChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(index => {
+                this._newFocusedYearId = this.getId(index);
+                this.focusYearElement();
+            })
+        ;
+
+        this._calendarService.onKeySelect
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(index => this.selectYear(this._getYearList()[index]))
+        ;
+
+        this._calendarService.onListStartApproach
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((index) => {
+                this._newFocusedYearId = this.getId(index);
+                this.loadPreviousYearList();
+            })
+        ;
+
+        this._calendarService.onListEndApproach
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((index) => {
+                this._newFocusedYearId = this.getId(index);
+                this.loadNextYearList();
+            })
+        ;
     }
 }

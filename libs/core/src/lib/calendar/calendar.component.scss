@@ -1,20 +1,5 @@
 @import '~fundamental-styles/dist/calendar';
 
-.fd-calendar__content {
-    min-height: 276px;
-    background: white;
-
-    td, li {
-        &:focus {
-            outline: 0;
-            box-shadow: inset 0 0 2px 2px #d9d9d9;
-            &:after {
-                display: none;
-            }
-        }
-    }
-}
-
 // Fix Temporally
 .fd-has-display-block {
     display: block;

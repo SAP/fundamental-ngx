@@ -2,7 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    EventEmitter,
+    EventEmitter, HostBinding,
     Input, OnDestroy,
     OnInit,
     Output,
@@ -14,6 +14,8 @@ import { FdCalendarView } from '../calendar.component';
 import { CalendarCurrent } from '../models/calendar-current';
 import { takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
+import { CalendarYearGrid } from '../models/calendar-year-grid';
+import { CalendarService } from '../calendar.service';
 
 /**
  * Internal use only.
@@ -29,7 +31,7 @@ import { merge, Subject } from 'rxjs';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarHeaderComponent implements OnDestroy {
+export class CalendarHeaderComponent implements OnDestroy, OnInit {
 
     /** Currently active view. Needed for a11y labels. */
     @Input()
@@ -39,9 +41,23 @@ export class CalendarHeaderComponent implements OnDestroy {
     @Input()
     currentlyDisplayed: CalendarCurrent;
 
+    /**
+     * Object to customize year grid
+     */
+    @Input()
+    calendarYearGrid: CalendarYearGrid;
+
     /** Id */
     @Input()
     id: string;
+
+    /** Whether close button should be shown */
+    @Input()
+    mobileLandscape: boolean = false;
+
+    /** Whether compact mode should be included into calendar */
+    @Input()
+    compact: boolean = false;
 
     /** Event emitted when the active view should change. */
     @Output()
@@ -58,20 +74,26 @@ export class CalendarHeaderComponent implements OnDestroy {
     readonly nextClicked: EventEmitter<void>
         = new EventEmitter<void>();
 
+    /** Event thrown, when the close button is clicked */
+    @Output()
+    readonly closeClicked: EventEmitter<void>
+        = new EventEmitter<void>();
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
-        public calendarI18nLabels: CalendarI18nLabels,
-        public calendarI18n: CalendarI18n,
-        private changeDetRef: ChangeDetectorRef
+        public  calendarI18nLabels: CalendarI18nLabels,
+        private  _calendarI18n: CalendarI18n,
+        private _changeDetRef: ChangeDetectorRef,
+        private _calendarService: CalendarService
     ) {
         /** Merging 18n observables */
-        const i18nObservables = merge(this.calendarI18n.i18nChange, this.calendarI18nLabels.labelsChange);
+        const i18nObservables = merge(this._calendarI18n.i18nChange, this.calendarI18nLabels.labelsChange);
 
         /** Called to trigger change detection */
         i18nObservables.pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.changeDetRef.markForCheck())
+            .subscribe(() => this._changeDetRef.markForCheck())
         ;
     }
 
@@ -79,6 +101,11 @@ export class CalendarHeaderComponent implements OnDestroy {
     ngOnDestroy(): void {
         this.onDestroy$.next();
         this.onDestroy$.complete();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._calendarService.leftArrowId = this.id + '-left-arrow';
     }
 
     /** Get the aria label for the previous button. Depends on the active view. */
@@ -95,24 +122,38 @@ export class CalendarHeaderComponent implements OnDestroy {
 
     /** Get aria label for the month shown. */
     get monthLabel(): string {
-        return this.calendarI18n.getAllFullMonthNames()[this.currentlyDisplayed.month - 1];
+        return this._calendarI18n.getAllFullMonthNames()[this.currentlyDisplayed.month - 1];
     }
 
+    /** Get information is calendar is on month view */
     isOnMonthView(): boolean {
         return this.activeView === 'month';
     }
 
+    /** Get information is calendar is on year view */
     isOnYearView(): boolean {
         return this.activeView === 'year';
     }
 
-    processViewChange(type: FdCalendarView): void {
+    /** Get information about amount of years displayed at once on year view  */
+    amountOfYearsPerPeriod(): number {
+        return this.calendarYearGrid.cols * this.calendarYearGrid.rows
+    }
+
+    processViewChange(type: FdCalendarView, event?: MouseEvent): void {
         if (type === this.activeView) {
             this.activeView = 'day';
         } else {
             this.activeView = type;
         }
+        if (event) {
+            event.stopPropagation();
+        }
         this.activeViewChange.emit(this.activeView);
+    }
+
+    emitClose(): void {
+        this.closeClicked.emit();
     }
 
 }

@@ -8,17 +8,17 @@ export class FdDate {
     /**
      * The year of the date.
      */
-    public year: number;
+    year: number;
 
     /**
      * The month of the date. 1 = January, 12 = December.
      */
-    public month: number;
+    month: number;
 
     /**
      * Day of the date. Starts at 1.
      */
-    public day: number;
+    day: number;
 
     /**
      * Static function to get the current date in FdDate form.
@@ -26,6 +26,21 @@ export class FdDate {
     static getToday(): FdDate {
         const tempDate: Date = new Date();
         return new FdDate(tempDate.getFullYear(), tempDate.getMonth() + 1, tempDate.getDate());
+    }
+
+    /**
+     * Get Amount of weeks in current month/year
+     * Month:  1 represents January, 2 is February, 3 is March, and so on.
+     * dayStart:  1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on.
+     */
+    static GetAmountOfWeeks(year: number, month: number, dayStart: number = 1): number {
+        const firstOfMonth = new Date(year, month - 1, 1);
+        const lastOfMonth = new Date(year, month, 0);
+
+        const dayOffset = (firstOfMonth.getDay() - dayStart + 8) % 7;
+        const used = dayOffset + lastOfMonth.getDate();
+
+        return Math.ceil(used / 7);
     }
 
     /**
@@ -52,7 +67,7 @@ export class FdDate {
     /**
      * Get Luxon date object converted to string from FdDate.
      */
-    public toDateString(): string {
+    toDateString(): string {
         if (this.year && this.month && this.day && this.isDateValid()) {
             return this.toDate().toDateString();
         } else {
@@ -64,7 +79,7 @@ export class FdDate {
      * Get amount of milliseconds from 01.01.1970
      * -1 is thrown when some some of properties (day,month,year) are not defined
      */
-    public getTimeStamp(): number {
+    getTimeStamp(): number {
         if (this.year && this.month && this.day) {
             return this.toDate().getTime();
         } else {
@@ -78,7 +93,7 @@ export class FdDate {
      * Native javascript date getDay() function returns Sunday as 0, Monday as 1, etc, to it's needed to increment value
      *
      */
-    public getDay(): number {
+    getDay(): number {
         if (this.year && this.month && this.day) {
             return this.toDate().getDay() + 1;
         } else {
@@ -87,7 +102,7 @@ export class FdDate {
     }
 
     /** Get next day */
-    public nextDay(): FdDate {
+    nextDay(): FdDate {
         const maxDays = CalendarService.getDaysInMonth(this.month, this.year);
         const isNextMonth = this.day >= maxDays;
         const isNextYear = isNextMonth && this.month === 12;
@@ -99,16 +114,16 @@ export class FdDate {
     }
 
     /** Get previous day  */
-    public previousDay(): FdDate {
+    previousDay(): FdDate {
 
         /** Check if should switch month to previous one */
         const prevMonth: boolean = this.day === 1;
 
         /** Check if should switch year to previous one */
-        const prevYear: boolean = prevMonth && ( this.month === 1 );
+        const prevYear: boolean = prevMonth && (this.month === 1);
 
         const year = prevYear ? this.year - 1 : this.year;
-        const month = prevYear ? 12 : ( prevMonth ? this.month - 1 : this.month );
+        const month = prevYear ? 12 : (prevMonth ? this.month - 1 : this.month);
 
         /** Amount of days in month */
         const maxDays: number = CalendarService.getDaysInMonth(month, year);
@@ -121,14 +136,29 @@ export class FdDate {
     /**
      * Get native date object from FdDate.
      */
-    public toDate(): Date {
+    toDate(): Date {
         return new Date(this.year, this.month - 1, this.day);
+    }
+
+    /*
+    * Get week number from a date
+    */
+    getWeekNumber(): number {
+        const date = this.toDate();
+        date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+
+        // January 4 is always in week 1.
+        const firstWeek = new Date(date.getFullYear(), 0, 4);
+
+        // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+        return 1 + Math.round(((date.getTime() - firstWeek.getTime()) / 86400000
+            - 3 + (firstWeek.getDay() + 6) % 7) / 7);
     }
 
     /**
      * Method that checks validity of current FdDate object.
      */
-    public isDateValid(): boolean {
+    isDateValid(): boolean {
         if (!this) {
             return false;
         }

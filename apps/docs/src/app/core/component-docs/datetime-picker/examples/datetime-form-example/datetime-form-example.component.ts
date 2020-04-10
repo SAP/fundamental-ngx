@@ -17,7 +17,7 @@ export class DatetimeFormExampleComponent {
         return this.customForm.get('date').valid;
     }
 
-    blockFunction = (fdDate: FdDate): boolean => {
+    disableFunction = (fdDate: FdDate): boolean => {
         return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp();
     }
 }

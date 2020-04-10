@@ -45,11 +45,16 @@
                     [activeView]="activeView"
                     (activeViewChange)="handleCalendarActiveViewChange($event)"
                     [disableFunction]="disableFunction ? disableFunction : null"
-                    [blockFunction]="blockFunction ? blockFunction : null"
                     [selectedDate]="selectedDate"
                     (selectedDateChange)="handleDateChange($event)"
                     (isValidDateChange)="isInvalidDateInputHandler($event)"
                     [escapeFocusFunction]="null"
+                    [compact]="compact"
+                    [markWeekends]="markWeekends"
+                    [specialDaysRules]="specialDaysRules"
+                    [showWeekNumbers]="showWeekNumbers"
+                    [aggregatedYearGrid]="aggregatedYearGrid"
+                    [yearGrid]="yearGrid"
                     [startingDayOfWeek]="startingDayOfWeek"
                 ></fd-calendar>
                 <div class="fd-datetime__separator"></div>

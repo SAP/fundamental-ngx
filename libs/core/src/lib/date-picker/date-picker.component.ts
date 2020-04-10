@@ -3,7 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
-    forwardRef,
+    forwardRef, HostBinding,
     Input, Optional,
     Output, ViewChild,
     ViewEncapsulation
@@ -17,6 +17,7 @@ import { FdRangeDate } from '../calendar/models/fd-range-date';
 import { DateFormatParser } from './format/date-parser';
 import { DatePipe } from '@angular/common';
 import { FormStates } from '../form/form-control/form-states';
+import { CalendarYearGrid, SpecialDayRule } from '../..';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and
@@ -99,6 +100,13 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     startingDayOfWeek: DaysOfWeek = 1;
 
+    /**
+     * Whether user wants to mark day cells on hover.
+     * Works only on range mode, when start date is selected on Day View.
+     */
+    @Input()
+    rangeHoverEffect: boolean = false;
+
     /** Whether to validate the date picker input. */
     @Input()
     useValidation: boolean = true;
@@ -130,6 +138,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     disabled: boolean;
 
+    /** Defines if date picker should be closed after date choose */
+    @Input()
+    closeOnDateChoose: boolean = true;
+
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -142,6 +154,50 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      */
     @Input()
     buttonFocusable: boolean = true;
+
+    /**
+     * Special days mark, it can be used by passing array of object with
+     * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
+     * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
+     * Rule accepts method with FdDate object as a parameter. ex:
+     * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
+     */
+    @Input()
+    specialDaysRules: SpecialDayRule[] = [];
+
+    /**
+     * Object to customize year grid,
+     * Row, Columns and method to display year can be modified
+     */
+    @Input()
+    yearGrid: CalendarYearGrid = {
+        rows: 4,
+        cols: 5,
+        yearMapping: (num: number) => num.toString()
+    };
+
+    /**
+     * Object to customize aggregated year grid,
+     * Row, Columns and method to display year can be modified
+     */
+    @Input()
+    aggregatedYearGrid: CalendarYearGrid = {
+        rows: 4,
+        cols: 3,
+        yearMapping: (num: number) => num.toString()
+    };
+
+    /**
+     * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
+     */
+    @Input()
+    markWeekends: boolean = true;
+
+    /**
+     * Whether user wants to show week numbers next to days
+     */
+    @Input()
+    showWeekNumbers: boolean = true;
 
     /** Fired when a new date is selected. */
     @Output()
@@ -191,33 +247,6 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     };
 
     /**
-     * Function used to block certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeStartFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeEndFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
      * Method that handle calendar active view change and throws event.
      */
     public handleCalendarActiveViewChange(activeView: FdCalendarView): void {
@@ -226,7 +255,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** @hidden */
     public closeFromCalendar(): void {
-        if (this.type === 'single') {
+        if (this.type === 'single' && this.closeOnDateChoose) {
             this.closeCalendar();
         }
     }
@@ -478,8 +507,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     private _isSingleModelValid(fdDate: FdDate): boolean {
         return (
             this._isFdDateValid(fdDate) &&
-            !this.disableFunction(fdDate) &&
-            !this.blockFunction(fdDate)
+            !this.disableFunction(fdDate)
         ) || (!this.inputFieldDate && this.allowNull);
     }
 
@@ -494,15 +522,15 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** Method that returns info if end date model given is valid */
     private _isEndDateValid(endDate: FdDate): boolean {
         return this._isFdDateValid(endDate) &&
-            !this.disableRangeEndFunction(endDate) &&
-            !this.blockRangeEndFunction(endDate);
+            !this.disableRangeEndFunction(endDate)
+        ;
     }
 
     /** Method that returns info if start date model given is valid */
     private _isStartDateValid(startDate: FdDate): boolean {
         return this._isFdDateValid(startDate) &&
-            !this.disableRangeStartFunction(startDate) &&
-            !this.blockRangeStartFunction(startDate);
+            !this.disableRangeStartFunction(startDate)
+        ;
     }
 
     /** Method that returns info if end date model given is valid */

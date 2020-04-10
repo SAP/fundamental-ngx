@@ -5,7 +5,7 @@
         <fd-datetime-picker
             [state]="isValid() ? 'success' : 'error'"
             formControlName="date"
-            [disableFunction]="blockFunction">
+            [disableFunction]="disableFunction">
         </fd-datetime-picker>
         <fd-form-message *ngIf="isValid()" [type]="'success'">This is valid DateTimePicker</fd-form-message>
         <fd-form-message *ngIf="!isValid()" [type]="'error'">This is invalid DateTimePicker</fd-form-message>

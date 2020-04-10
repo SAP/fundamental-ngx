@@ -4,4 +4,9 @@
     fd-popover {
         display: block;
     }
+
+    fd-calendar {
+        border-radius:.25rem;
+        border-radius:var(--sapElement_BorderCornerRadius,.25rem)
+    }
 }

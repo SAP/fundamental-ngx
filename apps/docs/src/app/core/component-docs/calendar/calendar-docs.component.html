@@ -8,8 +8,7 @@
     select a date you will create a new object that contains the property date, whose value is a FdDate model object.
     Then, using two-way binding syntax, set the selectedDay value to your new object. Note that selecting a day (or
     range of days) in this manner will override any block/disable functions. The
-    <code>disableFunction</code>
-    and <code>blockFunction</code> inputs can be changed and the calendar will automatically update (see example).
+    <code>disableFunction</code> inputs can be changed and the calendar will automatically update (see example).
     <br /><br />
     A disabled date or range of dates cannot be selected, usually applied to a large range of past or future dates. A
     blocked date or range of dates cannot be selected, usually applied to blackout or booked dates mixed in with
@@ -22,6 +21,81 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'calendar-mobile'" [componentName]="'calendar'">
+    Mobile Calendar
+</fd-docs-section-title>
+<description>
+    Calendar component has a dedicated mode for mobile devices. When used in mobile mode, the calendar should be wrapped
+    inside a dialog component. Examples of various dialog usages can be found <a fd-link [routerLink]="'/core/dialog'">here</a>.
+    The mobile calendar can be used in landscape or portrait mode.
+</description>
+<component-example>
+    <fd-calendar-mobile-example></fd-calendar-mobile-example>
+</component-example>
+<code-example [exampleFiles]="calendarMobileSource"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'calendar-options'" [componentName]="'calendar'">
+    Calendar Options
+</fd-docs-section-title>
+<description>
+    Calendar has an extensive set of customization options, such as displaying the week number or applying compact mode
+    for desktop devices. Weekends also can be marked with additional styling classes.
+</description>
+<component-example>
+    <fd-calendar-options-example></fd-calendar-options-example>
+</component-example>
+<code-example [exampleFiles]="calendarOptionsSource"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'calendar-range-hover'" [componentName]="'calendar'">
+    Mark Range Days on Hover
+</fd-docs-section-title>
+<description>
+    Use <code>[rangeHoverEffect]="true"</code> to set hover styles on dates when selecting a date range. It can also be
+    used when only one day is selected on range calendar mode.
+</description>
+<component-example>
+    <fd-calendar-mark-hover></fd-calendar-mark-hover>
+</component-example>
+<code-example [exampleFiles]="calendarMarkHoverSource"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'calendar-special'" [componentName]="'calendar'">
+    Calendar with Special Days
+</fd-docs-section-title>
+<description>
+    Special coloring classes can be applied to grid days by passing an object to <code>[specialDaysRules]</code>.
+    A list of special day numbers can be found
+    <a fd-link href="https://sap.github.io/fundamental-styles/components/calendar.html">
+        here
+    </a>.
+    Similar to the block function, <code>[specialDaysRules]</code> takes an FdDate object as a parameter and returns true/false.
+</description>
+<component-example>
+    <fd-calendar-special-day-example></fd-calendar-special-day-example>
+</component-example>
+<code-example [exampleFiles]="calendarSpecialDays"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'calendar-grid'" [componentName]="'calendar'">
+    Calendar Years Grid
+</fd-docs-section-title>
+<description>
+    Year Grid and Aggregated Year Grid can be customized by passing <code>[yearGrid]</code> and <code>[aggregatedYearGrid]</code>
+    properties. The column and row amounts can be modified, similar to how the year is displayed.
+</description>
+<component-example>
+    <fd-calendar-grid-example></fd-calendar-grid-example>
+</component-example>
+<code-example [exampleFiles]="calendarGridSource"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'calendar-range'" [componentName]="'calendar'">
     Range Selection Calendar
 </fd-docs-section-title>
@@ -30,7 +104,7 @@
     <br /><br />
     The <code>disableRangeStartFunction</code>, <code>disableRangeEndFunction</code>,
     <code>blockRangeStartFunction</code> and <code>blockRangeEndFunction</code> inputs can be used in addition to the
-    <code>disableFunction</code> and <code>blockFunction</code> inputs to set independent rules for the start and end
+    <code>disableFunction</code> input to set independent rules for the start and end
     dates. In this example, the user can only select a start date on or before October 10, 2019, and an end date on or
     after October 20, 2019.
 </description>
@@ -57,8 +131,8 @@
 <fd-docs-section-title [id]="'calendar-mondayStart'" [componentName]="'calendar'">
     Monday Start Calendar
 </fd-docs-section-title>
-<description
-    >Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 1 is for
+<description>
+    Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 1 is for
     Sunday, 2 is Monday, 3 is Tuesday, etc.
 </description>
 <component-example>
