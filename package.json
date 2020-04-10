@@ -81,7 +81,7 @@
     "intl": "^1.2.5",
     "jasminewd2": "^2.0.6",
     "moment": "^2.24.0",
-    "ngx-markdown": "9.0.0",
+    "ngx-markdown": "8.2.2",
     "npm": "^6.14.3",
     "popper.js": "^1.16.1",
     "raw-loader": "^4.0.0",
