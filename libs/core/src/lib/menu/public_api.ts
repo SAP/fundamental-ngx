@@ -1,7 +1,6 @@
 export * from './directives/menu-shortcut.directive';
 export * from './directives/menu-addon.directive';
 export * from './directives/menu-title.directive';
-export * from './directives/menu-list.directive';
 export * from './directives/menu-item.directive';
 export * from './directives/menu-link.directive';
 
