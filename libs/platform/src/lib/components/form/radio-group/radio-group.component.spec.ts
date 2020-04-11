@@ -113,7 +113,7 @@ describe('RadioGroupComponent', () => {
         host.customForm.get('example1').markAsTouched();
 
         await wait(fixture);
-
+        fixture.detectChanges();
         const inputElem2 = fixture.debugElement.queryAll(By.css('input'));
         inputElem2.forEach((inputradio) => {
             expect(inputradio.nativeElement.classList.contains('is-error')).toBeTruthy();
