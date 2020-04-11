@@ -35,9 +35,6 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
     @ViewChild('inputElement')
     inputElement: ElementRef;
 
-    /** @hidden */
-    actualValue: any;
-
     /** Whether to apply compact mode to the radio button.
      * Value: true or false
      * By default field is set to false
@@ -64,7 +61,10 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
      * The field is mandatory when working with reactive forms
      */
     @Input()
-    selectedValue: any;
+    set selectedValue(val: any) {
+        this._currentValue = val;
+        this._setNativeElementCheckedState();
+    }
 
     /** The name of the radio button
      * The field is mandatory
@@ -88,11 +88,14 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
         if (this.value === undefined) {
             return false;
         }
-        return this.actualValue === this.value;
+        return this._currentValue === this.value;
     }
 
     /** @hidden */
-    constructor(private changeDetectionRef: ChangeDetectorRef) { }
+    private _currentValue: any;
+
+    /** @hidden */
+    constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -108,10 +111,10 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = () => { };
+    onChange: any = () => {};
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {};
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -161,7 +164,7 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
 
     /** @hidden */
     valueChange(value: any): void {
-        this.actualValue = value;
+        this._currentValue = value;
 
         this._setNativeElementCheckedState();
 
