@@ -29,9 +29,6 @@ let uniqueId = 0;
 })
 export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder, ControlValueAccessor {
     /** @hidden */
-    class: string;
-
-    /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef;
 
@@ -90,6 +87,9 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
         }
         return this._currentValue === this.value;
     }
+
+    /** @hidden */
+    class: string;
 
     /** @hidden */
     private _currentValue: any;
