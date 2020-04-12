@@ -11,9 +11,8 @@
             fd-button
             [disabled]="disabled"
             [glyph]="'slim-arrow-up'"
-            [class]="'fd-button--half'"
+            [class]="'fd-button--half fd-input-group__button'"
             [fdType]="'transparent'"
-            class="fd-input-group__button"
             [attr.aria-label]="stepUpLabel"
             (click)="stepUpClicked()"
         ></button>
@@ -21,9 +20,8 @@
             fd-button
             [disabled]="disabled"
             [glyph]="'slim-arrow-down'"
-            [class]="'fd-button--half'"
+            [class]="'fd-button--half fd-input-group__button'"
             [fdType]="'transparent'"
-            class="fd-input-group__button"
             [attr.aria-label]="stepDownLabel"
             (click)="stepDownClicked()"
         ></button>
