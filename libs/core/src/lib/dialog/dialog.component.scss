@@ -18,8 +18,8 @@
 
     &--with-header {
         .fd-dialog__body {
-            border-top-left-radius: initial;
-            border-top-right-radius: initial;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
         }
     }
 }
