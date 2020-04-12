@@ -224,17 +224,21 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
 
     /** @hidden Set Dialog styles from DialogConfig */
     private _setStyles(): void {
-        const position = this.dialogConfig.position || {};
         this.dialogWindow.nativeElement.style.width = this.dialogConfig.width;
         this.dialogWindow.nativeElement.style.height = this.dialogConfig.height;
         this.dialogWindow.nativeElement.style.minWidth = this.dialogConfig.minWidth;
         this.dialogWindow.nativeElement.style.minHeight = this.dialogConfig.minHeight;
         this.dialogWindow.nativeElement.style.maxWidth = this.dialogConfig.maxWidth;
         this.dialogWindow.nativeElement.style.maxHeight = this.dialogConfig.maxHeight;
-        this.dialogWindow.nativeElement.style.top = position.top;
-        this.dialogWindow.nativeElement.style.bottom = position.bottom;
-        this.dialogWindow.nativeElement.style.left = position.left;
-        this.dialogWindow.nativeElement.style.right = position.right;
+
+        if (this.dialogConfig.position) {
+            this.dialogWindow.nativeElement.style.top = this.dialogConfig.position.top;
+            this.dialogWindow.nativeElement.style.bottom = this.dialogConfig.position.bottom;
+            this.dialogWindow.nativeElement.style.left = this.dialogConfig.position.left;
+            this.dialogWindow.nativeElement.style.right = this.dialogConfig.position.right;
+        } else {
+            this.dialogWindow.nativeElement.style.position = 'relative';
+        }
     }
 
     /** @hidden Listen on window resize and adjust padding */
