@@ -125,7 +125,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     /** @hidden Listen and close dialog on Escape key */
     @HostListener('keyup', ['$event'])
     closeDialogEsc(event: KeyboardEvent): void {
-        if (this.dialogConfig.escKeyCloseable && event.key === 'Escape') {
+        if (this.dialogConfig.escKeyCloseable && (event.key === 'Escape' || event.key === 'Esc')) {
             this._dialogRef.dismiss('escape');
         }
     }
