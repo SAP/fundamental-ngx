@@ -26,8 +26,7 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { RtlService } from '../utils/public_api';
-import { ModalService } from '../modal/modal-service/modal.service';
-import { ModalRef } from '../modal/modal-utils/modal-ref';
+import { DialogRef, DialogService } from '../..';
 
 let selectUniqueId: number = 0;
 
@@ -171,7 +170,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     controlId: string = `select-list-${selectUniqueId++}`;
 
     /** Reference to existing modal */
-    modalRef: ModalRef;
+    dialogRef: DialogRef;
 
     /** Current selected option component reference. */
     private _selected: OptionComponent;
@@ -220,7 +219,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     }
 
     constructor(
-        private _modalService: ModalService,
+        private _dialogService: DialogService,
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService
     ) { }
@@ -263,7 +262,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Toggles the open state of the select. */
     toggle(): void {
         if (!this.disabled) {
-            if (this.isOpen || this.modalRef) {
+            if (this.isOpen || this.dialogRef) {
                 this.close();
             } else {
                 this.open();
@@ -275,7 +274,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     open(): void {
         if (!this.isOpen && !this.disabled) {
             if (this.mobile) {
-                this.modalRef = this._modalService.open(this.modalTemplateRef);
+                this.dialogRef = this._dialogService.open(this.modalTemplateRef);
             } else {
                 this.isOpen = true;
             }
@@ -287,9 +286,9 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Closes the select popover body. */
     close(): void {
         if (!this.disabled) {
-            if (this.mobile && this.modalRef) {
-                this.modalRef.close();
-                this.modalRef = undefined;
+            if (this.mobile && this.dialogRef) {
+                this.dialogRef.close();
+                this.dialogRef = undefined;
             } else if (this.isOpen) {
                 this.isOpen = false;
             }

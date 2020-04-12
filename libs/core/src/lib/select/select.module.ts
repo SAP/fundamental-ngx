@@ -8,7 +8,7 @@ import { IconModule } from '../icon/icon.module';
 import { LoadingSpinnerModule } from '../loading-spinner/loading-spinner.module';
 import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
 import { ListModule } from '../list/list.module';
-import { ModalModule } from '../modal/modal.module';
+import { DialogModule } from '../..';
 
 @NgModule({
     declarations: [SelectComponent, OptionComponent],
@@ -21,7 +21,7 @@ import { ModalModule } from '../modal/modal.module';
         ButtonModule,
         IconModule,
         ListModule,
-        ModalModule
+        DialogModule
     ]
 })
 export class SelectModule {}
