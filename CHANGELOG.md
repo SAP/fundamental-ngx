@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.81...v0.16.0-rc.82) (2020-04-12)
+
+
+### Bug Fixes
+
+* space added for example's buttons ([#2312](https://github.com/SAP/fundamental-ngx/issues/2312)) ([d6dc815](https://github.com/SAP/fundamental-ngx/commit/d6dc81533e3c02d691d55be808f0b9d6be99b17c))
+
 ## [0.16.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.80...v0.16.0-rc.81) (2020-04-10)
 
 ## [0.16.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.79...v0.16.0-rc.80) (2020-04-10)
