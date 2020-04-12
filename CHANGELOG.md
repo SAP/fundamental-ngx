@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.83](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.82...v0.16.0-rc.83) (2020-04-12)
+
+
+### Bug Fixes
+
+* input group number arrow's size fixed ([#2310](https://github.com/SAP/fundamental-ngx/issues/2310)) ([a6bd9b3](https://github.com/SAP/fundamental-ngx/commit/a6bd9b3811d6d2d8794806f59e8f1609aedb245f))
+
 ## [0.16.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.81...v0.16.0-rc.82) (2020-04-12)
 
 
