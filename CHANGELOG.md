@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.86...v0.16.0-rc.87) (2020-04-12)
+
+
+### Bug Fixes
+
+* add Esc key support for IE11 ([#2325](https://github.com/SAP/fundamental-ngx/issues/2325)) ([c31c476](https://github.com/SAP/fundamental-ngx/commit/c31c476796fc4d78100c771196d3fd70619b312f))
+
 ## [0.16.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.85...v0.16.0-rc.86) (2020-04-12)
 
 ## [0.16.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.84...v0.16.0-rc.85) (2020-04-12)
