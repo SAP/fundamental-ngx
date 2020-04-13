@@ -5,6 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './select-basic-example.component.html'
 })
 export class SelectBasicExampleComponent {
-    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
     selectedValue: string;
 }

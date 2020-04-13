@@ -24,12 +24,16 @@
                  [attr.aria-haspopup]="!disabled && !readonly && !loading"
                  (click)="toggle()">
 
-                <ng-container *ngTemplateOutlet="controlTemplate ? controlTemplate : defaultSelectContent; context: {$implicit: selectValue}"></ng-container>
+                <div class="">
+                    <ng-container
+                        [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
+                        [ngTemplateOutletContext]="{$implicit: selectValue, option: _selected}">
+                    </ng-container>
 
-                <ng-template #defaultSelectContent>
-                    {{ selectValue }}
-                </ng-template>
-
+                    <ng-template #defaultSelectContent>
+                        {{ selectValue }}
+                    </ng-template>
+                </div>
                 <button fd-button
                         tabindex="-1"
                         class="fd-button--transparent fd-select__button"
@@ -61,7 +65,4 @@
         <ng-content></ng-content>
 
     </ul>
-</ng-template>
-
-<ng-template let-modal #selectMobileModal>
 </ng-template>

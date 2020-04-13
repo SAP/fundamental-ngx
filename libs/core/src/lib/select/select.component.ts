@@ -9,20 +9,17 @@ import {
     forwardRef,
     HostListener,
     Input,
-    OnChanges,
     OnDestroy,
     Optional,
     Output,
     QueryList,
-    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
-import { defer, merge, Observable, Subject } from 'rxjs';
-import { startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { RtlService } from '../utils/public_api';
@@ -39,6 +36,7 @@ export type SelectControlState = 'error' | 'success' | 'warning' | 'information'
     templateUrl: './select.component.html',
     styleUrls: ['./select.component.scss'],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -47,12 +45,10 @@ export type SelectControlState = 'error' | 'success' | 'warning' | 'information'
         }
     ],
     host: {
-        '[class.fd-dropdown]': 'true',
         role: 'listbox'
-    },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    }
 })
-export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
 
     /** Whether the select component is disabled. */
     @Input()
@@ -83,8 +79,11 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     isOpen: boolean = false;
 
     /** Current value of the selected option. */
-    @Input()
-    value: any;
+    @Input('value') set value(value: any) {
+        this.value$.next(value);
+    }
+
+    value$: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
 
     /** Whether the select is in compact mode. */
     @Input()
@@ -141,7 +140,8 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     unselectMissingOption: boolean = true;
 
     /** If user wants to disable clicking when the content has not yet loaded and apply the three dots. */
-    @Input() loading: boolean = false;
+    @Input()
+    loading: boolean = false;
 
     /** Event emitted when the popover open state changes. */
     @Output()
@@ -166,13 +166,10 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     controlId: string = `select-list-${selectUniqueId++}`;
 
     /** Current selected option component reference. */
-    private _selected: OptionComponent;
+    selected: OptionComponent;
 
     /** Subject triggered when the component is destroyed. */
-    private readonly _destroy$: Subject<void> = new Subject<void>();
-
-    /** Observable triggered when an option has its selectedChange event fire. */
-    private readonly _optionsStatusChanges$: Observable<OptionComponent> = this._createOptionStatusChangeObserver();
+    private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
     onChange: Function = () => {};
@@ -217,31 +214,19 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     ) { }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.value) {
-            setTimeout(() => {
-                if (this.value) {
-                    this._selectValue(this.value, false);
-                    this._changeDetectorRef.markForCheck();
-                }
-            });
-        }
-    }
-
-    /** @hidden */
     ngAfterContentInit(): void {
         this._listenOnOptionChanges();
+        this._setSelectedOption();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._destroy$.next();
-        this._destroy$.complete();
+        this._subscriptions.unsubscribe();
     }
 
     /** Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder. */
     get selectValue(): string {
-        return this._selected ? this._selected.viewValueText : this.placeholder;
+        return this.selected ? this.selected.viewValueText : this.placeholder;
     }
 
     /** @hidden */
@@ -254,19 +239,15 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Toggles the open state of the select. */
     toggle(): void {
         if (!this.disabled) {
-            if (this.isOpen) {
-                this.close();
-            } else {
-                this.open();
-            }
+            this.isOpen ? this.close() : this.open();
         }
     }
 
     /** Opens the select popover body. */
     open(): void {
-        if (!this.isOpen && !this.disabled) {
-
-                this.isOpen = true;
+        if (!this.disabled && !this.isOpen) {
+            this.onTouched();
+            this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
             this._focusOption('onOpen');
         }
@@ -274,10 +255,8 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
     /** Closes the select popover body. */
     close(): void {
-        if (!this.disabled) {
-            if (this.isOpen) {
-                this.isOpen = false;
-            }
+        if (!this.disabled && this.isOpen) {
+            this.isOpen = false;
             this.isOpenChange.emit(this.isOpen);
             this.focus();
         }
@@ -308,109 +287,19 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
     /** @hidden */
     writeValue(value: any): void {
-        if (this.options) {
-            this._selectValue(value, false);
-            this._changeDetectorRef.detectChanges();
-        } else {
-            // Defer the selection of the value to support forms
-            Promise.resolve().then(() => {
-                if (this.options) {
-                    this._selectValue(value, false);
-                    this._changeDetectorRef.detectChanges();
-                }
-            });
-        }
+        this.value$.next(value);
     }
 
-    /**
-     * Selects an option by option component reference. Preferred method of selection.
-     * @param option The option component to search for.
-     * @param fireEvents Whether to fire change events.
-     */
-    private _selectOption(option: OptionComponent, fireEvents: boolean = true) {
-        if (!this._isOptionActive(option)) {
-            if (this._selected) {
-                this._selected.setSelected(false, false);
-            }
-            option.setSelected(true, false);
-            this._selected = option;
-            this._updateValue(fireEvents);
-        }
-        this.close();
-    }
+    setSelectedOption(option: OptionComponent, controlChange: boolean) {
+        this.selected = option;
 
-    /**
-     * Selects an option by value. If two components have the same value, the first one found is selected.
-     * Recommend using selectOption generally.
-     * @param value Value to search for.
-     * @param fireEvents Whether to fire change events.
-     */
-    private _selectValue(value: any, fireEvents: boolean = true): void {
-        const matchOption = this.options
-            .find((option: OptionComponent) => option.value !== null && option.value === value);
-
-        // If not match is found, set everything to null
-        // This is mostly only for cases where a user removes an active option
-        if (!matchOption && this.unselectMissingOption) {
-            this._unselectOptions();
-            return;
-        }
-
-        // If match is found, select the new value
-        if (matchOption && !this._isOptionActive(matchOption)) {
-            if (this._selected) {
-                this._selected.setSelected(false, false);
-            }
-            matchOption.setSelected(true, false);
-            this._selected = matchOption;
-
-            this._updateValue(fireEvents);
+        if (controlChange) {
+            this._updateValue(option.value);
             this.close();
         }
+        this._changeDetectorRef.detectChanges();
     }
 
-    /**
-     * Updates the value parameter with optional events.
-     * @param fireEvents If true, function fires valueChange, onChange and onTouched events.
-     */
-    private _updateValue(fireEvents: boolean = true): void {
-        this.value = this._selected.value;
-        if (fireEvents) {
-            this.valueChange.emit(this.value);
-            this.onChange(this.value);
-            this.onTouched();
-        }
-    }
-
-    /**
-     * Function used to reset the options state.
-     */
-    private _resetOptions(): void {
-        // Create observable that fires when the options change or the component is destroyed.
-        const destroyCurrentObs = merge(this.options.changes, this._destroy$);
-
-        // Subscribe to observable defined in component properties which fires when an option is clicked.
-        // Destroy if the observable defined above triggers.
-        this._optionsStatusChanges$
-            .pipe(takeUntil(destroyCurrentObs))
-            .subscribe((instance: OptionComponent) => this._selectOption(instance));
-    }
-
-    /** Selection initialization when a change occurs in options. */
-    private _initSelection(): void {
-        if (this.value) {
-            this._selected = undefined;
-            this._selectValue(this.value, false);
-        }
-    }
-
-    /**
-     * Function that tests whether the tested option is currently selected.
-     * @param option Option to test against the selected option.
-     */
-    private _isOptionActive(option: OptionComponent): boolean {
-        return option && this._selected && option === this._selected;
-    }
 
     /** Method used to focus options
      * @param action
@@ -427,7 +316,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
         switch (action) {
             case 'onOpen':
-                focusAsync(this._selected || this.options.first);
+                focusAsync(this.selected || this.options.first);
                 break;
             case 'next':
                 activeIndex = findActiveIndex(this.options.toArray(), document.activeElement);
@@ -444,44 +333,27 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         }
     }
 
-    /**
-     * Method used to handle cases where a user removes the currently active option.
-     * The timeout is required because this can happen after the view has been checked.
-     */
-    private _unselectOptions(): void {
-        setTimeout(() => {
-            if (this._selected) {
-                this._selected.setSelected(false, false);
-            }
-            this._selected = undefined;
-            this.value = undefined;
-            this.valueChange.emit(undefined);
-            this.onChange(undefined);
-        });
-    }
-
-    private _createOptionStatusChangeObserver(): Observable<OptionComponent> {
-        return defer(() => {
-            const options = this.options;
-            if (options) {
-                return options.changes.pipe(
-                    startWith(options),
-                    switchMap(() => merge(...options.map(option => option.selectedChange)))
-                );
-            }
-        }) as Observable<OptionComponent>;
-    }
-
     private _listenOnOptionChanges(): void {
-        // If the observable state changes, reset the options and initialize selection.
-        this.options.changes
-            .pipe(
-                startWith(null),
-                takeUntil(this._destroy$)
-            )
-            .subscribe(() => {
-                this._resetOptions();
-                this._initSelection();
-            });
+        this._subscriptions.add(
+            this.options.changes
+                .subscribe(_ => {
+                    this._setSelectedOption();
+                    setTimeout(() => {
+                        if (this.selected === undefined && this.unselectMissingOption) {
+                            this._updateValue(undefined)
+                        }
+                    });
+                })
+        )
+    }
+
+    private _setSelectedOption(): void {
+        this.selected = this.options.find(option => option.selected)
+    }
+
+    private _updateValue(value: any): void {
+        this.value$.next(value);
+        this.valueChange.emit(value);
+        this.onChange(value);
     }
 }

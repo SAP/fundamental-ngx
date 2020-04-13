@@ -7,10 +7,14 @@ import {
     HostBinding,
     HostListener,
     Input,
+    OnDestroy,
     OnInit,
     Output,
     ViewEncapsulation
 } from '@angular/core';
+import { SelectComponent } from '../select.component';
+import { filter, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 /**
  * Used to represent an option of the select component.
@@ -19,15 +23,15 @@ import {
     selector: 'fd-option',
     templateUrl: './option.component.html',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         'class': 'fd-list__item',
         '[attr.aria-disabled]': 'disabled',
         '[tabindex]': 'disabled ? -1 : 0',
         role: 'option'
-    },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    }
 })
-export class OptionComponent implements OnInit {
+export class OptionComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     @HostBinding('class.is-selected')
@@ -49,6 +53,8 @@ export class OptionComponent implements OnInit {
     @Output()
     readonly selectedChange: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
 
+    private _subscriptions: Subscription = new Subscription();
+
     /** @hidden */
     @HostListener('click')
     @HostListener('keydown.space', ['$event'])
@@ -57,24 +63,26 @@ export class OptionComponent implements OnInit {
             event.preventDefault();
             event.stopPropagation();
         }
-        if (!this.selected && !this.disabled) {
-            this.selected = true;
+        if (!this.disabled) {
+            this.setSelected(true, true);
             this._changeDetRef.markForCheck();
-            this.selectedChange.emit(this);
         }
     }
 
     /** @hidden */
     constructor(
         private _elRef: ElementRef,
-        private _changeDetRef: ChangeDetectorRef
+        private _changeDetRef: ChangeDetectorRef,
+        private _selectComponent: SelectComponent
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.selected && !this.disabled) {
-            this.focus();
-        }
+        this._observeValue();
+    }
+
+    ngOnDestroy() {
+        this._subscriptions.unsubscribe();
     }
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
@@ -83,11 +91,13 @@ export class OptionComponent implements OnInit {
     }
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
-    setSelected(value: boolean, fireEvent: boolean = true): void {
-        this.selected = value;
-
-        if (fireEvent) {
+    setSelected(value: boolean, controlChange: boolean): void {
+        if (value !== this.selected) {
+            this.selected = value;
             this.selectedChange.emit(this);
+            if (value) {
+                this._selectComponent.setSelectedOption(this, controlChange);
+            }
         }
     }
 
@@ -99,5 +109,15 @@ export class OptionComponent implements OnInit {
     /** Returns HTMLElement representation of the component. */
     getHtmlElement(): HTMLElement {
         return this._elRef.nativeElement as HTMLElement;
+    }
+
+    private _observeValue(): void {
+        this._subscriptions.add(
+            this._selectComponent.value$.asObservable()
+                .pipe(
+                    filter(value => value !== undefined),
+                    map(value => value === this.value)
+                ).subscribe(isSelected => this.setSelected(isSelected, false))
+        );
     }
 }
