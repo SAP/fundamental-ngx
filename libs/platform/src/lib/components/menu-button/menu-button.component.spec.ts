@@ -1,10 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input, ViewChild } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core';
-import { PlatformMenuModule } from '../menu/menu.module';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { Component, Input, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { ButtonModule, RtlService, IconModule } from '@fundamental-ngx/core';
+import { createKeyboardEvent } from '../../testing/event-objects';
+import { DOWN_ARROW, ESCAPE, UP_ARROW, ENTER, TAB, RIGHT_ARROW, LEFT_ARROW } from '@angular/cdk/keycodes';
+import { PlatformMenuModule } from '../menu/menu.module';
 import { MenuButtonComponent } from './menu-button.component';
-import { ButtonModule } from '@fundamental-ngx/core';
+import { MenuItemComponent } from './../menu/menu-item.component';
 
 describe('MenuButtonComponent', () => {
     let component: MenuButtonComponent;
@@ -27,12 +30,6 @@ describe('MenuButtonComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should have a disabled menu button', () => {
-        spyOn(component, 'setDisabledState');
-        component.setDisabledState(true);
-        expect(component.setDisabledState).toHaveBeenCalled();
-    });
-
     it('button onclick should be called', () => {
         spyOn(component, 'buttonclick');
         component.buttonclick(event);
@@ -44,7 +41,7 @@ describe('MenuButtonComponent', () => {
 @Component({
     selector: 'fdp-disabled-menu-button',
     template: `
-        <fdp-menu-button [displaySize]="size" [disabled]="disabled" [type]="type">
+        <fdp-menu-button [contentSize]="size" [disabled]="disabled" [type]="type">
             Standard Button with long text
         </fdp-menu-button>
     `,
@@ -97,16 +94,16 @@ describe('Menu Button Disabled test and Type, size test', () => {
     });
 });
 
-/** Disabled menu button test */
+/** menu button click test */
 @Component({
-    selector: 'fdp-disabled-menu-button',
+    selector: 'fdp-menu-button-click',
     template: `
         <fdp-menu-button
-            [displaySize]="size"
+            [contentSize]="size"
             [disabled]="disabled"
             [type]="type"
             [fdpMenuTriggerFor]="basicMenu"
-            (click)="menuButtonClick($event)"
+            (click)="clicked($event)"
         >
             Standard Button with long text
         </fdp-menu-button>
@@ -123,43 +120,51 @@ class TestMenuButtonComponent {
     size = 'compact';
 
     @Input()
-    disabled = true;
+    disabled = false;
 
     @Input()
     type = 'standard';
 
-    item: string = '';
+    currentSelectedItem: string = '';
 
     @ViewChild(MenuButtonComponent, { static: true })
     component: MenuButtonComponent;
 
+    @ViewChildren(MenuItemComponent)
+    menuItems: QueryList<MenuItemComponent>;
+
     public menuButtonClicked = false;
-    menuButtonClick(event: any) {
+
+    clicked(event: any) {
         this.menuButtonClicked = true;
     }
 
     onItemSelect(item: string) {
-        this.item = item;
+        this.currentSelectedItem = item;
     }
     constructor() {}
 }
 
-describe('Menu Button click, Item select', () => {
+describe('Menu Button click on Item select', () => {
     let host: TestMenuButtonComponent;
-    let component: MenuButtonComponent;
     let fixture: ComponentFixture<TestMenuButtonComponent>;
+    let overlayContainerEl: HTMLElement;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
-            declarations: [DisabledMenuButtonComponent, MenuButtonComponent],
+            declarations: [TestMenuButtonComponent, MenuButtonComponent],
+            providers: [RtlService],
         }).compileComponents();
+
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuButtonComponent);
         host = fixture.componentInstance;
-        component = host.component;
         fixture.detectChanges();
     });
 
@@ -167,10 +172,10 @@ describe('Menu Button click, Item select', () => {
         expect(host).toBeTruthy();
     });
 
-    it('buttonclick should be called', () => {
-        spyOn(host, 'menuButtonClick');
-        host.menuButtonClick(event);
-        expect(host.menuButtonClick).toHaveBeenCalled();
+    it('clicked function should be called', () => {
+        spyOn(host, 'clicked');
+        host.clicked(event);
+        expect(host.clicked).toHaveBeenCalled();
     });
 
     it('buttonclick should change variable value', () => {
@@ -181,21 +186,21 @@ describe('Menu Button click, Item select', () => {
     });
 
     it('select item on click', () => {
-        const menuItems = fixture.debugElement.queryAll(By.css('fdp-menu-item'));
-
-        menuItems[0].nativeElement.dispatchEvent(new Event('itemSelect'));
-        menuItems[0].triggerEventHandler('click', { key: 'a' });
+        /**
+         * FIRST-CLICK (OPEN MENU)
+         */
+        const menubutton = fixture.debugElement.query(By.css('fdp-menu-button'));
+        menubutton.nativeElement.click();
         fixture.detectChanges();
-        expect(host.item).toEqual('First Item');
 
-        menuItems[1].nativeElement.dispatchEvent(new Event('itemSelect'));
-        menuItems[1].triggerEventHandler('click', { key: 'a' });
-        fixture.detectChanges();
-        expect(host.item).toEqual('Second Item');
+        const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
 
-        menuItems[2].nativeElement.dispatchEvent(new Event('itemSelect'));
-        menuItems[2].triggerEventHandler('click', { key: 'a' });
+        /**
+         * KEYPRESS ENTER
+         */
+        const keyboardEvent = createKeyboardEvent('keydown', ENTER, 'Enter');
+        items[0].dispatchEvent(keyboardEvent);
         fixture.detectChanges();
-        expect(host.item).toEqual('Third Item');
+        expect(host.currentSelectedItem).toBe('First Item');
     });
 });

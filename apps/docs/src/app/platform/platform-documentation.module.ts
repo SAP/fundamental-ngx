@@ -131,7 +131,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         PlatformRadioGroupListExampleComponent,
         PlatformRadioGroupContentExampleComponent,
         PlatformRadioGroupDisabledExampleComponent,
-        PlatformRadioGroupDocsComponent
+        PlatformRadioGroupDocsComponent,
         PlatformMenuButtonDocsComponent,
         PlatformMenuButtonExampleComponent,
         PlatformMenuButtonCozyExampleComponent,

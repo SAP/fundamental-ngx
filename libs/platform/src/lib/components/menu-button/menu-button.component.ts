@@ -10,11 +10,15 @@ import { InputSize } from './../form/form-control';
 export class MenuButtonComponent {
     /** Id for menu-button. */
     @Input()
-    Id: string;
+    id: string;
 
+    /** name for menu-button */
+    @Input()
+    name: string;
+    
     /** Menu button size. ex: compact | cozy  */
     @Input()
-    displaySize: InputSize = 'cozy';
+    contentSize: InputSize = 'cozy';
 
     /** to truncate text of menu-button based on width. */
     @Input()
@@ -28,8 +32,8 @@ export class MenuButtonComponent {
     @Input()
     disabled: boolean = false;
 
-    /** The type of the button. Types include 'standard', 'positive', 'negative', 'attention', 'attention', 'emphasized', 'ghost'.
-     * Leave empty for default (Action button).'*/
+    /** The type of the button. Types include 'standard', 'positive', 'negative', 'transparent', 'attention', 'emphasized', 'ghost'.
+     * Leave empty for default.'*/
     @Input()
     type: ButtonType;
 
@@ -37,20 +41,11 @@ export class MenuButtonComponent {
     @Output()
     click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
-    /** add 'menu' as button option */
-    /** @hidden */
-    menuOptions: string[] = new Array();
-
     /**
      *  Handles menu-button click
      */
     public buttonclick($event: any) {
         event.stopPropagation();
         this.click.emit();
-    }
-
-    /** @hidden */
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
     }
 }

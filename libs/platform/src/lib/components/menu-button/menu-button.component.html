@@ -1,12 +1,15 @@
 <button
-    class="fd-button fd-button--menu"
-    [compact]="displaySize === 'compact'"
+    fd-button
+    [attr.id]="id"
+    [attr.name]="name"
+    [fdMenu]="true"
+    [compact]="contentSize === 'compact'"
     [glyph]="icon"
     [disabled]="disabled"
     (click)="buttonclick($event)"
     [fdType]="type"
 >
-    <span [ngStyle]="{ width: width }" class="fdp-menu-btn-truncate__txt">
+    <span [ngStyle]="{ width: width }">
         <ng-content></ng-content>
     </span>
 </button>
