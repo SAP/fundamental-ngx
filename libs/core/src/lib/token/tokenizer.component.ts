@@ -14,9 +14,7 @@ import {
 } from '@angular/core';
 import { FormControlDirective } from '../form/form-control/form-control.directive';
 import { TokenComponent } from './token.component';
-import { RtlService } from '../..';
-import { map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { RtlService } from '../utils/services/rtl.service';
 
 @Component({
   selector: 'fd-tokenizer',
