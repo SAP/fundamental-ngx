@@ -1,7 +1,8 @@
 import { Subject } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { FdDate } from './models/fd-date';
 import { FdRangeDate } from './models/fd-range-date';
+import { RtlService } from '../utils/services/rtl.service';
 
 @Injectable()
 export class CalendarService {
@@ -76,7 +77,7 @@ export class CalendarService {
     }
 
     /**
-     *
+     * Method to check if date is betweeen 2 dates
      */
     static isBetween(dateToCheck: FdDate, dateRange: FdRangeDate): boolean {
         return (
@@ -84,6 +85,10 @@ export class CalendarService {
             (dateRange.end && (dateRange.end.getTimeStamp() > dateToCheck.getTimeStamp()))
         );
     }
+
+    constructor(
+        @Optional() private _rtlService: RtlService
+    ) {}
 
     /**
      * Standardized method to calculate grid [x][y] to index number
@@ -93,13 +98,15 @@ export class CalendarService {
     }
 
     /**
-     * Method that handles keydown events, dedicated for Month and Year views, which have a list with 12 elements.
+     * Method that handles keydown events, dedicated for All Calendar views, which have a list with row x col elements.
      * Triggers the events, when the focus approaches start and end of list. Or when there is basic change of focus.
      * Triggers also event, when the element is selected by enter key, or space bar.
      * @param event KeyboardEvent
-     * @param index which is number (0 - 11)
+     * @param index which is number (0 - (rowAmount * colAmount))
      */
     onKeydownHandler(event: KeyboardEvent, index: number): void {
+        const rtl: boolean = this._rtlService && this._rtlService.rtl.getValue();
+        
         switch (event.key) {
             case 'Enter':
             case ' ': {
@@ -109,19 +116,19 @@ export class CalendarService {
             }
             case 'ArrowLeft': {
                 event.preventDefault();
-                if (index === 0) {
-                    this.onListStartApproach.next(this.getId(this.rowAmount, 0) - 1);
+                if (!rtl) {
+                    this.focusLeftElement(index);
                 } else {
-                    this.onFocusIdChange.next(index - 1)
+                    this.focusRightElement(index);
                 }
                 break;
             }
             case 'ArrowRight': {
                 event.preventDefault();
-                if (index === this.getId(this.rowAmount, 0) - 1) {
-                    this.onListEndApproach.next(0);
+                if (!rtl) {
+                    this.focusRightElement(index);
                 } else {
-                    this.onFocusIdChange.next(index + 1)
+                    this.focusLeftElement(index);
                 }
                 break;
             }
@@ -160,4 +167,27 @@ export class CalendarService {
         }
     }
 
+    /**
+     * @hidden
+     * Right Element focus trigger
+     */
+    focusRightElement(index: number): void {
+        if (index === this.getId(this.rowAmount, 0) - 1) {
+            this.onListEndApproach.next(0);
+        } else {
+            this.onFocusIdChange.next(index + 1)
+        }
+    }
+
+    /**
+     * @hidden
+     * Left Element focus trigger
+     */
+    focusLeftElement(index: number): void {
+        if (index === 0) {
+            this.onListStartApproach.next(this.getId(this.rowAmount, 0) - 1);
+        } else {
+            this.onFocusIdChange.next(index - 1)
+        }
+    }
 }
