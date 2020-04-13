@@ -47,7 +47,7 @@ type Status = 'error' | 'warning' | 'information' | 'success';
         { provide: FormFieldControl, useExisting: InputComponent, multi: true }
     ]
 })
-export class InputComponent extends BaseInput implements CssClassBuilder, OnChanges {
+export class InputComponent extends BaseInput implements CssClassBuilder {
 
     @Input()
     type: InputType = 'text';
@@ -116,9 +116,4 @@ export class InputComponent extends BaseInput implements CssClassBuilder, OnChan
             throw new Error(` Input type ${this.type} is not supported`);
         }
     }
-
-    /** @hidden */
-    ngOnChanges(): void {
-    }
-
 }
