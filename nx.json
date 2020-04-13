@@ -12,7 +12,8 @@
             "tags": ["fd"]
         },
         "docs-e2e": {
-            "tags": []
+            "tags": [],
+            "implicitDependencies": ["docs"]
         },
         "core": {
             "tags": ["fd"]
