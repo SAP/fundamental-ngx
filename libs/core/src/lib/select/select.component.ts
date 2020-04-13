@@ -26,7 +26,6 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { RtlService } from '../utils/public_api';
-import { DialogRef, DialogService } from '../..';
 
 let selectUniqueId: number = 0;
 
@@ -54,17 +53,6 @@ export type SelectControlState = 'error' | 'success' | 'warning' | 'information'
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
-    /** @hidden */
-    @ContentChildren(OptionComponent, {descendants: true})
-    options: QueryList<OptionComponent>;
-
-    /** @hidden */
-    @ViewChild('selectMobileModal')
-    modalTemplateRef: TemplateRef<any>;
-
-    /** @hidden */
-    @ViewChild('selectControl')
-    controlTemplateRef: ElementRef;
 
     /** Whether the select component is disabled. */
     @Input()
@@ -164,13 +152,18 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     readonly valueChange: EventEmitter<any> = new EventEmitter<any>();
 
     /** @hidden */
+    @ContentChildren(OptionComponent, {descendants: true})
+    options: QueryList<OptionComponent>;
+
+    /** @hidden */
+    @ViewChild('selectControl')
+    controlTemplateRef: ElementRef;
+
+    /** @hidden */
     calculatedMaxHeight: number;
 
     /** @hidden */
     controlId: string = `select-list-${selectUniqueId++}`;
-
-    /** Reference to existing modal */
-    dialogRef: DialogRef;
 
     /** Current selected option component reference. */
     private _selected: OptionComponent;
@@ -219,7 +212,6 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     }
 
     constructor(
-        private _dialogService: DialogService,
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService
     ) { }
@@ -262,7 +254,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Toggles the open state of the select. */
     toggle(): void {
         if (!this.disabled) {
-            if (this.isOpen || this.dialogRef) {
+            if (this.isOpen) {
                 this.close();
             } else {
                 this.open();
@@ -273,11 +265,8 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Opens the select popover body. */
     open(): void {
         if (!this.isOpen && !this.disabled) {
-            if (this.mobile) {
-                this.dialogRef = this._dialogService.open(this.modalTemplateRef);
-            } else {
+
                 this.isOpen = true;
-            }
             this.isOpenChange.emit(this.isOpen);
             this._focusOption('onOpen');
         }
@@ -286,10 +275,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Closes the select popover body. */
     close(): void {
         if (!this.disabled) {
-            if (this.mobile && this.dialogRef) {
-                this.dialogRef.close();
-                this.dialogRef = undefined;
-            } else if (this.isOpen) {
+            if (this.isOpen) {
                 this.isOpen = false;
             }
             this.isOpenChange.emit(this.isOpen);
