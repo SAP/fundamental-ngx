@@ -219,7 +219,7 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
         const invalidDate = (<any>component)._invalidDate();
-        const rangeDateInvalidObject: FdRangeDate = { start: invalidDate, end: invalidDate };
+        const rangeDateInvalidObject = { start: invalidDate, end: invalidDate };
         component.type = 'range';
         component.disableRangeStartFunction = (fdDate: FdDate) => true;
         component.disableRangeEndFunction = (fdDate: FdDate) => true;
@@ -251,7 +251,7 @@ describe('DatePickerComponent', () => {
         const strDate1 = (<any>component)._formatDate(date1);
         const strDate2 = (<any>component)._formatDate(date2);
 
-        const rangeDateInvalidObject: FdRangeDate = { start: date1, end: invalidDate };
+        const rangeDateInvalidObject = { start: date1, end: invalidDate };
 
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
