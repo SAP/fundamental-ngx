@@ -22,6 +22,7 @@
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
+    "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
     "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
     "popper.js": "POPPER_VER_PLACEHOLDER"
