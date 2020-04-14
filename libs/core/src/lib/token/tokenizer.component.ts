@@ -170,7 +170,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number;
-        const rtl = this._rtlService.rtl.getValue();
+        const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
         if (event.code === 'ArrowLeft' && !rtl || (event.code === 'ArrowRight' && rtl)) {
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
