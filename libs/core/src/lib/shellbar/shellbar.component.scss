@@ -4,8 +4,13 @@
 .fd-shellbar {
     .fd-button.fd-shellbar__button.fd-shellbar-side-nav-control {
         margin-right: 4px;
-        @media (min-width: 600px) {
-            margin-left: -12px;
+        margin-left: -12px;
+        @at-root {
+            [dir='rtl'] &,
+            &[dir='rtl'] {
+                margin-left: 4px;
+                margin-right: -10px;
+            }
         }
     }
     // TODO: Investigate why this is necessary here but not in styles
