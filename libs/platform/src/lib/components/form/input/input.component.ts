@@ -44,10 +44,10 @@ type Status = 'error' | 'warning' | 'information' | 'success';
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['input.component.scss'],
     providers: [
-        { provide: FormFieldControl, useExisting: InputComponent, multi: true }
+        { provide: FormFieldControl, useExisting: PlatformInputComponent, multi: true }
     ]
 })
-export class InputComponent extends BaseInput implements CssClassBuilder {
+export class PlatformInputComponent extends BaseInput implements CssClassBuilder {
 
     /** defines the input type of the input. */
     @Input()
@@ -78,27 +78,6 @@ export class InputComponent extends BaseInput implements CssClassBuilder {
     inputElement: ElementRef;
 
     /** return the value in the text box */
-    @Input()
-    state: Status;
- 
-    /** Whether the input is read-only. */
-    @Input()
-    readonly: boolean = false;
-
-    /** Whether the input is disabled. */
-    @Input()
-    disabled: boolean = false;
-
-    @Input()
-    compact: boolean = false;
-    
-    @Input()
-    class: string = '';
-
-    /** @hidden */
-    @ViewChild('inputElement')
-    inputElement: ElementRef;
-
     @Input()
     get value(): any {
         return super.getValue();

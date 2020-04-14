@@ -17,7 +17,6 @@ import { BaseComponent } from '../base';
 import { ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
-import { BaseComponent } from '../base-component';
 
 let randomId = 0;
 
@@ -36,12 +35,9 @@ export abstract class BaseInput extends BaseComponent
     implements FormFieldControl<any>, ControlValueAccessor, OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
     protected defaultId: string = `fdp-input-id-${randomId++}`;
     protected _disabled: boolean;
+    protected _value: any;
     protected _editable: boolean = true;
     protected _destroyed = new Subject<void>();
-
-
-    @Input()
-    placeholder: string;
 
     @Input()
     placeholder: string;
@@ -86,10 +82,9 @@ export abstract class BaseInput extends BaseComponent
      * which we need to programmatically wraps components set/get value
      *
      */
-    @Input()
-    get editable(): boolean {
-        return this._editable;
-    }
+    abstract get value(): any;
+
+    abstract set value(value: any);
 
     /**
      * Reference to internal Input element
