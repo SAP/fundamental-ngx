@@ -13,7 +13,7 @@ import {
     LabelIconStatusExampleComponent, LabelStatusColorsExampleComponent
 } from './examples/badge-label-examples.component';
 import {BadgeLabelHeaderComponent} from './badge-label-header/badge-label-header.component';
-import { BadgeLabelModule } from '@fundamental-ngx/core';
+import { BadgeLabelModule, MessageStripModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -30,6 +30,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
+        MessageStripModule,
         BadgeLabelModule
     ],
     exports: [RouterModule],

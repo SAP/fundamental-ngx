@@ -3,6 +3,10 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 import { BadgeStatus, BadgeIconStatus } from '../label/label.component';
 
 /**
+ * @deprecated
+ * StatusLabelComponent is deprecated.
+ * Consult docs for better alternative.
+ *
  * Status Label component with some default icons based on status input used to indicate status.
  * Icons are used to easily highlight the state of an object.
  */

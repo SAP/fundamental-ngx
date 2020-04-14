@@ -6,6 +6,10 @@ export type BadgeModifier = 'pill' | 'filled';
 export type BadgeIconStatus = 'available' | 'away' | 'busy' | 'offline';
 
 /**
+ * @deprecated
+ * LabelComponent is deprecated.
+ * Consult docs for better alternative.
+ *
  * Label component, used to indicate status, without any background or border
  * Colors, generally in combination with text, are used to easily highlight the state of an object.
  */
