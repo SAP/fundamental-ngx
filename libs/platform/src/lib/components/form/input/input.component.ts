@@ -44,10 +44,10 @@ type Status = 'error' | 'warning' | 'information' | 'success';
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['input.component.scss'],
     providers: [
-        { provide: FormFieldControl, useExisting: InputComponent, multi: true }
+        { provide: FormFieldControl, useExisting: PlatformInputComponent, multi: true }
     ]
 })
-export class InputComponent extends BaseInput implements CssClassBuilder {
+export class PlatformInputComponent extends BaseInput implements CssClassBuilder {
 
     @Input()
     type: InputType = 'text';

@@ -2,11 +2,11 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormModule as FdFormModule } from '@fundamental-ngx/core';
-import { InputComponent } from './input.component';
+import { PlatformInputComponent } from './input.component';
 
 @NgModule({
     declarations: [
-        InputComponent
+        PlatformInputComponent
     ],
     imports: [
         CommonModule,
@@ -15,7 +15,7 @@ import { InputComponent } from './input.component';
         FdFormModule
     ],
     exports: [
-        InputComponent
+        PlatformInputComponent
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
