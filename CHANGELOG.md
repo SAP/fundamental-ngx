@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.106"></a>
+# [0.16.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.105...v0.16.0-rc.106) (2020-04-14)
+
+
+### Bug Fixes
+
+* DatePickers add focus trap ([#2350](https://github.com/SAP/fundamental-ngx/issues/2350)) ([d73a514](https://github.com/SAP/fundamental-ngx/commit/d73a514))
+
+
+
 <a name="0.16.0-rc.105"></a>
 # [0.16.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.104...v0.16.0-rc.105) (2020-04-14)
 
