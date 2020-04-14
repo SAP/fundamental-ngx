@@ -7,7 +7,8 @@ import {
     ViewChild,
     ChangeDetectionStrategy,
     OnChanges,
-    OnInit
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
@@ -19,6 +20,7 @@ let uniqueId = 0;
     templateUrl: './radio-button.component.html',
     styleUrls: ['./radio-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
