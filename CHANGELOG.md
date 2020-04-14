@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.115"></a>
+# [0.16.0-rc.115](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.114...v0.16.0-rc.115) (2020-04-14)
+
+
+### Bug Fixes
+
+* add fix for Dialog header template close button ([#2353](https://github.com/SAP/fundamental-ngx/issues/2353)) ([ac86c9c](https://github.com/SAP/fundamental-ngx/commit/ac86c9c))
+
+
+
 <a name="0.16.0-rc.114"></a>
 # [0.16.0-rc.114](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.113...v0.16.0-rc.114) (2020-04-14)
 
