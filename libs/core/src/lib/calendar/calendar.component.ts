@@ -112,7 +112,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * Whether user wants to show week numbers next to days
      */
     @Input()
-    showWeekNumbers: boolean = true;
+    showWeekNumbers: boolean = false;
 
     /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
     @Input()
