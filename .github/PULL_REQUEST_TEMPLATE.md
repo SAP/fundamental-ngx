@@ -8,7 +8,7 @@
 https://github.com/SAP/fundamental-ngx/blob/master/CONTRIBUTING.md
 - [ ] tests for the changes that have been done
 - [ ] accessibility has been properly addressed and documented
-- [ ] performence measurements done if applicable
+- [ ] performance measurements done if applicable
 - [ ] security risks addressed
 - [ ] storybook test has been created/updated
 
