@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.100"></a>
+# [0.16.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.99...v0.16.0-rc.100) (2020-04-14)
+
+
+### Bug Fixes
+
+* set ViewEncapsulation.None for radio button and split button ([#2337](https://github.com/SAP/fundamental-ngx/issues/2337)) ([8bd28b8](https://github.com/SAP/fundamental-ngx/commit/8bd28b8))
+
+
+
 <a name="0.16.0-rc.99"></a>
 # [0.16.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.98...v0.16.0-rc.99) (2020-04-14)
 
