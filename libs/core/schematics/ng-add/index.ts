@@ -125,8 +125,8 @@ function addFontsToStyles(options: any): Rule {
         if (options.styleFonts) {
 
             if (!stylesFileContent) {
-                throw new SchematicsException(`Unable to find styles.scss. Please manually configure your styles. 
-                For more info, visit https://fundamental-styles.netlify.com/getting-started.html`);
+                console.warn(`Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`);
+                return tree;
             }
 
             try {
@@ -141,8 +141,8 @@ function addFontsToStyles(options: any): Rule {
                 }
 
             } catch (e) {
-                throw new SchematicsException(`Unable to find styles.scss. Please manually configure your styles. 
-                For more info, visit https://fundamental-styles.netlify.com/getting-started.html`);
+                console.warn(`Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`);
+                return tree;
             }
         }
 
