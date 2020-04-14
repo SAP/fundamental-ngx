@@ -7,8 +7,8 @@ import {
     ViewChild,
     ChangeDetectionStrategy,
     OnChanges,
-    OnInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    AfterViewInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
@@ -29,7 +29,7 @@ let uniqueId = 0;
         }
     ]
 })
-export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder, ControlValueAccessor {
+export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor {
     /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef;
@@ -39,21 +39,21 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
      * By default field is set to false
      */
     @Input()
-    compact: boolean;
+    compact: boolean = false;
 
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
      * by default value is set to 'default'
      */
     @Input()
-    state: stateType;
+    state: stateType = 'default';
 
     /** The field is used to tell if radio button should be disabled
      * Value: true or false
      * by default disabled state is set to false
      */
     @Input()
-    disabled: boolean;
+    disabled: boolean = false;
 
     /** The field should be only used with reactive forms
      * Its purpose is to pass a current selected value from froumGroup
@@ -106,7 +106,7 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
     }
 
     /** @hidden */
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         this.buildComponentCssClass();
         this._checkMandatoryFields();
     }
@@ -140,11 +140,11 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
     }
     // End implementation
 
-    @applyCssClass
     /** This method is responsible for building a css class based on current state
      *  It is implementation of CssClassBuilder interface and
      *  should be used with @applyCssClass decorator
      */
+    @applyCssClass
     buildComponentCssClass(): string {
         return [
             'fd-radio',
