@@ -7,19 +7,19 @@ import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 import { getProject } from '@schematics/angular/utility/project';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
-import chalk from 'chalk';
 import { cdkVersion } from './versions';
+import { defaultFontStyle } from './styles';
 
 const browserAnimationsModuleName = 'BrowserAnimationsModule';
 const noopAnimationsModuleName = 'NoopAnimationsModule';
 const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
-const fdStylesFontsPath = 'node_modules/fundamental-styles/dist/fonts.css';
 
 export function ngAdd(options: any): Rule {
     return chain([
         addDependencies(),
         addAnimations(options),
         addStylePathToConfig(options),
+        addFontsToStyles(options),
         endInstallTask()
     ]);
 }
@@ -52,7 +52,7 @@ function addDependencies(): Rule {
 
         dependencies.forEach(dependency => {
             addPackageJsonDependency(tree, dependency);
-            console.log(chalk.green(`✅️ Added ${dependency.name} to ${dependency.type}.`));
+            console.log(`✅️ Added ${dependency.name} to ${dependency.type}.`);
         });
 
         return tree;
@@ -67,23 +67,23 @@ function addAnimations(options: any): Rule {
 
         if (options.animations) {
             if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
-                return console.warn(chalk.red(`Could not set up "${chalk.bold(browserAnimationsModuleName)}" ` +
-                    `because "${chalk.bold(noopAnimationsModuleName)}" is already imported. Please manually ` +
-                    `set up browser animations.`));
+                return console.warn(`Could not set up "${browserAnimationsModuleName}" ` +
+                    `because "${noopAnimationsModuleName}" is already imported. Please manually ` +
+                    `set up browser animations.`);
             }
             addImportToRootModule(tree, browserAnimationsModuleName,
                 '@angular/platform-browser/animations', modulePath);
-            console.log(chalk.green(`✅️ Added ${browserAnimationsModuleName} to root module.`));
+            console.log(`✅️ Added ${browserAnimationsModuleName} to root module.`);
         } else if (!hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
             addImportToRootModule(tree, noopAnimationsModuleName,
                 '@angular/platform-browser/animations', modulePath);
-            console.log(chalk.green(`✅️ Added ${noopAnimationsModuleName} to root module.`));
+            console.log(`✅️ Added ${noopAnimationsModuleName} to root module.`);
         }
         return tree;
     };
 }
 
-// Adds the style path to the angular.json.
+// Adds the icon style path to the angular.json.
 function addStylePathToConfig(options: any): Rule {
     return (tree: Tree) => {
         const angularConfigPath = '/angular.json';
@@ -97,20 +97,55 @@ function addStylePathToConfig(options: any): Rule {
             // tslint:disable-next-line:no-non-null-assertion
             let stylesArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'];
 
-            if (!stylesArray.includes(fdStylesIconPath) || !stylesArray.includes(fdStylesFontsPath)) {
-                stylesArray = pushStylesToArray(stylesArray, fdStylesFontsPath);
+            if (!stylesArray.includes(fdStylesIconPath)) {
                 stylesArray = pushStylesToArray(stylesArray, fdStylesIconPath);
                 // tslint:disable-next-line:no-non-null-assertion
                 (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'] = stylesArray;
             } else {
-                console.log(chalk.green(`✅️ Found duplicate style path in angular.json. Skipping.`));
+                console.log(`✅️ Found duplicate style path in angular.json. Skipping.`);
                 return tree;
             }
         } catch (e) {
             throw new SchematicsException(`Unable to find angular.json project styles. Please manually configure your styles array.`);
         }
         tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
-        console.log(chalk.green(`✅️ Added fundamental-styles path to angular.json.`));
+        console.log(`✅️ Added fundamental-styles path to angular.json.`);
+        return tree;
+    };
+}
+
+// Adds the default fonts import into styles.scss
+function addFontsToStyles(options: any): Rule {
+    return (tree: Tree) => {
+        const stylesFilePath = '/src/styles.scss';
+        const stylesFileContent = tree.read('/src/styles.scss');
+        const defaultFontStyleString = defaultFontStyle;
+        const sapThemingImport: string = 'node_modules/@sap-theming/theming-base-content/content/Base/baseLib';
+
+        if (options.styleFonts) {
+
+            if (!stylesFileContent) {
+                console.warn(`Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`);
+                return tree;
+            }
+
+            try {
+                let stylesFileString: string = stylesFileContent.toString();
+
+                if (!stylesFileString.includes(sapThemingImport)) {
+                    stylesFileString = defaultFontStyleString + stylesFileString;
+                    tree.overwrite(stylesFilePath, stylesFileString);
+                } else {
+                    console.log(`✅️ There are imports from @sap-theming in styles.scss already. Skipping`);
+                    return tree;
+                }
+
+            } catch (e) {
+                console.warn(`Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`);
+                return tree;
+            }
+        }
+
         return tree;
     };
 }
