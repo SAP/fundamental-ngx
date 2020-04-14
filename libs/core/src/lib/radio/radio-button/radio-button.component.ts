@@ -31,14 +31,8 @@ let uniqueId = 0;
 })
 export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder, ControlValueAccessor {
     /** @hidden */
-    class: string;
-
-    /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef;
-
-    /** @hidden */
-    actualValue: any;
 
     /** Whether to apply compact mode to the radio button.
      * Value: true or false
@@ -66,7 +60,10 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
      * The field is mandatory when working with reactive forms
      */
     @Input()
-    selectedValue: any;
+    set selectedValue(val: any) {
+        this.currentValue = val;
+        this._setNativeElementCheckedState();
+    }
 
     /** The name of the radio button
      * The field is mandatory
@@ -90,11 +87,17 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
         if (this.value === undefined) {
             return false;
         }
-        return this.actualValue === this.value;
+        return this.currentValue === this.value;
     }
 
     /** @hidden */
-    constructor(private changeDetectionRef: ChangeDetectorRef) { }
+    class: string;
+
+    /** @hidden */
+    currentValue: any;
+
+    /** @hidden */
+    constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -110,10 +113,10 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = () => { };
+    onChange: any = () => {};
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {};
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -163,7 +166,7 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
 
     /** @hidden */
     valueChange(value: any): void {
-        this.actualValue = value;
+        this.currentValue = value;
 
         this._setNativeElementCheckedState();
 
