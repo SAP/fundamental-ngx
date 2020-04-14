@@ -106,14 +106,16 @@ export class CalendarService {
      */
     onKeydownHandler(event: KeyboardEvent, index: number): void {
         const rtl: boolean = this._rtlService && this._rtlService.rtl.getValue();
-        
+
         switch (event.key) {
+            case 'Spacebar':
             case 'Enter':
             case ' ': {
                 event.preventDefault();
                 this.onKeySelect.next(index);
                 break;
             }
+            case 'Left':
             case 'ArrowLeft': {
                 event.preventDefault();
                 if (!rtl) {
@@ -123,6 +125,7 @@ export class CalendarService {
                 }
                 break;
             }
+            case 'Right':
             case 'ArrowRight': {
                 event.preventDefault();
                 if (!rtl) {
@@ -132,6 +135,7 @@ export class CalendarService {
                 }
                 break;
             }
+            case 'Up':
             case 'ArrowUp': {
                 event.preventDefault();
                 if (index <= this.colAmount - 1) {
@@ -141,6 +145,7 @@ export class CalendarService {
                 }
                 break;
             }
+            case 'Down':
             case 'ArrowDown': {
                 event.preventDefault();
                 if (index >= this.getId(this.rowAmount - 1, 0)) {
