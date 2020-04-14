@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.107"></a>
+# [0.16.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.106...v0.16.0-rc.107) (2020-04-14)
+
+
+### Bug Fixes
+
+* changed ngOnInit to ngAfterViewInit ([#2349](https://github.com/SAP/fundamental-ngx/issues/2349)) ([b1aaced](https://github.com/SAP/fundamental-ngx/commit/b1aaced))
+
+
+
 <a name="0.16.0-rc.106"></a>
 # [0.16.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.105...v0.16.0-rc.106) (2020-04-14)
 
