@@ -59,7 +59,7 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
      */
     @Input()
     set selectedValue(val: any) {
-        this._currentValue = val;
+        this.currentValue = val;
         this._setNativeElementCheckedState();
     }
 
@@ -85,14 +85,14 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
         if (this.value === undefined) {
             return false;
         }
-        return this._currentValue === this.value;
+        return this.currentValue === this.value;
     }
 
     /** @hidden */
     class: string;
 
     /** @hidden */
-    private _currentValue: any;
+    currentValue: any;
 
     /** @hidden */
     constructor(private changeDetectionRef: ChangeDetectorRef) {}
@@ -164,7 +164,7 @@ export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder,
 
     /** @hidden */
     valueChange(value: any): void {
-        this._currentValue = value;
+        this.currentValue = value;
 
         this._setNativeElementCheckedState();
 
