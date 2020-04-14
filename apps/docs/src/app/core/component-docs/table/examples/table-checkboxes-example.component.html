@@ -4,8 +4,8 @@
             <th fd-table-cell>
                 <fd-checkbox [compact]="true"
                              label="Select all"
-                             [(ngModel)]="selectMasterModel"
-                             (click)="selectMaster()"></fd-checkbox>
+                             [ngModel]="selectMasterModel"
+                             (ngModelChange)="selectMaster($event)"></fd-checkbox>
             </th>
             <th fd-table-cell>Column 1</th>
             <th fd-table-cell>Column 2</th>
@@ -19,7 +19,7 @@
             <td fd-table-cell>
                 <fd-checkbox [compact]="true"
                              [ngModel]="tableRows[i].checked"
-                             (ngModelChange)="select(i)"
+                             (ngModelChange)="select(i, $event)"
                              label="Option {{ i }}"></fd-checkbox>
             </td>
             <td fd-table-cell>{{row.column1}}</td>
@@ -30,5 +30,3 @@
         </tr>
     </tbody>
 </table>
-
-Selected rows: {{ selectedRows.toString() }}
