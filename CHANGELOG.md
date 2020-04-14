@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.109"></a>
+# [0.16.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.108...v0.16.0-rc.109) (2020-04-14)
+
+
+### Bug Fixes
+
+* removed option and changed button fdtype ([#2341](https://github.com/SAP/fundamental-ngx/issues/2341)) ([f726c60](https://github.com/SAP/fundamental-ngx/commit/f726c60))
+
+
+
 <a name="0.16.0-rc.108"></a>
 # [0.16.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.107...v0.16.0-rc.108) (2020-04-14)
 
