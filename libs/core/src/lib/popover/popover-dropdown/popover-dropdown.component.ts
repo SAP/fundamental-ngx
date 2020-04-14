@@ -3,6 +3,10 @@ import { Subscription } from 'rxjs';
 import { PopoverComponent } from '../popover.component';
 import { ButtonType } from '../../button/button.component';
 /**
+ * @deprecated
+ * PopoverDropdownComponent is deprecated
+ * Consult docs for better alternative
+ *
  * A component used to enforce a certain layout for the popover. With additional styling
  * ```html
  * <fd-popover>
