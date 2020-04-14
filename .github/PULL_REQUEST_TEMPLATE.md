@@ -7,6 +7,10 @@
 - [ ] the commit message follows the guideline:
 https://github.com/SAP/fundamental-ngx/blob/master/CONTRIBUTING.md
 - [ ] tests for the changes that have been done
+- [ ] accessibility has been properly addressed and documented
+- [ ] performence measurements done if applicable
+- [ ] security risks addressed
+- [ ] storybook test has been created/updated
 
 Documentation checklist:
 - [ ] update `README.md`
