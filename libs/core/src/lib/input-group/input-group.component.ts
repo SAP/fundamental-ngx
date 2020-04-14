@@ -81,8 +81,8 @@ export class InputGroupComponent implements ControlValueAccessor {
     buttonFocusable: boolean = true;
 
     /**
-     * The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
-     * Leave empty for default (Action button).'*/
+     * @deprecated, leaving for backwards compatibility, it will be removed in `0.17.0`.
+     */
     @Input()
     buttonType: ButtonType;
 
