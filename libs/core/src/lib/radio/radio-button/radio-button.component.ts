@@ -8,7 +8,7 @@ import {
     ChangeDetectionStrategy,
     OnChanges,
     ViewEncapsulation,
-    AfterViewInit,
+    AfterViewInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
@@ -25,9 +25,9 @@ let uniqueId = 0;
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => RadioButtonComponent),
-            multi: true,
-        },
-    ],
+            multi: true
+        }
+    ]
 })
 export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor {
     /** @hidden */
@@ -149,7 +149,7 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
         return [
             'fd-radio',
             this.compact ? 'fd-radio--compact' : '',
-            this.state !== 'default' ? `is-${this.state}` : '',
+            this.state !== 'default' ? `is-${this.state}` : ''
         ].join(' ');
     }
 
