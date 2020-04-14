@@ -7,13 +7,15 @@ import {
     ContentChild,
     ContentChildren, ElementRef,
     forwardRef, HostListener,
-    Input,
+    Input, OnDestroy, Optional,
     QueryList,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { FormControlDirective } from '../form/form-control/form-control.directive';
 import { TokenComponent } from './token.component';
+import { RtlService } from '../utils/services/rtl.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fd-tokenizer',
@@ -22,7 +24,7 @@ import { TokenComponent } from './token.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TokenizerComponent implements AfterViewInit, AfterContentInit {
+export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
@@ -81,6 +83,9 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     previousTokenCount: number;
 
     /** @hidden */
+    tokenListChangesSubscription: Subscription;
+
+    /** @hidden */
     ngAfterViewInit(): void {
         if (this.input && this.input.elementRef()) {
             this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
@@ -92,7 +97,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         }
         this.handleTokenClickSubscriptions();
         // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
-        this.tokenList.changes.subscribe(() => {
+        this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
             this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
             this.previousTokenCount = this.tokenList.length;
             this.handleTokenClickSubscriptions();
@@ -110,7 +115,19 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         this.onResize();
     }
 
-    constructor(public elementRef: ElementRef, private cdRef: ChangeDetectorRef) {}
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.tokenList.forEach(token => {
+            if (token.onTokenClick) {
+                token.onTokenClick.unsubscribe();
+            }
+        });
+        if (this.tokenListChangesSubscription) {
+            this.tokenListChangesSubscription.unsubscribe();
+        }
+    }
+
+    constructor(public elementRef: ElementRef, private cdRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
     handleTokenClickSubscriptions(): void {
@@ -169,14 +186,15 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number;
-        if (event.code === 'ArrowLeft') {
+        const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
+        if (event.code === 'ArrowLeft' && !rtl || (event.code === 'ArrowRight' && rtl)) {
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
-        } else if (event.code === 'ArrowRight') {
+        } else if (event.code === 'ArrowRight' && !rtl || (event.code === 'ArrowLeft' && rtl)) {
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
         }
-        if (newIndex === this.tokenList.length && event.code === 'ArrowRight') {
+        if (newIndex === this.tokenList.length && ((event.code === 'ArrowRight' && !rtl) || (event.code === 'ArrowLeft' && rtl))) {
             this.input.elementRef().nativeElement.focus();
         } else if (newIndex > this.tokenList.length - this.moreTokensRight.length &&
             document.activeElement === this.input.elementRef().nativeElement) {

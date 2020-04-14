@@ -2,8 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TokenizerComponent } from './tokenizer.component';
 import { Component } from '@angular/core';
-import { TokenComponent } from '@fundamental-ngx/core';
-import { FormControlDirective } from '@fundamental-ngx/core';
+import { RtlService, TokenComponent, TokenizerInputDirective, FormControlDirective } from '@fundamental-ngx/core';
 
 async function whenStable(fixture) {
   fixture.detectChanges();
@@ -17,7 +16,7 @@ async function whenStable(fixture) {
             <fd-token>Token 1</fd-token>
             <fd-token>Token 2</fd-token>
             <fd-token>Token 3</fd-token>
-            <input fd-form-control>
+            <input fd-tokenizer-input fd-form-control>
         </fd-tokenizer>
     `
 })
@@ -29,7 +28,8 @@ describe('TokenizerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TokenizerComponent, TokenComponent, TokenizerWrapperComponent, FormControlDirective]
+      declarations: [TokenizerComponent, TokenComponent, TokenizerWrapperComponent, FormControlDirective, TokenizerInputDirective],
+      providers: [RtlService]
     })
       .compileComponents();
   }));
