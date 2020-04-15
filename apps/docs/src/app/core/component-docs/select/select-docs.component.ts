@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as selectBasicHtml from '!raw-loader!./examples/select-basic-example/select-basic-example.component.html';
-import * as selectBasicTs from '!raw-loader!./examples/select-basic-example/select-basic-example.component.ts';
-
 import * as selectModeHtml from '!raw-loader!./examples/select-mode-example/select-mode-example.component.html';
 import * as selectModeTs from '!raw-loader!./examples/select-mode-example/select-mode-example.component.ts';
 
 import * as selectProgressiveHtml from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.html';
 import * as selectProgressiveScss from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.scss';
 import * as selectProgressiveTs from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.ts';
+
+import * as selectMobileHtml from '!raw-loader!./examples/select-mobile-example/select-mobile-example.component.html';
+import * as selectMobileTs from '!raw-loader!./examples/select-mobile-example/select-mobile-example.component.ts';
 
 import * as selectNestedHtml from '!raw-loader!./examples/select-nested-options/select-nested-options.component.html';
 import * as selectNestedTs from '!raw-loader!./examples/select-nested-options/select-nested-options.component.ts';
@@ -40,16 +40,6 @@ import * as selectSemanticStateTs from '!raw-loader!./examples/select-semantic-s
     templateUrl: './select-docs.component.html'
 })
 export class SelectDocsComponent {
-    selectBasic: ExampleFile[] = [
-        {
-            language: 'html',
-            code: selectBasicHtml,
-            fileName: 'select-basic-example',
-            typescriptFileCode: selectBasicTs,
-            component: 'SelectBasicExampleComponent'
-        }
-    ];
-
     selectMode: ExampleFile[] = [
         {
             language: 'html',
@@ -59,6 +49,20 @@ export class SelectDocsComponent {
             component: 'SelectModeExampleComponent'
         }
     ];
+
+    selectMobile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectMobileHtml,
+            fileName: 'select-mobile-example',
+        },
+        {
+            language: 'typescript',
+            component: 'SelectMobileExampleComponent',
+            code: selectMobileTs,
+            fileName: 'select-mobile-example',
+        }
+    ]
 
     selectProgrammatic: ExampleFile[] = [
         {

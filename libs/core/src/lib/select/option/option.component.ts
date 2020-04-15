@@ -3,12 +3,12 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    EventEmitter,
+    EventEmitter, Host,
     HostBinding,
     HostListener,
     Input,
     OnDestroy,
-    OnInit,
+    OnInit, Optional,
     Output,
     ViewEncapsulation
 } from '@angular/core';
@@ -33,10 +33,6 @@ import { Subscription } from 'rxjs';
 })
 export class OptionComponent implements OnInit, OnDestroy {
 
-    /** @hidden */
-    @HostBinding('class.is-selected')
-    selected: boolean = false;
-
     /** Value of the option. Similar to how a native select operates. */
     @Input()
     value: any;
@@ -49,9 +45,17 @@ export class OptionComponent implements OnInit, OnDestroy {
     @Input()
     viewValue: string;
 
+    /** Reference to parent select is option is declared beyond SelectComponent  */
+    @Input()
+    selectRef: SelectComponent;
+
     /** Emitted when the selected state changes. */
     @Output()
     readonly selectedChange: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
+
+    /** @hidden */
+    @HostBinding('class.is-selected')
+    selected: boolean = false;
 
     private _subscriptions: Subscription = new Subscription();
 
@@ -73,11 +77,12 @@ export class OptionComponent implements OnInit, OnDestroy {
     constructor(
         private _elRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
-        private _selectComponent: SelectComponent
+        @Host() @Optional() private _selectComponent: SelectComponent
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
+        this._checkForSelectDependency();
         this._observeValue();
     }
 
@@ -119,5 +124,14 @@ export class OptionComponent implements OnInit, OnDestroy {
                     map(value => value === this.value)
                 ).subscribe(isSelected => this.setSelected(isSelected, false))
         );
+    }
+
+    private _checkForSelectDependency(): void {
+        if (this._selectComponent || this.selectRef) {
+            this._selectComponent = this._selectComponent || this.selectRef;
+        } else {
+            throw 'OptionComponent missing SelectComponent dependency.' +
+            ' Provide dependency or pass reference using [selectRef] input';
+        }
     }
 }

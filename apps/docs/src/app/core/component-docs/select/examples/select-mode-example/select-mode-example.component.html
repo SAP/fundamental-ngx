@@ -27,9 +27,3 @@
     <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
 </fd-select>
 <small>Selected value: {{selectedValue5}}</small>
-
-<h4>Select in mobile mode</h4>
-<fd-select placeholder="Select an option" [(value)]="selectedValue6" [mobile]="true">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
-</fd-select>
-<small>Selected value: {{selectedValue6}}</small>

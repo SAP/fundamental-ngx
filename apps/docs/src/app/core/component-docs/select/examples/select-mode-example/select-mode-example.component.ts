@@ -11,5 +11,4 @@ export class SelectModeExampleComponent {
     selectedValue3: string;
     selectedValue4: string;
     selectedValue5: string = this.options[0];
-    selectedValue6: string;
 }

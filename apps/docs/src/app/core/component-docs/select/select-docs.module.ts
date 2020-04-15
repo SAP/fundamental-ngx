@@ -7,15 +7,15 @@ import { SelectHeaderComponent } from './select-header/select-header.component';
 import { SelectDocsComponent } from './select-docs.component';
 import { SelectFormsComponent } from './examples/select-forms/select-forms.component';
 import { SelectNestedOptionsComponent } from './examples/select-nested-options/select-nested-options.component';
-import { SelectBasicExampleComponent } from './examples/select-basic-example/select-basic-example.component';
 import { SelectAddingExampleComponent } from './examples/select-adding-example/select-adding-example.component';
 import { SelectCustomTriggerComponent } from './examples/select-custom-trigger/select-custom-trigger.component';
 import { SelectMaxHeightExampleComponent } from './examples/select-height/select-max-height-example.component';
 import { SelectViewValueExampleComponent } from './examples/select-view-value-example/select-view-value-example.component';
 import { SelectProgrammaticExampleComponent } from './examples/select-programmatic-example/select-programmatic-example.component';
-import { FormModule, SelectModule } from '@fundamental-ngx/core';
+import { DialogModule, FormModule, ListModule, SelectModule } from '@fundamental-ngx/core';
 import { SelectSemanticStateExampleComponent } from './examples/select-semantic-state-example/select-semantic-state-example.component.js';
 import { SelectModeExampleComponent } from './examples/select-mode-example/select-mode-example.component';
+import { SelectMobileExampleComponent } from './examples/select-mobile-example/select-mobile-example.component';
 
 const routes: Routes = [
     {
@@ -29,15 +29,22 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SelectModule, FormModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationModule,
+        SelectModule,
+        DialogModule,
+        ListModule,
+        FormModule
+    ],
     exports: [RouterModule],
     declarations: [
         SelectDocsComponent,
         SelectFormsComponent,
         SelectHeaderComponent,
         SelectModeExampleComponent,
-        SelectBasicExampleComponent,
         SelectNestedOptionsComponent,
+        SelectMobileExampleComponent,
         SelectAddingExampleComponent,
         SelectCustomTriggerComponent,
         SelectMaxHeightExampleComponent,

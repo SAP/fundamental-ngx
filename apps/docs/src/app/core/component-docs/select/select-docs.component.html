@@ -1,28 +1,10 @@
-<fd-docs-section-title [id]="'basic'" [componentName]="'select'">
-    Select composition
+<fd-docs-section-title [id]="'mode'" [componentName]="'select'">
+    Select modes
 </fd-docs-section-title>
 <description>
-    Select is composed out of:
-    <ul>
-        <li>
-            <code>SelectComponent</code> - main component representing input control
-        </li>
-        <li>
-            <code>OptionComponent</code> - component representing select option
-        </li>
-    </ul>
+    Select control is composed out of two components: SelectComponent and OptionComponent.<br/>
+    Below you can find examples of Select control in different modes.
 </description>
-<component-example>
-    <fd-select-basic-example></fd-select-basic-example>
-</component-example>
-<code-example [exampleFiles]="selectBasic"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'mode'" [componentName]="'select'">
-    Select states
-</fd-docs-section-title>
-<description>Examples of Select control in different modes</description>
 <component-example>
     <fd-select-mode-example></fd-select-mode-example>
 </component-example>
@@ -41,7 +23,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'customSelectTemplate'" [componentName]="'select'">
+<fd-docs-section-title [id]="'custom-select-template'" [componentName]="'select'">
     Custom control content
 </fd-docs-section-title>
 <description>
@@ -55,7 +37,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'nestedOptions'" [componentName]="'select'">
+<fd-docs-section-title [id]="'nested-options'" [componentName]="'select'">
     Extended Options
 </fd-docs-section-title>
 <description>
@@ -70,7 +52,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'customViewValue'" [componentName]="'select'">
+<fd-docs-section-title [id]="'custom-view-value'" [componentName]="'select'">
     Custom View Value
 </fd-docs-section-title>
 <description>
@@ -84,7 +66,21 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'selectMaxHeight'" [componentName]="'select'">
+<fd-docs-section-title [id]="'select-mobile'" [componentName]="'select'">
+    Select in mobile mode
+</fd-docs-section-title>
+<description>
+    The select component allows to define <code>[maxHeight]</code>. It can be useful when there are a lot of options,
+    the select body is be scrollable. By default maximum height of select body is 45% of browsers window inner height.
+</description>
+<component-example>
+    <fd-select-mobile-example></fd-select-mobile-example>
+</component-example>
+<code-example [exampleFiles]="selectMobile"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'select-max-height'" [componentName]="'select'">
     Select Max Height
 </fd-docs-section-title>
 <description>
@@ -98,7 +94,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'addingRemovingOptions'" [componentName]="'select'">
+<fd-docs-section-title [id]="'adding-removing-options'" [componentName]="'select'">
     Adding and Removing Options
 </fd-docs-section-title>
 <description>
@@ -114,7 +110,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'programmaticControl'" [componentName]="'select'">
+<fd-docs-section-title [id]="'programmatic-control'" [componentName]="'select'">
     Programmatic Control
 </fd-docs-section-title>
 <description>
@@ -128,7 +124,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'reactiveForm'" [componentName]="'select'">
+<fd-docs-section-title [id]="'reactive-form'" [componentName]="'select'">
     Select In A Reactive Form
 </fd-docs-section-title>
 <description>

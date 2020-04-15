@@ -5,23 +5,20 @@ import { PopoverModule } from '../popover/popover.module';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
-import { LoadingSpinnerModule } from '../loading-spinner/loading-spinner.module';
 import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
 import { ListModule } from '../list/list.module';
-import { DialogModule } from '../..';
+import { SelectMobileListComponent } from './select-mobile-list/select-mobile-list.component';
 
 @NgModule({
-    declarations: [SelectComponent, OptionComponent],
-    exports: [SelectComponent, OptionComponent, ListModule],
+    declarations: [SelectComponent, OptionComponent, SelectMobileListComponent],
+    exports: [SelectComponent, OptionComponent, SelectMobileListComponent],
     imports: [
-        LoadingSpinnerModule,
         BusyIndicatorModule,
         CommonModule,
         PopoverModule,
         ButtonModule,
         IconModule,
-        ListModule,
-        DialogModule
+        ListModule
     ]
 })
 export class SelectModule {}

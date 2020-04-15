@@ -314,6 +314,10 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
             .map(option => option.getHtmlElement())
             .indexOf(activeOption as HTMLElement);
 
+        if (!this.options.length) {
+            return;
+        }
+
         switch (action) {
             case 'onOpen':
                 focusAsync(this.selected || this.options.first);
