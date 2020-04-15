@@ -2,7 +2,7 @@
 <section class="tsd-panel tsd-comment">
 	<div class="tsd-comment tsd-typography">
 		<div class="lead">
-			<p>Service used to dynamically generate components like modals/alerts/notifications</p>
+			<p>Service used to dynamically generate components like dialogs/alerts/notifications</p>
 		</div>
 	</div>
 </section>
@@ -21,13 +21,13 @@
 		<h3>create<wbr>Dynamic<wbr>Component</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-			<li class="tsd-signature tsd-kind-icon">create<wbr>Dynamic<wbr>Component&lt;T&gt;<span class="tsd-signature-symbol">(</span>contentType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Object</span>, componentType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicComponentConfig</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+			<li class="tsd-signature tsd-kind-icon">create<wbr>Dynamic<wbr>Component&lt;T&gt;<span class="tsd-signature-symbol">(</span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Object</span>, componentType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicComponentConfig</span>, inject<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/utils/dynamic-component/dynamic-component.service.ts#L33">utils/dynamic-component/dynamic-component.service.ts:33</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/utils/dynamic-component/dynamic-component.service.ts#L34">lib/utils/dynamic-component/dynamic-component.service.ts:34</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -44,13 +44,13 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>contentType: <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Object</span></h5>
+						<h5>content: <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Object</span></h5>
 						<div class="tsd-comment tsd-typography">
 							<p>Type of the component content</p>
 						</div>
 					</li>
 					<li>
-						<h5>componentType: <span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<h5>componentType: <span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 						<div class="tsd-comment tsd-typography">
 							<p>Type of component that should be rendered.</p>
 						</div>
@@ -62,10 +62,18 @@
 						</div>
 					</li>
 					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> services: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+						<h5><span class="tsd-flag ts-flagDefault value">Default value</span> inject: <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> = {}</span></h5>
 						<div class="tsd-comment tsd-typography">
-							<p>Services that will be injected to the component.</p>
+							<p>enables to provide preconfigured component injector and dependencies</p>
 						</div>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> injector<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Injector</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+						</ul>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ComponentRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -83,7 +91,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/utils/dynamic-component/dynamic-component.service.ts#L72">utils/dynamic-component/dynamic-component.service.ts:72</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/utils/dynamic-component/dynamic-component.service.ts#L51">lib/utils/dynamic-component/dynamic-component.service.ts:51</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

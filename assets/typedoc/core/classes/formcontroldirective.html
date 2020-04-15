@@ -12,18 +12,14 @@
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
 		<li>
-			<span class="tsd-signature-type">AbstractFdNgxClass</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="target">FormControlDirective</span>
-				</li>
-			</ul>
+			<span class="target">FormControlDirective</span>
 		</li>
 	</ul>
 </section>
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">CssClassBuilder</span></li>
 		<li><span class="tsd-signature-type">OnInit</span></li>
 		<li><span class="tsd-signature-type">OnChanges</span></li>
 	</ul>
@@ -31,13 +27,30 @@
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="class" class="tsd-anchor"></a>
+		<h3>class</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Implementation of <span>CssClassBuilder</span>.<span>class</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/form/form-control/form-control.directive.ts#L37">lib/form/form-control/form-control.directive.ts:37</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>user&#39;s custom classes</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="compact" class="tsd-anchor"></a>
 		<h3>compact</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/form/form-control/form-control.directive.ts#L31">form/form-control/form-control.directive.ts:31</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/form/form-control/form-control.directive.ts#L30">lib/form/form-control/form-control.directive.ts:30</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -53,13 +66,13 @@
 		<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormStates</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/form/form-control/form-control.directive.ts#L25">form/form-control/form-control.directive.ts:25</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/form/form-control/form-control.directive.ts#L24">lib/form/form-control/form-control.directive.ts:24</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p> The state of the form control - applies css classes.
-				Can be <code>valid</code>, <code>invalid</code>, <code>warning</code>, <code>information</code> or blank for default.</p>
+				Can be <code>success</code>, <code>error</code>, <code>warning</code>, <code>information</code> or blank for default.</p>
 			</div>
 		</div>
 	</section>
@@ -70,68 +83,29 @@
 		<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/form/form-control/form-control.directive.ts#L35">form/form-control/form-control.directive.ts:35</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/form/form-control/form-control.directive.ts#L33">lib/form/form-control/form-control.directive.ts:33</a></li>
 			</ul>
 		</aside>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="elementref" class="tsd-anchor"></a>
-		<h3>element<wbr>Ref</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/form/form-control/form-control.directive.ts#L62">form/form-control/form-control.directive.ts:62</a></li>
-			</ul>
-		</aside>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="_clearelementclass" class="tsd-anchor"></a>
-		<h3>_clear<wbr>Element<wbr>Class</h3>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="buildcomponentcssclass" class="tsd-anchor"></a>
+		<h3>build<wbr>Component<wbr>Css<wbr>Class</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">_clear<wbr>Element<wbr>Class<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">build<wbr>Component<wbr>Css<wbr>Class<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
-					<p>Inherited from AbstractFdNgxClass._clearElementClass</p>
+					<p>Implementation of <span>CssClassBuilder</span>.<span>buildComponentCssClass</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/utils/abstract-fd-ngx-class.ts#L28">utils/abstract-fd-ngx-class.ts:28</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/form/form-control/form-control.directive.ts#L44">lib/form/form-control/form-control.directive.ts:44</a></li>
 					</ul>
 				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="_setclasstoelement" class="tsd-anchor"></a>
-		<h3>_set<wbr>Class<wbr>ToElement</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">_set<wbr>Class<wbr>ToElement<span class="tsd-signature-symbol">(</span>className<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from AbstractFdNgxClass._setClassToElement</p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/utils/abstract-fd-ngx-class.ts#L24">utils/abstract-fd-ngx-class.ts:24</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>className: <span class="tsd-signature-type">string</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 			</li>
 		</ul>
 	</section>

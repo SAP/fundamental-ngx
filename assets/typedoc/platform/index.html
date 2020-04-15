@@ -12,55 +12,33 @@
 	<a href="#description" id="description" style="color: inherit; text-decoration: none;">
 		<h2>Description</h2>
 	</a>
-	<p>   The <code>@fundamental-ngx/platform</code> is built on top of the <code>@fundamental-ngx/core</code> to enhance existing functionality.</p>
-	<p>  Provide a higher abstraction for the components by hiding most of the internal implementation details which boosts developer productivity.</p>
-	<p>  Components must be instantiable programmatically.</p>
-	<p>  Enterprise readiness:</p>
-	<p>    1. Working with data( reactive stream over the array, Data sources over the reactive steam)</p>
-	<p>    2. Layouts (Dashboard, detail page, master/detail page, Search/result page).</p>
-	<p>   It is not about UI:</p>
-	<p>    1. Application state UI
-		2. Bootstrapping and Configuration
-		3. Communication with the backend system.
-	Example:</p>
-	<p> This example captures several things:</p>
-	<p>   a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..</p>
-	<p>   b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)</p>
-	<p>   c). If we need to group information into sections</p>
-	<p>   d). How we are handling and forms errors
-	e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.</p>
-	<pre><code>&lt;fdp-<span class="hljs-keyword">form</span>-group [isFiveZoneLayout]=<span class="hljs-string">"true"</span> labelLayout=<span class="hljs-string">"floating"</span>
-                    [formGroup]=<span class="hljs-string">"fg"</span> [errorHanlding]=<span class="hljs-string">"'navigate'"</span>
-                    (onSubmit)=<span class="hljs-string">"save($event)"</span> (navigateToError)=<span class="hljs-string">"onGoToError($event)"</span>&gt;
-
-    &lt;fdp-<span class="hljs-keyword">form</span>-field <span class="hljs-keyword">label</span>=<span class="hljs-string">"email"</span> id=<span class="hljs-string">"email"</span> zone=<span class="hljs-string">"left"</span>&gt;
-        &lt;fdp-<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"email"</span> placeholder=<span class="hljs-string">"email"</span> [required]=<span class="hljs-string">"true"</span>&gt;&lt;/fdp-<span class="hljs-keyword">input</span>&gt;
-    &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
-
-    &lt;fdp-<span class="hljs-keyword">form</span>-field reqiuire=<span class="hljs-string">"true"</span> <span class="hljs-keyword">label</span>=<span class="hljs-string">"My Favorite Colors"</span> id=<span class="hljs-string">"colors"</span> hint=<span class="hljs-string">"Pick one of your favorite color"</span> zone=<span class="hljs-string">"right"</span>&gt;
-        &lt;fdp-select [<span class="hljs-keyword">list</span>]=<span class="hljs-string">"myColors"</span>&gt;&lt;/fdp-select&gt;
-    &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
-
-    &lt;fdp-<span class="hljs-keyword">form</span>-field <span class="hljs-keyword">label</span>=<span class="hljs-string">"Description"</span> id=<span class="hljs-string">"desription"</span> zone=<span class="hljs-string">"bottom"</span>&gt;
-        &lt;fdp-text-area [autoSizeEnabled]=<span class="hljs-string">"true"</span>&gt;&lt;/fdp-text-area&gt;
-    &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
-    &lt;/fdp-<span class="hljs-keyword">form</span>-group&gt;</code></pre><pre><code>    &lt;fdp-<span class="hljs-keyword">form</span>-group [isFiveZoneLayout]=<span class="hljs-string">"true"</span> labelLayout=<span class="hljs-string">"floating"</span>
-                        [formGroup]=<span class="hljs-string">"fg"</span> [errorHanlding]=<span class="hljs-string">"'navigate'"</span>&gt;
-        
-        &lt;fdp-<span class="hljs-keyword">form</span>-section title=<span class="hljs-string">"Basic Information"</span>&gt;
-        &lt;fdp-<span class="hljs-keyword">form</span>-field <span class="hljs-keyword">label</span>=<span class="hljs-string">"email"</span> id=<span class="hljs-string">"email"</span> zone=<span class="hljs-string">"left"</span>&gt;
-            &lt;fdp-<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"email"</span> placeholder=<span class="hljs-string">"email"</span> [required]=<span class="hljs-string">"true"</span>&gt;&lt;/fdp-<span class="hljs-keyword">input</span>&gt;
-        &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
-        &lt;fdp-<span class="hljs-keyword">form</span>-field reqiuire=<span class="hljs-string">"true"</span>
-                        <span class="hljs-keyword">label</span>=<span class="hljs-string">"My Favorite Colors"</span>
-                        id=<span class="hljs-string">"colors"</span> hint=<span class="hljs-string">"Pick one of your favorite color"</span> zone=<span class="hljs-string">"right"</span>&gt;
-            &lt;fdp-select [<span class="hljs-keyword">list</span>]=<span class="hljs-string">"myColors"</span>&gt;&lt;/fdp-select&gt;
-        &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
-    &lt;/fdp-<span class="hljs-keyword">form</span>-section&gt;
-        &lt;fdp-<span class="hljs-keyword">form</span>-field <span class="hljs-keyword">label</span>=<span class="hljs-string">"Description"</span> id=<span class="hljs-string">"desription"</span> zone=<span class="hljs-string">"bottom"</span>&gt;
-            &lt;fdp-text-area [autoSizeEnabled]=<span class="hljs-string">"true"</span>&gt;&lt;/fdp-text-area&gt;
-        &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
-    &lt;/fdp-<span class="hljs-keyword">form</span>-group&gt;</code></pre>
+	<p>The <code>@fundamental-ngx/platform</code> is built on top of the <code>@fundamental-ngx/core</code> to enhance existing functionality and
+		to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is
+	to create a layer which is closer to application development and not to the library creators. </p>
+	<p>Since there is a plan to generate UI programatically then components must be instantiable (they cannot be directives).</p>
+	<a href="#design" id="design" style="color: inherit; text-decoration: none;">
+		<h2>Design</h2>
+	</a>
+	<p>Each component that is developed here needs to have corresponding <a href="https://github.com/SAP/fundamental-ngx/wiki/Platform-Library-Home">technical specification</a>, where we need to agree on several things:</p>
+	<ul>
+		<li>Component Signature</li>
+		<li>We try to capture common things among components</li>
+		<li>Functionality</li>
+		<li>We decide how much extensible the component needs to be.</li>
+	</ul>
+	<p>As already mentioned above platform the goal is try to be closer to application developer as well as make it more ready for
+	enterprise use. </p>
+	<ul>
+		<li>Defining component model and how we work with data</li>
+		<li>Pre-defined layouts (Dashboard, detail page, master/detail page, Search/result page).</li>
+	</ul>
+	<p>This <code>Platform UI library</code> is not going to be only about UI but it needs to also capture other aspects:</p>
+	<ul>
+		<li>Application state UI</li>
+		<li>Bootstrapping and Configuration</li>
+		<li>Communication with the backend system.</li>
+	</ul>
+	<p>  </p>
 	<a href="#api-reference" id="api-reference" style="color: inherit; text-decoration: none;">
 		<h2>API Reference</h2>
 	</a>

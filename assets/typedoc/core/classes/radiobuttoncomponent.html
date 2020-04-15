@@ -10,6 +10,7 @@
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnChanges</span></li>
 		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">CssClassBuilder</span></li>
 		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
@@ -18,18 +19,89 @@
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="compact" class="tsd-anchor"></a>
+		<h3>compact</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L42">lib/radio/radio-button/radio-button.component.ts:42</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to apply compact mode to the radio button.
+					Value: true or false
+				By default field is set to false</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="disabled" class="tsd-anchor"></a>
+		<h3>disabled</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L56">lib/radio/radio-button/radio-button.component.ts:56</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The field is used to tell if radio button should be disabled
+					Value: true or false
+				by default disabled state is set to false</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="id" class="tsd-anchor"></a>
 		<h3>id</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;radio-id-${uniqueId++}&#x60;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L113">radio/radio-button/radio-button.component.ts:113</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L78">lib/radio/radio-button/radio-button.component.ts:78</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Set uniqueId to a radio button</p>
+				<p>uniqueId to a radio button</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="name" class="tsd-anchor"></a>
+		<h3>name</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L72">lib/radio/radio-button/radio-button.component.ts:72</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The name of the radio button
+				The field is mandatory</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="state" class="tsd-anchor"></a>
+		<h3>state</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">stateType</span><span class="tsd-signature-symbol"> = &quot;default&quot;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L49">lib/radio/radio-button/radio-button.component.ts:49</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The field to set state of radio button using:
+					&#39;success&#39; | &#39;error&#39; | &#39;warning&#39; | &#39;default&#39; | &#39;information&#39;
+				by default value is set to &#39;default&#39;</p>
 			</div>
 		</div>
 	</section>
@@ -40,7 +112,7 @@
 		<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L119">radio/radio-button/radio-button.component.ts:119</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L84">lib/radio/radio-button/radio-button.component.ts:84</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -51,48 +123,17 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="compact" class="tsd-anchor"></a>
-		<h3>compact</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> compact<span class="tsd-signature-symbol">(</span>isCompact<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L47">radio/radio-button/radio-button.component.ts:47</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether to apply compact mode to the radio button.
-							Value: true or false
-						By default field is set to false</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>isCompact: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
 		<a name="selectedvalue" class="tsd-anchor"></a>
 		<h3>selected<wbr>Value</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> selectedValue<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> selectedValue<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L84">radio/radio-button/radio-button.component.ts:84</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L63">lib/radio/radio-button/radio-button.component.ts:63</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -105,38 +146,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>v: <span class="tsd-signature-type">any</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="state" class="tsd-anchor"></a>
-		<h3>state</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span>newState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">stateType</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L58">radio/radio-button/radio-button.component.ts:58</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The field to set state of radio button using:
-							&#39;valid&#39; | &#39;invalid&#39; | &#39;warning&#39; | &#39;default&#39; | &#39;information&#39;
-						by default value is set to &#39;default&#39;</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>newState: <span class="tsd-signature-type">stateType</span></h5>
+						<h5>val: <span class="tsd-signature-type">any</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -157,7 +167,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L102">radio/radio-button/radio-button.component.ts:102</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L86">lib/radio/radio-button/radio-button.component.ts:86</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -179,7 +189,7 @@
 				<aside class="tsd-sources">
 					<p>Implementation of <span>CssClassBuilder</span>.<span>buildComponentCssClass</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L181">radio/radio-button/radio-button.component.ts:181</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/radio/radio-button/radio-button.component.ts#L148">lib/radio/radio-button/radio-button.component.ts:148</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

@@ -1,11 +1,13 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;null&gt;</p>
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;buttonfd-button, afd-button&gt;</p>
 	<div class="tsd-comment tsd-typography">
 		<div class="lead">
 			<p>Button directive, used to enhance standard HTML buttons.</p>
 		</div>
-		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-button</span>&gt;</span>Button Text<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></code></pre>
+		<p><code>selector: button[fd-button], a[fd-button]</code></p>
+		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-button</span>&gt;</span>Button Text<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">fd-button</span>&gt;</span>Button Text<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
 	</div>
 </section>
 <section class="tsd-panel tsd-hierarchy">
@@ -19,42 +21,61 @@
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnChanges</span></li>
 		<li><span class="tsd-signature-type">CssClassBuilder</span></li>
-		<li><span class="tsd-signature-type">CssStyleBuilder</span></li>
+		<li><span class="tsd-signature-type">OnInit</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="compact" class="tsd-anchor"></a>
-		<h3>compact</h3>
+		<a name="class" class="tsd-anchor"></a>
+		<h3>class</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<div class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
 		<aside class="tsd-sources">
+			<p>Implementation of <span>CssClassBuilder</span>.<span>class</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L44">button/button.component.ts:44</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L61">lib/button/button.component.ts:61</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Whether to apply compact mode to the button.</p>
+				<p>The property allows user to pass additional css classes</p>
 			</div>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="fdbuttonclass" class="tsd-anchor"></a>
-		<h3>fd<wbr>Button<wbr>Class</h3>
+		<a name="compact" class="tsd-anchor"></a>
+		<h3>compact</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">fd<wbr>Button<wbr>Class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L41">button/button.component.ts:41</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L74">lib/button/button.component.ts:74</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Defines if there will be added fd-button class. Enabled by default.</p>
+				<p>Whether to apply compact mode to the button.
+				Default value is set to false</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="fdmenu" class="tsd-anchor"></a>
+		<h3>fd<wbr>Menu</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fd<wbr>Menu<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L88">lib/button/button.component.ts:88</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to apply menu mode to the button.
+				Default value is set to false</p>
 			</div>
 		</div>
 	</section>
@@ -62,77 +83,68 @@
 		<a name="fdtype" class="tsd-anchor"></a>
 		<h3>fd<wbr>Type</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">fd<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ButtonType</span></div>
+		<div class="tsd-signature tsd-kind-icon">fd<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ButtonType</span><span class="tsd-signature-symbol"> = &quot;standard&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L48">button/button.component.ts:48</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L82">lib/button/button.component.ts:82</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>The type of the button. Types include &#39;standard&#39;, &#39;positive&#39;, &#39;medium&#39;, &#39;negative&#39;, &#39;half&#39;.
-				Leave empty for default (Action button).&#39;</p>
+				<p>The type of the button. Types include:
+					&#39;standard&#39; | &#39;positive&#39; | &#39;negative&#39; | &#39;attention&#39; | &#39;half&#39; | &#39;ghost&#39; | &#39;transparent&#39; | &#39;emphasized&#39; | &#39;menu&#39;.
+					Leave empty for default (Standard button).&#39;
+				Default value is set to &#39;standard&#39;</p>
 			</div>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="options" class="tsd-anchor"></a>
-		<h3>options</h3>
+		<a name="glyph" class="tsd-anchor"></a>
+		<h3>glyph</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ButtonOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ButtonOptions</span><span class="tsd-signature-symbol">[]</span></div>
+		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L54">button/button.component.ts:54</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L68">lib/button/button.component.ts:68</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Button options.  Options include &#39;emphasized&#39; and &#39;light&#39;. Leave empty for default.&#39;</p>
+				<p>The icon to include in the button. See the icon page for the list of icons.
+					Setter is used to control when css class have to be rebuilded.
+				Default value is set to &#39;&#39;.</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="class" class="tsd-anchor"></a>
-		<h3>class</h3>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="options" class="tsd-anchor"></a>
+		<h3>options</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> class<span class="tsd-signature-symbol">(</span>userClass<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">(</span>opt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ButtonOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ButtonOptions</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L25">button/button.component.ts:25</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L98">lib/button/button.component.ts:98</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Button options.  Options include &#39;emphasized&#39; and &#39;light&#39;. Leave empty for default.&#39;</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+						<dd><p>Will be removed in 0.17.0.
+							Use &#39;fdType&#39; instead.</p>
+						</dd>
+					</dl>
+				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>userClass: <span class="tsd-signature-type">string</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="glyph" class="tsd-anchor"></a>
-		<h3>glyph</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> glyph<span class="tsd-signature-symbol">(</span>icon<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L34">button/button.component.ts:34</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>icon: <span class="tsd-signature-type">string</span></h5>
+						<h5>opt: <span class="tsd-signature-type">ButtonOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ButtonOptions</span><span class="tsd-signature-symbol">[]</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -154,29 +166,10 @@
 				<aside class="tsd-sources">
 					<p>Implementation of <span>CssClassBuilder</span>.<span>buildComponentCssClass</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L77">button/button.component.ts:77</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L124">lib/button/button.component.ts:124</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="buildcomponentcssstyle" class="tsd-anchor"></a>
-		<h3>build<wbr>Component<wbr>Css<wbr>Style</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">build<wbr>Component<wbr>Css<wbr>Style<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Hash</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>CssStyleBuilder</span>.<span>buildComponentCssStyle</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L94">button/button.component.ts:94</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Hash</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -190,9 +183,9 @@
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
-					<p>Implementation of <span>CssStyleBuilder</span>.<span>elementRef</span></p>
+					<p>Implementation of <span>CssClassBuilder</span>.<span>elementRef</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L102">button/button.component.ts:102</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L141">lib/button/button.component.ts:141</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -202,6 +195,31 @@
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="ngonchanges" class="tsd-anchor"></a>
+		<h3>ng<wbr>OnChanges</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnChanges<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L111">lib/button/button.component.ts:111</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Function runs when component is initialized
+							function should build component css class
+						function should build css style</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -216,16 +234,9 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8877b24e/libs/core/src/lib/button/button.component.ts#L67">button/button.component.ts:67</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/97d68168/libs/core/src/lib/button/button.component.ts#L115">lib/button/button.component.ts:115</a></li>
 					</ul>
 				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Function runs when component is initialized
-							function should build component css class
-						function should build css style</p>
-					</div>
-				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>

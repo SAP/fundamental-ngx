@@ -23,19 +23,19 @@
 		<li><a href="#8">8. License</a></li>
 		<li><a href="#9">9. Similar Projects</a></li>
 	</ul>
-	<a href="#a-name1a1-description" id="a-name1a1-description" style="color: inherit; text-decoration: none;">
+	<a href="#1-description" id="1-description" style="color: inherit; text-decoration: none;">
 		<h2><a name="1"></a>1. Description</h2>
 	</a>
 	<p>The <code>@fundamental-ngx/core</code> library is a set of <a href="https://angular.io/">Angular</a> components built using <a href="https://sap.github.io/fundamental-styles/">SAP Fundamental Styles</a>.</p>
 	<p>The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.</p>
 	<p>See <a href="https://sap.github.io/fundamental-ngx/docs/home">Component Documentation</a> for examples and API details.</p>
-	<a href="#a-name2a2-requirements" id="a-name2a2-requirements" style="color: inherit; text-decoration: none;">
+	<a href="#2-requirements" id="2-requirements" style="color: inherit; text-decoration: none;">
 		<h2><a name="2"></a>2. Requirements</h2>
 	</a>
 	<p>To download and use Fundamental Library for Angular, you will first need to install the <a href="https://www.npmjs.com/get-npm">node package manager</a>.</p>
 	<p>Fundamental Library for Angular is intended for use with Angular 8 or newer.</p>
 	<p>Prior knowledge of Angular is recommended, to use the fundamental-ngx library.</p>
-	<a href="#a-name3a3-versioning" id="a-name3a3-versioning" style="color: inherit; text-decoration: none;">
+	<a href="#3-versioning" id="3-versioning" style="color: inherit; text-decoration: none;">
 		<h2><a name="3"></a>3. Versioning</h2>
 	</a>
 	<p>npm package <a href="https://npmjs.com/package/fundamental-ngx">fundamental-ngx</a> version <code>0.10.0</code> is compiled with Angular 7. It supports Angular 6 and 7 versions.
@@ -47,7 +47,7 @@
 	<p>npm package <a href="https://www.npmjs.com/package/@fundamental-ngx/core">@fundamental-ngx/core</a> version <code>0.13.z</code> is compiled with Angular 8.
 	It supports the current Angular 8 version and newer. This version also can be used along with enabled IVY.</p>
 	<p>Check the <a href="https://github.com/SAP/fundamental-ngx/wiki#breaking-changes">Breaking Changes</a> for the latest patches changes.</p>
-	<a href="#a-name4a4-getting-started" id="a-name4a4-getting-started" style="color: inherit; text-decoration: none;">
+	<a href="#4-getting-started" id="4-getting-started" style="color: inherit; text-decoration: none;">
 		<h2><a name="4"></a>4. Getting Started</h2>
 	</a>
 	<p>For an existing Angular CLI application,</p>
@@ -60,10 +60,8 @@
 			For models prior to 0.10 use <code>fundamental-ngx</code></p>
 			<p> <em>If you do not use the Angular CLI or if this command does not work for you, please see the <a href="https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide">full installation guide</a>.</em></p>
 		</li>
-		<li><p><strong>Import fonts.css and icon.css</strong>
-			Open your application&#39;s <code>angular.json</code> and add the following to the <code>styles</code> array(s)</p>
-			<pre><code class="language-$json"> &quot;node_modules/fundamental-styles/dist/fonts.css&quot;,
- &quot;node_modules/fundamental-styles/dist/icon.css&quot;,</code></pre>
+		<li><p><strong>Edit your tsconfig.</strong>
+			Edit the <code>target</code> in your <code>tsconfig.json</code> to <code>es5</code>. The library is incompatible with later versions.</p>
 		</li>
 		<li><p><strong>Import the modules you want to use.</strong></p>
 			<p> To add the entire library, add the following import to your main application module.</p>
@@ -85,29 +83,33 @@
      imports: [CheckboxModule],
  })
  <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> { }</span></code></pre></li>
+		<li><p><strong>Provide the RtlService.</strong>
+				In your main application module, add <code>RtlService</code> to the list of providers. This service is needed to ensure proper right-to-left functionality for
+			users with their browser set to an RTL language.</p>
+		</li>
 		<li><p><strong>Add the component to your HTML.</strong></p>
 			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-checkbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Fundamental Ngx Checkbox"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fd-checkbox</span>&gt;</span></code></pre>
 		</li>
 	</ol>
-	<a href="#a-name5a5-known-issues" id="a-name5a5-known-issues" style="color: inherit; text-decoration: none;">
+	<a href="#5-known-issues" id="5-known-issues" style="color: inherit; text-decoration: none;">
 		<h2><a name="5"></a>5. Known Issues</h2>
 	</a>
 	<p>Please see <a href="https://github.com/SAP/fundamental-ngx/issues">Issues</a>.</p>
-	<a href="#a-name6a6-support" id="a-name6a6-support" style="color: inherit; text-decoration: none;">
+	<a href="#6-support" id="6-support" style="color: inherit; text-decoration: none;">
 		<h2><a name="6"></a>6. Support</h2>
 	</a>
 	<p>If you encounter an issue, you can <a href="https://github.com/SAP/fundamental-ngx/issues">create a ticket</a>.</p>
-	<a href="#a-name7a7-contributing" id="a-name7a7-contributing" style="color: inherit; text-decoration: none;">
+	<a href="#7-contributing" id="7-contributing" style="color: inherit; text-decoration: none;">
 		<h2><a name="7"></a>7. Contributing</h2>
 	</a>
 	<p>If you want to contribute, please check the <a href="https://github.com/SAP/fundamental-ngx/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> documentation for contribution guidelines. Please follow the <a href="https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit">Angular commit message guidelines</a>.</p>
 	<p>Check out the <a href="https://github.com/SAP/fundamental-ngx/blob/master/NEW_COMPONENT.md">NEW_COMPONENT.md</a> guide on building a new component for the library and creating the necessary documentation for your new component.</p>
-	<a href="#a-name8a8-license" id="a-name8a8-license" style="color: inherit; text-decoration: none;">
+	<a href="#8-license" id="8-license" style="color: inherit; text-decoration: none;">
 		<h2><a name="8"></a>8. License</h2>
 	</a>
 	<p>Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 	This file is licensed under the Apache Software License, v.2 except as noted otherwise in the <a href="https://github.com/SAP/fundamental-ngx/blob/master/LICENSE.txt">LICENSE file</a>.</p>
-	<a href="#a-name9a9-similar-projects" id="a-name9a9-similar-projects" style="color: inherit; text-decoration: none;">
+	<a href="#9-similar-projects" id="9-similar-projects" style="color: inherit; text-decoration: none;">
 		<h2><a name="9"></a>9. Similar Projects</h2>
 	</a>
 	<p><a href="https://github.com/SAP/fundamental-react">Fundamental-react</a> - React implementation of SAP Fundamental Styles</p>
