@@ -1,10 +1,10 @@
 <ul fd-list
-    [compact]="selectRef.compact"
+    [compact]="selectComponent.compact"
     [dropdownMode]="true"
-    [hasMessage]="selectRef.stateMessage">
+    [hasMessage]="!!selectComponent.stateMessage">
 
-    <li fd-list-message *ngIf="selectRef.stateMessage" [type]="selectRef.state">
-        {{selectRef.stateMessage}}
+    <li fd-list-message *ngIf="selectComponent.stateMessage" [type]="selectComponent.state">
+        {{selectComponent.stateMessage}}
     </li>
 
     <ng-content></ng-content>

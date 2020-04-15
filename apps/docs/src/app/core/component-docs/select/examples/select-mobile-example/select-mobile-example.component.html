@@ -1,8 +1,16 @@
-<fd-select #select
-           placeholder="Select an option"
+<fd-select placeholder="Select an option"
            [(value)]="selectedValue"
            [mobile]="true"
            (isOpenChange)="toggleDialog(dialogTemplate, $event)">
+
+    <ng-template #optionsTemplate>
+        <fd-select-mobile-list>
+            <fd-option *ngFor="let option of options" [value]="option">
+                {{option}}
+            </fd-option>
+        </fd-select-mobile-list>
+    </ng-template>
+
 </fd-select>
 
 <ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
@@ -13,13 +21,7 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <fd-select-mobile-option [selectRef]="select">
-                <fd-option *ngFor="let option of options"
-                           [selectRef]="select"
-                           [value]="option">
-                    {{option}}
-                </fd-option>
-            </fd-select-mobile-option>
+            <ng-container *ngTemplateOutlet="optionsTemplate"></ng-container>
         </fd-dialog-body>
     </fd-dialog>
 </ng-template>

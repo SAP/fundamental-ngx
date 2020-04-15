@@ -16,13 +16,14 @@ export class SelectMobileExampleComponent implements AfterViewInit, OnDestroy {
 
     ngAfterViewInit() {
         this._openDialog();
+        this.dialogRef.hide(true);
     }
 
     ngOnDestroy() {
         this.dialogRef.close();
     }
 
-    toggleDialog(dialogTemplate: TemplateRef<any>, isOpen: boolean) {
+    toggleDialog(dialogTemplate: TemplateRef<any>, isOpen: boolean): void {
         if (isOpen) {
             this.dialogRef.hide(false);
         } else {
@@ -30,12 +31,11 @@ export class SelectMobileExampleComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    private _openDialog() {
+    private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
             verticalPadding: false,
             backdropClickCloseable: false
         });
-        this.dialogRef.hide(true);
     }
 }

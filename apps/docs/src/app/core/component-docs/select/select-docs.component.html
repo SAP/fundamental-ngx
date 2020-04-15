@@ -56,7 +56,8 @@
     Custom View Value
 </fd-docs-section-title>
 <description>
-    The value which appears inside select control can be easily customized using OptionComponent <code>[viewValue]</code>
+    The value which appears inside select control can be easily customized using OptionComponent
+    <code>[viewValue]</code>
     input.
 </description>
 <component-example>
@@ -70,8 +71,25 @@
     Select in mobile mode
 </fd-docs-section-title>
 <description>
-    The select component allows to define <code>[maxHeight]</code>. It can be useful when there are a lot of options,
-    the select body is be scrollable. By default maximum height of select body is 45% of browsers window inner height.
+    To open Menu in mobile mode compose the Menu Component together with the Dialog Component.<br/>
+    There are a few important things to remember:
+    <ul>
+        <li>
+            Because of Select being tightly bind with Option it is important to keep the options in
+            view without instantiating and destroying them with every dialog open/close action. We can easily achieve
+            it by creating the Dialog once and using <code>DialogRef.hidden()</code> method to show/hide the dialog.
+        </li>
+
+        <li>
+            To get full Fiori3 experience in mobile mode, wrap select options in <code>fd-select-mobile-list</code>
+            component and set Select in mobile mode using <code>[mobile]="true"</code>.
+        </li>
+
+        <li>
+            Options template needs to be declared inside <code>fd-select</code> tags to properly configure element
+            injectors.
+        </li>
+    </ul>
 </description>
 <component-example>
     <fd-select-mobile-example></fd-select-mobile-example>
