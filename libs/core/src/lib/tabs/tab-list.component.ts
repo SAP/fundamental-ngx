@@ -1,5 +1,7 @@
 import {
-    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef,
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -14,11 +16,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TabPanelComponent } from './tab/tab-panel.component';
-import { merge, Subject, Subscription } from 'rxjs';
+import { merge, Subject, Subscription, timer } from 'rxjs';
 import { TabsService } from './tabs.service';
 import { filter, takeUntil } from 'rxjs/operators';
 
-export type TabModes = 'icon-only' | 'process' | 'filter'
+export type TabModes = 'icon-only' | 'process' | 'filter';
 
 export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
 
@@ -37,7 +39,6 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     providers: [TabsService]
 })
 export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
-
     /** @hidden */
     @ContentChildren(TabPanelComponent)
     panelTabs: QueryList<TabPanelComponent>;
@@ -72,10 +73,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 
-    constructor(
-        private _tabsService: TabsService,
-        private _changeRef: ChangeDetectorRef
-    ) {}
+    constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -104,14 +102,16 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
      */
     selectTab(tabIndex: number): void {
         if (this._isIndexInRange(tabIndex)) {
-            setTimeout(() => {
-                this.panelTabs.forEach((tab, index) => {
-                    tab.triggerExpandedPanel(index === tabIndex);
+            timer(10)
+                .pipe(takeUntil(this._onDestroy$))
+                .subscribe(() => {
+                    this.panelTabs.forEach((tab, index) => {
+                        tab.triggerExpandedPanel(index === tabIndex);
+                    });
+                    this.selectedIndex = tabIndex;
+                    this.selectedIndexChange.emit(tabIndex);
+                    this._detectChanges();
                 });
-                this.selectedIndex = tabIndex;
-                this.selectedIndexChange.emit(tabIndex);
-                this._detectChanges();
-            })
         }
     }
 
@@ -124,7 +124,11 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     /** @hidden */
     tabHeaderKeyHandler(index: number, event: any): void {
-        this._tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(tab => tab.nativeElement));
+        this._tabsService.tabHeaderKeyHandler(
+            index,
+            event,
+            this.tabLinks.map((tab) => tab.nativeElement)
+        );
     }
 
     /** @hidden */
@@ -132,10 +136,9 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
         this._tabsService.tabSelected
             .pipe(
                 takeUntil(this._onDestroy$),
-                filter(index => index !== this.selectedIndex)
+                filter((index) => index !== this.selectedIndex)
             )
-            .subscribe(index => this.selectTab(index))
-        ;
+            .subscribe((index) => this.selectTab(index));
     }
 
     /**
@@ -149,16 +152,14 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
                 takeUntil(this._onDestroy$),
                 filter(() => !this._isIndexInRange(this.selectedIndex) || this._isAnyTabExpanded())
             )
-            .subscribe(() => this._resetTabHook())
-        ;
+            .subscribe(() => this._resetTabHook());
     }
 
     /** @hidden */
     private _listenOnPropertiesChange(): void {
         merge(this._tabsService.tabPanelPropertyChanged, this.panelTabs.changes)
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._detectChanges())
-        ;
+            .subscribe(() => this._detectChanges());
     }
 
     /** @hidden */
@@ -168,7 +169,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     /** @hidden */
     private _isAnyTabExpanded(): boolean {
-        return !this.panelTabs.some(tab => tab.expanded);
+        return !this.panelTabs.some((tab) => tab.expanded);
     }
 
     /** @hidden */
