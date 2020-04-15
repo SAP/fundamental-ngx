@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.117"></a>
+# [0.16.0-rc.117](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.116...v0.16.0-rc.117) (2020-04-15)
+
+
+### Bug Fixes
+
+* settimeout replaced by observable timer ([#2360](https://github.com/SAP/fundamental-ngx/issues/2360)) ([c29faad](https://github.com/SAP/fundamental-ngx/commit/c29faad))
+
+
+
 <a name="0.16.0-rc.116"></a>
 # [0.16.0-rc.116](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.115...v0.16.0-rc.116) (2020-04-14)
 
