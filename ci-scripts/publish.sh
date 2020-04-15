@@ -22,6 +22,13 @@ elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Archive-release" ]]; then
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
   std_ver=$(npm run std-version)
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
+
+  if  [[ $release_tag == v* ]]; then
+    echo ""
+  else
+    release_tag="v$release_tag"
+  fi
+
   echo "New release version: $std_ver"
 
 elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
@@ -38,6 +45,13 @@ elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
   std_ver=$(npm run std-version)
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
+
+  if  [[ $release_tag == v* ]]; then
+    echo ""
+  else
+    release_tag="v$release_tag"
+  fi
+
   echo "New release version: $std_ver"
 
 else
