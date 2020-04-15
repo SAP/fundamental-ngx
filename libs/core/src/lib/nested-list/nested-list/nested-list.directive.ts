@@ -1,21 +1,19 @@
 import {
-    AfterContentInit,
-    ContentChildren,
+    AfterContentInit, ContentChildren,
     Directive,
-    ElementRef,
-    forwardRef,
+    ElementRef, forwardRef,
     HostBinding,
-    Input,
-    QueryList
+    Input, Optional, QueryList
 } from '@angular/core';
-import { NestedItemDirective } from '../nested-item/nested-item.directive';
-import { NestedListInterface } from './nested-list.interface';
 import { NestedListStateService } from '../nested-list-state.service';
+import { NestedItemDirective } from '../nested-item/nested-item.directive';
+import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]'
 })
-export class NestedListDirective implements AfterContentInit, NestedListInterface {
+export class NestedListDirective implements AfterContentInit {
 
     /** @hidden */
     @HostBinding('class.fd-nested-list')
@@ -37,7 +35,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
      * but it's used by services and NestedItemDirective by itself,
      */
     @ContentChildren(forwardRef(() => NestedItemDirective))
-    nestedItems: QueryList<NestedItemDirective>;
+    _nestedItems: QueryList<NestedItemDirective>;
 
     /** @hidden */
     @HostBinding('attr.aria-hidden')
@@ -45,9 +43,15 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     constructor(
+        @Optional() private _nestedItemService: NestedItemService,
         private nestedListStateService: NestedListStateService,
+        private nestedListKeyboardService: NestedListKeyboardService,
         private elementRef: ElementRef
-    ) {}
+    ) {
+        if (this._nestedItemService) {
+            this._nestedItemService.list = this;
+        }
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -56,6 +60,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         if (this.nestedListStateService.condensed) {
             nestedLevel = Math.min(...[nestedLevel, 2]);
         }
+        this._nestedItems.changes.subscribe(() => this.nestedListKeyboardService.refresh$.next());
         this.handleNestedLevel(nestedLevel);
     }
 

@@ -1,4 +1,5 @@
-import { Hash, ELEMENT_REF_EXCEPTION } from '../public_api';
+import { ELEMENT_REF_EXCEPTION  } from '../interfaces/has-element-ref.interface';
+import { Hash } from '../datatypes/hash.datatype';
 
 /**
  * Method decorator to apply css styles to a component through native element
