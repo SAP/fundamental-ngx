@@ -30,6 +30,9 @@ export class PlatformButtonDocsComponent implements OnInit {
                     compact: {
                         type: 'boolean'
                     },
+                    disabled: {
+                        type: 'boolean'
+                    },
                     width: {
                         type: 'string'
                     },
@@ -52,7 +55,9 @@ export class PlatformButtonDocsComponent implements OnInit {
             option: 'default',
             width: '100px',
             size: 'default',
-            icon: ''
+            icon: '',
+            compact: false,
+            disabled: false
 
         }
     };

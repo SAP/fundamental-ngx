@@ -4,8 +4,10 @@ import {
     Output,
     EventEmitter,
     ViewChild,
-    ElementRef
+    ElementRef,
+    ChangeDetectorRef
 } from '@angular/core';
+import { BaseComponent } from '../base';
 
 export type ButtonType =
     | ''
@@ -22,30 +24,26 @@ export type ButtonType =
     templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent {
+export class ButtonComponent extends BaseComponent {
+
     /** Option to make to button compact. */
     @Input()
     compact: boolean;
-
-    /** Option to truncate content of the button based on width. */
-    @Input()
-    width: string;
 
     /** The icon to include in the button */
     @Input()
     glyph: string;
 
-    /** Button is disabled on true. */
-    @Input()
-    disabled: boolean;
-
-    /** The type of the button. Types include 'standard','positive' and 'negative' etc.
+    /** The type of the button. Types includes
+    'standard','positive', 'negative', 'attention', 'ghost',
+     'transparent', 'emphasized','menu'.
      * Leave empty for default (standard button).'*/
     @Input()
     type: ButtonType;
 
+    /** Tooltip text to show when focused for more*/
     @Input()
-    fdType: ButtonType;
+    title?: string;
 
     /** Event sent when button is clicked */
     @Output()
@@ -54,13 +52,15 @@ export class ButtonComponent {
     @ViewChild('fdButton', { read: ElementRef, static: false })
     focusEl: ElementRef<HTMLElement>;
 
-    constructor() { }
+    constructor(protected _changeDetector: ChangeDetectorRef) {
+        super(_changeDetector);
+    }
 
     /**
      *  Handles button click
      */
-    public onBtnClick($event: any) {
-        this.buttonClicked.emit();
+    public onBtnClick(event: any) {
+        this.buttonClicked.emit(event);
     }
 
     /** @hidden */
