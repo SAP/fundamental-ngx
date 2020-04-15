@@ -34,13 +34,13 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** Check if the item element has any child */
     public get hasChildren(): boolean {
-        return !!(this.itemService && this.itemService.list);
+        return !!(this._itemService && this._itemService.list);
     }
 
     /** Get all of the children item elements */
     public get allChildrenItems(): NestedItemInterface[] {
-        if (this.itemService && this.itemService.list) {
-            return this.itemService.list._nestedItems.toArray()
+        if (this._itemService && this._itemService.list) {
+            return this._itemService.list.nestedItems.toArray()
         } else {
             return [];
         }
@@ -48,9 +48,8 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     constructor (
-        private itemService: NestedItemService,
-        private elementRef: ElementRef,
-        private keyboardService: NestedListKeyboardService
+        private _itemService: NestedItemService,
+        private _keyboardService: NestedListKeyboardService
     ) {}
 
     /** Whether item should be expanded */
@@ -93,8 +92,8 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         }
 
         // /** Pass this element to popover child item, to allow control `expanded` value */
-        if (this.itemService.popover) {
-            this.itemService.popover.parentItemElement = this;
+        if (this._itemService.popover) {
+            this._itemService.popover.parentItemElement = this;
         }
 
         /** Propagate initial open state to children */
@@ -147,20 +146,23 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     private propagateOpenChange(open: boolean): void {
         this._expanded = open;
 
+        /** Propagate to child link directive */
         if (this.linkItem) {
             this.linkItem.expanded = open;
         }
 
-        if (this.itemService.list) {
-            this.itemService.list.hidden = !open;
+        /** Propagate hidden flag to list component, that is passed from child */
+        if (this._itemService.list) {
+            this._itemService.list.hidden = !open;
         }
 
-        if (this.itemService.popover) {
-            this.itemService.popover.open = open;
+        /** Propagate open flag to popover list component, that is passed from child */
+        if (this._itemService.popover) {
+            this._itemService.popover.open = open;
         }
 
         /** Trigger event to provide keyboard support to new list of opened item element. */
-        this.keyboardService.refresh$.next();
+        this._keyboardService.refresh$.next();
         this.expandedChange.emit(open);
     }
 

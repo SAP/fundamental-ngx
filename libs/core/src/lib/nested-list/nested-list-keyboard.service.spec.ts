@@ -23,7 +23,7 @@ class MockNestedItem {
 }
 
 interface MockNestedList {
-    _nestedItems: {
+    nestedItems: {
         toArray: () => MockNestedItem[]
     };
 }
@@ -53,7 +53,7 @@ describe('NestedListKeyboardSupportService', () => {
 
     beforeEach(() => {
         object = {
-            _nestedItems: {
+            nestedItems: {
                 toArray: toArray
             }
         };

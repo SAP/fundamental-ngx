@@ -9,11 +9,12 @@ import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { NestedListInterface } from './nested-list.interface';
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]'
 })
-export class NestedListDirective implements AfterContentInit {
+export class NestedListDirective implements AfterContentInit, NestedListInterface {
 
     /** @hidden */
     @HostBinding('class.fd-nested-list')
@@ -35,7 +36,7 @@ export class NestedListDirective implements AfterContentInit {
      * but it's used by services and NestedItemDirective by itself,
      */
     @ContentChildren(forwardRef(() => NestedItemDirective))
-    _nestedItems: QueryList<NestedItemDirective>;
+    nestedItems: QueryList<NestedItemDirective>;
 
     /** @hidden */
     @HostBinding('attr.aria-hidden')
@@ -44,9 +45,9 @@ export class NestedListDirective implements AfterContentInit {
     /** @hidden */
     constructor(
         @Optional() private _nestedItemService: NestedItemService,
-        private nestedListStateService: NestedListStateService,
-        private nestedListKeyboardService: NestedListKeyboardService,
-        private elementRef: ElementRef
+        private _nestedListStateService: NestedListStateService,
+        private _nestedListKeyboardService: NestedListKeyboardService,
+        private _elementRef: ElementRef
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;
@@ -57,17 +58,17 @@ export class NestedListDirective implements AfterContentInit {
     ngAfterContentInit(): void {
         let nestedLevel: number = this.getNestedLevel();
         /** If there is condensed mode, maximum 2nd level class of nest can be added */
-        if (this.nestedListStateService.condensed) {
+        if (this._nestedListStateService.condensed) {
             nestedLevel = Math.min(...[nestedLevel, 2]);
         }
-        this._nestedItems.changes.subscribe(() => this.nestedListKeyboardService.refresh$.next());
+        this.nestedItems.changes.subscribe(() => this._nestedListKeyboardService.refresh$.next());
         this.handleNestedLevel(nestedLevel);
     }
 
     /** @hidden */
     private handleNestedLevel(level: number): void {
         /** Adding class with the nested level */
-        this.elementRef.nativeElement.classList.add('level-' + level);
+        this._elementRef.nativeElement.classList.add('level-' + level);
     }
 
     /**
@@ -75,7 +76,7 @@ export class NestedListDirective implements AfterContentInit {
      * Method, that checks how deep is the list element
      */
     private getNestedLevel(): number {
-        let element = this.elementRef.nativeElement;
+        let element = this._elementRef.nativeElement;
         const parentElements = [];
 
         /** Method that gathers all of the parentNode elements of current NestedListDirective element */

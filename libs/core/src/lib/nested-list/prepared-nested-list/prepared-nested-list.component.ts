@@ -57,16 +57,16 @@ export class PreparedNestedListComponent implements AfterViewInit {
 
     /** @hidden */
     constructor (
-        private changeDetRef: ChangeDetectorRef,
+        private _changeDetRef: ChangeDetectorRef,
         @Optional() private _nestedItemService: NestedItemService
     ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.changeDetRef.markForCheck();
-        this.changeDetRef.detectChanges();
+        this._changeDetRef.markForCheck();
+        this._changeDetRef.detectChanges();
 
-        /** TODO */
+        /** If any item above, pass list directive reference to it */
         if (this._nestedItemService) {
             this._nestedItemService.list = this.nestedListDirective
         }

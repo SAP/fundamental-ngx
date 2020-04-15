@@ -76,7 +76,7 @@ describe('NestedItemDirective', () => {
         nestedItemListDirective = component.nestedItemListDirective;
         emptyItemDirective = component.emptyItemDirective;
         nestedItemPopoverDirective = component.nestedItemPopoverDirective;
-        itemService = (<any>nestedItemPopoverDirective).itemService;
+        itemService = (<any>nestedItemPopoverDirective)._itemService;
         fixture.detectChanges();
     });
 
