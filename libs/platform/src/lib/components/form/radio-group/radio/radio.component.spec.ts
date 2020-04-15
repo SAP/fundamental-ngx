@@ -72,7 +72,6 @@ describe('RadioButtonComponent', () => {
         component.name = 'radio1';
         component.value = 'radio1';
         component.size = 'compact';
-        component.state = 'valid';
         component.disabled = true;
 
         // forceRendere must be true for component creation

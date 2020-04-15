@@ -10,5 +10,5 @@ export const API_FILES = {
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
     link: ['LinkComponent'],
     searchField: ['SearchFieldComponent'],
-    radioGroup: ['GroupRadioButtonComponent'],
+    radioGroup: ['RadioGroupComponent'],
 };

@@ -38,7 +38,7 @@ export class RadioButtonComponent extends BaseInput {
     set status(newStatus: Status) {
         this._status = newStatus;
         this.state = newStatus;
-        if (newStatus !== 'error' || newStatus !== 'error') {
+        if (newStatus !== 'error' && newStatus !== 'warning') {
             this.state = 'default';
         }
         this._cd.markForCheck();
