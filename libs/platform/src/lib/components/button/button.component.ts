@@ -7,9 +7,16 @@ import {
     ElementRef
 } from '@angular/core';
 
-export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main';
-export type ButtonOptions = 'light' | 'emphasized' | '';
-
+export type ButtonType =
+    | ''
+    | 'standard'
+    | 'positive'
+    | 'negative'
+    | 'attention'
+    | 'ghost'
+    | 'transparent'
+    | 'emphasized'
+    | 'menu';
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
@@ -32,17 +39,13 @@ export class ButtonComponent {
     @Input()
     disabled: boolean;
 
-    /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
-     * Leave empty for default (Action button).'*/
+    /** The type of the button. Types include 'standard','positive' and 'negative' etc.
+     * Leave empty for default (standard button).'*/
     @Input()
     type: ButtonType;
 
     @Input()
     fdType: ButtonType;
-
-    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input()
-    options: ButtonOptions | ButtonOptions[];
 
     /** Event sent when button is clicked */
     @Output()
