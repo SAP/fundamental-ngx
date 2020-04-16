@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './popover-triggers.component.html',
     styleUrls: ['./popover-triggers.component.scss']
 })
-export class PopoverTriggersComponent {
-
-}
+export class PopoverTriggersComponent {}

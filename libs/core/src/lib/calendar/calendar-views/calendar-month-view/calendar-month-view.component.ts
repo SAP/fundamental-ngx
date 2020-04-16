@@ -28,7 +28,6 @@ import { CalendarService } from '../../calendar.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarMonthViewComponent implements OnInit, OnDestroy {
-
     /** A number offset used to achieve the 1-12 representation of the calendar */
     private readonly _monthOffset: number = 1;
 
@@ -150,20 +149,14 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         this._calendarService.colAmount = this._amountOfColPerRow;
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-
         this._calendarService.onFocusIdChange
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(index => this.focusElement('#' + this.getId(index)))
-        ;
+            .subscribe((index) => this.focusElement('#' + this.getId(index)));
 
         this._calendarService.onKeySelect
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(index => this.selectMonth(index))
-        ;
+            .subscribe((index) => this.selectMonth(index));
 
-        this._calendarI18n.i18nChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._refreshMonthNames())
-        ;
+        this._calendarI18n.i18nChange.pipe(takeUntil(this._onDestroy$)).subscribe(() => this._refreshMonthNames());
     }
 }

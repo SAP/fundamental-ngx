@@ -44,7 +44,7 @@ import { map } from 'rxjs/operators';
     templateUrl: 'split-button.component.html',
     styleUrls: ['./split-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class SplitButtonComponent {
     /** @hidden */
@@ -119,7 +119,7 @@ export class SplitButtonComponent {
     direction$: Observable<string>;
 
     constructor(@Optional() private rtlService: RtlService) {
-        this.direction$ = rtlService ? rtlService.rtl.pipe(map(isRtl => (isRtl ? 'rtl' : 'ltr'))) : of('ltr');
+        this.direction$ = rtlService ? rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'rtl' : 'ltr'))) : of('ltr');
     }
 
     /**

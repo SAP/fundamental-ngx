@@ -16,6 +16,5 @@ import { Component } from '@angular/core';
     ]
 })
 export class SemanticSwitchExampleComponent {
-
     checked: boolean = false;
 }

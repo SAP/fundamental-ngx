@@ -13,10 +13,8 @@ import { NestedListStateService } from '../nested-list-state.service';
     `
 })
 class TestNestedContainerComponent {
-
     @ViewChild('directiveElement', { static: true, read: NestedLinkDirective })
     directiveElement: NestedLinkDirective;
-
 }
 
 describe('NestedLinkDirective', () => {
@@ -28,9 +26,8 @@ describe('NestedLinkDirective', () => {
         TestBed.configureTestingModule({
             imports: [NestedListModule],
             declarations: [TestNestedContainerComponent],
-            providers: [ NestedListStateService ]
-        })
-            .compileComponents();
+            providers: [NestedListStateService]
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -43,7 +40,7 @@ describe('NestedLinkDirective', () => {
 
     it('Should return good information', () => {
         expect(directiveElement.getTitle()).toBe('Link 1');
-        expect(directiveElement.hasChildren).toBeFalsy()
+        expect(directiveElement.hasChildren).toBeFalsy();
     });
 
     it('Should have good classes', () => {
@@ -55,7 +52,5 @@ describe('NestedLinkDirective', () => {
         expect((directiveElement as any).elementRef.nativeElement.classList.contains('is-expanded')).toBeTruthy();
         expect((directiveElement as any).elementRef.nativeElement.classList.contains('is-selected')).toBeTruthy();
         expect((directiveElement as any).elementRef.nativeElement.classList.contains('has-child')).toBeTruthy();
-
     });
-
-})
+});

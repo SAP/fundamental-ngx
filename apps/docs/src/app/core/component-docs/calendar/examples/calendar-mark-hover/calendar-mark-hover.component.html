@@ -1,12 +1,8 @@
-<fd-calendar
-    [rangeHoverEffect]="true"
-    [calType]="'range'"
-    [(ngModel)]="rangeDate"
-></fd-calendar>
-<br/>
-<br/>
+<fd-calendar [rangeHoverEffect]="true" [calType]="'range'" [(ngModel)]="rangeDate"></fd-calendar>
+<br />
+<br />
 Start:
 {{ rangeDate.start.toDateString() }}
-<br/>
+<br />
 End:
 {{ rangeDate.end.toDateString() }}

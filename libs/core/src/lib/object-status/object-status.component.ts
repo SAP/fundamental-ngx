@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, ViewEncapsulation, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    ViewEncapsulation,
+    OnInit
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
@@ -9,7 +17,7 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     template: `<ng-content></ng-content>`,
     styleUrls: ['./object-status.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -50,7 +58,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     large: boolean = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -76,7 +84,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.indicationColor ? `fd-object-status--indication-${this.indicationColor}` : '',
             this.clickable ? 'fd-object-status--link' : '',
-            this.class,
+            this.class
         ]
             .filter((x) => x !== '')
             .join(' ');

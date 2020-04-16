@@ -11,7 +11,16 @@ import { InputGroupModule } from '../input-group/input-group.module';
 
 @NgModule({
     declarations: [DatetimePickerComponent],
-    imports: [CommonModule, IconModule, PopoverModule, CalendarModule, FormsModule, TimeModule, InputGroupModule, ButtonModule],
+    imports: [
+        CommonModule,
+        IconModule,
+        PopoverModule,
+        CalendarModule,
+        FormsModule,
+        TimeModule,
+        InputGroupModule,
+        ButtonModule
+    ],
     exports: [DatetimePickerComponent]
 })
 export class DatetimePickerModule {}

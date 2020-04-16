@@ -4,12 +4,9 @@ import { CalendarYearGrid, FdDate, SpecialDayRule } from '@fundamental-ngx/core'
 @Component({
     selector: 'fd-calendar-single-example',
     template: `
-        <fd-calendar [calType]="'single'"
-                     [(ngModel)]="date"
-                     [disableFunction]="myDisableFunction">
-        </fd-calendar>
-        <br/>
-        <div>Selected Date: {{date.toDateString()}}</div>
+        <fd-calendar [calType]="'single'" [(ngModel)]="date" [disableFunction]="myDisableFunction"> </fd-calendar>
+        <br />
+        <div>Selected Date: {{ date.toDateString() }}</div>
         <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
     `,
     styles: [
@@ -21,7 +18,6 @@ import { CalendarYearGrid, FdDate, SpecialDayRule } from '@fundamental-ngx/core'
     ]
 })
 export class CalendarSingleExampleComponent {
-
     date = FdDate.getToday();
 
     myDisableFunction = function (d: FdDate): boolean {

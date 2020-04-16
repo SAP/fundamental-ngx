@@ -14,14 +14,9 @@ describe('LocalizatorEditorComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                CommonModule, PopoverModule, FormModule, InputGroupModule, MenuModule, ButtonModule,
-            ],
-            declarations: [
-                LocalizationEditorComponent
-            ]
-        })
-            .compileComponents();
+            imports: [CommonModule, PopoverModule, FormModule, InputGroupModule, MenuModule, ButtonModule],
+            declarations: [LocalizationEditorComponent]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

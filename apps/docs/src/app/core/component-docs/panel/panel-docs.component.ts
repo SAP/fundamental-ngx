@@ -10,19 +10,21 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './panel-docs.component.html'
 })
 export class PanelDocsComponent {
+    panelBasic: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'panel-example',
+            code: panelSrc
+        }
+    ];
 
-    panelBasic: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'panel-example',
-        code: panelSrc,
-    }];
-
-    tableBleed: ExampleFile[] = [{
-        language: 'html',
-        component: 'PanelEdgeBleedExampleComponent',
-        code: panelEdgeBleedSrc,
-        fileName: 'panel-edge-bleed-example',
-        typescriptFileCode: panelEdgeBleedSrcTs
-    }];
-
+    tableBleed: ExampleFile[] = [
+        {
+            language: 'html',
+            component: 'PanelEdgeBleedExampleComponent',
+            code: panelEdgeBleedSrc,
+            fileName: 'panel-edge-bleed-example',
+            typescriptFileCode: panelEdgeBleedSrcTs
+        }
+    ];
 }

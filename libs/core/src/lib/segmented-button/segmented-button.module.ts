@@ -9,4 +9,4 @@ import { SegmentedButtonDirective } from './segmented-button.directive';
     exports: [SegmentedButtonComponent, SegmentedButtonDirective],
     declarations: [SegmentedButtonComponent, SegmentedButtonDirective]
 })
-export class SegmentedButtonModule { }
+export class SegmentedButtonModule {}

@@ -15,11 +15,10 @@ import { NestedListTitleDirective } from '../nested-list-directives';
 @Directive({
     selector: '[fdNestedLink], [fd-nested-list-link]',
     host: {
-        'tabindex': '0',
+        tabindex: '0'
     }
 })
 export class NestedLinkDirective implements OnInit {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list__link')
     fdNestedListItemClass: boolean = true;
@@ -75,20 +74,14 @@ export class NestedLinkDirective implements OnInit {
     }
 
     /** @hidden */
-    constructor(
-        private renderer: Renderer2,
-        private elementRef: ElementRef,
-        public changeDetRef: ChangeDetectorRef
-    ) {}
+    constructor(private renderer: Renderer2, private elementRef: ElementRef, public changeDetRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnInit(): void {
         /** Add event listeners on the element */
 
         /** Keyboard */
-        this.renderer.listen(this.elementRef.nativeElement, 'keydown', (event) =>
-            this.keyboardTriggered.emit(event)
-        );
+        this.renderer.listen(this.elementRef.nativeElement, 'keydown', (event) => this.keyboardTriggered.emit(event));
 
         /** Mouse Click */
         this.renderer.listen(this.elementRef.nativeElement, 'click', (event) => {
@@ -103,5 +96,4 @@ export class NestedLinkDirective implements OnInit {
     getTitle(): string {
         return this.title && this.title.getInnerText();
     }
-
 }

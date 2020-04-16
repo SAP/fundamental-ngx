@@ -8,20 +8,8 @@ import { BarRightDirective } from './directives/bar-right.directive';
 import { BarElementDirective } from './directives/bar-element.directive';
 
 @NgModule({
-    declarations: [
-        BarComponent,
-        BarLeftDirective,
-        BarMiddleDirective,
-        BarRightDirective,
-        BarElementDirective
-    ],
+    declarations: [BarComponent, BarLeftDirective, BarMiddleDirective, BarRightDirective, BarElementDirective],
     imports: [CommonModule],
-    exports: [
-        BarComponent,
-        BarLeftDirective,
-        BarMiddleDirective,
-        BarRightDirective,
-        BarElementDirective
-    ]
+    exports: [BarComponent, BarLeftDirective, BarMiddleDirective, BarRightDirective, BarElementDirective]
 })
-export class BarModule { }
+export class BarModule {}

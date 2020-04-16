@@ -20,7 +20,6 @@ export class ProductSwitchDocsComponent {
             language: 'html',
             code: productSwitchDndH,
             fileName: 'product-switch-dnd-example'
-
         },
         {
             language: 'typescript',
@@ -34,8 +33,7 @@ export class ProductSwitchDocsComponent {
         {
             language: 'html',
             code: smallProductSwitchH,
-            fileName: 'product-switch-small-example',
-
+            fileName: 'product-switch-small-example'
         },
         {
             language: 'typescript',
@@ -49,7 +47,7 @@ export class ProductSwitchDocsComponent {
         {
             language: 'html',
             code: listProductSwitchH,
-            fileName: 'product-switch-list-example',
+            fileName: 'product-switch-list-example'
         },
         {
             language: 'typescript',
@@ -58,5 +56,4 @@ export class ProductSwitchDocsComponent {
             component: 'ProductSwitchListComponent'
         }
     ];
-
 }

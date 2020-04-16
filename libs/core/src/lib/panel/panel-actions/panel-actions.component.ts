@@ -20,7 +20,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelActionsComponent {
-
     /** @hidden */
     @HostBinding('class.fd-panel__actions')
     fdPanelActionsClass: boolean = true;

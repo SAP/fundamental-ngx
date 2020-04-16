@@ -9,8 +9,7 @@ describe('NotificationGroupComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [NotificationGroupComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

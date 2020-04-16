@@ -13,7 +13,7 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     private _elementRef: ElementRef;
 
     /** @hidden */
-    @Input() class: string // user's custom classes
+    @Input() class: string; // user's custom classes
 
     /*
      each directive that extends this class will implement this function and populate it with one or more calls to

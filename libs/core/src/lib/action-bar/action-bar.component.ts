@@ -16,8 +16,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-action-bar]',
-    template: `
-        <ng-content></ng-content>`,
+    template: ` <ng-content></ng-content>`,
     host: {
         class: 'fd-action-bar'
     },
@@ -25,5 +24,4 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActionBarComponent {
-}
+export class ActionBarComponent {}

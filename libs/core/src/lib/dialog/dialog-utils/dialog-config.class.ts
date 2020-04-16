@@ -9,7 +9,6 @@ export const DIALOG_CONFIG = new InjectionToken<string[]>('DialogConfig');
 export const DIALOG_DEFAULT_CONFIG = new InjectionToken<string[]>('DialogConfig');
 
 export class DialogConfig implements DynamicComponentConfig {
-
     /** Id for the dialog component. If omitted, a unique one is generated. */
     id?: string;
 

@@ -3,9 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionBarModule } from './action-bar.module';
 
 @Component({
-    template: `
-        <div #componentElement fd-action-bar>Action Bar Parent Test Text</div>
-    `
+    template: ` <div #componentElement fd-action-bar>Action Bar Parent Test Text</div> `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })

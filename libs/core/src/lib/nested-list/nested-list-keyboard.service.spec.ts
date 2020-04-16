@@ -16,40 +16,31 @@ class MockNestedItem {
     focus = () => {};
     click = () => {};
 
-    constructor(
-        readonly allChildrenItems: MockNestedItem[] = [],
-        public expanded: boolean = true
-    ) {}
+    constructor(readonly allChildrenItems: MockNestedItem[] = [], public expanded: boolean = true) {}
 }
 
 interface MockNestedList {
     nestedItems: {
-        toArray: () => MockNestedItem[]
+        toArray: () => MockNestedItem[];
     };
 }
 
 describe('NestedListKeyboardSupportService', () => {
-
     let object: MockNestedList;
 
     let service: NestedListKeyboardService;
 
     const toArray = () => [
-        new MockNestedItem(
-            [
-                new MockNestedItem(),
-                new MockNestedItem(),
-                new MockNestedItem([
-                    new MockNestedItem(),
-                    new MockNestedItem()
-                ])
-            ]
-        ),
+        new MockNestedItem([
+            new MockNestedItem(),
+            new MockNestedItem(),
+            new MockNestedItem([new MockNestedItem(), new MockNestedItem()])
+        ]),
         new MockNestedItem(),
         new MockNestedItem(),
         new MockNestedItem(),
         new MockNestedItem()
-    ]
+    ];
 
     beforeEach(() => {
         object = {
@@ -58,18 +49,15 @@ describe('NestedListKeyboardSupportService', () => {
             }
         };
         service = new NestedListKeyboardService(new MenuKeyboardService());
-
     });
 
-    it ('Should return all of the items', () => {
-
+    it('Should return all of the items', () => {
         const resultItems = (service as any).getAllListItems(<any>object);
 
         expect(resultItems.length).toBe(10);
     });
 
-    it ('Should handle focus other element', () => {
-
+    it('Should handle focus other element', () => {
         const items = (<any>service).getAllListItems(<any>object);
 
         spyOn(items[1], 'focus').and.callThrough();
@@ -79,11 +67,9 @@ describe('NestedListKeyboardSupportService', () => {
         (<any>service).handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[1].focus).toHaveBeenCalled();
-
     });
 
-    it ('Should handle open trigger on element', () => {
-
+    it('Should handle open trigger on element', () => {
         const items = (<any>service).getAllListItems(<any>object);
 
         items[0].expanded = false;
@@ -99,11 +85,9 @@ describe('NestedListKeyboardSupportService', () => {
 
         expect(items[1].focus).not.toHaveBeenCalled();
         expect(items[0].triggerOpen).toHaveBeenCalled();
-
     });
 
-    it ('Should handle close trigger on element', () => {
-
+    it('Should handle close trigger on element', () => {
         const items = (<any>service).getAllListItems(<any>object);
 
         items[0].expanded = true;
@@ -119,11 +103,9 @@ describe('NestedListKeyboardSupportService', () => {
 
         expect(items[9].focus).not.toHaveBeenCalled();
         expect(items[0].triggerClose).toHaveBeenCalled();
-
     });
 
-    it ('Should focus last element', () => {
-
+    it('Should focus last element', () => {
         const items = (<any>service).getAllListItems(<any>object);
 
         items[0].expanded = false;
@@ -136,11 +118,9 @@ describe('NestedListKeyboardSupportService', () => {
         (<any>service).handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[items.length - 1].focus).toHaveBeenCalled();
-
     });
 
-    it ('Should focus first element', () => {
-
+    it('Should focus first element', () => {
         const items = (<any>service).getAllListItems(<any>object);
 
         items[items.length - 1].expanded = false;
@@ -153,7 +133,5 @@ describe('NestedListKeyboardSupportService', () => {
         (<any>service).handleKeyDown(keyboardEvent, items.length - 1, items);
 
         expect(items[0].focus).toHaveBeenCalled();
-
     });
-
 });

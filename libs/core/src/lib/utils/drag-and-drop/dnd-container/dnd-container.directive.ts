@@ -1,9 +1,4 @@
-import {
-    AfterContentInit,
-    ContentChild, Directive,
-    ElementRef, EventEmitter, Input,
-    Output
-} from '@angular/core';
+import { AfterContentInit, ContentChild, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
 
@@ -11,11 +6,10 @@ import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-dnd-container]',
     host: {
-        'class': 'fd-dnd-container'
+        class: 'fd-dnd-container'
     }
 })
 export class DndContainerDirective implements AfterContentInit {
-
     /** Class added to element, when it's dragged. */
     readonly CLASS_WHEN_ELEMENT_DRAGGED: string = 'fd-dnd-on-drag';
 
@@ -41,13 +35,10 @@ export class DndContainerDirective implements AfterContentInit {
     @ContentChild(CdkDrag)
     cdkDrag: CdkDrag;
 
-    constructor(
-        public element: ElementRef,
-    ) {}
+    constructor(public element: ElementRef) {}
 
     /** @hidden */
     public getElementChord(isBefore: boolean, listMode: boolean): ElementChord {
-
         /** Takes distance from the beginning of window page */
         const rect = <DOMRect>this.element.nativeElement.getBoundingClientRect();
 
@@ -60,7 +51,7 @@ export class DndContainerDirective implements AfterContentInit {
         return {
             x: x,
             position: position,
-            y: rect.top + (this.element.nativeElement.offsetHeight / 2),
+            y: rect.top + this.element.nativeElement.offsetHeight / 2,
             stickToPosition: this.stickInPlace
         };
     }

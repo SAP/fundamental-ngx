@@ -5,7 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-test-info-label',
-    template: `<span fd-info-label>info Label</span>`,
+    template: `<span fd-info-label>info Label</span>`
 })
 class TestInfoLabelComponent {
     @ViewChild(InfoLabelComponent, { static: true })
@@ -18,7 +18,7 @@ describe('InfoLabelComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [InfoLabelComponent, TestInfoLabelComponent],
+            declarations: [InfoLabelComponent, TestInfoLabelComponent]
         }).compileComponents();
     }));
 

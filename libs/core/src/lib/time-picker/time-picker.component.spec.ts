@@ -10,8 +10,6 @@ import { TimeObject } from '../time/time-object';
 import { ButtonModule } from '../button/button.module';
 import { TimeModule } from '../time/time.module';
 
-
-
 describe('TimePickerComponent', () => {
     let component: TimePickerComponent;
     let fixture: ComponentFixture<TimePickerComponent>;
@@ -222,7 +220,7 @@ describe('TimePickerComponent', () => {
     it('should handle input group click', () => {
         component.isOpen = false;
         component.disabled = false;
-        const event = { stopPropagation: function() {} };
+        const event = { stopPropagation: function () {} };
         spyOn(event, 'stopPropagation').and.callThrough();
         component.inputGroupClicked(event);
         expect(event.stopPropagation).toHaveBeenCalled();
@@ -231,7 +229,7 @@ describe('TimePickerComponent', () => {
 
     it('should handle addon button click', () => {
         component.disabled = false;
-        const event = { stopPropagation: function() {} };
+        const event = { stopPropagation: function () {} };
         spyOn(event, 'stopPropagation').and.callThrough();
         component.addOnButtonClicked();
         expect(component.isOpen).toBe(true);
@@ -279,7 +277,7 @@ describe('TimePickerComponent', () => {
 
     it('should call onChange when time from time picker changes', () => {
         spyOn(component, 'onChange');
-        component.time = {hour: 12, minute: 0, second: 0};
+        component.time = { hour: 12, minute: 0, second: 0 };
         component.timeFromTimeComponentChanged();
         expect(component.onChange).toHaveBeenCalledWith(component.time);
     });

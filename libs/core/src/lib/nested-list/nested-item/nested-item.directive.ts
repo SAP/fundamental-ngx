@@ -20,7 +20,6 @@ import { PreparedNestedListComponent } from '../prepared-nested-list/prepared-ne
     selector: '[fdNestedItem], [fd-nested-list-item]'
 })
 export class NestedItemDirective implements AfterContentInit, NestedItemInterface {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list__item')
     fdNestedListItemClass: boolean = true;
@@ -54,21 +53,16 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         if (this.nestedListItem && this.nestedListItem.nestedItems) {
             /** Get elements from child list */
             return this.nestedListItem.nestedItems.toArray();
-
         } else if (this.nestedListFromPreparedComponent && this.nestedListFromPreparedComponent.nestedItems) {
             /** Get elements from child prepared list  component */
             return this.nestedListFromPreparedComponent.nestedItems.toArray();
-
         } else {
             return [];
         }
     }
 
     /** @hidden */
-    constructor (
-        private elementRef: ElementRef,
-        private keyboardService: NestedListKeyboardService
-    ) {}
+    constructor(private elementRef: ElementRef, private keyboardService: NestedListKeyboardService) {}
 
     /** Whether item should be expanded */
     @Input() set expanded(expanded: boolean) {
@@ -93,7 +87,6 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     ngAfterContentInit(): void {
-
         /** Propagate hasChildren property */
         if (this.hasChildren && this.linkItem) {
             this.linkItem.hasChildren = true;
@@ -105,9 +98,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
             this.linkItem.clicked.subscribe(() => this.toggle());
 
             /** Subscribe to keyboard event and throw it farther */
-            this.linkItem.keyboardTriggered.subscribe(keyboardEvent =>
-                this.keyboardTriggered.emit(keyboardEvent)
-            );
+            this.linkItem.keyboardTriggered.subscribe((keyboardEvent) => this.keyboardTriggered.emit(keyboardEvent));
         }
 
         /** Pass this element to popover child item, to allow control `expanded` value */
@@ -189,5 +180,4 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     private get nestedListFromPreparedComponent(): NestedListDirective {
         return this.preparedListComponent && this.preparedListComponent.nestedListDirective;
     }
-
 }

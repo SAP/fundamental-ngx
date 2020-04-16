@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    forwardRef,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
@@ -44,10 +51,10 @@ export class InputGroupNumberComponent implements ControlValueAccessor {
     inputTextValue: number;
 
     /** @hidden */
-    onChange: any = () => { };
+    onChange: any = () => {};
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {};
 
     /** Get the value of the text input. */
     get inputText() {
@@ -62,9 +69,7 @@ export class InputGroupNumberComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    constructor(
-        private changeDetectorRef: ChangeDetectorRef
-    ) {}
+    constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     writeValue(value: any) {

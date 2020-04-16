@@ -114,9 +114,8 @@ export class DatePickerDocsComponent {
             component: 'DatePickerRangeDisabledExampleComponent',
             code: datePickerRangeDisableH,
             fileName: 'fd-date-picker-range-disabled-example'
-        },
+        }
     ];
-
 
     datePickerSingleDisable: ExampleFile[] = [
         {
@@ -130,7 +129,7 @@ export class DatePickerDocsComponent {
             component: 'DatePickerDisableFuncExampleComponent',
             code: datePickerSingleDisableH,
             fileName: 'fd-date-picker-disable-func-example'
-        },
+        }
     ];
 
     datePickerComplexI18n: ExampleFile[] = [
@@ -145,6 +144,6 @@ export class DatePickerDocsComponent {
             component: 'DatePickerComplexI18nExampleComponent',
             code: datePickerComplexI18nSrcH,
             fileName: 'date-picker-complex-i18n-example'
-        },
+        }
     ];
 }

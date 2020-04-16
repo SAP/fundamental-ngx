@@ -1,5 +1,4 @@
 export interface DynamicComponentConfig {
-
     /** Data to pass along to the content through the dynamic component reference service. */
     data?: any;
 

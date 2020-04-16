@@ -1,14 +1,14 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {FileInputHeaderComponent} from './file-input-header/file-input-header.component';
-import {FileInputDocsComponent} from './file-input-docs.component';
-import {API_FILES} from '../../api-files';
-import {FileInputExampleComponent} from './examples/file-input-example/file-input-example.component';
-import {FileInputCustomExampleComponent} from './examples/file-input-custom-example/file-input-custom-example.component';
-import {FileInputDragDisabledExampleComponent} from './examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
-import {FileInputMaxExampleComponent} from './examples/file-input-max-example/file-input-max-example.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { FileInputHeaderComponent } from './file-input-header/file-input-header.component';
+import { FileInputDocsComponent } from './file-input-docs.component';
+import { API_FILES } from '../../api-files';
+import { FileInputExampleComponent } from './examples/file-input-example/file-input-example.component';
+import { FileInputCustomExampleComponent } from './examples/file-input-custom-example/file-input-custom-example.component';
+import { FileInputDragDisabledExampleComponent } from './examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
+import { FileInputMaxExampleComponent } from './examples/file-input-max-example/file-input-max-example.component';
 import { FileInputModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -23,11 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        FileInputModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FileInputModule],
     exports: [RouterModule],
     declarations: [
         FileInputDocsComponent,
@@ -35,8 +31,7 @@ const routes: Routes = [
         FileInputExampleComponent,
         FileInputMaxExampleComponent,
         FileInputCustomExampleComponent,
-        FileInputDragDisabledExampleComponent,
+        FileInputDragDisabledExampleComponent
     ]
 })
-export class FileInputDocsModule {
-}
+export class FileInputDocsModule {}

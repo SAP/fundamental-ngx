@@ -9,8 +9,7 @@ describe('OptionComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [OptionComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -51,7 +50,7 @@ describe('OptionComponent', () => {
     it('should be selectable by keyboard', () => {
         spyOn(component, 'selectionHandler').and.callThrough();
         spyOn(component.selectedChange, 'emit');
-        component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+        component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         expect(component.selectionHandler).toHaveBeenCalled();
         expect(component.selectedChange.emit).toHaveBeenCalled();
         expect(component.selected).toBe(true);
@@ -62,12 +61,12 @@ describe('OptionComponent', () => {
         component.disabled = true;
         component.selectionHandler();
         expect(component.selectedChange.emit).not.toHaveBeenCalled();
-    })
+    });
 
     it('should support custom view value', () => {
         component.value = 'value';
         expect(component.viewValueText).toBeFalsy();
         component.viewValue = 'viewValue';
-        expect(component.viewValueText).toBe('viewValue')
+        expect(component.viewValueText).toBe('viewValue');
     });
 });

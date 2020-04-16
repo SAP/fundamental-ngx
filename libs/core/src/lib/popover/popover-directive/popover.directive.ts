@@ -4,8 +4,19 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     Directive,
-    ElementRef, EmbeddedViewRef, EventEmitter, HostBinding, HostListener,
-    Injector, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges,
+    ElementRef,
+    EmbeddedViewRef,
+    EventEmitter,
+    HostBinding,
+    HostListener,
+    Injector,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    Renderer2,
+    SimpleChanges,
     TemplateRef
 } from '@angular/core';
 import { PopoverContainer } from './popover-container';
@@ -24,10 +35,9 @@ export type PopoverFillMode = 'at-least' | 'equal';
  * ```
  */
 @Directive({
-    selector: '[fdPopover]',
+    selector: '[fdPopover]'
 })
 export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
-
     /** Content of the popover. Used through the actual directive tag. Accepts strings or TemplateRefs. */
     @Input('fdPopover')
     content: TemplateRef<any> | string;
@@ -108,13 +118,14 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     private isSetup: boolean = false;
 
     /** @hidden */
-    constructor(private elRef: ElementRef,
-                private cdRef: ChangeDetectorRef,
-                private resolver: ComponentFactoryResolver,
-                private injector: Injector,
-                private appRef: ApplicationRef,
-                private renderer: Renderer2) {
-    }
+    constructor(
+        private elRef: ElementRef,
+        private cdRef: ChangeDetectorRef,
+        private resolver: ComponentFactoryResolver,
+        private injector: Injector,
+        private appRef: ApplicationRef,
+        private renderer: Renderer2
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -262,12 +273,11 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         } else {
             this.appendTo.appendChild(containerEl);
         }
-
     }
 
     private destroyTriggerListeners(): void {
         if (this.eventRef && this.eventRef.length > 0) {
-            this.eventRef.forEach(event => {
+            this.eventRef.forEach((event) => {
                 event();
             });
             this.eventRef = [];
@@ -276,10 +286,12 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     private addTriggerListeners(): void {
         if (this.triggers && this.triggers.length > 0) {
-            this.triggers.forEach(trigger => {
-                this.eventRef.push(this.renderer.listen(this.elRef.nativeElement, trigger, () => {
-                    this.toggle();
-                }));
+            this.triggers.forEach((trigger) => {
+                this.eventRef.push(
+                    this.renderer.listen(this.elRef.nativeElement, trigger, () => {
+                        this.toggle();
+                    })
+                );
             });
         }
     }
@@ -324,7 +336,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             if (this.options) {
                 this.options.placement = this.placement;
             } else {
-                this.options = {placement: this.placement}
+                this.options = { placement: this.placement };
             }
         }
     }
@@ -336,7 +348,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
                     enabled: true,
                     fn: this.fillControlMode === 'equal' ? this.fillReference : this.atLeastReference,
                     order: 840
-                }
+                };
             } else {
                 this.options = {
                     modifiers: {
@@ -354,12 +366,14 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     /** @hidden */
     @HostListener('document:click', ['$event'])
     clickHandler(event: MouseEvent): void {
-        if (this.containerRef &&
+        if (
+            this.containerRef &&
             this.isOpen &&
             this.closeOnOutsideClick &&
             event.target !== this.elRef.nativeElement &&
             !this.elRef.nativeElement.contains(event.target) &&
-            !this.containerRef.location.nativeElement.contains(event.target)) {
+            !this.containerRef.location.nativeElement.contains(event.target)
+        ) {
             event.preventDefault();
             event.stopPropagation();
             this.close();

@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './message-strip-noicon-example.component.html',
     styleUrls: ['message-strip-example.component.scss']
 })
-export class MessageStripNoIconExampleComponent { }
+export class MessageStripNoIconExampleComponent {}

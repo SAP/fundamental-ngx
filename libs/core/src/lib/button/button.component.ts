@@ -5,7 +5,7 @@ import {
     Input,
     ViewEncapsulation,
     OnChanges,
-    OnInit,
+    OnInit
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
@@ -52,7 +52,7 @@ export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): str
     template: ` <ng-content></ng-content> `,
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
     /** The property allows user to pass additional css classes
@@ -129,7 +129,7 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
             this.fdMenu ? `fd-button--menu` : '',
             this._options ? getOptionCssClass(this._options) : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
-            this.class,
+            this.class
         ]
             .filter((x) => x !== '')
             .join(' ');

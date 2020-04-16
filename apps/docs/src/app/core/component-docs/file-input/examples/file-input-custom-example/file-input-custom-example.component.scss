@@ -11,10 +11,8 @@
 .inner-div {
     height: 100%;
     border: 2px lightgray dashed;
-    transition: 0.25s background-color ease-in-out,
-    0.25s border ease-in-out,
-    0.25s border-color ease-in-out,
-    0.25s color ease-in-out;
+    transition: 0.25s background-color ease-in-out, 0.25s border ease-in-out, 0.25s border-color ease-in-out,
+        0.25s color ease-in-out;
 }
 
 .state-over {

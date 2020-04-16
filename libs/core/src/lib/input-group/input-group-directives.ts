@@ -14,7 +14,7 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-input-group-input]',
+    selector: '[fd-input-group-input]'
 })
 export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChanges {
     /** user's custom classes */
@@ -43,11 +43,7 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return [
-            'fd-input',
-            'fd-input-group__input',
-            this.compact ? 'fd-input--compact' : ''
-        ]
+        return ['fd-input', 'fd-input-group__input', this.compact ? 'fd-input--compact' : '']
             .filter((x) => x !== '')
             .join(' ');
     }
@@ -55,16 +51,13 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }
-
 }
-
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-textarea-group-input]',
+    selector: '[fd-textarea-group-input]'
 })
-export class InputGroupTextareaDirective  {}
-
+export class InputGroupTextareaDirective {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
@@ -150,5 +143,4 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }
-
 }

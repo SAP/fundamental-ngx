@@ -4,10 +4,9 @@ import { NotificationType } from '../../notification/notification.component';
 
 @Component({
     selector: 'fd-default-notification',
-    templateUrl: './default-notification.component.html',
+    templateUrl: './default-notification.component.html'
 })
 export class DefaultNotificationComponent {
-
     /** @hidden */
     defaultConfigurationNotification: NotificationDefault;
 
@@ -31,5 +30,4 @@ export class DefaultNotificationComponent {
             this.defaultConfigurationNotification.cancelCallback();
         }
     }
-
 }

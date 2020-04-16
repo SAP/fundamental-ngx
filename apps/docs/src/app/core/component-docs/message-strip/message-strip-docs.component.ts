@@ -10,7 +10,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 @Component({
     selector: 'app-message-strip',
-    templateUrl: './message-strip-docs.component.html',
+    templateUrl: './message-strip-docs.component.html'
 })
 export class MessageStripDocsComponent {
     static schema: any = {
@@ -50,7 +50,7 @@ export class MessageStripDocsComponent {
             dismissible: true,
             noIcon: false,
             width: '100%',
-            message: 'This is a message strip message.',
+            message: 'This is a message strip message.'
         },
         modifier: {
             type: 'default'
@@ -62,8 +62,8 @@ export class MessageStripDocsComponent {
             language: 'html',
             scssFileCode: messageStripExampleScs,
             fileName: 'message-strip-example',
-            code: messageStripExampleHtml,
-        },
+            code: messageStripExampleHtml
+        }
     ];
 
     messageStripNoIconExample: ExampleFile[] = [
@@ -71,8 +71,8 @@ export class MessageStripDocsComponent {
             language: 'html',
             scssFileCode: messageStripExampleScs,
             fileName: 'message-strip-noicon-example',
-            code: messageStripNoIconExampleHtml,
-        },
+            code: messageStripNoIconExampleHtml
+        }
     ];
 
     messageStripWidthExample: ExampleFile[] = [
@@ -80,15 +80,13 @@ export class MessageStripDocsComponent {
             language: 'html',
             scssFileCode: messageStripExampleScs,
             fileName: 'message-strip-width-example',
-            code: messageStripWidthExampleHtml,
-        },
+            code: messageStripWidthExampleHtml
+        }
     ];
 
     schema: Schema;
 
-    constructor(
-        private schemaFactory: SchemaFactoryService
-    ) {
+    constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('messageStrip');
     }
 

@@ -2,7 +2,6 @@
  * Represents the positioning of the dialog on the screen.
  */
 export class DialogPosition {
-
     /** Value of the dialog's top position. */
     top?: string;
 

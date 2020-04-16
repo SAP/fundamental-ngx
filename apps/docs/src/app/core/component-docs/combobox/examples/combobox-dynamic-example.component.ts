@@ -5,30 +5,20 @@ import { Component } from '@angular/core';
     templateUrl: './combobox-dynamic-example.component.html'
 })
 export class ComboboxDynamicExampleComponent {
-
     searchTerm: string = '';
 
     selected: string;
     selectedIndex: number;
 
-    dropdownValues = [
-        'Apple',
-        'Banana',
-        'Kiwi',
-        'Strawberry',
-        'Tomato',
-        'Pineapple'
-    ];
+    dropdownValues = ['Apple', 'Banana', 'Kiwi', 'Strawberry', 'Tomato', 'Pineapple'];
 
-    selectItem(event: {item: any, index: number}) {
+    selectItem(event: { item: any; index: number }) {
         this.selected = event.item;
         this.selectedIndex = event.index;
     }
 
     customFilter(content: any[], searchTerm: string): any[] {
         const search = searchTerm.toLocaleLowerCase();
-        return content.filter(item =>
-            item.toLocaleLowerCase().startsWith(search)
-        );
+        return content.filter((item) => item.toLocaleLowerCase().startsWith(search));
     }
 }

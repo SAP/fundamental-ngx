@@ -1,7 +1,9 @@
 import {
     AfterContentChecked,
     ChangeDetectionStrategy,
-    Component, Input, QueryList,
+    Component,
+    Input,
+    QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
@@ -13,7 +15,6 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
-
     /** @hidden */
     @Input()
     shellbarActions: QueryList<ShellbarActionComponent>;
@@ -53,5 +54,4 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
             }
         });
     }
-
 }

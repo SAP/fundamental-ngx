@@ -59,7 +59,7 @@ export class PopoverDocsComponent {
             language: 'typescript',
             component: 'PopoverProgrammaticOpenExampleComponent',
             code: popoverProgrammaticTsSrc,
-            fileName: 'popover-programmatic-open-example',
+            fileName: 'popover-programmatic-open-example'
         }
     ];
 
@@ -67,13 +67,13 @@ export class PopoverDocsComponent {
         {
             language: 'html',
             code: popoverPlacementHtmlSrc,
-            fileName: 'popover-placement-example',
+            fileName: 'popover-placement-example'
         },
         {
             language: 'typescript',
             component: 'PopoverPlacementExampleComponent',
             code: popoverPlacementTsSrc,
-            fileName: 'popover-placement-example',
+            fileName: 'popover-placement-example'
         }
     ];
 
@@ -81,13 +81,13 @@ export class PopoverDocsComponent {
         {
             language: 'html',
             code: popoverDialogHtmlSrc,
-            fileName: 'popover-dialog-example',
+            fileName: 'popover-dialog-example'
         },
         {
             language: 'typescript',
             component: 'PopoverDialogExampleComponent',
             code: popoverDialogTsSrc,
-            fileName: 'popover-dialog-example',
+            fileName: 'popover-dialog-example'
         }
     ];
 
@@ -95,13 +95,13 @@ export class PopoverDocsComponent {
         {
             language: 'html',
             code: popoverDynamicHSrc,
-            fileName: 'popover-dynamic-example',
+            fileName: 'popover-dynamic-example'
         },
         {
             language: 'typescript',
             component: 'PopoverDynamicExampleComponent',
             code: popoverDynamicTSrc,
-            fileName: 'popover-dynamic-example',
+            fileName: 'popover-dynamic-example'
         }
     ];
 
@@ -127,7 +127,7 @@ export class PopoverDocsComponent {
             code: dropdownPopoverTs,
             fileName: 'popover-dropdown-example',
             typescriptFileCode: dropdownPopoverTs,
-            component: 'PopoverDropdownExampleComponent',
+            component: 'PopoverDropdownExampleComponent'
         },
         {
             language: 'scss',

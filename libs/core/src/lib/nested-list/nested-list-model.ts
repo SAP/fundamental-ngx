@@ -1,11 +1,9 @@
-
 export interface NestedListItem {
-    headerTitle?: string,
+    headerTitle?: string;
     list?: NestedListModel;
     link?: NestedListLink;
     expanded?: boolean;
 }
-
 
 export interface NestedListModel {
     textOnly?: boolean;

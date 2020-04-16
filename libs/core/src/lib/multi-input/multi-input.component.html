@@ -1,12 +1,14 @@
 <div class="fd-multi-input fd-multi-input-custom">
     <div class="fd-multi-input-field">
-        <fd-popover [isOpen]="open && displayedValues && displayedValues.length"
-                    (isOpenChange)="openChangeHandle($event)"
-                    [triggers]="[]"
-                    [disabled]="disabled"
-                    [closeOnOutsideClick]="true"
-                    [fillControlMode]="fillControlMode"
-                    class="fd-multi-input-popover-custom">
+        <fd-popover
+            [isOpen]="open && displayedValues && displayedValues.length"
+            (isOpenChange)="openChangeHandle($event)"
+            [triggers]="[]"
+            [disabled]="disabled"
+            [closeOnOutsideClick]="true"
+            [fillControlMode]="fillControlMode"
+            class="fd-multi-input-popover-custom"
+        >
             <fd-popover-control>
                 <form (submit)="onSubmit()">
                     <fd-input-group
@@ -15,40 +17,61 @@
                         [button]="true"
                         [compact]="compact"
                         [disabled]="disabled"
-                        (click)="openChangeHandle(!open)">
+                        (click)="openChangeHandle(!open)"
+                    >
                         <fd-tokenizer [compact]="compact" class="fd-multi-input-tokenizer" [glyph]="glyph">
                             <fd-token
                                 *ngFor="let token of selected"
                                 [compact]="compact"
-                                [disabled]=this.disabled
-                                (onCloseClick)="handleSelect(false, token, null)">
-                                <span [innerHtml]="token | displayFnPipe:displayFn"></span>
+                                [disabled]="this.disabled"
+                                (onCloseClick)="handleSelect(false, token, null)"
+                            >
+                                <span [innerHtml]="token | displayFnPipe: displayFn"></span>
                             </fd-token>
-                            <input type="text" class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
-                                   fd-form-control fd-input-group-input
-                                   #searchInputElement
-                                   [placeholder]="placeholder"
-                                   [(ngModel)]="searchTerm"
-                                   [compact]="compact"
-                                   [ngClass]="{'fd-input--compact': compact}"
-                                   (ngModelChange)="handleSearchTermChange()"
-                                   (keydown)="handleInputKeydown($event)"
-                                   [ngModelOptions]="{standalone: true}">
+                            <input
+                                type="text"
+                                class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
+                                fd-form-control
+                                fd-input-group-input
+                                #searchInputElement
+                                [placeholder]="placeholder"
+                                [(ngModel)]="searchTerm"
+                                [compact]="compact"
+                                [ngClass]="{ 'fd-input--compact': compact }"
+                                (ngModelChange)="handleSearchTermChange()"
+                                (keydown)="handleInputKeydown($event)"
+                                [ngModelOptions]="{ standalone: true }"
+                            />
                         </fd-tokenizer>
                     </fd-input-group>
                 </form>
             </fd-popover-control>
             <fd-popover-body [attr.aria-hidden]="!open">
-                <ul fd-list class="fd-multi-input-menu-overflow" *ngIf="displayedValues && displayedValues.length" [style.maxHeight]="maxHeight">
-                    <li (click)="handleSelect(selected.indexOf(value) === -1, value, $event)" fd-list-item class="fd-multi-input-item"
-                        *ngFor="let value of displayedValues; let ind  = index" [selected]="selected.indexOf(value) !== -1">
-                        <fd-checkbox [ngModel]="selected ? selected.indexOf(value) !== -1 : false" class="fd-multi-input-checkbox"
-                                 (keydown)="handleKeyDown($event, ind)">
-                            <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
+                <ul
+                    fd-list
+                    class="fd-multi-input-menu-overflow"
+                    *ngIf="displayedValues && displayedValues.length"
+                    [style.maxHeight]="maxHeight"
+                >
+                    <li
+                        (click)="handleSelect(selected.indexOf(value) === -1, value, $event)"
+                        fd-list-item
+                        class="fd-multi-input-item"
+                        *ngFor="let value of displayedValues; let ind = index"
+                        [selected]="selected.indexOf(value) !== -1"
+                    >
+                        <fd-checkbox
+                            [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
+                            class="fd-multi-input-checkbox"
+                            (keydown)="handleKeyDown($event, ind)"
+                        >
+                            <span
+                                [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight"
+                            ></span>
                         </fd-checkbox>
                     </li>
                     <li fd-list-item class="fd-multi-input-show-all">
-                        <a fd-link (click)="showAllClicked($event)" href>Show All ({{dropdownValues.length}})</a>
+                        <a fd-link (click)="showAllClicked($event)" href>Show All ({{ dropdownValues.length }})</a>
                     </li>
                 </ul>
                 <ng-content></ng-content>

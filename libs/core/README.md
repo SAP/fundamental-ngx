@@ -66,7 +66,7 @@ For an existing Angular CLI application,
 
 1. **Edit your tsconfig.**
    Edit the `target` in your `tsconfig.json` to `es5`. The library is incompatible with later versions.
-   
+
 1. **Import the modules you want to use.**
 
     To add the entire library, add the following import to your main application module.
@@ -100,7 +100,7 @@ For an existing Angular CLI application,
     })
     export class DemoModule { }
     ```
-   
+
 1. **Provide the RtlService.**
    In your main application module, add `RtlService` to the list of providers. This service is needed to ensure proper right-to-left functionality for
    users with their browser set to an RTL language.

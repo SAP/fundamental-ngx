@@ -3,16 +3,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopoverModule } from '../../popover.module';
 
 @Component({
-    template: `
-        <div #directiveElement fd-popover-body-footer>Popover Footer Test</div>
-    `
+    template: ` <div #directiveElement fd-popover-body-footer>Popover Footer Test</div> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
 describe('PopoverBodyFooterDirective', () => {
-
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 

@@ -8,9 +8,8 @@ describe('ShellbarSubtitleComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ ShellbarSubtitleComponent ]
-        })
-            .compileComponents();
+            declarations: [ShellbarSubtitleComponent]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

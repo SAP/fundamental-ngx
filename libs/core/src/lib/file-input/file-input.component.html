@@ -1,21 +1,24 @@
-<div style="display: block"
-     fdFileDragnDrop
-     [accept]="accept"
-     [dragndrop]="dragndrop"
-     [disabled]="disabled"
-     [multiple]="multiple"
-     (onFileChange)="selectHandler($event)"
-     (onInvalidFiles)="onInvalidFiles.emit($event)"
-     (onDragEnter)="onDragEnter.emit()"
-     (onDragLeave)="onDragLeave.emit()">
+<div
+    style="display: block;"
+    fdFileDragnDrop
+    [accept]="accept"
+    [dragndrop]="dragndrop"
+    [disabled]="disabled"
+    [multiple]="multiple"
+    (onFileChange)="selectHandler($event)"
+    (onInvalidFiles)="onInvalidFiles.emit($event)"
+    (onDragEnter)="onDragEnter.emit()"
+    (onDragLeave)="onDragLeave.emit()"
+>
     <ng-content></ng-content>
 </div>
-<input #input
-       class="hidden-file-input"
-       type="file"
-       [attr.accept]="accept"
-       (onFileSelect)="selectHandler($event)"
-       [multiple]="multiple"
-       [disabled]="disabled"
-       fdFileSelect>
-
+<input
+    #input
+    class="hidden-file-input"
+    type="file"
+    [attr.accept]="accept"
+    (onFileSelect)="selectHandler($event)"
+    [multiple]="multiple"
+    [disabled]="disabled"
+    fdFileSelect
+/>

@@ -28,7 +28,7 @@ export class FormLabelComponent {
     required: boolean = false;
 
     /** Whether label is for checkbox */
-     @Input()
+    @Input()
     @HostBinding('class.fd-form-label--checkbox')
     checkbox: boolean = false;
 

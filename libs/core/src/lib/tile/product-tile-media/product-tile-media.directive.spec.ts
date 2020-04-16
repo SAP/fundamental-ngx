@@ -3,9 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TileModule } from '../tile.module';
 
 @Component({
-    template: `
-        <h2 #directiveElement fd-product-tile-media>Product Tile Media Test</h2>
-    `
+    template: ` <h2 #directiveElement fd-product-tile-media>Product Tile Media Test</h2> `
 })
 class TestComponent {
     @ViewChild('directiveElement')

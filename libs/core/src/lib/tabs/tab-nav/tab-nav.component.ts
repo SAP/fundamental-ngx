@@ -1,7 +1,9 @@
 import {
-    AfterContentInit, ChangeDetectionStrategy,
+    AfterContentInit,
+    ChangeDetectionStrategy,
     Component,
-    ContentChildren, ElementRef,
+    ContentChildren,
+    ElementRef,
     Input,
     OnDestroy,
     QueryList,
@@ -20,8 +22,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-tab-nav]',
-    template: `
-        <ng-content></ng-content>`,
+    template: ` <ng-content></ng-content>`,
     providers: [TabsService],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -62,10 +63,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(
-        private _tabsService: TabsService,
-        private _elementRef: ElementRef
-    ) { }
+    constructor(private _tabsService: TabsService, private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -98,11 +96,13 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     buildComponentCssClass(): string {
         return [
             `fd-tabs`,
-            this.mode ? ('fd-tabs--' + this.mode) : '',
+            this.mode ? 'fd-tabs--' + this.mode : '',
             this.compact ? 'fd-tabs--compact' : '',
             `fd-tabs--${this.size}`,
             this.class
-        ].filter(x => x !== '').join(' ');
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
     /** HasElementRef interface implementation
@@ -116,10 +116,10 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     get tabLinks(): TabLinkDirective[] {
         let tabLinks: TabLinkDirective[] = [];
         if (this.links) {
-            tabLinks = tabLinks.concat(this.links.map(link => link));
+            tabLinks = tabLinks.concat(this.links.map((link) => link));
         }
         if (this.items) {
-            tabLinks = tabLinks.concat(this.items.filter(item => !!item.linkItem).map(item => item.linkItem));
+            tabLinks = tabLinks.concat(this.items.filter((item) => !!item.linkItem).map((item) => item.linkItem));
         }
         return tabLinks;
     }
@@ -134,10 +134,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** @hidden */
     private _listenOnTabSelect(): void {
-        this._tabsService.tabSelected
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(index => this.selectTab(index))
-            ;
+        this._tabsService.tabSelected.pipe(takeUntil(this._onDestroy$)).subscribe((index) => this.selectTab(index));
     }
 
     /**
@@ -148,8 +145,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     private _listenOnContentQueryListChange(): void {
         merge(this.links.changes, this.items.changes)
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._refreshSubscription())
-            ;
+            .subscribe(() => this._refreshSubscription());
     }
 
     /** Whether any QueryList detects any changes */
@@ -161,11 +157,13 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         const refreshObs = merge(this._onRefresh$, this._onDestroy$);
 
         this.tabLinks.forEach((tab: TabLinkDirective, index: number) => {
-            tab.keyDown
-                .pipe(takeUntil(refreshObs))
-                .subscribe(event =>
-                    this._tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(link => link.elementRef.nativeElement))
+            tab.keyDown.pipe(takeUntil(refreshObs)).subscribe((event) =>
+                this._tabsService.tabHeaderKeyHandler(
+                    index,
+                    event,
+                    this.tabLinks.map((link) => link.elementRef.nativeElement)
                 )
+            );
         });
     }
 }

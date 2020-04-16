@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './select-header.component.html',
     styleUrls: ['./select-header.component.scss']
 })
-export class SelectHeaderComponent {
-}
+export class SelectHeaderComponent {}

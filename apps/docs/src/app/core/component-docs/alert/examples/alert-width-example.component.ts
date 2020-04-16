@@ -7,7 +7,6 @@ import { AlertService } from '@fundamental-ngx/core';
     styleUrls: ['alert-width-example.component.scss']
 })
 export class AlertWidthExampleComponent {
-
     constructor(public alertService: AlertService) {}
 
     openAlert1() {

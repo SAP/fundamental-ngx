@@ -17,9 +17,7 @@ class TestTemplateComponent {
 }
 
 @Component({
-    template: `
-        <button fd-button fdPopover="content" [(isOpen)]="isOpen"></button>
-    `
+    template: ` <button fd-button fdPopover="content" [(isOpen)]="isOpen"></button> `
 })
 class TestStringComponent {
     @ViewChild(PopoverDirective, { static: true })
@@ -31,7 +29,8 @@ class TestStringComponent {
 @NgModule({
     declarations: [TestStringComponent, TestTemplateComponent],
     imports: [PopoverModule]
-}) class TestModule {}
+})
+class TestModule {}
 
 describe('PopoverDirective', () => {
     let fixtureTemplate: ComponentFixture<TestTemplateComponent>;
@@ -85,7 +84,7 @@ describe('PopoverDirective', () => {
         expect(fixtureTemplate.componentInstance.popoverDirective.isOpen).toBe(true);
         fixtureTemplate.componentInstance.popoverDirective.close();
         fixtureTemplate.detectChanges();
-        expect(fixtureTemplate.componentInstance.isOpen).toBe(false)
+        expect(fixtureTemplate.componentInstance.isOpen).toBe(false);
     });
 
     it('should support multiple triggers', () => {

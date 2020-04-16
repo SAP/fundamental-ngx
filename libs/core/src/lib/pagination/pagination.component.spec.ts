@@ -12,9 +12,7 @@ describe('Pagination Test', () => {
 
         TestBed.configureTestingModule({
             declarations: [PaginationComponent],
-            providers: [
-                { provide: PaginationService, useValue: paginationSpy }
-            ]
+            providers: [{ provide: PaginationService, useValue: paginationSpy }]
         }).compileComponents();
 
         paginationServiceSpy = TestBed.get(PaginationService);
@@ -39,7 +37,7 @@ describe('Pagination Test', () => {
         component.onKeypressHandler(1, keyboardEvent);
 
         expect(keyboardEvent.preventDefault).toHaveBeenCalled();
-        expect(component.goToPage).toHaveBeenCalledWith(1)
+        expect(component.goToPage).toHaveBeenCalledWith(1);
     });
 
     it('should handle mouseevent', () => {
@@ -57,5 +55,4 @@ describe('Pagination Test', () => {
 
         expect(retVal).toEqual({ totalItems: 3, currentPage: 1, itemsPerPage: 2 });
     });
-
 });

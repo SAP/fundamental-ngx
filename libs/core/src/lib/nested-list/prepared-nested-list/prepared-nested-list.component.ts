@@ -1,4 +1,13 @@
-import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    forwardRef,
+    Input,
+    QueryList,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 import { NestedListDirective } from '../nested-list/nested-list.directive';
 import { NestedListModel } from '../nested-list-model';
 import { NestedListStateService } from '../nested-list-state.service';
@@ -8,12 +17,11 @@ import { NestedItemDirective } from '../nested-item/nested-item.directive';
  * Component for internal usage, allows to generate the nested list from defined object.
  */
 @Component({
-  selector: 'fd-prepared-nested-list',
-  templateUrl: './prepared-nested-list.component.html',
-  styleUrls: ['./prepared-nested-list.component.scss']
+    selector: 'fd-prepared-nested-list',
+    templateUrl: './prepared-nested-list.component.html',
+    styleUrls: ['./prepared-nested-list.component.scss']
 })
 export class PreparedNestedListComponent implements AfterViewInit {
-
     /**
      * @hidden
      * For internal usage.
@@ -55,9 +63,7 @@ export class PreparedNestedListComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    constructor (
-        private changeDetRef: ChangeDetectorRef
-    ) {}
+    constructor(private changeDetRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {

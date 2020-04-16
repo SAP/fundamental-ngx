@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    ViewEncapsulation,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit
+} from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
 
 /**
@@ -34,9 +43,7 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {
-
-    }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges() {
