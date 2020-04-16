@@ -261,14 +261,12 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
 
     /** Toggles the open state of the select. */
     toggle(): void {
-        if (!this.disabled) {
-            this.isOpen ? this.close() : this.open();
-        }
+        this.isOpen ? this.close() : this.open();
     }
 
     /** Opens the select popover body. */
     open(): void {
-        if (!this.disabled && !this.isOpen) {
+        if (this.isInteractive && !this.isOpen) {
             this.focus();
             this.onTouched();
             this.isOpen = true;
@@ -280,7 +278,7 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
 
     /** Closes the select popover body. */
     close(): void {
-        if (!this.disabled && this.isOpen) {
+        if (this.isOpen) {
             this.isOpen = false;
             this.isOpenChange.emit(this.isOpen);
             this._focusTrap.deactivate();

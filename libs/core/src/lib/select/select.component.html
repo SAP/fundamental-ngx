@@ -4,12 +4,12 @@
     <fd-popover
         [(isOpen)]="isOpen"
         [triggers]="[]"
+        [disabled]="disabled"
         [appendTo]="appendTo"
         [options]="popperOptions"
         [closeOnEscapeKey]="false"
         [fillControlMode]="fillControlMode"
         [closeOnOutsideClick]="closeOnOutsideClick"
-        [disabled]="disabled || loading || readonly"
         (isOpenChange)="isOpenChangeHandle($event)">
 
         <fd-popover-control>
@@ -30,22 +30,24 @@
 
 <ng-template #selectInputControlTemplate>
     <div class="fd-select"
-         [class.fd-select--compact]="compact">
+         [class.fd-select--compact]="compact"
+         (click)="toggle()">
         <div class="fd-select__control"
              role="combobox"
              #selectControl
              [ngClass]="state ? 'is-' + state : ''"
              [class.is-disabled]="disabled"
              [class.is-readonly]="readonly"
+             [class.is-active]="isOpen && !loading"
              [class.is-expanded]="isOpen && !loading"
              [attr.tabindex]="disabled ? -1 : 0"
              [attr.id]="controlId"
-             [attr.aria-expanded]="isOpen"
+             [attr.aria-active]="isOpen && !loading"
+             [attr.aria-expanded]="isOpen && !loading"
              [attr.aria-disabled]="disabled"
              [attr.aria-readonly]="readonly"
              [attr.aria-controls]="controlId + '-list-box'"
-             [attr.aria-haspopup]="!disabled && !readonly && !loading"
-             (click)="toggle()">
+             [attr.aria-haspopup]="isInteractive">
 
             <div class="fd-select__content">
                 <ng-container
