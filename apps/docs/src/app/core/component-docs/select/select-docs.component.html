@@ -28,7 +28,13 @@
 </fd-docs-section-title>
 <description>
     Content of Select control can be customized with custom template. Custom template reference must be provided to
-    <code>[controlTemplate]</code> input. Selects provide selected option as a context to custom template.
+    <code>[controlTemplate]</code> input.<br/>
+    Select provides following context values to the template:
+    <ul>
+        <li>Text value of selected option - <code>implicit</code></li>
+        <li>Reference to selected option - <code>option</code></li>
+    </ul>
+    selected option as a context to custom template.
 </description>
 <component-example>
     <fd-select-custom-trigger></fd-select-custom-trigger>
@@ -43,7 +49,7 @@
 <description>
     OptionComponent is based on ListComponent thus list element features like headers, titles and icons are supported
     inside select option.
-    This example also shows how to handle options that are complex types like <code>Object</code>
+    This example also shows how to handle options that are complex types like <code>Object</code>.
 </description>
 <component-example>
     <fd-select-nested-options></fd-select-nested-options>
@@ -82,7 +88,8 @@
 
         <li>
             To get full Fiori3 experience in mobile mode, wrap select options in <code>fd-select-mobile-list</code>
-            component and set Select in mobile mode using <code>[mobile]="true"</code>.
+            component and set Select in mobile mode using <code>[mobile]="true"</code>. Also remember to instantiate the
+            Dialog inside the Select using <code>DialogConfig.container</code> and <code>Select.dialogContainerElementRef</code>.
         </li>
 
         <li>

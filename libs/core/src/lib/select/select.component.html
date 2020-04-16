@@ -12,37 +12,41 @@
         (isOpenChange)="isOpenChangeHandle($event)">
 
         <fd-popover-control>
-            <ng-container *ngTemplateOutlet="selectInputControlTemplate"></ng-container>
+            <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
         </fd-popover-control>
 
-        <fd-popover-body [attr.aria-controls]="controlId"
-                         [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
-            <ng-container *ngTemplateOutlet="selectOptionsListTemplate"></ng-container>
+        <fd-popover-body>
+            <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
         </fd-popover-body>
     </fd-popover>
 </ng-template>
 
 <ng-template #selectMobileTemplate>
-    <ng-container *ngTemplateOutlet="selectInputControlTemplate"></ng-container>
+    <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+
+    <div #dialogContainer></div>
 </ng-template>
 
 <ng-template #selectInputControlTemplate>
     <div class="fd-select"
          [class.fd-select--compact]="compact">
         <div class="fd-select__control"
+             role="combobox"
              #selectControl
              [ngClass]="state ? 'is-' + state : ''"
              [class.is-disabled]="disabled"
              [class.is-readonly]="readonly"
+             [class.is-expanded]="isOpen && !loading"
              [attr.tabindex]="disabled ? -1 : 0"
+             [attr.id]="controlId"
              [attr.aria-expanded]="isOpen"
              [attr.aria-disabled]="disabled"
              [attr.aria-readonly]="readonly"
-             [attr.aria-controls]="controlId"
+             [attr.aria-controls]="controlId + '-list-box'"
              [attr.aria-haspopup]="!disabled && !readonly && !loading"
              (click)="toggle()">
 
-            <div>
+            <div class="fd-select__content">
                 <ng-container
                     [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
                     [ngTemplateOutletContext]="{$implicit: selectValue, option: selected}">
@@ -68,11 +72,18 @@
 
 <ng-template #selectOptionsListTemplate>
     <ul fd-list
+        role="listbox"
         [compact]="compact"
         [dropdownMode]="true"
-        [hasMessage]="stateMessage">
+        [hasMessage]="!!stateMessage"
+        [attr.id]="controlId + '-list-box'"
+        [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
 
-        <li fd-list-message *ngIf="stateMessage" [type]="state">
+        <li *ngIf="stateMessage"
+            fd-list-message
+            role="option"
+            tabindex="-1"
+            [type]="state">
             {{stateMessage}}
         </li>
 

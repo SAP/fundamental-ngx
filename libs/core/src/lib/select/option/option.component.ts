@@ -27,6 +27,7 @@ import { Subscription } from 'rxjs';
     host: {
         'class': 'fd-list__item',
         '[attr.aria-disabled]': 'disabled',
+        '[attr.aria-selected]': 'selected',
         '[tabindex]': 'disabled ? -1 : 0',
         role: 'option'
     }
@@ -53,6 +54,7 @@ export class OptionComponent implements OnInit, OnDestroy {
     @HostBinding('class.is-selected')
     selected: boolean = false;
 
+    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
@@ -81,6 +83,7 @@ export class OptionComponent implements OnInit, OnDestroy {
         this._observeValue();
     }
 
+    /** @hidden */
     ngOnDestroy() {
         this._subscriptions.unsubscribe();
     }
@@ -90,14 +93,15 @@ export class OptionComponent implements OnInit, OnDestroy {
         return this.viewValue || this.value;
     }
 
-    /** Returns the view value text of the option, or the viewValue input if it exists. */
+    /** Set control selected state
+     * @param value - whether is selected
+     * @param controlChange - whether is a change initially coming from OptionComponent
+     * */
     setSelected(value: boolean, controlChange: boolean): void {
-        if (value !== this.selected) {
-            this.selected = value;
-            this.selectedChange.emit(this);
-            if (value) {
-                this._selectComponent.setSelectedOption(this, controlChange);
-            }
+        this.selected = value;
+        this.selectedChange.emit(this);
+        if (value) {
+            this._selectComponent.setSelectedOption(this, controlChange);
         }
     }
 
@@ -111,6 +115,7 @@ export class OptionComponent implements OnInit, OnDestroy {
         return this._elRef.nativeElement as HTMLElement;
     }
 
+    /** @hidden */
     private _observeValue(): void {
         this._subscriptions.add(
             this._selectComponent.value$.asObservable()

@@ -10,7 +10,7 @@ import {
     HostListener,
     Input,
     OnDestroy,
-    Optional,
+    OnInit,
     Output,
     QueryList,
     TemplateRef,
@@ -22,7 +22,7 @@ import { OptionComponent } from './option/option.component';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
-import { RtlService } from '../utils/public_api';
+import focusTrap, { FocusTrap } from 'focus-trap';
 
 let selectUniqueId: number = 0;
 
@@ -48,7 +48,11 @@ export type SelectControlState = 'error' | 'success' | 'warning' | 'information'
         role: 'listbox'
     }
 })
-export class SelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+
+    /** Id of the control. */
+    @Input()
+    controlId: string = `select-list-${selectUniqueId++}`;
 
     /** Whether the select component is disabled. */
     @Input()
@@ -157,18 +161,22 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
 
     /** @hidden */
     @ViewChild('selectControl')
-    controlTemplateRef: ElementRef;
+    controlElementRef: ElementRef;
+
+    /** @hidden Reference to root element for the dialog in mobile mode */
+    @ViewChild('dialogContainer')
+    dialogContainerElementRef: ElementRef;
 
     /** @hidden */
     calculatedMaxHeight: number;
 
-    /** @hidden */
-    controlId: string = `select-list-${selectUniqueId++}`;
-
     /** Current selected option component reference. */
     selected: OptionComponent;
 
-    /** Subject triggered when the component is destroyed. */
+    /** @hidden */
+    private _focusTrap: FocusTrap;
+
+    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
@@ -209,9 +217,14 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     }
 
     constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService
+        private _elementRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef
     ) { }
+
+    /** @hidden */
+    ngOnInit() {
+        this._setupFocusTrap();
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -249,6 +262,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
             this.onTouched();
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
+            this._focusTrap.activate();
             this._focusOption('onOpen');
         }
     }
@@ -258,14 +272,15 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         if (!this.disabled && this.isOpen) {
             this.isOpen = false;
             this.isOpenChange.emit(this.isOpen);
+            this._focusTrap.deactivate();
             this.focus();
         }
     }
 
     /** Focuses select control. */
     focus(): void {
-        if (this.controlTemplateRef) {
-            (this.controlTemplateRef.nativeElement as HTMLElement).focus();
+        if (this.controlElementRef) {
+            (this.controlElementRef.nativeElement as HTMLElement).focus();
         }
     }
 
@@ -290,6 +305,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         this.value$.next(value);
     }
 
+    /** @hidden */
     setSelectedOption(option: OptionComponent, controlChange: boolean) {
         this.selected = option;
 
@@ -309,6 +325,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
      * */
     private _focusOption(action: 'onOpen' | 'next' | 'previous'): void {
         let activeIndex: number;
+        let optionsArray: OptionComponent[];
         const focusAsync = (option: OptionComponent) => setTimeout(() => option.focus(), 10);
         const findActiveIndex = (options: OptionComponent[], activeOption: Element): number => options
             .map(option => option.getHtmlElement())
@@ -323,20 +340,23 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
                 focusAsync(this.selected || this.options.first);
                 break;
             case 'next':
-                activeIndex = findActiveIndex(this.options.toArray(), document.activeElement);
+                optionsArray = this.options.toArray();
+                activeIndex = findActiveIndex(optionsArray, document.activeElement);
                 if (activeIndex < this.options.length - 1) {
-                    this.options.toArray()[++activeIndex].focus();
+                    optionsArray[++activeIndex].focus();
                 }
                 break;
             case 'previous':
-                activeIndex = findActiveIndex(this.options.toArray(), document.activeElement);
+                optionsArray = this.options.toArray();
+                activeIndex = findActiveIndex(optionsArray, document.activeElement);
                 if (activeIndex > 0) {
-                    this.options.toArray()[--activeIndex].focus();
+                    optionsArray[--activeIndex].focus();
                 }
                 break;
         }
     }
 
+    /** @hidden */
     private _listenOnOptionChanges(): void {
         this._subscriptions.add(
             this.options.changes
@@ -351,13 +371,29 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         )
     }
 
+    /** @hidden */
     private _setSelectedOption(): void {
         this.selected = this.options.find(option => option.selected)
     }
 
+    /** @hidden */
     private _updateValue(value: any): void {
         this.value$.next(value);
         this.valueChange.emit(value);
         this.onChange(value);
+    }
+
+    /** @hidden */
+    private _setupFocusTrap(): void {
+        try {
+            this._focusTrap = focusTrap(this._elementRef.nativeElement, {
+                clickOutsideDeactivates: true,
+                returnFocusOnDeactivate: true,
+                escapeDeactivates: false,
+                allowOutsideClick: (event: MouseEvent) => true
+            });
+        } catch (e) {
+            console.warn('Attempted to focus trap the select, but no tabbable elements were found.', e);
+        }
     }
 }

@@ -4,9 +4,9 @@
     </ng-container>
 </fd-select>
 
-<ng-template #customSelectTemplate let-selectedOption>
+<ng-template #customSelectTemplate let-optionText>
     <div class="custom-select-trigger-styling">
         <fd-icon [glyph]="'action-settings'"></fd-icon>
-        {{selectedOption}}
+        {{optionText}}
     </div>
 </ng-template>

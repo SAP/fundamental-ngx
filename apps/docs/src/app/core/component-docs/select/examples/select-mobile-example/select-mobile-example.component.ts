@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { DialogRef, DialogService } from '@fundamental-ngx/core';
+import { DialogRef, DialogService, SelectComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-select-mobile-example',
@@ -9,6 +9,8 @@ export class SelectMobileExampleComponent implements AfterViewInit, OnDestroy {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
     selectedValue: string;
     dialogRef: DialogRef;
+
+    @ViewChild(SelectComponent) selectRef: SelectComponent;
 
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -34,8 +36,11 @@ export class SelectMobileExampleComponent implements AfterViewInit, OnDestroy {
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
+            focusTrapped: false,
             verticalPadding: false,
-            backdropClickCloseable: false
+            escKeyCloseable: false,
+            backdropClickCloseable: false,
+            container: this.selectRef.dialogContainerElementRef.nativeElement
         });
     }
 }
