@@ -9,5 +9,6 @@ export const API_FILES = {
     actionbar: ['actionbarcomponent'],
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
     link: ['LinkComponent'],
-    searchField: ['SearchFieldComponent']
+    searchField: ['SearchFieldComponent'],
+    radioGroup: ['RadioGroupComponent'],
 };

@@ -2,6 +2,7 @@ import { Input } from '@angular/core';
 import { BaseInput } from './base.input';
 import { isSelectItem } from '../../domain/data-model';
 import { isFunction, isJsObject } from '../../utils/lang';
+import { SelectItem } from '../../domain/data-model';
 
 
 /**
@@ -14,6 +15,11 @@ import { isFunction, isJsObject } from '../../utils/lang';
  *
  */
 export abstract class CollectionBaseInput extends BaseInput {
+    /**
+     * list of values, it can be of type SelectItem or String.
+     */
+    @Input()
+    list: Array<SelectItem | string>;
     /**
      * Used in filters and any kind of comparators when we work with objects and this identify
      * unique field name based on which we are going to do the job

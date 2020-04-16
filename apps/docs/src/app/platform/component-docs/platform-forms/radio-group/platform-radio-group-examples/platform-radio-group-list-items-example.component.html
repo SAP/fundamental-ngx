@@ -1,0 +1,60 @@
+<p>Reactive form Examples</p>
+<form [formGroup]="customForm" class="flex-form">
+    <p>Example 1: Radio Buttons Types with default value and error status</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group
+            [name]="'radio1'"
+            [value]="'Option 2'"
+            [list]="items"
+            [isInline]="false"
+            formControlName="example1"
+        >
+        </fdp-radio-group>
+    </fieldset>
+    <p>Example 2: Radio Buttons Types in Compact Size</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group
+            [name]="'radio2'"
+            [size]="'compact'"
+            [list]="items"
+            [isInline]="true"
+            formControlName="example2"
+        >
+        </fdp-radio-group>
+    </fieldset>
+</form>
+<div>
+    Example 1 selelected value: {{ customForm.value.example1 }}
+    <br />
+    Example 2 selelected value: {{ customForm.value.example2 }}
+</div>
+
+<br />
+<p>Template Driven Form</p>
+<form class="flex-form">
+    <p>Example 3: Radio Button Group Example with given list of objects, default value selection</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group
+            [name]="'radio3'"
+            [value]="'Option 2'"
+            [list]="items"
+            [size]="'cozy'"
+            [isInline]="true"
+            [(ngModel)]="favoriteOption"
+        >
+        </fdp-radio-group>
+    </fieldset>
+    <p>Example 4: Radio Button Group Example with given list of string values</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group
+            [name]="'radio4'"
+            [list]="items"
+            [size]="'compact'"
+            [isInline]="true"
+            [(ngModel)]="favoriteOption2"
+        >
+        </fdp-radio-group>
+    </fieldset>
+</form>
+<div>Example 3 selelected option: {{ favoriteOption }}</div>
+<div>Example 4 selelected option: {{ favoriteOption2 }}</div>

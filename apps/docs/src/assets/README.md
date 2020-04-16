@@ -34,7 +34,8 @@ Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
 ## <a name="3"></a>3. Known Issues
 
-Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
+* Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
+* Contribution Known [Issues](https://github.com/SAP/fundamental-ngx/wiki/Known-Contribution-Issues)
 
 ## <a name="4"></a>4. Support
 
