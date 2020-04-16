@@ -2,10 +2,9 @@ import {
     AfterContentInit,
     ContentChild,
     Directive,
-    ElementRef,
     EventEmitter,
     HostBinding,
-    Input, OnDestroy,
+    Input,
     Output
 } from '@angular/core';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
@@ -91,7 +90,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
             );
         }
 
-        // /** Pass this element to popover child item, to allow control `expanded` value */
+        /** Pass this element to popover child item, to allow control `expanded` value */
         if (this._itemService.popover) {
             this._itemService.popover.parentItemElement = this;
         }
@@ -162,5 +161,4 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         this._keyboardService.refresh$.next();
         this.expandedChange.emit(open);
     }
-
 }

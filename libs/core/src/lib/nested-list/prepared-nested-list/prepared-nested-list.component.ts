@@ -63,7 +63,6 @@ export class PreparedNestedListComponent implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._changeDetRef.markForCheck();
         this._changeDetRef.detectChanges();
 
         /** If any item above, pass list directive reference to it */

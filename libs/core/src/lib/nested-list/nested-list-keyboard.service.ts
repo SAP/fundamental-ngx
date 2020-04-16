@@ -55,8 +55,8 @@ export class NestedListKeyboardService {
     private getAllListItems(list: NestedListInterface): NestedItemInterface[] {
 
         const _items: NestedItemInterface[] = [];
-        if (list && list.nestedItems && list.nestedItems.toArray()) {
-            list.nestedItems.toArray().forEach(item => {
+        if (list && list.nestedItems && list.nestedItems.length > 0) {
+            list.nestedItems.forEach(item => {
                 _items.push(...this.getItems(item));
             });
         }
