@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.0-rc.0"></a>
+# [0.17.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.16.0...v0.17.0-rc.0) (2020-04-16)
+
+
+### Features
+
+* (platform) Radio button group component Implementation  ([#2122](https://github.com/SAP/fundamental-ngx/issues/2122)) ([cd2c26c](https://github.com/SAP/fundamental-ngx/commit/cd2c26c))
+
+
+
 <a name="0.16.0"></a>
 # [0.16.0](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.119...v0.16.0) (2020-04-15)
 
