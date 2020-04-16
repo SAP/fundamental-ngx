@@ -19,7 +19,7 @@ import { NestedItemService } from './nested-item.service';
         NestedItemService
     ]
 })
-export class NestedItemDirective implements AfterContentInit, NestedItemInterface, OnDestroy {
+export class NestedItemDirective implements AfterContentInit, NestedItemInterface {
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__item')
