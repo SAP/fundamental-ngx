@@ -100,9 +100,6 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         this.propagateOpenChange(this._expanded);
     }
 
-    ngOnDestroy(): void {
-    }
-
     /** Method that expand the item and propagate it to children */
     triggerOpen(): void {
         if (!this.expanded) {
