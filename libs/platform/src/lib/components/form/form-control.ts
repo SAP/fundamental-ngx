@@ -30,7 +30,7 @@ export abstract class FormFieldControl<T> {
     /**
      *  Components works in two sizes compact or cozy
      */
-    size: InputSize;
+    contentDensity: InputSize;
     /**
      *
      * Form Field listen for all the changes happening inside the input

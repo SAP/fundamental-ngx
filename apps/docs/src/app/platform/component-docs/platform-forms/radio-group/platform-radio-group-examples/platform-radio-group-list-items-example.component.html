@@ -11,11 +11,11 @@
         >
         </fdp-radio-group>
     </fieldset>
-    <p>Example 2: Radio Buttons Types in Compact Size</p>
+    <p>Example 2: Radio Buttons Types in Compact contentDensity</p>
     <fieldset fd-fieldset>
         <fdp-radio-group
             [name]="'radio2'"
-            [size]="'compact'"
+            [contentDensity]="'compact'"
             [list]="items"
             [isInline]="true"
             formControlName="example2"
@@ -38,7 +38,7 @@
             [name]="'radio3'"
             [value]="'Option 2'"
             [list]="items"
-            [size]="'cozy'"
+            [contentDensity]="'cozy'"
             [isInline]="true"
             [(ngModel)]="favoriteOption"
         >
@@ -49,7 +49,7 @@
         <fdp-radio-group
             [name]="'radio4'"
             [list]="items"
-            [size]="'compact'"
+            [contentDensity]="'compact'"
             [isInline]="true"
             [(ngModel)]="favoriteOption2"
         >

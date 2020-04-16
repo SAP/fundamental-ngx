@@ -14,7 +14,7 @@ import { FormModule, RadioModule } from '@fundamental-ngx/core';
                 <fdp-radio-group
                     [id]="'radio1'"
                     [name]="'radio1'"
-                    [size]="'compact'"
+                    [contentDensity]="'compact'"
                     [value]="'Spring'"
                     [isInline]="false"
                     formControlName="example1"

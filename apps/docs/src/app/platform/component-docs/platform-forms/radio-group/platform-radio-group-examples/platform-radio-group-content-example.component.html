@@ -5,7 +5,7 @@
         <fdp-radio-group
             [id]="'radio1'"
             [name]="'radio1'"
-            [size]="'compact'"
+            [contentDensity]="'compact'"
             [value]="'Spring'"
             [isInline]="false"
             formControlName="example1"
@@ -17,7 +17,7 @@
     </fieldset>
     <fieldset fd-fieldset>
         <p>Example 2: Inline Cozy Radio Button Group</p>
-        <fdp-radio-group [id]="'myid'" [name]="'radio2'" [size]="'cozy'" [isInline]="true" formControlName="example2">
+        <fdp-radio-group [id]="'myid'" [name]="'radio2'" [contentDensity]="'cozy'" [isInline]="true" formControlName="example2">
             <fdp-radio-button *ngFor="let season of seasons" [value]="season">
                 {{ season }}
             </fdp-radio-button>
@@ -38,7 +38,7 @@
         <fdp-radio-group
             [id]="'radio1'"
             [name]="'radio1'"
-            [size]="'compact'"
+            [contentDensity]="'compact'"
             [value]="'March'"
             [isInline]="false"
             formControlName="example4"
@@ -70,7 +70,7 @@
         <fdp-radio-group
             [name]="'radio4'"
             [value]="'Summer'"
-            [size]="'compact'"
+            [contentDensity]="'compact'"
             [isInline]="true"
             [(ngModel)]="favoriteSeason"
         >
@@ -83,7 +83,7 @@
 
     <p>Example 5: Inline Compact Radio Button Group</p>
     <fieldset fd-fieldset>
-        <fdp-radio-group [name]="'radio5'" [size]="'cozy'" [isInline]="true" [(ngModel)]="favoriteSeason2">
+        <fdp-radio-group [name]="'radio5'" [contentDensity]="'cozy'" [isInline]="true" [(ngModel)]="favoriteSeason2">
             <fdp-radio-button *ngFor="let season of seasons" [value]="season">
                 {{ season }}
             </fdp-radio-button>
@@ -95,7 +95,7 @@
         <fdp-radio-group
             [id]="'radio1'"
             [name]="'radio1'"
-            [size]="'compact'"
+            [contentDensity]="'compact'"
             [value]="'March'"
             [isInline]="false"
             [(ngModel)]="favoriteMonth"
