@@ -35,3 +35,4 @@ export * from './functions/closest-element';
 export * from './functions/keyboard-unification';
 export * from './functions/uuidv4-generator';
 export * from './functions/get-string-from-hashmap';
+export * from './functions/is-key';

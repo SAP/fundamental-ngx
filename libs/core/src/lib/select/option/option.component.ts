@@ -15,6 +15,7 @@ import {
 import { SelectComponent } from '../select.component';
 import { filter, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { isKey } from '../../utils/functions/is-key';
 
 /**
  * Used to represent an option of the select component.
@@ -59,15 +60,17 @@ export class OptionComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     @HostListener('click')
-    @HostListener('keydown.space', ['$event'])
+    @HostListener('keydown', ['$event'])
     selectionHandler(event?: KeyboardEvent): void {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        if (!this.disabled) {
-            this.setSelected(true, true);
-            this._changeDetRef.markForCheck();
+        if (!event || event && (isKey(event, ' ') || isKey(event, 'Enter'))) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            if (!this.disabled) {
+                this.setSelected(true, true);
+                this._changeDetRef.markForCheck();
+            }
         }
     }
 

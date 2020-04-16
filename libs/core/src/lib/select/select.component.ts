@@ -23,6 +23,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import focusTrap, { FocusTrap } from 'focus-trap';
+import { isKey } from '../utils/functions/is-key';
 
 let selectUniqueId: number = 0;
 
@@ -188,25 +189,29 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        switch (event.code || event.keyCode) {
-            case 'ArrowUp':
-            case 38: {
-                event.preventDefault();
+        if (isKey(event, 'ArrowUp')) {
+            if (this.isInteractive) {
                 this._focusOption('previous');
-                break;
             }
-            case 'ArrowDown':
-            case 40: {
-                event.preventDefault();
+            event.preventDefault();
+
+        } else if (isKey(event, 'ArrowDown')) {
+            if (this.isInteractive) {
                 this._focusOption('next');
-                break;
             }
-            case 'Space':
-            case 32: {
-                event.preventDefault();
+            event.preventDefault();
+
+        } else if (isKey(event, 'Escape')) {
+            if (this.isInteractive) {
+                this.close();
+            }
+            event.preventDefault();
+
+        } else if (isKey(event, ' ') || isKey(event, 'Enter')) {
+            if (this.isInteractive) {
                 this.toggle();
-                break;
             }
+            event.preventDefault();
         }
     }
 
@@ -242,6 +247,11 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
         return this.selected ? this.selected.viewValueText : this.placeholder;
     }
 
+    /** Whether control can be interacted with */
+    get isInteractive(): boolean {
+        return !(this.readonly || this.loading || this.disabled);
+    }
+
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
@@ -259,6 +269,7 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     /** Opens the select popover body. */
     open(): void {
         if (!this.disabled && !this.isOpen) {
+            this.focus();
             this.onTouched();
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
@@ -387,9 +398,8 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     private _setupFocusTrap(): void {
         try {
             this._focusTrap = focusTrap(this._elementRef.nativeElement, {
-                clickOutsideDeactivates: true,
-                returnFocusOnDeactivate: true,
                 escapeDeactivates: false,
+                clickOutsideDeactivates: true,
                 allowOutsideClick: (event: MouseEvent) => true
             });
         } catch (e) {
