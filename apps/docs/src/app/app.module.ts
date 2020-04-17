@@ -5,6 +5,7 @@ import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { IconModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     { path: 'core', loadChildren: () => import('./core/core-documentation.module').then(m => m.CoreDocumentationModule) },
@@ -16,6 +17,7 @@ const routes: Routes = [
     declarations: [AppComponent],
     imports: [
         BrowserAnimationsModule,
+        IconModule,
         RouterModule.forRoot(routes, { useHash: true }),
         HttpClientModule,
         MarkdownModule.forRoot({ loader: HttpClient }),
