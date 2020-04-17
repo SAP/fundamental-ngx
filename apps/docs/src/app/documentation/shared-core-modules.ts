@@ -13,6 +13,7 @@ import {
 export const sharedCoreModules = [
     AlertModule,
     ButtonModule,
+    IconModule,
     InputGroupModule,
     ShellbarModule,
     IconModule,
