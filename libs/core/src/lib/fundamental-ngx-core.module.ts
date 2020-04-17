@@ -25,6 +25,7 @@ import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { MenuModule } from './menu/menu.module';
 import { DialogModule } from './dialog/dialog.module';
 import { DialogService } from './dialog/dialog-service/dialog.service';
+import { MessageStripModule } from './message-strip/message-strip.module'
 import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
@@ -57,6 +58,7 @@ import { NestedListModule } from './nested-list/nested-list.module';
 import { RadioModule } from './radio/radio.module';
 import { LinkModule } from './link/link.module';
 import { InfoLabelModule } from './info-label/info-label.module';
+import { ObjectStatusModule } from './object-status/object-status.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -93,9 +95,11 @@ import { InfoLabelModule } from './info-label/info-label.module';
     MenuModule,
     MegaMenuModule,
     DialogModule,
+    MessageStripModule,
     MultiInputModule,
     NestedListModule,
     NotificationModule,
+    ObjectStatusModule,
     PaginationModule,
     PanelModule,
     ProductSwitchModule,

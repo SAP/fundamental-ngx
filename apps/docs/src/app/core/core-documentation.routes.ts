@@ -136,12 +136,20 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/menu/menu-docs.module').then(m => m.MenuDocsModule)
             },
             {
+                path: 'message-strip',
+                loadChildren: () => import('./component-docs/message-strip/message-strip-docs.module').then(m => m.MessageStripDocsModule)
+            },
+            {
                 path: 'multi-input',
                 loadChildren: () => import('./component-docs/multi-input/multi-input-docs.module').then(m => m.MultiInputDocsModule)
             },
             {
                 path: 'notification',
                 loadChildren: () => import('./component-docs/notification/notification-docs.module').then(m => m.NotificationDocsModule)
+            },
+            {
+                path: 'object-status',
+                loadChildren: () => import('./component-docs/object-status/object-status-docs.module').then(m => m.ObjectStatusDocsModule)
             },
             {
                 path: 'pagination',

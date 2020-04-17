@@ -1,0 +1,53 @@
+<fd-form-group [isInline]="isInline">
+    <ng-container *ngIf="!list">
+        <ng-container *ngFor="let radio of contentRadioButtons">
+            <div fd-form-item>
+                <ng-container
+                    *ngTemplateOutlet="
+                        radio?.renderer;
+                        context: {
+                            name: name,
+                            value: radio.value,
+                            size: size,
+                            disabled: disabled || radio.disabled
+                        }
+                    "
+                ></ng-container>
+            </div>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="list">
+        <ng-container *ngTemplateOutlet="listvalues"></ng-container>
+    </ng-container>
+</fd-form-group>
+
+<ng-template #listvalues>
+    <ng-container *ngIf="hasNoValue">
+        <div fd-form-item>
+            <fdp-radio-button
+                [name]="name"
+                [value]="'None'"
+                [size]="size"
+                [disabled]="disabled"
+                [forceRender]="true"
+                (click)="selected($event)"
+            >
+                {{ noValueLabel }}
+            </fdp-radio-button>
+        </div>
+    </ng-container>
+    <ng-container *ngFor="let item of list">
+        <div fd-form-item>
+            <fdp-radio-button
+                [name]="name"
+                [value]="item.value ? item.value : item"
+                [size]="size"
+                [disabled]="item.disabled ? item.disabled : disabled"
+                [forceRender]="true"
+                (click)="selected($event)"
+            >
+                {{ item.label ? item.label : item }}
+            </fdp-radio-button>
+        </div>
+    </ng-container>
+</ng-template>

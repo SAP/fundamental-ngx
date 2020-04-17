@@ -12,7 +12,12 @@ import { CalendarFormExamplesComponent } from './examples/calendar-form-example.
 import { CalendarProgrammaticallyChangeExampleComponent } from './examples/calendar-programmatically-change-example.component';
 import { CalendarI18nExampleComponent } from './examples/calendar-i18n-example.component';
 import { CalendarI18nMomentExampleComponent } from './examples/calendar--i18n-moment-example.component';
-import { SegmentedButtonModule, CalendarModule } from '@fundamental-ngx/core';
+import { SegmentedButtonModule, CalendarModule, FundamentalNgxCoreModule, DialogModule } from '@fundamental-ngx/core';
+import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example/calendar-mobile-example.component';
+import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
+import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
+import { CalendarSpecialDayExampleComponent } from './examples/calendar-special-day-example/calendar-special-day-example.component';
+import { CalendarMarkHoverComponent } from './examples/calendar-mark-hover/calendar-mark-hover.component';
 
 const routes: Routes = [
     {
@@ -30,7 +35,9 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         CalendarModule,
-        SegmentedButtonModule
+        DialogModule,
+        SegmentedButtonModule,
+        FundamentalNgxCoreModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -43,6 +50,11 @@ const routes: Routes = [
         CalendarI18nExampleComponent,
         CalendarI18nMomentExampleComponent,
         CalendarProgrammaticallyChangeExampleComponent,
+        CalendarMobileExampleComponent,
+        CalendarOptionsExampleComponent,
+        CalendarGridExampleComponent,
+        CalendarSpecialDayExampleComponent,
+        CalendarMarkHoverComponent
     ],
 })
 export class CalendarDocsModule {

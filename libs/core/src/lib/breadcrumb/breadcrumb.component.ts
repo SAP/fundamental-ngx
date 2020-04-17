@@ -80,6 +80,16 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
         this.previousContainerWidth = this.containerBoundary;
     }
 
+    /** @hidden */
+    getContainerBoundary(): number {
+        let containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
+        if (this.containerElement) {
+            containerBoundary = this.containerElement.getBoundingClientRect().width;
+        }
+
+        return containerBoundary;
+    }
+
     /**
      * @hidden
      *
@@ -88,8 +98,9 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
      * */
     collapseBreadcrumbs(): void {
         let i = 0;
+        const containerBoundary = this.getContainerBoundary();
         // move the breadcrumb items into a collapsed menu one by one, until the last one is inside the window
-        while (this.elementRef.nativeElement.getBoundingClientRect().width > this.containerBoundary && i < this.breadcrumbItems.length) {
+        while (this.elementRef.nativeElement.getBoundingClientRect().width > containerBoundary && i < this.breadcrumbItems.length) {
             const breadcrumbItem = this.breadcrumbItems.filter((item, index) => index === i)[0];
             if (this.collapsedBreadcrumbItems.indexOf(breadcrumbItem) === -1) {
                 this.collapsedBreadcrumbItems.push(breadcrumbItem);
@@ -155,7 +166,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     constructor(public elementRef: ElementRef, @Optional() private rtlService: RtlService) { }
 
     private fitInBoundries(): boolean {
-        return this.elementRef.nativeElement.getBoundingClientRect().width < this.containerBoundary;
+        return this.elementRef.nativeElement.getBoundingClientRect().width < this.getContainerBoundary();
     }
 
     private getCollapsedItem(): BreadcrumbItemDirective {

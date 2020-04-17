@@ -1,5 +1,4 @@
 import { Directive } from '@angular/core';
-import { BarElementDirective } from '../../..';
 
 /**
  * Directive that applies fundamental dialog styling to a header.

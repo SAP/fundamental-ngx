@@ -17,16 +17,16 @@ export class PlatformDocumentationComponent {
 
     guides = [{ url: 'platform/home', name: 'Home' }, { url: 'platform/new-component', name: 'New Component' }];
 
+    components = [{ url: 'platform/action-bar', name: 'Action Bar' },
+                    { url: 'platform/button', name: 'Button' },
+                    { url: 'platform/menu', name: 'Menu' },
+                    { url: 'platform/search-field', name: 'Search Field' },
+                    { url: 'platform/select', name: 'Select' },
+                    { url: 'platform/link', name: 'Link' },
+                    { url: 'platform/radio-group', name: 'Radio Button Group' },
+                    { url: 'platform/combo-box', name: 'ComboBox' }
+                ];
    
-
-    components = [{ url: 'platform/action-bar', name: 'Action Bar' }, 
-                  { url: 'platform/button', name: 'Button' }, 
-                  { url: 'platform/menu', name: 'Menu' },
-                  { url: 'platform/select', name: 'Select'},
-                  { url: 'platform/link', name: 'Link' },
-                  { url: 'platform/combo-box', name: 'ComboBox' }
-                 ];
-
     layouts = [];
 
     utilities = [];

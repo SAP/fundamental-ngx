@@ -18,6 +18,8 @@ import { PlatformSearchFieldHeaderComponent } from './component-docs/platform-se
 import { PlatformSearchFieldDocsComponent } from './component-docs/platform-search-field/platform-search-field-docs.component';
 import { PlatformComboboxHeaderComponent } from './component-docs/platform-combobox/platform-combobox-header/platform-combobox-header.component';
 import { PlatformComboboxDocsComponent } from './component-docs/platform-combobox/platform-combobox-docs.component';
+import { PlatformRadioGroupHeaderComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-header/platform-radio-group-header.component';
+import { PlatformRadioGroupDocsComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -81,6 +83,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PlatformComboboxDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.comboBox } }
+                ]
+            },
+            {
+                path: 'radio-group',
+                component: PlatformRadioGroupHeaderComponent,
+                children: [
+                    { path: '', component: PlatformRadioGroupDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.radioGroup } }
                 ]
             }
         ]

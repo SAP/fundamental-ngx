@@ -3,6 +3,7 @@
         [(isOpen)]="isOpen"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false"
+        [focusTrapped]="true"
         [triggers]="[]"
         [disabled]="disabled"
         [placement]="placement"
@@ -20,7 +21,7 @@
                     [placeholder]="placeholder"
                     (click)="openPopover()"
                     [compact]="compact"
-                    [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }"
+                    [ngClass]="{ 'is-error': isInvalidDateInput && useValidation }"
                     [disabled]="disabled"
                 />
                 <span fd-input-group-addon [state]="state" [compact]="compact" [button]="true">
@@ -45,11 +46,16 @@
                     [activeView]="activeView"
                     (activeViewChange)="handleCalendarActiveViewChange($event)"
                     [disableFunction]="disableFunction ? disableFunction : null"
-                    [blockFunction]="blockFunction ? blockFunction : null"
                     [selectedDate]="selectedDate"
                     (selectedDateChange)="handleDateChange($event)"
                     (isValidDateChange)="isInvalidDateInputHandler($event)"
                     [escapeFocusFunction]="null"
+                    [compact]="compact"
+                    [markWeekends]="markWeekends"
+                    [specialDaysRules]="specialDaysRules"
+                    [showWeekNumbers]="showWeekNumbers"
+                    [aggregatedYearGrid]="aggregatedYearGrid"
+                    [yearGrid]="yearGrid"
                     [startingDayOfWeek]="startingDayOfWeek"
                 ></fd-calendar>
                 <div class="fd-datetime__separator"></div>

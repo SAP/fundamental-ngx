@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 
 @Directive({
@@ -8,7 +8,7 @@ import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
         'class': 'fd-list__label'
     }
 })
-export class ListLabelDirective {}
+export class ListLabelDirective { }
 
 @Directive({
     // tslint:disable-next-line:directive-selector
@@ -51,37 +51,34 @@ export class ListSecondaryDirective {
         'class': 'fd-list__group-header'
     }
 })
-export class ListGroupHeaderDirective {}
+export class ListGroupHeaderDirective { }
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-list-icon]'
 })
-export class ListIconDirective implements OnInit {
+export class ListIconDirective implements OnChanges, OnInit {
 
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
-    private _glyph: string;
     @Input()
-    set glyph(glyph: string) {
-        this._glyph = glyph;
-        this.buildComponentCssClass();
-    }
+    glyph: string;
 
-    private _class: string = '';
-    @Input() set class(userClass: string) {
-        this._class = userClass;
-        this.buildComponentCssClass();
-    } // user's custom classes
+    /** Apply user custom styles */
+    @Input()
+    class: string;
 
     constructor(
         private _elementRef: ElementRef
-    ) {}
+    ) { }
 
-    /** Function runs when component is initialized
-     * function should build component css class
-     */
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
@@ -94,8 +91,8 @@ export class ListIconDirective implements OnInit {
     buildComponentCssClass(): string {
         return [
             'fd-list__icon',
-            this._glyph ? ('sap-icon--' + this._glyph) : '',
-            this._class
+            this.glyph ? ('sap-icon--' + this.glyph) : '',
+            this.class
         ].filter(x => x !== '').join(' ');
     }
 
@@ -103,8 +100,6 @@ export class ListIconDirective implements OnInit {
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }
-
-
 }
 
 @Directive({
@@ -114,4 +109,4 @@ export class ListIconDirective implements OnInit {
         'class': 'fd-list__footer'
     }
 })
-export class ListFooterDirective {}
+export class ListFooterDirective { }

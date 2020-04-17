@@ -86,7 +86,7 @@ describe('BreadcrumbComponent', () => {
 
     it('should collapse the breadcrumbs', () => {
         spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 2});
-        component.containerBoundary = 1;
+        spyOn(component, 'getContainerBoundary').and.returnValue(1);
 
         component.collapseBreadcrumbs();
 
@@ -99,7 +99,7 @@ describe('BreadcrumbComponent', () => {
     it('should expand all of the breadcrumbs', () => {
         // collapse all the breadcrumbs first
         spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 3});
-        component.containerBoundary = 2;
+        spyOn(component, 'getContainerBoundary').and.returnValue(2);
         component.collapseBreadcrumbs();
 
         component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({width: 1});

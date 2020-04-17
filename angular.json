@@ -28,7 +28,6 @@
                             "apps/docs/src/assets"
                         ],
                         "styles": [
-                            "node_modules/fundamental-styles/dist/icon.css",
                             "apps/docs/src/fd-typedoc/assets/css/main.scss",
                             "apps/docs/src/styles.scss"
                         ],
@@ -131,7 +130,8 @@
                             "apps/docs/tsconfig.spec.json"
                         ],
                         "exclude": [
-                            "**/node_modules/**"
+                            "**/node_modules/**",
+                            "!apps/docs/**"
                         ]
                     }
                 },
@@ -177,7 +177,8 @@
                     "options": {
                         "tsConfig": "apps/docs-e2e/tsconfig.e2e.json",
                         "exclude": [
-                            "**/node_modules/**"
+                            "**/node_modules/**",
+                            "!apps/docs/**"
                         ]
                     }
                 }
@@ -190,7 +191,7 @@
             "prefix": "fundamental-ngx",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@nrwl/angular:package",
                     "options": {
                         "tsConfig": "libs/core/tsconfig.lib.json",
                         "project": "libs/core/ng-package.json"
@@ -209,7 +210,8 @@
                             "libs/core/tsconfig.spec.json"
                         ],
                         "exclude": [
-                            "**/node_modules/**"
+                            "**/node_modules/**",
+                            "!apps/docs/**"
                         ]
                     }
                 },
@@ -254,7 +256,8 @@
                             "libs/platform/tsconfig.spec.json"
                         ],
                         "exclude": [
-                            "**/node_modules/**"
+                            "**/node_modules/**",
+                            "!libs/platform/**"
                         ]
                     }
                 },

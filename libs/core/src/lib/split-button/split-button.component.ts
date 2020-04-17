@@ -7,7 +7,8 @@ import {
     Output,
     TemplateRef,
     Inject,
-    Optional
+    Optional,
+    ViewEncapsulation
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
@@ -42,7 +43,8 @@ import { map } from 'rxjs/operators';
     selector: 'fd-split-button',
     templateUrl: 'split-button.component.html',
     styleUrls: ['./split-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
 })
 export class SplitButtonComponent {
     /** @hidden */

@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class CalendarI18nLabels {
 
     /** This is event that should be called, when labels are changed, to let component detect an changes. */
-    public readonly labelsChange: Subject<void> = new Subject<void>();
+    readonly labelsChange: Subject<void> = new Subject<void>();
 
     /** Year selection aria label. Used on the button to navigate to the years view. */
     yearSelectionLabel: string = 'Year selection';

@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 /**
  * The action bar description.
@@ -18,4 +18,13 @@ import { Directive } from '@angular/core';
         class: 'fd-action-bar__description'
     }
 })
-export class ActionBarDescriptionDirective { }
+export class ActionBarDescriptionDirective {
+
+    /*
+     Whether the action bar also has a back button.
+     */
+    @Input()
+    @HostBinding('class.fd-action-bar__description--back')
+    withBackBtn: boolean = false;
+
+}

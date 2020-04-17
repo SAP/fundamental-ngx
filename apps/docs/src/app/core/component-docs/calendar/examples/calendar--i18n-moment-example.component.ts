@@ -5,7 +5,6 @@ import 'moment/locale/en-gb';
 import 'moment/locale/de';
 import 'moment/locale/fr';
 import 'moment/locale/bg';
-import 'moment/locale/pl';
 import 'moment/locale/zh-cn';
 import 'moment/locale/zh-hk';
 import 'moment/locale/zh-tw';
@@ -43,7 +42,6 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
             <button fd-segmented-button [size]="'xs'" (click)="setLocale('de')" [state]="isSelected('de')">German</button>
             <button fd-segmented-button [size]="'xs'" (click)="setLocale('es')" [state]="isSelected('es')">Spanish</button>
             <button fd-segmented-button [size]="'xs'" (click)="setLocale('bg')" [state]="isSelected('bg')">Bulgarian</button>
-            <button fd-segmented-button [size]="'xs'" (click)="setLocale('pl')" [state]="isSelected('pl')">Polish</button>
             <button fd-segmented-button [size]="'xs'" (click)="setLocale('zh-cn')" [state]="isSelected('zh-cn')">Chinese CN</button>
             <button fd-segmented-button [size]="'xs'" (click)="setLocale('zh-hk')" [state]="isSelected('zh-hk')">Chinese HK</button>
             <button fd-segmented-button [size]="'xs'" (click)="setLocale('zh-tw')" [state]="isSelected('zh-tw')">Chinese TW</button>

@@ -24,6 +24,10 @@ import { AlertConfig } from './alert-utils/alert-config';
 let alertUniqueId: number = 0;
 
 /**
+ * @deprecated
+ * Alert component is depricated since version 0.16.0
+ * Message Strip component should be used instead.
+ * 
  * The component that represents an alert. It can be only be used inline.
  * If the AlertService is used, this component is auto-generated.
  */

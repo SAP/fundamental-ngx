@@ -10,7 +10,7 @@ import {DropdownIconsExampleComponent} from './examples/dropdown-icons-example.c
 import {DropdownStateExampleComponent} from './examples/dropdown-state-example.component';
 import {DropdownInfiniteScrollExampleComponent} from './examples/dropdown-infinite-scroll-example.component';
 import {DropdownToolbarExampleComponent} from './examples/dropdown-toolbar-example.component';
-import { InfiniteScrollModule, MenuModule, PopoverModule } from '@fundamental-ngx/core';
+import { InfiniteScrollModule, MenuModule, MessageStripModule, PopoverModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -29,6 +29,7 @@ const routes: Routes = [
         SharedDocumentationModule,
         PopoverModule,
         InfiniteScrollModule,
+        MessageStripModule,
         MenuModule
     ],
     exports: [RouterModule],

@@ -1,4 +1,4 @@
-<fd-popover [(isOpen)]="isOpen" [triggers]="[]" [placement]="placement" [closeOnEscapeKey]="true" [disabled]="disabled">
+<fd-popover [(isOpen)]="isOpen" [triggers]="[]" [placement]="placement" [closeOnEscapeKey]="true" [disabled]="disabled" [focusTrapped]="true">
     <fd-popover-control>
         <fd-input-group [compact]="compact" [state]="state" [disabled]="disabled">
             <input
@@ -12,7 +12,7 @@
                 (ngModelChange)="handleInputChange($event)"
                 (click)="openCalendar()"
                 [compact]="compact"
-                [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }"
+                [ngClass]="{ 'is-error': isInvalidDateInput && useValidation }"
             />
             <span fd-input-group-addon [button]="true" [compact]="compact">
                 <button
@@ -32,14 +32,18 @@
         <fd-calendar
             (closeCalendar)="closeFromCalendar()"
             [activeView]="activeView"
+            [compact]="compact"
+            [markWeekends]="markWeekends"
+            [specialDaysRules]="specialDaysRules"
+            [showWeekNumbers]="showWeekNumbers"
+            [aggregatedYearGrid]="aggregatedYearGrid"
+            [yearGrid]="yearGrid"
             (activeViewChange)="handleCalendarActiveViewChange($event)"
             [calType]="type"
+            [rangeHoverEffect]="rangeHoverEffect"
             [disableFunction]="disableFunction ? disableFunction : null"
-            [blockFunction]="blockFunction ? blockFunction : null"
             [disableRangeStartFunction]="disableRangeStartFunction ? disableRangeStartFunction : null"
             [disableRangeEndFunction]="disableRangeEndFunction ? disableRangeEndFunction : null"
-            [blockRangeStartFunction]="blockRangeStartFunction ? blockRangeStartFunction : null"
-            [blockRangeEndFunction]="blockRangeEndFunction ? blockRangeEndFunction : null"
             [selectedDate]="selectedDate"
             [selectedRangeDate]="selectedRangeDate"
             (selectedRangeDateChange)="handleRangeDateChange($event)"

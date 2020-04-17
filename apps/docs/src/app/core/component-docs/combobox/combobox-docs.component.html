@@ -14,7 +14,9 @@
 </fd-docs-section-title>
 <description>
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
-    accepts an array and a search term, and then returns the desired filtered array.
+    accepts an array and a search term, handle filtering logic within this function, and then return the desired filtered array.
+    In this example, we are only populating the list with results where the search term matches the beginning of the result,
+    as opposed to the usual behavior where the list will be populated if the search term appears anywhere in the string.
 </description>
 <component-example>
     <fd-combobox-dynamic-example></fd-combobox-dynamic-example>
@@ -27,8 +29,8 @@
     Custom Search Function
 </fd-docs-section-title>
 <description>
-    Custom search function can be provided by <code>[searchFunction]</code> to combobox. It will be called on mouse
-    click on combobox's primary button, or on enter key press, while focused on combobox input.
+    A custom search function can be provided with the <code>[searchFn]</code> input. This function will be called when the primary
+    combobox button is clicked, or when the user presses the 'enter' key while focused in the combobox input.
 </description>
 <component-example>
     <fd-combobox-search-function-example></fd-combobox-search-function-example>
@@ -41,8 +43,8 @@
     Display Object Property
 </fd-docs-section-title>
 <description>
-    Passing object arrays to the Combobox is supported through the <code>displayFn</code> input function. To access the
-    <code>this</code> keyword inside the passed function, use an arrow function.
+    The <code>displayFn</code> input can be used to modify how the results are presented within the combobox. In this
+    example we are making the results all upper-cased.
 </description>
 <component-example>
     <fd-combobox-displaywith-example></fd-combobox-displaywith-example>
@@ -59,8 +61,8 @@
 </description>
 <description>
     By passing <code>[closeOnOutsideClick]="false"</code>, <code>[openOnKeyboardEvent]="false"</code> and
-    <code>[triggers]="[]"</code>, it is possible to fully control the <code>open</code> state of combobox. To change it
-    pass variable to <code>[open]</code>.
+    <code>[triggers]="[]"</code>, it is possible to fully control how the user will open and close the results list. The
+    open state can be controlled directly with the <code>[open]</code> input.
 </description>
 <component-example>
     <fd-combobox-open-control-example></fd-combobox-open-control-example>
@@ -73,7 +75,7 @@
     Observable Async Example
 </fd-docs-section-title>
 <description>
-    The <code>dropdownValues</code> input can accept an Observable with the async pipe, which could be useful for
+    The <code>dropdownValues</code> input can accept an Observable with an async pipe, which could be useful for
     autocomplete.
 </description>
 <description>
@@ -90,8 +92,9 @@
     Custom Item Template
 </fd-docs-section-title>
 <description>
-    The way the items are rendered in the popover list can be customized through providing an <code>itemTemplate</code>
-    to the component.
+    The way the items are rendered in the popover list can be customized by providing an <code>itemTemplate</code>
+    to the component. The <code>itemTemplate</code> should align with the contents of an <a [routerLink]="'/core/list'">fd-list-item</a>
+    directive.
 </description>
 <component-example>
     <fd-combobox-template-example></fd-combobox-template-example>
@@ -100,17 +103,31 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'combobox-inReactiveForm'" [componentName]="'combobox'">
-    Combobox In A Reactive Form
+<fd-docs-section-title [id]="'combobox-columns'" [componentName]="'combobox'">
+    Combobox with Two Columns
 </fd-docs-section-title>
 <description>
-    This examples shows how to put <code>combobox</code> in a Reactive Form. Also how to sets it's state to
-    <code>disabled</code>
+    The <code>[itemTemplate]</code> input can be used to create a combobox with two columns of information. Note that a
+    <code>displayFn</code> is required for this example so the combobox knows how to display the selected item.
 </description>
 <component-example>
-    <fd-combobox-disabled-example></fd-combobox-disabled-example>
+    <fd-combobox-columns-example></fd-combobox-columns-example>
 </component-example>
-<code-example [exampleFiles]="comboboxDisabledExample"></code-example>
+<code-example [exampleFiles]="comboboxColumnsExample"></code-example>
+
+<fd-docs-section-title [id]="'combobox-group'" [componentName]="'combobox'">
+    Combobox with Groups
+</fd-docs-section-title>
+<description>
+    Grouping data within a set of values can be achieved by passing a function to the <code>[groupFn]</code> input. This
+    function should accept an object of key/value pairs as the parameter. Each key will be a group name and the corresponding
+    value for that key will be an array of any type. A <code>[displayFn]</code> can be used to specify what to display
+    from that array.
+</description>
+<component-example>
+    <fd-combobox-group-example></fd-combobox-group-example>
+</component-example>
+<code-example [exampleFiles]="comboboxGroupExample"></code-example>
 
 <separator></separator>
 
@@ -118,8 +135,7 @@
     Custom Height Example
 </fd-docs-section-title>
 <description>
-    There is also the possibility to define a fixed height for the dropdown list by specifying the desired height using
-    the <code>[maxHeight]</code> attribute.
+    Use the <code>[maxHeight]</code> input to set a maximum height for the results list.
 </description>
 <component-example>
     <fd-combobox-height-example></fd-combobox-height-example>
@@ -135,12 +151,23 @@
     The Combobox component may also be used within Angular Reactive Forms.
 </description>
 <description>
-    Also in combobox can be used <code>[communicateByObject]</code>. Enabling this option changes the way the component
-    communicates with the outside. When combobox communicates by objects, writing in text input doesn't change binded
-    value, until it matches one of displayed dropdown options. Also on this mode, combobox on communication uses model
-    with same type as it's passed to <code>[dropdownValues]</code>
+    Use the <code>[communicateByObject]</code> boolean input if you are using custom objects for the <code>dropdownValues</code>
+    or if you want the combobox to only trigger onChange when a value is selected, rather than every time the input changes.
 </description>
 <component-example>
     <fd-combobox-forms-example></fd-combobox-forms-example>
 </component-example>
 <code-example [exampleFiles]="comboboxFormExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'combobox-disabled'" [componentName]="'combobox'">
+    Disabled Combobox
+</fd-docs-section-title>
+<description>
+    This example shows how to use a a disabled combobox in a reactive form.
+</description>
+<component-example>
+    <fd-combobox-disabled-example></fd-combobox-disabled-example>
+</component-example>
+<code-example [exampleFiles]="comboboxDisabledExample"></code-example>

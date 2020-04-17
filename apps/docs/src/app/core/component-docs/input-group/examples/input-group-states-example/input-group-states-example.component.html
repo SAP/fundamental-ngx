@@ -1,12 +1,45 @@
-<label fd-form-label>Information</label>
-<fd-input-group [addOnText]="'Button'" [button]="true" [state]="'information'" [placeholder]="'Placeholder'"></fd-input-group>
+<div fd-form-item>
+    <label fd-form-label>Information</label>
+    <fd-form-input-message-group>
+        <fd-input-group fd-form-control [addOnText]="'Button'" [button]="true" [state]="'information'" [placeholder]="'Placeholder'"></fd-input-group>
+        <fd-form-message [type]="'information'">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>
+
 <br />
-<label fd-form-label>Success</label>
-<fd-input-group [addOnText]="'Button'" [button]="true" [state]="'valid'" [placeholder]="'Placeholder'"></fd-input-group>
+
+<div fd-form-item>
+    <label fd-form-label>Success</label>
+    <fd-form-input-message-group>
+        <fd-input-group fd-form-control [addOnText]="'Button'" [compact]="true" [button]="true" [state]="'success'" [placeholder]="'Placeholder'"></fd-input-group>
+        <fd-form-message [type]="'success'">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>
+
 <br />
-<label fd-form-label>Warning</label>
-<fd-input-group [addOnText]="'Button'" [button]="true" [state]="'warning'" [placeholder]="'Placeholder'"></fd-input-group>
+
+<div fd-form-item>
+    <label fd-form-label>Warning</label>
+    <fd-form-input-message-group>
+        <fd-input-group fd-form-control [addOnText]="'Button'" [button]="true" [state]="'warning'" [placeholder]="'Placeholder'"></fd-input-group>
+        <fd-form-message [type]="'warning'">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>
+
 <br />
-<label fd-form-label>Invalid</label>
-<fd-input-group [addOnText]="'Button'" [button]="true" [state]="'invalid'" [placeholder]="'Placeholder'"></fd-input-group>
-<br />
+
+<div fd-form-item>
+    <label fd-form-label>Error</label>
+    <fd-form-input-message-group>
+        <fd-input-group fd-form-control [addOnText]="'Button'" [button]="true" [state]="'error'" [placeholder]="'Placeholder'"></fd-input-group>
+        <fd-form-message [type]="'error'">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>

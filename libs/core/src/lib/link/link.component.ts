@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, ViewEncapsulation, OnInit } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 @Component({
@@ -11,19 +11,33 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LinkComponent implements OnInit, OnChanges, CssClassBuilder {
+export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** user's custom classes */
-    @Input() class: string;
+    @Input()
+    class: string;
 
     /** Whether user wants to use emphasized mode */
-    @Input() emphasized: boolean;
+    @Input()
+    emphasized: boolean;
 
     /** Whether user wants to put disabled mode */
-    @Input() disabled: boolean;
+    @Input()
+    disabled: boolean;
 
     /** Whether user wants to use inverted mode */
-    @Input() inverted: boolean;
+    @Input()
+    inverted: boolean;
+
+    /** @hidden */
+    constructor(
+        private _elementRef: ElementRef
+    ) { }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
 
     @applyCssClass
     /** CssClassBuilder interface implementation
@@ -40,18 +54,8 @@ export class LinkComponent implements OnInit, OnChanges, CssClassBuilder {
     }
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef
-    ) {}
-
-    /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
     }
 
     /** @hidden */

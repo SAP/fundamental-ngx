@@ -11,6 +11,6 @@
     "focus-trap",
     "popper.js",
     "fundamental-styles",
-    "@angular/cdk"
+    "@sap-theming/theming-base-content"
   ]
 }

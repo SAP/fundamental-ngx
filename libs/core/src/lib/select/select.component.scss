@@ -39,7 +39,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: -webkit-fill-available;
+            height: auto;
         }
 
         &:hover {
@@ -92,7 +92,7 @@
             &::after {
                 border-left-style: solid;
                 border-left-width: 1px;
-                height: -webkit-fill-available;
+                height: auto;
                 border-color: var(--sapUiFieldBorderColor, #89919a);
             }
             &:hover {

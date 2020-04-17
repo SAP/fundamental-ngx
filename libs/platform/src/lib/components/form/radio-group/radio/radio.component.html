@@ -1,0 +1,17 @@
+<ng-template #renderer>
+    <fd-radio-button
+        [id]="id"
+        [name]="name"
+        [value]="value"
+        [state]="state"
+        [compact]="size === 'compact'"
+        [disabled]="disabled"
+        (click)="onClick($event)"
+    >
+        <ng-content></ng-content>
+    </fd-radio-button>
+</ng-template>
+
+<ng-container *ngIf="forceRender">
+    <ng-container *ngTemplateOutlet="renderer"></ng-container>
+</ng-container>

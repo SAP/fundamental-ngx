@@ -2,6 +2,10 @@
 .fd-multi-input-custom {
     display: block;
 
+    .fd-multi-input-item {
+        cursor: pointer;
+    }
+
     .fd-multi-input-popover-size {
         overflow: auto;
         display: block;
@@ -27,6 +31,7 @@
             margin-top: 0;
             margin-bottom: 0;
             padding-left: 0;
+            background-color: transparent;
         }
     }
 

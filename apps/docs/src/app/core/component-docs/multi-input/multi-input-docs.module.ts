@@ -12,6 +12,7 @@ import {MultiInputFilterExampleComponent} from './examples/multi-input-filter-ex
 import {MultiInputFormExampleComponent} from './examples/multi-input-form-example/multi-input-form-example.component';
 import {MultiInputCompactExampleComponent} from './examples/multi-input-compact-example/multi-input-compact-example.component';
 import { MultiInputModule } from '@fundamental-ngx/core';
+import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
 
 const routes: Routes = [
     {
@@ -39,7 +40,8 @@ const routes: Routes = [
         MultiInputAsyncExampleComponent,
         MultiInputFilterExampleComponent,
         MultiInputDisplaywithExampleComponent,
-        MultiInputCompactExampleComponent
+        MultiInputCompactExampleComponent,
+        MultiInputNewTokensExampleComponent
     ]
 })
 export class MultiInputDocsModule {

@@ -19,7 +19,7 @@ const routes: Routes = [
         component: InfoLabelHeaderComponent,
         children: [
             {path: '', component: InfoLabelDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.infolabel}}
+            {path: 'api', component: ApiComponent, data: {content: API_FILES.infoLabel}}
         ]
     }
 ];

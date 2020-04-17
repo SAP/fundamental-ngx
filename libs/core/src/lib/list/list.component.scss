@@ -1,1 +1,11 @@
 @import "~fundamental-styles/dist/list";
+
+.fd-list--dropdown {
+    max-width: inherit;
+    .fd-list__title {
+        max-width: inherit;
+    }
+    .fd-list__secondary {
+        max-width: inherit;
+    }
+}

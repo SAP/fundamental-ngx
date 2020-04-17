@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { MessageStates } from '../form/form-message/form-message.component';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
@@ -6,29 +6,26 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-list-message]',
 })
-export class ListMessageDirective implements OnInit, CssClassBuilder {
+export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder {
 
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
-    private _type: MessageStates;
     @Input()
-    set type(type: MessageStates) {
-        this._type = type;
-        this.buildComponentCssClass();
-    }
+    type: MessageStates;
 
-    private _class: string = '';
-    @Input() set class(userClass: string) {
-        this._class = userClass;
-        this.buildComponentCssClass();
-    } // user's custom classes
+    /** Apply user custom styles */
+    @Input()
+    class: string;
 
     constructor(
         private _elementRef: ElementRef
-    ) {}
+    ) { }
 
-    /** Function runs when component is initialized
-     * function should build component css class
-     */
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
@@ -41,8 +38,8 @@ export class ListMessageDirective implements OnInit, CssClassBuilder {
     buildComponentCssClass(): string {
         return [
             'fd-list__message',
-            this._type ? ('fd-list__message--' + this._type) : '',
-            this._class
+            this.type ? ('fd-list__message--' + this.type) : '',
+            this.class
         ].filter(x => x !== '').join(' ');
     }
 

@@ -6,9 +6,7 @@ import { Component } from '@angular/core';
 })
 export class TableCheckboxesExampleComponent {
 
-    selectedRows = [];
     selectMasterModel = false;
-    allSelected = false;
 
     tableRows = [
         {
@@ -53,54 +51,29 @@ export class TableCheckboxesExampleComponent {
         }
     ];
 
-    select(row: number): void {
-        if (this.tableRows[row].checked === false) {
-            this.selectedRows.push(row);
-            this.tableRows[row].checked = true;
-        } else {
-            this.selectedRows.splice(this.selectedRows.indexOf(row), 1);
-            this.tableRows[row].checked = false;
-        }
-
-        this.allSelected = this.checkIfAllSelected();
+    select(index: number, checked: boolean): void {
+        this.tableRows[index].checked = checked;
+        this.selectMasterModel = this._allSelected();
     }
 
-    selectMaster() {
-        if (this.allSelected) {
-            this.deselectAll();
-            this.allSelected = false;
+    selectMaster(checked: boolean) {
+        this.selectMasterModel = checked
+        if (checked) {
+            this._selectAll();
         } else {
-            this.selectAll();
-            this.allSelected = true;
+            this._deselectAll();
         }
     }
 
-    private selectAll(): void {
-        this.tableRows.forEach((row, index) => {
-            if (row.checked === false) {
-                row.checked = true;
-                this.selectedRows.push(index);
-            }
-        });
-        this.allSelected = true;
+    private _selectAll(): void {
+        this.tableRows.forEach(row => row.checked = true);
     }
 
-    private deselectAll(): void {
-        this.tableRows.forEach(row => {
-            row.checked = false;
-        });
-        this.allSelected = false;
-        this.selectedRows = [];
+    private _deselectAll(): void {
+        this.tableRows.forEach(row => row.checked = false);
     }
 
-    private checkIfAllSelected(): boolean {
-        let state = true;
-        this.tableRows.forEach(row => {
-            if (row.checked === false) {
-                state = false;
-            }
-        });
-        return state;
+    private _allSelected(): boolean {
+        return !this.tableRows.find(_row => !_row.checked);
     }
-
 }

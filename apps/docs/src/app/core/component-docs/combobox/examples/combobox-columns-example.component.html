@@ -1,0 +1,12 @@
+<fd-combobox [(ngModel)]="searchTerm"
+             [dropdownValues]="dropdownValues"
+             [itemTemplate]="columnTemplate"
+             [placeholder]="'Type some text...'"
+             [maxHeight]="'250px'"
+             [displayFn]="displayFunc">
+</fd-combobox>
+
+<ng-template #columnTemplate let-item>
+    <span fd-list-title>{{item.name}}</span>
+    <span fd-list-secondary>{{item.price}}</span>
+</ng-template>

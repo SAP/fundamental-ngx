@@ -13,7 +13,7 @@
 
     <ng-content></ng-content>
 
-    <ng-container *ngIf="!addOnElement">
+    <ng-container *ngIf="!addOnElement && (glyph || addOnText)">
         <span
             *ngIf="button"
             fd-input-group-addon
@@ -25,9 +25,8 @@
             <button
                 fd-button
                 [compact]="compact"
-                [fdType]="'transparent'"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
-                [fdType]="buttonType"
+                [fdType]="'transparent'"
                 [glyph]="glyph"
                 [class]="inShellbar ? 'fd-shellbar__button' : ''"
                 (click)="buttonClicked($event)"

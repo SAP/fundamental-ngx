@@ -5,13 +5,13 @@
 	<fd-info-label-default-example></fd-info-label-default-example>
 </component-example>
 <code-example [exampleFiles]="defaultInfoLabelHtmlType"></code-example>
-<label fd-form-label>Default Info label by passing the default message </label>
+
 <separator></separator>
 
-<fd-docs-section-title [id]="'filled'" [componentName]="'infolabel'">
-	Info label with text
+<fd-docs-section-title [id]="'infoLabelText'" [componentName]="'infolabel'">
+	Info Label With Text
 </fd-docs-section-title>
-<description> <code>fd-info-label fd-info-label--accent-color-1</code> modifier can be used to render a Text version of the Info label. </description>
+<description>To apply semantic color to the Info Label use the <code>[color]</code> property. Available options are numbers from 1 to 10.</description>
 <component-example>
 	<fd-info-label-text-example></fd-info-label-text-example>
 </component-example>
@@ -19,10 +19,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'filled'" [componentName]="'infolabel'">
-	Info Label with text and icon
+<fd-docs-section-title [id]="'infoLabelTextIcon'" [componentName]="'infolabel'">
+	Info Label With Text and Icon
 </fd-docs-section-title>
-<description> <code>fd-info-label fd-info-label--accent-color-1 fd-info-label--icon</code> modifier can be used to render a icon with text version of the Info Label. </description>
+<description>Set the <code>[type]</code> property to 'icon' for Info Label with text and icon. </description>
 <component-example>
 	<fd-info-label-text-icon-example></fd-info-label-text-icon-example>
 </component-example>
@@ -30,10 +30,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'filled'" [componentName]="'infolabel'">
-	Info label with numeric and only Icon
+<fd-docs-section-title [id]="'infoLabelNumeric'" [componentName]="'infolabel'">
+	Info Label With a Number or an Icon
 </fd-docs-section-title>
-<description> <code>fd-info-label--numeric fd-info-label--only-icon</code> modifier can be used to render a numeric and icon only version of the badge. </description>
+<description>Set the <code>[type]</code> property to 'numeric' for Info Label with a number. For Info Label with icon only set the property to 'only-icon'. </description>
 <component-example>
 	<fd-info-label-numeric-icon-example></fd-info-label-numeric-icon-example>
 </component-example>

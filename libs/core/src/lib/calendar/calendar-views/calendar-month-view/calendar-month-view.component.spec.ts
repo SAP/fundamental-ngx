@@ -31,8 +31,8 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should have 12 months', () => {
-        expect(component.shortMonthNames).toBeDefined();
-        const monthList: string[] = [].concat.apply([], component.shortMonthNames);
+        expect(component.monthNames).toBeDefined();
+        const monthList: string[] = [].concat.apply([], component.monthNames);
         expect(monthList.length).toBe(12);
     });
 
@@ -42,17 +42,17 @@ describe('CalendarMonthViewComponent', () => {
         expect(component.selectMonth).toHaveBeenCalled();
     });
 
-    it('Should have is-selected class when the month is selected', () => {
+    it('Should have is-active class when the month is selected', () => {
         const element = fixture.debugElement.query(By.css('td')).nativeElement;
 
-        (component as any).cdRef.detectChanges();
-        expect(element.classList.contains('is-selected')).toBe(false);
+        (component as any)._cdRef.detectChanges();
+        expect(element.classList.contains('is-active')).toBe(false);
 
         component.selectMonth(0);
         fixture.detectChanges();
-        (component as any).cdRef.detectChanges();
+        (component as any)._cdRef.detectChanges();
         const selectedElement = fixture.debugElement.query(By.css('td')).nativeElement;
-        expect(selectedElement.classList.contains('is-selected')).toBe(true);
+        expect(selectedElement.classList.contains('is-active')).toBe(true);
     });
 
 
@@ -62,7 +62,7 @@ describe('CalendarMonthViewComponent', () => {
             key: 'ArrowDown', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
-        expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-9');
+        expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-8');
     });
 
     it('Should focus the month above with ArrowUp', () => {
@@ -71,7 +71,7 @@ describe('CalendarMonthViewComponent', () => {
             key: 'ArrowUp', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
-        expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-1');
+        expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-2');
     });
 
     it('Should focus the month to the left with ArrowLeft', () => {
@@ -110,11 +110,11 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should generate grid', () => {
-        expect(component.shortMonthNames).toBeDefined();
+        expect(component.monthNames).toBeDefined();
 
-        const sizes: number[] = component.shortMonthNames.map(list => list.length);
+        const sizes: number[] = component.monthNames.map(list => list.length);
 
-        expect(sizes).toEqual([4, 4, 4]);
+        expect(sizes).toEqual([3, 3, 3, 3]);
 
     });
 });

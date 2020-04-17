@@ -18,6 +18,7 @@ export class StackblitzDependencies {
         '@angular/router',
         '@angular/platform-browser',
         '@angular/platform-browser-dynamic',
+        '@sap-theming/theming-base-content',
         'core-js',
         'fundamental-styles',
         'moment',
@@ -41,5 +42,79 @@ export class StackblitzDependencies {
         });
 
         return _dependencies;
+    }
+
+    static GetAngularJson(): string {
+        return `
+        {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "fundamental-ngx-example": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fundamental-ngx-example:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fundamental-ngx-example:build:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "fundamental-ngx-example"
+}
+        `
     }
 }

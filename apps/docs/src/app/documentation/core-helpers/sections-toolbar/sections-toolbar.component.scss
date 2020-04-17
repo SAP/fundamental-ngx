@@ -1,11 +1,9 @@
 :host {
     display: flex;
     flex-direction: column;
-    height: 100vh;
 }
 
 .sidebar {
-    height: 100vh;
     color: #21262c;
     background-color: #f1f3f6;
     transition: 0.3s margin ease-in-out, 0.3s box-shadow ease-in-out;

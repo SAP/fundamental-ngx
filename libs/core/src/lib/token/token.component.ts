@@ -41,12 +41,21 @@ export class TokenComponent {
     @Output()
     readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
 
+    /** Emitted when a token is clicked. */
+    @Output()
+    onTokenClick: EventEmitter<void> = new EventEmitter<void>();
+
     /** @hidden */
-    clickHandler(event): void {
+    closeClickHandler(event): void {
         event.stopPropagation();
         if (!this.disabled) {
             this.onCloseClick.emit(event);
         }
+    }
+
+    /** @hidden */
+    tokenClickHandler(event): void {
+        this.onTokenClick.emit(event);
     }
 
     constructor(public elementRef: ElementRef) {}
