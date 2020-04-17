@@ -41,6 +41,9 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
     protected _destroyed = new Subject<void>();
 
     @Input()
+    placeholder: string;
+
+    @Input()
     get disabled(): boolean {
         if (this.ngControl && this.ngControl.disabled !== null) {
             return this.ngControl.disabled;

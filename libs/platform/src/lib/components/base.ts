@@ -1,29 +1,34 @@
 import { Input, ChangeDetectorRef } from '@angular/core';
-import { InputSize } from './form/form-control';
+import { ContentDensity } from './form/form-control';
 
 let randomId = 0;
 
 /**
- * This class contains common properties used across components. 
+ * This class contains common properties used across components.
  * this can be extended to reduce the code duplication across components.
  * @hidden for form related Base , see BaseInput.
  */
-export class BaseComponent {
+export abstract class BaseComponent {
     protected defaultId: string = `fdp-id-${randomId++}`;
     protected _disabled: boolean;
 
+    /** id for the Element */
     @Input()
     id: string = this.defaultId;
 
+    /** name for the element */
     @Input()
     name: string;
 
+    /** content Density of element. cozy | compact */
     @Input()
-    placeholder: string;
+    contentDensity: ContentDensity = 'cozy';
 
+    /** width of the element */
     @Input()
-    contentDensity: InputSize = 'cozy';
+    width: string;
 
+    /** disabled status of the element */
     @Input()
     get disabled(): boolean {
         return this._disabled;
@@ -34,5 +39,4 @@ export class BaseComponent {
     }
 
     constructor(protected _cd: ChangeDetectorRef) {}
-
 }
