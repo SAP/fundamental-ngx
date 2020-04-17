@@ -1,7 +1,6 @@
-import { compareObjects } from './compare-objects';
 import { isKey } from '@fundamental-ngx/core';
 
-describe('compareObjects', () => {
+describe('isKey', () => {
     interface TestValue {
         event: KeyboardEvent,
         key: string
@@ -78,6 +77,8 @@ describe('compareObjects', () => {
     );
 
     it('should throw error for broken examples', () =>
-        errorTestValues.forEach(example => expect(isKey(example.event, example.key)).toThrow())
+        errorTestValues.forEach(example =>
+            expect(() => isKey(example.event, example.key)).toThrow()
+        )
     );
 });

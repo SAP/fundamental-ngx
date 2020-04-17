@@ -21,6 +21,6 @@ export function isKey(event: KeyboardEvent, key: string) {
         return keyMap.get(key).aliases.includes(event.key) || keyMap.get(key).keyCode === event.keyCode;
     }
 
-    throw `Invalid function arguments. Check if "event" is a KeyboardEvent or "key" is defined in keyMap`;
+    throw new Error(`Invalid function arguments. Check if "event" is a KeyboardEvent or "key" is defined in keyMap`);
     return false;
 }
