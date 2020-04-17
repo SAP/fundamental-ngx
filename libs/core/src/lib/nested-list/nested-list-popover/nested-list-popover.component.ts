@@ -1,12 +1,14 @@
 import { Component, ContentChild, HostBinding, ViewChild, ViewEncapsulation, Optional } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { NestedItemDirective } from '../nested-item/nested-item.directive';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { PopoverComponent } from '../../popover/popover.component';
 import { RtlService } from '../../utils/public_api';
 import { map } from 'rxjs/operators';
+import { NestedItemInterface } from '../nested-item/nested-item.interface';
+import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedListPopoverInterface } from './nested-list-popover.interface';
 
 @Component({
     selector: 'fd-nested-list-popover',
@@ -14,7 +16,7 @@ import { map } from 'rxjs/operators';
     styleUrls: ['./nested-list-popover.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class NestedListPopoverComponent {
+export class NestedListPopoverComponent implements NestedListPopoverInterface {
     /** @hidden */
     placement$: Observable<string>;
 
@@ -34,7 +36,7 @@ export class NestedListPopoverComponent {
      * @hidden
      * Reference to parent item, to propagate open and close change from popover.
      */
-    parentItemElement: NestedItemDirective;
+    parentItemElement: NestedItemInterface;
 
     /**
      * @hidden
@@ -44,10 +46,14 @@ export class NestedListPopoverComponent {
     /** @hidden */
     constructor(
         private _keyboardNestService: NestedListKeyboardService,
+        @Optional() private _itemService: NestedItemService,
         @Optional() private _rtlService: RtlService
     ) {
         this._listenOnKeyboardRefresh();
         this._createRtlObservable();
+        if (this._itemService) {
+            this._itemService.popover = this;
+        }
     }
 
     /**

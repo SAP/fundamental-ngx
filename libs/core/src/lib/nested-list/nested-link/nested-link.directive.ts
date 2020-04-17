@@ -66,19 +66,19 @@ export class NestedLinkDirective implements OnInit {
 
     /** Set focus on the element. */
     focus(): void {
-        this.elementRef.nativeElement.focus();
+        this._elementRef.nativeElement.focus();
     }
 
     /** Dispatches the click event on the element */
     click(): void {
-        this.elementRef.nativeElement.click();
+        this._elementRef.nativeElement.click();
     }
 
     /** @hidden */
     constructor(
-        private renderer: Renderer2,
-        private elementRef: ElementRef,
-        public changeDetRef: ChangeDetectorRef
+        public changeDetRef: ChangeDetectorRef,
+        private _renderer: Renderer2,
+        private _elementRef: ElementRef
     ) {}
 
     /** @hidden */
@@ -86,12 +86,12 @@ export class NestedLinkDirective implements OnInit {
         /** Add event listeners on the element */
 
         /** Keyboard */
-        this.renderer.listen(this.elementRef.nativeElement, 'keydown', (event) =>
+        this._renderer.listen(this._elementRef.nativeElement, 'keydown', (event) =>
             this.keyboardTriggered.emit(event)
         );
 
         /** Mouse Click */
-        this.renderer.listen(this.elementRef.nativeElement, 'click', (event) => {
+        this._renderer.listen(this._elementRef.nativeElement, 'click', (event) => {
             if (this.onClickCallback) {
                 this.onClickCallback();
             }

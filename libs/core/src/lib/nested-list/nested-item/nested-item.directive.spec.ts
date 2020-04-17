@@ -5,6 +5,7 @@ import { NestedListModule } from '../nested-list.module';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
+import { NestedItemService } from './nested-item.service';
 
 @Component({
     template: `
@@ -57,6 +58,7 @@ describe('NestedItemDirective', () => {
     let nestedItemListDirective: NestedItemDirective;
     let emptyItemDirective: NestedItemDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
+    let itemService: NestedItemService;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -74,6 +76,7 @@ describe('NestedItemDirective', () => {
         nestedItemListDirective = component.nestedItemListDirective;
         emptyItemDirective = component.emptyItemDirective;
         nestedItemPopoverDirective = component.nestedItemPopoverDirective;
+        itemService = (<any>nestedItemPopoverDirective)._itemService;
         fixture.detectChanges();
     });
 
@@ -84,7 +87,7 @@ describe('NestedItemDirective', () => {
 
     it('Item with popover should react to open change from popover', () => {
         spyOn(nestedItemPopoverDirective, 'triggerOpen');
-        nestedItemPopoverDirective.popoverItem.handleOpenChange(true);
+        itemService.popover.handleOpenChange(true);
         expect(nestedItemPopoverDirective.triggerOpen).toHaveBeenCalled();
     });
 
@@ -102,7 +105,7 @@ describe('NestedItemDirective', () => {
     });
 
     it('Item with popover, should pass reference to popover child', () => {
-        expect(nestedItemPopoverDirective.popoverItem.parentItemElement).toBe(nestedItemPopoverDirective);
+        expect(itemService.popover.parentItemElement).toBe(nestedItemPopoverDirective);
     });
 
     it('Item with list should have children', () => {

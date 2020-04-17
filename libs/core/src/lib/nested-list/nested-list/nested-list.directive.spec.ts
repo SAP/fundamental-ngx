@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuKeyboardService, PopoverModule } from '@fundamental-ngx/core';
+import { MenuKeyboardService } from '@fundamental-ngx/core';
 import { NestedListModule } from '../nested-list.module';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
@@ -76,12 +76,12 @@ describe('NestedListDirective', () => {
     });
 
     it('Should add classes', () => {
-        expect((level1List as any).elementRef.nativeElement.classList.contains('fd-nested-list')).toBeTruthy();
-        expect((level1List as any).elementRef.nativeElement.classList.contains('fd-nested-list--text-only')).toBeTruthy();
-        expect((level1List as any).elementRef.nativeElement.classList.contains('fd-nested-list--compact')).toBeTruthy();
-        expect((level1List as any).elementRef.nativeElement.classList.contains('level-1')).toBeTruthy();
-        expect((level3List as any).elementRef.nativeElement.classList.contains('level-3')).toBeTruthy();
-        expect((level4List as any).elementRef.nativeElement.classList.contains('level-4')).toBeTruthy();
+        expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list')).toBeTruthy();
+        expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list--text-only')).toBeTruthy();
+        expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list--compact')).toBeTruthy();
+        expect((level1List as any)._elementRef.nativeElement.classList.contains('level-1')).toBeTruthy();
+        expect((level3List as any)._elementRef.nativeElement.classList.contains('level-3')).toBeTruthy();
+        expect((level4List as any)._elementRef.nativeElement.classList.contains('level-4')).toBeTruthy();
     })
 
 

@@ -52,9 +52,11 @@ describe('NestedLinkDirective', () => {
         directiveElement.expanded = true;
         fixture.detectChanges();
 
-        expect((directiveElement as any).elementRef.nativeElement.classList.contains('is-expanded')).toBeTruthy();
-        expect((directiveElement as any).elementRef.nativeElement.classList.contains('is-selected')).toBeTruthy();
-        expect((directiveElement as any).elementRef.nativeElement.classList.contains('has-child')).toBeTruthy();
+        const classList = (directiveElement as any)._elementRef.nativeElement.classList;
+
+        expect(classList.contains('is-expanded')).toBeTruthy();
+        expect(classList.contains('is-selected')).toBeTruthy();
+        expect(classList.contains('has-child')).toBeTruthy();
 
     });
 

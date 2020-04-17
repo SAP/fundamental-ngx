@@ -1,16 +1,15 @@
 import {
-    AfterContentInit,
-    ContentChildren,
+    AfterContentInit, ContentChildren,
     Directive,
-    ElementRef,
-    forwardRef,
+    ElementRef, forwardRef,
     HostBinding,
-    Input,
-    QueryList
+    Input, Optional, QueryList
 } from '@angular/core';
-import { NestedItemDirective } from '../nested-item/nested-item.directive';
-import { NestedListInterface } from './nested-list.interface';
 import { NestedListStateService } from '../nested-list-state.service';
+import { NestedItemDirective } from '../nested-item/nested-item.directive';
+import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { NestedListInterface } from './nested-list.interface';
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]'
@@ -45,24 +44,31 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     constructor(
-        private nestedListStateService: NestedListStateService,
-        private elementRef: ElementRef
-    ) {}
+        @Optional() private _nestedItemService: NestedItemService,
+        private _nestedListStateService: NestedListStateService,
+        private _nestedListKeyboardService: NestedListKeyboardService,
+        private _elementRef: ElementRef
+    ) {
+        if (this._nestedItemService) {
+            this._nestedItemService.list = this;
+        }
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
         let nestedLevel: number = this.getNestedLevel();
         /** If there is condensed mode, maximum 2nd level class of nest can be added */
-        if (this.nestedListStateService.condensed) {
+        if (this._nestedListStateService.condensed) {
             nestedLevel = Math.min(...[nestedLevel, 2]);
         }
+        this.nestedItems.changes.subscribe(() => this._nestedListKeyboardService.refresh$.next());
         this.handleNestedLevel(nestedLevel);
     }
 
     /** @hidden */
     private handleNestedLevel(level: number): void {
         /** Adding class with the nested level */
-        this.elementRef.nativeElement.classList.add('level-' + level);
+        this._elementRef.nativeElement.classList.add('level-' + level);
     }
 
     /**
@@ -70,7 +76,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
      * Method, that checks how deep is the list element
      */
     private getNestedLevel(): number {
-        let element = this.elementRef.nativeElement;
+        let element = this._elementRef.nativeElement;
         const parentElements = [];
 
         /** Method that gathers all of the parentNode elements of current NestedListDirective element */

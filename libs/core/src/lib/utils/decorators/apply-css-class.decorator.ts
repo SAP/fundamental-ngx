@@ -1,4 +1,6 @@
-import { ELEMENT_REF_EXCEPTION, getStringFromHashMap, uuidv4 } from '../public_api';
+import { ELEMENT_REF_EXCEPTION  } from '../interfaces/has-element-ref.interface';
+import { getStringFromHashMap } from '../functions/get-string-from-hashmap';
+import { uuidv4 } from '../functions/uuidv4-generator';
 
 /**
  * Method decorator to apply css class to a component through native element
