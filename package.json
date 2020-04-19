@@ -112,7 +112,7 @@
     "@storybook/addons": "5.3.18",
     "@storybook/angular": "5.3.18",
     "autoprefixer": "8.6.5",
-    "rollup": "1.32.1",
+    "rollup": "2.6.1",
     "@types/jasmine": "3.5.10",
     "@types/jasminewd2": "2.0.8",
     "angular-cli-ghpages": "0.6.2",
