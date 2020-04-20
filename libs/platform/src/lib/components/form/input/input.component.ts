@@ -49,9 +49,11 @@ type Status = 'error' | 'warning' | 'information' | 'success';
 })
 export class PlatformInputComponent extends BaseInput implements CssClassBuilder {
 
+    /** defines the input type of the input. */
     @Input()
     type: InputType = 'text';
 
+    /** defines the state of the text box to identify the validation status. */
     @Input()
     state: Status;
  
@@ -63,9 +65,11 @@ export class PlatformInputComponent extends BaseInput implements CssClassBuilder
     @Input()
     disabled: boolean = false;
 
+    /** to define the compactness of the componenent. */
     @Input()
     compact: boolean = false;
     
+    /**calass variable to add the class names.  */
     @Input()
     class: string = '';
 
@@ -73,6 +77,7 @@ export class PlatformInputComponent extends BaseInput implements CssClassBuilder
     @ViewChild('inputElement')
     inputElement: ElementRef;
 
+    /** return the value in the text box */
     @Input()
     get value(): any {
         return super.getValue();
