@@ -5,7 +5,7 @@ import {
     EventEmitter,
     ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy, HostBinding
 } from '@angular/core';
-import { Placement, PopperOptions } from 'popper.js';
+import { Placement, Options } from '@popperjs/core';
 import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
 import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
 
@@ -78,15 +78,19 @@ export class PopoverComponent {
     /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
     @Input()
-    options: PopperOptions = {
+    options: Options = {
         placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
+        strategy: 'absolute',
+        modifiers: [
+            {
+                name: 'preventOverflow',
                 enabled: true,
-                escapeWithReference: true,
-                boundariesElement: 'scrollParent'
+                options: {
+                    escapeWithReference: true,
+                    boundariesElement: 'scrollParent',
+                }
             }
-        }
+        ]
     };
 
     /** Whether the popover should be focusTrapped. */

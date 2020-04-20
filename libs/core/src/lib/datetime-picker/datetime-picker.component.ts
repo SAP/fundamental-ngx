@@ -16,7 +16,7 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
-import { Placement } from 'popper.js';
+import { Placement } from '@popperjs/core';
 import { DateTimeFormatParser } from './format/datetime-parser';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';

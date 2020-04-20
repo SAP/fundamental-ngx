@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/core';
 import { Observable } from 'rxjs';
-import { Placement } from 'popper.js';
+import { Placement } from '@popperjs/core';
 import { map } from 'rxjs/operators';
 
 @Component({

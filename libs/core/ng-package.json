@@ -9,7 +9,7 @@
   },
   "whitelistedNonPeerDependencies": [
     "focus-trap",
-    "popper.js",
+    "@popperjs/core",
     "fundamental-styles",
     "@sap-theming/theming-base-content"
   ]

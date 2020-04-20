@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { MenuItemDirective, MenuKeyboardService } from '@fundamental-ngx/core';
 import { ActionItem } from '../action-bar.component';
-import { Placement } from 'popper.js';
+import { Placement } from '@popperjs/core';
 
 const MAX_BUTTONS = 3;
 @Component({

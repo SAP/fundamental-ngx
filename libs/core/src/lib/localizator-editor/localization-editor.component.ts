@@ -8,7 +8,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { Placement } from 'popper.js';
+import { Placement } from '@popperjs/core';
 import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
 
 /**

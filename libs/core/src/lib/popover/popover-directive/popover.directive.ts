@@ -9,7 +9,7 @@ import {
     TemplateRef
 } from '@angular/core';
 import { PopoverContainer } from './popover-container';
-import Popper, { Placement, PopperOptions } from 'popper.js';
+import { createPopper, Placement, Options, Instance } from '@popperjs/core';
 
 export type PopoverFillMode = 'at-least' | 'equal';
 
@@ -24,7 +24,7 @@ export type PopoverFillMode = 'at-least' | 'equal';
  * ```
  */
 @Directive({
-    selector: '[fdPopover]',
+    selector: '[fdPopover]'
 })
 export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
@@ -78,15 +78,19 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
     @Input()
-    options: PopperOptions = {
+    options: Options = {
         placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
+        strategy: 'absolute',
+        modifiers: [
+            {
+                name: 'preventOverflow',
                 enabled: true,
-                escapeWithReference: true,
-                boundariesElement: 'scrollParent'
+                options: {
+                    escapeWithReference: true,
+                    boundariesElement: 'scrollParent',
+                }
             }
-        }
+        ]
     };
 
     /**
@@ -103,7 +107,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     private containerRef: ComponentRef<PopoverContainer>;
-    private popper: Popper;
+    private popper: Instance;
     private eventRef: Function[] = [];
     private isSetup: boolean = false;
 
@@ -226,7 +230,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
      */
     public updatePopper(): void {
         if (this.popper) {
-            this.popper.scheduleUpdate();
+            this.popper.update();
         }
     }
 
@@ -298,7 +302,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     private createPopper(): void {
-        this.popper = new Popper(
+        this.popper = createPopper(
             this.elRef.nativeElement as HTMLElement,
             this.containerRef.location.nativeElement as HTMLElement,
             this.options
@@ -321,33 +325,21 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     private initPlacement(): void {
         if (this.placement) {
-            if (this.options) {
-                this.options.placement = this.placement;
-            } else {
-                this.options = {placement: this.placement}
-            }
+            this.options.placement = this.placement;
         }
     }
 
     private setupFillBehaviour(): void {
         if (this.fillControlMode) {
-            if (this.options && this.options.modifiers) {
-                this.options.modifiers.fillReference = {
-                    enabled: true,
-                    fn: this.fillControlMode === 'equal' ? this.fillReference : this.atLeastReference,
-                    order: 840
-                }
-            } else {
-                this.options = {
-                    modifiers: {
-                        fillReference: {
-                            enabled: true,
-                            fn: this.fillControlMode === 'equal' ? this.fillReference : this.atLeastReference,
-                            order: 840
-                        }
-                    }
-                };
+            if (!this.options.modifiers) {
+                this.options.modifiers = [];
             }
+
+            this.options.modifiers.push({
+                name: 'fillReference',
+                enabled: true,
+                fn: this.fillControlMode === 'equal' ? this.fillReference : this.atLeastReference
+            });
         }
     }
 

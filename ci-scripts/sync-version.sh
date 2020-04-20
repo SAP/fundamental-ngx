@@ -12,7 +12,7 @@ echo "Updating packages.json under dist/libs with version ${NEW_VERSION}"
 ANGULAR_VERSION=$(node -p "require('./package.json').dependencies['@angular/core']")
 RXJS_VERSION=$(node -p "require('./package.json').dependencies['rxjs']")
 CDK_VERSION=$(node -p "require('./package.json').dependencies['@angular/cdk']")
-POPPER_VERSION=$(node -p "require('./package.json').dependencies['popper.js']")
+POPPER_VERSION=$(node -p "require('./package.json').dependencies['@popperjs/core']")
 FDSTYLES_VERSION=$(node -p "require('./package.json').dependencies['fundamental-styles']")
 FOCUSTRAP_VERSION=$(node -p "require('./package.json').dependencies['focus-trap']")
 THEMING_VERSION=$(node -p "require('./package.json').dependencies['@sap-theming/theming-base-content']")

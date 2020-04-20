@@ -10,7 +10,7 @@ import {
     ElementRef,
     OnDestroy
 } from '@angular/core';
-import { Placement } from 'popper.js';
+import { Placement } from '@popperjs/core';
 
 export interface ActionItem {
     label: string;

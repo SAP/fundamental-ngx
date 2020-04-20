@@ -23,7 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
 import { defer, merge, Observable, Subject, BehaviorSubject, of } from 'rxjs';
 import { startWith, switchMap, takeUntil, map, tap } from 'rxjs/operators';
-import { PopperOptions, Behavior } from 'popper.js';
+import { Options } from '@popperjs/core';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { RtlService } from '../utils/public_api';
 
@@ -96,15 +96,19 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
 
     /** Popper.js options of the popover. */
     @Input()
-    popperOptions: PopperOptions = {
+    popperOptions: Options = {
         placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
+        strategy: 'absolute',
+        modifiers: [
+            {
+                name: 'preventOverflow',
                 enabled: true,
-                escapeWithReference: true,
-                boundariesElement: 'scrollParent'
+                options: {
+                    escapeWithReference: true,
+                    boundariesElement: 'scrollParent',
+                }
             }
-        }
+        ]
     };
 
     /**

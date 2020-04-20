@@ -10,7 +10,7 @@ import {
 import { PopoverFillMode } from '../../popover/popover-directive/popover.directive';
 import { RtlService } from '../../utils/services/rtl.service';
 import { Observable, of } from 'rxjs';
-import { Placement } from 'popper.js';
+import { Placement } from '@popperjs/core';
 import { map } from 'rxjs/operators';
 
 @Component({

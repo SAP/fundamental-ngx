@@ -6,7 +6,6 @@ import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.compo
 import * as inlineHelpTriggerHtml from '!raw-loader!./examples/inline-help-trigger-example.component.html';
 import * as inlineHelpScssCode from '!raw-loader!./examples/inline-help-example.component.scss';
 import * as inlineHelpStylesHtml from '!raw-loader!./examples/inline-help-styled-example.component.html';
-import Popper from 'popper.js';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -27,7 +26,7 @@ export class InlineHelpDocsComponent {
                     },
                     position: {
                         type: 'string',
-                        enum: Array.from(Popper.placements)
+                        enum: ['top-start' , 'top-end' , 'bottom-start' , 'bottom-end' , 'right-start' , 'right-end' , 'left-start' , 'left-end']
                     }
                 }
             }
