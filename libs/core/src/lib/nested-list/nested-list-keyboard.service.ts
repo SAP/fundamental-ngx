@@ -41,7 +41,6 @@ export class NestedListKeyboardService {
 
         /** Gathering all of the items */
         lists.forEach(list => items.push(...this.getAllListItems(list)));
-
         /** Putting the keyboard support function to each of the items */
         items.forEach((item, index) => {
             item.keyboardTriggered
@@ -56,8 +55,8 @@ export class NestedListKeyboardService {
     private getAllListItems(list: NestedListInterface): NestedItemInterface[] {
 
         const _items: NestedItemInterface[] = [];
-        if (list && list.nestedItems) {
-            list.nestedItems.toArray().forEach(item => {
+        if (list && list.nestedItems && list.nestedItems.length > 0) {
+            list.nestedItems.forEach(item => {
                 _items.push(...this.getItems(item));
             });
         }
@@ -109,7 +108,6 @@ export class NestedListKeyboardService {
                 this.keyboardService.keyDownHandler(keyboardEvent, index, items);
             }
         }
-
     }
 
 }

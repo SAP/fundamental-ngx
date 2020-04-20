@@ -1,8 +1,15 @@
-import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    forwardRef,
+    Input,
+    Optional,
+    ViewChild
+} from '@angular/core';
 import { NestedListDirective } from '../nested-list/nested-list.directive';
 import { NestedListModel } from '../nested-list-model';
-import { NestedListStateService } from '../nested-list-state.service';
-import { NestedItemDirective } from '../nested-item/nested-item.directive';
+import { NestedItemService } from '../nested-item/nested-item.service';
 
 /**
  * Component for internal usage, allows to generate the nested list from defined object.
@@ -41,27 +48,26 @@ export class PreparedNestedListComponent implements AfterViewInit {
     _nestedListDirective: NestedListDirective;
 
     /**
-     * @hidden
-     */
-    @ViewChildren(forwardRef(() => NestedItemDirective))
-    nestedListItems: QueryList<NestedItemDirective>;
-
-    /**
      * In prepared nested list, nested items should be taken as reference of View, not Content.
      * There is direct reference to these directives here.
      */
     get nestedListDirective(): NestedListDirective {
-        return Object.assign(this._nestedListDirective, { nestedItems: this.nestedListItems });
+        return this._nestedListDirective;
     }
 
     /** @hidden */
     constructor (
-        private changeDetRef: ChangeDetectorRef
+        private _changeDetRef: ChangeDetectorRef,
+        @Optional() private _nestedItemService: NestedItemService
     ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.changeDetRef.markForCheck();
-        this.changeDetRef.detectChanges();
+        this._changeDetRef.detectChanges();
+
+        /** If any item above, pass list directive reference to it */
+        if (this._nestedItemService) {
+            this._nestedItemService.list = this.nestedListDirective
+        }
     }
 }

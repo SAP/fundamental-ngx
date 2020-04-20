@@ -266,7 +266,8 @@ export const API_FILES = {
         'NestedListIconDirective',
         'NestedListItem',
         'NestedListModel',
-        'NestedListLink'
+        'NestedListLink',
+        'NestedItemService'
     ],
     splitButton: [
         'SplitButtonComponent',

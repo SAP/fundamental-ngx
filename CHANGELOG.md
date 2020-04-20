@@ -2,6 +2,81 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.1-rc.8"></a>
+## [0.17.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.7...v0.17.1-rc.8) (2020-04-19)
+
+
+
+<a name="0.17.1-rc.7"></a>
+## [0.17.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.6...v0.17.1-rc.7) (2020-04-19)
+
+
+
+<a name="0.17.1-rc.6"></a>
+## [0.17.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.5...v0.17.1-rc.6) (2020-04-19)
+
+
+
+<a name="0.17.1-rc.5"></a>
+## [0.17.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.4...v0.17.1-rc.5) (2020-04-19)
+
+
+
+<a name="0.17.1-rc.4"></a>
+## [0.17.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.3...v0.17.1-rc.4) (2020-04-19)
+
+
+
+<a name="0.17.1-rc.3"></a>
+## [0.17.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.2...v0.17.1-rc.3) (2020-04-19)
+
+
+
+<a name="0.17.1-rc.2"></a>
+## [0.17.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.1...v0.17.1-rc.2) (2020-04-19)
+
+
+
+<a name="0.17.1-rc.1"></a>
+## [0.17.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.0...v0.17.1-rc.1) (2020-04-19)
+
+
+
+<a name="0.17.1-rc.0"></a>
+## [0.17.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.17.0...v0.17.1-rc.0) (2020-04-19)
+
+
+
+<a name="0.17.0"></a>
+# [0.17.0](https://github.com/SAP/fundamental-ngx/compare/v0.17.0-rc.4...v0.17.0) (2020-04-17)
+
+
+
+<a name="0.17.0-rc.4"></a>
+# [0.17.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.17.0-rc.3...v0.17.0-rc.4) (2020-04-17)
+
+
+
+<a name="0.17.0-rc.3"></a>
+# [0.17.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.17.0-rc.2...v0.17.0-rc.3) (2020-04-17)
+
+
+
+<a name="0.17.0-rc.2"></a>
+# [0.17.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.17.0-rc.1...v0.17.0-rc.2) (2020-04-17)
+
+
+### Bug Fixes
+
+* remove circular dependency for Nested List  ([#2366](https://github.com/SAP/fundamental-ngx/issues/2366)) ([f33a89f](https://github.com/SAP/fundamental-ngx/commit/f33a89f))
+
+
+
+<a name="0.17.0-rc.1"></a>
+# [0.17.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.17.0-rc.0...v0.17.0-rc.1) (2020-04-17)
+
+
+
 <a name="0.17.0-rc.0"></a>
 # [0.17.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.16.0...v0.17.0-rc.0) (2020-04-16)
 

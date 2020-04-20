@@ -23,9 +23,7 @@ class MockNestedItem {
 }
 
 interface MockNestedList {
-    nestedItems: {
-        toArray: () => MockNestedItem[]
-    };
+    nestedItems:  MockNestedItem[]
 }
 
 describe('NestedListKeyboardSupportService', () => {
@@ -53,9 +51,7 @@ describe('NestedListKeyboardSupportService', () => {
 
     beforeEach(() => {
         object = {
-            nestedItems: {
-                toArray: toArray
-            }
+            nestedItems: toArray()
         };
         service = new NestedListKeyboardService(new MenuKeyboardService());
 
