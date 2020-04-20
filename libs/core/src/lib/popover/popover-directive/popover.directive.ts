@@ -24,7 +24,7 @@ export type PopoverFillMode = 'at-least' | 'equal';
  * ```
  */
 @Directive({
-    selector: '[fdPopover]',
+    selector: '[fdPopover]'
 })
 export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
@@ -213,13 +213,14 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
      * Closes the popover.
      */
     public close(fireEvent: boolean = true): void {
+        if (this._outsideClickEventReference) {
+            this._outsideClickEventReference();
+            this._outsideClickEventReference = null;
+        }
+
         if (this.isOpen) {
             this.destroyContainer();
             this.isOpen = false;
-
-            if (this._outsideClickEventReference) {
-                this._outsideClickEventReference();
-            }
 
             if (fireEvent) {
                 this.isOpenChange.emit(this.isOpen);
@@ -330,7 +331,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             if (this.options) {
                 this.options.placement = this.placement;
             } else {
-                this.options = {placement: this.placement}
+                this.options = { placement: this.placement };
             }
         }
     }
@@ -342,7 +343,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
                     enabled: true,
                     fn: this.fillControlMode === 'equal' ? this.fillReference : this.atLeastReference,
                     order: 840
-                }
+                };
             } else {
                 this.options = {
                     modifiers: {
@@ -358,17 +359,24 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     private _addListenerForOutsideClick(): void {
-         this.renderer.listen('document', 'click', (event: MouseEvent) => {
-             if (this.containerRef &&
-                 this.isOpen &&
-                 this.closeOnOutsideClick &&
-                 event.target !== this.elRef.nativeElement &&
-                 !this.elRef.nativeElement.contains(event.target) &&
-                 !this.containerRef.location.nativeElement.contains(event.target)) {
-                 event.preventDefault();
-                 event.stopPropagation();
-                 this.close();
-             }
-         });
+        if (!this._outsideClickEventReference) {
+            this._outsideClickEventReference = this.renderer.listen('document', 'click', (event: MouseEvent) => {
+                if (this._shouldClose(event)) {
+                    this.close();
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            });
+        }
+    }
+
+    private _shouldClose(event: MouseEvent): boolean {
+        return this.containerRef &&
+            this.isOpen &&
+            this.closeOnOutsideClick &&
+            event.target !== this.elRef.nativeElement &&
+            !this.elRef.nativeElement.contains(event.target) &&
+            !this.containerRef.location.nativeElement.contains(event.target)
+        ;
     }
 }
