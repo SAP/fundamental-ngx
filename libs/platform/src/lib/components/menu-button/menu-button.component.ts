@@ -15,7 +15,7 @@ export class MenuButtonComponent {
     /** name for menu-button */
     @Input()
     name: string;
-    
+
     /** Menu button size. ex: compact | cozy  */
     @Input()
     contentSize: InputSize = 'cozy';
@@ -39,13 +39,21 @@ export class MenuButtonComponent {
 
     /** Event sent when menu-button is clicked */
     @Output()
-    click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
+    buttonClicked: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
     /**
      *  Handles menu-button click
      */
-    public buttonclick($event: any) {
-        event.stopPropagation();
-        this.click.emit();
+    public onButtonClick($event: any) {
+        this.buttonClicked.emit();
+    }
+
+    /**
+     * Stopping click event from label on disbled status
+     */
+    public onLabelClick($event: any) {
+        if (this.disabled) {
+            event.stopPropagation();
+        }
     }
 }

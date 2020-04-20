@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class PlatformMenuButtonExampleComponent {
     basicMenuData: any[] = [];
     item = '';
-    userDefined(event: Event) {}
+
     onItemSelect(item: string) {
         this.item = item;
     }

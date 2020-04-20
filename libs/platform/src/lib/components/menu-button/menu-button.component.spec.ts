@@ -4,7 +4,7 @@ import { Component, Input, ViewChild, ViewChildren, QueryList } from '@angular/c
 import { By } from '@angular/platform-browser';
 import { ButtonModule, RtlService, IconModule } from '@fundamental-ngx/core';
 import { createKeyboardEvent } from '../../testing/event-objects';
-import { DOWN_ARROW, ESCAPE, UP_ARROW, ENTER, TAB, RIGHT_ARROW, LEFT_ARROW } from '@angular/cdk/keycodes';
+import { ENTER } from '@angular/cdk/keycodes';
 import { PlatformMenuModule } from '../menu/menu.module';
 import { MenuButtonComponent } from './menu-button.component';
 import { MenuItemComponent } from './../menu/menu-item.component';
@@ -31,9 +31,9 @@ describe('MenuButtonComponent', () => {
     });
 
     it('button onclick should be called', () => {
-        spyOn(component, 'buttonclick');
-        component.buttonclick(event);
-        expect(component.buttonclick).toHaveBeenCalled();
+        spyOn(component, 'onButtonClick');
+        component.onButtonClick(event);
+        expect(component.onButtonClick).toHaveBeenCalled();
     });
 });
 

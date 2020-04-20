@@ -6,10 +6,10 @@
     [compact]="contentSize === 'compact'"
     [glyph]="icon"
     [disabled]="disabled"
-    (click)="buttonclick($event)"
+    (click)="onButtonClick($event)"
     [fdType]="type"
 >
-    <span [ngStyle]="{ width: width }">
+    <span [ngStyle]="{ width: width }" (click)="onLabelClick($event)">
         <ng-content></ng-content>
     </span>
 </button>
