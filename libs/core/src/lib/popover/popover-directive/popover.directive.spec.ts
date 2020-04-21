@@ -107,9 +107,15 @@ describe('PopoverDirective', () => {
     });
 
     it('should call close', () => {
-        fixtureTemplate.componentInstance.popoverDirective.open();
-        spyOn(fixtureTemplate.componentInstance.popoverDirective, 'close');
-        fixtureTemplate.componentInstance.divElement.nativeElement.click();
-        expect(fixtureTemplate.componentInstance.popoverDirective.close).toHaveBeenCalled();
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        popover.open();
+        const mouseEvent = { target: fixtureTemplate.componentInstance.divElement.nativeElement };
+        expect(popover._shouldClose(mouseEvent)).toEqual(true)
+    });
+
+    it('shouldn\'t call close', () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        const mouseEvent = { target: fixtureTemplate.componentInstance.divElement.nativeElement };
+        expect(popover._shouldClose(mouseEvent)).not.toEqual(true);
     });
 });
