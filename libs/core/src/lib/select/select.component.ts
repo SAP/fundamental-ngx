@@ -243,7 +243,7 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     }
 
     /** Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder. */
-    get selectValue(): string {
+    get selectViewValue(): string {
         return this.selected ? this.selected.viewValueText : this.placeholder;
     }
 
@@ -253,10 +253,8 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     }
 
     /** @hidden */
-    isOpenChangeHandle(isOpen: boolean): void {
-        this.isOpen = isOpen;
-        this.isOpenChange.emit(isOpen);
-        this.resizeScrollHandler();
+    popoverOpenChangeHandle(isOpen: boolean): void {
+        isOpen ? this.open() : this.close();
     }
 
     /** Toggles the open state of the select. */
@@ -267,7 +265,6 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     /** Opens the select popover body. */
     open(): void {
         if (this.isInteractive && !this.isOpen) {
-            this.focus();
             this.onTouched();
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
@@ -398,6 +395,7 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
             this._focusTrap = focusTrap(this._elementRef.nativeElement, {
                 escapeDeactivates: false,
                 clickOutsideDeactivates: true,
+                returnFocusOnDeactivate: false,
                 allowOutsideClick: (event: MouseEvent) => true
             });
         } catch (e) {

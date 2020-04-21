@@ -39,7 +39,7 @@ describe('OptionListComponent', () => {
     it('should have message', () => {
         expect(
             fixture.nativeElement
-                .querySelector('fd-list-message')
+                .querySelector('[fd-list-message]')
         ).toBeTruthy();
 
         expect(
@@ -50,16 +50,16 @@ describe('OptionListComponent', () => {
 
         expect(
             fixture.nativeElement
-                .querySelector('fd-list-message')
+                .querySelector('[fd-list-message]')
                 .textContent
-        ).toEqual(selectComponent.stateMessage);
+        ).toContain(selectComponent.stateMessage);
     });
 
     it('should have proper message type', () => {
         expect(
             fixture.nativeElement
-                .querySelector('fd-list-message')
-                .querySelector('ng-reflect-type')
+                .querySelector('[fd-list-message]')
+                .getAttribute('ng-reflect-type')
         ).toEqual(selectComponent.state);
     });
 });

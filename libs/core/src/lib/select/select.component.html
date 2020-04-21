@@ -2,7 +2,7 @@
 
 <ng-template #selectDesktopTemplate>
     <fd-popover
-        [(isOpen)]="isOpen"
+        [isOpen]="isOpen"
         [triggers]="[]"
         [disabled]="disabled"
         [appendTo]="appendTo"
@@ -10,7 +10,7 @@
         [closeOnEscapeKey]="false"
         [fillControlMode]="fillControlMode"
         [closeOnOutsideClick]="closeOnOutsideClick"
-        (isOpenChange)="isOpenChangeHandle($event)">
+        (isOpenChange)="popoverOpenChangeHandle($event)">
 
         <fd-popover-control>
             <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
@@ -52,11 +52,11 @@
             <div class="fd-select__content">
                 <ng-container
                     [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
-                    [ngTemplateOutletContext]="{$implicit: selectValue, option: selected}">
+                    [ngTemplateOutletContext]="{$implicit: selectViewValue, option: selected}">
                 </ng-container>
 
                 <ng-template #defaultSelectContent>
-                    {{ selectValue }}
+                    {{ selectViewValue }}
                 </ng-template>
             </div>
 

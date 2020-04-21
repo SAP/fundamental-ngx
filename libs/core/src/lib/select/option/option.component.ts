@@ -103,6 +103,7 @@ export class OptionComponent implements OnInit, OnDestroy {
     setSelected(value: boolean, controlChange: boolean): void {
         this.selected = value;
         this.selectedChange.emit(this);
+
         if (value) {
             this._selectComponent.setSelectedOption(this, controlChange);
         }

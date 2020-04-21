@@ -4,7 +4,7 @@ describe('isKey', () => {
     interface TestValue {
         event: KeyboardEvent,
         key: string
-    };
+    }
 
     const positiveTestValues: TestValue[] = [
         {

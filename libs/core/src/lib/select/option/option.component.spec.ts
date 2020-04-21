@@ -4,13 +4,17 @@ import { OptionComponent } from './option.component';
 import { SelectComponent } from '@fundamental-ngx/core';
 import { BehaviorSubject } from 'rxjs';
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
+import Spy = jasmine.Spy;
 
 describe('OptionComponent', () => {
     let component: OptionComponent;
     let fixture: ComponentFixture<OptionComponent>;
+    let emitChangeSpy: Spy<any>;
+    let keyHandlerSpy: Spy<any>;
+    let setSelectedSpy: Spy<any>;
     const selectValue = 'Pineapple';
     const selectComponent: Partial<SelectComponent> = {
-        value$: new BehaviorSubject<any>(selectValue),
+        value$: new BehaviorSubject<any>(undefined),
         setSelectedOption: (option, controlChange) => {}
     };
     const changeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']);
@@ -30,6 +34,10 @@ describe('OptionComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(OptionComponent);
         component = fixture.componentInstance;
+        setSelectedSpy = spyOn(component, 'setSelected').and.callThrough();
+        keyHandlerSpy = spyOn(component, 'selectionHandler').and.callThrough();
+        emitChangeSpy = spyOn(component.selectedChange, 'emit').and.callThrough();
+        fixture.detectChanges();
     });
 
     it('should create', () => {
@@ -48,60 +56,41 @@ describe('OptionComponent', () => {
         expect(document.activeElement).toBe(component.getHtmlElement());
     });
 
-    it('should be selected based on control state', async () => {
-        spyOn(component, 'setSelected');
-        spyOn(component.selectedChange, 'emit');
+    it('should be selected based on control state', () => {
         component.value = selectValue;
+        selectComponent.value$.next(selectValue);
 
-        fixture.detectChanges();
-        await fixture.whenStable();
-
-        expect(component.selectedChange.emit).toHaveBeenCalled();
-        expect(component.setSelected).toHaveBeenCalled();
+        expect(emitChangeSpy).toHaveBeenCalled();
+        expect(setSelectedSpy).toHaveBeenCalled();
         expect(component.selected).toBe(true);
     });
 
     it('should be selectable by click', () => {
-        spyOn(component, 'setSelected');
-        spyOn(component, 'selectionHandler');
-        spyOn(component.selectedChange, 'emit');
-        fixture.detectChanges();
 
         component.getHtmlElement().click();
-        fixture.detectChanges();
 
         expect(component.selected).toBe(true);
-        expect(component.selectionHandler).toHaveBeenCalled();
-        expect(component.selectedChange.emit).toHaveBeenCalled();
-        expect(component.setSelected).toHaveBeenCalledWith(true, true);
+        expect(emitChangeSpy).toHaveBeenCalled();
+        expect(keyHandlerSpy).toHaveBeenCalled();
+        expect(setSelectedSpy).toHaveBeenCalledWith(true, true);
     });
 
     it('should be selectable by keyboard', () => {
-        fixture.detectChanges();
-        spyOn(component, 'setSelected');
-        spyOn(component, 'selectionHandler');
-        spyOn(component.selectedChange, 'emit');
 
         component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
-        fixture.detectChanges();
         component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: ' '}));
-        fixture.detectChanges();
 
         expect(component.selected).toBe(true);
-        expect(component.setSelected).toHaveBeenCalledTimes(2);
-        expect(component.selectionHandler).toHaveBeenCalledTimes(2);
-        expect(component.selectedChange.emit).toHaveBeenCalledTimes(2);
-        expect(component.setSelected).toHaveBeenCalledWith(true, true);
+        expect(setSelectedSpy).toHaveBeenCalledWith(true, true);
+        expect(emitChangeSpy).toHaveBeenCalledTimes(2);
+        expect(keyHandlerSpy).toHaveBeenCalledTimes(2);
+        expect(setSelectedSpy).toHaveBeenCalledTimes(2);
     });
 
     it('should not fire select event when disabled', () => {
         component.disabled = true;
         fixture.detectChanges();
 
-        spyOn(component, 'setSelected');
-        spyOn(component, 'selectionHandler');
-        spyOn(component.selectedChange, 'emit');
-
         component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
         fixture.detectChanges();
         component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: ' '}));
@@ -109,9 +98,9 @@ describe('OptionComponent', () => {
         component.getHtmlElement().click();
         fixture.detectChanges();
 
-        expect(component.setSelected).not.toHaveBeenCalled();
-        expect(component.selectedChange.emit).not.toHaveBeenCalled();
-        expect(component.selectionHandler).toHaveBeenCalledTimes(3);
+        expect(emitChangeSpy).not.toHaveBeenCalled();
+        expect(keyHandlerSpy).toHaveBeenCalledTimes(3);
+        expect(component.selected).toEqual(false);
     });
 
     it('should support custom view value', () => {
