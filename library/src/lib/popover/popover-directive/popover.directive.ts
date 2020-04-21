@@ -101,6 +101,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     private popper: Popper;
     private eventRef: Function[] = [];
     private isSetup: boolean = false;
+    private _outsideClickEventReference: () => void;
 
     /** @hidden */
     constructor(private elRef: ElementRef,
@@ -194,6 +195,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     public open(fireEvent: boolean = true): void {
         if (!this.isOpen && !this.disabled) {
             this.createContainer();
+            this._addListenerForOutsideClick();
             this.isOpen = true;
 
             if (fireEvent) {
@@ -229,7 +231,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         if (this.containerRef) {
             return;
         }
-        
+
         const factory = this.resolver.resolveComponentFactory(PopoverContainer);
         this.containerRef = factory.create(this.injector);
 
@@ -342,18 +344,25 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    /** @hidden */
-    @HostListener('document:click', ['$event'])
-    clickHandler(event: MouseEvent): void {
-        if (this.containerRef &&
+    private _addListenerForOutsideClick(): void {
+        if (!this._outsideClickEventReference) {
+            this._outsideClickEventReference = this.renderer.listen('document', 'click', (event: MouseEvent) => {
+                if (this._shouldClose(event)) {
+                    this.close();
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            });
+        }
+    }
+
+    private _shouldClose(event: MouseEvent): boolean {
+        return this.containerRef &&
             this.isOpen &&
             this.closeOnOutsideClick &&
             event.target !== this.elRef.nativeElement &&
             !this.elRef.nativeElement.contains(event.target) &&
-            !this.containerRef.location.nativeElement.contains(event.target)) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.close();
-        }
+            !this.containerRef.location.nativeElement.contains(event.target)
+        ;
     }
 }
