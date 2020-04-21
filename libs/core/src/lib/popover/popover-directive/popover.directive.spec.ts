@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopoverDirective } from './popover.directive';
-import { Component, NgModule, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgModule, ViewChild } from '@angular/core';
 import { PopoverModule } from '../popover.module';
 
 @Component({
     template: `
+        <div #divElement></div>
         <button fd-button [fdPopover]="template" [(isOpen)]="isOpen"></button>
         <ng-template #template><div>Content Div</div></ng-template>
     `
@@ -12,6 +13,9 @@ import { PopoverModule } from '../popover.module';
 class TestTemplateComponent {
     @ViewChild(PopoverDirective, { static: true })
     popoverDirective: PopoverDirective;
+
+    @ViewChild('divElement')
+    divElement: ElementRef;
 
     isOpen = false;
 }
@@ -100,5 +104,25 @@ describe('PopoverDirective', () => {
     it('should support string content', () => {
         fixtureString.componentInstance.popoverDirective.open();
         expect(fixtureString.componentInstance.isOpen).toBe(true);
+    });
+
+    it('should call close', () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        popover.open();
+        const mouseEvent = { target: fixtureTemplate.componentInstance.divElement.nativeElement };
+        expect(popover._shouldClose(mouseEvent)).toEqual(true)
+    });
+
+    it('shouldn\'t call close', () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        const mouseEvent = { target: fixtureTemplate.componentInstance.divElement.nativeElement };
+        expect(popover._shouldClose(mouseEvent)).not.toEqual(true);
+    });
+
+    it('shouldn\'t call close on inside click', () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        popover.open();
+        const mouseEvent = { target: popover.elRef.nativeElement };
+        expect(popover._shouldClose(mouseEvent)).not.toEqual(true);
     });
 });
