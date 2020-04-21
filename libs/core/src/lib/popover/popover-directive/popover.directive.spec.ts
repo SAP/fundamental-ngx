@@ -118,4 +118,11 @@ describe('PopoverDirective', () => {
         const mouseEvent = { target: fixtureTemplate.componentInstance.divElement.nativeElement };
         expect(popover._shouldClose(mouseEvent)).not.toEqual(true);
     });
+
+    it('shouldn\'t call close on inside click', () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        popover.open();
+        const mouseEvent = { target: popover.elRef.nativeElement };
+        expect(popover._shouldClose(mouseEvent)).not.toEqual(true);
+    });
 });
