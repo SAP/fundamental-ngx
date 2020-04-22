@@ -3,13 +3,11 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    EventEmitter,
     HostBinding,
     HostListener,
     Input,
     OnDestroy,
     OnInit,
-    Output,
     ViewEncapsulation
 } from '@angular/core';
 import { SelectComponent } from '../select.component';
@@ -31,7 +29,20 @@ import { isKey } from '../../utils/functions/is-key';
         '[attr.aria-selected]': 'selected',
         '[tabindex]': 'disabled ? -1 : 0',
         role: 'option'
-    }
+    },
+    styles: [`
+
+        .fd-list__item[aria-disabled="true"],
+        .fd-list__item.is-disabled,
+        .fd-list__item:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .fd-list__item:disabled:focus {
+            outline: none;
+        }
+    `]
+
 })
 export class OptionComponent implements OnInit, OnDestroy {
 

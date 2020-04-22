@@ -9,7 +9,6 @@ import Spy = jasmine.Spy;
 describe('OptionComponent', () => {
     let component: OptionComponent;
     let fixture: ComponentFixture<OptionComponent>;
-    let emitChangeSpy: Spy<any>;
     let keyHandlerSpy: Spy<any>;
     let setSelectedSpy: Spy<any>;
     const selectValue = 'Pineapple';
@@ -36,7 +35,6 @@ describe('OptionComponent', () => {
         component = fixture.componentInstance;
         setSelectedSpy = spyOn(component, 'setSelected').and.callThrough();
         keyHandlerSpy = spyOn(component, 'selectionHandler').and.callThrough();
-        emitChangeSpy = spyOn(component.selectedChange, 'emit').and.callThrough();
         fixture.detectChanges();
     });
 
@@ -60,7 +58,6 @@ describe('OptionComponent', () => {
         component.value = selectValue;
         selectComponent.value$.next(selectValue);
 
-        expect(emitChangeSpy).toHaveBeenCalled();
         expect(setSelectedSpy).toHaveBeenCalled();
         expect(component.selected).toBe(true);
     });
@@ -70,7 +67,6 @@ describe('OptionComponent', () => {
         component.getHtmlElement().click();
 
         expect(component.selected).toBe(true);
-        expect(emitChangeSpy).toHaveBeenCalled();
         expect(keyHandlerSpy).toHaveBeenCalled();
         expect(setSelectedSpy).toHaveBeenCalledWith(true, true);
     });
@@ -82,7 +78,6 @@ describe('OptionComponent', () => {
 
         expect(component.selected).toBe(true);
         expect(setSelectedSpy).toHaveBeenCalledWith(true, true);
-        expect(emitChangeSpy).toHaveBeenCalledTimes(2);
         expect(keyHandlerSpy).toHaveBeenCalledTimes(2);
         expect(setSelectedSpy).toHaveBeenCalledTimes(2);
     });
@@ -98,7 +93,6 @@ describe('OptionComponent', () => {
         component.getHtmlElement().click();
         fixture.detectChanges();
 
-        expect(emitChangeSpy).not.toHaveBeenCalled();
         expect(keyHandlerSpy).toHaveBeenCalledTimes(3);
         expect(component.selected).toEqual(false);
     });
