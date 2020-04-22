@@ -18,7 +18,8 @@ const keyMap: Map<string, { aliases: string[], keyCode: number }> = new Map(
  * */
 export function isKey(event: KeyboardEvent, key: string) {
     if (event && keyMap.get(key)) {
-        return keyMap.get(key).aliases.includes(event.key) || keyMap.get(key).keyCode === event.keyCode;
+        return keyMap.get(key).aliases.some(alias => alias === event.key)
+            || keyMap.get(key).keyCode === event.keyCode;
     }
 
     throw new Error(`Invalid function arguments. Check if "event" is a KeyboardEvent or "key" is defined in keyMap`);
