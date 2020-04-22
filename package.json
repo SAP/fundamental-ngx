@@ -4,6 +4,11 @@
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "SAP Fundamental Styles, implemented in Angular",
+  "homepage": "https://sap.github.io/fundamental-ngx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SAP/fundamental-ngx"
+  },
   "scripts": {
     "build": "ng build",
     "build-all": "npm run build-artifacts && npm run build-docs -- --prod --base-href=\"/fundamental-ngx/\"",
@@ -138,7 +143,6 @@
     "standard-version": "4.4.0",
     "ts-node": "8.8.2",
     "tslint": "6.1.1",
-    "tslib": "1.11.1",
     "typedoc": "0.16.11",
     "typescript": "3.7.5",
     "@nrwl/workspace": "9.0.4"
