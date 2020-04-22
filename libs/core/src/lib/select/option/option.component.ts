@@ -47,10 +47,6 @@ export class OptionComponent implements OnInit, OnDestroy {
     @Input()
     viewValue: string;
 
-    /** Emitted when the selected state changes. */
-    @Output()
-    readonly selectedChange: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
-
     /** @hidden */
     @HostBinding('class.is-selected')
     selected: boolean = false;
@@ -69,7 +65,6 @@ export class OptionComponent implements OnInit, OnDestroy {
             }
             if (!this.disabled) {
                 this.setSelected(true, true);
-                this._changeDetRef.markForCheck();
             }
         }
     }
@@ -102,11 +97,11 @@ export class OptionComponent implements OnInit, OnDestroy {
      * */
     setSelected(value: boolean, controlChange: boolean): void {
         this.selected = value;
-        this.selectedChange.emit(this);
 
         if (value) {
             this._selectComponent.setSelectedOption(this, controlChange);
         }
+        this._changeDetRef.markForCheck();
     }
 
     /** Focuses the element. */

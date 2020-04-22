@@ -42,7 +42,7 @@ class TestWrapperComponent implements AfterViewInit, OnDestroy {
     selectedValue: string;
     dialogRef: DialogRef;
 
-    @ViewChild(SelectComponent) selectRef: SelectComponent;
+    @ViewChild(SelectComponent) selectComponent: SelectComponent;
 
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -72,7 +72,7 @@ class TestWrapperComponent implements AfterViewInit, OnDestroy {
             verticalPadding: false,
             escKeyCloseable: false,
             backdropClickCloseable: false,
-            container: this.selectRef.dialogContainerElementRef.nativeElement
+            container: this.selectComponent.dialogContainerElementRef.nativeElement
         });
     }
 }
@@ -111,7 +111,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await wait(fixture);
 
-        expect(testComponent.selectRef).toBeTruthy();
+        expect(testComponent.selectComponent).toBeTruthy();
     });
 
     it('should start closed', async () => {
@@ -123,7 +123,7 @@ describe('SelectComponent in mobile mode', () => {
     it('should open', async () => {
         await wait(fixture);
 
-        testComponent.selectRef.open();
+        testComponent.selectComponent.open();
 
         await wait(fixture);
 
@@ -135,11 +135,11 @@ describe('SelectComponent in mobile mode', () => {
     it('should close', async () => {
         await wait(fixture);
 
-        testComponent.selectRef.open();
+        testComponent.selectComponent.open();
 
         await wait(fixture);
 
-        testComponent.selectRef.close();
+        testComponent.selectComponent.close();
 
         await wait(fixture);
 
@@ -153,7 +153,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await wait(fixture);
 
-        expect(testComponent.selectRef.isOpen).toBe(true);
+        expect(testComponent.selectComponent.isOpen).toBe(true);
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeTruthy();
     });
 
@@ -168,14 +168,14 @@ describe('SelectComponent in mobile mode', () => {
 
         await wait(fixture);
 
-        expect(testComponent.selectRef.isOpen).toBe(false);
+        expect(testComponent.selectComponent.isOpen).toBe(false);
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeFalsy();
     });
 
     it('should select an option', async () => {
         await wait(fixture);
 
-        testComponent.selectRef.open();
+        testComponent.selectComponent.open();
 
         await wait(fixture);
 
@@ -183,6 +183,6 @@ describe('SelectComponent in mobile mode', () => {
 
         await wait(fixture);
 
-        expect(fixture.componentInstance.selectedValue).toBe(testComponent.selectRef.selected.value);
+        expect(fixture.componentInstance.selectedValue).toBe(testComponent.selectComponent.selected.value);
     });
 });

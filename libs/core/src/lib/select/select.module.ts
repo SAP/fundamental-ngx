@@ -7,11 +7,10 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
 import { ListModule } from '../list/list.module';
-import { SelectMobileListComponent } from './select-mobile-list/select-mobile-list.component';
 
 @NgModule({
-    declarations: [SelectComponent, OptionComponent, SelectMobileListComponent],
-    exports: [SelectComponent, OptionComponent, SelectMobileListComponent],
+    declarations: [SelectComponent, OptionComponent],
+    exports: [SelectComponent, OptionComponent],
     imports: [
         BusyIndicatorModule,
         CommonModule,

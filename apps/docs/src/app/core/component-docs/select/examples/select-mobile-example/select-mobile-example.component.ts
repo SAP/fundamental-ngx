@@ -10,7 +10,7 @@ export class SelectMobileExampleComponent implements AfterViewInit, OnDestroy {
     selectedValue: string;
     dialogRef: DialogRef;
 
-    @ViewChild(SelectComponent) selectRef: SelectComponent;
+    @ViewChild(SelectComponent) selectComponent: SelectComponent;
 
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -40,7 +40,7 @@ export class SelectMobileExampleComponent implements AfterViewInit, OnDestroy {
             verticalPadding: false,
             escKeyCloseable: false,
             backdropClickCloseable: false,
-            container: this.selectRef.dialogContainerElementRef.nativeElement
+            container: this.selectComponent.dialogContainerElementRef.nativeElement
         });
     }
 }

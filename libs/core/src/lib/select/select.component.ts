@@ -172,9 +172,13 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     @ViewChild('selectControl')
     controlElementRef: ElementRef;
 
-    /** @hidden Reference to root element for the dialog in mobile mode */
+    /** Reference to root element for the mobile mode dialog */
     @ViewChild('dialogContainer')
     dialogContainerElementRef: ElementRef;
+
+    /** Reference to element containing list of options */
+    @ViewChild('selectOptionsListTemplate')
+    selectOptionsListTemplate: TemplateRef<any>;
 
     /** @hidden */
     calculatedMaxHeight: number;
@@ -397,7 +401,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** @hidden */
     private _setSelectedOption(): void {
-        this.selected = this.options.find(option => option.selected)
+        this.selected = this.options.find(option => option.selected);
     }
 
     /** @hidden */

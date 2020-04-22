@@ -3,13 +3,9 @@
            [mobile]="true"
            (isOpenChange)="toggleDialog(dialogTemplate, $event)">
 
-    <ng-template #optionsTemplate>
-        <fd-select-mobile-list>
-            <fd-option *ngFor="let option of options" [value]="option">
-                {{option}}
-            </fd-option>
-        </fd-select-mobile-list>
-    </ng-template>
+    <fd-option *ngFor="let option of options" [value]="option">
+        {{option}}
+    </fd-option>
 
 </fd-select>
 
@@ -21,7 +17,7 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <ng-container *ngTemplateOutlet="optionsTemplate"></ng-container>
+            <ng-container *ngTemplateOutlet="selectComponent.selectOptionsListTemplate"></ng-container>
         </fd-dialog-body>
 
     </fd-dialog>

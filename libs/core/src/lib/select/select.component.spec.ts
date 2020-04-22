@@ -17,7 +17,7 @@ import { OptionComponent } from '@fundamental-ngx/core';
 })
 class TestWrapperComponent {
     @ViewChild(SelectComponent, {static: true})
-    selectRef: SelectComponent;
+    selectComponent: SelectComponent;
 
     @ViewChild(SelectComponent, {read: ElementRef, static: true})
     selectElement: ElementRef;
@@ -45,7 +45,7 @@ describe('SelectComponent', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);
-        component = fixture.componentInstance.selectRef;
+        component = fixture.componentInstance.selectComponent;
         element = fixture.componentInstance.selectElement;
         fixture.detectChanges();
     });

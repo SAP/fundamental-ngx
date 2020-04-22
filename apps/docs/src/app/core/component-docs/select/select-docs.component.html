@@ -87,14 +87,13 @@
         </li>
 
         <li>
-            To get full Fiori3 experience in mobile mode, wrap select options in <code>fd-select-mobile-list</code>
-            component and set Select in mobile mode using <code>[mobile]="true"</code>. Also remember to instantiate the
+            To get full Fiori3 experience set Select in mobile mode using <code>[mobile]="true"</code>. Also remember to instantiate the
             Dialog inside the Select using <code>DialogConfig.container</code> and <code>Select.dialogContainerElementRef</code>.
         </li>
 
         <li>
             Options template needs to be declared inside <code>fd-select</code> tags to properly configure element
-            injectors.
+            injectors. Use <code>Select.selectOptionsListTemplate</code> to render options in desired place.
         </li>
     </ul>
 </description>
