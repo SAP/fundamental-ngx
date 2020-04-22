@@ -10,7 +10,7 @@ import {
     HostBinding
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
-import { KeyTrigger, PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
+import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
 import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
 
 let popoverUniqueId: number = 0;
@@ -63,7 +63,7 @@ export class PopoverComponent {
     /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
-    triggers: (string | KeyTrigger)[] = ['click'];
+    triggers: string[] = ['click'];
 
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */

@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -9,10 +10,12 @@ import {
     forwardRef,
     HostListener,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Output,
     QueryList,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -49,7 +52,7 @@ export type SelectControlState = 'error' | 'success' | 'warning' | 'information'
         role: 'listbox'
     }
 })
-export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
 
     /** Id of the control. */
     @Input()
@@ -83,9 +86,14 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     @Input()
     isOpen: boolean = false;
 
-    /** Current value of the selected option. */
+    /** Sets value of the selected option. */
     @Input('value') set value(value: any) {
         this.value$.next(value);
+    }
+
+    /** Current value of the selected option. */
+    get value(): any {
+        return this.value$.value;
     }
 
     value$: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
@@ -227,14 +235,26 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     ) { }
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this._setupFocusTrap();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['isOpen'] && !changes['isOpen'].firstChange) {
+            this.isOpen ? this.open() : this.close();
+        }
     }
 
     /** @hidden */
     ngAfterContentInit(): void {
         this._listenOnOptionChanges();
         this._setSelectedOption();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._checkInitialOpenState();
     }
 
     /** @hidden */
@@ -264,7 +284,7 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
 
     /** Opens the select popover body. */
     open(): void {
-        if (this.isInteractive && !this.isOpen) {
+        if (this.isInteractive) {
             this.onTouched();
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
@@ -275,12 +295,10 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
 
     /** Closes the select popover body. */
     close(): void {
-        if (this.isOpen) {
-            this.isOpen = false;
-            this.isOpenChange.emit(this.isOpen);
-            this._focusTrap.deactivate();
-            this.focus();
-        }
+        this.isOpen = false;
+        this.isOpenChange.emit(this.isOpen);
+        this._focusTrap.deactivate();
+        this.focus();
     }
 
     /** Focuses select control. */
@@ -312,7 +330,7 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     }
 
     /** @hidden */
-    setSelectedOption(option: OptionComponent, controlChange: boolean) {
+    setSelectedOption(option: OptionComponent, controlChange: boolean): void {
         this.selected = option;
 
         if (controlChange) {
@@ -400,6 +418,13 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
             });
         } catch (e) {
             console.warn('Attempted to focus trap the select, but no tabbable elements were found.', e);
+        }
+    }
+
+    /** @hidden Open select if it has been initialized with [isOpen] = "true" */
+    private _checkInitialOpenState(): void {
+        if (this.isOpen) {
+            this.open();
         }
     }
 }

@@ -87,7 +87,7 @@ export class OptionComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
