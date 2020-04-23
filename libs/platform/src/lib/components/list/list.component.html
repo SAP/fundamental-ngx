@@ -1,3 +1,5 @@
-<ul fd-list #fdlist [multiInputMode]="multiInputMode" [compact]="compact" [noBorder]="noBorder">
+<ul fd-list #fdlist [attr.id]="id" [multiInputMode]="multiInputMode" [compact]="contentDensity === 'compact'"
+    [noBorder]="noBorder" (keydown)="keyManager.onKeydown($event);handleKeyDown($event);"
+    (change)="onSelectionChanged($event)">
     <ng-content></ng-content>
 </ul>

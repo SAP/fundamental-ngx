@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Icons } from '../../../documentation/utilities/icons';
-import { Schema } from '../../../schema/models/schema.model';
-import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as listSrc from '!raw-loader!./platform-list-examples/platform-list-example.component.html';
 import * as borderLessListSrc from '!raw-loader!./platform-list-examples/platform-borderless-list-example.component.html';
-import * as listWithButton from '!raw-loader!./platform-list-examples/platform-list-with-button-example.component.html';
-
+import * as borderLessListTs from '!raw-loader!./platform-list-examples/platform-list-border-less-example.component.ts';
+import * as groupHeaderListTs from '!raw-loader!./platform-list-examples/platform-list-with-group-header-example.component.ts';
+import * as listWithDeleteButton from '!raw-loader!./platform-list-examples/platform-list-with-delete-button-example.component.html';
+import * as listWithFooter from '!raw-loader!./platform-list-examples/platform-list-with-footer-example.component.html';
+import * as listWithGroupHeader from '!raw-loader!./platform-list-examples/platform-list-with-group-header-example.component.html';
+import * as listWithItemCounter from '!raw-loader!./platform-list-examples/platform-list-with-item-counter-example.component.html';
+import * as listWithSelection from '!raw-loader!./platform-list-examples/platform-list-with-selection-example.component.html';
+import * as listWithSingleSelection from '!raw-loader!./platform-list-examples/platform-list-with-single-selection-example.component.html';
+import * as listWithNavigation from '!raw-loader!./platform-list-examples/platform-list-with-navigation-example.component.html';
+import * as listWithInfiniteScroll from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.html';
+import * as listWithInfiniteScrollTs from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -13,45 +19,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './platform-list-docs.component.html'
 })
 export class PlatformListDocsComponent implements OnInit {
-
-    // static schema: any = {
-    //     properties: {
-    //         properties: {
-    //             type: 'object',
-    //             properties: {
-    //                 items: {
-    //                     type: ''
-    //                 },
-    //                 action: {
-    //                     type: 'object',
-    //                     properties: {
-    //                         icon: {
-    //                             type: 'string',
-    //                             enum: Icons
-    //                         },
-    //                         label: {
-    //                             type: 'string'
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     },
-    //     type: 'object'
-    // };
-
-    // schema: Schema;
-
-    // data: any = {
-    //     properties: {
-    //         items: ['List Item 1', 'List Item 2', 'List Item 3', 'List Item 4'],
-    //         action: {
-    //             icon: 'edit',
-    //             label: 'Delete'
-    //         }
-    //     }
-    // };
-
     simpleList: ExampleFile[] = [
         {
             language: 'html',
@@ -65,25 +32,92 @@ export class PlatformListDocsComponent implements OnInit {
             language: 'html',
             code: borderLessListSrc,
             fileName: 'platform-borderless-list-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListBorderLessExampleComponent',
+            code: borderLessListTs,
+            fileName: 'platform-borderless-list-example'
         }
     ];
 
-    listWithButton: ExampleFile[] = [
+    listWithDeleteButton: ExampleFile[] = [
         {
             language: 'html',
-            code: listWithButton,
-            fileName: 'platform-list-with-button-example',
+            code: listWithDeleteButton,
+            fileName: 'platform-list-with-delete-button-example',
         }
     ];
+
+    listWithFooter: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithFooter,
+            fileName: 'platform-list-with-footer-example',
+        }
+    ];
+
+    listWithGroupHeader: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithGroupHeader,
+            fileName: 'platform-list-with-group-header-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithGroupHeaderExampleComponent',
+            code: groupHeaderListTs,
+            fileName: 'platform-list-with-group-header-example'
+        }
+    ];
+
+    listWithItemCounter: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithItemCounter,
+            fileName: 'platform-list-with-item-counter-example',
+        }
+    ];
+
+    listWithSelection: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithSelection,
+            fileName: 'platform-list-with-selection-example',
+        }
+    ];
+
+    listWithSingleSelection: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithSingleSelection,
+            fileName: 'platform-list-with-single-selection-example',
+        }
+    ];
+
+    listWithNavigation: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithNavigation,
+            fileName: 'platform-list-with-navigation-example',
+        }
+    ];
+
+    listWithInfiniteScroll: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithInfiniteScroll,
+            fileName: 'platform-list-with-infinite-scroll-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithInfiniteScrollExampleComponent',
+            code: listWithInfiniteScrollTs,
+            fileName: 'platform-list-with-infinite-scroll-example'
+        }
+    ];
+
+
     ngOnInit() { }
     constructor() { }
-
-    // constructor(private schemaFactory: SchemaFactoryService) {
-    //     this.schema = this.schemaFactory.getComponent('list');
-    // }
-
-    // onSchemaValues(data) {
-    //     this.data = data;
-    // }
-
 }

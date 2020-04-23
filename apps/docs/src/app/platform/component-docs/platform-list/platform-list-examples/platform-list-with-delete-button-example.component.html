@@ -1,0 +1,39 @@
+<h3>Cozy</h3>
+<h5>Imperative Approach</h5>
+<fdp-list>
+    <fdp-standard-list-item [titleIcon]="'address-book'" title="Title1" [secondayIcon]="'decline'">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item [titleIcon]="'appointment'" title="Title2" [secondayIcon]="'decline'">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item [titleIcon]="'camera'" title="Title3" [secondayIcon]="'decline'">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item [titleIcon]="'folder-blank'" title="Title4">
+    </fdp-standard-list-item>
+</fdp-list>
+
+<h5>Declarative Approach</h5>
+
+<fdp-list>
+    <fdp-standard-list-item *ngFor="let item of items" [item]="item"></fdp-standard-list-item>
+</fdp-list>
+
+<br><br>
+
+<h3>Compact</h3>
+<h5>Imperative Approach</h5>
+<fdp-list [contentDensity]="'compact'">
+    <fdp-standard-list-item [titleIcon]="'address-book'" title="Title1" [secondayIcon]="'decline'">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item [titleIcon]="'appointment'" title="Title2" [secondayIcon]="'decline'">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item [titleIcon]="'camera'" title="Title3" [secondayIcon]="'decline'">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item [titleIcon]="'folder-blank'" title="Title4">
+    </fdp-standard-list-item>
+</fdp-list>
+
+<h5>Declarative Approach</h5>
+
+<fdp-list [contentDensity]="'compact'">
+    <fdp-standard-list-item *ngFor="let item of items" [item]="item"></fdp-standard-list-item>
+</fdp-list>

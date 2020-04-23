@@ -1,0 +1,35 @@
+<h3>Cozy</h3>
+<h5>Imperative Approach</h5>
+<fdp-list [hasNavigation]="true" [showNavigationArrow]="true">
+    <fdp-standard-list-item title="Title1">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item title="Title2">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item title="Title3">
+    </fdp-standard-list-item>
+</fdp-list>
+
+<h5>Declarative Approach</h5>
+
+<fdp-list [hasNavigation]="true" [showNavigationArrow]="true">
+    <fdp-standard-list-item *ngFor="let item of items" [item]="item"></fdp-standard-list-item>
+</fdp-list>
+
+<br><br>
+
+<h3>Compact</h3>
+<h5>Imperative Approach</h5>
+<fdp-list [contentDensity]="'compact'" [hasNavigation]="true" [showNavigationArrow]="true">
+    <fdp-standard-list-item title="Title1">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item title="Title2">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item title="Title3">
+    </fdp-standard-list-item>
+</fdp-list>
+
+<h5>Declarative Approach</h5>
+
+<fdp-list [contentDensity]="'compact'" [hasNavigation]="true" [showNavigationArrow]="true">
+    <fdp-standard-list-item *ngFor="let item of items" [item]="item"></fdp-standard-list-item>
+</fdp-list>

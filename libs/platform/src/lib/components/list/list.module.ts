@@ -1,23 +1,26 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ListComponent } from './list.component';
-import { IconModule, FormModule, ListModule } from '@fundamental-ngx/core';
+import { ListComponent, ListFooter, ListGroupHeader, ListHeader } from './list.component';
+import { IconModule, FormModule, ListModule, CheckboxModule, RadioModule } from '@fundamental-ngx/core';
 import { PlatformButtonModule } from '../button/button.module';
-import { ListItemComponent } from './list-item/list-item.component';
-
-
+import { PlatformLinkModule } from '../link/link.module';
+import { StandardListItemComponent } from './standard-list-item/standard-list-item.component';
 
 @NgModule({
-    declarations: [ListComponent, ListItemComponent],
+    declarations: [ListComponent, ListFooter, StandardListItemComponent, ListGroupHeader, ListHeader],
     imports: [
         CommonModule,
-        PlatformButtonModule,
         IconModule,
         FormsModule,
+        CheckboxModule,
         FormModule,
-        ListModule
+        ListModule,
+        RadioModule,
+        PlatformButtonModule,
+        PlatformLinkModule
+
     ],
-    exports: [ListComponent]
+    exports: [ListComponent, ListFooter, StandardListItemComponent, ListGroupHeader, ListHeader]
 })
 export class PlatformListModule { }

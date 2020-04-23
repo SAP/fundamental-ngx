@@ -7,16 +7,14 @@ import { PlatformListModule } from './list.module';
 @Component({
     template: `
         <fdp-list #componentElement
-            [noBorder]="noBorder"
-            [compact]="compact">List Title Test Text</fdp-list>
+            [noBorder]="noBorder">List Title Test Text</fdp-list>
     `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef, static: false })
     ref: ElementRef;
-
-    compact: boolean = false;
-    noBorder: boolean = false
+    noBorder: boolean = false;
+    hasByLine: boolean = false;
 }
 
 
@@ -41,16 +39,23 @@ describe('ListComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should contain class', () => {
+    it('should render a list container', () => {
         const listElement = fixture.debugElement.query(By.css('ul'));
         expect(listElement.nativeElement.classList).toContain('fd-list');
     });
 
-    it('should contain additional classes', () => {
-        component.compact = true;
+    it('should contain list--no-border class', () => {
         component.noBorder = true;
         fixture.detectChanges();
-        expect(component.ref.nativeElement.classList).toContain('fd-list--no-border');
-        expect(component.ref.nativeElement.classList).toContain('fd-list--compact');
+        const listElement = fixture.debugElement.query(By.css('ul'));
+        expect(listElement.nativeElement.classList).toContain('fd-list--no-border');
+    });
+
+    it('list item should byline', () => {
+        component.hasByLine = true;
+        fixture.detectChanges();
+        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        expect(listElement.classList).toContain('fd-list--byline');
     });
 });
+

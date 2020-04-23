@@ -1,30 +1,136 @@
 <fd-docs-section-title [id]="'list1'" [componentName]="'List'">
-    List
-</fd-docs-section-title>
-<description>A simple list. The list item can contain plain text or links.</description>
-<component-example>
-    <fdp-list-example></fdp-list-example>
-</component-example>
-<code-example [exampleFiles]="simpleList"></code-example>
-
-<separator></separator>
-<fd-docs-section-title [id]="'list2'" [componentName]="'List'">
     List - Border Less
 </fd-docs-section-title>
-<description>A list without border</description>
+<description>A list without border, setting <code>[noBorder]="true"</code> will help to achieve this, by default its
+    value is false. Below examples show both imperative and declarative way to bind the list items.
+    Where we can pass list items individually where a number of items are less, and if the items are more
+    we can pass the items in the array as well.</description>
 <component-example>
     <fdp-borderless-list-example></fdp-borderless-list-example>
 </component-example>
 <code-example [exampleFiles]="borderLesssList"></code-example>
-
 <separator></separator>
+
+<fd-docs-section-title [id]="'list2'" [componentName]="'List'">
+    List - Footer
+</fd-docs-section-title>
+<description>Footer of List. <code>&lt;fdp-list-footer&gt;</code> tag will help to set the footer for the list.
+    Below examples show both imperative and declarative
+    way to use footer.
+</description>
+<component-example>
+    <fdp-list-with-footer-example></fdp-list-with-footer-example>
+</component-example>
+<code-example [exampleFiles]="listWithFooter"></code-example>
+<separator></separator>
+
 <fd-docs-section-title [id]="'list3'" [componentName]="'List'">
+    List - Group header
+</fd-docs-section-title>
+<description>List with group header. <code>&lt;fdp-list-group-header&gt;</code> tag will help to set the Header for the
+    group of list items.Below examples show both imperative and declarative
+    way to bind the list items and how to bind the group header to them.
+</description>
+<component-example>
+    <fdp-list-with-group-header-example>
+    </fdp-list-with-group-header-example>
+</component-example>
+<code-example [exampleFiles]="listWithGroupHeader"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'list4'" [componentName]="'List'">
+    List- Interactive state
+</fd-docs-section-title>
+<description>A simple list. Which shows interactive states of List.</description>
+<component-example>
+    <fdp-list-example></fdp-list-example>
+</component-example>
+<code-example [exampleFiles]="simpleList"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'list5'" [componentName]="'List'">
+    List - Item Counter
+</fd-docs-section-title>
+<description>List with Item Counter. Attributes [secondary]="secondary text", [secondaryIcon]="secondary image" will
+    help to insert secondary data.
+    Below examples show both imperative and declarative way to use it.</description>
+<component-example>
+    <fdp-list-with-item-counter-example>
+    </fdp-list-with-item-counter-example>
+</component-example>
+<code-example [exampleFiles]="listWithItemCounter"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'list6'" [componentName]="'List'">
     List - Deletion button
 </fd-docs-section-title>
-<description>A list with button</description>
+<description>For delete option on list item [secondayIcon]="'decline/delete'" will help. Its button on click of it
+    delete operation can be invoked.
+    Below examples show both imperative and declarative way to use it.
+</description>
 <component-example>
-    <fdp-list-with-button-example></fdp-list-with-button-example>
+    <fdp-list-with-delete-button-example></fdp-list-with-delete-button-example>
 </component-example>
-<code-example [exampleFiles]="listWithButton"></code-example>
+<code-example [exampleFiles]="listWithDeleteButton"></code-example>
+<separator></separator>
 
+<fd-docs-section-title [id]="'list7'" [componentName]="'List'">
+    List - Multi Selection
+</fd-docs-section-title>
+<description>List with Multi Selection Option. [selectionMode]="'multi'" will help us to provide checkbox along with
+    list item.
+    .Below examples show both imperative and declarative way to use it.
+    Note:selection of listitem using keyboard can be performed by *space bar* (as per Fiori3 standards.) </description>
+<component-example>
+    <fdp-list-with-selection-example>
+    </fdp-list-with-selection-example>
+</component-example>
+<code-example [exampleFiles]="listWithSelection"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'list8'" [componentName]="'List'">
+    List - Single Selection
+</fd-docs-section-title>
+<description>List with Single Selection Option. [selectionMode]="'single'", [name]="name to group all radiobuttons" will
+    help us to provide single select(radiobutton) along with
+    list item
+    .Below examples show both imperative and declarative way to use it.
+    Note:selection of listitem using keyboard can be performed by *space bar* (as per Fiori3 standards.) </description>
+<component-example>
+    <fdp-list-with-single-selection-example>
+    </fdp-list-with-single-selection-example>
+</component-example>
+<code-example [exampleFiles]="listWithSingleSelection"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'list9'" [componentName]="'List'">
+    List - Navigation
+</fd-docs-section-title>
+<description>List with Navigation Option.[hasNavigation]="true" will enables navigation on click of list item,
+    [showNavigationArrow]="true" will provide *>* indicator,
+    [href] and [target] will help to get into the desiced destination on click of navigation.Below examples show both
+    imperative and declarative way to use it.</description>
+<component-example>
+    <fdp-list-with-navigation-example>
+    </fdp-list-with-navigation-example>
+</component-example>
+<code-example [exampleFiles]="listWithNavigation"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'list10'" [componentName]="'List'">
+    List - Virtual scroll
+</fd-docs-section-title>
+<description> We will take help of <code>&lt;
+    cdk-virtual-scroll-viewport>&gt;</code>of **scrollingModule** from
+    angular CDK by setting <code>textSize</code> will help us to achive virtual scrolling.
+    Loading hundreds of elements can be slow in any browser; virtual scrolling enables a performant way to simulate
+    all
+    items being rendered by making the height of the container element the same as the height of total number of
+    elements to be rendered, and then only rendering the items in view.
+</description>
+<component-example>
+    <fdp-list-with-infinite-scroll-example>
+    </fdp-list-with-infinite-scroll-example>
+</component-example>
+<code-example [exampleFiles]="listWithInfiniteScroll"></code-example>
 <separator></separator>
