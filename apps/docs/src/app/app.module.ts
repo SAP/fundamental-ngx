@@ -7,9 +7,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 const routes: Routes = [
-    { path: 'core', loadChildren: () => import('./core/core-documentation.module').then(m => m.CoreDocumentationModule) },
-    { path: 'platform', loadChildren: () => import('./platform/platform-documentation.module').then(m => m.PlatformDocumentationModule) },
-    { path: '', redirectTo: 'core', pathMatch: 'full' }
+    {
+        path: 'core',
+        loadChildren: () => import('./core/core-documentation.module').then((m) => m.CoreDocumentationModule),
+    },
+    // { path: 'platform', loadChildren: () => import('./platform/platform-documentation.module').then(m => m.PlatformDocumentationModule) },
+    { path: '', redirectTo: 'core', pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -22,6 +25,6 @@ const routes: Routes = [
     ],
     bootstrap: [AppComponent],
 
-    entryComponents: []
+    entryComponents: [],
 })
-export class AppModule { }
+export class AppModule {}
