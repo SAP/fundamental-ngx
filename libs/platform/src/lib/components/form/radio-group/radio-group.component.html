@@ -8,7 +8,7 @@
                         context: {
                             name: name,
                             value: radio.value,
-                            size: size,
+                            contentDensity: contentDensity,
                             disabled: disabled || radio.disabled
                         }
                     "
@@ -27,7 +27,7 @@
             <fdp-radio-button
                 [name]="name"
                 [value]="'None'"
-                [size]="size"
+                [contentDensity]="contentDensity"
                 [disabled]="disabled"
                 [forceRender]="true"
                 (click)="selected($event)"
@@ -41,7 +41,7 @@
             <fdp-radio-button
                 [name]="name"
                 [value]="item.value ? item.value : item"
-                [size]="size"
+                [contentDensity]="contentDensity"
                 [disabled]="item.disabled ? item.disabled : disabled"
                 [forceRender]="true"
                 (click)="selected($event)"

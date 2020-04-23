@@ -172,7 +172,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     private _setProperties(button: RadioButtonComponent) {
         if (button) {
             button.name = this.name;
-            button.size = this.size;
+            button.contentDensity = this.contentDensity;
             button.status = this.status;
             button.disabled = button.disabled ? button.disabled : this._disabled;
         }

@@ -12,7 +12,8 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
-import { FormFieldControl, InputSize, Status } from './form-control';
+import { FormFieldControl, Status } from './form-control';
+import { BaseComponent } from '../base';
 import { ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
@@ -30,7 +31,7 @@ let randomId = 0;
  * Usually try to fire stateChange only for things that can change dynamically in runtime. We don't expect
  * that e.g. placeholder will change after component is created
  */
-export abstract class BaseInput implements FormFieldControl<any>, ControlValueAccessor,
+export abstract class BaseInput extends BaseComponent implements FormFieldControl<any>, ControlValueAccessor,
     OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
 
     protected defaultId: string = `fdp-input-id-${randomId++}`;
@@ -40,16 +41,7 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
     protected _destroyed = new Subject<void>();
 
     @Input()
-    id: string = this.defaultId;
-
-    @Input()
-    name: string;
-
-    @Input()
     placeholder: string;
-
-    @Input()
-    size: InputSize = 'cozy';
 
     @Input()
     get disabled(): boolean {
@@ -129,7 +121,7 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
     constructor(protected _cd: ChangeDetectorRef,
                 @Optional() @Self() public ngControl: NgControl,
                 @Optional() @Self() public ngForm: NgForm) {
-
+        super(_cd);
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
