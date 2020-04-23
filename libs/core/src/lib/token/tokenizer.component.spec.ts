@@ -134,7 +134,7 @@ describe('TokenizerComponent', () => {
 
   it('should handle resize - getting smaller', () => {
     component.compact = true;
-    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
     component.previousElementWidth = 2;
     component.onResize();
@@ -151,10 +151,10 @@ describe('TokenizerComponent', () => {
   it('should handle resize - getting bigger', () => {
     component.compact = true;
     // need to collapse the tokens before running expand
-    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
     component.onResize();
-    component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({width: 3});
+    component.elementRef().nativeElement.getBoundingClientRect.and.returnValue({width: 3});
     component.previousElementWidth = 1;
     component.onResize();
 
@@ -177,7 +177,7 @@ describe('TokenizerComponent', () => {
   });
 
   it('should handle ngAfterContentInit', () => {
-    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component, 'onResize');
 
     component.ngAfterContentInit();
