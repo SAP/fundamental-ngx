@@ -59,8 +59,8 @@ export class ButtonComponent extends BaseComponent {
     /**
      *  Handles button click
      */
-    public onBtnClick(event: any) {
-        this.buttonClicked.emit(event);
+    public onBtnClick($event: any) {
+        this.buttonClicked.emit($event);
     }
 
     /** @hidden */
