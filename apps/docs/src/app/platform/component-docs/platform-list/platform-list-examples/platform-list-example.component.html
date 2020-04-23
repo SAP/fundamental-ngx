@@ -1,41 +1,20 @@
 <h3>Cozy Mode</h3>
-
 <fdp-list>
-    <li fd-list-item>
-        <a [href]="'#'" fd-list-title>List item with link 1</a>
-    </li>
-    <li fd-list-item>
-        <a [href]="'#'" fd-list-title>List item with link 2</a>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title>
-            List item 3
-        </span>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title>
-            List item 4
-        </span>
-    </li>
+    <fdp-list-group-header>Group header 1</fdp-list-group-header>
+    <fdp-standard-list-item title="List item 1">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item title="List item 2">
+    </fdp-standard-list-item>
+    <fdp-list-footer>List footer</fdp-list-footer>
 </fdp-list>
 
 <h3>Compact Mode</h3>
 
-<fdp-list [compact]="true">
-    <li fd-list-item>
-        <a [href]="'#'" fd-list-title>List item with link 1</a>
-    </li>
-    <li fd-list-item>
-        <a [href]="'#'" fd-list-title>List item with link 2</a>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title>
-            List item 3
-        </span>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title>
-            List item 4
-        </span>
-    </li>
+<fdp-list [contentDensity]="'compact'">
+    <fdp-list-group-header>Group header 1</fdp-list-group-header>
+    <fdp-standard-list-item title="List item 1">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item title="List item 2">
+    </fdp-standard-list-item>
+    <fdp-list-footer>List footer</fdp-list-footer>
 </fdp-list>

@@ -1,0 +1,82 @@
+<!--  list item navigation with Arrow-->
+<ng-container *ngIf="showNavigationArrow">
+    <li #listItem fd-list-item [attr.id]="id" tabindex="-1" [selected]="selected" class="fd-list__item--link"
+        (keydown)="onKeyDown($event)" (keyup)="onKeyUp($event)">
+        <a #link class="fd-list__link fd-list__link--navigation-indicator fd-link fdp-link-truncate__txt"
+            [attr.href]="href" [attr.target]="target">
+            <!-- <ng-container *ngTemplateOutlet="commonTemplate"></ng-container> -->
+            <ng-container *ngTemplateOutlet="hasByLine ? byLineTemplate: commonTemplate"></ng-container>
+        </a>
+    </li>
+</ng-container>
+
+<!-- list item navigation without Arrow-->
+<ng-container *ngIf="!showNavigationArrow && hasNavigation">
+    <li #listItem fd-list-item [attr.id]="id" tabindex="-1" [selected]="selected" class="fd-list__item--link"
+        (keydown)="onKeyDown($event)" (keyup)="onKeyUp($event)">
+        <a #link tabindex="0" class="fd-list__link" [attr.href]="href" [attr.target]="target">
+            <!-- <ng-container *ngTemplateOutlet="commonTemplate"></ng-container> -->
+            <ng-container *ngTemplateOutlet="hasByLine ? byLineTemplate: commonTemplate"></ng-container>
+        </a>
+    </li>
+</ng-container>
+
+<!--  list item without navigation and used for simple list display-->
+<ng-container *ngIf="!showNavigationArrow && !hasNavigation">
+    <li #listItem fd-list-item [attr.id]="id" tabindex="-1" [selected]="selected" (keydown)="onKeyDown($event)"
+        (keyup)="onKeyUp($event)">
+        <!-- <ng-container *ngTemplateOutlet="commonTemplate"></ng-container> -->
+        <ng-container *ngTemplateOutlet="hasByLine ? byLineTemplate: commonTemplate"></ng-container>
+    </li>
+</ng-container>
+
+
+<ng-template #commonTemplate>
+    <fd-checkbox #checkbox [(ngModel)]="selected" *ngIf="selectionMode === 'multi'" [attr.aria-checked]="selected"
+        [compact]="contentDensity === 'compact'" [attr.role]="'checkbox'">
+    </fd-checkbox>
+    <fd-radio-button #radio *ngIf="selectionMode === 'single'" [value]="title" [name]="name" [attr.role]="'radio'"
+        [attr.aria-checked]="selected" [compact]="contentDensity === 'compact'" [(ngModel)]="selected">
+    </fd-radio-button>
+    <fd-icon *ngIf="titleIcon" fd-list-icon [glyph]="titleIcon" [attr.alt]="titleIcon" [attr.role]="'img'">
+    </fd-icon>
+    <span *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap">{{title}}</span>
+    <span *ngIf="secondary" fd-list-secondary [attr.aria-label]="secondary" [attr.nowrap]="secondaryWrap">
+        {{secondary}}
+    </span>
+    <fd-icon class="fd-list-secondary" *ngIf="secondayIcon !== 'decline' && secondayIcon !== undefined" fd-list-icon
+        [glyph]="secondayIcon" [attr.alt]="secondayIcon" [attr.role]="'img'">
+    </fd-icon>
+    <fdp-button class="fd-list-secondary" *ngIf="secondayIcon  === 'decline'" [attr.role]="'button'"
+        [compact]="contentDensity === 'compact'" [type]="'transparent'" [glyph]="secondayIcon">
+    </fdp-button>
+</ng-template>
+
+<ng-template #byLineTemplate>
+    <fd-checkbox #checkbox [(ngModel)]="selected" *ngIf="selectionMode === 'multi'" [attr.aria-checked]="selected"
+        [compact]="contentDensity === 'compact'" [attr.role]="'checkbox'">
+    </fd-checkbox>
+    <fd-radio-button #radio *ngIf="selectionMode === 'single'" [value]="title" [name]="name" [attr.role]="'radio'"
+        [attr.aria-checked]="selected" [compact]="contentDensity === 'compact'" [(ngModel)]="selected">
+    </fd-radio-button>
+    <fd-icon class="fd-list__thumbnail" *ngIf="titleIcon" fd-list-icon [glyph]="titleIcon" [attr.alt]="titleIcon"
+        [attr.role]="'img'">
+    </fd-icon>
+    <div class="fd-list__content">
+        <div *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap">{{title}}</div>
+        <div class="fd-list__byline fd-list__byline--2-col">
+            <span *ngIf="description" class="fd-list__byline-left" [attr.aria-label]="description"
+                [attr.nowrap]="titleWrap">{{description}}</span>
+            <span #rt class="fd-list__byline-right" *ngIf="secondary" [attr.aria-label]="secondary"
+                [attr.nowrap]="secondaryWrap">
+                {{secondary}}
+            </span>
+            <fd-icon class="fd-list__byline-right" *ngIf="secondayIcon !== 'decline' && secondayIcon !== undefined"
+                fd-list-icon [glyph]="secondayIcon" [attr.alt]="secondayIcon" [attr.role]="'img'">
+            </fd-icon>
+            <fdp-button class="fd-list__byline-right" *ngIf="secondayIcon  === 'decline'" [attr.role]="'button'"
+                [compact]="contentDensity === 'compact'" [type]="'transparent'" [glyph]="secondayIcon">
+            </fdp-button>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,8 @@
+<fdp-list [noBorder]="true" [selectionMode]="'multi'" [(selectedItems)]="selectedItems"
+    (selectedItemChange)="showItemInfo($event)" [hasByLine]="true">
+    <fdp-list-header>
+        <div infoText>({{selectedItems.length}}) Items selected</div>
+    </fdp-list-header>
+    <fdp-standard-list-item *ngFor="let item of items" [item]="item">
+    </fdp-standard-list-item>
+</fdp-list>

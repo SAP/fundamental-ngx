@@ -1,0 +1,8 @@
+<h3>Cozy Mode</h3>
+<fdp-list [noBorder]="true" [selectionMode]="'single'" [(selectedItems)]="selectedItems"
+    (selectedItemChange)="showItemInfo($event)">
+    <fdp-list-header>
+        <div infoText>{{selectedItems}} : is selected</div>
+    </fdp-list-header>
+    <fdp-standard-list-item *ngFor="let item of radioItems" [item]="item"></fdp-standard-list-item>
+</fdp-list>

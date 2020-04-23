@@ -7,9 +7,20 @@ import { PlatformListHeaderComponent } from './platform-list-header/platform-lis
 import { PlatformListDocsComponent } from './platform-list-docs.component';
 import {
     PlatformListExampleComponent,
-    PlatformListBorderLessExampleComponent
+    PlatformListWithDeleteButtonExampleComponent,
+    PlatformListWithFooterExampleComponent,
+    PlatformListWithItemCounterExampleComponent,
+    PlatformListWithSelectionExampleComponent,
+    PlatformListWithNavigationExampleComponent,
+    PlatformListWithSingleSelectionExampleComponent
 } from './platform-list-examples/platform-list-example.component';
-import { CheckboxModule, InfiniteScrollModule, LinkModule, ListModule, RadioModule } from '@fundamental-ngx/core';
+import { PlatformListModule, PlatformButtonModule } from '@fundamental-ngx/platform';
+import { PlatformListBorderLessExampleComponent } from './platform-list-examples/Platform-List-Border-Less-example.component';
+import { PlatformListWithGroupHeaderExampleComponent } from './platform-list-examples/platform-list-with-group-header-example.component';
+import { PlatformListWithInfiniteScrollExampleComponent } from './platform-list-examples/platform-list-with-infinite-scroll-example.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
+
 
 const routes: Routes = [
     {
@@ -26,16 +37,24 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
-        ListModule,
-        LinkModule,
-        CheckboxModule,
-        RadioModule,
-        InfiniteScrollModule
+        PlatformListModule,
+        PlatformButtonModule,
+        ScrollingModule
     ],
     exports: [RouterModule],
     declarations: [
+        PlatformListDocsComponent,
+        PlatformListHeaderComponent,
         PlatformListExampleComponent,
-        PlatformListBorderLessExampleComponent
+        PlatformListBorderLessExampleComponent,
+        PlatformListWithDeleteButtonExampleComponent,
+        PlatformListWithFooterExampleComponent,
+        PlatformListWithGroupHeaderExampleComponent,
+        PlatformListWithItemCounterExampleComponent,
+        PlatformListWithSelectionExampleComponent,
+        PlatformListWithNavigationExampleComponent,
+        PlatformListWithSingleSelectionExampleComponent,
+        PlatformListWithInfiniteScrollExampleComponent
     ]
 })
 export class PlatformListDocsModule {

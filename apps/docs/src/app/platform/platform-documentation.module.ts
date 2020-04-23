@@ -13,14 +13,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AvatarModule } from '@fundamental-ngx/core';
 
 
-import { PlatformListHeaderComponent } from './component-docs/platform-list/platform-list-header/platform-list-header.component';
-import { PlatformListDocsComponent } from './component-docs/platform-list/platform-list-docs.component';
-import {
-    PlatformListExampleComponent,
-    PlatformListBorderLessExampleComponent,
-    PlatformListWithButtonExampleComponent
-} from './component-docs/platform-list/platform-list-examples/platform-list-example.component';
-
 @NgModule({
     declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
     imports: [
