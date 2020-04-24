@@ -1,8 +1,10 @@
-<fdp-action-bar
-    [title]="'Page Action bar component'"
-    (backButtonClick)="onBackButtonClick()"
-    [actionItems]="actionItems"
-    (itemClick)="onItemClick($event)"
-    [showBackButton]="true"
->
+<fdp-action-bar [title]="'Page Action bar component'" (backButtonClick)="onBackButtonClick()" [showBackButton]="true">
+    <fdp-action-button-group>
+        <fdp-button [compact]="true" [type]="'emphasized'">
+            Save
+        </fdp-button>
+        <fdp-button [compact]="true" [type]="'light'">
+            Cancel
+        </fdp-button>
+    </fdp-action-button-group>
 </fdp-action-bar>
