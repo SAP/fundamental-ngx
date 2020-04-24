@@ -89,7 +89,7 @@ export class ComboBoxComponent extends CollectionBaseInput {
     /**
      * Fill in popover values.
      */
-    public _suggestions: Array<any>;
+    _suggestions: Array<any>;
 
     /**
      * Sets if we deal with primitive string or object
@@ -229,9 +229,7 @@ export class ComboBoxComponent extends CollectionBaseInput {
     private patchQueryMethod() {
         if (this._comboBox) {
             this._comboBox.handleSearchTermChange = () => {
-                if (this.ds) {
                     this.ds.match(this._comboBox.inputTextValue);
-                }
 
                 if (this._comboBox.popoverComponent) {
                     this._comboBox.popoverComponent.updatePopover();
