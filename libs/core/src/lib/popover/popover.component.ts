@@ -68,7 +68,7 @@ export class PopoverComponent {
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
     @Input()
-    placement: Placement;
+    placement: Placement = 'bottom-start';
 
     /** Whether the popover is open. Can be used through two-way binding. */
     @Input()
