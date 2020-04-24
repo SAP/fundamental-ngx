@@ -88,12 +88,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     glyph: string = 'navigation-down-arrow';
 
     /**
-     *  The trigger events that will open/close the options popover, by default it is click, so if user click on
-     *  input field, the popover with options will open or close
+     *  The trigger events that will open/close the options popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
      */
     @Input()
-    triggers: string[] = ['click'];
+    triggers: string[] = [];
 
     /** Whether the combobox should close, when a click is performed outside its boundaries. True by default */
     @Input()
@@ -107,7 +106,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.  
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
     state: FormStates;
@@ -261,8 +260,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeydownHandler(event: KeyboardEvent): void {
-        if (event.key === 'Enter' && this.searchFn) {
-            this.searchFn();
+        if (event.key === 'Enter') {
+            if (this.searchFn) {
+                this.searchFn();
+            }
+            if (this.displayedValues && this.displayedValues.length) {
+                this.onMenuClickHandler(0);
+            }
         } else if (event.key === 'ArrowDown') {
             if (event.altKey) {
                 this.isOpenChangeHandle(true);
@@ -356,6 +360,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         if (this.searchFn) {
             this.searchFn();
         }
+        this.isOpenChangeHandle(!this.open);
     }
 
     /** @hidden */
