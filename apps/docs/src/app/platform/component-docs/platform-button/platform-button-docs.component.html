@@ -1,15 +1,3 @@
-<fd-docs-section-title [id]="'Button-options'" [componentName]="'button'"> Button Options </fd-docs-section-title>
-<description>
-    There are three emphasis styles used to indicate the importance of the button on the page. Do not provide a value
-    for the default option. Use <code class="code-snippet">[options]="'emphasized'"</code> or
-    <code class="code-snippet">[options]="'light'"</code> to set the option.
-</description>
-<component-example>
-    <fdp-button-options-example></fdp-button-options-example>
-</component-example>
-<code-example [exampleFiles]="buttonHtmlOptions"></code-example>
-<separator></separator>
-
 <fd-docs-section-title [id]="'Button-types'" [componentName]="'button'"> Button Types </fd-docs-section-title>
 <description>
     The default button type is "action", no modifier is required. Use
@@ -101,7 +89,7 @@
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fdp-button [type]="data.properties.type" [options]="data.properties.options" [compact]="data.properties.compact"
+    <fdp-button [type]="data.properties.type" [compact]="data.properties.compact" [disabled]="data.properties.disabled"
         [attr.title]='data.properties.label' [width]="data.properties.width" [glyph]="data.properties.icon">
         {{ data.properties.label }}
     </fdp-button>
