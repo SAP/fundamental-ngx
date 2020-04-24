@@ -22,15 +22,21 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { isKey } from '../utils/functions/is-key';
+import { SelectProxy } from './select-proxy.service';
 
 let selectUniqueId: number = 0;
 
 export type SelectControlState = 'error' | 'success' | 'warning' | 'information';
+
+export interface OptionStatusChange {
+    option: OptionComponent,
+    controlChange: boolean
+}
 
 /**
  * Select component intended to mimic the behaviour of the native select element.
@@ -42,21 +48,19 @@ export type SelectControlState = 'error' | 'success' | 'warning' | 'information'
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
+        SelectProxy,
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SelectComponent),
             multi: true
         }
-    ],
-    host: {
-        role: 'listbox'
-    }
+    ]
 })
 export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
 
     /** Id of the control. */
     @Input()
-    controlId: string = `select-list-${selectUniqueId++}`;
+    controlId: string = `fd-select-${selectUniqueId++}`;
 
     /** Whether the select component is disabled. */
     @Input()
@@ -88,15 +92,13 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** Sets value of the selected option. */
     @Input('value') set value(value: any) {
-        this.value$.next(value);
+        this._selectProxy.value$.next(value);
     }
 
     /** Current value of the selected option. */
     get value(): any {
-        return this.value$.value;
+        return this._selectProxy.value$.value;
     }
-
-    value$: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
 
     /** Whether the select is in compact mode. */
     @Input()
@@ -155,6 +157,10 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** If user wants to disable clicking when the content has not yet loaded and apply the three dots. */
     @Input()
     loading: boolean = false;
+
+    /** Binds to control aria-labelledby attribute */
+    @Input()
+    labelledby: string;
 
     /** Event emitted when the popover open state changes. */
     @Output()
@@ -235,12 +241,14 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     constructor(
         private _elementRef: ElementRef,
+        private _selectProxy: SelectProxy,
         private _changeDetectorRef: ChangeDetectorRef
     ) { }
 
     /** @hidden */
     ngOnInit(): void {
         this._setupFocusTrap();
+        this._setOptionsSelectionListener();
     }
 
     /** @hidden */
@@ -253,7 +261,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** @hidden */
     ngAfterContentInit(): void {
         this._listenOnOptionChanges();
-        this._setSelectedOption();
     }
 
     /** @hidden */
@@ -330,18 +337,18 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** @hidden */
     writeValue(value: any): void {
-        this.value$.next(value);
+        this._selectProxy.value$.next(value);
     }
 
     /** @hidden */
-    setSelectedOption(option: OptionComponent, controlChange: boolean): void {
+    setSelectedOption({option, controlChange}: OptionStatusChange): void {
         this.selected = option;
 
         if (controlChange) {
             this._updateValue(option.value);
             this.close();
         }
-        this._changeDetectorRef.detectChanges();
+        this._changeDetectorRef.markForCheck();
     }
 
 
@@ -392,7 +399,8 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
                     this._setSelectedOption();
                     setTimeout(() => {
                         if (this.selected === undefined && this.unselectMissingOption) {
-                            this._updateValue(undefined)
+                            this._updateValue(undefined);
+                            this._changeDetectorRef.markForCheck();
                         }
                     });
                 })
@@ -406,7 +414,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** @hidden */
     private _updateValue(value: any): void {
-        this.value$.next(value);
+        this._selectProxy.value$.next(value);
         this.valueChange.emit(value);
         this.onChange(value);
     }
@@ -430,5 +438,13 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
         if (this.isOpen) {
             this.open();
         }
+    }
+
+    /** Function used to setup new listener reacting on option select events.*/
+    private _setOptionsSelectionListener(): void {
+        this._subscriptions.add(
+            this._selectProxy.optionStateChange$.asObservable()
+                .subscribe((change: OptionStatusChange) => this.setSelectedOption(change))
+        );
     }
 }

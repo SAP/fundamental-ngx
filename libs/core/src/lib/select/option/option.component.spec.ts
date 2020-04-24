@@ -1,10 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OptionComponent } from './option.component';
-import { SelectComponent } from '@fundamental-ngx/core';
-import { BehaviorSubject } from 'rxjs';
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 import Spy = jasmine.Spy;
+import { SelectProxy } from '../select-proxy.service';
 
 describe('OptionComponent', () => {
     let component: OptionComponent;
@@ -12,10 +11,7 @@ describe('OptionComponent', () => {
     let keyHandlerSpy: Spy<any>;
     let setSelectedSpy: Spy<any>;
     const selectValue = 'Pineapple';
-    const selectComponent: Partial<SelectComponent> = {
-        value$: new BehaviorSubject<any>(undefined),
-        setSelectedOption: (option, controlChange) => {}
-    };
+
     const changeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']);
     const elementRef = new ElementRef(null);
 
@@ -23,8 +19,8 @@ describe('OptionComponent', () => {
         TestBed.configureTestingModule({
             declarations: [OptionComponent],
             providers: [
+                SelectProxy,
                 {provide: ChangeDetectorRef, useValue: changeDetectorRef},
-                {provide: SelectComponent, useValue: selectComponent},
                 {provide: ElementRef, useValue: elementRef}
             ]
         }).compileComponents();
@@ -56,7 +52,7 @@ describe('OptionComponent', () => {
 
     it('should be selected based on control state', () => {
         component.value = selectValue;
-        selectComponent.value$.next(selectValue);
+        component['_selectProxy'].value$.next(selectValue);
 
         expect(setSelectedSpy).toHaveBeenCalled();
         expect(component.selected).toBe(true);

@@ -1,4 +1,5 @@
 import { isKey } from '@fundamental-ngx/core';
+import { isDevMode } from '@angular/core';
 
 describe('isKey', () => {
     interface TestValue {
@@ -76,9 +77,9 @@ describe('isKey', () => {
         negativeTestValues.forEach(example => expect(isKey(example.event, example.key)).toBeFalse())
     );
 
-    it('should throw error for broken examples', () =>
-        errorTestValues.forEach(example =>
-            expect(() => isKey(example.event, example.key)).toThrow()
-        )
-    );
+    it('should throw error for broken examples', () => {
+        if (isDevMode()) {
+            errorTestValues.forEach(example => expect(() => isKey(example.event, example.key)).toThrow())
+        }
+    });
 });

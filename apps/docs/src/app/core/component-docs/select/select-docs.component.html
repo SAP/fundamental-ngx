@@ -1,9 +1,8 @@
 <fd-docs-section-title [id]="'mode'" [componentName]="'select'">
-    Select mMdes
+    Select Modes
 </fd-docs-section-title>
 <description>
-    The Select control supports a wide variety of modes to display your list items. <br/>
-
+    Following examples presents different modes of the Select control.
 </description>
 <component-example>
     <fd-select-mode-example></fd-select-mode-example>
@@ -15,7 +14,9 @@
 <fd-docs-section-title [id]="'semantic'" [componentName]="'select'">
     Select Semantic States
 </fd-docs-section-title>
-<description></description>
+<description>
+    Use semantic states to visually highlight current state of the Select.
+</description>
 <component-example>
     <fd-select-semantic-state-example></fd-select-semantic-state-example>
 </component-example>
@@ -47,7 +48,7 @@
     Extended Options
 </fd-docs-section-title>
 <description>
-    List element features such as headers, titles and icons are supported inside the Select option.
+    ListComponent features such as headers, titles and icons are supported inside the OptionComponent.
     This example also shows how to handle complex option types like <code>Object</code>.
 </description>
 <component-example>
@@ -123,8 +124,8 @@
 <description>
     Adding and removing options dynamically is supported seamlessly with very little extra work required from the
     developer. By design, if the user removes the option that is currently selected, the value will become undefined.
-    This was implemented to prevent a user from keeping the active value of a previously removed option. This can be
-    automatically prevented by removing the missing option and by passing <code>[unselectMissingOption]="false"</code>.
+    This was implemented to prevent a user from keeping the active value of a previously removed option. This behavior
+    can be automatically prevented by setting <code>[unselectMissingOption]="false"</code>.
 </description>
 <component-example>
     <fd-select-adding-example></fd-select-adding-example>

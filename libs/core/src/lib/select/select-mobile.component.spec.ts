@@ -14,11 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
                    (isOpenChange)="toggleDialog(dialogTemplate, $event)">
 
             <ng-template #optionsTemplate>
-                <fd-select-mobile-list>
-                    <fd-option *ngFor="let option of options" [value]="option">
-                        {{option}}
-                    </fd-option>
-                </fd-select-mobile-list>
+                <fd-option *ngFor="let option of options" [value]="option">
+                    {{option}}
+                </fd-option>
             </ng-template>
 
         </fd-select>

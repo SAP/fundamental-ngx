@@ -1,3 +1,5 @@
+import { isDevMode } from '@angular/core';
+
 const keyMap: Map<string, { aliases: string[], keyCode: number }> = new Map(
     [
         ['ArrowRight', {aliases: ['ArrowRight', 'Right'], keyCode: 39}],
@@ -8,7 +10,7 @@ const keyMap: Map<string, { aliases: string[], keyCode: number }> = new Map(
         ['Escape', {aliases: ['Escape', 'Esc'], keyCode: 27}],
         ['Delete', {aliases: ['Delete', 'Del'], keyCode: 46}],
         ['Enter', {aliases: ['Enter'], keyCode: 13}],
-        ['Tab', {aliases: ['Tab'], keyCode: 9}],
+        ['Tab', {aliases: ['Tab'], keyCode: 9}]
     ]
 );
 
@@ -22,6 +24,9 @@ export function isKey(event: KeyboardEvent, key: string) {
             || keyMap.get(key).keyCode === event.keyCode;
     }
 
-    throw new Error(`Invalid function arguments. Check if "event" is a KeyboardEvent or "key" is defined in keyMap`);
+    if (isDevMode()) {
+        throw new Error(`Invalid function arguments. Check if "event" is a KeyboardEvent or "key" is defined in keyMap`);
+    }
+
     return false;
 }

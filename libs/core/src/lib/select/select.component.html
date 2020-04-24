@@ -33,7 +33,7 @@
          [class.fd-select--compact]="compact"
          (click)="toggle()">
         <div class="fd-select__control"
-             role="combobox"
+             role="listbox"
              #selectControl
              [ngClass]="state ? 'is-' + state : ''"
              [class.is-disabled]="disabled"
@@ -47,7 +47,9 @@
              [attr.aria-disabled]="disabled"
              [attr.aria-readonly]="readonly"
              [attr.aria-controls]="controlId + '-list-box'"
-             [attr.aria-haspopup]="isInteractive">
+             [attr.aria-haspopup]="isInteractive"
+             [attr.aria-labelledby]="labelledby"
+             [attr.aria-activedescendant]="selected?.id">
 
             <div class="fd-select__content">
                 <ng-container

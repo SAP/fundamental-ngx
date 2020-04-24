@@ -10,10 +10,12 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { SelectComponent } from '../select.component';
 import { filter, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { isKey } from '../../utils/functions/is-key';
+import { SelectProxy } from '../select-proxy.service';
+
+let optionUniqueId: number = 0;
 
 /**
  * Used to represent an option of the select component.
@@ -27,17 +29,18 @@ import { isKey } from '../../utils/functions/is-key';
         'class': 'fd-list__item',
         '[attr.aria-disabled]': 'disabled',
         '[attr.aria-selected]': 'selected',
+        '[attr.id]': 'id',
         '[tabindex]': 'disabled ? -1 : 0',
         role: 'option'
     },
     styles: [`
-
         .fd-list__item[aria-disabled="true"],
         .fd-list__item.is-disabled,
         .fd-list__item:disabled {
             opacity: 0.4;
             cursor: not-allowed;
         }
+
         .fd-list__item:disabled:focus {
             outline: none;
         }
@@ -45,6 +48,10 @@ import { isKey } from '../../utils/functions/is-key';
 
 })
 export class OptionComponent implements OnInit, OnDestroy {
+
+    /** Option id attribute */
+    @Input()
+    id: string = `fd-option-${optionUniqueId++}`;
 
     /** Value of the option. Similar to how a native select operates. */
     @Input()
@@ -83,8 +90,8 @@ export class OptionComponent implements OnInit, OnDestroy {
     /** @hidden */
     constructor(
         private _elRef: ElementRef,
-        private _changeDetRef: ChangeDetectorRef,
-        private _selectComponent: SelectComponent
+        private _selectProxy: SelectProxy,
+        private _changeDetRef: ChangeDetectorRef
     ) {}
 
     /** @hidden */
@@ -110,7 +117,7 @@ export class OptionComponent implements OnInit, OnDestroy {
         this.selected = value;
 
         if (value) {
-            this._selectComponent.setSelectedOption(this, controlChange);
+            this._selectProxy.optionStateChange$.next({option: this, controlChange: controlChange})
         }
         this._changeDetRef.markForCheck();
     }
@@ -128,7 +135,7 @@ export class OptionComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _observeValue(): void {
         this._subscriptions.add(
-            this._selectComponent.value$.asObservable()
+            this._selectProxy.value$.asObservable()
                 .pipe(
                     filter(value => value !== undefined),
                     map(value => value === this.value)
