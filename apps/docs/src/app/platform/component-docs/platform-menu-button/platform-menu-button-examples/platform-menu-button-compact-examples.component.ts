@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
     templateUrl: './platform-menu-button-compact-example.component.html',
 })
 export class PlatformMenuButtonCompactExampleComponent {
-    basicMenuData: any[] = [];
-    item = '';
+    basicMenuData: any[];
+    item: string;
 
-    onItemSelect(item: string) {
+    onItemSelect(item: string): void {
         this.item = item;
     }
 }
