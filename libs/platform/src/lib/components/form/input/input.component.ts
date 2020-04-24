@@ -79,6 +79,27 @@ export class InputComponent extends BaseInput implements CssClassBuilder {
 
     /** return the value in the text box */
     @Input()
+    state: Status;
+ 
+    /** Whether the input is read-only. */
+    @Input()
+    readonly: boolean = false;
+
+    /** Whether the input is disabled. */
+    @Input()
+    disabled: boolean = false;
+
+    @Input()
+    compact: boolean = false;
+    
+    @Input()
+    class: string = '';
+
+    /** @hidden */
+    @ViewChild('inputElement')
+    inputElement: ElementRef;
+
+    @Input()
     get value(): any {
         return super.getValue();
     }
