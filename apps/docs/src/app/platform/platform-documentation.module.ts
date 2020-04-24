@@ -10,7 +10,6 @@ import { PlatformButtonHeaderComponent } from '../platform/component-docs/platfo
 import { NewComponentComponent } from '../platform/component-docs/new-component/new-component.component';
 import {
     PlatformButtonIconsExampleComponent,
-    PlatformButtonOptionsExampleComponent,
     PlatformButtonSizesExampleComponent,
     PlatformButtonStateExampleComponent,
     PlatformButtonTypesExampleComponent,
@@ -98,7 +97,6 @@ const dataProviderServiceFactory = () => {
         PlatformHomeComponent,
         PlatformButtonDocsComponent,
         PlatformButtonIconsExampleComponent,
-        PlatformButtonOptionsExampleComponent,
         PlatformButtonSizesExampleComponent,
         PlatformButtonTypesExampleComponent,
         PlatformButtonStateExampleComponent,
