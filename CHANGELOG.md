@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2-rc.2"></a>
+## [0.17.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.1...v0.17.2-rc.2) (2020-04-24)
+
+
+### Bug Fixes
+
+* (platform) button styles updated to 0.8 styles ([#2365](https://github.com/SAP/fundamental-ngx/issues/2365)) ([dd4f935](https://github.com/SAP/fundamental-ngx/commit/dd4f935))
+
+
+
 <a name="0.17.2-rc.1"></a>
 ## [0.17.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.0...v0.17.2-rc.1) (2020-04-23)
 
