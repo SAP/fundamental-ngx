@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { NgControl } from '@angular/forms';
 
-export type InputSize = 'compact' | 'cozy';
+export type ContentDensity = 'compact' | 'cozy';
 export type Status = 'error' | 'warning' | void;
 
 export abstract class FormFieldControl<T> {
@@ -30,7 +30,7 @@ export abstract class FormFieldControl<T> {
     /**
      *  Components works in two sizes compact or cozy
      */
-    size: InputSize;
+    contentDensity: ContentDensity;
     /**
      *
      * Form Field listen for all the changes happening inside the input

@@ -9,7 +9,7 @@
        [attr.type]="type"
        [attr.placeholder]="placeholder"
        [disabled]="disabled"
-       [compact]="size == 'compact'"
+       [compact]="contentDensity == 'compact'"
        [state]="status === 'error' ? 'invalid' : '' "
        (blur)="_onFocusChanged(false)"
        (focus)="_onFocusChanged(true)"

@@ -7,7 +7,7 @@
             [name]="'radio1'"
             [list]="seasons"
             [isInline]="false"
-            [size]="'cozy'"
+            [contentDensity]="'cozy'"
             [value]="'Summer'"
             formControlName="example1"
         >
@@ -20,7 +20,7 @@
             [name]="'radio2'"
             [list]="seasons"
             [isInline]="true"
-            [size]="'compact'"
+            [contentDensity]="'compact'"
             [hasNoValue]="true"
             [noValueLabel]="'(No Selection)'"
             formControlName="example2"
@@ -44,7 +44,7 @@
             [name]="'radio4'"
             [value]="'Summer'"
             [list]="seasons"
-            [size]="'cozy'"
+            [contentDensity]="'cozy'"
             [isInline]="true"
             [(ngModel)]="favoriteOption"
         >
@@ -55,7 +55,7 @@
         <fdp-radio-group
             [name]="'radio4'"
             [list]="seasons"
-            [size]="'compact'"
+            [contentDensity]="'compact'"
             [isInline]="true"
             [(ngModel)]="favoriteOption2"
         >

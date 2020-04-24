@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2-rc.1"></a>
+## [0.17.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.0...v0.17.2-rc.1) (2020-04-23)
+
+
+### Bug Fixes
+
+* (platform) Create common base class for Platform components ([#2369](https://github.com/SAP/fundamental-ngx/issues/2369)) ([4a25988](https://github.com/SAP/fundamental-ngx/commit/4a25988))
+
+
+
+<a name="0.17.2-rc.0"></a>
+## [0.17.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.17.1...v0.17.2-rc.0) (2020-04-22)
+
+
+
+<a name="0.17.1"></a>
+## [0.17.1](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.10...v0.17.1) (2020-04-21)
+
+
+
+<a name="0.17.1-rc.10"></a>
+## [0.17.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.9...v0.17.1-rc.10) (2020-04-21)
+
+
+### Bug Fixes
+
+* (popover) Fix popover performance ([#2389](https://github.com/SAP/fundamental-ngx/issues/2389)) ([b8e17a4](https://github.com/SAP/fundamental-ngx/commit/b8e17a4))
+
+
+
+<a name="0.17.1-rc.9"></a>
+## [0.17.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.8...v0.17.1-rc.9) (2020-04-21)
+
+
+
 <a name="0.17.1-rc.8"></a>
 ## [0.17.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.7...v0.17.1-rc.8) (2020-04-19)
 
