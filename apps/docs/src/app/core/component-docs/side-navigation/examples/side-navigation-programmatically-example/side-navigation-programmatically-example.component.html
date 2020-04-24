@@ -12,9 +12,12 @@
                 </a>
             </li>
             <li fd-nested-list-item [(expanded)]="open">
-                <a fd-nested-list-link>
-                    <span fd-nested-list-title>Link 3</span>
-                </a>
+                <div fd-nested-list-content [selected]="selected">
+                    <a fd-nested-list-link>
+                        <span fd-nested-list-title>Link 3</span>
+                    </a>
+                    <a fd-nested-list-expand-icon></a>
+                </div>
                 <ul fd-nested-list>
                     <li fd-nested-list-item>
                         <a fd-nested-list-link [selected]="selected">

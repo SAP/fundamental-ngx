@@ -1,5 +1,5 @@
 import {
-    AfterContentInit,
+    AfterContentInit, AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
@@ -28,9 +28,10 @@ import { NestedListStateService } from '../nested-list/nested-list-state.service
     styleUrls: ['side-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [NestedListKeyboardService, NestedListStateService]
+    providers: [ NestedListKeyboardService, NestedListStateService ]
 })
-export class SideNavigationComponent implements AfterContentInit, OnInit {
+export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit {
+
     /**
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
      */
@@ -54,23 +55,36 @@ export class SideNavigationComponent implements AfterContentInit, OnInit {
     preparedNestedList: QueryList<PreparedNestedListComponent>;
 
     /** @hidden */
-    constructor(private keyboardService: NestedListKeyboardService, private nestedListState: NestedListStateService) {
-        this.keyboardService.refresh$.subscribe(() =>
+    constructor(
+        private keyboardService: NestedListKeyboardService,
+        private nestedListState: NestedListStateService
+    ) {
+        this.keyboardService.refresh$.subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists())
-        );
+        });
     }
 
     /** @hidden */
     ngOnInit(): void {
         /** Set up condensed state */
-        this.nestedListState.condensed =
-            this.condensed || (this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
+        this.nestedListState.condensed = this.condensed ||
+            (this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed)
+        ;
     }
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.keyboardService.refreshItems(this.getLists());
+        if (!this.sideNavigationConfiguration) {
+            this.keyboardService.refreshItems(this.getLists());
+        }
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        if (this.sideNavigationConfiguration) {
+            this.keyboardService.refreshItems(this.getLists());
+        }
     }
 
     /**
@@ -78,6 +92,7 @@ export class SideNavigationComponent implements AfterContentInit, OnInit {
      * Method that returns 1 deep level of lists.
      */
     private getLists(): NestedListDirective[] {
+
         const lists: NestedListDirective[] = [];
 
         if (this.sideNavMain) {
@@ -87,7 +102,7 @@ export class SideNavigationComponent implements AfterContentInit, OnInit {
             lists.push(this.sideNavUtility.list);
         }
         if (this.preparedNestedList) {
-            lists.push(...this.preparedNestedList.map((preparedNested) => preparedNested.nestedListDirective));
+            lists.push(...this.preparedNestedList.map(preparedNested => preparedNested.nestedListDirective));
         }
 
         return lists;

@@ -15,10 +15,13 @@
             </li>
             <li fd-nested-list-item>
                 <fd-nested-list-popover>
-                    <a fd-nested-list-link>
-                        <span fd-nested-list-icon [glyph]="'settings'"></span>
-                        <span fd-nested-list-title>Link 3</span>
-                    </a>
+                    <div fd-nested-list-content>
+                        <a fd-nested-list-link>
+                            <span fd-nested-list-icon [glyph]="'settings'"></span>
+                            <span fd-nested-list-title>Link 3</span>
+                        </a>
+                        <a fd-nested-list-expand-icon></a>
+                    </div>
                     <ul fd-nested-list>
                         <li fd-nested-list-item>
                             <a fd-nested-list-link>

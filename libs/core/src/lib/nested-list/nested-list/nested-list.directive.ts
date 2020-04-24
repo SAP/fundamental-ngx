@@ -1,13 +1,9 @@
 import {
-    AfterContentInit,
-    ContentChildren,
+    AfterContentInit, ChangeDetectorRef, ContentChildren,
     Directive,
-    ElementRef,
-    forwardRef,
+    ElementRef, forwardRef,
     HostBinding,
-    Input,
-    Optional,
-    QueryList
+    Input, Optional, QueryList
 } from '@angular/core';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
@@ -19,6 +15,7 @@ import { NestedListInterface } from './nested-list.interface';
     selector: '[fdNestedList], [fd-nested-list]'
 })
 export class NestedListDirective implements AfterContentInit, NestedListInterface {
+
     /** @hidden */
     @HostBinding('class.fd-nested-list')
     fdNestedListItemClass: boolean = true;
@@ -50,7 +47,8 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         @Optional() private _nestedItemService: NestedItemService,
         private _nestedListStateService: NestedListStateService,
         private _nestedListKeyboardService: NestedListKeyboardService,
-        private _elementRef: ElementRef
+        private _elementRef: ElementRef,
+        private _changeDetectionRef: ChangeDetectorRef
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;
@@ -66,6 +64,11 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         }
         this.nestedItems.changes.subscribe(() => this._nestedListKeyboardService.refresh$.next());
         this.handleNestedLevel(nestedLevel);
+    }
+
+    /** @hidden */
+    public detectChanges(): void {
+        this._changeDetectionRef.markForCheck();
     }
 
     /** @hidden */
@@ -89,7 +92,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         }
 
         /** Filter only elements, that has `fd-nested-list` directive attribute */
-        const filteredParentElements = parentElements.filter((_element) => _element.hasAttribute('fd-nested-list'));
+        const filteredParentElements = parentElements.filter(_element => _element.hasAttribute('fd-nested-list'));
         return filteredParentElements.length;
     }
 }

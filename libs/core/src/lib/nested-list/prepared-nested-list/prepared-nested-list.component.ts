@@ -1,4 +1,15 @@
-import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, Optional, ViewChild } from '@angular/core';
+import {
+    AfterContentInit,
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    forwardRef,
+    Input,
+    Optional,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { NestedListDirective } from '../nested-list/nested-list.directive';
 import { NestedListModel } from '../nested-list-model';
 import { NestedItemService } from '../nested-item/nested-item.service';
@@ -9,9 +20,12 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 @Component({
     selector: 'fd-prepared-nested-list',
     templateUrl: './prepared-nested-list.component.html',
-    styleUrls: ['./prepared-nested-list.component.scss']
+    styleUrls: ['./prepared-nested-list.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PreparedNestedListComponent implements AfterViewInit {
+export class PreparedNestedListComponent {
+
     /**
      * @hidden
      * For internal usage.
@@ -47,15 +61,7 @@ export class PreparedNestedListComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    constructor(private _changeDetRef: ChangeDetectorRef, @Optional() private _nestedItemService: NestedItemService) {}
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._changeDetRef.detectChanges();
-
-        /** If any item above, pass list directive reference to it */
-        if (this._nestedItemService) {
-            this._nestedItemService.list = this.nestedListDirective;
-        }
-    }
+    constructor(
+        @Optional() private _nestedItemService: NestedItemService
+    ) {}
 }

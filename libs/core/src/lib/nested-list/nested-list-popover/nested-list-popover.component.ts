@@ -1,4 +1,14 @@
-import { Component, ContentChild, HostBinding, ViewChild, ViewEncapsulation, Optional } from '@angular/core';
+import {
+    AfterContentInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    HostBinding,
+    Input,
+    Optional,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
@@ -9,14 +19,16 @@ import { map } from 'rxjs/operators';
 import { NestedItemInterface } from '../nested-item/nested-item.interface';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListPopoverInterface } from './nested-list-popover.interface';
+import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 
 @Component({
     selector: 'fd-nested-list-popover',
     templateUrl: './nested-list-popover.component.html',
     styleUrls: ['./nested-list-popover.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NestedListPopoverComponent implements NestedListPopoverInterface {
+export class NestedListPopoverComponent implements NestedListPopoverInterface, AfterContentInit {
     /** @hidden */
     placement$: Observable<string>;
 
@@ -31,6 +43,13 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface {
     /** @hidden */
     @ContentChild(NestedLinkDirective)
     linkDirective: NestedLinkDirective;
+
+    /** @hidden */
+    @ContentChild(NestedListContentDirective)
+    contentDirective: NestedListContentDirective;
+
+    @Input()
+    title: string = '';
 
     /**
      * @hidden
@@ -70,6 +89,18 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface {
         }
     }
 
+    ngAfterContentInit(): void {
+        if (!this.title) {
+            this.title = this.getTitle();
+        }
+    }
+
+    public getTitle(): string {
+        if (this.contentDirective && this.contentDirective.nestedLink) {
+            return this.contentDirective.nestedLink.getTitle();
+        }
+    }
+
     /** @hidden */
     private _listenOnKeyboardRefresh(): void {
         this._keyboardNestService.refresh$.subscribe(() => {
@@ -83,7 +114,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface {
     /** @hidden */
     private _createRtlObservable(): void {
         this.placement$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left-start' : 'right-start')))
+            ? this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'left-start' : 'right-start'))
             : of('right-start');
     }
 }

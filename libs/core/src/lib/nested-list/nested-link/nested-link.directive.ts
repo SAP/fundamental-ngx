@@ -4,21 +4,19 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
-    HostBinding,
-    Input,
-    OnInit,
+    HostBinding, HostListener,
+    Input, Optional,
     Output,
     Renderer2
 } from '@angular/core';
 import { NestedListTitleDirective } from '../nested-list-directives';
+import { NestedItemService } from '../nested-item/nested-item.service';
 
 @Directive({
-    selector: '[fdNestedLink], [fd-nested-list-link]',
-    host: {
-        tabindex: '0'
-    }
+    selector: '[fdNestedLink], [fd-nested-list-link]'
 })
-export class NestedLinkDirective implements OnInit {
+export class NestedLinkDirective {
+
     /** @hidden */
     @HostBinding('class.fd-nested-list__link')
     fdNestedListItemClass: boolean = true;
@@ -29,6 +27,14 @@ export class NestedLinkDirective implements OnInit {
      */
     @ContentChild(NestedListTitleDirective)
     title: NestedListTitleDirective;
+
+    /**
+     * @hidden
+     * TODO
+     */
+    @HostBinding('attr.tabindex')
+    tabIndex: number = 0;
+
 
     /** Event that is thrown, when any keyboard event is dispatched on this element */
     @Output()
@@ -47,22 +53,6 @@ export class NestedLinkDirective implements OnInit {
     @HostBinding('class.is-selected')
     selected: boolean = false;
 
-    /**
-     * @hidden
-     * Attribute controlled by the parent `NestedItemDirective`
-     */
-    @HostBinding('class.is-expanded')
-    @HostBinding('attr.aria-expanded')
-    expanded: boolean = false;
-
-    /**
-     * @hidden
-     * Attribute controlled by the parent `NestedItemDirective`
-     */
-    @HostBinding('class.has-child')
-    @HostBinding('attr.aria-haspopup')
-    hasChildren: boolean = false;
-
     /** Set focus on the element. */
     focus(): void {
         this._elementRef.nativeElement.focus();
@@ -77,27 +67,29 @@ export class NestedLinkDirective implements OnInit {
     constructor(
         public changeDetRef: ChangeDetectorRef,
         private _renderer: Renderer2,
-        private _elementRef: ElementRef
+        private _elementRef: ElementRef,
+        private _itemService: NestedItemService
     ) {}
 
-    /** @hidden */
-    ngOnInit(): void {
-        /** Add event listeners on the element */
+    /** TODO */
+    @HostListener('keydown', ['$event'])
+    onKeyDown(event: KeyboardEvent): void {
+        this.keyboardTriggered.emit(event);
+        this._itemService.keyDown.next(event);
+    }
 
-        /** Keyboard */
-        this._renderer.listen(this._elementRef.nativeElement, 'keydown', (event) => this.keyboardTriggered.emit(event));
-
-        /** Mouse Click */
-        this._renderer.listen(this._elementRef.nativeElement, 'click', (event) => {
-            if (this.onClickCallback) {
-                this.onClickCallback();
-            }
-            this.clicked.emit(event);
-        });
+    /** TODO */
+    @HostListener('click', ['$event'])
+    onClick(event: MouseEvent): void {
+        if (this.onClickCallback) {
+            this.onClickCallback();
+        }
+        this.clicked.emit(event);
     }
 
     /** Returns the title value of the title directive */
     getTitle(): string {
         return this.title && this.title.getInnerText();
     }
+
 }
