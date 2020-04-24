@@ -16,7 +16,7 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
             #actionbar
         >
         </fdp-action-bar>
-    `
+    `,
 })
 class TestComponent {
     @Input() actionBarTitle: string;
@@ -40,7 +40,7 @@ describe('ActionBarHeaderComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ActionBarComponent, TestComponent],
-            imports: [FormsModule, FundamentalNgxCoreModule]
+            imports: [FormsModule, FundamentalNgxCoreModule],
         }).compileComponents();
     }));
 
@@ -73,7 +73,7 @@ describe('ActionBarHeaderComponent', () => {
         component.showBackButton = true;
         fixture.detectChanges();
 
-        let backButton = fixture.debugElement.queryAll(By.css('.sap-icon--nav-back'));
+        let backButton = fixture.debugElement.queryAll(By.css('.sap-icon--navigation-left-arrow'));
         expect(backButton.length).toBe(1);
 
         component.showBackButton = false;
@@ -86,7 +86,7 @@ describe('ActionBarHeaderComponent', () => {
     it('should emit a "backButtonClick" event when back button is pressed', () => {
         component.showBackButton = true;
         fixture.detectChanges();
-        const backButton = fixture.debugElement.query(By.css('.sap-icon--nav-back'));
+        const backButton = fixture.debugElement.query(By.css('.sap-icon--navigation-left-arrow'));
         backButton.nativeElement.click();
         expect(component.backButtonClicked).toBeTruthy();
     });
