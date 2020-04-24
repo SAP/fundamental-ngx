@@ -24,7 +24,7 @@ export type PopoverFillMode = 'at-least' | 'equal';
  * ```
  */
 @Directive({
-    selector: '[fdPopover]',
+    selector: '[fdPopover]'
 })
 export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
@@ -106,6 +106,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     private popper: Popper;
     private eventRef: Function[] = [];
     private isSetup: boolean = false;
+    private _outsideClickEventReference: () => void;
 
     /** @hidden */
     constructor(private elRef: ElementRef,
@@ -199,6 +200,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     public open(fireEvent: boolean = true): void {
         if (!this.isOpen && !this.disabled) {
             this.createContainer();
+            this._addListenerForOutsideClick();
             this.isOpen = true;
 
             if (fireEvent) {
@@ -211,6 +213,11 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
      * Closes the popover.
      */
     public close(fireEvent: boolean = true): void {
+        if (this._outsideClickEventReference) {
+            this._outsideClickEventReference();
+            this._outsideClickEventReference = null;
+        }
+
         if (this.isOpen) {
             this.destroyContainer();
             this.isOpen = false;
@@ -324,7 +331,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             if (this.options) {
                 this.options.placement = this.placement;
             } else {
-                this.options = {placement: this.placement}
+                this.options = { placement: this.placement };
             }
         }
     }
@@ -336,7 +343,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
                     enabled: true,
                     fn: this.fillControlMode === 'equal' ? this.fillReference : this.atLeastReference,
                     order: 840
-                }
+                };
             } else {
                 this.options = {
                     modifiers: {
@@ -351,18 +358,25 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    /** @hidden */
-    @HostListener('document:click', ['$event'])
-    clickHandler(event: MouseEvent): void {
-        if (this.containerRef &&
+    private _addListenerForOutsideClick(): void {
+        if (!this._outsideClickEventReference) {
+            this._outsideClickEventReference = this.renderer.listen('document', 'click', (event: MouseEvent) => {
+                if (this._shouldClose(event)) {
+                    this.close();
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            });
+        }
+    }
+
+    private _shouldClose(event: MouseEvent): boolean {
+        return this.containerRef &&
             this.isOpen &&
             this.closeOnOutsideClick &&
             event.target !== this.elRef.nativeElement &&
             !this.elRef.nativeElement.contains(event.target) &&
-            !this.containerRef.location.nativeElement.contains(event.target)) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.close();
-        }
+            !this.containerRef.location.nativeElement.contains(event.target)
+        ;
     }
 }
