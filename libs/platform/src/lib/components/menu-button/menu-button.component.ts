@@ -1,36 +1,16 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ButtonType } from '@fundamental-ngx/core';
-import { InputSize } from './../form/form-control';
+import { BaseComponent } from '../base';
 
 @Component({
     selector: 'fdp-menu-button',
     templateUrl: './menu-button.component.html',
     styleUrls: ['./menu-button.component.scss'],
 })
-export class MenuButtonComponent {
-    /** Id for menu-button. */
-    @Input()
-    id: string;
-
-    /** name for menu-button */
-    @Input()
-    name: string;
-
-    /** Menu button size. ex: compact | cozy  */
-    @Input()
-    contentSize: InputSize = 'cozy';
-
-    /** to truncate text of menu-button based on width. */
-    @Input()
-    width: string;
-
+export class MenuButtonComponent extends BaseComponent {
     /** The Sap-icon to include in the menu-button */
     @Input()
     icon: string;
-
-    /** Menu-Button is disabled on true. */
-    @Input()
-    disabled: boolean = false;
 
     /** The type of the button. Types include 'standard', 'positive', 'negative', 'transparent', 'attention', 'emphasized', 'ghost'.
      * Leave empty for default.'*/
@@ -40,6 +20,10 @@ export class MenuButtonComponent {
     /** Event sent when menu-button is clicked */
     @Output()
     buttonClicked: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
+
+    constructor(_cd: ChangeDetectorRef) {
+        super(_cd);
+    }
 
     /**
      *  Handles menu-button click

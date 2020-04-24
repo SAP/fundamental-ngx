@@ -41,7 +41,7 @@ describe('MenuButtonComponent', () => {
 @Component({
     selector: 'fdp-disabled-menu-button',
     template: `
-        <fdp-menu-button [contentSize]="size" [disabled]="disabled" [type]="type">
+        <fdp-menu-button [contentDensity]="size" [disabled]="disabled" [type]="type">
             Standard Button with long text
         </fdp-menu-button>
     `,
@@ -99,7 +99,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
     selector: 'fdp-menu-button-click',
     template: `
         <fdp-menu-button
-            [contentSize]="size"
+            [contentDensity]="size"
             [disabled]="disabled"
             [type]="type"
             [fdpMenuTriggerFor]="basicMenu"
