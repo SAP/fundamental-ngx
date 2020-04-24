@@ -18,6 +18,8 @@ import { PlatformSearchFieldHeaderComponent } from './component-docs/platform-se
 import { PlatformSearchFieldDocsComponent } from './component-docs/platform-search-field/platform-search-field-docs.component';
 import { PlatformRadioGroupHeaderComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-header/platform-radio-group-header.component';
 import { PlatformRadioGroupDocsComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-docs.component';
+import { PlatformInfoLabelHeaderComponent } from './component-docs/platform-info-label/platform-info-label-header/platform-info-label-header.component';
+import { PlatformInfoLabelDocsComponent } from './component-docs/platform-info-label/platform-info-label-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -81,6 +83,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PlatformRadioGroupDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.radioGroup } }
+                ]
+            },
+            {
+                path: 'info-label',
+                component: PlatformInfoLabelHeaderComponent,
+                children: [
+                    { path: '', component: PlatformInfoLabelDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.infoLabel } }
                 ]
             }
         ]

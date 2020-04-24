@@ -24,6 +24,7 @@ export class PlatformDocumentationComponent {
     { url: 'platform/select', name: 'Select' },
     { url: 'platform/link', name: 'Link' },
     { url: 'platform/radio-group', name: 'Radio Button Group' },
+    { url: 'platform/info-label', name: 'Info Label' },
     ];
    
     layouts = [];

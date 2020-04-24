@@ -11,4 +11,5 @@ export const API_FILES = {
     link: ['LinkComponent'],
     searchField: ['SearchFieldComponent'],
     radioGroup: ['RadioGroupComponent'],
+    infoLabel: ['PlatformInfoLabel']
 };
