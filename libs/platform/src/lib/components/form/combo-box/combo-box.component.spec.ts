@@ -1,15 +1,27 @@
 import { Component, ViewChild, ElementRef, OnInit, DebugElement } from '@angular/core';
-import { ComboBoxComponent, ComboBoxDataSource, ArrayComboBoxDataSource, Entity, DataProvider } from '@fundamental-ngx/platform';
+import { ComboBoxDataSource, Entity, DataProvider, DATA_PROVIDERS, ArrayDataProvider, ComboBoxComponent, ArrayComboBoxDataSource } from '@fundamental-ngx/platform';
 import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
 import { FdpComboBoxModule } from './fdp-combo-box.module';
-import { RtlService } from '@fundamental-ngx/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { By } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
 
+
+const dataProviderServiceFactory = () => {
+  const providers = new Map<string, DataProvider<any>>();
+
+  providers.set('celldata', new ArrayDataProvider<CellData>(
+    CELL_DATA.map((i: CellDataCsv) => {
+
+      return new CellData(
+        i.column1, i.column2, i.column3,  i.date, i.type );
+    })));
+
+  return providers;
+};
+
 const CELL_DATA: CellDataCsv[] = [
     { column1: 'Rowaa 1', column2: 'Row 1', column3: 'Row 1', date: '09-07-18', type: 'search' },
-    { column1: 'Rowbb 2', column2: 'Row 2', column3: 'Row 2', date: '09-08-18', type: 'cart' },
     { column1: 'Rowab 3', column2: 'Row 3', column3: 'Row 3', date: '02-14-18', type: 'calendar' }, 
     { column1: 'Rowac 4', column2: 'Row 4', column3: 'Row 4', date: '12-30-17', type: 'search' }, 
     { column1: 'Rowxx 5', column2: 'Row 5', column3: 'Row 5', date: '11-12-18', type: 'search' }
@@ -66,41 +78,40 @@ class ComboboxDataProvider extends DataProvider<string> {
          
     }
 }
-function getDropdownItems(menu: Element): NodeList {
-    const items = menu.querySelectorAll('.fd-menu__item');
-    return items;
-}
+
 
 @Component({
     selector: 'fdp-test-combo-box',
     template: `
-        <fdp-combo-box placeholder="select from here" [dataSource]="addressDataSource" displayKey="toString"></fdp-combo-box>
+        <fdp-combo-box placeholder="select from here" [dataSource]="dataSource"  displayKey="toString"></fdp-combo-box>
     `
 })
 class TestWrapperComboBoxComponent implements OnInit {
-
-    @ViewChild(ComboBoxComponent, { static: true })
-    selectRef: ComboBoxComponent;
-
-    @ViewChild(ComboBoxComponent, { read: ElementRef, static: true })
-    selectElement: ElementRef;
 
     inputValue: string;
 
     public placeholder: string;
     public dataSource: ComboBoxDataSource<CellData>;
 
+    @ViewChild(ComboBoxComponent) comboBox: ComboBoxComponent;
+
     constructor() { 
 
     }
 
     ngOnInit() {
-        this.dataSource = new ComboBoxDataSource(new ComboboxDataProvider())
+    this.dataSource = new ArrayComboBoxDataSource<CellData>(
+      CELL_DATA.map((i: CellDataCsv) => {
+
+        return new CellData(
+          i.column1, i.column2, i.column3, i.date, i.type);
+        }));
     }
 
     onInputChange($event) {
         this.inputValue = $event;
     }
+
 }
 
 export interface CellDataCsv {
@@ -112,22 +123,17 @@ export interface CellDataCsv {
 }
 
 describe('ComboBoxComponent', () => {
-    let host: ComboBoxComponent;
-    let fixture: ComponentFixture<ComboBoxComponent>;
+    let host: TestWrapperComboBoxComponent;
+    let fixture: ComponentFixture<TestWrapperComboBoxComponent>;
     let de: DebugElement;
-    let overlayContainerEl: HTMLElement;
-    const cellDataSource = new ArrayComboBoxDataSource<CellData>(
-      CELL_DATA.map((i: CellDataCsv) => {
 
-        return new CellData(
-          i.column1, i.column2, i.column3, i.date, i.type);
-      }));
+    let overlayContainerEl: HTMLElement;
    
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComboBoxComponent],
             imports: [FdpComboBoxModule],
-            providers: [RtlService]
+            providers: [{ provide: DATA_PROVIDERS, useFactory: dataProviderServiceFactory }]
         }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
@@ -136,33 +142,22 @@ describe('ComboBoxComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ComboBoxComponent);
+        fixture = TestBed.createComponent(TestWrapperComboBoxComponent);
         de = fixture.debugElement;
         host = fixture.componentInstance;
         host.placeholder = 'select from the list';
-        host.dataSource = cellDataSource;
         fixture.detectChanges();
     });
 
     it('component create', () =>  {
-         const textInput = de.query(By.css('fd-input'));
-         textInput.nativeElement.value = 'Rowa 1';
-         textInput.nativeElement.dispatchEvent(new Event('input'))
-         fixture.detectChanges();
-
+         const textInput = de.query(By.css('input.fd-input'));
         // simulate input entry
         textInput.nativeElement.value = 'Rowa';
         textInput.nativeElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
 
         // check dropdown
-        const menuEls = overlayContainerEl.querySelectorAll('.fd-list--dropdown');
-        expect(menuEls.length).toBe(1);
-        const items = getDropdownItems(menuEls[0]);
-        expect(items.length).toBe(3);
-        expect(items[0].textContent).toBe('Rowaa');
-        expect(items[1].textContent).toBe('Rowab');
-        expect(items[2].textContent).toBe('Rowac');
-
+        console.log('data', host.comboBox._suggestions);
+        expect(host.comboBox._suggestions.length).toBe(3);
     });
 });
