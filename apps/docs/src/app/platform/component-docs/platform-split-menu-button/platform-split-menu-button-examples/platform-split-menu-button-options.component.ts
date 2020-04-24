@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'split-menu-button-example',
-    templateUrl: 'platform-split-menu-button-examples.component.html',
+    selector: 'split-menu-button-options',
+    templateUrl: 'platform-split-menu-button-options.component.html',
 })
-export class PlatformDocsSplitMenuButtonExampleComponent {
+export class PlatformDocsSplitMenuButtonOptionsComponent {
     selectedCozyItem: string;
     selectedCompactItem: string;
     label: string = 'Default Action';

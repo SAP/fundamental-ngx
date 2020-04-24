@@ -73,6 +73,7 @@ import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/pl
 import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
 import { PlatformDocsSplitMenuButtonExampleComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-examples/platform-split-menu-button-examples.component';
+import { PlatformDocsSplitMenuButtonOptionsComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-examples/platform-split-menu-button-options.component';
 import { PlatformDocsSplitMenuButtonHeaderComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-header/platform-split-menu-button-header.component';
 import { PlatformDocsSplitMenuButtonComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button.component';
 
@@ -130,6 +131,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         PlatformSelectTypesSplitExampleComponent,
         PlatformSelectTypesWithIconExampleComponent,
         PlatformDocsSplitMenuButtonExampleComponent,
+        PlatformDocsSplitMenuButtonOptionsComponent,
         PlatformDocsSplitMenuButtonHeaderComponent,
         PlatformDocsSplitMenuButtonComponent,
         PlatformRadioGroupHeaderComponent,

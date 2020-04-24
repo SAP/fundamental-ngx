@@ -1,31 +1,28 @@
 <div class="fd-button-split" role="group" aria-label="button-split">
     <button
         fd-button
-        aria-label="button"
-        fd-button
         [attr.id]="id"
         [attr.name]="name"
-        [compact]="contentDensity === 'compact'"
-        [glyph]="icon"
+        aria-label="buttonLabel"
         [disabled]="disabled"
-        (click)="primarButtonClicked($event)"
         [fdType]="fdType"
+        [glyph]="icon"
+        [compact]="contentDensity === 'compact'"
+        (click)="primarButtonClicked($event)"
     >
-        <span [ngStyle]="{ width: width }">
-            {{ buttonLabel }}
-        </span>
+        {{ buttonLabel }}
     </button>
     <button
         fd-button
         [attr.id]="id"
         [attr.name]="name"
         [fdMenu]="true"
-        [compact]="contentDensity === 'compact'"
         [disabled]="disabled"
         [fdType]="fdType"
+        [compact]="contentDensity === 'compact'"
+        [fdpMenuTriggerFor]="menu"
         aria-haspopup="true"
         aria-expanded="false"
         aria-label="More"
-        [fdpMenuTriggerFor]="menu"
     ></button>
 </div>
