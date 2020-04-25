@@ -6,12 +6,12 @@ import {
     forwardRef,
     ViewEncapsulation,
     ContentChild,
-    TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, OnInit
+    TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, OnInit, ViewChild, ElementRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '../form/form-control/form-states';
-import { ButtonType } from '../button/button.component';
+import { ButtonComponent, ButtonType } from '../button/button.component';
 
 export type InputGroupPlacement = 'before' | 'after';
 
@@ -48,6 +48,10 @@ export class InputGroupComponent implements ControlValueAccessor {
     /** @hidden */
     @ContentChild(InputGroupAddOnDirective)
     addOnElement: InputGroupAddOnDirective;
+
+    /** @hiden */
+    @ViewChild(ButtonComponent)
+    inputGroupButtonElement: ButtonComponent;
 
     /** Input template */
     @Input()
@@ -115,6 +119,12 @@ export class InputGroupComponent implements ControlValueAccessor {
      */
     @Input()
     inShellbar: boolean = false;
+
+    /**
+     * Whether the input group is a popover control
+     */
+    @Input()
+    isControl: boolean = false;
 
     /** Event emitted when the add-on button is clicked. */
     @Output()
