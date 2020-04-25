@@ -2,10 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputGroupComponent } from './input-group.component';
 import { FormsModule } from '@angular/forms';
-import { InputGroupAddOnDirective, InputGroupInputDirective, InputGroupTextareaDirective } from './input-group-directives';
+import {
+    InputGroupAddOnDirective,
+    InputGroupInputDirective,
+    InputGroupTextareaDirective
+} from './input-group-directives';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
-
 
 describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
@@ -34,7 +37,7 @@ describe('InputGroupComponent', () => {
     });
 
     it('should get an ID and handle the close event for that ID', () => {
-        component.addOnButtonClicked.subscribe($event => expect($event).toBeDefined());
+        component.addOnButtonClicked.subscribe(($event) => expect($event).toBeDefined());
         component.buttonClicked({});
     });
 });

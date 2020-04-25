@@ -1,4 +1,4 @@
-<nav class="fd-side-nav" [ngClass]="{'fd-side-nav--condensed': condensed || sideNavigationConfiguration?.condensed}">
+<nav class="fd-side-nav" [ngClass]="{ 'fd-side-nav--condensed': condensed || sideNavigationConfiguration?.condensed }">
     <ng-container *ngIf="!sideNavigationConfiguration">
         <ng-content></ng-content>
     </ng-container>
@@ -7,14 +7,16 @@
             <fd-prepared-nested-list
                 [condensed]="condensed || sideNavigationConfiguration.condensed"
                 [first]="true"
-                [list]="sideNavigationConfiguration.mainNavigation">
+                [list]="sideNavigationConfiguration.mainNavigation"
+            >
             </fd-prepared-nested-list>
         </div>
         <div fd-side-nav-utility *ngIf="sideNavigationConfiguration.utilityNavigation">
             <fd-prepared-nested-list
                 [condensed]="condensed || sideNavigationConfiguration.condensed"
                 [first]="true"
-                [list]="sideNavigationConfiguration.utilityNavigation">
+                [list]="sideNavigationConfiguration.utilityNavigation"
+            >
             </fd-prepared-nested-list>
         </div>
     </ng-container>

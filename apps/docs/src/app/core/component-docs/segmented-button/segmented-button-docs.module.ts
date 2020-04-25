@@ -21,18 +21,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        SegmentedButtonModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SegmentedButtonModule],
     exports: [RouterModule],
     declarations: [
         SegmentedButtonDocsComponent,
         SegmentedButtonHeaderComponent,
         SegmentedButtonToggleExampleComponent,
-        SegmentedButtonDefaultExampleComponent,
-    ],
+        SegmentedButtonDefaultExampleComponent
+    ]
 })
-export class SegmentedButtonDocsModule {
-}
+export class SegmentedButtonDocsModule {}

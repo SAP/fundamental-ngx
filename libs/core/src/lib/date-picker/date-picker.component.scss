@@ -6,7 +6,7 @@
     }
 
     fd-calendar {
-        border-radius:.25rem;
-        border-radius:var(--sapElement_BorderCornerRadius,.25rem)
+        border-radius: 0.25rem;
+        border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
     }
 }

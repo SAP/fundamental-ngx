@@ -16,21 +16,23 @@ export function createMouseEvent(type: string, x = 0, y = 0, button = 0) {
     const event = document.createEvent('MouseEvent');
     const originalPreventDefault = event.preventDefault.bind(event);
 
-    event.initMouseEvent(type,
-        true, /* canBubble */
-        true, /* cancelable */
-        window, /* view */
-        0, /* detail */
-        x, /* screenX */
-        y, /* screenY */
-        x, /* clientX */
-        y, /* clientY */
-        false, /* ctrlKey */
-        false, /* altKey */
-        false, /* shiftKey */
-        false, /* metaKey */
-        button, /* button */
-        null /* relatedTarget */);
+    event.initMouseEvent(
+        type,
+        true /* canBubble */,
+        true /* cancelable */,
+        window /* view */,
+        0 /* detail */,
+        x /* screenX */,
+        y /* screenY */,
+        x /* clientX */,
+        y /* clientY */,
+        false /* ctrlKey */,
+        false /* altKey */,
+        false /* shiftKey */,
+        false /* metaKey */,
+        button /* button */,
+        null /* relatedTarget */
+    );
 
     // `initMouseEvent` doesn't allow us to pass the `buttons` and
     // defaults it to 0 which looks like a fake event.
@@ -73,15 +75,29 @@ export function createTouchEvent(type: string, pageX = 0, pageY = 0) {
  * Dispatches a keydown event from an element.
  * @docs-private
  */
-export function createKeyboardEvent(type: string, keyCode: number = 0, key: string = '',
-    target?: Element, modifiers: ModifierKeys = {}) {
+export function createKeyboardEvent(
+    type: string,
+    keyCode: number = 0,
+    key: string = '',
+    target?: Element,
+    modifiers: ModifierKeys = {}
+) {
     const event = document.createEvent('KeyboardEvent') as any;
     const originalPreventDefault = event.preventDefault;
 
     // Firefox does not support `initKeyboardEvent`, but supports `initKeyEvent`.
     if (event.initKeyEvent) {
-        event.initKeyEvent(type, true, true, window, modifiers.control, modifiers.alt, modifiers.shift,
-            modifiers.meta, keyCode);
+        event.initKeyEvent(
+            type,
+            true,
+            true,
+            window,
+            modifiers.control,
+            modifiers.alt,
+            modifiers.shift,
+            modifiers.meta,
+            keyCode
+        );
     } else {
         // `initKeyboardEvent` expects to receive modifiers as a whitespace-delimited string
         // See https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
@@ -103,15 +119,17 @@ export function createKeyboardEvent(type: string, keyCode: number = 0, key: stri
             modifiersList += 'Meta ';
         }
 
-        event.initKeyboardEvent(type,
-            true, /* canBubble */
-            true, /* cancelable */
-            window, /* view */
-            0, /* char */
-            key, /* key */
-            0, /* location */
-            modifiersList.trim(), /* modifiersList */
-            false /* repeat */);
+        event.initKeyboardEvent(
+            type,
+            true /* canBubble */,
+            true /* cancelable */,
+            window /* view */,
+            0 /* char */,
+            key /* key */,
+            0 /* location */,
+            modifiersList.trim() /* modifiersList */,
+            false /* repeat */
+        );
     }
 
     // Webkit Browsers don't set the keyCode when calling the init function.

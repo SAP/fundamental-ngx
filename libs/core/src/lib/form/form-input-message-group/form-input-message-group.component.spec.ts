@@ -12,8 +12,7 @@ describe('FormInputMessageGroupComponent', () => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PopoverModule],
             declarations: [FormInputMessageGroupComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

@@ -123,15 +123,15 @@ export class TabsDocsComponent {
                 counter3: '3',
                 content3: 'Content 3',
                 icon3: 'menu'
-            },
-        },
+            }
+        }
     };
 
     tabExample: ExampleFile[] = [
         {
             language: 'html',
             code: tabSrc,
-            fileName: 'tabs-example',
+            fileName: 'tabs-example'
         }
     ];
 
@@ -139,7 +139,7 @@ export class TabsDocsComponent {
         {
             language: 'html',
             code: tabCounter,
-            fileName: 'tab-counter-example',
+            fileName: 'tab-counter-example'
         }
     ];
 
@@ -147,7 +147,7 @@ export class TabsDocsComponent {
         {
             language: 'html',
             code: tabProcess,
-            fileName: 'tab-process-example',
+            fileName: 'tab-process-example'
         }
     ];
 
@@ -155,7 +155,7 @@ export class TabsDocsComponent {
         {
             language: 'html',
             code: tabIcon,
-            fileName: 'tab-icon-example',
+            fileName: 'tab-icon-example'
         }
     ];
 
@@ -163,7 +163,7 @@ export class TabsDocsComponent {
         {
             language: 'html',
             code: tabFilter,
-            fileName: 'tab-filter-example',
+            fileName: 'tab-filter-example'
         }
     ];
 
@@ -178,7 +178,7 @@ export class TabsDocsComponent {
             language: 'typescript',
             code: tabAddT,
             fileName: 'adding-tab-example',
-            component: 'AddingTabExampleComponent',
+            component: 'AddingTabExampleComponent'
         }
     ];
 

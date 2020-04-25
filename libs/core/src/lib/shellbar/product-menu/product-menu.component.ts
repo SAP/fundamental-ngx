@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ContentChild, HostListener, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    HostListener,
+    Input,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { PopoverComponent } from '../../popover/popover.component';
 import { MenuComponent } from '../../menu/menu.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
@@ -20,7 +29,6 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductMenuComponent extends PopoverComponent implements OnInit {
-
     /** @hidden */
     @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
@@ -54,7 +62,7 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
     @HostListener('window:resize', [])
     onResize(): void {
         const mq = window.matchMedia('(max-width: 601px)');
-        mq.matches ? this.productMenuCollapsed = true : this.productMenuCollapsed = false;
+        mq.matches ? (this.productMenuCollapsed = true) : (this.productMenuCollapsed = false);
     }
 
     /** @hidden */
@@ -75,12 +83,12 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
     }
 
     /**
-    * @hidden
-    */
+     * @hidden
+     */
     isAnyGlyphInItems(): boolean {
         if (!this.items || this.items.length === 0) {
             return false;
         }
-        return !!this.items.find(item => item.glyph);
+        return !!this.items.find((item) => item.glyph);
     }
 }

@@ -1,12 +1,16 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
     HostBinding,
-    Input, OnChanges, OnDestroy,
+    Input,
+    OnChanges,
+    OnDestroy,
     OnInit,
-    Output, SimpleChanges,
+    Output,
+    SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
@@ -33,7 +37,6 @@ import { compareObjects } from '../../../utils/public_api';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
-
     private readonly _amountOfCols: number = 7; // Days per week
     private _isOnRangePick: boolean = false;
     private _isInited: boolean = false;
@@ -71,7 +74,9 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     set selectedDate(fdDate: FdDate) {
         this._selectedDate = fdDate;
         if (this.dayViewGrid) {
-            const dayFromFdDate: CalendarDay = this.calendarDayList.find(day => CalendarService.datesEqual(day.date, fdDate));
+            const dayFromFdDate: CalendarDay = this.calendarDayList.find((day) =>
+                CalendarService.datesEqual(day.date, fdDate)
+            );
             this._changeSelectedSingleDay(dayFromFdDate, this.calendarDayList);
         }
     }
@@ -173,7 +178,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function(fdDate: FdDate): boolean {
+    disableFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -182,7 +187,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * @param fdDate FdDate
      */
     @Input()
-    disableRangeStartFunction = function(fdDate: FdDate): boolean {
+    disableRangeStartFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -191,7 +196,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * @param fdDate FdDate
      */
     @Input()
-    disableRangeEndFunction = function(fdDate: FdDate): boolean {
+    disableRangeEndFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -202,10 +207,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         private changeDetRef: ChangeDetectorRef,
         private calendarService: CalendarService
     ) {
-        this.calendarI18n.i18nChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this._refreshShortWeekDays())
-        ;
+        this.calendarI18n.i18nChange.pipe(takeUntil(this.onDestroy$)).subscribe(() => this._refreshShortWeekDays());
     }
 
     /** @hidden */
@@ -220,9 +222,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         /** Changes of those properties are done inside its setters */
-        if (!changes['selectedDate'] &&
-            !changes['selectedRangeDate'] &&
-            !changes['currentlyDisplayed']) {
+        if (!changes['selectedDate'] && !changes['selectedRangeDate'] && !changes['currentlyDisplayed']) {
             this._buildDayViewGrid();
         }
     }
@@ -249,7 +249,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         if (!day.disabled) {
             if (this.calType === 'single') {
                 /** Remove selections from other day and put selection to chosen day */
-                this.calendarDayList.forEach(_day => _day.selected = false);
+                this.calendarDayList.forEach((_day) => (_day.selected = false));
                 day.selected = true;
                 this._selectedDate = day.date;
                 this.selectedDateChange.emit(day.date);
@@ -281,18 +281,16 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     refreshHoverRange(day: CalendarDay): void {
         if (this._isOnRangePick) {
             if (day.date.getTimeStamp() < this.selectedRangeDate.start.getTimeStamp()) {
-                this.calendarDayList.forEach(_day => {
-                    _day.hoverRange = (
+                this.calendarDayList.forEach((_day) => {
+                    _day.hoverRange =
                         _day.date.getTimeStamp() > day.date.getTimeStamp() &&
-                        _day.date.getTimeStamp() < this.selectedRangeDate.start.getTimeStamp()
-                    );
+                        _day.date.getTimeStamp() < this.selectedRangeDate.start.getTimeStamp();
                 });
             } else {
-                this.calendarDayList.forEach(_day => {
-                    _day.hoverRange = (
+                this.calendarDayList.forEach((_day) => {
+                    _day.hoverRange =
                         _day.date.getTimeStamp() < day.date.getTimeStamp() &&
-                        _day.date.getTimeStamp() > this.selectedRangeDate.start.getTimeStamp()
-                    );
+                        _day.date.getTimeStamp() > this.selectedRangeDate.start.getTimeStamp();
                 });
             }
         }
@@ -307,15 +305,19 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     get selectCounter(): number {
         if (!this.selectedRangeDate || !this.selectedRangeDate.start || !this.selectedRangeDate.start.isDateValid()) {
             return 0;
-        } else if (this.selectedRangeDate.start &&
-            (!this.selectedRangeDate.end || !this.selectedRangeDate.end.isDateValid() ||
-                CalendarService.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
-            )
+        } else if (
+            this.selectedRangeDate.start &&
+            (!this.selectedRangeDate.end ||
+                !this.selectedRangeDate.end.isDateValid() ||
+                CalendarService.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end))
         ) {
             return 1;
         } else if (
-            this.selectedRangeDate.start && this.selectedRangeDate.start.isDateValid() &&
-            this.selectedRangeDate.end && this.selectedRangeDate.end.isDateValid()) {
+            this.selectedRangeDate.start &&
+            this.selectedRangeDate.start.isDateValid() &&
+            this.selectedRangeDate.end &&
+            this.selectedRangeDate.end.isDateValid()
+        ) {
             return 2;
         }
     }
@@ -361,7 +363,9 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      */
     focusActiveElement(): void {
         if (this.newFocusedDayIndex || this.newFocusedDayIndex === 0) {
-            const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + this._getId(this.newFocusedDayIndex));
+            const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector(
+                '#' + this._getId(this.newFocusedDayIndex)
+            );
             this.newFocusedDayIndex = null;
             if (elementToFocus) {
                 elementToFocus.focus();
@@ -372,7 +376,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     /** Active day means that with tabindex = 0, it's selected day or today or first day */
     focusActiveDay(): void {
         this.newFocusedDayIndex = this._getActiveCell(
-            this.calendarDayList.filter(cell => cell.monthStatus === 'current')
+            this.calendarDayList.filter((cell) => cell.monthStatus === 'current')
         ).index;
         this.focusActiveElement();
     }
@@ -391,10 +395,14 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      */
     private _selectPreviousMonth(): void {
         const prevMonth = this._getPreviousMonth();
-        this.newFocusedDayIndex -= (
-            FdDate.GetAmountOfWeeks(this._currentlyDisplayed.year, this._currentlyDisplayed.month, this.startingDayOfWeek) -
-            FdDate.GetAmountOfWeeks(prevMonth.year, prevMonth.month, this.startingDayOfWeek)
-        ) * 7;
+        this.newFocusedDayIndex -=
+            (FdDate.GetAmountOfWeeks(
+                this._currentlyDisplayed.year,
+                this._currentlyDisplayed.month,
+                this.startingDayOfWeek
+            ) -
+                FdDate.GetAmountOfWeeks(prevMonth.year, prevMonth.month, this.startingDayOfWeek)) *
+            7;
         this._currentlyDisplayed = prevMonth;
         this._buildDayViewGrid();
         this.previousMonthSelect.emit();
@@ -428,7 +436,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         });
 
         if (this.calType === 'single' && this._selectedDate) {
-            const _day: CalendarDay = calendar.find(day => CalendarService.datesEqual(day.date, this._selectedDate));
+            const _day: CalendarDay = calendar.find((day) => CalendarService.datesEqual(day.date, this._selectedDate));
             this._changeSelectedSingleDay(_day, calendar);
         }
 
@@ -504,10 +512,10 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * if there is no today, or selected, return first one
      */
     private _getActiveCell(calendarDays: CalendarDay[]): CalendarDay {
-        if (calendarDays.find(cell => cell.selected)) {
-            return calendarDays.find(cell => cell.selected);
-        } else if (calendarDays.find(cell => cell.today)) {
-            return calendarDays.find(cell => cell.today);
+        if (calendarDays.find((cell) => cell.selected)) {
+            return calendarDays.find((cell) => cell.selected);
+        } else if (calendarDays.find((cell) => cell.today)) {
+            return calendarDays.find((cell) => cell.today);
         } else {
             return calendarDays[0];
         }
@@ -519,7 +527,8 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      */
     private _getPreviousMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
         const month = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.month - 1 : 12;
-        const year = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year - 1;
+        const year =
+            this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year - 1;
         const amountOfDaysInCurrentMonth: number = CalendarService.getDaysInMonth(month, year);
         const prevMonthLastDate = new FdDate(year, month, amountOfDaysInCurrentMonth);
         const prevMonthLastDay = amountOfDaysInCurrentMonth;
@@ -549,7 +558,8 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      */
     private _getNextMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
         const month = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.month + 1 : 1;
-        const year = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year + 1;
+        const year =
+            this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year + 1;
 
         // The calendar grid can have 5 (35 days) or 6 (42 days) weeks
         const nextMonthDisplayedDays = (42 - calendarDays.length) % 7;
@@ -586,16 +596,17 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * Method that is called to refresh i18n short week days.
      */
     private _refreshShortWeekDays(): void {
-        this._shortWeekDays = this.calendarI18n.getAllShortWeekdays()
+        this._shortWeekDays = this.calendarI18n
+            .getAllShortWeekdays()
             .slice(this.startingDayOfWeek - 1)
             .concat(this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1))
-            .map(weekday => weekday[0].toLocaleUpperCase());
+            .map((weekday) => weekday[0].toLocaleUpperCase());
         this.changeDetRef.markForCheck();
     }
 
     /** Gets special day number of specified fdDate model */
     private _getSpecialDay(fdDate: FdDate): number | null {
-        const specialDay = this.specialDaysRules.find(specialDayRule => specialDayRule.rule(fdDate));
+        const specialDay = this.specialDaysRules.find((specialDayRule) => specialDayRule.rule(fdDate));
         if (specialDay) {
             return specialDay.specialDayNumber;
         } else {
@@ -635,44 +646,31 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     private _setupKeyboardService(): void {
         this.calendarService.colAmount = this._amountOfCols;
 
-        this.calendarService.onFocusIdChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedDayIndex = index;
-                this.focusActiveElement();
-            })
-        ;
+        this.calendarService.onFocusIdChange.pipe(takeUntil(this.onDestroy$)).subscribe((index) => {
+            this.newFocusedDayIndex = index;
+            this.focusActiveElement();
+        });
         this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-        this.calendarService.onKeySelect
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedDayIndex = index;
-                this.selectDate(this.calendarDayList[index]);
-            })
-        ;
+        this.calendarService.onKeySelect.pipe(takeUntil(this.onDestroy$)).subscribe((index) => {
+            this.newFocusedDayIndex = index;
+            this.selectDate(this.calendarDayList[index]);
+        });
 
-        this.calendarService.onListStartApproach
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedDayIndex = index;
-                this._selectPreviousMonth();
-            })
-        ;
+        this.calendarService.onListStartApproach.pipe(takeUntil(this.onDestroy$)).subscribe((index) => {
+            this.newFocusedDayIndex = index;
+            this._selectPreviousMonth();
+        });
 
-        this.calendarService.onListEndApproach
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => {
-                this.newFocusedDayIndex = index;
-                this._selectNextMonth();
-            })
-        ;
-
+        this.calendarService.onListEndApproach.pipe(takeUntil(this.onDestroy$)).subscribe((index) => {
+            this.newFocusedDayIndex = index;
+            this._selectNextMonth();
+        });
     }
 
     /** Change selection flag on days to false, besides the selected one */
     private _changeSelectedSingleDay(day: CalendarDay, calendar: CalendarDay[]): void {
-        calendar.forEach(_day => _day.selected = false);
+        calendar.forEach((_day) => (_day.selected = false));
         if (day) {
             day.selected = true;
         }
@@ -684,26 +682,27 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * it just changes properties of newly selected/unselected days.
      */
     private _changeSelectedRangeDays(dates: FdRangeDate, calendar: CalendarDay[]): void {
-
         /** Pull list of calendar days */
         const calendarList = calendar;
 
         /** Reset changing properties */
-        calendarList.forEach(_day => _day.selected = _day.isTabIndexed = _day.disabled = _day.hoverRange = _day.selectedRange = false);
+        calendarList.forEach(
+            (_day) => (_day.selected = _day.isTabIndexed = _day.disabled = _day.hoverRange = _day.selectedRange = false)
+        );
 
         if (dates) {
             let startDay: CalendarDay;
             let endDay: CalendarDay;
             if (dates.start) {
                 /** Find start date and mark it as selected */
-                startDay = calendarList.find(_day => CalendarService.datesEqual(_day.date, dates.start));
+                startDay = calendarList.find((_day) => CalendarService.datesEqual(_day.date, dates.start));
                 if (startDay) {
                     startDay.selected = true;
                 }
             }
             if (dates.end) {
                 /** Find end date and mark it as selected */
-                endDay = calendarList.find(_day => CalendarService.datesEqual(_day.date, dates.end));
+                endDay = calendarList.find((_day) => CalendarService.datesEqual(_day.date, dates.end));
                 if (endDay) {
                     endDay.selected = true;
                 }
@@ -711,27 +710,28 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
             /** Mark all days, which are between start and end date */
             calendarList
-                .filter(_day => _day.selectedRange = CalendarService.isBetween(_day.date, dates))
-                .forEach(_day => _day.selectedRange = true)
-            ;
+                .filter((_day) => (_day.selectedRange = CalendarService.isBetween(_day.date, dates)))
+                .forEach((_day) => (_day.selectedRange = true));
         }
 
         this.refreshTabIndex(calendarList);
 
         /** Apply disabled state to days marked with passed function */
         if (this.disableFunction) {
-            calendarList.forEach(_day => _day.disabled = this.disableFunction(_day.date));
+            calendarList.forEach((_day) => (_day.disabled = this.disableFunction(_day.date)));
         }
 
-        if ((this.selectCounter === 0 || this.selectCounter === 2 ) && this.disableRangeStartFunction) {
-            calendarList.forEach(_day => _day.disabled = _day.disabled || this.disableRangeStartFunction(_day.date));
+        if ((this.selectCounter === 0 || this.selectCounter === 2) && this.disableRangeStartFunction) {
+            calendarList.forEach(
+                (_day) => (_day.disabled = _day.disabled || this.disableRangeStartFunction(_day.date))
+            );
         } else if (this.selectCounter === 1 && this.disableRangeEndFunction) {
-            calendarList.forEach(_day => _day.disabled = _day.disabled || this.disableRangeEndFunction(_day.date));
+            calendarList.forEach((_day) => (_day.disabled = _day.disabled || this.disableRangeEndFunction(_day.date)));
         }
     }
 
     private refreshTabIndex(calendar: CalendarDay[]): void {
-        calendar.forEach(_day => _day.isTabIndexed = false);
-        this._getActiveCell(calendar.filter(_day => _day.monthStatus === 'current')).isTabIndexed = true;
+        calendar.forEach((_day) => (_day.isTabIndexed = false));
+        this._getActiveCell(calendar.filter((_day) => _day.monthStatus === 'current')).isTabIndexed = true;
     }
 }

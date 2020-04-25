@@ -6,16 +6,10 @@ import { Component } from '@angular/core';
     styleUrls: ['./select-types-example.component.scss']
 })
 export class SelectTypesExampleComponent {
-
     selectValue1: string;
     selectValue2: string;
     selectValue3: string;
     selectValue4: string;
 
-
-    options: string[] = [
-        'Tomato',
-        'Pineapple',
-        'Apple'
-    ];
+    options: string[] = ['Tomato', 'Pineapple', 'Apple'];
 }

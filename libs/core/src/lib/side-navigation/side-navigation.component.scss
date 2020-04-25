@@ -1,4 +1,4 @@
-@import "~fundamental-styles/dist/side-nav";
+@import '~fundamental-styles/dist/side-nav';
 
 .fd-nested-list__item {
     display: block;
@@ -7,8 +7,8 @@
         cursor: pointer;
 
         &:focus {
-            outline-offset: -.125rem;
-            outline-width: var(--sapContent_FocusWidth, .0625rem);
+            outline-offset: -0.125rem;
+            outline-width: var(--sapContent_FocusWidth, 0.0625rem);
             outline-color: var(--sapContent_FocusColor, #000);
             outline-style: var(--sapContent_FocusStyle, dotted);
         }

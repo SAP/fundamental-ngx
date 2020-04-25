@@ -1,8 +1,7 @@
-@import "~fundamental-styles/dist/inline-help";
+@import '~fundamental-styles/dist/inline-help';
 
 //TODO evaluate whether this should go to fd-styles?
 .fd-inline-help__content {
-
     /** Simulate always hovered */
     visibility: visible;
     opacity: 1;
@@ -18,7 +17,8 @@
     color: var(--fd-color-text-1);
 
     /** Do not show arrow */
-    &:before, &:after {
+    &:before,
+    &:after {
         display: none;
     }
 }

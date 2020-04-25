@@ -23,10 +23,7 @@ interface GeneratedFiles {
 
 @Injectable()
 export class StackblitzService {
-
-    constructor (
-        @Inject('CURRENT_LIB') private currentLib: Libraries
-    ) {}
+    constructor(@Inject('CURRENT_LIB') private currentLib: Libraries) {}
 
     get defaultProjectInfo(): StackblitzProject {
         return {
@@ -34,7 +31,7 @@ export class StackblitzService {
                 'src/main.ts': maints.default,
                 'src/polyfills.ts': polyfills.default,
                 'src/styles.scss': stylesScss.default,
-                'angular.json': StackblitzDependencies.GetAngularJson(),
+                'angular.json': StackblitzDependencies.GetAngularJson()
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
@@ -42,15 +39,13 @@ export class StackblitzService {
             tags: ['stackblitz', 'sdk'],
             dependencies: StackblitzDependencies.GetDependencies()
         };
-    };
+    }
 
     openCode(exampleFiles: ExampleFile[]): void {
-
         const defaultProjectInfo = this.defaultProjectInfo;
         const stackBlitzFiles: StackblitzFile[] = [];
 
         exampleFiles.forEach((example: ExampleFile) => {
-
             let generatedFiles: GeneratedFiles;
 
             /**
@@ -80,19 +75,15 @@ export class StackblitzService {
 
             if (generatedFiles.ts) {
                 defaultProjectInfo.files[generatedFiles.ts.path] = generatedFiles.ts.code;
-                stackBlitzFiles.push(
-                    this.getStackBlitzTsFile(
-                        example,
-                        mainComponent
-                    )
-                );
+                stackBlitzFiles.push(this.getStackBlitzTsFile(example, mainComponent));
             }
         });
 
         defaultProjectInfo.files['src/app/app.module.ts'] = this.getModule(stackBlitzFiles);
 
-        const mainFileSelector: string =  stackBlitzFiles.find(file => file.main) ?
-            stackBlitzFiles.find(file => file.main).selector : stackBlitzFiles[0].selector;
+        const mainFileSelector: string = stackBlitzFiles.find((file) => file.main)
+            ? stackBlitzFiles.find((file) => file.main).selector
+            : stackBlitzFiles[0].selector;
 
         defaultProjectInfo.files['src/index.html'] = `
             <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css"></link>
@@ -100,12 +91,10 @@ export class StackblitzService {
             <${mainFileSelector}></${mainFileSelector}>
         `;
 
-
         sdk.openProject(<any>defaultProjectInfo);
     }
 
     private getDefaultTypescriptFile(fileName: string): string {
-
         const libraryPrefix = this.getLibraryPrefix();
         const componentName: string = this.transformSnakeCaseToPascalCase(fileName);
 
@@ -116,8 +105,7 @@ import { Component } from '@angular/core';
         templateUrl: './${fileName}.component.html',
         styleUrls: ['./${fileName}.component.scss']
     })
-    export class ${componentName} {}`
-;
+    export class ${componentName} {}`;
     }
 
     private getLibraryPrefix(): string {
@@ -137,7 +125,7 @@ import { Component } from '@angular/core';
     }
 
     private getFilePath(file: ExampleFile, extension: string): string {
-        return  'src/app/' + this.getFileBasis(file) + '.' + extension;
+        return 'src/app/' + this.getFileBasis(file) + '.' + extension;
     }
 
     private getFileBasis(file: ExampleFile): string {
@@ -151,7 +139,7 @@ import { Component } from '@angular/core';
     /** this function transform that-word, or that_word to ThatWord */
     private transformSnakeCaseToPascalCase(snakeCase: string): string {
         if (snakeCase) {
-            const snakeToCamel = str => str.replace(/([-_]\w)/g, g => g[1].toUpperCase());
+            const snakeToCamel = (str) => str.replace(/([-_]\w)/g, (g) => g[1].toUpperCase());
             const camelCase = snakeToCamel(snakeCase);
             return camelCase[0].toUpperCase() + camelCase.substr(1);
         } else {
@@ -159,11 +147,7 @@ import { Component } from '@angular/core';
         }
     }
 
-    private getStackBlitzTsFile(
-        example: ExampleFile,
-        mainComponent: boolean
-    ): StackblitzFile {
-
+    private getStackBlitzTsFile(example: ExampleFile, mainComponent: boolean): StackblitzFile {
         const path = this.getFilePath(example, 'ts');
         const componentName = example.component || this.transformSnakeCaseToPascalCase(example.fileName);
 
@@ -183,7 +167,6 @@ import { Component } from '@angular/core';
     }
 
     private handleHtmlFile(exampleFiles: ExampleFile[], file: ExampleFile): GeneratedFiles {
-
         const generatedFile: GeneratedFiles = {};
 
         generatedFile.html = {
@@ -203,9 +186,9 @@ import { Component } from '@angular/core';
         if (this.isStandAlone(exampleFiles, file)) {
             generatedFile.ts = {
                 path: this.getFilePath(file, 'ts'),
-                code: file.typescriptFileCode ?
-                    file.typescriptFileCode.default :
-                    this.getDefaultTypescriptFile(file.fileName)
+                code: file.typescriptFileCode
+                    ? file.typescriptFileCode.default
+                    : this.getDefaultTypescriptFile(file.fileName)
             };
         }
         return generatedFile;

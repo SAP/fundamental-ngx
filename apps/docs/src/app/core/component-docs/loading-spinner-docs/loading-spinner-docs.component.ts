@@ -16,7 +16,7 @@ export class LoadingSpinnerDocsComponent {
         {
             language: 'html',
             code: loadingSpinnerHtml,
-            fileName: 'loading-spinner-example',
+            fileName: 'loading-spinner-example'
         }
     ];
 

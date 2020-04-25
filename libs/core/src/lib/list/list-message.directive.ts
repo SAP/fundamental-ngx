@@ -4,10 +4,9 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-list-message]',
+    selector: '[fd-list-message]'
 })
 export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder {
-
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
     @Input()
     type: MessageStates;
@@ -16,9 +15,7 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
     @Input()
     class: string;
 
-    constructor(
-        private _elementRef: ElementRef
-    ) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -36,11 +33,9 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return [
-            'fd-list__message',
-            this.type ? ('fd-list__message--' + this.type) : '',
-            this.class
-        ].filter(x => x !== '').join(' ');
+        return ['fd-list__message', this.type ? 'fd-list__message--' + this.type : '', this.class]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
     /** @hidden */

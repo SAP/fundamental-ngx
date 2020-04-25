@@ -1,14 +1,21 @@
-<fd-docs-section-title [id]="'search-field-simple'" [componentName]="'search-field'">Search Field
+<fd-docs-section-title [id]="'search-field-simple'" [componentName]="'search-field'"
+    >Search Field
 </fd-docs-section-title>
-<description>The data for the typeahead dropdown list can be provided via the <code>suggestions</code> property. Data
-    provided this manner can either be an array of strings or an Observeable with an array of strings as output.
-    Suggestion data will be filtered and highlighted based on the user input.</description>
-<description>The Search Field component outputs two types of events: an <code>inputChange</code> event whenever the
-    input text changes, and a <code>searchSubmit</code> event when the user types a keyboard enter or clicks the search
-    icon button.</description>
-<description>The placeholder text for the Search Field can be changed with the <code>placeholder</code> property.
+<description
+    >The data for the typeahead dropdown list can be provided via the <code>suggestions</code> property. Data provided
+    this manner can either be an array of strings or an Observeable with an array of strings as output. Suggestion data
+    will be filtered and highlighted based on the user input.</description
+>
+<description
+    >The Search Field component outputs two types of events: an <code>inputChange</code> event whenever the input text
+    changes, and a <code>searchSubmit</code> event when the user types a keyboard enter or clicks the search icon
+    button.</description
+>
+<description
+    >The placeholder text for the Search Field can be changed with the <code>placeholder</code> property.
 </description>
-<description>The Search field <code>size</code> property can be either <code>cozy</code> or <code>compact</code>
+<description
+    >The Search field <code>size</code> property can be either <code>cozy</code> or <code>compact</code>
 </description>
 <component-example>
     <fdp-platform-search-field-basic-example></fdp-platform-search-field-basic-example>
@@ -17,12 +24,14 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'search-field-categories'" [componentName]="'search-field-categories'">Search Field with
-    Categories
+<fd-docs-section-title [id]="'search-field-categories'" [componentName]="'search-field-categories'"
+    >Search Field with Categories
 </fd-docs-section-title>
-<description>Categories can be added to the search field by assigning an array of strings to the <code>categories</code>
-    property. The selected category is included in the event data emitted in both the <code>inputChange</code> and
-    <code>searchSubmit</code> events.</description>
+<description
+    >Categories can be added to the search field by assigning an array of strings to the
+    <code>categories</code> property. The selected category is included in the event data emitted in both the
+    <code>inputChange</code> and <code>searchSubmit</code> events.</description
+>
 
 <component-example>
     <fdp-platform-search-field-categories-example></fdp-platform-search-field-categories-example>
@@ -31,14 +40,15 @@
 
 <separator></separator>
 
-
-<fd-docs-section-title [id]="'search-field-data-source'" [componentName]="'search-field-data-source'">Search Field with
-    Data Source
+<fd-docs-section-title [id]="'search-field-data-source'" [componentName]="'search-field-data-source'"
+    >Search Field with Data Source
 </fd-docs-section-title>
-<description>A dynamic <code>dataSource</code> can be provided to the Search Field as an alternative to the static
-    string array provided via the <code>suggestions</code> property. Use the <code>SearchFieldDataSource</code> class
-    and <code>SearchFieldDataProvider</code> base class to create a data source which can be connected to a back-end
-    service.</description>
+<description
+    >A dynamic <code>dataSource</code> can be provided to the Search Field as an alternative to the static string array
+    provided via the <code>suggestions</code> property. Use the <code>SearchFieldDataSource</code> class and
+    <code>SearchFieldDataProvider</code> base class to create a data source which can be connected to a back-end
+    service.</description
+>
 
 <component-example>
     <fdp-platform-search-field-data-source-example></fdp-platform-search-field-data-source-example>

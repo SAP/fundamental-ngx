@@ -1,7 +1,13 @@
 <fd-popover
-    [isOpen]="isOpen" [fillControlMode]="'equal'" (isOpenChange)="handleOpenChange($event)"
-    [closeOnEscapeKey]="closeOnEscapeKey" [closeOnOutsideClick]="closeOnOutsideClick"
-    [disabled]="disabled" [triggers]="triggers" [placement]="placement">
+    [isOpen]="isOpen"
+    [fillControlMode]="'equal'"
+    (isOpenChange)="handleOpenChange($event)"
+    [closeOnEscapeKey]="closeOnEscapeKey"
+    [closeOnOutsideClick]="closeOnOutsideClick"
+    [disabled]="disabled"
+    [triggers]="triggers"
+    [placement]="placement"
+>
     <fd-popover-control>
         <ng-content select="fd-localization-editor-main"></ng-content>
     </fd-popover-control>

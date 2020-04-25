@@ -1,8 +1,12 @@
 <fdp-button [fdpMenuTriggerFor]="basicMenu">Button</fdp-button>
 <fdp-button [type]="'menu'" [fdpMenuTriggerFor]="basicMenu">Menu Button</fdp-button>
 <fdp-button [glyph]="'overflow'" [fdpMenuTriggerFor]="basicMenu"></fdp-button>
-<fd-image style="margin-right: 10px;" [size]="'m'" [photo]="'https://placeimg.com/400/400/nature'"
-    [fdpMenuTriggerFor]="basicMenu"></fd-image>
+<fd-image
+    style="margin-right: 10px;"
+    [size]="'m'"
+    [photo]="'https://placeimg.com/400/400/nature'"
+    [fdpMenuTriggerFor]="basicMenu"
+></fd-image>
 
 <fdp-menu #basicMenu id="basic-menu">
     <fdp-menu-item (itemSelect)="onItemSelect('First Item')">First Item</fdp-menu-item>
@@ -10,4 +14,4 @@
     <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
 </fdp-menu>
 
-<div style="margin-top: 1rem;"><label>Item Selected:</label> {{item}}</div>
+<div style="margin-top: 1rem;"><label>Item Selected:</label> {{ item }}</div>

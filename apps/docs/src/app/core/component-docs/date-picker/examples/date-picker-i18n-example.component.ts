@@ -3,21 +3,59 @@ import { CalendarI18n, CalendarI18nLabels, FdDate } from '@fundamental-ngx/core'
 
 // The weekdays translations have to start with Sunday
 const localized_values = {
-    'fr': {
+    fr: {
         weekdays: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
         months: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Déc'],
-        fullMonths: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
-            'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+        fullMonths: [
+            'Janvier',
+            'Février',
+            'Mars',
+            'Avril',
+            'Mai',
+            'Juin',
+            'Juillet',
+            'Aout',
+            'Septembre',
+            'Octobre',
+            'Novembre',
+            'Décembre'
+        ]
     },
-    'de': {
+    de: {
         weekdays: ['Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag', 'Montag'],
         months: [' Jän', 'Feb', 'März', 'Apr', 'Mai', 'Juni', 'Juli', 'Aug', 'Sept', 'Okt', 'Nov', 'Dez'],
-        fullMonths: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+        fullMonths: [
+            'Januar',
+            'Februar',
+            'März',
+            'April',
+            'Mai',
+            'Juni',
+            'Juli',
+            'August',
+            'September',
+            'Oktober',
+            'November',
+            'Dezember'
+        ]
     },
-    'bg': {
+    bg: {
         weekdays: ['неделя', 'понеделник', 'вторник', 'сряда', 'четвъртък', 'петък', 'събота'],
         months: [' яну', 'фев', 'март', 'апр', 'май', 'юни', 'юли', 'авг', 'септ', 'окт', 'ное', 'дек'],
-        fullMonths: ['януари', 'февруари', 'март', 'април', 'май', 'юни', 'юли', 'август', 'септември', 'октомври', 'ноември', 'декември']
+        fullMonths: [
+            'януари',
+            'февруари',
+            'март',
+            'април',
+            'май',
+            'юни',
+            'юли',
+            'август',
+            'септември',
+            'октомври',
+            'ноември',
+            'декември'
+        ]
     }
 };
 
@@ -25,7 +63,6 @@ const localized_values = {
     providedIn: 'root'
 })
 export class LanguageService {
-
     selectedLanguage: string = 'bg';
 
     setLanguage(newLanguage: string) {
@@ -39,14 +76,18 @@ export class LanguageService {
 
 @Injectable()
 export class CustomCalendarI18n extends CalendarI18n {
-
     constructor(private languageService: LanguageService) {
         super();
     }
 
     getDayAriaLabel(date: Date): string {
-        return date.getDate() + ' ' + localized_values[this.languageService.getLanguage()].fullMonths[date.getMonth()]
-            + ' ' + date.getFullYear();
+        return (
+            date.getDate() +
+            ' ' +
+            localized_values[this.languageService.getLanguage()].fullMonths[date.getMonth()] +
+            ' ' +
+            date.getFullYear()
+        );
     }
 
     getAllFullMonthNames(): string[] {
@@ -65,7 +106,6 @@ export class CustomCalendarI18n extends CalendarI18n {
 // Aria labels i18n
 @Injectable()
 export class CustomI18nLabels extends CalendarI18nLabels {
-
     yearSelectionLabel: string = 'Sélection de l\'année';
 
     previousYearLabel: string = 'Année précédente';
@@ -86,9 +126,11 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         <fd-segmented-button id="language" style="margin-bottom:20px">
             <button fd-segmented-button [size]="'xs'" (click)="setFrench()" [state]="isSelected('fr')">French</button>
             <button fd-segmented-button [size]="'xs'" (click)="setGerman()" [state]="isSelected('de')">German</button>
-            <button fd-segmented-button [size]="'xs'" (click)="setBulgarian()" [state]="isSelected('bg')">Bulgarian</button>
+            <button fd-segmented-button [size]="'xs'" (click)="setBulgarian()" [state]="isSelected('bg')">
+                Bulgarian
+            </button>
         </fd-segmented-button>
-        <br>
+        <br />
         <fd-date-picker [(ngModel)]="date" [startingDayOfWeek]="1"></fd-date-picker>
     `,
 
@@ -105,14 +147,13 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     ]
 })
 export class DatePickerI18nExampleComponent implements AfterViewInit {
-
     selected: number = 3;
 
     constructor(
         private languageService: LanguageService,
         private calendarI18n: CalendarI18n,
         private calendarI18nLabels: CalendarI18nLabels
-    ) { }
+    ) {}
 
     date = FdDate.getToday();
 
@@ -155,7 +196,5 @@ export class DatePickerI18nExampleComponent implements AfterViewInit {
     private refresh(): void {
         this.calendarI18n.i18nChange.next();
         this.calendarI18nLabels.labelsChange.next();
-
     }
-
 }

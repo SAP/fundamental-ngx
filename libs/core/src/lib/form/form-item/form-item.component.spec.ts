@@ -10,7 +10,6 @@ export class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
-
     horizontal: boolean = false;
 
     inline: boolean = false;

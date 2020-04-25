@@ -1,27 +1,27 @@
-<div class="fd-tree fd-tree--header"
-     *ngIf="headers.length > 0">
-  <div class="fd-tree__row fd-tree__row--header">
-    <div class="fd-tree__col fd-tree__col--control">
-      <button (click)="toggleDisplayAll()"
-              class="fd-tree__control"
-              aria-label="Expand all"
-              [ngClass]="{'is-pressed' : !hideAll}"
-              [attr.aria-pressed]="!hideAll"></button>
-      {{headers[0]}}
+<div class="fd-tree fd-tree--header" *ngIf="headers.length > 0">
+    <div class="fd-tree__row fd-tree__row--header">
+        <div class="fd-tree__col fd-tree__col--control">
+            <button
+                (click)="toggleDisplayAll()"
+                class="fd-tree__control"
+                aria-label="Expand all"
+                [ngClass]="{ 'is-pressed': !hideAll }"
+                [attr.aria-pressed]="!hideAll"
+            ></button>
+            {{ headers[0] }}
+        </div>
+        <div class="fd-tree__col" *ngFor="let header of headers | slice: 1">
+            {{ header }}
+        </div>
+        <div class="fd-tree__col fd-tree__col--actions"></div>
     </div>
-    <div class="fd-tree__col"
-         *ngFor="let header of headers | slice:1">
-      {{header}}
-    </div>
-    <div class="fd-tree__col fd-tree__col--actions"></div>
-  </div>
 </div>
-<ul class="fd-tree"
-    id="ENusD653"
-    role="tree">
-  <fd-tree-child (editClicked)="editClicked($event)"
-                 (deleteClicked)="deleteClicked($event)"
-                 [displayTreeActions]="displayTreeActions"
-                 *ngFor="let row of treeData"
-                 [row]="row"></fd-tree-child>
+<ul class="fd-tree" id="ENusD653" role="tree">
+    <fd-tree-child
+        (editClicked)="editClicked($event)"
+        (deleteClicked)="deleteClicked($event)"
+        [displayTreeActions]="displayTreeActions"
+        *ngFor="let row of treeData"
+        [row]="row"
+    ></fd-tree-child>
 </ul>

@@ -11,8 +11,7 @@ describe('NotificationHeaderComponent', () => {
         TestBed.configureTestingModule({
             imports: [ButtonModule],
             declarations: [NotificationHeaderComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -25,4 +24,3 @@ describe('NotificationHeaderComponent', () => {
         expect(component).toBeTruthy();
     });
 });
-

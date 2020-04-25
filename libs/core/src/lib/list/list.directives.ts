@@ -5,16 +5,16 @@ import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-list-label]',
     host: {
-        'class': 'fd-list__label'
+        class: 'fd-list__label'
     }
 })
-export class ListLabelDirective { }
+export class ListLabelDirective {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-list-title]',
     host: {
-        'class': 'fd-list__title'
+        class: 'fd-list__title'
     }
 })
 export class ListTitleDirective {
@@ -31,7 +31,7 @@ export class ListTitleDirective {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-list-secondary]',
     host: {
-        'class': 'fd-list__secondary'
+        class: 'fd-list__secondary'
     }
 })
 export class ListSecondaryDirective {
@@ -48,17 +48,16 @@ export class ListSecondaryDirective {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-list-group-header]',
     host: {
-        'class': 'fd-list__group-header'
+        class: 'fd-list__group-header'
     }
 })
-export class ListGroupHeaderDirective { }
+export class ListGroupHeaderDirective {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-list-icon]'
 })
 export class ListIconDirective implements OnChanges, OnInit {
-
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
@@ -69,9 +68,7 @@ export class ListIconDirective implements OnChanges, OnInit {
     @Input()
     class: string;
 
-    constructor(
-        private _elementRef: ElementRef
-    ) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -89,11 +86,9 @@ export class ListIconDirective implements OnChanges, OnInit {
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return [
-            'fd-list__icon',
-            this.glyph ? ('sap-icon--' + this.glyph) : '',
-            this.class
-        ].filter(x => x !== '').join(' ');
+        return ['fd-list__icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
     /** @hidden */
@@ -106,7 +101,7 @@ export class ListIconDirective implements OnChanges, OnInit {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-list-footer]',
     host: {
-        'class': 'fd-list__footer'
+        class: 'fd-list__footer'
     }
 })
-export class ListFooterDirective { }
+export class ListFooterDirective {}

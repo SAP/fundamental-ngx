@@ -5,15 +5,8 @@ import { LayoutGridComponent } from './layout-grid.component';
 import { LayoutGridSpanDirective } from './layout-grid-span.directive';
 
 @NgModule({
-    declarations: [
-        LayoutGridComponent,
-        LayoutGridSpanDirective
-    ],
+    declarations: [LayoutGridComponent, LayoutGridSpanDirective],
     imports: [CommonModule],
-    exports: [
-        LayoutGridComponent,
-        LayoutGridSpanDirective
-    ]
+    exports: [LayoutGridComponent, LayoutGridSpanDirective]
 })
-export class LayoutGridModule {
-}
+export class LayoutGridModule {}

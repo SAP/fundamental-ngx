@@ -15,9 +15,7 @@ import {
     PlatformButtonTypesExampleComponent,
     PlatformButtonTruncateExampleComponent
 } from '../platform/component-docs/platform-button/platform-button-examples/platform-button-examples.component';
-import {
-    PlatformActionbarExamplesComponent
-} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-simple-example.component';
+import { PlatformActionbarExamplesComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-simple-example.component';
 import { PlatformActionbarWithBackButtonExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
 import { PlatformActionbarWithDescriptionExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
 import { PlatformActionbarWithLongPageTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
@@ -136,9 +134,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         RouterModule.forChild(ROUTES),
         ScrollingModule
     ],
-    providers: [
-        { provide: 'CURRENT_LIB', useValue: 'platform' },
-        StackblitzService
-    ]
+    providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }, StackblitzService]
 })
-export class PlatformDocumentationModule { }
+export class PlatformDocumentationModule {}

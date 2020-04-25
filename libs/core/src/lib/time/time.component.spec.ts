@@ -55,7 +55,6 @@ describe('TimeComponent', () => {
     });
 
     it('should handle displayedHourChanged', () => {
-
         component.meridian = true;
 
         component.period = 'am';
@@ -149,7 +148,7 @@ describe('TimeComponent', () => {
         spyOn(component, 'setDisplayedHour');
         component.meridian = true;
         const meridianChange: SimpleChange = new SimpleChange(false, true, true);
-        component.ngOnChanges({meridian: meridianChange});
+        component.ngOnChanges({ meridian: meridianChange });
         expect(component.setDisplayedHour).toHaveBeenCalled();
     });
 

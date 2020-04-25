@@ -35,7 +35,7 @@ export class SwitchDocsComponent {
                     },
                     compact: {
                         type: 'boolean'
-                    },
+                    }
                 }
             }
         },
@@ -49,7 +49,7 @@ export class SwitchDocsComponent {
             disabled: false,
             checked: false,
             compact: true
-        },
+        }
     };
 
     switchSize: ExampleFile[] = [
@@ -85,14 +85,13 @@ export class SwitchDocsComponent {
         }
     ];
 
-
     switchSemantic: ExampleFile[] = [
         {
             language: 'html',
             fileName: 'semantic-switch-example',
             code: semanticSwitchExampleHtml,
             typescriptFileCode: semanticSwitchExampleTs,
-            component: 'SemanticSwitchExampleComponent',
+            component: 'SemanticSwitchExampleComponent'
         }
     ];
 

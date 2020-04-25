@@ -17,7 +17,7 @@ export class SelectNativeDocsComponent {
         {
             language: 'html',
             code: formHtml,
-            fileName: 'select-native-example',
+            fileName: 'select-native-example'
         }
     ];
 
@@ -25,7 +25,7 @@ export class SelectNativeDocsComponent {
         {
             language: 'html',
             code: formInlineHelpHtml,
-            fileName: 'select-native-inline-help-example',
+            fileName: 'select-native-inline-help-example'
         }
     ];
 
@@ -33,7 +33,7 @@ export class SelectNativeDocsComponent {
         {
             language: 'html',
             code: formStateHtml,
-            fileName: 'select-native-state-example',
+            fileName: 'select-native-state-example'
         }
     ];
 

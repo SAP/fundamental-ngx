@@ -18,7 +18,7 @@
                 <ul fd-nested-list>
                     <li fd-nested-list-item>
                         <a fd-nested-list-link [selected]="selected">
-                            <span fd-nested-list-title>Link 1 {{selected}}</span>
+                            <span fd-nested-list-title>Link 1 {{ selected }}</span>
                         </a>
                     </li>
                     <li fd-nested-list-item>
@@ -48,15 +48,19 @@
 
     <div fd-side-nav-utility>
         <ul fd-nested-list [textOnly]="true">
-            <li fd-nested-list-item><a fd-nested-list-link>
-                <span fd-nested-list-title>Link 1</span>
-            </a></li>
-            <li fd-nested-list-item><a fd-nested-list-link>
-                <span fd-nested-list-title>Link 2</span>
-            </a></li>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <span fd-nested-list-title>Link 1</span>
+                </a>
+            </li>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <span fd-nested-list-title>Link 2</span>
+                </a>
+            </li>
         </ul>
     </div>
 </fd-side-nav>
 
-<button fd-button (click)="selected = !selected">Selected Child {{selected}}</button>
-<button fd-button (click)="open = !open">Open {{open}}</button>
+<button fd-button (click)="selected = !selected">Selected Child {{ selected }}</button>
+<button fd-button (click)="open = !open">Open {{ open }}</button>

@@ -3,11 +3,16 @@ import { withKnobs, boolean, select, text, number } from '@storybook/addon-knobs
 import { withA11y } from '@storybook/addon-a11y';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { InputGroupComponent, InputGroupNumberComponent, InputGroupModule } from 'libs/core/src/lib/input-group/public_api';
+import {
+    InputGroupComponent,
+    InputGroupNumberComponent,
+    InputGroupModule
+} from 'libs/core/src/lib/input-group/public_api';
 
 export default {
     title: 'Fd input-group',
-    component: InputGroupNumberComponent, InputGroupComponent,
+    component: InputGroupNumberComponent,
+    InputGroupComponent,
     moduleMetadata: moduleMetadata,
     decorators: [
         withKnobs,
@@ -20,8 +25,7 @@ export default {
 };
 
 export const InputGroupNumber = () => ({
-    template:
-        `
+    template: `
         <label fd-form-label>Input Group</label>
         <fd-input-group-number 
         [placeholder]="placeholderVar"
@@ -36,15 +40,12 @@ export const InputGroupNumber = () => ({
         disabledVar: boolean('Disabled', false),
         stepDownLabel: text('Step down aria label', 'step-down'),
         stepUpLabel: text('Step up aria label', 'step-up'),
-        number: number('Number', 0),
-
+        number: number('Number', 0)
     }
 });
 
-
 export const InputGroup = () => ({
-    template:
-        `
+    template: `
         <label fd-form-label>Input Group</label>
         <fd-input-group 
         [placement]="placementVar"
@@ -62,27 +63,43 @@ export const InputGroup = () => ({
         ></fd-input-group>
   `,
     props: {
-        placementVar: select('Placement', {
-            before: 'before',
-            after: 'after',
-        }, 'after'),
-        buttonTypeVar: select('Button Type', {
-            standard: 'standard',
-            positive: 'positive',
-            medium: 'medium',
-            negative: 'negative',
-        }, 'standard'),
-        buttonOptionsVar: select('Button Options', {
-            emphasized: 'emphasized',
-            light: 'light',
-            empty: '',
-        }, ''),
-        stateVar: select('State', {
-            valid: 'valid',
-            invalid: 'invalid',
-            information: 'information',
-            empty: '',
-        }, ''),
+        placementVar: select(
+            'Placement',
+            {
+                before: 'before',
+                after: 'after'
+            },
+            'after'
+        ),
+        buttonTypeVar: select(
+            'Button Type',
+            {
+                standard: 'standard',
+                positive: 'positive',
+                medium: 'medium',
+                negative: 'negative'
+            },
+            'standard'
+        ),
+        buttonOptionsVar: select(
+            'Button Options',
+            {
+                emphasized: 'emphasized',
+                light: 'light',
+                empty: ''
+            },
+            ''
+        ),
+        stateVar: select(
+            'State',
+            {
+                valid: 'valid',
+                invalid: 'invalid',
+                information: 'information',
+                empty: ''
+            },
+            ''
+        ),
         compactVar: boolean('Compact', false),
         inlineVar: boolean('Inline', false),
         placeholderVar: text('Placeholder', 'Default placeholder'),
@@ -90,7 +107,6 @@ export const InputGroup = () => ({
         glyphVar: text('Glyph', ''),
         buttonFocusableVar: boolean('Button Focusable', true),
         buttonVar: boolean('Add on is Button', false),
-        disabledVar: boolean('Disabled', false),
-
+        disabledVar: boolean('Disabled', false)
     }
 });

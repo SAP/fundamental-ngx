@@ -9,10 +9,10 @@ import { Component } from '@angular/core';
     selector: 'fd-localization-item-test',
     template: `<fd-localization-editor-item>
         <ng-template fd-localization-editor-label>
-            <span >Custom Label</span>
+            <span>Custom Label</span>
         </ng-template>
         <input fd-localization-editor-input />
-  </fd-localization-editor-item>`
+    </fd-localization-editor-item>`
 })
 class TestLocalizationItemComponent {}
 
@@ -22,15 +22,9 @@ describe('LocalizationEditorItemComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                LocalizationEditorModule,
-                CommonModule
-            ],
-            declarations: [
-                TestLocalizationItemComponent
-            ]
-        })
-            .compileComponents();
+            imports: [LocalizationEditorModule, CommonModule],
+            declarations: [TestLocalizationItemComponent]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './message-strip-width-example.component.html',
     styleUrls: ['message-strip-example.component.scss']
 })
-export class MessageStripWidthExampleComponent { }
+export class MessageStripWidthExampleComponent {}

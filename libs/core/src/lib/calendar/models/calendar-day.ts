@@ -17,5 +17,5 @@ export interface CalendarDay {
     ariaLabel?: string;
     id?: string;
     index?: number;
-    specialNumber?: number
+    specialNumber?: number;
 }

@@ -18,15 +18,11 @@ const routes: Routes = [
             { path: '', component: MessageStripDocsComponent },
             { path: 'api', component: ApiComponent, data: { content: API_FILES.messageStrip } }
         ]
-    },
+    }
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        MessageStripModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MessageStripModule],
     exports: [RouterModule],
     declarations: [
         MessageStripHeaderComponent,
@@ -36,5 +32,4 @@ const routes: Routes = [
         MessageStripWidthExampleComponent
     ]
 })
-export class MessageStripDocsModule {
-}
+export class MessageStripDocsModule {}

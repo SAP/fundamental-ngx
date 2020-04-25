@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     selector: 'app-select-header',
     templateUrl: './textarea-header.component.html'
 })
-export class TextareaHeaderComponent {
-}
+export class TextareaHeaderComponent {}

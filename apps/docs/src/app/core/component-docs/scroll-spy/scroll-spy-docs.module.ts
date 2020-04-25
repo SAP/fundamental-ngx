@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {API_FILES} from '../../api-files';
-import {ScrollSpyCustomExampleComponent} from './examples/scroll-spy-custom-example/scroll-spy-custom-example.component';
-import {ScrollSpyOffsetExampleComponent} from './examples/scroll-spy-custom-offset/scroll-spy-offset-example.component';
-import {ScrollSpyExampleComponent} from './examples/scroll-spy-example/scroll-spy-example.component';
-import {ScrollSpyHeaderComponent} from './scroll-spy-header/scroll-spy-header.component';
-import {ScrollSpyDocsComponent} from './scroll-spy-docs.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { API_FILES } from '../../api-files';
+import { ScrollSpyCustomExampleComponent } from './examples/scroll-spy-custom-example/scroll-spy-custom-example.component';
+import { ScrollSpyOffsetExampleComponent } from './examples/scroll-spy-custom-offset/scroll-spy-offset-example.component';
+import { ScrollSpyExampleComponent } from './examples/scroll-spy-example/scroll-spy-example.component';
+import { ScrollSpyHeaderComponent } from './scroll-spy-header/scroll-spy-header.component';
+import { ScrollSpyDocsComponent } from './scroll-spy-docs.component';
 import { ScrollSpyModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -22,11 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        ScrollSpyModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ScrollSpyModule],
     exports: [RouterModule],
     declarations: [
         ScrollSpyDocsComponent,
@@ -36,5 +32,4 @@ const routes: Routes = [
         ScrollSpyCustomExampleComponent
     ]
 })
-export class ScrollSpyDocsModules {
-}
+export class ScrollSpyDocsModules {}

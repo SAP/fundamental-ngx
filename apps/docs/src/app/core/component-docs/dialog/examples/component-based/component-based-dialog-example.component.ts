@@ -6,11 +6,10 @@ import { DialogService } from '@fundamental-ngx/core';
     selector: 'fd-component-based-dialog-example',
     template: `
         <button fd-button (click)="open()">Open from Component</button>
-        <p>{{closeReason}}</p>
+        <p>{{ closeReason }}</p>
     `
 })
 export class ComponentBasedDialogExampleComponent {
-
     closeReason: string;
 
     constructor(private _dialogService: DialogService) {}
@@ -27,15 +26,18 @@ export class ComponentBasedDialogExampleComponent {
                     `An unripe pineapple not only tastes awful, but can also be poisonous`,
                     `One of the ways you can tell if a pineapple is ripe is by smelling it`,
                     `In Hawaii, the word for pineapple is “Hala kahiki“`
-                ],
+                ]
             },
             width: '400px'
         });
 
-        dialogRef.afterClosed.subscribe(result => {
-            this.closeReason = 'Dialog closed with result: ' + result;
-        }, error => {
-            this.closeReason = 'Dialog dismissed with result: ' + error;
-        });
+        dialogRef.afterClosed.subscribe(
+            (result) => {
+                this.closeReason = 'Dialog closed with result: ' + result;
+            },
+            (error) => {
+                this.closeReason = 'Dialog dismissed with result: ' + error;
+            }
+        );
     }
 }

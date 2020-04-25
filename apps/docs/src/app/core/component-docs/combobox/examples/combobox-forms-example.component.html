@@ -1,39 +1,42 @@
 <form [formGroup]="customForm">
     <div fd-form-item>
         <label fd-form-label>Combobox with communication via Objects</label>
-        <fd-combobox [dropdownValues]="dropdownValues"
-                     [state]="'information'"
-                     [placeholder]="'Type some text...'"
-                     [displayFn]="myDisplayFunction"
-                     [communicateByObject]="true"
-                     formControlName="itemOnDropdownMode">
+        <fd-combobox
+            [dropdownValues]="dropdownValues"
+            [state]="'information'"
+            [placeholder]="'Type some text...'"
+            [displayFn]="myDisplayFunction"
+            [communicateByObject]="true"
+            formControlName="itemOnDropdownMode"
+        >
             <li fd-list-message [type]="'information'">More information</li>
         </fd-combobox>
         <fd-form-message [type]="'information'">More information</fd-form-message>
     </div>
-</form><br/>
+</form>
+<br />
 
-Touched: {{customForm.controls.itemOnDropdownMode.touched}}<br/>
-Dirty: {{customForm.controls.itemOnDropdownMode.dirty}}<br/>
-Json Value: {{customForm.controls.itemOnDropdownMode.value | json}}
-<br/><br/>
+Touched: {{ customForm.controls.itemOnDropdownMode.touched }}<br />
+Dirty: {{ customForm.controls.itemOnDropdownMode.dirty }}<br />
+Json Value: {{ customForm.controls.itemOnDropdownMode.value | json }} <br /><br />
 
 <form [formGroup]="customForm">
     <div fd-form-item>
         <label fd-form-label>Combobox with communication via displayed value</label>
-        <fd-combobox [dropdownValues]="dropdownValues"
-                     [state]="'information'"
-                     [placeholder]="'Type some text...'"
-                     [displayFn]="myDisplayFunction"
-                     formControlName="item">
+        <fd-combobox
+            [dropdownValues]="dropdownValues"
+            [state]="'information'"
+            [placeholder]="'Type some text...'"
+            [displayFn]="myDisplayFunction"
+            formControlName="item"
+        >
             <li fd-list-message [type]="'information'">More information</li>
         </fd-combobox>
         <fd-form-message [type]="'information'">More information</fd-form-message>
     </div>
-</form><br/>
+</form>
+<br />
 
-Touched: {{customForm.controls.item.touched}}<br/>
-Dirty: {{customForm.controls.item.dirty}}<br/>
-Json Value: {{customForm.controls.item.value | json}}
-
-
+Touched: {{ customForm.controls.item.touched }}<br />
+Dirty: {{ customForm.controls.item.dirty }}<br />
+Json Value: {{ customForm.controls.item.value | json }}

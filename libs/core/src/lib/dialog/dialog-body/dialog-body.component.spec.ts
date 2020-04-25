@@ -14,8 +14,8 @@ describe('DialogBodyComponent', () => {
             imports: [BusyIndicatorModule],
             declarations: [DialogBodyComponent],
             providers: [
-                {provide: DIALOG_CONFIG, useClass: DialogConfig},
-                {provide: DIALOG_REF, useClass: DialogRef},
+                { provide: DIALOG_CONFIG, useClass: DialogConfig },
+                { provide: DIALOG_REF, useClass: DialogRef }
             ]
         }).compileComponents();
     }));
@@ -31,7 +31,6 @@ describe('DialogBodyComponent', () => {
     });
 
     it('should have proper css classes', () => {
-
         expect(fixture.nativeElement).toHaveClass('fd-dialog__body');
         expect(fixture.nativeElement).not.toHaveClass('fd-dialog__body--no-vertical-padding');
 
@@ -42,7 +41,6 @@ describe('DialogBodyComponent', () => {
     });
 
     it('should display in loading state', () => {
-
         expect(fixture.nativeElement.querySelector('fd-busy-indicator')).toBeFalsy();
 
         component.dialogRef.loading(true);

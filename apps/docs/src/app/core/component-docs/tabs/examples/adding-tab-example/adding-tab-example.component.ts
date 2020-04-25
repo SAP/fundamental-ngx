@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'fd-adding-tab-example',
-  templateUrl: './adding-tab-example.component.html',
-  styleUrls: ['./adding-tab-example.component.scss']
+    selector: 'fd-adding-tab-example',
+    templateUrl: './adding-tab-example.component.html',
+    styleUrls: ['./adding-tab-example.component.scss']
 })
 export class AddingTabExampleComponent {
     tabs = [
-        {title: 'Tab 1', content: 'Content 1'},
-        {title: 'Tab 2', content: 'Content 2'},
-        {title: 'Tab 3', content: 'Content 3'},
+        { title: 'Tab 1', content: 'Content 1' },
+        { title: 'Tab 2', content: 'Content 2' },
+        { title: 'Tab 3', content: 'Content 3' }
     ];
 
     addTab(): void {

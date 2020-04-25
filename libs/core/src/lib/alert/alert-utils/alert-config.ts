@@ -4,11 +4,10 @@ import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-co
  * @deprecated
  * Alert component is depricated since version 0.16.0
  * Message Strip component should be used instead.
- * 
+ *
  * Configuration for opening an alert with the AlertService.
  */
 export class AlertConfig implements DynamicComponentConfig {
-
     /** Whether the alert is dismissible. */
     dismissible?: boolean = true;
 

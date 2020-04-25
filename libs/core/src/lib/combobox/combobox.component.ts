@@ -1,7 +1,9 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy, ChangeDetectorRef,
-    Component, ContentChildren,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChildren,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -61,7 +63,6 @@ import { GroupFunction } from '../utils/pipes/list-group.pipe';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
-
     /** Values to be filtered in the search input. */
     @Input()
     dropdownValues: any[] = [];
@@ -107,7 +108,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.  
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
     state: FormStates;
@@ -178,7 +179,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-
     /** @hidden */
     @ViewChildren(ListItemDirective)
     listItems: QueryList<ListItemDirective>;
@@ -208,16 +208,16 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: any = () => { };
+    onChange: any = () => {};
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {};
 
     constructor(
         private elRef: ElementRef,
         private menuKeyboardService: MenuKeyboardService,
         private cdRef: ChangeDetectorRef
-    ) { }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -247,9 +247,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private _setupKeyboardService(): void {
         this.menuKeyboardService.itemClicked
             .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => this.onMenuClickHandler(index));
+            .subscribe((index) => this.onMenuClickHandler(index));
         this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this.menuKeyboardService.focusEscapeAfterList = () => { };
+        this.menuKeyboardService.focusEscapeAfterList = () => {};
     }
 
     /** @hidden */
@@ -276,13 +276,15 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeyupHandler(event: KeyboardEvent): void {
-        if (this.openOnKeyboardEvent &&
+        if (
+            this.openOnKeyboardEvent &&
             this.inputText &&
             this.inputText.length &&
             event.key !== 'Escape' &&
             event.key !== ' ' &&
             event.key !== 'Tab' &&
-            event.key !== 'Enter') {
+            event.key !== 'Enter'
+        ) {
             this.isOpenChangeHandle(true);
         }
     }
@@ -340,12 +342,14 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     handleSearchTermChange(): void {
         let foundMatch = false;
-        this.dropdownValues.forEach(value => {
+        this.dropdownValues.forEach((value) => {
             if (this.displayFn(value) === this.inputText) {
                 foundMatch = true;
             }
         });
-        foundMatch ? this.displayedValues = this.dropdownValues : this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+        foundMatch
+            ? (this.displayedValues = this.dropdownValues)
+            : (this.displayedValues = this.filterFn(this.dropdownValues, this.inputText));
         if (this.popoverComponent) {
             this.popoverComponent.updatePopover();
         }
@@ -390,17 +394,17 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private _defaultFilter(contentArray: any[], searchTerm: any): any[] {
         if (typeof searchTerm === 'string') {
             const searchLower = searchTerm.toLocaleLowerCase();
-            return contentArray.filter(item => {
+            return contentArray.filter((item) => {
                 if (item) {
                     return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
                 }
             });
         } else if (typeof searchTerm === 'object') {
-            return contentArray.filter(item => {
+            return contentArray.filter((item) => {
                 if (item === searchTerm) {
                     return item;
                 }
-            })
+            });
         }
     }
 
@@ -415,7 +419,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     private _getOptionObjectByDisplayedValue(displayValue: string): any {
-        return this.dropdownValues.find(value => this.displayFn(value) === displayValue);
+        return this.dropdownValues.find((value) => this.displayFn(value) === displayValue);
     }
 
     private _setupFocusTrap(): void {
@@ -437,5 +441,4 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.displayedValues = this.dropdownValues;
         }
     }
-
 }

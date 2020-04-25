@@ -14,7 +14,11 @@ import {
     Optional,
     EmbeddedViewRef,
     Output,
-    EventEmitter, ViewEncapsulation, HostListener, NgZone, ChangeDetectionStrategy
+    EventEmitter,
+    ViewEncapsulation,
+    HostListener,
+    NgZone,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
@@ -40,18 +44,15 @@ let alertUniqueId: number = 0;
         '[attr.aria-label]': 'ariaLabel',
         '[style.width]': 'width',
         '[style.min-width]': 'minWidth',
-        'role': 'alert',
+        role: 'alert',
         '[attr.id]': 'id',
         '[@fadeAlertNgIf]': ''
     },
-    animations: [
-        alertFadeNgIf
-    ],
+    animations: [alertFadeNgIf],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
-
     /** @hidden */
     @ViewChild('container', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
@@ -114,12 +115,14 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     childContent: Type<any> | TemplateRef<any> | string = undefined;
 
     /** @hidden */
-    constructor(private elRef: ElementRef,
-                private cdRef: ChangeDetectorRef,
-                private componentFactoryResolver: ComponentFactoryResolver,
-                private ngZone: NgZone,
-                @Optional() private alertConfig: AlertConfig,
-                @Optional() private alertRef: AlertRef) {
+    constructor(
+        private elRef: ElementRef,
+        private cdRef: ChangeDetectorRef,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private ngZone: NgZone,
+        @Optional() private alertConfig: AlertConfig,
+        @Optional() private alertRef: AlertRef
+    ) {
         super(elRef);
         this._setAlertConfig(alertConfig);
         this._setProperties();
@@ -243,7 +246,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     private _setAlertConfig(alertConfig: AlertConfig): void {
         Object.keys(alertConfig || {})
-            .filter(key => key !== 'data' && key !== 'container')
-            .forEach(key => this[key] = alertConfig[key]);
+            .filter((key) => key !== 'data' && key !== 'container')
+            .forEach((key) => (this[key] = alertConfig[key]));
     }
 }

@@ -40,7 +40,7 @@ export class DatetimePickerDocsComponent {
             code: dateTimeSimpleTs,
             fileName: 'datetime-example',
             component: 'DatetimeExampleComponent'
-        },
+        }
     ];
 
     datetimeNonMer: ExampleFile[] = [
@@ -54,7 +54,7 @@ export class DatetimePickerDocsComponent {
             code: dateTimeNonMeridianTs,
             fileName: 'datetime-non-meridian-example',
             component: 'DatetimeNonMeridianExampleComponent'
-        },
+        }
     ];
 
     datetimeProgram: ExampleFile[] = [
@@ -68,7 +68,7 @@ export class DatetimePickerDocsComponent {
             code: dateTimeProgTs,
             fileName: 'datetime-program-example',
             component: 'DatetimeProgramExampleComponent'
-        },
+        }
     ];
 
     datetimeFormat: ExampleFile[] = [
@@ -82,7 +82,7 @@ export class DatetimePickerDocsComponent {
             code: dateTimeFormatTs,
             fileName: 'datetime-format-example',
             component: 'DatetimeFormatExampleComponent'
-        },
+        }
     ];
 
     datetimeDisabled: ExampleFile[] = [
@@ -96,7 +96,7 @@ export class DatetimePickerDocsComponent {
             code: dateTimeDisabledTs,
             fileName: 'datetime-disabled-example',
             component: 'DatetimeDisabledExampleComponent'
-        },
+        }
     ];
 
     datetimeForm: ExampleFile[] = [
@@ -110,7 +110,7 @@ export class DatetimePickerDocsComponent {
             code: dateTimeFormTs,
             fileName: 'datetime-form-example',
             component: 'DatetimeFormExampleComponent'
-        },
+        }
     ];
 
     datetimePickerAllowNull: ExampleFile[] = [
@@ -119,7 +119,7 @@ export class DatetimePickerDocsComponent {
             code: dateTimePickerAllowNullTs,
             fileName: 'date-time-picker-allow-null-example',
             component: 'DatetimePickerAllowNullExampleComponent'
-        },
+        }
     ];
 
     datetimeI18nComplex: ExampleFile[] = [
@@ -134,6 +134,6 @@ export class DatetimePickerDocsComponent {
             code: datetimeI18nComplexH,
             fileName: 'datetime-picker-complex-i18n-example',
             component: 'DatetimePickerComplexI18nExampleComponent'
-        },
+        }
     ];
 }

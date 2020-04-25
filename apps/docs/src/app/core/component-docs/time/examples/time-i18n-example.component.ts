@@ -4,7 +4,6 @@ import { TimeI18n, TimeI18nLabels } from '@fundamental-ngx/core';
 // Aria labels i18n
 @Injectable()
 export class CustomI18nLabels extends TimeI18nLabels {
-
     increaseHoursLabel: string = 'Aumentar horas';
 
     hoursLabel: string = 'Horas';
@@ -22,12 +21,10 @@ export class CustomI18nLabels extends TimeI18nLabels {
     secondsLabel: string = 'Segundos';
 
     decreaseSecondsLabel: string = 'Disminuir segundos';
-
 }
 
 @Injectable()
 export class CustomI18n extends TimeI18n {
-
     meridianAm: string = 'vorm.';
 
     meridianPm: string = 'nachm.';
@@ -41,7 +38,6 @@ export class CustomI18n extends TimeI18n {
     secondsPlaceholder: string = 'zz';
 
     meridianCaseSensitive: boolean = true;
-
 }
 
 @Component({
@@ -49,7 +45,7 @@ export class CustomI18n extends TimeI18n {
     template: `
         <fd-time [meridian]="true" [(ngModel)]="timeObject"></fd-time>
         <br />
-        Selected Time: {{timeObject.hour}}h {{timeObject.minute}}m {{timeObject.second}}s
+        Selected Time: {{ timeObject.hour }}h {{ timeObject.minute }}m {{ timeObject.second }}s
     `,
     // Note that this can be provided in the root of your application.
     providers: [
@@ -64,7 +60,5 @@ export class CustomI18n extends TimeI18n {
     ]
 })
 export class TimeI18nExampleComponent {
-
     timeObject = { hour: 12, minute: 0, second: 0 };
-
 }

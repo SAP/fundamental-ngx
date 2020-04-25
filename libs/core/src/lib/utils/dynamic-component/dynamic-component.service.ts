@@ -16,7 +16,6 @@ import { DynamicComponentConfig } from './dynamic-component-config';
  */
 @Injectable()
 export class DynamicComponentService {
-
     /** @hidden */
     constructor(
         private _componentFactoryResolver: ComponentFactoryResolver,
@@ -35,10 +34,9 @@ export class DynamicComponentService {
         content: TemplateRef<any> | Type<any> | string | Object,
         componentType: Type<T>,
         config: DynamicComponentConfig,
-        inject: { injector?: Injector, services?: any[] } = {}
+        inject: { injector?: Injector; services?: any[] } = {}
     ): ComponentRef<T> {
-
-        const {injector, services} = inject;
+        const { injector, services } = inject;
         const dependenciesMap = this._createDependencyMap(services);
         const componentRef = this._createComponent<T>(componentType, dependenciesMap, injector);
         this._passExternalContent<T>(componentRef, content);
@@ -55,7 +53,7 @@ export class DynamicComponentService {
 
     private _createDependencyMap(services: any[] = []): WeakMap<any, any> {
         const dependencyMap = new WeakMap();
-        services.forEach(service => dependencyMap.set(service.constructor, service));
+        services.forEach((service) => dependencyMap.set(service.constructor, service));
         return dependencyMap;
     }
 
@@ -69,7 +67,11 @@ export class DynamicComponentService {
         }
     }
 
-    private _createComponent<V>(componentType: Type<V>, dependenciesMap: WeakMap<any, any>, injector: Injector): ComponentRef<V> {
+    private _createComponent<V>(
+        componentType: Type<V>,
+        dependenciesMap: WeakMap<any, any>,
+        injector: Injector
+    ): ComponentRef<V> {
         const dynamicComponentInjector = new DynamicComponentInjector(injector || this._injector, dependenciesMap);
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(componentType);
         const componentRef = componentFactory.create(dynamicComponentInjector);
@@ -77,7 +79,10 @@ export class DynamicComponentService {
         return componentRef;
     }
 
-    private _passExternalContent<V>(componentRef: ComponentRef<V>, content: TemplateRef<any> | Type<any> | string | Object) {
+    private _passExternalContent<V>(
+        componentRef: ComponentRef<V>,
+        content: TemplateRef<any> | Type<any> | string | Object
+    ) {
         if (componentRef.instance.hasOwnProperty('childContent')) {
             (componentRef.instance as any).childContent = content;
         }

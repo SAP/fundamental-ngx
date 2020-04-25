@@ -1,9 +1,9 @@
 export interface ExampleFile {
     code: {
-        default: string
+        default: string;
     };
     scssFileCode?: {
-        default: string
+        default: string;
     };
     standalone?: boolean;
     language: string;
@@ -13,7 +13,7 @@ export interface ExampleFile {
     main?: boolean;
     name?: string;
     typescriptFileCode?: {
-        default: string
+        default: string;
     };
     service?: boolean;
 }

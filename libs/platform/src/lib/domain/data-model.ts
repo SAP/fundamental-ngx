@@ -26,4 +26,3 @@ export interface SelectItem {
 export function isSelectItem(item: SelectItem): item is SelectItem {
     return item && item.label !== undefined && item.value !== undefined;
 }
-

@@ -1,28 +1,30 @@
 <div class="fd-shellbar-collapse">
-    <fd-popover [options]="{placement: 'bottom-end'}"
-                [focusTrapped]="false">
+    <fd-popover [options]="{ placement: 'bottom-end' }" [focusTrapped]="false">
         <fd-popover-control>
             <div class="fd-shellbar-collapse--control">
-                <button fd-button [glyph]="'overflow'" class="fd-shellbar__button"
-                        [attr.aria-label]="collapsedItemMenuLabel">
-                    <span *ngIf="totalNotifications"
-                          class="fd-counter fd-counter--notification fd-shellbar__counter--notification">{{totalNotifications}}</span>
+                <button
+                    fd-button
+                    [glyph]="'overflow'"
+                    class="fd-shellbar__button"
+                    [attr.aria-label]="collapsedItemMenuLabel"
+                >
+                    <span
+                        *ngIf="totalNotifications"
+                        class="fd-counter fd-counter--notification fd-shellbar__counter--notification"
+                        >{{ totalNotifications }}</span
+                    >
                 </button>
             </div>
         </fd-popover-control>
         <fd-popover-body>
             <fd-menu>
-                <ul fd-menu-list
-                    *ngIf="!showCollapsedProducts">
-                    <li fd-menu-item
-                        *ngFor="let action of shellbarActions"
-                        (click)="actionClicked(action, $event)">
+                <ul fd-menu-list *ngIf="!showCollapsedProducts">
+                    <li fd-menu-item *ngFor="let action of shellbarActions" (click)="actionClicked(action, $event)">
                         <fd-icon fd-menu-item-addon [glyph]="action.glyph"></fd-icon>
-                        {{action.label}}
+                        {{ action.label }}
                     </li>
                 </ul>
-                <ul fd-menu-list
-                    *ngIf="showCollapsedProducts">
+                <ul fd-menu-list *ngIf="showCollapsedProducts">
                     <li (click)="toggleCollapsedProducts($event)">
                         <span fd-menu-item class="sap-icon--nav-back"></span>
                     </li>

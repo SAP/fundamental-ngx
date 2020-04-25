@@ -10,7 +10,7 @@ describe('RadioButtonComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [RadioModule, FormModule],
-            declarations: [RadioButtonComponent, FormGroupComponent],
+            declarations: [RadioButtonComponent, FormGroupComponent]
         }).compileComponents();
     }));
 

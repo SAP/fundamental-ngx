@@ -1,34 +1,45 @@
 <h4>Cozy</h4>
-<fdp-search-field [placeholder]="'Search'" [suggestions]="suggestions" [categories]="categories"
-    (searchSubmit)="onSearchSubmit($event)" (inputChange)="onInputChange($event)"></fdp-search-field>
+<fdp-search-field
+    [placeholder]="'Search'"
+    [suggestions]="suggestions"
+    [categories]="categories"
+    (searchSubmit)="onSearchSubmit($event)"
+    (inputChange)="onInputChange($event)"
+></fdp-search-field>
 <div class="result-block">
     <div class="result-field">
-        <label>Input Change Text: </label><span>{{inputText}}</span>
+        <label>Input Change Text: </label><span>{{ inputText }}</span>
     </div>
     <div class="result-field">
-        <label>Input Change Category: </label><span>{{inputCategory}}</span>
+        <label>Input Change Category: </label><span>{{ inputCategory }}</span>
     </div>
     <div class="result-field">
-        <label>Search Submit Term: </label><span>{{searchTerm}}</span>
+        <label>Search Submit Term: </label><span>{{ searchTerm }}</span>
     </div>
     <div class="result-field">
-        <label>Search Submit Category: </label><span>{{searchCategory}}</span>
+        <label>Search Submit Category: </label><span>{{ searchCategory }}</span>
     </div>
 </div>
 <h4>Compact</h4>
-<fdp-search-field [placeholder]="'Search'" [suggestions]="suggestions" [categories]="categories" [size]="'compact'"
-    (searchSubmit)="onCompactSearchSubmit($event)" (inputChange)="onCompactInputChange($event)"></fdp-search-field>
+<fdp-search-field
+    [placeholder]="'Search'"
+    [suggestions]="suggestions"
+    [categories]="categories"
+    [size]="'compact'"
+    (searchSubmit)="onCompactSearchSubmit($event)"
+    (inputChange)="onCompactInputChange($event)"
+></fdp-search-field>
 <div class="result-block">
     <div class="result-field">
-        <label>Input Change Text: </label><span>{{compactInputText}}</span>
+        <label>Input Change Text: </label><span>{{ compactInputText }}</span>
     </div>
     <div class="result-field">
-        <label>Input Change Category: </label><span>{{compactInputCategory}}</span>
+        <label>Input Change Category: </label><span>{{ compactInputCategory }}</span>
     </div>
     <div class="result-field">
-        <label>Search Submit Term: </label><span>{{compactSearchTerm}}</span>
+        <label>Search Submit Term: </label><span>{{ compactSearchTerm }}</span>
     </div>
     <div class="result-field">
-        <label>Search Submit Category: </label><span>{{compactSearchCategory}}</span>
+        <label>Search Submit Category: </label><span>{{ compactSearchCategory }}</span>
     </div>
 </div>

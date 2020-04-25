@@ -1,5 +1,6 @@
 <fd-docs-section-title [id]="'def'" [componentName]="'menu'">Menu</fd-docs-section-title>
-<description>The Menu can be invoked from any element, by using the <code>fdpMenuTriggerFor</code> directive.
+<description
+    >The Menu can be invoked from any element, by using the <code>fdpMenuTriggerFor</code> directive.
 </description>
 <component-example>
     <fdp-platform-menu-basic-example></fdp-platform-menu-basic-example>
@@ -9,8 +10,10 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'def'" [componentName]="'menu'">Menu with Horizontal Positioning</fd-docs-section-title>
-<description>The horizontal position of the menu can be controlled via the <code>xPosition</code> property, which can be
-    set to either 'after' or 'before'. The default value is 'after'.</description>
+<description
+    >The horizontal position of the menu can be controlled via the <code>xPosition</code> property, which can be set to
+    either 'after' or 'before'. The default value is 'after'.</description
+>
 <component-example>
     <fdp-platform-menu-x-position-example></fdp-platform-menu-x-position-example>
 </component-example>
@@ -27,15 +30,17 @@
 
 <separator></separator>
 
-
 <fd-docs-section-title [id]="'def'" [componentName]="'menu'">Menu Within Scrolling Container</fd-docs-section-title>
 <description>
-    <p>Menus are designed to reposition themselves upon scroll of the page or within a scrollable container.
-        However, In order to accomplish this the Menu/MenuTrigger system is reliant on the
-        <a href="https://material.angular.io/cdk/scrolling/overview">CDK Scrolling</a> package</p>
-    <p>For containers that
-        are scrollable (e.g. via the CSS <code>overflow: scroll</code> property), the user needs to add the
-        <code>cdk-scrollable</code> (or <code>cdkScrollable</code>) directive to that container.</p>
+    <p>
+        Menus are designed to reposition themselves upon scroll of the page or within a scrollable container. However,
+        In order to accomplish this the Menu/MenuTrigger system is reliant on the
+        <a href="https://material.angular.io/cdk/scrolling/overview">CDK Scrolling</a> package
+    </p>
+    <p>
+        For containers that are scrollable (e.g. via the CSS <code>overflow: scroll</code> property), the user needs to
+        add the <code>cdk-scrollable</code> (or <code>cdkScrollable</code>) directive to that container.
+    </p>
 </description>
 <component-example>
     <fdp-platform-menu-scrolling-example></fdp-platform-menu-scrolling-example>

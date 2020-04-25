@@ -5,7 +5,7 @@ interface NodeModule {
 }
 declare module '!raw-loader!*' {
     const contents: {
-        default: string
+        default: string;
     };
     export = contents;
 }

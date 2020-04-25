@@ -1,8 +1,4 @@
-import {
-    Component, HostBinding,
-    ViewEncapsulation,
-    Input, ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation, Input, ChangeDetectionStrategy } from '@angular/core';
 
 /**
  * The component that represents a menu.
@@ -24,5 +20,4 @@ export class MenuComponent {
     @Input()
     @HostBinding('class.fd-menu__list--separated')
     separator: boolean = false;
-
 }

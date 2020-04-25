@@ -13,12 +13,11 @@ import { Icons } from '../../../documentation/utilities/icons';
     templateUrl: './info-label-docs.component.html'
 })
 export class InfoLabelDocsComponent {
-
     defaultInfoLabelHtmlType: ExampleFile[] = [
         {
             language: 'html',
             code: InfoLableDefaultExample,
-            fileName: 'Info-label-default-example',
+            fileName: 'Info-label-default-example'
         }
     ];
 
@@ -26,7 +25,7 @@ export class InfoLabelDocsComponent {
         {
             language: 'html',
             code: InfoLableTextExample,
-            fileName: 'info-label-text-example',
+            fileName: 'info-label-text-example'
         }
     ];
 
@@ -34,7 +33,7 @@ export class InfoLabelDocsComponent {
         {
             language: 'html',
             code: InfoLabelIconTextExample,
-            fileName: 'info-label-text-icon-example',
+            fileName: 'info-label-text-icon-example'
         }
     ];
 
@@ -42,8 +41,7 @@ export class InfoLabelDocsComponent {
         {
             language: 'html',
             code: InfoLableNumericIconExample,
-            fileName: 'info-label-icon-numeric-example',
+            fileName: 'info-label-icon-numeric-example'
         }
     ];
-
 }

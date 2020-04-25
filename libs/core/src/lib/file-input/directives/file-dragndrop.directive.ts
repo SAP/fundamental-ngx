@@ -7,7 +7,6 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
     selector: '[fdFileDragnDrop]'
 })
 export class FileDragndropDirective {
-
     /** Whether multiple files can be dropped at once. */
     @Input()
     multiple: boolean = true;

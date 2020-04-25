@@ -2,9 +2,8 @@
     Simple Tabs
 </fd-docs-section-title>
 <description>
-    Simple tabs can be built by setting specified properties to <code>fd-tab</code>. There is way to define
-    own templates, or use it with <code>[routerLink]</code>.
-    There is no <code>compact</code> mode on inline tabs.
+    Simple tabs can be built by setting specified properties to <code>fd-tab</code>. There is way to define own
+    templates, or use it with <code>[routerLink]</code>. There is no <code>compact</code> mode on inline tabs.
 </description>
 <component-example>
     <fd-tabs-example></fd-tabs-example>
@@ -17,9 +16,9 @@
     Tabs with Counter
 </fd-docs-section-title>
 <description>
-    Tabs with counter can be built by setting specified properties to <code>fd-tab</code>. There is way to define
-    own templates, or use it with <code>[routerLink]</code>.
-    There is no <code>compact</code> mode on inline tabs with counter.
+    Tabs with counter can be built by setting specified properties to <code>fd-tab</code>. There is way to define own
+    templates, or use it with <code>[routerLink]</code>. There is no <code>compact</code> mode on inline tabs with
+    counter.
 </description>
 <component-example>
     <fd-tab-counter-example></fd-tab-counter-example>
@@ -62,9 +61,9 @@
     Filter Mode
 </fd-docs-section-title>
 <description>
-    The Filter Mode can be used by adding <code>[mode]="'filter'"</code>. It has different structure than
-    tab any other mode. It can be built by setting properties, defining own template, or using it with
-    <code>[routerLink]</code>. To make filter Mode Tabs looks properly, it's mandatory to add <code>[header]="true"</code>
+    The Filter Mode can be used by adding <code>[mode]="'filter'"</code>. It has different structure than tab any other
+    mode. It can be built by setting properties, defining own template, or using it with <code>[routerLink]</code>. To
+    make filter Mode Tabs looks properly, it's mandatory to add <code>[header]="true"</code>
     property to first tab item, or in case of custom template use different structure, as it is shown in example.
 </description>
 <component-example>
@@ -102,20 +101,26 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-tab-list [mode]="data.properties.items.mode" [compact]="data.properties.items.compact">
-        <fd-tab [header]="data.properties.items.mode === 'filter'"
-                [title]="data.properties.item1.title"
-                [glyph]="data.properties.item1.icon"
-                [count]="data.properties.item1.counter">
+        <fd-tab
+            [header]="data.properties.items.mode === 'filter'"
+            [title]="data.properties.item1.title"
+            [glyph]="data.properties.item1.icon"
+            [count]="data.properties.item1.counter"
+        >
             {{ data.properties.item1.content }}
         </fd-tab>
-        <fd-tab [title]="data.properties.item2.title2"
-                [glyph]="data.properties.item2.icon2"
-                [count]="data.properties.item2.counter2">
+        <fd-tab
+            [title]="data.properties.item2.title2"
+            [glyph]="data.properties.item2.icon2"
+            [count]="data.properties.item2.counter2"
+        >
             {{ data.properties.item2.content2 }}
         </fd-tab>
-        <fd-tab [title]="data.properties.item3.title3"
-                [glyph]="data.properties.item3.icon3"
-                [count]="data.properties.item3.counter3">
+        <fd-tab
+            [title]="data.properties.item3.title3"
+            [glyph]="data.properties.item3.icon3"
+            [count]="data.properties.item3.counter3"
+        >
             {{ data.properties.item3.content3 }}
         </fd-tab>
     </fd-tab-list>

@@ -36,7 +36,7 @@ describe('AlertComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [TestModule],
+            imports: [TestModule]
         }).compileComponents();
     }));
 
@@ -103,7 +103,7 @@ describe('AlertComponent', () => {
     });
 
     it('should persist', fakeAsync(() => {
-        service.open(TemplateTestComponent, {duration: -1});
+        service.open(TemplateTestComponent, { duration: -1 });
         service['alerts'][0].instance.ngOnInit();
         fixture.detectChanges();
         service['alerts'][0].instance.ngAfterViewInit();
@@ -115,7 +115,7 @@ describe('AlertComponent', () => {
     }));
 
     it('should support visibleTime', fakeAsync(() => {
-        service.open(TemplateTestComponent, {duration: 10});
+        service.open(TemplateTestComponent, { duration: 10 });
         service['alerts'][0].instance.ngOnInit();
         fixture.detectChanges();
         service['alerts'][0].instance.ngAfterViewInit();
@@ -128,9 +128,9 @@ describe('AlertComponent', () => {
     }));
 
     it('should handle mouseenter/mouseleave events', () => {
-        component.handleAlertMouseEvent({type: 'mouseenter'});
+        component.handleAlertMouseEvent({ type: 'mouseenter' });
         expect(component.mouseInAlert).toBeTruthy();
-        component.handleAlertMouseEvent({type: 'mouseleave'});
+        component.handleAlertMouseEvent({ type: 'mouseleave' });
         expect(component.mouseInAlert).toBeFalsy();
     });
 });

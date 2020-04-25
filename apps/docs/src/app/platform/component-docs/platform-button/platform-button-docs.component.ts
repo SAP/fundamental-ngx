@@ -58,7 +58,6 @@ export class PlatformButtonDocsComponent implements OnInit {
             icon: '',
             compact: false,
             disabled: false
-
         }
     };
 
@@ -110,7 +109,7 @@ export class PlatformButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
-    ngOnInit() { }
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }

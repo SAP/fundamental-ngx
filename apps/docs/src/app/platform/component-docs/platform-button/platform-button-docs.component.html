@@ -49,8 +49,8 @@
     Button with long text truncated
 </fd-docs-section-title>
 <description>
-    When user specifices with width of the button then text will start truncating
-    to accomdate it self in the specified width as shown below
+    When user specifices with width of the button then text will start truncating to accomdate it self in the specified
+    width as shown below
 </description>
 <component-example>
     <fdp-button-truncate-example></fdp-button-truncate-example>
@@ -59,8 +59,8 @@
 
 <separator></separator>
 
-<description>The inputs for <code>button</code> will be translated into classes attributed to fundamental-styles
-    guidelines.
+<description
+    >The inputs for <code>button</code> will be translated into classes attributed to fundamental-styles guidelines.
     <br />For example: <br />if <code>positive</code> is passed for <code>type</code>, the class
     <code>fd-button--positive</code> will be added to the element. <br />if <code>compact</code> is passed for
     <code>size</code>, the class <code>fd-button--compact</code> will be added to the element.
@@ -72,15 +72,15 @@
     The button implementation allows certain extensibility in terms of options for the inputs.
     <code>button</code> inputs don't have a restriction for the predefined values.
     <p>
-        You can pass a number of custom options to the <code>options</code> input,
-        which accepts as a parameter either a string or an array of strings.
+        You can pass a number of custom options to the <code>options</code> input, which accepts as a parameter either a
+        string or an array of strings.
     </p>
     For example,
     <code>[options]="'emphasized'"</code> will add the class <code>fd-button--emphasized</code> to the button.
     <p>
         If you'd like to add multiple options, you could use
         <code>[options]="['emphasized', 'option1', 'option2']"</code>.
-        <br>
+        <br />
         This would result in 3 classes being added to the button: <code>fd-button--emphasized</code>,
         <code>fd-button--option1</code>, and <code>fd-button--option2</code>.
     </p>
@@ -89,8 +89,14 @@
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fdp-button [type]="data.properties.type" [compact]="data.properties.compact" [disabled]="data.properties.disabled"
-        [attr.title]='data.properties.label' [width]="data.properties.width" [glyph]="data.properties.icon">
+    <fdp-button
+        [type]="data.properties.type"
+        [compact]="data.properties.compact"
+        [disabled]="data.properties.disabled"
+        [attr.title]="data.properties.label"
+        [width]="data.properties.width"
+        [glyph]="data.properties.icon"
+    >
         {{ data.properties.label }}
     </fdp-button>
 </playground>

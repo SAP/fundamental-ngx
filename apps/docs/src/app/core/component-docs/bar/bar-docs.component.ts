@@ -15,18 +15,16 @@ import * as barPageResponsiveExampleTs from '!raw-loader!./examples/bar-page-res
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-
 @Component({
     selector: 'app-bar',
-    templateUrl: './bar-docs.component.html',
+    templateUrl: './bar-docs.component.html'
 })
 export class BarDocsComponent {
-
     barDefaultExample: ExampleFile[] = [
         {
             language: 'html',
             fileName: 'bar-default-example',
-            code: barDefaultExampleHtml,
+            code: barDefaultExampleHtml
         },
         {
             language: 'typescript',
@@ -40,7 +38,7 @@ export class BarDocsComponent {
         {
             language: 'html',
             fileName: 'bar-header-example',
-            code: barHeaderExampleHtml,
+            code: barHeaderExampleHtml
         },
         {
             language: 'typescript',
@@ -54,39 +52,39 @@ export class BarDocsComponent {
         {
             language: 'html',
             fileName: 'bar-subheader-example',
-            code: barSubHeaderExampleHtml,
-        },
+            code: barSubHeaderExampleHtml
+        }
     ];
 
     barHeaderSubHeaderExample: ExampleFile[] = [
         {
             language: 'html',
             fileName: 'bar-header-subheader-example',
-            code: barHeaderSubHeaderExampleHtml,
-        },
+            code: barHeaderSubHeaderExampleHtml
+        }
     ];
 
     barFooterExample: ExampleFile[] = [
         {
             language: 'html',
             fileName: 'bar-footer-example',
-            code: barFooterExampleHtml,
-        },
+            code: barFooterExampleHtml
+        }
     ];
 
     barFloatingFooterExample: ExampleFile[] = [
         {
             language: 'html',
             fileName: 'bar-floating-footer-example',
-            code: barFloatingFooterExampleHtml,
-        },
+            code: barFloatingFooterExampleHtml
+        }
     ];
 
     barPageExample: ExampleFile[] = [
         {
             language: 'html',
             fileName: 'bar-page-example',
-            code: barPageExampleHtml,
+            code: barPageExampleHtml
         },
         {
             language: 'typescript',
@@ -100,7 +98,7 @@ export class BarDocsComponent {
         {
             language: 'html',
             fileName: 'bar-page-responsive-example',
-            code: barPageResponsiveExampleHtml,
+            code: barPageResponsiveExampleHtml
         },
         {
             language: 'typescript',
@@ -109,5 +107,4 @@ export class BarDocsComponent {
             component: 'BarPageResponsiveExampleComponent'
         }
     ];
-
 }

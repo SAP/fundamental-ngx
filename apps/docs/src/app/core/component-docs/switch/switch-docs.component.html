@@ -1,11 +1,11 @@
-<fd-docs-section-title [id]="'sizes'"
-                       [componentName]="'switch'">
+<fd-docs-section-title [id]="'sizes'" [componentName]="'switch'">
     Default switch with variations
 </fd-docs-section-title>
 
-<description>Default switch which can include a [optionalText] input to remove text. The [optionalText] input is set to
-    true by default. The
-    [compact] input will make the switch compact.</description>
+<description
+    >Default switch which can include a [optionalText] input to remove text. The [optionalText] input is set to true by
+    default. The [compact] input will make the switch compact.</description
+>
 <component-example>
     <fd-switch-sizes-example></fd-switch-sizes-example>
 </component-example>
@@ -13,8 +13,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'disabled'"
-                       [componentName]="'switch'">
+<fd-docs-section-title [id]="'disabled'" [componentName]="'switch'">
     Disabled State
 </fd-docs-section-title>
 <description>Switch can be in the disabled state, which prevents the user from interacting with it.</description>
@@ -25,8 +24,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'twoWayBinding'"
-                       [componentName]="'switch'">
+<fd-docs-section-title [id]="'twoWayBinding'" [componentName]="'switch'">
     Two-Way Binding
 </fd-docs-section-title>
 <description>It is possible to two-way bind to the checked property of the fd-switch.</description>
@@ -37,12 +35,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'semanticCompact'"
-                       [componentName]="'switch'">
+<fd-docs-section-title [id]="'semanticCompact'" [componentName]="'switch'">
     Semantic and Compact Mode
 </fd-docs-section-title>
-<description>It is possible to add semantic mode by passing <code>[semantic]="true"</code> and compact mode by passing
-    <code>[compact]="true"</code> to switch component.</description>
+<description
+    >It is possible to add semantic mode by passing <code>[semantic]="true"</code> and compact mode by passing
+    <code>[compact]="true"</code> to switch component.</description
+>
 <component-example>
     <fd-semantic-switch-example></fd-semantic-switch-example>
 </component-example>
@@ -50,8 +49,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'withReactiveForm'"
-                       [componentName]="'switch'">
+<fd-docs-section-title [id]="'withReactiveForm'" [componentName]="'switch'">
     Switch used within Reactive Form
 </fd-docs-section-title>
 <description>It is possible to use the fd-switch component within Angular Reactive Forms</description>
@@ -60,10 +58,12 @@
 </component-example>
 <code-example [exampleFiles]="switchFormExample"></code-example>
 
-<playground [schema]="schema"
-            [schemaInitialValues]="data"
-            (onFormChanges)="onSchemaValues($event)">
-    <fd-switch [disabled]="data.properties.disabled"
-               [(ngModel)]="data.properties.checked"
-               [compact]="data.properties.compact"> Example Switch</fd-switch>
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fd-switch
+        [disabled]="data.properties.disabled"
+        [(ngModel)]="data.properties.checked"
+        [compact]="data.properties.compact"
+    >
+        Example Switch</fd-switch
+    >
 </playground>

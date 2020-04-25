@@ -23,7 +23,6 @@ import { CollectionBaseInput } from '../collection-base.input';
 
 type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | T[];
 
-
 /**
  * Basic ComboBox implementation including datasource based on the
  * https://github.com/SAP/fundamental-ngx/wiki/Data-Components-Standard-for-Enterprise-scale
@@ -37,18 +36,14 @@ type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | T[];
     templateUrl: 'combo-box.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [
-        { provide: FormFieldControl, useExisting: ComboBoxComponent, multi: true }
-    ]
+    providers: [{ provide: FormFieldControl, useExisting: ComboBoxComponent, multi: true }]
 })
 export class ComboBoxComponent extends CollectionBaseInput {
-
     @Input()
     maxHeight: string = '250px';
 
     @Input()
     inShellbar: boolean = false;
-
 
     @Input()
     get dataSource(): FdpComboBoxDataSource<any> {
@@ -99,20 +94,19 @@ export class ComboBoxComponent extends CollectionBaseInput {
     protected _dataSource: FdpComboBoxDataSource<any>;
     private _dsSubscription: Subscription | null;
 
-
-    constructor(protected _cd: ChangeDetectorRef,
-                /**
-                 * This data providers is initial implementation, but in the future we expect actual Service to
-                 * handle the registry of data providers
-                 */
-                @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
-                private _renderer: Renderer2,
-                @Optional() @Self() public ngControl: NgControl,
-                @Optional() @Self() public ngForm: NgForm) {
-
+    constructor(
+        protected _cd: ChangeDetectorRef,
+        /**
+         * This data providers is initial implementation, but in the future we expect actual Service to
+         * handle the registry of data providers
+         */
+        @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
+        private _renderer: Renderer2,
+        @Optional() @Self() public ngControl: NgControl,
+        @Optional() @Self() public ngForm: NgForm
+    ) {
         super(_cd, ngControl, ngForm);
     }
-
 
     ngOnInit(): void {
         // if we have both prefer dataSource
@@ -120,7 +114,6 @@ export class ComboBoxComponent extends CollectionBaseInput {
             this.dataSource = new ComboBoxDataSource(this.providers.get(this.entityClass));
         }
     }
-
 
     /**
      * FD combo is missing ID and name therefore we need to use render to set it manually
@@ -135,7 +128,6 @@ export class ComboBoxComponent extends CollectionBaseInput {
         this.patchQueryMethod();
         super.ngAfterViewInit();
     }
-
 
     // writeValue(value: any): void {
     //     super.writeValue(value);
@@ -158,7 +150,6 @@ export class ComboBoxComponent extends CollectionBaseInput {
         }
     }
 
-
     onContainerClick(event: MouseEvent): void {
         if (this._elementRef && !this.focused) {
             this.input().focus();
@@ -168,7 +159,6 @@ export class ComboBoxComponent extends CollectionBaseInput {
     protected input(): HTMLInputElement {
         return this._comboBox.searchInputElement.nativeElement;
     }
-
 
     private initializeDS(ds: FdpComboBoxDataSource<any>): void {
         this._suggestions = [];
@@ -196,15 +186,16 @@ export class ComboBoxComponent extends CollectionBaseInput {
          * places. If any new data comes in either you do a search and you want to pass initial data
          * its here.
          */
-        this._dsSubscription = initDataSource.open().pipe(
-            takeUntil(this._destroyed)
-        ).subscribe(data => {
-            this._suggestions = data || [];
+        this._dsSubscription = initDataSource
+            .open()
+            .pipe(takeUntil(this._destroyed))
+            .subscribe((data) => {
+                this._suggestions = data || [];
 
-            this.elementTypeIsObject = isJsObject(this._suggestions[0]);
-            this.stateChanges.next('initDataSource.open().');
-            this._cd.markForCheck();
-        });
+                this.elementTypeIsObject = isJsObject(this._suggestions[0]);
+                this.stateChanges.next('initDataSource.open().');
+                this._cd.markForCheck();
+            });
         initDataSource.dataProvider.setLookupKey(this.lookupKey);
 
         // initial data fetch
@@ -238,7 +229,7 @@ export class ComboBoxComponent extends CollectionBaseInput {
     }
 
     protected get ds(): ComboBoxDataSource<any> {
-        return (<ComboBoxDataSource<any>>this.dataSource);
+        return <ComboBoxDataSource<any>>this.dataSource;
     }
 
     // bindings as functions
@@ -247,6 +238,4 @@ export class ComboBoxComponent extends CollectionBaseInput {
         return this.displayValue(value);
     };
     // @formatter:off
-
 }
-

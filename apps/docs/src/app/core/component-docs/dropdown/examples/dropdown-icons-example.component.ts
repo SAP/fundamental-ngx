@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './dropdown-icons-example.component.html'
 })
 export class DropdownIconsExampleComponent {
-
     values = [
         { name: 'Photo Voltaic', icon: 'photo-voltaic' },
         { name: 'Settings', icon: 'settings' },
@@ -14,5 +13,4 @@ export class DropdownIconsExampleComponent {
         { name: 'World', icon: 'world' },
         { name: 'Shield', icon: 'shield' }
     ];
-
 }

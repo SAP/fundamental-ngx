@@ -9,13 +9,13 @@ export const RTL_LANGUAGE = new InjectionToken<string[]>('RtlLanguage');
  * Service taking care of RTL trough behavior subject
  * language list is used to determine if rtl should be enabled at start
  * user can overwrite default languages by using injection token RtlLanguageToken
-*/
+ */
 export class RtlService {
     rtl: BehaviorSubject<boolean>;
     constructor(@Optional() @Inject(RTL_LANGUAGE) injectedRtlLanguages: string[]) {
-        injectedRtlLanguages = injectedRtlLanguages || DefaultRtlLanguages
+        injectedRtlLanguages = injectedRtlLanguages || DefaultRtlLanguages;
 
-        const filtered = injectedRtlLanguages.filter(language => navigator.language.includes(language));
+        const filtered = injectedRtlLanguages.filter((language) => navigator.language.includes(language));
 
         this.rtl = new BehaviorSubject(filtered.length > 0);
     }

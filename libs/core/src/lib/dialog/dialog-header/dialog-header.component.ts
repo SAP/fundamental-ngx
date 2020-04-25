@@ -1,12 +1,4 @@
-import {
-    AfterContentInit,
-    Component,
-    ContentChildren,
-    Inject,
-    Optional,
-    QueryList,
-    TemplateRef
-} from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Inject, Optional, QueryList, TemplateRef } from '@angular/core';
 import { TemplateDirective } from '../../utils/directives/template/template.directive';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 
@@ -25,7 +17,6 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class
     templateUrl: './dialog-header.component.html'
 })
 export class DialogHeaderComponent implements AfterContentInit {
-
     /** @hidden */
     headerTemplate: TemplateRef<any>;
 
@@ -35,8 +26,7 @@ export class DialogHeaderComponent implements AfterContentInit {
     /** @hidden */
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
-    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) { }
-
+    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -45,7 +35,7 @@ export class DialogHeaderComponent implements AfterContentInit {
 
     /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
-        this.customTemplates.forEach(template => {
+        this.customTemplates.forEach((template) => {
             switch (template.getName()) {
                 case 'header':
                     this.headerTemplate = template.templateRef;

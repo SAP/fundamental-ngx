@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-action-bar-simple-example',
@@ -30,4 +30,3 @@ export class PlatformActionbarExamplesComponent implements OnInit {
         alert(item.label);
     }
 }
-

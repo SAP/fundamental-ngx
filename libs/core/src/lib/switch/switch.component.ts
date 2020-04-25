@@ -31,7 +31,7 @@ let switchUniqueId: number = 0;
     ],
     host: {
         class: 'fd-form__item fd-form__item--check fd-switch-custom',
-        '[attr.id]': 'id',
+        '[attr.id]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -73,7 +73,6 @@ export class SwitchComponent implements ControlValueAccessor {
     @Input()
     ariaLabelledby: string = null;
 
-
     /**
      * Event fired when the state of the switch changes.
      * *$event* can be used to retrieve the new state of the switch.
@@ -82,12 +81,12 @@ export class SwitchComponent implements ControlValueAccessor {
     readonly checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
-    onChange: any = () => { };
+    onChange: any = () => {};
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {};
 
-    constructor(private changeDetectorRef: ChangeDetectorRef) { }
+    constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
     /** Set focus on the input element. */
     public focus(): void {
@@ -145,5 +144,4 @@ export class SwitchComponent implements ControlValueAccessor {
         this.disabled = isDisabled;
         this.changeDetectorRef.detectChanges();
     }
-
 }

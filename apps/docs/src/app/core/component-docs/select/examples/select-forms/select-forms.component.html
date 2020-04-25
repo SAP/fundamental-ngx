@@ -7,7 +7,7 @@
                 <fd-option value="kiwi">Kiwi</fd-option>
                 <fd-option value="strawberry">Strawberry</fd-option>
             </fd-select>
-            Selected Value: {{customForm.controls.selectControl.value}} <br />
+            Selected Value: {{ customForm.controls.selectControl.value }} <br />
         </div>
         <div fd-form-item>
             <fd-select formControlName="disabledSelectControl">
@@ -16,13 +16,12 @@
                 <fd-option value="kiwi">Kiwi</fd-option>
                 <fd-option value="strawberry">Strawberry</fd-option>
             </fd-select>
-            Selected Value: {{customForm.controls.disabledSelectControl.value}} <br />
+            Selected Value: {{ customForm.controls.disabledSelectControl.value }} <br />
 
-            Disabled: {{customForm.controls.disabledSelectControl.disabled}}<br/>
+            Disabled: {{ customForm.controls.disabledSelectControl.disabled }}<br />
         </div>
     </fieldset>
 </form>
 
-Form Touched: {{customForm.touched}} <br />
-Form Dirty: {{customForm.dirty}} <br />
-
+Form Touched: {{ customForm.touched }} <br />
+Form Dirty: {{ customForm.dirty }} <br />

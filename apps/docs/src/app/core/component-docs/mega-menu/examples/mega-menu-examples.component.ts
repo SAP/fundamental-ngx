@@ -10,13 +10,11 @@ export class MegaMenuExampleComponent {}
     selector: 'fd-mega-menu-group-example',
     templateUrl: './mega-menu-group-example.component.html'
 })
-export class MegaMenuGroupExampleComponent { }
-
+export class MegaMenuGroupExampleComponent {}
 
 @Component({
     selector: 'fd-mega-menu-position-example',
     templateUrl: './mega-menu-position-example.component.html',
     styleUrls: ['mega-menu-position-example.component.scss']
-
 })
-export class MegaMenuPositionExampleComponent { }
+export class MegaMenuPositionExampleComponent {}

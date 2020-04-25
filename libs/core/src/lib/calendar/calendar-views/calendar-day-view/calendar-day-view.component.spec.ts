@@ -13,8 +13,7 @@ describe('CalendarDayViewComponent', () => {
         TestBed.configureTestingModule({
             declarations: [CalendarDayViewComponent],
             providers: [CalendarService]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -47,7 +46,7 @@ describe('CalendarDayViewComponent', () => {
             }
             return b.concat(a);
         });
-        const selected = calendarDays.find(cell => cell.selected);
+        const selected = calendarDays.find((cell) => cell.selected);
         expect(selected.date.toDateString()).toBe(component.selectedDate.toDateString());
     });
 
@@ -56,7 +55,7 @@ describe('CalendarDayViewComponent', () => {
         component.calType = 'range';
         component.ngOnInit();
         const dayPicked = component.dayViewGrid[2][3];
-        component.selectedRangeDateChange.subscribe((date: { start: FdDate, end: FdDate }) =>
+        component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) =>
             expect(date.start.toDateString()).toBe(dayPicked.date.toDateString())
         );
         component.selectDate(dayPicked);
@@ -69,7 +68,7 @@ describe('CalendarDayViewComponent', () => {
         const dayStartPicked = component.dayViewGrid[2][3];
         const dayEndPicked = component.dayViewGrid[3][3];
         component.selectedRangeDate = { start: dayStartPicked.date, end: null };
-        component.selectedRangeDateChange.subscribe((date: { start: FdDate, end: FdDate }) =>
+        component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) =>
             expect(date.end.toDateString()).toBe(dayEndPicked.date.toDateString())
         );
         component.selectDate(dayEndPicked);
@@ -140,7 +139,7 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed.month = 2;
         component.startingDayOfWeek = 2;
         component.ngOnInit();
-        expect(component.dayViewGrid.map(day => day.map(_day => _day.date.day))).toEqual([
+        expect(component.dayViewGrid.map((day) => day.map((_day) => _day.date.day))).toEqual([
             [27, 28, 29, 30, 31, 1, 2],
             [3, 4, 5, 6, 7, 8, 9],
             [10, 11, 12, 13, 14, 15, 16],
@@ -190,7 +189,7 @@ describe('CalendarDayViewComponent', () => {
         component.ngOnInit();
         component.selectedRangeDate = { start: date, end: date };
         component.refreshHoverRange(component.calendarDayList[0]);
-        expect(component.calendarDayList.filter(_day => _day.hoverRange).length).toBe(13);
+        expect(component.calendarDayList.filter((_day) => _day.hoverRange).length).toBe(13);
     });
 
     it('should change id of day focused', () => {
@@ -229,10 +228,10 @@ describe('CalendarDayViewComponent', () => {
         component.selectDate(newlyChosenDate);
         expect(component.selectedRangeDate.start).toBe(newlyChosenDate.date);
         expect(newlyChosenDate.selected).toBe(true);
-        expect(component.calendarDayList.filter(_day => _day.selectedRange).length).toBe(0);
+        expect(component.calendarDayList.filter((_day) => _day.selectedRange).length).toBe(0);
         component.selectDate(secondNewlyChosenDate);
         expect(component.selectedRangeDate).toEqual({ start: newlyChosenDate.date, end: secondNewlyChosenDate.date });
-        expect(component.calendarDayList.filter(_day => _day.selectedRange).length).toBe(24);
+        expect(component.calendarDayList.filter((_day) => _day.selectedRange).length).toBe(24);
         expect(newlyChosenDate.selected).toBe(true);
         expect(secondNewlyChosenDate.selected).toBe(true);
     });
@@ -253,10 +252,10 @@ describe('CalendarDayViewComponent', () => {
         component.selectDate(newlyChosenDate);
         expect(component.selectedRangeDate.start).toBe(newlyChosenDate.date);
         expect(newlyChosenDate.selected).toBe(true);
-        expect(component.calendarDayList.filter(_day => _day.disabled).length).toBe(5);
+        expect(component.calendarDayList.filter((_day) => _day.disabled).length).toBe(5);
         component.selectDate(secondNewlyChosenDate);
         expect(component.selectedRangeDate).toEqual({ start: newlyChosenDate.date, end: secondNewlyChosenDate.date });
-        expect(component.calendarDayList.filter(_day => _day.disabled).length).toBe(10);
+        expect(component.calendarDayList.filter((_day) => _day.disabled).length).toBe(10);
         expect(newlyChosenDate.selected).toBe(true);
         expect(secondNewlyChosenDate.selected).toBe(true);
     });

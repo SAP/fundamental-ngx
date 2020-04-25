@@ -25,10 +25,21 @@ export class ButtonDocsComponent {
                     },
                     fdType: {
                         type: 'string',
-                        enum: ['', 'standard', 'positive', 'negative', 'attention', 'half', 'ghost', 'transparent', 'emphasized', 'menu']
+                        enum: [
+                            '',
+                            'standard',
+                            'positive',
+                            'negative',
+                            'attention',
+                            'half',
+                            'ghost',
+                            'transparent',
+                            'emphasized',
+                            'menu'
+                        ]
                     },
                     fdMenu: {
-                        type: 'boolean',
+                        type: 'boolean'
                     },
                     compact: {
                         type: 'boolean'

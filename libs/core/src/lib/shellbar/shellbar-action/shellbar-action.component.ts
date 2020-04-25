@@ -19,7 +19,6 @@ import { ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulat
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarActionComponent {
-
     /** The glyph (icon) name */
     @Input()
     glyph: string;
@@ -39,5 +38,4 @@ export class ShellbarActionComponent {
     /** Represents the number of notifications. */
     @Input()
     notificationCount: number;
-
 }

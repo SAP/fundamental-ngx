@@ -5,11 +5,7 @@ import { ResizeHandleDirective } from './resize-handle.directive';
 
 @NgModule({
     imports: [CommonModule],
-    exports: [
-        ResizeDirective,
-        ResizeHandleDirective
-    ],
+    exports: [ResizeDirective, ResizeHandleDirective],
     declarations: [ResizeDirective, ResizeHandleDirective]
 })
-export class ResizeModule {
-}
+export class ResizeModule {}

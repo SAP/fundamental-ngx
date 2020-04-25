@@ -6,10 +6,12 @@ import { Libraries } from '../../utilities/libraries';
     selector: 'fd-docs-section-title',
     template: `
         <h2 [id]="id" #title class="docs-header-link">
-            <a class="docs-markdown-a"
-               [attr.aria-describedby]="id"
-               [routerLink]="'/' + currentLibrary + '/' + componentName"
-               [fragment]="id">
+            <a
+                class="docs-markdown-a"
+                [attr.aria-describedby]="id"
+                [routerLink]="'/' + currentLibrary + '/' + componentName"
+                [fragment]="id"
+            >
                 <fd-icon [glyph]="'chain-link'"></fd-icon>
             </a>
             <ng-content></ng-content>
@@ -18,7 +20,6 @@ import { Libraries } from '../../utilities/libraries';
     styleUrls: ['./docs-section-title.component.scss']
 })
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
-
     @ViewChild('title', { read: ElementRef })
     sectionTitle: ElementRef;
 
@@ -41,7 +42,7 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.activatedRoute.fragment.subscribe(fragment => {
+        this.activatedRoute.fragment.subscribe((fragment) => {
             this.idFromUrl = fragment;
             this.handleUrlFragment();
         });

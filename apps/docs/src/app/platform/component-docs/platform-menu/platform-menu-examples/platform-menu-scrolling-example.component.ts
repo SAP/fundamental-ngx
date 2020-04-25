@@ -7,5 +7,5 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformMenuScrollingExampleComponent implements OnInit {
-    ngOnInit() { }
+    ngOnInit() {}
 }

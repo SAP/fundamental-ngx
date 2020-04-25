@@ -17,15 +17,7 @@ import { PlatformMenuModule } from '../menu/public_api';
         PipeModule,
         PlatformMenuModule
     ],
-    exports: [
-        SearchFieldComponent,
-        SearchFieldSuggestionDirective,
-        SuggestionMatchesPipe
-    ],
-    declarations: [
-        SearchFieldComponent,
-        SearchFieldSuggestionDirective,
-        SuggestionMatchesPipe
-    ]
+    exports: [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe],
+    declarations: [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe]
 })
-export class PlatformSearchFieldModule { }
+export class PlatformSearchFieldModule {}

@@ -5,32 +5,32 @@ import { Component } from '@angular/core';
     templateUrl: './button-menu-example.component.html',
     styleUrls: ['./button-examples.component.scss']
 })
-export class ButtonMenuExampleComponent { }
+export class ButtonMenuExampleComponent {}
 
 @Component({
     selector: 'fd-button-types-example',
     templateUrl: './button-types-example.component.html',
     styleUrls: ['./button-examples.component.scss']
 })
-export class ButtonTypesExampleComponent { }
+export class ButtonTypesExampleComponent {}
 
 @Component({
     selector: 'fd-button-sizes-example',
     templateUrl: './button-sizes-example.component.html',
     styleUrls: ['./button-examples.component.scss']
 })
-export class ButtonSizesExampleComponent { }
+export class ButtonSizesExampleComponent {}
 
 @Component({
     selector: 'fd-button-icons-example',
     templateUrl: './button-icons-example.component.html',
     styleUrls: ['./button-examples.component.scss']
 })
-export class ButtonIconsExampleComponent { }
+export class ButtonIconsExampleComponent {}
 
 @Component({
     selector: 'fd-button-state-example',
     templateUrl: './button-state-example.component.html',
     styleUrls: ['./button-examples.component.scss']
 })
-export class ButtonStateExampleComponent { }
+export class ButtonStateExampleComponent {}

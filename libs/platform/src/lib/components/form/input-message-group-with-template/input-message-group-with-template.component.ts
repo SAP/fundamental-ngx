@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Optional, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    Optional,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormInputMessageGroupComponent, RtlService } from '@fundamental-ngx/core';
 
 /**
@@ -15,7 +22,6 @@ import { FormInputMessageGroupComponent, RtlService } from '@fundamental-ngx/cor
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputMessageGroupWithTemplate extends FormInputMessageGroupComponent {
-
     /**
      * Custom trigger element.
      */

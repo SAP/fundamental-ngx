@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './table-checkboxes-example.component.html'
 })
 export class TableCheckboxesExampleComponent {
-
     selectMasterModel = false;
 
     tableRows = [
@@ -57,7 +56,7 @@ export class TableCheckboxesExampleComponent {
     }
 
     selectMaster(checked: boolean) {
-        this.selectMasterModel = checked
+        this.selectMasterModel = checked;
         if (checked) {
             this._selectAll();
         } else {
@@ -66,14 +65,14 @@ export class TableCheckboxesExampleComponent {
     }
 
     private _selectAll(): void {
-        this.tableRows.forEach(row => row.checked = true);
+        this.tableRows.forEach((row) => (row.checked = true));
     }
 
     private _deselectAll(): void {
-        this.tableRows.forEach(row => row.checked = false);
+        this.tableRows.forEach((row) => (row.checked = false));
     }
 
     private _allSelected(): boolean {
-        return !this.tableRows.find(_row => !_row.checked);
+        return !this.tableRows.find((_row) => !_row.checked);
     }
 }

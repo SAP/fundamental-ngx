@@ -5,8 +5,10 @@ import { closestElement } from './closest-element';
 @Component({
     template: `
         <article class="article-class">
-            <div id="div-01" class="div-class">Here is div-01
-                <div id="div-02" class="div-class">Here is div-02
+            <div id="div-01" class="div-class">
+                Here is div-01
+                <div id="div-02" class="div-class">
+                    Here is div-02
                     <div id="div-03">Here is div-03</div>
                 </div>
             </div>

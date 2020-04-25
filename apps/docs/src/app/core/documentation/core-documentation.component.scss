@@ -13,7 +13,7 @@
     flex-grow: 1;
     overflow-y: scroll;
     padding-bottom: 2rem;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     padding-top: 52px;
 
     &:focus {
@@ -38,7 +38,7 @@
     transition: 0.3s opacity ease-in-out;
     visibility: hidden;
 
-    @media screen and (min-width: 992px){
+    @media screen and (min-width: 992px) {
         display: none;
         width: 0;
         height: 0;
@@ -66,20 +66,20 @@
     overflow: hidden;
 }
 
-@media (max-width: 992px){
+@media (max-width: 992px) {
     .content-margin {
         padding: 10px 60px;
         width: auto;
     }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .content-margin {
         padding: 10px 40px;
     }
 }
 
-@media (max-width: 576px){
+@media (max-width: 576px) {
     .content-margin {
         padding: 10px 20px;
     }

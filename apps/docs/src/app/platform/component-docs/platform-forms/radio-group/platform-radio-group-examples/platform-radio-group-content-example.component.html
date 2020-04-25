@@ -17,7 +17,13 @@
     </fieldset>
     <fieldset fd-fieldset>
         <p>Example 2: Inline Cozy Radio Button Group</p>
-        <fdp-radio-group [id]="'myid'" [name]="'radio2'" [contentDensity]="'cozy'" [isInline]="true" formControlName="example2">
+        <fdp-radio-group
+            [id]="'myid'"
+            [name]="'radio2'"
+            [contentDensity]="'cozy'"
+            [isInline]="true"
+            formControlName="example2"
+        >
             <fdp-radio-button *ngFor="let season of seasons" [value]="season">
                 {{ season }}
             </fdp-radio-button>
