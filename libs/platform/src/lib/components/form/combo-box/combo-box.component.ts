@@ -192,7 +192,6 @@ export class ComboBoxComponent extends CollectionBaseInput {
             throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
         }
         /**
-		 * 
          * This is single point of data entry to the component. We dont want to set data on different
          * places. If any new data comes in either you do a search and you want to pass initial data
          * its here.
@@ -229,7 +228,7 @@ export class ComboBoxComponent extends CollectionBaseInput {
     private patchQueryMethod() {
         if (this._comboBox) {
             this._comboBox.handleSearchTermChange = () => {
-                    this.ds.match(this._comboBox.inputTextValue);
+                this.ds.match(this._comboBox.inputTextValue);
 
                 if (this._comboBox.popoverComponent) {
                     this._comboBox.popoverComponent.updatePopover();
