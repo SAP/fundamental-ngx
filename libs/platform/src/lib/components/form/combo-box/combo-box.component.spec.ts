@@ -157,7 +157,6 @@ describe('ComboBoxComponent', () => {
         fixture.detectChanges();
 
         // check dropdown
-        console.log('data', host.comboBox._suggestions);
         expect(host.comboBox._suggestions.length).toBe(3);
     });
 });
