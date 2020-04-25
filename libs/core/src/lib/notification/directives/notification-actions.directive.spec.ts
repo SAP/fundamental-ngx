@@ -4,16 +4,13 @@ import { NotificationModule } from '@fundamental-ngx/core';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
-    template: `
-        <li #directiveElement fd-notification-actions>Notification Test</li>
-    `
+    template: ` <li #directiveElement fd-notification-actions>Notification Test</li> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
 describe('NotificationActionsDirective', () => {
-
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 

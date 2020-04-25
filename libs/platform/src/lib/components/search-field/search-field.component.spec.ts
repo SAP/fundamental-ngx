@@ -1,10 +1,11 @@
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import {
-    async,
-    ComponentFixture,
-    TestBed,
-    inject
-} from '@angular/core/testing';
-import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem, SuggestionMatchesPipe } from './search-field.component';
+    SearchFieldComponent,
+    SearchInput,
+    SuggestionItem,
+    ValueLabelItem,
+    SuggestionMatchesPipe
+} from './search-field.component';
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { createKeyboardEvent } from '../../testing/event-objects';
@@ -14,7 +15,6 @@ import { ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
 import { PlatformSearchFieldModule } from './search-field.module';
 import { RtlService } from '@fundamental-ngx/core';
 import { DataProvider, SearchFieldDataSource } from '../../domain/public_api';
-
 
 const CATEGORIES: ValueLabelItem[] = [
     { value: 'Fruits', label: 'Fruits' },
@@ -43,12 +43,12 @@ class SearchFieldDataProvider extends DataProvider<string> {
         let data = DATA;
         if (params['keyword']) {
             const keyword = params['keyword'].toLowerCase();
-            data = data.filter(item => (item.value.toLowerCase().indexOf(keyword) > -1));
+            data = data.filter((item) => item.value.toLowerCase().indexOf(keyword) > -1);
         }
         if (params['category']) {
-            data = data.filter(item => item.category === params['category']);
+            data = data.filter((item) => item.category === params['category']);
         }
-        return of(data.map(item => item.value));
+        return of(data.map((item) => item.value));
     }
 }
 
@@ -60,7 +60,8 @@ function getDropdownItems(menu: Element): NodeList {
 @Component({
     selector: 'fdp-test',
     template: `
-        <fdp-search-field #component
+        <fdp-search-field
+            #component
             [placeholder]="placeholder"
             [suggestions]="suggestions"
             [categories]="categories"
@@ -71,7 +72,9 @@ function getDropdownItems(menu: Element): NodeList {
             [disabled]="disabled"
             (inputChange)="onInputChange($event)"
             (searchSubmit)="onSearchSubmit($event)"
-            (cancelSearch)="onCancelSearch($event)"> </fdp-search-field>
+            (cancelSearch)="onCancelSearch($event)"
+        >
+        </fdp-search-field>
         <button #outsideButton>Outside</button>
     `
 })
@@ -92,7 +95,7 @@ class TestComponent {
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
 
-    constructor() { }
+    constructor() {}
 
     onInputChange($event) {
         this.inputValue = $event;
@@ -115,15 +118,9 @@ describe('SearchFieldComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                TestComponent
-            ],
-            imports: [
-                PlatformSearchFieldModule
-            ],
-            providers: [
-                RtlService
-            ]
+            declarations: [TestComponent],
+            imports: [PlatformSearchFieldModule],
+            providers: [RtlService]
         }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
@@ -162,7 +159,6 @@ describe('SearchFieldComponent', () => {
 
         const submitButton: ElementRef = fixture.debugElement.query(By.css('.search-field--submit'));
         expect(submitButton.nativeElement.id).toContain('fdp-search-field-submit-');
-
 
         // simulate keyboard entry
         const textInput = fixture.debugElement.query(By.css('input.fd-input'));
@@ -293,7 +289,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // click on category button
-        const button = fixture.debugElement.query(By.css('.search-field--category-button'))
+        const button = fixture.debugElement.query(By.css('.search-field--category-button'));
         button.nativeElement.click();
         fixture.detectChanges();
 
@@ -453,7 +449,7 @@ describe('SearchFieldComponent', () => {
             { value: 'Bell Pepper' },
             { value: 'Carrot' },
             { value: 'Cabbage' },
-            { value: 'Cucumber' },
+            { value: 'Cucumber' }
         ];
         fixture.detectChanges();
 
@@ -511,7 +507,6 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should emit a "searchSubmit" event when user selects from dropdown', () => {
-
         // set type ahead list
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
@@ -534,7 +529,6 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should emit a "searchSubmit" event and close the dropdown when user clicks keyboard enter in input field', () => {
-
         // set type ahead list
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
@@ -559,7 +553,6 @@ describe('SearchFieldComponent', () => {
     });
 
     it('should not emit a "searchSubmit" event when user clicks keyboard enter in input field and the input field is null', () => {
-
         // set type ahead list
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
@@ -752,13 +745,13 @@ describe('SearchFieldComponent', () => {
         expect(menuEls.length).toBe(0);
         expect(component.showDropdown).toBeFalsy();
     });
-
 });
 
 @Component({
     selector: 'fdp-test',
     template: `
-        <fdp-search-field #component
+        <fdp-search-field
+            #component
             [placeholder]="placeholder"
             [categories]="categories"
             [categoryLabel]="categoryLabel"
@@ -769,7 +762,9 @@ describe('SearchFieldComponent', () => {
             [disabled]="disabled"
             (inputChange)="onInputChange($event)"
             (searchSubmit)="onSearchSubmit($event)"
-            (cancelSearch)="onCancelSearch($event)"> </fdp-search-field>
+            (cancelSearch)="onCancelSearch($event)"
+        >
+        </fdp-search-field>
         <button #outsideButton>Outside</button>
     `
 })
@@ -790,10 +785,10 @@ class DataSourceTestComponent implements OnInit {
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
 
-    constructor() { }
+    constructor() {}
 
     ngOnInit() {
-        this.dataSource = new SearchFieldDataSource(new SearchFieldDataProvider())
+        this.dataSource = new SearchFieldDataSource(new SearchFieldDataProvider());
     }
 
     onInputChange($event) {
@@ -817,15 +812,9 @@ describe('SearchFieldComponent with DataSource', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                DataSourceTestComponent
-            ],
-            imports: [
-                PlatformSearchFieldModule
-            ],
-            providers: [
-                RtlService
-            ]
+            declarations: [DataSourceTestComponent],
+            imports: [PlatformSearchFieldModule],
+            providers: [RtlService]
         }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
@@ -876,7 +865,7 @@ describe('SearchFieldComponent with DataSource', () => {
 
     it('should be able to filter data source by category', () => {
         // click on category button
-        const button = fixture.debugElement.query(By.css('.search-field--category-button'))
+        const button = fixture.debugElement.query(By.css('.search-field--category-button'));
         button.nativeElement.click();
         fixture.detectChanges();
 
@@ -900,7 +889,5 @@ describe('SearchFieldComponent with DataSource', () => {
         expect(items.length).toBe(2);
         expect(items[0].textContent).toBe('Almond');
         expect(items[1].textContent).toBe('Walnut');
-
     });
-
 });

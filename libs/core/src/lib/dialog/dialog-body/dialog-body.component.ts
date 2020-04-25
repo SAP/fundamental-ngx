@@ -20,6 +20,8 @@ import { DIALOG_REF, DialogRef } from '../../dialog/dialog-utils/dialog-ref.clas
     }
 })
 export class DialogBodyComponent {
-    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
-                @Optional() @Inject(DIALOG_REF) public dialogRef: DialogRef) { }
+    constructor(
+        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
+        @Optional() @Inject(DIALOG_REF) public dialogRef: DialogRef
+    ) {}
 }

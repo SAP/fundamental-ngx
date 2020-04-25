@@ -79,5 +79,5 @@ export class PlatformMenuDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit() { }
+    ngOnInit() {}
 }

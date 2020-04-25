@@ -4,16 +4,13 @@ import { MenuItemDirective, MenuKeyboardService } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-menu-keyboard-support-example',
     templateUrl: 'menu-keyboard-support-example.component.html',
-    providers: [
-        MenuKeyboardService
-    ]
+    providers: [MenuKeyboardService]
 })
 export class MenuKeyboardSupportExampleComponent implements AfterViewInit {
-
     @ViewChildren(MenuItemDirective)
     menuItems: QueryList<MenuItemDirective>;
 
-    constructor (private menuKeyboardService: MenuKeyboardService) {}
+    constructor(private menuKeyboardService: MenuKeyboardService) {}
 
     public focusFirst() {
         this.menuItems.first.focus();

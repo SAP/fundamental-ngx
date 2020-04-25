@@ -12,7 +12,7 @@ const DISPLAY_NUM_PAGES = 3;
 export class PaginationService {
     /** Constant representing the default number of items per page. */
     public DEFAULT_ITEMS_PER_PAGE = 10;
-    
+
     /** @hidden */
     public MORE = -1;
 

@@ -13,11 +13,7 @@ import { NestedListStateService } from './nested-list-state.service';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        PopoverModule,
-        RouterModule
-    ],
+    imports: [CommonModule, PopoverModule, RouterModule],
     declarations: [
         NestedListDirective,
         NestedLinkDirective,
@@ -26,7 +22,7 @@ import { RouterModule } from '@angular/router';
         NestedListTitleDirective,
         NestedListHeaderDirective,
         NestedListPopoverComponent,
-        PreparedNestedListComponent,
+        PreparedNestedListComponent
     ],
     exports: [
         NestedListDirective,
@@ -36,12 +32,8 @@ import { RouterModule } from '@angular/router';
         NestedListTitleDirective,
         NestedListHeaderDirective,
         NestedListPopoverComponent,
-        PreparedNestedListComponent,
+        PreparedNestedListComponent
     ],
-    providers: [
-        MenuKeyboardService,
-        NestedListKeyboardService,
-        NestedListStateService
-    ]
+    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
 })
 export class NestedListModule {}

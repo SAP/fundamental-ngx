@@ -21,8 +21,7 @@ export default {
 const ariaLabelConst: string = 'Optioanl Label';
 
 export const Switch = () => ({
-    template:
-        `
+    template: `
         <fd-switch 
             id="sb-switch-1"
             [ariaLabel]="optionalText"
@@ -39,6 +38,6 @@ export const Switch = () => ({
         optionalText: boolean('Optional Text', false),
         semantic: boolean('Semantic Design', false),
         disabled: boolean('Disabled', false),
-        compact: boolean('Compact Mode', false),
+        compact: boolean('Compact Mode', false)
     }
 });

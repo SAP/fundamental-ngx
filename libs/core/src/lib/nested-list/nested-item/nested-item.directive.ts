@@ -1,12 +1,4 @@
-import {
-    AfterContentInit,
-    ContentChild,
-    Directive,
-    EventEmitter,
-    HostBinding,
-    Input,
-    Output
-} from '@angular/core';
+import { AfterContentInit, ContentChild, Directive, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedItemInterface } from './nested-item.interface';
@@ -14,12 +6,9 @@ import { NestedItemService } from './nested-item.service';
 
 @Directive({
     selector: '[fdNestedItem], [fd-nested-list-item]',
-    providers: [
-        NestedItemService
-    ]
+    providers: [NestedItemService]
 })
 export class NestedItemDirective implements AfterContentInit, NestedItemInterface {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list__item')
     fdNestedListItemClass: boolean = true;
@@ -39,17 +28,14 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** Get all of the children item elements */
     public get allChildrenItems(): NestedItemInterface[] {
         if (this._itemService && this._itemService.list) {
-            return this._itemService.list.nestedItems.toArray()
+            return this._itemService.list.nestedItems.toArray();
         } else {
             return [];
         }
     }
 
     /** @hidden */
-    constructor (
-        private _itemService: NestedItemService,
-        private _keyboardService: NestedListKeyboardService
-    ) {}
+    constructor(private _itemService: NestedItemService, private _keyboardService: NestedListKeyboardService) {}
 
     /** Whether item should be expanded */
     @Input() set expanded(expanded: boolean) {
@@ -85,9 +71,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
             this.linkItem.clicked.subscribe(() => this.toggle());
 
             /** Subscribe to keyboard event and throw it farther */
-            this.linkItem.keyboardTriggered.subscribe(keyboardEvent =>
-                this.keyboardTriggered.emit(keyboardEvent)
-            );
+            this.linkItem.keyboardTriggered.subscribe((keyboardEvent) => this.keyboardTriggered.emit(keyboardEvent));
         }
 
         /** Pass this element to popover child item, to allow control `expanded` value */

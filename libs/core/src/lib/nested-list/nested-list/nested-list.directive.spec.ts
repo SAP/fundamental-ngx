@@ -39,13 +39,13 @@ import { NestedListDirective } from './nested-list.directive';
     `
 })
 class TestNestedContainerComponent {
-    @ViewChild('level4List', { static: true, read: NestedListDirective})
+    @ViewChild('level4List', { static: true, read: NestedListDirective })
     level4List: NestedListDirective;
 
-    @ViewChild('level3List', { static: true, read: NestedListDirective})
+    @ViewChild('level3List', { static: true, read: NestedListDirective })
     level3List: NestedListDirective;
 
-    @ViewChild('level1List', { static: true, read: NestedListDirective})
+    @ViewChild('level1List', { static: true, read: NestedListDirective })
     level1List: NestedListDirective;
 }
 
@@ -60,9 +60,8 @@ describe('NestedListDirective', () => {
         TestBed.configureTestingModule({
             imports: [NestedListModule],
             declarations: [TestNestedContainerComponent],
-            providers: [ NestedListKeyboardService, MenuKeyboardService, NestedListStateService ]
-        })
-            .compileComponents();
+            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -77,13 +76,14 @@ describe('NestedListDirective', () => {
 
     it('Should add classes', () => {
         expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list')).toBeTruthy();
-        expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list--text-only')).toBeTruthy();
-        expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list--compact')).toBeTruthy();
+        expect(
+            (level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list--text-only')
+        ).toBeTruthy();
+        expect(
+            (level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list--compact')
+        ).toBeTruthy();
         expect((level1List as any)._elementRef.nativeElement.classList.contains('level-1')).toBeTruthy();
         expect((level3List as any)._elementRef.nativeElement.classList.contains('level-3')).toBeTruthy();
         expect((level4List as any)._elementRef.nativeElement.classList.contains('level-4')).toBeTruthy();
-    })
-
-
-
+    });
 });

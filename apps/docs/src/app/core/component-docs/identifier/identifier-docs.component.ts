@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {Schema} from '../../../schema/models/schema.model';
-import {SchemaFactoryService} from '../../../schema/services/schema-factory/schema-factory.service';
+import { Component } from '@angular/core';
+import { Schema } from '../../../schema/models/schema.model';
+import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as identifierScss from '!raw-loader!./examples/identifier-stack.component.scss';
 import * as circleSrc from '!raw-loader!./examples/circle-identifier-example.component.html';
@@ -8,8 +8,8 @@ import * as colorsSrc from '!raw-loader!./examples/colors-identifier-example.com
 import * as iconSrc from '!raw-loader!./examples/icon-identifier-example.component.html';
 import * as initialsSrc from '!raw-loader!./examples/initials-identifier-example.component.html';
 import * as transparentSrc from '!raw-loader!./examples/transparent-identifier-example.component.html';
-import {ExampleFile} from '../../../documentation/core-helpers/code-example/example-file';
-import {Icons} from '../../../documentation/utilities/icons';
+import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
     selector: 'app-identifier',

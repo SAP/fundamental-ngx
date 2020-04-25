@@ -18,4 +18,4 @@ import { Directive } from '@angular/core';
         class: 'fd-action-bar__back'
     }
 })
-export class ActionBarBackDirective { }
+export class ActionBarBackDirective {}

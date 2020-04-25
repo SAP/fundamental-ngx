@@ -6,8 +6,6 @@ import { ProductSwitchItem } from '@fundamental-ngx/core';
     templateUrl: './product-switch-list-example.component.html'
 })
 export class ProductSwitchListComponent {
-
-
     list: ProductSwitchItem[] = [
         {
             title: 'Home',
@@ -28,11 +26,11 @@ export class ProductSwitchListComponent {
         },
         {
             title: 'Guided Buying',
-            icon: 'credit-card',
+            icon: 'credit-card'
         },
         {
             title: 'Strategic Procurement',
-            icon: 'cart-3',
+            icon: 'cart-3'
         },
         {
             title: 'Vendor Managemen',
@@ -66,12 +64,11 @@ export class ProductSwitchListComponent {
         {
             title: 'S/4HANA',
             icon: 'batch-payments'
-        },
+        }
     ];
 
     productChangeHandle(products: ProductSwitchItem[]): void {
         this.list = products;
         console.log(products);
     }
-
 }

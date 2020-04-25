@@ -18,7 +18,7 @@ export class PlatformLinkDocsComponent implements OnInit {
         {
             language: 'html',
             code: standardlinkSrc,
-            fileName: 'platform-link-standard-example',
+            fileName: 'platform-link-standard-example'
         }
     ];
 
@@ -26,7 +26,7 @@ export class PlatformLinkDocsComponent implements OnInit {
         {
             language: 'html',
             code: emphasizedlinkSrc,
-            fileName: 'platform-link-emphasized-example',
+            fileName: 'platform-link-emphasized-example'
         }
     ];
 
@@ -34,7 +34,7 @@ export class PlatformLinkDocsComponent implements OnInit {
         {
             language: 'html',
             code: disabledlinkSrc,
-            fileName: 'platform-link-disabled-example',
+            fileName: 'platform-link-disabled-example'
         }
     ];
 
@@ -42,7 +42,7 @@ export class PlatformLinkDocsComponent implements OnInit {
         {
             language: 'html',
             code: disabledEmphasizedlinkSrc,
-            fileName: 'platform-link-disabled-emphasized-example',
+            fileName: 'platform-link-disabled-emphasized-example'
         }
     ];
 
@@ -50,7 +50,7 @@ export class PlatformLinkDocsComponent implements OnInit {
         {
             language: 'html',
             code: invertedlinkSrc,
-            fileName: 'platform-link-inverted-example',
+            fileName: 'platform-link-inverted-example'
         }
     ];
 
@@ -58,7 +58,7 @@ export class PlatformLinkDocsComponent implements OnInit {
         {
             language: 'html',
             code: truncatedlinkSrc,
-            fileName: 'platform-link-truncated-example',
+            fileName: 'platform-link-truncated-example'
         }
     ];
 
@@ -66,7 +66,7 @@ export class PlatformLinkDocsComponent implements OnInit {
         {
             language: 'html',
             code: iconlinkSrc,
-            fileName: 'platform-link-icon-example',
+            fileName: 'platform-link-icon-example'
         }
     ];
 

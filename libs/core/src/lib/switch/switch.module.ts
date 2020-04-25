@@ -8,4 +8,4 @@ import { FormsModule } from '@angular/forms';
     imports: [CommonModule, FormsModule],
     exports: [SwitchComponent]
 })
-export class SwitchModule { }
+export class SwitchModule {}

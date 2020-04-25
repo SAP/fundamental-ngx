@@ -31,16 +31,13 @@ import { debounceTime } from 'rxjs/operators';
     styleUrls: ['dialog.component.scss'],
     templateUrl: './dialog.component.html',
     host: {
-        'tabindex': '-1',
+        tabindex: '-1',
         '[@dialog-fade]': ''
     },
-    animations: [
-        dialogFadeNgIf
-    ],
+    animations: [dialogFadeNgIf],
     encapsulation: ViewEncapsulation.None
 })
 export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy, CssClassBuilder {
-
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -52,13 +49,13 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     @Input('dialogRef')
     set embeddedDialogRef(value: DialogRef) {
         this._dialogRef = value;
-    };
+    }
 
     /** DialogConfig - should be used for Template based Dialog implementation  */
     @Input('dialogConfig')
     set embeddedDialogConfig(value: DialogConfig) {
         this.dialogConfig = value;
-    };
+    }
 
     /** @hidden */
     @ViewChild('dialogWindow')
@@ -95,8 +92,8 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         @Optional() @Inject(DIALOG_REF) private _dialogRef: DialogRef,
         private _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef) {
-    }
+        private _changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -146,7 +143,9 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
             this.showDialogWindow ? 'fd-dialog--active' : '',
             this._class,
             this.dialogConfig.backdropClass
-        ].filter(x => x !== '').join(' ');
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
     /** @hidden */
@@ -215,7 +214,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     /** @hidden Listen on Dialog visibility */
     private _listenOnHidden(): void {
         this._subscriptions.add(
-            this._dialogRef.onHide.subscribe(isHidden => {
+            this._dialogRef.onHide.subscribe((isHidden) => {
                 this.showDialogWindow = !isHidden;
                 this.buildComponentCssClass();
             })
@@ -245,10 +244,10 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     private _listenOnWindowResize(): void {
         if (this.dialogConfig.responsivePadding) {
             this._subscriptions.add(
-                fromEvent(window, 'resize').pipe(
-                    debounceTime(100)
-                ).subscribe(() => this.adjustResponsivePadding())
-            )
+                fromEvent(window, 'resize')
+                    .pipe(debounceTime(100))
+                    .subscribe(() => this.adjustResponsivePadding())
+            );
         }
     }
 }

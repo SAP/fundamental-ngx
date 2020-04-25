@@ -14,8 +14,7 @@ import { Directive } from '@angular/core';
         '[class.fd-dialog__title]': 'true'
     }
 })
-export class DialogTitleDirective {
-}
+export class DialogTitleDirective {}
 
 /**
  * Directive that applies fundamental dialog styling to a dialog close button.
@@ -35,8 +34,7 @@ export class DialogTitleDirective {
         '[class.sap-icon--decline]': 'true'
     }
 })
-export class DialogCloseButtonDirective {
-}
+export class DialogCloseButtonDirective {}
 
 /**
  * Directive that applies fundamental dialog styling to a button.
@@ -52,5 +50,4 @@ export class DialogCloseButtonDirective {
         '[class.fd-dialog__decisive-button]': 'true'
     }
 })
-export class DialogDecisiveButtonDirective {
-}
+export class DialogDecisiveButtonDirective {}

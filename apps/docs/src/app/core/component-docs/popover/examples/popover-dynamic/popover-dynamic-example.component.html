@@ -1,5 +1,4 @@
-<fd-popover #popoverComponent [closeOnOutsideClick]="true" [focusTrapped]="true"
-            [noArrow]="false" title="top">
+<fd-popover #popoverComponent [closeOnOutsideClick]="true" [focusTrapped]="true" [noArrow]="false" title="top">
     <fd-popover-control>
         <button fd-button [glyph]="'add'" class="fd-image--circle"></button>
     </fd-popover-control>
@@ -7,7 +6,11 @@
         <fd-side-nav>
             <div fd-side-nav-main>
                 <ul fd-nested-list [textOnly]="true">
-                    <li fd-nested-list-item *ngFor="let component of componentWithTasks" (expandedChange)="updatePopover()">
+                    <li
+                        fd-nested-list-item
+                        *ngFor="let component of componentWithTasks"
+                        (expandedChange)="updatePopover()"
+                    >
                         <a fd-nested-list-link>
                             <span fd-nested-list-title>{{ component.name }}</span>
                         </a>

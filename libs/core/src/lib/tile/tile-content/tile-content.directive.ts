@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 /**
- * Directive that represents a tile content. 
+ * Directive that represents a tile content.
  * ```html
  * <div fd-tile-content>
  *    <h2 fd-tile-title>Tile Tile</h2>

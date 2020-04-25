@@ -13,8 +13,7 @@ describe('ProductSwitchBodyComponent', () => {
         TestBed.configureTestingModule({
             imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
             declarations: [ProductSwitchBodyComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

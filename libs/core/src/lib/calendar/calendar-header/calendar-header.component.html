@@ -1,6 +1,5 @@
 <header class="fd-calendar__header" aria-live="polite">
-    <div class="fd-calendar__navigation"
-         [ngClass]="{'fd-calendar__navigation--main': mobileLandscape}">
+    <div class="fd-calendar__navigation" [ngClass]="{ 'fd-calendar__navigation--main': mobileLandscape }">
         <div class="fd-calendar__action fd-calendar__action--arrow-left">
             <button
                 fd-button
@@ -22,8 +21,9 @@
                     [fdType]="'transparent'"
                     [attr.aria-label]="calendarI18nLabels.monthSelectionLabel + ' ' + monthLabel"
                     [attr.aria-selected]="isOnMonthView()"
-                    (click)="processViewChange('month', $event);"
-                    type="button">
+                    (click)="processViewChange('month', $event)"
+                    type="button"
+                >
                     {{ monthLabel }}
                 </button>
             </div>
@@ -71,13 +71,14 @@
                 type="button"
             ></button>
         </div>
-        <button fd-button
-                *ngIf="mobileLandscape"
-                (click)="emitClose()"
-                type="button"
-                [fdType]="'transparent'"
-                class="fd-calendar__close-button fd-calendar__close-button--navigation"
-                aria-label="Close">
-        </button>
+        <button
+            fd-button
+            *ngIf="mobileLandscape"
+            (click)="emitClose()"
+            type="button"
+            [fdType]="'transparent'"
+            class="fd-calendar__close-button fd-calendar__close-button--navigation"
+            aria-label="Close"
+        ></button>
     </div>
 </header>

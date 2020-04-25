@@ -1,14 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "types": ["jasmine"],
-    "paths": {
-      "@fundamental-ngx/core": ["libs/core/src/index.ts"],
-      "@fundamental-ngx/platform": ["libs/platform/src/index.ts"]
-    }
-  },
-  "angularCompilerOptions": {
-    "enableIvy": false
-  },
-  "include": ["**/*.ts"]
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "types": ["jasmine"],
+        "paths": {
+            "@fundamental-ngx/core": ["libs/core/src/index.ts"],
+            "@fundamental-ngx/platform": ["libs/platform/src/index.ts"]
+        }
+    },
+    "angularCompilerOptions": {
+        "enableIvy": false
+    },
+    "include": ["**/*.ts"]
 }

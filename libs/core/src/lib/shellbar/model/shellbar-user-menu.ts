@@ -1,5 +1,4 @@
 export interface ShellbarUserMenu {
-
     /** Text written in dropdown option */
     text: string;
 

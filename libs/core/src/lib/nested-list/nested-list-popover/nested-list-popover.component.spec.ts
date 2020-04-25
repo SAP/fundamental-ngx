@@ -14,8 +14,7 @@ describe('NestedListPopoverComponent', () => {
             imports: [PopoverModule],
             declarations: [NestedListPopoverComponent],
             providers: [MenuKeyboardService, NestedListKeyboardService]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

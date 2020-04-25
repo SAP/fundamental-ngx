@@ -2,7 +2,7 @@ import { Component, Directive, ViewEncapsulation } from '@angular/core';
 
 /**
  * Tile level actions such as add, remove, delete, sort, etc.
- * 
+ *
  * ```html
  * <fd-tile>
  *    <div fd-tile-actions>

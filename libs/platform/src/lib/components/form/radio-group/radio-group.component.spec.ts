@@ -25,13 +25,13 @@ import { FormModule, RadioModule } from '@fundamental-ngx/core';
                 </fdp-radio-group>
             </fieldset>
         </form>
-    `,
+    `
 })
 class TestComponentContent {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
     favoriteSeason: string = '';
     customForm = new FormGroup({
-        example1: new FormControl({ value: '', disabled: false }),
+        example1: new FormControl({ value: '', disabled: false })
     });
 
     @ViewChild(RadioGroupComponent)
@@ -46,7 +46,7 @@ describe('RadioGroupComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FormModule, RadioModule, ReactiveFormsModule],
-            declarations: [TestComponentContent, RadioGroupComponent, RadioButtonComponent],
+            declarations: [TestComponentContent, RadioGroupComponent, RadioButtonComponent]
         }).compileComponents();
     }));
 
@@ -137,7 +137,7 @@ describe('RadioGroupComponent', () => {
                 </fdp-radio-group>
             </fieldset>
         </form>
-    `,
+    `
 })
 class TestComponentList {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
@@ -159,7 +159,7 @@ describe('GroupRadioButtonComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FormModule, RadioModule, FormsModule],
-            declarations: [TestComponentList, RadioGroupComponent, RadioButtonComponent],
+            declarations: [TestComponentList, RadioGroupComponent, RadioButtonComponent]
         }).compileComponents();
     }));
 

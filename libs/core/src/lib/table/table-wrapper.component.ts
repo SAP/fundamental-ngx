@@ -18,14 +18,11 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, ViewE
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableWrapperComponent implements AfterContentInit {
-
-    constructor(
-        private elementRef: ElementRef
-    ) {}
+    constructor(private elementRef: ElementRef) {}
 
     public ngAfterContentInit(): void {
         if (this.elementRef.nativeElement && this.elementRef.nativeElement.firstChild) {
-            this.elementRef.nativeElement.firstChild.classList.add('fd-table')
+            this.elementRef.nativeElement.firstChild.classList.add('fd-table');
         }
     }
 }

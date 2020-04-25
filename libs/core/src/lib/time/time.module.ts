@@ -8,7 +8,6 @@ import { OnlyDigitsDirective } from '../utils/directives/only-digits/only-digits
 import { FormModule } from '../form/form.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 
-
 @NgModule({
     declarations: [TimeComponent, OnlyDigitsDirective],
     imports: [CommonModule, FormsModule, FormModule, ButtonModule, PipeModule],

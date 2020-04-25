@@ -20,7 +20,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelHeadComponent {
-
     /** @hidden */
     @HostBinding('class.fd-panel__head')
     fdPanelHeadClass = true;

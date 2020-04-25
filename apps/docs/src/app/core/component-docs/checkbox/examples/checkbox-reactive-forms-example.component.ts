@@ -1,12 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {map} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-checkbox-reactive-forms-example',
     template: `
         <form [formGroup]="registrationForm">
-            <fd-checkbox formControlName="acceptAll" [tristate]="true" [tristateSelectable]="false" label="Accept all"></fd-checkbox>
+            <fd-checkbox
+                formControlName="acceptAll"
+                [tristate]="true"
+                [tristateSelectable]="false"
+                label="Accept all"
+            ></fd-checkbox>
             <fieldset formGroupName="agreements">
                 <fd-checkbox formControlName="termsAndConditions" label="I accept Terms and Conditions"></fd-checkbox>
                 <fd-checkbox formControlName="marketing" label="I want to receive Marketing Materials"></fd-checkbox>
@@ -14,19 +19,18 @@ import {map} from 'rxjs/operators';
             </fieldset>
         </form>
 
-        <br>
+        <br />
 
-        Form value: {{registrationForm.getRawValue() | json}}
+        Form value: {{ registrationForm.getRawValue() | json }}
     `
 })
 export class CheckboxReactiveFormsExampleComponent implements OnInit {
-
     public registrationForm = new FormGroup({
         acceptAll: new FormControl(false),
         agreements: new FormGroup({
             marketing: new FormControl(false),
             newsletter: new FormControl(false),
-            termsAndConditions: new FormControl(false),
+            termsAndConditions: new FormControl(false)
         })
     });
 
@@ -40,33 +44,37 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
             marketing: accept,
             newsletter: accept,
             termsAndConditions: accept
-        })
+        });
     }
 
     private setAgreementsOnAcceptAllChange(): void {
-        this.registrationForm.get('acceptAll').valueChanges.subscribe(value => this.acceptAll(value));
+        this.registrationForm.get('acceptAll').valueChanges.subscribe((value) => this.acceptAll(value));
     }
 
     private setControlOnAgreementsChange(): void {
-        this.registrationForm.get('agreements').valueChanges.pipe(
-            map(agreements => this.getValuesFromObject(agreements)),
-            map((agreementsValues: boolean[]) => {
-                const agreeAll = agreementsValues.reduce((overall, value) => value && overall, true);
-                const declineAll = agreementsValues.reduce((overall, value) => !value && overall, true);
-                if (agreeAll) {
-                    return true;
-                } else if (declineAll) {
-                    return false;
-                } else {
-                    return null;
-                }
-            })
-        ).subscribe(acceptAllValue => this.registrationForm.get('acceptAll').setValue(acceptAllValue, {emitEvent: false}))
+        this.registrationForm
+            .get('agreements')
+            .valueChanges.pipe(
+                map((agreements) => this.getValuesFromObject(agreements)),
+                map((agreementsValues: boolean[]) => {
+                    const agreeAll = agreementsValues.reduce((overall, value) => value && overall, true);
+                    const declineAll = agreementsValues.reduce((overall, value) => !value && overall, true);
+                    if (agreeAll) {
+                        return true;
+                    } else if (declineAll) {
+                        return false;
+                    } else {
+                        return null;
+                    }
+                })
+            )
+            .subscribe((acceptAllValue) =>
+                this.registrationForm.get('acceptAll').setValue(acceptAllValue, { emitEvent: false })
+            );
     }
 
     // This is equivalent for `Object.values` not supported by IE11
     private getValuesFromObject(obj: Object): any[] {
-        return Object.keys(obj).map(e => obj[e]);
+        return Object.keys(obj).map((e) => obj[e]);
     }
 }
-

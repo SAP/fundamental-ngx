@@ -4,7 +4,6 @@ import { isSelectItem } from '../../domain/data-model';
 import { isFunction, isJsObject } from '../../utils/lang';
 import { SelectItem } from '../../domain/data-model';
 
-
 /**
  * Defines specific behavior for Input controls which deals with list of values including:
  *  - Select
@@ -27,7 +26,6 @@ export abstract class CollectionBaseInput extends BaseInput {
     @Input()
     lookupKey: string;
 
-
     /**
      * When we deal with unknown object we can use `displayKey` to retrieve value from specific
      * property of the object to act as display value.
@@ -37,12 +35,11 @@ export abstract class CollectionBaseInput extends BaseInput {
     @Input()
     displayKey: string;
 
-
     protected lookupValue(item: any): string {
         if (isSelectItem(item)) {
-            return (this.lookupKey && item) ? item.value[this.lookupKey] : item.value;
+            return this.lookupKey && item ? item.value[this.lookupKey] : item.value;
         } else {
-            return (this.lookupKey && item) ? item[this.lookupKey] : item;
+            return this.lookupKey && item ? item[this.lookupKey] : item;
         }
     }
 
@@ -56,4 +53,3 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 }
-

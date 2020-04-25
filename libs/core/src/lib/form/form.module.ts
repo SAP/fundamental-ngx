@@ -31,7 +31,7 @@ import { PopoverModule } from '../popover/popover.module';
         FormLegendDirective,
         FormMessageComponent,
         FormInputMessageGroupComponent,
-        FormGroupComponent,
+        FormGroupComponent
     ]
 })
-export class FormModule { }
+export class FormModule {}

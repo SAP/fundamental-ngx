@@ -5,7 +5,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: 'fd-bar-element',
+    selector: 'fd-bar-element'
 })
 export class BarElementDirective {
     /** Whether the element should take the whole width of the container. */

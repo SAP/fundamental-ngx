@@ -13,7 +13,6 @@ export function TIME_FORMAT_FACTORY() {
     useFactory: TIME_FORMAT_FACTORY
 })
 export abstract class TimeFormatParser {
-
     /**
      * Should take in a string value and return a Time object.
      * @param value String to convert to a time object.
@@ -38,7 +37,6 @@ export abstract class TimeFormatParser {
  */
 @Injectable()
 export class TimeFormatParserDefault extends TimeFormatParser {
-
     /**
      * Takes in a string representation of a date and returns a Time object.
      * @param value String to convert to a time object.
@@ -46,7 +44,12 @@ export class TimeFormatParserDefault extends TimeFormatParser {
      * @param displaySeconds boolean to define if string should display seconds.
      * @param displayMinutes boolean to define if string should display minutes.
      */
-    public parse(value: string, displaySeconds: boolean = true, displayMinutes: boolean = true, meridian?: boolean): TimeObject {
+    public parse(
+        value: string,
+        displaySeconds: boolean = true,
+        displayMinutes: boolean = true,
+        meridian?: boolean
+    ): TimeObject {
         const time = new TimeObject();
         let regexp;
         if (!meridian) {
@@ -81,9 +84,9 @@ export class TimeFormatParserDefault extends TimeFormatParser {
 
                 const splitString = value.split(':');
                 time.hour = parseInt(splitString[0], 10);
-                if (( period === 'pm' || period === 'PM' ) && time.hour < 12) {
+                if ((period === 'pm' || period === 'PM') && time.hour < 12) {
                     time.hour = time.hour + 12;
-                } else if ( (period === 'am' || period === 'AM') && time.hour === 12 ) {
+                } else if ((period === 'am' || period === 'AM') && time.hour === 12) {
                     time.hour = 0;
                 }
                 time.minute = parseInt(splitString[1], 10);
@@ -104,7 +107,12 @@ export class TimeFormatParserDefault extends TimeFormatParser {
      * @param displaySeconds boolean to define if string should display seconds.
      * @param displayMinutes boolean to define if string should display minutes.
      */
-    public format(time: TimeObject, displaySeconds: boolean = true, displayMinutes: boolean = true, meridian?: boolean): string {
+    public format(
+        time: TimeObject,
+        displaySeconds: boolean = true,
+        displayMinutes: boolean = true,
+        meridian?: boolean
+    ): string {
         let formattedHour, formattedMinute, formattedSecond;
         let formattedTime;
         let formattedMeridian;
@@ -144,7 +152,7 @@ export class TimeFormatParserDefault extends TimeFormatParser {
             }
         }
         if (formattedMeridian && formattedTime) {
-            formattedTime += ' ' + formattedMeridian
+            formattedTime += ' ' + formattedMeridian;
         }
 
         return formattedTime;

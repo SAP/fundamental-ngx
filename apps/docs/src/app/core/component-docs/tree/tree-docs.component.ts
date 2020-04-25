@@ -163,8 +163,7 @@ export class TreeDocsComponent {
               }
             ]
           }
-        ]`
-    ;
+        ]`;
 
     onSchemaValues(data) {
         this.data = data;

@@ -6,7 +6,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     styleUrls: ['./platform-button-examples.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformButtonTypesExampleComponent { }
+export class PlatformButtonTypesExampleComponent {}
 
 @Component({
     selector: 'fdp-button-sizes-example',
@@ -14,7 +14,7 @@ export class PlatformButtonTypesExampleComponent { }
     styleUrls: ['./platform-button-examples.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformButtonSizesExampleComponent { }
+export class PlatformButtonSizesExampleComponent {}
 
 @Component({
     selector: 'fdp-button-icons-example',
@@ -22,7 +22,7 @@ export class PlatformButtonSizesExampleComponent { }
     styleUrls: ['./platform-button-examples.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformButtonIconsExampleComponent { }
+export class PlatformButtonIconsExampleComponent {}
 
 @Component({
     selector: 'fdp-button-state-example',
@@ -30,11 +30,11 @@ export class PlatformButtonIconsExampleComponent { }
     styleUrls: ['./platform-button-examples.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformButtonStateExampleComponent { }
+export class PlatformButtonStateExampleComponent {}
 @Component({
     selector: 'fdp-button-truncate-example',
     templateUrl: './platform-button-truncate-example.component.html',
     styleUrls: ['./platform-button-examples.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformButtonTruncateExampleComponent { }
+export class PlatformButtonTruncateExampleComponent {}

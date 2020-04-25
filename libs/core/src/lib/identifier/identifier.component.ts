@@ -14,7 +14,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     // tslint:disable-next-line:component-selector
     selector: '[fd-identifier]',
     host: {
-        role: 'presentation',
+        role: 'presentation'
     },
     template: `<ng-content></ng-content>`,
     styleUrls: ['./identifier.component.scss'],

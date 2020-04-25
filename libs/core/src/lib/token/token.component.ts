@@ -20,7 +20,6 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenComponent {
-
     /** Whether the token is disabled. */
     @Input()
     disabled: boolean = false;
@@ -59,5 +58,4 @@ export class TokenComponent {
     }
 
     constructor(public elementRef: ElementRef) {}
-
 }

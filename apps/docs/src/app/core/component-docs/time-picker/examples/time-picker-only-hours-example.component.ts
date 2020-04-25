@@ -5,7 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './time-picker-only-hours-example.component.html'
 })
 export class TimePickerOnlyHoursExampleComponent {
-
     timePickerOnlyHoursObject = { hour: 12, minute: null, second: null };
-
 }

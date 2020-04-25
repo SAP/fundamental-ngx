@@ -68,5 +68,4 @@ describe('SegmentedButtonDirective', () => {
         fixture.detectChanges();
         expect(component.ref.nativeElement.className).toContain('is-' + testState);
     });
-
 });

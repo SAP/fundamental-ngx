@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-disabled-example',
-    templateUrl: './platform-radio-group-disabled-example.component.html',
+    templateUrl: './platform-radio-group-disabled-example.component.html'
 })
 export class PlatformRadioGroupDisabledExampleComponent {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
@@ -14,40 +14,40 @@ export class PlatformRadioGroupDisabledExampleComponent {
             label: 'Option 1',
             value: 'Option 1',
             state: 'default',
-            disabled: false,
+            disabled: false
         },
         {
             label: 'Option 2',
             value: 'Option 2',
             state: 'valid',
-            disabled: false,
+            disabled: false
         },
         {
             label: 'Option 3',
             value: 'Option 3',
             state: 'invalid',
-            disabled: false,
-        },
+            disabled: false
+        }
     ];
 
     disabledItems = [
         {
             label: 'Not disabled',
             value: 'Option 1',
-            state: 'default',
+            state: 'default'
         },
         {
             label: 'Option 2',
             value: 'Option 2',
             state: 'valid',
-            disabled: true,
+            disabled: true
         },
         {
             label: 'Option 3',
             value: 'Option 3',
             state: 'invalid',
-            disabled: true,
-        },
+            disabled: true
+        }
     ];
 
     favoriteSeason1: string = '';
@@ -58,6 +58,6 @@ export class PlatformRadioGroupDisabledExampleComponent {
     customForm = new FormGroup({
         example1: new FormControl({ value: '', disabled: true }),
         example2: new FormControl({ value: '', disabled: true }),
-        example3: new FormControl({ value: 'Winter', disabled: true }),
+        example3: new FormControl({ value: 'Winter', disabled: true })
     });
 }

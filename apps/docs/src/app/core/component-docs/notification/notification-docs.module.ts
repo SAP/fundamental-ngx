@@ -1,17 +1,17 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {API_FILES} from '../../api-files';
-import {NotificationDocsHeaderComponent} from './notification-docs-header/notification-docs-header.component';
-import {NotificationDocsComponent} from './notification-docs.component';
-import {NotificationComponentAsContentExampleComponent} from './examples/component-as-content/notification-component-as-content-example.component';
-import {NotificationContentComponent} from './examples/component-as-content/notification-content.component';
-import {NotificationGroupTemplateExampleComponent} from './examples/group-notification/notification-group-template-example.component';
-import {NotificationOptionsContentComponent} from './examples/notification-options/notification-options-content.component';
-import {NotificationOptionsExampleComponent} from './examples/notification-options/notification-options-example.component';
-import {NotificationOpenTemplateExampleComponent} from './examples/template-as-content/notification-open-template-example.component';
-import {NotificationAsObjectExampleComponent} from './examples/notification-as-object.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { API_FILES } from '../../api-files';
+import { NotificationDocsHeaderComponent } from './notification-docs-header/notification-docs-header.component';
+import { NotificationDocsComponent } from './notification-docs.component';
+import { NotificationComponentAsContentExampleComponent } from './examples/component-as-content/notification-component-as-content-example.component';
+import { NotificationContentComponent } from './examples/component-as-content/notification-content.component';
+import { NotificationGroupTemplateExampleComponent } from './examples/group-notification/notification-group-template-example.component';
+import { NotificationOptionsContentComponent } from './examples/notification-options/notification-options-content.component';
+import { NotificationOptionsExampleComponent } from './examples/notification-options/notification-options-example.component';
+import { NotificationOpenTemplateExampleComponent } from './examples/template-as-content/notification-open-template-example.component';
+import { NotificationAsObjectExampleComponent } from './examples/notification-as-object.component';
 import { IdentifierModule, NotificationModule, NotificationService } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -19,19 +19,14 @@ const routes: Routes = [
         path: '',
         component: NotificationDocsHeaderComponent,
         children: [
-            {path: '', component: NotificationDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.multiInput}}
+            { path: '', component: NotificationDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.multiInput } }
         ]
     }
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        NotificationModule,
-        IdentifierModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, NotificationModule, IdentifierModule],
     exports: [RouterModule],
     declarations: [
         NotificationDocsComponent,
@@ -42,15 +37,9 @@ const routes: Routes = [
         NotificationAsObjectExampleComponent,
         NotificationOpenTemplateExampleComponent,
         NotificationGroupTemplateExampleComponent,
-        NotificationComponentAsContentExampleComponent,
+        NotificationComponentAsContentExampleComponent
     ],
-    entryComponents: [
-        NotificationContentComponent,
-        NotificationOptionsContentComponent
-    ],
-    providers: [
-        NotificationService
-    ]
+    entryComponents: [NotificationContentComponent, NotificationOptionsContentComponent],
+    providers: [NotificationService]
 })
-export class NotificationDocsModule {
-}
+export class NotificationDocsModule {}

@@ -4,18 +4,14 @@ import { By } from '@angular/platform-browser';
 import { MegaMenuSubitemDirective } from './mega-menu-subitem.directive';
 
 @Component({
-    template: `
-        <h3 #directiveElement fd-mega-menu-subitem>Fd test</h3>
-    `
+    template: ` <h3 #directiveElement fd-mega-menu-subitem>Fd test</h3> `
 })
-
 export class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
 
 describe('MegaMenuLinkDirective', () => {
-
     let component: TestComponent,
         fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,

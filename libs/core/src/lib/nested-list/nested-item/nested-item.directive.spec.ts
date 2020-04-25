@@ -16,10 +16,12 @@ import { NestedItemService } from './nested-item.service';
                     <span fd-nested-list-title>Link 3</span>
                 </a>
                 <ul fd-nested-list [textOnly]="false">
-                    <li fd-nested-list-item><a fd-nested-list-link>
-                        <span fd-nested-list-icon [glyph]="'settings'"></span>
-                        <span fd-nested-list-title>Link 1</span>
-                    </a></li>
+                    <li fd-nested-list-item>
+                        <a fd-nested-list-link>
+                            <span fd-nested-list-icon [glyph]="'settings'"></span>
+                            <span fd-nested-list-title>Link 1</span>
+                        </a>
+                    </li>
                 </ul>
             </fd-nested-list-popover>
         </li>
@@ -29,16 +31,20 @@ import { NestedItemService } from './nested-item.service';
                 <span fd-nested-list-title>Link 3</span>
             </a>
             <ul fd-nested-list [textOnly]="false">
-                <li fd-nested-list-item><a fd-nested-list-link>
-                    <span fd-nested-list-icon [glyph]="'settings'"></span>
-                    <span fd-nested-list-title>Link 1</span>
-                </a></li>
+                <li fd-nested-list-item>
+                    <a fd-nested-list-link>
+                        <span fd-nested-list-icon [glyph]="'settings'"></span>
+                        <span fd-nested-list-title>Link 1</span>
+                    </a>
+                </li>
             </ul>
         </li>
-        <li fd-nested-list-item #emptyItemDirective><a fd-nested-list-link>
-            <span fd-nested-list-icon [glyph]="'settings'"></span>
-            <span fd-nested-list-title>Link 1</span>
-        </a></li>
+        <li fd-nested-list-item #emptyItemDirective>
+            <a fd-nested-list-link>
+                <span fd-nested-list-icon [glyph]="'settings'"></span>
+                <span fd-nested-list-title>Link 1</span>
+            </a>
+        </li>
     `
 })
 class TestNestedContainerComponent {
@@ -64,9 +70,8 @@ describe('NestedItemDirective', () => {
         TestBed.configureTestingModule({
             imports: [NestedListModule, PopoverModule],
             declarations: [TestNestedContainerComponent],
-            providers: [ NestedListKeyboardService, MenuKeyboardService, NestedListStateService ]
-        })
-            .compileComponents();
+            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -82,7 +87,7 @@ describe('NestedItemDirective', () => {
 
     it('Item with popover should have children', () => {
         expect(nestedItemPopoverDirective.hasChildren).toBeTruthy();
-        expect(nestedItemPopoverDirective.linkItem.hasChildren).toBeTruthy()
+        expect(nestedItemPopoverDirective.linkItem.hasChildren).toBeTruthy();
     });
 
     it('Item with popover should react to open change from popover', () => {
@@ -93,7 +98,7 @@ describe('NestedItemDirective', () => {
 
     it('Item with popover should propagate expanded change event', () => {
         nestedItemPopoverDirective.expanded = false;
-        spyOn((nestedItemPopoverDirective as any), 'propagateOpenChange');
+        spyOn(nestedItemPopoverDirective as any, 'propagateOpenChange');
         nestedItemPopoverDirective.triggerOpen();
         expect((nestedItemPopoverDirective as any).propagateOpenChange).toHaveBeenCalledWith(true);
     });
@@ -115,7 +120,7 @@ describe('NestedItemDirective', () => {
 
     it('Item with list should propagate expanded change event', () => {
         nestedItemListDirective.expanded = false;
-        spyOn((nestedItemListDirective as any), 'propagateOpenChange');
+        spyOn(nestedItemListDirective as any, 'propagateOpenChange');
         nestedItemListDirective.triggerOpen();
         expect((nestedItemListDirective as any).propagateOpenChange).toHaveBeenCalledWith(true);
     });
@@ -140,6 +145,4 @@ describe('NestedItemDirective', () => {
         expect(emptyItemDirective.toggle).toHaveBeenCalled();
         expect(emptyItemDirective.keyboardTriggered.emit).toHaveBeenCalledWith(keyboardEvent);
     });
-
-
 });

@@ -20,7 +20,7 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: backButtonExample,
-            fileName: 'action-bar-back',
+            fileName: 'action-bar-back'
         },
         {
             language: 'typescript',
@@ -34,7 +34,7 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: titleTruncationExample,
-            fileName: 'action-bar-long-string-title-truncation',
+            fileName: 'action-bar-long-string-title-truncation'
         },
         {
             language: 'typescript',
@@ -48,7 +48,7 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: noBackButtonExample,
-            fileName: 'action-bar-no-back',
+            fileName: 'action-bar-no-back'
         }
     ];
 
@@ -56,7 +56,7 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: contextualMenuExample,
-            fileName: 'action-bar-contextual-menu',
+            fileName: 'action-bar-contextual-menu'
         }
     ];
 
@@ -64,7 +64,7 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: mobileExample,
-            fileName: 'action-bar-mobile',
+            fileName: 'action-bar-mobile'
         },
         {
             language: 'typescript',

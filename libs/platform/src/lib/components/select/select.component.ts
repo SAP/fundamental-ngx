@@ -21,15 +21,15 @@ import { OptionComponent, SelectComponent as fdSelect, RtlService } from '@funda
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SelectPlatformComponent),
             multi: true
-        }],
+        }
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectPlatformComponent extends fdSelect implements OnInit, AfterContentInit {
-
     /**
-        * Form element ID.
-        * Todo: This should be moved to higher class that will be common to all input fields
-        */
+     * Form element ID.
+     * Todo: This should be moved to higher class that will be common to all input fields
+     */
     @Input()
     id: string;
 
@@ -89,17 +89,14 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
         this.cd.markForCheck();
     }
 
-
     /**
      * Dirty assignment is to disable resetOption logic.
      */
     ngAfterContentInit(): void {
-        this['unselectOptions'] = () => {
-        };
+        this['unselectOptions'] = () => {};
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     writeValue(newValue: any): void {
         if (newValue && newValue !== this._value) {
@@ -109,5 +106,4 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
             this.cd.markForCheck();
         }
     }
-
 }

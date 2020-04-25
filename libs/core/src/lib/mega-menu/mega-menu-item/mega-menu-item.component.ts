@@ -1,5 +1,6 @@
 import {
-    AfterContentInit, ChangeDetectionStrategy,
+    AfterContentInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -50,7 +51,6 @@ export type MenuSubListPosition = 'left' | 'right';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, DefaultMenuItem {
-
     /** @hidden */
     @ContentChildren(MegaMenuSubitemDirective)
     subItems: QueryList<MegaMenuSubitemDirective>;
@@ -76,7 +76,6 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly onRefresh$: Subject<void> = new Subject<void>();
-
 
     /** Variable that specifies if the sublist menu is opened. */
     @Input()
@@ -128,7 +127,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
              * the sub list should go over the parent list
              */
             while (distanceFromCorner > window.innerWidth && this._getLeftPropertyFromSubList() > 1) {
-                this.subList.nativeElement.style.left = (this._getLeftPropertyFromSubList() - 1) + '%';
+                this.subList.nativeElement.style.left = this._getLeftPropertyFromSubList() - 1 + '%';
                 this.changeDetectionRef.detectChanges();
                 distanceFromCorner = this.subList.nativeElement.getBoundingClientRect().right;
             }
@@ -138,7 +137,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
              * the sub list should go to right side of parent list
              */
             while (distanceFromCorner < window.innerWidth && this._getLeftPropertyFromSubList() < 100) {
-                this.subList.nativeElement.style.left = (this._getLeftPropertyFromSubList() + 1) + '%';
+                this.subList.nativeElement.style.left = this._getLeftPropertyFromSubList() + 1 + '%';
                 this.changeDetectionRef.detectChanges();
                 distanceFromCorner = this.subList.nativeElement.getBoundingClientRect().right;
             }
@@ -188,7 +187,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     /** Method that changes state of open variable */
     public toggleOpen(): void {
         if (this.open) {
-            this.closeSubList()
+            this.closeSubList();
         } else {
             this.openSubList();
         }
@@ -219,9 +218,9 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         const styles = getComputedStyle(this.subList.nativeElement);
         if (styles.left) {
             if (styles.left.includes('px')) {
-                return Number(styles.left.split('px')[0]) / this.parentElement.nativeElement.offsetWidth * 100;
+                return (Number(styles.left.split('px')[0]) / this.parentElement.nativeElement.offsetWidth) * 100;
             } else if (styles.left.includes('%')) {
-                return Number(styles.left.split('%')[0])
+                return Number(styles.left.split('%')[0]);
             }
         } else {
             return 100;
@@ -236,19 +235,20 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         /** Merge refresh/destroy observables */
         const refreshObs = merge(this.onRefresh$, this.onDestroy$);
 
-        this.subItems.forEach((item: MegaMenuSubitemDirective, index: number) => item.keyDown
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe((keyboardEvent: KeyboardEvent) => this.handleSubListKeyDown(keyboardEvent, index)))
-            ;
+        this.subItems.forEach((item: MegaMenuSubitemDirective, index: number) =>
+            item.keyDown
+                .pipe(takeUntil(this.onDestroy$))
+                .subscribe((keyboardEvent: KeyboardEvent) => this.handleSubListKeyDown(keyboardEvent, index))
+        );
     }
 
     private _keyboardLtr(event: KeyboardEvent) {
         switch (this.getKeyCode(event)) {
-            case ('ArrowLeft'): {
+            case 'ArrowLeft': {
                 this._handleCloseSubList();
                 break;
             }
-            case ('ArrowRight'): {
+            case 'ArrowRight': {
                 this._handleOpenSubList(event);
                 break;
             }
@@ -257,11 +257,11 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     private _keyboardRtl(event: KeyboardEvent) {
         switch (this.getKeyCode(event)) {
-            case ('ArrowRight'): {
+            case 'ArrowRight': {
                 this._handleCloseSubList();
                 break;
             }
-            case ('ArrowLeft'): {
+            case 'ArrowLeft': {
                 this._handleOpenSubList(event);
                 break;
             }
@@ -270,8 +270,8 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     private _keyboardDefault(event: KeyboardEvent) {
         switch (this.getKeyCode(event)) {
-            case (' '):
-            case ('Enter'): {
+            case ' ':
+            case 'Enter': {
                 this._handleOpenSubList(event);
                 break;
             }
@@ -302,13 +302,9 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     private subscribeToRtl() {
         if (this.rtlService) {
-            this.rtlService.rtl
-                .pipe(
-                    takeUntil(this.onDestroy$)
-                )
-                .subscribe(rtl => {
-                    this.subListPosition = rtl ? 'left' : 'right';
-                })
+            this.rtlService.rtl.pipe(takeUntil(this.onDestroy$)).subscribe((rtl) => {
+                this.subListPosition = rtl ? 'left' : 'right';
+            });
         }
     }
 }

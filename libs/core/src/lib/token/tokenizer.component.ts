@@ -5,9 +5,13 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
-    ContentChildren, ElementRef,
-    forwardRef, HostListener,
-    Input, OnDestroy, Optional,
+    ContentChildren,
+    ElementRef,
+    forwardRef,
+    HostListener,
+    Input,
+    OnDestroy,
+    Optional,
     QueryList,
     ViewChild,
     ViewEncapsulation
@@ -18,14 +22,13 @@ import { RtlService } from '../utils/services/rtl.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'fd-tokenizer',
-  templateUrl: './tokenizer.component.html',
-  styleUrls: ['./tokenizer.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'fd-tokenizer',
+    templateUrl: './tokenizer.component.html',
+    styleUrls: ['./tokenizer.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDestroy {
-
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
     tokenList: QueryList<TokenComponent>;
@@ -104,8 +107,8 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
         });
         if (!this.compact) {
             // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
-            this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth -
-                this.tokenizerInnerEl.nativeElement.clientWidth;
+            this.tokenizerInnerEl.nativeElement.scrollLeft =
+                this.tokenizerInnerEl.nativeElement.scrollWidth - this.tokenizerInnerEl.nativeElement.clientWidth;
         }
     }
 
@@ -117,7 +120,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.tokenList.forEach(token => {
+        this.tokenList.forEach((token) => {
             if (token.onTokenClick) {
                 token.onTokenClick.unsubscribe();
             }
@@ -127,14 +130,18 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
         }
     }
 
-    constructor(public elementRef: ElementRef, private cdRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
+    constructor(
+        public elementRef: ElementRef,
+        private cdRef: ChangeDetectorRef,
+        @Optional() private _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     handleTokenClickSubscriptions(): void {
         this.tokenList.forEach((token, index) => {
-            token.onTokenClick.subscribe(event => {
+            token.onTokenClick.subscribe((event) => {
                 this.focusTokenElement(event, index);
-            })
+            });
         });
     }
 
@@ -142,7 +149,8 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
     focusTokenElement(event: Event, newIndex: number): HTMLElement {
         let elementToFocus: HTMLElement;
         if (newIndex >= 0 && newIndex < this.tokenList.length) {
-            elementToFocus = this.tokenList.filter((element, index) => index === newIndex)[0]
+            elementToFocus = this.tokenList
+                .filter((element, index) => index === newIndex)[0]
                 .elementRef.nativeElement.querySelector('.fd-token');
             // element needs tabindex in order to be focused
             elementToFocus.setAttribute('tabindex', '0');
@@ -187,17 +195,22 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number;
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
-        if (event.code === 'ArrowLeft' && !rtl || (event.code === 'ArrowRight' && rtl)) {
+        if ((event.code === 'ArrowLeft' && !rtl) || (event.code === 'ArrowRight' && rtl)) {
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
-        } else if (event.code === 'ArrowRight' && !rtl || (event.code === 'ArrowLeft' && rtl)) {
+        } else if ((event.code === 'ArrowRight' && !rtl) || (event.code === 'ArrowLeft' && rtl)) {
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
         }
-        if (newIndex === this.tokenList.length && ((event.code === 'ArrowRight' && !rtl) || (event.code === 'ArrowLeft' && rtl))) {
+        if (
+            newIndex === this.tokenList.length &&
+            ((event.code === 'ArrowRight' && !rtl) || (event.code === 'ArrowLeft' && rtl))
+        ) {
             this.input.elementRef().nativeElement.focus();
-        } else if (newIndex > this.tokenList.length - this.moreTokensRight.length &&
-            document.activeElement === this.input.elementRef().nativeElement) {
+        } else if (
+            newIndex > this.tokenList.length - this.moreTokensRight.length &&
+            document.activeElement === this.input.elementRef().nativeElement
+        ) {
             this.focusTokenElement(event, newIndex - this.moreTokensRight.length);
         } else if (newIndex || newIndex === 0) {
             this.focusTokenElement(event, newIndex);
@@ -208,7 +221,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
     getCombinedTokenWidth(): number {
         let totalTokenWidth = 0;
         // get the width of each token
-        this.tokenList.forEach(token => {
+        this.tokenList.forEach((token) => {
             totalTokenWidth = totalTokenWidth + token.elementRef.nativeElement.getBoundingClientRect().width;
         });
         // add input width
@@ -294,7 +307,9 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
             let i = this.moreTokensLeft.length - 1 + this.moreTokensRight.length;
             while (combinedTokenWidth < elementWidth && i >= 0 && !breakLoop) {
                 // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
-                const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[i];
+                const tokenToCheck = this.tokenList.filter(
+                    (token) => token.elementRef.nativeElement.style.display === 'none'
+                )[i];
                 /*
                   set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
                   contain the width of the token we might display, without actually making the token visible to the user
@@ -330,5 +345,4 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
         elementRef.nativeElement.style.display = 'inline-block';
         elementRef.nativeElement.style.visibility = 'visible';
     }
-
 }

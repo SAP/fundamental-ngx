@@ -3,7 +3,11 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy, HostBinding
+    ViewChild,
+    ViewEncapsulation,
+    ContentChild,
+    ChangeDetectionStrategy,
+    HostBinding
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
@@ -29,7 +33,6 @@ let popoverUniqueId: number = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopoverComponent {
-
     /** @hidden */
     @ViewChild(PopoverDirective)
     directiveRef: PopoverDirective;
@@ -171,7 +174,6 @@ export class PopoverComponent {
         }
     }
 
-
     /** @hidden
      *  Function that allows us to control aria-expanded on dropdown child
      * */
@@ -180,5 +182,4 @@ export class PopoverComponent {
             this.dropdownComponent.isOpen = isOpen;
         }
     }
-
 }

@@ -9,9 +9,7 @@ const ICON_SIZE = 'l';
 
 @Component({
     selector: 'fd-test-icon',
-    template: `
-        <fd-icon [glyph]="iconName" [size]="iconSize"></fd-icon>
-    `
+    template: ` <fd-icon [glyph]="iconName" [size]="iconSize"></fd-icon> `
 })
 class TestWrapperComponent {
     readonly iconName = ICON_NAME;

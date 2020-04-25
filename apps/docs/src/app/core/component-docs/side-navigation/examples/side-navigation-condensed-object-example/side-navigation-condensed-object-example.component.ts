@@ -6,7 +6,6 @@ import { SideNavigationModel } from '@fundamental-ngx/core';
     templateUrl: 'side-navigation-condensed-object-example.component.html'
 })
 export class SideNavigationCondensedObjectExampleComponent {
-
     sideNavigationConfiguration: SideNavigationModel = {
         condensed: true,
         mainNavigation: {
@@ -92,6 +91,5 @@ export class SideNavigationCondensedObjectExampleComponent {
                 }
             ]
         }
-    }
-
+    };
 }

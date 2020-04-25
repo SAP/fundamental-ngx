@@ -1,11 +1,13 @@
 <li class="fd-mega-menu__item" (click)="toggleOpen()" #parentElement>
     <ng-content select="[fd-mega-menu-link]"></ng-content>
     <ng-content></ng-content>
-    <ul class="fd-mega-menu__sublist"
+    <ul
+        class="fd-mega-menu__sublist"
         #subList
         [attr.aria-hidden]="!isShow()"
-        [ngClass]="{'fd-mega-menu__sublist--left': !isSubListPositionRight()}"
-        (click)="$event.stopPropagation()">
+        [ngClass]="{ 'fd-mega-menu__sublist--left': !isSubListPositionRight() }"
+        (click)="$event.stopPropagation()"
+    >
         <ng-content select="[fd-mega-menu-subitem]"></ng-content>
     </ul>
 </li>

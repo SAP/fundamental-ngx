@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'description',
     template: `
-    <p class="description">
-      <ng-content></ng-content>
-    </p>
-  `,
+        <p class="description">
+            <ng-content></ng-content>
+        </p>
+    `,
     styles: [
         `
             .description {

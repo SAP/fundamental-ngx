@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
     templateUrl: './multi-input-async-example.component.html'
 })
 export class MultiInputAsyncExampleComponent implements OnInit {
-
     selected = [];
 
     dropdownValues;
@@ -21,5 +20,4 @@ export class MultiInputAsyncExampleComponent implements OnInit {
     ngOnInit() {
         this.dropdownValues = this.getDropdownValues();
     }
-
 }

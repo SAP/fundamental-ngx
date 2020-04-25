@@ -82,7 +82,7 @@ export class ActionBarActionsComponent implements OnInit {
     }
 
     orderActionItem() {
-        this.orderedActionItems = this.actionItems.sort(function(a, b) {
+        this.orderedActionItems = this.actionItems.sort(function (a, b) {
             return a.priority > b.priority ? 1 : a.priority < b.priority ? -1 : 0;
         });
     }

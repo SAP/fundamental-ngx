@@ -8,7 +8,6 @@ import { IdentifierModule } from '../identifier/identifier.module';
 import { ButtonModule } from '../button/button.module';
 import { ComboboxModule } from '../combobox/combobox.module';
 
-
 import { ShellbarSubtitleComponent } from './shellbar-subtitle/shellbar-subtitle.component';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
 import { ShellbarActionComponent } from './shellbar-action/shellbar-action.component';
@@ -61,4 +60,4 @@ import { ShellbarActionsMobileComponent } from './shellbar-actions/shellbar-acti
         ShellbarSidenavDirective
     ]
 })
-export class ShellbarModule { }
+export class ShellbarModule {}

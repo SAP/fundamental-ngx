@@ -27,12 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        DatetimePickerModule,
-        SegmentedButtonModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, DatetimePickerModule, SegmentedButtonModule],
     exports: [RouterModule],
     declarations: [
         DatetimeExampleComponent,
@@ -47,5 +42,4 @@ const routes: Routes = [
         DatetimePickerComplexI18nExampleComponent
     ]
 })
-export class DatetimePickerDocsModule {
-}
+export class DatetimePickerDocsModule {}

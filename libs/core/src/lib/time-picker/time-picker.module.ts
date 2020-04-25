@@ -8,7 +8,6 @@ import { TimeModule } from '../time/time.module';
 
 import { TimePickerComponent } from './time-picker.component';
 
-
 @NgModule({
     declarations: [TimePickerComponent],
     imports: [CommonModule, FormsModule, PopoverModule, InputGroupModule, TimeModule],

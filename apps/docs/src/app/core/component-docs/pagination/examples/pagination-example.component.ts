@@ -4,11 +4,13 @@ import { PaginationComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-pagination-example',
-    template: `
-        <fd-pagination [totalItems]="totalItems" (pageChangeStart)="newPageClicked($event)" 
-                       [itemsPerPage]="itemsPerPage"
-                       [currentPage]="currentPage"></fd-pagination>
-        <br/><br/>
+    template: ` <fd-pagination
+            [totalItems]="totalItems"
+            (pageChangeStart)="newPageClicked($event)"
+            [itemsPerPage]="itemsPerPage"
+            [currentPage]="currentPage"
+        ></fd-pagination>
+        <br /><br />
         <button fd-button (click)="goToPage1()">Go to page 1</button>`
 })
 export class PaginationExampleComponent {
@@ -19,26 +21,29 @@ export class PaginationExampleComponent {
     @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
 
     newPageClicked(event) {
-        this.http.get('assets/pagination-data.json').subscribe(data => {
-            /*
+        this.http.get('assets/pagination-data.json').subscribe(
+            (data) => {
+                /*
              update the currentPage when the http action is successful
              */
-            this.currentPage = event;
-            console.log('page change success!');
-        }, error => {
-            /*
+                this.currentPage = event;
+                console.log('page change success!');
+            },
+            (error) => {
+                /*
              do not update the currentPage when the http action fails
              */
-            console.log('page change error!');
-        }, () => {
-            alert('New page selected: ' + this.currentPage);
-        });
+                console.log('page change error!');
+            },
+            () => {
+                alert('New page selected: ' + this.currentPage);
+            }
+        );
     }
 
     goToPage1() {
         this.paginationComponent.goToPage(1);
     }
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 }

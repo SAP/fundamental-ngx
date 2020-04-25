@@ -1,16 +1,16 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {API_FILES} from '../../api-files';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { API_FILES } from '../../api-files';
 import {
     SelectNativeExampleComponent,
     SelectNativeInlineHelpExampleComponent,
     SelectNativeStateExampleComponent
 } from './examples/select-native-examples.component';
-import {SelectNativeFormGroupExampleComponent} from './examples/select-native-form-group-example.component';
-import {SelectNativeHeaderComponent} from './select-native-header/select-native-header.component';
-import {SelectNativeDocsComponent} from './select-native-docs.component';
+import { SelectNativeFormGroupExampleComponent } from './examples/select-native-form-group-example.component';
+import { SelectNativeHeaderComponent } from './select-native-header/select-native-header.component';
+import { SelectNativeDocsComponent } from './select-native-docs.component';
 import { FormModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -18,18 +18,14 @@ const routes: Routes = [
         path: '',
         component: SelectNativeHeaderComponent,
         children: [
-            {path: '', component: SelectNativeDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
+            { path: '', component: SelectNativeDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.form } }
         ]
     }
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        FormModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule],
     exports: [RouterModule],
     declarations: [
         SelectNativeDocsComponent,
@@ -40,5 +36,4 @@ const routes: Routes = [
         SelectNativeInlineHelpExampleComponent
     ]
 })
-export class SelectNativeDocsModule {
-}
+export class SelectNativeDocsModule {}

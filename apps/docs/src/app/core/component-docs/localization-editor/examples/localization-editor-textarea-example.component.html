@@ -4,7 +4,7 @@
     </fd-localization-editor-main>
     <li fd-localization-editor-element *ngFor="let field of fields">
         <fd-localization-editor-item [label]="field.label">
-            <textarea fd-form-control fd-localization-editor-textarea placeholder="{{field.placeholder}}"></textarea>
+            <textarea fd-form-control fd-localization-editor-textarea placeholder="{{ field.placeholder }}"></textarea>
         </fd-localization-editor-item>
     </li>
 </fd-localization-editor>

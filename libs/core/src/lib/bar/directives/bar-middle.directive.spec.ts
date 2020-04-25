@@ -3,9 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { BarModule } from '../bar.module';
 
 @Component({
-    template: `
-        <div #directiveElement fd-bar-middle>Bar Middle Area Test</div>
-    `
+    template: ` <div #directiveElement fd-bar-middle>Bar Middle Area Test</div> `
 })
 class TestComponent {
     @ViewChild('directiveElement', { static: false })

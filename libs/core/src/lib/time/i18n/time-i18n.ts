@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 /**
  * Provides i18n support for placeholders and meridian modifiers naming in the time component.
  */
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class TimeI18n {
-
     /**
      * Ante Meridian naming label. The value written in the input should match this or Post Meridian. Otherwise it would be
      * treated as invalid
@@ -42,5 +41,4 @@ export class TimeI18n {
      * Defines if the meridian validation should be case sensitive.
      * */
     meridianCaseSensitive: boolean = false;
-
 }

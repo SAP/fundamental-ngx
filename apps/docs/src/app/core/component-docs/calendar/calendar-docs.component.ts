@@ -73,7 +73,6 @@ myDisableFunction = function(d: FdDate): boolean {
     return d.getTimeStamp() > firstDay.getTimeStamp() && d.getTimeStamp() < lastDay.getTimeStamp()
 }`;
 
-
     exampleSpecialDays = `Example Special Days Functions:
 
 // Mark weekends with special day number 10
@@ -110,7 +109,6 @@ specialDay: SpecialDayRule[] = [
 ]`;
 
     calendarSingleSource: ExampleFile[] = [
-
         {
             language: 'typescript',
             code: { default: this.exampleFunctionsHtml },
@@ -187,8 +185,6 @@ specialDay: SpecialDayRule[] = [
         }
     ];
 
-
-
     calendarOptionsSource: ExampleFile[] = [
         {
             language: 'typescript',
@@ -203,8 +199,6 @@ specialDay: SpecialDayRule[] = [
             code: calendarOptionHtml
         }
     ];
-
-
 
     calendarMarkHoverSource: ExampleFile[] = [
         {

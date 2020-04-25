@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CopyService {
-
     copyText(text: string): boolean {
         const textarea = document.createElement('textarea');
         textarea.style.fontSize = '12pt';
@@ -13,7 +12,7 @@ export class CopyService {
 
         textarea.setAttribute('readonly', '');
         textarea.value = text;
-        
+
         document.body.appendChild(textarea);
 
         textarea.select();

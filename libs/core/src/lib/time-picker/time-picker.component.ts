@@ -34,7 +34,6 @@ import { FormStates } from '../form/form-control/form-states';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit {
-
     /** @hidden */
     @HostBinding('class.fd-time-picker')
     timepickerclass = true;
@@ -146,7 +145,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
     /** @hidden */
     getFormattedTime(): string {
-        const formattedTime = this.timeAdapter.format(this.time, this.displaySeconds, this.displayMinutes, this.meridian);
+        const formattedTime = this.timeAdapter.format(
+            this.time,
+            this.displaySeconds,
+            this.displayMinutes,
+            this.meridian
+        );
         return formattedTime !== undefined ? formattedTime : '';
     }
 
@@ -160,7 +164,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         } else {
             if (this.allowNull && timeFromInput === '') {
                 this.isInvalidTimeInput = false;
-                this.onChange({hour: null, minutes: null, seconds: null});
+                this.onChange({ hour: null, minutes: null, seconds: null });
                 this.child.setDisplayedHour();
             } else {
                 this.isInvalidTimeInput = true;
@@ -199,13 +203,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     getPlaceholder(): string {
         let retVal = '';
         if (this.displayHours) {
-            retVal = retVal + 'hh'
+            retVal = retVal + 'hh';
         }
         if (this.displayMinutes) {
-            retVal = retVal + ':mm'
+            retVal = retVal + ':mm';
         }
         if (this.displaySeconds) {
-            retVal = retVal + ':ss'
+            retVal = retVal + ':ss';
         }
         if (this.meridian) {
             retVal = retVal + ' am/pm';
@@ -247,6 +251,5 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     }
 
     /** @hidden */
-    constructor(private cd: ChangeDetectorRef,
-                public timeAdapter: TimeFormatParser) {}
+    constructor(private cd: ChangeDetectorRef, public timeAdapter: TimeFormatParser) {}
 }

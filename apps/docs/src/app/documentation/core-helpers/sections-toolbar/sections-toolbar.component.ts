@@ -7,7 +7,6 @@ import { SectionInterface } from './section.interface';
     templateUrl: './sections-toolbar.component.html'
 })
 export class SectionsToolbarComponent implements OnInit {
-
     @Input() sections: SectionInterface[];
 
     search: string = '';

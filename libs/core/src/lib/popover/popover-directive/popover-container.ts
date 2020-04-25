@@ -1,9 +1,14 @@
 import {
-    AfterViewInit, ChangeDetectionStrategy,
+    AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, ElementRef, EmbeddedViewRef,
-    EventEmitter, HostBinding,
-    HostListener, OnDestroy,
+    Component,
+    ElementRef,
+    EmbeddedViewRef,
+    EventEmitter,
+    HostBinding,
+    HostListener,
+    OnDestroy,
     Output,
     TemplateRef,
     ViewChild,
@@ -20,19 +25,18 @@ import focusTrap from 'focus-trap';
     template: `
         <span class="fd-popover__arrow" x-arrow></span>
         <ng-container #vc>
-            {{contentString}}
+            {{ contentString }}
         </ng-container>
     `,
     styleUrls: ['./popover-container.scss'],
     host: {
         class: 'fd-popover__popper fd-popover-container-custom',
-        'tabindex': '-1'
+        tabindex: '-1'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopoverContainer implements AfterViewInit, OnDestroy {
-
     @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
@@ -57,9 +61,7 @@ export class PopoverContainer implements AfterViewInit, OnDestroy {
     private componentRef: EmbeddedViewRef<any>;
     private focusTrap: any;
 
-    constructor(private elRef: ElementRef,
-                private cdRef: ChangeDetectorRef) {
-    }
+    constructor(private elRef: ElementRef, private cdRef: ChangeDetectorRef) {}
 
     ngAfterViewInit(): void {
         if (this.content instanceof TemplateRef) {

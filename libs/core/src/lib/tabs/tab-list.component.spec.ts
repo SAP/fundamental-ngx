@@ -7,19 +7,19 @@ import { TabsModule } from './tabs.module';
 @Component({
     selector: 'fd-test-tabs',
     template: `<fd-tab-list>
-    <fd-tab [title]="'Link'" id="tab1">
-      Content Link
-    </fd-tab>
-    <fd-tab [title]="'Selected'" id="tab2">
-      Content Selected
-    </fd-tab>
-    <fd-tab [title]="'Link'" id="tab3">
-      Content Link Two
-    </fd-tab>
-    <fd-tab [title]="'Disabled'" id="tab4" *ngIf="showDisabled">
-      Disabled
-    </fd-tab>
-  </fd-tab-list>`
+        <fd-tab [title]="'Link'" id="tab1">
+            Content Link
+        </fd-tab>
+        <fd-tab [title]="'Selected'" id="tab2">
+            Content Selected
+        </fd-tab>
+        <fd-tab [title]="'Link'" id="tab3">
+            Content Link Two
+        </fd-tab>
+        <fd-tab [title]="'Disabled'" id="tab4" *ngIf="showDisabled">
+            Disabled
+        </fd-tab>
+    </fd-tab-list>`
 })
 class TestWrapperComponent {
     showDisabled: boolean = true;

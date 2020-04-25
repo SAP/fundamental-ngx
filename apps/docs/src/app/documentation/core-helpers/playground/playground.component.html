@@ -1,13 +1,17 @@
-
 <h3>Playground</h3>
-<div class="row playground-wrap" [ngClass]="{'schema-block': displayBlock}">
-  <div class="col playground-content">
-    <div class="json">
-      <ng-content></ng-content>
+<div class="row playground-wrap" [ngClass]="{ 'schema-block': displayBlock }">
+    <div class="col playground-content">
+        <div class="json">
+            <ng-content></ng-content>
+        </div>
+        <br />
     </div>
-    <br>
-  </div>
-  <div class="col">
-    <schema class="schema" [schema]="schema" [initialValues]="schemaInitialValues" (onSchemaValues)="onSchemaValueChanges($event)"></schema>
-  </div>
+    <div class="col">
+        <schema
+            class="schema"
+            [schema]="schema"
+            [initialValues]="schemaInitialValues"
+            (onSchemaValues)="onSchemaValueChanges($event)"
+        ></schema>
+    </div>
 </div>

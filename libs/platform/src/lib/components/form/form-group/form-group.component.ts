@@ -40,7 +40,6 @@ import { FormFieldComponent } from './form-field/form-field.component';
 import { Subject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-
 /**
  *
  * FormGroup represent high order container aggregating FormFields and ability to distribute these
@@ -122,9 +121,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class FormGroupComponent implements OnInit, AfterContentInit, AfterContentChecked,
-    AfterViewInit, OnDestroy {
-
+export class FormGroupComponent implements OnInit, AfterContentInit, AfterContentChecked, AfterViewInit, OnDestroy {
     @Input()
     id: string;
 
@@ -180,7 +177,6 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         this._cd.markForCheck();
     }
 
-
     @Input()
     get multiLayout(): boolean {
         return this._multiLayout;
@@ -223,19 +219,15 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
     @ContentChildren(FormFieldComponent, { descendants: true })
     _fieldChildren: QueryList<FormFieldComponent>;
 
-
     private _useForm: boolean = false;
     private _multiLayout: boolean = false;
     private _hintPlacement: 'left' | 'right' = 'right';
 
-
     protected _destroyed = new Subject<void>();
 
     constructor(private _cd: ChangeDetectorRef, @Optional() private formContainer: ControlContainer) {
-        this.formGroup = <FormGroup>((this.formContainer) ? this.formContainer.control
-            : new FormGroup({}));
+        this.formGroup = <FormGroup>(this.formContainer ? this.formContainer.control : new FormGroup({}));
     }
-
 
     ngOnInit(): void {
         if (!this.formGroup) {
@@ -243,16 +235,14 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         }
     }
 
-
     ngAfterContentChecked(): void {
         if (!this.validateFormFields()) {
             throw new Error('fdp-form-group must contain a fdp-form-field.');
         }
     }
 
-
     ngAfterContentInit(): void {
-        this.i18Strings = (this.i18Strings) ? this.i18Strings : this.i18Template;
+        this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
 
         this.updateFieldByZone();
         this._cd.markForCheck();
@@ -262,24 +252,22 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         this._cd.detectChanges();
     }
 
-
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
     }
 
-
     trackByFieldName(index, zoneField: GroupField) {
         return zoneField ? zoneField.name : undefined;
-
     }
 
     /**
      * Make sure we have expected childs.
      */
     private validateFormFields(): boolean {
-        return this._fieldChildren.filter(item =>
-            !(item instanceof FormFieldComponent || item['renderer'])).length === 0;
+        return (
+            this._fieldChildren.filter((item) => !(item instanceof FormFieldComponent || item['renderer'])).length === 0
+        );
     }
 
     /**
@@ -295,9 +283,8 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
 
         this._fieldChildren.forEach((item, index) => {
             this.updateFormProperties(item);
-            const zone = (this._multiLayout) ? item.zone || 'zLeft' : 'zLeft';
-            const field = new GroupField(zone, item.id, item.rank || index, item.renderer,
-                item.columns, item.fluid);
+            const zone = this._multiLayout ? item.zone || 'zLeft' : 'zLeft';
+            const field = new GroupField(zone, item.id, item.rank || index, item.renderer, item.columns, item.fluid);
 
             switch (zone) {
                 case 'zTop':
@@ -327,7 +314,6 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         this.mZone = this.calculateMainZone(zLeft, zRight);
     }
 
-
     /**
      * Pass some global properties to each field. Even formGroup cna be inject directly inside form
      * field we are using here a setter method to initialize the
@@ -340,7 +326,6 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         item.editable = this.editable;
         item.noLabelLayout = this.noLabelLayout;
         item.labelLayout = this.labelLayout;
-
 
         if (this.object && this.object[item.id]) {
             item.formControl.patchValue(this.object[item.id]);
@@ -380,15 +365,22 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
      * Todo: this should be more generic with variable num of columns
      */
     private calculateMainZone(left: GroupField[], right: GroupField[]): GroupField[] {
-
         if (left.length > 0 && right.length > 0) {
             const merged: GroupField[] = [];
-            let indexL = 0, indexR = 0, current = 0;
+            let indexL = 0,
+                indexR = 0,
+                current = 0;
 
-            while (current < (left.length + right.length)) {
+            while (current < left.length + right.length) {
                 if (indexL < left.length) {
-                    const f = new GroupField(left[indexL].zone, left[indexL].name, current,
-                        left[indexL].renderer, left[indexL].columns, left[indexL].isFluid);
+                    const f = new GroupField(
+                        left[indexL].zone,
+                        left[indexL].name,
+                        current,
+                        left[indexL].renderer,
+                        left[indexL].columns,
+                        left[indexL].isFluid
+                    );
 
                     merged[current++] = f;
                     indexL++;
@@ -400,11 +392,16 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
                 }
 
                 if (indexR < right.length) {
-                    if ((right[indexR].columns + left[indexL - 1].columns) !== 12) {
+                    if (right[indexR].columns + left[indexL - 1].columns !== 12) {
                         right[indexR].columns = 12 - left[indexL - 1].columns;
                     }
-                    const f = new GroupField(right[indexR].zone, right[indexR].name, current,
-                        right[indexR].renderer, right[indexR].columns);
+                    const f = new GroupField(
+                        right[indexR].zone,
+                        right[indexR].name,
+                        current,
+                        right[indexR].renderer,
+                        right[indexR].columns
+                    );
 
                     f.styleClass = `col-sm-${f.columns} col-md-${f.columns} col-lg-${f.columns}`;
                     merged[current++] = f;
@@ -412,10 +409,9 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
                 }
             }
             return merged;
-
         } else if (left.length > 0) {
             // when only one column dont use 6 columsn and 6 colums
-            return left.map(item => {
+            return left.map((item) => {
                 item.isFluid = true;
                 return item;
             });
@@ -438,26 +434,25 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
 
         zRight.sort((a, b) => a.rank - b.rank);
         if (zLeft.length !== zRight.length) {
-
             // retrieve the smallest from both
             const toEven = zLeft.length > zRight.length ? zRight : zLeft;
             for (let i = 0; i <= Math.abs(zLeft.length - zRight.length); i++) {
                 const zone = toEven[0].zone;
-                toEven.push(new GroupField(zone, `${zone}-${i}`, (toEven.length + 1), null,
-                    6));
+                toEven.push(new GroupField(zone, `${zone}-${i}`, toEven.length + 1, null, 6));
             }
         }
         return;
     }
 }
 
-
 export class GroupField {
-
-    constructor(public zone: string, public name: string, public rank: number,
-                public renderer?: TemplateRef<any>,
-                public columns: number = 6,
-                public isFluid: boolean = false,
-                public styleClass?: string) {
-    }
+    constructor(
+        public zone: string,
+        public name: string,
+        public rank: number,
+        public renderer?: TemplateRef<any>,
+        public columns: number = 6,
+        public isFluid: boolean = false,
+        public styleClass?: string
+    ) {}
 }

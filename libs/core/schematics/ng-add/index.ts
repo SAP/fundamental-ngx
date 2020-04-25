@@ -39,18 +39,26 @@ function addDependencies(): Rule {
         const dependencies: NodeDependency[] = [];
 
         if (!hasPackage(tree, '@angular/forms')) {
-            dependencies.push({ type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/forms' })
+            dependencies.push({
+                type: NodeDependencyType.Default,
+                version: `${ngCoreVersionTag}`,
+                name: '@angular/forms'
+            });
         }
 
         if (!hasPackage(tree, '@angular/animations')) {
-            dependencies.push({ type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/animations' })
+            dependencies.push({
+                type: NodeDependencyType.Default,
+                version: `${ngCoreVersionTag}`,
+                name: '@angular/animations'
+            });
         }
 
         if (!hasPackage(tree, '@angular/cdk')) {
-            dependencies.push({ type: NodeDependencyType.Default, version: `${cdkVersion}`, name: '@angular/cdk' })
+            dependencies.push({ type: NodeDependencyType.Default, version: `${cdkVersion}`, name: '@angular/cdk' });
         }
 
-        dependencies.forEach(dependency => {
+        dependencies.forEach((dependency) => {
             addPackageJsonDependency(tree, dependency);
             console.log(`✅️ Added ${dependency.name} to ${dependency.type}.`);
         });
@@ -67,16 +75,21 @@ function addAnimations(options: any): Rule {
 
         if (options.animations) {
             if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
-                return console.warn(`Could not set up "${browserAnimationsModuleName}" ` +
-                    `because "${noopAnimationsModuleName}" is already imported. Please manually ` +
-                    `set up browser animations.`);
+                return console.warn(
+                    `Could not set up "${browserAnimationsModuleName}" ` +
+                        `because "${noopAnimationsModuleName}" is already imported. Please manually ` +
+                        `set up browser animations.`
+                );
             }
-            addImportToRootModule(tree, browserAnimationsModuleName,
-                '@angular/platform-browser/animations', modulePath);
+            addImportToRootModule(
+                tree,
+                browserAnimationsModuleName,
+                '@angular/platform-browser/animations',
+                modulePath
+            );
             console.log(`✅️ Added ${browserAnimationsModuleName} to root module.`);
         } else if (!hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
-            addImportToRootModule(tree, noopAnimationsModuleName,
-                '@angular/platform-browser/animations', modulePath);
+            addImportToRootModule(tree, noopAnimationsModuleName, '@angular/platform-browser/animations', modulePath);
             console.log(`✅️ Added ${noopAnimationsModuleName} to root module.`);
         }
         return tree;
@@ -106,7 +119,9 @@ function addStylePathToConfig(options: any): Rule {
                 return tree;
             }
         } catch (e) {
-            throw new SchematicsException(`Unable to find angular.json project styles. Please manually configure your styles array.`);
+            throw new SchematicsException(
+                `Unable to find angular.json project styles. Please manually configure your styles array.`
+            );
         }
         tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
         console.log(`✅️ Added fundamental-styles path to angular.json.`);
@@ -123,9 +138,10 @@ function addFontsToStyles(options: any): Rule {
         const sapThemingImport: string = 'node_modules/@sap-theming/theming-base-content/content/Base/baseLib';
 
         if (options.styleFonts) {
-
             if (!stylesFileContent) {
-                console.warn(`Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`);
+                console.warn(
+                    `Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`
+                );
                 return tree;
             }
 
@@ -139,9 +155,10 @@ function addFontsToStyles(options: any): Rule {
                     console.log(`✅️ There are imports from @sap-theming in styles.scss already. Skipping`);
                     return tree;
                 }
-
             } catch (e) {
-                console.warn(`Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`);
+                console.warn(
+                    `Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`
+                );
                 return tree;
             }
         }

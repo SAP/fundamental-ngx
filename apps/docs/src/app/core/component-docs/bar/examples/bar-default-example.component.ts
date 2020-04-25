@@ -8,13 +8,13 @@ import { map } from 'rxjs/operators';
     templateUrl: './bar-default-example.component.html'
 })
 export class BarDefaultExampleComponent implements OnInit {
-
     navigationArrow$: Observable<string>;
 
-    constructor(private _rtlService: RtlService) { }
+    constructor(private _rtlService: RtlService) {}
 
     ngOnInit(): void {
-        this.navigationArrow$ = this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'));
+        this.navigationArrow$ = this._rtlService.rtl.pipe(
+            map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
+        );
     }
-
 }

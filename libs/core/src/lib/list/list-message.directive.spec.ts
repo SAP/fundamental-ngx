@@ -5,12 +5,10 @@ import { ListMessageDirective } from './list-message.directive';
 import { MessageStates } from '@fundamental-ngx/core';
 
 @Component({
-    template: `
-        <li #directiveElement fd-list-message [type]="type">List Item Test Text</li>
-    `
+    template: ` <li #directiveElement fd-list-message [type]="type">List Item Test Text</li> `
 })
 class TestComponent {
-    @ViewChild(ListMessageDirective, {static: true })
+    @ViewChild(ListMessageDirective, { static: true })
     directive: ListMessageDirective;
     type: MessageStates;
 }

@@ -5,7 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './time-no-seconds-example.component.html'
 })
 export class TimeNoSecondsExampleComponent {
-
     timeNoSecondsObject = { hour: 12, minute: 0, second: null };
-
 }

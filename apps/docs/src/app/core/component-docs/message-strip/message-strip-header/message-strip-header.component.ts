@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-message-strip-header',
     templateUrl: './message-strip-header.component.html'
 })
-export class MessageStripHeaderComponent {
-
-}
+export class MessageStripHeaderComponent {}

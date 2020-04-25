@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
     styleUrls: ['./shellbar-side-nav-example.component.scss']
 })
 export class ShellbarSideNavExampleComponent {
-
     condensed: boolean = false;
-
 }

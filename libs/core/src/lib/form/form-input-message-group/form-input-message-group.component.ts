@@ -21,7 +21,6 @@ import { map } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormInputMessageGroupComponent {
-
     /*
      * To allow user to determine what event he wants to trigger the messages to show
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
@@ -70,7 +69,7 @@ export class FormInputMessageGroupComponent {
     /** @hidden */
     private _createRtlObservable(): void {
         this.placement$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'bottom-end' : 'bottom-start'))
-            : of('bottom-start')
+            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'bottom-end' : 'bottom-start')))
+            : of('bottom-start');
     }
 }

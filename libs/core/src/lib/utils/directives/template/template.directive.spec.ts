@@ -35,5 +35,4 @@ describe('TemplateDirective', () => {
     it('should return template name', () => {
         expect(component.templateDirectiveRef.getName()).toBe('Header');
     });
-
 });

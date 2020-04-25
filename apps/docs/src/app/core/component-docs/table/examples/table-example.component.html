@@ -10,10 +10,12 @@
     </thead>
     <tbody fd-table-body>
         <tr *ngFor="let row of tableRows" fd-table-row>
-            <td fd-table-cell class="fd-has-font-weight-semi"><a href="#">{{row.column1}}</a></td>
-            <td fd-table-cell>{{row.column2}}</td>
-            <td fd-table-cell>{{row.column3}}</td>
-            <td fd-table-cell>{{row.date}}</td>
+            <td fd-table-cell class="fd-has-font-weight-semi">
+                <a href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>{{ row.column2 }}</td>
+            <td fd-table-cell>{{ row.column3 }}</td>
+            <td fd-table-cell>{{ row.date }}</td>
             <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
         </tr>
     </tbody>

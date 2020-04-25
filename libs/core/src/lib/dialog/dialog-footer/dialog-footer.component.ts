@@ -1,12 +1,4 @@
-import {
-    AfterContentInit,
-    Component,
-    ContentChildren,
-    Inject,
-    Optional,
-    QueryList,
-    TemplateRef
-} from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Inject, Optional, QueryList, TemplateRef } from '@angular/core';
 import { TemplateDirective } from '../../utils/directives/template/template.directive';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 
@@ -24,14 +16,13 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class
     templateUrl: './dialog-footer.component.html'
 })
 export class DialogFooterComponent implements AfterContentInit {
-
     /** @hidden */
     footerTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
-    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) { }
+    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {}
 
     /** @hidden */
     ngAfterContentInit() {
@@ -40,7 +31,7 @@ export class DialogFooterComponent implements AfterContentInit {
 
     /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
-        const footerTemplate = this.customTemplates.find(template => template.getName() === 'footer');
+        const footerTemplate = this.customTemplates.find((template) => template.getName() === 'footer');
         this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
     }
 }

@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation,
+    EventEmitter,
+    Output
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 let messageStripUniqueId: number = 0;
@@ -15,14 +25,13 @@ let messageStripUniqueId: number = 0;
         '[attr.aria-label]': 'ariaLabel',
         '[style.width]': 'width',
         '[style.min-width]': 'minWidth',
-        'role': 'alert',
-        '[attr.id]': 'id',
+        role: 'alert',
+        '[attr.id]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder {
-
     /** User's custom classes */
     @Input()
     class: string = '';
@@ -31,15 +40,15 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     @Input()
     dismissible: boolean = true;
 
-    /** The default message strip does not have an icon. 
-     * The other types (warning, success, information and error) have icons by default. 
-     * To remove the icon set the property to true. 
+    /** The default message strip does not have an icon.
+     * The other types (warning, success, information and error) have icons by default.
+     * To remove the icon set the property to true.
      */
     @Input()
     noIcon: boolean = false;
 
-    /** The type of the message strip. 
-     * Can be one of *warning*, *success*, *information*, *error* or null. 
+    /** The type of the message strip.
+     * Can be one of *warning*, *success*, *information*, *error* or null.
      */
     @Input()
     type: string;
@@ -73,7 +82,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     onDismiss: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -91,7 +100,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     }
 
     /**
-     * Dismisses the message-strip. 
+     * Dismisses the message-strip.
      */
     dismiss(): void {
         this._elementRef.nativeElement.classList.add('fd-has-display-none');
@@ -111,7 +120,8 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
             this.dismissible ? 'fd-message-strip--dismissible' : '',
             this.noIcon ? 'fd-message-strip--no-icon' : '',
             this.class
-        ].filter(x => x !== '').join(' ');
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
     }
-
 }

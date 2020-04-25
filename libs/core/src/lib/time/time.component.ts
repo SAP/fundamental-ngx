@@ -1,5 +1,6 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     forwardRef,
@@ -33,7 +34,6 @@ import { TimeI18n } from './i18n/time-i18n';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimeComponent implements OnChanges, ControlValueAccessor {
-
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
@@ -105,12 +105,10 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     displayedHour: number = 0;
 
     /** @hidden */
-    onChange = (time: TimeObject) => {
-    };
+    onChange = (time: TimeObject) => {};
 
     /** @hidden */
-    onTouched = () => {
-    };
+    onTouched = () => {};
 
     /** @hidden */
     registerOnChange(fn: (time: TimeObject) => void): void {
@@ -234,9 +232,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
                 /**
                  * When there is invalid period, function changes period to valid basing on actual hour
                  */
-                if (!this.period ||
-                    (!this.isPm(this.period) && !this.isAm(this.period))
-                ) {
+                if (!this.period || (!this.isPm(this.period) && !this.isAm(this.period))) {
                     this.setDisplayedHour();
                 }
             }
@@ -391,7 +387,9 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
      * Defines if period is PM, Considers the fact that period should be case sensitive
      */
     private isPm(period: string): boolean {
-        const pmMeridian = this.timeI18n.meridianCaseSensitive ? this.timeI18n.meridianPm : this.timeI18n.meridianPm.toLocaleUpperCase();
+        const pmMeridian = this.timeI18n.meridianCaseSensitive
+            ? this.timeI18n.meridianPm
+            : this.timeI18n.meridianPm.toLocaleUpperCase();
         period = this.timeI18n.meridianCaseSensitive ? period : period.toLocaleUpperCase();
         return period === pmMeridian;
     }
@@ -401,7 +399,9 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
      * Defines if period is AM, Considers the fact that period should be case sensitive
      */
     private isAm(period: string): boolean {
-        const amMeridian = this.timeI18n.meridianCaseSensitive ? this.timeI18n.meridianAm : this.timeI18n.meridianAm.toLocaleUpperCase();
+        const amMeridian = this.timeI18n.meridianCaseSensitive
+            ? this.timeI18n.meridianAm
+            : this.timeI18n.meridianAm.toLocaleUpperCase();
         period = this.timeI18n.meridianCaseSensitive ? period : period.toLocaleUpperCase();
         return period === amMeridian;
     }

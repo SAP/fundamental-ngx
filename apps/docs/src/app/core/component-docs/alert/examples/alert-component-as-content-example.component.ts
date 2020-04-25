@@ -8,8 +8,7 @@ import { AlertService } from '@fundamental-ngx/core';
     styleUrls: ['alert-component-as-content-example.component.scss']
 })
 export class AlertComponentAsContentExampleComponent {
-
-    constructor(public alertService: AlertService) { }
+    constructor(public alertService: AlertService) {}
 
     openFromComponent() {
         this.alertService.open(AlertContentComponent, {

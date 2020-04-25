@@ -5,7 +5,7 @@ import {
     Input,
     OnChanges,
     OnInit,
-    ViewEncapsulation,
+    ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
@@ -23,7 +23,7 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     templateUrl: './bar.component.html',
     styleUrls: ['./bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** user's custom classes */
@@ -81,7 +81,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
             this.inPage && this.size ? `fd-bar--page-${this.size}` : '',
             this.inHomePage && !this.size ? 'fd-bar--home-page' : '',
             this.inHomePage && this.size ? `fd-bar--home-page-${this.size}` : '',
-            this.class,
+            this.class
         ]
             .filter((x) => x !== '')
             .join(' ');

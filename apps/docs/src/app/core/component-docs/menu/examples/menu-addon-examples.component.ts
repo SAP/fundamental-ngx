@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-menu-addon-example',
     templateUrl: './menu-addon-example.component.html'
 })
-export class MenuAddonExampleComponent { }
+export class MenuAddonExampleComponent {}

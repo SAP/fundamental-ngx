@@ -7,7 +7,7 @@ import { RtlService } from '@fundamental-ngx/core';
         <label fd-form-label>
             Simulate RTL
         </label>
-        <fd-switch [compact]="true" [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch> 
+        <fd-switch [compact]="true" [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch>
     `,
     encapsulation: ViewEncapsulation.None
 })
@@ -23,9 +23,7 @@ export class DirectionalityComponent implements OnInit {
     @Input()
     className: string;
 
-    constructor(private rtlService: RtlService) {
-
-    }
+    constructor(private rtlService: RtlService) {}
 
     ngOnInit() {
         if (this.label) {

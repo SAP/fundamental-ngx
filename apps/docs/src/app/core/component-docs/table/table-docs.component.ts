@@ -18,7 +18,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-table',
     templateUrl: './table-docs.component.html',
     styleUrls: ['table-docs.component.scss']
-
 })
 export class TableDocsComponent {
     static schema: Schema = {

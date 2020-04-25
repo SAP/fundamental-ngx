@@ -21,8 +21,8 @@ import * as platformselectWithIconTypesSrc from '!raw-loader!./platform-select-e
 import * as platformselectWithIconTypesTsSrc from '!raw-loader!./platform-select-examples/platform-select-types-with-icon-example.component.ts';
 
 @Component({
-    selector : 'fd-select-docs',
-    templateUrl : './platform-select-docs.component.html'
+    selector: 'fd-select-docs',
+    templateUrl: './platform-select-docs.component.html'
 })
 export class PlatformSelectDocsComponent implements OnInit {
     defaultselectType: ExampleFile[] = [
@@ -78,5 +78,5 @@ export class PlatformSelectDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit() { }
+    ngOnInit() {}
 }

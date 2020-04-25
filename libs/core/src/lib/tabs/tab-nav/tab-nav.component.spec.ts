@@ -4,31 +4,24 @@ import { TabsModule } from '../tabs.module';
 import { TabNavComponent } from './tab-nav.component';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 
-
 @Component({
     selector: 'fd-test-tabs',
     template: `
         <nav fd-tab-nav>
             <div fd-tab-item>
-                <a fd-tab-link
-                   [active]="true">
+                <a fd-tab-link [active]="true">
                     Link
                 </a>
             </div>
             <div fd-tab-item>
-                <a fd-tab-link
-                   #fdTabLink
-                   [active]="false">
+                <a fd-tab-link #fdTabLink [active]="false">
                     Link
                 </a>
             </div>
-            <a fd-tab-link
-               [active]="false">
+            <a fd-tab-link [active]="false">
                 Link
             </a>
-            <a fd-tab-link
-               *ngIf="showLastTab"
-               [active]="false">
+            <a fd-tab-link *ngIf="showLastTab" [active]="false">
                 Link
             </a>
         </nav>
@@ -42,7 +35,6 @@ class TestNavWrapperComponent {
     tabLink: TabLinkDirective;
 
     showLastTab: boolean = true;
-
 }
 
 describe('TabNavDirective', () => {
@@ -74,7 +66,7 @@ describe('TabNavDirective', () => {
     it('should react on query list change', fakeAsync(() => {
         fixture.componentInstance.tabNavDirective.ngAfterContentInit();
 
-        spyOn((component as any), '_refreshSubscription').and.callThrough();
+        spyOn(component as any, '_refreshSubscription').and.callThrough();
 
         fixture.componentInstance.showLastTab = false;
 
@@ -104,7 +96,7 @@ describe('TabNavDirective', () => {
 
         tick(10);
         fixture.detectChanges();
-        spyOn((component as any), 'selectTab').and.callThrough();
+        spyOn(component as any, 'selectTab').and.callThrough();
 
         (component as any)._tabsService.tabSelected.next(2);
 
