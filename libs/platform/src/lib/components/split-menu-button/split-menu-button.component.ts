@@ -25,7 +25,7 @@ export class SplitMenuButtonComponent extends BaseComponent {
      * 'Emphasized', 'Ghost', 'standard', 'positive', 'negative', 'transparent'
      * Leave empty for default.'*/
     @Input()
-    fdType: ButtonType;
+    type: ButtonType;
 
     /** Event sent when split-menu-button primary button is clicked */
     @Output()
