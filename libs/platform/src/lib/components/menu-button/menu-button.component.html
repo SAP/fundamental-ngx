@@ -1,0 +1,12 @@
+<button
+    class="fd-button fd-button--menu"
+    [compact]="displaySize === 'compact'"
+    [glyph]="icon"
+    [disabled]="disabled"
+    (click)="buttonclick($event)"
+    [fdType]="type"
+>
+    <span [ngStyle]="{ width: width }" class="fdp-menu-btn-truncate__txt">
+        <ng-content></ng-content>
+    </span>
+</button>
