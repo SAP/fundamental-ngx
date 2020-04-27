@@ -5,10 +5,10 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './new-component.component.html'
 })
 export class NewComponentComponent implements OnInit {
-    constructor() { }
+    constructor() {}
 
-    ngOnInit() { }
+    ngOnInit() {}
 
-    onLoad(event) { }
-    onError(event) { }
+    onLoad(event) {}
+    onError(event) {}
 }

@@ -5,7 +5,7 @@ import { ObjectStatusComponent } from './object-status.component';
 
 @Component({
     selector: 'fd-test-object-status',
-    template: ` <span fd-object-status>Test Object Status</span> `,
+    template: ` <span fd-object-status>Test Object Status</span> `
 })
 class TestObjectStatusComponent {
     @ViewChild(ObjectStatusComponent, { static: true })
@@ -18,7 +18,7 @@ describe('ObjectStatusComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectStatusComponent, TestObjectStatusComponent],
+            declarations: [ObjectStatusComponent, TestObjectStatusComponent]
         }).compileComponents();
     }));
 

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy, DebugElement } from '@angular/core';
-import { browser, element, by } from 'protractor'
+import { browser, element, by } from 'protractor';
 
 import { By } from '@angular/platform-browser';
 
@@ -14,10 +14,11 @@ describe('ImageComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ImageComponent]
-        }).overrideComponent(ImageComponent, {
-            set: {  changeDetection: ChangeDetectionStrategy.Default  }
         })
-        .compileComponents()
+            .overrideComponent(ImageComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();
     }));
 
     beforeEach(() => {
@@ -25,7 +26,6 @@ describe('ImageComponent', () => {
         component = fixture.componentInstance;
         fixture.detectChanges();
         htmlElement = fixture.debugElement.query(By.css('.fd-image--m'));
-
     });
 
     it('should create Image component', () => {
@@ -50,29 +50,24 @@ describe('ImageComponent', () => {
         expect(componentInstance.circle).toBeTruthy();
         expect(componentInstance.photo).toEqual(imageLabel);
         expect(componentInstance.label).toEqual(imageLabel);
-
     });
 
     it('should change the size of the image', () => {
-
         const imageElement = fixture.debugElement.nativeElement.querySelector('span');
         expect(imageElement.className).toEqual('fd-image--m');
 
         component.size = 's';
         fixture.detectChanges();
         expect(imageElement.className).toEqual('fd-image--s');
-
     });
 
     it('should set image url', () => {
-
         const imageLabel = 'imgUrl';
         component.photo = imageLabel;
 
         const imageElement = fixture.debugElement.nativeElement.querySelector('span');
         fixture.detectChanges();
 
-        expect(imageElement.style.backgroundImage).toEqual('url(\"' + imageLabel + '\")');
-
+        expect(imageElement.style.backgroundImage).toEqual('url("' + imageLabel + '")');
     });
 });

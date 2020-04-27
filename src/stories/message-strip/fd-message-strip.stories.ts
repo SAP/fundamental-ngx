@@ -26,8 +26,8 @@ const type = {
     warning: 'warning',
     success: 'success',
     information: 'information',
-    error: 'error',
-}
+    error: 'error'
+};
 
 export const MessageStrip = () => ({
     template: `
@@ -48,6 +48,6 @@ export const MessageStrip = () => ({
         noIcon: boolean('noIcon', false),
         width: text('width', '100%'),
         minWidth: text('minWidth', '100px'),
-        message: text('message', 'A dismissible warning message strip'),
+        message: text('message', 'A dismissible warning message strip')
     }
 });

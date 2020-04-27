@@ -15,7 +15,7 @@ export class MegaMenuDocsComponent {
         {
             language: 'html',
             code: menuSrc,
-            fileName: 'mega-menu-example',
+            fileName: 'mega-menu-example'
         }
     ];
 
@@ -23,7 +23,7 @@ export class MegaMenuDocsComponent {
         {
             language: 'html',
             code: menuGroupSrc,
-            fileName: 'mega-menu-group-example',
+            fileName: 'mega-menu-group-example'
         }
     ];
 

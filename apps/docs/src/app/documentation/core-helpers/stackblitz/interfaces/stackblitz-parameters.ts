@@ -8,7 +8,6 @@ export interface StackblitzFile {
     service: boolean;
 }
 
-
 export interface StackblitzParameters {
     tsFiles: StackblitzFile[];
 }

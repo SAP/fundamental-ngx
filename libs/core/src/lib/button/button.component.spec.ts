@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<button fd-button>Button</button>',
+    template: '<button fd-button>Button</button>'
 })
 export class TestComponent {}
 
@@ -16,7 +16,7 @@ describe('ButtonComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ButtonComponent, TestComponent],
+            declarations: [ButtonComponent, TestComponent]
         });
     }));
 

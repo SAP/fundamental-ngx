@@ -1,31 +1,43 @@
 <div class="fd-shellbar__action fd-shellbar__action--show-always" *ngIf="user">
     <div class="fd-user-menu">
-        <fd-popover [options]="options || {placement: 'bottom-end'}"
-                    [closeOnEscapeKey]="closeOnEscapeKey"
-                    [closeOnOutsideClick]="closeOnOutsideClick"
-                    [(isOpen)]="isOpen"
-                    [triggers]="triggers"
-                    (isOpenChange)="openChanged($event)"
-                    [disabled]="disabled"
-                    [isDropdown]="isDropdown"
-                    [focusTrapped]="false">
+        <fd-popover
+            [options]="options || { placement: 'bottom-end' }"
+            [closeOnEscapeKey]="closeOnEscapeKey"
+            [closeOnOutsideClick]="closeOnOutsideClick"
+            [(isOpen)]="isOpen"
+            [triggers]="triggers"
+            (isOpenChange)="openChanged($event)"
+            [disabled]="disabled"
+            [isDropdown]="isDropdown"
+            [focusTrapped]="false"
+        >
             <fd-popover-control>
                 <div class="fd-button fd-shellbar__button fd-user-menu__control">
-                    <span fd-identifier *ngIf="!user.image" [colorAccent]="user.colorAccent" [circle]="true" [size]="'xs'">
-                        {{user.initials}}
+                    <span
+                        fd-identifier
+                        *ngIf="!user.image"
+                        [colorAccent]="user.colorAccent"
+                        [circle]="true"
+                        [size]="'xs'"
+                    >
+                        {{ user.initials }}
                     </span>
-                    <span fd-identifier *ngIf="user.image" [colorAccent]="user.colorAccent" [circle]="true" [size]="'xs'"
-                          [ngStyle]="{'background-image': 'url(' + user.image + ')'}">
+                    <span
+                        fd-identifier
+                        *ngIf="user.image"
+                        [colorAccent]="user.colorAccent"
+                        [circle]="true"
+                        [size]="'xs'"
+                        [ngStyle]="{ 'background-image': 'url(' + user.image + ')' }"
+                    >
                     </span>
                 </div>
             </fd-popover-control>
             <fd-popover-body>
                 <fd-menu>
                     <ul fd-menu-list>
-                        <li fd-menu-item
-                            *ngFor="let item of userMenu"
-                            (click)="itemClick(item, $event)">
-                            {{item.text}}
+                        <li fd-menu-item *ngFor="let item of userMenu" (click)="itemClick(item, $event)">
+                            {{ item.text }}
                         </li>
                     </ul>
                 </fd-menu>

@@ -23,12 +23,11 @@ const state = {
     valid: 'valid',
     invalid: 'invalid',
     info: 'info',
-    warning: 'warning',
-}
+    warning: 'warning'
+};
 
 export const Checkbox = () => ({
-    template:
-        `
+    template: `
         <fd-checkbox [(ngModel)]="checkboxValue1" 
             [state]="state"
             [label]="label"
@@ -47,6 +46,6 @@ export const Checkbox = () => ({
         disabled: boolean('disabled', false),
         compact: boolean('compact', false),
         tristate: boolean('tristate', false),
-        tristateSelectable: boolean('tristateSelectable', false),
+        tristateSelectable: boolean('tristateSelectable', false)
     }
 });

@@ -12,8 +12,16 @@ import { MegaMenuTitleDirective } from './mega-menu-title/mega-menu-title.direct
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [MegaMenuComponent, MegaMenuListDirective, MegaMenuItemComponent, MegaMenuSubitemDirective,
-        MegaMenuSublinkDirective, MegaMenuLinkDirective, MegaMenuGroupComponent, MegaMenuTitleDirective],
+    declarations: [
+        MegaMenuComponent,
+        MegaMenuListDirective,
+        MegaMenuItemComponent,
+        MegaMenuSubitemDirective,
+        MegaMenuSublinkDirective,
+        MegaMenuLinkDirective,
+        MegaMenuGroupComponent,
+        MegaMenuTitleDirective
+    ],
     exports: [
         MegaMenuComponent,
         MegaMenuLinkDirective,

@@ -58,7 +58,7 @@ export class ListDocsComponent {
         {
             language: 'html',
             code: listSrc,
-            fileName: 'list-example',
+            fileName: 'list-example'
         }
     ];
 
@@ -66,7 +66,7 @@ export class ListDocsComponent {
         {
             language: 'html',
             code: listSecondarySrc,
-            fileName: 'list-example-secondary',
+            fileName: 'list-example-secondary'
         }
     ];
 
@@ -74,7 +74,7 @@ export class ListDocsComponent {
         {
             language: 'html',
             code: iconListSrc,
-            fileName: 'list-icon-example',
+            fileName: 'list-icon-example'
         }
     ];
 
@@ -82,7 +82,7 @@ export class ListDocsComponent {
         {
             language: 'html',
             code: complexList,
-            fileName: 'list-complex-example',
+            fileName: 'list-complex-example'
         }
     ];
 

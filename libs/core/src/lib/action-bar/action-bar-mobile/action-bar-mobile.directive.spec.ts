@@ -3,9 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionBarModule } from '../action-bar.module';
 
 @Component({
-    template: `
-        <div #directiveElement fd-action-bar-mobile>Action Bar Mobile Test Text</div>
-    `
+    template: ` <div #directiveElement fd-action-bar-mobile>Action Bar Mobile Test Text</div> `
 })
 class TestComponent {
     @ViewChild('directiveElement')

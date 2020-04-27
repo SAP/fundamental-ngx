@@ -1,7 +1,7 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[fdNotificationActions], [fd-notification-actions]'
+    selector: '[fdNotificationActions], [fd-notification-actions]'
 })
 export class NotificationActionsDirective {
     /** @hidden */

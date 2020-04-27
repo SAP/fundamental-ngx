@@ -1,12 +1,10 @@
-<fd-popover [noArrow]="false"
-            [placement]="placement"
-            [triggers]="triggers">
-        <fd-popover-control>
-            <span class="fd-inline-help" [ngStyle]="inlineHelpIconStyle" role="alert"></span>
-        </fd-popover-control>
-        <fd-popover-body>
-            <span class="fd-inline-help__content" [ngStyle]="inlineHelpContentStyle">
-                <ng-content></ng-content>
-            </span>
-        </fd-popover-body>
+<fd-popover [noArrow]="false" [placement]="placement" [triggers]="triggers">
+    <fd-popover-control>
+        <span class="fd-inline-help" [ngStyle]="inlineHelpIconStyle" role="alert"></span>
+    </fd-popover-control>
+    <fd-popover-body>
+        <span class="fd-inline-help__content" [ngStyle]="inlineHelpContentStyle">
+            <ng-content></ng-content>
+        </span>
+    </fd-popover-body>
 </fd-popover>

@@ -20,9 +20,9 @@ describe('ShellbarActionsComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ ShellbarActionsComponent, ShellbarActionsMobileComponent, ShellbarUserMenuComponent ],
-            imports: [ MenuModule, PopoverModule, ButtonModule, IconModule, IdentifierModule, ProductSwitchModule ],
-            providers: [{ provide: 'window', useFactory: (() => windowMock ) }]
+            declarations: [ShellbarActionsComponent, ShellbarActionsMobileComponent, ShellbarUserMenuComponent],
+            imports: [MenuModule, PopoverModule, ButtonModule, IconModule, IdentifierModule, ProductSwitchModule],
+            providers: [{ provide: 'window', useFactory: () => windowMock }]
         }).compileComponents();
     }));
 

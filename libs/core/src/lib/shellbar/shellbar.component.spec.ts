@@ -9,8 +9,7 @@ describe('ShellbarComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ShellbarComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

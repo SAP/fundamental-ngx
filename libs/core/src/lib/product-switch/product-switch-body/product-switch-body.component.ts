@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    HostListener,
+    Input,
+    OnInit,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 import { ProductSwitchItem } from './product-switch.item';
 
 @Component({
@@ -9,7 +18,6 @@ import { ProductSwitchItem } from './product-switch.item';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductSwitchBodyComponent implements OnInit {
-
     /** Defines if drag and drop functionality should be included in product switch*/
     @Input()
     dragAndDropEnabled: boolean = true;

@@ -1,31 +1,31 @@
 :host.cascades-right {
-  padding-right: 2rem;
-  /* render arrow for trigger */
-  &.trigger:after {
-    position: absolute;
-    right: 0;
-    width: 2rem;
-    font-family: SAP-icons;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.75rem;
-    text-align: center;
-    content: '\e066';
-  }
+    padding-right: 2rem;
+    /* render arrow for trigger */
+    &.trigger:after {
+        position: absolute;
+        right: 0;
+        width: 2rem;
+        font-family: SAP-icons;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 0.75rem;
+        text-align: center;
+        content: '\e066';
+    }
 }
 
 :host.cascades-left {
-  padding-left: 2rem;
-  /* render arrow for trigger */
-  &.trigger:before {
-    position: absolute;
-    left: 0;
-    width: 2rem;
-    font-family: SAP-icons;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.75rem;
-    text-align: center;
-    content: '\e067';
-  }
+    padding-left: 2rem;
+    /* render arrow for trigger */
+    &.trigger:before {
+        position: absolute;
+        left: 0;
+        width: 2rem;
+        font-family: SAP-icons;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 0.75rem;
+        text-align: center;
+        content: '\e067';
+    }
 }

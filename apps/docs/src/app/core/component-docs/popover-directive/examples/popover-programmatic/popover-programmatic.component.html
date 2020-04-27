@@ -1,32 +1,36 @@
-<button fd-button
-        placement="bottom"
-        [fdPopover]="clickTemplate"
-        [noArrow]="false"
-        [triggers]="[]"
-        [(isOpen)]="isOpenClick"
-        (click)="isOpenClick = !isOpenClick">
+<button
+    fd-button
+    placement="bottom"
+    [fdPopover]="clickTemplate"
+    [noArrow]="false"
+    [triggers]="[]"
+    [(isOpen)]="isOpenClick"
+    (click)="isOpenClick = !isOpenClick"
+>
     Click Custom Trigger
 </button>
 
-<button fd-button
-        placement="bottom"
-        [fdPopover]="hoverTemplate"
-        [noArrow]="false"
-        [triggers]="[]"
-        [(isOpen)]="isOpenHover"
-        (mouseenter)="isOpenHover = true"
-        (mouseleave)="isOpenHover = false">
+<button
+    fd-button
+    placement="bottom"
+    [fdPopover]="hoverTemplate"
+    [noArrow]="false"
+    [triggers]="[]"
+    [(isOpen)]="isOpenHover"
+    (mouseenter)="isOpenHover = true"
+    (mouseleave)="isOpenHover = false"
+>
     Hover Custom Trigger
 </button>
 
 <ng-template #clickTemplate>
-    <div style="padding: 12px">
+    <div style="padding: 12px;">
         This popover was opened using a custom click trigger.
     </div>
 </ng-template>
 
 <ng-template #hoverTemplate>
-    <div style="padding: 12px">
+    <div style="padding: 12px;">
         This popover was opened using a custom hover trigger.
     </div>
 </ng-template>

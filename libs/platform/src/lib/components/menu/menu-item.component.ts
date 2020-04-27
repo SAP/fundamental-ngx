@@ -20,7 +20,6 @@ import { Subject } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuItemComponent implements OnDestroy, FocusableOption {
-
     @Input() cascadeDirection: 'right' | 'left' = 'right';
 
     @Output() itemSelect: EventEmitter<void> = new EventEmitter();
@@ -28,9 +27,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     // Track when menu item is hovered over
     public hovered: Subject<MenuItemComponent> = new Subject<MenuItemComponent>();
 
-    constructor(
-        private elementRef: ElementRef
-    ) { }
+    constructor(private elementRef: ElementRef) {}
 
     // Add Fundamental-Styles class for menu item
     @HostBinding('class.fd-menu__item') menuItemClass = true;
@@ -67,5 +64,4 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     focus() {
         this.elementRef.nativeElement.focus();
     }
-
 }

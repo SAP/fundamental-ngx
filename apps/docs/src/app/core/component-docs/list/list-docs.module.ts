@@ -8,7 +8,9 @@ import { ListDocsComponent } from './list-docs.component';
 import { ListInfiniteScrollExampleComponent } from './examples/list-infinite-scroll-example.component';
 import {
     ListComplexExampleComponent,
-    ListExampleComponent, ListIconExampleComponent, ListSecondaryExampleComponent
+    ListExampleComponent,
+    ListIconExampleComponent,
+    ListSecondaryExampleComponent
 } from './examples/list-examples.component';
 import { CheckboxModule, InfiniteScrollModule, LinkModule, ListModule, RadioModule } from '@fundamental-ngx/core';
 
@@ -44,5 +46,4 @@ const routes: Routes = [
         ListComplexExampleComponent
     ]
 })
-export class ListDocsModule {
-}
+export class ListDocsModule {}

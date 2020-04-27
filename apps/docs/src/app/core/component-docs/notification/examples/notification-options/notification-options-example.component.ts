@@ -1,24 +1,15 @@
-import {
-    Component,
-    ViewChild,
-    ViewContainerRef,
-    ViewEncapsulation
-} from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { NotificationService } from '@fundamental-ngx/core';
 import { NotificationOptionsContentComponent } from './notification-options-content.component';
-
 
 @Component({
     selector: 'fd-notification-options-example',
     templateUrl: './notification-options-example.component.html',
     styleUrls: ['./notification-options-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [
-        NotificationService
-    ]
+    providers: [NotificationService]
 })
 export class NotificationOptionsExampleComponent {
-
     @ViewChild('vc', { read: ViewContainerRef })
     ref: ViewContainerRef;
 
@@ -28,15 +19,12 @@ export class NotificationOptionsExampleComponent {
         metadata: 'Other Data',
         moreInfo: 'More Info',
         approve: 'Approve',
-        cancel: 'Cancel',
+        cancel: 'Cancel'
     };
 
-    constructor (
-        private notificationService: NotificationService,
-    ) {}
+    constructor(private notificationService: NotificationService) {}
 
     openNotifications() {
-
         this.ref.clear();
 
         this.notificationService.open(NotificationOptionsContentComponent, {
@@ -77,6 +65,4 @@ export class NotificationOptionsExampleComponent {
             container: this.ref.element.nativeElement
         });
     }
-
-
 }

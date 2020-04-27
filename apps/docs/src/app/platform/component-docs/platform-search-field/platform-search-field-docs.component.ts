@@ -55,7 +55,5 @@ export class PlatformSearchFieldDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit() {
-    }
-
+    ngOnInit() {}
 }

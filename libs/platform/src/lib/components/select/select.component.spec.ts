@@ -6,15 +6,17 @@ import { ElementRef, ViewChild, Component } from '@angular/core';
 @Component({
     selector: 'fdp-select',
     template: `
-        <fdp-select class="fd-select-popover-custom fd-popover-custom" 
-        [selectType]="'noborder'" 
-        [gylph]="'filter'" 
-        [list]="option"
-        [placeholder]="'select from values'">
+        <fdp-select
+            class="fd-select-popover-custom fd-popover-custom"
+            [selectType]="'noborder'"
+            [gylph]="'filter'"
+            [list]="option"
+            [placeholder]="'select from values'"
+        >
+        </fdp-select>
     `
 })
 class TestWrapperComponent {
-
     @ViewChild(SelectPlatformComponent, { static: true })
     selectRef: SelectPlatformComponent;
 
@@ -30,9 +32,8 @@ describe('SelectPlatformComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-        declarations: [ SelectPlatformComponent ]
-    })
-    .compileComponents();
+            declarations: [SelectPlatformComponent]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

@@ -8,9 +8,8 @@ describe('ShellbarLogoComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ ShellbarLogoComponent ]
-        })
-            .compileComponents();
+            declarations: [ShellbarLogoComponent]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

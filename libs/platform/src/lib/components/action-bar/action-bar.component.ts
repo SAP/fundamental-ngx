@@ -132,5 +132,4 @@ export class ActionBarComponent implements OnInit, OnDestroy {
             clearTimeout(this.timer);
         }
     }
-
 }

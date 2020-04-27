@@ -3,10 +3,10 @@ import { NgModule, TemplateRef, Component, ViewChild } from '@angular/core';
 import { NotificationModule, NotificationRef, NotificationService } from '@fundamental-ngx/core';
 
 @Component({
-    template: `        
-            <ng-template #testTemplate let-alert>
-                <h1>test</h1>
-            </ng-template>
+    template: `
+        <ng-template #testTemplate let-alert>
+            <h1>test</h1>
+        </ng-template>
     `
 })
 class TemplateTestComponent {
@@ -127,6 +127,4 @@ describe('NotificationService', () => {
 
         expect(service['notifications'].length).toBe(0);
     });
-
-
 });

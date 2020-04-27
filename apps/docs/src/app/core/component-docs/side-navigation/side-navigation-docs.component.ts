@@ -90,7 +90,7 @@ export class SideNavigationDocsComponent {
         {
             language: 'html',
             code: sideNavigationIconsSrc,
-            fileName: 'side-navigation-icons-example',
+            fileName: 'side-navigation-icons-example'
         }
     ];
 
@@ -98,7 +98,7 @@ export class SideNavigationDocsComponent {
         {
             language: 'html',
             code: sideNavigationCondensedSrc,
-            fileName: 'side-navigation-condensed-example',
+            fileName: 'side-navigation-condensed-example'
         }
     ];
 

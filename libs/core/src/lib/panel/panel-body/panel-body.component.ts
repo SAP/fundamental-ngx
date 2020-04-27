@@ -21,7 +21,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelBodyComponent {
-
     /** @hidden */
     @HostBinding('class.fd-panel__body')
     fdPanelBodyClass: boolean = true;
@@ -30,5 +29,4 @@ export class PanelBodyComponent {
     @Input()
     @HostBinding('class.fd-panel__body--bleed')
     bleed: boolean = false;
-
 }

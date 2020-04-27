@@ -1,11 +1,10 @@
 import { Observable } from 'rxjs';
 import { NgControl } from '@angular/forms';
 
-export type InputSize = 'compact' | 'cozy';
+export type ContentDensity = 'compact' | 'cozy';
 export type Status = 'error' | 'warning' | void;
 
 export abstract class FormFieldControl<T> {
-
     /**
      * Each input control has always a value. Need to make sure we keep a convention for
      * input fields
@@ -30,13 +29,12 @@ export abstract class FormFieldControl<T> {
     /**
      *  Components works in two sizes compact or cozy
      */
-    size: InputSize;
+    contentDensity: ContentDensity;
     /**
      *
      * Form Field listen for all the changes happening inside the input
      */
     readonly stateChanges: Observable<void>;
-
 
     /**
      *  Each input should inject its own ngControl and we should retrieve it
@@ -63,7 +61,4 @@ export abstract class FormFieldControl<T> {
      * control
      */
     abstract onContainerClick(event: MouseEvent): void;
-
 }
-
-

@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './file-input-drag-disabled-example.component.html'
 })
 export class FileInputDragDisabledExampleComponent {
-
     files: File[];
     invalidFiles: File[];
-
 }

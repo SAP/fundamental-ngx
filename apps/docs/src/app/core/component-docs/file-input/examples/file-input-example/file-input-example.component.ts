@@ -5,7 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './file-input-example.component.html'
 })
 export class FileInputExampleComponent {
-
-    files: FileList;    // You can also receive the files as a File[].
-
+    files: FileList; // You can also receive the files as a File[].
 }

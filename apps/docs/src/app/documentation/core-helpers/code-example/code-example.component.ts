@@ -16,16 +16,14 @@ import { AlertService } from '@fundamental-ngx/core';
 import hljs from 'highlight.js/lib';
 import { StackblitzService } from '../stackblitz/stackblitz.service';
 
-
 @Component({
     selector: 'code-example',
     templateUrl: './code-example.component.html',
     styleUrls: ['./code-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: [height({ time: 200 })],
+    animations: [height({ time: 200 })]
 })
 export class CodeExampleComponent implements OnInit, AfterViewInit {
-
     @ViewChildren('code') codeElements: QueryList<ElementRef>;
 
     /**
@@ -69,6 +67,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         /** Highlight.js init */
-        this.codeElements.forEach(element => hljs.highlightBlock(element.nativeElement));
+        this.codeElements.forEach((element) => hljs.highlightBlock(element.nativeElement));
     }
 }

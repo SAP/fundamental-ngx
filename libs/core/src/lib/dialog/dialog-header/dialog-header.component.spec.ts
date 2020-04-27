@@ -6,7 +6,6 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class
 import { TemplateModule } from '../../utils/directives/template/template.module';
 import { BarModule } from '../../bar/bar.module';
 
-
 @Component({
     template: `
         <fd-dialog-header>
@@ -20,7 +19,7 @@ import { BarModule } from '../../bar/bar.module';
             <ng-template fdTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element>
-                        <input id="customInput">
+                        <input id="customInput" />
                     </fd-bar-element>
                 </div>
             </ng-template>
@@ -44,20 +43,19 @@ class DefaultHeaderTestComponent {
 }
 
 describe('DialogHeaderComponent', () => {
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [DialogHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
             imports: [BarModule, TemplateModule],
-            providers: [{provide: DIALOG_CONFIG, useClass: DialogConfig}]
+            providers: [{ provide: DIALOG_CONFIG, useClass: DialogConfig }]
         });
     }));
 
-    function setup<V>(testComponent): { fixture: ComponentFixture<V>, component: V } {
-        const fixture = TestBed.createComponent(testComponent as any as Type<V>);
+    function setup<V>(testComponent): { fixture: ComponentFixture<V>; component: V } {
+        const fixture = TestBed.createComponent((testComponent as any) as Type<V>);
         const component = fixture.componentInstance;
 
-        return {fixture: fixture, component: component};
+        return { fixture: fixture, component: component };
     }
 
     async function wait(componentFixture: ComponentFixture<any>) {
@@ -66,7 +64,7 @@ describe('DialogHeaderComponent', () => {
     }
 
     it('should create', async () => {
-        const {fixture, component} = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
+        const { fixture, component } = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
 
         await wait(fixture);
 
@@ -74,9 +72,8 @@ describe('DialogHeaderComponent', () => {
         expect(component.dialogHeaderRef).toBeTruthy();
     });
 
-
     it('should display in mobile mode', async () => {
-        const {fixture, component} = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
+        const { fixture, component } = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
 
         await wait(fixture);
 
@@ -89,9 +86,8 @@ describe('DialogHeaderComponent', () => {
         expect(footerEl).toHaveClass('fd-bar--cosy');
     });
 
-
     it('should use default template', async () => {
-        const {fixture} = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
+        const { fixture } = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
         await wait(fixture);
 
         const buttonEl = fixture.nativeElement.querySelector('[fd-dialog-close-button]');
@@ -102,7 +98,7 @@ describe('DialogHeaderComponent', () => {
     });
 
     it('should use custom templates', async () => {
-        const {fixture, component} = setup<CustomHeaderTestComponent>(CustomHeaderTestComponent);
+        const { fixture, component } = setup<CustomHeaderTestComponent>(CustomHeaderTestComponent);
         await wait(fixture);
 
         const headerEl = fixture.nativeElement.querySelector('.fd-bar--header-with-subheader');

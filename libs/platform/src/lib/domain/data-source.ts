@@ -68,10 +68,7 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { InjectionToken } from '@angular/core';
 
-
-export const DATA_PROVIDERS =
-    new InjectionToken<Map<string, DataProvider<any>>>('DataProviderRegistry');
-
+export const DATA_PROVIDERS = new InjectionToken<Map<string, DataProvider<any>>>('DataProviderRegistry');
 
 export interface DataSource<T> {
     open(): Observable<T[]>;
@@ -82,7 +79,6 @@ export interface DataSource<T> {
 export function isDataSource(value: any): value is DataSource<any> {
     return value && typeof value.open === 'function';
 }
-
 
 /**
  * Provider is a data driver that can access data and retrieve them. It knows how to get 1
@@ -123,13 +119,11 @@ export abstract class DataProvider<T> {
     }
 }
 
-
 export class ComboBoxDataSource<T> implements DataSource<T> {
     static readonly MaxLimit = 5;
     protected dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
 
-    constructor(public dataProvider: DataProvider<any>) {
-    }
+    constructor(public dataProvider: DataProvider<any>) {}
 
     match(predicate?: string | Map<string, string>) {
         const searchParam = new Map();
@@ -155,8 +149,7 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
         return this.dataChanges.asObservable();
     }
 
-    close() {
-    }
+    close() {}
 }
 
 export class SearchFieldDataSource<T> extends ComboBoxDataSource<T> {

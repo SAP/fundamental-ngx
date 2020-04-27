@@ -1,5 +1,4 @@
 export interface ProductSwitchItem {
-
     /** Title of product */
     title: string;
 

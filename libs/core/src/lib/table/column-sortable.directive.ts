@@ -13,12 +13,10 @@ import { Directive, Input } from '@angular/core';
     }
 })
 export class ColumnSortableDirective {
-
-    /** 
-     * The sorting direction. 
+    /**
+     * The sorting direction.
      * Options include *asc*, *dsc*, *desc*, and *none*
      */
     @Input() sortDir: SortDirections;
-
 }
 export type SortDirections = 'asc' | 'dsc' | 'desc' | 'none';

@@ -8,7 +8,6 @@ import { SuggestionItem, SearchInput } from '@fundamental-ngx/platform';
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformSearchFieldBasicExampleComponent implements OnInit {
-
     public suggestions: SuggestionItem[];
 
     public searchTerm = '';
@@ -18,31 +17,44 @@ export class PlatformSearchFieldBasicExampleComponent implements OnInit {
     public compactInputText = '';
 
     ngOnInit() {
-        this.suggestions = [{
-            value: 'Apple'
-        }, {
-            value: 'Banana'
-        }, {
-            value: 'Blueberry'
-        }, {
-            value: 'Cherry'
-        }, {
-            value: 'Grape'
-        }, {
-            value: 'Lemon'
-        }, {
-            value: 'Lime'
-        }, {
-            value: 'Orange'
-        }, {
-            value: 'Peach'
-        }, {
-            value: 'Pineapple'
-        }, {
-            value: 'Plum'
-        }, {
-            value: 'Raspberry'
-        }];
+        this.suggestions = [
+            {
+                value: 'Apple'
+            },
+            {
+                value: 'Banana'
+            },
+            {
+                value: 'Blueberry'
+            },
+            {
+                value: 'Cherry'
+            },
+            {
+                value: 'Grape'
+            },
+            {
+                value: 'Lemon'
+            },
+            {
+                value: 'Lime'
+            },
+            {
+                value: 'Orange'
+            },
+            {
+                value: 'Peach'
+            },
+            {
+                value: 'Pineapple'
+            },
+            {
+                value: 'Plum'
+            },
+            {
+                value: 'Raspberry'
+            }
+        ];
     }
 
     onSearchSubmit($event: SearchInput) {

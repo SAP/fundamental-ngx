@@ -10,7 +10,7 @@ describe('RadioButtonComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [RadioModule, FormModule],
-            declarations: [RadioButtonComponent, FormGroupComponent],
+            declarations: [RadioButtonComponent, FormGroupComponent]
         }).compileComponents();
     }));
 
@@ -47,7 +47,7 @@ describe('RadioButtonComponent', () => {
         component.id = 'id1';
         component.name = 'radio1';
         component.value = 'radio1';
-        component.size = 'compact';
+        component.contentDensity = 'compact';
         component.disabled = true;
 
         // forceRendere must be true for component creation
@@ -71,7 +71,7 @@ describe('RadioButtonComponent', () => {
         component.id = 'id1';
         component.name = 'radio1';
         component.value = 'radio1';
-        component.size = 'compact';
+        component.contentDensity = 'compact';
         component.disabled = true;
 
         // forceRendere must be true for component creation

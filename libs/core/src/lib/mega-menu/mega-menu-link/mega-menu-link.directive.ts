@@ -10,7 +10,7 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-mega-menu-link]',
     host: {
-        'tabindex': '0'
+        tabindex: '0'
     }
 })
 export class MegaMenuLinkDirective {
@@ -30,7 +30,7 @@ export class MegaMenuLinkDirective {
     isExpanded: boolean = false;
 
     /** @hidden */
-    constructor (public itemEl: ElementRef) {}
+    constructor(public itemEl: ElementRef) {}
 
     public focus(): void {
         this.itemEl.nativeElement.focus();

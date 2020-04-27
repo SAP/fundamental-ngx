@@ -4,7 +4,6 @@ import { MegaMenuItemComponent } from './mega-menu-item.component';
 import { Component } from '@angular/core';
 import { MegaMenuModule } from '../mega-menu.module';
 
-
 @Component({
     selector: 'fd-test-menu-item',
     template: `
@@ -32,8 +31,7 @@ describe('MegaMenuItemComponent', () => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
             imports: [MegaMenuModule]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -49,7 +47,7 @@ describe('MegaMenuItemComponent', () => {
     it('should open sublist and focus first sub element', () => {
         spyOn(component, 'openSubList');
         spyOn(component.subItems.first, 'focus');
-        const event: any = {key: 'ArrowRight', preventDefault: () => {}};
+        const event: any = { key: 'ArrowRight', preventDefault: () => {} };
         component.handleKeyboardEvent(event);
         expect(component.openSubList).toHaveBeenCalled();
         expect(component.subItems.first.focus).toHaveBeenCalled();
@@ -58,7 +56,7 @@ describe('MegaMenuItemComponent', () => {
     it('should close sublist and focus parent element', () => {
         spyOn(component, 'closeSubList');
         spyOn(component.link, 'focus');
-        const event: any = {key: 'ArrowLeft', preventDefault: () => {}};
+        const event: any = { key: 'ArrowLeft', preventDefault: () => {} };
         component.handleKeyboardEvent(event);
         expect(component.closeSubList).toHaveBeenCalled();
         expect(component.link.focus).toHaveBeenCalled();
@@ -67,7 +65,7 @@ describe('MegaMenuItemComponent', () => {
     it('should open sublist and focus first sub element', () => {
         spyOn(component, 'openSubList');
         spyOn(component.subItems.first, 'focus');
-        const event: any = {key: 'Enter', preventDefault: () => {}};
+        const event: any = { key: 'Enter', preventDefault: () => {} };
         component.handleKeyboardEvent(event);
         expect(component.openSubList).toHaveBeenCalled();
         expect(component.subItems.first.focus).toHaveBeenCalled();
@@ -76,7 +74,7 @@ describe('MegaMenuItemComponent', () => {
     it('should open sublist and focus first sub element', () => {
         spyOn(component, 'openSubList');
         spyOn(component.subItems.first, 'focus');
-        const event: any = {key: ' ', preventDefault: () => {}};
+        const event: any = { key: ' ', preventDefault: () => {} };
         component.handleKeyboardEvent(event);
         expect(component.openSubList).toHaveBeenCalled();
         expect(component.subItems.first.focus).toHaveBeenCalled();
@@ -84,20 +82,20 @@ describe('MegaMenuItemComponent', () => {
 
     it('should throw arrow up event', () => {
         spyOn(component.keyDown, 'emit');
-        const event: any = {key: 'ArrowUp', preventDefault: () => {}};
+        const event: any = { key: 'ArrowUp', preventDefault: () => {} };
         component.handleKeyboardEvent(event);
         expect(component.keyDown.emit).toHaveBeenCalledWith(event);
     });
 
     it('should not propagate event on specified arrow down event', () => {
-        const event: any = {key: 'ArrowDown', stopPropagation: () => {}, preventDefault: () => {}};
+        const event: any = { key: 'ArrowDown', stopPropagation: () => {}, preventDefault: () => {} };
         spyOn(event, 'stopPropagation');
         component.handleSubListKeyDown(event, 0);
         expect(event.stopPropagation).toHaveBeenCalled();
     });
 
     it('should not propagate event on specified arrow up event', () => {
-        const event: any = {key: 'ArrowUp', stopPropagation: () => {}, preventDefault: () => {}};
+        const event: any = { key: 'ArrowUp', stopPropagation: () => {}, preventDefault: () => {} };
         spyOn(event, 'stopPropagation');
         component.handleSubListKeyDown(event, 0);
         expect(event.stopPropagation).toHaveBeenCalled();

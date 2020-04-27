@@ -263,10 +263,7 @@ export class DialogDocsComponent {
         }
     ];
 
-    constructor(
-        private _schemaFactory: SchemaFactoryService,
-        private _dialogService: DialogService
-    ) {
+    constructor(private _schemaFactory: SchemaFactoryService, private _dialogService: DialogService) {
         this.schema = this._schemaFactory.getComponent('dialog');
     }
 

@@ -9,7 +9,8 @@
         [attr.aria-label]="previousLabel"
         [attr.aria-disabled]="currentPage === 1 ? true : null"
         (keypress)="onKeypressHandler(currentPage - 1, $event)"
-        (click)="goToPage(currentPage - 1)">
+        (click)="goToPage(currentPage - 1)"
+    >
     </a>
     <div dir="ltr" class="fd-pagination-direction-override-display">
         <ng-container *ngFor="let page of pages$ | async">
@@ -20,8 +21,9 @@
                 (keypress)="onKeypressHandler(page, $event)"
                 (click)="goToPage(page, $event)"
                 *ngIf="page !== -1; else more"
-                [attr.aria-selected]="currentPage === page">
-                    {{ page }}
+                [attr.aria-selected]="currentPage === page"
+            >
+                {{ page }}
             </a>
         </ng-container>
     </div>
@@ -32,7 +34,8 @@
         role="button"
         [attr.aria-disabled]="isLastPage$ | async"
         (keypress)="onKeypressHandler(currentPage + 1, $event)"
-        (click)="goToPage(currentPage + 1)">
+        (click)="goToPage(currentPage + 1)"
+    >
     </a>
 </nav>
 

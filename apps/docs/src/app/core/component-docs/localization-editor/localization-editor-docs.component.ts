@@ -19,13 +19,13 @@ export class LocalizationEditorDocsComponent {
         {
             language: 'html',
             code: localizationSrcH,
-            fileName: 'localization-editor-example',
+            fileName: 'localization-editor-example'
         },
         {
             language: 'typescript',
             component: 'LocalizationEditorExampleComponent',
             code: localizationSrcT,
-            fileName: 'localization-editor-example',
+            fileName: 'localization-editor-example'
         }
     ];
 
@@ -33,13 +33,13 @@ export class LocalizationEditorDocsComponent {
         {
             language: 'html',
             code: localizationTemplateSrcH,
-            fileName: 'localization-editor-template-example',
+            fileName: 'localization-editor-template-example'
         },
         {
             language: 'typescript',
             component: 'LocalizationEditorTemplateExampleComponent',
             code: localizationTemplateSrcT,
-            fileName: 'localization-editor-template-example',
+            fileName: 'localization-editor-template-example'
         }
     ];
 
@@ -47,13 +47,13 @@ export class LocalizationEditorDocsComponent {
         {
             language: 'html',
             code: localizationTextareaSrcH,
-            fileName: 'localization-editor-textarea-example',
+            fileName: 'localization-editor-textarea-example'
         },
         {
             language: 'typescript',
             component: 'LocalizationEditorTextareaExampleComponent',
             code: localizationTextareaSrcT,
-            fileName: 'localization-editor-textarea-example',
+            fileName: 'localization-editor-textarea-example'
         }
     ];
 
@@ -61,13 +61,13 @@ export class LocalizationEditorDocsComponent {
         {
             language: 'html',
             code: localizationFormsSrcH,
-            fileName: 'localization-editor-forms-example',
+            fileName: 'localization-editor-forms-example'
         },
         {
             language: 'typescript',
             component: 'LocalizationEditorFormsExampleComponent',
             code: localizationFormsSrcT,
-            fileName: 'localization-editor-forms-example',
+            fileName: 'localization-editor-forms-example'
         }
     ];
 }

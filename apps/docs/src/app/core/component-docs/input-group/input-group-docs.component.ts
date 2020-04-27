@@ -55,7 +55,7 @@ export class InputGroupDocsComponent {
                     state: {
                         type: 'string',
                         enum: ['success', 'error', 'information', 'warning']
-                    },
+                    }
                 }
             },
             state: {
@@ -91,7 +91,7 @@ export class InputGroupDocsComponent {
         {
             language: 'html',
             code: inputGroupTextSrc,
-            fileName: 'input-group-text-example',
+            fileName: 'input-group-text-example'
         }
     ];
 
@@ -99,7 +99,7 @@ export class InputGroupDocsComponent {
         {
             language: 'html',
             code: inputGroupIconSrc,
-            fileName: 'input-group-icon-example',
+            fileName: 'input-group-icon-example'
         }
     ];
 
@@ -107,7 +107,7 @@ export class InputGroupDocsComponent {
         {
             language: 'html',
             code: inputGroupButtonSrc,
-            fileName: 'input-group-button-example',
+            fileName: 'input-group-button-example'
         }
     ];
 
@@ -135,7 +135,7 @@ export class InputGroupDocsComponent {
         {
             language: 'html',
             code: inputGroupTextCompactSrc,
-            fileName: 'input-group-compact-example',
+            fileName: 'input-group-compact-example'
         }
     ];
 
@@ -158,7 +158,7 @@ export class InputGroupDocsComponent {
         {
             language: 'html',
             code: complexInputHtml,
-            fileName: 'input-group-number-example',
+            fileName: 'input-group-number-example'
         }
     ];
 

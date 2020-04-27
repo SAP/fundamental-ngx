@@ -11,7 +11,6 @@ import * as tileProductSrc from '!raw-loader!./examples/tile-product-example.com
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
-
 @Component({
     selector: 'app-tile',
     templateUrl: './tile-docs.component.html'
@@ -92,7 +91,7 @@ export class TileDocsComponent {
         {
             language: 'html',
             code: tileSrc,
-            fileName: 'tile-example',
+            fileName: 'tile-example'
         }
     ];
 
@@ -100,7 +99,7 @@ export class TileDocsComponent {
         {
             language: 'html',
             code: tileMediaSrc,
-            fileName: 'tile-media-example',
+            fileName: 'tile-media-example'
         }
     ];
 
@@ -108,7 +107,7 @@ export class TileDocsComponent {
         {
             language: 'html',
             code: tileActionsSrc,
-            fileName: 'tile-action-example',
+            fileName: 'tile-action-example'
         }
     ];
 
@@ -116,7 +115,7 @@ export class TileDocsComponent {
         {
             language: 'html',
             code: tileButtonSrc,
-            fileName: 'tile-button-example',
+            fileName: 'tile-button-example'
         }
     ];
 
@@ -124,7 +123,7 @@ export class TileDocsComponent {
         {
             language: 'html',
             code: tileProductSrc,
-            fileName: 'tile-product-example',
+            fileName: 'tile-product-example'
         }
     ];
 
@@ -132,7 +131,7 @@ export class TileDocsComponent {
         {
             language: 'html',
             code: tileDisabledSrc,
-            fileName: 'tile-disabled-example',
+            fileName: 'tile-disabled-example'
         }
     ];
 

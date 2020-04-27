@@ -33,8 +33,7 @@ export default {
 };
 
 export const Notifications = () => ({
-    template:
-        `
+    template: `
         <fd-notification [type]="headerType" [size]="size">
 
         <fd-notification-header (closeButtonClick)="closeButtonAction">
@@ -71,17 +70,25 @@ export const Notifications = () => ({
         </fd-notification>
   `,
     props: {
-        headerType: select('Type of header', {
-            information: 'information',
-            success: 'success',
-            error: 'error',
-            warning: 'warning',
-        }, 'success'),
-        size: select('Size Of notification', {
-            s: 's',
-            m: 'm',
-            l: 'l',
-        }, 'l'),
+        headerType: select(
+            'Type of header',
+            {
+                information: 'information',
+                success: 'success',
+                error: 'error',
+                warning: 'warning'
+            },
+            'success'
+        ),
+        size: select(
+            'Size Of notification',
+            {
+                s: 's',
+                m: 'm',
+                l: 'l'
+            },
+            'l'
+        ),
         closeButton: boolean('Close button hidden', false),
         title: text('Title text', 'Title'),
         description: text('Description text', 'Description'),
@@ -92,7 +99,6 @@ export const Notifications = () => ({
         closeButtonAction: action('Close button'),
         callToAction: action('Close button'),
         approveAction: action('Close button'),
-        cancelAction: action('Close button'),
-
+        cancelAction: action('Close button')
     }
 });

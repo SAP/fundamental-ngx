@@ -7,8 +7,15 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 const routes: Routes = [
-    { path: 'core', loadChildren: () => import('./core/core-documentation.module').then(m => m.CoreDocumentationModule) },
-    { path: 'platform', loadChildren: () => import('./platform/platform-documentation.module').then(m => m.PlatformDocumentationModule) },
+    {
+        path: 'core',
+        loadChildren: () => import('./core/core-documentation.module').then((m) => m.CoreDocumentationModule)
+    },
+    {
+        path: 'platform',
+        loadChildren: () =>
+            import('./platform/platform-documentation.module').then((m) => m.PlatformDocumentationModule)
+    },
     { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];
 
@@ -18,10 +25,10 @@ const routes: Routes = [
         BrowserAnimationsModule,
         RouterModule.forRoot(routes, { useHash: true }),
         HttpClientModule,
-        MarkdownModule.forRoot({ loader: HttpClient }),
+        MarkdownModule.forRoot({ loader: HttpClient })
     ],
     bootstrap: [AppComponent],
 
     entryComponents: []
 })
-export class AppModule { }
+export class AppModule {}

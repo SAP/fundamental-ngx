@@ -1,12 +1,8 @@
 import { version } from '../../../../../../../package.json';
-import { dependencies } from '../../../../../../../package-lock.json'
+import { dependencies } from '../../../../../../../package-lock.json';
 
 export class StackblitzDependencies {
-
-    private static _libDependencies: string[] = [
-        '@fundamental-ngx/platform',
-        '@fundamental-ngx/core'
-    ];
+    private static _libDependencies: string[] = ['@fundamental-ngx/platform', '@fundamental-ngx/core'];
 
     private static _dependencies: string[] = [
         '@angular/animations',
@@ -28,12 +24,11 @@ export class StackblitzDependencies {
     ];
 
     static GetDependencies(): object {
-
         const _dependencies: object = {};
 
-        this._libDependencies.forEach(libDep => _dependencies[libDep] = version);
+        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = version));
 
-        this._dependencies.forEach(dep => {
+        this._dependencies.forEach((dep) => {
             if (dependencies && dependencies[dep]) {
                 _dependencies[dep] = dependencies[dep].version;
             } else {
@@ -115,6 +110,6 @@ export class StackblitzDependencies {
   },
   "defaultProject": "fundamental-ngx-example"
 }
-        `
+        `;
     }
 }

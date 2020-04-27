@@ -1,5 +1,6 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -24,16 +25,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     host: {
         '(blur)': 'onTouched()'
     },
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => FileInputComponent),
-        multi: true,
-    }],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FileInputComponent),
+            multi: true
+        }
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileInputComponent implements ControlValueAccessor {
-
     /** @hidden */
     @HostBinding('class.fd-file-input')
     fdFileInputClass: boolean = true;
@@ -78,9 +80,7 @@ export class FileInputComponent implements ControlValueAccessor {
     @Output()
     readonly onDragLeave: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor (
-        private changeDetRef: ChangeDetectorRef
-    ) {}
+    constructor(private changeDetRef: ChangeDetectorRef) {}
 
     /** @hidden */
     onChange: Function = () => {};
@@ -114,7 +114,7 @@ export class FileInputComponent implements ControlValueAccessor {
         if (this.maxFileSize) {
             const valid_files: File[] = [];
             const invalid_files: File[] = [];
-            event.forEach(file => {
+            event.forEach((file) => {
                 if (file.size < this.maxFileSize) {
                     valid_files.push(file);
                 } else {
@@ -148,5 +148,4 @@ export class FileInputComponent implements ControlValueAccessor {
         this.inputRef.nativeElement.value = '';
         this.onChange([]);
     }
-
 }

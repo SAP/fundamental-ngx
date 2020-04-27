@@ -12,7 +12,6 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutGridComponent extends AbstractFdNgxClass {
-
     /** @Input Column span for the grid system */
     @Input()
     col: number;
@@ -27,7 +26,6 @@ export class LayoutGridComponent extends AbstractFdNgxClass {
 
     /** @hidden */
     _setProperties() {
-
         this._addClassToElement('fd-layout-grid');
 
         if (this.nogap) {

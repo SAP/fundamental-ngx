@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2-rc.8"></a>
+## [0.17.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.7...v0.17.2-rc.8) (2020-04-27)
+
+
+### Bug Fixes
+
+* fixed master branch by removing failed merge files ([#2428](https://github.com/SAP/fundamental-ngx/issues/2428)) ([e2a9b18](https://github.com/SAP/fundamental-ngx/commit/e2a9b18))
+
+
+
+<a name="0.17.2-rc.7"></a>
+## [0.17.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.6...v0.17.2-rc.7) (2020-04-27)
+
+
+
+<a name="0.17.2-rc.6"></a>
+## [0.17.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.5...v0.17.2-rc.6) (2020-04-27)
+
+
+
+<a name="0.17.2-rc.5"></a>
+## [0.17.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.4...v0.17.2-rc.5) (2020-04-27)
+
+
+
+<a name="0.17.2-rc.4"></a>
+## [0.17.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.3...v0.17.2-rc.4) (2020-04-27)
+
+
+
+<a name="0.17.2-rc.3"></a>
+## [0.17.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.2...v0.17.2-rc.3) (2020-04-25)
+
+
+
+<a name="0.17.2-rc.2"></a>
+## [0.17.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.1...v0.17.2-rc.2) (2020-04-24)
+
+
+### Bug Fixes
+
+* (platform) button styles updated to 0.8 styles ([#2365](https://github.com/SAP/fundamental-ngx/issues/2365)) ([dd4f935](https://github.com/SAP/fundamental-ngx/commit/dd4f935))
+
+
+
+<a name="0.17.2-rc.1"></a>
+## [0.17.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.0...v0.17.2-rc.1) (2020-04-23)
+
+
+### Bug Fixes
+
+* (platform) Create common base class for Platform components ([#2369](https://github.com/SAP/fundamental-ngx/issues/2369)) ([4a25988](https://github.com/SAP/fundamental-ngx/commit/4a25988))
+
+
+
 <a name="0.17.2-rc.0"></a>
 ## [0.17.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.17.1...v0.17.2-rc.0) (2020-04-22)
 

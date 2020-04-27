@@ -7,17 +7,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
     templateUrl: './combobox-disabled-example.component.html'
 })
 export class ComboboxDisabledExampleComponent {
-
-    dropdownValues = [
-        'Apple',
-        'Pineapple',
-        'Banana',
-        'Kiwi',
-        'Strawberry'
-    ];
+    dropdownValues = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];
 
     customForm = new FormGroup({
         disabledComboControl: new FormControl({ value: 'Kiwi', disabled: true }, Validators.required)
     });
-
 }

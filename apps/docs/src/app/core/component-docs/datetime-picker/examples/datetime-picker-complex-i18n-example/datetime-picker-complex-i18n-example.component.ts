@@ -15,10 +15,8 @@ import localeBulgarian from '@angular/common/locales/bg';
 import localeGb from '@angular/common/locales/en-GB';
 import localeDe from '@angular/common/locales/de';
 
-
 @Injectable()
 export class CustomI18nMomentCalendar extends CalendarI18n {
-
     getDayAriaLabel(date: Date): string {
         return date.getDate() + ' ' + moment.months()[date.getMonth()] + ' ' + date.getFullYear();
     }
@@ -48,10 +46,9 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
     ]
 })
 export class DatetimePickerComplexI18nExampleComponent {
-
     @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent;
 
-    constructor (private calendarI18nService: CalendarI18n) {
+    constructor(private calendarI18nService: CalendarI18n) {
         registerLocaleData(localeFrench, 'fr');
         registerLocaleData(localePolish, 'pl');
         registerLocaleData(localeBulgarian, 'bg');

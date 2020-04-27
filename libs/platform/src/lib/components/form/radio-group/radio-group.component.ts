@@ -10,7 +10,7 @@ import {
     Output,
     Self,
     Optional,
-    ViewChildren,
+    ViewChildren
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
@@ -24,7 +24,7 @@ let nextUniqueId = 0;
 @Component({
     selector: 'fdp-radio-group',
     templateUrl: './radio-group.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit {
     /** value of selected radio button */
@@ -172,7 +172,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     private _setProperties(button: RadioButtonComponent) {
         if (button) {
             button.name = this.name;
-            button.size = this.size;
+            button.contentDensity = this.contentDensity;
             button.status = this.status;
             button.disabled = button.disabled ? button.disabled : this._disabled;
         }

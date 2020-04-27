@@ -3,7 +3,9 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    ContentChildren, forwardRef, QueryList,
+    ContentChildren,
+    forwardRef,
+    QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
@@ -22,9 +24,8 @@ import { ComboboxComponent } from '../combobox/combobox.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarComponent implements AfterContentInit {
-
     /** @hidden */
-    @ContentChild(ComboboxComponent, {static: false})
+    @ContentChild(ComboboxComponent, { static: false })
     comboboxComponent: ComboboxComponent;
 
     /** @hidden */
@@ -45,10 +46,9 @@ export class ShellbarComponent implements AfterContentInit {
     }
     applyShellbarModeToButtons(): void {
         if (this.buttons && this.buttons.length) {
-            this.buttons.forEach(button => {
+            this.buttons.forEach((button) => {
                 button.elementRef().nativeElement.classList.add('fd-shellbar__button');
             });
         }
     }
-
 }

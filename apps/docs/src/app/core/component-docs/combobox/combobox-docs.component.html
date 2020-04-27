@@ -14,9 +14,10 @@
 </fd-docs-section-title>
 <description>
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
-    accepts an array and a search term, handle filtering logic within this function, and then return the desired filtered array.
-    In this example, we are only populating the list with results where the search term matches the beginning of the result,
-    as opposed to the usual behavior where the list will be populated if the search term appears anywhere in the string.
+    accepts an array and a search term, handle filtering logic within this function, and then return the desired
+    filtered array. In this example, we are only populating the list with results where the search term matches the
+    beginning of the result, as opposed to the usual behavior where the list will be populated if the search term
+    appears anywhere in the string.
 </description>
 <component-example>
     <fd-combobox-dynamic-example></fd-combobox-dynamic-example>
@@ -29,8 +30,9 @@
     Custom Search Function
 </fd-docs-section-title>
 <description>
-    A custom search function can be provided with the <code>[searchFn]</code> input. This function will be called when the primary
-    combobox button is clicked, or when the user presses the 'enter' key while focused in the combobox input.
+    A custom search function can be provided with the <code>[searchFn]</code> input. This function will be called when
+    the primary combobox button is clicked, or when the user presses the 'enter' key while focused in the combobox
+    input.
 </description>
 <component-example>
     <fd-combobox-search-function-example></fd-combobox-search-function-example>
@@ -92,8 +94,9 @@
     Custom Item Template
 </fd-docs-section-title>
 <description>
-    The way the items are rendered in the popover list can be customized by providing an <code>itemTemplate</code>
-    to the component. The <code>itemTemplate</code> should align with the contents of an <a [routerLink]="'/core/list'">fd-list-item</a>
+    The way the items are rendered in the popover list can be customized by providing an <code>itemTemplate</code> to
+    the component. The <code>itemTemplate</code> should align with the contents of an
+    <a [routerLink]="'/core/list'">fd-list-item</a>
     directive.
 </description>
 <component-example>
@@ -120,9 +123,9 @@
 </fd-docs-section-title>
 <description>
     Grouping data within a set of values can be achieved by passing a function to the <code>[groupFn]</code> input. This
-    function should accept an object of key/value pairs as the parameter. Each key will be a group name and the corresponding
-    value for that key will be an array of any type. A <code>[displayFn]</code> can be used to specify what to display
-    from that array.
+    function should accept an object of key/value pairs as the parameter. Each key will be a group name and the
+    corresponding value for that key will be an array of any type. A <code>[displayFn]</code> can be used to specify
+    what to display from that array.
 </description>
 <component-example>
     <fd-combobox-group-example></fd-combobox-group-example>
@@ -134,9 +137,7 @@
 <fd-docs-section-title [id]="'combobox-customHeight'" [componentName]="'combobox'">
     Custom Height Example
 </fd-docs-section-title>
-<description>
-    Use the <code>[maxHeight]</code> input to set a maximum height for the results list.
-</description>
+<description> Use the <code>[maxHeight]</code> input to set a maximum height for the results list. </description>
 <component-example>
     <fd-combobox-height-example></fd-combobox-height-example>
 </component-example>
@@ -151,8 +152,10 @@
     The Combobox component may also be used within Angular Reactive Forms.
 </description>
 <description>
-    Use the <code>[communicateByObject]</code> boolean input if you are using custom objects for the <code>dropdownValues</code>
-    or if you want the combobox to only trigger onChange when a value is selected, rather than every time the input changes.
+    Use the <code>[communicateByObject]</code> boolean input if you are using custom objects for the
+    <code>dropdownValues</code>
+    or if you want the combobox to only trigger onChange when a value is selected, rather than every time the input
+    changes.
 </description>
 <component-example>
     <fd-combobox-forms-example></fd-combobox-forms-example>

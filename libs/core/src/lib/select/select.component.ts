@@ -17,7 +17,7 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewEncapsulation,
-    Optional,
+    Optional
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
@@ -157,18 +157,18 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
         if (options) {
             return options.changes.pipe(
                 startWith(options),
-                switchMap(() => merge(...options.map(option => option.selectedChange)))
+                switchMap(() => merge(...options.map((option) => option.selectedChange)))
             );
         }
     }) as Observable<OptionComponent>;
 
     /** @hidden */
-    onChange: Function = () => { };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => { };
+    onTouched: Function = () => {};
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) { }
+    constructor(private _changeDetectorRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
@@ -191,10 +191,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
 
     ngOnInit() {
         if (this._rtlService) {
-            this.dir$ = this._rtlService.rtl
-                .pipe(
-                    map(isRtl => isRtl ? 'rtl' : 'ltr')
-                )
+            this.dir$ = this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'rtl' : 'ltr')));
         } else {
             this.dir$ = of['ltr'];
         }
@@ -203,15 +200,10 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     /** @hidden */
     ngAfterContentInit(): void {
         // If the observable state changes, reset the options and initialize selection.
-        this.options.changes
-            .pipe(
-                startWith(null),
-                takeUntil(this._destroy$)
-            )
-            .subscribe(() => {
-                this._resetOptions();
-                this._initSelection();
-            });
+        this.options.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
+            this._resetOptions();
+            this._initSelection();
+        });
     }
 
     /** @hidden */
@@ -380,11 +372,9 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
 
         // Subscribe to observable defined in component properties which fires when an option is clicked.
         // Destroy if the observable defined above triggers.
-        this._optionsStatusChanges
-            .pipe(takeUntil(destroyCurrentObs))
-            .subscribe((instance: OptionComponent) => {
-                this._selectOption(instance);
-            });
+        this._optionsStatusChanges.pipe(takeUntil(destroyCurrentObs)).subscribe((instance: OptionComponent) => {
+            this._selectOption(instance);
+        });
     }
 
     /** Selection initialization when a change occurs in options. */
@@ -409,7 +399,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
         const activeElement = document.activeElement;
 
         // Get corresponding option element to the above
-        const correspondingOption = this.options.find(option => {
+        const correspondingOption = this.options.find((option) => {
             return option.getHtmlElement() === activeElement;
         });
 
@@ -435,7 +425,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
         const activeElement = document.activeElement;
 
         // Get corresponding option element to the above
-        const correspondingOption = this.options.find(option => {
+        const correspondingOption = this.options.find((option) => {
             return option.getHtmlElement() === activeElement;
         });
 

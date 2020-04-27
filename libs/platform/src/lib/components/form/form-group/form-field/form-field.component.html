@@ -3,22 +3,22 @@
 </ng-template>
 
 <ng-template #renderer>
-    <div (click)="_control && _control.onContainerClick($event)" [horizontal]="labelLayout === 'horizontal'"
-         fd-form-item>
-
+    <div
+        (click)="_control && _control.onContainerClick($event)"
+        [horizontal]="labelLayout === 'horizontal'"
+        fd-form-item
+    >
         <label [attr.for]="id" [inlineHelp]="!!hint" [required]="editable && required" fd-form-label>
-            <span *ngIf="!noLabelLayout">{{label}}</span>
+            <span *ngIf="!noLabelLayout">{{ label }}</span>
 
             <!-- We can support placement on FormGroup Level to be applied to all the form fields     -->
             <fd-inline-help *ngIf="hint" [placement]="hintPlacement">
-                {{hint}}
+                {{ hint }}
             </fd-inline-help>
         </label>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
-
     </div>
 </ng-template>
-
 
 <ng-template #withFormMessage>
     <fdp-input-message-group>
@@ -33,11 +33,9 @@
 
         <fd-form-message *ngIf="hasErrors()" [type]="'error'">
             <ng-container *ngIf="i18Strings">
-                <ng-container
-                    *ngTemplateOutlet="i18Strings;context: {$implicit:_control?.ngControl.errors}">
+                <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: _control?.ngControl.errors }">
                 </ng-container>
             </ng-container>
         </fd-form-message>
     </fdp-input-message-group>
 </ng-template>
-

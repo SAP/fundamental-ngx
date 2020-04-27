@@ -58,16 +58,15 @@ export class InlineHelpDocsComponent {
         {
             language: 'html',
             code: inlineHelpTriggerHtml,
-            fileName: 'inline-help-trigger-example',
+            fileName: 'inline-help-trigger-example'
         }
     ];
-
 
     inlineHelpStyles: ExampleFile[] = [
         {
             language: 'html',
             code: inlineHelpStylesHtml,
-            fileName: 'inline-help-styled-example',
+            fileName: 'inline-help-styled-example'
         }
     ];
 

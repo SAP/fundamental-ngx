@@ -14,8 +14,7 @@ describe('ProductSwitchComponent', () => {
         TestBed.configureTestingModule({
             imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
             declarations: [ProductSwitchComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

@@ -92,4 +92,4 @@ import { sharedCoreModules } from './shared-core-modules';
         sharedCoreModules
     ]
 })
-export class SharedDocumentationModule { }
+export class SharedDocumentationModule {}

@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./platform-button-header.component.scss']
 })
 export class PlatformButtonHeaderComponent implements OnInit {
+    constructor() {}
 
-    constructor() { }
-
-    ngOnInit() {
-    }
-
+    ngOnInit() {}
 }

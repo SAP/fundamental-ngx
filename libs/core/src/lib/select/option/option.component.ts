@@ -1,5 +1,6 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -23,12 +24,11 @@ import {
         '[class.fd-option-default-custom]': 'true',
         '[attr.aria-disabled]': 'disabled',
         '[tabindex]': 'disabled ? -1 : 0',
-        'role': 'option',
+        role: 'option'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OptionComponent implements OnInit {
-
     /** @hidden */
     @HostBinding('class.fd-menu__item')
     fdMenuItemClass: boolean = true;
@@ -51,15 +51,10 @@ export class OptionComponent implements OnInit {
 
     /** Emitted when the selected state changes. */
     @Output()
-    readonly selectedChange: EventEmitter<OptionComponent>
-        = new EventEmitter<OptionComponent>();
+    readonly selectedChange: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
 
     /** @hidden */
-    constructor(
-        private _elRef: ElementRef,
-        private _changeDetRef: ChangeDetectorRef
-    ) {}
-
+    constructor(private _elRef: ElementRef, private _changeDetRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -70,8 +65,7 @@ export class OptionComponent implements OnInit {
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
     get viewValueText(): string {
-        return this.viewValue ? this.viewValue :
-            ((this._elRef.nativeElement as HTMLElement).textContent || '').trim();
+        return this.viewValue ? this.viewValue : ((this._elRef.nativeElement as HTMLElement).textContent || '').trim();
     }
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
@@ -103,5 +97,4 @@ export class OptionComponent implements OnInit {
             this.selectedChange.emit(this);
         }
     }
-
 }

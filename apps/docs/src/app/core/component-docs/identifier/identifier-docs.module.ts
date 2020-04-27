@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {API_FILES} from '../../api-files';
-import {IdentifierHeaderComponent} from './identifier-header/identifier-header.component';
-import {IdentifierDocsComponent} from './identifier-docs.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { API_FILES } from '../../api-files';
+import { IdentifierHeaderComponent } from './identifier-header/identifier-header.component';
+import { IdentifierDocsComponent } from './identifier-docs.component';
 import {
     CircleIdentifierExampleComponent,
     ColorsIdentifierExampleComponent,
@@ -26,11 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        IdentifierModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, IdentifierModule],
     exports: [RouterModule],
     declarations: [
         IdentifierDocsComponent,
@@ -42,5 +38,4 @@ const routes: Routes = [
         TransparentIdentifierExampleComponent
     ]
 })
-export class IdentifierDocsModule {
-}
+export class IdentifierDocsModule {}

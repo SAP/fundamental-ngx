@@ -5,19 +5,14 @@ import { MegaMenuListDirective } from './mega-menu-list.directive';
 import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 
 @Component({
-    template: `
-        <li #directiveElement fd-mega-menu-list>Fd test</li>
-    `
+    template: ` <li #directiveElement fd-mega-menu-list>Fd test</li> `
 })
-
 export class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
-
 }
 
 describe('MegaMenuLinkDirective', () => {
-
     let component: TestComponent,
         fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,

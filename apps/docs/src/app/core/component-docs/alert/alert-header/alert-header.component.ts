@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-alert-header',
     templateUrl: './alert-header.component.html'
 })
-export class AlertHeaderComponent {
-
-}
+export class AlertHeaderComponent {}

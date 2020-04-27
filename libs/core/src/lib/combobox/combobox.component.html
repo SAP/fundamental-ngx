@@ -1,52 +1,83 @@
-<fd-popover [isOpen]="open && displayedValues && displayedValues.length"
-            (isOpenChange)="isOpenChangeHandle($event)"
-            [fillControlMode]="'at-least'"
-            [triggers]="triggers"
-            [disabled]="disabled"
-            [closeOnOutsideClick]="closeOnOutsideClick"
-            class="fd-combobox-popover-custom">
+<fd-popover
+    [isOpen]="open && displayedValues && displayedValues.length"
+    (isOpenChange)="isOpenChangeHandle($event)"
+    [fillControlMode]="'at-least'"
+    [triggers]="triggers"
+    [disabled]="disabled"
+    [closeOnOutsideClick]="closeOnOutsideClick"
+    class="fd-combobox-popover-custom"
+>
     <fd-popover-control>
-        <fd-input-group [glyph]="glyph"  [compact]="compact" [button]="true" [state]="state" [inShellbar]="inShellbar"
-                        (addOnButtonClicked)="onPrimaryButtonClick()" [buttonFocusable]="buttonFocusable" [disabled]="disabled">
-            <input #searchInputElement type="text"
-                   fd-input-group-input
-                   [compact]="compact"
-                   (keydown)="onInputKeydownHandler($event)"
-                   (keyup)="onInputKeyupHandler($event)"
-                   [disabled]="disabled"
-                   [(ngModel)]="inputText"
-                   (ngModelChange)="handleSearchTermChange()"
-                   [placeholder]="placeholder">
+        <fd-input-group
+            [glyph]="glyph"
+            [compact]="compact"
+            [button]="true"
+            [state]="state"
+            [inShellbar]="inShellbar"
+            (addOnButtonClicked)="onPrimaryButtonClick()"
+            [buttonFocusable]="buttonFocusable"
+            [disabled]="disabled"
+        >
+            <input
+                #searchInputElement
+                type="text"
+                fd-input-group-input
+                [compact]="compact"
+                (keydown)="onInputKeydownHandler($event)"
+                (keyup)="onInputKeyupHandler($event)"
+                [disabled]="disabled"
+                [(ngModel)]="inputText"
+                (ngModelChange)="handleSearchTermChange()"
+                [placeholder]="placeholder"
+            />
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body *ngIf="displayedValues && displayedValues.length">
-        <ul fd-list [dropdownMode]="true" class="fd-combobox-input-menu-overflow" [style.maxHeight]="maxHeight" [hasMessage]="listMessages.length > 0">
+        <ul
+            fd-list
+            [dropdownMode]="true"
+            class="fd-combobox-input-menu-overflow"
+            [style.maxHeight]="maxHeight"
+            [hasMessage]="listMessages.length > 0"
+        >
             <ng-content></ng-content>
             <ng-container *ngIf="groupFn">
-                <ng-container *ngFor="let group of displayedValues | listGroupPipe:groupFn | keyvalue; let groupIndex = index">
+                <ng-container
+                    *ngFor="let group of displayedValues | listGroupPipe: groupFn | keyvalue; let groupIndex = index"
+                >
                     <li fd-list-group-header>
-                        {{group.key}}
+                        {{ group.key }}
                     </li>
-                    <li *ngFor="let term of group.value; let termIndex = index;"
-                        (click)="onMenuClickHandler((groupIndex *  group.value.length) + termIndex)"
-                        (keydown)="onListKeydownHandler($event, (groupIndex *  group.value.length) + termIndex)"
+                    <li
+                        *ngFor="let term of group.value; let termIndex = index"
+                        (click)="onMenuClickHandler(groupIndex * group.value.length + termIndex)"
+                        (keydown)="onListKeydownHandler($event, groupIndex * group.value.length + termIndex)"
                         fd-list-item
                         tabindex="0"
                         class="fd-combobox-list-item"
-                        [selected]="displayFn(term) === inputText">
-                        <ng-container [ngTemplateOutlet]="itemSource" [ngTemplateOutletContext]="{term: term}"></ng-container>
+                        [selected]="displayFn(term) === inputText"
+                    >
+                        <ng-container
+                            [ngTemplateOutlet]="itemSource"
+                            [ngTemplateOutletContext]="{ term: term }"
+                        ></ng-container>
                     </li>
                 </ng-container>
             </ng-container>
             <ng-container *ngIf="!groupFn">
-                <li *ngFor="let term of displayedValues; let index = index;"
+                <li
+                    *ngFor="let term of displayedValues; let index = index"
                     (click)="onMenuClickHandler(index)"
                     (keydown)="onListKeydownHandler($event, index)"
                     fd-list-item
                     tabindex="0"
                     class="fd-combobox-list-item"
-                    [selected]="displayFn(term) === inputText">
-                    <ng-container [ngTemplateOutlet]="itemSource" [ngTemplateOutletContext]="{term: term}"></ng-container>
+                    [selected]="displayFn(term) === inputText"
+                >
+                    <ng-container
+                        [ngTemplateOutlet]="itemSource"
+                        [ngTemplateOutletContext]="{ term: term }"
+                    ></ng-container>
                 </li>
             </ng-container>
         </ul>
@@ -54,10 +85,9 @@
 </fd-popover>
 
 <ng-template let-term="term" #itemSource>
-    <span *ngIf="!itemTemplate"
-        [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting">
+    <span *ngIf="!itemTemplate" [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting">
     </span>
     <ng-container *ngIf="itemTemplate">
-        <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{$implicit: term}"></ng-container>
+        <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: term }"></ng-container>
     </ng-container>
 </ng-template>

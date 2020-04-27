@@ -1,7 +1,9 @@
-<fd-combobox [(ngModel)]="searchTerm"
-             [dropdownValues]="dropdownValues"
-             [searchFn]="customSearchFunction"
-             [placeholder]="'Type to filter the list...'">
+<fd-combobox
+    [(ngModel)]="searchTerm"
+    [dropdownValues]="dropdownValues"
+    [searchFn]="customSearchFunction"
+    [placeholder]="'Type to filter the list...'"
+>
 </fd-combobox>
-<br/>
-<span>Search Term: {{searchTerm}}</span>
+<br />
+<span>Search Term: {{ searchTerm }}</span>

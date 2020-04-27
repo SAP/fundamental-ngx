@@ -5,18 +5,19 @@ import { DialogService } from '@fundamental-ngx/core';
     selector: 'fd-dialog-backdrop-container-example',
     templateUrl: './dialog-backdrop-container-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    styles: [`
-        .static-dialog.fd-dialog--active {
-            display: inline-block;
-        }
+    styles: [
+        `
+            .static-dialog.fd-dialog--active {
+                display: inline-block;
+            }
 
-        .static-dialog > .fd-dialog__content {
-            position: static;
-        }
-    `]
+            .static-dialog > .fd-dialog__content {
+                position: static;
+            }
+        `
+    ]
 })
 export class DialogBackdropContainerExampleComponent {
-
     constructor(private _dialogService: DialogService) {}
 
     openCustomBackdrop(dialog): void {

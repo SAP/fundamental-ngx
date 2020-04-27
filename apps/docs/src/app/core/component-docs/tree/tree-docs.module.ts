@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {API_FILES} from '../../api-files';
-import {TreeDocsComponent} from './tree-docs.component';
-import {TreeHeaderComponent} from './tree-header/tree-header.component';
-import {SimpleTreeExampleComponent} from './examples/simple-tree-example.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { API_FILES } from '../../api-files';
+import { TreeDocsComponent } from './tree-docs.component';
+import { TreeHeaderComponent } from './tree-header/tree-header.component';
+import { SimpleTreeExampleComponent } from './examples/simple-tree-example.component';
 import { TreeModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -13,24 +13,15 @@ const routes: Routes = [
         path: '',
         component: TreeHeaderComponent,
         children: [
-            {path: '', component: TreeDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.tree}}
+            { path: '', component: TreeDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.tree } }
         ]
     }
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        TreeModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TreeModule],
     exports: [RouterModule],
-    declarations: [
-        TreeDocsComponent,
-        TreeHeaderComponent,
-        SimpleTreeExampleComponent
-    ]
+    declarations: [TreeDocsComponent, TreeHeaderComponent, SimpleTreeExampleComponent]
 })
-export class TreeDocsModule {
-}
+export class TreeDocsModule {}

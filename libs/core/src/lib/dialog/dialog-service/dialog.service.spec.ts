@@ -9,9 +9,9 @@ import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-conf
 
 @Component({
     template: `
-            <ng-template #testTemplate let-alert>
-                <fd-dialog></fd-dialog>
-            </ng-template>
+        <ng-template #testTemplate let-alert>
+            <fd-dialog></fd-dialog>
+        </ng-template>
     `
 })
 class TemplateTestComponent {
@@ -25,10 +25,12 @@ describe('DialogService', () => {
         TestBed.configureTestingModule({
             declarations: [TemplateTestComponent],
             imports: [DialogModule],
-            providers: [{provide: DIALOG_DEFAULT_CONFIG, useValue: {...new DialogConfig(), resizable: true}}],
-        }).overrideModule(BrowserDynamicTestingModule, {
-            set: {entryComponents: [TemplateTestComponent]}
-        }).compileComponents();
+            providers: [{ provide: DIALOG_DEFAULT_CONFIG, useValue: { ...new DialogConfig(), resizable: true } }]
+        })
+            .overrideModule(BrowserDynamicTestingModule, {
+                set: { entryComponents: [TemplateTestComponent] }
+            })
+            .compileComponents();
 
         service = TestBed.inject<DialogService>(DialogService);
     });

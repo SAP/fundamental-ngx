@@ -1,29 +1,16 @@
 import { Component, Injectable } from '@angular/core';
 import { TimeFormatParser, TimeObject } from '@fundamental-ngx/core';
 
-
 @Injectable()
 export class TimeFormatDashes extends TimeFormatParser {
-
     public parse(value: string, displaySeconds: boolean = true, meridian?: boolean): TimeObject {
         const time = new TimeObject();
         let regexp;
         if (!meridian) {
             if (displaySeconds) {
-                regexp = new RegExp(
-                    '\^([0-1]?[0-9]|2[0-3])' +
-                    'h' +
-                    '([0-5][0-9])(' +
-                    'm' +
-                    '[0-5][0-9])' +
-                    's\$'
-                );
+                regexp = new RegExp('^([0-1]?[0-9]|2[0-3])' + 'h' + '([0-5][0-9])(' + 'm' + '[0-5][0-9])' + 's$');
             } else {
-                regexp = new RegExp('\^([0-1]?[0-9]|2[0-3])' +
-                    'h' +
-                    '([0-5][0-9])(' +
-                    'm\$'
-                );
+                regexp = new RegExp('^([0-1]?[0-9]|2[0-3])' + 'h' + '([0-5][0-9])(' + 'm$');
             }
             if (regexp.test(value)) {
                 const minutes = value.split('h')[1].split('m')[0];
@@ -38,24 +25,11 @@ export class TimeFormatDashes extends TimeFormatParser {
             }
         } else if (meridian) {
             if (displaySeconds) {
-
-
                 regexp = new RegExp(
-                    '\^([0-1]?[0-9]|2[0-3])' +
-                    'h' +
-                    '([0-5][0-9])(' +
-                    'm' +
-                    '[0-5][0-9])' +
-                    's' +
-                    ' [APap][mM]\$'
+                    '^([0-1]?[0-9]|2[0-3])' + 'h' + '([0-5][0-9])(' + 'm' + '[0-5][0-9])' + 's' + ' [APap][mM]$'
                 );
             } else {
-                regexp = new RegExp('\^([0-1]?[0-9]|2[0-3])' +
-                    'h' +
-                    '([0-5][0-9])(' +
-                    'm' +
-                    ' [APap][mM]\$'
-                );
+                regexp = new RegExp('^([0-1]?[0-9]|2[0-3])' + 'h' + '([0-5][0-9])(' + 'm' + ' [APap][mM]$');
             }
             if (regexp.test(value)) {
                 const period = value.split(' ')[1];
@@ -67,9 +41,9 @@ export class TimeFormatDashes extends TimeFormatParser {
                 if (displaySeconds) {
                     time.second = parseInt(_time.split('m')[1], 10);
                 }
-                if (( period === 'pm' || period === 'PM' ) && time.hour < 12) {
+                if ((period === 'pm' || period === 'PM') && time.hour < 12) {
                     time.hour = time.hour + 12;
-                } else if ( (period === 'am' || period === 'AM') && time.hour === 12 ) {
+                } else if ((period === 'am' || period === 'AM') && time.hour === 12) {
                     time.hour = 0;
                 }
                 return time;
@@ -124,13 +98,12 @@ export class TimeFormatDashes extends TimeFormatParser {
             }
         }
         if (formattedMeridian && formattedTime) {
-            formattedTime += ' ' + formattedMeridian
+            formattedTime += ' ' + formattedMeridian;
         }
 
         return formattedTime;
     }
 }
-
 
 @Component({
     selector: 'fd-time-picker-other-delimiter-example',

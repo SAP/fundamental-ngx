@@ -1,7 +1,4 @@
-<fd-file-input #fileInput
-               [(ngModel)]="files"
-               [multiple]="true"
-               [accept]="'.png,.jpg'">
+<fd-file-input #fileInput [(ngModel)]="files" [multiple]="true" [accept]="'.png,.jpg'">
     <button fd-button (click)="fileInput.open()">
         Browse (.jpg or .png)
     </button>
@@ -12,5 +9,5 @@ Files Selected:
 <br />
 
 <div *ngFor="let file of files">
-    {{file.name}}
+    {{ file.name }}
 </div>

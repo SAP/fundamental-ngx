@@ -3,16 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabIconDirective } from './tab-directives';
 
 @Component({
-    template: `
-        <li fd-tab-icon #directiveElement>
-        </li>
-    `
+    template: ` <li fd-tab-icon #directiveElement></li> `
 })
 class TestNestedContainerComponent {
-
     @ViewChild('directiveElement', { static: true, read: TabIconDirective })
     directiveElement: TabIconDirective;
-
 }
 
 describe('TabIconDirective', () => {
@@ -22,9 +17,8 @@ describe('TabIconDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, TabIconDirective],
-        })
-            .compileComponents();
+            declarations: [TestNestedContainerComponent, TabIconDirective]
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -33,7 +27,6 @@ describe('TabIconDirective', () => {
         directiveElement = component.directiveElement;
         fixture.detectChanges();
     });
-
 
     it('Should have good classes', () => {
         directiveElement.icon = 'menu';
@@ -45,15 +38,12 @@ describe('TabIconDirective', () => {
     });
 
     it('Should be able to change icon', () => {
-
-
         directiveElement.icon = 'edit';
         directiveElement.buildComponentCssClass();
         fixture.detectChanges();
-
 
         directiveElement.icon = 'menu';
         directiveElement.buildComponentCssClass();
         expect((directiveElement as any)._elementRef.nativeElement.classList.contains('sap-icon--menu')).toBeTruthy();
     });
-})
+});

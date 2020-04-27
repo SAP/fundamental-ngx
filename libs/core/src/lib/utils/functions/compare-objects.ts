@@ -21,11 +21,13 @@ export function compareObjects(obj1: any, obj2: any): boolean {
     // Works in case when functions are created in constructor.
     // Comparing dates is a common scenario. Another built-ins?
     // We can even handle functions passed across iframes
-    if ((typeof obj1 === 'function' && typeof obj2 === 'function') ||
+    if (
+        (typeof obj1 === 'function' && typeof obj2 === 'function') ||
         (obj1 instanceof Date && obj2 instanceof Date) ||
         (obj1 instanceof RegExp && obj2 instanceof RegExp) ||
         (obj1 instanceof String && obj2 instanceof String) ||
-        (obj1 instanceof Number && obj2 instanceof Number)) {
+        (obj1 instanceof Number && obj2 instanceof Number)
+    ) {
         return obj1.toString() === obj2.toString();
     }
 
@@ -67,10 +69,9 @@ export function compareObjects(obj1: any, obj2: any): boolean {
             return false;
         }
 
-        switch (typeof (obj1[p])) {
+        switch (typeof obj1[p]) {
             case 'object':
             case 'function':
-
                 leftChain.push(obj1);
                 rightChain.push(obj2);
 
@@ -92,4 +93,3 @@ export function compareObjects(obj1: any, obj2: any): boolean {
 
     return true;
 }
-
