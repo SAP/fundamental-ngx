@@ -3,7 +3,7 @@ import { PlatformDocumentationComponent } from './documentation/platform-documen
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { PlatformButtonDocsComponent } from './component-docs/platform-button/platform-button-docs.component';
 import { PlatformButtonHeaderComponent } from './component-docs/platform-button/platform-button-header/platform-button-header.component';
-import { PlatformActionbarHeaderComponent } from './component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
+import { PlatformActionBarHeaderComponent } from './component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
 import { PlatformActionBarDocsComponent } from './component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { ApiComponent } from './../documentation/core-helpers/api/api.component';
 import { API_FILES } from './api-files';
@@ -36,12 +36,12 @@ export const ROUTES: Routes = [
                 component: PlatformButtonHeaderComponent,
                 children: [
                     { path: '', component: PlatformButtonDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
-                ]
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.button } },
+                ],
             },
             {
                 path: 'action-bar',
-                component: PlatformActionbarHeaderComponent,
+                component: PlatformActionBarHeaderComponent,
                 children: [
                     { path: '', component: PlatformActionBarDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }
@@ -52,16 +52,16 @@ export const ROUTES: Routes = [
                 component: PlatformLinkHeaderComponent,
                 children: [
                     { path: '', component: PlatformLinkDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.link } }
-                ]
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.link } },
+                ],
             },
             {
                 path: 'menu',
                 component: PlatformMenuHeaderComponent,
                 children: [
                     { path: '', component: PlatformMenuDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
-                ]
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } },
+                ],
             },
           {
                 path: 'menu-button',
@@ -76,16 +76,16 @@ export const ROUTES: Routes = [
                 component: PlatformSearchFieldHeaderComponent,
                 children: [
                     { path: '', component: PlatformSearchFieldDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.searchField } }
-                ]
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.searchField } },
+                ],
             },
             {
                 path: 'select',
                 component: PlatformSelectHeaderComponent,
                 children: [
                     { path: '', component: PlatformSelectDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
-                ]
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } },
+                ],
             },
             {
                 path: 'radio-group',

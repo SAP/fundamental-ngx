@@ -3,14 +3,14 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fdp-platform-action-bar-contextual-menu-example',
     templateUrl: './platform-action-bar-contextual-menu-example.component.html',
-    styleUrls: ['./platform-action-bar-contextual-menu-example.component.scss']
+    styleUrls: ['./platform-action-bar-contextual-menu-example.component.scss'],
 })
-export class PlatformActionbarWithContextualMenuExampleComponent implements OnInit {
+export class PlatformActionBarWithContextualMenuExampleComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
 
-    onBackBuutonClick() {
+    onBackButtonClick() {
         alert('Back button clicked');
     }
 }
