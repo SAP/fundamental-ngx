@@ -2,10 +2,15 @@
     <fd-dropdown-control>Dropdown</fd-dropdown-control>
     <fd-popover-body>
         <fd-menu>
-            <ul fd-menu-list fdInfiniteScroll (onScrollAction)="loadMoreElements()" [scrollPercent]="scrollPercent"
-                          style="overflow-y: scroll; display: block; max-height: 120px;">
+            <ul
+                fd-menu-list
+                fdInfiniteScroll
+                (onScrollAction)="loadMoreElements()"
+                [scrollPercent]="scrollPercent"
+                style="overflow-y: scroll; display: block; max-height: 120px;"
+            >
                 <li fd-menu-item *ngFor="let element of displayedList">
-                    {{element.label}}
+                    {{ element.label }}
                 </li>
             </ul>
         </fd-menu>

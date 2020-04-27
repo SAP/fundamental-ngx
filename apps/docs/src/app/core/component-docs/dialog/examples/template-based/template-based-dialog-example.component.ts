@@ -6,18 +6,20 @@ import { DialogService } from '@fundamental-ngx/core';
     templateUrl: './template-based-dialog-example.component.html'
 })
 export class TemplateBasedDialogExampleComponent {
-
     confirmationReason: string;
 
-    constructor(private _dialogService: DialogService) { }
+    constructor(private _dialogService: DialogService) {}
 
     openDialog(dialog: TemplateRef<any>): void {
-        const dialogRef = this._dialogService.open(dialog, {responsivePadding: true});
+        const dialogRef = this._dialogService.open(dialog, { responsivePadding: true });
 
-        dialogRef.afterClosed.subscribe(result => {
-            this.confirmationReason = 'Dialog closed with result: ' + result;
-        }, error => {
-            this.confirmationReason = 'Dialog dismissed with result: ' + error;
-        });
+        dialogRef.afterClosed.subscribe(
+            (result) => {
+                this.confirmationReason = 'Dialog closed with result: ' + result;
+            },
+            (error) => {
+                this.confirmationReason = 'Dialog dismissed with result: ' + error;
+            }
+        );
     }
 }

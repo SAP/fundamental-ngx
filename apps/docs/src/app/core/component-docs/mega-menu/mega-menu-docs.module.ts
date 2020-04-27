@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {API_FILES} from '../../api-files';
-import {MegaMenuHeaderComponent} from './mega-menu-header/mega-menu-header.component';
-import {MegaMenuDocsComponent} from './mega-menu-docs.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { API_FILES } from '../../api-files';
+import { MegaMenuHeaderComponent } from './mega-menu-header/mega-menu-header.component';
+import { MegaMenuDocsComponent } from './mega-menu-docs.component';
 import {
     MegaMenuExampleComponent,
     MegaMenuGroupExampleComponent,
@@ -24,11 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        MegaMenuModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MegaMenuModule],
     exports: [RouterModule],
     declarations: [
         MegaMenuDocsComponent,
@@ -38,5 +34,4 @@ const routes: Routes = [
         MegaMenuPositionExampleComponent
     ]
 })
-export class MegaMenuDocsModule {
-}
+export class MegaMenuDocsModule {}

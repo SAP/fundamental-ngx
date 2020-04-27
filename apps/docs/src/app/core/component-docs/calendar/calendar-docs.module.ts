@@ -55,7 +55,6 @@ const routes: Routes = [
         CalendarGridExampleComponent,
         CalendarSpecialDayExampleComponent,
         CalendarMarkHoverComponent
-    ],
+    ]
 })
-export class CalendarDocsModule {
-}
+export class CalendarDocsModule {}

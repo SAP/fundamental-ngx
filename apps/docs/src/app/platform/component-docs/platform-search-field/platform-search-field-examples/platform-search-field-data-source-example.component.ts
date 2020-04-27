@@ -1,13 +1,5 @@
-import {
-    Component,
-    OnInit,
-    ViewEncapsulation
-} from '@angular/core';
-import {
-    SearchInput,
-    ValueLabelItem,
-    SearchFieldDataSource
-} from '@fundamental-ngx/platform';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { SearchInput, ValueLabelItem, SearchFieldDataSource } from '@fundamental-ngx/platform';
 import { SearchFieldDataProvider } from './platform-search-field-example.service';
 
 @Component({
@@ -17,7 +9,6 @@ import { SearchFieldDataProvider } from './platform-search-field-example.service
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {
-
     public categories: ValueLabelItem[];
 
     public searchTerm = '';
@@ -29,28 +20,36 @@ export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {
 
     ngOnInit() {
         this.dataSource = new SearchFieldDataSource(new SearchFieldDataProvider());
-        this.categories = [{
-            value: 'red',
-            label: 'Red'
-        }, {
-            value: 'orange',
-            label: 'Orange'
-        }, {
-            value: 'yellow',
-            label: 'Yellow'
-        }, {
-            value: 'green',
-            label: 'Green'
-        }, {
-            value: 'blue',
-            label: 'Blue'
-        }, {
-            value: 'indigo',
-            label: 'Indigo'
-        }, {
-            value: 'violet',
-            label: 'Violet'
-        }];
+        this.categories = [
+            {
+                value: 'red',
+                label: 'Red'
+            },
+            {
+                value: 'orange',
+                label: 'Orange'
+            },
+            {
+                value: 'yellow',
+                label: 'Yellow'
+            },
+            {
+                value: 'green',
+                label: 'Green'
+            },
+            {
+                value: 'blue',
+                label: 'Blue'
+            },
+            {
+                value: 'indigo',
+                label: 'Indigo'
+            },
+            {
+                value: 'violet',
+                label: 'Violet'
+            }
+        ];
     }
 
     onSearchSubmit($event: SearchInput) {

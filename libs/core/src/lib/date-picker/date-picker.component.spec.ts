@@ -18,7 +18,6 @@ describe('DatePickerComponent', () => {
             declarations: [DatePickerComponent],
             imports: [CalendarModule, PopoverModule, FormsModule, IconModule, InputGroupModule, ButtonModule]
         }).compileComponents();
-
     }));
 
     beforeEach(() => {
@@ -70,16 +69,15 @@ describe('DatePickerComponent', () => {
         spyOn(component, 'onChange');
         spyOn(component.selectedRangeDateChange, 'emit');
         const dateStart = FdDate.getToday();
-        const dateLast = FdDate.getToday(); dateLast.month = 12;
+        const dateLast = FdDate.getToday();
+        dateLast.month = 12;
         const dateStrStart = (<any>component)._formatDate(dateStart);
         const dateStrLast = (<any>component)._formatDate(dateLast);
         component.inputFieldDate = '';
-        component.handleRangeDateChange({start: dateStart, end: dateLast});
-        expect(component.inputFieldDate).toBe(
-            dateStrStart + component.dateAdapter.rangeDelimiter + dateStrLast
-        );
-        expect(component.onChange).toHaveBeenCalledWith({start: dateStart, end: dateLast});
-        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith( { start: dateStart, end: dateLast });
+        component.handleRangeDateChange({ start: dateStart, end: dateLast });
+        expect(component.inputFieldDate).toBe(dateStrStart + component.dateAdapter.rangeDelimiter + dateStrLast);
+        expect(component.onChange).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
     });
 
     it('Should handle correct write value for single mode', () => {
@@ -87,13 +85,13 @@ describe('DatePickerComponent', () => {
         const dateStr = (<any>component)._formatDate(date);
         component.writeValue(date);
         expect(component.selectedDate).toEqual(date);
-        expect(component.inputFieldDate).toBe(dateStr)
+        expect(component.inputFieldDate).toBe(dateStr);
     });
 
     it('Should handle null write value for single mode', () => {
         component.writeValue(null);
         expect(component.selectedDate).toBeUndefined();
-        expect(component.inputFieldDate).toBe('')
+        expect(component.inputFieldDate).toBe('');
     });
 
     it('Should handle correct write value for range mode', () => {
@@ -101,21 +99,20 @@ describe('DatePickerComponent', () => {
         const dateStart = FdDate.getToday();
         const dateStrStart = (<any>component)._formatDate(dateStart);
 
-        const dateEnd = FdDate.getToday(); dateEnd.month = 12;
+        const dateEnd = FdDate.getToday();
+        dateEnd.month = 12;
         const dateStrEnd = (<any>component)._formatDate(dateEnd);
-        component.writeValue({start: dateStart, end: dateEnd});
-        expect(component.selectedRangeDate).toEqual({start: dateStart, end: dateEnd});
-        expect(component.inputFieldDate).toBe(
-            dateStrStart + component.dateAdapter.rangeDelimiter + dateStrEnd
-        );
+        component.writeValue({ start: dateStart, end: dateEnd });
+        expect(component.selectedRangeDate).toEqual({ start: dateStart, end: dateEnd });
+        expect(component.inputFieldDate).toBe(dateStrStart + component.dateAdapter.rangeDelimiter + dateStrEnd);
     });
 
     it('Should handle null write value for range mode', () => {
         component.type = 'range';
         const dateStart = null;
         const dateEnd = null;
-        component.writeValue({start: dateStart, end: dateEnd});
-        expect(component.selectedRangeDate).toEqual({start: dateStart, end: dateEnd});
+        component.writeValue({ start: dateStart, end: dateEnd });
+        expect(component.selectedRangeDate).toEqual({ start: dateStart, end: dateEnd });
         expect(component.inputFieldDate).toBe('');
     });
 
@@ -136,7 +133,7 @@ describe('DatePickerComponent', () => {
         const start: FdDate = component.dateAdapter.parse('33333333');
         const end: FdDate = component.dateAdapter.parse('3000000');
         expect(component.isInvalidDateInput).toBe(true);
-        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({start: start, end: end});
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: start, end: end });
         expect(component.isModelValid()).toBe(false);
     });
 
@@ -198,7 +195,7 @@ describe('DatePickerComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
     });
 
-    it ('Should handle single date blocked by disable function', () => {
+    it('Should handle single date blocked by disable function', () => {
         spyOn(component.selectedDateChange, 'emit');
         spyOn(component, 'onChange');
         const invalidDate = (<any>component)._invalidDate();
@@ -215,7 +212,7 @@ describe('DatePickerComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith(invalidDate);
     });
 
-    it ('Should handle both range dates blocked by disable function', () => {
+    it('Should handle both range dates blocked by disable function', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
         const invalidDate = (<any>component)._invalidDate();
@@ -239,12 +236,13 @@ describe('DatePickerComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
 
-    it ('Should handle end range date blocked by disable function', () => {
+    it('Should handle end range date blocked by disable function', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
         const invalidDate = (<any>component)._invalidDate();
         component.type = 'range';
-        component.disableRangeEndFunction = (fdDate: FdDate) => fdDate.getTimeStamp() > FdDate.getToday().getTimeStamp();
+        component.disableRangeEndFunction = (fdDate: FdDate) =>
+            fdDate.getTimeStamp() > FdDate.getToday().getTimeStamp();
 
         const date1 = new FdDate(2010, 10, 10);
         const date2 = FdDate.getToday().nextDay();

@@ -1,5 +1,4 @@
 export interface ShellbarMenuItem {
-
     /** Text written in dropdown option */
     name: string;
 
@@ -12,11 +11,10 @@ export interface ShellbarMenuItem {
      * The link, that user will be redirected to, after clicking item. When this value is set, element will become
      * anchor with href, otherwise it's basic text
      */
-    link?: string
+    link?: string;
 
     /**
     /* The icon to include in shellbar menu item See the icon page for the list of icons.
     */
-    glyph?: string
-
+    glyph?: string;
 }

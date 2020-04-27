@@ -23,7 +23,6 @@ import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interf
     template: '<ng-container #contentContainer></ng-container>'
 })
 export class DialogContainerComponent implements AfterViewInit, CssClassBuilder {
-
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -32,7 +31,7 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
     }
 
     /** @hidden */
-    @ViewChild('contentContainer', {read: ViewContainerRef}) containerRef: ViewContainerRef;
+    @ViewChild('contentContainer', { read: ViewContainerRef }) containerRef: ViewContainerRef;
 
     /** @hidden Content that should be placed inside container */
     childContent: TemplateRef<any> | Type<any> = undefined;
@@ -49,8 +48,8 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
         @Inject(DIALOG_REF) private _dialogRef: DialogRef,
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _componentFactoryResolver: ComponentFactoryResolver) {
-    }
+        private _componentFactoryResolver: ComponentFactoryResolver
+    ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -60,10 +59,7 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string {
-        return [
-            this.dialogConfig.containerClass,
-            this._class
-        ].filter(x => x !== '').join(' ');
+        return [this.dialogConfig.containerClass, this._class].filter((x) => x !== '').join(' ');
     }
 
     /** @hidden */
@@ -91,7 +87,7 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
     /** @hidden Load received content as embedded view */
     private _createFromTemplate(content: TemplateRef<any>): void {
         this.containerRef.clear();
-        const context = {$implicit: this._dialogRef, dialogConfig: this.dialogConfig};
+        const context = { $implicit: this._dialogRef, dialogConfig: this.dialogConfig };
         this._componentRef = this.containerRef.createEmbeddedView(content, context);
     }
 }

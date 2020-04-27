@@ -9,8 +9,7 @@ describe('TokenComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TokenComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -40,5 +39,4 @@ describe('TokenComponent', () => {
         fixture.detectChanges();
         expect(component.onCloseClick.emit).toHaveBeenCalled();
     });
-
 });

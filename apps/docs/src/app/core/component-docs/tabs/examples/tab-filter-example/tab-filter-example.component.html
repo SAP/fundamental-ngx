@@ -11,8 +11,8 @@
     </fd-tab>
 </fd-tab-list>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <label fd-form-label>Compact Filter Tabs Built by passing parameters</label>
 <fd-tab-list [mode]="'filter'" [compact]="true">
@@ -27,8 +27,8 @@
     </fd-tab>
 </fd-tab-list>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <label fd-form-label>Filter Tabs Built by defining own template</label>
 <fd-tab-list [mode]="'filter'">
@@ -61,17 +61,13 @@
     </fd-tab>
 </fd-tab-list>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <label fd-form-label>Filter Tabs Built by defining own template with routerLink</label>
 <nav fd-tab-nav [mode]="'filter'">
     <div fd-tab-item [header]="true">
-        <a fd-tab-link
-           [active]="rla1.isActive"
-           [routerLink]="'tab1'"
-           routerLinkActive
-           #rla1="routerLinkActive">
+        <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">
             <span fd-tab-header>
                 <span fd-tab-counter-header>100</span>
                 <span fd-tab-label>items</span>
@@ -80,11 +76,7 @@
     </div>
     <div fd-tab-separator></div>
     <div fd-tab-item>
-        <a fd-tab-link
-           [active]="rla2.isActive"
-           [routerLink]="'tab2'"
-           routerLinkActive
-           #rla2="routerLinkActive">
+        <a fd-tab-link [active]="rla2.isActive" [routerLink]="'tab2'" routerLinkActive #rla2="routerLinkActive">
             <span fd-tab-icon [icon]="'edit'">
                 <p fd-tab-count>11</p>
             </span>
@@ -92,11 +84,7 @@
         </a>
     </div>
     <div fd-tab-item>
-        <a fd-tab-link
-           [active]="rla3.isActive"
-           [routerLink]="'tab3'"
-           routerLinkActive
-           #rla3="routerLinkActive">
+        <a fd-tab-link [active]="rla3.isActive" [routerLink]="'tab3'" routerLinkActive #rla3="routerLinkActive">
             <span fd-tab-icon [icon]="'menu'">
                 <p fd-tab-count>12</p>
             </span>

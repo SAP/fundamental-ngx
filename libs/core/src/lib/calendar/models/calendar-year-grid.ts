@@ -1,6 +1,6 @@
 export interface CalendarYearGrid {
     /** Number of rows in year grid */
-    rows: number,
+    rows: number;
 
     /** Number of columns in year grid */
     cols: number;

@@ -12,10 +12,9 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-form-control]',
+    selector: '[fd-form-control]'
 })
 export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges {
-
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -45,9 +44,11 @@ export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges 
         return [
             this.state ? 'is-' + this.state : '',
             this._getFormClass(),
-            this.compact ? (this._getFormClass() + '--compact') : '',
+            this.compact ? this._getFormClass() + '--compact' : '',
             this.class
-        ].filter(x => x !== '').join(' ');
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
     private _getFormClass(): string {
@@ -62,10 +63,7 @@ export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges 
     }
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef
-    ) {
-    }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -89,4 +87,3 @@ export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges 
         }
     }
 }
-

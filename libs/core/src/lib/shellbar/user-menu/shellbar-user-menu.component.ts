@@ -13,7 +13,6 @@ import { ShellbarUserMenu } from '../model/shellbar-user-menu';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarUserMenuComponent extends PopoverComponent {
-
     /** The user data. */
     @Input()
     user: ShellbarUser;

@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './dropdown-toolbar-example.component.html'
 })
 export class DropdownToolbarExampleComponent {
-
     menu1 = [
         { text: 'Option 1', url: '#' },
         { text: 'Option 2', url: '#' },

@@ -24,5 +24,5 @@ export class BreadcrumbLinkDirective {
         return this._elementRef;
     }
 
-    constructor(private _elementRef: ElementRef) { }
+    constructor(private _elementRef: ElementRef) {}
 }

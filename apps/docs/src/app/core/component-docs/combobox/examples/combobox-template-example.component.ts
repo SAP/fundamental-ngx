@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
 })
 export class ComboboxTemplateExampleComponent {
     values = [
-        { name: 'Photo Voltaic', icon: 'photo-voltaic'},
+        { name: 'Photo Voltaic', icon: 'photo-voltaic' },
         { name: 'Settings', icon: 'settings' },
         { name: 'Heating Cooling', icon: 'heating-cooling' },
         { name: 'Competitor', icon: 'competitor' },
@@ -20,12 +20,12 @@ export class ComboboxTemplateExampleComponent {
         { name: 'Passenger Train', icon: 'passenger-train' },
         { name: 'World', icon: 'world' },
         { name: 'Shield', icon: 'shield' },
-        { name: 'Journey Change', icon: 'journey-change' },
+        { name: 'Journey Change', icon: 'journey-change' }
     ];
 
     selected: any;
 
-    displayFunction(item: {name: string, icon: string}): string {
+    displayFunction(item: { name: string; icon: string }): string {
         return item.name;
     }
 }

@@ -12,35 +12,43 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './layout-grid-docs.component.html'
 })
 export class LayoutGridDocsComponent {
+    layoutGridGapSize: ExampleFile[] = [
+        {
+            language: 'html',
+            code: layoutGapSrc,
+            fileName: 'layout-grid-gap-size-example'
+        }
+    ];
 
-    layoutGridGapSize: ExampleFile[] = [{
-        language: 'html',
-        code: layoutGapSrc,
-        fileName: 'layout-grid-gap-size-example',
-    }];
+    defaultLayoutGrid: ExampleFile[] = [
+        {
+            language: 'html',
+            code: layoutGridSrc,
+            fileName: 'layout-grid-example'
+        }
+    ];
 
-    defaultLayoutGrid: ExampleFile[] = [{
-        language: 'html',
-        code: layoutGridSrc,
-        fileName: 'layout-grid-example',
-    }];
+    noGapLayoutGrid: ExampleFile[] = [
+        {
+            language: 'html',
+            code: layoutGridNoGapSrc,
+            fileName: 'layout-grid-nogap-example'
+        }
+    ];
 
-    noGapLayoutGrid: ExampleFile[] = [{
-        language: 'html',
-        code: layoutGridNoGapSrc,
-        fileName: 'layout-grid-nogap-example',
-    }];
+    twoColumnsLayoutGrid: ExampleFile[] = [
+        {
+            language: 'html',
+            code: layoutGridColumnsSrc,
+            fileName: 'layout-grid-columns-example'
+        }
+    ];
 
-    twoColumnsLayoutGrid: ExampleFile[] = [{
-        language: 'html',
-        code: layoutGridColumnsSrc,
-        fileName: 'layout-grid-columns-example',
-    }];
-
-    columnSpanLayoutGrid: ExampleFile[] = [{
-        language: 'html',
-        code: layoutGridRowColumnSrc,
-        fileName: 'layout-grid-column-span-example',
-    }];
-
+    columnSpanLayoutGrid: ExampleFile[] = [
+        {
+            language: 'html',
+            code: layoutGridRowColumnSrc,
+            fileName: 'layout-grid-column-span-example'
+        }
+    ];
 }

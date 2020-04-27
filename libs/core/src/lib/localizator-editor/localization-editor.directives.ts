@@ -13,7 +13,6 @@ import { Directive, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, Vi
     selector: '[fd-localization-editor-input]'
 })
 export class LocalizationEditorInputDirective {
-
     /** @hidden */
     @HostBinding('class.fd-input-group__input')
     fdInputGroupInputClass: boolean = true;
@@ -29,7 +28,7 @@ export class LocalizationEditorInputDirective {
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-localization-editor-textarea]',
+    selector: '[fd-localization-editor-textarea]'
 })
 export class LocalizationEditorTextareaDirective {
     /**
@@ -63,7 +62,7 @@ export class LocalizationEditorTextareaDirective {
  * */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-localization-editor-label]',
+    selector: '[fd-localization-editor-label]'
 })
 export class LocalizationEditorLabel {}
 
@@ -79,10 +78,9 @@ export class LocalizationEditorLabel {}
  * */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-localization-editor-element]',
+    selector: '[fd-localization-editor-element]'
 })
 export class LocalizationEditorElement {
-
     /** @hidden */
     @HostBinding('class.fd-localization-editor__language')
     fdLocalizationEditorLanguage: boolean = true;

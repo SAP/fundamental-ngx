@@ -9,6 +9,9 @@
     </div>
 </div>
 
-<div class="collapsed-overlay" [ngClass]="{ 'overlay-init': !isSideBarCollapsed() }" *ngIf="this.smallScreen"
-    (click)="closeSideBar()">
-</div>
+<div
+    class="collapsed-overlay"
+    [ngClass]="{ 'overlay-init': !isSideBarCollapsed() }"
+    *ngIf="this.smallScreen"
+    (click)="closeSideBar()"
+></div>

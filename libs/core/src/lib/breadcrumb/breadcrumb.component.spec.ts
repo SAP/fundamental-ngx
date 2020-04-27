@@ -5,7 +5,8 @@ import {
     PopoverModule,
     IconModule,
     BreadcrumbItemDirective,
-    BreadcrumbLinkDirective, RtlService
+    BreadcrumbLinkDirective,
+    RtlService
 } from '@fundamental-ngx/core';
 import { RouterModule } from '@angular/router';
 import { Component } from '@angular/core';
@@ -35,7 +36,12 @@ describe('BreadcrumbComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [BreadcrumbComponent, BreadcrumbItemDirective, BreadcrumbLinkDirective, BreadcrumbWrapperComponent],
+            declarations: [
+                BreadcrumbComponent,
+                BreadcrumbItemDirective,
+                BreadcrumbLinkDirective,
+                BreadcrumbWrapperComponent
+            ],
             imports: [PopoverModule, MenuModule, IconModule, RouterModule, RouterTestingModule],
             providers: [RtlService]
         }).compileComponents();
@@ -52,14 +58,14 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should handle onResize - enlarging the screen', () => {
-        spyOn(component.elementRef.nativeElement.parentElement, 'getBoundingClientRect').and.returnValue({width: 3});
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+        spyOn(component.elementRef.nativeElement.parentElement, 'getBoundingClientRect').and.returnValue({ width: 3 });
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'collapseBreadcrumbs');
         spyOn(component, 'expandBreadcrumbs');
         component.previousContainerWidth = 2;
 
         // move breadcrumbItems into collapsed array first
-        component.breadcrumbItems.forEach(item => {
+        component.breadcrumbItems.forEach((item) => {
             component.collapsedBreadcrumbItems.push(item);
         });
 
@@ -73,8 +79,8 @@ describe('BreadcrumbComponent', () => {
     it('should handle onResize - shrinking the screen', () => {
         spyOn(component, 'collapseBreadcrumbs');
         spyOn(component, 'expandBreadcrumbs');
-        spyOn(component.elementRef.nativeElement.parentElement, 'getBoundingClientRect').and.returnValue({width: 1});
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 3});
+        spyOn(component.elementRef.nativeElement.parentElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 3 });
         component.previousContainerWidth = 2;
 
         component.onResize();
@@ -85,12 +91,12 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should collapse the breadcrumbs', () => {
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 2});
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 2 });
         spyOn(component, 'getContainerBoundary').and.returnValue(1);
 
         component.collapseBreadcrumbs();
 
-        component.breadcrumbItems.forEach(item => {
+        component.breadcrumbItems.forEach((item) => {
             expect(item.elementRef.nativeElement.style.display).toBe('none');
         });
         expect(component.collapsedBreadcrumbItems.length).toBe(3);
@@ -98,15 +104,15 @@ describe('BreadcrumbComponent', () => {
 
     it('should expand all of the breadcrumbs', () => {
         // collapse all the breadcrumbs first
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 3});
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 3 });
         spyOn(component, 'getContainerBoundary').and.returnValue(2);
         component.collapseBreadcrumbs();
 
-        component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({width: 1});
+        component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({ width: 1 });
 
         component.expandBreadcrumbs();
 
-        component.breadcrumbItems.forEach(item => {
+        component.breadcrumbItems.forEach((item) => {
             expect(item.elementRef.nativeElement.style.display).toBe('inline-block');
             expect(item.elementRef.nativeElement.style.visibility).toBe('visible');
         });

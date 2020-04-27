@@ -40,12 +40,9 @@ describe('SelectComponent', () => {
             declarations: [TestWrapperComponent],
             imports: [SelectModule]
         })
-            .overrideComponent(
-                SelectComponent,
-                {
-                    set: { changeDetection: ChangeDetectionStrategy.Default }
-                }
-            )
+            .overrideComponent(SelectComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
             .compileComponents();
     }));
 
@@ -54,7 +51,6 @@ describe('SelectComponent', () => {
         component = fixture.componentInstance.selectRef;
         element = fixture.componentInstance.selectElement;
         fixture.detectChanges();
-
     });
 
     it('should create', () => {
@@ -81,7 +77,6 @@ describe('SelectComponent', () => {
         fixture.detectChanges();
         tick();
         expect(document.body.querySelector('#fdtest1')).toBeFalsy();
-
     }));
 
     it('should open on click', fakeAsync(() => {
@@ -146,7 +141,7 @@ describe('SelectComponent', () => {
         await fixture.whenStable();
 
         expect(component.value).toBe(testValue);
-        expect(component.options.find(option => option.value === testValue).selected).toBe(true);
+        expect(component.options.find((option) => option.value === testValue).selected).toBe(true);
         expect(component['_selected']).toBeTruthy();
         expect(component['_selected'].value).toBe(testValue);
     });
@@ -170,7 +165,7 @@ describe('SelectComponent', () => {
         expect(component.triggerValue).toBe('Nested');
     }));
 
-    it('Should not unselect option, when this is switched off', (() => {
+    it('Should not unselect option, when this is switched off', () => {
         component.unselectMissingOption = false;
         const testValue = 'fdtest3Timeout';
         expect(component.value).toBeFalsy();
@@ -183,8 +178,5 @@ describe('SelectComponent', () => {
         fixture.detectChanges();
 
         expect(component.value).toBe('fdtest3Timeout');
-
-
-    }));
-
+    });
 });

@@ -12,7 +12,16 @@ import { ListModule } from '../list/list.module';
 
 @NgModule({
     declarations: [ComboboxComponent],
-    imports: [CommonModule, PopoverModule, FormsModule, MenuModule, PipeModule, ButtonModule, InputGroupModule, ListModule],
+    imports: [
+        CommonModule,
+        PopoverModule,
+        FormsModule,
+        MenuModule,
+        PipeModule,
+        ButtonModule,
+        InputGroupModule,
+        ListModule
+    ],
     exports: [ComboboxComponent]
 })
 export class ComboboxModule {}

@@ -5,7 +5,8 @@ import {
     Component,
     ContentChild,
     Input,
-    OnChanges, Optional,
+    OnChanges,
+    Optional,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
@@ -32,7 +33,6 @@ let tabPanelUniqueId: number = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabPanelComponent implements OnChanges {
-
     /** @hidden */
     @ContentChild(TabTitleDirective, { read: TemplateRef })
     titleTemplate: TemplateRef<any>;
@@ -78,10 +78,7 @@ export class TabPanelComponent implements OnChanges {
     tabState: TabItemState;
 
     /** @hidden */
-    constructor(
-        private _changeDetRef: ChangeDetectorRef,
-        @Optional() private _tabsService: TabsService
-    ) {}
+    constructor(private _changeDetRef: ChangeDetectorRef, @Optional() private _tabsService: TabsService) {}
 
     /** @hidden
      * Thanks to OnPush change strategy detection on tab-list parent component,

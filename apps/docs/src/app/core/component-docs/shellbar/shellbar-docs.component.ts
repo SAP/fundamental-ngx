@@ -54,5 +54,4 @@ export class ShellbarDocsComponent {
             fileName: 'shellbar-side-nav-example'
         }
     ];
-
 }

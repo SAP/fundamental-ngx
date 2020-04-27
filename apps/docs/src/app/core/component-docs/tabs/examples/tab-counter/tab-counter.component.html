@@ -11,8 +11,8 @@
     </fd-tab>
 </fd-tab-list>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <label fd-form-label>Semantic Tabs Built by Passing Title Parameter</label>
 <fd-tab-list>
@@ -33,8 +33,8 @@
     </fd-tab>
 </fd-tab-list>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <label fd-form-label>Tabs With Counter Built by Defining Template</label>
 <fd-tab-list>
@@ -61,40 +61,27 @@
     </fd-tab>
 </fd-tab-list>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <label fd-form-label>Tabs With Counter Built by defining own template and with routerLink</label>
 <nav fd-tab-nav>
     <div fd-tab-item>
-        <a fd-tab-link
-           [active]="rla1.isActive"
-           [routerLink]="'tab1'"
-           routerLinkActive
-           #rla1="routerLinkActive">
+        <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">
             <p fd-tab-count>11</p>
             <span fd-tab-tag>Link 1</span>
         </a>
     </div>
     <div fd-tab-item>
-        <a fd-tab-link
-           [active]="rla2.isActive"
-           [routerLink]="'tab2'"
-           routerLinkActive
-           #rla2="routerLinkActive">
+        <a fd-tab-link [active]="rla2.isActive" [routerLink]="'tab2'" routerLinkActive #rla2="routerLinkActive">
             <p fd-tab-count>12</p>
             <span fd-tab-tag>Link 2</span>
         </a>
     </div>
     <div fd-tab-item>
-        <a fd-tab-link
-           [active]="rla3.isActive"
-           [routerLink]="'tab3'"
-           routerLinkActive
-           #rla3="routerLinkActive">
+        <a fd-tab-link [active]="rla3.isActive" [routerLink]="'tab3'" routerLinkActive #rla3="routerLinkActive">
             <p fd-tab-count>13</p>
             <span fd-tab-tag>Link 3</span>
         </a>
     </div>
 </nav>
-

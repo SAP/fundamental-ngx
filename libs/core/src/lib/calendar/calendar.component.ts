@@ -22,9 +22,7 @@ import { SpecialDayRule } from './models/special-day-rule';
 import { CalendarService } from './calendar.service';
 import { CalendarYearGrid } from './models/calendar-year-grid';
 import { AggregatedYear } from './models/aggregated-year';
-import {
-    CalendarAggregatedYearViewComponent
-} from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 
 let calendarUniqueId: number = 0;
 
@@ -72,7 +70,6 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit, ControlValueAccessor, Validator {
-
     /** @hidden */
     @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent;
 
@@ -208,19 +205,17 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    onChange: Function = () => {
-    };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {
-    };
+    onTouched: Function = () => {};
 
     /**
      * Function used to disable certain dates in the calendar.
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function(fdDate: FdDate): boolean {
+    disableFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -229,7 +224,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * @param fdDate FdDate
      */
     @Input()
-    disableRangeStartFunction = function(fdDate: FdDate): boolean {
+    disableRangeStartFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -238,7 +233,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * @param fdDate FdDate
      */
     @Input()
-    disableRangeEndFunction = function(fdDate: FdDate): boolean {
+    disableRangeEndFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -251,10 +246,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     };
 
     /** @hidden */
-    constructor(
-        calendarI18n: CalendarI18n,
-        private _changeDetectorRef: ChangeDetectorRef
-    ) {}
+    constructor(calendarI18n: CalendarI18n, private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -303,14 +295,18 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
-        [key: string]: any
+    validate(
+        control: AbstractControl
+    ): {
+        [key: string]: any;
     } {
-        return this.isModelValid() ? null : {
-            dateValidation: {
-                valid: false
-            }
-        };
+        return this.isModelValid()
+            ? null
+            : {
+                  dateValidation: {
+                      valid: false
+                  }
+              };
     }
 
     /** @hidden */
@@ -483,20 +479,17 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /** Method that provides information if model selected date/dates have properly types and are valid */
     isModelValid(): boolean {
         if (this.calType === 'single') {
-            return this.selectedDate &&
-                this.selectedDate instanceof FdDate &&
-                this.selectedDate.isDateValid();
+            return this.selectedDate && this.selectedDate instanceof FdDate && this.selectedDate.isDateValid();
         } else {
-            return this.selectedRangeDate &&
-                (
-                    this.selectedRangeDate.start &&
-                    this.selectedRangeDate.start instanceof FdDate &&
-                    this.selectedRangeDate.start.isDateValid()
-                ) && (
-                    this.selectedRangeDate.end &&
-                    this.selectedRangeDate.end instanceof FdDate &&
-                    this.selectedRangeDate.start.isDateValid()
-                );
+            return (
+                this.selectedRangeDate &&
+                this.selectedRangeDate.start &&
+                this.selectedRangeDate.start instanceof FdDate &&
+                this.selectedRangeDate.start.isDateValid() &&
+                this.selectedRangeDate.end &&
+                this.selectedRangeDate.end instanceof FdDate &&
+                this.selectedRangeDate.start.isDateValid()
+            );
         }
     }
 
@@ -523,5 +516,4 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
             this.currentlyDisplayed = { month: tempDate.month, year: tempDate.year };
         }
     }
-
 }

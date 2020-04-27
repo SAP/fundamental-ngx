@@ -9,35 +9,38 @@ import { FdDate } from '@fundamental-ngx/core';
             <div>
                 <div fd-form-item>
                     <label fd-form-label>Date Picker</label>
-                    <fd-date-picker 
-                            [state]="isValid() ? 'success' : 'error'" 
-                            formControlName="date">
-                    </fd-date-picker>
-                    <fd-form-message *ngIf="isValid()" [type]="'success'">This is valid(success) DatePicker</fd-form-message>
-                    <fd-form-message *ngIf="!isValid()" [type]="'error'">This is invalid(error) DatePicker</fd-form-message>
+                    <fd-date-picker [state]="isValid() ? 'success' : 'error'" formControlName="date"> </fd-date-picker>
+                    <fd-form-message *ngIf="isValid()" [type]="'success'"
+                        >This is valid(success) DatePicker</fd-form-message
+                    >
+                    <fd-form-message *ngIf="!isValid()" [type]="'error'"
+                        >This is invalid(error) DatePicker</fd-form-message
+                    >
                 </div>
-                <br/>
-                Touched: {{customForm.controls.date.touched}}<br/>
-                Dirty: {{customForm.controls.date.dirty}}<br/>
-                Valid: {{customForm.controls.date.valid}}<br/>
-                Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
+                <br />
+                Touched: {{ customForm.controls.date.touched }}<br />
+                Dirty: {{ customForm.controls.date.dirty }}<br />
+                Valid: {{ customForm.controls.date.valid }}<br />
+                Selected Date:
+                {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
             </div>
-            <br/>
-            <br/>
+            <br />
+            <br />
 
             <div fd-form-item>
                 <label fd-form-label>Disabled Date Picker</label>
                 <fd-date-picker [state]="'information'" formControlName="disabledDate"></fd-date-picker>
                 <fd-form-message [type]="'information'">This is disabled DatePicker</fd-form-message>
-                <br/>
+                <br />
             </div>
-            
+
             <div>
-                Touched: {{customForm.controls.disabledDate.touched}}<br/>
-                Dirty: {{customForm.controls.disabledDate.dirty}}<br/>
-                Valid: {{customForm.controls.disabledDate.valid}}<br/>
-                Disabled: {{customForm.controls.disabledDate.disabled}} <br/>
-                Selected Date: {{ customForm.controls.disabledDate.value ? customForm.controls.date.value.toDateString() : 'null' }}
+                Touched: {{ customForm.controls.disabledDate.touched }}<br />
+                Dirty: {{ customForm.controls.disabledDate.dirty }}<br />
+                Valid: {{ customForm.controls.disabledDate.valid }}<br />
+                Disabled: {{ customForm.controls.disabledDate.disabled }} <br />
+                Selected Date:
+                {{ customForm.controls.disabledDate.value ? customForm.controls.date.value.toDateString() : 'null' }}
             </div>
         </form>
     `

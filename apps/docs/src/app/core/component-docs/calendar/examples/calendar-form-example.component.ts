@@ -14,7 +14,8 @@ export class CalendarFormExamplesComponent {
             value: {
                 start: new FdDate(2019, 10, 11),
                 end: new FdDate(2019, 10, 19)
-            }, disabled: false
+            },
+            disabled: false
         })
     });
 
@@ -25,5 +26,4 @@ export class CalendarFormExamplesComponent {
     setInvalidRange() {
         this.customForm.controls['dateRange'].setValue(new FdDate(null, null, null));
     }
-
 }

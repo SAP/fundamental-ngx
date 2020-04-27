@@ -2,11 +2,7 @@
     <fieldset fd-fieldset>
         <div fd-form-item>
             <label fd-form-label>Search Input</label>
-            <fd-input-group
-                formControlName="searchQuery"
-                [glyph]="'decline'"
-                [button]="true"
-                [placeholder]="'Search'">
+            <fd-input-group formControlName="searchQuery" [glyph]="'decline'" [button]="true" [placeholder]="'Search'">
             </fd-input-group>
             Search Query Entered: {{ customForm.controls.searchQuery.value }}
         </div>
@@ -17,4 +13,3 @@
         </div>
     </fieldset>
 </form>
-

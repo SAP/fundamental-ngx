@@ -4,7 +4,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
     selector: 'fdp-platform-action-bar-contextual-menu-example',
     templateUrl: './platform-action-bar-contextual-menu-example.component.html',
     styleUrls: ['./platform-action-bar-contextual-menu-example.component.scss']
-
 })
 export class PlatformActionbarWithContextualMenuExampleComponent implements OnInit {
     actionItems: any[];

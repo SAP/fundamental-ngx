@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './platform-search-field-header.component.html'
 })
 export class PlatformSearchFieldHeaderComponent implements OnInit {
-    constructor() { }
+    constructor() {}
 
-    ngOnInit() { }
+    ngOnInit() {}
 }

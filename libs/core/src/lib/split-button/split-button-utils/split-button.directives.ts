@@ -32,7 +32,6 @@ import { Directive, EmbeddedViewRef, Input, OnInit, TemplateRef, ViewContainerRe
 })
 export class SplitButtonActionTitle {}
 
-
 /**
  *   Directive used to specify menu list of items for dropdown.
  *```html
@@ -56,11 +55,9 @@ export class SplitButtonActionTitle {}
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-split-button-menu]',
+    selector: '[fd-split-button-menu]'
 })
 export class SplitButtonMenuDirective {}
-
-
 
 /**
  * Not for external use. Portal to render the complex title template.

@@ -1,1 +1,1 @@
-export class AppModule { }
+export class AppModule {}

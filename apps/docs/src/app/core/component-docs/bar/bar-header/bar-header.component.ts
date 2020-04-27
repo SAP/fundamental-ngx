@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-bar-header',
     templateUrl: './bar-header.component.html'
 })
-export class BarHeaderComponent { }
+export class BarHeaderComponent {}

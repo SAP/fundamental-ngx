@@ -1,5 +1,7 @@
-<fd-multi-input [dropdownValues]="dropdownValues | async"
-                [placeholder]="'Search here...'"
-                [(ngModel)]="selected"></fd-multi-input>
+<fd-multi-input
+    [dropdownValues]="dropdownValues | async"
+    [placeholder]="'Search here...'"
+    [(ngModel)]="selected"
+></fd-multi-input>
 
-Selected: [{{selected.toLocaleString()}}]
+Selected: [{{ selected.toLocaleString() }}]

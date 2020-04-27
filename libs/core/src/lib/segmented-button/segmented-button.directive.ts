@@ -14,7 +14,6 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     selector: '[fd-segmented-button]'
 })
 export class SegmentedButtonDirective extends AbstractFdNgxClass {
-
     /**
      * @deprecated
      * Will be removed in 0.17.0
@@ -22,9 +21,9 @@ export class SegmentedButtonDirective extends AbstractFdNgxClass {
     @Input()
     size: string;
 
-    /** Defines if there will be added fd-button class. 
-     * Enabled by default. 
-    */
+    /** Defines if there will be added fd-button class.
+     * Enabled by default.
+     */
     @Input() fdButtonClass: boolean = true;
 
     /** Glyph (icon) of the button. */
@@ -35,9 +34,9 @@ export class SegmentedButtonDirective extends AbstractFdNgxClass {
     @Input()
     state: string;
 
-    /** Whether the button should be in compact form. 
+    /** Whether the button should be in compact form.
      * Default value is set to false
-    */
+     */
     @Input()
     @HostBinding('class.fd-button--compact')
     compact: boolean = false;

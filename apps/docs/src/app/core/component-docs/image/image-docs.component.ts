@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {Schema} from '../../../schema/models/schema.model';
-import {SchemaFactoryService} from '../../../schema/services/schema-factory/schema-factory.service';
+import { Component } from '@angular/core';
+import { Schema } from '../../../schema/models/schema.model';
+import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as imageShapesSrc from '!raw-loader!./examples/image-shapes-example.component.html';
 import * as imageSizesSrc from '!raw-loader!./examples/image-sizes-example.component.html';
-import {ExampleFile} from '../../../documentation/core-helpers/code-example/example-file';
+import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-image',
@@ -46,7 +46,7 @@ export class ImageDocsComponent {
         {
             language: 'html',
             code: imageSizesSrc,
-            fileName: 'image-sizes-example',
+            fileName: 'image-sizes-example'
         }
     ];
 
@@ -54,7 +54,7 @@ export class ImageDocsComponent {
         {
             language: 'html',
             code: imageShapesSrc,
-            fileName: 'image-shapes-example',
+            fileName: 'image-shapes-example'
         }
     ];
 

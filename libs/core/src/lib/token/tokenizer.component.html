@@ -1,21 +1,29 @@
-<div class="fd-tokenizer fd-tokenizer--scrollable" tabindex="0" (focus)="tokenizerHasFocus = true" (blur)="tokenizerHasFocus = false;"
-        [ngClass]="{'is-focus': tokenizerHasFocus, 'fd-tokenizer--compact': compact}">
+<div
+    class="fd-tokenizer fd-tokenizer--scrollable"
+    tabindex="0"
+    (focus)="tokenizerHasFocus = true"
+    (blur)="tokenizerHasFocus = false"
+    [ngClass]="{ 'is-focus': tokenizerHasFocus, 'fd-tokenizer--compact': compact }"
+>
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <ng-content select="fd-token"></ng-content>
-        <span *ngIf="(moreTokensLeft.length > 0 || moreTokensRight.length > 0) && compact" class="fd-tokenizer-more" #moreElement>
-            <ng-container>{{moreTokensLeft.length + moreTokensRight.length}} {{moreTerm}}</ng-container>
+        <span
+            *ngIf="(moreTokensLeft.length > 0 || moreTokensRight.length > 0) && compact"
+            class="fd-tokenizer-more"
+            #moreElement
+        >
+            <ng-container>{{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}</ng-container>
         </span>
         <ng-content select="[fd-form-control]"></ng-content>
     </div>
-    <span fd-input-group-addon *ngIf="glyph" #inputGroupAddOn
-          [compact]="compact"
-          [button]="true"
-          [placement]="'after'">
-        <button fd-button [class]="compact ? 'fd-tokenizer-addon--compact' : 'fd-tokenizer-addon'"
+    <span fd-input-group-addon *ngIf="glyph" #inputGroupAddOn [compact]="compact" [button]="true" [placement]="'after'">
+        <button
+            fd-button
+            [class]="compact ? 'fd-tokenizer-addon--compact' : 'fd-tokenizer-addon'"
             [fdType]="'transparent'"
             [compact]="compact"
             [glyph]="glyph"
-            type="button">
-        </button>
+            type="button"
+        ></button>
     </span>
 </div>

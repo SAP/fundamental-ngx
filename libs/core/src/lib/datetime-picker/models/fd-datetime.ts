@@ -6,7 +6,6 @@ import { FdDate } from '../../calendar/models/fd-date';
 import { TimeObject } from '../../time/time-object';
 
 export class FdDatetime {
-
     date: FdDate;
     time: TimeObject;
 
@@ -15,7 +14,7 @@ export class FdDatetime {
      */
     static getToday(): FdDatetime {
         const date: Date = new Date();
-        const time: TimeObject = {hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds()};
+        const time: TimeObject = { hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds() };
         return new FdDatetime(FdDate.getToday(), time);
     }
 
@@ -24,10 +23,7 @@ export class FdDatetime {
      * @param date the FdDate object.
      * @param time the TimeObject object.
      */
-    constructor(
-        date: FdDate,
-        time: TimeObject
-    ) {
+    constructor(date: FdDate, time: TimeObject) {
         this.date = date;
         this.time = time;
     }
@@ -47,8 +43,8 @@ export class FdDatetime {
      * Method that checks validity of time on FdDateTime object.
      */
     public isTimeValid(): boolean {
-
-        if (!this.time ||
+        if (
+            !this.time ||
             this.hour === undefined ||
             this.minute === undefined ||
             this.second === undefined ||

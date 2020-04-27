@@ -58,11 +58,7 @@ import { DialogFooterButtonComponent } from './dialog-footer-button/dialog-foote
         DialogFooterButtonComponent,
         DialogDecisiveButtonDirective
     ],
-    entryComponents: [
-        DialogComponent,
-        DialogContainerComponent
-    ],
+    entryComponents: [DialogComponent, DialogContainerComponent],
     providers: [DialogService, DynamicComponentService]
 })
-export class DialogModule {
-}
+export class DialogModule {}

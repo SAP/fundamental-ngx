@@ -4,9 +4,7 @@ import { TileModule } from '../tile.module';
 import { ProductTileTextDirective } from './product-tile-text.directive';
 
 @Component({
-    template: `
-        <p #directiveElement fd-product-tile-text>Product Tile Text Test</p>
-    `
+    template: ` <p #directiveElement fd-product-tile-text>Product Tile Text Test</p> `
 })
 class TestComponent {
     @ViewChild('directiveElement')

@@ -5,7 +5,6 @@ import { ListItemDirective } from '../list/list-item.directive';
 
 @Injectable()
 export class MenuKeyboardService {
-
     /** Event emitted when an item link is clicked.*/
     @Output()
     public readonly itemClicked: Subject<number> = new Subject<number>();
@@ -27,13 +26,12 @@ export class MenuKeyboardService {
      * @param menuItems array of menu item directives
      * */
     keyDownHandler(event: KeyboardEvent, index: number, menuItems: DefaultMenuItem[] | ListItemDirective[]): void {
-
         if (this.disableKeydownHandling) {
             return;
         }
 
         switch (event.key) {
-            case ('ArrowDown'): {
+            case 'ArrowDown': {
                 if (menuItems.length > index + 1) {
                     menuItems[index + 1].focus();
                 } else {
@@ -46,7 +44,7 @@ export class MenuKeyboardService {
                 event.preventDefault();
                 break;
             }
-            case ('ArrowUp'): {
+            case 'ArrowUp': {
                 if (index > 0) {
                     menuItems[index - 1].focus();
                 } else {
@@ -59,14 +57,14 @@ export class MenuKeyboardService {
                 event.preventDefault();
                 break;
             }
-            case (' '): {
+            case ' ': {
                 if (menuItems[index]) {
                     menuItems[index].click();
                     event.preventDefault();
                 }
                 break;
             }
-            case ('Enter'): {
+            case 'Enter': {
                 if (menuItems[index]) {
                     menuItems[index].click();
                     event.preventDefault();

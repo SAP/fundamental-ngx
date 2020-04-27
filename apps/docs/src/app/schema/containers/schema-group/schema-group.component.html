@@ -1,5 +1,5 @@
 <div [formGroup]="schemaGroup">
-    <ng-container *ngFor="let control of forms;let i = index">
+    <ng-container *ngFor="let control of forms; let i = index">
         <ng-container *ngIf="_isFormControl(control.control); else formGroup">
             <ng-container [ngSwitch]="control.type">
                 <ng-container *ngSwitchCase="'string'">
@@ -14,7 +14,7 @@
                     <ng-template #noEnum>
                         <div fd-form-item class="form-group">
                             <label fd-form-label>{{ control.key }}</label>
-                            <input fd-form-control type="text" class="form-control" [formControl]="control.control">
+                            <input fd-form-control type="text" class="form-control" [formControl]="control.control" />
                         </div>
                     </ng-template>
                 </ng-container>
@@ -35,23 +35,27 @@
                     <ng-template #noEnum>
                         <div fd-form-item class="form-group">
                             <label fd-form-label>{{ control.key }}</label>
-                            <input fd-form-control type="number" class="form-control" [formControl]="control.control">
+                            <input fd-form-control type="number" class="form-control" [formControl]="control.control" />
                         </div>
                     </ng-template>
                 </ng-container>
                 <ng-container *ngSwitchCase="'boolean'">
                     <div fd-form-item>
-                        <fd-checkbox [label]="control.key"
-                                     [formControl]="control.control"
-                                     [inputId]="'playground' + control.key">
+                        <fd-checkbox
+                            [label]="control.key"
+                            [formControl]="control.control"
+                            [inputId]="'playground' + control.key"
+                        >
                         </fd-checkbox>
                     </div>
                 </ng-container>
                 <ng-container *ngSwitchCase="'enum'">
                     <div fd-form-item>
-                        <fd-checkbox [label]="control.key"
-                                     [formControl]="control.control"
-                                     [inputId]="'playground' + control.key">
+                        <fd-checkbox
+                            [label]="control.key"
+                            [formControl]="control.control"
+                            [inputId]="'playground' + control.key"
+                        >
                         </fd-checkbox>
                     </div>
                 </ng-container>
@@ -59,7 +63,10 @@
         </ng-container>
         <ng-template #formGroup>
             <div class="schema--sub-header">{{ control.key }}</div>
-            <schema-group [schemaGroup]="control.control" [properties]="properties[control.key].properties"></schema-group>
+            <schema-group
+                [schemaGroup]="control.control"
+                [properties]="properties[control.key].properties"
+            ></schema-group>
         </ng-template>
     </ng-container>
 </div>

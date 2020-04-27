@@ -37,7 +37,7 @@ export class SplitButtonDocsComponent {
             code: buttonTypesExample,
             fileName: 'split-button-types-example',
             typescriptFileCode: buttonTypesExampleTs,
-            component: 'ButtonSplitTypesExampleComponent',
+            component: 'ButtonSplitTypesExampleComponent'
         }
     ];
 
@@ -47,7 +47,7 @@ export class SplitButtonDocsComponent {
             code: buttonSplitProgrammaticalyExample,
             fileName: 'split-button-programmatical-example',
             typescriptFileCode: buttonSplitProgrammaticalyExampleTs,
-            component: 'ButtonSplitProgrammaticalExampleComponent',
+            component: 'ButtonSplitProgrammaticalExampleComponent'
         }
     ];
 
@@ -57,7 +57,7 @@ export class SplitButtonDocsComponent {
             code: buttonSplitTemplateExample,
             fileName: 'split-button-template-example',
             typescriptFileCode: buttonSplitTemplateExampleTs,
-            component: 'ButtonSplitTemplateExampleComponent',
+            component: 'ButtonSplitTemplateExampleComponent'
         }
     ];
 
@@ -67,7 +67,7 @@ export class SplitButtonDocsComponent {
             code: buttonSplitOptionsExample,
             fileName: 'split-button-options-example',
             typescriptFileCode: buttonSplitOptionsExampleTs,
-            component: 'ButtonSplitOptionsExampleComponent',
+            component: 'ButtonSplitOptionsExampleComponent'
         }
     ];
 
@@ -77,7 +77,7 @@ export class SplitButtonDocsComponent {
             code: buttonSplitIcons,
             fileName: 'split-button-icons-example',
             typescriptFileCode: buttonSplitIconsTs,
-            component: 'ButtonSplitTypesIconsComponent',
+            component: 'ButtonSplitTypesIconsComponent'
         }
     ];
 

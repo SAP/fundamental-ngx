@@ -8,10 +8,10 @@ import { LocalizationEditorMainComponent } from './localization-editor-main.comp
     selector: 'fd-localization-main-test',
     template: `<fd-localization-editor-main>
         <ng-template fd-localization-editor-label>
-            <span >Custom Label</span>
+            <span>Custom Label</span>
         </ng-template>
         <input fd-localization-editor-input />
-  </fd-localization-editor-main>`
+    </fd-localization-editor-main>`
 })
 class TestLocalizationMainComponent {}
 
@@ -21,15 +21,9 @@ describe('LocalizationEditorMainComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                LocalizationEditorModule,
-                CommonModule
-            ],
-            declarations: [
-                TestLocalizationMainComponent
-            ]
-        })
-            .compileComponents();
+            imports: [LocalizationEditorModule, CommonModule],
+            declarations: [TestLocalizationMainComponent]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

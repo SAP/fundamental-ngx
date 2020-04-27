@@ -15,7 +15,6 @@ export function CALENDAR_I18N_FACTORY(locale) {
     deps: [LOCALE_ID]
 })
 export abstract class CalendarI18n {
-
     /** This is event that should be called, when any property is changed, to let component detect an changes. */
     readonly i18nChange: Subject<void> = new Subject<void>();
 
@@ -40,23 +39,48 @@ export abstract class CalendarI18n {
  */
 @Injectable()
 export class CalendarI18nDefault extends CalendarI18n {
-
     private _weekdaysShort: string[];
     private _monthsShort: string[];
     private _monthsFull: string[];
 
     private _weekdaysFallback: string[] = [
-        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
     ];
 
     private _monthsFullFallback: string[] = [
-        'January', 'February', 'March', 'April', 'May', 'June', 'July',
-        'August', 'September', 'October', 'November', 'December'
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
     ];
 
     private _monthsShortFallback: string[] = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-        'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
     ];
 
     /** Constructor takes in a locale_id and gets the appropriate data from Angular. */
@@ -110,5 +134,4 @@ export class CalendarI18nDefault extends CalendarI18n {
             this._monthsFull = this._monthsFullFallback;
         }
     }
-
 }

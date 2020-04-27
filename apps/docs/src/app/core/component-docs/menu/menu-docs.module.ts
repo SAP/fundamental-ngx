@@ -1,17 +1,17 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {API_FILES} from '../../api-files';
-import {MenuHeaderComponent} from './menu-header/menu-header.component';
-import {MenuDocsComponent} from './menu-docs.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { API_FILES } from '../../api-files';
+import { MenuHeaderComponent } from './menu-header/menu-header.component';
+import { MenuDocsComponent } from './menu-docs.component';
 import {
     MenuExampleComponent,
     MenuGroupExampleComponent,
     MenuSeparatorExampleComponent
 } from './examples/menu-examples.component';
-import {MenuAddonExampleComponent} from './examples/menu-addon-examples.component';
-import {MenuKeyboardSupportExampleComponent} from './examples/menu-keyboard-support-example.component';
+import { MenuAddonExampleComponent } from './examples/menu-addon-examples.component';
+import { MenuKeyboardSupportExampleComponent } from './examples/menu-keyboard-support-example.component';
 import { MenuModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -26,11 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        MenuModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MenuModule],
     exports: [RouterModule],
     declarations: [
         MenuDocsComponent,
@@ -42,5 +38,4 @@ const routes: Routes = [
         MenuKeyboardSupportExampleComponent
     ]
 })
-export class MenuDocsModule {
-}
+export class MenuDocsModule {}

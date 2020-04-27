@@ -4,18 +4,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 @Component({
-    template: `
-        <a fd-mega-menu-link #directiveElement>Fd-badge test</a>
-    `
+    template: ` <a fd-mega-menu-link #directiveElement>Fd-badge test</a> `
 })
-
 export class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
 
 describe('MegaMenuLinkDirective', () => {
-
     let component: TestComponent,
         fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,

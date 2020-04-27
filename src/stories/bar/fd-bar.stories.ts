@@ -25,15 +25,15 @@ const barDesign = {
     header: 'header',
     subheader: 'subheader',
     footer: 'footer',
-    floatingFooter: 'floating-footer',
-}
+    floatingFooter: 'floating-footer'
+};
 
 const sizes = {
     default: '',
     small: 's',
     medium_large: 'm_l',
     extra_large: 'xl'
-}
+};
 
 export const Bar = () => ({
     template: `
@@ -91,6 +91,6 @@ export const Bar = () => ({
         inHomePage: boolean('In Home Page', true),
         inPage: boolean('In Page', true),
         size: select('Size', sizes, 's'),
-        fullwidthVar: boolean('Full width element', true),
+        fullwidthVar: boolean('Full width element', true)
     }
 });

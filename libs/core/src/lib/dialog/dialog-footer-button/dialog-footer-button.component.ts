@@ -12,7 +12,6 @@ import { BarElementDirective } from '../../bar/directives/bar-element.directive'
  */
 @Component({
     selector: 'fd-dialog-footer-button',
-    template: '<ng-content></ng-content>',
+    template: '<ng-content></ng-content>'
 })
-export class DialogFooterButtonComponent extends BarElementDirective {
-}
+export class DialogFooterButtonComponent extends BarElementDirective {}

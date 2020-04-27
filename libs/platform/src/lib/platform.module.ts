@@ -23,4 +23,4 @@ import { PlatformRadioGroupModule } from './components/form/radio-group/radio-gr
         PlatformRadioGroupModule
     ]
 })
-export class FundamentalNgxPlatformModule { }
+export class FundamentalNgxPlatformModule {}

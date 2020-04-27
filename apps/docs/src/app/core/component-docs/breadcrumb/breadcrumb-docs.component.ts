@@ -14,7 +14,7 @@ export class BreadcrumbDocsComponent {
         {
             language: 'html',
             code: breadcrumbRouterLinkExample,
-            fileName: 'breadcrumb-routerLink-example',
+            fileName: 'breadcrumb-routerLink-example'
         }
     ];
 
@@ -22,7 +22,7 @@ export class BreadcrumbDocsComponent {
         {
             language: 'html',
             code: breadcrumbHrefExample,
-            fileName: 'fd-breadcrumb-href-example',
+            fileName: 'fd-breadcrumb-href-example'
         }
     ];
 

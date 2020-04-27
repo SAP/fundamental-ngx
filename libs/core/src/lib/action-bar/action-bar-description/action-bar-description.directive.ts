@@ -19,12 +19,10 @@ import { Directive, HostBinding, Input } from '@angular/core';
     }
 })
 export class ActionBarDescriptionDirective {
-
     /*
      Whether the action bar also has a back button.
      */
     @Input()
     @HostBinding('class.fd-action-bar__description--back')
     withBackBtn: boolean = false;
-
 }

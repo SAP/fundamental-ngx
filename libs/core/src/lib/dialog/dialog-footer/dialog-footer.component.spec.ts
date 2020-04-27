@@ -9,11 +9,11 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class
 @Component({
     template: `
         <fd-dialog-footer>
-                <ng-template fdTemplate="footer">
-                    <div fd-bar-middle>
-                        <button fd-dialog-decisive-button>Custom button</button>
-                    </div>
-                </ng-template>
+            <ng-template fdTemplate="footer">
+                <div fd-bar-middle>
+                    <button fd-dialog-decisive-button>Custom button</button>
+                </div>
+            </ng-template>
         </fd-dialog-footer>
     `
 })
@@ -24,7 +24,7 @@ class CustomFooterTestComponent {
 @Component({
     template: `
         <fd-dialog-footer>
-                <button fd-dialog-decisive-button>Default button</button>
+            <button fd-dialog-decisive-button>Default button</button>
         </fd-dialog-footer>
     `
 })
@@ -33,17 +33,16 @@ class DefaultFooterTestComponent {
 }
 
 describe('DialogFooterComponent', () => {
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [DialogFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
             imports: [BarModule, TemplateModule],
-            providers: [{provide: DIALOG_CONFIG, useClass: DialogConfig}]
+            providers: [{ provide: DIALOG_CONFIG, useClass: DialogConfig }]
         });
     }));
 
-    function setup<V>(testComponent): {fixture: ComponentFixture<V>, component: V} {
-        const fixture = TestBed.createComponent(testComponent as any as Type<V>);
+    function setup<V>(testComponent): { fixture: ComponentFixture<V>; component: V } {
+        const fixture = TestBed.createComponent((testComponent as any) as Type<V>);
         const component = fixture.componentInstance;
 
         return { fixture: fixture, component: component };

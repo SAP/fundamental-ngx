@@ -67,7 +67,7 @@ export class BadgeLabelDocsComponent {
             language: 'html',
             code: badgeDefaultExample,
             fileName: 'badge-default-example',
-            scssFileCode: badgeSccsCode,
+            scssFileCode: badgeSccsCode
         }
     ];
 
@@ -76,7 +76,7 @@ export class BadgeLabelDocsComponent {
             language: 'html',
             code: badgePillExample,
             fileName: 'badge-pill-example',
-            scssFileCode: badgeSccsCode,
+            scssFileCode: badgeSccsCode
         }
     ];
 
@@ -85,7 +85,7 @@ export class BadgeLabelDocsComponent {
             language: 'html',
             code: badgeFilledExample,
             fileName: 'badge-filled-example',
-            scssFileCode: badgeSccsCode,
+            scssFileCode: badgeSccsCode
         }
     ];
 
@@ -94,7 +94,7 @@ export class BadgeLabelDocsComponent {
             language: 'html',
             code: labelDefaultExample,
             fileName: 'label-default-example',
-            scssFileCode: badgeSccsCode,
+            scssFileCode: badgeSccsCode
         }
     ];
 
@@ -103,7 +103,7 @@ export class BadgeLabelDocsComponent {
             language: 'html',
             code: labelBuildStatusExample,
             fileName: 'label-build-status-example',
-            scssFileCode: badgeSccsCode,
+            scssFileCode: badgeSccsCode
         }
     ];
 
@@ -112,7 +112,7 @@ export class BadgeLabelDocsComponent {
             language: 'html',
             code: labelIconStatusExample,
             fileName: 'label-icon-status-example',
-            scssFileCode: badgeSccsCode,
+            scssFileCode: badgeSccsCode
         }
     ];
 
@@ -121,7 +121,7 @@ export class BadgeLabelDocsComponent {
             language: 'html',
             code: labelStatusColorsExample,
             fileName: 'label-status-colors-example',
-            scssFileCode: badgeSccsCode,
+            scssFileCode: badgeSccsCode
         }
     ];
 

@@ -11,10 +11,7 @@ import { NestedListInterface } from './nested-list/nested-list.interface';
  */
 @Injectable()
 export class NestedListKeyboardService {
-
-    constructor (
-        @Inject(MenuKeyboardService) private keyboardService: MenuKeyboardService,
-    ) {}
+    constructor(@Inject(MenuKeyboardService) private keyboardService: MenuKeyboardService) {}
 
     /**
      * Event, that is thrown always, when the open/close i being called on item components.
@@ -26,8 +23,11 @@ export class NestedListKeyboardService {
     private getItems(item: NestedItemInterface): NestedItemInterface[] {
         const childrenItems = item.expanded ? item.allChildrenItems : [];
         return childrenItems.reduce(
-            (actualArray: NestedItemInterface[], nextItem: NestedItemInterface) =>
-                [...actualArray, ...this.getItems(nextItem)], [item]
+            (actualArray: NestedItemInterface[], nextItem: NestedItemInterface) => [
+                ...actualArray,
+                ...this.getItems(nextItem)
+            ],
+            [item]
         );
     }
 
@@ -36,27 +36,23 @@ export class NestedListKeyboardService {
      * Refresh the list of NestedItems, that the keyboard support should be provided for
      */
     public refreshItems(lists: NestedListInterface[]): void {
-
         const items: NestedItemInterface[] = [];
 
         /** Gathering all of the items */
-        lists.forEach(list => items.push(...this.getAllListItems(list)));
+        lists.forEach((list) => items.push(...this.getAllListItems(list)));
         /** Putting the keyboard support function to each of the items */
         items.forEach((item, index) => {
             item.keyboardTriggered
                 .pipe(takeUntil(this.refresh$))
-                .subscribe((keyboardEvent: KeyboardEvent) =>
-                this.handleKeyDown(keyboardEvent, index, items)
-            )
+                .subscribe((keyboardEvent: KeyboardEvent) => this.handleKeyDown(keyboardEvent, index, items));
         });
     }
 
     /** Method that calls the recursive function, getItems() and gathers all of the items in the NestedList */
     private getAllListItems(list: NestedListInterface): NestedItemInterface[] {
-
         const _items: NestedItemInterface[] = [];
         if (list && list.nestedItems && list.nestedItems.length > 0) {
-            list.nestedItems.forEach(item => {
+            list.nestedItems.forEach((item) => {
                 _items.push(...this.getItems(item));
             });
         }
@@ -72,11 +68,10 @@ export class NestedListKeyboardService {
      * Otherwise it follows ArrowUp functionality
      */
     private handleKeyDown(keyboardEvent: KeyboardEvent, index: number, items: NestedItemInterface[]): void {
-
         const item: NestedItemInterface = items[index];
 
         switch (keyboardEvent.key) {
-            case ('ArrowRight'): {
+            case 'ArrowRight': {
                 if (!item.expanded && item.hasChildren) {
                     item.triggerOpen();
                 } else {
@@ -90,7 +85,7 @@ export class NestedListKeyboardService {
                 break;
             }
 
-            case ('ArrowLeft'): {
+            case 'ArrowLeft': {
                 if (item.expanded && item.hasChildren) {
                     item.triggerClose();
                 } else {
@@ -109,5 +104,4 @@ export class NestedListKeyboardService {
             }
         }
     }
-
 }

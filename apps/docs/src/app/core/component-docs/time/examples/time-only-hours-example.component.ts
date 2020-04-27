@@ -5,7 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './time-only-hours-example.component.html'
 })
 export class TimeOnlyHoursExampleComponent {
-
     onlyHoursTime = { hour: 12, minute: null, second: null };
-
 }

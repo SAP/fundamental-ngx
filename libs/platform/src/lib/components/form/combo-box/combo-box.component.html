@@ -1,12 +1,13 @@
-<fd-combobox [(ngModel)]="value"
-             [dropdownValues]="_suggestions"
-             [communicateByObject]="elementTypeIsObject"
-             [disabled]="disabled"
-             [compact]="contentDensity === 'compact'"
-             [inShellbar]="inShellbar"
-             [placeholder]="placeholder"
-             [maxHeight]="maxHeight"
-             [displayFn]="displayFn"
-             [state]="status === 'error' ? 'invalid' : '' "
+<fd-combobox
+    [(ngModel)]="value"
+    [dropdownValues]="_suggestions"
+    [communicateByObject]="elementTypeIsObject"
+    [disabled]="disabled"
+    [compact]="contentDensity === 'compact'"
+    [inShellbar]="inShellbar"
+    [placeholder]="placeholder"
+    [maxHeight]="maxHeight"
+    [displayFn]="displayFn"
+    [state]="status === 'error' ? 'invalid' : ''"
 >
 </fd-combobox>

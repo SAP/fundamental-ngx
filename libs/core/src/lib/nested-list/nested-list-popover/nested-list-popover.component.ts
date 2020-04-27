@@ -83,7 +83,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface {
     /** @hidden */
     private _createRtlObservable(): void {
         this.placement$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'left-start' : 'right-start'))
-            : of('right-start')
+            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left-start' : 'right-start')))
+            : of('right-start');
     }
 }

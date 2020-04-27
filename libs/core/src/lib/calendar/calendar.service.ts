@@ -6,7 +6,6 @@ import { RtlService } from '../utils/services/rtl.service';
 
 @Injectable()
 export class CalendarService {
-
     rowAmount: number = 3;
     colAmount: number = 4;
 
@@ -34,7 +33,6 @@ export class CalendarService {
      * @param year which is number
      */
     static getDaysInMonth(month: number, year: number): number {
-
         const isLeapYear = (_year: number): boolean => {
             if (_year % 4 !== 0) {
                 return false;
@@ -81,14 +79,14 @@ export class CalendarService {
      */
     static isBetween(dateToCheck: FdDate, dateRange: FdRangeDate): boolean {
         return (
-            (dateRange.start && (dateRange.start.getTimeStamp() < dateToCheck.getTimeStamp())) &&
-            (dateRange.end && (dateRange.end.getTimeStamp() > dateToCheck.getTimeStamp()))
+            dateRange.start &&
+            dateRange.start.getTimeStamp() < dateToCheck.getTimeStamp() &&
+            dateRange.end &&
+            dateRange.end.getTimeStamp() > dateToCheck.getTimeStamp()
         );
     }
 
-    constructor(
-        @Optional() private _rtlService: RtlService
-    ) {}
+    constructor(@Optional() private _rtlService: RtlService) {}
 
     /**
      * Standardized method to calculate grid [x][y] to index number
@@ -180,7 +178,7 @@ export class CalendarService {
         if (index === this.getId(this.rowAmount, 0) - 1) {
             this.onListEndApproach.next(0);
         } else {
-            this.onFocusIdChange.next(index + 1)
+            this.onFocusIdChange.next(index + 1);
         }
     }
 
@@ -192,7 +190,7 @@ export class CalendarService {
         if (index === 0) {
             this.onListStartApproach.next(this.getId(this.rowAmount, 0) - 1);
         } else {
-            this.onFocusIdChange.next(index - 1)
+            this.onFocusIdChange.next(index - 1);
         }
     }
 }

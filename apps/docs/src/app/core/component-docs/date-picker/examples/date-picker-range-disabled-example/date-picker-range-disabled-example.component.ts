@@ -3,8 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
-  selector: 'fd-date-picker-range-disabled-example',
-  templateUrl: './date-picker-range-disabled-example.component.html',
+    selector: 'fd-date-picker-range-disabled-example',
+    templateUrl: './date-picker-range-disabled-example.component.html'
 })
 export class DatePickerRangeDisabledExampleComponent {
     customForm = new FormGroup({
@@ -19,15 +19,17 @@ export class DatePickerRangeDisabledExampleComponent {
     }
 
     disabledEndFunction = (fdDate: FdDate): boolean => {
-        return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp() ||
+        return (
+            FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp() ||
             fdDate.getTimeStamp() > this._getFutureDate(FdDate.getToday()).getTimeStamp()
-        ;
+        );
     };
 
     disabledStartFunction = (fdDate: FdDate): boolean => {
-        return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp() ||
+        return (
+            FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp() ||
             fdDate.getTimeStamp() > this._getFutureDate(FdDate.getToday()).getTimeStamp()
-        ;
+        );
     };
 
     /** Get date for next 14 days. */

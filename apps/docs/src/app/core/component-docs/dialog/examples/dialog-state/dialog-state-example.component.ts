@@ -3,11 +3,10 @@ import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-dialog-state-example',
-    templateUrl: './dialog-state-example.component.html',
+    templateUrl: './dialog-state-example.component.html'
 })
 export class DialogStateExample {
-
-    constructor(public dialogService: DialogService) { }
+    constructor(public dialogService: DialogService) {}
 
     openCloseDialog(template): void {
         const dialogRef = this.dialogService.open(template, {
@@ -39,9 +38,8 @@ export class DialogStateExample {
     openLoadingDialog(template): void {
         const dialogRef = this.dialogService.open(template, {
             width: '300px',
-            responsivePadding: true,
+            responsivePadding: true
         });
         dialogRef.loading(true);
     }
-
 }

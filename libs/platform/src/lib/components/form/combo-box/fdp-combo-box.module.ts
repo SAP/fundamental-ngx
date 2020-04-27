@@ -5,21 +5,8 @@ import { ComboboxModule, FormModule as FdFormModule } from '@fundamental-ngx/cor
 import { ComboBoxComponent } from './combo-box.component';
 
 @NgModule({
-    declarations: [
-        ComboBoxComponent
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FdFormModule,
-        ComboboxModule
-    ],
-    exports: [
-        ComboBoxComponent
-    ]
+    declarations: [ComboBoxComponent],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, FdFormModule, ComboboxModule],
+    exports: [ComboBoxComponent]
 })
-export class FdpComboBoxModule {
-}
-
-
+export class FdpComboBoxModule {}

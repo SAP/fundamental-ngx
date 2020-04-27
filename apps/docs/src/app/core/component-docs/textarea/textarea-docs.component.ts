@@ -17,7 +17,7 @@ export class TextareaDocsComponent {
         {
             language: 'html',
             code: formHtml,
-            fileName: 'textarea-example',
+            fileName: 'textarea-example'
         }
     ];
 
@@ -25,7 +25,7 @@ export class TextareaDocsComponent {
         {
             language: 'html',
             code: formInlineHelpHtml,
-            fileName: 'textarea-inline-help-example',
+            fileName: 'textarea-inline-help-example'
         }
     ];
 
@@ -33,7 +33,7 @@ export class TextareaDocsComponent {
         {
             language: 'html',
             code: formStateHtml,
-            fileName: 'textarea-state-example',
+            fileName: 'textarea-state-example'
         }
     ];
 

@@ -58,7 +58,6 @@ import { CalendarYearGrid, SpecialDayRule } from '../..';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Validator {
-
     /** @hidden Reference to the inner time component. */
     @ViewChild(TimeComponent)
     timeComponent: TimeComponent;
@@ -246,19 +245,17 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    onChange: any = (selected: any) => {
-    };
+    onChange: any = (selected: any) => {};
 
     /** @hidden */
-    onTouched: any = () => {
-    };
+    onTouched: any = () => {};
 
     /**
      * Function used to disable certain dates in the calendar.
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function(fdDate: FdDate): boolean {
+    disableFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -266,14 +263,18 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
-        [key: string]: any
+    validate(
+        control: AbstractControl
+    ): {
+        [key: string]: any;
     } {
-        return ( this.isCurrentModelValid() && !this.isInvalidDateInput ) ? null : {
-            dateValidation: {
-                valid: false
-            }
-        };
+        return this.isCurrentModelValid() && !this.isInvalidDateInput
+            ? null
+            : {
+                  dateValidation: {
+                      valid: false
+                  }
+              };
     }
 
     /** Toggles the popover. */
@@ -338,10 +339,11 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     }
 
     /** @hidden */
-    constructor(private _elRef: ElementRef,
-                private _changeDetRef: ChangeDetectorRef,
-                public dateTimeAdapter: DateTimeFormatParser,
-                @Optional() private _datePipe: DatePipe
+    constructor(
+        private _elRef: ElementRef,
+        private _changeDetRef: ChangeDetectorRef,
+        public dateTimeAdapter: DateTimeFormatParser,
+        @Optional() private _datePipe: DatePipe
     ) {}
 
     /** @hidden */
@@ -452,18 +454,14 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
 
     /** Method that provides information if FdDateTime passed as arg has properly types and is valid */
     private _isModelValid(fdDateTime: FdDatetime): boolean {
-        return fdDateTime &&
-            fdDateTime instanceof FdDatetime &&
-            this._isDateValid(fdDateTime) &&
-            fdDateTime.isTimeValid()
-        ;
+        return (
+            fdDateTime && fdDateTime instanceof FdDatetime && this._isDateValid(fdDateTime) && fdDateTime.isTimeValid()
+        );
     }
 
     /** Method that provides information if Date is valid */
     private _isDateValid(fdDateTime: FdDatetime): boolean {
-        return fdDateTime && fdDateTime.isDateValid() &&
-            !this.disableFunction(fdDateTime.date)
-        ;
+        return fdDateTime && fdDateTime.isDateValid() && !this.disableFunction(fdDateTime.date);
     }
 
     private _setInput(fdDateTime: FdDatetime): void {
@@ -483,7 +481,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
      * If there is any format function provided, it is used. Otherwise date format follows angular DatePipe functionality.
      */
     private _formatDateTime(fdDateTime: FdDatetime): string {
-
         const customFormattedDate: string = this.dateTimeAdapter.format(fdDateTime);
 
         if (customFormattedDate) {
@@ -492,5 +489,4 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
             return this._datePipe.transform(fdDateTime.toDate(), this.format, null, this.locale);
         }
     }
-
 }

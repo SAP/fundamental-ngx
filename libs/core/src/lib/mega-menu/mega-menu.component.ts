@@ -38,10 +38,7 @@ export class MegaMenuComponent {
 
     constructor(@Optional() private rtlService: RtlService) {
         if (rtlService) {
-            this.dir$ = rtlService.rtl
-                .pipe(
-                    map(isRtl => isRtl ? rtl : ltr)
-                )
+            this.dir$ = rtlService.rtl.pipe(map((isRtl) => (isRtl ? rtl : ltr)));
         } else {
             this.dir$ = of(ltr);
         }

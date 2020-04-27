@@ -3,15 +3,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormModule } from '../form.module';
 
 @Component({
-    template: `
-        <label #componentElement fd-form-label>Test Text</label>
-    `
+    template: ` <label #componentElement fd-form-label>Test Text</label> `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 }
-
 
 describe('FormLabelComponent', () => {
     let component: TestComponent;

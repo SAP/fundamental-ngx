@@ -1,9 +1,18 @@
-import { AfterContentInit, ContentChildren, Directive, ElementRef, EventEmitter, Input, OnInit, Output, QueryList } from '@angular/core';
+import {
+    AfterContentInit,
+    ContentChildren,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    QueryList
+} from '@angular/core';
 import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
 import { DndContainerDirective } from '../dnd-container/dnd-container.directive';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
 
 export type LinkPosition = 'after' | 'before';
 
@@ -11,15 +20,14 @@ export interface ElementChord {
     x: number;
     y: number;
     position: LinkPosition;
-    stickToPosition?: boolean
+    stickToPosition?: boolean;
 }
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-  selector: '[fd-dnd-list]',
+    selector: '[fd-dnd-list]'
 })
 export class DndListDirective implements AfterContentInit {
-
     /** @hidden */
     @ContentChildren(DndContainerDirective)
     dndContainerItems: QueryList<DndContainerDirective>;
@@ -67,8 +75,8 @@ export class DndListDirective implements AfterContentInit {
 
         /** Temporary object, to store lowest distance values */
         let lowestDistanceItem: {
-            index: number,
-            distance: number
+            index: number;
+            distance: number;
         } = null;
 
         this.elementChords.forEach((element, index) => {
@@ -96,14 +104,13 @@ export class DndListDirective implements AfterContentInit {
         this.draggedItemIndex = ind;
         const draggedItemElement = this.dndContainerItems.toArray()[ind].element;
         /** Counting all of the elements's chords */
-        this.elementChords = this.dndContainerItems.toArray().map((link) =>
-            link.getElementChord(this.isBefore(draggedItemElement, link.element), this.listMode)
-        );
+        this.elementChords = this.dndContainerItems
+            .toArray()
+            .map((link) => link.getElementChord(this.isBefore(draggedItemElement, link.element), this.listMode));
     }
 
     /** Method called, when element is released */
     dragEnd(): void {
-
         const draggedItemIndex = this.draggedItemIndex;
         const replacedItemIndex = this.closestLinkIndex;
         const draggedItem = this.items[draggedItemIndex];
@@ -133,7 +140,7 @@ export class DndListDirective implements AfterContentInit {
 
     /** @hidden */
     private removeAllLines(): void {
-        this.dndContainerItems.forEach(item => item.removeLine());
+        this.dndContainerItems.forEach((item) => item.removeLine());
     }
 
     /** @hidden */
@@ -146,7 +153,7 @@ export class DndListDirective implements AfterContentInit {
     private refreshQueryList(): void {
         this.refresh$.next();
         this.dndContainerItems.forEach((item, index) => {
-            item.moved.pipe(takeUntil(this.refresh$)).subscribe(eventMove => this.onMove(eventMove));
+            item.moved.pipe(takeUntil(this.refresh$)).subscribe((eventMove) => this.onMove(eventMove));
             item.started.pipe(takeUntil(this.refresh$)).subscribe(() => this.dragStart(index));
             item.released.pipe(takeUntil(this.refresh$)).subscribe(() => this.dragEnd());
         });
@@ -157,7 +164,6 @@ export class DndListDirective implements AfterContentInit {
      * Return information if element is placed before the dragged element
      */
     private isBefore(draggedElement: ElementRef, targetElement: ElementRef): boolean {
-
         /** Sometimes the element are not straight in one column, that's why offset is needed */
         const VERTICAL_OFFSET: number = 20;
 

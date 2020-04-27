@@ -19,7 +19,7 @@ export class ScrollSpyDocsComponent {
         {
             language: 'html',
             code: standardH,
-            fileName: 'scroll-spy-example',
+            fileName: 'scroll-spy-example'
         },
         {
             language: 'typescript',
@@ -41,7 +41,7 @@ export class ScrollSpyDocsComponent {
             language: 'typescript',
             component: 'ScrollSpyCustomExampleComponent',
             code: customT,
-            fileName: 'scroll-spy-custom-example',
+            fileName: 'scroll-spy-custom-example'
         }
     ];
 }

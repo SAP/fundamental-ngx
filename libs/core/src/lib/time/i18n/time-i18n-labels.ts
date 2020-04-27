@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 /**
  * Provides i18n support for labels inside the time component.
  */
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class TimeI18nLabels {
-
     /** Aria label for the 'increase hours' button */
     increaseHoursLabel: string = 'Increase hours';
 
@@ -41,5 +40,4 @@ export class TimeI18nLabels {
 
     /** Aria label for the 'decrease period' button */
     decreasePeriodLabel: string = 'Decrease period';
-
 }

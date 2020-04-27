@@ -6,8 +6,7 @@ import { DialogService } from '@fundamental-ngx/core';
     templateUrl: './dialog-mobile-example.component.html'
 })
 export class DialogMobileExampleComponent {
-
-    constructor(public _dialogService: DialogService)  {}
+    constructor(public _dialogService: DialogService) {}
 
     openDialog(dialogTemplate): void {
         this._dialogService.open(dialogTemplate, {

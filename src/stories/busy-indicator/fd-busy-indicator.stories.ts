@@ -23,7 +23,7 @@ const size = {
     default: '',
     m: 'm',
     l: 'l'
-}
+};
 
 export const BusyIndicator = () => ({
     template: `
@@ -37,6 +37,6 @@ export const BusyIndicator = () => ({
     props: {
         size: select('size', size, 'default'),
         loadingLabel: text('loadingLabel', 'Loading data'),
-        loading: boolean('loading', true),
+        loading: boolean('loading', true)
     }
 });

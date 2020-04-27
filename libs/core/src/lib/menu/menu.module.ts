@@ -30,4 +30,4 @@ import { MenuItemAddonDirective } from './menu-item-addon.directive';
         MenuItemAddonDirective
     ]
 })
-export class MenuModule { }
+export class MenuModule {}

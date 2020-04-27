@@ -19,5 +19,4 @@ export class ButtonSplitTypesIconsComponent {
     primaryButtonClicked() {
         alert('Primary Button Clicked!');
     }
-
 }
