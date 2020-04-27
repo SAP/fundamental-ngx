@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2-rc.8"></a>
+## [0.17.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.7...v0.17.2-rc.8) (2020-04-27)
+
+
+### Bug Fixes
+
+* fixed master branch by removing failed merge files ([#2428](https://github.com/SAP/fundamental-ngx/issues/2428)) ([e2a9b18](https://github.com/SAP/fundamental-ngx/commit/e2a9b18))
+
+
+
 <a name="0.17.2-rc.7"></a>
 ## [0.17.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.6...v0.17.2-rc.7) (2020-04-27)
 
