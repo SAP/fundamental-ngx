@@ -24,6 +24,7 @@ import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
 import { ListItemDirective } from '../list/list-item.directive';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -36,8 +37,7 @@ import { ListItemDirective } from '../list/list-item.directive';
     templateUrl: './multi-input.component.html',
     styleUrls: ['./multi-input.component.scss'],
     host: {
-        '(blur)': 'onTouched()',
-        '[class.fd-multi-input-custom]': 'true'
+        '(blur)': 'onTouched()'
     },
     providers: [
         {
@@ -50,7 +50,10 @@ import { ListItemDirective } from '../list/list-item.directive';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit {
+export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit, CssClassBuilder {
+    /** user's custom classes */
+    @Input()
+    class: string;
     /** @hidden */
     @ViewChild(PopoverComponent)
     popoverRef: PopoverComponent;
@@ -62,10 +65,6 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     @ViewChild('searchInputElement')
     searchInputElement: ElementRef;
-
-    /** @hidden */
-    @HostBinding('class.fd-multi-input')
-    multiInputClass = true;
 
     /** Placeholder for the input field. */
     @Input()
@@ -184,13 +183,14 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     constructor(
-        private elRef: ElementRef,
+        private _elementRef: ElementRef,
         private changeDetRef: ChangeDetectorRef,
         private menuKeyboardService: MenuKeyboardService
     ) {}
 
     /** @hidden */
     ngOnInit() {
+        this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
@@ -199,6 +199,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
+        this.buildComponentCssClass();
         if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
             if (this.searchTerm) {
                 this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
@@ -215,6 +216,25 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         this.menuKeyboardService.focusEscapeAfterList = () => {};
     }
 
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            'fd-multi-input',
+            'fd-multi-input-custom',
+            this.class
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
+    }
+
     /** @hidden */
     registerOnChange(fn: any): void {
         this.onChange = fn;
@@ -229,9 +249,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         if (isDisabled) {
-            this.elRef.nativeElement.style.pointerEvents = 'none';
+            this._elementRef.nativeElement.style.pointerEvents = 'none';
         } else {
-            this.elRef.nativeElement.style.pointerEvents = 'auto';
+            this._elementRef.nativeElement.style.pointerEvents = 'auto';
         }
         this.changeDetRef.detectChanges();
     }
@@ -346,7 +366,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     private setupFocusTrap(): void {
         try {
-            this.focusTrap = focusTrap(this.elRef.nativeElement, {
+            this.focusTrap = focusTrap(this._elementRef.nativeElement, {
                 clickOutsideDeactivates: true,
                 returnFocusOnDeactivate: true,
                 escapeDeactivates: false

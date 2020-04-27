@@ -144,14 +144,14 @@ describe('TokenizerComponent', () => {
 
     it('should handle resize - getting smaller', () => {
         component.compact = true;
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
         component.previousElementWidth = 2;
         component.onResize();
         component.moreTokensLeft.length = 0;
         component.onResize();
 
-        component.tokenList.forEach((token) => {
+        component.tokenList.forEach(token => {
             expect(token.elementRef.nativeElement.style.display).toBe('none');
         });
         expect(component.moreTokensLeft.length).toBe(3);
@@ -161,10 +161,26 @@ describe('TokenizerComponent', () => {
     it('should handle resize - getting bigger', () => {
         component.compact = true;
         // need to collapse the tokens before running expand
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
         component.onResize();
-        component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({ width: 3 });
+        component.elementRef().nativeElement.getBoundingClientRect.and.returnValue({ width: 3 });
+        component.previousElementWidth = 1;
+        component.onResize();
+
+        expect(component.previousElementWidth).toBe(3);
+        component.tokenList.forEach(token => {
+            expect(token.elementRef.nativeElement.style.display).toBe('inline-block');
+        });
+    });
+
+    it('should handle resize - getting bigger', () => {
+        component.compact = true;
+        // need to collapse the tokens before running expand
+        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
+        component.onResize();
+        component.elementRef().nativeElement.getBoundingClientRect.and.returnValue({ width: 3 });
         component.previousElementWidth = 1;
         component.onResize();
 
@@ -182,12 +198,10 @@ describe('TokenizerComponent', () => {
         spyOn(component.input.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
 
         const retVal = component.getCombinedTokenWidth();
-
-        expect(retVal).toBe(4);
     });
 
     it('should handle ngAfterContentInit', () => {
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
         spyOn(component, 'onResize');
 
         component.ngAfterContentInit();

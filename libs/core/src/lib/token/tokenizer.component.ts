@@ -10,7 +10,9 @@ import {
     forwardRef,
     HostListener,
     Input,
+    OnChanges,
     OnDestroy,
+    OnInit,
     Optional,
     QueryList,
     ViewChild,
@@ -20,6 +22,7 @@ import { FormControlDirective } from '../form/form-control/form-control.directiv
 import { TokenComponent } from './token.component';
 import { RtlService } from '../utils/services/rtl.service';
 import { Subscription } from 'rxjs';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -28,7 +31,10 @@ import { Subscription } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDestroy {
+export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges {
+    /** user's custom classes */
+    @Input()
+    class: string;
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
     tokenList: QueryList<TokenComponent>;
@@ -114,7 +120,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
 
     /** @hidden */
     ngAfterContentInit() {
-        this.previousElementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+        this.previousElementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
         this.onResize();
     }
 
@@ -130,11 +136,34 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
         }
     }
 
-    constructor(
-        public elementRef: ElementRef,
-        private cdRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService
-    ) {}
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    constructor(private _elementRef: ElementRef, private cdRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            this.class
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
+    }
 
     /** @hidden */
     handleTokenClickSubscriptions(): void {
@@ -179,8 +208,8 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
     /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
-        if (this.elementRef) {
-            const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+        if (this._elementRef) {
+            const elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             // if the element is geting smaller, try collapsing tokens
             if (elementWidth <= this.previousElementWidth) {
                 this._collapseTokens();
@@ -268,7 +297,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
     /** @hidden */
     private _collapseTokens(side?: string): void {
         if (this.compact) {
-            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
             let i = 0;
             /*
@@ -289,7 +318,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
                 }
                 token.elementRef.nativeElement.style.display = 'none';
                 // get the new elementWidth and combinedTokenWidth as these will have changed after setting a token display to 'none'
-                elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+                elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
                 combinedTokenWidth = this.getCombinedTokenWidth();
                 side === 'right' ? i-- : i++;
                 this.cdRef.markForCheck();
@@ -300,7 +329,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
     /** @hidden */
     private _expandTokens(): void {
         if (this.compact) {
-            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
 
             let breakLoop = false;
@@ -316,7 +345,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
                  */
                 tokenToCheck.elementRef.nativeElement.style.display = 'inline-block';
                 tokenToCheck.elementRef.nativeElement.style.visibility = 'hidden';
-                elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+                elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
                 combinedTokenWidth = this.getCombinedTokenWidth();
                 /*
                   if the width of the inner tokenizer component is still smaller than the whole tokenizer component, we'll
