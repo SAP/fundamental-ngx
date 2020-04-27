@@ -2,7 +2,7 @@
 <ng-content select="[fd-notification-title]"></ng-content>
 <button
     fd-button
-    aria-label="close-notification"
+    [attr.aria-label]="closeNotificationLabel"
     [glyph]="'decline'"
     [fdType]="'transparent'"
     class="fd-notification__close"
