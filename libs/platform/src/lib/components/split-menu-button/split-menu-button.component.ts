@@ -15,7 +15,7 @@ export class SplitMenuButtonComponent extends BaseComponent {
 
     /** reference to menu which will be controlled by split button */
     @Input()
-    menu: MenuComponent;
+    menu: string;
 
     /** The Sap-icon to include in the menu-button */
     @Input()
