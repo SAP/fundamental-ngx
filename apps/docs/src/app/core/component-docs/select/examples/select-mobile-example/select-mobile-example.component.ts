@@ -25,7 +25,12 @@ export class SelectMobileExampleComponent implements AfterViewInit, OnDestroy {
         this.dialogRef.close();
     }
 
-    toggleDialog(dialogTemplate: TemplateRef<any>, isOpen: boolean): void {
+    close(): void {
+        this.selectComponent.close();
+        this.dialogRef.hide(true);
+    }
+
+    toggleDialog(isOpen: boolean): void {
         if (isOpen) {
             this.dialogRef.hide(false);
         } else {
