@@ -1,12 +1,12 @@
-import { Component, OnInit , ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-action-bar-simple-example',
     templateUrl: './platform-action-bar-simple-example.component.html',
     styleUrls: ['./platform-action-bar-simple-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
-export class PlatformActionbarExamplesComponent implements OnInit {
+export class PlatformActionBarExamplesComponent implements OnInit {
     actionItems: any[];
     constructor() {}
 
@@ -15,14 +15,14 @@ export class PlatformActionbarExamplesComponent implements OnInit {
             {
                 label: 'Save',
                 type: 'main',
-                priority: 1
+                priority: 1,
             },
             {
                 label: 'Cancel',
                 type: 'negative',
                 priority: 2,
-                options: 'emphasized'
-            }
+                options: 'emphasized',
+            },
         ];
     }
 
@@ -30,4 +30,3 @@ export class PlatformActionbarExamplesComponent implements OnInit {
         alert(item.label);
     }
 }
-
