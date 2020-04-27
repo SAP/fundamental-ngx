@@ -14,7 +14,7 @@ export class PlatformDocsSplitMenuButtonOptionsComponent {
         this.selectedCozyItem = menuItemValue;
     }
 
-    public onMainClickCozy(): void {
+    public onPrimaryButtonClickCozy(): void {
         this.selectedCozyItem = this.label;
     }
 
@@ -22,7 +22,7 @@ export class PlatformDocsSplitMenuButtonOptionsComponent {
         this.selectedCompactItem = menuItemValue;
     }
 
-    public onMainClickCompact(): void {
+    public onPrimaryButtonClickCompact(): void {
         this.selectedCompactItem = this.label;
     }
 }
