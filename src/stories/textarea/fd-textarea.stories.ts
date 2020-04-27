@@ -24,7 +24,8 @@ export const TextArea = () => ({
         `
         <div fd-form-item>
         <label fd-form-label for="input-1">Default Text Area</label>
-        <textarea fd-form-control type="text" id="input-1" placeholder="Field placeholder text"
+        <textarea fd-form-control type="text" id="id" [placeholder]="placeholder"
+        [disabled]="disabledVar"
         [compact]="compactVar"
         [state]="stateVar"
         >
@@ -40,5 +41,9 @@ export const TextArea = () => ({
             none: '',
         }, ''),
         compactVar: boolean('Compact', false),
+        disabledVar: boolean('Disabled', false),
+        placeholder: text('Placeholder', 'Enter text here'),
+        id: text('Id', 'textarea1'),
+
     }
 });
