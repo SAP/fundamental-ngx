@@ -6,7 +6,6 @@ import { ButtonModule, RtlService, IconModule } from '@fundamental-ngx/core';
 import { ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
 import { createKeyboardEvent } from '../../testing/event-objects';
 import { PlatformMenuModule } from '../menu/menu.module';
-import { MenuItemComponent } from './../menu/menu-item.component';
 import { SplitMenuButtonComponent } from './split-menu-button.component';
 
 @Component({
@@ -19,7 +18,7 @@ import { SplitMenuButtonComponent } from './split-menu-button.component';
             [buttonLabel]="'Default Button'"
             [icon]="'world'"
             [type]="'standard'"
-            (primarButtonClick)="onPrimaryButtonClick()"
+            (primaryButtonClick)="onPrimaryButtonClick()"
         >
         </fdp-split-menu-button>
 
@@ -28,7 +27,7 @@ import { SplitMenuButtonComponent } from './split-menu-button.component';
             <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">Second Item</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
         </fdp-menu>
-    `,
+    `
 })
 class TestWrapperComponent {
     @ViewChild(SplitMenuButtonComponent, { static: true })
@@ -57,7 +56,7 @@ describe('SplitMenuButtonComponent', () => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
             declarations: [TestWrapperComponent, SplitMenuButtonComponent],
-            providers: [RtlService],
+            providers: [RtlService]
         }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {

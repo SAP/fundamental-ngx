@@ -8,13 +8,13 @@
         [fdType]="type"
         [glyph]="icon"
         [compact]="contentDensity === 'compact'"
-        (click)="primarButtonClicked($event)"
+        (click)="primaryButtonClicked($event)"
     >
         {{ buttonLabel }}
     </button>
     <button
         fd-button
-        [attr.id]="id"
+        [attr.id]="secondaryId"
         [attr.name]="name"
         [fdMenu]="true"
         [disabled]="disabled"

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ButtonType } from '@fundamental-ngx/core';
 import { MenuComponent } from './../menu/menu.component';
 import { BaseComponent } from '../base';
@@ -8,14 +8,14 @@ import { BaseComponent } from '../base';
     templateUrl: './split-menu-button.component.html',
     styleUrls: ['split-menu-button.component.scss']
 })
-export class SplitMenuButtonComponent extends BaseComponent {
+export class SplitMenuButtonComponent extends BaseComponent implements OnInit {
     /** Label for the first Button */
     @Input()
     buttonLabel: string;
 
     /** reference to menu which will be controlled by split button */
     @Input()
-    menu: string;
+    menu: MenuComponent;
 
     /** The Sap-icon to include in the menu-button */
     @Input()
@@ -29,17 +29,24 @@ export class SplitMenuButtonComponent extends BaseComponent {
 
     /** Event sent when split-menu-button primary button is clicked */
     @Output()
-    primarButtonClick: EventEmitter<any> = new EventEmitter();
+    primaryButtonClick: EventEmitter<any> = new EventEmitter();
+
+    /** used as id for Menu Button */
+    public secondaryId: string;
 
     constructor(protected _cd: ChangeDetectorRef) {
         super(_cd);
     }
 
+    ngOnInit(): void {
+        this.secondaryId = 'secondary-' + this.id;
+    }
+
     /**
      *  Handles split-menu-button button click
      */
-    public primarButtonClicked(event: any): void {
+    public primaryButtonClicked(event: any): void {
         event.stopPropagation();
-        this.primarButtonClick.emit();
+        this.primaryButtonClick.emit();
     }
 }
