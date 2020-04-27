@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2-rc.9"></a>
+## [0.17.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.8...v0.17.2-rc.9) (2020-04-27)
+
+
+### Bug Fixes
+
+* multi-input and tokenizer should use CssClassBuilder ([#2398](https://github.com/SAP/fundamental-ngx/issues/2398)) ([e723046](https://github.com/SAP/fundamental-ngx/commit/e723046))
+
+
+
 <a name="0.17.2-rc.8"></a>
 ## [0.17.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.7...v0.17.2-rc.8) (2020-04-27)
 

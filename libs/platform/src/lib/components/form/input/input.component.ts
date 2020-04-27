@@ -16,14 +16,22 @@
  *
  *
  */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Optional, Self } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Optional, Self, ViewChild, ElementRef, OnChanges, TemplateRef } from '@angular/core';
 import { FormFieldControl } from '../form-control';
 import { NgControl, NgForm } from '@angular/forms';
 import { BaseInput } from '../base.input';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/core';
 
-const VALID_INPUT_TYPES = ['text', 'number', 'email'];
 
-export type InputType = 'text' | 'number' | 'email';
+const VALID_INPUT_TYPES = [
+    'text',
+    'number',
+    'email',
+    'password'
+];
+
+type InputType = 'text' | 'number' | 'email' | 'password';
+type Status = 'error' | 'warning' | 'information' | 'success';
 
 /**
  * Input field implementation to be compliant with our FormGroup/FormField design and also to
@@ -34,11 +42,36 @@ export type InputType = 'text' | 'number' | 'email';
     selector: 'fdp-input',
     templateUrl: 'input.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: InputComponent, multi: true }]
+    styleUrls: ['input.component.scss'],
+    providers: [
+        { provide: FormFieldControl, useExisting: PlatformInputComponent, multi: true }
+    ]
 })
-export class InputComponent extends BaseInput {
+export class PlatformInputComponent extends BaseInput implements CssClassBuilder {
+
     @Input()
     type: InputType = 'text';
+
+    @Input()
+    state: Status;
+ 
+    /** Whether the input is read-only. */
+    @Input()
+    readonly: boolean = false;
+
+    /** Whether the input is disabled. */
+    @Input()
+    disabled: boolean = false;
+
+    @Input()
+    compact: boolean = false;
+    
+    @Input()
+    class: string = '';
+
+    /** @hidden */
+    @ViewChild('inputElement')
+    inputElement: ElementRef;
 
     @Input()
     get value(): any {
@@ -49,21 +82,38 @@ export class InputComponent extends BaseInput {
         super.setValue(value);
     }
 
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
-    ) {
+
+    /** This method is responsible for building a css class based on current state
+     *  It is implementation of CssClassBuilder interface and
+     *  should be used with @applyCssClass decorator
+     */
+    @applyCssClass
+    buildComponentCssClass(): string {
+        return [
+            'fd-input',
+            this.state  ? `is-${this.state}` : '',
+            this.class
+        ].filter(x => x !== '').join(' ');
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this.inputElement;
+    }
+
+
+    constructor(protected _cd: ChangeDetectorRef,
+                @Optional() @Self() public ngControl: NgControl,
+                @Optional() @Self() public ngForm: NgForm) {
+
+
         super(_cd, ngControl, ngForm);
     }
 
     ngOnInit(): void {
+        this.buildComponentCssClass();
         if (!this.type || VALID_INPUT_TYPES.indexOf(this.type) === -1) {
             throw new Error(` Input type ${this.type} is not supported`);
         }
-    }
-
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
     }
 }

@@ -70,6 +70,10 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { PlatformInputExampleComponent } from './component-docs/platform-input/platform-input-example/platform-input-example.component';
+import { PlatformInputHeaderComponent } from './component-docs/platform-input/platform-input-header/platform-input-header.component';
+import { PlatformInputDocsComponent } from './component-docs/platform-input/platform-input-docs.component';
+import { PlatformInputValidationExampleComponent } from './component-docs/platform-input/platform-input-example/platform-input-validation-example.component';
 
 @NgModule({
     declarations: [
@@ -124,6 +128,10 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         PlatformRadioGroupContentExampleComponent,
         PlatformRadioGroupDisabledExampleComponent,
         PlatformRadioGroupDocsComponent
+        PlatformInputExampleComponent,
+        PlatformInputHeaderComponent,
+        PlatformInputDocsComponent,
+        PlatformInputValidationExampleComponent
     ],
     imports: [
         FundamentalNgxCoreModule,
