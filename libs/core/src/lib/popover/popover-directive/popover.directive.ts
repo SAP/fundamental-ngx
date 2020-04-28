@@ -8,7 +8,6 @@ import {
     EmbeddedViewRef,
     EventEmitter,
     HostBinding,
-    HostListener,
     Injector,
     Input,
     OnChanges,
@@ -16,11 +15,14 @@ import {
     OnInit,
     Output,
     Renderer2,
+    Optional,
     SimpleChanges,
     TemplateRef
 } from '@angular/core';
 import { PopoverContainer } from './popover-container';
 import Popper, { Placement, PopperOptions } from 'popper.js';
+import { startWith } from 'rxjs/operators';
+import { RtlService } from '../../utils/services/rtl.service';
 
 export type PopoverFillMode = 'at-least' | 'equal';
 
@@ -58,7 +60,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
     @Input()
-    placement: Placement;
+    placement: Placement = 'bottom-start';
 
     /** Whether the popover should be focusTrapped. */
     @Input()
@@ -125,7 +127,8 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         private resolver: ComponentFactoryResolver,
         private injector: Injector,
         private appRef: ApplicationRef,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        @Optional() private _rtlService: RtlService
     ) {}
 
     /** @hidden */
@@ -135,7 +138,15 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
 
         this.setupFillBehaviour();
-        this.initPlacement();
+        if (this.placement) {
+            this._initPlacement(this.placement);
+        }
+
+        if (this._rtlService && this._rtlService.rtl) {
+            this._rtlService.rtl.pipe(
+                startWith(this._rtlService.rtl.getValue())
+            ).subscribe(rtl => this._handleRtlChange(rtl));
+        }
 
         this.addTriggerListeners();
         this.isSetup = true;
@@ -183,7 +194,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
         if (changes.placement) {
             setTimeout(() => {
-                this.initPlacement();
+                this._initPlacement(this.placement);
             });
         }
 
@@ -338,13 +349,11 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         return data;
     }
 
-    private initPlacement(): void {
-        if (this.placement) {
-            if (this.options) {
-                this.options.placement = this.placement;
-            } else {
-                this.options = { placement: this.placement };
-            }
+    private _initPlacement(placement: Placement): void {
+        if (this.options) {
+            this.options.placement = placement;
+        } else {
+            this.options = { placement: placement };
         }
     }
 
@@ -391,5 +400,25 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             !this.elRef.nativeElement.contains(event.target) &&
             !this.containerRef.location.nativeElement.contains(event.target)
         );
+    }
+
+    private _handleRtlChange(rtl: boolean): void {
+        if (this.placement) {
+            if (rtl) {
+                const hash = {
+                    end: 'start',
+                    start: 'end',
+                    left: 'right',
+                    right: 'left'
+                };
+                const placement = <Placement>this.placement.replace(
+                    /start|end|right|left/g,
+                    matched => hash[matched]
+                );
+                this._initPlacement(placement);
+            } else {
+                this._initPlacement(this.placement);
+            }
+        }
     }
 }

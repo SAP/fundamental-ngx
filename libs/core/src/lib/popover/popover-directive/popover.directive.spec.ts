@@ -124,4 +124,12 @@ describe('PopoverDirective', () => {
         const mouseEvent = { target: popover.elRef.nativeElement };
         expect(popover._shouldClose(mouseEvent)).not.toEqual(true);
     });
+
+    it('should change position due to rtl', () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        popover.options.placement = 'bottom-start';
+        popover.placement = 'bottom-start';
+        popover._handleRtlChange(true);
+        expect(popover.options.placement).toEqual('bottom-end');
+    });
 });

@@ -1,11 +1,12 @@
 <div class="fd-shellbar__action fd-shellbar__action--show-always" *ngIf="user">
     <div class="fd-user-menu">
         <fd-popover
-            [options]="options || { placement: 'bottom-end' }"
+            [options]="options"
             [closeOnEscapeKey]="closeOnEscapeKey"
             [closeOnOutsideClick]="closeOnOutsideClick"
             [(isOpen)]="isOpen"
             [triggers]="triggers"
+            [placement]="'bottom-end'"
             (isOpenChange)="openChanged($event)"
             [disabled]="disabled"
             [isDropdown]="isDropdown"
