@@ -95,7 +95,7 @@ export const Bar = () => ({
         fullwidthVar: boolean('Full width element', true)
 =======
         fullwidthVar: boolean('Full width element', true),
-        leftText: text('Left Section Text', 'Section'),
+        leftText: text('Left Section Text', 'Left Section with very very very very very very very very very very very very very very very very very very  very very very very very very long text'),
         middleText: text('Middle Section Text', 'Section'),
         rightText: text('RightSection Text', 'Section'),
 
