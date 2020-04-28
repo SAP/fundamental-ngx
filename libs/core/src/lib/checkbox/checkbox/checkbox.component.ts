@@ -179,7 +179,6 @@ export class CheckboxComponent implements ControlValueAccessor {
         } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
         }
-        this._detectChanges();
     }
 
     /** @hidden */
