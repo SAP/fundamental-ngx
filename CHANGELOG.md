@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2-rc.11"></a>
+## [0.17.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.10...v0.17.2-rc.11) (2020-04-28)
+
+
+### Bug Fixes
+
+* add aria label to notification header for a11y ([#2403](https://github.com/SAP/fundamental-ngx/issues/2403)) ([cb88d66](https://github.com/SAP/fundamental-ngx/commit/cb88d66))
+* Add RTL to popover ([#2426](https://github.com/SAP/fundamental-ngx/issues/2426)) ([65bcf4f](https://github.com/SAP/fundamental-ngx/commit/65bcf4f))
+
+
+
 <a name="0.17.2-rc.10"></a>
 ## [0.17.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.9...v0.17.2-rc.10) (2020-04-28)
 
