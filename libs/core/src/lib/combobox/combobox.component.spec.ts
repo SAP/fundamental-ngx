@@ -186,5 +186,26 @@ describe('ComboboxComponent', () => {
 
         expect(component.filterFn).toHaveBeenCalledWith(component.dropdownValues, component.inputText);
         expect(component.popoverComponent.updatePopover).toHaveBeenCalled();
-    })
+    });
+
+    it('should handle primaryButtonClick', () => {
+        spyOn(component, 'searchFn');
+        spyOn(component, 'isOpenChangeHandle');
+        component.open = false;
+        component.onPrimaryButtonClick();
+        expect(component.searchFn).toHaveBeenCalled();
+        expect(component.isOpenChangeHandle).toHaveBeenCalledWith(true);
+    });
+
+    it('should handle isOpenChangeHandle', () => {
+        component.open = false;
+        spyOn(component.openChange, 'emit');
+        spyOn(component, 'onTouched');
+        component.displayedValues = ['value1', 'value2'];
+        spyOn(component.focusTrap, 'activate');
+        component.isOpenChangeHandle(true);
+        expect(component.openChange.emit).toHaveBeenCalledWith(true);
+        expect(component.onTouched).toHaveBeenCalled();
+        expect(component.focusTrap.activate).toHaveBeenCalled();
+    });
 });
