@@ -86,6 +86,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.25",
     "@angular-devkit/build-ng-packagr": "^0.803.25",
+    "caniuse-lite": "latest",
     "@angular-devkit/core": "^8.0.0",
     "@angular/cli": "^8.3.25",
     "@angular/compiler-cli": "^8.2.7",
