@@ -32,6 +32,10 @@ export class NotificationHeaderComponent {
     @Output()
     readonly closeButtonClick: EventEmitter<void> = new EventEmitter<void>();
 
+    /**Input to set the area label */
+    @Input ()
+    closeNotificationLabel: string;
+
     /** @hidden */
     public closeButtonClicked(): void {
         this.closeButtonClick.emit();
