@@ -14,7 +14,7 @@ class TestTemplateComponent {
     @ViewChild(PopoverDirective, { static: true })
     popoverDirective: PopoverDirective;
 
-    @ViewChild('divElement')
+    @ViewChild('divElement', { static: true })
     divElement: ElementRef;
 
     isOpen = false;
