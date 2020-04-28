@@ -57,19 +57,19 @@ export class InputComponent extends BaseInput implements CssClassBuilder {
     @Input()
     state: Status;
  
-    /** Whether the input is read-only. */
+    /** defines the component read-only on making the variable true */
     @Input()
     readonly: boolean = false;
 
-    /** Whether the input is disabled. */
+    /** defines the component disbaled  on making the variable true */
     @Input()
     disabled: boolean = false;
 
-    /** to define the compactness of the componenent. */
+    /** to define the compactness of the component. */
     @Input()
     compact: boolean = false;
     
-    /**calass variable to add the class names.  */
+    /**class variable to add the class names.  */
     @Input()
     class: string = '';
 
