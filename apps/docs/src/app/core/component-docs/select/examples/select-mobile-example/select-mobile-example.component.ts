@@ -7,7 +7,9 @@ import { DialogRef, DialogService, SelectComponent } from '@fundamental-ngx/core
 })
 export class SelectMobileExampleComponent implements AfterViewInit, OnDestroy {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+
     selectedValue: string;
+
     dialogRef: DialogRef;
 
     @ViewChild(SelectComponent) selectComponent: SelectComponent;

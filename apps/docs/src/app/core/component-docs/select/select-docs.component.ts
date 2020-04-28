@@ -37,7 +37,8 @@ import * as selectSemanticStateTs from '!raw-loader!./examples/select-semantic-s
 
 @Component({
     selector: 'fd-select-docs',
-    templateUrl: './select-docs.component.html'
+    templateUrl: './select-docs.component.html',
+    styles: [`ul > li:not(:last-child) { margin-bottom: 0.5rem }`]
 })
 export class SelectDocsComponent {
     selectMode: ExampleFile[] = [
@@ -62,7 +63,7 @@ export class SelectDocsComponent {
             code: selectMobileTs,
             fileName: 'select-mobile-example',
         }
-    ]
+    ];
 
     selectProgrammatic: ExampleFile[] = [
         {

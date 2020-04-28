@@ -301,6 +301,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
             this.isOpenChange.emit(this.isOpen);
             this._focusTrap.activate();
             this._focusOption('onOpen');
+            this._changeDetectorRef.markForCheck();
         }
     }
 
@@ -310,6 +311,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
         this.isOpenChange.emit(this.isOpen);
         this._focusTrap.deactivate();
         this.focus();
+        this._changeDetectorRef.markForCheck();
     }
 
     /** Focuses select control. */
@@ -332,7 +334,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this._changeDetectorRef.detectChanges();
+        this._changeDetectorRef.markForCheck();
     }
 
     /** @hidden */

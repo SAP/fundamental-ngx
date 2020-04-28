@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 })
 export class SelectCustomTriggerComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+
     selectedValue: string;
 }

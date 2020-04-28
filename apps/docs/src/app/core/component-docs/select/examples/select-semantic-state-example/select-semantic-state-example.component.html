@@ -3,9 +3,7 @@
            stateMessage="Success message"
            [(value)]="selectedValue1"
            [state]="'success'">
-    <fd-option *ngFor="let option of options" [value]="option">
-        {{option}}
-    </fd-option>
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
 <fd-form-message [static]="true" [type]="'success'">Success message</fd-form-message>
 
@@ -14,9 +12,7 @@
            stateMessage="Warning message"
            [(value)]="selectedValue2"
            [state]="'warning'">
-    <fd-option *ngFor="let option of options" [value]="option">
-        {{option}}
-    </fd-option>
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
 <fd-form-message [static]="true" [type]="'warning'">Warning message</fd-form-message>
 
@@ -25,9 +21,7 @@
            stateMessage="Error message"
            [(value)]="selectedValue3"
            [state]="'error'">
-    <fd-option *ngFor="let option of options" [value]="option">
-        {{option}}
-    </fd-option>
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
 <fd-form-message [static]="true" [type]="'error'">Error message</fd-form-message>
 
@@ -36,8 +30,6 @@
            stateMessage="Information message"
            [(value)]="selectedValue4"
            [state]="'information'">
-    <fd-option *ngFor="let option of options" [value]="option">
-        {{option}}
-    </fd-option>
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
 <fd-form-message [static]="true" [type]="'information'">Information message</fd-form-message>

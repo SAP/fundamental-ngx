@@ -5,9 +5,7 @@
            [mobile]="true"
            (isOpenChange)="toggleDialog($event)">
 
-    <fd-option *ngFor="let option of options" [value]="option">
-        {{option}}
-    </fd-option>
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 
 </fd-select>
 
