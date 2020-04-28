@@ -28,6 +28,7 @@ import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { GroupFunction } from '../utils/pipes/list-group.pipe';
+import { InputGroupComponent } from '../input-group/input-group.component';
 
 /**
  * Allows users to filter through results and select a value.
@@ -191,6 +192,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     popoverComponent: PopoverComponent;
 
     /** @hidden */
+    @ViewChild(InputGroupComponent)
+    inputGroup: InputGroupComponent;
+
+    /** @hidden */
     @ContentChildren(ListMessageDirective)
     listMessages: QueryList<ListMessageDirective>;
 
@@ -266,6 +271,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             }
             if (this.displayedValues && this.displayedValues.length) {
                 this.onMenuClickHandler(0);
+                this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.remove('is-expanded');
             }
         } else if (event.key === 'ArrowDown') {
             if (event.altKey) {
@@ -343,15 +349,17 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     handleSearchTermChange(): void {
-        let foundMatch = false;
-        this.dropdownValues.forEach(value => {
-            if (this.displayFn(value) === this.inputText) {
-                foundMatch = true;
-            }
-        });
-        foundMatch ? this.displayedValues = this.dropdownValues : this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+        this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
         if (this.popoverComponent) {
             this.popoverComponent.updatePopover();
+        }
+        if (this.displayedValues && this.displayedValues.length === 0 && this.inputGroup.inputGroupButtonElement) {
+            this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.remove('is-expanded');
+        } else if (this.inputGroup.inputGroupButtonElement) {
+            this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.add('is-expanded');
+        }
+        if (!this.inputText) {
+            this.isOpenChangeHandle(false);
         }
     }
 
@@ -369,10 +377,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.open = isOpen;
             this.openChange.emit(this.open);
             this.onTouched();
-            if (isOpen) {
+            if (isOpen && this.displayedValues && this.displayedValues.length) {
                 this.focusTrap.activate();
+                this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.add('is-expanded');
             } else {
                 this.focusTrap.deactivate();
+                this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.remove('is-expanded');
             }
         }
     }
