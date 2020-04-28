@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2-rc.10"></a>
+## [0.17.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.9...v0.17.2-rc.10) (2020-04-28)
+
+
+### Bug Fixes
+
+* Checkbox check destroyed state on detect changes ([#2427](https://github.com/SAP/fundamental-ngx/issues/2427)) ([4cd81da](https://github.com/SAP/fundamental-ngx/commit/4cd81da))
+
+
+
 <a name="0.17.2-rc.9"></a>
 ## [0.17.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.8...v0.17.2-rc.9) (2020-04-27)
 

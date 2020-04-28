@@ -107,7 +107,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     public writeValue(value: any): void {
         this.checkboxValue = value;
         this._setState();
-        this._changeDetectorRef.detectChanges();
+        this._detectChanges();
     }
 
     /** @hidden ControlValueAccessor interface method - sets onValueChange callback.*/
@@ -128,7 +128,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Called by FormControl - used to disable / enable control.*/
     public setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
-        this._changeDetectorRef.detectChanges();
+        this._detectChanges();
     }
 
     /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
@@ -167,7 +167,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
         this._setState();
         this.onValueChange(this.checkboxValue);
-        this._changeDetectorRef.detectChanges();
+        this._detectChanges();
     }
 
     /** @hidden Based on current control value sets new control state. */
@@ -179,14 +179,13 @@ export class CheckboxComponent implements ControlValueAccessor {
         } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
         }
-        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
     private _nextValueEvent(): void {
         if (this._isIE() && this.checkboxState === 'indeterminate') {
             this.checkboxState = 'force-checked';
-            this._changeDetectorRef.detectChanges();
+            this._detectChanges();
         }
     }
 
@@ -207,5 +206,12 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Determines event source based on key code */
     private _isSpaceBarEvent(event: KeyboardEvent): boolean {
         return event.keyCode === 32;
+    }
+
+    /** Method to trigger change detection in component */
+    private _detectChanges(): void {
+        if (!this._changeDetectorRef['destroyed']) {
+            this._changeDetectorRef.detectChanges();
+        }
     }
 }

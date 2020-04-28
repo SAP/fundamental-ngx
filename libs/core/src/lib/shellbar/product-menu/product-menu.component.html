@@ -1,6 +1,5 @@
 <ng-template [ngIf]="items?.length > 0" [ngIfElse]="subHeader">
     <fd-popover
-        [options]="{ placement: 'bottom-end' }"
         [disabled]="!items || items.length === 0 || disabled"
         [closeOnEscapeKey]="closeOnEscapeKey"
         [closeOnOutsideClick]="closeOnOutsideClick"
@@ -9,7 +8,7 @@
         [isDropdown]="isDropdown"
         [triggers]="triggers"
         [focusTrapped]="false"
-        [placement]="'bottom-start'"
+        [placement]="'bottom-end'"
     >
         <fd-popover-control>
             <button class="fd-button fd-button--transparent fd-button--menu fd-shellbar__button--menu">
