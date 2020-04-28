@@ -42,7 +42,6 @@ type Status = 'error' | 'warning' | 'information' | 'success';
     selector: 'fdp-input',
     templateUrl: 'input.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['input.component.scss'],
     providers: [
         { provide: FormFieldControl, useExisting: InputComponent, multi: true }
     ]
@@ -57,19 +56,19 @@ export class InputComponent extends BaseInput implements CssClassBuilder {
     @Input()
     state: Status;
  
-    /** defines the component read-only on making the variable true */
+    /** Whether the input is read-only. */
     @Input()
     readonly: boolean = false;
 
-    /** defines the component disbaled  on making the variable true */
+    /** Whether the input is disabled. */
     @Input()
     disabled: boolean = false;
 
-    /** to define the compactness of the component. */
+    /** to define the compactness of the componenent. */
     @Input()
     compact: boolean = false;
     
-    /**class variable to add the class names.  */
+    /**calass variable to add the class names.  */
     @Input()
     class: string = '';
 

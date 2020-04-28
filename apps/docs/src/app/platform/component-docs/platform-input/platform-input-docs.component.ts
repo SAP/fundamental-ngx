@@ -9,7 +9,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
   selector: 'fd-platform-input-docs',
   templateUrl: './platform-input-docs.component.html'
 })
-export class PlatformInputDocsComponent implements OnInit {
+export class PlatformInputDocsComponent {
 
     defaultInputType: ExampleFile[] = [
         {
@@ -37,11 +37,5 @@ export class PlatformInputDocsComponent implements OnInit {
             component: 'PlatformInputValidationExampleComponent'
         }
     ];
-
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

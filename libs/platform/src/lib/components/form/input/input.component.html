@@ -12,7 +12,8 @@
     [attr.placeholder]="placeholder"
     [disabled]="disabled"
     [compact]="contentDensity == 'compact'"
-    [state]="status === 'error' ? 'invalid' : ''"
+    [state]="state"
+    [readOnly]="readonly"
     (blur)="_onFocusChanged(false)"
     (focus)="_onFocusChanged(true)"
 />

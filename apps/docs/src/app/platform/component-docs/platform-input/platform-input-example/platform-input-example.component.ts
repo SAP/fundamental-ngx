@@ -4,11 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'fd-platform-input-example',
   templateUrl: './platform-input-example.component.html'
 })
-export class PlatformInputExampleComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class PlatformInputExampleComponent {
 
 }
