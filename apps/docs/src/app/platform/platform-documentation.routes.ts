@@ -20,6 +20,8 @@ import { PlatformSearchFieldHeaderComponent } from './component-docs/platform-se
 import { PlatformSearchFieldDocsComponent } from './component-docs/platform-search-field/platform-search-field-docs.component';
 import { PlatformRadioGroupHeaderComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-header/platform-radio-group-header.component';
 import { PlatformRadioGroupDocsComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-docs.component';
+import { PlatformDocsSplitMenuButtonComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button.component';
+import { PlatformDocsSplitMenuButtonHeaderComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-header/platform-split-menu-button-header.component';
 
 export const ROUTES: Routes = [
     {
@@ -91,6 +93,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PlatformRadioGroupDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.radioGroup } }
+                ]
+            },
+            {
+                path: 'split-menu-button',
+                component: PlatformDocsSplitMenuButtonHeaderComponent,
+                children: [
+                    { path: '', component: PlatformDocsSplitMenuButtonComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.splitMenuButton } }
                 ]
             }
         ]

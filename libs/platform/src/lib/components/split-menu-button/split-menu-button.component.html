@@ -1,0 +1,28 @@
+<div class="fd-button-split" role="group" aria-label="button-split">
+    <button
+        fd-button
+        [attr.id]="id"
+        [attr.name]="name"
+        aria-label="buttonLabel"
+        [disabled]="disabled"
+        [fdType]="type"
+        [glyph]="icon"
+        [compact]="contentDensity === 'compact'"
+        (click)="primaryButtonClicked($event)"
+    >
+        {{ buttonLabel }}
+    </button>
+    <button
+        fd-button
+        [attr.id]="secondaryId"
+        [attr.name]="name"
+        [fdMenu]="true"
+        [disabled]="disabled"
+        [fdType]="type"
+        [compact]="contentDensity === 'compact'"
+        [fdpMenuTriggerFor]="menu"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-label="More"
+    ></button>
+</div>

@@ -72,6 +72,10 @@ import { PlatformSelectTypesDefaultExampleComponent } from './component-docs/pla
 import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-noborder-example.component';
 import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
+import { PlatformDocsSplitMenuButtonExampleComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-examples/platform-split-menu-button-examples.component';
+import { PlatformDocsSplitMenuButtonOptionsComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-examples/platform-split-menu-button-options.component';
+import { PlatformDocsSplitMenuButtonHeaderComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-header/platform-split-menu-button-header.component';
+import { PlatformDocsSplitMenuButtonComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button.component';
 
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
@@ -126,6 +130,10 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         PlatformSelectTypesNoBorderExampleComponent,
         PlatformSelectTypesSplitExampleComponent,
         PlatformSelectTypesWithIconExampleComponent,
+        PlatformDocsSplitMenuButtonExampleComponent,
+        PlatformDocsSplitMenuButtonOptionsComponent,
+        PlatformDocsSplitMenuButtonHeaderComponent,
+        PlatformDocsSplitMenuButtonComponent,
         PlatformRadioGroupHeaderComponent,
         PlatformRadioGroupListItemsExampleComponent,
         PlatformRadioGroupListExampleComponent,
