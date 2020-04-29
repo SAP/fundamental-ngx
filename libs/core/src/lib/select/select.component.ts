@@ -266,6 +266,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** @hidden */
     ngAfterViewInit(): void {
         this._checkInitialOpenState();
+        this.resizeScrollHandler();
     }
 
     /** @hidden */
