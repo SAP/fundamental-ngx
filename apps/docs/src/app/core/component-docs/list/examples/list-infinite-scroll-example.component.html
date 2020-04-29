@@ -1,9 +1,11 @@
-<ul fd-list fdInfiniteScroll (onScrollAction)="loadMoreElements()" [scrollPercent]="scrollPercent"
-         style="display: block;
-         overflow-y: scroll;
-         max-height: 120px;
-         border: 1px solid black;">
+<ul
+    fd-list
+    fdInfiniteScroll
+    (onScrollAction)="loadMoreElements()"
+    [scrollPercent]="scrollPercent"
+    style="display: block; overflow-y: scroll; max-height: 120px; border: 1px solid black;"
+>
     <li fd-list-item *ngFor="let object of displayedList">
-        {{object.label}}
+        {{ object.label }}
     </li>
 </ul>

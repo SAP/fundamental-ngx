@@ -9,8 +9,7 @@ describe('MegaMenuGroupComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [MegaMenuGroupComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

@@ -18,7 +18,6 @@ import { Placement } from 'popper.js';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InlineHelpComponent {
-
     /** The placement of the inline help component. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
      *   The default placement is *bottom start*
@@ -35,10 +34,9 @@ export class InlineHelpComponent {
      * The inline help style has same type as popular [ngStyle] directive. Value will be passed to `control` element
      * */
     @Input()
-    inlineHelpIconStyle: {[key: string]: any} | {[key: string]: any}[];
+    inlineHelpIconStyle: { [key: string]: any } | { [key: string]: any }[];
 
     /** The inline help style has same type as popular [ngStyle] directive. Value will be passed to content element */
     @Input()
-    inlineHelpContentStyle: {[key: string]: any} | {[key: string]: any}[];
-
+    inlineHelpContentStyle: { [key: string]: any } | { [key: string]: any }[];
 }

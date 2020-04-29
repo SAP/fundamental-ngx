@@ -4,7 +4,9 @@ import {
     FormModule,
     IconModule,
     InlineHelpModule,
-    InputGroupModule, MenuModule, PopoverModule,
+    InputGroupModule,
+    MenuModule,
+    PopoverModule,
     ShellbarModule,
     SwitchModule,
     TabsModule

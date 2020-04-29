@@ -23,5 +23,3 @@ export class InfoLableTextIconExampleComponent {}
     templateUrl: './info-label-icon-numeric-example.component.html'
 })
 export class InfoLableNumericIconExampleComponent {}
-
-

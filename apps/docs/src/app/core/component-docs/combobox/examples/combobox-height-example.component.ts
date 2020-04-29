@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './combobox-height-example.component.html'
 })
 export class ComboboxHeightExampleComponent {
-
     searchTermOne: string = '';
 
     dropdownValues = [
@@ -26,5 +25,4 @@ export class ComboboxHeightExampleComponent {
         'Fig',
         'Pomegranate'
     ];
-
 }

@@ -1,5 +1,4 @@
-<fd-popover [(isOpen)]="isOpen"
-            [triggers]="[]">
+<fd-popover [(isOpen)]="isOpen" [triggers]="[]">
     <fd-popover-control>
         <fd-input-group
             [compact]="compact"
@@ -8,32 +7,37 @@
             [state]="state"
             [disabled]="disabled"
             [buttonFocusable]="buttonFocusable"
-            [glyph]="'fob-watch'">
-            <input [value]="getFormattedTime()"
-                   [compact]="compact"
-                   #inputElement
-                   fd-input-group-input
-                   (keyup.enter)="timeInputChanged($event.currentTarget.value)"
-                   (focusout)="timeInputChanged(inputElement.value)"
-                   (focus)="onFocusHandler()"
-                   (click)="inputGroupClicked($event)"
-                   [disabled]="disabled"
-                   type="text"
-                   [ngClass]="{ 'is-error': isInvalidTimeInput && validate }"
-                   class="fd-input"
-                   [placeholder]="placeholder"
-                   [attr.aria-label]="timePickerInputLabel">
+            [glyph]="'fob-watch'"
+        >
+            <input
+                [value]="getFormattedTime()"
+                [compact]="compact"
+                #inputElement
+                fd-input-group-input
+                (keyup.enter)="timeInputChanged($event.currentTarget.value)"
+                (focusout)="timeInputChanged(inputElement.value)"
+                (focus)="onFocusHandler()"
+                (click)="inputGroupClicked($event)"
+                [disabled]="disabled"
+                type="text"
+                [ngClass]="{ 'is-error': isInvalidTimeInput && validate }"
+                class="fd-input"
+                [placeholder]="placeholder"
+                [attr.aria-label]="timePickerInputLabel"
+            />
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body *ngIf="displaySeconds || displayMinutes || displayHours">
-        <fd-time [disabled]="disabled"
-                 [meridian]="meridian"
-                 [(ngModel)]="time"
-                 [keepTwoDigits]="keepTwoDigitsTime"
-                 (ngModelChange)="timeFromTimeComponentChanged()"
-                 [spinners]="spinners"
-                 [displayMinutes]="displayMinutes"
-                 [displaySeconds]="displaySeconds"
-                 [displayHours]="displayHours"></fd-time>
+        <fd-time
+            [disabled]="disabled"
+            [meridian]="meridian"
+            [(ngModel)]="time"
+            [keepTwoDigits]="keepTwoDigitsTime"
+            (ngModelChange)="timeFromTimeComponentChanged()"
+            [spinners]="spinners"
+            [displayMinutes]="displayMinutes"
+            [displaySeconds]="displaySeconds"
+            [displayHours]="displayHours"
+        ></fd-time>
     </fd-popover-body>
 </fd-popover>

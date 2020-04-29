@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { FdDate, SpecialDayRule } from '@fundamental-ngx/core';
 
 @Component({
-  selector: 'fd-calendar-special-day-example',
-  templateUrl: './calendar-special-day-example.component.html'
+    selector: 'fd-calendar-special-day-example',
+    templateUrl: './calendar-special-day-example.component.html'
 })
 export class CalendarSpecialDayExampleComponent {
-
     specialDays: SpecialDayRule[] = [];
 
     markWeekends: boolean = false;
@@ -17,22 +16,30 @@ export class CalendarSpecialDayExampleComponent {
     refreshRules(): void {
         this.specialDays = [];
         if (this.markWeekends) {
-            this.specialDays.push({ rule: fdDate => fdDate.getDay() === 1 || fdDate.getDay() === 7, specialDayNumber: 5 })
+            this.specialDays.push({
+                rule: (fdDate) => fdDate.getDay() === 1 || fdDate.getDay() === 7,
+                specialDayNumber: 5
+            });
         }
         if (this.markAllMondays) {
-            this.specialDays.push({ rule: fdDate => fdDate.getDay() === 2, specialDayNumber: 15 })
+            this.specialDays.push({ rule: (fdDate) => fdDate.getDay() === 2, specialDayNumber: 15 });
         }
         if (this.markNextWeek) {
             this.specialDays.push({
-                rule: fdDate => {
-                    return (fdDate.getTimeStamp() > FdDate.getToday().getTimeStamp() &&
-                        fdDate.getTimeStamp() <= this._getFutureDate(FdDate.getToday()).getTimeStamp())
+                rule: (fdDate) => {
+                    return (
+                        fdDate.getTimeStamp() > FdDate.getToday().getTimeStamp() &&
+                        fdDate.getTimeStamp() <= this._getFutureDate(FdDate.getToday()).getTimeStamp()
+                    );
                 },
                 specialDayNumber: 10
-            })
+            });
         }
         if (this.markPastDays) {
-            this.specialDays.push({ rule: fdDate => FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp(), specialDayNumber: 13 })
+            this.specialDays.push({
+                rule: (fdDate) => FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp(),
+                specialDayNumber: 13
+            });
         }
     }
 

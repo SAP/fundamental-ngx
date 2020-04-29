@@ -6,23 +6,20 @@ import { RtlService } from '../utils/services/rtl.service';
  * */
 @Injectable()
 export class TabsService {
-
     /** Event is thrown always when tab is selected by keyboard actions */
     readonly tabSelected: Subject<number> = new Subject<number>();
 
     /** Event is thrown always, when some property is changed */
     readonly tabPanelPropertyChanged: Subject<void> = new Subject<void>();
 
-    constructor(
-        @Optional() private _rtlService: RtlService
-    ) {}
+    constructor(@Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
     tabHeaderKeyHandler(index: number, event: any, elements: HTMLElement[]): void {
         const rtlDirection: boolean = this._rtlService && this._rtlService.rtl.getValue();
 
         switch (event.key) {
-            case ('ArrowLeft'): {
+            case 'ArrowLeft': {
                 if (!rtlDirection) {
                     this._focusPrevious(index, elements);
                 } else {
@@ -30,7 +27,7 @@ export class TabsService {
                 }
                 break;
             }
-            case ('ArrowRight'): {
+            case 'ArrowRight': {
                 if (!rtlDirection) {
                     this._focusNext(index, elements);
                 } else {
@@ -38,12 +35,12 @@ export class TabsService {
                 }
                 break;
             }
-            case (' '): {
+            case ' ': {
                 event.preventDefault();
                 this.tabSelected.next(index);
                 break;
             }
-            case ('Enter'): {
+            case 'Enter': {
                 this.tabSelected.next(index);
             }
         }
@@ -66,7 +63,6 @@ export class TabsService {
             this._getTabLinkFromIndex(elements.length - 1, elements).focus();
         }
     }
-
 
     /** @hidden */
     private _getTabLinkFromIndex(index: number, elements: HTMLElement[]): HTMLElement {

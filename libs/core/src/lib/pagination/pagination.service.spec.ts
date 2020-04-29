@@ -97,5 +97,5 @@ describe('PaginationService', () => {
         expect(pages[1]).toEqual(service.MORE);
         expect(pages[5]).not.toEqual(service.MORE);
         expect(pages[5]).toEqual(75);
-    })
+    });
 });

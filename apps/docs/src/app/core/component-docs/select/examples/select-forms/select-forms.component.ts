@@ -7,10 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     styleUrls: ['select-forms.component.scss']
 })
 export class SelectFormsComponent {
-
     customForm = new FormGroup({
         selectControl: new FormControl('pineapple', Validators.required),
         disabledSelectControl: new FormControl({ value: 'kiwi', disabled: true }, Validators.required)
     });
-
 }

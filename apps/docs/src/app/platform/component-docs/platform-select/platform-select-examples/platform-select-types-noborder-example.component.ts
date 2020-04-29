@@ -15,10 +15,9 @@ export class Fruit {
 
 @Component({
     selector: 'fdp-select-types-noborder-example',
-    templateUrl: './platform-select-types-noborder-example.component.html',
+    templateUrl: './platform-select-types-noborder-example.component.html'
 })
 export class PlatformSelectTypesNoBorderExampleComponent implements OnInit {
-
     selectedValue: string;
 
     userList = [
@@ -38,8 +37,7 @@ export class PlatformSelectTypesNoBorderExampleComponent implements OnInit {
         };
     });
 
-    constructor() { }
+    constructor() {}
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 }

@@ -19,7 +19,7 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: menuSrc,
-            fileName: 'menu-example',
+            fileName: 'menu-example'
         }
     ];
     menuAddon: ExampleFile[] = [
@@ -36,7 +36,7 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: menuGroupSrc,
-            fileName: 'menu-group-example',
+            fileName: 'menu-group-example'
         }
     ];
 
@@ -44,7 +44,7 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: menuKeyboardSrcH,
-            fileName: 'menu-keyboard-support-example',
+            fileName: 'menu-keyboard-support-example'
         },
         {
             language: 'typescript',
@@ -58,7 +58,7 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: menuSeparatorSrc,
-            fileName: 'menu-separator-example',
+            fileName: 'menu-separator-example'
         }
     ];
 }

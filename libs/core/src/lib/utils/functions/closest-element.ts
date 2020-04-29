@@ -3,7 +3,6 @@
  *  that matches the provided selector.
  * */
 export function closestElement(selector, element): Element | null {
-
     const matches = document.querySelectorAll(selector);
     let matched: boolean;
 

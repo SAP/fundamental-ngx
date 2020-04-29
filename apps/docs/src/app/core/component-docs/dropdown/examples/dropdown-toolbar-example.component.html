@@ -1,10 +1,10 @@
-<fd-popover style="margin-right: 12px">
+<fd-popover style="margin-right: 12px;">
     <fd-dropdown-control [toolbar]="true">Dropdown</fd-dropdown-control>
-    <fd-popover-body *ngIf="menu1 && menu1.length || menu2 && menu2.length">
+    <fd-popover-body *ngIf="(menu1 && menu1.length) || (menu2 && menu2.length)">
         <fd-menu>
             <ul fd-menu-list>
                 <li *ngFor="let option of menu1">
-                    <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                    <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
                 </li>
             </ul>
             <fd-menu-group>
@@ -13,7 +13,7 @@
                 </h1>
                 <ul fd-menu-list>
                     <li *ngFor="let option of menu2">
-                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                        <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
                     </li>
                 </ul>
             </fd-menu-group>
@@ -27,7 +27,7 @@
         <fd-menu>
             <ul fd-menu-list>
                 <li *ngFor="let option of menu1">
-                    <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                    <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
                 </li>
             </ul>
         </fd-menu>

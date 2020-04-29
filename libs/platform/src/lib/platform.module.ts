@@ -23,4 +23,4 @@ import { PlatformInfoLabelModule } from './components/info-label/info-label.modu
         PlatformInfoLabelModule	
     ]
 })
-export class FundamentalNgxPlatformModule { }
+export class FundamentalNgxPlatformModule {}

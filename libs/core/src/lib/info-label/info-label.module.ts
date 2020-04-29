@@ -4,9 +4,7 @@ import { InfoLabelComponent } from './info-label.component';
 
 @NgModule({
     declarations: [InfoLabelComponent],
-    imports: [
-        CommonModule
-    ],
+    imports: [CommonModule],
     exports: [InfoLabelComponent]
 })
-export class InfoLabelModule { }
+export class InfoLabelModule {}

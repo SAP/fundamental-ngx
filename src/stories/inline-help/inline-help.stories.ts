@@ -18,8 +18,7 @@ export default {
 };
 
 export const InlineHelp = () => ({
-    template:
-        `<div style="display:flex;align-items:center;justify-content:center;margin-top:10%;">
+    template: `<div style="display:flex;align-items:center;justify-content:center;margin-top:10%;">
         Inline Help
             <fd-inline-help style="margin-left:2px;" [placement]="placementVar"
             [inlineHelpContentStyle]="inlineHelpContentStyleVar"
@@ -30,21 +29,29 @@ export const InlineHelp = () => ({
         </div>
   `,
     props: {
-        placementVar: select('Placement', {
-            bottomStart: 'bottom-start',
-            bottomEnd: 'bottom-end',
-            right: 'right',
-            rightStart: 'right-start',
-            rightEnd: 'right-end',
-            left: 'left',
-            leftStart: 'left-start',
-            leftEnd: 'left-end',
-
-        }, 'bottom-start'),
+        placementVar: select(
+            'Placement',
+            {
+                bottomStart: 'bottom-start',
+                bottomEnd: 'bottom-end',
+                right: 'right',
+                rightStart: 'right-start',
+                rightEnd: 'right-end',
+                left: 'left',
+                leftStart: 'left-start',
+                leftEnd: 'left-end'
+            },
+            'bottom-start'
+        ),
         textValue: text('Text', 'Lorem ipsum'),
-        inlineHelpContentStyleVar: object('Inline help paragraph style', { 'width': '250px', 'min-width': '250px', 'overflow': 'hidden', 'text-overflow': 'ellipsis', 'color': 'black' }),
+        inlineHelpContentStyleVar: object('Inline help paragraph style', {
+            width: '250px',
+            'min-width': '250px',
+            overflow: 'hidden',
+            'text-overflow': 'ellipsis',
+            color: 'black'
+        }),
         inlineHelpIconStyleVar: object('Inline help icon style', { 'background-color': 'transparent' }),
         triggersVar: object('Triggers', ['click'])
-
     }
 });

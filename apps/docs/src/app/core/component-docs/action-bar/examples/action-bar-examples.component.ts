@@ -4,11 +4,10 @@ import { Component } from '@angular/core';
     selector: 'fd-action-bar-contextual-menu-example',
     templateUrl: './action-bar-contextual-menu-example.component.html'
 })
-export class ActionBarContextualMenuExampleComponent { }
+export class ActionBarContextualMenuExampleComponent {}
 
 @Component({
     selector: 'fd-action-bar-no-back-example',
     templateUrl: './action-bar-no-back-example.component.html'
 })
-export class ActionBarNoBackExampleComponent { }
-
+export class ActionBarNoBackExampleComponent {}

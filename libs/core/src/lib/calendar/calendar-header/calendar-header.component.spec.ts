@@ -12,9 +12,8 @@ describe('Calendar2HeaderComponent', () => {
         TestBed.configureTestingModule({
             declarations: [CalendarHeaderComponent],
             imports: [ButtonModule],
-            providers: [ CalendarService ]
-        })
-            .compileComponents();
+            providers: [CalendarService]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

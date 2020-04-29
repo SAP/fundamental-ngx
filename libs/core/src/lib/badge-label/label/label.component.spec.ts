@@ -4,17 +4,12 @@ import { By } from '@angular/platform-browser';
 import { LabelComponent } from './label.component';
 
 @Component({
-    template: `
-        <span fd-label>Fd-badge test</span>
-    `
+    template: ` <span fd-label>Fd-badge test</span> `
 })
-
-export class TestComponent { }
+export class TestComponent {}
 
 describe('LabelComponent', () => {
-    let fixture: ComponentFixture<TestComponent>,
-        debugElement: DebugElement,
-        element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement, element: HTMLElement;
 
     let component, componentInstance;
 
@@ -33,7 +28,6 @@ describe('LabelComponent', () => {
         fixture.detectChanges();
         component = debugElement.query(By.directive(LabelComponent));
         componentInstance = component.injector.get(LabelComponent);
-
 
         spyOn(componentInstance, '_setProperties').and.callThrough();
         spyOn(componentInstance, '_addClassToElement');

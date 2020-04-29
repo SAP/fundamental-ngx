@@ -1,7 +1,7 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[fdNotificationText], [fd-notification-text]'
+    selector: '[fdNotificationText], [fd-notification-text]'
 })
 export class NotificationTextDirective {
     /** @hidden */

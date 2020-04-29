@@ -6,7 +6,9 @@ import {
     OnInit,
     QueryList,
     ViewEncapsulation,
-    ContentChild, ViewChild, ChangeDetectionStrategy
+    ContentChild,
+    ViewChild,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
@@ -43,7 +45,6 @@ import { ProductSwitchComponent } from '../../product-switch/product-switch/prod
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarActionsComponent implements OnInit {
-
     /** @hidden */
     actionsCollapsed: boolean = false;
 
@@ -80,7 +81,7 @@ export class ShellbarActionsComponent implements OnInit {
     comboboxComponent: ComboboxComponent;
 
     /** @hidden */
-    @ContentChild(ProductSwitchComponent, {static: false})
+    @ContentChild(ProductSwitchComponent, { static: false })
     productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
@@ -113,5 +114,4 @@ export class ShellbarActionsComponent implements OnInit {
             return this.user;
         }
     }
-
 }

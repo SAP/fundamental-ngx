@@ -4,15 +4,12 @@ import { PanelTitleDirective } from './panel-title.directive';
 import { PanelModule } from '../panel.module';
 
 @Component({
-    template: `        
-        <h1 #directiveElement fd-panel-title>Test Text</h1>
-    `
+    template: ` <h1 #directiveElement fd-panel-title>Test Text</h1> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
-
 
 describe('PanelTitleDirective', () => {
     let component: TestComponent;

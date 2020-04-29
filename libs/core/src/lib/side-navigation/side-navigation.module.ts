@@ -8,16 +8,7 @@ import { NestedListModule } from '../nested-list/nested-list.module';
 
 @NgModule({
     imports: [CommonModule, NestedListModule],
-    exports: [
-        SideNavigationComponent,
-        SideNavigationMainDirective,
-        SideNavigationUtilityDirective,
-        NestedListModule
-    ],
-    declarations: [
-        SideNavigationComponent,
-        SideNavigationMainDirective,
-        SideNavigationUtilityDirective,
-    ]
+    exports: [SideNavigationComponent, SideNavigationMainDirective, SideNavigationUtilityDirective, NestedListModule],
+    declarations: [SideNavigationComponent, SideNavigationMainDirective, SideNavigationUtilityDirective]
 })
 export class SideNavigationModule {}

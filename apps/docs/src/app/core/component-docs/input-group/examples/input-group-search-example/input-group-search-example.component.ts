@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './input-group-search-example.component.html'
 })
 export class InputGroupSearchExampleComponent {
-
     searchTerm = 'Search Term';
     searchTermSecond = 'Search Term';
-
 }

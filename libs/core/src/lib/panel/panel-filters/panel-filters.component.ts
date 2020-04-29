@@ -21,7 +21,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelFiltersComponent {
-
     /** @hidden */
     @HostBinding('class.fd-panel__filters')
     fdPanelFiltersClass: boolean = true;

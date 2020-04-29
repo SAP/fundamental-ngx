@@ -3,16 +3,11 @@ import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 @Component({
-    template: `
-        <li fd-tab-item #directiveElement>
-        </li>
-    `
+    template: ` <li fd-tab-item #directiveElement></li> `
 })
 class TestNestedContainerComponent {
-
     @ViewChild('directiveElement', { static: true, read: TabItemDirective })
     directiveElement: TabItemDirective;
-
 }
 
 describe('TabItemDirective', () => {
@@ -22,9 +17,8 @@ describe('TabItemDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, TabItemDirective],
-        })
-            .compileComponents();
+            declarations: [TestNestedContainerComponent, TabItemDirective]
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -34,7 +28,6 @@ describe('TabItemDirective', () => {
         fixture.detectChanges();
     });
 
-
     it('Should have good classes', () => {
         directiveElement.header = true;
         directiveElement.tabItemState = 'success';
@@ -42,11 +35,13 @@ describe('TabItemDirective', () => {
         fixture.detectChanges();
 
         expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item')).toBeTruthy();
-        expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--header')).toBeTruthy();
-        expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--success')).toBeTruthy();
-
+        expect(
+            (directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--header')
+        ).toBeTruthy();
+        expect(
+            (directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--success')
+        ).toBeTruthy();
     });
-
 
     it('Should have good classes', () => {
         directiveElement.header = false;
@@ -55,8 +50,11 @@ describe('TabItemDirective', () => {
         fixture.detectChanges();
 
         expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item')).toBeTruthy();
-        expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--header')).toBeFalsy();
-        expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--success')).toBeFalsy();
-
+        expect(
+            (directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--header')
+        ).toBeFalsy();
+        expect(
+            (directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--success')
+        ).toBeFalsy();
     });
-})
+});

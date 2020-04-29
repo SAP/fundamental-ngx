@@ -8,7 +8,7 @@ const testDirectiveClass = 'fd-test-directive';
 
 @Directive({
     // tslint:disable-next-line: directive-selector
-    selector: '[fd-test-directive]',
+    selector: '[fd-test-directive]'
 })
 export class TestDirective implements OnInit, OnChanges, CssClassBuilder {
     class: string;
@@ -35,7 +35,7 @@ export class TestDirective implements OnInit, OnChanges, CssClassBuilder {
 
 @Component({
     selector: 'fd-test-component',
-    template: '<button #element fd-test-directive fd-button>Button</button>',
+    template: '<button #element fd-test-directive fd-button>Button</button>'
 })
 export class TestComponent {
     @ViewChild('element') element: ElementRef;
@@ -48,7 +48,7 @@ describe('ButtonComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestDirective, ButtonComponent, TestComponent],
+            declarations: [TestDirective, ButtonComponent, TestComponent]
         });
     }));
 

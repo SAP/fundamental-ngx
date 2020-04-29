@@ -14,13 +14,12 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     templateUrl: './segmented-button.component.html',
     styleUrls: ['./segmented-button.component.scss'],
     host: {
-        'role': 'group'
+        role: 'group'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SegmentedButtonComponent {
-
     /** @hidden */
     @HostBinding('class.fd-segmented-button')
     fdSegmentedButtonClass: boolean = true;

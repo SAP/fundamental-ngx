@@ -37,13 +37,7 @@
                 data-tag="actionbar__input"
             />
         </div>
-        <p
-            *ngIf="description"
-            fd-action-bar-description
-            [attr.title]="description"
-            data-tag="actionbar__description"
-        >
-
+        <p *ngIf="description" fd-action-bar-description [attr.title]="description" data-tag="actionbar__description">
             {{ description }}
         </p>
     </div>

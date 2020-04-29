@@ -8,7 +8,7 @@ import {
     BarSubHeaderExampleComponent,
     BarHeaderSubHeaderExampleComponent,
     BarFooterExampleComponent,
-    BarFloatingFooterExampleComponent,
+    BarFloatingFooterExampleComponent
 } from './examples/bar-simple-examples.component';
 import { BarDefaultExampleComponent } from './examples/bar-default-example.component';
 import { BarHeaderExampleComponent } from './examples/bar-header-example.component';
@@ -29,12 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        BarModule,
-        ImageModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, BarModule, ImageModule],
     exports: [RouterModule],
     declarations: [
         BarDocsComponent,
@@ -47,7 +42,6 @@ const routes: Routes = [
         BarFloatingFooterExampleComponent,
         BarPageExampleComponent,
         BarPageResponsiveExampleComponent
-    ],
+    ]
 })
-export class BarDocsModule {
-}
+export class BarDocsModule {}

@@ -5,7 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './multi-input-compact-example.component.html'
 })
 export class MultiInputCompactExampleComponent {
-
     selected = ['Banana'];
-
 }

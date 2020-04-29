@@ -8,6 +8,6 @@ import { ButtonModule } from '../button/button.module';
 @NgModule({
     declarations: [MessageStripComponent],
     imports: [CommonModule, IconModule, ButtonModule],
-    exports: [MessageStripComponent],
+    exports: [MessageStripComponent]
 })
-export class MessageStripModule { }
+export class MessageStripModule {}

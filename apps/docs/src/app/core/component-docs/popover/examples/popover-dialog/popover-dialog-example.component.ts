@@ -6,13 +6,12 @@ import { DialogService } from '@fundamental-ngx/core';
     templateUrl: './popover-dialog-example.component.html'
 })
 export class PopoverDialogExampleComponent {
-
     constructor(private _dialogService: DialogService) {}
 
     openDialog(template: TemplateRef<any>) {
         this._dialogService.open(template, {
             width: '500px',
             responsivePadding: true
-        })
+        });
     }
 }

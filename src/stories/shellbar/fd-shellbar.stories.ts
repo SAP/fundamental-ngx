@@ -19,8 +19,7 @@ export default {
 };
 
 export const Shellbar = () => ({
-    template:
-        `
+    template: `
         <br>
         <fd-shellbar>
             <fd-shellbar-logo>
@@ -34,6 +33,6 @@ export const Shellbar = () => ({
         </fd-shellbar>
   `,
     props: {
-        shellbarTitle: text('shellbarTitle', 'Corporate Portal'),
+        shellbarTitle: text('shellbarTitle', 'Corporate Portal')
     }
 });

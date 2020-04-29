@@ -8,7 +8,6 @@ import { SuggestionItem, SearchInput, ValueLabelItem } from '@fundamental-ngx/pl
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformSearchFieldCategoriesExampleComponent implements OnInit {
-
     public suggestions: SuggestionItem[];
     public categories: ValueLabelItem[];
 
@@ -23,54 +22,75 @@ export class PlatformSearchFieldCategoriesExampleComponent implements OnInit {
     public compactInputCategory = '';
 
     ngOnInit() {
-        this.suggestions = [{
-            value: 'Apple'
-        }, {
-            value: 'Banana'
-        }, {
-            value: 'Blueberry'
-        }, {
-            value: 'Cherry'
-        }, {
-            value: 'Grape'
-        }, {
-            value: 'Lemon'
-        }, {
-            value: 'Lime'
-        }, {
-            value: 'Orange'
-        }, {
-            value: 'Peach'
-        }, {
-            value: 'Pineapple'
-        }, {
-            value: 'Plum'
-        }, {
-            value: 'Raspberry'
-        }];
+        this.suggestions = [
+            {
+                value: 'Apple'
+            },
+            {
+                value: 'Banana'
+            },
+            {
+                value: 'Blueberry'
+            },
+            {
+                value: 'Cherry'
+            },
+            {
+                value: 'Grape'
+            },
+            {
+                value: 'Lemon'
+            },
+            {
+                value: 'Lime'
+            },
+            {
+                value: 'Orange'
+            },
+            {
+                value: 'Peach'
+            },
+            {
+                value: 'Pineapple'
+            },
+            {
+                value: 'Plum'
+            },
+            {
+                value: 'Raspberry'
+            }
+        ];
 
-        this.categories = [{
-            value: 'red',
-            label: 'Red'
-        }, {
-            value: 'orange',
-            label: 'Orange'
-        }, {
-            value: 'yellow',
-            label: 'Yellow'
-        }, {
-            value: 'green',
-            label: 'Green'
-        }, {
-            value: 'blue',
-            label: 'Blue'
-        }, {
-            value: 'indigo',
-            label: 'Indigo'
-        }, {
-            value: 'violet',
-            label: 'Violet'
-        }];
+        this.categories = [
+            {
+                value: 'red',
+                label: 'Red'
+            },
+            {
+                value: 'orange',
+                label: 'Orange'
+            },
+            {
+                value: 'yellow',
+                label: 'Yellow'
+            },
+            {
+                value: 'green',
+                label: 'Green'
+            },
+            {
+                value: 'blue',
+                label: 'Blue'
+            },
+            {
+                value: 'indigo',
+                label: 'Indigo'
+            },
+            {
+                value: 'violet',
+                label: 'Violet'
+            }
+        ];
     }
 
     onSearchSubmit($event: SearchInput) {

@@ -14,14 +14,7 @@ describe('ComboboxComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ComboboxComponent],
-            imports: [
-                InputGroupModule,
-                CommonModule,
-                PopoverModule,
-                FormsModule,
-                ListModule,
-                PipeModule,
-            ]
+            imports: [InputGroupModule, CommonModule, PopoverModule, FormsModule, ListModule, PipeModule]
         }).compileComponents();
     }));
 
@@ -32,8 +25,7 @@ describe('ComboboxComponent', () => {
             { value: 'value', displayedValue: 'displayedValue' },
             { value: 'value2', displayedValue: 'displayedValue2' }
         ];
-        component.searchFn = () => {
-        };
+        component.searchFn = () => {};
         fixture.detectChanges();
 
         /** That's focus trap testing workaround */
@@ -41,8 +33,8 @@ describe('ComboboxComponent', () => {
             activate: () => {},
             deactivate: () => {},
             pause: () => {},
-            unpause: () => {},
-        }
+            unpause: () => {}
+        };
     });
 
     it('should create', () => {
@@ -100,8 +92,7 @@ describe('ComboboxComponent', () => {
     it('should handle onListKeydownHandler, arrow up on the first item', () => {
         const event: any = {
             key: 'ArrowUp',
-            preventDefault: () => {
-            }
+            preventDefault: () => {}
         };
         spyOn(event, 'preventDefault');
         spyOn(component.searchInputElement.nativeElement, 'focus');
@@ -186,5 +177,5 @@ describe('ComboboxComponent', () => {
 
         expect(component.filterFn).toHaveBeenCalledWith(component.dropdownValues, component.inputText);
         expect(component.popoverComponent.updatePopover).toHaveBeenCalled();
-    })
+    });
 });

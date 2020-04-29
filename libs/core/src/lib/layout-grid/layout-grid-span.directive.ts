@@ -2,10 +2,9 @@ import { Directive, ElementRef, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Directive({
-  selector: '[fdLayoutGridSpan], [fd-layout-grid-span]'
+    selector: '[fdLayoutGridSpan], [fd-layout-grid-span]'
 })
 export class LayoutGridSpanDirective extends AbstractFdNgxClass {
-
     /** @Input Column span for the grid system */
     @Input()
     columnSpan: number;

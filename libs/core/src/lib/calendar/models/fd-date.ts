@@ -4,7 +4,6 @@
 import { CalendarService } from '../calendar.service';
 
 export class FdDate {
-
     /**
      * The year of the date.
      */
@@ -115,15 +114,14 @@ export class FdDate {
 
     /** Get previous day  */
     previousDay(): FdDate {
-
         /** Check if should switch month to previous one */
         const prevMonth: boolean = this.day === 1;
 
         /** Check if should switch year to previous one */
-        const prevYear: boolean = prevMonth && (this.month === 1);
+        const prevYear: boolean = prevMonth && this.month === 1;
 
         const year = prevYear ? this.year - 1 : this.year;
-        const month = prevYear ? 12 : (prevMonth ? this.month - 1 : this.month);
+        const month = prevYear ? 12 : prevMonth ? this.month - 1 : this.month;
 
         /** Amount of days in month */
         const maxDays: number = CalendarService.getDaysInMonth(month, year);
@@ -141,18 +139,19 @@ export class FdDate {
     }
 
     /*
-    * Get week number from a date
-    */
+     * Get week number from a date
+     */
     getWeekNumber(): number {
         const date = this.toDate();
-        date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+        date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
 
         // January 4 is always in week 1.
         const firstWeek = new Date(date.getFullYear(), 0, 4);
 
         // Adjust to Thursday in week 1 and count number of weeks from date to week1.
-        return 1 + Math.round(((date.getTime() - firstWeek.getTime()) / 86400000
-            - 3 + (firstWeek.getDay() + 6) % 7) / 7);
+        return (
+            1 + Math.round(((date.getTime() - firstWeek.getTime()) / 86400000 - 3 + ((firstWeek.getDay() + 6) % 7)) / 7)
+        );
     }
 
     /**
@@ -167,7 +166,8 @@ export class FdDate {
             return false;
         }
 
-        if (this.year <= 0 ||
+        if (
+            this.year <= 0 ||
             this.month < 1 ||
             this.month > 12 ||
             isNaN(this.year) ||
@@ -183,5 +183,4 @@ export class FdDate {
 
         return true;
     }
-
 }

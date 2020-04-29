@@ -3,18 +3,16 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import * as linkH from '!raw-loader!./examples/link-example.component.html';
 import * as linkTs from '!raw-loader!./examples/link-example.component.ts';
 
-
 @Component({
     selector: 'app-icon',
     templateUrl: './link-docs.component.html'
 })
 export class LinkDocsComponent {
-
     link: ExampleFile[] = [
         {
             language: 'html',
             code: linkH,
-            fileName: 'link-example',
+            fileName: 'link-example'
         },
         {
             language: 'typescript',
@@ -23,5 +21,4 @@ export class LinkDocsComponent {
             component: 'LinkExampleComponent'
         }
     ];
-
 }

@@ -7,17 +7,19 @@
     [disabled]="disabled"
     [indeterminate]="isIndeterminate"
     [class.fd-checkbox--compact]="compact"
-    [ngClass]="(state ? 'is-' + state : '')"
+    [ngClass]="state ? 'is-' + state : ''"
     [ngModel]="isChecked"
     (ngModelChange)="nextValue()"
     (keydown)="checkByKey($event)"
     (keyup)="$event.stopPropagation()"
+/>
+<label
+    class="fd-checkbox__label"
+    (click)="checkByClick()"
+    [class.fd-checkbox__label--compact]="compact"
+    [for]="inputId"
 >
-<label class="fd-checkbox__label"
-       (click)="checkByClick()"
-       [class.fd-checkbox__label--compact]="compact"
-       [for]="inputId">
-    {{label}}
+    {{ label }}
     <ng-container *ngIf="!label">
         <ng-content></ng-content>
     </ng-container>

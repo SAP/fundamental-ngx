@@ -26,11 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        ButtonModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ButtonModule],
     exports: [RouterModule],
     declarations: [
         ButtonDocsComponent,
@@ -39,8 +35,7 @@ const routes: Routes = [
         ButtonSizesExampleComponent,
         ButtonIconsExampleComponent,
         ButtonStateExampleComponent,
-        ButtonMenuExampleComponent,
-    ],
+        ButtonMenuExampleComponent
+    ]
 })
-export class ButtonDocsModule {
-}
+export class ButtonDocsModule {}

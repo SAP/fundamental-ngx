@@ -1,9 +1,13 @@
 import {
-    AfterContentInit, ContentChildren,
+    AfterContentInit,
+    ContentChildren,
     Directive,
-    ElementRef, forwardRef,
+    ElementRef,
+    forwardRef,
     HostBinding,
-    Input, Optional, QueryList
+    Input,
+    Optional,
+    QueryList
 } from '@angular/core';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
@@ -15,7 +19,6 @@ import { NestedListInterface } from './nested-list.interface';
     selector: '[fdNestedList], [fd-nested-list]'
 })
 export class NestedListDirective implements AfterContentInit, NestedListInterface {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list')
     fdNestedListItemClass: boolean = true;
@@ -86,7 +89,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         }
 
         /** Filter only elements, that has `fd-nested-list` directive attribute */
-        const filteredParentElements = parentElements.filter(_element => _element.hasAttribute('fd-nested-list'));
+        const filteredParentElements = parentElements.filter((_element) => _element.hasAttribute('fd-nested-list'));
         return filteredParentElements.length;
     }
 }

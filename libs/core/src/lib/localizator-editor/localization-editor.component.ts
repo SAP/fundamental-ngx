@@ -32,7 +32,6 @@ import { LocalizationEditorMainComponent } from './localization-editor-main/loca
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocalizationEditorComponent {
-
     /** @hidden */
     @HostBinding('class.fd-localization-editor')
     fdLocalizationEditorClass: boolean = true;

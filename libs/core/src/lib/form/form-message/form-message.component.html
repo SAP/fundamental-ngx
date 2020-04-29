@@ -1,5 +1,10 @@
 <span
     class="fd-form-message"
-    [ngClass]="[type ? ' fd-form-message--' + type : '', compact ? ' fd-form-message--' + compact : '', static ? ' fd-form-message--static' : '']">
+    [ngClass]="[
+        type ? ' fd-form-message--' + type : '',
+        compact ? ' fd-form-message--' + compact : '',
+        static ? ' fd-form-message--static' : ''
+    ]"
+>
     <ng-content></ng-content>
 </span>

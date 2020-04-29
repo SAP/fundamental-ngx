@@ -26,7 +26,7 @@ export class PlatformDocumentationComponent {
     { url: 'platform/radio-group', name: 'Radio Button Group' },
     { url: 'platform/info-label', name: 'Info Label' },
     ];
-   
+
     layouts = [];
 
     utilities = [];

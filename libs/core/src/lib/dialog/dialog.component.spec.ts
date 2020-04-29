@@ -30,8 +30,7 @@ class TemplateTestComponent {
     providers: [DialogService],
     entryComponents: [TemplateTestComponent]
 })
-class TestModule {
-}
+class TestModule {}
 
 describe('DialogComponent', () => {
     let component: TemplateTestComponent;
@@ -46,14 +45,14 @@ describe('DialogComponent', () => {
         TestBed.configureTestingModule({
             imports: [TestModule],
             providers: [
-                {provide: DIALOG_REF, useValue: dialogRef},
-                {provide: DIALOG_CONFIG, useValue: dialogConfig}
+                { provide: DIALOG_REF, useValue: dialogRef },
+                { provide: DIALOG_CONFIG, useValue: dialogConfig }
             ]
-        })
+        });
     }));
 
-    function setup(providers: { token: any, provider: { useValue: any; } }[] = []): void {
-        providers.forEach(provider => TestBed.overrideProvider(provider.token, provider.provider))
+    function setup(providers: { token: any; provider: { useValue: any } }[] = []): void {
+        providers.forEach((provider) => TestBed.overrideProvider(provider.token, provider.provider));
         TestBed.compileComponents();
 
         fixture = TestBed.createComponent(TemplateTestComponent);
@@ -84,7 +83,7 @@ describe('DialogComponent', () => {
 
         const dismissSpy = spyOn(dialogRef, 'dismiss');
 
-        dialogComponent['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', {key: 'Escape'}));
+        dialogComponent['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
         fixture.detectChanges();
 
         expect(dismissSpy).toHaveBeenCalled();
@@ -103,8 +102,8 @@ describe('DialogComponent', () => {
     });
 
     it('should set custom position', () => {
-        const customDialogConfig = {...new DialogConfig(), position: {bottom: '100px', right: '50px'}};
-        setup([{token: DIALOG_CONFIG, provider: {useValue: customDialogConfig}}]);
+        const customDialogConfig = { ...new DialogConfig(), position: { bottom: '100px', right: '50px' } };
+        setup([{ token: DIALOG_CONFIG, provider: { useValue: customDialogConfig } }]);
 
         expect(dialogComponent.dialogWindow.nativeElement.style.right).toEqual('50px');
         expect(dialogComponent.dialogWindow.nativeElement.style.bottom).toEqual('100px');
@@ -119,9 +118,9 @@ describe('DialogComponent', () => {
             maxWidth: '1000px',
             maxHeight: '900px'
         };
-        const customDialogConfig = {...new DialogConfig(), ...customSize};
+        const customDialogConfig = { ...new DialogConfig(), ...customSize };
 
-        setup([{token: DIALOG_CONFIG, provider: {useValue: customDialogConfig}}]);
+        setup([{ token: DIALOG_CONFIG, provider: { useValue: customDialogConfig } }]);
 
         expect(dialogComponent.dialogWindow.nativeElement.style.width).toEqual(customSize.width);
         expect(dialogComponent.dialogWindow.nativeElement.style.height).toEqual(customSize.height);
@@ -137,45 +136,51 @@ describe('DialogComponent', () => {
             backdropClass: 'customBackdropClass',
             dialogPanelClass: 'customPanelClass'
         };
-        setup([{token: DIALOG_CONFIG, provider: {useValue: customDialogConfig}}]);
+        setup([{ token: DIALOG_CONFIG, provider: { useValue: customDialogConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog')).toHaveClass('customBackdropClass');
         expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('customPanelClass');
     });
 
     it('should display in mobile mode', () => {
-        const customDialogConfig = {...new DialogConfig(), mobile: true};
-        setup([{token: DIALOG_CONFIG, provider: {useValue: customDialogConfig}}]);
+        const customDialogConfig = { ...new DialogConfig(), mobile: true };
+        setup([{ token: DIALOG_CONFIG, provider: { useValue: customDialogConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('fd-dialog__content--mobile');
     });
 
     it('should display in mobile mode', () => {
-        const customDialogConfig = {...new DialogConfig(), fullScreen: true};
-        setup([{token: DIALOG_CONFIG, provider: {useValue: customDialogConfig}}]);
+        const customDialogConfig = { ...new DialogConfig(), fullScreen: true };
+        setup([{ token: DIALOG_CONFIG, provider: { useValue: customDialogConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('fd-dialog__content--full-screen');
+        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass(
+            'fd-dialog__content--full-screen'
+        );
     });
 
     it('should display in mobile mode with no stretch', () => {
-        const customDialogConfig = {...new DialogConfig(), mobileOuterSpacing: true};
-        setup([{token: DIALOG_CONFIG, provider: {useValue: customDialogConfig}}]);
+        const customDialogConfig = { ...new DialogConfig(), mobileOuterSpacing: true };
+        setup([{ token: DIALOG_CONFIG, provider: { useValue: customDialogConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('fd-dialog__content--no-mobile-stretch');
+        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass(
+            'fd-dialog__content--no-mobile-stretch'
+        );
     });
 
     it('should be draggable', () => {
-        const customDialogConfig = {...new DialogConfig(), draggable: true};
-        setup([{token: DIALOG_CONFIG, provider: {useValue: customDialogConfig}}]);
+        const customDialogConfig = { ...new DialogConfig(), draggable: true };
+        setup([{ token: DIALOG_CONFIG, provider: { useValue: customDialogConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('fd-dialog__content--draggable-grab');
+        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass(
+            'fd-dialog__content--draggable-grab'
+        );
 
         fixture.nativeElement.querySelector('fd-dialog-header').dispatchEvent(new MouseEvent('mousedown'));
     });
 
     it('should be resizable', () => {
-        const customDialogConfig = {...new DialogConfig(), resizable: true};
-        setup([{token: DIALOG_CONFIG, provider: {useValue: customDialogConfig}}]);
+        const customDialogConfig = { ...new DialogConfig(), resizable: true };
+        setup([{ token: DIALOG_CONFIG, provider: { useValue: customDialogConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog__resize-handle')).toBeTruthy();
 
@@ -190,7 +195,7 @@ describe('DialogComponent', () => {
             ariaLabelledBy: 'customAriLabelledBy',
             ariaDescribedBy: 'customAriaDescribedBy'
         };
-        setup([{token: DIALOG_CONFIG, provider: {useValue: customDialogConfig}}]);
+        setup([{ token: DIALOG_CONFIG, provider: { useValue: customDialogConfig } }]);
 
         const dialogWindowEl = fixture.nativeElement.querySelector('.fd-dialog__content');
 

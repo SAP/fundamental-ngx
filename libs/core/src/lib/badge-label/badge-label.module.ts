@@ -14,4 +14,4 @@ import { StatusLabelComponent } from './status-label/status-label.component';
     exports: [BadgeComponent, LabelComponent, StatusLabelComponent],
     declarations: [BadgeComponent, LabelComponent, StatusLabelComponent]
 })
-export class BadgeLabelModule { }
+export class BadgeLabelModule {}

@@ -16,7 +16,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent {
-
     /** Whether dropdown mode is included to component, used for Select and Combobox */
     @Input()
     @HostBinding('class.fd-list--dropdown')

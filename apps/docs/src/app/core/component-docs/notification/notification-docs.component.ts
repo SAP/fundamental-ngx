@@ -17,7 +17,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './notification-docs.component.html'
 })
 export class NotificationDocsComponent {
-
     componentAsContent: ExampleFile[] = [
         {
             language: 'typescript',
@@ -94,5 +93,4 @@ export class NotificationDocsComponent {
             fileName: 'notification-component-as-object-example'
         }
     ];
-
 }

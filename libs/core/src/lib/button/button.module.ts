@@ -8,4 +8,4 @@ import { ButtonComponent } from './button.component';
     exports: [ButtonComponent],
     declarations: [ButtonComponent]
 })
-export class ButtonModule { }
+export class ButtonModule {}

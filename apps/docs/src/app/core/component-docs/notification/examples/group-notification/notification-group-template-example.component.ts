@@ -7,7 +7,6 @@ import { NotificationGroupComponent } from '@fundamental-ngx/core';
     templateUrl: './notification-group-template-example.component.html'
 })
 export class NotificationGroupTemplateExampleComponent {
-
     public closeReason: string;
 
     constructor(private notificationService: NotificationService) {}
@@ -16,33 +15,46 @@ export class NotificationGroupTemplateExampleComponent {
 
     newGroup(notificationComponent): void {
         this.currentGroup = this.notificationService.createNotificationGroup(null);
-        const notifRef = this.notificationService.open(notificationComponent, {
-            size: 's',
-            type: 'warning'
-        }, this.currentGroup);
+        const notifRef = this.notificationService.open(
+            notificationComponent,
+            {
+                size: 's',
+                type: 'warning'
+            },
+            this.currentGroup
+        );
 
-        notifRef.afterClosedGroup.subscribe(result => {
-            this.currentGroup = null;
-            this.closeReason = 'Whole Group Closed ' + result
-        }, error => {
-            this.currentGroup = null;
-            this.closeReason = 'Whole Group Dismissed ' + error
-        });
+        notifRef.afterClosedGroup.subscribe(
+            (result) => {
+                this.currentGroup = null;
+                this.closeReason = 'Whole Group Closed ' + result;
+            },
+            (error) => {
+                this.currentGroup = null;
+                this.closeReason = 'Whole Group Dismissed ' + error;
+            }
+        );
     }
 
     addToGroup(notificationComponent): void {
         if (this.currentGroup) {
-            const notificationRef = this.notificationService.open(notificationComponent, {
-                size: 's',
-                type: 'warning'
-            }, this.currentGroup);
+            const notificationRef = this.notificationService.open(
+                notificationComponent,
+                {
+                    size: 's',
+                    type: 'warning'
+                },
+                this.currentGroup
+            );
 
-            notificationRef.afterClosed.subscribe(result => {
-                this.closeReason = 'Notification closed with result: ' + result;
-            }, error => {
-                this.closeReason = 'Notification dismissed with result: ' + error;
-            });
+            notificationRef.afterClosed.subscribe(
+                (result) => {
+                    this.closeReason = 'Notification closed with result: ' + result;
+                },
+                (error) => {
+                    this.closeReason = 'Notification dismissed with result: ' + error;
+                }
+            );
         }
     }
-
 }

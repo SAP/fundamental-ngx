@@ -15,7 +15,6 @@ export function DATE_TIME_FORMAT_FACTORY() {
     useFactory: DATE_TIME_FORMAT_FACTORY
 })
 export abstract class DateTimeFormatParser {
-
     /**
      * Should take in a string value and return a FdDatetime model object.
      * @param value String to concert to a FdDatetime model object.
@@ -35,7 +34,6 @@ export abstract class DateTimeFormatParser {
  */
 @Injectable()
 export class DateTimeFormatParserDefault extends DateTimeFormatParser {
-
     /**
      * Takes in a string representation of a date and returns a FdDatetime object.
      * @param value String to convert to a FdDatetime model object.
@@ -45,14 +43,11 @@ export class DateTimeFormatParserDefault extends DateTimeFormatParser {
             return FdDatetime.getToday();
         } else {
             const date: Date = new Date(value);
-            return new FdDatetime(
-                new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-                {
-                    hour: date.getHours(),
-                    minute: date.getMinutes(),
-                    second: date.getSeconds()
-                }
-            );
+            return new FdDatetime(new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate()), {
+                hour: date.getHours(),
+                minute: date.getMinutes(),
+                second: date.getSeconds()
+            });
         }
     }
 

@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     selector: 'app-radio-header',
     templateUrl: './radio-header.component.html'
 })
-export class RadioHeaderComponent {
-}
+export class RadioHeaderComponent {}

@@ -31,7 +31,6 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconComponent extends AbstractFdNgxClass {
-
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */

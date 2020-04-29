@@ -11,20 +11,17 @@ import { Directionality } from '@angular/cdk/bidi';
 import { of } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/core';
 
-
 @Component({
     template: `<button [fdpMenuTriggerFor]="menu" #button>Fruit</button>
-    <fdp-menu #menu>
-      <fdp-menu-item (itemSelect)="onSelect('Apple')">Apple</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Banana')">Banana</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
-    </fdp-menu>
-    <button #otherButton>Another Button</button>
-  `
+        <fdp-menu #menu>
+            <fdp-menu-item (itemSelect)="onSelect('Apple')">Apple</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Banana')">Banana</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
+        </fdp-menu>
+        <button #otherButton>Another Button</button> `
 })
 class SimpleMenuComponent {
-
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
     @ViewChild('otherButton', { static: false }) otherButton: ElementRef<HTMLElement>;
     @ViewChild(MenuTriggerDirective, { static: false }) trigger: MenuTriggerDirective;
@@ -33,7 +30,7 @@ class SimpleMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string) {
         this.currentSelectedItem = item;
@@ -51,17 +48,10 @@ describe('Simple Menu', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                PlatformMenuModule
-            ],
-            declarations: [
-                SimpleMenuComponent
-            ],
-            providers: [
-                RtlService
-            ]
-        })
-            .compileComponents();
+            imports: [PlatformMenuModule],
+            declarations: [SimpleMenuComponent],
+            providers: [RtlService]
+        }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
@@ -324,7 +314,6 @@ describe('Simple Menu', () => {
         expect(menuEl.length).toBe(0);
     });
 
-
     it('should close the menu after user mouse click of an item', () => {
         /**
          * FIRST-CLICK (OPEN MENU)
@@ -345,35 +334,34 @@ describe('Simple Menu', () => {
         const menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEl.length).toBe(0);
     });
-
 });
 
 @Component({
     template: `<button [fdpMenuTriggerFor]="menu" #button>Fruit</button>
-    <fdp-menu #menu>
-      <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
-      <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
-    </fdp-menu>
-    <fdp-menu #appleMenu id="appleMenu">
-      <fdp-menu-item (itemSelect)="onSelect('Braeburn')" [fdpMenuTriggerFor]="braeburnMenu">Braeburn</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Fuji')">Fuji</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Honey Crisp')">Honey Crisp</fdp-menu-item>
-    </fdp-menu>
-    <fdp-menu #bananaMenu id="bananaMenu">
-      <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
-    </fdp-menu>
-    <fdp-menu #braeburnMenu id="braeburnMenu">
-      <fdp-menu-item (itemSelect)="onSelect('Red Braeburn')">Red Braeburn</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Pink Braeburn')">Pink Braeburn</fdp-menu-item>
-    </fdp-menu>
-  `
+        <fdp-menu #menu>
+            <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
+            <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
+        </fdp-menu>
+        <fdp-menu #appleMenu id="appleMenu">
+            <fdp-menu-item (itemSelect)="onSelect('Braeburn')" [fdpMenuTriggerFor]="braeburnMenu"
+                >Braeburn</fdp-menu-item
+            >
+            <fdp-menu-item (itemSelect)="onSelect('Fuji')">Fuji</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Honey Crisp')">Honey Crisp</fdp-menu-item>
+        </fdp-menu>
+        <fdp-menu #bananaMenu id="bananaMenu">
+            <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
+        </fdp-menu>
+        <fdp-menu #braeburnMenu id="braeburnMenu">
+            <fdp-menu-item (itemSelect)="onSelect('Red Braeburn')">Red Braeburn</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Pink Braeburn')">Pink Braeburn</fdp-menu-item>
+        </fdp-menu> `
 })
 class CascadingMenuComponent {
-
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
     @ViewChild(MenuTriggerDirective, { static: false }) trigger: MenuTriggerDirective;
     @ViewChild(MenuComponent, { static: false }) menu: MenuComponent;
@@ -381,7 +369,7 @@ class CascadingMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string) {
         this.currentSelectedItem = item;
@@ -397,17 +385,10 @@ describe('Cascading Menu', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                PlatformMenuModule
-            ],
-            declarations: [
-                CascadingMenuComponent
-            ],
-            providers: [
-                RtlService
-            ]
-        })
-            .compileComponents();
+            imports: [PlatformMenuModule],
+            declarations: [CascadingMenuComponent],
+            providers: [RtlService]
+        }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
@@ -730,31 +711,28 @@ describe('Cascading Menu', () => {
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
     });
-
 });
 
 @Component({
     template: `<button [fdpMenuTriggerFor]="menu" #button>Fruit</button>
-    <fdp-menu #menu [xPosition]="'before'">
-      <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
-      <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
-    </fdp-menu>
-    <fdp-menu #appleMenu [xPosition]="'before'" id="appleMenu">
-      <fdp-menu-item (itemSelect)="onSelect('Braeburn')">Braeburn</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Fuji')">Fuji</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Honey Crisp')">Honey Crisp</fdp-menu-item>
-    </fdp-menu>
-    <fdp-menu #bananaMenu [xPosition]="'before'" id="bananaMenu">
-      <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
-    </fdp-menu>
-  `
+        <fdp-menu #menu [xPosition]="'before'">
+            <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
+            <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
+        </fdp-menu>
+        <fdp-menu #appleMenu [xPosition]="'before'" id="appleMenu">
+            <fdp-menu-item (itemSelect)="onSelect('Braeburn')">Braeburn</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Fuji')">Fuji</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Honey Crisp')">Honey Crisp</fdp-menu-item>
+        </fdp-menu>
+        <fdp-menu #bananaMenu [xPosition]="'before'" id="bananaMenu">
+            <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
+        </fdp-menu> `
 })
 class CascadingBeforeMenuComponent {
-
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
     @ViewChild(MenuTriggerDirective, { static: false }) trigger: MenuTriggerDirective;
     @ViewChild(MenuComponent, { static: false }) menu: MenuComponent;
@@ -762,7 +740,7 @@ class CascadingBeforeMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string) {
         this.currentSelectedItem = item;
@@ -778,17 +756,10 @@ describe('Cascading Menu - Position Before', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                PlatformMenuModule
-            ],
-            declarations: [
-                CascadingBeforeMenuComponent
-            ],
-            providers: [
-                RtlService
-            ]
-        })
-            .compileComponents();
+            imports: [PlatformMenuModule],
+            declarations: [CascadingBeforeMenuComponent],
+            providers: [RtlService]
+        }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
@@ -861,26 +832,24 @@ describe('Cascading Menu - Position Before', () => {
 
 @Component({
     template: `<button [fdpMenuTriggerFor]="menu" #button>Fruit</button>
-    <fdp-menu #menu [xPosition]="'after'">
-      <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
-      <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
-    </fdp-menu>
-    <fdp-menu #appleMenu [xPosition]="'after'" id="appleMenu">
-      <fdp-menu-item (itemSelect)="onSelect('Braeburn')">Braeburn</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Fuji')">Fuji</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Honey Crisp')">Honey Crisp</fdp-menu-item>
-    </fdp-menu>
-    <fdp-menu #bananaMenu [xPosition]="'after'" id="bananaMenu">
-      <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
-    </fdp-menu>
-  `
+        <fdp-menu #menu [xPosition]="'after'">
+            <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
+            <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
+        </fdp-menu>
+        <fdp-menu #appleMenu [xPosition]="'after'" id="appleMenu">
+            <fdp-menu-item (itemSelect)="onSelect('Braeburn')">Braeburn</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Fuji')">Fuji</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Honey Crisp')">Honey Crisp</fdp-menu-item>
+        </fdp-menu>
+        <fdp-menu #bananaMenu [xPosition]="'after'" id="bananaMenu">
+            <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
+        </fdp-menu> `
 })
 class CascadingAfterRTLMenuComponent {
-
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
     @ViewChild(MenuTriggerDirective, { static: false }) trigger: MenuTriggerDirective;
     @ViewChild(MenuComponent, { static: false }) menu: MenuComponent;
@@ -888,7 +857,7 @@ class CascadingAfterRTLMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string) {
         this.currentSelectedItem = item;
@@ -908,22 +877,19 @@ describe('Cascading Menu - Position After, RTL', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                PlatformMenuModule
-            ],
-            declarations: [
-                CascadingAfterRTLMenuComponent
-            ],
-            providers: [{
-                provide: RtlService,
-                useFactory: () => dirProvider
-            }]
+            imports: [PlatformMenuModule],
+            declarations: [CascadingAfterRTLMenuComponent],
+            providers: [
+                {
+                    provide: RtlService,
+                    useFactory: () => dirProvider
+                }
+            ]
         }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
         })();
-
     }));
 
     beforeEach(() => {
@@ -937,7 +903,6 @@ describe('Cascading Menu - Position After, RTL', () => {
     });
 
     it('should be able to show sub menu on LEFT ARROW click of trigger menu item (position-after, RTL)', () => {
-
         /**
          * FIRST-CLICK (OPEN MENU)
          */
@@ -993,26 +958,24 @@ describe('Cascading Menu - Position After, RTL', () => {
 
 @Component({
     template: `<button [fdpMenuTriggerFor]="menu" #button>Fruit</button>
-    <fdp-menu #menu [xPosition]="'before'">
-      <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
-      <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
-    </fdp-menu>
-    <fdp-menu #appleMenu [xPosition]="'before'" id="appleMenu">
-      <fdp-menu-item (itemSelect)="onSelect('Braeburn')">Braeburn</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Fuji')">Fuji</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Honey Crisp')">Honey Crisp</fdp-menu-item>
-    </fdp-menu>
-    <fdp-menu #bananaMenu [xPosition]="'before'" id="bananaMenu">
-      <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
-      <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
-    </fdp-menu>
-  `
+        <fdp-menu #menu [xPosition]="'before'">
+            <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
+            <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
+        </fdp-menu>
+        <fdp-menu #appleMenu [xPosition]="'before'" id="appleMenu">
+            <fdp-menu-item (itemSelect)="onSelect('Braeburn')">Braeburn</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Fuji')">Fuji</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Honey Crisp')">Honey Crisp</fdp-menu-item>
+        </fdp-menu>
+        <fdp-menu #bananaMenu [xPosition]="'before'" id="bananaMenu">
+            <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
+        </fdp-menu> `
 })
 class CascadingBeforeRTLMenuComponent {
-
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
     @ViewChild(MenuTriggerDirective, { static: false }) trigger: MenuTriggerDirective;
     @ViewChild(MenuComponent, { static: false }) menu: MenuComponent;
@@ -1020,7 +983,7 @@ class CascadingBeforeRTLMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string) {
         this.currentSelectedItem = item;
@@ -1040,22 +1003,19 @@ describe('Cascading Menu - Position Before, RTL', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                PlatformMenuModule
-            ],
-            declarations: [
-                CascadingBeforeRTLMenuComponent
-            ],
-            providers: [{
-                provide: RtlService,
-                useFactory: () => dirProvider
-            }]
+            imports: [PlatformMenuModule],
+            declarations: [CascadingBeforeRTLMenuComponent],
+            providers: [
+                {
+                    provide: RtlService,
+                    useFactory: () => dirProvider
+                }
+            ]
         }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
         })();
-
     }));
 
     beforeEach(() => {
@@ -1069,7 +1029,6 @@ describe('Cascading Menu - Position Before, RTL', () => {
     });
 
     it('should be able to show sub menu on RIGHT ARROW click of trigger menu item (position-before, RTL)', () => {
-
         /**
          * FIRST-CLICK (OPEN MENU)
          */

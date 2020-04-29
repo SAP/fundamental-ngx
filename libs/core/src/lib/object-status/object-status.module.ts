@@ -4,11 +4,7 @@ import { ObjectStatusComponent } from './object-status.component';
 
 @NgModule({
     declarations: [ObjectStatusComponent],
-    imports: [
-        CommonModule
-    ],
-    exports: [
-        ObjectStatusComponent
-    ]
+    imports: [CommonModule],
+    exports: [ObjectStatusComponent]
 })
-export class ObjectStatusModule { }
+export class ObjectStatusModule {}

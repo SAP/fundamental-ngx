@@ -19,8 +19,7 @@ export default {
 };
 
 export const FormControl = () => ({
-    template:
-        `
+    template: `
         <div fd-form-item>
         <label fd-form-label for="input-1" [required]="requiredVar">Default Input</label>
         <fd-form-input-message-group>
@@ -33,23 +32,30 @@ export const FormControl = () => ({
     </div>
   `,
     props: {
-        stateVar: select('State', {
-            information: 'information',
-            valid: 'valid',
-            invalid: 'invalid',
-            warning: 'warning',
-            none: '',
-        }, ''),
-        messageStateVar: select('Message state', {
-            information: 'information',
-            success: 'success',
-            error: 'error',
-            warning: 'warning',
-            none: '',
-        }, ''),
+        stateVar: select(
+            'State',
+            {
+                information: 'information',
+                valid: 'valid',
+                invalid: 'invalid',
+                warning: 'warning',
+                none: ''
+            },
+            ''
+        ),
+        messageStateVar: select(
+            'Message state',
+            {
+                information: 'information',
+                success: 'success',
+                error: 'error',
+                warning: 'warning',
+                none: ''
+            },
+            ''
+        ),
         compactVar: boolean('Compact', false),
         requiredVar: boolean('Required', false),
-        messageText: text('Message Text', 'Message'),
-
+        messageText: text('Message Text', 'Message')
     }
 });

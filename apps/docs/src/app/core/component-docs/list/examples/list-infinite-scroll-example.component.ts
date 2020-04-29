@@ -5,14 +5,13 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './list-infinite-scroll-example.component.html'
 })
 export class ListInfiniteScrollExampleComponent implements OnInit {
-
     // List that is displayed to the user
     displayedList = [
-        {label: 'Initially shown element'},
-        {label: 'Initially shown element'},
-        {label: 'Initially shown element'},
-        {label: 'Initially shown element'},
-        {label: 'Initially shown element'}
+        { label: 'Initially shown element' },
+        { label: 'Initially shown element' },
+        { label: 'Initially shown element' },
+        { label: 'Initially shown element' },
+        { label: 'Initially shown element' }
     ];
 
     // Data to add. Can also come from an observable, service...
@@ -28,18 +27,20 @@ export class ListInfiniteScrollExampleComponent implements OnInit {
 
     loadMoreElements(): void {
         if (this.dataSelector < this.data.length) {
-            this.displayedList = this.displayedList.concat(this.data.slice(this.dataSelector, this.dataSelector + this.increment));
+            this.displayedList = this.displayedList.concat(
+                this.data.slice(this.dataSelector, this.dataSelector + this.increment)
+            );
             this.dataSelector += this.increment;
         }
     }
 
     ngOnInit(): void {
-        this.generateArray(1000)
+        this.generateArray(1000);
     }
 
     generateArray(size: number): void {
         for (let i = 0; i < size; ++i) {
-            this.data.push({label: 'Element ' + i});
+            this.data.push({ label: 'Element ' + i });
         }
     }
 }

@@ -9,7 +9,6 @@ import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 
-
 @Component({
     template: `
         <ng-template #testTemplate let-notification>
@@ -39,8 +38,7 @@ describe('NotificationComponent', () => {
         TestBed.configureTestingModule({
             imports: [TestModule],
             providers: [DynamicComponentService, NotificationService]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

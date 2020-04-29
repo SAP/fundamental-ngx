@@ -69,7 +69,7 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/time', name: 'Time' },
         { url: 'core/timePicker', name: 'Time Picker' },
         { url: 'core/switch', name: 'Switch' },
-        { url: 'core/token', name: 'Token' },
+        { url: 'core/token', name: 'Token' }
         // { url: 'core/tree', name: 'Tree' }
     ];
 
@@ -101,7 +101,7 @@ export class CoreDocumentationComponent implements OnInit {
         {
             header: 'Utilities',
             content: this.utilities
-        },
+        }
     ];
 
     smallScreen: boolean = window.innerWidth < 992;

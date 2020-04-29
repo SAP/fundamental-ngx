@@ -24,19 +24,14 @@ const routes: Routes = [
         path: '',
         component: DialogDocsHeaderComponent,
         children: [
-            {path: '', component: DialogDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.dialog}}
+            { path: '', component: DialogDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.dialog } }
         ]
     }
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        DialogModule,
-        ListModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, DialogModule, ListModule],
     exports: [RouterModule],
     declarations: [
         DialogStateExample,
@@ -60,9 +55,6 @@ const routes: Routes = [
         SecondDialogExampleComponent,
         DialogStackedExampleComponent
     ],
-    providers: [
-        DialogService
-    ]
+    providers: [DialogService]
 })
-export class DialogDocsModule {
-}
+export class DialogDocsModule {}

@@ -32,7 +32,7 @@ export class TimePickerDocsComponent {
             code: timePickerSrc,
             typescriptFileCode: timePickerSrcTs,
             fileName: 'time-picker-example',
-            component: 'TimePickerExampleComponent',
+            component: 'TimePickerExampleComponent'
         }
     ];
 
@@ -42,7 +42,7 @@ export class TimePickerDocsComponent {
             code: timePickerMeridianSrc,
             typescriptFileCode: timePickerMeridianSrcTs,
             fileName: 'time-picker-12-example',
-            component: 'TimePicker12ExampleComponent',
+            component: 'TimePicker12ExampleComponent'
         }
     ];
 
@@ -52,7 +52,7 @@ export class TimePickerDocsComponent {
             code: timePickerNoSecondsSrc,
             typescriptFileCode: timePickerNoSecondsSrcTs,
             fileName: 'time-picker-no-seconds-example',
-            component: 'TimePickerNoSecondsExampleComponent',
+            component: 'TimePickerNoSecondsExampleComponent'
         }
     ];
 
@@ -62,7 +62,7 @@ export class TimePickerDocsComponent {
             code: timePickerOnlyHoursSrc,
             typescriptFileCode: timePickerOnlyHoursSrcTs,
             fileName: 'time-picker-only-hours-example',
-            component: 'TimePickerOnlyHoursExampleComponent',
+            component: 'TimePickerOnlyHoursExampleComponent'
         }
     ];
 
@@ -72,7 +72,7 @@ export class TimePickerDocsComponent {
             code: timePickerDisabledSrc,
             typescriptFileCode: timePickerDisabledSrcTs,
             fileName: 'time-picker-disabled-example',
-            component: 'TimePickerDisabledExampleComponent',
+            component: 'TimePickerDisabledExampleComponent'
         }
     ];
 
@@ -82,7 +82,7 @@ export class TimePickerDocsComponent {
             code: timePickerCompactSrc,
             typescriptFileCode: timePickerCompactSrcTs,
             fileName: 'time-picker-compact-example',
-            component: 'TimePickerCompactExampleComponent',
+            component: 'TimePickerCompactExampleComponent'
         }
     ];
 
@@ -92,7 +92,7 @@ export class TimePickerDocsComponent {
             code: timePickerNullSrc,
             typescriptFileCode: timePickerNullSrcTs,
             fileName: 'time-picker-allow-null-example',
-            component: 'TimePickerAllowNullExampleComponent',
+            component: 'TimePickerAllowNullExampleComponent'
         }
     ];
 
@@ -100,7 +100,7 @@ export class TimePickerDocsComponent {
         {
             language: 'html',
             code: timePickerOtherDelimiterSrc,
-            fileName: 'time-picker-other-delimiter-example',
+            fileName: 'time-picker-other-delimiter-example'
         },
         {
             language: 'typescript',

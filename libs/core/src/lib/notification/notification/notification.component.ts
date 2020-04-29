@@ -33,13 +33,12 @@ export type NotificationSize = 's' | 'm';
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
-        'role': 'alertdialog',
-        '[attr.id]': 'id',
+        role: 'alertdialog',
+        '[attr.id]': 'id'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationComponent extends AbstractFdNgxClass implements AfterViewInit {
-
     /** Size of notification, defined by user, s or m */
     @Input()
     size: string;
@@ -76,11 +75,13 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     // @ts-ignore
-    constructor(private elRef: ElementRef,
-                private componentFactoryResolver: ComponentFactoryResolver,
-                private cdRef: ChangeDetectorRef,
-                @Optional() private notificationConfig: NotificationConfig,
-                @Optional() private notificationRef: NotificationRef) {
+    constructor(
+        private elRef: ElementRef,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private cdRef: ChangeDetectorRef,
+        @Optional() private notificationConfig: NotificationConfig,
+        @Optional() private notificationRef: NotificationRef
+    ) {
         // @ts-ignore
         this._setNotificationConfig(notificationConfig);
         super(elRef);
@@ -138,12 +139,11 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
         if (this.size) {
             this._addClassToElement('fd-notification--' + this.size);
         }
-
     }
 
     private _setNotificationConfig(notificationConfig: NotificationConfig): void {
         Object.keys(notificationConfig || {})
-            .filter(key => key !== 'data' && key !== 'container')
-            .forEach(key => this[key] = notificationConfig[key]);
+            .filter((key) => key !== 'data' && key !== 'container')
+            .forEach((key) => (this[key] = notificationConfig[key]));
     }
 }

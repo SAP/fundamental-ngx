@@ -5,7 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './time-picker-no-seconds-example.component.html'
 })
 export class TimePickerNoSecondsExampleComponent {
-
     timePickerNoSecondsObject = { hour: 12, minute: 0, second: null };
-
 }

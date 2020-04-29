@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-tabs-example',
     templateUrl: './tabs-example.component.html'
 })
-export class TabsExampleComponent { }
+export class TabsExampleComponent {}

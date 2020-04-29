@@ -4,9 +4,7 @@ import { SelectPlatformComponent } from './select.component';
 import { SelectModule, IconModule } from '@fundamental-ngx/core';
 @NgModule({
     declarations: [SelectPlatformComponent],
-    imports: [
-        CommonModule, SelectModule, IconModule
-    ],
+    imports: [CommonModule, SelectModule, IconModule],
     exports: [SelectPlatformComponent]
 })
 export class PlatformSelectModule {}

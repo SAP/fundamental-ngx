@@ -9,21 +9,8 @@ import { BidiModule } from '@angular/cdk/bidi';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        OverlayModule,
-        BidiModule,
-        ScrollingModule
-    ],
-    declarations: [
-        MenuComponent,
-        MenuItemComponent,
-        MenuTriggerDirective
-    ],
-    exports: [
-        MenuComponent,
-        MenuItemComponent,
-        MenuTriggerDirective
-    ]
+    imports: [CommonModule, OverlayModule, BidiModule, ScrollingModule],
+    declarations: [MenuComponent, MenuItemComponent, MenuTriggerDirective],
+    exports: [MenuComponent, MenuItemComponent, MenuTriggerDirective]
 })
-export class PlatformMenuModule { }
+export class PlatformMenuModule {}

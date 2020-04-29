@@ -7,7 +7,6 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
     selector: '[fd-tokenizer-input]'
 })
 export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuilder {
-
     /** user's custom classes */
     @Input()
     class: string;
@@ -18,16 +17,11 @@ export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuild
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return [
-            'fd-tokenizer__input',
-            this.class
-        ].filter(x => x !== '').join(' ');
+        return ['fd-tokenizer__input', this.class].filter((x) => x !== '').join(' ');
     }
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef
-    ) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -43,5 +37,4 @@ export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuild
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }
-
 }

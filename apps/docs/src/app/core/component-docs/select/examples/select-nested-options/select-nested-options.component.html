@@ -1,5 +1,5 @@
-<p>Selected Value: {{this.value}}</p>
-<fd-select [(value)]="value" placeholder="Select an option..." >
+<p>Selected Value: {{ this.value }}</p>
+<fd-select [(value)]="value" placeholder="Select an option...">
     <div>
         <div>
             <p class="fd-menu__title">
@@ -16,9 +16,8 @@
         </div>
 
         <!-- From an array of strings in the ts file -->
-        <fd-option *ngFor="let option of options"
-                   [value]="option.value" [viewValue]="option.viewValue">
-            {{option.name}}
+        <fd-option *ngFor="let option of options" [value]="option.value" [viewValue]="option.viewValue">
+            {{ option.name }}
         </fd-option>
     </div>
 </fd-select>

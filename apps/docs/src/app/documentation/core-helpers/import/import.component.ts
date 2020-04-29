@@ -17,11 +17,9 @@ export class ImportComponent {
 
     library: string;
 
-    constructor(
-        @Inject('CURRENT_LIB') private currentLib: Libraries
-    ) {
+    constructor(@Inject('CURRENT_LIB') private currentLib: Libraries) {
         switch (this.currentLib) {
-            case 'core' : {
+            case 'core': {
                 this.library = '@fundamental-ngx/core';
                 break;
             }
