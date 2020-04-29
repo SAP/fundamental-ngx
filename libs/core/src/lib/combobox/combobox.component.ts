@@ -361,6 +361,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         if (!this.inputText) {
             this.isOpenChangeHandle(false);
         }
+        if (this.inputText && this.inputText.length && this.displayedValues[0] && this.displayedValues[0].startsWith(this.inputText)) {
+            const cursorIndex = this.inputText.length;
+            this.searchInputElement.nativeElement.value = this.displayedValues[0];
+            this.searchInputElement.nativeElement.setSelectionRange(cursorIndex, this.displayedValues[0].length);
+        }
     }
 
     /** @hidden */
