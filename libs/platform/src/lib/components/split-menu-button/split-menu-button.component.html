@@ -1,0 +1,31 @@
+<div class="fd-button-split" role="group" aria-label="button-split">
+    <button
+        fd-button
+        aria-label="button"
+        fd-button
+        [attr.id]="id"
+        [attr.name]="name"
+        [compact]="contentDensity === 'compact'"
+        [glyph]="icon"
+        [disabled]="disabled"
+        (click)="primarButtonClicked($event)"
+        [fdType]="fdType"
+    >
+        <span [ngStyle]="{ width: width }">
+            {{ buttonLabel }}
+        </span>
+    </button>
+    <button
+        fd-button
+        [attr.id]="id"
+        [attr.name]="name"
+        [fdMenu]="true"
+        [compact]="contentDensity === 'compact'"
+        [disabled]="disabled"
+        [fdType]="fdType"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-label="More"
+        [fdpMenuTriggerFor]="menu"
+    ></button>
+</div>
