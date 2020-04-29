@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.15.4"></a>
+## [0.15.4](https://github.com/SAP/fundamental-ngx/compare/v0.15.3...v0.15.4) (2020-04-29)
+
+
+### Bug Fixes
+
+* (popover) Fix popover performance ([#2389](https://github.com/SAP/fundamental-ngx/issues/2389)) ([e5012a2](https://github.com/SAP/fundamental-ngx/commit/e5012a2))
+* Checkbox check destroyed state on detect changes ([#2427](https://github.com/SAP/fundamental-ngx/issues/2427)) ([9c18181](https://github.com/SAP/fundamental-ngx/commit/9c18181))
+
+
+
 <a name="0.15.3"></a>
 ## [0.15.3](https://github.com/SAP/fundamental-ngx/compare/v0.15.2...v0.15.3) (2020-04-09)
 
