@@ -1,0 +1,39 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <h1 fd-dialog-title>{{ defaultDialogConfig?.title }}</h1>
+        <button fd-dialog-close-button *ngIf="defaultDialogConfig?.closeButtonCallback"
+                (click)="closeButtonClicked()"></button>
+    </fd-dialog-header>
+
+    <fd-dialog-body *ngIf="defaultDialogConfig?.content">
+        <ng-container *ngTemplateOutlet="defaultDialogConfig?.content"></ng-container>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                *ngIf="defaultDialogConfig?.approveButton"
+                fd-button
+                fdType="emphasized"
+                fd-dialog-decisive-button
+                [compact]="true"
+                (click)="approveButtonClicked()"
+            >
+                {{defaultDialogConfig?.approveButton}}
+            </button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                *ngIf="defaultDialogConfig?.cancelButton"
+                fd-button
+                fdType="transparent"
+                fd-dialog-decisive-button
+                [compact]="true"
+                (click)="CancelButtonClicked()"
+            >
+                {{defaultDialogConfig?.cancelButton}}
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>a

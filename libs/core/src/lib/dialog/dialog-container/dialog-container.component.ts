@@ -17,6 +17,9 @@ import { DIALOG_REF, DialogRef } from '../dialog-utils/dialog-ref.class';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
+import { DefaultDialogObject } from '../default-dialog/default-dialog-object';
+import { DefaultNotificationComponent, NotificationDefault } from '../../..';
+import { DefaultDialogComponent } from '../default-dialog/default-dialog.component';
 
 @Component({
     selector: 'fd-dialog-container',
@@ -34,7 +37,7 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
     @ViewChild('contentContainer', { read: ViewContainerRef }) containerRef: ViewContainerRef;
 
     /** @hidden Content that should be placed inside container */
-    childContent: TemplateRef<any> | Type<any> = undefined;
+    childContent: TemplateRef<any> | Type<any> | DefaultDialogObject = undefined;
 
     /** @hidden */
     private _class: string = '';
@@ -73,7 +76,12 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
             this._createFromComponent(this.childContent);
         } else if (this.childContent instanceof TemplateRef) {
             this._createFromTemplate(this.childContent);
+        } else {
+            console.log('chuj');
+            this._createFromDefaultConfiguration(this.childContent);
         }
+        console.log(this.childContent);
+        console.log('XD');
         this._changeDetectorRef.detectChanges();
     }
 
@@ -89,5 +97,14 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
         this.containerRef.clear();
         const context = { $implicit: this._dialogRef, dialogConfig: this.dialogConfig };
         this._componentRef = this.containerRef.createEmbeddedView(content, context);
+    }
+
+    /** @hidden TODO */
+    private _createFromDefaultConfiguration(config: DefaultDialogObject): void {
+        console.log('dupa');
+        this.containerRef.clear();
+        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DefaultDialogComponent);
+        this._componentRef = this.containerRef.createComponent(componentFactory);
+        this._componentRef.instance.defaultDialogConfig = config;
     }
 }

@@ -11,9 +11,10 @@ import { FormModule } from '../form/form.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
 import { LinkModule } from '../link/link.module';
+import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 
 @NgModule({
-    declarations: [MultiInputComponent],
+    declarations: [MultiInputComponent, MultiInputMobileComponent],
     imports: [
         CommonModule,
         TokenModule,

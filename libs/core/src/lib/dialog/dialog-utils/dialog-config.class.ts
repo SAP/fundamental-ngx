@@ -4,6 +4,7 @@
 import { DialogPosition } from './dialog-position.class';
 import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
 import { InjectionToken } from '@angular/core';
+import { DefaultDialogObject } from '../default-dialog/default-dialog-object';
 
 export const DIALOG_CONFIG = new InjectionToken<string[]>('DialogConfig');
 export const DIALOG_DEFAULT_CONFIG = new InjectionToken<string[]>('DialogConfig');
@@ -94,4 +95,6 @@ export class DialogConfig implements DynamicComponentConfig {
      * min-width: 1440px                        - .fd-dialog__content--xl
      * */
     responsivePadding?: boolean = false;
+
+    defaultObject?: DefaultDialogObject;
 }

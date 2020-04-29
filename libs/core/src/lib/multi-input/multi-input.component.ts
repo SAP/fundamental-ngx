@@ -25,6 +25,7 @@ import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
 import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -61,6 +62,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     @ViewChildren(ListItemDirective)
     listItems: QueryList<ListItemDirective>;
+
+    @ViewChild(MultiInputMobileComponent)
+    multiInputMobile: MultiInputMobileComponent;
 
     /** @hidden */
     @ViewChild('searchInputElement')
@@ -152,6 +156,18 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
      */
     @Input()
     allowNewTokens: boolean = false;
+
+    /**
+     * mobile
+     */
+    @Input()
+    mobileMode: boolean = false;
+
+    /**
+     * Whether the multi-input should have show all button.
+     */
+    @Input()
+    showAllButton: boolean = true;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -268,6 +284,11 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     openChangeHandle(open: boolean): void {
         this.open = open;
         this.openChange.emit(this.open);
+        if (this.multiInputMobile && !this.hasOpenDialogs()) {
+            if (open) {
+                this.multiInputMobile.open();
+            }
+        }
         this.onTouched();
         if (this.open) {
             this.focusTrap.activate();
@@ -293,7 +314,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             (previousLength === 0 && this.selected.length === 1) ||
             (previousLength === 1 && this.selected.length === 0)
         ) {
-            this.popoverRef.updatePopover();
+            if (this.popoverRef) {
+                this.popoverRef.updatePopover();
+            }
         }
 
         this.onChange(this.selected);
@@ -303,6 +326,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     public handleKeyDown(event: KeyboardEvent, index: number): void {
         this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
+    }
+
+    hasOpenDialogs(): boolean {
+        return this.multiInputMobile && this.multiInputMobile.hasOpenDialogs();
     }
 
     /** @hidden */
@@ -325,7 +352,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
-        this.popoverRef.updatePopover();
+        if (this.popoverRef) {
+            this.popoverRef.updatePopover();
+        }
     }
 
     /** @hidden */
