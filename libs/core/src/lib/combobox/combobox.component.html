@@ -15,7 +15,7 @@
                    (keyup)="onInputKeyupHandler($event)"
                    [disabled]="disabled"
                    [(ngModel)]="inputText"
-                   (ngModelChange)="handleSearchTermChange()"
+                   (ngModelChange)="handleSearchTermChange($event)"
                    [placeholder]="placeholder">
         </fd-input-group>
     </fd-popover-control>

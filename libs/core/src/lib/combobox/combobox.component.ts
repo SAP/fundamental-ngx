@@ -217,6 +217,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     onTouched: any = () => { };
 
+    /** @hidden */
+    oldInputText: string;
+
     constructor(
         private elRef: ElementRef,
         private menuKeyboardService: MenuKeyboardService,
@@ -227,6 +230,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     ngOnInit(): void {
         this._refreshDisplayedValues();
         this._setupFocusTrap();
+        this.oldInputText = this.inputText;
     }
 
     /** @hidden */
@@ -348,7 +352,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     /** @hidden */
-    handleSearchTermChange(): void {
+    handleSearchTermChange(event?: string): void {
         this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
         if (this.popoverComponent) {
             this.popoverComponent.updatePopover();
@@ -361,11 +365,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         if (!this.inputText) {
             this.isOpenChangeHandle(false);
         }
-        if (this.inputText && this.inputText.length && this.displayedValues[0] && this.displayedValues[0].startsWith(this.inputText)) {
+        if (this.inputText && this.inputText.length && this.displayedValues[0] && this.displayedValues[0].startsWith(this.inputText)
+                && (!this.oldInputText || this.oldInputText.length < this.inputText.length)) {
             const cursorIndex = this.inputText.length;
             this.searchInputElement.nativeElement.value = this.displayedValues[0];
             this.searchInputElement.nativeElement.setSelectionRange(cursorIndex, this.displayedValues[0].length);
         }
+        this.oldInputText = event;
     }
 
     /** @hidden */
