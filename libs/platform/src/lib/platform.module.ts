@@ -8,6 +8,7 @@ import { PlatformMenuModule } from './components/menu/menu.module';
 import { PlatformSelectModule } from './components/select/select.module';
 import { PlatformLinkModule } from './components/link/link.module';
 import { PlatformRadioGroupModule } from './components/form/radio-group/radio-group.module';
+import { PlatformMenuButtonModule } from './components/menu-button/menu-button.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -18,7 +19,8 @@ import { PlatformRadioGroupModule } from './components/form/radio-group/radio-gr
         PlatformMenuModule,
         PlatformSelectModule,
         PlatformLinkModule,
-        PlatformRadioGroupModule
-    ]
+        PlatformRadioGroupModule,
+        PlatformMenuButtonModule,
+    ],
 })
 export class FundamentalNgxPlatformModule {}

@@ -179,8 +179,13 @@ describe('GroupRadioButtonComponent', () => {
         expect(host).toBeTruthy();
     });
 
-    it('should create radio buttons with given values', () => {
+    it('should create radio buttons with given values', async () => {
+        await wait(fixture);
+        fixture.detectChanges();
+
         const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        fixture.detectChanges();
+
         expect(fdradiobuttonsElem.length).toEqual(4);
         fdradiobuttonsElem.forEach((fdradio) => {
             expect(host.seasons.includes(fdradio.nativeElement.getAttribute('ng-reflect-value'))).toBeTruthy();
@@ -194,6 +199,8 @@ describe('GroupRadioButtonComponent', () => {
 
     it('control value should change on click', async () => {
         await wait(fixture);
+        fixture.detectChanges();
+
         expect(host.favoriteSeason).toEqual('Spring');
 
         const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));

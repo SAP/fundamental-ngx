@@ -10,6 +10,8 @@ import { API_FILES } from './api-files';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
+import { PlatformMenuButtonDocsComponent } from './component-docs/platform-menu-button/platform-menu-button-docs.component';
+import {PlatformMenuButtonHeaderComponent } from './component-docs/platform-menu-button/platform-menu-button-header/platform-menu-button-header.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
 import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
@@ -57,6 +59,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PlatformMenuDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
+                ]
+            },
+          {
+                path: 'menu-button',
+                component: PlatformMenuButtonHeaderComponent,
+                children: [
+                    { path: '', component: PlatformMenuButtonDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menuButton } }
                 ]
             },
             {
