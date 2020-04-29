@@ -408,19 +408,26 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     private _defaultFilter(contentArray: any[], searchTerm: any): any[] {
+        let retVal = [];
         if (typeof searchTerm === 'string') {
             const searchLower = searchTerm.toLocaleLowerCase();
-            return contentArray.filter(item => {
+            retVal = contentArray.filter(item => {
                 if (item) {
                     return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
                 }
             });
         } else if (typeof searchTerm === 'object') {
-            return contentArray.filter(item => {
+            retVal = contentArray.filter(item => {
                 if (item === searchTerm) {
                     return item;
                 }
             })
+        }
+
+        if (retVal.length === 1 && retVal[0] === searchTerm) {
+            return contentArray;
+        } else {
+            return retVal;
         }
     }
 
