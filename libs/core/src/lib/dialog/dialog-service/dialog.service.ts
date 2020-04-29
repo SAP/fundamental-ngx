@@ -3,12 +3,13 @@ import { DialogContainerComponent } from '../dialog-container/dialog-container.c
 import { DIALOG_CONFIG, DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { DIALOG_REF, DialogRef } from '../dialog-utils/dialog-ref.class';
+import { DefaultDialogObject } from '../default-dialog/default-dialog-object';
 
 /** Service used to dynamically generate a dialog. */
 @Injectable()
 export class DialogService {
     /** @hidden Collection of existing dialog references */
-    private _dialogs: ComponentRef<DialogContainerComponent>[] = [];
+    public _dialogs: ComponentRef<DialogContainerComponent>[] = [];
 
     constructor(
         @Inject(DynamicComponentService) private _dynamicComponentService: DynamicComponentService,
@@ -33,7 +34,7 @@ export class DialogService {
      * @param contentType Content of the dialog component.
      * @param dialogConfig Configuration of the dialog component.
      */
-    public open(contentType: Type<any> | TemplateRef<any>, dialogConfig?: DialogConfig): DialogRef {
+    public open(contentType: Type<any> | TemplateRef<any> | DefaultDialogObject, dialogConfig?: DialogConfig): DialogRef {
         const dialogRef: DialogRef = new DialogRef();
 
         dialogConfig = this._applyDefaultConfig(dialogConfig, this._defaultConfig || new DialogConfig());

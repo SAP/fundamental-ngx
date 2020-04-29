@@ -22,6 +22,7 @@ import { ResizeModule } from '../utils/directives/resize/resize.module';
 import { TemplateModule } from '../utils/directives/template/template.module';
 import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
 import { DialogFooterButtonComponent } from './dialog-footer-button/dialog-footer-button.component';
+import { DefaultDialogComponent } from './default-dialog/default-dialog.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { DialogFooterButtonComponent } from './dialog-footer-button/dialog-foote
         DialogContainerComponent,
         DialogCloseButtonDirective,
         DialogFooterButtonComponent,
-        DialogDecisiveButtonDirective
+        DialogDecisiveButtonDirective,
+        DefaultDialogComponent
     ],
     imports: [
         BarModule,

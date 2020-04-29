@@ -1,0 +1,10 @@
+{{hasOpenDialogs()}}
+
+<ng-container *ngIf="!hasOpenDialogs()">
+    <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+</ng-container>
+
+<ng-template #template>
+    <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+</ng-template>
