@@ -56,6 +56,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** user's custom classes */
     @Input()
     class: string;
+
     /** @hidden */
     @ViewChild(PopoverComponent)
     popoverRef: PopoverComponent;
@@ -291,15 +292,18 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     openChangeHandle(open: boolean): void {
         this.open = open;
         if (this.mobileMode) {
-            this._dialogOpenChandle(open);
+            this._dialogOpenHandle(open);
         } else {
             this._popoverOpenChandle(open);
         }
     }
 
     selectAllItems(): void {
-        this.writeValue([...this.dropdownValues]);
-        this.selectedChange.emit([...this.dropdownValues]);
+        this.selected = [...this.dropdownValues];
+
+        if (!this.mobileMode) {
+            this._propagateChange();
+        }
     }
 
     /** @hidden */
@@ -315,21 +319,22 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
 
         // Handle popover placement update
-        if (
+        if ((
             (previousLength === 0 && this.selected.length === 1) ||
-            (previousLength === 1 && this.selected.length === 0)
+            (previousLength === 1 && this.selected.length === 0)) &&
+            this.popoverRef
         ) {
-            if (this.popoverRef) {
-                this.popoverRef.updatePopover();
-            }
+            this.popoverRef.updatePopover();
         }
 
-        this.onChange(this.selected);
-        this.selectedChange.emit(this.selected);
+        if (!this.mobileMode) {
+            this._propagateChange();
+        }
     }
 
     /** @hidden */
     public handleKeyDown(event: KeyboardEvent, index: number): void {
+        console.log(this.listItems.toArray());
         this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
     }
 
@@ -381,6 +386,16 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
     }
 
+    dialogDismiss(selectedBackup: any[]): void {
+        this.selected = [...selectedBackup];
+        this.openChangeHandle(false);
+    }
+
+    dialogApprove(): void {
+        this._propagateChange();
+        this.openChangeHandle(false);
+    }
+
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
@@ -421,11 +436,14 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
     }
 
-    private _dialogOpenChandle(open: boolean): void {
-        if (!this.hasOpenDialogs()) {
-            if (open) {
-                this.multiInputMobile.open();
-            }
+    private _dialogOpenHandle(open: boolean): void {
+        if (!this.hasOpenDialogs() && open) {
+            this.multiInputMobile.open([...this.selected]);
         }
+    }
+
+    private _propagateChange(): void {
+        this.onChange(this.selected);
+        this.selectedChange.emit(this.selected);
     }
 }

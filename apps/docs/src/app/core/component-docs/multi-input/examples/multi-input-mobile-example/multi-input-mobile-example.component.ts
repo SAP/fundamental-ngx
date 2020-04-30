@@ -22,4 +22,10 @@ const customConfig: DialogConfig = {
     ]
 })
 export class MultiInputMobileExampleComponent {
+
+    something: any;
+
+    somethingChanged(a) {
+        console.log(a);
+    }
 }
