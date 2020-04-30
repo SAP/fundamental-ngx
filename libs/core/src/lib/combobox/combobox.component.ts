@@ -272,7 +272,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             if (this.searchFn) {
                 this.searchFn();
             }
-            if (this.displayedValues && this.displayedValues.length) {
+            if (this.open && this.displayedValues && this.displayedValues.length) {
                 this.onMenuClickHandler(0);
                 this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.remove('is-expanded');
             }
@@ -289,6 +289,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeyupHandler(event: KeyboardEvent): void {
+        console.log('keyup handler');
         if (
             this.openOnKeyboardEvent &&
             this.inputText &&
@@ -304,6 +305,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                 let foundCloseMatch = false;
                 this.displayedValues.forEach(displayedValue => {
                     if (displayedValue.startsWith(this.inputText) && !foundCloseMatch) {
+                        console.log('found close match');
                         foundCloseMatch = true;
                         const selectionStartIndex = this.inputText.length;
                         this.searchInputElement.nativeElement.value = displayedValue;
@@ -369,6 +371,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     handleSearchTermChange(): void {
+        console.log('handleSearchTermChange');
         let foundMatch = false;
         this.dropdownValues.forEach((value) => {
             if (this.displayFn(value) === this.inputText) {
