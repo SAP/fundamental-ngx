@@ -12,7 +12,8 @@ import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
 import { LinkModule } from '../link/link.module';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { BarModule, ButtonModule } from '../..';
+import { BarModule } from '../bar/bar.module';
+import { ButtonModule } from '../button/button.module';
 
 @NgModule({
     declarations: [MultiInputComponent, MultiInputMobileComponent],
@@ -33,4 +34,5 @@ import { BarModule, ButtonModule } from '../..';
     ],
     exports: [MultiInputComponent]
 })
-export class MultiInputModule {}
+export class MultiInputModule {
+}

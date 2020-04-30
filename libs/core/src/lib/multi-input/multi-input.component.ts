@@ -26,7 +26,7 @@ import { FormStates } from '../form/form-control/form-states';
 import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { DialogConfig } from '../..';
+import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a

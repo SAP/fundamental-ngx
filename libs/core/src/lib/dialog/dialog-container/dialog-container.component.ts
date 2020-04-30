@@ -18,7 +18,6 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
 import { DefaultDialogObject } from '../default-dialog/default-dialog-object';
-import { DefaultNotificationComponent, NotificationDefault } from '../../..';
 import { DefaultDialogComponent } from '../default-dialog/default-dialog.component';
 
 @Component({
