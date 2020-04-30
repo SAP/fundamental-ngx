@@ -63,32 +63,29 @@ describe('SelectComponent', () => {
         expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
     });
 
-    it('should open', fakeAsync(() => {
-        component.isOpen = true;
+    it('should open', async () => {
+        component.open();
 
-        fixture.detectChanges();
-        tick();
-
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeTruthy();
-    }));
-
-    it('should close', fakeAsync(() => {
-        component.isOpen = true;
-
-        fixture.detectChanges();
-        tick();
+        await wait(fixture);
 
         expect(fixture.nativeElement.querySelector('#option-1')).toBeTruthy();
-        component.isOpen = false;
+    });
 
-        fixture.detectChanges();
-        tick();
+    it('should close', async () => {
+        component.open();
+
+        await wait(fixture);
+
+        expect(fixture.nativeElement.querySelector('#option-1')).toBeTruthy();
+        component.close();
+
+        await wait(fixture);
 
         expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
-    }));
+    });
 
     it('should open on click', async () => {
-        component.isOpen = false;
+        component.close();
         element.nativeElement.querySelector('.fd-button').click();
 
         await wait(fixture);
@@ -98,7 +95,7 @@ describe('SelectComponent', () => {
     });
 
     it('should close on click while open', async () => {
-        component.isOpen = true;
+        component.open();
 
         await wait(fixture);
 
@@ -112,7 +109,7 @@ describe('SelectComponent', () => {
     });
 
     it('should close on outside click', async () => {
-        component.isOpen = true;
+        component.open();
 
         await wait(fixture);
 
@@ -126,7 +123,7 @@ describe('SelectComponent', () => {
 
     it('should select an option', async () => {
         spyOn(component.valueChange, 'emit').and.callThrough();
-        component.isOpen = true;
+        component.open();
 
         await wait(fixture);
 
@@ -289,15 +286,9 @@ describe('SelectComponent', () => {
     });
 
     it('Should support alphanumerical keys focus', async () => {
-        component.isOpen = true;
+        component.open();
 
         await wait(fixture);
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
-
-        await wait(fixture);
-
-        expect(document.activeElement).toBe(component['_options'][0].getHtmlElement());
 
         component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
 
@@ -305,10 +296,16 @@ describe('SelectComponent', () => {
 
         expect(document.activeElement).toBe(component['_options'][1].getHtmlElement());
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowDown'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
 
         await wait(fixture);
 
         expect(document.activeElement).toBe(component['_options'][2].getHtmlElement());
+
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowUp'}));
+
+        await wait(fixture);
+
+        expect(document.activeElement).toBe(component['_options'][1].getHtmlElement());
     });
 });

@@ -10,12 +10,10 @@ import {
     forwardRef,
     HostListener,
     Input,
-    OnChanges,
     OnDestroy,
     OnInit,
     Output,
     QueryList,
-    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -57,7 +55,7 @@ export interface OptionStatusChange {
         }
     ]
 })
-export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
 
     /** Id of the control. */
     @Input()
@@ -86,10 +84,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** Placeholder for the select. Appears in the triggerbox if no option is selected. */
     @Input()
     placeholder: string;
-
-    /** Open state of the select. */
-    @Input()
-    isOpen: boolean = false;
 
     /** Sets value of the selected option. */
     @Input('value') set value(value: any) {
@@ -159,6 +153,10 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     @Input()
     loading: boolean = false;
 
+    /** Time to wait in milliseconds after the last keydown before focusing or selecting option based on alphanumeric keys. */
+    @Input()
+    typeaheadDebounceInterval: number = 250;
+
     /** Binds to control aria-labelledBy attribute */
     @Input()
     ariaLabelledBy: string = null;
@@ -199,6 +197,9 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** Text value displayed in select control */
     selectViewValue: string;
+
+    /** Whether popover is opened */
+    isOpen: boolean = false;
 
     /** @hidden Cashed options as as Array */
     private _options: OptionComponent[];
@@ -264,13 +265,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes['isOpen'] && !changes['isOpen'].firstChange) {
-            this.isOpen ? this.open() : this.close();
-        }
-    }
-
-    /** @hidden */
     ngAfterContentInit(): void {
         this.resizeScrollHandler();
         this._listenOnOptionChanges();
@@ -280,7 +274,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** @hidden */
     ngAfterViewInit(): void {
         this._listenOnControlTouched();
-        this._checkInitialOpenState();
         this._setOptionsArray();
     }
 
@@ -414,13 +407,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
         }
     }
 
-    /** @hidden Open select if it has been initialized with [isOpen] = "true" */
-    private _checkInitialOpenState(): void {
-        if (this.isOpen) {
-            this.open();
-        }
-    }
-
     /** @hidden Function used to setup new listener reacting on option select events.*/
     private _listenOnSelectedOption(): void {
         this._subscriptions.add(
@@ -435,7 +421,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
             filter(_ => this.isInteractive),
             filter((event: KeyboardEvent) => KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical'))
         );
-        const trigger = source.pipe(debounceTime(250));
+        const trigger = source.pipe(debounceTime(this.typeaheadDebounceInterval));
 
         this._subscriptions.add(
             source.pipe(
