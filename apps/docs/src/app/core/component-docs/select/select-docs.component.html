@@ -32,7 +32,7 @@
     <code>[controlTemplate]</code> input. Select provides the following context values to the template:
     <ul>
         <li>Text value of selected option - <code>implicit</code></li>
-        <li>Reference to selected option - <code>option</code></li>
+        <li>Reference to selected option - <code>selected</code></li>
     </ul>
     Selected option as a context to custom template.
 </description>
@@ -54,21 +54,6 @@
     <fd-select-nested-options></fd-select-nested-options>
 </component-example>
 <code-example [exampleFiles]="selectExtendedOptions"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'custom-view-value'" [componentName]="'select'">
-    Custom View Value
-</fd-docs-section-title>
-<description>
-    The value which appears inside the Select control can be easily customized using the OptionComponent
-    <code>[viewValue]</code>
-    input.
-</description>
-<component-example>
-    <fd-select-view-value-example></fd-select-view-value-example>
-</component-example>
-<code-example [exampleFiles]="selectViewValue"></code-example>
 
 <separator></separator>
 

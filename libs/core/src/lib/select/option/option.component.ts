@@ -61,10 +61,6 @@ export class OptionComponent implements OnInit, OnDestroy {
     @Input()
     disabled: boolean = false;
 
-    /** Override for the view value of the option. If none is provided, the text content is used. */
-    @Input()
-    viewValue: string;
-
     /** @hidden */
     @HostBinding('class.is-selected')
     selected: boolean = false;
@@ -89,7 +85,7 @@ export class OptionComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     constructor(
-        private _elRef: ElementRef,
+        private _elementRef: ElementRef,
         private _selectProxy: SelectProxy,
         private _changeDetRef: ChangeDetectorRef
     ) {}
@@ -106,7 +102,7 @@ export class OptionComponent implements OnInit, OnDestroy {
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
     get viewValueText(): string {
-        return this.viewValue || this.value;
+        return (this._elementRef.nativeElement.textContent || '').trim();
     }
 
     /** Set control selected state
@@ -124,12 +120,12 @@ export class OptionComponent implements OnInit, OnDestroy {
 
     /** Focuses the element. */
     focus(): void {
-        (this._elRef.nativeElement as HTMLElement).focus();
+        (this._elementRef.nativeElement as HTMLElement).focus();
     }
 
     /** Returns HTMLElement representation of the component. */
     getHtmlElement(): HTMLElement {
-        return this._elRef.nativeElement as HTMLElement;
+        return this._elementRef.nativeElement as HTMLElement;
     }
 
     /** @hidden */

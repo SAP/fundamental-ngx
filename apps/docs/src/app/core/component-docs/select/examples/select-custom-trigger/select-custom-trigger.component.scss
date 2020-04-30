@@ -6,6 +6,11 @@
         padding: 0 .5rem;
         animation: spin 1s infinite ease-in-out;
     }
+
+    span {
+        padding: 0 .5rem;
+        color: darkgrey;
+    }
 }
 
 @keyframes spin {

@@ -10,7 +10,6 @@ import { SelectNestedOptionsComponent } from './examples/select-nested-options/s
 import { SelectAddingExampleComponent } from './examples/select-adding-example/select-adding-example.component';
 import { SelectCustomTriggerComponent } from './examples/select-custom-trigger/select-custom-trigger.component';
 import { SelectMaxHeightExampleComponent } from './examples/select-height/select-max-height-example.component';
-import { SelectViewValueExampleComponent } from './examples/select-view-value-example/select-view-value-example.component';
 import { SelectProgrammaticExampleComponent } from './examples/select-programmatic-example/select-programmatic-example.component';
 import { DialogModule, FormModule, ListModule, SelectModule } from '@fundamental-ngx/core';
 import { SelectSemanticStateExampleComponent } from './examples/select-semantic-state-example/select-semantic-state-example.component';
@@ -48,7 +47,6 @@ const routes: Routes = [
         SelectAddingExampleComponent,
         SelectCustomTriggerComponent,
         SelectMaxHeightExampleComponent,
-        SelectViewValueExampleComponent,
         SelectProgrammaticExampleComponent,
         SelectSemanticStateExampleComponent
     ]

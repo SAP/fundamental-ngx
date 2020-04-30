@@ -11,7 +11,7 @@
 
     <fd-option *ngFor="let item of list ; index as index"
                [disabled]="item.disabled ? true : false"
-               [viewValue]="item.label" [value]="item">
+               [value]="item">
 
         <ng-template [ngIf]="!optionValueTemplate">
             <fd-icon [glyph]="item.icon" size="m" class="fd-template-icon icon-margin"></fd-icon>

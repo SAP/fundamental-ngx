@@ -159,9 +159,13 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     @Input()
     loading: boolean = false;
 
-    /** Binds to control aria-labelledby attribute */
+    /** Binds to control aria-labelledBy attribute */
     @Input()
-    labelledby: string;
+    ariaLabelledBy: string = null;
+
+    /** Sets control aria-label attribute value */
+    @Input()
+    ariaLabel: string = null;
 
     /** Event emitted when the popover open state changes. */
     @Output()
@@ -193,8 +197,11 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** Current selected option component reference. */
     selected: OptionComponent;
 
-    /** @hidden */
-    optionsArray: OptionComponent[];
+    /** Text value displayed in select control */
+    selectViewValue: string;
+
+    /** @hidden Cashed options as as Array */
+    private _options: OptionComponent[];
 
     /** @hidden */
     private _focusTrap: FocusTrap;
@@ -267,6 +274,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     ngAfterContentInit(): void {
         this.resizeScrollHandler();
         this._listenOnOptionChanges();
+        this._setSelectViewValue();
     }
 
     /** @hidden */
@@ -279,11 +287,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    /** Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder. */
-    get selectViewValue(): string {
-        return this.selected ? this.selected.viewValueText : this.placeholder;
     }
 
     /** Whether control can be interacted with */
@@ -352,6 +355,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** @hidden */
     setSelectedOption({option, controlChange}: OptionStatusChange): void {
         this.selected = option;
+        this._setSelectViewValue();
 
         if (controlChange) {
             this._updateValue(option.value);
@@ -370,6 +374,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
                     setTimeout(() => {
                         if (this.selected === undefined && this.unselectMissingOption) {
                             this._updateValue(undefined);
+                            this._setSelectViewValue();
                             this._changeDetectorRef.markForCheck();
                         }
                     });
@@ -385,7 +390,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** @hidden */
     private _setSelectedOption(): void {
-        this.selected = this.options.find(option => option.selected);
+        this.selected = this._options.find(option => option.selected);
     }
 
     /** @hidden */
@@ -443,7 +448,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** @hidden Search for options by query */
     private _searchOption(query: string): void {
-        const validOptions = this.optionsArray.filter(options => options.value.toLowerCase().startsWith(query));
+        const validOptions = this._options.filter(options => options.viewValueText.toLowerCase().startsWith(query));
 
         if (!validOptions.length) {
             return;
@@ -471,7 +476,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** @hidden */
     private _interactWithOptions(action: 'previous' | 'next'): void {
-        if (!this.options.length) {
+        if (!this._options.length) {
             return;
         }
 
@@ -494,18 +499,18 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
         switch (action) {
             case 'onOpen':
-                focusAsync(this.selected || this.options.first);
+                focusAsync(this.selected || this._options[0]);
                 break;
             case 'next':
-                activeIndex = this._focusedOptionIndex(this.optionsArray, document.activeElement);
-                if (activeIndex < this.options.length - 1) {
-                    this.optionsArray[++activeIndex].focus();
+                activeIndex = this._focusedOptionIndex(this._options, document.activeElement);
+                if (activeIndex < this._options.length - 1) {
+                    this._options[++activeIndex].focus();
                 }
                 break;
             case 'previous':
-                activeIndex = this._focusedOptionIndex(this.optionsArray, document.activeElement);
+                activeIndex = this._focusedOptionIndex(this._options, document.activeElement);
                 if (activeIndex > 0) {
-                    this.optionsArray[--activeIndex].focus();
+                    this._options[--activeIndex].focus();
                 }
                 break;
         }
@@ -517,17 +522,17 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
      * 'previous'   - select previous element
      * */
     private _selectOption(action: 'next' | 'previous'): void {
-        let activeIndex = this.optionsArray.indexOf(this.selected);
+        let activeIndex = this._options.indexOf(this.selected);
 
         switch (action) {
             case 'next':
-                if (activeIndex < this.options.length - 1) {
-                    this.setSelectedOption({option: this.optionsArray[++activeIndex], controlChange: true});
+                if (activeIndex < this._options.length - 1) {
+                    this.setSelectedOption({option: this._options[++activeIndex], controlChange: true});
                 }
                 break;
             case 'previous':
                 if (activeIndex > 0) {
-                    this.setSelectedOption({option: this.optionsArray[--activeIndex], controlChange: true});
+                    this.setSelectedOption({option: this._options[--activeIndex], controlChange: true});
                 }
                 break;
         }
@@ -535,12 +540,17 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** @hidden */
     private _setOptionsArray(): void {
-        this.optionsArray = this.options.toArray();
+        this._options = this.options.toArray();
     }
 
     /** @hidden */
     private _focusedOptionIndex(options: OptionComponent[], activeOption: Element): number {
         return options.map(option => option.getHtmlElement())
             .indexOf(activeOption as HTMLElement);
+    }
+
+    /** @hidden Sets new select control text */
+    private _setSelectViewValue(): void {
+        this.selectViewValue = this.selected ? this.selected.viewValueText : this.placeholder;
     }
 }

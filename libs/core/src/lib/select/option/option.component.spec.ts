@@ -92,12 +92,4 @@ describe('OptionComponent', () => {
         expect(keyHandlerSpy).toHaveBeenCalledTimes(3);
         expect(component.selected).toEqual(false);
     });
-
-    it('should support custom view value', () => {
-        component.value = 'value';
-        component.viewValue = 'viewValue';
-        fixture.detectChanges();
-
-        expect(component.viewValueText).toBe('viewValue')
-    });
 });

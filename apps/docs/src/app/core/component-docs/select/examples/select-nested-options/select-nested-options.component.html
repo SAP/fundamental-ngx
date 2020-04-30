@@ -15,8 +15,8 @@
         <span fd-list-secondary>{{option.kCal}} kcal</span>
     </fd-option>
 
-    <ng-template #customSelectTemplate let-option>
-        {{option?.name || 'Select an option'}}
+    <ng-template #customSelectTemplate let-selected="selected">
+        {{selected?.value.name || 'Select an option'}}
     </ng-template>
 
 </fd-select>

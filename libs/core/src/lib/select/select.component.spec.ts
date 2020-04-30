@@ -10,7 +10,7 @@ import { OptionComponent } from '@fundamental-ngx/core';
         <fd-select [(value)]="value" formControlName="selectControl">
             <fd-option id="option-1" [value]="'value-1'">Test1</fd-option>
             <fd-option id="option-2" [value]="'value-2'">Test2</fd-option>
-            <fd-option id="option-3" [value]="'value-3'" [viewValue]="'view-value-3'">Test3</fd-option>
+            <fd-option id="option-3" [value]="'value-3'">Test3</fd-option>
             <fd-option id="option-4" *ngIf="optionVisible" [value]="'value-4'">Test4</fd-option>
         </fd-select>
     `
@@ -161,16 +161,6 @@ describe('SelectComponent', () => {
         expect(component.options.find(option => option.value === testValue).selected).toBe(true);
     });
 
-    it('should support custom view values', async () => {
-        const selectValue = 'value-3';
-        fixture.componentInstance.value = selectValue;
-
-        await wait(fixture);
-
-        expect(component.selectViewValue).toBe('view-value-3');
-        expect(fixture.componentInstance.value).toBe(selectValue);
-    });
-
     it('Should unselect option', async () => {
         const selectValue = 'value-4';
         component.unselectMissingOption = true;
@@ -283,19 +273,19 @@ describe('SelectComponent', () => {
 
         await wait(fixture);
 
-        expect(component.selected.viewValueText).toEqual('value-1');
+        expect(component.selected.value).toEqual('value-1');
 
         component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
 
         await wait(fixture);
 
-        expect(component.selected.viewValueText).toEqual('value-2');
+        expect(component.selected.value).toEqual('value-2');
 
         component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowDown'}));
 
         await wait(fixture);
 
-        expect(component.selected.viewValueText).toEqual('view-value-3');
+        expect(component.selected.value).toEqual('value-3');
     });
 
     it('Should support alphanumerical keys focus', async () => {
@@ -307,18 +297,18 @@ describe('SelectComponent', () => {
 
         await wait(fixture);
 
-        expect(document.activeElement).toBe(component.optionsArray[0].getHtmlElement());
+        expect(document.activeElement).toBe(component['_options'][0].getHtmlElement());
 
         component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
 
         await wait(fixture);
 
-        expect(document.activeElement).toBe(component.optionsArray[1].getHtmlElement());
+        expect(document.activeElement).toBe(component['_options'][1].getHtmlElement());
 
         component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowDown'}));
 
         await wait(fixture);
 
-        expect(document.activeElement).toBe(component.optionsArray[2].getHtmlElement());
+        expect(document.activeElement).toBe(component['_options'][2].getHtmlElement());
     });
 });

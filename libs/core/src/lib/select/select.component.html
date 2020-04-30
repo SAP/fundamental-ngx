@@ -48,13 +48,14 @@
              [attr.aria-readonly]="readonly"
              [attr.aria-controls]="controlId + '-list-box'"
              [attr.aria-haspopup]="isInteractive"
-             [attr.aria-labelledby]="labelledby"
-             [attr.aria-activedescendant]="selected?.id">
+             [attr.aria-label]="ariaLabel"
+             [attr.aria-labelledby]="ariaLabelledBy"
+             [attr.aria-activedescendant]="selected?.id || null">
 
             <div class="fd-select__content">
                 <ng-container
                     [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
-                    [ngTemplateOutletContext]="{$implicit: selectViewValue, option: selected}">
+                    [ngTemplateOutletContext]="{$implicit: selectViewValue, selected: selected}">
                 </ng-container>
 
                 <ng-template #defaultSelectContent>

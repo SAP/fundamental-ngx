@@ -26,9 +26,6 @@ import * as selectAddingTs from '!raw-loader!./examples/select-adding-example/se
 import * as selectFormHtml from '!raw-loader!./examples/select-forms/select-forms.component.html';
 import * as selectFormTs from '!raw-loader!./examples/select-forms/select-forms.component.ts';
 
-import * as selectViewValueHtml from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.html';
-import * as selectViewValueTs from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.ts';
-
 import * as selectMaxHeightHtml from '!raw-loader!./examples/select-height/select-max-height-example.component.html';
 import * as selectMaxHeightTs from '!raw-loader!./examples/select-height/select-max-height-example.component.ts';
 
@@ -143,19 +140,6 @@ export class SelectDocsComponent {
         }
     ];
 
-    selectViewValue: ExampleFile[] = [
-        {
-            language: 'html',
-            code: selectViewValueHtml,
-            fileName: 'select-view-value-example'
-        },
-        {
-            language: 'typescript',
-            component: 'SelectViewValueExampleComponent',
-            code: selectViewValueTs,
-            fileName: 'select-view-value-example'
-        }
-    ];
     selectSemantic: ExampleFile[] = [
         {
             language: 'html',
