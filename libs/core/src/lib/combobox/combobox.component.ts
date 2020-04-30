@@ -212,6 +212,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    oldInputText: string;
+
+    /** @hidden */
     onChange: any = () => { };
 
     /** @hidden */
@@ -287,14 +290,29 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     onInputKeyupHandler(event: KeyboardEvent): void {
         if (this.openOnKeyboardEvent &&
-            this.inputText &&
-            this.inputText.length &&
-            event.key !== 'Escape' &&
-            event.key !== ' ' &&
-            event.key !== 'Tab' &&
-            event.key !== 'Enter') {
+                this.inputText &&
+                this.inputText.length &&
+                event.key !== 'Escape' &&
+                event.key !== ' ' &&
+                event.key !== 'Tab' &&
+                event.key !== 'Enter') {
             this.isOpenChangeHandle(true);
+            if (this.open && this.displayedValues && this.displayedValues.length &&
+                    (!this.oldInputText || this.oldInputText.length < this.inputText.length)) {
+                let foundCloseMatch = false;
+                this.displayedValues.forEach(displayedValue => {
+                    if (displayedValue.startsWith(this.inputText) && !foundCloseMatch) {
+                        foundCloseMatch = true;
+                        const selectionStartIndex = this.inputText.length;
+                        this.searchInputElement.nativeElement.value = displayedValue;
+                        this.searchInputElement.nativeElement.setSelectionRange(selectionStartIndex, displayedValue.length);
+                    }
+                })
+            }
+        } else if (event.key === 'Enter') {
+            this.searchInputElement.nativeElement.setSelectionRange(this.inputText.length, this.inputText.length);
         }
+        this.oldInputText = this.inputText;
     }
 
     /** @hidden */
