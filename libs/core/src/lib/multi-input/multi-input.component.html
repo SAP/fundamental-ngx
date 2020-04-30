@@ -23,7 +23,8 @@
 </div>
 
 <fd-multi-input-mobile [controlTemplate]="control" [listTemplate]="list" *ngIf="mobileMode"
-                       (onAllItemsSelected)="selectAllItems()" (dialogClose)="openChangeHandle(false)"></fd-multi-input-mobile>
+                       (onAllItemsSelected)="selectAllItems()" (dialogApprove)="dialogApprove()"
+                       (dialogDismiss)="dialogDismiss($event)"></fd-multi-input-mobile>
 
 <ng-template #control>
     <fd-input-group
@@ -70,6 +71,7 @@
         [style.maxHeight]="maxHeight"
     >
         <li
+            #lists
             (click)="handleSelect(selected.indexOf(value) === -1, value, $event)"
             fd-list-item
             class="fd-multi-input-item"

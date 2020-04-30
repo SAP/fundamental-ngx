@@ -1,4 +1,6 @@
 <fd-multi-input [mobileMode]="true"
                 [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
                 [placeholder]="'Search here...'"
+                [(ngModel)]="something"
+                (ngModelChange)="somethingChanged($event)"
 ></fd-multi-input>

@@ -1,0 +1,13 @@
+<button fd-button (click)="openDialog()">
+    Open Dialog From Object
+</button>
+
+<ng-template #dialogContent>
+    <div style="padding: 0 1rem">
+        You can also create dialog without building whole template.
+    </div>
+</ng-template>
+
+<p>
+    Close Reason: {{ reason }}
+</p>

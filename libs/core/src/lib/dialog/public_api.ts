@@ -9,4 +9,5 @@ export * from './dialog-utils/dialog-position.class';
 export * from './dialog-footer/dialog-footer.component';
 export * from './dialog-header/dialog-header.component';
 export * from './default-dialog/default-dialog.component';
+export * from './default-dialog/default-dialog-object';
 export * from './dialog-container/dialog-container.component';

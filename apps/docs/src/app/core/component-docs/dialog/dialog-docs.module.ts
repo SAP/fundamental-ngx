@@ -18,6 +18,7 @@ import { SecondDialogExampleComponent } from './examples/stacked-dialogs/second-
 import { DialogBackdropContainerExampleComponent } from './examples/dialog-backdrop-container/dialog-backdrop-container-example.component';
 import { DialogComplexExampleComponent } from './examples/dialog-complex/dialog-complex-example.component';
 import { DialogStateExample } from './examples/dialog-state/dialog-state-example.component';
+import { DialogObjectComponent } from './examples/dialog-object/dialog-object.component';
 
 const routes: Routes = [
     {
@@ -47,7 +48,8 @@ const routes: Routes = [
         DialogPositionExampleComponent,
         TemplateBasedDialogExampleComponent,
         ComponentBasedDialogExampleComponent,
-        DialogBackdropContainerExampleComponent
+        DialogBackdropContainerExampleComponent,
+        DialogObjectComponent
     ],
     entryComponents: [
         DialogExampleComponent,
