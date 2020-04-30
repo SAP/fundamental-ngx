@@ -9,6 +9,8 @@ import { PlatformSelectModule } from './components/select/select.module';
 import { PlatformLinkModule } from './components/link/link.module';
 import { PlatformRadioGroupModule } from './components/form/radio-group/radio-group.module';
 import { PlatformInfoLabelModule } from './components/info-label/info-label.module';
+import { PlatformMenuButtonModule } from './components/menu-button/menu-button.module';
+import { PlatformSplitMenuButtonModule } from './components/split-menu-button/split-menu-button.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -20,7 +22,9 @@ import { PlatformInfoLabelModule } from './components/info-label/info-label.modu
         PlatformSelectModule,
         PlatformLinkModule,
         PlatformRadioGroupModule,
-        PlatformInfoLabelModule	
-    ]
+        PlatformInfoLabelModule,
+        PlatformMenuButtonModule,
+        PlatformSplitMenuButtonModule,
+    ],
 })
 export class FundamentalNgxPlatformModule {}

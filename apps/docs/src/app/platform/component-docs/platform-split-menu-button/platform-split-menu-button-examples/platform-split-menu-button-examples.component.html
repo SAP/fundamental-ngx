@@ -1,0 +1,83 @@
+<h2>Cozy Split Menu Button</h2>
+<ng-container *ngFor="let buttonType of buttonTypes">
+    <fdp-split-menu-button
+        [id]="'split-menu-button3'"
+        [name]="'split-menu-button3'"
+        [menu]="basicMenuCozy"
+        [buttonLabel]="label"
+        [icon]="'world'"
+        [type]="buttonType"
+        (primaryButtonClick)="onPrimaryButtonClickCozy()"
+    >
+    </fdp-split-menu-button>
+
+    <span>&nbsp;&nbsp; {{ buttonType | titlecase }}</span>
+    <br />
+    <br />
+</ng-container>
+
+<fdp-split-menu-button
+    [id]="'split-menu-button3'"
+    [name]="'split-menu-button3'"
+    [menu]="basicMenuCozy"
+    [disabled]="true"
+    [buttonLabel]="label"
+    [icon]="'world'"
+    (primaryButtonClick)="onPrimaryButtonClickCozy()"
+>
+</fdp-split-menu-button>
+<span>&nbsp;&nbsp;Disabled</span>
+<br />
+<br />
+<div>Selected Item: {{ selectedCozyItem }}</div>
+<br />
+<br />
+<br />
+<br />
+
+<h2>Compact Split Menu Button</h2>
+<ng-container *ngFor="let buttonType of buttonTypes">
+    <fdp-split-menu-button
+        [id]="'split-menu-button3'"
+        [name]="'split-menu-button3'"
+        [menu]="basicMenuCompact"
+        [buttonLabel]="label"
+        [contentDensity]="'compact'"
+        [icon]="'world'"
+        [type]="buttonType"
+        (primaryButtonClick)="onPrimaryButtonClickCompact()"
+    >
+    </fdp-split-menu-button>
+
+    <span>&nbsp;&nbsp; {{ buttonType | titlecase }}</span>
+    <br />
+    <br />
+</ng-container>
+
+<fdp-split-menu-button
+    [id]="'split-menu-button3'"
+    [name]="'split-menu-button3'"
+    [menu]="basicMenuCompact"
+    [contentDensity]="'compact'"
+    [disabled]="true"
+    [buttonLabel]="label"
+    [icon]="'world'"
+    (primaryButtonClick)="onPrimaryButtonClickCompact()"
+>
+</fdp-split-menu-button>
+<span>&nbsp;&nbsp;Disabled</span>
+<br />
+<br />
+<div>Selected Item: {{ selectedCompactItem }}</div>
+
+<fdp-menu #basicMenuCozy id="basic-menu">
+    <fdp-menu-item (itemSelect)="onItemSelectCozy('First Item')">First Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozy('Second Item')">Second Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozy('Third Item')">Third Item</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCompact id="basic-menu">
+    <fdp-menu-item (itemSelect)="onItemSelectCompact('First Item')">First Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompact('Second Item')">Second Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompact('Third Item')">Third Item</fdp-menu-item>
+</fdp-menu>
