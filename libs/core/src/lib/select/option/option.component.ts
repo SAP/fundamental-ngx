@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { isKey } from '../../utils/functions/is-key';
+import { KeyUtil } from '../../utils/functions/key-util';
 import { SelectProxy } from '../select-proxy.service';
 
 let optionUniqueId: number = 0;
@@ -76,7 +76,7 @@ export class OptionComponent implements OnInit, OnDestroy {
     @HostListener('click')
     @HostListener('keydown', ['$event'])
     selectionHandler(event?: KeyboardEvent): void {
-        if (!event || event && (isKey(event, ' ') || isKey(event, 'Enter'))) {
+        if (!event || event && KeyUtil.isKey(event, [' ', 'Enter'])) {
             if (event) {
                 event.preventDefault();
                 event.stopPropagation();

@@ -277,4 +277,48 @@ describe('SelectComponent', () => {
 
         expect(component.isOpen).toBeTrue();
     });
+
+    it('Should support alphanumerical keys selection', async () => {
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
+
+        await wait(fixture);
+
+        expect(component.selected.viewValueText).toEqual('value-1');
+
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
+
+        await wait(fixture);
+
+        expect(component.selected.viewValueText).toEqual('value-2');
+
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowDown'}));
+
+        await wait(fixture);
+
+        expect(component.selected.viewValueText).toEqual('view-value-3');
+    });
+
+    it('Should support alphanumerical keys focus', async () => {
+        component.isOpen = true;
+
+        await wait(fixture);
+
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
+
+        await wait(fixture);
+
+        expect(document.activeElement).toBe(component.optionsArray[0].getHtmlElement());
+
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
+
+        await wait(fixture);
+
+        expect(document.activeElement).toBe(component.optionsArray[1].getHtmlElement());
+
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowDown'}));
+
+        await wait(fixture);
+
+        expect(document.activeElement).toBe(component.optionsArray[2].getHtmlElement());
+    });
 });

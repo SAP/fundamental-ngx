@@ -22,12 +22,13 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import focusTrap, { FocusTrap } from 'focus-trap';
-import { isKey } from '../utils/functions/is-key';
+import { KeyUtil } from '../utils/functions/key-util';
 import { SelectProxy } from './select-proxy.service';
+import { buffer, debounceTime, filter, map } from 'rxjs/operators';
 
 let selectUniqueId: number = 0;
 
@@ -193,6 +194,9 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     selected: OptionComponent;
 
     /** @hidden */
+    optionsArray: OptionComponent[];
+
+    /** @hidden */
     private _focusTrap: FocusTrap;
 
     /** @hidden */
@@ -207,25 +211,25 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        if (isKey(event, 'ArrowUp')) {
+        if (KeyUtil.isKey(event, 'ArrowUp')) {
             if (this.isInteractive) {
-                this._focusOption('previous');
+                this._interactWithOptions('previous');
             }
             event.preventDefault();
 
-        } else if (isKey(event, 'ArrowDown')) {
+        } else if (KeyUtil.isKey(event, 'ArrowDown')) {
             if (this.isInteractive) {
-                this._focusOption('next');
+                this._interactWithOptions('next');
             }
             event.preventDefault();
 
-        } else if (isKey(event, 'Escape')) {
+        } else if (KeyUtil.isKey(event, 'Escape')) {
             if (this.isInteractive) {
                 this.close();
             }
             event.preventDefault();
 
-        } else if (isKey(event, ' ') || isKey(event, 'Enter')) {
+        } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
             if (this.isInteractive) {
                 this.toggle();
             }
@@ -248,7 +252,8 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** @hidden */
     ngOnInit(): void {
         this._setupFocusTrap();
-        this._setOptionsSelectionListener();
+        this._listenOnSelectedOption();
+        this._listenOptionFiltering();
     }
 
     /** @hidden */
@@ -260,13 +265,15 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this.resizeScrollHandler();
         this._listenOnOptionChanges();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._listenOnControlTouched();
         this._checkInitialOpenState();
-        this.resizeScrollHandler();
+        this._setOptionsArray();
     }
 
     /** @hidden */
@@ -297,7 +304,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     /** Opens the select popover body. */
     open(): void {
         if (this.isInteractive) {
-            this.onTouched();
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
             this._focusTrap.activate();
@@ -354,51 +360,12 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
         this._changeDetectorRef.markForCheck();
     }
 
-
-    /** Method used to focus options
-     * @param action
-     * 'onOpen'     - focus currently selected or first
-     * 'next'       - focus next element
-     * 'previous'   - focus previous element
-     * */
-    private _focusOption(action: 'onOpen' | 'next' | 'previous'): void {
-        let activeIndex: number;
-        let optionsArray: OptionComponent[];
-        const focusAsync = (option: OptionComponent) => setTimeout(() => option.focus(), 10);
-        const findActiveIndex = (options: OptionComponent[], activeOption: Element): number => options
-            .map(option => option.getHtmlElement())
-            .indexOf(activeOption as HTMLElement);
-
-        if (!this.options.length) {
-            return;
-        }
-
-        switch (action) {
-            case 'onOpen':
-                focusAsync(this.selected || this.options.first);
-                break;
-            case 'next':
-                optionsArray = this.options.toArray();
-                activeIndex = findActiveIndex(optionsArray, document.activeElement);
-                if (activeIndex < this.options.length - 1) {
-                    optionsArray[++activeIndex].focus();
-                }
-                break;
-            case 'previous':
-                optionsArray = this.options.toArray();
-                activeIndex = findActiveIndex(optionsArray, document.activeElement);
-                if (activeIndex > 0) {
-                    optionsArray[--activeIndex].focus();
-                }
-                break;
-        }
-    }
-
     /** @hidden */
     private _listenOnOptionChanges(): void {
         this._subscriptions.add(
             this.options.changes
                 .subscribe(_ => {
+                    this._setOptionsArray();
                     this._setSelectedOption();
                     setTimeout(() => {
                         if (this.selected === undefined && this.unselectMissingOption) {
@@ -407,6 +374,12 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
                         }
                     });
                 })
+        )
+    }
+
+    private _listenOnControlTouched(): void {
+        this._subscriptions.add(
+            fromEvent(this.controlElementRef.nativeElement, 'blur').subscribe(_ => this.onTouched())
         )
     }
 
@@ -443,11 +416,131 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
         }
     }
 
-    /** Function used to setup new listener reacting on option select events.*/
-    private _setOptionsSelectionListener(): void {
+    /** @hidden Function used to setup new listener reacting on option select events.*/
+    private _listenOnSelectedOption(): void {
         this._subscriptions.add(
             this._selectProxy.optionStateChange$.asObservable()
                 .subscribe((change: OptionStatusChange) => this.setSelectedOption(change))
         );
+    }
+
+    /** @hidden Listen on alphabetical or numerical keys and interact with options */
+    private _listenOptionFiltering(): void {
+        const source = fromEvent(this._elementRef.nativeElement, 'keydown').pipe(
+            filter(_ => this.isInteractive),
+            filter((event: KeyboardEvent) => KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical'))
+        );
+        const trigger = source.pipe(debounceTime(250));
+
+        this._subscriptions.add(
+            source.pipe(
+                map(event => event.key),
+                buffer(trigger),
+                map(keys => keys.join(''))
+            ).subscribe(query => this._searchOption(query))
+        );
+    }
+
+    /** @hidden Search for options by query */
+    private _searchOption(query: string): void {
+        const validOptions = this.optionsArray.filter(options => options.value.toLowerCase().startsWith(query));
+
+        if (!validOptions.length) {
+            return;
+        }
+
+        if (this.isOpen) {
+            const focusedOptionIndex = this._focusedOptionIndex(validOptions, document.activeElement);
+            if (focusedOptionIndex !== -1) {
+                validOptions[(focusedOptionIndex + 1) % validOptions.length].focus();
+            } else {
+                validOptions[0].focus();
+            }
+        } else {
+            const selectedOptionIndex = validOptions.indexOf(this.selected);
+            if (selectedOptionIndex !== -1) {
+                this.setSelectedOption({
+                    option: validOptions[(selectedOptionIndex + 1) % validOptions.length],
+                    controlChange: true
+                });
+            } else {
+                this.setSelectedOption({option: validOptions[0], controlChange: true});
+            }
+        }
+    }
+
+    /** @hidden */
+    private _interactWithOptions(action: 'previous' | 'next'): void {
+        if (!this.options.length) {
+            return;
+        }
+
+        if (this.isOpen) {
+            this._focusOption(action);
+        } else {
+            this._selectOption(action);
+        }
+    }
+
+    /** @hidden Method used to focus options
+     * @param action
+     * 'onOpen'     - focus currently selected or first
+     * 'next'       - focus next element
+     * 'previous'   - focus previous element
+     * */
+    private _focusOption(action: 'onOpen' | 'next' | 'previous'): void {
+        let activeIndex: number;
+        const focusAsync = (option: OptionComponent) => setTimeout(() => option.focus(), 10);
+
+        switch (action) {
+            case 'onOpen':
+                focusAsync(this.selected || this.options.first);
+                break;
+            case 'next':
+                activeIndex = this._focusedOptionIndex(this.optionsArray, document.activeElement);
+                if (activeIndex < this.options.length - 1) {
+                    this.optionsArray[++activeIndex].focus();
+                }
+                break;
+            case 'previous':
+                activeIndex = this._focusedOptionIndex(this.optionsArray, document.activeElement);
+                if (activeIndex > 0) {
+                    this.optionsArray[--activeIndex].focus();
+                }
+                break;
+        }
+    }
+
+    /** @hidden Method used to select next/previous options
+     * @param action
+     * 'next'       - select next element
+     * 'previous'   - select previous element
+     * */
+    private _selectOption(action: 'next' | 'previous'): void {
+        let activeIndex = this.optionsArray.indexOf(this.selected);
+
+        switch (action) {
+            case 'next':
+                if (activeIndex < this.options.length - 1) {
+                    this.setSelectedOption({option: this.optionsArray[++activeIndex], controlChange: true});
+                }
+                break;
+            case 'previous':
+                if (activeIndex > 0) {
+                    this.setSelectedOption({option: this.optionsArray[--activeIndex], controlChange: true});
+                }
+                break;
+        }
+    }
+
+    /** @hidden */
+    private _setOptionsArray(): void {
+        this.optionsArray = this.options.toArray();
+    }
+
+    /** @hidden */
+    private _focusedOptionIndex(options: OptionComponent[], activeOption: Element): number {
+        return options.map(option => option.getHtmlElement())
+            .indexOf(activeOption as HTMLElement);
     }
 }
