@@ -1,0 +1,177 @@
+<h3>Template Driven form</h3>
+<div>Checkbox can be pre-selected if value of checkbox matches any value in ngModel directive.</div>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'checkbox1'" zone="zLeft" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox1'"
+            [label]="'Checkbox1'"
+            [value]="'checkbox1'"
+            [(ngModel)]="field1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox2'" zone="zRight" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox2'"
+            [label]="'Checkbox2'"
+            [value]="'checkbox2'"
+            [(ngModel)]="field2"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
+<div style="padding-left: 2rem;">field1: {{ field1 }}</div>
+<div style="padding-left: 2rem;">field2: {{ field2 }}</div>
+<br />
+<br />
+
+<div>Multiple Checkboxes connected with same ngModel directive. Multiple checkbox can be selected.</div>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'checkbox1'" zone="zLeft" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox1'"
+            [label]="'Checkbox1'"
+            [value]="'checkbox1'"
+            [(ngModel)]="field3"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox2'" zone="zRight" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox2'"
+            [label]="'Checkbox2'"
+            [value]="'checkbox2'"
+            [(ngModel)]="field3"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
+
+<div style="padding-left: 2rem;">field3: {{ field3 }}</div>
+<br />
+<br />
+
+<div>Multiple Checkboxes connected with same ngModel directive. checkbox with value in ngModel are preselected.</div>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'checkbox1'" zone="zLeft" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox1'"
+            [label]="'Checkbox1'"
+            [value]="'checkbox1'"
+            [(ngModel)]="field4"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox2'" zone="zRight" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox2'"
+            [label]="'Checkbox2'"
+            [value]="'checkbox2'"
+            [(ngModel)]="field4"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox3'" zone="zLeft" rank="2">
+        <fdp-checkbox
+            [name]="'checkbox3'"
+            [label]="'Checkbox3'"
+            [value]="'checkbox3'"
+            [(ngModel)]="field4"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
+<div style="padding-left: 2rem;">field4: {{ field4 }}</div>
+<br />
+<br />
+
+<!--Reactive form example-->
+<h3>Reactive/Model Driven form</h3>
+<div>
+    Checkbox can be pre-selected if value of checkbox matches any value in form-control array.
+</div>
+<fdp-form-group [multiLayout]="true" [formGroup]="form1">
+    <fdp-form-field [id]="'checkbox1'" zone="zLeft" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox1'"
+            [label]="'Checkbox1'"
+            [value]="'checkbox1'"
+            [contentDensity]="'compact'"
+            formControlName="field1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox2'" zone="zRight" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox2'"
+            [label]="'Checkbox2'"
+            [value]="'checkbox2'"
+            [contentDensity]="'compact'"
+            formControlName="field2"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
+<div style="padding-left: 2rem;">form value: {{ form1.getRawValue() | json }}</div>
+<br />
+<br />
+
+<div>
+    Multiple Checkboxes connected with same form-control. Multiple checkbox can be selected.
+</div>
+<fdp-form-group [multiLayout]="true" [formGroup]="form2">
+    <fdp-form-field [id]="'checkbox1'" zone="zLeft" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox1'"
+            [label]="'Checkbox1'"
+            [value]="'checkbox1'"
+            [contentDensity]="'compact'"
+            formControlName="field1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox2'" zone="zRight" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox2'"
+            [label]="'Checkbox2'"
+            [value]="'checkbox2'"
+            [contentDensity]="'compact'"
+            formControlName="field1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
+<div style="padding-left: 2rem;">form value: {{ form2.getRawValue() | json }}</div>
+<br />
+<br />
+
+<div>
+    Multiple Checkboxes connected with same form-control. checkbox with value in form-controls are preselected.
+</div>
+<fdp-form-group [multiLayout]="true" [formGroup]="form3">
+    <fdp-form-field [id]="'checkbox1'" zone="zLeft" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox1'"
+            [label]="'Checkbox1'"
+            [value]="'checkbox1'"
+            [contentDensity]="'compact'"
+            formControlName="field1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox2'" zone="zRight" rank="2">
+        <fdp-checkbox
+            [name]="'checkbox2'"
+            [label]="'Checkbox2'"
+            [value]="'checkbox2'"
+            [contentDensity]="'compact'"
+            formControlName="field1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox3'" zone="zLeft" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox3'"
+            [label]="'Checkbox3'"
+            [value]="'checkbox3'"
+            [contentDensity]="'compact'"
+            formControlName="field1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
+<div style="padding-left: 2rem;">form value: {{ form3.getRawValue() | json }}</div>

@@ -1,0 +1,179 @@
+<div>
+    <span>Reactive form: TriState checkbox with value and without value</span>
+    <fdp-form-group #fg5 [multiLayout]="true" [formGroup]="triStateForm">
+        <fdp-form-field #ffltri1 [id]="'checkbox1'" zone="zLeft" rank="1">
+            <fdp-checkbox
+                [name]="'checkbox1'"
+                [label]="'checkbox1'"
+                [value]="'Yes'"
+                [tristate]="true"
+                formControlName="checkbox1"
+            ></fdp-checkbox>
+        </fdp-form-field>
+
+        <fdp-form-field #ffltri2 [id]="'checkbox2'" zone="zLeft" rank="3">
+            <fdp-checkbox
+                [name]="'checkbox2'"
+                [label]="'checkbox2'"
+                [value]="'Yes'"
+                [tristate]="true"
+                formControlName="checkbox2"
+            ></fdp-checkbox>
+        </fdp-form-field>
+
+        <fdp-form-field #ffltri2 [id]="'checkbox3'" zone="zLeft" rank="5">
+            <fdp-checkbox
+                [name]="'checkbox3'"
+                [label]="'checkbox3'"
+                [value]="'Yes'"
+                [tristate]="true"
+                formControlName="checkbox3"
+            ></fdp-checkbox>
+        </fdp-form-field>
+
+        <fdp-form-field #ffltri1 [id]="'checkbox4'" zone="zRight" rank="2">
+            <fdp-checkbox
+                [name]="'checkbox4'"
+                [label]="'checkbox4'"
+                [tristate]="true"
+                formControlName="checkbox4"
+            ></fdp-checkbox>
+        </fdp-form-field>
+
+        <fdp-form-field #ffltri2 [id]="'checkbox5'" zone="zRight" rank="4">
+            <fdp-checkbox
+                [name]="'checkbox5'"
+                [label]="'checkbox5'"
+                [tristate]="true"
+                formControlName="checkbox5"
+            ></fdp-checkbox>
+        </fdp-form-field>
+
+        <fdp-form-field #ffltri2 [id]="'checkbox6'" zone="zRight" rank="6">
+            <fdp-checkbox
+                [name]="'checkbox6'"
+                [label]="'checkbox6'"
+                [tristate]="true"
+                formControlName="checkbox6"
+            ></fdp-checkbox>
+        </fdp-form-field>
+
+        <fdp-form-field #ffltri2 [id]="'checkbox7'" zone="zLeft" rank="7">
+            <fdp-checkbox
+                [name]="'checkbox7'"
+                [label]="'checkbox7 tristateSelectable false'"
+                [value]="'Yes'"
+                [tristate]="true"
+                [tristateSelectable]="false"
+                formControlName="checkbox7"
+            ></fdp-checkbox>
+        </fdp-form-field>
+
+        <fdp-form-field #ffltri2 [id]="'checkbox8'" zone="zRight" rank="8">
+            <fdp-checkbox
+                [name]="'checkbox8'"
+                [label]="'checkbox8 tristateSelectable false'"
+                [tristate]="true"
+                [tristateSelectable]="false"
+                formControlName="checkbox8"
+            ></fdp-checkbox>
+        </fdp-form-field>
+    </fdp-form-group>
+    <div>form value: {{ triStateForm.getRawValue() | json }}</div>
+</div>
+<br />
+<br />
+<span>Template Driven form: TriState checkbox with value and without value</span>
+<fdp-form-group #fg6 [multiLayout]="true">
+    <fdp-form-field #ffltri4 [id]="'checkbox7'" zone="zLeft" rank="1">
+        <fdp-checkbox
+            [name]="'checkbox7'"
+            [label]="'checkbox7'"
+            [value]="'Yes'"
+            [tristate]="true"
+            [(ngModel)]="checkbox7"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #ffltri4 [id]="'checkbox8'" zone="zLeft" rank="3">
+        <fdp-checkbox
+            [name]="'checkbox8'"
+            [label]="'checkbox8'"
+            [value]="'Yes'"
+            [tristate]="true"
+            [(ngModel)]="checkbox8"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #ffltri4 [id]="'checkbox9'" zone="zLeft" rank="5">
+        <fdp-checkbox
+            [name]="'checkbox9'"
+            [label]="'checkbox9'"
+            [value]="'Yes'"
+            [tristate]="true"
+            [(ngModel)]="checkbox9"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #ffltri4 [id]="'checkbox10'" zone="zRight" rank="2">
+        <fdp-checkbox
+            [name]="'checkbox10'"
+            [label]="'checkbox10'"
+            [tristate]="true"
+            [(ngModel)]="checkbox10"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #ffltri4 [id]="'checkbox11'" zone="zRight" rank="4">
+        <fdp-checkbox
+            [name]="'checkbox11'"
+            [label]="'checkbox11'"
+            [tristate]="true"
+            [(ngModel)]="checkbox11"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #ffltri4 [id]="'checkbox12'" zone="zRight" rank="6">
+        <fdp-checkbox
+            [name]="'checkbox12'"
+            [label]="'checkbox12'"
+            [tristate]="true"
+            [(ngModel)]="checkbox12"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #ffltri4 [id]="'checkbox13'" zone="zLeft" rank="7">
+        <fdp-checkbox
+            [name]="'checkbox13'"
+            [label]="'checkbox13 tristateSelectable false'"
+            [value]="'Yes'"
+            [tristate]="true"
+            [tristateSelectable]="false"
+            [(ngModel)]="checkbox13"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #ffltri4 [id]="'checkbox14'" zone="zRight" rank="7">
+        <fdp-checkbox
+            [name]="'checkbox14'"
+            [label]="'checkbox14 tristateSelectable false'"
+            [tristate]="true"
+            [tristateSelectable]="false"
+            [(ngModel)]="checkbox14"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field zone="zLeft">
+        <div>checkbox7: {{ checkbox7 }}</div>
+        <div>checkbox8: {{ checkbox8 }}</div>
+        <div>checkbox9: {{ checkbox9 }}</div>
+        <div>checkbox13: {{ checkbox13 }}</div>
+    </fdp-form-field>
+
+    <fdp-form-field zone="zRight">
+        <div>checkbox10: {{ checkbox10 }}</div>
+        <div>checkbox11: {{ checkbox11 }}</div>
+        <div>checkbox12: {{ checkbox12 }}</div>
+        <div>checkbox14: {{ checkbox14 }}</div>
+    </fdp-form-field>
+</fdp-form-group>

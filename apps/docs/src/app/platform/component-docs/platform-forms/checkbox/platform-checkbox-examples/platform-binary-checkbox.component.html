@@ -1,0 +1,73 @@
+<div>Binary checkbox in Template Driven form</div>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'checkbox-1'" zone="zLeft" rank="4">
+        <fdp-checkbox
+            [id]="'checkbox-1'"
+            [name]="'checkbox-1'"
+            [label]="'Checkbox1'"
+            [isBinary]="true"
+            [(ngModel)]="checkbox1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox-2'" zone="zLeft" rank="4">
+        <fdp-checkbox
+            [name]="'checkbox-2'"
+            [label]="'Checkbox2'"
+            [isBinary]="true"
+            [(ngModel)]="checkbox2"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox-3'" zone="zLeft" rank="4">
+        <fdp-checkbox
+            [name]="'checkbox-3'"
+            [label]="'Checkbox3'"
+            [isBinary]="true"
+            [(ngModel)]="checkbox3"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
+<div style="padding-left: 2rem;">
+    <div>Checkbox1: {{ checkbox1 }}</div>
+    <div>Checkbox2: {{ checkbox2 }}</div>
+    <div>Checkbox3: {{ checkbox3 }}</div>
+</div>
+<br />
+<br />
+
+<div>Binary checkbox in Reactive/Model Driven form</div>
+<fdp-form-group [multiLayout]="true" [formGroup]="customForm">
+    <fdp-form-field [id]="'checkbox1'" zone="zLeft" rank="4">
+        <fdp-checkbox
+            [id]="'checkbox1'"
+            [name]="'checkbox1'"
+            [label]="'Checkbox1'"
+            [isBinary]="true"
+            [contentDensity]="'compact'"
+            formControlName="checkbox1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox2'" zone="zLeft" rank="4">
+        <fdp-checkbox
+            [name]="'checkbox2'"
+            [label]="'Checkbox2'"
+            [isBinary]="true"
+            [contentDensity]="'compact'"
+            formControlName="checkbox2"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox3'" zone="zLeft" rank="4">
+        <fdp-checkbox
+            [name]="'checkbox3'"
+            [label]="'Checkbox3'"
+            [isBinary]="true"
+            [contentDensity]="'compact'"
+            formControlName="checkbox3"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
+
+<div style="padding-left: 2rem;">form value: {{ customForm.getRawValue() | json }}</div>

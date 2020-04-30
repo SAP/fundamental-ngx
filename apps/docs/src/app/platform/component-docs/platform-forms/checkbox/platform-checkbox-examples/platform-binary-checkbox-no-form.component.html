@@ -1,0 +1,16 @@
+<h4>Binary Checkbox with value</h4>
+<fdp-checkbox [name]="'checkbox1'" [isBinary]="true" [label]="'checkbox1'" [value]="'Yes'" [(checked)]="checkbox1">
+</fdp-checkbox>
+<div>value: {{ checkbox1 }}</div>
+
+<fdp-checkbox [name]="'checkbox2'" [isBinary]="true" [label]="'checkbox2'" [value]="'Yes'" [(checked)]="checkbox2">
+</fdp-checkbox>
+<div>value: {{ checkbox2 }}</div>
+<br />
+<br />
+<h4>Binary Checkbox without value</h4>
+<fdp-checkbox [name]="'checkbox3'" [isBinary]="true" [label]="'checkbox3'" [(checked)]="checkbox3"> </fdp-checkbox>
+<div>value: {{ checkbox3 }}</div>
+
+<fdp-checkbox [name]="'checkbox4'" [isBinary]="true" [label]="'checkbox4'" [(checked)]="checkbox4"> </fdp-checkbox>
+<div>value: {{ checkbox4 }}</div>

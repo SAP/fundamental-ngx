@@ -1,0 +1,24 @@
+<fdp-form-group [hintPlacement]="'inline'" [multiLayout]="true" [formGroup]="customForm">
+    <h2>Compact Checkbox with Reactive form and Error Status Style</h2>
+    <span>Checkbox with Error status</span>
+    <fdp-form-field [id]="'checkbox-019'" [rank]="10" zone="zLeft">
+        <fdp-checkbox
+            [name]="'checkbox-019'"
+            [label]="'Mandatory checkbox'"
+            [isBinary]="true"
+            formControlName="example1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'checkbox-020'" [rank]="10" zone="zRight">
+        <fdp-checkbox [name]="'checkbox-020'" [isBinary]="true" formControlName="example2">
+            Do you Agree with <a href="#"> Terms and Conditions</a>?
+        </fdp-checkbox>
+    </fdp-form-field>
+    <fdp-form-field [id]="'button-1'" [rank]="10" zone="zRight">
+        <fdp-button [type]="'emphasized'" (click)="onSubmit()">Submit</fdp-button>
+    </fdp-form-field>
+</fdp-form-group>
+
+<div>Form value: {{ customForm.getRawValue() | json }}</div>
+<div>Form Status: {{ customForm.status | json }}</div>
