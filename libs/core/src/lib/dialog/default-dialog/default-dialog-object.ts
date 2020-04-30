@@ -8,6 +8,9 @@ export class DefaultDialogObject {
     /** Dialog Body */
     content?: TemplateRef<any>;
 
+    /** Subheader Body */
+    subHeader?: TemplateRef<any>;
+
     /** Approve Button Label */
     approveButton?: string;
 

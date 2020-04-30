@@ -12,6 +12,7 @@ import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
 import { LinkModule } from '../link/link.module';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
+import { BarModule, ButtonModule } from '../..';
 
 @NgModule({
     declarations: [MultiInputComponent, MultiInputMobileComponent],
@@ -26,7 +27,9 @@ import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobi
         InputGroupModule,
         FormModule,
         CheckboxModule,
-        LinkModule
+        LinkModule,
+        BarModule,
+        ButtonModule
     ],
     exports: [MultiInputComponent]
 })

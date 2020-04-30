@@ -26,6 +26,7 @@ import { FormStates } from '../form/form-control/form-states';
 import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
+import { DialogConfig } from '../..';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -169,6 +170,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Input()
     showAllButton: boolean = true;
 
+    /**
+     * TODO
+     */
+    @Input()
+    dialogConfig: DialogConfig;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
@@ -283,18 +290,16 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     openChangeHandle(open: boolean): void {
         this.open = open;
-        this.openChange.emit(this.open);
-        if (this.multiInputMobile && !this.hasOpenDialogs()) {
-            if (open) {
-                this.multiInputMobile.open();
-            }
-        }
-        this.onTouched();
-        if (this.open) {
-            this.focusTrap.activate();
+        if (this.mobileMode) {
+            this._dialogOpenChandle(open);
         } else {
-            this.focusTrap.deactivate();
+            this._popoverOpenChandle(open);
         }
+    }
+
+    selectAllItems(): void {
+        this.writeValue([...this.dropdownValues]);
+        this.selectedChange.emit([...this.dropdownValues]);
     }
 
     /** @hidden */
@@ -402,6 +407,25 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             });
         } catch (e) {
             console.warn('Unsuccessful attempting to focus trap the Multi Input.');
+        }
+    }
+
+    private _popoverOpenChandle(open: boolean): void {
+        this.open = open;
+        this.openChange.emit(this.open);
+        this.onTouched();
+        if (this.open) {
+            this.focusTrap.activate();
+        } else {
+            this.focusTrap.deactivate();
+        }
+    }
+
+    private _dialogOpenChandle(open: boolean): void {
+        if (!this.hasOpenDialogs()) {
+            if (open) {
+                this.multiInputMobile.open();
+            }
         }
     }
 }

@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '@fundamental-ngx/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { DIALOG_DEFAULT_CONFIG, DIALOG_REF, DialogConfig, DialogRef } from '@fundamental-ngx/core';
 
 const customConfig: DialogConfig = {
+    mobile: true,
+    verticalPadding: false,
+    maxWidth: '414px',
+    maxHeight: '736px',
     defaultObject: {
-        cancelButton: 'cancel',
-        title: 'Title'
+        cancelButton: 'Cancel',
+        title: 'Title',
+        approveButton: 'Approve'
     }
 };
 
@@ -16,4 +21,5 @@ const customConfig: DialogConfig = {
         { provide: DIALOG_DEFAULT_CONFIG, useValue: customConfig }
     ]
 })
-export class MultiInputMobileExampleComponent {}
+export class MultiInputMobileExampleComponent {
+}
