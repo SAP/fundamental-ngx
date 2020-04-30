@@ -22,17 +22,19 @@
     </div>
 </div>
 
-<fd-multi-input-mobile [controlTemplate]="control" [listTemplate]="list" *ngIf="mobileMode"></fd-multi-input-mobile>
+<fd-multi-input-mobile [controlTemplate]="control" [listTemplate]="list" *ngIf="mobileMode"
+                       (onAllItemsSelected)="selectAllItems()" (dialogClose)="openChangeHandle(false)"></fd-multi-input-mobile>
 
 <ng-template #control>
     <fd-input-group
+        class="fd-multi-input-input-group-custom"
         [state]="state"
         [buttonFocusable]="buttonFocusable"
         [button]="true"
         [compact]="compact"
         [disabled]="disabled"
         (click)="openChangeHandle(!open)">
-        <fd-tokenizer [compact]="compact" class="fd-multi-input-tokenizer" [glyph]="glyph">
+        <fd-tokenizer [compact]="compact" [class]="'fd-multi-input-tokenizer-custom'" [glyph]="glyph">
             <fd-token
                 *ngFor="let token of selected"
                 [compact]="compact"
@@ -53,6 +55,7 @@
                 [ngClass]="{ 'fd-input--compact': compact }"
                 (ngModelChange)="handleSearchTermChange()"
                 (keydown)="handleInputKeydown($event)"
+                [ngModelOptions]="{standalone: true}"
             />
         </fd-tokenizer>
     </fd-input-group>

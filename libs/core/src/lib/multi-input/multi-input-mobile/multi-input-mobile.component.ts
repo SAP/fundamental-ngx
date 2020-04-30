@@ -1,6 +1,17 @@
-import { ChangeDetectorRef, Component, Inject, Input, Optional, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Inject,
+    Input,
+    Optional,
+    Output,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../../dialog/dialog-utils/dialog-config.class';
+import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
 
 @Component({
     selector: 'fd-multi-input-mobile',
@@ -15,8 +26,22 @@ export class MultiInputMobileComponent {
     @Input()
     controlTemplate: TemplateRef<any>;
 
-    @ViewChild('template', { read: TemplateRef })
+    /**
+     * TODO
+     */
+    @Input()
+    dialogConfig: DialogConfig;
+
+    @Output()
+    readonly onAllItemsSelected: EventEmitter<void> = new EventEmitter<void>();
+
+    @Output()
+    readonly dialogClose: EventEmitter<void> = new EventEmitter<void>();
+
+    @ViewChild('wrappedControlTemplate', { read: TemplateRef })
     template: TemplateRef<any>;
+
+    private _dialogRef: DialogRef;
 
     constructor(
         @Optional() private dialogService: DialogService,
@@ -25,14 +50,19 @@ export class MultiInputMobileComponent {
     ) {}
 
     open(): void {
-        this._defaultConfig.defaultObject.content = this.template;
-        this._defaultConfig.defaultObject.approveButtonCallback = () => {this.dialogService.dismissAll(); this.dialogs()};
-        this._defaultConfig.defaultObject.cancelButtonCallback = () => {this.dialogService.dismissAll(); this.dialogs()};
-        this._defaultConfig.defaultObject.closeButtonCallback = () => {this.dialogService.dismissAll(); this.dialogs()};
-        this.dialogService.open(
+        this._defaultConfig.defaultObject.content = this.listTemplate;
+        this._defaultConfig.defaultObject.subHeader = this.template;
+        this._defaultConfig.defaultObject.approveButtonCallback = () => this.onClose();
+        this._defaultConfig.defaultObject.cancelButtonCallback = () => this.onClose();
+        this._defaultConfig.defaultObject.closeButtonCallback = () => this.onClose();
+        this._dialogRef = this.dialogService.open(
             this._defaultConfig.defaultObject,
             this._defaultConfig
-        )
+        );
+
+        this._dialogRef.afterClosed.subscribe(
+            () => {},
+            () => this.handleClose());
     }
 
     hasOpenDialogs(): boolean {
@@ -41,6 +71,20 @@ export class MultiInputMobileComponent {
 
     dialogs(): void {
         this._changeDetRef.detectChanges();
+    }
+
+    selectAll(): void {
+        this.onAllItemsSelected.emit();
+    }
+
+    onClose(): void {
+        this._dialogRef.close();
+        this.handleClose();
+    }
+
+    handleClose(): void {
+        this._changeDetRef.detectChanges();
+        this.dialogClose.emit();
     }
 
 }

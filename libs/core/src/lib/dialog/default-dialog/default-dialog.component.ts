@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DefaultDialogObject } from './default-dialog-object';
 
 @Component({

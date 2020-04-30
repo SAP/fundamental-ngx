@@ -1,10 +1,14 @@
-{{hasOpenDialogs()}}
-
 <ng-container *ngIf="!hasOpenDialogs()">
     <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
 </ng-container>
 
-<ng-template #template>
-    <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
-    <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+<ng-template #wrappedControlTemplate>
+    <div fd-bar-middle>
+        <fd-bar-element [fullWidth]="true">
+            <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+        </fd-bar-element>
+        <fd-bar-element>
+            <button fd-button [glyph]="'multiselect-all'" [fdType]="'transparent'" (click)="selectAll()"></button>
+        </fd-bar-element>
+    </div>
 </ng-template>

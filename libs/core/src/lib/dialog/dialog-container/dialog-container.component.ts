@@ -77,11 +77,8 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
         } else if (this.childContent instanceof TemplateRef) {
             this._createFromTemplate(this.childContent);
         } else {
-            console.log('chuj');
             this._createFromDefaultConfiguration(this.childContent);
         }
-        console.log(this.childContent);
-        console.log('XD');
         this._changeDetectorRef.detectChanges();
     }
 
@@ -101,7 +98,6 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
 
     /** @hidden TODO */
     private _createFromDefaultConfiguration(config: DefaultDialogObject): void {
-        console.log('dupa');
         this.containerRef.clear();
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DefaultDialogComponent);
         this._componentRef = this.containerRef.createComponent(componentFactory);
