@@ -50,6 +50,7 @@ import { DefaultDialogComponent } from './default-dialog/default-dialog.componen
     exports: [
         BarModule,
         TemplateModule,
+        DefaultDialogComponent,
         DialogComponent,
         DialogBodyComponent,
         DialogTitleDirective,
@@ -60,7 +61,7 @@ import { DefaultDialogComponent } from './default-dialog/default-dialog.componen
         DialogFooterButtonComponent,
         DialogDecisiveButtonDirective
     ],
-    entryComponents: [DialogComponent, DialogContainerComponent],
+    entryComponents: [DialogComponent, DialogContainerComponent, DefaultDialogComponent],
     providers: [DialogService, DynamicComponentService]
 })
 export class DialogModule {}
