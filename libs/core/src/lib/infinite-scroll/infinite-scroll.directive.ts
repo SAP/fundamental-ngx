@@ -8,7 +8,6 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
     selector: '[fdInfiniteScroll]'
 })
 export class InfiniteScrollDirective implements OnInit, OnDestroy {
-
     /** Scroll percentage at which the onScrollAction event is fired. */
     @Input()
     scrollPercent: number = 75;
@@ -39,5 +38,4 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
             this.subscription.unsubscribe();
         }
     }
-
 }

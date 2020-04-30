@@ -42,4 +42,4 @@ import { ProductTileTitleDirective } from './product-tile-title/product-tile-tit
         ProductTileTitleDirective
     ]
 })
-export class TileModule { }
+export class TileModule {}

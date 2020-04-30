@@ -5,5 +5,4 @@ import { TemplateDirective } from './template.directive';
     declarations: [TemplateDirective],
     exports: [TemplateDirective]
 })
-export class TemplateModule {
-}
+export class TemplateModule {}

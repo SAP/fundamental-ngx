@@ -35,4 +35,4 @@ import { ButtonModule } from '../button/button.module';
     ],
     entryComponents: [PopoverContainer]
 })
-export class PopoverModule { }
+export class PopoverModule {}

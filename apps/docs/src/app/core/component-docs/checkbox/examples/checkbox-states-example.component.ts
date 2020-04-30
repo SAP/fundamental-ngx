@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-checkbox-states-example',
@@ -19,7 +19,7 @@ import {Component} from '@angular/core';
             Compact:
             <fd-checkbox [(ngModel)]="checkboxValue7" [compact]="true" label="Compact label"></fd-checkbox>
         </div>
-    `,
+    `
 })
 export class CheckboxStatesExampleComponent {
     public checkboxValue1 = false;

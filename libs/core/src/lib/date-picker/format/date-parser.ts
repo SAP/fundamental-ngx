@@ -14,7 +14,6 @@ export function DATE_FORMAT_FACTORY() {
     useFactory: DATE_FORMAT_FACTORY
 })
 export abstract class DateFormatParser {
-
     /**
      * Delimiter for the range. This should not show up in the string representation of the dates.
      */
@@ -39,7 +38,6 @@ export abstract class DateFormatParser {
  */
 @Injectable()
 export class DateFormatParserDefault extends DateFormatParser {
-
     /**
      * Takes in a string value and return a FdDate model object.
      * @param value String to concert to a FdDate model object.

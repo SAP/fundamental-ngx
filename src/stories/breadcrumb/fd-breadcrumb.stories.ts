@@ -22,9 +22,7 @@ export default {
 };
 
 export const Breadcrumb = () => ({
-
-    template:
-        `<div #responsiveBreadcrumbContainer >
+    template: `<div #responsiveBreadcrumbContainer >
             <fd-breadcrumb 
                 [containerElement]="responsiveBreadcrumbContainer">
                 <fd-breadcrumb-item *ngFor="let row of getArray(bcLevels); let i = index;">
@@ -38,6 +36,6 @@ export const Breadcrumb = () => ({
         breadcrumbHref1: text('breadcrumbHref1', '#'),
         getArray: (len: number) => {
             return new Array(len);
-        },
+        }
     }
 });

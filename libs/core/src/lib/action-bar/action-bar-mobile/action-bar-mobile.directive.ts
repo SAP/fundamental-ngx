@@ -14,4 +14,4 @@ import { Directive } from '@angular/core';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-action-bar-mobile]'
 })
-export class ActionBarMobileDirective { }
+export class ActionBarMobileDirective {}

@@ -17,9 +17,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent {
-
     /** @hidden */
     @HostBinding('class.fd-table')
     fdTableClass: boolean = true;
-
 }

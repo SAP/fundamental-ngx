@@ -21,12 +21,7 @@ import { FormFieldControl } from '../form-control';
 import { NgControl, NgForm } from '@angular/forms';
 import { BaseInput } from '../base.input';
 
-
-const VALID_INPUT_TYPES = [
-    'text',
-    'number',
-    'email'
-];
+const VALID_INPUT_TYPES = ['text', 'number', 'email'];
 
 export type InputType = 'text' | 'number' | 'email';
 
@@ -39,12 +34,9 @@ export type InputType = 'text' | 'number' | 'email';
     selector: 'fdp-input',
     templateUrl: 'input.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        { provide: FormFieldControl, useExisting: InputComponent, multi: true }
-    ]
+    providers: [{ provide: FormFieldControl, useExisting: InputComponent, multi: true }]
 })
 export class InputComponent extends BaseInput {
-
     @Input()
     type: InputType = 'text';
 
@@ -57,13 +49,12 @@ export class InputComponent extends BaseInput {
         super.setValue(value);
     }
 
-    constructor(protected _cd: ChangeDetectorRef,
-                @Optional() @Self() public ngControl: NgControl,
-                @Optional() @Self() public ngForm: NgForm) {
-
-
+    constructor(
+        protected _cd: ChangeDetectorRef,
+        @Optional() @Self() public ngControl: NgControl,
+        @Optional() @Self() public ngForm: NgForm
+    ) {
         super(_cd, ngControl, ngForm);
-
     }
 
     ngOnInit(): void {
@@ -72,11 +63,7 @@ export class InputComponent extends BaseInput {
         }
     }
 
-
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
     }
-
-
 }
-

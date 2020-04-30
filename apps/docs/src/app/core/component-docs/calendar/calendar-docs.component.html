@@ -7,9 +7,8 @@
     internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>. To
     select a date you will create a new object that contains the property date, whose value is a FdDate model object.
     Then, using two-way binding syntax, set the selectedDay value to your new object. Note that selecting a day (or
-    range of days) in this manner will override any block/disable functions. The
-    <code>disableFunction</code> inputs can be changed and the calendar will automatically update (see example).
-    <br /><br />
+    range of days) in this manner will override any block/disable functions. The <code>disableFunction</code> inputs can
+    be changed and the calendar will automatically update (see example). <br /><br />
     A disabled date or range of dates cannot be selected, usually applied to a large range of past or future dates. A
     blocked date or range of dates cannot be selected, usually applied to blackout or booked dates mixed in with
     available dates.
@@ -26,8 +25,8 @@
 </fd-docs-section-title>
 <description>
     Calendar component has a dedicated mode for mobile devices. When used in mobile mode, the calendar should be wrapped
-    inside a dialog component. Examples of various dialog usages can be found <a fd-link [routerLink]="'/core/dialog'">here</a>.
-    The mobile calendar can be used in landscape or portrait mode.
+    inside a dialog component. Examples of various dialog usages can be found
+    <a fd-link [routerLink]="'/core/dialog'">here</a>. The mobile calendar can be used in landscape or portrait mode.
 </description>
 <component-example>
     <fd-calendar-mobile-example></fd-calendar-mobile-example>
@@ -68,12 +67,10 @@
     Calendar with Special Days
 </fd-docs-section-title>
 <description>
-    Special coloring classes can be applied to grid days by passing an object to <code>[specialDaysRules]</code>.
-    A list of special day numbers can be found
-    <a fd-link href="https://sap.github.io/fundamental-styles/components/calendar.html">
-        here
-    </a>.
-    Similar to the block function, <code>[specialDaysRules]</code> takes an FdDate object as a parameter and returns true/false.
+    Special coloring classes can be applied to grid days by passing an object to <code>[specialDaysRules]</code>. A list
+    of special day numbers can be found
+    <a fd-link href="https://sap.github.io/fundamental-styles/components/calendar.html"> here </a>. Similar to the block
+    function, <code>[specialDaysRules]</code> takes an FdDate object as a parameter and returns true/false.
 </description>
 <component-example>
     <fd-calendar-special-day-example></fd-calendar-special-day-example>
@@ -86,7 +83,8 @@
     Calendar Years Grid
 </fd-docs-section-title>
 <description>
-    Year Grid and Aggregated Year Grid can be customized by passing <code>[yearGrid]</code> and <code>[aggregatedYearGrid]</code>
+    Year Grid and Aggregated Year Grid can be customized by passing <code>[yearGrid]</code> and
+    <code>[aggregatedYearGrid]</code>
     properties. The column and row amounts can be modified, similar to how the year is displayed.
 </description>
 <component-example>
@@ -104,9 +102,8 @@
     <br /><br />
     The <code>disableRangeStartFunction</code>, <code>disableRangeEndFunction</code>,
     <code>blockRangeStartFunction</code> and <code>blockRangeEndFunction</code> inputs can be used in addition to the
-    <code>disableFunction</code> input to set independent rules for the start and end
-    dates. In this example, the user can only select a start date on or before October 10, 2019, and an end date on or
-    after October 20, 2019.
+    <code>disableFunction</code> input to set independent rules for the start and end dates. In this example, the user
+    can only select a start date on or before October 10, 2019, and an end date on or after October 20, 2019.
 </description>
 <component-example>
     <fd-calendar-range-example></fd-calendar-range-example>

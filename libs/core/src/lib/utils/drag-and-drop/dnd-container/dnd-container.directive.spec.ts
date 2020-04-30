@@ -6,13 +6,13 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
     template: `
-            <span>
-                <div #directiveElement fd-dnd-container>
-                    <div cdkDrag>
-                        <div></div>
-                    </div>
+        <span>
+            <div #directiveElement fd-dnd-container>
+                <div cdkDrag>
+                    <div></div>
                 </div>
-            </span>
+            </div>
+        </span>
     `
 })
 class TestDndContainerComponent {
@@ -29,8 +29,7 @@ describe('DndContainerDirective', () => {
         TestBed.configureTestingModule({
             imports: [DragDropModule],
             declarations: [TestDndContainerComponent, DndContainerDirective]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

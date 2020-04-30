@@ -4,18 +4,18 @@ import { TreeRowObject } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-simple-tree-example',
     template: `
-        <fd-tree (editRowClicked)="editRowClicked($event)"
-                 (deleteRowClicked)="deleteRowClicked($event)"
-                 [displayTreeActions]="true"
-                 [headers]="headers"
-                 [treeData]="items">
+        <fd-tree
+            (editRowClicked)="editRowClicked($event)"
+            (deleteRowClicked)="deleteRowClicked($event)"
+            [displayTreeActions]="true"
+            [headers]="headers"
+            [treeData]="items"
+        >
         </fd-tree>
     `
 })
 export class SimpleTreeExampleComponent {
-    headers: string[] = [
-        'Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'
-    ];
+    headers: string[] = ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'];
 
     items: TreeRowObject[] = [
         {

@@ -11,9 +11,12 @@
         <fd-menu [separator]="true">
             <ul fd-menu-list>
                 <li *ngFor="let collapsedBreadcrumbItem of collapsedBreadcrumbItems">
-                    <a fd-menu-item [attr.href]="collapsedBreadcrumbItem.href"
-                       [routerLink]="collapsedBreadcrumbItem.routerLink">
-                        {{collapsedBreadcrumbItem.elementRef.nativeElement.innerText}}
+                    <a
+                        fd-menu-item
+                        [attr.href]="collapsedBreadcrumbItem.href"
+                        [routerLink]="collapsedBreadcrumbItem.routerLink"
+                    >
+                        {{ collapsedBreadcrumbItem.elementRef.nativeElement.innerText }}
                     </a>
                 </li>
             </ul>

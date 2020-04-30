@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-tabs-navigation-mode-example',
     templateUrl: './tabs-navigation-mode-example.component.html'
 })
-
-export class TabsNavigationModeExampleComponent { }
+export class TabsNavigationModeExampleComponent {}

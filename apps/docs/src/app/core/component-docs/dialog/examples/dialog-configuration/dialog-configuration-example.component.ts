@@ -3,11 +3,10 @@ import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-dialog-configuration-example',
-    templateUrl: './dialog-configuration-example.component.html',
+    templateUrl: './dialog-configuration-example.component.html'
 })
 export class DialogConfigurationExample {
-
-    constructor(public _dialogService: DialogService) { }
+    constructor(public _dialogService: DialogService) {}
 
     openDraggableDialog(template): void {
         this._dialogService.open(template, {
@@ -33,5 +32,4 @@ export class DialogConfigurationExample {
             backdropClickCloseable: false
         });
     }
-
 }

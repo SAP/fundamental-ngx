@@ -54,14 +54,13 @@ let menuIdCounter = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
-
     private _id: string;
     public menuId: string;
 
     @Input()
     get id(): string {
         return this._id;
-    };
+    }
     set id(id: string) {
         this._id = id;
 
@@ -95,17 +94,14 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
     private _tabSubscription = Subscription.EMPTY;
     private _dirChangeSubscription = Subscription.EMPTY;
 
-    constructor(
-        private _rtl: RtlService
-    ) {
+    constructor(private _rtl: RtlService) {
         this._dirChangeSubscription = this._rtl.rtl.subscribe((value: boolean) => {
             this.direction = value ? 'rtl' : 'ltr';
             this._setMenuItemCascadeDirection();
         });
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     ngAfterViewInit() {
         if (!this.menuId) {
@@ -172,7 +168,7 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
         const menuItems = this.menuItems.changes as Observable<QueryList<MenuItemComponent>>;
         return menuItems.pipe(
             startWith(this.menuItems),
-            switchMap(items => merge(...items.map((item: MenuItemComponent) => item.hovered)))
+            switchMap((items) => merge(...items.map((item: MenuItemComponent) => item.hovered)))
         ) as Observable<MenuItemComponent>;
     }
 
@@ -181,21 +177,24 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
             return;
         }
         // set cascade direction
-        this.menuItems.forEach(item => {
+        this.menuItems.forEach((item) => {
             item.cascadeDirection = this.cascadesLeft() ? 'left' : 'right';
         });
     }
 
     cascadesRight(): boolean {
-        return (this.xPosition === 'after' && this.direction === 'ltr')
-            || (this.xPosition === 'before' && this.direction === 'rtl');
+        return (
+            (this.xPosition === 'after' && this.direction === 'ltr') ||
+            (this.xPosition === 'before' && this.direction === 'rtl')
+        );
     }
 
     cascadesLeft(): boolean {
-        return (this.xPosition === 'after' && this.direction === 'rtl')
-            || (this.xPosition === 'before' && this.direction === 'ltr');
+        return (
+            (this.xPosition === 'after' && this.direction === 'rtl') ||
+            (this.xPosition === 'before' && this.direction === 'ltr')
+        );
     }
-
 }
 
 export type MenuCloseMethod = void | 'mouse' | 'keyboard' | 'tab' | 'arrow';

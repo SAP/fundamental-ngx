@@ -1,4 +1,4 @@
-import { Component, } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FdDate, FdDatetime } from '@fundamental-ngx/core';
 
@@ -7,7 +7,6 @@ import { FdDate, FdDatetime } from '@fundamental-ngx/core';
     templateUrl: './datetime-form-example.component.html'
 })
 export class DatetimeFormExampleComponent {
-
     customForm = new FormGroup({
         date: new FormControl(FdDatetime.getToday()),
         disabledDate: new FormControl({ value: FdDatetime.getToday(), disabled: true })
@@ -19,5 +18,5 @@ export class DatetimeFormExampleComponent {
 
     disableFunction = (fdDate: FdDate): boolean => {
         return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp();
-    }
+    };
 }

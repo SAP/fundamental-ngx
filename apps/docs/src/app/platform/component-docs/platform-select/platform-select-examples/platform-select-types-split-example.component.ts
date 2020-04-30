@@ -15,10 +15,9 @@ export class Fruit {
 
 @Component({
     selector: 'fdp-select-types-split-example',
-    templateUrl: './platform-select-types-split-example.component.html',
+    templateUrl: './platform-select-types-split-example.component.html'
 })
 export class PlatformSelectTypesSplitExampleComponent implements OnInit {
-
     selectedValue: string;
 
     userList = [
@@ -38,8 +37,7 @@ export class PlatformSelectTypesSplitExampleComponent implements OnInit {
         };
     });
 
-    constructor() { }
+    constructor() {}
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 }

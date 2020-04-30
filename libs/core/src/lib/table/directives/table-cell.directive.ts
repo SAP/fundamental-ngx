@@ -1,7 +1,7 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[fdTableCell], [fd-table-cell]'
+    selector: '[fdTableCell], [fd-table-cell]'
 })
 export class TableCellDirective {
     /** @hidden */

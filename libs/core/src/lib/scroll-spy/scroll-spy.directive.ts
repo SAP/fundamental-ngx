@@ -57,8 +57,11 @@ export class ScrollSpyDirective {
 
         for (let i = 0; i < children.length; i++) {
             const element: HTMLElement = children[i];
-            if (this.trackedTags.some(tag => tag.toLocaleUpperCase() === element.tagName.toLocaleUpperCase())) {
-                if ((element.offsetTop - targetOffsetTop) <= targetScrollTop + event.target.offsetHeight * this.targetPercent) {
+            if (this.trackedTags.some((tag) => tag.toLocaleUpperCase() === element.tagName.toLocaleUpperCase())) {
+                if (
+                    element.offsetTop - targetOffsetTop <=
+                    targetScrollTop + event.target.offsetHeight * this.targetPercent
+                ) {
                     spiedTag = element;
                 }
             }
@@ -69,5 +72,4 @@ export class ScrollSpyDirective {
             this.spyChange.emit(this.currentActive);
         }
     }
-
 }

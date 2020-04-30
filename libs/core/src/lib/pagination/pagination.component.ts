@@ -32,11 +32,13 @@ import { Pagination } from './pagination.model';
     host: {
         class: 'fd-pagination'
     },
-    styles: [`
-        .fd-pagination a {
-            cursor: pointer;
-        }
-    `],
+    styles: [
+        `
+            .fd-pagination a {
+                cursor: pointer;
+            }
+        `
+    ],
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./pagination.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -91,7 +93,7 @@ export class PaginationComponent implements OnChanges, OnInit {
     isLastPage$: BehaviorSubject<boolean> = new BehaviorSubject(this._isLastPage);
 
     /** @hidden */
-    constructor(private paginationService: PaginationService, @Optional() private rtlService: RtlService) { }
+    constructor(private paginationService: PaginationService, @Optional() private rtlService: RtlService) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
@@ -114,10 +116,10 @@ export class PaginationComponent implements OnChanges, OnInit {
     /** @hidden */
     ngOnInit(): void {
         if (this.rtlService) {
-            this.rtlService.rtl.subscribe(value => {
+            this.rtlService.rtl.subscribe((value) => {
                 this.rtl = value;
                 this._refreshPages();
-            })
+            });
         }
     }
 

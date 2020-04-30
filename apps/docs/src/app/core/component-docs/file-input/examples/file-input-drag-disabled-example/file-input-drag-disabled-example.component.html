@@ -1,22 +1,20 @@
-<fd-file-input #fileInput
-               (onSelect)="this.files = $event"
-               (onInvalidFiles)="this.invalidFiles = $event"
-               [accept]="'.png'">
+<fd-file-input
+    #fileInput
+    (onSelect)="this.files = $event"
+    (onInvalidFiles)="this.invalidFiles = $event"
+    [accept]="'.png'"
+>
     <button fd-button (click)="fileInput.open()">
         Drag a .jpg file on me!
     </button>
 </fd-file-input>
 
-<br/><br/>
+<br /><br />
 
 Files Selected:
-<span *ngFor="let file of files">
-    &nbsp;{{file.name}}
-</span>
+<span *ngFor="let file of files"> &nbsp;{{ file.name }} </span>
 
 <br />
 
 Invalid Files:
-<span *ngFor="let file of invalidFiles">
-    &nbsp;{{file.name}}
-</span>
+<span *ngFor="let file of invalidFiles"> &nbsp;{{ file.name }} </span>

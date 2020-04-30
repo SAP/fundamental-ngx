@@ -31,9 +31,8 @@ let randomId = 0;
  * Usually try to fire stateChange only for things that can change dynamically in runtime. We don't expect
  * that e.g. placeholder will change after component is created
  */
-export abstract class BaseInput extends BaseComponent implements FormFieldControl<any>, ControlValueAccessor,
-    OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
-
+export abstract class BaseInput extends BaseComponent
+    implements FormFieldControl<any>, ControlValueAccessor, OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
     protected defaultId: string = `fdp-input-id-${randomId++}`;
     protected _disabled: boolean;
     protected _value: any;
@@ -77,7 +76,6 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
         }
     }
 
-
     /**
      * need to make  these value accessor as abstract to be implemented by subclasses. Having them
      * in superclass have issue getting reference to them with Object.getOwnPropertyDescripton
@@ -88,13 +86,11 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
 
     abstract set value(value: any);
 
-
     /**
      * Reference to internal Input element
      */
     @ViewChild('elemRef', { static: true })
     protected _elementRef: ElementRef;
-
 
     /**
      * See @FormFieldControl
@@ -111,16 +107,17 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
      */
     readonly stateChanges: Subject<any> = new Subject<any>();
 
-
     // @formatter:off
     onChange = (_: any) => {};
     onTouched = () => {};
 
     // @formatter:on
 
-    constructor(protected _cd: ChangeDetectorRef,
-                @Optional() @Self() public ngControl: NgControl,
-                @Optional() @Self() public ngForm: NgForm) {
+    constructor(
+        protected _cd: ChangeDetectorRef,
+        @Optional() @Self() public ngControl: NgControl,
+        @Optional() @Self() public ngForm: NgForm
+    ) {
         super(_cd);
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
@@ -136,7 +133,6 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
     ngOnChanges(changes: SimpleChanges): void {
         this.stateChanges.next('input: ngOnChanges');
     }
-
 
     /**
      * Re-validate and emit event to parent container on every CD cycle as they are some errors
@@ -187,7 +183,6 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
         return this._status;
     }
 
-
     /**
      *
      * Keeps track of element focus
@@ -225,7 +220,6 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
         }
     }
 
-
     /**
      *  Need re-validates errors on every CD iteration to make sure we are also
      *  covering non-control errors, errors that happens outside of this control
@@ -233,7 +227,7 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
     protected updateErrorState() {
         const oldState = this.status === 'error';
         const parent = this.ngForm;
-        const control = this.ngControl ? this.ngControl.control as FormControl : null;
+        const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
         const newState = !!(control && control.invalid && (control.touched || (parent && parent.submitted)));
 
         if (newState !== oldState) {
@@ -241,7 +235,6 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
             this.stateChanges.next('updateErrorState');
         }
     }
-
 
     protected setValue(value: any) {
         if (value !== this._value) {
@@ -254,4 +247,3 @@ export abstract class BaseInput extends BaseComponent implements FormFieldContro
         return this._value;
     }
 }
-

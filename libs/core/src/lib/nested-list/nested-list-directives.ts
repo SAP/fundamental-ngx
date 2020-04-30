@@ -2,21 +2,18 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Directive({
-  selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]'
+    selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]'
 })
 export class NestedListHeaderDirective {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list__group-header')
     fdNestedListHeaderClass: boolean = true;
-
 }
 
 @Directive({
-  selector: '[fdNestedDirectivesIcon], [fd-nested-list-icon]'
+    selector: '[fdNestedDirectivesIcon], [fd-nested-list-icon]'
 })
 export class NestedListIconDirective extends AbstractFdNgxClass {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list__icon')
     fdNestedListIconClass: boolean = true;
@@ -39,26 +36,21 @@ export class NestedListIconDirective extends AbstractFdNgxClass {
     constructor(private elementRef: ElementRef) {
         super(elementRef);
     }
-
 }
 
 @Directive({
-  selector: '[fdNestedDirectivesTitle], [fd-nested-list-title]'
+    selector: '[fdNestedDirectivesTitle], [fd-nested-list-title]'
 })
 export class NestedListTitleDirective {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list__title')
     fdNestedListTitleClass: boolean = true;
 
     /** @hidden */
-    constructor (
-        private elementRef: ElementRef
-    ) {}
+    constructor(private elementRef: ElementRef) {}
 
     /** Returns element's InnerText */
     public getInnerText(): string {
         return this.elementRef && this.elementRef.nativeElement.innerText;
     }
-
 }

@@ -1,6 +1,5 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
-
         <fd-dialog-header>
             <h1 fd-dialog-title>Origin of the Pineapple Word</h1>
         </fd-dialog-header>
@@ -15,19 +14,24 @@
 
         <fd-dialog-footer>
             <fd-dialog-footer-button>
-                <button fd-button
-                        fdType="emphasized"
-                        fd-dialog-decisive-button
-                        [compact]="true"
-                        (click)="dialog.close()">
+                <button
+                    fd-button
+                    fdType="emphasized"
+                    fd-dialog-decisive-button
+                    [compact]="true"
+                    (click)="dialog.close()"
+                >
                     Interesting
                 </button>
             </fd-dialog-footer-button>
         </fd-dialog-footer>
-
     </fd-dialog>
 </ng-template>
 
 <button fd-button (click)="openDraggableDialog(dialogTemplate)">Open draggable Dialog</button>
-<button fd-button (click)="openResizableDialog(dialogTemplate)" style="margin-left: 1rem;">Open resizable Dialog</button>
-<button fd-button (click)="openClosableByButtonDialog(dialogTemplate)" style="margin-left: 1rem;">Open Dialog closable only with footer button</button>
+<button fd-button (click)="openResizableDialog(dialogTemplate)" style="margin-left: 1rem;">
+    Open resizable Dialog
+</button>
+<button fd-button (click)="openClosableByButtonDialog(dialogTemplate)" style="margin-left: 1rem;">
+    Open Dialog closable only with footer button
+</button>

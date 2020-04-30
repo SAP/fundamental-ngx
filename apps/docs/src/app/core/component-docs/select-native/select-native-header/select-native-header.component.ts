@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     selector: 'app-select-header',
     templateUrl: './select-native-header.component.html'
 })
-export class SelectNativeHeaderComponent {
-}
+export class SelectNativeHeaderComponent {}

@@ -108,5 +108,4 @@ describe('SwitchComponent', () => {
         expect(switchComp.classList).toContain('is-disabled');
         expect(input.disabled).toBeTrue();
     });
-
 });

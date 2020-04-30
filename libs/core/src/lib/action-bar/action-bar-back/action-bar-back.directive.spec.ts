@@ -3,9 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionBarModule } from '../action-bar.module';
 
 @Component({
-    template: `
-        <div #directiveElement fd-action-bar-back>Action Bar Back Test Text</div>
-    `
+    template: ` <div #directiveElement fd-action-bar-back>Action Bar Back Test Text</div> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -37,4 +35,3 @@ describe('ActionBarBackDirective', () => {
         expect(component.ref.nativeElement.className).toBe('fd-action-bar__back');
     });
 });
-

@@ -34,7 +34,7 @@ export class PopoverDirectiveDocsComponent {
             language: 'html',
             scssFileCode: triggerScss,
             code: triggerH,
-            fileName: 'popover-triggers',
+            fileName: 'popover-triggers'
         }
     ];
 

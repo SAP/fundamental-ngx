@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./switch-binding-example.component.scss']
 })
 export class SwitchBindingExampleComponent {
-
     firstSwitch = false;
     secondSwitch = false;
 

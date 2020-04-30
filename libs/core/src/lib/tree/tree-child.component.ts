@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 import { TreeRowObject } from './tree-row-object.model';
 
 @Component({

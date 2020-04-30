@@ -1,12 +1,4 @@
-import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    ViewChild,
-    ElementRef,
-    ChangeDetectorRef
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { BaseComponent } from '../base';
 
 export type ButtonType =
@@ -25,7 +17,6 @@ export type ButtonType =
     styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent extends BaseComponent {
-
     /** Option to make to button compact. */
     @Input()
     compact: boolean;

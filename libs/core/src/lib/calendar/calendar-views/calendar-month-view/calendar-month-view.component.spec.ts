@@ -4,7 +4,6 @@ import { CalendarMonthViewComponent } from './calendar-month-view.component';
 import { By } from '@angular/platform-browser';
 import { CalendarService } from '../../calendar.service';
 
-
 describe('CalendarMonthViewComponent', () => {
     let component: CalendarMonthViewComponent;
     let fixture: ComponentFixture<CalendarMonthViewComponent>;
@@ -14,8 +13,7 @@ describe('CalendarMonthViewComponent', () => {
         TestBed.configureTestingModule({
             declarations: [CalendarMonthViewComponent],
             providers: [CalendarService]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -55,11 +53,11 @@ describe('CalendarMonthViewComponent', () => {
         expect(selectedElement.classList.contains('is-active')).toBe(true);
     });
 
-
     it('Should focus the month below with ArrowDown', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            key: 'ArrowDown', preventDefault: () => {}
+            key: 'ArrowDown',
+            preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-8');
@@ -68,7 +66,8 @@ describe('CalendarMonthViewComponent', () => {
     it('Should focus the month above with ArrowUp', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            key: 'ArrowUp', preventDefault: () => {}
+            key: 'ArrowUp',
+            preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-2');
@@ -77,7 +76,8 @@ describe('CalendarMonthViewComponent', () => {
     it('Should focus the month to the left with ArrowLeft', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            key: 'ArrowLeft', preventDefault: () => {}
+            key: 'ArrowLeft',
+            preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-4');
@@ -86,7 +86,8 @@ describe('CalendarMonthViewComponent', () => {
     it('Should focus the month to the right with ArrowRight', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            key: 'ArrowRight', preventDefault: () => {}
+            key: 'ArrowRight',
+            preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-6');
@@ -94,16 +95,17 @@ describe('CalendarMonthViewComponent', () => {
 
     it('Should select a month with Enter', () => {
         const event = {
-            key: 'Enter', preventDefault: () => {}
+            key: 'Enter',
+            preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);
     });
 
     it('Should select a month with Space', () => {
-
         const event = {
-            key: ' ', preventDefault: () => {}
+            key: ' ',
+            preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);
@@ -112,9 +114,8 @@ describe('CalendarMonthViewComponent', () => {
     it('Should generate grid', () => {
         expect(component.monthNames).toBeDefined();
 
-        const sizes: number[] = component.monthNames.map(list => list.length);
+        const sizes: number[] = component.monthNames.map((list) => list.length);
 
         expect(sizes).toEqual([3, 3, 3, 3]);
-
     });
 });

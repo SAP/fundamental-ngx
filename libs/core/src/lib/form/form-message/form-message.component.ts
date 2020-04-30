@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
-export type MessageStates = 'success' | 'error' | 'warning' | 'information'
+export type MessageStates = 'success' | 'error' | 'warning' | 'information';
 
 /**
  * Form message. Intended to be displayed with a form control for validation purposes.
@@ -13,7 +13,6 @@ export type MessageStates = 'success' | 'error' | 'warning' | 'information'
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormMessageComponent {
-
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
     @Input()
     type: MessageStates;

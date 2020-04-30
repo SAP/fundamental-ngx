@@ -19,8 +19,7 @@ export default {
 };
 
 export const Pagination = () => ({
-    template:
-        `
+    template: `
         <fd-pagination [totalItems]="totalItems" (pageChangeStart)="newPageClicked($event)" 
                        [itemsPerPage]="itemsPerPage"
                        [currentPage]="currentPage"></fd-pagination>

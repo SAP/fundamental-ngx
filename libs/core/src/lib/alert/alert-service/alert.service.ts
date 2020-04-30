@@ -1,9 +1,4 @@
-import {
-    Injectable,
-    ComponentRef,
-    TemplateRef,
-    Type
-} from '@angular/core';
+import { Injectable, ComponentRef, TemplateRef, Type } from '@angular/core';
 import { AlertComponent } from '../alert.component';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 import { AlertConfig } from '../alert-utils/alert-config';
@@ -14,7 +9,7 @@ import { AlertRef } from '../alert-utils/alert-ref';
  * @deprecated
  * Alert component is depricated since version 0.16.0
  * Message Strip component should be used instead.
- * 
+ *
  * Service used to dynamically generate an alert as an overlay.
  */
 @Injectable()
@@ -23,9 +18,7 @@ export class AlertService {
     private alertContainerRef: ComponentRef<AlertContainerComponent>;
 
     /** @hidden */
-    constructor(
-        private dynamicComponentService: DynamicComponentService
-    ) { }
+    constructor(private dynamicComponentService: DynamicComponentService) {}
 
     /**
      * Returns true if there are some alerts currently open. False otherwise.
@@ -39,8 +32,10 @@ export class AlertService {
      * @param content Content of the alert component.
      * @param alertConfig Configuration of the alert component.
      */
-    public open(content: TemplateRef<any> | Type<any> | string, alertConfig: AlertConfig = new AlertConfig()): AlertRef {
-
+    public open(
+        content: TemplateRef<any> | Type<any> | string,
+        alertConfig: AlertConfig = new AlertConfig()
+    ): AlertRef {
         // Get default values from alert model
         alertConfig = Object.assign(new AlertConfig(), alertConfig);
 
@@ -50,16 +45,22 @@ export class AlertService {
 
         // If empty or undefined alert array, create container
         if (!this.alerts || this.alerts.length === 0 || !this.alertContainerRef) {
-            this.alertContainerRef = this.dynamicComponentService.createDynamicComponent
-                <AlertContainerComponent>(content, AlertContainerComponent, alertConfig)
-                ;
+            this.alertContainerRef = this.dynamicComponentService.createDynamicComponent<AlertContainerComponent>(
+                content,
+                AlertContainerComponent,
+                alertConfig
+            );
         }
 
         // Define Container to put backdrop and component to container
         alertConfig.container = this.alertContainerRef.location.nativeElement;
 
-        const component = this.dynamicComponentService.createDynamicComponent
-            <AlertComponent>(content, AlertComponent, alertConfig, { services: [service, alertConfig] });
+        const component = this.dynamicComponentService.createDynamicComponent<AlertComponent>(
+            content,
+            AlertComponent,
+            alertConfig,
+            { services: [service, alertConfig] }
+        );
 
         component.location.nativeElement.style.marginTop = '10px';
 
@@ -78,14 +79,14 @@ export class AlertService {
      * Dismisses all service-opened alerts.
      */
     public dismissAll(): void {
-        this.alerts.forEach(ref => {
+        this.alerts.forEach((ref) => {
             this.destroyAlertComponent(ref);
         });
     }
 
     private destroyAlertComponent(alert: ComponentRef<AlertComponent>): void {
         this.alerts[this.alerts.indexOf(alert)] = null;
-        this.alerts = this.alerts.filter(item => item !== null && item !== undefined);
+        this.alerts = this.alerts.filter((item) => item !== null && item !== undefined);
         this.dynamicComponentService.destroyComponent(alert);
 
         if (this.alertContainerRef && (!this.alerts || this.alerts.length === 0)) {
@@ -97,5 +98,4 @@ export class AlertService {
         this.dynamicComponentService.destroyComponent(this.alertContainerRef);
         this.alertContainerRef = undefined;
     }
-
 }

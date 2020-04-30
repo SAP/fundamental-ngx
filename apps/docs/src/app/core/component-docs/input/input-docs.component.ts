@@ -16,14 +16,14 @@ export class InputDocsComponent {
         {
             language: 'html',
             code: formHtml,
-            fileName: 'input-example',
+            fileName: 'input-example'
         }
     ];
     inputsHelpFormHtml: ExampleFile[] = [
         {
             language: 'html',
             code: formInlineHelpHtml,
-            fileName: 'input-inline-help-example',
+            fileName: 'input-inline-help-example'
         }
     ];
 
@@ -31,7 +31,7 @@ export class InputDocsComponent {
         {
             language: 'html',
             code: formStateHtml,
-            fileName: 'input-state-example',
+            fileName: 'input-state-example'
         }
     ];
 

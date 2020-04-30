@@ -1,11 +1,4 @@
-import {
-    AfterContentInit,
-    ContentChildren,
-    Directive,
-    HostBinding,
-    OnDestroy,
-    QueryList
-} from '@angular/core';
+import { AfterContentInit, ContentChildren, Directive, HostBinding, OnDestroy, QueryList } from '@angular/core';
 import { MegaMenuItemComponent } from '../mega-menu-item/mega-menu-item.component';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
@@ -35,7 +28,6 @@ import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
     selector: '[fd-mega-menu-list]'
 })
 export class MegaMenuListDirective implements AfterContentInit, OnDestroy {
-
     /** @hidden */
     @HostBinding('class.fd-mega-menu__list')
     fdMegaMenuClass: boolean = true;
@@ -51,16 +43,11 @@ export class MegaMenuListDirective implements AfterContentInit, OnDestroy {
     private readonly onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(
-        private menuKeyboardService: MenuKeyboardService,
-    ) {}
+    constructor(private menuKeyboardService: MenuKeyboardService) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.items.changes
-            .pipe(takeUntil(this.onDestroy$), startWith(5))
-            .subscribe(() => this.refreshSubscription())
-        ;
+        this.items.changes.pipe(takeUntil(this.onDestroy$), startWith(5)).subscribe(() => this.refreshSubscription());
     }
 
     /** Method that provides handles keydown events from menu item list */
@@ -83,9 +70,10 @@ export class MegaMenuListDirective implements AfterContentInit, OnDestroy {
         const refreshObs = merge(this.onRefresh$, this.onDestroy$);
 
         /** New subscription streams */
-        this.items.forEach((item: MegaMenuItemComponent, index: number) => item.keyDown
-            .pipe(takeUntil(refreshObs))
-            .subscribe((keyboardEvent: KeyboardEvent) => this.handleListKeyDown(keyboardEvent, index)))
-        ;
+        this.items.forEach((item: MegaMenuItemComponent, index: number) =>
+            item.keyDown
+                .pipe(takeUntil(refreshObs))
+                .subscribe((keyboardEvent: KeyboardEvent) => this.handleListKeyDown(keyboardEvent, index))
+        );
     }
 }

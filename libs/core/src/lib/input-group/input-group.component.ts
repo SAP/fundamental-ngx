@@ -6,7 +6,10 @@ import {
     forwardRef,
     ViewEncapsulation,
     ContentChild,
-    TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, OnInit, ViewChild, ElementRef
+    TemplateRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
@@ -14,7 +17,6 @@ import { FormStates } from '../form/form-control/form-states';
 import { ButtonComponent, ButtonType } from '../button/button.component';
 
 export type InputGroupPlacement = 'before' | 'after';
-
 
 /**
  * The component that represents an input group.
@@ -40,7 +42,6 @@ export type InputGroupPlacement = 'before' | 'after';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupComponent implements ControlValueAccessor {
-
     /** @hidden */
     @ContentChild(InputGroupInputDirective)
     inputElement: InputGroupInputDirective;
@@ -131,18 +132,16 @@ export class InputGroupComponent implements ControlValueAccessor {
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
 
     /** @hidden */
-    constructor(
-        private changeDetectorRef: ChangeDetectorRef
-    ) { }
+    constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     inputTextValue: string;
 
     /** @hidden */
-    onChange: any = () => { };
+    onChange: any = () => {};
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {};
 
     /** Get the value of the text input. */
     get inputText(): string {

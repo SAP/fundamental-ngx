@@ -1,6 +1,7 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -9,9 +10,11 @@ import {
     Input,
     OnChanges,
     OnInit,
-    Output, QueryList,
+    Output,
+    QueryList,
     SimpleChanges,
-    ViewChild, ViewChildren,
+    ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -21,6 +24,7 @@ import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
 import { ListItemDirective } from '../list/list-item.directive';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -33,8 +37,7 @@ import { ListItemDirective } from '../list/list-item.directive';
     templateUrl: './multi-input.component.html',
     styleUrls: ['./multi-input.component.scss'],
     host: {
-        '(blur)': 'onTouched()',
-        '[class.fd-multi-input-custom]': 'true'
+        '(blur)': 'onTouched()'
     },
     providers: [
         {
@@ -47,8 +50,10 @@ import { ListItemDirective } from '../list/list-item.directive';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit {
-
+export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit, CssClassBuilder {
+    /** user's custom classes */
+    @Input()
+    class: string;
     /** @hidden */
     @ViewChild(PopoverComponent)
     popoverRef: PopoverComponent;
@@ -60,10 +65,6 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     @ViewChild('searchInputElement')
     searchInputElement: ElementRef;
-
-    /** @hidden */
-    @HostBinding('class.fd-multi-input')
-    multiInputClass = true;
 
     /** Placeholder for the input field. */
     @Input()
@@ -175,20 +176,21 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     public focusTrap: FocusTrap;
 
     /** @hidden */
-    onChange: Function = () => { };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => { };
+    onTouched: Function = () => {};
 
     /** @hidden */
     constructor(
-        private elRef: ElementRef,
+        private _elementRef: ElementRef,
         private changeDetRef: ChangeDetectorRef,
         private menuKeyboardService: MenuKeyboardService
-    ) { }
+    ) {}
 
     /** @hidden */
     ngOnInit() {
+        this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
@@ -197,6 +199,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
+        this.buildComponentCssClass();
         if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
             if (this.searchTerm) {
                 this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
@@ -210,7 +213,26 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     ngAfterViewInit(): void {
         this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this.menuKeyboardService.focusEscapeAfterList = () => { };
+        this.menuKeyboardService.focusEscapeAfterList = () => {};
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            'fd-multi-input',
+            'fd-multi-input-custom',
+            this.class
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 
     /** @hidden */
@@ -227,9 +249,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         if (isDisabled) {
-            this.elRef.nativeElement.style.pointerEvents = 'none';
+            this._elementRef.nativeElement.style.pointerEvents = 'none';
         } else {
-            this.elRef.nativeElement.style.pointerEvents = 'auto';
+            this._elementRef.nativeElement.style.pointerEvents = 'auto';
         }
         this.changeDetRef.detectChanges();
     }
@@ -267,8 +289,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
 
         // Handle popover placement update
-        if ((previousLength === 0 && this.selected.length === 1) ||
-            (previousLength === 1 && this.selected.length === 0)) {
+        if (
+            (previousLength === 0 && this.selected.length === 1) ||
+            (previousLength === 1 && this.selected.length === 0)
+        ) {
             this.popoverRef.updatePopover();
         }
 
@@ -285,7 +309,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     public handleInputKeydown(event: KeyboardEvent): void {
         if (event.key === 'ArrowDown') {
             if (event.altKey) {
-                this.openChangeHandle(true)
+                this.openChangeHandle(true);
             }
             if (this.listItems.first) {
                 this.listItems.first.focus();
@@ -325,7 +349,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
-        return contentArray.filter(item => {
+        return contentArray.filter((item) => {
             if (item) {
                 return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
             }
@@ -342,7 +366,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     private setupFocusTrap(): void {
         try {
-            this.focusTrap = focusTrap(this.elRef.nativeElement, {
+            this.focusTrap = focusTrap(this._elementRef.nativeElement, {
                 clickOutsideDeactivates: true,
                 returnFocusOnDeactivate: true,
                 escapeDeactivates: false
@@ -351,5 +375,4 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             console.warn('Unsuccessful attempting to focus trap the Multi Input.');
         }
     }
-
 }

@@ -9,12 +9,7 @@ import {
     Self,
     AfterContentInit
 } from '@angular/core';
-import {
-    Overlay,
-    OverlayRef,
-    OverlayConfig,
-    ConnectedPosition
-} from '@angular/cdk/overlay';
+import { Overlay, OverlayRef, OverlayConfig, ConnectedPosition } from '@angular/cdk/overlay';
 
 import { MenuComponent, MenuCloseMethod } from './menu.component';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -31,7 +26,6 @@ import { take, filter } from 'rxjs/operators';
     }
 })
 export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
-
     private _menu: MenuComponent;
     private _overlayRef: OverlayRef;
     private _portal: TemplatePortal;
@@ -43,7 +37,9 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     private menuItemHoverChangeSubscription: Subscription = Subscription.EMPTY;
 
     @Input('fdpMenuTriggerFor')
-    get menu() { return this._menu; }
+    get menu() {
+        return this._menu;
+    }
     set menu(menu: MenuComponent) {
         if (this._menu === menu) {
             return;
@@ -58,13 +54,10 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         private _viewContainerRef: ViewContainerRef,
         @Optional() @Self() private _menuItem: MenuItemComponent,
         @Optional() private _parentMenu: MenuComponent
-    ) {
-
-    }
+    ) {}
 
     ngAfterContentInit() {
         if (this._isMenuItem()) {
-
             // mark menu item as trigger
             this._menuItem.isTrigger = true;
 
@@ -135,7 +128,6 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     }
 
     openMenu() {
-
         // create overlay
         const overlayConfig = this._getOverlayConfig();
         this._overlayRef = this._overlay.create(overlayConfig);
@@ -147,17 +139,20 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         // add subscription to capture clicks outside menu
         this.outsideClickSubscription = fromEvent<MouseEvent>(document, 'click')
             .pipe(
-                filter(event => {
+                filter((event) => {
                     const target = event.target as HTMLElement;
-                    return !this._element.nativeElement.contains(target)
-                        && (!!this._overlayRef && !this._overlayRef.overlayElement.contains(target))
-                        && this.isMenuOpen;
+                    return (
+                        !this._element.nativeElement.contains(target) &&
+                        !!this._overlayRef &&
+                        !this._overlayRef.overlayElement.contains(target) &&
+                        this.isMenuOpen
+                    );
                 }),
                 take(1)
-            ).subscribe((event) => {
+            )
+            .subscribe((event) => {
                 this.closeMenu();
             });
-
 
         // add subscription to menu 'close' event
         this.menuCloseSubscription = this._menu.close.subscribe((method: MenuCloseMethod) => {
@@ -196,7 +191,8 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
 
     private _getOverlayConfig(): OverlayConfig {
         const positions = this._getPositions();
-        const positionStrategy = this._overlay.position()
+        const positionStrategy = this._overlay
+            .position()
             .flexibleConnectedTo(this._element)
             .withLockedPosition()
             .withPositions(positions);
@@ -217,67 +213,79 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         const offsetXPosition = 0;
         if (this._isMenuItem()) {
             if (this._menu.cascadesLeft()) {
-                positions = [{
-                    originX: 'start',
-                    originY: 'top',
-                    overlayX: 'end',
-                    overlayY: 'top',
-                    offsetX: offsetXPosition
-                }, {
-                    originX: 'start',
-                    originY: 'bottom',
-                    overlayX: 'end',
-                    overlayY: 'bottom',
-                    offsetX: offsetXPosition
-                }];
+                positions = [
+                    {
+                        originX: 'start',
+                        originY: 'top',
+                        overlayX: 'end',
+                        overlayY: 'top',
+                        offsetX: offsetXPosition
+                    },
+                    {
+                        originX: 'start',
+                        originY: 'bottom',
+                        overlayX: 'end',
+                        overlayY: 'bottom',
+                        offsetX: offsetXPosition
+                    }
+                ];
             } else {
-                positions = [{
-                    originX: 'end',
-                    originY: 'top',
-                    overlayX: 'start',
-                    overlayY: 'top',
-                    offsetX: -offsetXPosition
-                }, {
-                    originX: 'end',
-                    originY: 'bottom',
-                    overlayX: 'start',
-                    overlayY: 'bottom',
-                    offsetX: -offsetXPosition
-                }];
+                positions = [
+                    {
+                        originX: 'end',
+                        originY: 'top',
+                        overlayX: 'start',
+                        overlayY: 'top',
+                        offsetX: -offsetXPosition
+                    },
+                    {
+                        originX: 'end',
+                        originY: 'bottom',
+                        overlayX: 'start',
+                        overlayY: 'bottom',
+                        offsetX: -offsetXPosition
+                    }
+                ];
             }
         } else {
             if (this._menu.cascadesLeft()) {
-                positions = [{
-                    originX: 'end',
-                    originY: 'bottom',
-                    overlayX: 'end',
-                    overlayY: 'top',
-                    offsetY: offsetYPosition,
-                    offsetX: offsetXPosition
-                }, {
-                    originX: 'end',
-                    originY: 'top',
-                    overlayX: 'end',
-                    overlayY: 'bottom',
-                    offsetY: -offsetYPosition,
-                    offsetX: offsetXPosition
-                }];
+                positions = [
+                    {
+                        originX: 'end',
+                        originY: 'bottom',
+                        overlayX: 'end',
+                        overlayY: 'top',
+                        offsetY: offsetYPosition,
+                        offsetX: offsetXPosition
+                    },
+                    {
+                        originX: 'end',
+                        originY: 'top',
+                        overlayX: 'end',
+                        overlayY: 'bottom',
+                        offsetY: -offsetYPosition,
+                        offsetX: offsetXPosition
+                    }
+                ];
             } else {
-                positions = [{
-                    originX: 'start',
-                    originY: 'bottom',
-                    overlayX: 'start',
-                    overlayY: 'top',
-                    offsetY: offsetYPosition,
-                    offsetX: -offsetXPosition
-                }, {
-                    originX: 'start',
-                    originY: 'top',
-                    overlayX: 'start',
-                    overlayY: 'bottom',
-                    offsetY: -offsetYPosition,
-                    offsetX: -offsetXPosition
-                }];
+                positions = [
+                    {
+                        originX: 'start',
+                        originY: 'bottom',
+                        overlayX: 'start',
+                        overlayY: 'top',
+                        offsetY: offsetYPosition,
+                        offsetX: -offsetXPosition
+                    },
+                    {
+                        originX: 'start',
+                        originY: 'top',
+                        overlayX: 'start',
+                        overlayY: 'bottom',
+                        offsetY: -offsetYPosition,
+                        offsetX: -offsetXPosition
+                    }
+                ];
             }
         }
 
@@ -287,5 +295,4 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     private _isMenuItem(): boolean {
         return !!(this._parentMenu && this._menuItem);
     }
-
 }

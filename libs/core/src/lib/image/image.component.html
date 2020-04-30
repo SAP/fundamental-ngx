@@ -1,5 +1,6 @@
 <span
-  [ngClass]='(size ? "fd-image--" + size : "") + (circle ? " fd-image--circle" : "") '
-  [attr.aria-label]='label'
-  [ngStyle]= "{'background-image': 'url(' + photo + ')'}">
+    [ngClass]="(size ? 'fd-image--' + size : '') + (circle ? ' fd-image--circle' : '')"
+    [attr.aria-label]="label"
+    [ngStyle]="{ 'background-image': 'url(' + photo + ')' }"
+>
 </span>

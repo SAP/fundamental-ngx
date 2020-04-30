@@ -7,7 +7,6 @@ import { DIALOG_REF, DialogRef } from '../dialog-utils/dialog-ref.class';
 /** Service used to dynamically generate a dialog. */
 @Injectable()
 export class DialogService {
-
     /** @hidden Collection of existing dialog references */
     private _dialogs: ComponentRef<DialogContainerComponent>[] = [];
 
@@ -26,7 +25,7 @@ export class DialogService {
 
     /** Dismisses all currently open dialogs. */
     public dismissAll(): void {
-        this._dialogs.forEach(item => this._destroyDialogComponent(item));
+        this._dialogs.forEach((item) => this._destroyDialogComponent(item));
     }
 
     /**
@@ -35,7 +34,6 @@ export class DialogService {
      * @param dialogConfig Configuration of the dialog component.
      */
     public open(contentType: Type<any> | TemplateRef<any>, dialogConfig?: DialogConfig): DialogRef {
-
         const dialogRef: DialogRef = new DialogRef();
 
         dialogConfig = this._applyDefaultConfig(dialogConfig, this._defaultConfig || new DialogConfig());
@@ -43,20 +41,16 @@ export class DialogService {
 
         const dialogInjector = Injector.create({
             providers: [
-                {provide: DIALOG_CONFIG, useValue: dialogConfig},
-                {provide: DIALOG_REF, useValue: dialogRef}
+                { provide: DIALOG_CONFIG, useValue: dialogConfig },
+                { provide: DIALOG_REF, useValue: dialogRef }
             ]
         });
 
-        const component: ComponentRef<DialogContainerComponent> = this._dynamicComponentService
-            .createDynamicComponent<DialogContainerComponent>(
-                contentType,
-                DialogContainerComponent,
-                dialogConfig,
-                {
-                    injector: dialogInjector
-                }
-            );
+        const component: ComponentRef<DialogContainerComponent> = this._dynamicComponentService.createDynamicComponent<
+            DialogContainerComponent
+        >(contentType, DialogContainerComponent, dialogConfig, {
+            injector: dialogInjector
+        });
 
         this._dialogs.push(component);
 
@@ -72,19 +66,17 @@ export class DialogService {
 
     /** @hidden Destroy existing Dialog */
     private _destroyDialogComponent(dialog: ComponentRef<DialogContainerComponent>): void {
-
         const arrayRef = this._dialogs.find((item) => item === dialog);
         const indexOf = this._dialogs.indexOf(arrayRef);
         this._dynamicComponentService.destroyComponent(arrayRef);
         arrayRef.destroy();
 
         this._dialogs[indexOf] = null;
-        this._dialogs = this._dialogs.filter(item => item !== null && item !== undefined);
-
+        this._dialogs = this._dialogs.filter((item) => item !== null && item !== undefined);
     }
 
     /** @hidden Extends dialog config using default values*/
     private _applyDefaultConfig(config: DialogConfig, defaultConfig: DialogConfig): DialogConfig {
-        return {...defaultConfig, ...config};
+        return { ...defaultConfig, ...config };
     }
 }

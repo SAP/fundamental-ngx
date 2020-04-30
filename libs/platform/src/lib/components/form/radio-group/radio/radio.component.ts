@@ -8,7 +8,7 @@ import {
     Self,
     ViewChild,
     TemplateRef,
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { RadioButtonComponent as CoreRadioButtonComponent, stateType } from '@fundamental-ngx/core';
 import { NgControl, NgForm } from '@angular/forms';
@@ -20,7 +20,7 @@ let uniqueId = 0;
 @Component({
     selector: 'fdp-radio-button',
     templateUrl: './radio.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RadioButtonComponent extends BaseInput {
     /** value for Radio button */

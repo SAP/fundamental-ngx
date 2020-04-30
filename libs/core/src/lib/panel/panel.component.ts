@@ -15,7 +15,6 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelComponent extends AbstractFdNgxClass {
-
     /** @Input Background image of the panel. */
     @Input()
     backgroundImage: string;

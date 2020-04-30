@@ -18,7 +18,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelFooterComponent {
-
     /** @hidden */
     @HostBinding('class.fd-panel__footer')
     fdPanelFooterClass: boolean = true;

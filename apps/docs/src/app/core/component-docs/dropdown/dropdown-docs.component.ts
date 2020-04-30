@@ -23,13 +23,13 @@ export class DropdownDocsComponent {
         {
             language: 'html',
             code: dropdownDefaultMenuHtml,
-            fileName: 'dropdown-default-example',
+            fileName: 'dropdown-default-example'
         },
         {
             language: 'typescript',
             code: dropdownDefaultMenuTs,
             fileName: 'dropdown-default-example',
-            component: 'DropdownDefaultExampleComponent',
+            component: 'DropdownDefaultExampleComponent'
         }
     ];
 
@@ -37,13 +37,13 @@ export class DropdownDocsComponent {
         {
             language: 'html',
             code: dropdownStateMenuHtml,
-            fileName: 'dropdown-state-example',
+            fileName: 'dropdown-state-example'
         },
         {
             language: 'typescript',
             code: dropdownStateMenuTs,
             fileName: 'dropdown-state-example',
-            component: 'DropdownStateExampleComponent',
+            component: 'DropdownStateExampleComponent'
         }
     ];
 
@@ -51,13 +51,13 @@ export class DropdownDocsComponent {
         {
             language: 'html',
             code: dropdownIconsMenuHtml,
-            fileName: 'dropdown-icons-example',
+            fileName: 'dropdown-icons-example'
         },
         {
             language: 'typescript',
             code: dropdownIconsMenuTs,
             fileName: 'dropdown-icons-example',
-            component: 'DropdownIconsExampleComponent',
+            component: 'DropdownIconsExampleComponent'
         }
     ];
 
@@ -65,13 +65,13 @@ export class DropdownDocsComponent {
         {
             language: 'html',
             code: dropdownContextualMenuHtml,
-            fileName: 'dropdown-contextual-menu-example',
+            fileName: 'dropdown-contextual-menu-example'
         },
         {
             language: 'typescript',
             code: dropdownContextualMenuTs,
             fileName: 'dropdown-contextual-menu-example',
-            component: 'DropdownContextualMenuExampleComponent',
+            component: 'DropdownContextualMenuExampleComponent'
         }
     ];
 
@@ -93,13 +93,13 @@ export class DropdownDocsComponent {
         {
             language: 'html',
             code: dropdownToolbarHtml,
-            fileName: 'dropdown-toolbar-example',
+            fileName: 'dropdown-toolbar-example'
         },
         {
             language: 'typescript',
             code: dropdownToolbarTs,
             fileName: 'dropdown-toolbar-example',
-            component: 'DropdownToolbarExampleComponent',
+            component: 'DropdownToolbarExampleComponent'
         }
     ];
 }

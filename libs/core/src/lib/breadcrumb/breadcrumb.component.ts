@@ -2,8 +2,14 @@ import {
     AfterContentInit,
     ChangeDetectionStrategy,
     Component,
-    ContentChildren, ElementRef, forwardRef,
-    HostListener, Input, OnInit, Optional, QueryList,
+    ContentChildren,
+    ElementRef,
+    forwardRef,
+    HostListener,
+    Input,
+    OnInit,
+    Optional,
+    QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
@@ -34,7 +40,6 @@ import { BehaviorSubject } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbComponent implements AfterContentInit, OnInit {
-
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
     breadcrumbItems: QueryList<BreadcrumbItemDirective>;
@@ -74,7 +79,8 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
             if (this.elementRef.nativeElement.getBoundingClientRect().width > this.containerBoundary) {
                 this.collapseBreadcrumbs();
             }
-        } else if (this.collapsedBreadcrumbItems.length) { // if the screen is getting bigger and there are collapsed breadcrumbs
+        } else if (this.collapsedBreadcrumbItems.length) {
+            // if the screen is getting bigger and there are collapsed breadcrumbs
             this.expandBreadcrumbs();
         }
         this.previousContainerWidth = this.containerBoundary;
@@ -100,7 +106,10 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
         let i = 0;
         const containerBoundary = this.getContainerBoundary();
         // move the breadcrumb items into a collapsed menu one by one, until the last one is inside the window
-        while (this.elementRef.nativeElement.getBoundingClientRect().width > containerBoundary && i < this.breadcrumbItems.length) {
+        while (
+            this.elementRef.nativeElement.getBoundingClientRect().width > containerBoundary &&
+            i < this.breadcrumbItems.length
+        ) {
             const breadcrumbItem = this.breadcrumbItems.filter((item, index) => index === i)[0];
             if (this.collapsedBreadcrumbItems.indexOf(breadcrumbItem) === -1) {
                 this.collapsedBreadcrumbItems.push(breadcrumbItem);
@@ -159,11 +168,11 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     /** @hidden */
     ngOnInit(): void {
         if (this.rtlService) {
-            this.rtlService.rtl.subscribe(value => this.placement$.next(value ? 'bottom-end' : 'bottom-start'));
+            this.rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'));
         }
     }
 
-    constructor(public elementRef: ElementRef, @Optional() private rtlService: RtlService) { }
+    constructor(public elementRef: ElementRef, @Optional() private rtlService: RtlService) {}
 
     private fitInBoundries(): boolean {
         return this.elementRef.nativeElement.getBoundingClientRect().width < this.getContainerBoundary();

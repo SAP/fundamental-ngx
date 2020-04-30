@@ -10,14 +10,8 @@ import { LoadingSpinnerModule } from '../loading-spinner/loading-spinner.module'
 import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
 
 @NgModule({
-    declarations: [
-        SelectComponent,
-        OptionComponent
-    ],
-    exports: [
-        SelectComponent,
-        OptionComponent
-    ],
+    declarations: [SelectComponent, OptionComponent],
+    exports: [SelectComponent, OptionComponent],
     imports: [
         BusyIndicatorModule,
         CommonModule,
@@ -28,4 +22,4 @@ import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
         LoadingSpinnerModule
     ]
 })
-export class SelectModule { }
+export class SelectModule {}

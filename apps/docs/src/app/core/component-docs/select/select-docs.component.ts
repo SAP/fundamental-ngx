@@ -57,13 +57,12 @@ export class SelectDocsComponent {
             code: selectProgSrcH,
             fileName: 'select-programmatic-example',
             scssFileCode: selectProgSrcS
-
         },
         {
             language: 'typescript',
             component: 'SelectProgrammaticExampleComponent',
             code: selectProgSrcT,
-            fileName: 'select-programmatic-example',
+            fileName: 'select-programmatic-example'
         }
     ];
 
@@ -100,7 +99,7 @@ export class SelectDocsComponent {
             language: 'typescript',
             component: 'SelectAddingExampleComponent',
             code: selectAddingSrcT,
-            fileName: 'select-adding-example',
+            fileName: 'select-adding-example'
         }
     ];
 
@@ -108,14 +107,13 @@ export class SelectDocsComponent {
         {
             language: 'html',
             code: selectFormSrcH,
-            fileName: 'select-forms',
-
+            fileName: 'select-forms'
         },
         {
             language: 'typescript',
             component: 'SelectFormsComponent',
             code: selectFormSrcT,
-            fileName: 'select-forms',
+            fileName: 'select-forms'
         }
     ];
 
@@ -133,13 +131,13 @@ export class SelectDocsComponent {
         {
             language: 'html',
             code: selectViewValueH,
-            fileName: 'select-view-value-example',
+            fileName: 'select-view-value-example'
         },
         {
             language: 'typescript',
             component: 'SelectViewValueExampleComponent',
             code: selectViewValueT,
-            fileName: 'select-view-value-example',
+            fileName: 'select-view-value-example'
         }
     ];
     selectTypes: ExampleFile[] = [

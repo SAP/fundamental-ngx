@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './dropdown-default-example.component.html'
 })
 export class DropdownDefaultExampleComponent {
-
     menu1 = [
         { text: 'Option 1', url: '#' },
         { text: 'Option 2', url: '#' },
@@ -17,5 +16,4 @@ export class DropdownDefaultExampleComponent {
         { text: 'Option 4', url: '#' },
         { text: 'Option 5', url: '#' }
     ];
-
 }

@@ -6,15 +6,14 @@ import { ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core';
     templateUrl: './shellbar-basic-example.component.html'
 })
 export class ShellbarBasicExampleComponent {
-
     user: ShellbarUser = {
         initials: 'WW',
         colorAccent: 11
     };
 
     userMenu: ShellbarUserMenu[] = [
-        {text: 'Settings', callback: this.settingsCallback},
-        {text: 'Sign Out', callback: this.signOutCallback}
+        { text: 'Settings', callback: this.settingsCallback },
+        { text: 'Sign Out', callback: this.signOutCallback }
     ];
 
     settingsCallback() {
@@ -24,5 +23,4 @@ export class ShellbarBasicExampleComponent {
     signOutCallback() {
         alert('Sign Out Clicked');
     }
-
 }

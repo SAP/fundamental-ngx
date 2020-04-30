@@ -4,13 +4,17 @@ import { ListModule } from './list.module';
 
 @Component({
     template: `
-        <ul #componentElement
+        <ul
+            #componentElement
             [dropdownMode]="dropdown"
             [multiInputMode]="multiInput"
             [hasMessage]="hasMessage"
             [noBorder]="noBorder"
             [compact]="compact"
-            fd-list>Action Bar Title Test Text</ul>
+            fd-list
+        >
+            Action Bar Title Test Text
+        </ul>
     `
 })
 class TestComponent {
@@ -25,7 +29,7 @@ class TestComponent {
 
     hasMessage: boolean = false;
 
-    noBorder: boolean = false
+    noBorder: boolean = false;
 }
 
 describe('ListComponent', () => {

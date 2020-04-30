@@ -3,9 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormModule } from '../form.module';
 
 @Component({
-    template: `
-        <legend #directiveElement fd-form-legend>Test Text</legend>
-    `
+    template: ` <legend #directiveElement fd-form-legend>Test Text</legend> `
 })
 class TestComponent {
     @ViewChild('directiveElement')

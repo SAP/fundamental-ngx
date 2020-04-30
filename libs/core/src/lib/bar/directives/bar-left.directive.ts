@@ -10,4 +10,4 @@ import { Directive } from '@angular/core';
         class: 'fd-bar__left'
     }
 })
-export class BarLeftDirective { }
+export class BarLeftDirective {}

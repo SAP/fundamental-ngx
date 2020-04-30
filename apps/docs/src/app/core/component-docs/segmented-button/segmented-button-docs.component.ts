@@ -91,12 +91,11 @@ export class SegmentedButtonDocsComponent implements OnInit {
         }
     };
 
-
     defaultToggleHtml: ExampleFile[] = [
         {
             language: 'html',
             code: segmentedToggleExample,
-            fileName: 'segmented-button-toggle-example',
+            fileName: 'segmented-button-toggle-example'
         }
     ];
 
@@ -104,7 +103,7 @@ export class SegmentedButtonDocsComponent implements OnInit {
         {
             language: 'html',
             code: segmentedDefaultExample,
-            fileName: 'segmented-button-default-example',
+            fileName: 'segmented-button-default-example'
         }
     ];
 
@@ -112,7 +111,7 @@ export class SegmentedButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('segmentedButton');
     }
 
-    ngOnInit() { }
+    ngOnInit() {}
 
     onSchemaValues(data) {
         this.data = data;

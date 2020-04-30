@@ -4,7 +4,6 @@
 import { NotificationSize, NotificationType } from '../notification/notification.component';
 
 export class NotificationConfig {
-
     /** Id for the notification component. If omitted, a unique one is generated. */
     id?: string;
 

@@ -13,4 +13,3 @@ describe('MenuItemDirective', () => {
         expect(directive).toBeTruthy();
     });
 });
-

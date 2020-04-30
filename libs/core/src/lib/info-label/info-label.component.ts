@@ -1,4 +1,12 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnInit, ElementRef, OnChanges } from '@angular/core';
+import {
+    Component,
+    ViewEncapsulation,
+    ChangeDetectionStrategy,
+    Input,
+    OnInit,
+    ElementRef,
+    OnChanges
+} from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '../utils/public_api';
 
 type LabelType = 'numeric' | 'only-icon' | 'icon';
@@ -16,7 +24,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     @Input()
     class: string = '';
 
-    /** 
+    /**
      * The LabelType represented by the info label .
      * Can be one of the following: 'numeric' | 'only-icon' | 'icon'
      * For default info label omit this property
@@ -40,12 +48,13 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.color ? `fd-info-label--accent-color-${this.color}` : '',
             this.class
-        ].filter(x => x !== '').join(' ');
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {
-    }
+    constructor(private _elementRef: ElementRef) {}
 
     ngOnInit(): void {
         this.buildComponentCssClass();

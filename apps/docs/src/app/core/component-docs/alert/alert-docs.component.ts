@@ -16,7 +16,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 @Component({
     selector: 'app-alert',
-    templateUrl: './alert-docs.component.html',
+    templateUrl: './alert-docs.component.html'
 })
 export class AlertDocsComponent {
     static schema: any = {
@@ -72,8 +72,8 @@ export class AlertDocsComponent {
             language: 'html',
             scssFileCode: alertExampleScs,
             fileName: 'alert-example',
-            code: alertExampleHtml,
-        },
+            code: alertExampleHtml
+        }
     ];
 
     alertComponentContentExample: ExampleFile[] = [
@@ -122,15 +122,13 @@ export class AlertDocsComponent {
             language: 'typescript',
             component: 'AlertWidthExampleComponent',
             code: alertWidthExampleTs,
-            fileName: 'alert-width-example',
+            fileName: 'alert-width-example'
         }
     ];
 
     schema: Schema;
 
-    constructor(
-        private schemaFactory: SchemaFactoryService
-    ) {
+    constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 

@@ -6,21 +6,21 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 @Component({
     selector: 'app-busy-indicator-docs',
-    templateUrl: './busy-indicator-docs.component.html',
+    templateUrl: './busy-indicator-docs.component.html'
 })
 export class BusyIndicatorDocsComponent {
     BusyIndicatorBasicExample: ExampleFile[] = [
         {
             language: 'html',
             code: BusyIndicatorHtml,
-            fileName: 'busy-indicator-basic-example',
+            fileName: 'busy-indicator-basic-example'
         }
     ];
     BusyIndicatorToggleExample: ExampleFile[] = [
         {
             language: 'html',
             code: BusyIndicatorToggleHtml,
-            fileName: 'busy-indicator-toggle-example',
+            fileName: 'busy-indicator-toggle-example'
         }
     ];
 }

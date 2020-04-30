@@ -5,12 +5,10 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './platform-home.component.html'
 })
 export class PlatformHomeComponent implements OnInit {
+    constructor() {}
 
-    constructor() { }
+    ngOnInit() {}
 
-    ngOnInit() { }
-
-    onLoad(event) { }
-    onError(event) { }
-
+    onLoad(event) {}
+    onError(event) {}
 }

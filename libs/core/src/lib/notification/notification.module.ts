@@ -52,10 +52,7 @@ import { ButtonModule } from '../button/button.module';
         NotificationActionsDirective,
         DefaultNotificationComponent
     ],
-    providers: [
-        DynamicComponentService,
-        NotificationService
-    ],
+    providers: [DynamicComponentService, NotificationService],
     entryComponents: [
         NotificationContainer,
         NotificationComponent,

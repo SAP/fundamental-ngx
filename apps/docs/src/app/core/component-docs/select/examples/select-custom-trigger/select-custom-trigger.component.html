@@ -8,8 +8,7 @@
 <!-- Here, *select* refers to the actual select element so you can use it as you like! -->
 <ng-template #customTrigger let-select>
     <div tabindex="0" class="example-trigger">
-        <fd-icon style="margin-right: 8px;"
-                 [glyph]="'filter'"></fd-icon>
-        {{select.triggerValue}}
+        <fd-icon style="margin-right: 8px;" [glyph]="'filter'"></fd-icon>
+        {{ select.triggerValue }}
     </div>
 </ng-template>

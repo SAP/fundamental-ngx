@@ -15,17 +15,17 @@ class ContentTestComponent {}
 describe('DialogContainerComponent', () => {
     let component: DialogContainerComponent;
     let fixture: ComponentFixture<DialogContainerComponent>;
-    const dialogConfig = { ...new DialogConfig(), componentClass: 'test-class'};
+    const dialogConfig = { ...new DialogConfig(), componentClass: 'test-class' };
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [DialogContainerComponent, ContentTestComponent],
             providers: [
-                {provide: DIALOG_CONFIG, useValue: dialogConfig},
-                {provide: DIALOG_REF, useClass: DialogRef}
+                { provide: DIALOG_CONFIG, useValue: dialogConfig },
+                { provide: DIALOG_REF, useClass: DialogRef }
             ]
         }).overrideModule(BrowserDynamicTestingModule, {
-            set: {entryComponents: [ContentTestComponent]}
+            set: { entryComponents: [ContentTestComponent] }
         });
     }));
 

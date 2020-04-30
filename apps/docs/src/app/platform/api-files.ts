@@ -11,4 +11,6 @@ export const API_FILES = {
     link: ['LinkComponent'],
     searchField: ['SearchFieldComponent'],
     radioGroup: ['RadioGroupComponent'],
+    menuButton: ['MenuButtonComponent'],
+    splitMenuButton: ['SplitMenuButtonComponent']
 };

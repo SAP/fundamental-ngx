@@ -5,8 +5,7 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-scroll-spy-test-component',
-    template: `
-    <div fdScrollSpy [trackedTags]="['div']" (spyChange)="selectedSpy = $event.id">
+    template: ` <div fdScrollSpy [trackedTags]="['div']" (spyChange)="selectedSpy = $event.id">
         <div id="div1"></div>
         <span id="span1"></span>
         <div id="div2"></div>
@@ -17,7 +16,9 @@ export class ScrollSpyTestComponent {
 }
 
 export class MockElementRef extends ElementRef {
-    constructor() { super(null); }
+    constructor() {
+        super(null);
+    }
 }
 
 describe('ScrollSpyDirective', () => {
@@ -31,7 +32,7 @@ describe('ScrollSpyDirective', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ScrollSpyDirective, ScrollSpyTestComponent],
-            providers: [{provide: ElementRef, useClass: MockElementRef}]
+            providers: [{ provide: ElementRef, useClass: MockElementRef }]
         });
     }));
 
@@ -48,5 +49,4 @@ describe('ScrollSpyDirective', () => {
     it('should create', () => {
         expect(directive).toBeTruthy();
     });
-    
 });

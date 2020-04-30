@@ -7,7 +7,8 @@ import {
     EventEmitter,
     ElementRef,
     OnDestroy,
-    ChangeDetectionStrategy, ChangeDetectorRef
+    ChangeDetectionStrategy,
+    ChangeDetectorRef
 } from '@angular/core';
 import { FdDate } from '../../models/fd-date';
 import { takeUntil } from 'rxjs/operators';
@@ -27,7 +28,6 @@ import { CalendarYearGrid } from '../../models/calendar-year-grid';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarYearViewComponent implements OnInit, OnDestroy {
-
     /** @hidden
      *  This variable is used to define which year from calendarYearList should be focusable by tab key
      */
@@ -74,8 +74,8 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
     constructor(
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _calendarService: CalendarService) {
-    }
+        private _calendarService: CalendarService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -146,12 +146,12 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
      * if there is no current year, or selected, return first one
      */
     private _getActiveYear(): number {
-        const selectedYear: number = this._getYearList().find(year => year === this.yearSelected);
+        const selectedYear: number = this._getYearList().find((year) => year === this.yearSelected);
         if (selectedYear) {
             return selectedYear;
         }
 
-        const currentYear: number = this._getYearList().find(year => year === this.currentYear);
+        const currentYear: number = this._getYearList().find((year) => year === this.currentYear);
         if (currentYear) {
             return currentYear;
         }
@@ -183,7 +183,7 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
 
     /** Amount of years displayed in year view */
     private _getAmountOfYearsShownAtOnce(): number {
-        return this.yearViewGrid.rows * this.yearViewGrid.cols
+        return this.yearViewGrid.rows * this.yearViewGrid.cols;
     }
 
     /** Method to put configuration and listeners on calendar keyboard service */
@@ -192,33 +192,23 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
         this._calendarService.rowAmount = this.yearViewGrid.rows;
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-        this._calendarService.onFocusIdChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(index => {
-                this._newFocusedYearId = this.getId(index);
-                this.focusYearElement();
-            })
-        ;
+        this._calendarService.onFocusIdChange.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+            this._newFocusedYearId = this.getId(index);
+            this.focusYearElement();
+        });
 
         this._calendarService.onKeySelect
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(index => this.selectYear(this._getYearList()[index]))
-        ;
+            .subscribe((index) => this.selectYear(this._getYearList()[index]));
 
-        this._calendarService.onListStartApproach
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((index) => {
-                this._newFocusedYearId = this.getId(index);
-                this.loadPreviousYearList();
-            })
-        ;
+        this._calendarService.onListStartApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+            this._newFocusedYearId = this.getId(index);
+            this.loadPreviousYearList();
+        });
 
-        this._calendarService.onListEndApproach
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((index) => {
-                this._newFocusedYearId = this.getId(index);
-                this.loadNextYearList();
-            })
-        ;
+        this._calendarService.onListEndApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+            this._newFocusedYearId = this.getId(index);
+            this.loadNextYearList();
+        });
     }
 }

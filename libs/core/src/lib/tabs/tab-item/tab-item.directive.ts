@@ -2,8 +2,7 @@ import { ContentChild, Directive, ElementRef, Input, OnChanges, OnInit } from '@
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
-
-export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'neutral'
+export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'neutral';
 
 /**
  * Tab Item is optional wrapper for Tab link
@@ -20,7 +19,7 @@ export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'ne
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-item]',
     host: {
-        'class': 'fd-tabs__item'
+        class: 'fd-tabs__item'
     }
 })
 export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
@@ -45,9 +44,7 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     linkItem: TabLinkDirective;
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef
-    ) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -70,7 +67,9 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
             this.header ? 'fd-tabs__item--header' : '',
             this.tabItemState ? `fd-tabs__item--${this.tabItemState}` : '',
             this.class
-        ].filter(x => x !== '').join(' ');
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
     /** HasElementRef interface implementation

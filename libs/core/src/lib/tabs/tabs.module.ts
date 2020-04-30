@@ -6,9 +6,14 @@ import { TabListComponent } from './tab-list.component';
 
 import {
     TabCountDirective,
-    TabCounterHeaderDirective, TabHeaderDirective,
-    TabIconDirective, TabLabelDirective,
-    TabLoadTitleDirective, TabProcessDirective, TabProcessIconDirective, TabSeparatorDirective,
+    TabCounterHeaderDirective,
+    TabHeaderDirective,
+    TabIconDirective,
+    TabLabelDirective,
+    TabLoadTitleDirective,
+    TabProcessDirective,
+    TabProcessIconDirective,
+    TabSeparatorDirective,
     TabTagDirective,
     TabTitleDirective
 } from './tab-utils/tab-directives';
@@ -35,9 +40,7 @@ import { TabItemDirective } from './tab-item/tab-item.directive';
         TabProcessIconDirective,
         TabSeparatorDirective
     ],
-    imports: [
-        CommonModule
-    ],
+    imports: [CommonModule],
     exports: [
         TabListComponent,
         TabPanelComponent,

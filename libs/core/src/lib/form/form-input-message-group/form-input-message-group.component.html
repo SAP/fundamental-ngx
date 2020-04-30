@@ -1,11 +1,13 @@
-<fd-popover class="fd-form-input-message-group fd-popover--input-message-group"
-            [placement]="placement$ | async"
-            [triggers]="triggers"
-            [fillControlMode]="fillControlMode"
-            [closeOnOutsideClick]="closeOnOutsideClick"
-            [isOpen]="isOpen"
-            (isOpenChange)="openChanged($event)"
-            [addContainerClass]="'fd-popover-container-custom--message'">
+<fd-popover
+    class="fd-form-input-message-group fd-popover--input-message-group"
+    [placement]="placement$ | async"
+    [triggers]="triggers"
+    [fillControlMode]="fillControlMode"
+    [closeOnOutsideClick]="closeOnOutsideClick"
+    [isOpen]="isOpen"
+    (isOpenChange)="openChanged($event)"
+    [addContainerClass]="'fd-popover-container-custom--message'"
+>
     <fd-popover-control>
         <ng-content select="[fd-form-control]"></ng-content>
     </fd-popover-control>

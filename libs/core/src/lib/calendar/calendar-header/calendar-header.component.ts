@@ -2,8 +2,10 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    EventEmitter, HostBinding,
-    Input, OnDestroy,
+    EventEmitter,
+    HostBinding,
+    Input,
+    OnDestroy,
     OnInit,
     Output,
     ViewEncapsulation
@@ -32,7 +34,6 @@ import { CalendarService } from '../calendar.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarHeaderComponent implements OnDestroy, OnInit {
-
     /** Currently active view. Needed for a11y labels. */
     @Input()
     activeView: FdCalendarView;
@@ -61,30 +62,26 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
 
     /** Event emitted when the active view should change. */
     @Output()
-    readonly activeViewChange: EventEmitter<FdCalendarView>
-        = new EventEmitter<FdCalendarView>();
+    readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** Event emitted when the previous button is clicked. */
     @Output()
-    readonly previousClicked: EventEmitter<void>
-        = new EventEmitter<void>();
+    readonly previousClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event emitted when the next button is clicked. */
     @Output()
-    readonly nextClicked: EventEmitter<void>
-        = new EventEmitter<void>();
+    readonly nextClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event thrown, when the close button is clicked */
     @Output()
-    readonly closeClicked: EventEmitter<void>
-        = new EventEmitter<void>();
+    readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
-        public  calendarI18nLabels: CalendarI18nLabels,
-        private  _calendarI18n: CalendarI18n,
+        public calendarI18nLabels: CalendarI18nLabels,
+        private _calendarI18n: CalendarI18n,
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService
     ) {
@@ -92,9 +89,7 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
         const i18nObservables = merge(this._calendarI18n.i18nChange, this.calendarI18nLabels.labelsChange);
 
         /** Called to trigger change detection */
-        i18nObservables.pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this._changeDetRef.markForCheck())
-        ;
+        i18nObservables.pipe(takeUntil(this.onDestroy$)).subscribe(() => this._changeDetRef.markForCheck());
     }
 
     /** @hidden */
@@ -110,13 +105,15 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
 
     /** Get the aria label for the previous button. Depends on the active view. */
     get previousLabel(): string {
-        return this.activeView !== 'year' ? this.calendarI18nLabels.previousMonthLabel
+        return this.activeView !== 'year'
+            ? this.calendarI18nLabels.previousMonthLabel
             : this.calendarI18nLabels.previousYearLabel;
     }
 
     /** Get the aria label for the next button. Depends on the active view. */
     get nextLabel(): string {
-        return this.activeView !== 'year' ? this.calendarI18nLabels.nextMonthLabel
+        return this.activeView !== 'year'
+            ? this.calendarI18nLabels.nextMonthLabel
             : this.calendarI18nLabels.nextMonthLabel;
     }
 
@@ -137,7 +134,7 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
 
     /** Get information about amount of years displayed at once on year view  */
     amountOfYearsPerPeriod(): number {
-        return this.calendarYearGrid.cols * this.calendarYearGrid.rows
+        return this.calendarYearGrid.cols * this.calendarYearGrid.rows;
     }
 
     processViewChange(type: FdCalendarView, event?: MouseEvent): void {
@@ -155,5 +152,4 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
     emitClose(): void {
         this.closeClicked.emit();
     }
-
 }

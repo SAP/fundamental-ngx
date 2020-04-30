@@ -6,13 +6,12 @@ import { SideNavigationModel } from '@fundamental-ngx/core';
     templateUrl: 'side-navigation-object-example.component.html'
 })
 export class SideNavigationObjectExampleComponent {
-
     sideNavigationConfiguration: SideNavigationModel = {
         condensed: false,
         mainNavigation: {
             items: [
                 {
-                    headerTitle: 'Header Title 1',
+                    headerTitle: 'Header Title 1'
                 },
                 {
                     link: {
@@ -22,7 +21,7 @@ export class SideNavigationObjectExampleComponent {
                     }
                 },
                 {
-                    headerTitle: 'Header Title 2',
+                    headerTitle: 'Header Title 2'
                 },
                 {
                     link: {
@@ -35,7 +34,7 @@ export class SideNavigationObjectExampleComponent {
                     expanded: true,
                     link: {
                         icon: 'activate',
-                        title: 'Link 3',
+                        title: 'Link 3'
                     },
                     list: {
                         textOnly: true,
@@ -53,7 +52,7 @@ export class SideNavigationObjectExampleComponent {
                             },
                             {
                                 link: {
-                                    title: 'Sublink 3',
+                                    title: 'Sublink 3'
                                 }
                             },
                             {
@@ -76,7 +75,7 @@ export class SideNavigationObjectExampleComponent {
             textOnly: true,
             items: [
                 {
-                    headerTitle: 'Header Title 3',
+                    headerTitle: 'Header Title 3'
                 },
                 {
                     link: {
@@ -95,11 +94,9 @@ export class SideNavigationObjectExampleComponent {
                 }
             ]
         }
-    }
-
+    };
 
     callbackFunction(message: string): void {
         alert('Link Clicked ' + message);
     }
-
 }

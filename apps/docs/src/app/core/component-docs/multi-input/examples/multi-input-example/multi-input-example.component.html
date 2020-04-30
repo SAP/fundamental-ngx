@@ -1,17 +1,20 @@
-<fd-multi-input [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
-                [placeholder]="'Search here...'"
-                [(ngModel)]="selected"></fd-multi-input>
+<fd-multi-input
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+    [placeholder]="'Search here...'"
+    [(ngModel)]="selected"
+></fd-multi-input>
 
-Selected: [{{selected.toLocaleString()}}]
+Selected: [{{ selected.toLocaleString() }}]
 
-<br/><br/>
+<br /><br />
 
 <label fd-label for="disabledMultiInput1">Disabled Multi Input</label>
-<fd-multi-input [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
-                [placeholder]="'Search here...'"
-                [disabled]="true"
-                id="disabledMultiInput1"
-                [(ngModel)]="secondSelected"></fd-multi-input>
+<fd-multi-input
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+    [placeholder]="'Search here...'"
+    [disabled]="true"
+    id="disabledMultiInput1"
+    [(ngModel)]="secondSelected"
+></fd-multi-input>
 
-Selected: [{{secondSelected.toLocaleString()}}]
-
+Selected: [{{ secondSelected.toLocaleString() }}]

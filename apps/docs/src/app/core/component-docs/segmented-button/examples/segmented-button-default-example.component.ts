@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-segmented-button-default-example',
-    templateUrl: './segmented-button-default-example.component.html',
-
+    templateUrl: './segmented-button-default-example.component.html'
 })
 export class SegmentedButtonDefaultExampleComponent {
-
     icon: number = 0;
     lmr: boolean[] = [false, false, false];
 

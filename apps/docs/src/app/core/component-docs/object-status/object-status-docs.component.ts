@@ -14,12 +14,11 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './object-status-docs.component.html'
 })
 export class ObjectStatusDocsComponent {
-
     defaultObjectStatusHtmlType: ExampleFile[] = [
         {
             language: 'html',
             code: ObjectStatusDefaultExample,
-            fileName: 'object-status-default-example',
+            fileName: 'object-status-default-example'
         }
     ];
 
@@ -27,7 +26,7 @@ export class ObjectStatusDocsComponent {
         {
             language: 'html',
             code: ObjectStatusTextExample,
-            fileName: 'object-status-text-example',
+            fileName: 'object-status-text-example'
         }
     ];
 
@@ -35,7 +34,7 @@ export class ObjectStatusDocsComponent {
         {
             language: 'html',
             code: ObjectStatusGenericTextExample,
-            fileName: 'object-status-generic-text-example',
+            fileName: 'object-status-generic-text-example'
         }
     ];
 
@@ -43,7 +42,7 @@ export class ObjectStatusDocsComponent {
         {
             language: 'html',
             code: ObjectStatusTextIconExample,
-            fileName: 'object-status-icon-text-example',
+            fileName: 'object-status-icon-text-example'
         }
     ];
 
@@ -51,7 +50,7 @@ export class ObjectStatusDocsComponent {
         {
             language: 'html',
             code: ObjectStatusClickableAndIConExample,
-            fileName: 'object-status-clickable-and-icon-example',
+            fileName: 'object-status-clickable-and-icon-example'
         }
     ];
 
@@ -59,7 +58,7 @@ export class ObjectStatusDocsComponent {
         {
             language: 'html',
             code: ObjectStatusInvertedTextExample,
-            fileName: 'object-status-inverted-example',
+            fileName: 'object-status-inverted-example'
         }
     ];
 
@@ -67,7 +66,7 @@ export class ObjectStatusDocsComponent {
         {
             language: 'html',
             code: ObjectStatusInvertedGenericExample,
-            fileName: 'object-status-inverted-generic-text-example',
+            fileName: 'object-status-inverted-generic-text-example'
         }
     ];
 
@@ -75,7 +74,7 @@ export class ObjectStatusDocsComponent {
         {
             language: 'html',
             code: ObjectStatusLargeExample,
-            fileName: 'object-status-large-example',
+            fileName: 'object-status-large-example'
         }
     ];
 }

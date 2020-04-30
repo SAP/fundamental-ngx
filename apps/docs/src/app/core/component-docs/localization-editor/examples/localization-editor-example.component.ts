@@ -5,12 +5,10 @@ import { Component } from '@angular/core';
     templateUrl: './localization-editor-example.component.html'
 })
 export class LocalizationEditorExampleComponent {
-
-    fields: {placeholder: string, label: string}[] = [
-        {placeholder: 'DE', label: 'DE'},
-        {placeholder: 'NL', label: 'NL'},
-        {placeholder: 'PL', label: 'PL'},
-        {placeholder: 'ER', label: 'ER'},
+    fields: { placeholder: string; label: string }[] = [
+        { placeholder: 'DE', label: 'DE' },
+        { placeholder: 'NL', label: 'NL' },
+        { placeholder: 'PL', label: 'PL' },
+        { placeholder: 'ER', label: 'ER' }
     ];
-
 }

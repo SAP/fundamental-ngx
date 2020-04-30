@@ -34,13 +34,14 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
 
     /** Localization of resize handle inside resizable container */
     // tslint:disable-next-line:no-input-rename
-    @Input('fdResizeHandleLocation') resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' = 'bottom-right';
+    @Input('fdResizeHandleLocation') resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' =
+        'bottom-right';
 
     /** Resize handle reference - should be used if Resize handle is not a ContentChild of resizable container */
     // tslint:disable-next-line:no-input-rename
     @Input('fdResizeResizeHandleRef') set setResizeHandleReference(value: ResizeHandleDirective) {
         this.resizeHandleReference = value;
-    };
+    }
 
     /** Emits event when resizing has tarted */
     @Output() onResizeStart = new EventEmitter<void>();
@@ -49,14 +50,13 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     @Output() onResizeEnd = new EventEmitter<void>();
 
     /** @hidden Reference to Resize handle */
-    @ContentChild(ResizeHandleDirective, {static: false}) resizeHandleReference;
+    @ContentChild(ResizeHandleDirective, { static: false }) resizeHandleReference;
 
     /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {
-    }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
@@ -83,7 +83,6 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
 
     /** @hidden Sets Resize listeners */
     private _setResizeListeners(): void {
-
         const resize = this._getResizeFunction();
         const moveOffset = this._getMoveOffsetFunction();
         const resizeContainer = this._findResizeContainer();
@@ -97,17 +96,17 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         const emitResizableEvents$ = this._getResizeEventsNotifiers(resizeActive$);
         const preventOtherPointerEvents$ = this._blockOtherPointerEvents(resizeActive$);
 
-
         const resizingCursorMovement$ = mouseMoveEvent$.pipe(
             pairwise(),
             map(([event1, event2]: [MouseEvent, MouseEvent]) => moveOffset(event1, event2)),
-            filter(move => isBoundaryOverflow(move))
+            filter((move) => isBoundaryOverflow(move))
         );
 
-        const setupResizer = () => resizingCursorMovement$.pipe(takeUntil(mouseUpEvent$)).subscribe(event => resize(event));
+        const setupResizer = () =>
+            resizingCursorMovement$.pipe(takeUntil(mouseUpEvent$)).subscribe((event) => resize(event));
 
         const setupResize$ = resizeActive$.pipe(
-            filter(isActive => isActive),
+            filter((isActive) => isActive),
             tap(() => setupResizer())
         );
 
@@ -121,12 +120,11 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         return (move: ResizeMove) => {
             this._elementRef.nativeElement.style.width = `${this._elementRef.nativeElement.offsetWidth + move.x}px`;
             this._elementRef.nativeElement.style.height = `${this._elementRef.nativeElement.offsetHeight + move.y}px`;
-        }
+        };
     }
 
     /** @hidden Creates move function */
     private _getMoveOffsetFunction(): (event1: MouseEvent, event2: MouseEvent) => ResizeMove {
-
         let verticalModifier: 1 | -1;
         let horizontalModifier: 1 | -1;
 
@@ -152,7 +150,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         return (event1: MouseEvent, event2: MouseEvent) => ({
             x: (event2.screenX - event1.screenX) * verticalModifier,
             y: (event2.screenY - event1.screenY) * horizontalModifier
-        })
+        });
     }
 
     /** @hidden Return boundary container */
@@ -162,7 +160,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
             return resizeContainer;
         } else {
             console.warn(`fdResize - Cannot find "${this.resizeBoundary}", falling back to "body"`);
-            return document.querySelector('body')
+            return document.querySelector('body');
         }
     }
 
@@ -174,31 +172,39 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
 
             switch (this.resizeHandleLocation) {
                 case 'top-left':
-                    return containerPosition.top < elementPosition.top + move.y
-                        && containerPosition.left < elementPosition.left + move.x;
+                    return (
+                        containerPosition.top < elementPosition.top + move.y &&
+                        containerPosition.left < elementPosition.left + move.x
+                    );
                 case 'top-right':
-                    return containerPosition.top < elementPosition.top + move.y
-                        && containerPosition.right > elementPosition.right + move.x;
+                    return (
+                        containerPosition.top < elementPosition.top + move.y &&
+                        containerPosition.right > elementPosition.right + move.x
+                    );
                 case 'bottom-left':
-                    return containerPosition.bottom > elementPosition.bottom + move.y
-                        && containerPosition.left < elementPosition.left + move.x;
+                    return (
+                        containerPosition.bottom > elementPosition.bottom + move.y &&
+                        containerPosition.left < elementPosition.left + move.x
+                    );
                 case 'bottom-right':
-                    return containerPosition.bottom > elementPosition.bottom + move.y
-                        && containerPosition.right > elementPosition.right + move.x;
+                    return (
+                        containerPosition.bottom > elementPosition.bottom + move.y &&
+                        containerPosition.right > elementPosition.right + move.x
+                    );
             }
-        }
+        };
     }
 
     /** @hidden Create Observable notifying on resize actions */
     private _getResizeEventsNotifiers(trigger$: Observable<boolean>): Observable<any> {
         const emitResizableStart$ = trigger$.pipe(
-            filter(isActive => isActive),
-            tap(_ => this.onResizeStart.emit())
+            filter((isActive) => isActive),
+            tap((_) => this.onResizeStart.emit())
         );
 
         const emitResizableEnd$ = trigger$.pipe(
-            filter(isActive => !isActive),
-            tap(_ => this.onResizeEnd.emit())
+            filter((isActive) => !isActive),
+            tap((_) => this.onResizeEnd.emit())
         );
 
         return merge(emitResizableStart$, emitResizableEnd$);
@@ -207,8 +213,8 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** @hidden Block resizable container pointer events when resizing  */
     private _blockOtherPointerEvents(trigger$: Observable<boolean>): Observable<any> {
         return trigger$.pipe(
-            map(isActive => isActive ? 'none' : 'auto'),
-            tap(value => this._elementRef.nativeElement.style.pointerEvents = value)
+            map((isActive) => (isActive ? 'none' : 'auto')),
+            tap((value) => (this._elementRef.nativeElement.style.pointerEvents = value))
         );
     }
 }

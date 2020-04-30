@@ -4,7 +4,6 @@ import { TemplateRef } from '@angular/core';
  * Object to generate default notification component, without creating any template.
  */
 export class NotificationDefault {
-
     /** Notification Title */
     title?: string;
 
@@ -36,5 +35,5 @@ export class NotificationDefault {
     closeButtonCallback?: Function;
 
     /** Avatar Template */
-    avatar?: TemplateRef<any>
+    avatar?: TemplateRef<any>;
 }

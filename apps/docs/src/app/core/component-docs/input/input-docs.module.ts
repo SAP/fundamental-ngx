@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {API_FILES} from '../../api-files';
-import {InputHeaderComponent} from './input-header/input-header.component';
-import {InputDocsComponent} from './input-docs.component';
-import {InputFormGroupExampleComponent} from './examples/input-form-group-example.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { API_FILES } from '../../api-files';
+import { InputHeaderComponent } from './input-header/input-header.component';
+import { InputDocsComponent } from './input-docs.component';
+import { InputFormGroupExampleComponent } from './examples/input-form-group-example.component';
 import {
     InputExampleComponent,
     InputInlineHelpExampleComponent,
@@ -25,11 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        FormModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule],
     exports: [RouterModule],
     declarations: [
         InputDocsComponent,
@@ -40,5 +36,4 @@ const routes: Routes = [
         InputInlineHelpExampleComponent
     ]
 })
-export class InputDocsModule {
-}
+export class InputDocsModule {}

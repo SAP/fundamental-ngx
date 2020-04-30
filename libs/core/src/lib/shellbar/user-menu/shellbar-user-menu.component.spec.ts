@@ -13,8 +13,7 @@ describe('UserMenuComponent', () => {
         TestBed.configureTestingModule({
             imports: [PopoverModule, MenuModule, IdentifierModule],
             declarations: [ShellbarUserMenuComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

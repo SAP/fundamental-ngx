@@ -18,12 +18,7 @@ import {
     QueryList
 } from '@angular/core';
 
-import {
-    Overlay,
-    OverlayConfig,
-    ConnectedPosition,
-    OverlayRef
-} from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig, ConnectedPosition, OverlayRef } from '@angular/cdk/overlay';
 
 import { PopoverComponent } from '@fundamental-ngx/core';
 import { Observable, isObservable, of, Subscription, fromEvent } from 'rxjs';
@@ -57,7 +52,7 @@ export interface ValueLabelItem {
     }
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
-    constructor(private element: ElementRef) { }
+    constructor(private element: ElementRef) {}
     focus() {
         this.element.nativeElement.focus();
     }
@@ -69,7 +64,7 @@ let searchFieldIdCount = 0;
     selector: 'fdp-search-field',
     templateUrl: './search-field.component.html',
     styleUrls: ['./search-field.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchFieldComponent implements OnInit, OnDestroy {
     /**
@@ -93,9 +88,11 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
             });
             this.dropdownValues$ = of(dropdownValues);
         } else if (isObservable<SuggestionItem[]>(value)) {
-            this.dropdownValues$ = value.pipe(map((suggestions: SuggestionItem[]) => {
-                return suggestions.map(suggestion => suggestion.value);
-            }));
+            this.dropdownValues$ = value.pipe(
+                map((suggestions: SuggestionItem[]) => {
+                    return suggestions.map((suggestion) => suggestion.value);
+                })
+            );
         } else {
             this.dropdownValues$ = of([]);
         }
@@ -108,7 +105,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
     @Input()
     get dataSource(): SearchFieldDataSource<any> {
         return this._dataSource;
-    };
+    }
     set dataSource(value: SearchFieldDataSource<any>) {
         if (value) {
             this._initializeDataSource(value);
@@ -126,7 +123,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
      */
     @Input()
     get size(): 'cozy' | 'compact' {
-        return this.compact ? 'compact' : 'cozy'
+        return this.compact ? 'compact' : 'cozy';
     }
     set size(value: 'cozy' | 'compact') {
         this.compact = value === 'compact';
@@ -141,7 +138,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
     }
     set categories(value: ValueLabelItem[]) {
         this._categories = value;
-        this.showCategoryDropdown = (Array.isArray(value) && value.length > 0);
+        this.showCategoryDropdown = Array.isArray(value) && value.length > 0;
     }
     private _categories: ValueLabelItem[];
 
@@ -230,16 +227,15 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
     @ViewChild('suggestionMenuTemplate', { static: false }) suggestionMenuTemplate: TemplateRef<any>;
     @ViewChildren(SearchFieldSuggestionDirective) suggestionItems: QueryList<SearchFieldSuggestionDirective>;
 
-
     constructor(
         private _overlay: Overlay,
         private _viewContainerRef: ViewContainerRef,
         private _cd: ChangeDetectorRef,
         private _rtl: RtlService
-    ) { }
+    ) {}
 
     ngOnInit() {
-        const baseId = 'fdp-search-field'
+        const baseId = 'fdp-search-field';
         this.inputId = `${baseId}-input-${searchFieldIdCount++}`;
         this.submitId = `${baseId}-submit-${searchFieldIdCount++}`;
         this.menuId = `${baseId}-menu-${searchFieldIdCount++}`;
@@ -290,12 +286,15 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
         if (this.dataSource) {
             const match = new Map();
             match.set('keyword', $event);
-            match.set('category', (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null);
+            match.set(
+                'category',
+                this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
+            );
             this.dataSource.match(match);
         }
         this.inputChange.emit({
             text: $event,
-            category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
+            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
         });
     }
 
@@ -307,7 +306,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
         this.inputText = $event;
         const searchInput: SearchInput = {
             text: $event,
-            category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
+            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
         };
         this.inputChange.emit(searchInput);
         this.searchSubmit.emit(searchInput);
@@ -323,7 +322,6 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
         if (this.isLoading) {
             this.cancelSearch.emit();
         } else {
-
             // if there is no input text, don't emit event
             if (!this.inputText) {
                 return;
@@ -331,7 +329,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
 
             this.searchSubmit.emit({
                 text: this.inputText,
-                category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
+                category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
             });
 
             this.closeSuggestionMenu();
@@ -350,7 +348,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
         this.currentCategory = category;
         this.inputChange.emit({
             text: this.inputText,
-            category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
+            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
         });
     }
 
@@ -374,15 +372,19 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
         // add subscription to capture outside clicks
         this._outsideClickSubscription = fromEvent<MouseEvent>(document, 'click')
             .pipe(
-                filter(event => {
+                filter((event) => {
                     const target = event.target as HTMLElement;
-                    return (!!this._suggestionOverlayRef && !this._suggestionOverlayRef.overlayElement.contains(target))
-                        && this.showDropdown;
+                    return (
+                        !!this._suggestionOverlayRef &&
+                        !this._suggestionOverlayRef.overlayElement.contains(target) &&
+                        this.showDropdown
+                    );
                 }),
                 take(1)
-            ).subscribe((event) => {
+            )
+            .subscribe((event) => {
                 this.closeSuggestionMenu();
-            })
+            });
 
         this.showDropdown = true;
     }
@@ -396,33 +398,35 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
         this.showDropdown = false;
     }
 
-    openCategoryMenu(): void {
-
-    }
+    openCategoryMenu(): void {}
 
     clearTextInput(): void {
         this.inputText = '';
         this._cd.detectChanges();
         this.inputChange.emit({
             text: '',
-            category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
-        })
+            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
+        });
         this.closeSuggestionMenu();
     }
 
     _createSuggetionOverlayConfig(): OverlayConfig {
-        const positions: ConnectedPosition[] = [{
-            originX: 'start',
-            originY: 'bottom',
-            overlayX: 'start',
-            overlayY: 'top'
-        }, {
-            originX: 'start',
-            originY: 'top',
-            overlayX: 'start',
-            overlayY: 'bottom',
-        }];
-        const positionStrategy = this._overlay.position()
+        const positions: ConnectedPosition[] = [
+            {
+                originX: 'start',
+                originY: 'bottom',
+                overlayX: 'start',
+                overlayY: 'top'
+            },
+            {
+                originX: 'start',
+                originY: 'top',
+                overlayX: 'start',
+                overlayY: 'bottom'
+            }
+        ];
+        const positionStrategy = this._overlay
+            .position()
             .flexibleConnectedTo(this.inputGroup)
             .withLockedPosition()
             .withPositions(positions);
@@ -436,10 +440,9 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
     }
 
     _initializeDataSource(dataSource: SearchFieldDataSource<any>) {
-        this._dataSourceSubscription = dataSource.open()
-            .subscribe(data => {
-                this.dropdownValues$ = of(data);
-            });
+        this._dataSourceSubscription = dataSource.open().subscribe((data) => {
+            this.dropdownValues$ = of(data);
+        });
         this._dataSource = dataSource;
     }
 }
@@ -449,6 +452,6 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     transform(values: string[], match: string) {
-        return values.filter((value => value.toLowerCase().indexOf(match.toLowerCase()) > -1));
+        return values.filter((value) => value.toLowerCase().indexOf(match.toLowerCase()) > -1);
     }
 }

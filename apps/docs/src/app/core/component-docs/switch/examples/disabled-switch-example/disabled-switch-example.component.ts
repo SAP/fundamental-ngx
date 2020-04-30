@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
     styleUrls: ['./disabled-switch-example.component.scss']
 })
 export class DisabledSwitchExampleComponent {
-
     checked = false;
-
 }

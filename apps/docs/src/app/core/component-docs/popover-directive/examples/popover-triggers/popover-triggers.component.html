@@ -1,23 +1,24 @@
-<button fd-button
-        fdPopover="This popover is only triggered by focus events."
-        [noArrow]="false"
-        placement="bottom"
-        [triggers]="['focus']"
-        [focusTrapped]="false">
+<button
+    fd-button
+    fdPopover="This popover is only triggered by focus events."
+    [noArrow]="false"
+    placement="bottom"
+    [triggers]="['focus']"
+    [focusTrapped]="false"
+>
     Focus Trigger
 </button>
 
-<button fd-button
-        fdPopover="This popover is only triggered by click events."
-        placement="bottom"
-        [noArrow]="false">
+<button fd-button fdPopover="This popover is only triggered by click events." placement="bottom" [noArrow]="false">
     Click Trigger
 </button>
 
-<button fd-button
-        fdPopover="This popover is only triggered by hover events."
-        placement="bottom"
-        [triggers]="['mouseenter', 'mouseleave']"
-        [noArrow]="false">
+<button
+    fd-button
+    fdPopover="This popover is only triggered by hover events."
+    placement="bottom"
+    [triggers]="['mouseenter', 'mouseleave']"
+    [noArrow]="false"
+>
     Hover Trigger
 </button>

@@ -15,12 +15,12 @@ export class ComboboxDisplaywithExampleComponent {
         { name: 'Mango' },
         { name: 'Cucumber' },
         { name: 'Garlic' },
-        { name: 'Pear' },
+        { name: 'Pear' }
     ];
 
     searchTerm = '';
 
-    displayFunc(obj: {name: string}): string {
+    displayFunc(obj: { name: string }): string {
         if (obj) {
             return obj.name.toLocaleUpperCase();
         }

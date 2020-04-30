@@ -10,6 +10,8 @@ import { API_FILES } from './api-files';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
+import { PlatformMenuButtonDocsComponent } from './component-docs/platform-menu-button/platform-menu-button-docs.component';
+import {PlatformMenuButtonHeaderComponent } from './component-docs/platform-menu-button/platform-menu-button-header/platform-menu-button-header.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
 import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
@@ -18,6 +20,8 @@ import { PlatformSearchFieldHeaderComponent } from './component-docs/platform-se
 import { PlatformSearchFieldDocsComponent } from './component-docs/platform-search-field/platform-search-field-docs.component';
 import { PlatformRadioGroupHeaderComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-header/platform-radio-group-header.component';
 import { PlatformRadioGroupDocsComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-docs.component';
+import { PlatformDocsSplitMenuButtonComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button.component';
+import { PlatformDocsSplitMenuButtonHeaderComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-header/platform-split-menu-button-header.component';
 
 export const ROUTES: Routes = [
     {
@@ -36,12 +40,12 @@ export const ROUTES: Routes = [
                 ]
             },
             {
-
                 path: 'action-bar',
                 component: PlatformActionbarHeaderComponent,
                 children: [
                     { path: '', component: PlatformActionBarDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }]
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }
+                ]
             },
             {
                 path: 'link',
@@ -57,6 +61,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PlatformMenuDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
+                ]
+            },
+          {
+                path: 'menu-button',
+                component: PlatformMenuButtonHeaderComponent,
+                children: [
+                    { path: '', component: PlatformMenuButtonDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menuButton } }
                 ]
             },
             {
@@ -81,6 +93,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PlatformRadioGroupDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.radioGroup } }
+                ]
+            },
+            {
+                path: 'split-menu-button',
+                component: PlatformDocsSplitMenuButtonHeaderComponent,
+                children: [
+                    { path: '', component: PlatformDocsSplitMenuButtonComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.splitMenuButton } }
                 ]
             }
         ]

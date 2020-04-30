@@ -29,7 +29,6 @@ export abstract class FormField {
     formControl?: FormControl;
 }
 
-
 export type FormZone = 'zTop' | 'zBottom' | 'zLeft' | 'zRight';
 export type Column = 1 | 2 | 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
@@ -46,9 +45,8 @@ export type Column = 1 | 2 | 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
     styleUrls: ['./form-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormFieldComponent implements FormField, AfterContentInit, AfterContentChecked,
-    AfterViewInit, OnDestroy, OnInit {
-
+export class FormFieldComponent
+    implements FormField, AfterContentInit, AfterContentChecked, AfterViewInit, OnDestroy, OnInit {
     @Input()
     label: string;
 
@@ -113,7 +111,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
         this._cd.markForCheck();
     }
 
-
     @Input()
     get required(): boolean {
         return this._required;
@@ -122,7 +119,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
     set required(value: boolean) {
         this._required = coerceBooleanProperty(value);
     }
-
 
     @Input()
     get editable(): boolean {
@@ -137,7 +133,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
         }
     }
 
-
     /**
      * custom width in columns must be between 1 - 12
      */
@@ -149,7 +144,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
     set columns(value: Column) {
         this._columns = <Column>coerceNumberProperty(value);
     }
-
 
     @Output()
     onChange: EventEmitter<string> = new EventEmitter<string>();
@@ -163,12 +157,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
     @ContentChild(FormFieldControl, { static: false })
     _control: FormFieldControl<any>;
 
-
     protected _columns: Column = 6;
     protected _editable: boolean = true;
     protected _formGroup: FormGroup;
     protected _required: boolean = false;
-
 
     formControl: FormControl;
     protected _destroyed = new Subject<void>();
@@ -176,7 +168,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
     constructor(private _cd: ChangeDetectorRef) {
         this.formControl = new FormControl();
     }
-
 
     ngOnInit(): void {
         if (this.columns && (this.columns < 1 || this.columns > 12)) {
@@ -187,7 +178,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
             this.columns = 12;
         }
     }
-
 
     ngAfterContentChecked(): void {
         // this.validateFieldControlComponent();
@@ -208,12 +198,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
 
         // Refresh UI when value changes
         if (this._control && this._control.ngControl && this._control.ngControl.valueChanges) {
-            this._control.ngControl.valueChanges
-                .pipe(takeUntil(this._destroyed))
-                .subscribe((v) => {
-                    // this.onChange.emit('valueChangess');
-                    this._cd.markForCheck();
-                });
+            this._control.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe((v) => {
+                // this.onChange.emit('valueChangess');
+                this._cd.markForCheck();
+            });
         }
 
         if (this.required) {
@@ -227,15 +215,12 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
         this.initFormControl();
         this.updateControlProperties();
         this._cd.detectChanges();
-
     }
-
 
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
     }
-
 
     hasErrors(): boolean {
         return this._editable && this._control && this._control.status === 'error';
@@ -250,7 +235,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
             throw new Error('fdp-form-field must contain [id] binding.');
         }
     }
-
 
     private validateErrorHandler() {
         if (this._editable && this._control && this.hasValidators() && !this.i18Strings) {
@@ -270,7 +254,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
 
             this.formGroup.addControl(this.id, this._control.ngControl.control);
             this._control.ngControl.control.setValidators(Validators.compose(this.validators));
-            this._control.ngControl.control.updateValueAndValidity()
+            this._control.ngControl.control.updateValueAndValidity();
         }
     }
 
@@ -287,4 +271,3 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
         }
     }
 }
-
