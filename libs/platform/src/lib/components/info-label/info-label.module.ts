@@ -1,15 +1,15 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InfoLabelPlatformComponent } from './info-label.component';
+import { InfoLabelComponent } from './info-label.component';
 import { InfoLabelModule } from '@fundamental-ngx/core';
 
 @NgModule({
-    declarations: [InfoLabelPlatformComponent],
+    declarations: [InfoLabelComponent],
     imports: [
         CommonModule,
         InfoLabelModule
     ],
-    exports: [InfoLabelPlatformComponent],
+    exports: [InfoLabelComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
     
 })
