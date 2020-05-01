@@ -1,9 +1,11 @@
 import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     EventEmitter,
     Inject,
-    Input, isDevMode,
+    Input,
+    isDevMode,
     Optional,
     Output,
     TemplateRef,
@@ -16,7 +18,8 @@ import { MULTI_INPUT_MOBILE_CONFIG, MultiInputMobileConfiguration } from './mult
 
 @Component({
     selector: 'fd-multi-input-mobile',
-    templateUrl: './multi-input-mobile.component.html'
+    templateUrl: './multi-input-mobile.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiInputMobileComponent {
 
@@ -167,5 +170,4 @@ export class MultiInputMobileComponent {
             }
         }
     }
-
 }
