@@ -6,10 +6,11 @@
                     <h1 fd-dialog-title>{{ defaultDialogConfig?.title }}</h1>
                 </fd-bar-element>
             </div>
-            <div fd-bar-right>
+            <div fd-bar-right *ngIf="defaultDialogConfig?.closeButtonCallback">
                 <fd-bar-element>
-                    <button fd-dialog-close-button *ngIf="defaultDialogConfig?.closeButtonCallback"
-                            (click)="closeButtonClicked()"></button>
+                    <button fd-dialog-close-button
+                            (click)="closeButtonClicked()">
+                    </button>
                 </fd-bar-element>
             </div>
         </ng-template>
