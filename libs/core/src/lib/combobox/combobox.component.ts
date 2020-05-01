@@ -297,11 +297,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             event.key !== 'Escape' &&
             event.key !== ' ' &&
             event.key !== 'Tab' &&
-            event.key !== 'Enter'
+            event.key !== 'Enter' &&
+            event.key !== 'Backspace' &&
+            event.key !== 'Delete'
         ) {
             this.isOpenChangeHandle(true);
             if (this.open && this.displayedValues && this.displayedValues.length &&
-                    (!this.oldInputText || this.oldInputText.length < this.inputText.length)) {
+                    (!this.oldInputText || this.oldInputText !== this.inputText)) {
                 let foundCloseMatch = false;
                 this.displayedValues.forEach(displayedValue => {
                     if (displayedValue.toLocaleLowerCase().startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
