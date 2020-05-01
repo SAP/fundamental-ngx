@@ -196,4 +196,45 @@ describe('MultiInputComponent', () => {
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.listItems.first.focus).toHaveBeenCalled();
     });
+
+    it('should bring back values, if canceled on mobile mode and dont emit changes', async () => {
+        component.mobileMode = true;
+
+        spyOn(component, 'onChange');
+        spyOn(component.selectedChange, 'emit');
+
+        await fixture.whenStable();
+
+        component.handleSelect(true, component.dropdownValues[0]);
+
+        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.selectedChange.emit).not.toHaveBeenCalled();
+
+        expect(component.selected).toEqual([component.dropdownValues[0]]);
+
+        component.dialogDismiss([]);
+
+        expect(component.selected).toEqual([]);
+    });
+
+    it('should emit changes values on approve', async () => {
+        component.mobileMode = true;
+
+        spyOn(component, 'onChange');
+        spyOn(component.selectedChange, 'emit');
+
+        await fixture.whenStable();
+
+        component.handleSelect(true, component.dropdownValues[0]);
+
+        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.selectedChange.emit).not.toHaveBeenCalled();
+        expect(component.selected).toEqual([component.dropdownValues[0]]);
+
+        component.dialogApprove();
+
+        expect(component.onChange).toHaveBeenCalled();
+        expect(component.selectedChange.emit).toHaveBeenCalled();
+        expect(component.selected).toEqual([component.dropdownValues[0]]);
+    });
 });

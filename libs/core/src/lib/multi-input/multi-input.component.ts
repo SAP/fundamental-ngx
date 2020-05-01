@@ -27,6 +27,7 @@ import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
+import { MultiInputMobileConfiguration } from './multi-input-mobile/multi-input-mobile-configuration';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -177,6 +178,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Input()
     dialogConfig: DialogConfig;
 
+    /**
+     * TODO
+     */
+    @Input()
+    multiInputMobileConfig: MultiInputMobileConfiguration;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
@@ -294,7 +301,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         if (this.mobileMode) {
             this._dialogOpenHandle(open);
         } else {
-            this._popoverOpenChandle(open);
+            this._popoverOpenHandle(open);
         }
     }
 
@@ -425,7 +432,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
     }
 
-    private _popoverOpenChandle(open: boolean): void {
+    private _popoverOpenHandle(open: boolean): void {
         this.open = open;
         this.openChange.emit(this.open);
         this.onTouched();
