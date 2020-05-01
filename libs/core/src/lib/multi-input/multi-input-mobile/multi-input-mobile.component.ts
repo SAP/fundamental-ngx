@@ -155,6 +155,8 @@ export class MultiInputMobileComponent {
 
         if (multiInputConfig.closeButton) {
             this._dialogConfig.defaultObject.closeButtonCallback = () => this._handleDismiss();
+        } else {
+            this._dialogConfig.defaultObject.closeButtonCallback = null;
         }
     }
 
