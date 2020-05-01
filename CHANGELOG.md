@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2-rc.15"></a>
+## [0.17.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.14...v0.17.2-rc.15) (2020-05-01)
+
+
+### Bug Fixes
+
+* change static placement value ([#2445](https://github.com/SAP/fundamental-ngx/issues/2445)) ([d1f4a2a](https://github.com/SAP/fundamental-ngx/commit/d1f4a2a))
+
+
+
 <a name="0.17.2-rc.14"></a>
 ## [0.17.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.13...v0.17.2-rc.14) (2020-04-29)
 
