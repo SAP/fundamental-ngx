@@ -28,6 +28,9 @@ import * as backdropContainerHtml from '!raw-loader!./examples/dialog-backdrop-c
 import * as complexDialogTs from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.ts';
 import * as complexDialogHtml from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.html';
 
+import * as objectDialogTs from '!raw-loader!./examples/dialog-object/dialog-object.component.ts';
+import * as objectDialogHtml from '!raw-loader!./examples/dialog-object/dialog-object.component.html';
+
 import { DialogService } from '@fundamental-ngx/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
@@ -145,6 +148,20 @@ export class DialogDocsComponent {
             code: stateDialogTs,
             fileName: 'dialog-state-example',
             component: 'DialogStateExample'
+        }
+    ];
+
+    objectDialog: ExampleFile[] = [
+        {
+            language: 'html',
+            code: objectDialogHtml,
+            fileName: 'dialog-object'
+        },
+        {
+            language: 'typescript',
+            code: objectDialogTs,
+            fileName: 'dialog-object',
+            component: 'DialogObjectComponent'
         }
     ];
 
