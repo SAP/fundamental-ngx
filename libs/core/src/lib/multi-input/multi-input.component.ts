@@ -161,7 +161,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     allowNewTokens: boolean = false;
 
     /**
-     * mobile
+     * Whether the multi-input should be built on mobile mode
      */
     @Input()
     mobileMode: boolean = false;
@@ -173,13 +173,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     showAllButton: boolean = true;
 
     /**
-     * TODO
-     */
-    @Input()
-    dialogConfig: DialogConfig;
-
-    /**
-     * TODO
+     * Multi Input Mobile Configuration, it's applied only, when mobileMode is enabled
      */
     @Input()
     multiInputMobileConfig: MultiInputMobileConfiguration;
@@ -305,9 +299,11 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
     }
 
+    /** Method that selects all possible options. */
     selectAllItems(): void {
         this.selected = [...this.dropdownValues];
 
+        // On Mobile mode changes are propagated only on approve.
         if (!this.mobileMode) {
             this._propagateChange();
         }
@@ -334,6 +330,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             this.popoverRef.updatePopover();
         }
 
+        // On Mobile mode changes are propagated only on approve.
         if (!this.mobileMode) {
             this._propagateChange();
         }
@@ -343,10 +340,6 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     public handleKeyDown(event: KeyboardEvent, index: number): void {
         console.log(this.listItems.toArray());
         this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
-    }
-
-    hasOpenDialogs(): boolean {
-        return this.multiInputMobile && this.multiInputMobile.hasOpenDialogs();
     }
 
     /** @hidden */
@@ -393,14 +386,25 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
     }
 
+    /**
+     * Handle dialog dismissing, closes popover and sets backup data.
+     */
     dialogDismiss(selectedBackup: any[]): void {
         this.selected = [...selectedBackup];
         this.openChangeHandle(false);
     }
 
+    /**
+     * Handle dialog approval, closes popover and propagates data changes.
+     */
     dialogApprove(): void {
         this._propagateChange();
         this.openChangeHandle(false);
+    }
+
+    /** @hidden */
+    private _hasOpenDialogs(): boolean {
+        return this.multiInputMobile && this.multiInputMobile.hasOpenDialogs();
     }
 
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
@@ -432,6 +436,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
     }
 
+    /**
+     * @hidden
+     */
     private _popoverOpenHandle(open: boolean): void {
         this.open = open;
         this.openChange.emit(this.open);
@@ -443,12 +450,17 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
     }
 
+    /**
+     * @hidden
+     * Opens multi input in dialog, also adds backup data, to bring it, when changes are not approved.
+     */
     private _dialogOpenHandle(open: boolean): void {
-        if (!this.hasOpenDialogs() && open) {
+        if (!this._hasOpenDialogs() && open) {
             this.multiInputMobile.open([...this.selected]);
         }
     }
 
+    /** @hidden */
     private _propagateChange(): void {
         this.onChange(this.selected);
         this.selectedChange.emit(this.selected);
