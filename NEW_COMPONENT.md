@@ -54,8 +54,8 @@ Create an `exports` array in the poster module and add the poster component, lik
 Add a new file in the poster lib called `public_api.ts` and add the following:
 
 `
-export * from './poster.module'
-export * from './poster.component'
+export * from './poster.module';
+export * from './poster.component';
 `
 
 ## Step5: Add export to index.ts
@@ -74,7 +74,9 @@ Next let's create a directory for our poster docs.
 
 `mkdir poster`
 
-Create two new files in the `poster` directory, `poster-docs.component.ts` and `poster-docs.component.html`. Then create the directory `examples` as well. Create the component `poster-header`.
+Create two new files in the `poster` directory, `poster-docs.component.ts` and `poster-docs.component.html`. Then create the directory `examples` as well. 
+
+Next, from the documentation poster directory, create the component `poster-header`.
 
 `ng g c poster-header`
 
@@ -95,7 +97,7 @@ In poster-header.component.html Copy/paste the code here:
 <router-outlet></router-outlet>
 ```
 
-## Step8: Change poster-example.ts file
+## Step8: Edit the poster-example.component.ts file
 
 In `examples`, create the file `poster-example.component.ts`. Copy/paste the code here:
 
@@ -109,7 +111,7 @@ import { Component } from '@angular/core';
 export class PosterExampleComponent {}
 ```
 
-## Step9: Change poster-docs.ts file
+## Step9: Edit the poster-docs.component.ts file
 
 Then copy/paste this block to `poster-docs.component.ts`:
 
@@ -131,7 +133,7 @@ export class PosterDocsComponent {
 
 Note that we're using raw-loader to import the poster example code as raw text. This text will be rendered as the example source.
 
-## Step10: Change poster--docs.component.html file
+## Step10: Edit the poster-docs.component.html file
 
 In `poster-docs.component.html`, we'll provide a brief explanation of the poster component, and we'll add the poster component itself, along with the code example.
 
@@ -141,12 +143,12 @@ In `poster-docs.component.html`, we'll provide a brief explanation of the poster
     The Poster component displays a photograph taken from an image placeholder site.
 </description>
 <component-example>
-    <app-poster-example></app-poster-example>
+    <fd-poster-example></fd-poster-example>
 </component-example>
-<code-example [code]="posterHtml" [language]="'HTML'"></code-example>
+<code-example [exampleFiles]="posterHtml"></code-example>
 ```
 
-## Step11: Add poster.module.ts
+## Step11: Add poster-docs.module.ts
 Create a new file called `poster-docs.module.ts` in the poster documentation directory and copy/paste the following:
 
 ```TypeScript
@@ -202,6 +204,8 @@ In the same directory, open `core-documentation.routes.ts` and add the following
             )
     },
 ```
+
+PosterHeaderComponent may have been added automatically to `core-documentation.module.ts`, so we'll need to remove that.
 
 Then from this directory, navigate to the `documentation` directory and open `core-documentation.component.ts` and add:
 
