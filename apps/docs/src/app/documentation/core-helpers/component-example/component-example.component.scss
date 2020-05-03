@@ -15,8 +15,7 @@ rtl-switch {
 }
 
 .fd-tile.fd-tile-example-background {
-    background-color: #f7f7f7;
-    //background-color: var(--sapBackgroundColor);
+    background-color: var(--sapBackgroundColor);
 }
 
 span.fd-badge,
