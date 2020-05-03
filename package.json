@@ -145,7 +145,7 @@
     "protractor": "5.4.4",
     "rollup": "2.7.2",
     "standard-version": "4.4.0",
-    "ts-node": "8.9.1",
+    "ts-node": "8.10.0",
     "tslint": "6.1.1",
     "typedoc": "0.16.11",
     "typescript": "3.7.5"
