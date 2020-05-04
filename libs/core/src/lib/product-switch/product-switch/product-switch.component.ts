@@ -12,4 +12,9 @@ import {Placement} from 'popper.js';
 export class ProductSwitchComponent extends PopoverComponent {
     @Input () 
     placement: Placement = 'bottom-end'
+
+
+    /**Input to set the aria label */
+    @Input ()
+    ariaLabel: string = 'popover-button';
 }
