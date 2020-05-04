@@ -7,7 +7,7 @@ import { ListModule } from '../list/list.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 
-fdescribe('ComboboxComponent', () => {
+describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
     let fixture: ComponentFixture<ComboboxComponent>;
 

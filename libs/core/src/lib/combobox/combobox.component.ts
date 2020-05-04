@@ -272,7 +272,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             if (this.searchFn) {
                 this.searchFn();
             }
-            if (this.open && this.displayedValues && this.displayedValues.length) {
+            if (this.open && this._hasDisplayedValues()) {
                 this.onMenuClickHandler(0);
                 this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.remove('is-expanded');
             }
@@ -301,7 +301,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             event.key !== 'Delete'
         ) {
             this.isOpenChangeHandle(true);
-            if (this.open && this.displayedValues && this.displayedValues.length &&
+            if (this.open && this._hasDisplayedValues() &&
                     (!this.oldInputText || this.oldInputText !== this.inputText)) {
                 let foundCloseMatch = false;
                 this.displayedValues.forEach(displayedValue => {
@@ -407,7 +407,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.open = isOpen;
             this.openChange.emit(this.open);
             this.onTouched();
-            if (isOpen && this.displayedValues && this.displayedValues.length) {
+            if (isOpen && this._hasDisplayedValues()) {
                 this.focusTrap.activate();
                 this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.add('is-expanded');
             } else {
@@ -481,5 +481,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else {
             this.displayedValues = this.dropdownValues;
         }
+    }
+
+    private _hasDisplayedValues(): boolean {
+        return this.displayedValues && this.displayedValues.length > 0;
     }
 }

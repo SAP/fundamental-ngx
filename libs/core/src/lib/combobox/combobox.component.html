@@ -17,6 +17,7 @@
             (addOnButtonClicked)="onPrimaryButtonClick()"
             [buttonFocusable]="buttonFocusable"
             [disabled]="disabled"
+            [isControl]="true"
         >
             <input
                 #searchInputElement
@@ -72,7 +73,7 @@
                     fd-list-item
                     tabindex="0"
                     class="fd-combobox-list-item"
-                    [selected]="displayFn(term) === inputText"
+                    [selected]="displayFn(term) === searchInputElement.value"
                 >
                     <ng-container
                         [ngTemplateOutlet]="itemSource"
