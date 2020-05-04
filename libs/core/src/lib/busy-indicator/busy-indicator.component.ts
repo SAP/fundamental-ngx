@@ -18,7 +18,15 @@ export class BusyIndicatorComponent {
     @Input()
     size: BusyIndicatorSize = 'm';
 
-    /** Aria label for the 'loading' indicator. */
+    /** Aria label attribute value. */
+    @Input()
+    ariaLabel: string = 'Loading';
+
+    /** Aria label attribute value. */
     @Input()
     loadingLabel: string = 'Loading';
+
+    /** Aria live attribute value. */
+    @Input()
+    ariaLive: 'assertive' | 'polite' | null = 'polite';
 }
