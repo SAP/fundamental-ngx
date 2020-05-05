@@ -28,7 +28,7 @@ export class ListItemDirective {
     selected: boolean = false;
 
     /** @hidden */
-    @ContentChild(CheckboxComponent, { static: false })
+    @ContentChild(CheckboxComponent)
     checkboxComponent: CheckboxComponent;
 
     /** @hidden */

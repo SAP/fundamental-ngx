@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component, ContentChild,
+    HostBinding,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
+import { ListBylineComponent } from './list-byline.component';
 
 /**
  * The directive that represents a list.
@@ -9,7 +16,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
     selector: '[fd-list]',
     template: `<ng-content></ng-content>`,
     host: {
-        class: 'fd-list'
+        class: 'fd-list',
+        '[class.fd-list--byline]': 'isByline'
     },
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./list.component.scss'],
@@ -40,4 +48,11 @@ export class ListComponent {
     @Input()
     @HostBinding('class.fd-list--no-border')
     noBorder: boolean = false;
+
+    @ContentChild(ListBylineComponent)
+    set setBylineListItem(bylineListItem: ListBylineComponent) {
+        this.isByline = !!bylineListItem;
+    };
+
+    isByline: boolean = false;
 }

@@ -1,41 +1,40 @@
-<h3>Cozy Mode</h3>
-
 <ul fd-list>
-    <li fd-list-item>
-        <a [href]="'#'" fd-list-title>List item with link 1</a>
+    <li fd-byline>
+        <fd-icon fd-list-thumbnail glyph="world"></fd-icon>
+        <div fd-list-content>
+            <span fd-list-title>List item 3</span>
+        </div>
     </li>
-    <li fd-list-item>
-        <a [href]="'#'" fd-list-title>List item with link 2</a>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title>
-            List item 3
-        </span>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title>
-            List item 4
-        </span>
-    </li>
-</ul>
 
-<h3>Compact Mode</h3>
+    <li fd-byline>
+        <div fd-list-content>
+            <a [href]="'#'" fd-list-title>List item with link 2</a>
 
-<ul fd-list [compact]="true">
-    <li fd-list-item>
-        <a [href]="'#'" fd-list-title>List item with link 1</a>
+            <fd-byline-text>
+                Some byline text
+            </fd-byline-text>
+        </div>
     </li>
-    <li fd-list-item>
-        <a [href]="'#'" fd-list-title>List item with link 2</a>
+
+    <li fd-byline>
+        <div fd-list-content>
+            <span fd-list-title>List item 3</span>
+
+            <fd-byline-text>
+                <span fd-byline-text-left>Some byline text left</span>
+                <span fd-byline-text-right>Some byline text right</span>
+            </fd-byline-text>
+        </div>
     </li>
-    <li fd-list-item>
-        <span fd-list-title>
-            List item 3
-        </span>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title>
-            List item 4
-        </span>
+
+    <li fd-byline>
+        <div fd-list-content>
+            <span fd-list-title>List item 3</span>
+
+            <fd-byline-text>
+                <span fd-byline-text-left>Some byline text left</span>
+                <span fd-byline-text-right>Some byline text right</span>
+            </fd-byline-text>
+        </div>
     </li>
 </ul>
