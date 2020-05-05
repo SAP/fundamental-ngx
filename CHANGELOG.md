@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2-rc.27"></a>
+## [0.17.2-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.26...v0.17.2-rc.27) (2020-05-05)
+
+
+### Bug Fixes
+
+* add ariaLabel input to product-switch for button ([#2477](https://github.com/SAP/fundamental-ngx/issues/2477)) ([e7de4ee](https://github.com/SAP/fundamental-ngx/commit/e7de4ee))
+
+
+
 <a name="0.17.2-rc.26"></a>
 ## [0.17.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.17.2-rc.25...v0.17.2-rc.26) (2020-05-04)
 
