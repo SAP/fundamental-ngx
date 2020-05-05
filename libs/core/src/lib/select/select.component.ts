@@ -149,10 +149,6 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     @Input()
     unselectMissingOption: boolean = true;
 
-    /** If user wants to disable clicking when the content has not yet loaded and apply the three dots. */
-    @Input()
-    loading: boolean = false;
-
     /** Time to wait in milliseconds after the last keydown before focusing or selecting option based on alphanumeric keys. */
     @Input()
     typeaheadDebounceInterval: number = 250;
@@ -284,7 +280,7 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
 
     /** Whether control can be interacted with */
     get isInteractive(): boolean {
-        return !(this.readonly || this.loading || this.disabled);
+        return !(this.readonly || this.disabled);
     }
 
     /** @hidden */

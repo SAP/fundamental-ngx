@@ -36,14 +36,14 @@
              role="listbox"
              #selectControl
              [ngClass]="state ? 'is-' + state : ''"
+             [class.is-active]="isOpen"
+             [class.is-expanded]="isOpen"
              [class.is-disabled]="disabled"
              [class.is-readonly]="readonly"
-             [class.is-active]="isOpen && !loading"
-             [class.is-expanded]="isOpen && !loading"
              [attr.tabindex]="disabled ? -1 : 0"
              [attr.id]="controlId"
-             [attr.aria-active]="isOpen && !loading"
-             [attr.aria-expanded]="isOpen && !loading"
+             [attr.aria-active]="isOpen"
+             [attr.aria-expanded]="isOpen"
              [attr.aria-disabled]="disabled"
              [attr.aria-readonly]="readonly"
              [attr.aria-controls]="controlId + '-list-box'"
@@ -67,13 +67,11 @@
                     tabindex="-1"
                     class="fd-button--transparent fd-select__button"
                     *ngIf="!readonly"
-                    [disabled]="disabled || loading"
+                    [disabled]="disabled"
                     [glyph]="glyph">
             </button>
         </div>
     </div>
-
-    <fd-busy-indicator *ngIf="loading" [loading]="true" size="m"></fd-busy-indicator>
 </ng-template>
 
 <ng-template #selectOptionsListTemplate>

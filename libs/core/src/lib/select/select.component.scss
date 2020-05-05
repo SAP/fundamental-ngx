@@ -5,14 +5,6 @@ fd-popover {
     width: 100%;
 }
 
-// To be removed when Busy Indicator gets updated
-fd-busy-indicator {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 ul[fd-list] {
     max-width: 100%;
     overflow: auto;
