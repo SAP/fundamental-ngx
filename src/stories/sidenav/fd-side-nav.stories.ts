@@ -42,14 +42,12 @@ export const SideNavigation = () => ({
                             <span *ngIf="!mainTextOnlyVar" fd-nested-list-icon [glyph]="icon"></span>
                             <span fd-nested-list-title>{{textValue1}}</span>
                         </a>
-                        <ul fd-nested-list [textOnly]="mainSubTextOnlyVar">
+                        <ul fd-nested-list [textOnly]="true">
                             <li fd-nested-list-item>
                                 <a fd-nested-list-link>
-                                    <span *ngIf="!mainSubTextOnlyVar" fd-nested-list-icon [glyph]="iconSecondary"></span>
                                     <span fd-nested-list-title>{{textValue1}}</span>
                                 </a>
                                 <a fd-nested-list-link>
-                                    <span *ngIf="!mainSubTextOnlyVar" fd-nested-list-icon [glyph]="iconSecondary"></span>
                                     <span fd-nested-list-title>{{textValue1}}</span>
                                 </a>
                             </li>
@@ -81,7 +79,6 @@ export const SideNavigation = () => ({
     props: {
         mainCompactVar: boolean('Main Secion in Compact Mode', false),
         mainTextOnlyVar: boolean('Main Section Text Only', false),
-        mainSubTextOnlyVar: boolean('Main Sub Section Text Only', false),
         utilityTextOnlyVar: boolean('Utility Section text only', false),
         utilityCompactVar: boolean('Utility Section in Compact Mode', false),
         textValue1: text('Text Value 1', 'Item 1'),
