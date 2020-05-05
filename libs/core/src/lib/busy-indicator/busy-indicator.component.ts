@@ -7,7 +7,16 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
     templateUrl: './busy-indicator.component.html',
     styleUrls: ['./busy-indicator.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.tabindex]': 'focusable ? 0 : -1',
+        '[attr.aria-busy]': 'loading',
+        '[attr.aria-live]': 'ariaLive',
+        '[attr.aria-hidden]': 'loading',
+        '[attr.aria-label]': 'ariaLabel',
+        '[class.fd-busy-indicator__container]': 'true',
+        '[class.fd-busy-indicator__container--inline]': 'inline',
+    }
 })
 export class BusyIndicatorComponent {
     /** Whether to display the loading indicator animation. */
@@ -18,9 +27,17 @@ export class BusyIndicatorComponent {
     @Input()
     size: BusyIndicatorSize = 'm';
 
-    /** @deprecated Aria label for the 'loading' indicator. */
+    /** Whether to use loader as inline element */
     @Input()
-    loadingLabel: string = 'Loading';
+    inline: boolean = false;
+
+    /** Whether busy indicator can be focused */
+    @Input()
+    focusable: boolean = true;
+
+    /** Whether busy indicator can be focused */
+    @Input()
+    focusableContent: boolean = false;
 
     /** Aria label attribute value. */
     @Input()

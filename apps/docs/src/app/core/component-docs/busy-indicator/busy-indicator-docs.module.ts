@@ -7,7 +7,7 @@ import { BusyIndicatorHeaderComponent } from './busy-indicator-header/busy-indic
 import { BusyIndicatorDocsComponent } from './busy-indicator-docs.component';
 import { BusyIndicatorBasicExampleComponent } from './examples/busy-indicator-basic-example.component';
 import { BusyIndicatorToggleExampleComponent } from './examples/busy-indicator-toggle-example.component';
-import { BusyIndicatorModule } from '@fundamental-ngx/core';
+import { BusyIndicatorModule, ButtonModule, SelectModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, BusyIndicatorModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, BusyIndicatorModule, ButtonModule, SelectModule],
     exports: [RouterModule],
     declarations: [
         BusyIndicatorDocsComponent,

@@ -1,23 +1,16 @@
-<div class="fd-busy-indicator__container"
-     [attr.aria-busy]="loading"
-     [attr.aria-live]="ariaLive"
-     [attr.aria-hidden]="loading"
-     [attr.aria-label]="ariaLabel">
+<ng-content></ng-content>
 
-    <ng-content></ng-content>
-
-    <div
-        class="fd-busy-indicator"
-        *ngIf="loading"
-        [ngClass]="{
+<div
+    class="fd-busy-indicator"
+    *ngIf="loading"
+    [ngClass]="{
         'fd-busy-indicator--l': size == 'l',
         'fd-busy-indicator--m': size == 'm',
         'fd-busy-indicator--s': size == 's'
     }">
-        <div class="fd-busy-indicator--circle-0"></div>
-        <div class="fd-busy-indicator--circle-1"></div>
-        <div class="fd-busy-indicator--circle-2"></div>
-    </div>
-
-    <div class="fd-busy-indicator__overlay"></div>
+    <div class="fd-busy-indicator--circle-0"></div>
+    <div class="fd-busy-indicator--circle-1"></div>
+    <div class="fd-busy-indicator--circle-2"></div>
 </div>
+
+<div class="fd-busy-indicator__overlay"></div>

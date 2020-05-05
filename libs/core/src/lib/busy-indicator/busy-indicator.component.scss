@@ -6,11 +6,21 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    min-width: 48px;
 
     &__container {
+        display: block;
         position: relative;
-        display: inline-block;
+
+        &:focus {
+            outline-offset: -0.1875rem;
+            outline-width: var(--sapContent_FocusWidth);
+            outline-color: var(--sapContent_FocusColor);
+            outline-style: var(--sapContent_FocusStyle);
+        }
+
+        &--inline {
+            display: inline-block;
+        }
     }
 
     &__overlay {
@@ -20,7 +30,6 @@
         left: 0;
         right: 0;
         z-index: 1;
-        opacity: .5;
-        background-color: grey;
+        background-color: rgba(247, 247, 247, 0.72);
     }
 }

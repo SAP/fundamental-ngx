@@ -1,5 +1,28 @@
-<fd-busy-indicator [loading]="true" size="l">
+<fd-busy-indicator size="s" [loading]="true" [inline]="true">
+
+    <button fd-button>Save</button>
+
+</fd-busy-indicator>
+<br/>
+<fd-busy-indicator size="l" [loading]="true" [inline]="true">
 
     <div style="height: 200px; width: 300px; background-color: #00b0e8; border: 2px solid red"></div>
 
+</fd-busy-indicator>
+<br/>
+
+<fd-busy-indicator size="m" [inline]="false" [loading]="true">
+
+    <fd-select>
+        <fd-option>Hello</fd-option>
+        <fd-option>Hello</fd-option>
+        <fd-option>Hello</fd-option>
+        <fd-option>Hello</fd-option>
+    </fd-select>
+
+</fd-busy-indicator>
+<br/>
+
+<fd-busy-indicator size="l" [loading]="true">
+    <div style="height: 100px; background-color: #61dafb"></div>
 </fd-busy-indicator>
