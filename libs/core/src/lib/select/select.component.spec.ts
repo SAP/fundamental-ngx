@@ -38,7 +38,7 @@ describe('SelectComponent', () => {
             imports: [SelectModule]
         })
             .overrideComponent(SelectComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: {changeDetection: ChangeDetectionStrategy.Default}
             })
             .compileComponents();
     }));
@@ -285,27 +285,32 @@ describe('SelectComponent', () => {
         expect(component.selected.value).toEqual('value-3');
     });
 
-    it('Should support alphanumerical keys focus', async () => {
+    it('Should support alphanumerical keys focus', fakeAsync(() => {
+        fixture.componentInstance.value = 'value-1';
         component.open();
 
-        await wait(fixture);
+        fixture.detectChanges();
+        tick();
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyT'}));
 
-        await wait(fixture);
+        fixture.detectChanges();
+        tick(component.typeaheadDebounceInterval + 1);
 
         expect(document.activeElement).toBe(component['_options'][1].getHtmlElement());
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyT'}));
 
-        await wait(fixture);
+        fixture.detectChanges();
+        tick(component.typeaheadDebounceInterval + 1);
 
         expect(document.activeElement).toBe(component['_options'][2].getHtmlElement());
 
         component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowUp'}));
 
-        await wait(fixture);
+        fixture.detectChanges();
+        tick(component.typeaheadDebounceInterval + 1);
 
         expect(document.activeElement).toBe(component['_options'][1].getHtmlElement());
-    });
+    }));
 });
