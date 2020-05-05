@@ -1,13 +1,9 @@
-<div class="example-div">
+<div class="example-btn-holder">
     <button fd-button (click)="addOption()">Add Option</button>
     <button fd-button (click)="removeOption()">Remove Option</button>
-    <p>Selected Value: {{ selectValue }}</p>
 </div>
 
-<fd-select [(value)]="selectValue" placeholder="Select an option...">
-    <div style="max-height: 200px; overflow: auto;">
-        <fd-option *ngFor="let option of options" [value]="option">
-            {{ option }}
-        </fd-option>
-    </div>
+<fd-select placeholder="Select an option" [(value)]="selectedValue" [closeOnOutsideClick]="false">
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
+<small>Selected value: {{selectedValue}}</small>

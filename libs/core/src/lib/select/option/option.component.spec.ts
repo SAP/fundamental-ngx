@@ -1,72 +1,95 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OptionComponent } from './option.component';
+import { ChangeDetectorRef, ElementRef } from '@angular/core';
+import Spy = jasmine.Spy;
+import { SelectProxy } from '../select-proxy.service';
 
 describe('OptionComponent', () => {
     let component: OptionComponent;
     let fixture: ComponentFixture<OptionComponent>;
+    let keyHandlerSpy: Spy<any>;
+    let setSelectedSpy: Spy<any>;
+    const selectValue = 'Pineapple';
+
+    const changeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']);
+    const elementRef = new ElementRef(null);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [OptionComponent]
+            declarations: [OptionComponent],
+            providers: [
+                SelectProxy,
+                {provide: ChangeDetectorRef, useValue: changeDetectorRef},
+                {provide: ElementRef, useValue: elementRef}
+            ]
         }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(OptionComponent);
         component = fixture.componentInstance;
+        setSelectedSpy = spyOn(component, 'setSelected').and.callThrough();
+        keyHandlerSpy = spyOn(component, 'selectionHandler').and.callThrough();
         fixture.detectChanges();
     });
 
     it('should create', () => {
+        fixture.detectChanges();
         expect(component).toBeTruthy();
     });
 
     it('should make HTML Element available', () => {
+        fixture.detectChanges();
         expect(component.getHtmlElement()).toBeTruthy();
     });
 
-    xit('should be focusable', () => {
+    it('should be focusable', () => {
+        fixture.detectChanges();
         component.focus();
         expect(document.activeElement).toBe(component.getHtmlElement());
     });
 
-    it('should be selectable programmatically', () => {
-        spyOn(component.selectedChange, 'emit');
-        component.setSelected(true, true);
-        expect(component.selectedChange.emit).toHaveBeenCalled();
+    it('should be selected based on control state', () => {
+        component.value = selectValue;
+        component['_selectProxy'].value$.next(selectValue);
+
+        expect(setSelectedSpy).toHaveBeenCalled();
         expect(component.selected).toBe(true);
     });
 
     it('should be selectable by click', () => {
-        spyOn(component.selectedChange, 'emit');
-        spyOn(component, 'selectionHandler').and.callThrough();
+
         component.getHtmlElement().click();
-        expect(component.selectionHandler).toHaveBeenCalled();
-        expect(component.selectedChange.emit).toHaveBeenCalled();
+
         expect(component.selected).toBe(true);
+        expect(keyHandlerSpy).toHaveBeenCalled();
+        expect(setSelectedSpy).toHaveBeenCalledWith(true, true);
     });
 
     it('should be selectable by keyboard', () => {
-        spyOn(component, 'selectionHandler').and.callThrough();
-        spyOn(component.selectedChange, 'emit');
-        component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-        expect(component.selectionHandler).toHaveBeenCalled();
-        expect(component.selectedChange.emit).toHaveBeenCalled();
+
+        component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+        component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: ' '}));
+
         expect(component.selected).toBe(true);
+        expect(setSelectedSpy).toHaveBeenCalledWith(true, true);
+        expect(keyHandlerSpy).toHaveBeenCalledTimes(2);
+        expect(setSelectedSpy).toHaveBeenCalledTimes(2);
     });
 
     it('should not fire select event when disabled', () => {
-        spyOn(component.selectedChange, 'emit');
         component.disabled = true;
-        component.selectionHandler();
-        expect(component.selectedChange.emit).not.toHaveBeenCalled();
-    });
+        fixture.detectChanges();
 
-    it('should support custom view value', () => {
-        component.value = 'value';
-        expect(component.viewValueText).toBeFalsy();
-        component.viewValue = 'viewValue';
-        expect(component.viewValueText).toBe('viewValue');
+        component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+        fixture.detectChanges();
+        component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: ' '}));
+        fixture.detectChanges();
+        component.getHtmlElement().click();
+        fixture.detectChanges();
+
+        expect(keyHandlerSpy).toHaveBeenCalledTimes(3);
+        expect(component.selected).toEqual(false);
     });
 });

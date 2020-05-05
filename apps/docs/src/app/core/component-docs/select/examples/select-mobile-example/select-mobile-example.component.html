@@ -1,0 +1,25 @@
+<fd-select placeholder="Select an option"
+           stateMessage="Select your favourite fruit"
+           state="information"
+           [(value)]="selectedValue"
+           [mobile]="true"
+           (isOpenChange)="toggleDialog($event)">
+
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
+
+</fd-select>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+
+        <fd-dialog-header>
+            <h1 fd-dialog-title>Select Ingredient</h1>
+            <button fd-dialog-close-button (click)="close()"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <ng-container *ngTemplateOutlet="selectComponent.selectOptionsListTemplate"></ng-container>
+        </fd-dialog-body>
+
+    </fd-dialog>
+</ng-template>

@@ -1,27 +1,9 @@
 <form [formGroup]="customForm">
-    <fieldset fd-fieldset>
-        <div fd-form-item>
-            <fd-select formControlName="selectControl">
-                <fd-option value="apple">Apple</fd-option>
-                <fd-option value="pineapple">Pineapple</fd-option>
-                <fd-option value="kiwi">Kiwi</fd-option>
-                <fd-option value="strawberry">Strawberry</fd-option>
-            </fd-select>
-            Selected Value: {{ customForm.controls.selectControl.value }} <br />
-        </div>
-        <div fd-form-item>
-            <fd-select formControlName="disabledSelectControl">
-                <fd-option value="apple">Apple</fd-option>
-                <fd-option value="pineapple">Pineapple</fd-option>
-                <fd-option value="kiwi">Kiwi</fd-option>
-                <fd-option value="strawberry">Strawberry</fd-option>
-            </fd-select>
-            Selected Value: {{ customForm.controls.disabledSelectControl.value }} <br />
-
-            Disabled: {{ customForm.controls.disabledSelectControl.disabled }}<br />
-        </div>
-    </fieldset>
+    <fd-select formControlName="selectControl">
+        <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
+    </fd-select>
 </form>
-
-Form Touched: {{ customForm.touched }} <br />
-Form Dirty: {{ customForm.dirty }} <br />
+<small style="display: block">Value: {{customForm.controls.selectControl.value}}</small>
+<small style="display: block">Touched: {{customForm.touched}}</small>
+<small style="display: block">Dirty: {{customForm.dirty}}</small>
+<small style="display: block">Status: {{customForm.status}}</small>

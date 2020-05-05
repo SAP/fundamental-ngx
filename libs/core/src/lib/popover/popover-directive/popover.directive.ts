@@ -304,12 +304,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     private addTriggerListeners(): void {
         if (this.triggers && this.triggers.length > 0) {
-            this.triggers.forEach((trigger) => {
-                this.eventRef.push(
-                    this.renderer.listen(this.elRef.nativeElement, trigger, () => {
-                        this.toggle();
-                    })
-                );
+            this.triggers.forEach(trigger => {
+                this.eventRef.push(this.renderer.listen(this.elRef.nativeElement, trigger, () => {
+                    this.toggle();
+                }));
             });
         }
     }

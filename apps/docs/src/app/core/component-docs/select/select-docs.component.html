@@ -1,61 +1,99 @@
-<fd-docs-section-title [id]="'standard'" [componentName]="'select'">
-    Standard Select
-</fd-docs-section-title>
-<description>A basic example of the select component with no advanced features.</description>
-<component-example>
-    <fd-select-basic-example></fd-select-basic-example>
-</component-example>
-<code-example [exampleFiles]="selectBasic"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'Types'" [componentName]="'select'">
-    Select Border Types
-</fd-docs-section-title>
-<description
-    >An example of the select component with diffrent types of Border type and ability to add icon.
-</description>
-<component-example>
-    <fd-select-types-example></fd-select-types-example>
-</component-example>
-<code-example [exampleFiles]="selectTypes"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'programmaticControl'" [componentName]="'select'">
-    Programmatic Control
-</fd-docs-section-title>
-
-<description>
-    Controlling the select through programmatic methods is possible by calling the select component instance directly.
-    Note that this can be done through ViewChild as well.
-</description>
-<component-example>
-    <fd-select-programmatic-example></fd-select-programmatic-example>
-</component-example>
-<code-example [exampleFiles]="selectProg"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'customViewValue'" [componentName]="'select'">
-    Custom View Value
+<fd-docs-section-title [id]="'mode'" [componentName]="'select'">
+    Select Modes
 </fd-docs-section-title>
 <description>
-    The value which appears inside the trigger can be customized easily through the <code>viewValue</code> input.
+    Following examples presents different modes of the Select control.
 </description>
 <component-example>
-    <fd-select-view-value-example></fd-select-view-value-example>
+    <fd-select-mode-example></fd-select-mode-example>
 </component-example>
-<code-example [exampleFiles]="selectViewValue"></code-example>
+<code-example [exampleFiles]="selectMode"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'selectMaxHeight'" [componentName]="'select'">
+<fd-docs-section-title [id]="'semantic'" [componentName]="'select'">
+    Select Semantic States
+</fd-docs-section-title>
+<description>
+    Use semantic states to visually highlight current state of the Select.
+</description>
+<component-example>
+    <fd-select-semantic-state-example></fd-select-semantic-state-example>
+</component-example>
+<code-example [exampleFiles]="selectSemantic"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'custom-select-template'" [componentName]="'select'">
+    Custom Control Content
+</fd-docs-section-title>
+<description>
+    The content of the Select control can be customized using a custom template which needs to be referenced in the
+    <code>[controlTemplate]</code> input. Select provides the following context values to the template:
+    <ul>
+        <li>Text value of selected option - <code>implicit</code></li>
+        <li>Reference to selected option - <code>selected</code></li>
+    </ul>
+    Selected option as a context to custom template.
+</description>
+<component-example>
+    <fd-select-custom-trigger></fd-select-custom-trigger>
+</component-example>
+<code-example [exampleFiles]="customSelectTemplate"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'nested-options'" [componentName]="'select'">
+    Extended Options
+</fd-docs-section-title>
+<description>
+    ListComponent features such as headers, titles and icons are supported inside the OptionComponent.
+    This example also shows how to handle complex option types like <code>Object</code>.
+</description>
+<component-example>
+    <fd-select-nested-options></fd-select-nested-options>
+</component-example>
+<code-example [exampleFiles]="selectExtendedOptions"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'select-mobile'" [componentName]="'select'">
+    Select In Mobile Mode
+</fd-docs-section-title>
+<description>
+    To open a Menu in mobile mode, compose the Menu Component together with the Dialog Component.<br/>
+    There are a few important things to remember:
+    <ul>
+        <li>
+            Because Select is tightly bound to Option, it is important to keep the options in
+            view without instantiating and destroying them with every dialog open/close action. We can easily achieve
+            this by creating the Dialog once and using the <code>DialogRef.hidden()</code> method to show/hide the dialog.
+        </li>
+
+        <li>
+            To get the full Fiori3 experience, set Select in mobile mode using <code>[mobile]="true"</code>. Also remember to instantiate the
+            Dialog inside Select using <code>DialogConfig.container</code> and <code>Select.dialogContainerElementRef</code>.
+        </li>
+
+        <li>
+            The Options template needs to be declared inside the <code>fd-select</code> tags to properly configure element
+            injectors. Use <code>Select.selectOptionsListTemplate</code> to render options in the desired place.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fd-select-mobile-example></fd-select-mobile-example>
+</component-example>
+<code-example [exampleFiles]="selectMobile"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'select-max-height'" [componentName]="'select'">
     Select Max Height
 </fd-docs-section-title>
 <description>
-    The select component allows to define <code>[maxHeight]</code>. It can be useful when there are a lot of options,
-    the select body is be scrollable. By default maximum height of select body is 45% of browsers window inner height.
+    The Select component allows you to define the <code>[maxHeight]</code>. It can be useful when there are a lot of options given that
+    the select body is be scrollable. By default the maximum height of the Select body is 45% of the browser's inner window height.
 </description>
 <component-example>
     <fd-select-max-height-example></fd-select-max-height-example>
@@ -64,44 +102,14 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'nestedOptions'" [componentName]="'select'">
-    Nested Options
-</fd-docs-section-title>
-<description>
-    Instances of the fd-option component will be found regardless of how deep in the hierarchy they are. It also
-    includes having options inside options, for instance. This feature allows for some very flexible usage. The example
-    below showcases how to add a scrolling container around the options. Note that accessibility generally requires some
-    text-content to be present in the actual option element.
-</description>
-<component-example>
-    <fd-select-nested-options></fd-select-nested-options>
-</component-example>
-<code-example [exampleFiles]="selectNested"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'customTrigger'" [componentName]="'select'">
-    Custom Trigger
-</fd-docs-section-title>
-<description>
-    The default trigger can be replaced by providing a template reference to the appropriate input. Note that the
-    top-level element must be tab-indexed for the keyboard support to function correctly.
-</description>
-<component-example>
-    <fd-select-custom-trigger></fd-select-custom-trigger>
-</component-example>
-<code-example [exampleFiles]="customTrigger"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'addingRemovingOptions'" [componentName]="'select'">
+<fd-docs-section-title [id]="'adding-removing-options'" [componentName]="'select'">
     Adding and Removing Options
 </fd-docs-section-title>
 <description>
-    Adding and removing options dynamically is supported seamlessly, with very little extra work required from the
+    Adding and removing options dynamically is supported seamlessly with very little extra work required from the
     developer. By design, if the user removes the option that is currently selected, the value will become undefined.
-    This was implemented to prevent a user from keeping the active value of a previously removed option. Also user can
-    prevent automatically removing missing option by passing <code>[unselectMissingOption]="false"</code>.
+    This was implemented to prevent a user from keeping the active value of a previously removed option. This behavior
+    can be automatically prevented by setting <code>[unselectMissingOption]="false"</code>.
 </description>
 <component-example>
     <fd-select-adding-example></fd-select-adding-example>
@@ -110,12 +118,25 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'reactiveForm'" [componentName]="'select'">
+<fd-docs-section-title [id]="'programmatic-control'" [componentName]="'select'">
+    Programmatic Control
+</fd-docs-section-title>
+<description>
+    Controlling Select through programmatic methods is possible by calling the Select component instance directly.
+    Note that this can be done through ViewChild as well.
+</description>
+<component-example>
+    <fd-select-programmatic-example></fd-select-programmatic-example>
+</component-example>
+<code-example [exampleFiles]="selectProgrammatic"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'reactive-form'" [componentName]="'select'">
     Select In A Reactive Form
 </fd-docs-section-title>
-Select In A Reactive Form
 <description>
-    The select component can be used inside Angular reactive forms.
+    The Select component can be used inside Angular reactive forms.
 </description>
 <component-example>
     <fd-select-forms></fd-select-forms>
