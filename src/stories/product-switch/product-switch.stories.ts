@@ -22,8 +22,8 @@ export default {
 export const ProductSwitch = () => ({
     template:
         `<fd-product-switch 
-                [closeOnEscapeKey]="closeOnEscapeKey"
-                [closeOnOutsideClick]="closeOnOutsideClick"
+                [closeOnEscapeKey]="onCloseKeyPressed"
+                [closeOnOutsideClick]="onCloseOutsideClick"
                 [disabled]="disabled"
                 [fillControlMode]="fillControlMode"
                 [focusTrapped]="focusTrapped"
@@ -31,29 +31,29 @@ export const ProductSwitch = () => ({
                 [isOpen]="isOpen"
                 [noArrow]="noArrow"
                 [placement]="placement"
-                [triggers]="triggersVar">
+                [triggers]="triggersPopover">
             <fd-product-switch-body
-                [forceListMode]="forceListModeVar"
-                [products]="objectVar"
+                [forceListMode]="forceListMode"
+                [products]="objectChoices"
                 [dragAndDropEnabled]="dragAndDropEnabled">
             </fd-product-switch-body>
         </fd-product-switch>
     `,
     props: {
-        forceListModeVar: boolean('Mobile Mode', false),
-        closeOnEscapeKey: boolean('Close On Esc', false),
-        closeOnOutsideClick: boolean('Close on Outside Click', false),
+        forceListMode: boolean('Mobile Mode', false),
+        onCloseKeyPressed: boolean('Close On Esc', false),
+        onCloseOutsideClick: boolean('Close on Outside Click', false),
         disabled: boolean('disabled', false),
         fillControlMode: select('Full Controll Mode',{ equal: 'equal', atLeast: 'at-least', none: '',},'equal'),
         focusTrapped: boolean('Focus Trapped', false),
-        id: text('id', 'abd123'),
+        id: text('Id', 'abd123'),
         isDropdown: boolean('Is Dropdown', true),
         isOpen: boolean('Is Open', false),
         noArrow: boolean('Hide Arrow', false),
         placement: text('Placement', 'right-start'),
         dragAndDropEnabled: boolean('Enable Drag and Drop', false),
-        triggersVar: object('Triggers', ['click']),
-        objectVar: object('Objects',
+        triggersPopover: object('Triggers', ['click']),
+        objectChoices: object('Objects',
             [
                 {
                     title: 'Home',
