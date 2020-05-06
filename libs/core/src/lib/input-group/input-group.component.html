@@ -29,7 +29,7 @@
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
                 [fdType]="'transparent'"
                 [glyph]="glyph"
-                [class]="inShellbar ? 'fd-shellbar__button' : ''"
+                [class]="'fd-input-group__button' + (inShellbar ? ' fd-shellbar__button' : '') + (isExpanded ? ' is-expanded' : '')"
                 (click)="buttonClicked($event)"
                 type="button"
             >
