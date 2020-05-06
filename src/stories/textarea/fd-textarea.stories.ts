@@ -24,21 +24,21 @@ export const TextArea = () => ({
         `
         <div fd-form-item>
         <label fd-form-label for="input-1">Default Text Area</label>
-        <textarea fd-form-control id="id" [attr.aria-label]="ariaLabel" [placeholder]="placeholderVar" [disabled]="disabledVar" [compact]="compactVar" [state]="stateVar"></textarea>
+        <textarea fd-form-control id="id" [attr.aria-label]="ariaLabel" [placeholder]="placeholderOfTextArea" [disabled]="disabledOfTextArea" [compact]="compactOfTextArea" [state]="stateOfTextArea"></textarea>
         </div>
   `,
     props: {
-        stateVar: select('State', {
+        stateOfTextArea: select('State', {
             information: 'information',
             success: 'success',
             error: 'error',
             warning: 'warning',
             none: '',
         }, ''),
-        compactVar: boolean('Compact', false),
-        disabledVar: boolean('Disabled', false),
-        placeholderVar: text('Placeholder', 'Enter text here'),
-        id: text('Id', 'textarea1'),
+        compactOfTextArea: boolean('Compact', false),
+        disabledOfTextArea: boolean('Disabled', false),
+        placeholderOfTextArea: text('Placeholder', 'Enter text here'),
+        id: text('ID', 'textarea1'),
         ariaLabel: text('Aria Label', 'textarea1')
 
     }
