@@ -282,9 +282,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             event.key !== 'Escape' &&
             event.key !== ' ' &&
             event.key !== 'Tab' &&
-            event.key !== 'Enter' &&
-            event.key !== 'Backspace' &&
-            event.key !== 'Delete'
+            event.key !== 'Enter'
         ) {
             this.isOpenChangeHandle(true);
             if (this.open && this._hasDisplayedValues() &&
@@ -295,7 +293,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                             .startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
                         foundCloseMatch = true;
                         const selectionStartIndex = this.inputText.length;
-                        this.searchInputElement.nativeElement.value = this.displayFn(displayedValue);
+                        if (event.key !== 'Backspace' && event.key !== 'Delete') {
+                            this.searchInputElement.nativeElement.value = this.displayFn(displayedValue);
+                        }
                         this.searchInputElement.nativeElement.setSelectionRange(selectionStartIndex, this.displayFn(displayedValue).length);
                     }
                 });
@@ -306,8 +306,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                     this.onMenuClickHandler(i);
                 }
             });
+            this.isOpenChangeHandle(false);
             this.isExpanded = false;
-            this.searchInputElement.nativeElement.setSelectionRange(this.inputText.length, this.inputText.length);
+            const inputValueLength = this.searchInputElement.nativeElement.value.length;
+            this.searchInputElement.nativeElement.setSelectionRange(inputValueLength, inputValueLength);
         }
         this.selectedTermSubject$.next(this.searchInputElement.nativeElement.value);
         this.oldInputText = this.inputText;
