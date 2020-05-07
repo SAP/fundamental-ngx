@@ -1,6 +1,12 @@
-import { Directive, ElementRef, Host, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { Subscription } from 'rxjs';
+import {
+    Directive,
+    ElementRef,
+    EventEmitter,
+    HostBinding,
+    HostListener,
+    Input,
+    Output
+} from '@angular/core';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
@@ -9,7 +15,7 @@ import { Subscription } from 'rxjs';
         '[tabindex]': 'disabled ? -1 : 0'
     }
 })
-export class MenuLinkDirective implements OnInit, OnDestroy {
+export class MenuLinkDirective {
 
     /** Mark as disabled */
     @Input()
@@ -21,6 +27,9 @@ export class MenuLinkDirective implements OnInit, OnDestroy {
     @HostBinding('class.is-selected')
     selected: boolean = false;
 
+    @Output()
+    selectionChange = new EventEmitter<boolean>();
+
     /** @hidden Whether menu item has currently open sub menu */
     @HostBinding('class.has-child')
     fdHasChildClass: boolean = false;
@@ -29,38 +38,17 @@ export class MenuLinkDirective implements OnInit, OnDestroy {
     @HostBinding('class.fd-menu__link')
     readonly fdMenuLinkClass: boolean = true;
 
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
     /** @hidden Update sub menu visibility */
     @HostListener('click')
     onClick() {
-        if (this._menuItem.subMenu) {
-            this._menuItem.subLevelVisible$.next(!this._menuItem.subLevelVisible$.value);
-        }
+        this.setSelected(!this.selected);
+        this.selectionChange.emit(this.selected);
     };
 
     /** @hidden */
-    constructor(
-        public elementRef: ElementRef,
-        @Host() private _menuItem: MenuItemComponent
-    ) {
-    }
+    constructor(public elementRef: ElementRef) { }
 
-    /** @hidden */
-    ngOnInit() {
-        this._listenOnActiveSublist();
-    }
-
-    /** @hidden */
-    ngOnDestroy() {
-        this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    private _listenOnActiveSublist(): void {
-        this._subscriptions.add(
-            this._menuItem.subLevelVisible$.subscribe(isVisible => this.fdHasChildClass = isVisible)
-        );
+    setSelected(isSelected: boolean): void {
+        this.selected = isSelected;
     }
 }

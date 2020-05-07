@@ -1,5 +1,5 @@
 import {
-    AfterViewInit,
+    AfterContentInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -17,6 +17,7 @@ import { MenuItemComponent } from './menu-item/menu-item.component';
 import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MenuKeyboardService } from './menu-keyboard.service';
 import { BehaviorSubject } from 'rxjs';
+import { MenuService } from './services/menu.service';
 
 interface DialogContent {
     title: string,
@@ -31,9 +32,10 @@ interface DialogContent {
     templateUrl: './menu.component.html',
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['menu.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [MenuService]
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, AfterContentInit {
 
     /** Display menu in compact mode */
     @Input()
@@ -99,11 +101,16 @@ export class MenuComponent implements OnInit {
     }
 
     constructor(private _elementRef: ElementRef,
+                private _menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
                 private _menuKeyboardService: MenuKeyboardService) {}
 
     ngOnInit() {
         this.mobileMenuTitle$ = new BehaviorSubject<string>(this.mainMenuTitle)
+    }
+
+    ngAfterContentInit() {
+        this._menuService.setMenuRoot(this)
     }
 
     /** @hidden */

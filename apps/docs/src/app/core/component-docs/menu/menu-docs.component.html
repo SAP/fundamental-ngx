@@ -1,52 +1,52 @@
-<fd-docs-section-title [id]="'simple-menu'" [componentName]="'menu'">
-    Simple menu
-</fd-docs-section-title>
-<description>
-    To create simple menu use following directives:
-    <ul>
-        <li><code>fd-menu-item</code> - menu list element</li>
-        <li><code>fd-menu-link</code> - menu interactive element</li>
-        <li><code>fd-menu-title</code> - menu element title</li>
-    </ul>
-</description>
-<component-example>
-    <fd-menu-example></fd-menu-example>
-</component-example>
-<code-example [exampleFiles]="menuBasic"></code-example>
+<!--<fd-docs-section-title [id]="'simple-menu'" [componentName]="'menu'">-->
+<!--    Simple menu-->
+<!--</fd-docs-section-title>-->
+<!--<description>-->
+<!--    To create simple menu use following directives:-->
+<!--    <ul>-->
+<!--        <li><code>fd-menu-item</code> - menu list element</li>-->
+<!--        <li><code>fd-menu-link</code> - menu interactive element</li>-->
+<!--        <li><code>fd-menu-title</code> - menu element title</li>-->
+<!--    </ul>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fd-menu-example></fd-menu-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="menuBasic"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title [id]="'menu-with-icons'" [componentName]="'menu'">
-    Menu with icons
-</fd-docs-section-title>
-<description>
-    Menu items can be extended with additional content using the following directives:
-    <ul>
-        <li><code>fd-menu-addon</code> - adds icon to menu item. If you want to add the icon before the menu item title,
-            remember to add the <code>[position]="'before'"</code></li>
-        <li><code>fd-menu-shortcut</code> - adds information about useful shortcuts</li>
-    </ul>
-</description>
-<component-example>
-    <fd-menu-addon-example></fd-menu-addon-example>
-</component-example>
-<code-example [exampleFiles]="menuAddon"></code-example>
+<!--<fd-docs-section-title [id]="'menu-with-icons'" [componentName]="'menu'">-->
+<!--    Menu with icons-->
+<!--</fd-docs-section-title>-->
+<!--<description>-->
+<!--    Menu items can be extended with additional content using the following directives:-->
+<!--    <ul>-->
+<!--        <li><code>fd-menu-addon</code> - adds icon to menu item. If you want to add the icon before the menu item title,-->
+<!--            remember to add the <code>[position]="'before'"</code></li>-->
+<!--        <li><code>fd-menu-shortcut</code> - adds information about useful shortcuts</li>-->
+<!--    </ul>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fd-menu-addon-example></fd-menu-addon-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="menuAddon"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title [id]="'optionalSeparator'" [componentName]="'menu'">
-    Menu with separator and compact mode
-</fd-docs-section-title>
-<description>
-    To add a visual separation line between menu items, use the <code>fd-menu-separator</code> component.<br/>
-    To display Menu in compact mode use <code>[compact]="true"</code>.
-</description>
-<component-example>
-    <fd-menu-separator-example></fd-menu-separator-example>
-</component-example>
-<code-example [exampleFiles]="menuSeparator"></code-example>
+<!--<fd-docs-section-title [id]="'optionalSeparator'" [componentName]="'menu'">-->
+<!--    Menu with separator and compact mode-->
+<!--</fd-docs-section-title>-->
+<!--<description>-->
+<!--    To add a visual separation line between menu items, use the <code>fd-menu-separator</code> component.<br/>-->
+<!--    To display Menu in compact mode use <code>[compact]="true"</code>.-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fd-menu-separator-example></fd-menu-separator-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="menuSeparator"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
 <fd-docs-section-title [id]="'menu-with-submenu'" [componentName]="'menu'">
     Menu with submenu
@@ -68,28 +68,28 @@
 </component-example>
 <code-example [exampleFiles]="menuWithSubmenu"></code-example>
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title [id]="'mobile-menu'" [componentName]="'menu'">
-    Menu in mobile mode
-</fd-docs-section-title>
-<description>
-    To open Menu in mobile mode compose the Menu Component together with the Dialog Component.
-    The Menu provides necessary features to build Fiori3 mobile experience like:
-    <ul>
-        <li><code>mobileMenuTitle$</code> - title of current menu level</li>
-        <li><code>backToParentLevel</code> - method navigating to previous menu level</li>
-        <li><code>isInSubmenu</code> - indicates if currently displayed menu level is submenu</li>
-        <li><code>[mobile]</code> - menu option determining the visual appearance of the Menu</li>
-        <li><code>[mobileMenuTitle]</code> - menu option setting initial mobile menu title at first level of menu</li>
-    </ul>
-</description>
-<component-example>
-    <fd-menu-mobile-example></fd-menu-mobile-example>
-</component-example>
-<code-example [exampleFiles]="menuMobile"></code-example>
+<!--<fd-docs-section-title [id]="'mobile-menu'" [componentName]="'menu'">-->
+<!--    Menu in mobile mode-->
+<!--</fd-docs-section-title>-->
+<!--<description>-->
+<!--    To open Menu in mobile mode compose the Menu Component together with the Dialog Component.-->
+<!--    The Menu provides necessary features to build Fiori3 mobile experience like:-->
+<!--    <ul>-->
+<!--        <li><code>mobileMenuTitle$</code> - title of current menu level</li>-->
+<!--        <li><code>backToParentLevel</code> - method navigating to previous menu level</li>-->
+<!--        <li><code>isInSubmenu</code> - indicates if currently displayed menu level is submenu</li>-->
+<!--        <li><code>[mobile]</code> - menu option determining the visual appearance of the Menu</li>-->
+<!--        <li><code>[mobileMenuTitle]</code> - menu option setting initial mobile menu title at first level of menu</li>-->
+<!--    </ul>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fd-menu-mobile-example></fd-menu-mobile-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="menuMobile"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
 <!--<fd-docs-section-title [id]="'keyboard'" [componentName]="'menu'">-->
 <!--    Keyboard Support-->

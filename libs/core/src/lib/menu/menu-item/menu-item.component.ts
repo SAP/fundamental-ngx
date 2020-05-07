@@ -1,20 +1,19 @@
 import {
+    AfterContentInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
-    ContentChildren,
     ElementRef,
-    Host,
-    HostListener,
     Input,
-    QueryList,
-    TemplateRef
+    OnDestroy
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { MenuComponent } from '../menu.component';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuLinkDirective } from '../directives/menu-link.directive';
+import { SubMenuComponent } from '../../..';
+import { MenuService } from '../services/menu.service';
+import { Subscription } from 'rxjs';
 
 let menuUniqueId: number = 0;
 
@@ -28,10 +27,10 @@ let menuUniqueId: number = 0;
         '[class.fd-menu__item]': 'true',
         '[attr.aria-controls]': 'itemId',
         '[attr.aria-haspopup]': 'hasPopup',
-        '[attr.aria-expanded]': 'subLevelVisible$.value'
+        '[attr.aria-expanded]': 'subLevelVisible'
     }
 })
-export class MenuItemComponent implements DefaultMenuItem {
+export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnDestroy {
 
     /** Menu item id attribute value */
     @Input()
@@ -39,7 +38,7 @@ export class MenuItemComponent implements DefaultMenuItem {
 
     /** Reference to sub menu template */
     @Input()
-    subMenu: TemplateRef<any>;
+    subMenu: SubMenuComponent;
 
     /** @hidden Reference to menu item title */
     @ContentChild(MenuTitleDirective)
@@ -49,41 +48,28 @@ export class MenuItemComponent implements DefaultMenuItem {
     @ContentChild(MenuLinkDirective)
     menuLink: MenuLinkDirective;
 
-    /** @hidden Reference to menu item title */
-    @ContentChildren(MenuItemComponent)
-    subMenuItems: QueryList<MenuItemComponent>;
+    /** @hidden */
+    subLevelVisible: boolean = false;
+
+    private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    subLevelVisible$ = new BehaviorSubject<boolean>(false);
-
-    /** @hidden Close sub menus when any parent element clicked */
-    @HostListener('document:click', ['$event'])
-    onDocumentClicked(event): void {
-        if (!this._elementRef.nativeElement.contains(event.target)) {
-            this.subLevelVisible$.next(false);
-        }
+    constructor(public elementRef: ElementRef,
+                private _menuService: MenuService,
+                private _changeDetectorRef: ChangeDetectorRef) {
     }
 
-    /** @hidden Handle click if Menu is displayed in mobile mode */
-    @HostListener('click')
-    onMobileItemClicked() {
-        if (this.subMenu && this._menuComponent.mobile) {
-            this._menuComponent.loadView(
-                {
-                    title: this.menuItemTitle ? this.menuItemTitle.title : '',
-                    template: this.subMenu
-                })
-        }
-    };
+    ngAfterContentInit() {
+        this._listenOnMenuLinkState();
+    }
 
-    /** @hidden */
-    constructor(@Host() private _menuComponent: MenuComponent,
-                private _elementRef: ElementRef) {
+    ngOnDestroy() {
+        this._subscriptions.unsubscribe();
     }
 
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
-        return this.subMenu && !this._menuComponent.mobile;
+        return this.subMenu && !this._menuService.menu.mobile;
     }
 
     focus(): void {
@@ -96,5 +82,24 @@ export class MenuItemComponent implements DefaultMenuItem {
         if (this.menuLink) {
             this.menuLink.elementRef.nativeElement.click();
         }
+    }
+
+    open() {
+        this.menuLink.setSelected(true);
+        this.subLevelVisible = true;
+        this._changeDetectorRef.markForCheck();
+    }
+
+    close() {
+        this.menuLink.setSelected(false);
+        this.subLevelVisible = false;
+        this._changeDetectorRef.markForCheck();
+    }
+
+    private _listenOnMenuLinkState(): void {
+        this._subscriptions.add(
+            this.menuLink.selectionChange
+                .subscribe(isSelected => this._menuService.setActive(isSelected, this))
+        )
     }
 }

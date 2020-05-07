@@ -9,6 +9,7 @@ import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
 import { MenuItemDirective } from './directives/menu-item.directive';
+import { SubMenuComponent } from './sub-menu/sub-menu.component';
 
 @NgModule({
     imports: [CommonModule],
@@ -20,11 +21,13 @@ import { MenuItemDirective } from './directives/menu-item.directive';
         MenuShortcutDirective,
         MenuLinkDirective,
         MenuTitleDirective,
-        MenuItemDirective
+        MenuItemDirective,
+        SubMenuComponent
     ],
     exports: [
         MenuComponent,
         MenuItemComponent,
+        SubMenuComponent,
         MenuSeparatorComponent,
         MenuShortcutDirective,
         MenuLinkDirective,
