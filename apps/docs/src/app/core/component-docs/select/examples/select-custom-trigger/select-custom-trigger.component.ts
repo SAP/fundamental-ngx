@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./select-custom-trigger.component.scss']
 })
 export class SelectCustomTriggerComponent {
-    value: string;
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+
+    selectedValue: string;
 }

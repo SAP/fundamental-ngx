@@ -1,104 +1,116 @@
 import { Component } from '@angular/core';
-
-import * as selectBasicSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.html';
-import * as selectBasicTsSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.ts';
-import * as selectBasicScssSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.scss';
-
-import * as selectProgSrcH from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.html';
-import * as selectProgSrcS from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.scss';
-import * as selectProgSrcT from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.ts';
-
-import * as selectNestedSrcH from '!raw-loader!./examples/select-nested-options/select-nested-options.component.html';
-import * as selectNestedSrcHTs from '!raw-loader!./examples/select-nested-options/select-nested-options.component.ts';
-import * as selectNestedSrcScss from '!raw-loader!./examples/select-nested-options/select-nested-options.component.scss';
-
-import * as customTriggerSrcH from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.html';
-import * as customTriggerSrcHTs from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.ts';
-import * as customTriggerSrcScss from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.scss';
-
-import * as selectAddingSrcH from '!raw-loader!./examples/select-adding-example/select-adding-example.component.html';
-import * as selectAddingSrcScss from '!raw-loader!./examples/select-adding-example/select-adding-example.component.scss';
-import * as selectAddingSrcT from '!raw-loader!./examples/select-adding-example/select-adding-example.component.ts';
-
-import * as selectFormSrcH from '!raw-loader!./examples/select-forms/select-forms.component.html';
-import * as selectFormSrcT from '!raw-loader!./examples/select-forms/select-forms.component.ts';
-
-import * as selectViewValueH from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.html';
-import * as selectViewValueT from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.ts';
-
-import * as selectMaxHeightH from '!raw-loader!./examples/select-height/select-max-height-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as selectMaxHeightHTs from '!raw-loader!./examples/select-height/select-max-height-example.component.ts';
 
-import * as selectTypesSrc from '!raw-loader!./examples/select-types-example/select-types-example.component.html';
-import * as selectTypesTsSrc from '!raw-loader!./examples/select-types-example/select-types-example.component.ts';
-import * as selecTypesScssSrc from '!raw-loader!./examples/select-types-example/select-types-example.component.scss';
+import * as selectModeHtml from '!raw-loader!./examples/select-mode-example/select-mode-example.component.html';
+import * as selectModeTs from '!raw-loader!./examples/select-mode-example/select-mode-example.component.ts';
+
+import * as selectProgressiveHtml from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.html';
+import * as selectProgressiveScss from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.scss';
+import * as selectProgressiveTs from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.ts';
+
+import * as selectMobileHtml from '!raw-loader!./examples/select-mobile-example/select-mobile-example.component.html';
+import * as selectMobileTs from '!raw-loader!./examples/select-mobile-example/select-mobile-example.component.ts';
+
+import * as selectNestedHtml from '!raw-loader!./examples/select-nested-options/select-nested-options.component.html';
+import * as selectNestedTs from '!raw-loader!./examples/select-nested-options/select-nested-options.component.ts';
+import * as selectNestedScss from '!raw-loader!./examples/select-nested-options/select-nested-options.component.scss';
+
+import * as customTriggerHtml from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.html';
+import * as customTriggerTs from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.ts';
+import * as customTriggerScss from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.scss';
+
+import * as selectAddingHtml from '!raw-loader!./examples/select-adding-example/select-adding-example.component.html';
+import * as selectAddingScss from '!raw-loader!./examples/select-adding-example/select-adding-example.component.scss';
+import * as selectAddingTs from '!raw-loader!./examples/select-adding-example/select-adding-example.component.ts';
+
+import * as selectFormHtml from '!raw-loader!./examples/select-forms/select-forms.component.html';
+import * as selectFormTs from '!raw-loader!./examples/select-forms/select-forms.component.ts';
+
+import * as selectMaxHeightHtml from '!raw-loader!./examples/select-height/select-max-height-example.component.html';
+import * as selectMaxHeightTs from '!raw-loader!./examples/select-height/select-max-height-example.component.ts';
+
+import * as selectSemanticStateHtml from '!raw-loader!./examples/select-semantic-state-example/select-semantic-state-example.component.html';
+import * as selectSemanticStateTs from '!raw-loader!./examples/select-semantic-state-example/select-semantic-state-example.component.ts';
 
 @Component({
     selector: 'fd-select-docs',
     templateUrl: './select-docs.component.html',
-    styleUrls: ['./select-docs.component.scss']
+    styles: [`ul > li:not(:last-child) { margin-bottom: 0.5rem }`]
 })
 export class SelectDocsComponent {
-    selectBasic: ExampleFile[] = [
+    selectMode: ExampleFile[] = [
         {
             language: 'html',
-            code: selectBasicSrc,
-            fileName: 'select-basic-example',
-            scssFileCode: selectBasicScssSrc,
-            typescriptFileCode: selectBasicTsSrc,
-            component: 'SelectBasicExampleComponent'
+            code: selectModeHtml,
+            fileName: 'select-mode-example',
+            typescriptFileCode: selectModeTs,
+            component: 'SelectModeExampleComponent'
         }
     ];
 
-    selectProg: ExampleFile[] = [
+    selectMobile: ExampleFile[] = [
         {
             language: 'html',
-            code: selectProgSrcH,
+            code: selectMobileHtml,
+            fileName: 'select-mobile-example',
+        },
+        {
+            language: 'typescript',
+            component: 'SelectMobileExampleComponent',
+            code: selectMobileTs,
+            fileName: 'select-mobile-example',
+        }
+    ];
+
+    selectProgrammatic: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectProgressiveHtml,
             fileName: 'select-programmatic-example',
-            scssFileCode: selectProgSrcS
+            scssFileCode: selectProgressiveScss
+
         },
         {
             language: 'typescript',
             component: 'SelectProgrammaticExampleComponent',
-            code: selectProgSrcT,
+            code: selectProgressiveTs,
             fileName: 'select-programmatic-example'
         }
     ];
 
-    selectNested: ExampleFile[] = [
+    selectExtendedOptions: ExampleFile[] = [
         {
             language: 'html',
-            code: selectNestedSrcH,
+            code: selectNestedHtml,
             fileName: 'select-nested-options',
-            typescriptFileCode: selectNestedSrcHTs,
+            typescriptFileCode: selectNestedTs,
             component: 'SelectNestedOptionsComponent',
-            scssFileCode: selectNestedSrcScss
+            scssFileCode: selectNestedScss
         }
     ];
 
-    customTrigger: ExampleFile[] = [
+    customSelectTemplate: ExampleFile[] = [
         {
             language: 'html',
-            code: customTriggerSrcH,
+            code: customTriggerHtml,
             fileName: 'select-custom-trigger',
-            typescriptFileCode: customTriggerSrcHTs,
+            typescriptFileCode: customTriggerTs,
             component: 'SelectCustomTriggerComponent',
-            scssFileCode: customTriggerSrcScss
+            scssFileCode: customTriggerScss
         }
     ];
 
     selectAdding: ExampleFile[] = [
         {
             language: 'html',
-            code: selectAddingSrcH,
+            code: selectAddingHtml,
             fileName: 'select-adding-example',
-            scssFileCode: selectAddingSrcScss
+            scssFileCode: selectAddingScss
         },
         {
             language: 'typescript',
             component: 'SelectAddingExampleComponent',
-            code: selectAddingSrcT,
+            code: selectAddingTs,
             fileName: 'select-adding-example'
         }
     ];
@@ -106,13 +118,14 @@ export class SelectDocsComponent {
     selectForm: ExampleFile[] = [
         {
             language: 'html',
-            code: selectFormSrcH,
+            code: selectFormHtml,
             fileName: 'select-forms'
+
         },
         {
             language: 'typescript',
             component: 'SelectFormsComponent',
-            code: selectFormSrcT,
+            code: selectFormTs,
             fileName: 'select-forms'
         }
     ];
@@ -120,33 +133,19 @@ export class SelectDocsComponent {
     selectMaxHeight: ExampleFile[] = [
         {
             language: 'html',
-            code: selectMaxHeightH,
+            code: selectMaxHeightHtml,
             fileName: 'select-max-height-example',
-            typescriptFileCode: selectMaxHeightHTs,
+            typescriptFileCode: selectMaxHeightTs,
             component: 'SelectMaxHeightExampleComponent'
         }
     ];
 
-    selectViewValue: ExampleFile[] = [
+    selectSemantic: ExampleFile[] = [
         {
             language: 'html',
-            code: selectViewValueH,
-            fileName: 'select-view-value-example'
-        },
-        {
-            language: 'typescript',
-            component: 'SelectViewValueExampleComponent',
-            code: selectViewValueT,
-            fileName: 'select-view-value-example'
-        }
-    ];
-    selectTypes: ExampleFile[] = [
-        {
-            language: 'html',
-            code: selectTypesSrc,
+            code: selectSemanticStateHtml,
             fileName: 'select-types-example',
-            scssFileCode: selecTypesScssSrc,
-            typescriptFileCode: selectTypesTsSrc,
+            typescriptFileCode: selectSemanticStateTs,
             component: 'SelectTypesExampleComponent'
         }
     ];

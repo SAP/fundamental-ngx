@@ -6,14 +6,14 @@ import { Component } from '@angular/core';
     styleUrls: ['./select-adding-example.component.scss']
 })
 export class SelectAddingExampleComponent {
-    selectValue: string;
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
 
-    options: string[] = ['Tomato', 'Pineapple', 'Apple'];
+    selectedValue: string;
 
     addedOptions: number = 1;
 
     addOption(): void {
-        this.options.push('added option ' + this.addedOptions++);
+        this.options.push(`New option ${this.addedOptions++}`);
     }
 
     removeOption(): void {

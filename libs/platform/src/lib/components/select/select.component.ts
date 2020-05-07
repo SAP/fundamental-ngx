@@ -7,10 +7,11 @@ import {
     ChangeDetectorRef,
     ContentChild,
     TemplateRef,
-    AfterContentInit
+    AfterContentInit,
+    ElementRef
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { OptionComponent, SelectComponent as fdSelect, RtlService } from '@fundamental-ngx/core';
+import { SelectComponent as fdSelect, SelectProxy } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-select',
@@ -77,13 +78,12 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
      */
     private _value: any;
 
-    constructor(private cd: ChangeDetectorRef, private rtl: RtlService) {
-        super(cd, rtl);
-        this.fdDropdownClass = false;
+    constructor(private cd: ChangeDetectorRef, elementRef: ElementRef) {
+        super(elementRef, new SelectProxy(), cd);
     }
 
-    onSelection(event: OptionComponent): void {
-        this.value = event.value;
+    onSelection(value: any): void {
+        this.value = value;
         this.onChange(this.value);
         this.onTouched();
         this.cd.markForCheck();

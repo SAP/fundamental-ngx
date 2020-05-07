@@ -10,6 +10,8 @@ import { API_FILES } from './api-files';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
+import { PlatformMenuButtonDocsComponent } from './component-docs/platform-menu-button/platform-menu-button-docs.component';
+import {PlatformMenuButtonHeaderComponent } from './component-docs/platform-menu-button/platform-menu-button-header/platform-menu-button-header.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
 import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
@@ -20,6 +22,8 @@ import { PlatformRadioGroupHeaderComponent } from './component-docs/platform-for
 import { PlatformRadioGroupDocsComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-docs.component';
 import { PlatformInputHeaderComponent } from './component-docs/platform-input/platform-input-header/platform-input-header.component';
 import { PlatformInputDocsComponent } from './component-docs/platform-input/platform-input-docs.component';
+import { PlatformDocsSplitMenuButtonComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button.component';
+import { PlatformDocsSplitMenuButtonHeaderComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-header/platform-split-menu-button-header.component';
 
 export const ROUTES: Routes = [
     {
@@ -61,6 +65,14 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
                 ]
             },
+          {
+                path: 'menu-button',
+                component: PlatformMenuButtonHeaderComponent,
+                children: [
+                    { path: '', component: PlatformMenuButtonDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menuButton } }
+                ]
+            },
             {
                 path: 'search-field',
                 component: PlatformSearchFieldHeaderComponent,
@@ -91,6 +103,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PlatformInputDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.input } }
+                ]
+            },
+            {
+                path: 'split-menu-button',
+                component: PlatformDocsSplitMenuButtonHeaderComponent,
+                children: [
+                    { path: '', component: PlatformDocsSplitMenuButtonComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.splitMenuButton } }
                 ]
             }
         ]

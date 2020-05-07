@@ -1,0 +1,15 @@
+<button
+    fd-button
+    [attr.id]="id"
+    [attr.name]="name"
+    [fdMenu]="true"
+    [compact]="contentDensity === 'compact'"
+    [glyph]="icon"
+    [disabled]="disabled"
+    (click)="onButtonClick($event)"
+    [fdType]="type"
+>
+    <span [ngStyle]="{ width: width }" (click)="onLabelClick($event)">
+        <ng-content></ng-content>
+    </span>
+</button>

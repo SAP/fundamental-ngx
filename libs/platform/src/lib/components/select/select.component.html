@@ -1,29 +1,28 @@
-<fd-select
-    [placeholder]="placeholder"
-    [selectType]="selectType"
-    [glyph]="glyph"
-    [compact]="compact"
-    [disabled]="disabled"
-    [(value)]="value"
->
-    <fd-option *ngIf="noSelectionString" [disabled]="false" [value]="null" (selectedChange)="onSelection($event)">
-        {{ noSelectionString }}
+<fd-select [placeholder]="placeholder"
+           [glyph]="glyph"
+           [compact]="compact"
+           [disabled]="disabled"
+           [(value)]="value"
+           (valueChange)="onSelection($event)">
+
+    <fd-option *ngIf="noSelectionString" [disabled]="false" [value]="null">
+        {{noSelectionString}}
     </fd-option>
-    <fd-option
-        *ngFor="let item of list; index as index"
-        [disabled]="item.disabled ? true : false"
-        (selectedChange)="onSelection($event)"
-        [viewValue]="item.label"
-        [value]="item"
-    >
-        <ng-template [ngIf]="!optionValueTemplate"
-            ><fd-icon [glyph]="item.icon" size="m" class="fd-template-icon icon-margin"></fd-icon
-            >{{ item.label ? item.label : item }}</ng-template
-        >
+
+    <fd-option *ngFor="let item of list ; index as index"
+               [disabled]="item.disabled ? true : false"
+               [value]="item">
+
+        <ng-template [ngIf]="!optionValueTemplate">
+            <fd-icon [glyph]="item.icon" size="m" class="fd-template-icon icon-margin"></fd-icon>
+            {{item.label ? item.label : item }}
+        </ng-template>
 
         <ng-template [ngIf]="optionValueTemplate">
-            <ng-container *ngTemplateOutlet="optionValueTemplate; context: { $implicit: item, index: index }">
+            <ng-container *ngTemplateOutlet="optionValueTemplate; context: {$implicit: item, index: index}">
             </ng-container>
         </ng-template>
+
     </fd-option>
+
 </fd-select>

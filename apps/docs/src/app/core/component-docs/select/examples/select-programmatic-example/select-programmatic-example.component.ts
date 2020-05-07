@@ -6,13 +6,19 @@ import { Component } from '@angular/core';
     styleUrls: ['./select-programmatic-example.component.scss']
 })
 export class SelectProgrammaticExampleComponent {
-    value: any = 'tomato';
 
-    changeValue() {
-        if (this.value === 'tomato') {
-            this.value = 'apple';
-        } else {
-            this.value = 'tomato';
-        }
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+
+    selectedValue: string = this.options[0];
+
+    changeValue(): void {
+        this.selectedValue = this.getNewValue();
+    }
+
+    getNewValue(): string {
+        const newValue = this.options[Date.now() % this.options.length];
+        return this.selectedValue === newValue
+            ? this.getNewValue()
+            : newValue;
     }
 }
