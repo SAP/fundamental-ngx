@@ -212,13 +212,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     oldInputText: string;
 
     /** @hidden */
+    isExpanded: boolean = false;
+
+    /** @hidden */
     public focusTrap: FocusTrap;
 
     /** @hidden */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    isExpanded: boolean = false;
 
     /** @hidden */
     onChange: any = () => {};
@@ -262,10 +262,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             if (this.searchFn) {
                 this.searchFn();
             }
-            if (this.open && this._hasDisplayedValues()) {
-                this.onMenuClickHandler(0);
-                this.isExpanded = false;
-            }
         } else if (event.key === 'ArrowDown') {
             if (event.altKey) {
                 this.isOpenChangeHandle(true);
@@ -294,7 +290,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             if (this.open && this._hasDisplayedValues() &&
                     (!this.oldInputText || this.oldInputText !== this.inputText)) {
                 let foundCloseMatch = false;
-                this.displayedValues.forEach(displayedValue => {
+                this.displayedValues.forEach((displayedValue, i) => {
                     if (this.displayFn(displayedValue).toLocaleLowerCase()
                             .startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
                         foundCloseMatch = true;
@@ -302,12 +298,18 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                         this.searchInputElement.nativeElement.value = this.displayFn(displayedValue);
                         this.searchInputElement.nativeElement.setSelectionRange(selectionStartIndex, this.displayFn(displayedValue).length);
                     }
-                })
+                });
             }
-        } else if (event.key === 'Enter') {
+        } else if (event.key === 'Enter' && this.open && this._hasDisplayedValues()) {
+            this.displayedValues.forEach((value, i) => {
+                if (value === this.searchInputElement.nativeElement.value) {
+                    this.onMenuClickHandler(i);
+                }
+            });
+            this.isExpanded = false;
             this.searchInputElement.nativeElement.setSelectionRange(this.inputText.length, this.inputText.length);
         }
-        this.selectedTermSubject$.next(this.displayFn(this.searchInputElement.nativeElement.value));
+        this.selectedTermSubject$.next(this.searchInputElement.nativeElement.value);
         this.oldInputText = this.inputText;
     }
 

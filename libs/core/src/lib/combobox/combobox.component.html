@@ -57,7 +57,7 @@
                         fd-list-item
                         tabindex="0"
                         class="fd-combobox-list-item"
-                        [selected]="(selectedTermSubject$ | async) === term"
+                        [selected]="(selectedTermSubject$ | async) === (term | displayFnPipe: displayFn)"
                     >
                         <ng-container
                             [ngTemplateOutlet]="itemSource"
@@ -74,7 +74,7 @@
                     fd-list-item
                     tabindex="0"
                     class="fd-combobox-list-item"
-                    [selected]="(selectedTermSubject$ | async) === term"
+                    [selected]="(selectedTermSubject$ | async) === (term | displayFnPipe: displayFn)"
                 >
                     <ng-container
                         [ngTemplateOutlet]="itemSource"
