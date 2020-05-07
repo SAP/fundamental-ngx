@@ -24,7 +24,7 @@ import { ListItemDirective } from '../list/list-item.directive';
 import { ListMessageDirective } from '../list/list-message.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
@@ -200,6 +200,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     listMessages: QueryList<ListMessageDirective>;
 
     /** @hidden */
+    selectedTermSubject$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+    /** @hidden */
     displayedValues: any[] = [];
 
     /** @hidden */
@@ -304,6 +307,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else if (event.key === 'Enter') {
             this.searchInputElement.nativeElement.setSelectionRange(this.inputText.length, this.inputText.length);
         }
+        this.selectedTermSubject$.next(this.displayFn(this.searchInputElement.nativeElement.value));
         this.oldInputText = this.inputText;
     }
 

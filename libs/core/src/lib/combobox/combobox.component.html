@@ -57,7 +57,7 @@
                         fd-list-item
                         tabindex="0"
                         class="fd-combobox-list-item"
-                        [selected]="displayFn(term) === inputText"
+                        [selected]="(selectedTermSubject$ | async) === term"
                     >
                         <ng-container
                             [ngTemplateOutlet]="itemSource"
@@ -74,7 +74,7 @@
                     fd-list-item
                     tabindex="0"
                     class="fd-combobox-list-item"
-                    [selected]="displayFn(term) === searchInputElement.value"
+                    [selected]="(selectedTermSubject$ | async) === term"
                 >
                     <ng-container
                         [ngTemplateOutlet]="itemSource"
