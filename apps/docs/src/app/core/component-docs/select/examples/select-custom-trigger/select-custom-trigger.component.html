@@ -1,14 +1,11 @@
-<fd-select [(value)]="value" [triggerTemplate]="customTrigger" [placeholder]="'Select an option...'">
-    <fd-option value="apple">Apple</fd-option>
-    <fd-option value="pineapple">Pineapple</fd-option>
-    <fd-option value="tomato">Tomato</fd-option>
-    <fd-option value="strawberry">Strawberry</fd-option>
+<fd-select placeholder="Select an option" [(value)]="selectedValue" [controlTemplate]="customSelectTemplate">
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
 
-<!-- Here, *select* refers to the actual select element so you can use it as you like! -->
-<ng-template #customTrigger let-select>
-    <div tabindex="0" class="example-trigger">
-        <fd-icon style="margin-right: 8px;" [glyph]="'filter'"></fd-icon>
-        {{ select.triggerValue }}
+<ng-template #customSelectTemplate let-textValue let-selected="selected">
+    <div class="custom-select-trigger-styling">
+        <fd-icon glyph="action-settings"></fd-icon>
+        {{textValue}}
+        <span *ngIf="selected">{{selected.id}}</span>
     </div>
 </ng-template>

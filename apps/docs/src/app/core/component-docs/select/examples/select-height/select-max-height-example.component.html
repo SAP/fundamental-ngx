@@ -1,13 +1,4 @@
-<p>Selected Value: {{ selectValue }}</p>
-<fd-select [(value)]="selectValue" [maxHeight]="'250px'" placeholder="Select an option...">
-    <fd-option value="apple">Apple</fd-option>
-    <fd-option value="pineapple">Pineapple</fd-option>
-    <fd-option value="tomato">Tomato</fd-option>
-    <fd-option value="strawberry">Strawberry</fd-option>
-    <fd-option value="banana">Banana</fd-option>
-    <fd-option value="orange">Orange</fd-option>
-    <fd-option value="lemon">Lemon</fd-option>
-    <fd-option value="carrot">Carrot</fd-option>
-    <fd-option value="potato">Potato</fd-option>
-    <fd-option value="kiwi">Kiwi</fd-option>
+<fd-select placeholder="Select an option" [(value)]="selectedValue" [maxHeight]="'250px'">
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
+<small>Selected value: {{selectedValue}}</small>
