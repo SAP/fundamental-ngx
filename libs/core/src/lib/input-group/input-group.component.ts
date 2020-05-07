@@ -50,10 +50,6 @@ export class InputGroupComponent implements ControlValueAccessor {
     @ContentChild(InputGroupAddOnDirective)
     addOnElement: InputGroupAddOnDirective;
 
-    /** @hiden */
-    @ViewChild(ButtonComponent)
-    inputGroupButtonElement: ButtonComponent;
-
     /** Input template */
     @Input()
     inputTemplate: TemplateRef<any>;
@@ -126,6 +122,10 @@ export class InputGroupComponent implements ControlValueAccessor {
      */
     @Input()
     isControl: boolean = false;
+
+    /** @hidden */
+    @Input()
+    isExpanded: boolean = false;
 
     /** Event emitted when the add-on button is clicked. */
     @Output()

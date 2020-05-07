@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     Directive,
     ElementRef,
     HostBinding,
@@ -63,7 +62,7 @@ export class InputGroupTextareaDirective {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-input-group-addon]'
 })
-export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuilder, AfterContentInit {
+export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuilder {
     /** user's custom classes */
     @Input()
     class: string;
@@ -103,15 +102,6 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, private renderer: Renderer2) {}
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        /** Add fd-input-group__button to button child element */
-        const button = this.elementRef().nativeElement.querySelector('button');
-        if (button) {
-            this.renderer.addClass(button, 'fd-input-group__button');
-        }
-    }
 
     /** @hidden */
     ngOnInit(): void {

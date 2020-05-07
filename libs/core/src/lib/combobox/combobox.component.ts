@@ -215,6 +215,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    isExpanded: boolean = false;
+
+    /** @hidden */
     onChange: any = () => {};
 
     /** @hidden */
@@ -258,7 +261,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             }
             if (this.open && this._hasDisplayedValues()) {
                 this.onMenuClickHandler(0);
-                this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.remove('is-expanded');
+                this.isExpanded = false;
             }
         } else if (event.key === 'ArrowDown') {
             if (event.altKey) {
@@ -368,10 +371,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         if (this.popoverComponent) {
             this.popoverComponent.updatePopover();
         }
-        if (this.displayedValues && this.displayedValues.length === 0 && this.inputGroup.inputGroupButtonElement) {
-            this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.remove('is-expanded');
-        } else if (this.inputGroup.inputGroupButtonElement) {
-            this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.add('is-expanded');
+        if (this.displayedValues && this.displayedValues.length === 0 && this.inputGroup) {
+            this.isExpanded = false;
+        } else {
+            this.isExpanded = true;
         }
         if (!this.inputText) {
             this.isOpenChangeHandle(false);
@@ -394,10 +397,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.onTouched();
             if (isOpen && this._hasDisplayedValues()) {
                 this.focusTrap.activate();
-                this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.add('is-expanded');
+                this.isExpanded = true;
             } else {
                 this.focusTrap.deactivate();
-                this.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.remove('is-expanded');
+                this.isExpanded = false;
             }
         }
     }

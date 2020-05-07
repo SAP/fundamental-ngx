@@ -106,7 +106,6 @@ describe('ComboboxComponent', () => {
         spyOn(component, 'onMenuClickHandler');
         component.open = true;
         component.displayedValues = ['value'];
-        spyOn(component.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList, 'remove');
         const event: any = {
             key: 'Enter',
             preventDefault: () => {}
@@ -114,8 +113,7 @@ describe('ComboboxComponent', () => {
         component.onInputKeydownHandler(event);
 
         expect(component.onMenuClickHandler).toHaveBeenCalledWith(0);
-        expect(component.inputGroup.inputGroupButtonElement.elementRef().nativeElement.classList.remove)
-            .toHaveBeenCalledWith('is-expanded');
+        expect(component.isExpanded).toBe(false);
     });
 
     it('should set inputText', () => {
