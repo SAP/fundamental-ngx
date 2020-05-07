@@ -322,7 +322,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this._changeDetRef.detectChanges();
+        this._detectChanges();
     }
 
     /**
@@ -340,7 +340,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
             this._refreshCurrentlyDisplayedCalendarDate(this.date.date);
             this._setInput(this.date);
         }
-        this._changeDetRef.detectChanges();
+        this._detectChanges();
     }
 
     /**
@@ -434,7 +434,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
 
     private _setInput(fdDateTime: FdDatetime): void {
         this.inputFieldDate = this._formatDateTime(fdDateTime);
-        this._changeDetRef.detectChanges();
+        this._detectChanges();
     }
 
     /** @hidden */
@@ -459,4 +459,13 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
         }
     }
 
+    /**
+     * @hidden
+     * Method that triggers change detection
+     */
+    private _detectChanges(): void {
+        if (!this._changeDetRef['destroyed']) {
+            this._changeDetRef.detectChanges();
+        }
+    }
 }

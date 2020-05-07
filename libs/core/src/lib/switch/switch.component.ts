@@ -118,7 +118,7 @@ export class SwitchComponent implements ControlValueAccessor {
      */
     writeValue(value: any): void {
         this.checked = value;
-        this.changeDetectorRef.detectChanges();
+        this._detectChanges();
     }
 
     /**
@@ -143,7 +143,16 @@ export class SwitchComponent implements ControlValueAccessor {
      */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.changeDetectorRef.detectChanges();
+        this._detectChanges();
     }
 
+    /**
+     * @hidden
+     * Method that triggers change detection
+     */
+    private _detectChanges(): void {
+        if (!this.changeDetectorRef['destroyed']) {
+            this.changeDetectorRef.detectChanges();
+        }
+    }
 }

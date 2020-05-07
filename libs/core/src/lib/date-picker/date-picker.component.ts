@@ -329,7 +329,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this._changeDetectionRef.detectChanges();
+        this._detectChanges();
     }
 
     /**
@@ -377,7 +377,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                 this.inputFieldDate = '';
             }
         }
-        this._changeDetectionRef.detectChanges();
+        this._detectChanges();
         this.isInvalidDateInput = !this.isModelValid();
     }
 
@@ -535,6 +535,16 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             return customFormattedDate;
         } else {
             return this._datePipe.transform(fdDate.toDate(), this.format, null, this.locale);
+        }
+    }
+
+    /**
+     * @hidden
+     * Method that triggers change detection
+     */
+    private _detectChanges(): void {
+        if (!this._changeDetectionRef['destroyed']) {
+            this._changeDetectionRef.detectChanges();
         }
     }
 

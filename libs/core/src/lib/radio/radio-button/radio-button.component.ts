@@ -13,6 +13,7 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 export type stateType = 'valid' | 'invalid' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
+
 @Component({
     selector: 'fd-radio-button',
     templateUrl: './radio-button.component.html',
@@ -120,10 +121,12 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = () => { };
+    onChange: any = () => {
+    };
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {
+    };
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -138,13 +141,14 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.changeDetectionRef.detectChanges();
+        this._detectChanges();
     }
 
     /** @hidden */
     writeValue(value: any): void {
         this.valueChange(value);
     }
+
     // End implementation
 
     /** @hidden */
@@ -159,12 +163,13 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
 
         this._setNativeElementCheckedState();
 
-        this.changeDetectionRef.detectChanges();
+        this._detectChanges();
         this.onChange(value);
     }
 
     /** @hidden */
-    constructor(private changeDetectionRef: ChangeDetectorRef) { }
+    constructor(private changeDetectionRef: ChangeDetectorRef) {
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -212,6 +217,16 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     private _setNativeElementCheckedState(): void {
         if (this.inputElement) {
             this.inputElement.nativeElement.checked = this.checked;
+        }
+    }
+
+    /**
+     * @hidden
+     * Method that triggers change detection
+     */
+    private _detectChanges(): void {
+        if (!this.changeDetectionRef['destroyed']) {
+            this.changeDetectionRef.detectChanges();
         }
     }
 }
