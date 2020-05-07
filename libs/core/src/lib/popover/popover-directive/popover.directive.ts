@@ -281,6 +281,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         this.appRef.attachView(this.containerRef.hostView);
         const setupRef = this.containerRef.instance.isSetup.subscribe(() => {
             this.createPopper();
+            this.updatePopper();
             setupRef.unsubscribe();
         });
 
