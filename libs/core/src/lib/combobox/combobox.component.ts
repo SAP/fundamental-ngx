@@ -206,13 +206,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     inputTextValue: string;
 
     /** @hidden */
+    oldInputText: string;
+
+    /** @hidden */
     public focusTrap: FocusTrap;
 
     /** @hidden */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    oldInputText: string;
 
     /** @hidden */
     onChange: any = () => {};
@@ -248,22 +248,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     ngAfterViewInit(): void {
         this._setupKeyboardService();
         this._addShellbarClass();
-    }
-
-    /** @hidden */
-    private _setupKeyboardService(): void {
-        this.menuKeyboardService.itemClicked
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe((index) => this.onMenuClickHandler(index));
-        this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this.menuKeyboardService.focusEscapeAfterList = () => {};
-    }
-
-    /** @hidden */
-    private _addShellbarClass(): void {
-        if (this.inShellbar) {
-            this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group__input');
-        }
     }
 
     /** @hidden */
@@ -426,6 +410,22 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** Method that reset filtering for displayed values. It overrides displayed values by all possible dropdown values */
     public resetDisplayedValues(): void {
         this.displayedValues = this.dropdownValues;
+    }
+
+    /** @hidden */
+    private _setupKeyboardService(): void {
+        this.menuKeyboardService.itemClicked
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe((index) => this.onMenuClickHandler(index));
+        this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
+        this.menuKeyboardService.focusEscapeAfterList = () => {};
+    }
+
+    /** @hidden */
+    private _addShellbarClass(): void {
+        if (this.inShellbar) {
+            this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group__input');
+        }
     }
 
     private _defaultDisplay(str: any): string {
