@@ -289,11 +289,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                     (!this.oldInputText || this.oldInputText !== this.inputText)) {
                 let foundCloseMatch = false;
                 this.displayedValues.forEach(displayedValue => {
-                    if (displayedValue.toLocaleLowerCase().startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
+                    if (this.displayFn(displayedValue).toLocaleLowerCase()
+                            .startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
                         foundCloseMatch = true;
                         const selectionStartIndex = this.inputText.length;
-                        this.searchInputElement.nativeElement.value = displayedValue;
-                        this.searchInputElement.nativeElement.setSelectionRange(selectionStartIndex, displayedValue.length);
+                        this.searchInputElement.nativeElement.value = this.displayFn(displayedValue);
+                        this.searchInputElement.nativeElement.setSelectionRange(selectionStartIndex, this.displayFn(displayedValue).length);
                     }
                 })
             }
