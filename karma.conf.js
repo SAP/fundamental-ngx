@@ -32,7 +32,7 @@ module.exports = () => {
     browsers: ['Chrome'],
     singleRun: true,
     parallelOptions: {
-      executors: 6
+      executors: 3
     }
   };
 };
