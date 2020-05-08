@@ -44,8 +44,8 @@ export const ROUTES: Routes = [
                 component: PlatformActionBarHeaderComponent,
                 children: [
                     { path: '', component: PlatformActionBarDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }
-                ]
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } },
+                ],
             },
             {
                 path: 'link',
