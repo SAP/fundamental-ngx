@@ -24,7 +24,7 @@ import * as simpleActionBarcss from '!raw-loader!./platform-action-bar-examples/
 @Component({
     selector: 'app-platform-action-bar',
     templateUrl: './platform-action-bar-docs.component.html',
-    styleUrls: ['./platform-action-bar-docs.component.scss'],
+    styleUrls: ['./platform-action-bar-docs.component.scss']
 })
 export class PlatformActionBarDocsComponent implements OnInit {
     constructor() {}
@@ -33,14 +33,14 @@ export class PlatformActionBarDocsComponent implements OnInit {
             language: 'html',
             code: simpleActionBarHtml,
             fileName: 'platform-action-bar-simple-example',
-            scssFileCode: simpleActionBarcss,
+            scssFileCode: simpleActionBarcss
         },
         {
             language: 'typescript',
-            component: 'PlatformActionBarExamplesComponent',
+            component: 'PlatformActionbarExamplesComponent',
             code: simpleActionBarTs,
-            fileName: 'platform-action-bar-simple-example',
-        },
+            fileName: 'platform-action-bar-simple-example'
+        }
     ];
 
     backButtonExample: ExampleFile[] = [
@@ -48,14 +48,14 @@ export class PlatformActionBarDocsComponent implements OnInit {
             language: 'html',
             code: backButtonExampleHtml,
             fileName: 'platform-action-bar-with-back-button-example',
-            scssFileCode: backButtonExamplecss,
+            scssFileCode: backButtonExamplecss
         },
         {
             language: 'typescript',
-            component: 'PlatformActionBarWithBackButtonExampleComponent',
+            component: 'PlatformActionbarWithBackButtonExampleComponent',
             code: actionBarBackButtonTS,
-            fileName: 'platform-action-bar-with-back-button-example',
-        },
+            fileName: 'platform-action-bar-with-back-button-example'
+        }
     ];
 
     descriptionExample: ExampleFile[] = [
@@ -63,14 +63,14 @@ export class PlatformActionBarDocsComponent implements OnInit {
             language: 'html',
             code: descriptionExampleHtml,
             fileName: 'platform-action-bar-with-description-example',
-            scssFileCode: descriptionExamplecss,
+            scssFileCode: descriptionExamplecss
         },
         {
             language: 'typescript',
-            component: 'PlatformActionBarWithDescriptionExampleComponent',
+            component: 'PlatformActionbarWithDescriptionExampleComponent',
             code: actionBarDescriptionTs,
-            fileName: 'platform-action-bar-with-description-example',
-        },
+            fileName: 'platform-action-bar-with-description-example'
+        }
     ];
 
     longPageTitleExample: ExampleFile[] = [
@@ -78,14 +78,14 @@ export class PlatformActionBarDocsComponent implements OnInit {
             language: 'html',
             code: longPageTitleExampleHtml,
             fileName: 'platform-action-bar-with-long-title-example',
-            scssFileCode: longPageTitleExamplecss,
+            scssFileCode: longPageTitleExamplecss
         },
         {
             language: 'typescript',
-            component: 'PlatformActionBarWithLongPageTitleExampleComponent',
+            component: 'PlatformActionbarWithLongPageTitleExampleComponent',
             code: longPageTitleExampleTs,
-            fileName: 'platform-action-bar-with-long-title-example',
-        },
+            fileName: 'platform-action-bar-with-long-title-example'
+        }
     ];
 
     editActionBarTitle: ExampleFile[] = [
@@ -93,14 +93,14 @@ export class PlatformActionBarDocsComponent implements OnInit {
             language: 'html',
             code: editActionBarTitleHtml,
             fileName: 'platform-action-bar-edit-title-example',
-            scssFileCode: editActionBarTitlecss,
+            scssFileCode: editActionBarTitlecss
         },
         {
             language: 'typescript',
-            component: 'PlatformActionBarEditTitleExampleComponent',
+            component: 'PlatformActionbarEditTitleExampleComponent',
             code: editActionBarTitleTs,
-            fileName: 'platform-action-bar-edit-title-example',
-        },
+            fileName: 'platform-action-bar-edit-title-example'
+        }
     ];
 
     contextualMenuExample: ExampleFile[] = [
@@ -108,28 +108,28 @@ export class PlatformActionBarDocsComponent implements OnInit {
             language: 'html',
             code: contextualMenuExampleHtml,
             fileName: 'platform-action-bar-contextual-menu-example',
-            scssFileCode: contextualMenuExamplecss,
+            scssFileCode: contextualMenuExamplecss
         },
         {
             language: 'typescript',
-            component: 'PlatformActionBarWithContextualMenuExampleComponent',
+            component: 'PlatformActionbarWithContextualMenuExampleComponent',
             code: contextualMenuExampleTs,
-            fileName: 'platform-action-bar-contextual-menu-example',
-        },
+            fileName: 'platform-action-bar-contextual-menu-example'
+        }
     ];
     positiveNegativeExample: ExampleFile[] = [
         {
             language: 'html',
             code: positiveNegativeExampleHtml,
             fileName: 'platform-action-bar-positive-and-negative-action-example',
-            scssFileCode: positiveNegativecss,
+            scssFileCode: positiveNegativecss
         },
         {
             language: 'typescript',
-            component: 'PlatformActionBarWithPositiveNegativeActionsExampleComponent',
+            component: 'PlatformActionbarWithPositiveNegativeActionsExampleComponent',
             code: positiveNegativeExampleTs,
-            fileName: 'platform-action-bar-positive-and-negative-action-example',
-        },
+            fileName: 'platform-action-bar-positive-and-negative-action-example'
+        }
     ];
 
     ngOnInit() {}
