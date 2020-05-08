@@ -18,7 +18,7 @@
             [buttonFocusable]="buttonFocusable"
             [disabled]="disabled"
             [isControl]="true"
-            [isExpanded]="isExpanded"
+            [isExpanded]="open"
         >
             <input
                 #searchInputElement
@@ -31,6 +31,9 @@
                 [(ngModel)]="inputText"
                 (ngModelChange)="handleSearchTermChange()"
                 [placeholder]="placeholder"
+                (blur)="focusLost()"
+                (focus)="onTouched()"
+                [attr.aria-expanded]="open"
             />
         </fd-input-group>
     </fd-popover-control>

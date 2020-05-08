@@ -81,10 +81,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     placeholder: string;
 
-    /** Whether the combobox is opened. */
-    @Input()
-    open: boolean = false;
-
     /** Icon to display in the right-side button. */
     @Input()
     glyph: string = 'navigation-down-arrow';
@@ -128,7 +124,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
-    maxHeight: string = '200px';
+    maxHeight: string = '50vh';
 
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
@@ -188,7 +184,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     searchInputElement: ElementRef;
 
     /** @hidden */
-    @ViewChild(PopoverComponent, { static: false })
+    @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
 
     /** @hidden */
@@ -198,6 +194,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     @ContentChildren(ListMessageDirective)
     listMessages: QueryList<ListMessageDirective>;
+
+    /** Whether the combobox is opened. */
+    open: boolean = false;
 
     /** @hidden */
     selectedTermSubject$: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -212,9 +211,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     oldInputText: string;
 
     /** @hidden */
-    isExpanded: boolean = false;
-
-    /** @hidden */
     public focusTrap: FocusTrap;
 
     /** @hidden */
@@ -227,9 +223,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     onTouched: any = () => {};
 
     constructor(
-        private elRef: ElementRef,
-        private menuKeyboardService: MenuKeyboardService,
-        private cdRef: ChangeDetectorRef
+        private _elementRef: ElementRef,
+        private _menuKeyboardService: MenuKeyboardService,
+        private _cdRef: ChangeDetectorRef
     ) {}
 
     /** @hidden */
@@ -270,6 +266,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             if (this.listItems && this.listItems.first) {
                 this.listItems.first.focus();
             }
+        } else if (event.key === 'Escape') {
+            this.focusLost();
         }
     }
 
@@ -282,7 +280,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             event.key !== 'Escape' &&
             event.key !== ' ' &&
             event.key !== 'Tab' &&
-            event.key !== 'Enter'
+            event.key !== 'Enter' &&
+            event.key !== 'Alt' &&
+            event.key !== 'Ctrl' &&
+            event.key !== 'Control' &&
+            event.key !== 'Meta' &&
+            event.key !== 'Shift'
         ) {
             this.isOpenChangeHandle(true);
             if (this.open && this._hasDisplayedValues() &&
@@ -307,9 +310,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                 }
             });
             this.isOpenChangeHandle(false);
-            this.isExpanded = false;
-            const inputValueLength = this.searchInputElement.nativeElement.value.length;
-            this.searchInputElement.nativeElement.setSelectionRange(inputValueLength, inputValueLength);
+            this._setCaretToLastChar();
         }
         this.selectedTermSubject$.next(this.searchInputElement.nativeElement.value);
         this.oldInputText = this.inputText;
@@ -317,7 +318,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onListKeydownHandler(event: KeyboardEvent, index: number): void {
-        this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
+        this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
     }
 
     /** @hidden */
@@ -352,7 +353,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else {
             this.inputTextValue = value;
         }
-        this.cdRef.markForCheck();
+        this._cdRef.markForCheck();
     }
 
     /** @hidden */
@@ -379,11 +380,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         if (this.popoverComponent) {
             this.popoverComponent.updatePopover();
         }
-        if (this.displayedValues && this.displayedValues.length === 0 && this.inputGroup) {
-            this.isExpanded = false;
-        } else {
-            this.isExpanded = true;
-        }
         if (!this.inputText) {
             this.isOpenChangeHandle(false);
         }
@@ -399,16 +395,22 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
+        this.selectedTermSubject$.next(this.searchInputElement.nativeElement.value);
         if (this.open !== isOpen) {
             this.open = isOpen;
             this.openChange.emit(this.open);
             this.onTouched();
             if (isOpen && this._hasDisplayedValues()) {
                 this.focusTrap.activate();
-                this.isExpanded = true;
+                this.displayedValues.forEach((displayedValue, i) => {
+                    if (this.inputText === displayedValue) {
+                        setTimeout(() => {
+                            this.listItems.toArray()[i].focus();
+                        }, 50); // TODO: this ain't it
+                    }
+                })
             } else {
                 this.focusTrap.deactivate();
-                this.isExpanded = false;
             }
         }
     }
@@ -416,7 +418,24 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.cdRef.detectChanges();
+        this._cdRef.detectChanges();
+    }
+
+    /** @hidden */
+    focusLost(): void {
+        if (this.open) {
+            let foundMatch = false;
+            this.displayedValues.forEach((value, i) => {
+                if (this.searchInputElement.nativeElement.value === this.displayFn(value)) {
+                    this.onMenuClickHandler(i);
+                    foundMatch = true;
+                    this._setCaretToLastChar();
+                }
+            });
+            if (!foundMatch) {
+                this.isOpenChangeHandle(false);
+            }
+        }
     }
 
     /** Method that reset filtering for displayed values. It overrides displayed values by all possible dropdown values */
@@ -426,11 +445,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     private _setupKeyboardService(): void {
-        this.menuKeyboardService.itemClicked
+        this._menuKeyboardService.itemClicked
             .pipe(takeUntil(this.onDestroy$))
             .subscribe((index) => this.onMenuClickHandler(index));
-        this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this.menuKeyboardService.focusEscapeAfterList = () => {};
+        this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
+        this._menuKeyboardService.focusEscapeAfterList = () => {};
     }
 
     /** @hidden */
@@ -477,7 +496,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     private _setupFocusTrap(): void {
         try {
-            this.focusTrap = focusTrap(this.elRef.nativeElement, {
+            this.focusTrap = focusTrap(this._elementRef.nativeElement, {
                 clickOutsideDeactivates: true,
                 returnFocusOnDeactivate: true,
                 escapeDeactivates: false
@@ -497,5 +516,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     private _hasDisplayedValues(): boolean {
         return this.displayedValues && this.displayedValues.length > 0;
+    }
+
+    private _setCaretToLastChar(): void {
+        const inputValueLength = this.searchInputElement.nativeElement.value.length;
+        this.searchInputElement.nativeElement.setSelectionRange(inputValueLength, inputValueLength);
     }
 }

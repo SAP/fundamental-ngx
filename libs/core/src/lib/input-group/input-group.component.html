@@ -4,8 +4,8 @@
         (inline ? 'fd-input-group--inline ' : ' ') +
         (disabled ? 'is-disabled ' : ' ') +
         (state ? 'is-' + state : ' ') +
-        (inShellbar ? 'fd-shellbar__input-group' : '') +
-        (isControl ? 'fd-input-group--control' : '')
+        (inShellbar ? 'fd-shellbar__input-group ' : ' ') +
+        (isControl ? 'fd-input-group--control ' : ' ')
     "
 >
     <ng-container *ngIf="placement !== 'before' && !inputElement">
@@ -32,6 +32,8 @@
                 [class]="'fd-input-group__button' + (inShellbar ? ' fd-shellbar__button' : '') + (isExpanded ? ' is-expanded' : '')"
                 (click)="buttonClicked($event)"
                 type="button"
+                [attr.aria-expanded]="isExpanded"
+                [attr.aria-controls]="input"
             >
                 <ng-container *ngIf="!glyph">{{ addOnText }}</ng-container>
             </button>

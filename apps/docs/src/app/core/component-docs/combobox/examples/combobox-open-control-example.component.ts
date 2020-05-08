@@ -7,8 +7,6 @@ import { Component } from '@angular/core';
 export class ComboboxOpenControlExampleComponent {
     dropdownValues = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];
 
-    open: boolean = false;
-
     handleIsOpenChange(isOpen: boolean): void {
         if (isOpen) {
             alert('Combobox Opened');
