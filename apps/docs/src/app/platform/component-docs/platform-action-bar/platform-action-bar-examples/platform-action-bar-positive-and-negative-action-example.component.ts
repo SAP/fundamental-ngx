@@ -9,9 +9,34 @@ export class PlatformActionbarWithPositiveNegativeActionsExampleComponent implem
     actionItems: any[];
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.actionItems = [
+            {
+                label: 'Approve',
+                type: 'positive',
+                priority: 1,
+                options: 'emphasized'
+            },
+            {
+                label: 'Reject',
+                type: 'negative',
+                priority: 2,
+                options: 'emphasized'
+            },
+            {
+                label: 'Delegate',
+                type: 'primary',
+                priority: 3,
+                options: 'emphasized'
+            }
+        ];
+    }
 
     onBackBuutonClick() {
         alert('Back button clicked');
+    }
+
+    onItemClick(item: any) {
+        alert(item.label);
     }
 }

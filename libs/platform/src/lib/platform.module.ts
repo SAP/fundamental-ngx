@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { PlatformButtonModule } from './components/button/button.module';
 import { PlatformSearchFieldModule } from './components/search-field/search-field.module';
-import { PlatformActionBarModule } from './components/action-bar/action-bar.module';
-import { PlatformActionButtonGroupModule } from './components/action-button-group/action-button-group.module';
+import { ActionBarModule } from './components/action-bar/action-bar.module';
 import { PlatformMenuModule } from './components/menu/menu.module';
 import { PlatformSelectModule } from './components/select/select.module';
 import { PlatformLinkModule } from './components/link/link.module';
@@ -17,14 +16,13 @@ import { PlatformSplitMenuButtonModule } from './components/split-menu-button/sp
     exports: [
         PlatformButtonModule,
         PlatformSearchFieldModule,
-        PlatformActionBarModule,
-        PlatformActionButtonGroupModule,
+        ActionBarModule,
         PlatformMenuModule,
         PlatformSelectModule,
         PlatformLinkModule,
         PlatformRadioGroupModule,
         PlatformMenuButtonModule,
-        PlatformSplitMenuButtonModule
-    ]
+        PlatformSplitMenuButtonModule,
+    ],
 })
 export class FundamentalNgxPlatformModule {}
