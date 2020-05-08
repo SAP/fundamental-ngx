@@ -21,23 +21,25 @@ export default {
 
 export const ProductSwitch = () => ({
     template:
-        `<fd-product-switch 
-                [closeOnEscapeKey]="onCloseKeyPressed"
-                [closeOnOutsideClick]="onCloseOutsideClick"
-                [disabled]="disabled"
-                [fillControlMode]="fillControlMode"
-                [focusTrapped]="focusTrapped"
-                [isDropdown]="isDropdown"
-                [isOpen]="isOpen"
-                [noArrow]="noArrow"
-                [placement]="placement"
-                [triggers]="triggersPopover">
-            <fd-product-switch-body
-                [forceListMode]="forceListMode"
-                [products]="objectChoices"
-                [dragAndDropEnabled]="dragAndDropEnabled">
-            </fd-product-switch-body>
+        `<div style="text-align:center">
+        <fd-product-switch 
+              [closeOnEscapeKey]="onCloseKeyPressed"
+              [closeOnOutsideClick]="onCloseOutsideClick"
+              [disabled]="disabled"
+              [fillControlMode]="fillControlMode"
+              [focusTrapped]="focusTrapped"
+              [isDropdown]="isDropdown"
+              [isOpen]="isOpen"
+              [noArrow]="noArrow"
+              [placement]="placement"
+              [triggers]="triggersPopover">
+          <fd-product-switch-body
+              [forceListMode]="forceListMode"
+              [products]="objectChoices"
+              [dragAndDropEnabled]="dragAndDropEnabled">
+          </fd-product-switch-body>
         </fd-product-switch>
+        </div>
     `,
     props: {
         forceListMode: boolean('Mobile Mode', false),
