@@ -30,6 +30,7 @@ export class PlatformDocumentationComponent {
         { url: 'platform/radio-group', name: 'Radio Button Group' },
         { url: 'platform/menu-button', name: 'Menu Button' },
         { url: 'platform/split-menu-button', name: 'Split Menu Button' },
+        { url: 'platform/info-label', name: 'Info Label' },
     ];
 
     layouts = [];
