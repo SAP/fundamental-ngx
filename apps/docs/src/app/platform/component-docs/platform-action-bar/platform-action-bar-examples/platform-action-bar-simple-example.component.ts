@@ -1,32 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-action-bar-simple-example',
     templateUrl: './platform-action-bar-simple-example.component.html',
-    styleUrls: ['./platform-action-bar-simple-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['./platform-action-bar-simple-example.component.scss']
 })
-export class PlatformActionbarExamplesComponent implements OnInit {
-    actionItems: any[];
-    constructor() {}
+export class PlatformActionBarExamplesComponent {
 
-    ngOnInit() {
-        this.actionItems = [
-            {
-                label: 'Save',
-                type: 'main',
-                priority: 1
-            },
-            {
-                label: 'Cancel',
-                type: 'negative',
-                priority: 2,
-                options: 'emphasized'
-            }
-        ];
-    }
-
-    onItemClick(item: any) {
-        alert(item.label);
-    }
 }
+

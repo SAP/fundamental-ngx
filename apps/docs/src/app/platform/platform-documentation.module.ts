@@ -15,14 +15,13 @@ import {
     PlatformButtonTypesExampleComponent,
     PlatformButtonTruncateExampleComponent
 } from '../platform/component-docs/platform-button/platform-button-examples/platform-button-examples.component';
-import { PlatformActionbarExamplesComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-simple-example.component';
-import { PlatformActionbarWithBackButtonExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
-import { PlatformActionbarWithDescriptionExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
-import { PlatformActionbarWithLongPageTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
-import { PlatformActionbarEditTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-edit-title-example.component';
-import { PlatformActionbarWithContextualMenuExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
-import { PlatformActionbarWithPositiveNegativeActionsExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
-import { PlatformActionbarHeaderComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
+import { PlatformActionBarExamplesComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-simple-example.component';
+import { PlatformActionBarWithBackButtonExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
+import { PlatformActionBarWithDescriptionExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
+import { PlatformActionBarWithLongPageTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
+import { PlatformActionBarWithContextualMenuExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
+import { PlatformActionBarWithPositiveNegativeActionsExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
+import { PlatformActionBarHeaderComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
 import { PlatformActionBarDocsComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
@@ -59,8 +58,8 @@ import { PlatformRadioGroupContentExampleComponent } from './component-docs/plat
 import { PlatformRadioGroupDisabledExampleComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-examples/platform-radio-group-disabled-examples.component';
 
 import { PlatformMenuButtonHeaderComponent } from './component-docs/platform-menu-button/platform-menu-button-header/platform-menu-button-header.component';
-import { 
-    PlatformMenuButtonExampleComponent 
+import {
+    PlatformMenuButtonExampleComponent
 } from './component-docs/platform-menu-button/platform-menu-button-examples/platform-menu-button-examples.component';
 import { PlatformMenuButtonCozyExampleComponent } from './component-docs/platform-menu-button/platform-menu-button-examples/platform-menu-button-cozy-examples.component';
 import { PlatformMenuButtonCompactExampleComponent } from './component-docs/platform-menu-button/platform-menu-button-examples/platform-menu-button-compact-examples.component';
@@ -95,14 +94,13 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         PlatformButtonHeaderComponent,
         PlatformButtonTruncateExampleComponent,
         PlatformActionBarDocsComponent,
-        PlatformActionbarHeaderComponent,
-        PlatformActionbarExamplesComponent,
-        PlatformActionbarWithBackButtonExampleComponent,
-        PlatformActionbarWithDescriptionExampleComponent,
-        PlatformActionbarWithLongPageTitleExampleComponent,
-        PlatformActionbarEditTitleExampleComponent,
-        PlatformActionbarWithContextualMenuExampleComponent,
-        PlatformActionbarWithPositiveNegativeActionsExampleComponent,
+        PlatformActionBarHeaderComponent,
+        PlatformActionBarExamplesComponent,
+        PlatformActionBarWithBackButtonExampleComponent,
+        PlatformActionBarWithDescriptionExampleComponent,
+        PlatformActionBarWithLongPageTitleExampleComponent,
+        PlatformActionBarWithContextualMenuExampleComponent,
+        PlatformActionBarWithPositiveNegativeActionsExampleComponent,
         PlatformLinkStandardExampleComponent,
         PlatformLinkEmphasizedExampleComponent,
         PlatformLinkDisabledExampleComponent,
@@ -157,4 +155,4 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     ],
     providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }, StackblitzService]
 })
-export class PlatformDocumentationModule {}
+export class PlatformDocumentationModule { }
