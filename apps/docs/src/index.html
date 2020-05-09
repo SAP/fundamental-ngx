@@ -3,6 +3,12 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="description"
+          content="Fundamental Library for Angular is a themable Fiori 3 Angular component library" />
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="assets/favicon.png" />
     <title>Fundamental Library for Angular</title>
     <base href="fundamental-ngx" />
 
@@ -18,6 +24,16 @@
     <link id="themes"
           rel="stylesheet"
           href="assets/sap_fiori_3.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-126805333-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-126805333-2');
+    </script>
     <script>
         if (global === undefined) {
             var global = window;
