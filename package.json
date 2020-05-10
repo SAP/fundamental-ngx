@@ -95,7 +95,7 @@
     "popper.js": "1.16.1",
     "raw-loader": "4.0.1",
     "rxjs": "6.5.5",
-    "tslib": "1.11.1",
+    "tslib": "1.11.2",
     "web-animations-js": "2.3.2",
     "zone.js": "0.10.3"
   },
