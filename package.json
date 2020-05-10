@@ -143,7 +143,7 @@
     "pre-commit": "1.2.2",
     "prettier": "2.0.5",
     "protractor": "5.4.4",
-    "rollup": "2.7.6",
+    "rollup": "2.8.2",
     "standard-version": "4.4.0",
     "ts-node": "8.10.0",
     "tslint": "6.1.2",
