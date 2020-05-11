@@ -154,8 +154,9 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     private propagateOpenChange(open: boolean): void {
         this._expanded = open;
 
-        /**TODO
-         * Propagate to child link directive */
+        /**
+         * Propagate to child content directive, which contains icon and link
+         */
         if (this.contentItem) {
             this.contentItem.changeExpandedState(open);
         }

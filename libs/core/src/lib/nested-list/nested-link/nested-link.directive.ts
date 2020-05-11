@@ -30,7 +30,6 @@ export class NestedLinkDirective {
 
     /**
      * @hidden
-     * TODO
      */
     @HostBinding('attr.tabindex')
     tabIndex: number = 0;

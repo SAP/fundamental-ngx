@@ -7,11 +7,10 @@ export class NestedItemService {
     list: NestedListInterface;
     popover?: NestedListPopoverInterface;
 
-    /** TODO */
+    /** Subject fired when expand icon is clicked */
     toggle: Subject<boolean> = new Subject<boolean>();
 
-    /** KeyDown
-     * TODO
+    /** KeyDown handler, it is triggered from link, content and item elements
      * */
     keyDown: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
 }

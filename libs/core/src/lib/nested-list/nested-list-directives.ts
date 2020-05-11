@@ -84,7 +84,7 @@ export class NestedListExpandIconDirective {
     @HostBinding('attr.aria-expanded')
     expanded: boolean = false;
 
-    /** TODO */
+    /** Event thrown, when icon is clicked */
     @Output()
     clicked: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
@@ -92,7 +92,7 @@ export class NestedListExpandIconDirective {
         private _itemService: NestedItemService
     ) {}
 
-    /** TODO */
+    /** Mouse event handler */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         this.expanded = !this.expanded;
