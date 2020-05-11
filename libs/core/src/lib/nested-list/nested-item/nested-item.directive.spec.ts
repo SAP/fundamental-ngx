@@ -16,7 +16,7 @@ import { NestedItemService } from './nested-item.service';
                         <span fd-nested-list-icon [glyph]="'settings'"></span>
                         <span fd-nested-list-title>Link 1</span>
                     </a>
-                    <a fd-nested-list-expand-icon #iconElement></a>
+                    <a fd-nested-list-expand-icon #iconElementPopover></a>
                 </div>
                 <ul fd-nested-list [textOnly]="false">
                     <li fd-nested-list-item>
@@ -34,7 +34,7 @@ import { NestedItemService } from './nested-item.service';
                     <span fd-nested-list-icon [glyph]="'settings'"></span>
                     <span fd-nested-list-title>Link 1</span>
                 </a>
-                <a fd-nested-list-expand-icon #iconElement2></a>
+                <a fd-nested-list-expand-icon #iconElement></a>
             </div>
             <ul fd-nested-list [textOnly]="false">
                 <li fd-nested-list-item>
@@ -54,29 +54,30 @@ import { NestedItemService } from './nested-item.service';
     `
 })
 class TestNestedContainerComponent {
-    @ViewChild('listNestedItemElement', { static: true, read: NestedItemDirective })
+    @ViewChild('listNestedItemElement', { read: NestedItemDirective })
     nestedItemListDirective: NestedItemDirective;
 
-    @ViewChild('popoverNestedItemElement', { static: true, read: NestedItemDirective })
+    @ViewChild('popoverNestedItemElement', { read: NestedItemDirective })
     nestedItemPopoverDirective: NestedItemDirective;
 
-    @ViewChild('emptyItemDirective', { static: true, read: NestedItemDirective })
+    @ViewChild('emptyItemDirective', { read: NestedItemDirective })
     emptyItemDirective: NestedItemDirective;
 
-    @ViewChild('iconElement', { static: true, read: NestedListExpandIconDirective })
+    @ViewChild('iconElementPopover', { read: NestedListExpandIconDirective })
     popoverIconElement: NestedListExpandIconDirective;
 
-    @ViewChild('iconElement2', { static: true, read: NestedListExpandIconDirective })
+    @ViewChild('iconElement', { read: NestedListExpandIconDirective })
     iconElement: NestedListExpandIconDirective;
 
-    @ViewChild('linkElement', { static: true, read: NestedLinkDirective })
+    @ViewChild('linkElement', {read: NestedLinkDirective })
     linkDirective: NestedLinkDirective;
 }
 
-describe('NestedItemDirective', () => {
+fdescribe('NestedItemDirective', () => {
     let component: TestNestedContainerComponent;
     let nestedItemPopoverDirective: NestedItemDirective;
     let nestedItemListDirective: NestedItemDirective;
+    let iconElement: NestedListExpandIconDirective;
     let emptyItemDirective: NestedItemDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
     let itemService: NestedItemService;
@@ -91,11 +92,13 @@ describe('NestedItemDirective', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);
+        fixture.detectChanges();
         component = fixture.componentInstance;
         fixture.detectChanges();
         nestedItemListDirective = component.nestedItemListDirective;
         emptyItemDirective = component.emptyItemDirective;
         nestedItemPopoverDirective = component.nestedItemPopoverDirective;
+        iconElement = component.iconElement;
         itemService = (<any>nestedItemPopoverDirective)._itemService;
         fixture.detectChanges();
     });
@@ -150,29 +153,40 @@ describe('NestedItemDirective', () => {
 
     it('Empty item should not have children', () => {
         expect(emptyItemDirective.hasChildren).toBeFalsy();
-        expect(emptyItemDirective.contentItem.hasChildren).toBeFalsy();
     });
 
     it('Should react to events from icon child', () => {
+        fixture.detectChanges();
         spyOn(nestedItemListDirective, 'toggle');
-        component.iconElement.onClick(new MouseEvent('click'));
+        nestedItemListDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
         expect(nestedItemListDirective.toggle).toHaveBeenCalledWith();
     });
 
     it('Popover should react to events from icon child', () => {
+        fixture.detectChanges();
         itemService.popover.handleOpenChange(true);
         spyOn(nestedItemPopoverDirective, 'toggle');
-        component.popoverIconElement.onClick(new MouseEvent('click'));
+        nestedItemPopoverDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
         expect(nestedItemPopoverDirective.toggle).toHaveBeenCalledWith();
     });
 
     it('Should handle keyboard event from link', () => {
+        fixture.detectChanges();
         spyOn(nestedItemListDirective.keyboardTriggered, 'emit');
         const keyboardEvent = new KeyboardEvent('keyDown');
-        component.linkDirective.onKeyDown(keyboardEvent);
+        nestedItemListDirective.contentItem.nestedLink.onKeyDown(keyboardEvent);
         fixture.detectChanges();
         expect(nestedItemListDirective.keyboardTriggered.emit).toHaveBeenCalledWith(keyboardEvent);
+    });
+
+    it('Popover Should handle keyboard event from link', () => {
+        fixture.detectChanges();
+        spyOn(nestedItemPopoverDirective.keyboardTriggered, 'emit');
+        const keyboardEvent = new KeyboardEvent('keyDown');
+        nestedItemPopoverDirective.contentItem.nestedLink.onKeyDown(keyboardEvent);
+        fixture.detectChanges();
+        expect(nestedItemPopoverDirective.keyboardTriggered.emit).toHaveBeenCalledWith(keyboardEvent);
     });
 });

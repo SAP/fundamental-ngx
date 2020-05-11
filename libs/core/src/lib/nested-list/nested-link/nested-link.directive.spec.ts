@@ -3,7 +3,7 @@ import { NestedLinkDirective } from './nested-link.directive';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedListModule } from '../nested-list.module';
 import { NestedListStateService } from '../nested-list-state.service';
-import { NestedItemService } from '@fundamental-ngx/core';
+import { NestedItemService } from '../nested-item/nested-item.service';
 
 @Component({
     template: `
@@ -50,6 +50,6 @@ describe('NestedLinkDirective', () => {
 
         const classList = (directiveElement as any)._elementRef.nativeElement.classList;
 
-        expect(classList.contains('is-expanded')).toBeTruthy();
+        expect(classList.contains('is-selected')).toBeTruthy();
     });
 });

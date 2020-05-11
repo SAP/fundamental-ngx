@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedListModule } from '../nested-list.module';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedListExpandIconDirective } from '../nested-list-directives';
-import { NestedItemService } from '@fundamental-ngx/core';
+import { NestedItemService } from '../nested-item/nested-item.service';
 
 @Component({
     template: `
@@ -53,9 +53,9 @@ describe('NestedContentDirective', () => {
         expect(classList.contains('has-child')).toBeFalsy();
         expect(classList.contains('is-selected')).toBeFalsy();
 
-        fixture.detectChanges();
-
         directiveElement.selected = true;
+
+        fixture.detectChanges();
 
         expect(classList.contains('is-selected')).toBeTruthy();
     });

@@ -1,6 +1,5 @@
 import {
     AfterContentInit, AfterViewInit,
-    ChangeDetectionStrategy,
     Component,
     ContentChild,
     HostBinding,
@@ -27,7 +26,6 @@ import { NestedListStateService } from '../nested-list/nested-list-state.service
     selector: 'fd-side-nav',
     styleUrls: ['side-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ NestedListKeyboardService, NestedListStateService ]
 })
 export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit {
