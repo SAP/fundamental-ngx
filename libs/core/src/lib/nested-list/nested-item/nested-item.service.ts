@@ -8,7 +8,7 @@ export class NestedItemService {
     popover?: NestedListPopoverInterface;
 
     /** TODO */
-    toggle: Subject<boolean> = new Subject<boolean>()
+    toggle: Subject<boolean> = new Subject<boolean>();
 
     /** KeyDown
      * TODO

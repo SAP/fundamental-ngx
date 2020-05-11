@@ -3,6 +3,7 @@ import { NestedLinkDirective } from './nested-link.directive';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedListModule } from '../nested-list.module';
 import { NestedListStateService } from '../nested-list-state.service';
+import { NestedItemService } from '@fundamental-ngx/core';
 
 @Component({
     template: `
@@ -26,7 +27,7 @@ describe('NestedLinkDirective', () => {
         TestBed.configureTestingModule({
             imports: [NestedListModule],
             declarations: [TestNestedContainerComponent],
-            providers: [NestedListStateService]
+            providers: [NestedListStateService, NestedItemService]
         }).compileComponents();
     }));
 
@@ -40,19 +41,15 @@ describe('NestedLinkDirective', () => {
 
     it('Should return good information', () => {
         expect(directiveElement.getTitle()).toBe('Link 1');
-        expect(directiveElement.hasChildren).toBeFalsy();
+        expect(directiveElement.selected).toBeFalsy();
     });
 
     it('Should have good classes', () => {
         directiveElement.selected = true;
-        directiveElement.hasChildren = true;
-        directiveElement.expanded = true;
         fixture.detectChanges();
 
         const classList = (directiveElement as any)._elementRef.nativeElement.classList;
 
         expect(classList.contains('is-expanded')).toBeTruthy();
-        expect(classList.contains('is-selected')).toBeTruthy();
-        expect(classList.contains('has-child')).toBeTruthy();
     });
 });

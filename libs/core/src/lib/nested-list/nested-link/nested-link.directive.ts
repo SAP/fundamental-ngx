@@ -71,14 +71,14 @@ export class NestedLinkDirective {
         private _itemService: NestedItemService
     ) {}
 
-    /** TODO */
+    /** Handler for keyboard events */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         this.keyboardTriggered.emit(event);
         this._itemService.keyDown.next(event);
     }
 
-    /** TODO */
+    /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         if (this.onClickCallback) {

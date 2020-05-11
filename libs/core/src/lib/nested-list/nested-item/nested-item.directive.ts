@@ -89,12 +89,12 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         /** Subscribe to mouse click event, thrown by link item */
         this._itemService.toggle.subscribe(() => this.toggle());
 
+        /** Propagate hasChildren property */
         if (this.contentItem && this.hasChildren) {
             this.contentItem.hasChildren = true;
             this.contentItem.changeDetRef.detectChanges();
         }
 
-        /** Propagate hasChildren property */
         /** Subscribe to keyboard event and throw it farther */
         this._itemService.keyDown.subscribe(keyboardEvent => this.keyboardTriggered.emit(keyboardEvent));
 

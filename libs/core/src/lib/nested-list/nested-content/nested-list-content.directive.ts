@@ -69,13 +69,14 @@ export class NestedListContentDirective implements AfterContentInit {
         }
     }
 
-    /** TODO */
+    /** Keyboard Event Handler */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         this.keyboardTriggered.emit(event);
         this._itemService.keyDown.next(event);
     }
 
+    /** Expanded state change propagation method */
     changeExpandedState(expanded: boolean): void {
         if (this.nestedExpandIcon) {
             this.nestedExpandIcon.expanded = expanded;
