@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    HostListener,
+    Input,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
+import { KeyUtil } from '../utils/functions/key-util';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';
 
@@ -9,13 +18,13 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.tabindex]': 'focusable ? 0 : -1',
+        '[attr.tabindex]': '0',
         '[attr.aria-busy]': 'loading',
         '[attr.aria-live]': 'ariaLive',
         '[attr.aria-hidden]': 'loading',
         '[attr.aria-label]': 'ariaLabel',
         '[class.fd-busy-indicator__container]': 'true',
-        '[class.fd-busy-indicator__container--inline]': 'inline',
+        '[class.fd-busy-indicator__container--inline]': 'inline'
     }
 })
 export class BusyIndicatorComponent {
@@ -35,10 +44,6 @@ export class BusyIndicatorComponent {
     @Input()
     focusable: boolean = true;
 
-    /** Whether busy indicator can be focused */
-    @Input()
-    focusableContent: boolean = false;
-
     /** Aria label attribute value. */
     @Input()
     ariaLabel: string = 'Loading';
@@ -46,4 +51,25 @@ export class BusyIndicatorComponent {
     /** Aria live attribute value. */
     @Input()
     ariaLive: 'assertive' | 'polite' | null = 'polite';
+
+    @ViewChild('fakeFocusElement') fakeFocusElement: ElementRef;
+
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden If focus escapes busy container focus element after wrapped content */
+    @HostListener('keydown', ['$event'])
+    hostFocusChangeHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKey(event, 'Tab') && !event.shiftKey) {
+            this.fakeFocusElement.nativeElement.focus();
+        }
+    }
+
+    /** @hidden If busy container is navigated as "previous focusable element",
+     * focus busy indicator to prevent from focusing wrapped content */
+    fakeElementFocusHandler(event: FocusEvent): void {
+        if (event.relatedTarget !== this._elementRef.nativeElement) {
+            event.stopPropagation();
+            this._elementRef.nativeElement.focus();
+        }
+    }
 }

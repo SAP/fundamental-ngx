@@ -12,10 +12,14 @@
         position: relative;
 
         &:focus {
-            outline-offset: -0.1875rem;
-            outline-width: var(--sapContent_FocusWidth);
-            outline-color: var(--sapContent_FocusColor);
-            outline-style: var(--sapContent_FocusStyle);
+            outline: none;
+
+            .fd-busy-indicator__overlay {
+                outline-offset: -0.1875rem;
+                outline-width: var(--sapContent_FocusWidth, 0.0625rem);
+                outline-color: var(--sapContent_FocusColor, #000);
+                outline-style: var(--sapContent_FocusStyle, dotted);
+            }
         }
 
         &--inline {

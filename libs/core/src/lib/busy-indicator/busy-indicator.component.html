@@ -4,9 +4,9 @@
     class="fd-busy-indicator"
     *ngIf="loading"
     [ngClass]="{
-        'fd-busy-indicator--l': size == 'l',
-        'fd-busy-indicator--m': size == 'm',
-        'fd-busy-indicator--s': size == 's'
+        'fd-busy-indicator--l': size === 'l',
+        'fd-busy-indicator--m': size === 'm',
+        'fd-busy-indicator--s': size === 's'
     }">
     <div class="fd-busy-indicator--circle-0"></div>
     <div class="fd-busy-indicator--circle-1"></div>
@@ -14,3 +14,5 @@
 </div>
 
 <div class="fd-busy-indicator__overlay"></div>
+
+<div #fakeFocusElement tabindex="0" aria-hidden="true" (focus)="fakeElementFocusHandler($event)"></div>
