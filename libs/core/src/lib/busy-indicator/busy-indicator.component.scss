@@ -1,11 +1,15 @@
 @import '~fundamental-styles/dist/busy-indicator';
 
 .fd-busy-indicator {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 2;
+
+    &--absolute {
+        white-space: nowrap;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
     &__container {
         display: block;
@@ -15,7 +19,7 @@
             outline: none;
 
             .fd-busy-indicator__overlay {
-                outline-offset: -0.1875rem;
+                outline-offset: 0;
                 outline-width: var(--sapContent_FocusWidth, 0.0625rem);
                 outline-color: var(--sapContent_FocusColor, #000);
                 outline-style: var(--sapContent_FocusStyle, dotted);
@@ -35,5 +39,9 @@
         right: 0;
         z-index: 1;
         background-color: rgba(247, 247, 247, 0.72);
+
+        &--transparent {
+            background-color: transparent;
+        }
     }
 }
