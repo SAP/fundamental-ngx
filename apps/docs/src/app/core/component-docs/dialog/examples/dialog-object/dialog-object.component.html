@@ -8,6 +8,15 @@
     </div>
 </ng-template>
 
+
+<ng-template #dialogSubHeader>
+    <div fd-bar-middle>
+        <fd-bar-element [fullWidth]="true">
+            <fd-input-group [compact]="true" [glyph]="'menu'" [button]="true"></fd-input-group>
+        </fd-bar-element>
+    </div>
+</ng-template>
+
 <p>
     Close Reason: {{ reason }}
 </p>

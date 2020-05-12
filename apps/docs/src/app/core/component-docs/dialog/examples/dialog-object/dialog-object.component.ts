@@ -13,15 +13,18 @@ export class DialogObjectComponent {
     @ViewChild('dialogContent', { read: TemplateRef })
     dialogContent: TemplateRef<any>;
 
+    @ViewChild('dialogSubHeader', { read: TemplateRef })
+    dialogSubHeader: TemplateRef<any>;
+
     reason: string = '';
 
     private _dialogReference: DialogRef;
 
     openDialog(): void {
-
         const object: DefaultDialogObject = {
             title: 'Dialog Title',
             content: this.dialogContent,
+            subHeader: this.dialogSubHeader,
             approveButton: 'Ok',
             approveButtonCallback: () => this._dialogReference.close('Approved'),
             cancelButton: 'Cancel',

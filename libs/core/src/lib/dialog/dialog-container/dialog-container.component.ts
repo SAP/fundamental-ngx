@@ -95,7 +95,7 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
         this._componentRef = this.containerRef.createEmbeddedView(content, context);
     }
 
-    /** @hidden TODO */
+    /** @hidden Load Dialog component from passed object */
     private _createFromDefaultConfiguration(config: DefaultDialogObject): void {
         this.containerRef.clear();
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DefaultDialogComponent);

@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 
-export class DefaultDialogObject {
+export interface DefaultDialogObject {
 
     /** Dialog Title */
     title?: string;
