@@ -8,7 +8,7 @@
             [(expanded)]="item.expanded">
 
             <fd-nested-list-popover *ngIf="condensed && first && item.list" [title]="item.link?.title">
-                <div fd-nested-list-content>
+                <div fd-nested-list-content [selected]="item.link.selected">
                     <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{item: item}"></ng-container>
                     <a fd-nested-list-expand-icon></a>
                 </div>
@@ -31,7 +31,7 @@
             <ng-template let-item="item" #link>
                 <a fd-nested-list-link *ngIf="item.link"
                    [onClickCallback]="item.link.callback"
-                   [selected]="item.link.selected"
+                   [selected]="!item.list && item.link.selected"
                    [attr.href]="item.link.href ? item.link.href : null"
                    [routerLink]="item.link.routerLink ? item.link.routerLink : []">
                     <span fd-nested-list-icon *ngIf="item.link.icon" [glyph]="item.link.icon"></span>
