@@ -48,6 +48,9 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     @ContentChild(NestedListContentDirective)
     contentDirective: NestedListContentDirective;
 
+    /** @hidden
+     * For Internal Usage - Gets information about title, which should be displayed inside popover
+     */
     @Input()
     title: string = '';
 
@@ -89,13 +92,15 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
         }
     }
 
+    /** @hidden */
     ngAfterContentInit(): void {
         if (!this.title) {
-            this.title = this.getTitle();
+            this.title = this._getTitle();
         }
     }
 
-    public getTitle(): string {
+    /** Returns title of nested link element inside content directive */
+    private _getTitle(): string {
         if (this.contentDirective && this.contentDirective.nestedLink) {
             return this.contentDirective.nestedLink.getTitle();
         }

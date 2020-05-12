@@ -12,4 +12,13 @@
     .fd-popover-custom {
         display: block;
     }
+
+    [dir="rtl"] &,
+    &[dir="rtl"] {
+        .fd-popover-container-custom {
+            .fd-nested-list__link {
+                padding-left: 1rem;
+            }
+        }
+    }
 }
