@@ -1,23 +1,21 @@
 import {
     Component,
-    ChangeDetectionStrategy,
     Input,
     Output,
     EventEmitter,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    OnInit
 } from '@angular/core';
 import { BaseComponent } from '../base';
 @Component({
     selector: 'fdp-action-bar',
     templateUrl: './action-bar.component.html',
-    styleUrls: ['./action-bar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./action-bar.component.scss']
 })
-export class ActionBarComponent extends BaseComponent {
+export class ActionBarComponent extends BaseComponent implements OnInit {
     /**
      * Actionbar title
      */
-
     @Input()
     title: string;
 
@@ -27,11 +25,9 @@ export class ActionBarComponent extends BaseComponent {
     @Input()
     description: string;
 
-
     /**
      * Compact mode
      */
-    @Input()
     compact = true;
 
     /**
@@ -54,5 +50,11 @@ export class ActionBarComponent extends BaseComponent {
 
     constructor(_cd: ChangeDetectorRef) {
         super(_cd);
+    }
+
+    ngOnInit() {
+        if (this.contentDensity === 'cozy') {
+            this.compact = false;
+        }
     }
 }

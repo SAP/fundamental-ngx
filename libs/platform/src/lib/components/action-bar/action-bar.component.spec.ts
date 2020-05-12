@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActionBarComponent } from './action-bar.component';
-import { Component, Input, ViewChild, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { ActionBarModule } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-test-component',
@@ -22,11 +22,6 @@ class TestComponent {
     @Input() actionBarTitle: string;
     @Input() actionBarDescription: string;
     @Input() showBackButton = false;
-    @Input() editMode = false;
-    @Input() actionItems = [];
-    @Input() placement: string;
-    @ViewChild('actionbar', { static: false }) actionbar: ActionBarComponent;
-    @Output() onRenameTitle: EventEmitter<string> = new EventEmitter<string>();
     public backButtonClicked = false;
     onBackButtonClick() {
         this.backButtonClicked = true;
@@ -40,7 +35,7 @@ describe('ActionBarHeaderComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ActionBarComponent, TestComponent],
-            imports: [FormsModule, FundamentalNgxCoreModule]
+            imports: [FormsModule, ActionBarModule]
         }).compileComponents();
     }));
 

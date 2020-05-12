@@ -1,9 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActionButtonGroupComponent } from './action-button-group.component';
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { Component, ViewChild } from '@angular/core';
+import { ActionBarModule } from '@fundamental-ngx/core';
 @Component({
     selector: 'fdp-action-button-group-component',
     template: `
@@ -19,7 +18,7 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 })
 
 class ActionButtonGroupTestComponent {
-    @ViewChild('actionbuttongroup', { static: false }) actionbuttongroup: ActionButtonGroupComponent;
+    @ViewChild('actionbuttongroup') actionbuttongroup: ActionButtonGroupComponent;
 }
 
 describe('ActionButtonGroupComponent', () => {
@@ -30,7 +29,7 @@ describe('ActionButtonGroupComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ActionButtonGroupComponent, ActionButtonGroupTestComponent],
-            imports: [FormsModule, FundamentalNgxCoreModule]
+            imports: [ActionBarModule]
         }).compileComponents();
 
     }));

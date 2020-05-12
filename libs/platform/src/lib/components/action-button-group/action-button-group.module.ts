@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActionButtonGroupComponent } from './action-button-group.component';
-import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { ActionBarModule } from '@fundamental-ngx/core';
 @NgModule({
     declarations: [ActionButtonGroupComponent],
-    imports: [CommonModule, FundamentalNgxCoreModule],
+    imports: [CommonModule, ActionBarModule],
     exports: [ActionButtonGroupComponent]
 })
-export class PlatformActionButtonGroupModule {}
+export class PlatformActionButtonGroupModule { }
