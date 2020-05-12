@@ -3,7 +3,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
-import { OptionComponent } from '@fundamental-ngx/core';
+import { OptionComponent } from './option/option.component';
 
 @Component({
     template: `
