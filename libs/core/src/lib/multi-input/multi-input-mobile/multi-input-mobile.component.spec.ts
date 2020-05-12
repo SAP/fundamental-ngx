@@ -88,6 +88,6 @@ describe('MultiInputMobileComponent', () => {
 
         anyComponent._overwriteDialogProperties();
 
-        expect(anyComponent._dialogConfig.defaultObject.closeButtonCallback).not.toBeDefined();
+        expect(anyComponent._dialogConfig.defaultObject.closeButtonCallback).toBeFalsy();
     });
 });

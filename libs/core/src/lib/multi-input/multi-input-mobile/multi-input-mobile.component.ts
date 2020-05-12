@@ -5,7 +5,7 @@ import {
     EventEmitter,
     Inject,
     Input,
-    isDevMode,
+    isDevMode, OnInit,
     Optional,
     Output,
     TemplateRef,
@@ -15,34 +15,28 @@ import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { DIALOG_CONFIG, DialogConfig } from '../../dialog/dialog-utils/dialog-config.class';
 import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
 import { MULTI_INPUT_MOBILE_CONFIG, MultiInputMobileConfiguration } from './multi-input-mobile-configuration';
+import { MultiInputComponent } from '../multi-input.component';
 
 @Component({
     selector: 'fd-multi-input-mobile',
     templateUrl: './multi-input-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiInputMobileComponent {
+export class MultiInputMobileComponent implements OnInit {
+
+    multiInputConfig: MultiInputMobileConfiguration;
 
     /** @hidden
      * For internal usage
      * List element, which will be rendered inside dialog.
      */
-    @Input()
     listTemplate: TemplateRef<any>;
 
     /** @hidden
      * For internal usage
      * Control element, which will be rendered inside dialog.
      */
-    @Input()
     controlTemplate: TemplateRef<any>;
-
-    /**@hidden
-     * For internal usage
-     * Multi Input configuration file
-     */
-    @Input()
-    multiInputConfig: MultiInputMobileConfiguration;
 
     /** @hidden
      * For internal usage
@@ -67,11 +61,7 @@ export class MultiInputMobileComponent {
     @Output()
     readonly dialogDismiss: EventEmitter<any[]> = new EventEmitter<any[]>();
 
-    /** @hidden
-     * Wrapped Control template, passed to dialog
-     */
-    @ViewChild('wrappedControlTemplate', { read: TemplateRef })
-    template: TemplateRef<any>;
+    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
     private _dialogRef: DialogRef;
@@ -80,10 +70,19 @@ export class MultiInputMobileComponent {
 
     constructor(
         @Optional() private dialogService: DialogService,
+        @Optional() private _multiInputComponent: MultiInputComponent,
         @Optional() @Inject(DIALOG_CONFIG) private _dialogConfig: DialogConfig,
         @Optional() @Inject(MULTI_INPUT_MOBILE_CONFIG) private _providedMultiInputConfig: MultiInputMobileConfiguration,
         private _changeDetRef: ChangeDetectorRef
-    ) {}
+    ) {
+    }
+
+    ngOnInit(): void {
+        this.multiInputConfig = this.getMultiInputConfig();
+        if (!this.multiInputConfig) {
+            this._listenOnMultiInputOpenChange();
+        }
+    }
 
     /** Method that opens dialog with multi input list and control templates */
     open(backupSelected: any[]): void {
@@ -95,7 +94,7 @@ export class MultiInputMobileComponent {
         this._selectedBackup = backupSelected;
         this._overwriteDialogProperties();
         this._dialogRef = this.dialogService.open(
-            this._dialogConfig.defaultObject,
+            this.dialogTemplate,
             this._dialogConfig
         );
 
@@ -103,8 +102,9 @@ export class MultiInputMobileComponent {
          * Subscribe to errors, which is triggered by backdrop click.
          */
         this._dialogRef.afterClosed.subscribe(
-            () => {},
-            () => this._handleDismiss());
+            () => {
+            },
+            () => this.handleDismiss());
     }
 
     /**
@@ -113,7 +113,7 @@ export class MultiInputMobileComponent {
      * Also removes from DOM, <input> control element, which is rendered in dialog.
      */
     hasOpenDialogs(): boolean {
-        return this.dialogService && this.dialogService.hasOpenDialogs()
+        return this.dialogService && this.dialogService.hasOpenDialogs();
     }
 
     /** Throw select all event, it's handled by multi input component */
@@ -122,14 +122,14 @@ export class MultiInputMobileComponent {
     }
 
     /** @hidden */
-    private _handleDismiss(): void {
+    public handleDismiss(): void {
         this._dialogRef.close();
         this._changeDetRef.detectChanges();
         this.dialogDismiss.emit(this._selectedBackup);
     }
 
     /** @hidden */
-    private _handleApprove(): void {
+    public handleApprove(): void {
         this._dialogRef.close();
         this._changeDetRef.detectChanges();
         this.dialogApprove.emit();
@@ -145,29 +145,11 @@ export class MultiInputMobileComponent {
         if (!this._dialogConfig) {
             this._dialogConfig = new DialogConfig();
         }
-        if (!this._dialogConfig.defaultObject) {
-            this._dialogConfig.defaultObject = {};
-
-        }
-
-        this._dialogConfig.defaultObject.cancelButton = multiInputConfig.cancelButton;
-        this._dialogConfig.defaultObject.approveButton = multiInputConfig.approveButton;
-        this._dialogConfig.defaultObject.title = multiInputConfig.title;
-        this._dialogConfig.defaultObject.content = this.listTemplate;
-        this._dialogConfig.defaultObject.subHeader = this.template;
-        this._dialogConfig.defaultObject.approveButtonCallback = () => this._handleApprove();
-        this._dialogConfig.defaultObject.cancelButtonCallback = () => this._handleDismiss();
-
-        if (multiInputConfig.closeButton) {
-            this._dialogConfig.defaultObject.closeButtonCallback = () => this._handleDismiss();
-        } else {
-            this._dialogConfig.defaultObject.closeButtonCallback = null;
-        }
     }
 
     /** @hidden */
     private getMultiInputConfig(): MultiInputMobileConfiguration {
-        if (this.multiInputConfig) {
+        if (this._multiInputComponent.multiInputMobileConfig) {
             return this.multiInputConfig;
         } else if (this._providedMultiInputConfig) {
             return this._providedMultiInputConfig;
@@ -179,5 +161,18 @@ export class MultiInputMobileComponent {
                 );
             }
         }
+    }
+
+    private _toggleDialog(open: boolean): void {
+        if (open) {
+            this.open([]);
+        }
+    }
+
+    /** @hidden */
+    private _listenOnMultiInputOpenChange(): void {
+        this._multiInputComponent.openChange
+            .subscribe(isOpen => this._toggleDialog(isOpen))
+        ;
     }
 }

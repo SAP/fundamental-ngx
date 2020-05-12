@@ -22,15 +22,6 @@
     </div>
 </div>
 
-<fd-multi-input-mobile *ngIf="mobileMode"
-                       [controlTemplate]="control"
-                       [listTemplate]="list"
-                       [multiInputConfig]="multiInputMobileConfig"
-                       (onAllItemsSelected)="selectAllItems()"
-                       (dialogApprove)="dialogApprove()"
-                       (dialogDismiss)="dialogDismiss($event)" >
-</fd-multi-input-mobile>
-
 <ng-template #control>
     <fd-input-group
         class="fd-multi-input-input-group-custom"

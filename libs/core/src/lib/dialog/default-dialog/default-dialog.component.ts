@@ -4,7 +4,6 @@ import { DefaultDialogObject } from './default-dialog-object';
 @Component({
     selector: 'fd-default-dialog',
     templateUrl: './default-dialog.component.html',
-    styleUrls: ['./default-dialog.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultDialogComponent {

@@ -6,13 +6,12 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostBinding,
     Input,
     OnChanges,
     OnInit,
     Output,
     QueryList,
-    SimpleChanges,
+    SimpleChanges, TemplateRef,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -24,9 +23,8 @@ import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
 import { ListItemDirective } from '../list/list-item.directive';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MultiInputMobileConfiguration } from './multi-input-mobile/multi-input-mobile-configuration';
 
 /**
@@ -54,24 +52,6 @@ import { MultiInputMobileConfiguration } from './multi-input-mobile/multi-input-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit, CssClassBuilder {
-    /** user's custom classes */
-    @Input()
-    class: string;
-
-    /** @hidden */
-    @ViewChild(PopoverComponent)
-    popoverRef: PopoverComponent;
-
-    /** @hidden */
-    @ViewChildren(ListItemDirective)
-    listItems: QueryList<ListItemDirective>;
-
-    @ViewChild(MultiInputMobileComponent)
-    multiInputMobile: MultiInputMobileComponent;
-
-    /** @hidden */
-    @ViewChild('searchInputElement')
-    searchInputElement: ElementRef;
 
     /** Placeholder for the input field. */
     @Input()
@@ -108,6 +88,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** Selected dropdown items. */
     @Input()
     selected: any[] = [];
+
+    /** user's custom classes */
+    @Input()
+    class: string;
 
     /** Filter function. Accepts an array and a string as arguments, and outputs an array.
      * An arrow function can be used to access the *this* keyword in the calling component.
@@ -195,6 +179,26 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
+    @ViewChild(PopoverComponent)
+    popoverRef: PopoverComponent;
+
+    /** @hidden */
+    @ViewChild('control', { read: TemplateRef })
+    controlTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('list', { read: TemplateRef })
+    listTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChildren(ListItemDirective)
+    listItems: QueryList<ListItemDirective>;
+
+    /** @hidden */
+    @ViewChild('searchInputElement')
+    searchInputElement: ElementRef;
+
+    /** @hidden */
     displayedValues: any[] = [];
 
     /** @hidden */
@@ -210,7 +214,8 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     constructor(
         private _elementRef: ElementRef,
         private changeDetRef: ChangeDetectorRef,
-        private menuKeyboardService: MenuKeyboardService
+        private menuKeyboardService: MenuKeyboardService,
+        private _dynamicComponentService: DynamicComponentService
     ) {}
 
     /** @hidden */
@@ -239,6 +244,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     ngAfterViewInit(): void {
         this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
         this.menuKeyboardService.focusEscapeAfterList = () => {};
+        if (this.mobileMode) {
+            this._setUpMobileMode();
+        }
     }
 
     @applyCssClass
@@ -292,11 +300,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     openChangeHandle(open: boolean): void {
         this.open = open;
-        if (this.mobileMode) {
-            this._dialogOpenHandle(open);
-        } else {
+        if (!this.mobileMode) {
             this._popoverOpenHandle(open);
         }
+        this.openChange.emit(this.open);
     }
 
     /** Method that selects all possible options. */
@@ -322,11 +329,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
 
         // Handle popover placement update
-        if ((
-            (previousLength === 0 && this.selected.length === 1) ||
-            (previousLength === 1 && this.selected.length === 0)) &&
-            this.popoverRef
-        ) {
+        if (this._shouldPopoverBeUpdated(previousLength, this.selected.length)) {
             this.popoverRef.updatePopover();
         }
 
@@ -345,7 +348,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     public handleInputKeydown(event: KeyboardEvent): void {
-        if (event.key === 'ArrowDown' && !this.mobileMode) {
+        if (KeyUtil.isKey(event, 'ArrowDown') && !this.mobileMode) {
             if (event.altKey) {
                 this.openChangeHandle(true);
             }
@@ -403,11 +406,6 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         this.openChangeHandle(false);
     }
 
-    /** @hidden */
-    private _hasOpenDialogs(): boolean {
-        return this.multiInputMobile && this.multiInputMobile.hasOpenDialogs();
-    }
-
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
@@ -442,7 +440,6 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
      */
     private _popoverOpenHandle(open: boolean): void {
         this.open = open;
-        this.openChange.emit(this.open);
         this.onTouched();
         if (this.open) {
             this.focusTrap.activate();
@@ -451,19 +448,25 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
     }
 
-    /**
-     * @hidden
-     * Opens multi input in dialog, also adds backup data, to bring it, when changes are not approved.
-     */
-    private _dialogOpenHandle(open: boolean): void {
-        if (!this._hasOpenDialogs() && open) {
-            this.multiInputMobile.open([...this.selected]);
-        }
-    }
-
     /** @hidden */
     private _propagateChange(): void {
         this.onChange(this.selected);
         this.selectedChange.emit(this.selected);
+    }
+
+    private _shouldPopoverBeUpdated(previousLength: number, currentLength: number): boolean {
+        return ((previousLength === 0 && currentLength === 1) ||
+            (previousLength === 1 && currentLength === 0) &&
+            !!this.popoverRef)
+        ;
+    }
+
+    private _setUpMobileMode(): void {
+        this._dynamicComponentService.createDynamicComponent(
+            { list: this.listTemplate, control: this.controlTemplate },
+            MultiInputMobileComponent,
+            { container: this._elementRef.nativeElement },
+            { services: [this] }
+        )
     }
 }

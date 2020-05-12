@@ -1,14 +1,61 @@
-<ng-container *ngIf="!hasOpenDialogs()">
-    <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
-</ng-container>
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <ng-template fdTemplate="header">
+                <div fd-bar-left>
+                    <fd-bar-element>
+                        <h1 fd-dialog-title>{{ defaultDialogConfig?.title }}</h1>
+                    </fd-bar-element>
+                </div>
+                <div fd-bar-right *ngIf="defaultDialogConfig?.closeButtonCallback">
+                    <fd-bar-element>
+                        <button fd-dialog-close-button
+                                (click)="closeButtonClicked()">
+                        </button>
+                    </fd-bar-element>
+                </div>
+            </ng-template>
+            <div fd-bar-middle>
+                <fd-bar-element [fullWidth]="true">
+                    <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+                </fd-bar-element>
+                <fd-bar-element>
+                    <button fd-button [glyph]="'multiselect-all'" [fdType]="'transparent'"
+                            (click)="selectAll()"></button>
+                </fd-bar-element>
+            </div>
+        </fd-dialog-header>
 
-<ng-template #wrappedControlTemplate>
-    <div fd-bar-middle>
-        <fd-bar-element [fullWidth]="true">
-            <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
-        </fd-bar-element>
-        <fd-bar-element>
-            <button fd-button [glyph]="'multiselect-all'" [fdType]="'transparent'" (click)="selectAll()"></button>
-        </fd-bar-element>
-    </div>
+        <fd-dialog-body>
+            <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-dialog-footer-button>
+                <button
+                    *ngIf="defaultDialogConfig?.approveButton"
+                    fd-button
+                    fdType="emphasized"
+                    fd-dialog-decisive-button
+                    [compact]="true"
+                    (click)="approveButtonClicked()"
+                >
+                    {{defaultDialogConfig?.approveButton}}
+                </button>
+            </fd-dialog-footer-button>
+
+            <fd-dialog-footer-button>
+                <button
+                    *ngIf="defaultDialogConfig?.cancelButton"
+                    fd-button
+                    fdType="transparent"
+                    fd-dialog-decisive-button
+                    [compact]="true"
+                    (click)="handleApprove()"
+                >
+                    {{defaultDialogConfig?.cancelButton}}
+                </button>
+            </fd-dialog-footer-button>
+        </fd-dialog-footer>
+    </fd-dialog>
 </ng-template>
