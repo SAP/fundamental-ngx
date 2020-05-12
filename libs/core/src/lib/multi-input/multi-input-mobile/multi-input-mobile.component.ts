@@ -37,8 +37,9 @@ export class MultiInputMobileComponent {
     @Input()
     controlTemplate: TemplateRef<any>;
 
-    /**
-     * TODO
+    /**@hidden
+     * For internal usage
+     * Multi Input configuration file
      */
     @Input()
     multiInputConfig: MultiInputMobileConfiguration;
@@ -84,11 +85,11 @@ export class MultiInputMobileComponent {
         private _changeDetRef: ChangeDetectorRef
     ) {}
 
-    /** TODO */
+    /** Method that opens dialog with multi input list and control templates */
     open(backupSelected: any[]): void {
 
         if (!this.dialogService && isDevMode()) {
-            // TODO: Throw error
+            throw new Error('There is no dialog service provided. Multi input can\'t be opened');
         }
 
         this._selectedBackup = backupSelected;
@@ -115,7 +116,7 @@ export class MultiInputMobileComponent {
         return this.dialogService && this.dialogService.hasOpenDialogs()
     }
 
-    /** TODO */
+    /** Throw select all event, it's handled by multi input component */
     selectAll(): void {
         this.onAllItemsSelected.emit();
     }
@@ -136,14 +137,18 @@ export class MultiInputMobileComponent {
 
     /** @hidden */
     private _overwriteDialogProperties(): void {
+        const multiInputConfig = this.getMultiInputConfig();
+        if (!multiInputConfig) {
+            return;
+        }
+
         if (!this._dialogConfig) {
             this._dialogConfig = new DialogConfig();
         }
         if (!this._dialogConfig.defaultObject) {
             this._dialogConfig.defaultObject = {};
-        }
 
-        const multiInputConfig = this.getMultiInputConfig();
+        }
 
         this._dialogConfig.defaultObject.cancelButton = multiInputConfig.cancelButton;
         this._dialogConfig.defaultObject.approveButton = multiInputConfig.approveButton;
@@ -168,7 +173,10 @@ export class MultiInputMobileComponent {
             return this._providedMultiInputConfig;
         } else {
             if (isDevMode()) {
-                // TODO throw some error
+                throw new Error('There is no multi input configuration object provided. ' +
+                    'You need to pass it as a "[multiInputMobileConfig]",' +
+                    'or provide it with "MULTI_INPUT_MOBILE_CONFIG" injection token'
+                );
             }
         }
     }

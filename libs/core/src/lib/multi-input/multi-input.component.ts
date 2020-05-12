@@ -338,13 +338,14 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     public handleKeyDown(event: KeyboardEvent, index: number): void {
-        console.log(this.listItems.toArray());
-        this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
+        if (!this.mobileMode) {
+            this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
+        }
     }
 
     /** @hidden */
     public handleInputKeydown(event: KeyboardEvent): void {
-        if (event.key === 'ArrowDown') {
+        if (event.key === 'ArrowDown' && !this.mobileMode) {
             if (event.altKey) {
                 this.openChangeHandle(true);
             }
