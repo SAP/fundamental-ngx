@@ -8,7 +8,7 @@ import { DialogRef, DialogService, DefaultDialogObject } from '@fundamental-ngx/
 })
 export class DialogObjectComponent {
 
-    constructor(public _dialogService: DialogService) {}
+    constructor(private _dialogService: DialogService) {}
 
     @ViewChild('dialogContent', { read: TemplateRef })
     dialogContent: TemplateRef<any>;

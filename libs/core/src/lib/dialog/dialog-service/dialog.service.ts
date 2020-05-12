@@ -9,7 +9,7 @@ import { DefaultDialogObject } from '../default-dialog/default-dialog-object';
 @Injectable()
 export class DialogService {
     /** @hidden Collection of existing dialog references */
-    public _dialogs: ComponentRef<DialogContainerComponent>[] = [];
+    private _dialogs: ComponentRef<DialogContainerComponent>[] = [];
 
     constructor(
         @Inject(DynamicComponentService) private _dynamicComponentService: DynamicComponentService,
