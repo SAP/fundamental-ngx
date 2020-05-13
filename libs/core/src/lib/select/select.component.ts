@@ -27,6 +27,8 @@ import focusTrap, { FocusTrap } from 'focus-trap';
 import { KeyUtil } from '../utils/functions/key-util';
 import { SelectProxy } from './select-proxy.service';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
+import { DynamicComponentService } from '../..';
+import { SelectMobileComponent } from './select-mobile/select-mobile/select-mobile.component';
 
 let selectUniqueId: number = 0;
 
@@ -177,10 +179,6 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     @ViewChild('selectControl')
     controlElementRef: ElementRef;
 
-    /** Reference to root element for the mobile mode dialog */
-    @ViewChild('dialogContainer')
-    dialogContainerElementRef: ElementRef;
-
     /** Reference to element containing list of options */
     @ViewChild('selectOptionsListTemplate')
     selectOptionsListTemplate: TemplateRef<any>;
@@ -250,7 +248,8 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     constructor(
         private _elementRef: ElementRef,
         private _selectProxy: SelectProxy,
-        private _changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _dynamicComponentService: DynamicComponentService
     ) { }
 
     /** @hidden */
@@ -271,6 +270,7 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     ngAfterViewInit(): void {
         this._listenOnControlTouched();
         this._setOptionsArray();
+        this._setupMobileMode();
     }
 
     /** @hidden */
@@ -534,5 +534,16 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     /** @hidden Sets new select control text */
     private _setSelectViewValue(): void {
         this.selectViewValue = this.selected ? this.selected.viewValueText : this.placeholder;
+    }
+
+    private _setupMobileMode(): void {
+        if (this.mobile) {
+            this._dynamicComponentService.createDynamicComponent(
+                this.selectOptionsListTemplate,
+                SelectMobileComponent,
+                { container: this._elementRef.nativeElement },
+                { services: [this] }
+            )
+        }
     }
 }
