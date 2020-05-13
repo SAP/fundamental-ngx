@@ -167,6 +167,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     inShellbar: boolean = false;
 
+    /** Whether the combobox is readonly. */
+    @Input()
+    readOnly: boolean = false;
+
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
@@ -217,6 +221,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private programmaticFocusChange: boolean = false;
+
+    /** @hidden */
     onChange: any = () => {};
 
     /** @hidden */
@@ -264,6 +271,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             }
             event.preventDefault();
             if (this.listItems && this.listItems.first) {
+                this.programmaticFocusChange = true;
                 this.listItems.first.focus();
             }
         } else if (event.key === 'Escape') {
@@ -292,7 +300,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                     (!this.oldInputText || this.oldInputText !== this.inputText)) {
                 let foundCloseMatch = false;
                 this.displayedValues.forEach((displayedValue, i) => {
-                    if (this.displayFn(displayedValue).toLocaleLowerCase()
+                    if (this.searchInputElement.nativeElement.value === displayedValue) {
+                        setTimeout(() => {
+                            this.programmaticFocusChange = true;
+                            this.listItems.toArray()[i].focus();
+                        }, 50); // TODO: this ain't it
+                    } else if (this.displayFn(displayedValue).toLocaleLowerCase()
                             .startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
                         foundCloseMatch = true;
                         const selectionStartIndex = this.inputText.length;
@@ -402,13 +415,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.onTouched();
             if (isOpen && this._hasDisplayedValues()) {
                 this.focusTrap.activate();
-                this.displayedValues.forEach((displayedValue, i) => {
-                    if (this.inputText === displayedValue) {
-                        setTimeout(() => {
-                            this.listItems.toArray()[i].focus();
-                        }, 50); // TODO: this ain't it
-                    }
-                })
             } else {
                 this.focusTrap.deactivate();
             }
@@ -423,7 +429,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     focusLost(): void {
-        if (this.open) {
+        if (this.programmaticFocusChange) {
+            this.programmaticFocusChange = false;
+        } else if (this.open) {
             let foundMatch = false;
             this.displayedValues.forEach((value, i) => {
                 if (this.searchInputElement.nativeElement.value === this.displayFn(value)) {
@@ -448,7 +456,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         this._menuKeyboardService.itemClicked
             .pipe(takeUntil(this.onDestroy$))
             .subscribe((index) => this.onMenuClickHandler(index));
-        this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
+        this._menuKeyboardService.focusEscapeBeforeList = () => {
+            this.programmaticFocusChange = true;
+            this.searchInputElement.nativeElement.focus();
+        };
         this._menuKeyboardService.focusEscapeAfterList = () => {};
     }
 

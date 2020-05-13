@@ -3,7 +3,7 @@
     (isOpenChange)="isOpenChangeHandle($event)"
     [fillControlMode]="'at-least'"
     [triggers]="triggers"
-    [disabled]="disabled"
+    [disabled]="disabled || readOnly"
     [closeOnOutsideClick]="closeOnOutsideClick"
     class="fd-combobox-popover-custom"
 >
@@ -16,9 +16,10 @@
             [inShellbar]="inShellbar"
             (addOnButtonClicked)="onPrimaryButtonClick()"
             [buttonFocusable]="buttonFocusable"
-            [disabled]="disabled"
+            [disabled]="disabled || readOnly"
             [isControl]="true"
-            [isExpanded]="open"
+            [isExpanded]="open && displayedValues.length"
+            [attr.aria-readonly]="readOnly"
         >
             <input
                 #searchInputElement
@@ -33,7 +34,9 @@
                 [placeholder]="placeholder"
                 (blur)="focusLost()"
                 (focus)="onTouched()"
-                [attr.aria-expanded]="open"
+                [attr.aria-expanded]="open && displayedValues.length"
+                [readonly]="readOnly"
+                [attr.aria-readonly]="readOnly"
             />
         </fd-input-group>
     </fd-popover-control>
