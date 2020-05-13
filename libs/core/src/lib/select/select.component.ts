@@ -27,7 +27,7 @@ import focusTrap, { FocusTrap } from 'focus-trap';
 import { KeyUtil } from '../utils/functions/key-util';
 import { SelectProxy } from './select-proxy.service';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
-import { DynamicComponentService } from '../..';
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { SelectMobileComponent } from './select-mobile/select-mobile/select-mobile.component';
 
 let selectUniqueId: number = 0;

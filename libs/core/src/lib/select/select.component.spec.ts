@@ -4,7 +4,7 @@ import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { OptionComponent } from './option/option.component';
-import { DynamicComponentService } from '@fundamental-ngx/core';
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 
 @Component({
     template: `

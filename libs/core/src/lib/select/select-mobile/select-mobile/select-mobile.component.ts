@@ -8,7 +8,9 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { DialogRef, DialogService, SelectComponent } from '@fundamental-ngx/core';
+import { DialogRef } from '../../../dialog/dialog-utils/dialog-ref.class';
+import { DialogService } from '../../../dialog/dialog-service/dialog.service';
+import { SelectComponent } from '../../select.component';
 import { Subscription } from 'rxjs';
 
 @Component({
