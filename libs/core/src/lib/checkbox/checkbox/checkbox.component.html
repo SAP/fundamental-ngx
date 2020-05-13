@@ -3,6 +3,7 @@
     type="checkbox"
     class="fd-checkbox"
     [id]="inputId"
+    [required]="required"
     [name]="name"
     [disabled]="disabled"
     [indeterminate]="isIndeterminate"
@@ -19,8 +20,10 @@
     [class.fd-checkbox__label--compact]="compact"
     [for]="inputId"
 >
-    {{ label }}
-    <ng-container *ngIf="!label">
-        <ng-content></ng-content>
-    </ng-container>
+    <span fd-form-label [required]="required">
+        {{ label }}
+        <ng-container *ngIf="!label">
+            <ng-content></ng-content>
+        </ng-container>
+    </span>
 </label>

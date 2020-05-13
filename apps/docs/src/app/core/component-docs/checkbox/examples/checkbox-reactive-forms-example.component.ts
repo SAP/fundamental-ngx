@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
                 label="Accept all"
             ></fd-checkbox>
             <fieldset formGroupName="agreements">
-                <fd-checkbox formControlName="termsAndConditions" label="I accept Terms and Conditions"></fd-checkbox>
+                <fd-checkbox formControlName="termsAndConditions" [required]="true" label="I accept Terms and Conditions"></fd-checkbox>
                 <fd-checkbox formControlName="marketing" label="I want to receive Marketing Materials"></fd-checkbox>
                 <fd-checkbox formControlName="newsletter" label="I want want to sign for a Newsletter"></fd-checkbox>
             </fieldset>
@@ -30,7 +30,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
         agreements: new FormGroup({
             marketing: new FormControl(false),
             newsletter: new FormControl(false),
-            termsAndConditions: new FormControl(false)
+            termsAndConditions: new FormControl(false, Validators.required)
         })
     });
 

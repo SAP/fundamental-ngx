@@ -1,1 +1,8 @@
 @import '~fundamental-styles/dist/checkbox';
+
+.fd-checkbox__label {
+    .fd-form-label {
+        margin: 0;
+        cursor: pointer;
+    }
+}

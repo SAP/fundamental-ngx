@@ -62,6 +62,10 @@ export class CheckboxComponent implements ControlValueAccessor {
     @Input()
     tristate: boolean;
 
+    /** Required state */
+    @Input()
+    required: boolean;
+
     /** Allows to prevent user from manually selecting controls third state. */
     @Input()
     tristateSelectable: boolean = true;
