@@ -13,7 +13,8 @@ import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuLinkDirective } from '../directives/menu-link.directive';
 import { SubMenuComponent } from '../../..';
 import { MenuService } from '../services/menu.service';
-import { Subscription } from 'rxjs';
+import { defer, fromEvent, Subscription, timer } from 'rxjs';
+import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
 
 let menuUniqueId: number = 0;
 
@@ -25,9 +26,6 @@ let menuUniqueId: number = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-menu__item]': 'true',
-        '[attr.aria-controls]': 'itemId',
-        '[attr.aria-haspopup]': 'hasPopup',
-        '[attr.aria-expanded]': 'subLevelVisible'
     }
 })
 export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnDestroy {
@@ -60,7 +58,9 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
     }
 
     ngAfterContentInit() {
-        this._listenOnMenuLinkState();
+        this._initialiseLinkState();
+        this._listenOnMenuLinkClick();
+        this._listenOnMenuLinkHover();
     }
 
     ngOnDestroy() {
@@ -75,31 +75,66 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
     focus(): void {
         if (this.menuLink) {
             this.menuLink.elementRef.nativeElement.focus();
+            this._changeDetectorRef.markForCheck();
         }
     }
 
     click(): void {
         if (this.menuLink) {
             this.menuLink.elementRef.nativeElement.click();
+            this._changeDetectorRef.markForCheck();
         }
     }
 
-    open() {
+    open(): void {
         this.menuLink.setSelected(true);
         this.subLevelVisible = true;
         this._changeDetectorRef.markForCheck();
     }
 
-    close() {
+    close(): void {
         this.menuLink.setSelected(false);
         this.subLevelVisible = false;
         this._changeDetectorRef.markForCheck();
     }
 
-    private _listenOnMenuLinkState(): void {
+    setSelected(isSelected: boolean): void {
+        this.menuLink.setSelected(isSelected);
+        this._changeDetectorRef.markForCheck();
+    }
+
+    private _listenOnMenuLinkClick(): void {
         this._subscriptions.add(
-            this.menuLink.selectionChange
-                .subscribe(isSelected => this._menuService.setActive(isSelected, this))
+            fromEvent(this.menuLink.elementRef.nativeElement, 'click')
+                .subscribe(() => this._menuService.setActive(this))
         )
+    }
+
+    private _listenOnMenuLinkHover(): void {
+        const mouseEnter$ = fromEvent(this.menuLink.elementRef.nativeElement, 'mouseenter');
+        const mouseLeave$ = fromEvent(this.menuLink.elementRef.nativeElement, 'mouseleave');
+
+        // Set focus on hover
+        this._subscriptions.add(
+            mouseEnter$.subscribe(() => this._menuService.setFocused(this))
+        );
+
+        const timerFactory$ = defer(() => {
+            return timer(this._menuService.menu.openOnHoverTime).pipe(takeUntil(mouseLeave$))
+        });
+
+        const timeTrigger$ = mouseEnter$.pipe(switchMap(() => timerFactory$));
+
+        // Set active on long hover
+        this._subscriptions.add(
+            mouseEnter$.pipe(
+                sample(timeTrigger$)
+            ).subscribe(() => this._menuService.setActive(this))
+        );
+    }
+
+    private _initialiseLinkState(): void {
+        this.menuLink.setSubmenu(!!this.subMenu, this.itemId);
+        // this.menuLink.setDisabled(disabled)
     }
 }

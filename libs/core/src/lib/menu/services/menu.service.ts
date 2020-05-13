@@ -1,6 +1,7 @@
 import { Injectable, Renderer2 } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
+import { KeyUtil, MenuKeyboardService } from '@fundamental-ngx/core';
 
 interface MenuNode {
     item: MenuItemComponent;
@@ -13,38 +14,57 @@ type MenuMap = Map<MenuItemComponent, MenuNode>
 @Injectable()
 export class MenuService {
     menuMap: MenuMap;
+    focusedNode: MenuNode;
     activeNodePath: MenuNode[] = [];
 
     private _menu: MenuComponent;
+    private _keyboardHandlerListener: () => void;
     private _destroyOutsideClickListener: () => void;
 
-    constructor(private _renderer: Renderer2) {}
+    constructor(private _renderer: Renderer2,
+                private _menuKeyboardService: MenuKeyboardService) {}
 
     get menu(): MenuComponent {
         return this._menu;
     }
 
-    setActive(isActive: boolean, menuItem: MenuItemComponent): void {
-        if (isActive) {
-            this._addToActivePath(menuItem);
-        } else {
-            this._removeFromActivePath(menuItem);
+    setFocused(menuItem: MenuItemComponent): void {
+        this.focusedNode = this.menuMap.get(menuItem);
+        this.focusedNode.item.focus();
+    }
+
+    setActive(menuItem: MenuItemComponent): void {
+        this._addToActivePath(menuItem);
+    }
+
+    setMenuRoot(menu: MenuComponent, keyboardSupport: boolean = true): void {
+        this._menu = menu;
+        this.menuMap = this._buildMenuMap(this._menu);
+
+        if (keyboardSupport) {
+            this._setKeyboardSupport();
         }
     }
 
-    setMenuRoot(menu: MenuComponent): void {
-        this._menu = menu;
-        this.menuMap = this._buildMenuMap(this._menu);
+    private _nodeSiblings(node: MenuNode): MenuNode[] {
+        return node.parent
+            ? this.focusedNode.parent.children
+            : this.menuMap.get(null).children;
+    }
+
+    private _nodeListIndex(node: MenuNode): number {
+        return this._nodeSiblings(node).indexOf(node);
     }
 
     private _addToActivePath(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
         this._removeActiveSibling(menuItem);
         this.activeNodePath.push(menuNode);
+        menuNode.item.setSelected(true);
         menuNode.item.open();
 
         if (this.activeNodePath.length === 1) {
-            this._addListenerForOutsideClick();
+            this._listenOnOutsideClick();
         }
     }
 
@@ -95,7 +115,7 @@ export class MenuService {
         return toMap(menuTree);
     }
 
-    private _addListenerForOutsideClick(): void {
+    private _listenOnOutsideClick(): void {
         this._destroyOutsideClickListener = this._renderer.listen('document', 'click', (event: MouseEvent) => {
                 const isOutsideClick = !this.activeNodePath[this.activeNodePath.length - 1].item.elementRef.nativeElement
                     .contains(event.target);
@@ -118,5 +138,47 @@ export class MenuService {
                 : this.activeNodePath[0].item
             );
         }
+    }
+
+    private _setKeyboardSupport(): void {
+        this._keyboardHandlerListener = this._renderer.listen(
+            this.menu.elementRef.nativeElement,
+            'keydown',
+            (event: KeyboardEvent) => {
+                let matched = true;
+
+                if (KeyUtil.isKey(event, 'ArrowRight')) {
+                    if (this.focusedNode.children.length) {
+                        this.setActive(this.focusedNode.item);
+                        setTimeout(() => this.setFocused(this.focusedNode.children[0].item));
+                    }
+                } else if (KeyUtil.isKey(event, 'ArrowLeft')) {
+                    if (this.focusedNode.parent) {
+                        this._removeFromActivePath(this.focusedNode.parent.item);
+                        this.setFocused(this.focusedNode.parent.item);
+                    }
+                } else if (KeyUtil.isKey(event, 'ArrowDown')) {
+                    const index = this._nodeListIndex(this.focusedNode);
+                    const siblings = this._nodeSiblings(this.focusedNode);
+                    if (index < siblings.length - 1) {
+                        this.setFocused(siblings[index + 1].item);
+                    }
+                } else if (KeyUtil.isKey(event, 'ArrowUp')) {
+                    const index = this._nodeListIndex(this.focusedNode);
+                    const siblings = this._nodeSiblings(this.focusedNode);
+                    if (index > 0) {
+                        this.setFocused(siblings[index - 1].item);
+                    }
+                } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+                    this.setActive(this.focusedNode.item);
+                } else {
+                    matched = false;
+                }
+
+                if (matched) {
+                    event.preventDefault();
+                }
+            }
+        );
     }
 }

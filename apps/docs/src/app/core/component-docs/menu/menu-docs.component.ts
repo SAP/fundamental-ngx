@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 import * as menuSrc from '!raw-loader!./examples/menu-example.component.html';
 import * as menuAddon from '!raw-loader!./examples/menu-addon-example.component.html';
 import * as menuAddonTsCode from '!raw-loader!./examples/menu-addon-examples.component.ts';
-import * as menuKeyboardSrcH from '!raw-loader!./examples/menu-keyboard-support-example.component.html';
-import * as menuKeyboardSrcT from '!raw-loader!./examples/menu-keyboard-support-example.component.ts';
 import * as menuSeparatorSrc from '!raw-loader!./examples/menu-separator-example.component.html';
 import * as menuMobileSrc from '!raw-loader!./examples/menu-mobile-example.component.html';
 import * as menuWithSubmenuSrc from '!raw-loader!./examples/menu-with-submenu-example.component.html';
@@ -30,20 +28,6 @@ export class MenuDocsComponent {
             fileName: 'menu-addon-example',
             typescriptFileCode: menuAddonTsCode,
             component: 'MenuExampleComponent'
-        }
-    ];
-
-    menuKeyboard: ExampleFile[] = [
-        {
-            language: 'html',
-            code: menuKeyboardSrcH,
-            fileName: 'menu-keyboard-support-example'
-        },
-        {
-            language: 'typescript',
-            code: menuKeyboardSrcT,
-            fileName: 'menu-keyboard-support-example',
-            component: 'MenuKeyboardSupportExampleComponent'
         }
     ];
 

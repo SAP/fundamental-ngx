@@ -5,7 +5,6 @@ import {
     Component,
     ContentChildren,
     ElementRef,
-    HostListener,
     Input,
     OnInit,
     QueryList,
@@ -53,6 +52,10 @@ export class MenuComponent implements OnInit, AfterContentInit {
     @Input()
     dialogConfig: DialogConfig;
 
+    /** Custom config used to open the Dialog */
+    @Input()
+    openOnHoverTime: number = 0;
+
     /** @hidden */
     @ViewChild('menuTemplate')
     menuTemplate: TemplateRef<any>;
@@ -66,41 +69,7 @@ export class MenuComponent implements OnInit, AfterContentInit {
     /** @hidden */
     private _subMenuTemplates: DialogContent[] = [];
 
-    @HostListener('keydown', ['$event'])
-    keydownHandler(event: KeyboardEvent): void {
-        switch (event.code || event.keyCode) {
-            case 'ArrowUp':
-            case 38: {
-                this._focus('previous');
-                event.preventDefault();
-                break;
-            }
-            case 'ArrowDown':
-            case 40: {
-                this._focus('next');
-                event.preventDefault();
-                break;
-            }
-            case 'ArrowRight':
-            case 39: {
-                this._focus('childList');
-                event.preventDefault();
-                break;
-            }
-            case 'ArrowLeft':
-            case 37: {
-                this._focus('parentList');
-                event.preventDefault();
-                break;
-            }
-            case 'Space':
-            case 32: {
-                break;
-            }
-        }
-    }
-
-    constructor(private _elementRef: ElementRef,
+    constructor(public elementRef: ElementRef,
                 private _menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
                 private _menuKeyboardService: MenuKeyboardService) {}
@@ -144,34 +113,5 @@ export class MenuComponent implements OnInit, AfterContentInit {
                 ? this.dialogContent.title
                 : this.mainMenuTitle
         );
-    }
-
-    private _focus(direction: 'next' | 'previous' | 'parentList' | 'childList'): void {
-        let activeIndex: number;
-        let menuItemsArray: MenuItemComponent[];
-        const findActiveIndex = (items: MenuItemComponent[], activeOption: Element): number => items
-            .map(item => item.menuLink.elementRef.nativeElement)
-            .indexOf(activeOption);
-
-        switch (direction) {
-            case 'next':
-                menuItemsArray = this.menuItems.toArray();
-                activeIndex = findActiveIndex(menuItemsArray, document.activeElement);
-                if (activeIndex < this.menuItems.length - 1) {
-                    menuItemsArray[++activeIndex].focus();
-                }
-                break;
-            case 'previous':
-                menuItemsArray = this.menuItems.toArray();
-                activeIndex = findActiveIndex(this.menuItems.toArray(), document.activeElement);
-                if (activeIndex > 0) {
-                    menuItemsArray[--activeIndex].focus();
-                }
-                break;
-            case 'parentList':
-                break;
-            case 'childList':
-                break;
-        }
     }
 }

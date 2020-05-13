@@ -1,54 +1,56 @@
-import {
-    Directive,
-    ElementRef,
-    EventEmitter,
-    HostBinding,
-    HostListener,
-    Input,
-    Output
-} from '@angular/core';
+import { Directive, ElementRef, HostBinding } from '@angular/core';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-menu-link]',
     host: {
-        '[tabindex]': 'disabled ? -1 : 0'
+        role: 'menuitem'
     }
 })
 export class MenuLinkDirective {
 
     /** Mark as disabled */
-    @Input()
+    @HostBinding('attr.tabindex')
+    focusable: number = 0;
+
+    /** Mark as disabled */
     @HostBinding('class.is-disabled')
     disabled: boolean = false;
 
-    /** Mark as selected */
-    @Input()
+    /** Mark as disabled */
+    @HostBinding('attr.aria-controls')
+    itemId: string = null;
+
+    /** Mark as disabled */
     @HostBinding('class.is-selected')
+    @HostBinding('attr.aria-expanded')
     selected: boolean = false;
 
-    @Output()
-    selectionChange = new EventEmitter<boolean>();
-
-    /** @hidden Whether menu item has currently open sub menu */
-    @HostBinding('class.has-child')
-    fdHasChildClass: boolean = false;
+    /** Mark as disabled */
+    @HostBinding('attr.aria-haspopup')
+    hasSubmenu: boolean = false;
 
     /** @hidden */
     @HostBinding('class.fd-menu__link')
     readonly fdMenuLinkClass: boolean = true;
 
-    /** @hidden Update sub menu visibility */
-    @HostListener('click')
-    onClick() {
-        this.setSelected(!this.selected);
-        this.selectionChange.emit(this.selected);
-    };
-
     /** @hidden */
     constructor(public elementRef: ElementRef) { }
 
+    /** @hidden */
     setSelected(isSelected: boolean): void {
-        this.selected = isSelected;
+        this.selected = isSelected && this.hasSubmenu;
+    }
+
+    /** @hidden */
+    setDisabled(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this.focusable = isDisabled ? -1 : 0;
+    }
+
+    /** @hidden */
+    setSubmenu(hasSubmenu: boolean, itemId?: string): void {
+        this.hasSubmenu = hasSubmenu;
+        this.itemId = itemId || this.itemId;
     }
 }

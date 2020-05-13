@@ -2,6 +2,7 @@
 
 <ng-container *ngIf="hasPopup">
     <ul class="fd-menu__sublist"
+        role="menu"
         [attr.id]="itemId"
         [attr.aria-hidden]="!subLevelVisible">
         <ng-container *ngTemplateOutlet="subMenu?.templateRef"></ng-container>

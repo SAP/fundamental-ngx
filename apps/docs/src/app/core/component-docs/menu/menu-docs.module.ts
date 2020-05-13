@@ -12,7 +12,6 @@ import {
     MenuWithSubmenuExampleComponent
 } from './examples/menu-examples.component';
 import { MenuAddonExampleComponent } from './examples/menu-addon-examples.component';
-import { MenuKeyboardSupportExampleComponent } from './examples/menu-keyboard-support-example.component';
 import { DialogModule, MenuModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -36,8 +35,7 @@ const routes: Routes = [
         MenuAddonExampleComponent,
         MenuMobileExampleComponent,
         MenuSeparatorExampleComponent,
-        MenuWithSubmenuExampleComponent,
-        MenuKeyboardSupportExampleComponent
+        MenuWithSubmenuExampleComponent
     ]
 })
 export class MenuDocsModule {}
