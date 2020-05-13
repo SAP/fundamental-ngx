@@ -103,6 +103,8 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     private _getTitle(): string {
         if (this.contentDirective && this.contentDirective.nestedLink) {
             return this.contentDirective.nestedLink.getTitle();
+        } else {
+            return '';
         }
     }
 

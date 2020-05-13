@@ -49,9 +49,8 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     public get allChildrenItems(): NestedItemInterface[] {
         if (this._itemService && this._itemService.list) {
             return this._itemService.list.nestedItems.toArray()
-        } else {
-            return [];
         }
+        return [];
     }
 
     /** @hidden */
@@ -176,10 +175,15 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
          * If there are any list below
          * Trigger event to provide keyboard support to new list of opened item element.
          * */
-        if (this._itemService.popover || this._itemService.list || this.contentItem) {
+        if (this._shouldRefreshKeyboardService()) {
             this._keyboardService.refresh$.next();
         }
 
         this.expandedChange.emit(open);
+    }
+
+    /** @hidden */
+    private _shouldRefreshKeyboardService(): boolean {
+        return !!(this._itemService.popover || this._itemService.list || this.contentItem);
     }
 }
