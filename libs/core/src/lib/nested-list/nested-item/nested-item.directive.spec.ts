@@ -73,7 +73,7 @@ class TestNestedContainerComponent {
     linkDirective: NestedLinkDirective;
 }
 
-fdescribe('NestedItemDirective', () => {
+describe('NestedItemDirective', () => {
     let component: TestNestedContainerComponent;
     let nestedItemPopoverDirective: NestedItemDirective;
     let nestedItemListDirective: NestedItemDirective;

@@ -95,7 +95,7 @@ class TestNestedContainerComponent {
 
 }
 
-fdescribe('SideNavigationComponent', () => {
+describe('SideNavigationComponent', () => {
     let component: TestNestedContainerComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
