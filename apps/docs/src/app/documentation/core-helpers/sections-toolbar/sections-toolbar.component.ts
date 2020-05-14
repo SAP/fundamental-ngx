@@ -10,21 +10,7 @@ export class SectionsToolbarComponent implements OnInit {
     @Input() sections: SectionInterface[];
 
     search: string = '';
-    themes = [{
-        id: 'sap_fiori_3',
-        name: 'Fiori 3'
-    }, {
-        id: 'sap_fiori_3_dark',
-        name: 'Fiori 3 Dark'
-    }, {
-        id: 'sap_fiori_3_hcb',
-        name: 'High Contrast Black'
-    }, {
-        id: 'sap_fiori_3_hcw',
-        name: 'High Contrast White'
-    }];
 
-    selectedTheme: string;
     smallScreen: boolean = window.innerWidth < 992;
 
     @Input()
@@ -35,7 +21,6 @@ export class SectionsToolbarComponent implements OnInit {
 
     ngOnInit(): void {
         this.onActivate();
-        this.selectedTheme = this.themes[0].id;
     }
 
     onKeypressHandler(event: KeyboardEvent) {
@@ -69,8 +54,4 @@ export class SectionsToolbarComponent implements OnInit {
         this.windowSize();
     }
 
-    selectTheme() {
-        const cssLink: any = document.getElementById('themes');
-        cssLink.href = 'assets/' + this.selectedTheme + '.css';
-    }
 }

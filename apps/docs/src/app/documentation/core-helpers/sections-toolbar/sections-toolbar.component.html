@@ -1,20 +1,14 @@
-<div class="sidebar"
-     [ngClass]="{ 'sidebar-collapsed': sideCollapsed }">
+<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed }">
     <div class="fd-docs-search">
-        <fd-select placeholder="Select a theme"
-                   [(value)]="selectedTheme"
-                   (valueChange)="selectTheme()"
-                   class="section-toolbar--theme-selector">
-            <fd-option *ngFor="let theme of themes"
-                       [value]="theme.id">{{ theme.name }}</fd-option>
-        </fd-select>
-        <fd-input-group [disabled]="false"
-                        [(ngModel)]="search"
-                        [glyph]="'decline'"
-                        [button]="true"
-                        [buttonType]="'transparent'"
-                        [placeholder]="'Search'"
-                        (addOnButtonClicked)="search = ''">
+        <fd-input-group
+            [disabled]="false"
+            [(ngModel)]="search"
+            [glyph]="'decline'"
+            [button]="true"
+            [buttonType]="'transparent'"
+            [placeholder]="'Search'"
+            (addOnButtonClicked)="search = ''"
+        >
         </fd-input-group>
     </div>
     <div class="fd-docs-sidebar-content">
@@ -24,12 +18,14 @@
                 <ng-container *ngFor="let item of section.content">
                     <li *ngIf="item.url === 'home' || (item | docsSearch: search)">
                         <div class="nav-item-container">
-                            <a class="nav-item"
-                               [routerLink]="'/' + item.url"
-                               (keypress)="onKeypressHandler($event)"
-                               tabindex="0"
-                               role="button"
-                               routerLinkActive="nav-item--active">
+                            <a
+                                class="nav-item"
+                                [routerLink]="'/' + item.url"
+                                (keypress)="onKeypressHandler($event)"
+                                tabindex="0"
+                                role="button"
+                                routerLinkActive="nav-item--active"
+                            >
                                 {{ item.name }}
                             </a>
                         </div>
