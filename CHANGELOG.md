@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.0-rc.17"></a>
+# [0.18.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.16...v0.18.0-rc.17) (2020-05-14)
+
+
+### Bug Fixes
+
+* Add default behaviour to checkbox ([#2509](https://github.com/SAP/fundamental-ngx/issues/2509)) ([6e45179](https://github.com/SAP/fundamental-ngx/commit/6e45179))
+
+
+
 <a name="0.18.0-rc.16"></a>
 # [0.18.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.15...v0.18.0-rc.16) (2020-05-14)
 
