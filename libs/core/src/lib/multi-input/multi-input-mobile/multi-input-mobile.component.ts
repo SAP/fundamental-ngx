@@ -145,6 +145,7 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit {
             {
                 ...this._multiInputComponent.dialogConfig,
                 backdropClickCloseable: false,
+                escKeyCloseable: false,
                 container: this._elementRef.nativeElement
             }
         );
