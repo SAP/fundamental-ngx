@@ -163,6 +163,10 @@ export class CheckboxComponent implements ControlValueAccessor {
                 this.checkboxValue = this.values.trueValue;
                 this.inputLabel.nativeElement.checked = true;
                 break;
+            default:
+                this.checkboxValue = ( this.tristate && this.tristateSelectable)  ?
+                    this.values.thirdStateValue : this.values.trueValue;
+                break;
         }
 
         this._setState();
