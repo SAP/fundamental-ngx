@@ -12,6 +12,7 @@ import {
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     QueryList,
     TemplateRef,
@@ -249,7 +250,7 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
         private _elementRef: ElementRef,
         private _selectProxy: SelectProxy,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _dynamicComponentService: DynamicComponentService
+        @Optional() private _dynamicComponentService: DynamicComponentService
     ) { }
 
     /** @hidden */

@@ -19,10 +19,16 @@ import { Subscription } from 'rxjs';
 })
 export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
 
+    /** @hidden Dialog template reference */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
+    /** @hidden */
     dialogRef: DialogRef;
+
+    /** @hidden */
     childContent: TemplateRef<any> = undefined;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     constructor(
@@ -31,25 +37,30 @@ export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
         @Optional() private _selectComponent: SelectComponent
     ) { }
 
+    /** @hidden */
     ngOnInit() {
         this._listenOnSelectOpenChange();
     }
 
+    /** @hidden */
     ngAfterViewInit() {
         this._openDialog();
         this.dialogRef.hide(true);
     }
 
+    /** @hidden */
     ngOnDestroy() {
         this.dialogRef.close();
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden */
     close(): void {
         this._selectComponent.close();
         this.dialogRef.hide(true);
     }
 
+    /** @hidden */
     toggleDialog(isOpen: boolean): void {
         if (isOpen) {
             this.dialogRef.hide(false);
@@ -58,6 +69,7 @@ export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
+    /** @hidden */
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
@@ -69,6 +81,7 @@ export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
+    /** @hidden Bing select open change with opening/closing the Dialog*/
     private _listenOnSelectOpenChange(): void {
         this._subscriptions.add(
             this._selectComponent.isOpenChange
