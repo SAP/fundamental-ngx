@@ -33,27 +33,23 @@
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <fd-dialog-footer-button>
-                <button
-                    *ngIf="multiInputConfig?.approveButton"
-                    fd-button
-                    fdType="emphasized"
-                    fd-dialog-decisive-button
-                    [compact]="true"
-                    (click)="handleApprove()"
+            <fd-dialog-footer-button *ngIf="multiInputConfig?.approveButton">
+                <button fd-button
+                        fdType="emphasized"
+                        fd-dialog-decisive-button
+                        [compact]="true"
+                        (click)="handleApprove()"
                 >
                     {{multiInputConfig?.approveButton}}
                 </button>
             </fd-dialog-footer-button>
 
-            <fd-dialog-footer-button>
-                <button
-                    *ngIf="multiInputConfig?.cancelButton"
-                    fd-button
-                    fdType="transparent"
-                    fd-dialog-decisive-button
-                    [compact]="true"
-                    (click)="handleDismiss()"
+            <fd-dialog-footer-button *ngIf="multiInputConfig?.cancelButton">
+                <button fd-button
+                        fdType="transparent"
+                        fd-dialog-decisive-button
+                        [compact]="true"
+                        (click)="handleDismiss()"
                 >
                     {{multiInputConfig?.cancelButton}}
                 </button>

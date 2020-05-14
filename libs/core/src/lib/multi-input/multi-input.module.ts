@@ -11,8 +11,6 @@ import { FormModule } from '../form/form.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
 import { LinkModule } from '../link/link.module';
-import { BarModule } from '../bar/bar.module';
-import { ButtonModule } from '../button/button.module';
 
 @NgModule({
     declarations: [MultiInputComponent],
@@ -28,8 +26,6 @@ import { ButtonModule } from '../button/button.module';
         FormModule,
         CheckboxModule,
         LinkModule,
-        BarModule,
-        ButtonModule
     ],
     exports: [MultiInputComponent]
 })

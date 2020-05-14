@@ -35,7 +35,5 @@ export class MultiInputMobileExampleComponent {
     secondConfig: MultiInputMobileConfiguration = {
         title: 'Title 2',
         approveButton: 'Approve Button'
-    }
-
-    first = customMobileModeConfig;
+    };
 }

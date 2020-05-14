@@ -138,6 +138,7 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit {
         ;
     }
 
+    /** @hidden */
     private _open(): void {
         this._dialogRef = this.dialogService.open(
             this.dialogTemplate,
