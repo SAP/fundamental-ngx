@@ -271,8 +271,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             }
             event.preventDefault();
             if (this.listItems && this.listItems.first) {
-                this.programmaticFocusChange = true;
-                this.listItems.first.focus();
+                this._focusListItem(this.listItems.first);
             }
         } else if (event.key === 'Escape') {
             this.focusLost();
@@ -296,34 +295,32 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             event.key !== 'Shift'
         ) {
             this.isOpenChangeHandle(true);
-            if (this.open && this._hasDisplayedValues() &&
+            // If there are displayed values and the input text has changed since this function was last ran
+            if (this._hasDisplayedValues() &&
                     (!this.oldInputText || this.oldInputText !== this.inputText)) {
                 let foundCloseMatch = false;
                 this.displayedValues.forEach((displayedValue, i) => {
-                    if (this.searchInputElement.nativeElement.value === displayedValue) {
-                        setTimeout(() => {
-                            this.programmaticFocusChange = true;
-                            this.listItems.toArray()[i].focus();
-                        }, 50); // TODO: this ain't it
+                    // Try to find an exact match. If one is found, focus it. Otherwise, check if a displayedValue starts with input value
+                    if (this.searchInputElement.nativeElement.value === this.displayFn(displayedValue)) {
+                        this._focusListItem(this.listItems.toArray()[i])
                     } else if (this.displayFn(displayedValue).toLocaleLowerCase()
                             .startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
                         foundCloseMatch = true;
-                        const selectionStartIndex = this.inputText.length;
                         if (event.key !== 'Backspace' && event.key !== 'Delete') {
-                            this.searchInputElement.nativeElement.value = this.displayFn(displayedValue);
+                            this._autocomplete(displayedValue);
                         }
-                        this.searchInputElement.nativeElement.setSelectionRange(selectionStartIndex, this.displayFn(displayedValue).length);
                     }
                 });
             }
-        } else if (event.key === 'Enter' && this.open && this._hasDisplayedValues()) {
+        } else if (event.key === 'Enter' && this._hasDisplayedValues()) {
+            // If the user presses enter and there are displayed values, select the value that matches the input
             this.displayedValues.forEach((value, i) => {
-                if (value === this.searchInputElement.nativeElement.value) {
+                if (this.displayFn(value) === this.searchInputElement.nativeElement.value) {
                     this.onMenuClickHandler(i);
                 }
             });
             this.isOpenChangeHandle(false);
-            this._setCaretToLastChar();
+            this._setCursorToLastChar();
         }
         this.selectedTermSubject$.next(this.searchInputElement.nativeElement.value);
         this.oldInputText = this.inputText;
@@ -413,7 +410,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.open = isOpen;
             this.openChange.emit(this.open);
             this.onTouched();
-            if (isOpen && this._hasDisplayedValues()) {
+            if (this._hasDisplayedValues()) {
                 this.focusTrap.activate();
             } else {
                 this.focusTrap.deactivate();
@@ -437,7 +434,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                 if (this.searchInputElement.nativeElement.value === this.displayFn(value)) {
                     this.onMenuClickHandler(i);
                     foundMatch = true;
-                    this._setCaretToLastChar();
+                    this._setCursorToLastChar();
                 }
             });
             if (!foundMatch) {
@@ -526,11 +523,23 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     private _hasDisplayedValues(): boolean {
-        return this.displayedValues && this.displayedValues.length > 0;
+        return this.open && this.displayedValues && this.displayedValues.length > 0;
     }
 
-    private _setCaretToLastChar(): void {
+    private _setCursorToLastChar(): void {
         const inputValueLength = this.searchInputElement.nativeElement.value.length;
         this.searchInputElement.nativeElement.setSelectionRange(inputValueLength, inputValueLength);
+    }
+
+    private _focusListItem(item: ListItemDirective): void {
+        this.programmaticFocusChange = true;
+        item.focus();
+    }
+
+    private _autocomplete(displayedValue: string): void {
+        this.searchInputElement.nativeElement.value = this.displayFn(displayedValue);
+        const selectionStartIndex = this.inputText.length;
+        this.searchInputElement.nativeElement.setSelectionRange(selectionStartIndex,
+            this.displayFn(displayedValue).length);
     }
 }
