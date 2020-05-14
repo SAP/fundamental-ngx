@@ -6,8 +6,9 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { BusyIndicatorHeaderComponent } from './busy-indicator-header/busy-indicator-header.component';
 import { BusyIndicatorDocsComponent } from './busy-indicator-docs.component';
 import { BusyIndicatorBasicExampleComponent } from './examples/busy-indicator-basic-example.component';
-import { BusyIndicatorToggleExampleComponent } from './examples/busy-indicator-toggle-example.component';
+import { BusyIndicatorWrapperExampleComponent } from './examples/busy-indicator-wrapper-example.component';
 import { BusyIndicatorModule } from '@fundamental-ngx/core';
+import { BusyIndicatorSizeExampleComponent } from './examples/busy-indicator-size-example.component';
 
 const routes: Routes = [
     {
@@ -26,8 +27,9 @@ const routes: Routes = [
     declarations: [
         BusyIndicatorDocsComponent,
         BusyIndicatorHeaderComponent,
+        BusyIndicatorSizeExampleComponent,
         BusyIndicatorBasicExampleComponent,
-        BusyIndicatorToggleExampleComponent
+        BusyIndicatorWrapperExampleComponent
     ]
 })
 export class BusyIndicatorDocsModule {}
