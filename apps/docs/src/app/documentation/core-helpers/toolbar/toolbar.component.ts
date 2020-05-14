@@ -5,14 +5,13 @@ import {
     EventEmitter,
     Inject,
     Output,
-    OnInit,
-    ViewEncapsulation
+    OnInit
 } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
 import { ShellbarMenuItem, ShellbarUser, ShellbarUserMenu, MenuKeyboardService } from '@fundamental-ngx/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-docs-toolbar',
@@ -21,7 +20,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     providers: [MenuKeyboardService]
 })
 export class ToolbarComponent implements OnInit {
-    cssUrl: string;
+    cssUrl: SafeResourceUrl;
 
     items: ShellbarMenuItem[] = [
         {
@@ -37,6 +36,8 @@ export class ToolbarComponent implements OnInit {
             }
         }
     ];
+
+    themeUrl: string;
 
     isOpen: boolean = false;
 
@@ -71,7 +72,7 @@ export class ToolbarComponent implements OnInit {
     public library: string;
 
     ngOnInit(): void {
-        this.cssUrl = 'assets/sap_fiori_3.css';
+        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/sap_fiori_3.css');
     }
 
     constructor(
@@ -84,11 +85,9 @@ export class ToolbarComponent implements OnInit {
     }
 
     selectTheme(selectedTheme: string) {
-        this.isOpen = false;
-        this.cssUrl = 'assets/' + selectedTheme + '.css';
-    }
-
-    getCSSUrl() {
-        return this.sanitizer.bypassSecurityTrustResourceUrl(this.cssUrl);
+        if (this.isOpen) {
+            this.isOpen = false;
+            this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/' + selectedTheme + '.css');
+        }
     }
 }
