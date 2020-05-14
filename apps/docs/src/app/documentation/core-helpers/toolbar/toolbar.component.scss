@@ -53,6 +53,10 @@
     margin: 0 0.5rem;
     color: #fff;
     color: var(--sapShell_TextColor);
+    &:hover {
+        color: #fff;
+        color: var(--sapShell_TextColor);
+    }
 }
 
 .logo-github {
