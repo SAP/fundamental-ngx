@@ -49,6 +49,7 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit {
         private _elementRef: ElementRef
     ) {}
 
+    /** @hidden */
     ngOnInit(): void {
         this.multiInputConfig = this.getMultiInputConfig();
         if (this.multiInputConfig) {
@@ -56,6 +57,7 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit {
         }
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         if (!this.dialogService && isDevMode()) {
             throw new Error('There is no dialog service provided. Multi input can\'t be opened');

@@ -10,6 +10,7 @@ import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -28,6 +29,9 @@ describe('MultiInputComponent', () => {
                 PipeModule,
                 CheckboxModule,
                 InputGroupModule
+            ],
+            providers: [
+                DynamicComponentService
             ]
         }).compileComponents();
     }));

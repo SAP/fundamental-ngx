@@ -26,7 +26,7 @@ import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTI_INPUT_MOBILE_CONFIG, MultiInputMobileConfiguration } from './multi-input-mobile/multi-input-mobile-configuration';
-import { DIALOG_CONFIG, DialogConfig } from '../..';
+import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -461,6 +461,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         this.selectedChange.emit(this.selected);
     }
 
+    /** @hidden */
     private _shouldPopoverBeUpdated(previousLength: number, currentLength: number): boolean {
         return ((previousLength === 0 && currentLength === 1) ||
             (previousLength === 1 && currentLength === 0) &&
@@ -468,6 +469,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         ;
     }
 
+    /** @hidden */
     private _setUpMobileMode(): void {
         this._dynamicComponentService.createDynamicComponent(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
