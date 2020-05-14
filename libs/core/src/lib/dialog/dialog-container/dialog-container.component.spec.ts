@@ -53,16 +53,4 @@ describe('DialogContainerComponent', () => {
         expect(childComponentEl).toBeTruthy();
         expect(childComponentEl.textContent).toContain('Hello there');
     });
-
-    it('should create component from object', async () => {
-        fixture.componentInstance.childContent = { title: 'Title', approveButton: 'Approve' };
-
-        const componentInstance = <any>fixture.componentInstance;
-
-        spyOn(componentInstance, '_createFromDefaultConfiguration');
-
-        await wait(fixture);
-
-        expect(componentInstance._createFromDefaultConfiguration).toHaveBeenCalled();
-    });
 });

@@ -5,10 +5,10 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef,
+    forwardRef, Inject,
     Input,
     OnChanges,
-    OnInit,
+    OnInit, Optional,
     Output,
     QueryList,
     SimpleChanges, TemplateRef,
@@ -25,7 +25,8 @@ import { FormStates } from '../form/form-control/form-states';
 import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { MultiInputMobileConfiguration } from './multi-input-mobile/multi-input-mobile-configuration';
+import { MULTI_INPUT_MOBILE_CONFIG, MultiInputMobileConfiguration } from './multi-input-mobile/multi-input-mobile-configuration';
+import { DIALOG_CONFIG, DialogConfig } from '../..';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -212,10 +213,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     constructor(
+        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
+        @Optional() @Inject(MULTI_INPUT_MOBILE_CONFIG) public providedMultiInputConfig: MultiInputMobileConfiguration,
         private _elementRef: ElementRef,
         private changeDetRef: ChangeDetectorRef,
         private menuKeyboardService: MenuKeyboardService,
-        private _dynamicComponentService: DynamicComponentService
+        private _dynamicComponentService: DynamicComponentService,
     ) {}
 
     /** @hidden */
@@ -299,11 +302,15 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     openChangeHandle(open: boolean): void {
+        if (this.open !== open) {
+            this.openChange.emit(open);
+        }
+
         this.open = open;
         if (!this.mobileMode) {
             this._popoverOpenHandle(open);
         }
-        this.openChange.emit(this.open);
+        this.changeDetRef.detectChanges();
     }
 
     /** Method that selects all possible options. */
@@ -463,7 +470,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     private _setUpMobileMode(): void {
         this._dynamicComponentService.createDynamicComponent(
-            { list: this.listTemplate, control: this.controlTemplate },
+            { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             MultiInputMobileComponent,
             { container: this._elementRef.nativeElement },
             { services: [this] }

@@ -36,4 +36,6 @@ export class MultiInputMobileExampleComponent {
         title: 'Title 2',
         approveButton: 'Approve Button'
     }
+
+    first = customMobileModeConfig;
 }

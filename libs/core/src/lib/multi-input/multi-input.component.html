@@ -1,7 +1,9 @@
+{{open}}
+
 <div class="fd-multi-input fd-multi-input-custom">
-    <div class="fd-multi-input-field" *ngIf="!mobileMode">
+    <div class="fd-multi-input-field">
         <fd-popover
-            [isOpen]="open && displayedValues && displayedValues.length"
+            [isOpen]="open && displayedValues && displayedValues.length && !mobileMode"
             (isOpenChange)="openChangeHandle($event)"
             [triggers]="[]"
             [disabled]="disabled"
@@ -11,7 +13,9 @@
         >
             <fd-popover-control>
                 <form (submit)="onSubmit()">
-                    <ng-container *ngTemplateOutlet="control"></ng-container>
+                    <ng-container *ngIf="!mobileMode || !open">
+                        <ng-container *ngTemplateOutlet="control"></ng-container>
+                    </ng-container>
                 </form>
             </fd-popover-control>
             <fd-popover-body [attr.aria-hidden]="!open">
@@ -30,7 +34,7 @@
         [button]="true"
         [compact]="compact"
         [disabled]="disabled"
-        (click)="openChangeHandle(!open)">
+        (click)="openChangeHandle(!open || mobileMode)">
         <fd-tokenizer [compact]="compact" [class]="'fd-multi-input-tokenizer-custom'" [glyph]="glyph">
             <fd-token
                 *ngFor="let token of selected"
