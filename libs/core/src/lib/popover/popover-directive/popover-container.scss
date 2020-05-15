@@ -1,7 +1,8 @@
 .fd-popover-container-custom {
     z-index: 1000;
     transition: none;
-    background-color: white;
+    background-color: #fff;
+    background-color: var(--sapGroup_ContentBackground, #fff);
 
     &:focus {
         outline: none;
