@@ -1,27 +1,7 @@
 import { Routes } from '@angular/router';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
-import { PlatformButtonDocsComponent } from './component-docs/platform-button/platform-button-docs.component';
-import { PlatformButtonHeaderComponent } from './component-docs/platform-button/platform-button-header/platform-button-header.component';
-import { PlatformActionBarHeaderComponent } from './component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
-import { PlatformActionBarDocsComponent } from './component-docs/platform-action-bar/platform-action-bar-docs.component';
-import { ApiComponent } from './../documentation/core-helpers/api/api.component';
-import { API_FILES } from './api-files';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
-import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
-import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
-import { PlatformMenuButtonDocsComponent } from './component-docs/platform-menu-button/platform-menu-button-docs.component';
-import { PlatformMenuButtonHeaderComponent } from './component-docs/platform-menu-button/platform-menu-button-header/platform-menu-button-header.component';
-import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
-import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
-import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
-import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
-import { PlatformSearchFieldHeaderComponent } from './component-docs/platform-search-field/platform-search-field-header/platform-search-field-header.component';
-import { PlatformSearchFieldDocsComponent } from './component-docs/platform-search-field/platform-search-field-docs.component';
-import { PlatformRadioGroupHeaderComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-header/platform-radio-group-header.component';
-import { PlatformRadioGroupDocsComponent } from './component-docs/platform-forms/radio-group/platform-radio-group-docs.component';
-import { PlatformDocsSplitMenuButtonComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button.component';
-import { PlatformDocsSplitMenuButtonHeaderComponent } from './component-docs/platform-split-menu-button/platform-split-menu-button-header/platform-split-menu-button-header.component';
 
 export const ROUTES: Routes = [
     {
@@ -33,75 +13,62 @@ export const ROUTES: Routes = [
             { path: 'new-component', component: NewComponentComponent },
             {
                 path: 'button',
-                component: PlatformButtonHeaderComponent,
-                children: [
-                    { path: '', component: PlatformButtonDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-button/platform-button.module').then(
+                        (m) => m.PlatformButtonDocsModule
+                    )
             },
             {
                 path: 'action-bar',
-                component: PlatformActionBarHeaderComponent,
-                children: [
-                    { path: '', component: PlatformActionBarDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-action-bar/platform-action-bar.module').then(
+                        (m) => m.PlatformActionBarDocsModule
+                    )
             },
             {
                 path: 'link',
-                component: PlatformLinkHeaderComponent,
-                children: [
-                    { path: '', component: PlatformLinkDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.link } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-link/platform-link.module').then((m) => m.PlatformLinkDocsModule)
             },
             {
                 path: 'menu',
-                component: PlatformMenuHeaderComponent,
-                children: [
-                    { path: '', component: PlatformMenuDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-menu/platform-menu.module').then((m) => m.PlatformMenuDocsModule)
             },
             {
                 path: 'menu-button',
-                component: PlatformMenuButtonHeaderComponent,
-                children: [
-                    { path: '', component: PlatformMenuButtonDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menuButton } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-menu-button/platform-menu-button.module').then(
+                        (m) => m.PlatformMenuButtonDocsModule
+                    )
             },
             {
                 path: 'search-field',
-                component: PlatformSearchFieldHeaderComponent,
-                children: [
-                    { path: '', component: PlatformSearchFieldDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.searchField } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-search-field/platform-search-field.module').then(
+                        (m) => m.PlatformSearchFieldDocsModule
+                    )
             },
             {
                 path: 'select',
-                component: PlatformSelectHeaderComponent,
-                children: [
-                    { path: '', component: PlatformSelectDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-select/platform-select.module').then(
+                        (m) => m.PlatformSelectDocsModule
+                    )
             },
             {
                 path: 'radio-group',
-                component: PlatformRadioGroupHeaderComponent,
-                children: [
-                    { path: '', component: PlatformRadioGroupDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.radioGroup } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/radio-group/platform-radio-group.module').then(
+                        (m) => m.PlatformRadioGroupDocsModule
+                    )
             },
             {
                 path: 'split-menu-button',
-                component: PlatformDocsSplitMenuButtonHeaderComponent,
-                children: [
-                    { path: '', component: PlatformDocsSplitMenuButtonComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.splitMenuButton } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-split-menu-button/platform-split-menu-button.module').then(
+                        (m) => m.PlatformSplitMenuButtonDocsModule
+                    )
             }
         ]
     }
