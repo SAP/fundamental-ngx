@@ -113,7 +113,7 @@ describe('ComboboxComponent', () => {
         component.onInputKeydownHandler(event);
 
         expect(component.onMenuClickHandler).toHaveBeenCalledWith(0);
-        expect(component.isExpanded).toBe(false);
+        expect(component.open).toBe(false);
     });
 
     it('should set inputText', () => {

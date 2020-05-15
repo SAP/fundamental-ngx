@@ -31,6 +31,7 @@ import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { GroupFunction } from '../utils/pipes/list-group.pipe';
 import { InputGroupComponent } from '../input-group/input-group.component';
+import { KeyUtil } from '../..';
 
 /**
  * Allows users to filter through results and select a value.
@@ -284,15 +285,14 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.openOnKeyboardEvent &&
             this.inputText &&
             this.inputText.length &&
-            event.key !== 'Escape' &&
-            event.key !== ' ' &&
-            event.key !== 'Tab' &&
-            event.key !== 'Enter' &&
-            event.key !== 'Alt' &&
-            event.key !== 'Ctrl' &&
-            event.key !== 'Control' &&
-            event.key !== 'Meta' &&
-            event.key !== 'Shift'
+            !KeyUtil.isKey(event, 'Escape') &&
+            !KeyUtil.isKey(event, ' ') &&
+            !KeyUtil.isKey(event, 'Tab') &&
+            !KeyUtil.isKey(event, 'Enter') &&
+            !KeyUtil.isKey(event, 'Alt') &&
+            !KeyUtil.isKey(event, 'Ctrl') &&
+            !KeyUtil.isKey(event, 'Meta') &&
+            !KeyUtil.isKey(event, 'Shift')
         ) {
             this.isOpenChangeHandle(true);
             // If there are displayed values and the input text has changed since this function was last ran
@@ -306,7 +306,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                     } else if (this.displayFn(displayedValue).toLocaleLowerCase()
                             .startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
                         foundCloseMatch = true;
-                        if (event.key !== 'Backspace' && event.key !== 'Delete') {
+                        if (!KeyUtil.isKey(event, 'Backspace') && !KeyUtil.isKey(event, 'Delete')) {
                             this._autocomplete(displayedValue);
                         }
                     }
