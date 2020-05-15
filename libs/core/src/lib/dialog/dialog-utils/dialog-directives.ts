@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 /**
  * Directive that applies fundamental dialog styling to a header.
@@ -29,12 +29,17 @@ export class DialogTitleDirective {}
     host: {
         'attr.aria-label': 'close',
         '[class.fd-button]': 'true',
-        '[class.fd-button--compact]': 'true',
+        '[class.fd-button--compact]': '!mobile',
         '[class.fd-button--transparent]': 'true',
         '[class.sap-icon--decline]': 'true'
     }
 })
-export class DialogCloseButtonDirective {}
+export class DialogCloseButtonDirective {
+
+    /** Displays dialog close button in mobile mode */
+    @Input()
+    mobile: boolean = false;
+}
 
 /**
  * Directive that applies fundamental dialog styling to a button.

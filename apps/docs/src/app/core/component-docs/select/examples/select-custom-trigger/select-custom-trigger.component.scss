@@ -1,13 +1,23 @@
-.example-trigger {
-    padding: 8px 12px;
-    display: block;
-    border-radius: 6px;
-    border: 1px dashed grey;
-    background-color: transparent;
-    transition: all 0.2s ease-in-out;
+.custom-select-trigger-styling {
+    display: flex;
+
+    fd-icon {
+        display: flex;
+        padding: 0 .5rem;
+        animation: spin 1s infinite ease-in-out;
+    }
+
+    span {
+        padding: 0 .5rem;
+        color: darkgrey;
+    }
 }
 
-.example-trigger:focus {
-    outline: none;
-    border: 1px solid var(--fd-color-action-hover);
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

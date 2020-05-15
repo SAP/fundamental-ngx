@@ -28,7 +28,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
     public registrationForm = new FormGroup({
         acceptAll: new FormControl(false),
         agreements: new FormGroup({
-            marketing: new FormControl(false),
+            marketing: new FormControl(undefined),
             newsletter: new FormControl(false),
             termsAndConditions: new FormControl(false)
         })

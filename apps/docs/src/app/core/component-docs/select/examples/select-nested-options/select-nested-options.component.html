@@ -1,23 +1,23 @@
-<p>Selected Value: {{ this.value }}</p>
-<fd-select [(value)]="value" placeholder="Select an option...">
-    <div>
-        <div>
-            <p class="fd-menu__title">
-                <fd-icon [glyph]="'arrow-right'"></fd-icon>
-                Some random text
-            </p>
-            <fd-option value="Salad">
-                Salad
-            </fd-option>
-            <p class="fd-menu__title">
-                <fd-icon [glyph]="'arrow-right'"></fd-icon>
-                Some more random text
-            </p>
-        </div>
+<fd-select [(value)]="selectedValue"
+           [controlTemplate]="customSelectTemplate">
 
-        <!-- From an array of strings in the ts file -->
-        <fd-option *ngFor="let option of options" [value]="option.value" [viewValue]="option.viewValue">
-            {{ option.name }}
-        </fd-option>
-    </div>
+    <li fd-list-group-header>Fruits</li>
+    <fd-option *ngFor="let option of fruits" [value]="option">
+        <span fd-list-icon [glyph]="'add'"></span>
+        <span fd-list-title>{{option.name}}</span>
+        <span fd-list-secondary>{{option.kCal}} kcal</span>
+    </fd-option>
+
+    <li fd-list-group-header>Vegetables</li>
+    <fd-option *ngFor="let option of vegetables" [value]="option">
+        <span fd-list-icon [glyph]="'add'"></span>
+        <span fd-list-title>{{option.name}}</span>
+        <span fd-list-secondary>{{option.kCal}} kcal</span>
+    </fd-option>
+
+    <ng-template #customSelectTemplate let-selected="selected">
+        {{selected?.value.name || 'Select an option'}}
+    </ng-template>
+
 </fd-select>
+<small>Selected value: {{selectedValue | json}}</small>

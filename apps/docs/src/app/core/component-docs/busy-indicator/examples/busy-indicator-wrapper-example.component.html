@@ -1,0 +1,32 @@
+<h5>Use Busy Indicator as a block wrapper</h5>
+<fd-busy-indicator [loading]="loading" block="true">
+    <form>
+        <div fd-form-item>
+            <label fd-form-label>Name:</label>
+            <input fd-form-control type="text"/>
+        </div>
+
+        <div fd-form-item>
+            <label fd-form-label>Surname:</label>
+            <input fd-form-control type="text"/>
+        </div>
+
+        <div fd-form-item>
+            <label fd-form-label>Password:</label>
+            <input fd-form-control type="password"/>
+        </div>
+    </form>
+</fd-busy-indicator>
+
+
+<h5>Use Busy Indicator as a inline wrapper</h5>
+<fd-busy-indicator [loading]="loading" size="s">
+    <button fd-button>Save</button>
+</fd-busy-indicator>
+
+<br/>
+<br/>
+
+<button fd-button (click)="loading = !loading">
+    {{loading ? 'Disable' : 'Enable'}} loading
+</button>

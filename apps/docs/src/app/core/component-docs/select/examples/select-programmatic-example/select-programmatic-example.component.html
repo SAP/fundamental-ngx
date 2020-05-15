@@ -1,13 +1,10 @@
-<div class="example-div">
+<div class="example-btn-holder">
     <button fd-button (click)="changeValue()">Change Value</button>
     <button fd-button (click)="select.open()">Open</button>
     <button fd-button (click)="select.close()">Close</button>
-    <p>Selected Value: {{ this.value }}</p>
 </div>
 
-<fd-select #select [(value)]="value" placeholder="Click here!">
-    <fd-option value="apple">Apple</fd-option>
-    <fd-option value="pineapple">Pineapple</fd-option>
-    <fd-option value="tomato">Tomato</fd-option>
-    <fd-option value="strawberry">Strawberry</fd-option>
+<fd-select placeholder="Select value" #select [(value)]="selectedValue" [closeOnOutsideClick]="false">
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
+<small>Selected value: {{selectedValue}}</small>

@@ -1,40 +1,97 @@
-<fd-popover
-    [(isOpen)]="isOpen"
-    (isOpenChange)="isOpenChangeHandle($event)"
-    [options]="popperOptions"
-    [fillControlMode]="fillControlMode"
-    [appendTo]="appendTo"
-    class="fd-select-popover-custom"
-    [disabled]="disabled || loading"
->
-    <fd-popover-control>
-        <ng-container *ngIf="triggerTemplate">
-            <ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>
-        </ng-container>
-        <div *ngIf="!triggerTemplate">
-            <button
-                class="fd-select-button-custom fd-button"
-                aria-haspopup="true"
-                [attr.aria-expanded]="isOpen"
-                [disabled]="disabled"
-                [ngClass]="{
-                    'fd-button--compact': compact,
-                    'fd-button--noborder': selectType === 'noborder',
-                    'fd-button--splitborder': selectType === 'splitborder'
-                }"
-                type="button"
-            >
-                <fd-icon *ngIf="glyph" size="m" [glyph]="glyph" class="fd-template-icon icon-position"> </fd-icon>
-                <span class="fd-select-text-custom" [dir]="dir$ | async">{{ triggerValue }}</span>
+<ng-container *ngTemplateOutlet="mobile ? selectMobileTemplate : selectDesktopTemplate"></ng-container>
+
+<ng-template #selectDesktopTemplate>
+    <fd-popover
+        [isOpen]="isOpen"
+        [triggers]="[]"
+        [disabled]="disabled"
+        [appendTo]="appendTo"
+        [options]="popperOptions"
+        [closeOnEscapeKey]="false"
+        [fillControlMode]="fillControlMode"
+        [closeOnOutsideClick]="closeOnOutsideClick"
+        (isOpenChange)="popoverOpenChangeHandle($event)">
+
+        <fd-popover-control>
+            <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+        </fd-popover-control>
+
+        <fd-popover-body>
+            <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
+        </fd-popover-body>
+    </fd-popover>
+</ng-template>
+
+<ng-template #selectMobileTemplate>
+    <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+
+    <div #dialogContainer></div>
+</ng-template>
+
+<ng-template #selectInputControlTemplate>
+    <div class="fd-select"
+         [class.fd-select--compact]="compact"
+         (click)="toggle()">
+        <div class="fd-select__control"
+             role="listbox"
+             #selectControl
+             [ngClass]="state ? 'is-' + state : ''"
+             [class.is-active]="isOpen"
+             [class.is-expanded]="isOpen"
+             [class.is-disabled]="disabled"
+             [class.is-readonly]="readonly"
+             [attr.tabindex]="disabled ? -1 : 0"
+             [attr.id]="controlId"
+             [attr.aria-active]="isOpen"
+             [attr.aria-expanded]="isOpen"
+             [attr.aria-disabled]="disabled"
+             [attr.aria-readonly]="readonly"
+             [attr.aria-controls]="controlId + '-list-box'"
+             [attr.aria-haspopup]="isInteractive"
+             [attr.aria-label]="ariaLabel"
+             [attr.aria-labelledby]="ariaLabelledBy"
+             [attr.aria-activedescendant]="selected?.id || null">
+
+            <div class="fd-select__content">
+                <ng-container
+                    [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
+                    [ngTemplateOutletContext]="{$implicit: selectViewValue, selected: selected}">
+                </ng-container>
+
+                <ng-template #defaultSelectContent>
+                    {{ selectViewValue }}
+                </ng-template>
+            </div>
+
+            <button fd-button
+                    tabindex="-1"
+                    class="fd-button--transparent fd-select__button"
+                    *ngIf="!readonly"
+                    [disabled]="disabled"
+                    [glyph]="glyph">
             </button>
-            <fd-busy-indicator *ngIf="loading" [size]="'m'" [loading]="true"></fd-busy-indicator>
         </div>
-    </fd-popover-control>
-    <fd-popover-body class="fd-select-popover-body-custom" [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
-        <fd-menu>
-            <ul fd-menu-list>
-                <ng-content></ng-content>
-            </ul>
-        </fd-menu>
-    </fd-popover-body>
-</fd-popover>
+    </div>
+</ng-template>
+
+<ng-template #selectOptionsListTemplate>
+    <ul fd-list
+        role="listbox"
+        [compact]="compact"
+        [dropdownMode]="true"
+        [hasMessage]="!!stateMessage"
+        [attr.id]="controlId + '-list-box'"
+        [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
+
+        <li *ngIf="stateMessage"
+            fd-list-message
+            tabindex="-1"
+            role="presentation"
+            [type]="state">
+            {{stateMessage}}
+        </li>
+
+        <ng-content></ng-content>
+
+    </ul>
+</ng-template>

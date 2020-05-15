@@ -3,7 +3,7 @@ import { PlatformDocumentationComponent } from './documentation/platform-documen
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { PlatformButtonDocsComponent } from './component-docs/platform-button/platform-button-docs.component';
 import { PlatformButtonHeaderComponent } from './component-docs/platform-button/platform-button-header/platform-button-header.component';
-import { PlatformActionbarHeaderComponent } from './component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
+import { PlatformActionBarHeaderComponent } from './component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
 import { PlatformActionBarDocsComponent } from './component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { ApiComponent } from './../documentation/core-helpers/api/api.component';
 import { API_FILES } from './api-files';
@@ -11,7 +11,7 @@ import { NewComponentComponent } from './component-docs/new-component/new-compon
 import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
 import { PlatformMenuButtonDocsComponent } from './component-docs/platform-menu-button/platform-menu-button-docs.component';
-import {PlatformMenuButtonHeaderComponent } from './component-docs/platform-menu-button/platform-menu-button-header/platform-menu-button-header.component';
+import { PlatformMenuButtonHeaderComponent } from './component-docs/platform-menu-button/platform-menu-button-header/platform-menu-button-header.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
 import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
@@ -41,7 +41,7 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'action-bar',
-                component: PlatformActionbarHeaderComponent,
+                component: PlatformActionBarHeaderComponent,
                 children: [
                     { path: '', component: PlatformActionBarDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }
@@ -63,7 +63,7 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
                 ]
             },
-          {
+            {
                 path: 'menu-button',
                 component: PlatformMenuButtonHeaderComponent,
                 children: [

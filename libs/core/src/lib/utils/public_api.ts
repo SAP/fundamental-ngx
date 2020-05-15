@@ -26,7 +26,6 @@ export * from './dynamic-component/dynamic-component-injector';
 export * from './dynamic-component/dynamic-component.service';
 
 export * from './datatypes/hash.datatype';
-
 export * from './services/rtl.service';
 
 export * from './functions/compare-objects';
@@ -34,3 +33,4 @@ export * from './functions/closest-element';
 export * from './functions/keyboard-unification';
 export * from './functions/uuidv4-generator';
 export * from './functions/get-string-from-hashmap';
+export * from './functions/key-util';
