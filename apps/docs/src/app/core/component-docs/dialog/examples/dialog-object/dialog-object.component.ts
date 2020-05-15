@@ -16,7 +16,7 @@ export class DialogObjectComponent {
     @ViewChild('dialogSubHeader', { read: TemplateRef })
     dialogSubHeader: TemplateRef<any>;
 
-    reason: string = '';
+    closeReason: string = '';
 
     private _dialogReference: DialogRef;
 
@@ -35,8 +35,12 @@ export class DialogObjectComponent {
         this._dialogReference = this._dialogService.open(object);
 
         this._dialogReference.afterClosed.subscribe(
-            reason => this.reason = reason,
-            reason => this.reason = reason ? reason : 'Backdrop Clicked'
+            (result) => {
+                this.closeReason = 'Dialog closed with result: ' + result;
+            },
+            (error) => {
+                this.closeReason = 'Dialog dismissed with result: ' + error;
+            }
         );
     }
 }
