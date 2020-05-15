@@ -3,8 +3,7 @@ import { DialogRef, DialogService, DefaultDialogObject } from '@fundamental-ngx/
 
 @Component({
   selector: 'fd-dialog-object',
-  templateUrl: './dialog-object.component.html',
-  styleUrls: ['./dialog-object.component.scss']
+  templateUrl: './dialog-object.component.html'
 })
 export class DialogObjectComponent {
 
