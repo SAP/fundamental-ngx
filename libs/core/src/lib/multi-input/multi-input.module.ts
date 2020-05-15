@@ -25,7 +25,7 @@ import { LinkModule } from '../link/link.module';
         InputGroupModule,
         FormModule,
         CheckboxModule,
-        LinkModule,
+        LinkModule
     ],
     exports: [MultiInputComponent]
 })

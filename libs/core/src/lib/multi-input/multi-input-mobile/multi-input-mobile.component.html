@@ -20,7 +20,7 @@
                     <fd-bar-element [fullWidth]="true">
                         <ng-container *ngTemplateOutlet="childContent?.controlTemplate"></ng-container>
                     </fd-bar-element>
-                    <fd-bar-element>
+                    <fd-bar-element class="custom-multi-input-select-all-bar-element">
                         <button fd-button [glyph]="'multiselect-all'" [fdType]="'transparent'"
                                 (click)="selectAll()"></button>
                     </fd-bar-element>

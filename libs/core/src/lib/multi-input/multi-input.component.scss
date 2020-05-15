@@ -47,5 +47,9 @@
     .fd-multi-input-checkbox {
         width: 100%;
         cursor: pointer;
+
+        .fd-checkbox__label {
+            color: inherit;
+        }
     }
 }

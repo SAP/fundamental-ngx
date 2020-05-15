@@ -2,11 +2,14 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, ElementRef,
-    isDevMode, OnInit,
+    Component,
+    ElementRef,
+    isDevMode,
+    OnInit,
     Optional,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { DialogConfig } from '../../dialog/dialog-utils/dialog-config.class';
@@ -17,7 +20,9 @@ import { MultiInputComponent } from '../multi-input.component';
 @Component({
     selector: 'fd-multi-input-mobile',
     templateUrl: './multi-input-mobile.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./multi-input-mobile.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class MultiInputMobileComponent implements OnInit, AfterViewInit {
 
