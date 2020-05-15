@@ -216,7 +216,6 @@ describe('ComboboxComponent', () => {
 
         expect(component.isOpenChangeHandle).toHaveBeenCalledWith(true);
         expect(component.searchInputElement.nativeElement.setSelectionRange).toHaveBeenCalledWith(3, 4);
-        expect(component.oldInputText).toBe(component.inputText);
     });
 
     it('should handle key up enter', () => {
@@ -235,6 +234,5 @@ describe('ComboboxComponent', () => {
 
         expect(component.searchInputElement.nativeElement.setSelectionRange).toHaveBeenCalledWith(4, 4);
         expect(component.onMenuClickHandler).toHaveBeenCalledWith(0);
-        expect(component.oldInputText).toBe(component.inputText);
     });
 });

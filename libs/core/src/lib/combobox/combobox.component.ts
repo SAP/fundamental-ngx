@@ -213,9 +213,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     inputTextValue: string;
 
     /** @hidden */
-    oldInputText: string;
-
-    /** @hidden */
     public focusTrap: FocusTrap;
 
     /** @hidden */
@@ -296,8 +293,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         ) {
             this.isOpenChangeHandle(true);
             // If there are displayed values and the input text has changed since this function was last ran
-            if (this._hasDisplayedValues() &&
-                    (!this.oldInputText || this.oldInputText !== this.inputText)) {
+            if (this._hasDisplayedValues()) {
                 let foundCloseMatch = false;
                 this.displayedValues.forEach((displayedValue, i) => {
                     // Try to find an exact match. If one is found, focus it. Otherwise, check if a displayedValue starts with input value
@@ -323,7 +319,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this._setCursorToLastChar();
         }
         this.selectedTermSubject$.next(this.searchInputElement.nativeElement.value);
-        this.oldInputText = this.inputText;
     }
 
     /** @hidden */
