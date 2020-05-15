@@ -10,6 +10,7 @@ export class SectionsToolbarComponent implements OnInit {
     @Input() sections: SectionInterface[];
 
     search: string = '';
+
     smallScreen: boolean = window.innerWidth < 992;
 
     @Input()
@@ -52,4 +53,5 @@ export class SectionsToolbarComponent implements OnInit {
     onResize() {
         this.windowSize();
     }
+
 }
