@@ -1,23 +1,37 @@
-<fd-docs-section-title [id]="'default'" [componentName]="'busyIndicator'">
-    Default
+<fd-docs-section-title [id]="'default'" [componentName]="'BusyIndicator'">
+    Default Busy Indicator
 </fd-docs-section-title>
 <description>
-    The loading element is used to display the loading indicator animation.
+    Busy Indicator displays loading animation depending on its state. To set Busy Indicator state use
+    <code>[loading]</code> property.
 </description>
 <component-example>
     <fd-busy-indicator-basic-example></fd-busy-indicator-basic-example>
 </component-example>
-<code-example [exampleFiles]="BusyIndicatorBasicExample"></code-example>
+<code-example [exampleFiles]="busyIndicatorBasicExample"></code-example>
+
+<fd-docs-section-title [id]="'default'" [componentName]="'BusyIndicator'">
+    Busy Indicator sizes
+</fd-docs-section-title>
+<description>
+    Busy Indicator can be displayed in three different sizes. To change the size use <code>[size]</code> property.
+</description>
+<component-example>
+    <fd-busy-indicator-size-example></fd-busy-indicator-size-example>
+</component-example>
+<code-example [exampleFiles]="busyIndicatorSizeExample"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'toggle'" [componentName]="'busyIndicator'">
-    Default with toggle
+<fd-docs-section-title [id]="'sizes'" [componentName]="'BusyIndicator'">
+    Busy Indicator as wrapper
 </fd-docs-section-title>
 <description>
-    The loading element is used to display the loading indicator animation when the loading value is set to true.
+    Busy Indicator might be used as a wrapper to display elements or sections of the page behind an overflow.
+    Depending of the wrapped element type, use <code>[block]</code> property to manipulate the <code>display</code>
+    property of the Busy Indicator.
 </description>
 <component-example>
-    <fd-busy-indicator-toggle-example></fd-busy-indicator-toggle-example>
+    <fd-busy-indicator-wrapper-example></fd-busy-indicator-wrapper-example>
 </component-example>
-<code-example [exampleFiles]="BusyIndicatorToggleExample"></code-example>
+<code-example [exampleFiles]="busyIndicatorWrapperExample"></code-example>

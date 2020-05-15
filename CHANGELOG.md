@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.0-rc.19"></a>
+# [0.18.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.18...v0.18.0-rc.19) (2020-05-15)
+
+
+
+<a name="0.18.0-rc.18"></a>
+# [0.18.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.17...v0.18.0-rc.18) (2020-05-14)
+
+
+### Features
+
+* Busy Indicator as wrapper ([#2474](https://github.com/SAP/fundamental-ngx/issues/2474)) ([319ec5e](https://github.com/SAP/fundamental-ngx/commit/319ec5e))
+
+
+
+<a name="0.18.0-rc.17"></a>
+# [0.18.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.16...v0.18.0-rc.17) (2020-05-14)
+
+
+### Bug Fixes
+
+* Add default behaviour to checkbox ([#2509](https://github.com/SAP/fundamental-ngx/issues/2509)) ([6e45179](https://github.com/SAP/fundamental-ngx/commit/6e45179))
+
+
+
+<a name="0.18.0-rc.16"></a>
+# [0.18.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.15...v0.18.0-rc.16) (2020-05-14)
+
+
+### Bug Fixes
+
+* Add default button type to buttons ([#2510](https://github.com/SAP/fundamental-ngx/issues/2510)) ([1851d72](https://github.com/SAP/fundamental-ngx/commit/1851d72))
+
+
+
+<a name="0.18.0-rc.15"></a>
+# [0.18.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.14...v0.18.0-rc.15) (2020-05-14)
+
+
+
 <a name="0.18.0-rc.14"></a>
 # [0.18.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.13...v0.18.0-rc.14) (2020-05-12)
 

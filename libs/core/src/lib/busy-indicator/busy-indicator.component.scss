@@ -1,1 +1,47 @@
 @import '~fundamental-styles/dist/busy-indicator';
+
+.fd-busy-indicator {
+    z-index: 2;
+
+    &--absolute {
+        white-space: nowrap;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__container {
+        display: block;
+        position: relative;
+
+        &:focus {
+            outline: none;
+
+            .fd-busy-indicator__overlay {
+                outline-offset: 0;
+                outline-width: var(--sapContent_FocusWidth, 0.0625rem);
+                outline-color: var(--sapContent_FocusColor, #000);
+                outline-style: var(--sapContent_FocusStyle, dotted);
+            }
+        }
+
+        &--inline {
+            display: inline-block;
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        background-color: rgba(247, 247, 247, 0.72);
+
+        &--transparent {
+            background-color: transparent;
+        }
+    }
+}

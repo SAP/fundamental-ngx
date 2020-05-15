@@ -1,44 +1,30 @@
 <div fd-action-bar>
-    <div fd-action-bar-back *ngIf="showBackButton" (click)="backButtonClick.emit($event)">
-        <button
-            class="fd-button--light fd-button--compact sap-icon--nav-back"
-            [attr.aria-label]="backButtonLabel"
-            data-tag="actionbar__back-button"
-            [attr.title]="backButtonLabel"
-        ></button>
-    </div>
-    <ng-container *ngTemplateOutlet="actionBarContent"></ng-container>
-
-    <fdp-action-bar-actions
-        [actionItems]="actionItems"
-        [showOnlyMenu]="showOnlyMenu"
-        (editing)="enableEditTitle($event)"
-        [placement]="placement"
-        (itemClick)="actionItemClicked($event)"
-    >
-    </fdp-action-bar-actions>
-</div>
-
-<ng-template #actionBarContent>
     <div fd-action-bar-header>
-        <h3 fd-action-bar-title *ngIf="!editing" [attr.title]="title" data-tag="actionbar__title">
+        <div fd-action-bar-back *ngIf="showBackButton">
+            <button
+                class="sap-icon--navigation-left-arrow"
+                fd-button
+                [compact]="compact"
+                [fdType]="'transparent'"
+                [attr.aria-label]="backButtonLabel"
+                data-tag="actionbar__back-button"
+                [attr.title]="backButtonLabel"
+                (click)="backButtonClick.emit($event)"
+            ></button>
+        </div>
+        <h3 fd-action-bar-title [attr.title]="title" data-tag="actionbar__title">
             {{ title }}
         </h3>
-        <div fd-form-item *ngIf="editing">
-            <input
-                #inputTitle
-                fd-form-control
-                *ngIf="editing"
-                class="fd-input edit-actionbar-title"
-                (focusout)="onFocusOut()"
-                (keydown.enter)="$event.target.blur()"
-                [(ngModel)]="title"
-                aria-required="true"
-                data-tag="actionbar__input"
-            />
-        </div>
-        <p *ngIf="description" fd-action-bar-description [attr.title]="description" data-tag="actionbar__description">
-            {{ description }}
-        </p>
+        <ng-content selector="fdp-action-button-group"></ng-content>
     </div>
-</ng-template>
+    <p
+        fd-action-bar-description
+        *ngIf="description"
+        [withBackBtn]="showBackButton"
+        fd-action-bar-description
+        [attr.title]="description"
+        data-tag="actionbar__description"
+    >
+        {{ description }}
+    </p>
+</div>

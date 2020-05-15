@@ -5,7 +5,7 @@ import {
     Input,
     ViewEncapsulation,
     OnChanges,
-    OnInit
+    OnInit, HostBinding
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
@@ -55,6 +55,14 @@ export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): str
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
+
+    /**
+     * Native type of button element
+     */
+    @Input()
+    @HostBinding('attr.type')
+    type: string = 'button';
+
     /** The property allows user to pass additional css classes
      */
     @Input()

@@ -1,13 +1,16 @@
 <fdp-action-bar
     id="actionbar_with_menu"
     [title]="'Page Action bar component'"
-    [actionItems]="actionItems"
-    (itemClick)="onItemClick($event)"
-    [showOnlyMenu]="false"
-    [placement]="'bottom-end'"
     [showBackButton]="true"
-    [description]="
-        'This Action Bar description should be composed with enough text to span the entire width of the Action Bar plus a good amount more such that it will force the Action Bar to truncate the text to a more managable size but not so much that it looses its meaning.'
-    "
+    (backButtonClick)="onBackButtonClick()"
+    [description]="'Action bar description from the component.'"
 >
+    <fdp-action-button-group>
+        <fdp-button compact="true" [glyph]="'overflow'" [fdpMenuTriggerFor]="basicMenu"></fdp-button>
+        <fdp-menu #basicMenu id="basic-menu">
+            <fdp-menu-item>First Item</fdp-menu-item>
+            <fdp-menu-item>Second Item</fdp-menu-item>
+            <fdp-menu-item>Third Item</fdp-menu-item>
+        </fdp-menu>
+    </fdp-action-button-group>
 </fdp-action-bar>

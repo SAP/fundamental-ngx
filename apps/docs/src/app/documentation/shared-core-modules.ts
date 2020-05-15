@@ -7,6 +7,7 @@ import {
     InputGroupModule,
     MenuModule,
     PopoverModule,
+    SelectModule,
     ShellbarModule,
     SwitchModule,
     TabsModule
@@ -20,6 +21,7 @@ export const sharedCoreModules = [
     ShellbarModule,
     IconModule,
     TabsModule,
+    SelectModule,
     SwitchModule,
     FormModule,
     InlineHelpModule,
