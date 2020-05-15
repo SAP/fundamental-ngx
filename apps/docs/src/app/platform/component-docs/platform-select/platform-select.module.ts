@@ -6,12 +6,10 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 
 import { PlatformSelectHeaderComponent } from './platform-select-header/platform-select-header.component';
 import { PlatformSelectDocsComponent } from './platform-select-docs.component';
-
 import { PlatformSelectTypesDefaultExampleComponent } from './platform-select-examples/platform-select-types-default-example.component';
 import { PlatformSelectTypesNoBorderExampleComponent } from './platform-select-examples/platform-select-types-noborder-example.component';
 import { PlatformSelectTypesSplitExampleComponent } from './platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './platform-select-examples/platform-select-types-with-icon-example.component';
-
 import { PlatformSelectModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [

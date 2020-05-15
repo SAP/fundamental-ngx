@@ -6,12 +6,10 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 
 import { PlatformMenuButtonHeaderComponent } from './platform-menu-button-header/platform-menu-button-header.component';
 import { PlatformMenuButtonDocsComponent } from './platform-menu-button-docs.component';
-
 import { PlatformMenuButtonCompactExampleComponent } from './platform-menu-button-examples/platform-menu-button-compact-examples.component';
 import { PlatformMenuButtonCozyExampleComponent } from './platform-menu-button-examples/platform-menu-button-cozy-examples.component';
 import { PlatformMenuButtonExampleComponent } from './platform-menu-button-examples/platform-menu-button-examples.component';
-
-import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
+import { PlatformMenuButtonModule, PlatformMenuModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
     {
@@ -25,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FundamentalNgxPlatformModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformMenuButtonModule, PlatformMenuModule],
     exports: [RouterModule],
     declarations: [
         PlatformMenuButtonDocsComponent,

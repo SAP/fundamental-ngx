@@ -6,12 +6,10 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 
 import { PlatformSearchFieldHeaderComponent } from './platform-search-field-header/platform-search-field-header.component';
 import { PlatformSearchFieldDocsComponent } from './platform-search-field-docs.component';
-
 import { PlatformSearchFieldBasicExampleComponent } from './platform-search-field-examples/platform-search-field-basic-example.component';
 import { PlatformSearchFieldCategoriesExampleComponent } from './platform-search-field-examples/platform-search-field-categories-example.component';
 import { PlatformSearchFieldDataSourceExampleComponent } from './platform-search-field-examples/platform-search-field-data-source-example.component';
-
-import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
     {
@@ -25,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FundamentalNgxPlatformModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformSearchFieldModule],
     exports: [RouterModule],
     declarations: [
         PlatformSearchFieldDocsComponent,

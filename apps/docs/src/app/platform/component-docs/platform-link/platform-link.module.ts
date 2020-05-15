@@ -6,7 +6,6 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 
 import { PlatformLinkHeaderComponent } from './platform-link-header/platform-link-header.component';
 import { PlatformLinkDocsComponent } from './platform-link-docs.component';
-
 import { PlatformLinkDisabledEmphasizedExampleComponent } from './platform-link-examples/platform-link-examples.component';
 import { PlatformLinkDisabledExampleComponent } from './platform-link-examples/platform-link-examples.component';
 import { PlatformLinkEmphasizedExampleComponent } from './platform-link-examples/platform-link-examples.component';
@@ -14,7 +13,6 @@ import { PlatformLinkIconExampleComponent } from './platform-link-examples/platf
 import { PlatformLinkInvertedExampleComponent } from './platform-link-examples/platform-link-examples.component';
 import { PlatformLinkStandardExampleComponent } from './platform-link-examples/platform-link-examples.component';
 import { PlatformLinkTruncatedExampleComponent } from './platform-link-examples/platform-link-examples.component';
-
 import { PlatformLinkModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [

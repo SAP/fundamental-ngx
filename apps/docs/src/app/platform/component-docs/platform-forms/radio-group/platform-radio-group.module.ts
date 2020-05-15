@@ -6,13 +6,11 @@ import { SharedDocumentationModule } from '../../../../documentation/shared-docu
 
 import { PlatformRadioGroupHeaderComponent } from './platform-radio-group-header/platform-radio-group-header.component';
 import { PlatformRadioGroupDocsComponent } from './platform-radio-group-docs.component';
-
 import { PlatformRadioGroupContentExampleComponent } from './platform-radio-group-examples/platform-radio-group-content-examples.component';
 import { PlatformRadioGroupDisabledExampleComponent } from './platform-radio-group-examples/platform-radio-group-disabled-examples.component';
 import { PlatformRadioGroupListExampleComponent } from './platform-radio-group-examples/platform-radio-group-list-examples.component';
 import { PlatformRadioGroupListItemsExampleComponent } from './platform-radio-group-examples/platform-radio-group-list-items-examples.component';
-
-import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
+import { PlatformRadioGroupModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
     {
@@ -26,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FundamentalNgxPlatformModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformRadioGroupModule],
     exports: [RouterModule],
     declarations: [
         PlatformRadioGroupDocsComponent,

@@ -6,13 +6,11 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 
 import { PlatformMenuHeaderComponent } from './platform-menu-header/platform-menu-header.component';
 import { PlatformMenuDocsComponent } from './platform-menu-docs.component';
-
 import { PlatformMenuBasicExampleComponent } from './platform-menu-examples/platform-menu-basic-example.component';
 import { PlatformMenuCascadeExampleComponent } from './platform-menu-examples/platform-menu-cascade-example.component';
 import { PlatformMenuScrollingExampleComponent } from './platform-menu-examples/platform-menu-scrolling-example.component';
 import { PlatformMenuXPositionExampleComponent } from './platform-menu-examples/platform-menu-x-position-example.component';
-
-import { PlatformMenuModule, PlatformButtonModule } from '@fundamental-ngx/platform';
+import { PlatformMenuModule, PlatformButtonModule, } from '@fundamental-ngx/platform';
 import { ImageModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
