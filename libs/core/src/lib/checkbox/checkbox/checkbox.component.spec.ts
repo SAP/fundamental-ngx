@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckboxComponent } from './checkbox.component';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
+import { FormModule } from '../../form/form.module';
 
 @Component({
     template: ` <fd-checkbox [(ngModel)]="value"></fd-checkbox> `
@@ -19,7 +20,7 @@ describe('CheckboxComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
+            imports: [FormsModule, FormModule],
             declarations: [CheckboxComponent, TestCheckboxComponent]
         });
 
