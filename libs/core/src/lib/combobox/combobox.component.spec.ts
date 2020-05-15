@@ -102,20 +102,6 @@ describe('ComboboxComponent', () => {
         expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
     });
 
-    it('should select the first item when the list is open, input is focused and enter is pressed', () => {
-        spyOn(component, 'onMenuClickHandler');
-        component.open = true;
-        component.displayedValues = ['value'];
-        const event: any = {
-            key: 'Enter',
-            preventDefault: () => {}
-        };
-        component.onInputKeydownHandler(event);
-
-        expect(component.onMenuClickHandler).toHaveBeenCalledWith(0);
-        expect(component.open).toBe(false);
-    });
-
     it('should set inputText', () => {
         spyOn(component, 'onChange');
         spyOn(component, 'onTouched');
@@ -239,13 +225,16 @@ describe('ComboboxComponent', () => {
             preventDefault: () => {}
         };
         component.openOnKeyboardEvent = true;
-        component.inputText = 'text';
+        component.open = true;
+        component.searchInputElement.nativeElement.value = 'text';
         component.displayedValues = ['text'];
         spyOn(component.searchInputElement.nativeElement, 'setSelectionRange');
+        spyOn(component, 'onMenuClickHandler');
 
         component.onInputKeyupHandler(event);
 
         expect(component.searchInputElement.nativeElement.setSelectionRange).toHaveBeenCalledWith(4, 4);
+        expect(component.onMenuClickHandler).toHaveBeenCalledWith(0);
         expect(component.oldInputText).toBe(component.inputText);
     });
 });

@@ -262,11 +262,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeydownHandler(event: KeyboardEvent): void {
-        if (event.key === 'Enter') {
+        if (KeyUtil.isKey(event, 'Enter')) {
             if (this.searchFn) {
                 this.searchFn();
             }
-        } else if (event.key === 'ArrowDown') {
+        } else if (KeyUtil.isKey(event, 'ArrowDown')) {
             if (event.altKey) {
                 this.isOpenChangeHandle(true);
             }
@@ -274,7 +274,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             if (this.listItems && this.listItems.first) {
                 this._focusListItem(this.listItems.first);
             }
-        } else if (event.key === 'Escape') {
+        } else if (KeyUtil.isKey(event, 'Escape')) {
             this.focusLost();
         }
     }
@@ -312,7 +312,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                     }
                 });
             }
-        } else if (event.key === 'Enter' && this._hasDisplayedValues()) {
+        } else if (KeyUtil.isKey(event, 'Enter') && this._hasDisplayedValues()) {
             // If the user presses enter and there are displayed values, select the value that matches the input
             this.displayedValues.forEach((value, i) => {
                 if (this.displayFn(value) === this.searchInputElement.nativeElement.value) {
