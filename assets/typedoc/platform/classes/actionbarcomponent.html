@@ -3,7 +3,12 @@
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
 		<li>
-			<span class="target">ActionBarComponent</span>
+			<span class="tsd-signature-type">BaseComponent</span>
+			<ul class="tsd-hierarchy">
+				<li>
+					<span class="target">ActionBarComponent</span>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </section>
@@ -11,27 +16,10 @@
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">OnInit</span></li>
-		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="actionitems" class="tsd-anchor"></a>
-		<h3>action<wbr>Items</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">action<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ActionItem</span><span class="tsd-signature-symbol">[]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L76">libs/platform/src/lib/components/action-bar/action-bar.component.ts:76</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>List of action items.</p>
-			</div>
-		</div>
-	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="backbuttonlabel" class="tsd-anchor"></a>
 		<h3>back<wbr>Button<wbr>Label</h3>
@@ -39,12 +27,29 @@
 		<div class="tsd-signature tsd-kind-icon">back<wbr>Button<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;Go Back&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L65">libs/platform/src/lib/components/action-bar/action-bar.component.ts:65</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L43">libs/platform/src/lib/components/action-bar/action-bar.component.ts:43</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>&quot;back&quot; button label.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="contentdensity" class="tsd-anchor"></a>
+		<h3>content<wbr>Density</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">content<wbr>Density<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensity</span><span class="tsd-signature-symbol"> = &quot;cozy&quot;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.contentDensity</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/base.ts#L25">libs/platform/src/lib/components/base.ts:25</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>content Density of element. cozy | compact</p>
 			</div>
 		</div>
 	</section>
@@ -55,7 +60,7 @@
 		<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L50">libs/platform/src/lib/components/action-bar/action-bar.component.ts:50</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L26">libs/platform/src/lib/components/action-bar/action-bar.component.ts:26</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -64,35 +69,37 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="editing" class="tsd-anchor"></a>
-		<h3>editing</h3>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="id" class="tsd-anchor"></a>
+		<h3>id</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">editing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = this.defaultId</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.id</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L44">libs/platform/src/lib/components/action-bar/action-bar.component.ts:44</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/base.ts#L17">libs/platform/src/lib/components/base.ts:17</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>flag to set edit mode for renaming the title</p>
+				<p>id for the Element</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="placement" class="tsd-anchor"></a>
-		<h3>placement</h3>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="name" class="tsd-anchor"></a>
+		<h3>name</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Placement</span></div>
+		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.name</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L70">libs/platform/src/lib/components/action-bar/action-bar.component.ts:70</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/base.ts#L21">libs/platform/src/lib/components/base.ts:21</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>used to specify the posistion of the menu1`</p>
+				<p>name for the element</p>
 			</div>
 		</div>
 	</section>
@@ -103,7 +110,7 @@
 		<div class="tsd-signature tsd-kind-icon">show<wbr>Back<wbr>Button<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L56">libs/platform/src/lib/components/action-bar/action-bar.component.ts:56</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L37">libs/platform/src/lib/components/action-bar/action-bar.component.ts:37</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -113,24 +120,13 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="showonlymenu" class="tsd-anchor"></a>
-		<h3>show<wbr>Only<wbr>Menu</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">show<wbr>Only<wbr>Menu<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L59">libs/platform/src/lib/components/action-bar/action-bar.component.ts:59</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="title" class="tsd-anchor"></a>
 		<h3>title</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L38">libs/platform/src/lib/components/action-bar/action-bar.component.ts:38</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L20">libs/platform/src/lib/components/action-bar/action-bar.component.ts:20</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -138,6 +134,68 @@
 				<p>Actionbar title</p>
 			</div>
 		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="width" class="tsd-anchor"></a>
+		<h3>width</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.width</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/base.ts#L29">libs/platform/src/lib/components/base.ts:29</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>width of the element</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+		<a name="disabled" class="tsd-anchor"></a>
+		<h3>disabled</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> disabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> disabled<span class="tsd-signature-symbol">(</span>disabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from BaseComponent.disabled</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/base.ts#L33">libs/platform/src/lib/components/base.ts:33</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>disabled status of the element</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from BaseComponent.disabled</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/base.ts#L37">libs/platform/src/lib/components/base.ts:37</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>disabled status of the element</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>disabled: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -149,7 +207,7 @@
 		<div class="tsd-signature tsd-kind-icon">back<wbr>Button<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L87">libs/platform/src/lib/components/action-bar/action-bar.component.ts:87</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L49">libs/platform/src/lib/components/action-bar/action-bar.component.ts:49</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -158,59 +216,28 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="itemclick" class="tsd-anchor"></a>
-		<h3>item<wbr>Click</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">item<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ActionItem</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;ActionItem&gt;()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L100">libs/platform/src/lib/components/action-bar/action-bar.component.ts:100</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Emitted event when action button is clicked.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="titlerenamed" class="tsd-anchor"></a>
-		<h3>title<wbr>Renamed</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">title<wbr>Renamed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;string&gt;()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L94">libs/platform/src/lib/components/action-bar/action-bar.component.ts:94</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Emitted event when input textbox out of focus.</p>
-			</div>
-		</div>
-	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 		<a name="constructor" class="tsd-anchor"></a>
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Action<wbr>Bar<wbr>Component<span class="tsd-signature-symbol">(</span>cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActionBarComponent</span></li>
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Action<wbr>Bar<wbr>Component<span class="tsd-signature-symbol">(</span>_cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActionBarComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<p>Overrides BaseComponent.__constructor</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L101">libs/platform/src/lib/components/action-bar/action-bar.component.ts:101</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L49">libs/platform/src/lib/components/action-bar/action-bar.component.ts:49</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>cd: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+						<h5>_cd: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ActionBarComponent</span></h4>
@@ -220,86 +247,61 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="timer" class="tsd-anchor"></a>
-		<h3>timer</h3>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<a name="_cd" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _cd</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">timer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+		<div class="tsd-signature tsd-kind-icon">_cd<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ChangeDetectorRef</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent._cd</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/base.ts#L41">libs/platform/src/lib/components/base.ts:41</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<a name="_disabled" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _disabled</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent._disabled</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/base.ts#L13">libs/platform/src/lib/components/base.ts:13</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="compact" class="tsd-anchor"></a>
+		<h3>compact</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L101">libs/platform/src/lib/components/action-bar/action-bar.component.ts:101</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L31">libs/platform/src/lib/components/action-bar/action-bar.component.ts:31</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Compact mode</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<a name="defaultid" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> default<wbr>Id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">default<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;fdp-id-${randomId++}&#x60;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.defaultId</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/base.ts#L12">libs/platform/src/lib/components/base.ts:12</a></li>
 			</ul>
 		</aside>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="actionitemclicked" class="tsd-anchor"></a>
-		<h3>action<wbr>Item<wbr>Clicked</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">action<wbr>Item<wbr>Clicked<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActionItem</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L113">libs/platform/src/lib/components/action-bar/action-bar.component.ts:113</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>item: <span class="tsd-signature-type">ActionItem</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="enableedittitle" class="tsd-anchor"></a>
-		<h3>enable<wbr>Edit<wbr>Title</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">enable<wbr>Edit<wbr>Title<span class="tsd-signature-symbol">(</span>editing<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L107">libs/platform/src/lib/components/action-bar/action-bar.component.ts:107</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>editing: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="ngondestroy" class="tsd-anchor"></a>
-		<h3>ng<wbr>OnDestroy</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnDestroy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L130">libs/platform/src/lib/components/action-bar/action-bar.component.ts:130</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="ngoninit" class="tsd-anchor"></a>
 		<h3>ng<wbr>OnInit</h3>
@@ -311,51 +313,9 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L105">libs/platform/src/lib/components/action-bar/action-bar.component.ts:105</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L55">libs/platform/src/lib/components/action-bar/action-bar.component.ts:55</a></li>
 					</ul>
 				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="onfocusout" class="tsd-anchor"></a>
-		<h3>on<wbr>Focus<wbr>Out</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Focus<wbr>Out<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L118">libs/platform/src/lib/components/action-bar/action-bar.component.ts:118</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="outsideclick" class="tsd-anchor"></a>
-		<h3>out<wbr>Side<wbr>Click</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">out<wbr>Side<wbr>Click<span class="tsd-signature-symbol">(</span>$event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/platform/src/lib/components/action-bar/action-bar.component.ts#L123">libs/platform/src/lib/components/action-bar/action-bar.component.ts:123</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>$event: <span class="tsd-signature-type">Event</span></h5>
-					</li>
-				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>

@@ -19,6 +19,7 @@
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -30,12 +31,28 @@
 		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/option/option.component.ts#L46">lib/select/option/option.component.ts:46</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/option/option.component.ts#L62">lib/select/option/option.component.ts:62</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Whether to disable this option specifically.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="id" class="tsd-anchor"></a>
+		<h3>id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;fd-option-${optionUniqueId++}&#x60;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/option/option.component.ts#L54">lib/select/option/option.component.ts:54</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Option id attribute</p>
 			</div>
 		</div>
 	</section>
@@ -46,47 +63,12 @@
 		<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/option/option.component.ts#L42">lib/select/option/option.component.ts:42</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/option/option.component.ts#L58">lib/select/option/option.component.ts:58</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Value of the option. Similar to how a native select operates.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="viewvalue" class="tsd-anchor"></a>
-		<h3>view<wbr>Value</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">view<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/option/option.component.ts#L50">lib/select/option/option.component.ts:50</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Override for the view value of the option. If none is provided, the text content is used.</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Outputs</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectedchange" class="tsd-anchor"></a>
-		<h3>selected<wbr>Change</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OptionComponent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;OptionComponent&gt;()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/option/option.component.ts#L54">lib/select/option/option.component.ts:54</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Emitted when the selected state changes.</p>
 			</div>
 		</div>
 	</section>
@@ -104,7 +86,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/option/option.component.ts#L72">lib/select/option/option.component.ts:72</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/option/option.component.ts#L104">lib/select/option/option.component.ts:104</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -130,7 +112,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/option/option.component.ts#L87">lib/select/option/option.component.ts:87</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/option/option.component.ts#L122">lib/select/option/option.component.ts:122</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -153,7 +135,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/option/option.component.ts#L92">lib/select/option/option.component.ts:92</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/option/option.component.ts#L127">lib/select/option/option.component.ts:127</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -170,27 +152,33 @@
 		<h3>set<wbr>Selected</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Selected<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, fireEvent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Selected<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, controlChange<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/option/option.component.ts#L78">lib/select/option/option.component.ts:78</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/option/option.component.ts#L112">lib/select/option/option.component.ts:112</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Returns the view value text of the option, or the viewValue input if it exists.</p>
+						<p>Set control selected state</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
 						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>whether is selected</p>
+						</div>
 					</li>
 					<li>
-						<h5><span class="tsd-flag ts-flagDefault value">Default value</span> fireEvent: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5>
+						<h5>controlChange: <span class="tsd-signature-type">boolean</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>whether is a change initially coming from OptionComponent</p>
+						</div>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

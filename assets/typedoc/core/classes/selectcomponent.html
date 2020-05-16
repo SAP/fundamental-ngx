@@ -18,9 +18,9 @@
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnChanges</span></li>
-		<li><span class="tsd-signature-type">AfterContentInit</span></li>
 		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">AfterViewInit</span></li>
+		<li><span class="tsd-signature-type">AfterContentInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
 		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
 	</ul>
@@ -34,12 +34,60 @@
 		<div class="tsd-signature tsd-kind-icon">append<wbr>To<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"body"</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L125">lib/select/select.component.ts:125</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L142">lib/select/select.component.ts:142</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>The element to which the popover should be appended.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="arialabel" class="tsd-anchor"></a>
+		<h3>aria<wbr>Label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L162">lib/select/select.component.ts:162</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Sets control aria-label attribute value</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="arialabelledby" class="tsd-anchor"></a>
+		<h3>aria<wbr>Labelled<wbr>By</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L158">lib/select/select.component.ts:158</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Binds to control aria-labelledBy attribute</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="closeonoutsideclick" class="tsd-anchor"></a>
+		<h3>close<wbr>OnOutside<wbr>Click</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">close<wbr>OnOutside<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L112">lib/select/select.component.ts:112</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether close the popover on outside click.</p>
 			</div>
 		</div>
 	</section>
@@ -50,12 +98,44 @@
 		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L83">lib/select/select.component.ts:83</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L100">lib/select/select.component.ts:100</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Whether the select is in compact mode.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="controlid" class="tsd-anchor"></a>
+		<h3>control<wbr>Id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">control<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;fd-select-${selectUniqueId++}&#x60;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L62">lib/select/select.component.ts:62</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Id of the control.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="controltemplate" class="tsd-anchor"></a>
+		<h3>control<wbr>Template</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">control<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L138">lib/select/select.component.ts:138</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Custom template used to build control body.</p>
 			</div>
 		</div>
 	</section>
@@ -66,7 +146,7 @@
 		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L67">lib/select/select.component.ts:67</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L78">lib/select/select.component.ts:78</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -82,7 +162,7 @@
 		<div class="tsd-signature tsd-kind-icon">fill<wbr>Control<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PopoverFillMode</span><span class="tsd-signature-symbol"> = &quot;at-least&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L117">lib/select/select.component.ts:117</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L134">lib/select/select.component.ts:134</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -100,47 +180,15 @@
 		<a name="glyph" class="tsd-anchor"></a>
 		<h3>glyph</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;slim-arrow-down&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L95">lib/select/select.component.ts:95</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L108">lib/select/select.component.ts:108</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Glyph to add icon in the select component.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="isopen" class="tsd-anchor"></a>
-		<h3>is<wbr>Open</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L75">lib/select/select.component.ts:75</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Open state of the select.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="loading" class="tsd-anchor"></a>
-		<h3>loading</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L135">lib/select/select.component.ts:135</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>If user wants to disable clicking when the content has not yet loaded and apply the three dots.</p>
 			</div>
 		</div>
 	</section>
@@ -151,12 +199,28 @@
 		<div class="tsd-signature tsd-kind-icon">max<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L87">lib/select/select.component.ts:87</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L104">lib/select/select.component.ts:104</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Max height of the popover. Any overflowing elements will be accessible through scrolling.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="mobile" class="tsd-anchor"></a>
+		<h3>mobile</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">mobile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L70">lib/select/select.component.ts:70</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the select component should be displayed in mobile mode.</p>
 			</div>
 		</div>
 	</section>
@@ -167,7 +231,7 @@
 		<div class="tsd-signature tsd-kind-icon">placeholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L71">lib/select/select.component.ts:71</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L86">lib/select/select.component.ts:86</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -177,34 +241,66 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selecttype" class="tsd-anchor"></a>
-		<h3>select<wbr>Type</h3>
+		<a name="readonly" class="tsd-anchor"></a>
+		<h3>readonly</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">select<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SelectType</span></div>
+		<div class="tsd-signature tsd-kind-icon">readonly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L91">lib/select/select.component.ts:91</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L82">lib/select/select.component.ts:82</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Select type defines the border type of the select button.</p>
+				<p>Whether the select component is readonly.</p>
 			</div>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="triggertemplate" class="tsd-anchor"></a>
-		<h3>trigger<wbr>Template</h3>
+		<a name="state" class="tsd-anchor"></a>
+		<h3>state</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">trigger<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SelectControlState</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L121">lib/select/select.component.ts:121</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L66">lib/select/select.component.ts:66</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Template with which to display the trigger box.</p>
+				<p>Whether the select component is disabled.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="statemessage" class="tsd-anchor"></a>
+		<h3>state<wbr>Message</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">state<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L74">lib/select/select.component.ts:74</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the select component is disabled.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="typeaheaddebounceinterval" class="tsd-anchor"></a>
+		<h3>typeahead<wbr>Debounce<wbr>Interval</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">typeahead<wbr>Debounce<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 250</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L154">lib/select/select.component.ts:154</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Time to wait in milliseconds after the last keydown before focusing or selecting option based on alphanumeric keys.</p>
 			</div>
 		</div>
 	</section>
@@ -215,7 +311,7 @@
 		<div class="tsd-signature tsd-kind-icon">unselect<wbr>Missing<wbr>Option<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L133">lib/select/select.component.ts:133</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L150">lib/select/select.component.ts:150</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -226,21 +322,48 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
 		<a name="value" class="tsd-anchor"></a>
 		<h3>value</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L79">lib/select/select.component.ts:79</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Current value of the selected option.</p>
-			</div>
-		</div>
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L94">lib/select/select.component.ts:94</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Current value of the selected option.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L89">lib/select/select.component.ts:89</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Sets value of the selected option.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
 		<a name="popperoptions" class="tsd-anchor"></a>
@@ -249,7 +372,7 @@
 		<div class="tsd-signature tsd-kind-icon">popper<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L99">lib/select/select.component.ts:99</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L116">lib/select/select.component.ts:116</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -264,7 +387,7 @@
 			<div class="tsd-signature tsd-kind-icon">placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"bottom-start"</span><span class="tsd-signature-symbol"> = &quot;bottom-start&quot;</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L100">lib/select/select.component.ts:100</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L117">lib/select/select.component.ts:117</a></li>
 				</ul>
 			</aside>
 		</section>
@@ -275,7 +398,7 @@
 			<div class="tsd-signature tsd-kind-icon">modifiers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L101">lib/select/select.component.ts:101</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L118">lib/select/select.component.ts:118</a></li>
 				</ul>
 			</aside>
 			<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
@@ -285,7 +408,7 @@
 				<div class="tsd-signature tsd-kind-icon">prevent<wbr>Overflow<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L102">lib/select/select.component.ts:102</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L119">lib/select/select.component.ts:119</a></li>
 					</ul>
 				</aside>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -295,7 +418,7 @@
 					<div class="tsd-signature tsd-kind-icon">boundaries<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"scrollParent"</span><span class="tsd-signature-symbol"> = &quot;scrollParent&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L105">lib/select/select.component.ts:105</a></li>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L122">lib/select/select.component.ts:122</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -306,7 +429,7 @@
 					<div class="tsd-signature tsd-kind-icon">enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> = true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L103">lib/select/select.component.ts:103</a></li>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L120">lib/select/select.component.ts:120</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -317,7 +440,7 @@
 					<div class="tsd-signature tsd-kind-icon">escape<wbr>With<wbr>Reference<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> = true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L104">lib/select/select.component.ts:104</a></li>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L121">lib/select/select.component.ts:121</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -334,7 +457,7 @@
 		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;boolean&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L139">lib/select/select.component.ts:139</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L166">lib/select/select.component.ts:166</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -350,7 +473,7 @@
 		<div class="tsd-signature tsd-kind-icon">value<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;any&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L143">lib/select/select.component.ts:143</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L170">lib/select/select.component.ts:170</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -367,22 +490,25 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Select<wbr>Component<span class="tsd-signature-symbol">(</span>_changeDetectorRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, _rtlService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RtlService</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Select<wbr>Component<span class="tsd-signature-symbol">(</span>_elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span>, _selectProxy<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectProxy</span>, _changeDetectorRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L169">lib/select/select.component.ts:169</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L248">lib/select/select.component.ts:248</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>_changeDetectorRef: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+						<h5>_elementRef: <span class="tsd-signature-type">ElementRef</span></h5>
 					</li>
 					<li>
-						<h5>_rtlService: <span class="tsd-signature-type">RtlService</span></h5>
+						<h5>_selectProxy: <span class="tsd-signature-type">SelectProxy</span></h5>
+					</li>
+					<li>
+						<h5>_changeDetectorRef: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SelectComponent</span></h4>
@@ -391,27 +517,110 @@
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dialogcontainerelementref" class="tsd-anchor"></a>
+		<h3>dialog<wbr>Container<wbr>Element<wbr>Ref</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">dialog<wbr>Container<wbr>Element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L182">lib/select/select.component.ts:182</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Reference to root element for the mobile mode dialog</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="isopen" class="tsd-anchor"></a>
+		<h3>is<wbr>Open</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L198">lib/select/select.component.ts:198</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether popover is opened</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="selectoptionslisttemplate" class="tsd-anchor"></a>
+		<h3>select<wbr>Options<wbr>List<wbr>Template</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">select<wbr>Options<wbr>List<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L186">lib/select/select.component.ts:186</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Reference to element containing list of options</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="selectviewvalue" class="tsd-anchor"></a>
+		<h3>select<wbr>View<wbr>Value</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">select<wbr>View<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L195">lib/select/select.component.ts:195</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Text value displayed in select control</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="selected" class="tsd-anchor"></a>
+		<h3>selected</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">OptionComponent</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L192">lib/select/select.component.ts:192</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Current selected option component reference.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
 	<h2>Accessors</h2>
 	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-		<a name="triggervalue" class="tsd-anchor"></a>
-		<h3>trigger<wbr>Value</h3>
+		<a name="isinteractive" class="tsd-anchor"></a>
+		<h3>is<wbr>Interactive</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> triggerValue<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isInteractive<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L281">lib/select/select.component.ts:281</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L282">lib/select/select.component.ts:282</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder.</p>
+						<p>Whether control can be interacted with</p>
 					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -429,7 +638,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L241">lib/select/select.component.ts:241</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L308">lib/select/select.component.ts:308</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -442,19 +651,24 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="ngoninit" class="tsd-anchor"></a>
-		<h3>ng<wbr>OnInit</h3>
+		<a name="focus" class="tsd-anchor"></a>
+		<h3>focus</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">focus<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L192">lib/select/select.component.ts:192</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L317">lib/select/select.component.ts:317</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Focuses select control.</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
@@ -470,7 +684,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L233">lib/select/select.component.ts:233</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L297">lib/select/select.component.ts:297</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -493,7 +707,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0be3e84e/libs/core/src/lib/select/select.component.ts#L224">lib/select/select.component.ts:224</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/select/select.component.ts#L292">lib/select/select.component.ts:292</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
