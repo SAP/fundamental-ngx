@@ -13,7 +13,7 @@
             [focusTrapped]="false"
         >
             <fd-popover-control>
-                <div class="fd-button fd-shellbar__button fd-user-menu__control">
+                <button class="fd-button fd-shellbar__button fd-user-menu__control">
                     <span
                         fd-identifier
                         *ngIf="!user.image"
@@ -32,7 +32,7 @@
                         [ngStyle]="{ 'background-image': 'url(' + user.image + ')' }"
                     >
                     </span>
-                </div>
+                </button>
             </fd-popover-control>
             <fd-popover-body>
                 <fd-menu>
