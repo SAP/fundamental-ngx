@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.0-rc.20"></a>
+# [0.18.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.19...v0.18.0-rc.20) (2020-05-16)
+
+
+### Bug Fixes
+
+* ie11 fixed ([#2515](https://github.com/SAP/fundamental-ngx/issues/2515)) ([b34a1c0](https://github.com/SAP/fundamental-ngx/commit/b34a1c0))
+* Remove hardcoded background color ([#2516](https://github.com/SAP/fundamental-ngx/issues/2516)) ([d521503](https://github.com/SAP/fundamental-ngx/commit/d521503))
+
+
+
 <a name="0.18.0-rc.19"></a>
 # [0.18.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.18...v0.18.0-rc.19) (2020-05-15)
 
