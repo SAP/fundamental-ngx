@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/en-gb';
 import 'moment/locale/de';
