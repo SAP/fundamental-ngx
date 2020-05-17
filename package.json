@@ -85,7 +85,7 @@
     "@nrwl/angular": "9.3.0",
     "@sap-theming/theming-base-content": "11.1.19",
     "@stackblitz/sdk": "1.4.0",
-    "@types/node": "13.13.4",
+    "@types/node": "14.0.1",
     "classlist.js": "1.1.20150312",
     "core-js": "3.6.5",
     "flexboxgrid": "6.3.1",
