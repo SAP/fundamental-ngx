@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MultiInputModule, DialogModule, MultiInputMobileModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MultiInputModule, MultiInputMobileModule],
     exports: [RouterModule],
     declarations: [
         MultiInputDocsComponent,

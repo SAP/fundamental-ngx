@@ -5,8 +5,8 @@ import {
     Component,
     ElementRef,
     isDevMode,
+    OnDestroy,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -14,8 +14,10 @@ import {
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { DialogConfig } from '../../dialog/dialog-utils/dialog-config.class';
 import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
-import { MultiInputMobileConfiguration } from './multi-input-mobile-configuration';
+import { DropdownMobileConfiguration } from './dropdown-mobile-configuration';
 import { MultiInputComponent } from '../multi-input.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-multi-input-mobile',
@@ -24,10 +26,10 @@ import { MultiInputComponent } from '../multi-input.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class MultiInputMobileComponent implements OnInit, AfterViewInit {
+export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
-    multiInputConfig: MultiInputMobileConfiguration;
+    multiInputConfig: DropdownMobileConfiguration;
 
     /** @hidden
      * For internal usage
@@ -44,12 +46,16 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     private _dialogRef: DialogRef;
+
     /** @hidden */
     private _selectedBackup: any[];
 
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
     constructor(
-        @Optional() private dialogService: DialogService,
-        @Optional() private _multiInputComponent: MultiInputComponent,
+        private _dialogService: DialogService,
+        private _multiInputComponent: MultiInputComponent,
         private _changeDetRef: ChangeDetectorRef,
         private _elementRef: ElementRef
     ) {}
@@ -64,12 +70,15 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (!this.dialogService && isDevMode()) {
-            throw new Error('There is no dialog service provided. Multi input can\'t be opened');
-        }
         this._overwriteDialogProperties();
         this._open();
         this._dialogRef.hide(true);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**
@@ -78,7 +87,7 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit {
      * Also removes from DOM, <input> control element, which is rendered in dialog.
      */
     hasOpenDialogs(): boolean {
-        return this.dialogService && this.dialogService.hasOpenDialogs();
+        return this._dialogService && this._dialogService.hasOpenDialogs();
     }
 
     /** Throw select all event, it's handled by multi input component */
@@ -100,18 +109,13 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     private _overwriteDialogProperties(): void {
-        const multiInputConfig = this.getMultiInputConfig();
-        if (!multiInputConfig) {
-            return;
-        }
-
         if (!this._multiInputComponent.dialogConfig) {
             this._multiInputComponent.dialogConfig = new DialogConfig();
         }
     }
 
     /** @hidden */
-    private getMultiInputConfig(): MultiInputMobileConfiguration {
+    private getMultiInputConfig(): DropdownMobileConfiguration {
         if (this._multiInputComponent.multiInputMobileConfig) {
             return this._multiInputComponent.multiInputMobileConfig;
         } else if (this._multiInputComponent.providedMultiInputConfig) {
@@ -139,13 +143,14 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit {
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
         this._multiInputComponent.openChange
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe(isOpen => this._toggleDialog(isOpen))
         ;
     }
 
     /** @hidden */
     private _open(): void {
-        this._dialogRef = this.dialogService.open(
+        this._dialogRef = this._dialogService.open(
             this.dialogTemplate,
             {
                 ...this._multiInputComponent.dialogConfig,

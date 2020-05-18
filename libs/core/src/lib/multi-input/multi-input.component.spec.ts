@@ -202,7 +202,7 @@ describe('MultiInputComponent', () => {
     });
 
     it('should bring back values, if canceled on mobile mode and dont emit changes', async () => {
-        component.mobileMode = true;
+        component.mobile = true;
 
         spyOn(component, 'onChange');
         spyOn(component.selectedChange, 'emit');
@@ -222,7 +222,7 @@ describe('MultiInputComponent', () => {
     });
 
     it('should emit changes values on approve', async () => {
-        component.mobileMode = true;
+        component.mobile = true;
 
         spyOn(component, 'onChange');
         spyOn(component.selectedChange, 'emit');

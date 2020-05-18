@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MultiInputMobileComponent } from './multi-input-mobile.component';
-import { MultiInputMobileConfiguration } from './multi-input-mobile-configuration';
-import { DialogService } from '../../dialog/dialog-service/dialog.service';
+import { DropdownMobileConfiguration } from './dropdown-mobile-configuration';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { EventEmitter } from '@angular/core';
 import { DialogModule } from '../../dialog/dialog.module';
@@ -14,28 +13,20 @@ describe('MultiInputMobileComponent', () => {
     let anyComponent: any;
     let fixture: ComponentFixture<MultiInputMobileComponent>;
 
-    const testedMultiInputConfigObject: MultiInputMobileConfiguration = {
-        title: 'title', approveButton: 'approve', cancelButton: 'cancel', closeButton: true
+    const testedMultiInputConfigObject: DropdownMobileConfiguration = {
+        title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true
     };
 
     const backupData: any[] = ['option 1', 'option 2', 'option 3'];
 
 
-    let mockedMultiInputComponent: MultiInputComponent = <any>{
-        selected: backupData,
-        multiInputMobileConfig: {title: 'title', approveButton: 'approve', cancelButton: 'cancel', closeButton: true},
-        providedMultiInputConfig: {title: 'title', approveButton: 'approve', cancelButton: 'cancel', closeButton: true},
-        dialogDismiss: (backupArguments: any[]) => {},
-        selectAllItems: () => {},
-        dialogApprove: () => {},
-        openChange: new EventEmitter<boolean>()
-    };
+    let mockedMultiInputComponent: Partial<MultiInputComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [ DialogModule, BrowserAnimationsModule ],
             declarations: [MultiInputMobileComponent],
-            providers: [ DialogService , DynamicComponentService, {provide: MultiInputComponent, useValue: mockedMultiInputComponent} ]
+            providers: [ DynamicComponentService, {provide: MultiInputComponent, useValue: mockedMultiInputComponent} ]
         })
             .compileComponents();
     }));

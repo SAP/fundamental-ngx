@@ -3,7 +3,7 @@ import {
     DIALOG_CONFIG,
     DialogConfig,
     MULTI_INPUT_MOBILE_CONFIG,
-    MultiInputMobileConfiguration
+    DropdownMobileConfiguration
 } from '@fundamental-ngx/core';
 
 const customConfig: DialogConfig = {
@@ -13,11 +13,11 @@ const customConfig: DialogConfig = {
     maxHeight: '736px'
 };
 
-const customMobileModeConfig: MultiInputMobileConfiguration = {
+const customMobileModeConfig: DropdownMobileConfiguration = {
     title: 'Title',
-    approveButton: 'Approve',
-    cancelButton: 'Cancel',
-    closeButton: true
+    approveButtonText: 'Approve',
+    cancelButtonText: 'Cancel',
+    hasCloseButton: true
 };
 
 @Component({
@@ -32,8 +32,8 @@ export class MultiInputMobileExampleComponent {
     firstValues: any[] = [];
     secondValues: any[] = [];
 
-    secondConfig: MultiInputMobileConfiguration = {
+    secondConfig: DropdownMobileConfiguration = {
         title: 'Title 2',
-        approveButton: 'Approve Button'
+        approveButtonText: 'Approve Button'
     };
 }
