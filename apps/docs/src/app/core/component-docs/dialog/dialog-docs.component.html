@@ -47,15 +47,16 @@
 </fd-docs-section-title>
 <description>
     The Dialog can be declared inside the <code>DefaultDialogObject</code> and opened with DialogService using the object
-    reference. It allows to create simple dialog, with customizable
+    reference. This allows you to easily create dialogs, with customizable properties for
     <ul>
         <li>title</li>
         <li>content</li>
         <li>subheader</li>
-        <li>buttons text</li>
-        <li>buttons callbacks</li>
+        <li>button text</li>
+        <li>button callbacks</li>
     </ul>
-    If title, or text for buttons is not defined, then this won't appear.
+    Each of which is optional. Please note you will need to provide callback functions for the approve/cancel/close
+    buttons if you wish to display them.
 </description>
 <component-example>
     <fd-dialog-object></fd-dialog-object>

@@ -22,7 +22,7 @@ export class DefaultDialogComponent {
     }
 
     /** @hidden */
-    CancelButtonClicked(): void {
+    cancelButtonClicked(): void {
         this.defaultDialogConfig.cancelButtonCallback();
     }
 }

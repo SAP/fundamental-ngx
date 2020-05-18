@@ -23,6 +23,6 @@ export interface DefaultDialogObject {
     /** Cancel Button Click Callback */
     cancelButtonCallback?: Function;
 
-    /** Close Button Callback. If not set empty, the close button won't show */
+    /** Close Button Callback. If left unprovided, the close button won't show */
     closeButtonCallback?: Function;
 }

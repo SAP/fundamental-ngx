@@ -27,7 +27,6 @@ export class DialogObjectComponent {
             approveButton: 'Ok',
             approveButtonCallback: () => this._dialogReference.close('Approved'),
             cancelButton: 'Cancel',
-            cancelButtonCallback: () => this._dialogReference.close('Canceled'),
             closeButtonCallback: () => this._dialogReference.dismiss('Dismissed')
         };
 
