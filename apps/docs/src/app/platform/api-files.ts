@@ -10,6 +10,7 @@ export const API_FILES = {
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
     link: ['LinkComponent'],
     searchField: ['SearchFieldComponent'],
+    select: ['SelectPlatformComponent'],
     radioGroup: ['RadioGroupComponent'],
     menuButton: ['MenuButtonComponent'],
     splitMenuButton: ['SplitMenuButtonComponent']
