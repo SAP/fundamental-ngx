@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.1-rc.8"></a>
+## [0.18.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.7...v0.18.1-rc.8) (2020-05-18)
+
+
+### Bug Fixes
+
+* (platform) implementation of lazyloading for platform Documentation  ([#2519](https://github.com/SAP/fundamental-ngx/issues/2519)) ([0118ee6](https://github.com/SAP/fundamental-ngx/commit/0118ee6))
+
+
+
 <a name="0.18.1-rc.7"></a>
 ## [0.18.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.6...v0.18.1-rc.7) (2020-05-17)
 
