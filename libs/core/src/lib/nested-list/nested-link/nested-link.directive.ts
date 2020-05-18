@@ -3,10 +3,9 @@ import {
     ContentChild,
     Directive,
     ElementRef,
-    EventEmitter,
-    HostBinding, HostListener,
-    Input, Optional,
-    Output,
+    HostBinding,
+    HostListener,
+    Input,
     Renderer2
 } from '@angular/core';
 import { NestedListTitleDirective } from '../nested-list-directives';
@@ -16,6 +15,15 @@ import { NestedItemService } from '../nested-item/nested-item.service';
     selector: '[fdNestedLink], [fd-nested-list-link]'
 })
 export class NestedLinkDirective {
+
+    /** Function that is called on click event dispatch on this element. */
+    @Input()
+    onClickCallback: Function;
+
+    /** Whether this element is selected*/
+    @Input()
+    @HostBinding('class.is-selected')
+    selected: boolean = false;
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__link')
@@ -33,24 +41,6 @@ export class NestedLinkDirective {
      */
     @HostBinding('attr.tabindex')
     tabIndex: number = 0;
-
-
-    /** Event that is thrown, when any keyboard event is dispatched on this element */
-    @Output()
-    readonly keyboardTriggered: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
-    /** Event that is thrown, when this element is clicked */
-    @Output()
-    readonly clicked: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-
-    /** Function that is called on click event dispatch on this element. */
-    @Input()
-    onClickCallback: Function;
-
-    /** Whether this element is selected*/
-    @Input()
-    @HostBinding('class.is-selected')
-    selected: boolean = false;
 
     /** Set focus on the element. */
     focus(): void {
@@ -73,7 +63,6 @@ export class NestedLinkDirective {
     /** Handler for keyboard events */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
-        this.keyboardTriggered.emit(event);
         this._itemService.keyDown.next(event);
     }
 
@@ -83,7 +72,6 @@ export class NestedLinkDirective {
         if (this.onClickCallback) {
             this.onClickCallback();
         }
-        this.clicked.emit(event);
     }
 
     /** Returns the title value of the title directive */

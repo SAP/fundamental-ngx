@@ -10,7 +10,7 @@
             <fd-nested-list-popover *ngIf="condensed && first && item.list" [title]="item.link?.title">
                 <div fd-nested-list-content [selected]="item.link.selected">
                     <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{item: item}"></ng-container>
-                    <a fd-nested-list-expand-icon></a>
+                    <button fd-nested-list-expand-icon></button>
                 </div>
                 <fd-prepared-nested-list [first]="false" *ngIf="item.list" [list]="item.list"></fd-prepared-nested-list>
             </fd-nested-list-popover>
@@ -22,7 +22,7 @@
             <ng-container *ngIf="(!condensed || !first) && item.list">
                 <div fd-nested-list-content>
                     <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{item: item}"></ng-container>
-                    <a fd-nested-list-expand-icon></a>
+                    <button fd-nested-list-expand-icon></button>
                 </div>
                 <fd-prepared-nested-list [first]="false" *ngIf="item.list" [list]="item.list"></fd-prepared-nested-list>
             </ng-container>

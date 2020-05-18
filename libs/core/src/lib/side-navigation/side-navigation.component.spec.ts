@@ -26,7 +26,7 @@ import { SideNavigationMainDirective } from './side-navigation-main.directive';
                             <a fd-nested-list-link>
                                 <span fd-nested-list-title>Link 3</span>
                             </a>
-                            <a fd-nested-list-expand-icon></a>
+                            <button fd-nested-list-expand-icon></button>
                         </div>
                         <ul fd-nested-list>
                             <li fd-nested-list-item>
@@ -46,7 +46,7 @@ import { SideNavigationMainDirective } from './side-navigation-main.directive';
                             <a fd-nested-list-link>
                                 <span fd-nested-list-title>Link 6</span>
                             </a>
-                            <a fd-nested-list-expand-icon></a>
+                            <button fd-nested-list-expand-icon></button>
                         </div>
                         <ul fd-nested-list>
                             <li fd-nested-list-item>
@@ -59,7 +59,7 @@ import { SideNavigationMainDirective } from './side-navigation-main.directive';
                                     <a fd-nested-list-link>
                                         <span fd-nested-list-title>Link 6</span>
                                     </a>
-                                    <a fd-nested-list-expand-icon></a>
+                                    <button fd-nested-list-expand-icon></button>
                                 </div>
                                 <ul fd-nested-list>
                                     <li fd-nested-list-item>

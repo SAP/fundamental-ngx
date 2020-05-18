@@ -8,20 +8,20 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 
 @Component({
     template: `
-        <div fd-nested-list-content #directiveElement>
+        <div fd-nested-list-content>
             <a fd-nested-list-link>
                 <span fd-nested-list-icon [glyph]="'settings'"></span>
                 <span fd-nested-list-title>Link 1</span>
             </a>
-            <a fd-nested-list-expand-icon #iconElement></a>
+            <a fd-nested-list-expand-icon></a>
         </div>
     `
 })
 class TestNestedContainerComponent {
-    @ViewChild('directiveElement', { static: true, read: NestedListContentDirective })
+    @ViewChild(NestedListContentDirective)
     directiveElement: NestedListContentDirective;
 
-    @ViewChild('iconElement', { static: true, read: NestedListExpandIconDirective })
+    @ViewChild(NestedListExpandIconDirective)
     iconElement: NestedListExpandIconDirective;
 }
 

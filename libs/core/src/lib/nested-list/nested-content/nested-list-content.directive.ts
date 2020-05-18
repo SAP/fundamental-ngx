@@ -1,12 +1,13 @@
 import {
     AfterContentInit,
-    ChangeDetectorRef, ContentChild,
+    ChangeDetectorRef,
+    ContentChild,
     Directive,
     ElementRef,
     EventEmitter,
-    HostBinding, HostListener,
+    HostBinding,
+    HostListener,
     Input,
-    OnInit,
     Output,
     Renderer2
 } from '@angular/core';
@@ -22,10 +23,6 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 })
 export class NestedListContentDirective implements AfterContentInit {
 
-    /** @hidden */
-    @HostBinding('class.fd-nested-list__content')
-    fdNestedListContentClass: boolean = true;
-
     /** Event that is thrown, when any keyboard event is dispatched on this element */
     @Output()
     readonly keyboardTriggered: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
@@ -35,12 +32,8 @@ export class NestedListContentDirective implements AfterContentInit {
     readonly clicked: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     /** @hidden */
-    constructor(
-        public changeDetRef: ChangeDetectorRef,
-        private _renderer: Renderer2,
-        private _elementRef: ElementRef,
-        private _itemService: NestedItemService,
-    ) {}
+    @HostBinding('class.fd-nested-list__content')
+    fdNestedListContentClass: boolean = true;
 
     /**
      * @hidden
@@ -60,6 +53,13 @@ export class NestedListContentDirective implements AfterContentInit {
     @ContentChild(NestedListExpandIconDirective)
     nestedExpandIcon: NestedListExpandIconDirective;
 
+    /** @hidden */
+    constructor(
+        public changeDetRef: ChangeDetectorRef,
+        private _renderer: Renderer2,
+        private _elementRef: ElementRef,
+        private _itemService: NestedItemService,
+    ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {

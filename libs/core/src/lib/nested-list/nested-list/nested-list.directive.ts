@@ -1,9 +1,14 @@
 import {
-    AfterContentInit, ChangeDetectorRef, ContentChildren,
+    AfterContentInit,
+    ChangeDetectorRef,
+    ContentChildren,
     Directive,
-    ElementRef, forwardRef,
+    ElementRef,
+    forwardRef,
     HostBinding,
-    Input, Optional, QueryList
+    Input,
+    Optional,
+    QueryList
 } from '@angular/core';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
@@ -16,10 +21,6 @@ import { NestedListInterface } from './nested-list.interface';
 })
 export class NestedListDirective implements AfterContentInit, NestedListInterface {
 
-    /** @hidden */
-    @HostBinding('class.fd-nested-list')
-    fdNestedListItemClass: boolean = true;
-
     /** In case the user wants to no use icons for items in this list */
     @Input()
     @HostBinding('class.fd-nested-list--text-only')
@@ -30,6 +31,14 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     @HostBinding('class.fd-nested-list--compact')
     compact: boolean = false;
 
+    /** @hidden */
+    @HostBinding('class.fd-nested-list')
+    fdNestedListItemClass: boolean = true;
+
+    /** @hidden */
+    @HostBinding('attr.aria-hidden')
+    public hidden: boolean = false;
+
     /**
      * @hidden
      * This variable is mostly to keep track of this list's children. There is not usage of it inside this directive,
@@ -37,10 +46,6 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
      */
     @ContentChildren(forwardRef(() => NestedItemDirective))
     nestedItems: QueryList<NestedItemDirective>;
-
-    /** @hidden */
-    @HostBinding('attr.aria-hidden')
-    public hidden: boolean = false;
 
     /** @hidden */
     constructor(
@@ -57,7 +62,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     ngAfterContentInit(): void {
-        let nestedLevel: number = this.getNestedLevel();
+        let nestedLevel: number = this._getNestedLevel();
         /** If there is condensed mode, maximum 2nd level class of nest can be added */
         if (this._nestedListStateService.condensed) {
             nestedLevel = Math.min(...[nestedLevel, 2]);
@@ -81,7 +86,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
      * @hidden
      * Method, that checks how deep is the list element
      */
-    private getNestedLevel(): number {
+    private _getNestedLevel(): number {
         let element = this._elementRef.nativeElement;
         const parentElements = [];
 

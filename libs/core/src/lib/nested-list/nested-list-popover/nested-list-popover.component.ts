@@ -29,8 +29,12 @@ import { NestedListContentDirective } from '../nested-content/nested-list-conten
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NestedListPopoverComponent implements NestedListPopoverInterface, AfterContentInit {
-    /** @hidden */
-    placement$: Observable<string>;
+
+    /** @hidden
+     * For Internal Usage - Gets information about title, which should be displayed inside popover
+     */
+    @Input()
+    title: string = '';
 
     /** @hidden */
     @ViewChild(PopoverComponent)
@@ -48,21 +52,16 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     @ContentChild(NestedListContentDirective)
     contentDirective: NestedListContentDirective;
 
-    /** @hidden
-     * For Internal Usage - Gets information about title, which should be displayed inside popover
-     */
-    @Input()
-    title: string = '';
-
     /**
      * @hidden
      * Reference to parent item, to propagate open and close change from popover.
      */
     parentItemElement: NestedItemInterface;
 
-    /**
-     * @hidden
-     */
+    /** @hidden */
+    placement$: Observable<string>;
+
+    /** @hidden */
     open: boolean = false;
 
     /** @hidden */
@@ -78,6 +77,13 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
         }
     }
 
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (!this.title) {
+            this.title = this._getTitle();
+        }
+    }
+
     /**
      * Method called, when open state is changed, from popover component (escape key, outside click).
      */
@@ -89,13 +95,6 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
             } else {
                 this.parentItemElement.triggerClose();
             }
-        }
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        if (!this.title) {
-            this.title = this._getTitle();
         }
     }
 

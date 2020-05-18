@@ -48,13 +48,13 @@ describe('NestedListKeyboardSupportService', () => {
     });
 
     it('Should return all of the items', () => {
-        const resultItems = (service as any).getAllListItems(<any>object);
+        const resultItems = (service as any)._getAllListItems(<any>object);
 
         expect(resultItems.length).toBe(10);
     });
 
     it('Should handle focus other element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         spyOn(items[1], 'focus').and.callThrough();
 
@@ -66,7 +66,7 @@ describe('NestedListKeyboardSupportService', () => {
     });
 
     it('Should handle open trigger on element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         items[0].expanded = false;
         items[0].hasChildren = true;
@@ -84,7 +84,7 @@ describe('NestedListKeyboardSupportService', () => {
     });
 
     it('Should handle close trigger on element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         items[0].expanded = true;
         items[0].hasChildren = true;
@@ -102,7 +102,7 @@ describe('NestedListKeyboardSupportService', () => {
     });
 
     it('Should focus last element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         items[0].expanded = false;
         items[0].hasChildren = true;
@@ -117,7 +117,7 @@ describe('NestedListKeyboardSupportService', () => {
     });
 
     it('Should focus first element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         items[items.length - 1].expanded = false;
         items[items.length - 1].hasChildren = false;

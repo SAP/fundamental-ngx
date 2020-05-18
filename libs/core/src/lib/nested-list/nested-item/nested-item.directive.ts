@@ -4,7 +4,7 @@ import {
     Directive,
     EventEmitter,
     HostBinding,
-    Input,
+    Input, OnDestroy,
     Output
 } from '@angular/core';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
@@ -12,6 +12,8 @@ import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedItemInterface } from './nested-item.interface';
 import { NestedItemService } from './nested-item.service';
 import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Directive({
     selector: '[fdNestedItem], [fd-nested-list-item]',
@@ -19,7 +21,27 @@ import { NestedListContentDirective } from '../nested-content/nested-list-conten
         NestedItemService
     ]
 })
-export class NestedItemDirective implements AfterContentInit, NestedItemInterface {
+export class NestedItemDirective implements AfterContentInit, NestedItemInterface, OnDestroy {
+
+    /** Whether item should be expanded */
+    @Input() set expanded(expanded: boolean) {
+        if (expanded !== this._expanded) {
+            this.propagateOpenChange(expanded);
+        }
+    }
+
+    /** @hidden */
+    get expanded(): boolean {
+        return this._expanded;
+    }
+
+    /** Event thrown, when expanded state is changed */
+    @Output()
+    readonly expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Event thrown, when any keyboard event is dispatched on this, or link element */
+    @Output()
+    readonly keyboardTriggered: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__item')
@@ -40,6 +62,33 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     @ContentChild(NestedListContentDirective)
     contentItem: NestedListContentDirective;
 
+    /** @hidden */
+    constructor (
+        private _itemService: NestedItemService,
+        private _keyboardService: NestedListKeyboardService
+    ) {}
+
+    /** @hidden */
+    private _expanded: boolean = false;
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this._setUpSubscriptions();
+        this._propagateHasChildrenProperty();
+        this._passItemReferences();
+        /** Propagate initial open state to children */
+        this.propagateOpenChange(this._expanded);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
+
     /** Check if the item element has any child */
     public get hasChildren(): boolean {
         return !!(this._itemService && this._itemService.list);
@@ -51,59 +100,6 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
             return this._itemService.list.nestedItems.toArray()
         }
         return [];
-    }
-
-    /** @hidden */
-    constructor (
-        private _itemService: NestedItemService,
-        private _keyboardService: NestedListKeyboardService
-    ) {}
-
-    /** Whether item should be expanded */
-    @Input() set expanded(expanded: boolean) {
-        if (expanded !== this._expanded) {
-            this.propagateOpenChange(expanded);
-        }
-    }
-
-    /** @hidden */
-    get expanded(): boolean {
-        return this._expanded;
-    }
-
-    /** @hidden */
-    private _expanded: boolean = false;
-
-    /** Event thrown, when expanded state is changed */
-    @Output()
-    readonly expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-    /** Event thrown, when any keyboard event is dispatched on this, or link element */
-    @Output()
-    readonly keyboardTriggered: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-
-        /** Subscribe to mouse click event, thrown by link item */
-        this._itemService.toggle.subscribe(() => this.toggle());
-
-        /** Propagate hasChildren property */
-        if (this.contentItem && this.hasChildren) {
-            this.contentItem.hasChildren = true;
-            this.contentItem.changeDetRef.detectChanges();
-        }
-
-        /** Subscribe to keyboard event and throw it farther */
-        this._itemService.keyDown.subscribe(keyboardEvent => this.keyboardTriggered.emit(keyboardEvent));
-
-        /** Pass this element to popover child item, to allow control `expanded` value */
-        if (this._itemService.popover) {
-            this._itemService.popover.parentItemElement = this;
-        }
-
-        /** Propagate initial open state to children */
-        this.propagateOpenChange(this._expanded);
     }
 
     /** Method that expand the item and propagate it to children */
@@ -185,5 +181,33 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** @hidden */
     private _shouldRefreshKeyboardService(): boolean {
         return !!(this._itemService.popover || this._itemService.list || this.contentItem);
+    }
+
+    /** @hidden */
+    private _setUpSubscriptions(): void {
+        /** Subscribe to mouse click event, thrown by link item */
+        this._itemService.toggle
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => this.toggle());
+
+        /** Subscribe to keyboard event and throw it farther */
+        this._itemService.keyDown
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(keyboardEvent => this.keyboardTriggered.emit(keyboardEvent));
+    }
+
+    /** @hidden */
+    private _propagateHasChildrenProperty(): void {
+        if (this.contentItem && this.hasChildren) {
+            this.contentItem.hasChildren = true;
+            this.contentItem.changeDetRef.detectChanges();
+        }
+    }
+
+    /** Pass this element to popover child item, to allow control `expanded` value */
+    private _passItemReferences(): void {
+        if (this._itemService.popover) {
+            this._itemService.popover.parentItemElement = this;
+        }
     }
 }

@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { Directive, ElementRef, HostBinding, HostListener, Input, OnChanges, OnInit } from '@angular/core';
 import { NestedItemService } from './nested-item/nested-item.service';
+import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 
 @Directive({
     selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]'
@@ -16,11 +17,11 @@ export class NestedListHeaderDirective {
 @Directive({
     selector: '[fdNestedDirectivesIcon], [fd-nested-list-icon]'
 })
-export class NestedListIconDirective extends AbstractFdNgxClass {
+export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnInit {
 
-    /** @hidden */
-    @HostBinding('class.fd-nested-list__icon')
-    fdNestedListIconClass: boolean = true;
+    /** The property allows user to pass additional css classes */
+    @Input()
+    public class: string = '';
 
     /**
      * The icon name to display. See the icon page for the list of icons
@@ -29,16 +30,37 @@ export class NestedListIconDirective extends AbstractFdNgxClass {
     @Input() glyph: string;
 
     /** @hidden */
-    _setProperties() {
-        if (this.glyph) {
-            this._addClassToElement('sap-icon--' + this.glyph);
-        }
-        this._addClassToElement('fd-nested-list__icon');
+    @HostBinding('class.fd-nested-list__icon')
+    fdNestedListIconClass: boolean = true;
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden */
+    public ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    public ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation */
+    public buildComponentCssClass(): string {
+        return [
+            'fd-nested-list__icon',
+            this.glyph ? `sap-icon--${this.glyph}` : '',
+            this.class
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
+    /** HasElementRef interface implementation */
+    public elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 
 }
@@ -55,8 +77,7 @@ export class NestedListTitleDirective {
     /** @hidden */
     constructor(
         private elementRef: ElementRef
-    ) {
-    }
+    ) {}
 
     /** Returns element's InnerText */
     public getInnerText(): string {
@@ -84,19 +105,14 @@ export class NestedListExpandIconDirective {
     @HostBinding('attr.aria-expanded')
     expanded: boolean = false;
 
-    /** Event thrown, when icon is clicked */
-    @Output()
-    clicked: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-
     constructor (
         private _itemService: NestedItemService
     ) {}
 
     /** Mouse event handler */
     @HostListener('click', ['$event'])
-    onClick(event: MouseEvent): void {
+    onClick(): void {
         this.expanded = !this.expanded;
         this._itemService.toggle.next(this.expanded);
-        this.clicked.emit(event);
     }
 }

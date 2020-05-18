@@ -34,15 +34,11 @@ export class PreparedNestedListComponent {
     @Input()
     first: boolean = true;
 
-    /**
-     * Defines if list should be displayed in condensed mode
-     */
+    /** Defines if list should be displayed in condensed mode */
     @Input()
     condensed: boolean = false;
 
-    /**
-     * List configuration
-     */
+    /** List configuration*/
     @Input()
     list: NestedListModel;
 
