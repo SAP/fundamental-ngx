@@ -199,10 +199,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     public focusTrap: FocusTrap;
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: Function = () => {
+    };
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched: Function = () => {
+    };
 
     /** @hidden */
     constructor(
@@ -210,8 +212,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
         private _menuKeyboardService: MenuKeyboardService,
-        private _dynamicComponentService: DynamicComponentService,
-    ) {}
+        private _dynamicComponentService: DynamicComponentService
+    ) {
+    }
 
     /** @hidden */
     ngOnInit() {
@@ -225,20 +228,20 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
         this.buildComponentCssClass();
-        if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
+        if (this.shouldFilterValues(changes)) {
+            this.displayedValues = this.dropdownValues;
             if (this.searchTerm) {
                 this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
-            } else {
-                this.displayedValues = this.dropdownValues;
             }
+            this._changeDetRef.markForCheck();
         }
-        this._changeDetRef.markForCheck();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this._menuKeyboardService.focusEscapeAfterList = () => {};
+        this._menuKeyboardService.focusEscapeAfterList = () => {
+        };
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -466,7 +469,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             MultiInputMobileComponent,
             { container: this._elementRef.nativeElement },
             { services: [this] }
-        )
+        );
     }
 
     /** @hidden */
@@ -474,4 +477,11 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         this.searchTerm = '';
         this._changeDetRef.detectChanges();
     }
+
+    /** @hidden */
+    private shouldFilterValues(changes): boolean {
+        return this.dropdownValues && (changes.dropdownValues || changes.searchTerm);
+    }
+
+
 }
