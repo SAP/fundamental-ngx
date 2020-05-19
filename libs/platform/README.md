@@ -81,18 +81,18 @@ For an existing Angular CLI application,
     import { ToggleModule } from '@fundamental-ngx/core';
     ```
 
+    Note: Be careful while importing the entire `FundamentalNgxPlatformModule` as it loads all modules; we recommend to only import relevant modules as needed.
+
     For models prior to 0.11.1 use `fundamental-ngx`
 
+    ```javascript
     import { ToggleModule } from '@fundamental-ngx/core';
 
     @NgModule({
-    ...
-    imports: [ToggleModule],
+        ...
+        imports: [ToggleModule],
     })
     export class DemoModule { }
-
-    ```
-
     ```
 
 3. **Add the component to your HTML.**

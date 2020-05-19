@@ -127,6 +127,7 @@ For an existing Angular CLI application,
 
     For models prior to 0.11.1 use `fundamental-ngx`
 
+    ```javascript
     import { SwitchModule } from '@fundamental-ngx/core';
 
     @NgModule({
@@ -134,9 +135,6 @@ For an existing Angular CLI application,
     imports: [SwitchModule],
     })
     export class DemoModule { }
-
-    ```
-
     ```
 
 3. **Add the component to your HTML.**
@@ -144,6 +142,33 @@ For an existing Angular CLI application,
     ```html
     <fd-switch [size]="'l'" [(checked)]="myValue">Large Switch</fd-switch>
     ```
+
+4. **To add support for i18n**
+
+    To mark a text for translation, use [Angular's i18n marker](https://angular.io/guide/i18n#mark-text-with-the-i18n-attribute).
+
+    For example, to translate the button text, add `i18n` on the element `fdp-button`:
+
+    ```html
+    <fdp-button i18n="@@emphasizedBtn" [type]="'emphasized'">Emphasized Button</fdp-button>
+    ```
+
+    It is recommended to give ID to the marker like `@@emphasizedBtn` for easier tracking in the extracted `messages.xlf` file.
+
+    Note: Some components allow you to provide data imperatively or through an array of objects like `[list]="seasons"` in the below example:
+
+    ```html
+    <fdp-radio-group 
+        [id]="'radio1'"
+        [name]="'radio1'" 
+        [list]="seasons" 
+        [value]="'Summer'" 
+        formControlName="example1">
+    </fdp-radio-group>
+    ```
+
+    When data is provided like this(probably coming from a db or backend server), it is left to the application to provide for the translated
+    text themselves. Providing i18n markers as shown in the previous example will not work as this is a limitation of Angular's i18n for now.
 
 ## Tests
 
