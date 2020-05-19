@@ -8,7 +8,7 @@ import { DialogModule } from '../../dialog/dialog.module';
 import { MultiInputComponent } from '../multi-input.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('MultiInputMobileComponent', () => {
+fdescribe('MultiInputMobileComponent', () => {
     let component: MultiInputMobileComponent;
     let anyComponent: any;
     let fixture: ComponentFixture<MultiInputMobileComponent>;
@@ -20,7 +20,15 @@ describe('MultiInputMobileComponent', () => {
     const backupData: any[] = ['option 1', 'option 2', 'option 3'];
 
 
-    let mockedMultiInputComponent: Partial<MultiInputComponent>;
+    let mockedMultiInputComponent: Partial<MultiInputComponent> = {
+        selected: backupData,
+        multiInputMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+        providedMultiInputConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+        dialogDismiss: (backupArguments: any[]) => {},
+        selectAllItems: () => {},
+        dialogApprove: () => {},
+        openChange: new EventEmitter<boolean>()
+    };
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -32,10 +40,10 @@ describe('MultiInputMobileComponent', () => {
     }));
 
     beforeEach(() => {
-        mockedMultiInputComponent = <any>{
+        mockedMultiInputComponent = {
             selected: backupData,
-            multiInputMobileConfig: {title: 'title', approveButton: 'approve', cancelButton: 'cancel', closeButton: true},
-            providedMultiInputConfig: {title: 'title', approveButton: 'approve', cancelButton: 'cancel', closeButton: true},
+            multiInputMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+            providedMultiInputConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
             dialogDismiss: (backupArguments: any[]) => {},
             selectAllItems: () => {},
             dialogApprove: () => {},
