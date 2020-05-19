@@ -9,9 +9,9 @@
 
 ## Description
 
-The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and 
-to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is 
-to create a layer which is closer to application development and not to the library creators. 
+The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and
+to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is
+to create a layer which is closer to application development and not to the library creators.
 
 Since there is a plan to generate UI programatically then components must be instantiable (they cannot be directives).
 
@@ -19,24 +19,23 @@ Since there is a plan to generate UI programatically then components must be 
 
 Each component that is developed here needs to have corresponding [technical specification](https://github.com/SAP/fundamental-ngx/wiki/Platform-Library-Home), where we need to agree on several things:
 
-* Component Signature
-* We try to capture common things among components
-* Functionality
-* We decide how much extensible the component needs to be.
+-   Component Signature
+-   We try to capture common things among components
+-   Functionality
+-   We decide how much extensible the component needs to be.
 
 As already mentioned above platform the goal is try to be closer to application developer as well as make it more ready for
-enterprise use. 
+enterprise use.
 
-* Defining component model and how we work with data
-* Pre-defined layouts (Dashboard, detail page, master/detail page, Search/result page).
+-   Defining component model and how we work with data
+-   Pre-defined layouts (Dashboard, detail page, master/detail page, Search/result page).
 
 This `Platform UI library` is not going to be only about UI but it needs to also capture other aspects:
 
-* Application state UI
-* Bootstrapping and Configuration
-* Communication with the backend system.
+-   Application state UI
+-   Bootstrapping and Configuration
+-   Communication with the backend system.
 
-  
 ## API Reference
 
 See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/platform/home) for examples and API details.
@@ -132,7 +131,6 @@ If you want to contribute, please check the [CONTRIBUTING.md](https://github.com
 
 Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/master/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
 
-
 # Platform
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
@@ -154,6 +152,10 @@ After building your library with `ng build platform`, go to the dist folder `cd 
 ## Running unit tests
 
 Run `ng test platform` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Supporting internationalization
+
+If you want to support i18n, please check the [Supporting i18n in ngx/platform Wiki](https://github.com/SAP/fundamental-ngx/wiki/Internationalization-Supporting-in-@fundamental-ngx-platform) documentation for general guidelines when working on a new component.
 
 ## Further help
 
