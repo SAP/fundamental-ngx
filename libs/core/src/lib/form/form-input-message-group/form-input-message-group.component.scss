@@ -8,7 +8,7 @@
 }
 
 .fd-form-input-message-group {
-    // unfortunatelly it collides with
+    // unfortunately, it collides with
     // fd-popover-custom (the order of included css files)
     // and has to be overwritten
     &.fd-popover-custom {
