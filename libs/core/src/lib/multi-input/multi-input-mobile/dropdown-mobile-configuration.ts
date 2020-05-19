@@ -1,8 +1,3 @@
-import { InjectionToken } from '@angular/core';
-
-export const MULTI_INPUT_MOBILE_CONFIG = new InjectionToken<string[]>('DropdownMobileConfiguration');
-
-
 export class DropdownMobileConfiguration {
 
     /** Dialog Title */

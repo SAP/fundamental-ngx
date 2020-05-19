@@ -12,7 +12,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
-import { DialogConfig } from '../../dialog/dialog-utils/dialog-config.class';
 import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
 import { DropdownMobileConfiguration } from './dropdown-mobile-configuration';
 import { MultiInputComponent } from '../multi-input.component';
@@ -110,8 +109,6 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
     private getMultiInputConfig(): DropdownMobileConfiguration {
         if (this._multiInputComponent.multiInputMobileConfig) {
             return this._multiInputComponent.multiInputMobileConfig;
-        } else if (this._multiInputComponent.providedMultiInputConfig) {
-            return this._multiInputComponent.providedMultiInputConfig;
         } else {
             if (isDevMode()) {
                 throw new Error('There is no multi input configuration object provided. ' +

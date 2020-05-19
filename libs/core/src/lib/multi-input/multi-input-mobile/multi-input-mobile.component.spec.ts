@@ -8,7 +8,7 @@ import { DialogModule } from '../../dialog/dialog.module';
 import { MultiInputComponent } from '../multi-input.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-fdescribe('MultiInputMobileComponent', () => {
+describe('MultiInputMobileComponent', () => {
     let component: MultiInputMobileComponent;
     let anyComponent: any;
     let fixture: ComponentFixture<MultiInputMobileComponent>;
@@ -23,7 +23,6 @@ fdescribe('MultiInputMobileComponent', () => {
     let mockedMultiInputComponent: Partial<MultiInputComponent> = {
         selected: backupData,
         multiInputMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
-        providedMultiInputConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
         dialogDismiss: (backupArguments: any[]) => {},
         selectAllItems: () => {},
         dialogApprove: () => {},
@@ -43,7 +42,6 @@ fdescribe('MultiInputMobileComponent', () => {
         mockedMultiInputComponent = {
             selected: backupData,
             multiInputMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
-            providedMultiInputConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
             dialogDismiss: (backupArguments: any[]) => {},
             selectAllItems: () => {},
             dialogApprove: () => {},
@@ -57,11 +55,6 @@ fdescribe('MultiInputMobileComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should get multi input config, when it is provided', () => {
-        anyComponent._multiInputComponent.multiInputMobileConfig = null;
-        expect(anyComponent.getMultiInputConfig()).toEqual(testedMultiInputConfigObject);
     });
 
     it('should get multi input config, when it is passed by input', () => {
