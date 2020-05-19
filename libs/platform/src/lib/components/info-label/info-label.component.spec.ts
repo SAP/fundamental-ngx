@@ -44,14 +44,12 @@ describe('InfoLabelComponent', () => {
         host.glyph = 'hide';
         fixture.detectChanges();
         let linkElement = fixture.debugElement.query(By.css('span'));
-        expect(linkElement.nativeElement.classList.contains('fd-info-label--numeric')).toBe(true);
         expect(linkElement.nativeElement.classList.contains('fd-info-label--accent-color-2')).toBe(true);
         expect(linkElement.nativeElement.classList.contains('sap-icon--hide')).toBe(true);
         expect(linkElement.nativeElement.textContent).toContain('Info Label');
         host.color = '4';
         fixture.detectChanges();
         linkElement = fixture.debugElement.query(By.css('span'));
-        expect(linkElement.nativeElement.classList.contains('fd-info-label--numeric')).toBe(true);
         expect(linkElement.nativeElement.classList.contains('fd-info-label--accent-color-4')).toBe(true);
         expect(linkElement.nativeElement.textContent).toContain('Info Label');
     });
