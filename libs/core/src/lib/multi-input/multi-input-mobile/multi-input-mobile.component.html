@@ -1,20 +1,11 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <ng-template fdTemplate="header">
-                <div fd-bar-left>
-                    <fd-bar-element>
-                        <h1 fd-dialog-title>{{ multiInputConfig?.title }}</h1>
-                    </fd-bar-element>
-                </div>
-                <div fd-bar-right *ngIf="multiInputConfig?.hasCloseButton">
-                    <fd-bar-element>
-                        <button fd-dialog-close-button
-                                (click)="handleDismiss()">
-                        </button>
-                    </fd-bar-element>
-                </div>
-            </ng-template>
+            <h1 fd-dialog-title *ngIf="multiInputConfig?.title">{{ multiInputConfig?.title }}</h1>
+            <button fd-dialog-close-button
+                    *ngIf="multiInputConfig?.hasCloseButton"
+                    (click)="handleDismiss()">
+            </button>
             <ng-template fdTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">

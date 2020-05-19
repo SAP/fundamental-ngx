@@ -1,18 +1,20 @@
+<label fd-form-label>Multi Input with dialog generated from injected object</label>
 <fd-multi-input [mobile]="true"
-                [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
-                [placeholder]="'Search here...'"
-                [(ngModel)]="firstValues"
+                [dropdownValues]="values"
+                placeholder="Search here..."
                 [showAllButton]="false"
+                [(ngModel)]="firstValues"
 ></fd-multi-input>
 
 <br>
 <br>
 <br>
 
+<label fd-form-label>Multi Input with dialog generated from passed object</label>
 <fd-multi-input [mobile]="true"
-                [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
-                [placeholder]="'Search here...'"
+                [dropdownValues]="values"
+                [showAllButton]="false"
+                placeholder="Search here..."
                 [multiInputMobileConfig]="secondConfig"
                 [(ngModel)]="secondValues"
-                [showAllButton]="false"
 ></fd-multi-input>

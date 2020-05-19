@@ -70,7 +70,6 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._overwriteDialogProperties();
         this._open();
         this._dialogRef.hide(true);
     }
@@ -105,13 +104,6 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
     public handleApprove(): void {
         this._dialogRef.hide(true);
         this._multiInputComponent.dialogApprove();
-    }
-
-    /** @hidden */
-    private _overwriteDialogProperties(): void {
-        if (!this._multiInputComponent.dialogConfig) {
-            this._multiInputComponent.dialogConfig = new DialogConfig();
-        }
     }
 
     /** @hidden */

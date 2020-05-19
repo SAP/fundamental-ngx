@@ -36,4 +36,6 @@ export class MultiInputMobileExampleComponent {
         title: 'Title 2',
         approveButtonText: 'Approve Button'
     };
+
+    values: any[] = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange'];
 }
