@@ -68,7 +68,7 @@ describe('MultiInputMobileComponent', () => {
         spyOn(anyComponent._dialogRef._onHide, 'next');
         spyOn(anyComponent._multiInputComponent, 'dialogApprove');
         fixture.detectChanges();
-        expect(component.hasOpenDialogs()).toBe(true);
+        expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         anyComponent._multiInputComponent.openChange.emit(true);
         fixture.detectChanges();
         expect(anyComponent._dialogRef._onHide.next).toHaveBeenCalledWith(false);
@@ -82,7 +82,7 @@ describe('MultiInputMobileComponent', () => {
         spyOn(anyComponent._dialogRef._onHide, 'next');
         spyOn(anyComponent._multiInputComponent, 'dialogDismiss');
         fixture.detectChanges();
-        expect(component.hasOpenDialogs()).toBe(true);
+        expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         anyComponent._multiInputComponent.selected = [];
         anyComponent._multiInputComponent.openChange.emit(true);
         fixture.detectChanges();
