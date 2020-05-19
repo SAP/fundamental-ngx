@@ -1,7 +1,6 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     isDevMode,
@@ -55,7 +54,6 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
     constructor(
         private _dialogService: DialogService,
         private _multiInputComponent: MultiInputComponent,
-        private _changeDetRef: ChangeDetectorRef,
         private _elementRef: ElementRef
     ) {}
 
@@ -77,15 +75,6 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
-    }
-
-    /**
-     * Method returns, if the dialog is open.
-     * It gives information to prevent from having more than 1 dialog .
-     * Also removes from DOM, <input> control element, which is rendered in dialog.
-     */
-    hasOpenDialogs(): boolean {
-        return this._dialogService && this._dialogService.hasOpenDialogs();
     }
 
     /** Throw select all event, it's handled by multi input component */
@@ -122,7 +111,7 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
     private _toggleDialog(open: boolean): void {
         if (open) {
             this._selectedBackup = [...this._multiInputComponent.selected];
-            if (!this.hasOpenDialogs()) {
+            if (!this._dialogService.hasOpenDialogs()) {
                 this._open();
             }
         }
