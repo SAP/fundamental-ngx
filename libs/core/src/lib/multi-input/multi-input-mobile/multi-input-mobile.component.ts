@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
-import { DropdownMobileConfiguration } from './dropdown-mobile-configuration';
+import { DropdownMobileConfiguration } from '../../utils/interfaces/dropdown-mobile-configuration';
 import { MultiInputComponent } from '../multi-input.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -83,13 +83,13 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     /** @hidden */
-    public handleDismiss(): void {
+    handleDismiss(): void {
         this._dialogRef.hide(true);
         this._multiInputComponent.dialogDismiss(this._selectedBackup);
     }
 
     /** @hidden */
-    public handleApprove(): void {
+    handleApprove(): void {
         this._dialogRef.hide(true);
         this._multiInputComponent.dialogApprove();
     }

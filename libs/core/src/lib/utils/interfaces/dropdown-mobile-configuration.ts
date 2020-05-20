@@ -1,4 +1,4 @@
-export class DropdownMobileConfiguration {
+export interface DropdownMobileConfiguration {
 
     /** Dialog Title */
     title?: string;

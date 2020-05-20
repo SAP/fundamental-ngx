@@ -28,7 +28,7 @@ import { FormStates } from '../form/form-control/form-states';
 import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { DropdownMobileConfiguration } from './multi-input-mobile/dropdown-mobile-configuration';
+import { DropdownMobileConfiguration } from '../utils/interfaces/dropdown-mobile-configuration';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 
 /**
@@ -196,7 +196,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     displayedValues: any[] = [];
 
     /** @hidden */
-    public focusTrap: FocusTrap;
+    focusTrap: FocusTrap;
 
     /** @hidden */
     onChange: Function = () => {
@@ -338,14 +338,14 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     /** @hidden */
-    public handleKeyDown(event: KeyboardEvent, index: number): void {
+    handleKeyDown(event: KeyboardEvent, index: number): void {
         if (!this.mobile) {
             this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
         }
     }
 
     /** @hidden */
-    public handleInputKeydown(event: KeyboardEvent): void {
+    handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKey(event, 'ArrowDown') && !this.mobile) {
             if (event.altKey) {
                 this.openChangeHandle(true);
