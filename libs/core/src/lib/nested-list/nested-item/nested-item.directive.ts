@@ -90,12 +90,12 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     }
 
     /** Check if the item element has any child */
-    public get hasChildren(): boolean {
+    get hasChildren(): boolean {
         return !!(this._itemService && this._itemService.list);
     }
 
     /** Get all of the children item elements */
-    public get allChildrenItems(): NestedItemInterface[] {
+    get allChildrenItems(): NestedItemInterface[] {
         if (this._itemService && this._itemService.list) {
             return this._itemService.list.nestedItems.toArray()
         }

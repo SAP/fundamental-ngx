@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NestedListExpandIconDirective, NestedListTitleDirective, NestedListIconDirective } from './nested-list-directives';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedItemService } from './nested-item/nested-item.service';
@@ -19,10 +19,6 @@ class TestNestedContainerComponent {
 
     @ViewChild(NestedListIconDirective)
     iconElement: NestedListIconDirective;
-
-    constructor(
-        public elementRef: ElementRef
-    ) {}
 }
 
 describe('NestedListDirectives', () => {

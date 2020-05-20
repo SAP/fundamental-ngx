@@ -21,7 +21,7 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
 
     /** The property allows user to pass additional css classes */
     @Input()
-    public class: string = '';
+    class: string = '';
 
     /**
      * The icon name to display. See the icon page for the list of icons
@@ -37,18 +37,18 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
-    public ngOnChanges(): void {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
     /** @hidden */
-    public ngOnInit(): void {
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
     @applyCssClass
     /** CssClassBuilder interface implementation */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string {
         return [
             'fd-nested-list__icon',
             this.glyph ? `sap-icon--${this.glyph}` : '',
@@ -59,7 +59,7 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
     }
 
     /** HasElementRef interface implementation */
-    public elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 
@@ -80,7 +80,7 @@ export class NestedListTitleDirective {
     ) {}
 
     /** Returns element's InnerText */
-    public getInnerText(): string {
+    getInnerText(): string {
         return this.elementRef && this.elementRef.nativeElement.innerText;
     }
 }

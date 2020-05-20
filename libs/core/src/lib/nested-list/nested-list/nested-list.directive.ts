@@ -37,7 +37,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     @HostBinding('attr.aria-hidden')
-    public hidden: boolean = false;
+    hidden: boolean = false;
 
     /**
      * @hidden
@@ -72,7 +72,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     }
 
     /** @hidden */
-    public detectChanges(): void {
+    detectChanges(): void {
         this._changeDetectionRef.markForCheck();
     }
 

@@ -30,27 +30,17 @@ export class NestedLinkDirective {
     fdNestedListItemClass: boolean = true;
 
     /**
-     *  @hidden
-     *  Reference to title element, it is used, to get title for condensed mode.
-     */
-    @ContentChild(NestedListTitleDirective)
-    title: NestedListTitleDirective;
-
-    /**
      * @hidden
      */
     @HostBinding('attr.tabindex')
     tabIndex: number = 0;
 
-    /** Set focus on the element. */
-    focus(): void {
-        this._elementRef.nativeElement.focus();
-    }
-
-    /** Dispatches the click event on the element */
-    click(): void {
-        this._elementRef.nativeElement.click();
-    }
+    /**
+     *  @hidden
+     *  Reference to title element, it is used, to get title for condensed mode.
+     */
+    @ContentChild(NestedListTitleDirective)
+    title: NestedListTitleDirective;
 
     /** @hidden */
     constructor(
@@ -72,6 +62,16 @@ export class NestedLinkDirective {
         if (this.onClickCallback) {
             this.onClickCallback();
         }
+    }
+
+    /** Set focus on the element. */
+    focus(): void {
+        this._elementRef.nativeElement.focus();
+    }
+
+    /** Dispatches the click event on the element */
+    click(): void {
+        this._elementRef.nativeElement.click();
     }
 
     /** Returns the title value of the title directive */

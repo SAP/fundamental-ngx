@@ -24,7 +24,7 @@ export class NestedListKeyboardService {
      * Function called after refresh$ event is triggered.
      * Refresh the list of NestedItems, that the keyboard support should be provided for
      */
-    public refreshItems(lists: NestedListInterface[]): void {
+    refreshItems(lists: NestedListInterface[]): void {
         const items: NestedItemInterface[] = [];
 
         /** Gathering all of the items */

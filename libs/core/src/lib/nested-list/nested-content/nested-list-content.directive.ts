@@ -23,6 +23,11 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 })
 export class NestedListContentDirective implements AfterContentInit {
 
+    /** Whether this element is selected*/
+    @Input()
+    @HostBinding('class.is-selected')
+    selected: boolean = false;
+
     /** Event that is thrown, when any keyboard event is dispatched on this element */
     @Output()
     readonly keyboardTriggered: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
@@ -41,11 +46,6 @@ export class NestedListContentDirective implements AfterContentInit {
      */
     @HostBinding('class.has-child')
     hasChildren: boolean = false;
-
-    /** Whether this element is selected*/
-    @Input()
-    @HostBinding('class.is-selected')
-    selected: boolean = false;
 
     @ContentChild(NestedLinkDirective)
     nestedLink: NestedLinkDirective;
