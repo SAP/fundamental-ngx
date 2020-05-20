@@ -96,5 +96,4 @@ export class NestedListContentDirective implements AfterContentInit {
             this.nestedLink.click()
         }
     }
-
 }

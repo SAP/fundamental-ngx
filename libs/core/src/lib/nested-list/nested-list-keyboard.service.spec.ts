@@ -1,5 +1,5 @@
 import { NestedListKeyboardService } from './nested-list-keyboard.service';
-import { MenuKeyboardService } from '@fundamental-ngx/core';
+import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';
 
 class MockNestedLink {

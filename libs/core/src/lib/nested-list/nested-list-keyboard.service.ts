@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { NestedItemInterface } from './nested-item/nested-item.interface';
 import { NestedListInterface } from './nested-list/nested-list.interface';
-import { KeyUtil } from '@fundamental-ngx/core';
+import { KeyUtil } from '../utils/functions/key-util';
 
 /**
  * Nested list keyboard service, which uses MenuKeyboardService, to deal with ArrowUp, ArrowDown, Space, Enter.

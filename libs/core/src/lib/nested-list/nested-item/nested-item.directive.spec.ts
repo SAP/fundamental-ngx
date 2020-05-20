@@ -1,6 +1,9 @@
 import { NestedItemDirective } from './nested-item.directive';
 import { Component, ViewChild } from '@angular/core';
-import { MenuKeyboardService, NestedLinkDirective, NestedListExpandIconDirective, PopoverModule } from '@fundamental-ngx/core';
+import { PopoverModule } from '../../popover/popover.module';
+import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
+import { NestedLinkDirective } from '../nested-link/nested-link.directive';
+import { NestedListExpandIconDirective } from '../nested-list-directives';
 import { NestedListModule } from '../nested-list.module';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
@@ -158,7 +161,7 @@ describe('NestedItemDirective', () => {
     it('Should react to events from icon child', () => {
         fixture.detectChanges();
         spyOn(nestedItemListDirective, 'toggle');
-        nestedItemListDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
+        nestedItemListDirective.contentItem.nestedExpandIcon.onClick();
         fixture.detectChanges();
         expect(nestedItemListDirective.toggle).toHaveBeenCalledWith();
     });
@@ -167,7 +170,7 @@ describe('NestedItemDirective', () => {
         fixture.detectChanges();
         itemService.popover.handleOpenChange(true);
         spyOn(nestedItemPopoverDirective, 'toggle');
-        nestedItemPopoverDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
+        nestedItemPopoverDirective.contentItem.nestedExpandIcon.onClick();
         fixture.detectChanges();
         expect(nestedItemPopoverDirective.toggle).toHaveBeenCalledWith();
     });
