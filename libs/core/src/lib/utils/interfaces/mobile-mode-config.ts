@@ -1,4 +1,4 @@
-export interface DropdownMobileConfiguration {
+export interface MobileModeConfig {
 
     /** Dialog Title */
     title?: string;

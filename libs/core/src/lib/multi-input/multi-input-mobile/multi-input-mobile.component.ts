@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
-import { DropdownMobileConfiguration } from '../../utils/interfaces/dropdown-mobile-configuration';
+import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 import { MultiInputComponent } from '../multi-input.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -27,7 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
-    multiInputConfig: DropdownMobileConfiguration;
+    multiInputConfig: MobileModeConfig;
 
     /** @hidden
      * For internal usage
@@ -95,7 +95,7 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     /** @hidden */
-    private getMultiInputConfig(): DropdownMobileConfiguration {
+    private getMultiInputConfig(): MobileModeConfig {
         if (this._multiInputComponent.multiInputMobileConfig) {
             return this._multiInputComponent.multiInputMobileConfig;
         } else {

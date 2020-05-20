@@ -28,7 +28,7 @@ import { FormStates } from '../form/form-control/form-states';
 import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { DropdownMobileConfiguration } from '../utils/interfaces/dropdown-mobile-configuration';
+import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 
 /**
@@ -154,7 +154,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
-    multiInputMobileConfig: DropdownMobileConfiguration;
+    multiInputMobileConfig: MobileModeConfig;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()

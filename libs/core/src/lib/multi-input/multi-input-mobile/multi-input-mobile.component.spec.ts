@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MultiInputMobileComponent } from './multi-input-mobile.component';
-import { DropdownMobileConfiguration } from '../../utils/interfaces/dropdown-mobile-configuration';
+import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { EventEmitter } from '@angular/core';
 import { DialogModule } from '../../dialog/dialog.module';
@@ -13,7 +13,7 @@ describe('MultiInputMobileComponent', () => {
     let anyComponent: any;
     let fixture: ComponentFixture<MultiInputMobileComponent>;
 
-    const testedMultiInputConfigObject: DropdownMobileConfiguration = {
+    const testedMultiInputConfigObject: MobileModeConfig = {
         title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true
     };
 

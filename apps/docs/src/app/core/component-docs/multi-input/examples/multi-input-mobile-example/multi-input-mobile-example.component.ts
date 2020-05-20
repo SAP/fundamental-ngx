@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
     DIALOG_CONFIG,
     DialogConfig,
-    DropdownMobileConfiguration
+    MobileModeConfig
 } from '@fundamental-ngx/core';
 
 const customConfig: DialogConfig = {
@@ -22,7 +22,7 @@ const customConfig: DialogConfig = {
 export class MultiInputMobileExampleComponent {
     selectedValues: any[] = [];
 
-    secondConfig: DropdownMobileConfiguration = {
+    secondConfig: MobileModeConfig = {
         title: 'Title',
         approveButtonText: 'Approve',
         cancelButtonText: 'Cancel',
