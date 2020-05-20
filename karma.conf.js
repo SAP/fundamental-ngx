@@ -29,10 +29,22 @@ module.exports = () => {
     colors: true,
     logLevel: constants.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadlessNoSandbox'],
     singleRun: true,
+  customLaunchers:{
+      ChromeHeadlessNoSandbox:{
+          base:"ChromeHeadless",
+          flags:[
+              "--no-sandbox",
+              // required to run without privileges in Docker
+              "--disable-web-security",
+              "--disable-gpu",
+              "--remote-debugging-port=9222"
+          ]
+      }
+  },
     parallelOptions: {
       executors: 3
-    }
+    },
   };
 };

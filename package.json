@@ -67,7 +67,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "nx": "nx",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
+    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test"
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
