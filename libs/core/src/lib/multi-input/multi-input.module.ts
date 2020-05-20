@@ -29,4 +29,5 @@ import { LinkModule } from '../link/link.module';
     ],
     exports: [MultiInputComponent]
 })
-export class MultiInputModule {}
+export class MultiInputModule {
+}

@@ -27,6 +27,26 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'mobileMultiInput'" [componentName]="'multi-input'">
+    Mobile Mode Multi Input
+</fd-docs-section-title>
+<description>
+    There is way to use mobile mode on multi input component. To achieve it user needs to:
+    <ul>
+        <li>Set <code>[mobileMode]</code> property to true</li>
+        <li>Provide <code>DIALOG_CONFIG</code></li>
+        <li>
+            Add configuration object of multiInput by passing <code>[multiInputMobileConfig]</code> property
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fd-multi-input-mobile-example></fd-multi-input-mobile-example>
+</component-example>
+<code-example [exampleFiles]="mobile"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'displayObjectProperty'" [componentName]="'multi-input'">
     Display Object Property
 </fd-docs-section-title>
