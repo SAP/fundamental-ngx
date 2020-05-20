@@ -1,102 +1,94 @@
-<fd-menu [compact]="true">
+<fd-menu [compact]="true" [mobile]="true">
     <li fd-menu-item [subMenu]="fruits">
-        <div fd-menu-link>
+        <div fd-menu-interactive>
             <span fd-menu-title>Fruits</span>
             <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
         </div>
     </li>
 
     <li fd-menu-item [subMenu]="vegetables">
-        <div fd-menu-link>
+        <div fd-menu-interactive>
             <span fd-menu-title>Vegetables</span>
             <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
         </div>
     </li>
 
     <li fd-menu-item [subMenu]="milkProducts">
-        <div fd-menu-link>
+        <div fd-menu-interactive>
             <span fd-menu-title>Milk products</span>
             <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
         </div>
     </li>
+</fd-menu>
+
+<fd-sub-menu #fruits="fdSubMenu">
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Pineapple</span>
+        </a>
+    </li>
 
     <li fd-menu-item>
-        <div fd-menu-link>
-            <span fd-menu-title>Milk products</span>
-            <fd-icon fd-menu-addon></fd-icon>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Banana</span>
+        </a>
+    </li>
+</fd-sub-menu>
+
+<fd-sub-menu #vegetables="fdSubMenu">
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Cucumber</span>
+        </a>
+    </li>
+
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Onion</span>
+        </a>
+    </li>
+</fd-sub-menu>
+
+<fd-sub-menu #milkProducts="fdSubMenu">
+    <li fd-menu-item [subMenu]="cheeses">
+        <div fd-menu-interactive>
+            <span fd-menu-title>Cheese</span>
+            <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
         </div>
     </li>
 
-    <fd-sub-menu #fruits="fdSubMenu">
-        <li fd-menu-item>
-            <a href="#" fd-menu-link>
-                <span fd-menu-title>Pineapple</span>
-            </a>
-        </li>
+    <li fd-menu-item [subMenu]="yogurts">
+        <div fd-menu-interactive>
+            <span fd-menu-title>Yogurts</span>
+            <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
+        </div>
+    </li>
+</fd-sub-menu>
 
-        <li fd-menu-item>
-            <a href="#" fd-menu-link>
-                <span fd-menu-title>Banana</span>
-            </a>
-        </li>
-    </fd-sub-menu>
+<fd-sub-menu #cheeses="fdSubMenu">
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Parmesan</span>
+        </a>
+    </li>
 
-    <fd-sub-menu #vegetables="fdSubMenu">
-        <li fd-menu-item>
-            <a href="#" fd-menu-link>
-                <span fd-menu-title>Cucumber</span>
-            </a>
-        </li>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Brie</span>
+        </a>
+    </li>
+</fd-sub-menu>
 
-        <li fd-menu-item>
-            <a href="#" fd-menu-link>
-                <span fd-menu-title>Onion</span>
-            </a>
-        </li>
-    </fd-sub-menu>
+<fd-sub-menu #yogurts="fdSubMenu">
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Greek</span>
+        </a>
+    </li>
 
-    <fd-sub-menu #milkProducts="fdSubMenu">
-        <li fd-menu-item [subMenu]="cheeses">
-            <div fd-menu-link>
-                <span fd-menu-title>Cheese</span>
-                <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
-            </div>
-        </li>
-
-        <li fd-menu-item [subMenu]="yogurts">
-            <div fd-menu-link>
-                <span fd-menu-title>Yogurts</span>
-                <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
-            </div>
-        </li>
-    </fd-sub-menu>
-
-
-    <fd-sub-menu #cheeses="fdSubMenu">
-        <li fd-menu-item>
-            <a href="#" fd-menu-link>
-                <span fd-menu-title>Parmesan</span>
-            </a>
-        </li>
-
-        <li fd-menu-item>
-            <a href="#" fd-menu-link>
-                <span fd-menu-title>Brie</span>
-            </a>
-        </li>
-    </fd-sub-menu>
-
-    <fd-sub-menu #yogurts="fdSubMenu">
-        <li fd-menu-item>
-            <a href="#" fd-menu-link>
-                <span fd-menu-title>Greek</span>
-            </a>
-        </li>
-
-        <li fd-menu-item>
-            <a href="#" fd-menu-link>
-                <span fd-menu-title>Natural</span>
-            </a>
-        </li>
-    </fd-sub-menu>
-</fd-menu>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Natural</span>
+        </a>
+    </li>
+</fd-sub-menu>

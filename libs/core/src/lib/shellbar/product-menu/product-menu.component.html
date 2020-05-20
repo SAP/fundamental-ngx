@@ -20,7 +20,7 @@
         <fd-popover-body>
             <fd-menu *ngIf="!menuComponent">
                 <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item>
-                    <a [attr.href]="item.link ? item.link : null" fd-menu-link>
+                    <a [attr.href]="item.link ? item.link : null" fd-menu-interactive>
                         <span fd-menu-title>{{ item.name }}</span>
                         <fd-icon *ngIf="item.glyph" fd-menu-addon position="after" [glyph]="item.glyph"></fd-icon>
                     </a>

@@ -12,7 +12,7 @@
     <fd-popover-body>
         <fd-menu>
             <li fd-menu-item *ngFor="let collapsedBreadcrumbItem of collapsedBreadcrumbItems">
-                <a fd-menu-link [attr.href]="collapsedBreadcrumbItem.href"
+                <a fd-menu-interactive [attr.href]="collapsedBreadcrumbItem.href"
                    [routerLink]="collapsedBreadcrumbItem.routerLink">
                     <span fd-menu-title>{{collapsedBreadcrumbItem.elementRef.nativeElement.innerText}}</span>
                 </a>

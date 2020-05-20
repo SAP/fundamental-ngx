@@ -1,7 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { DialogService, RtlService } from '@fundamental-ngx/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-menu-example',

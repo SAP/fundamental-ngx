@@ -1,27 +1,12 @@
-<nav class="fd-menu"
-     [ngClass]="{
+<ng-template [ngIf]="!mobile" #menuRootTemplate>
+    <nav class="fd-menu"
+         [ngClass]="{
             'fd-menu--compact': compact,
             'fd-menu--mobile': mobile
          }">
 
-    <ng-container *ngTemplateOutlet="mobile ? dialogTemplate : menuTemplate"></ng-container>
-
-    <ng-template #menuTemplate>
         <ul class="fd-menu__list">
             <ng-content></ng-content>
         </ul>
-    </ng-template>
-
-    <ng-template #subMenuTemplate>
-        <ul class="fd-menu__sublist">
-            <ng-container *ngTemplateOutlet="dialogContent.template"></ng-container>
-        </ul>
-    </ng-template>
-
-    <ng-template #dialogTemplate>
-        <ng-container *ngTemplateOutlet="isInSubmenu
-            ? subMenuTemplate
-            : menuTemplate">
-        </ng-container>
-    </ng-template>
-</nav>
+    </nav>
+</ng-template>

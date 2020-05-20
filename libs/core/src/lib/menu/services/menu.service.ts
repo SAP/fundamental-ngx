@@ -22,7 +22,7 @@ export class MenuService {
     private _destroyOutsideClickListener: () => void;
 
     constructor(private _renderer: Renderer2,
-                private _menuKeyboardService: MenuKeyboardService) {}
+                private _menuKeyboardService: MenuKeyboardService) { }
 
     get menu(): MenuComponent {
         return this._menu;
@@ -35,6 +35,7 @@ export class MenuService {
 
     setActive(menuItem: MenuItemComponent): void {
         this._addToActivePath(menuItem);
+        this.menu.emitActivePath();
     }
 
     setMenuRoot(menu: MenuComponent, keyboardSupport: boolean = true): void {
@@ -46,9 +47,22 @@ export class MenuService {
         }
     }
 
+    setSelectProgrammatic(menuItem: MenuItemComponent): void {
+        this._clearMenuState();
+        const newPath = [];
+        let traverserNode = this.menuMap.get(menuItem);
+        do {
+            newPath.unshift(traverserNode);
+            traverserNode = traverserNode.parent;
+        }
+        while (traverserNode.parent);
+        newPath.forEach(node => this._addToActivePath(node.item));
+        this.menu.emitActivePath();
+    }
+
     private _nodeSiblings(node: MenuNode): MenuNode[] {
         return node.parent
-            ? this.focusedNode.parent.children
+            ? node.parent.children
             : this.menuMap.get(null).children;
     }
 
@@ -79,6 +93,12 @@ export class MenuService {
 
         if (this.activeNodePath.length === 0) {
             this._destroyOutsideClickListener();
+        }
+    }
+
+    private _clearMenuState(): void {
+        if (this.activeNodePath.length) {
+            this._removeFromActivePath(this.activeNodePath[0].item);
         }
     }
 
@@ -145,15 +165,16 @@ export class MenuService {
             this.menu.elementRef.nativeElement,
             'keydown',
             (event: KeyboardEvent) => {
+                const focusRight = (node) => setTimeout(() => this.setFocused(node.children[0].item));
                 let matched = true;
 
                 if (KeyUtil.isKey(event, 'ArrowRight')) {
                     if (this.focusedNode.children.length) {
-                        this.setActive(this.focusedNode.item);
-                        setTimeout(() => this.setFocused(this.focusedNode.children[0].item));
+                        this._addToActivePath(this.focusedNode.item);
+                        focusRight(this.focusedNode);
                     }
                 } else if (KeyUtil.isKey(event, 'ArrowLeft')) {
-                    if (this.focusedNode.parent) {
+                    if (this.focusedNode.parent.item) {
                         this._removeFromActivePath(this.focusedNode.parent.item);
                         this.setFocused(this.focusedNode.parent.item);
                     }
@@ -170,7 +191,13 @@ export class MenuService {
                         this.setFocused(siblings[index - 1].item);
                     }
                 } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
-                    this.setActive(this.focusedNode.item);
+                    this._addToActivePath(this.focusedNode.item);
+                    this.focusedNode.item.click();
+                    if (this.focusedNode.children.length) {
+                        focusRight(this.focusedNode);
+                    }
+                } else if (KeyUtil.isKey(event, 'Escape')) {
+                    this.menu.close();
                 } else {
                     matched = false;
                 }

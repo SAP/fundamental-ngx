@@ -8,11 +8,12 @@ import { MenuSeparatorComponent } from './menu-separator/menu-separator.componen
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
-import { MenuItemDirective } from './directives/menu-item.directive';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
+import { PopoverModule } from '../..';
+import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, PopoverModule],
     declarations: [
         MenuComponent,
         MenuItemComponent,
@@ -21,8 +22,8 @@ import { SubMenuComponent } from './sub-menu/sub-menu.component';
         MenuShortcutDirective,
         MenuLinkDirective,
         MenuTitleDirective,
-        MenuItemDirective,
-        SubMenuComponent
+        SubMenuComponent,
+        MenuTriggerDirective
     ],
     exports: [
         MenuComponent,
@@ -33,7 +34,7 @@ import { SubMenuComponent } from './sub-menu/sub-menu.component';
         MenuLinkDirective,
         MenuTitleDirective,
         MenuAddonDirective,
-        MenuItemDirective
+        MenuTriggerDirective
     ]
 })
 export class MenuModule {}

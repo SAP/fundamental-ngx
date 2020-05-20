@@ -1,27 +1,24 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
+    EventEmitter,
     Input,
-    OnInit,
+    Optional,
+    Output,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { MenuItemComponent } from './menu-item/menu-item.component';
-import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
-import { MenuKeyboardService } from './menu-keyboard.service';
-import { BehaviorSubject } from 'rxjs';
 import { MenuService } from './services/menu.service';
-
-interface DialogContent {
-    title: string,
-    template: TemplateRef<any>
-}
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { MenuMobileComponent } from './menu-mobile/menu-mobile/menu-mobile.component';
 
 /**
  * The component that represents a menu.
@@ -34,7 +31,7 @@ interface DialogContent {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [MenuService]
 })
-export class MenuComponent implements OnInit, AfterContentInit {
+export class MenuComponent implements AfterContentInit, AfterViewInit {
 
     /** Display menu in compact mode */
     @Input()
@@ -44,74 +41,71 @@ export class MenuComponent implements OnInit, AfterContentInit {
     @Input()
     mobile: boolean = false;
 
-    /** Dialog title used for menu in mobile mode */
-    @Input()
-    mainMenuTitle: string;
-
-    /** Custom config used to open the Dialog */
-    @Input()
-    dialogConfig: DialogConfig;
-
     /** Custom config used to open the Dialog */
     @Input()
     openOnHoverTime: number = 0;
 
-    /** @hidden */
-    @ViewChild('menuTemplate')
-    menuTemplate: TemplateRef<any>;
+    /** Emits array of active elements. */
+    @Output()
+    readonly activePath: EventEmitter<MenuItemComponent[]> = new EventEmitter<MenuItemComponent[]>();
 
     /** @hidden */
-    @ContentChildren(MenuItemComponent)
+    @ViewChild('menuRootTemplate')
+    menuRootTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ContentChildren(MenuItemComponent, {descendants: true})
     menuItems: QueryList<MenuItemComponent>;
 
-    mobileMenuTitle$: BehaviorSubject<string>;
-
-    /** @hidden */
-    private _subMenuTemplates: DialogContent[] = [];
+    isOpen: boolean;
 
     constructor(public elementRef: ElementRef,
+                public changeDetectorRef: ChangeDetectorRef,
                 private _menuService: MenuService,
-                private _changeDetectorRef: ChangeDetectorRef,
-                private _menuKeyboardService: MenuKeyboardService) {}
-
-    ngOnInit() {
-        this.mobileMenuTitle$ = new BehaviorSubject<string>(this.mainMenuTitle)
-    }
+                @Optional() private _dynamicComponentService: DynamicComponentService) {}
 
     ngAfterContentInit() {
-        this._menuService.setMenuRoot(this)
+        this._menuService.setMenuRoot(this);
+        this._listenOnMenuChanges();
     }
 
-    /** @hidden */
-    get dialogContent(): DialogContent {
-        return this._subMenuTemplates[this._subMenuTemplates.length - 1];
+    ngAfterViewInit() {
+        this._setupMobileMode();
     }
 
-    /** @hidden */
-    get isInSubmenu(): boolean {
-        return !!this._subMenuTemplates.length;
+    open(): void {
+        this.isOpen = true;
+        this.changeDetectorRef.markForCheck();
     }
 
-    /** Navigate back to parent level of submenu */
-    backToParentLevel(): void {
-        if (this._subMenuTemplates.length) {
-            this._subMenuTemplates.pop();
-            this._updateMenuTitle();
+    close(): void {
+        this.isOpen = false;
+        this.changeDetectorRef.markForCheck();
+    }
+
+    toggle(): void {
+        this.isOpen ? this.close() : this.open();
+    }
+
+    emitActivePath(): void {
+        this.activePath.emit(
+            this._menuService.activeNodePath
+                .map(node => node.item)
+        );
+    }
+
+    private _setupMobileMode(): void {
+        if (this.mobile) {
+            this._dynamicComponentService.createDynamicComponent(
+                this.menuRootTemplate,
+                MenuMobileComponent,
+                {container: this.elementRef.nativeElement},
+                {services: [this, this._menuService]}
+            )
         }
     }
 
-    /** @hidden Adds new view to menu templates */
-    loadView(view: DialogContent): void {
-        this._subMenuTemplates.push(view);
-        this._updateMenuTitle();
-        this._changeDetectorRef.detectChanges();
-    }
+    private _listenOnMenuChanges() {
 
-    private _updateMenuTitle(): void {
-        this.mobileMenuTitle$.next(
-            this.isInSubmenu
-                ? this.dialogContent.title
-                : this.mainMenuTitle
-        );
     }
 }

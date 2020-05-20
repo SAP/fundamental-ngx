@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-menu-link]',
+    selector: '[fd-menu-interactive]',
     host: {
         role: 'menuitem'
     }

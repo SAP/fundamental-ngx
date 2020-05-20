@@ -1,0 +1,42 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+
+        <fd-dialog-header>
+            <ng-template fdTemplate="header">
+                <div fd-bar-left>
+                    <fd-bar-element *ngIf="isSubmenu">
+                        <button fd-button
+                                fdType="transparent"
+                                glyph="nav-back"
+                                (click)="backToParentLevel()">
+                        </button>
+                    </fd-bar-element>
+                    <fd-bar-element>
+                        <h1 fd-dialog-title>{{title}}</h1>
+                    </fd-bar-element>
+                </div>
+                <div fd-bar-right>
+                    <fd-bar-element>
+                        <button fd-dialog-close-button (click)="close()"></button>
+                    </fd-bar-element>
+                </div>
+            </ng-template>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <ng-container *ngTemplateOutlet="isSubmenu
+                        ? subMenuTemplate
+                        : view">
+            </ng-container>
+        </fd-dialog-body>
+
+    </fd-dialog>
+</ng-template>
+
+<ng-template #subMenuTemplate>
+    <nav class="fd-menu fd-menu--mobile" [class.fd-menu--compact]="false">
+        <ul class="fd-menu__sublist">
+            <ng-container *ngTemplateOutlet="view"></ng-container>
+        </ul>
+    </nav>
+</ng-template>

@@ -1,5 +1,6 @@
 import { Component, ContentChildren, QueryList, TemplateRef, ViewChild } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
+import { MenuService } from '../services/menu.service';
 
 @Component({
     selector: 'fd-sub-menu',
@@ -14,4 +15,6 @@ export class SubMenuComponent {
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
     @ContentChildren(MenuItemComponent) menuItems: QueryList<MenuItemComponent>;
+
+    menuService: MenuService;
 }

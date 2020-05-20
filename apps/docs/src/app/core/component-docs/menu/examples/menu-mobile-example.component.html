@@ -21,21 +21,21 @@
         <fd-dialog-body>
             <fd-menu #menu [mobile]="true" mainMenuTitle="Fresh Market Products">
                 <li fd-menu-item [subMenu]="fruits">
-                    <div fd-menu-link>
+                    <div fd-menu-interactive>
                         <span fd-menu-title>Fruits</span>
                         <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
                     </div>
                 </li>
 
                 <li fd-menu-item [subMenu]="vegetables">
-                    <div fd-menu-link>
+                    <div fd-menu-interactive>
                         <span fd-menu-title>Vegetables</span>
                         <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
                     </div>
                 </li>
 
                 <li fd-menu-item [subMenu]="milkProducts">
-                    <div fd-menu-link>
+                    <div fd-menu-interactive>
                         <span fd-menu-title>Milk products</span>
                         <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
                     </div>
@@ -43,13 +43,13 @@
 
                 <ng-template #fruits>
                     <li fd-menu-item>
-                        <a href="#" fd-menu-link>
+                        <a href="#" fd-menu-interactive>
                             <span fd-menu-title>Pineapple</span>
                         </a>
                     </li>
 
                     <li fd-menu-item>
-                        <a href="#" fd-menu-link>
+                        <a href="#" fd-menu-interactive>
                             <span fd-menu-title>Banana</span>
                         </a>
                     </li>
@@ -57,13 +57,13 @@
 
                 <ng-template #vegetables>
                     <li fd-menu-item>
-                        <a href="#" fd-menu-link>
+                        <a href="#" fd-menu-interactive>
                             <span fd-menu-title>Cucumber</span>
                         </a>
                     </li>
 
                     <li fd-menu-item>
-                        <a href="#" fd-menu-link>
+                        <a href="#" fd-menu-interactive>
                             <span fd-menu-title>Onion</span>
                         </a>
                     </li>
@@ -71,14 +71,14 @@
 
                 <ng-template #milkProducts>
                     <li fd-menu-item [subMenu]="cheeses">
-                        <div fd-menu-link>
+                        <div fd-menu-interactive>
                             <span fd-menu-title>Cheese</span>
                             <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
                         </div>
                     </li>
 
                     <li fd-menu-item [subMenu]="yogurts">
-                        <div fd-menu-link>
+                        <div fd-menu-interactive>
                             <span fd-menu-title>Yogurts</span>
                             <fd-icon fd-menu-addon submenuIndicator="true" glyph="navigation-right-arrow"></fd-icon>
                         </div>
@@ -88,13 +88,13 @@
 
                 <ng-template #cheeses>
                     <li fd-menu-item>
-                        <a href="#" fd-menu-link>
+                        <a href="#" fd-menu-interactive>
                             <span fd-menu-title>Parmesan</span>
                         </a>
                     </li>
 
                     <li fd-menu-item>
-                        <a href="#" fd-menu-link>
+                        <a href="#" fd-menu-interactive>
                             <span fd-menu-title>Brie</span>
                         </a>
                     </li>
@@ -102,13 +102,13 @@
 
                 <ng-template #yogurts>
                     <li fd-menu-item>
-                        <a href="#" fd-menu-link>
+                        <a href="#" fd-menu-interactive>
                             <span fd-menu-title>Greek</span>
                         </a>
                     </li>
 
                     <li fd-menu-item>
-                        <a href="#" fd-menu-link>
+                        <a href="#" fd-menu-interactive>
                             <span fd-menu-title>Natural</span>
                         </a>
                     </li>

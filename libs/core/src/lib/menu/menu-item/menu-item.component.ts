@@ -6,7 +6,8 @@ import {
     ContentChild,
     ElementRef,
     Input,
-    OnDestroy
+    OnDestroy,
+    Optional
 } from '@angular/core';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
@@ -14,7 +15,7 @@ import { MenuLinkDirective } from '../directives/menu-link.directive';
 import { SubMenuComponent } from '../../..';
 import { MenuService } from '../services/menu.service';
 import { defer, fromEvent, Subscription, timer } from 'rxjs';
-import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
+import { sample, switchMap, takeUntil } from 'rxjs/operators';
 
 let menuUniqueId: number = 0;
 
@@ -25,10 +26,18 @@ let menuUniqueId: number = 0;
     templateUrl: './menu-item.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.fd-menu__item]': 'true',
+        '[class.fd-menu__item]': 'true'
     }
 })
 export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnDestroy {
+
+    /** Whether set menu item as selected */
+    @Input()
+    selected: boolean = false;
+
+    /** Whether set menu item as disabled */
+    @Input()
+    disabled: boolean = false;
 
     /** Menu item id attribute value */
     @Input()
@@ -53,12 +62,14 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
 
     /** @hidden */
     constructor(public elementRef: ElementRef,
-                private _menuService: MenuService,
-                private _changeDetectorRef: ChangeDetectorRef) {
+                private _changeDetectorRef: ChangeDetectorRef,
+                @Optional() private _menuService: MenuService,
+                @Optional() private _subMenu: SubMenuComponent) {
     }
 
     ngAfterContentInit() {
-        this._initialiseLinkState();
+        this._setMenuService();
+        this._initialiseItemState();
         this._listenOnMenuLinkClick();
         this._listenOnMenuLinkHover();
     }
@@ -133,8 +144,18 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
         );
     }
 
-    private _initialiseLinkState(): void {
+    private _initialiseItemState(): void {
         this.menuLink.setSubmenu(!!this.subMenu, this.itemId);
-        // this.menuLink.setDisabled(disabled)
+        this.menuLink.setDisabled(this.disabled);
+        if (this.selected) {
+            setTimeout(() => this._menuService.setSelectProgrammatic(this));
+        }
+    }
+
+    private _setMenuService(): void {
+        this._menuService = this._menuService || this._subMenu.menuService;
+        if (this.subMenu) {
+            this.subMenu.menuService = this._menuService;
+        }
     }
 }
