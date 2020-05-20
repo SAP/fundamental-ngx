@@ -25,4 +25,8 @@ export class InfoLabelComponent {
     @Input()
     color: string;
 
+    /** Sets control aria-label attribute value */
+    @Input()
+    ariaLabel: string = null;
+
 }
