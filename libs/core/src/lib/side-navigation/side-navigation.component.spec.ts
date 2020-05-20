@@ -119,7 +119,7 @@ describe('SideNavigationComponent', () => {
             fixture.detectChanges();
             const anyComponent: any = component.sideNav;
             expect(
-                anyComponent.keyboardService.getAllListItems(
+                anyComponent.keyboardService._getAllListItems(
                     anyComponent.getLists()[0]
                 ).length
             ).toBe(7);
@@ -133,7 +133,7 @@ describe('SideNavigationComponent', () => {
             fixture.detectChanges();
             const anyComponent: any = component.sideNav;
             expect(
-                anyComponent.keyboardService.getAllListItems(
+                anyComponent.keyboardService._getAllListItems(
                     anyComponent.getLists()[0]
                 ).length
             ).toBe(11);

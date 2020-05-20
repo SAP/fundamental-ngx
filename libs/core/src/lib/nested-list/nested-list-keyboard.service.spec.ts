@@ -60,7 +60,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
 
-        (<any>service).handleKeyDown(keyboardEvent, 0, items);
+        (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[1].focus).toHaveBeenCalled();
     });
@@ -77,7 +77,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
 
-        (<any>service).handleKeyDown(keyboardEvent, 0, items);
+        (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[1].focus).not.toHaveBeenCalled();
         expect(items[0].triggerOpen).toHaveBeenCalled();
@@ -95,7 +95,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowLeft' };
 
-        (<any>service).handleKeyDown(keyboardEvent, 0, items);
+        (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[9].focus).not.toHaveBeenCalled();
         expect(items[0].triggerClose).toHaveBeenCalled();
@@ -111,7 +111,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowLeft' };
 
-        (<any>service).handleKeyDown(keyboardEvent, 0, items);
+        (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[items.length - 1].focus).toHaveBeenCalled();
     });
@@ -126,7 +126,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
 
-        (<any>service).handleKeyDown(keyboardEvent, items.length - 1, items);
+        (<any>service)._handleKeyDown(keyboardEvent, items.length - 1, items);
 
         expect(items[0].focus).toHaveBeenCalled();
     });
