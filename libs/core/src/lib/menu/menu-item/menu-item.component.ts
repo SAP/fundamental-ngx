@@ -15,7 +15,7 @@ import { MenuLinkDirective } from '../directives/menu-link.directive';
 import { SubMenuComponent } from '../../..';
 import { MenuService } from '../services/menu.service';
 import { defer, fromEvent, Subscription, timer } from 'rxjs';
-import { sample, switchMap, takeUntil } from 'rxjs/operators';
+import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
 
 let menuUniqueId: number = 0;
 
@@ -117,7 +117,7 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
     private _listenOnMenuLinkClick(): void {
         this._subscriptions.add(
             fromEvent(this.menuLink.elementRef.nativeElement, 'click')
-                .subscribe(() => this._menuService.setActive(this))
+                .subscribe(() => this._menuService.setActive(true, this))
         )
     }
 
@@ -139,8 +139,9 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
         // Set active on long hover
         this._subscriptions.add(
             mouseEnter$.pipe(
+                filter(() => !this._menuService.menu.mobile),
                 sample(timeTrigger$)
-            ).subscribe(() => this._menuService.setActive(this))
+            ).subscribe(() => this._menuService.setActive(true, this))
         );
     }
 

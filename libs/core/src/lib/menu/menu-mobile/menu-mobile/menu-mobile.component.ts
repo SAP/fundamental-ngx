@@ -4,13 +4,12 @@ import { DialogService } from '../../../dialog/dialog-service/dialog.service';
 import { MenuComponent } from '../../menu.component';
 import { Subscription } from 'rxjs';
 import { MenuService } from '../../services/menu.service';
-import { MenuItemComponent } from '@fundamental-ngx/core';
+import { MenuItemComponent } from '../../menu-item/menu-item.component';
 import { startWith } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-menu-mobile',
-    templateUrl: './menu-mobile.component.html',
-    styleUrls: ['./menu-mobile.component.scss']
+    templateUrl: './menu-mobile.component.html'
 })
 export class MenuMobileComponent implements OnInit, AfterViewInit {
 
@@ -41,7 +40,7 @@ export class MenuMobileComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     ngOnInit() {
-        this._listenOnSelectOpenChange();
+        this._listenOnActivePathChange();
     }
 
     /** @hidden */
@@ -56,13 +55,14 @@ export class MenuMobileComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     close(): void {
-        this.dialogRef.hide(true);
+        this.dialogRef.close();
     }
 
     /** Navigate back to parent level of submenu */
     backToParentLevel(): void {
         this._menuService.setActive(
-            this._menuService.activeNodePath[this._menuService.activeNodePath.length - 1].parent.item
+            false,
+            this._menuService.activeNodePath[this._menuService.activeNodePath.length - 1].item
         );
     }
 
@@ -79,21 +79,17 @@ export class MenuMobileComponent implements OnInit, AfterViewInit {
     }
 
     /** @hidden Bing select open change with opening/closing the Dialog*/
-    private _listenOnSelectOpenChange(): void {
+    private _listenOnActivePathChange(): void {
         this._subscriptions.add(
             this._menuComponent.activePath
-                .pipe(
-                    startWith(this._menuService.activeNodePath.map(node => node.item))
-                )
+                .pipe(startWith(this._menuService.activeNodePath.map(node => node.item)))
                 .subscribe(items => this._setMenuView(items))
         )
     }
 
     private _setMenuView(items: MenuItemComponent[]): void {
         this.isSubmenu = !!items.length;
-        this.title = this.isSubmenu
-            ? items[items.length - 1].menuItemTitle.title
-            : '';
+        this.title = this.isSubmenu ? items[items.length - 1].menuItemTitle.title : '';
         if (this.isSubmenu) {
             if (items[items.length - 1].subMenu) {
                 this.view = items[items.length - 1].subMenu.templateRef

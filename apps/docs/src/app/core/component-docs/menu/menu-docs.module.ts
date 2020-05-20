@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, DialogModule, MenuModule, MenuMobileModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MenuModule, MenuMobileModule],
     exports: [RouterModule],
     declarations: [
         MenuDocsComponent,

@@ -19,6 +19,7 @@ import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { MenuMobileComponent } from './menu-mobile/menu-mobile/menu-mobile.component';
+import { PopoverComponent } from '../..';
 
 /**
  * The component that represents a menu.
@@ -62,9 +63,11 @@ export class MenuComponent implements AfterContentInit, AfterViewInit {
     constructor(public elementRef: ElementRef,
                 public changeDetectorRef: ChangeDetectorRef,
                 private _menuService: MenuService,
+                @Optional() private _popoverComponent: PopoverComponent,
                 @Optional() private _dynamicComponentService: DynamicComponentService) {}
 
     ngAfterContentInit() {
+        console.log(this.mobile);
         this._menuService.setMenuRoot(this);
         this._listenOnMenuChanges();
     }
@@ -73,18 +76,16 @@ export class MenuComponent implements AfterContentInit, AfterViewInit {
         this._setupMobileMode();
     }
 
+    get closeOnOutsideClick(): boolean {
+        return !this.mobile && !this._popoverComponent;
+    }
+
     open(): void {
-        this.isOpen = true;
         this.changeDetectorRef.markForCheck();
     }
 
     close(): void {
-        this.isOpen = false;
         this.changeDetectorRef.markForCheck();
-    }
-
-    toggle(): void {
-        this.isOpen ? this.close() : this.open();
     }
 
     emitActivePath(): void {
@@ -105,7 +106,9 @@ export class MenuComponent implements AfterContentInit, AfterViewInit {
         }
     }
 
-    private _listenOnMenuChanges() {
-
+    private _listenOnMenuChanges(): void {
+        if (this._popoverComponent) {
+            this._popoverComponent.isOpenChange.subscribe(console.log);
+        }
     }
 }

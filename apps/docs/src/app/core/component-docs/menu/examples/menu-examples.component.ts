@@ -18,17 +18,6 @@ export class MenuSeparatorExampleComponent {}
     templateUrl: './menu-mobile-example.component.html'
 })
 export class MenuMobileExampleComponent {
-
-    constructor(private _dialogService: DialogService) {
-    }
-
-    openDialog(dialogTemplate: TemplateRef<any>): void {
-        this._dialogService.open(dialogTemplate, {
-            mobile: true,
-            verticalPadding: false
-        })
-    }
-
 }
 
 @Component({

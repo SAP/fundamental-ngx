@@ -33,8 +33,12 @@ export class MenuService {
         this.focusedNode.item.focus();
     }
 
-    setActive(menuItem: MenuItemComponent): void {
-        this._addToActivePath(menuItem);
+    setActive(isActive: boolean, menuItem: MenuItemComponent): void {
+        if (isActive) {
+            this._addToActivePath(menuItem)
+        } else {
+            this._removeFromActivePath(menuItem);
+        }
         this.menu.emitActivePath();
     }
 
@@ -60,6 +64,12 @@ export class MenuService {
         this.menu.emitActivePath();
     }
 
+    private canOutsideClickListener(action: 'add' | 'remove'): boolean {
+        return action === 'add'
+            ? this.menu.closeOnOutsideClick && this.activeNodePath.length === 1
+            : this.activeNodePath.length === 0 && !!this._destroyOutsideClickListener;
+    }
+
     private _nodeSiblings(node: MenuNode): MenuNode[] {
         return node.parent
             ? node.parent.children
@@ -77,7 +87,7 @@ export class MenuService {
         menuNode.item.setSelected(true);
         menuNode.item.open();
 
-        if (this.activeNodePath.length === 1) {
+        if (this.canOutsideClickListener('add')) {
             this._listenOnOutsideClick();
         }
     }
@@ -91,7 +101,7 @@ export class MenuService {
                 .forEach(removedActiveNode => removedActiveNode.item.close());
         }
 
-        if (this.activeNodePath.length === 0) {
+        if (this.canOutsideClickListener('remove')) {
             this._destroyOutsideClickListener();
         }
     }
