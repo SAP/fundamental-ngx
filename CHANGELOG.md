@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.1-rc.9"></a>
+## [0.18.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.8...v0.18.1-rc.9) (2020-05-20)
+
+
+### Bug Fixes
+
+* multi input mobile  ([#2513](https://github.com/SAP/fundamental-ngx/issues/2513)) ([4e113b4](https://github.com/SAP/fundamental-ngx/commit/4e113b4))
+
+
+
 <a name="0.18.1-rc.8"></a>
 ## [0.18.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.7...v0.18.1-rc.8) (2020-05-18)
 
