@@ -155,20 +155,15 @@ For an existing Angular CLI application,
 
     It is recommended to give ID to the marker like `@@emphasizedBtn` for easier tracking in the extracted `messages.xlf` file.
 
-    Note: Some components allow you to provide data imperatively or through an array of objects like `[list]="seasons"` in the below example:
+    Note: Some components allow you to provide data imperatively through an array of objects like `[list]="seasons"` in the below example:
 
     ```html
-    <fdp-radio-group 
-        [id]="'radio1'"
-        [name]="'radio1'" 
-        [list]="seasons" 
-        [value]="'Summer'" 
-        formControlName="example1">
+    <fdp-radio-group [id]="'radio1'" [name]="'radio1'" [list]="seasons" [value]="'Summer'" formControlName="example1">
     </fdp-radio-group>
     ```
 
-    When data is provided like this(probably coming from a db or backend server), it is left to the application to provide for the translated
-    text themselves. Providing i18n markers as shown in the previous example will not work as this is a limitation of Angular's i18n for now.
+    When data is provided like this (probably coming from a db or backend server), it is left to the application to provide for the translated
+    text. Providing i18n markers as shown in the previous example will not work as this is a limitation of Angular's i18n for now.
 
 ## Tests
 
