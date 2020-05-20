@@ -1,0 +1,32 @@
+<label class="fd-time__slider-label">Hrs</label>
+<button class="fd-button fd-button fd-button--transparent sap-icon--navigation-up-arrow"
+        *ngIf="active"
+        (click)="scrollUp()"></button>
+<div class="fd-time__wrapper" [ngClass]="{'fd-time__wrapper--active': active, 'fd-time__wrapper--meridian': meridian}">
+    <ul class="fd-time__list"
+        (click)="indicator.focus()"
+        [ngClass]="{'is-hidden': !active}"
+        (wheel)="handleScroll($event)"
+        [config]="config"
+        (activeChange)="activeChangedHandle($event)"
+        (dragged)="handleDrag($event)"
+        fdCarousel>
+        <li class="fd-time__item" *ngFor="let row of rows; let index = index" [carouselItemId]="id + index" fdCarouselItem [value]="row">
+            <span class="fd-time__unit" (click)="pick(row, id + index)">{{row}}</span>
+        </li>
+    </ul>
+    <div class="fd-time__current-indicator"
+         #indicator
+         [ngClass]="{'is-hidden': !active}"
+         tabindex="0"
+         [id]="currentIndicatorId">
+    </div>
+    <span class="fd-time__item fd-time__item--collapsed" [ngClass]="{'is-hidden': active}">
+            {{activeItem}}
+    </span>
+</div>
+<button class="fd-button fd-button fd-button--transparent sap-icon--navigation-down-arrow"
+        *ngIf="active"
+        (click)="scrollDown()">
+</button>
+

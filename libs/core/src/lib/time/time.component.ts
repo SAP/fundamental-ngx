@@ -15,13 +15,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18nLabels } from './i18n/time-i18n-labels';
 import { TimeI18n } from './i18n/time-i18n';
 
+export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
+
 @Component({
     selector: 'fd-time',
     templateUrl: './time.component.html',
     styleUrls: ['./time.component.scss'],
     host: {
         '(blur)': 'onTouched()',
-        class: 'fd-time fd-has-display-block'
+        class: ''
     },
     providers: [
         {
@@ -30,10 +32,19 @@ import { TimeI18n } from './i18n/time-i18n';
             multi: true
         }
     ],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class TimeComponent implements OnChanges, ControlValueAccessor {
+
+    readonly hours: number[];
+    readonly minutes: number[];
+    readonly seconds: number[];
+
+    hour: number = 10;
+    minute: number = 10;
+    second: number = 10;
+
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
@@ -97,6 +108,8 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
      */
     period: string;
 
+    activeView: FdTimeActiveView = 'hour';
+
     /** @hidden
      * Variable that is displayed as an hour.
      * For meridian mode ranging from 0 to 12,
@@ -130,7 +143,35 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         public timeI18nLabels: TimeI18nLabels,
         public timeI18n: TimeI18n,
         private changeDetRef: ChangeDetectorRef
-    ) {}
+    ) {
+        this.hours = [];
+
+        const hoursAmount = this.meridian ? 12 : 24;
+
+        for (let i = 0; i < hoursAmount; i ++) {
+            this.hours.push(i);
+        }
+
+        this.minutes = [];
+        for (let i = 0; i < 60; i ++) {
+            this.minutes.push(i);
+        }
+    }
+
+    handleMinuteChange(minute: number): void {
+        this.time.minute = minute;
+        this.onChange(this.time);
+    }
+
+    handleHourChange(hour: number): void {
+        this.time.hour = hour;
+        this.onChange(this.time);
+    }
+
+    handleSecondChange(second: number): void {
+        this.time.second = second;
+        this.onChange(this.time);
+    }
 
     /** @hidden */
     writeValue(time: TimeObject): void {
@@ -195,6 +236,15 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
             }
         }
         this.onChange(this.time);
+    }
+
+    changeActive(view: FdTimeActiveView): void {
+        this.activeView = view;
+        this.changeDetRef.detectChanges()
+    }
+
+    isActive(view: FdTimeActiveView): boolean {
+        return this.activeView === view;
     }
 
     /** @hidden
