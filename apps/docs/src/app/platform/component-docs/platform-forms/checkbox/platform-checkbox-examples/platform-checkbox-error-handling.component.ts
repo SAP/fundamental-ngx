@@ -19,7 +19,6 @@ export class PlatformChekboxStyleComponent implements DoCheck {
             this.formcontrolRef1.setErrors({ invalid: true });
             this.formcontrolRef1.markAsTouched();
         }
-        console.log(this.customForm);
     }
 
     onSubmit(): void {
