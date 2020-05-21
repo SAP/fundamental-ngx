@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogService, MobileModeConfig } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-select-mobile-example',
@@ -7,7 +7,8 @@ import { DialogService } from '@fundamental-ngx/core';
 })
 export class SelectMobileExampleComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+    mobileConfig: MobileModeConfig = { hasCloseButton: true, title: 'Select your favourite fruit' };
     selectedValue: string;
 
-    constructor(private _dialogService: DialogService) {}
+    constructor(private _dialogService: DialogService) { }
 }

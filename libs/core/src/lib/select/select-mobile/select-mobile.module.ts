@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
-import { DialogModule } from '../../dialog/dialog.module';
-import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { ButtonModule, DialogModule, DynamicComponentService } from '../../..';
 
 @NgModule({
     declarations: [SelectMobileComponent],
     imports: [
         CommonModule,
-        DialogModule
+        DialogModule,
+        ButtonModule
     ],
     exports: [SelectMobileComponent],
     providers: [DynamicComponentService],

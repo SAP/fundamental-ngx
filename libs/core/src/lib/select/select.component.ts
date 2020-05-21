@@ -9,6 +9,7 @@ import {
     EventEmitter,
     forwardRef,
     HostListener,
+    Inject,
     Input,
     OnDestroy,
     OnInit,
@@ -30,6 +31,7 @@ import { SelectProxy } from './select-proxy.service';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { SelectMobileComponent } from './select-mobile/select-mobile/select-mobile.component';
+import { DIALOG_CONFIG, DialogConfig, MobileModeConfig } from '../..';
 
 let selectUniqueId: number = 0;
 
@@ -164,6 +166,10 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     @Input()
     ariaLabel: string = null;
 
+    /** Select Input Mobile Configuration */
+    @Input()
+    mobileConfig: MobileModeConfig = { hasCloseButton: true };
+
     /** Event emitted when the popover open state changes. */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -243,14 +249,15 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     /** @hidden */
     @HostListener('window:resize')
     resizeScrollHandler(): void {
-        this.calculatedMaxHeight = window.innerHeight * 0.45;
+        this.calculatedMaxHeight = this.mobile ? null : window.innerHeight * 0.45;
     }
 
     constructor(
         private _elementRef: ElementRef,
         private _selectProxy: SelectProxy,
         private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _dynamicComponentService: DynamicComponentService
+        @Optional() private _dynamicComponentService: DynamicComponentService,
+        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig?: DialogConfig
     ) { }
 
     /** @hidden */
@@ -282,6 +289,10 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     /** Whether control can be interacted with */
     get isInteractive(): boolean {
         return !(this.readonly || this.disabled);
+    }
+
+    get isCancelableMobileSelect(): boolean {
+        return this.mobile && !!this.mobileConfig.approveButtonText
     }
 
     /** @hidden */
@@ -343,13 +354,15 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     }
 
     /** @hidden */
-    setSelectedOption({option, controlChange}: OptionStatusChange): void {
+    setSelectedOption({option, controlChange}: OptionStatusChange, forceMobileSelect?: boolean): void {
         this.selected = option;
         this._setSelectViewValue();
 
         if (controlChange) {
-            this._updateValue(option.value);
-            this.close();
+            this._updateValue(option.value, !forceMobileSelect && this.isCancelableMobileSelect);
+            if (!this.isCancelableMobileSelect) {
+                this.close();
+            }
         }
         this._changeDetectorRef.markForCheck();
     }
@@ -384,10 +397,12 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     }
 
     /** @hidden */
-    private _updateValue(value: any): void {
+    private _updateValue(value: any, silent?: boolean): void {
         this._selectProxy.value$.next(value);
-        this.valueChange.emit(value);
-        this.onChange(value);
+        if (!silent) {
+            this.valueChange.emit(value);
+            this.onChange(value);
+        }
     }
 
     /** @hidden */

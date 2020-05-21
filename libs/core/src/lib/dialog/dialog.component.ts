@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectorRef,
     Component,
@@ -37,7 +36,7 @@ import { debounceTime } from 'rxjs/operators';
     animations: [dialogFadeNgIf],
     encapsulation: ViewEncapsulation.None
 })
-export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy, CssClassBuilder {
+export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssClassBuilder {
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -61,14 +60,33 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     @ViewChild('dialogWindow')
     dialogWindow: ElementRef;
 
-    /** @hidden */
-    @ContentChild(DialogHeaderComponent) dialogHeaderRef: DialogHeaderComponent;
+    /** @hidden If dialog subcomponents didn't receive DialogConfig from Injector, DialogConfig is passed from parent.
+     * This is necessary when dialog has been passed as TemplateRef and created as EmbeddedView.
+     * In such case parent injector of DialogComponent is the component that DECLARED the TemplateRef.
+     **/
+    @ContentChild(DialogHeaderComponent)
+    set dialogHeaderConfig(component: DialogHeaderComponent) {
+        if (component) {
+            component.dialogConfig = component.dialogConfig || this.dialogConfig;
+        }
+    }
 
     /** @hidden */
-    @ContentChild(DialogBodyComponent) dialogBodyRef: DialogBodyComponent;
+    @ContentChild(DialogBodyComponent)
+    set dialogBodyConfig(component: DialogBodyComponent) {
+        if (component) {
+            component.dialogRef = component.dialogRef || this._dialogRef;
+            component.dialogConfig = component.dialogConfig || this.dialogConfig;
+        }
+    }
 
     /** @hidden */
-    @ContentChild(DialogFooterComponent) dialogFooterRef: DialogFooterComponent;
+    @ContentChild(DialogFooterComponent)
+    set dialogFooterConfig(component: DialogFooterComponent) {
+        if (component) {
+            component.dialogConfig = component.dialogConfig || this.dialogConfig;
+        }
+    }
 
     /** @hidden Whenever dialog should be visible */
     showDialogWindow: boolean;
@@ -98,11 +116,6 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     /** @hidden */
     ngOnInit(): void {
         this._listenOnHidden();
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this._passConfigToSubComponents();
     }
 
     /** @hidden */
@@ -191,23 +204,6 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     private _deactivateFocus(): void {
         if (this._focusTrap) {
             this._focusTrap.deactivate();
-        }
-    }
-
-    /** @hidden If dialog subcomponents didn't receive DialogConfig from Injector, DialogConfig is passed from parent.
-     * This is necessary when dialog has been passed as TemplateRef and created as EmbeddedView.
-     * In such case parent injector of DialogComponent is the component that DECLARED the TemplateRef.
-     **/
-    private _passConfigToSubComponents(): void {
-        if (this.dialogHeaderRef) {
-            this.dialogHeaderRef.dialogConfig = this.dialogHeaderRef.dialogConfig || this.dialogConfig;
-        }
-        if (this.dialogBodyRef) {
-            this.dialogBodyRef.dialogRef = this.dialogBodyRef.dialogRef || this._dialogRef;
-            this.dialogBodyRef.dialogConfig = this.dialogBodyRef.dialogConfig || this.dialogConfig;
-        }
-        if (this.dialogFooterRef) {
-            this.dialogFooterRef.dialogConfig = this.dialogFooterRef.dialogConfig || this.dialogConfig;
         }
     }
 

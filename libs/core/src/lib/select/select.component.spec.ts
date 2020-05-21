@@ -35,7 +35,7 @@ describe('SelectComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
-            imports: [SelectModule],
+            imports: [SelectModule]
         })
             .overrideComponent(SelectComponent, {
                 set: {changeDetection: ChangeDetectionStrategy.Default}
