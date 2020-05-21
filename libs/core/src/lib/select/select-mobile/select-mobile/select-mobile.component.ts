@@ -5,7 +5,6 @@ import { SelectComponent } from '../../select.component';
 import { Subscription } from 'rxjs';
 import { MobileModeConfig } from '../../../utils/interfaces/mobile-mode-config';
 import { OptionComponent } from '../../option/option.component';
-import { DialogConfig } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-select-mobile',
