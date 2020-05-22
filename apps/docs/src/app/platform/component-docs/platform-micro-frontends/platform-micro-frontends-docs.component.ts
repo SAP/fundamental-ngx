@@ -24,6 +24,5 @@ export class PlatformMicroFrontendsDocsComponent {
         }
     ];
 
-
     constructor() { }
 }

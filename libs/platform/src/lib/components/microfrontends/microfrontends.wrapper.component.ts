@@ -2,6 +2,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, ElementRef, Renderer2, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { OnDestroy, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'fdp-microfrontends-wrapper',
@@ -13,19 +14,46 @@ import { Location } from '@angular/common';
 })
 
 export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit, OnChanges {
-    @ViewChild('customElementDiv', { static: false }) private elementDiv: ElementRef;
-    @Output() oncustomevent = new EventEmitter();
+    @ViewChild('customElementDiv', { static: false }) 
+    private elementDiv: ElementRef;
+    
+    /** replay custom element event to main app*/
+    @Output() 
+    oncustomevent = new EventEmitter();
+    /** micro app input parameters, it's array of object
+     *  object key will set to custom element's attrubite
+     *  object value will set to custom element's attribute vaue
+     */
     @Input() elParameters: any[];
+    /**
+     * custom element tag name
+     */
     @Input() customTag: string;
+    /**
+     * custom element code href
+     */
     @Input() src: any;
+    /**
+     * custom element css href
+     */
     @Input() stylesheet: any;
+    /**
+     * true : if the wrapper install as route node
+     * false: if the wrapper is not used as route node
+     */
     @Input() routeOutlet: boolean = true;
+    /**
+     * main app's router path from where micro app start it's own route
+     * for example if this wrapper is on route path platform/microfrontends/example in 
+     * main app, set routeRoot 'platform/microfrontends/example', 
+     * micro app will start path with  platform/microfrontends/example and continue add
+     * child path in their own route configuration
+     */
     @Input() routeRoot: string;
 
-    customEle;
-    customEventHandler;
-    elementInputs = {};
-    routeSubscribe: any;
+    private customEle: any;
+    private customEventHandler: (event: object) => object;
+    private routeSubscribe: Subscription;
 
     constructor(
         private router: Router,
@@ -40,22 +68,27 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         }
     }
 
-    public setParameters(params) {
-        this.elParameters = params;
+    /**
+     * set micro app custom element's attribute
+     * @param params array of object 
+     */
+    
+     public setParameters(attrs: Array<object>) {
+        this.elParameters = attrs;
         if (this.customEle) {
             (this.elParameters || []).forEach((p) => {
-                if (p.value && p.value.startsWith('${') && p.value.endsWith('}')) {
-                    const vKey = p.value.substring(2, p.value.length - 1);
-                    const value = this.elementInputs[vKey];
-                    this.customEle.setAttribute(p.key, value);
-                } else {
-                    this.customEle.setAttribute(p.key, p.value);
-                }
+               
+                this.customEle.setAttribute(p.key, p.value);
+                
             });
         }
     }
 
-    ngAfterViewInit() {
+    /**
+     * if this component is used as route node component
+     * the all input parameter will be from route configuration 
+     */
+     ngAfterViewInit() {
         if (this.routeOutlet) {
             this.routeSubscribe = this.route.data.subscribe(params => {
                 this.src = params.src;
@@ -79,7 +112,7 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         }
     }
 
-    appendCssLink(shadowroot) {
+    private appendCssLink(shadowroot): void {
         let stylesheets: String[];
 
         if (!Array.isArray(this.stylesheet)) {
@@ -105,7 +138,7 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         }
     }
 
-    installJsLink(shadowRoot) {
+    private installJsLink(shadowRoot): void {
 
         const microapp_store = document.head.getElementsByTagName('script');
         let loaded: boolean = false;
@@ -129,7 +162,7 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         }
     }
 
-    appendJsLink(srcs) {
+    private appendJsLink(srcs): void {
         (srcs || []).forEach(src => {
             const script = this.customElementRenderer.createElement('script');
             script.src = src;
@@ -138,7 +171,7 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         });
     }
 
-    appendElement() {
+    private appendElement(): void {
 
         const content = this.elementDiv.nativeElement;
         if (!content.shadowRoot) {
@@ -155,7 +188,7 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
 
     }
 
-    installCustomEvenetHandler() {
+    private installCustomEvenetHandler(): (result: any) => any {
         const eventHandler = this.oncustomevent.emit;
         const eventscope = this.oncustomevent;
         return function (e) {

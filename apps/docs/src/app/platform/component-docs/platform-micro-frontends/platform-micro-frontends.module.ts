@@ -10,7 +10,6 @@ import { PlatformMicroFrontendsModule } from '@fundamental-ngx/platform';
 import { PlatformMicroFrontendsHeaderComponent } from './platform-micro-frontends-header/platform-micro-frontends-header.component';
 import { PlatformMicroFrontendsDocsComponent } from './platform-micro-frontends-docs.component';
 import { PlatformMicroFrontendsBasicExampleComponent } from './platform-micro-frontends-examples/platform-micro-frontends-basic-example.component';
-import { PlatformMicroFrontendsExampleComponent } from './platform-micro-frontends-examples/platform-micro-frontends-examples.component';
 
 const appRoutes: Routes = [
     {
@@ -62,8 +61,7 @@ const appRoutes: Routes = [
             src: 'microapps/react.main.js',
             stylesheet: ['microapps/theme.css', 'microapps/react.main.css'],
             customTag: 'react-element',
-            elParameters: [
-            ]
+            elParameters: []
         }
     },
     {
@@ -73,8 +71,7 @@ const appRoutes: Routes = [
             src: 'microapps/ptable.main.js',
             stylesheet: ['microapps/theme.css', 'microapps/ptable.main.css'],
             customTag: 'prime-table',
-            elParameters: [
-            ]
+            elParameters: []
         }
     },
     { path: '**', component: PageNotFoundComponent }
@@ -100,7 +97,6 @@ const routes: Routes = [
     declarations: [
         PageNotFoundComponent,
         PlatformMicroFrontendsBasicExampleComponent,
-        PlatformMicroFrontendsExampleComponent,
         PlatformMicroFrontendsDocsComponent,
         PlatformMicroFrontendsHeaderComponent
     ]

@@ -12,7 +12,7 @@ interface MicroFrontendsWrapper {
 export class PlatformMicroFrontendsBasicExampleComponent {
     @ViewChildren('microfrontendswrapper') eleAnchors!: QueryList<MicroFrontendsWrapper>;
     
-    exampleData: any[][] = [
+    private exampleData: any[][] = [
         
         [{   
             key: 'sessionId', 
@@ -30,12 +30,17 @@ export class PlatformMicroFrontendsBasicExampleComponent {
             value: '["RouterModule", "HttpModule", "CoreModule","SharedModule","ExampleModule"]' 
         }]
     ];
-    
-    eventlogs: string = '';
-    i: number = 0;
-    elParameters: any[] = this.exampleData[this.i];
-
-    onMicroAppEvent(event) {
+    /**
+     * event message, will show on page's textarea
+     */
+    public eventlogs: string = '';
+    private i: number = 0;
+    private elParameters: any[] = this.exampleData[this.i];
+    /**
+     * custom event handler
+     * @param event 
+     */
+    public onMicroAppEvent(event: {event: string, data: any}) {
        
         this.eventlogs += 'Main app receive event:' + JSON.stringify(event) + '\n';
         

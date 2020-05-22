@@ -5,14 +5,16 @@ import { Observable, of} from 'rxjs';
   template: ``
 })
 export class MicroAppMain implements AfterViewInit, OnInit {
-
+  /**
+   * output custom event
+   */
   @Output() oncustomevent = new EventEmitter();
   
   constructor(public el: ElementRef, @Optional() private router?: Router) { }
 
   ngOnInit() {}
 
-  changeRootRouteConfig() {
+  private changeRootRouteConfig(): void {
     if (this.el.nativeElement.shadowRoot) {
       const locationLinks: HTMLCollection =
         this.el.nativeElement.parentNode.children;
@@ -34,7 +36,7 @@ export class MicroAppMain implements AfterViewInit, OnInit {
     }
   }
 
-  getRouterConfig(rootpath): Observable<Routes> {
+  private getRouterConfig(rootpath): Observable<Routes> {
     return of(this.router.config.map(config => {
       const newConfig = Object.assign({}, config);
       newConfig.path = config.path.replace('{rootpath}', rootpath);
@@ -45,7 +47,12 @@ export class MicroAppMain implements AfterViewInit, OnInit {
     }));
   }
 
-  emitCustomEvent(eventName, data) {
+/**
+ * 
+ * @param eventName name of original event for consumer to identify what's event about
+ * @param data any object to be sent. 
+ */
+  public emitCustomEvent(eventName: string, data: object): void {
     this.oncustomevent.emit({ event: eventName, data: data });
   }
 
