@@ -56,7 +56,6 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
     }
 
     ngAfterViewInit() {
-        this.buildElementInputs();
         if (this.routeOutlet) {
             this.routeSubscribe = this.route.data.subscribe(params => {
                 this.src = params.src;
@@ -70,9 +69,6 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         }
     }
 
-    buildElementInputs() {
-        this.elementInputs['loginId'] = this['loginId'];
-    }
 
     ngOnDestroy() {
         if (this.routeSubscribe) {
@@ -143,8 +139,6 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
     }
 
     appendElement() {
-
-        this.buildElementInputs();
 
         const content = this.elementDiv.nativeElement;
         if (!content.shadowRoot) {
