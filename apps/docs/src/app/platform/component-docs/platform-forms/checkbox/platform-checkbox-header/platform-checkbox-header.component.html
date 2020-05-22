@@ -1,46 +1,30 @@
 <header>Checkbox</header>
 <description>
-    <span>With checkboxes, all options are visible and the user can make one or more selections.</span>
-    <span>Checkbox is a Platform form component. It can be used without form as well.</span>
+    Platform Checkbox is wrapper implemention on
+    <a href="https://sap.github.io/fundamental-ngx/#/core/checkbox">fundamental-ngx/core/checkbox</a> to work with
+    Platform Form. It also works without form.<br />
+    Implementation simulates the behaviour in
+    <a href="https://primefaces.org/primeng/showcase/#/checkbox">primefaces </a> implementation.
 
     <div>
-        <h3 style="margin-bottom: 0%;">Platform specific enhancements:</h3>
+        <h3 style="margin-bottom: 1rem;">Platform specific enhancements:</h3>
         <ul style="margin-top: 0%;">
-            <li>Checkbox is a HTML element which can be used with form as well as without form.</li>
             <li>
-                Platform checkbox has only one value, for checked state attribute. It does not take second value for
-                unchecked state attribute.
+                Platform checkbox takes checked state value as a property. so when checkbox is in checked state, control
+                value will be set to value of checkbox. on unchecked state control value will not be defined.
             </li>
             <li>
-                Platform checkbox is specially designed to be used with
-                <a href="fundamental-ngx#/platform/form">Platform Form</a>
+                Platform Checkbox has capability for binary checkbox. and it can be used outside form.
             </li>
             <li>
-                Platform Checkbox implementation has following features.
-                <ol>
-                    <li>
-                        Binary checkbox with Platform form. In this case checkbox does not take any value. The
-                        state(checked or unchecked) is identified through boolean 'true' or 'false'.
-                    </li>
-                    <li>
-                        Checkbox without Platform form. In this case checkbox can either take a value for selected
-                        state. It can also behave like a binary check box by not taking the value but allowing its state
-                        to be identified through boolean 'true' or 'false'.
-                    </li>
-                    <li>Multiselect checkbox with value with Platform form.</li>
-                    <li>Tristate checkbox with value</li>
-                    <li>Tristate checkbox without value</li>
-                    <li>
-                        Compatible with <a href="fundamental-ngx#/platform/form">Platform Form</a> for validation and
-                        error management
-                    </li>
-                </ol>
+                Platform Checkbox has capability for tristate checkbox.
             </li>
         </ul>
     </div>
-    <b>**</b>Required checkbox: Use requiredTrue as Validaltor.
 </description>
-<import module="PlatformCheckboxModule"></import>
+<pre style="background-color: #e9e7e7;">
+    <import module="PlatformCheckboxModule"></import>
+</pre>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

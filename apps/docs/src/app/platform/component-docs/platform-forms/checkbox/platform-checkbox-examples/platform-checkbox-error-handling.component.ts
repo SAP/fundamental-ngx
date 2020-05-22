@@ -1,27 +1,27 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, DoCheck } from '@angular/core';
+import { FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fdp-checkbox-error-handling',
     templateUrl: 'platform-checkbox-error-handling.component.html'
 })
-export class PlatformChekboxStyleComponent implements DoCheck {
-    customForm = new FormGroup({
-        example1: new FormControl(''),
-        example2: new FormControl(true, Validators.requiredTrue)
-    });
+export class PlatformChekboxStyleComponent {
+    customForm: FormGroup;
+    data: SomeObject;
+    validators: ValidatorFn[];
 
-    formcontrolRef1 = this.customForm.get('example1');
-    formcontrolRef2 = this.customForm.get('example2');
+    constructor() {
+        this.customForm = new FormGroup({});
+        this.validators = [Validators.requiredTrue];
 
-    ngDoCheck(): void {
-        if (this.formcontrolRef1.value !== true) {
-            this.formcontrolRef1.setErrors({ invalid: true });
-            this.formcontrolRef1.markAsTouched();
-        }
+        this.data = new SomeObject(true, true);
     }
 
     onSubmit(): void {
-        alert('Status: ' + this.formcontrolRef2.status);
+        alert('Status: ' + this.customForm.status);
     }
+}
+
+class SomeObject {
+    constructor(public presence: boolean, public aggrement: boolean) {}
 }

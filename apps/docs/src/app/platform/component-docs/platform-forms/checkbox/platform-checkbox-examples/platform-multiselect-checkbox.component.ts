@@ -7,20 +7,22 @@ import { Component } from '@angular/core';
 })
 export class PlatformCozyChekboxExampleComponent {
     field1: string[] = [];
-    field2: string[] = ['checkbox2'];
+    field2: string[] = ['vega'];
     field3: string[] = [];
-    field4: string[] = ['checkbox1', 'checkbox2'];
+    field4: string[] = ['altair', 'deneb'];
 
-    form1 = new FormGroup({
-        field1: new FormControl([]),
-        field2: new FormControl(['checkbox2'])
-    });
+    form1 = new FormGroup({});
+    form1Data = new Form1data([], ['newton']);
 
-    form2 = new FormGroup({
-        field1: new FormControl([])
-    });
+    form2 = new FormGroup({});
 
-    form3 = new FormGroup({
-        field1: new FormControl(['checkbox1', 'checkbox2'])
-    });
+    form3 = new FormGroup({});
+    form3data = new Form3data(['faraday', 'edison']);
+}
+class Form1data {
+    constructor(public einstein: string[], public newton: string[]) {}
+}
+
+class Form3data {
+    constructor(public selected1: string[]) {}
 }

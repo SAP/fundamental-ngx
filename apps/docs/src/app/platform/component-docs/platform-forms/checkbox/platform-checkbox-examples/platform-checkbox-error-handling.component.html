@@ -1,24 +1,49 @@
-<fdp-form-group [hintPlacement]="'inline'" [multiLayout]="true" [formGroup]="customForm">
-    <h2>Compact Checkbox with Reactive form and Error Status Style</h2>
-    <span>Checkbox with Error status</span>
-    <fdp-form-field [id]="'checkbox-019'" [rank]="10" zone="zLeft">
+<h3>Checkbox Error Handling</h3>
+<fdp-form-group #fg [hintPlacement]="'left'" [multiLayout]="true" [formGroup]="customForm" [object]="data">
+    <fdp-form-field
+        #ffr1
+        [id]="'presence'"
+        [validators]="validators"
+        [hint]="'presence is necessary'"
+        [hintPlacement]="'left'"
+        [rank]="10"
+        zone="zLeft"
+    >
         <fdp-checkbox
-            [name]="'checkbox-019'"
-            [label]="'Mandatory checkbox'"
+            [name]="'presence'"
+            [label]="'presence is necessary'"
             [isBinary]="true"
-            formControlName="example1"
+            [formControl]="ffr1.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'checkbox-020'" [rank]="10" zone="zRight">
-        <fdp-checkbox [name]="'checkbox-020'" [isBinary]="true" formControlName="example2">
+    <fdp-form-field
+        #ffr2
+        [id]="'aggrement'"
+        [validators]="validators"
+        [hint]="'this selection is mandatory'"
+        [hintPlacement]="'left'"
+        [rank]="15"
+        zone="zRight"
+    >
+        <fdp-checkbox [name]="'aggrement'" [isBinary]="true" [formControl]="ffr2.formControl">
             Do you Agree with <a href="#"> Terms and Conditions</a>?
         </fdp-checkbox>
     </fdp-form-field>
-    <fdp-form-field [id]="'button-1'" [rank]="10" zone="zRight">
+
+    <fdp-form-field [id]="'button-1'" [rank]="20" zone="zRight">
         <fdp-button [type]="'emphasized'" (click)="onSubmit()">Submit</fdp-button>
     </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required">
+            Value is required
+        </span>
+        <span *ngIf="errors.invalid">
+            Value is invalid
+        </span>
+    </ng-template>
 </fdp-form-group>
 
-<div>Form value: {{ customForm.getRawValue() | json }}</div>
-<div>Form Status: {{ customForm.status | json }}</div>
+<p>Form value: {{ customForm.getRawValue() | json }}</p>
+<p>Form Status: {{ customForm.status | json }}</p>

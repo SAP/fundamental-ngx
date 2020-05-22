@@ -8,7 +8,6 @@ import { MarkdownModule } from 'ngx-markdown';
 import { NewComponentComponent } from '../platform/component-docs/new-component/new-component.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
-
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
