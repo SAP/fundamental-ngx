@@ -54,7 +54,12 @@ import 'zone.js/dist/zone'; // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-
+// Custom Elements polyfill. Required for browsers that do not natively support Custom Elements.
+import '@webcomponents/custom-elements';
+// Custom Elements ES5 shim. Required when using ES5 bundles on browsers that natively support
+// Custom Elements (either because the browser does not support ES2015 modules or because the app
+// is explicitly configured to generate ES5 only bundles).
+import '@webcomponents/custom-elements/src/native-shim';
 /**
  * Date, currency, decimal and percent pipes.
  * Needed for: All but Chrome, Firefox, Edge, IE11 and Safari 10

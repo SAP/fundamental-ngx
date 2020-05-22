@@ -13,5 +13,6 @@ export const API_FILES = {
     select: ['SelectPlatformComponent'],
     radioGroup: ['RadioGroupComponent'],
     menuButton: ['MenuButtonComponent'],
+    microFrontends: ['MicroFrontendsWrapperComponent', 'MicroFrontendsRouterSinkComponent'],
     splitMenuButton: ['SplitMenuButtonComponent']
 };

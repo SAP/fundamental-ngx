@@ -10,7 +10,6 @@ import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -29,9 +28,6 @@ describe('MultiInputComponent', () => {
                 PipeModule,
                 CheckboxModule,
                 InputGroupModule
-            ],
-            providers: [
-                DynamicComponentService
             ]
         }).compileComponents();
     }));
@@ -55,7 +51,7 @@ describe('MultiInputComponent', () => {
 
         const placeholder = 'placeholder';
         component.placeholder = placeholder;
-        (component as any)._changeDetRef.markForCheck();
+        (component as any).changeDetRef.markForCheck();
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('input').placeholder).toBe(placeholder);
@@ -145,7 +141,7 @@ describe('MultiInputComponent', () => {
         component.open = true;
         fixture.detectChanges();
 
-        (component as any)._changeDetRef.markForCheck();
+        (component as any).changeDetRef.markForCheck();
         component.selected = ['test1'];
         fixture.detectChanges();
 
@@ -199,46 +195,5 @@ describe('MultiInputComponent', () => {
         component.handleKeyDown(event, 1);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.listItems.first.focus).toHaveBeenCalled();
-    });
-
-    it('should bring back values, if canceled on mobile mode and dont emit changes', async () => {
-        component.mobile = true;
-
-        spyOn(component, 'onChange');
-        spyOn(component.selectedChange, 'emit');
-
-        await fixture.whenStable();
-
-        component.handleSelect(true, component.dropdownValues[0]);
-
-        expect(component.onChange).not.toHaveBeenCalled();
-        expect(component.selectedChange.emit).not.toHaveBeenCalled();
-
-        expect(component.selected).toEqual([component.dropdownValues[0]]);
-
-        component.dialogDismiss([]);
-
-        expect(component.selected).toEqual([]);
-    });
-
-    it('should emit changes values on approve', async () => {
-        component.mobile = true;
-
-        spyOn(component, 'onChange');
-        spyOn(component.selectedChange, 'emit');
-
-        await fixture.whenStable();
-
-        component.handleSelect(true, component.dropdownValues[0]);
-
-        expect(component.onChange).not.toHaveBeenCalled();
-        expect(component.selectedChange.emit).not.toHaveBeenCalled();
-        expect(component.selected).toEqual([component.dropdownValues[0]]);
-
-        component.dialogApprove();
-
-        expect(component.onChange).toHaveBeenCalled();
-        expect(component.selectedChange.emit).toHaveBeenCalled();
-        expect(component.selected).toEqual([component.dropdownValues[0]]);
     });
 });

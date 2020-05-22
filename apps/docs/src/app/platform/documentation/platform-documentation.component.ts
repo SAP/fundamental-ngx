@@ -29,6 +29,7 @@ export class PlatformDocumentationComponent {
         { url: 'platform/link', name: 'Link' },
         { url: 'platform/radio-group', name: 'Radio Button Group' },
         { url: 'platform/menu-button', name: 'Menu Button' },
+        { url: 'platform/microfrontends', name: 'Micro Frontends App' },
         { url: 'platform/split-menu-button', name: 'Split Menu Button' },
     ];
 

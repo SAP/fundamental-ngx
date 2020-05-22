@@ -1,0 +1,39 @@
+<fd-docs-section-title [id]="'def'" [componentName]="'MicroFrontendsWrapperComponent'">
+    Basic usage
+</fd-docs-section-title>
+
+<description>This example shows basic usage of embeding micro app into main app. 
+<ul>
+    <li>click inside hero micoapp, it emits event to main app,
+main app change simple microapp's input parameters in response of the event, simple microapp react input data changes by refreshing the list.
+    </li>
+    <li>
+click inside both simple and hero microap, main app show  events in event log.
+    </li>
+    <li>
+simple microapp and hero microapp both use same classname 'microapp-container' for outer div with different styles<br/>
+simple microapp definition as:<br/>
+.microapp-container {{ '{'}}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;margin: 4px;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;padding: 4px;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;border-width: 1px;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;border-style: solid;<br/>
+{{ '}' }}<br/>
+hero microapp definition as:<br/>
+.microapp-container {{ '{'}}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;margin: 10px;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;padding: 10px;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;border-width: 1px;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;border-style: inset;<br/>
+{{ '}' }}<br/>
+.microapp-container used in both micrapp on same page do not clash each other, they works as design expect.<br/>
+    </li>
+    <li>
+Hero microapp use router inside, it inherit parent(main app) routing root and  integrate with main app routing path.
+    </li>
+   </ul> 
+</description>
+<component-example>
+    <platform-micro-frontends-basic-example></platform-micro-frontends-basic-example>
+</component-example>
+<code-example [exampleFiles]="microfrontendsExample"></code-example>

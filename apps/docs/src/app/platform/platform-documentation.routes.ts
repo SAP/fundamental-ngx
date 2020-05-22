@@ -43,6 +43,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'microfrontends',
+                loadChildren: () =>
+                    import('./component-docs/platform-micro-frontends/platform-micro-frontends.module').then(
+                        (m) => m.PlatformMicroFrontendsDocsModule
+                    )
+            },
+            {
                 path: 'search-field',
                 loadChildren: () =>
                     import('./component-docs/platform-search-field/platform-search-field.module').then(

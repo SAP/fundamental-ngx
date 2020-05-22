@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.18.1-rc.10",
+  "version": "0.18.1-rc.8",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library",
@@ -67,8 +67,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "nx": "nx",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test"
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -83,6 +82,8 @@
     "@angular/platform-browser": "~9.1.7",
     "@angular/platform-browser-dynamic": "~9.1.7",
     "@angular/router": "~9.1.7",
+    "@angular/elements": "~9.1.7",
+    "@webcomponents/custom-elements": "^1.4.1",
     "@nrwl/angular": "9.3.0",
     "@sap-theming/theming-base-content": "11.1.19",
     "@stackblitz/sdk": "1.4.0",
@@ -115,7 +116,7 @@
     "@angularclass/hmr": "2.1.3",
     "@babel/core": "7.9.6",
     "@nrwl/schematics": "8.12.11",
-    "@nrwl/workspace": "9.3.0",
+    "@nrwl/workspace": "^9.3.0",
     "@schematics/angular": "~9.1.6",
     "@storybook/addon-a11y": "5.3.18",
     "@storybook/addon-actions": "5.3.18",

@@ -59,7 +59,6 @@ import { RadioModule } from './radio/radio.module';
 import { LinkModule } from './link/link.module';
 import { InfoLabelModule } from './info-label/info-label.module';
 import { ObjectStatusModule } from './object-status/object-status.module';
-import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-input-mobile.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -98,7 +97,6 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
         DialogModule,
         MessageStripModule,
         MultiInputModule,
-        MultiInputMobileModule,
         NestedListModule,
         NotificationModule,
         ObjectStatusModule,

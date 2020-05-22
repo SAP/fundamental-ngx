@@ -1,0 +1,33 @@
+<header>Micro App Wrapper</header>
+<description>
+    Micro App Wrapper works as micro app container and a proxy between main app and micro app.
+    <br />
+    it response for install micro app's code and css on demand , create shadow dom and load css into shadow dom
+    <br />
+    it capture custom event and relay event to main app, it reacts on input changes and pass input data from main app
+    into micro app
+</description>
+<import module="PlatformMicroFrontendsModule"></import>
+
+<ul fd-tab-nav>
+    <li fd-tab-item>
+        <a fd-tab-link
+            [routerLinkActiveOptions]="{ exact: true }"
+            [active]="rla1.isActive"
+            [routerLink]="'./example'"
+            routerLinkActive
+            #rla1="routerLinkActive"
+        >
+            <span fd-tab-tag>Examples</span>
+        </a>
+    </li>
+    <li fd-tab-item>
+        <a fd-tab-link [active]="rla2.isActive" [routerLink]="'./api'" routerLinkActive #rla2="routerLinkActive">
+            <span fd-tab-tag>API</span>
+        </a>
+    </li>
+</ul>
+
+<separator style="margin-top: 0;"></separator>
+
+<router-outlet></router-outlet>

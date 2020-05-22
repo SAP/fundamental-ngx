@@ -1,0 +1,29 @@
+<fieldset>
+    <legend>Event Logs</legend>
+    <textarea [rows]="4" [cols]="300" style="width:100%; max-height:100px;" readonly>{{eventlogs}}</textarea>
+</fieldset>
+
+<fieldset class="main-app">
+    <legend>Main App</legend>
+    <nav>
+        <a routerLink="heroes" routerLinkActive="active">Heroes</a>
+        <a routerLink="crisis" routerLinkActive="active">Crisis Center</a>
+        <a routerLink="vue" routerLinkActive="active">Vue App</a>
+        <a routerLink="reactapp" routerLinkActive="active">React App</a>
+        <a routerLink="ptable" routerLinkActive="active">PrimeNg Table</a>
+    </nav>
+
+    <div style="display: table;margin-top:20px">
+        <div style="display:table-cell;">
+            <fdp-microfrontends-wrapper [src]="'microapps/simple.main.js'" [stylesheet]="'microapps/theme.css'"
+                [elParameters]="elParameters" [customTag]="'simple-test'" [routeOutlet]=false
+                (oncustomevent)="onMicroAppEvent($event)">
+            </fdp-microfrontends-wrapper>
+        </div>
+
+        <div style="display:table-cell;">
+            <router-outlet (activate)="onRouteMicroAppEvent($event)"></router-outlet>
+        </div>
+    </div>
+
+</fieldset>

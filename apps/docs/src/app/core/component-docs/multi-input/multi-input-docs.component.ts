@@ -21,9 +21,6 @@ import * as formT from '!raw-loader!./examples/multi-input-form-example/multi-in
 import * as newTokensH from '!raw-loader!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.html';
 import * as newTokensT from '!raw-loader!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.ts';
 
-import * as mobileH from '!raw-loader!./examples/multi-input-mobile-example/multi-input-mobile-example.component.html';
-import * as mobileT from '!raw-loader!./examples/multi-input-mobile-example/multi-input-mobile-example.component.ts';
-
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -113,20 +110,6 @@ export class MultiInputDocsComponent {
             component: 'MultiInputFormExampleComponent',
             code: formT,
             fileName: 'multi-input-form-example'
-        }
-    ];
-
-    mobile: ExampleFile[] = [
-        {
-            language: 'html',
-            code: mobileH,
-            fileName: 'multi-input-mobile-example'
-        },
-        {
-            language: 'typescript',
-            component: 'MultiInputMobileExampleComponent',
-            code: mobileT,
-            fileName: 'multi-input-mobile-example'
         }
     ];
 
