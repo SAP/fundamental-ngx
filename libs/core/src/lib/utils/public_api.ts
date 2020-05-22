@@ -17,6 +17,8 @@ export * from './drag-and-drop/dnd-container/dnd-container.directive';
 export * from './interfaces/css-class-builder.interface';
 export * from './interfaces/css-style-builder.interface';
 export * from './interfaces/has-element-ref.interface';
+export * from './interfaces/mobile-mode-config';
+
 
 export * from './decorators/apply-css-class.decorator';
 export * from './decorators/apply-css-style.decorator';

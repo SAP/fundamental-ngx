@@ -4,15 +4,8 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "outDir": "../../dist/out-tsc",
-        "types": [
-            "node"
-        ]
+        "types": ["node"]
     },
-    "files": [
-        "src/main.ts",
-        "src/polyfills.ts"
-    ],
-    "include": [
-        "src/*.d.ts"
-    ]
+    "files": ["src/main.ts", "src/polyfills.ts"],
+    "include": ["src/*.d.ts"]
 }

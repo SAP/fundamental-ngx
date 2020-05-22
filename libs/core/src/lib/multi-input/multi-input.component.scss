@@ -1,4 +1,13 @@
 //TODO evaluate whether this should be in fd-styles
+
+.fd-multi-input-tokenizer-custom {
+    width: 100%;
+}
+
+.fd-multi-input-input-group-custom {
+    max-width: 100%;
+}
+
 .fd-multi-input-custom {
     display: block;
 
@@ -21,11 +30,6 @@
     .fd-multi-input-menu-overflow {
         overflow: auto;
     }
-
-    .fd-multi-input-tokenizer {
-        width: 100%;
-    }
-
     .fd-input {
         &.fd-multi-input-tokenizer-input {
             margin-top: 0;
@@ -37,10 +41,15 @@
 
     .fd-multi-input-show-all {
         float: right;
+        background-color: transparent;
     }
 
     .fd-multi-input-checkbox {
         width: 100%;
         cursor: pointer;
+
+        .fd-checkbox__label {
+            color: inherit;
+        }
     }
 }
