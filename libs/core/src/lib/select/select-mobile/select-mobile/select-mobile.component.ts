@@ -86,8 +86,9 @@ export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _openDialog(): void {
+        const dialogConfig = this._selectComponent.dialogConfig || {};
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
-            ...this._selectComponent.dialogConfig,
+            ...dialogConfig,
             mobile: true,
             focusTrapped: false,
             verticalPadding: false,

@@ -31,7 +31,8 @@ import { SelectProxy } from './select-proxy.service';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { SelectMobileComponent } from './select-mobile/select-mobile/select-mobile.component';
-import { DIALOG_CONFIG, DialogConfig, MobileModeConfig } from '../..';
+import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
+import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 
 let selectUniqueId: number = 0;
 
@@ -257,7 +258,7 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
         private _selectProxy: SelectProxy,
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _dynamicComponentService: DynamicComponentService,
-        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig?: DialogConfig
+        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig
     ) { }
 
     /** @hidden */
