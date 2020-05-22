@@ -2,13 +2,13 @@
     <div fd-action-bar-header>
         <div fd-action-bar-back *ngIf="showBackButton">
             <button
-                class="sap-icon--navigation-left-arrow"
                 fd-button
                 [compact]="compact"
                 [fdType]="'transparent'"
                 [attr.aria-label]="backButtonLabel"
                 data-tag="actionbar__back-button"
                 [attr.title]="backButtonLabel"
+                [glyph]="navigationArrow$ | async"
                 (click)="backButtonClick.emit($event)"
             ></button>
         </div>
