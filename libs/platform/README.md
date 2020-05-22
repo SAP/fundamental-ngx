@@ -75,10 +75,10 @@ For an existing Angular CLI application,
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Toggles, add the following import to your main application module.
+    For example, to use Link, add the following import to your main application module.
 
     ```javascript
-    import { ToggleModule } from '@fundamental-ngx/core';
+    import { PlatformLinkModule } from '@fundamental-ngx/platform';
     ```
 
     Note: Be careful while importing the entire `FundamentalNgxPlatformModule` as it loads all modules; we recommend to only import relevant modules as needed.
@@ -86,11 +86,11 @@ For an existing Angular CLI application,
     For models prior to 0.11.1 use `fundamental-ngx`
 
     ```javascript
-    import { ToggleModule } from '@fundamental-ngx/core';
+    import { PlatformLinkModule } from '@fundamental-ngx/platform';
 
     @NgModule({
         ...
-        imports: [ToggleModule],
+        imports: [PlatformLinkModule],
     })
     export class DemoModule { }
     ```
@@ -98,7 +98,9 @@ For an existing Angular CLI application,
 3. **Add the component to your HTML.**
 
     ```html
-    <fd-toggle [size]="'l'" [(checked)]="myValue">Large Toggle</fd-toggle>
+    <fdp-link [href]="'http://www.google.com'" [title]="'Extra info as tooltip text and aria-label'">
+        Standard Link
+    </fdp-link>
     ```
 
 ## Tests
