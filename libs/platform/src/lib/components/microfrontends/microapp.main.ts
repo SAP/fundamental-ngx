@@ -6,7 +6,7 @@ import { Observable, of} from 'rxjs';
 })
 export class MicroAppMain implements AfterViewInit, OnInit {
   /**
-   * output custom event
+   * emit custom event
    */
   @Output() oncustomevent = new EventEmitter();
   

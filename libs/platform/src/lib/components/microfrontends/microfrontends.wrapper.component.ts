@@ -17,26 +17,27 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
     @ViewChild('customElementDiv', { static: false }) 
     private elementDiv: ElementRef;
     
-    /** replay custom element event to main app*/
+    /** emit custom element event to main app*/
     @Output() 
     oncustomevent = new EventEmitter();
-    /** micro app input parameters, it's array of object
+    /** 
+     * micro app input parameters, it's array of object
      *  object key will set to custom element's attrubite
      *  object value will set to custom element's attribute vaue
      */
-    @Input() elParameters: any[];
+    @Input() elParameters: Array<{key: string, value: any}>;
     /**
      * custom element tag name
      */
     @Input() customTag: string;
     /**
-     * custom element code href
+     * custom element code href, can be array of string or string
      */
-    @Input() src: any;
+    @Input() src: string[]|string;
     /**
-     * custom element css href
+     * custom element css href, can be array of string or string
      */
-    @Input() stylesheet: any;
+    @Input() stylesheet: string[]|string;
     /**
      * true : if the wrapper install as route node
      * false: if the wrapper is not used as route node
@@ -73,7 +74,7 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
      * @param params array of object 
      */
     
-     public setParameters(attrs: Array<object>) {
+     public setParameters(attrs: Array<{key: string, value: any}>) {
         this.elParameters = attrs;
         if (this.customEle) {
             (this.elParameters || []).forEach((p) => {

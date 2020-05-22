@@ -1,7 +1,7 @@
 import { Component, ViewChildren, QueryList } from '@angular/core';
 
 interface MicroFrontendsWrapper {
-    setParameters(inputData: any[]);
+    setParameters(inputData: Array<{key: string, value: string}>): void;
 }
 
 @Component({
@@ -12,7 +12,7 @@ interface MicroFrontendsWrapper {
 export class PlatformMicroFrontendsBasicExampleComponent {
     @ViewChildren('microfrontendswrapper') eleAnchors!: QueryList<MicroFrontendsWrapper>;
     
-    private exampleData: any[][] = [
+    private exampleData: {key: string, value: string}[][] = [
         
         [{   
             key: 'sessionId', 

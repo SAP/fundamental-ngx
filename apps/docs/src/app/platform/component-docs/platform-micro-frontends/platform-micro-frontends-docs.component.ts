@@ -10,12 +10,12 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 })
 export class PlatformMicroFrontendsDocsComponent {
     microfrontendsExample: ExampleFile[] = [
-        {   name: 'template',
+        {   name: 'Html',
             language: 'html',
             code: microfrontendsBasicHtml,
             fileName: 'platform-micro-frontends-basic-example'
         },
-        {   name: 'js code',
+        {   name: 'Typescript',
             main: true,
             language: 'typescript',
             code: microfrontendsBasicTs,
