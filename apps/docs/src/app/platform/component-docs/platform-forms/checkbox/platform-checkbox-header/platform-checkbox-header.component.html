@@ -1,19 +1,31 @@
 <header>Checkbox</header>
+<span>With checkboxes, all options are visible and the user can make one or more selections.</span>
+<span>Checkbox is a Platform form component. It can be used without form as well.</span>
 <description>
     <ul>
         <li>Checkbox is a HTML element which can be used with form as well as without form.</li>
-        <li>With checkboxes, all options are visible and the user can make one or more selections.</li>
-        <li>Unlike checkbox in core implementation, platform checkbox expects value of checked state only.</li>
-        <li>Platform checkbox can be used with <a href="fundamental-ngx#/platform/form">Platform Form</a></li>
-        <li>Platform checkbox supports internationalisation with i18n directive</li>
+        <li>
+            Platform checkbox has only one value, for checked state attribute. It does not take second value for
+            unchecked state attribute.
+        </li>
+        <li>
+            Platform checkbox is specially designed to be used with
+            <a href="fundamental-ngx#/platform/form">Platform Form</a>
+        </li>
         <li>
             Platform Checkbox implementation has following features.
             <ol>
-                <li>Binary checkbox with form and without form</li>
-                <li>Binary checkbox without form</li>
-                <li>Binary checkbox with value without form</li>
-                <li>Multiple checkbox selection</li>
-                <li>Tristate checkbox with value and without value</li>
+                <li>
+                    Binary checkbox with Platform form. In this case checkbox does not take any value. The state(checked
+                    or unchecked) is identified through boolean 'true' or 'false'.
+                </li>
+                <li>
+                    Checkbox without Platform form. In this case checkbox can either take a value for selected state. It
+                    can also behave like a binary check box by not taking the value but allowing its state to be
+                    identified through boolean 'true' or 'false'.
+                </li>
+                <li>Multiselect checkbox with value with Platform form.</li>
+                <li>Tristate checkbox with value</li>
                 <li>Tristate checkbox without value</li>
                 <li>
                     Compatible with <a href="fundamental-ngx#/platform/form">Platform Form</a> for validation and error
