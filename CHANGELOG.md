@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.1-rc.12"></a>
+## [0.18.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.10...v0.18.1-rc.12) (2020-05-23)
+
+
+### Bug Fixes
+
+* added click event to set focus on input ([#2548](https://github.com/SAP/fundamental-ngx/issues/2548)) ([4a438a1](https://github.com/SAP/fundamental-ngx/commit/4a438a1))
+* removed extra space from first and last child ([#2547](https://github.com/SAP/fundamental-ngx/issues/2547)) ([c212475](https://github.com/SAP/fundamental-ngx/commit/c212475))
+
+
+
+<a name="0.18.1-rc.11"></a>
+## [0.18.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.10...v0.18.1-rc.11) (2020-05-23)
+
+
+### Bug Fixes
+
+* added click event to set focus on input ([#2548](https://github.com/SAP/fundamental-ngx/issues/2548)) ([4a438a1](https://github.com/SAP/fundamental-ngx/commit/4a438a1))
+* removed extra space from first and last child ([#2547](https://github.com/SAP/fundamental-ngx/issues/2547)) ([c212475](https://github.com/SAP/fundamental-ngx/commit/c212475))
+
+
+
 <a name="0.18.1-rc.10"></a>
 ## [0.18.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.9...v0.18.1-rc.10) (2020-05-20)
 
