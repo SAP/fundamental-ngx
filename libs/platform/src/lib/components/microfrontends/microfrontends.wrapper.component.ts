@@ -1,7 +1,7 @@
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Component, ElementRef, Renderer2, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, ElementRef, Renderer2, ViewChild, Output, EventEmitter, Input, Optional } from '@angular/core';
 import { OnDestroy, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Location } from '@angular/common';
+
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -57,10 +57,8 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
     private routeSubscribe: Subscription;
 
     constructor(
-        private router: Router,
-        private location: Location,
-        private route: ActivatedRoute,
-        private customElementRenderer: Renderer2, ) {
+        @Optional() private route: ActivatedRoute,
+        private customElementRenderer: Renderer2 ) {
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -113,7 +111,7 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         }
     }
 
-    private appendCssLink(shadowroot): void {
+    private appendCssLink(shadowroot: object): void {
         let stylesheets: String[];
 
         if (!Array.isArray(this.stylesheet)) {
@@ -139,11 +137,11 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         }
     }
 
-    private installJsLink(shadowRoot): void {
+    private installJsLink(): void {
 
         const microapp_store = document.head.getElementsByTagName('script');
         let loaded: boolean = false;
-        let srcs: String[];
+        let srcs: string[];
 
         if (!Array.isArray(this.src)) {
             srcs = [this.src];
@@ -163,7 +161,7 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         }
     }
 
-    private appendJsLink(srcs): void {
+    private appendJsLink(srcs: string[]): void {
         (srcs || []).forEach(src => {
             const script = this.customElementRenderer.createElement('script');
             script.src = src;
@@ -178,7 +176,7 @@ export class MicroFrontendsWrapperComponent implements OnDestroy, AfterViewInit,
         if (!content.shadowRoot) {
             const shadowroot = content.attachShadow({ mode: 'open' });
             this.appendCssLink(shadowroot);
-            this.installJsLink(shadowroot);
+            this.installJsLink();
             this.customEle = this.customElementRenderer.createElement(this.customTag);
             this.customEventHandler = this.installCustomEvenetHandler();
             this.customEle.addEventListener('oncustomevent', this.customEventHandler);

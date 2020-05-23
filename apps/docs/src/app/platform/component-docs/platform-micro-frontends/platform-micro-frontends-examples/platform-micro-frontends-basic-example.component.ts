@@ -30,12 +30,17 @@ export class PlatformMicroFrontendsBasicExampleComponent {
             value: '["RouterModule", "HttpModule", "CoreModule","SharedModule","ExampleModule"]' 
         }]
     ];
+    private i: number = 0;
     /**
      * event message, will show on page's textarea
      */
+
     public eventlogs: string = '';
-    private i: number = 0;
-    private elParameters: any[] = this.exampleData[this.i];
+    /**
+     * micro app's input parameters
+     */ 
+    public elParameters: any[] = this.exampleData[this.i];
+    
     /**
      * custom event handler
      * @param event 
