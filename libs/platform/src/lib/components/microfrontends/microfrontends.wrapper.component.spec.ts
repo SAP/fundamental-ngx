@@ -54,9 +54,9 @@ describe('MicroFrontendsWrapperComponent', () => {
 
             const shadowRoot = children[0].nativeElement.children[0].shadowRoot;
 
-            var childNodes = shadowRoot.childNodes;
+            const childNodes = shadowRoot.childNodes;
 
-            for(let i = 0; i < childNodes.length; i++) {
+            for (let i = 0; i < childNodes.length; i++) {
                const childNode = childNodes[i];
               
                if (childNode.tagName === 'DIV') {
@@ -84,3 +84,4 @@ describe('MicroFrontendsWrapperComponent', () => {
 
     
 });
+
