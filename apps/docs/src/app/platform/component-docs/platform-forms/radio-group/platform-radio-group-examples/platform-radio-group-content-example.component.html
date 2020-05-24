@@ -1,126 +1,118 @@
-<p>Reactive form Examples</p>
-<form [formGroup]="customForm" class="flex-form">
-    <fieldset fd-fieldset>
-        <p>Example 1: Compact Radio Button Group with 'default' state and with default selection</p>
+<h3><u>Use With Reactive Form</u></h3>
+<p class="header">1. Compact Radio Button Group with 'default' state and with default selection</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form1">
+    <fdp-form-field [id]="'radio1'" zone="zLeft" rank="1">
         <fdp-radio-group
             [id]="'radio1'"
             [name]="'radio1'"
             [contentDensity]="'compact'"
-            [value]="'Spring'"
+            [value]="'spring'"
             [isInline]="false"
             formControlName="example1"
         >
-            <fdp-radio-button *ngFor="let season of seasons" [value]="season">
-                {{ season }}
-            </fdp-radio-button>
+            <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+            <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+            <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
+            <fdp-radio-button [value]="'autumn'">Autumn</fdp-radio-button>
         </fdp-radio-group>
-    </fieldset>
-    <fieldset fd-fieldset>
-        <p>Example 2: Inline Cozy Radio Button Group</p>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selelected value: {{ form1.get('example1').value }}</p>
+
+<p class="header">2. Inline Cozy Radio Button Group</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form2">
+    <fdp-form-field [id]="'radio2'" zone="zLeft" rank="1">
         <fdp-radio-group
-            [id]="'myid'"
+            [id]="'radio2'"
             [name]="'radio2'"
             [contentDensity]="'cozy'"
             [isInline]="true"
             formControlName="example2"
         >
-            <fdp-radio-button *ngFor="let season of seasons" [value]="season">
-                {{ season }}
-            </fdp-radio-button>
+            <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+            <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+            <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
+            <fdp-radio-button [value]="'autumn'">Autumn</fdp-radio-button>
         </fdp-radio-group>
-    </fieldset>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selelected value: {{ form2.get('example2').value }}</p>
 
-    <fieldset fd-fieldset>
-        <p>Example 3: Radio Button Group with default property values</p>
+<p class="header">3. Radio Button Group With Default Property Values</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form3">
+    <fdp-form-field [id]="'radio3'" zone="zLeft" rank="1">
         <fdp-radio-group [id]="'radio3'" [name]="'radio3'" [isInline]="true" formControlName="example3">
-            <fdp-radio-button *ngFor="let season of seasons" [value]="season">
-                {{ season }}
-            </fdp-radio-button>
+            <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+            <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+            <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
+            <fdp-radio-button [value]="'autumn'">Autumn</fdp-radio-button>
         </fdp-radio-group>
-    </fieldset>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selelected value: {{ form3.get('example3').value }}</p>
 
-    <fieldset fd-fieldset>
-        <p>favourite Month: Radio Button Group with disabled and error status</p>
+<p class="header">4. Radio Button Group With Disabled Button and Validation Error</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form4">
+    <fdp-form-field [id]="'radio4'" zone="zLeft" rank="1">
         <fdp-radio-group
-            [id]="'radio1'"
-            [name]="'radio1'"
+            [id]="'radio4'"
+            [name]="'radio4'"
             [contentDensity]="'compact'"
-            [value]="'March'"
             [isInline]="false"
             formControlName="example4"
         >
-            <fdp-radio-button [value]="'January'" [disabled]="true">
-                {{ 'January' }}
-            </fdp-radio-button>
-            <fdp-radio-button [value]="'February'">
-                {{ 'February' }}
-            </fdp-radio-button>
-            <fdp-radio-button [value]="'March'">
-                {{ 'March' }}
-            </fdp-radio-button>
-            <fdp-radio-button [value]="'April'">
-                {{ 'April' }}
-            </fdp-radio-button>
+            <fdp-radio-button [value]="'january'" [disabled]="true">January</fdp-radio-button>
+            <fdp-radio-button [value]="'february'">February</fdp-radio-button>
+            <fdp-radio-button [value]="'march'">March</fdp-radio-button>
+            <fdp-radio-button [value]="'april'">April</fdp-radio-button>
         </fdp-radio-group>
-    </fieldset>
-</form>
-<div>Example 1 selelected value: {{ customForm.get('example1').value }}</div>
-<div>Example 2 selelected value: {{ customForm.get('example2').value }}</div>
-<div>Example 3 selelected value: {{ customForm.get('example3').value }}</div>
-<div>Favourite Month value: {{ customForm.get('example4').value }}</div>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selelected value: {{ form4.get('example4').value }}</p>
+
 <br />
-<p>Template Driven Form</p>
-<form class="flex-form">
-    <p>Example 4: Inline Compact Radio Button Group with default selection</p>
-    <fieldset fd-fieldset>
-        <fdp-radio-group
-            [name]="'radio4'"
-            [value]="'Summer'"
-            [contentDensity]="'compact'"
-            [isInline]="true"
-            [(ngModel)]="favoriteSeason"
-        >
-            <fdp-radio-button *ngFor="let season of seasons" [value]="season">
-                {{ season }}
-            </fdp-radio-button>
+<h3><u>Use With Template Driven Form</u></h3>
+<p>1. Inline Compact Radio Button Group With Default Selection</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio4'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radio4'" [contentDensity]="'compact'" [isInline]="true" [(ngModel)]="favoriteSeason">
+            <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+            <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+            <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
+            <fdp-radio-button [value]="'autumn'">Autumn</fdp-radio-button>
         </fdp-radio-group>
-    </fieldset>
-    <br />
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selected Value: {{ favoriteSeason }}</p>
 
-    <p>Example 5: Inline Compact Radio Button Group</p>
-    <fieldset fd-fieldset>
-        <fdp-radio-group [name]="'radio5'" [contentDensity]="'cozy'" [isInline]="true" [(ngModel)]="favoriteSeason2">
-            <fdp-radio-button *ngFor="let season of seasons" [value]="season">
-                {{ season }}
-            </fdp-radio-button>
+<p class="header">2. Inline Compact Radio Button Group</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio5'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radio5'" [contentDensity]="'compact'" [isInline]="true" [(ngModel)]="favoriteSeason2">
+            <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+            <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+            <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
+            <fdp-radio-button [value]="'autumn'">Autumn</fdp-radio-button>
         </fdp-radio-group>
-    </fieldset>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selected Value: {{ favoriteSeason2 }}</p>
 
-    <p>favourite Month: Radio Button Group with disabled item</p>
-    <fieldset fd-fieldset>
+<p class="header">3. Radio Button Group with disabled item</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio5'" zone="zLeft" rank="1">
         <fdp-radio-group
-            [id]="'radio1'"
-            [name]="'radio1'"
+            [id]="'radio5'"
+            [name]="'radio5'"
             [contentDensity]="'compact'"
-            [value]="'March'"
             [isInline]="false"
             [(ngModel)]="favoriteMonth"
         >
-            <fdp-radio-button [value]="'January'" [disabled]="true">
-                {{ 'January' }}
-            </fdp-radio-button>
-            <fdp-radio-button [value]="'February'">
-                {{ 'February' }}
-            </fdp-radio-button>
-            <fdp-radio-button [value]="'March'">
-                {{ 'March' }}
-            </fdp-radio-button>
-            <fdp-radio-button [value]="'April'">
-                {{ 'April' }}
-            </fdp-radio-button>
+            <fdp-radio-button [value]="'january'" [disabled]="true">January</fdp-radio-button>
+            <fdp-radio-button [value]="'february'">February</fdp-radio-button>
+            <fdp-radio-button [value]="'march'">March</fdp-radio-button>
+            <fdp-radio-button [value]="'april'">April</fdp-radio-button>
         </fdp-radio-group>
-    </fieldset>
-</form>
-<div>Example 4 selelected value: {{ favoriteSeason }}</div>
-<div>Example 5 selelected value: {{ favoriteSeason2 }}</div>
-<div>Favourite Month value: : {{ favoriteMonth }}</div>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selected Value: {{ favoriteMonth }}</p>

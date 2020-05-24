@@ -1,8 +1,32 @@
 <header>Radio Button Group</header>
 <description>
-    The radio-group Component is used to select amoung pre-defined options.
+    Radio button group is a component specially designed to work with
+    <a href="fundamental-ngx#/platform/form">platform form</a>, to create Platform Radio Buttons. Radio button group
+    creates multiple radio buttons and manages it as a single element. There is no need to explicitly associate a group
+    name for every radio button. <br />
+    Only one radio button can be selected at a time.
+    <div>
+        <h3 style="margin-bottom: 1rem;">Platform specific enhancements:</h3>
+        <ul style="margin-top: 0%;">
+            <li>
+                Radio button group is designed to work with platform form. It always requires an associated platform
+                form.
+            </li>
+            <li>Provides default grouping of radio buttons when created using Radio Button Group.</li>
+            <li>
+                Radio buttons can be created from the list of developer provided values (array of strings or list of
+                SelectItem objects).
+            </li>
+            <li>
+                Optionally, if internationalisation is required, radio button group can be created by passing individual
+                radio button elements and placing i18n directive to the radio button element's labels.
+            </li>
+            <li>Radio buttons can be placed in the required layout (default or inline).</li>
+        </ul>
+    </div>
 </description>
-<import module="PlatformRadioGroupModule"></import>
+
+<pre style="background-color: #e9e7e7;"><import module="PlatformRadioGroupModule, SelectItem"></import></pre>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

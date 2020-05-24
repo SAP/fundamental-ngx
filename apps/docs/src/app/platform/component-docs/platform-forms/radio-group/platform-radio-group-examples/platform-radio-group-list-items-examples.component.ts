@@ -3,52 +3,46 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-list-items-example',
-    templateUrl: './platform-radio-group-list-items-example.component.html'
+    templateUrl: './platform-radio-group-list-items-example.component.html',
+    styleUrls: ['platform-radio-group.component.scss']
 })
 export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
-    favoriteOption = '';
-    favoriteOption2 = '';
+    favoriteOption: string = '';
+    favoriteOption2: string = 'winter';
 
-    customForm = new FormGroup({
-        example1: new FormControl(''),
-        example2: new FormControl('')
+    form1 = new FormGroup({
+        example1: new FormControl('')
+    });
+
+    form2 = new FormGroup({
+        example2: new FormControl('winter')
     });
 
     items = [
         {
-            label: 'Option 1',
-            value: 'Option 1',
-            state: 'default',
+            label: 'Winter',
+            value: 'winter',
             disabled: false
         },
         {
-            label: 'Option 2',
-            value: 'Option 2',
-            state: 'valid',
+            label: 'Spring',
+            value: 'spring',
             disabled: false
         },
         {
-            label: 'Option 3',
-            value: 'Option 3',
-            state: 'invalid',
+            label: 'Summer',
+            value: 'summer',
             disabled: false
         },
         {
-            label: 'Option 4',
-            value: 'Option 4',
-            state: 'warning',
-            disabled: false
-        },
-        {
-            label: 'Option 5',
-            value: 'Option 5',
-            state: 'information',
+            label: 'Autumn',
+            value: 'autumn',
             disabled: false
         }
     ];
 
-    ngDoCheck(): void {
-        this.customForm.get('example1').setErrors({ invalid: true });
-        this.customForm.get('example1').markAsTouched();
+    ngDoCheck() {
+        this.form1.get('example1').setErrors({ invalid: true });
+        this.form1.get('example1').markAsTouched();
     }
 }

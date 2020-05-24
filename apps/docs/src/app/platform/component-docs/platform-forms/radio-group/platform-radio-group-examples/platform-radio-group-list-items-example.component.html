@@ -1,18 +1,23 @@
-<p>Reactive form Examples</p>
-<form [formGroup]="customForm" class="flex-form">
-    <p>Example 1: Radio Buttons Types with default value and error status</p>
-    <fieldset fd-fieldset>
+<h3><u>Use With Reactive Form</u></h3>
+
+<p class="header">1. Platform Radio Buttons created with given list of SelectItem objects and have Validation Error</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form1">
+    <fdp-form-field [id]="'radio1'" zone="zLeft" rank="1">
         <fdp-radio-group
             [name]="'radio1'"
-            [value]="'Option 2'"
+            [value]="'spring'"
             [list]="items"
             [isInline]="false"
             formControlName="example1"
         >
         </fdp-radio-group>
-    </fieldset>
-    <p>Example 2: Radio Buttons Types in Compact contentDensity</p>
-    <fieldset fd-fieldset>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selelected value: {{ form1.get('example1').value }}</p>
+
+<p class="header">2. Compact Platform Radio Button created with given list of SelectItem objects.</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form2">
+    <fdp-form-field [id]="'radio2'" zone="zLeft" rank="1">
         <fdp-radio-group
             [name]="'radio2'"
             [contentDensity]="'compact'"
@@ -21,40 +26,40 @@
             formControlName="example2"
         >
         </fdp-radio-group>
-    </fieldset>
-</form>
-<div>
-    Example 1 selelected value: {{ customForm.value.example1 }}
-    <br />
-    Example 2 selelected value: {{ customForm.value.example2 }}
-</div>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selelected value: {{ form2.get('example2').value }}</p>
 
 <br />
-<p>Template Driven Form</p>
-<form class="flex-form">
-    <p>Example 3: Radio Button Group Example with given list of objects, default value selection</p>
-    <fieldset fd-fieldset>
+<h3><u>Use With Template Driven Form</u></h3>
+
+<p class="header">
+    1. Platform Radio Buttons created with given list of SelectItem objects also pre-selection based on Control value
+</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio1'" zone="zLeft" rank="1">
         <fdp-radio-group
-            [name]="'radio3'"
-            [value]="'Option 2'"
+            [name]="'radio1'"
             [list]="items"
-            [contentDensity]="'cozy'"
             [isInline]="true"
             [(ngModel)]="favoriteOption"
         >
         </fdp-radio-group>
-    </fieldset>
-    <p>Example 4: Radio Button Group Example with given list of string values</p>
-    <fieldset fd-fieldset>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selelected value: {{ favoriteOption }}</p>
+
+<p class="header">2. Platform Radio Button created with given list of SelectItem objects.</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio2'" zone="zLeft" rank="1">
         <fdp-radio-group
-            [name]="'radio4'"
+            [name]="'radio2'"
             [list]="items"
             [contentDensity]="'compact'"
             [isInline]="true"
             [(ngModel)]="favoriteOption2"
         >
         </fdp-radio-group>
-    </fieldset>
-</form>
-<div>Example 3 selelected option: {{ favoriteOption }}</div>
-<div>Example 4 selelected option: {{ favoriteOption2 }}</div>
+    </fdp-form-field>
+</fdp-form-group>
+<p class="result">Selelected value: {{ favoriteOption2 }}</p>

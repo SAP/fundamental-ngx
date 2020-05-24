@@ -1,91 +1,153 @@
-<p>Example (Reactive form examples):</p>
-<form [formGroup]="customForm" class="flex-form">
-    <p>Example 1: Radio Button passed as content</p>
-    <fieldset fd-fieldset>
+<h3>Disabled Radio Button With Reactive Form</h3>
+
+<p class="header">1. Platform Radio Buttons passed as content and Formcontrol is disabled</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="customForm">
+    <fdp-form-field [id]="'radio1'" zone="zLeft" rank="1">
         <fdp-radio-group
-            [id]="'myid'"
+            [id]="'radio1'"
             [name]="'radio1'"
             [contentDensity]="'compact'"
             [isInline]="true"
             formControlName="example1"
         >
-            <fdp-radio-button *ngFor="let season of seasons" [value]="season">
-                {{ season }}
-            </fdp-radio-button>
+            <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+            <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+            <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
+            <fdp-radio-button [value]="'autumn'">Autumn</fdp-radio-button>
         </fdp-radio-group>
-    </fieldset>
+    </fdp-form-field>
+</fdp-form-group>
 
-    <p>Example 2: Radio Button created from list of string values</p>
-    <fieldset fd-fieldset>
+<p class="header">2. Platform Radio Buttons passed as content and some radio buttons are disabled</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="customForm">
+    <fdp-form-field [id]="'radio2'" zone="zLeft" rank="1">
         <fdp-radio-group
             [id]="'radio2'"
             [name]="'radio2'"
+            [contentDensity]="'compact'"
+            [isInline]="true"
+            formControlName="example2"
+        >
+            <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+            <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+            <fdp-radio-button [value]="'summer'" [disabled]="true">Summer</fdp-radio-button>
+            <fdp-radio-button [value]="'autumn'" [disabled]="true">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<p class="header">3. Platform Radio Button created from list of string values</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="customForm">
+    <fdp-form-field [id]="'radio3'" zone="zLeft" rank="1">
+        <fdp-radio-group
+            [id]="'radio3'"
+            [name]="'radio3'"
             [list]="seasons"
             [isInline]="true"
             [contentDensity]="'compact'"
-            [value]="'Winter'"
             [hasNoValue]="true"
             [noValueLabel]="'(No selection)'"
-            formControlName="example2"
+            formControlName="example3"
         >
         </fdp-radio-group>
-    </fieldset>
-    <p>Example 3: Radio Buttons created from list of objects</p>
-    <fieldset fd-fieldset>
-        <fdp-radio-group [name]="'radio1'" [list]="items" [isInline]="true" formControlName="example3">
+    </fdp-form-field>
+</fdp-form-group>
+
+<p class="header">4. Platform Radio Buttons created from list of SelectItem objects and FormContol is disabled</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="customForm">
+    <fdp-form-field [id]="'radio4'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radio4'" [list]="items" [isInline]="true" formControlName="example4">
         </fdp-radio-group>
-    </fieldset>
-</form>
+    </fdp-form-field>
+</fdp-form-group>
+
+<p class="header">5. Platform Radio Buttons created from list of SelectItem objects and some items are disabled</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="customForm">
+    <fdp-form-field [id]="'radio5'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radio5'" [list]="disabledItems" [isInline]="true" formControlName="example5">
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+
 <br />
 <br />
-<p>Example (Template Driven form):</p>
-<form class="flex-form">
-    <p>Example 4: Radio Button passed as content</p>
-    <fieldset fd-fieldset>
+
+<h3>Disabled Radio Button With Template Driven Form</h3>
+<p class="header">1. Platform Radio Buttons passed as content and Group is disabled</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio6'" zone="zLeft" rank="1">
         <fdp-radio-group
-            [id]="'myid'"
-            [name]="'radio3'"
+            [id]="'radio6'"
+            [name]="'radio6'"
             [contentDensity]="'compact'"
             [disabled]="true"
             [isInline]="true"
             [(ngModel)]="favoriteSeason1"
         >
-            <fdp-radio-button *ngFor="let season of seasons" [value]="season">
-                {{ season }}
-            </fdp-radio-button>
+            <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+            <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+            <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
+            <fdp-radio-button [value]="'autumn'">Autumn</fdp-radio-button>
         </fdp-radio-group>
-    </fieldset>
+    </fdp-form-field>
+</fdp-form-group>
 
-    <p>Example 5: Radio Button created from list of string values</p>
-    <fieldset fd-fieldset>
+<p class="header">2. Platform Radio Buttons passed as content and individual radio button is disabled</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio7'" zone="zLeft" rank="1">
         <fdp-radio-group
-            [id]="'radio2'"
-            [name]="'radio4'"
+            [id]="'radio7'"
+            [name]="'radio7'"
+            [contentDensity]="'compact'"
+            [isInline]="true"
+            [(ngModel)]="favoriteSeason2"
+        >
+            <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+            <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+            <fdp-radio-button [value]="'summer'" [disabled]="true">Summer</fdp-radio-button>
+            <fdp-radio-button [value]="'autumn'" [disabled]="true">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<p class="header">3. Platform Radio Buttons created from list of string values and Group is disabled</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio8'" zone="zLeft" rank="1">
+        <fdp-radio-group
+            [id]="'radio8'"
+            [name]="'radio8'"
             [list]="seasons"
             [isInline]="true"
             [contentDensity]="'compact'"
-            [value]="'Winter'"
             [disabled]="true"
             [hasNoValue]="true"
             [noValueLabel]="'(No selection)'"
-            [(ngModel)]="favoriteSeason2"
-        >
-        </fdp-radio-group>
-    </fieldset>
-    <p>Example 6: Radio Buttons created from list of objects</p>
-    <fieldset fd-fieldset>
-        <fdp-radio-group
-            [name]="'radio5'"
-            [list]="items"
-            [disabled]="true"
-            [isInline]="true"
             [(ngModel)]="favoriteSeason3"
         >
         </fdp-radio-group>
-    </fieldset>
-    <p>Example 7: Radio Buttons created from list of objects with disabled property</p>
-    <fieldset fd-fieldset>
-        <fdp-radio-group [name]="'radio6'" [list]="disabledItems" [isInline]="true" [(ngModel)]="favoriteSeason4">
+    </fdp-form-field>
+</fdp-form-group>
+
+<p class="header">4. Platform Radio Buttons created from list of SelectItem and Group is disabled</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio9'" zone="zLeft" rank="1">
+        <fdp-radio-group
+            [name]="'radio9'"
+            [list]="items"
+            [disabled]="true"
+            [isInline]="true"
+            [(ngModel)]="favoriteSeason4"
+        >
         </fdp-radio-group>
-    </fieldset>
-</form>
+    </fdp-form-field>
+</fdp-form-group>
+
+<p class="header">
+    5. Platform Radio Buttons created from list of SelectItem and individual item has disabled property
+</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'radio10'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radio10'" [list]="disabledItems" [isInline]="true" [(ngModel)]="favoriteSeason5">
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
