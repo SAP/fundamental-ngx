@@ -117,7 +117,7 @@
     "@nrwl/schematics": "8.12.11",
     "@nrwl/workspace": "9.3.0",
     "@schematics/angular": "~9.1.7",
-    "@storybook/addon-a11y": "5.3.18",
+    "@storybook/addon-a11y": "5.3.19",
     "@storybook/addon-actions": "5.3.18",
     "@storybook/addon-knobs": "5.3.19",
     "@storybook/addon-links": "5.3.18",
