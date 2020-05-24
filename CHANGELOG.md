@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.1-rc.13"></a>
+## [0.18.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.12...v0.18.1-rc.13) (2020-05-24)
+
+
+### Bug Fixes
+
+* more powerful selector added ([#2549](https://github.com/SAP/fundamental-ngx/issues/2549)) ([f5fb3af](https://github.com/SAP/fundamental-ngx/commit/f5fb3af))
+
+
+
 <a name="0.18.1-rc.12"></a>
 ## [0.18.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.10...v0.18.1-rc.12) (2020-05-23)
 
