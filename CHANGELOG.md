@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.1-rc.14"></a>
+## [0.18.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.13...v0.18.1-rc.14) (2020-05-24)
+
+
+### Bug Fixes
+
+* missing button restored, removed selected state from header ([#2546](https://github.com/SAP/fundamental-ngx/issues/2546)) ([387c4df](https://github.com/SAP/fundamental-ngx/commit/387c4df))
+
+
+
 <a name="0.18.1-rc.13"></a>
 ## [0.18.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.12...v0.18.1-rc.13) (2020-05-24)
 
