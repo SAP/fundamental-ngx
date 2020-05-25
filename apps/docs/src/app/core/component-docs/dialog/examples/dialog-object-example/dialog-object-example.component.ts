@@ -2,10 +2,10 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { DialogRef, DialogService, DefaultDialogObject } from '@fundamental-ngx/core';
 
 @Component({
-  selector: 'fd-dialog-object',
-  templateUrl: './dialog-object.component.html'
+  selector: 'fd-dialog-object-example',
+  templateUrl: './dialog-object-example.component.html'
 })
-export class DialogObjectComponent {
+export class DialogObjectExampleComponent {
 
     constructor(private _dialogService: DialogService) {}
 

@@ -28,8 +28,8 @@ import * as backdropContainerHtml from '!raw-loader!./examples/dialog-backdrop-c
 import * as complexDialogTs from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.ts';
 import * as complexDialogHtml from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.html';
 
-import * as objectDialogTs from '!raw-loader!./examples/dialog-object/dialog-object.component.ts';
-import * as objectDialogHtml from '!raw-loader!./examples/dialog-object/dialog-object.component.html';
+import * as objectDialogTs from '!raw-loader!./examples/dialog-object-example/dialog-object-example.component.ts';
+import * as objectDialogHtml from '!raw-loader!./examples/dialog-object-example/dialog-object-example.component.html';
 
 import { DialogService } from '@fundamental-ngx/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';

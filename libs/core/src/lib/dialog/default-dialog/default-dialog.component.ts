@@ -11,6 +11,13 @@ export class DefaultDialogComponent {
     /** @hidden */
     defaultDialogConfig: DefaultDialogObject;
 
+    /** Whether there is a approve button, or cancel button text */
+    showFooter(): boolean {
+        return this.defaultDialogConfig &&
+            !!(this.defaultDialogConfig.cancelButton || this.defaultDialogConfig.approveButton)
+        ;
+    }
+
     /** @hidden */
     closeButtonClicked(): void {
         this.defaultDialogConfig.closeButtonCallback();

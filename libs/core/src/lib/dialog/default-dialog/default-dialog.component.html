@@ -1,19 +1,10 @@
 <fd-dialog>
     <fd-dialog-header>
-        <ng-template fdTemplate="header">
-            <div fd-bar-left>
-                <fd-bar-element>
-                    <h1 fd-dialog-title>{{ defaultDialogConfig?.title }}</h1>
-                </fd-bar-element>
-            </div>
-            <div fd-bar-right *ngIf="defaultDialogConfig?.closeButtonCallback">
-                <fd-bar-element>
-                    <button fd-dialog-close-button
-                            (click)="closeButtonClicked()">
-                    </button>
-                </fd-bar-element>
-            </div>
-        </ng-template>
+        <h1 fd-dialog-title>{{ defaultDialogConfig?.title }}</h1>
+        <button fd-dialog-close-button
+                *ngIf="defaultDialogConfig?.closeButtonCallback"
+                (click)="closeButtonClicked()">
+        </button>
         <ng-container *ngIf="defaultDialogConfig?.subHeader">
             <ng-template fdTemplate="subheader">
                 <ng-container *ngTemplateOutlet="defaultDialogConfig.subHeader"></ng-container>
@@ -21,14 +12,13 @@
         </ng-container>
     </fd-dialog-header>
 
-    <fd-dialog-body>
+    <fd-dialog-body *ngIf="defaultDialogConfig?.content">
         <ng-container *ngTemplateOutlet="defaultDialogConfig?.content"></ng-container>
     </fd-dialog-body>
 
-    <fd-dialog-footer>
-        <fd-dialog-footer-button>
+    <fd-dialog-footer *ngIf="showFooter()">
+        <fd-dialog-footer-button *ngIf="defaultDialogConfig?.approveButton">
             <button
-                *ngIf="defaultDialogConfig?.approveButton"
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
@@ -39,9 +29,8 @@
             </button>
         </fd-dialog-footer-button>
 
-        <fd-dialog-footer-button>
+        <fd-dialog-footer-button *ngIf="defaultDialogConfig?.cancelButton">
             <button
-                *ngIf="defaultDialogConfig?.cancelButton"
                 fd-button
                 fdType="transparent"
                 fd-dialog-decisive-button
