@@ -10,7 +10,9 @@ export class NestedItemService {
     /** Subject fired when expand icon is clicked */
     toggle: Subject<boolean> = new Subject<boolean>();
 
-    /** KeyDown handler, it is triggered from link, content and item elements
-     * */
+    /** Subject fired, when child elements are focused */
+    focus: Subject<void> = new Subject<void>();
+
+    /** KeyDown handler, it is triggered from link, content and item elements */
     keyDown: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
 }

@@ -8,12 +8,15 @@ import {
     HostBinding,
     HostListener,
     Input,
+    OnDestroy,
     Output,
     Renderer2
 } from '@angular/core';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
 import { NestedListExpandIconDirective } from '../nested-list-directives';
 import { NestedItemService } from '../nested-item/nested-item.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Directive({
     selector: '[fdNestedListContent], [fd-nested-list-content]',
@@ -21,7 +24,7 @@ import { NestedItemService } from '../nested-item/nested-item.service';
         'tabindex': '0'
     }
 })
-export class NestedListContentDirective implements AfterContentInit {
+export class NestedListContentDirective implements AfterContentInit, OnDestroy {
 
     /** Whether this element is selected*/
     @Input()
@@ -53,6 +56,9 @@ export class NestedListContentDirective implements AfterContentInit {
     @ContentChild(NestedListExpandIconDirective)
     nestedExpandIcon: NestedListExpandIconDirective;
 
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
+
     /** @hidden */
     constructor(
         public changeDetRef: ChangeDetectorRef,
@@ -63,10 +69,14 @@ export class NestedListContentDirective implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (this.nestedLink) {
-            this.nestedLink.tabIndex = -1;
-            this.changeDetRef.detectChanges();
-        }
+        this._makeLinkUnFocusable();
+        this._setFocusSubscription();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
     }
 
     /** Keyboard Event Handler */
@@ -94,6 +104,21 @@ export class NestedListContentDirective implements AfterContentInit {
         this.focus();
         if (this.nestedLink) {
             this.nestedLink.click()
+        }
+    }
+
+    /** Add subscription for child focusing */
+    private _setFocusSubscription(): void {
+        this._itemService.focus.pipe(
+            takeUntil(this.onDestroy$)
+        ).subscribe(() => this.focus());
+    }
+
+    /** Hide link child element from tab key */
+    private _makeLinkUnFocusable(): void {
+        if (this.nestedLink) {
+            this.nestedLink.tabIndex = -1;
+            this.changeDetRef.detectChanges();
         }
     }
 }

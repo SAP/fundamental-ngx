@@ -64,6 +64,12 @@ export class NestedLinkDirective {
         }
     }
 
+    /** Handler for focus events */
+    @HostListener('focus')
+    onFocus(): void {
+        this._itemService.focus.next();
+    }
+
     /** Set focus on the element. */
     focus(): void {
         this._elementRef.nativeElement.focus();

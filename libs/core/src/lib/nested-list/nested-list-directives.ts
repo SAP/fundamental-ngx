@@ -88,7 +88,8 @@ export class NestedListTitleDirective {
 @Directive({
     selector: '[fdNestedListExpandIcon], [fd-nested-list-expand-icon]',
     host: {
-        'aria-haspopup': 'true'
+        'aria-haspopup': 'true',
+        'tabindex': '-1'
     }
 })
 export class NestedListExpandIconDirective {
@@ -114,5 +115,11 @@ export class NestedListExpandIconDirective {
     onClick(): void {
         this.expanded = !this.expanded;
         this._itemService.toggle.next(this.expanded);
+    }
+
+    /** Handler for focus events */
+    @HostListener('focus')
+    onFocus(): void {
+        this._itemService.focus.next();
     }
 }
