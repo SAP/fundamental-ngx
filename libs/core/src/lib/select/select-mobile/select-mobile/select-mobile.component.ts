@@ -52,26 +52,26 @@ export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     get mobileConfig(): MobileModeConfig {
-        return this._selectComponent.mobileConfig;
-    }
-
-    /** @hidden */
-    get valueChanged(): boolean {
-        return this._selectComponent.selected !== this._selectedOnOpen;
+        return this._selectComponent.mobileConfig || {};
     }
 
     /** @hidden */
     cancel(): void {
-        this._selectComponent.setSelectedOption({option: this._selectedOnOpen, controlChange: true});
+        this._selectComponent.setSelectedOption({
+            option: this._selectedOnOpen,
+            controlChange: !!this._selectedOnOpen
+        });
         this._selectComponent.close();
     }
 
     /** @hidden */
     approve(): void {
-        this._selectComponent.setSelectedOption({
-            option: this._selectComponent.selected,
-            controlChange: this.valueChanged
-        }, this.valueChanged);
+        if (this._selectComponent.selected) {
+            this._selectComponent.setSelectedOption({
+                option: this._selectComponent.selected,
+                controlChange: true
+            }, true);
+        }
         this._selectComponent.close();
     }
 
