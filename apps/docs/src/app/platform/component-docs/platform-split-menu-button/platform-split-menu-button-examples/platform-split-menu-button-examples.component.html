@@ -1,4 +1,4 @@
-<h2>Cozy Split Menu Button</h2>
+<h3>Cozy Split Menu Button</h3>
 <ng-container *ngFor="let buttonType of buttonTypes">
     <fdp-split-menu-button
         [id]="'split-menu-button3'"
@@ -29,13 +29,11 @@
 <span>&nbsp;&nbsp;Disabled</span>
 <br />
 <br />
-<div>Selected Item: {{ selectedCozyItem }}</div>
-<br />
-<br />
+<p>Selected Item: {{ selectedCozyItem }}</p>
 <br />
 <br />
 
-<h2>Compact Split Menu Button</h2>
+<h3>Compact Split Menu Button</h3>
 <ng-container *ngFor="let buttonType of buttonTypes">
     <fdp-split-menu-button
         [id]="'split-menu-button3'"
@@ -68,7 +66,7 @@
 <span>&nbsp;&nbsp;Disabled</span>
 <br />
 <br />
-<div>Selected Item: {{ selectedCompactItem }}</div>
+<p>Selected Item: {{ selectedCompactItem }}</p>
 
 <fdp-menu #basicMenuCozy id="basic-menu">
     <fdp-menu-item (itemSelect)="onItemSelectCozy('First Item')">First Item</fdp-menu-item>
