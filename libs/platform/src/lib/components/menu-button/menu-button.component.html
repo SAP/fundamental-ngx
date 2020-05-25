@@ -8,8 +8,10 @@
     [disabled]="disabled"
     (click)="onButtonClick($event)"
     [fdType]="type"
+    tabindex="0"
+    [attr.title]="title"
+    [attr.aria-haspopup]="true"
+    [attr.aria-expanded]="false"
 >
-    <span [ngStyle]="{ width: width }" (click)="onLabelClick($event)">
-        <ng-content></ng-content>
-    </span>
+    <ng-content></ng-content>
 </button>

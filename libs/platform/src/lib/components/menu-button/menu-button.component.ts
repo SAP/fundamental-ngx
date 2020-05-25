@@ -5,9 +5,13 @@ import { BaseComponent } from '../base';
 @Component({
     selector: 'fdp-menu-button',
     templateUrl: './menu-button.component.html',
-    styleUrls: ['./menu-button.component.scss'],
+    styleUrls: ['./menu-button.component.scss']
 })
 export class MenuButtonComponent extends BaseComponent {
+    /** text for tooltip */
+    @Input()
+    title: string;
+
     /** The Sap-icon to include in the menu-button */
     @Input()
     icon: string;
@@ -29,15 +33,6 @@ export class MenuButtonComponent extends BaseComponent {
      *  Handles menu-button click
      */
     public onButtonClick($event: any) {
-        this.buttonClicked.emit();
-    }
-
-    /**
-     * Stopping click event from label on disbled status
-     */
-    public onLabelClick($event: any) {
-        if (this.disabled) {
-            event.stopPropagation();
-        }
+        this.buttonClicked.emit($event);
     }
 }
