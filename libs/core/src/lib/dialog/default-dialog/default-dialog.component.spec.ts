@@ -6,7 +6,7 @@ import { DefaultDialogObject } from './default-dialog-object';
 import { DialogHeaderComponent } from '../dialog-header/dialog-header.component';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 
-fdescribe('DefaultDialogComponent', () => {
+describe('DefaultDialogComponent', () => {
     let component: DefaultDialogComponent;
     let fixture: ComponentFixture<DefaultDialogComponent>;
     let object: DefaultDialogObject;
