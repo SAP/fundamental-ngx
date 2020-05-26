@@ -29,11 +29,6 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
     description: string;
 
     /**
-     * Compact mode
-     */
-    compact = false;
-
-    /**
      * Show "back" button.
      */
     @Input()
@@ -59,9 +54,6 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
 
     ngOnInit(): void {
 
-        if (this.contentDensity === 'compact') {
-            this.compact = true;
-        }
         this.navigationArrow$ = this._rtlService.rtl.pipe(
             map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
         );
