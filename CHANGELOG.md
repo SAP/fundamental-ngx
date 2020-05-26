@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.2"></a>
+## [0.17.2](https://github.com/SAP/fundamental-ngx/compare/v0.17.1...v0.17.2) (2020-05-26)
+
+
+### Bug Fixes
+
+* Add loaded to dialog component ([f476528](https://github.com/SAP/fundamental-ngx/commit/f476528))
+
+
+
 <a name="0.17.1"></a>
 ## [0.17.1](https://github.com/SAP/fundamental-ngx/compare/v0.17.1-rc.10...v0.17.1) (2020-04-21)
 
