@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.3"></a>
+## [0.12.3](https://github.com/SAP/fundamental-ngx/compare/v0.12.2...v0.12.3) (2020-05-26)
+
+
+### Bug Fixes
+
+* Add loaded event to modal component ([3cd96bf](https://github.com/SAP/fundamental-ngx/commit/3cd96bf))
+
+
+
 <a name="0.12.2"></a>
 ## [0.12.2](https://github.com/SAP/fundamental-ngx/compare/v0.12.1...v0.12.2) (2020-04-27)
 
