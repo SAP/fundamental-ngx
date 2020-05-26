@@ -7,12 +7,16 @@ import { Observable, Subject } from 'rxjs';
  */
 export class ModalRef {
     private readonly _afterClosed = new Subject<any>();
+    private readonly _afterLoaded = new Subject<any>();
 
     /**
      * Observable that is triggered when the modal is closed.
      * On close a *result* is passed back. On dismiss, an *error* is returned instead.
      */
     public afterClosed: Observable<any> = this._afterClosed.asObservable();
+
+    /** Observable that is triggered when the modal view is initialised. */
+    public afterLoaded: Observable<any> = this._afterLoaded.asObservable();
 
     /** Data passed from the calling component to the content.*/
     public data: any;
@@ -32,5 +36,10 @@ export class ModalRef {
      */
     dismiss(reason?: any): void {
         this._afterClosed.error(reason);
+    }
+
+    /** Function that is called after the view of modal is initialised. */
+    loaded(): void {
+        this._afterLoaded.next();
     }
 }
