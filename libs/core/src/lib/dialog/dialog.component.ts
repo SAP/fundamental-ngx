@@ -111,6 +111,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         this._setStyles();
         this._listenOnWindowResize();
         this.adjustResponsivePadding();
+        this._dialogRef.loaded();
     }
 
     /** @hidden */
