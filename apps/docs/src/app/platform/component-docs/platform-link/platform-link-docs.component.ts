@@ -10,8 +10,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 @Component({
     selector: 'app-link',
-    templateUrl: './platform-link-docs.component.html',
-    styleUrls: ['./platform-link-docs.component.scss']
+    templateUrl: './platform-link-docs.component.html'
 })
 export class PlatformLinkDocsComponent implements OnInit {
     standardLink: ExampleFile[] = [
