@@ -53,5 +53,4 @@ export class SectionsToolbarComponent implements OnInit {
     onResize() {
         this.windowSize();
     }
-
 }

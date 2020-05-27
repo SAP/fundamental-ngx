@@ -12,26 +12,29 @@
         </fd-input-group>
     </div>
     <div class="fd-docs-sidebar-content">
-        <nav *ngFor="let section of sections">
-            <ul class="nav">
-                <div class="side-nav__headers">{{ section.header }}</div>
-                <ng-container *ngFor="let item of section.content">
-                    <li *ngIf="item.url === 'home' || (item | docsSearch: search)">
-                        <div class="nav-item-container">
-                            <a
-                                class="nav-item"
-                                [routerLink]="'/' + item.url"
-                                (keypress)="onKeypressHandler($event)"
-                                tabindex="0"
-                                role="button"
-                                routerLinkActive="nav-item--active"
-                            >
-                                {{ item.name }}
-                            </a>
-                        </div>
-                    </li>
-                </ng-container>
-            </ul>
-        </nav>
+        <fd-side-nav>
+            <div fd-side-nav-main>
+                <ul fd-nested-list [textOnly]="true">
+                    <nav *ngFor="let section of sections">
+                        <li fd-nested-list-header>{{ section.header }}</li>
+                        <ng-container *ngFor="let item of section.content">
+                            <li fd-nested-list-item *ngIf="item.url === 'home' || (item | docsSearch: search)">
+                                <a
+                                    fd-nested-list-link
+                                    class="nav-item"
+                                    [routerLink]="'/' + item.url"
+                                    (keypress)="onKeypressHandler($event)"
+                                    tabindex="0"
+                                    role="button"
+                                    routerLinkActive="nav-item--active"
+                                >
+                                    {{ item.name }}
+                                </a>
+                            </li>
+                        </ng-container>
+                    </nav>
+                </ul>
+            </div>
+        </fd-side-nav>
     </div>
 </div>
