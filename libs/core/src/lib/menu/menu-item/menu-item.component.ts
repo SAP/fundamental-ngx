@@ -35,10 +35,6 @@ let menuUniqueId: number = 0;
 })
 export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterContentInit, OnDestroy {
 
-    /** Set the Menu Item as selected/unselected */
-    @Input()
-    selected: boolean = false;
-
     /** Set the Menu Item as disabled/enabled */
     @Input()
     disabled: boolean = false;
@@ -52,7 +48,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     subMenu: SubMenuComponent;
 
     @Output()
-    selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    selected: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden Reference to the Menu Item title */
     @ContentChild(MenuTitleDirective)
@@ -69,9 +65,12 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
+    private _hoverSubscriptions: Subscription = new Subscription();
+
+    /** @hidden */
     constructor(public elementRef: ElementRef,
+                @Optional() public menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
-                @Optional() private _menuService: MenuService,
                 @Optional() private _subMenu: SubMenuComponent) {
     }
 
@@ -80,26 +79,28 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         this._setMenuService();
         this._initialiseItemState();
         this._listenOnMenuLinkClick();
-        this._listenOnMenuLinkHover();
+        this._listenOnMenuMode();
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
-        if (changes['selected'] && !changes['selected'].firstChange) {
-            if (this.selected) {
-                this._menuService.setSelectProgrammatic(this);
-            }
+        if (changes['disabled'] && !changes['disabled'].firstChange) {
+            this.menuLink.setDisabled(this.disabled);
+        }
+        if (changes['subMenu'] && !changes['subMenu'].firstChange) {
+            this.menuLink.setSubmenu(!!this.subMenu, this.subMenu ? this.itemId : null);
         }
     }
 
     /** @hidden */
     ngOnDestroy() {
         this._subscriptions.unsubscribe();
+        this._hoverSubscriptions.unsubscribe();
     }
 
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
-        return this.subMenu && !this._menuService.menu.mobile;
+        return this.subMenu && !this.menuService.menu.mobile;
     }
 
     /** Focuses Menu Item interactive element */
@@ -141,49 +142,60 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     private _listenOnMenuLinkClick(): void {
         this._subscriptions.add(
             fromEvent(this.menuLink.elementRef.nativeElement, 'click')
-                .subscribe(() => this._menuService.setActive(true, this))
+                .subscribe(() => this.menuService.setActive(true, this))
         )
     }
 
     /** @hidden Creates hover listeners for activating/deactivating menu item */
-    private _listenOnMenuLinkHover(): void {
+    private _listenOnMenuLinkHover(): Subscription {
+        const hoverSubscriptions: Subscription = new Subscription();
+
         const mouseEnter$ = fromEvent(this.menuLink.elementRef.nativeElement, 'mouseenter');
         const mouseLeave$ = fromEvent(this.menuLink.elementRef.nativeElement, 'mouseleave');
 
         // Set focus on hover
-        this._subscriptions.add(
-            mouseEnter$.subscribe(() => this._menuService.setFocused(this))
+        hoverSubscriptions.add(
+            mouseEnter$.subscribe(() => this.menuService.setFocused(this))
         );
 
         const timerFactory$ = defer(() => {
-            return timer(this._menuService.menu.openOnHoverTime).pipe(takeUntil(mouseLeave$))
+            return timer(this.menuService.menu.openOnHoverTime).pipe(takeUntil(mouseLeave$))
         });
 
         const timeTrigger$ = mouseEnter$.pipe(switchMap(() => timerFactory$));
 
         // Set active on long hover
-        this._subscriptions.add(
+        hoverSubscriptions.add(
             mouseEnter$.pipe(
-                filter(() => !this._menuService.menu.mobile && !!this.subMenu),
+                filter(() => !!this.subMenu),
                 sample(timeTrigger$)
-            ).subscribe(() => this._menuService.setActive(true, this))
+            ).subscribe(() => this.menuService.setActive(true, this))
         );
+
+        return hoverSubscriptions;
     }
 
     /** @hidden Initializes menu link state based on item initial state */
     private _initialiseItemState(): void {
-        this.menuLink.setSubmenu(!!this.subMenu, this.itemId);
+        this.menuLink.setSubmenu(!!this.subMenu, this.subMenu ? this.itemId : null);
         this.menuLink.setDisabled(this.disabled);
-        if (this.selected) {
-            setTimeout(() => this._menuService.setSelectProgrammatic(this));
-        }
     }
 
     /** @hidden Checks for Menu Service dependency and passes it if further */
     private _setMenuService(): void {
-        this._menuService = this._menuService || this._subMenu.menuService;
+        this.menuService = this.menuService || this._subMenu.menuService;
         if (this.subMenu) {
-            this.subMenu.menuService = this._menuService;
+            this.subMenu.menuService = this.menuService;
         }
+    }
+
+    /** @hidden Listen on menu mode and set proper mode listeners */
+    private _listenOnMenuMode(): void {
+        this.menuService.isMobileMode.subscribe(isMobile => {
+            this._hoverSubscriptions.unsubscribe();
+            if (!isMobile) {
+                this._hoverSubscriptions = this._listenOnMenuLinkHover();
+            }
+        });
     }
 }

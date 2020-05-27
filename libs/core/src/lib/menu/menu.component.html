@@ -20,7 +20,7 @@
          [popoverTrigger]="trigger"
          [appendTo]="popoverContainer"
          [fdPopover]="menuRootTemplate"
-         (loaded)="onPopoverLoaded()"
+         (loaded)="focusFirst()"
          (isOpenChange)="handlePopoverOpenChange($event)">
     </div>
 </ng-template>

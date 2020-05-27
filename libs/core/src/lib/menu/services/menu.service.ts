@@ -2,6 +2,8 @@ import { Injectable, Renderer2 } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
 import { KeyUtil, MenuKeyboardService } from '@fundamental-ngx/core';
+import { Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, startWith } from 'rxjs/operators';
 
 interface MenuNode {
     item: MenuItemComponent;
@@ -13,9 +15,7 @@ type MenuMap = Map<MenuItemComponent, MenuNode>
 
 @Injectable()
 export class MenuService {
-    /** Map of menu nodes
-     * Key - Menu item
-     * Value - Menu node*/
+    /** Map of menu items to menu nodes */
     menuMap: MenuMap;
 
     /** Currently focused node */
@@ -24,11 +24,11 @@ export class MenuService {
     /** Collection of active menu nodes */
     activeNodePath: MenuNode[] = [];
 
-    /** @hidden */
-    private _menu: MenuComponent;
+    /** Collection of active menu nodes */
+    private _isMobileMode: Subject<boolean> = new Subject();
 
     /** @hidden */
-    private _destroyOutsideClickListener: () => void;
+    private _menu: MenuComponent;
 
     /** @hidden */
     private _destroyKeyboardHandlerListener: () => void;
@@ -39,6 +39,17 @@ export class MenuService {
     /** Reference to menu component */
     get menu(): MenuComponent {
         return this._menu;
+    }
+
+    /** Returns menu mode observable */
+    get isMobileMode(): Observable<boolean> {
+        return this._isMobileMode.asObservable()
+            .pipe(distinctUntilChanged())
+    }
+
+    /** Sets menu mode */
+    setMenuMode(value: boolean) {
+        this._isMobileMode.next(value);
     }
 
     /** Sets given menu item as focused */
@@ -59,31 +70,12 @@ export class MenuService {
     }
 
     /** Initializes menu service based on given Menu Component */
-    setMenuRoot(menu: MenuComponent, keyboardSupport: boolean = true): void {
+    setMenuRoot(menu: MenuComponent): void {
         this._menu = menu;
         this.menuMap = this._buildMenuMap(this._menu);
-
-        if (keyboardSupport) {
-            this._setKeyboardSupport();
-        }
     }
 
-    /** Sets given menu item as active and recreates the Active Path */
-    setSelectProgrammatic(menuItem: MenuItemComponent): void {
-        this._clearActivePath();
-        const newPath = [];
-        let traverserNode = this.menuMap.get(menuItem);
-        do {
-            newPath.unshift(traverserNode);
-            traverserNode = traverserNode.parent;
-        }
-        while (traverserNode.parent);
-        newPath.forEach(node => this._addToActivePath(node.item));
-        this._emitActivePath();
-    }
-
-    /** - Clears Active Node Path
-     *  - Resets Focused Node */
+    /** Clears Active Node Path and resets Focused Node */
     resetMenuState(): void {
         this._clearActivePath();
         this.focusedNode = null;
@@ -107,11 +99,17 @@ export class MenuService {
         }
     }
 
-    /** @hidden Whether outside click listener should be added/removed */
-    private _canOutsideClickListener(action: 'add' | 'remove'): boolean {
-        return action === 'add'
-            ? this.menu.closeOnOutsideClick && this.activeNodePath.length === 1
-            : this.activeNodePath.length === 0 && !!this._destroyOutsideClickListener;
+    /** Adds Menu keyboard support */
+    addKeyboardSupport(): void {
+        this.removeKeyboardSupport();
+        this._setKeyboardSupport();
+    }
+
+    /** Removes Menu keyboard support */
+    removeKeyboardSupport(): void {
+        if (this._destroyKeyboardHandlerListener) {
+            this._destroyKeyboardHandlerListener();
+        }
     }
 
     /** @hidden Returns siblings of given node */
@@ -126,26 +124,16 @@ export class MenuService {
         return this._nodeSiblings(node).indexOf(node);
     }
 
-    /** @hidden
-     * - Adds given element to the Active Node Path
-     * - Setts given element as active
-     * - Conditionally adds outside click listener */
+    /** @hidden Adds given element to the Active Node Path and setts as active*/
     private _addToActivePath(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
         this._removeActiveSibling(menuItem);
         this.activeNodePath.push(menuNode);
         menuNode.item.setSelected(true);
         menuNode.item.open();
-
-        if (this._canOutsideClickListener('add')) {
-            this._listenOnOutsideClick();
-        }
     }
 
-    /** @hidden
-     * - Removes given element and all its successors from the Active Node Path
-     * - Setts given element as inactive
-     * - Conditionally removes outside click listener */
+    /** @hidden Removes given element and all its successors from the Active Node Path and setts as inactive*/
     private _removeFromActivePath(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
         const pathIndex = this.activeNodePath.indexOf(menuNode);
@@ -153,10 +141,6 @@ export class MenuService {
         if (pathIndex !== -1) {
             this.activeNodePath.splice(pathIndex)
                 .forEach(removedActiveNode => removedActiveNode.item.close());
-        }
-
-        if (this._canOutsideClickListener('remove')) {
-            this._destroyOutsideClickListener();
         }
     }
 
@@ -201,19 +185,6 @@ export class MenuService {
 
         setParents(menuTree, null);
         return toMap(menuTree);
-    }
-
-    /** @hidden Creates outside click listener */
-    private _listenOnOutsideClick(): void {
-        this._destroyOutsideClickListener = this._renderer.listen('document', 'click', (event: MouseEvent) => {
-                const isOutsideClick = !this.activeNodePath[this.activeNodePath.length - 1].item.elementRef.nativeElement
-                    .contains(event.target);
-
-                if (isOutsideClick) {
-                    this._removeFromActivePath(this.activeNodePath[0].item);
-                }
-            }
-        );
     }
 
     /** @hidden Removes active sibling of a given menu item from the Active Path */

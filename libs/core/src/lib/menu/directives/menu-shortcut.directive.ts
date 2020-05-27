@@ -1,11 +1,13 @@
-import { AfterViewInit, Directive, ElementRef, HostBinding, Input } from '@angular/core';
-import { MenuComponent } from '../menu.component';
+import { AfterViewInit, Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
+import { MenuItemComponent } from '../../..';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-menu-shortcut]'
 })
-export class MenuShortcutDirective implements AfterViewInit {
+export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
 
     /** Hide shortcuts in mobile mode */
     @Input()
@@ -16,7 +18,10 @@ export class MenuShortcutDirective implements AfterViewInit {
     fdMenuShortcutClass: boolean = true;
 
     /** @hidden */
-    constructor(private _menuComponent: MenuComponent,
+    private _subscriptions: Subscription = new Subscription();
+
+    /** @hidden */
+    constructor(private _menuItem: MenuItemComponent,
                 private _elementRef: ElementRef) {
     }
 
@@ -26,9 +31,20 @@ export class MenuShortcutDirective implements AfterViewInit {
     }
 
     /** @hidden */
+    ngOnDestroy() {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
     private _hideOnMobile(): void {
-        if (this.hideOnMobile && this._menuComponent.mobile) {
-            this._elementRef.nativeElement.style.display = 'none';
-        }
+        this._menuItem.menuService.isMobileMode
+            .pipe(filter(() => this.hideOnMobile))
+            .subscribe(isMobile => {
+                if (isMobile) {
+                    this._elementRef.nativeElement.style.display = 'none';
+                } else {
+                    this._elementRef.nativeElement.style.display = null;
+                }
+            });
     }
 }

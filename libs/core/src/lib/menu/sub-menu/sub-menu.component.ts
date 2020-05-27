@@ -12,9 +12,12 @@ import { MenuService } from '../services/menu.service';
     exportAs: 'fdSubMenu'
 })
 export class SubMenuComponent {
+    /** @hidden Reference to template with SubMenu items  */
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
+    /** @hidden Reference to SubMenu MenuItems  */
     @ContentChildren(MenuItemComponent) menuItems: QueryList<MenuItemComponent>;
 
+    /** @hidden Reference to MenuService used by MenuItems */
     menuService: MenuService;
 }
