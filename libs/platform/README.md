@@ -107,7 +107,7 @@ For an existing Angular CLI application,
 
 Fundamental Library for Angular makes use of Jasmine and Karma for its unit tests.
 
-Run `ng test @fundamental-ngx/platform`. Append `--code-coverage` to generate code coverage documentation.
+Run `ng test platform`. Append `--code-coverage` to generate code coverage documentation.
 
 For models prior to 0.11.1 use `fundamental-ngx`
 
