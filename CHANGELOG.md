@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.1-rc.25"></a>
+## [0.18.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.24...v0.18.1-rc.25) (2020-05-27)
+
+
+### Bug Fixes
+
+* Add loaded to dialog component ([#2567](https://github.com/SAP/fundamental-ngx/issues/2567)) ([f9fdd89](https://github.com/SAP/fundamental-ngx/commit/f9fdd89))
+
+
+
 <a name="0.18.1-rc.24"></a>
 ## [0.18.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.23...v0.18.1-rc.24) (2020-05-25)
 
