@@ -1,5 +1,5 @@
 <fd-docs-section-title [id]="'templateAsContent'" [componentName]="'dialog'">
-    Template based Dialog
+    Template Based Dialog
 </fd-docs-section-title>
 <description>
     The Dialog can be declared inside the <code>ng-template</code> and opened with DialogService using the template
@@ -26,7 +26,7 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'componentAsContent'" [componentName]="'dialog'">
-    Component based Dialog
+    Component Based Dialog
 </fd-docs-section-title>
 <description>
     To open a component based Dialog provide the component class to the DialogService open method. Inject the
@@ -47,7 +47,7 @@
 </fd-docs-section-title>
 <description>
     The Dialog can be declared inside the <code>DefaultDialogObject</code> and opened with DialogService using the object
-    reference. This allows you to easily create dialogs, with customizable properties for
+    reference. This allows you to easily create dialogs with customizable optional properties for the following:
     <ul>
         <li>title</li>
         <li>content</li>
@@ -55,7 +55,7 @@
         <li>button text</li>
         <li>button callbacks</li>
     </ul>
-    Each of which is optional. Please note you will need to provide callback functions for the approve/cancel/close
+     Please note you will need to provide callback functions for the approve/cancel/close
     buttons if you wish to display them.
 </description>
 <component-example>
@@ -66,7 +66,7 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'dialogState'" [componentName]="'dialog'">
-    Dialog state
+    Dialog State
 </fd-docs-section-title>
 <description>
     The dialog state can be controlled by using <code>DialogRef</code>, providing such features as:
@@ -85,7 +85,7 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'dialogConfiguration'" [componentName]="'dialog'">
-    Dialog configuration
+    Dialog Configuration
 </fd-docs-section-title>
 <description>
     Dialog behavior can be configured using the <code>DialogConfig</code> object passed as an argument to the
@@ -112,7 +112,7 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'dialogPosition'" [componentName]="'dialog'">
-    Dialog positioning
+    Dialog Positioning
 </fd-docs-section-title>
 <description>
     The placement of the Dialog on the screen can be customized through the <code>DialogConfig.position</code> property.
@@ -125,7 +125,7 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'dialogMobile'" [componentName]="'dialog'">
-    Dialog on mobile devices
+    Dialog On Mobile Devices
 </fd-docs-section-title>
 <description>
     To display the Dialog component in mobile mode, use the <code>DialogConfig.mobile</code> property. Dialog on mobile
@@ -184,7 +184,7 @@
     Custom Backdrop and Container
 </fd-docs-section-title>
 <description>
-    The dialog backdrop and container can be styled, disabled or even customized at will. Custom css classes can be
+    The Dialog backdrop and container can be styled, disabled or even customized at will. Custom css classes can be
     applied using:
     <ul>
         <li><code>DialogConfig.containerClass</code></li>
@@ -194,7 +194,7 @@
     The Dialog can be appended to whatever DOM element you choose. Simply pass an HTMLElement to the
     <code>DialogConfig.container</code>
     configuration option. Note that there is no visual distinction between parents. This functionality can be used to
-    apply a select set of style rules to a specific dialog, as you can see in the following example.
+    apply a select set of style rules to a specific Dialog, as you can see in the following example.
 </description>
 <component-example>
     <fd-dialog-backdrop-container-example></fd-dialog-backdrop-container-example>
