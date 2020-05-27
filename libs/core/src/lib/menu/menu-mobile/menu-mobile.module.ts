@@ -4,7 +4,6 @@ import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { DialogModule } from '../../dialog/dialog.module';
 import { ButtonModule } from '../../button/button.module';
 
-
 @NgModule({
     declarations: [MenuMobileComponent],
     imports: [
@@ -15,5 +14,4 @@ import { ButtonModule } from '../../button/button.module';
     exports: [MenuMobileComponent],
     entryComponents: [MenuMobileComponent],
 })
-export class MenuMobileModule {
-}
+export class MenuMobileModule { }

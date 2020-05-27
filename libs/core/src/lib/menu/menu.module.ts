@@ -9,7 +9,7 @@ import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
-import { PopoverModule } from '../..';
+import { PopoverModule } from '../popover/popover.module';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 
 @NgModule({

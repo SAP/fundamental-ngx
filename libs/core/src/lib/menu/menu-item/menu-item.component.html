@@ -4,7 +4,7 @@
     <ul class="fd-menu__sublist"
         role="menu"
         [attr.id]="itemId"
-        [attr.aria-hidden]="!subLevelVisible">
-        <ng-container *ngTemplateOutlet="subMenu?.templateRef"></ng-container>
+        [attr.aria-hidden]="!subMenuVisible">
+        <ng-container *ngTemplateOutlet="subMenu.templateRef"></ng-container>
     </ul>
 </ng-container>

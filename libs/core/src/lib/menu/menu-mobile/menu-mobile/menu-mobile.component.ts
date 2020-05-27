@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DialogRef } from '../../../dialog/dialog-utils/dialog-ref.class';
 import { DialogService } from '../../../dialog/dialog-service/dialog.service';
 import { MenuComponent } from '../../menu.component';
@@ -11,22 +11,25 @@ import { startWith } from 'rxjs/operators';
     selector: 'fd-menu-mobile',
     templateUrl: './menu-mobile.component.html'
 })
-export class MenuMobileComponent implements OnInit, AfterViewInit {
+export class MenuMobileComponent implements OnInit, OnDestroy {
 
     /** @hidden Dialog template reference */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
-    /** @hidden */
-    dialogRef: DialogRef;
+    /** Current menu title */
+    title: string;
 
-    /** @hidden */
-    childContent: TemplateRef<any> = undefined;
-
-    view: TemplateRef<any>;
-
+    /** Whether current menu level is submenu */
     isSubmenu: boolean;
 
-    title: string;
+    /** Dialog reference */
+    dialogRef: DialogRef;
+
+    /** @hidden External content */
+    childContent: TemplateRef<any> = undefined;
+
+    /** @hidden Currently rendered menu view */
+    view: TemplateRef<any>;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -41,11 +44,7 @@ export class MenuMobileComponent implements OnInit, AfterViewInit {
     /** @hidden */
     ngOnInit() {
         this._listenOnActivePathChange();
-    }
-
-    /** @hidden */
-    ngAfterViewInit() {
-        this._openDialog();
+        this._listenOnMenuOpenChange();
     }
 
     /** @hidden */
@@ -53,9 +52,10 @@ export class MenuMobileComponent implements OnInit, AfterViewInit {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** Closes the Dialog and Menu component */
     close(): void {
         this.dialogRef.close();
+        this._menuComponent.close();
     }
 
     /** Navigate back to parent level of submenu */
@@ -66,7 +66,7 @@ export class MenuMobileComponent implements OnInit, AfterViewInit {
         );
     }
 
-    /** @hidden */
+    /** @hidden Opens the Dialog */
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
@@ -78,7 +78,7 @@ export class MenuMobileComponent implements OnInit, AfterViewInit {
         });
     }
 
-    /** @hidden Bing select open change with opening/closing the Dialog*/
+    /** @hidden Listens on Active Path changes and updates mobile view */
     private _listenOnActivePathChange(): void {
         this._subscriptions.add(
             this._menuComponent.activePath
@@ -87,15 +87,25 @@ export class MenuMobileComponent implements OnInit, AfterViewInit {
         )
     }
 
+    /** @hidden Sets menu view, title and isSubmenu flag */
     private _setMenuView(items: MenuItemComponent[]): void {
+        const lastItem = items[items.length - 1];
         this.isSubmenu = !!items.length;
-        this.title = this.isSubmenu ? items[items.length - 1].menuItemTitle.title : '';
+        this.title = this.isSubmenu ? lastItem.menuItemTitle.title : '';
         if (this.isSubmenu) {
-            if (items[items.length - 1].subMenu) {
-                this.view = items[items.length - 1].subMenu.templateRef
+            if (lastItem.subMenu) {
+                this.view = lastItem.subMenu.templateRef
             }
         } else {
             this.view = this.childContent;
         }
+    }
+
+    /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
+    private _listenOnMenuOpenChange(): void {
+        this._subscriptions.add(
+            this._menuComponent.isOpenChange
+                .subscribe(isOpen => isOpen ? this._openDialog() : this.dialogRef.close())
+        )
     }
 }

@@ -1,4 +1,12 @@
-<fd-menu [compact]="true">
+<div>
+    <button fd-button [fdMenuTrigger]="menuRoot">Menu</button>
+
+    <span *ngFor="let active of activePath" style="padding: .25rem">
+        {{ active.menuItemTitle.title }}
+    </span>
+</div>
+
+<fd-menu #menuRoot="fdMenu" (activePath)="activePath = $event">
     <li fd-menu-item [subMenu]="fruits">
         <div fd-menu-interactive>
             <span fd-menu-title>Fruits</span>

@@ -1,12 +1,26 @@
-<ng-template [ngIf]="!mobile" #menuRootTemplate>
+<ng-container #viewContainer></ng-container>
+
+<ng-template #menuRootTemplate>
     <nav class="fd-menu"
          [ngClass]="{
             'fd-menu--compact': compact,
             'fd-menu--mobile': mobile
          }">
-
-        <ul class="fd-menu__list">
+        <ul class="fd-menu__list"
+            [class.fd-menu__list--no-shadow]="!mobile">
             <ng-content></ng-content>
         </ul>
     </nav>
+</ng-template>
+
+<ng-template #menuWithPopover>
+    <div #popoverContainer
+         [triggers]="[]"
+         [isOpen]="isOpen"
+         [popoverTrigger]="trigger"
+         [appendTo]="popoverContainer"
+         [fdPopover]="menuRootTemplate"
+         (loaded)="onPopoverLoaded()"
+         (isOpenChange)="handlePopoverOpenChange($event)">
+    </div>
 </ng-template>

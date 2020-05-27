@@ -17,7 +17,10 @@
                 </div>
                 <div fd-bar-right>
                     <fd-bar-element>
-                        <button fd-dialog-close-button (click)="close()"></button>
+                        <button fd-dialog-close-button
+                                [mobile]="true"
+                                (click)="close()">
+                        </button>
                     </fd-bar-element>
                 </div>
             </ng-template>

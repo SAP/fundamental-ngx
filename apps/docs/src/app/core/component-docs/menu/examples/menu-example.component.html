@@ -1,50 +1,19 @@
-<div style="display: inline-block; width: 50%">
+<button fd-button [fdMenuTrigger]="menu">Menu</button>
 
-    <fd-menu [compact]="true">
-        <li fd-menu-item>
-            <a href="#" fd-menu-interactive>
-                <span fd-menu-title>Option 1</span>
-            </a>
-        </li>
-        <li fd-menu-item>
-            <a href="#" fd-menu-interactive>
-                <span fd-menu-title>Option 2</span>
-            </a>
-        </li>
-        <li fd-menu-item>
-            <a href="#" fd-menu-interactive>
-                <span fd-menu-title>Option 3</span>
-            </a>
-        </li>
-    </fd-menu>
-
-</div>
-
-<div style="display: inline-block; width: 50%">
-
-    <fd-popover>
-        <fd-popover-control>
-            <button fd-button>Menu with popover</button>
-        </fd-popover-control>
-        <fd-popover-body>
-            <fd-menu [compact]="true">
-                <li fd-menu-item>
-                    <a href="#" fd-menu-interactive>
-                        <span fd-menu-title>Option 1</span>
-                    </a>
-                </li>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-interactive>
-                        <span fd-menu-title>Option 2</span>
-                    </a>
-                </li>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-interactive>
-                        <span fd-menu-title>Option 3</span>
-                    </a>
-                </li>
-            </fd-menu>
-        </fd-popover-body>
-    </fd-popover>
-
-</div>
+<fd-menu #menu="fdMenu">
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Option 1</span>
+        </a>
+    </li>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Option 2</span>
+        </a>
+    </li>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Option 3</span>
+        </a>
+    </li>
+</fd-menu>

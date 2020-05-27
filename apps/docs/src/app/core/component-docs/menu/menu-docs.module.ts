@@ -6,13 +6,13 @@ import { API_FILES } from '../../api-files';
 import { MenuHeaderComponent } from './menu-header/menu-header.component';
 import { MenuDocsComponent } from './menu-docs.component';
 import {
+    MenuAddonExampleComponent,
     MenuExampleComponent,
     MenuMobileExampleComponent,
     MenuSeparatorExampleComponent,
     MenuWithSubmenuExampleComponent
 } from './examples/menu-examples.component';
-import { MenuAddonExampleComponent } from './examples/menu-addon-examples.component';
-import { DialogModule, MenuMobileModule, MenuModule } from '@fundamental-ngx/core';
+import { MenuMobileModule, MenuModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {

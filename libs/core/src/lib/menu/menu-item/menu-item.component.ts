@@ -5,9 +5,13 @@ import {
     Component,
     ContentChild,
     ElementRef,
+    EventEmitter,
     Input,
+    OnChanges,
     OnDestroy,
-    Optional
+    Optional,
+    Output,
+    SimpleChanges
 } from '@angular/core';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
@@ -29,35 +33,39 @@ let menuUniqueId: number = 0;
         '[class.fd-menu__item]': 'true'
     }
 })
-export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnDestroy {
+export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterContentInit, OnDestroy {
 
-    /** Whether set menu item as selected */
+    /** Set the Menu Item as selected/unselected */
     @Input()
     selected: boolean = false;
 
-    /** Whether set menu item as disabled */
+    /** Set the Menu Item as disabled/enabled */
     @Input()
     disabled: boolean = false;
 
-    /** Menu item id attribute value */
+    /** Menu Item id attribute value */
     @Input()
     itemId: string = `fd-menu-item-${menuUniqueId++}`;
 
-    /** Reference to sub menu template */
+    /** Reference to sub-menu component */
     @Input()
     subMenu: SubMenuComponent;
 
-    /** @hidden Reference to menu item title */
+    @Output()
+    selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** @hidden Reference to the Menu Item title */
     @ContentChild(MenuTitleDirective)
     menuItemTitle: MenuTitleDirective;
 
-    /** @hidden Reference to menu item title */
+    /** @hidden Reference to the Menu Item interactive element */
     @ContentChild(MenuLinkDirective)
     menuLink: MenuLinkDirective;
 
-    /** @hidden */
-    subLevelVisible: boolean = false;
+    /** @hidden Whether sub-menu is currently visible*/
+    subMenuVisible: boolean = false;
 
+    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
@@ -67,6 +75,7 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
                 @Optional() private _subMenu: SubMenuComponent) {
     }
 
+    /** @hidden */
     ngAfterContentInit() {
         this._setMenuService();
         this._initialiseItemState();
@@ -74,6 +83,16 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
         this._listenOnMenuLinkHover();
     }
 
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['selected'] && !changes['selected'].firstChange) {
+            if (this.selected) {
+                this._menuService.setSelectProgrammatic(this);
+            }
+        }
+    }
+
+    /** @hidden */
     ngOnDestroy() {
         this._subscriptions.unsubscribe();
     }
@@ -83,13 +102,14 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
         return this.subMenu && !this._menuService.menu.mobile;
     }
 
+    /** Focuses Menu Item interactive element */
     focus(): void {
         if (this.menuLink) {
             this.menuLink.elementRef.nativeElement.focus();
-            this._changeDetectorRef.markForCheck();
         }
     }
 
+    /** Clicks Menu Item interactive element */
     click(): void {
         if (this.menuLink) {
             this.menuLink.elementRef.nativeElement.click();
@@ -97,23 +117,27 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
         }
     }
 
+    /** @hidden Opens submenu level */
     open(): void {
         this.menuLink.setSelected(true);
-        this.subLevelVisible = true;
+        this.subMenuVisible = true;
         this._changeDetectorRef.markForCheck();
     }
 
+    /** @hidden Closes submenu level */
     close(): void {
         this.menuLink.setSelected(false);
-        this.subLevelVisible = false;
+        this.subMenuVisible = false;
         this._changeDetectorRef.markForCheck();
     }
 
+    /** @hidden Sets menu item as selected/unselected based on isSelected flag */
     setSelected(isSelected: boolean): void {
         this.menuLink.setSelected(isSelected);
         this._changeDetectorRef.markForCheck();
     }
 
+    /** @hidden Creates click listener on menu item interactive element */
     private _listenOnMenuLinkClick(): void {
         this._subscriptions.add(
             fromEvent(this.menuLink.elementRef.nativeElement, 'click')
@@ -121,6 +145,7 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
         )
     }
 
+    /** @hidden Creates hover listeners for activating/deactivating menu item */
     private _listenOnMenuLinkHover(): void {
         const mouseEnter$ = fromEvent(this.menuLink.elementRef.nativeElement, 'mouseenter');
         const mouseLeave$ = fromEvent(this.menuLink.elementRef.nativeElement, 'mouseleave');
@@ -139,12 +164,13 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
         // Set active on long hover
         this._subscriptions.add(
             mouseEnter$.pipe(
-                filter(() => !this._menuService.menu.mobile),
+                filter(() => !this._menuService.menu.mobile && !!this.subMenu),
                 sample(timeTrigger$)
             ).subscribe(() => this._menuService.setActive(true, this))
         );
     }
 
+    /** @hidden Initializes menu link state based on item initial state */
     private _initialiseItemState(): void {
         this.menuLink.setSubmenu(!!this.subMenu, this.itemId);
         this.menuLink.setDisabled(this.disabled);
@@ -153,6 +179,7 @@ export class MenuItemComponent implements DefaultMenuItem, AfterContentInit, OnD
         }
     }
 
+    /** @hidden Checks for Menu Service dependency and passes it if further */
     private _setMenuService(): void {
         this._menuService = this._menuService || this._subMenu.menuService;
         if (this.subMenu) {
