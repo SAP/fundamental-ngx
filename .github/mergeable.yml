@@ -23,6 +23,8 @@ mergeable:
           - required:
               reviewers: [ 'fkolar' ]
           - required:
+              reviewers: [ 'KevinOkamoto' ]     
+          - required:
               reviewers: [ 'JKMarkowski' ]
           - required:
               reviewers: [ 'mikerodonnell89' ]
