@@ -32,7 +32,6 @@
                 [(ngModel)]="inputText"
                 (ngModelChange)="handleSearchTermChange()"
                 [placeholder]="placeholder"
-                (blur)="focusLost()"
                 (focus)="onTouched()"
                 [attr.aria-expanded]="open && displayedValues.length"
                 [readonly]="readOnly"

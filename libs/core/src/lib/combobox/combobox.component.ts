@@ -222,6 +222,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private programmaticFocusChange: boolean = false;
 
     /** @hidden */
+    private oldInputValue: string = '';
+
+    /** @hidden */
     onChange: any = () => {};
 
     /** @hidden */
@@ -273,7 +276,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                 this._focusListItem(this.listItems.first);
             }
         } else if (KeyUtil.isKey(event, 'Escape')) {
-            this.focusLost();
+            this.selectItemOnBlur();
         }
     }
 
@@ -284,14 +287,16 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             // If there are displayed values and the input text has changed since this function was last ran
             if (this._hasDisplayedValues()) {
                 let foundCloseMatch = false;
+                const listItemsArray = this.listItems.toArray();
                 this.displayedValues.forEach((displayedValue, i) => {
                     // Try to find an exact match. If one is found, focus it. Otherwise, check if a displayedValue starts with input value
-                    if (this.searchInputElement.nativeElement.value === this.displayFn(displayedValue)) {
-                        this._focusListItem(this.listItems.toArray()[i])
+                    if (this.searchInputElement.nativeElement.value === this.displayFn(displayedValue) &&
+                        !this.searchInputElement.nativeElement.selectionStart === this.searchInputElement.nativeElement.value.length) {
+                        this._focusListItem(listItemsArray[i])
                     } else if (this.displayFn(displayedValue).toLocaleLowerCase()
                             .startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
                         foundCloseMatch = true;
-                        if (!KeyUtil.isKey(event, 'Backspace') && !KeyUtil.isKey(event, 'Delete')) {
+                        if (!KeyUtil.isKey(event, ['Backspace', 'Delete'])) {
                             this._typeahead(displayedValue, event);
                         }
                     }
@@ -301,6 +306,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this._inputEnterKeyup();
         }
         this.selectedTermSubject$.next(this.searchInputElement.nativeElement.value);
+        this.oldInputValue = this.searchInputElement.nativeElement.value;
     }
 
     /** @hidden */
@@ -378,6 +384,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.searchFn();
         }
         this.isOpenChangeHandle(!this.open);
+        this.searchInputElement.nativeElement.focus();
     }
 
     /** @hidden */
@@ -402,10 +409,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     /** @hidden */
-    focusLost(): void {
+    selectItemOnBlur(): void {
         if (this.programmaticFocusChange) {
             this.programmaticFocusChange = false;
-        } else if (this.open) {
+        } else if (this.open && this.closeOnOutsideClick) {
             let foundMatch = false;
             this.displayedValues.forEach((value, i) => {
                 if (this.searchInputElement.nativeElement.value === this.displayFn(value)) {
@@ -529,7 +536,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         !KeyUtil.isKey(event, 'Alt') &&
         !KeyUtil.isKey(event, 'Ctrl') &&
         !KeyUtil.isKey(event, 'Meta') &&
-        !KeyUtil.isKey(event, 'Shift')
+        !KeyUtil.isKey(event, 'Shift') &&
+        !KeyUtil.isKey(event, 'ArrowUp') &&
+        !KeyUtil.isKey(event, 'ArrowDown') &&
+        !KeyUtil.isKey(event, 'ArrowLeft') &&
+        !KeyUtil.isKey(event, 'ArrowRight') &&
+        this.oldInputValue !== this.searchInputElement.nativeElement.value
     }
 
     private _inputEnterKeyup(): void {
