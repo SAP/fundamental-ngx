@@ -23,3 +23,11 @@ export class PlatformInfoLableTextIconExampleComponent {}
     templateUrl: './platform-info-label-numeric-example.component.html'
 })
 export class PlatformInfoLableNumericIconExampleComponent {}
+
+
+@Component({
+    selector: 'fdp-platform-info-label-aria-label-example',
+    templateUrl: './platform-info-label-aria-label-example.component.html',
+    styleUrls: ['platform-info-label-example.component.scss']
+})
+export class PlatformInfoLableAriaLabelExampleComponent {}

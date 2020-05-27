@@ -4,6 +4,7 @@ import * as PlatformInfoLableDefaultExample from '!raw-loader!./platform-info-la
 import * as PlatformInfoLableNumericExample from '!raw-loader!./platform-info-label-example/platform-info-label-numeric-example.component.html';
 import * as PlatformTextAndIconInfoLableExample from '!raw-loader!./platform-info-label-example/platform-info-label-text-and-icon-example.component.html';
 import * as PlatfromInfoLableTextExample from '!raw-loader!./platform-info-label-example/platform-info-label-text-example.component.html';
+import * as PlatfromInfoLableAriaLabelExample from '!raw-loader!./platform-info-label-example/platform-info-label-aria-label-example.component.html';
 
 @Component({
   selector: 'fd-platform-info-label-docs',
@@ -37,6 +38,13 @@ export class PlatformInfoLabelDocsComponent {
             language: 'html',
             code: PlatformInfoLableNumericExample,
             fileName: 'platform-info-label-numeric-example',
+        }
+    ];
+    platformAraiaLabelInfoLabelHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: PlatfromInfoLableAriaLabelExample,
+            fileName: 'platform-info-label-aria-label-example',
         }
     ];
 

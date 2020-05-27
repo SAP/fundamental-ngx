@@ -7,7 +7,8 @@ import { API_FILES } from '../../api-files';
 import { PlatformInfoLabelExampleComponent, 
          PlatformInfoLableNumericIconExampleComponent, 
          PlatformInfoLableTextExampleComponent, 
-         PlatformInfoLableTextIconExampleComponent } from './platform-info-label-example/platform-info-label-example.component';
+         PlatformInfoLableTextIconExampleComponent, 
+         PlatformInfoLableAriaLabelExampleComponent} from './platform-info-label-example/platform-info-label-example.component';
 import { PlatformInfoLabelModule } from '@fundamental-ngx/platform';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 
@@ -32,6 +33,7 @@ const routes: Routes = [
         PlatformInfoLableNumericIconExampleComponent,
         PlatformInfoLableTextExampleComponent,
         PlatformInfoLableTextIconExampleComponent,
+        PlatformInfoLableAriaLabelExampleComponent,
     ]
 })
 export class PlatformInfoLabelDocsModule {}

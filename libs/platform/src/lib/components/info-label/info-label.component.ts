@@ -29,4 +29,7 @@ export class InfoLabelComponent {
     @Input()
     ariaLabel: string = null;
 
+    /** Binds to control aria-labelledBy attribute */
+    @Input()
+    ariaLabelledBy: string = null;
 }
