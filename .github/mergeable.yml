@@ -22,6 +22,8 @@ mergeable:
               reviewers: [ 'droshev' ]
           - required:
               reviewers: [ 'fkolar' ]
+         - required:
+              reviewers: [ 'KevinOkamoto' ]     
           - required:
               reviewers: [ 'JKMarkowski' ]
           - required:
