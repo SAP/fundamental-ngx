@@ -23,7 +23,6 @@ import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { MenuMobileComponent } from './menu-mobile/menu-mobile/menu-mobile.component';
-import { PopoverComponent } from '../..';
 import { Subscription } from 'rxjs';
 
 /**
@@ -40,10 +39,6 @@ import { Subscription } from 'rxjs';
 })
 export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
-    /** Display menu in compact mode */
-    @Input()
-    compact: boolean = false;
-
     /** Set menu in mobile mode */
     @Input('mobile')
     set setMobileMode(value: boolean) {
@@ -51,9 +46,17 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
         this._menuService.setMenuMode(this.mobile);
     }
 
+    /** Display menu in compact mode */
+    @Input()
+    compact: boolean = false;
+
     /** Open submenu on hover after given milliseconds */
     @Input()
     openOnHoverTime: number = 0;
+
+    /** Display menu without integrated popover */
+    @Input()
+    standalone: boolean = false;
 
     /** Emits array of active menu items */
     @Output()
@@ -95,11 +98,9 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
     constructor(public elementRef: ElementRef,
-                public changeDetectorRef: ChangeDetectorRef,
                 private _menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
                 private _componentFactoryResolver: ComponentFactoryResolver,
-                @Optional() private _popoverComponent: PopoverComponent,
                 @Optional() private _dynamicComponentService: DynamicComponentService) {
     }
 
@@ -118,15 +119,15 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     /** @hidden */
     ngOnDestroy() {
         this._destroyMobileComponent();
+        this._menuService.onDestroy();
         this.subscriptions.unsubscribe();
-        this._menuService.removeKeyboardSupport();
     }
 
     /** Opens the menu */
     open(): void {
         this.isOpen = true;
         this.isOpenChange.emit(this.isOpen);
-        this.changeDetectorRef.markForCheck();
+        this._changeDetectorRef.markForCheck();
     }
 
     /** Closes the menu */
@@ -134,7 +135,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
         this.isOpen = false;
         this._menuService.resetMenuState();
         this.isOpenChange.emit(this.isOpen);
-        this.changeDetectorRef.markForCheck();
+        this._changeDetectorRef.markForCheck();
     }
 
     /** Focuses first menu item */
@@ -156,7 +157,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     private _setupView(): void {
         if (this.mobile) {
             this._setupMobileMode();
-        } else if (this._popoverComponent) {
+        } else if (this.standalone) {
             this._loadView(this.menuRootTemplate);
         } else {
             this._loadView(this.menuWithPopover);
@@ -164,11 +165,21 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
         this._changeDetectorRef.detectChanges();
     }
 
+    /** @hidden */
     private _manageKeyboardSupport(shouldHaveKeyboardSupport?: boolean) {
         if (shouldHaveKeyboardSupport) {
             this._menuService.addKeyboardSupport();
         } else {
             this._menuService.removeKeyboardSupport();
+        }
+    }
+
+    /** @hidden */
+    private _manageOutsideCLickListener(shouldCloseOnOutsideClick?: boolean) {
+        if (shouldCloseOnOutsideClick) {
+            this._menuService.addOutsideClickListener();
+        } else {
+            this._menuService.removeOutsideClickListener();
         }
     }
 
@@ -207,6 +218,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
                 this._destroyMobileComponent();
                 this._setupView();
                 this._manageKeyboardSupport(!isMobile);
+                this._manageOutsideCLickListener(!isMobile && this.standalone);
             })
         )
     }

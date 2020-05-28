@@ -33,8 +33,10 @@ export class MenuService {
     /** @hidden */
     private _destroyKeyboardHandlerListener: () => void;
 
-    constructor(private _renderer: Renderer2,
-                private _menuKeyboardService: MenuKeyboardService) { }
+    /** @hidden */
+    private _destroyOutsideClickListener: () => void;
+
+    constructor(private _renderer: Renderer2) { }
 
     /** Reference to menu component */
     get menu(): MenuComponent {
@@ -110,6 +112,24 @@ export class MenuService {
         if (this._destroyKeyboardHandlerListener) {
             this._destroyKeyboardHandlerListener();
         }
+    }
+
+    /** Adds close on outside click listener */
+    addOutsideClickListener(): void {
+        this.removeOutsideClickListener();
+        this._listenOnOutsideClick();
+    }
+
+    /** Removes close on outside click listener */
+    removeOutsideClickListener(): void {
+        if (this._destroyOutsideClickListener) {
+            this._destroyOutsideClickListener();
+        }
+    }
+
+    onDestroy() {
+        this.removeKeyboardSupport();
+        this.removeOutsideClickListener();
     }
 
     /** @hidden Returns siblings of given node */
@@ -199,6 +219,20 @@ export class MenuService {
                 : this.activeNodePath[0].item
             );
         }
+    }
+
+    /** @hidden Creates outside click listener */
+    private _listenOnOutsideClick(): void {
+        this._destroyOutsideClickListener = this._renderer.listen('document', 'click', (event: MouseEvent) => {
+                const isOutsideClick = this.activeNodePath.length
+                    && !this.activeNodePath[this.activeNodePath.length - 1].item.elementRef.nativeElement
+                        .contains(event.target);
+
+                if (isOutsideClick) {
+                    this._removeFromActivePath(this.activeNodePath[0].item);
+                }
+            }
+        );
     }
 
     /** @hidden Adds keyboard support */
