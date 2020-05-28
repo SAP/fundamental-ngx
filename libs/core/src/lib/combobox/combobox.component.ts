@@ -222,7 +222,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private programmaticFocusChange: boolean = false;
 
     /** @hidden */
-    private oldInputValue: string = '';
+    private oldInputText: string = '';
 
     /** @hidden */
     onChange: any = () => {};
@@ -240,6 +240,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     ngOnInit(): void {
         this._refreshDisplayedValues();
         this._setupFocusTrap();
+        if (this.inputText) {
+            this.oldInputText = this.inputText;
+        }
     }
 
     /** @hidden */
@@ -282,7 +285,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeyupHandler(event: KeyboardEvent): void {
-        if (this._inputKeyupTextChanged(event)) {
+        if (this._inputKeyupTextChanged()) {
             this.isOpenChangeHandle(true);
             // If there are displayed values and the input text has changed since this function was last ran
             if (this._hasDisplayedValues()) {
@@ -297,7 +300,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                             .startsWith(this.inputText.toLocaleLowerCase()) && !foundCloseMatch) {
                         foundCloseMatch = true;
                         if (!KeyUtil.isKey(event, ['Backspace', 'Delete'])) {
-                            this._typeahead(displayedValue, event);
+                            this._typeahead(displayedValue);
                         }
                     }
                 });
@@ -305,8 +308,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else if (KeyUtil.isKey(event, 'Enter') && this._hasDisplayedValues()) {
             this._inputEnterKeyup();
         }
-        this.selectedTermSubject$.next(this.searchInputElement.nativeElement.value);
-        this.oldInputValue = this.searchInputElement.nativeElement.value;
+        this.inputText = this.displayFn(this.searchInputElement.nativeElement.value);
+        this.selectedTermSubject$.next(this.inputText);
+        this.oldInputText = this.inputText;
     }
 
     /** @hidden */
@@ -372,9 +376,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             : (this.displayedValues = this.filterFn(this.dropdownValues, this.inputText));
         if (this.popoverComponent) {
             this.popoverComponent.updatePopover();
-        }
-        if (!this.inputText) {
-            this.isOpenChangeHandle(false);
         }
     }
 
@@ -520,28 +521,15 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         item.focus();
     }
 
-    private _typeahead(displayedValue: string, event: KeyboardEvent): void {
+    private _typeahead(displayedValue: string): void {
         this.searchInputElement.nativeElement.value = this.displayFn(displayedValue);
         const selectionStartIndex = this.inputText.length;
         this.searchInputElement.nativeElement.setSelectionRange(selectionStartIndex,
             this.displayFn(displayedValue).length);
     }
 
-    private _inputKeyupTextChanged(event: KeyboardEvent): boolean {
-        return this.openOnKeyboardEvent &&
-        !KeyUtil.isKey(event, 'Escape') &&
-        !KeyUtil.isKey(event, ' ') &&
-        !KeyUtil.isKey(event, 'Tab') &&
-        !KeyUtil.isKey(event, 'Enter') &&
-        !KeyUtil.isKey(event, 'Alt') &&
-        !KeyUtil.isKey(event, 'Ctrl') &&
-        !KeyUtil.isKey(event, 'Meta') &&
-        !KeyUtil.isKey(event, 'Shift') &&
-        !KeyUtil.isKey(event, 'ArrowUp') &&
-        !KeyUtil.isKey(event, 'ArrowDown') &&
-        !KeyUtil.isKey(event, 'ArrowLeft') &&
-        !KeyUtil.isKey(event, 'ArrowRight') &&
-        this.oldInputValue !== this.searchInputElement.nativeElement.value
+    private _inputKeyupTextChanged(): boolean {
+        return this.openOnKeyboardEvent && this.oldInputText !== this.searchInputElement.nativeElement.value
     }
 
     private _inputEnterKeyup(): void {
