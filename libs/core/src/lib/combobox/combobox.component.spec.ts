@@ -7,7 +7,7 @@ import { ListModule } from '../list/list.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 
-fdescribe('ComboboxComponent', () => {
+describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
     let fixture: ComponentFixture<ComboboxComponent>;
 
@@ -144,6 +144,20 @@ fdescribe('ComboboxComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith({ value: 'value2', displayedValue: 'displayedValue2' });
     });
 
+    it('should handle wrong input entry on dropdown mode', () => {
+        spyOn(component, 'onChange');
+        component.communicateByObject = true;
+        component.displayFn = (item: any): string => {
+            if (item) {
+                return item.displayedValue;
+            } else {
+                return '';
+            }
+        };
+        component.inputText = 'otherDisplayedValue';
+        expect(component.onChange).toHaveBeenCalledWith(undefined);
+    });
+
     it('should handle write value from outside on dropdown mode', () => {
         component.communicateByObject = true;
         component.displayFn = (item: any): string => {
@@ -192,12 +206,12 @@ fdescribe('ComboboxComponent', () => {
             preventDefault: () => {}
         };
         component.openOnKeyboardEvent = true;
-        component.inputText = 'te';
+        component.inputText = 'tex';
+        spyOnProperty(component.searchInputElement.nativeElement, 'value').and.returnValue('tex');
         spyOn(component, 'isOpenChangeHandle');
         component.open = true;
         component.displayedValues = ['text'];
         spyOn(component.searchInputElement.nativeElement, 'setSelectionRange');
-        spyOnProperty(component.searchInputElement.nativeElement, 'value').and.returnValue('tex');
 
         component.onInputKeyupHandler(event);
 
