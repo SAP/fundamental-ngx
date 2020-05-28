@@ -18,6 +18,9 @@ import * as positiveNegativeExampleHtml from '!raw-loader!./platform-action-bar-
 import * as positiveNegativeExampleTs from '!raw-loader!./platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component.ts';
 import * as positiveNegativecss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component.scss';
 import * as simpleActionBarcss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-simple-example.component.scss';
+import * as cozyModeExampleHtml from '!raw-loader!./platform-action-bar-examples/platform-action-bar-cozy-mode-example.component.html';
+import * as cozyModeExamplecss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-cozy-mode-example.component.scss';
+import * as cozyModeExampleTs from '!raw-loader!./platform-action-bar-examples/platform-action-bar-cozy-mode-example.component.ts';
 @Component({
     selector: 'app-platform-action-bar',
     templateUrl: './platform-action-bar-docs.component.html',
@@ -111,6 +114,21 @@ export class PlatformActionBarDocsComponent {
             component: 'PlatformActionBarWithPositiveNegativeActionsExampleComponent',
             code: positiveNegativeExampleTs,
             fileName: 'platform-action-bar-positive-and-negative-action-example'
+        }
+    ];
+    cozyModeExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: cozyModeExampleHtml,
+            fileName: 'platform-action-bar-cozy-mode-example',
+            scssFileCode: cozyModeExamplecss
+        },
+
+        {
+            language: 'typescript',
+            component: 'PlatformActionBarCozyModeExampleComponent',
+            code: cozyModeExampleTs,
+            fileName: 'platform-action-bar-cozy-mode-example'
         }
     ];
 

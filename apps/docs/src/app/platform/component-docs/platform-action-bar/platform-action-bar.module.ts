@@ -12,13 +12,14 @@ import { PlatformActionBarWithDescriptionExampleComponent } from './platform-act
 import { PlatformActionBarWithLongPageTitleExampleComponent } from './platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
 import { PlatformActionBarWithContextualMenuExampleComponent } from './platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
 import { PlatformActionBarWithPositiveNegativeActionsExampleComponent } from './platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
-
+import { PlatformActionBarCozyModeExampleComponent } from './platform-action-bar-examples/platform-action-bar-cozy-mode-example.component';
 import {
     PlatformActionBarModule,
     PlatformButtonModule,
     PlatformMenuModule,
     PlatformActionButtonGroupModule
 } from '@fundamental-ngx/platform';
+
 
 const routes: Routes = [
     {
@@ -49,7 +50,8 @@ const routes: Routes = [
         PlatformActionBarWithDescriptionExampleComponent,
         PlatformActionBarWithLongPageTitleExampleComponent,
         PlatformActionBarWithContextualMenuExampleComponent,
-        PlatformActionBarWithPositiveNegativeActionsExampleComponent
+        PlatformActionBarWithPositiveNegativeActionsExampleComponent,
+        PlatformActionBarCozyModeExampleComponent
     ]
 })
-export class PlatformActionBarDocsModule {}
+export class PlatformActionBarDocsModule { }
