@@ -1,5 +1,3 @@
-
-
 <div class="fd-multi-input fd-multi-input-custom">
     <div class="fd-multi-input-field">
         <ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
@@ -89,7 +87,7 @@
                     ></span>
             </fd-checkbox>
         </li>
-        <li fd-list-footer class="fd-multi-input-show-all" *ngIf="showAllButton">
+        <li fd-list-footer class="fd-multi-input-show-all" *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)">
             <a fd-link (click)="showAllClicked($event)" href>Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>

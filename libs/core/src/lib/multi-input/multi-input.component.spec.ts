@@ -241,4 +241,21 @@ describe('MultiInputComponent', () => {
         expect(component.selectedChange.emit).toHaveBeenCalled();
         expect(component.selected).toEqual([component.dropdownValues[0]]);
     });
+
+    it('should handle showAll button', async () => {
+        await fixture.whenStable();
+        const event: any = {
+            key: 'ArrowUp',
+            preventDefault: () => {},
+            stopPropagation: () => {}
+        };
+        component.searchTerm = 'term';
+        spyOn(event, 'preventDefault');
+        spyOn(event, 'stopPropagation');
+        spyOn(component, 'handleSearchTermChange');
+        component.showAllClicked(event);
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(event.stopPropagation).toHaveBeenCalled();
+        expect(component.searchTerm).toBe('');
+    });
 });
