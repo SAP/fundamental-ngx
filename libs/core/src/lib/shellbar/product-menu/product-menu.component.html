@@ -18,7 +18,7 @@
             </button>
         </fd-popover-control>
         <fd-popover-body>
-            <fd-menu *ngIf="!menuComponent">
+            <fd-menu *ngIf="!menuComponent" [standalone]="true">
                 <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item>
                     <a [attr.href]="item.link ? item.link : null" fd-menu-interactive>
                         <span fd-menu-title>{{ item.name }}</span>

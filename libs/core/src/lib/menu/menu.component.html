@@ -17,9 +17,14 @@
     <div #popoverContainer
          [triggers]="[]"
          [isOpen]="isOpen"
+         [options]="options"
+         [placement]="placement"
          [popoverTrigger]="trigger"
          [appendTo]="popoverContainer"
          [fdPopover]="menuRootTemplate"
+         [fillControlMode]="fillControlMode"
+         [closeOnEscapeKey]="closeOnEscapeKey"
+         [closeOnOutsideClick]="closeOnOutsideClick"
          (loaded)="focusFirst()"
          (isOpenChange)="handlePopoverOpenChange($event)">
     </div>

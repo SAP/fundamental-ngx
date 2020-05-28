@@ -9,6 +9,7 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -24,6 +25,8 @@ import { MenuService } from './services/menu.service';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { MenuMobileComponent } from './menu-mobile/menu-mobile/menu-mobile.component';
 import { Subscription } from 'rxjs';
+import { DIALOG_CONFIG, DialogConfig, MobileModeConfig, PopoverFillMode } from '../..';
+import { Placement, PopperOptions } from 'popper.js';
 
 /**
  * The component that represents a menu.
@@ -46,6 +49,42 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
         this._menuService.setMenuMode(this.mobile);
     }
 
+    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
+    @Input()
+    placement: Placement = 'bottom-start';
+
+    /** The Popper.js options to attach to this popover.
+     * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
+    @Input()
+    options: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: true,
+                escapeWithReference: true,
+                boundariesElement: 'scrollParent'
+            }
+        }
+    };
+
+    /**
+     * Preset options for the popover body width.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * Leave blank for no effect.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode;
+
+    /** Whether the popover should close when a click is made outside its boundaries. */
+    @Input()
+    closeOnOutsideClick: boolean = true;
+
+    /** Whether the popover should close when the escape key is pressed. */
+    @Input()
+    closeOnEscapeKey: boolean = true;
+
     /** Display menu in compact mode */
     @Input()
     compact: boolean = false;
@@ -57,6 +96,10 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     /** Display menu without integrated popover */
     @Input()
     standalone: boolean = false;
+
+    /** Display menu without integrated popover */
+    @Input()
+    mobileConfig: MobileModeConfig = { hasCloseButton: true };
 
     /** Emits array of active menu items */
     @Output()
@@ -98,6 +141,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
     constructor(public elementRef: ElementRef,
+                @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
                 private _menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
                 private _componentFactoryResolver: ComponentFactoryResolver,
@@ -139,8 +183,10 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     }
 
     /** Focuses first menu item */
-    focusFirst() {
-        this._menuService.setFocused(this.menuItems.first);
+    focusFirst(): void {
+        if (this.menuItems.first) {
+            this._menuService.setFocused(this.menuItems.first);
+        }
     }
 
     /** Toggles menu open/close state */
@@ -176,7 +222,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
 
     /** @hidden */
     private _manageOutsideCLickListener(shouldCloseOnOutsideClick?: boolean) {
-        if (shouldCloseOnOutsideClick) {
+        if (shouldCloseOnOutsideClick && this.closeOnOutsideClick) {
             this._menuService.addOutsideClickListener();
         } else {
             this._menuService.removeOutsideClickListener();

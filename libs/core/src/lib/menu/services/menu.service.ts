@@ -1,9 +1,9 @@
 import { Injectable, Renderer2 } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
-import { KeyUtil, MenuKeyboardService } from '@fundamental-ngx/core';
+import { KeyUtil } from '../../utils/functions/key-util';
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, startWith } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 interface MenuNode {
     item: MenuItemComponent;
@@ -63,6 +63,10 @@ export class MenuService {
     /** Sets state of a given menu item
      * @param isActive - Whether should be set as active or inactive*/
     setActive(isActive: boolean, menuItem: MenuItemComponent): void {
+        if (isActive && menuItem.disabled) {
+            return;
+        }
+
         if (isActive) {
             this._addToActivePath(menuItem)
         } else {
@@ -137,11 +141,6 @@ export class MenuService {
         return node.parent
             ? node.parent.children
             : this.menuMap.get(null).children;
-    }
-
-    /** @hidden Returns index of given node in local menu list */
-    private _nodeListIndex(node: MenuNode): number {
-        return this._nodeSiblings(node).indexOf(node);
     }
 
     /** @hidden Adds given element to the Active Node Path and setts as active*/
@@ -255,16 +254,14 @@ export class MenuService {
                         this.setFocused(this.focusedNode.parent.item);
                     }
                 } else if (KeyUtil.isKey(event, 'ArrowDown')) {
-                    const index = this._nodeListIndex(this.focusedNode);
-                    const siblings = this._nodeSiblings(this.focusedNode);
-                    if (index < siblings.length - 1) {
-                        this.setFocused(siblings[index + 1].item);
+                    const closest = this._closestEnabled(this.focusedNode, 'down');
+                    if (closest) {
+                        this.setFocused(closest.item);
                     }
                 } else if (KeyUtil.isKey(event, 'ArrowUp')) {
-                    const index = this._nodeListIndex(this.focusedNode);
-                    const siblings = this._nodeSiblings(this.focusedNode);
-                    if (index > 0) {
-                        this.setFocused(siblings[index - 1].item);
+                    const closest = this._closestEnabled(this.focusedNode, 'up');
+                    if (closest) {
+                        this.setFocused(closest.item);
                     }
                 } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
                     this.setActive(true, this.focusedNode.item);
@@ -272,7 +269,7 @@ export class MenuService {
                     if (this.focusedNode.children.length) {
                         focusRight(this.focusedNode);
                     }
-                } else if (KeyUtil.isKey(event, 'Escape')) {
+                } else if (KeyUtil.isKey(event, 'Escape') && this.menu.closeOnEscapeKey) {
                     this.menu.close();
                 } else {
                     matched = false;
@@ -291,4 +288,20 @@ export class MenuService {
             this.activeNodePath.map(node => node.item)
         );
     }
+
+    /** @hidden Depending on direction returns closest enabled sibling of given node */
+    private _closestEnabled(node: MenuNode, direction: 'up' | 'down'): MenuNode {
+        const siblings = direction === 'up'
+            ? [...this._nodeSiblings(this.focusedNode)].reverse()
+            : this._nodeSiblings(this.focusedNode);
+
+        const startIndex = siblings.indexOf(node) + 1;
+
+        for (let i = startIndex; i < siblings.length; i++) {
+            if (!siblings[i].item.disabled) {
+                return siblings[i];
+            }
+        }
+        return undefined;
+    };
 }

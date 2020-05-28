@@ -52,6 +52,11 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
         this._subscriptions.unsubscribe();
     }
 
+    /** Mobile config */
+    get mobileConfig() {
+        return this._menuComponent.mobileConfig || {};
+    }
+
     /** Closes the Dialog and Menu component */
     close(): void {
         this.dialogRef.close();
@@ -68,9 +73,10 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
 
     /** @hidden Opens the Dialog */
     private _openDialog(): void {
+        const dialogConfig = this._menuComponent.dialogConfig || {};
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
+            ...dialogConfig,
             mobile: true,
-            focusTrapped: false,
             verticalPadding: false,
             escKeyCloseable: false,
             backdropClickCloseable: false,
@@ -91,7 +97,7 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
     private _setMenuView(items: MenuItemComponent[]): void {
         const lastItem = items[items.length - 1];
         this.isSubmenu = !!items.length;
-        this.title = this.isSubmenu ? lastItem.menuItemTitle.title : '';
+        this.title = this.isSubmenu ? lastItem.menuItemTitle.title : this.mobileConfig.title;
         if (this.isSubmenu) {
             if (lastItem.subMenu) {
                 this.view = lastItem.subMenu.templateRef

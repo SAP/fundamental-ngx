@@ -79,6 +79,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         this._setMenuService();
         this._initialiseItemState();
         this._listenOnMenuLinkClick();
+        this._listenOnOuterFocus();
         this._listenOnMenuMode();
     }
 
@@ -197,5 +198,14 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
                 this._hoverSubscriptions = this._listenOnMenuLinkHover();
             }
         });
+    }
+
+    /** @hidden Updates focused menu item on outer focus */
+    private _listenOnOuterFocus(): void {
+        this._subscriptions.add(
+            fromEvent(this.menuLink.elementRef.nativeElement, 'focus').pipe(
+                filter(() => this.menuService.focusedNode !== this.menuService.menuMap.get(this))
+            ).subscribe(() => this.menuService.setFocused(this))
+        )
     }
 }

@@ -20,30 +20,27 @@
 
     <fd-product-menu [control]="library"
                      [closePopoverOnSelect]="true"
-                     [items]="items"> </fd-product-menu>
+                     [items]="items">
+    </fd-product-menu>
 
     <fd-shellbar-actions [closePopoverOnSelect]>
-        <fd-popover placement="bottom-end"
-                    [(isOpen)]="isOpen">
-            <fd-popover-control>
-                <button fd-button
-                        [fdMenu]="true"
-                        class="fd-shellbar__button--menu fd-docs--theme-menu"
-                        [fdType]="'transparent'"
-                        [glyph]="action.glyph"></button>
-            </fd-popover-control>
-            <fd-popover-body *ngIf="themes && themes.length">
-                <fd-menu>
-                    <ul fd-menu-list>
-                        <li fd-menu-item
-                            (click)="selectTheme(theme.id)"
-                            *ngFor="let theme of themes">
-                            {{ theme.name }}
-                        </li>
-                    </ul>
-                </fd-menu>
-            </fd-popover-body>
-        </fd-popover>
+        <button fd-button
+                glyph="palette"
+                class="fd-shellbar__button--menu fd-docs--theme-menu"
+                fdType="transparent"
+                [fdMenu]="true"
+                [fdMenuTrigger]="themesMenu">
+        </button>
+
+        <fd-menu #themesMenu="fdMenu"
+                 placement="bottom-end">
+            <li fd-menu-item *ngFor="let theme of themes">
+                <div fd-menu-interactive (click)="selectTheme(theme.id)">
+                    <span fd-menu-title>{{ theme.name }}</span>
+                </div>
+            </li>
+        </fd-menu>
+
         <span class="fd-docs--toolbar__version">v {{ version }}</span>
         <a href="https://github.com/SAP/fundamental-ngx"
            title="Find us on Github!"
