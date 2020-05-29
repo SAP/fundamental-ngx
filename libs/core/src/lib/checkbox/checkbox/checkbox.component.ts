@@ -132,8 +132,9 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
-    public checkByClick() {
-        this._nextValueEvent();
+    public checkByClick(event: Event) {
+        event.stopPropagation();
+        this.nextValue();
     }
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
@@ -164,8 +165,8 @@ export class CheckboxComponent implements ControlValueAccessor {
                 this.inputLabel.nativeElement.checked = true;
                 break;
             default:
-                this.checkboxValue = ( this.tristate && this.tristateSelectable)  ?
-                    this.values.thirdStateValue : this.values.trueValue;
+                this.checkboxValue =
+                    this.tristate && this.tristateSelectable ? this.values.thirdStateValue : this.values.trueValue;
                 break;
         }
 
