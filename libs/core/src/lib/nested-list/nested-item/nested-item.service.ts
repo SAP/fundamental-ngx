@@ -13,6 +13,9 @@ export class NestedItemService {
     /** Subject fired, when child elements are focused */
     focus: Subject<void> = new Subject<void>();
 
+    /** Subject fired, when content or link is clicked */
+    click: Subject<void> = new Subject<void>();
+
     /** KeyDown handler, it is triggered from link, content and item elements */
     keyDown: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
 }

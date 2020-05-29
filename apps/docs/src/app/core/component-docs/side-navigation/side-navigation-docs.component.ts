@@ -6,6 +6,7 @@ import * as sideNavigationIconsSrc from '!raw-loader!./examples/side-navigation-
 import * as sideNavigationTitlesSrc from '!raw-loader!./examples/side-navigation-titles-example.component.html';
 import * as sideNavigationCompactSrc from '!raw-loader!./examples/side-navigation-compact-example.component.html';
 import * as sideNavigationMultiLevelSrc from '!raw-loader!./examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component.html';
+import * as sideNavigationNonSelectSrc from '!raw-loader!./examples/side-navigation-non-selectable-example/side-navigation-non-selectable-example.component.htm';
 import * as sideNavigationMultiLevelSrcTs from '!raw-loader!./examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component.ts';
 import * as programmaticallySideNavigationSrc from '!raw-loader!./examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component.html';
 import * as programmaticallySideNavigationSrcTs from '!raw-loader!./examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component.ts';
@@ -91,6 +92,14 @@ export class SideNavigationDocsComponent {
             language: 'html',
             code: sideNavigationIconsSrc,
             fileName: 'side-navigation-icons-example'
+        }
+    ];
+
+    nonSelectableSideNav: ExampleFile[] = [
+        {
+            language: 'html',
+            code: sideNavigationNonSelectSrc,
+            fileName: 'side-navigation-non-selectable-example'
         }
     ];
 

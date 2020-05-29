@@ -41,6 +41,12 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     @HostBinding('class.fd-side-nav--condensed')
     condensed: boolean = false;
 
+    /** Whether clicking on elements should change selected state of items */
+    @Input()
+    set selectable(selectable: boolean) {
+        this.nestedListState.selectable = selectable
+    }
+
     /** @hidden */
     @ContentChild(SideNavigationUtilityDirective)
     sideNavUtility: SideNavigationUtilityDirective;

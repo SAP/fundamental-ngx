@@ -74,25 +74,13 @@ export class NestedListKeyboardService {
         if (KeyUtil.isKey(keyboardEvent, 'ArrowRight')) {
             if (!item.expanded && item.hasChildren) {
                 item.triggerOpen();
-            } else {
-                if (items.length > index + 1) {
-                    items[index + 1].focus();
-                } else {
-                    items[0].focus();
-                }
-                keyboardEvent.preventDefault();
             }
+            keyboardEvent.preventDefault();
         } else if (KeyUtil.isKey(keyboardEvent, 'ArrowLeft')) {
             if (item.expanded && item.hasChildren) {
                 item.triggerClose();
-            } else {
-                if (index > 0) {
-                    items[index - 1].focus();
-                } else {
-                    items[items.length - 1].focus();
-                }
-                keyboardEvent.preventDefault();
             }
+            keyboardEvent.preventDefault();
         } else {
             this.keyboardService.keyDownHandler(keyboardEvent, index, items);
         }

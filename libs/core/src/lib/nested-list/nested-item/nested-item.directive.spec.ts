@@ -22,7 +22,7 @@ import { NestedItemService } from './nested-item.service';
                     <a fd-nested-list-expand-icon #iconElementPopover></a>
                 </div>
                 <ul fd-nested-list [textOnly]="false">
-                    <li fd-nested-list-item>
+                    <li fd-nested-list-item #popoverSubItemElement>
                         <a fd-nested-list-link>
                             <span fd-nested-list-icon [glyph]="'settings'"></span>
                             <span fd-nested-list-title>Link 1</span>
@@ -40,7 +40,7 @@ import { NestedItemService } from './nested-item.service';
                 <a fd-nested-list-expand-icon #iconElement></a>
             </div>
             <ul fd-nested-list [textOnly]="false">
-                <li fd-nested-list-item>
+                <li fd-nested-list-item #subItemElement>
                     <a fd-nested-list-link>
                         <span fd-nested-list-icon [glyph]="'settings'"></span>
                         <span fd-nested-list-title>Link 1</span>
@@ -60,8 +60,14 @@ class TestNestedContainerComponent {
     @ViewChild('listNestedItemElement', { read: NestedItemDirective })
     nestedItemListDirective: NestedItemDirective;
 
+    @ViewChild('subItemElement', { read: NestedItemDirective })
+    subItemElement: NestedItemDirective;
+
     @ViewChild('popoverNestedItemElement', { read: NestedItemDirective })
     nestedItemPopoverDirective: NestedItemDirective;
+
+    @ViewChild('popoverSubItemElement', { read: NestedItemDirective })
+    popoverSubItemElement: NestedItemDirective;
 
     @ViewChild('emptyItemDirective', { read: NestedItemDirective })
     emptyItemDirective: NestedItemDirective;
@@ -76,10 +82,12 @@ class TestNestedContainerComponent {
     linkDirective: NestedLinkDirective;
 }
 
-describe('NestedItemDirective', () => {
+fdescribe('NestedItemDirective', () => {
     let component: TestNestedContainerComponent;
     let nestedItemPopoverDirective: NestedItemDirective;
     let nestedItemListDirective: NestedItemDirective;
+    let subItemElement: NestedItemDirective;
+    let popoverSubItemElement: NestedItemDirective;
     let iconElement: NestedListExpandIconDirective;
     let emptyItemDirective: NestedItemDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
@@ -101,6 +109,8 @@ describe('NestedItemDirective', () => {
         nestedItemListDirective = component.nestedItemListDirective;
         emptyItemDirective = component.emptyItemDirective;
         nestedItemPopoverDirective = component.nestedItemPopoverDirective;
+        subItemElement = component.subItemElement;
+        popoverSubItemElement = component.popoverSubItemElement;
         iconElement = component.iconElement;
         itemService = (<any>nestedItemPopoverDirective)._itemService;
         fixture.detectChanges();
@@ -191,5 +201,21 @@ describe('NestedItemDirective', () => {
         nestedItemPopoverDirective.contentItem.nestedLink.onKeyDown(keyboardEvent);
         fixture.detectChanges();
         expect(nestedItemPopoverDirective.keyboardTriggered.emit).toHaveBeenCalledWith(keyboardEvent);
+    });
+
+    it('Popover Should handle keyboard event from sub items', () => {
+        spyOn((<any>nestedItemPopoverDirective), '_selectedChange');
+        fixture.detectChanges();
+        popoverSubItemElement.linkItem.onClick(new MouseEvent('click'));
+        fixture.detectChanges();
+        expect((<any>nestedItemPopoverDirective)._selectedChange).toHaveBeenCalledWith((<any>popoverSubItemElement)._elementId);
+    });
+
+    it('Should handle keyboard event from sub items', () => {
+        spyOn((<any>nestedItemListDirective), '_selectedChange');
+        fixture.detectChanges();
+        subItemElement.linkItem.onClick(new MouseEvent('click'));
+        fixture.detectChanges();
+        expect((<any>nestedItemListDirective)._selectedChange).toHaveBeenCalledWith((<any>subItemElement)._elementId);
     });
 });

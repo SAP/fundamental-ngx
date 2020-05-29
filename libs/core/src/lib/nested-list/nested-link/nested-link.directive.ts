@@ -59,6 +59,7 @@ export class NestedLinkDirective {
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
+        this._itemService.click.next();
         if (this.onClickCallback) {
             this.onClickCallback();
         }

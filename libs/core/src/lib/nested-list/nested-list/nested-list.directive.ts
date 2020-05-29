@@ -68,7 +68,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
             nestedLevel = Math.min(...[nestedLevel, 2]);
         }
         this.nestedItems.changes.subscribe(() => this._nestedListKeyboardService.refresh$.next());
-        this.handleNestedLevel(nestedLevel);
+        this._handleNestedLevel(nestedLevel);
     }
 
     /** @hidden */
@@ -77,7 +77,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     }
 
     /** @hidden */
-    private handleNestedLevel(level: number): void {
+    private _handleNestedLevel(level: number): void {
         /** Adding class with the nested level */
         this._elementRef.nativeElement.classList.add('level-' + level);
     }

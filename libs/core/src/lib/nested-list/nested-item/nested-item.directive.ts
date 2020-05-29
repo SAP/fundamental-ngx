@@ -3,7 +3,7 @@ import {
     ContentChild,
     Directive,
     EventEmitter,
-    HostBinding,
+    HostBinding, HostListener,
     Input, OnDestroy,
     Output
 } from '@angular/core';
@@ -13,7 +13,10 @@ import { NestedItemInterface } from './nested-item.interface';
 import { NestedItemService } from './nested-item.service';
 import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
+import { NestedListStateService } from '../nested-list-state.service';
+
+let sideNavigationItemUniqueId: number = 0;
 
 @Directive({
     selector: '[fdNestedItem], [fd-nested-list-item]',
@@ -65,7 +68,8 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** @hidden */
     constructor (
         private _itemService: NestedItemService,
-        private _keyboardService: NestedListKeyboardService
+        private _keyboardService: NestedListKeyboardService,
+        private _stateService: NestedListStateService
     ) {}
 
     /** @hidden */
@@ -73,6 +77,9 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** Unique element ID */
+    private readonly _elementId: string = 'fdNestedItem' + sideNavigationItemUniqueId++;
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -142,6 +149,18 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         }
     }
 
+    /** Method that provides information if element, or children of this element has passed id */
+    containsId(id: string): boolean {
+        if (this._elementId === id) {
+            return true;
+        }
+        if (this._itemService.list) {
+            return !!this._itemService.list.nestedItems.find(item => item.containsId(id))
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @hidden
      * Propagate open state to all of the children
@@ -190,10 +209,23 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(() => this.toggle());
 
+        /** Subscribe to mouse click event, thrown by link item */
+        this._itemService.click
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => this._stateService.onSelected.next(this._elementId));
+
         /** Subscribe to keyboard event and throw it farther */
         this._itemService.keyDown
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(keyboardEvent => this.keyboardTriggered.emit(keyboardEvent));
+
+        /** Subscribe to selected state change, it's not triggered, when selectable flag is disabled*/
+        this._stateService.onSelected
+            .pipe(
+                takeUntil(this._onDestroy$),
+                filter(() => this._stateService.selectable)
+            )
+            .subscribe(id => this._selectedChange(id));
     }
 
     /** @hidden */
@@ -208,6 +240,15 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     private _passItemReferences(): void {
         if (this._itemService.popover) {
             this._itemService.popover.parentItemElement = this;
+        }
+    }
+
+    /** Change of selected state of content or link, if there is any children with I */
+    private _selectedChange(id: string): void {
+        if (this.contentItem) {
+            this.contentItem.selected = this.containsId(id);
+        } else if (this.linkItem) {
+            this.linkItem.selected = this.containsId(id);
         }
     }
 }

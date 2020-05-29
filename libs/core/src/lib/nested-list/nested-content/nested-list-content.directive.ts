@@ -86,6 +86,12 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
         this._itemService.keyDown.next(event);
     }
 
+    /** Handler for mouse events */
+    @HostListener('click', ['$event'])
+    onClick(event: MouseEvent): void {
+        this._itemService.click.next();
+    }
+
     /** Expanded state change propagation method */
     changeExpandedState(expanded: boolean): void {
         if (this.nestedExpandIcon) {
