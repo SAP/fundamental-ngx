@@ -23,14 +23,14 @@ export class PlatformDocumentationComponent {
     components = [
         { url: 'platform/action-bar', name: 'Action Bar' },
         { url: 'platform/button', name: 'Button' },
-        { url: 'platform/menu', name: 'Menu' },
-        { url: 'platform/search-field', name: 'Search Field' },
-        { url: 'platform/select', name: 'Select' },
-        { url: 'platform/link', name: 'Link' },
-        { url: 'platform/radio-group', name: 'Radio Button Group' },
-        { url: 'platform/menu-button', name: 'Menu Button' },
-        { url: 'platform/split-menu-button', name: 'Split Menu Button' },
         { url: 'platform/info-label', name: 'Info Label' },
+        { url: 'platform/link', name: 'Link' },
+        { url: 'platform/menu', name: 'Menu' },
+        { url: 'platform/menu-button', name: 'Menu Button' },
+        { url: 'platform/radio-group', name: 'Radio Button Group' },
+        { url: 'platform/select', name: 'Select' },
+        { url: 'platform/search-field', name: 'Search Field' },
+        { url: 'platform/split-menu-button', name: 'Split Menu Button' },
     ];
 
     layouts = [];
