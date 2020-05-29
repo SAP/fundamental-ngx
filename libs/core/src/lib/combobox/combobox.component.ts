@@ -164,7 +164,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     buttonFocusable: boolean = false;
 
-    /** Whether the combobox is part of the shellbar, used to add shellbar-specific styles */
+    /** @hidden */
     @Input()
     inShellbar: boolean = false;
 
@@ -308,7 +308,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else if (KeyUtil.isKey(event, 'Enter') && this._hasDisplayedValues()) {
             this._inputEnterKeyup();
         }
-        this.inputText = this.displayFn(this.searchInputElement.nativeElement.value);
+        this.inputText = this.searchInputElement.nativeElement.value;
         this.selectedTermSubject$.next(this.inputText);
         this.oldInputText = this.inputText;
     }

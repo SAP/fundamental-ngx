@@ -25,6 +25,8 @@ export class ComboboxTemplateExampleComponent {
 
     selected: any;
 
+    searchTerm: string;
+
     displayFunction(item: { name: string; icon: string }): string {
         return item.name;
     }
