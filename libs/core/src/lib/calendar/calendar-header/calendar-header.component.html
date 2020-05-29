@@ -20,7 +20,6 @@
                     [compact]="compact"
                     [fdType]="'transparent'"
                     [attr.aria-label]="calendarI18nLabels.monthSelectionLabel + ' ' + monthLabel"
-                    [attr.aria-selected]="isOnMonthView()"
                     (click)="processViewChange('month', $event)"
                     type="button"
                 >
@@ -33,7 +32,6 @@
                     [compact]="compact"
                     [fdType]="'transparent'"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
-                    [attr.aria-selected]="isOnYearView()"
                     (click)="processViewChange('year', $event)"
                     type="button"
                 >
@@ -44,12 +42,10 @@
         <ng-container *ngIf="activeView === 'aggregatedYear' || activeView === 'year'">
             <div class="fd-calendar__action">
                 <button
-                    *ngIf="activeView === 'year'"
                     fd-button
                     [compact]="compact"
                     [fdType]="'transparent'"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
-                    [attr.aria-selected]="isOnYearView()"
                     (click)="processViewChange('aggregatedYear', $event)"
                     type="button"
                 >

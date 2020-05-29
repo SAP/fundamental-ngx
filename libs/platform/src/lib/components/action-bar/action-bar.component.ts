@@ -6,6 +6,9 @@ import {
     ChangeDetectorRef,
     OnInit
 } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RtlService } from '@fundamental-ngx/core';
+import { map } from 'rxjs/operators';
 import { BaseComponent } from '../base';
 @Component({
     selector: 'fdp-action-bar',
@@ -26,11 +29,6 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
     description: string;
 
     /**
-     * Compact mode
-     */
-    compact = true;
-
-    /**
      * Show "back" button.
      */
     @Input()
@@ -48,13 +46,17 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
     @Output()
     backButtonClick: EventEmitter<void> = new EventEmitter();
 
-    constructor(_cd: ChangeDetectorRef) {
+    navigationArrow$: Observable<string>;
+
+    constructor(private _rtlService: RtlService, _cd: ChangeDetectorRef) {
         super(_cd);
     }
 
-    ngOnInit() {
-        if (this.contentDensity === 'cozy') {
-            this.compact = false;
-        }
+    ngOnInit(): void {
+
+        this.navigationArrow$ = this._rtlService.rtl.pipe(
+            map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
+        );
     }
+
 }

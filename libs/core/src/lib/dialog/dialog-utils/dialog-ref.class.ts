@@ -12,6 +12,7 @@ export const DIALOG_REF = new InjectionToken<string[]>('DialogRef');
 
 export class DialogRef {
     private readonly _afterClosed = new Subject<any>();
+    private readonly _afterLoaded = new Subject<any>();
     private readonly _onHide = new BehaviorSubject<boolean>(false);
     private readonly _onLoading = new BehaviorSubject<boolean>(false);
 
@@ -26,6 +27,9 @@ export class DialogRef {
 
     /** Observable that is triggered whenever the dialog should be displayed in loading state.*/
     public onLoading: Observable<boolean> = this._onLoading.asObservable();
+
+    /** Observable that is triggered when the modal view is initialised. */
+    public afterLoaded: Observable<boolean> = this._onLoading.asObservable();
 
     /** Data passed from the calling component to the content.*/
     public data: any;
@@ -61,5 +65,10 @@ export class DialogRef {
      */
     loading(isLoading: boolean): void {
         this._onLoading.next(isLoading);
+    }
+
+    /** Function that is called after the view of modal is initialised. */
+    loaded(): void {
+        this._afterLoaded.next();
     }
 }

@@ -57,36 +57,36 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'select-mobile'" [componentName]="'select'">
-    Select In Mobile Mode
-</fd-docs-section-title>
-<description>
-    To open a Menu in mobile mode, compose the Menu Component together with the Dialog Component.<br/>
-    There are a few important things to remember:
-    <ul>
-        <li>
-            Because Select is tightly bound to Option, it is important to keep the options in
-            view without instantiating and destroying them with every dialog open/close action. We can easily achieve
-            this by creating the Dialog once and using the <code>DialogRef.hidden()</code> method to show/hide the dialog.
-        </li>
+<!--<fd-docs-section-title [id]="'select-mobile'" [componentName]="'select'">-->
+<!--    Select In Mobile Mode-->
+<!--</fd-docs-section-title>-->
+<!--<description>-->
+<!--    To open a Menu in mobile mode, compose the Menu Component together with the Dialog Component.<br/>-->
+<!--    There are a few important things to remember:-->
+<!--    <ul>-->
+<!--        <li>-->
+<!--            Because Select is tightly bound to Option, it is important to keep the options in-->
+<!--            view without instantiating and destroying them with every dialog open/close action. We can easily achieve-->
+<!--            this by creating the Dialog once and using the <code>DialogRef.hidden()</code> method to show/hide the dialog.-->
+<!--        </li>-->
 
-        <li>
-            To get the full Fiori3 experience, set Select in mobile mode using <code>[mobile]="true"</code>. Also remember to instantiate the
-            Dialog inside Select using <code>DialogConfig.container</code> and <code>Select.dialogContainerElementRef</code>.
-        </li>
+<!--        <li>-->
+<!--            To get the full Fiori3 experience, set Select in mobile mode using <code>[mobile]="true"</code>. Also remember to instantiate the-->
+<!--            Dialog inside Select using <code>DialogConfig.container</code> and <code>Select.dialogContainerElementRef</code>.-->
+<!--        </li>-->
 
-        <li>
-            The Options template needs to be declared inside the <code>fd-select</code> tags to properly configure element
-            injectors. Use <code>Select.selectOptionsListTemplate</code> to render options in the desired place.
-        </li>
-    </ul>
-</description>
-<component-example>
-    <fd-select-mobile-example></fd-select-mobile-example>
-</component-example>
-<code-example [exampleFiles]="selectMobile"></code-example>
+<!--        <li>-->
+<!--            The Options template needs to be declared inside the <code>fd-select</code> tags to properly configure element-->
+<!--            injectors. Use <code>Select.selectOptionsListTemplate</code> to render options in the desired place.-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fd-select-mobile-example></fd-select-mobile-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="selectMobile"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
 <fd-docs-section-title [id]="'select-max-height'" [componentName]="'select'">
     Select Max Height

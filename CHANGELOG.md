@@ -2,6 +2,244 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.1-rc.30"></a>
+## [0.18.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.29...v0.18.1-rc.30) (2020-05-29)
+
+
+
+<a name="0.18.1-rc.29"></a>
+## [0.18.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.28...v0.18.1-rc.29) (2020-05-28)
+
+
+### Bug Fixes
+
+* Add Dialog Generated from Object ([#2517](https://github.com/SAP/fundamental-ngx/issues/2517)) ([dccdc37](https://github.com/SAP/fundamental-ngx/commit/dccdc37))
+
+
+
+<a name="0.18.1-rc.28"></a>
+## [0.18.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.27...v0.18.1-rc.28) (2020-05-28)
+
+
+
+<a name="0.18.1-rc.27"></a>
+## [0.18.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.26...v0.18.1-rc.27) (2020-05-27)
+
+
+
+<a name="0.18.1-rc.26"></a>
+## [0.18.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.25...v0.18.1-rc.26) (2020-05-27)
+
+
+
+<a name="0.18.1-rc.25"></a>
+## [0.18.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.24...v0.18.1-rc.25) (2020-05-27)
+
+
+### Bug Fixes
+
+* Add loaded to dialog component ([#2567](https://github.com/SAP/fundamental-ngx/issues/2567)) ([f9fdd89](https://github.com/SAP/fundamental-ngx/commit/f9fdd89))
+
+
+
+<a name="0.18.1-rc.24"></a>
+## [0.18.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.23...v0.18.1-rc.24) (2020-05-25)
+
+
+
+<a name="0.18.1-rc.23"></a>
+## [0.18.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.22...v0.18.1-rc.23) (2020-05-24)
+
+
+
+<a name="0.18.1-rc.22"></a>
+## [0.18.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.21...v0.18.1-rc.22) (2020-05-24)
+
+
+
+<a name="0.18.1-rc.21"></a>
+## [0.18.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.20...v0.18.1-rc.21) (2020-05-24)
+
+
+
+<a name="0.18.1-rc.20"></a>
+## [0.18.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.19...v0.18.1-rc.20) (2020-05-24)
+
+
+
+<a name="0.18.1-rc.19"></a>
+## [0.18.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.18...v0.18.1-rc.19) (2020-05-24)
+
+
+
+<a name="0.18.1-rc.18"></a>
+## [0.18.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.17...v0.18.1-rc.18) (2020-05-24)
+
+
+
+<a name="0.18.1-rc.17"></a>
+## [0.18.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.16...v0.18.1-rc.17) (2020-05-24)
+
+
+
+<a name="0.18.1-rc.16"></a>
+## [0.18.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.15...v0.18.1-rc.16) (2020-05-24)
+
+
+
+<a name="0.18.1-rc.15"></a>
+## [0.18.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.14...v0.18.1-rc.15) (2020-05-24)
+
+
+
+<a name="0.18.1-rc.14"></a>
+## [0.18.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.13...v0.18.1-rc.14) (2020-05-24)
+
+
+### Bug Fixes
+
+* missing button restored, removed selected state from header ([#2546](https://github.com/SAP/fundamental-ngx/issues/2546)) ([387c4df](https://github.com/SAP/fundamental-ngx/commit/387c4df))
+
+
+
+<a name="0.18.1-rc.13"></a>
+## [0.18.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.12...v0.18.1-rc.13) (2020-05-24)
+
+
+### Bug Fixes
+
+* more powerful selector added ([#2549](https://github.com/SAP/fundamental-ngx/issues/2549)) ([f5fb3af](https://github.com/SAP/fundamental-ngx/commit/f5fb3af))
+
+
+
+<a name="0.18.1-rc.12"></a>
+## [0.18.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.10...v0.18.1-rc.12) (2020-05-23)
+
+
+### Bug Fixes
+
+* added click event to set focus on input ([#2548](https://github.com/SAP/fundamental-ngx/issues/2548)) ([4a438a1](https://github.com/SAP/fundamental-ngx/commit/4a438a1))
+* removed extra space from first and last child ([#2547](https://github.com/SAP/fundamental-ngx/issues/2547)) ([c212475](https://github.com/SAP/fundamental-ngx/commit/c212475))
+
+
+
+<a name="0.18.1-rc.11"></a>
+## [0.18.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.10...v0.18.1-rc.11) (2020-05-23)
+
+
+### Bug Fixes
+
+* added click event to set focus on input ([#2548](https://github.com/SAP/fundamental-ngx/issues/2548)) ([4a438a1](https://github.com/SAP/fundamental-ngx/commit/4a438a1))
+* removed extra space from first and last child ([#2547](https://github.com/SAP/fundamental-ngx/issues/2547)) ([c212475](https://github.com/SAP/fundamental-ngx/commit/c212475))
+
+
+
+<a name="0.18.1-rc.10"></a>
+## [0.18.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.9...v0.18.1-rc.10) (2020-05-20)
+
+
+
+<a name="0.18.1-rc.9"></a>
+## [0.18.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.8...v0.18.1-rc.9) (2020-05-20)
+
+
+### Bug Fixes
+
+* multi input mobile  ([#2513](https://github.com/SAP/fundamental-ngx/issues/2513)) ([4e113b4](https://github.com/SAP/fundamental-ngx/commit/4e113b4))
+
+
+
+<a name="0.18.1-rc.8"></a>
+## [0.18.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.7...v0.18.1-rc.8) (2020-05-18)
+
+
+### Bug Fixes
+
+* (platform) implementation of lazyloading for platform Documentation  ([#2519](https://github.com/SAP/fundamental-ngx/issues/2519)) ([0118ee6](https://github.com/SAP/fundamental-ngx/commit/0118ee6))
+
+
+
+<a name="0.18.1-rc.7"></a>
+## [0.18.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.6...v0.18.1-rc.7) (2020-05-17)
+
+
+
+<a name="0.18.1-rc.6"></a>
+## [0.18.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.5...v0.18.1-rc.6) (2020-05-17)
+
+
+
+<a name="0.18.1-rc.5"></a>
+## [0.18.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.4...v0.18.1-rc.5) (2020-05-17)
+
+
+
+<a name="0.18.1-rc.4"></a>
+## [0.18.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.3...v0.18.1-rc.4) (2020-05-17)
+
+
+
+<a name="0.18.1-rc.3"></a>
+## [0.18.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.2...v0.18.1-rc.3) (2020-05-17)
+
+
+
+<a name="0.18.1-rc.2"></a>
+## [0.18.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.1...v0.18.1-rc.2) (2020-05-17)
+
+
+
+<a name="0.18.1-rc.1"></a>
+## [0.18.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.0...v0.18.1-rc.1) (2020-05-17)
+
+
+
+<a name="0.18.1-rc.0"></a>
+## [0.18.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.18.0...v0.18.1-rc.0) (2020-05-17)
+
+
+
+<a name="0.18.0"></a>
+# [0.18.0](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.24...v0.18.0) (2020-05-16)
+
+
+
+<a name="0.18.0-rc.24"></a>
+# [0.18.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.23...v0.18.0-rc.24) (2020-05-16)
+
+
+
+<a name="0.18.0-rc.23"></a>
+# [0.18.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.22...v0.18.0-rc.23) (2020-05-16)
+
+
+
+<a name="0.18.0-rc.22"></a>
+# [0.18.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.21...v0.18.0-rc.22) (2020-05-16)
+
+
+### Bug Fixes
+
+* add tabindex to shellbar button and user menu ([#2512](https://github.com/SAP/fundamental-ngx/issues/2512)) ([8501f67](https://github.com/SAP/fundamental-ngx/commit/8501f67))
+
+
+
+<a name="0.18.0-rc.21"></a>
+# [0.18.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.20...v0.18.0-rc.21) (2020-05-16)
+
+
+
+<a name="0.18.0-rc.20"></a>
+# [0.18.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.19...v0.18.0-rc.20) (2020-05-16)
+
+
+### Bug Fixes
+
+* ie11 fixed ([#2515](https://github.com/SAP/fundamental-ngx/issues/2515)) ([b34a1c0](https://github.com/SAP/fundamental-ngx/commit/b34a1c0))
+* Remove hardcoded background color ([#2516](https://github.com/SAP/fundamental-ngx/issues/2516)) ([d521503](https://github.com/SAP/fundamental-ngx/commit/d521503))
+
+
+
 <a name="0.18.0-rc.19"></a>
 # [0.18.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.18.0-rc.18...v0.18.0-rc.19) (2020-05-15)
 
