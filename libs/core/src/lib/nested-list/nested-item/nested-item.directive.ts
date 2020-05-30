@@ -246,9 +246,9 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** Change of selected state of content or link, if there is any children with I */
     private _selectedChange(id: string): void {
         if (this.contentItem) {
-            this.contentItem.selected = this.containsId(id);
+            this.contentItem.changeSelected(this.containsId(id));
         } else if (this.linkItem) {
-            this.linkItem.selected = this.containsId(id);
+            this.linkItem.changeSelected(this.containsId(id));
         }
     }
 }

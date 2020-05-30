@@ -31,7 +31,7 @@
             <ng-template let-item="item" #link>
                 <a fd-nested-list-link *ngIf="item.link"
                    [onClickCallback]="item.link.callback"
-                   [selected]="!item.list && item.link.selected"
+                   [(selected)]="!item.list && item.link.selected"
                    [attr.href]="item.link.href ? item.link.href : null"
                    [routerLink]="item.link.routerLink ? item.link.routerLink : []">
                     <span fd-nested-list-icon *ngIf="item.link.icon" [glyph]="item.link.icon"></span>

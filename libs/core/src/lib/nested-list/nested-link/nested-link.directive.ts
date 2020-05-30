@@ -3,9 +3,11 @@ import {
     ContentChild,
     Directive,
     ElementRef,
+    EventEmitter,
     HostBinding,
     HostListener,
     Input,
+    Output,
     Renderer2
 } from '@angular/core';
 import { NestedListTitleDirective } from '../nested-list-directives';
@@ -24,6 +26,10 @@ export class NestedLinkDirective {
     @Input()
     @HostBinding('class.is-selected')
     selected: boolean = false;
+
+    /** Event thrown, when selected state is changed */
+    @Output()
+    selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__link')
@@ -69,6 +75,12 @@ export class NestedLinkDirective {
     @HostListener('focus')
     onFocus(): void {
         this._itemService.focus.next();
+    }
+
+    /** Method to trigger selected state change */
+    changeSelected(selected: boolean): void {
+        this.selected = selected;
+        this.selectedChange.emit(selected);
     }
 
     /** Set focus on the element. */

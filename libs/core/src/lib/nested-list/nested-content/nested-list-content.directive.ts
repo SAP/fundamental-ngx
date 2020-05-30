@@ -31,6 +31,10 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     @HostBinding('class.is-selected')
     selected: boolean = false;
 
+    /** Event thrown, when selected state is changed */
+    @Output()
+    selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     /** Event that is thrown, when any keyboard event is dispatched on this element */
     @Output()
     readonly keyboardTriggered: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
@@ -90,6 +94,12 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         this._itemService.click.next();
+    }
+
+    /** Method to trigger selected state change */
+    changeSelected(selected: boolean): void {
+        this.selected = selected;
+        this.selectedChange.emit(selected);
     }
 
     /** Expanded state change propagation method */
