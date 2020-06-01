@@ -1,8 +1,7 @@
 import { Subject } from 'rxjs';
-import { Injectable, Output } from '@angular/core';
+import { Output, Injectable } from '@angular/core';
 import { DefaultMenuItem } from './default-menu-item.class';
 import { ListItemDirective } from '../list/list-item.directive';
-import { KeyUtil } from '../utils/functions/key-util';
 
 @Injectable()
 export class MenuKeyboardService {
@@ -31,32 +30,46 @@ export class MenuKeyboardService {
             return;
         }
 
-        if (KeyUtil.isKey(event, 'ArrowDown')) {
-            if (menuItems.length > index + 1) {
-                menuItems[index + 1].focus();
-            } else {
-                if (this.focusEscapeAfterList) {
-                    this.focusEscapeAfterList();
+        switch (event.key) {
+            case 'ArrowDown': {
+                if (menuItems.length > index + 1) {
+                    menuItems[index + 1].focus();
                 } else {
-                    menuItems[0].focus();
+                    if (this.focusEscapeAfterList) {
+                        this.focusEscapeAfterList();
+                    } else {
+                        menuItems[0].focus();
+                    }
                 }
-            }
-            event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'ArrowUp')) {
-            if (index > 0) {
-                menuItems[index - 1].focus();
-            } else {
-                if (this.focusEscapeBeforeList) {
-                    this.focusEscapeBeforeList();
-                } else {
-                    menuItems[menuItems.length - 1].focus();
-                }
-            }
-            event.preventDefault();
-        } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
-            if (menuItems[index]) {
-                menuItems[index].click();
                 event.preventDefault();
+                break;
+            }
+            case 'ArrowUp': {
+                if (index > 0) {
+                    menuItems[index - 1].focus();
+                } else {
+                    if (this.focusEscapeBeforeList) {
+                        this.focusEscapeBeforeList();
+                    } else {
+                        menuItems[menuItems.length - 1].focus();
+                    }
+                }
+                event.preventDefault();
+                break;
+            }
+            case ' ': {
+                if (menuItems[index]) {
+                    menuItems[index].click();
+                    event.preventDefault();
+                }
+                break;
+            }
+            case 'Enter': {
+                if (menuItems[index]) {
+                    menuItems[index].click();
+                    event.preventDefault();
+                }
+                break;
             }
         }
     }
