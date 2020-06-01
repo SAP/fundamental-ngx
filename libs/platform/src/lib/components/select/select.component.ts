@@ -11,7 +11,7 @@ import {
     ElementRef
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SelectComponent as fdSelect, SelectProxy } from '@fundamental-ngx/core';
+import { DynamicComponentService, SelectComponent as fdSelect, SelectProxy } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-select',
@@ -78,8 +78,9 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
      */
     private _value: any;
 
-    constructor(private cd: ChangeDetectorRef, elementRef: ElementRef) {
-        super(elementRef, new SelectProxy(), cd);
+    constructor(private cd: ChangeDetectorRef, elementRef: ElementRef, dynamicComponentService: DynamicComponentService
+    ) {
+        super(elementRef, new SelectProxy(), cd, dynamicComponentService, null);
     }
 
     onSelection(value: any): void {

@@ -9,9 +9,11 @@ import {
     EventEmitter,
     forwardRef,
     HostListener,
+    Inject,
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     QueryList,
     TemplateRef,
@@ -27,6 +29,10 @@ import focusTrap, { FocusTrap } from 'focus-trap';
 import { KeyUtil } from '../utils/functions/key-util';
 import { SelectProxy } from './select-proxy.service';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { SelectMobileComponent } from './select-mobile/select-mobile/select-mobile.component';
+import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
+import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 
 let selectUniqueId: number = 0;
 
@@ -161,6 +167,10 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     @Input()
     ariaLabel: string = null;
 
+    /** Select Input Mobile Configuration */
+    @Input()
+    mobileConfig: MobileModeConfig = { hasCloseButton: true };
+
     /** Event emitted when the popover open state changes. */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -176,10 +186,6 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     /** @hidden */
     @ViewChild('selectControl')
     controlElementRef: ElementRef;
-
-    /** Reference to root element for the mobile mode dialog */
-    @ViewChild('dialogContainer')
-    dialogContainerElementRef: ElementRef;
 
     /** Reference to element containing list of options */
     @ViewChild('selectOptionsListTemplate')
@@ -244,13 +250,15 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     /** @hidden */
     @HostListener('window:resize')
     resizeScrollHandler(): void {
-        this.calculatedMaxHeight = window.innerHeight * 0.45;
+        this.calculatedMaxHeight = this.mobile ? null : window.innerHeight * 0.45;
     }
 
     constructor(
         private _elementRef: ElementRef,
         private _selectProxy: SelectProxy,
-        private _changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _dynamicComponentService: DynamicComponentService,
+        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig
     ) { }
 
     /** @hidden */
@@ -271,6 +279,7 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     ngAfterViewInit(): void {
         this._listenOnControlTouched();
         this._setOptionsArray();
+        this._setupMobileMode();
     }
 
     /** @hidden */
@@ -281,6 +290,10 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     /** Whether control can be interacted with */
     get isInteractive(): boolean {
         return !(this.readonly || this.disabled);
+    }
+
+    get isCancelableMobileSelect(): boolean {
+        return this.mobile && !!this.mobileConfig.approveButtonText
     }
 
     /** @hidden */
@@ -342,13 +355,15 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     }
 
     /** @hidden */
-    setSelectedOption({option, controlChange}: OptionStatusChange): void {
+    setSelectedOption({option, controlChange}: OptionStatusChange, forceMobileSelect?: boolean): void {
         this.selected = option;
         this._setSelectViewValue();
 
         if (controlChange) {
-            this._updateValue(option.value);
-            this.close();
+            this._updateValue(option.value, !forceMobileSelect && this.isCancelableMobileSelect);
+            if (!this.isCancelableMobileSelect) {
+                this.close();
+            }
         }
         this._changeDetectorRef.markForCheck();
     }
@@ -383,10 +398,12 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     }
 
     /** @hidden */
-    private _updateValue(value: any): void {
+    private _updateValue(value: any, silent?: boolean): void {
         this._selectProxy.value$.next(value);
-        this.valueChange.emit(value);
-        this.onChange(value);
+        if (!silent) {
+            this.valueChange.emit(value);
+            this.onChange(value);
+        }
     }
 
     /** @hidden */
@@ -534,5 +551,16 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
     /** @hidden Sets new select control text */
     private _setSelectViewValue(): void {
         this.selectViewValue = this.selected ? this.selected.viewValueText : this.placeholder;
+    }
+
+    private _setupMobileMode(): void {
+        if (this.mobile) {
+            this._dynamicComponentService.createDynamicComponent(
+                this.selectOptionsListTemplate,
+                SelectMobileComponent,
+                { container: this._elementRef.nativeElement },
+                { services: [this] }
+            )
+        }
     }
 }
