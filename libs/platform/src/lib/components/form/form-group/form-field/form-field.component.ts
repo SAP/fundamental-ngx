@@ -279,7 +279,9 @@ export class FormFieldComponent
     private updateControlProperties() {
         if (this._control && this._editable) {
             this._control.id = this.id;
-            this._control.placeholder = this.placeholder;
+            if (this.placeholder && !this._control.placeholder) {
+                this._control.placeholder = this.placeholder;
+            }
         }
     }
 }
