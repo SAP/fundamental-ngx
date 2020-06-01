@@ -16,7 +16,7 @@ import {
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
-import { SubMenuComponent } from '../../..';
+import { SubmenuComponent } from '../../..';
 import { MenuService } from '../services/menu.service';
 import { defer, fromEvent, Subscription, timer } from 'rxjs';
 import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
@@ -45,7 +45,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Reference to sub-menu component */
     @Input()
-    subMenu: SubMenuComponent;
+    submenu: SubmenuComponent;
 
     @Output()
     selected: EventEmitter<void> = new EventEmitter<void>();
@@ -71,7 +71,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     constructor(public elementRef: ElementRef,
                 @Optional() public menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
-                @Optional() private _subMenu: SubMenuComponent) {
+                @Optional() private _subMenu: SubmenuComponent) {
     }
 
     /** @hidden */
@@ -88,8 +88,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         if (changes['disabled'] && !changes['disabled'].firstChange) {
             this.menuInteractive.setDisabled(this.disabled);
         }
-        if (changes['subMenu'] && !changes['subMenu'].firstChange) {
-            this.menuInteractive.setSubmenu(!!this.subMenu, this.subMenu ? this.itemId : null);
+        if (changes['submenu'] && !changes['submenu'].firstChange) {
+            this.menuInteractive.setSubmenu(!!this.submenu, this.submenu ? this.itemId : null);
         }
     }
 
@@ -101,7 +101,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
-        return this.subMenu && !this.menuService.menu.mobile;
+        return this.submenu && !this.menuService.menu.mobile;
     }
 
     /** Focuses Menu Item interactive element */
@@ -168,7 +168,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         // Set active on long hover
         hoverSubscriptions.add(
             mouseEnter$.pipe(
-                filter(() => !!this.subMenu),
+                filter(() => !!this.submenu),
                 sample(timeTrigger$)
             ).subscribe(() => this.menuService.setActive(true, this))
         );
@@ -178,15 +178,15 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden Initializes menu link state based on item initial state */
     private _initialiseItemState(): void {
-        this.menuInteractive.setSubmenu(!!this.subMenu, this.subMenu ? this.itemId : null);
+        this.menuInteractive.setSubmenu(!!this.submenu, this.submenu ? this.itemId : null);
         this.menuInteractive.setDisabled(this.disabled);
     }
 
     /** @hidden Checks for Menu Service dependency and passes it if further */
     private _setMenuService(): void {
         this.menuService = this.menuService || this._subMenu.menuService;
-        if (this.subMenu) {
-            this.subMenu.menuService = this.menuService;
+        if (this.submenu) {
+            this.submenu.menuService = this.menuService;
         }
     }
 

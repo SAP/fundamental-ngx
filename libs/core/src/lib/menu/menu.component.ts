@@ -257,8 +257,8 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
             .createDynamicComponent<MenuMobileComponent>(
                 this.menuRootTemplate,
                 MenuMobileComponent,
-                {container: this.elementRef.nativeElement},
-                {services: [this, this._menuService]}
+                { container: this.elementRef.nativeElement },
+                { services: [this, this._menuService] }
             )
     }
 

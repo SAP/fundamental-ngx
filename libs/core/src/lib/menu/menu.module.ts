@@ -8,7 +8,7 @@ import { MenuSeparatorComponent } from './menu-separator/menu-separator.componen
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
-import { SubMenuComponent } from './sub-menu/sub-menu.component';
+import { SubmenuComponent } from './submenu/submenu.component';
 import { PopoverModule } from '../popover/popover.module';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 
@@ -22,13 +22,13 @@ import { MenuTriggerDirective } from './directives/menu-trigger.directive';
         MenuShortcutDirective,
         MenuInteractiveDirective,
         MenuTitleDirective,
-        SubMenuComponent,
+        SubmenuComponent,
         MenuTriggerDirective
     ],
     exports: [
         MenuComponent,
         MenuItemComponent,
-        SubMenuComponent,
+        SubmenuComponent,
         MenuSeparatorComponent,
         MenuShortcutDirective,
         MenuInteractiveDirective,

@@ -1,19 +1,28 @@
-<fd-menu (activePath)="activePath = $event">
-    <li fd-menu-item [subMenu]="fruits">
+<button fd-button [fdMenu]="true" [fdMenuTrigger]="menu">Menu with submenu</button>
+
+<div style="display: inline-block">
+    <span style="padding-left: .5rem">Active path:</span>
+    <span *ngFor="let active of activePath" style="padding: .5rem">
+        {{active.menuItemTitle.title}}
+    </span>
+</div>
+
+<fd-menu #menu="fdMenu" (activePath)="activePath = $event">
+    <li fd-menu-item [submenu]="fruits">
         <div fd-menu-interactive>
             <span fd-menu-title>Fruits</span>
             <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
         </div>
     </li>
 
-    <li fd-menu-item [subMenu]="vegetables">
+    <li fd-menu-item [submenu]="vegetables">
         <div fd-menu-interactive>
             <span fd-menu-title>Vegetables</span>
             <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
         </div>
     </li>
 
-    <li fd-menu-item [subMenu]="milkProducts">
+    <li fd-menu-item [submenu]="milkProducts">
         <div fd-menu-interactive>
             <span fd-menu-title>Milk products</span>
             <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
@@ -21,7 +30,7 @@
     </li>
 </fd-menu>
 
-<fd-sub-menu #fruits="fdSubMenu">
+<fd-submenu #fruits="fdSubmenu">
     <li fd-menu-item>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Pineapple</span>
@@ -33,9 +42,9 @@
             <span fd-menu-title>Banana</span>
         </a>
     </li>
-</fd-sub-menu>
+</fd-submenu>
 
-<fd-sub-menu #vegetables="fdSubMenu">
+<fd-submenu #vegetables="fdSubmenu">
     <li fd-menu-item>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Cucumber</span>
@@ -47,25 +56,25 @@
             <span fd-menu-title>Onion</span>
         </a>
     </li>
-</fd-sub-menu>
+</fd-submenu>
 
-<fd-sub-menu #milkProducts="fdSubMenu">
-    <li fd-menu-item [subMenu]="cheeses">
+<fd-submenu #milkProducts="fdSubmenu">
+    <li fd-menu-item [submenu]="cheeses">
         <div fd-menu-interactive>
             <span fd-menu-title>Cheese</span>
             <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
         </div>
     </li>
 
-    <li fd-menu-item [subMenu]="yogurts">
+    <li fd-menu-item [submenu]="yogurts">
         <div fd-menu-interactive>
             <span fd-menu-title>Yogurts</span>
             <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
         </div>
     </li>
-</fd-sub-menu>
+</fd-submenu>
 
-<fd-sub-menu #cheeses="fdSubMenu">
+<fd-submenu #cheeses="fdSubmenu">
     <li fd-menu-item>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Parmesan</span>
@@ -77,9 +86,9 @@
             <span fd-menu-title>Brie</span>
         </a>
     </li>
-</fd-sub-menu>
+</fd-submenu>
 
-<fd-sub-menu #yogurts="fdSubMenu">
+<fd-submenu #yogurts="fdSubmenu">
     <li fd-menu-item>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Greek</span>
@@ -91,4 +100,4 @@
             <span fd-menu-title>Natural</span>
         </a>
     </li>
-</fd-sub-menu>
+</fd-submenu>

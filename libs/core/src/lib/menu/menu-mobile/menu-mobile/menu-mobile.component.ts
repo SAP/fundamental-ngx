@@ -99,8 +99,8 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
         this.isSubmenu = !!items.length;
         this.title = this.isSubmenu ? lastItem.menuItemTitle.title : this.mobileConfig.title;
         if (this.isSubmenu) {
-            if (lastItem.subMenu) {
-                this.view = lastItem.subMenu.templateRef
+            if (lastItem.submenu) {
+                this.view = lastItem.submenu.templateRef
             }
         } else {
             this.view = this.childContent;

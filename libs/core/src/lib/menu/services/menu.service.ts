@@ -162,8 +162,8 @@ export class MenuService {
             return {
                 item: menuItem,
                 parent: null,
-                children: menuItem.subMenu
-                    ? menuItem.subMenu.menuItems.toArray().map(subMenuItem => buildNode(subMenuItem))
+                children: menuItem.submenu
+                    ? menuItem.submenu.menuItems.toArray().map(subMenuItem => buildNode(subMenuItem))
                     : []
             }
         }

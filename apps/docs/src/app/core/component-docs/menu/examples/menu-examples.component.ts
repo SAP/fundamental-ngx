@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuItemComponent, MobileModeConfig } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-menu-example',
@@ -33,5 +34,5 @@ export class MenuMobileExampleComponent {
     templateUrl: './menu-with-submenu-example.component.html'
 })
 export class MenuWithSubmenuExampleComponent {
-    activePath = [];
+    activePath: MenuItemComponent[] = [];
 }
