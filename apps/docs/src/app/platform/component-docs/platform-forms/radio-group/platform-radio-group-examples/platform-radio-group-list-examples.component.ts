@@ -3,8 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-list-example',
-    templateUrl: './platform-radio-group-list-example.component.html',
-    styleUrls: ['platform-radio-group.component.scss']
+    templateUrl: './platform-radio-group-list-example.component.html'
 })
 export class PlatformRadioGroupListExampleComponent implements DoCheck {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
@@ -21,7 +20,7 @@ export class PlatformRadioGroupListExampleComponent implements DoCheck {
     });
 
     ngDoCheck() {
-        this.form1.get('example1').setErrors({ invalid: true });
-        this.form1.get('example1').markAsTouched();
+        this.form1.controls.example1.setErrors({ invalid: true });
+        this.form1.controls.example1.markAsTouched();
     }
 }

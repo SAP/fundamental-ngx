@@ -1,65 +1,44 @@
-<h3><u>Use With Reactive Form</u></h3>
+<h3>Use With Reactive Form</h3>
 
-<p class="header">1. Platform Radio Buttons created with given list of SelectItem objects and have Validation Error</p>
+<p>Platform Radio Buttons Created with given List of SelectItem Objects and have Validation Error</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form1">
     <fdp-form-field [id]="'radio1'" zone="zLeft" rank="1">
-        <fdp-radio-group
-            [name]="'radio1'"
-            [value]="'spring'"
-            [list]="items"
-            [isInline]="false"
-            formControlName="example1"
-        >
+        <fdp-radio-group [name]="'radio1'" [value]="'spring'" [list]="items" [isInline]="false"
+            formControlName="example1">
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p class="result">Selelected value: {{ form1.get('example1').value }}</p>
+<p style="margin-left: 2rem;">Selelected value: {{ form1.controls.example1.value }}</p>
 
-<p class="header">2. Compact Platform Radio Button created with given list of SelectItem objects.</p>
+<p>Compact Platform Radio Button Created with given List of SelectItem Objects.</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form2">
     <fdp-form-field [id]="'radio2'" zone="zLeft" rank="1">
-        <fdp-radio-group
-            [name]="'radio2'"
-            [contentDensity]="'compact'"
-            [list]="items"
-            [isInline]="true"
-            formControlName="example2"
-        >
+        <fdp-radio-group [name]="'radio2'" [contentDensity]="'compact'" [list]="items" [isInline]="true"
+            formControlName="example2">
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p class="result">Selelected value: {{ form2.get('example2').value }}</p>
+<p style="margin-left: 2rem;">Selelected value: {{ form2.controls.example2.value }}</p>
 
 <br />
-<h3><u>Use With Template Driven Form</u></h3>
+<separator></separator>
+<h3>Use With Template Driven Form</h3>
 
-<p class="header">
-    1. Platform Radio Buttons created with given list of SelectItem objects also pre-selection based on Control value
-</p>
+<p>Platform Radio Buttons Created with given List of SelectItem Objects also pre-selection based on Control value</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'radio1'" zone="zLeft" rank="1">
-        <fdp-radio-group
-            [name]="'radio1'"
-            [list]="items"
-            [isInline]="true"
-            [(ngModel)]="favoriteOption"
-        >
+        <fdp-radio-group [name]="'radio1'" [list]="items" [isInline]="true" [(ngModel)]="favoriteOption">
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p class="result">Selelected value: {{ favoriteOption }}</p>
+<p style="margin-left: 2rem;">Selelected value: {{ favoriteOption }}</p>
 
-<p class="header">2. Platform Radio Button created with given list of SelectItem objects.</p>
+<p>Platform Radio Button Created with given List of SelectItem Objects.</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'radio2'" zone="zLeft" rank="1">
-        <fdp-radio-group
-            [name]="'radio2'"
-            [list]="items"
-            [contentDensity]="'compact'"
-            [isInline]="true"
-            [(ngModel)]="favoriteOption2"
-        >
+        <fdp-radio-group [name]="'radio2'" [list]="items" [contentDensity]="'compact'" [isInline]="true"
+            [(ngModel)]="favoriteOption2">
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p class="result">Selelected value: {{ favoriteOption2 }}</p>
+<p style="margin-left: 2rem;">Selelected value: {{ favoriteOption2 }}</p>

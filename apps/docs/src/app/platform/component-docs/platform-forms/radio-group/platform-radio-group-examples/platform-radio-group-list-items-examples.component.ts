@@ -3,8 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-list-items-example',
-    templateUrl: './platform-radio-group-list-items-example.component.html',
-    styleUrls: ['platform-radio-group.component.scss']
+    templateUrl: './platform-radio-group-list-items-example.component.html'
 })
 export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
     favoriteOption: string = '';
@@ -42,7 +41,7 @@ export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
     ];
 
     ngDoCheck() {
-        this.form1.get('example1').setErrors({ invalid: true });
-        this.form1.get('example1').markAsTouched();
+        this.form1.controls.example1.setErrors({ invalid: true });
+        this.form1.controls.example1.markAsTouched();
     }
 }

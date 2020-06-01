@@ -3,8 +3,7 @@ import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-content-example',
-    templateUrl: './platform-radio-group-content-example.component.html',
-    styleUrls: ['platform-radio-group.component.scss']
+    templateUrl: './platform-radio-group-content-example.component.html'
 })
 export class PlatformRadioGroupContentExampleComponent implements DoCheck {
     favoriteSeason: string = '';
@@ -29,7 +28,7 @@ export class PlatformRadioGroupContentExampleComponent implements DoCheck {
     });
 
     ngDoCheck() {
-        this.form4.get('example4').setErrors({ invalid: true });
-        this.form4.get('example4').markAsTouched();
+        this.form4.controls.example4.setErrors({ invalid: true });
+        this.form4.controls.example4.markAsTouched();
     }
 }

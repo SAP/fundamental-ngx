@@ -38,4 +38,4 @@ import { PlatformCheckboxGroupModule } from './components/form/checkbox-group/ch
         PlatformInfoLabelModule
     ]
 })
-export class FundamentalNgxPlatformModule {}
+export class FundamentalNgxPlatformModule { }

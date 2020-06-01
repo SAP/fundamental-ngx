@@ -1,32 +1,31 @@
 <header>Radio Button Group</header>
 <description>
-    Radio button group is a component specially designed to work with
-    <a href="fundamental-ngx#/platform/form">platform form</a>, to create Platform Radio Buttons. Radio button group
-    creates multiple radio buttons and manages it as a single element. There is no need to explicitly associate a group
-    name for every radio button. <br />
-    Only one radio button can be selected at a time.
-    <div>
-        <h3 style="margin-bottom: 1rem;">Platform specific enhancements:</h3>
-        <ul style="margin-top: 0%;">
-            <li>
-                Radio button group is designed to work with platform form. It always requires an associated platform
-                form.
-            </li>
-            <li>Provides default grouping of radio buttons when created using Radio Button Group.</li>
-            <li>
-                Radio buttons can be created from the list of developer provided values (array of strings or list of
-                SelectItem objects).
-            </li>
-            <li>
-                Optionally, if internationalisation is required, radio button group can be created by passing individual
-                radio button elements and placing i18n directive to the radio button element's labels.
-            </li>
-            <li>Radio buttons can be placed in the required layout (default or inline).</li>
-        </ul>
-    </div>
+    Platform Radio Button group creates multiple radios by using list of values or by passing individual radios.
+    <a [routerLink]="'/core'">@fundamental-ngx/Core</a> does not have an implementation of radio group, instead requires
+    user to build group using individual radio components. Platform Radio Button Group handles all these radios together
+    and selection of only one radio is possible for a form field. It is implemented to work with Platform Form.
+    <br />
+    <br />
+    <import module="PlatformRadioGroupModule"></import>
+    <br />
+    <h3>Platform specific enhancements:</h3>
+    <ul>
+        <li>Radio group can create multiple radios by using list of string values.</li>
+        <li>
+            Multiple radios can be created using list of
+            <a
+                [routerLink]="'https://github.com/SAP/fundamental-ngx/blob/master/libs/platform/src/lib/domain/data-model.ts'">
+                SelectItem Objects
+            </a>.
+        </li>
+        <li>Radio group can be created by passing radios under radio group.</li>
+        <li>It is implemented to work with Platform Form.</li>
+        <li>Radio group creates Platform radios.</li>
+        <li>
+            Radio group can be created using list of Plain Objects (Entities) and specifying lookupKey and displayKey.
+        </li>
+    </ul>
 </description>
-
-<pre style="background-color: #e9e7e7;"><import module="PlatformRadioGroupModule, SelectItem"></import></pre>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

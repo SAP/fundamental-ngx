@@ -4,8 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-disabled-example',
-    templateUrl: './platform-radio-group-disabled-example.component.html',
-    styleUrls: ['platform-radio-group.component.scss']
+    templateUrl: './platform-radio-group-disabled-example.component.html'
 })
 export class PlatformRadioGroupDisabledExampleComponent {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
