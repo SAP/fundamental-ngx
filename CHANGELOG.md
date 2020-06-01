@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.1-rc.40"></a>
+## [0.18.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.39...v0.18.1-rc.40) (2020-06-01)
+
+
+### Bug Fixes
+
+* Create dynamic mobile view for Select component ([#2511](https://github.com/SAP/fundamental-ngx/issues/2511)) ([c2881e3](https://github.com/SAP/fundamental-ngx/commit/c2881e3))
+
+
+
 <a name="0.18.1-rc.39"></a>
 ## [0.18.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.38...v0.18.1-rc.39) (2020-05-31)
 
