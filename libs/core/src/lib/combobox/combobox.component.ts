@@ -164,13 +164,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     buttonFocusable: boolean = false;
 
-    /**
-     * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
-     * @hidden
-     */
-    @Input()
-    inShellbar: boolean = false;
-
     /** Whether the combobox is readonly. */
     @Input()
     readOnly: boolean = false;
@@ -205,6 +198,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** Whether the combobox is opened. */
     open: boolean = false;
+
+    /**
+     * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
+     * @hidden
+     */
+    inShellbar: boolean = false;
 
     /** @hidden */
     selectedTermSubject$: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -452,6 +451,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private _addShellbarClass(): void {
         if (this.inShellbar) {
             this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group__input');
+            if (this.inputGroup) {
+                this.inputGroup.setInShellbar(true);
+            }
         }
     }
 
