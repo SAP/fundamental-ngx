@@ -21,6 +21,10 @@ import { BaseComponent } from '../base';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SplitMenuButtonComponent extends BaseComponent implements OnInit, OnDestroy {
+    /** text for tooltip */
+    @Input()
+    title: string;
+
     /** Label for the first Button */
     @Input()
     buttonLabel: string;

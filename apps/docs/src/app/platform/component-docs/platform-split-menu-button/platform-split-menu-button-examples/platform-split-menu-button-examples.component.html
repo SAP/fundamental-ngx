@@ -7,7 +7,9 @@
         [buttonLabel]="label"
         [icon]="'world'"
         [type]="buttonType"
+        [title]="'default button with menu'"
         (primaryButtonClick)="onPrimaryButtonClickCozy()"
+        i18n
     >
     </fdp-split-menu-button>
 
@@ -67,6 +69,19 @@
 <br />
 <br />
 <p>Selected Item: {{ selectedCompactItem }}</p>
+
+<h3>Internationalisation support with i18n directive</h3>
+<fdp-split-menu-button
+    [id]="'split-menu-button4'"
+    [name]="'split-menu-button4'"
+    [menu]="basicMenuCompact"
+    [buttonLabel]="label"
+    [icon]="'world'"
+    [title]="'default button with menu'"
+    (primaryButtonClick)="onPrimaryButtonClickCompact()"
+    i18n
+>
+</fdp-split-menu-button>
 
 <fdp-menu #basicMenuCozy id="basic-menu">
     <fdp-menu-item (itemSelect)="onItemSelectCozy('First Item')">First Item</fdp-menu-item>
