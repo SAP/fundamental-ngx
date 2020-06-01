@@ -35,27 +35,26 @@
         </div>
         <div class="fd-tree__col fd-tree__col--actions">
             <ng-container *ngIf="displayTreeActions">
-                <fd-popover>
-                    <fd-popover-control>
-                        <button fd-button [fdType]="'transparent'" [glyph]="'vertical-grip'"></button>
-                    </fd-popover-control>
-                    <fd-popover-body>
-                        <fd-menu>
-                            <ul fd-menu-list>
-                                <li fd-menu-item (click)="editTreeItem(row)">
-                                    <div fd-menu-interactive>
-                                        <span fd-menu-title>Edit</span>
-                                    </div>
-                                </li>
-                                <li fd-menu-item (click)="deleteTreeItem(row)">
-                                    <div fd-menu-interactive>
-                                        <span fd-menu-title>Delete</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </fd-menu>
-                    </fd-popover-body>
-                </fd-popover>
+                <button fd-button
+                        fdType="transparent"
+                        glyph="vertical-grip"
+                        [fdMenuTrigger]="menu">
+                </button>
+
+                <fd-menu #menu="fdMenu">
+                    <ul fd-menu-list>
+                        <li fd-menu-item (click)="editTreeItem(row)">
+                            <div fd-menu-interactive>
+                                <span fd-menu-title>Edit</span>
+                            </div>
+                        </li>
+                        <li fd-menu-item (click)="deleteTreeItem(row)">
+                            <div fd-menu-interactive>
+                                <span fd-menu-title>Delete</span>
+                            </div>
+                        </li>
+                    </ul>
+                </fd-menu>
             </ng-container>
         </div>
     </div>

@@ -5,23 +5,29 @@
         </h2>
     </div>
     <div fd-tile-actions>
-        <fd-popover>
-            <fd-popover-control>
-                <button fd-button [fdType]="'transparent'" [glyph]="'vertical-grip'"></button>
-            </fd-popover-control>
-            <fd-popover-body>
-                <ul fd-list>
-                    <li fd-list-item>
-                        <span fd-list-title>Option 1</span>
-                    </li>
-                    <li fd-list-item>
-                        <span fd-list-title>Option 2</span>
-                    </li>
-                    <li fd-list-item>
-                        <span fd-list-title>Option 3</span>
-                    </li>
-                </ul>
-            </fd-popover-body>
-        </fd-popover>
+        <button fd-button
+                fdType="transparent"
+                glyph="vertical-grip"
+                [fdMenuTrigger]="menu">
+        </button>
+        <fd-menu #menu="fdMenu">
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Option 1</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Option 2</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Option 3</span>
+                    </div>
+                </li>
+            </ul>
+        </fd-menu>
     </div>
 </fd-tile>

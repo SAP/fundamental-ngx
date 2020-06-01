@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MenuComponent } from './menu.component';
 import { MenuTitleDirective } from './directives/menu-title.directive';
-import { MenuLinkDirective } from './directives/menu-link.directive';
+import { MenuInteractiveDirective } from './directives/menu-interactive.directive';
 import { MenuSeparatorComponent } from './menu-separator/menu-separator.component';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent } from './menu-item/menu-item.component';
@@ -20,7 +20,7 @@ import { MenuTriggerDirective } from './directives/menu-trigger.directive';
         MenuAddonDirective,
         MenuSeparatorComponent,
         MenuShortcutDirective,
-        MenuLinkDirective,
+        MenuInteractiveDirective,
         MenuTitleDirective,
         SubMenuComponent,
         MenuTriggerDirective
@@ -31,7 +31,7 @@ import { MenuTriggerDirective } from './directives/menu-trigger.directive';
         SubMenuComponent,
         MenuSeparatorComponent,
         MenuShortcutDirective,
-        MenuLinkDirective,
+        MenuInteractiveDirective,
         MenuTitleDirective,
         MenuAddonDirective,
         MenuTriggerDirective

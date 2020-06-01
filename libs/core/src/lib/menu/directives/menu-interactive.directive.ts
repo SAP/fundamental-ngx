@@ -7,7 +7,7 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
         role: 'menuitem'
     }
 })
-export class MenuLinkDirective {
+export class MenuInteractiveDirective {
 
     /** Mark as disabled */
     @HostBinding('attr.tabindex')

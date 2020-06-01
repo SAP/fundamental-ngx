@@ -2,47 +2,44 @@
     <div fd-action-bar-header>
         <h3 fd-action-bar-title>Page Title</h3>
         <div fd-action-bar-actions>
-            <fd-popover placement="bottom-end" [noArrow]="false">
-                <fd-popover-control>
-                    <button
-                        fd-button
-                        aria-label="More"
-                        aria-haspopup="true"
-                        [compact]="true"
-                        [fdType]="'transparent'"
-                        [glyph]="'overflow'"
-                    ></button>
-                </fd-popover-control>
-                <fd-popover-body>
-                    <fd-menu>
-                        <li fd-menu-item>
-                            <div fd-menu-interactive>
-                                <span fd-menu-title>Edit</span>
-                            </div>
-                        </li>
-                        <li fd-menu-item>
-                            <div fd-menu-interactive>
-                                <span fd-menu-title>Delete</span>
-                            </div>
-                        </li>
-                        <li fd-menu-item>
-                            <div fd-menu-interactive>
-                                <span fd-menu-title>Assign</span>
-                            </div>
-                        </li>
-                        <li fd-menu-item>
-                            <div fd-menu-interactive>
-                                <span fd-menu-title>Expire</span>
-                            </div>
-                        </li>
-                        <li fd-menu-item>
-                            <div fd-menu-interactive>
-                                <span fd-menu-title>Archive</span>
-                            </div>
-                        </li>
-                    </fd-menu>
-                </fd-popover-body>
-            </fd-popover>
+
+            <button
+                fd-button
+                aria-label="More"
+                aria-haspopup="true"
+                glyph="overflow"
+                fdType="transparent"
+                [fdMenuTrigger]="menu"
+                [compact]="true"
+            ></button>
+
+            <fd-menu #menu="fdMenu" placement="bottom-end" [compact]="true">
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Edit</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Delete</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Assign</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Expire</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Archive</span>
+                    </div>
+                </li>
+            </fd-menu>
         </div>
     </div>
 </div>

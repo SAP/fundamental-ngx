@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
-import { MenuLinkDirective } from '../directives/menu-link.directive';
+import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { SubMenuComponent } from '../../..';
 import { MenuService } from '../services/menu.service';
 import { defer, fromEvent, Subscription, timer } from 'rxjs';
@@ -55,8 +55,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     menuItemTitle: MenuTitleDirective;
 
     /** @hidden Reference to the Menu Item interactive element */
-    @ContentChild(MenuLinkDirective)
-    menuLink: MenuLinkDirective;
+    @ContentChild(MenuInteractiveDirective)
+    menuInteractive: MenuInteractiveDirective;
 
     /** @hidden Whether sub-menu is currently visible*/
     subMenuVisible: boolean = false;
@@ -86,10 +86,10 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
         if (changes['disabled'] && !changes['disabled'].firstChange) {
-            this.menuLink.setDisabled(this.disabled);
+            this.menuInteractive.setDisabled(this.disabled);
         }
         if (changes['subMenu'] && !changes['subMenu'].firstChange) {
-            this.menuLink.setSubmenu(!!this.subMenu, this.subMenu ? this.itemId : null);
+            this.menuInteractive.setSubmenu(!!this.subMenu, this.subMenu ? this.itemId : null);
         }
     }
 
@@ -106,43 +106,43 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Focuses Menu Item interactive element */
     focus(): void {
-        if (this.menuLink) {
-            this.menuLink.elementRef.nativeElement.focus();
+        if (this.menuInteractive) {
+            this.menuInteractive.elementRef.nativeElement.focus();
         }
     }
 
     /** Clicks Menu Item interactive element */
     click(): void {
-        if (this.menuLink) {
-            this.menuLink.elementRef.nativeElement.click();
+        if (this.menuInteractive) {
+            this.menuInteractive.elementRef.nativeElement.click();
             this._changeDetectorRef.markForCheck();
         }
     }
 
     /** @hidden Opens submenu level */
     open(): void {
-        this.menuLink.setSelected(true);
+        this.menuInteractive.setSelected(true);
         this.subMenuVisible = true;
         this._changeDetectorRef.markForCheck();
     }
 
     /** @hidden Closes submenu level */
     close(): void {
-        this.menuLink.setSelected(false);
+        this.menuInteractive.setSelected(false);
         this.subMenuVisible = false;
         this._changeDetectorRef.markForCheck();
     }
 
     /** @hidden Sets menu item as selected/unselected based on isSelected flag */
     setSelected(isSelected: boolean): void {
-        this.menuLink.setSelected(isSelected);
+        this.menuInteractive.setSelected(isSelected);
         this._changeDetectorRef.markForCheck();
     }
 
     /** @hidden Creates click listener on menu item interactive element */
     private _listenOnMenuLinkClick(): void {
         this._subscriptions.add(
-            fromEvent(this.menuLink.elementRef.nativeElement, 'click')
+            fromEvent(this.menuInteractive.elementRef.nativeElement, 'click')
                 .subscribe(() => this.menuService.setActive(true, this))
         )
     }
@@ -151,8 +151,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     private _listenOnMenuLinkHover(): Subscription {
         const hoverSubscriptions: Subscription = new Subscription();
 
-        const mouseEnter$ = fromEvent(this.menuLink.elementRef.nativeElement, 'mouseenter');
-        const mouseLeave$ = fromEvent(this.menuLink.elementRef.nativeElement, 'mouseleave');
+        const mouseEnter$ = fromEvent(this.menuInteractive.elementRef.nativeElement, 'mouseenter');
+        const mouseLeave$ = fromEvent(this.menuInteractive.elementRef.nativeElement, 'mouseleave');
 
         // Set focus on hover
         hoverSubscriptions.add(
@@ -178,8 +178,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden Initializes menu link state based on item initial state */
     private _initialiseItemState(): void {
-        this.menuLink.setSubmenu(!!this.subMenu, this.subMenu ? this.itemId : null);
-        this.menuLink.setDisabled(this.disabled);
+        this.menuInteractive.setSubmenu(!!this.subMenu, this.subMenu ? this.itemId : null);
+        this.menuInteractive.setDisabled(this.disabled);
     }
 
     /** @hidden Checks for Menu Service dependency and passes it if further */
@@ -203,7 +203,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     /** @hidden Updates focused menu item on outer focus */
     private _listenOnOuterFocus(): void {
         this._subscriptions.add(
-            fromEvent(this.menuLink.elementRef.nativeElement, 'focus').pipe(
+            fromEvent(this.menuInteractive.elementRef.nativeElement, 'focus').pipe(
                 filter(() => this.menuService.focusedNode !== this.menuService.menuMap.get(this))
             ).subscribe(() => this.menuService.setFocused(this))
         )
