@@ -1,34 +1,26 @@
 <ng-template [ngIf]="items?.length > 0" [ngIfElse]="subHeader">
-    <fd-popover
-        [disabled]="!items || items.length === 0 || disabled"
-        [closeOnEscapeKey]="closeOnEscapeKey"
-        [closeOnOutsideClick]="closeOnOutsideClick"
-        [(isOpen)]="isOpen"
-        (isOpenChange)="openChanged($event)"
-        [isDropdown]="isDropdown"
-        [triggers]="triggers"
-        [focusTrapped]="false"
-        [placement]="'bottom-end'"
-    >
-        <fd-popover-control>
-            <button class="fd-button fd-button--transparent fd-button--menu fd-shellbar__button--menu">
-                <span class="fd-shellbar__title">
-                    {{ control }}
-                </span>
-            </button>
-        </fd-popover-control>
-        <fd-popover-body>
-            <fd-menu *ngIf="!menuComponent" [standalone]="true">
-                <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item>
-                    <a [attr.href]="item.link ? item.link : null" fd-menu-interactive>
-                        <span fd-menu-title>{{ item.name }}</span>
-                        <fd-icon *ngIf="item.glyph" fd-menu-addon position="after" [glyph]="item.glyph"></fd-icon>
-                    </a>
-                </li>
-            </fd-menu>
-            <ng-content select="fd-menu"></ng-content>
-        </fd-popover-body>
-    </fd-popover>
+
+    <button fd-button
+            fdMenu="true"
+            fdType="transparent"
+            class="fd-shellbar__button--menu"
+            [disabled]="disabled"
+            [fdMenuTrigger]="menu">
+        <span class="fd-shellbar__title">{{ control }}</span>
+    </button>
+
+    <fd-menu #menu="fdMenu"
+             placement="bottom-end"
+             [triggers]="triggers"
+             [closeOnEscapeKey]="closeOnEscapeKey"
+             [closeOnOutsideClick]="closeOnOutsideClick">
+        <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item>
+            <a [attr.href]="item.link ? item.link : null" fd-menu-interactive>
+                <span fd-menu-title>{{ item.name }}</span>
+                <fd-icon *ngIf="item.glyph" fd-menu-addon position="after" [glyph]="item.glyph"></fd-icon>
+            </a>
+        </li>
+    </fd-menu>
 </ng-template>
 
 <ng-template #subHeader>

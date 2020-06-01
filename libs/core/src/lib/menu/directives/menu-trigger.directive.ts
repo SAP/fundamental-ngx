@@ -16,12 +16,6 @@ export class MenuTriggerDirective {
     /** @hidden */
     private _menu: MenuComponent;
 
-    /** Toggles the Menu when interacted with */
-    @HostListener('click')
-    handleInteraction() {
-        this._menu.toggle();
-    }
-
     /** @hidden */
     constructor(private _elementRef: ElementRef) { }
 }

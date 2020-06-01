@@ -51,12 +51,12 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
     @Input()
     items: ShellbarMenuItem[];
 
-    /** @hidden */
-    productMenuCollapsed: boolean = false;
-
     /** When set to true, popover list will be closed after selecting the option */
     @Input()
     closePopoverOnSelect: boolean = false;
+
+    /** @hidden */
+    productMenuCollapsed: boolean = false;
 
     /** @hidden */
     @HostListener('window:resize', [])
@@ -70,21 +70,17 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
         this.onResize();
     }
 
-    /**
-     * @hidden
-     */
+    /** @hidden */
     itemClicked(item: any, event: any): void {
         if (this.closePopoverOnSelect) {
-            this.popoverComponent.close();
+            this.menuComponent.close();
         }
         if (item.callback) {
             item.callback(event);
         }
     }
 
-    /**
-     * @hidden
-     */
+    /** @hidden */
     isAnyGlyphInItems(): boolean {
         if (!this.items || this.items.length === 0) {
             return false;

@@ -15,6 +15,7 @@ import {
     Optional,
     Output,
     QueryList,
+    Renderer2,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
@@ -77,6 +78,11 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     @Input()
     fillControlMode: PopoverFillMode;
 
+    /** The trigger events that will open/close the popover.
+     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    @Input()
+    triggers: string[] = ['click'];
+
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
     closeOnOutsideClick: boolean = true;
@@ -131,17 +137,21 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     /** @hidden Whether Popover with the menu is opened */
     isOpen: boolean = false;
 
+    /** @hidden */
+    private _eventRef: Function[] = [];
+
     /** @hidden Reference to external menu trigger */
-    trigger: ElementRef;
+    private _externalTrigger: ElementRef;
 
     /** @hidden */
-    subscriptions: Subscription = new Subscription();
+    private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
     constructor(public elementRef: ElementRef,
                 @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
+                private _rendered: Renderer2,
                 private _menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
                 private _componentFactoryResolver: ComponentFactoryResolver,
@@ -164,7 +174,17 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     ngOnDestroy() {
         this._destroyMobileComponent();
         this._menuService.onDestroy();
-        this.subscriptions.unsubscribe();
+        this._eventRef.forEach(ref => ref());
+        this._subscriptions.unsubscribe();
+    }
+
+    get trigger(): ElementRef {
+        return this._externalTrigger;
+    }
+
+    set trigger(trigger: ElementRef) {
+        this._externalTrigger = trigger;
+        this.listenOnTriggerEvents();
     }
 
     /** Opens the menu */
@@ -197,6 +217,16 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     /** @hidden Toggles menu open/close state */
     handlePopoverOpenChange(isOpen: boolean): void {
         isOpen ? this.open() : this.close();
+    }
+
+    listenOnTriggerEvents(): void {
+        if (Array.isArray(this.triggers)) {
+            this.triggers.forEach(trigger => {
+                this._eventRef.push(this._rendered.listen(this.trigger.nativeElement, trigger, () => {
+                    this.toggle();
+                }));
+            });
+        }
     }
 
     /** @hidden Select and instantiate menu view mode */
@@ -248,14 +278,14 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
 
     /** @hidden Listen on menu items change and rebuild menu */
     private _listenOnMenuItemsChange(): void {
-        this.subscriptions.add(
+        this._subscriptions.add(
             this.menuItems.changes.subscribe(() => this._menuService.rebuildMenu())
         );
     }
 
     /** @hidden Listen on menu mode */
     private _listenOnMenuMode() {
-        this.subscriptions.add(
+        this._subscriptions.add(
             this._menuService.isMobileMode.subscribe(isMobile => {
                 if (this.isOpen) {
                     this.close();
