@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ContentChildren, Input, QueryList, TemplateRef, ViewChild } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuService } from '../services/menu.service';
 
@@ -12,6 +12,15 @@ import { MenuService } from '../services/menu.service';
     exportAs: 'fdSubmenu'
 })
 export class SubmenuComponent {
+
+    /** Aria-label for navigation */
+    @Input()
+    ariaLabel: string = null;
+
+    /** Aria-Labelledby for element describing navigation */
+    @Input()
+    ariaLabelledby: string = null;
+
     /** @hidden Reference to template with Submenu items  */
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 

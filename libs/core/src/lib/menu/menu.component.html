@@ -2,6 +2,8 @@
 
 <ng-template #menuRootTemplate>
     <nav class="fd-menu"
+         [attr.aria-labelledby]="ariaLabelledby"
+         [attr.aria-label]="ariaLabel"
          [ngClass]="{
             'fd-menu--compact': compact,
             'fd-menu--mobile': mobile

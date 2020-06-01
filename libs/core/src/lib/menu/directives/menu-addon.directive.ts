@@ -16,6 +16,11 @@ export class MenuAddonDirective {
     @HostBinding('class.fd-menu__addon-after--submenu')
     submenuIndicator: boolean = false;
 
+    /** Whether is used as submenu indicator */
+    @Input()
+    @HostBinding('attr.aria-hidden')
+    ariaHidden: boolean = true;
+
     /** @hidden */
     @HostBinding('class.fd-menu__addon-after')
     fdAddonAfterClass: boolean = true;

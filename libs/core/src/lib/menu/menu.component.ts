@@ -103,6 +103,14 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
 
+    /** Aria-label for navigation */
+    @Input()
+    ariaLabel: string = null;
+
+    /** Aria-Labelledby for element describing navigation */
+    @Input()
+    ariaLabelledby: string = null;
+
     /** Emits array of active menu items */
     @Output()
     readonly activePath: EventEmitter<MenuItemComponent[]> = new EventEmitter<MenuItemComponent[]>();
