@@ -101,10 +101,6 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
 
     /** Display menu without integrated popover */
     @Input()
-    standalone: boolean = false;
-
-    /** Display menu without integrated popover */
-    @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
 
     /** Emits array of active menu items */
@@ -219,6 +215,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
         isOpen ? this.open() : this.close();
     }
 
+    /** @hidden Sets listeners based on triggers array */
     listenOnTriggerEvents(): void {
         if (Array.isArray(this.triggers)) {
             this.triggers.forEach(trigger => {
@@ -233,8 +230,6 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     private _setupView(): void {
         if (this.mobile) {
             this._setupMobileMode();
-        } else if (this.standalone) {
-            this._loadView(this.menuRootTemplate);
         } else {
             this._loadView(this.menuWithPopover);
         }
@@ -247,15 +242,6 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
             this._menuService.addKeyboardSupport();
         } else {
             this._menuService.removeKeyboardSupport();
-        }
-    }
-
-    /** @hidden */
-    private _manageOutsideCLickListener(shouldCloseOnOutsideClick?: boolean) {
-        if (shouldCloseOnOutsideClick && this.closeOnOutsideClick) {
-            this._menuService.addOutsideClickListener();
-        } else {
-            this._menuService.removeOutsideClickListener();
         }
     }
 
@@ -294,7 +280,6 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
                 this._destroyMobileComponent();
                 this._setupView();
                 this._manageKeyboardSupport(!isMobile);
-                this._manageOutsideCLickListener(!isMobile && this.standalone);
             })
         )
     }

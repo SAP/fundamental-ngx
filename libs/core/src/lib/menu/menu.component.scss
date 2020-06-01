@@ -3,3 +3,9 @@
 :host {
     display: inline;
 }
+
+fd-menu {
+    .fd-popover__popper {
+        box-shadow: none;
+    }
+}
