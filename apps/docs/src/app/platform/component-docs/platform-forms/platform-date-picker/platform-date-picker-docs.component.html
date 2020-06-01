@@ -1,0 +1,62 @@
+<fd-docs-section-title [id]="'def'" [componentName]="'DatePicker'">
+    Simple Date Picker and Range Date Picker in Platform Form.
+</fd-docs-section-title>
+
+<description>
+    Simple Date Picker and Range Date Picker. Value of Date Picker can be initialized by passing data using object
+    property in fdp-form-group. <br />
+    Value passed should be of type <code>FdDate</code> in case of simple date picker and in case of Range date picker it
+    should be of type <code>FdDateRange</code>.
+</description>
+<component-example>
+    <fdp-platform-date-picker-example></fdp-platform-date-picker-example>
+</component-example>
+<code-example [exampleFiles]="datePickerExample"></code-example>
+
+<separator></separator>
+
+<description>
+    <h3>Disabled Function of Platform Date Picker.</h3>
+    Part of Calendar can be disabled as per requirements. This can be controlled by passing disableFunction for simple
+    date picker and passing disableRangeStartFunction and disableRangeEndFunction for range date picker. It will pass
+    function reference which will be able to restrict calendar visibility.
+</description>
+<component-example>
+    <fdp-date-picker-disablefn></fdp-date-picker-disablefn>
+</component-example>
+<code-example [exampleFiles]="datePickerDisableFunction"></code-example>
+
+<separator></separator>
+<description>
+    <h3>Placement of Calendar From Date Picker.</h3>
+    Available values for placing Calendar is top, top-start, top-end, bottom, bottom-start, bottom-end, right,
+    right-start, right-end, left, left-start, left-end.
+</description>
+<component-example>
+    <fdp-date-picker-placement></fdp-date-picker-placement>
+</component-example>
+<code-example [exampleFiles]="datePickerPlacement"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'def'" [componentName]="'DatePicker'">
+    Internationalization
+</fd-docs-section-title>
+<description>
+    It is possible to internationalize both the aria labels and the month names/weekdays through providing a service.<br />
+    Same behaviour of core Example is replicated here using platform Date Picker.
+</description>
+<component-example>
+    <fdp-datepicker-i18n-example></fdp-datepicker-i18n-example>
+</component-example>
+<code-example [exampleFiles]="datePickerIntExample"></code-example>
+
+<separator></separator>
+<description>
+    <h3>Complex i18n Example.</h3>
+    To change format or locale options in DatePicker component, we need to set [format] and [locale] properties value.
+</description>
+<component-example>
+    <fdp-date-picker-complex-i18n-example></fdp-date-picker-complex-i18n-example>
+</component-example>
+<code-example [exampleFiles]="datePickeri18nExample"></code-example>

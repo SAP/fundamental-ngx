@@ -1,0 +1,93 @@
+<fdp-form-group #ffg [formGroup]="datePickerForm" [object]="data" (onSubmit)="save(ffg)" [multiLayout]="true">
+    <fdp-form-field
+        #ffl1
+        [id]="'birthday'"
+        zone="zLeft"
+        rank="1"
+        [required]="true"
+        [placeholder]="'Enter your birthday'"
+        [label]="'Birth Date:'"
+    >
+        <fdp-date-picker
+            [name]="'birthday'"
+            [type]="'single'"
+            [format]="'dd/MM/yyyy'"
+            [allowNull]="false"
+            [formControl]="ffl1.formControl"
+        >
+            Birthday:
+        </fdp-date-picker>
+    </fdp-form-field>
+
+    <fdp-form-field #ffl2 [id]="'examdate'" zone="zRight" rank="1" [required]="true" [label]="'Exam Date:'">
+        <fdp-date-picker
+            [name]="'examdate'"
+            [type]="'single'"
+            [format]="'MM/dd/yyyy'"
+            [allowNull]="false"
+            [placeholder]="'Enter your Exam dates'"
+            [formControl]="ffl2.formControl"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+
+    <fdp-form-field #ffl3 [id]="'holiday'" zone="zLeft" rank="2" [required]="true" [label]="'Holiday:'">
+        <fdp-date-picker
+            [name]="'holiday'"
+            [type]="'range'"
+            [format]="'MM/dd/yyyy'"
+            [allowNull]="false"
+            [contentDensity]="'compact'"
+            [placeholder]="'When are you going to holiday?'"
+            [formControl]="ffl3.formControl"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+
+    <fdp-form-field #ffl4 [id]="'journeydate'" zone="zRight" rank="3" [required]="true" [label]="'Journey Date:'">
+        <fdp-date-picker
+            [name]="'journeydate'"
+            [type]="'range'"
+            [format]="'MM/dd/yyyy'"
+            [allowNull]="false"
+            [contentDensity]="'compact'"
+            [placeholder]="'When are you travelling?'"
+            [formControl]="ffl4.formControl"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+    <fdp-form-field
+        #ffl5
+        [id]="'disableddate'"
+        zone="zLeft"
+        rank="4"
+        [required]="true"
+        [label]="'Disabled Date Picker:'"
+        [disabled]="true"
+    >
+        <fdp-date-picker
+            [name]="'disableddate'"
+            [type]="'single'"
+            [format]="'dd/MM/yyyy'"
+            [allowNull]="false"
+            [placeholder]="'This is a disabled date picker'"
+            [formControl]="ffl5.formControl"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span>Value is required</span>
+        </ng-container>
+    </ng-template>
+</fdp-form-group>
+
+<p>Birthday: {{ datePickerForm.get('birthday').value?.toDateString() }}</p>
+<span>Exam Date: {{ datePickerForm.get('examdate').value?.toDateString() }}</span>
+
+<p>Holiday Start Date: {{ datePickerForm.get('holiday').value?.start?.toDateString() }}</p>
+<span>Holiday End Date: {{ datePickerForm.get('holiday').value?.end?.toDateString() }}</span>
+
+<p>Journey Start Date: {{ datePickerForm.get('journeydate').value?.start?.toDateString() }}</p>
+<span>Journey End Date: {{ datePickerForm.get('journeydate').value?.end?.toDateString() }}</span>

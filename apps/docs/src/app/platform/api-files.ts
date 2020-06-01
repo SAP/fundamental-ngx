@@ -19,6 +19,7 @@ export const API_FILES = {
     ],
     infoLabel: ['InfoLabelComponent'],
     input: ['InputComponent'],
+    datePicker: ['DatePickerComponent'],
     link: ['LinkComponent'],
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
     menuButton: ['MenuButtonComponent'],
