@@ -133,16 +133,16 @@ export const API_FILES = {
     ],
     objectStatus: ['ObjectStatusModule', 'ObjectStatusComponent'],
     pagination: ['PaginationComponent', 'PaginationModel', 'PaginationService'],
-    panel: [
-        'PanelComponent',
-        'PanelActionsComponent',
-        'PanelBodyComponent',
-        'PanelDescriptionComponent',
-        'PanelFiltersComponent',
-        'PanelFooterComponent',
-        'PanelHeaderComponent',
-        'PanelHeadComponent',
-        'PanelTitleDirective'
+    layoutPanel: [
+        'LayoutPanelComponent',
+        'LayoutPanelActionsComponent',
+        'LayoutPanelBodyComponent',
+        'LayoutPanelDescriptionComponent',
+        'LayoutPanelFiltersComponent',
+        'LayoutPanelFooterComponent',
+        'LayoutPanelHeaderComponent',
+        'LayoutPanelHeadComponent',
+        'LayoutPanelTitleDirective'
     ],
     popover: [
         'PopoverComponent',

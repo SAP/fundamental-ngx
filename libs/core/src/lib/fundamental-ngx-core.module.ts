@@ -28,7 +28,7 @@ import { DialogService } from './dialog/dialog-service/dialog.service';
 import { MessageStripModule } from './message-strip/message-strip.module';
 import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
-import { PanelModule } from './panel/panel.module';
+import { LayoutPanelModule } from './layout-panel/layout-panel.module';
 import { PopoverModule } from './popover/popover.module';
 import { ScrollSpyModule } from './scroll-spy/scroll-spy.module';
 import { ShellbarModule } from './shellbar/shellbar.module';
@@ -103,7 +103,7 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
         NotificationModule,
         ObjectStatusModule,
         PaginationModule,
-        PanelModule,
+        LayoutPanelModule,
         ProductSwitchModule,
         PopoverModule,
         RadioModule,
@@ -124,4 +124,4 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
     ],
     providers: [AlertService, DialogService, NotificationService]
 })
-export class FundamentalNgxCoreModule {}
+export class FundamentalNgxCoreModule { }

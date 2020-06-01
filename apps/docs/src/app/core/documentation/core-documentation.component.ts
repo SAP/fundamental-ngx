@@ -69,7 +69,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.layouts = [
-            { url: 'core/panel', name: 'Panel' },
+            { url: 'core/layoutPanel', name: 'Layout Panel' },
             { url: 'core/layoutGrid', name: 'Layout Grid' }
         ];
 

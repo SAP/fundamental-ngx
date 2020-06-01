@@ -200,8 +200,8 @@ export const ROUTES: Routes = [
                     import('./component-docs/pagination/pagination-docs.module').then((m) => m.PaginationDocsModule)
             },
             {
-                path: 'panel',
-                loadChildren: () => import('./component-docs/panel/panel-docs.module').then((m) => m.PanelDocsModule)
+                path: 'layoutPanel',
+                loadChildren: () => import('./component-docs/layout-panel/layout-panel-docs.module').then((m) => m.LayoutPanelDocsModule)
             },
             {
                 path: 'popover',
