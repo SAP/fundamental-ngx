@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.0"></a>
+# [0.19.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.41...v0.19.0-rc.0) (2020-06-02)
+
+
+### Features
+
+* Side Navigation styles markup adaptation ([#2490](https://github.com/SAP/fundamental-ngx/issues/2490)) ([ecd6c25](https://github.com/SAP/fundamental-ngx/commit/ecd6c25))
+
+
+
 <a name="0.18.1-rc.41"></a>
 ## [0.18.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.40...v0.18.1-rc.41) (2020-06-02)
 
