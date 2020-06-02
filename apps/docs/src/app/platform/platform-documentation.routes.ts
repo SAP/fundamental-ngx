@@ -3,6 +3,8 @@ import { PlatformDocumentationComponent } from './documentation/platform-documen
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 
+import { PlatformListHeaderComponent } from './component-docs/platform-list/platform-list-header/platform-list-header.component';
+import { PlatformListDocsComponent } from './component-docs/platform-list/platform-list-docs.component';
 export const ROUTES: Routes = [
     {
         path: '',

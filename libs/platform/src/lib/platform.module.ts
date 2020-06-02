@@ -41,7 +41,6 @@ import { PlatformComboboxModule } from './components/form/combobox';
         PlatformSplitMenuButtonModule,
         PlatformInfoLabelModule,
         PlatformTextAreaModule,
-        PlatformInfoLabelModule,
         PlatformPanelModule,
         PlatformSwitchModule,
         PlatformTextAreaModule,
@@ -53,4 +52,4 @@ import { PlatformComboboxModule } from './components/form/combobox';
         PlatformComboboxMobileModule
     ]
 })
-export class FundamentalNgxPlatformModule {}
+export class FundamentalNgxPlatformModule { }

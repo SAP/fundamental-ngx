@@ -1,0 +1,4 @@
+<li fd-list-item *ngFor="let item of '+ items +'; index as i; trackBy: trackByFn">
+    <span fd-list-title [attr.id]=' i+ item.title' [attr.href]="href" [attr.target]="target" [attr.title]="title"
+        [attr.aria-label]="item.title">{{item.title}}</span>
+</li>
