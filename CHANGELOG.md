@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.18.1-rc.41"></a>
+## [0.18.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.40...v0.18.1-rc.41) (2020-06-02)
+
+
+### Bug Fixes
+
+* Platform wrapper component for info Label  with document changes ([#2486](https://github.com/SAP/fundamental-ngx/issues/2486)) ([de981b0](https://github.com/SAP/fundamental-ngx/commit/de981b0))
+
+
+
 <a name="0.18.1-rc.40"></a>
 ## [0.18.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.39...v0.18.1-rc.40) (2020-06-01)
 
