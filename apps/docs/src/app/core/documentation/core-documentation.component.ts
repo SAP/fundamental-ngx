@@ -50,6 +50,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/notification', name: 'Notification' },
             { url: 'core/object-status', name: 'Object Status' },
             { url: 'core/pagination', name: 'Pagination' },
+            { url: 'core/panel', name: 'Panel' },
             { url: 'core/popover', name: 'Popover' },
             { url: 'core/product-switch', name: 'Product Switch' },
             { url: 'core/radio', name: 'Radio Button' },

@@ -58,6 +58,17 @@ export const API_FILES = {
     inlineHelp: ['InlineHelpComponent'],
     inputGroup: ['InputGroupComponent', 'InputGroupNumberComponent'],
     layoutGrid: ['LayoutGridComponent', 'LayoutGridSpanDirective'],
+    layoutPanel: [
+        'LayoutPanelComponent',
+        'LayoutPanelActionsComponent',
+        'LayoutPanelBodyComponent',
+        'LayoutPanelDescriptionComponent',
+        'LayoutPanelFiltersComponent',
+        'LayoutPanelFooterComponent',
+        'LayoutPanelHeaderComponent',
+        'LayoutPanelHeadComponent',
+        'LayoutPanelTitleDirective'
+    ],
     link: ['LinkComponent'],
     list: [
         'ListComponent',
@@ -133,16 +144,9 @@ export const API_FILES = {
     ],
     objectStatus: ['ObjectStatusModule', 'ObjectStatusComponent'],
     pagination: ['PaginationComponent', 'PaginationModel', 'PaginationService'],
-    layoutPanel: [
-        'LayoutPanelComponent',
-        'LayoutPanelActionsComponent',
-        'LayoutPanelBodyComponent',
-        'LayoutPanelDescriptionComponent',
-        'LayoutPanelFiltersComponent',
-        'LayoutPanelFooterComponent',
-        'LayoutPanelHeaderComponent',
-        'LayoutPanelHeadComponent',
-        'LayoutPanelTitleDirective'
+    panel: [
+        'PanelComponent',
+        'PanelTitleDirective'
     ],
     popover: [
         'PopoverComponent',
