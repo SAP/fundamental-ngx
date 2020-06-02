@@ -1,26 +1,17 @@
-<fd-split-button
-    (primaryButtonClicked)="primaryButtonClicked()"
-    [(isOpen)]="isOpen"
-    [focusTrapped]="false"
-    [triggers]="['']"
-    [closeOnOutsideClick]="false"
-    [mainActionTitle]="'Action Button'"
->
-    <div fd-split-button-menu>
-        <fd-menu>
-            <li fd-menu-item (click)="itemClicked()">
-                <div fd-menu-interactive>
-                    <span fd-menu-title>Option 1</span>
-                </div>
-            </li>
-            <li fd-menu-item (click)="itemClicked()">
-                <div fd-menu-interactive>
-                    <span fd-menu-title>Option 2</span>
-                </div>
-            </li>
-        </fd-menu>
-    </div>
+<fd-split-button mainActionTitle="Action Button" [disabled]="true">
+    <fd-menu #menu [closeOnOutsideClick]="false">
+        <li fd-menu-item>
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item>
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2</span>
+            </div>
+        </li>
+    </fd-menu>
 </fd-split-button>
 
-<button class="docs-button" fd-button (click)="isOpen = true">Open</button>
-<button class="docs-button" fd-button (click)="isOpen = false">Close</button>
+<button class="docs-button" fd-button (click)="menu.open()">Open</button>
+<button class="docs-button" fd-button (click)="menu.close()">Close</button>

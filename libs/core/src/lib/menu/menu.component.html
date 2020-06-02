@@ -2,6 +2,7 @@
 
 <ng-template #menuRootTemplate>
     <nav class="fd-menu"
+         [id]="id"
          [attr.aria-labelledby]="ariaLabelledby"
          [attr.aria-label]="ariaLabel"
          [ngClass]="{
@@ -20,6 +21,7 @@
          [triggers]="[]"
          [isOpen]="isOpen"
          [options]="options"
+         [disabled]="disabled"
          [placement]="placement"
          [popoverTrigger]="trigger"
          [appendTo]="popoverContainer"

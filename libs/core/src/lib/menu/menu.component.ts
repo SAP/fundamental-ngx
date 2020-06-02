@@ -31,6 +31,8 @@ import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { Placement, PopperOptions } from 'popper.js';
 
+let menuUniqueId: number = 0;
+
 /**
  * The component that represents a menu.
  */
@@ -78,7 +80,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
      * * Leave blank for no effect.
      */
     @Input()
-    fillControlMode: PopoverFillMode;
+    fillControlMode: PopoverFillMode = 'at-least';
 
     /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
@@ -88,6 +90,10 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
     closeOnOutsideClick: boolean = true;
+
+    /** Whether the popover is disabled. */
+    @Input()
+    disabled: boolean = false;
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
@@ -112,6 +118,10 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     /** Aria-Labelledby for element describing navigation */
     @Input()
     ariaLabelledby: string = null;
+
+    /** Id of the control. */
+    @Input()
+    id: string = `fd-menu-${menuUniqueId++}`;
 
     /** Emits array of active menu items */
     @Output()

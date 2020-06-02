@@ -12,11 +12,4 @@ import { Component } from '@angular/core';
     ]
 })
 export class ButtonSplitTemplateExampleComponent {
-    itemClicked() {
-        alert('Item Clicked!');
-    }
-
-    primaryButtonClicked() {
-        alert('Primary Button Clicked!');
-    }
 }
