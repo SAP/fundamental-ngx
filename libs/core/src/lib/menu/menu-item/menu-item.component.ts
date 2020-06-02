@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    ContentChildren,
     ElementRef,
     EventEmitter,
     Input,
@@ -11,12 +12,14 @@ import {
     OnDestroy,
     Optional,
     Output,
-    SimpleChanges
+    QueryList,
+    SimpleChanges,
+    TemplateRef,
+    ViewChild
 } from '@angular/core';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
-import { SubmenuComponent } from '../submenu/submenu.component';
 import { MenuService } from '../services/menu.service';
 import { defer, fromEvent, Subscription, timer } from 'rxjs';
 import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
@@ -208,4 +211,34 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
             ).subscribe(() => this.menuService.setFocused(this))
         )
     }
+}
+
+
+@Component({
+    selector: 'fd-submenu',
+    template: `
+        <ng-template>
+            <ng-content></ng-content>
+        </ng-template>
+    `,
+    exportAs: 'fdSubmenu'
+})
+export class SubmenuComponent {
+
+    /** Aria-label for navigation */
+    @Input()
+    ariaLabel: string = null;
+
+    /** Aria-Labelledby for element describing navigation */
+    @Input()
+    ariaLabelledby: string = null;
+
+    /** @hidden Reference to template with Submenu items  */
+    @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
+
+    /** @hidden Reference to Submenu MenuItems  */
+    @ContentChildren(MenuItemComponent) menuItems: QueryList<MenuItemComponent>;
+
+    /** @hidden Reference to MenuService used by MenuItems */
+    menuService: MenuService;
 }

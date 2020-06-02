@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubmenuComponent } from './submenu.component';
+import { SubmenuComponent } from './menu-item.component';
 
 xdescribe('SubmenuComponent', () => {
   let component: SubmenuComponent;

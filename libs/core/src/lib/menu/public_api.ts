@@ -12,5 +12,4 @@ export * from './default-menu-item.class';
 
 export * from './menu-keyboard.service';
 export * from './menu.component';
-export * from './submenu/submenu.component';
 export * from './menu-mobile/menu-mobile.module';
