@@ -16,5 +16,7 @@ export const API_FILES = {
     searchField: ['SearchFieldComponent'],
     select: ['SelectPlatformComponent'],
     splitMenuButton: ['SplitMenuButtonComponent'],
-    textarea: ['TextAreaComponent']
+    textarea: ['TextAreaComponent'],
+    list: ['listcomponent'],
+    standardListItem: ['standardListItemcomponent']
 };

@@ -11,6 +11,14 @@ import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
+import { PlatformListHeaderComponent } from './component-docs/platform-list/platform-list-header/platform-list-header.component';
+import { PlatformListDocsComponent } from './component-docs/platform-list/platform-list-docs.component';
+import {
+    PlatformListExampleComponent,
+    PlatformListBorderLessExampleComponent,
+    PlatformListWithButtonExampleComponent
+} from './component-docs/platform-list/platform-list-examples/platform-list-example.component';
+
 @NgModule({
     declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
     imports: [
@@ -22,4 +30,4 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     ],
     providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }, StackblitzService]
 })
-export class PlatformDocumentationModule {}
+export class PlatformDocumentationModule { }
