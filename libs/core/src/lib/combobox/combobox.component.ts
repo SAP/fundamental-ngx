@@ -31,7 +31,7 @@ import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { GroupFunction } from '../utils/pipes/list-group.pipe';
 import { InputGroupComponent } from '../input-group/input-group.component';
-import { KeyUtil } from '../..';
+import { KeyUtil } from '../utils/functions/key-util';
 
 /**
  * Allows users to filter through results and select a value.
@@ -277,9 +277,26 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                 this.isOpenChangeHandle(true);
             }
             event.preventDefault();
-            if (this.listItems && this.listItems.first) {
+            if (this.open && this.listItems && this.listItems.first) {
                 this._focusListItem(this.listItems.first);
+            } else if (!this.open) {
+                let foundMatch = false;
+                this.dropdownValues.forEach((value, i) => {
+                    if (this.inputText === value && i + 1 < this.dropdownValues.length && !foundMatch) {
+                        foundMatch = true;
+                        this.onMenuClickHandler(i + 1);
+                    }
+                });
             }
+        } else if (KeyUtil.isKey(event, 'ArrowUp')) {
+            event.preventDefault();
+            let foundMatch = false;
+            this.dropdownValues.forEach((value, i) => {
+                if (this.inputText === value && i - 1 >= 0 && !foundMatch) {
+                    foundMatch = true;
+                    this.onMenuClickHandler(i - 1);
+                }
+            });
         } else if (KeyUtil.isKey(event, 'Escape')) {
             this.selectItemOnBlur();
         }
@@ -288,7 +305,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     onInputKeyupHandler(event: KeyboardEvent): void {
         if (this._inputKeyupTextChanged()) {
-            this.isOpenChangeHandle(true);
+            if (!KeyUtil.isKey(event, 'ArrowUp') && !KeyUtil.isKey(event, 'ArrowDown')) {
+                this.isOpenChangeHandle(true);
+            } else {
+                this._selectAllInputText();
+            }
             // If there are displayed values and the input text has changed since this function was last ran
             if (this._hasDisplayedValues()) {
                 let foundCloseMatch = false;
@@ -307,7 +328,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                     }
                 });
             }
-        } else if (KeyUtil.isKey(event, 'Enter') && this._hasDisplayedValues()) {
+        } else if (KeyUtil.isKey(event, 'Enter')) {
             this._inputEnterKeyup();
         }
         this.inputText = this.searchInputElement.nativeElement.value;
@@ -516,6 +537,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         return this.open && this.displayedValues && this.displayedValues.length > 0;
     }
 
+    private _selectAllInputText(): void {
+        const inputValueLength = this.searchInputElement.nativeElement.value.length;
+        this.searchInputElement.nativeElement.setSelectionRange(0, inputValueLength);
+    }
+
     private _setCursorToLastChar(): void {
         const inputValueLength = this.searchInputElement.nativeElement.value.length;
         this.searchInputElement.nativeElement.setSelectionRange(inputValueLength, inputValueLength);
@@ -544,7 +570,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                 this.onMenuClickHandler(i);
             }
         });
-        this.isOpenChangeHandle(false);
         this._setCursorToLastChar();
     }
 }
