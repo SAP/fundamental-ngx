@@ -43,6 +43,7 @@ describe('ComboboxComponent', () => {
 
     it('should call searchFn onInputKeydownHandler', () => {
         spyOn(component, 'searchFn');
+        component.open = true;
         const event = {
             key: 'Enter',
             preventDefault: () => {}

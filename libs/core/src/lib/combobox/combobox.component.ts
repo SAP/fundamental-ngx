@@ -176,6 +176,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** Event emitted when the input text changes. */
+    @Output()
+    inputTextChange: EventEmitter<string> = new EventEmitter<string>();
+
     /** @hidden */
     @ViewChildren(ListItemDirective)
     listItems: QueryList<ListItemDirective>;
@@ -304,7 +308,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeyupHandler(event: KeyboardEvent): void {
-        if (this._inputKeyupTextChanged()) {
+        if (this.openOnKeyboardEvent && this._inputKeyupTextChanged()) {
             if (!KeyUtil.isKey(event, 'ArrowUp') && !KeyUtil.isKey(event, 'ArrowDown')) {
                 this.isOpenChangeHandle(true);
             } else {
@@ -332,6 +336,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this._inputEnterKeyup();
         }
         this.inputText = this.searchInputElement.nativeElement.value;
+        if (this._inputKeyupTextChanged()) {
+            this.inputTextChange.emit(this.inputText);
+        }
         this.selectedTermSubject$.next(this.inputText);
         this.oldInputText = this.inputText;
     }
@@ -505,6 +512,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
         if (this.fillOnSelect) {
             this.inputText = this.displayFn(term);
+            this.searchInputElement.nativeElement.value = this.inputText;
+            if (this._inputKeyupTextChanged()) {
+                this.inputTextChange.emit(this.inputText);
+            }
         }
         this.handleSearchTermChange();
     }
@@ -560,7 +571,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     private _inputKeyupTextChanged(): boolean {
-        return this.openOnKeyboardEvent && this.oldInputText !== this.searchInputElement.nativeElement.value
+        return this.oldInputText !== this.searchInputElement.nativeElement.value
     }
 
     private _inputEnterKeyup(): void {
