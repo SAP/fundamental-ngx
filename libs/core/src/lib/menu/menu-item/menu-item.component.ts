@@ -16,7 +16,7 @@ import {
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
-import { SubmenuComponent } from '../../..';
+import { SubmenuComponent } from '../submenu/submenu.component';
 import { MenuService } from '../services/menu.service';
 import { defer, fromEvent, Subscription, timer } from 'rxjs';
 import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
