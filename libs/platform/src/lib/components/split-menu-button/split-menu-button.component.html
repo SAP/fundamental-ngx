@@ -1,4 +1,4 @@
-<div class="fd-button-split" role="group" aria-label="button-split" [attr.dir]="dir">
+<div class="fd-button-split" role="group" aria-label="split-button" [attr.dir]="dir">
     <button
         fd-button
         [attr.id]="id"
@@ -9,7 +9,7 @@
         [glyph]="icon"
         tabindex="0"
         [compact]="contentDensity === 'compact'"
-        aria-label="buttonLabel"
+        [attr.aria-label]="title"
         (click)="primaryButtonClicked($event)"
     >
         {{ buttonLabel }}
@@ -25,8 +25,8 @@
         tabindex="0"
         [compact]="contentDensity === 'compact'"
         [fdpMenuTriggerFor]="menu"
-        aria-haspopup="true"
-        aria-expanded="false"
-        aria-label="More"
+        [attr.aria-haspopup]="true"
+        [attr.aria-expanded]="false"
+        [attr.aria-label]="menuTitle"
     ></button>
 </div>
