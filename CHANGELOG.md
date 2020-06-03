@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.1"></a>
+# [0.19.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.0...v0.19.0-rc.1) (2020-06-03)
+
+
+### Bug Fixes
+
+* Use KeyUtil in MenuKeyboardService ([#2592](https://github.com/SAP/fundamental-ngx/issues/2592)) ([35f71b2](https://github.com/SAP/fundamental-ngx/commit/35f71b2))
+
+
+
 <a name="0.19.0-rc.0"></a>
 # [0.19.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.18.1-rc.41...v0.19.0-rc.0) (2020-06-02)
 
