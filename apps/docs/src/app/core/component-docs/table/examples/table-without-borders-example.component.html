@@ -1,5 +1,5 @@
 <span>Table without Borders</span>
-<table fd-table fd-table-no-vertical-borders fd-table-no-horizontal-borders>
+<table fd-table [noBorderX]="true" [noBorderY]="true">
     <thead fd-table-header>
     <tr fd-table-row>
         <th fd-table-cell>Column Header</th>
@@ -33,7 +33,7 @@
         <th fd-table-cell>Column Header</th>
     </tr>
     </thead>
-    <tbody fd-table-body fd-table-no-vertical-borders fd-table-no-horizontal-borders>
+    <tbody fd-table-body [noBorderX]="true" [noBorderY]="true">
         <tr *ngFor="let row of tableRows" fd-table-row>
             <td fd-table-cell>
                 <a fd-link href="#">{{ row.column1 }}</a>
