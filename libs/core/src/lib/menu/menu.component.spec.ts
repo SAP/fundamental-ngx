@@ -43,8 +43,6 @@ describe('MenuComponent', () => {
     let menuService: MenuService;
     let menuItems: QueryList<MenuItemComponent>;
     let fixture: ComponentFixture<TestMenuComponent>;
-    const menuElement = () => document.querySelector('[fd-menu-interactive]');
-    const popoverContainerElement = () => document.querySelector('fd-popover-container');
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -67,6 +65,7 @@ describe('MenuComponent', () => {
     });
 
     it('should open/close popover', fakeAsync(() => {
+        const menuElement = () => document.querySelector('[fd-menu-interactive]');
         const openEmitterSpy = spyOn(menu.isOpenChange, 'emit');
 
         menu.open();
@@ -109,7 +108,6 @@ describe('MenuComponent', () => {
         tick();
 
         expect(mobileViewSpy).toHaveBeenCalled();
-        expect(popoverContainerElement()).toBeFalsy();
         expect(keyboardSupportSpy).toHaveBeenCalledWith(false);
 
         menu.setMobileMode = false;
@@ -124,7 +122,6 @@ describe('MenuComponent', () => {
 
         expect(desktopViewSpy).toHaveBeenCalled();
         expect(destroyMobileSpy).toHaveBeenCalled();
-        expect(popoverContainerElement()).toBeTruthy();
         expect(keyboardSupportSpy).toHaveBeenCalledWith(true);
     }));
 

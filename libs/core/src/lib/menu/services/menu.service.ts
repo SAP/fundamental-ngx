@@ -259,10 +259,10 @@ export class MenuService {
     }
 
     /** @hidden Depending on direction returns closest enabled sibling of given node */
-    private _closestEnabled(node: MenuNode, direction: 'up' | 'down'): MenuNode {
+    private _closestEnabled(node: MenuNode, direction: 'up' | 'down'): MenuNode | null {
         const siblings = direction === 'up'
-            ? [...this._nodeSiblings(this.focusedNode)].reverse()
-            : this._nodeSiblings(this.focusedNode);
+            ? [...this._nodeSiblings(node)].reverse()
+            : this._nodeSiblings(node);
 
         const startIndex = siblings.indexOf(node) + 1;
 
@@ -271,6 +271,7 @@ export class MenuService {
                 return siblings[i];
             }
         }
-        return undefined;
+
+        return null;
     };
 }

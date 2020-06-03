@@ -1,7 +1,48 @@
 import { MenuShortcutDirective } from './menu-shortcut.directive';
+import { MenuItemComponent } from '../menu-item/menu-item.component';
+import { async, fakeAsync, tick } from '@angular/core/testing';
+import { Subject } from 'rxjs';
 
 describe('MenuShortcutDirective', () => {
-  xit('should create an instance', () => {
+    const buildMenuItem = (subject: Subject<boolean>) => ({
+        menuService: {
+            get isMobileMode() {
+                return subject.asObservable()
+            }
+        }
+    } as MenuItemComponent);
 
-  });
+    const elementRefMock = {
+        nativeElement: {
+            style: {
+                display: ''
+            }
+        }
+    };
+
+    let isMobileSubject: Subject<boolean>;
+    let directive: MenuShortcutDirective;
+
+    beforeEach(async(() => {
+        isMobileSubject = new Subject<boolean>();
+        directive = new MenuShortcutDirective(buildMenuItem(isMobileSubject), elementRefMock)
+    }));
+
+    it('should create an instance', () => {
+        expect(directive).toBeTruthy();
+    });
+
+    it('should hide/show depending on mobile mode', fakeAsync(() => {
+        isMobileSubject.next(false);
+
+        tick();
+
+        expect(directive['_elementRef'].nativeElement.style.display).toBeFalsy();
+
+        isMobileSubject.next(true);
+
+        tick();
+
+        expect(directive['_elementRef'].nativeElement.style.display).toBeFalsy('none');
+    }));
 });
