@@ -3,13 +3,13 @@
         fd-button
         [attr.id]="id"
         [attr.name]="name"
-        aria-label="buttonLabel"
+        [attr.title]="title"
         [disabled]="disabled"
         [fdType]="type"
         [glyph]="icon"
         tabindex="0"
-        [attr.title]="title"
         [compact]="contentDensity === 'compact'"
+        aria-label="buttonLabel"
         (click)="primaryButtonClicked($event)"
     >
         {{ buttonLabel }}
@@ -18,13 +18,13 @@
         fd-button
         [attr.id]="secondaryId"
         [attr.name]="name"
+        [attr.title]="menuTitle"
         [glyph]="'slim-arrow-down'"
         [disabled]="disabled"
         [fdType]="type"
         tabindex="0"
         [compact]="contentDensity === 'compact'"
         [fdpMenuTriggerFor]="menu"
-        [attr.title]="title"
         aria-haspopup="true"
         aria-expanded="false"
         aria-label="More"

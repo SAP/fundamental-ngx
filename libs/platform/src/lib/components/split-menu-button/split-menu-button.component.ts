@@ -25,6 +25,10 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, O
     @Input()
     title: string;
 
+    /** text for tooltip */
+    @Input()
+    menuTitle: string;
+
     /** Label for the first Button */
     @Input()
     buttonLabel: string;
