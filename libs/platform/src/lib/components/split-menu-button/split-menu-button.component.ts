@@ -70,7 +70,8 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, O
 
     ngOnInit(): void {
         this.secondaryId = 'secondary-' + this.id;
-
+        // if no title provided.
+        this.title = this.title || this.buttonLabel;
         this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
             this.dir = isRtl ? 'rtl' : 'ltr';
             this._cd.detectChanges();
