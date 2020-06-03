@@ -14,6 +14,7 @@ import { CheckboxModule, TableModule } from '@fundamental-ngx/core';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
 import { TableActivableExampleComponent } from './examples/table-activable-example.component';
+import { TableSemanticExampleComponent } from './examples/table-semantic-example.component';
 
 const routes: Routes = [
     {
@@ -39,7 +40,8 @@ const routes: Routes = [
         TableCheckboxesExampleComponent,
         TableWithoutBordersExampleComponent,
         TableFooterExampleComponent,
-        TableActivableExampleComponent
+        TableActivableExampleComponent,
+        TableSemanticExampleComponent
     ]
 })
 export class TableDocsModule {}

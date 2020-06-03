@@ -12,6 +12,8 @@ import * as tableActivableHtmlSrc from '!raw-loader!./examples/table-activable-e
 import * as tableActivableTsSrc from '!raw-loader!./examples/table-activable-example.component.ts';
 import * as tableCheckHtml from '!raw-loader!./examples/table-checkboxes-example.component.html';
 import * as tableCheckTs from '!raw-loader!./examples/table-checkboxes-example.component.ts';
+import * as tableSemanticHtml from '!raw-loader!./examples/table-semantic-example.component.html';
+import * as tableSemanticTs from '!raw-loader!./examples/table-semantic-example.component.ts';
 import * as tableFooterHtml from '!raw-loader!./examples/table-footer-example.component.html';
 import * as tableFooterTs from '!raw-loader!./examples/table-footer-example.component.ts';
 import * as tableCdkHtml from '!raw-loader!./examples/table-cdk-example.component.html';
@@ -130,6 +132,20 @@ export class TableDocsComponent {
             component: 'TableCheckboxesExampleComponent',
             code: tableCheckTs,
             fileName: 'table-checkboxes-example'
+        }
+    ];
+
+    tableSemantic: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableSemanticHtml,
+            fileName: 'table-semantic-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableSemanticExampleComponent',
+            code: tableSemanticTs,
+            fileName: 'table-semantic-example'
         }
     ];
 
