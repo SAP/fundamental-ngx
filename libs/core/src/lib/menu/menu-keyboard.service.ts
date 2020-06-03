@@ -1,8 +1,8 @@
 import { Subject } from 'rxjs';
-import { Output, Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { DefaultMenuItem } from './default-menu-item';
 import { ListItemDirective } from '../list/list-item.directive';
-import { KeyUtil } from '../..';
+import { KeyUtil } from '../utils/functions/key-util';
 
 @Injectable()
 export class MenuKeyboardService {
