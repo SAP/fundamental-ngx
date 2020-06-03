@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 })
 export class TableCheckboxesExampleComponent {
     selectMasterModel = false;
+    selectMasterModelCompact = false;
+    selectMasterModelCondensed = false;
 
     tableRows = [
         {
@@ -79,29 +81,55 @@ export class TableCheckboxesExampleComponent {
         }
     ];
 
-    select(index: number, checked: boolean): void {
-        this.tableRows[index].checked = checked;
-        this.selectMasterModel = this._allSelected();
+    select(index: number, checked: boolean, size: string): void {
+        this._getTable(size)[index].checked = checked;
+        this._setMasterModel(size);
     }
 
-    selectMaster(checked: boolean) {
-        this.selectMasterModel = checked;
+    selectMaster(checked: boolean, size: string) {
+        if (size === 'cozy') {
+            this.selectMasterModel = checked;
+        } else if (size === 'compact') {
+            this.selectMasterModelCompact = checked;
+        } else if (size === 'condensed') {
+            this.selectMasterModelCondensed = checked;
+        }
         if (checked) {
-            this._selectAll();
+            this._selectAll(size);
         } else {
-            this._deselectAll();
+            this._deselectAll(size);
         }
     }
 
-    private _selectAll(): void {
-        this.tableRows.forEach((row) => (row.checked = true));
+    private _selectAll(size: string): void {
+        this._getTable(size).forEach((row) => (row.checked = true));
     }
 
-    private _deselectAll(): void {
-        this.tableRows.forEach((row) => (row.checked = false));
+    private _deselectAll(size: string): void {
+        this._getTable(size).forEach((row) => (row.checked = false));
     }
 
-    private _allSelected(): boolean {
-        return !this.tableRows.find((_row) => !_row.checked);
+    private _allSelected(size: string): boolean {
+        return !this._getTable(size).find((_row) => !_row.checked);
+    }
+
+    private _getTable(size: string) {
+        let table = this.tableRows;
+        if (size === 'compact') {
+            table = this.tableRowsCompact;
+        } else if (size === 'condensed') {
+            table = this.tableRowsCondensed;
+        }
+        return table;
+    }
+
+    private _setMasterModel(size: string) {
+        if (size === 'cozy') {
+            this.selectMasterModel = this._allSelected(size);
+        } else if (size === 'compact') {
+            this.selectMasterModelCompact = this._allSelected(size);
+        } else if (size === 'condensed') {
+            this.selectMasterModelCondensed = this._allSelected(size);
+        }
     }
 }
