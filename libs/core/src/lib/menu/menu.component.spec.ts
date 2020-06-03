@@ -1,53 +1,50 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { MenuComponent } from './menu.component';
-import { AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MenuModule } from './menu.module';
-import { MenuKeyboardService } from './menu-keyboard.service';
 import { MenuItemComponent } from './menu-item/menu-item.component';
+import { MenuService } from './services/menu.service';
 
 @Component({
     selector: 'fd-menu-test',
     template: `
-        <fd-menu fd-menu-addon>
-            <ul fd-menu-list>
-                <li fd-menu-item #element1>
-                    <div fd-menu-addon></div>
-                    Option 1
-                </li>
-                <li fd-menu-item #element2>
-                    Option 2
-                </li>
-                <li fd-menu-item #element3>
-                    Option 3
-                </li>
-            </ul>
-            <ul fd-menu-list>
-                <li fd-menu-item #element4>
-                    Option 4
-                </li>
-            </ul>
+        <fd-menu>
+            <li fd-menu-item>
+                <a href="#" fd-menu-interactive>
+                    <span fd-menu-title>Option 1</span>
+                </a>
+            </li>
+            <li fd-menu-item>
+                <a href="#" fd-menu-interactive>
+                    <span fd-menu-title>Option 2</span>
+                </a>
+            </li>
+            <li fd-menu-item>
+                <a href="#" fd-menu-interactive>
+                    <span fd-menu-title>Option 3</span>
+                </a>
+            </li>
         </fd-menu>
-        <a href="#" #elementOutOfScope>OutOfScope</a>
     `
 })
-export class TestMenuComponent implements AfterViewInit {
-    @ViewChild('element1') element1: ElementRef;
-    @ViewChild('element2') element2: ElementRef;
-    @ViewChild('element3') element3: ElementRef;
-    @ViewChild('element4') element4: ElementRef;
-    @ViewChild('elementOutOfScope') elementOutOfScope: ElementRef;
+export class TestMenuComponent {
+
+    @ViewChild(MenuComponent)
+    menu: MenuComponent;
+
     @ViewChildren(MenuItemComponent)
     menuItems: QueryList<MenuItemComponent>;
-    public ngAfterViewInit(): void {}
+
 }
 
-xdescribe('MenuComponent', () => {
-    let items: QueryList<MenuItemComponent>;
+describe('MenuComponent', () => {
+    let menu: MenuComponent;
+    let menuService: MenuService;
+    let menuItems: QueryList<MenuItemComponent>;
     let fixture: ComponentFixture<TestMenuComponent>;
-    let elements: ElementRef[];
-    let elementOutOfScope: ElementRef;
-    let service: MenuKeyboardService;
+    const menuElement = () => document.querySelector('[fd-menu-interactive]');
+    const popoverContainerElement = () => document.querySelector('fd-popover-container');
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -59,60 +56,124 @@ xdescribe('MenuComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuComponent);
         fixture.detectChanges();
-        const componentInstance = fixture.componentInstance;
-        elements = [
-            componentInstance.element1,
-            componentInstance.element2,
-            componentInstance.element3,
-            componentInstance.element4
-        ];
-        elementOutOfScope = fixture.componentInstance.elementOutOfScope;
-        items = fixture.componentInstance.menuItems;
-        service = new MenuKeyboardService();
+        menu = fixture.componentInstance.menu;
+        menuItems = fixture.componentInstance.menuItems;
+        menuService = menu['_menuService'];
     });
 
-    it('should focus first element', () => {
-        const list = elements.map((element) => element.nativeElement);
-        spyOn(list[0], 'focus');
-        fixture.componentInstance.menuItems.first.focus();
-        expect(list[0].focus).toHaveBeenCalled();
+    it('should properly initialize menu', () => {
+        expect(menu).toBeTruthy();
+        expect(menuService.menuMap).toBeTruthy();
     });
 
-    it('should focus second element', () => {
-        const list = elements.map((element) => element.nativeElement);
-        spyOn(list[1], 'focus');
-        const event: any = { key: 'ArrowDown', preventDefault: () => {} };
-        service.keyDownHandler(event, 0, items.toArray());
-        expect(list[1].focus).toHaveBeenCalled();
-    });
+    it('should open/close popover', fakeAsync(() => {
+        const openEmitterSpy = spyOn(menu.isOpenChange, 'emit');
 
-    it('Should use default function and select last element, when encounter a beginning and arrow up', () => {
-        const list = elements.map((element) => element.nativeElement);
-        spyOn(list[3], 'focus');
-        const event: any = { key: 'ArrowUp', preventDefault: () => {} };
-        service.keyDownHandler(event, 0, items.toArray());
-        expect(list[3].focus).toHaveBeenCalled();
-    });
+        menu.open();
+        fixture.detectChanges();
 
-    it('Should use custom after focus function which and focus out of scope element', () => {
-        const _elementOutOfScope = elementOutOfScope.nativeElement;
-        service.focusEscapeAfterList = () => {
-            _elementOutOfScope.focus();
-        };
-        spyOn(_elementOutOfScope, 'focus');
-        const event: any = { key: 'ArrowDown', preventDefault: () => {} };
-        service.keyDownHandler(event, 3, items.toArray());
-        expect(_elementOutOfScope.focus).toHaveBeenCalled();
-    });
+        tick();
 
-    it('Should use custom before focus function which and focus out of scope element', () => {
-        const _elementOutOfScope = elementOutOfScope.nativeElement;
-        service.focusEscapeBeforeList = () => {
-            _elementOutOfScope.focus();
-        };
-        spyOn(_elementOutOfScope, 'focus');
-        const event: any = { key: 'ArrowUp', preventDefault: () => {} };
-        service.keyDownHandler(event, 0, items.toArray());
-        expect(_elementOutOfScope.focus).toHaveBeenCalled();
+        expect(menuElement()).toBeTruthy();
+        expect(openEmitterSpy).toHaveBeenCalledWith(true);
+
+        menu.close();
+        fixture.detectChanges();
+
+        tick();
+
+        expect(menuElement()).toBeFalsy();
+        expect(openEmitterSpy).toHaveBeenCalledWith(false);
+    }));
+
+    it('should focus first element on open', fakeAsync(() => {
+        menu.open();
+        fixture.detectChanges();
+
+        tick();
+
+        expect(menuService.focusedNode.item).toBe(menuItems.first);
+        expect(menuService.focusedNode.item.menuInteractive.elementRef.nativeElement).toBe(document.activeElement);
+    }));
+
+    it('should select proper view depending on menu mode', fakeAsync(() => {
+        const desktopViewSpy = spyOn<any>(menu, '_loadView');
+        const mobileViewSpy = spyOn<any>(menu, '_setupMobileMode');
+        const destroyMobileSpy = spyOn<any>(menu, '_destroyMobileComponent');
+        const keyboardSupportSpy = spyOn<any>(menu, '_manageKeyboardSupport');
+
+        menu.setMobileMode = true;
+        menu.open();
+        fixture.detectChanges();
+
+        tick();
+
+        expect(mobileViewSpy).toHaveBeenCalled();
+        expect(popoverContainerElement()).toBeFalsy();
+        expect(keyboardSupportSpy).toHaveBeenCalledWith(false);
+
+        menu.setMobileMode = false;
+        fixture.detectChanges();
+
+        tick();
+
+        menu.open();
+        fixture.detectChanges();
+
+        tick();
+
+        expect(desktopViewSpy).toHaveBeenCalled();
+        expect(destroyMobileSpy).toHaveBeenCalled();
+        expect(popoverContainerElement()).toBeTruthy();
+        expect(keyboardSupportSpy).toHaveBeenCalledWith(true);
+    }));
+
+    it('should close on Esc key', fakeAsync(() => {
+        const closeSpy = spyOn(menu, 'close');
+        menu.closeOnEscapeKey = true;
+
+        menu.open();
+        fixture.detectChanges();
+
+        tick();
+
+        menu.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Escape'}));
+        fixture.detectChanges();
+
+        expect(closeSpy).toHaveBeenCalled();
+    }));
+
+    it('should subscribe to triggers', fakeAsync(() => {
+        menu.triggers = ['click', 'mouseover', 'mouseenter'];
+        menu.trigger = menu.elementRef;
+
+        fixture.detectChanges();
+        tick();
+
+        expect(menu['_eventRef'].length).toBe(menu.triggers.length);
+    }));
+
+    it('should subscribe to triggers', fakeAsync(() => {
+        menu.triggers = ['click', 'mouseover', 'mouseenter'];
+        menu.trigger = menu.elementRef;
+
+        fixture.detectChanges();
+        tick();
+
+        expect(menu['_eventRef'].length).toBe(menu.triggers.length);
+    }));
+
+    it('should destroy all references', () => {
+        const destroyEventsSpy = spyOn<any>(menu, '_destroyEventListeners');
+        const destroyMobileSpy = spyOn<any>(menu, '_destroyMobileComponent');
+        const menuServiceDestroySpy = spyOn<any>(menu['_menuService'], 'onDestroy');
+
+        menu.ngOnDestroy();
+
+        fixture.detectChanges();
+
+        expect(destroyEventsSpy).toHaveBeenCalled();
+        expect(destroyMobileSpy).toHaveBeenCalled();
+        expect(menuServiceDestroySpy).toHaveBeenCalled();
     });
 });

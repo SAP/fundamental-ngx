@@ -189,8 +189,8 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     /** @hidden */
     ngOnDestroy() {
         this._destroyMobileComponent();
+        this._destroyEventListeners();
         this._menuService.onDestroy();
-        this._eventRef.forEach(ref => ref());
         this._subscriptions.unsubscribe();
     }
 
@@ -200,6 +200,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
 
     set trigger(trigger: ElementRef) {
         this._externalTrigger = trigger;
+        this._destroyEventListeners();
         this.listenOnTriggerEvents();
     }
 
@@ -307,6 +308,12 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     private _destroyMobileComponent(): void {
         if (this._mobileModeComponentRef) {
             this._mobileModeComponentRef.destroy();
+        }
+    }
+
+    private _destroyEventListeners(): void {
+        if (Array.isArray(this._eventRef)) {
+            this._eventRef.forEach(ref => ref());
         }
     }
 }

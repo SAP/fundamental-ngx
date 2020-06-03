@@ -82,7 +82,9 @@ export class SplitButtonComponent {
     @ContentChild(MenuComponent)
     set setMenu(menu: MenuComponent) {
         this.menu = menu;
-        this.menu.placement = 'bottom-end'
+        if (menu) {
+            this.menu.placement = 'bottom-end';
+        }
     }
 
     menu: MenuComponent;

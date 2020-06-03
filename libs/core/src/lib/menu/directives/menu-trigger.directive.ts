@@ -11,9 +11,11 @@ export class MenuTriggerDirective implements OnDestroy {
     /** Set reference to Menu Component */
     @Input('fdMenuTrigger')
     set menu(menu: MenuComponent) {
-        menu.trigger = this._elementRef;
+        if (menu) {
+            menu.trigger = this._elementRef;
+            this._listenOnExpanded(menu);
+        }
         this._setAriaAttributes(menu);
-        this._listenOnExpanded(menu);
     }
 
     @HostBinding('attr.aria-haspopup')
