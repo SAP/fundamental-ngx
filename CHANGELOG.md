@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.2"></a>
+# [0.19.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.1...v0.19.0-rc.2) (2020-06-03)
+
+
+### Bug Fixes
+
+* checkbox crashing chrome fix and unit tests ([#2578](https://github.com/SAP/fundamental-ngx/issues/2578)) ([3321315](https://github.com/SAP/fundamental-ngx/commit/3321315))
+
+
+
 <a name="0.19.0-rc.1"></a>
 # [0.19.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.0...v0.19.0-rc.1) (2020-06-03)
 
