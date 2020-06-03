@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'fd-table-example',
-    templateUrl: './table-example.component.html'
+    selector: 'fd-table-footer-example',
+    templateUrl: './table-footer-example.component.html'
 })
-export class TableExampleComponent implements OnInit {
+export class TableFooterExampleComponent implements OnInit {
     tableRows;
 
     ngOnInit() {

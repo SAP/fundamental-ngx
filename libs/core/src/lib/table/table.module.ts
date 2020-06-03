@@ -9,6 +9,8 @@ import { TableBodyDirective } from './directives/table-body.directive';
 import { TableRowDirective } from './directives/table-row.directive';
 import { TableCellDirective } from './directives/table-cell.directive';
 import { TableWrapperComponent } from './table-wrapper.component';
+import { TableNoHorizontalBordersDirective, TableNoVerticalBordersDirective } from './directives/table-border-directives';
+import { TableFooterDirective } from './directives/table-footer.directive';
 
 @NgModule({
     imports: [CommonModule],
@@ -18,9 +20,12 @@ import { TableWrapperComponent } from './table-wrapper.component';
         ColumnSortableDirective,
         TableWrapperComponent,
         TableHeaderDirective,
+        TableFooterDirective,
         TableBodyDirective,
         TableRowDirective,
-        TableCellDirective
+        TableCellDirective,
+        TableNoHorizontalBordersDirective,
+        TableNoVerticalBordersDirective
     ],
     exports: [
         TableComponent,
@@ -28,9 +33,12 @@ import { TableWrapperComponent } from './table-wrapper.component';
         ColumnSortableDirective,
         TableWrapperComponent,
         TableHeaderDirective,
+        TableFooterDirective,
         TableBodyDirective,
         TableRowDirective,
-        TableCellDirective
+        TableCellDirective,
+        TableNoHorizontalBordersDirective,
+        TableNoVerticalBordersDirective
     ]
 })
 export class TableModule {}

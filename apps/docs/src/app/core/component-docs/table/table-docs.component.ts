@@ -4,8 +4,14 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as tableHtmlSrc from '!raw-loader!./examples/table-example.component.html';
 import * as tableTsSrc from '!raw-loader!./examples/table-example.component.ts';
+import * as tableWithoutBordersHtmlSrc from '!raw-loader!./examples/table-without-borders-example.component.html';
+import * as tableWithoutBordersTsSrc from '!raw-loader!./examples/table-without-borders-example.component.ts';
+import * as tableColumnSortHtmlSrc from '!raw-loader!./examples/table-column-sorting-example.component.html';
+import * as tableColumnSortTsSrc from '!raw-loader!./examples/table-column-sorting-example.component.ts';
 import * as tableCheckHtml from '!raw-loader!./examples/table-checkboxes-example.component.html';
 import * as tableCheckTs from '!raw-loader!./examples/table-checkboxes-example.component.ts';
+import * as tableFooterHtml from '!raw-loader!./examples/table-footer-example.component.html';
+import * as tableFooterTs from '!raw-loader!./examples/table-footer-example.component.ts';
 import * as tableCdkHtml from '!raw-loader!./examples/table-cdk-example.component.html';
 import * as tableCdkTs from '!raw-loader!./examples/table-cdk-example.component.ts';
 import * as tableCdkScss from '!raw-loader!./examples/table-cdk-example.component.scss';
@@ -52,6 +58,48 @@ export class TableDocsComponent {
             component: 'TableExampleComponent',
             code: tableTsSrc,
             fileName: 'table-example'
+        }
+    ];
+
+    tableWithoutBordersExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableWithoutBordersHtmlSrc,
+            fileName: 'table-without-borders-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableExampleComponent',
+            code: tableWithoutBordersTsSrc,
+            fileName: 'table-without-borders-example'
+        }
+    ];
+
+    tableFooterExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableFooterHtml,
+            fileName: 'table-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableFooterExampleComponent',
+            code: tableFooterTs,
+            fileName: 'table-footer-example'
+        }
+    ];
+
+    tableColumnSortExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableColumnSortHtmlSrc,
+            fileName: 'table-column-sort-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableColumnSortExampleComponent',
+            code: tableColumnSortTsSrc,
+            fileName: 'table-column-sort-example'
         }
     ];
 

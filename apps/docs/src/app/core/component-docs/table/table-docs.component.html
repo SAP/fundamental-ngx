@@ -1,5 +1,37 @@
-<fd-docs-section-title [id]="'Default'" [componentName]="'table'">
-    Table
+<fd-docs-section-title [id]="'default'" [componentName]="'table'">
+    Default Table
+</fd-docs-section-title>
+<component-example>
+    <fd-table-example></fd-table-example>
+</component-example>
+<code-example [exampleFiles]="tableExample"></code-example>
+
+<fd-docs-section-title [id]="'noBorders'" [componentName]="'table'">
+    Table Without Borders
+</fd-docs-section-title>
+<description>
+    The <code>fd-table-no-vertical-borders</code> and <code>fd-table-no-horizontal-borders</code> directives can be used
+    to remove borders. They can be used together or separately, and can be added to <code>fd-table</code>,
+    <code>fd-table-header</code>, and <code>fd-table-body</code> components.
+</description>
+<component-example>
+    <fd-table-without-borders-example></fd-table-without-borders-example>
+</component-example>
+<code-example [exampleFiles]="tableWithoutBordersExample"></code-example>
+
+<fd-docs-section-title [id]="'withFooter'" [componentName]="'table'">
+    Table with Footer
+</fd-docs-section-title>
+<description>
+    Footer can be added by using the <code>fd-table-footer</code> directive.
+</description>
+<component-example>
+    <fd-table-footer-example></fd-table-footer-example>
+</component-example>
+<code-example [exampleFiles]="tableFooterExample"></code-example>
+
+<fd-docs-section-title [id]="'columnSorting'" [componentName]="'table'">
+    Column Sorting
 </fd-docs-section-title>
 <description>
     Column sorting is achieved using the <code>fdColumnSortable</code> directive. Place this directive on the desired
@@ -9,9 +41,9 @@
     example that calling a sort function for one column will reset the sort direction for the other sortable column.
 </description>
 <component-example>
-    <fd-table-example></fd-table-example>
+    <fd-table-column-sorting-example></fd-table-column-sorting-example>
 </component-example>
-<code-example [exampleFiles]="tableExample"></code-example>
+<code-example [exampleFiles]="tableColumnSortExample"></code-example>
 
 <separator></separator>
 
