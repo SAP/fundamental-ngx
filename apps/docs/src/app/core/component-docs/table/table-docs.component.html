@@ -47,12 +47,25 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'columnSorting'" [componentName]="'table'">
+    Interactive Rows and Cells
+</fd-docs-section-title>
+<description>
+    Interactive states can be set by using the <code>[activable]</code> and <code>[hoverable]</code> inputs on rows and
+    cells.
+</description>
+<component-example>
+    <fd-table-activable-example></fd-table-activable-example>
+</component-example>
+<code-example [exampleFiles]="tableActivableExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'withCheckboxes'" [componentName]="'table'">
     Table with Checkboxes
 </fd-docs-section-title>
 <description>
-    While there is no formal support for row selection, fundamental-ngx does provide the tools to accomplish this. The
-    following example is simply one of the many methods that can be used.
+    The checkbox input can be used at the beginning of each row to allow for bulk actions.
 </description>
 <component-example>
     <fd-table-checkboxes-example></fd-table-checkboxes-example>

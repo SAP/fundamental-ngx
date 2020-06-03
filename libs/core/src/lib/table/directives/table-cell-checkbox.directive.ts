@@ -1,11 +1,11 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    selector: '[fdTableCell], [fd-table-cell]'
+    selector: '[fdTableCellCheckbox], [fd-table-cell-checkbox]'
 })
-export class TableCellDirective {
+export class TableCellCheckboxDirective {
     /** @hidden */
-    @HostBinding('class.fd-table__cell')
+    @HostBinding('class.fd-table__cell--checkbox')
     fdTableCellClass: boolean = true;
 
     /** Whether or not to show the table cell's horizontal borders */

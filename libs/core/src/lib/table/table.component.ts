@@ -31,4 +31,14 @@ export class TableComponent {
     @Input()
     noBorderY: boolean = false;
 
+    /** Whether or not to display the table in compact mode */
+    @HostBinding('class.fd-table--compact')
+    @Input()
+    compact: boolean = false;
+
+    /** Whether or not to display the table in condensed mode */
+    @HostBinding('class.fd-table--condensed')
+    @Input()
+    condensed: boolean = false;
+
 }

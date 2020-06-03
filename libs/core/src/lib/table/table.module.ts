@@ -10,6 +10,7 @@ import { TableRowDirective } from './directives/table-row.directive';
 import { TableCellDirective } from './directives/table-cell.directive';
 import { TableWrapperComponent } from './table-wrapper.component';
 import { TableFooterDirective } from './directives/table-footer.directive';
+import { TableCellCheckboxDirective } from './directives/table-cell-checkbox.directive';
 
 @NgModule({
     imports: [CommonModule],
@@ -22,7 +23,8 @@ import { TableFooterDirective } from './directives/table-footer.directive';
         TableFooterDirective,
         TableBodyDirective,
         TableRowDirective,
-        TableCellDirective
+        TableCellDirective,
+        TableCellCheckboxDirective
     ],
     exports: [
         TableComponent,
@@ -33,7 +35,8 @@ import { TableFooterDirective } from './directives/table-footer.directive';
         TableFooterDirective,
         TableBodyDirective,
         TableRowDirective,
-        TableCellDirective
+        TableCellDirective,
+        TableCellCheckboxDirective
     ]
 })
 export class TableModule {}
