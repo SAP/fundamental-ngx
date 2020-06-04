@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenuSeparatorComponent } from './menu-separator.component';
 
-xdescribe('MenuSeparatorComponent', () => {
+describe('MenuSeparatorComponent', () => {
   let component: MenuSeparatorComponent;
   let fixture: ComponentFixture<MenuSeparatorComponent>;
 

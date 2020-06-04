@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubmenuComponent } from './menu-item.component';
 
-xdescribe('SubmenuComponent', () => {
+describe('SubmenuComponent', () => {
   let component: SubmenuComponent;
   let fixture: ComponentFixture<SubmenuComponent>;
 

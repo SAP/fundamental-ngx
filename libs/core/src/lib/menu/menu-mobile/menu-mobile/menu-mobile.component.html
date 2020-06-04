@@ -8,6 +8,7 @@
                         <button fd-button
                                 fdType="transparent"
                                 glyph="nav-back"
+                                id="menu-mobile-navigate-back"
                                 [attr.aria-label]="'Go to previous menu level: ' + title"
                                 (click)="backToParentLevel()">
                         </button>
@@ -37,13 +38,21 @@
 
         <fd-dialog-footer *ngIf="mobileConfig.approveButtonText || mobileConfig.cancelButtonText">
             <fd-dialog-footer-button *ngIf="mobileConfig.approveButtonText">
-                <button fd-button fdType="emphasized" fd-dialog-decisive-button (click)="close()">
+                <button fd-button
+                        id="menu-mobile-approve-button"
+                        fdType="emphasized"
+                        fd-dialog-decisive-button
+                        (click)="close()">
                     {{mobileConfig.approveButtonText}}
                 </button>
             </fd-dialog-footer-button>
 
             <fd-dialog-footer-button *ngIf="mobileConfig.cancelButtonText">
-                <button fd-button fdType="transparent" fd-dialog-decisive-button (click)="close()">
+                <button fd-button
+                        id="menu-mobile-cancel-button"
+                        fdType="transparent"
+                        fd-dialog-decisive-button
+                        (click)="close()">
                     {{mobileConfig.cancelButtonText}}
                 </button>
             </fd-dialog-footer-button>

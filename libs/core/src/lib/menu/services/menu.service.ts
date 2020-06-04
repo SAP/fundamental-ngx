@@ -132,7 +132,6 @@ export class MenuService {
         this._removeActiveSibling(menuItem);
         this.activeNodePath.push(menuNode);
         menuNode.item.setSelected(true);
-        menuNode.item.open();
     }
 
     /** @hidden Removes given element and all its successors from the Active Node Path and setts as inactive*/
@@ -142,7 +141,7 @@ export class MenuService {
 
         if (pathIndex !== -1) {
             this.activeNodePath.splice(pathIndex)
-                .forEach(removedActiveNode => removedActiveNode.item.close());
+                .forEach(removedActiveNode => removedActiveNode.item.setSelected(false))
         }
     }
 
@@ -208,47 +207,49 @@ export class MenuService {
         this._destroyKeyboardHandlerListener = this._renderer.listen(
             this.menu.elementRef.nativeElement,
             'keydown',
-            (event: KeyboardEvent) => {
-                const focusRight = (node) => setTimeout(() => this.setFocused(node.children[0].item));
-                let matched = true;
-
-                if (KeyUtil.isKey(event, 'ArrowRight')) {
-                    if (this.focusedNode.children.length) {
-                        this.setActive(true, this.focusedNode.item);
-                        focusRight(this.focusedNode);
-                    }
-                } else if (KeyUtil.isKey(event, 'ArrowLeft')) {
-                    if (this.focusedNode.parent.item) {
-                        this.setActive(false, this.focusedNode.parent.item);
-                        this.setFocused(this.focusedNode.parent.item);
-                    }
-                } else if (KeyUtil.isKey(event, 'ArrowDown')) {
-                    const closest = this._closestEnabled(this.focusedNode, 'down');
-                    if (closest) {
-                        this.setFocused(closest.item);
-                    }
-                } else if (KeyUtil.isKey(event, 'ArrowUp')) {
-                    const closest = this._closestEnabled(this.focusedNode, 'up');
-                    if (closest) {
-                        this.setFocused(closest.item);
-                    }
-                } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
-                    this.setActive(true, this.focusedNode.item);
-                    this.focusedNode.item.click();
-                    if (this.focusedNode.children.length) {
-                        focusRight(this.focusedNode);
-                    }
-                } else if (KeyUtil.isKey(event, 'Escape') && this.menu.closeOnEscapeKey) {
-                    this.menu.close();
-                } else {
-                    matched = false;
-                }
-
-                if (matched) {
-                    event.preventDefault();
-                }
-            }
+            (event: KeyboardEvent) => this._handleKey(event)
         );
+    }
+
+    private _handleKey(event: KeyboardEvent): void {
+        const focusRight = (node) => setTimeout(() => this.setFocused(node.children[0].item));
+        let matched = true;
+
+        if (KeyUtil.isKey(event, 'ArrowRight')) {
+            if (this.focusedNode.children.length) {
+                this.setActive(true, this.focusedNode.item);
+                focusRight(this.focusedNode);
+            }
+        } else if (KeyUtil.isKey(event, 'ArrowLeft')) {
+            if (this.focusedNode.parent.item) {
+                this.setActive(false, this.focusedNode.parent.item);
+                this.setFocused(this.focusedNode.parent.item);
+            }
+        } else if (KeyUtil.isKey(event, 'ArrowDown')) {
+            const closest = this._closestEnabled(this.focusedNode, 'down');
+            if (closest) {
+                this.setFocused(closest.item);
+            }
+        } else if (KeyUtil.isKey(event, 'ArrowUp')) {
+            const closest = this._closestEnabled(this.focusedNode, 'up');
+            if (closest) {
+                this.setFocused(closest.item);
+            }
+        } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+            this.setActive(true, this.focusedNode.item);
+            this.focusedNode.item.click();
+            if (this.focusedNode.children.length) {
+                focusRight(this.focusedNode);
+            }
+        } else if (KeyUtil.isKey(event, 'Escape') && this.menu.closeOnEscapeKey) {
+            this.menu.close();
+        } else {
+            matched = false;
+        }
+
+        if (matched) {
+            event.preventDefault();
+        }
     }
 
     /** @hidden Emits an array of active menu items */

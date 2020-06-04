@@ -51,6 +51,8 @@ export class MenuInteractiveDirective {
     /** @hidden */
     setSubmenu(hasSubmenu: boolean, itemId?: string): void {
         this.hasSubmenu = hasSubmenu;
-        this.itemId = itemId || this.itemId;
+        this.itemId = hasSubmenu
+            ? itemId || this.itemId
+            : null;
     }
 }

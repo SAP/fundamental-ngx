@@ -62,7 +62,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     menuInteractive: MenuInteractiveDirective;
 
     /** @hidden Whether sub-menu is currently visible*/
-    subMenuVisible: boolean = false;
+    submenuVisible: boolean = false;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
@@ -122,23 +122,10 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         }
     }
 
-    /** @hidden Opens submenu level */
-    open(): void {
-        this.menuInteractive.setSelected(true);
-        this.subMenuVisible = true;
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /** @hidden Closes submenu level */
-    close(): void {
-        this.menuInteractive.setSelected(false);
-        this.subMenuVisible = false;
-        this._changeDetectorRef.markForCheck();
-    }
-
     /** @hidden Sets menu item as selected/unselected based on isSelected flag */
     setSelected(isSelected: boolean): void {
         this.menuInteractive.setSelected(isSelected);
+        this.submenuVisible = isSelected && !!this.submenu;
         this._changeDetectorRef.markForCheck();
     }
 
@@ -181,7 +168,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden Initializes menu link state based on item initial state */
     private _initialiseItemState(): void {
-        this.menuInteractive.setSubmenu(!!this.submenu, this.submenu ? this.itemId : null);
+        this.menuInteractive.setSubmenu(!!this.submenu, this.itemId);
         this.menuInteractive.setDisabled(this.disabled);
     }
 
