@@ -78,7 +78,7 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, O
         });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._rtlChangeSubscription.unsubscribe();
     }
 
