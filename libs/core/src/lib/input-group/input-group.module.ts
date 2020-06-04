@@ -18,7 +18,7 @@ import {
         InputGroupComponent,
         InputGroupInputDirective,
         InputGroupTextareaDirective,
-        InputGroupAddOnDirective,
+        InputGroupAddOnDirective
     ],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule],
     exports: [
@@ -29,5 +29,4 @@ import {
         InputGroupAddOnDirective
     ]
 })
-export class InputGroupModule {
-}
+export class InputGroupModule {}

@@ -20,6 +20,7 @@ import { NotificationRef } from '../notification-utils/notification-ref';
 import { NotificationDefault } from '../notification-utils/notification-default';
 import { DefaultNotificationComponent } from '../notification-utils/default-notification/default-notification.component';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { NotificationConfig } from '../notification-utils/notification-config';
 
 export type NotificationType = 'success' | 'warning' | 'information' | 'error';
 export type NotificationSize = 's' | 'm';
@@ -32,13 +33,12 @@ export type NotificationSize = 's' | 'm';
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
-        'role': 'notification',
-        '[attr.id]': 'id',
+        role: 'alertdialog',
+        '[attr.id]': 'id'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationComponent extends AbstractFdNgxClass implements AfterViewInit {
-
     /** Size of notification, defined by user, s or m */
     @Input()
     size: string;
@@ -47,7 +47,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
     @Input()
     type: NotificationType;
 
-    @ViewChild('vc', { read: ViewContainerRef, static: false })
+    @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
     id: string;
@@ -64,7 +64,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     ariaDescribedBy: string = null;
 
-    childComponentType: TemplateRef<any> | Type<any> | NotificationDefault;
+    childContent: TemplateRef<any> | Type<any> | NotificationDefault = undefined;
 
     backdropClickCloseable: boolean = true;
 
@@ -74,21 +74,27 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
-    constructor(private elRef: ElementRef,
-                private componentFactoryResolver: ComponentFactoryResolver,
-                private cdRef: ChangeDetectorRef,
-                @Optional() private notificationRef: NotificationRef) {
+    // @ts-ignore
+    constructor(
+        private elRef: ElementRef,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private cdRef: ChangeDetectorRef,
+        @Optional() private notificationConfig: NotificationConfig,
+        @Optional() private notificationRef: NotificationRef
+    ) {
+        // @ts-ignore
+        this._setNotificationConfig(notificationConfig);
         super(elRef);
     }
 
     ngAfterViewInit(): void {
-        if (this.childComponentType) {
-            if (this.childComponentType instanceof Type) {
-                this.loadFromComponent(this.childComponentType);
-            } else if (this.childComponentType instanceof TemplateRef) {
-                this.loadFromTemplate(this.childComponentType);
+        if (this.childContent) {
+            if (this.childContent instanceof Type) {
+                this.loadFromComponent(this.childContent);
+            } else if (this.childContent instanceof TemplateRef) {
+                this.loadFromTemplate(this.childContent);
             } else {
-                this.createFromDefaultConfiguration(this.childComponentType);
+                this.createFromDefaultConfiguration(this.childContent);
             }
         }
         this.cdRef.detectChanges();
@@ -133,7 +139,11 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
         if (this.size) {
             this._addClassToElement('fd-notification--' + this.size);
         }
-
     }
 
+    private _setNotificationConfig(notificationConfig: NotificationConfig): void {
+        Object.keys(notificationConfig || {})
+            .filter((key) => key !== 'data' && key !== 'container')
+            .forEach((key) => (this[key] = notificationConfig[key]));
+    }
 }

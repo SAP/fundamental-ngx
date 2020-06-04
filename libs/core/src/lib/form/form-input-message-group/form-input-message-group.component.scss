@@ -6,3 +6,16 @@
 .fd-popover-container-custom {
     border: none;
 }
+
+.fd-form-input-message-group {
+    // unfortunately, it collides with
+    // fd-popover-custom (the order of included css files)
+    // and has to be overwritten
+    &.fd-popover-custom {
+        display: flex;
+    }
+
+    .fd-input {
+        display: block;
+    }
+}

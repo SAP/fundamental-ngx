@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { CalendarI18n, DatetimePickerComponent, FdDate, FdDatetime } from '@fundamental-ngx/core';
 
-import moment from 'moment';
+import * as moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/en-gb';
 import 'moment/locale/de';
@@ -15,10 +15,8 @@ import localeBulgarian from '@angular/common/locales/bg';
 import localeGb from '@angular/common/locales/en-GB';
 import localeDe from '@angular/common/locales/de';
 
-
 @Injectable()
 export class CustomI18nMomentCalendar extends CalendarI18n {
-
     getDayAriaLabel(date: Date): string {
         return date.getDate() + ' ' + moment.months()[date.getMonth()] + ' ' + date.getFullYear();
     }
@@ -48,10 +46,9 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
     ]
 })
 export class DatetimePickerComplexI18nExampleComponent {
+    @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent;
 
-    @ViewChild(DatetimePickerComponent, { static: false }) datetimePickerComponent: DatetimePickerComponent;
-
-    constructor (private calendarI18nService: CalendarI18n) {
+    constructor(private calendarI18nService: CalendarI18n) {
         registerLocaleData(localeFrench, 'fr');
         registerLocaleData(localePolish, 'pl');
         registerLocaleData(localeBulgarian, 'bg');

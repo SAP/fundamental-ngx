@@ -6,7 +6,6 @@ import { ProductSwitchItem } from '@fundamental-ngx/core';
     templateUrl: './product-switch-small-example.component.html'
 })
 export class ProductSwitchSmallExampleComponent {
-
     list: ProductSwitchItem[] = [
         {
             title: 'Home',
@@ -24,7 +23,7 @@ export class ProductSwitchSmallExampleComponent {
         {
             title: 'Catalog',
             subtitle: 'Ariba',
-            icon: 'contacts',
+            icon: 'contacts'
         },
         {
             title: 'Guided Buying',

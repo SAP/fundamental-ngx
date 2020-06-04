@@ -4,8 +4,10 @@ import { AlertRef } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-alert-content',
     template: `
-        <div>{{ref.data.label}}</div><br/>
-        <div>It will stay open when the mouse is hovered inside.</div><br/>
+        <div>{{ ref.data.label }}</div>
+        <br />
+        <div>It will stay open when the mouse is hovered inside.</div>
+        <br />
         <div>Injecting AlertRef allows you to call <code>dismiss()</code> on the alert or access passed data.</div>
     `
 })

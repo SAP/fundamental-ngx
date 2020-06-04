@@ -3,7 +3,6 @@ import { DateFormatParser, FdDate, FdRangeDate } from '@fundamental-ngx/core';
 
 @Injectable()
 export class DateFormatDashes extends DateFormatParser {
-
     rangeDelimiter: string = ' to ';
 
     public parse(value: string): FdDate {
@@ -24,15 +23,18 @@ export class DateFormatDashes extends DateFormatParser {
 @Component({
     selector: 'fd-date-picker-format-example',
     template: `
-        <fd-date-picker [(ngModel)]="date" placeholder="yyyy/mm/dd"></fd-date-picker>
-        <br/>
-        <div>Selected Date: {{date?.toDateString()}}</div>
-        <br/>
-        <fd-date-picker placeholder="yyyy/mm/dd to yyyy/mm/dd"
-                        [type]="'range'" [(ngModel)]="selectedRange"></fd-date-picker>
-        <br/>
-        <div>Selected First Date: {{selectedRange?.start?.toDateString()}}</div>
-        <div>Selected Last Date: {{selectedRange?.end?.toDateString()}}</div>
+        <fd-date-picker [(ngModel)]="date" placeholder="dd-mm-yyyy"></fd-date-picker>
+        <br />
+        <div>Selected Date: {{ date?.toDateString() }}</div>
+        <br />
+        <fd-date-picker
+            placeholder="dd-mm-yyyy to dd-mm-yyyy"
+            [type]="'range'"
+            [(ngModel)]="selectedRange"
+        ></fd-date-picker>
+        <br />
+        <div>Selected First Date: {{ selectedRange?.start?.toDateString() }}</div>
+        <div>Selected Last Date: {{ selectedRange?.end?.toDateString() }}</div>
     `,
     providers: [
         {
@@ -42,12 +44,10 @@ export class DateFormatDashes extends DateFormatParser {
     ]
 })
 export class DatePickerFormatExampleComponent {
-
     date = FdDate.getToday();
 
     selectedRange: FdRangeDate = {
         start: FdDate.getToday(),
         end: FdDate.getToday().nextDay()
     };
-
 }

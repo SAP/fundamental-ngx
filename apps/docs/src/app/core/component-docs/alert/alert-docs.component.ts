@@ -1,28 +1,24 @@
-import { Component, OnInit, AfterViewInit, ViewChild, QueryList, ViewChildren, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as alertExampleHtml from '!raw-loader!./examples/alert-example.component.html';
-import * as alertExampleTs from '!raw-loader!./examples/alert-example.component.ts';
 import * as alertExampleScs from '!raw-loader!./examples/alert-example.component.scss';
 import * as alertContent from '!raw-loader!./examples/alert-content.component.ts';
 import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
-import * as alertComponentAsContentExampleModule from '!raw-loader!./examples/alert-component-as-content.module.ts';
 import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-component-as-content-example.component.html';
 import * as alertComponentAsContentExampleScss from '!raw-loader!./examples/alert-component-as-content-example.component.scss';
 import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
-import * as alertInlineExampleTs from '!raw-loader!./examples/alert-inline-example.component.ts';
 import * as alertInlineExampleScs from '!raw-loader!./examples/alert-inline-example.component.scss';
 import * as alertWidthExampleHtml from '!raw-loader!./examples/alert-width-example.component.html';
 import * as alertWidthExampleTs from '!raw-loader!./examples/alert-width-example.component.ts';
 import * as alertWidthExampleScss from '!raw-loader!./examples/alert-width-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { AlertExampleComponent } from './examples/alert-example.component';
 
 @Component({
     selector: 'app-alert',
-    templateUrl: './alert-docs.component.html',
+    templateUrl: './alert-docs.component.html'
 })
-export class AlertDocsComponent implements OnInit {
+export class AlertDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -75,12 +71,9 @@ export class AlertDocsComponent implements OnInit {
         {
             language: 'html',
             scssFileCode: alertExampleScs,
-            component: 'AlertExampleComponent',
             fileName: 'alert-example',
-            code: alertExampleHtml,
-            typescriptFileCode: alertExampleTs,
-        },
-
+            code: alertExampleHtml
+        }
     ];
 
     alertComponentContentExample: ExampleFile[] = [
@@ -95,55 +88,50 @@ export class AlertDocsComponent implements OnInit {
             fileName: 'alert-component-as-content-example',
             code: alertComponentAsContentExample,
             component: 'AlertComponentAsContentExampleComponent',
-
+            entryComponent: true,
+            name: 'Main Component',
+            main: true
         },
         {
             language: 'typescript',
             code: alertContent,
-            name: 'Alert Content',
             fileName: 'alert-content',
-            secondFile: 'alert-content'
-        },
-        {
-            language: 'typescript',
-            code: alertComponentAsContentExampleModule,
-            name: 'Module',
-            module: 'app.module.ts'
+            component: 'AlertContentComponent',
+            name: 'Content Component',
+            entryComponent: true
         }
-
     ];
 
     alertInlineExample: ExampleFile[] = [
         {
             language: 'html',
-            component: 'AlertInlineExampleComponent',
             scssFileCode: alertInlineExampleScs,
             fileName: 'alert-inline-example',
-            code: alertInlineExampleHtml,
-            typescriptFileCode: alertInlineExampleTs
+            code: alertInlineExampleHtml
         }
     ];
 
     alertWidthExample: ExampleFile[] = [
         {
             language: 'html',
-            component: 'AlertWidthExampleComponent',
             code: alertWidthExampleHtml,
             fileName: 'alert-width-example',
-            typescriptFileCode: alertWidthExampleTs,
             scssFileCode: alertWidthExampleScss
+        },
+        {
+            language: 'typescript',
+            component: 'AlertWidthExampleComponent',
+            code: alertWidthExampleTs,
+            fileName: 'alert-width-example'
         }
     ];
 
     schema: Schema;
 
-    constructor(
-        private schemaFactory: SchemaFactoryService
-    ) {
+    constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

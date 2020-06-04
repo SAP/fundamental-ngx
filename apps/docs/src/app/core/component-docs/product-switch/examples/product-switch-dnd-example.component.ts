@@ -6,7 +6,6 @@ import { ProductSwitchItem } from '@fundamental-ngx/core';
     templateUrl: './product-switch-dnd-example.component.html'
 })
 export class ProductSwitchDndExampleComponent {
-
     list: ProductSwitchItem[] = [
         {
             title: 'Home',
@@ -64,13 +63,11 @@ export class ProductSwitchDndExampleComponent {
         {
             title: 'S/4HANA',
             icon: 'batch-payments'
-        },
+        }
     ];
 
     productChangeHandle(products: ProductSwitchItem[]): void {
         this.list = products;
         console.log(products);
     }
-
-
 }

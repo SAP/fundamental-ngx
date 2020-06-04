@@ -1,24 +1,19 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'fd-select-adding-example',
-  templateUrl: './select-adding-example.component.html',
-  styleUrls: ['./select-adding-example.component.scss']
+    selector: 'fd-select-adding-example',
+    templateUrl: './select-adding-example.component.html',
+    styleUrls: ['./select-adding-example.component.scss']
 })
 export class SelectAddingExampleComponent {
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
 
-    selectValue: string;
-
-    options: string[] = [
-        'Tomato',
-        'Pineapple',
-        'Apple'
-    ];
+    selectedValue: string;
 
     addedOptions: number = 1;
 
     addOption(): void {
-        this.options.push('added option ' + this.addedOptions++);
+        this.options.push(`New option ${this.addedOptions++}`);
     }
 
     removeOption(): void {
@@ -26,5 +21,4 @@ export class SelectAddingExampleComponent {
             this.options.pop();
         }
     }
-
 }

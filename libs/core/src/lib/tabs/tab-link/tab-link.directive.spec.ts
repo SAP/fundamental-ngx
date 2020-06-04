@@ -3,12 +3,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TabsModule } from '../tabs.module';
 
 @Component({
-    template: `
-        <div #directiveElement fd-tab-link>Tab Link Directive</div>
-    `
+    template: ` <div #directiveElement fd-tab-link>Tab Link Directive</div> `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 

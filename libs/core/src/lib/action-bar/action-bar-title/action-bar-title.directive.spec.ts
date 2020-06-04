@@ -4,12 +4,10 @@ import { ActionBarTitleDirective } from './action-bar-title.directive';
 import { ActionBarModule } from '../action-bar.module';
 
 @Component({
-    template: `
-        <h1 #directiveElement fd-action-bar-title>Action Bar Title Test Text</h1>
-    `
+    template: ` <h1 #directiveElement fd-action-bar-title>Action Bar Title Test Text</h1> `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 

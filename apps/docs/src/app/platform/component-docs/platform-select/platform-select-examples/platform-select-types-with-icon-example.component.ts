@@ -7,7 +7,6 @@ export class Fruit {
     age: number;
     icon: string;
 
-
     constructor(id: string, name: string, age: number, icon: string) {
         this.id = id;
         this.name = name;
@@ -30,7 +29,7 @@ export class PlatformSelectTypesWithIconExampleComponent implements OnInit {
         new Fruit('D', 'pineapple', 11, 'passenger-train'),
         new Fruit('E', 'watermelon', 10, 'world')
     ];
-    option = this.userList.map<SelectItem>(item => {
+    option = this.userList.map<SelectItem>((item) => {
         return {
             label: item.name + item.id,
             value: item,

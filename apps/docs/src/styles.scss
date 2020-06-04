@@ -1,6 +1,39 @@
 // @import url("../../../node_modules/fundamental-styles/dist/fundamental-styles.css");
+@import "~@angular/cdk/overlay-prebuilt.css";
 
 $gutter-size: 15px;
+
+@font-face {
+    font-family: "72";
+    src: url("node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_base_fiori/fonts/72-Regular-full.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "72";
+    src: url("node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_base_fiori/fonts/72-Light.woff")
+        format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "72";
+    src: url("node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_base_fiori/fonts/72-Bold.woff")
+        format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SAP-icons";
+    src: url("node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/fonts/SAP-icons.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
 
 html,
 body {
@@ -9,7 +42,9 @@ body {
     overflow: hidden;
 }
 
-*, ::after, ::before {
+*,
+::after,
+::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
@@ -17,7 +52,7 @@ body {
 body {
     margin: 0;
     background-color: white;
-    font-family: '72', sans-serif;
+    font-family: "72", sans-serif;
 }
 
 .container {
@@ -78,6 +113,32 @@ fd-card {
     width: 95%;
 }
 
+.fd-scroll-spy-example-icon-class {
+    position: relative;
+    display: inline-block;
+    margin-right: 4px;
+
+    @at-root {
+        [dir="rtl"] &,
+        &[dir="rtl"] {
+            margin-right: 0;
+            margin-left: 4px;
+            transform: rotate(180deg);
+            bottom: 2px;
+        }
+    }
+}
+
+.middle-marker-container {
+    @at-root {
+        [dir="rtl"] &,
+        &[dir="rtl"] {
+            right: initial !important;
+            left: 0 !important;
+        }
+    }
+}
+
 pre {
     margin: 0;
     white-space: pre-wrap;
@@ -105,24 +166,11 @@ pre {
     display: block;
 
     ul {
-        list-style: none;
         margin-left: 0;
-        padding-left: 0;
 
         a:hover {
             text-decoration: none;
-            color: inherit;
         }
-    }
-
-    a[aria-disabled='true']:hover,
-    a[aria-disabled='true']:visited,
-    a[aria-disabled='true']:active,
-    a[aria-disabled='true']:focus,
-    a.is-disabled {
-        color: rgba(10, 110, 209, 0.4);
-        cursor: not-allowed;
-        text-decoration: none;
     }
 }
 
@@ -130,12 +178,14 @@ pre {
     text-align: center;
 }
 
-.is-disabled, .is-blocked {
+.is-disabled,
+.is-blocked {
     pointer-events: none;
 }
 
 //highlight overrides
-.hljs-tag, .hljs-name {
+.hljs-tag,
+.hljs-name {
     color: #000080;
 }
 
@@ -156,19 +206,19 @@ pre {
 }
 
 .hljs-meta {
-    color: #2b91af
+    color: #2b91af;
 }
 
 .side-nav__search {
     padding: 10px 10px 0 10px;
 }
 
-a, a:focus {
+a,
+a:focus {
     text-decoration: none;
 }
 
 .fd-playground--markdown {
-
     #fundamental-ngx {
         margin-top: calc(2rem + 10px);
         font-size: 2.2rem;
@@ -223,10 +273,12 @@ a, a:focus {
     flex-direction: column;
 }
 
-.modal-custom-overlay-example {
-    background-color: rgba(255, 0, 0, 0.4);
-}
+body {
+    .custom-container-class {
+        z-index: 0;
+    }
 
-.modal-no-backdrop-custom-shadow {
-    box-shadow: 0 4px 20px 0 grey
+    .dialog-custom-overlay-example {
+        background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(0, 0, 0, 0.48) 100%);
+    }
 }

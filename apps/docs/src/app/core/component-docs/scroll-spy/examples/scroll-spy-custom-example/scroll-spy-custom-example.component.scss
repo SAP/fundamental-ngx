@@ -32,18 +32,6 @@
     }
 }
 
-.icon {
-    left: -4px;
-    opacity: 0;
-}
-
-.selected {
-    font-weight: bold;
-    .icon {
-        opacity: 1;
-    }
-}
-
 .middle-marker-container {
     position: absolute;
     top: 50%;
@@ -53,5 +41,16 @@
     .marker {
         height: 1px;
         border: 0.5px dashed black;
+    }
+}
+
+.icon {
+    opacity: 0;
+}
+
+.selected {
+    font-weight: bold;
+    .icon {
+        opacity: 1;
     }
 }

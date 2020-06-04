@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
- * The component that represents a loading spinner.
+ * @deprecated
+ * LoadingSpinnerComponent is deprecated.
+ * Consult docs for better alternative.
  *
+ * The component that represents a loading spinner.
  * ```html
  * <fd-loading-spinner [loading]="true"></fd-loading-spinner>
  * ```

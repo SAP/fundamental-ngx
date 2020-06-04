@@ -1,7 +1,21 @@
-import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    EventEmitter,
+    Input,
+    Output,
+    TemplateRef,
+    Inject,
+    Optional,
+    ViewEncapsulation
+} from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
-import { ButtonOptions, ButtonType } from '../button/button.component';
+import { ButtonType, ButtonOptions } from '../button/button.component';
+import { Observable, of } from 'rxjs';
+import { RtlService } from '../utils/public_api';
+import { map } from 'rxjs/operators';
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
@@ -29,12 +43,12 @@ import { ButtonOptions, ButtonType } from '../button/button.component';
     selector: 'fd-split-button',
     templateUrl: 'split-button.component.html',
     styleUrls: ['./split-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class SplitButtonComponent {
-
     /** @hidden */
-    @ContentChild(SplitButtonActionTitle, { read: TemplateRef, static: false })
+    @ContentChild(SplitButtonActionTitle, { read: TemplateRef })
     titleTemplate: TemplateRef<any>;
 
     /** The trigger events that will open/close the popover.
@@ -76,6 +90,7 @@ export class SplitButtonComponent {
     fdType: ButtonType;
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
+
     @Input()
     options: ButtonOptions | ButtonOptions[];
 
@@ -99,6 +114,13 @@ export class SplitButtonComponent {
     /** Event sent when primary button is clicked */
     @Output()
     readonly primaryButtonClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** @hidden */
+    direction$: Observable<string>;
+
+    constructor(@Optional() private rtlService: RtlService) {
+        this.direction$ = rtlService ? rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'rtl' : 'ltr'))) : of('ltr');
+    }
 
     /**
      *  Handles primary button click
@@ -138,5 +160,4 @@ export class SplitButtonComponent {
             this.isOpenChange.emit(this.isOpen);
         }
     }
-
 }

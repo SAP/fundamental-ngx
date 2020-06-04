@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'fd-scroll-spy-custom-example',
-  templateUrl: './scroll-spy-custom-example.component.html',
-  styleUrls: ['./scroll-spy-custom-example.component.scss']
+    selector: 'fd-scroll-spy-custom-example',
+    templateUrl: './scroll-spy-custom-example.component.html',
+    styleUrls: ['./scroll-spy-custom-example.component.scss']
 })
 export class ScrollSpyCustomExampleComponent implements OnInit {
-
     selectedSpy = 'element-2';
     items: any[] = [];
 
@@ -16,8 +15,7 @@ export class ScrollSpyCustomExampleComponent implements OnInit {
 
     generateItems(count: number): void {
         for (let i = 0; i < count; ++i) {
-            this.items.push({name: 'Element ' + i, id: 'element-' + i});
+            this.items.push({ name: 'Element ' + i, id: 'element-' + i });
         }
     }
-
 }

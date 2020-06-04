@@ -7,13 +7,19 @@ import { Component } from '@angular/core';
 export class ListExampleComponent {}
 
 @Component({
-    selector: 'fd-list-actions-example',
-    templateUrl: './list-actions-example.component.html'
+    selector: 'fd-list-secondary-example',
+    templateUrl: './list-secondary-example.component.html'
 })
-export class ListActionsExampleComponent {}
+export class ListSecondaryExampleComponent {}
 
 @Component({
-    selector: 'fd-list-checkbox-example',
-    templateUrl: './list-checkbox-example.component.html'
+    selector: 'fd-list-icon-example',
+    templateUrl: './list-icon-example.component.html'
 })
-export class ListCheckboxExampleComponent {}
+export class ListIconExampleComponent {}
+
+@Component({
+    selector: 'fd-list-complex-example',
+    templateUrl: './list-complex-example.component.html'
+})
+export class ListComplexExampleComponent {}

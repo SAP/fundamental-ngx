@@ -1,1 +1,1 @@
-export type FormStates = 'valid' | 'invalid' | 'warning' | 'information';
+export type FormStates = 'success' | 'error' | 'warning' | 'information';

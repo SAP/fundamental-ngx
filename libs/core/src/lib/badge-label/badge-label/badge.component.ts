@@ -3,6 +3,10 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 import { BadgeStatus, BadgeModifier } from '../label/label.component';
 
 /**
+ * @deprecated
+ * BadgeComponent is deprecated.
+ * Consult docs for better alternative.
+ *
  * Badge component, used to indicate status.
  * Colors, generally in combination with text, are used to easily highlight the state of an object.
  */

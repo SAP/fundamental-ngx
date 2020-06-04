@@ -1,48 +1,57 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { BaseComponent } from '../base';
 
-export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main';
-export type ButtonOptions = 'light' | 'emphasized' | '';
-
+export type ButtonType =
+    | ''
+    | 'standard'
+    | 'positive'
+    | 'negative'
+    | 'attention'
+    | 'ghost'
+    | 'transparent'
+    | 'emphasized'
+    | 'menu';
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent {
+export class ButtonComponent extends BaseComponent {
     /** Option to make to button compact. */
     @Input()
     compact: boolean;
-
-    /** Option to truncate content of the button based on width. */
-    @Input()
-    width: string;
 
     /** The icon to include in the button */
     @Input()
     glyph: string;
 
-    /** Button is disabled on true. */
-    @Input()
-    disabled: boolean;
-
-    /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
-     * Leave empty for default (Action button).'*/
+    /** The type of the button. Types includes
+    'standard','positive', 'negative', 'attention', 'ghost',
+     'transparent', 'emphasized','menu'.
+     * Leave empty for default (standard button).'*/
     @Input()
     type: ButtonType;
 
-    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
+    /** Tooltip text to show when focused for more*/
     @Input()
-    options: ButtonOptions | ButtonOptions[];
+    title?: string;
 
     /** Event sent when button is clicked */
     @Output()
     buttonClicked = new EventEmitter();
 
+    @ViewChild('fdButton', { read: ElementRef, static: false })
+    focusEl: ElementRef<HTMLElement>;
+
+    constructor(protected _changeDetector: ChangeDetectorRef) {
+        super(_changeDetector);
+    }
+
     /**
      *  Handles button click
      */
     public onBtnClick($event: any) {
-        this.buttonClicked.emit();
+        this.buttonClicked.emit($event);
     }
 
     /** @hidden */

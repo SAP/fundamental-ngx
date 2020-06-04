@@ -1,0 +1,4 @@
+<ng-content></ng-content>
+<div class="fd-dialog__loader" *ngIf="dialogRef.onLoading | async">
+    <fd-busy-indicator [loading]="true" size="l"></fd-busy-indicator>
+</div>

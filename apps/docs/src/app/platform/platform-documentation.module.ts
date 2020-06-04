@@ -5,96 +5,51 @@ import { ROUTES } from './platform-documentation.routes';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { MarkdownModule } from 'ngx-markdown';
-import { PlatformButtonDocsComponent } from '../platform/component-docs/platform-button/platform-button-docs.component';
-import { PlatformButtonHeaderComponent } from '../platform/component-docs/platform-button/platform-button-header/platform-button-header.component';
 import { NewComponentComponent } from '../platform/component-docs/new-component/new-component.component';
-import {
-    PlatformButtonIconsExampleComponent,
-    PlatformButtonOptionsExampleComponent,
-    PlatformButtonSizesExampleComponent,
-    PlatformButtonStateExampleComponent,
-    PlatformButtonTypesExampleComponent,
-    PlatformButtonTruncateExampleComponent
-} from '../platform/component-docs/platform-button/platform-button-examples/platform-button-examples.component';
-import {
-    PlatformActionbarExamplesComponent
-} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-simple-example.component';
-import {PlatformActionbarWithBackButtonExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
-import {PlatformActionbarWithDescriptionExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
-import {PlatformActionbarWithLongPageTitleExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
-import {PlatformActionbarEditTitleExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-edit-title-example.component';
-import {PlatformActionbarWithContextualMenuExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
-import {PlatformActionbarWithPositiveNegativeActionsExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
-import { PlatformActionbarHeaderComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
-import {PlatformActionBarDocsComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
-import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
-import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
-import { PlatformMenuBasicExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-basic-example.component';
-import { PlatformMenuComplexExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-complex-example.component';
-import { PlatformMenuSeparatorExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-separator-example.component';
-import { PlatformMenuGroupExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-group-example.component';
-import { PlatformMenuIconsExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-icons-example.component';
-import { PlatformMenuClickCloseExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-click-close-example.component';
+import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
+import { ImageModule } from '@fundamental-ngx/core';
+import { PlatformButtonModule, 
+         PlatformActionBarModule,
+         PlatformLinkModule, 
+         PlatformMenuModule, 
+         PlatformSearchFieldModule, 
+         PlatformSelectModule,
+         PlatformInfoLabelModule,
+         PlatformMenuButtonModule,
+         PlatformSplitMenuButtonModule,
+         PlatformRadioGroupModule,
+         PlatformActionButtonGroupModule,
+       } from '@fundamental-ngx/platform';
 
-import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
-import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
-import { PlatformSelectTypesDefaultExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-default-example.component';
-import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-noborder-example.component';
-import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
-import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { PlatformInputDocsComponent } from './component-docs/platform-input/platform-input-docs.component';
 import { PlatformInputExampleComponent } from './component-docs/platform-input/platform-input-example/platform-input-example.component';
 import { PlatformInputHeaderComponent } from './component-docs/platform-input/platform-input-header/platform-input-header.component';
 
 @NgModule({
-    declarations: [
-        PlatformDocumentationComponent,
-        PlatformHomeComponent,
-        PlatformButtonDocsComponent,
-        PlatformButtonIconsExampleComponent,
-        PlatformButtonOptionsExampleComponent,
-        PlatformButtonSizesExampleComponent,
-        PlatformButtonTypesExampleComponent,
-        PlatformButtonStateExampleComponent,
-        PlatformButtonHeaderComponent,
-        PlatformButtonTruncateExampleComponent,
-        PlatformActionBarDocsComponent,
-        PlatformActionbarHeaderComponent,
-        PlatformActionbarExamplesComponent,
-        PlatformActionbarWithBackButtonExampleComponent,
-        PlatformActionbarWithDescriptionExampleComponent,
-        PlatformActionbarWithLongPageTitleExampleComponent,
-        PlatformActionbarEditTitleExampleComponent,
-        PlatformActionbarWithContextualMenuExampleComponent,
-        PlatformActionbarWithPositiveNegativeActionsExampleComponent,
-        PlatformMenuDocsComponent,
-        PlatformMenuHeaderComponent,
-        PlatformMenuBasicExampleComponent,
-        PlatformMenuGroupExampleComponent,
-        PlatformMenuSeparatorExampleComponent,
-        PlatformMenuIconsExampleComponent,
-        PlatformMenuComplexExampleComponent,
-        PlatformMenuClickCloseExampleComponent,
-        NewComponentComponent,
-        PlatformSelectDocsComponent,
-        PlatformSelectHeaderComponent,
-        PlatformSelectTypesDefaultExampleComponent,
-        PlatformSelectTypesNoBorderExampleComponent,
-        PlatformSelectTypesSplitExampleComponent,
-        PlatformSelectTypesWithIconExampleComponent,
-        PlatformInputDocsComponent,
-        PlatformInputExampleComponent,
-        PlatformInputHeaderComponent
-    ],
+    declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
     imports: [
+        ImageModule,
+        PlatformButtonModule,
+        PlatformActionBarModule,
+        PlatformActionButtonGroupModule,
+        PlatformLinkModule,
+        PlatformInfoLabelModule,
+        PlatformMenuModule,
+        PlatformMenuButtonModule,
+        PlatformSearchFieldModule,
+        PlatformSelectModule,
+        PlatformSplitMenuButtonModule,
+        PlatformRadioGroupModule,
         SharedDocumentationModule,
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),
-        RouterModule.forChild(ROUTES)
+        RouterModule.forChild(ROUTES),
+        ScrollingModule
     ],
-    providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }]
+    providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }, StackblitzService]
 })
 export class PlatformDocumentationModule {}

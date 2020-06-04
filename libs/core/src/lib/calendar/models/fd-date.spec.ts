@@ -70,4 +70,24 @@ describe('FdDateSpec', () => {
         const fdDate = new FdDate(2022, 9, 24);
         expect(fdDate.getDay()).toBe(7);
     });
+
+    it('should return good week number for 28.12.2020 (53)', () => {
+        const fdDate = new FdDate(2020, 12, 28);
+        expect(fdDate.getWeekNumber()).toBe(53);
+    });
+
+    it('should return good week number for 01.01.2020 (1)', () => {
+        const fdDate = new FdDate(2020, 1, 1);
+        expect(fdDate.getWeekNumber()).toBe(1);
+    });
+
+    it('should return good week number for 7.03.2016 (10)', () => {
+        const fdDate = new FdDate(2016, 3, 7);
+        expect(fdDate.getWeekNumber()).toBe(10);
+    });
+
+    it('should return good week number for 29.02.2000 (9)', () => {
+        const fdDate = new FdDate(2000, 2, 29);
+        expect(fdDate.getWeekNumber()).toBe(9);
+    });
 });

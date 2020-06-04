@@ -6,7 +6,6 @@ import { FormControl, FormGroup } from '@angular/forms';
     templateUrl: './localization-editor-forms-example.component.html'
 })
 export class LocalizationEditorFormsExampleComponent {
-
     customForm = new FormGroup({
         en: new FormControl(''),
         de: new FormControl(''),
@@ -15,5 +14,5 @@ export class LocalizationEditorFormsExampleComponent {
         nl: new FormControl('')
     });
 
-    customFormKeys: string[] = ['en', 'de', 'pl', 'ca', 'nl'];
+    otherLanguages: string[] = ['de', 'pl', 'ca', 'nl'];
 }

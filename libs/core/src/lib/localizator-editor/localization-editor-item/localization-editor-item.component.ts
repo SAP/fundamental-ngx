@@ -1,5 +1,6 @@
 import {
-    AfterContentInit, ChangeDetectionStrategy,
+    AfterContentInit,
+    ChangeDetectionStrategy,
     Component,
     ContentChild,
     Input,
@@ -8,9 +9,7 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import {
-    LocalizationEditorLabel
-} from '../localization-editor.directives';
+import { LocalizationEditorLabel } from '../localization-editor.directives';
 
 /**
  *  Component that represents field with add-on.
@@ -27,7 +26,6 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocalizationEditorItemComponent {
-
     /** @hidden */
     type: string;
 
@@ -40,6 +38,6 @@ export class LocalizationEditorItemComponent {
     compact: boolean;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorLabel, { read: TemplateRef, static: false })
+    @ContentChild(LocalizationEditorLabel, { read: TemplateRef })
     labelTemplate: TemplateRef<any>;
 }

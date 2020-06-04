@@ -12,7 +12,7 @@ const DISPLAY_NUM_PAGES = 3;
 export class PaginationService {
     /** Constant representing the default number of items per page. */
     public DEFAULT_ITEMS_PER_PAGE = 10;
-    
+
     /** @hidden */
     public MORE = -1;
 
@@ -58,7 +58,7 @@ export class PaginationService {
                 for (let i = pagination.currentPage - buffer; i <= pagination.currentPage + buffer; i++) {
                     pages.push(i);
                 }
-                if (totalPages !== DISPLAY_NUM_PAGES + 1) {
+                if (totalPages !== DISPLAY_NUM_PAGES + 1 && pagination.currentPage !== totalPages - 2) {
                     pages.push(this.MORE);
                 }
                 pages.push(totalPages);

@@ -11,7 +11,6 @@ describe('PopoverComponent', () => {
         TestBed.configureTestingModule({
             imports: [PopoverModule]
         }).compileComponents();
-
     }));
 
     beforeEach(() => {
@@ -45,7 +44,7 @@ describe('PopoverComponent', () => {
         expect(component.isOpen).toBe(true);
     });
 
-    it ('should support Alt + ArrowDown event', () => {
+    it('should support Alt + ArrowDown event', () => {
         spyOn(component.isOpenChange, 'emit');
 
         const event: any = {

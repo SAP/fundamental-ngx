@@ -9,14 +9,13 @@ import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 
-
 @Component({
-    template: `        
-            <ng-template #testTemplate let-notification>
-                <h1>test</h1>
-                <a href="#">testLink</a>
-                <button>testBtn</button>
-            </ng-template>
+    template: `
+        <ng-template #testTemplate let-notification>
+            <h1>test</h1>
+            <a href="#">testLink</a>
+            <button>testBtn</button>
+        </ng-template>
     `
 })
 class TemplateTestComponent {
@@ -39,8 +38,7 @@ describe('NotificationComponent', () => {
         TestBed.configureTestingModule({
             imports: [TestModule],
             providers: [DynamicComponentService, NotificationService]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -52,7 +50,7 @@ describe('NotificationComponent', () => {
 
     it('should generate From Object', () => {
         spyOn<any>(component, 'createFromDefaultConfiguration').and.callThrough();
-        component.childComponentType = new NotificationDefault();
+        component.childContent = new NotificationDefault();
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
@@ -61,7 +59,7 @@ describe('NotificationComponent', () => {
 
     it('should generate component', () => {
         spyOn<any>(component, 'loadFromComponent').and.callThrough();
-        component.childComponentType = TemplateTestComponent;
+        component.childContent = TemplateTestComponent;
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
@@ -70,7 +68,7 @@ describe('NotificationComponent', () => {
 
     it('should generate template', () => {
         spyOn<any>(component, 'loadFromTemplate').and.callThrough();
-        component.childComponentType = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
+        component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();

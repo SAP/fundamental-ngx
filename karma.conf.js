@@ -7,8 +7,9 @@ const { constants } = require('karma');
 module.exports = () => {
   return {
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['parallel', 'jasmine', '@angular-devkit/build-angular'],
     plugins: [
+      require('karma-parallel'),
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
@@ -28,7 +29,22 @@ module.exports = () => {
     colors: true,
     logLevel: constants.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: true
+    browsers: ['ChromeHeadlessNoSandbox'],
+    singleRun: true,
+  customLaunchers:{
+      ChromeHeadlessNoSandbox:{
+          base:"ChromeHeadless",
+          flags:[
+              "--no-sandbox",
+              // required to run without privileges in Docker
+              "--disable-web-security",
+              "--disable-gpu",
+              "--remote-debugging-port=9222"
+          ]
+      }
+  },
+    parallelOptions: {
+      executors: 3
+    },
   };
 };

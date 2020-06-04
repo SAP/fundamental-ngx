@@ -3,12 +3,47 @@
 </fd-docs-section-title>
 <description>
     The standard version of the component that most people will use regularly. Width of the input can be controlled
-    simply through the top-level component element sizing.
+    simply through the top-level component element sizing. Overflowing tokens can be reviewed by swiping the tokens left
+    and right.
 </description>
-<component-example [name]="'ex1'">
+<component-example>
     <fd-multi-input-example></fd-multi-input-example>
 </component-example>
 <code-example [exampleFiles]="multiInputBasic"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'compactMultiInput'" [componentName]="'multi-input'">
+    Compact Multi Input
+</fd-docs-section-title>
+<description>
+    The compact multi-input is for large screens. The user can review tokens by pressing the right or left arrows on the
+    keyboard.
+</description>
+<component-example>
+    <fd-multi-input-compact-example></fd-multi-input-compact-example>
+</component-example>
+<code-example [exampleFiles]="compact"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'mobileMultiInput'" [componentName]="'multi-input'">
+    Mobile Mode Multi Input
+</fd-docs-section-title>
+<description>
+    There is way to use mobile mode on multi input component. To achieve it user needs to:
+    <ul>
+        <li>Set <code>[mobileMode]</code> property to true</li>
+        <li>Provide <code>DIALOG_CONFIG</code></li>
+        <li>
+            Add configuration object of multiInput by passing <code>[multiInputMobileConfig]</code> property
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fd-multi-input-mobile-example></fd-multi-input-mobile-example>
+</component-example>
+<code-example [exampleFiles]="mobile"></code-example>
 
 <separator></separator>
 
@@ -20,7 +55,7 @@
     fully customizable through providing a function that accepts the object and returns the string to be displayed. The
     example below shows displaying an object field in full uppercase.
 </description>
-<component-example [name]="'ex2'">
+<component-example>
     <fd-multi-input-displaywith-example></fd-multi-input-displaywith-example>
 </component-example>
 <code-example [exampleFiles]="display"></code-example>
@@ -34,7 +69,7 @@
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
     accepts an array and a search term, and then returns the desired filtered array.
 </description>
-<component-example [name]="'ex3'">
+<component-example>
     <fd-multi-input-filter-example></fd-multi-input-filter-example>
 </component-example>
 <code-example [exampleFiles]="filter"></code-example>
@@ -48,7 +83,7 @@
     The <code>dropdownValues</code> input can accept an Observable with the async pipe, which could be useful for
     autocomplete.
 </description>
-<component-example [name]="'ex4'">
+<component-example>
     <fd-multi-input-async-example></fd-multi-input-async-example>
 </component-example>
 <code-example [exampleFiles]="async"></code-example>
@@ -59,7 +94,23 @@
     Multi Input in Reactive Form
 </fd-docs-section-title>
 <description>The multi-input component may also be used within an angular reactive form.</description>
-<component-example [name]="'ex5'">
+<component-example>
     <fd-multi-input-form-example></fd-multi-input-form-example>
 </component-example>
 <code-example [exampleFiles]="form"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'newTokens'" [componentName]="'multi-input'">
+    Adding New Tokens
+</fd-docs-section-title>
+<description>
+    Set <code>[allowNewTokens]</code> to "true" to allow the creation of new tokens in the multi-input. Note that if you
+    are populating the multi-input with objects and using a custom <code>displayFn</code>, you will also need to
+    implement your own <code>newTokenParseFn</code> so your multi-input knows how to format a new object. This function
+    is not required if your collection is simply an array of strings.
+</description>
+<component-example>
+    <fd-multi-input-new-tokens-example></fd-multi-input-new-tokens-example>
+</component-example>
+<code-example [exampleFiles]="newTokens"></code-example>

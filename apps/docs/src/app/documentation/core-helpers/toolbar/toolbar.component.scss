@@ -1,52 +1,22 @@
-:host {
-
-    background-color: #354a5f;
-    color: #fff;
-    padding: 8px 20px;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,.5);
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    position: fixed;
-}
-
 .fd-docs--toolbar {
-
-
-    &__sidebar-btn {
-        margin-left: -10px;
-        margin-right: 10px;
-        color: #fff;
-
-        &:active {
-            background-color: var(--fd-color-status-4);
-            color: black;
-        }
-
-        &:hover {
-            color: black;
-        }
-    }
-
     &__home-logo {
-        flex: 0 0 auto;
+        display: inline-block;
         font-size: 20px;
         line-height: 1.5;
         font-weight: 700;
         margin: 0;
         text-align: center;
         color: #fff;
+        color: var(--sapShell_TextColor);
         text-decoration: none;
+        margin-left: 10px;
 
         @media (min-width: 576px) {
             font-size: 24px;
         }
 
         &-framework {
+            display: inline-block;
             color: #61dafb;
         }
     }
@@ -56,10 +26,13 @@
     }
 
     &__version {
+        color: #fff;
+        color: var(--sapShell_TextColor);
+        line-height: 2.3rem;
         flex: 0 0 auto;
-        margin-left: 20px;
         font-size: 1.2rem;
         display: inline-block;
+        margin-right: 0.5rem;
 
         @media (max-width: 576px) {
             display: none;
@@ -70,18 +43,29 @@
         margin-left: 10px;
         display: flex;
         height: 28px;
-        @media only screen and (max-width:640px) {
+        @media only screen and (max-width: 640px) {
             display: none;
         }
     }
 }
 
+.fd-docs--theme-menu {
+    margin: 0 0.5rem;
+    color: #fff;
+    color: var(--sapShell_TextColor);
+    &:hover {
+        color: #fff;
+        color: var(--sapShell_TextColor);
+    }
+}
+
 .logo-github {
-    width: 2rem;
-    height: 2rem;
-    fill: #ffffff;
+    width: 1rem;
+    height: 1rem;
+    margin: 0 0.5rem;
+    fill: #fff;
+    fill: var(--sapShell_TextColor);
     vertical-align: middle;
-    margin-left: 20px;
 
     &:hover {
         cursor: pointer;

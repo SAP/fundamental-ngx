@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.component.html';
 import * as inlineHelpTriggerHtml from '!raw-loader!./examples/inline-help-trigger-example.component.html';
-import * as inlineHelpTsCode from '!raw-loader!./examples/inline-help-examples.component.ts';
 import * as inlineHelpScssCode from '!raw-loader!./examples/inline-help-example.component.scss';
 import * as inlineHelpStylesHtml from '!raw-loader!./examples/inline-help-styled-example.component.html';
 import Popper from 'popper.js';
@@ -14,7 +13,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-inline-help',
     templateUrl: './inline-help-docs.component.html'
 })
-export class InlineHelpDocsComponent implements OnInit {
+export class InlineHelpDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -51,9 +50,6 @@ export class InlineHelpDocsComponent implements OnInit {
             language: 'html',
             code: inlineHelpSrc,
             fileName: 'inline-help-example',
-            secondFile: 'inline-help-examples',
-            typescriptFileCode: inlineHelpTsCode,
-            component: 'InlineHelpExampleComponent',
             scssFileCode: inlineHelpScssCode
         }
     ];
@@ -62,22 +58,15 @@ export class InlineHelpDocsComponent implements OnInit {
         {
             language: 'html',
             code: inlineHelpTriggerHtml,
-            fileName: 'inline-help-trigger-example',
-            secondFile: 'inline-help-examples',
-            typescriptFileCode: inlineHelpTsCode,
-            component: 'InlineHelpTriggerExampleComponent'
+            fileName: 'inline-help-trigger-example'
         }
     ];
-
 
     inlineHelpStyles: ExampleFile[] = [
         {
             language: 'html',
             code: inlineHelpStylesHtml,
-            fileName: 'inline-help-styled-example',
-            secondFile: 'inline-help-examples',
-            typescriptFileCode: inlineHelpTsCode,
-            component: 'InlineHelpStyledExampleComponent'
+            fileName: 'inline-help-styled-example'
         }
     ];
 
@@ -85,7 +74,6 @@ export class InlineHelpDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('inlineHelp');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

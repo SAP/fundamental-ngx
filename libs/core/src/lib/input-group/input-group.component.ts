@@ -6,15 +6,18 @@ import {
     forwardRef,
     ViewEncapsulation,
     ContentChild,
-    TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, OnInit
+    TemplateRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    AfterViewInit,
+    OnInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '../form/form-control/form-states';
-import { ButtonOptions, ButtonType } from '../button/button.component';
+import { ButtonType } from '../button/button.component';
 
 export type InputGroupPlacement = 'before' | 'after';
-
 
 /**
  * The component that represents an input group.
@@ -40,13 +43,12 @@ export type InputGroupPlacement = 'before' | 'after';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupComponent implements ControlValueAccessor {
-
     /** @hidden */
-    @ContentChild(InputGroupInputDirective, { static: false })
+    @ContentChild(InputGroupInputDirective)
     inputElement: InputGroupInputDirective;
 
     /** @hidden */
-    @ContentChild(InputGroupAddOnDirective, { static: false })
+    @ContentChild(InputGroupAddOnDirective)
     addOnElement: InputGroupAddOnDirective;
 
     /** Input template */
@@ -81,14 +83,14 @@ export class InputGroupComponent implements ControlValueAccessor {
     buttonFocusable: boolean = true;
 
     /**
-     * The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
-     * Leave empty for default (Action button).'*/
+     * @deprecated, leaving for backwards compatibility, it will be removed in `0.17.0`.
+     */
     @Input()
     buttonType: ButtonType;
 
-    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
+    /** The type of the input, used in Input Group. By default value is set to 'text' */
     @Input()
-    buttonOptions: ButtonOptions | ButtonOptions[] = 'light';
+    type: string = 'text';
 
     /** The icon value for the add-on. */
     @Input()
@@ -104,28 +106,33 @@ export class InputGroupComponent implements ControlValueAccessor {
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
     state: FormStates;
+
+    /**
+     * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
+     * @hidden
+     */
+    @Input()
+    inShellbar: boolean = false;
 
     /** Event emitted when the add-on button is clicked. */
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
 
     /** @hidden */
-    constructor(
-        private changeDetectorRef: ChangeDetectorRef
-    ) {}
+    constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     inputTextValue: string;
 
     /** @hidden */
-    onChange: any = () => { };
+    onChange: any = () => {};
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {};
 
     /** Get the value of the text input. */
     get inputText(): string {

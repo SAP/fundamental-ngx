@@ -20,7 +20,7 @@ import { PanelFooterComponent } from './panel-footer/panel-footer.component';
         PanelActionsComponent,
         PanelFiltersComponent,
         PanelBodyComponent,
-        PanelFooterComponent,
+        PanelFooterComponent
     ],
     imports: [CommonModule],
     exports: [
@@ -32,7 +32,7 @@ import { PanelFooterComponent } from './panel-footer/panel-footer.component';
         PanelActionsComponent,
         PanelFiltersComponent,
         PanelBodyComponent,
-        PanelFooterComponent,
+        PanelFooterComponent
     ]
 })
 export class PanelModule {}

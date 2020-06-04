@@ -1,5 +1,5 @@
 <button fd-button (click)="open(notificationTemplate)">Open Notification</button>
-<span style="margin-left: 24px;">{{closeReason}}</span>
+<span style="margin-left: 24px;">{{ closeReason }}</span>
 
 <ng-template let-notification #notificationTemplate>
     <fd-notification-header (closeButtonClick)="notification.dismiss('Close Button Click')">
@@ -16,10 +16,14 @@
             </div>
         </div>
         <fd-notification-footer>
-            <button fd-button [options]="'light'">More Info</button>
+            <button fd-button [fdType]="'transparent'">More Info</button>
             <div fd-notification-actions>
-                <button fd-button [fdType]="'positive'"  (click)="notification.close('Approve Button Click')">Approve</button>
-                <button fd-button [fdType]="'negative'"  (click)="notification.dismiss('Reject Button Click')">Reject</button>
+                <button fd-button [fdType]="'positive'" (click)="notification.close('Approve Button Click')">
+                    Approve
+                </button>
+                <button fd-button [fdType]="'negative'" (click)="notification.dismiss('Reject Button Click')">
+                    Reject
+                </button>
             </div>
         </fd-notification-footer>
     </fd-notification-body>

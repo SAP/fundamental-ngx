@@ -10,21 +10,29 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
 export class PlatformDocumentationComponent {
     @ViewChild('content', { static: true }) contentElRef: ElementRef;
 
-    @ViewChild(SectionsToolbarComponent, { static: false, read: SectionsToolbarComponent })
+    @ViewChild(SectionsToolbarComponent, { read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
     sideCollapsed: boolean = window.innerWidth < 576;
 
-    guides = [{ url: 'platform/home', name: 'Home' }, { url: 'platform/new-component', name: 'New Component' }];
+    guides = [
+        { url: 'platform/home', name: 'Home' },
+        { url: 'platform/new-component', name: 'New Component' }
+    ];
 
-   
-
-    components = [{ url: 'platform/action-bar', name: 'Action Bar' }, 
-                  { url: 'platform/button', name: 'Button' }, 
-                  { url: 'platform/menu', name: 'Menu' },
-                  { url: 'platform/select', name: 'Select'},
-                  { url: 'platform/input', name: 'Input'}
-                 ];
+    components = [
+        { url: 'platform/action-bar', name: 'Action Bar' },
+        { url: 'platform/button', name: 'Button' },
+        { url: 'platform/info-label', name: 'Info Label' },
+        { url: 'platform/link', name: 'Link' },
+        { url: 'platform/menu', name: 'Menu' },
+        { url: 'platform/menu-button', name: 'Menu Button' },
+        { url: 'platform/radio-group', name: 'Radio Button Group' },
+        { url: 'platform/select', name: 'Select' },
+        { url: 'platform/search-field', name: 'Search Field' },
+        { url: 'platform/split-menu-button', name: 'Split Menu Button' },
+        { url: 'platform/input', name: 'Input'}
+    ];
 
     layouts = [];
 

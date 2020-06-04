@@ -1,22 +1,20 @@
-<fd-file-input #fileInput
-               (onSelect)="this.files = $event"
-               (onInvalidFiles)="this.invalid_files = $event"
-               [maxFileSize]="1048576">
+<fd-file-input
+    #fileInput
+    (onSelect)="this.files = $event"
+    (onInvalidFiles)="this.invalid_files = $event"
+    [maxFileSize]="1048576"
+>
     <button fd-button (click)="fileInput.open()">
         Files larger than 1mb are rejected!
     </button>
 </fd-file-input>
 
-<br/><br/>
+<br /><br />
 
 Files Selected:
-<span *ngFor="let file of files">
-    &nbsp;{{file.name}}
-</span>
+<span *ngFor="let file of files"> &nbsp;{{ file.name }} </span>
 
 <br />
 
 Invalid Files:
-<span *ngFor="let file of invalid_files">
-    &nbsp;{{file.name}}
-</span>
+<span *ngFor="let file of invalid_files"> &nbsp;{{ file.name }} </span>

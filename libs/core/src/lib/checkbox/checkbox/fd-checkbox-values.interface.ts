@@ -1,5 +1,5 @@
 export interface FdCheckboxValues {
-    trueValue?: any,
-    falseValue?: any,
-    thirdStateValue?: any
+    trueValue?: any;
+    falseValue?: any;
+    thirdStateValue?: any;
 }

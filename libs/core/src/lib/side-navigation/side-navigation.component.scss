@@ -1,13 +1,13 @@
-@import "~fundamental-styles/dist/side-nav";
+@import '~fundamental-styles/dist/side-nav';
 
 .fd-nested-list__item {
     display: block;
 
     .fd-nested-list__link {
         cursor: pointer;
+    }
 
-        &:focus {
-            outline: .0625rem dotted #000;
-        }
+    .fd-nested-list__expand-icon {
+        background-color: transparent;
     }
 }

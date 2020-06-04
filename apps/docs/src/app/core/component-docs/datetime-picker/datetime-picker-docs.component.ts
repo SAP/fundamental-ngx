@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as dateTimeSimpleHtml from '!raw-loader!./examples/datetime-example/datetime-example.component.html';
 import * as dateTimeSimpleTs from '!raw-loader!./examples/datetime-example/datetime-example.component.ts';
@@ -22,15 +22,13 @@ import * as dateTimeDisabledTs from '!raw-loader!./examples/datetime-disabled-ex
 import * as dateTimeFormHtml from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.html';
 import * as dateTimeFormTs from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-datetime-picker-docs',
     templateUrl: './datetime-picker-docs.component.html',
     styleUrls: ['./datetime-picker-docs.component.scss']
 })
-export class DatetimePickerDocsComponent implements OnInit {
+export class DatetimePickerDocsComponent {
     datetimePickerSingle: ExampleFile[] = [
         {
             language: 'html',
@@ -42,7 +40,7 @@ export class DatetimePickerDocsComponent implements OnInit {
             code: dateTimeSimpleTs,
             fileName: 'datetime-example',
             component: 'DatetimeExampleComponent'
-        },
+        }
     ];
 
     datetimeNonMer: ExampleFile[] = [
@@ -56,7 +54,7 @@ export class DatetimePickerDocsComponent implements OnInit {
             code: dateTimeNonMeridianTs,
             fileName: 'datetime-non-meridian-example',
             component: 'DatetimeNonMeridianExampleComponent'
-        },
+        }
     ];
 
     datetimeProgram: ExampleFile[] = [
@@ -70,7 +68,7 @@ export class DatetimePickerDocsComponent implements OnInit {
             code: dateTimeProgTs,
             fileName: 'datetime-program-example',
             component: 'DatetimeProgramExampleComponent'
-        },
+        }
     ];
 
     datetimeFormat: ExampleFile[] = [
@@ -84,7 +82,7 @@ export class DatetimePickerDocsComponent implements OnInit {
             code: dateTimeFormatTs,
             fileName: 'datetime-format-example',
             component: 'DatetimeFormatExampleComponent'
-        },
+        }
     ];
 
     datetimeDisabled: ExampleFile[] = [
@@ -98,7 +96,7 @@ export class DatetimePickerDocsComponent implements OnInit {
             code: dateTimeDisabledTs,
             fileName: 'datetime-disabled-example',
             component: 'DatetimeDisabledExampleComponent'
-        },
+        }
     ];
 
     datetimeForm: ExampleFile[] = [
@@ -112,7 +110,7 @@ export class DatetimePickerDocsComponent implements OnInit {
             code: dateTimeFormTs,
             fileName: 'datetime-form-example',
             component: 'DatetimeFormExampleComponent'
-        },
+        }
     ];
 
     datetimePickerAllowNull: ExampleFile[] = [
@@ -121,23 +119,21 @@ export class DatetimePickerDocsComponent implements OnInit {
             code: dateTimePickerAllowNullTs,
             fileName: 'date-time-picker-allow-null-example',
             component: 'DatetimePickerAllowNullExampleComponent'
-        },
+        }
     ];
 
     datetimeI18nComplex: ExampleFile[] = [
         {
             language: 'typescript',
             code: datetimeI18nComplexTs,
-            fileName: 'fd-datetime-picker-complex-i18n-example',
+            fileName: 'datetime-picker-complex-i18n-example',
             component: 'DatetimePickerComplexI18nExampleComponent'
         },
         {
             language: 'html',
             code: datetimeI18nComplexH,
-            fileName: 'fd-datetime-picker-complex-i18n-example',
+            fileName: 'datetime-picker-complex-i18n-example',
             component: 'DatetimePickerComplexI18nExampleComponent'
-        },
+        }
     ];
-
-    ngOnInit() { }
 }

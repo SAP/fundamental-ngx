@@ -21,10 +21,9 @@ const CELL_DATA: CellData[] = [
     selector: 'fd-table-cdk-example',
     templateUrl: './table-cdk-example.component.html',
     styleUrls: ['table-cdk-example.component.scss']
-
 })
 export class TableCdkExampleComponent {
-    @ViewChild('table', { static: false }) table: CdkTable<{}[]>;
+    @ViewChild('table') table: CdkTable<{}[]>;
 
     displayedColumns: string[] = ['column1', 'column2', 'column3', 'date', 'type'];
     dataSource = CELL_DATA;

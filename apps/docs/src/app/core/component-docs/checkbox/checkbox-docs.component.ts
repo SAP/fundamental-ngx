@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as checkboxDefaultTsCode from '!raw-loader!./examples/checkbox-default-example.component.ts';
 import * as checkboxTristateTsCode from '!raw-loader!./examples/checkbox-tristate-example.component.ts';
@@ -7,7 +7,7 @@ import * as checkboxReactiveFormsTsCode from '!raw-loader!./examples/checkbox-re
 import * as checkboxStatesTsCode from '!raw-loader!./examples/checkbox-states-example.component.ts';
 import * as checkboxCustomLabelTsCode from '!raw-loader!./examples/checkbox-custom-label-example.component.ts';
 
-import {ExampleFile} from '../../../documentation/core-helpers/code-example/example-file';
+import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-input',

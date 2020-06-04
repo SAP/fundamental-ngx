@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as simpleH from '!raw-loader!./examples/multi-input-example/multi-input-example.component.html';
 import * as simpleT from '!raw-loader!./examples/multi-input-example/multi-input-example.component.ts';
@@ -12,18 +12,26 @@ import * as filterT from '!raw-loader!./examples/multi-input-filter-example/mult
 import * as asyncH from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.html';
 import * as asyncT from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.ts';
 
+import * as compactH from '!raw-loader!./examples/multi-input-compact-example/multi-input-compact-example.component.html';
+import * as compactT from '!raw-loader!./examples/multi-input-compact-example/multi-input-compact-example.component.ts';
+
 import * as formH from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.html';
 import * as formT from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.ts';
+
+import * as newTokensH from '!raw-loader!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.html';
+import * as newTokensT from '!raw-loader!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.ts';
+
+import * as mobileH from '!raw-loader!./examples/multi-input-mobile-example/multi-input-mobile-example.component.html';
+import * as mobileT from '!raw-loader!./examples/multi-input-mobile-example/multi-input-mobile-example.component.ts';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-multi-input-docs',
     templateUrl: './multi-input-docs.component.html',
     styleUrls: ['./multi-input-docs.component.scss']
 })
-export class MultiInputDocsComponent implements OnInit {
+export class MultiInputDocsComponent {
     multiInputBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -80,6 +88,20 @@ export class MultiInputDocsComponent implements OnInit {
         }
     ];
 
+    compact: ExampleFile[] = [
+        {
+            language: 'html',
+            code: compactH,
+            fileName: 'multi-input-compact-example'
+        },
+        {
+            language: 'typescript',
+            component: 'MultiInputCompactExampleComponent',
+            code: compactT,
+            fileName: 'multi-input-compact-example'
+        }
+    ];
+
     form: ExampleFile[] = [
         {
             language: 'html',
@@ -94,5 +116,31 @@ export class MultiInputDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit() { }
+    mobile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: mobileH,
+            fileName: 'multi-input-mobile-example'
+        },
+        {
+            language: 'typescript',
+            component: 'MultiInputMobileExampleComponent',
+            code: mobileT,
+            fileName: 'multi-input-mobile-example'
+        }
+    ];
+
+    newTokens: ExampleFile[] = [
+        {
+            language: 'html',
+            code: newTokensH,
+            fileName: 'multi-input-new-tokens-example'
+        },
+        {
+            language: 'typescript',
+            component: 'MultiInputNewTokensExampleComponent',
+            code: newTokensT,
+            fileName: 'multi-input-new-tokens-example'
+        }
+    ];
 }

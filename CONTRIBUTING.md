@@ -1,6 +1,6 @@
-# Contributing to Fundamental NGX
+# Contributing to Fundamental Library for Angular
 
-We're excited that you're interested in contributing to Fundamental NGX! Your contribution can make this library even better. 
+We're excited that you're interested in contributing to Fundamental Library for Angular! Your contribution can make this library even better. 
 As a contributor, here are the guidelines we would like you to follow:
 
  - [Issues and Bugs](#issues-and-bugs)
@@ -61,16 +61,16 @@ Status of closed issues:
 
 ## <a name="contribute-code"></a> Contribute Code
 
-You are welcome to contribute code to Fundamental NGX in order to fix issues or to add new features.
+You are welcome to contribute code to Fundamental Library for Angular in order to fix issues or to add new features.
 
 There are two important things to consider:
 
 1.  You must be aware of the Apache License (which describes contributions) and **agree to the Contributors License Agreement**. This is common practice in all major Open Source projects. If you are an individual contributor, use _[CLA assistant](https://cla-assistant.io/)_. CLA assistant is an open source tool that integrates with GitHub and enables a one-click-experience for accepting the CLA. If you are contributing on behalf of a company, see the [Company Contributors](#company-contributors) section below for details.
-2.  You must follow **code style, quality, and product standards requirements**. You can find more information on the coding guidelines below.
+2.  You must follow **code style, quality, and product standards requirements**. You can find more information [HERE](https://github.com/SAP/fundamental-ngx/wiki/Code-Contribution-Guideline).
 
 ### Contributor License Agreement
 
-When you contribute (code, documentation, or anything else), you must be aware that your contribution is covered by the same [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0) that is applied to Fundamental NGX itself.
+When you contribute (code, documentation, or anything else), you must be aware that your contribution is covered by the same [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0) that is applied to Fundamental Library for Angular itself.
 In particular, you need to agree to the Individual Contributor License Agreement,
 which can be [found here](https://gist.github.com/CLAassistant/bd1ea8ec8aa0357414e8).
 (This applies to all contributors, including those contributing on behalf of a company). If you agree to its content, you simply have to click on the link posted by the CLA assistant as a comment to the pull request. Click it to check the CLA and, if you agree to it, accept it on the following screen. CLA assistant saves this decision for upcoming contributions and notifies you if there is any change to the CLA in the meantime.
@@ -218,7 +218,7 @@ chore: Updated package.json
 
 ##### Type
 
-Type can have following values: `WIP|feat|chore|test|doc|fix`.
+Type can have following values: `WIP|feat|chore|test|docs|fix`.
 
 The `WIP` represent work in progress and it will not be merged, so please make sure to use one of 
 the specific format such as `feat|chore|test|doc|fix` if your PR needs to be merged with master 
@@ -338,10 +338,11 @@ Full description of current CI PipeLine can be found [here](https://github.com/S
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
-* All public API methods **must be documented**. (Details TBC).
+* All public API methods **must be documented**. [Documentation Guideline](https://github.com/SAP/fundamental-ngx/wiki/Documenting-Code)
 * We follow [Google's JavaScript Style Guide][js-style-guide], but wrap all code at
   **100 characters**. An automated formatter is available, see
   [DEVELOPER.md](docs/DEVELOPER.md#clang-format).
+* Rules are also mentioned in our [Code Contribution Guideline](https://github.com/SAP/fundamental-ngx/wiki/Code-Contribution-Guideline)
 
 
 ## <a name="cla"></a> Signing the CLA

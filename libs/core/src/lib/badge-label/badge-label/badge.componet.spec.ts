@@ -4,16 +4,12 @@ import { By } from '@angular/platform-browser';
 import { BadgeComponent } from './badge.component';
 
 @Component({
-    template: `
-        <span fd-badge>Fd-badge test</span>
-    `
+    template: ` <span fd-badge>Fd-badge test</span> `
 })
-export class TestComponent { }
+export class TestComponent {}
 
 describe('BadgeComponent', () => {
-    let fixture: ComponentFixture<TestComponent>,
-        debugElement: DebugElement,
-        element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement, element: HTMLElement;
 
     let component, componentInstance;
 

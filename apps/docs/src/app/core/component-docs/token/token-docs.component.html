@@ -1,10 +1,56 @@
 <fd-docs-section-title [id]="'default'" [componentName]="'token'">
-    Token
+    Default Token
 </fd-docs-section-title>
-<description
-    >The token is very flexible. It can be styled freely, closed on clicking the cancel icon, and more.</description
->
-<component-example [name]="'ex1'">
-    <app-token-example></app-token-example>
+<component-example>
+    <fd-token-example></fd-token-example>
 </component-example>
 <code-example [exampleFiles]="basicToken"></code-example>
+
+<fd-docs-section-title [id]="'selected'" [componentName]="'token'">
+    Selected Token
+</fd-docs-section-title>
+<component-example>
+    <fd-token-selected-example></fd-token-selected-example>
+</component-example>
+<code-example [exampleFiles]="selectedToken"></code-example>
+
+<fd-docs-section-title [id]="'readOnly'" [componentName]="'token'">
+    Read Only Token
+</fd-docs-section-title>
+<component-example>
+    <fd-token-readonly-example></fd-token-readonly-example>
+</component-example>
+<code-example [exampleFiles]="readOnlyToken"></code-example>
+
+<fd-docs-section-title [id]="'compact'" [componentName]="'token'">
+    Compact Token
+</fd-docs-section-title>
+<component-example>
+    <fd-token-compact-example></fd-token-compact-example>
+</component-example>
+<code-example [exampleFiles]="compactToken"></code-example>
+
+<fd-docs-section-title [id]="'tokenizer'" [componentName]="'token'">
+    Tokenizer
+</fd-docs-section-title>
+<description>
+    Tokenizer is a container for tokens, often placed inside multi-input components. The Cozy tokenizer is for small and
+    medium sized screens. The user can review the tokens by swiping them to the left or right. The tokenizer is not
+    meant to be used as a standalone component but instead as part of the multi-input.
+</description>
+<component-example>
+    <fd-tokenizer-example></fd-tokenizer-example>
+</component-example>
+<code-example [exampleFiles]="tokenizer"></code-example>
+
+<fd-docs-section-title [id]="'tokenizer-compact'" [componentName]="'token'">
+    Compact Tokenizer
+</fd-docs-section-title>
+<description>
+    The compact tokenizer is for large screens. The user can review tokens by pressing the right or left arrows on the
+    keyboard.
+</description>
+<component-example>
+    <fd-tokenizer-compact-example></fd-tokenizer-compact-example>
+</component-example>
+<code-example [exampleFiles]="tokenizerCompact"></code-example>

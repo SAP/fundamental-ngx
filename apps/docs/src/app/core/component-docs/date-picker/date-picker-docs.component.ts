@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as datePickerRangeSrc from '!raw-loader!./examples/date-picker-range-example.component.ts';
 import * as datePickerSingleSrc from '!raw-loader!./examples/date-picker-single-example.component.ts';
@@ -8,7 +8,6 @@ import * as datePickerAllowNullSrc from '!raw-loader!./examples/date-picker-allo
 import * as datePickerFormTsSrc from '!raw-loader!./examples/date-picker-form-example.component.ts';
 import * as datePickerRangeFormTsSrc from '!raw-loader!./examples/date-picker-form-range-example.component.ts';
 import * as datePickerPositionSrc from '!raw-loader!./examples/date-picker-position-example.component.ts';
-import * as datePickerDisabledSrc from '!raw-loader!./examples/date-picker-disabled-example.component.ts';
 import * as datePickerComplexI18nSrcTs from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.ts';
 import * as datePickerComplexI18nSrcH from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.html';
 import * as datePickerRangeDisableTs from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
@@ -16,14 +15,12 @@ import * as datePickerSingleDisableTs from '!raw-loader!./examples/date-picker-r
 import * as datePickerSingleDisableH from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
 import * as datePickerRangeDisableH from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-date-picker',
     templateUrl: './date-picker-docs.component.html'
 })
-export class DatePickerDocsComponent implements OnInit {
+export class DatePickerDocsComponent {
     datePickerSingle: ExampleFile[] = [
         {
             language: 'typescript',
@@ -47,7 +44,7 @@ export class DatePickerDocsComponent implements OnInit {
             language: 'typescript',
             component: 'DatePickerI18nExampleComponent',
             code: datePickeri18nSrc,
-            fileName: 'date-picker-i18n-example'
+            fileName: 'datepicker-i18n-example'
         }
     ];
 
@@ -117,9 +114,8 @@ export class DatePickerDocsComponent implements OnInit {
             component: 'DatePickerRangeDisabledExampleComponent',
             code: datePickerRangeDisableH,
             fileName: 'fd-date-picker-range-disabled-example'
-        },
+        }
     ];
-
 
     datePickerSingleDisable: ExampleFile[] = [
         {
@@ -133,7 +129,7 @@ export class DatePickerDocsComponent implements OnInit {
             component: 'DatePickerDisableFuncExampleComponent',
             code: datePickerSingleDisableH,
             fileName: 'fd-date-picker-disable-func-example'
-        },
+        }
     ];
 
     datePickerComplexI18n: ExampleFile[] = [
@@ -141,15 +137,13 @@ export class DatePickerDocsComponent implements OnInit {
             language: 'typescript',
             component: 'DatePickerComplexI18nExampleComponent',
             code: datePickerComplexI18nSrcTs,
-            fileName: 'fd-date-picker-complex-i18n-example'
+            fileName: 'date-picker-complex-i18n-example'
         },
         {
             language: 'html',
             component: 'DatePickerComplexI18nExampleComponent',
             code: datePickerComplexI18nSrcH,
-            fileName: 'fd-date-picker-complex-i18n-example'
-        },
+            fileName: 'date-picker-complex-i18n-example'
+        }
     ];
-
-    ngOnInit() { }
 }

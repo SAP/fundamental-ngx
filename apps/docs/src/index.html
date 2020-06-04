@@ -1,19 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="description"
+            content="Fundamental Library for Angular is a themable Fiori 3 Angular component library"
+        />
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png" />
+        <title>Fundamental Library for Angular</title>
+        <base href="fundamental-ngx" />
 
-<head>
-    <meta charset="utf-8">
-    <title>Fundamental NGX</title>
-    <base href="fundamental-ngx">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#354a5f" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#354a5f">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.2.20171210/classList.min.js"></script>
-</head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126805333-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
 
-<body>
-    <app-root></app-root>
-</body>
+            gtag('config', 'UA-126805333-2');
+        </script>
+        <script>
+            if (global === undefined) {
+                var global = window;
+            }
+        </script>
+    </head>
 
+    <body>
+        <app-root></app-root>
+    </body>
 </html>

@@ -1,22 +1,20 @@
 <input
+    #inputLabel
     type="checkbox"
     class="fd-checkbox"
     [id]="inputId"
     [name]="name"
     [disabled]="disabled"
-    [checked]="isChecked"
-    [value]="checkboxValue"
     [indeterminate]="isIndeterminate"
     [class.fd-checkbox--compact]="compact"
-    [ngClass]="(state ? 'is-' + state : '')"
-    (keydown)="muteKey($event)"
-    (keyup)="checkByKey($event)"
->
-<label class="fd-checkbox__label"
-       (click)="checkByClick($event)"
-       [class.fd-checkbox__label--compact]="compact"
-       [for]="inputId">
-    {{label}}
+    [ngClass]="state ? 'is-' + state : ''"
+    [ngModel]="isChecked"
+    (ngModelChange)="nextValue()"
+    (keydown)="checkByKey($event)"
+    (keyup)="$event.stopPropagation()"
+/>
+<label class="fd-checkbox__label" [for]="inputId" [class.fd-checkbox__label--compact]="compact">
+    {{ label }}
     <ng-container *ngIf="!label">
         <ng-content></ng-content>
     </ng-container>

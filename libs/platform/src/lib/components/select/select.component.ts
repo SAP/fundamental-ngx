@@ -1,4 +1,4 @@
-import { 	
+import {
     Component,
     OnInit,
     Input,
@@ -7,32 +7,11 @@ import {
     ChangeDetectorRef,
     ContentChild,
     TemplateRef,
-    AfterContentInit } from '@angular/core';
+    AfterContentInit,
+    ElementRef
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { OptionComponent, SelectComponent as fdSelect } from '@fundamental-ngx/core';
-/**
- * Interface SelectItem is used to deal with complex object in order to be able to format custom label that is
- * shown in the options.
- */
-export interface SelectItem {
-    /**
-     * Item text shown in the popup
-     */
-     label: string;
-
-    /**
-     * References to the object instance
-     */
-    value: any;
-    disabled?: boolean;
-
-    icon: string;
-    /**
-     * Trigger values is a text for selected item
-     */
-    triggerValue?: string;
-}
-
+import { DynamicComponentService, SelectComponent as fdSelect, SelectProxy } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-select',
@@ -43,12 +22,12 @@ export interface SelectItem {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SelectPlatformComponent),
             multi: true
-        }],
+        }
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectPlatformComponent extends fdSelect implements OnInit, AfterContentInit  {
-
- /**
+export class SelectPlatformComponent extends fdSelect implements OnInit, AfterContentInit {
+    /**
      * Form element ID.
      * Todo: This should be moved to higher class that will be common to all input fields
      */
@@ -71,7 +50,7 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
      * custom option popup item template defined by app.
      *
      */
-    @ContentChild('optionValue', { static: false })
+    @ContentChild('optionValue')
     optionValueTemplate: TemplateRef<any>;
 
     /**
@@ -99,29 +78,26 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
      */
     private _value: any;
 
-    constructor(private cd: ChangeDetectorRef) {
-        super(cd);
-        this.fdDropdownClass = false;
+    constructor(private cd: ChangeDetectorRef, elementRef: ElementRef, dynamicComponentService: DynamicComponentService
+    ) {
+        super(elementRef, new SelectProxy(), cd, dynamicComponentService, null);
     }
 
-    onSelection(event: OptionComponent): void {
-        this.value = event.value;
+    onSelection(value: any): void {
+        this.value = value;
         this.onChange(this.value);
         this.onTouched();
         this.cd.markForCheck();
     }
 
-
     /**
      * Dirty assignment is to disable resetOption logic.
      */
     ngAfterContentInit(): void {
-        this['unselectOptions'] = () => {
-        };
+        this['unselectOptions'] = () => {};
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     writeValue(newValue: any): void {
         if (newValue && newValue !== this._value) {
@@ -131,5 +107,4 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
             this.cd.markForCheck();
         }
     }
-
 }

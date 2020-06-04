@@ -1,0 +1,20 @@
+<a
+    #link
+    fd-link
+    class="fdp-link-truncate__txt"
+    [attr.id]="id"
+    [attr.href]="href"
+    [attr.target]="target"
+    [disabled]="disabled"
+    [emphasized]="emphasized"
+    [inverted]="inverted"
+    [attr.title]="title"
+    [attr.aria-label]="title"
+    [attr.hreflang]="hreflang"
+    [attr.download]="download"
+    [attr.media]="media"
+    [attr.rel]="rel"
+    (click)="clicked($event)"
+>
+    <ng-content></ng-content>
+</a>

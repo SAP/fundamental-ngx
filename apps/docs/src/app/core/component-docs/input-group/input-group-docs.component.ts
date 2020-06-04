@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -10,7 +10,6 @@ import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-
 import * as inputGroupSearchSrcTs from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.ts';
 import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
 import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
-import * as inputGroupTscode from '!raw-loader!./examples/input-group-examples.component.ts';
 import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts';
 import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html';
 import * as complexInputHtml from '!raw-loader!./examples/input-group-complex-example.component.html';
@@ -24,7 +23,7 @@ import { Icons } from '../../../documentation/utilities/icons';
     selector: 'app-input-group',
     templateUrl: './input-group-docs.component.html'
 })
-export class InputGroupDocsComponent implements OnInit {
+export class InputGroupDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -55,8 +54,8 @@ export class InputGroupDocsComponent implements OnInit {
                     },
                     state: {
                         type: 'string',
-                        enum: ['valid', 'invalid', 'information', 'warning']
-                    },
+                        enum: ['success', 'error', 'information', 'warning']
+                    }
                 }
             },
             state: {
@@ -92,10 +91,7 @@ export class InputGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: inputGroupTextSrc,
-            fileName: 'input-group-text-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupTextExampleComponent'
+            fileName: 'input-group-text-example'
         }
     ];
 
@@ -103,10 +99,7 @@ export class InputGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: inputGroupIconSrc,
-            fileName: 'input-group-icon-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupIconExampleComponent'
+            fileName: 'input-group-icon-example'
         }
     ];
 
@@ -114,10 +107,7 @@ export class InputGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: inputGroupButtonSrc,
-            fileName: 'input-group-button-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupButtonExampleComponent'
+            fileName: 'input-group-button-example'
         }
     ];
 
@@ -145,10 +135,7 @@ export class InputGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: inputGroupTextCompactSrc,
-            fileName: 'input-group-compact-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupTextCompactExampleComponent'
+            fileName: 'input-group-compact-example'
         }
     ];
 
@@ -171,10 +158,7 @@ export class InputGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: complexInputHtml,
-            fileName: 'input-group-number-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupComplexExampleComponent'
+            fileName: 'input-group-number-example'
         }
     ];
 
@@ -192,7 +176,6 @@ export class InputGroupDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('inputGroup');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

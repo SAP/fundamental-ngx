@@ -1,27 +1,21 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as listSrc from '!raw-loader!./examples/list-example.component.html';
-import * as listTsCode from '!raw-loader!./examples/list-examples.component.ts';
-import * as listActionsSrc from '!raw-loader!./examples/list-actions-example.component.html';
-import * as listCheckboxSrc from '!raw-loader!./examples/list-checkbox-example.component.html';
+import * as listSecondarySrc from '!raw-loader!./examples/list-secondary-example.component.html';
+import * as iconListSrc from '!raw-loader!./examples/list-icon-example.component.html';
+import * as complexList from '!raw-loader!./examples/list-complex-example.component.html';
 import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
 import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
-import * as listSingleHtml from '!raw-loader!./examples/list-single-select-example.component.html';
-import * as listSingleTs from '!raw-loader!./examples/list-single-select-example.component.ts';
-import * as listCheckboxFormHtmlSrc from '!raw-loader!./examples/list-checkbox-form-example.component.html';
-import * as listCheckboxFormTsSrc from '!raw-loader!./examples/list-checkbox-form-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
     selector: 'app-list',
     templateUrl: './list-docs.component.html'
 })
-export class ListDocsComponent implements OnInit {
+export class ListDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -64,46 +58,31 @@ export class ListDocsComponent implements OnInit {
         {
             language: 'html',
             code: listSrc,
-            fileName: 'list-example',
-            secondFile: 'list-examples',
-            typescriptFileCode: listTsCode,
-            component: 'ListExampleComponent'
+            fileName: 'list-example'
         }
     ];
 
-    listActions: ExampleFile[] = [
+    secondaryList: ExampleFile[] = [
         {
             language: 'html',
-            code: listActionsSrc,
-            fileName: 'list-actions-example',
-            secondFile: 'list-examples',
-            typescriptFileCode: listTsCode,
-            component: 'ListActionsExampleComponent'
+            code: listSecondarySrc,
+            fileName: 'list-example-secondary'
         }
     ];
 
-    listCheckboxes: ExampleFile[] = [
+    iconList: ExampleFile[] = [
         {
             language: 'html',
-            code: listCheckboxSrc,
-            fileName: 'list-checkbox-example',
-            secondFile: 'list-examples',
-            typescriptFileCode: listTsCode,
-            component: 'ListCheckboxExampleComponent'
+            code: iconListSrc,
+            fileName: 'list-icon-example'
         }
     ];
 
-    listSingleSelect: ExampleFile[] = [
+    listComplex: ExampleFile[] = [
         {
             language: 'html',
-            code: listSingleHtml,
-            fileName: 'list-single-select-example'
-        },
-        {
-            language: 'typescript',
-            code: listSingleTs,
-            fileName: 'list-single-select-example',
-            component: 'ListSingleSelectExampleComponent'
+            code: complexList,
+            fileName: 'list-complex-example'
         }
     ];
 
@@ -121,25 +100,10 @@ export class ListDocsComponent implements OnInit {
         }
     ];
 
-    listCheckboxForm: ExampleFile[] = [
-        {
-            language: 'html',
-            code: listCheckboxFormHtmlSrc,
-            fileName: 'list-checkbox-form-example'
-        },
-        {
-            language: 'typescript',
-            code: listCheckboxFormTsSrc,
-            fileName: 'list-checkbox-form-example',
-            component: 'ListCheckboxFormExampleComponent'
-        }
-    ];
-
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('list');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

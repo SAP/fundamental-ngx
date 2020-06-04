@@ -22,6 +22,13 @@ elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Archive-release" ]]; then
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
   std_ver=$(npm run std-version)
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
+
+  if  [[ $release_tag == v* ]]; then
+    echo ""
+  else
+    release_tag="v$release_tag"
+  fi
+
   echo "New release version: $std_ver"
 
 elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
@@ -38,6 +45,13 @@ elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
   std_ver=$(npm run std-version)
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
+
+  if  [[ $release_tag == v* ]]; then
+    echo ""
+  else
+    release_tag="v$release_tag"
+  fi
+
   echo "New release version: $std_ver"
 
 else
@@ -46,7 +60,7 @@ else
    exit 1
 fi
 
-git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null 2>&1;
+git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null;
 npm run build-deploy-library
 
 cd dist/libs
@@ -70,12 +84,12 @@ cd ../../
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
 
     npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch master
-    npm run build-docs
+    npm run build-docs-github-pages
     npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 elif [[ $TRAVIS_BUILD_STAGE_NAME == "Archive-Release" ]]; then
 
     npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $ARCHIVE_BRANCH
-    npm run build-docs
+    npm run build-docs-github-pages
     npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 fi
 

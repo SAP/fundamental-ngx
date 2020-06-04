@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FdpItem } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-menu-basic-example',
@@ -8,28 +7,11 @@ import { FdpItem } from '@fundamental-ngx/platform';
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformMenuBasicExampleComponent implements OnInit {
-    basicMenuData: FdpItem[] = [];
+    public item = '';
 
-    ngOnInit() {
-        this.basicMenuData = [
-            {
-                label: 'First Item',
-                command: () => {
-                    alert('First');
-                }
-            },
-            {
-                label: 'Second Item',
-                command: () => {
-                    alert('second');
-                }
-            },
-            {
-                label: 'Third Item',
-                command: () => {
-                    alert('Third');
-                }
-            }
-        ];
+    ngOnInit() {}
+
+    onItemSelect(item: string) {
+        this.item = item;
     }
 }

@@ -1,19 +1,7 @@
 import { Routes } from '@angular/router';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
-import { PlatformButtonDocsComponent } from './component-docs/platform-button/platform-button-docs.component';
-import { PlatformButtonHeaderComponent } from './component-docs/platform-button/platform-button-header/platform-button-header.component';
-import { PlatformActionbarHeaderComponent } from './component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
-import { PlatformActionBarDocsComponent } from './component-docs/platform-action-bar/platform-action-bar-docs.component';
-import { ApiComponent } from './../documentation/core-helpers/api/api.component';
-import { API_FILES } from './api-files';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
-import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
-import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
-import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
-import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
-import { PlatformInputHeaderComponent } from './component-docs/platform-input/platform-input-header/platform-input-header.component';
-import { PlatformInputDocsComponent } from './component-docs/platform-input/platform-input-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -25,44 +13,68 @@ export const ROUTES: Routes = [
             { path: 'new-component', component: NewComponentComponent },
             {
                 path: 'button',
-                component: PlatformButtonHeaderComponent,
-                children: [
-                    { path: '', component: PlatformButtonDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-button/platform-button.module').then(
+                        (m) => m.PlatformButtonDocsModule
+                    )
             },
             {
-
                 path: 'action-bar',
-                component: PlatformActionbarHeaderComponent,
-                children: [
-                    { path: '', component: PlatformActionBarDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }]
+                loadChildren: () =>
+                    import('./component-docs/platform-action-bar/platform-action-bar.module').then(
+                        (m) => m.PlatformActionBarDocsModule
+                    )
             },
-          {
+            {
+                path: 'link',
+                loadChildren: () =>
+                    import('./component-docs/platform-link/platform-link.module').then((m) => m.PlatformLinkDocsModule)
+            },
+            {
                 path: 'menu',
-                component: PlatformMenuHeaderComponent,
-                children: [
-                    { path: '', component: PlatformMenuDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-menu/platform-menu.module').then((m) => m.PlatformMenuDocsModule)
+            },
+            {
+                path: 'menu-button',
+                loadChildren: () =>
+                    import('./component-docs/platform-menu-button/platform-menu-button.module').then(
+                        (m) => m.PlatformMenuButtonDocsModule
+                    )
+            },
+            {
+                path: 'search-field',
+                loadChildren: () =>
+                    import('./component-docs/platform-search-field/platform-search-field.module').then(
+                        (m) => m.PlatformSearchFieldDocsModule
+                    )
             },
             {
                 path: 'select',
-                component: PlatformSelectHeaderComponent,
-                children: [
-                    { path: '', component: PlatformSelectDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.select } }
-                ]
+                loadChildren: () =>
+                    import('./component-docs/platform-select/platform-select.module').then(
+                        (m) => m.PlatformSelectDocsModule
+                    )
             },
             {
-                path: 'input',
-                component: PlatformInputHeaderComponent,
-                children: [
-                    { path: '', component: PlatformInputDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.input } }
-                ]
-            }
+                path: 'radio-group',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/radio-group/platform-radio-group.module').then(
+                        (m) => m.PlatformRadioGroupDocsModule
+                    )
+            },
+            {
+                path: 'split-menu-button',
+                loadChildren: () =>
+                    import('./component-docs/platform-split-menu-button/platform-split-menu-button.module').then(
+                        (m) => m.PlatformSplitMenuButtonDocsModule
+                    )
+            },
+            {
+                path: 'info-label',
+                loadChildren: () =>
+                    import('./component-docs/platform-info-label/platform-info-label-docs-module').then((m) => m.PlatformInfoLabelDocsModule)
+            },
         ]
     }
 ];

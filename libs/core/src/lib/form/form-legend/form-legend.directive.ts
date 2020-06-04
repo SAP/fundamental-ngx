@@ -8,10 +8,9 @@ import { Directive, HostBinding } from '@angular/core';
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-form-legend]',
+    selector: '[fd-form-legend]'
 })
 export class FormLegendDirective {
-
     /** @hidden */
     @HostBinding('class.fd-fieldset__legend')
     fdFormLegendClass: boolean = true;

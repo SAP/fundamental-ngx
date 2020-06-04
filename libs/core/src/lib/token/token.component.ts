@@ -1,13 +1,11 @@
 import {
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     EventEmitter,
-    HostListener,
-    Output,
-    ViewChild,
-    ViewEncapsulation,
     Input,
-    ChangeDetectionStrategy
+    Output,
+    ViewEncapsulation
 } from '@angular/core';
 
 /**
@@ -18,42 +16,46 @@ import {
     selector: 'fd-token',
     templateUrl: './token.component.html',
     styleUrls: ['./token.component.scss'],
-    host: {
-        class: 'fd-token',
-        '[class.fd-token__disabled]': 'disabled',
-        'role': 'button'
-    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenComponent {
-
-    /** @hidden */
-    @ViewChild('contentContainer', { static: false })
-    contentContainer: ElementRef;
-
     /** Whether the token is disabled. */
     @Input()
     disabled: boolean = false;
+
+    /** Whether the token is compact. */
+    @Input()
+    compact: boolean = false;
+
+    /** Whether the token is selected. */
+    @Input()
+    selected: boolean = false;
+
+    /** Whether the token is read-only. */
+    @Input()
+    readOnly: boolean = false;
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
     readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
 
-    /** @hidden */
-    constructor(private elRef: ElementRef) {
-    }
+    /** Emitted when a token is clicked. */
+    @Output()
+    onTokenClick: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    @HostListener('click', ['$event'])
-    clickHandler(event): void {
-        if (this.contentContainer && !this.disabled) {
-            if (this.elRef.nativeElement.contains(event.target) && !this.contentContainer.nativeElement.contains(event.target)) {
-                this.onCloseClick.emit();
-            }
+    closeClickHandler(event): void {
+        event.stopPropagation();
+        if (!this.disabled) {
+            this.onCloseClick.emit(event);
         }
     }
 
+    /** @hidden */
+    tokenClickHandler(event): void {
+        this.onTokenClick.emit(event);
+    }
+
+    constructor(public elementRef: ElementRef) {}
 }
-
-

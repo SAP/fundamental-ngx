@@ -8,9 +8,9 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
     templateUrl: './core-documentation.component.html'
 })
 export class CoreDocumentationComponent implements OnInit {
-    @ViewChild('content', { static: false }) contentElRef: ElementRef;
+    @ViewChild('content') contentElRef: ElementRef;
 
-    @ViewChild(SectionsToolbarComponent, { static: false, read: SectionsToolbarComponent })
+    @ViewChild(SectionsToolbarComponent, { read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
     sideCollapsed: boolean = window.innerWidth < 576;
@@ -24,31 +24,36 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/action-bar', name: 'Action Bar' },
         { url: 'core/alert', name: 'Alert' },
         { url: 'core/badgeLabel', name: 'Status Indicator' },
+        { url: 'core/bar', name: 'Bar' },
         { url: 'core/breadcrumb', name: 'Breadcrumb' },
         { url: 'core/busyIndicator', name: 'Busy Indicator' },
         { url: 'core/button', name: 'Button' },
-        { url: 'core/buttonGroup', name: 'Button Group' },
+        { url: 'core/segmentedButton', name: 'Segmented Button' },
         { url: 'core/checkbox', name: 'Checkbox' },
         { url: 'core/splitButton', name: 'Split Button' },
         { url: 'core/calendar', name: 'Calendar' },
         { url: 'core/combobox', name: 'Combobox' },
         { url: 'core/datePicker', name: 'Date Picker' },
         { url: 'core/datetime-picker', name: 'Datetime Picker' },
+        { url: 'core/dialog', name: 'Dialog' },
         { url: 'core/dropdown', name: 'Dropdown' },
         { url: 'core/icon', name: 'Icon' },
         { url: 'core/identifier', name: 'Identifier' },
         { url: 'core/image', name: 'Image' },
+        { url: 'core/info-label', name: 'Info Label' },
         { url: 'core/inlineHelp', name: 'Inline Help' },
         { url: 'core/input', name: 'Input' },
         { url: 'core/inputGroup', name: 'Input Group' },
+        { url: 'core/link', name: 'Link' },
         { url: 'core/list', name: 'List' },
         { url: 'core/loadingSpinner', name: 'Loading Spinner' },
         { url: 'core/localizationEditor', name: 'Localization Editor' },
         { url: 'core/mega-menu', name: 'Mega Menu' },
         { url: 'core/menu', name: 'Menu' },
-        { url: 'core/modal', name: 'Modal' },
+        { url: 'core/message-strip', name: 'Message Strip' },
         { url: 'core/multi-input', name: 'Multi Input' },
         { url: 'core/notification', name: 'Notification' },
+        { url: 'core/object-status', name: 'Object Status' },
         { url: 'core/pagination', name: 'Pagination' },
         { url: 'core/popover', name: 'Popover' },
         { url: 'core/product-switch', name: 'Product Switch' },
@@ -63,8 +68,8 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/tile', name: 'Tile' },
         { url: 'core/time', name: 'Time' },
         { url: 'core/timePicker', name: 'Time Picker' },
-        { url: 'core/toggle', name: 'Toggle' },
-        { url: 'core/token', name: 'Token' },
+        { url: 'core/switch', name: 'Switch' },
+        { url: 'core/token', name: 'Token' }
         // { url: 'core/tree', name: 'Tree' }
     ];
 
@@ -96,7 +101,7 @@ export class CoreDocumentationComponent implements OnInit {
         {
             header: 'Utilities',
             content: this.utilities
-        },
+        }
     ];
 
     smallScreen: boolean = window.innerWidth < 992;

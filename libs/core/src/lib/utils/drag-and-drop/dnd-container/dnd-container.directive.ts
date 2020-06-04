@@ -1,9 +1,4 @@
-import {
-    AfterContentInit,
-    ContentChild, Directive,
-    ElementRef, EventEmitter, Input,
-    Output
-} from '@angular/core';
+import { AfterContentInit, ContentChild, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
 
@@ -11,11 +6,10 @@ import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-dnd-container]',
     host: {
-        'class': 'fd-dnd-container'
+        class: 'fd-dnd-container'
     }
 })
 export class DndContainerDirective implements AfterContentInit {
-
     /** Class added to element, when it's dragged. */
     readonly CLASS_WHEN_ELEMENT_DRAGGED: string = 'fd-dnd-on-drag';
 
@@ -38,29 +32,26 @@ export class DndContainerDirective implements AfterContentInit {
     @Input() stickInPlace: boolean = false;
 
     /** @hidden */
-    @ContentChild(CdkDrag, { static: false })
+    @ContentChild(CdkDrag)
     cdkDrag: CdkDrag;
 
-    constructor(
-        public element: ElementRef,
-    ) {}
+    constructor(public element: ElementRef) {}
 
     /** @hidden */
     public getElementChord(isBefore: boolean, listMode: boolean): ElementChord {
-
         /** Takes distance from the beginning of window page */
         const rect = <DOMRect>this.element.nativeElement.getBoundingClientRect();
 
         const position: LinkPosition = isBefore ? 'before' : 'after';
 
         /** Depending on the position, gets the left or right side of element */
-        const x = rect.x + (isBefore || listMode ? 0 : this.element.nativeElement.offsetWidth);
+        const x = rect.left + (isBefore || listMode ? 0 : this.element.nativeElement.offsetWidth);
 
         /** Vertically distance is counted by distance from top of the side + half of the element height */
         return {
             x: x,
             position: position,
-            y: rect.y + (this.element.nativeElement.offsetHeight / 2),
+            y: rect.top + this.element.nativeElement.offsetHeight / 2,
             stickToPosition: this.stickInPlace
         };
     }
@@ -108,16 +99,18 @@ export class DndContainerDirective implements AfterContentInit {
 
     /** @hidden */
     public removePlaceholder(): void {
-        if (this.placeholderElement) {
-            this.placeholderElement.remove();
+        if (this.placeholderElement && this.placeholderElement.parentNode) {
+            // IE11 workaround
+            this.placeholderElement.parentNode.removeChild(this.placeholderElement);
             this.placeholderElement = null;
         }
     }
 
     /** @hidden */
     public removeLine(): void {
-        if (this.lineElement) {
-            this.lineElement.remove();
+        if (this.lineElement && this.lineElement.parentNode) {
+            // IE11 workaround
+            this.lineElement.parentNode.removeChild(this.lineElement);
             this.lineElement = null;
         }
     }

@@ -9,6 +9,8 @@ import { PopoverModule } from '../popover/popover.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
+import { ListModule } from '../list/list.module';
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -22,13 +24,16 @@ describe('MultiInputComponent', () => {
                 TokenModule,
                 FormsModule,
                 MenuModule,
+                ListModule,
                 PopoverModule,
                 PipeModule,
                 CheckboxModule,
                 InputGroupModule
+            ],
+            providers: [
+                DynamicComponentService
             ]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -50,7 +55,7 @@ describe('MultiInputComponent', () => {
 
         const placeholder = 'placeholder';
         component.placeholder = placeholder;
-        (component as any).changeDetRef.markForCheck();
+        (component as any)._changeDetRef.markForCheck();
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('input').placeholder).toBe(placeholder);
@@ -77,7 +82,7 @@ describe('MultiInputComponent', () => {
         expect(component.openChangeHandle).toHaveBeenCalledWith(true);
     });
 
-    it('should filter dropdown values', async() => {
+    it('should filter dropdown values', async () => {
         await fixture.whenStable();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
@@ -95,7 +100,7 @@ describe('MultiInputComponent', () => {
         expect(component.dropdownValues.length).toBe(3);
     });
 
-    it('should open/close popover on input click', async() => {
+    it('should open/close popover on input click', async () => {
         await fixture.whenStable();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
@@ -112,7 +117,7 @@ describe('MultiInputComponent', () => {
         expect(component.open).toBe(false);
     });
 
-    it('should open/close popover on button click', async() => {
+    it('should open/close popover on button click', async () => {
         await fixture.whenStable();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
@@ -129,7 +134,7 @@ describe('MultiInputComponent', () => {
         expect(component.open).toBe(false);
     });
 
-    it('should select values', async() => {
+    it('should select values', async () => {
         await fixture.whenStable();
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
@@ -140,14 +145,14 @@ describe('MultiInputComponent', () => {
         component.open = true;
         fixture.detectChanges();
 
-        (component as any).changeDetRef.markForCheck();
+        (component as any)._changeDetRef.markForCheck();
         component.selected = ['test1'];
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('fd-token')).toBeTruthy();
     });
 
-    it('should de-select values', async() => {
+    it('should de-select values', async () => {
         await fixture.whenStable();
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
@@ -169,7 +174,7 @@ describe('MultiInputComponent', () => {
         expect(fixture.nativeElement.querySelector('fd-token')).toBeFalsy();
     });
 
-    it('should handle onMenuKeydownHandler, arrow up on the first item', async() => {
+    it('should handle onMenuKeydownHandler, arrow up on the first item', async () => {
         await fixture.whenStable();
         const event: any = {
             key: 'ArrowUp',
@@ -182,18 +187,58 @@ describe('MultiInputComponent', () => {
         expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
     });
 
-    it('should handle onMenuKeydownHandler, arrow up', async() => {
+    it('should handle onMenuKeydownHandler, arrow up', async () => {
         await fixture.whenStable();
         const event: any = {
             key: 'ArrowUp',
             preventDefault: () => {},
             stopPropagation: () => {}
         };
-        spyOn(component.menuItems.first, 'focus');
+        spyOn(component.listItems.first, 'focus');
         spyOn(event, 'preventDefault');
         component.handleKeyDown(event, 1);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.menuItems.first.focus).toHaveBeenCalled();
+        expect(component.listItems.first.focus).toHaveBeenCalled();
     });
 
+    it('should bring back values, if canceled on mobile mode and dont emit changes', async () => {
+        component.mobile = true;
+
+        spyOn(component, 'onChange');
+        spyOn(component.selectedChange, 'emit');
+
+        await fixture.whenStable();
+
+        component.handleSelect(true, component.dropdownValues[0]);
+
+        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.selectedChange.emit).not.toHaveBeenCalled();
+
+        expect(component.selected).toEqual([component.dropdownValues[0]]);
+
+        component.dialogDismiss([]);
+
+        expect(component.selected).toEqual([]);
+    });
+
+    it('should emit changes values on approve', async () => {
+        component.mobile = true;
+
+        spyOn(component, 'onChange');
+        spyOn(component.selectedChange, 'emit');
+
+        await fixture.whenStable();
+
+        component.handleSelect(true, component.dropdownValues[0]);
+
+        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.selectedChange.emit).not.toHaveBeenCalled();
+        expect(component.selected).toEqual([component.dropdownValues[0]]);
+
+        component.dialogApprove();
+
+        expect(component.onChange).toHaveBeenCalled();
+        expect(component.selectedChange.emit).toHaveBeenCalled();
+        expect(component.selected).toEqual([component.dropdownValues[0]]);
+    });
 });

@@ -6,4 +6,6 @@ export * from './menu-addon.directive';
 export * from './menu-list.directive';
 export * from './menu-item.directive';
 export * from './menu.component';
+export * from './menu-title.directive';
 export * from './default-menu-item';
+export * from './menu-item-addon.directive';

@@ -3,12 +3,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionBarModule } from '../action-bar.module';
 
 @Component({
-    template: `
-        <div #directiveElement fd-action-bar-actions>Action Bar Actions Test Text</div>
-    `
+    template: ` <div #directiveElement fd-action-bar-actions>Action Bar Actions Test Text</div> `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 

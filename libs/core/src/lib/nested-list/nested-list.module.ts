@@ -2,7 +2,12 @@ import { NgModule } from '@angular/core';
 import { NestedListDirective } from './nested-list/nested-list.directive';
 import { NestedLinkDirective } from './nested-link/nested-link.directive';
 import { NestedItemDirective } from './nested-item/nested-item.directive';
-import { NestedListHeaderDirective, NestedListIconDirective, NestedListTitleDirective } from './nested-list-directives';
+import {
+    NestedListExpandIconDirective,
+    NestedListHeaderDirective,
+    NestedListIconDirective,
+    NestedListTitleDirective
+} from './nested-list-directives';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { CommonModule } from '@angular/common';
 import { NestedListKeyboardService } from './nested-list-keyboard.service';
@@ -11,6 +16,7 @@ import { NestedListPopoverComponent } from './nested-list-popover/nested-list-po
 import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nested-list.component';
 import { NestedListStateService } from './nested-list-state.service';
 import { RouterModule } from '@angular/router';
+import { NestedListContentDirective } from './nested-content/nested-list-content.directive';
 
 @NgModule({
     imports: [
@@ -27,6 +33,8 @@ import { RouterModule } from '@angular/router';
         NestedListHeaderDirective,
         NestedListPopoverComponent,
         PreparedNestedListComponent,
+        NestedListExpandIconDirective,
+        NestedListContentDirective
     ],
     exports: [
         NestedListDirective,
@@ -37,6 +45,8 @@ import { RouterModule } from '@angular/router';
         NestedListHeaderDirective,
         NestedListPopoverComponent,
         PreparedNestedListComponent,
+        NestedListExpandIconDirective,
+        NestedListContentDirective
     ],
     providers: [
         MenuKeyboardService,

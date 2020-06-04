@@ -17,5 +17,4 @@ export class MenuGroupComponent {
     /** @hidden*/
     @HostBinding('class.fd-menu__group')
     fdMenuGroupClass: boolean = true;
-
 }

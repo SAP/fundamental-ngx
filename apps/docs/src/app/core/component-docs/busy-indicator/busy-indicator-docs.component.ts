@@ -1,32 +1,34 @@
 import { Component } from '@angular/core';
 
 import * as BusyIndicatorHtml from '!raw-loader!./examples/busy-indicator-basic-example.component.html';
-import * as BusyIndicatorTscode from '!raw-loader!./examples/busy-indicator-basic-example.component.ts';
-import * as BusyIndicatorToggleHtml from '!raw-loader!./examples/busy-indicator-toggle-example.component.html';
-import * as BusyIndicatorToggleTscode from '!raw-loader!./examples/busy-indicator-toggle-example.component.ts';
+import * as BusyIndicatorSizeHtml from '!raw-loader!./examples/busy-indicator-size-example.component.html';
+import * as BusyIndicatorWrapperHtml from '!raw-loader!./examples/busy-indicator-wrapper-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-busy-indicator-docs',
-    templateUrl: './busy-indicator-docs.component.html',
+    templateUrl: './busy-indicator-docs.component.html'
 })
 export class BusyIndicatorDocsComponent {
-    BusyIndicatorBasicExample: ExampleFile[] = [
+    busyIndicatorBasicExample: ExampleFile[] = [
         {
             language: 'html',
             code: BusyIndicatorHtml,
-            fileName: 'busy-indicator-basic-example',
-            typescriptFileCode: BusyIndicatorTscode,
-            component: 'BusyIndicatorBasicExampleComponent'
+            fileName: 'busy-indicator-basic-example'
         }
     ];
-    BusyIndicatorToggleExample: ExampleFile[] = [
+    busyIndicatorSizeExample: ExampleFile[] = [
         {
             language: 'html',
-            code: BusyIndicatorToggleHtml,
-            fileName: 'busy-indicator-toggle-example',
-            typescriptFileCode: BusyIndicatorToggleTscode,
-            component: 'BusyIndicatorToggleExampleComponent'
+            code: BusyIndicatorSizeHtml,
+            fileName: 'busy-indicator-size-example'
+        }
+    ];
+    busyIndicatorWrapperExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: BusyIndicatorWrapperHtml,
+            fileName: 'busy-indicator-wrapper-example'
         }
     ];
 }

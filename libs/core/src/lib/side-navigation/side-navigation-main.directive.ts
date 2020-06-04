@@ -5,9 +5,8 @@ import { NestedListDirective } from '../nested-list/nested-list/nested-list.dire
     selector: '[fdSideNavigationMain], [fd-side-nav-main]'
 })
 export class SideNavigationMainDirective {
-
     /** @hidden */
-    @ContentChild(NestedListDirective, { static: false })
+    @ContentChild(NestedListDirective)
     list: NestedListDirective;
 
     /** @hidden */

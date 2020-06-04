@@ -1,0 +1,118 @@
+<h2>Cozy Button options</h2>
+<fdp-split-menu-button
+    [id]="'split-menu-button1'"
+    [name]="'split-menu-button1'"
+    [menu]="basicMenuCozy"
+    [buttonLabel]="label"
+    [icon]="'world'"
+    [type]="'standard'"
+    (primaryButtonClick)="onPrimaryButtonClickCozy()"
+>
+</fdp-split-menu-button>
+<br />
+<br />
+
+<fdp-split-menu-button
+    [id]="'split-menu-button2'"
+    [name]="'split-menu-button2'"
+    [menu]="basicMenuCozy"
+    [buttonLabel]="label"
+    [type]="'standard'"
+    (primaryButtonClick)="onPrimaryButtonClickCozy()"
+>
+</fdp-split-menu-button>
+<br />
+<br />
+
+<fdp-split-menu-button
+    [id]="'split-menu-button3'"
+    [name]="'split-menu-button3'"
+    [menu]="basicMenuCozy"
+    [icon]="'world'"
+    [type]="'standard'"
+    (primaryButtonClick)="onPrimaryButtonClickCozy()"
+>
+</fdp-split-menu-button>
+<br />
+<br />
+
+<fdp-split-menu-button
+    [id]="'split-menu-button4'"
+    [name]="'split-menu-button4'"
+    [menu]="basicMenuCozy"
+    [type]="'standard'"
+    (primaryButtonClick)="onPrimaryButtonClickCozy()"
+>
+</fdp-split-menu-button>
+<br />
+<br />
+<div>Selected: {{ selectedCozyItem }}</div>
+
+<br />
+<br />
+<h2>Compact Button Options</h2>
+<fdp-split-menu-button
+    [id]="'split-menu-button1'"
+    [name]="'split-menu-button1'"
+    [menu]="basicMenuCompact"
+    [buttonLabel]="label"
+    [icon]="'world'"
+    [contentDensity]="'compact'"
+    [type]="'standard'"
+    (primaryButtonClick)="onPrimaryButtonClickCompact()"
+>
+</fdp-split-menu-button>
+<br />
+<br />
+
+<fdp-split-menu-button
+    [id]="'split-menu-button2'"
+    [name]="'split-menu-button2'"
+    [menu]="basicMenuCompact"
+    [buttonLabel]="label"
+    [contentDensity]="'compact'"
+    [type]="'standard'"
+    (primaryButtonClick)="onPrimaryButtonClickCompact()"
+>
+</fdp-split-menu-button>
+<br />
+<br />
+
+<fdp-split-menu-button
+    [id]="'split-menu-button3'"
+    [name]="'split-menu-button3'"
+    [menu]="basicMenuCompact"
+    [icon]="'world'"
+    [contentDensity]="'compact'"
+    [type]="'standard'"
+    (primaryButtonClick)="onPrimaryButtonClickCompact()"
+>
+</fdp-split-menu-button>
+<br />
+<br />
+
+<fdp-split-menu-button
+    [id]="'split-menu-button4'"
+    [name]="'split-menu-button4'"
+    [menu]="basicMenuCompact"
+    [contentDensity]="'compact'"
+    [type]="'standard'"
+    (primaryButtonClick)="onPrimaryButtonClickCompact()"
+>
+</fdp-split-menu-button>
+
+<br />
+<br />
+<div>Selected: {{ selectedCompactItem }}</div>
+
+<fdp-menu #basicMenuCompact id="basic-menu">
+    <fdp-menu-item (itemSelect)="onItemSelectCompact('First Item')">First Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompact('Second Item')">Second Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompact('Third Item')">Third Item</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCozy id="basic-menu">
+    <fdp-menu-item (itemSelect)="onItemSelectCozy('First Item')">First Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozy('Second Item')">Second Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozy('Third Item')">Third Item</fdp-menu-item>
+</fdp-menu>

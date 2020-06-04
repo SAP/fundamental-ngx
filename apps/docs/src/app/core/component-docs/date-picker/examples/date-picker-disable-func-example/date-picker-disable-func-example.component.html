@@ -4,16 +4,17 @@
             <label fd-form-label>Date Picker</label>
             <fd-date-picker
                 [disableFunction]="disableFunction"
-                [state]="isValid() ? 'valid' : 'invalid'"
-                formControlName="date">
+                [state]="isValid() ? 'success' : 'error'"
+                formControlName="date"
+            >
             </fd-date-picker>
-            <fd-form-message *ngIf="isValid()" [type]="'success'">This is valid DatePicker</fd-form-message>
-            <fd-form-message *ngIf="!isValid()" [type]="'error'">This is invalid DatePicker</fd-form-message>
+            <fd-form-message *ngIf="isValid()" [type]="'success'">This is valid(success) DatePicker</fd-form-message>
+            <fd-form-message *ngIf="!isValid()" [type]="'error'">This is invalid(error) DatePicker</fd-form-message>
         </div>
-        <br/>
-        Touched: {{customForm.controls.date.touched}}<br/>
-        Dirty: {{customForm.controls.date.dirty}}<br/>
-        Valid: {{customForm.controls.date.valid}}<br/>
+        <br />
+        Touched: {{ customForm.controls.date.touched }}<br />
+        Dirty: {{ customForm.controls.date.dirty }}<br />
+        Valid: {{ customForm.controls.date.valid }}<br />
         Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
     </div>
 </form>

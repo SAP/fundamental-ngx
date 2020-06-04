@@ -21,13 +21,19 @@ describe('DatetimePickerComponent', () => {
     };
 
     const internalParser = (date: FdDatetime): string => {
-        return takeAtLeastTwoDigits(date.month) + '/' +
-            takeAtLeastTwoDigits(date.day) + '/' +
-            date.year + ', ' +
-            takeAtLeastTwoDigits(date.hour) + ':' +
-            takeAtLeastTwoDigits(date.minute) + ':' +
+        return (
+            takeAtLeastTwoDigits(date.month) +
+            '/' +
+            takeAtLeastTwoDigits(date.day) +
+            '/' +
+            date.year +
+            ', ' +
+            takeAtLeastTwoDigits(date.hour) +
+            ':' +
+            takeAtLeastTwoDigits(date.minute) +
+            ':' +
             takeAtLeastTwoDigits(date.second)
-        ;
+        );
     };
 
     beforeEach(async(() => {
@@ -43,8 +49,7 @@ describe('DatetimePickerComponent', () => {
                 InputGroupModule,
                 ButtonModule
             ]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -112,8 +117,8 @@ describe('DatetimePickerComponent', () => {
         component.handleTimeChange(timeModel);
 
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
-        expect(component.inputFieldDate).toEqual((<any>component)
-            ._formatDateTime(new FdDatetime(component.selectedDate, timeModel))
+        expect(component.inputFieldDate).toEqual(
+            (<any>component)._formatDateTime(new FdDatetime(component.selectedDate, timeModel))
         );
     });
 
@@ -143,7 +148,9 @@ describe('DatetimePickerComponent', () => {
         component.handleDateChange(date);
 
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
-        expect(component.inputFieldDate).toEqual((<any>component)._formatDateTime(new FdDatetime(date, component.time)));
+        expect(component.inputFieldDate).toEqual(
+            (<any>component)._formatDateTime(new FdDatetime(date, component.time))
+        );
     });
 
     it('should handle correct write value function', () => {
@@ -182,5 +189,4 @@ describe('DatetimePickerComponent', () => {
         component.writeValue(dateTimeString);
         expect(component.inputFieldDate).not.toBe(dateTimeString);
     });
-
 });

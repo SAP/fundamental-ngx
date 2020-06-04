@@ -1,21 +1,19 @@
 <ul fd-tab-nav>
     <li fd-tab-item>
-        <a fd-tab-link
-           [routerLinkActiveOptions]= "{exact: true}"
-           [active]="rla1.isActive"
-           [routerLink]="'./'"
-           routerLinkActive
-           #rla1="routerLinkActive">
-            Examples
+        <a
+            fd-tab-link
+            [routerLinkActiveOptions]="{ exact: true }"
+            [active]="rla1.isActive"
+            [routerLink]="'./'"
+            routerLinkActive
+            #rla1="routerLinkActive"
+        >
+            <span fd-tab-tag>Examples</span>
         </a>
     </li>
     <li fd-tab-item>
-        <a fd-tab-link
-           [active]="rla2.isActive"
-           [routerLink]="'./api'"
-           routerLinkActive
-           #rla2="routerLinkActive">
-            API
+        <a fd-tab-link [active]="rla2.isActive" [routerLink]="'./api'" routerLinkActive #rla2="routerLinkActive">
+            <span fd-tab-tag>API</span>
         </a>
     </li>
 </ul>

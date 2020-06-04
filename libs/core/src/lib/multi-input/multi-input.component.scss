@@ -1,8 +1,19 @@
-@import "~fundamental-styles/dist/multi-input";
-
 //TODO evaluate whether this should be in fd-styles
+
+.fd-multi-input-tokenizer-custom {
+    width: 100%;
+}
+
+.fd-multi-input-input-group-custom {
+    max-width: 100%;
+}
+
 .fd-multi-input-custom {
     display: block;
+
+    .fd-multi-input-item {
+        cursor: pointer;
+    }
 
     .fd-multi-input-popover-size {
         overflow: auto;
@@ -11,18 +22,34 @@
 
     .fd-multi-input-popover-custom {
         display: block;
+        .fd-tokenizer {
+            height: 100%;
+        }
     }
 
     .fd-multi-input-menu-overflow {
         overflow: auto;
     }
+    .fd-input {
+        &.fd-multi-input-tokenizer-input {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-left: 0;
+            background-color: transparent;
+        }
+    }
 
-    .fd-multi-input-token-spacing {
-        margin: 0 4px 4px 0;
+    .fd-multi-input-show-all {
+        float: right;
+        background-color: transparent;
+    }
 
-        &:last-child {
-            margin-right: 0;
+    .fd-multi-input-checkbox {
+        width: 100%;
+        cursor: pointer;
+
+        .fd-checkbox__label {
+            color: inherit;
         }
     }
 }
-

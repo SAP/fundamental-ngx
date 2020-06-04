@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-default-checkbox-example',
     template: `
         <fd-checkbox label="Option 1" [(ngModel)]="checkboxValue"></fd-checkbox>
-        Value: {{checkboxValue}}
+        Value: {{ checkboxValue }}
     `
 })
 export class CheckboxDefaultExampleComponent {

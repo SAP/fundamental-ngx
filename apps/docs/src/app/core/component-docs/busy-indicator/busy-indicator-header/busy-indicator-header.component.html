@@ -1,8 +1,22 @@
 <header>Busy Indicator</header>
 <description>
-    A busy indicator informs the user of an ongoing operation that has not completed recieving information. Only one
-    busy indicator should be shown at a time. The
-    <code>loading</code> input on the component is used to hide and show the element.
+    The busy indicator informs the user about an ongoing operation.
+    Try to avoid showing multiple busy indicators at
+    once.
+
+    Use the busy indicator if:
+    <ul>
+        <li>The ongoing operation covers only part of a screen that has multiple controls</li>
+        <li>You need to display additional information or the user needs to be able to cancel the operation</li>
+    </ul>
+
+    Do not use the busy indicator if:
+    <ul>
+        <li>The operation takes less than one second</li>
+        <li>You need to block the screen because the user is not supposed to start another activity. In this case, use
+            the busy dialog
+        </li>
+    </ul>
 </description>
 <import module="BusyIndicatorModule"></import>
 

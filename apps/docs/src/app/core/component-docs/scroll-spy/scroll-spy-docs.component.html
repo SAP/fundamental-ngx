@@ -1,11 +1,11 @@
 <fd-docs-section-title [id]="'standardScrollSpy'" [componentName]="'scroll-spy'">
-    Radio Button Reactive Forms
+    Scroll Spy Example
 </fd-docs-section-title>
 <description>
     This example does not modify the <code>fireEmpty</code> input, so the navigation will always have an arrow. To have
     the arrow not display if a user scrolls to the absolute top or bottom, set <code>fireEmpty</code> to true.
 </description>
-<component-example [name]="'ex1'">
+<component-example>
     <fd-scroll-spy-example></fd-scroll-spy-example>
 </component-example>
 <code-example [exampleFiles]="scrollSpy"></code-example>
@@ -20,20 +20,20 @@
     For example, a value of <code>0.5</code> would fire the events in the middle of the container, <code>0</code> for
     the top and <code>1</code> for the bottom.
 </description>
-<component-example [name]="'ex2'">
+<component-example>
     <fd-scroll-spy-custom-example></fd-scroll-spy-custom-example>
 </component-example>
 <code-example [exampleFiles]="scrollSpyCustom"></code-example>
-
 
 <fd-docs-section-title [id]="'customOffset'" [componentName]="'scroll-spy'">
     Custom Offset Detection Threshold
 </fd-docs-section-title>
 <description>
-    The <code>targetOffset</code> property allows you to add the offset to the detection. The value is measured in pixels,
-    so for example if there is <code>[targetOffset]="100"</code>, the event will be fired for element, that is 100px below.
+    The <code>targetOffset</code> property allows you to add the offset to the detection. The value is measured in
+    pixels, so for example if there is <code>[targetOffset]="100"</code>, the event will be fired for element, that is
+    100px below.
 </description>
-<component-example [name]="'ex2'">
+<component-example>
     <fd-scroll-spy-offset-example></fd-scroll-spy-offset-example>
 </component-example>
 <code-example [exampleFiles]="scrollSpyCustom"></code-example>

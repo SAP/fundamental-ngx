@@ -23,8 +23,8 @@ import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angul
     `
 })
 class TestRadioButtonComponentReactiveForms {
-    @ViewChild('radio1', { static: false }) radioButton1: RadioButtonComponent;
-    @ViewChild('radio2', { static: false }) radioButton2: RadioButtonComponent;
+    @ViewChild('radio1') radioButton1: RadioButtonComponent;
+    @ViewChild('radio2') radioButton2: RadioButtonComponent;
 
     radioForm = new FormGroup({
         radioInput: new FormControl(1)

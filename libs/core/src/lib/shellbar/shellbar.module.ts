@@ -8,7 +8,6 @@ import { IdentifierModule } from '../identifier/identifier.module';
 import { ButtonModule } from '../button/button.module';
 import { ComboboxModule } from '../combobox/combobox.module';
 
-
 import { ShellbarSubtitleComponent } from './shellbar-subtitle/shellbar-subtitle.component';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
 import { ShellbarActionComponent } from './shellbar-action/shellbar-action.component';
@@ -21,6 +20,7 @@ import { DragAndDropModule } from '../utils/drag-and-drop/drag-and-drop.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductSwitchModule } from '../product-switch/product-switch.module';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
+import { ShellbarActionsMobileComponent } from './shellbar-actions/shellbar-actions-mobile.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +28,7 @@ import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
         ProductMenuComponent,
         ShellbarSubtitleComponent,
         ShellbarActionsComponent,
+        ShellbarActionsMobileComponent,
         ShellbarActionComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,
@@ -51,6 +52,7 @@ import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
         ProductMenuComponent,
         ShellbarSubtitleComponent,
         ShellbarActionsComponent,
+        ShellbarActionsMobileComponent,
         ShellbarActionComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,
@@ -58,4 +60,4 @@ import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
         ShellbarSidenavDirective
     ]
 })
-export class ShellbarModule { }
+export class ShellbarModule {}

@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    HostBinding,
+    Input,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 
 @Component({
     selector: 'fd-notification-header',
@@ -23,6 +31,10 @@ export class NotificationHeaderComponent {
     /** Event thrown always, when the close button is clicked */
     @Output()
     readonly closeButtonClick: EventEmitter<void> = new EventEmitter<void>();
+
+    /**Input to set the area label */
+    @Input ()
+    closeNotificationLabel: string;
 
     /** @hidden */
     public closeButtonClicked(): void {

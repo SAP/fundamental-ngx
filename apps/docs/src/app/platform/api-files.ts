@@ -7,8 +7,13 @@
 export const API_FILES = {
     button: ['buttoncomponent'],
     actionbar: ['actionbarcomponent'],
-    menu: ['MenuComponent', 'MenuItemComponent'],
     select: ['SelectComponent', 'OptionComponent'],
+    menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
+    link: ['LinkComponent'],
+    searchField: ['SearchFieldComponent'],
+    radioGroup: ['RadioGroupComponent'],
+    menuButton: ['MenuButtonComponent'],
+    splitMenuButton: ['SplitMenuButtonComponent'],
+    infoLabel: ['InfoLabelComponent'],
     input: ['InputComponent']
-
 };

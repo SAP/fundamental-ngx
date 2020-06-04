@@ -6,27 +6,26 @@ import { SideNavigationModel } from '@fundamental-ngx/core';
     templateUrl: 'side-navigation-object-example.component.html'
 })
 export class SideNavigationObjectExampleComponent {
-
     sideNavigationConfiguration: SideNavigationModel = {
         condensed: false,
         mainNavigation: {
             items: [
                 {
-                    headerTitle: 'Header Title 1',
+                    headerTitle: 'Header Title 1'
                 },
                 {
                     link: {
                         callback: () => this.callbackFunction('First Item'),
-                        icon: 'menu',
+                        icon: 'home',
                         title: 'Link 1'
                     }
                 },
                 {
-                    headerTitle: 'Header Title 2',
+                    headerTitle: 'Header Title 2'
                 },
                 {
                     link: {
-                        icon: 'menu',
+                        icon: 'account',
                         title: 'Link 2',
                         routerLink: '#'
                     }
@@ -34,31 +33,31 @@ export class SideNavigationObjectExampleComponent {
                 {
                     expanded: true,
                     link: {
-                        icon: 'menu',
-                        title: 'Link 3',
+                        icon: 'activate',
+                        title: 'Link 3'
                     },
                     list: {
                         textOnly: true,
                         items: [
                             {
                                 link: {
-                                    title: 'Link 1'
+                                    title: 'Sublink 1'
                                 }
                             },
                             {
                                 link: {
-                                    title: 'Link 2',
+                                    title: 'Sublink 2',
                                     selected: true
                                 }
                             },
                             {
                                 link: {
-                                    title: 'Link 3',
+                                    title: 'Sublink 3'
                                 }
                             },
                             {
                                 link: {
-                                    title: 'Link 4'
+                                    title: 'Sublink 4'
                                 }
                             }
                         ]
@@ -66,7 +65,7 @@ export class SideNavigationObjectExampleComponent {
                 },
                 {
                     link: {
-                        icon: 'menu',
+                        icon: 'approvals',
                         title: 'Link 4'
                     }
                 }
@@ -76,7 +75,7 @@ export class SideNavigationObjectExampleComponent {
             textOnly: true,
             items: [
                 {
-                    headerTitle: 'Header Title 3',
+                    headerTitle: 'Header Title 3'
                 },
                 {
                     link: {
@@ -95,11 +94,9 @@ export class SideNavigationObjectExampleComponent {
                 }
             ]
         }
-    }
-
+    };
 
     callbackFunction(message: string): void {
         alert('Link Clicked ' + message);
     }
-
 }

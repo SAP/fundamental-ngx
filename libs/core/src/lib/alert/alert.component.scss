@@ -1,9 +1,8 @@
-@import "~fundamental-styles/dist/alert";
+@import '~fundamental-styles/dist/alert';
 
 .fd-alert {
     display: block;
 }
-
 
 .fd-has-display-block {
     display: block;
@@ -11,10 +10,4 @@
 
 .fd-has-display-none {
     display: none;
-}
-
-.fd-alert__close {
-    border-width: 1px;
-    border-style: solid;
-    border-color: transparent;
 }

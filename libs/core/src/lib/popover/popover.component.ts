@@ -3,7 +3,11 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy, HostBinding
+    ViewChild,
+    ViewEncapsulation,
+    ContentChild,
+    ChangeDetectionStrategy,
+    HostBinding
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
@@ -29,12 +33,11 @@ let popoverUniqueId: number = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopoverComponent {
-
     /** @hidden */
-    @ViewChild(PopoverDirective, { static: false })
+    @ViewChild(PopoverDirective)
     directiveRef: PopoverDirective;
     /** @hidden */
-    @ContentChild(PopoverDropdownComponent, { static: false }) dropdownComponent: PopoverDropdownComponent;
+    @ContentChild(PopoverDropdownComponent) dropdownComponent: PopoverDropdownComponent;
 
     /** Whether the popover should have an arrow. */
     @Input()
@@ -65,7 +68,7 @@ export class PopoverComponent {
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
     @Input()
-    placement: Placement;
+    placement: Placement = 'bottom-start';
 
     /** Whether the popover is open. Can be used through two-way binding. */
     @Input()
@@ -117,7 +120,7 @@ export class PopoverComponent {
     /** Id of the popover. If none is provided, one will be generated. */
     @Input()
     id: string = 'fd-popover-' + popoverUniqueId++;
-    
+
     /**
      * Toggles the popover open state.
      */
@@ -171,7 +174,6 @@ export class PopoverComponent {
         }
     }
 
-
     /** @hidden
      *  Function that allows us to control aria-expanded on dropdown child
      * */
@@ -180,5 +182,4 @@ export class PopoverComponent {
             this.dropdownComponent.isOpen = isOpen;
         }
     }
-
 }

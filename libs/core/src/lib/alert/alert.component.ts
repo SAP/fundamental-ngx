@@ -14,15 +14,24 @@ import {
     Optional,
     EmbeddedViewRef,
     Output,
-    EventEmitter, ViewEncapsulation, HostListener, NgZone, ChangeDetectionStrategy
+    EventEmitter,
+    ViewEncapsulation,
+    HostListener,
+    NgZone,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 import { AlertRef } from './alert-utils/alert-ref';
+import { AlertConfig } from './alert-utils/alert-config';
 
 let alertUniqueId: number = 0;
 
 /**
+ * @deprecated
+ * Alert component is depricated since version 0.16.0
+ * Message Strip component should be used instead.
+ *
  * The component that represents an alert. It can be only be used inline.
  * If the AlertService is used, this component is auto-generated.
  */
@@ -35,20 +44,17 @@ let alertUniqueId: number = 0;
         '[attr.aria-label]': 'ariaLabel',
         '[style.width]': 'width',
         '[style.min-width]': 'minWidth',
-        'role': 'alert',
+        role: 'alert',
         '[attr.id]': 'id',
         '[@fadeAlertNgIf]': ''
     },
-    animations: [
-        alertFadeNgIf
-    ],
+    animations: [alertFadeNgIf],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
-
     /** @hidden */
-    @ViewChild('container', { read: ViewContainerRef, static: false })
+    @ViewChild('container', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
     /** Whether the alert is dismissible. */
@@ -106,15 +112,20 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    childComponentType: Type<any> | TemplateRef<any> | string;
+    childContent: Type<any> | TemplateRef<any> | string = undefined;
 
     /** @hidden */
-    constructor(private elRef: ElementRef,
-                private cdRef: ChangeDetectorRef,
-                private componentFactoryResolver: ComponentFactoryResolver,
-                private ngZone: NgZone,
-                @Optional() private alertRef: AlertRef) {
+    constructor(
+        private elRef: ElementRef,
+        private cdRef: ChangeDetectorRef,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private ngZone: NgZone,
+        @Optional() private alertConfig: AlertConfig,
+        @Optional() private alertRef: AlertRef
+    ) {
         super(elRef);
+        this._setAlertConfig(alertConfig);
+        this._setProperties();
     }
 
     /** @hidden */
@@ -127,13 +138,13 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.childComponentType) {
-            if (this.childComponentType instanceof Type) {
-                this.loadFromComponent(this.childComponentType);
-            } else if (this.childComponentType instanceof TemplateRef) {
-                this.loadFromTemplate(this.childComponentType);
+        if (this.childContent) {
+            if (this.childContent instanceof Type) {
+                this.loadFromComponent(this.childContent);
+            } else if (this.childContent instanceof TemplateRef) {
+                this.loadFromTemplate(this.childContent);
             } else {
-                this.loadFromString(this.childComponentType);
+                this.loadFromString(this.childContent);
             }
             this.cdRef.detectChanges();
         }
@@ -233,4 +244,9 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         this.message = contentString;
     }
 
+    private _setAlertConfig(alertConfig: AlertConfig): void {
+        Object.keys(alertConfig || {})
+            .filter((key) => key !== 'data' && key !== 'container')
+            .forEach((key) => (this[key] = alertConfig[key]));
+    }
 }

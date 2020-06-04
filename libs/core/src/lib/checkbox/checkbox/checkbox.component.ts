@@ -2,13 +2,16 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    forwardRef, HostBinding,
+    ElementRef,
+    forwardRef,
+    HostBinding,
     Input,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {FdCheckboxValues} from './fd-checkbox-values.interface';
-import {compareObjects} from '../../utils/functions';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FdCheckboxValues } from './fd-checkbox-values.interface';
+import { compareObjects } from '../../utils/public_api';
 
 let checkboxUniqueId: number = 0;
 
@@ -27,6 +30,9 @@ let checkboxUniqueId: number = 0;
     ]
 })
 export class CheckboxComponent implements ControlValueAccessor {
+    /** @hidden */
+    @ViewChild('inputLabel', { static: false })
+    inputLabel: ElementRef;
 
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
@@ -34,7 +40,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** State of control, changes visual appearance of control. */
     @Input()
-    state: 'valid' | 'invalid' | 'info' | 'warning';
+    state: 'success' | 'error' | 'info' | 'warning';
 
     /** Sets [name] property of input. */
     @Input()
@@ -63,7 +69,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** Sets values returned by control. */
     @Input('values')
     set _values(checkboxValues: FdCheckboxValues) {
-        this.values = {...this.values, ...checkboxValues}
+        this.values = { ...this.values, ...checkboxValues };
     }
 
     /** @hidden */
@@ -71,27 +77,27 @@ export class CheckboxComponent implements ControlValueAccessor {
     readonly position = 'relative';
 
     /** Values returned by control. */
-    public values: FdCheckboxValues = {trueValue: true, falseValue: false, thirdStateValue: null};
+    public values: FdCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
     /** Stores current checkbox value. */
     public checkboxValue: any;
     /** Stores current checkbox state. */
-    public checkboxState: 'checked' | 'unchecked' | 'indeterminate';
+    public checkboxState: 'checked' | 'unchecked' | 'indeterminate' | 'force-checked';
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
     public onValueChange = (newValue) => {};
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {
-    }
-
-    /** @hidden Used to define if control is in 'checked' / 'unchecked' state.*/
-    get isChecked(): boolean {
-        return this.checkboxState === 'checked';
-    }
+    /** @hidden */
+    constructor(private _changeDetectorRef: ChangeDetectorRef, public elementRef: ElementRef) {}
 
     /** @hidden Used to define if control is in 'indeterminate' state.*/
     get isIndeterminate(): boolean {
         return this.checkboxState === 'indeterminate';
+    }
+
+    /** @hidden Used to define if control is in 'checked' / 'unchecked' state. */
+    get isChecked(): boolean {
+        return this.checkboxState === 'checked' || this.checkboxState === 'force-checked';
     }
 
     /** @hidden ControlValueAccessor interface
@@ -101,12 +107,17 @@ export class CheckboxComponent implements ControlValueAccessor {
     public writeValue(value: any): void {
         this.checkboxValue = value;
         this._setState();
-        this._changeDetectorRef.detectChanges();
+        this._detectChanges();
     }
 
     /** @hidden ControlValueAccessor interface method - sets onValueChange callback.*/
     public registerOnChange(fn: any): void {
         this.onValueChange = fn;
+    }
+
+    /** @hidden prevent event from propagating */
+    public muteKey(event: KeyboardEvent): void {
+        event.stopPropagation();
     }
 
     /** @hidden ControlValueAccessor interface method - sets onTouched callback.*/
@@ -117,7 +128,20 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Called by FormControl - used to disable / enable control.*/
     public setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
-        this._changeDetectorRef.detectChanges();
+        this._detectChanges();
+    }
+
+    /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
+    public checkByClick(event: Event) {
+        this.nextValue();
+    }
+
+    /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
+    public checkByKey(event: KeyboardEvent): void {
+        if (this._isSpaceBarEvent(event)) {
+            this._nextValueEvent();
+            this.muteKey(event);
+        }
     }
 
     /** @hidden Based on current control state:
@@ -131,45 +155,23 @@ export class CheckboxComponent implements ControlValueAccessor {
                 this.checkboxValue = this.values.falseValue;
                 break;
             case 'unchecked':
-                this.checkboxValue = this.tristate && this.tristateSelectable
-                    ? this.values.thirdStateValue
-                    : this.values.trueValue;
+                this.checkboxValue =
+                    this.tristate && this.tristateSelectable ? this.values.thirdStateValue : this.values.trueValue;
                 break;
             case 'indeterminate':
+            case 'force-checked':
                 this.checkboxValue = this.values.trueValue;
+                this.inputLabel.nativeElement.checked = true;
+                break;
+            default:
+                this.checkboxValue =
+                    this.tristate && this.tristateSelectable ? this.values.thirdStateValue : this.values.trueValue;
                 break;
         }
+
         this._setState();
         this.onValueChange(this.checkboxValue);
-        this._changeDetectorRef.detectChanges();
-    }
-
-    /** @hidden Updates checkbox state on mouse click
-     * and prevents from double check update from label-input binding */
-    public checkByClick(event: Event) {
-        this.nextValue();
-        event.preventDefault();
-    }
-
-    /** @hidden Updates checkbox state on spacebar key
-     * and prevents from double check update from label-input binding */
-    public checkByKey(event: KeyboardEvent): void {
-        if (this._isSpaceBarEvent(event)) {
-            this.nextValue();
-            event.preventDefault();
-        }
-    }
-
-    /** @hidden Prevents from checkbox update based on label-input binding */
-    public muteKey(event: KeyboardEvent): void {
-        if (this._isSpaceBarEvent(event)) {
-            event.preventDefault();
-        }
-    }
-
-    /** @hidden Determines event source based on key code */
-    private _isSpaceBarEvent(event: KeyboardEvent): boolean {
-        return event.keyCode === 32;
+        this._detectChanges();
     }
 
     /** @hidden Based on current control value sets new control state. */
@@ -183,10 +185,37 @@ export class CheckboxComponent implements ControlValueAccessor {
         }
     }
 
+    /** @hidden */
+    private _nextValueEvent(): void {
+        if (this._isIE() && this.checkboxState === 'indeterminate') {
+            this.checkboxState = 'force-checked';
+            this._detectChanges();
+        }
+    }
+
     /** @hidden Compares values */
     private _compare(val1: any, val2: any): boolean {
-        return typeof val1 === 'object'
-            ? compareObjects(val1, val2)
-            : val1 === val2;
+        return typeof val1 === 'object' ? compareObjects(val1, val2) : val1 === val2;
+    }
+
+    /** @hidden */
+    private _isIE(): boolean {
+        const ua = window.navigator.userAgent; // Check the userAgent property of the window.navigator object
+        const msie = ua.indexOf('MSIE '); // IE 10 or older
+        const trident = ua.indexOf('Trident/'); // IE 11
+
+        return msie > 0 || trident > 0;
+    }
+
+    /** @hidden Determines event source based on key code */
+    private _isSpaceBarEvent(event: KeyboardEvent): boolean {
+        return event.keyCode === 32;
+    }
+
+    /** Method to trigger change detection in component */
+    private _detectChanges(): void {
+        if (!this._changeDetectorRef['destroyed']) {
+            this._changeDetectorRef.detectChanges();
+        }
     }
 }

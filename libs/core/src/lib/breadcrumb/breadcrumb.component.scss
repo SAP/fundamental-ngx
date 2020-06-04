@@ -1,1 +1,6 @@
 @import '~fundamental-styles/dist/breadcrumb';
+
+.fd-breadcrumb {
+    display: inline-block;
+    white-space: nowrap;
+}

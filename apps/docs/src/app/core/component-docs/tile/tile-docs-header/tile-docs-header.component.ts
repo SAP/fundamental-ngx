@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-tile-docs-header',
-  templateUrl: './tile-docs-header.component.html',
-  styleUrls: ['./tile-docs-header.component.scss']
+    selector: 'app-tile-docs-header',
+    templateUrl: './tile-docs-header.component.html',
+    styleUrls: ['./tile-docs-header.component.scss']
 })
-export class TileDocsHeaderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class TileDocsHeaderComponent {}

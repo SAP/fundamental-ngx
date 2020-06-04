@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopoverDirective } from './popover.directive';
-import { Component, NgModule, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgModule, ViewChild } from '@angular/core';
 import { PopoverModule } from '../popover.module';
 
 @Component({
     template: `
+        <div #divElement></div>
         <button fd-button [fdPopover]="template" [(isOpen)]="isOpen"></button>
         <ng-template #template><div>Content Div</div></ng-template>
     `
@@ -13,13 +14,14 @@ class TestTemplateComponent {
     @ViewChild(PopoverDirective, { static: true })
     popoverDirective: PopoverDirective;
 
+    @ViewChild('divElement')
+    divElement: ElementRef;
+
     isOpen = false;
 }
 
 @Component({
-    template: `
-        <button fd-button fdPopover="content" [(isOpen)]="isOpen"></button>
-    `
+    template: ` <button fd-button fdPopover="content" [(isOpen)]="isOpen"></button> `
 })
 class TestStringComponent {
     @ViewChild(PopoverDirective, { static: true })
@@ -31,7 +33,8 @@ class TestStringComponent {
 @NgModule({
     declarations: [TestStringComponent, TestTemplateComponent],
     imports: [PopoverModule]
-}) class TestModule {}
+})
+class TestModule {}
 
 describe('PopoverDirective', () => {
     let fixtureTemplate: ComponentFixture<TestTemplateComponent>;
@@ -85,7 +88,7 @@ describe('PopoverDirective', () => {
         expect(fixtureTemplate.componentInstance.popoverDirective.isOpen).toBe(true);
         fixtureTemplate.componentInstance.popoverDirective.close();
         fixtureTemplate.detectChanges();
-        expect(fixtureTemplate.componentInstance.isOpen).toBe(false)
+        expect(fixtureTemplate.componentInstance.isOpen).toBe(false);
     });
 
     it('should support multiple triggers', () => {
@@ -100,5 +103,33 @@ describe('PopoverDirective', () => {
     it('should support string content', () => {
         fixtureString.componentInstance.popoverDirective.open();
         expect(fixtureString.componentInstance.isOpen).toBe(true);
+    });
+
+    it('should call close', () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        popover.open();
+        const mouseEvent = { target: fixtureTemplate.componentInstance.divElement.nativeElement };
+        expect(popover._shouldClose(mouseEvent)).toEqual(true);
+    });
+
+    it("shouldn't call close", () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        const mouseEvent = { target: fixtureTemplate.componentInstance.divElement.nativeElement };
+        expect(popover._shouldClose(mouseEvent)).not.toEqual(true);
+    });
+
+    it("shouldn't call close on inside click", () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        popover.open();
+        const mouseEvent = { target: popover.elRef.nativeElement };
+        expect(popover._shouldClose(mouseEvent)).not.toEqual(true);
+    });
+
+    it('should change position due to rtl', () => {
+        const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
+        popover.options.placement = 'bottom-start';
+        popover.placement = 'bottom-start';
+        popover._handleRtlChange(true);
+        expect(popover.options.placement).toEqual('bottom-end');
     });
 });

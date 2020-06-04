@@ -6,7 +6,6 @@ import { SideNavigationModel } from '@fundamental-ngx/core';
     templateUrl: 'side-navigation-condensed-object-example.component.html'
 })
 export class SideNavigationCondensedObjectExampleComponent {
-
     sideNavigationConfiguration: SideNavigationModel = {
         condensed: true,
         mainNavigation: {
@@ -16,20 +15,21 @@ export class SideNavigationCondensedObjectExampleComponent {
                 },
                 {
                     link: {
-                        icon: 'menu',
+                        icon: 'home',
                         title: 'Link 1'
                     }
                 },
                 {
                     link: {
-                        icon: 'menu',
+                        icon: 'account',
                         title: 'Link 2'
                     }
                 },
                 {
                     link: {
-                        icon: 'menu',
+                        icon: 'action-settings',
                         title: 'Link 3',
+                        selected: true
                     },
                     list: {
                         textOnly: true,
@@ -63,7 +63,7 @@ export class SideNavigationCondensedObjectExampleComponent {
                 },
                 {
                     link: {
-                        icon: 'menu',
+                        icon: 'add-coursebook',
                         title: 'Link 4'
                     }
                 }
@@ -73,24 +73,23 @@ export class SideNavigationCondensedObjectExampleComponent {
             items: [
                 {
                     link: {
-                        icon: 'menu',
+                        icon: 'bubble-chart',
                         title: 'Link 1'
                     }
                 },
                 {
                     link: {
-                        icon: 'menu',
+                        icon: 'chain-link',
                         title: 'Link 2'
                     }
                 },
                 {
                     link: {
-                        icon: 'menu',
+                        icon: 'customize',
                         title: 'Link 3'
                     }
                 }
             ]
         }
-    }
-
+    };
 }

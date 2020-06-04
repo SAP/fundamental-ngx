@@ -3,22 +3,25 @@
         <ul fd-nested-list>
             <li fd-nested-list-item>
                 <a fd-nested-list-link>
-                    <span fd-nested-list-icon [glyph]="'menu'"></span>
+                    <span fd-nested-list-icon [glyph]="'home'"></span>
                     <span fd-nested-list-title>Link 1</span>
                 </a>
             </li>
             <li fd-nested-list-item>
                 <a fd-nested-list-link>
-                    <span fd-nested-list-icon [glyph]="'home'"></span>
+                    <span fd-nested-list-icon [glyph]="'appointment-2'"></span>
                     <span fd-nested-list-title>Link 2</span>
                 </a>
             </li>
             <li fd-nested-list-item>
                 <fd-nested-list-popover>
-                    <a fd-nested-list-link>
-                        <span fd-nested-list-icon [glyph]="'settings'"></span>
-                        <span fd-nested-list-title>Link 3</span>
-                    </a>
+                    <div fd-nested-list-content [selected]="true">
+                        <a fd-nested-list-link>
+                            <span fd-nested-list-icon [glyph]="'settings'"></span>
+                            <span fd-nested-list-title>Link 3</span>
+                        </a>
+                        <button fd-nested-list-expand-icon></button>
+                    </div>
                     <ul fd-nested-list>
                         <li fd-nested-list-item>
                             <a fd-nested-list-link>
@@ -30,9 +33,11 @@
                                 <span fd-nested-list-title>Link 2</span>
                             </a>
                         </li>
-                        <li fd-nested-list-item><a fd-nested-list-link>
-                            <span fd-nested-list-title>Link 3</span>
-                        </a></li>
+                        <li fd-nested-list-item>
+                            <a fd-nested-list-link>
+                                <span fd-nested-list-title>Link 3</span>
+                            </a>
+                        </li>
                         <li fd-nested-list-item>
                             <a fd-nested-list-link>
                                 <span fd-nested-list-title>Link 4</span>
@@ -43,7 +48,7 @@
             </li>
             <li fd-nested-list-item>
                 <a fd-nested-list-link>
-                    <span fd-nested-list-icon [glyph]="'settings'"></span>
+                    <span fd-nested-list-icon [glyph]="'activity-items'"></span>
                     <span fd-nested-list-title>Link 4</span>
                 </a>
             </li>
@@ -51,15 +56,19 @@
     </div>
 
     <div fd-side-nav-utility>
-        <ul fd-nested-list [compact]="true" [textOnly]="false">
-            <li fd-nested-list-item><a fd-nested-list-link>
-                <span fd-nested-list-icon [glyph]="'menu'"></span>
-                <span fd-nested-list-title>Link 1</span>
-            </a></li>
-            <li fd-nested-list-item><a fd-nested-list-link>
-                <span fd-nested-list-icon [glyph]="'home'"></span>
-                <span fd-nested-list-title>Link 2</span>
-            </a></li>
+        <ul fd-nested-list [textOnly]="false">
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <span fd-nested-list-icon [glyph]="'notification-2'"></span>
+                    <span fd-nested-list-title>Link 1</span>
+                </a>
+            </li>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <span fd-nested-list-icon [glyph]="'world'"></span>
+                    <span fd-nested-list-title>Link 2</span>
+                </a>
+            </li>
         </ul>
     </div>
 </fd-side-nav>

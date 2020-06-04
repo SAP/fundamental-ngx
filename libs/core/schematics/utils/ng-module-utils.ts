@@ -32,8 +32,7 @@ export function hasModuleImport(tree: Tree, modulePath: string, className: strin
         throw new SchematicsException(`Could not read Angular module file: ${modulePath}`);
     }
 
-    const parsedFile = ts.createSourceFile(modulePath, moduleFileContent.toString(),
-        ts.ScriptTarget.Latest, true);
+    const parsedFile = ts.createSourceFile(modulePath, moduleFileContent.toString(), ts.ScriptTarget.Latest, true);
     const ngModuleMetadata = findNgModuleMetadata(parsedFile);
 
     if (!ngModuleMetadata) {
@@ -42,12 +41,15 @@ export function hasModuleImport(tree: Tree, modulePath: string, className: strin
 
     // tslint:disable-next-line:no-non-null-assertion
     for (const property of ngModuleMetadata!.properties) {
-        if (!ts.isPropertyAssignment(property) || property.name.getText() !== 'imports' ||
-            !ts.isArrayLiteralExpression(property.initializer)) {
+        if (
+            !ts.isPropertyAssignment(property) ||
+            property.name.getText() !== 'imports' ||
+            !ts.isArrayLiteralExpression(property.initializer)
+        ) {
             continue;
         }
 
-        if (property.initializer.elements.some(element => element.getText() === className)) {
+        if (property.initializer.elements.some((element) => element.getText() === className)) {
             return true;
         }
     }
@@ -64,8 +66,7 @@ function findNgModuleMetadata(rootNode: ts.Node): ts.ObjectLiteralExpression | n
         // tslint:disable-next-line:no-non-null-assertion
         const node = nodeQueue.shift()!;
 
-        if (ts.isDecorator(node) && ts.isCallExpression(node.expression) &&
-            isNgModuleCallExpression(node.expression)) {
+        if (ts.isDecorator(node) && ts.isCallExpression(node.expression) && isNgModuleCallExpression(node.expression)) {
             return node.expression.arguments[0] as ts.ObjectLiteralExpression;
         } else {
             nodeQueue.push(...node.getChildren());
@@ -87,8 +88,7 @@ function resolveIdentifierOfExpression(expression: ts.Expression): ts.Identifier
 
 // Borrowed from the Angular CDK
 function isNgModuleCallExpression(callExpression: ts.CallExpression): boolean {
-    if (!callExpression.arguments.length ||
-        !ts.isObjectLiteralExpression(callExpression.arguments[0])) {
+    if (!callExpression.arguments.length || !ts.isObjectLiteralExpression(callExpression.arguments[0])) {
         return false;
     }
 

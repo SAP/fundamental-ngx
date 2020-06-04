@@ -15,6 +15,6 @@ export interface Property {
     id?: string;
     type: string;
     items?: Property;
-    enum?: [any];
+    enum?: any[];
     properties?: Properties;
 }

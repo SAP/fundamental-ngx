@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as comboboxHTMLSrc from '!raw-loader!./examples/combobox-example.component.html';
 import * as comboboxTSSrc from '!raw-loader!./examples/combobox-example.component.ts';
@@ -12,6 +12,10 @@ import * as comboboxTemplateH from '!raw-loader!./examples/combobox-template-exa
 import * as comboboxTemplateT from '!raw-loader!./examples/combobox-template-example.component.ts';
 import * as comboboxDisabledTemplateH from '!raw-loader!./examples/combobox-disabled-example.component.html';
 import * as comboboxDisabledTemplateT from '!raw-loader!./examples/combobox-disabled-example.component.ts';
+import * as comboboxColumnsTemplateH from '!raw-loader!./examples/combobox-columns-example.component.html';
+import * as comboboxColumnsTemplateT from '!raw-loader!./examples/combobox-columns-example.component.ts';
+import * as comboboxGroupTemplateH from '!raw-loader!./examples/combobox-group-example.component.html';
+import * as comboboxGroupTemplateT from '!raw-loader!./examples/combobox-group-example.component.ts';
 import * as comboboxDisabledTemplateScss from '!raw-loader!./examples/combobox-disabled-example.component.scss';
 import * as comboboxFormT from '!raw-loader!./examples/combobox-forms-example.component.ts';
 import * as comboboxFormH from '!raw-loader!./examples/combobox-forms-example.component.html';
@@ -22,13 +26,12 @@ import * as comboboxSeaHtml from '!raw-loader!./examples/combobox-search-functio
 import * as comboboxProgramHtml from '!raw-loader!./examples/combobox-open-control-example.component.html';
 import * as comboboxProgramTs from '!raw-loader!./examples/combobox-open-control-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'fd-combobox-docs',
     templateUrl: './combobox-docs.component.html'
 })
-export class ComboboxDocsComponent implements OnInit {
+export class ComboboxDocsComponent {
     comboboxBasicExample: ExampleFile[] = [
         {
             language: 'html',
@@ -128,6 +131,34 @@ export class ComboboxDocsComponent implements OnInit {
         }
     ];
 
+    comboboxColumnsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxColumnsTemplateH,
+            fileName: 'combobox-columns-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxColumnsExampleComponent',
+            code: comboboxColumnsTemplateT,
+            fileName: 'combobox-columns-example'
+        }
+    ];
+
+    comboboxGroupExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxGroupTemplateH,
+            fileName: 'combobox-group-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxGroupExampleComponent',
+            code: comboboxGroupTemplateT,
+            fileName: 'combobox-group-example'
+        }
+    ];
+
     comboboxTemplateExample: ExampleFile[] = [
         {
             language: 'html',
@@ -169,6 +200,4 @@ export class ComboboxDocsComponent implements OnInit {
             fileName: 'combobox-forms-example'
         }
     ];
-
-    ngOnInit() { }
 }

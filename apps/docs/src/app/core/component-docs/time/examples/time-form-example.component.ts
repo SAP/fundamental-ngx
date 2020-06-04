@@ -11,4 +11,4 @@ export class TimeFormExampleComponent {
         time: new FormControl(''),
         disabledTime: new FormControl({ value: '', disabled: true })
     });
-};
+}

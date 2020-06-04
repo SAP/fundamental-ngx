@@ -14,32 +14,13 @@ export const API_FILES = {
         'ActionBarMobileDirective',
         'ActionBarTitleDirective'
     ],
-    alert: [
-        'AlertComponent',
-        'AlertConfig',
-        'AlertService',
-        'AlertRef'
-    ],
-    badgeLabel: [
-        'BadgeComponent',
-        'LabelComponent',
-        'StatusLabelComponent'
-    ],
-    breadcrumb: [
-        'BreadcrumbComponent',
-        'BreadcrumbItemDirective',
-        'BreadcrumbLinkDirective'
-    ],
-    busyIndicator: [
-        'BusyIndicatorComponent',
-    ],
-    button: [
-        'ButtonComponent'
-    ],
-    buttonGroup: [
-        'ButtonGroupComponent',
-        'ButtonGroupedDirective',
-    ],
+    alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
+    badgeLabel: ['BadgeComponent', 'LabelComponent', 'StatusLabelComponent'],
+    bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
+    breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
+    busyIndicator: ['BusyIndicatorComponent'],
+    button: ['ButtonComponent'],
+    segmentedButton: ['SegmentedButtonComponent', 'SegmentedButtonDirective'],
     calendar: [
         'CalendarComponent',
         'CalendarDayViewComponent',
@@ -53,32 +34,12 @@ export const API_FILES = {
         'DateFormatParserDefault',
         'FdDate'
     ],
-    combobox: [
-        'ComboboxComponent'
-    ],
-    checkbox: [
-        'CheckboxComponent'
-    ],
-    datePicker: [
-        'DatePickerComponent',
-        'DateFormatParser',
-        'DateFormatParserDefault',
-        'FdDate'
-    ],
-    datetimePicker: [
-        'DatetimePickerComponent',
-        'FdDateTime',
-        'DateTimeFormatParser',
-        'DateTimeFormatParserDefault'
-    ],
-    dropdown: [
-        'PopoverDropdownComponent'
-    ],
-    fileInput: [
-        'FileInputComponent',
-        'FileSelectDirective',
-        'FileDragndropDirective'
-    ],
+    combobox: ['ComboboxComponent'],
+    checkbox: ['CheckboxComponent'],
+    datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
+    datetimePicker: ['DatetimePickerComponent', 'FdDateTime', 'DateTimeFormatParser', 'DateTimeFormatParserDefault'],
+    dropdown: ['PopoverDropdownComponent'],
+    fileInput: ['FileInputComponent', 'FileSelectDirective', 'FileDragndropDirective'],
     form: [
         'FormControlDirective',
         'FormGroupComponent',
@@ -89,37 +50,26 @@ export const API_FILES = {
         'FormSetDirective',
         'FormInputMessageGroupComponent'
     ],
-    icon: [
-        'IconComponent'
-    ],
-    identifier: [
-        'IdentifierComponent'
-    ],
-    image: [
-        'ImageComponent'
-    ],
-    infiniteScroll: [
-        'InfiniteScrollDirective'
-    ],
-    inlineHelp: [
-        'InlineHelpComponent'
-    ],
-    inputGroup: [
-        'InputGroupComponent',
-        'InputGroupNumberComponent',
-    ],
-    layoutGrid: [
-        'LayoutGridComponent',
-        'LayoutGridSpanDirective',
-    ],
+    icon: ['IconComponent'],
+    identifier: ['IdentifierComponent'],
+    image: ['ImageComponent'],
+    infoLabel: ['InfoLabelComponent'],
+    infiniteScroll: ['InfiniteScrollDirective'],
+    inlineHelp: ['InlineHelpComponent'],
+    inputGroup: ['InputGroupComponent', 'InputGroupNumberComponent'],
+    layoutGrid: ['LayoutGridComponent', 'LayoutGridSpanDirective'],
+    link: ['LinkComponent'],
     list: [
         'ListComponent',
-        'ListActionDirective',
-        'ListItemDirective'
+        'ListItemDirective',
+        'ListLabelDirective',
+        'ListTitleDirective',
+        'ListSecondaryDirective',
+        'ListGroupHeaderDirective',
+        'ListIconDirective',
+        'ListFooterDirective'
     ],
-    loadingSpinner: [
-        'LoadingSpinnerComponent'
-    ],
+    loadingSpinner: ['LoadingSpinnerComponent'],
     localizationEditor: [
         'LocalizationEditorComponent',
         'LocalizationEditorItemComponent',
@@ -147,20 +97,21 @@ export const API_FILES = {
         'MenuTitleDirective',
         'MenuKeyboardService'
     ],
-    modal: [
-        'ModalService',
-        'ModalTitleDirective',
-        'ModalCloseButtonDirective',
-        'ModalConfig',
-        'ModalPosition',
-        'ModalBodyComponent',
-        'ModalHeaderComponent',
-        'ModalFooterComponent',
-        'ModalRef'
+    messageStrip: ['MessageStripComponent'],
+    dialog: [
+        'DialogService',
+        'DialogContainerComponent',
+        'DialogTitleDirective',
+        'DialogCloseButtonDirective',
+        'DialogDecisiveButtonDirective',
+        'DialogConfig',
+        'DialogPosition',
+        'DialogBodyComponent',
+        'DialogHeaderComponent',
+        'DialogFooterComponent',
+        'DialogRef'
     ],
-    multiInput: [
-        'MultiInputComponent'
-    ],
+    multiInput: ['MultiInputComponent'],
     notification: [
         'NotificationComponent',
         'NotificationHeaderComponent',
@@ -178,13 +129,10 @@ export const API_FILES = {
         'NotificationContainer',
         'NotificationConfig',
         'NotificationDefault',
-        'NotificationRef',
+        'NotificationRef'
     ],
-    pagination: [
-        'PaginationComponent',
-        'PaginationModel',
-        'PaginationService'
-    ],
+    objectStatus: ['ObjectStatusModule', 'ObjectStatusComponent'],
+    pagination: ['PaginationComponent', 'PaginationModel', 'PaginationService'],
     panel: [
         'PanelComponent',
         'PanelActionsComponent',
@@ -205,20 +153,10 @@ export const API_FILES = {
         'PopoverBodySubheaderDirective',
         'PopoverBodyFooterDirective'
     ],
-    popoverDirective: [
-        'PopoverDirective',
-    ],
-    productSwitch: [
-        'ProductSwitchComponent',
-        'ProductSwitchItem'
-    ],
-    scrollSpy: [
-        'ScrollSpyDirective'
-    ],
-    select: [
-        'SelectComponent',
-        'OptionComponent'
-    ],
+    popoverDirective: ['PopoverDirective'],
+    productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
+    scrollSpy: ['ScrollSpyDirective'],
+    select: ['SelectComponent', 'OptionComponent'],
     shellbar: [
         'ProductMenuComponent',
         'ShellbarComponent',
@@ -239,13 +177,10 @@ export const API_FILES = {
         'NestedListIconDirective',
         'NestedListItem',
         'NestedListModel',
-        'NestedListLink'
+        'NestedListLink',
+        'NestedItemService'
     ],
-    splitButton: [
-        'SplitButtonComponent',
-        'SplitButtonMenuDirective',
-        'SplitButtonActionTitle',
-    ],
+    splitButton: ['SplitButtonComponent', 'SplitButtonMenuDirective', 'SplitButtonActionTitle'],
     table: [
         'TableBodyDirective',
         'TableCellDirective',
@@ -257,11 +192,22 @@ export const API_FILES = {
         'ColumnSortableDirective'
     ],
     tabs: [
-        'TabPanelComponent',
         'TabListComponent',
+        'TabPanelComponent',
         'TabTitleDirective',
+        'TabLoadTitleDirective',
+        'TabNavComponent',
         'TabLinkDirective',
-        'TabNavComponent'
+        'TabItemDirective',
+        'TabTagDirective',
+        'TabIconDirective',
+        'TabCountDirective',
+        'TabLabelDirective',
+        'TabProcessDirective',
+        'TabHeaderDirective',
+        'TabCounterHeaderDirective',
+        'TabProcessIconDirective',
+        'TabSeparator'
     ],
     tile: [
         'ProductTileComponent',
@@ -277,28 +223,9 @@ export const API_FILES = {
         'TileTextDirective',
         'TileTitleComponent'
     ],
-    time: [
-        'TimeComponent',
-        'TimeI18nLabels',
-        'TimeFormatParser',
-        'TimeFormatParserDefault',
-        'TimeObject'
-    ],
-    timePicker: [
-        'TimePickerComponent',
-        'TimeFormatParser',
-        'TimeFormatParserDefault',
-        'TimeObject',
-    ],
-    toggle: [
-        'ToggleComponent'
-    ],
-    token: [
-        'TokenComponent'
-    ],
-    tree: [
-        'TreeComponent',
-        'TreeChildComponent',
-        'TreeRowObjectModel'
-    ]
+    time: ['TimeComponent', 'TimeI18nLabels', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
+    timePicker: ['TimePickerComponent', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
+    switch: ['SwitchComponent'],
+    token: ['TokenComponent', 'TokenizerComponent'],
+    tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel']
 };

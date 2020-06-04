@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarHeaderComponent } from './calendar-header.component';
-import { ButtonModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '../../button/button.module';
+import { CalendarService } from '../calendar.service';
 
 describe('Calendar2HeaderComponent', () => {
     let component: CalendarHeaderComponent;
@@ -10,9 +11,9 @@ describe('Calendar2HeaderComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [CalendarHeaderComponent],
-            imports: [ButtonModule]
-        })
-            .compileComponents();
+            imports: [ButtonModule],
+            providers: [CalendarService]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

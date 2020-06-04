@@ -11,9 +11,8 @@ describe('ShellbarActionComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, IdentifierModule],
-            declarations: [ ShellbarActionComponent ]
-        })
-            .compileComponents();
+            declarations: [ShellbarActionComponent]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

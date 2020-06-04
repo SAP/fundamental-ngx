@@ -1,8 +1,21 @@
-import { ChangeDetectionStrategy, Component, Host, Inject, Input, isDevMode, OnDestroy, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Host,
+    Inject,
+    Input,
+    isDevMode,
+    OnDestroy,
+    ViewEncapsulation
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PopoverComponent } from '../popover.component';
 import { ButtonType } from '../../button/button.component';
 /**
+ * @deprecated
+ * PopoverDropdownComponent is deprecated
+ * Consult docs for better alternative
+ *
  * A component used to enforce a certain layout for the popover. With additional styling
  * ```html
  * <fd-popover>
@@ -14,7 +27,7 @@ import { ButtonType } from '../../button/button.component';
 @Component({
     selector: 'fd-dropdown-control',
     host: {
-        class: 'fd-dropdown',
+        class: 'fd-dropdown'
     },
     templateUrl: 'popover-dropdown.component.html',
     encapsulation: ViewEncapsulation.None,
@@ -51,8 +64,9 @@ export class PopoverDropdownComponent {
 
     constructor() {
         if (isDevMode()) {
-            console.warn('Popover Dropdown has been deprecated, it will be removed soon. Replace it by popover with menu button');
+            console.warn(
+                'Popover Dropdown has been deprecated, it will be removed soon. Replace it by popover with menu button'
+            );
         }
     }
-
 }

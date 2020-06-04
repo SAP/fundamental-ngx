@@ -1,6 +1,5 @@
 import {
-    AfterContentInit,
-    ChangeDetectionStrategy,
+    AfterContentInit, AfterViewInit,
     Component,
     ContentChild,
     HostBinding,
@@ -27,10 +26,9 @@ import { NestedListStateService } from '../nested-list/nested-list-state.service
     selector: 'fd-side-nav',
     styleUrls: ['side-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ NestedListKeyboardService, NestedListStateService ]
 })
-export class SideNavigationComponent implements AfterContentInit, OnInit {
+export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit {
 
     /**
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
@@ -43,12 +41,18 @@ export class SideNavigationComponent implements AfterContentInit, OnInit {
     @HostBinding('class.fd-side-nav--condensed')
     condensed: boolean = false;
 
+    /** Whether clicking on elements should change selected state of items */
+    @Input()
+    set selectable(selectable: boolean) {
+        this.nestedListState.selectable = selectable
+    }
+
     /** @hidden */
-    @ContentChild(SideNavigationUtilityDirective, { static: false })
+    @ContentChild(SideNavigationUtilityDirective)
     sideNavUtility: SideNavigationUtilityDirective;
 
     /** @hidden */
-    @ContentChild(SideNavigationMainDirective, { static: false })
+    @ContentChild(SideNavigationMainDirective)
     sideNavMain: SideNavigationMainDirective;
 
     @ViewChildren(PreparedNestedListComponent)
@@ -59,10 +63,10 @@ export class SideNavigationComponent implements AfterContentInit, OnInit {
         private keyboardService: NestedListKeyboardService,
         private nestedListState: NestedListStateService
     ) {
-        this.keyboardService.refresh$.subscribe(() =>
+        this.keyboardService.refresh$.subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists())
-        );
+        });
     }
 
     /** @hidden */
@@ -75,13 +79,16 @@ export class SideNavigationComponent implements AfterContentInit, OnInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.keyboardService.refreshItems(this.getLists());
-        this.getLists().forEach(list => this.nestedListState.propagateSelected(list));
+        if (!this.sideNavigationConfiguration) {
+            this.keyboardService.refreshItems(this.getLists());
+        }
+    }
 
-        this.nestedListState.refresh$.subscribe(() =>
-            /** Refresh selected state for links */
-            this.getLists().forEach(list => this.nestedListState.propagateSelected(list))
-        );
+    /** @hidden */
+    ngAfterViewInit(): void {
+        if (this.sideNavigationConfiguration) {
+            this.keyboardService.refreshItems(this.getLists());
+        }
     }
 
     /**

@@ -17,7 +17,6 @@ import { FormStates } from '../../form/form-control/form-states';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocalizationEditorMainComponent extends LocalizationEditorItemComponent {
-
     /**
      * @hidden
      * This variable is controlled by parent component
@@ -26,7 +25,7 @@ export class LocalizationEditorMainComponent extends LocalizationEditorItemCompo
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
     state: FormStates;

@@ -20,7 +20,7 @@ export class SchemaComponent implements OnInit {
         this.schemaGroup = this._constructProperties(this.schema.properties);
         this.schemaGroup.patchValue(this.initialValues);
 
-        this.schemaGroup.valueChanges.subscribe(values => {
+        this.schemaGroup.valueChanges.subscribe((values) => {
             this.onSchemaValues.emit(values);
         });
     }

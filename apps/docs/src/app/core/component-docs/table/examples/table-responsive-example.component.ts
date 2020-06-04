@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
     selector: 'fd-table-responsive-example',
     templateUrl: './table-responsive-example.component.html',
     styleUrls: ['table-responsive-example.component.scss']
-
 })
 export class TableResponsiveExampleComponent implements OnInit {
     tableRows;

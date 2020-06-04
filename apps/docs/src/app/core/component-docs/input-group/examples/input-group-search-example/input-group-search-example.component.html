@@ -5,7 +5,25 @@
     [glyph]="'decline'"
     [placeholder]="'Search'"
     [button]="true"
-    (addOnButtonClicked)="searchTerm = ''">
+    (addOnButtonClicked)="searchTerm = ''"
+>
 </fd-input-group>
-<br/>
-<span>searchTerm: {{searchTerm}}</span>
+<br />
+<span>Search term: {{ searchTerm }}</span>
+
+<br />
+<br />
+<br />
+
+<label fd-form-label>Search input with search type</label>
+<fd-input-group
+    [disabled]="false"
+    [(ngModel)]="searchTermSecond"
+    [glyph]="'search'"
+    [placeholder]="'Search'"
+    [button]="true"
+    [type]="'search'"
+>
+</fd-input-group>
+<br />
+<span>Search term: {{ searchTermSecond }}</span>

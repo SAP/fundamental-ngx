@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
     template: `
-        <fd-radio-button #radio1 state="valid" [(ngModel)]="selectedValue" [value]="1" name="radio"></fd-radio-button>
-        <fd-radio-button #radio2 state="invalid" [(ngModel)]="selectedValue" [value]="2" name="radio"></fd-radio-button>
+        <fd-radio-button #radio1 state="success" [(ngModel)]="selectedValue" [value]="1" name="radio"></fd-radio-button>
+        <fd-radio-button #radio2 state="error" [(ngModel)]="selectedValue" [value]="2" name="radio"></fd-radio-button>
         <fd-radio-button
             #radio3
             [disabled]="true"
@@ -20,9 +20,9 @@ import { FormsModule } from '@angular/forms';
 class TestRadioButtonComponent {
     selectedValue = 1;
 
-    @ViewChild('radio1', { static: false }) radioButton1: RadioButtonComponent;
-    @ViewChild('radio2', { static: false }) radioButton2: RadioButtonComponent;
-    @ViewChild('radio3', { static: false }) radioButton3: RadioButtonComponent;
+    @ViewChild('radio1') radioButton1: RadioButtonComponent;
+    @ViewChild('radio2') radioButton2: RadioButtonComponent;
+    @ViewChild('radio3') radioButton3: RadioButtonComponent;
 }
 
 describe('RadioButtonComponent', () => {
@@ -72,14 +72,14 @@ describe('RadioButtonComponent', () => {
         await wait(fixture);
 
         // value is accessed by [] because component doesn't have a getter for state by design
-        expect(component.radioButton1['_state']).toContain('valid');
-        expect(component.radioButton2['_state']).toContain('invalid');
+        expect(component.radioButton1.state).toContain('success');
+        expect(component.radioButton2.state).toContain('error');
     });
 
     it('should be disabled', async () => {
         await wait(fixture);
 
-        expect(component.radioButton3['_disabled']).toBeTruthy();
+        expect(component.radioButton3.disabled).toBeTruthy();
         expect(component.radioButton3.inputElement.nativeElement.disabled).toBeTruthy();
     });
 });

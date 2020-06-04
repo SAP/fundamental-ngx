@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./scroll-spy-example.component.scss']
 })
 export class ScrollSpyExampleComponent implements OnInit {
-
     selectedSpy = 'element-0';
     items: any[] = [];
 
@@ -19,5 +18,4 @@ export class ScrollSpyExampleComponent implements OnInit {
             this.items.push({ name: 'Element ' + i, id: 'element-' + i });
         }
     }
-
 }
