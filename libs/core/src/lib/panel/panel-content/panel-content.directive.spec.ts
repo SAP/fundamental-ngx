@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { PanelHeaderDirective } from './panel-header.directive';
+import { PanelContentDirective } from './panel-content.directive';
 import { PanelModule } from '../panel.module';
 
 @Component({
-    template: `<div #directiveElement fd-panel-header>Test Panel Header</div>`
+    template: `<div #directiveElement fd-panel-content [height]="'100px'">Test Panel Content</div>`
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
 
-describe('PanelHeaderDirective', () => {
+describe('PanelContentDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -33,6 +33,10 @@ describe('PanelHeaderDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-panel__header');
+        expect(component.ref.nativeElement.className).toBe('fd-panel__content');
+    });
+
+    it('should assign height of the container', () => {
+        expect(component.ref.nativeElement.height).toBe('100px');
     });
 });

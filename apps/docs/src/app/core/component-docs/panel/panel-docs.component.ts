@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
-import * as panelEdgeBleedSrc from '!raw-loader!./examples/panel-edge-bleed-example.component.html';
-import * as panelEdgeBleedSrcTs from '!raw-loader!./examples/panel-edge-bleed-example.component.ts';
-import * as panelSrc from '!raw-loader!./examples/panel-example.component.html';
+
+import * as panelExpandableSrc from '!raw-loader!./examples/panel-expandable-example.component.html';
+import * as panelFixedSrc from '!raw-loader!./examples/panel-fixed-example.component.html';
+import * as panelCompactSrc from '!raw-loader!./examples/panel-compact-example.component.html';
+import * as panelFixedHeightSrc from '!raw-loader!./examples/panel-fixed-height-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -10,11 +12,35 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './panel-docs.component.html'
 })
 export class PanelDocsComponent {
-    panelBasic: ExampleFile[] = [
+    panelExpandable: ExampleFile[] = [
         {
             language: 'html',
-            fileName: 'panel-example',
-            code: panelSrc
+            fileName: 'panel-expandable-example',
+            code: panelExpandableSrc
+        }
+    ];
+
+    panelFixed: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'panel-fixed-example',
+            code: panelFixedSrc
+        }
+    ];
+
+    panelCompact: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'panel-compact-example',
+            code: panelCompactSrc
+        }
+    ];
+
+    panelFixedHeight: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'panel-fixed-height-example',
+            code: panelFixedHeightSrc
         }
     ];
 }

@@ -1,4 +1,5 @@
 export * from './panel.module';
-export * from './panel-header/panel-header.directive';
+export * from './panel-content/panel-content.directive';
+export * from './panel-header/panel-header.component';
 export * from './panel-title/panel-title.directive';
 export * from './panel.component';

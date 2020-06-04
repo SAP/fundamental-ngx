@@ -5,9 +5,11 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { API_FILES } from '../../api-files';
 import { PanelDocsHeaderComponent } from './panel-docs-header/panel-docs-header.component';
 import { PanelDocsComponent } from './panel-docs.component';
-import { PanelExampleComponent } from './examples/panel-examples.component';
-import { PanelEdgeBleedExampleComponent } from './examples/panel-edge-bleed-example.component';
-import { LayoutPanelModule, TableModule } from '@fundamental-ngx/core';
+import { PanelExpandableExampleComponent } from './examples/panel-expandable-examples.component';
+import { PanelFixedExampleComponent } from './examples/panel-fixed-example.component';
+import { PanelCompactExampleComponent } from './examples/panel-compact-example.component';
+import { PanelFixedHeightExampleComponent } from './examples/panel-fixed-height-example.component';
+import { PanelModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -21,8 +23,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, LayoutPanelModule, TableModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PanelModule],
     exports: [RouterModule],
-    declarations: [PanelDocsComponent, PanelExampleComponent, PanelDocsHeaderComponent, PanelEdgeBleedExampleComponent]
+    declarations: [
+        PanelDocsComponent, 
+        PanelExpandableExampleComponent, 
+        PanelDocsHeaderComponent, 
+        PanelFixedExampleComponent, 
+        PanelCompactExampleComponent, 
+        PanelFixedHeightExampleComponent
+    ]
 })
 export class PanelDocsModule { }

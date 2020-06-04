@@ -1,0 +1,6 @@
+<button 
+    class="fd-button fd-button--transparent fd-panel__button" 
+    [ngClass]="{ 'fd-button--compact': compact, 'is-expanded' : isExpanded }"
+    [attr.aria-expanded]="isExpanded"
+    (click)="toggleExpand()">
+</button>

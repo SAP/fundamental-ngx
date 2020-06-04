@@ -6,7 +6,7 @@ import * as panelSrc from '!raw-loader!./examples/layout-panel-example.component
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
-    selector: 'app-panel',
+    selector: 'app-layout-panel',
     templateUrl: './layout-panel-docs.component.html'
 })
 export class LayoutPanelDocsComponent {
