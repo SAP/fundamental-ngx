@@ -308,7 +308,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeyupHandler(event: KeyboardEvent): void {
-        if (this.openOnKeyboardEvent && this._inputKeyupTextChanged()) {
+        if (this.openOnKeyboardEvent && this._inputKeyupTextChanged() && !KeyUtil.isKey(event, 'Enter')) {
             if (!KeyUtil.isKey(event, 'ArrowUp') && !KeyUtil.isKey(event, 'ArrowDown')) {
                 this.isOpenChangeHandle(true);
             } else {
