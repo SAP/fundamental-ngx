@@ -37,6 +37,7 @@ describe('PanelContentDirective', () => {
     });
 
     it('should assign height of the container', () => {
-        expect(component.ref.nativeElement.height).toBe('100px');
+        const style = getComputedStyle(component.ref.nativeElement);
+        expect(style.height).toEqual('100px');
     });
 });

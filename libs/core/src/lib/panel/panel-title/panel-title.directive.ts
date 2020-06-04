@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core';
 
 /**
  * Applies the panel title style to a header element. It can be used with any header level.
@@ -9,9 +9,10 @@ import { Directive } from '@angular/core';
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-panel-title]',
-    host: {
-        class: 'fd-panel__title'
-    }
+    selector: '[fd-panel-title]'
 })
-export class PanelTitleDirective { }
+export class PanelTitleDirective {
+    /** @hidden */
+    @HostBinding('class.fd-panel__title')
+    readonly fdPanelTitleClass: boolean = true;
+}

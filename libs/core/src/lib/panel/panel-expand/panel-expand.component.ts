@@ -1,10 +1,11 @@
-import { 
+import {
     ChangeDetectionStrategy,
-    Component, 
-    EventEmitter, 
-    Input, 
+    Component,
+    EventEmitter,
+    HostBinding,
+    Input,
     Output,
-    ViewEncapsulation 
+    ViewEncapsulation
 } from '@angular/core';
 
 /**
@@ -15,14 +16,14 @@ import {
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-panel-expand]',
-    host: {
-        class: 'fd-panel__expand'
-    },
     templateUrl: './panel-expand.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelExpandComponent {
+    /** @hidden */
+    @HostBinding('class.fd-panel__expand')
+    readonly fdPanelExpandClass: boolean = true;
 
     /** Whether to apply compact mode to the button that shows/hides the Panel content. */
     @Input()
@@ -30,7 +31,7 @@ export class PanelExpandComponent {
 
     /** An event emitted when the button is clicked.  */
     @Output()
-    expandedValue = new EventEmitter<boolean>();
+    expandedValue: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden Whether the panel content is expanded. */
     isExpanded: boolean = false;
