@@ -12,6 +12,8 @@ import { TableWrapperComponent } from './table-wrapper.component';
 import { TableFooterDirective } from './directives/table-footer.directive';
 import { TableCellCheckboxDirective } from './directives/table-cell-checkbox.directive';
 import { TableStatusIndicatorDirective } from './directives/table-status-indicator.directive';
+import { TableTextDirective } from './directives/table-text.directive';
+import { TableIconDirective } from './directives/table-icon.directive';
 
 @NgModule({
     imports: [CommonModule],
@@ -26,7 +28,9 @@ import { TableStatusIndicatorDirective } from './directives/table-status-indicat
         TableRowDirective,
         TableCellDirective,
         TableCellCheckboxDirective,
-        TableStatusIndicatorDirective
+        TableStatusIndicatorDirective,
+        TableTextDirective,
+        TableIconDirective
     ],
     exports: [
         TableComponent,
@@ -39,7 +43,9 @@ import { TableStatusIndicatorDirective } from './directives/table-status-indicat
         TableRowDirective,
         TableCellDirective,
         TableCellCheckboxDirective,
-        TableStatusIndicatorDirective
+        TableStatusIndicatorDirective,
+        TableTextDirective,
+        TableIconDirective
     ]
 })
 export class TableModule {}
