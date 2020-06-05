@@ -7,9 +7,9 @@
                     <fd-bar-element *ngIf="isSubmenu">
                         <button fd-button
                                 fdType="transparent"
-                                glyph="nav-back"
                                 id="menu-mobile-navigate-back"
                                 [attr.aria-label]="'Go to previous menu level: ' + title"
+                                [glyph]="navigationIcon$ | async"
                                 (click)="backToParentLevel()">
                         </button>
                     </fd-bar-element>

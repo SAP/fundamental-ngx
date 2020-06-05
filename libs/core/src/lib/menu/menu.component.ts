@@ -24,7 +24,7 @@ import {
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { MenuMobileComponent } from './menu-mobile/menu-mobile/menu-mobile.component';
+import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { Subscription } from 'rxjs';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
@@ -39,8 +39,8 @@ let menuUniqueId: number = 0;
 @Component({
     selector: 'fd-menu',
     templateUrl: './menu.component.html',
-    encapsulation: ViewEncapsulation.None,
     styleUrls: ['menu.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [MenuService],
     exportAs: 'fdMenu'
@@ -175,19 +175,19 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
     }
 
     /** @hidden */
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this._menuService.setMenuRoot(this);
         this._listenOnMenuItemsChange();
     }
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this._listenOnMenuMode();
         this._menuService.setMenuMode(this.mobile);
     }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._destroyMobileComponent();
         this._destroyEventListeners();
         this._menuService.onDestroy();

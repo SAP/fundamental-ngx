@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItemComponent, MobileModeConfig } from '@fundamental-ngx/core';
+import { MenuItemComponent, RtlService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-menu-example',
@@ -24,7 +24,8 @@ export class MenuSeparatorExampleComponent {
 
 @Component({
     selector: 'fd-menu-mobile-example',
-    templateUrl: './menu-mobile-example.component.html'
+    templateUrl: './menu-mobile-example.component.html',
+    providers: [RtlService]
 })
 export class MenuMobileExampleComponent {
 }
@@ -35,4 +36,7 @@ export class MenuMobileExampleComponent {
 })
 export class MenuWithSubmenuExampleComponent {
     activePath: MenuItemComponent[] = [];
+    visible = true;
+
+    constructor() { }
 }

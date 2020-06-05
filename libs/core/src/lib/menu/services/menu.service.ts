@@ -47,7 +47,7 @@ export class MenuService {
     }
 
     /** Sets menu mode */
-    setMenuMode(value: boolean) {
+    setMenuMode(value: boolean): void {
         this._isMobileMode.next(value);
     }
 

@@ -1,8 +1,10 @@
-import { Component, HostBinding} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'fd-menu-separator',
-  template: ''
+    selector: 'fd-menu-separator',
+    template: '',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuSeparatorComponent {
 

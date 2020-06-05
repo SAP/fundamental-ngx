@@ -34,7 +34,7 @@ export class MenuTriggerDirective implements OnDestroy {
     constructor(private _elementRef: ElementRef) { }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._unsubscribeExpandedListener();
     }
 

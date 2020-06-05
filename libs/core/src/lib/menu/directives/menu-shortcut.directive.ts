@@ -15,7 +15,7 @@ export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     @HostBinding('class.fd-menu__shortcut')
-    fdMenuShortcutClass: boolean = true;
+    readonly fdMenuShortcutClass: boolean = true;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
@@ -26,12 +26,12 @@ export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this._hideOnMobile();
     }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 

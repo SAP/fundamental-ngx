@@ -16,7 +16,7 @@ import { PopoverModule } from '@fundamental-ngx/core';
         </fd-menu>
     `
 })
-class TesMenuItemComponent {
+class TestMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
     @ViewChild(MenuItemComponent) menuItem: MenuItemComponent;
     @ViewChild(MenuInteractiveDirective) menuInteractive: MenuInteractiveDirective;
@@ -25,21 +25,21 @@ class TesMenuItemComponent {
 }
 
 describe('MenuItemComponent', () => {
-    let fixture: ComponentFixture<TesMenuItemComponent>;
+    let fixture: ComponentFixture<TestMenuItemComponent>;
     let menu: MenuComponent;
     let menuItem: MenuItemComponent;
     let menuInteractive: MenuInteractiveDirective;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TesMenuItemComponent, MenuComponent, MenuItemComponent, MenuInteractiveDirective],
+            declarations: [TestMenuItemComponent, MenuComponent, MenuItemComponent, MenuInteractiveDirective],
             imports: [CommonModule, PopoverModule]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TesMenuItemComponent);
+        fixture = TestBed.createComponent(TestMenuItemComponent);
         fixture.detectChanges();
         menu = fixture.componentInstance.menu;
         menuItem = fixture.componentInstance.menuItem;
@@ -107,14 +107,14 @@ describe('MenuItemComponent', () => {
     }));
 
     it('should set disabled state', fakeAsync(() => {
-        const setActiveSpy = spyOn(menuInteractive, 'setDisabled').and.callThrough();
+        const setDisabledSpy = spyOn(menuInteractive, 'setDisabled').and.callThrough();
 
         fixture.componentInstance.disabled = true;
         fixture.detectChanges();
 
         tick();
 
-        expect(setActiveSpy).toHaveBeenCalledWith(true);
+        expect(setDisabledSpy).toHaveBeenCalledWith(true);
         expect(menuInteractive.disabled).toBeTrue();
     }));
 

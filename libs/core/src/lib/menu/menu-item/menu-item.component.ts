@@ -15,13 +15,14 @@ import {
     QueryList,
     SimpleChanges,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuService } from '../services/menu.service';
-import { defer, fromEvent, Subscription, timer } from 'rxjs';
+import { defer, fromEvent, Observable, Subscription, timer } from 'rxjs';
 import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
 
 let menuUniqueId: number = 0;
@@ -32,6 +33,7 @@ let menuUniqueId: number = 0;
     exportAs: 'fd-menu-item',
     templateUrl: './menu-item.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     host: {
         '[class.fd-menu__item]': 'true'
     }
@@ -141,8 +143,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     private _listenOnMenuLinkHover(): Subscription {
         const hoverSubscriptions: Subscription = new Subscription();
 
-        const mouseEnter$ = fromEvent(this.menuInteractive.elementRef.nativeElement, 'mouseenter');
-        const mouseLeave$ = fromEvent(this.menuInteractive.elementRef.nativeElement, 'mouseleave');
+        const mouseEnter$: Observable<MouseEvent> = fromEvent(this.menuInteractive.elementRef.nativeElement, 'mouseenter');
+        const mouseLeave$: Observable<MouseEvent> = fromEvent(this.menuInteractive.elementRef.nativeElement, 'mouseleave');
 
         // Set focus on hover
         hoverSubscriptions.add(
@@ -208,6 +210,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
             <ng-content></ng-content>
         </ng-template>
     `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     exportAs: 'fdSubmenu'
 })
 export class SubmenuComponent {

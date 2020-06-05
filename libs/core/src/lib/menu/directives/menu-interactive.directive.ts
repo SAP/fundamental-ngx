@@ -9,26 +9,26 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
 })
 export class MenuInteractiveDirective {
 
-    /** Mark as disabled */
+    /** @hidden */
     @HostBinding('attr.tabindex')
-    focusable: number = 0;
+    tabindex: number = 0;
 
-    /** Mark as disabled */
+    /** @hidden */
     @HostBinding('class.is-disabled')
     disabled: boolean = false;
 
-    /** Mark as disabled */
+    /** @hidden */
     @HostBinding('attr.aria-controls')
-    itemId: string = null;
+    ariaControls: string = null;
 
-    /** Mark as disabled */
+    /** @hidden */
     @HostBinding('class.is-selected')
     @HostBinding('attr.aria-expanded')
     selected: boolean = false;
 
-    /** Mark as disabled */
+    /** @hidden */
     @HostBinding('attr.aria-haspopup')
-    hasSubmenu: boolean = false;
+    ariaHaspopup: boolean = false;
 
     /** @hidden */
     @HostBinding('class.fd-menu__link')
@@ -39,20 +39,20 @@ export class MenuInteractiveDirective {
 
     /** @hidden */
     setSelected(isSelected: boolean): void {
-        this.selected = isSelected && this.hasSubmenu;
+        this.selected = isSelected && this.ariaHaspopup;
     }
 
     /** @hidden */
     setDisabled(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.focusable = isDisabled ? -1 : 0;
+        this.tabindex = isDisabled ? -1 : 0;
     }
 
     /** @hidden */
     setSubmenu(hasSubmenu: boolean, itemId?: string): void {
-        this.hasSubmenu = hasSubmenu;
-        this.itemId = hasSubmenu
-            ? itemId || this.itemId
+        this.ariaHaspopup = hasSubmenu;
+        this.ariaControls = hasSubmenu
+            ? itemId || this.ariaControls
             : null;
     }
 }
