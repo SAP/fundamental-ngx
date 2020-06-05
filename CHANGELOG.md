@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.4"></a>
+# [0.19.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.3...v0.19.0-rc.4) (2020-06-05)
+
+
+### Bug Fixes
+
+* Add 0.8.1 Css to time component ([#2605](https://github.com/SAP/fundamental-ngx/issues/2605)) ([b8ed06a](https://github.com/SAP/fundamental-ngx/commit/b8ed06a))
+
+
+
 <a name="0.19.0-rc.3"></a>
 # [0.19.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.2...v0.19.0-rc.3) (2020-06-03)
 
