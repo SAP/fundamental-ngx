@@ -30,6 +30,7 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-confi
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { Placement, PopperOptions } from 'popper.js';
+import { RtlService } from '../utils/services/rtl.service';
 
 let menuUniqueId: number = 0;
 
@@ -171,6 +172,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
                 private _menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
                 private _componentFactoryResolver: ComponentFactoryResolver,
+                @Optional() private _rtlService: RtlService,
                 @Optional() private _dynamicComponentService: DynamicComponentService) {
     }
 
@@ -279,7 +281,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
                 this.menuRootTemplate,
                 MenuMobileComponent,
                 { container: this.elementRef.nativeElement },
-                { services: [this, this._menuService] }
+                { services: [this, this._menuService, this._rtlService] }
             )
     }
 

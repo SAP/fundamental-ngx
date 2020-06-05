@@ -11,7 +11,7 @@ import { DIALOG_CONFIG } from '../../dialog/dialog-utils/dialog-config.class';
 import { MenuMobileModule } from './menu-mobile.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
-import { MobileModeConfig } from '@fundamental-ngx/core';
+import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 
 @Component({
     template: `

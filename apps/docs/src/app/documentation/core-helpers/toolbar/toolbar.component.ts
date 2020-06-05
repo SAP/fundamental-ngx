@@ -1,11 +1,10 @@
 import {
-    AfterViewInit,
-    ChangeDetectorRef,
     Component,
     EventEmitter,
     Inject,
     Output,
-    OnInit, ViewChild
+    OnInit,
+    ViewChild
 } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';

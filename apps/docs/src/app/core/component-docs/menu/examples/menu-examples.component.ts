@@ -24,8 +24,7 @@ export class MenuSeparatorExampleComponent {
 
 @Component({
     selector: 'fd-menu-mobile-example',
-    templateUrl: './menu-mobile-example.component.html',
-    providers: [RtlService]
+    templateUrl: './menu-mobile-example.component.html'
 })
 export class MenuMobileExampleComponent {
 }
@@ -36,7 +35,4 @@ export class MenuMobileExampleComponent {
 })
 export class MenuWithSubmenuExampleComponent {
     activePath: MenuItemComponent[] = [];
-    visible = true;
-
-    constructor() { }
 }

@@ -3,9 +3,9 @@
     <span style="display: flex; flex-grow: 1;"></span>
 
     <button *ngIf="files.length > 1"
-            [fdMenuTrigger]="menu"
             fd-button
-            [fdMenu]="true">
+            [fdMenu]="true"
+            [fdMenuTrigger]="menu">
         Select a file ({{ files.length }})
     </button>
 
