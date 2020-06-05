@@ -353,7 +353,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         const selectedItem = this.displayedValues[index];
         if (selectedItem) {
             this._handleClickActions(selectedItem);
-            this.itemClicked.emit({ item: selectedItem, index: index });
+            this.dropdownValues.forEach((value, i) => {
+                if (selectedItem === value) {
+                    this.itemClicked.emit({ item: selectedItem, index: i });
+                }
+            });
         }
     }
 
