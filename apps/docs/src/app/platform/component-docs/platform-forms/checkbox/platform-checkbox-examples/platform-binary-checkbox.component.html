@@ -6,6 +6,9 @@
             [name]="'yellow'"
             [label]="'Yellow'"
             [isBinary]="true"
+            (checkedChange)="checkedChangeFunction($event)"
+            (indeterminateChange)="indeterminateChangeFunction($event)"
+            (change)="changeFunction($event)"
             [(ngModel)]="yellow"
         ></fdp-checkbox>
     </fdp-form-field>
@@ -34,6 +37,9 @@
             [name]="'red'"
             [label]="'Red'"
             [isBinary]="true"
+            (checkedChange)="checkedChangeFunction($event)"
+            (indeterminateChange)="indeterminateChangeFunction($event)"
+            (change)="changeFunction($event)"
             [contentDensity]="'compact'"
             [formControl]="red.formControl"
         ></fdp-checkbox>

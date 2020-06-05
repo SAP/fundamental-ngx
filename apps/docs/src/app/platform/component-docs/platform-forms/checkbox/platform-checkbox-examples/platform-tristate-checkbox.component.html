@@ -6,6 +6,9 @@
             [label]="'Paris'"
             [value]="'Yes'"
             [tristate]="true"
+            (checkedChange)="checkedChangeFunction($event)"
+            (indeterminateChange)="indeterminateChangeFunction($event)"
+            (change)="changeFunction($event)"
             [formControl]="paris.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
@@ -34,6 +37,9 @@
         <fdp-checkbox
             [name]="'venice'"
             [label]="'Venice'"
+            (checkedChange)="checkedChangeFunction($event)"
+            (indeterminateChange)="indeterminateChangeFunction($event)"
+            (change)="changeFunction($event)"
             [tristate]="true"
             [formControl]="venice.formControl"
         ></fdp-checkbox>
@@ -89,6 +95,9 @@
             [label]="'Havana'"
             [value]="'Yes'"
             [tristate]="true"
+            (checkedChange)="checkedChangeFunction($event)"
+            (indeterminateChange)="indeterminateChangeFunction($event)"
+            (change)="changeFunction($event)"
             [(ngModel)]="havana"
         ></fdp-checkbox>
     </fdp-form-field>
@@ -114,7 +123,15 @@
     </fdp-form-field>
 
     <fdp-form-field [id]="'lisbon'" zone="zRight" rank="2">
-        <fdp-checkbox [name]="'lisbon'" [label]="'Lisbon'" [tristate]="true" [(ngModel)]="lisbon"></fdp-checkbox>
+        <fdp-checkbox
+            [name]="'lisbon'"
+            [label]="'Lisbon'"
+            [tristate]="true"
+            [(ngModel)]="lisbon"
+            (checkedChange)="checkedChangeFunction($event)"
+            (indeterminateChange)="indeterminateChangeFunction($event)"
+            (change)="changeFunction($event)"
+        ></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field [id]="'istanbul'" zone="zRight" rank="4">
@@ -162,62 +179,58 @@
 </fdp-form-group>
 
 <h3>TriState Checkbox Used with Multiple checkboxes</h3>
-<form>
-    <fdp-form-group #fgtristate [multiLayout]="true" [formGroup]="registrationForm" (onSubmit)="save($event)">
+<form #form="ngForm" [formGroup]="registrationForm">
+    <fdp-form-group #fgtristate [multiLayout]="true" [formGroup]="registrationForm">
         <fdp-form-field #ffr1 [id]="'acceptAll'" zone="zLeft" rank="1">
             <fdp-checkbox
                 [name]="'all'"
                 [label]="'Accept All'"
                 [tristate]="true"
                 [tristateSelectable]="false"
+                [value]="false"
                 [formControl]="ffr1.formControl"
             ></fdp-checkbox>
         </fdp-form-field>
-
-        <fdp-form-field #ffr2 [id]="'agreements'" zone="zLeft" rank="2">
-            <fdp-form-group
-                #ffg1
-                [id]="'agreementGroup'"
-                [formGroup]="registrationForm.get('agreements')"
-                [object]="choices"
-            >
-                <fdp-form-field #ffr3 [id]="'termsAndConditions'" zone="zLeft" rank="3">
-                    <fdp-checkbox
-                        [name]="'termsAndConditions'"
-                        [isBinary]="true"
-                        [label]="'I accept Terms and Conditions'"
-                        [formControl]="ffr3.formControl"
-                    ></fdp-checkbox>
-                </fdp-form-field>
-
-                <fdp-form-field #ffr2 [id]="'marketing'" zone="zLeft" rank="3">
-                    <fdp-checkbox
-                        [name]="'marketing'"
-                        [isBinary]="true"
-                        [label]="'I want to receive Marketing Materials'"
-                        [formControl]="ffr2.formControl"
-                    ></fdp-checkbox>
-                </fdp-form-field>
-
-                <fdp-form-field #ffr3 [id]="'newsletter'" zone="zLeft" rank="4">
-                    <fdp-checkbox
-                        [name]="'newsletter'"
-                        [isBinary]="true"
-                        [label]="'I want want to sign for a Newsletter'"
-                        [formControl]="ffr3.formControl"
-                    ></fdp-checkbox>
-                </fdp-form-field>
-            </fdp-form-group>
-        </fdp-form-field>
-
-        <fdp-form-field>
-            <button class="button" type="submit">Submit</button>
-        </fdp-form-field>
-
-        <ng-template #i18n let-errors>
-            <ng-container *ngIf="errors.required">
-                value is required
-            </ng-container>
-        </ng-template>
     </fdp-form-group>
+    <div style="padding-left: 2rem; border: black solid;">
+        <fdp-form-group
+            class="padding-top:0%;"
+            #checkboxes
+            [formGroup]="registrationForm.get('agreements')"
+            [object]="choices"
+        >
+            <fdp-form-field #ffr2 [id]="'termsAndConditions'" zone="zLeft" rank="3">
+                <fdp-checkbox
+                    [name]="'termsAndConditions'"
+                    [isBinary]="true"
+                    [label]="'I accept Terms and Conditions'"
+                    [formControl]="ffr2.formControl"
+                ></fdp-checkbox>
+            </fdp-form-field>
+
+            <fdp-form-field #ffr3 [id]="'marketing'" zone="zLeft" rank="3">
+                <fdp-checkbox
+                    [name]="'marketing'"
+                    [isBinary]="true"
+                    [label]="'I want to receive Marketing Materials'"
+                    [formControl]="ffr3.formControl"
+                ></fdp-checkbox>
+            </fdp-form-field>
+
+            <fdp-form-field #ffr4 [id]="'newsletter'" zone="zLeft" rank="4">
+                <fdp-checkbox
+                    [name]="'newsletter'"
+                    [isBinary]="true"
+                    [label]="'I want want to sign for a Newsletter'"
+                    [formControl]="ffr4.formControl"
+                ></fdp-checkbox>
+            </fdp-form-field>
+
+            <ng-template #i18n let-errors>
+                <ng-container *ngIf="errors.required">
+                    value is required
+                </ng-container>
+            </ng-template>
+        </fdp-form-group>
+    </div>
 </form>

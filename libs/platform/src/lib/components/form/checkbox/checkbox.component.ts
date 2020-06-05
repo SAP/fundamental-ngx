@@ -1,21 +1,17 @@
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    Input,
-    NgZone,
-    Optional,
-    Output,
-    Self,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy, Component, EventEmitter } from '@angular/core';
+import { Input, NgZone, Optional, Output, Self, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { CheckboxComponent as CoreCheckboxComponent } from '@fundamental-ngx/core';
 import { BaseInput } from '../base.input';
 import { FormFieldControl } from '../form-control';
+
+/** Change event object emitted by Platform Checkbox. */
+export class PlatformCheckboxChange {
+    /** The source Checkbox of the event. */
+    source: CheckboxComponent;
+    /** The new `checked` value of the checkbox. */
+    checked: boolean;
+}
 
 /**
  * Checkbox implementation based on the
@@ -40,11 +36,11 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @Input()
     label: string;
 
-    /** indeterminate state */
+    /** true when checkbox has indeterminate state */
     @Input()
     tristate: boolean = false;
 
-    /** indeterminate state can be selected  */
+    /** when true indeterminate state can be selected */
     @Input()
     tristateSelectable: boolean = true;
 
@@ -60,7 +56,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     }
 
     /**
-     * Whether the checkbox is checked.
+     * true when checkbox is checked. used when checkbox created outside form
      */
     @Input()
     get checked(): boolean {
@@ -72,16 +68,17 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         }
     }
 
+    /** Emitting checked event for non-form checkbox  */
     @Output()
-    readonly checkedChange = new EventEmitter();
+    readonly checkedChange: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
 
     /** Emitting checkbox change event */
     @Output()
-    readonly change = new EventEmitter();
+    readonly change: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
 
     /** Event emitted when the checkbox's `indeterminate` value changes. */
     @Output()
-    readonly indeterminateChange = new EventEmitter();
+    readonly indeterminateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden
      * tracking checkbox current value
@@ -138,8 +135,9 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
                     this.checkboxCurrentValue = this.value;
                     this.corecheckbox.values.trueValue = this.value;
 
-                    // emit for change inside AfterViewInit causing Expression changed error
-                    // suppressing Expression changed error by running outside angular
+                    // in case of checkbox outside form.
+                    // have to update checked value, as checkbox is checked.
+                    // Doing inside ngAfterViewInit, so have to run outside angular
                     this._emitvalueInViewInit();
                 }
             }
@@ -164,13 +162,13 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         this._updateModel();
         this.onTouched();
         this.stateChanges.next('checkbox: onModelChange');
-        this._changeDetector.markForCheck();
     }
 
     /** @hidden running outside angular zone */
     private _emitvalueInViewInit(): void {
         this._ngZone.runOutsideAngular(() => {
             setTimeout(() => {
+                // handles value of binary checkbox with value, outside form
                 this.checkedChange.emit(this.value);
             });
         });
@@ -190,18 +188,16 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
                     this.checkboxCurrentValue = this.corecheckbox.values.trueValue;
                 }
             }
-            this.onChange(this.checkboxCurrentValue);
             this.indeterminateChange.emit(this.checkboxCurrentValue);
-            this.change.emit(this.checkboxCurrentValue);
+            this._emitChangeEvent(this.checkboxCurrentValue);
         } else if (this.isBinary) {
             if (this.checkboxCurrentValue && this.value) {
-                // handles binary checkbox with value
+                // handles value of binary checkbox with value, outside form
                 this.checkedChange.emit(this.value);
             } else {
                 this.checkedChange.emit(this.checkboxCurrentValue);
             }
-            this.onChange(this.checkboxCurrentValue);
-            this.change.emit(this.checkboxCurrentValue);
+            this._emitChangeEvent(this.checkboxCurrentValue);
         } else {
             // checkbox has been selected
             if (this.corecheckbox.inputLabel.nativeElement.checked) {
@@ -209,14 +205,26 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
             } else {
                 this._removeValue();
             }
-            this.onChange(this.model);
 
             // for multiSelect checkbox, all checkbox should have same copy of model.
             if (this.ngControl) {
                 this.ngControl.control.setValue(this.model);
             }
-            this.change.emit(this.model);
+            this._emitChangeEvent(this.model);
         }
+    }
+
+    /**
+     * Method to emit change event
+     */
+    private _emitChangeEvent(modelValue: any): void {
+        const event = new PlatformCheckboxChange();
+        event.source = this;
+        event.checked = modelValue;
+
+        // setting baseInput value and control
+        this.setValue(modelValue);
+        this.change.emit(event);
     }
 
     /** @hidden

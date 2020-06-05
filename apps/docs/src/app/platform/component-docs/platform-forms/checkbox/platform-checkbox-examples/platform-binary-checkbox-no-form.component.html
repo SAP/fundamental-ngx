@@ -1,5 +1,14 @@
 <h3>Binary Checkbox With Value</h3>
-<fdp-checkbox [name]="'orion'" [isBinary]="true" [label]="'Orion'" [value]="'orion'" [(checked)]="orion">
+<fdp-checkbox
+    [name]="'orion'"
+    [isBinary]="true"
+    [label]="'Orion'"
+    [value]="'orion'"
+    [(checked)]="orion"
+    (checkedChange)="checkedChangeFunction($event)"
+    (indeterminateChange)="indeterminateChangeFunction($event)"
+    (change)="changeFunction($event)"
+>
 </fdp-checkbox>
 <div>value: {{ orion }}</div>
 
