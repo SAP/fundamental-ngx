@@ -12,9 +12,13 @@ export class ComboboxDynamicExampleComponent {
 
     dropdownValues = ['Apple', 'Banana', 'Kiwi', 'Strawberry', 'Tomato', 'Pineapple'];
 
-    selectItem(event: { item: any; index: number }) {
-        this.selected = event.item;
-        this.selectedIndex = event.index;
+    selectItem(event: string) {
+        this.dropdownValues.forEach((value, i) => {
+            if (value === event) {
+                this.selected = value;
+                this.selectedIndex = i;
+            }
+        });
     }
 
     customFilter(content: any[], searchTerm: string): any[] {
