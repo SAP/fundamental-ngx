@@ -4,6 +4,6 @@ export * from './directives/table-body.directive';
 export * from './directives/table-cell.directive';
 export * from './directives/table-header.directive';
 export * from './directives/table-row.directive';
-export * from './table-responsive-wrapper.directive';
+export * from './directives/table-responsive-wrapper.directive';
 export * from './table-wrapper.component';
-export * from './column-sortable.directive';
+export * from './directives/column-sortable.directive';

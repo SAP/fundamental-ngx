@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PopoverComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-table-column-sorting-example',
@@ -9,10 +10,13 @@ export class TableColumnSortingExampleComponent implements OnInit {
     column1SortDir: string = 'none';
     dateSortDir: string = 'none';
 
-    sortColumn1() {
+    @ViewChild('column1SortPopover')
+    column1SortPopover: PopoverComponent;
+
+    sortColumn1(dir: string) {
         this.dateSortDir = 'none';
-        if (this.column1SortDir === 'asc') {
-            this.column1SortDir = 'dsc';
+        this.column1SortPopover.close();
+        if (dir === 'asc') {
             this.tableRows.sort((val1, val2) => {
                 if (val1.column1 < val2.column1) {
                     return -1;
@@ -22,8 +26,7 @@ export class TableColumnSortingExampleComponent implements OnInit {
                     return 0;
                 }
             });
-        } else if (this.column1SortDir === 'none' || this.column1SortDir === 'dsc') {
-            this.column1SortDir = 'asc';
+        } else if (dir === 'desc') {
             this.tableRows.sort((val1, val2) => {
                 if (val1.column1 > val2.column1) {
                     return -1;

@@ -5,12 +5,7 @@ import { Directive, Input } from '@angular/core';
  * The directive is placed on the the desired column(s) to sort,
  */
 @Directive({
-    selector: '[fdColumnSortable]',
-    host: {
-        class: 'fd-table__sort-column',
-        '[class.fd-table__sort-column--dsc]': 'sortDir === "desc" || sortDir === "dsc"',
-        '[class.fd-table__sort-column--asc]': 'sortDir === "asc"'
-    }
+    selector: '[fdColumnSortable]'
 })
 export class ColumnSortableDirective {
     /**

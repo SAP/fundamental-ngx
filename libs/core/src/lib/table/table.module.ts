@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TableComponent } from './table.component';
-import { ColumnSortableDirective } from './column-sortable.directive';
-import { TableResponsiveWrapperDirective } from './table-responsive-wrapper.directive';
+import { ColumnSortableDirective } from './directives/column-sortable.directive';
+import { TableResponsiveWrapperDirective } from './directives/table-responsive-wrapper.directive';
 import { TableHeaderDirective } from './directives/table-header.directive';
 import { TableBodyDirective } from './directives/table-body.directive';
 import { TableRowDirective } from './directives/table-row.directive';
@@ -12,6 +12,9 @@ import { TableWrapperComponent } from './table-wrapper.component';
 import { TableFooterDirective } from './directives/table-footer.directive';
 import { TableCellCheckboxDirective } from './directives/table-cell-checkbox.directive';
 import { TableStatusIndicatorDirective } from './directives/table-status-indicator.directive';
+import { TablePopoverDirective } from './directives/table-popover.directive';
+import { TableInnerDirective } from './directives/table-inner.directive';
+import { TableIconDirective } from './directives/table-icon.directive';
 
 @NgModule({
     imports: [CommonModule],
@@ -26,7 +29,10 @@ import { TableStatusIndicatorDirective } from './directives/table-status-indicat
         TableRowDirective,
         TableCellDirective,
         TableCellCheckboxDirective,
-        TableStatusIndicatorDirective
+        TableStatusIndicatorDirective,
+        TablePopoverDirective,
+        TableInnerDirective,
+        TableIconDirective
     ],
     exports: [
         TableComponent,
@@ -39,7 +45,10 @@ import { TableStatusIndicatorDirective } from './directives/table-status-indicat
         TableRowDirective,
         TableCellDirective,
         TableCellCheckboxDirective,
-        TableStatusIndicatorDirective
+        TableStatusIndicatorDirective,
+        TablePopoverDirective,
+        TableInnerDirective,
+        TableIconDirective
     ]
 })
 export class TableModule {}
