@@ -6,8 +6,8 @@ import { MenuComponent } from './../menu/menu.component';
 import { BaseComponent } from '../base';
 
 /**
- * Checkbox implementation based on the
- * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Checkbox-Component-Technical-Design
+ * Split Menu Button implementation based on the
+ * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Split-Menu-Button-Component-V1.0-Technical-Design
  * documents.
  *
  *
