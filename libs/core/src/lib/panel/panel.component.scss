@@ -1,1 +1,5 @@
 @import '~fundamental-styles/dist/panel';
+
+.fd-panel__content:focus {
+    outline: none;
+}

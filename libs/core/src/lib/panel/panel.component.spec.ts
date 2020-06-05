@@ -62,7 +62,7 @@ describe('PanelComponent', () => {
 
     it('should not display the panel content', () => {
         panelContent = fixture.debugElement.query(By.css('.fd-panel__content'));
-        expect(panelContent).toBeNull;
+        expect(panelContent).toBeNull();
     });
 
     it('should display the panel content when the Panel is fixed', () => {
