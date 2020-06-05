@@ -1,19 +1,17 @@
-import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    ChangeDetectorRef,
-    OnInit,
-    OnDestroy,
-    Optional,
-    ChangeDetectionStrategy
-} from '@angular/core';
+import { ChangeDetectorRef, Component, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
+import { Input, Output, OnInit, OnDestroy, Optional } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ButtonType, RtlService } from '@fundamental-ngx/core';
 import { MenuComponent } from './../menu/menu.component';
 import { BaseComponent } from '../base';
 
+/**
+ * Checkbox implementation based on the
+ * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Checkbox-Component-Technical-Design
+ * documents.
+ *
+ *
+ */
 @Component({
     selector: 'fdp-split-menu-button',
     templateUrl: './split-menu-button.component.html',
