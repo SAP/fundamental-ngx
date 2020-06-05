@@ -41,4 +41,8 @@ export class TableComponent {
     @Input()
     condensed: boolean = false;
 
+    /** Whether or not to display the table in pop in mode, it also require change of markup */
+    @HostBinding('class.fd-table--pop-in')
+    @Input()
+    popIn: boolean = false;
 }

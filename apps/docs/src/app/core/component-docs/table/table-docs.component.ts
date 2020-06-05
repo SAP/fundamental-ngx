@@ -22,6 +22,8 @@ import * as tableCdkScss from '!raw-loader!./examples/table-cdk-example.componen
 import * as tableResponsiveHtml from '!raw-loader!./examples/table-responsive-example.component.html';
 import * as tableResponsiveTs from '!raw-loader!./examples/table-responsive-example.component.ts';
 import * as tableResponsiveScss from '!raw-loader!./examples/table-responsive-example.component.scss';
+import * as tablePopInHTs from '!raw-loader!./examples/table-popin-example/table-popin-example.component.ts';
+import * as tablePopInHtml from '!raw-loader!./examples/table-popin-example/table-popin-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -90,6 +92,20 @@ export class TableDocsComponent {
             component: 'TableFooterExampleComponent',
             code: tableFooterTs,
             fileName: 'table-footer-example'
+        }
+    ];
+
+    tablePopInExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tablePopInHtml,
+            fileName: 'table-popin-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TablePopinExampleComponent',
+            code: tablePopInHTs,
+            fileName: 'table-popin-example'
         }
     ];
 
