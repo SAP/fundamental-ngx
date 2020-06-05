@@ -2,7 +2,7 @@
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell fdColumnSortable [sortDir]="column1SortDir">
-                <fd-popover fd-table-popover #column1SortPopover>
+                <fd-popover fd-table-popover #column1SortPopover [(isOpen)]="open">
                     <fd-popover-control>
                         <div fd-table-inner>
                             Column 1
@@ -23,7 +23,7 @@
                                 <fd-icon fd-list-icon [glyph]="'filter'"></fd-icon>
                                 <div fd-form-item [horizontal]="true">
                                     <label fd-form-label for="input-1">Filter</label>
-                                    <input fd-form-control [compact]="true" id="input-1"
+                                    <input fd-form-control [compact]="true" id="input-1" (keyup)="inputKeyup($event)"
                                            [(ngModel)]="filterVal" (ngModelChange)="filterChange($event)">
                                 </div>
                             </li>

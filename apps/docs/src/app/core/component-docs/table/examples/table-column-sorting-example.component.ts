@@ -11,13 +11,10 @@ export class TableColumnSortingExampleComponent implements OnInit {
     column1SortDir: string = 'none';
     dateSortDir: string = 'none';
     filterVal: string = '';
-
-    @ViewChild('column1SortPopover')
-    column1SortPopover: PopoverComponent;
+    open: boolean = false;
 
     sortColumn1(dir: string) {
         this.dateSortDir = 'none';
-        this.column1SortPopover.close();
         if (dir === 'asc') {
             this.tableRows.sort((val1, val2) => {
                 if (val1.column1 < val2.column1) {
@@ -39,6 +36,7 @@ export class TableColumnSortingExampleComponent implements OnInit {
                 }
             });
         }
+        this.open = false;
     }
 
     filterChange(searchTerm: string) {
@@ -48,6 +46,12 @@ export class TableColumnSortingExampleComponent implements OnInit {
                 return item.column1.toLocaleLowerCase().includes(searchLower);
             }
         });
+    }
+
+    inputKeyup(event: KeyboardEvent) {
+        if (event.key === 'Enter' || event.key === 'Esc') {
+            this.open = false;
+        }
     }
 
     ngOnInit() {
