@@ -8,6 +8,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+let expandButtonUniqueId: number = 0;
+
 /**
  * ```html
  * <div fd-panel-expand></div>
@@ -29,16 +31,29 @@ export class PanelExpandComponent {
     @Input()
     compact: boolean = false;
 
+    /** Whether the panel content is expanded. */
+    @Input()
+    expanded: boolean = false;
+
+    /** aria-label attribute of the expand button. */
+    @Input()
+    ariaLabel: string = null;
+
+    /** aria-labelledby attribute of the expand button. */
+    @Input()
+    ariaLabelledBy: string = null;
+
+    /** Id for the expand button. If omitted, a unique one is generated. */
+    @Input()
+    id: string = 'fd-panel-expand-' + expandButtonUniqueId++;
+
     /** An event emitted when the button is clicked.  */
     @Output()
-    expandedValue: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-    /** @hidden Whether the panel content is expanded. */
-    isExpanded: boolean = false;
+    expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Methods that toggles the content of the Panel and emits the value to the parent. */
     toggleExpand(): void {
-        this.isExpanded = !this.isExpanded;
-        this.expandedValue.emit(this.isExpanded);
+        this.expanded = !this.expanded;
+        this.expandedChange.emit(this.expanded);
     }
 }

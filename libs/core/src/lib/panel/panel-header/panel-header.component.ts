@@ -5,10 +5,14 @@ import {
     ContentChild,
     EventEmitter,
     HostBinding,
+    Input,
     Output,
     ViewEncapsulation
 } from '@angular/core';
 import { PanelExpandComponent } from '../panel-expand/panel-expand.component';
+
+
+let panelHeaderUniqueId: number = 0;
 
 /**
  * Applies the panel header style to a div element
@@ -35,13 +39,18 @@ export class PanelHeaderComponent implements AfterViewInit {
     @HostBinding('class.fd-panel__header')
     readonly fdPanelHeaderClass: boolean = true;
 
+    /** Id of the host element. */
+    @Input()
+    @HostBinding('attr.id')
+    id: string = 'fd-panel-header-' + panelHeaderUniqueId++;
+
     /** 
      * An event emitted to the parent PaneComponent 
      * with a boolean value captured from the child PanelExpandComponent 
      * that controls the expanded state of the Panel Content.
      */
     @Output()
-    expandedValue: EventEmitter<boolean> = new EventEmitter<boolean>();
+    expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
     @ContentChild(PanelExpandComponent) panelExpand: PanelExpandComponent;
@@ -49,8 +58,8 @@ export class PanelHeaderComponent implements AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.panelExpand) {
-            this.panelExpand.expandedValue.subscribe(
-                (value: boolean) => this.expandedValue.emit(value)
+            this.panelExpand.expandedChange.subscribe(
+                (value: boolean) => this.expandedChange.emit(value)
             );
         }
     }

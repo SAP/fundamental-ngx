@@ -41,10 +41,10 @@ describe('PanelExpandComponent', () => {
     });
 
     it('should emit event when the button is clicked', () => {
-        component.isExpanded = false;
-        spyOn(component.expandedValue, 'emit');
+        component.expanded = false;
+        spyOn(component.expandedChange, 'emit');
         button.nativeElement.click();
-        expect(component.expandedValue.emit).toHaveBeenCalledWith(true);
+        expect(component.expandedChange.emit).toHaveBeenCalledWith(true);
     });
 
     it('should assign compact modifier class to the button', () => {

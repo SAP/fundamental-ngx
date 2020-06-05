@@ -5,6 +5,7 @@ import {
     Component,
     ContentChild,
     ElementRef,
+    HostBinding,
     Input,
     OnChanges,
     OnInit,
@@ -13,8 +14,10 @@ import {
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { PanelHeaderComponent } from './panel-header/panel-header.component';
 
+let panelUniqueId: number = 0;
+
 /**
- * The panel is a container for grouping and displaying information 
+ * The panel is a container for grouping and displaying information
  * Types: Expandable (default) and Fixed
  * Modes: Tablet/Mobile (default) and Desktop (compact)
  */
@@ -26,7 +29,7 @@ import { PanelHeaderComponent } from './panel-header/panel-header.component';
     styleUrls: ['./panel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PanelComponent implements AfterViewInit, CssClassBuilder, OnChanges, OnInit  {
+export class PanelComponent implements AfterViewInit, CssClassBuilder, OnChanges, OnInit {
     /** User's custom classes */
     @Input()
     class: string;
@@ -39,17 +42,20 @@ export class PanelComponent implements AfterViewInit, CssClassBuilder, OnChanges
     @Input()
     compact: boolean;
 
+    /** Id of the panel element. */
+    @Input()
+    @HostBinding('attr.id')
+    id: string = 'fd-panel-' + panelUniqueId++;
+
     /** @hidden */
     @ContentChild(PanelHeaderComponent) panelHeader: PanelHeaderComponent;
 
-    /** 
-     * @hidden 
-     * Whether the Panel Content is expanded
-     */
-    isExpanded: boolean = false;
+    /** Whether the Panel Content is expanded */
+    @Input()
+    expanded: boolean = false;
 
     /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef) { }
+    constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -63,8 +69,8 @@ export class PanelComponent implements AfterViewInit, CssClassBuilder, OnChanges
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.panelHeader.expandedValue.subscribe((value: boolean) => {
-            this.isExpanded = value;
+        this.panelHeader.expandedChange.subscribe((value: boolean) => {
+            this.expanded = value;
             this._cdRef.detectChanges();
         });
     }
@@ -75,12 +81,7 @@ export class PanelComponent implements AfterViewInit, CssClassBuilder, OnChanges
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return [
-            'fd-panel',
-            this.fixed ? 'fd-panel--fixed' : '',
-            this.compact ? 'fd-panel--compact' : '',
-            this.class
-        ]
+        return ['fd-panel', this.fixed ? 'fd-panel--fixed' : '', this.compact ? 'fd-panel--compact' : '', this.class]
             .filter((x) => x !== '')
             .join(' ');
     }

@@ -1,5 +1,13 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 
 /**
  * Layout Panels are used to encapsulate part of the content, form elements, lists, collections, etc., on a page.
@@ -14,7 +22,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     styleUrls: ['./layout-panel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutPanelComponent extends AbstractFdNgxClass {
+export class LayoutPanelComponent implements OnChanges, OnInit {
     /** @Input Background image of the panel. */
     @Input()
     backgroundImage: string;
@@ -23,15 +31,21 @@ export class LayoutPanelComponent extends AbstractFdNgxClass {
     @HostBinding('class.fd-layout-panel')
     fdLayoutPanelClass: boolean = true;
 
+    constructor(private elRef: ElementRef) {}
+
     /** @hidden */
-    _setProperties() {
-        if (this.backgroundImage) {
-            this._addStyleToElement('background-image', 'url("' + this.backgroundImage + '")');
-        }
+    ngOnChanges(): void {
+        this._applyBackgroundImage();
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    ngOnInit(): void {
+        this._applyBackgroundImage();
+    }
+
+    private _applyBackgroundImage(): void {
+        if (this.backgroundImage) {
+            (this.elRef.nativeElement as HTMLElement).style['background-image'] = 'url("' + this.backgroundImage + '")';
+        }
     }
 }
