@@ -7,8 +7,10 @@ import { PopoverComponent } from '@fundamental-ngx/core';
 })
 export class TableColumnSortingExampleComponent implements OnInit {
     tableRows;
+    filteredRows;
     column1SortDir: string = 'none';
     dateSortDir: string = 'none';
+    filterVal: string = '';
 
     @ViewChild('column1SortPopover')
     column1SortPopover: PopoverComponent;
@@ -39,58 +41,53 @@ export class TableColumnSortingExampleComponent implements OnInit {
         }
     }
 
-    sortDate() {
-        this.column1SortDir = 'none';
-        if (this.dateSortDir === 'asc') {
-            this.dateSortDir = 'dsc';
-            this.tableRows.sort((val1, val2) => {
-                return +new Date(val1.date) - +new Date(val2.date);
-            });
-        } else if (this.dateSortDir === 'none' || this.dateSortDir === 'dsc') {
-            this.dateSortDir = 'asc';
-            this.tableRows.sort((val1, val2) => {
-                return +new Date(val2.date) - +new Date(val1.date);
-            });
-        }
+    filterChange(searchTerm: string) {
+        const searchLower = searchTerm.toLocaleLowerCase();
+        this.filteredRows = this.tableRows.filter((item) => {
+            if (item) {
+                return item.column1.toLocaleLowerCase().includes(searchLower);
+            }
+        });
     }
 
     ngOnInit() {
         this.tableRows = [
             {
-                column1: 'Row 1',
+                column1: 'Apple',
                 column2: 'Row 1',
                 column3: 'Row 1',
                 date: '09-07-18',
                 type: 'search'
             },
             {
-                column1: 'Row 2',
+                column1: 'Banana',
                 column2: 'Row 2',
                 column3: 'Row 2',
                 date: '09-08-18',
                 type: 'cart'
             },
             {
-                column1: 'Row 3',
+                column1: 'Kiwi',
                 column2: 'Row 3',
                 column3: 'Row 3',
                 date: '02-14-18',
                 type: 'calendar'
             },
             {
-                column1: 'Row 4',
+                column1: 'Peach',
                 column2: 'Row 4',
                 column3: 'Row 4',
                 date: '12-30-17',
                 type: 'search'
             },
             {
-                column1: 'Row 5',
+                column1: 'Strawberry',
                 column2: 'Row 5',
                 column3: 'Row 5',
                 date: '11-12-18',
                 type: 'search'
             }
         ];
+        this.filteredRows = this.tableRows;
     }
 }

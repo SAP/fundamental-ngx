@@ -11,13 +11,21 @@
                     </fd-popover-control>
                     <fd-popover-body>
                         <ul fd-list [compact]="true">
+                            <li fd-list-item (click)="sortColumn1('asc')">
+                                <fd-icon fd-list-icon [glyph]="'sort-ascending'"></fd-icon>
+                                <span fd-list-title>Sort Ascending</span>
+                            </li>
                             <li fd-list-item (click)="sortColumn1('desc')">
                                 <fd-icon fd-list-icon [glyph]="'sort-descending'"></fd-icon>
                                 <span fd-list-title>Sort Descending</span>
                             </li>
-                            <li fd-list-item (click)="sortColumn1('asc')">
-                                <fd-icon fd-list-icon [glyph]="'sort-ascending'"></fd-icon>
-                                <span fd-list-title>Sort Ascending</span>
+                            <li fd-list-item>
+                                <fd-icon fd-list-icon [glyph]="'filter'"></fd-icon>
+                                <div fd-form-item [horizontal]="true">
+                                    <label fd-form-label for="input-1">Filter</label>
+                                    <input fd-form-control [compact]="true" id="input-1"
+                                           [(ngModel)]="filterVal" (ngModelChange)="filterChange($event)">
+                                </div>
                             </li>
                         </ul>
                     </fd-popover-body>
@@ -25,12 +33,12 @@
             </th>
             <th fd-table-cell>Column 2</th>
             <th fd-table-cell>Column 3</th>
-            <th fd-table-cell fdColumnSortable [sortDir]="dateSortDir" (click)="sortDate()">Date</th>
+            <th fd-table-cell>Date</th>
             <th fd-table-cell>Type</th>
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of tableRows" fd-table-row>
+        <tr *ngFor="let row of filteredRows" fd-table-row>
             <td fd-table-cell class="fd-has-font-weight-semi">
                 <a href="#">{{ row.column1 }}</a>
             </td>
