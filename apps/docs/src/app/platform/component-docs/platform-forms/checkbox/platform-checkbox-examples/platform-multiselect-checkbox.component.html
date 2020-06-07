@@ -2,11 +2,11 @@
 <p>Checkbox can be pre-selected if value of checkbox matches any value in ngModel directive.</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'sirius'" zone="zLeft" rank="1">
-        <fdp-checkbox [name]="'sirius'" [label]="'Sirius'" [value]="'sirius'" [(ngModel)]="field1"></fdp-checkbox>
+        <fdp-checkbox [name]="'sirius'" [label]="'Sirius'" [checkboxValue]="'sirius'" [(ngModel)]="field1"></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field [id]="'vega'" zone="zRight" rank="1">
-        <fdp-checkbox [name]="'vega'" [label]="'Vega'" [value]="'vega'" [(ngModel)]="field2"></fdp-checkbox>
+        <fdp-checkbox [name]="'vega'" [label]="'Vega'" [checkboxValue]="'vega'" [(ngModel)]="field2"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
 <div style="padding-left: 2rem;">field1: {{ field1 }}</div>
@@ -20,13 +20,13 @@
         <fdp-checkbox
             [name]="'fomalhaut'"
             [label]="'Fomalhaut'"
-            [value]="'fomalhaut'"
+            [checkboxValue]="'fomalhaut'"
             [(ngModel)]="field3"
         ></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field [id]="'canopus'" zone="zRight" rank="1">
-        <fdp-checkbox [name]="'canopus'" [label]="'Canopus'" [value]="'canopus'" [(ngModel)]="field3"></fdp-checkbox>
+        <fdp-checkbox [name]="'canopus'" [label]="'Canopus'" [checkboxValue]="'canopus'" [(ngModel)]="field3"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
 
@@ -40,7 +40,7 @@
         <fdp-checkbox
             [name]="'altair'"
             [label]="'Altair'"
-            [value]="'altair'"
+            [checkboxValue]="'altair'"
             [(ngModel)]="field4"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
@@ -52,7 +52,7 @@
         <fdp-checkbox
             [name]="'deneb'"
             [label]="'Deneb'"
-            [value]="'deneb'"
+            [checkboxValue]="'deneb'"
             [(ngModel)]="field4"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
@@ -64,7 +64,7 @@
         <fdp-checkbox
             [name]="'pollux'"
             [label]="'Pollux'"
-            [value]="'pollux'"
+            [checkboxValue]="'pollux'"
             [(ngModel)]="field4"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
@@ -84,7 +84,7 @@
         <fdp-checkbox
             [name]="'einstein'"
             [label]="'Einstein'"
-            [value]="'einstein'"
+            [checkboxValue]="'einstein'"
             [contentDensity]="'compact'"
             [formControl]="rfield1.formControl"
         ></fdp-checkbox>
@@ -94,7 +94,7 @@
         <fdp-checkbox
             [name]="'newton'"
             [label]="'Newton'"
-            [value]="'newton'"
+            [checkboxValue]="'newton'"
             [contentDensity]="'compact'"
             [formControl]="rfield2.formControl"
         ></fdp-checkbox>
@@ -110,14 +110,14 @@
         <fdp-checkbox
             [name]="'curie'"
             [label]="'Curie'"
-            [value]="'curie'"
+            [checkboxValue]="'curie'"
             [contentDensity]="'compact'"
             [formControl]="ffr1.formControl"
         ></fdp-checkbox>
         <fdp-checkbox
             [name]="'galileo'"
             [label]="'Galileo'"
-            [value]="'galileo'"
+            [checkboxValue]="'galileo'"
             [contentDensity]="'compact'"
             [formControl]="ffr1.formControl"
         ></fdp-checkbox>
@@ -133,7 +133,7 @@
         <fdp-checkbox
             [name]="'faraday'"
             [label]="'Faraday'"
-            [value]="'faraday'"
+            [checkboxValue]="'faraday'"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
             (change)="changeFunction($event)"
@@ -144,7 +144,7 @@
         <fdp-checkbox
             [name]="'edison'"
             [label]="'Edison'"
-            [value]="'edison'"
+            [checkboxValue]="'edison'"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
             (change)="changeFunction($event)"
@@ -155,7 +155,7 @@
         <fdp-checkbox
             [name]="'darwin'"
             [label]="'Darwin'"
-            [value]="'darwin'"
+            [checkboxValue]="'darwin'"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
             (change)="changeFunction($event)"

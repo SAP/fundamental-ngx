@@ -3,7 +3,7 @@
     [name]="'orion'"
     [isBinary]="true"
     [label]="'Orion'"
-    [value]="'orion'"
+    [checkboxValue]="'orion'"
     [(checked)]="orion"
     (checkedChange)="checkedChangeFunction($event)"
     (indeterminateChange)="indeterminateChangeFunction($event)"
@@ -12,7 +12,7 @@
 </fdp-checkbox>
 <div>value: {{ orion }}</div>
 
-<fdp-checkbox [name]="'cygnus'" [isBinary]="true" [label]="'Cygnus'" [value]="'cygnus'" [(checked)]="cygnus">
+<fdp-checkbox [name]="'cygnus'" [isBinary]="true" [label]="'Cygnus'" [checkboxValue]="'cygnus'" [(checked)]="cygnus">
 </fdp-checkbox>
 <div>value: {{ cygnus }}</div>
 <br />

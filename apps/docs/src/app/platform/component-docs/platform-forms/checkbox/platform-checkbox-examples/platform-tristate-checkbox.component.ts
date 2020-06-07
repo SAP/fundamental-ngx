@@ -62,7 +62,7 @@ export class PlatformChekboxTristateComponent implements AfterViewChecked {
 
     private acceptAll(accept: boolean): void {
         if (accept !== null) {
-            this.registrationForm.controls.agreements.setValue({
+            this.registrationForm.controls.agreements.patchValue({
                 marketing: accept,
                 newsletter: accept,
                 termsAndConditions: accept

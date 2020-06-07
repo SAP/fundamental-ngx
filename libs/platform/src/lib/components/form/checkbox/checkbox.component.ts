@@ -44,15 +44,21 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @Input()
     tristateSelectable: boolean = true;
 
-    /** value for checkbox, when it is not binary */
-    @Input()
+    /** value for checkbox control */
     get value(): any {
-        return this._checkboxValue;
+        return this.getValue();
     }
     set value(selectValue: any) {
-        if (selectValue !== this.value) {
-            this._checkboxValue = selectValue;
-        }
+        this.setValue(selectValue);
+    }
+
+    /** value for checkbox when selected */
+    @Input()
+    get checkboxValue(): any {
+        return this._checkboxValue;
+    }
+    set checkboxValue(selectValue: any) {
+        this._checkboxValue = selectValue;
     }
 
     /**
@@ -123,17 +129,17 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     ngAfterViewInit(): void {
         if (this.tristate) {
             // handling tristate checkbox without value as well
-            if (this.value) {
-                this.corecheckbox.values.trueValue = this.value;
+            if (this.checkboxValue) {
+                this.corecheckbox.values.trueValue = this.checkboxValue;
             }
         } else if (this.isBinary) {
             if (!this.checkboxCurrentValue) {
                 this.checkboxCurrentValue = this.checked;
 
-                if (this.checked && this.value) {
+                if (this.checked && this.checkboxValue) {
                     // have to set checkbox value here.
-                    this.checkboxCurrentValue = this.value;
-                    this.corecheckbox.values.trueValue = this.value;
+                    this.checkboxCurrentValue = this.checkboxValue;
+                    this.corecheckbox.values.trueValue = this.checkboxValue;
 
                     // in case of checkbox outside form.
                     // have to update checked value, as checkbox is checked.
@@ -143,12 +149,12 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
             }
         } else {
             // updating checkbox values property for this custom checkbox
-            this.corecheckbox.values.trueValue = this.value;
+            this.corecheckbox.values.trueValue = this.checkboxValue;
             this.corecheckbox.values.falseValue = undefined;
 
             // set core checkbox control value based on platform checkbox control value
-            if (this.value && this.model && this.model.includes(this.value)) {
-                this.checkboxCurrentValue = this.value;
+            if (this.checkboxValue && this.model && this.model.includes(this.checkboxValue)) {
+                this.checkboxCurrentValue = this.checkboxValue;
             } else {
                 this.checkboxCurrentValue = undefined;
             }
@@ -169,7 +175,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         this._ngZone.runOutsideAngular(() => {
             setTimeout(() => {
                 // handles value of binary checkbox with value, outside form
-                this.checkedChange.emit(this.value);
+                this.checkedChange.emit(this.checkboxValue);
             });
         });
     }
@@ -191,9 +197,9 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
             this.indeterminateChange.emit(this.checkboxCurrentValue);
             this._emitChangeEvent(this.checkboxCurrentValue);
         } else if (this.isBinary) {
-            if (this.checkboxCurrentValue && this.value) {
+            if (this.checkboxCurrentValue && this.checkboxValue) {
                 // handles value of binary checkbox with value, outside form
-                this.checkedChange.emit(this.value);
+                this.checkedChange.emit(this.checkboxValue);
             } else {
                 this.checkedChange.emit(this.checkboxCurrentValue);
             }
@@ -222,8 +228,8 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         event.source = this;
         event.checked = modelValue;
 
-        // setting baseInput value and control
-        this.setValue(modelValue);
+        // setting value, it will call setValue()
+        this.value = modelValue;
         this.change.emit(event);
     }
 
@@ -232,7 +238,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      */
     private _removeValue(): void {
         if (this.model) {
-            this.model = this.model.filter((val: string) => val !== this.value);
+            this.model = this.model.filter((val: string) => val !== this.checkboxValue);
         }
     }
 
@@ -258,8 +264,8 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         // Expecting Formcontrol values as Array [] or boolean
         if (Array.isArray(value)) {
             // handling ngmodel/formcontrol as Array.
-            if (this.value && value.includes(this.value)) {
-                this.checkboxCurrentValue = this.value;
+            if (this.checkboxValue && value.includes(this.checkboxValue)) {
+                this.checkboxCurrentValue = this.checkboxValue;
             } else {
                 this.checkboxCurrentValue = undefined;
             }

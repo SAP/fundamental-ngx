@@ -4,7 +4,7 @@
         <fdp-checkbox
             [name]="'paris'"
             [label]="'Paris'"
-            [value]="'Yes'"
+            [checkboxValue]="'Yes'"
             [tristate]="true"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
@@ -17,7 +17,7 @@
         <fdp-checkbox
             [name]="'doha'"
             [label]="'Doha'"
-            [value]="'Yes'"
+            [checkboxValue]="'Yes'"
             [tristate]="true"
             [formControl]="doha.formControl"
         ></fdp-checkbox>
@@ -27,7 +27,7 @@
         <fdp-checkbox
             [name]="'amsterdam'"
             [label]="'Amsterdam'"
-            [value]="'Yes'"
+            [checkboxValue]="'Yes'"
             [tristate]="true"
             [formControl]="amsterdam.formControl"
         ></fdp-checkbox>
@@ -67,7 +67,7 @@
         <fdp-checkbox
             [name]="'athens'"
             [label]="'athens: tristateSelectable false'"
-            [value]="'Yes'"
+            [checkboxValue]="'Yes'"
             [tristate]="true"
             [tristateSelectable]="false"
             [formControl]="athens.formControl"
@@ -93,7 +93,7 @@
         <fdp-checkbox
             [name]="'havana'"
             [label]="'Havana'"
-            [value]="'Yes'"
+            [checkboxValue]="'Yes'"
             [tristate]="true"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
@@ -106,7 +106,7 @@
         <fdp-checkbox
             [name]="'beirut'"
             [label]="'Beirut'"
-            [value]="'Yes'"
+            [checkboxValue]="'Yes'"
             [tristate]="true"
             [(ngModel)]="beirut"
         ></fdp-checkbox>
@@ -116,7 +116,7 @@
         <fdp-checkbox
             [name]="'budapest'"
             [label]="'Budapest'"
-            [value]="'Yes'"
+            [checkboxValue]="'Yes'"
             [tristate]="true"
             [(ngModel)]="budapest"
         ></fdp-checkbox>
@@ -146,7 +146,7 @@
         <fdp-checkbox
             [name]="'dubrovnik'"
             [label]="'Dubrovnik: tristateSelectable false'"
-            [value]="'Yes'"
+            [checkboxValue]="'Yes'"
             [tristate]="true"
             [tristateSelectable]="false"
             [(ngModel)]="dubrovnik"
@@ -187,7 +187,7 @@
                 [label]="'Accept All'"
                 [tristate]="true"
                 [tristateSelectable]="false"
-                [value]="false"
+                [checkboxValue]="false"
                 [formControl]="ffr1.formControl"
             ></fdp-checkbox>
         </fdp-form-field>
