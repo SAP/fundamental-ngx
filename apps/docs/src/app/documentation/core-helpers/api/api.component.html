@@ -9,7 +9,9 @@
         Select a file ({{ files.length }})
     </button>
 
-    <fd-menu #menu="fdMenu">
+    <fd-menu #menu="fdMenu"
+             [fillControlMode]="null"
+             placement="bottom-start">
         <li fd-menu-item *ngFor="let file of files"
             [ngClass]="{'is-selected': file === activeFile}"
             (click)="getFile(file)">

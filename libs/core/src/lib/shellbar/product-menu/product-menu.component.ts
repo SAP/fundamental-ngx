@@ -1,16 +1,8 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ContentChild,
-    HostListener,
-    Input,
-    OnInit,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
-import { PopoverComponent } from '../../popover/popover.component';
+import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MenuComponent } from '../../menu/menu.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
+import { Placement } from 'popper.js';
+import { PopoverFillMode } from '../../..';
 
 /**
  * The component that represents a product menu.
@@ -28,14 +20,38 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductMenuComponent extends PopoverComponent implements OnInit {
-    /** @hidden */
-    @ViewChild(PopoverComponent)
-    popoverComponent: PopoverComponent;
+export class ProductMenuComponent {
 
-    /** @hidden */
-    @ContentChild(MenuComponent)
-    menuComponent: MenuComponent;
+    /** Whether the popover should close when the escape key is pressed. */
+    @Input()
+    closeOnEscapeKey: boolean = true;
+
+    /** Whether the popover should close when a click is made outside its boundaries. */
+    @Input()
+    closeOnOutsideClick: boolean = true;
+
+    /** The trigger events that will open/close the popover.
+     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    @Input()
+    triggers: string[] = ['click'];
+
+    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
+    @Input()
+    placement: Placement = 'bottom-end';
+
+    /** Whether the popover is disabled. */
+    @Input()
+    disabled: boolean = false;
+
+    /**
+     * Preset options for the popover body width.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * Leave blank for no effect.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode = null;
 
     /**
      * The control element to toggle the product menu,
@@ -56,35 +72,16 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
     closePopoverOnSelect: boolean = false;
 
     /** @hidden */
-    productMenuCollapsed: boolean = false;
-
-    /** @hidden */
-    @HostListener('window:resize', [])
-    onResize(): void {
-        const mq = window.matchMedia('(max-width: 601px)');
-        mq.matches ? (this.productMenuCollapsed = true) : (this.productMenuCollapsed = false);
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.onResize();
-    }
+    @ViewChild(MenuComponent)
+    menu: MenuComponent;
 
     /** @hidden */
     itemClicked(item: any, event: any): void {
         if (this.closePopoverOnSelect) {
-            this.menuComponent.close();
+            this.menu.close();
         }
         if (item.callback) {
             item.callback(event);
         }
-    }
-
-    /** @hidden */
-    isAnyGlyphInItems(): boolean {
-        if (!this.items || this.items.length === 0) {
-            return false;
-        }
-        return !!this.items.find((item) => item.glyph);
     }
 }

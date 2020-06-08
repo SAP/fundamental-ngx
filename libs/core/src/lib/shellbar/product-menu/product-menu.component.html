@@ -10,8 +10,9 @@
     </button>
 
     <fd-menu #menu="fdMenu"
-             placement="bottom-end"
+             [placement]="placement"
              [triggers]="triggers"
+             [fillControlMode]="fillControlMode"
              [closeOnEscapeKey]="closeOnEscapeKey"
              [closeOnOutsideClick]="closeOnOutsideClick">
         <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item>

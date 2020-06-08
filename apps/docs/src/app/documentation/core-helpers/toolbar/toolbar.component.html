@@ -18,7 +18,8 @@
         </a>
     </fd-shellbar-logo>
 
-    <fd-product-menu [control]="library"
+    <fd-product-menu placement="bottom-start"
+                     [control]="library"
                      [closePopoverOnSelect]="true"
                      [items]="items">
     </fd-product-menu>
@@ -33,6 +34,7 @@
         </button>
 
         <fd-menu #themesMenu="fdMenu"
+                 [fillControlMode]="null"
                  placement="bottom-end">
             <li fd-menu-item *ngFor="let theme of themes">
                 <div fd-menu-interactive (click)="selectTheme(theme.id)">

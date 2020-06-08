@@ -5,6 +5,10 @@
 }
 
 fd-menu {
+    .fd-menu__list, .fd-menu__sublist {
+        flex-wrap: nowrap;
+    }
+
     .fd-popover__popper {
         box-shadow: none;
     }

@@ -17,19 +17,20 @@ import { MenuComponent } from '../menu/menu.component';
  * additional options.
  *
  * ```html
- *    <fd-split-button>
- *        Action Button
- *            <fd-menu>
- *                <ul fd-menu-list>
- *                    <li fd-menu-item>
- *                       <a [routerLink]="'/'">option</a>
- *                    </li>
- *                    <li fd-menu-item>
- *                       <a [routerLink]="'/'">option2</a>
- *                    </li>
- *                </ul>
- *            </fd-menu>
- *    </fd-split-button>
+ * <fd-split-button>
+ *   <fd-menu>
+ *       <li fd-menu-item>
+ *           <div fd-menu-interactive>
+ *               <span fd-menu-title>Option 1</span>
+ *           </div>
+ *       </li>
+ *       <li fd-menu-item>
+ *           <div fd-menu-interactive>
+ *               <span fd-menu-title>Option 2</span>
+ *           </div>
+ *       </li>
+ *    </fd-menu>
+ *</fd-split-button>
  * ```
  */
 @Component({
@@ -80,13 +81,6 @@ export class SplitButtonComponent {
 
     /** @hidden */
     @ContentChild(MenuComponent)
-    set setMenu(menu: MenuComponent) {
-        this.menu = menu;
-        if (menu) {
-            this.menu.placement = 'bottom-end';
-        }
-    }
-
     menu: MenuComponent;
 
     /** @hidden Emits event when main button is clicked */
