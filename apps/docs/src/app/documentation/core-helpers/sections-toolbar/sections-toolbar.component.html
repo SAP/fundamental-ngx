@@ -12,26 +12,34 @@
         </fd-input-group>
     </div>
     <div class="fd-docs-sidebar-content">
-        <nav *ngFor="let section of sections">
-            <ul class="nav">
-                <div class="side-nav__headers">{{ section.header }}</div>
-                <ng-container *ngFor="let item of section.content">
-                    <li *ngIf="item.url === 'home' || (item | docsSearch: search)">
-                        <div class="nav-item-container">
-                            <a
-                                class="nav-item"
-                                [routerLink]="'/' + item.url"
-                                (keypress)="onKeypressHandler($event)"
-                                tabindex="0"
-                                role="button"
-                                routerLinkActive="nav-item--active"
-                            >
-                                {{ item.name }}
+        <fd-side-nav>
+            <div fd-side-nav-main>
+                <ul fd-nested-list [textOnly]="true">
+                    <li fd-nested-list-item *ngFor="let section of sections">
+                        <div fd-nested-list-content>
+                            <a fd-nested-list-link>
+                                <span fd-nested-list-title>{{ section.header }}</span>
                             </a>
+                            <button fd-nested-list-expand-icon></button>
                         </div>
+                        <ul fd-nested-list *ngFor="let item of section.content">
+                            <li fd-nested-list-item *ngIf="item.url === 'home' || (item | docsSearch: search)">
+                                <a
+                                    fd-nested-list-link
+                                    class="nav-item"
+                                    [routerLink]="'/' + item.url"
+                                    (keypress)="onKeypressHandler($event)"
+                                    tabindex="0"
+                                    role="button"
+                                    routerLinkActive="nav-item--active"
+                                >
+                                    <span fd-nested-list-title>{{ item.name }}</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                </ng-container>
-            </ul>
-        </nav>
+                </ul>
+            </div>
+        </fd-side-nav>
     </div>
 </div>
