@@ -67,3 +67,20 @@
 </fdp-form-group>
 
 <div style="padding-left: 2rem;">form value: {{ customForm.getRawValue() | json }}</div>
+
+<h3>Disabled Checkbox</h3>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field #red [id]="'red'" zone="zLeft" rank="1">
+        <fdp-checkbox
+            [id]="'red'"
+            [name]="'red'"
+            [label]="'Red'"
+            [isBinary]="true"
+            (checkedChange)="checkedChangeFunction($event)"
+            (indeterminateChange)="indeterminateChangeFunction($event)"
+            (change)="changeFunction($event)"
+            [contentDensity]="'compact'"
+            [disabled]="true"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
