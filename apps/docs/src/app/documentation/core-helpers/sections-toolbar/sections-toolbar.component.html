@@ -15,9 +15,11 @@
         <fd-side-nav>
             <div fd-side-nav-main>
                 <ul fd-nested-list [textOnly]="true">
-                    <nav *ngFor="let section of sections">
-                        <li fd-nested-list-header>{{ section.header }}</li>
-                        <ng-container *ngFor="let item of section.content">
+                    <li fd-nested-list-item *ngFor="let section of sections">
+                        <a fd-nested-list-link>
+                            <span fd-nested-list-title>{{ section.header }}</span>
+                        </a>
+                        <ul fd-nested-list *ngFor="let item of section.content">
                             <li fd-nested-list-item *ngIf="item.url === 'home' || (item | docsSearch: search)">
                                 <a
                                     fd-nested-list-link
@@ -28,11 +30,11 @@
                                     role="button"
                                     routerLinkActive="nav-item--active"
                                 >
-                                    {{ item.name }}
+                                    <span fd-nested-list-title>{{ item.name }}</span>
                                 </a>
                             </li>
-                        </ng-container>
-                    </nav>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </fd-side-nav>
