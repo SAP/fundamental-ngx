@@ -244,18 +244,17 @@ describe('MultiInputComponent', () => {
 
     it('should handle showAll button', async () => {
         await fixture.whenStable();
-        const event: any = {
-            key: 'ArrowUp',
-            preventDefault: () => {},
-            stopPropagation: () => {}
-        };
+        const event = new MouseEvent('click');
         component.searchTerm = 'term';
+        component.dropdownValues = ['term1', 'term2', 'value'];
         spyOn(event, 'preventDefault');
         spyOn(event, 'stopPropagation');
-        spyOn(component, 'handleSearchTermChange');
+        spyOn(component, 'handleSearchTermChange').and.callThrough();
         component.showAllClicked(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');
+        expect(component.displayedValues.length).toEqual(component.dropdownValues.length);
+        expect(component.handleSearchTermChange).toHaveBeenCalled();
     });
 });
