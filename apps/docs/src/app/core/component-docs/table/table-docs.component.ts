@@ -19,9 +19,6 @@ import * as tableFooterTs from '!raw-loader!./examples/table-footer-example.comp
 import * as tableCdkHtml from '!raw-loader!./examples/table-cdk-example.component.html';
 import * as tableCdkTs from '!raw-loader!./examples/table-cdk-example.component.ts';
 import * as tableCdkScss from '!raw-loader!./examples/table-cdk-example.component.scss';
-import * as tableResponsiveHtml from '!raw-loader!./examples/table-responsive-example.component.html';
-import * as tableResponsiveTs from '!raw-loader!./examples/table-responsive-example.component.ts';
-import * as tableResponsiveScss from '!raw-loader!./examples/table-responsive-example.component.scss';
 import * as tablePopInHTs from '!raw-loader!./examples/table-popin-example/table-popin-example.component.ts';
 import * as tablePopInHtml from '!raw-loader!./examples/table-popin-example/table-popin-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
@@ -177,21 +174,6 @@ export class TableDocsComponent {
             component: 'TableCdkExampleComponent',
             code: tableCdkTs,
             fileName: 'table-cdk-example'
-        }
-    ];
-
-    tableResponsive: ExampleFile[] = [
-        {
-            language: 'html',
-            code: tableResponsiveHtml,
-            fileName: 'table-responsive-example',
-            scssFileCode: tableResponsiveScss
-        },
-        {
-            language: 'typescript',
-            component: 'TableResponsiveExampleComponent',
-            code: tableResponsiveTs,
-            fileName: 'table-responsive-example'
         }
     ];
 
