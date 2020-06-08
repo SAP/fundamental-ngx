@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.17"></a>
+# [0.19.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.16...v0.19.0-rc.17) (2020-06-08)
+
+
+### Bug Fixes
+
+* Provide way to put placement to shellbar product menu ([#2609](https://github.com/SAP/fundamental-ngx/issues/2609)) ([15022d1](https://github.com/SAP/fundamental-ngx/commit/15022d1))
+
+
+
 <a name="0.19.0-rc.16"></a>
 # [0.19.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.15...v0.19.0-rc.16) (2020-06-08)
 
