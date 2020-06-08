@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ContentChild, Directive, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, ContentChild, Directive, HostListener, Input } from '@angular/core';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
@@ -77,7 +77,7 @@ let bylineUniqueId: number = 0;
     selector: 'li[fd-byline]',
     host: {
         class: 'fd-list__item',
-        role: 'listitem',
+        role: 'listbox',
         tabindex: '0',
         '[attr.id]': 'id',
         '[class.is-selected]': 'isSelected'

@@ -15,14 +15,15 @@ import {
     ListTitleDirective
 } from './list.directives';
 import { ListMessageDirective } from './list-message.directive';
+import { CheckboxModule } from '../checkbox/checkbox.module';
 import {
-    CheckboxModule,
+    ListBylineComponent,
     ListBylineTextDirective,
-    ListBylineTextLeftDirective, ListBylineTextRightDirective,
+    ListBylineTextLeftDirective,
+    ListBylineTextRightDirective,
     ListContentDirective,
     ListContentThumbnail
-} from '../..';
-import { ListBylineComponent } from './list-byline.component';
+} from './list-byline.component';
 
 @NgModule({
     declarations: [

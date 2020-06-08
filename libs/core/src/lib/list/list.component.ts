@@ -17,7 +17,6 @@ import { ListBylineComponent } from './list-byline.component';
     template: `<ng-content></ng-content>`,
     host: {
         class: 'fd-list',
-        '[class.fd-list--byline]': 'isByline'
     },
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./list.component.scss'],
@@ -49,10 +48,17 @@ export class ListComponent {
     @HostBinding('class.fd-list--no-border')
     noBorder: boolean = false;
 
+    /** Whether list component has removed borders */
+    @Input()
+    @HostBinding('class.fd-list--selection')
+    selectionList: boolean = false;
+
+    /** Whether list component has removed borders */
+    @HostBinding('class.fd-list--byline')
+    isByline: boolean = false;
+
     @ContentChild(ListBylineComponent)
     set setBylineListItem(bylineListItem: ListBylineComponent) {
         this.isByline = !!bylineListItem;
     };
-
-    isByline: boolean = false;
 }
