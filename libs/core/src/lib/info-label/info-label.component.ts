@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '../utils/public_api';
 
-type LabelType = 'numeric' | 'only-icon' | 'icon';
+export type LabelType = 'numeric' | 'only-icon' | 'icon';
 
 @Component({
     // tslint:disable-next-line:component-selector

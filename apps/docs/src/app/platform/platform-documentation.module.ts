@@ -9,12 +9,37 @@ import { NewComponentComponent } from '../platform/component-docs/new-component/
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
+import { ImageModule } from '@fundamental-ngx/core';
+import { PlatformButtonModule, 
+         PlatformActionBarModule,
+         PlatformLinkModule, 
+         PlatformMenuModule, 
+         PlatformSearchFieldModule, 
+         PlatformSelectModule,
+         PlatformInfoLabelModule,
+         PlatformMenuButtonModule,
+         PlatformSplitMenuButtonModule,
+         PlatformRadioGroupModule,
+         PlatformActionButtonGroupModule,
+       } from '@fundamental-ngx/platform';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
     imports: [
+        ImageModule,
+        PlatformButtonModule,
+        PlatformActionBarModule,
+        PlatformActionButtonGroupModule,
+        PlatformLinkModule,
+        PlatformInfoLabelModule,
+        PlatformMenuModule,
+        PlatformMenuButtonModule,
+        PlatformSearchFieldModule,
+        PlatformSelectModule,
+        PlatformSplitMenuButtonModule,
+        PlatformRadioGroupModule,
         SharedDocumentationModule,
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),

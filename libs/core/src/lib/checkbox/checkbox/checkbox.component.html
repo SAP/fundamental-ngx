@@ -13,13 +13,10 @@
     (keydown)="checkByKey($event)"
     (keyup)="$event.stopPropagation()"
 />
-<label
-    class="fd-checkbox__label"
-    (click)="checkByClick()"
-    [class.fd-checkbox__label--compact]="compact"
-    [for]="inputId"
->
-    {{ label }}
+<label class="fd-checkbox__label" [for]="inputId" [class.fd-checkbox__label--compact]="compact">
+    <ng-container *ngIf="label">
+        {{ label }}
+    </ng-container>
     <ng-container *ngIf="!label">
         <ng-content></ng-content>
     </ng-container>
