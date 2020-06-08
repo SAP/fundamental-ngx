@@ -1,5 +1,6 @@
 <fd-breadcrumb-item *ngIf="collapsedBreadcrumbItems.length" [fdMenuTrigger]="menu">
-    <a fd-breadcrumb-link>...
+    <a fd-breadcrumb-link tabindex="0" (keydown)="keyDownHandle($event)">
+        ...
         <fd-icon [glyph]="'slim-arrow-down'"></fd-icon>
     </a>
 </fd-breadcrumb-item>

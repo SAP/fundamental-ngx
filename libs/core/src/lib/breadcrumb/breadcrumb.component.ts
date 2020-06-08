@@ -9,12 +9,14 @@ import {
     Input,
     OnInit,
     Optional,
-    QueryList,
+    QueryList, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { RtlService } from '../utils/services/rtl.service';
 import { BehaviorSubject } from 'rxjs';
+import { PopoverComponent } from '../popover/popover.component';
+import { KeyUtil } from '../utils/public_api';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -43,6 +45,10 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
     breadcrumbItems: QueryList<BreadcrumbItemDirective>;
+
+    /** @hidden */
+    @ViewChild(PopoverComponent)
+    popoverComponent: PopoverComponent;
 
     /** @hidden */
     collapsedBreadcrumbItems: Array<BreadcrumbItemDirective> = [];
@@ -84,6 +90,15 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
             this.expandBreadcrumbs();
         }
         this.previousContainerWidth = this.containerBoundary;
+    }
+
+    /** @hidden */
+    keyDownHandle(event: KeyboardEvent): void {
+        if (KeyUtil.isKey(event, 'Enter') || KeyUtil.isKey(event, ' ')) {
+            event.stopPropagation();
+            event.preventDefault();
+            this.popoverComponent.toggle();
+        }
     }
 
     /** @hidden */
