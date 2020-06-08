@@ -6,7 +6,6 @@ import { PopoverModule } from '../popover/popover.module';
 import { MenuModule } from '../menu/menu.module';
 import { IdentifierModule } from '../identifier/identifier.module';
 import { ButtonModule } from '../button/button.module';
-import { ComboboxModule } from '../combobox/combobox.module';
 
 import { ShellbarSubtitleComponent } from './shellbar-subtitle/shellbar-subtitle.component';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
@@ -41,7 +40,6 @@ import { ShellbarActionsMobileComponent } from './shellbar-actions/shellbar-acti
         MenuModule,
         IdentifierModule,
         ButtonModule,
-        ComboboxModule,
         DragAndDropModule,
         DragDropModule,
         ProductSwitchModule,
