@@ -95,9 +95,9 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     /** @hidden */
     keyDownHandle(event: KeyboardEvent): void {
         if (KeyUtil.isKey(event, 'Enter') || KeyUtil.isKey(event, ' ')) {
+            this.popoverComponent.toggle();
             event.stopPropagation();
             event.preventDefault();
-            this.popoverComponent.toggle();
         }
     }
 
