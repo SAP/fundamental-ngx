@@ -8,14 +8,13 @@ import { PopoverComponent } from '@fundamental-ngx/core';
 export class TableColumnSortingExampleComponent implements OnInit {
     tableRows;
     displayedRows;
-    column1SortDir: string = 'none';
-    dateSortDir: string = 'none';
+    column1SortDir: string = 'asc';
     filterVal: string = '';
     open: boolean = false;
 
     sortColumn1(dir: string) {
-        this.dateSortDir = 'none';
         if (dir === 'asc') {
+            this.column1SortDir = 'asc';
             this.tableRows.sort((val1, val2) => {
                 if (val1.column1 < val2.column1) {
                     return -1;
@@ -26,6 +25,7 @@ export class TableColumnSortingExampleComponent implements OnInit {
                 }
             });
         } else if (dir === 'desc') {
+            this.column1SortDir = 'desc';
             this.tableRows.sort((val1, val2) => {
                 if (val1.column1 > val2.column1) {
                     return -1;

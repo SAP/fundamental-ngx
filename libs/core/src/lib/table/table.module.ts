@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TableComponent } from './table.component';
-import { ColumnSortableDirective } from './directives/column-sortable.directive';
 import { TableResponsiveWrapperDirective } from './directives/table-responsive-wrapper.directive';
 import { TableHeaderDirective } from './directives/table-header.directive';
 import { TableBodyDirective } from './directives/table-body.directive';
@@ -22,7 +21,6 @@ import { TableIconDirective } from './directives/table-icon.directive';
     declarations: [
         TableComponent,
         TableResponsiveWrapperDirective,
-        ColumnSortableDirective,
         TableWrapperComponent,
         TableHeaderDirective,
         TableFooterDirective,
@@ -39,7 +37,6 @@ import { TableIconDirective } from './directives/table-icon.directive';
     exports: [
         TableComponent,
         TableResponsiveWrapperDirective,
-        ColumnSortableDirective,
         TableWrapperComponent,
         TableHeaderDirective,
         TableFooterDirective,
