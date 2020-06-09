@@ -24,7 +24,8 @@ let nextUniqueId = 0;
 @Component({
     selector: 'fdp-radio-group',
     templateUrl: './radio-group.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    inputs: ['list', 'lookupKey', 'displayKey']
 })
 export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit {
     /** value of selected radio button */
