@@ -10,11 +10,12 @@ import { TableColumnSortingExampleComponent } from './examples/table-column-sort
 import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
 import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
-import { CheckboxModule, TableModule } from '@fundamental-ngx/core';
+import { CheckboxModule, ObjectStatusModule, TableModule } from '@fundamental-ngx/core';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
 import { TableActivableExampleComponent } from './examples/table-activable-example.component';
 import { TableSemanticExampleComponent } from './examples/table-semantic-example.component';
+import { TablePopinExampleComponent } from './examples/table-popin-example/table-popin-example.component';
 
 const routes: Routes = [
     {
@@ -28,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TableModule, CheckboxModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TableModule, CheckboxModule, ObjectStatusModule],
     exports: [RouterModule],
     declarations: [
         TableDocsComponent,
@@ -41,7 +42,8 @@ const routes: Routes = [
         TableWithoutBordersExampleComponent,
         TableFooterExampleComponent,
         TableActivableExampleComponent,
-        TableSemanticExampleComponent
+        TableSemanticExampleComponent,
+        TablePopinExampleComponent
     ]
 })
 export class TableDocsModule {}

@@ -104,3 +104,19 @@
     <fd-table-cdk-example></fd-table-cdk-example>
 </component-example>
 <code-example [exampleFiles]="tableCdk"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'tablePopIn'" [componentName]="'table'">
+    Pop In Mode on Table
+</fd-docs-section-title>
+<description>
+    Table has a mode to be support mobile devices. It's called Pop In mode, it can be achieved by adding <code>[popIn]="true"</code>
+    and changing a markup. One default row should be divided to 2 rows, main and secondary. First(main) one is interactive,
+    second has to be used only to display rest of information. More important data has to go to first row. Amount of cells is limited to minimum,
+    to improve overall look of table.
+</description>
+<component-example>
+    <fd-table-popin-example></fd-table-popin-example>
+</component-example>
+<code-example [exampleFiles]="tablePopInExample"></code-example>
