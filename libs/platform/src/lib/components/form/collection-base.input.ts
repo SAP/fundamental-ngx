@@ -13,7 +13,9 @@ import { SelectItem } from '../../domain/data-model';
  *  ...
  *
  */
-@Directive()
+@Directive({
+    selector: '[fdpCollectionBaseInput]'
+})
 export abstract class CollectionBaseInput extends BaseInput {
     /**
      * list of values, it can be of type SelectItem or String.
