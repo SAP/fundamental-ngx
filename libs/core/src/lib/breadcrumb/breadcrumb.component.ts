@@ -9,7 +9,8 @@ import {
     Input,
     OnInit,
     Optional,
-    QueryList, ViewChild,
+    QueryList,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
