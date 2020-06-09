@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItemComponent, RtlService } from '@fundamental-ngx/core';
+import { MenuItemComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-menu-example',

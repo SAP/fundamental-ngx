@@ -7,6 +7,9 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    forwardRef,
+    Inject,
+    InjectionToken,
     Input,
     OnChanges,
     OnDestroy,
@@ -27,6 +30,8 @@ import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
 
 let menuUniqueId: number = 0;
 
+export const SUBMENU = new InjectionToken<SubmenuComponent>('Submenu component dependency');
+
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'li[fd-menu-item]',
@@ -35,6 +40,7 @@ let menuUniqueId: number = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
+        'attr.role': 'presentation',
         '[class.fd-menu__item]': 'true'
     }
 })
@@ -76,7 +82,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     constructor(public elementRef: ElementRef,
                 @Optional() public menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
-                @Optional() private _subMenu: SubmenuComponent) {
+                @Optional() @Inject(SUBMENU) private _submenu: SubmenuComponent) {
     }
 
     /** @hidden */
@@ -176,7 +182,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden Checks for Menu Service dependency and passes it if further */
     private _setMenuService(): void {
-        this.menuService = this.menuService || this._subMenu.menuService;
+        this.menuService = this.menuService || this._submenu.menuService;
         if (this.submenu) {
             this.submenu.menuService = this.menuService;
         }
@@ -203,6 +209,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 }
 
 
+
 @Component({
     selector: 'fd-submenu',
     template: `
@@ -212,6 +219,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    providers: [{provide: SUBMENU, useExisting: forwardRef(() => SubmenuComponent)}],
     exportAs: 'fdSubmenu'
 })
 export class SubmenuComponent {

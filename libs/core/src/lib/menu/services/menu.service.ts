@@ -90,15 +90,15 @@ export class MenuService {
      *  - Validates Focused Node */
     rebuildMenu(): void {
         this.menuMap = this._buildMenuMap(this._menu);
+
         const deadNode = this.activeNodePath.find(node => !this.menuMap.has(node.item));
         if (deadNode) {
-            this._removeFromActivePath(deadNode.item);
-            const invalidFocusedElement = this.focusedNode
-                && this.focusedNode.parent !== null
-                && this.activeNodePath.indexOf(this.focusedNode.parent) === -1;
-            if (invalidFocusedElement) {
-                this.focusedNode = this.activeNodePath[0] || this.menuMap.get(null).children[0];
-            }
+            this.setActive(false, deadNode.item);
+        }
+
+        const invalidFocusedElement = this.focusedNode && !this.menuMap.get(this.focusedNode.item);
+        if (invalidFocusedElement) {
+            this.focusedNode = this.activeNodePath[this.activeNodePath.length - 1] || this.menuMap.get(null).children[0];
         }
     }
 
