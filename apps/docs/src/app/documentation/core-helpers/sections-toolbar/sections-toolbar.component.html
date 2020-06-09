@@ -22,20 +22,22 @@
                             </a>
                             <button fd-nested-list-expand-icon></button>
                         </div>
-                        <ul fd-nested-list *ngFor="let item of section.content">
-                            <li fd-nested-list-item *ngIf="item.url === 'home' || (item | docsSearch: search)">
-                                <a
-                                    fd-nested-list-link
-                                    class="nav-item"
-                                    [routerLink]="'/' + item.url"
-                                    (keypress)="onKeypressHandler($event)"
-                                    tabindex="0"
-                                    role="button"
-                                    routerLinkActive="nav-item--active"
-                                >
-                                    <span fd-nested-list-title>{{ item.name }}</span>
-                                </a>
-                            </li>
+                        <ul fd-nested-list>
+                            <ng-container *ngFor="let item of section.content">
+                                <li fd-nested-list-item *ngIf="item.url === 'home' || (item | docsSearch: search)">
+                                    <a
+                                        fd-nested-list-link
+                                        class="nav-item"
+                                        [routerLink]="'/' + item.url"
+                                        (keypress)="onKeypressHandler($event)"
+                                        tabindex="0"
+                                        role="button"
+                                        routerLinkActive="nav-item--active"
+                                    >
+                                        <span fd-nested-list-title>{{ item.name }}</span>
+                                    </a>
+                                </li>
+                            </ng-container>
                         </ul>
                     </li>
                 </ul>
