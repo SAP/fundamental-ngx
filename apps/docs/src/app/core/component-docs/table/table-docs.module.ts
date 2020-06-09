@@ -10,11 +10,7 @@ import { TableColumnSortingExampleComponent } from './examples/table-column-sort
 import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
 import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
-<<<<<<< HEAD
-import { CheckboxModule, ListModule, TableModule } from '@fundamental-ngx/core';
-=======
-import { CheckboxModule, ObjectStatusModule, TableModule } from '@fundamental-ngx/core';
->>>>>>> feat/fiori-3-table
+import { CheckboxModule, ListModule, ObjectStatusModule, TableModule } from '@fundamental-ngx/core';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
 import { TableActivableExampleComponent } from './examples/table-activable-example.component';
@@ -33,11 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-<<<<<<< HEAD
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TableModule, CheckboxModule, ListModule],
-=======
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TableModule, CheckboxModule, ObjectStatusModule],
->>>>>>> feat/fiori-3-table
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TableModule, CheckboxModule, ObjectStatusModule, ListModule],
     exports: [RouterModule],
     declarations: [
         TableDocsComponent,
