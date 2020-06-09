@@ -7,7 +7,7 @@ import { PopoverComponent } from '@fundamental-ngx/core';
 })
 export class TableColumnSortingExampleComponent implements OnInit {
     tableRows;
-    filteredRows;
+    displayedRows;
     column1SortDir: string = 'none';
     dateSortDir: string = 'none';
     filterVal: string = '';
@@ -36,12 +36,16 @@ export class TableColumnSortingExampleComponent implements OnInit {
                 }
             });
         }
+        this.displayedRows = this.tableRows;
+        if (this.filterVal) {
+            this.filterChange(this.filterVal);
+        }
         this.open = false;
     }
 
     filterChange(searchTerm: string) {
         const searchLower = searchTerm.toLocaleLowerCase();
-        this.filteredRows = this.tableRows.filter((item) => {
+        this.displayedRows = this.tableRows.filter((item) => {
             if (item) {
                 return item.column1.toLocaleLowerCase().includes(searchLower);
             }
@@ -92,6 +96,6 @@ export class TableColumnSortingExampleComponent implements OnInit {
                 type: 'search'
             }
         ];
-        this.filteredRows = this.tableRows;
+        this.displayedRows = this.tableRows;
     }
 }
