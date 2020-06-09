@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { Input, Directive } from '@angular/core';
 import { BaseInput } from './base.input';
 import { isSelectItem } from '../../domain/data-model';
 import { isFunction, isJsObject } from '../../utils/lang';
@@ -13,6 +13,7 @@ import { SelectItem } from '../../domain/data-model';
  *  ...
  *
  */
+@Directive()
 export abstract class CollectionBaseInput extends BaseInput {
     /**
      * list of values, it can be of type SelectItem or String.
