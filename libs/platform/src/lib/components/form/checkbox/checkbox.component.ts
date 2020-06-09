@@ -18,7 +18,8 @@ export class PlatformCheckboxChange {
  * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Checkbox-Component-Technical-Design
  * documents.
  *
- *
+ * This implementation behaves like implementation in PrimeNg and Material checkbox implementation.
+ * Some part of code/idea has been taken from above mentioned and has been implemented to work with platform form.
  */
 @Component({
     selector: 'fdp-checkbox',

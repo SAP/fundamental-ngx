@@ -1,12 +1,12 @@
 <h3>Template Driven Form</h3>
 <p>Checkbox can be pre-selected if value of checkbox matches any value in ngModel directive.</p>
 <fdp-form-group [multiLayout]="true">
-    <fdp-form-field [id]="'sirius'" zone="zLeft" rank="1">
-        <fdp-checkbox [name]="'sirius'" [label]="'Sirius'" [checkboxValue]="'sirius'" [(ngModel)]="field1"></fdp-checkbox>
+    <fdp-form-field [id]="'sirius'" [label]="'Sirius'" zone="zLeft" rank="1">
+        <fdp-checkbox [name]="'sirius-cb'" [checkboxValue]="'sirius'" [(ngModel)]="field1"></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'vega'" zone="zRight" rank="1">
-        <fdp-checkbox [name]="'vega'" [label]="'Vega'" [checkboxValue]="'vega'" [(ngModel)]="field2"></fdp-checkbox>
+    <fdp-form-field [id]="'vega'" [label]="'Vega'" zone="zRight" rank="1">
+        <fdp-checkbox [name]="'vega-cb'" [checkboxValue]="'vega'" [(ngModel)]="field2"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
 <div style="padding-left: 2rem;">field1: {{ field1 }}</div>
@@ -16,17 +16,12 @@
 
 <p>Multiple checkboxes connected with same ngModel directive. Multiple checkbox can be selected.</p>
 <fdp-form-group [multiLayout]="true">
-    <fdp-form-field [id]="'fomalhaut'" zone="zLeft" rank="1">
-        <fdp-checkbox
-            [name]="'fomalhaut'"
-            [label]="'Fomalhaut'"
-            [checkboxValue]="'fomalhaut'"
-            [(ngModel)]="field3"
-        ></fdp-checkbox>
+    <fdp-form-field [id]="'fomalhaut'" [label]="'Fomalhaut'" zone="zLeft" rank="1">
+        <fdp-checkbox [name]="'skystars-cb'" [checkboxValue]="'fomalhaut'" [(ngModel)]="field3"></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'canopus'" zone="zRight" rank="1">
-        <fdp-checkbox [name]="'canopus'" [label]="'Canopus'" [checkboxValue]="'canopus'" [(ngModel)]="field3"></fdp-checkbox>
+    <fdp-form-field [id]="'canopus'" [label]="'Canopus'" zone="zRight" rank="1">
+        <fdp-checkbox [name]="'skystars-cb'" [checkboxValue]="'canopus'" [(ngModel)]="field3"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
 
@@ -35,11 +30,10 @@
 <br />
 
 <p>Multiple checkboxes connected with same ngModel directive. Checkbox with value in ngModel are pre-selected.</p>
-<fdp-form-group [multiLayout]="true">
-    <fdp-form-field [id]="'altair'" zone="zLeft" rank="1">
+<fdp-form-group>
+    <fdp-form-field [id]="'altair'" [label]="'Altair'" rank="1">
         <fdp-checkbox
-            [name]="'altair'"
-            [label]="'Altair'"
+            [name]="'stars-cb'"
             [checkboxValue]="'altair'"
             [(ngModel)]="field4"
             (checkedChange)="checkedChangeFunction($event)"
@@ -48,10 +42,9 @@
         ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'deneb'" zone="zRight" rank="1">
+    <fdp-form-field [id]="'deneb'" [label]="'Deneb'" rank="2">
         <fdp-checkbox
-            [name]="'deneb'"
-            [label]="'Deneb'"
+            [name]="'stars-cb'"
             [checkboxValue]="'deneb'"
             [(ngModel)]="field4"
             (checkedChange)="checkedChangeFunction($event)"
@@ -60,10 +53,9 @@
         ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'pollux'" zone="zLeft" rank="2">
+    <fdp-form-field [id]="'pollux'" [label]="'Pollux'" rank="3">
         <fdp-checkbox
-            [name]="'pollux'"
-            [label]="'Pollux'"
+            [name]="'stars-cb'"
             [checkboxValue]="'pollux'"
             [(ngModel)]="field4"
             (checkedChange)="checkedChangeFunction($event)"
@@ -80,20 +72,18 @@
 <h3>Reactive/Model Driven Form</h3>
 <p>Checkbox can be pre-selected if value of checkbox matches any value in form-control array.</p>
 <fdp-form-group #rmsfg [multiLayout]="true" [formGroup]="form1" [object]="form1Data">
-    <fdp-form-field #rfield1 [id]="'einstein'" zone="zLeft" rank="1">
+    <fdp-form-field #rfield1 [id]="'einstein'" [label]="'Einstein'" zone="zLeft" rank="1">
         <fdp-checkbox
-            [name]="'einstein'"
-            [label]="'Einstein'"
+            [name]="'einstein-cb'"
             [checkboxValue]="'einstein'"
             [contentDensity]="'compact'"
             [formControl]="rfield1.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #rfield2 [id]="'newton'" zone="zRight" rank="1">
+    <fdp-form-field #rfield2 [id]="'newton'" [label]="'Newton'" zone="zRight" rank="1">
         <fdp-checkbox
-            [name]="'newton'"
-            [label]="'Newton'"
+            [name]="'newton-cb'"
             [checkboxValue]="'newton'"
             [contentDensity]="'compact'"
             [formControl]="rfield2.formControl"
@@ -108,14 +98,14 @@
 <fdp-form-group [multiLayout]="true" [formGroup]="form2">
     <fdp-form-field #ffr1 [id]="'selected'" zone="zLeft" rank="1">
         <fdp-checkbox
-            [name]="'curie'"
+            [name]="'science-cb'"
             [label]="'Curie'"
             [checkboxValue]="'curie'"
             [contentDensity]="'compact'"
             [formControl]="ffr1.formControl"
         ></fdp-checkbox>
         <fdp-checkbox
-            [name]="'galileo'"
+            [name]="'science-cb'"
             [label]="'Galileo'"
             [checkboxValue]="'galileo'"
             [contentDensity]="'compact'"
@@ -129,9 +119,9 @@
 
 <p>Multiple checkboxes connected with same form-control. Checkbox with value in form-controls are pre-selected.</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form3" [object]="form3data">
-    <fdp-form-field #ffr2 [id]="'selected1'" zone="zLeft" rank="1">
+    <fdp-form-field #ffr2 [id]="'scientists'" zone="zLeft" rank="1">
         <fdp-checkbox
-            [name]="'faraday'"
+            [name]="'scientists-cb'"
             [label]="'Faraday'"
             [checkboxValue]="'faraday'"
             (checkedChange)="checkedChangeFunction($event)"
@@ -142,7 +132,7 @@
         ></fdp-checkbox>
 
         <fdp-checkbox
-            [name]="'edison'"
+            [name]="'scientists-cb'"
             [label]="'Edison'"
             [checkboxValue]="'edison'"
             (checkedChange)="checkedChangeFunction($event)"
@@ -153,7 +143,7 @@
         ></fdp-checkbox>
 
         <fdp-checkbox
-            [name]="'darwin'"
+            [name]="'scientists-cb'"
             [label]="'Darwin'"
             [checkboxValue]="'darwin'"
             (checkedChange)="checkedChangeFunction($event)"

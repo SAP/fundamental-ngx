@@ -1,10 +1,8 @@
 <h3>Binary Checkbox in Template Driven Form</h3>
-<fdp-form-group [multiLayout]="true">
-    <fdp-form-field [id]="'yellow'" zone="zLeft" rank="4">
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
+    <fdp-form-field [id]="'yellow'" [label]="'Yellow'" [noLabelLayout]="true" zone="zLeft" rank="4" [editable]="true">
         <fdp-checkbox
-            [id]="'yellow'"
-            [name]="'yellow'"
-            [label]="'Yellow'"
+            [name]="'yellow-cb'"
             [isBinary]="true"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
@@ -13,12 +11,12 @@
         ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'white'" zone="zLeft" rank="4">
-        <fdp-checkbox [name]="'white'" [label]="'White'" [isBinary]="true" [(ngModel)]="white"></fdp-checkbox>
+    <fdp-form-field [id]="'white'" zone="zLeft" rank="4" [label]="'White'">
+        <fdp-checkbox [name]="'white-cb'" [isBinary]="true" [(ngModel)]="white"></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'violet'" zone="zLeft" rank="4">
-        <fdp-checkbox [name]="'violet'" [label]="'Violet'" [isBinary]="true" [(ngModel)]="violet"></fdp-checkbox>
+    <fdp-form-field [id]="'violet'" [label]="'Violet'" zone="zLeft" rank="4">
+        <fdp-checkbox [name]="'violet-cb'" [isBinary]="true" [(ngModel)]="violet"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
 <div style="padding-left: 2rem;">
@@ -31,11 +29,9 @@
 
 <h3>Binary Checkbox in Reactive/Model Driven Form</h3>
 <fdp-form-group [multiLayout]="true" [formGroup]="customForm" [object]="data">
-    <fdp-form-field #red [id]="'red'" zone="zLeft" rank="4">
+    <fdp-form-field #red [id]="'red'" [label]="'Red'" zone="zLeft" rank="4">
         <fdp-checkbox
-            [id]="'red'"
-            [name]="'red'"
-            [label]="'Red'"
+            [name]="'red-cb'"
             [isBinary]="true"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"
@@ -45,20 +41,18 @@
         ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #blue [id]="'blue'" zone="zLeft" rank="4">
+    <fdp-form-field #blue [id]="'blue'" [label]="'Blue'" zone="zLeft" rank="4">
         <fdp-checkbox
-            [name]="'blue'"
-            [label]="'Blue'"
+            [name]="'blue-cb'"
             [isBinary]="true"
             [contentDensity]="'compact'"
             [formControl]="blue.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #green [id]="'green'" zone="zLeft" rank="4">
+    <fdp-form-field #green [id]="'green'" [label]="'Green'" zone="zLeft" rank="4">
         <fdp-checkbox
-            [name]="'green'"
-            [label]="'Green'"
+            [name]="'green-cb'"
             [isBinary]="true"
             [contentDensity]="'compact'"
             [formControl]="green.formControl"
@@ -70,11 +64,9 @@
 
 <h3>Disabled Checkbox</h3>
 <fdp-form-group [multiLayout]="true">
-    <fdp-form-field #red [id]="'red'" zone="zLeft" rank="1">
+    <fdp-form-field #red [id]="'red'" [label]="'Red'" zone="zLeft" rank="1">
         <fdp-checkbox
-            [id]="'red'"
-            [name]="'red'"
-            [label]="'Red'"
+            [name]="'red-cb'"
             [isBinary]="true"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"

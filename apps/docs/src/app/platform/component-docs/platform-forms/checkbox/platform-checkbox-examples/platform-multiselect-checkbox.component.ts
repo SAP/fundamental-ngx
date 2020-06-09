@@ -30,5 +30,5 @@ class Form1data {
 }
 
 class Form3data {
-    constructor(public selected1: string[]) {}
+    constructor(public scientists: string[]) {}
 }
