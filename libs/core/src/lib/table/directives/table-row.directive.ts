@@ -17,4 +17,14 @@ export class TableRowDirective {
     @HostBinding('class.fd-table__row--hoverable')
     @Input()
     hoverable: boolean = false;
+
+    /** Whether or not the table row is main row, it's concerned only on pop in mode */
+    @HostBinding('class.fd-table__row--main')
+    @Input()
+    main: boolean = false;
+
+    /** Whether or not the table row is secondary row, it's concerned only on pop in mode */
+    @HostBinding('class.fd-table__row--secondary')
+    @Input()
+    secondary: boolean = false;
 }

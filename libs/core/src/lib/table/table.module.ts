@@ -14,6 +14,7 @@ import { TableCellCheckboxDirective } from './directives/table-cell-checkbox.dir
 import { TableStatusIndicatorDirective } from './directives/table-status-indicator.directive';
 import { TablePopoverDirective } from './directives/table-popover.directive';
 import { TableInnerDirective } from './directives/table-inner.directive';
+import { TableTextDirective } from './directives/table-text.directive';
 import { TableIconDirective } from './directives/table-icon.directive';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { TableIconDirective } from './directives/table-icon.directive';
         TableStatusIndicatorDirective,
         TablePopoverDirective,
         TableInnerDirective,
+        TableTextDirective,
         TableIconDirective
     ],
     exports: [
@@ -48,6 +50,7 @@ import { TableIconDirective } from './directives/table-icon.directive';
         TableStatusIndicatorDirective,
         TablePopoverDirective,
         TableInnerDirective,
+        TableTextDirective,
         TableIconDirective
     ]
 })
