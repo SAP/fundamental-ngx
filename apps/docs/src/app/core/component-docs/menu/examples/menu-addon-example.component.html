@@ -1,7 +1,7 @@
 <div style="width: 50%; display: inline-block">
     <button fd-button [fdMenu]="true" [fdMenuTrigger]="menuIcons">Menu with icons</button>
 
-    <fd-menu #menuIcons="fdMenu">
+    <fd-menu #menuIcons>
         <li fd-menu-item>
             <a fd-menu-interactive href="#">
                 <fd-icon fd-menu-addon position="before" [glyph]="'cart'"></fd-icon>
@@ -29,7 +29,7 @@
 <div style="width: 50%; display: inline-block">
     <button fd-button [fdMenu]="true" [fdMenuTrigger]="menuShortcut">Menu with shortcuts</button>
 
-    <fd-menu #menuShortcut="fdMenu">
+    <fd-menu #menuShortcut>
         <li fd-menu-item>
             <a fd-menu-interactive href="#">
                 <span fd-menu-title>Save</span>

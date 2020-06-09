@@ -1,7 +1,7 @@
 <div style="display: inline-block; width: 50%;">
     <button fd-button [fdMenu]="true" [fdMenuTrigger]="menu">Menu</button>
 
-    <fd-menu #menu="fdMenu">
+    <fd-menu #menu>
         <li fd-menu-item>
             <a href="#" fd-menu-interactive>
                 <span fd-menu-title>Create New</span>
@@ -39,7 +39,7 @@
 <div style="display: inline-block; width: 50%;">
     <button fd-button [fdMenu]="true" [compact]="true" [fdMenuTrigger]="menuCompact">Compact Menu</button>
 
-    <fd-menu #menuCompact="fdMenu" [compact]="true">
+    <fd-menu #menuCompact [compact]="true">
         <li fd-menu-item>
             <a href="#" fd-menu-interactive>
                 <span fd-menu-title>Create New</span>

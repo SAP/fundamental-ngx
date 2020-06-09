@@ -144,7 +144,7 @@ describe('MenuItemComponent', () => {
             </li>
         </fd-menu>
 
-        <fd-submenu #submenu="fdSubmenu">
+        <fd-submenu #submenu>
             <li fd-menu-item #menuNestedItem>
                 <div fd-menu-interactive></div>
             </li>

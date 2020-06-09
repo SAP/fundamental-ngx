@@ -1,6 +1,6 @@
 <button fd-button [fdMenuTrigger]="menuRoot">Open Mobile Menu</button>
 
-<fd-menu #menuRoot="fdMenu" [mobile]="true" [mobileConfig]="{ title: 'Healthy Shop', hasCloseButton: true }">
+<fd-menu #menuRoot [mobile]="true" [mobileConfig]="{ title: 'Healthy Shop', hasCloseButton: true }">
     <li fd-menu-item [submenu]="fruits">
         <div fd-menu-interactive>
             <span fd-menu-title>Fruits</span>
@@ -23,7 +23,7 @@
     </li>
 </fd-menu>
 
-<fd-submenu #fruits="fdSubmenu">
+<fd-submenu #fruits>
     <li fd-menu-item>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Pineapple</span>
@@ -37,7 +37,7 @@
     </li>
 </fd-submenu>
 
-<fd-submenu #vegetables="fdSubmenu">
+<fd-submenu #vegetables>
     <li fd-menu-item>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Cucumber</span>
@@ -51,7 +51,7 @@
     </li>
 </fd-submenu>
 
-<fd-submenu #milkProducts="fdSubmenu">
+<fd-submenu #milkProducts>
     <li fd-menu-item [submenu]="cheeses">
         <div fd-menu-interactive>
             <span fd-menu-title>Cheese</span>
@@ -67,7 +67,7 @@
     </li>
 </fd-submenu>
 
-<fd-submenu #cheeses="fdSubmenu">
+<fd-submenu #cheeses>
     <li fd-menu-item>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Parmesan</span>
@@ -81,7 +81,7 @@
     </li>
 </fd-submenu>
 
-<fd-submenu #yogurts="fdSubmenu">
+<fd-submenu #yogurts>
     <li fd-menu-item>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Greek</span>

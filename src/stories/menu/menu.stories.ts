@@ -21,7 +21,7 @@ export const Menu = () => ({
     template: `
         <button [fdMenuTrigger]="menu">Menu</button>
 
-        <fd-menu #menu="fdMenu"
+        <fd-menu #menu
             [disabled]="disabled"
             [compact]="compact"
             [closeOnEscapeKey]="closeOnEscapeKey"
@@ -55,7 +55,7 @@ export const Menu = () => ({
             </li>
         </fd-menu>
 
-        <fd-submenu #fruits="fdSubmenu">
+        <fd-submenu #fruits>
             <li fd-menu-item>
                 <a href="#" fd-menu-interactive>
                     <fd-icon *ngIf="hasAddonBefore" fd-menu-addon glyph="decline" position="before"></fd-icon>
@@ -73,7 +73,7 @@ export const Menu = () => ({
             </li>
         </fd-submenu>
 
-        <fd-submenu #vegetables="fdSubmenu">
+        <fd-submenu #vegetables>
             <li fd-menu-item>
                 <a href="#" fd-menu-interactive>
                     <fd-icon *ngIf="hasAddonBefore" fd-menu-addon glyph="decline" position="before"></fd-icon>
@@ -91,7 +91,7 @@ export const Menu = () => ({
             </li>
         </fd-submenu>
 
-        <fd-submenu #milkProducts="fdSubmenu">
+        <fd-submenu #milkProducts>
             <li fd-menu-item [submenu]="cheeses">
                 <div fd-menu-interactive>
                     <fd-icon *ngIf="hasAddonBefore" fd-menu-addon glyph="decline" position="before"></fd-icon>
@@ -109,7 +109,7 @@ export const Menu = () => ({
             </li>
         </fd-submenu>
 
-        <fd-submenu #cheeses="fdSubmenu">
+        <fd-submenu #cheeses>
             <li fd-menu-item>
                 <a href="#" fd-menu-interactive>
                     <fd-icon *ngIf="hasAddonBefore" fd-menu-addon glyph="decline" position="before"></fd-icon>
@@ -127,7 +127,7 @@ export const Menu = () => ({
             </li>
         </fd-submenu>
 
-        <fd-submenu #yogurts="fdSubmenu">
+        <fd-submenu #yogurts>
             <li fd-menu-item>
                 <a href="#" fd-menu-interactive>
                     <fd-icon *ngIf="hasAddonBefore" fd-menu-addon glyph="decline" position="before"></fd-icon>

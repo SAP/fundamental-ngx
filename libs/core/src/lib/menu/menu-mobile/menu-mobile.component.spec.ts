@@ -23,7 +23,7 @@ import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
             </li>
         </fd-menu>
 
-        <fd-submenu #submenu="fdSubmenu">
+        <fd-submenu #submenu>
             <li fd-menu-item>
                 <div fd-menu-interactive></div>
             </li>

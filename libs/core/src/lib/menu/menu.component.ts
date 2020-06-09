@@ -44,7 +44,6 @@ let menuUniqueId: number = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [MenuService],
-    exportAs: 'fdMenu'
 })
 export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
@@ -110,7 +109,7 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
 
     /** Display menu without integrated popover */
     @Input()
-    mobileConfig: MobileModeConfig = { hasCloseButton: true };
+    mobileConfig: MobileModeConfig = { cancelButtonText: 'Cancel' };
 
     /** Aria-label for navigation */
     @Input()

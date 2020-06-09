@@ -22,7 +22,7 @@ import { MenuModule } from '../menu.module';
             </li>
         </fd-menu>
 
-        <fd-submenu #submenu="fdSubmenu">
+        <fd-submenu #submenu>
             <li fd-menu-item #nestedItem>
                 <div href="#" fd-menu-interactive></div>
             </li>
