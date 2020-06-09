@@ -61,6 +61,9 @@ module.exports = {
         return options.inverse(this);
     },
     parseSelector: function (str) {
+        if (typeof str !== 'string') {
+            return '';
+        }
         let selectorStr = str.match(/(selector: '(.*?)')/g) + '';
         selectorStr = selectorStr.replace('selector: ', '').replace(/['\[\]]/g, '');
         return selectorStr;
