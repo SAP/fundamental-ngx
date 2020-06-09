@@ -64,13 +64,13 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: mobileExample,
-            fileName: 'action-bar-mobile-button-example'
+            fileName: 'action-bar-mobile-example'
         },
         {
             language: 'typescript',
             code: mobileExampleTs,
-            fileName: 'action-bar-mobile-button-example',
-            component: 'ActionBarMobileButtonExampleComponent'
+            fileName: 'action-bar-mobile-example',
+            component: 'ActionBarMobileExampleComponent'
         }
     ];
 }

@@ -3,7 +3,9 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as segmentedDefaultExample from '!raw-loader!./examples/segmented-button-default-example.component.html';
+import * as segmentedDefaultExampleTs from '!raw-loader!./examples/segmented-button-default-example.component.ts';
 import * as segmentedToggleExample from '!raw-loader!./examples/segmented-button-toggle-example.component.html';
+import * as segmentedToggleExampleTs from '!raw-loader!./examples/segmented-button-toggle-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -96,6 +98,12 @@ export class SegmentedButtonDocsComponent implements OnInit {
             language: 'html',
             code: segmentedToggleExample,
             fileName: 'segmented-button-toggle-example'
+        },
+        {
+            component: 'SegmentedButtonToggleExampleComponent',
+            language: 'typescript',
+            code: segmentedToggleExampleTs,
+            fileName: 'segmented-button-toggle-example'
         }
     ];
 
@@ -103,6 +111,12 @@ export class SegmentedButtonDocsComponent implements OnInit {
         {
             language: 'html',
             code: segmentedDefaultExample,
+            fileName: 'segmented-button-default-example'
+        },
+        {
+            component: 'SegmentedButtonDefaultExampleComponent',
+            language: 'typescript',
+            code: segmentedDefaultExampleTs,
             fileName: 'segmented-button-default-example'
         }
     ];
