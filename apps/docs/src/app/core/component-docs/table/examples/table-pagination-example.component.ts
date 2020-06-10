@@ -5,25 +5,25 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './table-pagination-example.component.html'
 })
 export class TablePaginationExampleComponent implements OnInit {
-    tableRows;
-    displayedRows;
-    totalItems = 25;
-    itemsPerPage = 5;
-    currentPage = 3;
-    itemsPerPageOptions = [3, 5, 10];
+    tableRows: any[];
+    displayedRows: any[];
+    totalItems: number = 25;
+    itemsPerPage: number = 5;
+    currentPage: number = 3;
+    itemsPerPageOptions: number[] = [3, 5, 10];
 
-    newPageClicked(event) {
-        this.currentPage = event;
-        const firstDisplayedRow = (event - 1) * this.itemsPerPage;
+    newPageClicked(pageNumber: number): void {
+        this.currentPage = pageNumber;
+        const firstDisplayedRow = (pageNumber - 1) * this.itemsPerPage;
         this.displayedRows = this.tableRows.slice(firstDisplayedRow, firstDisplayedRow + this.itemsPerPage);
     }
 
-    itemsPerPageChange(value) {
+    itemsPerPageChange(value: number): void {
         this.itemsPerPage = value;
         this.newPageClicked(1);
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.tableRows = [
             {
                 column1: 'Row 1',
