@@ -278,31 +278,21 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             }
         } else if (KeyUtil.isKey(event, 'ArrowDown')) {
             if (event.altKey) {
+                console.log('1');
                 this.isOpenChangeHandle(true);
             }
-            event.preventDefault();
             if (this.open && this.listItems && this.listItems.first) {
                 this._focusListItem(this.listItems.first);
             } else if (!this.open) {
-                let foundMatch = false;
-                this.dropdownValues.forEach((value, i) => {
-                    if (this.inputText === value && i + 1 < this.dropdownValues.length && !foundMatch) {
-                        foundMatch = true;
-                        this.onMenuClickHandler(i + 1);
-                    }
-                });
+                this._chooseOtherItem(1);
             }
-        } else if (KeyUtil.isKey(event, 'ArrowUp')) {
             event.preventDefault();
-            let foundMatch = false;
-            this.dropdownValues.forEach((value, i) => {
-                if (this.inputText === value && i - 1 >= 0 && !foundMatch) {
-                    foundMatch = true;
-                    this.onMenuClickHandler(i - 1);
-                }
-            });
+        } else if (KeyUtil.isKey(event, 'ArrowUp')) {
+            this._chooseOtherItem(-1);
+            event.preventDefault();
         } else if (KeyUtil.isKey(event, 'Escape')) {
             this.selectItemOnBlur();
+            event.preventDefault();
         }
     }
 
@@ -350,14 +340,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onMenuClickHandler(index: number): void {
-        const selectedItem = this.displayedValues[index];
+        const selectedItem = this.dropdownValues[index];
         if (selectedItem) {
             this._handleClickActions(selectedItem);
-            this.dropdownValues.forEach((value, i) => {
-                if (selectedItem === value) {
-                    this.itemClicked.emit({ item: selectedItem, index: i });
-                }
-            });
+            this.itemClicked.emit({ item: selectedItem, index: index });
         }
     }
 
@@ -369,11 +355,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** Set the input text of the input. */
     set inputText(value) {
         this.inputTextValue = value;
-        if (this.communicateByObject) {
-            this.onChange(this._getOptionObjectByDisplayedValue(value));
-        } else {
-            this.onChange(value);
-        }
+        this.onChange(this._getActiveValue());
         this.onTouched();
     }
 
@@ -465,6 +447,18 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** Method that reset filtering for displayed values. It overrides displayed values by all possible dropdown values */
     public resetDisplayedValues(): void {
         this.displayedValues = this.dropdownValues;
+    }
+
+    /** */
+    private _chooseOtherItem(offset: number): void {
+        const activeValue: any = this._getActiveValue();
+        const index: number = this.dropdownValues.findIndex(value => value === activeValue);
+        this.onMenuClickHandler(index + offset);
+    }
+
+    /**  */
+    private _getActiveValue(): any {
+        return this._getOptionObjectByDisplayedValue(this.inputTextValue);
     }
 
     /** @hidden */

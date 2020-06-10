@@ -9,14 +9,14 @@
 >
     <fd-popover-control>
         <fd-input-group
-            [glyph]="glyph"
             [compact]="compact"
             [button]="true"
+            [glyph]="glyph"
             [state]="state"
-            (addOnButtonClicked)="onPrimaryButtonClick()"
             [buttonFocusable]="buttonFocusable"
             [disabled]="disabled || readOnly"
             [isControl]="true"
+            (addOnButtonClicked)="onPrimaryButtonClick()"
             [isExpanded]="open && displayedValues.length"
             [attr.aria-readonly]="readOnly"
         >
