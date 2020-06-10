@@ -24,7 +24,7 @@ import { ListItemDirective } from '../list/list-item.directive';
 import { ListMessageDirective } from '../list/list-message.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
@@ -206,6 +206,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @ContentChildren(ListMessageDirective)
     listMessages: QueryList<ListMessageDirective>;
 
+    /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     readonly nonOpeningKeys: string[] = [
         'Escape',
         'Enter',
@@ -214,9 +215,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         'ArrowDown',
         'ArrowUp',
         'Ctrl',
-        'Tab'
+        'Tab',
+        'Shift'
     ];
 
+    /** Keys, that will close popover's body, when dispatched on search input */
     readonly closingKeys: string[] = [
         'Escape',
     ];
@@ -257,8 +260,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         private _elementRef: ElementRef,
         private _menuKeyboardService: MenuKeyboardService,
         private _cdRef: ChangeDetectorRef
-    ) {
-    }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -314,6 +316,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else if (this.openOnKeyboardEvent &&
             !event.ctrlKey &&
             !KeyUtil.isKey(event, this.nonOpeningKeys)) {
+            console.log(event);
             this.isOpenChangeHandle(true);
         }
     }
@@ -417,7 +420,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
     }
 
-    /** */
+    /** Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
         const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue);
         const index: number = this.dropdownValues.findIndex(value => value === activeValue);

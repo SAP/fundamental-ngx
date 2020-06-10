@@ -9,12 +9,11 @@ import {
     TemplateRef,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '../form/form-control/form-states';
-import { ButtonComponent, ButtonType } from '../button/button.component';
+import { ButtonType } from '../button/button.component';
 
 export type InputGroupPlacement = 'before' | 'after';
 

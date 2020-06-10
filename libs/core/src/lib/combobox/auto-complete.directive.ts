@@ -61,6 +61,7 @@ export class AutoCompleteDirective {
     /** @hidden */
     @HostListener('keyup', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
+        console.log(event);
         if (this.enable) {
             if (KeyUtil.isKey(event, this.stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;

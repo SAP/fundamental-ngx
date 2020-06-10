@@ -59,6 +59,7 @@ describe('ComboboxComponent', () => {
     });
 
     it('should fire selected event onListKeydownHandler, arrow down', () => {
+        component.listItems[0].focus();
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
@@ -67,17 +68,18 @@ describe('ComboboxComponent', () => {
             preventDefault: () => {}
         };
         spyOn(component, 'onChange');
-        component.onListKeydownHandler(event, 0);
+        component.onListKeydownHandler(event);
         expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[0].displayedValue);
         spyOn(event, 'preventDefault');
         spyOn(component.listItems.toArray()[1], 'focus');
         event.key = 'ArrowDown';
-        component.onListKeydownHandler(event, 0);
+        component.onListKeydownHandler(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.listItems.toArray()[1].focus).toHaveBeenCalled();
     });
 
     it('should handle onListKeydownHandler, arrow up', () => {
+        component.listItems[1].focus();
         const event: any = {
             key: 'ArrowUp',
             preventDefault: () => {}
@@ -85,12 +87,13 @@ describe('ComboboxComponent', () => {
         spyOn(component.listItems.first, 'focus');
         spyOn(event, 'preventDefault');
         event.key = 'ArrowUp';
-        component.onListKeydownHandler(event, 1);
+        component.onListKeydownHandler(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.listItems.first.focus).toHaveBeenCalled();
     });
 
     it('should handle onListKeydownHandler, arrow up on the first item', () => {
+        component.listItems.first.focus();
         const event: any = {
             key: 'ArrowUp',
             preventDefault: () => {}
@@ -98,7 +101,7 @@ describe('ComboboxComponent', () => {
         spyOn(event, 'preventDefault');
         spyOn(component.searchInputElement.nativeElement, 'focus');
         event.key = 'ArrowUp';
-        component.onListKeydownHandler(event, 0);
+        component.onListKeydownHandler(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
     });
@@ -124,7 +127,7 @@ describe('ComboboxComponent', () => {
         };
         (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
-        component.resetDisplayedValues();
+        (<any>component)._resetDisplayedValues();
         expect(component.displayedValues.length).toBe(2);
     });
 
@@ -184,7 +187,7 @@ describe('ComboboxComponent', () => {
         spyOn(component, 'searchFn');
         spyOn(component, 'isOpenChangeHandle');
         component.open = false;
-        component.onPrimaryButtonClick();
+        component.onPrimaryButtonClick(new MouseEvent('click'));
         expect(component.searchFn).toHaveBeenCalled();
         expect(component.isOpenChangeHandle).toHaveBeenCalledWith(true);
     });
@@ -199,42 +202,5 @@ describe('ComboboxComponent', () => {
         expect(component.openChange.emit).toHaveBeenCalledWith(true);
         expect(component.onTouched).toHaveBeenCalled();
         expect(component.focusTrap.activate).toHaveBeenCalled();
-    });
-
-    it('should handle key up', () => {
-        const event: any = {
-            key: 't',
-            preventDefault: () => {}
-        };
-        component.openOnKeyboardEvent = true;
-        component.inputText = 'tex';
-        spyOnProperty(component.searchInputElement.nativeElement, 'value').and.returnValue('tex');
-        spyOn(component, 'isOpenChangeHandle');
-        component.open = true;
-        component.displayedValues = ['text'];
-        spyOn(component.searchInputElement.nativeElement, 'setSelectionRange');
-
-        component.onInputKeyupHandler(event);
-
-        expect(component.isOpenChangeHandle).toHaveBeenCalledWith(true);
-        expect(component.searchInputElement.nativeElement.setSelectionRange).toHaveBeenCalledWith(3, 4);
-    });
-
-    it('should handle key up enter', () => {
-        const event: any = {
-            key: 'Enter',
-            preventDefault: () => {}
-        };
-        component.openOnKeyboardEvent = false;
-        component.open = true;
-        component.searchInputElement.nativeElement.value = 'text';
-        component.displayedValues = ['text'];
-        spyOn(component.searchInputElement.nativeElement, 'setSelectionRange');
-        spyOn(component, 'onMenuClickHandler');
-
-        component.onInputKeyupHandler(event);
-
-        expect(component.searchInputElement.nativeElement.setSelectionRange).toHaveBeenCalledWith(4, 4);
-        expect(component.onMenuClickHandler).toHaveBeenCalledWith(0);
     });
 });
