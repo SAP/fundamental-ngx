@@ -1,5 +1,31 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core';
+import { Component, OnInit } from '@angular/core';
+
+interface ExampleRow {
+    column1: any,
+    column2?: any,
+    column3?: any,
+    date?: any,
+    type?: any
+}
+
+type columnSortType = (a: ExampleRow, b: ExampleRow) => boolean;
+const sort = (a, b, firstComparer: columnSortType, secondComparer: columnSortType) => {
+    if (firstComparer(a.column1, b.column1)) {
+        return -1;
+    } else if (secondComparer(a.column1, b.column1)) {
+        return 1;
+    } else {
+        return 0;
+    }
+};
+
+const asc: columnSortType = (a, b) => a < b;
+const desc: columnSortType = (a, b) => a > b;
+
+const sortMethod = {
+    asc: (a, b) => sort(a, b, asc, desc),
+    desc: (a, b) => sort(a, b, desc, asc)
+};
 
 @Component({
     selector: 'fd-table-column-sorting-example',
@@ -13,29 +39,11 @@ export class TableColumnSortingExampleComponent implements OnInit {
     open: boolean = false;
 
     sortColumn1(dir: string) {
-        if (dir === 'asc') {
-            this.column1SortDir = 'asc';
-            this.tableRows.sort((val1, val2) => {
-                if (val1.column1 < val2.column1) {
-                    return -1;
-                } else if (val1.column1 > val2.column1) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            });
-        } else if (dir === 'desc') {
-            this.column1SortDir = 'desc';
-            this.tableRows.sort((val1, val2) => {
-                if (val1.column1 > val2.column1) {
-                    return -1;
-                } else if (val1.column1 < val2.column1) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            });
+        if (dir) {
+            this.column1SortDir = dir;
+            this.tableRows.sort(sortMethod[dir]);
         }
+
         this.displayedRows = this.tableRows;
         if (this.filterVal) {
             this.filterChange(this.filterVal);
