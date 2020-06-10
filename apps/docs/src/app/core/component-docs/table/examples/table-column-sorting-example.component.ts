@@ -32,13 +32,13 @@ const sortMethod = {
     templateUrl: './table-column-sorting-example.component.html'
 })
 export class TableColumnSortingExampleComponent implements OnInit {
-    tableRows;
-    displayedRows;
+    tableRows: ExampleRow[];
+    displayedRows: ExampleRow[];
     column1SortDir: string = 'asc';
     filterVal: string = '';
     open: boolean = false;
 
-    sortColumn1(dir: string) {
+    sortColumn1(dir: string): void {
         if (dir) {
             this.column1SortDir = dir;
             this.tableRows.sort(sortMethod[dir]);
@@ -51,7 +51,7 @@ export class TableColumnSortingExampleComponent implements OnInit {
         this.open = false;
     }
 
-    filterChange(searchTerm: string) {
+    filterChange(searchTerm: string): void {
         const searchLower = searchTerm.toLocaleLowerCase();
         this.displayedRows = this.tableRows.filter((item) => {
             if (item) {
@@ -60,13 +60,13 @@ export class TableColumnSortingExampleComponent implements OnInit {
         });
     }
 
-    inputKeyup(event: KeyboardEvent) {
+    inputKeyup(event: KeyboardEvent): void {
         if (event.key === 'Enter' || event.key === 'Esc') {
             this.open = false;
         }
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.tableRows = [
             {
                 column1: 'Apple',
