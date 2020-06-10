@@ -8,7 +8,6 @@ Standard
 </fd-combobox>
 
 <span>Search Term: {{ searchTermOne }}</span>
-
 <br/><br/>
 
 Disable Highlighting
@@ -22,12 +21,24 @@ Disable Highlighting
 </fd-combobox>
 
 <span>Search Term: {{ searchTermTwo }}</span>
+<br/><br/>
 
+Disable Auto Complete
+<fd-combobox
+    [(ngModel)]="searchTermThree"
+    [dropdownValues]="dropdownValues"
+    [autoComplete]="false"
+    [placeholder]="'Type some text...'"
+    [maxHeight]="'250px'"
+>
+</fd-combobox>
+
+<span>Search Term: {{ searchTermThree }}</span>
 <br/><br/>
 
 Compact
 <fd-combobox
-    [(ngModel)]="searchTermThree"
+    [(ngModel)]="searchTermFour"
     [dropdownValues]="dropdownValues"
     [compact]="true"
     [placeholder]="'Type some text...'"
@@ -35,13 +46,12 @@ Compact
 >
 </fd-combobox>
 
-<span>Search Term: {{ searchTermThree }}</span>
-
+<span>Search Term: {{ searchTermFour }}</span>
 <br/><br/>
 
 Readonly
 <fd-combobox
-    [(ngModel)]="searchTermFour"
+    [(ngModel)]="searchTermFive"
     [dropdownValues]="dropdownValues"
     [placeholder]="'Type some text...'"
     [maxHeight]="'250px'"
@@ -49,6 +59,5 @@ Readonly
 >
 </fd-combobox>
 
-<span>Search Term: {{ searchTermFour }}</span>
-
+<span>Search Term: {{ searchTermFive }}</span>
 <br/><br/>

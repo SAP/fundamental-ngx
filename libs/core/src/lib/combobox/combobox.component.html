@@ -16,17 +16,22 @@
             [buttonFocusable]="buttonFocusable"
             [disabled]="disabled || readOnly"
             [isControl]="true"
-            (addOnButtonClicked)="onPrimaryButtonClick()"
+            (addOnButtonClicked)="onPrimaryButtonClick($event)"
             [isExpanded]="open && displayedValues.length"
             [attr.aria-readonly]="readOnly"
         >
             <input
+                fd-auto-complete
+                [enable]="autoComplete"
+                [displayFn]="displayFn"
+                [options]="dropdownValues"
+                [inputText]="inputText"
+                (onComplete)="handleAutoComplete($event)"
                 #searchInputElement
                 type="text"
                 fd-input-group-input
                 [compact]="compact"
                 (keydown)="onInputKeydownHandler($event)"
-                (keyup)="onInputKeyupHandler($event)"
                 [disabled]="disabled"
                 [(ngModel)]="inputText"
                 (ngModelChange)="handleSearchTermChange()"
@@ -55,13 +60,13 @@
                         {{ group.key }}
                     </li>
                     <li
-                        *ngFor="let term of group.value; let termIndex = index"
-                        (click)="onMenuClickHandler(groupIndex * group.value.length + termIndex)"
-                        (keydown)="onListKeydownHandler($event, groupIndex * group.value.length + termIndex)"
+                        *ngFor="let term of group.value"
+                        (click)="onMenuClickHandler(term, groupIndex)"
+                        (keydown)="onListKeydownHandler($event)"
                         fd-list-item
                         tabindex="0"
                         class="fd-combobox-list-item"
-                        [selected]="(selectedTermSubject$ | async) === (term | displayFnPipe: displayFn)"
+                        [selected]="inputText === (term | displayFnPipe: displayFn)"
                     >
                         <ng-container
                             [ngTemplateOutlet]="itemSource"
@@ -72,13 +77,13 @@
             </ng-container>
             <ng-container *ngIf="!groupFn">
                 <li
-                    *ngFor="let term of displayedValues; let index = index"
-                    (click)="onMenuClickHandler(index)"
-                    (keydown)="onListKeydownHandler($event, index)"
+                    *ngFor="let term of displayedValues"
+                    (click)="onMenuClickHandler(term)"
+                    (keydown)="onListKeydownHandler($event)"
                     fd-list-item
                     tabindex="0"
                     class="fd-combobox-list-item"
-                    [selected]="(selectedTermSubject$ | async) === (term | displayFnPipe: displayFn)"
+                    [selected]="inputText === (term | displayFnPipe: displayFn)"
                 >
                     <ng-container
                         [ngTemplateOutlet]="itemSource"
