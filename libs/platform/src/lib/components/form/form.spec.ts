@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { FdpFormGroupModule } from './form-group/fdp-form.module';
-import { FdpInputModule } from './input/fdp-input.module';
+import { PlatformInputModule } from './input/fdp-input.module';
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
 import { FormGroupComponent } from '@fundamental-ngx/core';
@@ -88,7 +88,7 @@ describe('Simple Form', () => {
             imports: [
                 ReactiveFormsModule,
                 FdpFormGroupModule,
-                FdpInputModule,
+                PlatformInputModule,
             ],
             declarations: [SimpleFormTestComponent],
         }).compileComponents();
@@ -240,7 +240,7 @@ describe('Nested Form Groups', () => {
             imports: [
                 ReactiveFormsModule,
                 FdpFormGroupModule,
-                FdpInputModule,
+                PlatformInputModule,
             ],
             declarations: [NestedFormGroupsTestComponent],
         }).compileComponents();

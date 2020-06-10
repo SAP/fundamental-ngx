@@ -12,7 +12,10 @@
     [attr.placeholder]="placeholder"
     [disabled]="disabled"
     [compact]="contentDensity == 'compact'"
-    [state]="status === 'error' ? 'invalid' : ''"
+    [state]="status"
+    [readOnly]="readonly"
     (blur)="_onFocusChanged(false)"
     (focus)="_onFocusChanged(true)"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledBy"
 />

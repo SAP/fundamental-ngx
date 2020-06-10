@@ -1,0 +1,35 @@
+<div>
+    <fd-popover class="fd-popover" [isOpen]="open">
+        <fd-popover-control>
+            <fdp-input
+                [type]="'text'"
+                id="form-input-7"
+                name="autoCompletTextInput"
+                [placeholder]="'Enter the sport name'"
+                [(ngModel)]="inputText"
+                (input)="onSearchChange()"
+                [ariaLabel]="'Input with Auto complete'"
+            >
+            </fdp-input>
+        </fd-popover-control>
+        <fd-popover-body *ngIf="options && options.length">
+            <ng-container [ngTemplateOutlet]="menuTemplate"> </ng-container>
+        </fd-popover-body>
+    </fd-popover>
+</div>
+<ng-template #menuTemplate>
+    <div *ngIf="!itemTemplate" class="fd-popover__body fd-popover__body--no-arrow">
+        <nav class="fd-menu">
+            <ul fd-menu-list class="fd-menu__list">
+                <li
+                    fd-menu-list-item
+                    class="fd-menu__item"
+                    *ngFor="let option of options"
+                    (click)="onItemClick(option)"
+                >
+                    {{ option }}
+                </li>
+            </ul>
+        </nav>
+    </div>
+</ng-template>

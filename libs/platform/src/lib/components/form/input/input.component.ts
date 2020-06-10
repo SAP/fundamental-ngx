@@ -30,9 +30,9 @@ import { FormFieldControl } from '../form-control';
 import { NgControl, NgForm } from '@angular/forms';
 import { BaseInput } from '../base.input';
 
-const VALID_INPUT_TYPES = ['text', 'number', 'email'];
+const VALID_INPUT_TYPES = ['text', 'number', 'email', 'password'];
 
-export type InputType = 'text' | 'number' | 'email';
+export type InputType = 'text' | 'number' | 'email' | 'password';
 
 /**
  * Input field implementation to be compliant with our FormGroup/FormField design and also to
@@ -49,6 +49,13 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     @Input()
     type: InputType = 'text';
 
+    state: Status = 'default';
+
+    /** @hidden */
+    @ViewChild('inputElement')
+    inputElement: ElementRef;
+
+    /** return the value in the text box */
     @Input()
     get value(): any {
         return super.getValue();
@@ -56,6 +63,11 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
 
     set value(value: any) {
         super.setValue(value);
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this.inputElement;
     }
 
     constructor(
@@ -70,9 +82,5 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         if (!this.type || VALID_INPUT_TYPES.indexOf(this.type) === -1) {
             throw new Error(` Input type ${this.type} is not supported`);
         }
-    }
-
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
     }
 }

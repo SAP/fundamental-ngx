@@ -1,0 +1,70 @@
+<form #myForm="ngForm">
+    <fdp-form-group [formGroup]="formTypesGroupRegister">
+        <fdp-form-field
+            #ffl1
+            label="Default Input"
+            [id]="'input1'"
+            name="reactiveFormInput"
+            zone="“zLeft”"
+            rank="1"
+            [placeholder]="'Field placeholder text'"
+        >
+            <fdp-input [type]="'text'"> </fdp-input>
+        </fdp-form-field>
+        <fdp-form-field
+            #ffl1
+            label="Text Input"
+            [id]="'input2'"
+            name="reactiveFormInput"
+            zone="“zLeft”"
+            rank="1"
+            [placeholder]="'Field placeholder text'"
+        >
+            <fdp-input [type]="'text'"> </fdp-input>
+        </fdp-form-field>
+        <fdp-form-field
+            #ffl1
+            label="Number Text Box"
+            [id]="'input3'"
+            name="reactiveFormInput"
+            zone="“zLeft”"
+            rank="1"
+            [placeholder]="'Field placeholder text'"
+        >
+            <fdp-input [type]="'number'"></fdp-input>
+        </fdp-form-field>
+        <fdp-form-field
+            #ffl1
+            label="Compact Text Box"
+            [id]="'input4'"
+            name="compactTextBox"
+            zone="“zLeft”"
+            rank="1"
+            [placeholder]="'Field placeholder text'"
+        >
+            <fdp-input [type]="'text'" [contentDensity]="'compact'"></fdp-input>
+        </fdp-form-field>
+        <fdp-form-field
+            #ffl1
+            label="ReadOnly Text Box"
+            [id]="'input5'"
+            name="readOnlyInput"
+            zone="“zLeft”"
+            rank="1"
+            [placeholder]="'Field placeholder text'"
+        >
+            <fdp-input [type]="'text'" [readonly]="true"></fdp-input>
+        </fdp-form-field>
+        <fdp-form-field
+            #ffl1
+            label="Disabled Text Box"
+            [id]="'input6'"
+            name="disabledInput"
+            zone="“zLeft”"
+            rank="1"
+            [placeholder]="'Field placeholder text'"
+        >
+            <fdp-input [type]="'text'" [disabled]="true"></fdp-input>
+        </fdp-form-field>
+    </fdp-form-group>
+</form>

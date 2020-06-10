@@ -10,6 +10,7 @@ export const API_FILES = {
     checkbox: ['CheckboxComponent'],
     checkboxGroup: ['CheckboxGroupComponent'],
     infoLabel: ['InfoLabelComponent'],
+    input: ['InputComponent'],
     link: ['LinkComponent'],
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
     menuButton: ['MenuButtonComponent'],
