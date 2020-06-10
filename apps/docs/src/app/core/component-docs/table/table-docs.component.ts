@@ -14,6 +14,8 @@ import * as tableCheckHtml from '!raw-loader!./examples/table-checkboxes-example
 import * as tableCheckTs from '!raw-loader!./examples/table-checkboxes-example.component.ts';
 import * as tableSemanticHtml from '!raw-loader!./examples/table-semantic-example.component.html';
 import * as tableSemanticTs from '!raw-loader!./examples/table-semantic-example.component.ts';
+import * as tablePaginationHtml from '!raw-loader!./examples/table-pagination-example.component.html';
+import * as tablePaginationTs from '!raw-loader!./examples/table-pagination-example.component.ts';
 import * as tableFooterHtml from '!raw-loader!./examples/table-footer-example.component.html';
 import * as tableFooterTs from '!raw-loader!./examples/table-footer-example.component.ts';
 import * as tableCdkHtml from '!raw-loader!./examples/table-cdk-example.component.html';
@@ -159,6 +161,20 @@ export class TableDocsComponent {
             component: 'TableSemanticExampleComponent',
             code: tableSemanticTs,
             fileName: 'table-semantic-example'
+        }
+    ];
+
+    tablePagination: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tablePaginationHtml,
+            fileName: 'table-pagination-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TablePaginationExampleComponent',
+            code: tablePaginationTs,
+            fileName: 'table-pagination-example'
         }
     ];
 
