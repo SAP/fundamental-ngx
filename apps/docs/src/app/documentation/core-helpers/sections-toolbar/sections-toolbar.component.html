@@ -27,12 +27,10 @@
                                 <li fd-nested-list-item *ngIf="item.url === 'home' || (item | docsSearch: search)">
                                     <a
                                         fd-nested-list-link
-                                        class="nav-item"
                                         [routerLink]="'/' + item.url"
                                         (keypress)="onKeypressHandler($event)"
                                         tabindex="0"
                                         role="button"
-                                        routerLinkActive="nav-item--active"
                                     >
                                         <span fd-nested-list-title>{{ item.name }}</span>
                                     </a>
