@@ -64,9 +64,9 @@
 
 <h3>Disabled Checkbox</h3>
 <fdp-form-group [multiLayout]="true">
-    <fdp-form-field #red [id]="'red'" [label]="'Red'" zone="zLeft" rank="1">
+    <fdp-form-field #disabled [id]="'disabled'" [label]="'Red'" zone="zLeft" rank="1">
         <fdp-checkbox
-            [name]="'red-cb'"
+            [name]="'disabled-cb'"
             [isBinary]="true"
             (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)"

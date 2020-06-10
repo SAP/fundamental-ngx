@@ -18,7 +18,7 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
                     [label]="'checkbox0'"
                     [contentDensity]="'compact'"
                     [tristate]="true"
-                    [checkboxValue]="'Yes'"
+                    [value]="'Yes'"
                     formControlName="example1"
                 ></fdp-checkbox>
             </fdp-form-field>
@@ -27,7 +27,7 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
                 <fdp-checkbox
                     [name]="'checkbox-1'"
                     [label]="'Checkbox1'"
-                    [checkboxValue]="'Checkbox1'"
+                    [value]="'Checkbox1'"
                     [contentDensity]="'compact'"
                     formControlName="example2"
                 ></fdp-checkbox>
@@ -37,7 +37,7 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
                 <fdp-checkbox
                     [name]="'checkbox-2'"
                     [label]="'Checkbox2'"
-                    [checkboxValue]="'Checkbox2'"
+                    [value]="'Checkbox2'"
                     [contentDensity]="'compact'"
                     formControlName="example2"
                 ></fdp-checkbox>
@@ -47,7 +47,7 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
                 <fdp-checkbox
                     [name]="'checkbox-3'"
                     [label]="'Checkbox3'"
-                    [checkboxValue]="'Checkbox3'"
+                    [value]="'Checkbox3'"
                     [contentDensity]="'compact'"
                     formControlName="example2"
                 ></fdp-checkbox>
@@ -57,7 +57,7 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
                 <fdp-checkbox
                     [name]="'checkbox-4'"
                     [label]="'Checkbox4'"
-                    [checkboxValue]="'Checkbox4'"
+                    [value]="'Checkbox4'"
                     formControlName="disabledcheckbox"
                 ></fdp-checkbox>
             </fdp-form-field>
@@ -332,7 +332,7 @@ describe('Checkbox test Component', () => {
                     [name]="'checkbox-0'"
                     [label]="'checkbox0'"
                     [contentDensity]="'compact'"
-                    [checkboxValue]="'checkbox0'"
+                    [value]="'checkbox0'"
                     [(ngModel)]="example1"
                 ></fdp-checkbox>
             </fdp-form-field>
@@ -341,7 +341,7 @@ describe('Checkbox test Component', () => {
                 <fdp-checkbox
                     [name]="'checkbox-1'"
                     [label]="'Checkbox1'"
-                    [checkboxValue]="'Checkbox1'"
+                    [value]="'Checkbox1'"
                     [(ngModel)]="example2"
                 ></fdp-checkbox>
             </fdp-form-field>
@@ -350,7 +350,7 @@ describe('Checkbox test Component', () => {
                 <fdp-checkbox
                     [name]="'checkbox-2'"
                     [label]="'Checkbox2'"
-                    [checkboxValue]="'Checkbox2'"
+                    [value]="'Checkbox2'"
                     [(ngModel)]="example2"
                 ></fdp-checkbox>
             </fdp-form-field>
@@ -359,7 +359,7 @@ describe('Checkbox test Component', () => {
                 <fdp-checkbox
                     [name]="'checkbox-3'"
                     [label]="'Checkbox3'"
-                    [checkboxValue]="'Checkbox3'"
+                    [value]="'Checkbox3'"
                     [(ngModel)]="example2"
                 ></fdp-checkbox>
             </fdp-form-field>
@@ -369,7 +369,7 @@ describe('Checkbox test Component', () => {
                     [name]="'checkbox-4'"
                     [label]="'checkbox4'"
                     [tristate]="true"
-                    [checkboxValue]="'Yes'"
+                    [value]="'Yes'"
                     [(ngModel)]="example3"
                 ></fdp-checkbox>
             </fdp-form-field>

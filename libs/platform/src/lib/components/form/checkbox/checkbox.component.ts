@@ -20,6 +20,7 @@ export class PlatformCheckboxChange {
  *
  * This implementation behaves like implementation in PrimeNg and Material checkbox implementation.
  * Some part of code/idea has been taken from above mentioned and has been implemented to work with platform form.
+ * primeng: https://primefaces.org/primeng/showcase/#/checkbox
  */
 @Component({
     selector: 'fdp-checkbox',
@@ -54,7 +55,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     }
 
     /** value for checkbox when selected */
-    @Input()
+    @Input('value')
     get checkboxValue(): any {
         return this._checkboxValue;
     }
