@@ -1,4 +1,4 @@
-<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed }">
+<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed | async }">
     <div class="fd-docs-search">
         <fd-input-group
             [disabled]="false"
@@ -21,6 +21,7 @@
                             <a
                                 class="nav-item"
                                 [routerLink]="'/' + item.url"
+                                (click)="onItemClick()"
                                 (keypress)="onKeypressHandler($event)"
                                 tabindex="0"
                                 role="button"

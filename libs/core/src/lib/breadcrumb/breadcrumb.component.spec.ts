@@ -1,17 +1,12 @@
-import { BreadcrumbComponent } from './breadcrumb.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-    MenuModule,
-    PopoverModule,
-    IconModule,
-    BreadcrumbItemDirective,
-    BreadcrumbLinkDirective,
-    RtlService
-} from '@fundamental-ngx/core';
+import { MenuModule, PopoverModule, IconModule, RtlService } from '@fundamental-ngx/core';
 import { RouterModule } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { BreadcrumbComponent } from './breadcrumb.component';
+import { whenStable } from '../utils/tests/when-stable';
+import { BreadcrumbItemDirective, BreadcrumbLinkDirective } from './public_api';
 @Component({
     selector: 'fd-breadcrumb-test-component',
     template: `
@@ -28,7 +23,9 @@ import { RouterTestingModule } from '@angular/router/testing';
         </fd-breadcrumb>
     `
 })
-class BreadcrumbWrapperComponent {}
+class BreadcrumbWrapperComponent {
+    @ViewChild(BreadcrumbComponent) breadcrumb: BreadcrumbComponent;
+}
 
 describe('BreadcrumbComponent', () => {
     let component: BreadcrumbComponent;
@@ -47,17 +44,19 @@ describe('BreadcrumbComponent', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(BreadcrumbWrapperComponent);
-        component = fixture.debugElement.children[0].componentInstance;
-        fixture.detectChanges();
+
+        await whenStable(fixture);
+
+        component = fixture.componentInstance.breadcrumb;
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should handle onResize - enlarging the screen', () => {
+    it('should handle onResize - enlarging the screen', async () => {
         spyOn(component.elementRef.nativeElement.parentElement, 'getBoundingClientRect').and.returnValue({ width: 3 });
         spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'collapseBreadcrumbs');
@@ -71,8 +70,11 @@ describe('BreadcrumbComponent', () => {
 
         component.onResize();
 
+        await whenStable(fixture);
+
         expect(component.expandBreadcrumbs).toHaveBeenCalled();
         expect(component.collapseBreadcrumbs).not.toHaveBeenCalled();
+
         expect(component.previousContainerWidth).toBe(3);
     });
 
@@ -90,15 +92,18 @@ describe('BreadcrumbComponent', () => {
         expect(component.previousContainerWidth).toBe(1);
     });
 
-    it('should collapse the breadcrumbs', () => {
+    it('should collapse the breadcrumbs', async () => {
         spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 2 });
         spyOn(component, 'getContainerBoundary').and.returnValue(1);
 
         component.collapseBreadcrumbs();
 
+        await whenStable(fixture);
+
         component.breadcrumbItems.forEach((item) => {
             expect(item.elementRef.nativeElement.style.display).toBe('none');
         });
+
         expect(component.collapsedBreadcrumbItems.length).toBe(3);
     });
 

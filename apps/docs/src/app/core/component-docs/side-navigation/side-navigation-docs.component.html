@@ -33,6 +33,20 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'withCompact'" [componentName]="'sideNavigation'">
+    Side Navigation with Disabled Selection
+</fd-docs-section-title>
+<description>
+    Add <code>[selectable]="false"</code> to main side navigation component,
+    to prevent from changing selected state on items on click
+</description>
+<component-example>
+    <fd-side-navigation-non-selectable-example></fd-side-navigation-non-selectable-example>
+</component-example>
+<code-example [exampleFiles]="nonSelectableSideNav"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'withMultipleTitles'" [componentName]="'sideNavigation'">
     Side Navigation with Multiple Levels
 </fd-docs-section-title>

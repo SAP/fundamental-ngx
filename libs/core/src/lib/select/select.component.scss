@@ -1,11 +1,13 @@
 @import "~fundamental-styles/dist/select";
 
 // To be removed when proper strategy for controls inside popover is picked
-fd-popover {
-    width: 100%;
-}
+fd-select {
+    & > fd-popover {
+        width: 100%;
+    }
 
-ul[fd-list] {
-    max-width: 100%;
-    overflow: auto;
+    & ul[fd-list] {
+        max-width: 100%;
+        overflow: auto;
+    }
 }

@@ -222,7 +222,7 @@ describe('SelectComponent', () => {
     }));
 
     it('Should support arrows navigation', fakeAsync(() => {
-        const options: OptionComponent[] = component.options.toArray();
+        const options: any = component.options.toArray();
         component.open();
 
         fixture.detectChanges();

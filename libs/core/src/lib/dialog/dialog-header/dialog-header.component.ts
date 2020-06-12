@@ -26,7 +26,9 @@ export class DialogHeaderComponent implements AfterContentInit {
     /** @hidden */
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
-    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {}
+    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {
+        this.dialogConfig = this.dialogConfig || {};
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
