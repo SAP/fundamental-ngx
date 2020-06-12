@@ -12,7 +12,7 @@ class TestComponent {
     values: string[] = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];
 }
 
-fdescribe('AutoCompleteDirective', () => {
+describe('AutoCompleteDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let directive: AutoCompleteDirective;
@@ -38,11 +38,11 @@ fdescribe('AutoCompleteDirective', () => {
 
         directive.inputText = 'ap';
 
-        directive.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'p', code: 'KeyP' }));
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
 
         expect((<any>directive)._elementRef.nativeElement.value).toBe('Apple');
 
-        directive.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter', code: 'Enter' }));
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'Enter' });
 
         expect(directive.onComplete.emit).toHaveBeenCalledWith({
             term: 'Apple',
@@ -55,11 +55,11 @@ fdescribe('AutoCompleteDirective', () => {
 
         directive.inputText = 'ap';
 
-        directive.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'p', code: 'KeyP'}));
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
 
         expect((<any>directive)._elementRef.nativeElement.value).toBe('Apple');
 
-        directive.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowLeft', code: 'ArrowLeft' }));
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'ArrowLeft' } );
 
         expect(directive.onComplete.emit).toHaveBeenCalledWith({
             term: 'Apple',
@@ -72,12 +72,37 @@ fdescribe('AutoCompleteDirective', () => {
 
         directive.inputText = 'ap';
 
-        directive.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'p', code: 'KeyP' }));
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
 
         expect((<any>directive)._elementRef.nativeElement.value).toBe('Apple');
 
-        directive.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Backspace', code: 'Backspace' }));
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'Backspace' });
 
-        expect((<any>directive)._elementRef.nativeElement.value).toBe('App');
+        expect((<any>directive)._elementRef.nativeElement.value).toBe('ap');
+    });
+
+    it('should stop completing on blur', () => {
+        spyOn(directive.onComplete, 'emit');
+
+        directive.inputText = 'ap';
+
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
+
+        expect((<any>directive)._elementRef.nativeElement.value).toBe('Apple');
+
+        directive.onBlur();
+
+        expect((<any>directive)._elementRef.nativeElement.value).toBe('ap');
+    });
+
+    it('should not complete, when other word is written', () => {
+        spyOn(directive.onComplete, 'emit');
+
+        directive.inputText = 'SomeOtherWord';
+
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'Escape' });
+
+        expect((<any>directive)._elementRef.nativeElement.value).toBe('SomeOtherWord');
     });
 });

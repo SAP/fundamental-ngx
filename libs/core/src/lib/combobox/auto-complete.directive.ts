@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { KeyUtil } from '@fundamental-ngx/core';
+import { KeyUtil } from '../utils/public_api';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -61,7 +61,6 @@ export class AutoCompleteDirective {
     /** @hidden */
     @HostListener('keyup', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
-        console.log(event);
         if (this.enable) {
             if (KeyUtil.isKey(event, this.stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;

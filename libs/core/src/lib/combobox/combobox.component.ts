@@ -243,10 +243,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     public focusTrap: FocusTrap;
 
     /** @hidden */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    private oldInputText: string = '';
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     onChange: any = () => {
@@ -266,9 +263,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     ngOnInit(): void {
         this._refreshDisplayedValues();
         this._setupFocusTrap();
-        if (this.inputText) {
-            this.oldInputText = this.inputText;
-        }
     }
 
     /** @hidden */
@@ -280,8 +274,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -316,7 +310,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else if (this.openOnKeyboardEvent &&
             !event.ctrlKey &&
             !KeyUtil.isKey(event, this.nonOpeningKeys)) {
-            console.log(event);
             this.isOpenChangeHandle(true);
         }
     }
@@ -411,7 +404,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         this._cdRef.detectChanges();
     }
 
-    /** */
+    /** Method that handles complete event from auto complete directive, setting the new value, and closing popover */
     handleAutoComplete(event: AutoCompleteEvent): void {
         this.inputText = event.term;
         this.handleSearchTermChange();
@@ -437,7 +430,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     private _setupKeyboardService(): void {
         this._menuKeyboardService.itemClicked
-            .pipe(takeUntil(this.onDestroy$))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe((index) => this.onMenuClickHandler(index));
         this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
         this._menuKeyboardService.focusEscapeAfterList = () => {};

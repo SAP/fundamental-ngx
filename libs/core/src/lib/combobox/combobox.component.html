@@ -61,7 +61,7 @@
                     </li>
                     <li
                         *ngFor="let term of group.value"
-                        (click)="onMenuClickHandler(term, groupIndex)"
+                        (click)="onMenuClickHandler(term)"
                         (keydown)="onListKeydownHandler($event)"
                         fd-list-item
                         tabindex="0"

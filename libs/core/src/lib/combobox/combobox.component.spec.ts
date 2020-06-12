@@ -25,15 +25,20 @@ describe('ComboboxComponent', () => {
             { value: 'value', displayedValue: 'displayedValue' },
             { value: 'value2', displayedValue: 'displayedValue2' }
         ];
-        component.searchFn = () => {};
+        component.searchFn = () => {
+        };
         fixture.detectChanges();
 
         /** That's focus trap testing workaround */
         component.focusTrap = {
-            activate: () => {},
-            deactivate: () => {},
-            pause: () => {},
-            unpause: () => {}
+            activate: () => {
+            },
+            deactivate: () => {
+            },
+            pause: () => {
+            },
+            unpause: () => {
+            }
         };
     });
 
@@ -46,7 +51,8 @@ describe('ComboboxComponent', () => {
         component.open = true;
         const event = {
             key: 'Enter',
-            preventDefault: () => {}
+            preventDefault: () => {
+            }
         };
         component.onInputKeydownHandler(<any>event);
         expect(component.searchFn).toHaveBeenCalled();
@@ -59,7 +65,6 @@ describe('ComboboxComponent', () => {
     });
 
     it('should fire selected event onListKeydownHandler, arrow down', () => {
-        component.listItems[0].focus();
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
@@ -67,27 +72,31 @@ describe('ComboboxComponent', () => {
             key: 'Enter',
             preventDefault: () => {}
         };
+
+        fixture.detectChanges();
         spyOn(component, 'onChange');
-        component.onListKeydownHandler(event);
+        (<any>component)._menuKeyboardService.keyDownHandler(event, 0, component.listItems.toArray());
+        fixture.detectChanges();
         expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[0].displayedValue);
         spyOn(event, 'preventDefault');
         spyOn(component.listItems.toArray()[1], 'focus');
         event.key = 'ArrowDown';
-        component.onListKeydownHandler(event);
+        (<any>component)._menuKeyboardService.keyDownHandler(event, 0, component.listItems.toArray());
+        fixture.detectChanges();
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.listItems.toArray()[1].focus).toHaveBeenCalled();
     });
 
     it('should handle onListKeydownHandler, arrow up', () => {
-        component.listItems[1].focus();
         const event: any = {
             key: 'ArrowUp',
             preventDefault: () => {}
         };
+
         spyOn(component.listItems.first, 'focus');
         spyOn(event, 'preventDefault');
-        event.key = 'ArrowUp';
-        component.onListKeydownHandler(event);
+        (<any>component)._menuKeyboardService.keyDownHandler(event, 1, component.listItems.toArray());
+
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.listItems.first.focus).toHaveBeenCalled();
     });
@@ -96,7 +105,8 @@ describe('ComboboxComponent', () => {
         component.listItems.first.focus();
         const event: any = {
             key: 'ArrowUp',
-            preventDefault: () => {}
+            preventDefault: () => {
+            }
         };
         spyOn(event, 'preventDefault');
         spyOn(component.searchInputElement.nativeElement, 'focus');
@@ -202,5 +212,60 @@ describe('ComboboxComponent', () => {
         expect(component.openChange.emit).toHaveBeenCalledWith(true);
         expect(component.onTouched).toHaveBeenCalled();
         expect(component.focusTrap.activate).toHaveBeenCalled();
+    });
+
+    it('should choose previous element', () => {
+        component.open = false;
+        spyOn(component, 'onMenuClickHandler');
+        component.displayFn = (item: any): string => {
+            return item.displayedValue;
+        };
+        component.inputTextValue = component.dropdownValues[1].displayedValue;
+        component.onInputKeydownHandler(<any>{ stopPropagation: () => {}, preventDefault: () => {}, key: 'ArrowUp' });
+
+        expect(component.onMenuClickHandler).toHaveBeenCalledWith(component.dropdownValues[0]);
+    });
+
+    it('should choose next element, when there is nothing chosen', () => {
+        component.open = false;
+        spyOn(component, 'onMenuClickHandler');
+        component.displayFn = (item: any): string => {
+            return item.displayedValue;
+        };
+        component.inputTextValue = null;
+        component.onInputKeydownHandler(<any>{ stopPropagation: () => {}, preventDefault: () => {}, key: 'ArrowDown' });
+
+        expect(component.onMenuClickHandler).toHaveBeenCalledWith(component.dropdownValues[0]);
+    });
+
+    it('should reset displayed values', () => {
+        component.open = false;
+        spyOn(component, 'onMenuClickHandler');
+        component.displayFn = (item: any): string => {
+            return item.displayedValue;
+        };
+        component.inputTextValue = component.dropdownValues[0];
+        component.handleSearchTermChange();
+        expect(component.displayedValues.length).toBe(1);
+        component.onPrimaryButtonClick(<any>{ stopPropagation: () => {}, preventDefault: () => {} });
+        expect(component.displayedValues.length).toBe(2);
+    });
+
+    it('should open nad reset displayed values on alt+down', () => {
+        component.open = false;
+        spyOn(component, 'onMenuClickHandler');
+        component.displayFn = (item: any): string => {
+            return item.displayedValue;
+        };
+        component.inputTextValue = component.dropdownValues[0];
+        component.handleSearchTermChange();
+        expect(component.displayedValues.length).toBe(1);
+
+        component.onInputKeydownHandler(<any>
+            { stopPropagation: () => {}, preventDefault: () => {}, altKey: true, key: 'ArrowDown' }
+        );
+
+        expect(component.displayedValues.length).toBe(2);
+        expect(component.open).toBe(true);
     });
 });
