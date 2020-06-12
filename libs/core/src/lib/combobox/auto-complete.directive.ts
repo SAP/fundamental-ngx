@@ -102,7 +102,7 @@ export class AutoCompleteDirective {
     }
 
     private _isControlKey(event: KeyboardEvent): boolean {
-        return KeyUtil.isKey(event, 'Ctrl') || event.ctrlKey;
+        return (KeyUtil.isKey(event, 'Ctrl') || event.ctrlKey) || KeyUtil.isKey(event, 'Meta');
     }
 
     private _defaultDisplay(value: any): string {

@@ -28,6 +28,8 @@ export class ComboboxTemplateExampleComponent {
     searchTerm: string;
 
     displayFunction(item: { name: string; icon: string }): string {
-        return item.name;
+        if (item && item.name) {
+            return item.name;
+        }
     }
 }

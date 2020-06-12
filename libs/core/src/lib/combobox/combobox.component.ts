@@ -290,6 +290,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             if (this.searchFn) {
                 this.searchFn();
             }
+            const value = this.searchInputElement.nativeElement.value;
+            this.searchInputElement.nativeElement.setSelectionRange(value.length, value.length);
         } else if (KeyUtil.isKey(event, 'ArrowDown')) {
             if (event.altKey) {
                 this._resetDisplayedValues();
