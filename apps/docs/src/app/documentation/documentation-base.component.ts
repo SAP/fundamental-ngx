@@ -11,7 +11,7 @@ export class DocumentationBaseComponent implements OnInit {
     @ViewChild(SectionsToolbarComponent, { read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
-    sideCollapsed = new BehaviorSubject(true);
+    sideCollapsed = new BehaviorSubject(false);
 
     guides = [];
 
