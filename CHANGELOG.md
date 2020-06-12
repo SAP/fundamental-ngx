@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.19"></a>
+# [0.19.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.18...v0.19.0-rc.19) (2020-06-12)
+
+
+### Bug Fixes
+
+* Remove unused modules ([#2644](https://github.com/SAP/fundamental-ngx/issues/2644)) ([13f2565](https://github.com/SAP/fundamental-ngx/commit/13f2565))
+
+
+
 <a name="0.19.0-rc.18"></a>
 # [0.19.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.17...v0.19.0-rc.18) (2020-06-10)
 
