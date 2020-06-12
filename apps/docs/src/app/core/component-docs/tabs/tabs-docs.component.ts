@@ -13,6 +13,8 @@ import * as tabSelectionScss from '!raw-loader!./examples/tab-selection-example.
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
 import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
+import * as tabEventH from '!raw-loader!./examples/tab-events-example/tab-events-example.component.html';
+import * as tabEventTs from '!raw-loader!./examples/tab-events-example/tab-events-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -156,6 +158,20 @@ export class TabsDocsComponent {
             language: 'html',
             code: tabIcon,
             fileName: 'tab-icon-example'
+        }
+    ];
+
+    tabEvents: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabEventH,
+            fileName: 'tab-events-example'
+        },
+        {
+            language: 'typescript',
+            code: tabEventTs,
+            fileName: 'tab-events-example',
+            component: 'TabEventsExampleComponent'
         }
     ];
 
