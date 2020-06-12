@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.22"></a>
+# [0.19.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.21...v0.19.0-rc.22) (2020-06-12)
+
+
+### Bug Fixes
+
+* Deprecate isDropdown flag ([#2639](https://github.com/SAP/fundamental-ngx/issues/2639)) ([9a7a8a3](https://github.com/SAP/fundamental-ngx/commit/9a7a8a3))
+
+
+
 <a name="0.19.0-rc.21"></a>
 # [0.19.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.20...v0.19.0-rc.21) (2020-06-12)
 
