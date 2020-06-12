@@ -14,7 +14,7 @@
                 [attr.aria-label]="tab.ariaLabel || null"
                 [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
                 (keydown)="tabHeaderKeyHandler(i, $event)"
-                (click)="tabHeaderClickHandler(i)"
+                (click)="tabHeaderClickHandler(i); tab.headerClick.emit($event);"
             >
                 <ng-container *ngIf="tab.titleTemplate">
                     <ng-container [fd-tab-load-title]="tab.titleTemplate"></ng-container>

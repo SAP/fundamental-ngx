@@ -20,6 +20,7 @@ import { TabSelectionExampleComponent } from './examples/tab-selection-example.c
 import { ComplexTitleExampleComponent } from './examples/complex-title-example/complex-title-example.component';
 import { TabsNavigationModeExampleComponent } from './examples/tab-navigation-mode-example-component';
 import { TabsModule } from '@fundamental-ngx/core';
+import { TabEventsExampleComponent } from './examples/tab-events-example/tab-events-example.component';
 
 const routes: Routes = [
     {
@@ -57,7 +58,8 @@ const routes: Routes = [
         TabNavigationExampleChildFirst,
         TabNavigationExampleChildThird,
         TabNavigationExampleChildSecond,
-        TabsNavigationModeExampleComponent
+        TabsNavigationModeExampleComponent,
+        TabEventsExampleComponent
     ]
 })
 export class TabsDocsModule {}

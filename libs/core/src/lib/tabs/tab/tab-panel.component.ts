@@ -1,12 +1,13 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
+    EventEmitter,
     Input,
     OnChanges,
     Optional,
+    Output,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
@@ -76,6 +77,10 @@ export class TabPanelComponent implements OnChanges {
     /** Semantic type of the tab item */
     @Input()
     tabState: TabItemState;
+
+    /** Event thrown, when tab is clicked */
+    @Output()
+    readonly headerClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     /** @hidden */
     constructor(private _changeDetRef: ChangeDetectorRef, @Optional() private _tabsService: TabsService) {}
