@@ -27,7 +27,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     // Track when menu item is hovered over
     public hovered: Subject<MenuItemComponent> = new Subject<MenuItemComponent>();
 
-    constructor(private elementRef: ElementRef) {}
+    constructor(private elementRef: ElementRef) { }
 
     // Add Fundamental-Styles class for menu item
     @HostBinding('class.fd-menu__item') menuItemClass = true;
@@ -40,7 +40,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
         return this.cascadeDirection === 'left';
     }
 
-    @HostBinding('attr.role') role = 'listitem';
+    @HostBinding('attr.role') role = 'menuitem';
     @HostBinding('attr.tabindex') tabindex = '-1';
 
     // Handle selection of item via keyboard 'Enter' or mouseclick
