@@ -6,7 +6,10 @@ import { API_FILES } from '../../api-files';
 import { TableDocsHeaderComponent } from './table-docs-header/table-docs-header.component';
 import { TableDocsComponent } from './table-docs.component';
 import { TableExampleComponent } from './examples/table-example.component';
-import { TableColumnSortingExampleComponent } from './examples/table-column-sorting-example.component';
+import {
+    FilterTableByPipe, SortTableByPipe,
+    TableColumnSortingExampleComponent
+} from './examples/table-column-sorting-example.component';
 import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
 import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
@@ -43,7 +46,9 @@ const routes: Routes = [
         TableFooterExampleComponent,
         TableActivableExampleComponent,
         TableSemanticExampleComponent,
-        TablePopinExampleComponent
+        TablePopinExampleComponent,
+        FilterTableByPipe,
+        SortTableByPipe
     ]
 })
 export class TableDocsModule {}

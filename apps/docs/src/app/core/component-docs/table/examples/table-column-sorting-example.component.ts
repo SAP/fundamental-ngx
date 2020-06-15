@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 
 interface ExampleRow {
     column1: any,
@@ -27,9 +27,29 @@ const sortMethod = {
     desc: (a, b) => sort(a, b, desc, asc)
 };
 
+@Pipe({ name: 'filterTableBy', pure: false })
+export class FilterTableByPipe implements PipeTransform {
+    transform(tableRows: any[], searchTerm: string): any[] {
+        const searchLower = searchTerm.toLocaleLowerCase();
+        return tableRows.filter((item) => {
+            if (item) {
+                return item.column1.toLocaleLowerCase().includes(searchLower);
+            }
+        });
+    }
+}
+
+@Pipe({ name: 'sortTableBy', pure: false })
+export class SortTableByPipe implements PipeTransform {
+    transform(tableRows: any[], sortDir: string): any[] {
+        return tableRows.sort(sortMethod[sortDir]);
+    }
+}
+
 @Component({
     selector: 'fd-table-column-sorting-example',
-    templateUrl: './table-column-sorting-example.component.html'
+    templateUrl: './table-column-sorting-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableColumnSortingExampleComponent implements OnInit {
     tableRows: ExampleRow[];
@@ -39,25 +59,8 @@ export class TableColumnSortingExampleComponent implements OnInit {
     open: boolean = false;
 
     sortColumn1(dir: string): void {
-        if (dir) {
-            this.column1SortDir = dir;
-            this.tableRows.sort(sortMethod[dir]);
-        }
-
-        this.displayedRows = this.tableRows;
-        if (this.filterVal) {
-            this.filterChange(this.filterVal);
-        }
+        this.column1SortDir = dir;
         this.open = false;
-    }
-
-    filterChange(searchTerm: string): void {
-        const searchLower = searchTerm.toLocaleLowerCase();
-        this.displayedRows = this.tableRows.filter((item) => {
-            if (item) {
-                return item.column1.toLocaleLowerCase().includes(searchLower);
-            }
-        });
     }
 
     inputKeyup(event: KeyboardEvent): void {

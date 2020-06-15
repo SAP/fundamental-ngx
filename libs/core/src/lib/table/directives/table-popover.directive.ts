@@ -1,10 +1,7 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[fdTablePopover], [fd-table-popover]',
-    host: {
-        class: ''
-    }
+    selector: '[fdTablePopover], [fd-table-popover]'
 })
 export class TablePopoverDirective {
     /** @hidden */

@@ -24,7 +24,7 @@
                                 <div fd-form-item [horizontal]="true">
                                     <label fd-form-label for="input-1">Filter</label>
                                     <input fd-form-control [compact]="true" id="input-1" (keyup)="inputKeyup($event)"
-                                           [(ngModel)]="filterVal" (ngModelChange)="filterChange($event)">
+                                           [(ngModel)]="filterVal">
                                 </div>
                             </li>
                         </ul>
@@ -38,7 +38,7 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of displayedRows" fd-table-row>
+        <tr *ngFor="let row of displayedRows | sortTableBy: column1SortDir | filterTableBy: filterVal" fd-table-row>
             <td fd-table-cell class="fd-has-font-weight-semi">
                 <a href="#">{{ row.column1 }}</a>
             </td>
