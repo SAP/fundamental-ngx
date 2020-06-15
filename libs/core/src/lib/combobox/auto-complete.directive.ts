@@ -54,6 +54,9 @@ export class AutoCompleteDirective {
         'Escape'
     ];
 
+    private oldValue: string;
+    private lastKeyUpEvent: KeyboardEvent;
+
     constructor(
         private _elementRef: ElementRef
     ) {}
@@ -64,7 +67,6 @@ export class AutoCompleteDirective {
         if (this.enable) {
             if (KeyUtil.isKey(event, this.stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;
-
             } else if (KeyUtil.isKey(event, this.completeKeys)) {
                 this.onComplete.emit({
                     term: this._elementRef.nativeElement.value,
@@ -76,6 +78,14 @@ export class AutoCompleteDirective {
                     forceClose: false
                 });
             } else if (!this._isControlKey(event) && this.inputText) {
+
+                /** Prevention from triggering typeahead, when having crtl/cmd + keys */
+                if (!this._triggerTypeAhead()) {
+                    return
+                }
+
+                this.oldValue = this.inputText;
+
                 const item = this.options.find(
                     option => this.displayFn(option).toLocaleLowerCase().startsWith(this.inputText.toLocaleLowerCase())
                 );
@@ -85,6 +95,7 @@ export class AutoCompleteDirective {
                 }
             }
         }
+        this.lastKeyUpEvent = event;
     }
 
     /** @hidden */
@@ -107,5 +118,15 @@ export class AutoCompleteDirective {
 
     private _defaultDisplay(value: any): string {
         return value;
+    }
+
+    private _triggerTypeAhead(): boolean {
+        if (this.lastKeyUpEvent &&
+            KeyUtil.isKey(this.lastKeyUpEvent, 'Ctrl') &&
+            this.inputText === this.oldValue) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
