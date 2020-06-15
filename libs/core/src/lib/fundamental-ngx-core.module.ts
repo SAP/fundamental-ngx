@@ -60,6 +60,7 @@ import { LinkModule } from './link/link.module';
 import { InfoLabelModule } from './info-label/info-label.module';
 import { ObjectStatusModule } from './object-status/object-status.module';
 import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-input-mobile.module';
+import { StepInputModule } from './step-input/step-input.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -113,6 +114,7 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
         ShellbarModule,
         SideNavigationModule,
         SplitButtonModule,
+        StepInputModule,
         TableModule,
         TabsModule,
         TileModule,
