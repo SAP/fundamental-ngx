@@ -6,10 +6,9 @@
             [closeOnOutsideClick]="closeOnOutsideClick"
             [(isOpen)]="isOpen"
             [triggers]="triggers"
-            [placement]="'bottom-end'"
+            [placement]="placement"
             (isOpenChange)="openChanged($event)"
             [disabled]="disabled"
-            [isDropdown]="isDropdown"
             [focusTrapped]="false"
         >
             <fd-popover-control>

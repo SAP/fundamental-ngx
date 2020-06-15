@@ -113,7 +113,7 @@ specialDay: SpecialDayRule[] = [
             language: 'typescript',
             code: { default: this.exampleFunctionsHtml },
             component: 'CalendarSingleExampleComponent',
-            fileName: 'calendar-single-example', // todo
+            fileName: 'calendar-single-example',
             name: 'Example Block/Disable Functions'
         },
         {
