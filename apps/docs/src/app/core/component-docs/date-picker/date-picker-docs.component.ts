@@ -84,15 +84,6 @@ export class DatePickerDocsComponent {
         }
     ];
 
-    datePickerRangeDisable: ExampleFile[] = [
-        {
-            language: 'typescript',
-            component: 'DatePickerFormRangeExampleComponent',
-            code: datePickerRangeFormTsSrc,
-            fileName: 'date-picker-form-range-example'
-        }
-    ];
-
     datePickerPosition: ExampleFile[] = [
         {
             language: 'typescript',

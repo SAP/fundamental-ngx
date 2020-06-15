@@ -141,10 +141,6 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.isOpen) {
-            this.open();
-        }
-
         this.setupFillBehaviour();
         if (this.placement) {
             this._initPlacement(this.placement);
@@ -158,6 +154,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
         this.addTriggerListeners();
         this.isSetup = true;
+
+        if (this.isOpen) {
+            this.open();
+        }
     }
 
     /** @hidden */
@@ -232,7 +232,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
      * Opens the popover.
      */
     public open(fireEvent: boolean = true): void {
-        if (!this.isOpen && !this.disabled) {
+        if (!this.disabled) {
             this.createContainer();
             this._addListenerForOutsideClick();
             this.isOpen = true;
@@ -297,10 +297,9 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             this.updatePopper();
             setupRef.unsubscribe();
         });
-
         const containerEl = (this.containerRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-
         if (this.appendTo === 'body') {
+
             document.body.appendChild(containerEl);
         } else {
             this.appendTo.appendChild(containerEl);
