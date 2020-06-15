@@ -16,19 +16,21 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class
     templateUrl: './dialog-footer.component.html'
 })
 export class DialogFooterComponent implements AfterContentInit {
+    /** Whether the dialog footer should be displayed in mobile mode. */
+    cosy: boolean;
+
     /** @hidden */
     footerTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
-    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {
-        this.dialogConfig = this.dialogConfig || {};
-    }
+    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {}
 
     /** @hidden */
     ngAfterContentInit() {
         this._assignCustomTemplates();
+        this.cosy = this.dialogConfig ? this.dialogConfig.mobile : false;
     }
 
     /** @hidden Assign custom templates */

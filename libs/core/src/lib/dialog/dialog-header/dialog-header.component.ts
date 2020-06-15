@@ -17,6 +17,9 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class
     templateUrl: './dialog-header.component.html'
 })
 export class DialogHeaderComponent implements AfterContentInit {
+    /** Whether the dialog header/subheader should be displayed in mobile mode. */
+    cosy: boolean;
+
     /** @hidden */
     headerTemplate: TemplateRef<any>;
 
@@ -27,12 +30,12 @@ export class DialogHeaderComponent implements AfterContentInit {
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
     constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {
-        this.dialogConfig = this.dialogConfig || {};
     }
 
     /** @hidden */
     ngAfterContentInit(): void {
         this._assignCustomTemplates();
+        this.cosy = this.dialogConfig ? this.dialogConfig.mobile : false;
     }
 
     /** @hidden Assign custom templates */
