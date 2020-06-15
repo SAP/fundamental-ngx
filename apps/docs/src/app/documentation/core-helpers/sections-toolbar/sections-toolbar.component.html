@@ -15,7 +15,7 @@
         <fd-side-nav>
             <div fd-side-nav-main>
                 <ul fd-nested-list [textOnly]="true">
-                    <li fd-nested-list-item *ngFor="let section of sections">
+                    <li fd-nested-list-item *ngFor="let section of sections" [expanded]="true">
                         <div fd-nested-list-content>
                             <a fd-nested-list-link>
                                 <span fd-nested-list-title>{{ section.header }}</span>
