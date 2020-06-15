@@ -48,23 +48,22 @@ describe('SwitchComponent', () => {
         expect(component.id).toBeTruthy();
     });
 
-    it('should switch on click', fakeAsync (() => {
-        spyOn(component.checkedChange, 'emit');
+    it('should switch on click', fakeAsync(() => {
 
-        component.checked = false;
-        fixture.detectChanges();
+        const checkedChangeSpy = spyOn(component.checkedChange, 'emit');
+        input.click();
+
+        detectChangesOnPush();
+        tick();
+
+        expect(checkedChangeSpy).toHaveBeenCalledWith(true);
 
         input.click();
-        fixture.detectChanges();
-        tick(10);
 
-        expect(component.checkedChange.emit).toHaveBeenCalledWith(true);
+        detectChangesOnPush();
+        tick();
 
-        input.click();
-        fixture.detectChanges();
-        tick(10);
-
-        expect(component.checkedChange.emit).toHaveBeenCalledWith(false);
+        expect(checkedChangeSpy).toHaveBeenCalledWith(false);
     }));
 
     it('should focus inner input element', () => {
@@ -95,12 +94,12 @@ describe('SwitchComponent', () => {
         expect(switchComp.classList).toContain('fd-switch--semantic');
     });
 
-    it('should disable', async () => {
+    it('should disable', fakeAsync(() => {
         spyOn(component.checkedChange, 'emit');
         component.disabled = true;
 
         detectChangesOnPush();
-        await fixture.whenStable();
+        tick();
 
         input.click();
 
@@ -109,5 +108,5 @@ describe('SwitchComponent', () => {
         expect(component.checkedChange.emit).not.toHaveBeenCalled();
         expect(switchComp.classList).toContain('is-disabled');
         expect(input.disabled).toBeTrue();
-    });
+    }));
 });
