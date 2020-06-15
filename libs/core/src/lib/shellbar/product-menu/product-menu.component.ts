@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation
 import { MenuComponent } from '../../menu/menu.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { Placement } from 'popper.js';
-import { PopoverFillMode } from '../../..';
+import { PopoverFillMode } from '../../popover/popover-directive/popover.directive';
 
 /**
  * The component that represents a product menu.

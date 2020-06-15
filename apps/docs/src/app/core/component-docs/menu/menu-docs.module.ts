@@ -10,9 +10,10 @@ import {
     MenuExampleComponent,
     MenuMobileExampleComponent,
     MenuSeparatorExampleComponent,
-    MenuWithSubmenuExampleComponent
 } from './examples/menu-examples.component';
+
 import { MenuMobileModule, MenuModule } from '@fundamental-ngx/core';
+import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 
 const routes: Routes = [
     {

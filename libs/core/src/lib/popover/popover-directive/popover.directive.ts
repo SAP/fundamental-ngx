@@ -48,7 +48,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     @Input()
     isOpen: boolean = false;
 
-    /**  */
+    /** Reference to external popover trigger responsible for opening/closing the popover */
     @Input()
     popoverTrigger?: ElementRef;
 

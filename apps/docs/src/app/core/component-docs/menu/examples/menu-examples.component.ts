@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuItemComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-menu-example',
@@ -27,12 +26,4 @@ export class MenuSeparatorExampleComponent {
     templateUrl: './menu-mobile-example.component.html'
 })
 export class MenuMobileExampleComponent {
-}
-
-@Component({
-    selector: 'fd-menu-with-submenu-example',
-    templateUrl: './menu-with-submenu-example.component.html'
-})
-export class MenuWithSubmenuExampleComponent {
-    activePath: MenuItemComponent[] = [];
 }

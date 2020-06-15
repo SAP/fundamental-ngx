@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import * as menuSrc from '!raw-loader!./examples/menu-example.component.html';
-import * as menuAddon from '!raw-loader!./examples/menu-addon-example.component.html';
-import * as menuSeparatorSrc from '!raw-loader!./examples/menu-separator-example.component.html';
-import * as menuMobileSrc from '!raw-loader!./examples/menu-mobile-example.component.html';
-import * as menuWithSubmenuSrc from '!raw-loader!./examples/menu-with-submenu-example.component.html';
-
+import * as menuHtml from '!raw-loader!./examples/menu-example.component.html';
+import * as menuAddonHtml from '!raw-loader!./examples/menu-addon-example.component.html';
+import * as menuMobileHtml from '!raw-loader!./examples/menu-mobile-example.component.html';
+import * as menuSeparatorHtml from '!raw-loader!./examples/menu-separator-example.component.html';
+import * as menuWithSubmenuHtml from '!raw-loader!./examples/menu-with-submenu-example.component.html';
+import * as menuWithSubmenuTs from '!raw-loader!./examples/menu-with-submenu-example.component.ts'
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -16,14 +16,14 @@ export class MenuDocsComponent {
     menuBasic: ExampleFile[] = [
         {
             language: 'html',
-            code: menuSrc,
+            code: menuHtml,
             fileName: 'menu-example'
         }
     ];
     menuAddon: ExampleFile[] = [
         {
             language: 'html',
-            code: menuAddon,
+            code: menuAddonHtml,
             fileName: 'menu-addon-example',
         }
     ];
@@ -31,7 +31,7 @@ export class MenuDocsComponent {
     menuSeparator: ExampleFile[] = [
         {
             language: 'html',
-            code: menuSeparatorSrc,
+            code: menuSeparatorHtml,
             fileName: 'menu-separator-example'
         }
     ];
@@ -39,7 +39,7 @@ export class MenuDocsComponent {
     menuMobile: ExampleFile[] = [
         {
             language: 'html',
-            code: menuMobileSrc,
+            code: menuMobileHtml,
             fileName: 'menu-mobile-example'
         }
     ];
@@ -47,8 +47,10 @@ export class MenuDocsComponent {
     menuWithSubmenu: ExampleFile[] = [
         {
             language: 'html',
-            code: menuWithSubmenuSrc,
-            fileName: 'menu-with-submenu-example'
+            code: menuWithSubmenuHtml,
+            fileName: 'menu-with-submenu-example',
+            typescriptFileCode: menuWithSubmenuTs,
+            component: 'MenuWithSubmenuExampleComponent'
         }
     ];
 }
