@@ -1,7 +1,10 @@
-:host.cascades-right {
+@import '~fundamental-styles/dist/menu';
+
+:host.cascades-right.trigger .fd-menu__title {
     padding-right: 2rem;
+
     /* render arrow for trigger */
-    &.trigger:after {
+    &:after {
         position: absolute;
         right: 0;
         width: 2rem;
@@ -14,10 +17,11 @@
     }
 }
 
-:host.cascades-left {
+:host.cascades-left.trigger .fd-menu__title {
     padding-left: 2rem;
+
     /* render arrow for trigger */
-    &.trigger:before {
+    &:before {
         position: absolute;
         left: 0;
         width: 2rem;

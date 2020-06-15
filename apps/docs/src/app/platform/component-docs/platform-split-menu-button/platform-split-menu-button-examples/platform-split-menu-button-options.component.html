@@ -1,4 +1,4 @@
-<h2>Cozy Button options</h2>
+<h3>Cozy Split Menu Buttons</h3>
 <fdp-split-menu-button
     [id]="'split-menu-button1'"
     [name]="'split-menu-button1'"
@@ -46,11 +46,10 @@
 </fdp-split-menu-button>
 <br />
 <br />
-<div>Selected: {{ selectedCozyItem }}</div>
+<p>Selected: {{ selectedCozyItem }}</p>
 
 <br />
-<br />
-<h2>Compact Button Options</h2>
+<h3>Compact Split Menu Buttons</h3>
 <fdp-split-menu-button
     [id]="'split-menu-button1'"
     [name]="'split-menu-button1'"
@@ -103,7 +102,7 @@
 
 <br />
 <br />
-<div>Selected: {{ selectedCompactItem }}</div>
+<p>Selected: {{ selectedCompactItem }}</p>
 
 <fdp-menu #basicMenuCompact id="basic-menu">
     <fdp-menu-item (itemSelect)="onItemSelectCompact('First Item')">First Item</fdp-menu-item>

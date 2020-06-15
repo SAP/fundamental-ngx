@@ -18,7 +18,7 @@ export class CheckboxDocsComponent {
         {
             language: 'typescript',
             fileName: 'checkbox-default-example',
-            component: 'CheckboxDefaultExamplesComponent',
+            component: 'CheckboxDefaultExampleComponent',
             code: checkboxDefaultTsCode
         }
     ];
@@ -27,7 +27,7 @@ export class CheckboxDocsComponent {
         {
             language: 'typescript',
             fileName: 'checkbox-tristate-example',
-            component: 'DefaultCheckboxExamplesComponent',
+            component: 'CheckboxTristateExampleComponent',
             code: checkboxTristateTsCode
         }
     ];

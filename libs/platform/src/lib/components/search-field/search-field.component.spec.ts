@@ -67,7 +67,7 @@ function getDropdownItems(menu: Element): NodeList {
             [categories]="categories"
             [categoryLabel]="categoryLabel"
             [hideCategoryLabel]="hideCategoryLabel"
-            [size]="size"
+            [contentDensity]="contentDensity"
             [isLoading]="isLoading"
             [disabled]="disabled"
             (inputChange)="onInputChange($event)"
@@ -85,7 +85,7 @@ class TestComponent {
     public categories: ValueLabelItem[];
     public categoryLabel: string;
     public hideCategoryLabel = false;
-    public size: 'cozy' | 'compact';
+    public contentDensity: 'cozy' | 'compact';
     public isLoading = false;
     public disabled = false;
 
@@ -95,7 +95,7 @@ class TestComponent {
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
 
-    constructor() {}
+    constructor() { }
 
     onInputChange($event) {
         this.inputValue = $event;
@@ -154,10 +154,10 @@ describe('SearchFieldComponent', () => {
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
-        const input: ElementRef = fixture.debugElement.query(By.css('.search-field--input'));
+        const input: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__input'));
         expect(input.nativeElement.id).toContain('fdp-search-field-input-');
 
-        const submitButton: ElementRef = fixture.debugElement.query(By.css('.search-field--submit'));
+        const submitButton: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__submit'));
         expect(submitButton.nativeElement.id).toContain('fdp-search-field-submit-');
 
         // simulate keyboard entry
@@ -241,10 +241,10 @@ describe('SearchFieldComponent', () => {
         host.categoryLabel = 'Category';
         fixture.detectChanges();
 
-        const categoryButton = fixture.debugElement.queryAll(By.css('.search-field--category-button'));
+        const categoryButton = fixture.debugElement.queryAll(By.css('.fdp-search-field__category-button'));
         expect(categoryButton.length).toBe(1);
 
-        const categoryLabel = fixture.debugElement.query(By.css('.search-field--category-label'));
+        const categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
         expect(categoryLabel.nativeElement.textContent).toBe('Category');
     });
 
@@ -255,7 +255,7 @@ describe('SearchFieldComponent', () => {
         host.categoryLabel = 'Categoría';
         fixture.detectChanges();
 
-        const categoryLabel = fixture.debugElement.query(By.css('.search-field--category-label'));
+        const categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
         expect(categoryLabel.nativeElement.textContent).toBe('Categoría');
     });
 
@@ -267,7 +267,7 @@ describe('SearchFieldComponent', () => {
         host.hideCategoryLabel = true;
         fixture.detectChanges();
 
-        const categoryLabel = fixture.debugElement.queryAll(By.css('.search-field--category-label'));
+        const categoryLabel = fixture.debugElement.queryAll(By.css('.fdp-search-field__category-label'));
         expect(categoryLabel.length).toBe(0);
     });
 
@@ -289,7 +289,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // click on category button
-        const button = fixture.debugElement.query(By.css('.search-field--category-button'));
+        const button = fixture.debugElement.query(By.css('.fdp-search-field__category-button'));
         button.nativeElement.click();
         fixture.detectChanges();
 
@@ -300,7 +300,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         expect(component.currentCategory).toEqual(CATEGORIES[2]);
-        let categoryLabel = fixture.debugElement.query(By.css('.search-field--category-label'));
+        let categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
         expect(categoryLabel.nativeElement.textContent).toBe(CATEGORIES[2].label);
         expect(host.inputValue.category).toBe(CATEGORIES[2].value);
 
@@ -315,7 +315,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         expect(component.currentCategory).toEqual(CATEGORIES[1]);
-        categoryLabel = fixture.debugElement.query(By.css('.search-field--category-label'));
+        categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
         expect(categoryLabel.nativeElement.textContent).toBe(CATEGORIES[1].label);
         expect(host.inputValue.category).toBe(CATEGORIES[1].value);
     });
@@ -328,19 +328,19 @@ describe('SearchFieldComponent', () => {
 
         fixture.detectChanges();
         let inputField: ElementRef = fixture.debugElement.query(By.css('input.fd-input'));
-        let submitButton: ElementRef = fixture.debugElement.query(By.css('button.search-field--submit'));
-        let categoryButton: ElementRef = fixture.debugElement.query(By.css('button.search-field--category-button'));
+        let submitButton: ElementRef = fixture.debugElement.query(By.css('button.fdp-search-field__submit'));
+        let categoryButton: ElementRef = fixture.debugElement.query(By.css('button.fdp-search-field__category-button'));
         let compactAddons: ElementRef[] = fixture.debugElement.queryAll(By.css('.fd-input-group__addon--compact'));
         expect(inputField.nativeElement.classList.contains('fd-input--compact')).toBeFalsy();
         expect(submitButton.nativeElement.classList.contains('fd-button--compact')).toBeFalsy();
         expect(categoryButton.nativeElement.classList.contains('fd-button--compact')).toBeFalsy();
         expect(compactAddons.length).toBe(0);
-        host.size = 'compact';
+        host.contentDensity = 'compact';
         fixture.detectChanges();
 
         inputField = fixture.debugElement.query(By.css('input.fd-input'));
-        submitButton = fixture.debugElement.query(By.css('button.search-field--submit'));
-        categoryButton = fixture.debugElement.query(By.css('button.search-field--category-button'));
+        submitButton = fixture.debugElement.query(By.css('button.fdp-search-field__submit'));
+        categoryButton = fixture.debugElement.query(By.css('button.fdp-search-field__category-button'));
         compactAddons = fixture.debugElement.queryAll(By.css('.fd-input-group__addon--compact'));
         expect(inputField.nativeElement.classList.contains('fd-input--compact')).toBeTruthy();
         expect(submitButton.nativeElement.classList.contains('fd-button--compact')).toBeTruthy();
@@ -590,7 +590,7 @@ describe('SearchFieldComponent', () => {
         host.isLoading = true;
         fixture.detectChanges();
 
-        const cancelButton: ElementRef = fixture.debugElement.query(By.css('.search-field--loading'));
+        const cancelButton: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__loading'));
         cancelButton.nativeElement.click();
         fixture.detectChanges();
 
@@ -604,8 +604,8 @@ describe('SearchFieldComponent', () => {
         host.disabled = true;
         fixture.detectChanges();
 
-        const input: ElementRef = fixture.debugElement.query(By.css('input[type="text"]'));
-        const submitButton: ElementRef = fixture.debugElement.query(By.css('button.search-field--submit'));
+        const input: ElementRef = fixture.debugElement.query(By.css('input[type="search"]'));
+        const submitButton: ElementRef = fixture.debugElement.query(By.css('button.fdp-search-field__submit'));
         expect(input.nativeElement.attributes['disabled']).toBeTruthy();
         expect(submitButton.nativeElement.attributes['disabled']).toBeTruthy();
     });
@@ -616,7 +616,7 @@ describe('SearchFieldComponent', () => {
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
-        const clearButton = fixture.debugElement.queryAll(By.css('button.search-field--clear'));
+        const clearButton = fixture.debugElement.queryAll(By.css('button.fdp-search-field__clear'));
         expect(clearButton.length).toBe(0);
     });
 
@@ -632,7 +632,7 @@ describe('SearchFieldComponent', () => {
         textInput.nativeElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
 
-        const clearButton = fixture.debugElement.queryAll(By.css('button.search-field--clear'));
+        const clearButton = fixture.debugElement.queryAll(By.css('button.fdp-search-field__clear'));
         expect(clearButton.length).toBe(1);
     });
 
@@ -648,7 +648,7 @@ describe('SearchFieldComponent', () => {
         textInput.nativeElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
 
-        const clearButton = fixture.debugElement.queryAll(By.css('button.search-field--clear'));
+        const clearButton = fixture.debugElement.queryAll(By.css('button.fdp-search-field__clear'));
         clearButton[0].nativeElement.click();
 
         // check input field
@@ -757,7 +757,7 @@ describe('SearchFieldComponent', () => {
             [categoryLabel]="categoryLabel"
             [hideCategoryLabel]="hideCategoryLabel"
             [dataSource]="dataSource"
-            [size]="size"
+            [contentDensity]="contentDensity"
             [isLoading]="isLoading"
             [disabled]="disabled"
             (inputChange)="onInputChange($event)"
@@ -774,7 +774,7 @@ class DataSourceTestComponent implements OnInit {
     public categories: ValueLabelItem[];
     public categoryLabel: string;
     public hideCategoryLabel = false;
-    public size: 'cozy' | 'compact';
+    public contentDensity: 'cozy' | 'compact';
     public isLoading = false;
     public disabled = false;
     public dataSource: SearchFieldDataSource<any>;
@@ -785,7 +785,7 @@ class DataSourceTestComponent implements OnInit {
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
 
-    constructor() {}
+    constructor() { }
 
     ngOnInit() {
         this.dataSource = new SearchFieldDataSource(new SearchFieldDataProvider());
@@ -865,7 +865,7 @@ describe('SearchFieldComponent with DataSource', () => {
 
     it('should be able to filter data source by category', () => {
         // click on category button
-        const button = fixture.debugElement.query(By.css('.search-field--category-button'));
+        const button = fixture.debugElement.query(By.css('.fdp-search-field__category-button'));
         button.nativeElement.click();
         fixture.detectChanges();
 

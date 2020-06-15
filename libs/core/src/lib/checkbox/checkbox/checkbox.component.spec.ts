@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async, tick, fakeAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 
@@ -74,19 +74,19 @@ describe('CheckboxComponent', () => {
         expect(checkbox.checkboxValue).toBe(true);
     });
 
-    it('should be unchecked on double click', async () => {
+    it('should be unchecked on double click', fakeAsync (() => {
         const checkboxLabel = getCheckboxLabel(fixture);
         fixture.detectChanges();
 
-        await fixture.whenStable();
         spyOn(checkbox, 'nextValue');
         checkboxLabel.click();
+        tick(15);
         checkboxLabel.click();
         expect(getCheckboxInput(fixture).checked).toBe(false);
         expect(hostComponent.value).toBe(false);
         expect(checkbox.checkboxValue).toBe(false);
         expect(checkbox.nextValue).toHaveBeenCalledTimes(2);
-    });
+    }));
 
     it('should add state class', async () => {
         checkbox.state = 'success';
@@ -154,20 +154,22 @@ describe('CheckboxComponent', () => {
         expect(checkbox.checkboxValue).toBe('No');
     });
 
-    it('should use third state', async () => {
+    it('should use third state', fakeAsync (() => {
         const checkboxLabel = getCheckboxLabel(fixture);
         checkbox.tristate = true;
         fixture.detectChanges();
 
-        await fixture.whenStable();
         expect(hostComponent.value).toBe(false);
         checkboxLabel.click();
+        tick(10);
         expect(hostComponent.value).toBe(null);
         checkboxLabel.click();
+        tick(10);
         expect(hostComponent.value).toBe(true);
         checkboxLabel.click();
+        tick(10);
         expect(hostComponent.value).toBe(false);
-    });
+    }));
 
     it('should not use third state', async () => {
         const checkboxLabel = getCheckboxLabel(fixture);

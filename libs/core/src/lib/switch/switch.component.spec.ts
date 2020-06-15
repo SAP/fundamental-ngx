@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { SwitchComponent } from './switch.component';
 import { CommonModule } from '@angular/common';
@@ -48,7 +48,7 @@ describe('SwitchComponent', () => {
         expect(component.id).toBeTruthy();
     });
 
-    it('should switch on click', () => {
+    it('should switch on click', fakeAsync (() => {
         spyOn(component.checkedChange, 'emit');
 
         component.checked = false;
@@ -56,14 +56,16 @@ describe('SwitchComponent', () => {
 
         input.click();
         fixture.detectChanges();
+        tick(10);
 
         expect(component.checkedChange.emit).toHaveBeenCalledWith(true);
 
         input.click();
         fixture.detectChanges();
+        tick(10);
 
         expect(component.checkedChange.emit).toHaveBeenCalledWith(false);
-    });
+    }));
 
     it('should focus inner input element', () => {
         spyOn(input, 'focus');

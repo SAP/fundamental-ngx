@@ -15,7 +15,7 @@
     <ng-container *ngIf="!userComponent">
         <fd-shellbar-user-menu
             (itemClicked)="triggerItems()"
-            [options]="{ placement: 'bottom-end' }"
+            [placement]="'bottom-end'"
             [focusTrapped]="false"
             [user]="user"
             [userMenu]="userMenu"
