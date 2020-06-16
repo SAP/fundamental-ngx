@@ -1,6 +1,6 @@
 import {
     AfterContentInit,
-    AfterViewInit,
+    AfterViewChecked,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -31,7 +31,7 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges {
+export class TokenizerComponent implements AfterViewChecked, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges {
     /** user's custom classes */
     @Input()
     class: string;
@@ -95,7 +95,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
     tokenListChangesSubscription: Subscription;
 
     /** @hidden */
-    ngAfterViewInit(): void {
+    hiddenCozyTokenCount: number = 0;
+
+    /** @hidden */
+    ngAfterViewChecked(): void {
         if (this.input && this.input.elementRef()) {
             this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
                 this.handleKeyDown(event, this.tokenList.length);
@@ -114,7 +117,13 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
         if (!this.compact) {
             // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
             this.tokenizerInnerEl.nativeElement.scrollLeft =
-                this.tokenizerInnerEl.nativeElement.scrollWidth - this.tokenizerInnerEl.nativeElement.clientWidth;
+                this.tokenizerInnerEl.nativeElement.scrollWidth;
+            this._getHiddenCozyTokenCount();
+            if (this.hiddenCozyTokenCount > 0) {
+                // need to do this again in case "____ more" text was added
+                this.tokenizerInnerEl.nativeElement.scrollLeft =
+                    this.tokenizerInnerEl.nativeElement.scrollWidth;
+            }
         }
     }
 
@@ -323,6 +332,8 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
                 side === 'right' ? i-- : i++;
                 this.cdRef.markForCheck();
             }
+        } else {
+            this._getHiddenCozyTokenCount();
         }
     }
 
@@ -341,7 +352,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
                 )[i];
                 /*
                   set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
-                  contain the width of the token we might display, without actually making the token visible to the user
+                  contain the width of the token we might display, without actually making the token visible to the user.
                  */
                 tokenToCheck.elementRef.nativeElement.style.display = 'inline-block';
                 tokenToCheck.elementRef.nativeElement.style.visibility = 'hidden';
@@ -366,7 +377,22 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit, OnDe
                 i--;
                 this.cdRef.markForCheck();
             }
+        } else {
+            this._getHiddenCozyTokenCount();
         }
+    }
+
+    /** @hidden */
+    private _getHiddenCozyTokenCount(): void {
+        const elementLeft = this._elementRef.nativeElement.getBoundingClientRect().left;
+        this.hiddenCozyTokenCount = 0;
+        this.tokenList.forEach(token => {
+            if (token.elementRef.nativeElement.getBoundingClientRect().right < elementLeft) {
+                this.hiddenCozyTokenCount += 1;
+            }
+        });
+        this.cdRef.markForCheck();
+        this.cdRef.detectChanges();
     }
 
     /** @hidden */

@@ -51,9 +51,9 @@ describe('TokenizerComponent', () => {
         expect(component.compact).toBeFalsy();
     });
 
-    it('should addEventListener to input during ngAfterViewInit and handle keydown', async () => {
+    it('should addEventListener to input during ngAfterViewChecked and handle keydown', async () => {
         spyOn(component, 'handleKeyDown');
-        component.ngAfterViewInit();
+        component.ngAfterViewChecked();
 
         await whenStable(fixture);
 

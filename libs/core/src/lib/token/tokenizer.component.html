@@ -8,11 +8,12 @@
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <ng-content select="fd-token"></ng-content>
         <span
-            *ngIf="(moreTokensLeft.length > 0 || moreTokensRight.length > 0) && compact"
+            *ngIf="(moreTokensLeft.length > 0 || moreTokensRight.length > 0) || hiddenCozyTokenCount > 0"
             class="fd-tokenizer-more"
             #moreElement
         >
-            <ng-container>{{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}</ng-container>
+            <ng-container *ngIf="compact">{{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}</ng-container>
+            <ng-container *ngIf="!compact">{{ hiddenCozyTokenCount }} {{ moreTerm }}</ng-container>
         </span>
         <ng-content select="[fd-form-control]"></ng-content>
     </div>
