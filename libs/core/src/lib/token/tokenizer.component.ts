@@ -391,7 +391,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterContentInit, O
                 this.hiddenCozyTokenCount += 1;
             }
         });
-        this.cdRef.markForCheck();
         this.cdRef.detectChanges();
     }
 
