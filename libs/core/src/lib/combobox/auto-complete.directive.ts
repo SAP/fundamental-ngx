@@ -68,15 +68,9 @@ export class AutoCompleteDirective {
             if (KeyUtil.isKey(event, this.stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;
             } else if (KeyUtil.isKey(event, this.completeKeys)) {
-                this.onComplete.emit({
-                    term: this._elementRef.nativeElement.value,
-                    forceClose: true
-                });
+                this._sendCompleteEvent(true);
             } else if (KeyUtil.isKey(event, this.fillKeys)) {
-                this.onComplete.emit({
-                    term: this._elementRef.nativeElement.value,
-                    forceClose: false
-                });
+                this._sendCompleteEvent(false);
             } else if (!this._isControlKey(event) && this.inputText) {
 
                 /** Prevention from triggering typeahead, when having crtl/cmd + keys */
@@ -102,7 +96,7 @@ export class AutoCompleteDirective {
     @HostListener('blur')
     onBlur(): void {
         if (this.enable) {
-            this._elementRef.nativeElement.value = this.inputText;
+            this._sendCompleteEvent(true);
         }
     }
 
@@ -128,5 +122,12 @@ export class AutoCompleteDirective {
         } else {
             return true;
         }
+    }
+
+    private _sendCompleteEvent(forceClose: boolean): void {
+        this.onComplete.emit({
+            term: this._elementRef.nativeElement.value,
+            forceClose: forceClose
+        });
     }
 }
