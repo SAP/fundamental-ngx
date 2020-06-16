@@ -4,4 +4,6 @@ import { Component } from '@angular/core';
     selector: 'fd-panel-expandable-example',
     templateUrl: './panel-expandable-example.component.html'
 })
-export class PanelExpandableExampleComponent { }
+export class PanelExpandableExampleComponent {
+    expanded: boolean = true;
+}

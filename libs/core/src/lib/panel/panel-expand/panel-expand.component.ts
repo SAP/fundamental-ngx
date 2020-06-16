@@ -1,12 +1,15 @@
 import {
+    ChangeDetectorRef,
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
     HostBinding,
     Input,
-    Output,
+    OnDestroy,
+    OnInit,
     ViewEncapsulation
 } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { PanelService } from '../panel.service';
 
 let expandButtonUniqueId: number = 0;
 
@@ -22,7 +25,7 @@ let expandButtonUniqueId: number = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PanelExpandComponent {
+export class PanelExpandComponent implements OnInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.fd-panel__expand')
     readonly fdPanelExpandClass: boolean = true;
@@ -30,10 +33,6 @@ export class PanelExpandComponent {
     /** Whether to apply compact mode to the button that shows/hides the Panel content. */
     @Input()
     compact: boolean = false;
-
-    /** Whether the panel content is expanded. */
-    @Input()
-    expanded: boolean = false;
 
     /** aria-label attribute of the expand button. */
     @Input()
@@ -47,13 +46,32 @@ export class PanelExpandComponent {
     @Input()
     id: string = 'fd-panel-expand-' + expandButtonUniqueId++;
 
-    /** An event emitted when the button is clicked.  */
-    @Output()
-    expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    /** Whether the panel content is expanded. */
+    expanded: boolean;
 
-    /** Methods that toggles the content of the Panel and emits the value to the parent. */
+    /** @hidden */
+    private _subscription: Subscription;
+
+    constructor(private _cdRef: ChangeDetectorRef, public panelService: PanelService) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._subscription = this.panelService.expanded.subscribe( (value: boolean) => {
+            this.expanded = value;
+            this._cdRef.detectChanges();
+        });
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this._subscription) {
+            this._subscription.unsubscribe();
+        }
+    }
+
+    /** Methods that toggles the content of the Panel. */
     toggleExpand(): void {
         this.expanded = !this.expanded;
-        this.expandedChange.emit(this.expanded);
+        this.panelService.updateExpanded(this.expanded);
     }
 }

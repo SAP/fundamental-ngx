@@ -1,4 +1,7 @@
-<div fd-panel>
+<button class="docs-button" fd-button (click)="expanded = !expanded">Toggle Expand</button>
+<br><br><br>
+
+<div fd-panel [(expanded)]="expanded">
     <div fd-panel-header>
         <div fd-panel-expand [ariaLabel]="'fdPE2'"></div>
         <h5 fd-panel-title>Panel Header</h5>

@@ -1,18 +1,19 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     ElementRef,
     HostBinding,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
+    SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
-import { PanelHeaderComponent } from './panel-header/panel-header.component';
+import { PanelService } from './panel.service';
 
 let panelUniqueId: number = 0;
 
@@ -27,9 +28,10 @@ let panelUniqueId: number = 0;
     templateUrl: './panel.component.html',
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./panel.component.scss'],
+    providers: [PanelService],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PanelComponent implements AfterViewInit, CssClassBuilder, OnChanges, OnInit {
+export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDestroy {
     /** User's custom classes */
     @Input()
     class: string;
@@ -47,32 +49,43 @@ export class PanelComponent implements AfterViewInit, CssClassBuilder, OnChanges
     @HostBinding('attr.id')
     id: string = 'fd-panel-' + panelUniqueId++;
 
-    /** @hidden */
-    @ContentChild(PanelHeaderComponent) panelHeader: PanelHeaderComponent;
-
     /** Whether the Panel Content is expanded */
-    @Input()
-    expanded: boolean = false;
+    @Input() expanded: boolean;
 
     /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef) {}
+    private _subscription: Subscription;
+
+    /** @hidden */
+    constructor(
+        private _cdRef: ChangeDetectorRef,
+        private _elementRef: ElementRef,
+        public panelService: PanelService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.panelHeader.expandedChange.subscribe((value: boolean) => {
+        this._subscription = this.panelService.expanded.subscribe((value) => {
             this.expanded = value;
             this._cdRef.detectChanges();
         });
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        this.buildComponentCssClass();
+        this.panelService.updateExpanded(this.expanded);
+
+        if (changes && changes.expanded) {
+            this.panelService.updateExpanded(this.expanded);
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this._subscription) {
+            this._subscription.unsubscribe();
+        }
     }
 
     @applyCssClass

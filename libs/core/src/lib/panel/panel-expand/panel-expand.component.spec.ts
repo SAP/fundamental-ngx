@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { PanelExpandComponent } from './panel-expand.component';
 import { ChangeDetectorRef, ElementRef, DebugElement } from '@angular/core';
+import { PanelService } from '../panel.service';
+import { BehaviorSubject } from 'rxjs';
 
 
 describe('PanelExpandComponent', () => {
@@ -10,11 +12,19 @@ describe('PanelExpandComponent', () => {
     let debugElement: DebugElement;
     let button: ElementRef;
     let changeDetectorRef: ChangeDetectorRef;
+    let panelServiceSpy: jasmine.SpyObj<PanelService>;
 
     beforeEach(async(() => {
+        const panelSpy = jasmine.createSpyObj('PanelService', ['updateExpanded', 'expanded']);
+        const mockExpandedObservable = new BehaviorSubject(false);
+
         TestBed.configureTestingModule({
-            declarations: [PanelExpandComponent]
+            declarations: [PanelExpandComponent],
+            providers: [{ provide: PanelService, useValue: panelSpy }]
         }).compileComponents();
+        
+        panelServiceSpy = TestBed.get(PanelService);
+        panelServiceSpy.expanded = mockExpandedObservable;
     }));
 
     beforeEach(() => {
@@ -38,13 +48,6 @@ describe('PanelExpandComponent', () => {
         button.nativeElement.click();
         fixture.detectChanges();
         expect(button.nativeElement.className).toContain('is-expanded');
-    });
-
-    it('should emit event when the button is clicked', () => {
-        component.expanded = false;
-        spyOn(component.expandedChange, 'emit');
-        button.nativeElement.click();
-        expect(component.expandedChange.emit).toHaveBeenCalledWith(true);
     });
 
     it('should assign compact modifier class to the button', () => {

@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { PanelModule } from './panel.module';
+import { PanelService } from './panel.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     template: `
@@ -29,12 +31,20 @@ describe('PanelComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let panelContent: ElementRef;
     let button: ElementRef;
+    let panelServiceSpy: jasmine.SpyObj<PanelService>;
 
     beforeEach(async(() => {
+        const panelSpy = jasmine.createSpyObj('PanelService', ['updateExpanded']);
+        const mockExpandedObservable = new BehaviorSubject(false);
+
         TestBed.configureTestingModule({
             declarations: [TestComponent],
+            providers: [{ provide: PanelService, useValue: panelSpy }],
             imports: [PanelModule]
         }).compileComponents();
+
+        panelServiceSpy = TestBed.get(PanelService);
+        panelServiceSpy.expanded = mockExpandedObservable;
     }));
 
     beforeEach(() => {
