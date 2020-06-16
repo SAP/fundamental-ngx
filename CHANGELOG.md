@@ -2,6 +2,116 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.34"></a>
+# [0.19.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.33...v0.19.0-rc.34) (2020-06-15)
+
+
+### Bug Fixes
+
+* Fix initially open popover, change example on popover with side nav ([#2607](https://github.com/SAP/fundamental-ngx/issues/2607)) ([0dd8907](https://github.com/SAP/fundamental-ngx/commit/0dd8907))
+
+
+
+<a name="0.19.0-rc.33"></a>
+# [0.19.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.32...v0.19.0-rc.33) (2020-06-15)
+
+
+
+<a name="0.19.0-rc.32"></a>
+# [0.19.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.31...v0.19.0-rc.32) (2020-06-15)
+
+
+
+<a name="0.19.0-rc.31"></a>
+# [0.19.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.30...v0.19.0-rc.31) (2020-06-15)
+
+
+
+<a name="0.19.0-rc.30"></a>
+# [0.19.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.29...v0.19.0-rc.30) (2020-06-15)
+
+
+### Features
+
+* (platform) Fixing Menu/SearchField styles after fundamental-style upgrade ([#2294](https://github.com/SAP/fundamental-ngx/issues/2294)) ([53f5120](https://github.com/SAP/fundamental-ngx/commit/53f5120))
+
+
+
+<a name="0.19.0-rc.29"></a>
+# [0.19.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.28...v0.19.0-rc.29) (2020-06-14)
+
+
+
+<a name="0.19.0-rc.28"></a>
+# [0.19.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.27...v0.19.0-rc.28) (2020-06-14)
+
+
+
+<a name="0.19.0-rc.27"></a>
+# [0.19.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.26...v0.19.0-rc.27) (2020-06-14)
+
+
+
+<a name="0.19.0-rc.26"></a>
+# [0.19.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.25...v0.19.0-rc.26) (2020-06-14)
+
+
+
+<a name="0.19.0-rc.25"></a>
+# [0.19.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.24...v0.19.0-rc.25) (2020-06-14)
+
+
+
+<a name="0.19.0-rc.24"></a>
+# [0.19.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.23...v0.19.0-rc.24) (2020-06-14)
+
+
+
+<a name="0.19.0-rc.23"></a>
+# [0.19.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.22...v0.19.0-rc.23) (2020-06-12)
+
+
+
+<a name="0.19.0-rc.22"></a>
+# [0.19.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.21...v0.19.0-rc.22) (2020-06-12)
+
+
+### Bug Fixes
+
+* Deprecate isDropdown flag ([#2639](https://github.com/SAP/fundamental-ngx/issues/2639)) ([9a7a8a3](https://github.com/SAP/fundamental-ngx/commit/9a7a8a3))
+
+
+
+<a name="0.19.0-rc.21"></a>
+# [0.19.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.20...v0.19.0-rc.21) (2020-06-12)
+
+
+### Bug Fixes
+
+* Failing tests on checkbox and switch ([#2656](https://github.com/SAP/fundamental-ngx/issues/2656)) ([e40db61](https://github.com/SAP/fundamental-ngx/commit/e40db61))
+
+
+
+<a name="0.19.0-rc.20"></a>
+# [0.19.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.19...v0.19.0-rc.20) (2020-06-12)
+
+
+
+<a name="0.19.0-rc.19"></a>
+# [0.19.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.18...v0.19.0-rc.19) (2020-06-12)
+
+
+### Bug Fixes
+
+* Remove unused modules ([#2644](https://github.com/SAP/fundamental-ngx/issues/2644)) ([13f2565](https://github.com/SAP/fundamental-ngx/commit/13f2565))
+
+
+
+<a name="0.19.0-rc.18"></a>
+# [0.19.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.17...v0.19.0-rc.18) (2020-06-10)
+
+
+
 <a name="0.19.0-rc.17"></a>
 # [0.19.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.16...v0.19.0-rc.17) (2020-06-08)
 

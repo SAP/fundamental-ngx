@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MultiInputComponent } from './multi-input.component';
 import { TokenModule } from '../token/token.module';
 import { FormsModule } from '@angular/forms';
-import { MenuModule } from '../menu/menu.module';
 import { PopoverModule } from '../popover/popover.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
@@ -18,7 +17,6 @@ import { LinkModule } from '../link/link.module';
         CommonModule,
         TokenModule,
         FormsModule,
-        MenuModule,
         ListModule,
         PopoverModule,
         PipeModule,

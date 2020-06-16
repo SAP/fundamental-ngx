@@ -1,9 +1,46 @@
 @import '~fundamental-styles/dist/input';
+
+/* Remove clear "x" from search field for IE browsers */
+input[type=text]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type=text]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* Remove clear "x" from search field for Webkit browsers */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
 input.fd-input {
     border: none;
     border-width: 0;
 }
+
 .fd-popover__body {
     position: static;
     width: 100%;
+}
+
+.search-field--dropdown {
+    .fd-menu {
+        max-width: none;
+    }
+
+    .fd-menu__list {
+        max-width: none;
+    }
+
+    .fd-menu__item {
+        max-width: none;
+    }
 }
