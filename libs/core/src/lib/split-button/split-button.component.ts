@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
-import { ButtonOptions, ButtonType } from '../button/button.component';
+import { ButtonType } from '../button/button.component';
 import { MenuComponent } from '../menu/menu.component';
 
 /**
@@ -67,16 +67,12 @@ export class SplitButtonComponent {
     @Input()
     expandButtonAriaLabel: string = 'More';
 
-    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input()
-    options: ButtonOptions | ButtonOptions[];
-
     /** Event sent when primary button is clicked */
     @Output()
     readonly primaryButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** @hidden */
-    @ContentChild(SplitButtonActionTitle, {read: TemplateRef})
+    @ContentChild(SplitButtonActionTitle, { read: TemplateRef })
     titleTemplate: TemplateRef<any>;
 
     /** @hidden */
