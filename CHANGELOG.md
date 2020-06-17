@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.40"></a>
+# [0.19.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.39...v0.19.0-rc.40) (2020-06-17)
+
+
+### Bug Fixes
+
+* Bring IE11 support for tristate on checkbox ([#2677](https://github.com/SAP/fundamental-ngx/issues/2677)) ([98ed7ba](https://github.com/SAP/fundamental-ngx/commit/98ed7ba))
+
+
+
 <a name="0.19.0-rc.39"></a>
 # [0.19.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.38...v0.19.0-rc.39) (2020-06-17)
 
