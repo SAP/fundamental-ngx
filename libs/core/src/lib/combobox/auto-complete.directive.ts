@@ -39,16 +39,16 @@ export class AutoCompleteDirective {
     @Output()
     readonly onComplete: EventEmitter<AutoCompleteEvent> = new EventEmitter<AutoCompleteEvent>();
 
-    private readonly completeKeys: string[] = [
+    private readonly _completeKeys: string[] = [
         'Enter'
     ];
 
-    private readonly fillKeys: string[] = [
+    private readonly _fillKeys: string[] = [
         'ArrowLeft',
         'ArrowRight'
     ];
 
-    private readonly stopKeys: string[] = [
+    private readonly _stopKeys: string[] = [
         'Backspace',
         'Delete',
         'Escape'
@@ -65,11 +65,11 @@ export class AutoCompleteDirective {
     @HostListener('keyup', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.enable) {
-            if (KeyUtil.isKey(event, this.stopKeys)) {
+            if (KeyUtil.isKey(event, this._stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;
-            } else if (KeyUtil.isKey(event, this.completeKeys)) {
+            } else if (KeyUtil.isKey(event, this._completeKeys)) {
                 this._sendCompleteEvent(true);
-            } else if (KeyUtil.isKey(event, this.fillKeys)) {
+            } else if (KeyUtil.isKey(event, this._fillKeys)) {
                 this._sendCompleteEvent(false);
             } else if (!this._isControlKey(event) && this.inputText) {
 
