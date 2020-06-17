@@ -16,8 +16,8 @@ import {
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { RtlService } from '../utils/services/rtl.service';
 import { BehaviorSubject } from 'rxjs';
-import { PopoverComponent } from '../popover/popover.component';
 import { KeyUtil } from '../utils/public_api';
+import { MenuComponent } from '../menu/menu.component';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -43,13 +43,18 @@ import { KeyUtil } from '../utils/public_api';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbComponent implements AfterContentInit, OnInit {
+
+    /** Whenever links wrapped inside overflow should be displayed in compact mode  */
+    @Input()
+    compact: boolean = false;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
     breadcrumbItems: QueryList<BreadcrumbItemDirective>;
 
     /** @hidden */
-    @ViewChild(PopoverComponent)
-    popoverComponent: PopoverComponent;
+    @ViewChild(MenuComponent)
+    menuComponent: MenuComponent;
 
     /** @hidden */
     collapsedBreadcrumbItems: Array<BreadcrumbItemDirective> = [];
@@ -96,7 +101,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     /** @hidden */
     keyDownHandle(event: KeyboardEvent): void {
         if (KeyUtil.isKey(event, ['Enter', ' '])) {
-            this.popoverComponent.toggle();
+            this.menuComponent.toggle();
             event.preventDefault();
         }
     }
