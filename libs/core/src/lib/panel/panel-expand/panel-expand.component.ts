@@ -56,7 +56,7 @@ export class PanelExpandComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        this._subscription = this.panelService.expanded.subscribe( (value: boolean) => {
+        this._subscription = this.panelService.expanded$.subscribe( (value: boolean) => {
             this.expanded = value;
             this._cdRef.detectChanges();
         });

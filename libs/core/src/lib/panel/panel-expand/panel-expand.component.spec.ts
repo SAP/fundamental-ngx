@@ -22,9 +22,9 @@ describe('PanelExpandComponent', () => {
             declarations: [PanelExpandComponent],
             providers: [{ provide: PanelService, useValue: panelSpy }]
         }).compileComponents();
-        
+
         panelServiceSpy = TestBed.get(PanelService);
-        panelServiceSpy.expanded = mockExpandedObservable;
+        panelServiceSpy.expanded$ = mockExpandedObservable;
     }));
 
     beforeEach(() => {

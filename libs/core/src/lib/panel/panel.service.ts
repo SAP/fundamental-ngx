@@ -3,14 +3,10 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class PanelService {
+    expanded$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
     /** Whether the Panel is expanded */
-    expanded: BehaviorSubject<boolean>;
-
-    constructor() {
-        this.expanded = new BehaviorSubject(false);
-    }
-
     updateExpanded(value: boolean) {
-        this.expanded.next(value);
+        this.expanded$.next(value);
     }
 }

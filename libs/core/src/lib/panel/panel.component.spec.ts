@@ -44,7 +44,7 @@ describe('PanelComponent', () => {
         }).compileComponents();
 
         panelServiceSpy = TestBed.get(PanelService);
-        panelServiceSpy.expanded = mockExpandedObservable;
+        panelServiceSpy.expanded$ = mockExpandedObservable;
     }));
 
     beforeEach(() => {

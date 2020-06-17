@@ -59,13 +59,13 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     constructor(
         private _cdRef: ChangeDetectorRef,
         private _elementRef: ElementRef,
-        public panelService: PanelService
+        private _panelService: PanelService
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        this._subscription = this.panelService.expanded.subscribe((value) => {
+        this._subscription = this._panelService.expanded$.subscribe((value) => {
             this.expanded = value;
             this._cdRef.detectChanges();
         });
@@ -74,10 +74,10 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
-        this.panelService.updateExpanded(this.expanded);
+        this._panelService.updateExpanded(this.expanded);
 
         if (changes && changes.expanded) {
-            this.panelService.updateExpanded(this.expanded);
+            this._panelService.updateExpanded(this.expanded);
         }
     }
 
