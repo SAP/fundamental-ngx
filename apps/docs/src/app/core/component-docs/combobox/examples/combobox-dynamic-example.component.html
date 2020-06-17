@@ -1,13 +1,11 @@
 <fd-combobox
-    [(ngModel)]="searchTerm"
+    [ngModel]="selected"
     (ngModelChange)="selectItem($event)"
     [dropdownValues]="dropdownValues"
     [placeholder]="'Type to filter the list...'"
     [filterFn]="customFilter"
 >
 </fd-combobox>
-<br />
-<span>Search Term: {{ searchTerm }}</span>
 <br />
 <span>Selected: {{ selected }}</span>
 <br />
