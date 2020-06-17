@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.37"></a>
+# [0.19.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.36...v0.19.0-rc.37) (2020-06-17)
+
+
+### Bug Fixes
+
+* Stop propagating clicks from nested icon ([#2676](https://github.com/SAP/fundamental-ngx/issues/2676)) ([c264ff2](https://github.com/SAP/fundamental-ngx/commit/c264ff2))
+
+
+
 <a name="0.19.0-rc.36"></a>
 # [0.19.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.35...v0.19.0-rc.36) (2020-06-17)
 
