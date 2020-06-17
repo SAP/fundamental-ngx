@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.38"></a>
+# [0.19.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.37...v0.19.0-rc.38) (2020-06-17)
+
+
+### Features
+
+* Update Menu styling to match Fiori3 requirements ([#2572](https://github.com/SAP/fundamental-ngx/issues/2572)) ([4d9b64b](https://github.com/SAP/fundamental-ngx/commit/4d9b64b))
+
+
+
 <a name="0.19.0-rc.37"></a>
 # [0.19.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.36...v0.19.0-rc.37) (2020-06-17)
 
