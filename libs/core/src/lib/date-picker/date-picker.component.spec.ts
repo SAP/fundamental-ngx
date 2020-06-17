@@ -216,7 +216,7 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
         const invalidDate = (<any>component)._invalidDate();
-        // const rangeDateInvalidObject: FdRangeDate = { start: invalidDate, end: invalidDate };
+        const rangeDateInvalidObject: FdRangeDate = { start: invalidDate, end: invalidDate };
         component.type = 'range';
         component.disableRangeStartFunction = (fdDate: FdDate) => true;
         component.disableRangeEndFunction = (fdDate: FdDate) => true;
@@ -232,8 +232,8 @@ describe('DatePickerComponent', () => {
         expect(component.isInvalidDateInput).toBe(true);
         expect(component.calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
         expect(component.calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
-        // expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
-        // expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
+        expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
 
     it('Should handle end range date blocked by disable function', () => {
@@ -249,14 +249,14 @@ describe('DatePickerComponent', () => {
         const strDate1 = (<any>component)._formatDate(date1);
         const strDate2 = (<any>component)._formatDate(date2);
 
-        // const rangeDateInvalidObject: FdRangeDate = { start: date1, end: invalidDate };
+        const rangeDateInvalidObject: FdRangeDate = { start: date1, end: invalidDate };
 
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
         expect(component.isInvalidDateInput).toBe(true);
         expect(component.calendarComponent.currentlyDisplayed.month).toBe(date1.month);
         expect(component.calendarComponent.currentlyDisplayed.year).toBe(date1.year);
-        // expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
-        // expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
+        expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
 });
