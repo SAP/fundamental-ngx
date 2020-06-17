@@ -57,12 +57,11 @@ describe('RadioButtonComponent', () => {
         expect(component.radioButton1.value).toEqual(1);
     });
 
-    it('should check second radio', async () => {
-        await wait(fixture);
+    it('should check second radio', () => {
+        component.radioButton2.valueChange(2);
 
-        component.radioButton2.inputElement.nativeElement.click();
-
-        await wait(fixture);
+        (<any>component.radioButton2).changeDetectionRef.detectChanges();
+        fixture.detectChanges();
 
         expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
         expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();

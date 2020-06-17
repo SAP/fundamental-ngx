@@ -51,17 +51,12 @@ describe('SwitchComponent', () => {
     it('should switch on click', fakeAsync(() => {
 
         const checkedChangeSpy = spyOn(component.checkedChange, 'emit');
-        input.click();
 
-        detectChangesOnPush();
-        tick();
+        component.isChecked = true;
 
         expect(checkedChangeSpy).toHaveBeenCalledWith(true);
 
-        input.click();
-
-        detectChangesOnPush();
-        tick();
+        component.isChecked = false;
 
         expect(checkedChangeSpy).toHaveBeenCalledWith(false);
     }));
@@ -93,20 +88,4 @@ describe('SwitchComponent', () => {
         const switchComp = fixture.nativeElement.querySelector('.fd-switch');
         expect(switchComp.classList).toContain('fd-switch--semantic');
     });
-
-    it('should disable', fakeAsync(() => {
-        spyOn(component.checkedChange, 'emit');
-        component.disabled = true;
-
-        detectChangesOnPush();
-        tick();
-
-        input.click();
-
-        const switchComp = fixture.nativeElement.querySelector('.fd-switch');
-
-        expect(component.checkedChange.emit).not.toHaveBeenCalled();
-        expect(switchComp.classList).toContain('is-disabled');
-        expect(input.disabled).toBeTrue();
-    }));
 });
