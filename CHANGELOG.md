@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.50"></a>
+# [0.19.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.49...v0.19.0-rc.50) (2020-06-17)
+
+
+### Features
+
+* Remove button options ([#2689](https://github.com/SAP/fundamental-ngx/issues/2689)) ([bfae2a6](https://github.com/SAP/fundamental-ngx/commit/bfae2a6))
+
+
+
 <a name="0.19.0-rc.49"></a>
 # [0.19.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.48...v0.19.0-rc.49) (2020-06-17)
 
