@@ -21,7 +21,7 @@ import { MegaMenuLinkDirective } from '../mega-menu-link/mega-menu-link.directiv
 import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { DefaultMenuItem } from '../../menu/default-menu-item';
+import { DefaultMenuItem } from '../../menu/default-menu-item.class';
 import { RtlService, unifyKeyboardKey } from '../../utils/public_api';
 
 export type MenuSubListPosition = 'left' | 'right';

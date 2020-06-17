@@ -48,6 +48,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     @Input()
     isOpen: boolean = false;
 
+    /** Reference to external popover trigger responsible for opening/closing the popover */
+    @Input()
+    popoverTrigger?: ElementRef;
+
     /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
@@ -113,6 +117,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Popover loaded */
+    @Output()
+    loaded: EventEmitter<void> = new EventEmitter<void>();
 
     private containerRef: ComponentRef<PopoverContainer>;
     private popper: Popper;
@@ -205,6 +213,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
+    get triggerRef(): ElementRef {
+        return this.popoverTrigger || this.elRef;
+    }
+
     /**
      * Toggles the popover open state.
      */
@@ -281,6 +293,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         this.appRef.attachView(this.containerRef.hostView);
         const setupRef = this.containerRef.instance.isSetup.subscribe(() => {
             this.createPopper();
+            this.loaded.emit();
             this.updatePopper();
             setupRef.unsubscribe();
         });
@@ -305,7 +318,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     private addTriggerListeners(): void {
         if (this.triggers && this.triggers.length > 0) {
             this.triggers.forEach(trigger => {
-                this.eventRef.push(this.renderer.listen(this.elRef.nativeElement, trigger, () => {
+                this.eventRef.push(this.renderer.listen(this.triggerRef.nativeElement, trigger, () => {
                     this.toggle();
                 }));
             });
@@ -327,7 +340,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     private createPopper(): void {
         this.popper = new Popper(
-            this.elRef.nativeElement as HTMLElement,
+            this.triggerRef.nativeElement as HTMLElement,
             this.containerRef.location.nativeElement as HTMLElement,
             this.options
         );
@@ -394,8 +407,8 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             this.containerRef &&
             this.isOpen &&
             this.closeOnOutsideClick &&
-            event.target !== this.elRef.nativeElement &&
-            !this.elRef.nativeElement.contains(event.target) &&
+            event.target !== this.triggerRef.nativeElement &&
+            !this.triggerRef.nativeElement.contains(event.target) &&
             !this.containerRef.location.nativeElement.contains(event.target)
         );
     }

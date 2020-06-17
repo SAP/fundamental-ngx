@@ -6,13 +6,14 @@ import { API_FILES } from '../../api-files';
 import { MenuHeaderComponent } from './menu-header/menu-header.component';
 import { MenuDocsComponent } from './menu-docs.component';
 import {
+    MenuAddonExampleComponent,
     MenuExampleComponent,
-    MenuGroupExampleComponent,
-    MenuSeparatorExampleComponent
+    MenuMobileExampleComponent,
+    MenuSeparatorExampleComponent,
 } from './examples/menu-examples.component';
-import { MenuAddonExampleComponent } from './examples/menu-addon-examples.component';
-import { MenuKeyboardSupportExampleComponent } from './examples/menu-keyboard-support-example.component';
-import { MenuModule } from '@fundamental-ngx/core';
+
+import { MenuMobileModule, MenuModule } from '@fundamental-ngx/core';
+import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 
 const routes: Routes = [
     {
@@ -26,16 +27,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MenuModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MenuModule, MenuMobileModule],
     exports: [RouterModule],
     declarations: [
         MenuDocsComponent,
         MenuHeaderComponent,
         MenuExampleComponent,
         MenuAddonExampleComponent,
-        MenuGroupExampleComponent,
+        MenuMobileExampleComponent,
         MenuSeparatorExampleComponent,
-        MenuKeyboardSupportExampleComponent
+        MenuWithSubmenuExampleComponent
     ]
 })
 export class MenuDocsModule {}

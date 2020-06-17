@@ -1,16 +1,19 @@
 import {
-    AfterViewInit,
-    ChangeDetectorRef,
     Component,
     EventEmitter,
     Inject,
     Output,
-    OnInit
+    OnInit,
+    ViewChild
 } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
-import { ShellbarMenuItem, ShellbarUser, ShellbarUserMenu, MenuKeyboardService } from '@fundamental-ngx/core';
+import {
+    ShellbarMenuItem,
+    MenuKeyboardService,
+    MenuComponent
+} from '@fundamental-ngx/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -20,7 +23,18 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
     providers: [MenuKeyboardService]
 })
 export class ToolbarComponent implements OnInit {
+
+    @Output()
+    btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
+
+    @ViewChild('themeMenu')
+    themeMenu: MenuComponent;
+
     cssUrl: SafeResourceUrl;
+
+    library: string;
+
+    version: string = environment.version;
 
     items: ShellbarMenuItem[] = [
         {
@@ -36,14 +50,6 @@ export class ToolbarComponent implements OnInit {
             }
         }
     ];
-
-    themeUrl: string;
-
-    isOpen: boolean = false;
-
-    action = {
-        glyph: 'palette'
-    };
 
     themes = [
         {
@@ -64,17 +70,6 @@ export class ToolbarComponent implements OnInit {
         }
     ];
 
-    @Output()
-    btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
-
-    version: string = environment.version;
-
-    public library: string;
-
-    ngOnInit(): void {
-        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/sap_fiori_3.css');
-    }
-
     constructor(
         private routerService: Router,
         @Inject('CURRENT_LIB') private currentLib: Libraries,
@@ -84,9 +79,13 @@ export class ToolbarComponent implements OnInit {
         this.library = routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
     }
 
-    selectTheme(selectedTheme: string) {
-        if (this.isOpen) {
-            this.isOpen = false;
+    ngOnInit(): void {
+        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/sap_fiori_3.css');
+    }
+
+    selectTheme(selectedTheme: string): void {
+        if (this.themeMenu.isOpen) {
+            this.themeMenu.close();
             this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/' + selectedTheme + '.css');
         }
     }

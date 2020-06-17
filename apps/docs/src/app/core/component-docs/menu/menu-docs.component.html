@@ -1,6 +1,15 @@
-<fd-docs-section-title [id]="'def'" [componentName]="'menu'">
-    Menu
+<fd-docs-section-title [id]="'simple-menu'" [componentName]="'menu'">
+    Simple menu
 </fd-docs-section-title>
+<description>
+    To create simple menu use following directives:
+    <ul>
+        <li><code>fd-menu-item</code> - list element</li>
+        <li><code>fd-menu-interactive</code> - interactive element wrapping menu element content</li>
+        <li><code>fd-menu-title</code> - menu element title</li>
+    </ul>
+    Attach created menu to any HTML element using <code>fdMenuTrigger</code> directive.
+</description>
 <component-example>
     <fd-menu-example></fd-menu-example>
 </component-example>
@@ -8,12 +17,16 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'addon'" [componentName]="'menu'">
-    Menu with Addon
+<fd-docs-section-title [id]="'menu-with-icons'" [componentName]="'menu'">
+    Menu with icons
 </fd-docs-section-title>
-<description
-    >This is an additional container that can be used for an icon or checkbox before the menu item text. This can be
-    achieved with the directives <code>fd-menu-item-addon</code> and <code>fd-menu-addon</code>
+<description>
+    Menu items can be extended with additional content using the following directives:
+    <ul>
+        <li><code>fd-menu-addon</code> - adds icon to menu item. If you want to add the icon before the menu item title,
+            remember to add the <code>[position]="'before'"</code></li>
+        <li><code>fd-menu-shortcut</code> - adds information about useful shortcuts</li>
+    </ul>
 </description>
 <component-example>
     <fd-menu-addon-example></fd-menu-addon-example>
@@ -22,20 +35,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'group'" [componentName]="'menu'">
-    Menu with Group
+<fd-docs-section-title [id]="'menu-separator'" [componentName]="'menu'">
+    Menu with separator and compact mode
 </fd-docs-section-title>
-<component-example>
-    <fd-menu-group-example></fd-menu-group-example>
-</component-example>
-<code-example [exampleFiles]="menuGroup"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'optionalSeparator'" [componentName]="'menu'">
-    Menu with Optional Separator
-</fd-docs-section-title>
-<description>Each menu item can have an optional separator shown as a line beneath the item.</description>
+<description>
+    To add a visual separation line between menu items, use the <code>fd-menu-separator</code> component.<br/>
+    To display Menu in compact mode use <code>[compact]="true"</code>.
+</description>
 <component-example>
     <fd-menu-separator-example></fd-menu-separator-example>
 </component-example>
@@ -43,16 +49,47 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'keyboard'" [componentName]="'menu'">
-    Keyboard Support
+<fd-docs-section-title [id]="'menu-with-submenu'" [componentName]="'menu'">
+    Menu with submenu
 </fd-docs-section-title>
 <description>
-    Keyboard support can be added on every component which uses the <code>MenuComponent</code>. It simulates click event
-    on <code>Enter</code> or <code>Space</code> key down. It is also possible to override functions for a variety of
-    situations. For example, when the focus should escape the element. Use the up and down arrows to test the component
-    below. To enable focusing on non-focusable elements, change value of <code>tabIndex</code> to 0.
+    Each Menu item can have its submenu. To create a submenu, do the following:
+    <ul>
+        <li>Create standard menu</li>
+        <li>Create submenus using <code>fd-submenu</code> component</li>
+        <li>Attach created submenus to <code>fd-menu-item</code> using <code>[submenu]</code> input</li>
+        <li>You can use <code>fd-menu-addon</code> with <code>[submenuIndicator]="true"</code> to add icon indicating
+            menu items with submenus
+        </li>
+    </ul>
+    Use <code>(activePath)</code> output to receive information about currently active items.
+    Use <code>(openOnHoverTime)</code> to specify after how much hover time menu item should expand.
 </description>
 <component-example>
-    <fd-menu-keyboard-support-example></fd-menu-keyboard-support-example>
+    <fd-menu-with-submenu-example></fd-menu-with-submenu-example>
 </component-example>
-<code-example [exampleFiles]="menuKeyboard"></code-example>
+<code-example [exampleFiles]="menuWithSubmenu"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'mobile-menu'" [componentName]="'menu'">
+    Menu in mobile mode
+</fd-docs-section-title>
+<import module="MenuMobileModule"></import>
+<description>
+    To open Menu in mobile mode:
+    <ul>
+        <li>Additionally import <code>MenuMobileModule</code></li>
+        <li>Set Menu input <code>[mobileMode]="true"</code></li>
+        <li>Use <code>[mobileModeConfig]</code> to customize the mobile view.</li>
+        <li>To pass additional configuration to the Dialog where the mobile Menu is opened, provide
+            <code>DialogConfig</code> using <code>DIALOG_CONFIG</code> injection token.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fd-menu-mobile-example></fd-menu-mobile-example>
+</component-example>
+<code-example [exampleFiles]="menuMobile"></code-example>
+
+<separator></separator>
