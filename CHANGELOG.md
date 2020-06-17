@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.45"></a>
+# [0.19.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.44...v0.19.0-rc.45) (2020-06-17)
+
+
+### Bug Fixes
+
+* remove circular dependency on mobile modes ([#2696](https://github.com/SAP/fundamental-ngx/issues/2696)) ([53ab1a1](https://github.com/SAP/fundamental-ngx/commit/53ab1a1))
+
+
+
 <a name="0.19.0-rc.44"></a>
 # [0.19.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.43...v0.19.0-rc.44) (2020-06-17)
 
