@@ -20,6 +20,6 @@
          [class.fd-busy-indicator__overlay--transparent]="!busyIndicator?.previousElementSibling">
     </div>
 
-    <div #fakeFocusElement tabindex="0" aria-hidden="true" (focus)="fakeElementFocusHandler($event)"></div>
+    <div #fakeFocusElement tabindex="0" aria-hidden="true" (focusin)="fakeElementFocusHandler($event)"></div>
 
 </ng-container>
