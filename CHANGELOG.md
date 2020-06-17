@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.46"></a>
+# [0.19.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.45...v0.19.0-rc.46) (2020-06-17)
+
+
+### Bug Fixes
+
+* Fix sizing of mobile mode multi input, fix dialog components configuration passing ([#2695](https://github.com/SAP/fundamental-ngx/issues/2695)) ([8755718](https://github.com/SAP/fundamental-ngx/commit/8755718))
+
+
+
 <a name="0.19.0-rc.45"></a>
 # [0.19.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.44...v0.19.0-rc.45) (2020-06-17)
 
