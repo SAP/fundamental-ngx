@@ -2,7 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
+    ElementRef, Inject,
     isDevMode,
     OnDestroy,
     OnInit,
@@ -13,9 +13,9 @@ import {
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
-import { MultiInputComponent } from '../multi-input.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.interface';
 
 @Component({
     selector: 'fd-multi-input-mobile',
@@ -53,7 +53,7 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
 
     constructor(
         private _dialogService: DialogService,
-        private _multiInputComponent: MultiInputComponent,
+        @Inject(MULTI_INPUT_COMPONENT) private _multiInputComponent: MultiInputInterface,
         private _elementRef: ElementRef
     ) {}
 
