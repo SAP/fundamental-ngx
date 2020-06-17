@@ -15,13 +15,4 @@ import { Component } from '@angular/core';
     ]
 })
 export class ButtonSplitProgrammaticalExampleComponent {
-    isOpen: boolean = false;
-
-    itemClicked() {
-        alert('Item Clicked!');
-    }
-
-    primaryButtonClicked() {
-        alert('Primary Button Clicked!');
-    }
 }

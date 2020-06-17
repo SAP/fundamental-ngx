@@ -171,7 +171,7 @@ describe('NestedItemDirective', () => {
     it('Should react to events from icon child', () => {
         fixture.detectChanges();
         spyOn(nestedItemListDirective, 'toggle');
-        nestedItemListDirective.contentItem.nestedExpandIcon.onClick();
+        nestedItemListDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
         expect(nestedItemListDirective.toggle).toHaveBeenCalledWith();
     });
@@ -180,7 +180,7 @@ describe('NestedItemDirective', () => {
         fixture.detectChanges();
         itemService.popover.handleOpenChange(true);
         spyOn(nestedItemPopoverDirective, 'toggle');
-        nestedItemPopoverDirective.contentItem.nestedExpandIcon.onClick();
+        nestedItemPopoverDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
         expect(nestedItemPopoverDirective.toggle).toHaveBeenCalledWith();
     });

@@ -7,6 +7,7 @@ import { EventEmitter } from '@angular/core';
 import { DialogModule } from '../../dialog/dialog.module';
 import { MultiInputComponent } from '../multi-input.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MULTI_INPUT_COMPONENT } from '../multi-input.interface';
 
 describe('MultiInputMobileComponent', () => {
     let component: MultiInputMobileComponent;
@@ -33,7 +34,7 @@ describe('MultiInputMobileComponent', () => {
         TestBed.configureTestingModule({
             imports: [ DialogModule, BrowserAnimationsModule ],
             declarations: [MultiInputMobileComponent],
-            providers: [ DynamicComponentService, {provide: MultiInputComponent, useValue: mockedMultiInputComponent} ]
+            providers: [ DynamicComponentService, {provide: MULTI_INPUT_COMPONENT, useValue: mockedMultiInputComponent} ]
         })
             .compileComponents();
     }));

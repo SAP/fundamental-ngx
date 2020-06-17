@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RadioButtonComponent } from './radio-button.component';
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -34,6 +34,7 @@ class TestRadioButtonComponentReactiveForms {
 describe('RadioButtonComponent reactive forms', () => {
     let component: TestRadioButtonComponentReactiveForms;
     let fixture: ComponentFixture<TestRadioButtonComponentReactiveForms>;
+    let changeDetectorRef: ChangeDetectorRef;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -45,10 +46,12 @@ describe('RadioButtonComponent reactive forms', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioButtonComponentReactiveForms);
         component = fixture.componentInstance;
+        changeDetectorRef = fixture.componentRef.injector.get(ChangeDetectorRef);
         fixture.detectChanges();
     });
 
     async function wait(componentFixture: ComponentFixture<any>) {
+        changeDetectorRef.markForCheck();
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }

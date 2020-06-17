@@ -1,0 +1,70 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+
+        <fd-dialog-header>
+            <ng-template fdTemplate="header">
+                <div fd-bar-left>
+                    <fd-bar-element *ngIf="isSubmenu">
+                        <button fd-button
+                                fdType="transparent"
+                                id="menu-mobile-navigate-back"
+                                [attr.aria-label]="'Go to previous menu level: ' + title"
+                                [glyph]="navigationIcon$ | async"
+                                (click)="backToParentLevel()">
+                        </button>
+                    </fd-bar-element>
+                    <fd-bar-element>
+                        <h1 fd-dialog-title>{{title}}</h1>
+                    </fd-bar-element>
+                </div>
+                <div fd-bar-right>
+                    <fd-bar-element>
+                        <button *ngIf="this.mobileConfig.hasCloseButton"
+                                fd-dialog-close-button
+                                [mobile]="true"
+                                (click)="close()">
+                        </button>
+                    </fd-bar-element>
+                </div>
+            </ng-template>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <ng-container *ngTemplateOutlet="isSubmenu
+                        ? subMenuTemplate
+                        : view">
+            </ng-container>
+        </fd-dialog-body>
+
+        <fd-dialog-footer *ngIf="mobileConfig.approveButtonText || mobileConfig.cancelButtonText">
+            <fd-dialog-footer-button *ngIf="mobileConfig.approveButtonText">
+                <button fd-button
+                        id="menu-mobile-approve-button"
+                        fdType="emphasized"
+                        fd-dialog-decisive-button
+                        (click)="close()">
+                    {{mobileConfig.approveButtonText}}
+                </button>
+            </fd-dialog-footer-button>
+
+            <fd-dialog-footer-button *ngIf="mobileConfig.cancelButtonText">
+                <button fd-button
+                        id="menu-mobile-cancel-button"
+                        fdType="transparent"
+                        fd-dialog-decisive-button
+                        (click)="close()">
+                    {{mobileConfig.cancelButtonText}}
+                </button>
+            </fd-dialog-footer-button>
+        </fd-dialog-footer>
+
+    </fd-dialog>
+</ng-template>
+
+<ng-template #subMenuTemplate>
+    <nav class="fd-menu fd-menu--mobile" [class.fd-menu--compact]="false">
+        <ul class="fd-menu__sublist">
+            <ng-container *ngTemplateOutlet="view"></ng-container>
+        </ul>
+    </nav>
+</ng-template>

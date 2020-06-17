@@ -1,21 +1,50 @@
-<fd-docs-section-title [id]="'basicPanelLayout'" [componentName]="'panel'">
-    Basic Panel Layout
+<fd-docs-section-title [id]="'panelExpandable'" [componentName]="'panel'">
+   Expandable Panel
 </fd-docs-section-title>
+<description>
+    Expandable panels are much like fixed panels, except their content can be expanded and collapsed (including the info toolbar, if available).
+</description>
 <component-example>
-    <fd-panel-example></fd-panel-example>
+    <fd-panel-expandable-example></fd-panel-expandable-example>
 </component-example>
-<code-example [exampleFiles]="panelBasic"></code-example>
+<code-example [exampleFiles]="panelExpandable"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'panelEdgeBleed'" [componentName]="'panel'">
-    Panel Edge Bleed
+<fd-docs-section-title [id]="'panelFixed'" [componentName]="'panel'">
+   Fixed Panel
 </fd-docs-section-title>
 <description>
-    Use <code>[bleed]="true"</code> on the panel body to have the contents of the panel body bleed to the outer edge.
-    This is useful for components like tables and trees.
+    Fixed panels are useful for grouping custom content. They include headers and info toolbars. To create a fixed panel, add <code>[fixed]="true"</code> to the Panel.
 </description>
 <component-example>
-    <fd-panel-edge-bleed-example></fd-panel-edge-bleed-example>
+    <fd-panel-fixed-example></fd-panel-fixed-example>
 </component-example>
-<code-example [exampleFiles]="tableBleed"></code-example>
+<code-example [exampleFiles]="panelFixed"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'panelCompact'" [componentName]="'panel'">
+   Compact Panel
+</fd-docs-section-title>
+<description>
+    For a compact panel, set the <code>compact</code> property to <code>true</code>.
+</description>
+<component-example>
+    <fd-panel-compact-example></fd-panel-compact-example>
+</component-example>
+<code-example [exampleFiles]="panelCompact"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'panelFixedHeight'" [componentName]="'panel'">
+   Fixed Height Content Panel
+</fd-docs-section-title>
+<description>
+   When the height of the panel’s content is set to a fixed size, the content area can be scrolled through. To set the height of the panel's content use the <code>height</code> property. 
+   Available options are: <code>height</code>, <code>minHeight</code> and <code>maxHeight</code>.
+</description>
+<component-example>
+    <fd-panel-fixed-height-example></fd-panel-fixed-height-example>
+</component-example>
+<code-example [exampleFiles]="panelFixedHeight"></code-example>

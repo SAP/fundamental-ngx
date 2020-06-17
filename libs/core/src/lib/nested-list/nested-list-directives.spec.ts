@@ -55,7 +55,7 @@ describe('NestedListDirectives', () => {
 
         spyOn((<any>expandIconElement)._itemService.toggle, 'next');
 
-        expandIconElement.onClick();
+        expandIconElement.onClick(new MouseEvent('click'));
 
         fixture.detectChanges();
 

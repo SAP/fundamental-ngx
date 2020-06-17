@@ -4,14 +4,7 @@ import { DialogService, FdDate } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-calendar-mobile-example',
     templateUrl: './calendar-mobile-example.component.html',
-    encapsulation: ViewEncapsulation.None,
-    styles: [
-        `
-            .fd-calendar--mobile-landscape .fd-calendar__navigation--main {
-                padding-right: calc(640px - 320px) !important;
-            }
-        `
-    ]
+    encapsulation: ViewEncapsulation.None
 })
 export class CalendarMobileExampleComponent {
     datePicked: FdDate = FdDate.getToday();

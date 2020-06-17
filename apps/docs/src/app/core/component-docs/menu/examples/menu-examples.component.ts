@@ -4,16 +4,26 @@ import { Component } from '@angular/core';
     selector: 'fd-menu-example',
     templateUrl: './menu-example.component.html'
 })
-export class MenuExampleComponent {}
+export class MenuExampleComponent {
+}
 
 @Component({
-    selector: 'fd-menu-group-example',
-    templateUrl: './menu-group-example.component.html'
+    selector: 'fd-menu-addon-example',
+    templateUrl: './menu-addon-example.component.html'
 })
-export class MenuGroupExampleComponent {}
+export class MenuAddonExampleComponent {
+}
 
 @Component({
     selector: 'fd-menu-separator-example',
     templateUrl: './menu-separator-example.component.html'
 })
-export class MenuSeparatorExampleComponent {}
+export class MenuSeparatorExampleComponent {
+}
+
+@Component({
+    selector: 'fd-menu-mobile-example',
+    templateUrl: './menu-mobile-example.component.html'
+})
+export class MenuMobileExampleComponent {
+}

@@ -36,6 +36,7 @@ export class PopoverComponent {
     /** @hidden */
     @ViewChild(PopoverDirective)
     directiveRef: PopoverDirective;
+
     /** @hidden */
     @ContentChild(PopoverDropdownComponent) dropdownComponent: PopoverDropdownComponent;
 

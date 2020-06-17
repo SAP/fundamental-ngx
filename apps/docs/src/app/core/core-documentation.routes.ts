@@ -138,6 +138,10 @@ export const ROUTES: Routes = [
                     import('./component-docs/layout-grid/layout-grid-docs.module').then((m) => m.LayoutGridDocsModule)
             },
             {
+                path: 'layoutPanel',
+                loadChildren: () => import('./component-docs/layout-panel/layout-panel-docs.module').then((m) => m.LayoutPanelDocsModule)
+            },
+            {
                 path: 'link',
                 loadChildren: () => import('./component-docs/link/link-docs.module').then((m) => m.LinkDocsModule)
             },

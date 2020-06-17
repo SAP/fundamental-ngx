@@ -27,18 +27,6 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     totalNotifications: number;
 
     /** @hidden */
-    showCollapsedProducts: boolean = false;
-
-    /** @hidden */
-    toggleCollapsedProducts(event: MouseEvent): void {
-        event.preventDefault();
-        event.stopPropagation();
-        this.showCollapsedProducts = !this.showCollapsedProducts;
-    }
-
-    /**
-     * @hidden
-     */
     actionClicked(item: ShellbarActionComponent, event: any): void {
         if (item.callback) {
             item.callback(event);

@@ -1,20 +1,23 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+
+let panelHeaderUniqueId: number = 0;
 
 /**
- * Header of the panel. Contains a head and actions.
+ * Applies the panel header style to a div element
+ * and serves as a container for the Panel Expand component,
+ * the Panel Title and an optional Toolbar component.
  *
  * ```html
- * <fd-panel>
- *     <fd-panel-header>
- *         <fd-panel-head>
- *             <fd-panel-title>Title!</fd-panel-title>
- *         </fd-panel-head>
- *     </fd-panel-header>
- * </fd-panel>
+ * <div fd-panel-header>
+ *   <div fd-panel-expand></div>
+ *   <h5 fd-panel-title>Panel Header</h5>
+ *   <div>Other content</div>
+ * </div>
  * ```
  */
 @Component({
-    selector: 'fd-panel-header',
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-panel-header]',
     templateUrl: './panel-header.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,5 +25,10 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 export class PanelHeaderComponent {
     /** @hidden */
     @HostBinding('class.fd-panel__header')
-    fdPanelHeaderClass = true;
+    readonly fdPanelHeaderClass: boolean = true;
+
+    /** Id of the host element. */
+    @Input()
+    @HostBinding('attr.id')
+    id: string = 'fd-panel-header-' + panelHeaderUniqueId++;
 }

@@ -10,6 +10,7 @@ import {
     forwardRef,
     HostListener,
     Inject,
+    Injector,
     Input,
     OnDestroy,
     OnInit,
@@ -33,6 +34,7 @@ import { DynamicComponentService } from '../utils/dynamic-component/dynamic-comp
 import { SelectMobileComponent } from './select-mobile/select-mobile/select-mobile.component';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
+import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 
 let selectUniqueId: number = 0;
 
@@ -61,7 +63,7 @@ export interface OptionStatusChange {
         }
     ]
 })
-export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor, SelectInterface {
 
     /** Id of the control. */
     @Input()
@@ -559,7 +561,7 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
                 this.selectOptionsListTemplate,
                 SelectMobileComponent,
                 { container: this._elementRef.nativeElement },
-                { services: [this] }
+                { injector: Injector.create([{ provide: SELECT_COMPONENT, useValue: this }]) }
             )
         }
     }

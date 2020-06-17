@@ -1,5 +1,4 @@
-<ng-content select="fd-panel-header"></ng-content>
-<ng-content select="fd-panel-filters"></ng-content>
-<ng-content select="fd-panel-body"></ng-content>
-<ng-content select="fd-panel-footer"></ng-content>
-<ng-content></ng-content>
+<ng-content select="[fd-panel-header]"></ng-content>
+<ng-container *ngIf="expanded || fixed">
+    <ng-content select="[fd-panel-content]"></ng-content>
+</ng-container>

@@ -15,12 +15,12 @@ import { PopoverExampleComponent } from './examples/popover-simple/popover-examp
 import {
     IdentifierModule,
     ImageModule,
-    MenuModule,
     DialogModule,
     MultiInputModule,
     PopoverModule,
     SideNavigationModule,
-    BarModule
+    BarModule,
+    ListModule
 } from '@fundamental-ngx/core';
 import { PopoverComplexExampleComponent } from './examples/popover-complex-example/popover-complex-example.component';
 
@@ -44,8 +44,8 @@ const routes: Routes = [
         IdentifierModule,
         SideNavigationModule,
         MultiInputModule,
-        MenuModule,
         DialogModule,
+        ListModule,
         BarModule
     ],
     exports: [RouterModule],

@@ -20,6 +20,7 @@ import { ImageModule } from './image/image.module';
 import { InfiniteScrollModule } from './infinite-scroll/infinite-scroll.module';
 import { InlineHelpModule } from './inline-help/inline-help.module';
 import { InputGroupModule } from './input-group/input-group.module';
+import { LayoutPanelModule } from './layout-panel/layout-panel.module';
 import { ListModule } from './list/list.module';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { MenuModule } from './menu/menu.module';
@@ -89,6 +90,7 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
         InfiniteScrollModule,
         InputGroupModule,
         LayoutGridModule,
+        LayoutPanelModule,
         LinkModule,
         ListModule,
         LoadingSpinnerModule,
@@ -124,4 +126,4 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
     ],
     providers: [AlertService, DialogService, NotificationService]
 })
-export class FundamentalNgxCoreModule {}
+export class FundamentalNgxCoreModule { }

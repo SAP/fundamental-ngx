@@ -9,4 +9,5 @@ export * from './combo-box/combo-box.component';
 export * from './input-message-group-with-template/input-message-group-with-template.component';
 export * from './radio-group/radio-group.module';
 export * from './radio-group/radio-group.component';
-export * from './radio-group/radio/radio.component';
+export * from './checkbox/checkbox.module';
+export * from './checkbox/checkbox.component';
