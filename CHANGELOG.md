@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.39"></a>
+# [0.19.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.38...v0.19.0-rc.39) (2020-06-17)
+
+
+### Features
+
+* refactor old Panel component to Layout Panel and introduce Fiori 3 Panel ([#2612](https://github.com/SAP/fundamental-ngx/issues/2612)) ([6f106ca](https://github.com/SAP/fundamental-ngx/commit/6f106ca))
+
+
+
 <a name="0.19.0-rc.38"></a>
 # [0.19.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.37...v0.19.0-rc.38) (2020-06-17)
 
