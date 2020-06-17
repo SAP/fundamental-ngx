@@ -15,5 +15,6 @@ export const API_FILES = {
     radioGroup: ['RadioGroupComponent'],
     searchField: ['SearchFieldComponent'],
     select: ['SelectPlatformComponent'],
-    splitMenuButton: ['SplitMenuButtonComponent']
+    splitMenuButton: ['SplitMenuButtonComponent'],
+    textarea: ['TextAreaComponent']
 };
