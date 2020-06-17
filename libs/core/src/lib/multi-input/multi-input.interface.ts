@@ -9,9 +9,9 @@ export const MULTI_INPUT_COMPONENT = new InjectionToken<string[]>('MultiInputInt
  * MultiInputComponent <==> MultiInputMobileComponent
  */
 export interface MultiInputInterface {
-    selectAllItems: () => {};
-    dialogDismiss: (backup: any[]) => {};
-    dialogApprove: () => {};
+    selectAllItems: () => void;
+    dialogDismiss: (backup: any[]) => void;
+    dialogApprove: () => void;
     multiInputMobileConfig?: MobileModeConfig;
     selected: any[];
     openChange: EventEmitter<boolean>;

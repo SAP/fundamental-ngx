@@ -11,8 +11,8 @@ export const SELECT_COMPONENT = new InjectionToken<string[]>('SelectInterface');
  */
 export interface SelectInterface {
     mobileConfig: MobileModeConfig;
-    setSelectedOption: ({option, controlChange}: OptionStatusChange, forceMobileSelect?: boolean) => {};
-    close: () => {};
+    setSelectedOption: ({option, controlChange}: OptionStatusChange, forceMobileSelect?: boolean) => void;
+    close: () => void;
     selected: OptionComponent;
     dialogConfig: DialogConfig;
     isOpenChange: EventEmitter<boolean>;
