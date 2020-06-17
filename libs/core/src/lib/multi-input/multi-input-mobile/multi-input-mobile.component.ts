@@ -63,6 +63,8 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
         if (this.multiInputConfig) {
             this._listenOnMultiInputOpenChange();
         }
+
+        console.log(this.multiInputConfig);
     }
 
     /** @hidden */
@@ -128,6 +130,7 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _open(): void {
+        console.log(this._multiInputComponent.dialogConfig);
         this._dialogRef = this._dialogService.open(
             this.dialogTemplate,
             {
