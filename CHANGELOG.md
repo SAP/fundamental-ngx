@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.44"></a>
+# [0.19.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.43...v0.19.0-rc.44) (2020-06-17)
+
+
+### Bug Fixes
+
+* Add support for focus/trigger on breadcrumb overflow indicator ([#2642](https://github.com/SAP/fundamental-ngx/issues/2642)) ([4f66969](https://github.com/SAP/fundamental-ngx/commit/4f66969))
+
+
+
 <a name="0.19.0-rc.43"></a>
 # [0.19.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.42...v0.19.0-rc.43) (2020-06-17)
 
