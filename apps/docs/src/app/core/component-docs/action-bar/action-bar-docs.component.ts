@@ -20,7 +20,7 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: backButtonExample,
-            fileName: 'action-bar-back'
+            fileName: 'action-bar-back-button-example'
         },
         {
             language: 'typescript',
@@ -34,7 +34,7 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: titleTruncationExample,
-            fileName: 'action-bar-long-string-title-truncation'
+            fileName: 'action-bar-long-string-title-truncation-example'
         },
         {
             language: 'typescript',
@@ -64,13 +64,13 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: mobileExample,
-            fileName: 'action-bar-mobile'
+            fileName: 'action-bar-mobile-example'
         },
         {
             language: 'typescript',
             code: mobileExampleTs,
-            fileName: 'action-bar-mobile-button-example',
-            component: 'ActionBarMobileButtonExampleComponent'
+            fileName: 'action-bar-mobile-example',
+            component: 'ActionBarMobileExampleComponent'
         }
     ];
 }

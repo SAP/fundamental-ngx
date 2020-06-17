@@ -1,6 +1,8 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SectionInterface } from './section.interface';
+import { BehaviorSubject } from 'rxjs';
 
+const SMALL_SCREEN_BREAKPOINT = 992;
 @Component({
     selector: 'sections-toolbar',
     styleUrls: ['./sections-toolbar.component.scss'],
@@ -9,15 +11,19 @@ import { SectionInterface } from './section.interface';
 export class SectionsToolbarComponent implements OnInit {
     @Input() sections: SectionInterface[];
 
-    search: string = '';
-
-    smallScreen: boolean = window.innerWidth < 992;
-
-    @Input()
-    sideCollapsed: boolean = window.innerWidth < 576;
-
     @Output()
     readonly sideCollapsedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    @Input()
+    sideCollapsed: BehaviorSubject<boolean>;
+
+    search: string = '';
+
+    private get _smallScreen(): boolean {
+        return window.innerWidth < SMALL_SCREEN_BREAKPOINT;
+    }
+
+    constructor() {}
 
     ngOnInit(): void {
         this.onActivate();
@@ -31,27 +37,28 @@ export class SectionsToolbarComponent implements OnInit {
         }
     }
 
+    onItemClick() {
+        this.sideCollapsed.next(false);
+    }
+
     onActivate() {
-        if (this.smallScreen && !this.sideCollapsed) {
-            this.sideCollapsed = true;
-            this.sideCollapsedChange.emit(this.sideCollapsed);
+        if (this._smallScreen && !this.sideCollapsed.value) {
+            this._setCollapseState(true);
         }
     }
 
     windowSize() {
-        if (window.innerWidth < 992) {
-            this.smallScreen = true;
-            this.onActivate();
-        } else {
-            this.smallScreen = false;
-            this.sideCollapsed = false;
+        if (!this._smallScreen) {
+            this._setCollapseState(false);
+            return;
         }
-        this.sideCollapsedChange.emit(this.sideCollapsed);
+
+        this.onActivate();
+        this.sideCollapsedChange.emit(this.sideCollapsed.value);
     }
 
-    @HostListener('window:resize', ['$event'])
-    onResize() {
-        this.windowSize();
+    private _setCollapseState(state: boolean) {
+        this.sideCollapsed?.next(state);
+        this.sideCollapsedChange.emit(state);
     }
-
 }

@@ -11,39 +11,83 @@
         </div>
         <h3 fd-action-bar-title>Page Title</h3>
         <div fd-action-bar-actions>
-            <fd-popover placement="bottom-end">
-                <fd-popover-control>
-                    <button
-                        aria-label="More"
-                        aria-haspopup="true"
-                        fd-button
-                        [compact]="true"
-                        [fdType]="'transparent'"
-                        [glyph]="'overflow'"
-                    ></button>
-                </fd-popover-control>
-                <fd-popover-body>
-                    <fd-menu>
-                        <ul fd-menu-list>
-                            <li fd-menu-item>
-                                Edit
-                            </li>
-                            <li fd-menu-item>
-                                Delete
-                            </li>
-                            <li fd-menu-item>
-                                Assign
-                            </li>
-                            <li fd-menu-item>
-                                Expire
-                            </li>
-                            <li fd-menu-item>
-                                Archive
-                            </li>
-                        </ul>
-                    </fd-menu>
-                </fd-popover-body>
-            </fd-popover>
+
+            <button
+                fd-button
+                aria-label="More"
+                aria-haspopup="true"
+                [glyph]="'overflow'"
+                [fdType]="'transparent'"
+                [fdMenuTrigger]="menu"
+                [compact]="true"
+            ></button>
+
+            <fd-menu #menu placement="bottom-end" [compact]="true">
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Edit</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Delete</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Assign</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Expire</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Archive</span>
+                    </div>
+                </li>
+            </fd-menu>
+
+            <button
+                fd-button
+                aria-label="More"
+                aria-haspopup="true"
+                [glyph]="'overflow'"
+                [fdType]="'transparent'"
+                [fdMenuTrigger]="menu2"
+                [compact]="true"
+            ></button>
+
+            <fd-menu #menu2 [placement]="'bottom-end'" [compact]="true">
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Edit</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Delete</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Assign</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Expire</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Archive</span>
+                    </div>
+                </li>
+            </fd-menu>
+
         </div>
     </div>
     <p fd-action-bar-description [withBackBtn]="true">Action bar Description</p>

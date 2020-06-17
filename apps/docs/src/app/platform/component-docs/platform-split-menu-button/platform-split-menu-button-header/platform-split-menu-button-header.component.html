@@ -1,9 +1,19 @@
 <header>Split Menu Button</header>
 <description>
-    Split Menu Button has a primary button and a Menu icon. On click on menu dropdown, menu appears. Primary button
-    click the default in Menu.
+    Split Menu Button features a button with a label and an expand icon. The label specifies the default action and the
+    expand icon opens a menu that list the available actions. The split menu button provides a quick and compact way for
+    users to initiate a default action, or choose another action.
+    <h3>Platform specific enhancements:</h3>
+    <ul>
+        <li>Separated creation of Menu reference and Split menu button.</li>
+        <li>
+            Integration of Menu with use of fdpMenuTriggerFor directive. <br />
+            (More information on fdpMenuTriggerFor directive available in
+            <a href="https://sap.github.io/fundamental-ngx/#/platform/menu">Platform Menu</a>.)
+        </li>
+    </ul>
 </description>
-<import module="PlatformSplitMenuButtonModule"></import>
+<pre style="background-color: #e9e7e7;"><import module="PlatformSplitMenuButtonModule"></import></pre>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

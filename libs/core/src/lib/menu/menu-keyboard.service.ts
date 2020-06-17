@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import { Injectable, Output } from '@angular/core';
-import { DefaultMenuItem } from './default-menu-item';
+import { DefaultMenuItem } from './default-menu-item.class';
 import { ListItemDirective } from '../list/list-item.directive';
 import { KeyUtil } from '../utils/functions/key-util';
 

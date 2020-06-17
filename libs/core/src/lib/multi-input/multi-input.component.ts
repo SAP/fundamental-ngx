@@ -7,6 +7,7 @@ import {
     EventEmitter,
     forwardRef,
     Inject,
+    Injector,
     Input,
     OnChanges,
     OnInit,
@@ -29,7 +30,8 @@ import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
-import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
+import { DialogConfig, DIALOG_CONFIG } from '../dialog/dialog-utils/dialog-config.class';
+import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -55,7 +57,7 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-confi
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit, CssClassBuilder {
+export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit, CssClassBuilder, MultiInputInterface {
 
     /** Placeholder for the input field. */
     @Input()
@@ -468,7 +470,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             MultiInputMobileComponent,
             { container: this._elementRef.nativeElement },
-            { services: [this] }
+            { injector: Injector.create([{ provide: MULTI_INPUT_COMPONENT, useValue: this }]) }
         );
     }
 

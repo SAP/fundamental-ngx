@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async, tick, fakeAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 
@@ -61,32 +61,25 @@ describe('CheckboxComponent', () => {
     });
 
     it('should be checked on click', async () => {
-        const checkboxLabel = getCheckboxLabel(fixture);
-        checkboxLabel.click();
+        checkbox.nextValue();
 
         await whenStable(fixture);
 
-        const input = getCheckboxInput(fixture);
-
-        expect(input.checked).toBe(true);
         expect(checkbox.checkboxState).toBe('checked');
         expect(hostComponent.value).toBe(true);
         expect(checkbox.checkboxValue).toBe(true);
     });
 
-    it('should be unchecked on double click', async () => {
-        const checkboxLabel = getCheckboxLabel(fixture);
-        fixture.detectChanges();
-
-        await fixture.whenStable();
+    it('should be unchecked on double click', fakeAsync (() => {
         spyOn(checkbox, 'nextValue');
-        checkboxLabel.click();
-        checkboxLabel.click();
+        checkbox.nextValue();
+        tick(15);
+        checkbox.nextValue();
         expect(getCheckboxInput(fixture).checked).toBe(false);
         expect(hostComponent.value).toBe(false);
         expect(checkbox.checkboxValue).toBe(false);
         expect(checkbox.nextValue).toHaveBeenCalledTimes(2);
-    });
+    }));
 
     it('should add state class', async () => {
         checkbox.state = 'success';
@@ -139,7 +132,6 @@ describe('CheckboxComponent', () => {
     });
 
     it('should use custom values', async () => {
-        const checkboxLabel = getCheckboxLabel(fixture);
         checkbox.values = { trueValue: 'Yes', falseValue: 'No' };
         hostComponent.value = 'Yes';
         fixture.detectChanges();
@@ -148,29 +140,30 @@ describe('CheckboxComponent', () => {
         expect(hostComponent.value).toBe('Yes');
         expect(checkbox.checkboxValue).toBe('Yes');
 
-        checkboxLabel.click();
+        checkbox.nextValue();
+
 
         expect(hostComponent.value).toBe('No');
         expect(checkbox.checkboxValue).toBe('No');
     });
 
-    it('should use third state', async () => {
-        const checkboxLabel = getCheckboxLabel(fixture);
+    it('should use third state', fakeAsync (() => {
         checkbox.tristate = true;
         fixture.detectChanges();
 
-        await fixture.whenStable();
         expect(hostComponent.value).toBe(false);
-        checkboxLabel.click();
+        checkbox.nextValue();
+        tick(10);
         expect(hostComponent.value).toBe(null);
-        checkboxLabel.click();
+        checkbox.nextValue();
+        tick(10);
         expect(hostComponent.value).toBe(true);
-        checkboxLabel.click();
+        checkbox.nextValue();
+        tick(10);
         expect(hostComponent.value).toBe(false);
-    });
+    }));
 
     it('should not use third state', async () => {
-        const checkboxLabel = getCheckboxLabel(fixture);
         hostComponent.value = null;
         checkbox.tristate = true;
         checkbox.tristateSelectable = false;
@@ -178,16 +171,15 @@ describe('CheckboxComponent', () => {
 
         await fixture.whenStable();
         expect(hostComponent.value).toBe(null);
-        checkboxLabel.click();
+        checkbox.nextValue();
         expect(hostComponent.value).toBe(true);
-        checkboxLabel.click();
+        checkbox.nextValue();
         expect(hostComponent.value).toBe(false);
-        checkboxLabel.click();
+        checkbox.nextValue();
         expect(hostComponent.value).toBe(true);
     });
 
     it('should use custom values for third state', async () => {
-        const checkboxLabel = getCheckboxLabel(fixture);
         checkbox.tristate = true;
         checkbox.values = { trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maby' };
         hostComponent.value = 'Yes';
@@ -195,11 +187,11 @@ describe('CheckboxComponent', () => {
 
         await fixture.whenStable();
         expect(hostComponent.value).toBe('Yes');
-        checkboxLabel.click();
+        checkbox.nextValue();
         expect(hostComponent.value).toBe('No');
-        checkboxLabel.click();
+        checkbox.nextValue();
         expect(hostComponent.value).toBe('Maby');
-        checkboxLabel.click();
+        checkbox.nextValue();
         expect(hostComponent.value).toBe('Yes');
     });
 });

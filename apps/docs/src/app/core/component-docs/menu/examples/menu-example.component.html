@@ -1,13 +1,19 @@
-<fd-menu>
-    <ul fd-menu-list>
-        <li fd-menu-item>
-            Option 1
-        </li>
-        <li fd-menu-item>
-            Option 2
-        </li>
-        <li fd-menu-item>
-            Option 3
-        </li>
-    </ul>
+<button fd-button [fdMenuTrigger]="menu">Menu</button>
+
+<fd-menu #menu>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Option 1</span>
+        </a>
+    </li>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Option 2</span>
+        </a>
+    </li>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Option 3</span>
+        </a>
+    </li>
 </fd-menu>

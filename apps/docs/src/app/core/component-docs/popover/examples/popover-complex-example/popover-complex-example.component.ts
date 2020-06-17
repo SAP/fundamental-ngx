@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./popover-complex-example.component.scss']
 })
 export class PopoverComplexExampleComponent {
-    menu = [
+    list = [
         { text: 'Option 1', url: '#' },
         { text: 'Option 2', url: '#' },
         { text: 'Option 3', url: '#' }

@@ -26,6 +26,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'checkbox',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/checkbox/platform-checkbox-docs.module').then(
+                        (m) => m.CheckboxDocsModule
+                    )
+            },
+            {
                 path: 'link',
                 loadChildren: () =>
                     import('./component-docs/platform-link/platform-link.module').then((m) => m.PlatformLinkDocsModule)

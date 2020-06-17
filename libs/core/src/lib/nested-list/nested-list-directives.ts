@@ -111,10 +111,11 @@ export class NestedListExpandIconDirective {
     ) {}
 
     /** Mouse event handler */
-    @HostListener('click')
-    onClick(): void {
+    @HostListener('click', ['$event'])
+    onClick(event: MouseEvent): void {
         this.expanded = !this.expanded;
         this._itemService.toggle.next(this.expanded);
+        event.stopPropagation();
     }
 
     /** Handler for focus events */

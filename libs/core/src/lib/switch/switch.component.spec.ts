@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { SwitchComponent } from './switch.component';
 import { CommonModule } from '@angular/common';
@@ -48,22 +48,18 @@ describe('SwitchComponent', () => {
         expect(component.id).toBeTruthy();
     });
 
-    it('should switch on click', () => {
-        spyOn(component.checkedChange, 'emit');
+    it('should switch on click', fakeAsync(() => {
 
-        component.checked = false;
-        fixture.detectChanges();
+        const checkedChangeSpy = spyOn(component.checkedChange, 'emit');
 
-        input.click();
-        fixture.detectChanges();
+        component.isChecked = true;
 
-        expect(component.checkedChange.emit).toHaveBeenCalledWith(true);
+        expect(checkedChangeSpy).toHaveBeenCalledWith(true);
 
-        input.click();
-        fixture.detectChanges();
+        component.isChecked = false;
 
-        expect(component.checkedChange.emit).toHaveBeenCalledWith(false);
-    });
+        expect(checkedChangeSpy).toHaveBeenCalledWith(false);
+    }));
 
     it('should focus inner input element', () => {
         spyOn(input, 'focus');
@@ -91,21 +87,5 @@ describe('SwitchComponent', () => {
 
         const switchComp = fixture.nativeElement.querySelector('.fd-switch');
         expect(switchComp.classList).toContain('fd-switch--semantic');
-    });
-
-    it('should disable', async () => {
-        spyOn(component.checkedChange, 'emit');
-        component.disabled = true;
-
-        detectChangesOnPush();
-        await fixture.whenStable();
-
-        input.click();
-
-        const switchComp = fixture.nativeElement.querySelector('.fd-switch');
-
-        expect(component.checkedChange.emit).not.toHaveBeenCalled();
-        expect(switchComp.classList).toContain('is-disabled');
-        expect(input.disabled).toBeTrue();
     });
 });

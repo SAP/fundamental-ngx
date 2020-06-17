@@ -13,7 +13,7 @@ const bottomEnd = 'bottom-end';
 export class PopoverDropdownExampleComponent {
     dropDownPlacement$: Observable<string>;
 
-    menu = ['Option 1', 'Option 2', 'Option 3'];
+    list = ['Option 1', 'Option 2', 'Option 3'];
 
     constructor(private _rtlService: RtlService) {
         this.dropDownPlacement$ = _rtlService.rtl.pipe(map((isRtl) => (isRtl ? bottomEnd : bottomStart)));

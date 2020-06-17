@@ -10,11 +10,14 @@ import {
     OnInit,
     Optional,
     QueryList,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { RtlService } from '../utils/services/rtl.service';
 import { BehaviorSubject } from 'rxjs';
+import { KeyUtil } from '../utils/public_api';
+import { MenuComponent } from '../menu/menu.component';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -40,9 +43,18 @@ import { BehaviorSubject } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbComponent implements AfterContentInit, OnInit {
+
+    /** Whenever links wrapped inside overflow should be displayed in compact mode  */
+    @Input()
+    compact: boolean = false;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
     breadcrumbItems: QueryList<BreadcrumbItemDirective>;
+
+    /** @hidden */
+    @ViewChild(MenuComponent)
+    menuComponent: MenuComponent;
 
     /** @hidden */
     collapsedBreadcrumbItems: Array<BreadcrumbItemDirective> = [];
@@ -84,6 +96,14 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
             this.expandBreadcrumbs();
         }
         this.previousContainerWidth = this.containerBoundary;
+    }
+
+    /** @hidden */
+    keyDownHandle(event: KeyboardEvent): void {
+        if (KeyUtil.isKey(event, ['Enter', ' '])) {
+            this.menuComponent.toggle();
+            event.preventDefault();
+        }
     }
 
     /** @hidden */
