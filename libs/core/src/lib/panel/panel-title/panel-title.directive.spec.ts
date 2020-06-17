@@ -4,7 +4,7 @@ import { PanelTitleDirective } from './panel-title.directive';
 import { PanelModule } from '../panel.module';
 
 @Component({
-    template: ` <h1 #directiveElement fd-panel-title>Test Text</h1> `
+    template: `<h5 #directiveElement fd-panel-title>Test Panel Title Text</h5>`
 })
 class TestComponent {
     @ViewChild('directiveElement')

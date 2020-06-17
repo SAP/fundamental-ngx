@@ -1,4 +1,4 @@
-<h2>Cozy Split Menu Button</h2>
+<h3>Cozy Split Menu Button</h3>
 <ng-container *ngFor="let buttonType of buttonTypes">
     <fdp-split-menu-button
         [id]="'split-menu-button3'"
@@ -7,6 +7,8 @@
         [buttonLabel]="label"
         [icon]="'world'"
         [type]="buttonType"
+        [title]="'Default action button with list of other available action items'"
+        [menuTitle]="'More options'"
         (primaryButtonClick)="onPrimaryButtonClickCozy()"
     >
     </fdp-split-menu-button>
@@ -29,13 +31,11 @@
 <span>&nbsp;&nbsp;Disabled</span>
 <br />
 <br />
-<div>Selected Item: {{ selectedCozyItem }}</div>
-<br />
-<br />
+<p>Selected Item: {{ selectedCozyItem }}</p>
 <br />
 <br />
 
-<h2>Compact Split Menu Button</h2>
+<h3>Compact Split Menu Button</h3>
 <ng-container *ngFor="let buttonType of buttonTypes">
     <fdp-split-menu-button
         [id]="'split-menu-button3'"
@@ -68,7 +68,22 @@
 <span>&nbsp;&nbsp;Disabled</span>
 <br />
 <br />
-<div>Selected Item: {{ selectedCompactItem }}</div>
+<p>Selected Item: {{ selectedCompactItem }}</p>
+
+<h3>Internationalisation support with i18n directive</h3>
+<fdp-split-menu-button
+    [id]="'split-menu-button4'"
+    [name]="'split-menu-button4'"
+    [menu]="basicMenuCompact"
+    [icon]="'world'"
+    i18n-buttonLabel
+    buttonLabel="Default Action"
+    i18n-title
+    title="Default action button with list of other available action items"
+    (primaryButtonClick)="onPrimaryButtonClickCompact()"
+    i18n="@@basicSplitMenuBtn"
+>
+</fdp-split-menu-button>
 
 <fdp-menu #basicMenuCozy id="basic-menu">
     <fdp-menu-item (itemSelect)="onItemSelectCozy('First Item')">First Item</fdp-menu-item>

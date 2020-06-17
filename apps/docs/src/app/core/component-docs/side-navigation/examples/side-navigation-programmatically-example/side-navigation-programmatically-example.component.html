@@ -1,4 +1,4 @@
-<fd-side-nav>
+<fd-side-nav [selectable]="false">
     <div fd-side-nav-main>
         <ul fd-nested-list [textOnly]="true">
             <li fd-nested-list-item>
@@ -12,9 +12,12 @@
                 </a>
             </li>
             <li fd-nested-list-item [(expanded)]="open">
-                <a fd-nested-list-link>
-                    <span fd-nested-list-title>Link 3</span>
-                </a>
+                <div fd-nested-list-content [selected]="selected">
+                    <a fd-nested-list-link>
+                        <span fd-nested-list-title>Link 3</span>
+                    </a>
+                    <button fd-nested-list-expand-icon></button>
+                </div>
                 <ul fd-nested-list>
                     <li fd-nested-list-item>
                         <a fd-nested-list-link [selected]="selected">

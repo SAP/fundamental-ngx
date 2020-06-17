@@ -5,13 +5,15 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
-    button: ['buttoncomponent'],
     actionbar: ['actionbarcomponent'],
-    menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
+    button: ['buttoncomponent'],
+    checkbox: ['CheckboxComponent'],
+    infoLabel: ['InfoLabelComponent'],
     link: ['LinkComponent'],
+    menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
+    menuButton: ['MenuButtonComponent'],
+    radioGroup: ['RadioGroupComponent'],
     searchField: ['SearchFieldComponent'],
     select: ['SelectPlatformComponent'],
-    radioGroup: ['RadioGroupComponent'],
-    menuButton: ['MenuButtonComponent'],
     splitMenuButton: ['SplitMenuButtonComponent']
 };

@@ -2,32 +2,38 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MenuComponent } from './menu.component';
-import { MenuGroupComponent } from './menu-group.component';
-import { MenuTitleDirective } from './menu-title.directive';
-import { MenuListDirective } from './menu-list.directive';
-import { MenuItemDirective } from './menu-item.directive';
-import { MenuAddonDirective } from './menu-addon.directive';
-import { MenuItemAddonDirective } from './menu-item-addon.directive';
+import { MenuTitleDirective } from './directives/menu-title.directive';
+import { MenuInteractiveDirective } from './directives/menu-interactive.directive';
+import { MenuSeparatorComponent } from './menu-separator/menu-separator.component';
+import { MenuAddonDirective } from './directives/menu-addon.directive';
+import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.component';
+import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
+import { PopoverModule } from '../popover/popover.module';
+import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 
 @NgModule({
-    imports: [CommonModule],
-    exports: [
-        MenuComponent,
-        MenuGroupComponent,
-        MenuTitleDirective,
-        MenuListDirective,
-        MenuItemDirective,
-        MenuAddonDirective,
-        MenuItemAddonDirective
-    ],
+    imports: [CommonModule, PopoverModule],
     declarations: [
         MenuComponent,
-        MenuGroupComponent,
-        MenuTitleDirective,
-        MenuListDirective,
-        MenuItemDirective,
+        MenuItemComponent,
         MenuAddonDirective,
-        MenuItemAddonDirective
+        MenuSeparatorComponent,
+        MenuShortcutDirective,
+        MenuInteractiveDirective,
+        MenuTitleDirective,
+        SubmenuComponent,
+        MenuTriggerDirective
+    ],
+    exports: [
+        MenuComponent,
+        MenuItemComponent,
+        SubmenuComponent,
+        MenuSeparatorComponent,
+        MenuShortcutDirective,
+        MenuInteractiveDirective,
+        MenuTitleDirective,
+        MenuAddonDirective,
+        MenuTriggerDirective
     ]
 })
 export class MenuModule {}

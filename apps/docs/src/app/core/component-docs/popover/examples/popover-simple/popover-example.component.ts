@@ -19,13 +19,13 @@ export class PopoverExampleComponent {
         this.rightPlacement$ = this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left' : 'right')));
     }
 
-    menu1 = [
+    list1 = [
         { text: 'Option 1', url: '#' },
         { text: 'Option 2', url: '#' },
         { text: 'Option 3', url: '#' }
     ];
 
-    menu2 = [
+    list2 = [
         { text: 'Option 3', url: '#' },
         { text: 'Option 4', url: '#' },
         { text: 'Option 5', url: '#' }

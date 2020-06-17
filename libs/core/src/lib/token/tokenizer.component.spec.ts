@@ -1,14 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ViewChild, ContentChildren, forwardRef, QueryList } from '@angular/core';
+import { RtlService, TokenizerInputDirective } from '@fundamental-ngx/core';
 
-import { TokenizerComponent } from './tokenizer.component';
-import { Component } from '@angular/core';
-import { RtlService, TokenComponent, TokenizerInputDirective, FormControlDirective } from '@fundamental-ngx/core';
-
-async function whenStable(fixture) {
-    fixture.detectChanges();
-    await fixture.whenStable();
-}
-
+import { whenStable } from '../utils/tests/when-stable';
+import { FormControlDirective } from '../form/form-control/form-control.directive';
+import { TokenComponent, TokenizerComponent } from './public_api';
 @Component({
     selector: 'fd-tokenizer-test-component',
     template: `
@@ -20,7 +16,13 @@ async function whenStable(fixture) {
         </fd-tokenizer>
     `
 })
-class TokenizerWrapperComponent {}
+class TokenizerWrapperComponent {
+    @ViewChild(TokenizerComponent) tokenizer: TokenizerComponent;
+    @ViewChild(FormControlDirective) formControl: FormControlDirective;
+
+    @ContentChildren(TokenComponent, { read: TokenComponent })
+    tokenList: QueryList<TokenComponent>;
+}
 
 describe('TokenizerComponent', () => {
     let component: TokenizerComponent;
@@ -41,8 +43,9 @@ describe('TokenizerComponent', () => {
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TokenizerWrapperComponent);
-        component = fixture.debugElement.children[0].componentInstance;
         await whenStable(fixture);
+
+        component = fixture.componentInstance.tokenizer;
     });
 
     it('should create', () => {
@@ -102,7 +105,7 @@ describe('TokenizerComponent', () => {
         expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 1);
     });
 
-    it('should focus a token element', () => {
+    it('should focus a token element', async () => {
         component.tokenList.forEach((token) =>
             spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus')
         );
@@ -116,6 +119,9 @@ describe('TokenizerComponent', () => {
         });
 
         component.focusTokenElement(event, 1);
+
+        await whenStable(fixture);
+        await fixture.whenRenderingDone();
 
         const elementToCheck = component.tokenList
             .filter((element, index) => index === 1)[0]
@@ -144,14 +150,14 @@ describe('TokenizerComponent', () => {
 
     it('should handle resize - getting smaller', () => {
         component.compact = true;
-        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
         component.previousElementWidth = 2;
         component.onResize();
         component.moreTokensLeft.length = 0;
         component.onResize();
 
-        component.tokenList.forEach(token => {
+        component.tokenList.forEach((token) => {
             expect(token.elementRef.nativeElement.style.display).toBe('none');
         });
         expect(component.moreTokensLeft.length).toBe(3);
@@ -169,7 +175,7 @@ describe('TokenizerComponent', () => {
         component.onResize();
 
         expect(component.previousElementWidth).toBe(3);
-        component.tokenList.forEach(token => {
+        component.tokenList.forEach((token) => {
             expect(token.elementRef.nativeElement.style.display).toBe('inline-block');
         });
     });
@@ -201,7 +207,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle ngAfterContentInit', () => {
-        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'onResize');
 
         component.ngAfterContentInit();

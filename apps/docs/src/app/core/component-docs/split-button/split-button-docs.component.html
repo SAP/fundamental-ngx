@@ -1,4 +1,4 @@
-<fd-docs-section-title [id]="'buttonTypes'" [componentName]="'splitButton'">
+<fd-docs-section-title [id]="'button-types'" [componentName]="'splitButton'">
     Button Types
 </fd-docs-section-title>
 <description>
@@ -20,12 +20,12 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'buttonsWithIcons'" [componentName]="'splitButton'">
+<fd-docs-section-title [id]="'with-icons'" [componentName]="'splitButton'">
     Buttons with Icons
 </fd-docs-section-title>
 <description>
     Use
-    <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to change an icon of dropdown menu.
+    <code class="code-snippet">[glyph]="icon-name"</code> to change an icon of dropdown menu.
 </description>
 <component-example>
     <fd-split-button-icons-example></fd-split-button-icons-example>
@@ -34,12 +34,12 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'openCloseProg'" [componentName]="'splitButton'">
+<fd-docs-section-title [id]="'programmatic-control'" [componentName]="'splitButton'">
     Open/Close Programmatically
 </fd-docs-section-title>
 <description>
-    It is possible to control the open state of the popover through two-way binding to the
-    <code>[(isOpen)]</code> property.
+    It is possible to control the open state of the popover using <code>MenuComponent.open()</code> and <code>MenuComponent.close()</code>
+    methods.
 </description>
 <component-example>
     <fd-split-button-programmatical-example></fd-split-button-programmatical-example>
@@ -48,7 +48,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'customTemplate'" [componentName]="'splitButton'">
+<fd-docs-section-title [id]="'custom-template'" [componentName]="'splitButton'">
     Custom Template for Action Button
 </fd-docs-section-title>
 <description>

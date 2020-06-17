@@ -326,8 +326,8 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         item.editable = this.editable;
         item.noLabelLayout = this.noLabelLayout;
         item.labelLayout = this.labelLayout;
-
-        if (this.object && this.object[item.id]) {
+        // letting control to set value. when provided value is 'false'.
+        if (this.object) {
             item.formControl.patchValue(this.object[item.id]);
         }
     }

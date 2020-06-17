@@ -1,15 +1,10 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    Host,
-    Inject,
     Input,
     isDevMode,
-    OnDestroy,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { PopoverComponent } from '../popover.component';
 import { ButtonType } from '../../button/button.component';
 /**
  * @deprecated

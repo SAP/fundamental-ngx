@@ -9,7 +9,6 @@ import { NewComponentComponent } from '../platform/component-docs/new-component/
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
-
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({

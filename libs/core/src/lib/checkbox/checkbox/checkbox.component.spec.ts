@@ -1,14 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CheckboxComponent } from './checkbox.component';
+import { ComponentFixture, TestBed, async, tick, fakeAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
+
+import { CheckboxComponent } from './checkbox.component';
+import { whenStable } from '../../utils/tests/when-stable';
+
+function getCheckboxInput(fixture: ComponentFixture<any>): any {
+    return fixture.nativeElement.querySelector('input');
+}
+
+function getCheckboxLabel(fixture: ComponentFixture<any>): any {
+    return fixture.nativeElement.querySelector('.fd-checkbox__label');
+}
+
+function checkboxDetectChanges(checkbox: CheckboxComponent) {
+    checkbox['_changeDetectorRef'].detectChanges();
+}
 
 @Component({
     template: ` <fd-checkbox [(ngModel)]="value"></fd-checkbox> `
 })
 class TestCheckboxComponent {
-    @ViewChild(CheckboxComponent) checkboxRef;
+    @ViewChild(CheckboxComponent) checkboxRef: CheckboxComponent;
     value: any = false;
 }
 
@@ -17,16 +30,21 @@ describe('CheckboxComponent', () => {
     let hostComponent: TestCheckboxComponent;
     let fixture: ComponentFixture<TestCheckboxComponent>;
 
-    beforeEach(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
             declarations: [CheckboxComponent, TestCheckboxComponent]
-        });
+        }).compileComponents();
+    }));
 
+    beforeEach(async () => {
         fixture = TestBed.createComponent(TestCheckboxComponent);
+        await whenStable(fixture);
+
         hostComponent = fixture.componentInstance;
-        fixture.detectChanges();
         checkbox = fixture.componentInstance.checkboxRef;
+
+        await whenStable(fixture);
     });
 
     it('should create', () => {
@@ -43,57 +61,62 @@ describe('CheckboxComponent', () => {
     });
 
     it('should be checked on click', async () => {
-        const input = fixture.nativeElement.querySelector('input');
-        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
-        fixture.detectChanges();
-
-        await fixture.whenStable();
+        const checkboxLabel = getCheckboxLabel(fixture);
         checkboxLabel.click();
+
+        await whenStable(fixture);
+
+        const input = getCheckboxInput(fixture);
+
         expect(input.checked).toBe(true);
+        expect(checkbox.checkboxState).toBe('checked');
         expect(hostComponent.value).toBe(true);
         expect(checkbox.checkboxValue).toBe(true);
     });
 
-    it('should be unchecked on double click', async () => {
-        const input = fixture.nativeElement.querySelector('input');
-        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+    it('should be unchecked on double click', fakeAsync (() => {
+        const checkboxLabel = getCheckboxLabel(fixture);
         fixture.detectChanges();
 
-        await fixture.whenStable();
         spyOn(checkbox, 'nextValue');
         checkboxLabel.click();
+        tick(15);
         checkboxLabel.click();
-        expect(input.checked).toBe(false);
+        expect(getCheckboxInput(fixture).checked).toBe(false);
         expect(hostComponent.value).toBe(false);
         expect(checkbox.checkboxValue).toBe(false);
         expect(checkbox.nextValue).toHaveBeenCalledTimes(2);
-    });
+    }));
 
     it('should add state class', async () => {
         checkbox.state = 'success';
-        fixture.detectChanges();
 
-        await fixture.whenStable();
-        const input = fixture.nativeElement.querySelector('input');
+        checkboxDetectChanges(checkbox);
+        await whenStable(fixture);
+
+        const input = getCheckboxInput(fixture);
         expect(input).toHaveClass('is-success');
     });
 
     it('should display input label', async () => {
-        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
         checkbox.label = 'Option 1';
-        fixture.detectChanges();
 
-        await fixture.whenStable();
+        checkboxDetectChanges(checkbox);
+        await whenStable(fixture);
+
+        const checkboxLabel = getCheckboxLabel(fixture);
+
         expect(checkboxLabel.innerText).toBe('Option 1');
     });
 
     it('should be disabled', async () => {
-        const input = fixture.nativeElement.querySelector('input');
-        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
-        checkbox.disabled = true;
-        fixture.detectChanges();
+        checkbox.setDisabledState(true);
 
-        await fixture.whenStable();
+        await whenStable(fixture);
+
+        const input = getCheckboxInput(fixture);
+        const checkboxLabel = getCheckboxLabel(fixture);
+
         spyOn(checkbox, 'nextValue');
         checkboxLabel.click();
         expect(input.checked).toBe(false);
@@ -104,18 +127,19 @@ describe('CheckboxComponent', () => {
 
     it('should be compact', async () => {
         checkbox.compact = true;
-        fixture.detectChanges();
 
-        const input = fixture.nativeElement.querySelector('input');
-        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        checkboxDetectChanges(checkbox);
+        await whenStable(fixture);
 
-        await fixture.whenStable();
+        const input = getCheckboxInput(fixture);
+        const checkboxLabel = getCheckboxLabel(fixture);
+
         expect(input).toHaveClass('fd-checkbox--compact');
         expect(checkboxLabel).toHaveClass('fd-checkbox__label--compact');
     });
 
     it('should use custom values', async () => {
-        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        const checkboxLabel = getCheckboxLabel(fixture);
         checkbox.values = { trueValue: 'Yes', falseValue: 'No' };
         hostComponent.value = 'Yes';
         fixture.detectChanges();
@@ -130,23 +154,25 @@ describe('CheckboxComponent', () => {
         expect(checkbox.checkboxValue).toBe('No');
     });
 
-    it('should use third state', async () => {
-        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+    it('should use third state', fakeAsync (() => {
+        const checkboxLabel = getCheckboxLabel(fixture);
         checkbox.tristate = true;
         fixture.detectChanges();
 
-        await fixture.whenStable();
         expect(hostComponent.value).toBe(false);
         checkboxLabel.click();
+        tick(10);
         expect(hostComponent.value).toBe(null);
         checkboxLabel.click();
+        tick(10);
         expect(hostComponent.value).toBe(true);
         checkboxLabel.click();
+        tick(10);
         expect(hostComponent.value).toBe(false);
-    });
+    }));
 
     it('should not use third state', async () => {
-        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        const checkboxLabel = getCheckboxLabel(fixture);
         hostComponent.value = null;
         checkbox.tristate = true;
         checkbox.tristateSelectable = false;
@@ -163,7 +189,7 @@ describe('CheckboxComponent', () => {
     });
 
     it('should use custom values for third state', async () => {
-        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        const checkboxLabel = getCheckboxLabel(fixture);
         checkbox.tristate = true;
         checkbox.values = { trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maby' };
         hostComponent.value = 'Yes';

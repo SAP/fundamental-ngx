@@ -1,5 +1,5 @@
 import { NestedListKeyboardService } from './nested-list-keyboard.service';
-import { MenuKeyboardService } from '@fundamental-ngx/core';
+import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';
 
 class MockNestedLink {
@@ -48,25 +48,25 @@ describe('NestedListKeyboardSupportService', () => {
     });
 
     it('Should return all of the items', () => {
-        const resultItems = (service as any).getAllListItems(<any>object);
+        const resultItems = (service as any)._getAllListItems(<any>object);
 
         expect(resultItems.length).toBe(10);
     });
 
     it('Should handle focus other element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         spyOn(items[1], 'focus').and.callThrough();
 
-        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
+        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowDown' };
 
-        (<any>service).handleKeyDown(keyboardEvent, 0, items);
+        (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[1].focus).toHaveBeenCalled();
     });
 
     it('Should handle open trigger on element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         items[0].expanded = false;
         items[0].hasChildren = true;
@@ -77,14 +77,14 @@ describe('NestedListKeyboardSupportService', () => {
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
 
-        (<any>service).handleKeyDown(keyboardEvent, 0, items);
+        (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[1].focus).not.toHaveBeenCalled();
         expect(items[0].triggerOpen).toHaveBeenCalled();
     });
 
     it('Should handle close trigger on element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         items[0].expanded = true;
         items[0].hasChildren = true;
@@ -95,38 +95,38 @@ describe('NestedListKeyboardSupportService', () => {
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowLeft' };
 
-        (<any>service).handleKeyDown(keyboardEvent, 0, items);
+        (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[9].focus).not.toHaveBeenCalled();
         expect(items[0].triggerClose).toHaveBeenCalled();
     });
 
     it('Should focus last element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         items[0].expanded = false;
         items[0].hasChildren = true;
 
         spyOn(items[items.length - 1], 'focus').and.callThrough();
 
-        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowLeft' };
+        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowUp' };
 
-        (<any>service).handleKeyDown(keyboardEvent, 0, items);
+        (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
         expect(items[items.length - 1].focus).toHaveBeenCalled();
     });
 
     it('Should focus first element', () => {
-        const items = (<any>service).getAllListItems(<any>object);
+        const items = (<any>service)._getAllListItems(<any>object);
 
         items[items.length - 1].expanded = false;
         items[items.length - 1].hasChildren = false;
 
         spyOn(items[0], 'focus').and.callThrough();
 
-        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
+        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowDown' };
 
-        (<any>service).handleKeyDown(keyboardEvent, items.length - 1, items);
+        (<any>service)._handleKeyDown(keyboardEvent, items.length - 1, items);
 
         expect(items[0].focus).toHaveBeenCalled();
     });

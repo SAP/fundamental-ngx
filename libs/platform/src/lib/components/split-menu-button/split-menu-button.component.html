@@ -1,12 +1,13 @@
-<div class="fd-button-split" role="group" aria-label="button-split">
+<div class="fd-button-split" role="group" aria-label="split-button" [attr.dir]="dir">
     <button
         fd-button
         [attr.id]="id"
         [attr.name]="name"
-        aria-label="buttonLabel"
+        [attr.title]="title"
         [disabled]="disabled"
         [fdType]="type"
         [glyph]="icon"
+        tabindex="0"
         [compact]="contentDensity === 'compact'"
         (click)="primaryButtonClicked($event)"
     >
@@ -16,13 +17,14 @@
         fd-button
         [attr.id]="secondaryId"
         [attr.name]="name"
-        [fdMenu]="true"
+        [attr.title]="menuTitle"
+        [glyph]="'slim-arrow-down'"
         [disabled]="disabled"
         [fdType]="type"
+        tabindex="0"
         [compact]="contentDensity === 'compact'"
         [fdpMenuTriggerFor]="menu"
-        aria-haspopup="true"
-        aria-expanded="false"
-        aria-label="More"
+        [attr.aria-haspopup]="true"
+        [attr.aria-expanded]="false"
     ></button>
 </div>

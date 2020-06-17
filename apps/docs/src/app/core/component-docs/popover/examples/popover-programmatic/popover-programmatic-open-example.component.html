@@ -10,19 +10,11 @@
         <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
     </fd-popover-control>
     <fd-popover-body>
-        <fd-menu>
-            <ul fd-menu-list>
-                <li fd-menu-item>
-                    Option 1
-                </li>
-                <li fd-menu-item>
-                    Option 2
-                </li>
-                <li fd-menu-item>
-                    Option 3
-                </li>
-            </ul>
-        </fd-menu>
+        <ul fd-list>
+            <li fd-list-item *ngFor="let option of list">
+                <span fd-list-title>{{option}}</span>
+            </li>
+        </ul>
     </fd-popover-body>
 </fd-popover>
 

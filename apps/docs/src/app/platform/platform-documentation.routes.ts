@@ -26,6 +26,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'checkbox',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/checkbox/platform-checkbox-docs.module').then(
+                        (m) => m.CheckboxDocsModule
+                    )
+            },
+            {
                 path: 'link',
                 loadChildren: () =>
                     import('./component-docs/platform-link/platform-link.module').then((m) => m.PlatformLinkDocsModule)
@@ -69,7 +76,12 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-split-menu-button/platform-split-menu-button.module').then(
                         (m) => m.PlatformSplitMenuButtonDocsModule
                     )
-            }
+            },
+            {
+                path: 'info-label',
+                loadChildren: () =>
+                    import('./component-docs/platform-info-label/platform-info-label-docs-module').then((m) => m.PlatformInfoLabelDocsModule)
+            },
         ]
     }
 ];

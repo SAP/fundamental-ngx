@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from '../button/button.module';
-import { IconModule } from '../icon/icon.module';
 
 import { ActionBarComponent } from './action-bar.component';
 import { ActionBarTitleDirective } from './action-bar-title/action-bar-title.directive';
@@ -21,7 +19,7 @@ import { ActionBarMobileDirective } from './action-bar-mobile/action-bar-mobile.
         ActionBarBackDirective,
         ActionBarMobileDirective
     ],
-    imports: [CommonModule, ButtonModule, IconModule],
+    imports: [CommonModule],
     exports: [
         ActionBarComponent,
         ActionBarTitleDirective,

@@ -36,6 +36,7 @@ export class PopoverComponent {
     /** @hidden */
     @ViewChild(PopoverDirective)
     directiveRef: PopoverDirective;
+
     /** @hidden */
     @ContentChild(PopoverDropdownComponent) dropdownComponent: PopoverDropdownComponent;
 
@@ -52,7 +53,9 @@ export class PopoverComponent {
     @HostBinding('class.fd-popover-custom--disabled')
     disabled: boolean = false;
 
-    /** Whether the popover should be treated as a dropdown. */
+    /** @deprecated
+     * Left for backward compatibility. It's going to be removed on 0.20.0
+     */
     @Input()
     isDropdown: boolean = false;
 
