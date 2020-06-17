@@ -1,0 +1,95 @@
+<h3>Reactive Form Examples:</h3>
+<h3>Checkboxes created from from list of selectItem Objects</h3>
+<p>Inline checkboxes</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form4">
+    <fdp-form-field #fl1 [id]="'languages'" [label]="'Programming Languages Known: '" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [list]="languages"
+            [isInline]="true"
+            [name]="'languages'"
+            [contentDensity]="'compact'"
+            [formControl]="fl1.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Languages: {{ form4.controls.languages.value }}</span>
+<br />
+<br />
+
+<p>Pre-selection based on control value passed</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form5" [object]="visited">
+    <fdp-form-field #fl2 [id]="'visited'" [label]="'Country visited: '" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [list]="countryVisited"
+            [name]="'visited'"
+            [formControl]="fl2.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Currencies: {{ form5.controls.visited.value }}</span>
+
+<br />
+<br />
+<p>Disabled checkbox group</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form6">
+    <fdp-form-field
+        #fl3
+        [id]="'disabled currencies'"
+        [label]="'Disabled checkbox Group: '"
+        [disabled]="true"
+        zone="zLeft"
+        rank="1"
+    >
+        <fdp-checkbox-group
+            [list]="countryCurrency"
+            [name]="'currencies'"
+            [formControl]="fl3.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<separator></separator>
+
+<h3>Template Driven Form</h3>
+<h3>Checkboxes created from from list of selectItem Objects</h3>
+<p>Inline checkboxes</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'languages known'" [label]="'Programming Languages Known: '" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [list]="languages"
+            [isInline]="true"
+            [name]="'languages'"
+            [(ngModel)]="languagesKnown"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Languages: {{ languagesKnown }}</span>
+<br />
+<br />
+
+<p>Pre-selection based on value passed</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'currency'" [label]="'Currencies in country: '" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [list]="countryCurrency"
+            [name]="'currencies'"
+            [contentDensity]="'compact'"
+            [(ngModel)]="currencies"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Currencies: {{ currencies }}</span>
+
+<br />
+<br />
+<p>Disabled checkbox group</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'disabled currency'" [label]="'Disabled checkbox Group: '" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [list]="countryCurrency"
+            [disabled]="true"
+            [name]="'currencies'"
+            [(ngModel)]="currencyDisabled"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>

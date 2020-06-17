@@ -33,6 +33,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'checkbox-group',
+                loadChildren: () =>
+                    import(
+                        './component-docs/platform-forms/platform-checkbox-group/platform-checkbox-group-docs.module'
+                    ).then((m) => m.PlatformCheckboxGroupDocsModule)
+            },
+            {
                 path: 'link',
                 loadChildren: () =>
                     import('./component-docs/platform-link/platform-link.module').then((m) => m.PlatformLinkDocsModule)
@@ -87,7 +94,6 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/platform-forms/platform-textarea/platform-textarea-docs.module').then(
                         (m) => m.PlatformTextareaDocsModule
-                    )
             }
         ]
     }

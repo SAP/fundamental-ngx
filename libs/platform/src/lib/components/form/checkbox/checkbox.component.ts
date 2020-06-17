@@ -17,7 +17,13 @@ export class PlatformCheckboxChange {
  * This implementation behaves like implementation in PrimeNg and Material checkbox implementation.
  * Some part of code/idea has been taken from above mentioned and has been implemented to work with platform form.
  * primeng: https://primefaces.org/primeng/showcase/#/checkbox
+ *
+ * Checkbox group implementation based on the
+ * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Checkbox-Component-Technical-Design
+ * documents.
  */
+let nextUniqueId: number = 0;
+
 @Component({
     selector: 'fdp-checkbox',
     templateUrl: './checkbox.component.html',
@@ -115,6 +121,9 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         private _ngZone: NgZone
     ) {
         super(_changeDetector, ngControl, ngForm);
+        // necessary to fulfill baseInput check.
+        // case: fdp-checkbox passed in decalarative fdp-checkbox-group without id and name.
+        this.name = `fdp-checkbox-${nextUniqueId++}`;
     }
 
     /** ControlvalueAccessor */
@@ -271,6 +280,10 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         } else {
             this.checkboxCurrentValue = value;
         }
+        this._changeDetector.detectChanges();
+    }
+
+    public detectChanges(): void {
         this._changeDetector.detectChanges();
     }
 }
