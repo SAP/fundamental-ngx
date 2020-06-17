@@ -27,7 +27,7 @@ const size = {
 
 export const BusyIndicator = () => ({
     template: `
-        <div class="fd-panel" style="margin:50px">
+        <div class="fd-layout-panel" style="margin:50px">
             <fd-busy-indicator 
                 [size]="size"
                 [loadingLabel]="loadingLabel"

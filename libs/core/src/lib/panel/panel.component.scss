@@ -1,5 +1,5 @@
 @import '~fundamental-styles/dist/panel';
 
-.fd-has-display-block {
-    display: block;
+.fd-panel__content:focus {
+    outline: none;
 }
