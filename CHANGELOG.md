@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.36"></a>
+# [0.19.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.35...v0.19.0-rc.36) (2020-06-17)
+
+
+### Bug Fixes
+
+* (platform) Introduce Checkbox as a Component ([#2293](https://github.com/SAP/fundamental-ngx/issues/2293)) ([9f410fb](https://github.com/SAP/fundamental-ngx/commit/9f410fb))
+* Fix failing Switch test ([#2673](https://github.com/SAP/fundamental-ngx/issues/2673)) ([e6a41f6](https://github.com/SAP/fundamental-ngx/commit/e6a41f6))
+
+
+
 <a name="0.19.0-rc.35"></a>
 # [0.19.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.34...v0.19.0-rc.35) (2020-06-16)
 
