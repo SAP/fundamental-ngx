@@ -2,6 +2,97 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.44"></a>
+# [0.19.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.43...v0.19.0-rc.44) (2020-06-17)
+
+
+### Bug Fixes
+
+* Add support for focus/trigger on breadcrumb overflow indicator ([#2642](https://github.com/SAP/fundamental-ngx/issues/2642)) ([4f66969](https://github.com/SAP/fundamental-ngx/commit/4f66969))
+
+
+
+<a name="0.19.0-rc.43"></a>
+# [0.19.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.42...v0.19.0-rc.43) (2020-06-17)
+
+
+### Bug Fixes
+
+* bring old list css ([#2698](https://github.com/SAP/fundamental-ngx/issues/2698)) ([b90f653](https://github.com/SAP/fundamental-ngx/commit/b90f653))
+
+
+
+<a name="0.19.0-rc.42"></a>
+# [0.19.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.41...v0.19.0-rc.42) (2020-06-17)
+
+
+### Bug Fixes
+
+* Remove click event testing on native radio/checkbox input elements ([#2699](https://github.com/SAP/fundamental-ngx/issues/2699)) ([825d613](https://github.com/SAP/fundamental-ngx/commit/825d613))
+
+
+
+<a name="0.19.0-rc.41"></a>
+# [0.19.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.40...v0.19.0-rc.41) (2020-06-17)
+
+
+
+<a name="0.19.0-rc.40"></a>
+# [0.19.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.39...v0.19.0-rc.40) (2020-06-17)
+
+
+### Bug Fixes
+
+* Bring IE11 support for tristate on checkbox ([#2677](https://github.com/SAP/fundamental-ngx/issues/2677)) ([98ed7ba](https://github.com/SAP/fundamental-ngx/commit/98ed7ba))
+
+
+
+<a name="0.19.0-rc.39"></a>
+# [0.19.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.38...v0.19.0-rc.39) (2020-06-17)
+
+
+### Features
+
+* refactor old Panel component to Layout Panel and introduce Fiori 3 Panel ([#2612](https://github.com/SAP/fundamental-ngx/issues/2612)) ([6f106ca](https://github.com/SAP/fundamental-ngx/commit/6f106ca))
+
+
+
+<a name="0.19.0-rc.38"></a>
+# [0.19.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.37...v0.19.0-rc.38) (2020-06-17)
+
+
+### Features
+
+* Update Menu styling to match Fiori3 requirements ([#2572](https://github.com/SAP/fundamental-ngx/issues/2572)) ([4d9b64b](https://github.com/SAP/fundamental-ngx/commit/4d9b64b))
+
+
+
+<a name="0.19.0-rc.37"></a>
+# [0.19.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.36...v0.19.0-rc.37) (2020-06-17)
+
+
+### Bug Fixes
+
+* Stop propagating clicks from nested icon ([#2676](https://github.com/SAP/fundamental-ngx/issues/2676)) ([c264ff2](https://github.com/SAP/fundamental-ngx/commit/c264ff2))
+
+
+
+<a name="0.19.0-rc.36"></a>
+# [0.19.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.35...v0.19.0-rc.36) (2020-06-17)
+
+
+### Bug Fixes
+
+* (platform) Introduce Checkbox as a Component ([#2293](https://github.com/SAP/fundamental-ngx/issues/2293)) ([9f410fb](https://github.com/SAP/fundamental-ngx/commit/9f410fb))
+* Fix failing Switch test ([#2673](https://github.com/SAP/fundamental-ngx/issues/2673)) ([e6a41f6](https://github.com/SAP/fundamental-ngx/commit/e6a41f6))
+
+
+
+<a name="0.19.0-rc.35"></a>
+# [0.19.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.34...v0.19.0-rc.35) (2020-06-16)
+
+
+
 <a name="0.19.0-rc.34"></a>
 # [0.19.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.33...v0.19.0-rc.34) (2020-06-15)
 

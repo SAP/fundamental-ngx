@@ -1,5 +1,5 @@
 import { ContentChild, Directive, EventEmitter, HostBinding, HostListener, Output } from '@angular/core';
-import { DefaultMenuItem } from '../menu/default-menu-item';
+import { DefaultMenuItem } from '../menu/default-menu-item.class';
 import { MegaMenuSublinkDirective } from './mega-menu-sublink.directive';
 
 /**

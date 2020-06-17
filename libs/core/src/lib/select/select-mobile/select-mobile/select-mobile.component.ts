@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DialogRef } from '../../../dialog/dialog-utils/dialog-ref.class';
 import { DialogService } from '../../../dialog/dialog-service/dialog.service';
-import { SelectComponent } from '../../select.component';
 import { Subscription } from 'rxjs';
 import { MobileModeConfig } from '../../../utils/interfaces/mobile-mode-config';
 import { OptionComponent } from '../../option/option.component';
+import { SELECT_COMPONENT, SelectInterface } from '../../select.interface';
 
 @Component({
     selector: 'fd-select-mobile',
@@ -30,7 +30,7 @@ export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(
         private _elementRef: ElementRef,
         private _dialogService: DialogService,
-        private _selectComponent: SelectComponent
+        @Inject(SELECT_COMPONENT) private _selectComponent: SelectInterface
     ) { }
 
     /** @hidden */

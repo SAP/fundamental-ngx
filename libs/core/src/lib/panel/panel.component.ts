@@ -1,37 +1,106 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    SimpleChanges,
+    ViewEncapsulation
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { PanelService } from './panel.service';
+
+let panelUniqueId: number = 0;
 
 /**
- * Panels are used to encapsulate part of the content, form elements, lists, collections, etc., on a page.
+ * The panel is a container for grouping and displaying information
+ * Types: Expandable (default) and Fixed
+ * Modes: Tablet/Mobile (default) and Desktop (compact)
  */
 @Component({
-    selector: 'fd-panel',
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-panel]',
     templateUrl: './panel.component.html',
-    host: {
-        '[class.fd-has-display-block]': 'true'
-    },
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./panel.component.scss'],
+    providers: [PanelService],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PanelComponent extends AbstractFdNgxClass {
-    /** @Input Background image of the panel. */
+export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDestroy {
+    /** User's custom classes */
     @Input()
-    backgroundImage: string;
+    class: string;
+
+    /** Whether the Panel is fixed */
+    @Input()
+    fixed: boolean;
+
+    /** Whether to apply compact mode to the Panel */
+    @Input()
+    compact: boolean;
+
+    /** Id of the panel element. */
+    @Input()
+    @HostBinding('attr.id')
+    id: string = 'fd-panel-' + panelUniqueId++;
+
+    /** Whether the Panel Content is expanded */
+    @Input() expanded: boolean;
 
     /** @hidden */
-    @HostBinding('class.fd-panel')
-    fdPanelClass: boolean = true;
+    private _subscription: Subscription;
 
     /** @hidden */
-    _setProperties() {
-        if (this.backgroundImage) {
-            this._addStyleToElement('background-image', 'url("' + this.backgroundImage + '")');
+    constructor(
+        private _cdRef: ChangeDetectorRef,
+        private _elementRef: ElementRef,
+        private _panelService: PanelService
+    ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+        this._subscription = this._panelService.expanded$.subscribe((value) => {
+            this.expanded = value;
+            this._cdRef.detectChanges();
+        });
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        this.buildComponentCssClass();
+        this._panelService.updateExpanded(this.expanded);
+
+        if (changes && changes.expanded) {
+            this._panelService.updateExpanded(this.expanded);
         }
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    ngOnDestroy(): void {
+        if (this._subscription) {
+            this._subscription.unsubscribe();
+        }
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return ['fd-panel', this.fixed ? 'fd-panel--fixed' : '', this.compact ? 'fd-panel--compact' : '', this.class]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }

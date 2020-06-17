@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PanelHeaderComponent } from './panel-header.component';
+
 
 describe('PanelHeaderComponent', () => {
     let component: PanelHeaderComponent;
@@ -20,9 +20,5 @@ describe('PanelHeaderComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should have panel head class', () => {
-        expect(fixture.nativeElement.className).toBe('fd-panel__header');
     });
 });

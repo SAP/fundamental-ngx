@@ -6,37 +6,31 @@ import {
     Input,
     Output,
     TemplateRef,
-    Inject,
-    Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
-import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
-import { ButtonType, ButtonOptions } from '../button/button.component';
-import { Observable, of } from 'rxjs';
-import { RtlService } from '../utils/public_api';
-import { map } from 'rxjs/operators';
+import { ButtonOptions, ButtonType } from '../button/button.component';
+import { MenuComponent } from '../menu/menu.component';
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
  * additional options.
  *
  * ```html
- *    <fd-split-button>
- *        Action Button
- *        <div fd-split-button-menu>
- *            <fd-menu>
- *                <ul fd-menu-list>
- *                    <li fd-menu-item>
- *                       <a [routerLink]="'/'">option</a>
- *                    </li>
- *                    <li fd-menu-item>
- *                       <a [routerLink]="'/'">option2</a>
- *                    </li>
- *                </ul>
- *            </fd-menu>
- *        </div>
- *    </fd-split-button>
+ * <fd-split-button>
+ *   <fd-menu>
+ *       <li fd-menu-item>
+ *           <div fd-menu-interactive>
+ *               <span fd-menu-title>Option 1</span>
+ *           </div>
+ *       </li>
+ *       <li fd-menu-item>
+ *           <div fd-menu-interactive>
+ *               <span fd-menu-title>Option 2</span>
+ *           </div>
+ *       </li>
+ *    </fd-menu>
+ *</fd-split-button>
  * ```
  */
 @Component({
@@ -47,26 +41,6 @@ import { map } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None
 })
 export class SplitButtonComponent {
-    /** @hidden */
-    @ContentChild(SplitButtonActionTitle, { read: TemplateRef })
-    titleTemplate: TemplateRef<any>;
-
-    /** The trigger events that will open/close the popover.
-     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
-    @Input()
-    triggers: string[] = ['click'];
-
-    /** Whether the popover should close when a click is made outside its boundaries. */
-    @Input()
-    closeOnOutsideClick: boolean = true;
-
-    /** Whether the popover should close when the escape key is pressed. */
-    @Input()
-    closeOnEscapeKey: boolean = true;
-
-    /** Whether the popover should be focusTrapped. */
-    @Input()
-    focusTrapped: boolean = false;
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -89,75 +63,29 @@ export class SplitButtonComponent {
     @Input()
     fdType: ButtonType;
 
-    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
+    /** Aria-label used to describe expand button*/
+    @Input()
+    expandButtonAriaLabel: string = 'More';
 
+    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
     @Input()
     options: ButtonOptions | ButtonOptions[];
 
-    /**
-     * Preset options for the popover body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
-     * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * Leave blank for no effect.
-     */
-    @Input()
-    fillControlMode: PopoverFillMode = 'at-least';
-
-    /** @hidden */
-    @Input()
-    isOpen: boolean = false;
-
-    /** Event sent when is open popover changed */
-    @Output()
-    readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
     /** Event sent when primary button is clicked */
     @Output()
-    readonly primaryButtonClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly primaryButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** @hidden */
-    direction$: Observable<string>;
+    @ContentChild(SplitButtonActionTitle, {read: TemplateRef})
+    titleTemplate: TemplateRef<any>;
 
-    constructor(@Optional() private rtlService: RtlService) {
-        this.direction$ = rtlService ? rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'rtl' : 'ltr'))) : of('ltr');
-    }
+    /** @hidden */
+    @ContentChild(MenuComponent)
+    menu: MenuComponent;
 
-    /**
-     *  Handles primary button click
-     *  */
-    public buttonClick($event) {
-        this.primaryButtonClicked.emit();
-        $event.stopPropagation();
-    }
-
-    /**
-     * Toggles the popover open state.
-     */
-    public toggle(): void {
-        if (this.isOpen) {
-            this.close();
-        } else {
-            this.open();
-        }
-    }
-
-    /**
-     * Closes the popover.
-     */
-    public close(): void {
-        if (this.isOpen) {
-            this.isOpen = false;
-            this.isOpenChange.emit(this.isOpen);
-        }
-    }
-
-    /**
-     * Opens the popover.
-     */
-    public open(): void {
-        if (!this.isOpen) {
-            this.isOpen = true;
-            this.isOpenChange.emit(this.isOpen);
-        }
+    /** @hidden Emits event when main button is clicked */
+    onMainButtonClick(event: MouseEvent): void {
+        this.primaryButtonClicked.emit(event);
+        event.stopPropagation();
     }
 }

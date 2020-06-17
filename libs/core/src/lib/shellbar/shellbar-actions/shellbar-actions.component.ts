@@ -94,10 +94,10 @@ export class ShellbarActionsComponent implements OnInit {
     triggerItems(): void {
         if (this.closePopoverOnSelect) {
             if (this.userComponentView) {
-                this.userComponentView.close();
+                this.userComponentView.menu.close();
             }
             if (this.userComponent) {
-                this.userComponent.close();
+                this.userComponent.menu.close();
             }
         }
     }

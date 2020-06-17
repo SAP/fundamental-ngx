@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiDocsService } from '../../services/api-docs.service';
+import { MenuComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-api',
@@ -11,7 +12,9 @@ export class ApiComponent implements OnInit {
     files: string[];
     activeFile: string;
     result: string;
-    openMenu: boolean = false;
+
+    @ViewChild('menu')
+    menu: MenuComponent;
 
     constructor(private route: ActivatedRoute, private apiService: ApiDocsService) {}
 
@@ -34,7 +37,7 @@ export class ApiComponent implements OnInit {
             (data) => {
                 this.result = data;
                 this.activeFile = file;
-                this.openMenu = false;
+                this.menu.close();
             },
             (error) => {
                 console.warn('Did not find file ' + file + '.\nError: ' + error);

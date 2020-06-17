@@ -1,68 +1,65 @@
-<fd-split-button
-    (primaryButtonClicked)="primaryButtonClicked()"
-    [disabled]="true"
-    [mainActionTitle]="'Disabled Button'"
->
-    <div fd-split-button-menu>
-        <fd-menu>
-            <ul fd-menu-list>
-                <li fd-menu-item (click)="itemClicked()">
-                    option 1
-                </li>
-                <li fd-menu-item (click)="itemClicked()">
-                    option 2
-                </li>
-            </ul>
-        </fd-menu>
-    </div>
+<fd-split-button [mainActionTitle]="'Disabled Button'" [disabled]="true" (primaryButtonClicked)="primaryButtonClicked()">
+    <fd-menu>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2</span>
+            </div>
+        </li>
+    </fd-menu>
 </fd-split-button>
-<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [mainActionTitle]="'Default Button'">
-    <div fd-split-button-menu>
-        <fd-menu>
-            <ul fd-menu-list>
-                <li fd-menu-item (click)="itemClicked()">
-                    option 1
-                </li>
-                <li fd-menu-item (click)="itemClicked()">
-                    option 2
-                </li>
-            </ul>
-        </fd-menu>
-    </div>
+
+<fd-split-button [mainActionTitle]="'Default Button'" (primaryButtonClicked)="primaryButtonClicked()">
+    <fd-menu>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+    </fd-menu>
 </fd-split-button>
+
 <fd-split-button
-    (primaryButtonClicked)="primaryButtonClicked()"
     [fdType]="'emphasized'"
     [mainActionTitle]="'Emphasized Button'"
->
-    <div fd-split-button-menu>
-        <fd-menu>
-            <ul fd-menu-list>
-                <li fd-menu-item (click)="itemClicked()">
-                    option 1
-                </li>
-                <li fd-menu-item (click)="itemClicked()">
-                    option 2
-                </li>
-            </ul>
-        </fd-menu>
-    </div>
+    (primaryButtonClicked)="primaryButtonClicked()">
+    <fd-menu>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2</span>
+            </div>
+        </li>
+    </fd-menu>
 </fd-split-button>
+
 <fd-split-button
-    (primaryButtonClicked)="primaryButtonClicked()"
     [fdType]="'transparent'"
     [mainActionTitle]="'Light Button'"
->
-    <div fd-split-button-menu>
-        <fd-menu>
-            <ul fd-menu-list>
-                <li fd-menu-item (click)="itemClicked()">
-                    option 1
-                </li>
-                <li fd-menu-item (click)="itemClicked()">
-                    option 2
-                </li>
-            </ul>
-        </fd-menu>
-    </div>
+    (primaryButtonClicked)="primaryButtonClicked()">
+    <fd-menu>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2</span>
+            </div>
+        </li>
+    </fd-menu>
 </fd-split-button>

@@ -2,37 +2,27 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PanelComponent } from './panel.component';
+import { PanelContentDirective } from './panel-content/panel-content.directive';
+import { PanelExpandComponent } from './panel-expand/panel-expand.component';
 import { PanelHeaderComponent } from './panel-header/panel-header.component';
-import { PanelHeadComponent } from './panel-head/panel-head.component';
 import { PanelTitleDirective } from './panel-title/panel-title.directive';
-import { PanelDescriptionComponent } from './panel-description/panel-description.component';
-import { PanelActionsComponent } from './panel-actions/panel-actions.component';
-import { PanelFiltersComponent } from './panel-filters/panel-filters.component';
-import { PanelBodyComponent } from './panel-body/panel-body.component';
-import { PanelFooterComponent } from './panel-footer/panel-footer.component';
+
 @NgModule({
     declarations: [
         PanelComponent,
+        PanelContentDirective,
+        PanelExpandComponent,
         PanelHeaderComponent,
-        PanelHeadComponent,
-        PanelTitleDirective,
-        PanelDescriptionComponent,
-        PanelActionsComponent,
-        PanelFiltersComponent,
-        PanelBodyComponent,
-        PanelFooterComponent
+        PanelTitleDirective
+
     ],
     imports: [CommonModule],
     exports: [
         PanelComponent,
+        PanelContentDirective,
+        PanelExpandComponent,
         PanelHeaderComponent,
-        PanelHeadComponent,
-        PanelTitleDirective,
-        PanelDescriptionComponent,
-        PanelActionsComponent,
-        PanelFiltersComponent,
-        PanelBodyComponent,
-        PanelFooterComponent
+        PanelTitleDirective
     ]
 })
-export class PanelModule {}
+export class PanelModule { }

@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { DefaultMenuItem } from '../../menu/default-menu-item';
+import { DefaultMenuItem } from '../../menu/default-menu-item.class';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
 
 /** Interface, to reduce amount of circular dependency warnings */
