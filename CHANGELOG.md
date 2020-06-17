@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.42"></a>
+# [0.19.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.41...v0.19.0-rc.42) (2020-06-17)
+
+
+### Bug Fixes
+
+* Remove click event testing on native radio/checkbox input elements ([#2699](https://github.com/SAP/fundamental-ngx/issues/2699)) ([825d613](https://github.com/SAP/fundamental-ngx/commit/825d613))
+
+
+
 <a name="0.19.0-rc.41"></a>
 # [0.19.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.40...v0.19.0-rc.41) (2020-06-17)
 
