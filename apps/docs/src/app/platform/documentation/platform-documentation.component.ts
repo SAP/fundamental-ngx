@@ -18,6 +18,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
         this.components = [
             { url: 'platform/action-bar', name: 'Action Bar' },
             { url: 'platform/button', name: 'Button' },
+            { url: 'platform/checkbox', name: 'Checkbox' },
             { url: 'platform/info-label', name: 'Info Label' },
             { url: 'platform/link', name: 'Link' },
             { url: 'platform/menu', name: 'Menu' },
