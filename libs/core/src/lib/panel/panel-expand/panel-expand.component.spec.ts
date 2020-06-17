@@ -15,7 +15,7 @@ describe('PanelExpandComponent', () => {
     let panelServiceSpy: jasmine.SpyObj<PanelService>;
 
     beforeEach(async(() => {
-        const panelSpy = jasmine.createSpyObj('PanelService', ['updateExpanded', 'expanded']);
+        const panelSpy = jasmine.createSpyObj('PanelService', ['updateExpanded']);
         const mockExpandedObservable = new BehaviorSubject(false);
 
         TestBed.configureTestingModule({
@@ -44,7 +44,13 @@ describe('PanelExpandComponent', () => {
         expect(fixture.nativeElement.className).toContain('fd-panel__expand');
     });
 
-    it('should expand the button', () => {
+    it('should call the Panel Service with the correct value', () => {
+        button.nativeElement.click();
+        fixture.detectChanges();
+        expect(panelServiceSpy.updateExpanded).toHaveBeenCalledWith(true);
+    });
+
+    it('should expand the button when clicked', () => {
         button.nativeElement.click();
         fixture.detectChanges();
         expect(button.nativeElement.className).toContain('is-expanded');

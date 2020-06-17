@@ -50,7 +50,8 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     id: string = 'fd-panel-' + panelUniqueId++;
 
     /** Whether the Panel Content is expanded */
-    @Input() expanded: boolean;
+    @Input() 
+    expanded: boolean = false;
 
     /** @hidden */
     private _subscription: Subscription;
@@ -74,7 +75,6 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
-        this._panelService.updateExpanded(this.expanded);
 
         if (changes && changes.expanded) {
             this._panelService.updateExpanded(this.expanded);
