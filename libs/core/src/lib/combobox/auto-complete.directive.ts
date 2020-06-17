@@ -92,14 +92,6 @@ export class AutoCompleteDirective {
         this.lastKeyUpEvent = event;
     }
 
-    /** @hidden */
-    @HostListener('blur')
-    onBlur(): void {
-        if (this.enable) {
-            this._sendCompleteEvent(true);
-        }
-    }
-
     private _typeahead(displayedValue: string): void {
         this._elementRef.nativeElement.value = displayedValue;
         const selectionStartIndex = this.inputText.length;

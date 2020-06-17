@@ -81,23 +81,6 @@ describe('AutoCompleteDirective', () => {
         expect((<any>directive)._elementRef.nativeElement.value).toBe('ap');
     });
 
-    it('should complete on blur', () => {
-        spyOn(directive.onComplete, 'emit');
-
-        directive.inputText = 'ap';
-
-        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
-
-        expect((<any>directive)._elementRef.nativeElement.value).toBe('Apple');
-
-        directive.onBlur();
-
-        expect(directive.onComplete.emit).toHaveBeenCalledWith({
-            term: 'Apple',
-            forceClose: false
-        });
-    });
-
     it('should not complete, when other word is written', () => {
         spyOn(directive.onComplete, 'emit');
 

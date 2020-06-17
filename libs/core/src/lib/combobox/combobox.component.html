@@ -37,6 +37,7 @@
                 (ngModelChange)="handleSearchTermChange()"
                 [placeholder]="placeholder"
                 (focus)="onTouched()"
+                (blur)="handleBlur()"
                 [attr.aria-expanded]="open && displayedValues.length"
                 [readonly]="readOnly"
                 [attr.aria-readonly]="readOnly"

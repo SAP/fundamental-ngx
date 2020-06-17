@@ -63,7 +63,7 @@ import { AutoCompleteEvent } from './auto-complete.directive';
         '[class.fd-combobox-input]': 'true'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
 
@@ -398,6 +398,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                 this.focusTrap.deactivate();
             }
         }
+
+        if (!this.open) {
+            this.handleBlur();
+        }
     }
 
     /** @hidden */
@@ -412,6 +416,16 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         this.handleSearchTermChange();
         if (event.forceClose) {
             this.isOpenChangeHandle(false);
+        }
+    }
+
+    /** @hidden */
+    handleBlur(): void {
+        if (!this.open) {
+            this.handleAutoComplete({
+                term: this.searchInputElement.nativeElement.value,
+                forceClose: false
+            });
         }
     }
 
