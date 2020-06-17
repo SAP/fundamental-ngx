@@ -19,9 +19,9 @@ export class ComboboxFormsExampleComponent {
     dropdownValues: ComboboxItem[] = [
         { displayedValue: 'Apple', value: 'AppleValue' },
         { displayedValue: 'Banana', value: 'BananaValue' },
-        { displayedValue: 'Kiwi', value: 'AppleValue' },
-        { displayedValue: 'Strawberry', value: 'AppleValue' },
-        { displayedValue: 'Tomato', value: 'AppleValue' }
+        { displayedValue: 'Kiwi', value: 'KiwiValue' },
+        { displayedValue: 'Strawberry', value: 'StrawberryValue' },
+        { displayedValue: 'Tomato', value: 'TomatoValue' }
     ];
 
     myDisplayFunction = (item: ComboboxItem): string => {

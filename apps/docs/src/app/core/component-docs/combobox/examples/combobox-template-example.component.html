@@ -4,8 +4,11 @@
     (itemClicked)="selected = $event"
     [displayFn]="displayFunction"
     [placeholder]="'Select an icon...'"
+    [(ngModel)]="searchTerm"
 ></fd-combobox>
 Returned from itemClicked Event: {{ selected | json }}
+<br/>
+<span>Search Term: {{ searchTerm }}</span>
 
 <!-- Note that in this case you are responsible for highlighting. -->
 <ng-template #template let-item>

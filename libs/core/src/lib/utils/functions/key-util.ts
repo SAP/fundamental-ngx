@@ -10,7 +10,12 @@ const keyMap: Map<string, { aliases: string[], keyCode: number }> = new Map(
         ['Escape', {aliases: ['Escape', 'Esc'], keyCode: 27}],
         ['Delete', {aliases: ['Delete', 'Del'], keyCode: 46}],
         ['Enter', {aliases: ['Enter'], keyCode: 13}],
-        ['Tab', {aliases: ['Tab'], keyCode: 9}]
+        ['Tab', {aliases: ['Tab'], keyCode: 9}],
+        ['Alt', {aliases: ['Alt'], keyCode: 18}],
+        ['Ctrl', {aliases: ['Ctrl', 'Control', 'Meta'], keyCode: 17}],
+        ['Meta', {aliases: ['Meta'], keyCode: 91}],
+        ['Shift', {aliases: ['Shift'], keyCode: 16}],
+        ['Backspace', {aliases: ['Backspace'], keyCode: 8}]
     ]
 );
 

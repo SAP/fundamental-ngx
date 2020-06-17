@@ -3,32 +3,44 @@
     (isOpenChange)="isOpenChangeHandle($event)"
     [fillControlMode]="'at-least'"
     [triggers]="triggers"
-    [disabled]="disabled"
+    [disabled]="disabled || readOnly"
     [closeOnOutsideClick]="closeOnOutsideClick"
     class="fd-combobox-popover-custom"
 >
     <fd-popover-control>
         <fd-input-group
-            [glyph]="glyph"
             [compact]="compact"
             [button]="true"
+            [glyph]="glyph"
             [state]="state"
-            [inShellbar]="inShellbar"
-            (addOnButtonClicked)="onPrimaryButtonClick()"
             [buttonFocusable]="buttonFocusable"
-            [disabled]="disabled"
+            [disabled]="disabled || readOnly"
+            [isControl]="true"
+            (addOnButtonClicked)="onPrimaryButtonClick($event)"
+            [isExpanded]="open && displayedValues.length"
+            [attr.aria-readonly]="readOnly"
         >
             <input
+                fd-auto-complete
+                [enable]="autoComplete"
+                [displayFn]="displayFn"
+                [options]="dropdownValues"
+                [inputText]="inputText"
+                (onComplete)="handleAutoComplete($event)"
                 #searchInputElement
                 type="text"
                 fd-input-group-input
                 [compact]="compact"
                 (keydown)="onInputKeydownHandler($event)"
-                (keyup)="onInputKeyupHandler($event)"
                 [disabled]="disabled"
                 [(ngModel)]="inputText"
                 (ngModelChange)="handleSearchTermChange()"
                 [placeholder]="placeholder"
+                (focus)="onTouched()"
+                (blur)="handleBlur()"
+                [attr.aria-expanded]="open && displayedValues.length"
+                [readonly]="readOnly"
+                [attr.aria-readonly]="readOnly"
             />
         </fd-input-group>
     </fd-popover-control>
@@ -49,13 +61,13 @@
                         {{ group.key }}
                     </li>
                     <li
-                        *ngFor="let term of group.value; let termIndex = index"
-                        (click)="onMenuClickHandler(groupIndex * group.value.length + termIndex)"
-                        (keydown)="onListKeydownHandler($event, groupIndex * group.value.length + termIndex)"
+                        *ngFor="let term of group.value"
+                        (click)="onMenuClickHandler(term)"
+                        (keydown)="onListKeydownHandler($event)"
                         fd-list-item
                         tabindex="0"
                         class="fd-combobox-list-item"
-                        [selected]="displayFn(term) === inputText"
+                        [selected]="inputText === (term | displayFnPipe: displayFn)"
                     >
                         <ng-container
                             [ngTemplateOutlet]="itemSource"
@@ -66,13 +78,13 @@
             </ng-container>
             <ng-container *ngIf="!groupFn">
                 <li
-                    *ngFor="let term of displayedValues; let index = index"
-                    (click)="onMenuClickHandler(index)"
-                    (keydown)="onListKeydownHandler($event, index)"
+                    *ngFor="let term of displayedValues"
+                    (click)="onMenuClickHandler(term)"
+                    (keydown)="onListKeydownHandler($event)"
                     fd-list-item
                     tabindex="0"
                     class="fd-combobox-list-item"
-                    [selected]="displayFn(term) === inputText"
+                    [selected]="inputText === (term | displayFnPipe: displayFn)"
                 >
                     <ng-container
                         [ngTemplateOutlet]="itemSource"
