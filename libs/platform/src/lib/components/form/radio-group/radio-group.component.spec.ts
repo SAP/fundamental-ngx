@@ -183,7 +183,7 @@ describe('GroupRadioButtonComponent', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fdp-radio-button'));
         fixture.detectChanges();
 
         expect(fdradiobuttonsElem.length).toEqual(4);
