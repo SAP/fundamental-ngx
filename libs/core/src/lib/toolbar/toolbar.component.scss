@@ -1,0 +1,14 @@
+@import '~fundamental-styles/dist/toolbar';
+
+.fd-toolbar {
+    position: relative;
+}
+
+.fd-toolbar > * {
+    flex-shrink: 0;
+}
+
+// .fd-toolbar > .fd-popover {
+//     position: absolute;
+//     right: 0;
+// }

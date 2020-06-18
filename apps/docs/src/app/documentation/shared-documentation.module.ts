@@ -28,7 +28,7 @@ import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 import { SchemaModule } from '../schema/schema.module';
 import { COMPONENT_SCHEMAS } from '../core/component-docs/schemas';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
-import { ToolbarComponent } from './core-helpers/toolbar/toolbar.component';
+import { ToolbarDocsComponent } from './core-helpers/toolbar/toolbar.component';
 import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sections-toolbar.component';
 import { HeaderTabsComponent } from './core-helpers/header-tabs/header-tabs.component';
 import { ApiComponent } from './core-helpers/api/api.component';
@@ -47,7 +47,7 @@ import { sharedCoreModules } from './shared-core-modules';
         ExampleBackgroundComponent,
         DocsSectionTitleComponent,
         SearchPipe,
-        ToolbarComponent,
+        ToolbarDocsComponent,
         SectionsToolbarComponent,
         HeaderTabsComponent,
         ApiComponent
@@ -85,7 +85,7 @@ import { sharedCoreModules } from './shared-core-modules';
         DocsSectionTitleComponent,
         SchemaModule,
         SearchPipe,
-        ToolbarComponent,
+        ToolbarDocsComponent,
         SectionsToolbarComponent,
         HeaderTabsComponent,
         ApiComponent,

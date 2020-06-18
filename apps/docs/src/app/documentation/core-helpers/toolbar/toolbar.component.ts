@@ -1,19 +1,8 @@
-import {
-    Component,
-    EventEmitter,
-    Inject,
-    Output,
-    OnInit,
-    ViewChild
-} from '@angular/core';
+import { Component, EventEmitter, Inject, Output, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
-import {
-    ShellbarMenuItem,
-    MenuKeyboardService,
-    MenuComponent
-} from '@fundamental-ngx/core';
+import { ShellbarMenuItem, MenuKeyboardService, MenuComponent } from '@fundamental-ngx/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -23,7 +12,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
     providers: [MenuKeyboardService]
 })
 export class ToolbarComponent implements OnInit {
-
     @Output()
     btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
 

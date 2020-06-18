@@ -231,5 +231,11 @@ export const API_FILES = {
     timePicker: ['TimePickerComponent', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
     switch: ['SwitchComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],
+    toolbar: [
+        'ToolbarComponent',
+        'ToolbarContentComponent',
+        'ToolbarOverflowContentComponent',
+        'ToolbarSpacerComponent'
+    ],
     tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel']
 };
