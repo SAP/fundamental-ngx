@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.55"></a>
+# [0.19.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.54...v0.19.0-rc.55) (2020-06-18)
+
+
+### Bug Fixes
+
+* bring back input group button class adding ([#2713](https://github.com/SAP/fundamental-ngx/issues/2713)) ([a5ded14](https://github.com/SAP/fundamental-ngx/commit/a5ded14))
+
+
+
 <a name="0.19.0-rc.54"></a>
 # [0.19.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.53...v0.19.0-rc.54) (2020-06-18)
 
