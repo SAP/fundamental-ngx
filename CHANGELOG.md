@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.60"></a>
+# [0.19.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.59...v0.19.0-rc.60) (2020-06-18)
+
+
+### Bug Fixes
+
+* add Panel component improvements ([#2702](https://github.com/SAP/fundamental-ngx/issues/2702)) ([001119a](https://github.com/SAP/fundamental-ngx/commit/001119a)), closes [#2710](https://github.com/SAP/fundamental-ngx/issues/2710)
+
+
+
 <a name="0.19.0-rc.59"></a>
 # [0.19.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.58...v0.19.0-rc.59) (2020-06-18)
 
