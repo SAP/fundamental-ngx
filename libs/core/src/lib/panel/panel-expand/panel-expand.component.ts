@@ -1,6 +1,6 @@
 import {
-    ChangeDetectorRef,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     HostBinding,
     Input,
@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PanelService } from '../panel.service';
+import { filter } from 'rxjs/operators';
 
 let expandButtonUniqueId: number = 0;
 
@@ -52,26 +53,30 @@ export class PanelExpandComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _subscription: Subscription;
 
-    constructor(private _cdRef: ChangeDetectorRef, public panelService: PanelService) {}
+    constructor(private _cdRef: ChangeDetectorRef, private _panelService: PanelService) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this._subscription = this.panelService.expanded$.subscribe( (value: boolean) => {
-            this.expanded = value;
-            this._cdRef.detectChanges();
-        });
+        this._listenOnExpandedChange();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this._subscription) {
-            this._subscription.unsubscribe();
-        }
+        this._subscription.unsubscribe();
     }
 
     /** Methods that toggles the content of the Panel. */
     toggleExpand(): void {
         this.expanded = !this.expanded;
-        this.panelService.updateExpanded(this.expanded);
+        this._panelService.updateExpanded(this.expanded, true);
+    }
+
+    private _listenOnExpandedChange(): void {
+        this._subscription = this._panelService.expanded$
+            .pipe(filter(value => !value.isExpandTriggerClick))
+            .subscribe(value => {
+                this.expanded = value.isExpanded;
+                this._cdRef.markForCheck();
+            });
     }
 }

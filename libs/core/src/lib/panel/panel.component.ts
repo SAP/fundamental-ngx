@@ -3,17 +3,20 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     HostBinding,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
+    Output,
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { PanelService } from './panel.service';
+import { filter } from 'rxjs/operators';
 
 let panelUniqueId: number = 0;
 
@@ -50,8 +53,12 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     id: string = 'fd-panel-' + panelUniqueId++;
 
     /** Whether the Panel Content is expanded */
-    @Input() 
+    @Input()
     expanded: boolean = false;
+
+    /** Emits event when expanded state has been changed */
+    @Output()
+    expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
     private _subscription: Subscription;
@@ -66,18 +73,17 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        this._subscription = this._panelService.expanded$.subscribe((value) => {
-            this.expanded = value;
-            this._cdRef.detectChanges();
-        });
+        this._listenOnExpandedChange();
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        this.buildComponentCssClass();
+        if (changes && changes.class) {
+            this.buildComponentCssClass();
+        }
 
         if (changes && changes.expanded) {
-            this._panelService.updateExpanded(this.expanded);
+            this._panelService.updateExpanded(this.expanded, false);
         }
     }
 
@@ -102,5 +108,15 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    private _listenOnExpandedChange(): void {
+        this._subscription = this._panelService.expanded$
+            .pipe(filter(value => value.isExpandTriggerClick))
+            .subscribe(value => {
+                this.expanded = value.isExpanded;
+                this.expandedChange.emit(this.expanded);
+                this._cdRef.detectChanges();
+            });
     }
 }
