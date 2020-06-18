@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.53"></a>
+# [0.19.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.52...v0.19.0-rc.53) (2020-06-18)
+
+
+### Bug Fixes
+
+* Remove max-width limits from dropdown ([#2708](https://github.com/SAP/fundamental-ngx/issues/2708)) ([8357be6](https://github.com/SAP/fundamental-ngx/commit/8357be6))
+
+
+
 <a name="0.19.0-rc.52"></a>
 # [0.19.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.51...v0.19.0-rc.52) (2020-06-18)
 
