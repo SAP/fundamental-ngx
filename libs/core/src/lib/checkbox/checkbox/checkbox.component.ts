@@ -66,6 +66,10 @@ export class CheckboxComponent implements ControlValueAccessor {
     @Input()
     tristateSelectable: boolean = true;
 
+    /** Whenever the checkbox is used inside list, it applies another class to label */
+    @Input()
+    checkboxInList: boolean = false;
+
     /** Sets values returned by control. */
     @Input('values')
     set _values(checkboxValues: FdCheckboxValues) {

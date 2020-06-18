@@ -16,6 +16,7 @@
 <label class="fd-checkbox__label"
        (click)="checkByClick()"
        [for]="inputId"
+       [class.fd-list__label]="checkboxInList"
        [class.fd-checkbox__label--compact]="compact">
     <ng-container *ngIf="label">
         {{ label }}

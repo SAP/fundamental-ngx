@@ -36,8 +36,11 @@
         [button]="true"
         [compact]="compact"
         [disabled]="disabled"
+        [isExpanded]="open"
+        [isControl]="true"
+        [glyph]="glyph"
         (click)="openChangeHandle(!open || mobile)">
-        <fd-tokenizer [compact]="compact" [class]="'fd-multi-input-tokenizer-custom'" [glyph]="glyph">
+        <fd-tokenizer [compact]="compact" [class]="'fd-multi-input-tokenizer-custom'" >
             <fd-token
                 *ngFor="let token of selected"
                 [compact]="compact"
@@ -68,7 +71,7 @@
 <ng-template #list>
     <ul
         fd-list
-        class="fd-multi-input-menu-overflow"
+        class="fd-list--multi-input fd-multi-input-menu-overflow"
         *ngIf="displayedValues && displayedValues.length"
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
     >
@@ -80,6 +83,7 @@
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
+                [checkboxInList]="true"
                 [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                 class="fd-multi-input-checkbox"
                 (keydown)="handleKeyDown($event, ind)"
