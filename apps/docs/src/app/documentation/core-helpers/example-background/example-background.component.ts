@@ -20,7 +20,7 @@ export class ExampleBackgroundComponent {
     className: string;
 
     onChange() {
-        const className = 'fd-tile-example-background';
+        const className = 'docs-tile-example-background';
         if (this.label) {
             document.getElementById(this.label).classList.toggle(className);
         }
