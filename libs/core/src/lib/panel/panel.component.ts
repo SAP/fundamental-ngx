@@ -78,9 +78,7 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes && changes.class) {
-            this.buildComponentCssClass();
-        }
+        this.buildComponentCssClass();
 
         if (changes && changes.expanded) {
             this._panelService.updateExpanded(this.expanded, false);
@@ -89,9 +87,7 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this._subscription) {
-            this._subscription.unsubscribe();
-        }
+        this._subscription.unsubscribe();
     }
 
     @applyCssClass
@@ -110,6 +106,7 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
         return this._elementRef;
     }
 
+    /** @hidden */
     private _listenOnExpandedChange(): void {
         this._subscription = this._panelService.expanded$
             .pipe(filter(value => value.isExpandTriggerClick))

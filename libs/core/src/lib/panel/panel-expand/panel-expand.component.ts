@@ -71,6 +71,7 @@ export class PanelExpandComponent implements OnInit, OnDestroy {
         this._panelService.updateExpanded(this.expanded, true);
     }
 
+    /** @hidden */
     private _listenOnExpandedChange(): void {
         this._subscription = this._panelService.expanded$
             .pipe(filter(value => !value.isExpandTriggerClick))
