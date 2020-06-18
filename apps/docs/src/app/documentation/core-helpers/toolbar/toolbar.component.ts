@@ -84,9 +84,6 @@ export class ToolbarComponent implements OnInit {
     }
 
     selectTheme(selectedTheme: string): void {
-        if (this.themeMenu.isOpen) {
-            this.themeMenu.close();
-            this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/' + selectedTheme + '.css');
-        }
+        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/' + selectedTheme + '.css');
     }
 }
