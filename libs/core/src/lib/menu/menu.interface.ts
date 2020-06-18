@@ -6,8 +6,8 @@ import { MenuItemComponent } from './menu-item/menu-item.component';
 export const MENU_COMPONENT = new InjectionToken<string[]>('MenuInterface');
 
 /**
- * Select Interface to have typing and avoid circular dependency between
- * SelectComponent <==> SelectMobileComponent
+ * Menu Interface to have typing and avoid circular dependency between
+ * MenuComponent <==> MenuMobileComponent
  */
 export interface MenuInterface {
     mobileConfig: MobileModeConfig;
