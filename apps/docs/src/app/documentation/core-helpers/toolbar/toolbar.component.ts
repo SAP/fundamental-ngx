@@ -11,7 +11,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
     styleUrls: ['./toolbar.component.scss'],
     providers: [MenuKeyboardService]
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarDocsComponent implements OnInit {
     @Output()
     btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
 
