@@ -35,7 +35,6 @@ describe('PanelComponent', () => {
 
     beforeEach(async(() => {
         const panelSpy = jasmine.createSpyObj('PanelService', ['updateExpanded']);
-        const mockExpandedObservable = new BehaviorSubject(false);
 
         TestBed.configureTestingModule({
             declarations: [TestComponent],
@@ -44,7 +43,7 @@ describe('PanelComponent', () => {
         }).compileComponents();
 
         panelServiceSpy = TestBed.get(PanelService);
-        panelServiceSpy.expanded$ = mockExpandedObservable;
+        panelServiceSpy.expanded$ = new BehaviorSubject({isExpanded: false, isExpandTriggerClick: false});
     }));
 
     beforeEach(() => {

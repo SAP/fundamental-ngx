@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+interface ExpandedChange {
+    isExpanded: boolean
+    isExpandTriggerClick: boolean
+}
+
 @Injectable()
 export class PanelService {
-    isExpanded: boolean = false;
-    expanded$: BehaviorSubject<boolean> = new BehaviorSubject(this.isExpanded);
+    expanded$ = new BehaviorSubject<ExpandedChange>({isExpanded: false, isExpandTriggerClick: false});
 
     /** Whether the Panel is expanded */
-    updateExpanded(value: boolean) {
-        value === this.isExpanded ? this.isExpanded = !value : this.isExpanded = value
-        
-        this.expanded$.next(this.isExpanded);
+    updateExpanded(isExpanded: boolean, byUser: boolean) {
+        this.expanded$.next({ isExpanded: isExpanded, isExpandTriggerClick: byUser });
     }
 }
