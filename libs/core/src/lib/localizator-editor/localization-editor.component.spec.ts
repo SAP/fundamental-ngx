@@ -4,7 +4,7 @@ import { LocalizationEditorComponent } from './localization-editor.component';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { PopoverModule } from '../popover/popover.module';
-import { MenuModule } from '../menu/menu.module';
+import { ListModule } from '../list/list.module';
 import { FormModule } from '../form/form.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 
@@ -14,7 +14,7 @@ describe('LocalizatorEditorComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PopoverModule, FormModule, InputGroupModule, MenuModule, ButtonModule],
+            imports: [CommonModule, PopoverModule, FormModule, InputGroupModule, ListModule, ButtonModule],
             declarations: [LocalizationEditorComponent]
         }).compileComponents();
     }));
