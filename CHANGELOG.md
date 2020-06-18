@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.19.0-rc.57"></a>
+# [0.19.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.56...v0.19.0-rc.57) (2020-06-18)
+
+
+### Bug Fixes
+
+* Menu circular dependency ([#2707](https://github.com/SAP/fundamental-ngx/issues/2707)) ([0007996](https://github.com/SAP/fundamental-ngx/commit/0007996))
+
+
+
 <a name="0.19.0-rc.56"></a>
 # [0.19.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.19.0-rc.55...v0.19.0-rc.56) (2020-06-18)
 
