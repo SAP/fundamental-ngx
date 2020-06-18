@@ -470,7 +470,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             MultiInputMobileComponent,
             { container: this._elementRef.nativeElement },
-            { injector: Injector.create([{ provide: MULTI_INPUT_COMPONENT, useValue: this }]) }
+            { injector: Injector.create({ providers: [{ provide: MULTI_INPUT_COMPONENT, useValue: this }] }) }
         );
     }
 

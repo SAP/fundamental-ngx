@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    Inject,
     OnDestroy,
     OnInit,
     Optional,
@@ -12,7 +13,6 @@ import {
 } from '@angular/core';
 import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
-import { MenuComponent } from '../menu.component';
 import { Observable, of, Subscription } from 'rxjs';
 import { MenuService } from '../services/menu.service';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
@@ -20,6 +20,7 @@ import { map, startWith } from 'rxjs/operators';
 import { DialogConfig } from '../../dialog/dialog-utils/dialog-config.class';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 import { RtlService } from '../../utils/services/rtl.service';
+import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 
 @Component({
     selector: 'fd-menu-mobile',
@@ -56,10 +57,10 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
     constructor(
         private _elementRef: ElementRef,
         private _menuService: MenuService,
-        private _menuComponent: MenuComponent,
         private _dialogService: DialogService,
         private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService,
+        @Inject(MENU_COMPONENT) private _menuComponent: MenuInterface,
     ) { }
 
     /** @hidden */
