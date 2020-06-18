@@ -15,9 +15,8 @@ rtl-switch {
 }
 
 .docs-tile.docs-tile-example-background {
-    // --sapBackgroundColor is not set when run locally
-    // background-color: var(--sapBackgroundColor);
     background-color: #f7f7f7;
+    background-color: var(--sapBackgroundColor, #f7f7f7);
 }
 
 span.fd-badge,
