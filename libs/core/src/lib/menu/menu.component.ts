@@ -10,6 +10,7 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
+    Injector,
     Input,
     OnDestroy,
     Optional,
@@ -31,6 +32,7 @@ import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { Placement, PopperOptions } from 'popper.js';
 import { RtlService } from '../utils/services/rtl.service';
+import { MENU_COMPONENT } from './menu.interface';
 
 let menuUniqueId: number = 0;
 
@@ -280,7 +282,9 @@ export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy
                 this.menuRootTemplate,
                 MenuMobileComponent,
                 { container: this.elementRef.nativeElement },
-                { services: [this, this._menuService, this._rtlService] }
+                {
+                    injector: Injector.create({providers: [{ provide: MENU_COMPONENT, useValue: this }]}),
+                    services: [this._menuService, this._rtlService] }
             )
     }
 

@@ -561,7 +561,7 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
                 this.selectOptionsListTemplate,
                 SelectMobileComponent,
                 { container: this._elementRef.nativeElement },
-                { injector: Injector.create([{ provide: SELECT_COMPONENT, useValue: this }]) }
+                { injector: Injector.create({providers: [{ provide: SELECT_COMPONENT, useValue: this }]}) }
             )
         }
     }
