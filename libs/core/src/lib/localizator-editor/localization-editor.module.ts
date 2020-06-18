@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { LocalizationEditorComponent } from './localization-editor.component';
 import { PopoverModule } from '../popover/popover.module';
 import { InputGroupModule } from '../input-group/input-group.module';
-import { MenuModule } from '../menu/menu.module';
 import {
     LocalizationEditorInputDirective,
     LocalizationEditorLabel,
@@ -14,6 +13,7 @@ import {
 import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
 import { LocalizationEditorItemComponent } from './localization-editor-item/localization-editor-item.component';
 import { ButtonModule } from '../button/button.module';
+import { ListModule } from '../list/list.module';
 
 @NgModule({
     declarations: [
@@ -36,6 +36,6 @@ import { ButtonModule } from '../button/button.module';
         LocalizationEditorTextareaDirective,
         LocalizationEditorElement
     ],
-    imports: [CommonModule, PopoverModule, InputGroupModule, MenuModule, ButtonModule]
+    imports: [CommonModule, PopoverModule, InputGroupModule, ListModule, ButtonModule]
 })
 export class LocalizationEditorModule {}
