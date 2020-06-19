@@ -12,6 +12,7 @@
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">AfterContentInit</span></li>
 		<li><span class="tsd-signature-type">NestedItemInterface</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -23,7 +24,7 @@
 		<div class="tsd-signature tsd-kind-icon">expanded<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;boolean&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L55">lib/nested-list/nested-item/nested-item.directive.ts:55</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L43">lib/nested-list/nested-item/nested-item.directive.ts:43</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -40,7 +41,7 @@
 		<aside class="tsd-sources">
 			<p>Implementation of <span>NestedItemInterface</span>.<span>keyboardTriggered</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L59">lib/nested-list/nested-item/nested-item.directive.ts:59</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L47">lib/nested-list/nested-item/nested-item.directive.ts:47</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -63,7 +64,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L29">lib/nested-list/nested-item/nested-item.directive.ts:29</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L105">lib/nested-list/nested-item/nested-item.directive.ts:105</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -86,7 +87,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L24">lib/nested-list/nested-item/nested-item.directive.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L100">lib/nested-list/nested-item/nested-item.directive.ts:100</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -113,7 +114,7 @@
 				<aside class="tsd-sources">
 					<p>Implementation of <span>NestedItemInterface</span>.<span>click</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L109">lib/nested-list/nested-item/nested-item.directive.ts:109</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L135">lib/nested-list/nested-item/nested-item.directive.ts:135</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -122,6 +123,35 @@
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="containsid" class="tsd-anchor"></a>
+		<h3>contains<wbr>Id</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">contains<wbr>Id<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L153">lib/nested-list/nested-item/nested-item.directive.ts:153</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Method that provides information if element, or children of this element has passed id</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>id: <span class="tsd-signature-type">string</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -137,7 +167,7 @@
 				<aside class="tsd-sources">
 					<p>Implementation of <span>NestedItemInterface</span>.<span>focus</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L116">lib/nested-list/nested-item/nested-item.directive.ts:116</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L144">lib/nested-list/nested-item/nested-item.directive.ts:144</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -160,7 +190,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L103">lib/nested-list/nested-item/nested-item.directive.ts:103</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L129">lib/nested-list/nested-item/nested-item.directive.ts:129</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -183,7 +213,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L95">lib/nested-list/nested-item/nested-item.directive.ts:95</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L121">lib/nested-list/nested-item/nested-item.directive.ts:121</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -206,7 +236,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L87">lib/nested-list/nested-item/nested-item.directive.ts:87</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/nested-list/nested-item/nested-item.directive.ts#L113">lib/nested-list/nested-item/nested-item.directive.ts:113</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

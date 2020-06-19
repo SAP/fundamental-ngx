@@ -2,10 +2,10 @@
 * Copyright (c) 2012-2019 SAP SE. All Rights Reserved Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
 * Theming Engine 1.51.0
-* data:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.19.20200407101940", "Source": "11.1.19", "Engine": "1.51.0"}}
+* data:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.20.20200604061102", "Source": "11.1.20", "Engine": "1.51.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.19.20200407101940", "Source": "11.1.19", "Engine": "1.51.0"}}');}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.20.20200604061102", "Source": "11.1.20", "Engine": "1.51.0"}}');}
 :root {
   --sapBrandColor: #91c8f6;
   --sapHighlightColor: #91c8f6;
@@ -31,7 +31,7 @@
   --sapLink_Active_Color: #91c8f6;
   --sapLink_Visited_Color: #91c8f6;
   --sapLink_InvertedColor: #d3e9fb;
-  --sapLink_SubtleColor: #eff7fe;
+  --sapLink_SubtleColor: #c0e0fa;
   --sapCompanyLogo: none;
   --sapBackgroundImage: none;
   --sapBackgroundImageOpacity: 1.0;
@@ -100,7 +100,7 @@
   --sapIndicationColor_8: #E269C9;
   --sapIndicationColor_8_Hover_Background: #e67ed1;
   --sapIndicationColor_8_Active_Background: #ea94d8;
-  --sapIndicationColor_8_TextColor: #29313a;
+  --sapIndicationColor_8_TextColor: #fafafa;
   --sapElement_LineHeight: 2.75rem;
   --sapElement_Height: 2.25rem;
   --sapElement_BorderWidth: .0625rem;
@@ -138,7 +138,7 @@
   --sapContent_MonospaceFontFamily: lucida console, monospace;
   --sapContent_DisabledTextColor: rgba(250,250,250,0.6);
   --sapContent_DisabledOpacity: 0.4;
-  --sapContent_ContrastTextThreshold: 0.5;
+  --sapContent_ContrastTextThreshold: 0.55;
   --sapContent_ContrastTextColor: #29313a;
   --sapContent_ForegroundColor: #1c2228;
   --sapContent_ForegroundBorderColor: #8696a9;
@@ -198,7 +198,7 @@
   --sapButton_Emphasized_TextColor: #fff;
   --sapButton_Emphasized_Hover_Background: #2e96ee;
   --sapButton_Emphasized_Hover_BorderColor: #2e96ee;
-  --sapButton_Emphasized_Hover_TextColor: #29313a;
+  --sapButton_Emphasized_Hover_TextColor: #fff;
   --sapButton_Emphasized_Active_Background: #91c8f6;
   --sapButton_Emphasized_Active_BorderColor: #91c8f6;
   --sapButton_Emphasized_TextShadow: transparent;

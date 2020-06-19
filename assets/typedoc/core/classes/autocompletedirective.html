@@ -1,0 +1,127 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">AutoCompleteDirective</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="displayfn" class="tsd-anchor"></a>
+		<h3>display<wbr>Fn</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">display<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> = this._defaultDisplay</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/combobox/auto-complete.directive.ts#L36">lib/combobox/auto-complete.directive.ts:36</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Display function. Accepts an object of the same type as the
+					items passed to dropdownValues as argument, and outputs a string.
+					An arrow function can be used to access the <em>this</em> keyword in the calling component.
+				See search input examples for details.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="enable" class="tsd-anchor"></a>
+		<h3>enable</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">enable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/combobox/auto-complete.directive.ts#L29">lib/combobox/auto-complete.directive.ts:29</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the auto complete directive should be enabled</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="inputtext" class="tsd-anchor"></a>
+		<h3>input<wbr>Text</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">input<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/combobox/auto-complete.directive.ts#L25">lib/combobox/auto-complete.directive.ts:25</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Input text, that is taken from ngModel of formControl,
+				there has to be difference between native input value and model value</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="options" class="tsd-anchor"></a>
+		<h3>options</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/combobox/auto-complete.directive.ts#L18">lib/combobox/auto-complete.directive.ts:18</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Values that will fill missing text in the input.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Outputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="oncomplete" class="tsd-anchor"></a>
+		<h3>on<wbr>Complete</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">on<wbr>Complete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AutoCompleteEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;AutoCompleteEvent&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/combobox/auto-complete.directive.ts#L40">lib/combobox/auto-complete.directive.ts:40</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event thrown, when the auto ahead text is accepted</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Auto<wbr>Complete<wbr>Directive<span class="tsd-signature-symbol">(</span>_elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AutoCompleteDirective</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/combobox/auto-complete.directive.ts#L58">lib/combobox/auto-complete.directive.ts:58</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>_elementRef: <span class="tsd-signature-type">ElementRef</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AutoCompleteDirective</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

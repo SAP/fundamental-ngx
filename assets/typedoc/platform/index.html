@@ -14,7 +14,7 @@
 	</a>
 	<p>The <code>@fundamental-ngx/platform</code> is built on top of the <code>@fundamental-ngx/core</code> to enhance existing functionality and
 		to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is
-	to create a layer which is closer to application development and not to the library creators. </p>
+	to create a layer which is closer to application development and not to the library creators.</p>
 	<p>Since there is a plan to generate UI programatically then components must be instantiable (they cannot be directives).</p>
 	<a href="#design" id="design" style="color: inherit; text-decoration: none;">
 		<h2>Design</h2>
@@ -27,7 +27,7 @@
 		<li>We decide how much extensible the component needs to be.</li>
 	</ul>
 	<p>As already mentioned above platform the goal is try to be closer to application developer as well as make it more ready for
-	enterprise use. </p>
+	enterprise use.</p>
 	<ul>
 		<li>Defining component model and how we work with data</li>
 		<li>Pre-defined layouts (Dashboard, detail page, master/detail page, Search/result page).</li>
@@ -38,7 +38,6 @@
 		<li>Bootstrapping and Configuration</li>
 		<li>Communication with the backend system.</li>
 	</ul>
-	<p>  </p>
 	<a href="#api-reference" id="api-reference" style="color: inherit; text-decoration: none;">
 		<h2>API Reference</h2>
 	</a>
@@ -70,25 +69,29 @@
  })
  <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
 			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
-			<p> For example, to use Toggles, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { ToggleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core'</span>;</code></pre>
+			<p> For example, to use Link, add the following import to your main application module.</p>
+			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { PlatformLinkModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/platform'</span>;</code></pre>
+			<p> Note: Be careful while importing the entire <code>FundamentalNgxPlatformModule</code> as it loads all modules; we recommend to only import relevant modules as needed.</p>
 			<p> For models prior to 0.11.1 use <code>fundamental-ngx</code></p>
-			<p> import { ToggleModule } from &#39;@fundamental-ngx/core&#39;;</p>
-			<p> @NgModule({
-				...
-				imports: [ToggleModule],
-				})
-			export class DemoModule { }</p>
-		<pre><code></code></pre></li>
+			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { PlatformLinkModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/platform'</span>;
+
+ @NgModule({
+     ...
+     imports: [PlatformLinkModule],
+ })
+ <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
+		</li>
 		<li><p><strong>Add the component to your HTML.</strong></p>
-			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-toggle</span> [<span class="hljs-attr">size</span>]=<span class="hljs-string">"'l'"</span> [(<span class="hljs-attr">checked</span>)]=<span class="hljs-string">"myValue"</span>&gt;</span>Large Toggle<span class="hljs-tag">&lt;/<span class="hljs-name">fd-toggle</span>&gt;</span></code></pre>
+			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fdp-link</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"'http://www.google.com'"</span> [<span class="hljs-attr">title</span>]=<span class="hljs-string">"'Extra info as tooltip text and aria-label'"</span>&gt;</span>
+     Standard Link
+ <span class="hljs-tag">&lt;/<span class="hljs-name">fdp-link</span>&gt;</span></code></pre>
 		</li>
 	</ol>
 	<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
 		<h2>Tests</h2>
 	</a>
 	<p>Fundamental Library for Angular makes use of Jasmine and Karma for its unit tests.</p>
-	<p>Run <code>ng test @fundamental-ngx/platform</code>. Append <code>--code-coverage</code> to generate code coverage documentation.</p>
+	<p>Run <code>ng test platform</code>. Append <code>--code-coverage</code> to generate code coverage documentation.</p>
 	<p>For models prior to 0.11.1 use <code>fundamental-ngx</code></p>
 	<a href="#versioning" id="versioning" style="color: inherit; text-decoration: none;">
 		<h2>Versioning</h2>
@@ -132,6 +135,10 @@
 		<h2>Running unit tests</h2>
 	</a>
 	<p>Run <code>ng test platform</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
+	<a href="#supporting-internationalization" id="supporting-internationalization" style="color: inherit; text-decoration: none;">
+		<h2>Supporting internationalization</h2>
+	</a>
+	<p>If you want to support i18n, please check the <a href="https://github.com/SAP/fundamental-ngx/wiki/Internationalization-Supporting-in-@fundamental-ngx-platform">Supporting i18n in ngx/platform Wiki</a> documentation for general guidelines when working on a new component.</p>
 	<a href="#further-help" id="further-help" style="color: inherit; text-decoration: none;">
 		<h2>Further help</h2>
 	</a>

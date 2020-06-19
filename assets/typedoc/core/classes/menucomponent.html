@@ -15,27 +15,576 @@
 		</li>
 	</ul>
 </section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">AfterContentInit</span></li>
+		<li><span class="tsd-signature-type">AfterViewInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
+	</ul>
+</section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="separator" class="tsd-anchor"></a>
-		<h3>separator</h3>
+		<a name="arialabel" class="tsd-anchor"></a>
+		<h3>aria<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">separator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/893a9e1c/libs/core/src/lib/menu/menu.component.ts#L22">lib/menu/menu.component.ts:22</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L118">lib/menu/menu.component.ts:118</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>The separator line for each menu item. When set to true, it adds a separator below each menu item in the list.
-				False by default. Leave empty for default.</p>
+				<p>Aria-label for navigation</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="arialabelledby" class="tsd-anchor"></a>
+		<h3>aria<wbr>Labelledby</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelledby<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L122">lib/menu/menu.component.ts:122</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Aria-Labelledby for element describing navigation</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="closeonescapekey" class="tsd-anchor"></a>
+		<h3>close<wbr>OnEscape<wbr>Key</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">close<wbr>OnEscape<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L102">lib/menu/menu.component.ts:102</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the popover should close when the escape key is pressed.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="closeonoutsideclick" class="tsd-anchor"></a>
+		<h3>close<wbr>OnOutside<wbr>Click</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">close<wbr>OnOutside<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L94">lib/menu/menu.component.ts:94</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the popover should close when a click is made outside its boundaries.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="compact" class="tsd-anchor"></a>
+		<h3>compact</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L106">lib/menu/menu.component.ts:106</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Display menu in compact mode</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="disabled" class="tsd-anchor"></a>
+		<h3>disabled</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L98">lib/menu/menu.component.ts:98</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the popover is disabled.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="fillcontrolmode" class="tsd-anchor"></a>
+		<h3>fill<wbr>Control<wbr>Mode</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fill<wbr>Control<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PopoverFillMode</span><span class="tsd-signature-symbol"> = &quot;at-least&quot;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L85">lib/menu/menu.component.ts:85</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Preset options for the popover body width.</p>
+				<ul>
+					<li><code>at-least</code> will apply a minimum width to the body equivalent to the width of the control.</li>
+					<li><code>equal</code> will apply a width to the body equivalent to the width of the control.</li>
+					<li>Leave blank for no effect.</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="id" class="tsd-anchor"></a>
+		<h3>id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;fd-menu-${menuUniqueId++}&#x60;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L126">lib/menu/menu.component.ts:126</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Id of the control.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="openonhovertime" class="tsd-anchor"></a>
+		<h3>open<wbr>OnHover<wbr>Time</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">open<wbr>OnHover<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L110">lib/menu/menu.component.ts:110</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Open submenu on hover after given milliseconds</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="placement" class="tsd-anchor"></a>
+		<h3>placement</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Placement</span><span class="tsd-signature-symbol"> = &quot;bottom-start&quot;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L62">lib/menu/menu.component.ts:62</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+				bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="triggers" class="tsd-anchor"></a>
+		<h3>triggers</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">triggers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;click&#x27;]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L90">lib/menu/menu.component.ts:90</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The trigger events that will open/close the popover.
+				Accepts any <a href="https://www.w3schools.com/jsref/dom_obj_event.asp">HTML DOM Events</a>.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="setmobilemode" class="tsd-anchor"></a>
+		<h3>set<wbr>Mobile<wbr>Mode</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> setMobileMode<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L54">lib/menu/menu.component.ts:54</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Set menu in mobile mode</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
+		<a name="mobileconfig" class="tsd-anchor"></a>
+		<h3>mobile<wbr>Config</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">mobile<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L114">lib/menu/menu.component.ts:114</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Display menu without integrated popover</p>
+			</div>
+		</div>
+		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+			<a name="mobileconfig.cancelbuttontext" class="tsd-anchor"></a>
+			<h3>cancel<wbr>Button<wbr>Text</h3>
+			<!-- {log decorators} -->
+			<div class="tsd-signature tsd-kind-icon">cancel<wbr>Button<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;Cancel&quot;</span></div>
+			<aside class="tsd-sources">
+				<ul>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L114">lib/menu/menu.component.ts:114</a></li>
+				</ul>
+			</aside>
+		</section>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
+		<a name="options" class="tsd-anchor"></a>
+		<h3>options</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L67">lib/menu/menu.component.ts:67</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The Popper.js options to attach to this popover.
+				See the <a href="https://popper.js.org/popper-documentation.html">Popper.js Documentation</a> for details.</p>
+			</div>
+		</div>
+		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+			<a name="options.placement-1" class="tsd-anchor"></a>
+			<h3>placement</h3>
+			<!-- {log decorators} -->
+			<div class="tsd-signature tsd-kind-icon">placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"bottom-start"</span><span class="tsd-signature-symbol"> = &quot;bottom-start&quot;</span></div>
+			<aside class="tsd-sources">
+				<ul>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L68">lib/menu/menu.component.ts:68</a></li>
+				</ul>
+			</aside>
+		</section>
+		<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
+			<a name="options.modifiers" class="tsd-anchor"></a>
+			<h3>modifiers</h3>
+			<!-- {log decorators} -->
+			<div class="tsd-signature tsd-kind-icon">modifiers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+			<aside class="tsd-sources">
+				<ul>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L69">lib/menu/menu.component.ts:69</a></li>
+				</ul>
+			</aside>
+			<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
+				<a name="options.modifiers.preventoverflow" class="tsd-anchor"></a>
+				<h3>prevent<wbr>Overflow</h3>
+				<!-- {log decorators} -->
+				<div class="tsd-signature tsd-kind-icon">prevent<wbr>Overflow<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L70">lib/menu/menu.component.ts:70</a></li>
+					</ul>
+				</aside>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+					<a name="options.modifiers.preventoverflow.boundarieselement" class="tsd-anchor"></a>
+					<h3>boundaries<wbr>Element</h3>
+					<!-- {log decorators} -->
+					<div class="tsd-signature tsd-kind-icon">boundaries<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"scrollParent"</span><span class="tsd-signature-symbol"> = &quot;scrollParent&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L73">lib/menu/menu.component.ts:73</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+					<a name="options.modifiers.preventoverflow.enabled" class="tsd-anchor"></a>
+					<h3>enabled</h3>
+					<!-- {log decorators} -->
+					<div class="tsd-signature tsd-kind-icon">enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> = true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L71">lib/menu/menu.component.ts:71</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+					<a name="options.modifiers.preventoverflow.escapewithreference" class="tsd-anchor"></a>
+					<h3>escape<wbr>With<wbr>Reference</h3>
+					<!-- {log decorators} -->
+					<div class="tsd-signature tsd-kind-icon">escape<wbr>With<wbr>Reference<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> = true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L72">lib/menu/menu.component.ts:72</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+		</section>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Outputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="activepath" class="tsd-anchor"></a>
+		<h3>active<wbr>Path</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">active<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MenuItemComponent</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;MenuItemComponent[]&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L130">lib/menu/menu.component.ts:130</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Emits array of active menu items</p>
 			</div>
 		</div>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Menu<wbr>Component<span class="tsd-signature-symbol">(</span>elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span>, dialogConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogConfig</span>, _rendered<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Renderer2</span>, _menuService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MenuService</span>, _changeDetectorRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, _componentFactoryResolver<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentFactoryResolver</span>, _rtlService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RtlService</span>, _dynamicComponentService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicComponentService</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MenuComponent</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L168">lib/menu/menu.component.ts:168</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>elementRef: <span class="tsd-signature-type">ElementRef</span></h5>
+					</li>
+					<li>
+						<h5>dialogConfig: <span class="tsd-signature-type">DialogConfig</span></h5>
+					</li>
+					<li>
+						<h5>_rendered: <span class="tsd-signature-type">Renderer2</span></h5>
+					</li>
+					<li>
+						<h5>_menuService: <span class="tsd-signature-type">MenuService</span></h5>
+					</li>
+					<li>
+						<h5>_changeDetectorRef: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
+					<li>
+						<h5>_componentFactoryResolver: <span class="tsd-signature-type">ComponentFactoryResolver</span></h5>
+					</li>
+					<li>
+						<h5>_rtlService: <span class="tsd-signature-type">RtlService</span></h5>
+					</li>
+					<li>
+						<h5>_dynamicComponentService: <span class="tsd-signature-type">DynamicComponentService</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MenuComponent</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dialogconfig" class="tsd-anchor"></a>
+		<h3>dialog<wbr>Config</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">dialog<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DialogConfig</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L171">lib/menu/menu.component.ts:171</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="elementref" class="tsd-anchor"></a>
+		<h3>element<wbr>Ref</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L170">lib/menu/menu.component.ts:170</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="mobile" class="tsd-anchor"></a>
+		<h3>mobile</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">mobile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L153">lib/menu/menu.component.ts:153</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether use menu in mobile mode</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="trigger" class="tsd-anchor"></a>
+		<h3>trigger</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> trigger<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> trigger<span class="tsd-signature-symbol">(</span>trigger<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L200">lib/menu/menu.component.ts:200</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ElementRef</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L204">lib/menu/menu.component.ts:204</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>trigger: <span class="tsd-signature-type">ElementRef</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="close" class="tsd-anchor"></a>
+		<h3>close</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">close<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L218">lib/menu/menu.component.ts:218</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Closes the menu</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="focusfirst" class="tsd-anchor"></a>
+		<h3>focus<wbr>First</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">focus<wbr>First<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L226">lib/menu/menu.component.ts:226</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Focuses first menu item</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="open" class="tsd-anchor"></a>
+		<h3>open</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">open<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L211">lib/menu/menu.component.ts:211</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Opens the menu</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="toggle" class="tsd-anchor"></a>
+		<h3>toggle</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">toggle<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/core/src/lib/menu/menu.component.ts#L233">lib/menu/menu.component.ts:233</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Toggles menu open/close state</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
 </section>
 </div>
