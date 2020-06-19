@@ -1,8 +1,7 @@
 <fd-docs-section-title [id]="'Button-types'" [componentName]="'button'"> Button Types </fd-docs-section-title>
 <description>
-    The default button does not require modifier. Use
-    <code class="code-snippet">[type]="'standard'", [type]="'positive'", [type]="'medium'"</code>, or
-    <code class="code-snippet">[type]="'negative'"</code> to modify the type of the button.
+    The button component follows fundamental-styles for button guidelines. The default button type is "Default button",
+    no modifier is required. Use the <code class="code-snippet">[type]=""</code> property to set the button type.
 </description>
 <component-example>
     <fdp-button-types-example></fdp-button-types-example>
@@ -11,7 +10,9 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'Button-sizes'" [componentName]="'button'"> Button Sizes </fd-docs-section-title>
-<description> Button support two sized: compact and cozy  </description>
+<description> Button support two sized: compact and cozy. Use <code
+        class="code-snippet">[contentDensity]="'compact'"</code>
+    to set the values. </description>
 <component-example>
     <fdp-button-sizes-example></fdp-button-sizes-example>
 </component-example>
@@ -35,23 +36,44 @@
     Button State
 </fd-docs-section-title>
 <description>
-    <code>[disabled]="true"</code> sets the button disabled
+    'disabled' and 'selected' states can be achieved through 'disabled' / 'ariaDisabled' and 'ariaSelected'
+    attributes.
 </description>
 <component-example>
     <fdp-button-state-example></fdp-button-state-example>
 </component-example>
 <code-example [exampleFiles]="buttonHtmlState"></code-example>
 
-<!-- <separator></separator> -->
+<separator></separator>
 
-<!-- <fd-docs-section-title [id]="'Button-truncate'" [componentName]="'button'">
+<fd-docs-section-title [id]="'Button-truncate'" [componentName]="'button'">
     Button with long text truncated
 </fd-docs-section-title>
 <description>
-    When user specifices with width of the button then text will start truncating to accomdate it self in the specified
+    When user specifices with width of the button then text will start truncating to accomdate it self in the
+    specified
     width as shown below
 </description>
 <component-example>
     <fdp-button-truncate-example></fdp-button-truncate-example>
 </component-example>
-<code-example [exampleFiles]="buttonHtmlTruncate"></code-example> -->
+<code-example [exampleFiles]="buttonHtmlTruncate"></code-example>
+
+<separator></separator>
+
+<description>The inputs for <code>button</code> will be translated into classes attributed to fundamental-styles
+    guidelines.
+    <br />For example: <br />if <code>positive</code> is passed for <code>type</code>, the class
+    <code>fd-button--positive</code> will be added to the element. <br />if <code>compact</code> is passed for
+    <code>size</code>, the class <code>fd-button--compact</code> will be added to the element.
+</description>
+<separator></separator>
+
+<playground [schema]="schema" [schemaInitialValues]="fdpData" (onFormChanges)="onSchemaValues($event)">
+    <fdp-button [type]="fdpData.properties.type" [contentDensity]="fdpData.properties.contentDensity"
+        [ariaSelected]="fdpData.properties.ariaSelected" [ariaDisabled]="fdpData.properties.ariaDisabled"
+        [disabled]="fdpData.properties.disabled" [attr.title]="fdpData.properties.label"
+        [width]="fdpData.properties.width" [glyph]="fdpData.properties.icon">
+        {{ fdpData.properties.label }}
+    </fdp-button>
+</playground>

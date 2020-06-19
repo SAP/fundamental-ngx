@@ -27,10 +27,17 @@ export class PlatformButtonDocsComponent implements OnInit {
                         type: 'string',
                         enum: ['', 'standard', 'positive', 'transparent', 'negative', 'emphasized', 'ghost']
                     },
-                    compact: {
-                        type: 'boolean'
+                    contentDensity: {
+                        type: 'string',
+                        enum: ['cozy', 'compact']
                     },
                     disabled: {
+                        type: 'boolean'
+                    },
+                    ariaDisabled: {
+                        type: 'boolean'
+                    },
+                    ariaSelected: {
                         type: 'boolean'
                     },
                     width: {
@@ -48,7 +55,7 @@ export class PlatformButtonDocsComponent implements OnInit {
 
     schema: Schema;
 
-    data: any = {
+    fdpData: any = {
         properties: {
             label: 'click here',
             type: 'default',
@@ -57,7 +64,9 @@ export class PlatformButtonDocsComponent implements OnInit {
             size: 'default',
             icon: '',
             compact: false,
-            disabled: false
+            disabled: false,
+            ariaDisabled: false,
+            ariaSelected: true
         }
     };
 
@@ -109,8 +118,8 @@ export class PlatformButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
-        this.data = data;
+        this.fdpData = data;
     }
 }

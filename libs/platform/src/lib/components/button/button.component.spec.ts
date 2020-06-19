@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonComponent } from './button.component';
 import { ButtonModule } from '@fundamental-ngx/core';
+import { By } from '@angular/platform-browser';
 
 describe('ButtonComponent', () => {
     let component: ButtonComponent;
@@ -23,15 +24,17 @@ describe('ButtonComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should have a content disabled button', () => {
-        spyOn(component, 'setDisabledState');
-        component.setDisabledState(true);
-        expect(component.setDisabledState).toHaveBeenCalled();
-    });
-
     it('button onclick should be called', () => {
         spyOn(component, 'onBtnClick');
         component.onBtnClick(event);
         expect(component.onBtnClick).toHaveBeenCalled();
     });
+
+    it('should have a content disabled button', () => {
+        const element = fixture.debugElement.nativeElement.querySelector('button');
+        component.disabled = true;
+        fixture.detectChanges();
+        expect(element.disabled).toBeTruthy();
+    });
+
 });

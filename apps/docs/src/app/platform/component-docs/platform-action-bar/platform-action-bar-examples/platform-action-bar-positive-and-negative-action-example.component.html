@@ -1,15 +1,10 @@
-<fdp-action-bar
-    id="actionbar_with_menu"
-    [contentDensity]="'compact'"
-    [title]="'Page Action bar component'"
-    [showBackButton]="true"
-    [description]="'Action bar description from the component.'"
->
+<fdp-action-bar id="actionbar_with_menu" [contentDensity]="'compact'" [title]="'Page Action bar component'"
+    [showBackButton]="true" [description]="'Action bar description from the component.'">
     <fdp-action-button-group>
-        <fdp-button [compact]="true" [type]="'emphasized'">
+        <fdp-button [contentDensity]="'compact'" [type]="'emphasized'">
             Save
         </fdp-button>
-        <fdp-button [compact]="true" [type]="'negative'">
+        <fdp-button [contentDensity]="'compact'" [type]="'negative'">
             Cancel
         </fdp-button>
     </fdp-action-button-group>

@@ -1,3 +1,10 @@
 :host {
-    display: inline-block;
+  display: inline-block;
+}
+
+.fd-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
