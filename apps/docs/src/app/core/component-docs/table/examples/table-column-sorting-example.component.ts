@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 interface ExampleRow {
     column1: any,
@@ -6,44 +6,6 @@ interface ExampleRow {
     column3?: any,
     date?: any,
     type?: any
-}
-
-type columnSortType = (a: ExampleRow, b: ExampleRow) => boolean;
-const sort = (a, b, firstComparer: columnSortType, secondComparer: columnSortType) => {
-    if (firstComparer(a.column1, b.column1)) {
-        return -1;
-    } else if (secondComparer(a.column1, b.column1)) {
-        return 1;
-    } else {
-        return 0;
-    }
-};
-
-const asc: columnSortType = (a, b) => a < b;
-const desc: columnSortType = (a, b) => a > b;
-
-const sortMethod = {
-    asc: (a, b) => sort(a, b, asc, desc),
-    desc: (a, b) => sort(a, b, desc, asc)
-};
-
-@Pipe({ name: 'filterTableBy', pure: false })
-export class FilterTableByPipe implements PipeTransform {
-    transform(tableRows: any[], searchTerm: string): any[] {
-        const searchLower = searchTerm.toLocaleLowerCase();
-        return tableRows.filter((item) => {
-            if (item) {
-                return item.column1.toLocaleLowerCase().includes(searchLower);
-            }
-        });
-    }
-}
-
-@Pipe({ name: 'sortTableBy', pure: false })
-export class SortTableByPipe implements PipeTransform {
-    transform(tableRows: any[], sortDir: string): any[] {
-        return tableRows.sort(sortMethod[sortDir]);
-    }
 }
 
 @Component({
