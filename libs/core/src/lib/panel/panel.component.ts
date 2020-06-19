@@ -100,6 +100,5 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit {
     toggleExpand(): void {
         this.expanded = !this.expanded;
         this.expandedChange.emit(this.expanded);
-        this._cdRef.detectChanges();
     }
 }

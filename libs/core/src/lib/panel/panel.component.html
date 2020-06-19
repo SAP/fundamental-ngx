@@ -3,6 +3,7 @@
         <button 
             class="fd-button fd-button--transparent fd-panel__button" 
             [ngClass]="{ 'fd-button--compact': compact, 'is-expanded' : expanded }"
+            [id]="expandId"
             [attr.aria-expanded]="expanded"
             [attr.aria-controls]="expandId"
             [attr.aria-label]="expandAriaLabel"
