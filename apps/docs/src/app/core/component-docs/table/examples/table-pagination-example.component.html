@@ -24,7 +24,7 @@
                 <fd-menu>
                     <ul fd-menu-list>
                         <li fd-menu-item *ngFor="let value of itemsPerPageOptions" (click)="itemsPerPageChange(value)">
-                            {{ value }}
+                            <span fd-menu-interactive>{{ value }}</span>
                         </li>
                     </ul>
                 </fd-menu>
