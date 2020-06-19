@@ -174,7 +174,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
                 this._removeToolbarItemFromDOM(toolbarItem);
                 this.overflowElements.push(toolbarItem);
             }
-            return !shouldItemBeRemoved && !this._isSpacer(toolbarItem) ? _contentWidth + itemWidth : _contentWidth;
+            return !shouldItemBeRemoved ? _contentWidth + itemWidth : _contentWidth;
         }, 0);
 
         this._addToolbarItemToOverflow(this.overflowElements);
