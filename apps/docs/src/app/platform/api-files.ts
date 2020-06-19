@@ -6,7 +6,7 @@
  */
 export const API_FILES = {
     actionbar: ['actionbarcomponent'],
-    button: ['buttoncomponent'],
+    button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
     infoLabel: ['InfoLabelComponent'],
     link: ['LinkComponent'],

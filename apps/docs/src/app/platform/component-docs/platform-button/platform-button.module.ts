@@ -41,4 +41,4 @@ const routes: Routes = [
         PlatformButtonStateExampleComponent
     ]
 })
-export class PlatformButtonDocsModule {}
+export class PlatformButtonDocsModule { }
