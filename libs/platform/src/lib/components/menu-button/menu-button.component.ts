@@ -1,11 +1,21 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ViewEncapsulation
+} from '@angular/core';
 import { ButtonType } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
 
 @Component({
     selector: 'fdp-menu-button',
     templateUrl: './menu-button.component.html',
-    styleUrls: ['./menu-button.component.scss']
+    styleUrls: ['./menu-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class MenuButtonComponent extends BaseComponent {
     /** text for tooltip */
