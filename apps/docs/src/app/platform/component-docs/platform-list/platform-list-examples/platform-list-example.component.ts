@@ -1,33 +1,10 @@
-import { Component, HostListener } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fdp-list-example',
     templateUrl: './platform-list-example.component.html'
 })
 export class PlatformListExampleComponent { }
-
-@Component({
-    selector: 'fdp-list-with-delete-button-example',
-    templateUrl: './platform-list-with-delete-button-example.component.html'
-})
-export class PlatformListWithDeleteButtonExampleComponent {
-    items: any[] = [
-        { 'title': 'Item1', 'secondayIcon': 'decline' },
-        { 'title': 'Item2', 'secondayIcon': 'decline' },
-        { 'title': 'Item3', 'secondayIcon': 'decline' },
-        { 'title': 'Item4' }
-    ];
-
-    @HostListener('click', ['$event'])
-    deleteRow(event: any) {
-        if (event.target.parentNode.tagName.toLowerCase() === 'fdp-button') {
-            event.target.parentNode.parentNode.style.display = 'none';
-        }
-    }
-
-}
-
 
 @Component({
     selector: 'fdp-list-with-footer-example',
@@ -41,7 +18,6 @@ export class PlatformListWithFooterExampleComponent {
         { 'title': 'Item3' }];
 }
 
-
 @Component({
     selector: 'fdp-list-with-item-counter-example',
     templateUrl: './platform-list-with-item-counter-example.component.html'
@@ -53,26 +29,6 @@ export class PlatformListWithItemCounterExampleComponent {
         { 'title': 'Item2', 'secondary': '34562' },
         { 'title': 'Item3', 'secondary': '739' }];
 }
-
-
-@Component({
-    selector: 'fdp-list-with-selection-example',
-    templateUrl: './platform-list-with-selection-example.component.html'
-})
-export class PlatformListWithSelectionExampleComponent {
-    selectedItems: any[] = [];
-    items: any[] = [
-        { 'title': 'Item1', 'checkboxValue': 'check1' },
-        { 'title': 'Item2', 'checkboxValue': 'check2' },
-        { 'title': 'Item3', 'checkboxValue': 'check3' },
-        { 'title': 'Item4', 'checkboxValue': 'check4' }];
-
-    showItemInfo(event: any) {
-        this.selectedItems = event;
-    }
-
-}
-
 
 @Component({
     selector: 'fdp-list-with-single-selection-example',
@@ -102,3 +58,9 @@ export class PlatformListWithNavigationExampleComponent {
         { 'title': 'Item2' },
         { 'title': 'Item3' }];
 }
+
+@Component({
+    selector: 'fdp-list-with-buttons-example',
+    templateUrl: './platform-list-with-buttons-example.component.html'
+})
+export class PlatformListWithButtonsExampleComponent { }

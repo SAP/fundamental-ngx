@@ -8,7 +8,10 @@ import * as sliWithFooter from '!raw-loader!./platform-standard-list-item-exampl
 import * as sliWithGroupHeader from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component.html';
 import * as sliWithSelection from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component.html';
 import * as sliWithSingleSelection from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.html';
+import * as sliWithSingleSelectionTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.ts';
 import * as sliWithNavigation from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component.html';
+import * as sliWithi18n from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-i18n-example.component.html';
+import * as sliWithi18nTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-i18n-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -81,6 +84,12 @@ export class PlatformStandardListItemDocsComponent implements OnInit {
             language: 'html',
             code: sliWithSingleSelection,
             fileName: 'platform-standard-list-item-with-single-selection-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithSingleSelectExampleComponent',
+            code: sliWithSingleSelectionTs,
+            fileName: 'platform-standard-list-item-with-single-selection-example'
         }
     ];
 
@@ -92,6 +101,19 @@ export class PlatformStandardListItemDocsComponent implements OnInit {
         }
     ];
 
+    sliWithi18n: ExampleFile[] = [
+        {
+            language: 'html',
+            code: sliWithi18n,
+            fileName: 'platform-standard-list-item-with-i18n-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithi18nExampleComponent',
+            code: sliWithi18nTs,
+            fileName: 'platform- standard - list - item -with-i18n - example'
+        }
+    ];
 
     ngOnInit() { }
     constructor() { }

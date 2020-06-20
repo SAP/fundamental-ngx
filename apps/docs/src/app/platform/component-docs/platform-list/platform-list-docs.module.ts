@@ -7,19 +7,21 @@ import { PlatformListHeaderComponent } from './platform-list-header/platform-lis
 import { PlatformListDocsComponent } from './platform-list-docs.component';
 import {
     PlatformListExampleComponent,
-    PlatformListWithDeleteButtonExampleComponent,
     PlatformListWithFooterExampleComponent,
     PlatformListWithItemCounterExampleComponent,
-    PlatformListWithSelectionExampleComponent,
     PlatformListWithNavigationExampleComponent,
-    PlatformListWithSingleSelectionExampleComponent
+    PlatformListWithSingleSelectionExampleComponent,
+    PlatformListWithButtonsExampleComponent
 } from './platform-list-examples/platform-list-example.component';
-import { PlatformListModule, PlatformButtonModule } from '@fundamental-ngx/platform';
-import { PlatformListBorderLessExampleComponent } from './platform-list-examples/Platform-List-Border-Less-example.component';
+import { PlatformListModule, StandardListItemModule, PlatformButtonModule, PlatformCheckboxModule } from '@fundamental-ngx/platform';
+import { ToolbarModule, CheckboxModule, IconModule } from '@fundamental-ngx/core';
+import { PlatformListBorderLessExampleComponent } from './platform-list-examples/platform-list-border-less-example.component';
 import { PlatformListWithGroupHeaderExampleComponent } from './platform-list-examples/platform-list-with-group-header-example.component';
 import { PlatformListWithInfiniteScrollExampleComponent } from './platform-list-examples/platform-list-with-infinite-scroll-example.component';
+import { PlatformListWithDeleteButtonExampleComponent } from './platform-list-examples/platform-list-with-delete-button-example.component';
+import { PlatformListWithSelectionExampleComponent } from './platform-list-examples/platform-list-with-selection-example.component';
+import { PlatformListWithi18nExampleComponent } from './platform-list-examples/platform-list-with-i18n-example.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-
 
 
 const routes: Routes = [
@@ -38,8 +40,13 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         PlatformListModule,
+        StandardListItemModule,
         PlatformButtonModule,
-        ScrollingModule
+        ScrollingModule,
+        ToolbarModule,
+        CheckboxModule,
+        PlatformCheckboxModule,
+        IconModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -54,7 +61,9 @@ const routes: Routes = [
         PlatformListWithSelectionExampleComponent,
         PlatformListWithNavigationExampleComponent,
         PlatformListWithSingleSelectionExampleComponent,
-        PlatformListWithInfiniteScrollExampleComponent
+        PlatformListWithInfiniteScrollExampleComponent,
+        PlatformListWithi18nExampleComponent,
+        PlatformListWithButtonsExampleComponent
     ]
 })
 export class PlatformListDocsModule {

@@ -10,15 +10,14 @@ import {
     PlatformStandardListItemWithSecondaryTypeExampleComponent,
     PlatformStandardListItemWithFooterExampleComponent,
     PlatformStandardListItemWithSelectionExampleComponent,
-    PlatformStandardListItemWithNavigationExampleComponent,
-    PlatformStandardListItemWithSingleSelectionExampleComponent
+    PlatformStandardListItemWithNavigationExampleComponent
 } from './platform-standard-list-item-examples/platform-standard-list-item-example.component';
-import { PlatformListModule, PlatformButtonModule } from '@fundamental-ngx/platform';
-import { PlatformStandardListItemBorderLessExampleComponent } from './platform-standard-list-item-examples/Platform-standard-list-item-Border-Less-example.component';
+import { PlatformListModule, StandardListItemModule, PlatformButtonModule } from '@fundamental-ngx/platform';
+import { ToolbarModule } from '@fundamental-ngx/core';
+import { PlatformStandardListItemBorderLessExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component';
 import { PlatformStandardListItemtWithGroupHeaderExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component';
-
-
-
+import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component';
+import { PlatformStandardListItemWithi18nExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-i18n-example.component';
 const routes: Routes = [
     {
         path: '',
@@ -35,7 +34,9 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         PlatformListModule,
-        PlatformButtonModule
+        PlatformButtonModule,
+        ToolbarModule,
+        StandardListItemModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -48,7 +49,8 @@ const routes: Routes = [
         PlatformStandardListItemtWithGroupHeaderExampleComponent,
         PlatformStandardListItemWithSelectionExampleComponent,
         PlatformStandardListItemWithNavigationExampleComponent,
-        PlatformStandardListItemWithSingleSelectionExampleComponent
+        PlatformStandardListItemWithSingleSelectionExampleComponent,
+        PlatformStandardListItemWithi18nExampleComponent
     ]
 })
 export class PlatformStandardListItemDocsModule {

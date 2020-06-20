@@ -7,14 +7,20 @@ import { PlatformListModule } from './list.module';
 @Component({
     template: `
         <fdp-list #componentElement
-            [noBorder]="noBorder">List Title Test Text</fdp-list>
+            [noBorder]="noBorder"
+            [hasByLine]="hasByLine"
+            [hasNavigation]="hasNavigation"
+            [showNavigationArrow]="showNavigationArrow">List Title Test Text</fdp-list>
     `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef, static: false })
-    ref: ElementRef;
+    c
     noBorder: boolean = false;
     hasByLine: boolean = false;
+    multiSelect: boolean = false;
+    showNavigationArrow: boolean = false;
+    hasNavigation: boolean = false;
 }
 
 
@@ -51,11 +57,32 @@ describe('ListComponent', () => {
         expect(listElement.nativeElement.classList).toContain('fd-list--no-border');
     });
 
-    it('list item should byline', () => {
+    it('should contain by Line class', () => {
         component.hasByLine = true;
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('li');
-        expect(listElement.classList).toContain('fd-list--byline');
+        const listElement = fixture.debugElement.query(By.css('ul'));
+        expect(listElement.nativeElement.classList).toContain('fd-list--byline');
+    });
+
+
+    it('should contain show navigation arrow', () => {
+        component.showNavigationArrow = true;
+        fixture.detectChanges();
+        const listElement = fixture.debugElement.query(By.css('ul'));
+        expect(listElement.nativeElement.classList).toContain('fd-list--navigation-indication');
+    });
+
+    it('should contain navigation', () => {
+        component.hasNavigation = true;
+        fixture.detectChanges();
+        const listElement = fixture.debugElement.query(By.css('ul'));
+        expect(listElement.nativeElement.classList).toContain('fd-list--navigation');
+    });
+
+    it('should have aria roles property', () => {
+        fixture.detectChanges();
+        const list = fixture.debugElement.query(By.css('fdp-list'));
+        expect(list.nativeElement.getAttribute('role')).toEqual('list');
     });
 });
 

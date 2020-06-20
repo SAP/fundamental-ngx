@@ -1,0 +1,24 @@
+<h5> Declarative Approach</h5>
+<fdp-list>
+    <fdp-standard-list-item i18n-title title="Title1">
+    </fdp-standard-list-item>
+
+    <br />
+    <br />
+    <h3>After translation with help of i18n</h3>
+
+    <fdp-standard-list-item title="objet 1">
+    </fdp-standard-list-item>
+
+    <br />
+    <br />
+    <h3>Transalation of footer text in applicaition with help of i18n</h3>
+    <fdp-list-footer>texte de pied de page</fdp-list-footer>
+</fdp-list>
+
+<h5>Imperative Approach</h5>
+<br />
+<h3>Transalation of list data in applicaition with help of i18n</h3>
+<fdp-list>
+    <fdp-standard-list-item *ngFor="let item of items" [item]="item"></fdp-standard-list-item>
+</fdp-list>
