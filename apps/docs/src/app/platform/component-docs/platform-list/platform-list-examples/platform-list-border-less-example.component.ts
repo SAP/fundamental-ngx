@@ -7,6 +7,7 @@ export class PlatformListBorderLessExampleComponent {
     items: any[] = [
         { 'title': 'Item1' },
         { 'title': 'Item2' },
-        { 'title': 'Item3' }];
+        { 'title': 'Item3' },
+        { 'title': 'Item4' }];
 
 }

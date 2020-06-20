@@ -7,11 +7,13 @@ import { BaseComponent } from '../base';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { UP_ARROW, DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { BaseListItem } from './base-list-item';
+import { SelectionModel } from '@angular/cdk/collections';
+
 
 export type SelectionType = '' | 'multi' | 'single';
 let nextListId = 0;
 let nextListGrpHeaderId = 0;
-let nextListHeaderId = 0;
+
 /**
  * The List component represents a container for list item types.
  * It is used to display a list features.
@@ -26,6 +28,7 @@ let nextListHeaderId = 0;
 
 
 export class ListComponent extends BaseComponent implements AfterContentInit, OnInit {
+
 
     /**
     * Child items of the List.
@@ -45,41 +48,22 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     /** Whether Navigation mode is included to list component
      * for all the items
     */
-    @Input()
-    @HostBinding('class.fd-list--navigation')
-    hasNavigation: boolean = false;
+    _hasNavigation: boolean;
 
     /** Whether Navigation mode is included to list component
      * only a subset of the list items are navigable
      * you should indicate those by displaying a navigation arrow
     */
-    @Input()
-    @HostBinding('class.fd-list--navigation-indication')
-    showNavigationArrow: boolean = false;
-
-    /** Whether dropdown mode is included to list component*/
-    @Input()
-    dropdownMode: boolean = false;
+    _showNavigationArrow: boolean;
 
     /** Whether By line is present in list item*/
-    @Input()
-    @HostBinding('class.fd-list--byline')
-    hasByLine: boolean = false;
-
-    /** Whether multi mode is included to list component*/
-    @Input()
-    multiInputMode: boolean = false;
-
-    /** Whether list component contains message */
-    @Input()
-    hasMessage: boolean = false;
+    _hasByLine: boolean;
 
     /** Whether list component has removed borders */
     @Input()
     noBorder: boolean = false;
 
     /** Whether list component has multiselection */
-    @HostBinding('class.fd-list--selection')
     multiSelect: boolean = false;
 
     /** The type of the selection. Types include:
@@ -98,15 +82,50 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     @HostBinding('attr.role')
     role = 'list';
 
+    /** The model backing of the component. */
+    selection: SelectionModel<BaseListItem>;
+
+    /** setter and getter for _hasNavigation */
+    get hasNavigation(): boolean {
+        return this._hasNavigation;
+    }
+
+    @Input('hasNavigation')
+    set hasNavigation(value: boolean) {
+        this._hasNavigation = value;
+        this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--navigation');
+    }
+
+    /** setter and getter for _showNavigationArrow */
+    get showNavigationArrow(): boolean {
+        return this._showNavigationArrow;
+    }
+
+    @Input('showNavigationArrow')
+    set showNavigationArrow(value: boolean) {
+        this._showNavigationArrow = value;
+        this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--navigation-indication');
+    }
+
+    /** setter and getter for _hasByLine*/
+    get hasByLine(): boolean {
+        return this._hasByLine;
+    }
+
+    @Input('hasByLine')
+    set hasByLine(value: boolean) {
+        this._hasByLine = value;
+        this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--byline');
+    }
+
     /**  filter to get Selected items from a list**/
     onSelectionChanged(event: any) {
         if (event.target.checked) {
-            this.selectedItems.push(event.target.parentNode.parentNode);
+            this.selection.select(event.target.parentNode.parentNode);
         }
         else {
-            this.selectedItems = this.selectedItems.filter(m => m.id !== event.target.parentNode.parentNode.id);
+            this.selection.deselect(event.target.parentNode.parentNode);
         }
-        this.selectedItemChange.emit(this.selectedItems);
     }
 
     /** @hidden */
@@ -130,26 +149,54 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
         });
 
         this.handleSingleSelect(event);
+        this.handleMultiSelect(event);
 
     }
 
     /** @hidden */
     /**List item with radio button styles,check,uncheckupdates */
     handleSingleSelect(event: any): void {
-        if (event.target !== null && (event.target.tagName.toLowerCase() === 'label' || event.target.tagName.toLowerCase() === 'input')) {
-            this.selectedItems = [];
+        if (event.target !== null && (event.target.tagName.toLowerCase() === 'label'
+            || event.target.tagName.toLowerCase() === 'input') && event.target.type === 'radio') {
             event.target.checked = true;
             event.target.parentNode.parentNode.classList.add('is-selected');
-            this.selectedItems.push(event.target.parentNode.parentNode);
-            this.selectedItemChange.emit(this.selectedItems);
+            this.selection.select(event.target.parentNode.parentNode);
         }
         else if (event.target.querySelector('fd-radio-button') !== undefined &&
             event.target.querySelector('fd-radio-button') !== null) {
-            this.selectedItems = [];
             event.target.querySelector('.fd-radio').checked = true;
             event.target.classList.add('is-selected');
-            this.selectedItems.push(event.target);
-            this.selectedItemChange.emit(this.selectedItems);
+            this.selection.select(event.target);
+        }
+    }
+
+    /** @hidden */
+    /**List item with checkbox styles,check,uncheckupdates */
+    handleMultiSelect(event: any): void {
+        if (event.target !== null && (event.target.tagName.toLowerCase() === 'label'
+            || event.target.tagName.toLowerCase() === 'input') && event.target.type === 'checkbox') {
+            event.target.checked = !event.target.checked;
+            if (event.target.checked) {
+                event.target.parentNode.parentNode.classList.add('is-selected');
+                this.selection.select(event.target.parentNode.parentNode);
+            }
+            else {
+                event.target.parentNode.parentNode.classList.remove('is-selected');
+                this.selection.deselect(event.target.parentNode.parentNode);
+            }
+        }
+        else if (event.target !== null && event.target.querySelector('fd-checkbox') !== undefined
+            && event.target.querySelector('fd-checkbox') !== null) {
+            event.target.querySelector('fd-checkbox').childNodes[0].checked =
+                !event.target.querySelector('fd-checkbox').childNodes[0].checked;
+            if (event.target.querySelector('fd-checkbox').childNodes[0].checked) {
+                event.target.classList.add('is-selected');
+                this.selection.select(event.target);
+            }
+            else {
+                event.target.classList.remove('is-selected');
+                this.selection.deselect(event.target);
+            }
         }
     }
 
@@ -157,9 +204,23 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     /** Instailization of list with selection mode*/
     ngOnInit(): void {
         this.id = `fdp-list-${nextListId++}`;
-        if (this.selectionMode === 'multi' || this.selectionMode === 'single') {
+
+        // for checkbox,selecAll,unselectAll
+        if (this.selectionMode === 'multi') {
             this.multiSelect = true;
         }
+        else { this.multiSelect = false; }
+        this.selection = new SelectionModel<BaseListItem>(
+            this.multiSelect,
+            this.selectedItems
+        );
+
+        this.selection.changed.subscribe(e => {
+            this.selectedItems = this.selection.selected;
+            this.selectedItemChange.emit(this.selectedItems);
+        });
+
+
     }
 
     /** @hidden */
@@ -179,11 +240,11 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
      */
     ngAfterContentInit(): void {
         this.ListItems.forEach((item) => {
-            item.hasNavigation = this.hasNavigation;
-            item.showNavigationArrow = this.showNavigationArrow;
+            item.hasNavigation = this._hasNavigation;
+            item.showNavigationArrow = this._showNavigationArrow;
             item.contentDensity = this.contentDensity;
             item.selectionMode = this.selectionMode;
-            item.hasByLine = this.hasByLine;
+            item.hasByLine = this._hasByLine;
         });
 
     }
@@ -211,45 +272,6 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     }
 
 }
-
-
-/**Note:replace below component
- *  with Toolbar once it is avalible
- **/
-@Component({
-    selector: 'fdp-list-header',
-    template: `<li #listHeader class="fd-toolbar" [attr.id]="id" role="listitem">
-    <div class="fd-toolbar fd-toolbar--solid">
-    <ng-content select="[header]"></ng-content>
-    </div>
-    <br>
-    <div style="width:100%"  class="fd-toolbar fd-toolbar--info fd-toolbar--active">
-    <ng-content select="[infoText]"></ng-content>
-    </div>
-    </li>`,
-    styleUrls: ['./list.component.scss']
-})
-export class ListHeader extends BaseComponent {
-    /**
-    *  Displays list header title
-    **/
-    @Input()
-    headerTitle?: string;
-    /**
-     **   Displays list information text
-    **/
-    @Input()
-    infoText?: string;
-
-    /** @hidden */
-    /** Instailization of list header*/
-    ngOnInit(): void {
-        this.id = `fdp-list-${nextListHeaderId++}`;
-    }
-
-
-}
-
 
 @Component({
     selector: 'fdp-list-footer',

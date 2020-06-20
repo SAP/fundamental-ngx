@@ -54,7 +54,8 @@
 <fd-docs-section-title [id]="'list6'" [componentName]="'List'">
     Standad List Item - Secondary text types
 </fd-docs-section-title>
-<description>Standard list for [type] option on list item [type]="'positive/negative/informative/critical/neutral'"
+<description> Property on list item
+    [textType]="'positive/negative/informative/critical/neutral'"
     will help to information on what type of text it is.[hasByLine]="true" provides by line features.
 </description>
 <component-example>
@@ -106,4 +107,18 @@
     </fdp-standard-list-item-with-navigation-example>
 </component-example>
 <code-example [exampleFiles]="sliWithNavigation"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'list10'" [componentName]="'List'">
+    Standad List Item - Internalization usage
+</fd-docs-section-title>
+<description>The below example shows how an application can handle internalization in the Standard list Item component.
+    In declarative approach use <code>i18n-[property]</code> and update the *.xlf files with desired language and
+    non-declarative need
+    to place the language as shown below.</description>
+<component-example>
+    <fdp-standard-list-item-with-i18n-example>
+    </fdp-standard-list-item-with-i18n-example>
+</component-example>
+<code-example [exampleFiles]="sliWithi18n"></code-example>
 <separator></separator>

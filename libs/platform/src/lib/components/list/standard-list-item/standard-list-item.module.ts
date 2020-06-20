@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
 import { IconModule, FormModule, ListModule, CheckboxModule, RadioModule, ToolbarModule } from '@fundamental-ngx/core';
-import { PlatformButtonModule } from '../button/button.module';
-import { PlatformLinkModule } from '../link/link.module';
+import { PlatformButtonModule } from '../../button/button.module';
+import { PlatformLinkModule } from '../../link/link.module';
+import { StandardListItemComponent } from './standard-list-item.component';
 
 @NgModule({
-    declarations: [ListComponent, ListFooter, ListGroupHeader],
+    declarations: [StandardListItemComponent],
     imports: [
         CommonModule,
         IconModule,
@@ -21,6 +21,6 @@ import { PlatformLinkModule } from '../link/link.module';
         ToolbarModule
 
     ],
-    exports: [ListComponent, ListFooter, ListGroupHeader]
+    exports: [StandardListItemComponent]
 })
-export class PlatformListModule { }
+export class StandardListItemModule { }

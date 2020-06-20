@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, forwardRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, forwardRef, AfterViewInit, Input } from '@angular/core';
 import { BaseListItem } from '../base-list-item';
 
 
@@ -12,7 +12,28 @@ import { BaseListItem } from '../base-list-item';
     changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class StandardListItemComponent extends BaseListItem {
+export class StandardListItemComponent extends BaseListItem implements AfterViewInit {
+
+    /** @hidden */
+    /** message type styles to secondary text in Byline*/
+    ngAfterViewInit(): void {
+        this._setProperties();
+    }
+
+    /** @hidden */
+    _setProperties(): void {
+        if (this.textType !== null && this.textType !== undefined) {
+            this._addClassToElement('fd-list__byline-right--' + this.textType);
+        }
+    }
+
+    /** @hidden */
+    _addClassToElement(className: string): void {
+        const secItems = this.listItemRef.nativeElement.querySelectorAll('.fd-list__byline-right');
+        secItems.forEach(function (secItem: any) {
+            secItem.classList.add(...className.split(' '));
+        });
+    }
 
     /** @hidden */
     constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef) {

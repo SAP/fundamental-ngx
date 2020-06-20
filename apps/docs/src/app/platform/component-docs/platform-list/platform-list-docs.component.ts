@@ -4,14 +4,20 @@ import * as borderLessListSrc from '!raw-loader!./platform-list-examples/platfor
 import * as borderLessListTs from '!raw-loader!./platform-list-examples/platform-list-border-less-example.component.ts';
 import * as groupHeaderListTs from '!raw-loader!./platform-list-examples/platform-list-with-group-header-example.component.ts';
 import * as listWithDeleteButton from '!raw-loader!./platform-list-examples/platform-list-with-delete-button-example.component.html';
+import * as listWithButtons from '!raw-loader!./platform-list-examples/platform-list-with-buttons-example.component.html';
+import * as listWithDeleteButtonTs from '!raw-loader!./platform-list-examples/platform-list-with-delete-button-example.component.ts';
 import * as listWithFooter from '!raw-loader!./platform-list-examples/platform-list-with-footer-example.component.html';
 import * as listWithGroupHeader from '!raw-loader!./platform-list-examples/platform-list-with-group-header-example.component.html';
 import * as listWithItemCounter from '!raw-loader!./platform-list-examples/platform-list-with-item-counter-example.component.html';
 import * as listWithSelection from '!raw-loader!./platform-list-examples/platform-list-with-selection-example.component.html';
+import * as listWithSelectionTs from '!raw-loader!./platform-list-examples/platform-list-with-selection-example.component.ts';
 import * as listWithSingleSelection from '!raw-loader!./platform-list-examples/platform-list-with-single-selection-example.component.html';
 import * as listWithNavigation from '!raw-loader!./platform-list-examples/platform-list-with-navigation-example.component.html';
 import * as listWithInfiniteScroll from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.html';
 import * as listWithInfiniteScrollTs from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.ts';
+import * as listWithi18n from '!raw-loader!./platform-list-examples/platform-list-with-i18n-example.component.html';
+import * as listWithi18nTs from '!raw-loader!./platform-list-examples/platform-list-with-i18n-example.component.ts';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -46,6 +52,20 @@ export class PlatformListDocsComponent implements OnInit {
             language: 'html',
             code: listWithDeleteButton,
             fileName: 'platform-list-with-delete-button-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithDeleteButtonExampleComponent',
+            code: listWithDeleteButtonTs,
+            fileName: 'platform-list-with-delete-button-example'
+        }
+    ];
+
+    listWithButtons: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithButtons,
+            fileName: 'platform-list-with-button-example',
         }
     ];
 
@@ -84,6 +104,12 @@ export class PlatformListDocsComponent implements OnInit {
             language: 'html',
             code: listWithSelection,
             fileName: 'platform-list-with-selection-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithSelectionExampleComponent',
+            code: listWithSelectionTs,
+            fileName: 'platform-list-with-selection-example'
         }
     ];
 
@@ -117,6 +143,19 @@ export class PlatformListDocsComponent implements OnInit {
         }
     ];
 
+    listWithi18n: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithi18n,
+            fileName: 'platform-list-with-i18n-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithi18nExampleComponent',
+            code: listWithi18nTs,
+            fileName: 'platform-list-with-i18n-example'
+        }
+    ];
 
     ngOnInit(): void { }
     constructor() { }

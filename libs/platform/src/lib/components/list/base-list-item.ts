@@ -1,16 +1,27 @@
 import {
     ElementRef, HostBinding, Input, ChangeDetectorRef, EventEmitter,
-    Output, HostListener, ViewChild, AfterViewChecked, AfterViewInit, OnInit
+    Output, HostListener, ViewChild, AfterViewChecked, OnInit
 } from '@angular/core';
 import { CheckboxComponent, RadioButtonComponent } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 let nextListItemId = 0;
+export type TextType = 'negative' | 'critical' | 'positive' | 'informative';
+
+/**
+ * Interface for defining more actions on list item
+ * secondary
+ */
+
+interface SecondaryActionItem {
+    icon: string;
+    isButton: boolean;
+}
 /**
  * This class contains common properties used across list Item components.
  * this can be extended to reduce the code duplication across list Item components.
  */
-export class BaseListItem extends BaseComponent implements AfterViewChecked, AfterViewInit, OnInit {
+export class BaseListItem extends BaseComponent implements AfterViewChecked, OnInit {
 
     /** event emitter for selected item*/
     @Output()
@@ -37,8 +48,8 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, Aft
     showNavigationArrow: boolean = false;
 
 
-    /** Whether Navigation mode is included to for current list item component
-   *
+    /** Whether Navigation mode is included to for
+     *  current list item component
    */
     @Input()
     partialNavigation?: boolean = false;
@@ -64,10 +75,6 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, Aft
     @Input()
     description: string;
 
-    /**
-    * list of values, it can be of type Item or String.
-    */
-    private _item: any;
 
     /** @hidden */
     @ViewChild(CheckboxComponent, { static: false })
@@ -108,36 +115,29 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, Aft
     @Input()
     secondaryWrap?: boolean;
 
-    /** attribute holds secondary icon*/
+    /** attribute holds secondary icon value*/
     @Input()
-    secondayIcon?: string;
+    secondayIcons?: SecondaryActionItem[];
 
-    /** Whether listitem is selected */
+    // /** Whether listitem is selected */
     @Input()
     @HostBinding('class.is-selected')
     selected: boolean = false;
 
-    /**
-    ** Whather list footer
-    **should displayed or not
-    **/
+    /** The type of the secondary text.fd-list__byline-right--*
+    *  Can be one of *positive*, *negative*, *informative*, *critical*, *neutral* */
     @Input()
-    footer?: boolean;
+    textType?: TextType;
 
     /** @hidden */
     /** a11y role */
     @HostBinding('attr.role')
     role = 'listitem';
 
-    /** The type of the secondary text.fd-list__byline-right--*
-     *  Can be one of *positive*, *negative*, *informative*, *critical*, *neutral* */
-    @Input()
-    type?: string;
-
-    /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef) {
-        super(_changeDetectorRef);
-    }
+    /**
+    * list of values, it can be of type Item or String.
+    */
+    private _item: any;
 
     /**Get the list of items */
     get item(): any {
@@ -154,13 +154,20 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, Aft
         this.name = item.name ? item.name : '';
         this.target = item.target;
         this.href = item.href;
+        this.textType = item.textType;
         this.partialNavigation = item.partialNavigation;
         this.secondary = item.secondary;
         this.description = item.description;
-        this.type = item.type;
-        this.secondayIcon = item.secondayIcon;
+        if (item.secondayIcons !== null && item.secondayIcons !== undefined) {
+            this.secondayIcons = [...item.secondayIcons];
+        }
         this.secondaryWrap = item.secondaryWrap ? true : false;
 
+    }
+
+    /** @hidden */
+    constructor(protected _changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef) {
+        super(_changeDetectorRef);
     }
 
     /** @hidden */
@@ -182,10 +189,6 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, Aft
     /**On item click event will be emitted */
     @HostListener('click')
     onItemClick(): void {
-        if (this.checkboxComponent) {
-            this.checkboxComponent.inputLabel.nativeElement.click();
-            event.stopImmediatePropagation();
-        }
         this.itemSelected.emit(event);
         this._changeDetectorRef.markForCheck();
 
@@ -208,12 +211,6 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, Aft
     }
 
     /** @hidden */
-    /** message type styles to secondary text in Byline*/
-    ngAfterViewInit(): void {
-        this._setProperties();
-    }
-
-    /** @hidden */
     /** Show navigation for single list*/
     ngOnInit(): void {
         this.id = `fdp-list-item-${nextListItemId++}`;
@@ -221,21 +218,6 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, Aft
             this.hasNavigation = true;
             this.showNavigationArrow = true;
         }
-    }
-
-    /** @hidden */
-    _setProperties(): void {
-        if (this.type !== null && this.type !== undefined) {
-            this._addClassToElement('fd-list__byline-right--' + this.type);
-        }
-    }
-
-    /** @hidden */
-    _addClassToElement(className: string): void {
-        const secItems = this.listItemRef.nativeElement.querySelectorAll('.fd-list__byline-right');
-        secItems.forEach(function (sItem: any) {
-            sItem.classList.add(...className.split(' '));
-        });
     }
 
 }
