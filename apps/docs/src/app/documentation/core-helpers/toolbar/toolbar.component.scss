@@ -7,7 +7,7 @@
         margin: 0;
         text-align: center;
         color: #fff;
-        color: var(--sapShell_TextColor);
+        color: var(--sapShell_TextColor, #fff);
         text-decoration: none;
         margin-left: 10px;
 
@@ -27,7 +27,7 @@
 
     &__version {
         color: #fff;
-        color: var(--sapShell_TextColor);
+        color: var(--sapShell_TextColor, #fff);
         line-height: 2.3rem;
         flex: 0 0 auto;
         font-size: 1.2rem;
@@ -52,10 +52,10 @@
 .fd-docs--theme-menu {
     margin: 0 0.5rem;
     color: #fff;
-    color: var(--sapShell_TextColor);
+    color: var(--sapShell_TextColor, #fff);
     &:hover {
         color: #fff;
-        color: var(--sapShell_TextColor);
+        color: var(--sapShell_TextColor, #fff);
     }
 }
 
@@ -64,7 +64,7 @@
     height: 1rem;
     margin: 0 0.5rem;
     fill: #fff;
-    fill: var(--sapShell_TextColor);
+    fill: var(--sapShell_TextColor, #fff);
     vertical-align: middle;
 
     &:hover {
