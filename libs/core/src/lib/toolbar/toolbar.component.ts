@@ -174,7 +174,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
                 this._removeToolbarItemFromDOM(toolbarItem);
                 this.overflowElements.push(toolbarItem);
             }
-            return !shouldItemBeRemoved ? _contentWidth + itemWidth : _contentWidth;
+            return !shouldItemBeRemoved && !this._isSpacer(toolbarItem) ? _contentWidth + itemWidth : _contentWidth * 2;
         }, 0);
 
         this._addToolbarItemToOverflow(this.overflowElements);
@@ -207,11 +207,19 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
 
     /** @hidden */
     private _reset() {
+        let overflowItems = [];
         this._overflowBody.childNodes.forEach((x) => {
             x.remove();
+            overflowItems.push(x);
+        });
+
+        overflowItems = overflowItems.reverse();
+
+        overflowItems.map((x) => {
             this.renderer.insertBefore(this._toolbar, x, this.overflowSpacer.nativeElement);
         });
 
+        overflowItems = [];
         this.overflowElements = [];
         this._changeOverflowVisibleState(false);
     }
