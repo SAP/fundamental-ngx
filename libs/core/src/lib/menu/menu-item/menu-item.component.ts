@@ -7,7 +7,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Inject,
     InjectionToken,
     Input,
@@ -30,7 +29,15 @@ import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
 
 let menuUniqueId: number = 0;
 
-export const SUBMENU = new InjectionToken<SubmenuComponent>('Submenu component dependency');
+export interface BaseSubmenu {
+    templateRef: TemplateRef<any>;
+    menuItems: QueryList<any>;
+    menuService: MenuService;
+    ariaLabel: string;
+    ariaLabelledby: string;
+}
+
+export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component dependency');
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -56,7 +63,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Reference to sub-menu component */
     @Input()
-    submenu: SubmenuComponent;
+    submenu: BaseSubmenu;
 
     @Output()
     selected: EventEmitter<void> = new EventEmitter<void>();
@@ -82,7 +89,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     constructor(public elementRef: ElementRef,
                 @Optional() public menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
-                @Optional() @Inject(SUBMENU) private _submenu: SubmenuComponent) {
+                @Optional() @Inject(SUBMENU) private _submenu: BaseSubmenu) {
     }
 
     /** @hidden */
@@ -219,10 +226,10 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{provide: SUBMENU, useExisting: forwardRef(() => SubmenuComponent)}],
+    providers: [{provide: SUBMENU, useExisting: SubmenuComponent}],
     exportAs: 'fdSubmenu'
 })
-export class SubmenuComponent {
+export class SubmenuComponent implements BaseSubmenu {
 
     /** Aria-label for navigation */
     @Input()
