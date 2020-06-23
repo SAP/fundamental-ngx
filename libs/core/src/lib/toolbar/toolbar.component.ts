@@ -18,14 +18,17 @@ import {
 import { ToolbarItemDirective } from './public_api';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
+const MAX_CONTENT_SIZE = 99999999;
 
 export type ToolbarType = 'solid' | 'transparent' | 'auto' | 'info';
 
 export type ToolbarSize = 'cozy' | 'compact';
+const OVERFLOW_VISIBILITY_DELAY = 1;
+
 @Component({
     selector: 'fd-toolbar',
     templateUrl: './toolbar.component.html',
@@ -94,9 +97,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
     toolbarItems: QueryList<ToolbarItemDirective>;
 
     /** @hidden */
-    overflowElements: ToolbarItemDirective[] = [];
-
-    /** @hidden */
     overflowVisibility: Observable<boolean>;
 
     /** @hidden */
@@ -113,6 +113,12 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
     private get _toolbar(): HTMLElement {
         return this.toolbar.nativeElement as HTMLElement;
     }
+
+    /** @hidden */
+    private _overflowElements: ToolbarItemDirective[] = [];
+
+    /** @hidden */
+    private _normalElements: ToolbarItemDirective[] = [];
 
     /** @hidden */
     constructor(private cd: ChangeDetectorRef, private renderer: Renderer2) {}
@@ -143,8 +149,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
     @HostListener('window:resize')
     onResize() {
         if (this.shouldOverflow) {
-            this._reset();
-            this._collapseItems();
+            of(true)
+                .pipe(
+                    tap(() => this._reset()),
+                    delay(OVERFLOW_VISIBILITY_DELAY),
+                    tap(() => this._collapseItems())
+                )
+                .subscribe(() => {});
         }
     }
 
@@ -172,13 +183,21 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
 
             if (shouldItemBeRemoved) {
                 this._removeToolbarItemFromDOM(toolbarItem);
-                this.overflowElements.push(toolbarItem);
+                this._overflowElements.push(toolbarItem);
+            } else {
+                this._normalElements.push(toolbarItem);
             }
-            return !shouldItemBeRemoved && !this._isSpacer(toolbarItem) ? _contentWidth + itemWidth : _contentWidth * 2;
+
+            return !shouldItemBeRemoved ? _contentWidth + itemWidth : MAX_CONTENT_SIZE;
         }, 0);
 
-        this._addToolbarItemToOverflow(this.overflowElements);
-        this._changeOverflowVisibleState(this.overflowElements.length > 0);
+        this._addToolbarItemToOverflow(this._overflowElements);
+
+        [...this._normalElements, ...this._overflowElements].map((x) =>
+            this._changeItemVisibilityState(x.elementRef.nativeElement, true)
+        );
+
+        this._changeOverflowVisibleState(this._overflowElements.length > 0);
 
         this.cd.markForCheck();
     }
@@ -207,29 +226,24 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
 
     /** @hidden */
     private _reset() {
-        let overflowItems = [];
-        this._overflowBody.childNodes.forEach((x) => {
-            x.remove();
-            overflowItems.push(x);
+        this._normalElements.map(this._removeToolbarItemFromDOM);
+        this._overflowElements.map(this._removeToolbarItemFromDOM);
+
+        [...this._normalElements, ...this._overflowElements].map((x) => {
+            this._changeItemVisibilityState(x.elementRef.nativeElement, false);
+            this.renderer.insertBefore(this._toolbar, x.elementRef.nativeElement, this.overflowSpacer.nativeElement);
         });
 
-        overflowItems = overflowItems.reverse();
-
-        overflowItems.map((x) => {
-            this.renderer.insertBefore(this._toolbar, x, this.overflowSpacer.nativeElement);
-        });
-
-        overflowItems = [];
-        this.overflowElements = [];
+        this._overflowElements = [];
+        this._normalElements = [];
         this._changeOverflowVisibleState(false);
     }
 
-    /** @hidden */
-    private _isSpacer(item: ToolbarItemDirective): boolean {
-        return (item.elementRef.nativeElement as HTMLElement).className.includes('spacer');
+    private _changeOverflowVisibleState(visible: boolean) {
+        this.overflowVisibility = of(visible).pipe(delay(OVERFLOW_VISIBILITY_DELAY));
     }
 
-    private _changeOverflowVisibleState(visible: boolean) {
-        this.overflowVisibility = of(visible).pipe(delay(5));
+    private _changeItemVisibilityState(element: HTMLElement, visible: boolean) {
+        element.style.setProperty('visibility', visible ? 'visible' : 'hidden');
     }
 }
