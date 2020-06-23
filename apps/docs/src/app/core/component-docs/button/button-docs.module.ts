@@ -20,7 +20,10 @@ const routes: Routes = [
         component: ButtonHeaderComponent,
         children: [
             { path: '', component: ButtonDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
+            {
+                path: 'api', component: ApiComponent,
+                data: { content: API_FILES.button }
+            }
         ]
     }
 ];
@@ -38,4 +41,4 @@ const routes: Routes = [
         ButtonMenuExampleComponent
     ]
 })
-export class ButtonDocsModule {}
+export class ButtonDocsModule { }
