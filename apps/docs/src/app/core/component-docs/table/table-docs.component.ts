@@ -112,13 +112,13 @@ export class TableDocsComponent {
         {
             language: 'html',
             code: tableColumnSortHtmlSrc,
-            fileName: 'table-column-sort-example'
+            fileName: 'table-column-sorting-example'
         },
         {
             language: 'typescript',
             component: 'TableColumnSortExampleComponent',
             code: tableColumnSortTsSrc,
-            fileName: 'table-column-sort-example'
+            fileName: 'table-column-sorting-example'
         },
         {
             language: 'typescript',
