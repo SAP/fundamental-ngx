@@ -27,7 +27,6 @@ const MAX_CONTENT_SIZE = 99999999;
 export type ToolbarType = 'solid' | 'transparent' | 'auto' | 'info';
 
 export type ToolbarSize = 'cozy' | 'compact';
-const OVERFLOW_VISIBILITY_DELAY = 1;
 
 @Component({
     selector: 'fd-toolbar',
@@ -152,7 +151,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
             of(true)
                 .pipe(
                     tap(() => this._reset()),
-                    delay(OVERFLOW_VISIBILITY_DELAY),
+                    delay(5),
                     tap(() => this._collapseItems())
                 )
                 .subscribe(() => {});
@@ -240,7 +239,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
 
     private _changeOverflowVisibleState(visible: boolean) {
-        this.overflowVisibility = of(visible).pipe(delay(OVERFLOW_VISIBILITY_DELAY));
+        this.overflowVisibility = of(visible).pipe(delay(1));
     }
 
     private _changeItemVisibilityState(element: HTMLElement, visible: boolean) {
