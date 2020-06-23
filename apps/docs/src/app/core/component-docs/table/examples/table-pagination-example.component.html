@@ -15,21 +15,9 @@
             <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
         </tr>
     </tbody>
+    <br/>
     <tfoot fd-table-footer>
-        <fd-popover placement="top-end" style="margin-top: 5px;">
-            <fd-popover-control>
-                <button fd-button [fdType]="'transparent'" [fdMenu]="true">Items Per Page</button>
-            </fd-popover-control>
-            <fd-popover-body>
-                <fd-menu>
-                    <ul fd-menu-list>
-                        <li fd-menu-item *ngFor="let value of itemsPerPageOptions" (click)="itemsPerPageChange(value)">
-                            <span fd-menu-interactive>{{ value }}</span>
-                        </li>
-                    </ul>
-                </fd-menu>
-            </fd-popover-body>
-        </fd-popover>
+        <button fd-button [fdMenu]="true" [fdMenuTrigger]="itemsPerPageMenu" style="margin-right: 20px">Items Per Page</button>
         <fd-pagination
             [totalItems]="totalItems"
             (pageChangeStart)="newPageClicked($event)"
@@ -38,3 +26,9 @@
         ></fd-pagination>
     </tfoot>
 </table>
+
+<fd-menu #itemsPerPageMenu>
+    <li fd-menu-item *ngFor="let value of itemsPerPageOptions" (click)="itemsPerPageChange(value)">
+        <span fd-menu-interactive>{{ value }}</span>
+    </li>
+</fd-menu>

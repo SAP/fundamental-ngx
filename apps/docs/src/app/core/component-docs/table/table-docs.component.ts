@@ -8,6 +8,8 @@ import * as tableWithoutBordersHtmlSrc from '!raw-loader!./examples/table-withou
 import * as tableWithoutBordersTsSrc from '!raw-loader!./examples/table-without-borders-example.component.ts';
 import * as tableColumnSortHtmlSrc from '!raw-loader!./examples/table-column-sorting-example.component.html';
 import * as tableColumnSortTsSrc from '!raw-loader!./examples/table-column-sorting-example.component.ts';
+import * as tableColumnSortPipeTs from '!raw-loader!./examples/table-example-sort.pipe.ts';
+import * as tableColumnFilterPipeTs from '!raw-loader!./examples/table-example-filter.pipe.ts';
 import * as tableActivableHtmlSrc from '!raw-loader!./examples/table-activable-example.component.html';
 import * as tableActivableTsSrc from '!raw-loader!./examples/table-activable-example.component.ts';
 import * as tableCheckHtml from '!raw-loader!./examples/table-checkboxes-example.component.html';
@@ -112,13 +114,25 @@ export class TableDocsComponent {
         {
             language: 'html',
             code: tableColumnSortHtmlSrc,
-            fileName: 'table-column-sort-example'
+            fileName: 'table-column-sorting-example'
         },
         {
             language: 'typescript',
             component: 'TableColumnSortExampleComponent',
             code: tableColumnSortTsSrc,
-            fileName: 'table-column-sort-example'
+            fileName: 'table-column-sorting-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableColumnSortExampleComponent',
+            code: tableColumnSortPipeTs,
+            fileName: 'table-example-sort'
+        },
+        {
+            language: 'typescript',
+            component: 'TableColumnFilterExampleComponent',
+            code: tableColumnFilterPipeTs,
+            fileName: 'table-example-filter'
         }
     ];
 
