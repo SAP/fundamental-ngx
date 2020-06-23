@@ -32,7 +32,11 @@ let checkboxUniqueId: number = 0;
 export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden */
     @ViewChild('inputLabel', { static: false })
+
     inputLabel: ElementRef;
+    /** @hidden */
+    @ViewChild('labelElement', { static: false })
+    labelElement: ElementRef;
 
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
@@ -65,10 +69,6 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** Allows to prevent user from manually selecting controls third state. */
     @Input()
     tristateSelectable: boolean = true;
-
-    /** Whenever the checkbox is used inside list, it applies another class to label */
-    @Input()
-    checkboxInList: boolean = false;
 
     /** Sets values returned by control. */
     @Input('values')

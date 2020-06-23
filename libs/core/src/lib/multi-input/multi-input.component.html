@@ -86,7 +86,6 @@
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
-                [checkboxInList]="true"
                 [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                 class="fd-multi-input-checkbox"
                 (keydown)="handleKeyDown($event, ind)"

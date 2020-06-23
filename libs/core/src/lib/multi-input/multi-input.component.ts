@@ -9,7 +9,7 @@ import {
     Inject,
     Injector,
     Input,
-    OnChanges,
+    OnChanges, OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -32,6 +32,8 @@ import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobi
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { DialogConfig, DIALOG_CONFIG } from '../dialog/dialog-utils/dialog-config.class';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
+import { CheckboxComponent } from '../checkbox/checkbox/checkbox.component';
+import { Subscription } from 'rxjs';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -57,7 +59,14 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interf
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit, CssClassBuilder, MultiInputInterface {
+export class MultiInputComponent implements
+    OnInit,
+    ControlValueAccessor,
+    OnChanges,
+    AfterViewInit,
+    CssClassBuilder,
+    MultiInputInterface,
+    OnDestroy {
 
     /** Placeholder for the input field. */
     @Input()
@@ -178,6 +187,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @ViewChild(PopoverComponent)
     popoverRef: PopoverComponent;
 
+    @ViewChildren(CheckboxComponent)
+    checkboxComponents: QueryList<CheckboxComponent>;
+
     /** @hidden */
     @ViewChild('control', { read: TemplateRef })
     controlTemplate: TemplateRef<any>;
@@ -201,6 +213,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     focusTrap: FocusTrap;
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     onChange: Function = () => {
     };
 
@@ -215,8 +230,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         private _changeDetRef: ChangeDetectorRef,
         private _menuKeyboardService: MenuKeyboardService,
         private _dynamicComponentService: DynamicComponentService
-    ) {
-    }
+    ) {}
 
     /** @hidden */
     ngOnInit() {
@@ -247,6 +261,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         if (this.mobile) {
             this._setUpMobileMode();
         }
+        this.setUpCheckboxSubscription();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     @applyCssClass
@@ -448,6 +468,20 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         } else {
             this.focusTrap.deactivate();
         }
+    }
+
+    /** @hidden */
+    private _applyClassToCheckboxes(): void {
+        this.checkboxComponents.forEach(
+            _checkbox => _checkbox.labelElement.nativeElement.classList.add('fd-list__label')
+        );
+    }
+
+    /** @hidden */
+    private setUpCheckboxSubscription(): void {
+        this._subscriptions.add(
+            this.checkboxComponents.changes.subscribe(() => this._applyClassToCheckboxes())
+        );
     }
 
     /** @hidden */
