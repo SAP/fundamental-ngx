@@ -1,15 +1,4 @@
-import {
-    Component,
-    ViewEncapsulation,
-    HostBinding,
-    Input,
-    ElementRef,
-    AfterViewInit,
-    AfterViewChecked,
-    ChangeDetectionStrategy
-} from '@angular/core';
-
-import { ToolbarItemDirective } from './toolbar-item.directive';
+import { Component, ViewEncapsulation, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'fd-toolbar-spacer',
@@ -17,7 +6,7 @@ import { ToolbarItemDirective } from './toolbar-item.directive';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToolbarSpacerComponent implements AfterViewInit, AfterViewChecked {
+export class ToolbarSpacerComponent {
     /** Determines the width of spacer when fixed property is set to true
      * Allowed values: absolute and relative metrics
      * Default value: 0px
@@ -42,10 +31,4 @@ export class ToolbarSpacerComponent implements AfterViewInit, AfterViewChecked {
     get css(): string {
         return `fd-toolbar__spacer ${this.fixed ? 'fd-toolbar__spacer--fixed' : ''} ${this.class}`;
     }
-
-    constructor() {}
-
-    ngAfterViewInit() {}
-
-    ngAfterViewChecked() {}
 }
