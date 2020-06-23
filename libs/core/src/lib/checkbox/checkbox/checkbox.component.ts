@@ -32,8 +32,8 @@ let checkboxUniqueId: number = 0;
 export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden */
     @ViewChild('inputLabel', { static: false })
-
     inputLabel: ElementRef;
+
     /** @hidden */
     @ViewChild('labelElement', { static: false })
     labelElement: ElementRef;

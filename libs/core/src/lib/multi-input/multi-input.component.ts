@@ -9,7 +9,8 @@ import {
     Inject,
     Injector,
     Input,
-    OnChanges, OnDestroy,
+    OnChanges,
+    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -187,6 +188,7 @@ export class MultiInputComponent implements
     @ViewChild(PopoverComponent)
     popoverRef: PopoverComponent;
 
+    /** @hidden */
     @ViewChildren(CheckboxComponent)
     checkboxComponents: QueryList<CheckboxComponent>;
 
