@@ -1,1 +1,41 @@
-<p>step-input works!</p>
+<div class="fd-step-input"
+     [ngClass]="{
+        'is-error': state === 'error',
+        'is-warning': state === 'warning',
+        'is-success': state === 'success',
+        'is-information': state === 'information',
+        'fd-step-input--compact': compact
+     }">
+    <button fd-button
+            fdType="transparent"
+            class="fd-step-input__button"
+            tabindex="-1"
+            type="button"
+            [compact]="compact"
+            [glyph]="decrementButtonIcon"
+            (click)="decrement()">
+    </button>
+    <input [attr.aria-label]="ariaLabel"
+           [name]="name"
+           [id]="inputId"
+           [title]="inputTitle"
+           [value]="viewValue"
+           [class.fd-input--compact]="compact"
+           (keydown)="onKeyDown($event)"
+           (change)="onInputValueChange($event)"
+           class="fd-input fd-input--no-number-spinner fd-step-input__input"
+           type="text">
+    <button fd-button
+            fdType="transparent"
+            class="fd-step-input__button"
+            tabindex="-1"
+            type="button"
+            [compact]="compact"
+            [glyph]="incrementButtonIcon"
+            (click)="increment()">
+    </button>
+</div>
+<span class="fd-form-label fd-form-label--unit-description">
+<!--    {{ unit }}-->
+    {{viewValue}}
+</span>
