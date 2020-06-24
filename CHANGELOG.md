@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.19.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.19.1-rc.2...v0.19.1-rc.3) (2020-06-24)
+
+
+### Bug Fixes
+
+* replace datepicker icon ([#2728](https://github.com/SAP/fundamental-ngx/issues/2728)) ([0b864f8](https://github.com/SAP/fundamental-ngx/commit/0b864f8e0c7d5e7e5a7610e1f0d79821bfbbe6d6))
+
 ### [0.19.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.19.1-rc.1...v0.19.1-rc.2) (2020-06-24)
 
 <a name="0.19.1-rc.1"></a>
