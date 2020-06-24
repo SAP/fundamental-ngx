@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.0...v0.20.0-rc.1) (2020-06-24)
+
+
+### Bug Fixes
+
+* replace hardcoded colors in Product switch with theme variables ([#2735](https://github.com/SAP/fundamental-ngx/issues/2735)) ([9d21252](https://github.com/SAP/fundamental-ngx/commit/9d2125205fa9f5bce433a5bcb83bd9c091341e0e))
+
 ## [0.20.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.19.1-rc.3...v0.20.0-rc.0) (2020-06-24)
 
 
