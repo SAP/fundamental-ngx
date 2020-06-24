@@ -1,0 +1,34 @@
+<table fd-table>
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of displayedRows" fd-table-row>
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+        </tr>
+    </tbody>
+    <br/>
+    <tfoot fd-table-footer>
+        <button fd-button [fdMenu]="true" [fdMenuTrigger]="itemsPerPageMenu" style="margin-right: 20px">Items Per Page</button>
+        <fd-pagination
+            [totalItems]="totalItems"
+            (pageChangeStart)="newPageClicked($event)"
+            [itemsPerPage]="itemsPerPage"
+            [currentPage]="currentPage"
+        ></fd-pagination>
+    </tfoot>
+</table>
+
+<fd-menu #itemsPerPageMenu>
+    <li fd-menu-item *ngFor="let value of itemsPerPageOptions" (click)="itemsPerPageChange(value)">
+        <span fd-menu-interactive>{{ value }}</span>
+    </li>
+</fd-menu>

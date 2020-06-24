@@ -10,12 +10,13 @@ import { TableColumnSortingExampleComponent } from './examples/table-column-sort
 import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
 import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
-import { CheckboxModule, ListModule, ObjectStatusModule, TableModule } from '@fundamental-ngx/core';
+import { CheckboxModule, ListModule, ObjectStatusModule, TableModule, PaginationModule } from '@fundamental-ngx/core';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
 import { TableActivableExampleComponent } from './examples/table-activable-example.component';
 import { TableSemanticExampleComponent } from './examples/table-semantic-example.component';
 import { TablePopinExampleComponent } from './examples/table-popin-example/table-popin-example.component';
+import { TablePaginationExampleComponent } from './examples/table-pagination-example.component';
 import { SortTableByPipe } from './examples/table-example-sort.pipe';
 import { FilterTableByPipe } from './examples/table-example-filter.pipe';
 
@@ -37,6 +38,7 @@ const routes: Routes = [
         TableModule,
         CheckboxModule,
         ObjectStatusModule,
+        PaginationModule,
         ListModule
     ],
     exports: [RouterModule, SortTableByPipe, FilterTableByPipe],
@@ -53,6 +55,7 @@ const routes: Routes = [
         TableActivableExampleComponent,
         TableSemanticExampleComponent,
         TablePopinExampleComponent,
+        TablePaginationExampleComponent,
         FilterTableByPipe,
         SortTableByPipe
     ]
