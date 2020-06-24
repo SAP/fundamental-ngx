@@ -1,0 +1,80 @@
+<table fd-table [keys]="displayedColumns">
+    <thead fd-table-header>
+    <tr fd-table-row>
+        <th fd-table-cell *ngFor="let column of displayedColumns" [key]="column">{{column | uppercase}}</th>
+    </tr>
+    </thead>
+    <tbody fd-table-body>
+    <tr *ngFor="let row of dataSource" fd-table-row >
+        <td fd-table-cell  [key]="'column1'">
+            <a href="#">{{ row.column1 }}</a>
+        </td>
+        <td fd-table-cell [key]="'column2'">{{ row.column2 }}</td>
+        <td fd-table-cell [key]="'column3'">{{ row.column3 }}</td>
+        <td fd-table-cell [key]="'date'">{{ row.date }}</td>
+        <td fd-table-cell [key]="'type'"><fd-icon [glyph]="row.type"></fd-icon></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <ng-template fdTemplate="header">
+                <div fd-bar-left>
+                    <fd-bar-element>
+                        <h1 fd-dialog-title>Table Customization</h1>
+                    </fd-bar-element>
+                </div>
+                <div fd-bar-right>
+                    <fd-bar-element>
+                        <button fd-button fdType="transparent" [compact]="true" (click)="shuffle()">
+                            Shuffle
+                        </button>
+                    </fd-bar-element>
+                </div>
+            </ng-template>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+                <ul cdkDropList (cdkDropListDropped)="dropHandle($event)" fd-list>
+                    <li *ngFor="let column of originalDisplayedColumns"
+                        cdkDrag
+                        fd-list-item
+                        [selected]="column.checked">
+                        <fd-checkbox
+                            name="{{column.key"
+                            label="{{column.key}}"
+                            [ngModel]="column.checked"
+                            (ngModelChange)="handleChange(column, $event)"
+                        >
+                        </fd-checkbox>
+                    </li>
+                </ul>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <ng-template fdTemplate="footer">
+                <div fd-bar-left>
+                </div>
+                <div fd-bar-right>
+                    <fd-bar-element>
+                        <button
+                            fd-button
+                            fd-dialog-decisive-button
+                            fdType="emphasized"
+                            glyph="save"
+                            [compact]="true"
+                            (click)="close()"
+                        >
+                            Save and Close
+                        </button>
+                    </fd-bar-element>
+                </div>
+            </ng-template>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button (click)="openDialog(dialogTemplate)">Open Table Customization</button>

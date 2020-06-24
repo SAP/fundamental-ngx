@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { TableService } from './table.service';
 
 /**
  * The component that represents a table.
@@ -14,9 +15,10 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
     template: `<ng-content></ng-content>`,
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [ TableService ]
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
     /** @hidden */
     @HostBinding('class.fd-table')
     fdTableClass: boolean = true;
@@ -45,4 +47,27 @@ export class TableComponent {
     @HostBinding('class.fd-table--pop-in')
     @Input()
     popIn: boolean = false;
+
+    /** */
+    @Input()
+    keys: string[];
+
+    constructor (
+        private _tableService: TableService
+    ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._propagateKeys(this.keys);
+    }
+
+    reset(keys: string[]): void {
+        this._propagateKeys(keys);
+    }
+
+    private _propagateKeys(keys: string[]): void {
+        if (keys) {
+            this._tableService.changeKeys([...keys]);
+        }
+    }
 }
