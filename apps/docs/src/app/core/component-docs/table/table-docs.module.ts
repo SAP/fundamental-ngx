@@ -10,7 +10,7 @@ import { TableColumnSortingExampleComponent } from './examples/table-column-sort
 import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
 import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
-import { CheckboxModule, ObjectStatusModule, MenuModule, TableModule, PaginationModule } from '@fundamental-ngx/core';
+import { CheckboxModule, ListModule, ObjectStatusModule, TableModule, PaginationModule } from '@fundamental-ngx/core';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
 import { TableActivableExampleComponent } from './examples/table-activable-example.component';
@@ -38,8 +38,8 @@ const routes: Routes = [
         TableModule,
         CheckboxModule,
         ObjectStatusModule,
-        MenuModule,
-        PaginationModule
+        PaginationModule,
+        ListModule
     ],
     exports: [RouterModule, SortTableByPipe, FilterTableByPipe],
     declarations: [
