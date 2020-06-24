@@ -7,5 +7,15 @@ import { Component } from '@angular/core';
 export class SelectMaxHeightExampleComponent {
     selectedValue: string;
 
-    options: string[] = ['Apple', 'Apricot', 'Avocado', 'Banana', 'Blueberry', 'Bing Cherry', 'Mango', 'Mandarin', 'Melon'];
+    options: string[] = [
+        'Apple',
+        'Apricot',
+        'Avocado',
+        'Banana',
+        'Blueberry',
+        'Bing Cherry',
+        'Mango',
+        'Mandarin',
+        'Melon'
+    ];
 }
