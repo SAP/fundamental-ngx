@@ -1,8 +1,35 @@
 <header>Action Bar</header>
 <description>
-    The Action Bar is located at the top of the page and is used for Page title and Main Actions for the page.
+    <p>
+        Platform ActionBar component is built on top of
+        <a [routerLink]="'/core/action-bar'">fundamental-ngx/core</a>
+        ActionBar component to provide additional enhancements.
+    </p>
+    <p>
+        <a [routerLink]="'/core/action-bar'">fundamental-ngx/core</a> <code> ActionBarComponent</code> is implemented as
+        set of <code>@Directives</code> to give developers more freedom to assemble the component.
+    </p>
+    In Platform it is implemented as a <code>@Component</code> hiding the internal complexity from application
+    developer. It abstracts out everything making it easier to use. Full list of enhancements is described below.
+    <h3>Platform specific enhancements:</h3>
+    <li>
+        Implemented as Angular component to hide complexity of dealing with HTML in order to delivered high-order
+        component.
+    </li>
+    <li>Optimised number of bindings (<code>@Inputs(), @Outputs</code>) suited more for application developer.</li>
+    <li>
+        Attributes like title, description are parameterised.
+    </li>
+    <li>
+        Introducing 'back button' is made simpler by just setting the <code>showbackbutton</code> flag to true or false.
+    </li>
+    <li>
+        ActionButtonGroup is used to associate actions with action bar component. Individual action buttons or an action
+        menu can be associated.
+    </li>
 </description>
-<import module="ActionBarModule" path="@fundamental-ngx/platform"></import>
+<import module="PlatformActionBarModule" path="@fundamental-ngx/platform"></import><br />
+<import module="PlatformActionButtonGroupModule" path="@fundamental-ngx/platform"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>
