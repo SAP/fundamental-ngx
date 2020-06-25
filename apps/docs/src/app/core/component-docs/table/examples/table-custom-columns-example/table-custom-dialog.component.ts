@@ -92,7 +92,6 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
     `
 })
 export class TableCustomDialogComponent {
-
     filterPhrase: string;
     columns: DisplayedColumn[] = [];
     allSelected: boolean = false;
@@ -106,11 +105,7 @@ export class TableCustomDialogComponent {
     handleChange(column: { key: string, checked: boolean }, checked?: boolean): void {
         column.checked = checked;
 
-        if (this._areAllSelected) {
-            this.allSelected = true;
-        } else {
-            this.allSelected = false;
-        }
+        this.allSelected = this._areAllSelected();
 
         if (checked) {
             this.showError = false;

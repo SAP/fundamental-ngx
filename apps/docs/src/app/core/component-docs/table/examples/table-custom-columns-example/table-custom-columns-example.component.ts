@@ -1,6 +1,5 @@
-import { Component, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DialogRef, DialogService, TableComponent, TableRowDirective } from '@fundamental-ngx/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TableCustomDialogComponent } from './table-custom-dialog.component';
 
 export interface DisplayedColumn {
@@ -66,7 +65,6 @@ export class TableCustomColumnsExampleComponent {
 
         dialogRef.afterClosed.subscribe(
             (columns) => {
-                console.log(columns);
                 this.originalDisplayedColumns = [...columns];
                 this._propagateChangeToDisplayedValue();
             },
@@ -77,7 +75,11 @@ export class TableCustomColumnsExampleComponent {
     }
 
     private _propagateChangeToDisplayedValue(): void {
-        this.displayedColumns = [...this.originalDisplayedColumns.filter(_col => _col.checked).map(_col => _col.key)];
+        this.displayedColumns = [
+            ...this.originalDisplayedColumns
+                .filter(_col => _col.checked)
+                .map(_col => _col.key)
+        ];
         this.tableComponent.reset(this.displayedColumns);
     }
 }
