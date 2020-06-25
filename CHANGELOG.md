@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.3...v0.20.0-rc.4) (2020-06-25)
+
+
+### Bug Fixes
+
+* **select:** Cleanup unused definition ([#2753](https://github.com/SAP/fundamental-ngx/issues/2753)) ([7883e84](https://github.com/SAP/fundamental-ngx/commit/7883e8420ebe411557d6af52cea755e382416791))
+
 ## [0.20.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.2...v0.20.0-rc.3) (2020-06-25)
 
 
