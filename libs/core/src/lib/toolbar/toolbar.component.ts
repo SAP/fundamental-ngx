@@ -19,7 +19,7 @@ import {
 import { ToolbarItemDirective } from './public_api';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { Observable, of, fromEvent } from 'rxjs';
-import { delay, tap, debounce, debounceTime, filter, takeWhile, distinctUntilChanged } from 'rxjs/operators';
+import { delay, tap, debounce, debounceTime, filter, takeWhile, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -133,9 +133,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
                 takeWhile(() => this._alive && this.shouldOverflow),
                 debounceTime(100),
                 distinctUntilChanged(),
-                tap(() => this._reset()),
-                delay(5),
-                tap(() => this._collapseItems())
+                switchMap(() => this._onResize())
             )
             .subscribe();
     }
@@ -177,6 +175,15 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         ]
             .filter((x) => x !== '')
             .join(' ');
+    }
+
+    /** @hidden */
+    private _onResize(): Observable<boolean> {
+        return of(true).pipe(
+            tap(() => this._reset()),
+            delay(5),
+            tap(() => this._collapseItems())
+        );
     }
 
     // shouldOverflow items
