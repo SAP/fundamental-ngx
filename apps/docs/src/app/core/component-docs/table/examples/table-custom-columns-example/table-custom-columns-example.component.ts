@@ -1,6 +1,7 @@
 import { Component, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { DialogRef, DialogService, TableComponent, TableRowDirective } from '@fundamental-ngx/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { TableCustomDialogComponent } from './table-custom-dialog.component';
 
 export interface DisplayedColumn {
     key: string,
@@ -46,59 +47,37 @@ export class TableCustomColumnsExampleComponent {
         Object.keys(this.dataSource[0]).forEach(key => {
             this.originalDisplayedColumns.push({ key: key, checked: true });
         });
-
-    }
-
-    shuffle() {
-        this._shuffleArray(this.originalDisplayedColumns);
-        this._propagateChangeToDisplayedValue();
-        this.tableComponent.reset(this.displayedColumns);
-    }
-
-    handleChange(column: { key: string, checked: boolean }, checked?: boolean): void {
-        column.checked = checked;
-        this.displayedColumns = [...this.originalDisplayedColumns.filter(_col => _col.checked).map(_col => _col.key)];
-        this.tableComponent.reset(this.displayedColumns);
     }
 
 
-    openDialog(template: TemplateRef<any>): void {
-        this.dialogRef = this._dialogService.open(template, {
+    openDialog(): void {
+        const dialogRef = this._dialogService.open(TableCustomDialogComponent, {
             width: '350px',
             height: '370px',
             draggable: true,
             resizable: true,
             verticalPadding: false,
-            backdropClickCloseable: false
+            backdropClickCloseable: false,
+            data: {
+                columns: this.originalDisplayedColumns
+            }
         });
-    }
 
-    close(): void {
-        this.dialogRef.close();
-    }
 
-    dropHandle(event: CdkDragDrop<string[]>) {
-        moveItemInArray(this.originalDisplayedColumns, event.previousIndex, event.currentIndex);
-        this._propagateChangeToDisplayedValue();
-
-        this.tableComponent.reset(this.displayedColumns);
-    }
-
-    private _shuffleArray(array: any[]): void {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
+        dialogRef.afterClosed.subscribe(
+            (columns) => {
+                console.log(columns);
+                this.originalDisplayedColumns = [...columns];
+                this._propagateChangeToDisplayedValue();
+            },
+            () => {
+                console.log('closed without changes')
+            }
+        );
     }
 
     private _propagateChangeToDisplayedValue(): void {
-        this.displayedColumns.sort((a: string, b: string) => {
-            if (this.originalDisplayedColumns.findIndex(_key => _key.key === a) <
-                this.originalDisplayedColumns.findIndex(_key => _key.key === b)) {
-                return -1;
-            } else {
-                return 1;
-            }
-        });
+        this.displayedColumns = [...this.originalDisplayedColumns.filter(_col => _col.checked).map(_col => _col.key)];
+        this.tableComponent.reset(this.displayedColumns);
     }
 }

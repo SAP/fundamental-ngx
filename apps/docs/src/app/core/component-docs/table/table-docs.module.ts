@@ -11,7 +11,15 @@ import { TableCdkExampleComponent } from './examples/table-cdk-example.component
 import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
 import { TableCustomColumnsExampleComponent } from './examples/table-custom-columns-example/table-custom-columns-example.component';
-import { CheckboxModule, ListModule, ObjectStatusModule, TableModule, PaginationModule, DialogModule } from '@fundamental-ngx/core';
+import {
+    CheckboxModule,
+    ListModule,
+    ObjectStatusModule,
+    TableModule,
+    PaginationModule,
+    DialogModule,
+    MessageStripModule
+} from '@fundamental-ngx/core';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
 import { TableActivableExampleComponent } from './examples/table-activable-example.component';
@@ -20,6 +28,8 @@ import { TablePopinExampleComponent } from './examples/table-popin-example/table
 import { TablePaginationExampleComponent } from './examples/table-pagination-example.component';
 import { SortTableByPipe } from './examples/table-example-sort.pipe';
 import { FilterTableByPipe } from './examples/table-example-filter.pipe';
+import { TableFilterPipe } from './examples/table-custom-columns-example/table-filter.pipe';
+import { TableCustomDialogComponent } from './examples/table-custom-columns-example/table-custom-dialog.component';
 
 const routes: Routes = [
     {
@@ -41,7 +51,8 @@ const routes: Routes = [
         ObjectStatusModule,
         PaginationModule,
         ListModule,
-        DialogModule
+        DialogModule,
+        MessageStripModule
     ],
     exports: [RouterModule, SortTableByPipe, FilterTableByPipe],
     declarations: [
@@ -60,7 +71,12 @@ const routes: Routes = [
         TablePaginationExampleComponent,
         FilterTableByPipe,
         SortTableByPipe,
-        TableCustomColumnsExampleComponent
+        TableCustomColumnsExampleComponent,
+        TableFilterPipe,
+        TableCustomDialogComponent
+    ],
+    entryComponents: [
+        TableCustomDialogComponent
     ]
 })
 export class TableDocsModule {}
