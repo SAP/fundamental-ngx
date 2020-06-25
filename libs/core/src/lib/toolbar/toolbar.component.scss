@@ -7,3 +7,15 @@
 .fd-toolbar > * {
     flex-shrink: 0;
 }
+
+.fd-toolbar-fade-out {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 1s, opacity 1ms;
+}
+
+.fd-toolbar-fade-in {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 1s;
+}

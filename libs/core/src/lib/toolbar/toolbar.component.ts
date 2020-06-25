@@ -13,12 +13,13 @@ import {
     HostListener,
     ChangeDetectorRef,
     Renderer2,
-    Input
+    Input,
+    OnDestroy
 } from '@angular/core';
 import { ToolbarItemDirective } from './public_api';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
-import { Observable, of } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { Observable, of, fromEvent } from 'rxjs';
+import { delay, tap, debounce, debounceTime, filter, takeWhile, distinctUntilChanged } from 'rxjs/operators';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -35,7 +36,7 @@ export type ToolbarSize = 'cozy' | 'compact';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked, CssClassBuilder {
+export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked, CssClassBuilder {
     /** Property allows user to pass additional class
      */
     @Input()
@@ -120,10 +121,24 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
     private _normalElements: ToolbarItemDirective[] = [];
 
     /** @hidden */
-    constructor(private cd: ChangeDetectorRef, private renderer: Renderer2) {}
+    private _alive: boolean = true;
 
     /** @hidden */
-    ngOnInit() {}
+    constructor(private _cd: ChangeDetectorRef, private _renderer: Renderer2) {}
+
+    /** @hidden */
+    ngOnInit() {
+        fromEvent(window, 'resize')
+            .pipe(
+                takeWhile(() => this._alive && this.shouldOverflow),
+                debounceTime(100),
+                distinctUntilChanged(),
+                tap(() => this._reset()),
+                delay(5),
+                tap(() => this._collapseItems())
+            )
+            .subscribe();
+    }
 
     /** @hidden */
     ngAfterViewInit() {
@@ -140,27 +155,18 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
 
     /** @hidden */
+    ngOnDestroy() {
+        this._alive = false;
+    }
+
+    /** @hidden */
     elementRef(): ElementRef<any> {
         return this.toolbar;
     }
 
     /** @hidden */
-    @HostListener('window:resize')
-    onResize() {
-        if (this.shouldOverflow) {
-            of(true)
-                .pipe(
-                    tap(() => this._reset()),
-                    delay(5),
-                    tap(() => this._collapseItems())
-                )
-                .subscribe(() => {});
-        }
-    }
-
-    /** @hidden */
     @applyCssClass
-    buildComponentCssClass() {
+    buildComponentCssClass(): string {
         return [
             'fd-toolbar',
             `fd-toolbar--${this.fdType}`,
@@ -175,7 +181,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
 
     // shouldOverflow items
     /** @hidden */
-    private _collapseItems() {
+    private _collapseItems(): void {
         this.toolbarItems.reduce((_contentWidth, toolbarItem) => {
             const itemWidth = this._getElementWidthWithMargin(toolbarItem);
             const shouldItemBeRemoved = this._shouldToolbarItemBeRemoved(itemWidth, _contentWidth);
@@ -192,13 +198,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
 
         this._addToolbarItemToOverflow(this._overflowElements);
 
-        [...this._normalElements, ...this._overflowElements].map((x) =>
+        [...this._normalElements, ...this._overflowElements].forEach((x) =>
             this._changeItemVisibilityState(x.elementRef.nativeElement, true)
         );
 
         this._changeOverflowVisibleState(this._overflowElements.length > 0);
 
-        this.cd.markForCheck();
+        this._cd.markForCheck();
     }
 
     /** @hidden */
@@ -212,25 +218,25 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
 
     /** @hidden */
-    private _removeToolbarItemFromDOM(toolbarItem: ToolbarItemDirective) {
+    private _removeToolbarItemFromDOM(toolbarItem: ToolbarItemDirective): void {
         toolbarItem.elementRef.nativeElement.remove();
     }
 
     /** @hidden */
-    private _addToolbarItemToOverflow(toolbarItems: ToolbarItemDirective[]) {
+    private _addToolbarItemToOverflow(toolbarItems: ToolbarItemDirective[]): void {
         toolbarItems.forEach((x) => {
             this._overflowBody.appendChild(x.elementRef.nativeElement);
         });
     }
 
     /** @hidden */
-    private _reset() {
-        this._normalElements.map(this._removeToolbarItemFromDOM);
-        this._overflowElements.map(this._removeToolbarItemFromDOM);
+    private _reset(): void {
+        this._normalElements.forEach(this._removeToolbarItemFromDOM);
+        this._overflowElements.forEach(this._removeToolbarItemFromDOM);
 
         [...this._normalElements, ...this._overflowElements].map((x) => {
             this._changeItemVisibilityState(x.elementRef.nativeElement, false);
-            this.renderer.insertBefore(this._toolbar, x.elementRef.nativeElement, this.overflowSpacer.nativeElement);
+            this._renderer.insertBefore(this._toolbar, x.elementRef.nativeElement, this.overflowSpacer.nativeElement);
         });
 
         this._overflowElements = [];
@@ -238,11 +244,21 @@ export class ToolbarComponent implements OnInit, AfterViewInit, AfterViewChecked
         this._changeOverflowVisibleState(false);
     }
 
-    private _changeOverflowVisibleState(visible: boolean) {
+    private _changeOverflowVisibleState(visible: boolean): void {
         this.overflowVisibility = of(visible).pipe(delay(1));
     }
 
-    private _changeItemVisibilityState(element: HTMLElement, visible: boolean) {
-        element.style.setProperty('visibility', visible ? 'visible' : 'hidden');
+    private _changeItemVisibilityState(element: HTMLElement, visible: boolean): void {
+        const fadeIn = 'fd-toolbar-fade-in';
+        const fadeOut = 'fd-toolbar-fade-out';
+
+        if (visible) {
+            element.classList.add(fadeIn);
+            element.classList.remove(fadeOut);
+            return;
+        }
+
+        element.classList.add(fadeOut);
+        element.classList.remove(fadeIn);
     }
 }
