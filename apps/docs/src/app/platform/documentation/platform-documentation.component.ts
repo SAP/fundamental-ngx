@@ -24,7 +24,6 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/menu', name: 'Menu' },
             { url: 'platform/menu-button', name: 'Menu Button' },
             { url: 'platform/radio-group', name: 'Radio Button Group' },
-            { url: 'platform/select', name: 'Select' },
             { url: 'platform/search-field', name: 'Search Field' },
             { url: 'platform/split-menu-button', name: 'Split Menu Button' }
         ];
