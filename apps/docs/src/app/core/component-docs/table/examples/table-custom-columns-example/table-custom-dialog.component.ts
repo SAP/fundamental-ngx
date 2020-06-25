@@ -131,8 +131,6 @@ export class TableCustomDialogComponent {
         }
     }
 
-
-
     sortAlphabetically(reverse?: boolean): void {
         this.columns = this.columns.sort((a, b) => {
             if (a.key > b.key) {

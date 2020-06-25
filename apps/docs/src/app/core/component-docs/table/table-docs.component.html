@@ -31,14 +31,18 @@
 <code-example [exampleFiles]="tableFooterExample"></code-example>
 
 <fd-docs-section-title [id]="'columnSorting'" [componentName]="'table'">
-    Custom Columns
+    Customizable Columns
 </fd-docs-section-title>
 <description>
+    Adding the customizable columns requires to set <code>[key]</code> value to all of the cells.
+    Also it needs to put array with some keys. Cells will be hidden/sorted depending on actual order/presence of elements.
+    In example below there is added component based dialog. Whole template and behaviours should be implemented in
+    application side.
 </description>
 <component-example>
     <fd-table-custom-columns-example></fd-table-custom-columns-example>
 </component-example>
-<code-example [exampleFiles]="tableColumnSortExample"></code-example>
+<code-example [exampleFiles]="tableCustomColumnsExample"></code-example>
 
 <fd-docs-section-title [id]="'columnSorting'" [componentName]="'table'">
     Column Sorting
