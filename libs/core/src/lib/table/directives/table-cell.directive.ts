@@ -43,6 +43,7 @@ export class TableCellDirective {
     @Input()
     checkbox: boolean = false;
 
+    /** Key of cell element, it's used to identify this cell with certain column */
     @Input()
     key: string;
 

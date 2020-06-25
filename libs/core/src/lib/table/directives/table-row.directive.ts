@@ -41,26 +41,33 @@ export class TableRowDirective implements AfterViewInit {
         private _changeDetRef: ChangeDetectorRef,
         private _tableService: TableService
     ) {
-        this._tableService.propagateKeys$.subscribe((keys: string[]) => this._sortCells(keys));
+        this._tableService.propagateKeys$.subscribe(
+            (keys: string[]) => this._resetCells(keys)
+        );
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
-        this._sortCells(this._tableService.propagateKeys$.getValue());
+        this._resetCells(this._tableService.propagateKeys$.getValue());
     }
 
-    private _sortCells(keys: string[]): void {
+    /** @hidden */
+    private _resetCells(keys: string[]): void {
         if (this.cells && keys && keys.length > 0) {
 
-            this._handleElements(keys);
+            this._changeVisibility(keys);
 
-            const newCells = this.cells.toArray().sort(((a, b) => this._sortMethod(a, b, keys)));
+            const sortedCells = this.cells.toArray().sort(((a, b) => this._sortMethod(a, b, keys)));
 
-            this.cells.reset(newCells);
+            this.cells.reset(sortedCells);
+
             this._sortNativeElements();
+
             this._changeDetRef.detectChanges();
         }
     }
 
+    /** @hidden */
     private _sortMethod(a: TableCellDirective, b: TableCellDirective, keys: string[]): number {
         if (keys.findIndex(_key => _key === a.key) <
             keys.findIndex(_key => _key === b.key)) {
@@ -70,21 +77,22 @@ export class TableRowDirective implements AfterViewInit {
         }
     }
 
+    /** @hidden */
     private _sortNativeElements(): void {
-        this.cells
-            .forEach(cell =>
-                cell.elementRef.nativeElement.parentNode.appendChild(cell.elementRef.nativeElement)
-            )
-        ;
+        this.cells.forEach(cell =>
+            cell.elementRef.nativeElement.parentNode.appendChild(cell.elementRef.nativeElement)
+        );
     }
 
-    private _handleElements(keys: string[]): void {
-        this.cells.forEach(cell => cell.elementRef.nativeElement.classList.remove(Hidden_Class_Name))
+    /** @hidden */
+    private _changeVisibility(keys: string[]): void {
+        this.cells.forEach(cell => cell.elementRef.nativeElement.classList.remove(Hidden_Class_Name));
         const notFoundElements: TableCellDirective[] = this.cells.filter(cell => !keys.find(key => key === cell.key));
-        notFoundElements.forEach(element => this._removeElement(element.elementRef.nativeElement));
+        notFoundElements.forEach(this._hideElement);
     }
 
-    private _removeElement(nativeElement: any): void {
-        nativeElement.classList.add(Hidden_Class_Name);
+    /** @hidden */
+    private _hideElement(element: TableCellDirective): void {
+        element.elementRef.nativeElement.classList.add(Hidden_Class_Name)
     }
 }

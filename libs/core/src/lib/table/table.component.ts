@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { TableService } from './table.service';
 
 /**
@@ -18,7 +18,7 @@ import { TableService } from './table.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ TableService ]
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements AfterViewInit {
     /** @hidden */
     @HostBinding('class.fd-table')
     fdTableClass: boolean = true;
@@ -48,7 +48,7 @@ export class TableComponent implements OnInit {
     @Input()
     popIn: boolean = false;
 
-    /** */
+    /** List of keys that identifies single columns */
     @Input()
     keys: string[];
 
@@ -57,14 +57,16 @@ export class TableComponent implements OnInit {
     ) {}
 
     /** @hidden */
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         this._propagateKeys(this.keys);
     }
 
+    /** Method that sorts and changes visible state of particular cells  */
     reset(keys: string[]): void {
         this._propagateKeys(keys);
     }
 
+    /** @hidden */
     private _propagateKeys(keys: string[]): void {
         if (keys) {
             this._tableService.changeKeys([...keys]);

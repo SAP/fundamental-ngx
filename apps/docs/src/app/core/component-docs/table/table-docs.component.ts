@@ -161,7 +161,7 @@ export class TableDocsComponent {
             component: 'SortTableByPipe',
             code: tableColumnSortPipeTs,
             pipe: true,
-            fileName: 'table-example-sort',
+            fileName: 'table-example-sorting',
             name: 'Sort Pipe'
         },
         {

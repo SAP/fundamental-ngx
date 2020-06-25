@@ -13,4 +13,14 @@ describe('TableServiceService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it ('should propagate keys', () => {
+      const keys = ['test1', 'test2'];
+
+      spyOn(service.propagateKeys$, 'next');
+
+      service.changeKeys(keys);
+
+      expect(service.propagateKeys$.next).toHaveBeenCalledWith(keys);
+  })
 });
