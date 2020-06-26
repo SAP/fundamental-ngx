@@ -11,6 +11,13 @@ import {
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
+/**
+ * Split Menu Button implementation based on the
+ * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Link-Component-Technical-Design
+ * documents.
+ *
+ *
+ */
 export type LinkType = 'standard' | 'emphasized';
 export type NavigationTarget = '_blank' | '_self' | '_parent' | '_top' | 'framename';
 const VALID_INPUT_TYPES = ['standard', 'emphasized'];
