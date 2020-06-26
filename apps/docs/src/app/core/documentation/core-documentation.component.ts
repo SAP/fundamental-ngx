@@ -65,7 +65,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/time', name: 'Time' },
             { url: 'core/timePicker', name: 'Time Picker' },
             { url: 'core/switch', name: 'Switch' },
-            { url: 'core/token', name: 'Token' }
+            { url: 'core/token', name: 'Token' },
+            { url: 'core/toolbar', name: 'Toolbar' }
             // { url: 'core/tree', name: 'Tree' }
         ];
 

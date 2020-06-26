@@ -301,6 +301,11 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/token/token-docs.module').then((m) => m.TokenDocsModule)
             },
             {
+                path: 'toolbar',
+                loadChildren: () =>
+                    import('./component-docs/toolbar/toolbar-docs.module').then((m) => m.ToolbarDocsModule)
+            },
+            {
                 path: 'tree',
                 loadChildren: () => import('./component-docs/tree/tree-docs.module').then((m) => m.TreeDocsModule)
             }

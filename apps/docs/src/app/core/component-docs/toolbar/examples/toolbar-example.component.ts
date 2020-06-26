@@ -1,0 +1,37 @@
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'fd-toolbar-type-example',
+    templateUrl: './toolbar-type-example.component.html'
+})
+export class ToolbarTypeExampleComponent {}
+
+@Component({
+    selector: 'fd-toolbar-title-example',
+    templateUrl: './toolbar-title-example.component.html'
+})
+export class ToolbarTitleExampleComponent {}
+
+@Component({
+    selector: 'fd-toolbar-spacer-example',
+    templateUrl: './toolbar-spacer-example.component.html'
+})
+export class ToolbarSpacerExampleComponent {}
+
+@Component({
+    selector: 'fd-toolbar-separator-example',
+    templateUrl: './toolbar-separator-example.component.html'
+})
+export class ToolbarSeparatorExampleComponent {}
+
+@Component({
+    selector: 'fd-toolbar-overflow-example',
+    templateUrl: './toolbar-overflow-example.component.html'
+})
+export class ToolbarOverflowExampleComponent {}
+
+@Component({
+    selector: 'fd-toolbar-size-example',
+    templateUrl: './toolbar-size-example.component.html'
+})
+export class ToolbarSizeExampleComponent {}
