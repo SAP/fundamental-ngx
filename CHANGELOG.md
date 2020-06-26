@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.4...v0.20.0-rc.5) (2020-06-26)
+
+
+### Bug Fixes
+
+* simplify Panel's implementation ([#2719](https://github.com/SAP/fundamental-ngx/issues/2719)) ([7f33da0](https://github.com/SAP/fundamental-ngx/commit/7f33da09c051861b8c0907ffcbfd24d6041014ba))
+
 ## [0.20.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.3...v0.20.0-rc.4) (2020-06-25)
 
 
