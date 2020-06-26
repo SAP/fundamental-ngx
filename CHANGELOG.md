@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.7...v0.20.0-rc.8) (2020-06-26)
+
+
+### Features
+
+* introduce toolbar component ([#2657](https://github.com/SAP/fundamental-ngx/issues/2657)) ([f5eebe7](https://github.com/SAP/fundamental-ngx/commit/f5eebe7609afd67a47d0ced58f3465918130ae27))
+
 ## [0.20.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.6...v0.20.0-rc.7) (2020-06-26)
 
 
