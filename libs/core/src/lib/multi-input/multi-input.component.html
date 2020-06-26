@@ -34,8 +34,14 @@
         [button]="true"
         [compact]="compact"
         [disabled]="disabled"
+        [isExpanded]="open && !mobile"
+        [isControl]="true"
+        [glyph]="glyph"
         (click)="openChangeHandle(!open || mobile)">
-        <fd-tokenizer [compact]="compact" [class]="'fd-multi-input-tokenizer-custom'" [glyph]="glyph">
+        <fd-tokenizer [compact]="compact"
+                      class="fd-multi-input-tokenizer-custom"
+                      [class.fd-multi-input-tokenizer-custom--compact]="compact"
+        >
             <fd-token
                 *ngFor="let token of selected"
                 [compact]="compact"
