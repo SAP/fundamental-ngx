@@ -82,9 +82,8 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
         @Optional() private notificationConfig: NotificationConfig,
         @Optional() private notificationRef: NotificationRef
     ) {
-        // @ts-ignore
-        this._setNotificationConfig(notificationConfig);
         super(elRef);
+        this._setNotificationConfig(notificationConfig);
     }
 
     ngAfterViewInit(): void {
