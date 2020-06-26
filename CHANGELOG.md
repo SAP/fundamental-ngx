@@ -1,6 +1,13 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.19.2](https://github.com/SAP/fundamental-ngx/compare/v0.19.1...v0.19.2) (2020-06-26)
+
+
+### Bug Fixes
+
+* super call error when using NotificationComponent ([#2756](https://github.com/SAP/fundamental-ngx/issues/2756)) ([8b1044d](https://github.com/SAP/fundamental-ngx/commit/8b1044d4b03ba6eb05ba8ff1e2a8027fb9787440))
 
 <a name="0.19.1"></a>
 ## [0.19.1](https://github.com/SAP/fundamental-ngx/compare/v0.19.0...v0.19.1) (2020-06-24)
