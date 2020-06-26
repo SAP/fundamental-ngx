@@ -4,7 +4,6 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
-    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
@@ -16,9 +15,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TabPanelComponent } from './tab/tab-panel.component';
-import { merge, Subject, Subscription, timer } from 'rxjs';
+import { merge, Subject, timer } from 'rxjs';
 import { TabsService } from './tabs.service';
 import { filter, takeUntil } from 'rxjs/operators';
+import { TabLinkDirective } from './tab-link/tab-link.directive';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -44,8 +44,8 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     panelTabs: QueryList<TabPanelComponent>;
 
     /** @hidden */
-    @ViewChildren('tabLink')
-    tabLinks: QueryList<ElementRef>;
+    @ViewChildren(TabLinkDirective)
+    tabLinks: QueryList<TabLinkDirective>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -73,7 +73,8 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 
-    constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {}
+    constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -101,7 +102,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
      * @param tabIndex Index of the tab to select.
      */
     selectTab(tabIndex: number): void {
-        if (this._isIndexInRange(tabIndex)) {
+        if (this._canBeSelected(tabIndex)) {
             timer(10)
                 .pipe(takeUntil(this._onDestroy$))
                 .subscribe(() => {
@@ -116,8 +117,8 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    tabHeaderClickHandler(tabIndex: number): void {
-        if (this.selectedIndex !== tabIndex) {
+    tabHeaderClickHandler(tabIndex: number, disabled?: boolean): void {
+        if (this.selectedIndex !== tabIndex && !disabled) {
             this.selectTab(tabIndex);
         }
     }
@@ -127,7 +128,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
         this._tabsService.tabHeaderKeyHandler(
             index,
             event,
-            this.tabLinks.map((tab) => tab.nativeElement)
+            this.tabLinks.map(tab => tab.elementRef.nativeElement)
         );
     }
 
@@ -181,5 +182,13 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
         if (this._changeRef && !this._changeRef['destroyed']) {
             this._changeRef.detectChanges();
         }
+    }
+
+    private _isDisabled(index: number): boolean {
+        return this.panelTabs.toArray()[index].disabled;
+    }
+
+    private _canBeSelected(index: number): boolean {
+        return this._isIndexInRange(index) && !this._isDisabled(index);
     }
 }

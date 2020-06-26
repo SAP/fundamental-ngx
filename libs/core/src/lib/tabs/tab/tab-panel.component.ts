@@ -73,6 +73,10 @@ export class TabPanelComponent implements OnChanges {
     @Input()
     header: boolean = false;
 
+    /** TODO */
+    @Input()
+    disabled: boolean = false;
+
     /** Semantic type of the tab item */
     @Input()
     tabState: TabItemState;

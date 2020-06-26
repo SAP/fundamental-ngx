@@ -30,6 +30,7 @@ export class TabLinkDirective extends AbstractFdNgxClass {
      */
     @Input()
     @HostBinding('attr.aria-disabled')
+    @HostBinding('class.is-disabled')
     disabled: boolean;
 
     /** Event Emitted always when, any keyboard event is dispatched on this element */

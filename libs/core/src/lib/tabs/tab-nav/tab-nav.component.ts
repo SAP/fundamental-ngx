@@ -17,7 +17,7 @@ import { TabsService } from '../tabs.service';
 import { merge, Subject } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -134,7 +134,10 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** @hidden */
     private _listenOnTabSelect(): void {
-        this._tabsService.tabSelected.pipe(takeUntil(this._onDestroy$)).subscribe((index) => this.selectTab(index));
+        this._tabsService.tabSelected.pipe(
+            takeUntil(this._onDestroy$),
+            filter(index => !this.tabLinks[index].disabled)
+        ).subscribe(index => this.selectTab(index));
     }
 
     /**
@@ -161,7 +164,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
                 this._tabsService.tabHeaderKeyHandler(
                     index,
                     event,
-                    this.tabLinks.map((link) => link.elementRef.nativeElement)
+                    this.tabLinks.map(link => link.elementRef.nativeElement)
                 )
             );
         });

@@ -90,6 +90,20 @@ describe('TabNavDirective', () => {
         expect(component.selectTab).toHaveBeenCalledWith(3);
     }));
 
+    it('should handle disabled state', fakeAsync(() => {
+        fixture.componentInstance.tabNavDirective.ngAfterContentInit();
+
+        spyOn(component, 'selectTab').and.callThrough();
+
+        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'ArrowRight', preventDefault: () => {} });
+        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'Enter', preventDefault: () => {} });
+
+        tick(10);
+        fixture.detectChanges();
+
+        expect(component.selectTab).toHaveBeenCalledWith(3);
+    }));
+
     it('should call select tab on service event', fakeAsync(() => {
         component.ngAfterContentInit();
         component.selectTab(1);
