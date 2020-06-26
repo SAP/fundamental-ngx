@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.8...v0.20.0-rc.9) (2020-06-26)
+
+
+### Bug Fixes
+
+* Change addon place on multi input, remove doubled padding from dropdown list on multi input ([#2714](https://github.com/SAP/fundamental-ngx/issues/2714)) ([3037891](https://github.com/SAP/fundamental-ngx/commit/30378910cf455879fa26f9c8b69f82e82af48308))
+
 ## [0.20.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.7...v0.20.0-rc.8) (2020-06-26)
 
 
