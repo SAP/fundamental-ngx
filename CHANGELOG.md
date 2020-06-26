@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.6...v0.20.0-rc.7) (2020-06-26)
+
+
+### Bug Fixes
+
+* only display "show all" text when options have been filtered ([#2575](https://github.com/SAP/fundamental-ngx/issues/2575)) ([9400387](https://github.com/SAP/fundamental-ngx/commit/94003878a280d525140af8e3af0c53625f7381c6))
+
 ## [0.20.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.5...v0.20.0-rc.6) (2020-06-26)
 
 
