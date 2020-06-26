@@ -374,6 +374,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     showAllClicked(event: MouseEvent): void {
         event.preventDefault();
+        event.stopPropagation();
         this.searchTerm = '';
         this.handleSearchTermChange();
     }
