@@ -1,4 +1,13 @@
-import { AfterViewInit, ChangeDetectorRef, ContentChildren, Directive, HostBinding, Input, QueryList } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    ContentChildren,
+    Directive,
+    HostBinding,
+    Input,
+    OnDestroy,
+    QueryList
+} from '@angular/core';
 import { TableCellDirective } from './table-cell.directive';
 import { TableService } from '../table.service';
 
@@ -8,7 +17,7 @@ export const Hidden_Class_Name = 'fd-table-hidden';
 @Directive({
     selector: '[fdTableRow], [fd-table-row]'
 })
-export class TableRowDirective implements AfterViewInit {
+export class TableRowDirective implements AfterViewInit, OnDestroy {
 
     @ContentChildren(TableCellDirective)
     cells: QueryList<TableCellDirective>;
@@ -49,6 +58,11 @@ export class TableRowDirective implements AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         this._resetCells(this._tableService.propagateKeys$.getValue());
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._tableService.propagateKeys$.unsubscribe();
     }
 
     /** @hidden */
