@@ -80,7 +80,7 @@ fdescribe('TableRowDirective', () => {
 
         keys = component.keys.reverse();
 
-        (<any>component.tableRow)._sortCells(keys);
+        (<any>component.tableRow)._resetCells(keys);
 
         fixture.detectChanges();
 
@@ -93,7 +93,7 @@ fdescribe('TableRowDirective', () => {
             component.keys[2]
         ];
 
-        (<any>component.tableRow)._sortCells(keys);
+        (<any>component.tableRow)._resetCells(keys);
 
         fixture.detectChanges();
 
@@ -109,7 +109,7 @@ fdescribe('TableRowDirective', () => {
 
         keys = component.keys;
 
-        (<any>component.tableRow)._sortCells(keys);
+        (<any>component.tableRow)._resetCells(keys);
 
         fixture.detectChanges();
 
@@ -119,7 +119,7 @@ fdescribe('TableRowDirective', () => {
 
         keys = component.keys;
 
-        (<any>component.tableRow)._sortCells(keys);
+        (<any>component.tableRow)._resetCells(keys);
 
         fixture.detectChanges();
 
