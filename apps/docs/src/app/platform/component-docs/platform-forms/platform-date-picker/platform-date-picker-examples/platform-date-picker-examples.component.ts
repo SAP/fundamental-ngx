@@ -22,6 +22,12 @@ export class PlatformDatePickerExampleComponent {
         birthday: this.birthday,
         holiday: this.holiday
     };
+
+    // Template driven form
+    disableddate = '';
+    birthdayPicker = ''
+    holidayPicker = ''
+
     constructor() {}
 
     public save(value: any): void {

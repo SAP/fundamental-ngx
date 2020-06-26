@@ -208,13 +208,17 @@ export class DatePickerComponent extends BaseInput {
         this._cd.detectChanges();
     }
 
-    setDisabledState(isDisabled: boolean) {
-        if (this.ngControl.disabled !== isDisabled && isDisabled) {
-            this.ngControl.control.disable();
+    ngOnInit(): void {
+        // initialize placeholder
+        if (!this.placeholder) {
+            this.placeholder = 'mm/dd/yyyy';
         }
-        super.setDisabledState(isDisabled);
     }
 
+    /**
+     * validates date on date change.
+     * @param value FdDate | FdRangeDate
+     */
     public handleDateChange(value: FdDate | FdRangeDate): void {
         this.onTouched();
 
