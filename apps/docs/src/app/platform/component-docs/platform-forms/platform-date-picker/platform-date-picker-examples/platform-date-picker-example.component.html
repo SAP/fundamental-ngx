@@ -1,3 +1,4 @@
+<h3>Date Picker with Reactive Form.</h3>
 <fdp-form-group #ffg [formGroup]="datePickerForm" [object]="data" (onSubmit)="save(ffg)" [multiLayout]="true">
     <fdp-form-field
         #ffl1
@@ -91,3 +92,52 @@
 
 <p>Journey Start Date: {{ datePickerForm.get('journeydate').value?.start?.toDateString() }}</p>
 <span>Journey End Date: {{ datePickerForm.get('journeydate').value?.end?.toDateString() }}</span>
+
+<separator></separator>
+<h3>Date Picker with Template Driven Form.</h3>
+<!--Template Driven Form-->
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'birthday'" zone="zLeft" rank="1" [required]="true" [label]="'Birth Date:'">
+        <fdp-date-picker
+            [name]="'birthday'"
+            [type]="'single'"
+            [format]="'dd/MM/yyyy'"
+            [allowNull]="false"
+            [(ngModel)]="birthdayPicker"
+        >
+            Birthday:
+        </fdp-date-picker>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'holiday'" zone="zLeft" rank="2" [required]="true" [label]="'Holiday:'">
+        <fdp-date-picker
+            [name]="'holiday'"
+            [type]="'range'"
+            [format]="'MM/dd/yyyy'"
+            [allowNull]="false"
+            [contentDensity]="'compact'"
+            [placeholder]="'When are you going to holiday?'"
+            [(ngModel)]="holidayPicker"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+
+    <fdp-form-field [id]="'disableddate'" zone="zRight" rank="1" [label]="'Disabled Date Picker:'">
+        <fdp-date-picker
+            [name]="'disableddate'"
+            [type]="'single'"
+            [format]="'dd/MM/yyyy'"
+            [disabled]="true"
+            [(ngModel)]="disableddate"
+        ></fdp-date-picker>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span>Value is required</span>
+        </ng-container>
+    </ng-template>
+</fdp-form-group>
+
+<p>Birthday: {{ birthdayPicker | json }}</p>
+<p>Holiday Date: {{ holidayPicker | json }}</p>
