@@ -16,7 +16,7 @@ describe('MenuButtonComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
-            declarations: [MenuButtonComponent],
+            declarations: [MenuButtonComponent]
         }).compileComponents();
     }));
 
@@ -44,7 +44,7 @@ describe('MenuButtonComponent', () => {
         <fdp-menu-button [contentDensity]="size" [disabled]="disabled" [type]="type">
             Standard Button with long text
         </fdp-menu-button>
-    `,
+    `
 })
 class DisabledMenuButtonComponent {
     @Input()
@@ -66,7 +66,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
-            declarations: [DisabledMenuButtonComponent, MenuButtonComponent],
+            declarations: [DisabledMenuButtonComponent, MenuButtonComponent]
         }).compileComponents();
     }));
 
@@ -113,7 +113,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
             <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">Second Item</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
         </fdp-menu>
-    `,
+    `
 })
 class TestMenuButtonComponent {
     @Input()
@@ -154,7 +154,7 @@ describe('Menu Button click on Item select', () => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
             declarations: [TestMenuButtonComponent, MenuButtonComponent],
-            providers: [RtlService],
+            providers: [RtlService]
         }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
