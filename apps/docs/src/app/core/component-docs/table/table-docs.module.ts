@@ -10,7 +10,14 @@ import { TableColumnSortingExampleComponent } from './examples/table-column-sort
 import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
 import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
-import { CheckboxModule, ListModule, ObjectStatusModule, TableModule, PaginationModule } from '@fundamental-ngx/core';
+import {
+    CheckboxModule,
+    ListModule,
+    ObjectStatusModule,
+    TableModule,
+    PaginationModule,
+    ToolbarModule, DialogModule
+} from '@fundamental-ngx/core';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
 import { TableActivableExampleComponent } from './examples/table-activable-example.component';
@@ -19,6 +26,7 @@ import { TablePopinExampleComponent } from './examples/table-popin-example/table
 import { TablePaginationExampleComponent } from './examples/table-pagination-example.component';
 import { SortTableByPipe } from './examples/table-example-sort.pipe';
 import { FilterTableByPipe } from './examples/table-example-filter.pipe';
+import { TableToolbarExampleComponent } from './examples/table-toolbar-example.component';
 
 const routes: Routes = [
     {
@@ -39,7 +47,9 @@ const routes: Routes = [
         CheckboxModule,
         ObjectStatusModule,
         PaginationModule,
-        ListModule
+        ListModule,
+        ToolbarModule,
+        DialogModule
     ],
     exports: [RouterModule, SortTableByPipe, FilterTableByPipe],
     declarations: [
@@ -56,6 +66,7 @@ const routes: Routes = [
         TableSemanticExampleComponent,
         TablePopinExampleComponent,
         TablePaginationExampleComponent,
+        TableToolbarExampleComponent,
         FilterTableByPipe,
         SortTableByPipe
     ]

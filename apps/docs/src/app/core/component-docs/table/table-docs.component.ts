@@ -12,6 +12,8 @@ import * as tableColumnSortPipeTs from '!raw-loader!./examples/table-example-sor
 import * as tableColumnFilterPipeTs from '!raw-loader!./examples/table-example-filter.pipe.ts';
 import * as tableActivableHtmlSrc from '!raw-loader!./examples/table-activable-example.component.html';
 import * as tableActivableTsSrc from '!raw-loader!./examples/table-activable-example.component.ts';
+import * as tableToolbarHtmlSrc from '!raw-loader!./examples/table-toolbar-example.component.html';
+import * as tableToolbarTsSrc from '!raw-loader!./examples/table-toolbar-example.component.ts';
 import * as tableCheckHtml from '!raw-loader!./examples/table-checkboxes-example.component.html';
 import * as tableCheckTs from '!raw-loader!./examples/table-checkboxes-example.component.ts';
 import * as tableSemanticHtml from '!raw-loader!./examples/table-semantic-example.component.html';
@@ -147,6 +149,20 @@ export class TableDocsComponent {
             component: 'TableActivableExampleComponent',
             code: tableActivableTsSrc,
             fileName: 'table-activable-example'
+        }
+    ];
+
+    tableToolbarExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableToolbarHtmlSrc,
+            fileName: 'table-toolbar-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableToolbarExampleComponent',
+            code: tableToolbarTsSrc,
+            fileName: 'table-toolbar-example'
         }
     ];
 
