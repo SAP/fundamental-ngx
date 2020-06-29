@@ -7,7 +7,7 @@ import { LinkModule } from '@fundamental-ngx/core';
 /** Standard link functionality tests */
 @Component({
     selector: 'fdp-link-test',
-    template: ` <fdp-link [href]="'https://www.google.com/'" [type]="'standard'">StandardLink</fdp-link> `
+    template: ` <fdp-link [href]="'https://www.google.com/'" [linktype]="'standard'">StandardLink</fdp-link> `
 })
 class TestComponent {
     constructor() {}
@@ -47,7 +47,7 @@ describe('LinkComponent', () => {
 /** Disabled link test */
 @Component({
     selector: 'fdp-disabled-link',
-    template: ` <fdp-link [href]="href" [type]="'emphasized'" [disabled]="true">DisabledLink</fdp-link> `
+    template: ` <fdp-link [href]="href" [linktype]="'emphasized'" [disabled]="true">DisabledLink</fdp-link> `
 })
 class DisabledLinkComponent {
     @ViewChild(LinkComponent)
