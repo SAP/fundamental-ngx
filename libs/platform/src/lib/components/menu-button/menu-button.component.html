@@ -8,8 +8,8 @@
     [disabled]="disabled"
     (click)="onButtonClick($event)"
     [fdType]="type"
+    tabindex="0"
+    [attr.title]="title"
 >
-    <span [ngStyle]="{ width: width }" (click)="onLabelClick($event)">
-        <ng-content></ng-content>
-    </span>
+    <ng-content></ng-content>
 </button>

@@ -1,23 +1,18 @@
 <header>Checkbox</header>
 <description>
     This is an extension of the Checkbox component present in
-    <a href="https://sap.github.io/fundamental-ngx/#/core/checkbox">ngx-core</a>. <br />
-    It is wrapper implemention to work with
-    <a href="https://sap.github.io/fundamental-ngx/#/platform/form">Platform Form</a>. It can also be used standalone
-    without form. <br />
+    <a [routerLink]="'/core/checkbox'">ngx-core</a>. <br />
     For usecase of Multiple checkboxes selection, please see
-    <a href="https://sap.github.io/fundamental-ngx/#/platform/checkbox-group">Checkbox Group</a>.
+    <a [routerLink]="'/platform/checkbox'">Checkbox Group</a>.
 
-    <div>
-        <h3 style="margin-bottom: 1rem;">Platform specific enhancements:</h3>
-        <ul style="margin-top: 0%;">
-            <li>
-                Platform checkbox takes checked state value as a property. so when checkbox is in checked state, control
-                value will be set to value of checkbox.
-            </li>
-            <li>Platform checkbox can be used outside form using "checked" property two way binding.</li>
-        </ul>
-    </div>
+    <h3>Platform specific enhancements:</h3>
+    <ul>
+        <li>
+            Platform checkbox takes checked state value as a property. so when checkbox is in checked state, control
+            value will be set to value of checkbox.
+        </li>
+        <li>Platform checkbox can be used outside form using "checked" property two way binding.</li>
+    </ul>
 </description>
 <import module="PlatformCheckboxModule"></import>
 

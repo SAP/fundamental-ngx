@@ -9,8 +9,6 @@ import {
     TemplateRef,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    AfterViewInit,
-    OnInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
@@ -112,11 +110,14 @@ export class InputGroupComponent implements ControlValueAccessor {
     state: FormStates;
 
     /**
-     * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
-     * @hidden
+     * Whether the input group is a popover control
      */
     @Input()
-    inShellbar: boolean = false;
+    isControl: boolean = false;
+
+    /** @hidden */
+    @Input()
+    isExpanded: boolean = false;
 
     /** Event emitted when the add-on button is clicked. */
     @Output()
@@ -127,6 +128,12 @@ export class InputGroupComponent implements ControlValueAccessor {
 
     /** @hidden */
     inputTextValue: string;
+
+    /**
+     * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
+     * @hidden
+     */
+    inShellbar: boolean = false;
 
     /** @hidden */
     onChange: any = () => {};
@@ -165,6 +172,12 @@ export class InputGroupComponent implements ControlValueAccessor {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
+    setInShellbar(value: boolean): void {
+        this.inShellbar = value;
         this.changeDetectorRef.markForCheck();
     }
 

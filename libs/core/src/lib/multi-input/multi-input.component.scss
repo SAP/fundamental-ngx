@@ -1,7 +1,10 @@
 //TODO evaluate whether this should be in fd-styles
 
 .fd-multi-input-tokenizer-custom {
-    width: 100%;
+    width: calc(100% - 2.25rem);
+    &--compact {
+        width: calc(100% - 2rem);
+    }
 }
 
 .fd-multi-input-input-group-custom {
@@ -13,6 +16,7 @@
 
     .fd-multi-input-item {
         cursor: pointer;
+        padding: 0;
     }
 
     .fd-multi-input-popover-size {

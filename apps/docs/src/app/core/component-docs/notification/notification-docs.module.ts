@@ -20,7 +20,7 @@ const routes: Routes = [
         component: NotificationDocsHeaderComponent,
         children: [
             { path: '', component: NotificationDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.multiInput } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.notification } }
         ]
     }
 ];

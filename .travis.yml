@@ -1,6 +1,6 @@
 language: node_js
 sudo: required
-node_js: 10.19.0
+node_js: 12.13.1
 cache: npm
 dist: trusty
 addons:
@@ -16,7 +16,7 @@ jobs:
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     script: npm run lint && npm run test && npm run test:coveralls && npm run build-pack-library
   - stage: "Pre-release"
-    if: branch = master
+    if: branch = master AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     before_deploy:
     - git checkout master

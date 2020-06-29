@@ -54,7 +54,7 @@ export const Notifications = () => ({
                 </div>
             </div>
             <fd-notification-footer>
-                <button fd-button [options]="'light'">                        
+                <button fd-button [fdType]="'transparent'">
                     {{callToActionText}}
                 </button>
                 <div fd-notification-actions>

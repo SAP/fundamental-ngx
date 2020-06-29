@@ -9,9 +9,10 @@ import { ComboboxComponent } from './combobox.component';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { ListModule } from '../list/list.module';
+import { AutoCompleteDirective } from './auto-complete.directive';
 
 @NgModule({
-    declarations: [ComboboxComponent],
+    declarations: [ComboboxComponent, AutoCompleteDirective],
     imports: [
         CommonModule,
         PopoverModule,

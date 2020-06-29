@@ -1,5 +1,3 @@
-
-
 <div class="fd-multi-input fd-multi-input-custom">
     <div class="fd-multi-input-field">
         <ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
@@ -36,8 +34,14 @@
         [button]="true"
         [compact]="compact"
         [disabled]="disabled"
+        [isExpanded]="open && !mobile"
+        [isControl]="true"
+        [glyph]="glyph"
         (click)="openChangeHandle(!open || mobile)">
-        <fd-tokenizer [compact]="compact" [class]="'fd-multi-input-tokenizer-custom'" [glyph]="glyph">
+        <fd-tokenizer [compact]="compact"
+                      class="fd-multi-input-tokenizer-custom"
+                      [class.fd-multi-input-tokenizer-custom--compact]="compact"
+        >
             <fd-token
                 *ngFor="let token of selected"
                 [compact]="compact"
@@ -68,7 +72,7 @@
 <ng-template #list>
     <ul
         fd-list
-        class="fd-multi-input-menu-overflow"
+        class="fd-list--multi-input fd-multi-input-menu-overflow"
         *ngIf="displayedValues && displayedValues.length"
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
     >
@@ -89,7 +93,7 @@
                     ></span>
             </fd-checkbox>
         </li>
-        <li fd-list-footer class="fd-multi-input-show-all" *ngIf="showAllButton">
+        <li fd-list-item class="fd-multi-input-show-all" *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)">
             <a fd-link (click)="showAllClicked($event)" href>Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>

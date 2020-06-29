@@ -20,20 +20,6 @@ export type ButtonType =
     | 'transparent'
     | 'emphasized'
     | 'menu';
-export type ButtonOptions = 'light' | 'emphasized' | 'menu';
-
-// TODO remove in 0.17.0
-function replaceLightWithTransparent(option: string): string {
-    return option.replace('light', 'transparent');
-}
-
-// TODO remove in 0.17.0
-export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): string {
-    if (Array.isArray(options)) {
-        return options.map((option) => `fd-button--${this.replaceLightWithTransparent(option)}`).join(' ');
-    }
-    return `fd-button--${replaceLightWithTransparent(options)}`;
-}
 
 /**
  * Button directive, used to enhance standard HTML buttons.
@@ -95,20 +81,6 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
     @Input()
     public fdMenu: boolean = false;
 
-    private _options: ButtonOptions | ButtonOptions[];
-    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.'
-     * @deprecated
-     * Will be removed in 0.17.0.
-     * Use 'fdType' instead.
-     */
-
-    @Input()
-    public options(opt: ButtonOptions | ButtonOptions[]) {
-        console.warn(`fd-button options property is deprecated and will be removed in 0.17.0.
-        Please follow the breaking changes.`);
-        this._options = opt;
-    }
-
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
@@ -135,7 +107,6 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
             this.fdType ? `fd-button--${this.fdType}` : '',
             this.compact ? 'fd-button--compact' : '',
             this.fdMenu ? `fd-button--menu` : '',
-            this._options ? getOptionCssClass(this._options) : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.class
         ]

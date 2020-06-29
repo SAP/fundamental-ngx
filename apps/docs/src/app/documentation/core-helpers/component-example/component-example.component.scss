@@ -10,12 +10,13 @@ rtl-switch {
     padding-right: 20px;
 }
 
-.fd-tile-content-example {
+.docs-tile-content-example {
     padding: 16px;
 }
 
-.fd-tile.fd-tile-example-background {
-    background-color: var(--sapBackgroundColor);
+.docs-tile.docs-tile-example-background {
+    background-color: #f7f7f7;
+    background-color: var(--sapBackgroundColor, #f7f7f7);
 }
 
 span.fd-badge,

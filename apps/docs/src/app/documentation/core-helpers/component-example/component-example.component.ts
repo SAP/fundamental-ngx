@@ -6,8 +6,8 @@ let componentExampleUniqueId: number = 0;
 @Component({
     selector: 'component-example',
     template: `
-        <div class="fd-tile docs-component fd-tile-example-background" id="{{ id }}">
-            <div class="fd-tile__content fd-tile-content-example">
+        <div class="docs-tile docs-component docs-tile-example-background" id="{{ id }}">
+            <div class="docs-tile__content docs-tile-content-example">
                 <div class="component-example__features">
                     <rtl-switch [label]="id2"></rtl-switch>
                     <background-switch [label]="id"></background-switch>

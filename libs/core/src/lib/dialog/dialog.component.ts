@@ -67,7 +67,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
     @ContentChild(DialogHeaderComponent)
     set dialogHeaderConfig(component: DialogHeaderComponent) {
         if (component) {
-            component.dialogConfig = component.dialogConfig || this.dialogConfig;
+            component.dialogConfig = this.dialogConfig;
         }
     }
 
@@ -75,8 +75,8 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
     @ContentChild(DialogBodyComponent)
     set dialogBodyConfig(component: DialogBodyComponent) {
         if (component) {
-            component.dialogRef = component.dialogRef || this._dialogRef;
-            component.dialogConfig = component.dialogConfig || this.dialogConfig;
+            component.dialogRef = this._dialogRef;
+            component.dialogConfig = this.dialogConfig;
         }
     }
 
@@ -84,7 +84,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
     @ContentChild(DialogFooterComponent)
     set dialogFooterConfig(component: DialogFooterComponent) {
         if (component) {
-            component.dialogConfig = component.dialogConfig || this.dialogConfig;
+            component.dialogConfig = this.dialogConfig;
         }
     }
 

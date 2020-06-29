@@ -3,19 +3,18 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     HostBinding,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
-    SimpleChanges,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Output
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
-import { PanelService } from './panel.service';
 
 let panelUniqueId: number = 0;
+let panelExpandUniqueId: number = 0;
 
 /**
  * The panel is a container for grouping and displaying information
@@ -24,14 +23,13 @@ let panelUniqueId: number = 0;
  */
 @Component({
     // tslint:disable-next-line:component-selector
-    selector: '[fd-panel]',
+    selector: 'fd-panel',
     templateUrl: './panel.component.html',
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./panel.component.scss'],
-    providers: [PanelService],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDestroy {
+export class PanelComponent implements CssClassBuilder, OnChanges, OnInit {
     /** User's custom classes */
     @Input()
     class: string;
@@ -49,43 +47,37 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     @HostBinding('attr.id')
     id: string = 'fd-panel-' + panelUniqueId++;
 
+    /** Id of the expand button */
+    @Input()
+    expandId: string = 'fd-panel-expand-' + panelExpandUniqueId++;
+
+    /** aria-label of the expand button */
+    @Input()
+    expandAriaLabel: string;
+
+    /** aria-labelledby of the expand button */
+    @Input()
+    expandAriaLabelledBy: string;
+
     /** Whether the Panel Content is expanded */
-    @Input() expanded: boolean;
+    @Input()
+    expanded: boolean;
+
+    /** Output event triggered when the Expand button is clicked */
+    @Output()
+    expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
-    private _subscription: Subscription;
-
-    /** @hidden */
-    constructor(
-        private _cdRef: ChangeDetectorRef,
-        private _elementRef: ElementRef,
-        private _panelService: PanelService
-    ) {}
+    constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        this._subscription = this._panelService.expanded$.subscribe((value) => {
-            this.expanded = value;
-            this._cdRef.detectChanges();
-        });
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
-        this._panelService.updateExpanded(this.expanded);
-
-        if (changes && changes.expanded) {
-            this._panelService.updateExpanded(this.expanded);
-        }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (this._subscription) {
-            this._subscription.unsubscribe();
-        }
     }
 
     @applyCssClass
@@ -102,5 +94,11 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** Methods that toggles the Panel Content */
+    toggleExpand(): void {
+        this.expanded = !this.expanded;
+        this.expandedChange.emit(this.expanded);
     }
 }

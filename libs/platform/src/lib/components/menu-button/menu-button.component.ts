@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ViewEncapsulation
+} from '@angular/core';
 import { ButtonType } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
 
@@ -6,8 +14,14 @@ import { BaseComponent } from '../base';
     selector: 'fdp-menu-button',
     templateUrl: './menu-button.component.html',
     styleUrls: ['./menu-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class MenuButtonComponent extends BaseComponent {
+    /** text for tooltip */
+    @Input()
+    title: string;
+
     /** The Sap-icon to include in the menu-button */
     @Input()
     icon: string;
@@ -29,15 +43,6 @@ export class MenuButtonComponent extends BaseComponent {
      *  Handles menu-button click
      */
     public onButtonClick($event: any) {
-        this.buttonClicked.emit();
-    }
-
-    /**
-     * Stopping click event from label on disbled status
-     */
-    public onLabelClick($event: any) {
-        if (this.disabled) {
-            event.stopPropagation();
-        }
+        this.buttonClicked.emit($event);
     }
 }

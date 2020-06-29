@@ -523,3 +523,7 @@
     border-bottom-right-radius: .25rem;
     border-bottom-right-radius: var(--sapElement_BorderCornerRadius,.25rem)
 }
+
+.fd-list--dropdown {
+    max-width: 100%;
+}

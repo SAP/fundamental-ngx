@@ -14,6 +14,7 @@
     (keyup)="$event.stopPropagation()"
 />
 <label class="fd-checkbox__label"
+       #labelElement
        (click)="checkByClick()"
        [for]="inputId"
        [class.fd-checkbox__label--compact]="compact">
