@@ -18,3 +18,7 @@
         max-width: inherit;
     }
 }
+
+.fd-popover__body > :first-child {
+    border-radius: 0;
+}
