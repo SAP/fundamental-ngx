@@ -18,7 +18,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         this.components = [
             { url: 'core/action-bar', name: 'Action Bar' },
             { url: 'core/alert', name: 'Alert' },
-            { url: 'core/badgeLabel', name: 'Status Indicator' },
             { url: 'core/bar', name: 'Bar' },
             { url: 'core/breadcrumb', name: 'Breadcrumb' },
             { url: 'core/busyIndicator', name: 'Busy Indicator' },
