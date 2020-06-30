@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.12...v0.20.0-rc.13) (2020-06-30)
+
+
+### Bug Fixes
+
+* Add change detection, when passed null value on datepicker ([#2766](https://github.com/SAP/fundamental-ngx/issues/2766)) ([872f830](https://github.com/SAP/fundamental-ngx/commit/872f830a0e1ee60c7c36b30076f2ede437d8e5f2))
+
 ## [0.20.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.11...v0.20.0-rc.12) (2020-06-29)
 
 
