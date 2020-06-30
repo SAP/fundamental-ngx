@@ -7,35 +7,39 @@
         'fd-step-input--compact': compact
      }">
     <button fd-button
+            #decrementBtn
             fdType="transparent"
             class="fd-step-input__button"
             tabindex="-1"
             type="button"
             [compact]="compact"
-            [glyph]="decrementButtonIcon"
-            (click)="decrement()">
+            [title]="decrementButtonTitle"
+            [glyph]="decrementButtonIcon">
     </button>
-    <input [attr.aria-label]="ariaLabel"
+    <input #inputElement
            [name]="name"
            [id]="inputId"
            [title]="inputTitle"
-           [value]="viewValue"
            [class.fd-input--compact]="compact"
+           [attr.aria-label]="ariaLabel"
+           (blur)="onBlur.emit()"
+           (focusin)="onFocus.emit()"
            (keydown)="onKeyDown($event)"
+           (input)="trackInputValue($event)"
            (change)="onInputValueChange($event)"
            class="fd-input fd-input--no-number-spinner fd-step-input__input"
            type="text">
     <button fd-button
+            #incrementBtn
             fdType="transparent"
             class="fd-step-input__button"
             tabindex="-1"
             type="button"
             [compact]="compact"
-            [glyph]="incrementButtonIcon"
-            (click)="increment()">
+            [title]="incrementButtonTitle"
+            [glyph]="incrementButtonIcon">
     </button>
 </div>
 <span class="fd-form-label fd-form-label--unit-description">
-<!--    {{ unit }}-->
-    {{viewValue}}
+    {{ unit || currencySign }}
 </span>
