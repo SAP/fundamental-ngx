@@ -238,7 +238,7 @@ describe('StepInputComponent', () => {
     });
 
     it('should format values according to min max value limits', () => {
-        const context = {_max: 10, _min: 10, minFractionDigits: 2 };
+        const context = {_max: 10, _min: -10, minFractionDigits: 2 };
 
         expect(component['_checkValueLimits'].call(context, 12)).toEqual(10);
         expect(component['_checkValueLimits'].call(context, -12)).toEqual(-10);
