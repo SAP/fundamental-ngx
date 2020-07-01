@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { whenStable } from '../utils/tests/when-stable';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
+import { SelectComponent } from '@fundamental-ngx/core';
 
 const initialValue = 100;
 
@@ -61,20 +62,23 @@ class TestWrapperComponent {
 describe('StepInputComponent', () => {
     let element: ElementRef;
     let component: StepInputComponent;
+    let testComponent: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
             imports: [StepInputModule]
-        })
-            .compileComponents();
+        }).overrideComponent(SelectComponent, {
+            set: {changeDetection: ChangeDetectionStrategy.Default}
+        }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);
         component = fixture.componentInstance.stepInputComponent;
         element = fixture.componentInstance.stepInputElement;
+        testComponent = fixture.componentInstance;
         fixture.detectChanges();
     });
 
@@ -88,7 +92,7 @@ describe('StepInputComponent', () => {
 
         expect(component.value).toEqual(initialValue);
 
-        component.decrement();
+        component.increment();
         await whenStable(fixture);
 
         expect(component.value).toEqual(desiredValue);
@@ -130,13 +134,13 @@ describe('StepInputComponent', () => {
         const blurEventSpy = spyOn(component.onBlur, 'emit');
         const focusEventSpy = spyOn(component.onFocus, 'emit');
 
-        component.inputElement.nativeElement.click();
+        component.inputElement.nativeElement.focus();
 
         await whenStable(fixture);
 
         expect(focusEventSpy).toHaveBeenCalled();
 
-        fixture.nativeElement.click();
+        component.inputElement.nativeElement.blur();
 
         await whenStable(fixture);
 
@@ -144,17 +148,16 @@ describe('StepInputComponent', () => {
     });
 
     it('should display in compact mode', async () => {
-        component.compact = true;
+        testComponent.compact = true;
 
         await whenStable(fixture);
 
-        expect(component.inputElement.nativeElement.querySelector('.fd-step-input--compact')).toBeTruthy();
-        expect(component.incrementButton.nativeElement.querySelector('.fd-button--compact')).toBeTruthy();
-        expect(component.decrementButton.nativeElement.querySelector('.fd-button--compact')).toBeTruthy();
+        expect(element.nativeElement.querySelector('.fd-step-input--compact')).toBeTruthy();
+        expect(element.nativeElement.querySelectorAll('.fd-button--compact').length).toEqual(2);
     });
 
     it('should display in selected semantic state', async () => {
-        component.state = 'warning';
+        testComponent.state = 'warning';
 
         await whenStable(fixture);
 
@@ -166,34 +169,34 @@ describe('StepInputComponent', () => {
         const incrementButtonTitle = 'Inc Button Title';
         const decrementButtonTitle = 'Dec Button Title';
 
-        component.inputTitle = inputTitle;
-        component.incrementButtonTitle = incrementButtonTitle;
-        component.decrementButtonTitle = decrementButtonTitle;
+        testComponent.inputTitle = inputTitle;
+        testComponent.incrementButtonTitle = incrementButtonTitle;
+        testComponent.decrementButtonTitle = decrementButtonTitle;
 
         await whenStable(fixture);
 
-        expect(component.inputElement.nativeElement.querySelector(`[title]="${inputTitle}"`)).toBeTruthy();
-        expect(component.incrementButton.nativeElement.querySelector(`[title]="${incrementButtonTitle}"`)).toBeTruthy();
-        expect(component.decrementButton.nativeElement.querySelector(`[title]="${decrementButtonTitle}"`)).toBeTruthy();
+        expect(element.nativeElement.querySelector(`[title="${inputTitle}"]`)).toBeTruthy();
+        expect(element.nativeElement.querySelector(`[title="${incrementButtonTitle}"]`)).toBeTruthy();
+        expect(element.nativeElement.querySelector(`[title="${decrementButtonTitle}"]`)).toBeTruthy();
     });
 
     it('should use custom button icons', async () => {
         const incrementButtonIcon = 'arrow-up';
         const decrementButtonIcon = 'arrow-bottom';
 
-        component.incrementButtonIcon = incrementButtonIcon;
-        component.decrementButtonIcon = decrementButtonIcon;
+        testComponent.incrementButtonIcon = incrementButtonIcon;
+        testComponent.decrementButtonIcon = decrementButtonIcon;
 
         await whenStable(fixture);
 
-        expect(component.incrementButton.nativeElement.querySelector(`.sap-icon--${incrementButtonIcon}`)).toBeTruthy();
-        expect(component.decrementButton.nativeElement.querySelector(`.sap-icon--${decrementButtonIcon}`)).toBeTruthy();
+        expect(element.nativeElement.querySelector(`.sap-icon--${incrementButtonIcon}`)).toBeTruthy();
+        expect(element.nativeElement.querySelector(`.sap-icon--${decrementButtonIcon}`)).toBeTruthy();
     });
 
     it('should display unit', async () => {
         const unit = 'kg';
 
-        component.unit = unit;
+        testComponent.unit = unit;
 
         await whenStable(fixture);
 
@@ -203,7 +206,7 @@ describe('StepInputComponent', () => {
     it('should set id attribute', async () => {
         const id = 'custom-id';
 
-        component.inputId = id;
+        testComponent.inputId = id;
 
         await whenStable(fixture);
 
@@ -213,21 +216,11 @@ describe('StepInputComponent', () => {
     it('should set aria-label attribute', async () => {
         const ariaLabel = 'Number of elements';
 
-        component.ariaLabel = ariaLabel;
+        testComponent.ariaLabel = ariaLabel;
 
         await whenStable(fixture);
 
-        expect(element.nativeElement.querySelector(`[aria-label]="${ariaLabel}"`)).toBeTruthy();
-    });
-
-    it('should set aria-label attribute', async () => {
-        const ariaLabel = 'Number of elements';
-
-        component.ariaLabel = ariaLabel;
-
-        await whenStable(fixture);
-
-        expect(element.nativeElement.querySelector(`[aria-label]="${ariaLabel}"`)).toBeTruthy();
+        expect(element.nativeElement.querySelector(`[aria-label="${ariaLabel}"]`)).toBeTruthy();
     });
 
     it('should properly parse formatted value', () => {
@@ -242,6 +235,15 @@ describe('StepInputComponent', () => {
         const emptyFormattedValue = '';
 
         expect(component['_parseValue'](emptyFormattedValue)).toEqual(0);
+    });
+
+    it('should format values according to min max value limits', () => {
+        const context = {_max: 10, _min: 10, minFractionDigits: 2 };
+
+        expect(component['_parseValue'].call(context, 12)).toEqual(10);
+        expect(component['_parseValue'].call(context, -12)).toEqual(-10);
+        expect(component['_parseValue'].call(context, 1.121)).toEqual(1.12);
+        expect(component['_parseValue'].call(context, 1.129)).toEqual(1.13);
     });
 
 });
