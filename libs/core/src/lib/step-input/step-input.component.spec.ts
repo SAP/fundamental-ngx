@@ -240,10 +240,10 @@ describe('StepInputComponent', () => {
     it('should format values according to min max value limits', () => {
         const context = {_max: 10, _min: 10, minFractionDigits: 2 };
 
-        expect(component['_parseValue'].call(context, 12)).toEqual(10);
-        expect(component['_parseValue'].call(context, -12)).toEqual(-10);
-        expect(component['_parseValue'].call(context, 1.121)).toEqual(1.12);
-        expect(component['_parseValue'].call(context, 1.129)).toEqual(1.13);
+        expect(component['_checkValueLimits'].call(context, 12)).toEqual(10);
+        expect(component['_checkValueLimits'].call(context, -12)).toEqual(-10);
+        expect(component['_checkValueLimits'].call(context, 1.121)).toEqual(1.12);
+        expect(component['_checkValueLimits'].call(context, 1.129)).toEqual(1.13);
     });
 
 });
