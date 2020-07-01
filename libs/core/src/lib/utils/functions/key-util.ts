@@ -39,7 +39,8 @@ const keyMap: Map<string, { aliases: string[]; keyCode: number }> = new Map([
     ['Ctrl', { aliases: ['Ctrl', 'Control', 'Meta'], keyCode: CONTROL }],
     ['Meta', { aliases: ['Meta'], keyCode: META }],
     ['Shift', { aliases: ['Shift'], keyCode: SHIFT }],
-    ['Backspace', { aliases: ['Backspace'], keyCode: BACKSPACE }]
+    ['Backspace', { aliases: ['Backspace'], keyCode: BACKSPACE }],
+    ['Space', { aliases: ['Space', 'Spacebar', ' '], keyCode: SPACE }]
 ]);
 
 /**

@@ -35,6 +35,7 @@ import { DialogConfig, DIALOG_CONFIG } from '../dialog/dialog-utils/dialog-confi
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { CheckboxComponent } from '../checkbox/checkbox/checkbox.component';
 import { Subscription } from 'rxjs';
+import { TokenizerComponent } from '../token/tokenizer.component';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -209,6 +210,10 @@ export class MultiInputComponent implements
     searchInputElement: ElementRef;
 
     /** @hidden */
+    @ViewChild(TokenizerComponent)
+    tokenizer;
+
+    /** @hidden */
     displayedValues: any[] = [];
 
     /** @hidden */
@@ -359,6 +364,29 @@ export class MultiInputComponent implements
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
+    }
+
+    /** @hidden */
+    removeSelectedTokens(event: KeyboardEvent): void {
+        let foundSelected = false;
+        let allSelected = true;
+        if (KeyUtil.isKey(event, 'Delete') || KeyUtil.isKey(event, 'Backspace')) {
+            this.tokenizer.tokenList.forEach(token => {
+                if (token.selected) {
+                    foundSelected = true;
+                    this.handleSelect(false, token.elementRef.nativeElement.innerText);
+                } else {
+                    allSelected = false;
+                }
+            });
+            if (foundSelected) {
+                if (this.tokenizer.tokenList.length && !allSelected) {
+                    this.tokenizer.focusTokenElement(this.tokenizer.tokenList.length - 2);
+                } else {
+                    this.tokenizer.input.elementRef().nativeElement.focus();
+                }
+            }
+        }
     }
 
     /** @hidden */

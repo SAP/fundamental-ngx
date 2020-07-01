@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -28,9 +29,20 @@ export class TokenComponent {
     @Input()
     compact: boolean = false;
 
+    private _selected: boolean = false;
+
     /** Whether the token is selected. */
     @Input()
-    selected: boolean = false;
+    get selected(): boolean {
+        return this._selected;
+    };
+
+    set selected(val: boolean) {
+        if (this._selected !== val) {
+            this._cdRef.markForCheck();
+        }
+        this._selected = val;
+    }
 
     /** Whether the token is read-only. */
     @Input()
@@ -45,10 +57,12 @@ export class TokenComponent {
     onTokenClick: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    closeClickHandler(event): void {
-        event.stopPropagation();
-        if (!this.disabled) {
-            this.onCloseClick.emit(event);
+    closeClickHandler(event?): void {
+        if (event) {
+            event.stopPropagation();
+            if (!this.disabled) {
+                this.onCloseClick.emit(event);
+            }
         }
     }
 
@@ -57,5 +71,5 @@ export class TokenComponent {
         this.onTokenClick.emit(event);
     }
 
-    constructor(public elementRef: ElementRef) {}
+    constructor(public elementRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
 }

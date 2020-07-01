@@ -80,7 +80,7 @@ describe('TokenizerComponent', () => {
         component.handleKeyDown(event, component.tokenList.length - 1);
 
         expect(component.input.elementRef().nativeElement.focus).not.toHaveBeenCalled();
-        expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 2);
+        expect(component.focusTokenElement).toHaveBeenCalledWith(component.tokenList.length - 2);
     });
 
     it('should handleKeyDown on ArrowRight when last token is focused', () => {
@@ -102,7 +102,7 @@ describe('TokenizerComponent', () => {
         });
         component.handleKeyDown(event, component.tokenList.length - 2);
 
-        expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 1);
+        expect(component.focusTokenElement).toHaveBeenCalledWith(component.tokenList.length - 1);
     });
 
     it('should focus a token element', async () => {
@@ -118,7 +118,7 @@ describe('TokenizerComponent', () => {
             code: 'ArrowRight'
         });
 
-        component.focusTokenElement(event, 1);
+        component.focusTokenElement(1);
 
         await whenStable(fixture);
         await fixture.whenRenderingDone();

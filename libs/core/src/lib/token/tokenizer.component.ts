@@ -1,6 +1,6 @@
 import {
     AfterContentInit,
-    AfterViewChecked,
+    AfterViewChecked, AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -22,7 +22,7 @@ import { FormControlDirective } from '../form/form-control/form-control.directiv
 import { TokenComponent } from './token.component';
 import { RtlService } from '../utils/services/rtl.service';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder, KeyUtil } from '../utils/public_api';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -31,10 +31,12 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TokenizerComponent implements AfterViewChecked, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges {
+export class TokenizerComponent implements AfterViewChecked, AfterViewInit, AfterContentInit, OnDestroy,
+    CssClassBuilder, OnInit, OnChanges {
     /** user's custom classes */
     @Input()
     class: string;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
     tokenList: QueryList<TokenComponent>;
@@ -95,20 +97,30 @@ export class TokenizerComponent implements AfterViewChecked, AfterContentInit, O
     tokenListChangesSubscription: Subscription;
 
     /** @hidden */
+    tokenListClickSubscriptions: Subscription[] = [];
+
+    /** @hidden */
     hiddenCozyTokenCount: number = 0;
 
     /** @hidden */
-    ngAfterViewChecked(): void {
+    ngAfterViewInit(): void {
         if (this.input && this.input.elementRef()) {
             this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
                 this.handleKeyDown(event, this.tokenList.length);
             });
         }
+    }
+
+    /** @hidden */
+    ngAfterViewChecked(): void {
         if (this.tokenList) {
             this.previousTokenCount = this.tokenList.length;
         }
         this.handleTokenClickSubscriptions();
         // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
+        if (this.tokenListChangesSubscription) {
+            this.tokenListChangesSubscription.unsubscribe();
+        }
         this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
             this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
             this.previousTokenCount = this.tokenList.length;
@@ -135,14 +147,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterContentInit, O
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.tokenList.forEach((token) => {
-            if (token.onTokenClick) {
-                token.onTokenClick.unsubscribe();
-            }
-        });
         if (this.tokenListChangesSubscription) {
             this.tokenListChangesSubscription.unsubscribe();
         }
+        this._unsubscribeClicks();
     }
 
     /** @hidden */
@@ -176,15 +184,23 @@ export class TokenizerComponent implements AfterViewChecked, AfterContentInit, O
 
     /** @hidden */
     handleTokenClickSubscriptions(): void {
+        this._unsubscribeClicks();
         this.tokenList.forEach((token, index) => {
-            token.onTokenClick.subscribe((event) => {
-                this.focusTokenElement(event, index);
-            });
+            this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe(() => {
+                console.log('tokenIndex: ' + index);
+                this.focusTokenElement(index);
+                this.tokenList.forEach(shadowedToken => {
+                    if (shadowedToken !== token) {
+                        shadowedToken.selected = false;
+                    }
+                });
+                token.selected = true;
+            }));
         });
     }
 
     /** @hidden */
-    focusTokenElement(event: Event, newIndex: number): HTMLElement {
+    focusTokenElement(newIndex: number): HTMLElement {
         let elementToFocus: HTMLElement;
         if (newIndex >= 0 && newIndex < this.tokenList.length) {
             elementToFocus = this.tokenList
@@ -230,15 +246,38 @@ export class TokenizerComponent implements AfterViewChecked, AfterContentInit, O
     }
 
     /** @hidden */
+    @HostListener('document: click', ['$event'])
+    clickout(event) {
+        if (this.elementRef().nativeElement.contains(event.target) === false) {
+            this.tokenList.forEach(token => {
+                token.selected = false;
+            });
+        }
+    }
+
+    /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number;
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
-        if ((event.code === 'ArrowLeft' && !rtl) || (event.code === 'ArrowRight' && rtl)) {
+        if (KeyUtil.isKey(event, 'Space')) {
+            const token = this.tokenList.filter((element, index) => index === fromIndex);
+            this.tokenList.forEach(shadowedToken => {if (shadowedToken !== token[0]) {shadowedToken.selected = false}});
+            token[0].selected = !token[0].selected;
+            event.preventDefault();
+        } else if (KeyUtil.isKey(event, 'Enter')) {
+            this.input.elementRef().nativeElement.focus();
+        } else if ((event.code === 'ArrowLeft' && !rtl) || (event.code === 'ArrowRight' && rtl)) {
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
         } else if ((event.code === 'ArrowRight' && !rtl) || (event.code === 'ArrowLeft' && rtl)) {
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
+        } else if (event.code === 'KeyA' && this.input.elementRef().nativeElement.value === '') {
+            if (event.ctrlKey || event.metaKey) {
+                this.tokenList.forEach(token => {
+                    token.selected = true;
+                });
+            }
         }
         if (
             newIndex === this.tokenList.length &&
@@ -249,9 +288,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterContentInit, O
             newIndex > this.tokenList.length - this.moreTokensRight.length &&
             document.activeElement === this.input.elementRef().nativeElement
         ) {
-            this.focusTokenElement(event, newIndex - this.moreTokensRight.length);
+            this.focusTokenElement(newIndex - this.moreTokensRight.length);
         } else if (newIndex || newIndex === 0) {
-            this.focusTokenElement(event, newIndex);
+            this.focusTokenElement(newIndex);
         }
     }
 
@@ -398,5 +437,13 @@ export class TokenizerComponent implements AfterViewChecked, AfterContentInit, O
     private _makeElementVisible(elementRef: ElementRef): void {
         elementRef.nativeElement.style.display = 'inline-block';
         elementRef.nativeElement.style.visibility = 'visible';
+    }
+
+    private _unsubscribeClicks(): void {
+        if (this.tokenListClickSubscriptions && this.tokenListClickSubscriptions.length) {
+            this.tokenListClickSubscriptions.forEach(subscription => {
+                subscription.unsubscribe();
+            });
+        }
     }
 }
