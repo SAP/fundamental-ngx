@@ -8,6 +8,7 @@ import {
     forwardRef,
     Inject,
     Input,
+    isDevMode,
     LOCALE_ID,
     OnInit,
     Output,
@@ -20,6 +21,8 @@ import { KeyUtil } from '../..';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;
+
+let stepInputUniqueId: number = 0;
 
 @Component({
     selector: 'fd-step-input',
@@ -45,7 +48,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
     @Input()
     locale: string;
 
-    /** Sets locale used to format numeric value */
+    /** Specifies algorithm used to match locale. Check Intl.NumberFormat documentation for more information */
     @Input()
     localeMatcher: string;
 
@@ -59,19 +62,19 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
 
     /** Sets Increment Button title attribute */
     @Input()
-    incrementButtonTitle: string;
+    incrementButtonTitle: string = null;
 
     /** Sets Decrement Button title attribute */
     @Input()
-    decrementButtonTitle: string;
+    decrementButtonTitle: string = null;
 
     /** Sets input aria-label attribute */
     @Input()
-    ariaLabel: string;
+    ariaLabel: string = null;
 
     /** Sets input id */
     @Input()
-    inputId: boolean;
+    inputId: string = `fd-step-input-${stepInputUniqueId++}`;
 
     /** Sets control value */
     @Input()
@@ -91,7 +94,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
 
     /** Sets input name attribute */
     @Input()
-    name: boolean;
+    name: boolean = null;
 
     /** Sets input title attribute */
     @Input()
@@ -99,7 +102,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
 
     /** Sets formatting mode */
     @Input()
-    mode: string = 'decimal';
+    mode: 'decimal' | 'currency' = 'decimal';
 
     /** Sets state of the control. Can be `success`, `error`, `warning`, `information` or blank for default.*/
     @Input()
@@ -150,13 +153,17 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
     decrementButton: ElementRef;
 
     /** @hidden */
-    @ViewChild('inputElement', {read: ElementRef})
+    @ViewChild('inputElement', {read: ElementRef, static: true})
     inputElement: ElementRef;
 
     /** @hidden */
     lastEmittedValue: number;
 
+    /** @hidden */
     currencySign: string;
+
+    /** @hidden */
+    viewValue: string;
 
     /** @hidden */
     private _numerals: RegExp;
@@ -258,6 +265,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
     }
 
     /** @hidden */
+    onFocusIn(): void {
+        this.onFocus.emit();
+        this.onTouched();
+    }
+
+    /** @hidden */
     onInputValueChange(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
         if (parsedValue !== this.lastEmittedValue) {
@@ -284,7 +297,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
             return this._min;
         }
         if (!isNaN(this.maxFractionDigits)) {
-            return Number(value.toFixed(this.maxFractionDigits));
+            value = Number(value.toFixed(this.maxFractionDigits));
+        }
+        if (!isNaN(this.minFractionDigits)) {
+            value = Number(value.toFixed(this.minFractionDigits));
         }
         return value;
     }
@@ -308,8 +324,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
 
     /** @hidden */
     private _updateViewValue(): void {
-        console.log(this.value, this._numberFormat.format(this.value));
-        this.inputElement.nativeElement.value = this._formatNumber(this.value);
+        this.inputElement.nativeElement.value = this._formatViewValue(this.value);
     }
 
     /** @hidden */
@@ -373,7 +388,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
 
     /** @hidden */
     private _getNumberFormat(): NumberFormat {
-        console.log(this.locale);
+        if (isDevMode() && this.minFractionDigits > this.maxFractionDigits) {
+            throw new Error('Range error - minFractionDigits can\'t be bigger than maxFractionDigits');
+        }
+
         return new NumberFormat(this.locale, {
             localeMatcher: this.localeMatcher,
             style: this.mode,
@@ -441,7 +459,8 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
         this._currency = this._getCurrencyExpression();
     }
 
-    private _formatNumber(number: number): string {
+    /** @hidden */
+    private _formatViewValue(number: number): string {
         return this.currency
             ? this._numberFormat.format(number).replace(this._currency, '')
             : this._numberFormat.format(number)

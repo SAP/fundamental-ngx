@@ -14,16 +14,18 @@
             type="button"
             [compact]="compact"
             [title]="decrementButtonTitle"
-            [glyph]="decrementButtonIcon">
+            [glyph]="decrementButtonIcon"
+            (click)="onTouched()">
     </button>
     <input #inputElement
            [name]="name"
            [id]="inputId"
            [title]="inputTitle"
+           [value]="viewValue"
            [class.fd-input--compact]="compact"
            [attr.aria-label]="ariaLabel"
            (blur)="onBlur.emit()"
-           (focusin)="onFocus.emit()"
+           (focusin)="onFocusIn();"
            (keydown)="onKeyDown($event)"
            (input)="trackInputValue($event)"
            (change)="onInputValueChange($event)"
@@ -37,7 +39,8 @@
             type="button"
             [compact]="compact"
             [title]="incrementButtonTitle"
-            [glyph]="incrementButtonIcon">
+            [glyph]="incrementButtonIcon"
+            (click)="onTouched()">
     </button>
 </div>
 <span class="fd-form-label fd-form-label--unit-description">

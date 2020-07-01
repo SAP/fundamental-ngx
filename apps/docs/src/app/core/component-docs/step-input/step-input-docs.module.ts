@@ -12,6 +12,7 @@ import { StepInputLocaleExampleComponent } from './examples/step-input-locale-ex
 import { StepInputStateExampleComponent } from './examples/step-input-state-example/step-input-state-example.component';
 import { StepInputLabelExampleComponent } from './examples/step-input-label-example/step-input-label-example.component';
 import { StepInputCurrencyExampleComponent } from './examples/step-input-currency-example/step-input-currency-example.component';
+import { StepInputFormExampleComponent } from './examples/step-input-form-example/step-input-form-example.component';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         StepInputConfigurationExampleComponent,
         StepInputStateExampleComponent,
         StepInputLabelExampleComponent,
-        StepInputCurrencyExampleComponent
+        StepInputCurrencyExampleComponent,
+        StepInputFormExampleComponent
     ]
 })
 export class StepInputDocsModule {}
