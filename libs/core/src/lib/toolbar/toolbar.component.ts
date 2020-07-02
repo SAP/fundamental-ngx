@@ -226,7 +226,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden */
     private _removeToolbarItemFromDOM(toolbarItem: ToolbarItemDirective): void {
-        toolbarItem.elementRef.nativeElement.remove();
+        // IE11 workaround element.remove() is not supported
+        toolbarItem.elementRef.nativeElement.parentNode.removeChild(toolbarItem.elementRef.nativeElement);
     }
 
     /** @hidden */
