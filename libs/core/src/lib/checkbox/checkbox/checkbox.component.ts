@@ -15,6 +15,8 @@ import { compareObjects } from '../../utils/public_api';
 
 let checkboxUniqueId: number = 0;
 
+export type fdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force-checked';
+
 @Component({
     selector: 'fd-checkbox',
     templateUrl: './checkbox.component.html',
@@ -85,7 +87,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** Stores current checkbox value. */
     public checkboxValue: any;
     /** Stores current checkbox state. */
-    public checkboxState: 'checked' | 'unchecked' | 'indeterminate' | 'force-checked';
+    public checkboxState: fdCheckboxTypes;
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
@@ -137,7 +139,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
     public checkByClick() {
-        this._nextValueEvent();
+        this._nextValueEvent(true);
     }
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
@@ -153,8 +155,8 @@ export class CheckboxComponent implements ControlValueAccessor {
      * - emits new control value
      * - updates control state based on new control value
      * */
-    public nextValue(): void {
-        switch (this.checkboxState) {
+    public nextValue(previousValue?: fdCheckboxTypes): void {
+        switch (previousValue || this.checkboxState) {
             case 'checked':
                 this.checkboxValue = this.values.falseValue;
                 break;
@@ -190,10 +192,14 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    private _nextValueEvent(): void {
+    private _nextValueEvent(triggeredByClick?: boolean): void {
         if (this._isIE() && this.checkboxState === 'indeterminate') {
             this.checkboxState = 'force-checked';
             this._detectChanges();
+            /** Prevents from keeping the old value */
+            if (triggeredByClick) {
+                this.nextValue('force-checked');
+            }
         }
     }
 
