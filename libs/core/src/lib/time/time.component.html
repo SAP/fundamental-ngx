@@ -1,5 +1,6 @@
-<div class="fd-time">
+<div class="fd-time" [ngClass]="{'fd-time--compact': compact}">
     <fd-time-column
+        *ngIf="hours"
         [active]="isActive('hour')"
         (activeStateChange)="changeActive('hour')"
         [rows]="hours"
@@ -7,7 +8,7 @@
         (activeItemChange)="handleHourChange($event)"
     ></fd-time-column>
     <fd-time-column
-        *ngIf="displayMinutes"
+        *ngIf="displayMinutes && minutes"
         [active]="isActive('minute')"
         (activeStateChange)="changeActive('minute')"
         [rows]="minutes"
@@ -15,7 +16,7 @@
         (activeItemChange)="handleMinuteChange($event)"
     ></fd-time-column>
     <fd-time-column
-        *ngIf="displaySeconds"
+        *ngIf="displaySeconds && minutes"
         [active]="isActive('second')"
         (activeStateChange)="changeActive('second')"
         [rows]="minutes"
@@ -23,11 +24,11 @@
         (activeItemChange)="handleSecondChange($event)"
     ></fd-time-column>
     <fd-time-column
-        *ngIf="meridian"
+        *ngIf="meridian && periods"
         [active]="isActive('meridian')"
         (activeStateChange)="changeActive('meridian')"
-        [rows]="['am', 'pm']"
-        [activeItem]="period"
-        (activeItemChange)="handleSecondChange($event)"
+        [rows]="periods"
+        [(activeItem)]="period"
+        (activeItemChange)="periodModelChange()"
         [meridian]="true"></fd-time-column>
 </div>

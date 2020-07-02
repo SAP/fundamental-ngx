@@ -5,3 +5,32 @@
 <button fd-button [fdType]="'negative'">Negative Button</button>
 <button fd-button [fdType]="'attention'">Attention Button</button>
 <button fd-button [fdType]="'transparent'">Transparent Button</button>
+
+<div class="container-wrap">
+    <div class="container-ex" fdCarousel [config]="{elementsAtOnce: 3, panSupport: true, infinite: true}">
+        <div class="element" fdCarouselItem>1</div>
+        <div class="element" fdCarouselItem>2</div>
+        <div class="element" fdCarouselItem>3</div>
+        <div class="element" fdCarouselItem>4</div>
+        <div class="element" fdCarouselItem>5</div>
+        <div class="element" fdCarouselItem>6</div>
+        <div class="element" fdCarouselItem>7</div>
+        <div class="element" fdCarouselItem>8</div>
+        <div class="element" fdCarouselItem>9</div>
+        <div class="element" fdCarouselItem>10</div>
+        <div class="element" fdCarouselItem>11</div>
+        <div class="element" fdCarouselItem>12</div>
+    </div>
+</div>
+
+
+<div class="container-wrap">
+    <div class="container-ex" fdCarousel [config]="{elementsAtOnce: 3, panSupport: false, infinite: true}">
+        <div class="element" fdCarouselItem>1</div>
+        <div class="element" fdCarouselItem>2</div>
+        <div class="element" fdCarouselItem>3</div>
+        <div class="element" fdCarouselItem>4</div>
+        <div class="element" fdCarouselItem>5</div>
+        <div class="element" fdCarouselItem>6</div>
+    </div>
+</div>

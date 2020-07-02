@@ -5,7 +5,7 @@ import {
     EventEmitter,
     forwardRef,
     Input,
-    OnChanges,
+    OnChanges, OnInit,
     Output,
     SimpleChanges,
     ViewEncapsulation
@@ -35,15 +35,12 @@ export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TimeComponent implements OnChanges, ControlValueAccessor {
+export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
 
-    readonly hours: number[];
-    readonly minutes: number[];
-    readonly seconds: number[];
-
-    hour: number = 10;
-    minute: number = 10;
-    second: number = 10;
+    public hours: number[];
+    public minutes: number[];
+    public seconds: number[];
+    public periods: string[];
 
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
@@ -87,6 +84,9 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
      */
     @Input()
     displayHours: boolean = true;
+
+    @Input()
+    compact: boolean = false;
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
@@ -144,18 +144,27 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         public timeI18n: TimeI18n,
         private changeDetRef: ChangeDetectorRef
     ) {
+    }
+
+    ngOnInit(): void {
         this.hours = [];
 
-        const hoursAmount = this.meridian ? 12 : 24;
+        this.period = this.timeI18n.meridianAm;
 
+        const hoursAmount = this.meridian ? 12 : 24;
         for (let i = 0; i < hoursAmount; i ++) {
             this.hours.push(i);
+
         }
 
+        const minutesAmount = 60;
         this.minutes = [];
-        for (let i = 0; i < 60; i ++) {
+        for (let i = 0; i < minutesAmount; i ++) {
             this.minutes.push(i);
+
         }
+
+        this.periods = [this.timeI18n.meridianAm, this.timeI18n.meridianPm];
     }
 
     handleMinuteChange(minute: number): void {
@@ -211,6 +220,10 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
             this.displayedHour = this.time.hour;
             this.period = this.timeI18n.meridianAm;
         }
+
+        if (this.time) {
+            this.time = {...this.time};
+        }
     }
 
     /** @hidden
@@ -245,164 +258,6 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
 
     isActive(view: FdTimeActiveView): boolean {
         return this.activeView === view;
-    }
-
-    /** @hidden
-     * Handles the blur events from inputs. Also rewrite values if they are incorrect, prevents from negative or too big
-     * values. Also changes period if it's on meridian type and hour is bigger than 12.
-     */
-    inputBlur(inputType: string): void {
-        switch (inputType) {
-            case 'hour': {
-                this.displayedHour = Math.round(Math.abs(this.displayedHour)) % 24;
-                this.time.hour = this.displayedHour;
-
-                if (this.meridian) {
-                    if (this.displayedHour > 12) {
-                        this.period = this.timeI18n.meridianPm;
-                        this.displayedHour = this.displayedHour !== 12 ? this.displayedHour % 12 : this.displayedHour;
-                    } else if (this.displayedHour === 0) {
-                        this.displayedHour = 12;
-                        this.period = this.timeI18n.meridianAm;
-                    } else if (this.isAm(this.period) && this.displayedHour === 12) {
-                        this.time.hour = 0;
-                    }
-                }
-                break;
-            }
-            case 'minute': {
-                this.time.minute = Math.abs(Math.round(this.time.minute) % 60);
-                break;
-            }
-            case 'second': {
-                this.time.second = Math.abs(Math.round(this.time.second) % 60);
-                break;
-            }
-            case 'period': {
-                /**
-                 * When there is invalid period, function changes period to valid basing on actual hour
-                 */
-                if (!this.period || (!this.isPm(this.period) && !this.isAm(this.period))) {
-                    this.setDisplayedHour();
-                }
-            }
-        }
-        this.onChange(this.time);
-    }
-
-    /** Increases the hour value by one. */
-    increaseHour(): void {
-        if (this.time.hour === null) {
-            this.time.hour = 0;
-        } else if (this.time.hour === 23) {
-            this.time.hour = 0;
-        } else {
-            this.time.hour = this.time.hour + 1;
-        }
-        this.setDisplayedHour();
-        this.onChange(this.time);
-    }
-
-    /** Decreases the hour value by one. */
-    decreaseHour(): void {
-        if (this.time.hour === null) {
-            this.time.hour = 0;
-        } else if (this.time.hour === 0) {
-            this.time.hour = 23;
-        } else {
-            this.time.hour = this.time.hour - 1;
-        }
-        this.setDisplayedHour();
-        this.onChange(this.time);
-    }
-
-    /** Increases the minute value by one. */
-    increaseMinute(): void {
-        if (this.time.minute === null) {
-            this.time.minute = 0;
-        } else if (this.time.minute === 59) {
-            this.time.minute = 0;
-            this.increaseHour();
-        } else {
-            this.time.minute = this.time.minute + 1;
-        }
-        this.onChange(this.time);
-    }
-
-    /** Decreases the minute value by one. */
-    decreaseMinute(): void {
-        if (this.time.minute === null) {
-            this.time.minute = 0;
-        } else if (this.time.minute === 0) {
-            this.time.minute = 59;
-            this.decreaseHour();
-        } else {
-            this.time.minute = this.time.minute - 1;
-        }
-        this.onChange(this.time);
-    }
-
-    /** Increases the second value by one. */
-    increaseSecond(): void {
-        if (this.displaySeconds) {
-            if (this.time.second === null) {
-                this.time.second = 0;
-            } else if (this.time.second === 59) {
-                this.time.second = 0;
-                this.increaseMinute();
-            } else {
-                this.time.second = this.time.second + 1;
-            }
-        }
-        this.onChange(this.time);
-    }
-
-    /** Decreases the second value by one. */
-    decreaseSecond(): void {
-        if (this.displaySeconds) {
-            if (this.time.second === null) {
-                this.time.second = 0;
-            } else if (this.time.second === 0) {
-                this.time.second = 59;
-                this.decreaseMinute();
-            } else {
-                this.time.second = this.time.second - 1;
-            }
-        }
-        this.onChange(this.time);
-    }
-
-    /** Toggles the period (am/pm). */
-    togglePeriod(): void {
-        if (this.time.hour < 24 && this.time.hour >= 0) {
-            if (this.isAm(this.period)) {
-                this.period = this.timeI18n.meridianPm;
-                this.periodModelChange();
-            } else if (this.isPm(this.period)) {
-                this.period = this.timeI18n.meridianAm;
-                this.periodModelChange();
-            }
-        }
-    }
-
-    /** @hidden
-     * Handles minutes model change from template
-     * */
-    minuteModelChange(minuteChange: number): void {
-        this.time.minute = minuteChange;
-        if (!(this.time.minute > 59 || this.time.minute < 0) || !this.validate) {
-            this.onChange(this.time);
-        }
-    }
-
-    /** @hidden
-     * Handles seconds model change from template
-     * */
-    secondModelChange(secondChange: number): void {
-        this.time.second = secondChange;
-        if (!(this.time.second > 59 || this.time.second < 0) || !this.validate) {
-            this.onChange(this.time);
-        }
     }
 
     /** @hidden

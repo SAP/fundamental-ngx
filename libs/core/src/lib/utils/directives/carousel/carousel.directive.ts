@@ -10,22 +10,18 @@ import {
     QueryList
 } from '@angular/core';
 import {
-    animate,
-    AnimationBuilder,
-    AnimationFactory,
     AnimationPlayer,
-    style
 } from '@angular/animations';
 import { CarouselItemDirective } from './carousel-item.directive';
 import * as Hammer from 'hammerjs';
 import { HammerConfig } from './carousel.module';
 import { Subject } from 'rxjs';
-import { tap, throttleTime } from 'rxjs/operators';
 
 
 export interface CarouselConfig {
     vertical?: boolean;
-    offset?: number;
+    elementsAtOnce?: number;
+    panSupport?: boolean
     infinite?: boolean;
     transition?: string;
 }
@@ -47,6 +43,9 @@ export class CarouselDirective implements AfterContentInit {
     @Input()
     active: CarouselItemDirective;
 
+    @Input()
+    panSupport: boolean = true;
+
     @Output()
     readonly activeChange: EventEmitter<CarouselItemDirective> = new EventEmitter<CarouselItemDirective>();
 
@@ -61,47 +60,41 @@ export class CarouselDirective implements AfterContentInit {
     private _lastDistance: number = 0;
     private _currentTransitionPx: number = 0;
 
+    private _size: number;
+
     private _panMoved$ = new Subject<number>();
+    private _panMovedCheck$ = new Subject<number>();
 
     constructor(
         private _elementRef: ElementRef,
-        private _changeDetRef: ChangeDetectorRef,
-        private _builder: AnimationBuilder
+        private _changeDetRef: ChangeDetectorRef
     ) {
         this._panMoved$.subscribe(delta => this._handlePan(delta));
     }
 
     ngAfterContentInit(): void {
-        const hammer = new Hammer(this._elementRef.nativeElement, new HammerConfig());
 
-        hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
-
-        hammer.on('panmove', (event) => this._panMoved$.next(event.deltaY));
-        hammer.on('panstart', () => this.dragged.emit(true));
-        hammer.on('panend', (event) => this._handlePanEnd(event.deltaY));
+        if (this.config.panSupport) {
+            this._hammerSetup();
+        }
     }
 
     goToItem(item: CarouselItemDirective, smooth?: boolean): void {
 
         let index: number = this.getIndexOfItem(item);
 
-        console.log(index);
-
-        if (index < this._getOverflowItems() &&
-            this.config.infinite) {
-            this._placeOnTop();
-        } else if (
-            index > this.items.length - this._getOverflowItems() &&
-            this.config.infinite) {
-            this._placeOnBottom();
+        if (this.config.infinite) {
+            this._centerActive(index);
+            index = this.getIndexOfItem(item);
         }
 
-        console.log(index);
-
-        index = this.getIndexOfItem(item);
         this._transitionToIndex(index, smooth);
 
         this._previousActiveItem = item;
+    }
+
+    nextElement(): void {
+
     }
 
     private _handlePan(delta: number): void {
@@ -109,7 +102,7 @@ export class CarouselDirective implements AfterContentInit {
 
         this._lastDistance = delta;
 
-        this._transitionCarousel(this._currentTransitionPx + distance, false);
+        this._transitionCarousel(this._currentTransitionPx + distance);
     }
 
     private _handlePanEnd(delta) {
@@ -125,40 +118,33 @@ export class CarouselDirective implements AfterContentInit {
         this._lastDistance = 0;
     }
 
-    private _placeOnBottom(): void {
+    private _centerActive(index: number): void {
+        const middleIndex = Math.ceil(this.items.length / 2);
+        const offset = Math.ceil(this.config.elementsAtOnce / 2);
+        const missingItems = (index + offset) - middleIndex;
         const array = this.items.toArray();
-        for (let i = 0; i < this._getOverflowItems(); i++) {
-            const firstElement = array.shift();
-            array.push(firstElement);
+
+        if (missingItems > 0) {
+            for (let i = 0; i < missingItems; i ++) {
+                array.push(array.shift())
+            }
+        } else {
+            for (let i = 0; i < Math.abs(missingItems); i ++) {
+                array.unshift(array.pop())
+            }
         }
 
         this.items.reset(array);
         this.items.forEach(item => item.getElement().parentNode.appendChild(item.getElement()));
 
-        this._transitionToIndex(this.getIndexOfItem(this._previousActiveItem), false);
-    }
 
-    private _placeOnTop(): void {
-        let array = this.items.toArray();
-        for (let i = 0; i < this._getOverflowItems(); i++) {
-            const lastElement = array.pop();
-            array = [lastElement].concat(array);
-        }
-
-        this.items.reset(array);
-        this.items.forEach(item => item.getElement().parentNode.appendChild(item.getElement()));
-
-        this._transitionToIndex(this.getIndexOfItem(this._previousActiveItem), false);
+        /** TODO: Comment */
+        this._elementRef.nativeElement.style.transitionDuration = '0s';
+        this._transitionCarousel(this._currentTransitionPx + this._getSize(this.items.first) * missingItems);
     }
 
     private _transitionToIndex(index: number, smooth?: boolean): void {
-
-        if (index < this.config.offset || index > this.items.length - this.config.offset) {
-            // TODO Throw some error
-            return;
-        }
-
-        const transitionPx: number = this.items.first.getHeight() * (index - this.config.offset);
+        const transitionPx: number = this._getSize(this.items.first) * index;
 
         // Performance Saving Purposes
         // const transitionPx: number = this.items
@@ -167,26 +153,35 @@ export class CarouselDirective implements AfterContentInit {
         //     .reduce((_item: number, sum: number) => sum + _item)
         // ;
 
-        this._transitionCarousel(-transitionPx, smooth);
+
+        if (smooth) {
+            this._elementRef.nativeElement.style.transitionDuration = this._getTransition();
+        } else {
+            this._elementRef.nativeElement.style.transitionDuration = '0s';
+        }
+
+        this._transitionCarousel(-transitionPx);
     }
 
     private _getClosest(): CarouselItemDirective {
 
+        const size: number = this._getSize(this.items.first);
+
         // TODO Comment
         const halfApproached: boolean =
-            Math.abs(this._currentTransitionPx % this.items.first.getHeight()) >
-            this.items.first.getHeight() / 2
+            Math.abs(this._currentTransitionPx % size) >
+            size / 2
         ;
 
         const index: number =
-            Math.ceil(this._currentTransitionPx / this.items.first.getHeight())
+            Math.ceil(this._currentTransitionPx / size)
         ;
 
         let absIndex = Math.abs(index);
 
         if (this.items.toArray()[absIndex]) {
             absIndex = absIndex + (halfApproached ? 1 : 0);
-            return this.items.toArray()[absIndex + this.config.offset];
+            return this.items.toArray()[absIndex];
         } else {
             if (index > 0) {
                 return this.items.first;
@@ -200,35 +195,50 @@ export class CarouselDirective implements AfterContentInit {
         return this.items.toArray().findIndex(_item => _item === item);
     }
 
-    private buildAnimation(offset, time: boolean) {
-        return this._builder.build([
-            animate(time ? this._getTransition() : 0, style({ transform: `translateY(${offset}px)` }))
-        ]);
-    }
-
     private _getOverflowItems(): number {
         return Math.ceil(this.items.length / 5);
+    }
+
+    private _hammerSetup(): void {
+        const hammer = new Hammer(this._elementRef.nativeElement, new HammerConfig());
+
+        hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+
+        if (this.config.vertical) {
+            hammer.on('panmove', (event) => this._panMoved$.next(event.deltaY));
+            hammer.on('panstart', () => this._handlePanStart());
+            hammer.on('panend', (event) => this._handlePanEnd(event.deltaY));
+        } else {
+            hammer.on('panmove', (event) => this._panMoved$.next(event.deltaX));
+            hammer.on('panstart', () => this._handlePanStart());
+            hammer.on('panend', (event) => this._handlePanEnd(event.deltaX));
+        }
+    }
+
+    private _handlePanStart(): void {
+        this._size = this._getSize(this.items.first);
+        this._elementRef.nativeElement.style.transitionDuration = '0s';
+        this.dragged.emit(true);
     }
 
     /**
      * Animates the carousel to the currently selected slide.
      */
-    private _transitionCarousel(transitionPx: number, smooth: boolean) {
-
-        console.log(transitionPx);
+    private _transitionCarousel(transitionPx: number) {
 
         this._currentTransitionPx = transitionPx;
 
-        if (smooth) {
-            console.log('smooth');
-            this._elementRef.nativeElement.style.transitionDuration = this._getTransition();
+        if (this.config.vertical) {
+
+            this._elementRef.nativeElement.style.transform = 'translateY(' + this._currentTransitionPx + 'px)';
+
         } else {
-            this._elementRef.nativeElement.style.transitionDuration = '0s';
+
+            this._elementRef.nativeElement.style.transform = 'translateX(' + this._currentTransitionPx + 'px)';
+
         }
 
-        this._elementRef.nativeElement.style.transform = 'translateY(' + this._currentTransitionPx + 'px)';
-
-
+        // TODO Test scrolling
         // this._elementRef.nativeElement.scrollTo({
         //     top: this._currentTransitionPx,
         //     left: 0,
@@ -244,11 +254,25 @@ export class CarouselDirective implements AfterContentInit {
         // this._player.play();
     }
 
+    // private buildAnimation(offset, time: boolean) {
+    //     return this._builder.build([
+    //         animate(time ? this._getTransition() : 0, style({ transform: `translateY(${offset}px)` }))
+    //     ]);
+    // }
+
     private _getTransition(): string {
         if (this.config) {
             return this.config.transition;
         } else {
             return Default_Transition_Duration;
+        }
+    }
+
+    private _getSize(item: CarouselItemDirective): number {
+        if (this.config.vertical) {
+            return item.getHeight();
+        } else {
+            return item.getWidth();
         }
     }
 

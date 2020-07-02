@@ -16,7 +16,7 @@ import {
 import { Subject } from 'rxjs';
 import { CarouselConfig, CarouselDirective } from '../../utils/directives/carousel/carousel.directive';
 import { CarouselItemDirective } from '../../utils/directives/carousel/carousel-item.directive';
-import { KeyUtil } from '@fundamental-ngx/core';
+import { KeyUtil } from '../../utils/functions/key-util';
 
 
 let timeColumnUniqueId: number = 0;
@@ -54,6 +54,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     set active(value: boolean) {
         this._active = value;
         if (value && this._initialised) {
+            this._changeDetRef.detectChanges();
             this._pickTime(this._getItem(this.activeItem), false);
         }
     }
@@ -72,7 +73,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     id: string = 'fd-time-column-' + timeColumnUniqueId++;
 
     @Output()
-    activeItemChange: EventEmitter<number> = new EventEmitter<number>();
+    activeItemChange: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
     activeStateChange: EventEmitter<number> = new EventEmitter<number>();
@@ -102,10 +103,10 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
 
     ngOnInit(): void {
         if (!this.meridian) {
-            this.config = { offset: 3, transition: '150ms', infinite: true };
-            this.rows = [...this.rows, ...this.rows, ...this.rows];
+            this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms', infinite: true };
+            // this.rows = [...this.rows, ...this.rows, ...this.rows];
         } else {
-            this.config = { offset: 0, transition: '150ms' };
+            this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
         }
     }
 
@@ -145,7 +146,6 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     }
 
     handleDrag(isDragging: boolean): void {
-        console.log('is-drag', isDragging);
         if (!isDragging) {
             setTimeout(() => this._isDragging = false, 30);
         } else {
@@ -202,8 +202,6 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     }
 
     private _pickTime(item: CarouselItemDirective, smooth?: boolean): void {
-        console.log('item');
-        console.log(item);
         if (!item) {
             // TODO: Throw Error
             return
