@@ -44,7 +44,7 @@
         class="fd-select__control"
         role="listbox"
         #selectControl
-        [ngClass]="state ? 'is-' + state : ''"
+        [ngClass]="(state ? 'is-' + state : '') + (panelOpen ? 'fd-select--hide-outline' : '')"
         [class.is-active]="panelOpen"
         [class.is-expanded]="panelOpen"
         [class.is-disabled]="disabled"
@@ -78,6 +78,7 @@
             fd-button
             tabindex="-1"
             class="fd-button--transparent fd-select__button"
+            [ngClass]="panelOpen ? 'fd-select--hide-outline' : ''"
             *ngIf="!readonly"
             [disabled]="disabled"
             [glyph]="glyph"
