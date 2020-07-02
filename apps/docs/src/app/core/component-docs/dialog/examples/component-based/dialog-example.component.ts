@@ -15,6 +15,9 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
                         {{ fact }}
                     </li>
                 </ul>
+                <fd-select placeholder="Select an option" [(value)]="selectedValue1">
+                  <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+                </fd-select>
             </fd-dialog-body>
 
             <fd-dialog-footer>
@@ -47,4 +50,10 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
 })
 export class DialogExampleComponent {
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {}
-}
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+    selectedValue1: string;
+    selectedValue2: string;
+    selectedValue3: string;
+    selectedValue4: string;
+    selectedValue5: string = this.options[0];
+  }
