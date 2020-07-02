@@ -73,7 +73,7 @@ export class TabPanelComponent implements OnChanges {
     @Input()
     header: boolean = false;
 
-    /** TODO */
+    /** Disabled state for tab item, disabled by default */
     @Input()
     disabled: boolean = false;
 
