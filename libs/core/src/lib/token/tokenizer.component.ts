@@ -187,7 +187,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         this._unsubscribeClicks();
         this.tokenList.forEach((token, index) => {
             this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe(() => {
-                console.log('tokenIndex: ' + index);
                 this.focusTokenElement(index);
                 this.tokenList.forEach(shadowedToken => {
                     if (shadowedToken !== token) {
@@ -274,6 +273,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             newIndex = fromIndex + 1;
         } else if (event.code === 'KeyA' && this.input.elementRef().nativeElement.value === '') {
             if (event.ctrlKey || event.metaKey) {
+                if (!this.input.elementRef().nativeElement.value) {
+                    event.preventDefault();
+                }
                 this.tokenList.forEach(token => {
                     token.selected = true;
                 });
