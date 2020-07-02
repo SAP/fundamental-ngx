@@ -14,7 +14,7 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    QueryList,
+    QueryList, Renderer2,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -163,7 +163,16 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         this.buildComponentCssClass();
     }
 
-    constructor(private _elementRef: ElementRef, private cdRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
+    constructor(private _elementRef: ElementRef, private cdRef: ChangeDetectorRef,
+                @Optional() private _rtlService: RtlService, private _renderer: Renderer2) {
+        this._renderer.listen('window', 'click', (e: Event) => {
+            if (this.elementRef().nativeElement.contains(e.target) === false) {
+                this.tokenList.forEach(token => {
+                    token.selected = false;
+                });
+            }
+        });
+    }
 
     @applyCssClass
     /** CssClassBuilder interface implementation
@@ -200,6 +209,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     focusTokenElement(newIndex: number): HTMLElement {
+        console.log('focusTokenElement: ' + newIndex);
         let elementToFocus: HTMLElement;
         if (newIndex >= 0 && newIndex < this.tokenList.length) {
             elementToFocus = this.tokenList
@@ -241,16 +251,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
                 this._expandTokens(); // if it's getting bigger, try expanding
             }
             this.previousElementWidth = elementWidth;
-        }
-    }
-
-    /** @hidden */
-    @HostListener('document: click', ['$event'])
-    clickout(event) {
-        if (this.elementRef().nativeElement.contains(event.target) === false) {
-            this.tokenList.forEach(token => {
-                token.selected = false;
-            });
         }
     }
 
