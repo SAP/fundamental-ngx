@@ -28,7 +28,7 @@ class TestComponent {
     }
 }
 
-fdescribe('TableRowDirective', () => {
+describe('TableRowDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
