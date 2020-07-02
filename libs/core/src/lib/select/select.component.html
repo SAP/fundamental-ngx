@@ -78,7 +78,8 @@
             fd-button
             tabindex="-1"
             class="fd-button--transparent fd-select__button"
-            [ngClass]="panelOpen ? 'fd-select--hide-outline' : ''"
+            [ngClass]="state ? 'is-' + state : ''"
+            [class.fd-select--hide-outline]="panelOpen"
             *ngIf="!readonly"
             [disabled]="disabled"
             [glyph]="glyph"
