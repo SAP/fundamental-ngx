@@ -13,7 +13,7 @@
                 [attr.aria-label]="tab.ariaLabel || null"
                 [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
                 [disabled]="tab.disabled"
-                (keydown)="tabHeaderKeyHandler(i, $event, tab.disabled)"
+                (keydown)="tabHeaderKeyHandler(i, $event)"
                 (click)="tabHeaderClickHandler(i, tab.disabled)"
             >
                 <ng-container *ngIf="tab.titleTemplate">
