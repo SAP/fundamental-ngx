@@ -4,9 +4,11 @@
         'is-warning': state === 'warning',
         'is-success': state === 'success',
         'is-information': state === 'information',
+        'fd-step-input--without-buttons': !hasStepButtons,
         'fd-step-input--compact': compact
      }">
-    <button fd-button
+    <button *ngIf="hasStepButtons"
+            fd-button
             #decrementBtn
             fdType="transparent"
             class="fd-step-input__button"
@@ -31,7 +33,8 @@
            (change)="onInputValueChange($event)"
            class="fd-input fd-input--no-number-spinner fd-step-input__input"
            type="text">
-    <button fd-button
+    <button *ngIf="hasStepButtons"
+            fd-button
             #incrementBtn
             fdType="transparent"
             class="fd-step-input__button"

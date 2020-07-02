@@ -132,6 +132,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
     @Input()
     currencyDisplay: string;
 
+    /** Whether StepInput should display Increase/Decrease buttons */
+    @Input()
+    hasStepButtons: boolean = true;
+
     /** Emits event on input input blur */
     @Output()
     onBlur: EventEmitter<void> = new EventEmitter<void>();
@@ -329,21 +333,24 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
 
     /** @hidden */
     private _listenOnButtonsClick(): void {
-        this._subscriptions.add(
-            this._setupButtonListener(this.incrementButton)
-                .subscribe(() => {
-                    this.increment();
-                    this._changeDetectorRef.detectChanges();
-                })
-        );
+        if (this.hasStepButtons) {
+            this._subscriptions.add(
+                this._setupButtonListener(this.incrementButton)
+                    .subscribe(() => {
+                        this.increment();
+                        this._changeDetectorRef.detectChanges();
+                    })
+            );
 
-        this._subscriptions.add(
-            this._setupButtonListener(this.decrementButton)
-                .subscribe(() => {
-                    this.decrement();
-                    this._changeDetectorRef.detectChanges();
-                })
-        )
+            this._subscriptions.add(
+                this._setupButtonListener(this.decrementButton)
+                    .subscribe(() => {
+                        this.decrement();
+                        this._changeDetectorRef.detectChanges();
+                    })
+            )
+        }
+
     }
 
     /** @hidden */
