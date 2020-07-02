@@ -5,38 +5,39 @@
 -->
 
 <ng-template #desktopTemplate>
-    <div
-        cdk-overlay-origin
-        #selectTrigger="cdkOverlayOrigin"
-        class="fd-select"
-        [class.fd-select--compact]="compact"
-        (keydown)="handleKeydown($event)"
-        (click)="toggle()"
-    >
-        <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
-    </div>
+  <div
+      cdkOverlayOrigin
+      #selectTrigger="cdkOverlayOrigin"
+      class="fd-select"
+      [class.fd-select--compact]="compact"
+      (keydown)="handleKeydown($event)"
+      (click)="toggle()"
+  >
+      <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+  </div>
 
     <!--
         Option panel using Material CDK overlay system
     -->
-    <ng-template
-        cdk-connected-overlay
-        cdkConnectedOverlayLockPosition
-        cdkConnectedOverlayHasBackdrop
-        cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-        [cdkConnectedOverlayOrigin]="selectTrigger"
-        [cdkConnectedOverlayOpen]="panelOpen"
-        [cdkConnectedOverlayPositions]="positions"
-        [cdkConnectedOverlayMinWidth]="triggerRect?.width"
-        [cdkConnectedOverlayOffsetY]="offsetY"
-        (backdropClick)="close()"
-        (attach)="onAttached()"
-        (detach)="close()"
-    >
-        <div class="fd-select-overlay fd-popover__body fd-popover__body--no-arrow fd-popover__body--dropdown">
-            <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
-        </div>
-    </ng-template>
+  <ng-template
+      
+      cdkConnectedOverlay
+      cdkConnectedOverlayLockPosition
+      cdkConnectedOverlayHasBackdrop
+      cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+      [cdkConnectedOverlayOrigin]="selectTrigger"
+      [cdkConnectedOverlayOpen]="panelOpen"
+      [cdkConnectedOverlayPositions]="positions"
+      [cdkConnectedOverlayMinWidth]="triggerRect?.width"
+      [cdkConnectedOverlayOffsetY]="offsetY"
+      (backdropClick)="close()"
+      (attach)="onAttached()"
+      (detach)="close()"
+  >
+      <div class="fd-select-overlay fd-popover__body fd-popover__body--no-arrow fd-popover__body--dropdown">
+          <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
+      </div>
+  </ng-template>
 </ng-template>
 
 <ng-template #selectInputControlTemplate>
@@ -99,8 +100,8 @@
         <li *ngIf="stateMessage" fd-list-message tabindex="-1" role="presentation" [type]="state">
             {{ stateMessage }}
         </li>
+          <ng-content></ng-content>
 
-        <ng-content></ng-content>
     </ul>
 </ng-template>
 
