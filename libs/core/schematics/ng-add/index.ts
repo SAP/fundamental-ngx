@@ -1,18 +1,32 @@
-import { Rule, SchematicContext, Tree, chain, SchematicsException } from '@angular-devkit/schematics';
+import {
+    chain,
+    Rule,
+    SchematicContext,
+    SchematicsException,
+    Tree
+} from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
-import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
+import {
+    addPackageJsonDependency,
+    NodeDependency,
+    NodeDependencyType
+} from '@schematics/angular/utility/dependencies';
 import { addImportToRootModule, hasModuleImport } from '../utils/ng-module-utils';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
-import { getProject } from '@schematics/angular/utility/project';
-import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
+import { WorkspaceProject } from '@schematics/angular/utility/workspace-models';
 
 import { cdkVersion } from './versions';
 import { defaultFontStyle } from './styles';
+import { getWorkspace, getWorkspacePath } from '@schematics/angular/utility/config';
+import { getProject } from '@schematics/angular/utility/project';
 
 const browserAnimationsModuleName = 'BrowserAnimationsModule';
 const noopAnimationsModuleName = 'NoopAnimationsModule';
-const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
+const stylesEntries: string[] = [
+    'node_modules/fundamental-styles/dist/icon.css',
+    'node_modules/@angular/cdk/overlay-prebuilt.css'
+];
 
 export function ngAdd(options: any): Rule {
     return chain([
@@ -70,8 +84,12 @@ function addDependencies(): Rule {
 // Configures browser animations.
 function addAnimations(options: any): Rule {
     return (tree: Tree) => {
+
+        const workspace = getWorkspace(tree);
+        const projectName = options.project || workspace.defaultProject;
+
         // tslint:disable-next-line:no-non-null-assertion
-        const modulePath = getAppModulePath(tree, getProject(tree, options.project)!.architect!.build!.options!.main);
+        const modulePath = getAppModulePath(tree, getProject(tree, projectName)!.architect!.build!.options!.main);
 
         if (options.animations) {
             if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
@@ -98,34 +116,32 @@ function addAnimations(options: any): Rule {
 
 // Adds the icon style path to the angular.json.
 function addStylePathToConfig(options: any): Rule {
-    return (tree: Tree) => {
-        const angularConfigPath = '/angular.json';
-        const workspaceConfig = tree.read('/angular.json');
-        if (!workspaceConfig) {
-            throw new SchematicsException(`Unable to find angular.json. Please manually configure your styles array.`);
-        }
-        const workspaceJson: WorkspaceSchema = JSON.parse(workspaceConfig.toString());
+    return (host: Tree) => {
 
+        const workspace = getWorkspace(host);
+        const projectName = options.project || workspace.defaultProject;
+
+        if (!projectName) {
+            throw Error(`Cant Find project by name ${projectName}`);
+        }
         try {
             // tslint:disable-next-line:no-non-null-assertion
-            let stylesArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'];
+            const project: WorkspaceProject = workspace.projects[projectName];
+            const styles: any[] = (<any>project.architect)['build']['options']['styles'];
 
-            if (!stylesArray.includes(fdStylesIconPath)) {
-                stylesArray = pushStylesToArray(stylesArray, fdStylesIconPath);
-                // tslint:disable-next-line:no-non-null-assertion
-                (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'] = stylesArray;
-            } else {
-                console.log(`✅️ Found duplicate style path in angular.json. Skipping.`);
-                return tree;
-            }
+            stylesEntries.reverse().forEach(path => {
+                if (!styles.includes(path)) {
+                    styles.unshift(path);
+                }
+            });
         } catch (e) {
             throw new SchematicsException(
                 `Unable to find angular.json project styles. Please manually configure your styles array.`
             );
         }
-        tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
-        console.log(`✅️ Added fundamental-styles path to angular.json.`);
-        return tree;
+        host.overwrite(getWorkspacePath(host), JSON.stringify(workspace, null, 2));
+        console.log(`✅️ Added styles path to angular.json.`);
+        return host;
     };
 }
 
@@ -167,9 +183,3 @@ function addFontsToStyles(options: any): Rule {
     };
 }
 
-function pushStylesToArray(stylesArray: any, path: string): any {
-    if (!stylesArray.includes(path)) {
-        stylesArray.push(path);
-    }
-    return stylesArray;
-}

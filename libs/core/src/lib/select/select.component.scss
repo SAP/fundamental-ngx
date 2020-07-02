@@ -1,7 +1,6 @@
 @import '~fundamental-styles/dist/select';
 @import '~fundamental-styles/dist/popover';
 
-
 /**
     Reference to overlay panel which independent from select triggering element.
  */
@@ -17,4 +16,15 @@
     &.fd-list--dropdown {
         max-width: inherit;
     }
+}
+
+/**
+   Dirty hack to enforce z-index of CDK's overlay class to be higher then Dialog z-index
+ */
+.cdk-overlay-container,
+.cdk-global-overlay-wrapper,
+.cdk-overlay-pane,
+.cdk-overlay-backdrop,
+.cdk-overlay-connected-position-bounding-box {
+    z-index: 1001 !important;
 }
