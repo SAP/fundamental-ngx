@@ -35,7 +35,7 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     @Input()
     header: boolean;
 
-    /** Disabled state for tab item, disabled by default */
+    /** Disabled state for tab item */
     @Input()
     @HostBinding('attr.aria-disabled')
     @HostBinding('class.is-disabled')
