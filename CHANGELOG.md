@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.17...v0.20.0-rc.18) (2020-07-03)
+
+
+### Bug Fixes
+
+* change remove method in toolbar ([#2791](https://github.com/SAP/fundamental-ngx/issues/2791)) ([e7263bc](https://github.com/SAP/fundamental-ngx/commit/e7263bc5ec75db8846f3c6785e0e518bca589d7d))
+
 ## [0.20.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.16...v0.20.0-rc.17) (2020-07-03)
 
 
