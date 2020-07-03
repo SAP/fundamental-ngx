@@ -58,7 +58,7 @@ describe('TabsService', () => {
     it('should handle select on first element', () => {
         const elements = anchors.map((anchor) => anchor.nativeElement);
         service.tabSelected.subscribe((index) => expect(index).toBe(0));
-        service.tabHeaderKeyHandler(0, { key: 'Enter' }, elements);
+        service.tabHeaderKeyHandler(0, { key: 'Enter', preventDefault: () => {} }, elements);
     });
 
     it('should handle select when space click on first element', () => {

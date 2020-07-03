@@ -16,7 +16,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TabPanelComponent } from './tab/tab-panel.component';
-import { merge, Subject, Subscription, timer } from 'rxjs';
+import { merge, Subject, timer } from 'rxjs';
 import { TabsService } from './tabs.service';
 import { filter, takeUntil } from 'rxjs/operators';
 
