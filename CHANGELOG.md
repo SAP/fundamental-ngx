@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.14...v0.20.0-rc.15) (2020-07-03)
+
+
+### Bug Fixes
+
+* (platform) Link documentation changes and Extending from Base class. ([#2751](https://github.com/SAP/fundamental-ngx/issues/2751)) ([0e0c1de](https://github.com/SAP/fundamental-ngx/commit/0e0c1deca47cb138cdbff51314fdbdabd7792bc2))
+
 ## [0.20.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.13...v0.20.0-rc.14) (2020-06-30)
 
 ## [0.20.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.12...v0.20.0-rc.13) (2020-06-30)
