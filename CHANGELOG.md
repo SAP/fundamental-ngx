@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.15...v0.20.0-rc.16) (2020-07-03)
+
+
+### Bug Fixes
+
+* Shellbar positioning items on Ie11 ([#2793](https://github.com/SAP/fundamental-ngx/issues/2793)) ([efe5ad3](https://github.com/SAP/fundamental-ngx/commit/efe5ad3df26424110c6d7b7b4f1090cc991546f1))
+
 ## [0.20.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.14...v0.20.0-rc.15) (2020-07-03)
 
 
