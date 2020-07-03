@@ -1,12 +1,3 @@
-<fd-breadcrumb-item *ngIf="collapsedBreadcrumbItems.length" [fdMenuTrigger]="menu">
-    <a fd-breadcrumb-link tabindex="0" (keydown)="keyDownHandle($event)">
-        ...
-        <fd-icon [glyph]="'slim-arrow-down'"></fd-icon>
-    </a>
-</fd-breadcrumb-item>
-
-<ng-content></ng-content>
-
 <fd-menu #menu [placement]="placement$ | async" [compact]="compact">
     <li fd-menu-item *ngFor="let collapsedBreadcrumbItem of collapsedBreadcrumbItems">
         <a fd-menu-interactive [attr.href]="collapsedBreadcrumbItem.href"
@@ -15,3 +6,12 @@
         </a>
     </li>
 </fd-menu>
+
+<fd-breadcrumb-item *ngIf="collapsedBreadcrumbItems.length" [fdMenuTrigger]="menu">
+    <a fd-breadcrumb-link tabindex="0" (keydown)="keyDownHandle($event)">
+        ...
+        <fd-icon [glyph]="'slim-arrow-down'"></fd-icon>
+    </a>
+</fd-breadcrumb-item>
+
+<ng-content></ng-content>
