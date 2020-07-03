@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.16...v0.20.0-rc.17) (2020-07-03)
+
+
+### Bug Fixes
+
+* checkbox ie11 too fast click fix ([#2792](https://github.com/SAP/fundamental-ngx/issues/2792)) ([4e33858](https://github.com/SAP/fundamental-ngx/commit/4e33858f9460352864533055107d48adfd58af3a))
+
 ## [0.20.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.15...v0.20.0-rc.16) (2020-07-03)
 
 
