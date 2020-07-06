@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Directive({
     selector: '[fdTableCell], [fd-table-cell]'
@@ -42,4 +42,12 @@ export class TableCellDirective {
     @HostBinding('class.fd-table__cell--checkbox')
     @Input()
     checkbox: boolean = false;
+
+    /** Key of cell element, it's used to identify this cell with certain column */
+    @Input()
+    key: string;
+
+    constructor (
+        public elementRef: ElementRef
+    ) {}
 }

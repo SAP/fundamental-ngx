@@ -25,6 +25,10 @@ import * as tableCdkTs from '!raw-loader!./examples/table-cdk-example.component.
 import * as tableCdkScss from '!raw-loader!./examples/table-cdk-example.component.scss';
 import * as tablePopInHTs from '!raw-loader!./examples/table-popin-example/table-popin-example.component.ts';
 import * as tablePopInHtml from '!raw-loader!./examples/table-popin-example/table-popin-example.component.html';
+import * as tableCustomHtml from '!raw-loader!./examples/table-custom-columns-example/table-custom-columns-example.component.html';
+import * as tableCustomTs from '!raw-loader!./examples/table-custom-columns-example/table-custom-columns-example.component.ts';
+import * as tableDialogCustom from '!raw-loader!./examples/table-custom-columns-example/table-custom-dialog.component.ts';
+import * as tableFilterPipe from '!raw-loader!./examples/table-custom-columns-example/table-filter.pipe.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -110,6 +114,36 @@ export class TableDocsComponent {
         }
     ];
 
+    tableCustomColumnsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableCustomHtml,
+            fileName: 'table-custom-columns-example'
+        },
+        {
+            language: 'typescript',
+            code: tableCustomTs,
+            fileName: 'table-custom-columns-example',
+            component: 'TableCustomColumnsExampleComponent',
+            name: 'Table Component'
+        },
+        {
+            language: 'typescript',
+            code: tableDialogCustom,
+            fileName: 'table-custom-dialog',
+            component: 'TableCustomDialogComponent',
+            name: 'Dialog Component'
+        },
+        {
+            language: 'typescript',
+            code: tableFilterPipe,
+            fileName: 'table-filter',
+            component: 'TableFilterPipe',
+            pipe: true,
+            name: 'Filter Pipe'
+        }
+    ];
+
     tableColumnSortExample: ExampleFile[] = [
         {
             language: 'html',
@@ -124,15 +158,19 @@ export class TableDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'TableColumnSortExampleComponent',
+            component: 'SortTableByPipe',
             code: tableColumnSortPipeTs,
-            fileName: 'table-example-sort'
+            pipe: true,
+            fileName: 'table-example-sorting',
+            name: 'Sort Pipe'
         },
         {
             language: 'typescript',
-            component: 'TableColumnFilterExampleComponent',
+            component: 'FilterTableByPipe',
             code: tableColumnFilterPipeTs,
-            fileName: 'table-example-filter'
+            pipe: true,
+            fileName: 'table-example-filter',
+            name: 'Filter Pipe'
         }
     ];
 

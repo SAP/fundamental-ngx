@@ -1,9 +1,27 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    ContentChildren,
+    Directive,
+    HostBinding,
+    Input,
+    OnDestroy,
+    QueryList
+} from '@angular/core';
+import { TableCellDirective } from './table-cell.directive';
+import { TableService } from '../table.service';
+
+export const Hidden_Class_Name = 'fd-table-hidden';
+
 
 @Directive({
     selector: '[fdTableRow], [fd-table-row]'
 })
-export class TableRowDirective {
+export class TableRowDirective implements AfterViewInit, OnDestroy {
+
+    @ContentChildren(TableCellDirective)
+    cells: QueryList<TableCellDirective>;
+
     /** @hidden */
     @HostBinding('class.fd-table__row')
     fdTableRowClass: boolean = true;
@@ -27,4 +45,68 @@ export class TableRowDirective {
     @HostBinding('class.fd-table__row--secondary')
     @Input()
     secondary: boolean = false;
+
+    constructor(
+        private _changeDetRef: ChangeDetectorRef,
+        private _tableService: TableService
+    ) {
+        this._tableService.propagateKeys$.subscribe(
+            (keys: string[]) => this._resetCells(keys)
+        );
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._resetCells(this._tableService.propagateKeys$.getValue());
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._tableService.propagateKeys$.unsubscribe();
+    }
+
+    /** @hidden */
+    private _resetCells(keys: string[]): void {
+        if (this.cells && keys && keys.length > 0) {
+
+            this._changeVisibility(keys);
+
+            const sortedCells = this.cells.toArray().sort(((a, b) => this._sortMethod(a, b, keys)));
+
+            this.cells.reset(sortedCells);
+
+            this._sortNativeElements();
+
+            this._changeDetRef.detectChanges();
+        }
+    }
+
+    /** @hidden */
+    private _sortMethod(a: TableCellDirective, b: TableCellDirective, keys: string[]): number {
+        if (keys.findIndex(_key => _key === a.key) <
+            keys.findIndex(_key => _key === b.key)) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+
+    /** @hidden */
+    private _sortNativeElements(): void {
+        this.cells.forEach(cell =>
+            cell.elementRef.nativeElement.parentNode.appendChild(cell.elementRef.nativeElement)
+        );
+    }
+
+    /** @hidden */
+    private _changeVisibility(keys: string[]): void {
+        this.cells.forEach(cell => cell.elementRef.nativeElement.classList.remove(Hidden_Class_Name));
+        const notFoundElements: TableCellDirective[] = this.cells.filter(cell => !keys.find(key => key === cell.key));
+        notFoundElements.forEach(this._hideElement);
+    }
+
+    /** @hidden */
+    private _hideElement(element: TableCellDirective): void {
+        element.elementRef.nativeElement.classList.add(Hidden_Class_Name)
+    }
 }

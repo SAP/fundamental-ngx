@@ -15,6 +15,7 @@ import { TablePopoverDirective } from './directives/table-popover.directive';
 import { TableInnerDirective } from './directives/table-inner.directive';
 import { TableTextDirective } from './directives/table-text.directive';
 import { TableIconDirective } from './directives/table-icon.directive';
+import { TableService } from './table.service';
 
 @NgModule({
     imports: [CommonModule],
@@ -49,6 +50,9 @@ import { TableIconDirective } from './directives/table-icon.directive';
         TableInnerDirective,
         TableTextDirective,
         TableIconDirective
+    ],
+    providers: [
+        TableService
     ]
 })
 export class TableModule {}

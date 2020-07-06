@@ -31,6 +31,22 @@
 <code-example [exampleFiles]="tableFooterExample"></code-example>
 
 <fd-docs-section-title [id]="'columnSorting'" [componentName]="'table'">
+    Customizable Columns
+</fd-docs-section-title>
+<description>
+    The user can be given greater control over what appears in the table if the application developer provides an
+    array of <code>[keys]</code> as an input to the table component. Each cell must have a <code>key</code> provided
+    that corresponds to one of the values in the <code>[keys]</code> array. In this example, the user can press the
+    "Open Table Customization" button to open a modal. Each of the <code>[keys]</code> is displayed in a list and the
+    user can use the checkboxes to decide what columns will appear in the table, and they can also set the order of the
+    columns using the arrow up/arrow down buttons.
+</description>
+<component-example>
+    <fd-table-custom-columns-example></fd-table-custom-columns-example>
+</component-example>
+<code-example [exampleFiles]="tableCustomColumnsExample"></code-example>
+
+<fd-docs-section-title [id]="'columnSorting'" [componentName]="'table'">
     Column Sorting
 </fd-docs-section-title>
 <description>
