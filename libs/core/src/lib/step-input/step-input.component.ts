@@ -10,6 +10,7 @@ import {
     Input,
     isDevMode,
     LOCALE_ID,
+    OnDestroy,
     OnInit,
     Output,
     ViewChild,
@@ -38,11 +39,19 @@ let stepInputUniqueId: number = 0;
         }
     ]
 })
-export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAccessor {
+export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 
     /** Sets compact mode */
     @Input()
     compact: boolean;
+
+    /** Sets control in readonly mode */
+    @Input()
+    readonly: boolean;
+
+    /** Sets control in disabled mode */
+    @Input()
+    disabled: boolean;
 
     /** Sets locale used to format numeric value */
     @Input()
@@ -62,11 +71,11 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
 
     /** Sets Increment Button title attribute */
     @Input()
-    incrementButtonTitle: string = null;
+    incrementButtonTitle: string = '';
 
     /** Sets Decrement Button title attribute */
     @Input()
-    decrementButtonTitle: string = null;
+    decrementButtonTitle: string = '';
 
     /** Sets input aria-label attribute */
     @Input()
@@ -136,13 +145,17 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
     @Input()
     hasStepButtons: boolean = true;
 
-    /** Emits event on input input blur */
-    @Output()
-    onBlur: EventEmitter<void> = new EventEmitter<void>();
+    /** Horizontally aligns value inside input */
+    @Input()
+    textAlign: 'left' | 'center' | 'right';
 
-    /** Emits event on input input focus */
+    /** Emits event when input gets focused */
     @Output()
-    onFocus: EventEmitter<void> = new EventEmitter<void>();
+    onFocusIn: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Emits event when input loses focus */
+    @Output()
+    onFocusOut: EventEmitter<void> = new EventEmitter<void>();
 
     /** Emits new value when control value has changed */
     @Output()
@@ -168,6 +181,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
 
     /** @hidden */
     viewValue: string;
+
+    /** @hidden */
+    focused: boolean;
 
     /** @hidden */
     private _numerals: RegExp;
@@ -215,6 +231,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
         this._listenOnButtonsClick();
     }
 
+    ngOnDestroy() {
+        this._subscriptions.unsubscribe();
+    }
+
     /** @hidden */
     registerOnChange(fn: any): void {
         this.onChange = fn;
@@ -234,10 +254,15 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
         }
     }
 
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+    }
+
     /** Increment input value by step value */
     increment(): void {
-        if (this.value + this.step <= this._max) {
-            this.value += this.step;
+        if (this.canIncrement) {
+            this.value = this._cutFloatingNumberDistortion(this.value, this.step);
             this._emitChangedValue();
             this._updateViewValue();
         }
@@ -245,19 +270,23 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
 
     /** Decrement input value by step value */
     decrement(): void {
-        if (this.value - this.step >= this._min) {
-            this.value -= this.step;
+        if (this.canDecrement) {
+            this.value = this._cutFloatingNumberDistortion(this.value, -this.step);
             this._emitChangedValue();
             this._updateViewValue();
         }
     }
 
     /** @hidden */
-    onKeyDown(event: KeyboardEvent): void {
+    handleKeyDown(event: KeyboardEvent): void {
         const muteEvent = (evnt: Event) => {
             evnt.stopPropagation();
             evnt.preventDefault();
         };
+
+        if (!this._canChangeValue) {
+            return
+        }
 
         if (KeyUtil.isKey(event, 'ArrowUp')) {
             this.increment();
@@ -269,18 +298,38 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
     }
 
     /** @hidden */
-    onFocusIn(): void {
-        this.onFocus.emit();
+    handleFocusIn(): void {
+        this.focused = true;
+        this.onFocusIn.emit();
         this.onTouched();
     }
 
     /** @hidden */
-    onInputValueChange(event: any): void {
+    handleFocusOut(): void {
+        this.focused = false;
+        this.onFocusOut.emit();
+    }
+
+
+    /** @hidden */
+    handleScroll(event: WheelEvent): void {
+        if (this._canChangeValue && this.focused) {
+            if (event.deltaY > 0) {
+                this.decrement();
+            } else {
+                this.increment();
+            }
+            event.preventDefault();
+        }
+    }
+
+    /** @hidden */
+    updateViewValue(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
         if (parsedValue !== this.lastEmittedValue) {
             this._emitChangedValue();
-            this._updateViewValue();
         }
+        this._updateViewValue();
     }
 
     /** @hidden */
@@ -290,6 +339,32 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
         if (parsedValue !== null) {
             this.value = this._checkValueLimits(parsedValue);
         }
+    }
+
+    /** @hidden */
+    private get _canChangeValue(): boolean {
+        return !(this.disabled || this.readonly)
+    }
+
+    /** @hidden */
+    get canIncrement(): boolean {
+        return this.value + this.step <= this._max;
+    }
+
+    /** @hidden */
+    get canDecrement(): boolean {
+        return this.value - this.step >= this._min;
+    }
+
+    /** @hidden */
+    private _cutFloatingNumberDistortion(value: number, step: number): number {
+        const stepDecimals = `${step}`.split('.')[1];
+        const valueDecimals = `${value}`.split('.')[1];
+        const stepDecimalsLength = stepDecimals ? stepDecimals.length : 0;
+        const valueDecimalsLength = valueDecimals ? valueDecimals.length : 0;
+        const longestDecimal = valueDecimalsLength > stepDecimalsLength ? valueDecimalsLength : stepDecimalsLength;
+
+        return Number((value + step).toFixed(longestDecimal));
     }
 
     /** @hidden */
@@ -366,7 +441,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, ControlValueAc
                 )
         });
 
-        return merge(onMouseDown$, onMouseDown$.pipe(switchMap(() => timerFactory$)))
+        return merge(onMouseDown$, onMouseDown$.pipe(switchMap(() => timerFactory$)));
     }
 
     /** @hidden */

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-step-input-default-example',
     template: `
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+        <div class="step-input-example-container" style="justify-content: space-evenly;">
             <div class="step-input-example">
                 <label fd-form-label for="default-input">Normal</label>
                 <fd-step-input id="default-input" [(value)]="value1"></fd-step-input>

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-step-input-label-example',
     template: `
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+        <div class="step-input-example-container">
             <div class="step-input-example">
                 <label fd-form-label for="kg-input">Kilograms</label>
                 <fd-step-input id="kg-input" unit="kg"></fd-step-input>

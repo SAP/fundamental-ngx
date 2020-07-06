@@ -16,55 +16,73 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     encapsulation: ViewEncapsulation.None
 })
 export class StepInputDocsComponent {
-    stepInput: ExampleFile[] = [
+    stepInputDefault: ExampleFile[] = [
         {
             language: 'typescript',
             standalone: true,
             code: stepInputDefaultSrc,
             fileName: 'step-input-default-example',
-            component: 'StepInputDefaultExampleComponent',
-        },
+            component: 'StepInputDefaultExampleComponent'
+        }
+    ];
+
+    stepInputConfiguration: ExampleFile[] = [
         {
             language: 'typescript',
             standalone: true,
             code: stepInputConfigurationSrc,
             fileName: 'step-input-configuration-example',
-            component: 'StepInputConfigurationExampleComponent',
-        },
+            component: 'StepInputConfigurationExampleComponent'
+        }
+    ];
+
+    stepInputCurrency: ExampleFile[] = [
         {
             language: 'typescript',
             standalone: true,
             code: stepInputCurrencySrc,
             fileName: 'step-input-currency-example',
-            component: 'StepInputCurrencyExampleComponent',
-        },
+            component: 'StepInputCurrencyExampleComponent'
+        }
+    ];
+
+    stepInputForm: ExampleFile[] = [
         {
             language: 'typescript',
             standalone: true,
             code: stepInputFormSrc,
             fileName: 'step-input-form-example',
-            component: 'StepInputFormExampleComponent',
-        },
+            component: 'StepInputFormExampleComponent'
+        }
+    ];
+
+    stepInputLabel: ExampleFile[] = [
         {
             language: 'typescript',
             standalone: true,
             code: stepInputLabelSrc,
             fileName: 'step-input-label-example',
-            component: 'StepInputLabelExampleComponent',
-        },
-        {
-            language: 'typescript',
-            standalone: true,
-            code: stepInputStateSrc,
-            fileName: 'step-input-state-example',
-            component: 'StepInputStateExampleComponent',
-        },
+            component: 'StepInputLabelExampleComponent'
+        }
+    ];
+
+    stepInputLocale: ExampleFile[] = [
         {
             language: 'typescript',
             standalone: true,
             code: stepInputLocaleSrc,
             fileName: 'step-input-locale-example',
-            component: 'StepInputLocaleExampleComponent',
+            component: 'StepInputLocaleExampleComponent'
+        }
+    ];
+
+    stepInputState: ExampleFile[] = [
+        {
+            language: 'typescript',
+            standalone: true,
+            code: stepInputStateSrc,
+            fileName: 'step-input-state-example',
+            component: 'StepInputStateExampleComponent'
         }
     ];
 }
