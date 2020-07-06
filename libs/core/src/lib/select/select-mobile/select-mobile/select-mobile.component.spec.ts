@@ -8,13 +8,8 @@ import { MobileModeConfig } from '../../../utils/interfaces/mobile-mode-config';
 
 @Component({
     template: `
-        <fd-select
-            placeholder="Select an option"
-            [(value)]="selectedValue"
-            [mobile]="true"
-            [mobileConfig]="mobileConfig"
-        >
-            <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+        <fd-select placeholder="Select an option" [(value)]="selectedValue" [mobile]="true" [mobileConfig]="mobileConfig">
+            <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
         </fd-select>
     `
 })
@@ -23,30 +18,28 @@ class TestWrapperComponent {
     selectedValue: string;
     mobileConfig: MobileModeConfig = { title: 'TITLE', hasCloseButton: true };
 
-    @ViewChild(SelectComponent, { static: true })
+    @ViewChild(SelectComponent, {static: true})
     selectComponent: SelectComponent;
 }
 
-xdescribe('SelectComponent in mobile mode', () => {
+describe('SelectComponent in mobile mode', () => {
     let testComponent: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
-    let triggerControl: HTMLElement;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
             imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule]
-        })
-            .overrideComponent(SelectComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-            .compileComponents();
+        }).overrideComponent(
+            SelectComponent,
+            {set: {changeDetection: ChangeDetectionStrategy.Default}}
+        ).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
-
-        triggerControl = fixture.nativeElement.querySelector('div.fd-select');
     });
 
     async function wait(componentFixture: ComponentFixture<any>) {
@@ -54,39 +47,81 @@ xdescribe('SelectComponent in mobile mode', () => {
         await componentFixture.whenStable();
     }
 
-    it('should start closed so that dialog is not shown', async () => {
+    it('should create', async () => {
+        expect(testComponent).toBeTruthy();
+
+        await wait(fixture);
+
+        expect(testComponent.selectComponent).toBeTruthy();
+    });
+
+    it('should start closed', async () => {
         await wait(fixture);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeFalsy();
     });
 
-    it('should open dialog with option items when select is clicked', async () => {
+    it('should open', async () => {
         await wait(fixture);
-        fixture.componentInstance.selectComponent.toggle();
+
+        testComponent.selectComponent.open();
 
         await wait(fixture);
+
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeTruthy();
+
         expect(fixture.nativeElement.querySelectorAll('fd-option').length).toBe(testComponent.options.length);
     });
 
-    it('should close dialog with cancel X icon in the top corner is clicked', async () => {
-        await wait(fixture);
-        triggerControl.click();
+    it('should close', async () => {
         await wait(fixture);
 
-        const closeButton: HTMLElement = fixture.nativeElement.querySelector('.fd-dialog__header button');
-        closeButton.click();
+        testComponent.selectComponent.open();
+
         await wait(fixture);
 
+        testComponent.selectComponent.close();
+
+        await wait(fixture);
+
+        expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeFalsy();
+    });
+
+    it('should open on click', async () => {
+        await wait(fixture);
+
+        fixture.nativeElement.querySelector('.fd-select__control').click();
+
+        await wait(fixture);
+
+        expect(testComponent.selectComponent.isOpen).toBe(true);
+        expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeTruthy();
+    });
+
+    it('should close on click while open', async () => {
+        await wait(fixture);
+
+        fixture.nativeElement.querySelector('.fd-select__control').click();
+
+        await wait(fixture);
+
+        fixture.nativeElement.querySelector('.fd-select__control').click();
+
+        await wait(fixture);
+
+        expect(testComponent.selectComponent.isOpen).toBe(false);
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeFalsy();
     });
 
     it('should select an option', async () => {
         await wait(fixture);
-        triggerControl.click();
+
+        testComponent.selectComponent.open();
+
         await wait(fixture);
 
         fixture.nativeElement.querySelector('fd-option').click();
+
         await wait(fixture);
 
         expect(fixture.componentInstance.selectedValue).toBe(testComponent.selectComponent.selected.value);
@@ -101,7 +136,7 @@ xdescribe('SelectComponent in mobile mode', () => {
                 dialogFooter: fixture.nativeElement.querySelector('fd-dialog-footer'),
                 dialogCloseBtn: fixture.nativeElement.querySelector('[fd-dialog-close-button]'),
                 footerButtons: fixture.nativeElement.querySelectorAll('[fd-dialog-decisive-button]')
-            };
+            }
         }
 
         await wait(fixture);
@@ -116,7 +151,7 @@ xdescribe('SelectComponent in mobile mode', () => {
         expect(mobileElements.dialogFooter).toBeFalsy();
         expect(mobileElements.dialogCloseBtn).toBeFalsy();
         expect(mobileElements.footerButtons.length).toEqual(0);
-        testComponent.mobileConfig = { title: 'TITLE', hasCloseButton: true };
+        testComponent.mobileConfig = {title: 'TITLE', hasCloseButton: true};
 
         await wait(fixture);
 
@@ -125,7 +160,7 @@ xdescribe('SelectComponent in mobile mode', () => {
         expect(mobileElements.dialogCloseBtn).toBeTruthy();
         expect(mobileElements.footerButtons.length).toEqual(0);
         expect(mobileElements.dialogTitle.textContent).toContain('TITLE');
-        testComponent.mobileConfig = { cancelButtonText: 'APPROVE', approveButtonText: 'DISMISS' };
+        testComponent.mobileConfig = {cancelButtonText: 'APPROVE', approveButtonText: 'DISMISS'};
 
         await wait(fixture);
 
@@ -136,7 +171,6 @@ xdescribe('SelectComponent in mobile mode', () => {
         expect(mobileElements.footerButtons.length).toEqual(2);
     });
 
-
     it('should emit value on submit', async () => {
         await wait(fixture);
 
@@ -145,30 +179,36 @@ xdescribe('SelectComponent in mobile mode', () => {
         testComponent.selectComponent.open();
 
         await wait(fixture);
+
         fixture.nativeElement.querySelector('fd-option').click();
 
         await wait(fixture);
 
+        expect(testComponent.selectComponent.valueChange.emit).not.toHaveBeenCalled();
+
+        await wait(fixture);
+
         fixture.nativeElement.querySelector('[fd-dialog-decisive-button]').click();
+
         await wait(fixture);
 
         expect(testComponent.selectComponent.valueChange.emit).toHaveBeenCalled();
     });
 
-    it('should rollback to original value when CANCEL is pressed', async () => {
-        fixture.componentInstance.selectedValue = 'Pineapple';
+    it('should not emit value on cancel', async () => {
         await wait(fixture);
 
+        spyOn(testComponent.selectComponent.valueChange, 'emit').and.callThrough();
         testComponent.selectComponent.mobileConfig = { approveButtonText: 'SUBMIT', hasCloseButton: true };
         testComponent.selectComponent.open();
 
         await wait(fixture);
+
         fixture.nativeElement.querySelector('fd-option').click();
+
         await wait(fixture);
 
         fixture.nativeElement.querySelector('.sap-icon--decline').click();
-        await wait(fixture);
-
-        expect(testComponent.selectComponent.selected.value).toBe('Pineapple');
+        expect(testComponent.selectComponent.valueChange.emit).not.toHaveBeenCalled();
     });
 });

@@ -1,9 +1,9 @@
 <form [formGroup]="customForm">
     <fd-select formControlName="selectControl">
-        <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+        <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
     </fd-select>
 </form>
-<small style="display: block;">Value: {{ customForm.controls.selectControl.value }}</small>
-<small style="display: block;">Touched: {{ customForm.touched }}</small>
-<small style="display: block;">Dirty: {{ customForm.dirty }}</small>
-<small style="display: block;">Status: {{ customForm.status }}</small>
+<small style="display: block">Value: {{customForm.controls.selectControl.value}}</small>
+<small style="display: block">Touched: {{customForm.touched}}</small>
+<small style="display: block">Dirty: {{customForm.dirty}}</small>
+<small style="display: block">Status: {{customForm.status}}</small>

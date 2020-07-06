@@ -7,9 +7,14 @@ import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-c
 
 @NgModule({
     declarations: [SelectMobileComponent],
-    imports: [CommonModule, DialogModule, ButtonModule],
+    imports: [
+        CommonModule,
+        DialogModule,
+        ButtonModule
+    ],
     exports: [SelectMobileComponent],
     providers: [DynamicComponentService],
     entryComponents: [SelectMobileComponent]
 })
-export class SelectMobileModule {}
+export class SelectMobileModule {
+}
