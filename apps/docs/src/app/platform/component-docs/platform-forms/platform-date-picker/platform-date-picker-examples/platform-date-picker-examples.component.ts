@@ -27,6 +27,7 @@ export class PlatformDatePickerExampleComponent {
     disableddate = '';
     birthdayPicker = ''
     holidayPicker = ''
+    dateOutsideForm = ''
 
     constructor() {}
 

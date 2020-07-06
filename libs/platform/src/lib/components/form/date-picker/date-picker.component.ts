@@ -247,15 +247,15 @@ export class DatePickerComponent extends BaseInput {
         this.value = finalValue;
     }
 
-    public handleSelectedDateChange(fdDate: FdDate): void {
+    public handleSelectedDateChange = (fdDate: FdDate): void => {
         this.selectedDateChange.emit(fdDate);
-    }
+    };
 
-    public handleSelectedRangeDateChange(fdRangeDate: FdRangeDate): void {
+    public handleSelectedRangeDateChange = (fdRangeDate: FdRangeDate): void => {
         this.selectedRangeDateChange.emit(fdRangeDate);
-    }
+    };
 
-    public handleActiveViewChange(fdCalendarView: FdCalendarView): void {
+    public handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
         this.activeViewChange.emit(fdCalendarView);
-    }
+    };
 }

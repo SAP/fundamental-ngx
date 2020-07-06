@@ -141,3 +141,10 @@
 
 <p>Birthday: {{ birthdayPicker | json }}</p>
 <p>Holiday Date: {{ holidayPicker | json }}</p>
+
+<separator></separator>
+<!--Date picker use outside form-->
+<h3>Date Picker Use Outside Form.</h3>
+<fdp-date-picker [name]="'dateOutsideForm'" [type]="'single'" [format]="'dd/MM/yyyy'" [(ngModel)]="dateOutsideForm">
+</fdp-date-picker>
+<p>Date: {{ dateOutsideForm | json }}</p>
