@@ -6,12 +6,12 @@
     <fd-input-group
         [compact]="true"
         [disabled]="false"
-        [ngModel]="searchTerm"
+        [(ngModel)]="searchTerm"
         (ngModelChange)="searchInputChanged($event)"
         [glyph]="'decline'"
         [placeholder]="'Search'"
         [button]="true"
-        (addOnButtonClicked)="searchTerm = ''"
+        (addOnButtonClicked)="resetSearch()"
     >
     </fd-input-group>
     <button fd-toolbar-item fd-button (click)="openDialog(newItemDialog)" [compact]="true" [fdType]="'transparent'" [glyph]="'add'">New Item</button>

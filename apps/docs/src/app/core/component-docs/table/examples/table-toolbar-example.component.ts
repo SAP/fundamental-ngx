@@ -52,7 +52,7 @@ export class TableToolbarExampleComponent implements OnInit {
         });
     }
 
-    searchInputChanged(event: string) {
+    searchInputChanged(event: string): void {
         if (event) {
             this.displayedRows = this.tableRows.filter(row => {
                 return JSON.stringify(row).toLowerCase().indexOf(event.toLowerCase()) !== -1;
@@ -60,6 +60,11 @@ export class TableToolbarExampleComponent implements OnInit {
         } else {
             this.displayedRows = this.tableRows;
         }
+    }
+
+    resetSearch(): void {
+        this.displayedRows = this.tableRows;
+        this.searchTerm = '';
     }
 
     openDialog(dialog: TemplateRef<any>): void {
