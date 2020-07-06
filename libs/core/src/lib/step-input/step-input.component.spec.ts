@@ -131,20 +131,20 @@ describe('StepInputComponent', () => {
     });
 
     it('should emit (onFocus) and (onBlur) event', async () => {
-        const blurEventSpy = spyOn(component.onBlur, 'emit');
-        const focusEventSpy = spyOn(component.onFocus, 'emit');
+        const focusOutEventSpy = spyOn(component.onFocusOut, 'emit');
+        const focusInEventSpy = spyOn(component.onFocusIn, 'emit');
 
         component.inputElement.nativeElement.focus();
 
         await whenStable(fixture);
 
-        expect(focusEventSpy).toHaveBeenCalled();
+        expect(focusInEventSpy).toHaveBeenCalled();
 
         component.inputElement.nativeElement.blur();
 
         await whenStable(fixture);
 
-        expect(blurEventSpy).toHaveBeenCalled();
+        expect(focusOutEventSpy).toHaveBeenCalled();
     });
 
     it('should display in compact mode', async () => {

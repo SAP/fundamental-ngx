@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-step-input-locale-example',
     template: `
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+        <div class="step-input-example-container">
             <div class="step-input-example">
                 <label fd-form-label for="spanish-input">Spanish locale</label>
                 <fd-step-input id="spanish-input" [(value)]="value1" locale="es-ES"></fd-step-input>
