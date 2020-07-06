@@ -11,3 +11,7 @@ fd-select {
         overflow: auto;
     }
 }
+
+.fd-popover__body > :first-child {
+    border-radius: 0;
+}
