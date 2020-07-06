@@ -36,44 +36,38 @@ export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
     encapsulation: ViewEncapsulation.None
 })
 export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
-
-    public hours: number[];
-    public minutes: number[];
-    public seconds: number[];
-    public periods: string[];
-
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
      */
-    @Input() meridian: boolean = false;
+    @Input()
+    meridian: boolean = false;
 
     /**
      *  @Input When set to false, does not set the input field to invalid state on invalid entry.
      */
-    @Input() validate: boolean = true;
+    @Input()
+    validate: boolean = true;
 
     /**
      * @Input when set to true, time inputs won't allow to have 1 digit
      * for example 9 will become 09
      * but 12 will be kept as 12.
      */
-    @Input() keepTwoDigits: boolean = false;
+    @Input()
+    keepTwoDigits: boolean = false;
 
     /**
      * @Input Disables the component.
      */
-    @Input() disabled: boolean;
-
-    /**
-     * @Input When set to false, hides the buttons that increment and decrement the corresponding input.
-     */
-    @Input() spinners: boolean = true;
+    @Input()
+    disabled: boolean;
 
     /**
      * @Input When set to false, hides the input for seconds.
      */
-    @Input() displaySeconds: boolean = true;
+    @Input()
+    displaySeconds: boolean = true;
 
     /** @Input When set to false, hides the input for minutes. */
     @Input()
@@ -85,8 +79,13 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     @Input()
     displayHours: boolean = true;
 
+    /** Defines if time component should be used with compact mode */
     @Input()
     compact: boolean = false;
+
+    /** Defines if time component should be used with tablet mode */
+    @Input()
+    tablet: boolean = false;
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
@@ -107,6 +106,11 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
      * Used only in meridian mode. Stores information the current am/pm state.
      */
     period: string;
+
+    hours: number[];
+    minutes: number[];
+    seconds: number[];
+    periods: string[];
 
     activeView: FdTimeActiveView = 'hour';
 
@@ -166,13 +170,13 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
         this.periods = [this.timeI18n.meridianAm, this.timeI18n.meridianPm];
     }
 
-    handleMinuteChange(minute: number): void {
-        this.time.minute = minute;
+    handleSecondChange(second: number): void {
+        this.time.second = second;
         this.onChange(this.time);
     }
 
-    handleHourChange(hour: number): void {
-        this.time.hour = hour;
+    handleMinuteChange(minute: number): void {
+        this.time.minute = minute;
         this.onChange(this.time);
     }
 
@@ -214,16 +218,12 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
         }
     }
 
-    handleSecondChange(second: number): void {
-        this.time.second = second;
-        this.onChange(this.time);
-    }
-
     /** @hidden */
     writeValue(time: TimeObject): void {
         if (!time) {
             return;
         }
+        console.log(time);
         this.time = Object.assign({}, time);
         this.setDisplayedHour();
         this.changeDetRef.detectChanges();
@@ -329,10 +329,8 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
      * Defines if period is PM, Considers the fact that period should be case sensitive
      */
     private isPm(period: string): boolean {
-        const pmMeridian = this.timeI18n.meridianCaseSensitive
-            ? this.timeI18n.meridianPm
-            : this.timeI18n.meridianPm.toLocaleUpperCase();
-        period = this.timeI18n.meridianCaseSensitive ? period : period.toLocaleUpperCase();
+        const pmMeridian = this.timeI18n.meridianPm.toLocaleUpperCase();
+        period = period.toLocaleUpperCase();
         return period === pmMeridian;
     }
 
@@ -341,10 +339,8 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
      * Defines if period is AM, Considers the fact that period should be case sensitive
      */
     private isAm(period: string): boolean {
-        const amMeridian = this.timeI18n.meridianCaseSensitive
-            ? this.timeI18n.meridianAm
-            : this.timeI18n.meridianAm.toLocaleUpperCase();
-        period = this.timeI18n.meridianCaseSensitive ? period : period.toLocaleUpperCase();
+        const amMeridian = this.timeI18n.meridianAm.toLocaleUpperCase();
+        period = period.toLocaleUpperCase();
         return period === amMeridian;
     }
 }

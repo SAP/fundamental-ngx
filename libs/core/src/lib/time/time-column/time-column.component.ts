@@ -29,25 +29,26 @@ let timeColumnUniqueId: number = 0;
     encapsulation: ViewEncapsulation.None,
 })
 export class TimeColumnComponent implements AfterViewInit, OnInit {
-     /*
-     Whether the action bar also has a back button.
-     */
-    @HostBinding('class.fd-time__col')
-    fdTimeColClass: boolean = true;
-
     /** items in row  */
     @Input()
     rows: any[];
 
+    /**
+     * @Input when set to true, time inputs won't allow to have 1 digit
+     * for example 9 will become 09
+     * but 12 will be kept as 12.
+     */
+    @Input()
+    keepTwoDigits: boolean = false;
+
     /** Active value  */
     @Input()
     set activeItem(value: any) {
-        this._activeItem = value;
-        if (this._initialised && this._activeItem && this._activeItem !== value) {
+        if (this._initialised && this._activeItem !== value) {
             this._pickTime(this._getItem(value), true);
         }
+        this._activeItem = value;
     }
-
     get activeItem(): any {
         return this._activeItem;
     }
@@ -62,11 +63,9 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
             document.getElementById(this.currentIndicatorId).focus();
         }
     }
-
     get active(): boolean {
         return this._active;
     }
-
     private _active: boolean = false;
 
     /** Whether time column is meridian */
@@ -107,6 +106,11 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     @ViewChildren(CarouselItemDirective)
     items: QueryList<CarouselItemDirective>;
 
+    /* Whether the action bar also has a back button. */
+    @HostBinding('class.fd-time__col')
+    fdTimeColClass: boolean = true;
+
+
     config: CarouselConfig;
     currentIndicatorId: string = this.id + '-current-indicator';
 
@@ -119,7 +123,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         private _changeDetRef: ChangeDetectorRef
     ) {}
 
-    /* @hidden */
+    /** @hidden */
     ngOnInit(): void {
         if (!this.meridian) {
             this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms', infinite: true };
@@ -130,6 +134,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
+        console.log(this._activeItem);
         if (!this._activeItem) {
             this._activeItem = this.items.first.value;
         }
@@ -174,17 +179,25 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
 
     /** Method that handles active item change */
     activeChangedHandle(item: CarouselItemDirective): void {
-        this._activeItem = item.value;
+        const array = this.items.toArray();
+        let index: number = array.findIndex(__item => __item === item) + this.offset;
+
+        if (index > array.length) {
+            index = index - array.length;
+        }
+
+        const _item = array[index];
+
+        this._activeItem = _item.value;
         this.activeItemChange.emit(this._activeItem);
-        this._activeCarouselItem = item;
-        console.log('change handle');
+        this._activeCarouselItem = _item;
     }
 
     /** Method that changes active item and triggers carousel scroll */
     pick(value: any): void {
         /** To prevent from switching time, when it's being dragged */
         if (!this._isDragging) {
-            this._pickTime(this._getItem(value), true);
+            this._pickTime(this._getItem(value), true, true);
         }
     }
 
@@ -223,6 +236,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     /** Method triggered by keyboard, or decrement button */
     private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean): void {
         if (!item) {
+            console.log('empty');
             // TODO: Throw Error
             return
         }

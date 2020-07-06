@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { TimeObject } from './time-object';
 
 import { TimeComponent } from './time.component';
-import { SimpleChange } from '@angular/core';
 import { ButtonModule } from '../button/button.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 

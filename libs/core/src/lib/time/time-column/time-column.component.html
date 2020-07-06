@@ -11,7 +11,9 @@
         (dragged)="handleDrag($event)"
         fdCarousel>
         <li class="fd-time__item" *ngFor="let row of rows; let index = index" [carouselItemId]="id + index" fdCarouselItem [value]="row">
-            <span class="fd-time__unit" (click)="pick(row)">{{row}}</span>
+            <span class="fd-time__unit" (click)="pick(row)">
+                {{row | twoDigits: keepTwoDigits}}
+            </span>
         </li>
     </ul>
     <div class="fd-time__current-indicator"
@@ -21,7 +23,7 @@
          [id]="currentIndicatorId">
     </div>
     <span class="fd-time__item fd-time__item--collapsed" [ngClass]="{'is-hidden': active}">
-            {{activeItem}}
+            {{activeItem | twoDigits: keepTwoDigits}}
     </span>
 </div>
 <button class="fd-button fd-button fd-button--transparent sap-icon--navigation-down-arrow"

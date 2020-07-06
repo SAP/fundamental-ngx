@@ -59,14 +59,10 @@ export class CarouselDirective implements AfterContentInit {
     private _lastDistance: number = 0;
     private _currentTransitionPx: number = 0;
 
-    private _panMoved$ = new Subject<number>();
-
     constructor(
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef
-    ) {
-        this._panMoved$.subscribe(delta => this._handlePan(delta));
-    }
+    ) {}
 
     ngAfterContentInit(): void {
 
@@ -85,7 +81,6 @@ export class CarouselDirective implements AfterContentInit {
 
         this._transitionToIndex(index, smooth);
 
-        console.log(this._currentTransitionPx);
         this._previousActiveItem = item;
     }
 
@@ -167,6 +162,11 @@ export class CarouselDirective implements AfterContentInit {
     /** Get closes element, based on current tansition */
     private _getClosest(): CarouselItemDirective {
 
+        /** If transition is positive, it'should go to first element */
+        if (this._currentTransitionPx > 0) {
+            return this.items.first;
+        }
+
         const size: number = this._getSize(this.items.first);
 
         /** When scroll is after half of element, then ext one should be active */
@@ -180,22 +180,14 @@ export class CarouselDirective implements AfterContentInit {
          * every element should have same width, otherwise it should be looped through all elements,
          * which is not good for performance
          */
-        const index: number =
-            Math.ceil(this._currentTransitionPx / size)
-        ;
-
-        let absIndex = Math.abs(index);
+        let index: number = Math.abs(Math.ceil(this._currentTransitionPx / size));
 
         /** Checking if transition went out of scope of array */
-        if (this.items.toArray()[absIndex]) {
-            absIndex = absIndex + (halfApproached ? 1 : 0);
-            return this.items.toArray()[absIndex];
+        if (this.items.toArray()[index]) {
+            index = index + (halfApproached ? 1 : 0);
+            return this.items.toArray()[index];
         } else {
-            if (index > 0) {
-                return this.items.first;
-            } else {
-                return this.items.last;
-            }
+            return this.items.last;
         }
     }
 
@@ -209,11 +201,11 @@ export class CarouselDirective implements AfterContentInit {
         hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 
         if (this.config.vertical) {
-            hammer.on('panmove', (event) => this._panMoved$.next(event.deltaY));
+            hammer.on('panmove', (event) => this._handlePan(event.deltaY));
             hammer.on('panstart', () => this._handlePanStart());
             hammer.on('panend', (event) => this._handlePanEnd(event.deltaY));
         } else {
-            hammer.on('panmove', (event) => this._panMoved$.next(event.deltaX));
+            hammer.on('panmove', (event) => this._handlePan(event.deltaX));
             hammer.on('panstart', () => this._handlePanStart());
             hammer.on('panend', (event) => this._handlePanEnd(event.deltaX));
         }
@@ -231,6 +223,8 @@ export class CarouselDirective implements AfterContentInit {
     private _transitionCarousel(transitionPx: number) {
 
         this._currentTransitionPx = transitionPx;
+
+        console.log(this._currentTransitionPx);
 
         if (this.config.vertical) {
 

@@ -26,7 +26,10 @@
 <fd-docs-section-title [id]="'dynamicChangeTime'" [componentName]="'time'">
     Programmatically Changed Time
 </fd-docs-section-title>
-<description></description>
+<description>
+    Makes it possible to programmatically change the value of the currently selected time. By programmatically
+    changing the value of this property, the time that is highlighted on the calendar will change accordingly.
+</description>
 <component-example>
     <fd-time-programmatically-example></fd-time-programmatically-example>
 </component-example>
@@ -37,7 +40,7 @@
 <fd-docs-section-title [id]="'clockWithoutSeconds'" [componentName]="'time'">
     Clock Without Seconds
 </fd-docs-section-title>
-<description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
+<description>Use <code>[displaySeconds]="false"</code> to hide the seconds column.</description>
 <component-example>
     <fd-time-no-seconds-example></fd-time-no-seconds-example>
 </component-example>
@@ -48,28 +51,28 @@
 <fd-docs-section-title [id]="'clockWithoutMinutesSeconds'" [componentName]="'time'">
     Clock Without Minutes and Seconds
 </fd-docs-section-title>
-<description
-    >Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or
+<description>
+    Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or
     <code>[displayHours]="false"</code>
     to turn off seconds, minutes or hours for the time picker. At least one of them should be enabled.
 </description>
 <component-example>
-<!--    <fd-time-only-hours-example></fd-time-only-hours-example>-->
+    <fd-time-only-hours-example></fd-time-only-hours-example>
 </component-example>
 <code-example [exampleFiles]="timeOnlyHours"></code-example>
 
 <separator></separator>
-
-<fd-docs-section-title [id]="'disabled'" [componentName]="'time'">
-    Disabled State
-</fd-docs-section-title>
-<description> You can disable the entire component by setting <code>[disabled]="true"</code>. </description>
-<component-example>
+    
+<!--<fd-docs-section-title [id]="'disabled'" [componentName]="'time'">-->
+<!--    Disabled State-->
+<!--</fd-docs-section-title>-->
+<!--<description> You can disable the entire component by setting <code>[disabled]="true"</code>. </description>-->
+<!--<component-example>-->
 <!--    <fd-time-disabled-example></fd-time-disabled-example>-->
-</component-example>
-<code-example [exampleFiles]="timeDisabled"></code-example>
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="timeDisabled"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
 <fd-docs-section-title [id]="'twoDigits'" [componentName]="'time'">
     Time With Two Digits
@@ -110,6 +113,6 @@
     methods used for accessing data within Angular reactive forms.
 </description>
 <component-example>
-<!--    <fd-time-form-example></fd-time-form-example>-->
+    <fd-time-form-example></fd-time-form-example>
 </component-example>
 <code-example [exampleFiles]="timeForm"></code-example>

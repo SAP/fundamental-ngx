@@ -1,11 +1,13 @@
-<div class="fd-time" [ngClass]="{'fd-time--compact': compact}">
+<div class="fd-time"
+     [ngClass]="{'fd-time--compact': compact, 'fd-time--tablet': tablet}">
     <fd-time-column
         *ngIf="hours"
         [active]="isActive('hour')"
         (activeStateChange)="changeActive('hour')"
         [rows]="hours"
-        [activeItem]="time.hour"
-        (activeItemChange)="handleHourChange($event)"
+        [activeItem]="displayedHour"
+        [keepTwoDigits]="keepTwoDigits"
+        (activeItemChange)="displayedHourChanged($event)"
         (focusNextColumn)="handleNextColumnFocus('hour')"
         (focusPreviousColumn)="handlePreviousColumnFocus('hour')"
     ></fd-time-column>
@@ -17,6 +19,7 @@
         (focusPreviousColumn)="handlePreviousColumnFocus('minute')"
         [rows]="minutes"
         [activeItem]="time.minute"
+        [keepTwoDigits]="keepTwoDigits"
         (activeItemChange)="handleMinuteChange($event)"
     ></fd-time-column>
     <fd-time-column
@@ -27,6 +30,7 @@
         (focusPreviousColumn)="handlePreviousColumnFocus('second')"
         [rows]="minutes"
         [activeItem]="time.second"
+        [keepTwoDigits]="keepTwoDigits"
         (activeItemChange)="handleSecondChange($event)"
     ></fd-time-column>
     <fd-time-column
@@ -36,6 +40,7 @@
         (focusNextColumn)="handleNextColumnFocus('meridian')"
         (focusPreviousColumn)="handlePreviousColumnFocus('meridian')"
         [rows]="periods"
+        [offset]="0"
         [(activeItem)]="period"
         (activeItemChange)="periodModelChange()"
         [meridian]="true"></fd-time-column>
