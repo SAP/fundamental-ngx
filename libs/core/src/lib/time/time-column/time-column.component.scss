@@ -17,9 +17,12 @@
     pointer-events: none;
 }
 
-.fd-time__wrapper--meridian .fd-time__item:last-child {
-    &.fd-time__item--collapsed {
-        margin-bottom: 0;
-        margin-top: 0;
+.fd-time--compact,
+.fd-time {
+    .fd-time__wrapper--meridian .fd-time__item:last-child {
+        &.fd-time__item--collapsed {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
     }
 }

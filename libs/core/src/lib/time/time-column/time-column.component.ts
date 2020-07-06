@@ -4,7 +4,8 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
-    HostBinding, HostListener,
+    HostBinding,
+    HostListener,
     Input,
     OnInit,
     Output,
@@ -13,7 +14,6 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Subject } from 'rxjs';
 import { CarouselConfig, CarouselDirective } from '../../utils/directives/carousel/carousel.directive';
 import { CarouselItemDirective } from '../../utils/directives/carousel/carousel-item.directive';
 import { KeyUtil } from '../../utils/functions/key-util';
@@ -29,20 +29,22 @@ let timeColumnUniqueId: number = 0;
     encapsulation: ViewEncapsulation.None,
 })
 export class TimeColumnComponent implements AfterViewInit, OnInit {
-
-    /*
+     /*
      Whether the action bar also has a back button.
      */
     @HostBinding('class.fd-time__col')
     fdTimeColClass: boolean = true;
 
+    /** items in row  */
     @Input()
     rows: any[];
 
+    /** Active value  */
     @Input()
     set activeItem(value: any) {
+        this._activeItem = value;
         if (this._initialised && this._activeItem && this._activeItem !== value) {
-            this._pickTime(this._getItem(value), true)
+            this._pickTime(this._getItem(value), true);
         }
     }
 
@@ -50,12 +52,14 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         return this._activeItem;
     }
 
+    /** Defines if column is active, it has impact on behaviour and visual  */
     @Input()
     set active(value: boolean) {
         this._active = value;
         if (value && this._initialised) {
             this._changeDetRef.detectChanges();
             this._pickTime(this._getItem(this.activeItem), false);
+            document.getElementById(this.currentIndicatorId).focus();
         }
     }
 
@@ -65,51 +69,66 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
 
     private _active: boolean = false;
 
+    /** Whether time column is meridian */
     @Input()
     @HostBinding('class.fd-time__col--period')
     meridian: boolean = false;
 
+    /** Id of column, initiated with some default value */
     @Input()
     id: string = 'fd-time-column-' + timeColumnUniqueId++;
 
+    /**
+     * Offset for carousel directive, active item is always the first one.
+     * In case of having more items in carousel than 1, middle element should be active
+     */
+    @Input()
+    offset: number = 3;
+
+    /** Event emitted, when active item is changed, by carousel */
     @Output()
     activeItemChange: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
-    activeStateChange: EventEmitter<number> = new EventEmitter<number>();
+    focusPreviousColumn: EventEmitter<void> = new EventEmitter<void>();
 
-    private _activeItem: any;
-    private _activeCarouselItem: CarouselItemDirective;
+    @Output()
+    focusNextColumn: EventEmitter<void> = new EventEmitter<void>();
 
-    private _isDragging: boolean = false;
+    /** Event emitted, when certain column is activated */
+    @Output()
+    activeStateChange: EventEmitter<void> = new EventEmitter<void>();
 
+    /** @hidden */
     @ViewChild(CarouselDirective)
     carousel: CarouselDirective;
 
+    /** @hidden */
     @ViewChildren(CarouselItemDirective)
     items: QueryList<CarouselItemDirective>;
 
     config: CarouselConfig;
-
     currentIndicatorId: string = this.id + '-current-indicator';
 
-    private _scrolled: Subject<any> = new Subject<any>();
-
+    private _activeItem: any;
+    private _activeCarouselItem: CarouselItemDirective;
+    private _isDragging: boolean = false;
     private _initialised: boolean = false;
 
     constructor(
         private _changeDetRef: ChangeDetectorRef
     ) {}
 
+    /* @hidden */
     ngOnInit(): void {
         if (!this.meridian) {
             this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms', infinite: true };
-            // this.rows = [...this.rows, ...this.rows, ...this.rows];
         } else {
             this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
         }
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         if (!this._activeItem) {
             this._activeItem = this.items.first.value;
@@ -118,11 +137,13 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         this._initialised = true;
     }
 
+    /** @hidden */
     @HostListener('click')
     onItemClick() {
         this.activeStateChange.emit();
     }
 
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKey(event, 'ArrowDown')) {
@@ -132,19 +153,17 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
             this.scrollUp();
             event.preventDefault();
         } else if (KeyUtil.isKey(event, 'ArrowLeft')) {
-            // TODO
+            this.focusPreviousColumn.emit();
         } else if (KeyUtil.isKey(event, 'ArrowRight')) {
-            // TODO
+            this.focusNextColumn.emit();
         } else if (KeyUtil.isKeyType(event, 'numeric')) {
+            // TODO
             const value = Number(event.key);
-            this._pickTime(this._getItem(value), false)
+            this._pickTime(this._getItem(value), false, true)
         }
     }
 
-    getId(num: number): string {
-        return this.id + '-' + num;
-    }
-
+    /** It prevents from accidentally change the item by click event */
     handleDrag(isDragging: boolean): void {
         if (!isDragging) {
             setTimeout(() => this._isDragging = false, 30);
@@ -153,24 +172,23 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         }
     }
 
+    /** Method that handles active item change */
     activeChangedHandle(item: CarouselItemDirective): void {
         this._activeItem = item.value;
         this.activeItemChange.emit(this._activeItem);
         this._activeCarouselItem = item;
+        console.log('change handle');
     }
 
-    handleScroll(event): void {
-        this._scrolled.next(event);
-    }
-
-    // TODO
-    pick(value: any, id: string): void {
-        // TODO
+    /** Method that changes active item and triggers carousel scroll */
+    pick(value: any): void {
+        /** To prevent from switching time, when it's being dragged */
         if (!this._isDragging) {
-            this._pickTime(this._getItem(value, id), true);
+            this._pickTime(this._getItem(value), true);
         }
     }
 
+    /** Method triggered by keyboard, or increment button */
     scrollUp(): void {
         let index: number = this.items
             .toArray()
@@ -183,9 +201,10 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
             index = this.rows.length - 1;
         }
 
-        this._pickTime(this.items.toArray()[index], true);
+        this._pickTime(this.items.toArray()[index], true, true);
     }
 
+    /** Method triggered by keyboard, or decrement button */
     scrollDown(): void {
         let index: number = this.items
             .toArray()
@@ -198,25 +217,37 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
             index = 0;
         }
 
-        this._pickTime(this.items.toArray()[index], true);
+        this._pickTime(this.items.toArray()[index], true, true);
     }
 
-    private _pickTime(item: CarouselItemDirective, smooth?: boolean): void {
+    /** Method triggered by keyboard, or decrement button */
+    private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean): void {
         if (!item) {
             // TODO: Throw Error
             return
         }
-        this.carousel.goToItem(item, smooth);
+        this._triggerCarousel(item, smooth);
         this._activeCarouselItem = item;
         this._activeItem = item.value;
-        this.activeItemChange.emit(this._activeItem);
+        if (emitEvent) {
+            this.activeItemChange.emit(this._activeItem);
+        }
     }
 
-    private _getItem(value: number, id?: string): CarouselItemDirective {
-        if (id) {
-            return this.items.find(item => item.value === value && item.carouselItemId === id);
-        } else {
-            return this.items.find(item => item.value === value);
+    /** Returns item with passed value */
+    private _getItem(value: number): CarouselItemDirective {
+        return this.items.find(item => item.value === value);
+    }
+
+    /**  */
+    private _triggerCarousel(item: CarouselItemDirective, smooth?: boolean): void {
+        const array = this.items.toArray();
+        let index: number = array.findIndex(_item => _item === item) - this.offset;
+
+        if (index < 0) {
+            index = array.length + index;
         }
+
+        this.carousel.goToItem(array[index], smooth);
     }
 }

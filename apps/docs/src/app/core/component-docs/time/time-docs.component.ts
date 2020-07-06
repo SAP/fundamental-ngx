@@ -5,14 +5,14 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 import * as timeSrc from '!raw-loader!./examples/time-example.component.html';
 import * as timeMeridianSrc from '!raw-loader!./examples/time-12-example.component.html';
 import * as timeDisabledSrc from '!raw-loader!./examples/time-disabled-example.component.html';
-import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-no-spinners-example.component.html';
+import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-programmatically-example.component.html';
 import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
 import * as timeOnlyHoursSrc from '!raw-loader!./examples/time-only-hours-example.component.html';
 
 import * as timeSrcTs from '!raw-loader!./examples/time-example.component.ts';
 import * as timeMeridianSrcTs from '!raw-loader!./examples/time-12-example.component.ts';
 import * as timeDisabledSrcTs from '!raw-loader!./examples/time-disabled-example.component.ts';
-import * as timeNoSpinnersSrcTs from '!raw-loader!./examples/time-no-spinners-example.component.ts';
+import * as timeNoSpinnersSrcTs from '!raw-loader!./examples/time-programmatically-example.component.ts';
 import * as timeNoSecondsSrcTs from '!raw-loader!./examples/time-no-seconds-example.component.ts';
 import * as timeOnlyHoursSrcTs from '!raw-loader!./examples/time-only-hours-example.component.ts';
 import * as timeTwoDigitsSrcTs from '!raw-loader!./examples/time-two-digits-example/time-two-digits-example.component.ts';

@@ -143,8 +143,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
         public timeI18nLabels: TimeI18nLabels,
         public timeI18n: TimeI18n,
         private changeDetRef: ChangeDetectorRef
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.hours = [];
@@ -175,6 +174,44 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     handleHourChange(hour: number): void {
         this.time.hour = hour;
         this.onChange(this.time);
+    }
+
+    handleNextColumnFocus(column: FdTimeActiveView): void {
+        if (column === 'hour' && this.displayMinutes) {
+            this.changeActive('minute');
+        } else if (column === 'hour' && this.meridian) {
+            this.changeActive('meridian');
+        } else if (column === 'minute' && this.displaySeconds) {
+            this.changeActive('second');
+        } else if (column === 'minute' && this.meridian) {
+            this.changeActive('meridian');
+        } else if (column === 'second' && this.meridian) {
+            this.changeActive('meridian');
+        } else if (column === 'second') {
+            this.changeActive('hour');
+        } else if (column === 'meridian') {
+            this.changeActive('hour');
+        }
+    }
+
+    handlePreviousColumnFocus(column: FdTimeActiveView): void {
+        if (column === 'hour' && this.meridian) {
+            this.changeActive('meridian');
+        } else if (column === 'hour' && this.displaySeconds) {
+            this.changeActive('second');
+        } else if (column === 'minute') {
+            this.changeActive('hour');
+        } else if (column === 'second') {
+            this.changeActive('minute');
+        } else if (column === 'meridian') {
+            if (this.displaySeconds) {
+                this.changeActive('second')
+            } else if (this.displayMinutes) {
+                this.changeActive('minute')
+            } else {
+                this.changeActive('hour')
+            }
+        }
     }
 
     handleSecondChange(second: number): void {

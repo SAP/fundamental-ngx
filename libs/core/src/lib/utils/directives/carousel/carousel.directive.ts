@@ -56,14 +56,10 @@ export class CarouselDirective implements AfterContentInit {
     items: QueryList<CarouselItemDirective>;
 
     private _previousActiveItem: CarouselItemDirective;
-    private _player: AnimationPlayer;
     private _lastDistance: number = 0;
     private _currentTransitionPx: number = 0;
 
-    private _size: number;
-
     private _panMoved$ = new Subject<number>();
-    private _panMovedCheck$ = new Subject<number>();
 
     constructor(
         private _elementRef: ElementRef,
@@ -80,7 +76,6 @@ export class CarouselDirective implements AfterContentInit {
     }
 
     goToItem(item: CarouselItemDirective, smooth?: boolean): void {
-
         let index: number = this.getIndexOfItem(item);
 
         if (this.config.infinite) {
@@ -90,6 +85,7 @@ export class CarouselDirective implements AfterContentInit {
 
         this._transitionToIndex(index, smooth);
 
+        console.log(this._currentTransitionPx);
         this._previousActiveItem = item;
     }
 
@@ -124,6 +120,7 @@ export class CarouselDirective implements AfterContentInit {
         const missingItems = (index + offset) - middleIndex;
         const array = this.items.toArray();
 
+
         if (missingItems > 0) {
             for (let i = 0; i < missingItems; i ++) {
                 array.push(array.shift())
@@ -134,15 +131,19 @@ export class CarouselDirective implements AfterContentInit {
             }
         }
 
+        /** Changing order of elements in QueryList and Native HTML */
         this.items.reset(array);
         this.items.forEach(item => item.getElement().parentNode.appendChild(item.getElement()));
 
-
-        /** TODO: Comment */
+        /**
+         * For proper animation it's needed to transform elements,
+         * by changing transition by amount of elements placed at top/bottom
+         */
         this._elementRef.nativeElement.style.transitionDuration = '0s';
         this._transitionCarousel(this._currentTransitionPx + this._getSize(this.items.first) * missingItems);
     }
 
+    /** @hidden */
     private _transitionToIndex(index: number, smooth?: boolean): void {
         const transitionPx: number = this._getSize(this.items.first) * index;
 
@@ -163,22 +164,29 @@ export class CarouselDirective implements AfterContentInit {
         this._transitionCarousel(-transitionPx);
     }
 
+    /** Get closes element, based on current tansition */
     private _getClosest(): CarouselItemDirective {
 
         const size: number = this._getSize(this.items.first);
 
-        // TODO Comment
+        /** When scroll is after half of element, then ext one should be active */
         const halfApproached: boolean =
             Math.abs(this._currentTransitionPx % size) >
             size / 2
         ;
 
+        /**
+         * Index based on transition px divided by size of elements,
+         * every element should have same width, otherwise it should be looped through all elements,
+         * which is not good for performance
+         */
         const index: number =
             Math.ceil(this._currentTransitionPx / size)
         ;
 
         let absIndex = Math.abs(index);
 
+        /** Checking if transition went out of scope of array */
         if (this.items.toArray()[absIndex]) {
             absIndex = absIndex + (halfApproached ? 1 : 0);
             return this.items.toArray()[absIndex];
@@ -193,10 +201,6 @@ export class CarouselDirective implements AfterContentInit {
 
     private getIndexOfItem(item: CarouselItemDirective): number {
         return this.items.toArray().findIndex(_item => _item === item);
-    }
-
-    private _getOverflowItems(): number {
-        return Math.ceil(this.items.length / 5);
     }
 
     private _hammerSetup(): void {
@@ -215,8 +219,8 @@ export class CarouselDirective implements AfterContentInit {
         }
     }
 
+    /** Pam Start handler, removes transition duration, */
     private _handlePanStart(): void {
-        this._size = this._getSize(this.items.first);
         this._elementRef.nativeElement.style.transitionDuration = '0s';
         this.dragged.emit(true);
     }
@@ -254,12 +258,7 @@ export class CarouselDirective implements AfterContentInit {
         // this._player.play();
     }
 
-    // private buildAnimation(offset, time: boolean) {
-    //     return this._builder.build([
-    //         animate(time ? this._getTransition() : 0, style({ transform: `translateY(${offset}px)` }))
-    //     ]);
-    // }
-
+    /** @hidden */
     private _getTransition(): string {
         if (this.config) {
             return this.config.transition;
@@ -268,6 +267,7 @@ export class CarouselDirective implements AfterContentInit {
         }
     }
 
+    /** Getting size of carousel, width for horizontal, height for vertical */
     private _getSize(item: CarouselItemDirective): number {
         if (this.config.vertical) {
             return item.getHeight();

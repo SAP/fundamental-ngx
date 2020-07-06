@@ -6,7 +6,7 @@ import { API_FILES } from '../../api-files';
 import { TimeHeaderComponent } from './time-header/time-header.component';
 import { TimeDocsComponent } from './time-docs.component';
 import { TimeOnlyHoursExampleComponent } from './examples/time-only-hours-example.component';
-import { TimeNoSpinnersExampleComponent } from './examples/time-no-spinners-example.component';
+import { TimeProgrammaticallyExampleComponent } from './examples/time-programmatically-example.component';
 import { TimeNoSecondsExampleComponent } from './examples/time-no-seconds-example.component';
 import { TimeI18nExampleComponent } from './examples/time-i18n-example.component';
 import { TimeFormExampleComponent } from './examples/time-form-example.component';
@@ -41,7 +41,7 @@ const routes: Routes = [
         TimeTwoDigitsExampleComponent,
         TimeOnlyHoursExampleComponent,
         TimeNoSecondsExampleComponent,
-        TimeNoSpinnersExampleComponent
+        TimeProgrammaticallyExampleComponent
     ]
 })
 export class TimeDocsModule {}

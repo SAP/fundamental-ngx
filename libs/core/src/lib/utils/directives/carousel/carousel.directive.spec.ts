@@ -10,13 +10,13 @@ import { CommonModule } from '@angular/common';
 @Component({
     template: `
         <div #directiveElement fdCarousel [config]="configuration">
-            <div fdCarouselItem style="height: 30px"></div>
-            <div fdCarouselItem style="height: 30px"></div>
-            <div fdCarouselItem style="height: 30px"></div>
-            <div fdCarouselItem style="height: 30px"></div>
-            <div fdCarouselItem style="height: 30px"></div>
-            <div fdCarouselItem style="height: 30px"></div>
-            <div fdCarouselItem style="height: 30px"></div>
+            <div fdCarouselItem value="1" style="height: 30px"></div>
+            <div fdCarouselItem value="2" style="height: 30px"></div>
+            <div fdCarouselItem value="3" style="height: 30px"></div>
+            <div fdCarouselItem value="4" style="height: 30px"></div>
+            <div fdCarouselItem value="5" style="height: 30px"></div>
+            <div fdCarouselItem value="6" style="height: 30px"></div>
+            <div fdCarouselItem value="7" style="height: 30px"></div>
         </div>
     `
 })
@@ -33,13 +33,13 @@ class VerticalCarouselComponent {
 @Component({
     template: `
         <div #directiveElement fdCarousel [config]="configuration">
-            <div fdCarouselItem style="width: 30px"></div>
-            <div fdCarouselItem style="width: 30px"></div>
-            <div fdCarouselItem style="width: 30px"></div>
-            <div fdCarouselItem style="width: 30px"></div>
-            <div fdCarouselItem style="width: 30px"></div>
-            <div fdCarouselItem style="width: 30px"></div>
-            <div fdCarouselItem style="width: 30px"></div>
+            <div fdCarouselItem value="1" style="width: 30px"></div>
+            <div fdCarouselItem value="2" style="width: 30px"></div>
+            <div fdCarouselItem value="3" style="width: 30px"></div>
+            <div fdCarouselItem value="4" style="width: 30px"></div>
+            <div fdCarouselItem value="5" style="width: 30px"></div>
+            <div fdCarouselItem value="6" style="width: 30px"></div>
+            <div fdCarouselItem value="7" style="width: 30px"></div>
         </div>
     `
 })
@@ -91,8 +91,6 @@ fdescribe('CarouselDirective', () => {
     });
 
     it('should put translate on vertical', () => {
-        verticalDirective.config.offset = 0;
-
         const distance: number = verticalComponent.items.first.getHeight() * 4;
 
         verticalDirective.goToItem(verticalDirective.items.toArray()[4], false);
@@ -101,10 +99,8 @@ fdescribe('CarouselDirective', () => {
         expect(verticalDirective['_currentTransitionPx']).toBe(-distance);
     });
 
-    it('should put translate on vertical with offset', () => {
-        verticalDirective.config.offset = 3;
-
-        const distance: number = verticalComponent.items.first.getHeight() * (4 - 3);
+    it('should put translate on vertical and be on middle at end', () => {
+        const distance: number = verticalComponent.items.first.getHeight() * 4;
 
         verticalDirective.goToItem(verticalDirective.items.toArray()[4], false);
         verticalFixture.detectChanges();
@@ -112,95 +108,81 @@ fdescribe('CarouselDirective', () => {
         expect(verticalDirective['_currentTransitionPx']).toBe(-distance);
     });
 
-    it('should put some elements down/up, when scrolled', () => {
-        verticalDirective.config.offset = 0;
-        verticalDirective.config.infinite = true;
+    it('should center, when scrolled', () => {
+        const distanceCenter: number = verticalComponent.items.first.getHeight() * 4;
 
-        spyOn<any>(verticalDirective, '_placeOnBottom');
-        spyOn<any>(verticalDirective, '_placeOnTop');
+        verticalDirective.config.infinite = true;
 
         verticalDirective.goToItem(verticalComponent.items.toArray()[6], false);
         verticalFixture.detectChanges();
+        verticalFixture.detectChanges();
 
-        expect(verticalDirective['_placeOnBottom']).toHaveBeenCalled();
+        expect(verticalDirective['_currentTransitionPx']).toBe(-distanceCenter);
 
         verticalDirective.goToItem(verticalComponent.items.toArray()[0], false);
         verticalFixture.detectChanges();
+        verticalFixture.detectChanges();
 
-        expect(verticalDirective['_placeOnTop']).toHaveBeenCalled();
+        expect(verticalDirective['_currentTransitionPx']).toBe(-distanceCenter);
     });
 
-    it('should handle pan start, move and end ', () => {
-        verticalDirective.config.offset = 0;
-
+    it('should handle pan start and move', () => {
         spyOn<any>(verticalDirective.dragged, 'emit').and.callThrough();
 
         (<any>verticalDirective)._handlePanStart();
 
         expect(verticalDirective.dragged.emit).toHaveBeenCalledWith(true);
 
-        const firstDelta: number = 10;
+        const firstDelta: number = -10;
         (<any>verticalDirective)._handlePan(firstDelta);
 
         verticalFixture.detectChanges();
 
         expect(verticalDirective['_currentTransitionPx']).toBe(firstDelta);
 
-        const secondDelta: number = 20;
+        const secondDelta: number = -20;
         (<any>verticalDirective)._handlePan(secondDelta);
 
         verticalFixture.detectChanges();
 
         expect(verticalDirective['_currentTransitionPx']).toBe(secondDelta);
 
-        const thirdDelta: number = 120;
+        const thirdDelta: number = -120;
         (<any>verticalDirective)._handlePan(thirdDelta);
 
         verticalFixture.detectChanges();
 
         expect(verticalDirective['_currentTransitionPx']).toBe(thirdDelta);
+        expect((<any>verticalDirective)._getClosest().value).toBe(verticalDirective.items.toArray()[4].value);
+    });
 
-        expect((<any>verticalDirective)._getClosest()).toBe(verticalDirective.items.toArray()[4]);
+    it('should handle pan end', () => {
+        spyOn(verticalDirective.activeChange, 'emit');
 
-        // Should Return fifth, because it's pre half
-        (<any>verticalDirective)._handlePan(160);
-
+        (<any>verticalDirective)._handlePanEnd(-170);
         verticalFixture.detectChanges();
 
-        expect(verticalDirective['_currentTransitionPx']).toBe(160);
+        expect(verticalDirective.activeChange.emit).toHaveBeenCalledWith(verticalDirective.items.toArray()[6]);
+    });
 
-        expect((<any>verticalDirective)._getClosest()).toBe(verticalDirective.items.toArray()[4]);
+    it('should return closest with half', () => {
+        verticalDirective['_currentTransitionPx'] = -160;
 
-        // Should Return sixth, because it's after half
-        (<any>verticalDirective)._handlePan(170);
+        expect((<any>verticalDirective)._getClosest().value).toBe(verticalDirective.items.toArray()[5].value);
+        verticalDirective['_currentTransitionPx'] = -170;
 
-        verticalFixture.detectChanges();
-
-        expect(verticalDirective['_currentTransitionPx']).toBe(170);
-
-        expect((<any>verticalDirective)._getClosest()).toBe(verticalDirective.items.toArray()[5]);
-
-        (<any>verticalDirective)._handlePanEnd(170);
-
-        verticalFixture.detectChanges();
-
-        expect(verticalDirective.dragged.emit).toHaveBeenCalledWith(false);
-
-        // Should be aligned to 6th element
-        expect(verticalDirective['_currentTransitionPx']).toBe(verticalDirective.items.first.getHeight() * 5);
+        expect((<any>verticalDirective)._getClosest().value).toBe(verticalDirective.items.toArray()[6].value);
     });
 
     it('should handle get put last/first element when pan after/before list ', () => {
-        verticalDirective.config.offset = 0;
-
         (<any>verticalDirective)._handlePanStart();
 
-        (<any>verticalDirective)._handlePanEnd(6000);
+        (<any>verticalDirective)._handlePanEnd(-6000);
         verticalFixture.detectChanges();
 
-        expect(verticalDirective['_currentTransitionPx']).toBe(verticalDirective.items.first.getHeight() * 6);
+        expect(verticalDirective['_currentTransitionPx']).toBe(-verticalDirective.items.first.getHeight() * 6);
 
-        (<any>verticalDirective)._handlePanEnd(0);
+        (<any>verticalDirective)._handlePanEnd(1000);
         verticalFixture.detectChanges();
 
         expect(verticalDirective['_currentTransitionPx']).toBe(0);
