@@ -114,6 +114,7 @@ export class TableCustomDialogComponent {
 
     dropHandle(event: CdkDragDrop<string[]>) {
         moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+        this.columns = [...this.columns];
     }
 
     handleAllChange(selected?: boolean): void {
@@ -138,6 +139,8 @@ export class TableCustomDialogComponent {
         if (reverse) {
             this.columns = this.columns.reverse();
         }
+
+        this.columns = [...this.columns];
     }
 
     save(): void {
