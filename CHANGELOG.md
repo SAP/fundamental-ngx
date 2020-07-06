@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.25...v0.20.0-rc.26) (2020-07-06)
+
+
+### Bug Fixes
+
+* remove rounded corners for the first element of Select ([#2779](https://github.com/SAP/fundamental-ngx/issues/2779)) ([8adb816](https://github.com/SAP/fundamental-ngx/commit/8adb81662a5348182722ecbf2cd6b06b395818dd))
+
 ## [0.20.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.24...v0.20.0-rc.25) (2020-07-06)
 
 ## [0.20.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.23...v0.20.0-rc.24) (2020-07-05)
