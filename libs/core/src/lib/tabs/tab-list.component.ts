@@ -117,8 +117,8 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    tabHeaderClickHandler(tabIndex: number, disabled?: boolean): void {
-        if (this.selectedIndex !== tabIndex && !disabled) {
+    tabHeaderClickHandler(tabIndex: number): void {
+        if (tabIndex !== this.selectedIndex) {
             this.selectTab(tabIndex);
         }
     }
@@ -137,7 +137,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
         this._tabsService.tabSelected
             .pipe(
                 takeUntil(this._onDestroy$),
-                filter((index) => index !== this.selectedIndex)
+                filter(index => index !== this.selectedIndex)
             )
             .subscribe((index) => this.selectTab(index));
     }
