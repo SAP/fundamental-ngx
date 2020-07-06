@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -33,7 +34,7 @@ import { FormStates } from '../form/form-control/form-states';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent implements ControlValueAccessor, OnInit {
+export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit {
     /** @hidden */
     @HostBinding('class.fd-time-picker')
     timepickerclass = true;
@@ -136,6 +137,11 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         this.placeholder = this.getPlaceholder();
     }
 
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.child.changeActive(null);
+    }
+
     /**
      * Returns the current value of the time input.
      */
@@ -152,6 +158,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
             this.meridian
         );
         return formattedTime !== undefined ? formattedTime : '';
+    }
+
+    handleIsOpenChange(isOpen: boolean): void {
+        this.isOpen = isOpen;
+        if (isOpen) {
+            this.child.changeActive('hour');
+        }
     }
 
     /** @hidden */
@@ -176,27 +189,27 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     inputGroupClicked($event) {
         if (!this.isOpen && !this.disabled) {
             $event.stopPropagation();
-            this.isOpen = true;
+            this.handleIsOpenChange(true);
         }
     }
 
     /** @hidden */
     onFocusHandler() {
         if (!this.isOpen) {
-            this.isOpen = true;
+            this.handleIsOpenChange(true);
         }
     }
 
     /** @hidden */
     addOnButtonClicked() {
         if (!this.disabled) {
-            this.isOpen = !this.isOpen;
+            this.handleIsOpenChange(!this.isOpen);
         }
     }
 
     /** @hidden */
     popoverClosed() {
-        this.isOpen = false;
+        this.handleIsOpenChange(false);
     }
 
     /** @hidden */

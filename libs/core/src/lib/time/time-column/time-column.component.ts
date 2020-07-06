@@ -60,7 +60,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         if (value && this._initialised) {
             this._changeDetRef.detectChanges();
             this._pickTime(this._getItem(this.activeItem), false);
-            document.getElementById(this.currentIndicatorId).focus();
+            this._focusIndicator();
         }
     }
     get active(): boolean {
@@ -134,7 +134,6 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        console.log(this._activeItem);
         if (!this._activeItem) {
             this._activeItem = this.items.first.value;
         }
@@ -236,7 +235,6 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     /** Method triggered by keyboard, or decrement button */
     private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean): void {
         if (!item) {
-            console.log('empty');
             // TODO: Throw Error
             return
         }
@@ -263,5 +261,12 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         }
 
         this.carousel.goToItem(array[index], smooth);
+    }
+
+    /** */
+    private _focusIndicator(): void {
+        if (document.getElementById(this.currentIndicatorId)) {
+            document.getElementById(this.currentIndicatorId).focus();
+        }
     }
 }

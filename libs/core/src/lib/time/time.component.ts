@@ -223,7 +223,6 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
         if (!time) {
             return;
         }
-        console.log(time);
         this.time = Object.assign({}, time);
         this.setDisplayedHour();
         this.changeDetRef.detectChanges();

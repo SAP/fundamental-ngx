@@ -53,7 +53,7 @@ class HorizontalCarouselComponent {
     configuration: CarouselConfig = {};
 }
 
-fdescribe('CarouselDirective', () => {
+describe('CarouselDirective', () => {
     let horizontalComponent: HorizontalCarouselComponent;
     let verticalComponent: VerticalCarouselComponent;
     let horizontalDirective: CarouselDirective;

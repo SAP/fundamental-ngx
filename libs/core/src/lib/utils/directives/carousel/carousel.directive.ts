@@ -224,8 +224,6 @@ export class CarouselDirective implements AfterContentInit {
 
         this._currentTransitionPx = transitionPx;
 
-        console.log(this._currentTransitionPx);
-
         if (this.config.vertical) {
 
             this._elementRef.nativeElement.style.transform = 'translateY(' + this._currentTransitionPx + 'px)';
