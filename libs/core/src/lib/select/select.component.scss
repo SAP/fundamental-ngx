@@ -4,6 +4,11 @@
 fd-select {
     & > fd-popover {
         width: 100%;
+
+        &.fd-popover__body--dropdown {
+            width: auto;
+            display: block;
+        }
     }
 
     & ul[fd-list] {

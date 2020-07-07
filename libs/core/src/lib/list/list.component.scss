@@ -199,8 +199,8 @@
 }
 .fd-list__title {
     -webkit-box-flex: 3;
-    -ms-flex: 3 3 10%;
-    flex: 3 3 10%;
+    -ms-flex: 3 3 auto;
+    flex: 3 3 auto;
     font-size: 1rem;
     font-size: var(--sapFontLargeSize,1rem)
 }
@@ -208,8 +208,8 @@
     font-size: .875rem;
     font-size: var(--sapFontSize,.875rem);
     -webkit-box-flex: 2;
-    -ms-flex: 2 2 10%;
-    flex: 2 2 10%;
+    -ms-flex: 2 2 auto;
+    flex: 2 2 auto;
     text-align: right;
     padding-left: 1rem
 }
