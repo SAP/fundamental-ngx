@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { TableCellDirective } from './table-cell.directive';
 import { TableService } from '../table.service';
+import { Subscription } from 'rxjs';
 
 export const Hidden_Class_Name = 'fd-table-hidden';
 
@@ -46,11 +47,14 @@ export class TableRowDirective implements AfterViewInit, OnDestroy {
     @Input()
     secondary: boolean = false;
 
+    /** @hidden */
+    propagateKeysSubscription: Subscription;
+
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _tableService: TableService
     ) {
-        this._tableService.propagateKeys$.subscribe(
+        this.propagateKeysSubscription = this._tableService.propagateKeys$.subscribe(
             (keys: string[]) => this._resetCells(keys)
         );
     }
@@ -62,7 +66,7 @@ export class TableRowDirective implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._tableService.propagateKeys$.unsubscribe();
+        this.propagateKeysSubscription.unsubscribe();
     }
 
     /** @hidden */

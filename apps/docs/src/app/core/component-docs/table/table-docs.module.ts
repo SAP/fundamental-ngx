@@ -17,6 +17,7 @@ import {
     ObjectStatusModule,
     TableModule,
     PaginationModule,
+    ToolbarModule,
     DialogModule,
     MessageStripModule
 } from '@fundamental-ngx/core';
@@ -28,6 +29,7 @@ import { TablePopinExampleComponent } from './examples/table-popin-example/table
 import { TablePaginationExampleComponent } from './examples/table-pagination-example.component';
 import { SortTableByPipe } from './examples/table-example-sort.pipe';
 import { FilterTableByPipe } from './examples/table-example-filter.pipe';
+import { TableToolbarExampleComponent } from './examples/table-toolbar-example.component';
 import { TableFilterPipe } from './examples/table-custom-columns-example/table-filter.pipe';
 import { TableCustomDialogComponent } from './examples/table-custom-columns-example/table-custom-dialog.component';
 
@@ -51,6 +53,7 @@ const routes: Routes = [
         ObjectStatusModule,
         PaginationModule,
         ListModule,
+        ToolbarModule,
         DialogModule,
         MessageStripModule
     ],
@@ -69,6 +72,7 @@ const routes: Routes = [
         TableSemanticExampleComponent,
         TablePopinExampleComponent,
         TablePaginationExampleComponent,
+        TableToolbarExampleComponent,
         FilterTableByPipe,
         SortTableByPipe,
         TableCustomColumnsExampleComponent,
