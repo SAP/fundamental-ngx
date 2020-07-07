@@ -58,8 +58,6 @@ describe('TokenizerComponent', () => {
         spyOn(component, 'handleKeyDown');
         component.ngAfterViewChecked();
 
-        component.compact = true;
-
         await whenStable(fixture);
 
         component.input.elementRef().nativeElement.focus();
@@ -79,7 +77,6 @@ describe('TokenizerComponent', () => {
         const event = new KeyboardEvent('keydown', {
             code: 'ArrowLeft'
         });
-        component.compact = true;
         component.handleKeyDown(event, component.tokenList.length - 1);
 
         expect(component.input.elementRef().nativeElement.focus).not.toHaveBeenCalled();
@@ -92,7 +89,6 @@ describe('TokenizerComponent', () => {
         const event = new KeyboardEvent('keydown', {
             code: 'ArrowRight'
         });
-        component.compact = true;
         component.handleKeyDown(event, component.tokenList.length - 1);
 
         expect(component.input.elementRef().nativeElement.focus).toHaveBeenCalled();
@@ -104,7 +100,6 @@ describe('TokenizerComponent', () => {
         const event = new KeyboardEvent('keydown', {
             code: 'ArrowRight'
         });
-        component.compact = true;
         component.handleKeyDown(event, component.tokenList.length - 2);
 
         expect(component.focusTokenElement).toHaveBeenCalledWith(component.tokenList.length - 1);
@@ -119,6 +114,9 @@ describe('TokenizerComponent', () => {
         );
         spyOn(component, 'addKeyboardListener');
         spyOn(component, 'handleKeyDown');
+        const event = new KeyboardEvent('keydown', {
+            code: 'ArrowRight'
+        });
 
         component.focusTokenElement(1);
 

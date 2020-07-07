@@ -266,7 +266,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             event.preventDefault();
         } else if (KeyUtil.isKey(event, 'Enter')) {
             this.input.elementRef().nativeElement.focus();
-        } else if ((KeyUtil.isKey(event, 'ArrowLeft') && !rtl) || (KeyUtil.isKey(event, 'ArrowRight') && rtl) ) {
+        } else if ((KeyUtil.isKey(event, 'ArrowLeft') && !rtl) || (KeyUtil.isKey(event, 'ArrowRight') && rtl)) {
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
         } else if ((KeyUtil.isKey(event, 'ArrowRight') && !rtl) || (KeyUtil.isKey(event, 'ArrowLeft') && rtl)) {
@@ -322,35 +322,31 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     private _handleArrowLeft(fromIndex: number): void {
-        if (this.compact) {
-            // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
-            if (fromIndex === this.moreTokensLeft.length) {
-                const poppedToken = this.moreTokensLeft.pop();
-                if (poppedToken) {
-                    this._makeElementVisible(poppedToken.elementRef);
-                }
-                // and then hide any tokens from the right that no longer fit
-                this._collapseTokens('right');
+        // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
+        if (fromIndex === this.moreTokensLeft.length) {
+            const poppedToken = this.moreTokensLeft.pop();
+            if (poppedToken) {
+                this._makeElementVisible(poppedToken.elementRef);
             }
-
-            this.cdRef.detectChanges();
+            // and then hide any tokens from the right that no longer fit
+            this._collapseTokens('right');
         }
+
+        this.cdRef.detectChanges();
     }
 
     /** @hidden */
     private _handleArrowRight(fromIndex: number): void {
-        if (this.compact) {
-            if (fromIndex === this.tokenList.length - this.moreTokensRight.length - 1 && this.moreTokensRight.length) {
-                const poppedToken = this.moreTokensRight.pop();
-                if (poppedToken) {
-                    this._makeElementVisible(poppedToken.elementRef);
-                }
-                // and then hide any tokens from the left that no longer fit
-                this._collapseTokens('left');
+        if (fromIndex === this.tokenList.length - this.moreTokensRight.length - 1 && this.moreTokensRight.length) {
+            const poppedToken = this.moreTokensRight.pop();
+            if (poppedToken) {
+                this._makeElementVisible(poppedToken.elementRef);
             }
-
-            this.cdRef.detectChanges();
+            // and then hide any tokens from the left that no longer fit
+            this._collapseTokens('left');
         }
+
+        this.cdRef.detectChanges();
     }
 
     /** @hidden */
