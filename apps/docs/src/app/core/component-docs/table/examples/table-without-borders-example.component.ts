@@ -5,9 +5,9 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './table-without-borders-example.component.html'
 })
 export class TableWithoutBordersExampleComponent implements OnInit {
-    tableRows;
+    tableRows: any[];
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.tableRows = [
             {
                 column1: 'user.name@email.com',

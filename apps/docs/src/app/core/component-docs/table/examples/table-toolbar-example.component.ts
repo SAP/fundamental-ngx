@@ -15,7 +15,7 @@ export class TableToolbarExampleComponent implements OnInit {
 
     constructor(private _dialogService: DialogService, private _fb: FormBuilder) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.tableRows = [
             {
                 column1: 'Apple',

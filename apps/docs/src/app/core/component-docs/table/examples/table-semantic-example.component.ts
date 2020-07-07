@@ -5,9 +5,9 @@ import { Component } from '@angular/core';
     templateUrl: './table-semantic-example.component.html'
 })
 export class TableSemanticExampleComponent {
-    selectMasterModel = false;
+    selectMasterModel: boolean = false;
 
-    tableRows = [
+    tableRows: any[] = [
         {
             status: '',
             column1: 'user.name@email.com',
@@ -79,7 +79,7 @@ export class TableSemanticExampleComponent {
         this.selectMasterModel = this._allSelected();
     }
 
-    selectMaster(checked: boolean) {
+    selectMaster(checked: boolean): void {
         this.selectMasterModel = checked;
         if (checked) {
             this._selectAll();

@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['table-responsive-example.component.scss']
 })
 export class TableResponsiveExampleComponent implements OnInit {
-    tableRows;
+    tableRows: any[];
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.tableRows = [
             {
                 column1: 'Row 1',

@@ -5,9 +5,9 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './table-activable-example.component.html'
 })
 export class TableActivableExampleComponent implements OnInit {
-    tableRows;
+    tableRows: any[];
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.tableRows = [
             {
                 column1: {
