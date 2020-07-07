@@ -16,4 +16,5 @@ export interface ExampleFile {
         default: string;
     };
     service?: boolean;
+    pipe?: boolean;
 }

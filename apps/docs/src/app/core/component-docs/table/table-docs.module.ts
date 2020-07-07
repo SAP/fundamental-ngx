@@ -10,13 +10,16 @@ import { TableColumnSortingExampleComponent } from './examples/table-column-sort
 import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
 import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
+import { TableCustomColumnsExampleComponent } from './examples/table-custom-columns-example/table-custom-columns-example.component';
 import {
     CheckboxModule,
     ListModule,
     ObjectStatusModule,
     TableModule,
     PaginationModule,
-    ToolbarModule, DialogModule
+    ToolbarModule,
+    DialogModule,
+    MessageStripModule
 } from '@fundamental-ngx/core';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
@@ -27,6 +30,8 @@ import { TablePaginationExampleComponent } from './examples/table-pagination-exa
 import { SortTableByPipe } from './examples/table-example-sort.pipe';
 import { FilterTableByPipe } from './examples/table-example-filter.pipe';
 import { TableToolbarExampleComponent } from './examples/table-toolbar-example.component';
+import { TableFilterPipe } from './examples/table-custom-columns-example/table-filter.pipe';
+import { TableCustomDialogComponent } from './examples/table-custom-columns-example/table-custom-dialog.component';
 
 const routes: Routes = [
     {
@@ -49,7 +54,8 @@ const routes: Routes = [
         PaginationModule,
         ListModule,
         ToolbarModule,
-        DialogModule
+        DialogModule,
+        MessageStripModule
     ],
     exports: [RouterModule, SortTableByPipe, FilterTableByPipe],
     declarations: [
@@ -68,7 +74,13 @@ const routes: Routes = [
         TablePaginationExampleComponent,
         TableToolbarExampleComponent,
         FilterTableByPipe,
-        SortTableByPipe
+        SortTableByPipe,
+        TableCustomColumnsExampleComponent,
+        TableFilterPipe,
+        TableCustomDialogComponent
+    ],
+    entryComponents: [
+        TableCustomDialogComponent
     ]
 })
 export class TableDocsModule {}
