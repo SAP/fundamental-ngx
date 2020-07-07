@@ -125,11 +125,11 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     useGrouping: boolean = true;
 
-    /** Defines minimal number of fraction digits for control value */
+    /** Defines minimal number of fractional digits for control value */
     @Input()
     minFractionDigits: number;
 
-    /** Defines maximal number of fraction digits for control value */
+    /** Defines maximal number of fractional digits for control value */
     @Input()
     maxFractionDigits: number;
 

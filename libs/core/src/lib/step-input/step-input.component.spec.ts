@@ -130,20 +130,20 @@ describe('StepInputComponent', () => {
         expect(valueChangeSpy).toHaveBeenCalledWith(initialValue);
     });
 
-    it('should emit (onFocus) and (onBlur) event', async () => {
-        const focusOutEventSpy = spyOn(component.onFocusOut, 'emit');
+    it('should emit (onFocusIn) and (onFocusOut) events', () => {
+        const onTouchedSpy = spyOn(component, 'onTouched');
         const focusInEventSpy = spyOn(component.onFocusIn, 'emit');
+        const focusOutEventSpy = spyOn(component.onFocusOut, 'emit');
 
-        component.inputElement.nativeElement.focus();
+        component.handleFocusIn();
 
-        await whenStable(fixture);
-
+        expect(component.focused).toBeTrue();
+        expect(onTouchedSpy).toHaveBeenCalled();
         expect(focusInEventSpy).toHaveBeenCalled();
 
-        component.inputElement.nativeElement.blur();
+        component.handleFocusOut();
 
-        await whenStable(fixture);
-
+        expect(component.focused).toBeFalse();
         expect(focusOutEventSpy).toHaveBeenCalled();
     });
 
@@ -246,4 +246,93 @@ describe('StepInputComponent', () => {
         expect(component['_checkValueLimits'].call(context, 1.129)).toEqual(1.13);
     });
 
+    it('should add floating point number with proper precision', () => {
+        expect(component['_cutFloatingNumberDistortion'](0.1, 0.2)).toEqual(0.3);
+        expect(component['_cutFloatingNumberDistortion'](0.1, 0.111)).toEqual(0.211);
+        expect(component['_cutFloatingNumberDistortion'](0.1, -0.11)).toEqual(-0.01);
+    });
+
+    it('should change value based on mouse wheel events when input is focused', () => {
+        const context = { _canChangeValue: true, focused: true, increment: () => {}, decrement: () => {} };
+        const wheelEventUp = new WheelEvent('', { deltaY: -15 });
+        const wheelEventDown = new WheelEvent('', { deltaY: 15 });
+
+        const incrementSpy = spyOn(context, 'increment');
+        const decrementSpy = spyOn(context, 'decrement');
+
+        component.handleScroll.call(context, wheelEventUp);
+        expect(incrementSpy).toHaveBeenCalled();
+
+        component.handleScroll.call(context, wheelEventDown);
+        expect(decrementSpy).toHaveBeenCalled();
+    });
+
+    it('should not change value based on mouse wheel events when input is not focused', () => {
+        const context = { _canChangeValue: true, focused: false, increment: () => {}, decrement: () => {} };
+        const wheelEventUp = new WheelEvent('', { deltaY: -15 });
+        const wheelEventDown = new WheelEvent('', { deltaY: 15 });
+
+        const incrementSpy = spyOn(context, 'increment');
+        const decrementSpy = spyOn(context, 'decrement');
+
+        component.handleScroll.call(context, wheelEventUp);
+        expect(incrementSpy).not.toHaveBeenCalled();
+
+        component.handleScroll.call(context, wheelEventDown);
+        expect(decrementSpy).not.toHaveBeenCalled();
+    });
+
+    it('should write only valid numeric values [ControlValueAccessor]', () => {
+        const context = { _checkValueLimits: value => value, _updateViewValue: () => {}, value: null };
+
+        component.writeValue.call(context, '12ab34');
+        expect(context.value).toEqual(null);
+
+        component.writeValue.call(context, '1234');
+        expect(context.value).toEqual(1234);
+    });
+
+    it('should set disabled state [ControlValueAccessor]', () => {
+        const context = { disabled: false };
+
+        component.setDisabledState.call(context, true);
+        expect(context.disabled).toEqual(true);
+
+        component.setDisabledState.call(context, false);
+        expect(context.disabled).toEqual(false);
+    });
+
+    it('should set disabled state [ControlValueAccessor]', () => {
+        const context = { disabled: false };
+
+        component.setDisabledState.call(context, true);
+        expect(context.disabled).toEqual(true);
+
+        component.setDisabledState.call(context, false);
+        expect(context.disabled).toEqual(false);
+    });
+
+    it('should handle ArrowUp and ArrowDown keys', () => {
+        const context = { _canChangeValue: false, increment: () => {}, decrement: () => {} };
+
+        const keyUpEvent = new KeyboardEvent('keydown', { key: 'ArrowUp' });
+        const keyDownEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+
+        const incrementSpy = spyOn(context, 'increment');
+        const decrementSpy = spyOn(context, 'decrement');
+
+        component.handleKeyDown.call(context, keyUpEvent);
+        expect(incrementSpy).not.toHaveBeenCalled();
+
+        component.handleKeyDown.call(context, keyDownEvent);
+        expect(decrementSpy).not.toHaveBeenCalled();
+
+        context._canChangeValue = true;
+
+        component.handleKeyDown.call(context, keyUpEvent);
+        expect(incrementSpy).toHaveBeenCalled();
+
+        component.handleKeyDown.call(context, keyDownEvent);
+        expect(decrementSpy).toHaveBeenCalled();
+    });
 });
