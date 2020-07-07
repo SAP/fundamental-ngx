@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
-    AfterViewChecked, AfterViewInit,
+    AfterViewChecked,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -195,7 +196,8 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     handleTokenClickSubscriptions(): void {
         this._unsubscribeClicks();
         this.tokenList.forEach((token, index) => {
-            this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe(() => {
+            this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
+                event.stopPropagation();
                 this.focusTokenElement(index);
                 this.tokenList.forEach(shadowedToken => {
                     if (shadowedToken !== token) {
@@ -209,11 +211,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     focusTokenElement(newIndex: number): HTMLElement {
-        console.log('focusTokenElement: ' + newIndex);
         let elementToFocus: HTMLElement;
         if (newIndex >= 0 && newIndex < this.tokenList.length) {
             elementToFocus = this.tokenList
-                .filter((element, index) => index === newIndex)[0]
+                .find((element, index) => index === newIndex)
                 .elementRef.nativeElement.querySelector('.fd-token');
             // element needs tabindex in order to be focused
             elementToFocus.setAttribute('tabindex', '0');
@@ -258,20 +259,20 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number;
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
-        if (KeyUtil.isKey(event, 'Space')) {
-            const token = this.tokenList.filter((element, index) => index === fromIndex);
-            this.tokenList.forEach(shadowedToken => {if (shadowedToken !== token[0]) {shadowedToken.selected = false}});
-            token[0].selected = !token[0].selected;
+        if (KeyUtil.isKey(event, ' ') && document.activeElement !== this.input.elementRef().nativeElement) {
+            const token = this.tokenList.find((element, index) => index === fromIndex);
+            this.tokenList.forEach(shadowedToken => {if (shadowedToken !== token) {shadowedToken.selected = false}});
+            token.selected = !token.selected;
             event.preventDefault();
         } else if (KeyUtil.isKey(event, 'Enter')) {
             this.input.elementRef().nativeElement.focus();
-        } else if ((event.code === 'ArrowLeft' && !rtl) || (event.code === 'ArrowRight' && rtl)) {
+        } else if ((KeyUtil.isKey(event, 'ArrowLeft') && !rtl) || (KeyUtil.isKey(event, 'ArrowRight') && rtl)) {
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
-        } else if ((event.code === 'ArrowRight' && !rtl) || (event.code === 'ArrowLeft' && rtl)) {
+        } else if ((KeyUtil.isKey(event, 'ArrowRight') && !rtl) || (KeyUtil.isKey(event, 'ArrowLeft') && rtl)) {
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
-        } else if (event.code === 'KeyA' && this.input.elementRef().nativeElement.value === '') {
+        } else if (KeyUtil.isKey(event, 'KeyA') && this.input.elementRef().nativeElement.value === '') {
             if (event.ctrlKey || event.metaKey) {
                 if (!this.input.elementRef().nativeElement.value) {
                     event.preventDefault();
@@ -283,7 +284,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         }
         if (
             newIndex === this.tokenList.length &&
-            ((event.code === 'ArrowRight' && !rtl) || (event.code === 'ArrowLeft' && rtl))
+            ((KeyUtil.isKey(event, 'ArrowRight') && !rtl) || (KeyUtil.isKey(event, 'ArrowLeft') && rtl))
         ) {
             this.input.elementRef().nativeElement.focus();
         } else if (
@@ -330,6 +331,8 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             // and then hide any tokens from the right that no longer fit
             this._collapseTokens('right');
         }
+
+        this.cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -342,6 +345,8 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             // and then hide any tokens from the left that no longer fit
             this._collapseTokens('left');
         }
+
+        this.cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -361,7 +366,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
             while (combinedTokenWidth > elementWidth && (side === 'right' ? i >= 0 : i < this.tokenList.length)) {
                 // loop through the tokens and hide them until the combinedTokenWidth fits in the elementWidth
-                const token = this.tokenList.filter((item, index) => index === i)[0];
+                const token = this.tokenList.find((item, index) => index === i);
                 const moreTokens = side === 'right' ? this.moreTokensRight : this.moreTokensLeft;
                 if (moreTokens.indexOf(token) === -1) {
                     moreTokens.push(token);

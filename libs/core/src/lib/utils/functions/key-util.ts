@@ -1,5 +1,6 @@
 import { isDevMode } from '@angular/core';
 import {
+    A,
     ALT,
     BACKSPACE,
     CONTROL,
@@ -40,7 +41,7 @@ const keyMap: Map<string, { aliases: string[]; keyCode: number }> = new Map([
     ['Meta', { aliases: ['Meta'], keyCode: META }],
     ['Shift', { aliases: ['Shift'], keyCode: SHIFT }],
     ['Backspace', { aliases: ['Backspace'], keyCode: BACKSPACE }],
-    ['Space', { aliases: ['Space', 'Spacebar', ' '], keyCode: SPACE }]
+    ['KeyA', { aliases: ['KeyA'], keyCode: A }]
 ]);
 
 /**
@@ -64,7 +65,8 @@ const keyMapByCode: Map<number, { aliases: string[]; keyCode: number }> = new Ma
     [CONTROL, { aliases: ['Ctrl', 'Control', 'Meta'], keyCode: CONTROL }],
     [META, { aliases: ['Meta'], keyCode: META }],
     [SHIFT, { aliases: ['Shift'], keyCode: SHIFT }],
-    [BACKSPACE, { aliases: ['Backspace'], keyCode: BACKSPACE }]
+    [BACKSPACE, { aliases: ['Backspace'], keyCode: BACKSPACE }],
+    [A, { aliases: ['KeyA'], keyCode: A }]
 ]);
 
 export class KeyUtil {
