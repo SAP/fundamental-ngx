@@ -50,6 +50,6 @@
             (click)="onTouched()">
     </button>
 </div>
-<span class="fd-form-label fd-form-label--unit-description">
+<span *ngIf="canDisplayLabel" class="fd-form-label fd-form-label--unit-description">
     {{ unit || currencySign }}
 </span>

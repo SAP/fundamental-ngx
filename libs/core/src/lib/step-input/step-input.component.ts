@@ -259,6 +259,21 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this.disabled = isDisabled;
     }
 
+    /** @hidden */
+    get canIncrement(): boolean {
+        return this.value + this.step <= this._max;
+    }
+
+    /** @hidden */
+    get canDecrement(): boolean {
+        return this.value - this.step >= this._min;
+    }
+
+    /** @hidden */
+    get canDisplayLabel(): boolean {
+        return !!this.unit || !!this.currencySign;
+    }
+
     /** Increment input value by step value */
     increment(): void {
         if (this.canIncrement) {
@@ -310,7 +325,6 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this.onFocusOut.emit();
     }
 
-
     /** @hidden */
     handleScroll(event: WheelEvent): void {
         if (this._canChangeValue && this.focused) {
@@ -323,7 +337,8 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         }
     }
 
-    /** @hidden */
+    /** @hidden Updates viewValue and conditionally emits new value.
+     * This method is called on (change) event, when user leaves input control. */
     updateViewValue(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
         if (parsedValue !== this.lastEmittedValue) {
@@ -332,7 +347,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this._updateViewValue();
     }
 
-    /** @hidden */
+    /** @hidden Track parsed value when user changes value of the input control. */
     trackInputValue(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
 
@@ -344,16 +359,6 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden */
     private get _canChangeValue(): boolean {
         return !(this.disabled || this.readonly)
-    }
-
-    /** @hidden */
-    get canIncrement(): boolean {
-        return this.value + this.step <= this._max;
-    }
-
-    /** @hidden */
-    get canDecrement(): boolean {
-        return this.value - this.step >= this._min;
     }
 
     /** @hidden */
