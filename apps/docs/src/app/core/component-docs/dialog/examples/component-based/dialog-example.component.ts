@@ -35,6 +35,7 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
                         fd-button
                         fdType="transparent"
                         fd-dialog-decisive-button
+                        fd-initial-focus
                         [compact]="true"
                         (click)="this.dialogRef.dismiss('Cancel')"
                     >

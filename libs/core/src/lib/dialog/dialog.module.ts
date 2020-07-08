@@ -23,6 +23,7 @@ import { TemplateModule } from '../utils/directives/template/template.module';
 import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
 import { DialogFooterButtonComponent } from './dialog-footer-button/dialog-footer-button.component';
 import { DefaultDialogComponent } from './default-dialog/default-dialog.component';
+import { InitialFocusDirective } from '../utils/directives/initial-focus/initial-focus.directive';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { DefaultDialogComponent } from './default-dialog/default-dialog.componen
         DialogCloseButtonDirective,
         DialogFooterButtonComponent,
         DialogDecisiveButtonDirective,
-        DefaultDialogComponent
+        DefaultDialogComponent,
+        InitialFocusDirective
     ],
     imports: [
         BarModule,
@@ -59,7 +61,8 @@ import { DefaultDialogComponent } from './default-dialog/default-dialog.componen
         DialogContainerComponent,
         DialogCloseButtonDirective,
         DialogFooterButtonComponent,
-        DialogDecisiveButtonDirective
+        DialogDecisiveButtonDirective,
+        InitialFocusDirective
     ],
     entryComponents: [DialogComponent, DialogContainerComponent, DefaultDialogComponent],
     providers: [DialogService, DynamicComponentService]
