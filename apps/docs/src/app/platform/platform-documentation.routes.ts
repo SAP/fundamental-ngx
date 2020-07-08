@@ -57,6 +57,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'select',
+                loadChildren: () =>
+                    import('./component-docs/platform-select/platform-select.module').then(
+                        (m) => m.PlatformSelectDocsModule
+                    )
+            },
+            {
                 path: 'radio-group',
                 loadChildren: () =>
                     import('./component-docs/platform-forms/radio-group/platform-radio-group.module').then(

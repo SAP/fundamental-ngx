@@ -1,20 +1,22 @@
-@import '~fundamental-styles/dist/select';
-@import '~fundamental-styles/dist/popover';
+@import "~fundamental-styles/dist/select";
 
+// To be removed when proper strategy for controls inside popover is picked
+fd-select {
+    & > fd-popover {
+        width: 100%;
 
-/**
-    Reference to overlay panel which independent from select triggering element.
- */
-.fd-select-overlay {
-    flex-basis: 100%;
-    position: static;
+        &.fd-popover__body--dropdown {
+            width: auto;
+            display: block;
+        }
+    }
+
+    & ul[fd-list] {
+        max-width: 100%;
+        overflow: auto;
+    }
 }
 
-.fd-select-options {
-    max-width: 100%;
-    overflow: auto;
-
-    &.fd-list--dropdown {
-        max-width: inherit;
-    }
+.fd-popover__body > :first-child {
+    border-radius: 0;
 }

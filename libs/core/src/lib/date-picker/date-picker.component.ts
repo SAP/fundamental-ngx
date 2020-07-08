@@ -371,6 +371,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         /** If written value is not defined, null, empty string */
         if (!selected) {
             this.inputFieldDate = '';
+            this._changeDetectionRef.detectChanges();
             return;
         }
         if (this.type === 'single') {

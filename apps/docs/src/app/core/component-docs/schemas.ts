@@ -1,7 +1,6 @@
 import { Schema } from '../../schema/models/schema.model';
 
 // components
-import { BadgeLabelDocsComponent } from './badge-label/badge-label-docs.component';
 import { ButtonDocsComponent } from './button/button-docs.component';
 import { SegmentedButtonDocsComponent } from './segmented-button/segmented-button-docs.component';
 import { AlertDocsComponent } from './alert/alert-docs.component';
@@ -23,7 +22,6 @@ import { TimeDocsComponent } from './time/time-docs.component';
 import { SwitchDocsComponent } from './switch/switch-docs.component';
 
 export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
-    badgeLabel: BadgeLabelDocsComponent.schema,
     button: ButtonDocsComponent.schema,
     segmentedButton: SegmentedButtonDocsComponent.schema,
     alert: AlertDocsComponent.schema,

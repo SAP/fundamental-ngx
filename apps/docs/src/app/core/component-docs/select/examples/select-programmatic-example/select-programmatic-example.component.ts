@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./select-programmatic-example.component.scss']
 })
 export class SelectProgrammaticExampleComponent {
+
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
 
     selectedValue: string = this.options[0];
@@ -16,6 +17,8 @@ export class SelectProgrammaticExampleComponent {
 
     getNewValue(): string {
         const newValue = this.options[Date.now() % this.options.length];
-        return this.selectedValue === newValue ? this.getNewValue() : newValue;
+        return this.selectedValue === newValue
+            ? this.getNewValue()
+            : newValue;
     }
 }

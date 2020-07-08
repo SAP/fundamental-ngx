@@ -1,20 +1,23 @@
-<fd-select [(value)]="selectedValue" [controlTemplate]="customSelectTemplate">
+<fd-select [(value)]="selectedValue"
+           [controlTemplate]="customSelectTemplate">
+
     <li fd-list-group-header>Fruits</li>
     <fd-option *ngFor="let option of fruits" [value]="option">
         <span fd-list-icon [glyph]="'add'"></span>
-        <span fd-list-title>{{ option.name }}</span>
-        <span fd-list-secondary>{{ option.kCal }} kcal</span>
+        <span fd-list-title>{{option.name}}</span>
+        <span fd-list-secondary>{{option.kCal}} kcal</span>
     </fd-option>
 
     <li fd-list-group-header>Vegetables</li>
     <fd-option *ngFor="let option of vegetables" [value]="option">
         <span fd-list-icon [glyph]="'add'"></span>
-        <span fd-list-title>{{ option.name }}</span>
-        <span fd-list-secondary>{{ option.kCal }} kcal</span>
+        <span fd-list-title>{{option.name}}</span>
+        <span fd-list-secondary>{{option.kCal}} kcal</span>
     </fd-option>
 
     <ng-template #customSelectTemplate let-selected="selected">
-        {{ selected?.value.name || 'Select an option' }}
+        {{selected?.value.name || 'Select an option'}}
     </ng-template>
+
 </fd-select>
-<small>Selected value: {{ selectedValue | json }}</small>
+<small>Selected value: {{selectedValue | json}}</small>

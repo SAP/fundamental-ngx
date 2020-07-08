@@ -1,6 +1,25 @@
+/**
+ * @license
+ * SAP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ */
 import {
     AfterViewInit,
     Component,
+    ChangeDetectorRef,
     ChangeDetectionStrategy,
     EventEmitter,
     ElementRef,
@@ -10,18 +29,25 @@ import {
     ViewChild
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BaseComponent } from '../base';
 
 export type LinkType = 'standard' | 'emphasized';
 export type NavigationTarget = '_blank' | '_self' | '_parent' | '_top' | 'framename';
 const VALID_INPUT_TYPES = ['standard', 'emphasized'];
 
+/**
+ * Platform Link implementation based on the
+ * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Link-Component-Technical-Design
+ * documents.
+ *
+ */
 @Component({
     selector: 'fdp-link',
     templateUrl: './link.component.html',
     styleUrls: ['./link.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LinkComponent implements OnInit, AfterViewInit {
+export class LinkComponent extends BaseComponent implements OnInit, AfterViewInit {
     emphasized: boolean = false;
     isfocused: boolean = false;
 
@@ -29,32 +55,33 @@ export class LinkComponent implements OnInit, AfterViewInit {
     @ViewChild('link', { read: ElementRef })
     anchor: ElementRef;
 
-    /** Id for the link */
-    @Input()
-    id?: string;
-
-    /** href value to Navigate to */
+    /**
+     * href value to Navigate to. sets href to Native anchor.
+     */
     @Input()
     href: string;
 
-    /** target where navigation will happen, Default=same frame */
+    /**
+     * target where navigation will happen, Default=same frame
+     * sets target to Native anchor.
+     */
     @Input()
     target?: NavigationTarget;
 
-    /** type of link, options standard or Emphasized, Default=standard */
+    /** linktype of link, options standard or Emphasized, Default=standard */
     @Input()
-    type: LinkType = 'standard';
+    linkType?: LinkType = 'standard';
 
+    /**
+     * type of link. possible values text|application|audio|font|example|image|message|model|multipart|video.
+     * sets type to Native anchor.
+     */
     @Input()
-    get disabled(): boolean {
-        return this._disabled;
-    }
+    type?: string = 'text';
 
-    /** Link enable or disabled status */
-    set disabled(value: boolean) {
-        this._disabled = coerceBooleanProperty(value);
-    }
-
+    /**
+     * sets inverted property.
+     */
     @Input()
     get inverted(): boolean {
         return this._inverted;
@@ -65,23 +92,35 @@ export class LinkComponent implements OnInit, AfterViewInit {
         this._inverted = coerceBooleanProperty(value);
     }
 
-    /** Tooltip text to show when focused for more than  timeout value*/
+    /**
+     * Tooltip text to show when focused for more than  timeout value
+     * sets title to Native anchor.
+     * */
     @Input()
     title?: string;
 
-    /** Specifies the language of the linked document */
+    /**
+     * Specifies the language of the linked document.
+     * sets language to Native anchor.
+     */
     @Input()
     hreflang?: string;
 
-    /** Specifies that the target will be downloaded when a user clicks on the hyperlink */
+    /** Specifies that the target will be downloaded when a user clicks on the hyperlink
+     * sets download property to Native anchor.
+     */
     @Input()
     download?: string;
 
-    /** Specifies what media/device the linked document is optimized for */
+    /** Specifies what media/device the linked document is optimized for
+     * sets media property to Native anchor.
+     */
     @Input()
     media?: string;
 
-    /** Specifies the relationship between the current document and the linked document */
+    /** Specifies the relationship between the current document and the linked document
+     * sets relation property to Native anchor.
+     */
     @Input()
     rel?: string;
 
@@ -89,36 +128,40 @@ export class LinkComponent implements OnInit, AfterViewInit {
     @Output()
     click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
-    private _disabled: boolean = false;
     private _inverted: boolean = false;
 
-    clicked(event: MouseEvent | KeyboardEvent | TouchEvent) {
-        this.click.emit(event);
+    constructor(protected _cd: ChangeDetectorRef) {
+        super(_cd);
     }
 
-    constructor() {}
-
-    ngOnInit() {
+    /** @hidden */
+    ngOnInit(): void {
         /* if link disabled, for Avoiding tab focus and click. marking href undefined. */
         if (this.disabled) {
             this.href = undefined;
         }
 
-        /* If link type===emphasized then make link emphasized type */
-        if (this.type === VALID_INPUT_TYPES[1]) {
+        /* If link linkType===emphasized then make link emphasized type */
+        if (this.linkType === VALID_INPUT_TYPES[1]) {
             this.emphasized = true;
         }
 
         /* if link type not supported, throw Error */
-        if (this.type && VALID_INPUT_TYPES.indexOf(this.type) === -1) {
-            throw new Error(`fdp-link type ${this.type} is not supported`);
+        if (this.linkType && VALID_INPUT_TYPES.indexOf(this.linkType) === -1) {
+            throw new Error(`fdp-link type ${this.linkType} is not supported`);
         }
     }
 
-    /** Throw error for blank text/icon link */
-    ngAfterViewInit() {
+    /** @hidden Throw error for blank text/icon link */
+    ngAfterViewInit(): void {
         if (!this.anchor.nativeElement.innerHTML) {
             throw new Error('Mandatory text/icon for fdp-link missing');
         }
+    }
+
+    /** raising click event */
+    public clicked(event: MouseEvent | KeyboardEvent | TouchEvent): void {
+        event.stopPropagation();
+        this.click.emit(event);
     }
 }
