@@ -144,7 +144,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
     public checkByKey(event: KeyboardEvent): void {
-        if (this._isSpaceBarEvent(event)) {
+        if (this._isSpaceBarEvent(event) && this._isIE()) {
             this._nextValueEvent();
             this.muteKey(event);
         }

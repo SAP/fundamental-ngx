@@ -1,4 +1,4 @@
-<div class="fd-multi-input fd-multi-input-custom">
+<div class="fd-multi-input fd-multi-input-custom" (keydown)="removeSelectedTokens($event)">
     <div class="fd-multi-input-field">
         <ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
         <fd-popover
@@ -34,7 +34,7 @@
         [button]="true"
         [compact]="compact"
         [disabled]="disabled"
-        [isExpanded]="open && !mobile"
+        [isExpanded]="open && !mobile && displayedValues && displayedValues.length"
         [isControl]="true"
         [glyph]="glyph"
         (click)="openChangeHandle(!open || mobile)">
@@ -84,7 +84,7 @@
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
-                [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
+                [ngModel]="selected.indexOf(value) !== -1"
                 class="fd-multi-input-checkbox"
                 (keydown)="handleKeyDown($event, ind)"
             >

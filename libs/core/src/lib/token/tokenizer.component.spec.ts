@@ -62,7 +62,7 @@ describe('TokenizerComponent', () => {
 
         component.input.elementRef().nativeElement.focus();
         const event = new KeyboardEvent('keydown', {
-            code: 'ArrowLeft'
+            key: 'ArrowLeft'
         });
         component.input.elementRef().nativeElement.dispatchEvent(event);
 
@@ -75,19 +75,19 @@ describe('TokenizerComponent', () => {
         spyOn(component.input.elementRef().nativeElement, 'focus');
         spyOn(component, 'focusTokenElement');
         const event = new KeyboardEvent('keydown', {
-            code: 'ArrowLeft'
+            key: 'ArrowLeft'
         });
         component.handleKeyDown(event, component.tokenList.length - 1);
 
         expect(component.input.elementRef().nativeElement.focus).not.toHaveBeenCalled();
-        expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 2);
+        expect(component.focusTokenElement).toHaveBeenCalledWith(component.tokenList.length - 2);
     });
 
     it('should handleKeyDown on ArrowRight when last token is focused', () => {
         spyOn(component.input.elementRef().nativeElement, 'focus');
         spyOn(component, 'focusTokenElement');
         const event = new KeyboardEvent('keydown', {
-            code: 'ArrowRight'
+            key: 'ArrowRight'
         });
         component.handleKeyDown(event, component.tokenList.length - 1);
 
@@ -98,11 +98,11 @@ describe('TokenizerComponent', () => {
     it('should handleKeyDown on ArrowRight when second to last token is focused', () => {
         spyOn(component, 'focusTokenElement');
         const event = new KeyboardEvent('keydown', {
-            code: 'ArrowRight'
+            key: 'ArrowRight'
         });
         component.handleKeyDown(event, component.tokenList.length - 2);
 
-        expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 1);
+        expect(component.focusTokenElement).toHaveBeenCalledWith(component.tokenList.length - 1);
     });
 
     it('should focus a token element', async () => {
@@ -115,10 +115,10 @@ describe('TokenizerComponent', () => {
         spyOn(component, 'addKeyboardListener');
         spyOn(component, 'handleKeyDown');
         const event = new KeyboardEvent('keydown', {
-            code: 'ArrowRight'
+            key: 'ArrowRight'
         });
 
-        component.focusTokenElement(event, 1);
+        component.focusTokenElement(1);
 
         await whenStable(fixture);
         await fixture.whenRenderingDone();
