@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { PaginationService } from './pagination.service';
 import { Pagination } from './pagination.model';
 
-fdescribe('PaginationService', () => {
+describe('PaginationService', () => {
     let service: PaginationService;
 
     beforeEach(() => {
