@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormStates } from '../form/form-control/form-states';
-import { KeyUtil } from '../..';
+import { KeyUtil } from '../utils/functions/key-util';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;

@@ -1,9 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { whenStable } from '../utils/tests/when-stable';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
-import { SelectComponent } from '@fundamental-ngx/core';
 
 const initialValue = 100;
 
@@ -69,8 +68,6 @@ describe('StepInputComponent', () => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
             imports: [StepInputModule]
-        }).overrideComponent(SelectComponent, {
-            set: {changeDetection: ChangeDetectionStrategy.Default}
         }).compileComponents();
     }));
 
