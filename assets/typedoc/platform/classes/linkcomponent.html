@@ -1,9 +1,24 @@
 <div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fdp-link&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>Platform Link implementation based on the
+				<a href="https://github.com/SAP/fundamental-ngx/wiki/Platform:-Link-Component-Technical-Design">https://github.com/SAP/fundamental-ngx/wiki/Platform:-Link-Component-Technical-Design</a>
+			documents.</p>
+		</div>
+	</div>
+</section>
 <section class="tsd-panel tsd-hierarchy">
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
 		<li>
-			<span class="target">LinkComponent</span>
+			<span class="tsd-signature-type">BaseComponent</span>
+			<ul class="tsd-hierarchy">
+				<li>
+					<span class="target">LinkComponent</span>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </section>
@@ -16,6 +31,23 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="contentdensity" class="tsd-anchor"></a>
+		<h3>content<wbr>Density</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">content<wbr>Density<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensity</span><span class="tsd-signature-symbol"> = &quot;cozy&quot;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.contentDensity</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/base.ts#L25">libs/platform/src/lib/components/base.ts:25</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>content Density of element. cozy | compact</p>
+			</div>
+		</div>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="download" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagOptional">Optional</span> download</h3>
@@ -23,12 +55,13 @@
 		<div class="tsd-signature tsd-kind-icon">download<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L78">libs/platform/src/lib/components/link/link.component.ts:78</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L113">libs/platform/src/lib/components/link/link.component.ts:113</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Specifies that the target will be downloaded when a user clicks on the hyperlink</p>
+				<p>Specifies that the target will be downloaded when a user clicks on the hyperlink
+				sets download property to Native anchor.</p>
 			</div>
 		</div>
 	</section>
@@ -39,12 +72,12 @@
 		<div class="tsd-signature tsd-kind-icon">href<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L38">libs/platform/src/lib/components/link/link.component.ts:38</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L62">libs/platform/src/lib/components/link/link.component.ts:62</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>href value to Navigate to</p>
+				<p>href value to Navigate to. sets href to Native anchor.</p>
 			</div>
 		</div>
 	</section>
@@ -55,28 +88,46 @@
 		<div class="tsd-signature tsd-kind-icon">hreflang<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L74">libs/platform/src/lib/components/link/link.component.ts:74</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L107">libs/platform/src/lib/components/link/link.component.ts:107</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Specifies the language of the linked document</p>
+				<p>Specifies the language of the linked document.
+				sets language to Native anchor.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="id" class="tsd-anchor"></a>
+		<h3>id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = this.defaultId</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.id</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/base.ts#L17">libs/platform/src/lib/components/base.ts:17</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>id for the Element</p>
 			</div>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="id" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> id</h3>
+		<a name="linktype" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> link<wbr>Type</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">link<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LinkType</span><span class="tsd-signature-symbol"> = &quot;standard&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L34">libs/platform/src/lib/components/link/link.component.ts:34</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L73">libs/platform/src/lib/components/link/link.component.ts:73</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Id for the link</p>
+				<p>linktype of link, options standard or Emphasized, Default=standard</p>
 			</div>
 		</div>
 	</section>
@@ -87,12 +138,30 @@
 		<div class="tsd-signature tsd-kind-icon">media<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L82">libs/platform/src/lib/components/link/link.component.ts:82</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L119">libs/platform/src/lib/components/link/link.component.ts:119</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Specifies what media/device the linked document is optimized for</p>
+				<p>Specifies what media/device the linked document is optimized for
+				sets media property to Native anchor.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="name" class="tsd-anchor"></a>
+		<h3>name</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.name</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/base.ts#L21">libs/platform/src/lib/components/base.ts:21</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>name for the element</p>
 			</div>
 		</div>
 	</section>
@@ -103,12 +172,13 @@
 		<div class="tsd-signature tsd-kind-icon">rel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L86">libs/platform/src/lib/components/link/link.component.ts:86</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L125">libs/platform/src/lib/components/link/link.component.ts:125</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Specifies the relationship between the current document and the linked document</p>
+				<p>Specifies the relationship between the current document and the linked document
+				sets relation property to Native anchor.</p>
 			</div>
 		</div>
 	</section>
@@ -119,12 +189,13 @@
 		<div class="tsd-signature tsd-kind-icon">target<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NavigationTarget</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L42">libs/platform/src/lib/components/link/link.component.ts:42</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L69">libs/platform/src/lib/components/link/link.component.ts:69</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>target where navigation will happen, Default=same frame</p>
+				<p>target where navigation will happen, Default=same frame
+				sets target to Native anchor.</p>
 			</div>
 		</div>
 	</section>
@@ -135,68 +206,89 @@
 		<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L70">libs/platform/src/lib/components/link/link.component.ts:70</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L100">libs/platform/src/lib/components/link/link.component.ts:100</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Tooltip text to show when focused for more than  timeout value</p>
+				<p>Tooltip text to show when focused for more than  timeout value
+				sets title to Native anchor.</p>
 			</div>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="type" class="tsd-anchor"></a>
-		<h3>type</h3>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> type</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LinkType</span><span class="tsd-signature-symbol"> = &quot;standard&quot;</span></div>
+		<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;text&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L46">libs/platform/src/lib/components/link/link.component.ts:46</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L80">libs/platform/src/lib/components/link/link.component.ts:80</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>type of link, options standard or Emphasized, Default=standard</p>
+				<p>type of link. possible values text|application|audio|font|example|image|message|model|multipart|video.
+				sets type to Native anchor.</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="width" class="tsd-anchor"></a>
+		<h3>width</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.width</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/base.ts#L29">libs/platform/src/lib/components/base.ts:29</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>width of the element</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
 		<a name="disabled" class="tsd-anchor"></a>
 		<h3>disabled</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
 			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> disabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> disabled<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> disabled<span class="tsd-signature-symbol">(</span>disabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<p>Inherited from BaseComponent.disabled</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L49">libs/platform/src/lib/components/link/link.component.ts:49</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/base.ts#L33">libs/platform/src/lib/components/base.ts:33</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Link enable or disabled status</p>
+						<p>disabled status of the element</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<p>Inherited from BaseComponent.disabled</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L54">libs/platform/src/lib/components/link/link.component.ts:54</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/base.ts#L37">libs/platform/src/lib/components/base.ts:37</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Link enable or disabled status</p>
+						<p>disabled status of the element</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+						<h5>disabled: <span class="tsd-signature-type">boolean</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -215,12 +307,12 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L59">libs/platform/src/lib/components/link/link.component.ts:59</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L86">libs/platform/src/lib/components/link/link.component.ts:86</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>set incase of Inverted link</p>
+						<p>sets inverted property.</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -228,7 +320,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L64">libs/platform/src/lib/components/link/link.component.ts:64</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L91">libs/platform/src/lib/components/link/link.component.ts:91</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -256,7 +348,7 @@
 		<div class="tsd-signature tsd-kind-icon">click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">KeyboardEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TouchEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L90">libs/platform/src/lib/components/link/link.component.ts:90</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L129">libs/platform/src/lib/components/link/link.component.ts:129</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -268,20 +360,27 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 		<a name="constructor" class="tsd-anchor"></a>
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Link<wbr>Component<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LinkComponent</span></li>
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Link<wbr>Component<span class="tsd-signature-symbol">(</span>_cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LinkComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<p>Overrides BaseComponent.__constructor</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L97">libs/platform/src/lib/components/link/link.component.ts:97</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L131">libs/platform/src/lib/components/link/link.component.ts:131</a></li>
 					</ul>
 				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>_cd: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
+				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">LinkComponent</span></h4>
 			</li>
 		</ul>
@@ -289,6 +388,30 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+		<a name="_cd" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _cd</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_cd<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ChangeDetectorRef</span></div>
+		<aside class="tsd-sources">
+			<p>Overrides BaseComponent._cd</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L133">libs/platform/src/lib/components/link/link.component.ts:133</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<a name="_disabled" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _disabled</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent._disabled</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/base.ts#L13">libs/platform/src/lib/components/base.ts:13</a></li>
+			</ul>
+		</aside>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="anchor" class="tsd-anchor"></a>
 		<h3>anchor</h3>
@@ -296,7 +419,7 @@
 		<div class="tsd-signature tsd-kind-icon">anchor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L30">libs/platform/src/lib/components/link/link.component.ts:30</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L56">libs/platform/src/lib/components/link/link.component.ts:56</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -305,6 +428,18 @@
 			</div>
 		</div>
 	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<a name="defaultid" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> default<wbr>Id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">default<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;fdp-id-${randomId++}&#x60;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent.defaultId</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/base.ts#L12">libs/platform/src/lib/components/base.ts:12</a></li>
+			</ul>
+		</aside>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="emphasized" class="tsd-anchor"></a>
 		<h3>emphasized</h3>
@@ -312,7 +447,7 @@
 		<div class="tsd-signature tsd-kind-icon">emphasized<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L25">libs/platform/src/lib/components/link/link.component.ts:25</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L51">libs/platform/src/lib/components/link/link.component.ts:51</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -323,7 +458,7 @@
 		<div class="tsd-signature tsd-kind-icon">isfocused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L26">libs/platform/src/lib/components/link/link.component.ts:26</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L52">libs/platform/src/lib/components/link/link.component.ts:52</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -341,56 +476,20 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L95">libs/platform/src/lib/components/link/link.component.ts:95</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/platform/src/lib/components/link/link.component.ts#L163">libs/platform/src/lib/components/link/link.component.ts:163</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>raising click event</p>
+					</div>
+				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
 						<h5>event: <span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">KeyboardEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TouchEvent</span></h5>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="ngafterviewinit" class="tsd-anchor"></a>
-		<h3>ng<wbr>After<wbr>View<wbr>Init</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>After<wbr>View<wbr>Init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L119">libs/platform/src/lib/components/link/link.component.ts:119</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Throw error for blank text/icon link</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="ngoninit" class="tsd-anchor"></a>
-		<h3>ng<wbr>OnInit</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26c4fc17/libs/platform/src/lib/components/link/link.component.ts#L101">libs/platform/src/lib/components/link/link.component.ts:101</a></li>
-					</ul>
-				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
