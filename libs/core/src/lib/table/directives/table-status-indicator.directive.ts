@@ -1,5 +1,7 @@
 import { Directive, Input } from '@angular/core';
 
+export type TableStatuses = 'valid' | 'warning' | 'information' | 'error'
+
 @Directive({
     selector: '[fdTableStatusIndicator], [fd-table-status-indicator]',
     host: {
@@ -13,5 +15,5 @@ import { Directive, Input } from '@angular/core';
 export class TableStatusIndicatorDirective {
     /** The type of indicator. Options are 'valid', 'warning', 'information' and 'error'. */
     @Input()
-    status: string;
+    status: TableStatuses;
 }

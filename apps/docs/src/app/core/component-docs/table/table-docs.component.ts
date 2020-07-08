@@ -154,7 +154,7 @@ export class TableDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'TableColumnSortExampleComponent',
+            component: 'TableColumnSortingExampleComponent',
             code: tableColumnSortTsSrc,
             fileName: 'table-column-sorting-example'
         },

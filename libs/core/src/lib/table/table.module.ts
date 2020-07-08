@@ -9,7 +9,6 @@ import { TableRowDirective } from './directives/table-row.directive';
 import { TableCellDirective } from './directives/table-cell.directive';
 import { TableWrapperComponent } from './table-wrapper.component';
 import { TableFooterDirective } from './directives/table-footer.directive';
-import { TableCellCheckboxDirective } from './directives/table-cell-checkbox.directive';
 import { TableStatusIndicatorDirective } from './directives/table-status-indicator.directive';
 import { TablePopoverDirective } from './directives/table-popover.directive';
 import { TableInnerDirective } from './directives/table-inner.directive';
@@ -28,7 +27,6 @@ import { TableService } from './table.service';
         TableBodyDirective,
         TableRowDirective,
         TableCellDirective,
-        TableCellCheckboxDirective,
         TableStatusIndicatorDirective,
         TablePopoverDirective,
         TableInnerDirective,
@@ -44,7 +42,6 @@ import { TableService } from './table.service';
         TableBodyDirective,
         TableRowDirective,
         TableCellDirective,
-        TableCellCheckboxDirective,
         TableStatusIndicatorDirective,
         TablePopoverDirective,
         TableInnerDirective,

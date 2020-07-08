@@ -2,7 +2,7 @@
     <thead fd-table-header>
     <tr fd-table-row>
         <th fd-table-cell fd-table-status-indicator></th>
-        <th fd-table-cell fd-table-cell-checkbox>
+        <th fd-table-cell [checkbox]="true">
             <fd-checkbox
                 [ngModel]="selectMasterModel"
                 (ngModelChange)="selectMaster($event)"
@@ -17,7 +17,7 @@
     <tbody fd-table-body>
     <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="tableRows[i].checked">
         <td fd-table-cell fd-table-status-indicator [status]="row.status"></td>
-        <td fd-table-cell fd-table-cell-checkbox>
+        <td fd-table-cell [checkbox]="true">
             <fd-checkbox
                 [ngModel]="tableRows[i].checked"
                 (ngModelChange)="select(i, $event)"

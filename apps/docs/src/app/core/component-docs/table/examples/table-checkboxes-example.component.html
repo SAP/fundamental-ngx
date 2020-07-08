@@ -2,7 +2,7 @@
 <table fd-table>
     <thead fd-table-header>
         <tr fd-table-row>
-            <th fd-table-cell fd-table-cell-checkbox>
+            <th fd-table-cell [checkbox]="true">
                 <fd-checkbox
                     [ngModel]="selectMasterModel"
                     (ngModelChange)="selectMaster($event, 'cozy')"
@@ -16,7 +16,7 @@
     </thead>
     <tbody fd-table-body>
         <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="tableRows[i].checked">
-            <td fd-table-cell fd-table-cell-checkbox>
+            <td fd-table-cell [checkbox]="true">
                 <fd-checkbox
                     [ngModel]="tableRows[i].checked"
                     (ngModelChange)="select(i, $event, 'cozy')"
@@ -36,7 +36,7 @@
 <table fd-table [compact]="true">
     <thead fd-table-header>
     <tr fd-table-row>
-        <th fd-table-cell fd-table-cell-checkbox>
+        <th fd-table-cell [checkbox]="true">
             <fd-checkbox [compact]="true"
                 [ngModel]="selectMasterModelCompact"
                 (ngModelChange)="selectMaster($event, 'compact')"
@@ -51,7 +51,7 @@
     </thead>
     <tbody fd-table-body>
     <tr *ngFor="let row of tableRowsCompact; let i = index" fd-table-row [attr.aria-selected]="tableRowsCompact[i].checked">
-        <td fd-table-cell fd-table-cell-checkbox>
+        <td fd-table-cell [checkbox]="true">
             <fd-checkbox [compact]="true"
                 [ngModel]="tableRowsCompact[i].checked"
                 (ngModelChange)="select(i, $event, 'compact')"
@@ -72,7 +72,7 @@
 <table fd-table [condensed]="true">
     <thead fd-table-header>
     <tr fd-table-row>
-        <th fd-table-cell fd-table-cell-checkbox>
+        <th fd-table-cell [checkbox]="true">
             <fd-checkbox [compact]="true"
                          [ngModel]="selectMasterModelCondensed"
                          (ngModelChange)="selectMaster($event, 'condensed')"
@@ -87,7 +87,7 @@
     </thead>
     <tbody fd-table-body>
     <tr *ngFor="let row of tableRowsCondensed; let i = index" fd-table-row [attr.aria-selected]="tableRowsCondensed[i].checked">
-        <td fd-table-cell fd-table-cell-checkbox>
+        <td fd-table-cell [checkbox]="true">
             <fd-checkbox [compact]="true"
                          [ngModel]="tableRowsCondensed[i].checked"
                          (ngModelChange)="select(i, $event, 'condensed')"
