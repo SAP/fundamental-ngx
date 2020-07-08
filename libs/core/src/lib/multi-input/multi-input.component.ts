@@ -369,7 +369,7 @@ export class MultiInputComponent implements
     /** @hidden */
     removeSelectedTokens(event: KeyboardEvent): void {
         let allSelected = true;
-        if (KeyUtil.isKey(event, ['Delete', 'Backspace'])) {
+        if (KeyUtil.isKey(event, ['Delete', 'Backspace']) && !this.searchTerm) {
             this.tokenizer.tokenList.forEach(token => {
                 if (token.selected) {
                     this.handleSelect(false, token.elementRef.nativeElement.innerText);
