@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { PaginationService } from './pagination.service';
 import { Pagination } from './pagination.model';
 
-describe('PaginationService', () => {
+fdescribe('PaginationService', () => {
     let service: PaginationService;
 
     beforeEach(() => {
@@ -69,7 +69,7 @@ describe('PaginationService', () => {
 
     it('should have one dots section', () => {
         const pagination: Pagination = {
-            totalItems: 50,
+            totalItems: 60,
             itemsPerPage: 10
         };
         const pages = service.getPages(pagination);
