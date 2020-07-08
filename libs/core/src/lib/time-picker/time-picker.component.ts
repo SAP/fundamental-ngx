@@ -15,6 +15,7 @@ import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
     selector: 'fd-time-picker',
@@ -117,6 +118,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     /** @hidden */
     @ViewChild(TimeComponent)
     child: TimeComponent;
+
+    /** @hidden */
+    @ViewChild(PopoverComponent)
+    popover: PopoverComponent;
 
     /** @hidden */
     period: string;

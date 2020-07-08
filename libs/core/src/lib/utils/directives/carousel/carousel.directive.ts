@@ -65,7 +65,6 @@ export class CarouselDirective implements AfterContentInit {
     ) {}
 
     ngAfterContentInit(): void {
-
         if (this.config.panSupport) {
             this._hammerSetup();
         }
@@ -82,10 +81,6 @@ export class CarouselDirective implements AfterContentInit {
         this._transitionToIndex(index, smooth);
 
         this._previousActiveItem = item;
-    }
-
-    nextElement(): void {
-
     }
 
     private _handlePan(delta: number): void {

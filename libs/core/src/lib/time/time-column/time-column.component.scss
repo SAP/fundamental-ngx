@@ -15,6 +15,10 @@
 
 .fd-time__current-indicator {
     pointer-events: none;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .fd-time--compact,

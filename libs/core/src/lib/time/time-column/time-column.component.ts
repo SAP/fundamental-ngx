@@ -17,21 +17,31 @@ import {
 import { CarouselConfig, CarouselDirective } from '../../utils/directives/carousel/carousel.directive';
 import { CarouselItemDirective } from '../../utils/directives/carousel/carousel-item.directive';
 import { KeyUtil } from '../../utils/functions/key-util';
+import { TimeColumnConfig } from './time-column-config';
 
 
 let timeColumnUniqueId: number = 0;
 
 @Component({
-    selector: 'fd-time-column',
+    selector: ' fd-time-column',
     templateUrl: './time-column.component.html',
     styleUrls: ['./time-column.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class TimeColumnComponent implements AfterViewInit, OnInit {
-    /** items in row  */
+
+    /** Popover workaround, before initialisation the carousel items can't return size */
+    readonly InitialTimeHeight: number = 46;
+    readonly InitialCompactTimeHeight: number = 28;
+
+    /** items in row */
     @Input()
     rows: any[];
+
+    /** items in row */
+    @Input()
+    compact: boolean = false;
 
     /**
      * @Input when set to true, time inputs won't allow to have 1 digit
@@ -49,6 +59,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         }
         this._activeItem = value;
     }
+
     get activeItem(): any {
         return this._activeItem;
     }
@@ -63,9 +74,11 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
             this._focusIndicator();
         }
     }
+
     get active(): boolean {
         return this._active;
     }
+
     private _active: boolean = false;
 
     /** Whether time column is meridian */
@@ -76,6 +89,10 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     /** Id of column, initiated with some default value */
     @Input()
     id: string = 'fd-time-column-' + timeColumnUniqueId++;
+
+    /** I18n and labels */
+    @Input()
+    timeConfig: TimeColumnConfig;
 
     /**
      * Offset for carousel directive, active item is always the first one.
@@ -121,7 +138,8 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
 
     constructor(
         private _changeDetRef: ChangeDetectorRef
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -163,7 +181,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         } else if (KeyUtil.isKeyType(event, 'numeric')) {
             // TODO
             const value = Number(event.key);
-            this._pickTime(this._getItem(value), false, true)
+            this._pickTime(this._getItem(value), false, true);
         }
     }
 
@@ -236,7 +254,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean): void {
         if (!item) {
             // TODO: Throw Error
-            return
+            return;
         }
         this._triggerCarousel(item, smooth);
         this._activeCarouselItem = item;

@@ -1,5 +1,6 @@
-<label class="fd-time__slider-label">Hrs</label>
+<label class="fd-time__slider-label">{{timeConfig?.label}}</label>
 <button class="fd-button fd-button fd-button--transparent sap-icon--navigation-up-arrow"
+        [attr.aria-label]="timeConfig?.decreaseLabel"
         *ngIf="active"
         (click)="scrollUp()"></button>
 <div class="fd-time__wrapper" [ngClass]="{'fd-time__wrapper--active': active, 'fd-time__wrapper--meridian': meridian}">
@@ -10,7 +11,9 @@
         (activeChange)="activeChangedHandle($event)"
         (dragged)="handleDrag($event)"
         fdCarousel>
-        <li class="fd-time__item" *ngFor="let row of rows; let index = index" [carouselItemId]="id + index" fdCarouselItem [value]="row">
+        <li class="fd-time__item" *ngFor="let row of rows; let index = index" [carouselItemId]="id + index"
+            [initialHeight]="compact ? InitialCompactTimeHeight : InitialTimeHeight"
+            fdCarouselItem [value]="row">
             <span class="fd-time__unit" (click)="pick(row)">
                 {{row | twoDigits: keepTwoDigits}}
             </span>
@@ -27,6 +30,7 @@
     </span>
 </div>
 <button class="fd-button fd-button fd-button--transparent sap-icon--navigation-down-arrow"
+        [attr.aria-label]="timeConfig?.increaseLabel"
         *ngIf="active"
         (click)="scrollDown()">
 </button>

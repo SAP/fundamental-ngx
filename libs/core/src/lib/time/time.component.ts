@@ -14,6 +14,7 @@ import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18nLabels } from './i18n/time-i18n-labels';
 import { TimeI18n } from './i18n/time-i18n';
+import { TimeColumnConfig } from './time-column/time-column-config';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -311,6 +312,38 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
             }
             this.onChange(this.time);
         }
+    }
+
+    getHoursConfig(): TimeColumnConfig {
+        return {
+            decreaseLabel: this.timeI18nLabels.decreaseHoursLabel,
+            increaseLabel: this.timeI18nLabels.increaseHoursLabel,
+            label: this.timeI18nLabels.hoursLabel
+        };
+    }
+
+    getMinutesConfig(): TimeColumnConfig {
+        return {
+            decreaseLabel: this.timeI18nLabels.decreaseMinutesLabel,
+            increaseLabel: this.timeI18nLabels.increaseMinutesLabel,
+            label: this.timeI18nLabels.minutesLabel
+        };
+    }
+
+    getSecondsConfig(): TimeColumnConfig {
+        return {
+            decreaseLabel: this.timeI18nLabels.decreaseSecondsLabel,
+            increaseLabel: this.timeI18nLabels.increaseSecondsLabel,
+            label: this.timeI18nLabels.secondsLabel
+        };
+    }
+
+    getPeriodConfig(): TimeColumnConfig {
+        return {
+            decreaseLabel: this.timeI18nLabels.decreasePeriodLabel,
+            increaseLabel: this.timeI18nLabels.increasePeriodLabel,
+            label: this.timeI18nLabels.periodLabel
+        };
     }
 
     /** @hidden

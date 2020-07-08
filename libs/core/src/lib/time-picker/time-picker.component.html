@@ -29,6 +29,7 @@
     </fd-popover-control>
     <fd-popover-body *ngIf="displaySeconds || displayMinutes || displayHours">
         <fd-time
+            [compact]="compact"
             [disabled]="disabled"
             [meridian]="meridian"
             [(ngModel)]="time"
