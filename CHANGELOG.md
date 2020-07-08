@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.29...v0.20.0-rc.30) (2020-07-08)
+
+
+### Bug Fixes
+
+* pagination ... issue when there are 5 pages ([#2828](https://github.com/SAP/fundamental-ngx/issues/2828)) ([fcc8230](https://github.com/SAP/fundamental-ngx/commit/fcc823084301557a33e3c091901a349f83c4dc11))
+
 ## [0.20.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.28...v0.20.0-rc.29) (2020-07-07)
 
 ## [0.20.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.27...v0.20.0-rc.28) (2020-07-07)
