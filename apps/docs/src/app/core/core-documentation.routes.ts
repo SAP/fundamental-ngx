@@ -21,6 +21,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/alert/alert-docs.module').then((m) => m.AlertDocsModule)
             },
             {
+                path: 'avatar',
+                loadChildren: () => import('./component-docs/avatar/avatar-docs.module').then((m) => m.AvatarDocsModule)
+            },
+            {
                 path: 'bar',
                 loadChildren: () => import('./component-docs/bar/bar-docs.module').then((m) => m.BarDocsModule)
             },

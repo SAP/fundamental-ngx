@@ -1,0 +1,20 @@
+<span
+    class="fd-avatar"
+    role="presentation"
+    [ngStyle]="{ 'background-image': 'url(' + image + ')' }"
+    [ngClass]="
+        (size ? ' fd-avatar--' + size : '') +
+        (glyph ? ' sap-icon--' + glyph : '' ) + 
+        (colorAccent ? ' fd-avatar--accent-color-' + colorAccent : '')"
+    [class.fd-avatar--circle]="circle"
+    [class.fd-avatar--transparent]="transparent"
+    [class.fd-avatar--placeholder]="placeholder"
+    [class.fd-avatar--tile]="tile"
+    [class.fd-avatar--border]="border"
+    [id]="id"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledby"
+>
+<ng-content></ng-content>
+<ng-content select="[fd-avatar-zoom]"></ng-content>
+</span>
