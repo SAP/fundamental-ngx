@@ -3,8 +3,6 @@
 <br /><br />
 <a fd-link [disabled]="true" aria-disabled="true">Disabled Link</a>
 <br /><br />
-<a fd-link [routerLink]="['./']" fragment="inverted" [inverted]="true">Inverted Link</a>
-<br /><br />
 <a [routerLink]="['./']" fd-link>
     Icon Right Link
     <fd-icon [glyph]="arrowRight$ | async" [size]="'s'"></fd-icon>
@@ -14,3 +12,7 @@
     <fd-icon [glyph]="arrowLeft$ | async" [size]="'s'"></fd-icon>
     Icon Left Link
 </a>
+<br /><br />
+<div style="background-color:#314a5e;padding:10px">
+    <a fd-link [routerLink]="['./']" fragment="inverted" [inverted]="true">Inverted Link</a>
+</div>
