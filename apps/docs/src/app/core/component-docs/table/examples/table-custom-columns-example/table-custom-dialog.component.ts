@@ -7,16 +7,24 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <h1 fd-dialog-title>Table Customization</h1>
-                <div fd-bar-middle>
-                    <fd-bar-element>
-                        <button fd-button [compact]="true" (click)="sortAlphabetically(true)" fdType="transparent" [glyph]="'arrow-top'"></button>
-                        <button fd-button [compact]="true" (click)="sortAlphabetically()" fdType="transparent" [glyph]="'arrow-bottom'"></button>
-                    </fd-bar-element>
-                    <fd-bar-element [fullWidth]="true">
-                        <fd-input-group name="filter" [(ngModel)]="filterPhrase" [compact]="true" [glyph]="'search'"></fd-input-group>
-                    </fd-bar-element>
-                </div>
+                <ng-template fdTemplate="header">
+                    <div fd-bar-middle>
+                        <fd-bar-element>
+                            <h1 fd-dialog-title>Table Customization</h1>
+                        </fd-bar-element>
+                    </div>
+                </ng-template>
+                <ng-template fdTemplate="subheader">
+                    <div fd-bar-middle>
+                        <fd-bar-element>
+                            <button fd-button [compact]="true" (click)="sortAlphabetically(true)" fdType="transparent" [glyph]="'arrow-top'"></button>
+                            <button fd-button [compact]="true" (click)="sortAlphabetically()" fdType="transparent" [glyph]="'arrow-bottom'"></button>
+                        </fd-bar-element>
+                        <fd-bar-element [fullWidth]="true">
+                            <fd-input-group name="filter" [(ngModel)]="filterPhrase" [compact]="true" [glyph]="'search'"></fd-input-group>
+                        </fd-bar-element>
+                    </div>
+                </ng-template>
             </fd-dialog-header>
 
             <fd-dialog-body>
