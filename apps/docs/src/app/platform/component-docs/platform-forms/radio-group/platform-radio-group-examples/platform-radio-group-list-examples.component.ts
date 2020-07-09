@@ -11,16 +11,19 @@ export class PlatformRadioGroupListExampleComponent implements DoCheck {
     favoriteOption: string = '';
     favoriteOption2: string = 'Winter';
 
-    form1 = new FormGroup({
-        example1: new FormControl({ value: '', disabled: false })
-    });
+    form1 = new FormGroup({});
 
-    form2 = new FormGroup({
-        example2: new FormControl({ value: 'Winter', disabled: false })
+    form2 = new FormGroup({});
+    form2Data = { radiol2: 'Winter' };
+
+    form3 = new FormGroup({
+        month: new FormControl('Winter')
     });
 
     ngDoCheck() {
-        this.form1.controls.example1.setErrors({ invalid: true });
-        this.form1.controls.example1.markAsTouched();
+        if (this.form1.controls.radiol1) {
+            this.form1.controls.radiol1.setErrors({ invalid: true });
+            this.form1.controls.radiol1.markAsTouched();
+        }
     }
 }

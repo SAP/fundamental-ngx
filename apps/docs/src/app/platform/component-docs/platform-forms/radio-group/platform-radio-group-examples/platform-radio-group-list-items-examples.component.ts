@@ -8,6 +8,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
     favoriteOption: string = '';
     favoriteOption2: string = 'winter';
+    favBrand = 'redmi'
 
     form1 = new FormGroup({
         example1: new FormControl('')
@@ -16,6 +17,23 @@ export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
     form2 = new FormGroup({
         example2: new FormControl('winter')
     });
+
+    form3 = new FormGroup({});
+
+    form3Data = {
+        radiolo3: 'spring'
+    };
+
+    form4 = new FormGroup({});
+    form4Data = {
+        radiolo4: 'samsung'
+    };
+
+    invoiceItems = [
+        new Item('1', 'samsung', 'Samsung', 1, 12000),
+        new Item('2', 'xiomi', 'Xiomi', 1, 10500),
+        new Item('3', 'motorola', 'Motorola', 1, 5530)
+    ];
 
     items = [
         {
@@ -44,4 +62,14 @@ export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
         this.form1.controls.example1.setErrors({ invalid: true });
         this.form1.controls.example1.markAsTouched();
     }
+}
+
+class Item {
+    constructor(
+        public itemId: string,
+        public item: string,
+        public itemType: string,
+        public quantity: number,
+        public rate: number
+    ) {}
 }

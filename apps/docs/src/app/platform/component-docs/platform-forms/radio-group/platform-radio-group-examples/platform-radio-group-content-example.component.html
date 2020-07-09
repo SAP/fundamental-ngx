@@ -1,9 +1,9 @@
 <h3>Use With Reactive Form</h3>
 <p>Compact Radio Button Group with 'default' State and with Default Selection</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form1">
-    <fdp-form-field [id]="'radio1'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radio1'" [contentDensity]="'compact'" [value]="'spring'" [isInline]="false"
-            formControlName="example1">
+    <fdp-form-field #ffl1 [id]="'radioc1'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radioc1'" [contentDensity]="'compact'" [value]="'spring'" [isInline]="false"
+            [formControl]="ffl1.formControl">
             <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
             <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
             <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
@@ -11,12 +11,14 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem;">Selelected value: {{ form1.controls.example1.value }}</p>
+<p style="margin-left: 2rem;">Selected value: {{ form1.controls.radioc1?.value }}</p>
+<br />
 
 <p>Inline Cozy Radio Button Group</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form2">
-    <fdp-form-field [id]="'radio2'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radio2'" [contentDensity]="'cozy'" [isInline]="true" formControlName="example2">
+    <fdp-form-field #ffl2 [id]="'radioc2'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radioc2'" [contentDensity]="'cozy'" [isInline]="true"
+            [formControl]="ffl2.formControl">
             <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
             <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
             <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
@@ -24,12 +26,13 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem;">Selelected value: {{ form2.controls.example2.value }}</p>
+<p style="margin-left: 2rem;">Selected value: {{ form2.controls.radioc2?.value }}</p>
+<br />
 
 <p>Radio Button Group With Default Property Values</p>
-<fdp-form-group [multiLayout]="true" [formGroup]="form3">
-    <fdp-form-field [id]="'radio3'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radio3'" [isInline]="true" formControlName="example3">
+<fdp-form-group [multiLayout]="true" [formGroup]="form3" [object]="form3Data">
+    <fdp-form-field #ffl3 [id]="'radioc3'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radioc3'" [isInline]="true" [formControl]="ffl3.formControl">
             <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
             <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
             <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
@@ -37,12 +40,14 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem;">Selelected value: {{ form3.controls.example3.value }}</p>
+<p style="margin-left: 2rem;">Selected value: {{ form3.controls.radioc3?.value }}</p>
+<br />
 
 <p>Radio Button Group With Disabled Button and Validation Error</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form4">
-    <fdp-form-field [id]="'radio4'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radio4'" [contentDensity]="'compact'" [isInline]="false" formControlName="example4">
+    <fdp-form-field #ffl4 [id]="'radioc4'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radioc4'" [contentDensity]="'compact'" [value]="'march'" [isInline]="false"
+            [formControl]="ffl4.formControl">
             <fdp-radio-button [value]="'january'" [disabled]="true">January</fdp-radio-button>
             <fdp-radio-button [value]="'february'">February</fdp-radio-button>
             <fdp-radio-button [value]="'march'">March</fdp-radio-button>
@@ -50,15 +55,29 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem;">Selelected value: {{ form4.controls.example4.value }}</p>
-
+<p style="margin-left: 2rem;">Selected value: {{ form4.controls.radioc4?.value }}</p>
 <br />
+
+<p>Radio Button Group using FormGroup and FormControl</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form5">
+    <fdp-form-field [id]="'radioc5'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radioc5'" [contentDensity]="'compact'" [value]="'march'" [isInline]="false"
+            formControlName="month">
+            <fdp-radio-button [value]="'january'" [disabled]="true">January</fdp-radio-button>
+            <fdp-radio-button [value]="'february'">February</fdp-radio-button>
+            <fdp-radio-button [value]="'march'">March</fdp-radio-button>
+            <fdp-radio-button [value]="'april'">April</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p style="margin-left: 2rem;">Selected value: {{ form5.controls.month?.value }}</p>
+
 <separator></separator>
 <h3>Use With Template Driven Form</h3>
 <p>Inline Compact Radio Button Group With Default Selection</p>
 <fdp-form-group [multiLayout]="true">
-    <fdp-form-field [id]="'radio4'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radio4'" [contentDensity]="'compact'" [isInline]="true" [(ngModel)]="favoriteSeason">
+    <fdp-form-field [id]="'radioc6'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radioc6'" [contentDensity]="'compact'" [isInline]="true" [(ngModel)]="favoriteSeason">
             <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
             <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
             <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
@@ -70,8 +89,9 @@
 
 <p>Inline Compact Radio Button Group</p>
 <fdp-form-group [multiLayout]="true">
-    <fdp-form-field [id]="'radio5'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radio5'" [contentDensity]="'compact'" [isInline]="true" [(ngModel)]="favoriteSeason2">
+    <fdp-form-field [id]="'radioc7'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radioc7'" [contentDensity]="'compact'" [isInline]="true"
+            [(ngModel)]="favoriteSeason2">
             <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
             <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
             <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
@@ -83,8 +103,8 @@
 
 <p>Radio Button Group with Disabled Item</p>
 <fdp-form-group [multiLayout]="true">
-    <fdp-form-field [id]="'radio5'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radio5'" [contentDensity]="'compact'" [isInline]="false" [(ngModel)]="favoriteMonth">
+    <fdp-form-field [id]="'radioc8'" zone="zLeft" rank="1">
+        <fdp-radio-group [name]="'radioc8'" [contentDensity]="'compact'" [isInline]="false" [(ngModel)]="favoriteMonth">
             <fdp-radio-button [value]="'january'" [disabled]="true">January</fdp-radio-button>
             <fdp-radio-button [value]="'february'">February</fdp-radio-button>
             <fdp-radio-button [value]="'march'">March</fdp-radio-button>

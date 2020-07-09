@@ -40,13 +40,13 @@
         <div fd-form-item>
             <fdp-radio-button
                 [name]="name"
-                [value]="item.value ? item.value : item"
+                [value]="getLookupValue(item)"
                 [contentDensity]="contentDensity"
                 [disabled]="item.disabled ? item.disabled : disabled"
                 [forceRender]="true"
                 (click)="selected($event)"
             >
-                {{ item.label ? item.label : item }}
+                {{ getDisaplyValue(item) }}
             </fdp-radio-button>
         </div>
     </ng-container>
