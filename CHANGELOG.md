@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.20.0...v0.20.1-rc.0) (2020-07-09)
+
+
+### Bug Fixes
+
+* Create Step Input component matching Fiori3 ([#2782](https://github.com/SAP/fundamental-ngx/issues/2782)) ([77801c9](https://github.com/SAP/fundamental-ngx/commit/77801c9015c296a7099e4d68f8269cb4faec5f5f))
+
 ## [0.20.0](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.31...v0.20.0) (2020-07-08)
 
 ## [0.20.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.20.0-rc.30...v0.20.0-rc.31) (2020-07-08)
