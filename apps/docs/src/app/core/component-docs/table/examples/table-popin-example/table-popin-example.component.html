@@ -19,7 +19,7 @@
                     {{fruit.price}}
                 </td>
                 <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                    <span fd-table-icon [glyph]="'navigation-right-arrow'" [navigation]="true"></span>
+                    <span fd-table-icon [glyph]="navigationArrow$ | async" [navigation]="true"></span>
                 </td>
             </tr>
             <tr fd-table-row [secondary]="true">
@@ -73,7 +73,7 @@
                     {{fruit.dateOfExpire}}
                 </td>
                 <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                    <span fd-table-icon [glyph]="'navigation-right-arrow'" [navigation]="true"></span>
+                    <span fd-table-icon [glyph]="navigationArrow$ | async" [navigation]="true"></span>
                 </td>
             </tr>
             <tr fd-table-row [secondary]="true">
@@ -126,7 +126,7 @@
                     {{fruit.description}}
                 </td>
                 <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                    <span fd-table-icon [glyph]="'navigation-right-arrow'" [navigation]="true"></span>
+                    <span fd-table-icon [glyph]="navigationArrow$ | async" [navigation]="true"></span>
                 </td>
             </tr>
         </ng-container>
@@ -165,7 +165,7 @@
                     {{fruit.price}}
                 </td>
                 <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                    <span fd-table-icon [glyph]="'navigation-right-arrow'" [navigation]="true"></span>
+                    <span fd-table-icon [glyph]="navigationArrow$ | async" [navigation]="true"></span>
                 </td>
             </tr>
             <tr fd-table-row [secondary]="true" [attr.aria-selected]="fruit.checked">

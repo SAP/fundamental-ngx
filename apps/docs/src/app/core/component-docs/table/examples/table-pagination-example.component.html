@@ -17,7 +17,8 @@
     </tbody>
     <br/>
     <tfoot fd-table-footer>
-        <button fd-button [fdMenu]="true" [fdMenuTrigger]="itemsPerPageMenu" style="margin-right: 20px">Items Per Page</button>
+        <button fd-button [fdMenu]="true" [fdMenuTrigger]="itemsPerPageMenu"
+                [ngStyle]="{'margin-left': (rtl$ | async) ? '20px' : '0', 'margin-right': (rtl$ | async) ? '0' : '20px'}">Items Per Page</button>
         <fd-pagination
             [totalItems]="totalItems"
             (pageChangeStart)="newPageClicked($event)"

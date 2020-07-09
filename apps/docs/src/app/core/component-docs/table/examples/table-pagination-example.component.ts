@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MenuComponent, RtlService } from '@fundamental-ngx/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-table-pagination-example',
@@ -11,11 +14,18 @@ export class TablePaginationExampleComponent implements OnInit {
     itemsPerPage: number = 5;
     currentPage: number = 3;
     itemsPerPageOptions: number[] = [3, 5, 10];
+    rtl$: Observable<boolean>;
+
+    @ViewChild('itemsPerPageMenu')
+    itemsPerPageMenu: MenuComponent;
 
     newPageClicked(pageNumber: number): void {
         this.currentPage = pageNumber;
         const firstDisplayedRow = (pageNumber - 1) * this.itemsPerPage;
         this.displayedRows = this.tableRows.slice(firstDisplayedRow, firstDisplayedRow + this.itemsPerPage);
+        if (this.itemsPerPageMenu) {
+            this.itemsPerPageMenu.close();
+        }
     }
 
     itemsPerPageChange(value: number): void {
@@ -23,7 +33,10 @@ export class TablePaginationExampleComponent implements OnInit {
         this.newPageClicked(1);
     }
 
+    constructor(private _rtlService: RtlService) {}
+
     ngOnInit(): void {
+        this.rtl$ = this._rtlService.rtl;
         this.tableRows = [
             {
                 column1: 'Row 1',

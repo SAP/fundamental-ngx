@@ -20,6 +20,7 @@ export const Hidden_Class_Name = 'fd-table-hidden';
 })
 export class TableRowDirective implements AfterViewInit, OnDestroy {
 
+    /** @hidden */
     @ContentChildren(TableCellDirective)
     cells: QueryList<TableCellDirective>;
 

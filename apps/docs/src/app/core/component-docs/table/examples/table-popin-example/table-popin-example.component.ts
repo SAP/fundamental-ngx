@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RtlService } from '@fundamental-ngx/core';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-table-popin-example',
@@ -11,11 +14,13 @@ import { Component } from '@angular/core';
         `
     ]
 })
-export class TablePopinExampleComponent {
+export class TablePopinExampleComponent implements OnInit {
 
     masterCheckbox: boolean = false;
 
-    fruits = [
+    navigationArrow$: Observable<string>;
+
+    fruits: any[] = [
         {
             name: 'Banana',
             status: 'positive',
@@ -57,7 +62,7 @@ export class TablePopinExampleComponent {
             description: 'The orange is the fruit of various citrus species in the family Rutaceae (see list of plants known as orange); it primarily refers to Citrus × sinensis.',
             checked: false
         },
-    ]
+    ];
 
 
     select(index: number, checked: boolean): void {
@@ -65,12 +70,20 @@ export class TablePopinExampleComponent {
         this.masterCheckbox = this._allSelected();
     }
 
-    selectMaster(checked: boolean) {
+    selectMaster(checked: boolean): void {
         if (checked) {
             this._selectAll();
         } else {
             this._deselectAll();
         }
+    }
+
+    constructor(private _rtlService: RtlService) {}
+
+    ngOnInit(): void {
+        this.navigationArrow$ = this._rtlService.rtl.pipe(
+            map((isRtl) => (isRtl ? 'navigation-left-arrow' : 'navigation-right-arrow'))
+        );
     }
 
     private _selectAll(): void {

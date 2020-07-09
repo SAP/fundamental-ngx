@@ -7,24 +7,16 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <ng-template fdTemplate="header">
-                    <div fd-bar-middle>
-                        <fd-bar-element>
-                            <h1 fd-dialog-title>Table Customization</h1>
-                        </fd-bar-element>
-                    </div>
-                </ng-template>
-                <ng-template fdTemplate="subheader">
-                    <div fd-bar-middle>
-                        <fd-bar-element>
-                            <button fd-button [compact]="true" (click)="sortAlphabetically(true)" fdType="transparent" [glyph]="'arrow-top'"></button>
-                            <button fd-button [compact]="true" (click)="sortAlphabetically()" fdType="transparent" [glyph]="'arrow-bottom'"></button>
-                        </fd-bar-element>
-                        <fd-bar-element [fullWidth]="true">
-                            <fd-input-group name="filter" [(ngModel)]="filterPhrase" [compact]="true" [glyph]="'search'"></fd-input-group>
-                        </fd-bar-element>
-                    </div>
-                </ng-template>
+                <h1 fd-dialog-title>Table Customization</h1>
+                <div fd-bar-middle>
+                    <fd-bar-element>
+                        <button fd-button [compact]="true" (click)="sortAlphabetically(true)" fdType="transparent" [glyph]="'arrow-top'"></button>
+                        <button fd-button [compact]="true" (click)="sortAlphabetically()" fdType="transparent" [glyph]="'arrow-bottom'"></button>
+                    </fd-bar-element>
+                    <fd-bar-element [fullWidth]="true">
+                        <fd-input-group name="filter" [(ngModel)]="filterPhrase" [compact]="true" [glyph]="'search'"></fd-input-group>
+                    </fd-bar-element>
+                </div>
             </fd-dialog-header>
 
             <fd-dialog-body>
@@ -59,34 +51,28 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
             </fd-dialog-body>
 
             <fd-dialog-footer>
-                <ng-template fdTemplate="footer">
-                    <div fd-bar-left>
-                    </div>
-                    <div fd-bar-right>
-                        <fd-bar-element>
-                            <button
-                                    fd-button
-                                    fd-dialog-decisive-button
-                                    fdType="emphasized"
-                                    [compact]="true"
-                                    (click)="save()"
-                            >
-                                Save and Close
-                            </button>
-                        </fd-bar-element>
-                        <fd-bar-element>
-                            <button
-                                    fd-button
-                                    fd-dialog-decisive-button
-                                    fdType="emphasized"
-                                    [compact]="true"
-                                    (click)="dismiss()"
-                            >
-                                Close without Saving
-                            </button>
-                        </fd-bar-element>
-                    </div>
-                </ng-template>
+                <fd-dialog-footer-button>
+                    <button
+                        fd-button
+                        fd-dialog-decisive-button
+                        fdType="emphasized"
+                        [compact]="true"
+                        (click)="save()"
+                    >
+                        Save and Close
+                    </button>
+                </fd-dialog-footer-button>
+                <fd-dialog-footer-button>
+                    <button
+                        fd-button
+                        fd-dialog-decisive-button
+                        fdType="transparent"
+                        [compact]="true"
+                        (click)="dismiss()"
+                    >
+                        Close without Saving
+                    </button>
+                </fd-dialog-footer-button>
             </fd-dialog-footer>
         </fd-dialog>
     `
