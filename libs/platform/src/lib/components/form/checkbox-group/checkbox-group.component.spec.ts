@@ -218,9 +218,9 @@ describe('CheckboxGroup component Reactive Form Test', () => {
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
         expect(fdpCheckboxElem[15].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[16].nativeElement.getAttribute('ng-reflect-is-disabled')).toBeFalsy();
+        expect(fdpCheckboxElem[16].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
         expect(fdpCheckboxElem[17].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[18].nativeElement.getAttribute('ng-reflect-is-disabled')).toBeFalsy();
+        expect(fdpCheckboxElem[18].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
     });
 });
 
@@ -436,9 +436,9 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
         expect(fdpCheckboxElem[15].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[16].nativeElement.getAttribute('ng-reflect-is-disabled')).toBeFalsy();
+        expect(fdpCheckboxElem[16].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
         expect(fdpCheckboxElem[17].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[18].nativeElement.getAttribute('ng-reflect-is-disabled')).toBeFalsy();
+        expect(fdpCheckboxElem[18].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
     });
 });
 

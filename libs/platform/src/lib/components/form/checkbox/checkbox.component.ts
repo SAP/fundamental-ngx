@@ -3,14 +3,17 @@ import { Input, NgZone, Optional, Output, Self, ViewChild, ViewEncapsulation } f
 import { NgControl, NgForm } from '@angular/forms';
 import { CheckboxComponent as CoreCheckboxComponent } from '@fundamental-ngx/core';
 import { BaseInput } from '../base.input';
-import { FormFieldControl } from '../form-control';
+import { FormFieldControl, Status } from '../form-control';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
     /** The source Checkbox of the event. */
     source: CheckboxComponent;
-    /** The new `checked` value of the checkbox. */
-    checked: boolean;
+    /**
+     * The new `checked` value of the checkbox.
+     * possible value: true/false and array of checkbox values.
+     */
+    checked: any;
 }
 
 /**
@@ -78,6 +81,10 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         }
     }
 
+    /** set state of individual checkbox.Used by CBG to set checkbox states */
+    @Input()
+    stateType: Status;
+
     /** Emitting checked event for non-form checkbox  */
     @Output()
     readonly checkedChange: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
@@ -113,6 +120,9 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
 
     /** @hidden value of checkbox */
     private _checkboxValue: any;
+
+    /** @hidden state of checkbox, coming from CBG */
+    private _state: Status;
 
     constructor(
         protected _changeDetector: ChangeDetectorRef,
@@ -177,6 +187,16 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         this.stateChanges.next('checkbox: onModelChange');
     }
 
+    /**
+     * returns the state for checkbox.
+     */
+    public getUpdatedState(): string {
+        if (this.stateType) {
+            return this.stateType as string;
+        }
+        return this.status as string; // return parent form field status.
+    }
+
     /** @hidden running outside angular zone */
     private _emitvalueInViewInit(): void {
         this._ngZone.runOutsideAngular(() => {
@@ -192,16 +212,16 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      */
     private _updateModel(): void {
         if (this.tristate) {
-            if (!this.corecheckbox.inputLabel.nativeElement.checked) {
-                this.checkboxCurrentValue = this.corecheckbox.values.falseValue;
-            } else {
+            if (!this.corecheckbox.isChecked) {
                 if (this.corecheckbox.checkboxState === 'indeterminate') {
                     this.checkboxCurrentValue = this.corecheckbox.values.thirdStateValue;
+                    this.indeterminateChange.emit(this.checkboxCurrentValue);
                 } else {
-                    this.checkboxCurrentValue = this.corecheckbox.values.trueValue;
+                    this.checkboxCurrentValue = this.corecheckbox.values.falseValue;
                 }
+            } else {
+                this.checkboxCurrentValue = this.corecheckbox.values.trueValue;
             }
-            this.indeterminateChange.emit(this.checkboxCurrentValue);
             this._emitChangeEvent(this.checkboxCurrentValue);
         } else if (this.isBinary) {
             if (this.checkboxCurrentValue && this.checkboxValue) {
@@ -213,7 +233,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
             this._emitChangeEvent(this.checkboxCurrentValue);
         } else {
             // checkbox has been selected
-            if (this.corecheckbox.inputLabel.nativeElement.checked) {
+            if (this.corecheckbox.isChecked) {
                 this._addValue();
             } else {
                 this._removeValue();
@@ -280,10 +300,6 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         } else {
             this.checkboxCurrentValue = value;
         }
-        this._changeDetector.detectChanges();
-    }
-
-    public detectChanges(): void {
         this._changeDetector.detectChanges();
     }
 }

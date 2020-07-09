@@ -94,6 +94,7 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/platform-forms/platform-textarea/platform-textarea-docs.module').then(
                         (m) => m.PlatformTextareaDocsModule
+                    )
             }
         ]
     }

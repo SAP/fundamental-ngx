@@ -34,7 +34,7 @@ import { PlatformCheckboxGroupModule } from './components/form/checkbox-group/ch
         PlatformMenuButtonModule,
         PlatformSplitMenuButtonModule,
         PlatformInfoLabelModule,
-        PlatformTextAreaModule
+        PlatformTextAreaModule,
         PlatformInfoLabelModule
     ]
 })
