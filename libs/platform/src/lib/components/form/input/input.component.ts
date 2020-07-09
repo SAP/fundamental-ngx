@@ -79,6 +79,7 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        super.ngOnInit();
         if (!this.type || VALID_INPUT_TYPES.indexOf(this.type) === -1) {
             throw new Error(` Input type ${this.type} is not supported`);
         }

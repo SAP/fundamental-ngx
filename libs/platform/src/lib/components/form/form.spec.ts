@@ -19,41 +19,49 @@ interface TestUser {
 
 @Component({
     template: `
-    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
-        <fdp-form-group #userForm
-            [object]="user"
-            [formGroup]="userFormGroup"
-            [hintPlacement]="'right'"
-            [i18Strings]="i18n">
-            <fdp-form-field #firstName
-                id="firstName"
-                label="First Name"
-                hint="Enter your first name."
-                zone="zTop"
-                required=true>
-                <fdp-input [formControl]="firstName.formControl"></fdp-input>
-            </fdp-form-field>
-            <fdp-form-field #lastName
-                id="lastName"
-                label="Last Name"
-                hint="Enter your last name."
-                zone="zTop"
-                required=true>
-                <fdp-input [formControl]="lastName.formControl"></fdp-input>
-            </fdp-form-field>
-            <fdp-form-field #favoriteColor
-                id="favoriteColor"
-                label="Favorite Color"
-                hint="What is your favorite color?"
-                zone="zBottom">
-                <fdp-input [formControl]="favoriteColor.formControl"></fdp-input>
-            </fdp-form-field>
-            <ng-template #i18n let-errors>
-                <span *ngIf="errors && errors.required" class="error">This field is required.</span>
-            </ng-template>
-        </fdp-form-group>
-        <button type="submit" #submitButton>Submit</button>
-    </form>
+        <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+            <fdp-form-group
+                #userForm
+                [object]="user"
+                [formGroup]="userFormGroup"
+                [hintPlacement]="'right'"
+                [i18Strings]="i18n"
+            >
+                <fdp-form-field
+                    #firstName
+                    id="firstName"
+                    label="First Name"
+                    hint="Enter your first name."
+                    zone="zTop"
+                    required="true"
+                >
+                    <fdp-input [formControl]="firstName.formControl"></fdp-input>
+                </fdp-form-field>
+                <fdp-form-field
+                    #lastName
+                    id="lastName"
+                    label="Last Name"
+                    hint="Enter your last name."
+                    zone="zTop"
+                    required="true"
+                >
+                    <fdp-input [formControl]="lastName.formControl"></fdp-input>
+                </fdp-form-field>
+                <fdp-form-field
+                    #favoriteColor
+                    id="favoriteColor"
+                    label="Favorite Color"
+                    hint="What is your favorite color?"
+                    zone="zBottom"
+                >
+                    <fdp-input [formControl]="favoriteColor.formControl"></fdp-input>
+                </fdp-form-field>
+                <ng-template #i18n let-errors>
+                    <span *ngIf="errors && errors.required" class="error">This field is required.</span>
+                </ng-template>
+            </fdp-form-group>
+            <button type="submit" #submitButton>Submit</button>
+        </form>
     `
 })
 class SimpleFormTestComponent {
@@ -69,7 +77,7 @@ class SimpleFormTestComponent {
     public user: TestUser = {
         firstName: 'Tom',
         lastName: 'Tiny',
-        favoriteColor: 'blue',
+        favoriteColor: 'blue'
     };
 
     public result: any = null;
@@ -85,12 +93,8 @@ describe('Simple Form', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                ReactiveFormsModule,
-                FdpFormGroupModule,
-                PlatformInputModule,
-            ],
-            declarations: [SimpleFormTestComponent],
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+            declarations: [SimpleFormTestComponent]
         }).compileComponents();
     }));
 
@@ -149,12 +153,10 @@ describe('Simple Form', () => {
         expect(host.result).toEqual({
             firstName: 'Tom',
             lastName: 'Tiny',
-            favoriteColor: 'blue',
+            favoriteColor: 'blue'
         });
     });
-
 });
-
 
 @Component({
     template: `
@@ -183,20 +185,46 @@ describe('Simple Form', () => {
                     label="Street">
                     <fdp-input [formControl]="street.formControl"></fdp-input>
                 </fdp-form-field>
-                <fdp-form-field #city
-                    id="city"
-                    label="City">
-                    <fdp-input [formControl]="city.formControl"></fdp-input>
+                <fdp-form-field #lastName id="lastName" label="Last Name">
+                    <fdp-input
+                        [name]="'input_test5'"
+                        [id]="'input_test5'"
+                        [formControl]="lastName.formControl"
+                    ></fdp-input>
                 </fdp-form-field>
-                <fdp-form-field #state
-                    id="state"
-                    label="State">
-                    <fdp-input [formControl]="state.formControl"></fdp-input>
+                <fdp-form-field #favoriteColor id="favoriteColor" label="Favorite Color">
+                    <fdp-input
+                        [name]="'input_test6'"
+                        [id]="'input_test6'"
+                        [formControl]="favoriteColor.formControl"
+                    ></fdp-input>
                 </fdp-form-field>
+                <fdp-form-group #addressGroup>
+                    <fdp-form-field #street id="street" label="Street">
+                        <fdp-input
+                            [name]="'input_test7'"
+                            [id]="'input_test7'"
+                            [formControl]="street.formControl"
+                        ></fdp-input>
+                    </fdp-form-field>
+                    <fdp-form-field #city id="city" label="City">
+                        <fdp-input
+                            [name]="'input_test8'"
+                            [id]="'input_test8'"
+                            [formControl]="city.formControl"
+                        ></fdp-input>
+                    </fdp-form-field>
+                    <fdp-form-field #state id="state" label="State">
+                        <fdp-input
+                            [name]="'input_test9'"
+                            [id]="'input_test9'"
+                            [formControl]="state.formControl"
+                        ></fdp-input>
+                    </fdp-form-field>
+                </fdp-form-group>
             </fdp-form-group>
-        </fdp-form-group>
-        <button type="submit" #submitButton>Submit</button>
-    </form>
+            <button type="submit" #submitButton>Submit</button>
+        </form>
     `
 })
 class NestedFormGroupsTestComponent {
@@ -228,7 +256,6 @@ class NestedFormGroupsTestComponent {
     onSubmit(): void {
         this.result = this.userFormGroup.value;
     }
-
 }
 
 describe('Nested Form Groups', () => {
@@ -237,12 +264,8 @@ describe('Nested Form Groups', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                ReactiveFormsModule,
-                FdpFormGroupModule,
-                PlatformInputModule,
-            ],
-            declarations: [NestedFormGroupsTestComponent],
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+            declarations: [NestedFormGroupsTestComponent]
         }).compileComponents();
     }));
 
@@ -282,5 +305,4 @@ describe('Nested Form Groups', () => {
             state: 'AK'
         });
     });
-
 });
