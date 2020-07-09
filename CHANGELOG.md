@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.1...v0.20.1-rc.2) (2020-07-09)
+
+
+### Bug Fixes
+
+* **platform:** textarea as a component with counter and auto-grow features ([#2691](https://github.com/SAP/fundamental-ngx/issues/2691)) ([573614b](https://github.com/SAP/fundamental-ngx/commit/573614b8f0e1ce113e26f4624281c4df0bba982b))
+
 ### [0.20.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.0...v0.20.1-rc.1) (2020-07-09)
 
 ### [0.20.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.20.0...v0.20.1-rc.0) (2020-07-09)
