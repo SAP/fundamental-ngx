@@ -265,6 +265,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'step-input',
+                loadChildren: () =>
+                    import('./component-docs/step-input/step-input-docs.module').then(
+                        (m) => m.StepInputDocsModule
+                    )
+            },
+            {
                 path: 'switch',
                 loadChildren: () => import('./component-docs/switch/switch-docs.module').then((m) => m.SwitchDocsModule)
             },
