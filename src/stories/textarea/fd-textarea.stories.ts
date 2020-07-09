@@ -4,6 +4,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormControlDirective, FormModule } from 'libs/core/src/lib/form/public_api';
+import { semanticStates } from '../../utils';
 
 export default {
     title: 'Fd text-area',
@@ -28,13 +29,7 @@ export const TextArea = () => ({
         </div>
   `,
     props: {
-        stateOfTextArea: select('State', {
-            information: 'information',
-            success: 'success',
-            error: 'error',
-            warning: 'warning',
-            none: '',
-        }, ''),
+        stateOfTextArea: select('State', semanticStates, null),
         compactOfTextArea: boolean('Compact', false),
         disabledOfTextArea: boolean('Disabled', false),
         placeholderOfTextArea: text('Placeholder', 'Enter text here'),

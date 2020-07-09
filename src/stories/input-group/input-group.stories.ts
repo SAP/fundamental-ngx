@@ -8,6 +8,7 @@ import {
     InputGroupNumberComponent,
     InputGroupModule
 } from 'libs/core/src/lib/input-group/public_api';
+import { icons, semanticStates } from '../../utils';
 
 export default {
     title: 'Fd input-group',
@@ -27,7 +28,7 @@ export default {
 export const InputGroupNumber = () => ({
     template: `
         <label fd-form-label>Input Group</label>
-        <fd-input-group-number 
+        <fd-input-group-number
         [placeholder]="placeholderVar"
         [disabled]="disabledVar"
         [stepDownLabel]="stepDownLabel"
@@ -47,15 +48,15 @@ export const InputGroupNumber = () => ({
 export const InputGroup = () => ({
     template: `
         <label fd-form-label>Input Group</label>
-        <fd-input-group 
+        <fd-input-group
         [placement]="placementVar"
-        [addOnText]="addOnTextVar" 
+        [addOnText]="addOnTextVar"
         [placeholder]="placeholder"
         [compact]="compactVar"
         [inline]="inlineVar"
         [buttonFocusable]="buttonFocusable"
         [buttonType]="buttonTypeVar"
-        
+
         [glyph]="glyphVar"
         [button]="buttonVar"
         [disabled]="disabledVar"
@@ -90,21 +91,12 @@ export const InputGroup = () => ({
             },
             ''
         ),
-        stateVar: select(
-            'State',
-            {
-                valid: 'valid',
-                invalid: 'invalid',
-                information: 'information',
-                empty: ''
-            },
-            ''
-        ),
+        stateVar: select('State', semanticStates, null),
         compactVar: boolean('Compact', false),
         inlineVar: boolean('Inline', false),
         placeholderVar: text('Placeholder', 'Default placeholder'),
         addOnTextVar: text('Add on text', ''),
-        glyphVar: text('Glyph', ''),
+        glyphVar: select('Glyph', icons, ''),
         buttonFocusableVar: boolean('Button Focusable', true),
         buttonVar: boolean('Add on is Button', false),
         disabledVar: boolean('Disabled', false)

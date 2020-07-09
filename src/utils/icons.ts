@@ -1,4 +1,5 @@
 export const icons = [
+    '',
     'accelerated',
     'accept',
     'accidental-leave',

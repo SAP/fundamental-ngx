@@ -52,8 +52,8 @@ export const StepInput = () => ({
         incrementButtonTitle: text('Increment button title', ''),
         decrementButtonTitle: text('Decrement button title', ''),
 
-        min: number('Min value', null),
-        max: number('Max value', null),
+        min: number('Min value', -10000),
+        max: number('Max value', 10000),
         step: number('Step value', 1),
 
         state: select('State', semanticStates, null),
