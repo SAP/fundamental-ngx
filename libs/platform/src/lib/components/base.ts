@@ -10,7 +10,7 @@ let randomId = 0;
  */
 export abstract class BaseComponent {
     protected defaultId: string = `fdp-id-${randomId++}`;
-    protected _disabled: boolean;
+    protected _disabled: boolean = false;
 
     /** id for the Element */
     @Input()
@@ -38,5 +38,5 @@ export abstract class BaseComponent {
         this._disabled = disabled;
     }
 
-    constructor(protected _cd: ChangeDetectorRef) {}
+    constructor(protected _cd: ChangeDetectorRef) { }
 }

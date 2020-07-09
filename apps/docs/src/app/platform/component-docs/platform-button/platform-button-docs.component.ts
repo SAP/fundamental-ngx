@@ -23,14 +23,21 @@ export class PlatformButtonDocsComponent implements OnInit {
                     label: {
                         type: 'string'
                     },
-                    type: {
+                    buttonType: {
                         type: 'string',
                         enum: ['', 'standard', 'positive', 'transparent', 'negative', 'emphasized', 'ghost']
                     },
-                    compact: {
-                        type: 'boolean'
+                    contentDensity: {
+                        type: 'string',
+                        enum: ['cozy', 'compact']
                     },
                     disabled: {
+                        type: 'boolean'
+                    },
+                    ariaDisabled: {
+                        type: 'boolean'
+                    },
+                    ariaSelected: {
                         type: 'boolean'
                     },
                     width: {
@@ -51,13 +58,14 @@ export class PlatformButtonDocsComponent implements OnInit {
     data: any = {
         properties: {
             label: 'click here',
-            type: 'default',
-            option: 'default',
+            buttonType: 'default',
             width: '100px',
             size: 'default',
             icon: '',
-            compact: false,
-            disabled: false
+            contentDensity: 'cozy',
+            disabled: false,
+            ariaDisabled: false,
+            ariaSelected: true
         }
     };
 
@@ -109,7 +117,7 @@ export class PlatformButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }
