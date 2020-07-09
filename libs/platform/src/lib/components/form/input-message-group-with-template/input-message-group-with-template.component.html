@@ -5,8 +5,8 @@
     [fillControlMode]="fillControlMode"
     [isOpen]="isOpen"
     [placement]="placement$ | async"
-    [triggers]="triggers"
-    class="fd-form-input-message-group"
+    [triggers]="['input', 'click']"
+    class="fd-form-input-message-group fd-popover--input-message-group"
 >
     <fd-popover-control>
         <ng-container *ngTemplateOutlet="triggerItemTemplate"></ng-container>

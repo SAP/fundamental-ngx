@@ -7,3 +7,8 @@
 .fd-popover-container-custom {
     border: none;
 }
+
+// when disabled, this class adds the grabber cursor type on textarea. Overriding it to auto instead of pointer.
+.fd-popover__control {
+    cursor: auto;
+}
