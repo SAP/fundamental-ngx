@@ -85,9 +85,25 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     inputId: string = `fd-step-input-${stepInputUniqueId++}`;
 
-    /** Sets control value */
-    @Input()
-    value: number = 0;
+    /** Set control value */
+    @Input('value')
+    set value(value: number) {
+        if (value === null) {
+            this._value = value;
+        } else if (!isNaN(value)) {
+            value = Number(value);
+            this._value = this._checkValueLimits(value);
+        }
+        this.lastEmittedValue = this._value;
+        if (this._numberFormat) {
+            this._updateViewValue();
+        }
+    }
+
+    /** Control value */
+    get value(): number {
+        return this._value;
+    }
 
     /** Sets minimum value boundary */
     @Input()
@@ -186,6 +202,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     focused: boolean;
 
     /** @hidden */
+    private _value: number = null;
+
+    /** @hidden */
     private _numerals: RegExp;
 
     /** @hidden */
@@ -247,11 +266,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     writeValue(value: number): void {
-        value = Number(value);
-        if (!isNaN(value)) {
-            this.value = this._checkValueLimits(value);
-            this._updateViewValue();
-        }
+        this.value = value;
     }
 
     /** @hidden */
@@ -277,7 +292,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Increment input value by step value */
     increment(): void {
         if (this.canIncrement) {
-            this.value = this._cutFloatingNumberDistortion(this.value, this.step);
+            this._value = this._cutFloatingNumberDistortion(this.value, this.step);
             this._emitChangedValue();
             this._updateViewValue();
         }
@@ -286,7 +301,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Decrement input value by step value */
     decrement(): void {
         if (this.canDecrement) {
-            this.value = this._cutFloatingNumberDistortion(this.value, -this.step);
+            this._value = this._cutFloatingNumberDistortion(this.value, -this.step);
             this._emitChangedValue();
             this._updateViewValue();
         }
@@ -339,9 +354,8 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden Updates viewValue and conditionally emits new value.
      * This method is called on (change) event, when user leaves input control. */
-    updateViewValue(event: any): void {
-        const parsedValue = this._parseValue(event.target.value);
-        if (parsedValue !== this.lastEmittedValue) {
+    updateOnInputChanged(): void {
+        if (this.value !== this.lastEmittedValue) {
             this._emitChangedValue();
         }
         this._updateViewValue();
@@ -350,10 +364,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden Track parsed value when user changes value of the input control. */
     trackInputValue(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
-
-        if (parsedValue !== null) {
-            this.value = this._checkValueLimits(parsedValue);
-        }
+        this._value = parsedValue !== null
+            ? this._checkValueLimits(parsedValue)
+            : null;
     }
 
     /** @hidden */
@@ -408,7 +421,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     private _updateViewValue(): void {
-        this.inputElement.nativeElement.value = this._formatViewValue(this.value);
+        this.inputElement.nativeElement.value = this._formatToViewValue(this.value);
     }
 
     /** @hidden */
@@ -454,7 +467,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         const trimmedText = text.trim();
 
         if (trimmedText === '') {
-            return 0;
+            return null;
         }
 
         const filteredText = trimmedText
@@ -467,7 +480,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
         if (filteredText) {
             const parsedValue = Number(filteredText);
-            return isNaN(parsedValue) ? null : parsedValue;
+            return isNaN(parsedValue) ? this.lastEmittedValue : parsedValue;
         }
 
         return null;
@@ -547,9 +560,13 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /** @hidden */
-    private _formatViewValue(number: number): string {
-        return this.currency
-            ? this._numberFormat.format(number).replace(this._currency, '')
-            : this._numberFormat.format(number)
+    private _formatToViewValue(number: number): string {
+        if (number === null) {
+            return '';
+        } else {
+            return this.currency
+                ? this._numberFormat.format(number).replace(this._currency, '')
+                : this._numberFormat.format(number)
+        }
     }
 }

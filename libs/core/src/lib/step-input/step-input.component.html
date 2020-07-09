@@ -32,7 +32,7 @@
            (wheel)="handleScroll($event)"
            (keydown)="handleKeyDown($event)"
            (input)="trackInputValue($event)"
-           (change)="updateViewValue($event)"
+           (change)="updateOnInputChanged()"
            [style.textAlign]="textAlign"
            class="fd-input fd-input--no-number-spinner fd-step-input__input"
            type="text">

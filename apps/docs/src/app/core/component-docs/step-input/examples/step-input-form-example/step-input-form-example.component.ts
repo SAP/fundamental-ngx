@@ -8,31 +8,31 @@ import { FormControl } from '@angular/forms';
 
             <div class="step-input-example">
                 <label fd-form-label for="reactive-form-input">Reactive forms</label>
-                <fd-step-input id="reactive-form-input" [formControl]="stepInputFormControl"></fd-step-input>
+                <fd-step-input id="reactive-form-input" [formControl]="stepInputFormControl1"></fd-step-input>
                 <table [style.fontSize]="'smaller'">
                     <tr>
                         <td>Value:</td>
-                        <td>{{ stepInputFormControl.value }}</td>
+                        <td>{{ stepInputFormControl1.value }}</td>
                     </tr>
                     <tr>
                         <td>Dirty:</td>
-                        <td>{{ stepInputFormControl.dirty }}</td>
+                        <td>{{ stepInputFormControl1.dirty }}</td>
                     </tr>
                     <tr>
                         <td>Touched:</td>
-                        <td>{{ stepInputFormControl.touched }}</td>
+                        <td>{{ stepInputFormControl1.touched }}</td>
                     </tr>
                     <tr>
                         <td>Status:</td>
-                        <td>{{ stepInputFormControl.status }}</td>
+                        <td>{{ stepInputFormControl1.status }}</td>
                     </tr>
                 </table>
             </div>
 
             <div class="step-input-example">
                 <label fd-form-label for="template-form-input">Template Driven forms</label>
-                <fd-step-input id="template-form-input" [(ngModel)]="value"></fd-step-input>
-                <small>Value: {{ value }}</small>
+                <fd-step-input id="template-form-input" [(ngModel)]="value1"></fd-step-input>
+                <small>Value: {{ value1 }}</small>
             </div>
 
             <div class="step-input-example">
@@ -67,8 +67,8 @@ import { FormControl } from '@angular/forms';
     `
 })
 export class StepInputFormExampleComponent {
-    stepInputFormControl = new FormControl(100);
+    stepInputFormControl1 = new FormControl(100);
     stepInputFormControl2 = new FormControl({ disabled: true, value: 100 });
-    value = 100;
+    value1 = 100;
     value2 = 100;
 }

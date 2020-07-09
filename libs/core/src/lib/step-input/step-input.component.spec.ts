@@ -227,11 +227,11 @@ describe('StepInputComponent', () => {
 
         const disruptedFormattedValue = 'ABC123,DEF456.789';
 
-        expect(component['_parseValue'](disruptedFormattedValue)).toEqual(null);
+        expect(component['_parseValue'](disruptedFormattedValue)).toEqual(initialValue);
 
         const emptyFormattedValue = '';
 
-        expect(component['_parseValue'](emptyFormattedValue)).toEqual(0);
+        expect(component['_parseValue'](emptyFormattedValue)).toEqual(null);
     });
 
     it('should format values according to min max value limits', () => {
@@ -279,14 +279,15 @@ describe('StepInputComponent', () => {
         expect(decrementSpy).not.toHaveBeenCalled();
     });
 
-    it('should write only valid numeric values [ControlValueAccessor]', () => {
-        const context = { _checkValueLimits: value => value, _updateViewValue: () => {}, value: null };
+    it('should write only null or valid numeric values [ControlValueAccessor]', () => {
+        component.writeValue('12ab34' as any as number);
+        expect(component.value).toEqual(initialValue);
 
-        component.writeValue.call(context, '12ab34');
-        expect(context.value).toEqual(null);
+        component.writeValue(1234);
+        expect(component.value).toEqual(1234);
 
-        component.writeValue.call(context, '1234');
-        expect(context.value).toEqual(1234);
+        component.writeValue(null);
+        expect(component.value).toEqual(null);
     });
 
     it('should set disabled state [ControlValueAccessor]', () => {
