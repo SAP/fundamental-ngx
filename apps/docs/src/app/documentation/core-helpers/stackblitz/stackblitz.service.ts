@@ -131,6 +131,8 @@ import { Component } from '@angular/core';
     private getFileBasis(file: ExampleFile): string {
         if (file.service) {
             return file.fileName + '.service';
+        } else if (file.pipe) {
+            return file.fileName + '.pipe';
         } else {
             return file.fileName + '.component';
         }
