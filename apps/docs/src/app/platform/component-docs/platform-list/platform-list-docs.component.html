@@ -1,7 +1,7 @@
 <fd-docs-section-title [id]="'list1'" [componentName]="'List'">
     List - Border Less
 </fd-docs-section-title>
-<description>A list without border, setting <code>[noBorder]="true"</code> will help to achieve this, by default its
+<description>A list without border, setting <code>[noBorder]="true"</code> will help to do this, by default its
     value is false. Below examples show both imperative and declarative way to bind the list items.
     Where we can pass list items individually where a number of items are less, and if the items are more
     we can pass the items in the array as well.</description>
@@ -27,7 +27,8 @@
 <fd-docs-section-title [id]="'list3'" [componentName]="'List'">
     List - Group header
 </fd-docs-section-title>
-<description>List with group header. <code>&lt;fdp-list-group-header&gt;</code> tag will help to set the Header for the
+<description>List with the group header. <code>&lt;fdp-list-group-header&gt;</code> tag will help to set the Header for
+    the
     group of list items.Below examples show both imperative and declarative
     way to bind the list items and how to bind the group header to them.
 </description>
@@ -65,7 +66,7 @@
 <fd-docs-section-title [id]="'list6'" [componentName]="'List'">
     List - buttons
 </fd-docs-section-title>
-<description>For more image and button options on list item property<code>[secondayIcons]="'['icons':'iconname',
+<description>For more image and button options on list item property<code>[secondaryIcons]="'['icons':'iconname',
     'isButton':'true/false']'"</code> will help.
     IsButton setting to false to set an image and true will set a button with sepficed icon.
 </description>
@@ -79,7 +80,7 @@
 <fd-docs-section-title [id]="'list7'" [componentName]="'List'">
     List - Deletion button
 </fd-docs-section-title>
-<description>For delete option on list item <code>[secondayIcons]="['icons':decline/delete, 'isButton':'true']"</code>
+<description>For delete option on list item <code>[secondaryIcons]="['icons':decline/delete, 'isButton':'true']"</code>
     will help. Its
     button on click of it
     delete operation can be invoked.
@@ -114,7 +115,7 @@
     help us to provide single select(radiobutton) along with
     list item
     .Below examples show both imperative and declarative way to use it.
-    Note:selection of listitem using keyboard can be performed by *space bar* (as per Fiori3 standards.) </description>
+    Note: selection of listitem using keyboard can be performed by *space bar* (as per Fiori3 standards.) </description>
 <component-example>
     <fdp-list-with-single-selection-example>
     </fdp-list-with-single-selection-example>
@@ -144,7 +145,7 @@
     angular CDK by setting <code>textSize</code> will help us to achive virtual scrolling.
     Loading hundreds of elements can be slow in any browser; virtual scrolling enables a performant way to simulate
     all
-    items being rendered by making the height of the container element the same as the height of total number of
+    items being rendered by making the height of the container element the same as the height of the total number of
     elements to be rendered, and then only rendering the items in view.
 </description>
 <component-example>
@@ -152,19 +153,4 @@
     </fdp-list-with-infinite-scroll-example>
 </component-example>
 <code-example [exampleFiles]="listWithInfiniteScroll"></code-example>
-<separator></separator>
-
-<fd-docs-section-title [id]="'list12'" [componentName]="'List'">
-    List - Internationalization usage
-</fd-docs-section-title>
-<description> The below example shows how an application can handle internalization in the list component. In
-    declarative approach use <code>i18n-[property]</code> and update the *.xlf files with desired language and
-    non-declarative need
-    to place the language as shown below.
-</description>
-<component-example>
-    <fdp-list-with-i18n-example>
-    </fdp-list-with-i18n-example>
-</component-example>
-<code-example [exampleFiles]="listWithi18n"></code-example>
 <separator></separator>

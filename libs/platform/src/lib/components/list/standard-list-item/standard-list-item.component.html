@@ -25,14 +25,14 @@
     <span fd-list-secondary [attr.aria-label]="secondary" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
         {{secondary}}
     </span>
-    <span *ngIf="secondayIcons!== null && secondayIcons!== undefined">
-        <span *ngFor="let secondayIcon of secondayIcons">
-            <fd-icon *ngIf="!(secondayIcon.isButton)" fd-list-icon [glyph]="secondayIcon.icon"
-                [attr.alt]="secondayIcon.icon" [attr.role]="'img'">
+    <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
+        <span *ngFor="let secondaryIcon of secondaryIcons">
+            <fd-icon *ngIf="!(secondaryIcon.isButton)" fd-list-icon [glyph]="secondaryIcon.icon"
+                [attr.alt]="secondaryIcon.icon" [attr.role]="'img'">
             </fd-icon>
-            <fdp-button *ngIf="secondayIcon.isButton" [attr.role]="'button'" [compact]="contentDensity === 'compact'"
-                [type]="'transparent'" [glyph]="secondayIcon.icon">
-            </fdp-button>
+            <button fd-button *ngIf="secondaryIcon.isButton" [attr.role]="'button'"
+                [compact]="contentDensity === 'compact'" [fdType]="'transparent'" [glyph]="secondaryIcon.icon">
+            </button>
         </span>
     </span>
 </ng-template>
@@ -49,14 +49,15 @@
                 [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
                 {{secondary}}
             </span>
-            <span *ngIf="secondayIcons!== null && secondayIcons!== undefined">
-                <span *ngFor="let secondayIcon of secondayIcons">
-                    <fd-icon class="fd-list__byline-right" *ngIf="!(secondayIcon.isButton)" fd-list-icon
-                        [glyph]="secondayIcon.icon" [attr.alt]="secondayIcon.icon" [attr.role]="'img'">
+            <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
+                <span *ngFor="let secondaryIcon of secondaryIcons">
+                    <fd-icon class="fd-list__byline-right" *ngIf="!(secondaryIcon.isButton)" fd-list-icon
+                        [glyph]="secondaryIcon.icon" [attr.alt]="secondaryIcon.icon" [attr.role]="'img'">
                     </fd-icon>
-                    <fdp-button class="fd-list__byline-right" *ngIf="secondayIcon.isButton" [attr.role]="'button'"
-                        [compact]="contentDensity === 'compact'" [type]="'transparent'" [glyph]="secondayIcon.icon">
-                    </fdp-button>
+                    <button fd-button class="fd-list__byline-right" *ngIf="secondaryIcon.isButton"
+                        [attr.role]="'button'" [compact]="contentDensity === 'compact'" [fdType]="'transparent'"
+                        [glyph]="secondaryIcon.icon">
+                    </button>
                 </span>
             </span>
         </div>

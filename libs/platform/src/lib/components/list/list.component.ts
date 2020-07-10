@@ -78,9 +78,23 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     @Input()
     protected selectedItems: BaseListItem[];
 
-    /** a11y role */
+    /** a11y attributes*/
+
+    /** role */
     @HostBinding('attr.role')
     role = 'list';
+
+    /** define size of items for screen reader */
+    @HostBinding('attr.aria-setsize')
+    ariaSetsize: number;
+
+    /** Defines whether items are multiseletable for screen reader */
+    @HostBinding('attr.aria-multiselectable')
+    ariaMultiselectable = this.multiSelect;
+
+    /** define label of list for screen reader */
+    @HostBinding('attr.aria-label')
+    ariaLabel: string;
 
     /** The model backing of the component. */
     selection: SelectionModel<BaseListItem>;
@@ -205,7 +219,7 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     ngOnInit(): void {
         this.id = `fdp-list-${nextListId++}`;
 
-        // for checkbox,selecAll,unselectAll
+        // using selection Model for multiselect
         if (this.selectionMode === 'multi') {
             this.multiSelect = true;
         }
@@ -227,7 +241,6 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     /**Keyboard manager on list items */
     ngAfterViewInit(): void {
         this.keyManager = new FocusKeyManager<BaseListItem>(this.ListItems).withWrap();
-        this.keyManager.setFirstItemActive();
     }
 
     /** @hidden */
@@ -246,7 +259,6 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
             item.selectionMode = this.selectionMode;
             item.hasByLine = this._hasByLine;
         });
-
     }
 
     /** @hidden */
@@ -259,7 +271,6 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
             if (event.keyCode === DOWN_ARROW || event.keyCode === UP_ARROW) {
                 return false;
             } else if (event.keyCode === ENTER || event.keyCode === SPACE) {
-                this.keyManager.activeItem.onItemClick();
                 this.updateNavigation(event);
                 return false;
             }
@@ -283,7 +294,7 @@ export class ListFooter extends BaseComponent { }
 
 @Component({
     selector: 'fdp-list-group-header',
-    template: `<li #listItem fd-list-item fd-list-group-header [attr.id]="id" role="listitem" tabindex="-1"
+    template: `<li #listItem fd-list-group-header [attr.id]="id" role="listitem"
     [attr.aria-label]="grpheaderTitle" [attr.title]="grpheaderTitle">
     {{grpheaderTitle}} <ng-content></ng-content>
 </li>`

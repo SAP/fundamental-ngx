@@ -13,14 +13,13 @@ import {
     PlatformListWithSingleSelectionExampleComponent,
     PlatformListWithButtonsExampleComponent
 } from './platform-list-examples/platform-list-example.component';
-import { PlatformListModule, StandardListItemModule, PlatformButtonModule, PlatformCheckboxModule } from '@fundamental-ngx/platform';
-import { ToolbarModule, CheckboxModule, IconModule } from '@fundamental-ngx/core';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform';
+import { ToolbarModule, CheckboxModule, IconModule, ButtonModule } from '@fundamental-ngx/core';
 import { PlatformListBorderLessExampleComponent } from './platform-list-examples/platform-list-border-less-example.component';
 import { PlatformListWithGroupHeaderExampleComponent } from './platform-list-examples/platform-list-with-group-header-example.component';
 import { PlatformListWithInfiniteScrollExampleComponent } from './platform-list-examples/platform-list-with-infinite-scroll-example.component';
 import { PlatformListWithDeleteButtonExampleComponent } from './platform-list-examples/platform-list-with-delete-button-example.component';
 import { PlatformListWithSelectionExampleComponent } from './platform-list-examples/platform-list-with-selection-example.component';
-import { PlatformListWithi18nExampleComponent } from './platform-list-examples/platform-list-with-i18n-example.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
@@ -41,11 +40,10 @@ const routes: Routes = [
         SharedDocumentationModule,
         PlatformListModule,
         StandardListItemModule,
-        PlatformButtonModule,
+        ButtonModule,
         ScrollingModule,
         ToolbarModule,
         CheckboxModule,
-        PlatformCheckboxModule,
         IconModule
     ],
     exports: [RouterModule],
@@ -62,7 +60,6 @@ const routes: Routes = [
         PlatformListWithNavigationExampleComponent,
         PlatformListWithSingleSelectionExampleComponent,
         PlatformListWithInfiniteScrollExampleComponent,
-        PlatformListWithi18nExampleComponent,
         PlatformListWithButtonsExampleComponent
     ]
 })

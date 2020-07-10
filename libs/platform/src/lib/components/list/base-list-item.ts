@@ -117,7 +117,7 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
 
     /** attribute holds secondary icon value*/
     @Input()
-    secondayIcons?: SecondaryActionItem[];
+    secondaryIcons?: SecondaryActionItem[];
 
     // /** Whether listitem is selected */
     @Input()
@@ -130,9 +130,22 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
     textType?: TextType;
 
     /** @hidden */
-    /** a11y role */
+    /** a11y attributes */
+    /** role */
     @HostBinding('attr.role')
     role = 'listitem';
+
+    /** define label for screen reader */
+    @HostBinding('attr.ariaLabelledBy')
+    ariaLabelledBy: string;
+
+    /** define level of item for screen reader */
+    @HostBinding('attr.aria-level')
+    ariaLevel: number;
+
+    /** define position of item for screen reader */
+    @HostBinding('attr.aria-posinet')
+    ariaPosinet: number;
 
     /**
     * list of values, it can be of type Item or String.
@@ -158,8 +171,8 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
         this.partialNavigation = item.partialNavigation;
         this.secondary = item.secondary;
         this.description = item.description;
-        if (item.secondayIcons !== null && item.secondayIcons !== undefined) {
-            this.secondayIcons = [...item.secondayIcons];
+        if (item.secondaryIcons !== null && item.secondaryIcons !== undefined) {
+            this.secondaryIcons = [...item.secondaryIcons];
         }
         this.secondaryWrap = item.secondaryWrap ? true : false;
 
@@ -191,19 +204,27 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
     onItemClick(): void {
         this.itemSelected.emit(event);
         this._changeDetectorRef.markForCheck();
-
     }
 
-    /** @hidden */
-    /**on keypdown append active styles on actionable item */
+    // /** @hidden */
+    @HostListener('keydown', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+        if (event.keyCode === ENTER || event.keyCode === SPACE) {
+            this.itemSelected.emit(event);
+            this._changeDetectorRef.markForCheck();
+        }
+    }
+
+    // /** @hidden */
+    // /**on keydown append active styles on actionable item */
     onKeyDown(event: any): void {
         if (this.anchor !== undefined && (event.keyCode === ENTER || event.keyCode === SPACE)) {
             this.anchor.nativeElement.classList.add('is-active');
         }
     }
 
-    /** @hidden */
-    /**on keyup remove active styles from actionable item*/
+    // /** @hidden */
+    // /**on keyup remove active styles from actionable item*/
     onKeyUp(event: any): void {
         if (this.anchor !== undefined && (event.keyCode === ENTER || event.keyCode === SPACE)) {
             this.anchor.nativeElement.classList.remove('is-active');
