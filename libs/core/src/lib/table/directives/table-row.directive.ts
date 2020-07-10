@@ -5,20 +5,20 @@ import {
     Directive,
     HostBinding,
     Input,
-    OnDestroy,
+    OnDestroy, OnInit,
     QueryList
 } from '@angular/core';
 import { TableCellDirective } from './table-cell.directive';
 import { TableService } from '../table.service';
 import { Subscription } from 'rxjs';
 
-export const Hidden_Class_Name = 'fd-table-hidden';
+export const HIDDEN_CLASS_NAME = 'fd-table-hidden';
 
 
 @Directive({
     selector: '[fdTableRow], [fd-table-row]'
 })
-export class TableRowDirective implements AfterViewInit, OnDestroy {
+export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
 
     /** @hidden */
     @ContentChildren(TableCellDirective)
@@ -54,7 +54,10 @@ export class TableRowDirective implements AfterViewInit, OnDestroy {
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _tableService: TableService
-    ) {
+    ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
         this.propagateKeysSubscription = this._tableService.propagateKeys$.subscribe(
             (keys: string[]) => this._resetCells(keys)
         );
@@ -105,13 +108,13 @@ export class TableRowDirective implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _changeVisibility(keys: string[]): void {
-        this.cells.forEach(cell => cell.elementRef.nativeElement.classList.remove(Hidden_Class_Name));
+        this.cells.forEach(cell => cell.elementRef.nativeElement.classList.remove(HIDDEN_CLASS_NAME));
         const notFoundElements: TableCellDirective[] = this.cells.filter(cell => !keys.find(key => key === cell.key));
         notFoundElements.forEach(this._hideElement);
     }
 
     /** @hidden */
     private _hideElement(element: TableCellDirective): void {
-        element.elementRef.nativeElement.classList.add(Hidden_Class_Name)
+        element.elementRef.nativeElement.classList.add(HIDDEN_CLASS_NAME)
     }
 }

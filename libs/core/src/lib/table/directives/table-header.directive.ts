@@ -11,10 +11,10 @@ export class TableHeaderDirective {
     /** Whether or not to show the table header's horizontal borders */
     @HostBinding('class.fd-table__header--no-horizontal-borders')
     @Input()
-    noBorderX: boolean = false;
+    borderX: boolean = true;
 
     /** Whether or not to show the table header's vertical borders */
     @HostBinding('class.fd-table__header--no-vertical-borders')
     @Input()
-    noBorderY: boolean = false;
+    borderY: boolean = true;
 }

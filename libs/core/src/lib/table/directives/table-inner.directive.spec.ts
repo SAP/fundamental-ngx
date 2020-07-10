@@ -22,10 +22,11 @@ describe('TableInnerDirective', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(async() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        await fixture.whenStable();
     });
 
     it('should create', () => {

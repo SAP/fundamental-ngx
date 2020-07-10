@@ -27,10 +27,11 @@ describe('TableCellDirective', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(async() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        await fixture.whenStable();
     });
 
     it('should create', () => {
@@ -45,12 +46,11 @@ describe('TableCellDirective', () => {
         component.cell.hoverable = true;
         component.cell.fitContent = true;
         component.cell.noPadding = true;
-        component.cell.checkbox = true;
-        component.cell.noBorderX = true;
-        component.cell.noBorderY = true;
+        component.cell.borderX = false;
+        component.cell.borderY = false;
 
         fixture.detectChanges();
 
-        expect(component.cell.elementRef.nativeElement.classList.length).toBe(8);
+        expect(component.cell.elementRef.nativeElement.classList.length).toBe(7);
     });
 });

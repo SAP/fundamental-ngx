@@ -5,9 +5,9 @@ import { Component } from '@angular/core';
     templateUrl: './table-checkboxes-example.component.html'
 })
 export class TableCheckboxesExampleComponent {
-    selectMasterModel: boolean = false;
-    selectMasterModelCompact: boolean = false;
-    selectMasterModelCondensed: boolean = false;
+    checkboxValue: boolean = false;
+    checkboxValueCompact: boolean = false;
+    checkboxValueCondensed: boolean = false;
 
     tableRows: any[] = [
         {
@@ -83,16 +83,16 @@ export class TableCheckboxesExampleComponent {
 
     select(index: number, checked: boolean, size: string): void {
         this._getTable(size)[index].checked = checked;
-        this._setMasterModel(size);
+        this._setValue(size);
     }
 
     selectMaster(checked: boolean, size: string): void {
         if (size === 'cozy') {
-            this.selectMasterModel = checked;
+            this.checkboxValue = checked;
         } else if (size === 'compact') {
-            this.selectMasterModelCompact = checked;
+            this.checkboxValueCompact = checked;
         } else if (size === 'condensed') {
-            this.selectMasterModelCondensed = checked;
+            this.checkboxValueCondensed = checked;
         }
         if (checked) {
             this._selectAll(size);
@@ -123,13 +123,13 @@ export class TableCheckboxesExampleComponent {
         return table;
     }
 
-    private _setMasterModel(size: string): void {
+    private _setValue(size: string): void {
         if (size === 'cozy') {
-            this.selectMasterModel = this._allSelected(size);
+            this.checkboxValue = this._allSelected(size);
         } else if (size === 'compact') {
-            this.selectMasterModelCompact = this._allSelected(size);
+            this.checkboxValueCompact = this._allSelected(size);
         } else if (size === 'condensed') {
-            this.selectMasterModelCondensed = this._allSelected(size);
+            this.checkboxValueCondensed = this._allSelected(size);
         }
     }
 }

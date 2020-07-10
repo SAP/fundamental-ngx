@@ -1,9 +1,10 @@
-import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, HostBinding, Input, QueryList, ContentChildren } from '@angular/core';
+import { CheckboxComponent } from '../../..';
 
 @Directive({
     selector: '[fdTableCell], [fd-table-cell]'
 })
-export class TableCellDirective {
+export class TableCellDirective implements AfterContentInit {
     /** @hidden */
     @HostBinding('class.fd-table__cell')
     fdTableCellClass: boolean = true;
@@ -11,12 +12,12 @@ export class TableCellDirective {
     /** Whether or not to show the table cell's horizontal borders */
     @HostBinding('class.fd-table__cell--no-horizontal-border')
     @Input()
-    noBorderX: boolean = false;
+    borderX: boolean = true;
 
     /** Whether or not to show the table cell's vertical borders */
     @HostBinding('class.fd-table__cell--no-vertical-border')
     @Input()
-    noBorderY: boolean = false;
+    borderY: boolean = true;
 
     /** Whether or not the table cell is activable */
     @HostBinding('class.fd-table__cell--activable')
@@ -38,10 +39,9 @@ export class TableCellDirective {
     @Input()
     noPadding: boolean = false;
 
-    /** Whether or not the table cell has displayed only checkbox */
-    @HostBinding('class.fd-table__cell--checkbox')
-    @Input()
-    checkbox: boolean = false;
+    /** @hidden */
+    @ContentChildren(CheckboxComponent)
+    checkboxes: QueryList<CheckboxComponent>;
 
     /** Key of cell element, it's used to identify this cell with certain column */
     @Input()
@@ -50,4 +50,11 @@ export class TableCellDirective {
     constructor (
         public elementRef: ElementRef
     ) {}
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (this.checkboxes && this.checkboxes.length) {
+            this.elementRef.nativeElement.classList.add('fd-table__cell--checkbox');
+        }
+    }
 }

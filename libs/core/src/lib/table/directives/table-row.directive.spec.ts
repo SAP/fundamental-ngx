@@ -1,4 +1,4 @@
-import { Hidden_Class_Name, TableRowDirective } from './table-row.directive';
+import { HIDDEN_CLASS_NAME, TableRowDirective } from './table-row.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableModule } from '../table.module';
@@ -50,7 +50,7 @@ describe('TableRowDirective', () => {
 
     const getVisibleCells = (): string[] => {
         return getElements()
-            .filter(cell => !cell.classList.contains(Hidden_Class_Name))
+            .filter(cell => !cell.classList.contains(HIDDEN_CLASS_NAME))
             .map(cell => cell.innerHTML)
         ;
     };
@@ -63,10 +63,11 @@ describe('TableRowDirective', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(async() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        await fixture.whenStable();
     });
 
     it('should create', () => {

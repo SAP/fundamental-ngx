@@ -6,7 +6,7 @@
 </component-example>
 <code-example [exampleFiles]="tableExample"></code-example>
 
-<fd-docs-section-title [id]="'tableToolbar'" [componentName]="'table'">
+<fd-docs-section-title [id]="'table-toolbar'" [componentName]="'table'">
     Table with Toolbar
 </fd-docs-section-title>
 <description>
@@ -18,11 +18,11 @@
 </component-example>
 <code-example [exampleFiles]="tableToolbarExample"></code-example>
 
-<fd-docs-section-title [id]="'noBorders'" [componentName]="'table'">
+<fd-docs-section-title [id]="'no-borders'" [componentName]="'table'">
     Table Without Borders
 </fd-docs-section-title>
 <description>
-    The <code>[noBorderX]</code> and <code>[noBorderY]</code> inputs can be used to remove borders. They can be used
+    The <code>[borderX]</code> and <code>[borderY]</code> inputs can be used to remove borders. They can be used
     together or separately, and can be added to <code>fd-table</code>, <code>fd-table-header</code>,
     <code>fd-table-body</code>, and <code>fd-table-cell</code> components.
 </description>
@@ -31,7 +31,7 @@
 </component-example>
 <code-example [exampleFiles]="tableWithoutBordersExample"></code-example>
 
-<fd-docs-section-title [id]="'withFooter'" [componentName]="'table'">
+<fd-docs-section-title [id]="'with-footer'" [componentName]="'table'">
     Table with Footer
 </fd-docs-section-title>
 <description>
@@ -42,7 +42,7 @@
 </component-example>
 <code-example [exampleFiles]="tableFooterExample"></code-example>
 
-<fd-docs-section-title [id]="'columnSorting'" [componentName]="'table'">
+<fd-docs-section-title [id]="'customizable-columns'" [componentName]="'table'">
     Customizable Columns
 </fd-docs-section-title>
 <description>
@@ -58,15 +58,12 @@
 </component-example>
 <code-example [exampleFiles]="tableCustomColumnsExample"></code-example>
 
-<fd-docs-section-title [id]="'columnSorting'" [componentName]="'table'">
-    Column Sorting
+<fd-docs-section-title [id]="'column-sorting'" [componentName]="'table'">
+    Column Sorting and Filtering
 </fd-docs-section-title>
 <description>
-    Column sorting is achieved using the <code>fdColumnSortable</code> directive. Place this directive on the desired
-    column(s) to sort, set the <code>[sortDir]</code> input to the corresponding component variable that dictates sort
-    direction, and use <code>(click)</code> to call the sorting algorithm on your component. Valid values for sort
-    direction are <code>'asc'</code>, <code>'desc'</code>, <code>'dsc'</code> or <code>'none'</code>. Note in this
-    example that calling a sort function for one column will reset the sort direction for the other sortable column.
+    In this example, the first column can be sorted alphabetically or filtered based on text in an input. Click the
+    first column header to try.
 </description>
 <component-example>
     <fd-table-column-sorting-example></fd-table-column-sorting-example>
@@ -75,7 +72,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'columnSorting'" [componentName]="'table'">
+<fd-docs-section-title [id]="'interactive-table'" [componentName]="'table'">
     Interactive Rows and Cells
 </fd-docs-section-title>
 <description>
@@ -89,7 +86,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'withCheckboxes'" [componentName]="'table'">
+<fd-docs-section-title [id]="'with-checkboxes'" [componentName]="'table'">
     Table with Checkboxes
 </fd-docs-section-title>
 <description>
@@ -102,7 +99,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'withSemantic'" [componentName]="'table'">
+<fd-docs-section-title [id]="'with-semantic'" [componentName]="'table'">
     Table With Semantic Row Highlighting
 </fd-docs-section-title>
 <description>
@@ -118,7 +115,7 @@
 <separator></separator>
 
 <!-- TODO: update this example for column drag in drop, which is in table priority 2
-<fd-docs-section-title [id]="'withAngularCDK'" [componentName]="'table'">
+<fd-docs-section-title [id]="'with-angular-CDK'" [componentName]="'table'">
     Table with Angular CDK
 </fd-docs-section-title>
 <description>
@@ -137,7 +134,7 @@
 <separator></separator>
 -->
 
-<fd-docs-section-title [id]="'tablePopIn'" [componentName]="'table'">
+<fd-docs-section-title [id]="'table-pop-in'" [componentName]="'table'">
     Pop In Mode on Table
 </fd-docs-section-title>
 <description>
@@ -153,7 +150,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'withPagination'" [componentName]="'table'">
+<fd-docs-section-title [id]="'with-pagination'" [componentName]="'table'">
     Table With Pagination
 </fd-docs-section-title>
 <description>
