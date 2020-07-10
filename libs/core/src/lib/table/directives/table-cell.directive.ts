@@ -1,4 +1,13 @@
-import { AfterContentInit, Directive, ElementRef, HostBinding, Input, QueryList, ContentChildren } from '@angular/core';
+import {
+    AfterContentInit,
+    Directive,
+    ElementRef,
+    HostBinding,
+    Input,
+    QueryList,
+    ContentChildren,
+    forwardRef
+} from '@angular/core';
 import { CheckboxComponent } from '../../..';
 
 @Directive({
@@ -12,12 +21,12 @@ export class TableCellDirective implements AfterContentInit {
     /** Whether or not to show the table cell's horizontal borders */
     @HostBinding('class.fd-table__cell--no-horizontal-border')
     @Input()
-    borderX: boolean = true;
+    noBorderX: boolean = false;
 
     /** Whether or not to show the table cell's vertical borders */
     @HostBinding('class.fd-table__cell--no-vertical-border')
     @Input()
-    borderY: boolean = true;
+    noBorderY: boolean = false;
 
     /** Whether or not the table cell is activable */
     @HostBinding('class.fd-table__cell--activable')
@@ -40,7 +49,7 @@ export class TableCellDirective implements AfterContentInit {
     noPadding: boolean = false;
 
     /** @hidden */
-    @ContentChildren(CheckboxComponent)
+    @ContentChildren(forwardRef(() => CheckboxComponent))
     checkboxes: QueryList<CheckboxComponent>;
 
     /** Key of cell element, it's used to identify this cell with certain column */

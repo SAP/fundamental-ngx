@@ -5,6 +5,9 @@ import { TableCellDirective } from './table-cell.directive';
 
 @Component({
     template: `
+            <td fd-table-cell>
+                <fd-checkbox></fd-checkbox>
+            </td>
             <td fd-table-cell [key]="key">{{key}}</td>
     `
 })
@@ -46,8 +49,8 @@ describe('TableCellDirective', () => {
         component.cell.hoverable = true;
         component.cell.fitContent = true;
         component.cell.noPadding = true;
-        component.cell.borderX = false;
-        component.cell.borderY = false;
+        component.cell.noBorderX = true;
+        component.cell.noBorderY = true;
 
         fixture.detectChanges();
 

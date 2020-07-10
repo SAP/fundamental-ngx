@@ -26,12 +26,12 @@ export class TableComponent implements AfterViewInit {
     /** Whether or not to show the table's horizontal borders */
     @HostBinding('class.fd-table--no-horizontal-borders')
     @Input()
-    borderX: boolean = true;
+    noBorderX: boolean = false;
 
     /** Whether or not to show the table's vertical borders */
     @HostBinding('class.fd-table--no-vertical-borders')
     @Input()
-    borderY: boolean = true;
+    noBorderY: boolean = false;
 
     /** Whether or not to display the table in compact mode */
     @HostBinding('class.fd-table--compact')
