@@ -1,10 +1,11 @@
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, text, radios, array } from '@storybook/addon-knobs';
+import { withKnobs, text, radios, array, select } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { RadioModule, RadioButtonComponent } from 'libs/core/src/lib/radio/public_api';
+import { semanticStates } from '../../utils';
 
 export default {
     title: 'Fd radio button',
@@ -20,20 +21,10 @@ export default {
     ]
 };
 
-const stateOptions = {
-    valid: 'valid',
-    invalid: 'invalid',
-    warning: 'warning',
-    default: 'default',
-    information: 'information'
-};
-
-const stateDefaultValue = 'default';
-
 const radioValues = ['1', '2', '3'];
 
 export const NgModel = () => ({
-    template: `  
+    template: `
   <div fd-form-item *ngFor="let value of radioButtonValues">
     <fd-radio-button
         (click)="onClick(value)"
@@ -48,7 +39,7 @@ export const NgModel = () => ({
     props: {
         model: text('[(ngModel)]', '1'),
         name: 'radio-buttons-ngmodel',
-        state: radios('state', stateOptions, stateDefaultValue),
+        state: select('state', semanticStates, null),
         radioButtonValues: array('radioButtonValues', [...radioValues]),
         onClick: (value: string) => action('radio button clicked')(value)
     }
@@ -78,7 +69,7 @@ export const ReactiveForms = () => ({
         formControlName: 'radioInput',
         name: 'radio-buttons',
         selectedValue: () => form.controls.radioInput.value,
-        state: radios('state', stateOptions, stateDefaultValue),
+        state: select('state', semanticStates, null),
         radioButtonValues: array('radioButtonValues', [...radioValues])
     }
 });
