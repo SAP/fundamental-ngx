@@ -1,26 +1,96 @@
-<fd-docs-section-title [id]="'Default'" [componentName]="'table'">
-    Table
+<fd-docs-section-title [id]="'default'" [componentName]="'table'">
+    Default Table
 </fd-docs-section-title>
-<description>
-    Column sorting is achieved using the <code>fdColumnSortable</code> directive. Place this directive on the desired
-    column(s) to sort, set the <code>[sortDir]</code> input to the corresponding component variable that dictates sort
-    direction, and use <code>(click)</code> to call the sorting algorithm on your component. Valid values for sort
-    direction are <code>'asc'</code>, <code>'desc'</code>, <code>'dsc'</code> or <code>'none'</code>. Note in this
-    example that calling a sort function for one column will reset the sort direction for the other sortable column.
-</description>
 <component-example>
     <fd-table-example></fd-table-example>
 </component-example>
 <code-example [exampleFiles]="tableExample"></code-example>
 
+<fd-docs-section-title [id]="'table-toolbar'" [componentName]="'table'">
+    Table with Toolbar
+</fd-docs-section-title>
+<description>
+    The application developer can use the toolbar alongside the table to provide custom functionality to the user. In
+    this example, the user can add new items to the table and perform a simple local search on all data in the table.
+</description>
+<component-example>
+    <fd-table-toolbar-example></fd-table-toolbar-example>
+</component-example>
+<code-example [exampleFiles]="tableToolbarExample"></code-example>
+
+<fd-docs-section-title [id]="'no-borders'" [componentName]="'table'">
+    Table Without Borders
+</fd-docs-section-title>
+<description>
+    The <code>[noBorderX]</code> and <code>[noBorderY]</code> inputs can be used to remove borders. They can be used
+    together or separately, and can be added to <code>fd-table</code>, <code>fd-table-header</code>,
+    <code>fd-table-body</code>, and <code>fd-table-cell</code> components.
+</description>
+<component-example>
+    <fd-table-without-borders-example></fd-table-without-borders-example>
+</component-example>
+<code-example [exampleFiles]="tableWithoutBordersExample"></code-example>
+
+<fd-docs-section-title [id]="'with-footer'" [componentName]="'table'">
+    Table with Footer
+</fd-docs-section-title>
+<description>
+    Footer can be added by using the <code>fd-table-footer</code> directive.
+</description>
+<component-example>
+    <fd-table-footer-example></fd-table-footer-example>
+</component-example>
+<code-example [exampleFiles]="tableFooterExample"></code-example>
+
+<fd-docs-section-title [id]="'customizable-columns'" [componentName]="'table'">
+    Customizable Columns
+</fd-docs-section-title>
+<description>
+    The user can be given greater control over what appears in the table if the application developer provides an
+    array of <code>[keys]</code> as an input to the table component. Each cell must have a <code>key</code> provided
+    that corresponds to one of the values in the <code>[keys]</code> array. In this example, the user can press the
+    "Open Table Customization" button to open a modal. Each of the <code>[keys]</code> is displayed in a list and the
+    user can use the checkboxes to decide what columns will appear in the table, and they can also set the order of the
+    columns using the arrow up/arrow down buttons.
+</description>
+<component-example>
+    <fd-table-custom-columns-example></fd-table-custom-columns-example>
+</component-example>
+<code-example [exampleFiles]="tableCustomColumnsExample"></code-example>
+
+<fd-docs-section-title [id]="'column-sorting'" [componentName]="'table'">
+    Column Sorting and Filtering
+</fd-docs-section-title>
+<description>
+    In this example, the first column can be sorted alphabetically or filtered based on text in an input. Click the
+    first column header to try.
+</description>
+<component-example>
+    <fd-table-column-sorting-example></fd-table-column-sorting-example>
+</component-example>
+<code-example [exampleFiles]="tableColumnSortExample"></code-example>
+
 <separator></separator>
 
-<fd-docs-section-title [id]="'withCheckboxes'" [componentName]="'table'">
+<fd-docs-section-title [id]="'interactive-table'" [componentName]="'table'">
+    Interactive Rows and Cells
+</fd-docs-section-title>
+<description>
+    Interactive states can be set by using the <code>[activable]</code> and <code>[hoverable]</code> inputs on rows and
+    cells.
+</description>
+<component-example>
+    <fd-table-activable-example></fd-table-activable-example>
+</component-example>
+<code-example [exampleFiles]="tableActivableExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'with-checkboxes'" [componentName]="'table'">
     Table with Checkboxes
 </fd-docs-section-title>
 <description>
-    While there is no formal support for row selection, fundamental-ngx does provide the tools to accomplish this. The
-    following example is simply one of the many methods that can be used.
+    The checkbox input can be used at the beginning of each row to allow for bulk actions.
 </description>
 <component-example>
     <fd-table-checkboxes-example></fd-table-checkboxes-example>
@@ -29,7 +99,23 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'withAngularCDK'" [componentName]="'table'">
+<fd-docs-section-title [id]="'with-semantic'" [componentName]="'table'">
+    Table With Semantic Row Highlighting
+</fd-docs-section-title>
+<description>
+    To show that an item needs attention, you can show a highlight indicator next to the item. This is done using the
+    <code>fd-table-status-indicator</code> directive, along with the <code>[type]</code> input. Acceptable values for
+    this input are <code>valid</code>, <code>warning</code>, <code>information</code>, and <code>error</code>.
+</description>
+<component-example>
+    <fd-table-semantic-example></fd-table-semantic-example>
+</component-example>
+<code-example [exampleFiles]="tableSemantic"></code-example>
+
+<separator></separator>
+
+<!-- TODO: update this example for column drag in drop, which is in table priority 2
+<fd-docs-section-title [id]="'with-angular-CDK'" [componentName]="'table'">
     Table with Angular CDK
 </fd-docs-section-title>
 <description>
@@ -46,18 +132,31 @@
 <code-example [exampleFiles]="tableCdk"></code-example>
 
 <separator></separator>
+-->
 
-<fd-docs-section-title [id]="'responsive'" [componentName]="'table'">
-    Responsive Table
+<fd-docs-section-title [id]="'table-pop-in'" [componentName]="'table'">
+    Pop In Mode on Table
 </fd-docs-section-title>
 <description>
-    The <code>fd-table-responsive-wrapper</code> directive can be used in along with <code>fd-table</code> directive
-    inside which makes table easy to read even on smaller devices.
-</description>
-<description>
-    To test it, reduce size of screen
+    Table has a mode to be support mobile devices. It's called Pop In mode, it can be achieved by adding <code>[popIn]="true"</code>
+    and changing a markup. One default row should be divided to 2 rows, main and secondary. First(main) one is interactive,
+    second has to be used only to display rest of information. More important data has to go to first row. Amount of cells is limited to minimum,
+    to improve overall look of table.
 </description>
 <component-example>
-    <fd-table-responsive-example></fd-table-responsive-example>
+    <fd-table-popin-example></fd-table-popin-example>
 </component-example>
-<code-example [exampleFiles]="tableResponsive"></code-example>
+<code-example [exampleFiles]="tablePopInExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'with-pagination'" [componentName]="'table'">
+    Table With Pagination
+</fd-docs-section-title>
+<description>
+
+</description>
+<component-example>
+    <fd-table-pagination-example></fd-table-pagination-example>
+</component-example>
+<code-example [exampleFiles]="tablePagination"></code-example>

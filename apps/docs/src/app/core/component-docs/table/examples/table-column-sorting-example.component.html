@@ -1,0 +1,51 @@
+<table fd-table>
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>
+                <fd-popover fd-table-popover [(isOpen)]="open">
+                    <fd-popover-control>
+                        <div fd-table-inner>
+                            Column 1
+                            <fd-icon fd-table-icon [glyph]="column1SortDir === 'asc' ? 'sort-ascending' : 'sort-descending'"></fd-icon>
+                        </div>
+                    </fd-popover-control>
+                    <fd-popover-body>
+                        <ul fd-list [compact]="true">
+                            <li fd-list-item (click)="sortColumn1('asc')">
+                                <fd-icon fd-list-icon [glyph]="'sort-ascending'"></fd-icon>
+                                <span fd-list-title>Sort Ascending</span>
+                            </li>
+                            <li fd-list-item (click)="sortColumn1('desc')">
+                                <fd-icon fd-list-icon [glyph]="'sort-descending'"></fd-icon>
+                                <span fd-list-title>Sort Descending</span>
+                            </li>
+                            <li fd-list-item>
+                                <fd-icon fd-list-icon [glyph]="'filter'"></fd-icon>
+                                <div fd-form-item [horizontal]="true">
+                                    <label fd-form-label for="input-1">Filter</label>
+                                    <input fd-form-control [compact]="true" id="input-1" (keyup)="inputKeyup($event)"
+                                           [(ngModel)]="filterVal" style="min-width: 164px;">
+                                </div>
+                            </li>
+                        </ul>
+                    </fd-popover-body>
+                </fd-popover>
+            </th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+            <th fd-table-cell>Date</th>
+            <th fd-table-cell>Type</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of displayedRows | sortTableBy: column1SortDir | filterTableBy: filterVal" fd-table-row>
+            <td fd-table-cell class="fd-has-font-weight-semi">
+                <a href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>{{ row.column2 }}</td>
+            <td fd-table-cell>{{ row.column3 }}</td>
+            <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+        </tr>
+    </tbody>
+</table>
