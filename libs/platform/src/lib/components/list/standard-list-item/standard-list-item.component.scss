@@ -1,0 +1,6 @@
+// Temporary solution until the core list is updated with latest styles
+.fd-list__item.is-active,
+.fd-list__item:active {
+  background: #f5f5f5;
+  background: var(--sapList_Hover_Background, #f5f5f5);
+}

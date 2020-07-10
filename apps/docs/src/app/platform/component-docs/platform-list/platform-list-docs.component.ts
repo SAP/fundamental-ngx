@@ -15,8 +15,6 @@ import * as listWithSingleSelection from '!raw-loader!./platform-list-examples/p
 import * as listWithNavigation from '!raw-loader!./platform-list-examples/platform-list-with-navigation-example.component.html';
 import * as listWithInfiniteScroll from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.html';
 import * as listWithInfiniteScrollTs from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.ts';
-import * as listWithi18n from '!raw-loader!./platform-list-examples/platform-list-with-i18n-example.component.html';
-import * as listWithi18nTs from '!raw-loader!./platform-list-examples/platform-list-with-i18n-example.component.ts';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -140,20 +138,6 @@ export class PlatformListDocsComponent implements OnInit {
             component: 'PlatformListWithInfiniteScrollExampleComponent',
             code: listWithInfiniteScrollTs,
             fileName: 'platform-list-with-infinite-scroll-example'
-        }
-    ];
-
-    listWithi18n: ExampleFile[] = [
-        {
-            language: 'html',
-            code: listWithi18n,
-            fileName: 'platform-list-with-i18n-example',
-        },
-        {
-            language: 'typescript',
-            component: 'PlatformListWithi18nExampleComponent',
-            code: listWithi18nTs,
-            fileName: 'platform-list-with-i18n-example'
         }
     ];
 

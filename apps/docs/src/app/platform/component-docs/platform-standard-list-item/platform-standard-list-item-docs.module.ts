@@ -17,7 +17,6 @@ import { ToolbarModule } from '@fundamental-ngx/core';
 import { PlatformStandardListItemBorderLessExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component';
 import { PlatformStandardListItemtWithGroupHeaderExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component';
 import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component';
-import { PlatformStandardListItemWithi18nExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-i18n-example.component';
 const routes: Routes = [
     {
         path: '',
@@ -49,8 +48,7 @@ const routes: Routes = [
         PlatformStandardListItemtWithGroupHeaderExampleComponent,
         PlatformStandardListItemWithSelectionExampleComponent,
         PlatformStandardListItemWithNavigationExampleComponent,
-        PlatformStandardListItemWithSingleSelectionExampleComponent,
-        PlatformStandardListItemWithi18nExampleComponent
+        PlatformStandardListItemWithSingleSelectionExampleComponent
     ]
 })
 export class PlatformStandardListItemDocsModule {

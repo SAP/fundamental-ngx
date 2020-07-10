@@ -56,7 +56,7 @@ describe('StandardListItemComponent', () => {
     it('list item should have title', () => {
         component.title = 'title 1';
         fixture.detectChanges();
-        const listElement = fixture.debugElement.query(By.css('fdp-standard-list-item'));
+        const listElement = fixture.debugElement.query(By.css('span'));
         expect(listElement.nativeElement.getAttribute('title')).toEqual('title 1');
     });
 
