@@ -21,11 +21,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/alert/alert-docs.module').then((m) => m.AlertDocsModule)
             },
             {
-                path: 'badgeLabel',
-                loadChildren: () =>
-                    import('./component-docs/badge-label/badge-label-docs.module').then((m) => m.BadgeLabelDocsModule)
-            },
-            {
                 path: 'bar',
                 loadChildren: () => import('./component-docs/bar/bar-docs.module').then((m) => m.BarDocsModule)
             },
@@ -139,7 +134,10 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'layoutPanel',
-                loadChildren: () => import('./component-docs/layout-panel/layout-panel-docs.module').then((m) => m.LayoutPanelDocsModule)
+                loadChildren: () =>
+                    import('./component-docs/layout-panel/layout-panel-docs.module').then(
+                        (m) => m.LayoutPanelDocsModule
+                    )
             },
             {
                 path: 'link',
@@ -264,6 +262,13 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/split-button/split-button-docs.module').then(
                         (m) => m.SplitButtonDocsModule
+                    )
+            },
+            {
+                path: 'step-input',
+                loadChildren: () =>
+                    import('./component-docs/step-input/step-input-docs.module').then(
+                        (m) => m.StepInputDocsModule
                     )
             },
             {

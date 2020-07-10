@@ -4,6 +4,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CheckboxComponent, CheckboxModule } from 'libs/core/src/lib/checkbox/public_api';
+import { semanticStates } from '../../utils';
 
 export default {
     title: 'Fd checkbox',
@@ -19,16 +20,9 @@ export default {
     ]
 };
 
-const state = {
-    valid: 'valid',
-    invalid: 'invalid',
-    info: 'info',
-    warning: 'warning'
-};
-
 export const Checkbox = () => ({
     template: `
-        <fd-checkbox [(ngModel)]="checkboxValue1" 
+        <fd-checkbox [(ngModel)]="checkboxValue1"
             [state]="state"
             [label]="label"
             [name]="name"
@@ -40,7 +34,7 @@ export const Checkbox = () => ({
   `,
     props: {
         checkboxValue1: boolean('checkbox 1', false),
-        state: select('state', state, 'info'),
+        state: select('state', semanticStates, null),
         label: text('label', 'Checkbox'),
         name: text('name', 'Checkbox'),
         disabled: boolean('disabled', false),

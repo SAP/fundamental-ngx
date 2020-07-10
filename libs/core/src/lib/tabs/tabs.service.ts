@@ -1,6 +1,8 @@
 import { Injectable, Optional } from '@angular/core';
 import { Subject } from 'rxjs';
 import { RtlService } from '../utils/services/rtl.service';
+import { KeyUtil } from '../utils/functions/key-util';
+
 /**
  * Service that is responsible for providing keyboard actions support
  * */
@@ -18,31 +20,21 @@ export class TabsService {
     tabHeaderKeyHandler(index: number, event: any, elements: HTMLElement[]): void {
         const rtlDirection: boolean = this._rtlService && this._rtlService.rtl.getValue();
 
-        switch (event.key) {
-            case 'ArrowLeft': {
-                if (!rtlDirection) {
-                    this._focusPrevious(index, elements);
-                } else {
-                    this._focusNext(index, elements);
-                }
-                break;
+        if (KeyUtil.isKey(event, 'ArrowLeft')) {
+            if (!rtlDirection) {
+                this._focusPrevious(index, elements);
+            } else {
+                this._focusNext(index, elements);
             }
-            case 'ArrowRight': {
-                if (!rtlDirection) {
-                    this._focusNext(index, elements);
-                } else {
-                    this._focusPrevious(index, elements);
-                }
-                break;
+        } else if (KeyUtil.isKey(event, 'ArrowRight')) {
+            if (!rtlDirection) {
+                this._focusNext(index, elements);
+            } else {
+                this._focusPrevious(index, elements);
             }
-            case ' ': {
-                event.preventDefault();
-                this.tabSelected.next(index);
-                break;
-            }
-            case 'Enter': {
-                this.tabSelected.next(index);
-            }
+        } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+            event.preventDefault();
+            this.tabSelected.next(index);
         }
     }
 

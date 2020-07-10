@@ -57,6 +57,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'select',
+                loadChildren: () =>
+                    import('./component-docs/platform-select/platform-select.module').then(
+                        (m) => m.PlatformSelectDocsModule
+                    )
+            },
+            {
                 path: 'radio-group',
                 loadChildren: () =>
                     import('./component-docs/platform-forms/radio-group/platform-radio-group.module').then(
@@ -75,6 +82,13 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/platform-info-label/platform-info-label-docs-module').then((m) => m.PlatformInfoLabelDocsModule)
             },
+            {
+                path: 'textarea',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/platform-textarea/platform-textarea-docs.module').then(
+                        (m) => m.PlatformTextareaDocsModule
+                    )
+            }
         ]
     }
 ];

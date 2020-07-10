@@ -15,7 +15,6 @@ export const API_FILES = {
         'ActionBarTitleDirective'
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
-    badgeLabel: ['BadgeComponent', 'LabelComponent', 'StatusLabelComponent'],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
@@ -144,10 +143,7 @@ export const API_FILES = {
     ],
     objectStatus: ['ObjectStatusModule', 'ObjectStatusComponent'],
     pagination: ['PaginationComponent', 'PaginationModel', 'PaginationService'],
-    panel: [
-        'PanelComponent',
-        'PanelTitleDirective'
-    ],
+    panel: ['PanelComponent', 'PanelTitleDirective'],
     popover: [
         'PopoverComponent',
         'PopoverBodyComponent',
@@ -230,6 +226,7 @@ export const API_FILES = {
     time: ['TimeComponent', 'TimeI18nLabels', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
     timePicker: ['TimePickerComponent', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
     switch: ['SwitchComponent'],
+    stepInput: ['StepInputComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],
     toolbar: [
         'ToolbarComponent',

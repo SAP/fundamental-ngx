@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { ActionBarModule } from './action-bar/action-bar.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
-import { BadgeLabelModule } from './badge-label/badge-label.module';
 import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
@@ -61,13 +60,13 @@ import { LinkModule } from './link/link.module';
 import { InfoLabelModule } from './info-label/info-label.module';
 import { ObjectStatusModule } from './object-status/object-status.module';
 import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-input-mobile.module';
+import { StepInputModule } from './step-input/step-input.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
     exports: [
         ActionBarModule,
         AlertModule,
-        BadgeLabelModule,
         BarModule,
         BreadcrumbModule,
         BusyIndicatorModule,
@@ -115,6 +114,7 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
         ShellbarModule,
         SideNavigationModule,
         SplitButtonModule,
+        StepInputModule,
         TableModule,
         TabsModule,
         TileModule,
@@ -126,4 +126,4 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
     ],
     providers: [AlertService, DialogService, NotificationService]
 })
-export class FundamentalNgxCoreModule { }
+export class FundamentalNgxCoreModule {}

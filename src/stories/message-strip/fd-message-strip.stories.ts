@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MessageStripComponent, MessageStripModule } from 'libs/core/src/lib/message-strip/public_api';
 import { ButtonModule } from 'libs/core/src/lib/button/public_api';
 import { IconModule } from 'libs/core/src/lib/icon/public_api';
+import { semanticStates } from '../../utils';
 
 export default {
     title: 'Fd message-strip',
@@ -21,20 +22,12 @@ export default {
     ]
 };
 
-const type = {
-    default: '',
-    warning: 'warning',
-    success: 'success',
-    information: 'information',
-    error: 'error'
-};
-
 export const MessageStrip = () => ({
     template: `
     <div style="padding: 30px">
-        <fd-message-strip 
-            [type]="type" 
-            [dismissible]="dismissible" 
+        <fd-message-strip
+            [type]="type"
+            [dismissible]="dismissible"
             [noIcon]="noIcon"
             [width]="width"
             [minWidth]="minWidth">
@@ -43,7 +36,7 @@ export const MessageStrip = () => ({
     </div>
   `,
     props: {
-        type: select('Type', type, ''),
+        type: select('Type', semanticStates, null),
         dismissible: boolean('dismissible', false),
         noIcon: boolean('noIcon', false),
         width: text('width', '100%'),

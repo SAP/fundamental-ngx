@@ -1,0 +1,71 @@
+<fd-docs-section-title [id]="'def'" [componentName]="'textarea'">
+    Textarea
+</fd-docs-section-title>
+<description>This example shows basic Textarea</description>
+<component-example>
+    <fdp-platform-textarea-basic-example></fdp-platform-textarea-basic-example>
+</component-example>
+<code-example [exampleFiles]="textareaBasic"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'autogrow'" [componentName]="'textarea'">
+    Textarea with <code>growing</code> option
+</fd-docs-section-title>
+<description>
+    This example shows how Textarea behaves when <code>growing</code> is set. <br /><br /><code>growingMaxLines</code> -
+    the number of visible lines. Height of textarea is according to this number. <br /><code>height</code> - if
+    specified, overrides <code>growingMaxLines</code> to set the height of textarea. <br /><code>cols</code> -
+    approximately, the number of characters in a single line when the width of textarea is not set. <br /><code
+        >growing</code
+    >
+    - when set to true, resizes the textarea to either <code>growingMaxLines</code> or <code>height</code>, whichever is
+    applied. As user types, the textarea overflows beyond the width to the next line and grows in height until the
+    number of <code>growingMaxLines</code> is reached, or until the <code>height</code> is reached; whichever takes
+    precedence. Beyond this, a scrollbar appears.
+</description>
+<component-example>
+    <fdp-platform-textarea-autogrow-example></fdp-platform-textarea-autogrow-example>
+</component-example>
+<code-example [exampleFiles]="textareaAutogrow"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'counter'" [componentName]="'textarea'">
+    Textarea with message counter
+</fd-docs-section-title>
+<description
+    >This example shows how Textarea behaves when showExceededText is set. It also shows form submission.</description
+>
+<component-example>
+    <fdp-platform-textarea-counter-example></fdp-platform-textarea-counter-example>
+</component-example>
+<code-example [exampleFiles]="textareaCounter"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'templateExample'" [componentName]="'textarea'">
+    Textarea with message counter in template-driven form
+</fd-docs-section-title>
+<description
+    >This example shows how Textarea behaves with a template-driven form with an initial value set.</description
+>
+<component-example>
+    <fdp-platform-textarea-counter-template-example></fdp-platform-textarea-counter-template-example>
+</component-example>
+<code-example [exampleFiles]="textareaTemplateCounter"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'i18nExample'" [componentName]="'textarea'">
+    Textarea with internationalization support.
+</fd-docs-section-title>
+<description
+    >This example shows how Textarea works with i18n markers to achieve internationalization support. Support for
+    translation of the counter message directly from the library is planned in the near future.
+    <br />
+</description>
+<component-example>
+    <fdp-platform-textarea-i18n-example></fdp-platform-textarea-i18n-example>
+</component-example>
+<code-example [exampleFiles]="textareaI18n"></code-example>

@@ -1,43 +1,19 @@
-import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    Inject,
-    Injector,
-    OnDestroy,
-    OnInit,
-    Optional,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DialogRef } from '../../../dialog/dialog-utils/dialog-ref.class';
 import { DialogService } from '../../../dialog/dialog-service/dialog.service';
 import { Subscription } from 'rxjs';
 import { MobileModeConfig } from '../../../utils/interfaces/mobile-mode-config';
-import { FD_OPTION_PARENT_COMPONENT, FdOptionParentComponent } from '../../option/option.component';
+import { OptionComponent } from '../../option/option.component';
+import { SELECT_COMPONENT, SelectInterface } from '../../select.interface';
 
-/**
- * This component provides extended mobile support for Select component to render list of option since full screen
- * dialog.
- *
- * When in Approve/Cancel mode we do allow emitting values on every selection, but we know how to rollback if user
- * decides otherwise. The important thing here is that there is no difference emitting event on every selection vs
- * only after it is approved as long as we can revert the selection.
- *
- * There could be situations where you want listen on actual change and maybe present the selected value in the view.
- */
 @Component({
     selector: 'fd-select-mobile',
     templateUrl: './select-mobile.component.html'
 })
 export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
-    /**
-     * Dialog template reference
-     *
-     * @hidden
-     */
-    @ViewChild('dialogTemplate')
-    dialogTemplate: TemplateRef<any>;
+
+    /** @hidden Dialog template reference */
+    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
     dialogRef: DialogRef;
@@ -46,28 +22,20 @@ export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
     childContent: TemplateRef<any> = undefined;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    private _selectedOnOpen: OptionComponent;
 
     /** @hidden */
-    private _activeItemIndex: number;
+    private _subscriptions = new Subscription();
 
     constructor(
         private _elementRef: ElementRef,
         private _dialogService: DialogService,
-        @Inject(FD_OPTION_PARENT_COMPONENT) private _parent: FdOptionParentComponent
-    ) {}
+        @Inject(SELECT_COMPONENT) private _selectComponent: SelectInterface
+    ) { }
 
     /** @hidden */
     ngOnInit() {
-        // Listens for Select option HIDE/SHOW events in order to show or hide this dialog
-        // When in non dismissible mode we save currently selected item index to rollback original selection
-        //
-        this._subscriptions.add(
-            this._parent.openedChange.subscribe((isOpen) => {
-                this.dialogRef.hide(!isOpen);
-                this._activeItemIndex = this._parent.keyManager.activeItemIndex;
-            })
-        );
+        this._listenOnSelectOpenChange();
     }
 
     /** @hidden */
@@ -84,34 +52,41 @@ export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     get mobileConfig(): MobileModeConfig {
-        return this._parent.mobileConfig || {};
+        return this._selectComponent.mobileConfig || {};
     }
 
-    /**
-     * Only when we have Approve button available we do rollback to original selection that is stored in the
-     * _activeItemIndex that was set when Dialog opened.
-     *
-     * @hidden
-     */
+    /** @hidden */
     cancel(): void {
-        this._parent.close(true);
-        if (this._parent.keyManager.activeItem && !!this.mobileConfig.approveButtonText) {
-            this._parent.keyManager.setActiveItem(this._activeItemIndex);
-            this._parent.keyManager.activeItem.selectViaInteraction();
-        }
+        this._selectComponent.setSelectedOption({
+            option: this._selectedOnOpen,
+            controlChange: !!this._selectedOnOpen
+        });
+        this._selectComponent.close();
     }
 
     /** @hidden */
     approve(): void {
-        this._parent.close(true);
-        if (this._parent.keyManager.activeItem) {
-            this._parent.keyManager.activeItem.selectViaInteraction();
+        if (this._selectComponent.selected) {
+            this._selectComponent.setSelectedOption({
+                option: this._selectComponent.selected,
+                controlChange: true
+            }, true);
+        }
+        this._selectComponent.close();
+    }
+
+    /** @hidden */
+    private _toggleDialog(isOpen: boolean): void {
+        if (isOpen) {
+            this.dialogRef.hide(false);
+        } else {
+            this.dialogRef.hide(true);
         }
     }
 
     /** @hidden */
     private _openDialog(): void {
-        const dialogConfig = this._parent.dialogConfig || {};
+        const dialogConfig = this._selectComponent.dialogConfig || {};
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             ...dialogConfig,
             mobile: true,
@@ -121,5 +96,23 @@ export class SelectMobileComponent implements OnInit, AfterViewInit, OnDestroy {
             backdropClickCloseable: false,
             container: this._elementRef.nativeElement
         });
+    }
+
+    /** @hidden Hide/Show the Dialog when Select Open/Close*/
+    private _listenOnSelectOpenChange(): void {
+        this._subscriptions.add(
+            this._selectComponent.isOpenChange
+                .subscribe(isOpen => {
+                    this._toggleDialog(isOpen);
+                    this._updateSelectedValue(isOpen);
+                })
+        )
+    }
+
+    /** @hidden Cache selected value when Select opens */
+    private _updateSelectedValue(isOpen: any): void {
+        if (isOpen) {
+            this._selectedOnOpen = this._selectComponent.selected;
+        }
     }
 }

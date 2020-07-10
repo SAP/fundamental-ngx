@@ -18,7 +18,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         this.components = [
             { url: 'core/action-bar', name: 'Action Bar' },
             { url: 'core/alert', name: 'Alert' },
-            { url: 'core/badgeLabel', name: 'Status Indicator' },
             { url: 'core/bar', name: 'Bar' },
             { url: 'core/breadcrumb', name: 'Breadcrumb' },
             { url: 'core/busyIndicator', name: 'Busy Indicator' },
@@ -58,6 +57,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/select', name: 'Select' },
             { url: 'core/shellbar', name: 'Shellbar' },
             { url: 'core/sideNavigation', name: 'Side Navigation' },
+            { url: 'core/step-input', name: 'Step Input' },
             { url: 'core/table', name: 'Table' },
             { url: 'core/tabs', name: 'Tabs' },
             { url: 'core/textarea', name: 'Textarea' },
@@ -92,7 +92,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
                 content: this.components
             },
             {
-                header: 'layouts',
+                header: 'Layouts',
                 content: this.layouts
             },
             {

@@ -3,7 +3,7 @@
     <button fd-button (click)="removeOption()">Remove Option</button>
 </div>
 
-<fd-select placeholder="Select an option" [(value)]="selectedValue">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+<fd-select placeholder="Select an option" [(value)]="selectedValue" [closeOnOutsideClick]="false">
+    <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
-<small>Selected value: {{ selectedValue }}</small>
+<small>Selected value: {{selectedValue}}</small>

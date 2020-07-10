@@ -12,6 +12,7 @@ import { NotificationHeaderComponent } from 'libs/core/src/lib/notification/noti
 import { DefaultNotificationComponent } from 'libs/core/src/lib/notification/notification-utils/default-notification/default-notification.component';
 import { IdentifierModule } from '@fundamental-ngx/core';
 import { ButtonModule } from 'libs/core/src/lib/button/button.module';
+import { semanticStates } from '../../utils';
 
 export default {
     title: 'Fd notification',
@@ -70,16 +71,6 @@ export const Notifications = () => ({
         </fd-notification>
   `,
     props: {
-        headerType: select(
-            'Type of header',
-            {
-                information: 'information',
-                success: 'success',
-                error: 'error',
-                warning: 'warning'
-            },
-            'success'
-        ),
         size: select(
             'Size Of notification',
             {
@@ -89,6 +80,7 @@ export const Notifications = () => ({
             },
             'l'
         ),
+        headerType: select('Type of header', semanticStates, 'success'),
         closeButton: boolean('Close button hidden', false),
         title: text('Title text', 'Title'),
         description: text('Description text', 'Description'),

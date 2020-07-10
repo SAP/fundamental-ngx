@@ -177,7 +177,7 @@ For an existing Angular CLI application,
     ```html
     <fdp-button
         i18n="emphasized button|An example for button with emphasized property@@buttonEmphasizedBtn"
-        [type]="'emphasized'"
+        [buttonType]="'emphasized'"
         >Emphasized Button</fdp-button
     >
     ```

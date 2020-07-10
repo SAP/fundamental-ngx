@@ -2,6 +2,7 @@ import { moduleMetadata } from '@storybook/angular';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { SideNavigationComponent, SideNavigationModule } from 'libs/core/src/lib/side-navigation/public_api';
+import { icons } from '../../utils';
 
 
 export default {
@@ -22,8 +23,8 @@ export const SideNavigation = () => ({
     template:
         `<fd-side-nav>
             <div fd-side-nav-main>
-                <ul fd-nested-list 
-                        [compact]="mainCompactVar" 
+                <ul fd-nested-list
+                        [compact]="mainCompactVar"
                         [textOnly]="mainTextOnlyVar">
                     <li fd-nested-list-item>
                         <a fd-nested-list-link>
@@ -55,14 +56,14 @@ export const SideNavigation = () => ({
                     </li>
                 </ul>
             </div>
-        
+
             <div fd-side-nav-utility>
-                <ul fd-nested-list 
-                        [compact]="utilityCompactVar" 
+                <ul fd-nested-list
+                        [compact]="utilityCompactVar"
                         [textOnly]="utilityTextOnlyVar">
                     <li fd-nested-list-item>
                         <a fd-nested-list-link>
-                            <span *ngIf="!utilityTextOnlyVar" fd-nested-list-icon [glyph]="iconUtility"></span>  
+                            <span *ngIf="!utilityTextOnlyVar" fd-nested-list-icon [glyph]="iconUtility"></span>
                             <span fd-nested-list-title>{{textValue1}}</span>
                         </a>
                     </li>
@@ -82,9 +83,9 @@ export const SideNavigation = () => ({
         utilityTextOnlyVar: boolean('Utility Section text only', false),
         utilityCompactVar: boolean('Utility Section in Compact Mode', false),
         textValue1: text('Text Value 1', 'Item 1'),
-        icon: text('Icon Primary', 'menu'),
-        iconSecondary: text('Icon Secondary', 'menu'),
-        iconUtility: text('Icon Utility', 'menu')
+        icon: select('Icon Primary', icons, 'menu'),
+        iconSecondary: select('Icon Secondary', icons, 'menu'),
+        iconUtility: select('Icon Utility', icons, 'menu')
     }
 });
 
@@ -142,7 +143,7 @@ export const SideNavigationCondensed = () => ({
                 </li>
             </ul>
         </div>
-    
+
         <div fd-side-nav-utility>
             <ul fd-nested-list [compact]="utilityCompactVar">
                 <li fd-nested-list-item>
@@ -163,7 +164,6 @@ export const SideNavigationCondensed = () => ({
         mainCompactVar: boolean('Main Secion in Compact Mode', false),
         utilityCompactVar: boolean('Utility Section in Compact Mode', false),
         textValue1: text('Text Value 1', 'Item 1'),
-        icon: text('Icon Primary', 'menu')
-
+        icon: select('Icon Primary', icons, 'menu')
     }
 });

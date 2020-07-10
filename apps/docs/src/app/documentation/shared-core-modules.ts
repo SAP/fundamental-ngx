@@ -10,7 +10,8 @@ import {
     SelectModule,
     ShellbarModule,
     SwitchModule,
-    TabsModule
+    TabsModule,
+    SideNavigationModule
 } from '@fundamental-ngx/core';
 
 export const sharedCoreModules = [
@@ -26,5 +27,6 @@ export const sharedCoreModules = [
     FormModule,
     InlineHelpModule,
     PopoverModule,
-    MenuModule
+    MenuModule,
+    SideNavigationModule
 ];

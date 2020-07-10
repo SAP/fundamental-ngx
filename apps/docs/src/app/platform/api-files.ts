@@ -6,7 +6,7 @@
  */
 export const API_FILES = {
     actionbar: ['actionbarcomponent'],
-    button: ['buttoncomponent'],
+    button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
     infoLabel: ['InfoLabelComponent'],
     link: ['LinkComponent'],
@@ -14,5 +14,7 @@ export const API_FILES = {
     menuButton: ['MenuButtonComponent'],
     radioGroup: ['RadioGroupComponent'],
     searchField: ['SearchFieldComponent'],
-    splitMenuButton: ['SplitMenuButtonComponent']
+    select: ['SelectPlatformComponent'],
+    splitMenuButton: ['SplitMenuButtonComponent'],
+    textarea: ['TextAreaComponent']
 };

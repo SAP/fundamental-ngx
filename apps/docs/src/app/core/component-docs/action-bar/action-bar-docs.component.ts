@@ -20,13 +20,13 @@ export class ActionBarDocsComponent {
         {
             language: 'html',
             code: backButtonExample,
-            fileName: 'action-bar-back-button-example'
+            fileName: 'action-bar-back-example'
         },
         {
             language: 'typescript',
             code: backButtonExampleTs,
-            fileName: 'action-bar-back-button-example',
-            component: 'ActionBarBackButtonExampleComponent'
+            fileName: 'action-bar-back-example',
+            component: 'ActionBarBackExampleComponent'
         }
     ];
 

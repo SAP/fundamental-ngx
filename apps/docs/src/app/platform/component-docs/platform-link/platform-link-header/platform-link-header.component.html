@@ -1,10 +1,18 @@
-<header>Link</header>
+<header>Link Component</header>
 <description>
-    The Link Component is used to enhance standard HTML link.
-    <br /><br />
-    Link can be clicked by keyboard enter key and Mouse click.
+    Link in Platform is functionally similar to the Link in
+    <a [routerLink]="'/core/link'">@fundamental-ngx/core</a>. In Platform, Link is wrapped up as a component.
+    <br />
+    <br />
+
+    <import module="PlatformLinkModule"></import>
+    <br />
+
+    <h3>Platform specific enhancements:</h3>
+    <ul>
+        <li>Link provided as a component.</li>
+    </ul>
 </description>
-<import module="PlatformLinkModule"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

@@ -1,7 +1,6 @@
 export * from './lib/fundamental-ngx-core.module';
 export * from './lib/action-bar/public_api';
 export * from './lib/alert/public_api';
-export * from './lib/badge-label/public_api';
 export * from './lib/bar/public_api';
 export * from './lib/breadcrumb/public_api';
 export * from './lib/busy-indicator/public_api';
@@ -43,6 +42,7 @@ export * from './lib/side-navigation/public_api';
 export * from './lib/segmented-button/public_api';
 export * from './lib/select/public_api';
 export * from './lib/split-button/public_api';
+export * from './lib/step-input/public_api';
 export * from './lib/utils/public_api';
 export * from './lib/table/public_api';
 export * from './lib/tabs/public_api';

@@ -11,3 +11,4 @@ export * from './radio-group/radio-group.module';
 export * from './radio-group/radio-group.component';
 export * from './checkbox/checkbox.module';
 export * from './checkbox/checkbox.component';
+export * from './text-area/text-area.module';
