@@ -5,7 +5,7 @@ import { TableModule } from '@fundamental-ngx/core';
 
 @Component({
     template: `
-        <span fd-table-icon></span>
+        <span fd-table-icon [glyph]="'glyph'" [navigation]="true"></span>
     `
 })
 class TestComponent {
@@ -36,14 +36,6 @@ describe('TableIconDirective', () => {
     });
 
     it('should assign classes', () => {
-
-        expect(component.icon.elementRef().nativeElement.classList.length).toBe(1);
-
-        component.icon.glyph = 'glyph';
-        component.icon.navigation = true;
-
-        fixture.detectChanges();
-
         expect(component.icon.elementRef().nativeElement.classList.length).toBe(3);
     });
 });
