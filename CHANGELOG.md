@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.3...v0.20.1-rc.4) (2020-07-10)
+
+
+### Features
+
+* implement fiori 3 table ([#2819](https://github.com/SAP/fundamental-ngx/issues/2819)) ([3783133](https://github.com/SAP/fundamental-ngx/commit/3783133b3ff201812819de95e2fd1075144d872c)), closes [#2621](https://github.com/SAP/fundamental-ngx/issues/2621) [#2650](https://github.com/SAP/fundamental-ngx/issues/2650) [#2652](https://github.com/SAP/fundamental-ngx/issues/2652) [#2752](https://github.com/SAP/fundamental-ngx/issues/2752) [#2771](https://github.com/SAP/fundamental-ngx/issues/2771)
+
 ### [0.20.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.2...v0.20.1-rc.3) (2020-07-10)
 
 ### [0.20.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.1...v0.20.1-rc.2) (2020-07-09)
