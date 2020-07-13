@@ -136,10 +136,10 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     fdTimeColClass: boolean = true;
 
     /**
-     * Time to wait in milliseconds after the last keydown before focusing or selecting option based on numeric
+     * Time to wait in milliseconds after the last keydown before focusing or selecting option based on numeric/alpha
      * keys.
      */
-    typeaheadDebounceInterval: number = 250;
+    typeaheadDebounceInterval: number = 750;
 
     config: CarouselConfig;
     currentIndicatorId: string = this.id + '-current-indicator';
@@ -287,7 +287,6 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     /** Method triggered by keyboard, or decrement button */
     private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean): void {
         if (!item) {
-            // TODO: Throw Error
             return;
         }
         this._triggerCarousel(item, smooth);
