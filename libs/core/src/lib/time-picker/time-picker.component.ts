@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
@@ -29,16 +29,18 @@ import { PopoverComponent } from '../popover/popover.component';
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => TimePickerComponent),
             multi: true
-        }
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => TimePickerComponent),
+            multi: true
+        },
     ],
     styleUrls: ['./time-picker.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit {
-    /** @hidden */
-    @HostBinding('class.fd-time-picker')
-    timepickerclass = true;
+export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit, Validator {
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
@@ -80,9 +82,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     @Input()
     displayHours: boolean = true;
 
-    /** Whether to perform visual validation on the picker input. */
-    @Input()
-    validate: boolean = true;
+    // /** Whether to perform visual validation on the picker input. */
+    // @Input()
+    // validate: boolean = true;
 
     /** Aria label for the time picker input. */
     @Input()
@@ -91,6 +93,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     /** Whether a null input is considered valid(success). */
     @Input()
     allowNull: boolean = true;
+
+    /** Defines if time component should be used with tablet mode */
+    @Input()
+    tablet: boolean = false;
 
     /**
      *  The state of the form control - applies css classes.
@@ -110,10 +116,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
      * for example 9 will become 09
      * but 12 will be kept as 12.
      */
-    @Input() keepTwoDigitsTime: boolean = false;
+    @Input()
+    keepTwoDigitsTime: boolean = false;
 
-    /** @hidden Whether the input time is valid(success). Internal use. */
-    isInvalidTimeInput: boolean = false;
+    /** @hidden */
+    @HostBinding('class.fd-time-picker')
+    timepickerclass = true;
 
     /** @hidden */
     @ViewChild(TimeComponent)
@@ -122,6 +130,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     /** @hidden */
     @ViewChild(PopoverComponent)
     popover: PopoverComponent;
+
+    /** @hidden Whether the input time is valid(success). Internal use. */
+    isInvalidTimeInput: boolean = false;
 
     /** @hidden */
     period: string;
@@ -138,6 +149,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     onTouched: Function = () => {};
 
     /** @hidden */
+    constructor(private cd: ChangeDetectorRef, public timeAdapter: TimeFormatParser) {}
+
+    /** @hidden */
     ngOnInit(): void {
         this.placeholder = this.getPlaceholder();
     }
@@ -145,6 +159,20 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     /** @hidden */
     ngAfterViewInit(): void {
         this.child.changeActive(null);
+    }
+
+    /**
+     * @hidden
+     * Function that implements Validator Interface, adds validation support for forms
+     */
+    validate(control: AbstractControl): {
+        [key: string]: any;
+    } {
+        return this.isInvalidTimeInput ? {
+            dateValidation: {
+                valid: false
+            }
+        } : null;
     }
 
     /**
@@ -173,8 +201,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     }
 
     /** @hidden */
-    timeInputChanged(timeFromInput) {
+    timeInputChanged(timeFromInput: string) {
+        console.log(timeFromInput);
         const time = this.timeAdapter.parse(timeFromInput, this.displaySeconds, this.displayMinutes, this.meridian);
+        console.log(time);
         if (time) {
             this.isInvalidTimeInput = false;
             this.time = time;
@@ -267,7 +297,4 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
         this.time = time;
         this.cd.markForCheck();
     }
-
-    /** @hidden */
-    constructor(private cd: ChangeDetectorRef, public timeAdapter: TimeFormatParser) {}
 }

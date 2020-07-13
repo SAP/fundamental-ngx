@@ -101,7 +101,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     /** @hidden */
     @Output()
-    readonly focusArrowLeft: EventEmitter<void> = new EventEmitter<void>();
+    readonly focusFirstElement: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden
      * Used only in meridian mode. Stores information the current am/pm state.
@@ -349,11 +349,8 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     /** @hidden
      * Handles last button keyboard events
      */
-    lastButtonKeydown(event: KeyboardEvent): void {
-        if (event.key === 'Tab' && !event.shiftKey) {
-            event.preventDefault();
-            this.focusArrowLeft.emit();
-        }
+    lastButtonKeydown(): void {
+        this.focusFirstElement.emit();
     }
 
     /**

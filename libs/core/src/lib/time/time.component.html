@@ -12,6 +12,7 @@
         (focusNextColumn)="handleNextColumnFocus('hour')"
         (focusPreviousColumn)="handlePreviousColumnFocus('hour')"
         [timeConfig]="getHoursConfig()"
+        (lastButtonTabKeyDown)="lastButtonKeydown()"
     ></fd-time-column>
     <fd-time-column
         *ngIf="displayMinutes && minutes"
@@ -25,6 +26,7 @@
         [keepTwoDigits]="keepTwoDigits"
         (activeItemChange)="handleMinuteChange($event)"
         [timeConfig]="getMinutesConfig()"
+        (lastButtonTabKeyDown)="lastButtonKeydown()"
     ></fd-time-column>
     <fd-time-column
         *ngIf="displaySeconds && minutes"
@@ -38,6 +40,7 @@
         [keepTwoDigits]="keepTwoDigits"
         (activeItemChange)="handleSecondChange($event)"
         [timeConfig]="getSecondsConfig()"
+        (lastButtonTabKeyDown)="lastButtonKeydown()"
     ></fd-time-column>
     <fd-time-column
         *ngIf="meridian && periods"
@@ -51,5 +54,7 @@
         [(activeItem)]="period"
         (activeItemChange)="periodModelChange()"
         [timeConfig]="getPeriodConfig()"
-        [meridian]="true"></fd-time-column>
+        [meridian]="true"
+        (lastButtonTabKeyDown)="lastButtonKeydown()"
+    ></fd-time-column>
 </div>

@@ -18,6 +18,7 @@ import { CarouselConfig, CarouselDirective } from '../../utils/directives/carous
 import { CarouselItemDirective } from '../../utils/directives/carousel/carousel-item.directive';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { TimeColumnConfig } from './time-column-config';
+import { Subject } from 'rxjs';
 
 
 let timeColumnUniqueId: number = 0;
@@ -115,6 +116,10 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     @Output()
     activeStateChange: EventEmitter<void> = new EventEmitter<void>();
 
+    /** Event emitted, when focus is lost from last button of column. It helps with focus trap */
+    @Output()
+    lastButtonTabKeyDown: EventEmitter<void> = new EventEmitter<void>();
+
     /** @hidden */
     @ViewChild(CarouselDirective)
     carousel: CarouselDirective;
@@ -127,10 +132,16 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     @HostBinding('class.fd-time__col')
     fdTimeColClass: boolean = true;
 
+    /**
+     * Time to wait in milliseconds after the last keydown before focusing or selecting option based on numeric
+     * keys.
+     */
+    typeaheadDebounceInterval: number = 250;
 
     config: CarouselConfig;
     currentIndicatorId: string = this.id + '-current-indicator';
 
+    private _numericDownEvent: Subject<number> = new Subject<number>();
     private _activeItem: any;
     private _activeCarouselItem: CarouselItemDirective;
     private _isDragging: boolean = false;
@@ -138,8 +149,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
 
     constructor(
         private _changeDetRef: ChangeDetectorRef
-    ) {
-    }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -148,6 +158,8 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         } else {
             this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
         }
+
+        this._numericDownEvent.pipe()
     }
 
     /** @hidden */
@@ -184,6 +196,15 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
             this._pickTime(this._getItem(value), false, true);
         }
     }
+
+    /** @hidden */
+    handleLastButtonKeyDown(event: KeyboardEvent): void {
+        if (KeyUtil.isKey(event, 'Tab') && !event.shiftKey) {
+            event.preventDefault();
+            this.lastButtonTabKeyDown.emit();
+        }
+    }
+
 
     /** It prevents from accidentally change the item by click event */
     handleDrag(isDragging: boolean): void {
