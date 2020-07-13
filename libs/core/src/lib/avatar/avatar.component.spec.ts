@@ -29,7 +29,7 @@ class TestComponent {
     border: boolean = false;
 }
 
-fdescribe('AvatarComponent', () => {
+describe('AvatarComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 

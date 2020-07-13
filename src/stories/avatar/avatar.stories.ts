@@ -12,7 +12,7 @@ export default {
     decorators: [
         withKnobs,
         withA11y,
-        moduleMetadata({
+    moduleMetadata({
             imports: [AvatarModule],
             declarations: []
         })
