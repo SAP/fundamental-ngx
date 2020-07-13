@@ -13,7 +13,6 @@ import {
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18nLabels } from './i18n/time-i18n-labels';
-import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
@@ -141,19 +140,18 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.changeDetRef.detectChanges();
+        this._changeDetRef.detectChanges();
     }
 
     constructor(
-        public timeI18nLabels: TimeI18nLabels,
-        public timeI18n: TimeI18n,
-        private changeDetRef: ChangeDetectorRef
+        private _timeI18nLabels: TimeI18nLabels,
+        private _changeDetRef: ChangeDetectorRef
     ) {}
 
     ngOnInit(): void {
         this.hours = [];
 
-        this.period = this.timeI18n.meridianAm;
+        this.period = this._timeI18nLabels.meridianAm;
 
         const hoursAmount = this.meridian ? 12 : 24;
         for (let i = 0; i < hoursAmount; i ++) {
@@ -168,7 +166,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
 
         }
 
-        this.periods = [this.timeI18n.meridianAm, this.timeI18n.meridianPm];
+        this.periods = [this._timeI18nLabels.meridianAm, this._timeI18nLabels.meridianPm];
     }
 
     handleSecondChange(second: number): void {
@@ -226,7 +224,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
         }
         this.time = Object.assign({}, time);
         this.setDisplayedHour();
-        this.changeDetRef.detectChanges();
+        this._changeDetRef.detectChanges();
     }
 
     /** @hidden
@@ -246,16 +244,16 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
             this.displayedHour = this.time.hour;
         } else if (this.time.hour === 0) {
             this.displayedHour = 12;
-            this.period = this.timeI18n.meridianAm;
+            this.period = this._timeI18nLabels.meridianAm;
         } else if (this.time.hour > 12) {
             this.displayedHour = this.time.hour - 12;
-            this.period = this.timeI18n.meridianPm;
+            this.period = this._timeI18nLabels.meridianPm;
         } else if (this.time.hour === 12) {
             this.displayedHour = 12;
-            this.period = this.timeI18n.meridianPm;
+            this.period = this._timeI18nLabels.meridianPm;
         } else {
             this.displayedHour = this.time.hour;
-            this.period = this.timeI18n.meridianAm;
+            this.period = this._timeI18nLabels.meridianAm;
         }
 
         if (this.time) {
@@ -271,13 +269,13 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
         if (!this.meridian) {
             this.time.hour = this.displayedHour;
         } else {
-            if (this.period === this.timeI18n.meridianAm) {
+            if (this.period === this._timeI18nLabels.meridianAm) {
                 if (this.displayedHour === 12) {
                     this.time.hour = 0;
                 } else {
                     this.time.hour = this.displayedHour;
                 }
-            } else if (this.period === this.timeI18n.meridianPm) {
+            } else if (this.period === this._timeI18nLabels.meridianPm) {
                 if (this.displayedHour === 12) {
                     this.time.hour = this.displayedHour;
                 } else {
@@ -290,7 +288,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     changeActive(view: FdTimeActiveView): void {
         this.activeView = view;
-        this.changeDetRef.detectChanges()
+        this._changeDetRef.detectChanges()
     }
 
     isActive(view: FdTimeActiveView): boolean {
@@ -316,33 +314,33 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     getHoursConfig(): TimeColumnConfig {
         return {
-            decreaseLabel: this.timeI18nLabels.decreaseHoursLabel,
-            increaseLabel: this.timeI18nLabels.increaseHoursLabel,
-            label: this.timeI18nLabels.hoursLabel
+            decreaseLabel: this._timeI18nLabels.decreaseHoursLabel,
+            increaseLabel: this._timeI18nLabels.increaseHoursLabel,
+            label: this._timeI18nLabels.hoursLabel
         };
     }
 
     getMinutesConfig(): TimeColumnConfig {
         return {
-            decreaseLabel: this.timeI18nLabels.decreaseMinutesLabel,
-            increaseLabel: this.timeI18nLabels.increaseMinutesLabel,
-            label: this.timeI18nLabels.minutesLabel
+            decreaseLabel: this._timeI18nLabels.decreaseMinutesLabel,
+            increaseLabel: this._timeI18nLabels.increaseMinutesLabel,
+            label: this._timeI18nLabels.minutesLabel
         };
     }
 
     getSecondsConfig(): TimeColumnConfig {
         return {
-            decreaseLabel: this.timeI18nLabels.decreaseSecondsLabel,
-            increaseLabel: this.timeI18nLabels.increaseSecondsLabel,
-            label: this.timeI18nLabels.secondsLabel
+            decreaseLabel: this._timeI18nLabels.decreaseSecondsLabel,
+            increaseLabel: this._timeI18nLabels.increaseSecondsLabel,
+            label: this._timeI18nLabels.secondsLabel
         };
     }
 
     getPeriodConfig(): TimeColumnConfig {
         return {
-            decreaseLabel: this.timeI18nLabels.decreasePeriodLabel,
-            increaseLabel: this.timeI18nLabels.increasePeriodLabel,
-            label: this.timeI18nLabels.periodLabel
+            decreaseLabel: this._timeI18nLabels.decreasePeriodLabel,
+            increaseLabel: this._timeI18nLabels.increasePeriodLabel,
+            label: this._timeI18nLabels.periodLabel
         };
     }
 
@@ -362,7 +360,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
      * Defines if period is PM, Considers the fact that period should be case sensitive
      */
     private isPm(period: string): boolean {
-        const pmMeridian = this.timeI18n.meridianPm.toLocaleUpperCase();
+        const pmMeridian = this._timeI18nLabels.meridianPm.toLocaleUpperCase();
         period = period.toLocaleUpperCase();
         return period === pmMeridian;
     }
@@ -372,7 +370,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
      * Defines if period is AM, Considers the fact that period should be case sensitive
      */
     private isAm(period: string): boolean {
-        const amMeridian = this.timeI18n.meridianAm.toLocaleUpperCase();
+        const amMeridian = this._timeI18nLabels.meridianAm.toLocaleUpperCase();
         period = period.toLocaleUpperCase();
         return period === amMeridian;
     }

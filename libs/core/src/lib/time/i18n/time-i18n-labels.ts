@@ -9,7 +9,7 @@ export class TimeI18nLabels {
     increaseHoursLabel: string = 'Increase hours';
 
     /** label for the 'hours' column */
-    hoursLabel: string = 'Hrs';
+    hoursLabel: string = 'Hours';
 
     /** Aria label for the 'decrease hours' button */
     decreaseHoursLabel: string = 'Decrease hours';
@@ -18,7 +18,7 @@ export class TimeI18nLabels {
     increaseMinutesLabel: string = 'Increase minutes';
 
     /** label for the 'minutes' column */
-    minutesLabel: string = 'Min';
+    minutesLabel: string = 'Minutes';
 
     /** Aria label for the 'decrease minutes' button */
     decreaseMinutesLabel: string = 'Decrease minutes';
@@ -27,7 +27,7 @@ export class TimeI18nLabels {
     increaseSecondsLabel: string = 'Increase seconds';
 
     /** label for the 'seconds' column */
-    secondsLabel: string = 'Sec';
+    secondsLabel: string = 'Seconds';
 
     /** Aria label for the 'decrease seconds' button */
     decreaseSecondsLabel: string = 'Decrease seconds';
@@ -40,4 +40,16 @@ export class TimeI18nLabels {
 
     /** Aria label for the 'decrease period' button */
     decreasePeriodLabel: string = 'Decrease period';
+
+    /**
+     * Ante Meridian naming label. The value written in the input should match this or Post Meridian. Otherwise it would be
+     * treated as invalid
+     * */
+    meridianAm: string = 'am';
+
+    /**
+     * Post Meridian naming label. The value written in the input should match this or Ante Meridian. Otherwise it would be
+     * treated as invalid
+     * */
+    meridianPm: string = 'pm';
 }

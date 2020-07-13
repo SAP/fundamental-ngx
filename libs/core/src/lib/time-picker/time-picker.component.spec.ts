@@ -222,7 +222,7 @@ describe('TimePickerComponent', () => {
         component.disabled = false;
         const event = { stopPropagation: function () {} };
         spyOn(event, 'stopPropagation').and.callThrough();
-        component.inputGroupClicked(event);
+        component.inputGroupClicked(<any>event);
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.isOpen).toBe(true);
     });

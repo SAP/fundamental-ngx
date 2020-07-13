@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { TimeI18n, TimeI18nLabels } from '@fundamental-ngx/core';
+import { TimeI18nLabels } from '@fundamental-ngx/core';
 
 // Aria labels i18n
 @Injectable()
@@ -21,23 +21,10 @@ export class CustomI18nLabels extends TimeI18nLabels {
     secondsLabel: string = 'Segundos';
 
     decreaseSecondsLabel: string = 'Disminuir segundos';
-}
 
-@Injectable()
-export class CustomI18n extends TimeI18n {
     meridianAm: string = 'vorm.';
 
     meridianPm: string = 'nachm.';
-
-    meridianPlaceholder: string = 'vorm.';
-
-    hoursPlaceholder: string = 'ss';
-
-    minutesPlaceholder: string = 'mm';
-
-    secondsPlaceholder: string = 'zz';
-
-    meridianCaseSensitive: boolean = true;
 }
 
 @Component({
@@ -52,10 +39,6 @@ export class CustomI18n extends TimeI18n {
         {
             provide: TimeI18nLabels,
             useClass: CustomI18nLabels
-        },
-        {
-            provide: TimeI18n,
-            useClass: CustomI18n
         }
     ]
 })

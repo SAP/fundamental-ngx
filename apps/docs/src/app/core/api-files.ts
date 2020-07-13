@@ -224,7 +224,14 @@ export const API_FILES = {
         'TileTextDirective',
         'TileTitleComponent'
     ],
-    time: ['TimeComponent', 'TimeI18nLabels', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
+    time: [
+        'TimeComponent',
+        'TimeI18nLabels',
+        'TimeFormatParser',
+        'TimeFormatParserDefault',
+        'TimeObject',
+        'TimeColumnComponent'
+    ],
     timePicker: ['TimePickerComponent', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
