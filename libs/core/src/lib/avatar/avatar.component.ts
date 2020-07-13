@@ -121,6 +121,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
             .join(' ');
     }
 
+    /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }
