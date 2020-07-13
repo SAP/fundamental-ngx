@@ -9,6 +9,9 @@ import * as timeSizesSrcH from '!raw-loader!./examples/time-sizes-example.compon
 import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
 import * as timeOnlyHoursSrc from '!raw-loader!./examples/time-only-hours-example.component.html';
 
+import * as timeProgramTs from '!raw-loader!./examples/time-programmatically-example.component.ts';
+import * as timeProgramH from '!raw-loader!./examples/time-programmatically-example.component.html';
+
 import * as timeSrcTs from '!raw-loader!./examples/time-example.component.ts';
 import * as timeMeridianSrcTs from '!raw-loader!./examples/time-12-example.component.ts';
 import * as timeNoSecondsSrcTs from '!raw-loader!./examples/time-no-seconds-example.component.ts';
@@ -84,6 +87,16 @@ export class TimeDocsComponent {
             typescriptFileCode: timeSizesSrcTs,
             code: timeSizesSrcH,
             component: 'TimeSizesExampleComponent'
+        }
+    ];
+
+    timeProgramaticalyChange: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'time-programmatically-example',
+            code: timeProgramH,
+            typescriptFileCode: timeProgramTs,
+            component: 'TimeProgrammaticallyExampleComponent'
         }
     ];
 
