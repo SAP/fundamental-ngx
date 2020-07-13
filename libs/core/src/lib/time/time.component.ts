@@ -349,8 +349,12 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     /** @hidden
      * Handles last button keyboard events
      */
-    lastButtonKeydown(): void {
-        this.focusFirstElement.emit();
+    lastButtonKeydown(event: KeyboardEvent): void {
+        /** Prevent tab, when it's in time/datetime picker */
+        if (this.focusFirstElement.observers.length > 0) {
+            event.preventDefault();
+            this.focusFirstElement.emit();
+        }
     }
 
     /**

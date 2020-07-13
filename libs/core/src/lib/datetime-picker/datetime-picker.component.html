@@ -64,6 +64,7 @@
                     [keepTwoDigits]="keepTwoDigitsTime"
                     [meridian]="meridian"
                     [ngModel]="time"
+                    (focusFirstElement)="dateTimePicker.focus()"
                     (ngModelChange)="handleTimeChange($event)"
                     [displaySeconds]="displaySeconds"
                     [displayMinutes]="displayMinutes"

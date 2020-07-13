@@ -119,7 +119,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** Event emitted, when focus is lost from last button of column. It helps with focus trap */
     @Output()
-    lastButtonTabKeyDown: EventEmitter<void> = new EventEmitter<void>();
+    lastButtonTabKeyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
     /** @hidden */
     @ViewChild(CarouselDirective)
@@ -143,7 +143,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     currentIndicatorId: string = this.id + '-current-indicator';
 
     /** @hidden */
-    private _numericDownEvent: Subject<string> = new Subject<string>();
+    private _queryKeyDownEvent: Subject<string> = new Subject<string>();
 
     /** @hidden */
     private _activeItem: any;
@@ -166,30 +166,13 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        if (!this.meridian) {
-            this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms', infinite: true };
-        } else {
-            this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
-        }
-
-        const trigger = this._numericDownEvent.pipe(debounceTime(this.typeaheadDebounceInterval));
-
-        this._subscriptions.add(
-            this._numericDownEvent.pipe(
-                buffer(trigger),
-                map(keys => keys.join('')),
-                map(value => this._getValue(value)),
-                map(value => this._getItem(value))
-            ).subscribe(item => this._pickTime(item, false, true))
-        );
+        this._setUpCarouselConfiguration();
+        this._setUpQuerySubscription();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (!this._activeItem) {
-            this._activeItem = this.items.first.value;
-        }
-        this._pickTime(this._getItem(this._activeItem), true);
+        this._setUpInitialValue();
         this._initialised = true;
     }
 
@@ -218,15 +201,14 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         } else if (KeyUtil.isKey(event, 'ArrowRight')) {
             this.focusNextColumn.emit();
         } else if (KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical')) {
-            this._numericDownEvent.next(event.key)
+            this._queryKeyDownEvent.next(event.key)
         }
     }
 
     /** @hidden */
     handleLastButtonKeyDown(event: KeyboardEvent): void {
         if (KeyUtil.isKey(event, 'Tab') && !event.shiftKey) {
-            event.preventDefault();
-            this.lastButtonTabKeyDown.emit();
+            this.lastButtonTabKeyDown.emit(event);
         }
     }
 
@@ -265,7 +247,11 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     /** Method triggered by keyboard, or increment button */
-    scrollUp(): void {
+    scrollUp(event?: MouseEvent): void {
+        /** Keyboard events in reactive forms, shouldn't trigger this method */
+        if (event && !event.clientX) {
+            return;
+        }
         let index: number = this.items
             .toArray()
             .findIndex(_item => _item === this._activeCarouselItem)
@@ -342,4 +328,36 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
             return value;
         }
     }
+
+    /** @hidden */
+    private _setUpQuerySubscription(): void {
+        const trigger = this._queryKeyDownEvent.pipe(debounceTime(this.typeaheadDebounceInterval));
+
+        this._subscriptions.add(
+            this._queryKeyDownEvent.pipe(
+                buffer(trigger),
+                map(keys => keys.join('')),
+                map(value => this._getValue(value)),
+                map(value => this._getItem(value))
+            ).subscribe(item => this._pickTime(item, false, true))
+        );
+    }
+
+    /** @hidden */
+    private _setUpCarouselConfiguration(): void {
+        if (!this.meridian) {
+            this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms', infinite: true };
+        } else {
+            this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
+        }
+    }
+
+    /** @hidden */
+    private _setUpInitialValue(): void {
+        if (!this._activeItem) {
+            this._activeItem = this.items.first.value;
+        }
+        this._pickTime(this._getItem(this._activeItem), true);
+    }
+
 }

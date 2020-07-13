@@ -37,21 +37,27 @@ export const Default_Transition_Duration: string = '150ms';
 })
 export class CarouselDirective implements AfterContentInit {
 
+    /** Configuration for carousel */
     @Input()
     config: CarouselConfig;
 
+    /** Initial active item of carousel, position first + offset */
     @Input()
     active: CarouselItemDirective;
 
+    /** Whether support for mouse down, or tap should be enabled */
     @Input()
     panSupport: boolean = true;
 
+    /** Event thrown, when active element is changed */
     @Output()
     readonly activeChange: EventEmitter<CarouselItemDirective> = new EventEmitter<CarouselItemDirective>();
 
+    /** Event thrown, when element is started/stopped to be dragged */
     @Output()
     readonly dragged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** @hidden */
     @ContentChildren(CarouselItemDirective)
     items: QueryList<CarouselItemDirective>;
 
@@ -64,12 +70,14 @@ export class CarouselDirective implements AfterContentInit {
         private _changeDetRef: ChangeDetectorRef
     ) {}
 
+    /** @hidden */
     ngAfterContentInit(): void {
         if (this.config.panSupport) {
             this._hammerSetup();
         }
     }
 
+    /** Change active element */
     goToItem(item: CarouselItemDirective, smooth?: boolean): void {
         let index: number = this.getIndexOfItem(item);
 
@@ -84,6 +92,7 @@ export class CarouselDirective implements AfterContentInit {
         this._previousActiveItem = item;
     }
 
+    /** @hidden */
     private _handlePan(delta: number): void {
         const distance: number = delta - this._lastDistance;
 
@@ -92,7 +101,8 @@ export class CarouselDirective implements AfterContentInit {
         this._transitionCarousel(this._currentTransitionPx + distance);
     }
 
-    private _handlePanEnd(delta) {
+    /** @hidden */
+    private _handlePanEnd(delta: number) {
         this._handlePan(delta);
 
         const closestItem: CarouselItemDirective = this._getClosest();
@@ -105,6 +115,7 @@ export class CarouselDirective implements AfterContentInit {
         this._lastDistance = 0;
     }
 
+    /** @hidden */
     private _centerActive(index: number): void {
         const middleIndex = Math.ceil(this.items.length / 2);
         const offset = Math.ceil(this.config.elementsAtOnce / 2);
@@ -138,14 +149,6 @@ export class CarouselDirective implements AfterContentInit {
     private _transitionToIndex(index: number, smooth?: boolean): void {
         const transitionPx: number = this._getSize(this.items.first) * index;
 
-        // Performance Saving Purposes
-        // const transitionPx: number = this.items
-        //     .filter((_item, _index) => _index < index - this.config.amountAtOnce)
-        //     .map(_item => _item.getHeight())
-        //     .reduce((_item: number, sum: number) => sum + _item)
-        // ;
-
-
         if (smooth) {
             this._elementRef.nativeElement.style.transitionDuration = this._getTransition();
         } else {
@@ -155,7 +158,7 @@ export class CarouselDirective implements AfterContentInit {
         this._transitionCarousel(-transitionPx);
     }
 
-    /** Get closes element, based on current tansition */
+    /** Get closes element, based on current transition */
     private _getClosest(): CarouselItemDirective {
 
         /** If transition is positive, it'should go to first element */
@@ -187,10 +190,12 @@ export class CarouselDirective implements AfterContentInit {
         }
     }
 
+    /** @hidden */
     private getIndexOfItem(item: CarouselItemDirective): number {
         return this.items.toArray().findIndex(_item => _item === item);
     }
 
+    /** @hidden */
     private _hammerSetup(): void {
         const hammer = new Hammer(this._elementRef.nativeElement, new HammerConfig());
 
@@ -244,5 +249,4 @@ export class CarouselDirective implements AfterContentInit {
             return item.getWidth();
         }
     }
-
 }

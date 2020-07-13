@@ -2,7 +2,7 @@
 <button class="fd-button fd-button fd-button--transparent sap-icon--navigation-up-arrow"
         [attr.aria-label]="timeConfig?.decreaseLabel"
         *ngIf="active"
-        (click)="scrollUp()"></button>
+        (click)="scrollUp($event)"></button>
 <div class="fd-time__wrapper" [ngClass]="{'fd-time__wrapper--active': active, 'fd-time__wrapper--meridian': meridian}">
     <ul class="fd-time__list"
         (click)="indicator.focus()"
@@ -32,7 +32,7 @@
 <button class="fd-button fd-button fd-button--transparent sap-icon--navigation-down-arrow"
         [attr.aria-label]="timeConfig?.increaseLabel"
         *ngIf="active"
-        (keydown)="handleLastButtonKeyDown()"
+        (keydown)="handleLastButtonKeyDown($event)"
         (click)="scrollDown()">
 </button>
 

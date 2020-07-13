@@ -149,7 +149,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     onTouched: Function = () => {};
 
     /** @hidden */
-    constructor(private cd: ChangeDetectorRef, public timeAdapter: TimeFormatParser) {}
+    constructor(private _cd: ChangeDetectorRef, public timeAdapter: TimeFormatParser) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -169,7 +169,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
         [key: string]: any;
     } {
         return this.isInvalidTimeInput ? {
-            dateValidation: {
+            timeValidation: {
                 valid: false
             }
         } : null;
@@ -214,8 +214,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
                 this.child.setDisplayedHour();
             } else {
                 this.isInvalidTimeInput = true;
+                this.onChange(time);
             }
         }
+        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -266,7 +268,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
 
     /** @hidden */
     timeFromTimeComponentChanged() {
-        this.cd.detectChanges();
+        this._cd.detectChanges();
         this.onChange(this.time);
         this.isInvalidTimeInput = false;
     }
@@ -284,7 +286,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.cd.detectChanges();
+        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -293,6 +295,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
             return;
         }
         this.time = time;
-        this.cd.markForCheck();
+        this._cd.markForCheck();
     }
 }

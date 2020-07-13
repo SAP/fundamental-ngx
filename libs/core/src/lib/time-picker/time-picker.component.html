@@ -35,6 +35,7 @@
             [meridian]="meridian"
             [(ngModel)]="time"
             [keepTwoDigits]="keepTwoDigitsTime"
+            (focusFirstElement)="inputElement.focus()"
             (ngModelChange)="timeFromTimeComponentChanged()"
             [displayMinutes]="displayMinutes"
             [displaySeconds]="displaySeconds"
