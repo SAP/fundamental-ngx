@@ -1,11 +1,132 @@
 <fd-docs-section-title [id]="'avatar'" [componentName]="'avatar'">
-    Avatar Bla Bla Bla
+    Icon
 </fd-docs-section-title>
-<description
-    >Bla bla bla description</description
->
+<description>
+    Use the <code>[glyph]</code> property to specify the name of the icon. 
+    The size of the Avatar is controlled by the <code>[size]</code> property. If omitted, the default size of the Avatar is set to large (<code>l</code>).
+</description>
 <component-example>
-    <fd-avatar-example></fd-avatar-example>
+    <fd-avatar-icon-example></fd-avatar-icon-example>
 </component-example>
-<code-example [exampleFiles]="avatarBasicExample"></code-example>
+<code-example [exampleFiles]="avatarIcon"></code-example>
+
 <separator></separator>
+
+<fd-docs-section-title [id]="'avatar-initials'" [componentName]="'avatar'">
+    Initials
+</fd-docs-section-title>
+<description>
+    The initials stand for the first name(s) and last name(s) of a person. Which name comes first depends on the language-specific settings.
+</description>
+<component-example>
+    <fd-avatar-initials-example></fd-avatar-initials-example>
+</component-example>
+<code-example [exampleFiles]="avatarInitials"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'avatar-circle'" [componentName]="'avatar'">
+    Circle
+</fd-docs-section-title>
+<description>
+    Set <code>[circle]="true"</code> for a circular shape of the Avatar. 
+</description>
+<component-example>
+    <fd-avatar-circle-example></fd-avatar-circle-example>
+</component-example>
+<code-example [exampleFiles]="avatarCircle"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'avatar-background-image'" [componentName]="'avatar'">
+    Background Image
+</fd-docs-section-title>
+<description>
+    To provide an image url use the <code>[backgroundImage]</code> property. <br>
+    The size of the image is scaled up to completely cover the control area.
+</description>
+<component-example>
+    <fd-avatar-background-image-example></fd-avatar-background-image-example>
+</component-example>
+<code-example [exampleFiles]="avatarBackgroundImage"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'avatar-transparent'" [componentName]="'avatar'">
+    Transparent
+</fd-docs-section-title>
+<description>
+    To remove the background of the Avatar set <code>[transparent]="true"</code>. 
+</description>
+<component-example>
+    <fd-avatar-transparent-example></fd-avatar-transparent-example>
+</component-example>
+<code-example [exampleFiles]="avatarTransparent"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'avatar-placeholder'" [componentName]="'avatar'">
+    Placeholder Background
+</fd-docs-section-title>
+<description>
+    To apply a Placeholder Background set <code>[placeholder]="true"</code>. <br>
+    Placeholder images are used when no other image is available. <br>
+    The default placeholder for an avatar is a gender-neutral person icon inside a circle. <br>
+    For a business image is a neutral product icon inside a square can be used or you can specify your own default placeholder icon.
+</description>
+<component-example>
+    <fd-avatar-placeholder-example></fd-avatar-placeholder-example>
+</component-example>
+<code-example [exampleFiles]="avatarPlaceholder"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'avatar-tile'" [componentName]="'avatar'">
+    Tile Icon Background
+</fd-docs-section-title>
+<description>
+    For Tile Background set <code>[tile]="true"</code>.
+</description>
+<component-example>
+    <fd-avatar-tile-example></fd-avatar-tile-example>
+</component-example>
+<code-example [exampleFiles]="avatarTile"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'avatar-accent-colors'" [componentName]="'avatar'">
+    Accent Colors
+</fd-docs-section-title>
+<description>
+    By default, the placeholder background color is set to blue. Use <code>[colorAccent]</code> property to change the background color. Options include numbers from 1 to 10. For example: <code>[colorAccent]="6"</code>.
+</description>
+<component-example>
+    <fd-avatar-accent-colors-example></fd-avatar-accent-colors-example>
+</component-example>
+<code-example [exampleFiles]="avatarAccentColors"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'avatar-zoom-icon'" [componentName]="'avatar'">
+    Zoom Icon
+</fd-docs-section-title>
+<description>
+    To specify the zoom icon use the <code>[zoomGlyph]</code> property.
+</description>
+<component-example>
+    <fd-avatar-zoom-icon-example></fd-avatar-zoom-icon-example>
+</component-example>
+<code-example [exampleFiles]="avatarZoomIcon"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'avatar-border'" [componentName]="'avatar'">
+    Borders
+</fd-docs-section-title>
+<description>
+    A border can be added with <code>[border]="true"</code>.
+</description>
+<component-example>
+    <fd-avatar-borders-example></fd-avatar-borders-example>
+</component-example>
+<code-example [exampleFiles]="avatarBorders"></code-example>

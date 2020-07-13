@@ -3,12 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
-import { AvatarDocsComponent } from './avatar-docs.component';
-import { AvatarExampleComponent } from './examples/avatar-example.component';
-
-
-import { AvatarHeaderComponent } from './avatar-header/avatar-header.component';
 import { AvatarModule } from '@fundamental-ngx/core';
+import { AvatarAccentColorsExampleComponent } from './examples/avatar-examples.component';
+import { AvatarBackgroundImageExampleComponent } from './examples/avatar-examples.component';
+import { AvatarBordersExampleComponent } from './examples/avatar-examples.component';
+import { AvatarCircleExampleComponent } from './examples/avatar-examples.component';
+import { AvatarDocsComponent } from './avatar-docs.component';
+import { AvatarHeaderComponent } from './avatar-header/avatar-header.component';
+import { AvatarIconExampleComponent } from './examples/avatar-examples.component';
+import { AvatarInitialsExampleComponent } from './examples/avatar-examples.component';
+import { AvatarPlaceholderExampleComponent } from './examples/avatar-examples.component';
+import { AvatarTransparentExampleComponent } from './examples/avatar-examples.component';
+import { AvatarTileExampleComponent } from './examples/avatar-examples.component';
+import { AvatarZoomIconExampleComponent } from './examples/avatar-examples.component';
 
 const routes: Routes = [
     {
@@ -25,9 +32,18 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes), SharedDocumentationModule, AvatarModule],
     exports: [RouterModule],
     declarations: [
-        AvatarHeaderComponent,
+        AvatarAccentColorsExampleComponent,
+        AvatarBackgroundImageExampleComponent,
+        AvatarBordersExampleComponent,
+        AvatarCircleExampleComponent,
         AvatarDocsComponent,
-        AvatarExampleComponent
+        AvatarHeaderComponent,
+        AvatarIconExampleComponent,
+        AvatarInitialsExampleComponent,
+        AvatarPlaceholderExampleComponent,
+        AvatarTileExampleComponent,
+        AvatarTransparentExampleComponent,
+        AvatarZoomIconExampleComponent
     ]
 })
 export class AvatarDocsModule {}
