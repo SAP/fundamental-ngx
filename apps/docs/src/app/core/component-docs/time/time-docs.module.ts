@@ -11,7 +11,6 @@ import { TimeNoSecondsExampleComponent } from './examples/time-no-seconds-exampl
 import { TimeI18nExampleComponent } from './examples/time-i18n-example.component';
 import { TimeFormExampleComponent } from './examples/time-form-example.component';
 import { TimeExampleComponent } from './examples/time-example.component';
-import { TimeDisabledExampleComponent } from './examples/time-disabled-example.component';
 import { Time12ExampleComponent } from './examples/time-12-example.component';
 import { TimeTwoDigitsExampleComponent } from './examples/time-two-digits-example/time-two-digits-example.component';
 import { TimeModule } from '@fundamental-ngx/core';
@@ -38,7 +37,6 @@ const routes: Routes = [
         Time12ExampleComponent,
         TimeI18nExampleComponent,
         TimeFormExampleComponent,
-        TimeDisabledExampleComponent,
         TimeTwoDigitsExampleComponent,
         TimeOnlyHoursExampleComponent,
         TimeNoSecondsExampleComponent,

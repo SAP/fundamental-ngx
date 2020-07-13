@@ -16,24 +16,4 @@ export class TimeI18n {
      * treated as invalid
      * */
     meridianPm: string = 'pm';
-
-    /**
-     * Placeholder on the Ante Meridian / Post Meridian input
-     * */
-    meridianPlaceholder: string = 'am';
-
-    /**
-     * Placeholder for hours input
-     * */
-    hoursPlaceholder: string = 'hh';
-
-    /**
-     * Placeholder for minutes input
-     * */
-    minutesPlaceholder: string = 'mm';
-
-    /**
-     * Placeholder for seconds input
-     * */
-    secondsPlaceholder: string = 'ss';
 }

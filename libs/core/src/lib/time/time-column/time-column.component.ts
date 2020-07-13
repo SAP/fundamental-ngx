@@ -107,9 +107,11 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     @Output()
     activeItemChange: EventEmitter<any> = new EventEmitter<any>();
 
+    /** Event emitted, when previous column should be focused */
     @Output()
     focusPreviousColumn: EventEmitter<void> = new EventEmitter<void>();
 
+    /** Event emitted, when next column should be focused */
     @Output()
     focusNextColumn: EventEmitter<void> = new EventEmitter<void>();
 

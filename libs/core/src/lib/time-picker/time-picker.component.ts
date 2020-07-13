@@ -82,10 +82,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     @Input()
     displayHours: boolean = true;
 
-    // /** Whether to perform visual validation on the picker input. */
-    // @Input()
-    // validate: boolean = true;
-
     /** Aria label for the time picker input. */
     @Input()
     timePickerInputLabel: string = 'Time picker input';
@@ -221,7 +217,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     }
 
     /** @hidden */
-    inputGroupClicked($event) {
+    inputGroupClicked($event: MouseEvent): void {
         if (!this.isOpen && !this.disabled) {
             $event.stopPropagation();
             this.handleIsOpenChange(true);
@@ -229,21 +225,21 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     }
 
     /** @hidden */
-    onFocusHandler() {
+    onFocusHandler(): void {
         if (!this.isOpen) {
             this.handleIsOpenChange(true);
         }
     }
 
     /** @hidden */
-    addOnButtonClicked() {
+    addOnButtonClicked(): void {
         if (!this.disabled) {
             this.handleIsOpenChange(!this.isOpen);
         }
     }
 
     /** @hidden */
-    popoverClosed() {
+    popoverClosed(): void {
         this.handleIsOpenChange(false);
     }
 
@@ -267,7 +263,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     }
 
     /** @hidden */
-    timeFromTimeComponentChanged() {
+    timeFromTimeComponentChanged(): void {
         this._cd.detectChanges();
         this.onChange(this.time);
         this.isInvalidTimeInput = false;

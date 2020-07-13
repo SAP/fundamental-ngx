@@ -6,13 +6,11 @@ import * as timeSrc from '!raw-loader!./examples/time-example.component.html';
 import * as timeMeridianSrc from '!raw-loader!./examples/time-12-example.component.html';
 import * as timeSizesSrcTs from '!raw-loader!./examples/time-sizes-example.component.ts';
 import * as timeSizesSrcH from '!raw-loader!./examples/time-sizes-example.component.html';
-import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-programmatically-example.component.html';
 import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
 import * as timeOnlyHoursSrc from '!raw-loader!./examples/time-only-hours-example.component.html';
 
 import * as timeSrcTs from '!raw-loader!./examples/time-example.component.ts';
 import * as timeMeridianSrcTs from '!raw-loader!./examples/time-12-example.component.ts';
-import * as timeNoSpinnersSrcTs from '!raw-loader!./examples/time-programmatically-example.component.ts';
 import * as timeNoSecondsSrcTs from '!raw-loader!./examples/time-no-seconds-example.component.ts';
 import * as timeOnlyHoursSrcTs from '!raw-loader!./examples/time-only-hours-example.component.ts';
 import * as timeTwoDigitsSrcTs from '!raw-loader!./examples/time-two-digits-example/time-two-digits-example.component.ts';
@@ -86,16 +84,6 @@ export class TimeDocsComponent {
             typescriptFileCode: timeSizesSrcTs,
             code: timeSizesSrcH,
             component: 'TimeSizesExampleComponent'
-        }
-    ];
-
-    timeNoSpinners: ExampleFile[] = [
-        {
-            language: 'html',
-            fileName: 'time-no-spinners-example',
-            code: timeNoSpinnersSrc,
-            typescriptFileCode: timeNoSpinnersSrcTs,
-            component: 'TimeNoSpinnersExampleComponent'
         }
     ];
 

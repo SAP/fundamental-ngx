@@ -20,8 +20,4 @@ export class TimePickerFormExampleComponent {
     isValid(): boolean {
         return this.customForm.get('time').valid;
     }
-
-    a() {
-        console.log(this.customForm.get('time'));
-    }
 }
