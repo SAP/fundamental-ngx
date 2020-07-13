@@ -22,7 +22,19 @@ export class TableWrapperComponent implements AfterContentInit {
 
     public ngAfterContentInit(): void {
         if (this.elementRef.nativeElement && this.elementRef.nativeElement.firstChild) {
-            this.elementRef.nativeElement.firstChild.classList.add('fd-table');
+            const tableElement = this.elementRef.nativeElement.firstChild;
+            tableElement.classList.add('fd-table');
+            if (tableElement.children) {
+                for (let i = 0; i < tableElement.children.length; i++) {
+                    if (tableElement.children[i].tagName === 'THEAD') {
+                        tableElement.children[i].classList.add('fd-table__header');
+                    } else if (tableElement.children[i].tagName === 'TBODY') {
+                        tableElement.children[i].classList.add('fd-table__body');
+                    } else if (tableElement.children[i].tagName === 'TFOOT') {
+                        tableElement.children[i].classList.add('fd-table__footer');
+                    }
+                }
+            }
         }
     }
 }
