@@ -27,21 +27,44 @@ class VerticalCarouselComponent {
     @ViewChildren(CarouselItemDirective)
     items: QueryList<CarouselItemDirective>;
 
-    configuration: CarouselConfig = { vertical: true };
+    configuration: CarouselConfig = { vertical: true,  elementsAtOnce: 1 };
 }
 
 @Component({
     template: `
-        <div #directiveElement fdCarousel [config]="configuration">
-            <div fdCarouselItem value="1" style="width: 30px"></div>
-            <div fdCarouselItem value="2" style="width: 30px"></div>
-            <div fdCarouselItem value="3" style="width: 30px"></div>
-            <div fdCarouselItem value="4" style="width: 30px"></div>
-            <div fdCarouselItem value="5" style="width: 30px"></div>
-            <div fdCarouselItem value="6" style="width: 30px"></div>
-            <div fdCarouselItem value="7" style="width: 30px"></div>
+        <div #directiveElement class="container-ex" fdCarousel [config]="configuration">
+            <div fdCarouselItem value="1" [initialWidth]="30" class="element"></div>
+            <div fdCarouselItem value="2" [initialWidth]="30" class="element"></div>
+            <div fdCarouselItem value="3" [initialWidth]="30" class="element"></div>
+            <div fdCarouselItem value="4" [initialWidth]="30" class="element"></div>
+            <div fdCarouselItem value="5" [initialWidth]="30" class="element"></div>
+            <div fdCarouselItem value="6" [initialWidth]="30" class="element"></div>
+            <div fdCarouselItem value="7" [initialWidth]="30" class="element"></div>
         </div>
-    `
+    `,
+    styles: [
+        `            
+            .element {
+                width: 30px;
+                min-width: 30px;
+                height: 30px;
+                align-items: center;
+                display: flex;
+            }
+
+
+            .container-wrap {
+                overflow: hidden;
+                width: 210px;
+                min-width: 210px;
+            }
+
+            .container-ex {
+                display: flex;
+                width: 210px;
+                min-width: 210px;
+            }`
+    ]
 })
 class HorizontalCarouselComponent {
     @ViewChild(CarouselDirective)
@@ -50,7 +73,7 @@ class HorizontalCarouselComponent {
     @ViewChildren(CarouselItemDirective)
     items: QueryList<CarouselItemDirective>;
 
-    configuration: CarouselConfig = {};
+    configuration: CarouselConfig = { vertical: false, elementsAtOnce: 1 };
 }
 
 describe('CarouselDirective', () => {
@@ -108,22 +131,18 @@ describe('CarouselDirective', () => {
         expect(verticalDirective['_currentTransitionPx']).toBe(-distance);
     });
 
-    it('should center, when scrolled', () => {
-        const distanceCenter: number = verticalComponent.items.first.getHeight() * 4;
-
-        verticalDirective.config.infinite = true;
+    it('should put translate on last and first', () => {
+        const height: number = verticalComponent.items.first.getHeight();
 
         verticalDirective.goToItem(verticalComponent.items.toArray()[6], false);
         verticalFixture.detectChanges();
-        verticalFixture.detectChanges();
 
-        expect(verticalDirective['_currentTransitionPx']).toBe(-distanceCenter);
+        expect(verticalDirective['_currentTransitionPx']).toBe(-height * 6);
 
         verticalDirective.goToItem(verticalComponent.items.toArray()[0], false);
         verticalFixture.detectChanges();
-        verticalFixture.detectChanges();
 
-        expect(verticalDirective['_currentTransitionPx']).toBe(-distanceCenter);
+        expect(verticalDirective['_currentTransitionPx']).toBe(0);
     });
 
     it('should handle pan start and move', () => {
@@ -187,4 +206,61 @@ describe('CarouselDirective', () => {
 
         expect(verticalDirective['_currentTransitionPx']).toBe(0);
     });
+
+    it('horizontal should handle pan start and move', () => {
+
+        spyOn<any>(horizontalDirective.dragged, 'emit').and.callThrough();
+
+        (<any>horizontalDirective)._handlePanStart();
+
+        expect(horizontalDirective.dragged.emit).toHaveBeenCalledWith(true);
+
+        const firstDelta: number = -10;
+        (<any>horizontalDirective)._handlePan(firstDelta);
+
+        horizontalFixture.detectChanges();
+
+        expect(horizontalDirective['_currentTransitionPx']).toBe(firstDelta);
+
+        const secondDelta: number = -20;
+        (<any>horizontalDirective)._handlePan(secondDelta);
+
+        horizontalFixture.detectChanges();
+
+        expect(horizontalDirective['_currentTransitionPx']).toBe(secondDelta);
+
+        const thirdDelta: number = -120;
+        (<any>horizontalDirective)._handlePan(thirdDelta);
+
+        horizontalFixture.detectChanges();
+
+        expect(horizontalDirective['_currentTransitionPx']).toBe(thirdDelta);
+        expect((<any>horizontalDirective)._getClosest().value).toBe(horizontalDirective.items.toArray()[4].value);
+    });
+
+    it('horizontal should return closest with half', () => {
+
+        horizontalDirective['_currentTransitionPx'] = -160;
+
+        expect((<any>horizontalDirective)._getClosest().value).toBe(horizontalDirective.items.toArray()[5].value);
+        horizontalDirective['_currentTransitionPx'] = -170;
+
+        expect((<any>horizontalDirective)._getClosest().value).toBe(horizontalDirective.items.toArray()[6].value);
+    });
+
+    it('horizontal should handle get put last/first element when pan after/before list ', () => {
+
+        (<any>horizontalDirective)._handlePanStart();
+
+        (<any>horizontalDirective)._handlePanEnd(-6000);
+        horizontalFixture.detectChanges();
+
+        expect(horizontalDirective['_currentTransitionPx']).toBe(-horizontalDirective.items.first.getWidth() * 6);
+
+        (<any>horizontalDirective)._handlePanEnd(1000);
+        horizontalFixture.detectChanges();
+
+        expect(horizontalDirective['_currentTransitionPx']).toBe(0);
+    });
+
 });

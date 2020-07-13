@@ -75,6 +75,7 @@ export class CarouselDirective implements AfterContentInit {
 
         if (this.config.infinite) {
             this._centerActive(index);
+
             index = this.getIndexOfItem(item);
         }
 
@@ -220,29 +221,10 @@ export class CarouselDirective implements AfterContentInit {
         this._currentTransitionPx = transitionPx;
 
         if (this.config.vertical) {
-
             this._elementRef.nativeElement.style.transform = 'translateY(' + this._currentTransitionPx + 'px)';
-
         } else {
-
             this._elementRef.nativeElement.style.transform = 'translateX(' + this._currentTransitionPx + 'px)';
-
         }
-
-        // TODO Test scrolling
-        // this._elementRef.nativeElement.scrollTo({
-        //     top: this._currentTransitionPx,
-        //     left: 0,
-        //     behavior: 'smooth'
-        // });
-
-
-        // TODO Consider animation usage -> poor performance
-        // style({ transform: `translateY(${offset}px)` })
-        // const myAnimation: AnimationFactory = this.buildAnimation(this._currentTransitionPx, time);
-        //
-        // this._player = myAnimation.create(this._elementRef.nativeElement);
-        // this._player.play();
     }
 
     /** @hidden */

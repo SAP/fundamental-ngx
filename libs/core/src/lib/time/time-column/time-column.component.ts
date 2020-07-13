@@ -6,7 +6,7 @@ import {
     EventEmitter,
     HostBinding,
     HostListener,
-    Input,
+    Input, OnDestroy,
     OnInit,
     Output,
     QueryList,
@@ -18,7 +18,8 @@ import { CarouselConfig, CarouselDirective } from '../../utils/directives/carous
 import { CarouselItemDirective } from '../../utils/directives/carousel/carousel-item.directive';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { TimeColumnConfig } from './time-column-config';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { buffer, debounceTime, map } from 'rxjs/operators';
 
 
 let timeColumnUniqueId: number = 0;
@@ -30,7 +31,7 @@ let timeColumnUniqueId: number = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TimeColumnComponent implements AfterViewInit, OnInit {
+export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** Popover workaround, before initialisation the carousel items can't return size */
     readonly InitialTimeHeight: number = 46;
@@ -141,11 +142,23 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     config: CarouselConfig;
     currentIndicatorId: string = this.id + '-current-indicator';
 
-    private _numericDownEvent: Subject<number> = new Subject<number>();
+    /** @hidden */
+    private _numericDownEvent: Subject<string> = new Subject<string>();
+
+    /** @hidden */
     private _activeItem: any;
+
+    /** @hidden */
     private _activeCarouselItem: CarouselItemDirective;
+
+    /** @hidden */
     private _isDragging: boolean = false;
+
+    /** @hidden */
     private _initialised: boolean = false;
+
+    /** @hidden */
+    private _subscriptions: Subscription = new Subscription();
 
     constructor(
         private _changeDetRef: ChangeDetectorRef
@@ -159,7 +172,16 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
             this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
         }
 
-        this._numericDownEvent.pipe()
+        const trigger = this._numericDownEvent.pipe(debounceTime(this.typeaheadDebounceInterval));
+
+        this._subscriptions.add(
+            this._numericDownEvent.pipe(
+                buffer(trigger),
+                map(keys => keys.join('')),
+                map(value => this._getValue(value)),
+                map(value => this._getItem(value))
+            ).subscribe(item => this._pickTime(item, false, true))
+        );
     }
 
     /** @hidden */
@@ -169,6 +191,11 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         }
         this._pickTime(this._getItem(this._activeItem), true);
         this._initialised = true;
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */
@@ -190,10 +217,8 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
             this.focusPreviousColumn.emit();
         } else if (KeyUtil.isKey(event, 'ArrowRight')) {
             this.focusNextColumn.emit();
-        } else if (KeyUtil.isKeyType(event, 'numeric')) {
-            // TODO
-            const value = Number(event.key);
-            this._pickTime(this._getItem(value), false, true);
+        } else if (KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical')) {
+            this._numericDownEvent.next(event.key)
         }
     }
 
@@ -286,11 +311,11 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
     }
 
     /** Returns item with passed value */
-    private _getItem(value: number): CarouselItemDirective {
+    private _getItem(value: any): CarouselItemDirective {
         return this.items.find(item => item.value === value);
     }
 
-    /**  */
+    /** @hidden */
     private _triggerCarousel(item: CarouselItemDirective, smooth?: boolean): void {
         const array = this.items.toArray();
         let index: number = array.findIndex(_item => _item === item) - this.offset;
@@ -302,10 +327,19 @@ export class TimeColumnComponent implements AfterViewInit, OnInit {
         this.carousel.goToItem(array[index], smooth);
     }
 
-    /** */
+    /** Focus current indicator, which allows to handle keydown events inside column */
     private _focusIndicator(): void {
         if (document.getElementById(this.currentIndicatorId)) {
             document.getElementById(this.currentIndicatorId).focus();
+        }
+    }
+
+    /** @hidden */
+    private _getValue(value: string): any {
+        if (!isNaN(Number(value))) {
+            return Number(value);
+        } else {
+            return value;
         }
     }
 }

@@ -201,10 +201,8 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     }
 
     /** @hidden */
-    timeInputChanged(timeFromInput: string) {
-        console.log(timeFromInput);
+    timeInputChanged(timeFromInput: string): void {
         const time = this.timeAdapter.parse(timeFromInput, this.displaySeconds, this.displayMinutes, this.meridian);
-        console.log(time);
         if (time) {
             this.isInvalidTimeInput = false;
             this.time = time;
