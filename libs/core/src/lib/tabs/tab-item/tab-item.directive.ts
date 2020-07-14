@@ -1,4 +1,4 @@
-import { ContentChild, Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { ContentChild, Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
@@ -34,6 +34,12 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     /** This should be used only on `filterMode`. Flag should be enable for first item */
     @Input()
     header: boolean;
+
+    /** Disabled state for tab item */
+    @Input()
+    @HostBinding('attr.aria-disabled')
+    @HostBinding('class.is-disabled')
+    disabled: boolean = false;
 
     /** Defines if there will be added fd-tabs__item class. Enabled by default. */
     @Input()

@@ -15,7 +15,8 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-link]',
     host: {
-        role: 'tab'
+        role: 'tab',
+        tabindex: '0'
     }
 })
 export class TabLinkDirective extends AbstractFdNgxClass {
@@ -30,6 +31,7 @@ export class TabLinkDirective extends AbstractFdNgxClass {
      */
     @Input()
     @HostBinding('attr.aria-disabled')
+    @HostBinding('class.is-disabled')
     disabled: boolean;
 
     /** Event Emitted always when, any keyboard event is dispatched on this element */

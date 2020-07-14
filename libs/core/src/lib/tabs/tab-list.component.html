@@ -7,12 +7,12 @@
         <li fd-tab-item [header]="tab.header" [tabItemState]="tab.tabState">
             <a
                 fd-tab-link
-                #tabLink
                 [active]="tab.expanded"
                 [attr.tabindex]="0"
                 [attr.aria-controls]="tab.id"
                 [attr.aria-label]="tab.ariaLabel || null"
                 [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
+                [disabled]="tab.disabled"
                 (keydown)="tabHeaderKeyHandler(i, $event)"
                 (click)="tabHeaderClickHandler(i)"
             >
