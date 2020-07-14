@@ -1,0 +1,39 @@
+<fdp-form-group [multiLayout]="true" [formGroup]="customForm" [object]="switchFormInitData">
+  <fdp-form-field #switch1 id="switch1" label="Form Switch 1" zone="zLeft" rank="4">
+    <fdp-switch
+      name="switch-1"
+      [ariaLabel]="'Switch'"
+      [ariaLabelledby]="'switch-label'"
+      [contentDensity]="'cozy'"
+      [semantic]="false"
+      [formControl]="switch1.formControl"
+      (switchChange)="onSwitchChange($event)">
+    </fdp-switch>
+  </fdp-form-field>
+
+  <fdp-form-field #switch2 id="switch2" label="Form Switch 2" zone="zLeft" rank="4">
+    <fdp-switch
+      name="switch-2"
+      [ariaLabel]="'Switch'"
+      [ariaLabelledby]="'switch-label'"
+      [contentDensity]="'compact'"
+      [semantic]="true"
+      [formControl]="switch2.formControl"
+      (switchChange)="onSwitchChange($event)">
+    </fdp-switch>
+  </fdp-form-field>
+
+  <fdp-form-field #switch3 id="switch3" label="Form Switch 3" zone="zLeft" rank="4">
+    <fdp-switch
+      name="switch-3"
+      [ariaLabel]="'Switch'"
+      [ariaLabelledby]="'switch-label'"
+      [contentDensity]="'compact'"
+      [semantic]="false"
+      [formControl]="switch3.formControl"
+      (switchChange)="onSwitchChange($event)">
+    </fdp-switch>
+  </fdp-form-field>
+</fdp-form-group>
+
+<div style="padding-left: 2rem;">form value: {{ customForm.getRawValue() | json }}</div>

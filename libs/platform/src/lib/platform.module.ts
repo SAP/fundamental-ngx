@@ -15,24 +15,27 @@ import { PlatformSplitMenuButtonModule } from './components/split-menu-button/sp
 import { PlatformInfoLabelModule } from './components/info-label/info-label.module';
 import { PlatformCheckboxModule } from './components/form/checkbox/checkbox.module';
 import { PlatformTextAreaModule } from './components/form/text-area/text-area.module';
+import { PlatformSwitchModule } from './components/form/switch/switch.module';
 
 @NgModule({
-    imports: [CommonModule, FundamentalNgxCoreModule],
-    exports: [
-        FdpFormGroupModule,
-        PlatformButtonModule,
-        PlatformCheckboxModule,
-        PlatformSearchFieldModule,
-        PlatformActionBarModule,
-        PlatformActionButtonGroupModule,
-        PlatformMenuModule,
-        PlatformSelectModule,
-        PlatformLinkModule,
-        PlatformRadioGroupModule,
-        PlatformMenuButtonModule,
-        PlatformSplitMenuButtonModule,
-        PlatformInfoLabelModule,
-        PlatformTextAreaModule
-    ]
+  imports: [CommonModule, FundamentalNgxCoreModule],
+  exports: [
+    FdpFormGroupModule,
+    PlatformButtonModule,
+    PlatformCheckboxModule,
+    PlatformSearchFieldModule,
+    PlatformActionBarModule,
+    PlatformActionButtonGroupModule,
+    PlatformMenuModule,
+    PlatformSelectModule,
+    PlatformLinkModule,
+    PlatformRadioGroupModule,
+    PlatformMenuButtonModule,
+    PlatformSplitMenuButtonModule,
+    PlatformInfoLabelModule,
+    PlatformTextAreaModule,
+    PlatformSwitchModule
+  ]
 })
-export class FundamentalNgxPlatformModule {}
+export class FundamentalNgxPlatformModule {
+}
