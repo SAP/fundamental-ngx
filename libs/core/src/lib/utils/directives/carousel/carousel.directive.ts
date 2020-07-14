@@ -51,7 +51,7 @@ export class CarouselDirective implements AfterContentInit {
     @Output()
     readonly activeChange: EventEmitter<CarouselItemDirective> = new EventEmitter<CarouselItemDirective>();
 
-    /** Event thrown, when element starts/stops to be dragged */
+    /** Event thrown when element is dragged. Emits "true" when drag starts and "false" when drag ends. */
     @Output()
     readonly dragStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
