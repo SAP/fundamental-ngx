@@ -11,3 +11,4 @@ export * from './lib/components/select/public_api';
 export * from './lib/components/split-menu-button/public_api';
 export * from './lib/domain/public_api';
 export * from './lib/components/info-label/public_api';
+export * from './lib/components/panel/public_api';

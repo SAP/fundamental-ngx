@@ -1,0 +1,19 @@
+<fd-panel
+    [expanded]="expanded"
+    [fixed]="!collapsable"
+    [compact]="contentDensity === 'compact'"
+    [expandAriaLabel]="expandAriaLabel"
+    (expandedChange)="_onExpandedChange($event)"
+>
+    <h5 fd-panel-title>{{ title }}</h5>
+
+    <ng-container *ngIf="panelActions">
+        <fd-toolbar [size]="contentDensity" [shouldOverflow]="true" [fdType]="'transparent'" [clearBorder]="true">
+            <ng-content select="fdp-panel-actions"></ng-content>
+        </fd-toolbar>
+    </ng-container>
+
+    <div fd-panel-content [attr.aria-expanded]="expanded" [attr.aria-hidden]="!expanded">
+        <ng-content select="fdp-panel-content"></ng-content>
+    </div>
+</fd-panel>
