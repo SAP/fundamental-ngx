@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.10...v0.20.1-rc.11) (2020-07-14)
+
+
+### Bug Fixes
+
+* add disabled state to tabs ([#2788](https://github.com/SAP/fundamental-ngx/issues/2788)) ([628a580](https://github.com/SAP/fundamental-ngx/commit/628a580af89d66d9c2b149f6c36d1e12bdce040e))
+
 ### [0.20.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.9...v0.20.1-rc.10) (2020-07-13)
 
 ### [0.20.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.8...v0.20.1-rc.9) (2020-07-13)
