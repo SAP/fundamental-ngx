@@ -1,0 +1,4 @@
+export * from './panel.component';
+export * from './panel-content/panel-content.component';
+export * from './panel-actions/panel-actions.component';
+export * from './panel.module';
