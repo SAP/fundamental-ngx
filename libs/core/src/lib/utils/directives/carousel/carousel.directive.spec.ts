@@ -146,11 +146,11 @@ describe('CarouselDirective', () => {
     });
 
     it('should handle pan start and move', () => {
-        spyOn<any>(verticalDirective.dragged, 'emit').and.callThrough();
+        spyOn<any>(verticalDirective.dragStateChange, 'emit').and.callThrough();
 
         (<any>verticalDirective)._handlePanStart();
 
-        expect(verticalDirective.dragged.emit).toHaveBeenCalledWith(true);
+        expect(verticalDirective.dragStateChange.emit).toHaveBeenCalledWith(true);
 
         const firstDelta: number = -10;
         (<any>verticalDirective)._handlePan(firstDelta);
@@ -209,11 +209,11 @@ describe('CarouselDirective', () => {
 
     it('horizontal should handle pan start and move', () => {
 
-        spyOn<any>(horizontalDirective.dragged, 'emit').and.callThrough();
+        spyOn<any>(horizontalDirective.dragStateChange, 'emit').and.callThrough();
 
         (<any>horizontalDirective)._handlePanStart();
 
-        expect(horizontalDirective.dragged.emit).toHaveBeenCalledWith(true);
+        expect(horizontalDirective.dragStateChange.emit).toHaveBeenCalledWith(true);
 
         const firstDelta: number = -10;
         (<any>horizontalDirective)._handlePan(firstDelta);

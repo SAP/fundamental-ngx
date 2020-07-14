@@ -9,7 +9,7 @@
         [ngClass]="{'is-hidden': !active}"
         [config]="config"
         (activeChange)="activeChangedHandle($event)"
-        (dragged)="handleDrag($event)"
+        (dragStateChange)="handleDrag($event)"
         fdCarousel>
         <li class="fd-time__item" *ngFor="let row of rows; let index = index" [carouselItemId]="id + index"
             [initialHeight]="compact ? InitialCompactTimeHeight : InitialTimeHeight"

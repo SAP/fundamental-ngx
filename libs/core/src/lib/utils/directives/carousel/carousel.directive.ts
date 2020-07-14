@@ -9,13 +9,9 @@ import {
     Output,
     QueryList
 } from '@angular/core';
-import {
-    AnimationPlayer,
-} from '@angular/animations';
 import { CarouselItemDirective } from './carousel-item.directive';
 import * as Hammer from 'hammerjs';
 import { HammerConfig } from './carousel.module';
-import { Subject } from 'rxjs';
 
 
 export interface CarouselConfig {
@@ -45,26 +41,34 @@ export class CarouselDirective implements AfterContentInit {
     @Input()
     active: CarouselItemDirective;
 
-    /** Whether support for mouse down, or tap should be enabled */
+    /**
+     * Defines if support for gestures, like touch swipe or mouse drag should be enabled
+     */
     @Input()
-    panSupport: boolean = true;
+    gestureSupport: boolean = true;
 
     /** Event thrown, when active element is changed */
     @Output()
     readonly activeChange: EventEmitter<CarouselItemDirective> = new EventEmitter<CarouselItemDirective>();
 
-    /** Event thrown, when element is started/stopped to be dragged */
+    /** Event thrown, when element starts/stops to be dragged */
     @Output()
-    readonly dragged: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly dragStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
     @ContentChildren(CarouselItemDirective)
     items: QueryList<CarouselItemDirective>;
 
+    /** @hidden */
     private _previousActiveItem: CarouselItemDirective;
+
+    /** @hidden */
     private _lastDistance: number = 0;
+
+    /** @hidden */
     private _currentTransitionPx: number = 0;
 
+    /** @hidden */
     constructor(
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef
@@ -111,7 +115,7 @@ export class CarouselDirective implements AfterContentInit {
 
         this.activeChange.emit(closestItem);
 
-        this.dragged.emit(false);
+        this.dragStateChange.emit(false);
         this._lastDistance = 0;
     }
 
@@ -215,7 +219,7 @@ export class CarouselDirective implements AfterContentInit {
     /** Pam Start handler, removes transition duration, */
     private _handlePanStart(): void {
         this._elementRef.nativeElement.style.transitionDuration = '0s';
-        this.dragged.emit(true);
+        this.dragStateChange.emit(true);
     }
 
     /**

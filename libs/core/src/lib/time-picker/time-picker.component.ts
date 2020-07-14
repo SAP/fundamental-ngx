@@ -12,10 +12,11 @@ import {
 } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
+import { Placement } from 'popper.js';
 
 @Component({
     selector: 'fd-time-picker',
@@ -95,6 +96,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     tablet: boolean = false;
 
     /**
+     *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
+     */
+    @Input()
+    placement: Placement = 'bottom-start';
+
+    /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
@@ -145,7 +153,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     onTouched: Function = () => {};
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, public timeAdapter: TimeFormatParser) {}
+    constructor(private _cd: ChangeDetectorRef, private _timeAdapter: TimeFormatParser) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -180,7 +188,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
 
     /** @hidden */
     getFormattedTime(): string {
-        const formattedTime = this.timeAdapter.format(
+        const formattedTime = this._timeAdapter.format(
             this.time,
             this.displaySeconds,
             this.displayMinutes,
@@ -189,6 +197,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
         return formattedTime !== undefined ? formattedTime : '';
     }
 
+    /**
+     *  @hidden
+     * When the is open state is changed, there should be at least one active item, which by default is hour.
+     */
     handleIsOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
         if (isOpen) {
@@ -198,7 +210,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
 
     /** @hidden */
     timeInputChanged(timeFromInput: string): void {
-        const time = this.timeAdapter.parse(timeFromInput, this.displaySeconds, this.displayMinutes, this.meridian);
+        const time = this._timeAdapter.parse(timeFromInput, this.displaySeconds, this.displayMinutes, this.meridian);
         if (time) {
             this.isInvalidTimeInput = false;
             this.time = time;
@@ -220,13 +232,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     inputGroupClicked($event: MouseEvent): void {
         if (!this.isOpen && !this.disabled) {
             $event.stopPropagation();
-            this.handleIsOpenChange(true);
-        }
-    }
-
-    /** @hidden */
-    onFocusHandler(): void {
-        if (!this.isOpen) {
             this.handleIsOpenChange(true);
         }
     }

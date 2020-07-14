@@ -9,9 +9,6 @@ import { TimePickerComponent } from '@fundamental-ngx/core';
 })
 export class TimePickerFormExampleComponent {
 
-    @ViewChild('timePickerComponent')
-    timePickerComponent: TimePickerComponent;
-
     customForm = new FormGroup({
         time: new FormControl(''),
         disabledTime: new FormControl({ value: { hour: 12, minute: 34, second: 10 }, disabled: true })

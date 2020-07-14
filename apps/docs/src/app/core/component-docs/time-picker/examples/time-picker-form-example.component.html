@@ -1,7 +1,7 @@
 <form [formGroup]="customForm" class="flex-form">
     <div fd-form-item>
         <label fd-form-label>TimePicker</label>
-        <fd-time-picker #timePickerComponent formControlName="time"></fd-time-picker>
+        <fd-time-picker formControlName="time"></fd-time-picker>
         <fd-form-message [type]="'success'" *ngIf="isValid()">Valid Time</fd-form-message>
         <fd-form-message [type]="'error'" *ngIf="!isValid()">Invalid Time</fd-form-message>
         <br />

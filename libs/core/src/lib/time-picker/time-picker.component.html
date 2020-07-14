@@ -1,4 +1,9 @@
-<fd-popover [(isOpen)]="isOpen" (isOpenChange)="handleIsOpenChange($event)" [triggers]="[]">
+<fd-popover [(isOpen)]="isOpen"
+            [triggers]="[]"
+            [disabled]="disabled"
+            [placement]="placement"
+            [closeOnEscapeKey]="true"
+            [focusTrapped]="true">
     <fd-popover-control>
         <fd-input-group
             [compact]="compact"
@@ -16,7 +21,6 @@
                 fd-input-group-input
                 (keyup.enter)="timeInputChanged($event.currentTarget.value)"
                 (focusout)="timeInputChanged(inputElement.value)"
-                (focus)="onFocusHandler()"
                 (click)="inputGroupClicked($event)"
                 [disabled]="disabled"
                 type="text"
@@ -34,7 +38,6 @@
             [meridian]="meridian"
             [(ngModel)]="time"
             [keepTwoDigits]="keepTwoDigitsTime"
-            (focusFirstElement)="inputElement.focus()"
             (ngModelChange)="timeFromTimeComponentChanged()"
             [displayMinutes]="displayMinutes"
             [displaySeconds]="displaySeconds"
