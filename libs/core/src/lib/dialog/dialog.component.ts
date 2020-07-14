@@ -129,7 +129,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._deactivateFocus();
+        this._deactivateFocusTrap();
         this._subscriptions.unsubscribe();
     }
 
@@ -190,7 +190,6 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
             try {
                 this._focusTrap = focusTrap(this._elementRef.nativeElement, {
                     clickOutsideDeactivates: this.dialogConfig.backdropClickCloseable && this.dialogConfig.hasBackdrop,
-                    initialFocus: this._elementRef.nativeElement.querySelector('[fd-dialog-decisive-button]'),
                     escapeDeactivates: false,
                     allowOutsideClick: (event: MouseEvent) => true
                 });
@@ -202,7 +201,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
     }
 
     /** @hidden */
-    private _deactivateFocus(): void {
+    private _deactivateFocusTrap(): void {
         if (this._focusTrap) {
             this._focusTrap.deactivate();
         }

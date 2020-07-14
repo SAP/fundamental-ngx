@@ -20,6 +20,7 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
                     <button
                         fd-button
                         fdType="emphasized"
+                        fd-initial-focus
                         fd-dialog-decisive-button
                         [compact]="true"
                         (click)="openDialog()"
