@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.13...v0.20.1-rc.14) (2020-07-15)
+
+
+### Bug Fixes
+
+* introduce Avatar component ([#2852](https://github.com/SAP/fundamental-ngx/issues/2852)) ([060755d](https://github.com/SAP/fundamental-ngx/commit/060755deff869a5d9dd1ffe928c21e6b6b9382f6))
+
 ### [0.20.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.12...v0.20.1-rc.13) (2020-07-15)
 
 ### [0.20.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.11...v0.20.1-rc.12) (2020-07-14)
