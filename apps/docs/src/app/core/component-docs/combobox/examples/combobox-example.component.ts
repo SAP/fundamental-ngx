@@ -1,19 +1,8 @@
 import { Component } from '@angular/core';
-import { DIALOG_CONFIG, DialogConfig, MobileModeConfig } from '@fundamental-ngx/core';
 
-
-const customConfig: DialogConfig = {
-    mobile: true,
-    verticalPadding: false,
-    maxWidth: '320px',
-    maxHeight: '640px'
-};
 @Component({
     selector: 'fd-combobox-example',
-    templateUrl: './combobox-example.component.html',
-    providers: [
-        { provide: DIALOG_CONFIG, useValue: customConfig },
-    ]
+    templateUrl: './combobox-example.component.html'
 })
 export class ComboboxExampleComponent {
     searchTermOne: string = '';
@@ -28,18 +17,5 @@ export class ComboboxExampleComponent {
         'Banana',
         'Kiwi',
         'Strawberry',
-        'Strawberry1',
-        'Strawberry2',
-        'Strawberry3',
-        'Strawberry4',
-        'Strawberry5',
-        'Strawberry6',
     ];
-
-    secondConfig: MobileModeConfig = {
-        title: 'Title',
-        approveButtonText: 'Approve',
-        cancelButtonText: 'Cancel',
-        hasCloseButton: true
-    };
 }

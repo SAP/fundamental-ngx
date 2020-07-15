@@ -37,9 +37,9 @@
         [disabled]="disabled || readOnly"
         [isControl]="true"
         (addOnButtonClicked)="onPrimaryButtonClick($event)"
-        [isExpanded]="open && displayedValues.length"
+        [isExpanded]="!mobile && open && displayedValues.length"
         [attr.aria-readonly]="readOnly"
-        (click)="isOpenChangeHandle(!open || mobile)">
+        (click)="mobile && isOpenChangeHandle(true)">
         <input
             fd-auto-complete
             [enable]="autoComplete && !mobile"
