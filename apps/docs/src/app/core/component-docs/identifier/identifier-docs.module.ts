@@ -12,7 +12,7 @@ import {
     InitialsIdentifierExampleComponent,
     TransparentIdentifierExampleComponent
 } from './examples/identifier-examples.component';
-import { IdentifierModule } from '@fundamental-ngx/core';
+import { IdentifierModule, MessageStripModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, IdentifierModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, IdentifierModule, MessageStripModule],
     exports: [RouterModule],
     declarations: [
         IdentifierDocsComponent,

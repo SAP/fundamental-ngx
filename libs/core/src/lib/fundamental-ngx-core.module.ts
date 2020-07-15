@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ActionBarModule } from './action-bar/action-bar.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
+import { AvatarModule } from './avatar/avatar.module';
 import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
@@ -67,6 +68,7 @@ import { StepInputModule } from './step-input/step-input.module';
     exports: [
         ActionBarModule,
         AlertModule,
+        AvatarModule,
         BarModule,
         BreadcrumbModule,
         BusyIndicatorModule,

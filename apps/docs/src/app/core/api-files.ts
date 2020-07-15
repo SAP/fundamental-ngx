@@ -15,6 +15,7 @@ export const API_FILES = {
         'ActionBarTitleDirective'
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
+    avatar: ['AvatarComponent'],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
