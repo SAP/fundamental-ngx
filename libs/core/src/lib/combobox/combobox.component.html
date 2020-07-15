@@ -1,4 +1,6 @@
+<ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
 <fd-popover
+    *ngIf="!mobile"
     [isOpen]="open && displayedValues && displayedValues.length"
     (isOpenChange)="isOpenChangeHandle($event)"
     [fillControlMode]="'at-least'"
@@ -8,77 +10,79 @@
     class="fd-combobox-popover-custom"
 >
     <fd-popover-control>
-        <fd-input-group
-            [compact]="compact"
-            [button]="true"
-            [glyph]="glyph"
-            [state]="state"
-            [buttonFocusable]="buttonFocusable"
-            [disabled]="disabled || readOnly"
-            [isControl]="true"
-            (addOnButtonClicked)="onPrimaryButtonClick($event)"
-            [isExpanded]="open && displayedValues.length"
-            [attr.aria-readonly]="readOnly"
-        >
-            <input
-                fd-auto-complete
-                [enable]="autoComplete"
-                [displayFn]="displayFn"
-                [options]="dropdownValues"
-                [inputText]="inputText"
-                (onComplete)="handleAutoComplete($event)"
-                #searchInputElement
-                type="text"
-                fd-input-group-input
-                [compact]="compact"
-                (keydown)="onInputKeydownHandler($event)"
-                [disabled]="disabled"
-                [(ngModel)]="inputText"
-                (ngModelChange)="handleSearchTermChange()"
-                [placeholder]="placeholder"
-                (focus)="onTouched()"
-                (blur)="handleBlur()"
-                [attr.aria-expanded]="open && displayedValues.length"
-                [readonly]="readOnly"
-                [attr.aria-readonly]="readOnly"
-            />
-        </fd-input-group>
+        <ng-container *ngTemplateOutlet="control"></ng-container>
     </fd-popover-control>
     <fd-popover-body *ngIf="displayedValues && displayedValues.length">
-        <ul
-            fd-list
-            [dropdownMode]="true"
-            class="fd-combobox-input-menu-overflow"
-            [style.maxHeight]="maxHeight"
-            [hasMessage]="listMessages && listMessages.length > 0"
-        >
-            <ng-content></ng-content>
-            <ng-container *ngIf="groupFn">
-                <ng-container
-                    *ngFor="let group of displayedValues | listGroupPipe: groupFn | keyvalue; let groupIndex = index"
-                >
-                    <li fd-list-group-header>
-                        {{ group.key }}
-                    </li>
-                    <li
-                        *ngFor="let term of group.value"
-                        (click)="onMenuClickHandler(term)"
-                        (keydown)="onListKeydownHandler($event)"
-                        fd-list-item
-                        tabindex="0"
-                        class="fd-combobox-list-item"
-                        [selected]="inputText === (term | displayFnPipe: displayFn)"
-                    >
-                        <ng-container
-                            [ngTemplateOutlet]="itemSource"
-                            [ngTemplateOutletContext]="{ term: term }"
-                        ></ng-container>
-                    </li>
-                </ng-container>
-            </ng-container>
-            <ng-container *ngIf="!groupFn">
+        <ng-container *ngTemplateOutlet="list"></ng-container>
+        <ng-content></ng-content>
+    </fd-popover-body>
+</fd-popover>
+
+<ng-template let-term="term" #itemSource>
+    <span *ngIf="!itemTemplate" [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting">
+    </span>
+    <ng-container *ngIf="itemTemplate">
+        <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: term }"></ng-container>
+    </ng-container>
+</ng-template>
+
+
+<ng-template #control>
+    <fd-input-group
+        [compact]="compact"
+        [button]="true"
+        [glyph]="glyph"
+        [state]="state"
+        [buttonFocusable]="buttonFocusable"
+        [disabled]="disabled || readOnly"
+        [isControl]="true"
+        (addOnButtonClicked)="onPrimaryButtonClick($event)"
+        [isExpanded]="open && displayedValues.length"
+        [attr.aria-readonly]="readOnly"
+        (click)="isOpenChangeHandle(!open || mobile)">
+        <input
+            fd-auto-complete
+            [enable]="autoComplete && !mobile"
+            [displayFn]="displayFn"
+            [options]="dropdownValues"
+            [inputText]="inputText"
+            (onComplete)="handleAutoComplete($event)"
+            #searchInputElement
+            type="text"
+            fd-input-group-input
+            [compact]="compact"
+            (keydown)="onInputKeydownHandler($event)"
+            [disabled]="disabled"
+            [(ngModel)]="inputText"
+            (ngModelChange)="handleSearchTermChange()"
+            [placeholder]="placeholder"
+            (focus)="onTouched()"
+            (blur)="handleBlur()"
+            [attr.aria-expanded]="open && displayedValues.length"
+            [readonly]="readOnly"
+            [attr.aria-readonly]="readOnly"
+        />
+    </fd-input-group>
+</ng-template>
+
+<ng-template #list>
+    <ul
+        fd-list
+        [dropdownMode]="true"
+        class="fd-combobox-input-menu-overflow"
+        [style.maxHeight]="!mobile && maxHeight"
+        [hasMessage]="listMessages && listMessages.length > 0"
+    >
+        <ng-content></ng-content>
+        <ng-container *ngIf="groupFn">
+            <ng-container
+                *ngFor="let group of displayedValues | listGroupPipe: groupFn | keyvalue"
+            >
+                <li fd-list-group-header>
+                    {{ group.key }}
+                </li>
                 <li
-                    *ngFor="let term of displayedValues"
+                    *ngFor="let term of group.value"
                     (click)="onMenuClickHandler(term)"
                     (keydown)="onListKeydownHandler($event)"
                     fd-list-item
@@ -92,14 +96,22 @@
                     ></ng-container>
                 </li>
             </ng-container>
-        </ul>
-    </fd-popover-body>
-</fd-popover>
-
-<ng-template let-term="term" #itemSource>
-    <span *ngIf="!itemTemplate" [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting">
-    </span>
-    <ng-container *ngIf="itemTemplate">
-        <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: term }"></ng-container>
-    </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!groupFn">
+            <li
+                *ngFor="let term of displayedValues"
+                (click)="onMenuClickHandler(term)"
+                (keydown)="onListKeydownHandler($event)"
+                fd-list-item
+                tabindex="0"
+                class="fd-combobox-list-item"
+                [selected]="inputText === (term | displayFnPipe: displayFn)"
+            >
+                <ng-container
+                    [ngTemplateOutlet]="itemSource"
+                    [ngTemplateOutletContext]="{ term: term }"
+                ></ng-container>
+            </li>
+        </ng-container>
+    </ul>
 </ng-template>

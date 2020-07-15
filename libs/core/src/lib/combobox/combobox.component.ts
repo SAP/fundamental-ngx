@@ -6,11 +6,11 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
+    forwardRef, Inject, Injector,
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
+    OnInit, Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -33,6 +33,11 @@ import { GroupFunction } from '../utils/pipes/list-group.pipe';
 import { InputGroupComponent } from '../input-group/input-group.component';
 import { KeyUtil } from '../utils/functions/key-util';
 import { AutoCompleteEvent } from './auto-complete.directive';
+import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
+import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
+import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 
 /**
  * Allows users to filter through results and select a value.
@@ -63,9 +68,9 @@ import { AutoCompleteEvent } from './auto-complete.directive';
         '[class.fd-combobox-input]': 'true'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy, ComboboxInterface {
 
     /** Values to be filtered in the search input. */
     @Input()
@@ -104,6 +109,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
      */
     @Input()
     openOnKeyboardEvent: boolean = true;
+
+    /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
+    @Input()
+    comboboxMobileConfig: MobileModeConfig;
 
     /**
      *  The state of the form control - applies css classes.
@@ -174,6 +183,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     readOnly: boolean = false;
 
+    /** Whether the combobox should be built on mobile mode */
+    @Input()
+    mobile: boolean = false;
+
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
@@ -206,6 +219,14 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @ContentChildren(ListMessageDirective)
     listMessages: QueryList<ListMessageDirective>;
 
+    /** @hidden */
+    @ViewChild('control', { read: TemplateRef })
+    controlTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('list', { read: TemplateRef })
+    listTemplate: TemplateRef<any>;
+
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     readonly nonOpeningKeys: string[] = [
         'Escape',
@@ -221,7 +242,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** Keys, that will close popover's body, when dispatched on search input */
     readonly closingKeys: string[] = [
-        'Escape',
+        'Escape'
     ];
 
     /** Whether the combobox is opened. */
@@ -253,11 +274,15 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     onTouched: any = () => {
     };
 
+    /** @hidden */
     constructor(
+        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         private _elementRef: ElementRef,
         private _menuKeyboardService: MenuKeyboardService,
-        private _cdRef: ChangeDetectorRef
-    ) {}
+        private _cdRef: ChangeDetectorRef,
+        private _dynamicComponentService: DynamicComponentService
+    ) {
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -282,6 +307,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     ngAfterViewInit(): void {
         this._setupKeyboardService();
         this._addShellbarClass();
+        if (this.mobile) {
+            this._setUpMobileMode();
+        }
     }
 
     /** @hidden */
@@ -332,6 +360,18 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
     }
 
+    /** Handle dialog dismissing, closes popover and sets backup data. */
+    dialogDismiss(term: string): void {
+        this.inputText = term;
+        this.isOpenChangeHandle(false);
+    }
+
+    /** Handle dialog approval, closes popover and propagates data changes. */
+    dialogApprove(): void {
+        this._propagateChange(this.inputText);
+        this.isOpenChangeHandle(false);
+    }
+
     /** Get the input text of the input. */
     get inputText(): string {
         return this.inputTextValue;
@@ -341,10 +381,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     set inputText(value) {
         this.inputTextValue = value;
         this.inputTextChange.emit(value);
-        if (this.communicateByObject) {
-            this.onChange(this._getOptionObjectByDisplayedValue(this.inputTextValue));
-        } else {
-            this.onChange(this.inputTextValue);
+        if (!this.mobile) {
+            this._propagateChange(value);
         }
         this.onTouched();
     }
@@ -375,6 +413,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onPrimaryButtonClick(event: MouseEvent): void {
+        // Prevent primary button click behaviour on mobiles
+        if (this.mobile) {
+            return;
+        }
+
         if (this.searchFn) {
             this.searchFn();
         }
@@ -387,20 +430,25 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
-        if (this.open !== isOpen) {
-            this.open = isOpen;
-            this.openChange.emit(this.open);
-            this.onTouched();
-            if (this._hasDisplayedValues()) {
-                this.focusTrap.activate();
-            } else {
-                this.focusTrap.deactivate();
-            }
+        /** Reset displayed values on every mobile open */
+        if (this.mobile && !this.open) {
+            this._resetDisplayedValues();
         }
 
-        if (!this.open) {
+        if (this.open !== isOpen) {
+            this.open = isOpen;
+            this.onTouched();
+            if (!this.mobile) {
+                this._popoverOpenHandle();
+            }
+            this.openChange.emit(isOpen);
+        }
+
+        if (!this.open && !this.mobile) {
             this.handleBlur();
         }
+
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -449,7 +497,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((index) => this.onMenuClickHandler(index));
         this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this._menuKeyboardService.focusEscapeAfterList = () => {};
+        this._menuKeyboardService.focusEscapeAfterList = () => {
+        };
     }
 
     /** @hidden */
@@ -462,10 +511,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
     }
 
+    /** @hidden */
     private _defaultDisplay(str: any): string {
         return str;
     }
 
+    /** @hidden */
     private _defaultFilter(contentArray: any[], searchTerm: any): any[] {
         if (typeof searchTerm === 'string') {
             const searchLower = searchTerm.toLocaleLowerCase();
@@ -483,21 +534,38 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
     }
 
-    private _handleClickActions(term): void {
+
+    /** @hidden*/
+    private _popoverOpenHandle(): void {
+        if (this._hasDisplayedValues) {
+            this.focusTrap.activate();
+        } else {
+            this.focusTrap.deactivate();
+        }
+    }
+
+    /** @hidden */
+    private _handleClickActions(term: any): void {
         if (this.closeOnSelect) {
             this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
             this.inputText = this.displayFn(term);
             this.searchInputElement.nativeElement.value = this.inputText;
+
+            if (this.mobile) {
+                this._propagateChange(this.inputText);
+            }
         }
         this.handleSearchTermChange();
     }
 
+    /** @hidden */
     private _getOptionObjectByDisplayedValue(displayValue: string): any {
         return this.dropdownValues.find((value) => this.displayFn(value) === displayValue);
     }
 
+    /** @hidden */
     private _setupFocusTrap(): void {
         try {
             this.focusTrap = focusTrap(this._elementRef.nativeElement, {
@@ -510,6 +578,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
     }
 
+    /** @hidden */
     private _refreshDisplayedValues(): void {
         if (this.inputText) {
             this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
@@ -518,12 +587,35 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
     }
 
+
+    /** @hidden */
     private _hasDisplayedValues(): boolean {
         return this.open && this.displayedValues && this.displayedValues.length > 0;
     }
 
+    /** @hidden */
     private _moveCursorToInputEnd(): void {
         const value = this.searchInputElement.nativeElement.value;
         this.searchInputElement.nativeElement.setSelectionRange(value.length, value.length);
+    }
+
+    /** @hidden */
+    private _propagateChange(inputTextValue: string): void {
+        if (this.communicateByObject) {
+            this.onChange(this._getOptionObjectByDisplayedValue(inputTextValue));
+        } else {
+            this.onChange(inputTextValue);
+        }
+    }
+
+    /** @hidden */
+    private _setUpMobileMode(): void {
+        // this.maxHeight = '100%';
+        this._dynamicComponentService.createDynamicComponent(
+            { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
+            ComboboxMobileComponent,
+            { container: this._elementRef.nativeElement },
+            { injector: Injector.create({ providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }] }) }
+        );
     }
 }

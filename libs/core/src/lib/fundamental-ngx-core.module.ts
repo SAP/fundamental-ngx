@@ -62,6 +62,7 @@ import { InfoLabelModule } from './info-label/info-label.module';
 import { ObjectStatusModule } from './object-status/object-status.module';
 import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-input-mobile.module';
 import { StepInputModule } from './step-input/step-input.module';
+import { ComboboxMobileModule } from './combobox/combobox-mobile/combobox-mobile.module';
 import { CarouselModule } from './utils/directives/carousel/carousel.module';
 
 @NgModule({
@@ -78,6 +79,7 @@ import { CarouselModule } from './utils/directives/carousel/carousel.module';
         CalendarModule,
         CarouselModule,
         ComboboxModule,
+        ComboboxMobileModule,
         CheckboxModule,
         DatePickerModule,
         DatetimePickerModule,
