@@ -165,6 +165,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     textAlign: 'left' | 'center' | 'right';
 
+    /** Hint displayed inside input before user writes value */
+    @Input()
+    placeholder: string;
+
     /** Emits event when input gets focused */
     @Output()
     onFocusIn: EventEmitter<void> = new EventEmitter<void>();
