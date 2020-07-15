@@ -18,8 +18,6 @@ describe('ComboboxMobileComponent', () => {
         title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true
     };
 
-    const backupData: any[] = ['option 1', 'option 2', 'option 3'];
-
 
     let comboboxInputComponent: Partial<ComboboxComponent> = {
         comboboxMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},

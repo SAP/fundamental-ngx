@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ListModule } from '../list/list.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
-import { DynamicComponentService } from '@fundamental-ngx/core';
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -136,7 +136,6 @@ describe('ComboboxComponent', () => {
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
-        component.writeValue('displayedValue2');
         component.inputText = 'displayedValue2';
         (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
@@ -241,14 +240,13 @@ describe('ComboboxComponent', () => {
         expect(component.onMenuClickHandler).toHaveBeenCalledWith(component.dropdownValues[0]);
     });
 
-    it('should reset displayed values', () => {
-        component.open = false;
-        spyOn(component, 'onMenuClickHandler');
+    it('should reset displayed values on primary button click', () => {
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
-        component.inputTextValue = component.dropdownValues[0];
-        component.handleSearchTermChange();
+        component.open = false;
+        component.inputText = 'displayedValue2';
+        (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
         component.onPrimaryButtonClick(<any>{ stopPropagation: () => {}, preventDefault: () => {} });
         expect(component.displayedValues.length).toBe(2);
@@ -259,9 +257,8 @@ describe('ComboboxComponent', () => {
             return item.displayedValue;
         };
         component.open = false;
-        spyOn(component, 'onMenuClickHandler');
-        component.inputTextValue = component.dropdownValues[0];
-        component.handleSearchTermChange();
+        component.inputText = 'displayedValue2';
+        (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
 
         component.onInputKeydownHandler(<any>
@@ -281,7 +278,7 @@ describe('ComboboxComponent', () => {
 
         expect(component.onChange).not.toHaveBeenCalled();
 
-        expect(component.inputText).toEqual('');
+        expect(component.inputText).toEqual(undefined);
 
         component.dialogDismiss('test');
 

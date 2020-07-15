@@ -368,7 +368,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** Handle dialog approval, closes popover and propagates data changes. */
     dialogApprove(): void {
-        this._propagateChange(this.inputText);
+        this._propagateChange();
         this.isOpenChangeHandle(false);
     }
 
@@ -382,7 +382,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         this.inputTextValue = value;
         this.inputTextChange.emit(value);
         if (!this.mobile) {
-            this._propagateChange(value);
+            this._propagateChange();
         }
         this.onTouched();
     }
@@ -554,7 +554,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.searchInputElement.nativeElement.value = this.inputText;
 
             if (this.mobile) {
-                this._propagateChange(this.inputText);
+                this._propagateChange();
             }
         }
         this.handleSearchTermChange();
@@ -600,17 +600,16 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     /** @hidden */
-    private _propagateChange(inputTextValue: string): void {
+    private _propagateChange(): void {
         if (this.communicateByObject) {
-            this.onChange(this._getOptionObjectByDisplayedValue(inputTextValue));
+            this.onChange(this._getOptionObjectByDisplayedValue(this.inputTextValue));
         } else {
-            this.onChange(inputTextValue);
+            this.onChange(this.inputTextValue);
         }
     }
 
     /** @hidden */
     private _setUpMobileMode(): void {
-        // this.maxHeight = '100%';
         this._dynamicComponentService.createDynamicComponent(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             ComboboxMobileComponent,
