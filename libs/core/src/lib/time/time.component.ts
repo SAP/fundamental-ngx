@@ -376,18 +376,20 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     /** @hidden */
     private _setUpTimeGrid(): void {
-
         this.hours = [];
-
+        this.minutes = [];
         this.period = this._timeI18nLabels.meridianAm;
 
         const hoursAmount = this.meridian ? 12 : 24;
-        for (let i = 0; i < hoursAmount; i ++) {
-            this.hours.push(i + (this.meridian ? 1 : 0));
+        const hourColumnMultiply = this.meridian ? 4 : 2;
+
+        for (let j = 0; j < hourColumnMultiply; j ++) {
+            for (let i = 0; i < hoursAmount; i++) {
+                this.hours.push(i + (this.meridian ? 1 : 0));
+            }
         }
 
         const minutesAmount = 60;
-        this.minutes = [];
         for (let i = 0; i < minutesAmount; i ++) {
             this.minutes.push(i);
         }

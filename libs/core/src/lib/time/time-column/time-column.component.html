@@ -13,8 +13,8 @@
         fdCarousel>
         <li class="fd-time__item" *ngFor="let row of rows; let index = index" [carouselItemId]="id + index"
             [initialHeight]="compact ? InitialCompactTimeHeight : InitialTimeHeight"
-            fdCarouselItem [value]="row">
-            <span class="fd-time__unit" (click)="pick(row)">
+            fdCarouselItem #item=fdCarouselItem [value]="row">
+            <span class="fd-time__unit" (click)="pick(item)">
                 {{row | twoDigits: keepTwoDigits}}
             </span>
         </li>

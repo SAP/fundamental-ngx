@@ -3,7 +3,8 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 let uniqueCarouselItemId: number = 0;
 
 @Directive({
-    selector: '[fdCarouselItem]'
+    selector: '[fd-carousel-item], [fdCarouselItem]',
+    exportAs: 'fdCarouselItem'
 })
 export class CarouselItemDirective {
 

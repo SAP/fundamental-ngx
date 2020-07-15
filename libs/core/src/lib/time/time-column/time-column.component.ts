@@ -241,10 +241,10 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     /** Method that changes active item and triggers carousel scroll */
-    pick(value: any): void {
+    pick(item: CarouselItemDirective): void {
         /** To prevent from switching time, when it's being dragged */
         if (!this._isDragging) {
-            this._pickTime(this._getItem(value), true, true);
+            this._pickTime(item, true, true);
         }
     }
 
