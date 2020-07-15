@@ -2,7 +2,8 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    ElementRef, Inject,
+    ElementRef,
+    Inject,
     isDevMode,
     OnDestroy,
     OnInit,
@@ -20,7 +21,6 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 @Component({
     selector: 'fd-combobox-mobile',
     templateUrl: './combobox-mobile.component.html',
-    styleUrls: ['./combobox-mobile.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
