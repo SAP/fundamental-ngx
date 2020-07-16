@@ -1,7 +1,9 @@
 <fd-toolbar>
     <label fd-toolbar-label>
-        Table Toolbar Label ({{tableRows.length}} rows)
+        Products ({{displayedRows.length}})
     </label>
+    <fd-toolbar-separator></fd-toolbar-separator>
+    <button fd-toolbar-item fd-button [compact]="true" [fdMenu]="true" [fdMenuTrigger]="variantMenu" [fdType]="'transparent'">{{selectedVariant}}</button>
     <fd-toolbar-spacer></fd-toolbar-spacer>
     <fd-input-group
         [compact]="true"
@@ -84,3 +86,9 @@
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
+
+<fd-menu #variantMenu>
+    <li fd-menu-item *ngFor="let value of variants" (click)="variantChange(value)">
+        <span fd-menu-interactive>{{ value }}</span>
+    </li>
+</fd-menu>

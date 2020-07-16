@@ -1,22 +1,31 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { DialogService, MenuComponent } from '@fundamental-ngx/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fd-table-toolbar-example',
     templateUrl: './table-toolbar-example.component.html'
 })
 export class TableToolbarExampleComponent implements OnInit {
-    tableRows: any[];
+    produceRows: any[];
+    kitchenwareRows: any[];
     displayedRows: any[];
     searchTerm: string = '';
     confirmationReason: string;
     myForm: FormGroup;
+    selectedVariant: string = 'Produce';
+    variants: string[] = [
+        'Produce',
+        'Kitchenware'
+    ];
+
+    @ViewChild('variantMenu')
+    variantMenu: MenuComponent;
 
     constructor(private _dialogService: DialogService, private _fb: FormBuilder) {}
 
     ngOnInit(): void {
-        this.tableRows = [
+        this.produceRows = [
             {
                 column1: 'Apple',
                 column2: 'Fruit',
@@ -43,7 +52,19 @@ export class TableToolbarExampleComponent implements OnInit {
                 region: 'California'
             }
         ];
-        this.displayedRows = this.tableRows;
+        this.kitchenwareRows = [
+            {
+                column1: 'Fork',
+                column2: 'Utensils',
+                region: 'France'
+            },
+            {
+                column1: 'Wok',
+                column2: 'Cookware',
+                region: 'China'
+            }
+        ];
+        this.displayedRows = this.produceRows;
 
         this.myForm = this._fb.group({
             nameInput: new FormControl(''),
@@ -54,16 +75,16 @@ export class TableToolbarExampleComponent implements OnInit {
 
     searchInputChanged(event: string): void {
         if (event) {
-            this.displayedRows = this.tableRows.filter(row => {
+            this.displayedRows = this.getSelectedVariantRows().filter(row => {
                 return JSON.stringify(row).toLowerCase().indexOf(event.toLowerCase()) !== -1;
             });
         } else {
-            this.displayedRows = this.tableRows;
+            this.displayedRows = this.getSelectedVariantRows();
         }
     }
 
     resetSearch(): void {
-        this.displayedRows = this.tableRows;
+        this.displayedRows = this.getSelectedVariantRows();
         this.searchTerm = '';
     }
 
@@ -73,7 +94,7 @@ export class TableToolbarExampleComponent implements OnInit {
         dialogRef.afterClosed.subscribe(
             (result) => {
                 this.confirmationReason = 'Dialog closed with result: ' + result;
-                this.tableRows.push({
+                this.getSelectedVariantRows().push({
                     column1: this.myForm.get('nameInput').value,
                     column2: this.myForm.get('typeInput').value,
                     region: this.myForm.get('regionInput').value
@@ -85,6 +106,21 @@ export class TableToolbarExampleComponent implements OnInit {
                 this.confirmationReason = 'Dialog dismissed with result: ' + error;
             }
         );
+    }
+
+    variantChange(value: string): void {
+        this.variantMenu.close();
+        this.selectedVariant = value;
+        this.searchTerm = '';
+        if (value === 'Produce') {
+            this.displayedRows = this.produceRows;
+        } else if (value === 'Kitchenware') {
+            this.displayedRows = this.kitchenwareRows;
+        }
+    }
+
+    getSelectedVariantRows(): any[] {
+        return this.selectedVariant === 'Produce' ? this.produceRows : this.kitchenwareRows;
     }
 
 }
