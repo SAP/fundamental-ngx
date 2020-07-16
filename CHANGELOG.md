@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.15...v0.20.1-rc.16) (2020-07-16)
+
+
+### Bug Fixes
+
+* update table wrapper component to apply classes to thead/tbody/tfoot ([#2855](https://github.com/SAP/fundamental-ngx/issues/2855)) ([d0f6072](https://github.com/SAP/fundamental-ngx/commit/d0f607290f111d6e1e8caa7041416738c76113ac))
+
 ### [0.20.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.14...v0.20.1-rc.15) (2020-07-16)
 
 
