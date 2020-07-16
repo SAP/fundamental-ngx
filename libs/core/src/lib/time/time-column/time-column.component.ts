@@ -14,7 +14,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { CarouselConfig, CarouselDirective } from '../../utils/directives/carousel/carousel.directive';
+import { CarouselConfig, CarouselDirective, PanEndOutput } from '../../utils/directives/carousel/carousel.directive';
 import { CarouselItemDirective } from '../../utils/directives/carousel/carousel-item.directive';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { TimeColumnConfig } from './time-column-config';
@@ -23,6 +23,13 @@ import { buffer, debounceTime, map } from 'rxjs/operators';
 
 
 let timeColumnUniqueId: number = 0;
+
+
+export interface TimeColumnItemOutput {
+    value: any;
+    after?: boolean;
+}
+
 
 @Component({
     selector: ' fd-time-column',
@@ -61,15 +68,15 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** Active value  */
     @Input()
-    set activeItem(value: any) {
-        if (this._initialised && this._activeItem !== value) {
+    set activeValue(value: any) {
+        if (this._initialised && this._activeValue !== value) {
             this._pickTime(this._getItem(value), true);
         }
-        this._activeItem = value;
+        this._activeValue = value;
     }
 
-    get activeItem(): any {
-        return this._activeItem;
+    get activeValue(): any {
+        return this._activeValue;
     }
 
     /** Defines if column is active, it has impact on behaviour and visual  */
@@ -78,7 +85,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         this._active = value;
         if (value && this._initialised) {
             this._changeDetRef.detectChanges();
-            this._pickTime(this._getItem(this.activeItem), false);
+            this._pickTime(this._getItem(this.activeValue), false);
             this._focusIndicator();
         }
     }
@@ -111,7 +118,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** Event emitted, when active item is changed, by carousel */
     @Output()
-    activeItemChange: EventEmitter<any> = new EventEmitter<any>();
+    activeValueChange: EventEmitter<TimeColumnItemOutput> = new EventEmitter<TimeColumnItemOutput>();
 
     /** Event emitted, when previous column should be focused */
     @Output()
@@ -154,7 +161,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     private _queryKeyDownEvent: Subject<string> = new Subject<string>();
 
     /** @hidden */
-    private _activeItem: any;
+    private _activeValue: any;
 
     /** @hidden */
     private _activeCarouselItem: CarouselItemDirective;
@@ -170,7 +177,8 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     constructor(
         private _changeDetRef: ChangeDetectorRef
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -209,7 +217,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         } else if (KeyUtil.isKey(event, 'ArrowRight')) {
             this.focusNextColumn.emit();
         } else if (KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical')) {
-            this._queryKeyDownEvent.next(event.key)
+            this._queryKeyDownEvent.next(event.key);
         }
     }
 
@@ -231,9 +239,9 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     /** Method that handles active item change */
-    activeChangedHandle(item: CarouselItemDirective): void {
+    activeChangedHandle(output: PanEndOutput): void {
         const array = this.items.toArray();
-        let index: number = array.findIndex(__item => __item === item) + this.offset;
+        let index: number = array.findIndex(__item => __item === output.item) + this.offset;
 
         if (index > array.length) {
             index = index - array.length;
@@ -241,16 +249,20 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
         const _item = array[index];
 
-        this._activeItem = _item.value;
-        this.activeItemChange.emit(this._activeItem);
+        this._activeValue = _item.value;
+        this.activeValueChange.emit({
+            value: this._activeValue,
+            after: output.after
+        });
         this._activeCarouselItem = _item;
     }
 
     /** Method that changes active item and triggers carousel scroll */
-    pick(item: CarouselItemDirective): void {
+    pick(item: CarouselItemDirective, index: number): void {
+        const currentIndex: number = this.items.toArray().findIndex(_item => _item === this._activeCarouselItem);
         /** To prevent from switching time, when it's being dragged */
         if (!this._isDragging) {
-            this._pickTime(item, true, true);
+            this._pickTime(item, true, true, currentIndex > index);
         }
     }
 
@@ -271,7 +283,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
             index = this.rows.length - 1;
         }
 
-        this._pickTime(this.items.toArray()[index], true, true);
+        this._pickTime(this.items.toArray()[index], true, true, false);
     }
 
     /** Method triggered by keyboard, or decrement button */
@@ -287,20 +299,30 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
             index = 0;
         }
 
-        this._pickTime(this.items.toArray()[index], true, true);
+        this._pickTime(this.items.toArray()[index], true, true, true);
     }
 
-    /** Method triggered by keyboard, or decrement button */
-    private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean): void {
+    /**
+     * Method triggered by keyboard, or decrement button
+     * Args:
+     * item => picked carousel item, that should be centered
+     * smooth => defines if transition time should be included in transform
+     * emitEvent => defines if EventEmitter should be triggered by this change, set to false, when changed from outside
+     * after => Defines if value was incremented/decremented, needed for hours to trigger AM/PM change
+     */
+    private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean, after?: boolean): void {
         if (!item) {
             return;
         }
         this._triggerCarousel(item, smooth);
         this._activeCarouselItem = item;
-        this._activeItem = item.value;
         if (emitEvent) {
-            this.activeItemChange.emit(this._activeItem);
+            this.activeValueChange.emit({
+                value: item.value,
+                after: after
+            });
         }
+        this._activeValue = item.value;
     }
 
     /** Returns item with passed value */
@@ -361,10 +383,10 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** @hidden */
     private _setUpInitialValue(): void {
-        if (!this._activeItem) {
-            this._activeItem = this.items.first.value;
+        if (!this._activeValue) {
+            this._activeValue = this.items.first.value;
         }
-        this._pickTime(this._getItem(this._activeItem), true);
+        this._pickTime(this._getItem(this._activeValue), true);
     }
 
 }

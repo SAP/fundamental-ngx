@@ -58,33 +58,54 @@ describe('TimeComponent', () => {
         component.meridian = true;
 
         component.period = 'am';
-        component.displayedHourChanged(12);
+        component.displayedHourChanged({
+            value: 12,
+            after: true
+        });
         expect(component.time.hour).toBe(0);
 
         component.period = 'am';
-        component.displayedHourChanged(1);
+        component.displayedHourChanged({
+            value: 1,
+            after: false
+        });
         expect(component.time.hour).toBe(1);
 
         component.period = 'pm';
-        component.displayedHourChanged(12);
+        component.displayedHourChanged({
+            value: 12,
+            after: true
+        });
         expect(component.time.hour).toBe(12);
 
         component.period = 'pm';
-        component.displayedHourChanged(1);
+        component.displayedHourChanged({
+            value: 1,
+            after: false
+        });
         expect(component.time.hour).toBe(13);
 
         component.meridian = false;
 
-        component.displayedHourChanged(12);
+        component.displayedHourChanged({
+            value: 12,
+            after: false
+        });
         expect(component.time.hour).toBe(12);
 
-        component.displayedHourChanged(1);
+        component.displayedHourChanged({
+            value: 1,
+            after: false
+        });
         expect(component.time.hour).toBe(1);
     });
 
     it('should handle input blur for displayedHour === 0, meridian', () => {
         component.meridian = true;
-        component.displayedHourChanged(0);
+        component.displayedHourChanged({
+            value: 12,
+            after: true
+        });
         expect(component.time.hour).toBe(0);
         expect(component.period).toBe('am');
     });
@@ -155,6 +176,46 @@ describe('TimeComponent', () => {
         component.periodModelChange();
         expect(component.period).toBe('am');
         expect(component.time.hour).toBe(4);
+    });
+
+    it ('should change period to pm, depending on new later hour', () => {
+        component.displayedHour = 5;
+
+        component.period = 'am';
+
+        (<any>component)._periodByHoursChange(3, true);
+
+        expect(component.period).toBe('pm');
+    });
+
+    it ('should change period to am, depending on new later hour', () => {
+        component.displayedHour = 7;
+
+        component.period = 'pm';
+
+        (<any>component)._periodByHoursChange(5, true);
+
+        expect(component.period).toBe('am');
+    });
+
+    it ('should change period to am, depending on new previous hour', () => {
+        component.displayedHour = 10;
+
+        component.period = 'pm';
+
+        (<any>component)._periodByHoursChange(11, false);
+
+        expect(component.period).toBe('am');
+    });
+
+    it ('should change period to pm, depending on new previous hour', () => {
+        component.displayedHour = 10;
+
+        component.period = 'am';
+
+        (<any>component)._periodByHoursChange(11, false);
+
+        expect(component.period).toBe('pm')
     });
 
 });

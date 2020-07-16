@@ -22,6 +22,11 @@ export interface CarouselConfig {
     transition?: string;
 }
 
+export interface PanEndOutput {
+    item: CarouselItemDirective;
+    after: boolean;
+}
+
 export const Default_Transition_Duration: string = '150ms';
 
 
@@ -49,7 +54,7 @@ export class CarouselDirective implements AfterContentInit {
 
     /** Event thrown, when active element is changed */
     @Output()
-    readonly activeChange: EventEmitter<CarouselItemDirective> = new EventEmitter<CarouselItemDirective>();
+    readonly activeChange: EventEmitter<PanEndOutput> = new EventEmitter<PanEndOutput>();
 
     /** Event thrown when element is dragged. Emits "true" when drag starts and "false" when drag ends. */
     @Output()
@@ -64,6 +69,9 @@ export class CarouselDirective implements AfterContentInit {
 
     /** @hidden */
     private _lastDistance: number = 0;
+
+    /** @hidden */
+    private _prePanTransitionPx: number = 0;
 
     /** @hidden */
     private _currentTransitionPx: number = 0;
@@ -113,7 +121,10 @@ export class CarouselDirective implements AfterContentInit {
 
         this.goToItem(closestItem, true);
 
-        this.activeChange.emit(closestItem);
+        this.activeChange.emit({
+            item: closestItem,
+            after: delta > 0
+        });
 
         this.dragStateChange.emit(false);
         this._lastDistance = 0;
@@ -219,6 +230,7 @@ export class CarouselDirective implements AfterContentInit {
     /** Pam Start handler, removes transition duration, */
     private _handlePanStart(): void {
         this._elementRef.nativeElement.style.transitionDuration = '0s';
+        this._prePanTransitionPx = this._currentTransitionPx;
         this.dragStateChange.emit(true);
     }
 

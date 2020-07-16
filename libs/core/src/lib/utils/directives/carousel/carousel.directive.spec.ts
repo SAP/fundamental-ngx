@@ -181,7 +181,10 @@ describe('CarouselDirective', () => {
         (<any>verticalDirective)._handlePanEnd(-170);
         verticalFixture.detectChanges();
 
-        expect(verticalDirective.activeChange.emit).toHaveBeenCalledWith(verticalDirective.items.toArray()[6]);
+        expect(verticalDirective.activeChange.emit).toHaveBeenCalledWith({
+            item: verticalDirective.items.toArray()[6],
+            after: false
+        });
     });
 
     it('should return closest with half', () => {

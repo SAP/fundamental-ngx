@@ -14,7 +14,7 @@
         <li class="fd-time__item" *ngFor="let row of rows; let index = index" [carouselItemId]="id + index"
             [initialHeight]="compact ? InitialCompactTimeHeight : InitialTimeHeight"
             fdCarouselItem #item=fdCarouselItem [value]="row">
-            <span class="fd-time__unit" (click)="pick(item)">
+            <span class="fd-time__unit" (click)="pick(item, index)">
                 {{row | twoDigits: keepTwoDigits}}
             </span>
         </li>
@@ -26,7 +26,7 @@
          [id]="currentIndicatorId">
     </div>
     <span class="fd-time__item fd-time__item--collapsed" [ngClass]="{'is-hidden': active}">
-            {{activeItem | twoDigits: keepTwoDigits}}
+            {{activeValue | twoDigits: keepTwoDigits}}
     </span>
 </div>
 <button class="fd-button fd-button fd-button--transparent sap-icon--navigation-down-arrow"

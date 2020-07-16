@@ -14,6 +14,7 @@ import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18nLabels } from './i18n/time-i18n-labels';
 import { TimeColumnConfig } from './time-column/time-column-config';
+import { TimeColumnItemOutput } from './time-column/time-column.component';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -132,10 +133,12 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     displayedHour: number = 0;
 
     /** @hidden */
-    onChange = (time: TimeObject) => {};
+    onChange = (time: TimeObject) => {
+    };
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = () => {
+    };
 
     /** @hidden */
     registerOnChange(fn: (time: TimeObject) => void): void {
@@ -157,7 +160,8 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     constructor(
         private _timeI18nLabels: TimeI18nLabels,
         private _changeDetRef: ChangeDetectorRef
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -207,11 +211,11 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
             this.changeActive('minute');
         } else if (column === 'meridian') {
             if (this.displaySeconds) {
-                this.changeActive('second')
+                this.changeActive('second');
             } else if (this.displayMinutes) {
-                this.changeActive('minute')
+                this.changeActive('minute');
             } else {
-                this.changeActive('hour')
+                this.changeActive('hour');
             }
         }
     }
@@ -256,18 +260,20 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
         }
 
         if (this.time) {
-            this.time = {...this.time};
+            this.time = { ...this.time };
         }
     }
 
     /** @hidden
      * Handles changes of displayed hour value from template.
      */
-    displayedHourChanged(changedHour: number): void {
-        this.displayedHour = changedHour;
+    displayedHourChanged(changedHourOutput: TimeColumnItemOutput): void {
         if (!this.meridian) {
-            this.time.hour = this.displayedHour;
+            this.time.hour = changedHourOutput.value;
+            this.displayedHour = changedHourOutput.value
         } else {
+            this._periodByHoursChange(changedHourOutput.value, changedHourOutput.after);
+            this.displayedHour = changedHourOutput.value;
             if (this._isAm(this.period)) {
                 if (this.displayedHour === 12) {
                     this.time.hour = 0;
@@ -288,7 +294,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     /** @hidden */
     changeActive(view: FdTimeActiveView): void {
         this.activeView = view;
-        this._changeDetRef.detectChanges()
+        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
@@ -389,17 +395,25 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
         const hoursAmount = this.meridian ? 12 : 24;
         const hourColumnMultiply = this.meridian ? 4 : 2;
 
-        for (let j = 0; j < hourColumnMultiply; j ++) {
+        for (let j = 0; j < hourColumnMultiply; j++) {
             for (let i = 0; i < hoursAmount; i++) {
                 this.hours.push(i + (this.meridian ? 1 : 0));
             }
         }
 
         const minutesAmount = 60;
-        for (let i = 0; i < minutesAmount; i ++) {
+        for (let i = 0; i < minutesAmount; i++) {
             this.minutes.push(i);
         }
 
         this.periods = [this._timeI18nLabels.meridianAm, this._timeI18nLabels.meridianPm];
+    }
+
+    /** @hidden */
+    private _periodByHoursChange(newHour: number, after: boolean): void {
+        const shouldChange: boolean = (after ? (newHour < this.displayedHour) : (newHour > this.displayedHour));
+        if (shouldChange) {
+            this.period = this._isAm(this.period) ? this._timeI18nLabels.meridianPm : this._timeI18nLabels.meridianAm;
+        }
     }
 }

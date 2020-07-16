@@ -35,7 +35,7 @@ describe('TimeColumnComponent', () => {
 
         (<any>component)._initialised = true;
 
-        component.activeItem = 3;
+        component.activeValue = 3;
         fixture.detectChanges();
 
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[2], true);
@@ -44,45 +44,45 @@ describe('TimeColumnComponent', () => {
 
     it('should call pick time method with scrollUp', () => {
 
-        component.activeItem = 3;
+        component.activeValue = 3;
 
         spyOn(<any>component, '_pickTime');
 
         component.scrollUp();
-        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[1], true, true);
+        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[1], true, true, false);
 
     });
 
     it('should call pick time method with scrollUp, when beginning is approached', () => {
 
-        component.activeItem = 1;
+        component.activeValue = 1;
 
         spyOn(<any>component, '_pickTime');
 
         component.scrollUp();
-        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[9], true, true);
+        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[9], true, true, false);
 
     });
 
     it('should call pick time method with scrollDown', () => {
 
-        component.activeItem = 3;
+        component.activeValue = 3;
 
         spyOn(<any>component, '_pickTime');
 
         component.scrollDown();
-        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[3], true, true);
+        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[3], true, true, true);
 
     });
 
     it('should call pick time method with scrollDown, when end is approached', () => {
 
-        component.activeItem = 10;
+        component.activeValue = 10;
 
         spyOn(<any>component, '_pickTime');
 
         component.scrollDown();
-        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[0], true, true);
+        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[0], true, true, true);
 
     });
 
@@ -91,13 +91,19 @@ describe('TimeColumnComponent', () => {
         const item = component.items.toArray()[3];
         const offsetItem = component.items.toArray()[3 + component.offset];
 
-        spyOn(component.activeItemChange, 'emit');
-        component.activeChangedHandle(item);
+        spyOn(component.activeValueChange, 'emit');
+        component.activeChangedHandle({
+            item: item,
+            after: false
+        });
 
         fixture.detectChanges();
-        expect((<any>component)._activeItem).toBe(offsetItem.value);
+        expect((<any>component)._activeValue).toBe(offsetItem.value);
         expect((<any>component)._activeCarouselItem).toBe(offsetItem);
-        expect(component.activeItemChange.emit).toHaveBeenCalledWith(offsetItem.value);
+        expect(component.activeValueChange.emit).toHaveBeenCalledWith({
+            value: offsetItem.value,
+            after: false
+        });
 
     });
 
@@ -108,13 +114,19 @@ describe('TimeColumnComponent', () => {
 
         const item = component.items.toArray()[3];
 
-        spyOn(component.activeItemChange, 'emit');
-        component.activeChangedHandle(item);
+        spyOn(component.activeValueChange, 'emit');
+        component.activeChangedHandle({
+            item: item,
+            after: false
+        });
 
         fixture.detectChanges();
-        expect((<any>component)._activeItem).toBe(item.value);
+        expect((<any>component)._activeValue).toBe(item.value);
         expect((<any>component)._activeCarouselItem).toBe(item);
-        expect(component.activeItemChange.emit).toHaveBeenCalledWith(item.value);
+        expect(component.activeValueChange.emit).toHaveBeenCalledWith({
+            value: item.value,
+            after: false
+        });
 
     });
 });
