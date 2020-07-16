@@ -368,6 +368,8 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
      */
     writeValue(selected: FdDatetime): void {
         if (!selected || !(selected instanceof FdDatetime)) {
+            this.inputFieldDate = '';
+            this._changeDetRef.detectChanges();
             return;
         }
         this.selectedDate = selected.date;
