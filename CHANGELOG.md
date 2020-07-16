@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.14...v0.20.1-rc.15) (2020-07-16)
+
+
+### Bug Fixes
+
+* Datetime Picker null detection ([#2857](https://github.com/SAP/fundamental-ngx/issues/2857)) ([144c5c4](https://github.com/SAP/fundamental-ngx/commit/144c5c4f88b32f647235df03b2ff989dae2b8ee9))
+
 ### [0.20.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.13...v0.20.1-rc.14) (2020-07-15)
 
 
