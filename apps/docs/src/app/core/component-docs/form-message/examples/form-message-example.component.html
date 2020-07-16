@@ -1,0 +1,63 @@
+<div fd-form-item class="fd-custom-form-item-message">
+    <label fd-form-label for="input-message">
+        Message With Input
+    </label>
+    <fd-form-input-message-group>
+        <input fd-form-control type="text" id="input-message" placeholder="Field placeholder text" [state]="'information'" />
+        <fd-form-message [type]="'information'">
+            This Message is triggered by click event
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>
+
+<div fd-form-item class="fd-custom-form-item-message">
+    <label fd-form-label for="picker-message">
+        Message With Picker - Changed Programmatically
+        <button fd-button (click)="open = !open" style="width: 200px">Switch Visibility of Message </button>
+    </label>
+    <fd-form-input-message-group
+        [placement]="'bottom-start'"
+        [(isOpen)]="open"
+        [triggers]="[]"
+        [closeOnOutsideClick]="false"
+        [closeOnEscapeKey]="false">
+        <fd-date-picker id="picker-message" [state]="'information'" [placement]="'top'"></fd-date-picker>
+        <fd-form-message [type]="'information'">
+            This message is controlled by <code>open</code> variable.
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>
+
+<div fd-form-item class="fd-custom-form-item-message">
+    <label fd-form-label for="group-message">
+        Message With InputGroup - Hover
+    </label>
+    <fd-form-input-message-group
+        [placement]="'bottom'"
+        [triggers]="['mouseenter', 'mouseleave']"
+        [closeOnOutsideClick]="false"
+        [closeOnEscapeKey]="false">
+        <fd-input-group id="group-message" [glyph]="'world'" [state]="'information'" [button]="true"></fd-input-group>
+        <fd-form-message [type]="'information'">
+            This message is triggered only by hover on InputGroup
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>
+
+<div fd-form-item class="fd-custom-form-item-message">
+    <label fd-form-label for="textarea-message">
+        Message With Textarea - Try to focus
+    </label>
+    <fd-form-input-message-group
+        [triggers]="['focusin', 'focusout']"
+        [placement]="'bottom'"
+        [closeOnOutsideClick]="false"
+        [closeOnEscapeKey]="false">
+        <textarea fd-form-control id="textarea-message" [state]="'information'"></textarea>
+        <fd-form-message [type]="'information'">
+            This message is triggered only by focus/blur inside textarea, also placement is changed
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>
+
+
