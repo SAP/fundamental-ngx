@@ -2,8 +2,8 @@
     [expanded]="expanded"
     [fixed]="!expandable"
     [compact]="contentDensity === 'compact'"
-    [expandAriaLabel]="_expandAriaLabel"
-    (expandedChange)="_onExpandedChange($event)"
+    [expandAriaLabel]="expandAriaLabel"
+    (expandedChange)="onExpandedChange($event)"
 >
     <h5 fd-panel-title>{{ title }}</h5>
 
