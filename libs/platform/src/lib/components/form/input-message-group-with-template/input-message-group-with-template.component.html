@@ -2,9 +2,10 @@
     (isOpenChange)="openChanged($event)"
     [addContainerClass]="'fd-popover-container-custom--message'"
     [closeOnOutsideClick]="closeOnOutsideClick"
+    [closeOnEscapeKey]="closeOnEscapeKey"
     [fillControlMode]="fillControlMode"
     [isOpen]="isOpen"
-    [placement]="placement$ | async"
+    [placement]="placement"
     [triggers]="['input', 'click']"
     class="fd-form-input-message-group fd-popover--input-message-group"
 >
