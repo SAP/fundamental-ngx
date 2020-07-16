@@ -141,7 +141,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     ngAfterViewInit() {
         if (this.shouldOverflow) {
-            this._collapseItems();
+            of(true)
+                .pipe(delay(5))
+                .subscribe(() => this._collapseItems());
         }
 
         this.buildComponentCssClass();
