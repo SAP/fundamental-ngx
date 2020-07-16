@@ -127,15 +127,24 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     selector: 'fdp-datepicker-i18n-example',
     template: `
         <label fd-form-label for="language">Select language:</label>
-        <fdp-button [compact]="true" (buttonClicked)="setFrench()" [type]="isSelected('fr') ? 'emphasized' : ''"
+        <fdp-button
+            [contentDensity]="'compact'"
+            (buttonClicked)="setFrench()"
+            [type]="isSelected('fr') ? 'emphasized' : ''"
             >French
         </fdp-button>
         |
-        <fdp-button [compact]="true" (buttonClicked)="setGerman()" [type]="isSelected('de') ? 'emphasized' : ''"
+        <fdp-button
+            [contentDensity]="'compact'"
+            (buttonClicked)="setGerman()"
+            [type]="isSelected('de') ? 'emphasized' : ''"
             >German
         </fdp-button>
         |
-        <fdp-button [compact]="true" (buttonClicked)="setBulgarian()" [type]="isSelected('bg') ? 'emphasized' : ''"
+        <fdp-button
+            [contentDensity]="'compact'"
+            (buttonClicked)="setBulgarian()"
+            [type]="isSelected('bg') ? 'emphasized' : ''"
             >Bulgarian
         </fdp-button>
         <br />

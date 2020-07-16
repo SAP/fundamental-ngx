@@ -25,9 +25,9 @@ export class PlatformDatePickerExampleComponent {
 
     // Template driven form
     disableddate = '';
-    birthdayPicker = ''
-    holidayPicker = ''
-    dateOutsideForm = ''
+    birthdayPicker = '';
+    holidayPicker = '';
+    dateOutsideForm = '';
 
     constructor() {}
 
