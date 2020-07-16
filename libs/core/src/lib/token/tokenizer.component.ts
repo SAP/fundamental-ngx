@@ -15,7 +15,8 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    QueryList, Renderer2,
+    QueryList,
+    Renderer2,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -123,20 +124,13 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListChangesSubscription.unsubscribe();
         }
         this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
+            this.cdRef.detectChanges();
             this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
             this.previousTokenCount = this.tokenList.length;
             this.handleTokenClickSubscriptions();
         });
         if (!this.compact) {
-            // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
-            this.tokenizerInnerEl.nativeElement.scrollLeft =
-                this.tokenizerInnerEl.nativeElement.scrollWidth;
-            this._getHiddenCozyTokenCount();
-            if (this.hiddenCozyTokenCount > 0) {
-                // need to do this again in case "____ more" text was added
-                this.tokenizerInnerEl.nativeElement.scrollLeft =
-                    this.tokenizerInnerEl.nativeElement.scrollWidth;
-            }
+            this._handleInitCozyTokenCount();
         }
     }
 
@@ -433,11 +427,26 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         const elementLeft = this._elementRef.nativeElement.getBoundingClientRect().left;
         this.hiddenCozyTokenCount = 0;
         this.tokenList.forEach(token => {
-            if (token.elementRef.nativeElement.getBoundingClientRect().right < elementLeft) {
+            if (token.tokenSpanElement.nativeElement.getBoundingClientRect().right < elementLeft) {
                 this.hiddenCozyTokenCount += 1;
             }
         });
+
         this.cdRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _handleInitCozyTokenCount(): void {
+        // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
+        this.tokenizerInnerEl.nativeElement.scrollLeft =
+            this.tokenizerInnerEl.nativeElement.scrollWidth;
+        this._getHiddenCozyTokenCount();
+        if (this.hiddenCozyTokenCount > 0) {
+            // need to do this again in case "____ more" text was added
+            this.tokenizerInnerEl.nativeElement.scrollLeft =
+                this.tokenizerInnerEl.nativeElement.scrollWidth;
+            this._getHiddenCozyTokenCount();
+        }
     }
 
     /** @hidden */

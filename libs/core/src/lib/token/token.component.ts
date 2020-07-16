@@ -6,6 +6,7 @@ import {
     EventEmitter,
     Input,
     Output,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -28,6 +29,10 @@ export class TokenComponent {
     /** Whether the token is compact. */
     @Input()
     compact: boolean = false;
+
+    /** @hidden */
+    @ViewChild('spanElement')
+    tokenSpanElement: ElementRef;
 
     private _selected: boolean = false;
 
