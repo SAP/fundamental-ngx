@@ -86,6 +86,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     displayHours: boolean = true;
 
+    /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds. 
+     * Otherwise It can be set to a default value
+    */
+    @Input()
+    placeholder: string = this.getPlaceholder();
+
     /** Aria label for the time picker input. */
     @Input()
     timePickerInputLabel: string = 'Time picker input';
@@ -148,9 +154,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDest
     isOpen: boolean;
 
     /** @hidden */
-    placeholder: string;
-
-    /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
@@ -163,7 +166,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** @hidden */
     ngOnInit(): void {
-        this.placeholder = this.getPlaceholder();
     }
 
     /** @hidden */
