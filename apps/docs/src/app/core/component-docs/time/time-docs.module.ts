@@ -15,6 +15,7 @@ import { Time12ExampleComponent } from './examples/time-12-example.component';
 import { TimeTwoDigitsExampleComponent } from './examples/time-two-digits-example/time-two-digits-example.component';
 import { TimeModule } from '@fundamental-ngx/core';
 import { TimeSizesExampleComponent } from './examples/time-sizes-example.component';
+import { TimeNoSpinnersExampleComponent } from './examples/time-no-spinners-example/time-no-spinners-example.component';
 
 const routes: Routes = [
     {
@@ -41,6 +42,7 @@ const routes: Routes = [
         TimeOnlyHoursExampleComponent,
         TimeNoSecondsExampleComponent,
         TimeProgrammaticallyExampleComponent,
+        TimeNoSpinnersExampleComponent,
         TimeSizesExampleComponent
     ]
 })

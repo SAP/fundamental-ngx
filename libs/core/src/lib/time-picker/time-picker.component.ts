@@ -67,7 +67,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     @Input()
     disabled: boolean;
 
-    /** @Input When set to false, hides the buttons that increment and decrement the corresponding input. */
+    /** @Input When set to false, hides the buttons that increment and decrement the corresponding column. */
     @Input()
     spinners: boolean = true;
 

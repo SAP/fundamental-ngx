@@ -53,6 +53,12 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     @Input()
     keepTwoDigits: boolean = false;
 
+    /**
+     * @Input When set to false, hides the buttons that increment and decrement the corresponding columns.
+     */
+    @Input()
+    spinners: boolean = true;
+
     /** Active value  */
     @Input()
     set activeItem(value: any) {

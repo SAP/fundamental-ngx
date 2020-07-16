@@ -98,6 +98,12 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
+    /**
+     * @Input When set to false, hides the buttons that increment and decrement the corresponding columns.
+     */
+    @Input()
+    spinners: boolean = true;
+
     /** @hidden */
     @Output()
     readonly focusFirstElement: EventEmitter<void> = new EventEmitter<void>();
