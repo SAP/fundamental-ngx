@@ -1,8 +1,62 @@
-<fd-docs-section-title [id]="'Panel'" [componentName]="'panel'"> Panel </fd-docs-section-title>
+<fd-docs-section-title [id]="'panelExpandable'" [componentName]="'panel'">
+    Expandable Panel
+</fd-docs-section-title>
 <description>
-    The panel component.
+    Expandable panels are much like fixed panels, except their content can be expanded and collapsed.
 </description>
 <component-example>
-    <fdp-panel-simple-example></fdp-panel-simple-example>
+    <fdp-panel-expandable-example></fdp-panel-expandable-example>
 </component-example>
-<code-example [exampleFiles]="panelHtmlSimple"></code-example>
+<code-example [exampleFiles]="panelExpandable"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'panelFixed'" [componentName]="'panel'">
+    Fixed Panel
+</fd-docs-section-title>
+<description>
+    Fixed panels are useful for grouping custom content. To create a fixed panel, add
+    <code>[expandable]="false"</code> to the Panel.
+</description>
+<component-example>
+    <fdp-panel-fixed-example></fdp-panel-fixed-example>
+</component-example>
+<code-example [exampleFiles]="panelFixed"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'panelCompact'" [componentName]="'panel'">
+    Compact Panel
+</fd-docs-section-title>
+<description> For a compact panel, set the <code>[contentDensity]="'compact'"</code>. </description>
+<component-example>
+    <fdp-panel-compact-example></fdp-panel-compact-example>
+</component-example>
+<code-example [exampleFiles]="panelCompact"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'panelFixedHeight'" [componentName]="'panel'">
+    Fixed Height Content Panel
+</fd-docs-section-title>
+<description>
+    When the height of the panel’s content is set to a fixed size, the content area can be scrolled through. To set the
+    height of the panel's content use the <code>contentHeight</code> property.
+</description>
+<component-example>
+    <fdp-panel-fixed-height-example></fdp-panel-fixed-height-example>
+</component-example>
+<code-example [exampleFiles]="panelFixedHeight"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'panelActions'" [componentName]="'panel'">
+    Panel Actions
+</fd-docs-section-title>
+<description>
+    Buttons and other action elements with in this tag will be placed in the Panel header toolbar
+</description>
+<component-example>
+    <fdp-panel-actions-example></fdp-panel-actions-example>
+</component-example>
+<code-example [exampleFiles]="panelActions"></code-example>

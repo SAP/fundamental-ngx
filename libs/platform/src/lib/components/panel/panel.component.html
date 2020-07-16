@@ -1,8 +1,8 @@
 <fd-panel
     [expanded]="expanded"
-    [fixed]="!collapsable"
+    [fixed]="!expandable"
     [compact]="contentDensity === 'compact'"
-    [expandAriaLabel]="expandAriaLabel"
+    [expandAriaLabel]="_expandAriaLabel"
     (expandedChange)="_onExpandedChange($event)"
 >
     <h5 fd-panel-title>{{ title }}</h5>
@@ -13,7 +13,12 @@
         </fd-toolbar>
     </ng-container>
 
-    <div fd-panel-content [attr.aria-expanded]="expanded" [attr.aria-hidden]="!expanded">
+    <div
+        fd-panel-content
+        [height]="panelContent.contentHeight"
+        [attr.aria-expanded]="expanded"
+        [attr.aria-hidden]="!expanded"
+    >
         <ng-content select="fdp-panel-content"></ng-content>
     </div>
 </fd-panel>

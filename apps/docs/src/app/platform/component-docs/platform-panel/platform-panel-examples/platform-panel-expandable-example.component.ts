@@ -2,12 +2,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { PanelExpandChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-panel-simple-example',
-    templateUrl: './platform-panel-simple-example.component.html',
-    styleUrls: ['./platform-panel-simple-example.scss'],
+    selector: 'fdp-panel-expandable-example',
+    templateUrl: './platform-panel-expandable-example.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformPanelSimpleExampleComponent {
+export class PlatformPanelExpandableExampleComponent {
     public expanded: boolean = true;
 
     public onExpandChange(event: PanelExpandChangeEvent) {

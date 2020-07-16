@@ -1,8 +1,6 @@
 import {
     Component,
-    OnInit,
     Input,
-    AfterContentInit,
     ChangeDetectorRef,
     Output,
     EventEmitter,
@@ -13,6 +11,7 @@ import {
 import { BaseComponent } from '../base';
 
 import { PlatformPanelActionsComponent } from './panel-actions/panel-actions.component';
+import { PlatformPanelContentComponent } from './panel-content/panel-content.component';
 
 export class PanelExpandChangeEvent {
     constructor(
@@ -35,17 +34,17 @@ export class PlatformPanelComponent extends BaseComponent {
     /**
      * Whether the Panel Content is expanded
      */
-    @Input() expanded: boolean;
+    @Input() expanded: boolean = true;
     /**
-     * Whether the Panel is collapsable
+     * Whether the Panel is expandable
      */
-    @Input() collapsable: boolean = true;
+    @Input() expandable: boolean = true;
     /**
-     * Aria label for button when the Panel is collapsed
+     * ARIA label for button when the Panel is collapsed
      */
     @Input() expandLabel: string = 'Expand Panel';
     /**
-     * Aria label for button when the Panel is expanded
+     * ARIA label for button when the Panel is expanded
      */
     @Input() collapseLabel: string = 'Collapse Panel';
 
@@ -54,8 +53,11 @@ export class PlatformPanelComponent extends BaseComponent {
 
     /** @hidden */
     @ContentChild(PlatformPanelActionsComponent) panelActions: PlatformPanelActionsComponent;
+    /** @hidden */
+    @ContentChild(PlatformPanelContentComponent) panelContent: PlatformPanelContentComponent;
 
-    get expandAriaLabel(): string {
+    /** @hidden */
+    get _expandAriaLabel(): string {
         return this.expanded ? this.collapseLabel : this.expandLabel;
     }
 

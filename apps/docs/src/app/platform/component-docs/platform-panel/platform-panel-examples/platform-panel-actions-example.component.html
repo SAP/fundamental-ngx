@@ -1,19 +1,10 @@
-<fdp-button (click)="expanded = !expanded">Toggle Expand</fdp-button> <br /><br />
-Expanded value is: {{ expanded }} <br /><br /><br />
-
-<fdp-panel
-    [id]="'panel-id'"
-    [title]="'Panel Title'"
-    [contentDensity]="'cozy'"
-    [expanded]="expanded"
-    (panelExpandChange)="onExpandChange($event)"
->
+<fdp-panel [id]="'panel-actions-id'" [title]="'Panel Title'">
     <fdp-panel-actions>
         <fdp-button>Edit</fdp-button>
         <fdp-button>Delete</fdp-button>
     </fdp-panel-actions>
 
-    <fdp-panel-content class="panel-content">
+    <fdp-panel-content>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut laoreet lorem. Vestibulum ante ipsum primis
         in faucibus orci luctus et ultrices posuere cubilia curae; Aenean sagittis aliquam justo et suscipit. Nam
         molestie, magna at elementum pulvinar, nisi enim venenatis ante, id convallis mi neque nec risus. Cras blandit

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@angular/core';
 
 @Component({
     selector: 'fdp-panel-content',
@@ -8,5 +8,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformPanelContentComponent {
-    constructor() {}
+    /** Custom height of the content container. */
+    @Input()
+    contentHeight: string = null;
 }

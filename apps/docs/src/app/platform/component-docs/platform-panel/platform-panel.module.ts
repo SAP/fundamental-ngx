@@ -7,7 +7,12 @@ import { PlatformPanelModule, PlatformButtonModule } from '@fundamental-ngx/plat
 
 import { PlatformPanelHeaderComponent } from './platform-panel-header/platform-panel-header.component';
 import { PlatformPanelDocsComponent } from './platform-panel-docs.component';
-import { PlatformPanelSimpleExampleComponent } from './platform-panel-examples/platform-panel-simple-example.component';
+
+import { PlatformPanelExpandableExampleComponent } from './platform-panel-examples/platform-panel-expandable-example.component';
+import { PlatformPanelFixedExampleComponent } from './platform-panel-examples/platform-panel-fixed-example.component';
+import { PlatformPanelFixedHeightExampleComponent } from './platform-panel-examples/platform-panel-fixed-height-example.component';
+import { PlatformPanelCompactExampleComponent } from './platform-panel-examples/platform-panel-compact-example.component';
+import { PlatformPanelActionsExampleComponent } from './platform-panel-examples/platform-panel-actions-example.component';
 
 const routes: Routes = [
     {
@@ -15,7 +20,7 @@ const routes: Routes = [
         component: PlatformPanelHeaderComponent,
         children: [
             { path: '', component: PlatformPanelDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.panel } }
         ]
     }
 ];
@@ -23,6 +28,14 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformPanelModule, PlatformButtonModule],
     exports: [RouterModule],
-    declarations: [PlatformPanelDocsComponent, PlatformPanelHeaderComponent, PlatformPanelSimpleExampleComponent]
+    declarations: [
+        PlatformPanelDocsComponent,
+        PlatformPanelHeaderComponent,
+        PlatformPanelExpandableExampleComponent,
+        PlatformPanelFixedExampleComponent,
+        PlatformPanelFixedHeightExampleComponent,
+        PlatformPanelCompactExampleComponent,
+        PlatformPanelActionsExampleComponent
+    ]
 })
 export class PlatformPanelDocsModule {}
