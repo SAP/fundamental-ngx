@@ -35,9 +35,11 @@
     "release": "./scripts/publish-release.sh",
     "release:create": "create-release",
     "start": "ng serve",
-    "test": "ng test core --watch false --code-coverage true --browsers=ChromeHeadless",
+    "test-all": "npm run test:core && npm run test:platform",
+    "test:core": "ng test core --watch false --code-coverage true --browsers=ChromeHeadless",
+    "test:core:active": "ng test core --watch true --browsers=ChromeHeadless",
     "test:platform": "ng test platform --watch false --code-coverage true --browsers=ChromeHeadless",
-    "active-test": "ng test core --watch true --browsers=ChromeHeadless",
+    "test:platform:active": "ng test platform --watch true --browsers=ChromeHeadless",
     "test:coveralls": "cat ./coverage/libs/core/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
     "compile-typedoc-all": "npm run compile-typedoc-core && npm run compile-typedoc-platform",
     "compile-typedoc-core": "rm -rf apps/docs/src/assets/typedoc/core && typedoc --out apps/docs/src/assets/typedoc/core libs/core/src/lib --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme apps/docs/src/fd-typedoc",
@@ -75,7 +77,7 @@
     "build-storybook": "build-storybook",
     "nx": "nx",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test"
+    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test-all"
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
