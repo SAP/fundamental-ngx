@@ -15,17 +15,21 @@
         Message With Picker - Changed Programmatically
         <button fd-button (click)="open = !open" style="width: 200px">Switch Message Visibility</button>
     </label>
-    <fd-form-input-message-group
+    <fd-popover
         [placement]="'bottom-start'"
         [(isOpen)]="open"
         [triggers]="[]"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false">
-        <fd-date-picker id="picker-message" [state]="'information'" [placement]="'top'"></fd-date-picker>
-        <fd-form-message [type]="'information'">
-            This message is controlled by <code>open</code> variable.
-        </fd-form-message>
-    </fd-form-input-message-group>
+        <fd-popover-control>
+            <fd-date-picker id="picker-message" [state]="'information'" [placement]="'top'"></fd-date-picker>
+        </fd-popover-control>
+        <fd-popover-body>
+            <fd-form-message [type]="'information'">
+                This message is controlled by <code>open</code> variable.
+            </fd-form-message>
+        </fd-popover-body>
+    </fd-popover>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
