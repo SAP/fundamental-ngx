@@ -12,7 +12,7 @@ export interface ComboboxInterface {
     dialogDismiss: (backup: string) => void;
     dialogApprove: () => void;
     inputText: string;
-    comboboxMobileConfig?: MobileModeConfig;
+    mobileConfig?: MobileModeConfig;
     openChange: EventEmitter<boolean>;
     dialogConfig: DialogConfig
 }

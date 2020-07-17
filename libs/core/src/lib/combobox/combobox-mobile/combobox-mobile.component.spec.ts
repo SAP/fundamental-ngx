@@ -20,7 +20,7 @@ describe('ComboboxMobileComponent', () => {
 
 
     let comboboxInputComponent: Partial<ComboboxComponent> = {
-        comboboxMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+        mobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
         dialogDismiss: (backupArgument: string) => {},
         dialogApprove: () => {},
         openChange: new EventEmitter<boolean>()
@@ -37,7 +37,7 @@ describe('ComboboxMobileComponent', () => {
 
     beforeEach(() => {
         comboboxInputComponent = {
-            comboboxMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+            mobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
             dialogDismiss: (backupArgument: string) => {},
             dialogApprove: () => {},
             openChange: new EventEmitter<boolean>()

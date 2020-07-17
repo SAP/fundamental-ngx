@@ -91,12 +91,12 @@ export class ComboboxMobileComponent implements OnInit, AfterViewInit, OnDestroy
 
     /** @hidden */
     private getMultiInputConfig(): MobileModeConfig {
-        if (this._comboboxComponent.comboboxMobileConfig) {
-            return this._comboboxComponent.comboboxMobileConfig;
+        if (this._comboboxComponent.mobileConfig) {
+            return this._comboboxComponent.mobileConfig;
         } else {
             if (isDevMode()) {
                 throw new Error('There is no combobox configuration object provided. ' +
-                    'You need to pass it as a "[comboboxMobileConfig]",' +
+                    'You need to pass it as a "[mobileConfig]",' +
                     'or provide it with "COMBOBOX_MOBILE_CONFIG" injection token'
                 );
             }

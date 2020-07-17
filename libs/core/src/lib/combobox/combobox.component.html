@@ -1,22 +1,24 @@
-<ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
-<fd-popover
-    *ngIf="!mobile"
-    [isOpen]="open && displayedValues && displayedValues.length"
-    (isOpenChange)="isOpenChangeHandle($event)"
-    [fillControlMode]="'at-least'"
-    [triggers]="triggers"
-    [disabled]="disabled || readOnly"
-    [closeOnOutsideClick]="closeOnOutsideClick"
-    class="fd-combobox-popover-custom"
->
-    <fd-popover-control>
-        <ng-container *ngTemplateOutlet="control"></ng-container>
-    </fd-popover-control>
-    <fd-popover-body *ngIf="displayedValues && displayedValues.length">
-        <ng-container *ngTemplateOutlet="list"></ng-container>
-        <ng-content></ng-content>
-    </fd-popover-body>
-</fd-popover>
+<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+
+<ng-template #desktopTemplate>
+    <fd-popover
+        [isOpen]="open && displayedValues && displayedValues.length"
+        (isOpenChange)="isOpenChangeHandle($event)"
+        [fillControlMode]="'at-least'"
+        [triggers]="triggers"
+        [disabled]="disabled || readOnly"
+        [closeOnOutsideClick]="closeOnOutsideClick"
+        class="fd-combobox-popover-custom"
+    >
+        <fd-popover-control>
+            <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+        </fd-popover-control>
+        <fd-popover-body *ngIf="displayedValues && displayedValues.length">
+            <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+            <ng-content></ng-content>
+        </fd-popover-body>
+    </fd-popover>
+</ng-template>
 
 <ng-template let-term="term" #itemSource>
     <span *ngIf="!itemTemplate" [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting">
@@ -26,8 +28,12 @@
     </ng-container>
 </ng-template>
 
+<ng-template #mobileTemplate>
+    <ng-container *ngIf="!open" [ngTemplateOutlet]="controlTemplate"></ng-container>
+</ng-template>
 
-<ng-template #control>
+
+<ng-template #controlTemplate>
     <fd-input-group
         [compact]="compact"
         [button]="true"
@@ -65,7 +71,7 @@
     </fd-input-group>
 </ng-template>
 
-<ng-template #list>
+<ng-template #listTemplate>
     <ul
         fd-list
         [dropdownMode]="true"

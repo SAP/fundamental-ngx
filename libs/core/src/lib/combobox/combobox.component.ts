@@ -115,7 +115,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
-    comboboxMobileConfig: MobileModeConfig;
+    mobileConfig: MobileModeConfig;
 
     /**
      *  The state of the form control - applies css classes.
@@ -223,11 +223,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     listMessages: QueryList<ListMessageDirective>;
 
     /** @hidden */
-    @ViewChild('control', { read: TemplateRef })
+    @ViewChild('controlTemplate')
     controlTemplate: TemplateRef<any>;
 
     /** @hidden */
-    @ViewChild('list', { read: TemplateRef })
+    @ViewChild('listTemplate')
     listTemplate: TemplateRef<any>;
 
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
