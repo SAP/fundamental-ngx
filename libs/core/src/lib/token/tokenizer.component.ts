@@ -427,7 +427,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         const elementLeft = this._elementRef.nativeElement.getBoundingClientRect().left;
         this.hiddenCozyTokenCount = 0;
         this.tokenList.forEach(token => {
-            if (token.tokenSpanElement.nativeElement.getBoundingClientRect().right < elementLeft) {
+            if (token.tokenWrapperElement.nativeElement.getBoundingClientRect().right < elementLeft) {
                 this.hiddenCozyTokenCount += 1;
             }
         });

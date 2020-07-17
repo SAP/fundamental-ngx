@@ -31,8 +31,8 @@ export class TokenComponent {
     compact: boolean = false;
 
     /** @hidden */
-    @ViewChild('spanElement')
-    tokenSpanElement: ElementRef;
+    @ViewChild('tokenWrapperElement')
+    tokenWrapperElement: ElementRef;
 
     private _selected: boolean = false;
 
