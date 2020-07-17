@@ -25,7 +25,7 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
-import { ListItemDirective } from '../list/list-item.directive';
+import { ListItemComponent } from '../list/list-item/list-item.component';
 import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
@@ -198,8 +198,8 @@ export class MultiInputComponent implements
     listTemplate: TemplateRef<any>;
 
     /** @hidden */
-    @ViewChildren(ListItemDirective)
-    listItems: QueryList<ListItemDirective>;
+    @ViewChildren(ListItemComponent)
+    listItems: QueryList<ListItemComponent>;
 
     /** @hidden */
     @ViewChild('searchInputElement')
@@ -258,8 +258,7 @@ export class MultiInputComponent implements
     /** @hidden */
     ngAfterViewInit(): void {
         this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this._menuKeyboardService.focusEscapeAfterList = () => {
-        };
+        this._menuKeyboardService.focusEscapeAfterList = () => {};
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -373,13 +372,6 @@ export class MultiInputComponent implements
                 }
             });
             this.tokenizer.input.elementRef().nativeElement.focus();
-        }
-    }
-
-    /** @hidden */
-    handleKeyDown(event: KeyboardEvent, index: number): void {
-        if (!this.mobile) {
-            this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
         }
     }
 

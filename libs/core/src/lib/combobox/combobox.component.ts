@@ -21,7 +21,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ListItemDirective } from '../list/list-item.directive';
+import { ListItemComponent } from '../list/list-item/list-item.component';
 import { ListMessageDirective } from '../list/list-message.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
@@ -70,8 +70,8 @@ import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.compo
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComboboxComponent
-    implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ComboboxComponent implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
+
     /** Values to be filtered in the search input. */
     @Input()
     dropdownValues: any[] = [];
@@ -203,8 +203,8 @@ export class ComboboxComponent
     inputTextChange: EventEmitter<string> = new EventEmitter<string>();
 
     /** @hidden */
-    @ViewChildren(ListItemDirective)
-    listItems: QueryList<ListItemDirective>;
+    @ViewChildren(ListItemComponent)
+    listItems: QueryList<ListItemComponent>;
 
     /** @hidden */
     @ViewChild('searchInputElement')
@@ -341,7 +341,7 @@ export class ComboboxComponent
     onListKeydownHandler(event: KeyboardEvent): void {
         const index: number = this.listItems
             .toArray()
-            .findIndex((item) => item.itemEl.nativeElement === document.activeElement);
+            .findIndex((item) => item.elementRef.nativeElement === document.activeElement);
         this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
     }
 

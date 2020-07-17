@@ -1,11 +1,53 @@
 <fd-docs-section-title [id]="'list-simple'" [componentName]="'list'">
     Simple List
 </fd-docs-section-title>
-<description>A simple list. The list item can contain plain text or links.</description>
 <component-example>
     <fd-list-example></fd-list-example>
 </component-example>
 <code-example [exampleFiles]="simpleList"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'listNavigation'" [componentName]="'list'">
+    Navigation
+</fd-docs-section-title>
+<description>
+    For a standard list with navigation links add the <code>[hasNavigation]="true"</code> property and
+    <code>[link]="true"</code> to the list elements, that contain <code>fd-list-link</code>.
+    All items should be navigable.
+</description>
+<component-example>
+    <fd-list-navigation-example></fd-list-navigation-example>
+</component-example>
+<code-example [exampleFiles]="listNavigation"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'listIndicator'" [componentName]="'list'">
+    Navigation Indicator
+</fd-docs-section-title>
+<description>
+    If only a subset of the list items are navigable you should indicate those by displaying a navigation arrow.
+    This is achieved by adding <code>[navigationIndication]="true"</code> property to the <code>fd-list</code> element.
+    Do not show arrows if all items are navigable. In this case use a Standard List with Navigation.
+</description>
+<component-example>
+    <fd-list-nav-indicator-example></fd-list-nav-indicator-example>
+</component-example>
+<code-example [exampleFiles]="listNavIndicator"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'listAction'" [componentName]="'list'">
+    Action List
+</fd-docs-section-title>
+<description>
+    To create action item, add <code>[action]="true"</code> to certain item.
+</description>
+<component-example>
+    <fd-list-action-example></fd-list-action-example>
+</component-example>
+<code-example [exampleFiles]="listAction"></code-example>
 
 <separator></separator>
 
@@ -31,17 +73,76 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'iconList'" [componentName]="'list'">
+<fd-docs-section-title [id]="'borderless-list'" [componentName]="'list'">
+    Borderless List
+</fd-docs-section-title>
+<description>
+    Also there is a way to remove bottom borders, by passing <code>[noBorder]="true"</code>.
+</description>
+<component-example>
+    <fd-list-borderless-example></fd-list-borderless-example>
+</component-example>
+<code-example [exampleFiles]="listBorderLess"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'iconComplex'" [componentName]="'list'">
     Complex Borderless List with Group Headers and Footer
 </fd-docs-section-title>
 <description>
-    In ListComponent items can be split to different groups, there is also available footer element. Also there is a way
-    to remove bottom borders, by passing <code>[noBorder]="true"</code>.
+    In ListComponent items can be split to different groups, there is also available footer element.
 </description>
 <component-example>
     <fd-list-complex-example></fd-list-complex-example>
 </component-example>
 <code-example [exampleFiles]="listComplex"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'selection-list'" [componentName]="'list'">
+    Selection
+</fd-docs-section-title>
+<description>
+    To achieve selection:
+    <ul>
+        <li>Add <code>[selection]="true"</code> to list</li>
+        <li>Add <code>fd-checkbox</code> or <code>fd-radio-button</code> inside list item</li>
+    </ul>
+</description>
+<component-example>
+    <fd-list-selection-example></fd-list-selection-example>
+</component-example>
+<code-example [exampleFiles]="listSelect"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'keyboard-list'" [componentName]="'list'">
+    Keyboard Support
+</fd-docs-section-title>
+<description>
+    Keyboard support is built inside the list component, it supports Arrow Down/Up and emits click event,
+    when Enter/Space keys triggered. To make it work user needs to provide <code>MenuKeyboardService</code>.
+    It can be disabled, by passing <code>[enableKeyboardSupport]="false"</code> to list component.
+    Also methods triggered on list leave can be customised as on example.
+</description>
+<component-example>
+    <fd-list-keyboard-example></fd-list-keyboard-example>
+</component-example>
+<code-example [exampleFiles]="keyboardList"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'dnd-list'" [componentName]="'list'">
+    Drag and Drop
+</fd-docs-section-title>
+<description>
+    List can be used along with <code>DragAndDropModule</code>. To achieve it, user should add <code>fd-dnd-list</code>
+    to list element and <code>fd-dnd-item</code> to every list item.
+</description>
+<component-example>
+    <fd-list-dnd-example></fd-list-dnd-example>
+</component-example>
+<code-example [exampleFiles]="listDnd"></code-example>
 
 <separator></separator>
 
@@ -57,5 +158,3 @@
     <fd-list-infinite-scroll-example></fd-list-infinite-scroll-example>
 </component-example>
 <code-example [exampleFiles]="infiniteScrollCode"></code-example>
-
-<separator></separator>

@@ -1,20 +1,21 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { MessageStates } from '../form/form-message/form-message.component';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass } from '../../utils/public_api';
 
 @Directive({
-    selector: '[fd-list-message], [fdListMessage]'
+  selector: '[fdListIcon], [fd-list-icon]'
 })
-export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder {
-    /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
+export class ListIconDirective implements OnChanges, OnInit {
+
+    /** The icon name to display. See the icon page for the list of icons
+     * here: https://sap.github.io/fundamental-ngx/icon
+     * */
     @Input()
-    type: MessageStates;
+    glyph: string;
 
     /** Apply user custom styles */
     @Input()
     class: string;
 
-    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -34,10 +35,10 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
      */
     buildComponentCssClass(): string[] {
         return [
-            'fd-list__message',
-            this.type ? 'fd-list__message--' + this.type : '',
+            'fd-list__icon',
+            this.glyph ? 'sap-icon--' + this.glyph : '',
             this.class
-        ];
+        ]
     }
 
     /** @hidden */

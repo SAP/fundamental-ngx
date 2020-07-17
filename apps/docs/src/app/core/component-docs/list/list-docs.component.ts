@@ -1,58 +1,29 @@
 import { Component } from '@angular/core';
-import { Schema } from '../../../schema/models/schema.model';
-import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as listSrc from '!raw-loader!./examples/list-example.component.html';
 import * as listSecondarySrc from '!raw-loader!./examples/list-secondary-example.component.html';
 import * as iconListSrc from '!raw-loader!./examples/list-icon-example.component.html';
 import * as complexList from '!raw-loader!./examples/list-complex-example.component.html';
+import * as actionListH from '!raw-loader!./examples/list-action-example/list-action-example.component.html';
+import * as actionListTs from '!raw-loader!./examples/list-action-example/list-action-example.component.ts';
+import * as borderLessListHtml from '!raw-loader!./examples/list-borderless-example/list-borderless-example.component.html';
+import * as dndListTs from '!raw-loader!./examples/list-dnd-example/list-dnd-example.component.ts';
+import * as dndListH from '!raw-loader!./examples/list-dnd-example/list-dnd-example.component.html';
+import * as keyboardListTs from '!raw-loader!./examples/list-keyboard-example/list-keyboard-example.component.ts';
+import * as keyboardListH from '!raw-loader!./examples/list-keyboard-example/list-keyboard-example.component.html';
+import * as listIndicatorH from '!raw-loader!./examples/list-nav-indicator-example/list-nav-indicator-example.component.html';
+import * as listNavH from '!raw-loader!./examples/list-navigation-example/list-navigation-example.component.html';
+import * as listSelectionH from '!raw-loader!./examples/list-selection-example/list-selection-example.component.html';
+import * as listSelectionTs from '!raw-loader!./examples/list-selection-example/list-selection-example.component.ts';
 import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
 import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
     selector: 'app-list',
     templateUrl: './list-docs.component.html'
 })
 export class ListDocsComponent {
-    static schema: any = {
-        properties: {
-            properties: {
-                type: 'object',
-                properties: {
-                    items: {
-                        type: ''
-                    },
-                    action: {
-                        type: 'object',
-                        properties: {
-                            icon: {
-                                type: 'string',
-                                enum: Icons
-                            },
-                            label: {
-                                type: 'string'
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        type: 'object'
-    };
-
-    schema: Schema;
-
-    data: any = {
-        properties: {
-            items: ['List Item 1', 'List Item 2', 'List Item 3', 'List Item 4'],
-            action: {
-                icon: 'edit',
-                label: 'Delete'
-            }
-        }
-    };
 
     simpleList: ExampleFile[] = [
         {
@@ -86,6 +57,86 @@ export class ListDocsComponent {
         }
     ];
 
+    listBorderLess: ExampleFile[] = [
+        {
+            language: 'html',
+            code: borderLessListHtml,
+            fileName: 'list-borderless-example'
+        }
+    ];
+
+    listAction: ExampleFile[] = [
+        {
+            language: 'html',
+            code: actionListH,
+            fileName: 'list-complex-example'
+        },
+        {
+            language: 'typescript',
+            code: actionListTs,
+            fileName: 'list-action-example',
+            component: 'ListActionExampleComponent'
+        }
+    ];
+
+    listDnd: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dndListH,
+            fileName: 'list-dnd-example'
+        },
+        {
+            language: 'typescript',
+            code: dndListTs,
+            fileName: 'list-dnd-example',
+            component: 'ListDndExampleComponent'
+        }
+    ];
+
+    keyboardList: ExampleFile[] = [
+        {
+            language: 'html',
+            code: keyboardListH,
+            fileName: 'list-keyboard-example'
+        },
+        {
+            language: 'typescript',
+            code: keyboardListTs,
+            fileName: 'list-keyboard-example',
+            component: 'ListKeyboardExampleComponent'
+        }
+    ];
+
+    listSelect: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listSelectionH,
+            fileName: 'list-selection-example'
+        },
+        {
+            language: 'typescript',
+            code: listSelectionTs,
+            fileName: 'list-selection-example',
+            component: 'ListSelectionExampleComponent'
+        }
+    ];
+
+    listNavIndicator: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listIndicatorH,
+            fileName: 'list-nav-indicator-example'
+        }
+    ];
+
+    listNavigation: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listNavH,
+            fileName: 'list-navigation-example'
+        }
+    ];
+
     infiniteScrollCode: ExampleFile[] = [
         {
             language: 'html',
@@ -99,12 +150,4 @@ export class ListDocsComponent {
             component: 'ListInfiniteScrollExampleComponent'
         }
     ];
-
-    constructor(private schemaFactory: SchemaFactoryService) {
-        this.schema = this.schemaFactory.getComponent('list');
-    }
-
-    onSchemaValues(data): void {
-        this.data = data;
-    }
 }

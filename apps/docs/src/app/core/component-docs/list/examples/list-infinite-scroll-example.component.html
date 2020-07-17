@@ -1,11 +1,14 @@
-<ul
-    fd-list
-    fdInfiniteScroll
-    (onScrollAction)="loadMoreElements()"
-    [scrollPercent]="scrollPercent"
-    style="display: block; overflow-y: scroll; max-height: 120px; border: 1px solid black;"
->
-    <li fd-list-item *ngFor="let object of displayedList">
-        {{ object.label }}
-    </li>
-</ul>
+
+<fd-busy-indicator size="l" class="fd-busy-indicator-custom" [block]="true" [loading]="loading">
+    <ul
+        fd-list
+        fdInfiniteScroll
+        (onScrollAction)="scrollHandler()"
+        [scrollOffset]="40"
+        style="overflow-y: scroll; max-height: 250px;"
+    >
+        <li fd-list-item *ngFor="let item of items">
+            {{ item }}
+        </li>
+    </ul>
+</fd-busy-indicator>

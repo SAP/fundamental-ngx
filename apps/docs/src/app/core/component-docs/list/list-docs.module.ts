@@ -11,8 +11,23 @@ import {
     ListIconExampleComponent,
     ListSecondaryExampleComponent
 } from './examples/list-examples.component';
-import { CheckboxModule, InfiniteScrollModule, LinkModule, ListModule, RadioModule } from '@fundamental-ngx/core';
+import {
+    CheckboxModule,
+    InfiniteScrollModule,
+    LinkModule,
+    ListModule,
+    RadioModule,
+    DragAndDropModule,
+    BusyIndicatorModule
+} from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { ListDndExampleComponent } from './examples/list-dnd-example/list-dnd-example.component';
+import { ListSelectionExampleComponent } from './examples/list-selection-example/list-selection-example.component';
+import { ListBorderlessExampleComponent } from './examples/list-borderless-example/list-borderless-example.component';
+import { ListActionExampleComponent } from './examples/list-action-example/list-action-example.component';
+import { ListNavigationExampleComponent } from './examples/list-navigation-example/list-navigation-example.component';
+import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/list-keyboard-example.component';
+import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
 
 const routes: Routes = [
     {
@@ -33,7 +48,9 @@ const routes: Routes = [
         LinkModule,
         CheckboxModule,
         RadioModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        DragAndDropModule,
+        BusyIndicatorModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -43,7 +60,14 @@ const routes: Routes = [
         ListInfiniteScrollExampleComponent,
         ListSecondaryExampleComponent,
         ListIconExampleComponent,
-        ListComplexExampleComponent
+        ListComplexExampleComponent,
+        ListDndExampleComponent,
+        ListSelectionExampleComponent,
+        ListBorderlessExampleComponent,
+        ListActionExampleComponent,
+        ListNavigationExampleComponent,
+        ListKeyboardExampleComponent,
+        ListNavIndicatorExampleComponent
     ]
 })
 export class ListDocsModule {}

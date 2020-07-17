@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Injectable, Output } from '@angular/core';
 import { DefaultMenuItem } from './default-menu-item.class';
-import { ListItemDirective } from '../list/list-item.directive';
+import { ListItemComponent } from '../list/list-item/list-item.component';
 import { KeyUtil } from '../utils/functions/key-util';
 
 @Injectable()
@@ -26,7 +26,7 @@ export class MenuKeyboardService {
      * @param index index of items starts from 0
      * @param menuItems array of menu item directives
      * */
-    keyDownHandler(event: KeyboardEvent, index: number, menuItems: DefaultMenuItem[] | ListItemDirective[]): void {
+    keyDownHandler(event: KeyboardEvent, index: number, menuItems: DefaultMenuItem[] | ListItemComponent[]): void {
         if (this.disableKeydownHandling) {
             return;
         }
