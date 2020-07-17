@@ -183,7 +183,7 @@ describe('CarouselDirective', () => {
 
         expect(verticalDirective.activeChange.emit).toHaveBeenCalledWith({
             item: verticalDirective.items.toArray()[6],
-            after: false
+            after: true
         });
     });
 

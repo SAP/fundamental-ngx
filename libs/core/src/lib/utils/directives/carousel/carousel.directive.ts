@@ -123,7 +123,7 @@ export class CarouselDirective implements AfterContentInit {
 
         this.activeChange.emit({
             item: closestItem,
-            after: delta > 0
+            after: delta < 0
         });
 
         this.dragStateChange.emit(false);

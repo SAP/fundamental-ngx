@@ -262,7 +262,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         const currentIndex: number = this.items.toArray().findIndex(_item => _item === this._activeCarouselItem);
         /** To prevent from switching time, when it's being dragged */
         if (!this._isDragging) {
-            this._pickTime(item, true, true, currentIndex > index);
+            this._pickTime(item, true, true, currentIndex < index);
         }
     }
 
