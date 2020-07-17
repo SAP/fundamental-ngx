@@ -7,6 +7,8 @@ import * as panelActionsExample from '!raw-loader!./platform-panel-examples/plat
 import * as panelFixedExample from '!raw-loader!./platform-panel-examples/platform-panel-fixed-example.component.html';
 import * as panelFixedHeightExample from '!raw-loader!./platform-panel-examples/platform-panel-fixed-height-example.component.html';
 import * as panelCompactExample from '!raw-loader!./platform-panel-examples/platform-panel-compact-example.component.html';
+import * as panelConfigHtmlExample from '!raw-loader!./platform-panel-examples/platform-panel-config-example.component.html';
+import * as panelConfigTsExample from '!raw-loader!./platform-panel-examples/platform-panel-config-example.component.ts';
 
 @Component({
     selector: 'app-panel',
@@ -15,7 +17,7 @@ import * as panelCompactExample from '!raw-loader!./platform-panel-examples/plat
 export class PlatformPanelDocsComponent {
     panelExpandable: ExampleFile[] = [
         {
-            language: 'html',
+            language: 'Html',
             code: panelExpandableExample,
             fileName: 'platform-panel-expandable-example.component'
         }
@@ -23,7 +25,7 @@ export class PlatformPanelDocsComponent {
 
     panelActions: ExampleFile[] = [
         {
-            language: 'html',
+            language: 'Html',
             code: panelActionsExample,
             fileName: 'platform-panel-actions-example'
         }
@@ -31,7 +33,7 @@ export class PlatformPanelDocsComponent {
 
     panelFixed: ExampleFile[] = [
         {
-            language: 'html',
+            language: 'Html',
             code: panelFixedExample,
             fileName: 'platform-panel-fixed-example'
         }
@@ -39,7 +41,7 @@ export class PlatformPanelDocsComponent {
 
     panelFixedHeight: ExampleFile[] = [
         {
-            language: 'html',
+            language: 'Html',
             code: panelFixedHeightExample,
             fileName: 'platform-panel-fixed-height-example'
         }
@@ -47,9 +49,22 @@ export class PlatformPanelDocsComponent {
 
     panelCompact: ExampleFile[] = [
         {
-            language: 'html',
+            language: 'Html',
             code: panelCompactExample,
             fileName: 'platform-panel-compact-example'
+        }
+    ];
+
+    panelConfig: ExampleFile[] = [
+        {
+            language: 'Html',
+            code: panelConfigHtmlExample,
+            fileName: 'platform-panel-config-example.component'
+        },
+        {
+            language: 'Typescript',
+            code: panelConfigTsExample,
+            fileName: 'platform-panel-config-example.component'
         }
     ];
 }

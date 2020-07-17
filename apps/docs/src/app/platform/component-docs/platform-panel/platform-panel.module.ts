@@ -13,6 +13,7 @@ import { PlatformPanelFixedExampleComponent } from './platform-panel-examples/pl
 import { PlatformPanelFixedHeightExampleComponent } from './platform-panel-examples/platform-panel-fixed-height-example.component';
 import { PlatformPanelCompactExampleComponent } from './platform-panel-examples/platform-panel-compact-example.component';
 import { PlatformPanelActionsExampleComponent } from './platform-panel-examples/platform-panel-actions-example.component';
+import { PlatformPanelConfigExampleComponent } from './platform-panel-examples/platform-panel-config-example.component';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         PlatformPanelFixedExampleComponent,
         PlatformPanelFixedHeightExampleComponent,
         PlatformPanelCompactExampleComponent,
-        PlatformPanelActionsExampleComponent
+        PlatformPanelActionsExampleComponent,
+        PlatformPanelConfigExampleComponent
     ]
 })
 export class PlatformPanelDocsModule {}
