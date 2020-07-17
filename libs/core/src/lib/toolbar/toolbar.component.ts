@@ -143,9 +143,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         if (this.shouldOverflow) {
             of(true)
                 .pipe(
-		  delay(5),
-		  takeWhile(() => this._alive)
-		)
+                    delay(5),
+                    takeWhile(() => this._alive)
+                )
                 .subscribe(() => this._collapseItems());
         }
 
@@ -185,7 +185,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     private _onResize(): Observable<boolean> {
         return of(true).pipe(
-	    takeWhile(()=> this._alive),
+            takeWhile(() => this._alive),
             tap(() => this._reset()),
             delay(5),
             tap(() => this._collapseItems())
