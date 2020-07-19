@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-content',
@@ -10,10 +10,11 @@ export class PlatformCheckboxGroupContentCheckboxComponent {
 
     form1 = new FormGroup({});
     form2 = new FormGroup({});
-    form3 = new FormGroup({});
+    form3 = new FormGroup({
+        visited: new FormControl(['Italy', 'France'])
+    });
 
     // Template driven
     subjects = '';
     reptiles = ['Lizards', 'Snakes'];
-    disabledCountries = ''
 }

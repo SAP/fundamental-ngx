@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { SelectItem } from '@fundamental-ngx/platform';
 
 @Component({
@@ -16,10 +16,11 @@ export class PlatformCheckboxGroupListComponent {
 
     form1 = new FormGroup({});
     form2 = new FormGroup({});
-    form3 = new FormGroup({});
+    form3 = new FormGroup({
+        sports: new FormControl(['cycling', 'running'])
+    });
 
     // template driven
     countrySeason = '';
     selectedSports = ['running', 'swimming'];
-    sportsDisabled = '';
 }

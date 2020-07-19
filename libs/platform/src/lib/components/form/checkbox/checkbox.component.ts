@@ -83,7 +83,16 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
 
     /** set state of individual checkbox.Used by CBG to set checkbox states */
     @Input()
-    stateType: Status;
+    get stateType(): Status {
+        if (this._state) {
+            return this._state;
+        }
+        return this.status; // return parent form field status.
+    }
+
+    set stateType(state: Status) {
+        this._state = state;
+    }
 
     /** Emitting checked event for non-form checkbox  */
     @Output()
@@ -185,16 +194,6 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         this._updateModel();
         this.onTouched();
         this.stateChanges.next('checkbox: onModelChange');
-    }
-
-    /**
-     * returns the state for checkbox.
-     */
-    public getUpdatedState(): string {
-        if (this.stateType) {
-            return this.stateType as string;
-        }
-        return this.status as string; // return parent form field status.
     }
 
     /** @hidden running outside angular zone */

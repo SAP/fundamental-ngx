@@ -24,7 +24,23 @@
     </fdp-form-field>
 </fdp-form-group>
 <span style="margin-left: 2rem;">Hobbies: {{ form2.controls.hobbies.value }}</span>
+<br />
+<br />
 
+<p>Pre-selection based on value passed from FormGroup</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form3">
+    <fdp-form-field #fl4 [id]="'visited'" [label]="'visited countries'" zone="zLeft" rank="1">
+        <fdp-checkbox-group [name]="'countries'" formControlName="visited">
+            <fdp-checkbox [value]="'Italy'" [label]="'Italy'"></fdp-checkbox>
+            <fdp-checkbox [value]="'France'" [label]="'France'"></fdp-checkbox>
+            <fdp-checkbox [value]="'Switzerland'" [label]="'Switzerland'"></fdp-checkbox>
+            <fdp-checkbox [value]="'Austria'" [label]="'Austria'"></fdp-checkbox>
+        </fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Visited Countries: {{ form3.controls.visited.value }}</span>
+<br />
+<br />
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form3">
     <fdp-form-field
@@ -75,7 +91,7 @@
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'countries'" [label]="'Disabled checkbox Group: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group [name]="'visited countries'" [disabled]="true" [(ngModel)]="disabledCountries">
+        <fdp-checkbox-group [name]="'visited countries'" [disabled]="true">
             <fdp-checkbox [value]="'Italy'" [label]="'Italy'"></fdp-checkbox>
             <fdp-checkbox [value]="'France'" [label]="'France'"></fdp-checkbox>
             <fdp-checkbox [value]="'Switzerland'" [label]="'Switzerland'"></fdp-checkbox>

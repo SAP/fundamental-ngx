@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { SelectItem } from '@fundamental-ngx/platform';
 
 @Component({
@@ -22,12 +22,14 @@ export class PlatformCheckboxGroupListObjectComponent {
 
     form4 = new FormGroup({});
     form5 = new FormGroup({});
-    form6 = new FormGroup({});
+    form6 = new FormGroup({
+        currencies: new FormControl(['INR'])
+    });
+    form7 = new FormGroup({});
 
     // template driven
     languagesKnown = '';
     currencies = ['INR', 'USD'];
-    currencyDisabled = '';
 }
 
 class Country implements SelectItem {

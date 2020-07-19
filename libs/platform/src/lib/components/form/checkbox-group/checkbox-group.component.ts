@@ -71,8 +71,8 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     writeValue(value: any): void {
         if (value) {
             super.writeValue(value);
+            this.stateChanges.next('CBG: writevalue');
         }
-        this._changeDetector.detectChanges();
     }
 
     /**

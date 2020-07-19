@@ -25,6 +25,16 @@
 <br />
 <br />
 
+<p>Pre-selection based on value passed from formGroup</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form3">
+    <fdp-form-field #fl4 [id]="'sports'" [label]="'Sports I Play:'" zone="zLeft" rank="1">
+        <fdp-checkbox-group [list]="sports" [name]="'sports'" formControlName="sports"></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Sports I Play: {{ form3.controls.sports.value }}</span>
+<br />
+<br />
+
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form3">
     <fdp-form-field #fl3 [id]="'sportsDisabled'" [label]="'Disabled checkbox Group: '" [disabled]="true" zone="zLeft" rank="1">
@@ -73,7 +83,6 @@
             [list]="sports"
             [name]="'sports'"
             [disabled]="true"
-            [(ngModel)]="sportsDisabled"
         ></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
