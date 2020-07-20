@@ -35,8 +35,12 @@
                         "scripts": [
                             "node_modules/marked/lib/marked.js"
                         ],
-                        "es5BrowserSupport": true,
-                        "showCircularDependencies": false
+                        "showCircularDependencies": false,
+                        "allowedCommonJsDependencies": [
+                          "moment",
+                          "highlight.js",
+                          "focus-trap"
+                        ]
                     },
                     "configurations": {
                         "production": {
