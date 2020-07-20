@@ -1,0 +1,58 @@
+<div
+    class="fd-step-input"
+    [class.is-focus]="focused"
+    [class.is-disabled]="disabled"
+    [class.fd-step-input--compact]="compact"
+    [class.fd-step-input--without-buttons]="showLabels"
+>
+    <button
+        *ngIf="!showLabels"
+        fd-button
+        fdType="transparent"
+        class="fd-step-input__button"
+        fdp-step-input-decrement
+        tabindex="-1"
+        type="button"
+        [compact]="compact"
+        [disabled]="disabled"
+        [attr.title]="decrementLabel"
+        [attr.aria-label]="decrementLabel"
+        glyph="add"
+    ></button>
+    <input
+        #elemRef
+        class="fd-input fd-input--no-number-spinner fd-step-input__input"
+        [name]="name"
+        [id]="id"
+        [value]="value"
+        [disabled]="disabled"
+        [placeholder]="placeholder"
+        [class.fd-input--compact]="compact"
+        [attr.aria-label]="ariaLabel"
+        [style.textAlign]="align"
+        type="number"
+        (focusin)="handleFocusIn()"
+        (focusout)="handleFocusOut()"
+        (wheel)="handleScroll($event)"
+        (keydown)="handleKeyDown($event)"
+        (input)="trackInputValue($event)"
+        (change)="updateOnInputChanged()"
+    />
+    <button
+        *ngIf="!showLabels"
+        fd-button
+        fdType="transparent"
+        class="fd-step-input__button"
+        fdp-step-input-decrement
+        tabindex="-1"
+        type="button"
+        [compact]="compact"
+        [disabled]="disabled"
+        [attr.title]="incrementLabel"
+        [attr.aria-label]="incrementLabel"
+        glyph="minus"
+    ></button>
+</div>
+<span *ngIf="description" class="fd-form-label fd-form-label--unit-description">
+    {{ description }}
+</span>
