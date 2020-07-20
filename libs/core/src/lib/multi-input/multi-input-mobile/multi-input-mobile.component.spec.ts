@@ -23,7 +23,7 @@ describe('MultiInputMobileComponent', () => {
 
     let mockedMultiInputComponent: Partial<MultiInputComponent> = {
         selected: backupData,
-        multiInputMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+        mobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
         dialogDismiss: (backupArguments: any[]) => {},
         selectAllItems: () => {},
         dialogApprove: () => {},
@@ -42,7 +42,7 @@ describe('MultiInputMobileComponent', () => {
     beforeEach(() => {
         mockedMultiInputComponent = {
             selected: backupData,
-            multiInputMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+            mobileModeConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
             dialogDismiss: (backupArguments: any[]) => {},
             selectAllItems: () => {},
             dialogApprove: () => {},
