@@ -60,14 +60,11 @@ describe('ComboboxMobileComponent', () => {
     it('should open and close with approve', () => {
         anyComponent._comboboxComponent.mobile = true;
         component.ngOnInit();
-        component.ngAfterViewInit();
-        spyOn(anyComponent._dialogRef._onHide, 'next');
+        anyComponent._comboboxComponent.openChange.emit(true);
         spyOn(anyComponent._comboboxComponent, 'dialogApprove');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
-        anyComponent._comboboxComponent.openChange.emit(true);
         fixture.detectChanges();
-        expect(anyComponent._dialogRef._onHide.next).toHaveBeenCalledWith(false);
         component.handleApprove();
         expect(anyComponent._comboboxComponent.dialogApprove).toHaveBeenCalled();
     });
@@ -75,15 +72,12 @@ describe('ComboboxMobileComponent', () => {
     it('should open and close with dismiss', () => {
         anyComponent._comboboxComponent.mobile = true;
         component.ngOnInit();
-        component.ngAfterViewInit();
-        spyOn(anyComponent._dialogRef._onHide, 'next');
+        anyComponent._comboboxComponent.inputText = 'test';
+        anyComponent._comboboxComponent.openChange.emit(true);
         spyOn(anyComponent._comboboxComponent, 'dialogDismiss');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
-        anyComponent._comboboxComponent.inputText = 'test';
-        anyComponent._comboboxComponent.openChange.emit(true);
         fixture.detectChanges();
-        expect(anyComponent._dialogRef._onHide.next).toHaveBeenCalledWith(false);
         component.handleDismiss();
         expect(anyComponent._comboboxComponent.dialogDismiss).toHaveBeenCalledWith('test');
     });
