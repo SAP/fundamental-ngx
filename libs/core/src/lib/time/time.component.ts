@@ -114,7 +114,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     minutes: number[];
 
     /** @hidden container for [am, pm] values */
-    periods: string[];
+    meridians: string[];
 
     activeView: FdTimeActiveView = 'hour';
 
@@ -399,7 +399,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
             this.minutes.push(i);
         }
 
-        this.periods = [this._timeI18nLabels.meridianAm, this._timeI18nLabels.meridianPm];
+        this.meridians = [this._timeI18nLabels.meridianAm, this._timeI18nLabels.meridianPm];
     }
 
     /** @hidden */

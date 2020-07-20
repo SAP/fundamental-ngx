@@ -38,9 +38,9 @@
         (activeStateChange)="changeActive('second')"
     ></fd-time-column>
     <fd-time-column
-        *ngIf="meridian && periods"
+        *ngIf="meridian && meridians"
         [active]="isActive('meridian')"
-        [rows]="periods"
+        [rows]="meridians"
         [offset]="0"
         [compact]="compact"
         [activeValue]="period"
