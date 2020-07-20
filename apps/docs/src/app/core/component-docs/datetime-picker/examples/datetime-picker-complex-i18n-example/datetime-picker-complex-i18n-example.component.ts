@@ -63,18 +63,18 @@ export class DatetimePickerComplexI18nExampleComponent {
 
     actualMomentJsLang: string = '';
 
-    placeholder: string = 'mm/dd/yyyy, hh:mm:ss am'
+    placeholder: string = 'mm/dd/yyyy, hh:mm am'
 
     public date: FdDatetime = FdDatetime.getToday();
 
     public refresh(): void {
         this.datetimePickerComponent.locale = this.actualLocale;
         this.datetimePickerComponent.format = this.actualFormat;
+        console.log(this.actualLocale);
         switch (this.actualLocale) {
-          case('en'): this.placeholder = 'mm/dd/yyyy, hh:mm'; break;
+          case('en-gb'): this.placeholder = 'mm/dd/yyyy, hh:mm'; break;
           case('fr'): this.placeholder = 'dd/mm/yyyy  hh:mm'; break;
           case('bg'): this.placeholder = 'дд/мм/гг чч:мм'; break;
-          case('en-bg'): this.placeholder = 'mm/dd/yyyy, hh:mm'; break;
           case('de'): this.placeholder = 'dd.mm.yy, hh:mm'; break;
           case('pl'): this.placeholder = 'dd.mm.yyyy, hh:mm'; break;
         }
