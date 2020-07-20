@@ -7,7 +7,6 @@ import {
     HostBinding,
     Input,
     OnDestroy,
-    OnInit,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -44,7 +43,7 @@ import { delay, filter, first, takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit, Validator {
+export class TimePickerComponent implements ControlValueAccessor, OnDestroy, AfterViewInit, Validator {
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
@@ -163,10 +162,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** @hidden */
     constructor(private _cd: ChangeDetectorRef, private _timeAdapter: TimeFormatParser) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-    }
 
     /** @hidden */
     ngAfterViewInit(): void {
