@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -24,7 +23,7 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class ComboboxMobileComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ComboboxMobileComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     comboboxMobileConfig: MobileModeConfig;
@@ -66,12 +65,6 @@ export class ComboboxMobileComponent implements OnInit, AfterViewInit, OnDestroy
     }
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this._open();
-        this._dialogRef.hide(true);
-    }
-
-    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -79,13 +72,13 @@ export class ComboboxMobileComponent implements OnInit, AfterViewInit, OnDestroy
 
     /** @hidden */
     handleDismiss(): void {
-        this._dialogRef.hide(true);
+        this._dialogRef.dismiss();
         this._comboboxComponent.dialogDismiss(this._selectedBackup);
     }
 
     /** @hidden */
     handleApprove(): void {
-        this._dialogRef.hide(true);
+        this._dialogRef.close();
         this._comboboxComponent.dialogApprove();
     }
 
@@ -110,7 +103,6 @@ export class ComboboxMobileComponent implements OnInit, AfterViewInit, OnDestroy
                 this._open();
             }
         }
-        this._dialogRef.hide(!open);
     }
 
     /** @hidden */
