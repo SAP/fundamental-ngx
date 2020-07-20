@@ -39,7 +39,8 @@
                         "allowedCommonJsDependencies": [
                           "moment",
                           "highlight.js",
-                          "focus-trap"
+                          "focus-trap",
+                          "@angularclass/hmr"
                         ]
                     },
                     "configurations": {
