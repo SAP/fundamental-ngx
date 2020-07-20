@@ -2,9 +2,9 @@ import { Rule, SchematicContext, Tree, chain, SchematicsException } from '@angul
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
-import { addImportToRootModule, hasModuleImport } from '../utils/ng-module-utils';
+import { addImportToRootModule, getProjectFromWorkspace, hasModuleImport } from '../utils/ng-module-utils';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
-import { getProject } from '@schematics/angular/utility/project';
+import { getWorkspace } from '@schematics/angular/utility/config';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
 import { cdkVersion } from './versions';
@@ -70,8 +70,8 @@ function addDependencies(): Rule {
 // Configures browser animations.
 function addAnimations(options: any): Rule {
     return (tree: Tree) => {
-        // tslint:disable-next-line:no-non-null-assertion
-        const modulePath = getAppModulePath(tree, getProject(tree, options.project)!.architect!.build!.options!.main);
+        const workspace = getWorkspace(tree);
+        const modulePath = getAppModulePath(tree, getProjectFromWorkspace(workspace, options.project).architect.build.options.main);
 
         if (options.animations) {
             if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
