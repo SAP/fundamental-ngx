@@ -22,6 +22,6 @@ export const API_FILES = {
         'PlatformPanelComponent',
         'PlatformPanelContentComponent',
         'PlatformPanelActionsComponent',
-        'PlatformPanelOptions'
+        'PlatformPanelConfig'
     ]
 };
