@@ -31,6 +31,9 @@
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body *ngIf="displaySeconds || displayMinutes || displayHours">
+        <ng-container *ngIf="isOpen">
+            <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
+        </ng-container>
         <fd-time
             [tablet]="tablet"
             [compact]="compact"
@@ -46,3 +49,12 @@
         ></fd-time>
     </fd-popover-body>
 </fd-popover>
+
+<ng-container *ngIf="!isOpen">
+    <ng-container *ngTemplateOutlet="messageTemplate"></ng-container>
+</ng-container>
+
+
+<ng-template #messageTemplate>
+    <ng-content select="fd-form-message"></ng-content>
+</ng-template>
