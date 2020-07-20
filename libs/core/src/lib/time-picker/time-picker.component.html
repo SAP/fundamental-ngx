@@ -15,18 +15,18 @@
             [glyph]="'fob-watch'"
         >
             <input
-                [value]="getFormattedTime()"
-                [compact]="compact"
-                #inputElement
-                fd-input-group-input
-                (keyup.enter)="timeInputChanged($event.currentTarget.value)"
-                (focusout)="timeInputChanged(inputElement.value)"
-                (click)="inputGroupClicked($event)"
-                [disabled]="disabled"
                 type="text"
                 class="fd-input"
+                fd-input-group-input
+                #inputElement
+                [value]="getFormattedTime()"
+                [compact]="compact"
+                (focusout)="timeInputChanged(inputElement.value)"
+                [disabled]="disabled"
                 [placeholder]="placeholder"
                 [attr.aria-label]="timePickerInputLabel"
+                (keyup.enter)="timeInputChanged($event.currentTarget.value)"
+                (click)="inputGroupClicked($event)"
             />
         </fd-input-group>
     </fd-popover-control>
@@ -42,7 +42,7 @@
             [displayMinutes]="displayMinutes"
             [displaySeconds]="displaySeconds"
             [displayHours]="displayHours"
-            [spinners]="spinners"
+            [spinnerButtons]="spinnerButtons"
         ></fd-time>
     </fd-popover-body>
 </fd-popover>

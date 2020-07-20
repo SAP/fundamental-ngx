@@ -6,7 +6,8 @@ import {
     EventEmitter,
     HostBinding,
     HostListener,
-    Input, OnDestroy,
+    Input,
+    OnDestroy,
     OnInit,
     Output,
     QueryList,
@@ -32,7 +33,7 @@ export interface TimeColumnItemOutput {
 
 
 @Component({
-    selector: ' fd-time-column',
+    selector: 'fd-time-column',
     templateUrl: './time-column.component.html',
     styleUrls: ['./time-column.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,7 +67,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     @Input()
     spinners: boolean = true;
 
-    /** Active value  */
+    /** Currently chosen, centered time column item */
     @Input()
     set activeValue(value: any) {
         if (this._initialised && this._activeValue !== value) {
@@ -120,21 +121,9 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     @Output()
     activeValueChange: EventEmitter<TimeColumnItemOutput> = new EventEmitter<TimeColumnItemOutput>();
 
-    /** Event emitted, when previous column should be focused */
-    @Output()
-    focusPreviousColumn: EventEmitter<void> = new EventEmitter<void>();
-
-    /** Event emitted, when next column should be focused */
-    @Output()
-    focusNextColumn: EventEmitter<void> = new EventEmitter<void>();
-
     /** Event emitted, when certain column is activated */
     @Output()
     activeStateChange: EventEmitter<void> = new EventEmitter<void>();
-
-    /** Event emitted, when focus is lost from last button of column. It helps with focus trap */
-    @Output()
-    lastButtonTabKeyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
     /** @hidden */
     @ViewChild(CarouselDirective)
@@ -212,19 +201,22 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         } else if (KeyUtil.isKey(event, 'ArrowUp')) {
             this.scrollUp();
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'ArrowLeft')) {
-            this.focusPreviousColumn.emit();
-        } else if (KeyUtil.isKey(event, 'ArrowRight')) {
-            this.focusNextColumn.emit();
         } else if (KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical')) {
             this._queryKeyDownEvent.next(event.key);
         }
     }
 
     /** @hidden */
-    handleLastButtonKeyDown(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, 'Tab') && !event.shiftKey) {
-            this.lastButtonTabKeyDown.emit(event);
+    spinnerButtonKeydownHandle(event: KeyboardEvent, upButton?: boolean): void {
+        if (KeyUtil.isKey(event, ' ')) {
+            if (upButton) {
+                this.scrollUp();
+            } else {
+                this.scrollDown()
+            }
+
+            event.stopPropagation();
+            event.preventDefault();
         }
     }
 
@@ -288,6 +280,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** Method triggered by keyboard, or decrement button */
     scrollDown(): void {
+        console.log('scrolldown');
         let index: number = this.items
             .toArray()
             .findIndex(_item => _item === this._activeCarouselItem)

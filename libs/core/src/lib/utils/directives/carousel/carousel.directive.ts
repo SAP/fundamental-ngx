@@ -27,7 +27,7 @@ export interface PanEndOutput {
     after: boolean;
 }
 
-export const Default_Transition_Duration: string = '150ms';
+export const DEFAULT_TRANSITION_DURATION: string = '150ms';
 
 
 @Directive({
@@ -253,7 +253,7 @@ export class CarouselDirective implements AfterContentInit {
         if (this.config) {
             return this.config.transition;
         } else {
-            return Default_Transition_Duration;
+            return DEFAULT_TRANSITION_DURATION;
         }
     }
 

@@ -14,7 +14,6 @@
                     type="text"
                     class="fd-input"
                     fd-input-group-input
-                    #dateTimePicker
                     [attr.aria-label]="datetimeInputLabel"
                     [(ngModel)]="inputFieldDate"
                     (ngModelChange)="handleInputChange($event)"
@@ -65,8 +64,7 @@
                     [meridian]="meridian"
                     [ngModel]="time"
                     [compact]="compact"
-                    [spinners]="spinners"
-                    (focusFirstElement)="dateTimePicker.focus()"
+                    [spinnerButtons]="spinnerButtons"
                     (ngModelChange)="handleTimeChange($event)"
                     [displaySeconds]="displaySeconds"
                     [displayMinutes]="displayMinutes"

@@ -29,7 +29,6 @@ describe('TimePickerComponent', () => {
 
     it('should create with default values', () => {
         expect(component).toBeTruthy();
-        expect(component.spinners).toBe(true);
         expect(component.displaySeconds).toBe(true);
     });
 

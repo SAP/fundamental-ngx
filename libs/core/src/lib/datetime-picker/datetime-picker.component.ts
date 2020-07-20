@@ -214,9 +214,9 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     @Input()
     markWeekends: boolean = true;
 
-    /** @Input When set to false, hides the buttons that increment and decrement the corresponding time column. */
+    /** @Input Whether to show spinner buttons */
     @Input()
-    spinners: boolean = true;
+    spinnerButtons: boolean = true;
 
     /**
      * Whether user wants to show week numbers next to days

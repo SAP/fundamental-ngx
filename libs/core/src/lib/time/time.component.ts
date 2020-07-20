@@ -2,19 +2,19 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    EventEmitter,
     forwardRef,
     Input,
-    OnChanges, OnInit,
-    Output,
+    OnChanges,
+    OnInit,
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TimeI18nLabels } from './i18n/time-i18n-labels';
+import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnItemOutput } from './time-column/time-column.component';
+import { KeyUtil } from '../..';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -23,8 +23,7 @@ export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
     templateUrl: './time.component.html',
     styleUrls: ['./time.component.scss'],
     host: {
-        '(blur)': 'onTouched()',
-        class: ''
+        '(blur)': 'onTouched()'
     },
     providers: [
         {
@@ -99,15 +98,9 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
-    /**
-     * @Input When set to false, hides the buttons that increment and decrement the corresponding columns.
-     */
+    /** @Input Whether to show spinner buttons */
     @Input()
-    spinners: boolean = true;
-
-    /** @hidden */
-    @Output()
-    readonly focusFirstElement: EventEmitter<void> = new EventEmitter<void>();
+    spinnerButtons: boolean = true;
 
     /** @hidden
      * Used only in meridian mode. Stores information the current am/pm state.
@@ -158,7 +151,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     /** @hidden */
     constructor(
-        private _timeI18nLabels: TimeI18nLabels,
+        private _timeI18nLabels: TimeI18n,
         private _changeDetRef: ChangeDetectorRef
     ) {
     }
@@ -217,6 +210,17 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
             } else {
                 this.changeActive('hour');
             }
+        }
+    }
+
+    /** @hidden */
+    handleKeyDownEvent(event: KeyboardEvent): void {
+        if (KeyUtil.isKey(event, 'ArrowLeft')) {
+            this.handlePreviousColumnFocus(this.activeView);
+            event.preventDefault();
+        } else if (KeyUtil.isKey(event, 'ArrowRight')) {
+            this.handleNextColumnFocus(this.activeView);
+            event.preventDefault();
         }
     }
 
@@ -353,17 +357,6 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
             increaseLabel: this._timeI18nLabels.increasePeriodLabel,
             label: this._timeI18nLabels.periodLabel
         };
-    }
-
-    /** @hidden
-     * Handles last button keyboard events
-     */
-    lastButtonKeydown(event: KeyboardEvent): void {
-        /** Prevent tab, when it's in time/datetime picker */
-        if (this.focusFirstElement.observers.length > 0) {
-            event.preventDefault();
-            this.focusFirstElement.emit();
-        }
     }
 
     /**

@@ -23,7 +23,7 @@ export class CarouselItemDirective {
     /** Carousel Id, it has some default value if not set,  */
     @Input()
     @HostBinding('attr.id')
-    carouselItemId: string = 'carousel-item-id-' + uniqueCarouselItemId++;
+    id: string = 'carousel-item-id-' + uniqueCarouselItemId++;
 
     constructor(
         private _elementRef: ElementRef

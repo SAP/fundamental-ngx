@@ -67,9 +67,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     @Input()
     disabled: boolean;
 
-    /** @Input When set to false, hides the buttons that increment and decrement the corresponding column. */
+    /** @Input Whether to show spinner buttons */
     @Input()
-    spinners: boolean = true;
+    spinnerButtons: boolean = true;
 
     /** @Input When set to false, hides the input for seconds. */
     @Input()
@@ -125,7 +125,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
 
     /** @hidden */
     @HostBinding('class.fd-time-picker')
-    timepickerclass = true;
+    timePickerClass = true;
 
     /** @hidden */
     @ViewChild(TimeComponent)

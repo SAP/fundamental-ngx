@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 /**
- * Provides i18n support for labels inside the time component.
+ * Provides i18n support for labels and meridian naming inside the time component.
  */
 @Injectable({ providedIn: 'root' })
-export class TimeI18nLabels {
+export class TimeI18n {
     /** Aria label for the 'increase hours' button */
     increaseHoursLabel: string = 'Increase hours';
 
@@ -41,15 +41,9 @@ export class TimeI18nLabels {
     /** Aria label for the 'decrease period' button */
     decreasePeriodLabel: string = 'Decrease period';
 
-    /**
-     * Ante Meridian naming label. The value written in the input should match this or Post Meridian. Otherwise it would be
-     * treated as invalid
-     * */
+    /** Ante Meridian value, which will be displayed on period column */
     meridianAm: string = 'am';
 
-    /**
-     * Post Meridian naming label. The value written in the input should match this or Ante Meridian. Otherwise it would be
-     * treated as invalid
-     * */
+    /** Post Meridian value, which will be displayed on period column */
     meridianPm: string = 'pm';
 }

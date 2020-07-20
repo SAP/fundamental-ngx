@@ -1,9 +1,9 @@
 import { Component, Injectable } from '@angular/core';
-import { TimeI18nLabels } from '@fundamental-ngx/core';
+import { TimeI18n } from '@fundamental-ngx/core';
 
 // Aria labels i18n
 @Injectable()
-export class CustomI18nLabels extends TimeI18nLabels {
+export class CustomI18nLabels extends TimeI18n {
     increaseHoursLabel: string = 'Aumentar horas';
 
     hoursLabel: string = 'Horas';
@@ -37,7 +37,7 @@ export class CustomI18nLabels extends TimeI18nLabels {
     // Note that this can be provided in the root of your application.
     providers: [
         {
-            provide: TimeI18nLabels,
+            provide: TimeI18n,
             useClass: CustomI18nLabels
         }
     ]
