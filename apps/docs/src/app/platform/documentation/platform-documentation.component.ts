@@ -30,7 +30,8 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/search-field', name: 'Search Field' },
             { url: 'platform/split-menu-button', name: 'Split Menu Button' },
             { url: 'platform/textarea', name: 'Textarea' },
-            { url: 'platform/switch', name: 'Switch' }
+            { url: 'platform/switch', name: 'Switch' },
+            { url: 'platform/step-input', name: 'Step Input' }
         ];
 
         this.layouts = [];

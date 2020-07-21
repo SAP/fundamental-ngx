@@ -12,8 +12,12 @@ export class PlatformNumberStepInputChange extends PlatformStepInputChange<Numbe
 @Component({
     selector: 'fdp-number-step-input',
     templateUrl: 'number-step-input.component.html',
+    styleUrls: ['number-step-input.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: NumberStepInputComponent, multi: true }]
+    providers: [
+        { provide: FormFieldControl, useExisting: NumberStepInputComponent, multi: true },
+        { provide: StepInputComponent, useExisting: NumberStepInputComponent }
+    ]
 })
 export class NumberStepInputComponent extends StepInputComponent {
     /** Set description */
@@ -38,10 +42,19 @@ export class NumberStepInputComponent extends StepInputComponent {
         super.ngAfterViewInit();
     }
 
-    createChangeEvent() {
+    createChangeEvent(value: number) {
         const event = new PlatformNumberStepInputChange();
         event.source = this;
-        event.payload = this.value;
+        event.payload = value;
         return event;
+    }
+
+    formatValue(value: number) {
+        return value.toPrecision();
+    }
+
+    parseValue(value: string) {
+        const parsedValue = Number(value);
+        return isNaN(parsedValue) ? null : parsedValue;
     }
 }

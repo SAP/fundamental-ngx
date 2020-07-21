@@ -25,5 +25,6 @@ export const API_FILES = {
         'PlatformPanelActionsComponent',
         'PlatformPanelConfig'
     ],
-    switch: ['SwitchComponent']
+    switch: ['SwitchComponent'],
+    stepInput: ['NumberStepInputComponent', 'StepInputComponent']
 };

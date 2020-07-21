@@ -1,16 +1,16 @@
-import { Directive, HostListener, Self } from '@angular/core';
+import { Directive, HostListener, SkipSelf } from '@angular/core';
 
 import { StepInputComponent } from './base.step-input';
 
 /**
- * Tool directive used to achieve the infinite scroll mechanism.
+ * This Directive is used to be assigned to increment button.
  */
 @Directive({
     selector: '[fdpStepInputIncrement]'
 })
 export class StepInputIncrementDirective {
     /** @hidden */
-    constructor(@Self() private stepInput: StepInputComponent) {}
+    constructor(@SkipSelf() private stepInput: StepInputComponent) {}
 
     @HostListener('click', ['$event'])
     click($event: Event) {
