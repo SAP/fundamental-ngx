@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { PlatformPanelModule, PlatformButtonModule } from '@fundamental-ngx/platform';
+
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
-import { PlatformPanelModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 
 import { PlatformPanelHeaderComponent } from './platform-panel-header/platform-panel-header.component';
 import { PlatformPanelDocsComponent } from './platform-panel-docs.component';
-
 import { PlatformPanelExpandableExampleComponent } from './platform-panel-examples/platform-panel-expandable-example.component';
 import { PlatformPanelFixedExampleComponent } from './platform-panel-examples/platform-panel-fixed-example.component';
 import { PlatformPanelFixedHeightExampleComponent } from './platform-panel-examples/platform-panel-fixed-height-example.component';

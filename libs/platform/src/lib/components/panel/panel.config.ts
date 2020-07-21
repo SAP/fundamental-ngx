@@ -22,18 +22,6 @@ export class PlatformPanelConfig {
      */
     contentDensity: ContentDensity;
 
-    static createCustomConfigProvider(obj: Partial<PlatformPanelConfig>): FactoryProvider {
-        const provider = (platformConfig: PlatformConfig): PlatformPanelConfig => {
-            return Object.assign(new PlatformPanelConfig(platformConfig), obj);
-        };
-
-        return {
-            provide: PlatformPanelConfig,
-            useFactory: provider,
-            deps: [PlatformConfig]
-        }
-    }
-
     constructor(platformConfig: PlatformConfig) {
         this.contentDensity = platformConfig.contentDensity;
     }

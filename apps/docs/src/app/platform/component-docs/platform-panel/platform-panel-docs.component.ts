@@ -17,7 +17,7 @@ import * as panelConfigTsExample from '!raw-loader!./platform-panel-examples/pla
 export class PlatformPanelDocsComponent {
     panelExpandable: ExampleFile[] = [
         {
-            language: 'Html',
+            language: 'html',
             code: panelExpandableExample,
             fileName: 'platform-panel-expandable-example.component'
         }
@@ -25,7 +25,7 @@ export class PlatformPanelDocsComponent {
 
     panelActions: ExampleFile[] = [
         {
-            language: 'Html',
+            language: 'html',
             code: panelActionsExample,
             fileName: 'platform-panel-actions-example'
         }
@@ -33,7 +33,7 @@ export class PlatformPanelDocsComponent {
 
     panelFixed: ExampleFile[] = [
         {
-            language: 'Html',
+            language: 'html',
             code: panelFixedExample,
             fileName: 'platform-panel-fixed-example'
         }
@@ -41,7 +41,7 @@ export class PlatformPanelDocsComponent {
 
     panelFixedHeight: ExampleFile[] = [
         {
-            language: 'Html',
+            language: 'html',
             code: panelFixedHeightExample,
             fileName: 'platform-panel-fixed-height-example'
         }
@@ -49,7 +49,7 @@ export class PlatformPanelDocsComponent {
 
     panelCompact: ExampleFile[] = [
         {
-            language: 'Html',
+            language: 'html',
             code: panelCompactExample,
             fileName: 'platform-panel-compact-example'
         }
@@ -57,12 +57,12 @@ export class PlatformPanelDocsComponent {
 
     panelConfig: ExampleFile[] = [
         {
-            language: 'Html',
+            language: 'html',
             code: panelConfigHtmlExample,
             fileName: 'platform-panel-config-example.component'
         },
         {
-            language: 'Typescript',
+            language: 'typescript',
             code: panelConfigTsExample,
             fileName: 'platform-panel-config-example.component'
         }

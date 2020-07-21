@@ -1,10 +1,15 @@
-<fdp-button (click)="expanded = !expanded">Toggle Expand</fdp-button> <br /><br />
-Expanded value is: {{ expanded }} <br /><br /><br />
+<fdp-button (click)="expanded = !expanded">Toggle Expand</fdp-button>
+<br />
+<br />
+Expanded value is: {{ expanded }}
+<br />
+<br />
+<br />
 
 <fdp-panel
-    [id]="'panel-id'"
-    [title]="'Panel Title'"
-    [contentDensity]="'cozy'"
+    id="panel-id"
+    title="Panel Title"
+    contentDensity="cozy"
     [expanded]="expanded"
     [expandable]="true"
     (panelExpandChange)="onExpandChange($event)"

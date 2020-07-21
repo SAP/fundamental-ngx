@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-panel-header',
-    templateUrl: './platform-panel-header.component.html',
-    styleUrls: ['./platform-panel-header.component.scss']
+    templateUrl: './platform-panel-header.component.html'
 })
-export class PlatformPanelHeaderComponent implements OnInit {
-    constructor() {}
-
-    ngOnInit() {}
-}
+export class PlatformPanelHeaderComponent {}

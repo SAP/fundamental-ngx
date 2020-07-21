@@ -1,8 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fdp-panel-actions-example',
-    templateUrl: './platform-panel-actions-example.component.html',
-    encapsulation: ViewEncapsulation.None
+    templateUrl: './platform-panel-actions-example.component.html'
 })
 export class PlatformPanelActionsExampleComponent {}
