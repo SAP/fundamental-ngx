@@ -73,12 +73,10 @@ describe('MultiInputComponent', () => {
         const inputElement = fixture.nativeElement.querySelector('.fd-input');
         inputElement.value = text;
         inputElement.dispatchEvent(new Event('input'));
-        fixture.detectChanges();
 
         expect(component.searchTerm).toBe(text);
         expect(component.searchTermChange.emit).toHaveBeenCalled();
         expect(component.filterFn).toHaveBeenCalled();
-        expect(component.popoverRef.updatePopover).toHaveBeenCalled();
         expect(component.openChangeHandle).toHaveBeenCalledWith(true);
     });
 
@@ -112,23 +110,6 @@ describe('MultiInputComponent', () => {
         expect(component.open).toBe(true);
 
         inputButtonElement.click();
-        fixture.detectChanges();
-
-        expect(component.open).toBe(false);
-    });
-
-    it('should open/close popover on button click', async () => {
-        await fixture.whenStable();
-        component.dropdownValues = ['test1', 'test2', 'foobar'];
-        component.ngOnInit();
-        component.open = false;
-
-        const button = fixture.nativeElement.querySelector('button');
-        button.click();
-        fixture.detectChanges();
-        expect(component.open).toBe(true);
-
-        button.click();
         fixture.detectChanges();
 
         expect(component.open).toBe(false);
