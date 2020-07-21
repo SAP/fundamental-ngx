@@ -11,11 +11,5 @@ export class ComboboxExampleComponent {
     searchTermFour: string = '';
     searchTermFive: string = '';
 
-    dropdownValues = [
-        'Apple',
-        'Pineapple',
-        'Banana',
-        'Kiwi',
-        'Strawberry',
-    ];
+    dropdownValues = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];
 }
