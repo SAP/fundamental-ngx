@@ -9,6 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { anyLanguageLettersRegEx } from '../utils/constants/any-language-letters.regex';
 
 export type AvatarSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ColorAccent = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
@@ -43,6 +44,17 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     @HostBinding('attr.aria-labelledby')
     ariaLabelledby: string = null;
 
+    /** Localized text for label */
+    @Input()
+    set label(value: string) {
+        this.ariaLabel = value || null;
+        this._label = value || null;
+    }
+
+    get label(): string {
+        return this._label;
+    }
+
     /** The size of the Avatar. Options include: *xs*, *s*, *m*, *l* and *xl*. */
     @Input() size: AvatarSize = 'l';
 
@@ -70,13 +82,27 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** A number from 1 to 10 representing the background color of the Avatar. */
     @Input() colorAccent: ColorAccent = null;
 
+    /**
+    * @deprecated
+    * Deprecated according to Rename `backgroundImage` to `image`
+    * */
     /** Background image url. */
     @Input()
     backgroundImage: string = null;
 
+    /** Background image resource: url or base64. */
+    @Input()
+    set image(value: string) {
+        this._image = value || null;
+    }
+
     /** @hidden */
     @HostBinding('style.background-image')
-    get image(): string {
+    get bgImage(): string {
+        if (this._image) {
+            return 'url(' + this._image + ')';
+        }
+
         return 'url(' + this.backgroundImage + ')';
     }
 
@@ -84,6 +110,34 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     @HostBinding('attr.role')
     get role(): string {
         return this.zoomGlyph ? 'button' : 'presentation';
+    }
+
+    /** @hidden */
+    get abbreviate(): string {
+        if (!this.label || this._image) {
+            return null;
+        }
+
+        const maxLettersCount = 3;
+        const firstLetters = this.label.split(' ').map(word => word.charAt(0));
+        const abbreviate = firstLetters.join('');
+
+        if (firstLetters.length > maxLettersCount || !abbreviate.match(anyLanguageLettersRegEx)) {
+            return null;
+        }
+
+        return abbreviate;
+    }
+
+    /** @hidden */
+    private _image: string;
+
+    /** @hidden */
+    private _label: string;
+
+    /** @hidden */
+    private get showDefault() {
+        return !this.abbreviate && !this._image && !this.glyph;
     }
 
     /** @hidden */
@@ -108,6 +162,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return [
             'fd-avatar',
             this.size ? `fd-avatar--${this.size}` : '',
+            this.showDefault ? 'sap-icon--person-placeholder' : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.colorAccent ? `fd-avatar--accent-color-${this.colorAccent}` : '',
             this.circle ? 'fd-avatar--circle' : '',
