@@ -368,9 +368,9 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     /** @hidden */
     private _setUpCarouselConfiguration(): void {
         if (!this.meridian) {
-            this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms', infinite: true };
+            this.config = { gestureSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms', infinite: true };
         } else {
-            this.config = { panSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
+            this.config = { gestureSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
         }
     }
 

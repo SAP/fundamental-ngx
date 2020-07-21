@@ -15,10 +15,15 @@ import { HammerConfig } from './carousel.module';
 
 
 export interface CarouselConfig {
+    /** Defines if carousel items are placed vertically */
     vertical?: boolean;
+    /** Amount of visible elements in carousel */
     elementsAtOnce?: number;
-    panSupport?: boolean
+    /** Defines if support for gestures, like touch swipe or mouse drag should be enabled */
+    gestureSupport?: boolean
+    /** Defines if carousel should move elements to sides. It allows to slide infinitely in one direction */
     infinite?: boolean;
+    /** Transition time of CSS translate, `150ms` by default */
     transition?: string;
 }
 
@@ -45,12 +50,6 @@ export class CarouselDirective implements AfterContentInit {
     /** Initial active item of carousel, position first + offset */
     @Input()
     active: CarouselItemDirective;
-
-    /**
-     * Defines if support for gestures, like touch swipe or mouse drag should be enabled
-     */
-    @Input()
-    gestureSupport: boolean = true;
 
     /** Event thrown, when active element is changed */
     @Output()
@@ -84,7 +83,7 @@ export class CarouselDirective implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (this.config.panSupport) {
+        if (this.config.gestureSupport) {
             this._hammerSetup();
         }
     }
