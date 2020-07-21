@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.18...v0.20.1-rc.19) (2020-07-19)
+
+### [0.20.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.17...v0.20.1-rc.18) (2020-07-19)
+
+### [0.20.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.16...v0.20.1-rc.17) (2020-07-19)
+
+### [0.20.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.15...v0.20.1-rc.16) (2020-07-16)
+
+
+### Bug Fixes
+
+* update table wrapper component to apply classes to thead/tbody/tfoot ([#2855](https://github.com/SAP/fundamental-ngx/issues/2855)) ([d0f6072](https://github.com/SAP/fundamental-ngx/commit/d0f607290f111d6e1e8caa7041416738c76113ac))
+
+### [0.20.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.14...v0.20.1-rc.15) (2020-07-16)
+
+
+### Bug Fixes
+
+* Datetime Picker null detection ([#2857](https://github.com/SAP/fundamental-ngx/issues/2857)) ([144c5c4](https://github.com/SAP/fundamental-ngx/commit/144c5c4f88b32f647235df03b2ff989dae2b8ee9))
+
 ### [0.20.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.13...v0.20.1-rc.14) (2020-07-15)
 
 
