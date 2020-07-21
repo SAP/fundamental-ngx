@@ -403,14 +403,12 @@ export class MultiInputComponent implements
 
     /** @hidden */
     handleSearchTermChange(): void {
-        if (!this.open && this.searchTerm && this.searchTerm.length) {
+        if (!this.open) {
             this.openChangeHandle(true);
         }
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
-        if (this.popoverRef) {
-            this.popoverRef.updatePopover();
-        }
+        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
@@ -452,7 +450,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    moreClicked() {
+    moreClicked(): void {
         this.openChangeHandle(true);
         const newDisplayedValues: any[] = [];
         this.displayedValues.forEach(value => {
@@ -461,9 +459,19 @@ export class MultiInputComponent implements
             }
         });
         this.displayedValues = newDisplayedValues;
+        this._changeDetRef.detectChanges();
     }
 
-    private defaultFilter(contentArray: any[], searchTerm: string): any[] {
+    /** @hidden */
+    addOnButtonClicked(): void {
+        if (!this.open) {
+            this.handleSearchTermChange();
+        } else {
+            this.openChangeHandle(false);
+        }
+    }
+
+    private defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
