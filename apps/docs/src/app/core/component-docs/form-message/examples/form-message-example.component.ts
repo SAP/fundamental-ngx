@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     styles: [
             `
             .fd-custom-form-item-message {
-                margin-bottom: 30px !important;
+                margin-bottom: 40px !important;
             }
         `
     ]

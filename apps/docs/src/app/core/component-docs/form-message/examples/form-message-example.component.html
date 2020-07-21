@@ -11,18 +11,22 @@
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="picker-message">
-        Message With Picker - Changed Programmatically
-        <button fd-button (click)="open = !open" style="width: 200px">Switch Message Visibility</button>
+    <label fd-form-label for="group-message-2">
+        Message With InputGroup - Changed Programmatically
     </label>
     <fd-popover
-        [placement]="'bottom-start'"
+        [placement]="'bottom'"
         [(isOpen)]="open"
         [triggers]="[]"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false">
         <fd-popover-control>
-            <fd-date-picker id="picker-message" [state]="'information'" [placement]="'top'"></fd-date-picker>
+            <fd-input-group id="group-message-2"
+                            [state]="'information'"
+                            [button]="true"
+                            [addOnText]="'Toggle Message'"
+                            (addOnButtonClicked)="open = !open">
+            </fd-input-group>
         </fd-popover-control>
         <fd-popover-body>
             <fd-form-message [type]="'information'">
