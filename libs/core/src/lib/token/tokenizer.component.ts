@@ -7,14 +7,14 @@ import {
     Component,
     ContentChild,
     ContentChildren,
-    ElementRef,
+    ElementRef, EventEmitter,
     forwardRef,
     HostListener,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
+    Optional, Output,
     QueryList,
     Renderer2,
     ViewChild,
@@ -82,6 +82,17 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** Word to use for when there are extra tokens. */
     @Input()
     moreTerm: string = 'more';
+
+    /** @hidden */
+    @Input()
+    open: boolean;
+
+    /** @hidden */
+    inputFocused: boolean = false;
+
+    /** Event emitted when the search term changes. Use *$event* to access the new term. */
+    @Output()
+    readonly moreClickedEvent: EventEmitter<any> = new EventEmitter<any>();
 
     /** @hidden */
     previousElementWidth: number;
@@ -312,6 +323,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         }
 
         return totalTokenWidth;
+    }
+
+    /** @hidden */
+    moreClicked(): void {
+        this.moreClickedEvent.emit();
     }
 
     /** @hidden */

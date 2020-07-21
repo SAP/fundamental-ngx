@@ -37,8 +37,8 @@
         [isExpanded]="open && !mobile && displayedValues && displayedValues.length"
         [isControl]="true"
         [glyph]="glyph"
-        (click)="openChangeHandle(!open || mobile)">
-        <fd-tokenizer [compact]="compact"
+        (addOnButtonClicked)="openChangeHandle(!open || mobile)">
+        <fd-tokenizer [compact]="compact" [open]="open" (moreClickedEvent)="moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
                       [class.fd-multi-input-tokenizer-custom--compact]="compact"
         >
@@ -50,7 +50,7 @@
             >
                 <span [innerHtml]="token | displayFnPipe: displayFn"></span>
             </fd-token>
-            <input
+            <input (focusin)="tokenizer.inputFocused = true;" (focusout)="tokenizer.inputFocused = false;"
                 type="text"
                 class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
                 fd-form-control

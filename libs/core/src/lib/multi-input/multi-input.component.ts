@@ -451,6 +451,18 @@ export class MultiInputComponent implements
         this._resetSearchTerm();
     }
 
+    /** @hidden */
+    moreClicked() {
+        this.openChangeHandle(true);
+        const newDisplayedValues: any[] = [];
+        this.displayedValues.forEach(value => {
+            if (this.selected.indexOf(value) !== -1) {
+                newDisplayedValues.push(value);
+            }
+        });
+        this.displayedValues = newDisplayedValues;
+    }
+
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {

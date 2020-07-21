@@ -100,18 +100,18 @@ describe('MultiInputComponent', () => {
         expect(component.dropdownValues.length).toBe(3);
     });
 
-    it('should open/close popover on input click', async () => {
+    it('should open/close popover on input addon click', async () => {
         await fixture.whenStable();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
         component.open = false;
 
-        const inputElement = fixture.nativeElement.querySelector('.fd-input');
-        inputElement.click();
+        const inputButtonElement = fixture.nativeElement.querySelector('.fd-input-group__button');
+        inputButtonElement.click();
         fixture.detectChanges();
         expect(component.open).toBe(true);
 
-        inputElement.click();
+        inputButtonElement.click();
         fixture.detectChanges();
 
         expect(component.open).toBe(false);
