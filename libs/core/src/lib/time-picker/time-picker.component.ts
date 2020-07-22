@@ -294,9 +294,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     writeValue(time: TimeObject): void {
         if (!time) {
             this.time = { hour: null, minute: null, second: null };
+            if (!this.allowNull) {
+                this.isInvalidTimeInput = true;
+            }
         } else {
+            this.isInvalidTimeInput = false;
             this.time = time;
         }
-        this.cd.markForCheck();
+        this._cd.markForCheck();
     }
 }
