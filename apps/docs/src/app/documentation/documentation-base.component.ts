@@ -73,7 +73,7 @@ export class DocumentationBaseComponent implements OnInit {
     }
 
     private _isCollapsed(): void {
-        if (window.innerWidth < COLLAPSED_BREAKPOINT) {
+        if (window.innerWidth < SMALL_SCREEN_BREAKPOINT) {
             this.sideCollapsed.next(true);
         }
     }
