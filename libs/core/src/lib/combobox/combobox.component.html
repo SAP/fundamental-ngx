@@ -50,7 +50,7 @@
             [dropdownMode]="true"
             class="fd-combobox-input-menu-overflow"
             [style.maxHeight]="maxHeight"
-            [hasMessage]="listMessages.length > 0"
+            [hasMessage]="listMessages && listMessages.length > 0"
         >
             <ng-content></ng-content>
             <ng-container *ngIf="groupFn">
