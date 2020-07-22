@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { PanelModule, ToolbarModule } from '@fundamental-ngx/core';
 
 import { PlatformPanelComponent } from './panel.component';

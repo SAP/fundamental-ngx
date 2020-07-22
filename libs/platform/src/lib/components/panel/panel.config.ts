@@ -1,4 +1,5 @@
-import { Injectable, FactoryProvider } from '@angular/core';
+import { Injectable } from '@angular/core';
+
 import { ContentDensity, PlatformConfig } from '@fundamental-ngx/platform';
 
 /**
@@ -21,6 +22,16 @@ export class PlatformPanelConfig {
      * Content Density of element. 'cozy' | 'compact'
      */
     contentDensity: ContentDensity;
+
+    /**
+     * Create Provider factory function
+     */
+    static createProviderFactory(obj: Partial<PlatformPanelConfig>) {
+        const useFactory = (platformConfig: PlatformConfig): PlatformPanelConfig => {
+            return Object.assign(new PlatformPanelConfig(platformConfig), obj);
+        };
+        return useFactory;
+    }
 
     constructor(platformConfig: PlatformConfig) {
         this.contentDensity = platformConfig.contentDensity;

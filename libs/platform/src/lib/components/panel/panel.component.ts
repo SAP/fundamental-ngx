@@ -5,8 +5,14 @@ import {
     Output,
     EventEmitter,
     ContentChild,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    ViewChild,
+    OnInit,
+    OnChanges,
+    SimpleChanges
 } from '@angular/core';
+
+import { PanelTitleDirective } from '@fundamental-ngx/core';
 
 import { BaseComponent } from '../base';
 
@@ -14,20 +20,29 @@ import { PlatformPanelConfig } from './panel.config';
 import { PlatformPanelActionsComponent } from './panel-actions/panel-actions.component';
 import { PlatformPanelContentComponent } from './panel-content/panel-content.component';
 
+/** Panel change event instance */
 export class PanelExpandChangeEvent {
-    constructor(
-        public source: PlatformPanelComponent,
-        public payload: boolean // true if "Expanded", false if "collapsed"
-    ) {}
+    constructor(public source: PlatformPanelComponent, public payload: boolean) {}
 }
 
+/**
+ * Fundamental Panel component
+ *
+ * ```html
+ * <fdp-panel title="Panel Header">
+ *     <fdp-panel-content>
+ *        Panel Content
+ *     </fdp-panel-content>
+ * </fdp-panel>
+ * ```
+ *
+ * */
 @Component({
     selector: 'fdp-panel',
     templateUrl: './panel.component.html',
-    styleUrls: ['./panel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformPanelComponent extends BaseComponent {
+export class PlatformPanelComponent extends BaseComponent implements OnInit, OnChanges {
     /**
      * sets Panel title.
      */
@@ -65,18 +80,24 @@ export class PlatformPanelComponent extends BaseComponent {
     /**
      *  Button label based on the current state
      */
-    get expandAriaLabel(): string {
-        return this.expanded ? this.collapseLabel : this.expandLabel;
-    }
+    expandAriaLabel: string;
+
+    /** @hidden */
+    _expanded: boolean = true;
 
     /** @hidden */
     @ContentChild(PlatformPanelActionsComponent)
-    panelActions: PlatformPanelActionsComponent;
+    panelActionsComponent: PlatformPanelActionsComponent;
 
     /** @hidden */
     @ContentChild(PlatformPanelContentComponent)
-    panelContent: PlatformPanelContentComponent;
+    panelContentComponent: PlatformPanelContentComponent;
 
+    /** @hidden */
+    @ViewChild(PanelTitleDirective)
+    panelTitleDirective: PanelTitleDirective;
+
+    /** @hidden */
     constructor(protected _cd: ChangeDetectorRef, panelConfig: PlatformPanelConfig) {
         super(_cd);
 
@@ -86,6 +107,18 @@ export class PlatformPanelComponent extends BaseComponent {
         this.collapseLabel = panelConfig.collapseLabel;
     }
 
+    /** @hidden */
+    ngOnInit() {
+        this._calculateExpandAriaLabel();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.expanded) {
+            this._calculateExpandAriaLabel();
+        }
+    }
+
     /**
      *  Handles expanded/collapsed event
      */
@@ -93,5 +126,14 @@ export class PlatformPanelComponent extends BaseComponent {
         this.expanded = expanded;
         const event = new PanelExpandChangeEvent(this, expanded);
         this.panelExpandChange.emit(event);
+        this._calculateExpandAriaLabel();
+    }
+
+    /**
+     * @hidden
+     * Calculate expandAriaLabel based on panel state
+     */
+    private _calculateExpandAriaLabel() {
+        this.expandAriaLabel = this.expanded ? this.collapseLabel : this.expandLabel;
     }
 }

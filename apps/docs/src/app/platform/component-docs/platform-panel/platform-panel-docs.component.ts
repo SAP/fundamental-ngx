@@ -19,7 +19,7 @@ export class PlatformPanelDocsComponent {
         {
             language: 'html',
             code: panelExpandableExample,
-            fileName: 'platform-panel-expandable-example.component'
+            fileName: 'platform-panel-expandable-example'
         }
     ];
 
@@ -59,12 +59,12 @@ export class PlatformPanelDocsComponent {
         {
             language: 'html',
             code: panelConfigHtmlExample,
-            fileName: 'platform-panel-config-example.component'
+            fileName: 'platform-panel-config-example'
         },
         {
             language: 'typescript',
             code: panelConfigTsExample,
-            fileName: 'platform-panel-config-example.component'
+            fileName: 'platform-panel-config-example'
         }
     ];
 }

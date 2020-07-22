@@ -2,12 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 
+import { PlatformButtonModule, ContentDensity } from '@fundamental-ngx/platform';
+import { By } from '@angular/platform-browser';
+
 import { PlatformPanelComponent, PanelExpandChangeEvent } from './panel.component';
 import { PlatformPanelContentComponent } from './panel-content/panel-content.component';
 import { PlatformPanelActionsComponent } from './panel-actions/panel-actions.component';
 import { PlatformPanelModule } from './panel.module';
-import { By } from '@angular/platform-browser';
-import { PlatformButtonModule, ContentDensity } from '@fundamental-ngx/platform';
 
 @Component({
     template: `<fdp-panel [title]="'Panel Title'">

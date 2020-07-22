@@ -1,23 +1,21 @@
-import { Component, FactoryProvider } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { PlatformPanelConfig } from '@fundamental-ngx/platform';
+import { PlatformPanelConfig, PlatformConfig } from '@fundamental-ngx/platform';
 
-export const panelConfigProviderFactory = (): PlatformPanelConfig => {
-    const config: PlatformPanelConfig = {
-        contentDensity: 'compact',
-        collapseLabel: 'New Default Collapse Label',
-        expandLabel: 'New Default Expand Label'
-    };
-    return config;
-};
-export const panelConfigProvider: FactoryProvider = {
+export const panelConfigFactory = PlatformPanelConfig.createProviderFactory({
+    collapseLabel: 'New Default Collapse Label',
+    expandLabel: 'New Default Expand Label'
+});
+
+export const customPanelConfigProvider = {
     provide: PlatformPanelConfig,
-    useFactory: panelConfigProviderFactory
+    useFactory: panelConfigFactory,
+    deps: [PlatformConfig]
 };
 
 @Component({
     selector: 'fdp-panel-config-example',
     templateUrl: './platform-panel-config-example.component.html',
-    providers: [panelConfigProvider]
+    providers: [customPanelConfigProvider]
 })
 export class PlatformPanelConfigExampleComponent {}
