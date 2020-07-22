@@ -6,7 +6,7 @@ import { PanelExpandChangeEvent } from '@fundamental-ngx/platform';
     templateUrl: './platform-panel-expandable-example.component.html'
 })
 export class PlatformPanelExpandableExampleComponent {
-    public expanded: boolean = true;
+    public expanded = true;
 
     public onExpandChange(event: PanelExpandChangeEvent) {
         this.expanded = event.payload;

@@ -53,13 +53,13 @@ export class PlatformPanelComponent extends BaseComponent implements OnInit, OnC
      * Whether the Panel Content is expanded
      */
     @Input()
-    expanded: boolean = true;
+    expanded = true;
 
     /**
      * Whether the Panel is expandable
      */
     @Input()
-    expandable: boolean = true;
+    expandable = true;
 
     /**
      * ARIA label for button when the Panel is collapsed
@@ -81,9 +81,6 @@ export class PlatformPanelComponent extends BaseComponent implements OnInit, OnC
      *  Button label based on the current state
      */
     expandAriaLabel: string;
-
-    /** @hidden */
-    _expanded: boolean = true;
 
     /** @hidden */
     @ContentChild(PlatformPanelActionsComponent)
