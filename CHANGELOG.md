@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.21...v0.20.1-rc.22) (2020-07-22)
+
+
+### Bug Fixes
+
+* bug where initial hidden token count was wrong on cozy multi-input ([#2870](https://github.com/SAP/fundamental-ngx/issues/2870)) ([f96a39b](https://github.com/SAP/fundamental-ngx/commit/f96a39bad2c18350ead154483b2e5be1d10f12ab))
+
 ### [0.20.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.20...v0.20.1-rc.21) (2020-07-22)
 
 ### [0.20.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.19...v0.20.1-rc.20) (2020-07-22)
