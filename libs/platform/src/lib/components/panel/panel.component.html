@@ -9,7 +9,7 @@
     <h5 fd-panel-title>{{ title }}</h5>
 
     <ng-container *ngIf="panelActionsComponent">
-        <fd-toolbar [size]="contentDensity" [shouldOverflow]="true" [fdType]="'transparent'" [clearBorder]="true">
+        <fd-toolbar [size]="contentDensity" [shouldOverflow]="true" fdType="transparent" [clearBorder]="true">
             <ng-content select="fdp-panel-actions"></ng-content>
         </fd-toolbar>
     </ng-container>
