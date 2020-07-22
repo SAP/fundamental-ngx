@@ -268,10 +268,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     }
 
     /** @hidden */
-    timeFromTimeComponentChanged(): void {
-        this._cd.detectChanges();
-        this.onChange(this.time);
+    timeFromTimeComponentChanged(time: TimeObject): void {
+        Object.keys(time).forEach(key => time[key] = time[key] ? time[key] : 0)
+        this.time = time;
+        this.onChange(time);
         this.isInvalidTimeInput = false;
+        this._cd.detectChanges();
     }
 
     /** @hidden */
