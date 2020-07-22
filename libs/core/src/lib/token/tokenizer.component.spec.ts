@@ -199,7 +199,7 @@ describe('TokenizerComponent', () => {
 
     it('should get the combined token width', () => {
         component.tokenList.forEach((token) => {
-            spyOn(token.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+            spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         });
         spyOn(component.input.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
 
@@ -219,7 +219,7 @@ describe('TokenizerComponent', () => {
     it('should get the hidden cozy token count AfterViewChecked', async () => {
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({left: 1});
         component.tokenList.forEach((token) => {
-            spyOn(token.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ right: 0 });
+            spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').and.returnValue({ right: 0 });
         });
         spyOnProperty(component.tokenizerInnerEl.nativeElement, 'scrollWidth').and.returnValue(5);
 

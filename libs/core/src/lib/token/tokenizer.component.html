@@ -7,8 +7,8 @@
 >
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <ng-content select="fd-token"></ng-content>
-        <span
-            *ngIf="(moreTokensLeft.length > 0 || moreTokensRight.length > 0) || hiddenCozyTokenCount > 0"
+        <span (click)="moreClicked()"
+            *ngIf="((moreTokensLeft.length > 0 || moreTokensRight.length > 0) || hiddenCozyTokenCount > 0) && !open && !inputFocused"
             class="fd-tokenizer-more"
             #moreElement
         >

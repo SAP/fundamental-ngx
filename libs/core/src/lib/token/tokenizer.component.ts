@@ -7,15 +7,16 @@ import {
     Component,
     ContentChild,
     ContentChildren,
-    ElementRef,
+    ElementRef, EventEmitter,
     forwardRef,
     HostListener,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
-    QueryList, Renderer2,
+    Optional, Output,
+    QueryList,
+    Renderer2,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -83,6 +84,17 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     moreTerm: string = 'more';
 
     /** @hidden */
+    @Input()
+    open: boolean;
+
+    /** @hidden */
+    inputFocused: boolean = false;
+
+    /** Event emitted when the search term changes. Use *$event* to access the new term. */
+    @Output()
+    readonly moreClickedEvent: EventEmitter<any> = new EventEmitter<any>();
+
+    /** @hidden */
     previousElementWidth: number;
 
     /** @hidden */
@@ -123,20 +135,13 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListChangesSubscription.unsubscribe();
         }
         this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
+            this.cdRef.detectChanges();
             this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
             this.previousTokenCount = this.tokenList.length;
             this.handleTokenClickSubscriptions();
         });
         if (!this.compact) {
-            // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
-            this.tokenizerInnerEl.nativeElement.scrollLeft =
-                this.tokenizerInnerEl.nativeElement.scrollWidth;
-            this._getHiddenCozyTokenCount();
-            if (this.hiddenCozyTokenCount > 0) {
-                // need to do this again in case "____ more" text was added
-                this.tokenizerInnerEl.nativeElement.scrollLeft =
-                    this.tokenizerInnerEl.nativeElement.scrollWidth;
-            }
+            this._handleInitCozyTokenCount();
         }
     }
 
@@ -321,6 +326,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     }
 
     /** @hidden */
+    moreClicked(): void {
+        this.moreClickedEvent.emit();
+    }
+
+    /** @hidden */
     private _handleArrowLeft(fromIndex: number): void {
         // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
         if (fromIndex === this.moreTokensLeft.length) {
@@ -433,11 +443,26 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         const elementLeft = this._elementRef.nativeElement.getBoundingClientRect().left;
         this.hiddenCozyTokenCount = 0;
         this.tokenList.forEach(token => {
-            if (token.elementRef.nativeElement.getBoundingClientRect().right < elementLeft) {
+            if (token.tokenWrapperElement && token.tokenWrapperElement.nativeElement.getBoundingClientRect().right < elementLeft) {
                 this.hiddenCozyTokenCount += 1;
             }
         });
+
         this.cdRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _handleInitCozyTokenCount(): void {
+        // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
+        this.tokenizerInnerEl.nativeElement.scrollLeft =
+            this.tokenizerInnerEl.nativeElement.scrollWidth;
+        this._getHiddenCozyTokenCount();
+        if (this.hiddenCozyTokenCount > 0) {
+            // need to do this again in case "____ more" text was added
+            this.tokenizerInnerEl.nativeElement.scrollLeft =
+                this.tokenizerInnerEl.nativeElement.scrollWidth;
+            this._getHiddenCozyTokenCount();
+        }
     }
 
     /** @hidden */
