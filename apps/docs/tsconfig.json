@@ -14,7 +14,7 @@
         }
     },
     "angularCompilerOptions": {
-        "enableIvy": false
+        "enableIvy": true
     },
     "include": [
         "**/*.ts"
