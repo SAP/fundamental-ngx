@@ -112,10 +112,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     @Input()
     disabled: boolean;
 
-    /** Whether the time component shows spinners for changing the time. */
-    @Input()
-    spinners: boolean = true;
-
     /** Whether the time component shows seconds. */
     @Input()
     displaySeconds: boolean = true;
@@ -217,6 +213,10 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
      */
     @Input()
     markWeekends: boolean = true;
+
+    /** @Input Whether to show spinner buttons */
+    @Input()
+    spinnerButtons: boolean = true;
 
     /**
      * Whether user wants to show week numbers next to days

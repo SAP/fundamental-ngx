@@ -4,7 +4,6 @@ import {
     Component,
     EventEmitter,
     forwardRef,
-    HostBinding,
     Input,
     Optional,
     Output,

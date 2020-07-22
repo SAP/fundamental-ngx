@@ -62,6 +62,7 @@ import { InfoLabelModule } from './info-label/info-label.module';
 import { ObjectStatusModule } from './object-status/object-status.module';
 import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-input-mobile.module';
 import { StepInputModule } from './step-input/step-input.module';
+import { CarouselModule } from './utils/directives/carousel/carousel.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -75,6 +76,7 @@ import { StepInputModule } from './step-input/step-input.module';
         ButtonModule,
         SegmentedButtonModule,
         CalendarModule,
+        CarouselModule,
         ComboboxModule,
         CheckboxModule,
         DatePickerModule,
