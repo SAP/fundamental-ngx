@@ -25,13 +25,13 @@
         class="fd-input fd-input--no-number-spinner fd-step-input__input"
         [name]="name"
         [id]="id"
-        [value]="value"
         [disabled]="disabled"
         [placeholder]="placeholder"
         [class.fd-input--compact]="compact"
         [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledby"
         [style.textAlign]="align"
-        fdp-step-input-control
+        fdpStepInputControl
         type="text"
     />
     <button

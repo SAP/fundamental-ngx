@@ -49,11 +49,11 @@ export class NumberStepInputComponent extends StepInputComponent {
         return event;
     }
 
-    formatValue(value: number) {
-        return value.toPrecision();
+    formatValue(value: number | null) {
+        return value ? value.toPrecision() : '0';
     }
 
-    parseValue(value: string) {
+    parseValue(value: string | null) {
         const parsedValue = Number(value);
         return isNaN(parsedValue) ? null : parsedValue;
     }

@@ -1,1 +1,17 @@
-<fdp-number-step-input [value]="100"></fdp-number-step-input>
+<label>Default Number Step Input</label>
+<br />
+<fdp-number-step-input [value]="100" name="number"></fdp-number-step-input>
+<br />
+<br />
+
+<label>Min Max limits</label>
+<br />
+<fdp-number-step-input [value]="0" name="number" [min]="-20" [max]="20"></fdp-number-step-input>
+<br />
+<br />
+
+<label>Precision</label>
+<br />
+<fdp-number-step-input [value]="50" name="number" [precision]="3"></fdp-number-step-input>
+<br />
+<br />

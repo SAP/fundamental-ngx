@@ -27,6 +27,8 @@ export abstract class StepInputComponent extends BaseInput {
 
     set value(value: number) {
         super.setValue(value);
+        this._updateViewValue();
+        this.lastEmittedValue = this._value;
     }
 
     /** Sets minimum value boundary */
@@ -56,6 +58,10 @@ export abstract class StepInputComponent extends BaseInput {
     /** Horizontally aligns value inside input */
     @Input()
     align: 'left' | 'center' | 'right';
+
+    /** Number of digits after the decimal point */
+    @Input()
+    precision = 0;
 
     /**
      * ARIA label for increment button
@@ -130,6 +136,11 @@ export abstract class StepInputComponent extends BaseInput {
         super.ngAfterViewInit();
     }
 
+    ngOnInit() {
+        super.ngOnInit();
+        this._updateViewValue();
+    }
+
     /** Increase value method */
     increase(step = this._getStepValue('increase')) {
         const value = this.value + step;
@@ -171,7 +182,7 @@ export abstract class StepInputComponent extends BaseInput {
     onInput(value: string): void {
         const parsedValue = this.parseValue(value);
         if (parsedValue === null) {
-            this._value = null;
+            this._value = this.lastEmittedValue;
         } else {
             this._value = Math.max(parsedValue, this._min);
             this._value = Math.min(parsedValue, this._max);

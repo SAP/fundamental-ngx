@@ -20,5 +20,5 @@ export class PlatformStepInputConfig {
     /**
      * Content Density of element. 'cozy' | 'compact'
      */
-    contentDensity: ContentDensity = 'compact';
+    contentDensity: ContentDensity = 'cozy';
 }

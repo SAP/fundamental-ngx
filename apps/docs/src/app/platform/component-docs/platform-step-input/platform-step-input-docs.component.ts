@@ -17,7 +17,7 @@ export class PlatformStepInputDocsComponent {
             fileName: 'platform-number-step-input-example'
         },
         {
-            language: 'ts',
+            language: 'typescript',
             code: numberStepInputExampleTs,
             fileName: 'platform-number-step-input-example'
         }

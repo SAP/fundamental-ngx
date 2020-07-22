@@ -57,7 +57,7 @@ export class StepInputControlDirective {
     }
 
     /** @hidden handle mouse wheel */
-    @HostListener('keydown', ['$event'])
+    @HostListener('wheel', ['$event'])
     onMouseWheel(event: WheelEvent): void {
         event.preventDefault();
         if (event.deltaY > 0) {
