@@ -11,7 +11,10 @@ export class MultiInputMobileExampleComponent {
     secondConfig: MobileModeConfig = {
         approveButtonText: 'Approve',
         cancelButtonText: 'Cancel',
-        hasCloseButton: true
+        hasCloseButton: true,
+        dialogConfig: {
+            ariaLabel: 'Select fruits dialog'
+        }
     };
 
     values: any[] = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange'];

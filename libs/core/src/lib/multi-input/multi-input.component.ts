@@ -164,7 +164,7 @@ export class MultiInputComponent implements
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
-    mobileConfig: MobileModeConfig;
+    mobileConfig: MobileModeConfig = { hasCloseButton: true, approveButtonText: 'Select' };
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()

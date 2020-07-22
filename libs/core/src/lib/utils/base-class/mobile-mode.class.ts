@@ -28,6 +28,9 @@ export abstract class MobileModeBase<T> implements OnDestroy {
     dialogRef: DialogRef;
 
     /** @hidden */
+    dialogConfig: DialogConfig;
+
+    /** @hidden */
     mobileConfig: MobileModeConfig;
 
     /** @hidden */
@@ -42,11 +45,7 @@ export abstract class MobileModeBase<T> implements OnDestroy {
 
         this._mobileModes = this._mobileModes || [];
         this.mobileConfig = this._getMobileModeConfig();
-    }
-
-    /** @hidden */
-    get dialogConfig(): DialogConfig {
-        return this.mobileConfig.dialogConfig || {};
+        this.dialogConfig = this.mobileConfig.dialogConfig;
     }
 
     /** @hidden */

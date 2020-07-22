@@ -109,6 +109,7 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         this.dialogRef = this._dialogService.open(
             this.dialogTemplate,
             {
+                mobile: true,
                 verticalPadding: false,
                 ...this.dialogConfig,
                 backdropClickCloseable: false,
