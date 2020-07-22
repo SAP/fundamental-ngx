@@ -125,6 +125,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-forms/step-input/platform-step-input.module').then(
                         (m) => m.PlatformStepInputDocsModule
                     )
+            },
+            {
+                path: 'object-status',
+                loadChildren: () =>
+                    import('./component-docs/platform-object-status/platform-object-status-docs.module').then(
+                        (m) => m.PlatformObjectStatusDocsModule
+                    )
             }
         ]
     }

@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
-type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
+export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
 @Component({
     // tslint:disable-next-line:component-selector

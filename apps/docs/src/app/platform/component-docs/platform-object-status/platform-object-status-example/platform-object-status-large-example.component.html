@@ -1,0 +1,64 @@
+<fdp-object-status
+    [status]="'negative'"
+    [glyph]="'status-negative'"
+    [inverted]="true"
+    [large]="true"
+></fdp-object-status>
+<fdp-object-status [status]="'critical'" [glyph]="'status-critical'" [inverted]="true" [large]="true"></fdp-object-status>
+<fdp-object-status [status]="'positive'" [glyph]="'status-positive'" [inverted]="true" [large]="true"></fdp-object-status>
+<fdp-object-status [status]="'informative'" [glyph]="'hint'" [inverted]="true" [large]="true"></fdp-object-status>
+<fdp-object-status [glyph]="'to-be-reviewed'" [inverted]="true" [large]="true"></fdp-object-status>
+
+<br /><br />
+
+<fdp-object-status [status]="'negative'" [large]="true">Negative</fdp-object-status>
+<fdp-object-status [status]="'critical'" [large]="true">Critical</fdp-object-status>
+<fdp-object-status [status]="'positive'" [large]="true">Positive</fdp-object-status>
+<fdp-object-status [status]="'informative'" [large]="true">Informative</fdp-object-status>
+<fdp-object-status [large]="true">Default</fdp-object-status>
+
+<br /><br />
+
+<fdp-object-status [status]="'negative'" [large]="true">5</fdp-object-status>
+<fdp-object-status [status]="'critical'" [large]="true">20</fdp-object-status>
+<fdp-object-status [status]="'positive'" [large]="true">2.99</fdp-object-status>
+<fdp-object-status [status]="'informative'" [large]="true">10</fdp-object-status>
+<fdp-object-status [large]="true">99+</fdp-object-status>
+
+<br /><br />
+
+<fdp-object-status [status]="'negative'" [glyph]="'status-negative'" [large]="true">Negative</fdp-object-status>
+<fdp-object-status [status]="'critical'" [glyph]="'status-critical'" [large]="true">Critical</fdp-object-status>
+<fdp-object-status [status]="'positive'" [glyph]="'status-positive'" [large]="true">Positive</fdp-object-status>
+<fdp-object-status [status]="'informative'" [glyph]="'hint'" [large]="true">Informative</fdp-object-status>
+<fdp-object-status [glyph]="'to-be-reviewed'" [large]="true">Default</fdp-object-status>
+
+<br /><br />
+
+<fdp-object-status
+    [status]="'negative'"
+    [glyph]="'status-negative'"
+    [clickable]="true"
+    [large]="true"
+    [inverted]="true"
+	(click)="showAlert()"
+    >Negative</fdp-object-status>
+<fdp-object-status
+    [status]="'critical'"
+    [glyph]="'status-critical'"
+    [clickable]="true"
+    [large]="true"
+    [inverted]="true"
+	(click)="showAlert()"
+    >Critical</fdp-object-status>
+<fdp-object-status
+    [status]="'positive'"
+    [glyph]="'status-positive'"
+    [clickable]="true"
+    [large]="true"
+    [inverted]="true"
+	(click)="showAlert()"
+    >Positive</fdp-object-status>
+<fdp-object-status [status]="'informative'" [glyph]="'hint'" [clickable]="true" [large]="true" [inverted]="true"
+    >Informative</fdp-object-status>
+<fdp-object-status [glyph]="'to-be-reviewed'" [clickable]="true" [large]="true" [inverted]="true">Default</fdp-object-status>
