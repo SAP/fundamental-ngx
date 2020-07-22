@@ -6,13 +6,20 @@ import {
     Inject,
     OnDestroy,
     OnInit,
+    Optional,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { takeUntil } from 'rxjs/operators';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.interface';
-import { MOBILE_MODE_CONFIG, MobileModeBase, MobileModeControlName, MobileModeToken } from '../../utils/base-class';
+import {
+    MOBILE_MODE_CONFIG,
+    MobileModeBase,
+    MobileModeControlName,
+    MobileModeToken
+} from '../../utils/base-class/mobile-mode.class';
+
 
 @Component({
     selector: 'fd-multi-input-mobile',
@@ -39,8 +46,8 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
-        @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeToken[],
-        @Inject(MULTI_INPUT_COMPONENT) multiInputComponent: MultiInputInterface
+        @Inject(MULTI_INPUT_COMPONENT) multiInputComponent: MultiInputInterface,
+        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeToken[]
     ) {
         super(
             elementRef,
@@ -79,6 +86,7 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         this._component.dialogApprove();
     }
 
+    /** @hidden */
     private _toggleDialog(open: boolean): void {
         if (open) {
             this._selectedBackup = [...this._component.selected];
@@ -101,6 +109,7 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         this.dialogRef = this._dialogService.open(
             this.dialogTemplate,
             {
+                verticalPadding: false,
                 ...this.dialogConfig,
                 backdropClickCloseable: false,
                 escKeyCloseable: false,

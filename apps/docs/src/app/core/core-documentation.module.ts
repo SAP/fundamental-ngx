@@ -8,31 +8,32 @@ import { StackblitzService } from '../documentation/core-helpers/stackblitz/stac
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
 import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeControlName,
-    MobileModeToken
-} from '@fundamental-ngx/core';
+import { MOBILE_MODE_CONFIG, MobileModeControlName, MobileModeToken } from '@fundamental-ngx/core';
+import { MOBILE_DIALOG_PORTRAIT } from '../documentation/utilities/consts';
+
+const SELECT_MOBILE_CONFIG: MobileModeToken = {
+    controlName: MobileModeControlName.SELECT,
+    config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
+};
 
 const COMBOBOX_MOBILE_CONFIG: MobileModeToken = {
     controlName: MobileModeControlName.COMBOBOX,
-    config: {title: 'COMBO TITLE'}
+    config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
 };
-const SELECT_MOBILE_CONFIG: MobileModeToken = {
-    controlName: MobileModeControlName.SELECT,
-    config: {title: 'SELECT TITLE'}
-};
+
 const MULTI_INPUT_MOBILE_CONFIG: MobileModeToken = {
     controlName: MobileModeControlName.MULTI_INPUT,
-    config: {title: 'MULTI TITLE'}
+    config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
 };
 
 @NgModule({
     declarations: [HomeDocsComponent, NewComponentComponent, CoreDocumentationComponent],
     imports: [SharedDocumentationModule, MarkdownModule.forChild(), RouterModule.forChild(ROUTES)],
-    providers: [{provide: 'CURRENT_LIB', useValue: 'core'}, StackblitzService,
-        {provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true},
+    providers: [
+        StackblitzService,
+        {provide: 'CURRENT_LIB', useValue: 'core'},
         {provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true},
+        {provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true},
         {provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true}
     ]
 })
