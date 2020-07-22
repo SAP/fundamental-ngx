@@ -276,8 +276,7 @@ describe('TimePickerComponent', () => {
 
     it('should call onChange when time from time picker changes', () => {
         spyOn(component, 'onChange');
-        component.time = { hour: 12, minute: 0, second: 0 };
-        component.timeFromTimeComponentChanged();
+        component.timeFromTimeComponentChanged({ hour: 12, minute: 0, second: 0 });
         expect(component.onChange).toHaveBeenCalledWith(component.time);
     });
 });
