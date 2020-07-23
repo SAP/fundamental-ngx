@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import { PlatformButtonModule, ContentDensity } from '@fundamental-ngx/platform';
-import { By } from '@angular/platform-browser';
 
 import { PlatformPanelComponent, PanelExpandChangeEvent } from './panel.component';
 import { PlatformPanelContentComponent } from './panel-content/panel-content.component';
@@ -11,7 +11,7 @@ import { PlatformPanelActionsComponent } from './panel-actions/panel-actions.com
 import { PlatformPanelModule } from './panel.module';
 
 @Component({
-    template: `<fdp-panel [title]="'Panel Title'">
+    template: `<fdp-panel title="Panel Title">
         <fdp-panel-content>Panel Content Text</fdp-panel-content>
     </fdp-panel>`
 })
@@ -55,8 +55,8 @@ describe('PanelComponent default values', () => {
 });
 
 @Component({
-    template: ` <fdp-panel
-        [id]="'panel-id'"
+    template: `<fdp-panel
+        id="panel-id"
         [title]="title"
         [contentDensity]="contentDensity"
         [expanded]="expanded"
@@ -77,15 +77,13 @@ class SimplePanelComponent {
     @ViewChild(PlatformPanelContentComponent) panelContent: PlatformPanelContentComponent;
     @ViewChild(PlatformPanelActionsComponent) panelActions: PlatformPanelActionsComponent;
 
-    public expanded: boolean = true;
-    public expandable: boolean = true;
-    public title: string = 'Panel Title';
-    public contentHeight: string = null;
-    public contentDensity: ContentDensity = 'cozy';
-    public expandLabel: string = 'Collapse Panel';
-    public collapseLabel: string = 'Expand Panel';
-
-    constructor() {}
+    expanded = true;
+    expandable = true;
+    title = 'Panel Title';
+    contentHeight: string;
+    contentDensity: ContentDensity = 'cozy';
+    expandLabel = 'Collapse Panel';
+    collapseLabel = 'Expand Panel';
 
     onExpandChange(event: PanelExpandChangeEvent) {
         this.expanded = event.payload;

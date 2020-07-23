@@ -6,7 +6,10 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformPanelContentComponent {
-    /** Custom height of the content container. */
+    /**
+     * @harmful Potentially bad approach to hardcode css related properties
+     * Custom height of the content container.
+     */
     @Input()
     contentHeight: string;
 }

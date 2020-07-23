@@ -11,12 +11,12 @@ export class PlatformPanelConfig {
     /**
      * ARIA label for button when the Panel is collapsed
      */
-    expandLabel: string = 'Expand Panel';
+    expandLabel = 'Expand Panel';
 
     /**
      * ARIA label for button when the Panel is expanded
      */
-    collapseLabel: string = 'Collapse Panel';
+    collapseLabel = 'Collapse Panel';
 
     /**
      * Content Density of element. 'cozy' | 'compact'
