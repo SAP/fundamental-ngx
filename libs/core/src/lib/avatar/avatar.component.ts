@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
-import { anyLanguageLettersRegEx } from '../utils/constants/any-language-letters.regex';
+import { anyLanguageLettersRegEx } from '../utils/constants';
 
 export type AvatarSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ColorAccent = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
@@ -48,11 +48,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input()
     set label(value: string) {
         this.ariaLabel = value || null;
-        this._label = value || null;
-    }
-
-    get label(): string {
-        return this._label;
+        this.abbreviate = this._getAbbreviate(value);
     }
 
     /** The size of the Avatar. Options include: *xs*, *s*, *m*, *l* and *xl*. */
@@ -93,17 +89,19 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Background image resource: url or base64. */
     @Input()
     set image(value: string) {
-        this._image = value || null;
+        if (value) {
+            this._image = 'url(' + value + ')';
+        } else if (this.backgroundImage) {
+            this._image = 'url(' + this.backgroundImage + ')';
+        } else {
+            this._image = null;
+        }
     }
 
     /** @hidden */
     @HostBinding('style.background-image')
     get bgImage(): string {
-        if (this._image) {
-            return 'url(' + this._image + ')';
-        }
-
-        return 'url(' + this.backgroundImage + ')';
+        return this._image;
     }
 
     /** @hidden */
@@ -113,27 +111,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    get abbreviate(): string {
-        if (!this.label || this._image) {
-            return null;
-        }
-
-        const maxLettersCount = 3;
-        const firstLetters = this.label.split(' ').map(word => word.charAt(0));
-        const abbreviate = firstLetters.join('');
-
-        if (firstLetters.length > maxLettersCount || !abbreviate.match(anyLanguageLettersRegEx)) {
-            return null;
-        }
-
-        return abbreviate;
-    }
+    abbreviate: string = null;
 
     /** @hidden */
-    private _image: string;
-
-    /** @hidden */
-    private _label: string;
+    private _image: string = null;
 
     /** @hidden */
     private get showDefault() {
@@ -179,5 +160,22 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** @hidden Get an abbreviate from the label or return null if not fit requirements */
+    private _getAbbreviate(label: string): string | null {
+        if (!label || this._image) {
+            return null;
+        }
+
+        const maxLettersCount = 3;
+        const firstLetters = label.split(' ').map(word => word.charAt(0));
+        const abbreviate = firstLetters.join('');
+
+        if (firstLetters.length > maxLettersCount || !abbreviate.match(anyLanguageLettersRegEx)) {
+            return null;
+        }
+
+        return abbreviate;
     }
 }
