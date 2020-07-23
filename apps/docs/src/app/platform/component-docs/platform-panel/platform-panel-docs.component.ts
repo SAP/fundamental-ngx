@@ -6,6 +6,7 @@ import * as panelExpandableExample from '!raw-loader!./platform-panel-examples/p
 import * as panelActionsExample from '!raw-loader!./platform-panel-examples/platform-panel-actions-example.component.html';
 import * as panelFixedExample from '!raw-loader!./platform-panel-examples/platform-panel-fixed-example.component.html';
 import * as panelFixedHeightExample from '!raw-loader!./platform-panel-examples/platform-panel-fixed-height-example.component.html';
+import * as panelFixedHeightStyleExample from '!raw-loader!./platform-panel-examples/platform-panel-fixed-height-example.component.scss';
 import * as panelCompactExample from '!raw-loader!./platform-panel-examples/platform-panel-compact-example.component.html';
 import * as panelConfigHtmlExample from '!raw-loader!./platform-panel-examples/platform-panel-config-example.component.html';
 import * as panelConfigTsExample from '!raw-loader!./platform-panel-examples/platform-panel-config-example.component.ts';
@@ -43,6 +44,11 @@ export class PlatformPanelDocsComponent {
         {
             language: 'html',
             code: panelFixedHeightExample,
+            fileName: 'platform-panel-fixed-height-example'
+        },
+        {
+            language: 'scss',
+            code: panelFixedHeightStyleExample,
             fileName: 'platform-panel-fixed-height-example'
         }
     ];

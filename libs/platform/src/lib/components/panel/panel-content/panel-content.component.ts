@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 @Component({
     selector: 'fdp-panel-content',
     templateUrl: './panel-content.component.html',
+    styleUrls: ['./panel-content.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelContentComponent {
