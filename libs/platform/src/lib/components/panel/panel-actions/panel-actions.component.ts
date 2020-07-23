@@ -5,4 +5,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     templateUrl: './panel-actions.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformPanelActionsComponent {}
+export class PanelActionsComponent {}

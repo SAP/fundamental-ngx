@@ -15,14 +15,15 @@ import {
 import { PanelTitleDirective } from '@fundamental-ngx/core';
 
 import { BaseComponent } from '../base';
+import { ContentDensity } from '../form/form-control';
 
-import { PlatformPanelConfig } from './panel.config';
-import { PlatformPanelActionsComponent } from './panel-actions/panel-actions.component';
-import { PlatformPanelContentComponent } from './panel-content/panel-content.component';
+import { PanelConfig } from './panel.config';
+import { PanelActionsComponent } from './panel-actions/panel-actions.component';
+import { PanelContentComponent } from './panel-content/panel-content.component';
 
 /** Panel change event instance */
 export class PanelExpandChangeEvent {
-    constructor(public source: PlatformPanelComponent, public payload: boolean) {}
+    constructor(public source: PanelComponent, public payload: boolean) {}
 }
 
 /**
@@ -42,7 +43,7 @@ export class PanelExpandChangeEvent {
     templateUrl: './panel.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformPanelComponent extends BaseComponent implements OnInit, OnChanges {
+export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     /**
      * sets Panel title.
      */
@@ -62,16 +63,25 @@ export class PlatformPanelComponent extends BaseComponent implements OnInit, OnC
     expandable = true;
 
     /**
+     * content Density of element. 'cozy' | 'compact'
+     */
+    @Input()
+    set contentDensity(contentDensity: ContentDensity) {
+        this._contentDensity = contentDensity;
+        this.isCompact = contentDensity === 'compact';
+    }
+
+    /**
      * ARIA label for button when the Panel is collapsed
      */
     @Input()
-    expandLabel: string;
+    expandLabel = this._panelConfig.expandLabel;
 
     /**
      * ARIA label for button when the Panel is expanded
      */
     @Input()
-    collapseLabel: string;
+    collapseLabel = this._panelConfig.collapseLabel;
 
     /** Output event triggered when the Expand button is clicked */
     @Output()
@@ -83,25 +93,29 @@ export class PlatformPanelComponent extends BaseComponent implements OnInit, OnC
     expandAriaLabel: string;
 
     /** @hidden */
-    @ContentChild(PlatformPanelActionsComponent)
-    panelActionsComponent: PlatformPanelActionsComponent;
+    @ContentChild(PanelActionsComponent)
+    panelActionsComponent: PanelActionsComponent;
 
     /** @hidden */
-    @ContentChild(PlatformPanelContentComponent)
-    panelContentComponent: PlatformPanelContentComponent;
+    @ContentChild(PanelContentComponent)
+    panelContentComponent: PanelContentComponent;
 
     /** @hidden */
     @ViewChild(PanelTitleDirective)
     panelTitleDirective: PanelTitleDirective;
 
     /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, panelConfig: PlatformPanelConfig) {
-        super(_cd);
+    _contentDensity = this._panelConfig.contentDensity;
 
-        /* Initialize values by default options */
-        this.contentDensity = panelConfig.contentDensity;
-        this.expandLabel = panelConfig.expandLabel;
-        this.collapseLabel = panelConfig.collapseLabel;
+    /**
+     * @hidden
+     * Whether "contentDensity" is "compact"
+     */
+    isCompact = this._contentDensity === 'compact';
+
+    /** @hidden */
+    constructor(protected _cd: ChangeDetectorRef, protected _panelConfig: PanelConfig) {
+        super(_cd);
     }
 
     /** @hidden */

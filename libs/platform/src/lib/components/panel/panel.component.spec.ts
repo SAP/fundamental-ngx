@@ -5,9 +5,9 @@ import { By } from '@angular/platform-browser';
 
 import { PlatformButtonModule, ContentDensity } from '@fundamental-ngx/platform';
 
-import { PlatformPanelComponent, PanelExpandChangeEvent } from './panel.component';
-import { PlatformPanelContentComponent } from './panel-content/panel-content.component';
-import { PlatformPanelActionsComponent } from './panel-actions/panel-actions.component';
+import { PanelComponent, PanelExpandChangeEvent } from './panel.component';
+import { PanelContentComponent } from './panel-content/panel-content.component';
+import { PanelActionsComponent } from './panel-actions/panel-actions.component';
 import { PlatformPanelModule } from './panel.module';
 
 @Component({
@@ -16,12 +16,12 @@ import { PlatformPanelModule } from './panel.module';
     </fdp-panel>`
 })
 class PanelWithDefaultValuesComponent {
-    @ViewChild(PlatformPanelComponent) panel: PlatformPanelComponent;
+    @ViewChild(PanelComponent, { static: false }) panel: PanelComponent;
 }
 describe('PanelComponent default values', () => {
     let component: PanelWithDefaultValuesComponent;
     let fixture: ComponentFixture<PanelWithDefaultValuesComponent>;
-    let panelComponent: PlatformPanelComponent;
+    let panelComponent: PanelComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -73,11 +73,9 @@ describe('PanelComponent default values', () => {
     </fdp-panel>`
 })
 class SimplePanelComponent {
-    @ViewChild(PlatformPanelComponent) panel: PlatformPanelComponent;
-    ```
-as a human I could be mistaken, please check after change
-    @ViewChild(PlatformPanelContentComponent) panelContent: PlatformPanelContentComponent;
-    @ViewChild(PlatformPanelActionsComponent) panelActions: PlatformPanelActionsComponent;
+    @ViewChild(PanelComponent) panel: PanelComponent;
+    @ViewChild(PanelContentComponent) panelContent: PanelContentComponent;
+    @ViewChild(PanelActionsComponent) panelActions: PanelActionsComponent;
 
     expanded = true;
     expandable = true;
@@ -95,7 +93,7 @@ as a human I could be mistaken, please check after change
 describe('Simple PanelComponent', () => {
     let component: SimplePanelComponent;
     let fixture: ComponentFixture<SimplePanelComponent>;
-    let panelContentComponent: PlatformPanelContentComponent;
+    let panelContentComponent: PanelContentComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

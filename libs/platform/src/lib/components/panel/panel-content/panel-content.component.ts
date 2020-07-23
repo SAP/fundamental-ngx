@@ -5,7 +5,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
     templateUrl: './panel-content.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformPanelContentComponent {
+export class PanelContentComponent {
     /**
      * @harmful Potentially bad approach to hardcode css related properties
      * Custom height of the content container.

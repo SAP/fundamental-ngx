@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
-import { PlatformPanelConfig, PlatformConfig } from '@fundamental-ngx/platform';
+import { PanelConfig, PlatformConfig } from '@fundamental-ngx/platform';
 
-export const panelConfigFactory = PlatformPanelConfig.createProviderFactory({
+export const panelConfigFactory = PanelConfig.createProviderFactory({
     collapseLabel: 'New Default Collapse Label',
     expandLabel: 'New Default Expand Label'
 });
 
 export const customPanelConfigProvider = {
-    provide: PlatformPanelConfig,
+    provide: PanelConfig,
     useFactory: panelConfigFactory,
     deps: [PlatformConfig]
 };

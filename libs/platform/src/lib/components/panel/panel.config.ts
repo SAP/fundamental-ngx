@@ -6,7 +6,7 @@ import { ContentDensity, PlatformConfig } from '@fundamental-ngx/platform';
  * Default options for platform panel
  */
 @Injectable({ providedIn: 'root' })
-export class PlatformPanelConfig {
+export class PanelConfig {
     /**
      * ARIA label for button when the Panel is collapsed
      */
@@ -25,9 +25,9 @@ export class PlatformPanelConfig {
     /**
      * Create Provider factory function
      */
-    static createProviderFactory(obj: Partial<PlatformPanelConfig>) {
-        const useFactory = (platformConfig: PlatformConfig): PlatformPanelConfig => {
-            return Object.assign(new PlatformPanelConfig(platformConfig), obj);
+    static createProviderFactory(obj: Partial<PanelConfig>) {
+        const useFactory = (platformConfig: PlatformConfig): PanelConfig => {
+            return Object.assign(new PanelConfig(platformConfig), obj);
         };
         return useFactory;
     }

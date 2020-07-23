@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { PanelModule, ToolbarModule } from '@fundamental-ngx/core';
 
-import { PlatformPanelComponent } from './panel.component';
-import { PlatformPanelContentComponent } from './panel-content/panel-content.component';
-import { PlatformPanelActionsComponent } from './panel-actions/panel-actions.component';
+import { PanelComponent } from './panel.component';
+import { PanelContentComponent } from './panel-content/panel-content.component';
+import { PanelActionsComponent } from './panel-actions/panel-actions.component';
 
 @NgModule({
-    declarations: [PlatformPanelComponent, PlatformPanelContentComponent, PlatformPanelActionsComponent],
+    declarations: [PanelComponent, PanelContentComponent, PanelActionsComponent],
     imports: [CommonModule, PanelModule, ToolbarModule],
-    exports: [PlatformPanelComponent, PlatformPanelContentComponent, PlatformPanelActionsComponent]
+    exports: [PanelComponent, PanelContentComponent, PanelActionsComponent]
 })
 export class PlatformPanelModule {}
