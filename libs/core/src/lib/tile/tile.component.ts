@@ -1,61 +1,57 @@
-import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
-/**
- * Tile is used to display information in a simple container format.
- * ```html
- * <fd-tile>
- *     <fd-tile-content>
- *         <h2 fd-tile-title>Tile Tile</h2>
- *         <p>Tile Description</p>
- *     </fd-tile-content>
- * </fd-tile>
- * ```
- */
 @Component({
-    selector: 'fd-tile',
-    host: {
-        '[attr.role]': "(this.isButton === true ? 'button' : '')"
-    },
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-tile]',
     templateUrl: './tile.component.html',
     styleUrls: ['./tile.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class TileComponent extends AbstractFdNgxClass {
-    /** Whether the tile is disabled. */
-    @Input() disabled: boolean = false;
+export class TileComponent implements CssClassBuilder, OnInit, OnChanges {
+    /** user's custom classes */
+    @Input()
+    class: string;
 
-    /** Whether the tile is rendered as a button. */
-    @Input() isButton: boolean = false;
+    /** Optional 'small' modifier to reduce the tile size. */
+    @Input()
+    small: boolean = false;
 
-    /** Specifies the number of rows a tile should span. */
-    @Input() rowSpan: number;
-
-    /** Specifies the number of columns a tile should span. */
-    @Input() columnSpan: number;
-
-    /** A number specifying the background color of the tile. */
-    @Input() colorAccent: number;
+    /** Optional 'double' modifier to double the tile width. */
+    @Input()
+    double: boolean = false;
 
     /** @hidden */
-    _setProperties() {
-        this._addClassToElement('fd-tile');
-        if (this.disabled) {
-            this._addClassToElement('is-disabled');
-        }
-        if (this.rowSpan) {
-            this._addClassToElement('fd-has-grid-row-span-' + this.rowSpan);
-        }
-        if (this.columnSpan) {
-            this._addClassToElement('fd-has-grid-column-span-' + this.columnSpan);
-        }
-        if (this.colorAccent) {
-            this._addClassToElement('fd-has-background-color-accent-' + this.colorAccent);
-        }
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            'fd-tile',
+            this.small ? 'fd-tile--s' : '',
+            this.double ? 'fd-tile--double' : '',
+            this.class
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
+    }
+
 }

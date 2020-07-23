@@ -211,18 +211,10 @@ export const API_FILES = {
         'TabSeparator'
     ],
     tile: [
-        'ProductTileComponent',
-        'ProductTileContentDirective',
-        'ProductTileMediaDirective',
-        'ProductTileTextDirective',
-        'ProductTileTitleDirective',
         'TileComponent',
-        'TileActionsDirective',
+        'TileHeaderDirective',
         'TileContentDirective',
-        'TileGridDirective',
-        'TileMediaDirective',
-        'TileTextDirective',
-        'TileTitleComponent'
+        'TileFooterDirective',
     ],
     time: [
         'TimeComponent',

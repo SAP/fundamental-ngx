@@ -6,14 +6,9 @@ import { API_FILES } from '../../api-files';
 import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
 import { TileDocsComponent } from './tile-docs.component';
 import {
-    TileActionsExampleComponent,
-    TileButtonExampleComponent,
-    TileDisabledExampleComponent,
-    TileExampleComponent,
-    TileMediaExampleComponent,
-    TileProductExampleComponent
+    TileExampleComponent
 } from './examples/tile-examples.component';
-import { IdentifierModule, ImageModule, ListModule, TileModule } from '@fundamental-ngx/core';
+import { IdentifierModule, TileModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -31,20 +26,13 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         IdentifierModule,
-        TileModule,
-        ListModule,
-        ImageModule
+        TileModule
     ],
     exports: [RouterModule],
     declarations: [
         TileDocsComponent,
         TileExampleComponent,
-        TileDocsHeaderComponent,
-        TileMediaExampleComponent,
-        TileButtonExampleComponent,
-        TileActionsExampleComponent,
-        TileProductExampleComponent,
-        TileDisabledExampleComponent
+        TileDocsHeaderComponent
     ]
 })
 export class TileDocsModule {}
