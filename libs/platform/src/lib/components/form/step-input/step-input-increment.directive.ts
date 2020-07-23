@@ -31,6 +31,7 @@ export class StepInputIncrementDirective {
         // Until mouseup trigger "increment"
         this._streamUntilMouseUp$.subscribe(() => {
             this.stepInput.increase();
+            this.stepInput.detectChanges();
         });
     }
 }

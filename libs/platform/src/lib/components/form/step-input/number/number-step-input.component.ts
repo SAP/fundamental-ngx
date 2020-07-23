@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component, Input, Renderer2 } from '@angular/core';
 import { Optional, Self } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
 import { FormFieldControl } from '../../form-control';
 import { StepInputComponent, PlatformStepInputChange } from '../base.step-input';
-import { PlatformStepInputConfig } from '../step-input.config';
+import { StepInputConfig } from '../step-input.config';
 
 /** Change event object emitted by Platform Number Step Input. */
 export class PlatformNumberStepInputChange extends PlatformStepInputChange<NumberStepInputComponent, number> {}
@@ -25,17 +25,12 @@ export class NumberStepInputComponent extends StepInputComponent {
 
     constructor(
         protected _cd: ChangeDetectorRef,
-        config: PlatformStepInputConfig,
+        config: StepInputConfig,
         @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        @Optional() @Self() public ngForm: NgForm,
+        renderer: Renderer2
     ) {
-        super(_cd, ngControl, ngForm, config);
-    }
-
-    ngOnInit(): void {
-        if (this.step == null && typeof this.stepFn !== 'function') {
-            throw new Error('Step Input Component: It is required to define either "step" or "stepFn" input');
-        }
+        super(_cd, ngControl, ngForm, config, renderer);
     }
 
     ngAfterViewInit(): void {
@@ -49,11 +44,11 @@ export class NumberStepInputComponent extends StepInputComponent {
         return event;
     }
 
-    formatValue(value: number | null) {
+    formatValue(value: number | null): string {
         return value ? value.toPrecision() : '0';
     }
 
-    parseValue(value: string | null) {
+    parseValue(value: string | null): number | null {
         const parsedValue = Number(value);
         return isNaN(parsedValue) ? null : parsedValue;
     }

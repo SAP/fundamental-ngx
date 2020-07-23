@@ -6,16 +6,16 @@ import { ContentDensity } from '@fundamental-ngx/platform';
  */
 
 @Injectable({ providedIn: 'root' })
-export class PlatformStepInputConfig {
+export class StepInputConfig {
     /**
      * ARIA label for increment button
      */
-    incrementLabel: string = 'Increment';
+    incrementLabel = 'Increment';
 
     /**
      * ARIA label for decrement button
      */
-    decrementLabel: string = 'Decrement';
+    decrementLabel = 'Decrement';
 
     /**
      * Content Density of element. 'cozy' | 'compact'

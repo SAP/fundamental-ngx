@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectorRef, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
 import { BaseInput } from '../base.input';
-import { PlatformStepInputConfig } from './step-input.config';
+import { StepInputConfig } from './step-input.config';
+import { ContentDensity } from '../form-control';
 
 /** Change event object emitted by Platform Step Input component */
 export class PlatformStepInputChange<T extends StepInputComponent = StepInputComponent, K = number> {
@@ -19,6 +20,13 @@ export class PlatformStepInputChange<T extends StepInputComponent = StepInputCom
  */
 
 export abstract class StepInputComponent extends BaseInput {
+    /** content Density of element. cozy | compact */
+    @Input()
+    set contentDensity(contentDensity: ContentDensity) {
+        this._contentDensity = contentDensity;
+        this.isCompact = this._contentDensity === 'compact';
+    }
+
     /** Sets input value */
     @Input()
     get value(): number {
@@ -28,32 +36,45 @@ export abstract class StepInputComponent extends BaseInput {
     set value(value: number) {
         super.setValue(value);
         this._updateViewValue();
+        this._calculateCanDecrementIncrement();
         this.lastEmittedValue = this._value;
     }
 
     /** Sets minimum value boundary */
     @Input()
-    min: number;
+    set min(min: number) {
+        this._min = !isNaN(min) ? min : Number.MIN_VALUE;
+        this._calculateCanDecrement();
+    }
 
     /** Sets maximum value boundary */
     @Input()
-    max: number;
+    set max(max: number) {
+        this._max = !isNaN(max) ? max : Number.MAX_VALUE;
+        this._calculateCanIncrement();
+    }
 
     /** Sets input step value */
     @Input()
-    step: number = 1;
+    set step(step: number) {
+        this._step = step;
+        this._calculateCanDecrementIncrement();
+    }
 
     /** Custom function to calculate step dynamically */
     @Input()
-    stepFn: (value: number, action: 'increase' | 'decrease') => number;
+    set stepFn(stepFn: (value: number, action: 'increase' | 'decrease') => number) {
+        this._stepFn = stepFn;
+        this._calculateCanDecrementIncrement();
+    }
 
     /** Sets largeStep multiplier */
     @Input()
-    largerStep: number = 2;
+    largerStep = 2;
 
     /** Hides -/+ icons and shows labels */
     @Input()
-    showLabels: boolean = false;
+    showLabels = false;
 
     /** Horizontally aligns value inside input */
     @Input()
@@ -67,19 +88,19 @@ export abstract class StepInputComponent extends BaseInput {
      * ARIA label for increment button
      */
     @Input()
-    incrementLabel: string;
+    incrementLabel = this.config.incrementLabel;
 
     /**
      * ARIA label for decrement button
      */
     @Input()
-    decrementLabel: string;
+    decrementLabel = this.config.decrementLabel;
 
     /**
      * ARIA label for input element
      */
     @Input()
-    ariaLabel: string;
+    ariaLabel = 'Step input';
 
     /**
      * ARIA labelledby for input element
@@ -95,41 +116,37 @@ export abstract class StepInputComponent extends BaseInput {
     lastEmittedValue: number;
 
     /** @hidden */
-    get compact() {
-        return this.contentDensity === 'compact';
-    }
+    canIncrement = true;
 
     /** @hidden */
-    get canIncrement(): boolean {
-        return this.value + this.step <= this._max;
-    }
+    canDecrement = true;
 
     /** @hidden */
-    get canDecrement(): boolean {
-        return this.value - this.step >= this._min;
-    }
+    _contentDensity = this.config.contentDensity;
 
     /** @hidden */
-    private get _max(): number {
-        return !isNaN(this.max) ? this.max : Number.MAX_VALUE;
-    }
+    isCompact = this._contentDensity === 'compact';
 
     /** @hidden */
-    private get _min(): number {
-        return !isNaN(this.min) ? this.min : -Number.MAX_VALUE;
-    }
+    private _max = Number.MAX_VALUE;
+
+    /** @hidden */
+    private _min = Number.MIN_VALUE;
+
+    /** @hidden */
+    private _step = 1;
+
+    /** @hidden */
+    private _stepFn: (value: number, action: 'increase' | 'decrease') => number;
 
     constructor(
         protected _cd: ChangeDetectorRef,
         public ngControl: NgControl,
         public ngForm: NgForm,
-        protected config: PlatformStepInputConfig
+        protected config: StepInputConfig,
+        private _renderer: Renderer2
     ) {
         super(_cd, ngControl, ngForm);
-        // Initiate default options
-        this.decrementLabel = this.config.decrementLabel;
-        this.incrementLabel = this.config.incrementLabel;
-        this.contentDensity = this.config.contentDensity;
     }
 
     ngAfterViewInit(): void {
@@ -138,13 +155,14 @@ export abstract class StepInputComponent extends BaseInput {
 
     ngOnInit() {
         super.ngOnInit();
+        this._calculateCanDecrementIncrement();
         this._updateViewValue();
     }
 
     /** Increase value method */
     increase(step = this._getStepValue('increase')) {
         const value = this.value + step;
-        this._value = Math.min(value, this._max);
+        this.value = Math.min(value, this._max);
         this._emitChangedValue();
         this._updateViewValue();
     }
@@ -152,7 +170,7 @@ export abstract class StepInputComponent extends BaseInput {
     /** Decrease value method */
     decrease(step = this._getStepValue('decrease')) {
         const value = this.value - step;
-        this._value = Math.max(value, this._min);
+        this.value = Math.max(value, this._min);
         this._emitChangedValue();
         this._updateViewValue();
     }
@@ -169,13 +187,16 @@ export abstract class StepInputComponent extends BaseInput {
         this.decrease(step);
     }
 
-    /** @hidden Updates viewValue and conditionally emits new value.
-     * This method is called on (change) event, when user leaves input control. */
+    /** @hidden
+     * Updates viewValue and conditionally emits new value.
+     * This method is called on (change) event, when user leaves input control.
+     */
     commitEnteredValue(): void {
         if (this.value !== this.lastEmittedValue) {
             this._emitChangedValue();
         }
         this._updateViewValue();
+        this._calculateCanDecrementIncrement();
     }
 
     /** @hidden Track value when user changes value of input control. */
@@ -184,9 +205,13 @@ export abstract class StepInputComponent extends BaseInput {
         if (parsedValue === null) {
             this._value = this.lastEmittedValue;
         } else {
-            this._value = Math.max(parsedValue, this._min);
-            this._value = Math.min(parsedValue, this._max);
+            this._value = Math.min(Math.max(parsedValue, this._min), this._max);
         }
+    }
+
+    /** @hidden */
+    detectChanges() {
+        this._cd.detectChanges();
     }
 
     /** Create valueChange event */
@@ -205,16 +230,37 @@ export abstract class StepInputComponent extends BaseInput {
         this.onChange(this.value);
     }
 
-    /**@hidden get step value base either on "stepFn" or "step" */
+    /** @hidden
+     * get step value base either on "stepFn" or "step"
+     */
     private _getStepValue(action: 'increase' | 'decrease'): number {
-        if (typeof this.stepFn === 'function') {
-            return this.stepFn(this.value, action);
+        if (typeof this._stepFn === 'function') {
+            return this._stepFn(this.value, action);
         }
-        return this.step;
+        return this._step;
     }
 
     /** @hidden */
     private _updateViewValue(): void {
-        this._elementRef.nativeElement.value = this.formatValue(this.value);
+        const formatted = this.formatValue(this.value);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'value', formatted);
+    }
+
+    /** @hidden */
+    _calculateCanIncrement() {
+        const step = this._getStepValue('increase');
+        this.canIncrement = this.value + step <= this._max;
+    }
+
+    /** @hidden */
+    _calculateCanDecrement() {
+        const step = this._getStepValue('decrease');
+        this.canDecrement = this.value - step >= this._min;
+    }
+
+    /** @hidden */
+    _calculateCanDecrementIncrement() {
+        this._calculateCanDecrement();
+        this._calculateCanIncrement();
     }
 }
