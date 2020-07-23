@@ -17,6 +17,8 @@ import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { Placement } from 'popper.js';
+import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-time-picker',
@@ -35,7 +37,7 @@ import { Placement } from 'popper.js';
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => TimePickerComponent),
             multi: true
-        },
+        }
     ],
     styleUrls: ['./time-picker.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -204,7 +206,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     handleIsOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
         if (isOpen) {
-            this.child.changeActive('hour');
+            const subscription: Subscription = this.popover.directiveRef.loaded
+                .pipe(delay(0))
+                .subscribe(() => {
+                    this.child.changeActive('hour');
+                    subscription.unsubscribe();
+                });
         }
     }
 
@@ -269,7 +276,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
 
     /** @hidden */
     timeFromTimeComponentChanged(time: TimeObject): void {
-        Object.keys(time).forEach(key => time[key] = time[key] ? time[key] : 0)
+        Object.keys(time).forEach(key => time[key] = time[key] ? time[key] : 0);
         this.time = time;
         this.onChange(time);
         this.isInvalidTimeInput = false;

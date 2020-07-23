@@ -17,7 +17,6 @@
             *ngFor="let row of rows; let index = index"
             #item=fdCarouselItem
             [id]="id + index"
-            [initialHeight]="compact ? InitialCompactTimeHeight : InitialTimeHeight"
             [value]="row">
             <span class="fd-time__unit" (click)="pick(item, index)">
                 {{row | twoDigits: keepTwoDigits}}

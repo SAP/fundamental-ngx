@@ -23,7 +23,9 @@ import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calen
 import { FdDatetime } from './models/fd-datetime';
 import { FormStates } from '../form/form-control/form-states';
 import { DatePipe } from '@angular/common';
-import { CalendarYearGrid, SpecialDayRule } from '../..';
+import { CalendarYearGrid, PopoverComponent, SpecialDayRule } from '../..';
+import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -65,6 +67,10 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     /** @hidden Reference to the inner calendar component. */
     @ViewChild(CalendarComponent)
     calendarComponent: CalendarComponent;
+
+    /** @hidden */
+    @ViewChild(PopoverComponent)
+    popover: PopoverComponent;
 
     /**
      * @hidden Date of the input field. Internal use.
@@ -299,6 +305,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
         if (!this.isOpen && !this.disabled) {
             this.onTouched();
             this.isOpen = true;
+            this._activateTimeComponent();
         }
     }
 
@@ -490,5 +497,15 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
         } else {
             return this._datePipe.transform(fdDateTime.toDate(), this.format, null, this.locale);
         }
+    }
+
+    /** @hidden */
+    private _activateTimeComponent(): void {
+        const subscription: Subscription = this.popover.directiveRef.loaded
+            .pipe(delay(0))
+            .subscribe(() => {
+                this.timeComponent.changeActive('hour');
+                subscription.unsubscribe();
+            });
     }
 }

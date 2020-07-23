@@ -1,3 +1,6 @@
 <fd-time-picker [meridian]="true" [(ngModel)]="timeMeridianObject" [spinnerButtons]="false"></fd-time-picker>
-<br />
-Selected Time: {{ timeMeridianObject.hour }}h {{ timeMeridianObject.minute }}m {{ timeMeridianObject.second }}s
+<br/>
+Selected Time:
+<ng-container *ngIf="timeMeridianObject">{{ timeMeridianObject.hour }}h {{ timeMeridianObject.minute }}m
+    {{ timeMeridianObject.second }}s
+</ng-container>

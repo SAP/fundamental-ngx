@@ -41,10 +41,6 @@ export interface TimeColumnItemOutput {
 })
 export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
-    /** Popover workaround, before initialisation the carousel items can't return size */
-    readonly InitialTimeHeight: number = 46;
-    readonly InitialCompactTimeHeight: number = 28;
-
     /** items in row */
     @Input()
     rows: any[];
@@ -308,13 +304,13 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         }
         this._triggerCarousel(item, smooth);
         this._activeCarouselItem = item;
+        this._activeValue = item.value;
         if (emitEvent) {
             this.activeValueChange.emit({
                 value: item.value,
                 after: after
             });
         }
-        this._activeValue = item.value;
     }
 
     /** Returns item with passed value */
