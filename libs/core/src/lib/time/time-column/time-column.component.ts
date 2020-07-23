@@ -280,7 +280,6 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** Method triggered by keyboard, or decrement button */
     scrollDown(): void {
-        console.log('scrolldown');
         let index: number = this.items
             .toArray()
             .findIndex(_item => _item === this._activeCarouselItem)
