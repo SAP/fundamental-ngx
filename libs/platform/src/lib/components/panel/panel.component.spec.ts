@@ -16,7 +16,7 @@ import { PlatformPanelModule } from './panel.module';
     </fdp-panel>`
 })
 class PanelWithDefaultValuesComponent {
-    @ViewChild(PlatformPanelComponent, { static: false }) panel: PlatformPanelComponent;
+    @ViewChild(PlatformPanelComponent) panel: PlatformPanelComponent;
 }
 describe('PanelComponent default values', () => {
     let component: PanelWithDefaultValuesComponent;
