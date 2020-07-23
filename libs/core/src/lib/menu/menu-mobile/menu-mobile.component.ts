@@ -8,19 +8,21 @@ import {
     OnInit,
     Optional,
     TemplateRef,
-    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MenuService } from '../services/menu.service';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { map, startWith } from 'rxjs/operators';
-import { DialogConfig } from '../../dialog/dialog-utils/dialog-config.class';
-import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 import { RtlService } from '../../utils/services/rtl.service';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
+import {
+    MOBILE_MODE_CONFIG,
+    MobileModeBase,
+    MobileModeControlName,
+    MobileModeToken
+} from '../../utils/base-class/mobile-mode.class';
 
 @Component({
     selector: 'fd-menu-mobile',
@@ -28,19 +30,12 @@ import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class MenuMobileComponent implements OnInit, OnDestroy {
-
-    /** @hidden Dialog template reference */
-    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
-
+export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
     /** Current menu title */
     title: string;
 
     /** Whether current menu level is submenu */
     isSubmenu: boolean;
-
-    /** Dialog reference */
-    dialogRef: DialogRef;
 
     /** @hidden External content */
     childContent: TemplateRef<any> = undefined;
@@ -51,17 +46,17 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
     /** @hidden Navigation icon name based on RTL */
     navigationIcon$: Observable<string>;
 
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
     constructor(
-        private _elementRef: ElementRef,
+        elementRef: ElementRef,
+        dialogService: DialogService,
         private _menuService: MenuService,
-        private _dialogService: DialogService,
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
-        @Inject(MENU_COMPONENT) private _menuComponent: MenuInterface,
-    ) { }
+        @Inject(MENU_COMPONENT) menuComponent: MenuInterface,
+        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeToken[]
+    ) {
+        super(elementRef, dialogService, menuComponent, MobileModeControlName.MENU, mobileModes);
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -72,18 +67,13 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
-    /** Mobile config */
-    get mobileConfig(): MobileModeConfig {
-        return this._menuComponent.mobileConfig || {};
+        super.ngOnDestroy();
     }
 
     /** Closes the Dialog and Menu component */
     close(): void {
         this.dialogRef.close();
-        this._menuComponent.close();
+        this._component.close();
     }
 
     /** Navigate back to parent level of submenu */
@@ -96,11 +86,10 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
 
     /** @hidden Opens the Dialog */
     private _openDialog(): void {
-        const dialogConfig: DialogConfig = this._menuComponent.dialogConfig || {};
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
-            ...dialogConfig,
             mobile: true,
             verticalPadding: false,
+            ...this.dialogConfig,
             escKeyCloseable: false,
             backdropClickCloseable: false,
             container: this._elementRef.nativeElement
@@ -110,11 +99,11 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
     /** @hidden Listens on Active Path changes and updates mobile view */
     private _listenOnActivePathChange(): void {
         const initialItemPath: MenuItemComponent[] = this._menuService.activeNodePath.map(node => node.item);
-        this._subscriptions.add(
-            this._menuComponent.activePath
-                .pipe(startWith(initialItemPath))
-                .subscribe(items => this._setMenuView(items))
-        )
+        this._component.activePath
+            .pipe(
+                takeUntil(this._onDestroy$),
+                startWith(initialItemPath)
+            ).subscribe(items => this._setMenuView(items));
     }
 
     /** @hidden Sets menu view, title and isSubmenu flag */
@@ -128,10 +117,8 @@ export class MenuMobileComponent implements OnInit, OnDestroy {
 
     /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
     private _listenOnMenuOpenChange(): void {
-        this._subscriptions.add(
-            this._menuComponent.isOpenChange
-                .subscribe(isOpen => isOpen ? this._openDialog() : this.dialogRef.close())
-        )
+        this._component.isOpenChange.pipe(takeUntil(this._onDestroy$))
+            .subscribe(isOpen => isOpen ? this._openDialog() : this.dialogRef.close())
     }
 
     /** @hidden Sets navigation arrow depending on text direction */

@@ -49,13 +49,7 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         @Inject(MULTI_INPUT_COMPONENT) multiInputComponent: MultiInputInterface,
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeToken[]
     ) {
-        super(
-            elementRef,
-            dialogService,
-            multiInputComponent,
-            MobileModeControlName.MULTI_INPUT,
-            mobileModes
-        );
+        super(elementRef, dialogService, multiInputComponent, MobileModeControlName.MULTI_INPUT, mobileModes);
     }
 
     /** @hidden */

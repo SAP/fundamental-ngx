@@ -1,7 +1,7 @@
 import { EventEmitter, InjectionToken } from '@angular/core';
-import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MenuItemComponent } from './menu-item/menu-item.component';
+import { MobileMode } from '../utils/interfaces/mobile-control.interface';
 
 export const MENU_COMPONENT = new InjectionToken<string[]>('MenuInterface');
 
@@ -9,10 +9,10 @@ export const MENU_COMPONENT = new InjectionToken<string[]>('MenuInterface');
  * Menu Interface to have typing and avoid circular dependency between
  * MenuComponent <==> MenuMobileComponent
  */
-export interface MenuInterface {
-    mobileConfig: MobileModeConfig;
+export interface MenuInterface extends MobileMode {
     activePath: EventEmitter<MenuItemComponent[]>;
-    close: () => void;
     dialogConfig: DialogConfig;
     isOpenChange: EventEmitter<boolean>;
+
+    close(): void;
 }

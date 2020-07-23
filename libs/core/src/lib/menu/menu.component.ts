@@ -32,7 +32,7 @@ import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { Placement, PopperOptions } from 'popper.js';
 import { RtlService } from '../utils/services/rtl.service';
-import { MENU_COMPONENT } from './menu.interface';
+import { MENU_COMPONENT, MenuInterface } from './menu.interface';
 
 let menuUniqueId: number = 0;
 
@@ -47,7 +47,7 @@ let menuUniqueId: number = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [MenuService],
 })
-export class MenuComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export class MenuComponent implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy {
 
     /** Set menu in mobile mode */
     @Input('mobile')
