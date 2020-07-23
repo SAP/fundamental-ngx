@@ -4,7 +4,6 @@ import { ContentDensity } from '@fundamental-ngx/platform';
 /**
  * Platform lib Config
  */
-
 @Injectable({ providedIn: 'root' })
 export class PlatformConfig {
     /**

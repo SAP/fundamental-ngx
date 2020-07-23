@@ -5,7 +5,6 @@ import { ContentDensity, PlatformConfig } from '@fundamental-ngx/platform';
 /**
  * Default options for platform panel
  */
-
 @Injectable({ providedIn: 'root' })
 export class PlatformPanelConfig {
     /**
