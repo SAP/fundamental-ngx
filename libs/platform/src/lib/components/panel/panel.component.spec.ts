@@ -73,7 +73,9 @@ describe('PanelComponent default values', () => {
     </fdp-panel>`
 })
 class SimplePanelComponent {
-    @ViewChild(PlatformPanelComponent, { static: false }) panel: PlatformPanelComponent;
+    @ViewChild(PlatformPanelComponent) panel: PlatformPanelComponent;
+    ```
+as a human I could be mistaken, please check after change
     @ViewChild(PlatformPanelContentComponent) panelContent: PlatformPanelContentComponent;
     @ViewChild(PlatformPanelActionsComponent) panelActions: PlatformPanelActionsComponent;
 
