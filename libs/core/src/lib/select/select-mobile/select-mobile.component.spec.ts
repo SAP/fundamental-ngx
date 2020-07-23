@@ -1,13 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy, Component, Inject, InjectionToken, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
 import { SelectComponent } from '../select.component';
 import { SelectMobileModule } from './select-mobile.module';
 import { SelectModule } from '../select.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 import { whenStable } from '../../utils/tests/when-stable';
+import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN } from '../../utils/tests';
 
-const MOBILE_CONFIG_TOKEN = new InjectionToken<MobileModeConfig>('For test purposes');
 const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true };
 
 @Component({
@@ -25,9 +25,7 @@ class TestWrapperComponent {
     @ViewChild(SelectComponent, {static: true})
     selectComponent: SelectComponent;
 
-    constructor(@Inject(MOBILE_CONFIG_TOKEN) public mobileConfig: MobileModeConfig) {
-        console.log(mobileConfig);
-    }
+    constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) { }
 }
 
 describe('SelectComponent in mobile mode', () => {
@@ -37,34 +35,20 @@ describe('SelectComponent in mobile mode', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
-            imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule],
-            providers: [{ provide: MOBILE_CONFIG_TOKEN, useValue: {}}]
+            imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule]
         }).overrideComponent(
             SelectComponent,
             {set: {changeDetection: ChangeDetectionStrategy.Default}}
         )
     }));
 
-
     function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): void {
-        TestBed.overrideProvider(MOBILE_CONFIG_TOKEN, { useValue: mobileConfig });
+        TestBed.overrideProvider(MOBILE_CONFIG_TEST_TOKEN, { useValue: mobileConfig });
         TestBed.compileComponents();
-    }
-
-    function getMobileElements() {
-        return {
-            dialogTitle: fixture.nativeElement.querySelector('[fd-dialog-title]'),
-            dialogFooter: fixture.nativeElement.querySelector('fd-dialog-footer'),
-            dialogCloseBtn: fixture.nativeElement.querySelector('[fd-dialog-close-button]'),
-            footerButtons: fixture.nativeElement.querySelectorAll('[fd-dialog-decisive-button]')
-        }
-    }
-
-    beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
-    });
+    }
 
 
     it('should create', async () => {
@@ -163,7 +147,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        const mobileElements = getMobileElements();
+        const mobileElements = getMobileModeViewElements(fixture);
         expect(mobileElements.dialogTitle).toBeFalsy();
         expect(mobileElements.dialogFooter).toBeFalsy();
         expect(mobileElements.dialogCloseBtn).toBeFalsy();
@@ -180,7 +164,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        const mobileElements = getMobileElements();
+        const mobileElements = getMobileModeViewElements(fixture);
         expect(mobileElements.dialogFooter).toBeFalsy();
         expect(mobileElements.dialogCloseBtn).toBeTruthy();
         expect(mobileElements.footerButtons.length).toEqual(0);
@@ -196,7 +180,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        const mobileElements = getMobileElements();
+        const mobileElements = getMobileModeViewElements(fixture);
         expect(mobileElements.dialogTitle).toBeFalsy();
         expect(mobileElements.dialogFooter).toBeTruthy();
         expect(mobileElements.dialogCloseBtn).toBeFalsy();
@@ -229,7 +213,7 @@ describe('SelectComponent in mobile mode', () => {
     });
 
     it('should not emit value on cancel', async () => {
-        setup();
+        setup({ approveButtonText: 'SUBMIT', hasCloseButton: true });
         await whenStable(fixture);
 
         spyOn(testComponent.selectComponent.valueChange, 'emit').and.callThrough();
