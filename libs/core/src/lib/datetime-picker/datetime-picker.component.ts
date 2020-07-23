@@ -23,7 +23,8 @@ import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calen
 import { FdDatetime } from './models/fd-datetime';
 import { FormStates } from '../form/form-control/form-states';
 import { DatePipe } from '@angular/common';
-import { CalendarYearGrid, PopoverComponent, SpecialDayRule } from '../..';
+import { CalendarYearGrid, SpecialDayRule } from '../..';
+import { PopoverComponent } from '../popover/popover.component';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
