@@ -21,6 +21,8 @@ export class TileComponent implements CssClassBuilder, OnInit, OnChanges {
     @Input()
     double: boolean = false;
 
+    /** Option 'launch' modifier
+
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 

@@ -2,12 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TileComponent } from './tile.component';
-import { TileHeaderDirective } from './directives/tile-header.directive';
-import { TileContentDirective } from './directives/tile-content.directive';
-import { TileFooterDirective } from './directives/tile-footer.directive';
-import { TileTitleDirective } from './directives/tile-title.directive';
-import { TileSubtitleDirective } from './directives/tile-subtitle.directive';
-import { TileSectionDirective } from './directives/tile-section.directive';
+import {
+    TileContentDirective,
+    TileHeaderDirective,
+    TileFooterDirective,
+    TileSectionDirective,
+    TileSubtitleDirective,
+    TileTitleDirective
+} from './directives/tile.directives';
+import {
+    NumericContentKpiContainerDirective,
+    NumericContentKpiDirective,
+    NumericContentLaunchIconContainerDirective,
+    NumericContentLaunchIconDirective,
+    NumericContentScaleContainerDirective,
+    NumericContentScaleDirective,
+    NumericContentScaleTextDirective,
+    TileLaunchDirective
+} from './directives/numeric-content.directives';
 
 @NgModule({
     imports: [CommonModule],
@@ -18,7 +30,15 @@ import { TileSectionDirective } from './directives/tile-section.directive';
         TileFooterDirective,
         TileTitleDirective,
         TileSubtitleDirective,
-        TileSectionDirective
+        TileSectionDirective,
+        TileLaunchDirective,
+        NumericContentKpiContainerDirective,
+        NumericContentKpiDirective,
+        NumericContentLaunchIconContainerDirective,
+        NumericContentLaunchIconDirective,
+        NumericContentScaleContainerDirective,
+        NumericContentScaleDirective,
+        NumericContentScaleTextDirective
     ],
     declarations: [
         TileComponent,
@@ -27,7 +47,15 @@ import { TileSectionDirective } from './directives/tile-section.directive';
         TileFooterDirective,
         TileTitleDirective,
         TileSubtitleDirective,
-        TileSectionDirective
+        TileSectionDirective,
+        TileLaunchDirective,
+        NumericContentKpiContainerDirective,
+        NumericContentKpiDirective,
+        NumericContentLaunchIconContainerDirective,
+        NumericContentLaunchIconDirective,
+        NumericContentScaleContainerDirective,
+        NumericContentScaleDirective,
+        NumericContentScaleTextDirective
     ]
 })
 export class TileModule {}
