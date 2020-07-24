@@ -1,4 +1,4 @@
-import { Directive, ElementRef, InjectionToken, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
+import { ElementRef, InjectionToken, TemplateRef, ViewChild } from '@angular/core';
 import { DialogConfig } from '../../dialog/dialog-utils/dialog-config.class';
 import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
@@ -21,10 +21,7 @@ export enum MobileModeControl {
     MULTI_INPUT = 'MULTI_INPUT'
 }
 
-@Directive()
-export abstract class MobileModeBase<T> implements OnDestroy {
-    /** @hidden */
-    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
+export abstract class MobileModeBase<T extends MobileMode> {
 
     /** @hidden */
     dialogRef: DialogRef;
@@ -41,7 +38,7 @@ export abstract class MobileModeBase<T> implements OnDestroy {
     constructor(
         protected _elementRef: ElementRef,
         protected _dialogService: DialogService,
-        protected _component: MobileMode & T,
+        protected _component: T,
         protected readonly target: MobileModeControl,
         private readonly _mobileModes: MobileModeConfigToken[]) {
 
@@ -51,7 +48,7 @@ export abstract class MobileModeBase<T> implements OnDestroy {
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
+    onDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }

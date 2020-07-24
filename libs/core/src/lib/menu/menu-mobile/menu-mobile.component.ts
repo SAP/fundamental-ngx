@@ -7,7 +7,7 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    TemplateRef,
+    TemplateRef, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
@@ -31,6 +31,10 @@ import {
     encapsulation: ViewEncapsulation.None
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
+
+    /** @hidden */
+    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
+
     /** Current menu title */
     title: string;
 
@@ -67,7 +71,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** @hidden */
     ngOnDestroy(): void {
-        super.ngOnDestroy();
+        super.onDestroy();
     }
 
     /** Closes the Dialog and Menu component */

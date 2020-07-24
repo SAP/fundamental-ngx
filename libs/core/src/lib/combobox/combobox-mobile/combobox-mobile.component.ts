@@ -6,7 +6,7 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    TemplateRef,
+    TemplateRef, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
@@ -26,6 +26,9 @@ import {
     encapsulation: ViewEncapsulation.None
 })
 export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit, OnDestroy {
+
+    /** @hidden */
+    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden
      * For internal usage
@@ -55,7 +58,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
 
     /** @hidden */
     ngOnDestroy(): void {
-        super.ngOnDestroy();
+        super.onDestroy();
     }
 
     /** @hidden */
