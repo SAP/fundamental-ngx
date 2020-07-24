@@ -6,6 +6,7 @@ import {
     forwardRef,
     HostBinding,
     Input,
+    OnDestroy,
     OnInit,
     ViewChild,
     ViewEncapsulation
@@ -17,8 +18,8 @@ import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { Placement } from 'popper.js';
-import { Subscription } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { delay, filter, first, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-time-picker',
@@ -43,7 +44,7 @@ import { delay } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit, Validator {
+export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit, Validator {
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
@@ -150,6 +151,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     placeholder: string;
 
     /** @hidden */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
     onChange: Function = () => {};
     /** @hidden */
     onTouched: Function = () => {};
@@ -165,6 +169,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     /** @hidden */
     ngAfterViewInit(): void {
         this.child.changeActive(null);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**
@@ -206,11 +216,15 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     handleIsOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
         if (isOpen) {
-            const subscription: Subscription = this.popover.directiveRef.loaded
-                .pipe(delay(0))
+            this.popover.directiveRef.loaded
+                .pipe(
+                    filter(() => !this.child.activeView),
+                    takeUntil(this._onDestroy$),
+                    first(),
+                    delay(0)
+                )
                 .subscribe(() => {
                     this.child.changeActive('hour');
-                    subscription.unsubscribe();
                 });
         }
     }
