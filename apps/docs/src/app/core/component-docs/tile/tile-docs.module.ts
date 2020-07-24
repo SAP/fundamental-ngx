@@ -5,9 +5,8 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { API_FILES } from '../../api-files';
 import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
 import { TileDocsComponent } from './tile-docs.component';
-import {
-    TileExampleComponent
-} from './examples/tile-examples.component';
+import { TileGenericExampleComponent } from './examples/tile-generic-example.component';
+import { TileLaunchExampleComponent } from './examples/tile-launch-example.component';
 import { IdentifierModule, TileModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -31,7 +30,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         TileDocsComponent,
-        TileExampleComponent,
+        TileGenericExampleComponent,
+        TileLaunchExampleComponent,
         TileDocsHeaderComponent
     ]
 })
