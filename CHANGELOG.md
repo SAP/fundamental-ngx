@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.26...v0.20.1-rc.27) (2020-07-24)
+
+
+### Bug Fixes
+
+* form message group example ([#2864](https://github.com/SAP/fundamental-ngx/issues/2864)) ([174f9bb](https://github.com/SAP/fundamental-ngx/commit/174f9bbb93756497d5d489978e5dc83d69e92a6c))
+
 ### [0.20.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.25...v0.20.1-rc.26) (2020-07-24)
 
 ### [0.20.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.24...v0.20.1-rc.25) (2020-07-24)
