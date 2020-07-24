@@ -219,8 +219,8 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDest
             this.popover.directiveRef.loaded
                 .pipe(
                     filter(() => !this.child.activeView),
-                    takeUntil(this._onDestroy$),
                     first(),
+                    takeUntil(this._onDestroy$),
                     delay(0)
                 )
                 .subscribe(() => {
