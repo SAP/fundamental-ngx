@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CalendarAggregatedYearViewComponent } from './calendar-aggregated-year-view.component';
 import { CalendarService } from '../../calendar.service';
 import { AggregatedYear } from '../../models/aggregated-year';
+import { CommonModule } from '@angular/common';
+import { ButtonModule, IconModule } from '@fundamental-ngx/core';
 
 describe('CalendarAggregatedYearViewComponent', () => {
     let component: CalendarAggregatedYearViewComponent;
@@ -10,6 +12,7 @@ describe('CalendarAggregatedYearViewComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [CommonModule, IconModule, ButtonModule],
             declarations: [CalendarAggregatedYearViewComponent],
             providers: [CalendarService]
         }).compileComponents();

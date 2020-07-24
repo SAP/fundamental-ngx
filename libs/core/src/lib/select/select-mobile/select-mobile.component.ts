@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, Optional, TemplateRef } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    Inject,
+    OnDestroy,
+    OnInit,
+    Optional,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { OptionComponent } from '../option/option.component';
 import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
@@ -15,6 +25,9 @@ import { takeUntil } from 'rxjs/operators';
     templateUrl: './select-mobile.component.html'
 })
 export class SelectMobileComponent extends MobileModeBase<SelectInterface> implements OnInit, AfterViewInit, OnDestroy {
+
+    /** @hidden */
+    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
     childContent: TemplateRef<any> = undefined;
@@ -45,7 +58,7 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     /** @hidden */
     ngOnDestroy() {
         this.dialogRef.close();
-        super.ngOnDestroy();
+        super.onDestroy();
     }
 
     /** @hidden */

@@ -1,6 +1,5 @@
-import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
-import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { EventEmitter, InjectionToken } from '@angular/core';
+import { MobileMode } from '../utils/interfaces/mobile-control.interface';
 
 export const COMBOBOX_COMPONENT = new InjectionToken<string[]>('ComboboxInterface');
 
@@ -8,11 +7,10 @@ export const COMBOBOX_COMPONENT = new InjectionToken<string[]>('ComboboxInterfac
  * Combobox Interface to have typing and avoid circular dependency between
  * ComboboxComponent <==> ComboboxMobileComponent
  */
-export interface ComboboxInterface {
-    dialogDismiss: (backup: string) => void;
-    dialogApprove: () => void;
+export interface ComboboxInterface extends MobileMode {
     inputText: string;
-    mobileConfig?: MobileModeConfig;
     openChange: EventEmitter<boolean>;
-    dialogConfig: DialogConfig
+
+    dialogApprove(): void;
+    dialogDismiss(backup: string): void;
 }

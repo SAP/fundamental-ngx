@@ -8,6 +8,7 @@ import {
     OnInit,
     Optional,
     TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
@@ -29,6 +30,9 @@ import {
     encapsulation: ViewEncapsulation.None
 })
 export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterface> implements OnInit, AfterViewInit, OnDestroy {
+
+    /** @hidden */
+    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden
      * For internal usage
@@ -65,7 +69,7 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
 
     ngOnDestroy(): void {
         this.dialogRef.close();
-        super.ngOnDestroy();
+        super.onDestroy();
     }
 
     /** Throw select all event, it's handled by multi input component */
