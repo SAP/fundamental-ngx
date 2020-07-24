@@ -14,16 +14,15 @@ describe('MultiInputMobileComponent', () => {
     let anyComponent: any;
     let fixture: ComponentFixture<MultiInputMobileComponent>;
 
-    const testedMultiInputConfigObject: MobileModeConfig = {
+    const multiInputConfigObject: MobileModeConfig = {
         title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true
     };
 
     const backupData: any[] = ['option 1', 'option 2', 'option 3'];
 
-
     let mockedMultiInputComponent: Partial<MultiInputComponent> = {
         selected: backupData,
-        multiInputMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+        mobileConfig: multiInputConfigObject,
         dialogDismiss: (backupArguments: any[]) => {},
         selectAllItems: () => {},
         dialogApprove: () => {},
@@ -42,7 +41,7 @@ describe('MultiInputMobileComponent', () => {
     beforeEach(() => {
         mockedMultiInputComponent = {
             selected: backupData,
-            multiInputMobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+            mobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
             dialogDismiss: (backupArguments: any[]) => {},
             selectAllItems: () => {},
             dialogApprove: () => {},
@@ -59,36 +58,35 @@ describe('MultiInputMobileComponent', () => {
     });
 
     it('should get multi input config, when it is passed by input', () => {
-        anyComponent._multiInputComponent.providedMultiInputConfig = null;
-        expect(anyComponent.getMultiInputConfig()).toEqual(testedMultiInputConfigObject);
+        expect(anyComponent.mobileConfig).toEqual(multiInputConfigObject);
     });
 
     it('should open and close with approve', () => {
         component.ngOnInit();
         component.ngAfterViewInit();
-        spyOn(anyComponent._dialogRef._onHide, 'next');
-        spyOn(anyComponent._multiInputComponent, 'dialogApprove');
+        spyOn(anyComponent.dialogRef._onHide, 'next');
+        spyOn(anyComponent._component, 'dialogApprove');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
-        anyComponent._multiInputComponent.openChange.emit(true);
+        anyComponent._component.openChange.emit(true);
         fixture.detectChanges();
-        expect(anyComponent._dialogRef._onHide.next).toHaveBeenCalledWith(false);
+        expect(anyComponent.dialogRef._onHide.next).toHaveBeenCalledWith(false);
         component.handleApprove();
-        expect(anyComponent._multiInputComponent.dialogApprove).toHaveBeenCalled();
+        expect(anyComponent._component.dialogApprove).toHaveBeenCalled();
     });
 
     it('should open and close with dismiss', () => {
         component.ngOnInit();
         component.ngAfterViewInit();
-        spyOn(anyComponent._dialogRef._onHide, 'next');
-        spyOn(anyComponent._multiInputComponent, 'dialogDismiss');
+        spyOn(anyComponent.dialogRef._onHide, 'next');
+        spyOn(anyComponent._component, 'dialogDismiss');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
-        anyComponent._multiInputComponent.selected = [];
-        anyComponent._multiInputComponent.openChange.emit(true);
+        anyComponent._component.selected = [];
+        anyComponent._component.openChange.emit(true);
         fixture.detectChanges();
-        expect(anyComponent._dialogRef._onHide.next).toHaveBeenCalledWith(false);
+        expect(anyComponent.dialogRef._onHide.next).toHaveBeenCalledWith(false);
         component.handleDismiss();
-        expect(anyComponent._multiInputComponent.dialogDismiss).toHaveBeenCalledWith([]);
+        expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith([]);
     });
 });

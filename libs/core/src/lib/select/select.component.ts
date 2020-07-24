@@ -31,7 +31,7 @@ import { KeyUtil } from '../utils/functions/key-util';
 import { SelectProxy } from './select-proxy.service';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { SelectMobileComponent } from './select-mobile/select-mobile/select-mobile.component';
+import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
@@ -63,7 +63,7 @@ export interface OptionStatusChange {
         }
     ]
 })
-export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor, SelectInterface {
+export class SelectComponent implements ControlValueAccessor, SelectInterface, OnInit, AfterViewInit, AfterContentInit, OnDestroy {
 
     /** Id of the control. */
     @Input()
@@ -171,7 +171,7 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
 
     /** Select Input Mobile Configuration */
     @Input()
-    mobileConfig: MobileModeConfig = { hasCloseButton: true };
+    mobileConfig: MobileModeConfig = {hasCloseButton: true};
 
     /** Event emitted when the popover open state changes. */
     @Output()
@@ -560,8 +560,8 @@ export class SelectComponent implements OnInit, AfterViewInit, AfterContentInit,
             this._dynamicComponentService.createDynamicComponent(
                 this.selectOptionsListTemplate,
                 SelectMobileComponent,
-                { container: this._elementRef.nativeElement },
-                { injector: Injector.create({providers: [{ provide: SELECT_COMPONENT, useValue: this }]}) }
+                {container: this._elementRef.nativeElement},
+                {injector: Injector.create({providers: [{provide: SELECT_COMPONENT, useValue: this}]})}
             )
         }
     }

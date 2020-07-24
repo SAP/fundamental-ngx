@@ -40,3 +40,5 @@ export * from './functions/keyboard-unification';
 export * from './functions/uuidv4-generator';
 export * from './functions/get-string-from-hashmap';
 export * from './functions/key-util';
+
+export * from './base-class/mobile-mode.class';

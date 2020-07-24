@@ -1,19 +1,19 @@
-import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
-import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { EventEmitter, InjectionToken } from '@angular/core';
+import { MobileMode } from '../utils/interfaces/mobile-control.interface';
 
-export const MULTI_INPUT_COMPONENT = new InjectionToken<string[]>('MultiInputInterface');
+export const MULTI_INPUT_COMPONENT = new InjectionToken<string[]>('MultiInputComponent');
 
 /**
  * Multi Input Interface to have typing and avoid circular dependency between
  * MultiInputComponent <==> MultiInputMobileComponent
  */
-export interface MultiInputInterface {
-    selectAllItems: () => void;
-    dialogDismiss: (backup: any[]) => void;
-    dialogApprove: () => void;
-    multiInputMobileConfig?: MobileModeConfig;
+export interface MultiInputInterface extends MobileMode {
     selected: any[];
     openChange: EventEmitter<boolean>;
-    dialogConfig: DialogConfig
+
+    dialogApprove(): void;
+
+    selectAllItems(): void;
+
+    dialogDismiss(selectedBackup: any[]): void;
 }

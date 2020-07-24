@@ -93,6 +93,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/file-input/file-input-docs.module').then((m) => m.FileInputDocsModule)
             },
             {
+                path: 'global-config',
+                loadChildren: () =>
+                    import('./component-docs/global-config/global-config-docs.module').then((m) => m.GlobalConfigDocsModule)
+            },
+            {
                 path: 'icon',
                 loadChildren: () => import('./component-docs/icon/icon-docs.module').then((m) => m.IconDocsModule)
             },
