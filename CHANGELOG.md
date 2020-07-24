@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.24...v0.20.1-rc.25) (2020-07-24)
+
+
+### Features
+
+* Create base interfaces and typing for control mobile mode ([#2886](https://github.com/SAP/fundamental-ngx/issues/2886)) ([5fafda0](https://github.com/SAP/fundamental-ngx/commit/5fafda0827fefa36c000c76020d7a11c20e8d714))
+
 ### [0.20.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.23...v0.20.1-rc.24) (2020-07-24)
 
 
