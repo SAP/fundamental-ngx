@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ContentDensity } from '@fundamental-ngx/platform';
+
+import { ContentDensity } from './components/form/form-control';
 
 /**
  * Platform lib Config

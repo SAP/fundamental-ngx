@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { ContentDensity, PlatformConfig } from '@fundamental-ngx/platform';
+import { PlatformConfig } from '../../platform.config';
+import { ContentDensity } from '../form/form-control';
 
 /**
  * Default options for platform panel
