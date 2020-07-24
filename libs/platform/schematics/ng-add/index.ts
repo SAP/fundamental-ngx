@@ -1,4 +1,4 @@
-import { Rule, SchematicContext, Tree, chain, externalSchematic } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain, externalSchematic, noop } from '@angular-devkit/schematics';
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { hasPackage, getSourceTreePath } from '../utils/package-utils';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
@@ -25,8 +25,8 @@ export function ngAdd(_options: any): Rule {
     return (_tree: Tree, _context: SchematicContext) => {
         return chain([
             addCoreLib(_options),
-            callCoreSchematic(_options),
-            addLocalizeLib(_options),
+            _options.installations ? callCoreSchematic(_options) : noop(),
+            _options.installations ? addLocalizeLib(_options) : noop(),
             readTranslationFiles(_options),
             endInstallTask()
         ]);

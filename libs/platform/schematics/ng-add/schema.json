@@ -16,6 +16,12 @@
             "$default": {
                 "$source": "projectName"
             }
+        },
+        "installations": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether all dependent libraries for Fundamental Platform Library should be installed.",
+            "x-prompt": "Install all dependent libraries for Fundamental Platform Library to your project?"
         }
     }
 }
