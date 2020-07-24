@@ -1,12 +1,12 @@
 import { Directive, HostListener, SkipSelf } from '@angular/core';
 import { fromEvent, timer, interval } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, startWith } from 'rxjs/operators';
 
 import { StepInputComponent } from './base.step-input';
 
 export const streamUntilMouseUp$ = timer(500).pipe(
     switchMap(() => interval(40)),
-    takeUntil(fromEvent(window, 'mouseup'))
+    takeUntil(fromEvent(window, 'mouseup', { capture: true, once: true }))
 );
 
 /**
@@ -25,11 +25,8 @@ export class StepInputIncrementDirective {
     @HostListener('mousedown', ['$event'])
     click($event: Event) {
         $event.preventDefault();
-        // Propagate event to increase value
-        this.stepInput.increase();
 
-        // Until mouseup trigger "increment"
-        this._streamUntilMouseUp$.subscribe(() => {
+        this._streamUntilMouseUp$.pipe(startWith(null)).subscribe(() => {
             this.stepInput.increase();
             this.stepInput.detectChanges();
         });

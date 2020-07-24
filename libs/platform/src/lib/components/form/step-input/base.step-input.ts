@@ -34,16 +34,17 @@ export abstract class StepInputComponent extends BaseInput {
     }
 
     set value(value: number) {
-        super.setValue(value);
-        this._updateViewValue();
-        this._calculateCanDecrementIncrement();
-        this.lastEmittedValue = this._value;
+        if (value !== this._value) {
+            super.setValue(value);
+            this._updateViewValue();
+            this._calculateCanDecrementIncrement();
+        }
     }
 
     /** Sets minimum value boundary */
     @Input()
     set min(min: number) {
-        this._min = !isNaN(min) ? min : Number.MIN_VALUE;
+        this._min = !isNaN(min) ? min : -Number.MAX_VALUE;
         this._calculateCanDecrement();
     }
 
@@ -57,6 +58,7 @@ export abstract class StepInputComponent extends BaseInput {
     /** Sets input step value */
     @Input()
     set step(step: number) {
+        this._checkAndThrowErrorIfStepDoesntMatchPrecision(this._precision, step);
         this._step = step;
         this._calculateCanDecrementIncrement();
     }
@@ -66,6 +68,16 @@ export abstract class StepInputComponent extends BaseInput {
     set stepFn(stepFn: (value: number, action: 'increase' | 'decrease') => number) {
         this._stepFn = stepFn;
         this._calculateCanDecrementIncrement();
+    }
+
+    /** Number of digits after the decimal point */
+    @Input()
+    set precision(precision: number) {
+        this._checkAndThrowErrorIfStepDoesntMatchPrecision(precision, this._step);
+        this._precision = precision;
+    }
+    get precision(): number {
+        return this._precision;
     }
 
     /** Sets largeStep multiplier */
@@ -79,10 +91,6 @@ export abstract class StepInputComponent extends BaseInput {
     /** Horizontally aligns value inside input */
     @Input()
     align: 'left' | 'center' | 'right';
-
-    /** Number of digits after the decimal point */
-    @Input()
-    precision = 0;
 
     /**
      * ARIA label for increment button
@@ -131,10 +139,13 @@ export abstract class StepInputComponent extends BaseInput {
     private _max = Number.MAX_VALUE;
 
     /** @hidden */
-    private _min = Number.MIN_VALUE;
+    private _min = -Number.MAX_VALUE;
 
     /** @hidden */
     private _step = 1;
+
+    /** @hidden */
+    private _precision = 0;
 
     /** @hidden */
     private _stepFn: (value: number, action: 'increase' | 'decrease') => number;
@@ -157,11 +168,12 @@ export abstract class StepInputComponent extends BaseInput {
         super.ngOnInit();
         this._calculateCanDecrementIncrement();
         this._updateViewValue();
+        this.lastEmittedValue = this._value;
     }
 
     /** Increase value method */
     increase(step = this._getStepValue('increase')) {
-        const value = this.value + step;
+        const value = this._value + step;
         this.value = Math.min(value, this._max);
         this._emitChangedValue();
         this._updateViewValue();
@@ -169,7 +181,7 @@ export abstract class StepInputComponent extends BaseInput {
 
     /** Decrease value method */
     decrease(step = this._getStepValue('decrease')) {
-        const value = this.value - step;
+        const value = this._value - step;
         this.value = Math.max(value, this._min);
         this._emitChangedValue();
         this._updateViewValue();
@@ -187,25 +199,24 @@ export abstract class StepInputComponent extends BaseInput {
         this.decrease(step);
     }
 
-    /** @hidden
-     * Updates viewValue and conditionally emits new value.
-     * This method is called on (change) event, when user leaves input control.
+    /**
+     * @hidden
+     * Commit new entered value from view.
      */
-    commitEnteredValue(): void {
-        if (this.value !== this.lastEmittedValue) {
-            this._emitChangedValue();
-        }
-        this._updateViewValue();
-        this._calculateCanDecrementIncrement();
-    }
+    commitEnteredValue(value: string): void {
+        let newValue = this.parseValue(value);
 
-    /** @hidden Track value when user changes value of input control. */
-    onInput(value: string): void {
-        const parsedValue = this.parseValue(value);
-        if (parsedValue === null) {
-            this._value = this.lastEmittedValue;
+        if (newValue === null) {
+            newValue = this.lastEmittedValue;
+            this._updateViewValue();
         } else {
-            this._value = Math.min(Math.max(parsedValue, this._min), this._max);
+            newValue = Math.min(Math.max(newValue, this._min), this._max);
+        }
+
+        this.value = newValue;
+
+        if (this._value !== this.lastEmittedValue) {
+            this._emitChangedValue();
         }
     }
 
@@ -225,9 +236,10 @@ export abstract class StepInputComponent extends BaseInput {
 
     /** @hidden */
     private _emitChangedValue(): void {
-        this.lastEmittedValue = this.value;
-        this.valueChange.emit(this.createChangeEvent(this.value));
-        this.onChange(this.value);
+        const value = this._value;
+        this.lastEmittedValue = value;
+        this.valueChange.emit(this.createChangeEvent(value));
+        this.onChange(value);
     }
 
     /** @hidden
@@ -235,32 +247,49 @@ export abstract class StepInputComponent extends BaseInput {
      */
     private _getStepValue(action: 'increase' | 'decrease'): number {
         if (typeof this._stepFn === 'function') {
-            return this._stepFn(this.value, action);
+            return this._stepFn(this._value, action);
         }
         return this._step;
     }
 
     /** @hidden */
     private _updateViewValue(): void {
-        const formatted = this.formatValue(this.value);
+        const formatted = this.formatValue(this._value);
         this._renderer.setProperty(this._elementRef.nativeElement, 'value', formatted);
     }
 
     /** @hidden */
     _calculateCanIncrement() {
         const step = this._getStepValue('increase');
-        this.canIncrement = this.value + step <= this._max;
+        this.canIncrement = this._value + step <= this._max;
     }
 
     /** @hidden */
     _calculateCanDecrement() {
         const step = this._getStepValue('decrease');
-        this.canDecrement = this.value - step >= this._min;
+        this.canDecrement = this._value - step >= this._min;
     }
 
     /** @hidden */
     _calculateCanDecrementIncrement() {
         this._calculateCanDecrement();
         this._calculateCanIncrement();
+    }
+
+    /** @hidden */
+    _getNumberDecimalLength(value: number): number {
+        return ((value || 0).toString().split('.')[0] || '').length;
+    }
+
+    /** @hidden */
+    _checkAndThrowErrorIfStepDoesntMatchPrecision(precision: number, step: number) {
+        // Check if "precision" is valid comparing to "step"
+        const stepDecimalLength = this._getNumberDecimalLength(step);
+        const precisionDecimalLength = this._getNumberDecimalLength(precision);
+        if (stepDecimalLength > precisionDecimalLength) {
+            throw Error(
+                `Step input: The value of step property can not contain more digits after the decimal point than what is set to the precision property`
+            );
+        }
     }
 }

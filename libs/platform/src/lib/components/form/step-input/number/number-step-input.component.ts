@@ -45,11 +45,12 @@ export class NumberStepInputComponent extends StepInputComponent {
     }
 
     formatValue(value: number | null): string {
-        return value ? value.toPrecision() : '0';
+        const precision = this._precision;
+        return value ? value.toFixed(precision) : '0';
     }
 
     parseValue(value: string | null): number | null {
-        const parsedValue = Number(value);
+        const parsedValue = Number.parseFloat(value);
         return isNaN(parsedValue) ? null : parsedValue;
     }
 }

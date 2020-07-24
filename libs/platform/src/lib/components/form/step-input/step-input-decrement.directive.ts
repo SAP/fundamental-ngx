@@ -1,4 +1,5 @@
 import { Directive, HostListener, SkipSelf } from '@angular/core';
+import { startWith } from 'rxjs/operators';
 
 import { StepInputComponent } from './base.step-input';
 import { streamUntilMouseUp$ } from './step-input-increment.directive';
@@ -19,11 +20,8 @@ export class StepInputDecrementDirective {
     @HostListener('mousedown', ['$event'])
     click($event: Event) {
         $event.preventDefault();
-        // Propagate event to decrease value
-        this.stepInput.decrease();
 
-        // Until mouseup trigger "increment"
-        this._streamUntilMouseUp$.subscribe(() => {
+        this._streamUntilMouseUp$.pipe(startWith(null)).subscribe(() => {
             this.stepInput.decrease();
             this.stepInput.detectChanges();
         });

@@ -18,20 +18,10 @@ export class StepInputControlDirective {
      * @hidden
      * Handle "change" event
      */
-    @HostListener('change')
+    @HostListener('change', ['$event'])
     onChange() {
-        this.stepInputCmp.commitEnteredValue();
-        this.stepInputCmp.detectChanges();
-    }
-
-    /**
-     * @hidden
-     * Handle "input" event
-     */
-    @HostListener('input', ['$event'])
-    onInput(event: KeyboardEvent) {
         const value: string = (event.target as HTMLInputElement).value;
-        this.stepInputCmp.onInput(value);
+        this.stepInputCmp.commitEnteredValue(value);
         this.stepInputCmp.detectChanges();
     }
 

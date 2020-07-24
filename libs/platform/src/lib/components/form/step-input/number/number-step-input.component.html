@@ -13,7 +13,7 @@
         tabindex="-1"
         type="button"
         [compact]="isCompact"
-        [disabled]="disabled || !canDecrement"
+        [attr.aria-disabled]="disabled || !canDecrement"
         [attr.title]="decrementLabel"
         [attr.aria-label]="decrementLabel"
         [attr.aria-controls]="id"
@@ -43,7 +43,7 @@
         fdpStepInputIncrement
         tabindex="-1"
         type="button"
-        [disabled]="disabled || !canIncrement"
+        [attr.aria-disabled]="disabled || !canIncrement"
         [attr.title]="incrementLabel"
         [attr.aria-label]="incrementLabel"
         [attr.aria-controls]="id"
