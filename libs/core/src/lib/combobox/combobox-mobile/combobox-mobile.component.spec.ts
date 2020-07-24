@@ -53,32 +53,32 @@ describe('ComboboxMobileComponent', () => {
     });
 
     it('should get multi input config, when it is passed by input', () => {
-        anyComponent._comboboxComponent.providedMultiInputConfig = null;
-        expect(anyComponent.getMultiInputConfig()).toEqual(testComboboxConfigObject);
+        anyComponent._component.providedMultiInputConfig = null;
+        expect(anyComponent.mobileConfig).toEqual(testComboboxConfigObject);
     });
 
     it('should open and close with approve', () => {
-        anyComponent._comboboxComponent.mobile = true;
+        anyComponent._component.mobile = true;
         component.ngOnInit();
-        anyComponent._comboboxComponent.openChange.emit(true);
-        spyOn(anyComponent._comboboxComponent, 'dialogApprove');
+        anyComponent._component.openChange.emit(true);
+        spyOn(anyComponent._component, 'dialogApprove');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();
         component.handleApprove();
-        expect(anyComponent._comboboxComponent.dialogApprove).toHaveBeenCalled();
+        expect(anyComponent._component.dialogApprove).toHaveBeenCalled();
     });
 
     it('should open and close with dismiss', () => {
-        anyComponent._comboboxComponent.mobile = true;
+        anyComponent._component.mobile = true;
         component.ngOnInit();
-        anyComponent._comboboxComponent.inputText = 'test';
-        anyComponent._comboboxComponent.openChange.emit(true);
-        spyOn(anyComponent._comboboxComponent, 'dialogDismiss');
+        anyComponent._component.inputText = 'test';
+        anyComponent._component.openChange.emit(true);
+        spyOn(anyComponent._component, 'dialogDismiss');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();
         component.handleDismiss();
-        expect(anyComponent._comboboxComponent.dialogDismiss).toHaveBeenCalledWith('test');
+        expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith('test');
     });
 });

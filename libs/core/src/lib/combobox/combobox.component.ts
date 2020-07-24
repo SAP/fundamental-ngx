@@ -7,13 +7,11 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    Inject,
     Injector,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -38,7 +36,6 @@ import { KeyUtil } from '../utils/functions/key-util';
 import { AutoCompleteEvent } from './auto-complete.directive';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
-import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 
@@ -73,7 +70,7 @@ import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.compo
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy, ComboboxInterface {
+export class ComboboxComponent implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
 
     /** Values to be filtered in the search input. */
     @Input()
@@ -112,10 +109,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
      */
     @Input()
     openOnKeyboardEvent: boolean = true;
-
-    /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
-    @Input()
-    mobileConfig: MobileModeConfig;
 
     /**
      *  The state of the form control - applies css classes.
@@ -189,6 +182,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** Whether the combobox should be built on mobile mode */
     @Input()
     mobile: boolean = false;
+
+    /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
+    @Input()
+    mobileConfig: MobileModeConfig;
 
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
@@ -279,7 +276,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     constructor(
-        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         private _elementRef: ElementRef,
         private _menuKeyboardService: MenuKeyboardService,
         private _cdRef: ChangeDetectorRef,
