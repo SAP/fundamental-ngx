@@ -85,10 +85,11 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
 
     /** Output event triggered when the Expand button is clicked */
     @Output()
-    panelExpandChange: EventEmitter<PanelExpandChangeEvent> = new EventEmitter();
+    panelExpandChange = new EventEmitter<PanelExpandChangeEvent>();
 
     /**
-     *  Button label based on the current state
+     * @hidden
+     * Button label based on the current state
      */
     expandAriaLabel: string;
 
