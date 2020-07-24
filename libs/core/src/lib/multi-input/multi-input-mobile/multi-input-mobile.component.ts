@@ -7,7 +7,8 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    TemplateRef, ViewChild,
+    TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
