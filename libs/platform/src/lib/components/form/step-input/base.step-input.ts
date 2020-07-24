@@ -16,7 +16,7 @@ export class PlatformStepInputChange<T extends StepInputComponent = StepInputCom
 /**
  * StepInputComponent is a base abstract class that should be used
  * to create type specific StepInput components such as number, money, unitOfMeasure
- * This holds main Step Input functionality that can be abstracted
+ * This holds base Step Input functionality that can be abstracted
  */
 
 export abstract class StepInputComponent extends BaseInput {
@@ -136,6 +136,9 @@ export abstract class StepInputComponent extends BaseInput {
     isCompact = this._contentDensity === 'compact';
 
     /** @hidden */
+    _precision = 0;
+
+    /** @hidden */
     private _max = Number.MAX_VALUE;
 
     /** @hidden */
@@ -143,9 +146,6 @@ export abstract class StepInputComponent extends BaseInput {
 
     /** @hidden */
     private _step = 1;
-
-    /** @hidden */
-    private _precision = 0;
 
     /** @hidden */
     private _stepFn: (value: number, action: 'increase' | 'decrease') => number;

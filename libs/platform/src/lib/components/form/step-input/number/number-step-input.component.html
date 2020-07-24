@@ -1,6 +1,7 @@
 <div
     class="fd-step-input"
     [class.is-focus]="focused"
+    [class.is-readonly]="!editable"
     [class.is-disabled]="disabled"
     [class.fd-step-input--compact]="isCompact"
     [class.fd-step-input--without-buttons]="showLabels"
@@ -28,12 +29,14 @@
         [id]="id"
         [name]="name"
         [disabled]="disabled"
+        [readonly]="!editable"
         [attr.placeholder]="placeholder || ''"
         [attr.aria-label]="ariaLabel"
         [attr.aria-labelledby]="ariaLabelledby"
         [style.textAlign]="align"
         fdpStepInputControl
         type="text"
+        inputmode="numeric"
     />
     <button
         class="fd-step-input__button"
