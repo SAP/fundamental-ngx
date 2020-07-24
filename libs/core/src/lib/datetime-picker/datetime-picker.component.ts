@@ -524,4 +524,5 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
                 this.timeComponent.changeActive('hour');
             });
     }
+    
 }
