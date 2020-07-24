@@ -50,6 +50,8 @@ export const API_FILES = {
         'FormSetDirective',
         'FormInputMessageGroupComponent'
     ],
+    globalConfig: [
+    ],
     icon: ['IconComponent'],
     identifier: ['IdentifierComponent'],
     image: ['ImageComponent'],

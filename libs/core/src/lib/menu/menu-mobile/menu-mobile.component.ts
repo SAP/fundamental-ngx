@@ -20,8 +20,8 @@ import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
-    MobileModeControlName,
-    MobileModeToken
+    MobileModeControl,
+    MobileModeConfigToken
 } from '../../utils/base-class/mobile-mode.class';
 
 @Component({
@@ -53,9 +53,9 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
         @Inject(MENU_COMPONENT) menuComponent: MenuInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeToken[]
+        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
-        super(elementRef, dialogService, menuComponent, MobileModeControlName.MENU, mobileModes);
+        super(elementRef, dialogService, menuComponent, MobileModeControl.MENU, mobileModes);
     }
 
     /** @hidden */

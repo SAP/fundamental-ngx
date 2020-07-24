@@ -31,6 +31,7 @@ import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sectio
 import { HeaderTabsComponent } from './core-helpers/header-tabs/header-tabs.component';
 import { ApiComponent } from './core-helpers/api/api.component';
 import { sharedCoreModules } from './shared-core-modules';
+import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import { sharedCoreModules } from './shared-core-modules';
         ToolbarDocsComponent,
         SectionsToolbarComponent,
         HeaderTabsComponent,
-        ApiComponent
+        ApiComponent,
+        CodeSnippetComponent
     ],
 
     imports: [
@@ -87,7 +89,8 @@ import { sharedCoreModules } from './shared-core-modules';
         SectionsToolbarComponent,
         HeaderTabsComponent,
         ApiComponent,
-        sharedCoreModules
+        sharedCoreModules,
+        CodeSnippetComponent
     ]
 })
 export class SharedDocumentationModule {}

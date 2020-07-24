@@ -16,8 +16,8 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
-    MobileModeControlName,
-    MobileModeToken
+    MobileModeControl,
+    MobileModeConfigToken
 } from '../../utils/base-class/mobile-mode.class';
 
 
@@ -47,9 +47,9 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         elementRef: ElementRef,
         dialogService: DialogService,
         @Inject(MULTI_INPUT_COMPONENT) multiInputComponent: MultiInputInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeToken[]
+        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
-        super(elementRef, dialogService, multiInputComponent, MobileModeControlName.MULTI_INPUT, mobileModes);
+        super(elementRef, dialogService, multiInputComponent, MobileModeControl.MULTI_INPUT, mobileModes);
     }
 
     /** @hidden */
@@ -61,6 +61,11 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
     ngAfterViewInit(): void {
         this._open();
         this.dialogRef.hide(true);
+    }
+
+    ngOnDestroy(): void {
+        this.dialogRef.close();
+        super.ngOnDestroy();
     }
 
     /** Throw select all event, it's handled by multi input component */

@@ -1,22 +1,22 @@
-import { MobileModeControlName, MobileModeToken } from '@fundamental-ngx/core';
+import { MobileModeControl, MobileModeConfigToken } from '@fundamental-ngx/core';
 import { MOBILE_DIALOG_PORTRAIT } from './mobile-dialog.consts';
 
-export const SELECT_MOBILE_CONFIG: MobileModeToken = {
-    controlName: MobileModeControlName.SELECT,
+export const SELECT_MOBILE_CONFIG: MobileModeConfigToken = {
+    target: MobileModeControl.SELECT,
     config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
 };
 
-export const COMBOBOX_MOBILE_CONFIG: MobileModeToken = {
-    controlName: MobileModeControlName.COMBOBOX,
+export const COMBOBOX_MOBILE_CONFIG: MobileModeConfigToken = {
+    target: MobileModeControl.COMBOBOX,
     config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
 };
 
-export const MULTI_INPUT_MOBILE_CONFIG: MobileModeToken = {
-    controlName: MobileModeControlName.MULTI_INPUT,
+export const MULTI_INPUT_MOBILE_CONFIG: MobileModeConfigToken = {
+    target: MobileModeControl.MULTI_INPUT,
     config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
 };
 
-export const MENU_MOBILE_CONFIG: MobileModeToken = {
-    controlName: MobileModeControlName.MENU,
+export const MENU_MOBILE_CONFIG: MobileModeConfigToken = {
+    target: MobileModeControl.MENU,
     config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
 };

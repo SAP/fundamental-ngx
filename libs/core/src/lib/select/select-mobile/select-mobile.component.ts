@@ -5,8 +5,8 @@ import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
-    MobileModeControlName,
-    MobileModeToken
+    MobileModeControl,
+    MobileModeConfigToken
 } from '../../utils/base-class/mobile-mode.class';
 import { takeUntil } from 'rxjs/operators';
 
@@ -26,9 +26,9 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         elementRef: ElementRef,
         dialogService: DialogService,
         @Inject(SELECT_COMPONENT) selectComponent: SelectInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeToken[]
+        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
-        super(elementRef, dialogService, selectComponent, MobileModeControlName.SELECT, mobileModes);
+        super(elementRef, dialogService, selectComponent, MobileModeControl.SELECT, mobileModes);
     }
 
     /** @hidden */

@@ -7,14 +7,14 @@ import { MobileMode } from '../interfaces/mobile-control.interface';
 import { Subject } from 'rxjs';
 import { MOBILE_CONFIG_ERROR } from '../consts';
 
-export const MOBILE_MODE_CONFIG = new InjectionToken<MobileModeToken>('Provides configuration for mobile control');
+export const MOBILE_MODE_CONFIG = new InjectionToken<MobileModeConfigToken>('Provides configuration for mobile control');
 
-export interface MobileModeToken {
-    controlName: MobileModeControlName,
+export interface MobileModeConfigToken {
+    target: MobileModeControl,
     config: MobileModeConfig;
 }
 
-export enum MobileModeControlName {
+export enum MobileModeControl {
     MENU = 'MENU',
     SELECT = 'SELECT',
     COMBOBOX = 'COMBOBOX',
@@ -41,8 +41,8 @@ export abstract class MobileModeBase<T> implements OnDestroy {
         protected _elementRef: ElementRef,
         protected _dialogService: DialogService,
         protected _component: MobileMode & T,
-        protected readonly controlName: MobileModeControlName,
-        private readonly _mobileModes: MobileModeToken[]) {
+        protected readonly target: MobileModeControl,
+        private readonly _mobileModes: MobileModeConfigToken[]) {
 
         this._mobileModes = this._mobileModes || [];
         this.mobileConfig = this._getMobileModeConfig();
@@ -57,7 +57,7 @@ export abstract class MobileModeBase<T> implements OnDestroy {
 
     /** @hidden */
     private _getMobileModeConfig(): MobileModeConfig {
-        const injectedConfig = this._mobileModes.find(mode => mode.controlName === this.controlName);
+        const injectedConfig = this._mobileModes.find(mode => mode.target === this.target);
 
         if (injectedConfig || this._component.mobileConfig) {
             return injectedConfig
