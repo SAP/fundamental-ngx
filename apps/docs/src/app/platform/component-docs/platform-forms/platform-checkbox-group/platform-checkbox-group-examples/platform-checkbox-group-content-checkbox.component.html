@@ -1,5 +1,5 @@
 <h3>Reactive Form Examples:</h3>
-<h3>Checkbox group created from passed checkboxes</h3>
+<h3>Checkbox group created from projected checkboxes</h3>
 <fdp-form-group [multiLayout]="true" [formGroup]="form1">
     <fdp-form-field #fl1 [id]="'fruits'" [label]="'My favourite fruits:'" zone="zLeft" rank="1">
         <fdp-checkbox-group [name]="'fruits'" [formControl]="fl1.formControl">
@@ -29,7 +29,7 @@
 
 <p>Pre-selection based on value passed from FormGroup</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form3">
-    <fdp-form-field #fl4 [id]="'visited'" [label]="'visited countries'" zone="zLeft" rank="1">
+    <fdp-form-field #fl4 [id]="'visited1'" [label]="'visited countries'" zone="zLeft" rank="1">
         <fdp-checkbox-group [name]="'countries'" formControlName="visited">
             <fdp-checkbox [value]="'Italy'" [label]="'Italy'"></fdp-checkbox>
             <fdp-checkbox [value]="'France'" [label]="'France'"></fdp-checkbox>
@@ -38,7 +38,7 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Visited Countries: {{ form3.controls.visited.value }}</span>
+<span style="margin-left: 2rem;">Visited Countries: {{ form3.controls.visited1.value }}</span>
 <br />
 <br />
 <p>Disabled checkbox group</p>
@@ -62,7 +62,7 @@
 
 <separator></separator>
 <h3>Template Driven Form Examples:</h3>
-<h3>Checkbox group created from passed checkboxes</h3>
+<h3>Checkbox group created from projected checkboxes</h3>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'subjects'" [label]="'Subjects selected:'" zone="zLeft" rank="1">
         <fdp-checkbox-group [name]="'semester1'" [(ngModel)]="subjects">

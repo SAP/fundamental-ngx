@@ -30,10 +30,10 @@
                 context: {
                     id: id + i,
                     name: name,
-                    checkboxValue: item.value || item,
+                    checkboxValue: getLookupValue(item),
                     contentDensity: contentDensity,
-                    labeltext: item.label || item,
-                    disabled: item.disabled || disabled
+                    labeltext: getDisaplyValue(item),
+                    disabled: item.disabled ? item.disabled : disabled
                 }
             "
         >

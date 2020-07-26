@@ -44,6 +44,22 @@
 
 <br />
 <br />
+<p>Lookup key and Disaplay key usages.</p>
+<fdp-form-group [multiLayout]="true" [formGroup]="form7">
+    <fdp-form-field #fl5 [id]="'items'" [label]="'Purchased Items: '" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [list]="invoiceItems"
+            [name]="'invoices'"
+            [lookupKey]="'item'"
+            [displayKey]="'itemType'"
+            [formControl]="fl5.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Purchased Items: {{ form7.controls.items.value }}</span>
+
+<br />
+<br />
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form6">
     <fdp-form-field
@@ -94,6 +110,21 @@
 </fdp-form-group>
 <span style="margin-left: 2rem;">Currencies: {{ currencies }}</span>
 
+<br />
+<br />
+<p>Lookup key and Disaplay key usages.</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field [id]="'itemst'" [label]="'Purchased Items: '" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [list]="invoiceItems"
+            [name]="'items'"
+            [lookupKey]="'item'"
+            [displayKey]="'itemType'"
+            [(ngModel)]="itemsData"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Purchased Items: {{ itemsData }}</span>
 <br />
 <br />
 <p>Disabled checkbox group</p>

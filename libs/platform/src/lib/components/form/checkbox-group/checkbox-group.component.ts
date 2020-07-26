@@ -83,4 +83,18 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
         this.onTouched();
         this.valueChange.emit(event);
     }
+
+    /**
+     * acess display value for objects, acts as checkbox label.
+     */
+    public getDisaplyValue(item: any): string {
+        return this.displayValue(item);
+    }
+
+    /**
+     * acess lookup value for objects, acts as checkbox value.
+     */
+    public getLookupValue(item: any): string {
+        return this.lookupValue(item);
+    }
 }

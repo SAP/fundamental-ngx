@@ -27,9 +27,16 @@ export class PlatformCheckboxGroupListObjectComponent {
     });
     form7 = new FormGroup({});
 
+    invoiceItems = [
+        new Item('1', 'coffee', 'Coffee', 100, 12),
+        new Item('2', 'pen', 'Pen', 200, 5),
+        new Item('3', 'chair', 'Office chair', 50, 5530)
+    ];
+
     // template driven
     languagesKnown = '';
     currencies = ['INR', 'USD'];
+    itemsData = ['pen'];
 }
 
 class Country implements SelectItem {
@@ -38,4 +45,14 @@ class Country implements SelectItem {
 
 class LanguageKnown implements SelectItem {
     constructor(public label: string, public value: string, public disabled: boolean) {}
+}
+
+class Item {
+    constructor(
+        public itemId: string,
+        public item: string,
+        public itemType: string,
+        public quantity: number,
+        public rate: number
+    ) {}
 }

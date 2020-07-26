@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { SelectItem } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-list',
