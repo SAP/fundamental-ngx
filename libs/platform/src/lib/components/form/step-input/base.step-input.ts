@@ -4,6 +4,7 @@ import { NgControl, NgForm } from '@angular/forms';
 import { BaseInput } from '../base.input';
 import { StepInputConfig } from './step-input.config';
 import { ContentDensity } from '../form-control';
+import { takeUntil } from 'rxjs/operators';
 
 /** Change event object emitted by Platform Step Input component */
 export class PlatformStepInputChange<T extends StepInputComponent = StepInputComponent, K = number> {
@@ -36,7 +37,6 @@ export abstract class StepInputComponent extends BaseInput {
     set value(value: number) {
         if (value !== this._value) {
             super.setValue(value);
-            this._updateViewValue();
             this._calculateCanDecrementIncrement();
         }
     }
@@ -129,6 +129,9 @@ export abstract class StepInputComponent extends BaseInput {
     /** @hidden */
     canDecrement = true;
 
+    /** Indicates if control has an error */
+    isErrorState = false;
+
     /** @hidden */
     _contentDensity = this.config.contentDensity;
 
@@ -160,31 +163,56 @@ export abstract class StepInputComponent extends BaseInput {
         super(_cd, ngControl, ngForm);
     }
 
+    ngOnInit() {
+        super.ngOnInit();
+
+        // Validate initial value
+        this._value = this._validateValueByLimits(this._value);
+
+        this._calculateCanDecrementIncrement();
+
+        this._updateViewValue();
+
+        this.lastEmittedValue = this._value;
+
+        this.stateChanges
+            .asObservable()
+            .pipe(takeUntil(this._destroyed))
+            .subscribe(() => {
+                this.isErrorState = this.status === 'error';
+            });
+    }
+
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
     }
 
-    ngOnInit() {
-        super.ngOnInit();
-        this._calculateCanDecrementIncrement();
+    /** @hidden
+     * Override writeValue method to keep input view value up to date
+     */
+    writeValue(value: any) {
+        super.writeValue(value);
         this._updateViewValue();
-        this.lastEmittedValue = this._value;
     }
 
-    /** Increase value method */
+    /** Increase value */
     increase(step = this._getStepValue('increase')) {
+        if (!this.canIncrement) {
+            return;
+        }
         const value = this._value + step;
-        this.value = Math.min(value, this._max);
+        this.value = this._validateValueByLimits(value);
         this._emitChangedValue();
-        this._updateViewValue();
     }
 
-    /** Decrease value method */
+    /** Decrease value */
     decrease(step = this._getStepValue('decrease')) {
+        if (!this.canDecrement) {
+            return;
+        }
         const value = this._value - step;
-        this.value = Math.max(value, this._min);
+        this.value = this._validateValueByLimits(value);
         this._emitChangedValue();
-        this._updateViewValue();
     }
 
     /** Increase value by large step */
@@ -204,16 +232,20 @@ export abstract class StepInputComponent extends BaseInput {
      * Commit new entered value from view.
      */
     commitEnteredValue(value: string): void {
-        let newValue = this.parseValue(value);
+        const parsedValue = this.parseValue(value);
+        let newValue = parsedValue;
 
-        if (newValue === null) {
-            newValue = this.lastEmittedValue;
-            this._updateViewValue();
-        } else {
-            newValue = Math.min(Math.max(newValue, this._min), this._max);
+        if (newValue !== null) {
+            newValue = this._validateValueByLimits(newValue);
         }
 
+        const needToUpdateView = this._value === newValue;
+
         this.value = newValue;
+
+        if (needToUpdateView) {
+            this._updateViewValue();
+        }
 
         if (this._value !== this.lastEmittedValue) {
             this._emitChangedValue();
@@ -228,11 +260,15 @@ export abstract class StepInputComponent extends BaseInput {
     /** Create valueChange event */
     abstract createChangeEvent(value: number): PlatformStepInputChange;
 
-    /** Format value to view presentation */
+    /**
+     * Format value to view presentation
+     */
     abstract formatValue(value: number): string;
 
-    /** Format value to view presentation */
-    abstract parseValue(value: string): number;
+    /**
+     * Parse value from view.
+     */
+    abstract parseValue(value: string): number | null;
 
     /** @hidden */
     private _emitChangedValue(): void {
@@ -243,7 +279,7 @@ export abstract class StepInputComponent extends BaseInput {
     }
 
     /** @hidden
-     * get step value base either on "stepFn" or "step"
+     * Get step value based either on "stepFn" or "step"
      */
     private _getStepValue(action: 'increase' | 'decrease'): number {
         if (typeof this._stepFn === 'function') {
@@ -254,35 +290,43 @@ export abstract class StepInputComponent extends BaseInput {
 
     /** @hidden */
     private _updateViewValue(): void {
+        if (this._value === null) {
+            return;
+        }
         const formatted = this.formatValue(this._value);
         this._renderer.setProperty(this._elementRef.nativeElement, 'value', formatted);
     }
 
     /** @hidden */
-    _calculateCanIncrement() {
+    private _calculateCanIncrement() {
         const step = this._getStepValue('increase');
         this.canIncrement = this._value + step <= this._max;
     }
 
     /** @hidden */
-    _calculateCanDecrement() {
+    private _calculateCanDecrement() {
         const step = this._getStepValue('decrease');
         this.canDecrement = this._value - step >= this._min;
     }
 
     /** @hidden */
-    _calculateCanDecrementIncrement() {
+    private _calculateCanDecrementIncrement() {
         this._calculateCanDecrement();
         this._calculateCanIncrement();
     }
 
     /** @hidden */
-    _getNumberDecimalLength(value: number): number {
+    private _validateValueByLimits(value: number): number {
+        return Math.min(Math.max(value, this._min), this._max);
+    }
+
+    /** @hidden */
+    private _getNumberDecimalLength(value: number): number {
         return ((value || 0).toString().split('.')[0] || '').length;
     }
 
     /** @hidden */
-    _checkAndThrowErrorIfStepDoesntMatchPrecision(precision: number, step: number) {
+    private _checkAndThrowErrorIfStepDoesntMatchPrecision(precision: number, step: number) {
         // Check if "precision" is valid comparing to "step"
         const stepDecimalLength = this._getNumberDecimalLength(step);
         const precisionDecimalLength = this._getNumberDecimalLength(precision);

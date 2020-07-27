@@ -1,0 +1,71 @@
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <label>Default Number Step Input</label>
+        <br />
+        <fdp-number-step-input
+            [value]="value1"
+            (valueChange)="value1 = $event.payload"
+            name="number"
+        ></fdp-number-step-input>
+        <br />
+        <small>value: {{ value1 }}</small>
+    </div>
+    <div class="step-input-example">
+        <label>Compact</label>
+        <br />
+        <fdp-number-step-input [value]="0" name="compact" contentDensity="compact"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label>Min Max limits</label>
+        <br />
+        <fdp-number-step-input [value]="0" name="minMaxLimits" [min]="-20" [max]="20"></fdp-number-step-input>
+    </div>
+</div>
+
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <label>Precision</label>
+        <br />
+        <fdp-number-step-input [value]="0" name="precision" [precision]="2" [step]="0.25"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label>Disabled</label>
+        <br />
+        <fdp-number-step-input [value]="50" name="stepNumberDisabled" [disabled]="true"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label>Read Only</label>
+        <br />
+        <fdp-number-step-input [value]="50" name="stepNumberReadOnly" [editable]="false"></fdp-number-step-input>
+    </div>
+</div>
+
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <label>With description</label>
+        <br />
+        <fdp-number-step-input [value]="25" name="stepNumberDescription" description="PC"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label>Show labels</label>
+        <br />
+        <fdp-number-step-input [value]="0" name="showLabels" [showLabels]="true"></fdp-number-step-input>
+    </div>
+</div>
+
+<label>Horizontal alignment in the input field</label>
+<br />
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <small>Left</small><br />
+        <fdp-number-step-input [value]="100" name="alignment" align="left"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <small>Center</small><br />
+        <fdp-number-step-input [value]="100" name="alignment" align="center"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <small>Right</small><br />
+        <fdp-number-step-input [value]="100" name="alignment" align="right"></fdp-number-step-input>
+    </div>
+</div>

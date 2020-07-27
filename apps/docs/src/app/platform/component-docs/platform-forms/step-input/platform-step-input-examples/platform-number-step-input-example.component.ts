@@ -6,7 +6,4 @@ import { Component } from '@angular/core';
 })
 export class PlatformNumberStepInputExampleComponent {
     value1 = 100;
-    value2 = 0;
-    value3 = 0;
-    value4 = 0;
 }

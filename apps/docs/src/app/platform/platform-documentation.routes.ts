@@ -122,7 +122,7 @@ export const ROUTES: Routes = [
             {
                 path: 'step-input',
                 loadChildren: () =>
-                    import('./component-docs/platform-step-input/platform-step-input.module').then(
+                    import('./component-docs/platform-forms/step-input/platform-step-input.module').then(
                         (m) => m.PlatformStepInputDocsModule
                     )
             }

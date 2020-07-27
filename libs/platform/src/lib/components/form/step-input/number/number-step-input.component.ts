@@ -46,11 +46,16 @@ export class NumberStepInputComponent extends StepInputComponent {
 
     formatValue(value: number | null): string {
         const precision = this._precision;
-        return value ? value.toFixed(precision) : '0';
+        return !isNaN(value) ? value.toFixed(precision) : '0';
     }
 
     parseValue(value: string | null): number | null {
-        const parsedValue = Number.parseFloat(value);
+        let parsedValue = Number.parseFloat(value);
+        if (isNaN(parsedValue)) {
+            return null;
+        }
+        const fixedStringValue = parsedValue.toFixed(this._precision);
+        parsedValue = Number.parseFloat(fixedStringValue);
         return isNaN(parsedValue) ? null : parsedValue;
     }
 }
