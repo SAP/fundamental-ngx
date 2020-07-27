@@ -12,29 +12,31 @@ import { SemanticSwitchExampleComponent } from './switch-examples/semantic-switc
 import { SwitchFormsExampleComponent } from './switch-examples/switch-form-example/switch-forms-example.component';
 import { SwitchSizesExampleComponent } from './switch-examples/switch-sizes-example/switch-sizes-example.component';
 import { SwitchHeaderComponent } from './switch-header/switch-header.component';
+import { SwitchConfigExampleComponent } from './switch-examples/switch-config-example/switch-config-example.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: SwitchHeaderComponent,
-    children: [
-      { path: '', component: SwitchDocsComponent },
-      { path: 'api', component: ApiComponent, data: { content: API_FILES.switch } }
-    ]
-  }
+    {
+        path: '',
+        component: SwitchHeaderComponent,
+        children: [
+            { path: '', component: SwitchDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.switch } }
+        ]
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformSwitchModule, FdpFormGroupModule],
-  exports: [RouterModule],
-  declarations: [
-    SwitchHeaderComponent,
-    SwitchDocsComponent,
-    DisabledSwitchExampleComponent,
-    SemanticSwitchExampleComponent,
-    SwitchFormsExampleComponent,
-    SwitchSizesExampleComponent
-  ]
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformSwitchModule, FdpFormGroupModule],
+    exports: [RouterModule],
+    declarations: [
+        SwitchHeaderComponent,
+        SwitchDocsComponent,
+        DisabledSwitchExampleComponent,
+        SemanticSwitchExampleComponent,
+        SwitchFormsExampleComponent,
+        SwitchSizesExampleComponent,
+        SwitchConfigExampleComponent
+    ]
 })
 export class PlatformSwitchDocsModule {
 }

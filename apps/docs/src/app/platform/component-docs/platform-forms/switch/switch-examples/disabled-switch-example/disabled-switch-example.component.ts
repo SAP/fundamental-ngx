@@ -6,7 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
     templateUrl: './disabled-switch-example.component.html'
 })
 export class DisabledSwitchExampleComponent {
-  customForm = new FormGroup({
-    fieldDisable: new FormControl({ value: true, disabled: true })
-  });
+    customForm = new FormGroup({
+        fieldDisable: new FormControl({ value: true, disabled: true })
+    });
 }

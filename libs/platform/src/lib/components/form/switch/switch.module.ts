@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { SwitchComponent } from './switch';
 
 @NgModule({
-  declarations: [SwitchComponent],
-  imports: [CommonModule, FormsModule],
-  exports: [SwitchComponent]
+    declarations: [SwitchComponent],
+    imports: [CommonModule, FormsModule],
+    exports: [SwitchComponent]
 })
 export class PlatformSwitchModule {}

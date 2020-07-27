@@ -6,9 +6,9 @@ import { FormControl, FormGroup } from '@angular/forms';
     templateUrl: './switch-forms-example.component.html'
 })
 export class SwitchFormsExampleComponent {
-  customForm = new FormGroup({
-    switch1: new FormControl(false),
-    switch2: new FormControl(true),
-    switch3: new FormControl(false)
-  });
+    customForm = new FormGroup({
+        switch1: new FormControl(false),
+        switch2: new FormControl(true),
+        switch3: new FormControl(false)
+    });
 }
