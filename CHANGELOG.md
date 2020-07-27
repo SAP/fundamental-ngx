@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.31...v0.20.1-rc.32) (2020-07-27)
+
+
+### Bug Fixes
+
+* Add null value handler for time picker, fix latest time picker bugs ([#2874](https://github.com/SAP/fundamental-ngx/issues/2874)) ([5776c76](https://github.com/SAP/fundamental-ngx/commit/5776c760c6d01bb6ec169cded136453588d93d69))
+
 ### [0.20.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.30...v0.20.1-rc.31) (2020-07-26)
 
 ### [0.20.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.29...v0.20.1-rc.30) (2020-07-26)
