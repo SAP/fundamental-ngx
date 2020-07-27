@@ -1,3 +1,18 @@
-<fd-time-picker [allowNull]="false" [(ngModel)]="timeObject"></fd-time-picker>
-<br />
-Selected Time: {{ timeObject.hour }}h {{ timeObject.minute }}m {{ timeObject.second }}s
+<fd-time-picker
+    [allowNull]="false"
+    [formControl]="timeObject"
+    [state]="timeObject.invalid ? 'error' : null">
+</fd-time-picker>
+<br/>
+
+Selected Time:
+<ng-container *ngIf="timeObject.value">{{ timeObject.value.hour }}h
+    {{ timeObject.value.minute }}m {{ timeObject.value.second }}s
+</ng-container>
+
+<br/>
+<br/>
+<fd-segmented-button>
+    <button fd-button (click)="setNull()">Set To Null</button>
+    <button fd-button (click)="setValid()">Set Valid Time</button>
+</fd-segmented-button>

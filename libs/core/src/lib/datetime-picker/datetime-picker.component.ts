@@ -7,6 +7,7 @@ import {
     forwardRef,
     HostListener,
     Input,
+    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -24,6 +25,9 @@ import { FdDatetime } from './models/fd-datetime';
 import { FormStates } from '../form/form-control/form-states';
 import { DatePipe } from '@angular/common';
 import { CalendarYearGrid, SpecialDayRule } from '../..';
+import { PopoverComponent } from '../popover/popover.component';
+import { Subject, Subscription } from 'rxjs';
+import { delay, filter, first, takeUntil } from 'rxjs/operators';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -57,29 +61,7 @@ import { CalendarYearGrid, SpecialDayRule } from '../..';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Validator {
-    /** @hidden Reference to the inner time component. */
-    @ViewChild(TimeComponent)
-    timeComponent: TimeComponent;
-
-    /** @hidden Reference to the inner calendar component. */
-    @ViewChild(CalendarComponent)
-    calendarComponent: CalendarComponent;
-
-    /**
-     * @hidden Date of the input field. Internal use.
-     * For programmatic selection, use two-way binding on the date input.
-     */
-    inputFieldDate: string = null;
-
-    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
-    isInvalidDateInput: boolean = false;
-
-    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
-    time: TimeObject = { hour: 0, minute: 0, second: 0 };
-
-    /** @hidden The CalendarDay object which interacts with the inner Calendar component. Internal use. */
-    selectedDate: FdDate;
+export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
 
     /** Placeholder for the inner input element. */
     @Input()
@@ -244,6 +226,36 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     @Output()
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
+    /** @hidden Reference to the inner time component. */
+    @ViewChild(TimeComponent)
+    timeComponent: TimeComponent;
+
+    /** @hidden Reference to the inner calendar component. */
+    @ViewChild(CalendarComponent)
+    calendarComponent: CalendarComponent;
+
+    /** @hidden */
+    @ViewChild(PopoverComponent)
+    popover: PopoverComponent;
+
+    /**
+     * @hidden Date of the input field. Internal use.
+     * For programmatic selection, use two-way binding on the date input.
+     */
+    inputFieldDate: string = null;
+
+    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
+    isInvalidDateInput: boolean = false;
+
+    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
+    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+
+    /** @hidden The CalendarDay object which interacts with the inner Calendar component. Internal use. */
+    selectedDate: FdDate;
+
+    /** @hidden */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
     /** @hidden */
     onChange: any = (selected: any) => {};
 
@@ -258,6 +270,28 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     disableFunction = function (fdDate: FdDate): boolean {
         return false;
     };
+
+    /** @hidden */
+    constructor(
+        private _elRef: ElementRef,
+        private _changeDetRef: ChangeDetectorRef,
+        public dateTimeAdapter: DateTimeFormatParser,
+        @Optional() private _datePipe: DatePipe
+    ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.date && this.inputFieldDate !== null) {
+            this.selectedDate = this.date.date;
+            this.time = this.date.time;
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
 
     /**
      * @hidden
@@ -299,6 +333,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
         if (!this.isOpen && !this.disabled) {
             this.onTouched();
             this.isOpen = true;
+            this._activateTimeComponent();
         }
     }
 
@@ -329,22 +364,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
             this.closePopover();
         }
     }
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.date && this.inputFieldDate !== null) {
-            this.selectedDate = this.date.date;
-            this.time = this.date.time;
-        }
-    }
-
-    /** @hidden */
-    constructor(
-        private _elRef: ElementRef,
-        private _changeDetRef: ChangeDetectorRef,
-        public dateTimeAdapter: DateTimeFormatParser,
-        @Optional() private _datePipe: DatePipe
-    ) {}
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -491,4 +510,19 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
             return this._datePipe.transform(fdDateTime.toDate(), this.format, null, this.locale);
         }
     }
+
+    /** @hidden */
+    private _activateTimeComponent(): void {
+        this.popover.directiveRef.loaded
+            .pipe(
+                filter(() => !this.timeComponent.activeView),
+                first(),
+                takeUntil(this._onDestroy$),
+                delay(0)
+            )
+            .subscribe(() => {
+                this.timeComponent.changeActive('hour');
+            });
+    }
+
 }

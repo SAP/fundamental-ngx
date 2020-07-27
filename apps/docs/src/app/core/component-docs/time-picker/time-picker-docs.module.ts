@@ -14,7 +14,7 @@ import { TimePickerOnlyHoursExampleComponent } from './examples/time-picker-only
 import { TimePickerNoSecondsExampleComponent } from './examples/time-picker-no-seconds-example.component';
 import { TimePickerAllowNullExampleComponent } from './examples/time-picker-allow-null-example.component';
 import { TimePickerOtherDelimiterExampleComponent } from './examples/time-picker-other-delimiter-example.component';
-import { TimePickerModule } from '@fundamental-ngx/core';
+import { TimePickerModule, SegmentedButtonModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -28,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TimePickerModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TimePickerModule, SegmentedButtonModule],
     exports: [RouterModule],
     declarations: [
         TimePickerDocsComponent,
