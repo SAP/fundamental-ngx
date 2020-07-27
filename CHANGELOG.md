@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.32...v0.20.1-rc.33) (2020-07-27)
+
+
+### Bug Fixes
+
+* change placeholder to input on time picker ([#2869](https://github.com/SAP/fundamental-ngx/issues/2869)) ([784d72e](https://github.com/SAP/fundamental-ngx/commit/784d72e54425259c5483d992951538f85a80b3e0))
+
 ### [0.20.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.31...v0.20.1-rc.32) (2020-07-27)
 
 
