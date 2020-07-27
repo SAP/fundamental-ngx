@@ -422,7 +422,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         this.inputFieldDate = date;
         /** Case when there is single mode */
         if (this.type === 'single') {
-            let fdDate = this.dateAdapter.parse(date);
+            const fdDate = this.dateAdapter.parse(date);
 
             /** Check if dates are equal, if so, there is no need to make any changes */
             if (!CalendarService.datesEqual(fdDate, this.selectedDate)) {
@@ -432,6 +432,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                 if (!this.isInvalidDateInput && date) {
                     this._refreshCurrentlyDisplayedCalendarDate(fdDate);
                 }
+
                 /**
                  * Date in model is changed no matter if the parsed date from string is valid or not.
                  */
@@ -520,10 +521,6 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** Method that returns info if end date model given is valid */
     private _isFdDateValid(fdDate: FdDate): boolean {
         return fdDate && fdDate instanceof FdDate && fdDate.isDateValid();
-    }
-
-    private _invalidDate(): FdDate {
-        return this.dateAdapter.parse('InVaLiDDaTe');
     }
 
     /** @hidden */
