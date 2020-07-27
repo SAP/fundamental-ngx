@@ -54,6 +54,16 @@ import { By } from '@angular/platform-browser';
                     <fdp-checkbox [value]="'papaya'" [label]="'Papaya'"></fdp-checkbox>
                 </fdp-checkbox-group>
             </fdp-form-field>
+
+            <fdp-form-field #fl6 [id]="'items'" [label]="'Purchased Items: '" zone="zLeft" rank="1">
+                <fdp-checkbox-group
+                    [list]="invoiceItems"
+                    [name]="'items'"
+                    [lookupKey]="'item'"
+                    [displayKey]="'itemType'"
+                    [formControl]="fl6.formControl"
+                ></fdp-checkbox-group>
+            </fdp-form-field>
         </fdp-form-group>
     `
 })
@@ -66,6 +76,12 @@ class TestReactiveCheckboxGroupComponnet {
         new LanguageKnown('Javascript', 'javascript', true),
         new LanguageKnown('Python', 'python', false),
         new LanguageKnown('GoLang', 'go', true)
+    ];
+
+    invoiceItems = [
+        new Item('1', 'coffee', 'Coffee', 100, 12),
+        new Item('2', 'pen', 'Pen', 200, 5),
+        new Item('3', 'chair', 'Office chair', 50, 5530)
     ];
 
     form1 = new FormGroup({});
@@ -222,17 +238,45 @@ describe('CheckboxGroup component Reactive Form Test', () => {
         expect(fdpCheckboxElem[17].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
         expect(fdpCheckboxElem[18].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
     });
+
+    it('should create checkboxes with any type of objects with lookupKey and displayKey given', async () => {
+        await wait(fixture);
+        fixture.detectChanges();
+
+        const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
+
+        fdpCheckboxElem[19].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
+
+        fdpCheckboxElem[20].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
+
+        fdpCheckboxElem[21].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(host.form1.controls.items.value.sort()).toEqual(['chair', 'coffee', 'pen']);
+
+        // uncheck checkbox 20
+        fdpCheckboxElem[20].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(host.form1.controls.items.value.sort()).toEqual(['chair', 'coffee']);
+    });
 });
 
 @Component({
     selector: 'fdp-cbg-template-driven-test',
     template: `
         <fdp-form-group [multiLayout]="true">
-            <fdp-form-field #fl1 [id]="'phones1'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'phonest'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
                 <fdp-checkbox-group [list]="phoneslist" [name]="'brands'" [(ngModel)]="phones"></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl2 [id]="'visited1'" [label]="'Country visited: '" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'visitedt'" [label]="'Country visited: '" zone="zLeft" rank="1">
                 <fdp-checkbox-group
                     [list]="countryVisited"
                     [name]="'visited'"
@@ -240,7 +284,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
                 ></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl3 [id]="'hobbies1'" [label]="'My Hobbies:'" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'hobbiest'" [label]="'My Hobbies:'" zone="zLeft" rank="1">
                 <fdp-checkbox-group [name]="'hobby'" [(ngModel)]="hobbies">
                     <fdp-checkbox [value]="'cooking'" [label]="'Cooking'"></fdp-checkbox>
                     <fdp-checkbox [value]="'painting'" [label]="'Painting'"></fdp-checkbox>
@@ -249,17 +293,27 @@ describe('CheckboxGroup component Reactive Form Test', () => {
                 </fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field [id]="'language1'" [label]="'Languages Known: '" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'languaget'" [label]="'Languages Known: '" zone="zLeft" rank="1">
                 <fdp-checkbox-group [list]="languages" [name]="'language'" [(ngModel)]="language"></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field [id]="'fruits1'" [label]="'Fruits:'" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'fruitst'" [label]="'Fruits:'" zone="zLeft" rank="1">
                 <fdp-checkbox-group [name]="'fruits'" [(ngModel)]="fruits">
                     <fdp-checkbox [value]="'apple'" [label]="'Apple'" [disabled]="true"></fdp-checkbox>
                     <fdp-checkbox [value]="'banana'" [label]="'Banana'"></fdp-checkbox>
                     <fdp-checkbox [value]="'guava'" [label]="'Guava'" [disabled]="true"></fdp-checkbox>
                     <fdp-checkbox [value]="'papaya'" [label]="'Papaya'"></fdp-checkbox>
                 </fdp-checkbox-group>
+            </fdp-form-field>
+
+            <fdp-form-field [id]="'itemst'" [label]="'Purchased Items: '" zone="zLeft" rank="1">
+                <fdp-checkbox-group
+                    [list]="invoiceItems"
+                    [name]="'items'"
+                    [lookupKey]="'item'"
+                    [displayKey]="'itemType'"
+                    [(ngModel)]="itemsData"
+                ></fdp-checkbox-group>
             </fdp-form-field>
         </fdp-form-group>
     `
@@ -278,6 +332,14 @@ class TestTemplateDrivenCheckboxGroupComponnet {
         new LanguageKnown('Python', 'python', false),
         new LanguageKnown('GoLang', 'go', true)
     ];
+
+    invoiceItems = [
+        new Item('1', 'coffee', 'Coffee', 100, 12),
+        new Item('2', 'pen', 'Pen', 200, 5),
+        new Item('3', 'chair', 'Office chair', 50, 5530)
+    ];
+
+    itemsData = ['pen'];
 }
 
 describe('Checkbox Group Component Template driven Form Tests', () => {
@@ -313,6 +375,8 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
 
         // pre-select test
         const inputElem = fixture.debugElement.queryAll(By.css('.fd-checkbox'));
+        await wait(fixture);
+        fixture.detectChanges();
 
         expect(inputElem[0].nativeElement.getAttribute('ng-reflect-model')).toEqual('true');
         expect(inputElem[1].nativeElement.getAttribute('ng-reflect-model')).toEqual('false');
@@ -323,27 +387,31 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
 
         // select checkbox on click
         fdpCheckboxElem[1].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
 
         fdpCheckboxElem[3].nativeElement.click();
         fixture.detectChanges();
-        console.log('host.phones: ', host.phones.sort());
 
         expect(host.phones.sort()).toEqual(['Apple', 'OnePlus', 'Redmi', 'Samsung']);
 
         // de-select checked checkbox on click
         fdpCheckboxElem[3].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
 
         fdpCheckboxElem[2].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
 
-        expect(host.phones).toEqual(['Samsung', 'Apple']);
+        expect(host.phones.sort()).toEqual(['Apple', 'Samsung']);
 
         fdpCheckboxElem[0].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
 
         fdpCheckboxElem[1].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
 
         expect(host.phones).toEqual([]);
@@ -354,26 +422,32 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         await wait(fixture);
         fixture.detectChanges();
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
+        await wait(fixture);
+        fixture.detectChanges();
 
         // pre-select test
         expect(host.visited).toEqual(['India', 'USA']);
 
         // select checkbox on click
         fdpCheckboxElem[4].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
 
-        expect(host.visited).toEqual(['India', 'USA', 'Australia']);
+        expect(host.visited.sort()).toEqual(['Australia', 'India', 'USA']);
 
         // de-select checked checkbox on click
         fdpCheckboxElem[5].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
 
         fdpCheckboxElem[6].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
 
         expect(host.visited).toEqual(['Australia']);
 
         fdpCheckboxElem[4].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
 
         expect(host.visited).toEqual([]);
@@ -384,29 +458,32 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         await wait(fixture);
         fixture.detectChanges();
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
-
+        await wait(fixture);
+        fixture.detectChanges();
         // pre-select test
         expect(host.hobbies.sort()).toEqual(['coding', 'gardening']);
 
         // select checkbox on click
-        // fdpCheckboxElem[7].nativeElement.click();
-        // fixture.detectChanges();
+        fdpCheckboxElem[7].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
 
-        // fdpCheckboxElem[8].nativeElement.click();
-        // fixture.detectChanges();
+        fdpCheckboxElem[8].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
 
-        // expect(host.hobbies.sort()).toEqual(['coding', 'cooking', 'gardening', 'painting']);
+        expect(host.hobbies.sort()).toEqual(['coding', 'cooking', 'gardening', 'painting']);
 
-        // // de-select checked checkbox on click
-        // fdpCheckboxElem[9].nativeElement.click();
-        // await wait(fixture);
-        // fixture.detectChanges();
+        // de-select checked checkbox on click
+        fdpCheckboxElem[9].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
 
-        // fdpCheckboxElem[10].nativeElement.click();
-        // await wait(fixture);
-        // fixture.detectChanges();
+        fdpCheckboxElem[10].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
 
-        // expect(host.hobbies.sort()).toEqual(['cooking', 'painting']);
+        expect(host.hobbies.sort()).toEqual(['cooking', 'painting']);
     });
 
     it('should create checkbox group with enabled and disabled checkboxes from SelectItem object', async () => {
@@ -429,6 +506,38 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         expect(fdpCheckboxElem[16].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
         expect(fdpCheckboxElem[17].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
         expect(fdpCheckboxElem[18].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
+    });
+
+    it('should create checkboxes with any type of objects with lookupKey and displayKey given', async () => {
+        await wait(fixture);
+        fixture.detectChanges();
+
+        const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(host.itemsData.sort()).toEqual(['pen']);
+
+        fdpCheckboxElem[19].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
+
+        fdpCheckboxElem[20].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
+
+        fdpCheckboxElem[21].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(host.itemsData.sort()).toEqual(['chair', 'coffee']);
+
+        // uncheck checkbox 21
+        fdpCheckboxElem[19].nativeElement.click();
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(host.itemsData.sort()).toEqual(['chair']);
     });
 });
 
@@ -654,4 +763,14 @@ class Country implements SelectItem {
 
 class LanguageKnown implements SelectItem {
     constructor(public label: string, public value: string, public disabled: boolean) {}
+}
+
+class Item {
+    constructor(
+        public itemId: string,
+        public item: string,
+        public itemType: string,
+        public quantity: number,
+        public rate: number
+    ) {}
 }
