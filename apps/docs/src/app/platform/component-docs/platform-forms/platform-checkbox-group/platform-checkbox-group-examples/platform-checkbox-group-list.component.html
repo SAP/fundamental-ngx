@@ -11,7 +11,7 @@
         ></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Seasons: {{ form1.controls.seasons.value }}</span>
+<span style="margin-left: 2rem;">Seasons: {{ form1.controls.seasons?.value }}</span>
 <br />
 <br />
 
@@ -21,7 +21,7 @@
         <fdp-checkbox-group [list]="phoneslist" [name]="'brands'" [formControl]="fl2.formControl"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Available brands: {{ form2.controls.phones.value }}</span>
+<span style="margin-left: 2rem;">Available brands: {{ form2.controls.phones?.value }}</span>
 <br />
 <br />
 
@@ -31,18 +31,21 @@
         <fdp-checkbox-group [list]="sports" [name]="'sports'" formControlName="sports"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Sports: {{ form3.controls.sports1.value }}</span>
+<span style="margin-left: 2rem;">Sports: {{ form3.controls.sports1?.value }}</span>
 <br />
 <br />
 
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form3">
-    <fdp-form-field #fl3 [id]="'sportsDisabled'" [label]="'Disabled checkbox Group: '" [disabled]="true" zone="zLeft" rank="1">
-        <fdp-checkbox-group
-            [list]="sports"
-            [name]="'sports'"
-            [formControl]="fl3.formControl"
-        ></fdp-checkbox-group>
+    <fdp-form-field
+        #fl3
+        [id]="'sportsDisabled'"
+        [label]="'Disabled checkbox Group: '"
+        [disabled]="true"
+        zone="zLeft"
+        rank="1"
+    >
+        <fdp-checkbox-group [list]="sports" [name]="'sports'" [formControl]="fl3.formControl"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
 <br />
@@ -79,10 +82,6 @@
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'sportsDisabled'" [label]="'Disabled checkbox Group:'" zone="zLeft" rank="1">
-        <fdp-checkbox-group
-            [list]="sports"
-            [name]="'sports'"
-            [disabled]="true"
-        ></fdp-checkbox-group>
+        <fdp-checkbox-group [list]="sports" [name]="'sports'" [disabled]="true"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>

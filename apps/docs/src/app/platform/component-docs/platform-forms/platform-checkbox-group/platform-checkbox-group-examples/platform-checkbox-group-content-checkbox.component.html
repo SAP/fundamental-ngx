@@ -10,7 +10,7 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Favourites: {{ form1.controls.fruits.value }}</span>
+<span style="margin-left: 2rem;">Favourites: {{ form1.controls.fruits?.value }}</span>
 
 <p>Pre-selection based on value passed</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form2" [object]="hobbies">
@@ -23,7 +23,7 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Hobbies: {{ form2.controls.hobbies.value }}</span>
+<span style="margin-left: 2rem;">Hobbies: {{ form2.controls.hobbies?.value }}</span>
 <br />
 <br />
 
@@ -38,7 +38,7 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Visited Countries: {{ form3.controls.visited1.value }}</span>
+<span style="margin-left: 2rem;">Visited Countries: {{ form3.controls.visited1?.value }}</span>
 <br />
 <br />
 <p>Disabled checkbox group</p>

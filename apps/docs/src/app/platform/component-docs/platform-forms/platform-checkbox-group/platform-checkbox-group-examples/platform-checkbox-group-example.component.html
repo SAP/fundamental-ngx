@@ -14,7 +14,7 @@
         </ng-container>
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Favourites: {{ form1.controls.fruitsEx.value }}</span>
+<span style="margin-left: 2rem;">Favourites: {{ form1.controls.fruitsEx?.value }}</span>
 
 <h3>Checkbox group created from list of values and value is required</h3>
 <fdp-form-group [multiLayout]="true" [formGroup]="form2">
@@ -33,7 +33,7 @@
         </ng-container>
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Favourites: {{ form2.controls.fruits1.value }}</span>
+<span style="margin-left: 2rem;">Favourites: {{ form2.controls.fruits1?.value }}</span>
 
 <h3>Checkbox group created from list of SelectItem Objects and value is required</h3>
 <fdp-form-group [multiLayout]="true" [formGroup]="form3">
@@ -52,4 +52,4 @@
         </ng-container>
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem;">Languages Known: {{ form3.controls.language.value }}</span>
+<span style="margin-left: 2rem;">Languages Known: {{ form3.controls.language?.value }}</span>
