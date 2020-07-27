@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
-import { anyLanguageLettersRegEx } from '../utils/constants';
+import { ANY_LANGUAGE_LETTERS_REGEX } from '../utils/consts';
 
 export type AvatarSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ColorAccent = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
@@ -84,18 +84,14 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     * */
     /** Background image url. */
     @Input()
-    backgroundImage: string = null;
+    set backgroundImage(value: string) {
+        this._setImage(value);
+    };
 
     /** Background image resource: url or base64. */
     @Input()
     set image(value: string) {
-        if (value) {
-            this._image = 'url(' + value + ')';
-        } else if (this.backgroundImage) {
-            this._image = 'url(' + this.backgroundImage + ')';
-        } else {
-            this._image = null;
-        }
+        this._setImage(value);
     }
 
     /** @hidden */
@@ -117,7 +113,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     private _image: string = null;
 
     /** @hidden */
-    private get showDefault() {
+    private get showDefault(): boolean {
         return !this.abbreviate && !this._image && !this.glyph;
     }
 
@@ -172,10 +168,18 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         const firstLetters = label.split(' ').map(word => word.charAt(0));
         const abbreviate = firstLetters.join('');
 
-        if (firstLetters.length > maxLettersCount || !abbreviate.match(anyLanguageLettersRegEx)) {
+        if (firstLetters.length > maxLettersCount || !abbreviate.match(ANY_LANGUAGE_LETTERS_REGEX)) {
             return null;
         }
 
         return abbreviate;
+    }
+
+    private _setImage(value: string): void {
+        if (value) {
+            this._image = 'url(' + value + ')';
+        } else {
+            this._image = null;
+        }
     }
 }
