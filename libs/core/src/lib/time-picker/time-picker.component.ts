@@ -7,7 +7,6 @@ import {
     HostBinding,
     Input,
     OnDestroy,
-    OnInit,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -44,7 +43,7 @@ import { delay, filter, first, takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit, Validator {
+export class TimePickerComponent implements ControlValueAccessor, OnDestroy, AfterViewInit, Validator {
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
@@ -85,6 +84,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDest
     /** @Input When set to false, hides the input for hours. */
     @Input()
     displayHours: boolean = true;
+
+    /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds. 
+     * Otherwise It can be set to a default value
+    */
+    @Input()
+    placeholder: string = this.getPlaceholder();
 
     /** Aria label for the time picker input. */
     @Input()
@@ -148,9 +153,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDest
     isOpen: boolean;
 
     /** @hidden */
-    placeholder: string;
-
-    /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
@@ -160,11 +162,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** @hidden */
     constructor(private _cd: ChangeDetectorRef, private _timeAdapter: TimeFormatParser) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.placeholder = this.getPlaceholder();
-    }
 
     /** @hidden */
     ngAfterViewInit(): void {
