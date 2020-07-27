@@ -431,9 +431,6 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                 /** Check if date is valid, if it's not, there is no need to refresh calendar */
                 if (!this.isInvalidDateInput && date) {
                     this._refreshCurrentlyDisplayedCalendarDate(fdDate);
-                } else {
-                    /** Whether string is invalid, by passed block or disable functions there is forced Invalid Object, */
-                    fdDate = this._invalidDate();
                 }
                 /**
                  * Date in model is changed no matter if the parsed date from string is valid or not.
@@ -467,16 +464,6 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                 }
 
                 this.isInvalidDateInput = !this._isRangeModelValid(selectedRangeDate);
-
-                /** If start date is invalid, because of format, block or disable function, there is invalidDate forced */
-                if (!this._isStartDateValid(selectedRangeDate.start)) {
-                    selectedRangeDate.start = this._invalidDate();
-                }
-
-                /** If end date is invalid, because of format, block or disable function, there is invalidDate forced */
-                if (!this._isEndDateValid(selectedRangeDate.end)) {
-                    selectedRangeDate.end = this._invalidDate();
-                }
 
                 /** Whole object is changed, even it's invalid */
                 this.selectedRangeDate = selectedRangeDate;
