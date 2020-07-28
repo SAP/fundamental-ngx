@@ -8,7 +8,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
     favoriteOption: string = '';
     favoriteOption2: string = 'winter';
-    favBrand = 'redmi'
+    favBrand = 'xiomi'
 
     form1 = new FormGroup({
         example1: new FormControl('')

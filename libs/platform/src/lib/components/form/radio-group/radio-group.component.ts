@@ -106,7 +106,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     /**
      * acess display value for objects, acts as checkbox label.
      */
-    public getDisaplyValue(item: any): string {
+    public getDisplayValue(item: any): string {
         return this.displayValue(item);
     }
 
