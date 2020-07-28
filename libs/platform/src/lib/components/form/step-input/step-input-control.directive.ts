@@ -12,7 +12,7 @@ import { StepInputComponent } from './base.step-input';
 })
 export class StepInputControlDirective {
     /** @hidden */
-    constructor(@SkipSelf() private stepInputCmp: StepInputComponent) {}
+    constructor(@SkipSelf() private stepInput: StepInputComponent) {}
 
     /**
      * @hidden
@@ -20,9 +20,12 @@ export class StepInputControlDirective {
      */
     @HostListener('change', ['$event'])
     onChange() {
+        if (!this.stepInput._canChangeValue) {
+            return;
+        }
         const value: string = (event.target as HTMLInputElement).value;
-        this.stepInputCmp.commitEnteredValue(value);
-        this.stepInputCmp.detectChanges();
+        this.stepInput.commitEnteredValue(value);
+        this.stepInput.detectChanges();
     }
 
     /**
@@ -31,8 +34,8 @@ export class StepInputControlDirective {
      */
     @HostListener('focus')
     onFocus() {
-        this.stepInputCmp._onFocusChanged(true);
-        this.stepInputCmp.detectChanges();
+        this.stepInput.onFocus();
+        this.stepInput.detectChanges();
     }
 
     /**
@@ -41,8 +44,8 @@ export class StepInputControlDirective {
      */
     @HostListener('blur')
     onBlur() {
-        this.stepInputCmp._onFocusChanged(false);
-        this.stepInputCmp.detectChanges();
+        this.stepInput.onBlur();
+        this.stepInput.detectChanges();
     }
 
     /**
@@ -51,20 +54,23 @@ export class StepInputControlDirective {
      */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
+        if (!this.stepInput._canChangeValue) {
+            return;
+        }
         if (KeyUtil.isKey(event, 'ArrowUp')) {
-            this.stepInputCmp.increase();
+            this.stepInput.increase();
             this._muteEvent(event);
         }
         if (KeyUtil.isKey(event, 'ArrowDown')) {
-            this.stepInputCmp.decrease();
+            this.stepInput.decrease();
             this._muteEvent(event);
         }
         if (KeyUtil.isKey(event, 'PageUp')) {
-            this.stepInputCmp.largeStepIncrease();
+            this.stepInput.largeStepIncrease();
             this._muteEvent(event);
         }
         if (KeyUtil.isKey(event, 'PageDown')) {
-            this.stepInputCmp.largeStepDecrease();
+            this.stepInput.largeStepDecrease();
             this._muteEvent(event);
         }
     }
@@ -75,11 +81,14 @@ export class StepInputControlDirective {
      */
     @HostListener('wheel', ['$event'])
     onMouseWheel(event: WheelEvent): void {
+        if (!this.stepInput._canChangeValue || !this.stepInput.focused) {
+            return;
+        }
         event.preventDefault();
         if (event.deltaY > 0) {
-            this.stepInputCmp.decrease();
+            this.stepInput.decrease();
         } else {
-            this.stepInputCmp.increase();
+            this.stepInput.increase();
         }
     }
 

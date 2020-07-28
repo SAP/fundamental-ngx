@@ -58,7 +58,7 @@ export abstract class StepInputComponent extends BaseInput {
     /** Sets input step value */
     @Input()
     set step(step: number) {
-        this._checkAndThrowErrorIfStepDoesntMatchPrecision(this._precision, step);
+        this._checkAndThrowErrorIfStepDoesntMatchPrecision(this.precision, step);
         this._step = step;
         this._calculateCanDecrementIncrement();
     }
@@ -139,7 +139,9 @@ export abstract class StepInputComponent extends BaseInput {
     isCompact = this._contentDensity === 'compact';
 
     /** @hidden */
-    _precision = 0;
+    get _canChangeValue(): boolean {
+        return !(this.disabled || !this.editable);
+    }
 
     /** @hidden */
     private _max = Number.MAX_VALUE;
@@ -152,6 +154,9 @@ export abstract class StepInputComponent extends BaseInput {
 
     /** @hidden */
     private _stepFn: (value: number, action: 'increase' | 'decrease') => number;
+
+    /** @hidden */
+    private _precision;
 
     constructor(
         protected _cd: ChangeDetectorRef,
@@ -200,7 +205,7 @@ export abstract class StepInputComponent extends BaseInput {
         if (!this.canIncrement) {
             return;
         }
-        const value = this._value + step;
+        const value = this._addAndCutFloatingNumberDistortion(this._value, step);
         this.value = this._validateValueByLimits(value);
         this._emitChangedValue();
     }
@@ -210,7 +215,7 @@ export abstract class StepInputComponent extends BaseInput {
         if (!this.canDecrement) {
             return;
         }
-        const value = this._value - step;
+        const value = this._addAndCutFloatingNumberDistortion(this._value, -step);
         this.value = this._validateValueByLimits(value);
         this._emitChangedValue();
     }
@@ -232,7 +237,7 @@ export abstract class StepInputComponent extends BaseInput {
      * Commit new entered value from view.
      */
     commitEnteredValue(value: string): void {
-        const parsedValue = this.parseValue(value);
+        const parsedValue = this.parseValueInFocusMode(value);
         let newValue = parsedValue;
 
         if (newValue !== null) {
@@ -252,6 +257,18 @@ export abstract class StepInputComponent extends BaseInput {
         }
     }
 
+    /** Indicates when input gets focused */
+    onFocus() {
+        super._onFocusChanged(true);
+        this._updateViewValue();
+    }
+
+    /** Indicates when input loses focus */
+    onBlur() {
+        super._onFocusChanged(false);
+        this._updateViewValue();
+    }
+
     /** @hidden */
     detectChanges() {
         this._cd.detectChanges();
@@ -261,14 +278,30 @@ export abstract class StepInputComponent extends BaseInput {
     abstract createChangeEvent(value: number): PlatformStepInputChange;
 
     /**
-     * Format value to view presentation
+     * Format value for view presentation
      */
     abstract formatValue(value: number): string;
 
     /**
-     * Parse value from view.
+     * Format value for "in focus" mode.
      */
-    abstract parseValue(value: string): number | null;
+    abstract formatValueInFocusMode(value: number): string;
+
+    /**
+     * Parse value entered "in focus" mode.
+     */
+    abstract parseValueInFocusMode(value: string): number | null;
+
+    /** @hidden */
+    private _addAndCutFloatingNumberDistortion(value: number, step: number): number {
+        const stepDecimals = `${step}`.split('.')[1];
+        const valueDecimals = `${value}`.split('.')[1];
+        const stepDecimalsLength = stepDecimals ? stepDecimals.length : 0;
+        const valueDecimalsLength = valueDecimals ? valueDecimals.length : 0;
+        const longestDecimal = Math.max(valueDecimalsLength, stepDecimalsLength);
+
+        return Number((value + step).toFixed(longestDecimal));
+    }
 
     /** @hidden */
     private _emitChangedValue(): void {
@@ -282,8 +315,10 @@ export abstract class StepInputComponent extends BaseInput {
      * Get step value based either on "stepFn" or "step"
      */
     private _getStepValue(action: 'increase' | 'decrease'): number {
+        // steFn has precedence
         if (typeof this._stepFn === 'function') {
-            return this._stepFn(this._value, action);
+            const calculatedStep = this._stepFn(this._value, action);
+            return calculatedStep;
         }
         return this._step;
     }
@@ -293,8 +328,26 @@ export abstract class StepInputComponent extends BaseInput {
         if (this._value === null) {
             return;
         }
-        const formatted = this.formatValue(this._value);
-        this._renderer.setProperty(this._elementRef.nativeElement, 'value', formatted);
+        let formatted = '';
+        if (this.focused) {
+            formatted = this.formatValueInFocusMode(this._value);
+        } else {
+            formatted = this.formatValue(this._value);
+        }
+        this._renderValue(formatted);
+    }
+
+    /** @hidden */
+    private _renderValue(value: string, keepSelection = true): void {
+        const inputEl = this._elementRef.nativeElement as HTMLInputElement | null;
+        const startSelectionPos = inputEl?.selectionStart;
+        const endSelectionPos = inputEl?.selectionEnd;
+
+        this._renderer.setProperty(this._elementRef.nativeElement, 'value', value);
+
+        if (keepSelection && startSelectionPos > 0 && endSelectionPos > 0) {
+            inputEl.setSelectionRange(startSelectionPos, endSelectionPos);
+        }
     }
 
     /** @hidden */

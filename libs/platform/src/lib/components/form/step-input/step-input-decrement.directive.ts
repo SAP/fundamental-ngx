@@ -19,6 +19,10 @@ export class StepInputDecrementDirective {
 
     @HostListener('mousedown', ['$event'])
     click($event: Event) {
+        if (!this.stepInput._canChangeValue) {
+            return;
+        }
+
         $event.preventDefault();
 
         this._streamUntilMouseUp$.pipe(startWith(null)).subscribe(() => {

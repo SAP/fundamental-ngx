@@ -1,5 +1,15 @@
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component, Input, Renderer2 } from '@angular/core';
-import { Optional, Self } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+    Renderer2,
+    Optional,
+    Self,
+    LOCALE_ID,
+    Inject
+} from '@angular/core';
+import { formatNumber } from '@angular/common';
 import { NgControl, NgForm } from '@angular/forms';
 
 import { FormFieldControl } from '../../form-control';
@@ -23,20 +33,21 @@ export class NumberStepInputComponent extends StepInputComponent {
     /** Set description */
     @Input() description: string;
 
+    /**@hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
         config: StepInputConfig,
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @Self() public ngForm: NgForm,
-        renderer: Renderer2
+        renderer: Renderer2,
+        @Inject(LOCALE_ID) private localeId: string
     ) {
         super(_cd, ngControl, ngForm, config, renderer);
     }
 
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
-    }
-
+    /**@hidden
+     * Create change event instance
+     */
     createChangeEvent(value: number) {
         const event = new PlatformNumberStepInputChange();
         event.source = this;
@@ -44,18 +55,35 @@ export class NumberStepInputComponent extends StepInputComponent {
         return event;
     }
 
+    /**@hidden
+     * Format value taking into account LOCALE_ID
+     */
     formatValue(value: number | null): string {
-        const precision = this._precision;
-        return !isNaN(value) ? value.toFixed(precision) : '0';
+        const precision = this.precision;
+        const digitsInfo = !isNaN(precision) && `1.${precision}-${precision}`;
+        return formatNumber(value || 0, this.localeId, digitsInfo);
     }
 
-    parseValue(value: string | null): number | null {
-        let parsedValue = Number.parseFloat(value);
-        if (isNaN(parsedValue)) {
-            return null;
+    /**@hidden
+     * In order to avoid issues trying to parse formatted number
+     * (potentially specific for each local)
+     * we have to simplify number format once it's in focus mode.
+     * In this case we deal with a regular float number
+     */
+    formatValueInFocusMode(value: number | null): string {
+        const precision = this.precision;
+        value = value || 0;
+        if (!isNaN(precision)) {
+            return value.toFixed(precision);
         }
-        const fixedStringValue = parsedValue.toFixed(this._precision);
-        parsedValue = Number.parseFloat(fixedStringValue);
+        return value.toString(10);
+    }
+
+    /**@hidden
+     * Used to parse entered value
+     */
+    parseValueInFocusMode(value: string | null): number | null {
+        const parsedValue = Number.parseFloat(value);
         return isNaN(parsedValue) ? null : parsedValue;
     }
 }
