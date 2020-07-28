@@ -1,0 +1,10 @@
+<fd-select class="flex" (valueChange)="onOptionChange($event)"  placeholder="Select an option" [(value)]="locale">
+  <fd-option *ngFor="let option of ['en', 'fr', 'de', 'bg', 'pl']" [value]="option">{{ option }}</fd-option>
+</fd-select>
+<br/>
+
+<fd-time-picker [placeholder]="placeholder" [meridian]="meridian" [(ngModel)]="timeMeridianObject" [spinnerButtons]="false"></fd-time-picker>
+<br/>
+Selected Time:
+<ng-container *ngIf="timeMeridianObject">{{ timeMeridianObject.hour }}h {{ timeMeridianObject.minute }}m {{ timeMeridianObject.second }}s
+</ng-container>
