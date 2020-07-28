@@ -2,8 +2,8 @@
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
 
         <fd-dialog-header>
-            <h1 *ngIf="this.mobileConfig.title" fd-dialog-title>{{this.mobileConfig.title}}</h1>
-            <button *ngIf="this.mobileConfig.hasCloseButton"
+            <h1 *ngIf="mobileConfig.title" fd-dialog-title>{{mobileConfig.title}}</h1>
+            <button *ngIf="mobileConfig.hasCloseButton"
                     fd-dialog-close-button
                     [mobile]="true"
                     (click)="cancel()">

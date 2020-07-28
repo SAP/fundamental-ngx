@@ -10,6 +10,8 @@ import * as comboboxDisplayHtml from '!raw-loader!./examples/combobox-displaywit
 import * as comboboxDisplayTs from '!raw-loader!./examples/combobox-displaywith-example.component.ts';
 import * as comboboxTemplateH from '!raw-loader!./examples/combobox-template-example.component.html';
 import * as comboboxTemplateT from '!raw-loader!./examples/combobox-template-example.component.ts';
+import * as comboboxMobileH from '!raw-loader!./examples/combobox-mobile/combobox-mobile-example.component.html';
+import * as comboboxMobileT from '!raw-loader!./examples/combobox-mobile/combobox-mobile-example.component.ts';
 import * as comboboxDisabledTemplateH from '!raw-loader!./examples/combobox-disabled-example.component.html';
 import * as comboboxDisabledTemplateT from '!raw-loader!./examples/combobox-disabled-example.component.ts';
 import * as comboboxColumnsTemplateH from '!raw-loader!./examples/combobox-columns-example.component.html';
@@ -184,6 +186,20 @@ export class ComboboxDocsComponent {
             component: 'ComboboxHeightExampleComponent',
             code: comboboxHeightTs,
             fileName: 'combobox-height-example'
+        }
+    ];
+
+    comboboxMobileExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxMobileH,
+            fileName: 'combobox-mobile-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxMobileExampleComponent',
+            code: comboboxMobileT,
+            fileName: 'combobox-mobile-example'
         }
     ];
 

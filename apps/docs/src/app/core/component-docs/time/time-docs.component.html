@@ -23,10 +23,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'clockWithoutSpinners'" [componentName]="'time'">
-    Clock Without Spinners
+<fd-docs-section-title [id]="'noSpinners'" [componentName]="'time'">
+    No Spinners
 </fd-docs-section-title>
-<description>Use <code>[spinners]="false"</code> to hide the spinners.</description>
+<description>
+    For mobile, or tablet devices spinners should be removed from time component. It can be done by passing
+    <code>[spinnerButtons]="false"</code>.
+</description>
 <component-example>
     <fd-time-no-spinners-example></fd-time-no-spinners-example>
 </component-example>
@@ -34,10 +37,41 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'sizes'" [componentName]="'time'">
+    Sizes
+</fd-docs-section-title>
+<description>
+    You can change size of time component by passing
+    <ul>
+        <li><code>[compact]="true"</code>, which is dedicated for desktop devices and makes time items smaller.</li>
+        <li><code>[tablet]="true"</code>, which is dedicated for tablets and changes container spacing.</li>
+    </ul>
+</description>
+<component-example>
+    <fd-time-sizes-example></fd-time-sizes-example>
+</component-example>
+<code-example [exampleFiles]="timeSizes"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'dynamicChangeTime'" [componentName]="'time'">
+    Programmatically Changed Time
+</fd-docs-section-title>
+<description>
+    Makes it possible to programmatically change the value of the currently selected time. By programmatically
+    changing the value of this property, the time that is highlighted on the calendar will change accordingly.
+</description>
+<component-example>
+    <fd-time-programmatically-example></fd-time-programmatically-example>
+</component-example>
+<code-example [exampleFiles]="timeProgramaticalyChange"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'clockWithoutSeconds'" [componentName]="'time'">
     Clock Without Seconds
 </fd-docs-section-title>
-<description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
+<description>Use <code>[displaySeconds]="false"</code> to hide the seconds column.</description>
 <component-example>
     <fd-time-no-seconds-example></fd-time-no-seconds-example>
 </component-example>
@@ -48,8 +82,8 @@
 <fd-docs-section-title [id]="'clockWithoutMinutesSeconds'" [componentName]="'time'">
     Clock Without Minutes and Seconds
 </fd-docs-section-title>
-<description
-    >Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or
+<description>
+    Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or
     <code>[displayHours]="false"</code>
     to turn off seconds, minutes or hours for the time picker. At least one of them should be enabled.
 </description>
@@ -57,17 +91,6 @@
     <fd-time-only-hours-example></fd-time-only-hours-example>
 </component-example>
 <code-example [exampleFiles]="timeOnlyHours"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'disabled'" [componentName]="'time'">
-    Disabled State
-</fd-docs-section-title>
-<description> You can disable the entire component by setting <code>[disabled]="true"</code>. </description>
-<component-example>
-    <fd-time-disabled-example></fd-time-disabled-example>
-</component-example>
-<code-example [exampleFiles]="timeDisabled"></code-example>
 
 <separator></separator>
 

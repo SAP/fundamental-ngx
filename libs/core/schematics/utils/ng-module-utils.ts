@@ -4,6 +4,7 @@ import { addImportToModule } from '@schematics/angular/utility/ast-utils';
 import { InsertChange } from '@schematics/angular/utility/change';
 
 import * as ts from 'typescript';
+import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
 // Adds an import to the root module.
 export function addImportToRootModule(tree: Tree, moduleName: string, src: string, modulePath: string) {
@@ -80,7 +81,7 @@ function findNgModuleMetadata(rootNode: ts.Node): ts.ObjectLiteralExpression | n
 function resolveIdentifierOfExpression(expression: ts.Expression): ts.Identifier | null {
     if (ts.isIdentifier(expression)) {
         return expression;
-    } else if (ts.isPropertyAccessExpression(expression)) {
+    } else if (ts.isPropertyAccessExpression(expression) && ts.isIdentifier(expression.name)) {
         return expression.name;
     }
     return null;
@@ -94,4 +95,18 @@ function isNgModuleCallExpression(callExpression: ts.CallExpression): boolean {
 
     const decoratorIdentifier = resolveIdentifierOfExpression(callExpression.expression);
     return decoratorIdentifier ? decoratorIdentifier.text === 'NgModule' : false;
+}
+
+// Borrowed from the Angular CDK
+export function getProjectFromWorkspace(
+    workspace: WorkspaceSchema,
+    projectName?: string): WorkspaceProject {
+
+    const project = workspace.projects[projectName || workspace.defaultProject];
+
+    if (!project) {
+        throw new SchematicsException(`Could not find project in workspace: ${projectName}`);
+    }
+
+    return project;
 }

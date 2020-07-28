@@ -10,16 +10,16 @@ import {
     forwardRef,
     ContentChildren,
     QueryList,
-    HostListener,
     ChangeDetectorRef,
     Renderer2,
     Input,
     OnDestroy
 } from '@angular/core';
-import { ToolbarItemDirective } from './public_api';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { ToolbarItemDirective } from './toolbar-item.directive';
+import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 import { Observable, of, fromEvent } from 'rxjs';
-import { delay, tap, debounce, debounceTime, filter, takeWhile, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { delay, tap, debounceTime, takeWhile, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -141,7 +141,12 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     ngAfterViewInit() {
         if (this.shouldOverflow) {
-            this._collapseItems();
+            of(true)
+                .pipe(
+                    delay(5),
+                    takeWhile(() => this._alive)
+                )
+                .subscribe(() => this._collapseItems());
         }
 
         this.buildComponentCssClass();
@@ -180,6 +185,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     private _onResize(): Observable<boolean> {
         return of(true).pipe(
+            takeWhile(() => this._alive),
             tap(() => this._reset()),
             delay(5),
             tap(() => this._collapseItems())

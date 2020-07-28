@@ -4,15 +4,18 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as timeSrc from '!raw-loader!./examples/time-example.component.html';
 import * as timeMeridianSrc from '!raw-loader!./examples/time-12-example.component.html';
-import * as timeDisabledSrc from '!raw-loader!./examples/time-disabled-example.component.html';
-import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-no-spinners-example.component.html';
+import * as timeSizesSrcTs from '!raw-loader!./examples/time-sizes-example.component.ts';
+import * as timeSizesSrcH from '!raw-loader!./examples/time-sizes-example.component.html';
 import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
 import * as timeOnlyHoursSrc from '!raw-loader!./examples/time-only-hours-example.component.html';
 
+import * as timeProgramTs from '!raw-loader!./examples/time-programmatically-example.component.ts';
+import * as timeProgramH from '!raw-loader!./examples/time-programmatically-example.component.html';
+
 import * as timeSrcTs from '!raw-loader!./examples/time-example.component.ts';
 import * as timeMeridianSrcTs from '!raw-loader!./examples/time-12-example.component.ts';
-import * as timeDisabledSrcTs from '!raw-loader!./examples/time-disabled-example.component.ts';
-import * as timeNoSpinnersSrcTs from '!raw-loader!./examples/time-no-spinners-example.component.ts';
+import * as timeNoSpinnersSrcTs from '!raw-loader!./examples/time-no-spinners-example/time-no-spinners-example.component.ts';
+import * as timeNoSpinnersSrcH from '!raw-loader!./examples/time-no-spinners-example/time-no-spinners-example.component.html';
 import * as timeNoSecondsSrcTs from '!raw-loader!./examples/time-no-seconds-example.component.ts';
 import * as timeOnlyHoursSrcTs from '!raw-loader!./examples/time-only-hours-example.component.ts';
 import * as timeTwoDigitsSrcTs from '!raw-loader!./examples/time-two-digits-example/time-two-digits-example.component.ts';
@@ -78,23 +81,24 @@ export class TimeDocsComponent {
         }
     ];
 
-    timeDisabled: ExampleFile[] = [
+    timeSizes: ExampleFile[] = [
         {
             language: 'html',
-            fileName: 'time-disabled-example',
-            code: timeDisabledSrc,
-            typescriptFileCode: timeDisabledSrcTs,
-            component: 'TimeDisabledExampleComponent'
+            standalone: true,
+            fileName: 'time-sizes-example',
+            typescriptFileCode: timeSizesSrcTs,
+            code: timeSizesSrcH,
+            component: 'TimeSizesExampleComponent'
         }
     ];
 
-    timeNoSpinners: ExampleFile[] = [
+    timeProgramaticalyChange: ExampleFile[] = [
         {
             language: 'html',
-            fileName: 'time-no-spinners-example',
-            code: timeNoSpinnersSrc,
-            typescriptFileCode: timeNoSpinnersSrcTs,
-            component: 'TimeNoSpinnersExampleComponent'
+            fileName: 'time-programmatically-example',
+            code: timeProgramH,
+            typescriptFileCode: timeProgramTs,
+            component: 'TimeProgrammaticallyExampleComponent'
         }
     ];
 
@@ -105,6 +109,16 @@ export class TimeDocsComponent {
             code: timeNoSecondsSrc,
             typescriptFileCode: timeNoSecondsSrcTs,
             component: 'TimeNoSecondsExampleComponent'
+        }
+    ];
+
+    timeNoSpinners: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'time-no-spinners-example',
+            code: timeNoSpinnersSrcH,
+            typescriptFileCode: timeNoSpinnersSrcTs,
+            component: 'TimeNoSpinnersExampleComponent'
         }
     ];
 

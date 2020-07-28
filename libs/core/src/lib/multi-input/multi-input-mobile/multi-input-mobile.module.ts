@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
 @NgModule({
     declarations: [MultiInputMobileComponent],
     imports: [BarModule, DialogModule, ButtonModule, CommonModule],
-    entryComponents: [ MultiInputMobileComponent ],
+    entryComponents: [MultiInputMobileComponent],
     exports: [MultiInputMobileComponent]
 })
-export class MultiInputMobileModule {}
+export class MultiInputMobileModule {
+}

@@ -7,10 +7,12 @@ import { ButtonModule } from '../button/button.module';
 import { OnlyDigitsDirective } from '../utils/directives/only-digits/only-digits.directive';
 import { FormModule } from '../form/form.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
+import { TimeColumnComponent } from './time-column/time-column.component';
+import { CarouselModule } from '../utils/directives/carousel/carousel.module';
 
 @NgModule({
-    declarations: [TimeComponent, OnlyDigitsDirective],
-    imports: [CommonModule, FormsModule, FormModule, ButtonModule, PipeModule],
+    declarations: [TimeComponent, OnlyDigitsDirective, TimeColumnComponent],
+    imports: [CommonModule, FormsModule, FormModule, ButtonModule, PipeModule, CarouselModule],
     exports: [TimeComponent, OnlyDigitsDirective]
 })
 export class TimeModule {}

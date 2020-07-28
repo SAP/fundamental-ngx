@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ListModule } from '../list/list.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -14,7 +15,8 @@ describe('ComboboxComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ComboboxComponent],
-            imports: [InputGroupModule, CommonModule, PopoverModule, FormsModule, ListModule, PipeModule]
+            imports: [InputGroupModule, CommonModule, PopoverModule, FormsModule, ListModule, PipeModule],
+            providers: [DynamicComponentService]
         }).compileComponents();
     }));
 
@@ -130,11 +132,11 @@ describe('ComboboxComponent', () => {
     });
 
     it('should reset displayed values', () => {
-        component.writeValue('displayedValue2');
-        component.inputText = 'displayedValue2';
+
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
+        component.inputText = 'displayedValue2';
         (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
         (<any>component)._resetDisplayedValues();
@@ -238,27 +240,25 @@ describe('ComboboxComponent', () => {
         expect(component.onMenuClickHandler).toHaveBeenCalledWith(component.dropdownValues[0]);
     });
 
-    it('should reset displayed values', () => {
-        component.open = false;
-        spyOn(component, 'onMenuClickHandler');
+    it('should reset displayed values on primary button click', () => {
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
-        component.inputTextValue = component.dropdownValues[0];
-        component.handleSearchTermChange();
+        component.open = false;
+        component.inputText = 'displayedValue2';
+        (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
         component.onPrimaryButtonClick(<any>{ stopPropagation: () => {}, preventDefault: () => {} });
         expect(component.displayedValues.length).toBe(2);
     });
 
-    it('should open nad reset displayed values on alt+down', () => {
-        component.open = false;
-        spyOn(component, 'onMenuClickHandler');
+    it('should open and reset displayed values on alt+down', () => {
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
-        component.inputTextValue = component.dropdownValues[0];
-        component.handleSearchTermChange();
+        component.open = false;
+        component.inputText = 'displayedValue2';
+        (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
 
         component.onInputKeydownHandler(<any>
@@ -267,5 +267,39 @@ describe('ComboboxComponent', () => {
 
         expect(component.displayedValues.length).toBe(2);
         expect(component.open).toBe(true);
+    });
+
+    it('should bring back values, if canceled on mobile mode and dont emit changes', async () => {
+        component.mobile = true;
+
+        spyOn(component, 'onChange');
+
+        await fixture.whenStable();
+
+        expect(component.onChange).not.toHaveBeenCalled();
+
+        expect(component.inputText).toEqual(undefined);
+
+        component.dialogDismiss('test');
+
+        expect(component.inputText).toEqual('test');
+    });
+
+    it('should emit changes values on approve', async () => {
+        component.mobile = true;
+
+        spyOn(component, 'onChange');
+
+        await fixture.whenStable();
+
+        component.inputText = 'test';
+
+        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.inputText).toEqual('test');
+
+        component.dialogApprove();
+
+        expect(component.onChange).toHaveBeenCalled();
+        expect(component.inputText).toEqual('test');
     });
 });

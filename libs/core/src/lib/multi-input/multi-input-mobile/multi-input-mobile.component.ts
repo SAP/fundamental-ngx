@@ -2,20 +2,25 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    ElementRef, Inject,
-    isDevMode,
+    ElementRef,
+    Inject,
     OnDestroy,
     OnInit,
+    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
-import { DialogRef } from '../../dialog/dialog-utils/dialog-ref.class';
-import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.interface';
+import {
+    MOBILE_MODE_CONFIG,
+    MobileModeBase,
+    MobileModeControl,
+    MobileModeConfigToken
+} from '../../utils/base-class/mobile-mode.class';
+
 
 @Component({
     selector: 'fd-multi-input-mobile',
@@ -24,10 +29,10 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterface> implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
-    multiInputConfig: MobileModeConfig;
+    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden
      * For internal usage
@@ -40,98 +45,76 @@ export class MultiInputMobileComponent implements OnInit, AfterViewInit, OnDestr
     } = null;
 
     /** @hidden */
-    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    private _dialogRef: DialogRef;
-
-    /** @hidden */
     private _selectedBackup: any[];
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
     constructor(
-        private _dialogService: DialogService,
-        @Inject(MULTI_INPUT_COMPONENT) private _multiInputComponent: MultiInputInterface,
-        private _elementRef: ElementRef
-    ) {}
+        elementRef: ElementRef,
+        dialogService: DialogService,
+        @Inject(MULTI_INPUT_COMPONENT) multiInputComponent: MultiInputInterface,
+        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
+    ) {
+        super(elementRef, dialogService, multiInputComponent, MobileModeControl.MULTI_INPUT, mobileModes);
+    }
 
     /** @hidden */
     ngOnInit(): void {
-        this.multiInputConfig = this.getMultiInputConfig();
-        if (this.multiInputConfig) {
-            this._listenOnMultiInputOpenChange();
-        }
+        this._listenOnMultiInputOpenChange();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._open();
-        this._dialogRef.hide(true);
+        this.dialogRef.hide(true);
     }
 
-    /** @hidden */
     ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
+        this.dialogRef.close();
+        super.onDestroy();
     }
 
     /** Throw select all event, it's handled by multi input component */
     selectAll(): void {
-        this._multiInputComponent.selectAllItems();
+        this._component.selectAllItems();
     }
 
     /** @hidden */
     handleDismiss(): void {
-        this._dialogRef.hide(true);
-        this._multiInputComponent.dialogDismiss(this._selectedBackup);
+        this.dialogRef.hide(true);
+        this._component.dialogDismiss(this._selectedBackup);
     }
 
     /** @hidden */
     handleApprove(): void {
-        this._dialogRef.hide(true);
-        this._multiInputComponent.dialogApprove();
+        this.dialogRef.hide(true);
+        this._component.dialogApprove();
     }
 
     /** @hidden */
-    private getMultiInputConfig(): MobileModeConfig {
-        if (this._multiInputComponent.multiInputMobileConfig) {
-            return this._multiInputComponent.multiInputMobileConfig;
-        } else {
-            if (isDevMode()) {
-                throw new Error('There is no multi input configuration object provided. ' +
-                    'You need to pass it as a "[multiInputMobileConfig]",' +
-                    'or provide it with "MULTI_INPUT_MOBILE_CONFIG" injection token'
-                );
-            }
-        }
-    }
-
     private _toggleDialog(open: boolean): void {
         if (open) {
-            this._selectedBackup = [...this._multiInputComponent.selected];
+            this._selectedBackup = [...this._component.selected];
             if (!this._dialogService.hasOpenDialogs()) {
                 this._open();
             }
         }
-        this._dialogRef.hide(!open);
+        this.dialogRef.hide(!open);
     }
 
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
-        this._multiInputComponent.openChange
+        this._component.openChange
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(isOpen => this._toggleDialog(isOpen))
-        ;
+            .subscribe(isOpen => this._toggleDialog(isOpen));
     }
 
     /** @hidden */
     private _open(): void {
-        this._dialogRef = this._dialogService.open(
+        this.dialogRef = this._dialogService.open(
             this.dialogTemplate,
             {
-                ...this._multiInputComponent.dialogConfig,
+                mobile: true,
+                verticalPadding: false,
+                ...this.dialogConfig,
                 backdropClickCloseable: false,
                 escKeyCloseable: false,
                 container: this._elementRef.nativeElement

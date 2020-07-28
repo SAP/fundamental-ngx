@@ -61,8 +61,17 @@
     Select In Mobile Mode
 </fd-docs-section-title>
 <description>
-    To open a Menu in mobile mode use <code>[mobile]</code> option. To customize the mobile view of the Select control
-    use <code>[mobileConfig]</code>.
+    To use Select in mobile mode:
+    <ul>
+        <li>import <code>SelectMobileModule</code></li>
+        <li>Set <code>[mobile]</code> property to true</li>
+        <li>Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+            look of the control
+        </li>
+    </ul>
+
+    Select Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
+    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more information.
 </description>
 <component-example>
     <fd-select-mobile-example></fd-select-mobile-example>
@@ -75,8 +84,10 @@
     Select Max Height
 </fd-docs-section-title>
 <description>
-    The Select component allows you to define the <code>[maxHeight]</code>. It can be useful when there are a lot of options given that
-    the select body is be scrollable. By default the maximum height of the Select body is 45% of the browser's inner window height.
+    The Select component allows you to define the <code>[maxHeight]</code>. It can be useful when there are a lot of
+    options given that
+    the select body is be scrollable. By default the maximum height of the Select body is 45% of the browser's inner
+    window height.
 </description>
 <component-example>
     <fd-select-max-height-example></fd-select-max-height-example>

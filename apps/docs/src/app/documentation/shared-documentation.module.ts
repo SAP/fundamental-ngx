@@ -1,4 +1,4 @@
-import { InjectionToken, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
@@ -23,8 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DocsSectionTitleComponent } from './core-helpers/docs-section-title/docs-section-title.component';
-import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
-import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 import { SchemaModule } from '../schema/schema.module';
 import { COMPONENT_SCHEMAS } from '../core/component-docs/schemas';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
@@ -33,6 +31,7 @@ import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sectio
 import { HeaderTabsComponent } from './core-helpers/header-tabs/header-tabs.component';
 import { ApiComponent } from './core-helpers/api/api.component';
 import { sharedCoreModules } from './shared-core-modules';
+import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.component';
 
 @NgModule({
     declarations: [
@@ -50,7 +49,8 @@ import { sharedCoreModules } from './shared-core-modules';
         ToolbarDocsComponent,
         SectionsToolbarComponent,
         HeaderTabsComponent,
-        ApiComponent
+        ApiComponent,
+        CodeSnippetComponent
     ],
 
     imports: [
@@ -89,7 +89,8 @@ import { sharedCoreModules } from './shared-core-modules';
         SectionsToolbarComponent,
         HeaderTabsComponent,
         ApiComponent,
-        sharedCoreModules
+        sharedCoreModules,
+        CodeSnippetComponent
     ]
 })
 export class SharedDocumentationModule {}

@@ -95,24 +95,14 @@
     Dialog behavior can be configured using the <code>DialogConfig</code> object passed as an argument to the
     <code>DialogService.open()</code> method. Passing <code>DialogConfig</code> overrides specified behaviours of the
     Dialog component.
+
+    Dialog can be configured <strong>globally</strong> by providing <code>DIALOG_DEFAULT_CONFIG</code> token.
+    Check <a [routerLink]="['/core/global-config']" fragment="dialog-config">Global Configuration page</a> for more information.
 </description>
 <component-example>
     <fd-dialog-configuration-example></fd-dialog-configuration-example>
 </component-example>
 <code-example [exampleFiles]="customConfiguration"></code-example>
-
-<description>
-    The default values used by the Dialog component can be specified by providing the
-    <code>DIALOG_DEFAULT_CONFIG</code> token value.<br /><br />
-    <code>
-        @NgModule({{ '{' }}
-        provide: [
-        {{ '{' }}provide: DIALOG_DEFAULT_CONFIG, useValue: customConfig{{ '}' }}
-        ]
-        {{ '}' }}
-    </code>
-</description>
-
 <separator></separator>
 
 <fd-docs-section-title [id]="'dialogPosition'" [componentName]="'dialog'">

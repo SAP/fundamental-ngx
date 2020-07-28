@@ -1,4 +1,9 @@
-<fd-popover [(isOpen)]="isOpen" [triggers]="[]">
+<fd-popover [(isOpen)]="isOpen"
+            [triggers]="[]"
+            [disabled]="disabled"
+            [placement]="placement"
+            [closeOnEscapeKey]="true"
+            [focusTrapped]="true">
     <fd-popover-control>
         <fd-input-group
             [compact]="compact"
@@ -10,34 +15,35 @@
             [glyph]="'fob-watch'"
         >
             <input
+                type="text"
+                class="fd-input"
+                fd-input-group-input
+                #inputElement
                 [value]="getFormattedTime()"
                 [compact]="compact"
-                #inputElement
-                fd-input-group-input
-                (keyup.enter)="timeInputChanged($event.currentTarget.value)"
                 (focusout)="timeInputChanged(inputElement.value)"
-                (focus)="onFocusHandler()"
-                (click)="inputGroupClicked($event)"
                 [disabled]="disabled"
-                type="text"
-                [ngClass]="{ 'is-error': isInvalidTimeInput && validate }"
-                class="fd-input"
                 [placeholder]="placeholder"
                 [attr.aria-label]="timePickerInputLabel"
+                (keyup.enter)="timeInputChanged($event.currentTarget.value)"
+                (click)="inputGroupClicked($event)"
             />
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body *ngIf="displaySeconds || displayMinutes || displayHours">
+        <ng-content></ng-content>
         <fd-time
+            [tablet]="tablet"
+            [compact]="compact"
             [disabled]="disabled"
             [meridian]="meridian"
             [(ngModel)]="time"
             [keepTwoDigits]="keepTwoDigitsTime"
-            (ngModelChange)="timeFromTimeComponentChanged()"
-            [spinners]="spinners"
+            (ngModelChange)="timeFromTimeComponentChanged($event)"
             [displayMinutes]="displayMinutes"
             [displaySeconds]="displaySeconds"
             [displayHours]="displayHours"
+            [spinnerButtons]="spinnerButtons"
         ></fd-time>
     </fd-popover-body>
 </fd-popover>

@@ -2,6 +2,85 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.35...v0.20.1-rc.36) (2020-07-28)
+
+
+### Bug Fixes
+
+* fixed order of component ([#2871](https://github.com/SAP/fundamental-ngx/issues/2871)) ([72f1f6a](https://github.com/SAP/fundamental-ngx/commit/72f1f6a2bd308debccc94f5f624e220e22b547e1))
+
+### [0.20.1-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.34...v0.20.1-rc.35) (2020-07-28)
+
+
+### Bug Fixes
+
+* Remove circular dependency from library ([#2919](https://github.com/SAP/fundamental-ngx/issues/2919)) ([5aa9754](https://github.com/SAP/fundamental-ngx/commit/5aa9754ca37569658d07e67192e53f268fbc11e7))
+
+### [0.20.1-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.33...v0.20.1-rc.34) (2020-07-28)
+
+### [0.20.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.32...v0.20.1-rc.33) (2020-07-27)
+
+
+### Bug Fixes
+
+* change placeholder to input on time picker ([#2869](https://github.com/SAP/fundamental-ngx/issues/2869)) ([784d72e](https://github.com/SAP/fundamental-ngx/commit/784d72e54425259c5483d992951538f85a80b3e0))
+
+### [0.20.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.31...v0.20.1-rc.32) (2020-07-27)
+
+
+### Bug Fixes
+
+* Add null value handler for time picker, fix latest time picker bugs ([#2874](https://github.com/SAP/fundamental-ngx/issues/2874)) ([5776c76](https://github.com/SAP/fundamental-ngx/commit/5776c760c6d01bb6ec169cded136453588d93d69))
+
+### [0.20.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.30...v0.20.1-rc.31) (2020-07-26)
+
+### [0.20.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.29...v0.20.1-rc.30) (2020-07-26)
+
+### [0.20.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.28...v0.20.1-rc.29) (2020-07-26)
+
+### [0.20.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.27...v0.20.1-rc.28) (2020-07-26)
+
+### [0.20.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.26...v0.20.1-rc.27) (2020-07-24)
+
+
+### Bug Fixes
+
+* form message group example ([#2864](https://github.com/SAP/fundamental-ngx/issues/2864)) ([174f9bb](https://github.com/SAP/fundamental-ngx/commit/174f9bbb93756497d5d489978e5dc83d69e92a6c))
+
+### [0.20.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.25...v0.20.1-rc.26) (2020-07-24)
+
+### [0.20.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.24...v0.20.1-rc.25) (2020-07-24)
+
+
+### Features
+
+* Create base interfaces and typing for control mobile mode ([#2886](https://github.com/SAP/fundamental-ngx/issues/2886)) ([5fafda0](https://github.com/SAP/fundamental-ngx/commit/5fafda0827fefa36c000c76020d7a11c20e8d714))
+
+### [0.20.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.23...v0.20.1-rc.24) (2020-07-24)
+
+
+### Bug Fixes
+
+* Combobox Mobile ([#2862](https://github.com/SAP/fundamental-ngx/issues/2862)) ([fa0573e](https://github.com/SAP/fundamental-ngx/commit/fa0573e4d622c5f0eb9b10048cb2b43c44b1d00a))
+
+### [0.20.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.22...v0.20.1-rc.23) (2020-07-22)
+
+### [0.20.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.21...v0.20.1-rc.22) (2020-07-22)
+
+
+### Bug Fixes
+
+* bug where initial hidden token count was wrong on cozy multi-input ([#2870](https://github.com/SAP/fundamental-ngx/issues/2870)) ([f96a39b](https://github.com/SAP/fundamental-ngx/commit/f96a39bad2c18350ead154483b2e5be1d10f12ab))
+
+### [0.20.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.20...v0.20.1-rc.21) (2020-07-22)
+
+### [0.20.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.19...v0.20.1-rc.20) (2020-07-22)
+
+
+### Features
+
+* adapt time ([#2802](https://github.com/SAP/fundamental-ngx/issues/2802)) ([a671287](https://github.com/SAP/fundamental-ngx/commit/a671287b18864268aa0cbb91cebc5308197d0a17))
+
 ### [0.20.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.18...v0.20.1-rc.19) (2020-07-19)
 
 ### [0.20.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.17...v0.20.1-rc.18) (2020-07-19)

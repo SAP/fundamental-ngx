@@ -29,7 +29,6 @@ describe('TimePickerComponent', () => {
 
     it('should create with default values', () => {
         expect(component).toBeTruthy();
-        expect(component.spinners).toBe(true);
         expect(component.displaySeconds).toBe(true);
     });
 
@@ -222,7 +221,7 @@ describe('TimePickerComponent', () => {
         component.disabled = false;
         const event = { stopPropagation: function () {} };
         spyOn(event, 'stopPropagation').and.callThrough();
-        component.inputGroupClicked(event);
+        component.inputGroupClicked(<any>event);
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.isOpen).toBe(true);
     });
@@ -277,8 +276,7 @@ describe('TimePickerComponent', () => {
 
     it('should call onChange when time from time picker changes', () => {
         spyOn(component, 'onChange');
-        component.time = { hour: 12, minute: 0, second: 0 };
-        component.timeFromTimeComponentChanged();
+        component.timeFromTimeComponentChanged({ hour: 12, minute: 0, second: 0 });
         expect(component.onChange).toHaveBeenCalledWith(component.time);
     });
 });

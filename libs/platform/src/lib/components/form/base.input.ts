@@ -1,6 +1,7 @@
 import {
     AfterViewInit,
     ChangeDetectorRef,
+    Directive,
     DoCheck,
     ElementRef,
     Input,
@@ -31,6 +32,7 @@ let randomId = 0;
  * Usually try to fire stateChange only for things that can change dynamically in runtime. We don't expect
  * that e.g. placeholder will change after component is created
  */
+@Directive()
 export abstract class BaseInput extends BaseComponent
     implements FormFieldControl<any>, ControlValueAccessor, OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
     protected defaultId: string = `fdp-input-id-${randomId++}`;

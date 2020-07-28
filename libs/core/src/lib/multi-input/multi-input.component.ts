@@ -6,13 +6,11 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    Inject,
     Injector,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -31,7 +29,6 @@ import { ListItemDirective } from '../list/list-item.directive';
 import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
-import { DialogConfig, DIALOG_CONFIG } from '../dialog/dialog-utils/dialog-config.class';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { CheckboxComponent } from '../checkbox/checkbox/checkbox.component';
 import { Subscription } from 'rxjs';
@@ -62,12 +59,12 @@ import { TokenizerComponent } from '../token/tokenizer.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiInputComponent implements
-    OnInit,
+    MultiInputInterface,
     ControlValueAccessor,
+    CssClassBuilder,
+    OnInit,
     OnChanges,
     AfterViewInit,
-    CssClassBuilder,
-    MultiInputInterface,
     OnDestroy {
 
     /** Placeholder for the input field. */
@@ -167,7 +164,7 @@ export class MultiInputComponent implements
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
-    multiInputMobileConfig: MobileModeConfig;
+    mobileConfig: MobileModeConfig = { hasCloseButton: true, approveButtonText: 'Select' };
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -232,7 +229,6 @@ export class MultiInputComponent implements
 
     /** @hidden */
     constructor(
-        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
         private _menuKeyboardService: MenuKeyboardService,

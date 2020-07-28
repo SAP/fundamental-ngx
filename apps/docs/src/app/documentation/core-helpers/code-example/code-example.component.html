@@ -13,9 +13,7 @@
     <div class="docs-code-example-content">
         <fd-tab-list [(selectedIndex)]="selectedFileIndex">
             <fd-tab *ngFor="let file of exampleFiles" [title]="file.name || file.language | titlecase">
-                <pre>
-                    <code #code [ngClass]="file.language" class="hljs">{{file.code?.default}}</code>
-                </pre>
+                <fd-code-snippet [file]="file"></fd-code-snippet>
             </fd-tab>
         </fd-tab-list>
     </div>
