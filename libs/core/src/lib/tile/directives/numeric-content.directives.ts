@@ -1,15 +1,67 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
-type KpiStatus = 'negative' | 'critical' | 'positive' | 'informative' | '';
+
+type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | '' | 'neutral';
+type NumericContentSize = 's' | 'm' | 'l' | '';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-numeric-content]'
 })
-export class NumericContentDirective {
+export class NumericContentDirective implements OnInit, OnChanges {
+    /** Apply user custom styles */
+    @Input()
+    class: string;
+
     /** @hidden */
     @HostBinding('class.fd-numeric-content')
     baseClass: boolean = true;
+
+    @Input()
+    size: NumericContentSize = '';
+
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            'fd-numeric-content',
+            this.size ? 'fd-numeric-content--' + this.size : '',
+            this.class,
+            this._isSmallTile() ? 'fd-numeric-content--small-tile' : ''
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
+    }
+
+    /** @hidden */
+    private _isSmallTile(): boolean {
+        let retVal = false;
+        if (this._elementRef.nativeElement.parentElement && this._elementRef.nativeElement.parentElement.parentElement &&
+        this._elementRef.nativeElement.parentElement.parentElement.classList.contains('fd-tile--s')) {
+            retVal = true;
+        }
+        return retVal;
+    }
 }
 
 @Directive({
@@ -81,7 +133,7 @@ export class NumericContentKpiContainerDirective {
 export class NumericContentKpiDirective implements OnInit, OnChanges {
     /** State of the KPI. Options are 'neutral' (default), 'positive', 'negative', 'critical', and 'informative'. */
     @Input()
-    status: KpiStatus = '';
+    state: NumericContentState = '';
 
     /** Apply user custom styles */
     @Input()
@@ -109,7 +161,7 @@ export class NumericContentKpiDirective implements OnInit, OnChanges {
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return ['fd-numeric-content__kpi', this.status ? 'fd-numeric-content__kpi--' + this.status : '', this.class]
+        return ['fd-numeric-content__kpi', this.state ? 'fd-numeric-content__kpi--' + this.state : '', this.class]
             .filter((x) => x !== '')
             .join(' ');
     }
@@ -179,7 +231,7 @@ export class NumericContentScaleArrowDirective {
 export class NumericContentScaleDirective implements OnInit, OnChanges {
     /** State of the SCALE. Options are 'neutral' (default), 'positive', 'negative', 'critical', and 'informative'. */
     @Input()
-    state: string = '';
+    state: NumericContentState = '';
 
     /** Apply user custom styles */
     @Input()
@@ -221,15 +273,5 @@ export class NumericContentScaleDirective implements OnInit, OnChanges {
 export class NumericContentScaleTextDirective {
     /** @hidden */
     @HostBinding('class.fd-numeric-content__scale-text')
-    baseClass: boolean = true;
-}
-
-@Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[fd-numeric-content-small-tile]'
-})
-export class NumericContentSmallTileDirective {
-    /** @hidden */
-    @HostBinding('class.fd-numeric-content--small-tile')
     baseClass: boolean = true;
 }

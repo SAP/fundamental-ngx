@@ -117,7 +117,7 @@
                 <span fd-numeric-content-launch-icon [glyph]="'line-charts'"></span>
             </div>
             <div fd-numeric-content-kpi-container>
-                <div fd-numeric-content-kpi [status]="'negative'">1Ñç</div>
+                <div fd-numeric-content-kpi [state]="'negative'">1Ñç</div>
             </div>
             <div fd-numeric-content-scale-container>
                 <div fd-numeric-content-scale [state]="'negative'">
@@ -155,7 +155,7 @@
                 <span fd-numeric-content-launch-icon [glyph]="'line-charts'"></span>
             </div>
             <div fd-numeric-content-kpi-container>
-                <div fd-numeric-content-kpi [status]="'positive'">1234</div>
+                <div fd-numeric-content-kpi [state]="'positive'">1234</div>
             </div>
         </div>
     </div>
@@ -313,6 +313,85 @@
     </div>
     <div fd-tile-content>
         <div fd-numeric-content>
+            <div fd-numeric-content-kpi-container>
+                <span fd-numeric-content-kpi [glyph]="'line-charts'"></span>
+            </div>
+            <div fd-numeric-content-kpi-container>
+                <div fd-numeric-content-kpi>1Ñç</div>
+            </div>
+            <div fd-numeric-content-scale-container>
+                <div fd-numeric-content-scale>
+                    <span fd-numeric-content-scale-arrow [glyph]="'down'"></span>
+                    <span fd-numeric-content-scale-text>M</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fd-tile-footer [twoColumn]="true">
+        <div fd-tile-section>
+            <span fd-tile-refresh [glyph]="'refresh'"></span>
+            <span fd-tile-footer-text>Now</span>
+        </div>
+        <div fd-tile-section>
+            <span fd-tile-footer-text>Footer</span>
+        </div>
+    </div>
+</div>
+
+
+<br/><br/>
+
+<h1>KPI Tile with M size numeric content</h1>
+
+<div fd-tile [type]="'kpi'">
+    <div fd-tile-header>
+        <div fd-tile-title>
+            Kpi Tile Title Text
+        </div>
+        <div fd-tile-subtitle>
+            Kpi Tile Subtitle
+        </div>
+    </div>
+    <div fd-tile-content>
+        <div fd-numeric-content [size]="'m'">
+            <div fd-numeric-content-kpi-container>
+                <span fd-numeric-content-kpi [glyph]="'line-charts'"></span>
+            </div>
+            <div fd-numeric-content-kpi-container>
+                <div fd-numeric-content-kpi>1Ñç</div>
+            </div>
+            <div fd-numeric-content-scale-container>
+                <div fd-numeric-content-scale>
+                    <span fd-numeric-content-scale-arrow [glyph]="'down'"></span>
+                    <span fd-numeric-content-scale-text>M</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fd-tile-footer [twoColumn]="true">
+        <div fd-tile-section>
+            <span fd-tile-refresh [glyph]="'refresh'"></span>
+            <span fd-tile-footer-text>Now</span>
+        </div>
+        <div fd-tile-section>
+            <span fd-tile-footer-text>Footer</span>
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div fd-tile [type]="'kpi'" [small]="true">
+    <div fd-tile-header>
+        <div fd-tile-title>
+            Kpi Tile Title Text
+        </div>
+        <div fd-tile-subtitle>
+            Kpi Tile Subtitle
+        </div>
+    </div>
+    <div fd-tile-content>
+        <div fd-numeric-content [size]="'m'">
             <div fd-numeric-content-kpi-container>
                 <span fd-numeric-content-kpi [glyph]="'line-charts'"></span>
             </div>

@@ -24,8 +24,7 @@ import {
     NumericContentScaleArrowDirective,
     NumericContentScaleContainerDirective,
     NumericContentScaleDirective,
-    NumericContentScaleTextDirective,
-    NumericContentSmallTileDirective
+    NumericContentScaleTextDirective
 } from './directives/numeric-content.directives';
 
 @NgModule({
@@ -51,8 +50,7 @@ import {
         NumericContentScaleArrowDirective,
         NumericContentScaleContainerDirective,
         NumericContentScaleDirective,
-        NumericContentScaleTextDirective,
-        NumericContentSmallTileDirective
+        NumericContentScaleTextDirective
     ],
     declarations: [
         TileComponent,
@@ -75,8 +73,7 @@ import {
         NumericContentLaunchIconDirective,
         NumericContentScaleContainerDirective,
         NumericContentScaleDirective,
-        NumericContentScaleTextDirective,
-        NumericContentSmallTileDirective
+        NumericContentScaleTextDirective
     ]
 })
 export class TileModule {}
