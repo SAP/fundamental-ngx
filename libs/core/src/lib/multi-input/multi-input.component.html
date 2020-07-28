@@ -93,8 +93,9 @@
                     ></span>
             </fd-checkbox>
         </li>
-        <li fd-list-item class="fd-multi-input-show-all" *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)">
-            <a fd-link (click)="showAllClicked($event)" href>Show All ({{ dropdownValues.length }})</a>
+        <li (click)="showAllClicked($event)" fd-list-item class="fd-multi-input-show-all"
+            *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)">
+            <a fd-link href>Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>
 </ng-template>
