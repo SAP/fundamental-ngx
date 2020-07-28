@@ -11,8 +11,7 @@ import {
 } from '@angular/core';
 import { CarouselItemDirective } from './carousel-item.directive';
 import * as Hammer from 'hammerjs';
-import { HammerConfig } from './carousel.module';
-
+import { HammerConfig } from './hammer.config';
 
 export interface CarouselConfig {
     /** Defines if carousel items are placed vertically */
