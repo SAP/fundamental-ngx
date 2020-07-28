@@ -3,8 +3,13 @@
 <p>Platform Radio Buttons Created with given List of SelectItem Objects and have Validation Error</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form1">
     <fdp-form-field [id]="'radiolo1'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radiolo1'" [value]="'spring'" [list]="items" [isInline]="false"
-            formControlName="example1">
+        <fdp-radio-group
+            [name]="'radiolo1'"
+            [value]="'spring'"
+            [list]="items"
+            [isInline]="false"
+            formControlName="example1"
+        >
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
@@ -14,8 +19,13 @@
 <p>Compact Platform Radio Button Created with given List of SelectItem Objects. Using FormGroup and FormControl.</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form2">
     <fdp-form-field [id]="'radiolo2'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radiolo2'" [contentDensity]="'compact'" [list]="items" [isInline]="true"
-            formControlName="example2">
+        <fdp-radio-group
+            [name]="'radiolo2'"
+            [contentDensity]="'compact'"
+            [list]="items"
+            [isInline]="true"
+            formControlName="example2"
+        >
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
@@ -35,8 +45,14 @@
 <p>Platform Radio Button created from Invoice objects. Using LookupKey and DisplayKey.</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form4" [object]="form4Data">
     <fdp-form-field #fl4 [id]="'radiolo4'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radiolo4'" [list]="invoiceItems" [isInline]="true" [lookupKey]="'item'"
-            [displayKey]="'itemType'" [formControl]="fl4.formControl">
+        <fdp-radio-group
+            [name]="'radiolo4'"
+            [list]="invoiceItems"
+            [isInline]="true"
+            [lookupKey]="'item'"
+            [displayKey]="'itemType'"
+            [formControl]="fl4.formControl"
+        >
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
@@ -57,18 +73,29 @@
 <p>Platform Radio Button Created with given List of SelectItem Objects.</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'radiolo6'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radiolo6'" [list]="items" [contentDensity]="'compact'" [isInline]="true"
-            [(ngModel)]="favoriteOption2">
+        <fdp-radio-group
+            [name]="'radiolo6'"
+            [list]="items"
+            [contentDensity]="'compact'"
+            [isInline]="true"
+            [(ngModel)]="favoriteOption2"
+        >
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
 <p style="margin-left: 2rem;">Selected value: {{ favoriteOption2 }}</p>
 
 <p>Platform Radio Button created from Invoice objects. Using LookupKey and DisplayKey.</p>
-<fdp-form-group [multiLayout]="true" [formGroup]="form4" [object]="form4Data">
+<fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'radiotlo7'" zone="zLeft" rank="1">
-        <fdp-radio-group [name]="'radiolo7'" [list]="invoiceItems" [isInline]="true" [lookupKey]="'item'"
-            [displayKey]="'itemType'" [(ngModel)]="favBrand">
+        <fdp-radio-group
+            [name]="'radiolo7'"
+            [list]="invoiceItems"
+            [isInline]="true"
+            [lookupKey]="'item'"
+            [displayKey]="'itemType'"
+            [(ngModel)]="favBrand"
+        >
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
