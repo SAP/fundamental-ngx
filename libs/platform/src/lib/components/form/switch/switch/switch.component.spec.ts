@@ -3,7 +3,7 @@ import { Component, QueryList, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { FormModule } from '@fundamental-ngx/core';
+import { FormModule, SwitchModule } from '@fundamental-ngx/core';
 import { SwitchComponent, SwitchChangeEvent } from './switch.component';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 
@@ -80,7 +80,7 @@ describe('SwitchComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule],
+            imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, SwitchModule],
             declarations: [TestSwitchComponent, SwitchComponent]
         }).compileComponents();
     }));

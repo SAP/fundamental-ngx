@@ -7,8 +7,7 @@ import {
     NgZone,
     Optional,
     Output,
-    Self,
-    ViewEncapsulation
+    Self
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
@@ -27,9 +26,7 @@ export class SwitchChangeEvent {
 @Component({
     selector: 'fdp-switch',
     templateUrl: './switch.component.html',
-    styleUrls: ['./switch.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: SwitchComponent, multi: true }]
 })
 export class SwitchComponent extends BaseInput {
@@ -95,10 +92,10 @@ export class SwitchComponent extends BaseInput {
     }
 
     /** update controller on switch state change */
-    onModelChange(modelValue: boolean): void {
+    onValueChange(modelValue: boolean): void {
         this._updateModel(modelValue);
         this.onTouched();
-        this.stateChanges.next('switch: onModelChange');
+        this.stateChanges.next('switch: onValueChange');
     }
 
     /** write value for ControlValueAccessor */
