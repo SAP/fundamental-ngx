@@ -16,7 +16,7 @@ import localeGb from '@angular/common/locales/en-GB';
 import localeDe from '@angular/common/locales/de';
 
 const placeholders = new Map([
-  ['en-gb', 'mm/dd/yyyy, hh:mm'],
+  ['en-gb', 'mm/dd/yyyy, hh:mm a'],
   ['fr', 'dd/mm/yyyy  hh:mm'],
   ['bg', 'дд/мм/гг чч:мм'],
   ['de', 'dd.mm.yy, hh:mm'],
@@ -65,7 +65,9 @@ export class DatetimePickerComplexI18nExampleComponent {
         moment.locale('en-gb');
     }
 
-    actualLocale = '';
+    meridian: boolean = false;
+
+    actualLocale: string = '';
 
     actualFormat = 'short';
 
@@ -85,10 +87,18 @@ export class DatetimePickerComplexI18nExampleComponent {
     }
 
     public setLocale(locale: string): void {
-        this.actualMomentJsLang = locale;
-        this.actualLocale = locale;
-        moment.locale(locale);
-        this.refresh();
+      this.actualMomentJsLang = locale;
+      this.actualLocale = locale;
+      moment.locale(locale);
+      if (moment().format('LT').includes('AM') || moment().format('LT').includes('PM')) {
+        this.actualFormat = 'mm/dd/yyyy, hh:mm a';
+        this.meridian = true;
+      }
+      else {
+        this.actualFormat = 'mm/dd/yyyy, hh:mm';
+        this.meridian = false;
+      }
+      this.refresh();
     }
 
     public isSelected(momentJsLang: string): string {
