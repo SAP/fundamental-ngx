@@ -40,7 +40,7 @@ export class NumberStepInputComponent extends StepInputComponent {
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @Self() public ngForm: NgForm,
         renderer: Renderer2,
-        @Inject(LOCALE_ID) private localeId: string
+        @Inject(LOCALE_ID) readonly localeId: string
     ) {
         super(_cd, ngControl, ngForm, config, renderer);
     }

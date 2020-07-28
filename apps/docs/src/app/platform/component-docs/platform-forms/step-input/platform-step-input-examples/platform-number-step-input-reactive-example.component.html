@@ -4,9 +4,7 @@
             <fdp-form-field
                 #formField
                 id="qty"
-                i18n-label="@@platformI18nStepInputFormQtyLabel"
                 label="Quantity"
-                i18n-placeholder="@@platformI18nStepInputFormQtyPlaceholder"
                 placeholder="Things quantity"
                 hint="This is tooltip to help"
                 zone="zLeft"
@@ -24,12 +22,12 @@
             </fdp-form-field>
 
             <ng-template #i18n let-errors>
-                <span i18n="@@platformI18nStepInputQtyRequiredValidation" *ngIf="errors.required">
+                <span *ngIf="errors.required">
                     Value is required
                 </span>
             </ng-template>
         </fdp-form-group>
     </div>
-    <pre>Form result: {{ form.value | json }}</pre>
-    <pre>Form Status: {{ form.status | json }}</pre>
+    <pre>Form result: {{ form.value?.qty }}</pre>
+    <pre>Form Status: {{ form.status }}</pre>
 </main>

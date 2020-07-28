@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Input, Output, EventEmitter, Renderer2, Directive } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
 import { BaseInput } from '../base.input';
@@ -19,7 +19,7 @@ export class PlatformStepInputChange<T extends StepInputComponent = StepInputCom
  * to create type specific StepInput components such as number, money, unitOfMeasure
  * This holds base Step Input functionality that can be abstracted
  */
-
+@Directive()
 export abstract class StepInputComponent extends BaseInput {
     /** content Density of element. cozy | compact */
     @Input()
@@ -33,7 +33,6 @@ export abstract class StepInputComponent extends BaseInput {
     get value(): number {
         return super.getValue();
     }
-
     set value(value: number) {
         if (value !== this._value) {
             super.setValue(value);
@@ -47,12 +46,18 @@ export abstract class StepInputComponent extends BaseInput {
         this._min = !isNaN(min) ? min : -Number.MAX_VALUE;
         this._calculateCanDecrement();
     }
+    get min() {
+        return this._min;
+    }
 
     /** Sets maximum value boundary */
     @Input()
     set max(max: number) {
         this._max = !isNaN(max) ? max : Number.MAX_VALUE;
         this._calculateCanIncrement();
+    }
+    get max() {
+        return this._max;
     }
 
     /** Sets input step value */
@@ -61,6 +66,9 @@ export abstract class StepInputComponent extends BaseInput {
         this._checkAndThrowErrorIfStepDoesntMatchPrecision(this.precision, step);
         this._step = step;
         this._calculateCanDecrementIncrement();
+    }
+    get step() {
+        return this._step;
     }
 
     /** Custom function to calculate step dynamically */
@@ -195,7 +203,7 @@ export abstract class StepInputComponent extends BaseInput {
     /** @hidden
      * Override writeValue method to keep input view value up to date
      */
-    writeValue(value: any) {
+    writeValue(value: number) {
         super.writeValue(value);
         this._updateViewValue();
     }
@@ -294,6 +302,7 @@ export abstract class StepInputComponent extends BaseInput {
 
     /** @hidden */
     private _addAndCutFloatingNumberDistortion(value: number, step: number): number {
+        value = value || 0;
         const stepDecimals = `${step}`.split('.')[1];
         const valueDecimals = `${value}`.split('.')[1];
         const stepDecimalsLength = stepDecimals ? stepDecimals.length : 0;
@@ -353,13 +362,13 @@ export abstract class StepInputComponent extends BaseInput {
     /** @hidden */
     private _calculateCanIncrement() {
         const step = this._getStepValue('increase');
-        this.canIncrement = this._value + step <= this._max;
+        this.canIncrement = (this._value || 0) + step <= this._max;
     }
 
     /** @hidden */
     private _calculateCanDecrement() {
         const step = this._getStepValue('decrease');
-        this.canDecrement = this._value - step >= this._min;
+        this.canDecrement = (this._value || 0) - step >= this._min;
     }
 
     /** @hidden */

@@ -2,18 +2,19 @@
     <div class="step-input-example">
         <label>Default Number Step Input</label>
         <br />
-        <fdp-number-step-input
-            [value]="value1"
-            (valueChange)="value1 = $event.payload"
-            name="number"
-        ></fdp-number-step-input>
-        <br />
-        <small>value: {{ value1 }}</small>
+        <fdp-number-step-input name="number"></fdp-number-step-input>
     </div>
     <div class="step-input-example">
         <label>Compact</label>
         <br />
-        <fdp-number-step-input [value]="0" name="compact" contentDensity="compact"></fdp-number-step-input>
+        <fdp-number-step-input
+            [value]="value1"
+            name="compact"
+            contentDensity="compact"
+            (valueChange)="value1 = $event.payload"
+        ></fdp-number-step-input>
+        <br />
+        <small>value: {{ value1 }}</small>
     </div>
     <div class="step-input-example">
         <label>Min Max limits</label>
