@@ -175,6 +175,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return abbreviate;
     }
 
+    /** @hidden */
     private _setImage(value: string): void {
         if (value) {
             this._image = 'url(' + value + ')';
