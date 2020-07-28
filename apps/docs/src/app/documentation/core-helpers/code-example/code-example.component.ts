@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     Component,
     ElementRef,
     HostListener,
@@ -13,8 +12,8 @@ import { CopyService } from '../../services/copy.service';
 import { ExampleFile } from './example-file';
 import { height } from '../../utilities/animations/collapse';
 import { AlertService } from '@fundamental-ngx/core';
-import hljs from 'highlight.js/lib';
 import { StackblitzService } from '../stackblitz/stackblitz.service';
+import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 
 @Component({
     selector: 'code-example',
@@ -23,8 +22,9 @@ import { StackblitzService } from '../stackblitz/stackblitz.service';
     encapsulation: ViewEncapsulation.None,
     animations: [height({ time: 200 })]
 })
-export class CodeExampleComponent implements OnInit, AfterViewInit {
-    @ViewChildren('code') codeElements: QueryList<ElementRef>;
+export class CodeExampleComponent implements OnInit {
+    @ViewChildren(CodeSnippetComponent)
+    codeElements: QueryList<ElementRef>;
 
     /**
      * List of files to display in this code example.
@@ -63,10 +63,5 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
     @HostListener('window:resize', ['$event'])
     onResize() {
         this.smallScreen = window.innerWidth <= 768;
-    }
-
-    ngAfterViewInit() {
-        /** Highlight.js init */
-        this.codeElements.forEach((element) => hljs.highlightBlock(element.nativeElement));
     }
 }

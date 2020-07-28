@@ -3,15 +3,11 @@ import {
     Component,
     EventEmitter,
     Input,
-    Optional,
     Output,
     ViewEncapsulation
 } from '@angular/core';
 import { PopoverFillMode } from '../../popover/popover-directive/popover.directive';
-import { RtlService } from '../../utils/services/rtl.service';
-import { Observable, of } from 'rxjs';
 import { Placement } from 'popper.js';
-import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-form-input-message-group',
@@ -44,6 +40,19 @@ export class FormInputMessageGroupComponent {
     @Input()
     fillControlMode: PopoverFillMode;
 
+    /** Whether the popover should have an arrow. */
+    @Input()
+    noArrow: boolean = true;
+
+    /** Whether the popover should close when the escape key is pressed. */
+    @Input()
+    closeOnEscapeKey: boolean = true;
+
+    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
+    @Input()
+    placement: Placement = 'bottom-start';
+
     /** Whether the message is open. Can be used through two-way binding. */
     @Input()
     isOpen: boolean = false;
@@ -52,24 +61,10 @@ export class FormInputMessageGroupComponent {
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
-    public placement$: Observable<Placement>;
-
-    constructor(@Optional() private _rtlService: RtlService) {
-        this._createRtlObservable();
-    }
-
     /**
      * Function is called every time message changes isOpen attribute
      */
     public openChanged(isOpen: boolean) {
         this.isOpenChange.emit(isOpen);
-    }
-
-    /** @hidden */
-    private _createRtlObservable(): void {
-        this.placement$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'bottom-end' : 'bottom-start')))
-            : of('bottom-start');
     }
 }

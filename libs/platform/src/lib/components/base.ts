@@ -1,4 +1,4 @@
-import { Input, ChangeDetectorRef } from '@angular/core';
+import { Input, ChangeDetectorRef, Directive } from '@angular/core';
 import { ContentDensity } from './form/form-control';
 
 let randomId = 0;
@@ -8,6 +8,7 @@ let randomId = 0;
  * this can be extended to reduce the code duplication across components.
  * @hidden for form related Base , see BaseInput.
  */
+@Directive()
 export abstract class BaseComponent {
     protected defaultId: string = `fdp-id-${randomId++}`;
     protected _disabled: boolean = false;

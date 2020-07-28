@@ -33,6 +33,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/dialog', name: 'Dialog' },
             { url: 'core/dropdown', name: 'Dropdown' },
             { url: 'core/icon', name: 'Icon' },
+            { url: 'core/form-message', name: 'Form Message' },
             { url: 'core/identifier', name: 'Identifier' },
             { url: 'core/image', name: 'Image' },
             { url: 'core/info-label', name: 'Info Label' },
@@ -78,6 +79,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
 
         this.utilities = [
             { url: 'core/file-input', name: 'File Input' },
+            { url: 'core/global-config', name: 'Global Configuration' },
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
             { url: 'core/popover-directive', name: 'Popover Helper' },
             { url: 'core/scroll-spy', name: 'Scroll Spy' }

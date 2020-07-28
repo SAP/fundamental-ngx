@@ -27,8 +27,4 @@ export class InputMessageGroupWithTemplate extends FormInputMessageGroupComponen
      */
     @ContentChild('triggerItem', { static: false })
     triggerItemTemplate: TemplateRef<any>;
-
-    constructor(@Optional() private _rtl: RtlService) {
-        super(_rtl);
-    }
 }

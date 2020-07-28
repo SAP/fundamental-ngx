@@ -1,6 +1,16 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ToolbarModule, ButtonModule, ToolbarSeparatorComponent } from '@fundamental-ngx/core';
+import {
+    ToolbarModule,
+    ButtonModule,
+    SegmentedButtonModule,
+    SplitButtonModule,
+    MenuModule,
+    SelectModule,
+    CheckboxModule,
+    FormModule,
+    DatetimePickerModule
+} from '@fundamental-ngx/core';
 
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { ToolbarDocsComponent } from './toolbar-docs.component';
@@ -37,7 +47,20 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ToolbarModule, ButtonModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationModule,
+        ToolbarModule,
+        ButtonModule,
+        SegmentedButtonModule,
+        SplitButtonModule,
+        SegmentedButtonModule,
+        MenuModule,
+        SelectModule,
+        CheckboxModule,
+        FormModule,
+        DatetimePickerModule
+    ],
     exports: [RouterModule],
     declarations: [ToolbarDocsComponent, ToolbarHeaderComponent, ...examples]
 })

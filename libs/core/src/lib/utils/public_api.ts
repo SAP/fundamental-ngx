@@ -7,6 +7,7 @@ export * from './directives/resize/resize.module';
 export * from './directives/carousel/carousel.module';
 export * from './directives/carousel/carousel.directive';
 export * from './directives/carousel/carousel-item.directive';
+export * from './directives/carousel/hammer.config';
 export * from './directives/initial-focus/initial-focus.directive';
 
 export * from './pipes/pipe.module';
@@ -40,3 +41,5 @@ export * from './functions/keyboard-unification';
 export * from './functions/uuidv4-generator';
 export * from './functions/get-string-from-hashmap';
 export * from './functions/key-util';
+
+export * from './base-class/mobile-mode.class';

@@ -15,6 +15,14 @@ import localeBulgarian from '@angular/common/locales/bg';
 import localeGb from '@angular/common/locales/en-GB';
 import localeDe from '@angular/common/locales/de';
 
+const placeholders = new Map([
+  ['en-gb', 'mm/dd/yyyy, hh:mm'],
+  ['fr', 'dd/mm/yyyy  hh:mm'],
+  ['bg', 'дд/мм/гг чч:мм'],
+  ['de', 'dd.mm.yy, hh:mm'],
+  ['pl', 'dd.mm.yyyy, hh:mm'],
+]);
+
 @Injectable()
 export class CustomI18nMomentCalendar extends CalendarI18n {
     getDayAriaLabel(date: Date): string {
@@ -63,11 +71,15 @@ export class DatetimePickerComplexI18nExampleComponent {
 
     actualMomentJsLang: string = '';
 
+    placeholder: string = 'mm/dd/yyyy, hh:mm am'
+
     public date: FdDatetime = FdDatetime.getToday();
 
     public refresh(): void {
         this.datetimePickerComponent.locale = this.actualLocale;
         this.datetimePickerComponent.format = this.actualFormat;
+        this.placeholder = placeholders.get(this.actualLocale);
+
         this.datetimePickerComponent.handleDateChange(this.date.date);
         this.calendarI18nService.i18nChange.next();
     }

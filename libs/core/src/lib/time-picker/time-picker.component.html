@@ -39,7 +39,7 @@
             [meridian]="meridian"
             [(ngModel)]="time"
             [keepTwoDigits]="keepTwoDigitsTime"
-            (ngModelChange)="timeFromTimeComponentChanged()"
+            (ngModelChange)="timeFromTimeComponentChanged($event)"
             [displayMinutes]="displayMinutes"
             [displaySeconds]="displaySeconds"
             [displayHours]="displayHours"

@@ -6,7 +6,7 @@ import {
     forwardRef,
     HostBinding,
     Input,
-    OnInit,
+    OnDestroy,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -17,6 +17,8 @@ import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { Placement } from 'popper.js';
+import { Subject, Subscription } from 'rxjs';
+import { delay, filter, first, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-time-picker',
@@ -35,13 +37,13 @@ import { Placement } from 'popper.js';
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => TimePickerComponent),
             multi: true
-        },
+        }
     ],
     styleUrls: ['./time-picker.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit, Validator {
+export class TimePickerComponent implements ControlValueAccessor, OnDestroy, AfterViewInit, Validator {
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
@@ -82,6 +84,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     /** @Input When set to false, hides the input for hours. */
     @Input()
     displayHours: boolean = true;
+
+    /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds. 
+     * Otherwise It can be set to a default value
+    */
+    @Input()
+    placeholder: string = this.getPlaceholder();
 
     /** Aria label for the time picker input. */
     @Input()
@@ -145,7 +153,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     isOpen: boolean;
 
     /** @hidden */
-    placeholder: string;
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     onChange: Function = () => {};
@@ -156,13 +164,14 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     constructor(private _cd: ChangeDetectorRef, private _timeAdapter: TimeFormatParser) {}
 
     /** @hidden */
-    ngOnInit(): void {
-        this.placeholder = this.getPlaceholder();
+    ngAfterViewInit(): void {
+        this.child.changeActive(null);
     }
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this.child.changeActive(null);
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**
@@ -204,7 +213,16 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     handleIsOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
         if (isOpen) {
-            this.child.changeActive('hour');
+            this.popover.directiveRef.loaded
+                .pipe(
+                    filter(() => !this.child.activeView),
+                    first(),
+                    takeUntil(this._onDestroy$),
+                    delay(0)
+                )
+                .subscribe(() => {
+                    this.child.changeActive('hour');
+                });
         }
     }
 
@@ -268,10 +286,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     }
 
     /** @hidden */
-    timeFromTimeComponentChanged(): void {
-        this._cd.detectChanges();
-        this.onChange(this.time);
+    timeFromTimeComponentChanged(time: TimeObject): void {
+        Object.keys(time).forEach(key => time[key] = time[key] ? time[key] : 0);
+        this.time = time;
+        this.onChange(time);
         this.isInvalidTimeInput = false;
+        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -293,9 +313,14 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     /** @hidden */
     writeValue(time: TimeObject): void {
         if (!time) {
-            return;
+            this.time = { hour: null, minute: null, second: null };
+            if (!this.allowNull) {
+                this.isInvalidTimeInput = true;
+            }
+        } else {
+            this.isInvalidTimeInput = false;
+            this.time = time;
         }
-        this.time = time;
         this._cd.markForCheck();
     }
 }

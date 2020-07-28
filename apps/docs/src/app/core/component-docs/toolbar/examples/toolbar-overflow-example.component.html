@@ -1,32 +1,51 @@
 <fd-toolbar [shouldOverflow]="true">
-    <button fd-toolbar-item fd-button [compact]="true">Button1</button>
-    <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
-    <button fd-toolbar-item fd-button [compact]="true">Button2</button>
-    <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
-    <button fd-toolbar-item fd-button [compact]="true">Button3</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button4</button>
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
 
-    <fd-toolbar-spacer fd-toolbar-item></fd-toolbar-spacer>
+    <fd-datetime-picker fd-toolbar-item [compact]="true"></fd-datetime-picker>
 
-    <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
+    <fd-select fd-toolbar-item [compact]="true" placeholder="Select an option" [closeOnOutsideClick]="false">
+        <fd-option *ngFor="let option of ['Apple', 'Pineapple', 'Tomato', 'Strawberry']" [value]="option">{{
+            option
+        }}</fd-option>
+    </fd-select>
 
-    <button fd-toolbar-item fd-button [compact]="true">Button5</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button6</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button7</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button8</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button9</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button10</button>
-    <fd-toolbar-spacer fd-toolbar-item></fd-toolbar-spacer>
-    <button fd-toolbar-item fd-button [compact]="true">Button11</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button12</button>
-    <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
-    <button fd-toolbar-item fd-button [compact]="true">Button13</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button14</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button15</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button16</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button17</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button18</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button19</button>
-    <button fd-toolbar-item fd-button [compact]="true">Button20</button>
-    <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
+
+    <fd-checkbox fd-toolbar-item label="Option 1" [tristate]="true"> </fd-checkbox>
+
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
+
+    <fd-split-button fd-toolbar-item [compact]="true">
+        <ng-template fd-split-button-action-title>
+            Action
+        </ng-template>
+    </fd-split-button>
+
+    <label fd-toolbar-item fd-toolbar-label fd-form-label for="input-1">Default Input</label>
+    <input
+        [compact]="true"
+        fd-toolbar-item
+        fd-form-control
+        type="text"
+        id="input-1"
+        placeholder="Field placeholder text"
+        style="max-width: 200px;"
+    />
+
+    <button fd-toolbar-item fd-button [fdMenu]="true" [compact]="true">Button</button>
+
+    <fd-segmented-button fd-toolbar-item>
+        <button fd-button [compact]="true">Left</button>
+        <button fd-button [compact]="true">Middle</button>
+        <button fd-button [compact]="true">Right</button>
+    </fd-segmented-button>
+
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
+    <fd-toolbar-spacer fd-toolbar-item [fixed]="true" [width]="'200px'"></fd-toolbar-spacer>
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
+    <button fd-toolbar-item fd-button [compact]="true">Button</button>
 </fd-toolbar>

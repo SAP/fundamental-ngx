@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnItemOutput } from './time-column/time-column.component';
-import { KeyUtil } from '../..';
+import { KeyUtil } from '../utils/functions/key-util';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
