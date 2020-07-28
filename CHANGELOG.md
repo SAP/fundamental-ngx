@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.34...v0.20.1-rc.35) (2020-07-28)
+
+
+### Bug Fixes
+
+* Remove circular dependency from library ([#2919](https://github.com/SAP/fundamental-ngx/issues/2919)) ([5aa9754](https://github.com/SAP/fundamental-ngx/commit/5aa9754ca37569658d07e67192e53f268fbc11e7))
+
 ### [0.20.1-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.33...v0.20.1-rc.34) (2020-07-28)
 
 ### [0.20.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.32...v0.20.1-rc.33) (2020-07-27)
