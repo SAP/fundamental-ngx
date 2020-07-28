@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CarouselConfig, CarouselDirective } from './carousel.directive';
 import { CarouselItemDirective } from './carousel-item.directive';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { HammerConfig } from './carousel.module';
+import { HammerConfig } from './hammer.config';
 import { CommonModule } from '@angular/common';
 
 
@@ -43,7 +43,7 @@ class VerticalCarouselComponent {
         </div>
     `,
     styles: [
-        `            
+        `
             .element {
                 width: 30px;
                 min-width: 30px;
