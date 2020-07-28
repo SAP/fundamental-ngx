@@ -246,7 +246,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             event.preventDefault();
         }
         this.newFocusedDayIndex = null;
-        if (!day.disabled) {
+        if (!day.disabled && !day.blocked) {
             if (this.calType === 'single') {
                 /** Remove selections from other day and put selection to chosen day */
                 this.calendarDayList.forEach((_day) => (_day.selected = false));
@@ -671,7 +671,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     /** Change selection flag on days to false, besides the selected one */
     private _changeSelectedSingleDay(day: CalendarDay, calendar: CalendarDay[]): void {
         calendar.forEach((_day) => (_day.selected = false));
-        if (day) {
+        if (day && !day.blocked && !day.disabled) {
             day.selected = true;
         }
         this.refreshTabIndex(calendar);
@@ -696,14 +696,14 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             if (dates.start) {
                 /** Find start date and mark it as selected */
                 startDay = calendarList.find((_day) => CalendarService.datesEqual(_day.date, dates.start));
-                if (startDay) {
+                if (startDay && !startDay.blocked && !startDay.disabled) {
                     startDay.selected = true;
                 }
             }
             if (dates.end) {
                 /** Find end date and mark it as selected */
                 endDay = calendarList.find((_day) => CalendarService.datesEqual(_day.date, dates.end));
-                if (endDay) {
+                if (endDay && !endDay.blocked && !endDay.disabled) {
                     endDay.selected = true;
                 }
             }
