@@ -4,16 +4,6 @@ type KpiStatus = 'negative' | 'critical' | 'positive' | 'informative' | '';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-tile-launch]'
-})
-export class TileLaunchDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile--launch')
-    baseClass: boolean = true;
-}
-
-@Directive({
-    // tslint:disable-next-line:directive-selector
     selector: '[fd-numeric-content]'
 })
 export class NumericContentDirective {
@@ -91,11 +81,15 @@ export class NumericContentKpiContainerDirective {
 export class NumericContentKpiDirective implements OnInit, OnChanges {
     /** State of the KPI. Options are 'neutral' (default), 'positive', 'negative', 'critical', and 'informative'. */
     @Input()
-    state: KpiStatus = '';
+    status: KpiStatus = '';
 
     /** Apply user custom styles */
     @Input()
     class: string;
+
+    /** Glyph */
+    @Input()
+    glyph: string;
 
     constructor(private _elementRef: ElementRef) {}
 
@@ -115,7 +109,7 @@ export class NumericContentKpiDirective implements OnInit, OnChanges {
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return ['fd-numeric-content__kpi', this.state ? 'fd-numeric-content__kpi--' + this.state : '', this.class]
+        return ['fd-numeric-content__kpi', this.status ? 'fd-numeric-content__kpi--' + this.status : '', this.class]
             .filter((x) => x !== '')
             .join(' ');
     }

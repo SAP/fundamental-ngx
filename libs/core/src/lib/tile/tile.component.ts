@@ -1,6 +1,8 @@
 import { Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
+type TileType = '' | 'kpi' | 'launch';
+
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-tile]',
@@ -20,6 +22,10 @@ export class TileComponent implements CssClassBuilder, OnInit, OnChanges {
     /** Optional 'double' modifier to double the tile width. */
     @Input()
     double: boolean = false;
+
+    /** Type of tile.  Options are 'kpi' or 'launch', or leave blank for default. */
+    @Input()
+    type: TileType = '';
 
     /** Option 'launch' modifier
 
@@ -46,6 +52,7 @@ export class TileComponent implements CssClassBuilder, OnInit, OnChanges {
             'fd-tile',
             this.small ? 'fd-tile--s' : '',
             this.double ? 'fd-tile--double' : '',
+            this.type ? 'fd-tile--' + this.type : '',
             this.class
         ]
             .filter((x) => x !== '')

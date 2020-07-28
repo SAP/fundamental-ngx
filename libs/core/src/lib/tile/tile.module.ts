@@ -12,18 +12,20 @@ import {
     TileRefreshDirective,
     TileFooterTextDirective,
     TileHeaderContentDirective,
-    TileProfileImgDirective
+    TileProfileImgDirective,
+    TileLogoDirective
 } from './directives/tile.directives';
 import {
     NumericContentDirective,
     NumericContentKpiContainerDirective,
     NumericContentKpiDirective,
     NumericContentLaunchIconContainerDirective,
-    NumericContentLaunchIconDirective, NumericContentScaleArrowDirective,
+    NumericContentLaunchIconDirective,
+    NumericContentScaleArrowDirective,
     NumericContentScaleContainerDirective,
     NumericContentScaleDirective,
-    NumericContentScaleTextDirective, NumericContentSmallTileDirective,
-    TileLaunchDirective
+    NumericContentScaleTextDirective,
+    NumericContentSmallTileDirective
 } from './directives/numeric-content.directives';
 
 @NgModule({
@@ -36,11 +38,11 @@ import {
         TileTitleDirective,
         TileSubtitleDirective,
         TileSectionDirective,
-        TileLaunchDirective,
         TileRefreshDirective,
         TileFooterTextDirective,
         TileHeaderContentDirective,
         TileProfileImgDirective,
+        TileLogoDirective,
         NumericContentDirective,
         NumericContentKpiContainerDirective,
         NumericContentKpiDirective,
@@ -60,11 +62,11 @@ import {
         TileTitleDirective,
         TileSubtitleDirective,
         TileSectionDirective,
-        TileLaunchDirective,
         TileRefreshDirective,
         TileFooterTextDirective,
         TileHeaderContentDirective,
         TileProfileImgDirective,
+        TileLogoDirective,
         NumericContentDirective,
         NumericContentScaleArrowDirective,
         NumericContentKpiContainerDirective,

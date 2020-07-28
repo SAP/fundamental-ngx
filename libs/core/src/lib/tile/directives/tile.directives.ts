@@ -129,6 +129,8 @@ export class TileRefreshDirective implements OnInit, OnChanges {
     }
 }
 
+let profileTileUniqueId: number = 0;
+
 @Directive({
     selector: '[fdTileProfileImg], [fd-tile-profile-img]',
     host: {
@@ -138,6 +140,40 @@ export class TileRefreshDirective implements OnInit, OnChanges {
 export class TileProfileImgDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__profile-img')
-    fdTileTitleClass: boolean = true;
+    fdTileProfileImgClass: boolean = true;
+
+    /** Id of the tile. */
+    @Input()
+    @HostBinding('attr.id')
+    id: string = `fd-profileTile-${profileTileUniqueId++}`;
+
+    /** Aria-label for tile. */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel: string = null;
+
+    /** Aria-Labelledby for element describing tile. */
+    @Input()
+    @HostBinding('attr.aria-labelledby')
+    ariaLabelledby: string = null;
+
+    /** Background image url. */
+    @Input()
+    backgroundImage: string = null;
+
+    /** @hidden */
+    @HostBinding('style.background-image')
+    get image(): string {
+        return 'url(' + this.backgroundImage + ')';
+    }
+}
+
+@Directive({
+    selector: '[fdTileLogo], [fd-tile-logo]'
+})
+export class TileLogoDirective {
+    /** @hidden */
+    @HostBinding('class.fd-tile__logo')
+    baseClass: boolean = true;
 }
 
