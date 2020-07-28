@@ -10,16 +10,16 @@ import {
     forwardRef,
     ContentChildren,
     QueryList,
-    HostListener,
     ChangeDetectorRef,
     Renderer2,
     Input,
     OnDestroy
 } from '@angular/core';
-import { ToolbarItemDirective } from './public_api';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { ToolbarItemDirective } from './toolbar-item.directive';
+import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 import { Observable, of, fromEvent } from 'rxjs';
-import { delay, tap, debounce, debounceTime, filter, takeWhile, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { delay, tap, debounceTime, takeWhile, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
