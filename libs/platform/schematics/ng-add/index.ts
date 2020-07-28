@@ -6,7 +6,8 @@ import {
     writeToAngularConfig,
     createExtractionFiles,
     replaceLibPaths,
-    addLocalizeLib
+    addLocalizeLib,
+    callLocalizeSchematic
 } from '../utils/translation-utils';
 
 /**
@@ -25,9 +26,10 @@ export function ngAdd(_options: any): Rule {
     return (_tree: Tree, _context: SchematicContext) => {
         return chain([
             addCoreLib(_options),
-            _options.installations ? callCoreSchematic(_options) : noop(),
-            _options.installations ? addLocalizeLib(_options) : noop(),
+            addLocalizeLib(_options),
             readTranslationFiles(_options),
+            _options.installations ? callCoreSchematic(_options) : noop(),
+            _options.installations ? callLocalizeSchematic(_options) : noop(),
             endInstallTask()
         ]);
     };
@@ -49,6 +51,7 @@ export function callCoreSchematic(options: any): Rule {
         // Chain won't work here since we need the externals to be actually installed before we call their schemas
         // This ensures the externals are a dependency of the node install, so they exist when their schemas run.
         context.addTask(new RunSchematicTask('addCoreSchematic', options), [installTaskId]);
+        return _tree;
     };
 }
 
@@ -80,13 +83,6 @@ function addCoreLib(_options: any): Rule {
             });
         }
 
-        if (!hasPackage(tree, '@fundamental-ngx/platform')) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                version: `latest`,
-                name: '@fundamental-ngx/platform'
-            });
-        }
         dependencies.forEach((dependency) => {
             addPackageJsonDependency(tree, dependency);
             console.log(`✅️ Added ${dependency.name} to ${dependency.type} to your application`);

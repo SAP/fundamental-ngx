@@ -1,6 +1,12 @@
 import { Tree } from '@angular-devkit/schematics/src/tree/interface';
 
-import { getSourceTreePath, getDistPath, getPackageVersionFromPackageJson, hasPackage } from './package-utils';
+import {
+    getSourceTreePath,
+    getDistPath,
+    hasPackage,
+    getWorkspaceProject,
+    getPackageVersionFromPackageJson
+} from './package-utils';
 import { SchematicContext, Rule, externalSchematic, chain } from '@angular-devkit/schematics';
 import { NodeDependency, addPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
@@ -12,7 +18,18 @@ import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schema
 export function addLocalizeLib(_options: any): Rule {
     return (tree: Tree, context: SchematicContext) => {
         if (_options.translations) {
-            const ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
+            context.logger.info('***** Adding @angular/localize to your application *****');
+            let ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
+            const tempVersion = ngCoreVersionTag ? ngCoreVersionTag : '9.0.0';
+            let majorVersionString = tempVersion.split('.')[0];
+            if (majorVersionString.startsWith('~') || majorVersionString.startsWith('^')) {
+                majorVersionString = majorVersionString.slice(1, majorVersionString.length);
+            }
+            const majorVersion: number = parseInt(majorVersionString, 10);
+            // placing the first version of localize lib, ideally host app should be upgrading to version > 9.
+            if (majorVersion < 9) {
+                ngCoreVersionTag = '9.0.0';
+            }
             let dependency: NodeDependency;
             if (!hasPackage(tree, '@angular/localize')) {
                 dependency = {
@@ -22,20 +39,34 @@ export function addLocalizeLib(_options: any): Rule {
                 };
                 addPackageJsonDependency(tree, dependency);
                 console.log(`✅️ Added ${dependency.name} to ${dependency.type} to your application`);
-
-                context.logger.info('Adding localize schematic to tasks');
-                const installTaskId = context.addTask(
-                    new NodePackageInstallTask({
-                        packageName: '@angular/localize'
-                    })
-                );
-
-                // Calling only chain won't work here since we need the external lib to be actually installed before we call their schemas
-                // This ensures the external lib is a dependency of the node install, so they exist when their schemas run.
-                context.addTask(new RunSchematicTask('addLocalizeSchematic', _options), [installTaskId]);
             }
         }
         return tree;
+    };
+}
+
+/**
+ * installs `@angular/localize` lib and makes call to the localize schematic
+ * @param options options passed for this schematic
+ */
+export function callLocalizeSchematic(_options: any): Rule {
+    return (_tree: Tree, context: SchematicContext) => {
+        context.logger.info('Adding localize schematic to tasks');
+        const installTaskId = context.addTask(
+            new NodePackageInstallTask({
+                packageName: '@angular/localize'
+            })
+        );
+
+        // check if project name is available
+        if (!_options.project) {
+            _options.name = getWorkspaceProject(_tree, _options);
+        }
+
+        // Calling only chain won't work here since we need the external lib to be actually installed before we call their schemas.
+        // This ensures the external lib is a dependency of the node install, so they exist when their schemas run.
+        context.addTask(new RunSchematicTask('addLocalizeSchematic', _options), [installTaskId]);
+        return _tree;
     };
 }
 
