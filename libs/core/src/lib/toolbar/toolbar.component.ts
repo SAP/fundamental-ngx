@@ -141,7 +141,12 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     ngAfterViewInit() {
         if (this.shouldOverflow) {
-            this._collapseItems();
+            of(true)
+                .pipe(
+                    delay(5),
+                    takeWhile(() => this._alive)
+                )
+                .subscribe(() => this._collapseItems());
         }
 
         this.buildComponentCssClass();
@@ -180,6 +185,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     private _onResize(): Observable<boolean> {
         return of(true).pipe(
+            takeWhile(() => this._alive),
             tap(() => this._reset()),
             delay(5),
             tap(() => this._collapseItems())
