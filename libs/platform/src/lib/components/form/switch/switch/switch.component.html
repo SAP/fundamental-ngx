@@ -1,12 +1,9 @@
 <label class="fd-switch__label">
     <span
         class="fd-switch"
-        [ngClass]="{
-            'fd-switch--no-text': !semantic,
-            'fd-switch--compact': isCompact,
-            'fd-switch--semantic': semantic,
-            'is-disabled': disabled
-        }"
+        [className]="'fd-switch--' + (semantic ? 'semantic' : 'no-text')"
+        [class.fd-switch--compact]="isCompact"
+        [class.is-disabled]="disabled"
     >
         <input
             class="fd-switch__input"

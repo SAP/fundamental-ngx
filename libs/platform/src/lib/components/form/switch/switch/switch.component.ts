@@ -7,7 +7,8 @@ import {
     NgZone,
     Optional,
     Output,
-    Self
+    Self,
+    ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
@@ -28,16 +29,17 @@ export class SwitchChangeEvent {
     templateUrl: './switch.component.html',
     styleUrls: ['./switch.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: SwitchComponent, multi: true }]
 })
 export class SwitchComponent extends BaseInput {
     /** aria-label attribute of the inner input element. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel = 'Switch input';
 
     /** aria-labelledby attribute of the inner input element. */
     @Input()
-    ariaLabelledby: string = null;
+    ariaLabelledby: string | null = null;
 
     /**
      * content Density of element. 'cozy' | 'compact'
