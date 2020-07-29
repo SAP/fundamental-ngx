@@ -1,13 +1,7 @@
 <label fd-form-label>Languages</label>
-<fd-segmented-button id="language" style="margin-bottom: 20px;">
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('en-gb')" [state]="isSelected('en-gb')">
-        English
-    </button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('fr')" [state]="isSelected('fr')">French</button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('de')" [state]="isSelected('de')">German</button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('bg')" [state]="isSelected('bg')">Bulgarian</button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('pl')" [state]="isSelected('pl')">Polish</button>
-</fd-segmented-button>
+<fd-select (valueChange)="setLocale($event)" placeholder="Select an option" [(value)]="selectedLocale">
+  <fd-option *ngFor="let option of ['en-ca','fr','de','bg','pl']" [value]="option">{{ option }}</fd-option>
+</fd-select>
 
 <br />
 <fieldset fd-fieldset>

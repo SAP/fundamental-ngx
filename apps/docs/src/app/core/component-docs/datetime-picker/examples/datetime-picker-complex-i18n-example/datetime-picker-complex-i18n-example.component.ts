@@ -12,11 +12,11 @@ import { registerLocaleData } from '@angular/common';
 import localeFrench from '@angular/common/locales/fr';
 import localePolish from '@angular/common/locales/pl';
 import localeBulgarian from '@angular/common/locales/bg';
-import localeGb from '@angular/common/locales/en-GB';
+import localeCa from '@angular/common/locales/en-CA';
 import localeDe from '@angular/common/locales/de';
 
 const placeholders = new Map([
-  ['en-gb', 'mm/dd/yyyy, hh:mm a'],
+  ['en-ca', 'mm/dd/yyyy, hh:mm a'],
   ['fr', 'dd/mm/yyyy  hh:mm'],
   ['bg', 'дд/мм/гг чч:мм'],
   ['de', 'dd.mm.yy, hh:mm'],
@@ -60,16 +60,18 @@ export class DatetimePickerComplexI18nExampleComponent {
         registerLocaleData(localeFrench, 'fr');
         registerLocaleData(localePolish, 'pl');
         registerLocaleData(localeBulgarian, 'bg');
-        registerLocaleData(localeGb, 'en-gb');
+        registerLocaleData(localeCa, 'en-ca');
         registerLocaleData(localeDe, 'de');
-        moment.locale('en-gb');
+        moment.locale('en-ca');
     }
 
-    meridian: boolean = false;
+    meridian: boolean = true;
 
     actualLocale: string = '';
 
-    actualFormat = 'short';
+    selectedLocale: string = 'en-ca';
+
+    actualFormat: string = 'mm/dd/yyyy, hh:mm a';
 
     actualMomentJsLang = '';
 
