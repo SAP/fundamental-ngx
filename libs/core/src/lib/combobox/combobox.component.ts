@@ -70,8 +70,8 @@ import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.compo
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComboboxComponent implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
-
+export class ComboboxComponent
+    implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
     /** Values to be filtered in the search input. */
     @Input()
     dropdownValues: any[] = [];
@@ -241,9 +241,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     ];
 
     /** Keys, that will close popover's body, when dispatched on search input */
-    readonly closingKeys: string[] = [
-        'Escape'
-    ];
+    readonly closingKeys: string[] = ['Escape'];
 
     /** Whether the combobox is opened. */
     open: boolean = false;
@@ -267,12 +265,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: any = () => {
-    };
+    onChange: any = () => {};
 
     /** @hidden */
-    onTouched: any = () => {
-    };
+    onTouched: any = () => {};
 
     /** @hidden */
     constructor(
@@ -280,8 +276,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         private _menuKeyboardService: MenuKeyboardService,
         private _cdRef: ChangeDetectorRef,
         private _dynamicComponentService: DynamicComponentService
-    ) {
-    }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -335,26 +330,25 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         } else if (KeyUtil.isKey(event, this.closingKeys)) {
             this.isOpenChangeHandle(false);
             event.stopPropagation();
-        } else if (this.openOnKeyboardEvent &&
-            !event.ctrlKey &&
-            !KeyUtil.isKey(event, this.nonOpeningKeys)) {
+        } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKey(event, this.nonOpeningKeys)) {
             this.isOpenChangeHandle(true);
         }
     }
 
     /** @hidden */
     onListKeydownHandler(event: KeyboardEvent): void {
-        const index: number = this.listItems.toArray().findIndex(
-            item => item.itemEl.nativeElement === document.activeElement
-        );
+        const index: number = this.listItems
+            .toArray()
+            .findIndex((item) => item.itemEl.nativeElement === document.activeElement);
         this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
     }
 
     /** @hidden */
     onMenuClickHandler(value: any): void {
         if (value) {
-            const index: number = this.dropdownValues.findIndex(_value => _value === value);
+            const index: number = this.dropdownValues.findIndex((_value) => _value === value);
             this._handleClickActions(value);
+            this.highlighting = false;
             this.itemClicked.emit({ item: value, index: index });
         }
     }
@@ -479,7 +473,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
         const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue);
-        const index: number = this.dropdownValues.findIndex(value => value === activeValue);
+        const index: number = this.dropdownValues.findIndex((value) => value === activeValue);
         if (this.dropdownValues[index + offset]) {
             this.onMenuClickHandler(this.dropdownValues[index + offset]);
         }
@@ -496,8 +490,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((index) => this.onMenuClickHandler(index));
         this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this._menuKeyboardService.focusEscapeAfterList = () => {
-        };
+        this._menuKeyboardService.focusEscapeAfterList = () => {};
     }
 
     /** @hidden */
@@ -517,6 +510,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     private _defaultFilter(contentArray: any[], searchTerm: any): any[] {
+        this.highlighting = true;
         if (typeof searchTerm === 'string') {
             const searchLower = searchTerm.toLocaleLowerCase();
             return contentArray.filter((item) => {
@@ -532,7 +526,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             });
         }
     }
-
 
     /** @hidden*/
     private _popoverOpenHandle(): void {
@@ -585,7 +578,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             this.displayedValues = this.dropdownValues;
         }
     }
-
 
     /** @hidden */
     private _hasDisplayedValues(): boolean {
