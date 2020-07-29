@@ -9,8 +9,8 @@ export class PlatformCompactChekboxExampleComponent {
     customForm = new FormGroup({});
     data: DataObject = new DataObject(false, true);
 
-    yellow: boolean = false;
-    white: boolean = true;
+    yellow = false;
+    white = true;
     violet: boolean;
 
     public checkedChangeFunction(event: any): void {}

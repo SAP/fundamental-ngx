@@ -48,7 +48,7 @@ export class RadioButtonComponent extends BaseInput {
      * used for radio button creation if list value present
      */
     @Input()
-    forceRender: boolean = false;
+    forceRender = false;
 
     /** click event to emit */
     @Output()

@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
     templateUrl: './radio-example.component.html'
 })
 export class RadioExamplesComponent {
-    optionVariable: string = 'val1';
-    optionTwoVariable: string = 'val2';
-    optionThreeVariable: string = 'val1';
-    optionFourVariable: string = 'val1';
-    optionFiveVariable: string = 'val1';
-    optionSixVariable: string = 'val1';
+    optionVariable = 'val1';
+    optionTwoVariable = 'val2';
+    optionThreeVariable = 'val1';
+    optionFourVariable = 'val1';
+    optionFiveVariable = 'val1';
+    optionSixVariable = 'val1';
 }

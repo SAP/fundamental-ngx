@@ -25,7 +25,7 @@ const localized_values = {
 @Injectable()
 export class CustomCalendarI18n extends CalendarI18n {
     // You could also define a custom service and inject it here
-    language: string = 'fr';
+    language = 'fr';
 
     getDayAriaLabel(date: Date): string {
         return (
@@ -52,17 +52,17 @@ export class CustomCalendarI18n extends CalendarI18n {
 // Aria labels i18n
 @Injectable()
 export class CustomI18nLabels extends CalendarI18nLabels {
-    yearSelectionLabel: string = 'Sélection de l\'année';
+    yearSelectionLabel = 'Sélection de l\'année';
 
-    previousYearLabel: string = 'Année précédente';
+    previousYearLabel = 'Année précédente';
 
-    nextYearLabel: string = 'Année suivante';
+    nextYearLabel = 'Année suivante';
 
-    monthSelectionLabel: string = 'Sélection du mois';
+    monthSelectionLabel = 'Sélection du mois';
 
-    previousMonthLabel: string = 'Mois précédent';
+    previousMonthLabel = 'Mois précédent';
 
-    nextMonthLabel: string = 'Mois suivant';
+    nextMonthLabel = 'Mois suivant';
 }
 
 @Component({

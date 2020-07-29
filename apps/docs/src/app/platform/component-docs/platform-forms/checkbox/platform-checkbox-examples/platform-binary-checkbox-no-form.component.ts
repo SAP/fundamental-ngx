@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
     templateUrl: 'platform-binary-checkbox-no-form.component.html'
 })
 export class PlatformChekboxNoFormComponent {
-    orion: boolean = true;
-    cygnus: boolean = false;
-    lyra: boolean = true;
-    gemini: boolean = false;
+    orion = true;
+    cygnus = false;
+    lyra = true;
+    gemini = false;
 
     public checkedChangeFunction(event: any): void {}
 

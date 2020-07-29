@@ -48,8 +48,8 @@ const VALID_INPUT_TYPES = ['standard', 'emphasized'];
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LinkComponent extends BaseComponent implements OnInit, AfterViewInit {
-    emphasized: boolean = false;
-    isfocused: boolean = false;
+    emphasized = false;
+    isfocused = false;
 
     /** Access child element, for checking link content*/
     @ViewChild('link', { read: ElementRef })
@@ -77,7 +77,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
      * sets type to Native anchor.
      */
     @Input()
-    type?: string = 'text';
+    type = 'text';
 
     /**
      * sets inverted property.
@@ -128,7 +128,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     @Output()
     click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
-    private _inverted: boolean = false;
+    private _inverted = false;
 
     constructor(protected _cd: ChangeDetectorRef) {
         super(_cd);

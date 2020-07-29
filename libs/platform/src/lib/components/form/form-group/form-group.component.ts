@@ -129,13 +129,13 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
     name: string;
 
     @Input()
-    editable: boolean = true;
+    editable = true;
 
     @Input()
-    noLabelLayout: boolean = false;
+    noLabelLayout = false;
 
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     @Input()
     labelLayout: 'horizontal' | 'vertical' = 'vertical';
@@ -219,8 +219,8 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
     @ContentChildren(FormFieldComponent, { descendants: true })
     _fieldChildren: QueryList<FormFieldComponent>;
 
-    private _useForm: boolean = false;
-    private _multiLayout: boolean = false;
+    private _useForm = false;
+    private _multiLayout = false;
     private _hintPlacement: 'left' | 'right' = 'right';
 
     protected _destroyed = new Subject<void>();

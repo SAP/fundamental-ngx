@@ -34,7 +34,7 @@ export class DatePickerRangeDisabledExampleComponent {
 
     /** Get date for next 14 days. */
     private _getFutureDate(fdDate: FdDate): FdDate {
-        const amountOfDaysInFuture: number = 14;
+        const amountOfDaysInFuture = 14;
         for (let i = 0; i < amountOfDaysInFuture; i++) {
             fdDate = fdDate.nextDay();
         }

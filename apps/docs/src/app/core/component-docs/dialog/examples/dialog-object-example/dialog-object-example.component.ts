@@ -15,7 +15,7 @@ export class DialogObjectExampleComponent {
     @ViewChild('dialogSubHeader', { read: TemplateRef })
     dialogSubHeader: TemplateRef<any>;
 
-    closeReason: string = '';
+    closeReason = '';
 
     private _dialogReference: DialogRef;
 

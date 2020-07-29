@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
 })
 export class FormMessageExampleComponent {
 
-    open: boolean = false;
+    open = false;
 
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
 }

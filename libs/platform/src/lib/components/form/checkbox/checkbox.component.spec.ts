@@ -391,8 +391,8 @@ class TestCheckboxComponentTemplateDriven {
 
     example1: string[] = ['checkbox0'];
     example2: string[] = ['Checkbox1', 'Checkbox2'];
-    example3: string = 'Yes';
-    example4: boolean = true;
+    example3 = 'Yes';
+    example4 = true;
 }
 
 describe('Checkbox test Component with Template driven form', () => {

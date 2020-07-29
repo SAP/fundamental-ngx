@@ -35,7 +35,7 @@ export class DialogComplexExampleComponent {
 
     dialogRef: DialogRef;
 
-    searchedPhrase: string = '';
+    searchedPhrase = '';
 
     constructor(public _dialogService: DialogService) {}
 
