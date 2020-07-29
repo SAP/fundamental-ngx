@@ -6,7 +6,7 @@ import { API_FILES } from '../../api-files';
 import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
 import { TileDocsComponent } from './tile-docs.component';
 import { TileGenericExampleComponent } from './examples/tile-generic-example.component';
-import { IdentifierModule, TileModule } from '@fundamental-ngx/core';
+import { IdentifierModule, TileModule, BadgeModule, ButtonModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -24,7 +24,9 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         IdentifierModule,
-        TileModule
+        TileModule,
+        BadgeModule,
+        ButtonModule
     ],
     exports: [RouterModule],
     declarations: [

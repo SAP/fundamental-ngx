@@ -8,7 +8,7 @@
 
 <br/>
 
-<fd-tile [small]="true">
+<fd-tile [size]="'s'">
     <div fd-tile-header></div>
     <div fd-tile-content></div>
     <div fd-tile-footer></div>
@@ -24,7 +24,7 @@
 
 <br/>
 
-<fd-tile [small]="true" [double]="true">
+<fd-tile [size]="'s'" [double]="true">
     <div fd-tile-header></div>
     <div fd-tile-content></div>
     <div fd-tile-footer></div>
@@ -66,7 +66,7 @@
 
 <br/>
 
-<fd-tile [small]="true">
+<fd-tile [size]="'s'">
     <div fd-tile-header [twoColumn]="true">
         <div fd-tile-section style="background-color: #C0E0FA"></div>
         <div fd-tile-section style="background-color: #C0E0FA"></div>
@@ -83,7 +83,7 @@
 
 <br/>
 
-<fd-tile [double]="true" [small]="true">
+<fd-tile [double]="true" [size]="'s'">
     <div fd-tile-header [twoColumn]="true">
         <div fd-tile-section style="background-color: #C0E0FA"></div>
         <div fd-tile-section style="background-color: #C0E0FA"></div>
@@ -140,7 +140,7 @@
 
 <br/>
 
-<fd-tile [type]="'launch'" [small]="true">
+<fd-tile [type]="'launch'" [size]="'s'">
     <div fd-tile-header>
         <div fd-tile-title>
             Launch Tile Title Text
@@ -184,7 +184,7 @@
 
 <br/>
 
-<fd-tile [type]="'launch'" [small]="true">
+<fd-tile [type]="'launch'" [size]="'s'">
     <div fd-tile-header-content>
         <div fd-tile-title>Launch Tile Title Text Lorem ipsum dolor sit amet, consectetur elit</div>
         <div fd-tile-subtitle>Subtitle Text</div>
@@ -217,7 +217,7 @@
 
 <br/>
 
-<fd-tile [type]="'launch'" [small]="true">
+<fd-tile [type]="'launch'" [size]="'s'">
     <div fd-tile-header>
         <div fd-tile-title>Launch Tile (Profile) Title Text</div>
         <div fd-tile-subtitle>Launch Title Subtitle</div>
@@ -247,7 +247,7 @@
 
 <br/>
 
-<fd-tile [type]="'launch'" [small]="true">
+<fd-tile [type]="'launch'" [size]="'s'">
     <div fd-tile-header>
         <div fd-tile-title>Launch Tile (Logo) Title Text</div>
         <div fd-tile-subtitle>Launch Title Subtitle</div>
@@ -302,7 +302,7 @@
 
 <br/>
 
-<fd-tile [type]="'kpi'" [small]="true">
+<fd-tile [type]="'kpi'" [size]="'s'">
     <div fd-tile-header>
         <div fd-tile-title>
             Kpi Tile Title Text
@@ -381,7 +381,7 @@
 
 <br/>
 
-<fd-tile [type]="'kpi'" [small]="true">
+<fd-tile [type]="'kpi'" [size]="'s'">
     <div fd-tile-header>
         <div fd-tile-title>
             Kpi Tile Title Text
@@ -460,7 +460,7 @@
 
 <br/>
 
-<fd-tile [type]="'kpi'" [small]="true">
+<fd-tile [type]="'kpi'" [size]="'s'">
     <div fd-tile-header>
         <div fd-tile-title>
             Kpi Tile Title Text
@@ -495,3 +495,190 @@
         </div>
     </div>
 </fd-tile>
+
+<br/><br/>
+
+<h1>Feed tile</h1>
+
+<br/>
+
+<fd-tile [double]="true" [type]="'feed'">
+    <div fd-tile-header>
+        <div fd-tile-title>Feed Tile Title Text sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
+        <div fd-tile-subtitle>Feed Tile Subtitle Text</div>
+    </div>
+    <div fd-tile-content [twoColumn]="true">
+        <div fd-tile-section>
+            <div fd-tile-content-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt magna aliqua.</div>
+            <div fd-tile-content-byline>About 1 minute ago.</div>
+        </div>
+        <div fd-tile-section>
+            <div fd-numeric-content>
+                <div fd-numeric-content-kpi-container>
+                    <div fd-numeric-content-kpi>35</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fd-tile-footer>
+        <div fd-tile-footer-text>Footer</div>
+    </div>
+</fd-tile>
+
+<br/>
+
+<fd-tile [double]="true" [type]="'feed'" [size]="'s'">
+    <div fd-tile-header>
+        <div fd-tile-title>Feed Tile Title Text sed do eiusmod</div>
+        <div fd-tile-subtitle>Feed Tile Subtitle Text</div>
+    </div>
+    <div fd-tile-content [twoColumn]="true">
+        <div fd-tile-section>
+            <div fd-tile-content-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt magna aliqua.</div>
+            <div fd-tile-content-byline>About 1 minute ago.</div>
+        </div>
+        <div fd-tile-section>
+            <div fd-numeric-content>
+                <div fd-numeric-content-kpi-container>
+                    <div fd-numeric-content-kpi [state]="'negative'">35</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fd-tile-footer>
+        <div fd-tile-footer-text>Footer</div>
+    </div>
+</fd-tile>
+
+<br/><br/>
+
+<h1>Badge Tile</h1>
+
+<br/>
+
+<fd-tile [type]="'launch'">
+    <fd-badge>Badge</fd-badge>
+    <div fd-tile-header>
+        <div fd-tile-title>Launch Tile (Profile) Title Text</div>
+        <div fd-tile-subtitle>Launch Title Subtitle</div>
+    </div>
+    <div fd-tile-content>
+        <span fd-tile-profile-img [backgroundImage]="'https://placeimg.com/60/60/nature'" aria-label="Profile Image"></span>
+    </div>
+    <div fd-tile-footer>
+        <span fd-tile-footer-text>Footer Text</span>
+    </div>
+</fd-tile>
+
+<br/><br/>
+
+<h1>Slide Tile</h1>
+
+<br/>
+
+<fd-tile [type]="'slide'">
+    <div fd-tile-background-img [backgroundImage]="'https://placeimg.com/200/200/nature'"></div>
+    <button fd-tile-toggle></button>
+    <div fd-tile-container>
+        <div fd-tile-header>
+            <div fd-tile-title>Wind Map: Monitoring Real-Time</div>
+            <div fd-tile-subtitle>SAP News</div>
+        </div>
+        <div fd-tile-footer>
+            <span fd-tile-footer-text>May 14, 2020</span>
+        </div>
+        <div fd-tile-page-indicator>
+            <span fd-tile-dot></span>
+            <span fd-tile-dot></span>
+            <span fd-tile-dot [active]="true"></span>
+            <span fd-tile-dot></span>
+            <span fd-tile-dot></span>
+        </div>
+    </div>
+</fd-tile>
+
+<br/><br/>
+
+<h1>Action Tile</h1>
+
+<br/>
+
+<fd-tile [type]="'launch'" [action]="true">
+    <button fd-button fd-tile-action-close [compact]="true" [fdType]="'transparent'" (click)="window.alert('Close clicked')"></button>
+    <button fd-button fd-tile-action-indicator [compact]="true" [fdType]="'transparent'" (click)="window.alert('More clicked')"></button>
+    <div fd-tile-header>
+        <div fd-tile-title>
+            Launch Tile Title Text
+        </div>
+        <div fd-tile-subtitle>
+            Launch Tile Subtitle
+        </div>
+    </div>
+    <div fd-tile-content>
+        <div fd-numeric-content>
+            <div fd-numeric-content-launch-icon-container>
+                <span fd-numeric-content-launch-icon [glyph]="'line-charts'"></span>
+            </div>
+            <div fd-numeric-content-kpi-container>
+                <div fd-numeric-content-kpi [state]="'positive'">1234</div>
+            </div>
+        </div>
+    </div>
+    <div fd-tile-footer>
+        <span fd-tile-footer-text>Unit, Notification</span>
+    </div>
+</fd-tile>
+
+<br/><br/>
+
+<h1>Line Tile</h1>
+
+<br/>
+
+<fd-tile [type]="'launch'" [action]="true">
+    <button fd-button fd-tile-action-close [compact]="true" [fdType]="'transparent'" (click)="window.alert('Close clicked')"></button>
+    <button fd-button fd-tile-action-indicator [compact]="true" [fdType]="'transparent'" (click)="window.alert('More clicked')"></button>
+    <div fd-tile-header>
+        <div fd-tile-title>
+            Launch Tile Title Text
+        </div>
+        <div fd-tile-subtitle>
+            Launch Tile Subtitle
+        </div>
+    </div>
+    <div fd-tile-content>
+        <div fd-numeric-content>
+            <div fd-numeric-content-launch-icon-container>
+                <span fd-numeric-content-launch-icon [glyph]="'line-charts'"></span>
+            </div>
+            <div fd-numeric-content-kpi-container>
+                <div fd-numeric-content-kpi [state]="'positive'">1234</div>
+            </div>
+        </div>
+    </div>
+    <div fd-tile-footer>
+        <span fd-tile-footer-text>Unit, Notification</span>
+    </div>
+</fd-tile>
+
+<br/><br/>
+
+<h1>Line Tile</h1>
+
+<div fd-tile-container>
+    <fd-tile [type]="'line'" [action]="true">
+        <div fd-tile-header>
+            <div fd-tile-title-container>
+                <fd-badge>Badge</fd-badge>
+                <div fd-tile-title>Line Tile Title sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                <div fd-tile-subtitle>Line Tile Subtitle aute irure dolor in reprehenderit in voluptate velit esse cillum</div>
+            </div>
+        </div>
+        <div fd-tile-action-container>
+            <button fd-button fd-tile-action-close [compact]="true" [fdType]="'transparent'" (click)="window.alert('Close clicked')"></button>
+            <button fd-button fd-tile-action-indicator [compact]="true" [fdType]="'transparent'" (click)="window.alert('More clicked')"></button>
+        </div>
+    </fd-tile>
+</div>
+
+
