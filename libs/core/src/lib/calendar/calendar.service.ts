@@ -58,6 +58,8 @@ export class CalendarService {
     static datesEqual(date1: FdDate, date2: FdDate): boolean {
         if (!date1 || !date2) {
             return false;
+        } else if (!date1.toDateString() && !date2.toDateString()) {
+            return false;
         } else {
             return date1.toDateString() === date2.toDateString();
         }
