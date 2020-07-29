@@ -5,11 +5,11 @@ import { Component } from '@angular/core';
     templateUrl: './combobox-example.component.html'
 })
 export class ComboboxExampleComponent {
-    searchTermOne: string = '';
-    searchTermTwo: string = '';
-    searchTermThree: string = '';
-    searchTermFour: string = '';
-    searchTermFive: string = '';
+    searchTermOne = '';
+    searchTermTwo = '';
+    searchTermThree = '';
+    searchTermFour = '';
+    searchTermFive = '';
 
     dropdownValues = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];
 }

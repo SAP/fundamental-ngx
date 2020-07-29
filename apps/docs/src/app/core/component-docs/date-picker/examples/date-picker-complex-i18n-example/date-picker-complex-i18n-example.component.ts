@@ -57,11 +57,11 @@ export class DatePickerComplexI18nExampleComponent {
         moment.locale('en-gb');
     }
 
-    actualLocale: string = '';
+    actualLocale = '';
 
-    actualFormat: string = 'shortDate';
+    actualFormat = 'shortDate';
 
-    actualMomentJsLang: string = '';
+    actualMomentJsLang = '';
 
     public date: FdDate = FdDate.getToday();
 

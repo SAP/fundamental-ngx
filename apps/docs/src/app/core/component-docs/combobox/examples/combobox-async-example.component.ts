@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
     templateUrl: './combobox-async-example.component.html'
 })
 export class ComboboxAsyncExampleComponent implements OnInit {
-    searchTerm: string = '';
+    searchTerm = '';
 
     dropdownValues: Observable<string[]>;
 

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: 'combobox-search-function-example.component.html'
 })
 export class ComboboxSearchFunctionExampleComponent {
-    searchTerm: string = '';
+    searchTerm = '';
 
     dropdownValues = [
         'Apple',

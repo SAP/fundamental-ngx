@@ -19,6 +19,6 @@ import { Component } from '@angular/core';
     `
 })
 export class StepInputDefaultExampleComponent {
-    value1: number = 0;
-    value2: number = 0;
+    value1 = 0;
+    value2 = 0;
 }

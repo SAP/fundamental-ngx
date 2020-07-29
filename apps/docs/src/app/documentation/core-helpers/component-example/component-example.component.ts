@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/core';
 
-let componentExampleUniqueId: number = 0;
+let componentExampleUniqueId = 0;
 
 @Component({
     selector: 'component-example',

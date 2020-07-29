@@ -125,7 +125,7 @@ class TestMenuButtonComponent {
     @Input()
     type = 'standard';
 
-    currentSelectedItem: string = '';
+    currentSelectedItem = '';
 
     @ViewChild(MenuButtonComponent, { static: true })
     component: MenuButtonComponent;

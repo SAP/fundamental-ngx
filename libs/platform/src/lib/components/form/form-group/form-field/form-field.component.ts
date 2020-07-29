@@ -66,7 +66,7 @@ export class FormFieldComponent
     labelLayout: 'horizontal' | 'vertical' = 'vertical';
 
     @Input()
-    noLabelLayout: boolean = false;
+    noLabelLayout = false;
 
     /**
      * By default form field does not render any content as it is wrapped inside ng-template and
@@ -77,7 +77,7 @@ export class FormFieldComponent
      * directly
      */
     @Input()
-    forceRender: boolean = false;
+    forceRender = false;
 
     @Input()
     validators: Array<ValidatorFn> = [Validators.nullValidator];
@@ -89,7 +89,7 @@ export class FormFieldComponent
     placeholder: string;
 
     @Input()
-    fluid: boolean = false;
+    fluid = false;
     /**
      * This is in most of the cases set from parent container (form-group)
      */
@@ -158,9 +158,9 @@ export class FormFieldComponent
     _control: FormFieldControl<any>;
 
     protected _columns: Column = 6;
-    protected _editable: boolean = true;
+    protected _editable = true;
     protected _formGroup: FormGroup;
-    protected _required: boolean = false;
+    protected _required = false;
 
     formControl: FormControl;
     protected _destroyed = new Subject<void>();

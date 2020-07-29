@@ -32,9 +32,9 @@ export class CodeExampleComponent implements OnInit {
     @Input()
     exampleFiles: ExampleFile[] = [];
     smallScreen: boolean;
-    selectedFileIndex: number = 0;
+    selectedFileIndex = 0;
 
-    isOpen: boolean = false;
+    isOpen = false;
 
     constructor(
         private element: ElementRef,

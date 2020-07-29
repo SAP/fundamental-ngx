@@ -65,13 +65,13 @@ export class DatetimePickerComplexI18nExampleComponent {
         moment.locale('en-gb');
     }
 
-    actualLocale: string = '';
+    actualLocale = '';
 
-    actualFormat: string = 'short';
+    actualFormat = 'short';
 
-    actualMomentJsLang: string = '';
+    actualMomentJsLang = '';
 
-    placeholder: string = 'mm/dd/yyyy, hh:mm am'
+    placeholder = 'mm/dd/yyyy, hh:mm am'
 
     public date: FdDatetime = FdDatetime.getToday();
 

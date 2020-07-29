@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './segmented-button-default-example.component.html'
 })
 export class SegmentedButtonDefaultExampleComponent {
-    icon: number = 0;
+    icon = 0;
     lmr: boolean[] = [false, false, false];
 
     isSelectedIcon(x: number): string {

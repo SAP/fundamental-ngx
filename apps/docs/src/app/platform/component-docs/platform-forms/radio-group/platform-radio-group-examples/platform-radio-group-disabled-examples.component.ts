@@ -50,10 +50,10 @@ export class PlatformRadioGroupDisabledExampleComponent {
         }
     ];
 
-    favoriteSeason1: string = '';
-    favoriteSeason2: string = '';
-    favoriteSeason3: string = '';
-    favoriteSeason4: string = '';
+    favoriteSeason1 = '';
+    favoriteSeason2 = '';
+    favoriteSeason3 = '';
+    favoriteSeason4 = '';
 
     customForm = new FormGroup({
         example1: new FormControl({ value: '', disabled: true }),

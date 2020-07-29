@@ -6,7 +6,7 @@ import { SpecialDayRule } from '@fundamental-ngx/core';
     templateUrl: './calendar-options-example.component.html'
 })
 export class CalendarOptionsExampleComponent {
-    showWeekCount: boolean = false;
-    compact: boolean = false;
-    markWeekends: boolean = false;
+    showWeekCount = false;
+    compact = false;
+    markWeekends = false;
 }

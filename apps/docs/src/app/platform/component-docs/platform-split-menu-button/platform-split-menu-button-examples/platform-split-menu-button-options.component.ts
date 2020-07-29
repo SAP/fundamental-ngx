@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class PlatformDocsSplitMenuButtonOptionsComponent {
     selectedCozyItem: string;
     selectedCompactItem: string;
-    label: string = 'Default Action';
+    label = 'Default Action';
     buttonTypes = ['standard', 'positive', 'negative', 'ghost', 'transparent', 'emphasized'];
 
     public onItemSelectCozy(menuItemValue: string): void {

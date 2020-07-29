@@ -1,10 +1,11 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
     Inject,
-    Input,
+    Input, OnDestroy, OnInit,
     Optional,
     Renderer2,
     Self,
@@ -27,9 +28,6 @@ type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | T[];
  * Basic ComboBox implementation including datasource based on the
  * https://github.com/SAP/fundamental-ngx/wiki/Data-Components-Standard-for-Enterprise-scale
  * documents.
- *
- *
- *
  */
 @Component({
     selector: 'fdp-combo-box',
@@ -38,12 +36,12 @@ type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | T[];
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: ComboBoxComponent, multi: true }]
 })
-export class ComboBoxComponent extends CollectionBaseInput {
+export class ComboBoxComponent extends CollectionBaseInput implements OnInit, OnDestroy, AfterViewInit {
     @Input()
-    maxHeight: string = '250px';
+    maxHeight = '250px';
 
     @Input()
-    inShellbar: boolean = false;
+    inShellbar = false;
 
     @Input()
     get dataSource(): FdpComboBoxDataSource<any> {

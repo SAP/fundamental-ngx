@@ -9,7 +9,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class TableToolbarExampleComponent implements OnInit {
     tableRows: any[];
     displayedRows: any[];
-    searchTerm: string = '';
+    searchTerm = '';
     confirmationReason: string;
     myForm: FormGroup;
 

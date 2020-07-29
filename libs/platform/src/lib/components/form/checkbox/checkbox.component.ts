@@ -28,7 +28,7 @@ export class PlatformCheckboxChange {
 export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /** set to true if binary checkbox */
     @Input()
-    isBinary: boolean = false;
+    isBinary = false;
 
     /** Sets label for checkbox. */
     @Input()
@@ -36,11 +36,11 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
 
     /** true when checkbox has indeterminate state */
     @Input()
-    tristate: boolean = false;
+    tristate = false;
 
     /** when true indeterminate state can be selected */
     @Input()
-    tristateSelectable: boolean = true;
+    tristateSelectable = true;
 
     /** value for checkbox control */
     get value(): any {
@@ -103,7 +103,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /**
      * @hidden checkbox state, used when checkbox is used without form.
      */
-    private _checked: boolean = false;
+    private _checked = false;
 
     /** @hidden value of checkbox */
     private _checkboxValue: any;

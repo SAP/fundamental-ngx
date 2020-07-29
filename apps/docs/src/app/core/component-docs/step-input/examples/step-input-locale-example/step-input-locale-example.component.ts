@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
     `
 })
 export class StepInputLocaleExampleComponent {
-    value1: number = 0;
-    value2: number = 0;
-    value3: number = 0;
+    value1 = 0;
+    value2 = 0;
+    value3 = 0;
 }
