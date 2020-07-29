@@ -696,22 +696,25 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             if (dates.start) {
                 /** Find start date and mark it as selected */
                 startDay = calendarList.find((_day) => CalendarService.datesEqual(_day.date, dates.start));
-                if (startDay && !startDay.blocked && !startDay.disabled) {
+                if (startDay && !startDay.blocked && !startDay.disabled && !this.disableRangeStartFunction(startDay.date)) {
                     startDay.selected = true;
                 }
             }
             if (dates.end) {
                 /** Find end date and mark it as selected */
                 endDay = calendarList.find((_day) => CalendarService.datesEqual(_day.date, dates.end));
-                if (endDay && !endDay.blocked && !endDay.disabled) {
+                if (endDay && !endDay.blocked && !endDay.disabled && !this.disableRangeEndFunction(endDay.date)) {
                     endDay.selected = true;
                 }
             }
 
-            /** Mark all days, which are between start and end date */
-            calendarList
-                .filter((_day) => (_day.selectedRange = CalendarService.isBetween(_day.date, dates)))
-                .forEach((_day) => (_day.selectedRange = true));
+            /** Verify if start day and end day is valid, otherwise don't put range selection */
+            if (endDay && endDay.selected && startDay && startDay.selected) {
+                /** Mark all days, which are between start and end date */
+                calendarList
+                    .filter((_day) => (_day.selectedRange = CalendarService.isBetween(_day.date, dates)))
+                    .forEach((_day) => (_day.selectedRange = true));
+            }
         }
 
         this.refreshTabIndex(calendarList);
