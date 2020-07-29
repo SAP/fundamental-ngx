@@ -7,7 +7,7 @@ import {
     OnChanges,
     OnInit, HostBinding
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { CssClassBuilder } from '../utils/public_api';
 
 export type ButtonType =
     | ''
@@ -38,10 +38,9 @@ export type ButtonType =
     template: ` <ng-content></ng-content> `,
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
-
     /**
      * Native type of button element
      */
@@ -81,6 +80,9 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
     @Input()
     public fdMenu = false;
 
+    @HostBinding('class')
+    classList: string;
+
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
@@ -89,14 +91,13 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
      * function should build css style
      */
     public ngOnChanges(): void {
-        this.buildComponentCssClass();
+        this.classList = this.buildComponentCssClass();
     }
 
     public ngOnInit(): void {
-        this.buildComponentCssClass();
+        this.classList = this.buildComponentCssClass();
     }
 
-    @applyCssClass
     /** CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
