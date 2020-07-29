@@ -1,16 +1,24 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 type TileType = '' | 'kpi' | 'launch';
 
 @Component({
     // tslint:disable-next-line:component-selector
-    selector: '[fd-tile]',
+    selector: 'fd-tile',
     templateUrl: './tile.component.html',
     styleUrls: ['./tile.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class TileComponent implements CssClassBuilder, OnInit, OnChanges {
+export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges {
     /** user's custom classes */
     @Input()
     class: string;
@@ -27,18 +35,17 @@ export class TileComponent implements CssClassBuilder, OnInit, OnChanges {
     @Input()
     type: TileType = '';
 
-    /** Option 'launch' modifier
+    /** @hidden */
+    @ViewChild('tileDiv')
+    ref: ElementRef;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
-
-    /** @hidden */
-    ngOnInit(): void {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
     /** @hidden */
-    ngOnChanges(): void {
+    ngAfterViewInit(): void {
         this.buildComponentCssClass();
     }
 
@@ -60,7 +67,7 @@ export class TileComponent implements CssClassBuilder, OnInit, OnChanges {
     }
 
     elementRef(): ElementRef<any> {
-        return this._elementRef;
+        return this.ref;
     }
 
 }
