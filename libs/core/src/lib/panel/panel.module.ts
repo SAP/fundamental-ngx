@@ -4,15 +4,15 @@ import { CommonModule } from '@angular/common';
 import { PanelComponent } from './panel.component';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
 import { PanelTitleDirective } from './panel-title/panel-title.directive';
+import { ButtonModule } from '../button/button.module';
 
 @NgModule({
     declarations: [
         PanelComponent,
         PanelContentDirective,
         PanelTitleDirective
-
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, ButtonModule],
     exports: [
         PanelComponent,
         PanelContentDirective,
