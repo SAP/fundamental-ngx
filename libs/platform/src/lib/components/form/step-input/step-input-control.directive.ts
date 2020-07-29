@@ -23,7 +23,7 @@ export class StepInputControlDirective {
         if (!this.stepInput._canChangeValue) {
             return;
         }
-        const value: string = (event.target as HTMLInputElement).value;
+        const value: string = ((event.target as HTMLInputElement).value || '').trim();
         this.stepInput.commitEnteredValue(value);
         this.stepInput.detectChanges();
     }

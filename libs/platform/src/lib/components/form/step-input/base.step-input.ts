@@ -1,10 +1,13 @@
 import { ChangeDetectorRef, Input, Output, EventEmitter, Renderer2, Directive } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
+import { takeUntil, switchMap, map } from 'rxjs/operators';
+
+import { RtlService } from '@fundamental-ngx/core';
 
 import { BaseInput } from '../base.input';
 import { StepInputConfig } from './step-input.config';
 import { ContentDensity } from '../form-control';
-import { takeUntil } from 'rxjs/operators';
 
 /** Change event object emitted by Platform Step Input component */
 export class PlatformStepInputChange<T extends StepInputComponent = StepInputComponent, K = number> {
@@ -13,6 +16,8 @@ export class PlatformStepInputChange<T extends StepInputComponent = StepInputCom
     /** The new value of a control. */
     payload: K;
 }
+
+type AlignInputType = 'left' | 'center' | 'right';
 
 /**
  * StepInputComponent is a base abstract class that should be used
@@ -81,7 +86,7 @@ export abstract class StepInputComponent extends BaseInput {
     /** Number of digits after the decimal point */
     @Input()
     set precision(precision: number) {
-        this._checkAndThrowErrorIfStepDoesntMatchPrecision(precision, this._step);
+        this._checkAndThrowErrorIfStepDoesntMatchPrecision(precision, this.step);
         this._precision = precision;
     }
     get precision(): number {
@@ -98,7 +103,9 @@ export abstract class StepInputComponent extends BaseInput {
 
     /** Horizontally aligns value inside input */
     @Input()
-    align: 'left' | 'center' | 'right';
+    set align(align: AlignInputType) {
+        this.alignInput$.next(align);
+    }
 
     /**
      * ARIA label for increment button
@@ -137,7 +144,9 @@ export abstract class StepInputComponent extends BaseInput {
     /** @hidden */
     canDecrement = true;
 
-    /** Indicates if control has an error */
+    /**@hidden
+     * Indicates if control has an error
+     */
     isErrorState = false;
 
     /** @hidden */
@@ -145,6 +154,9 @@ export abstract class StepInputComponent extends BaseInput {
 
     /** @hidden */
     isCompact = this._contentDensity === 'compact';
+
+    /** @hidden */
+    _align: AlignInputType;
 
     /** @hidden */
     get _canChangeValue(): boolean {
@@ -166,21 +178,24 @@ export abstract class StepInputComponent extends BaseInput {
     /** @hidden */
     private _precision;
 
+    /** @hidden */
+    private alignInput$ = new BehaviorSubject<AlignInputType>(null);
+
+    /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
         public ngControl: NgControl,
         public ngForm: NgForm,
         protected config: StepInputConfig,
-        private _renderer: Renderer2
+        private _renderer: Renderer2,
+        private _rtlService: RtlService
     ) {
         super(_cd, ngControl, ngForm);
     }
 
+    /** @hidden */
     ngOnInit() {
         super.ngOnInit();
-
-        // Validate initial value
-        this._value = this._validateValueByLimits(this._value);
 
         this._calculateCanDecrementIncrement();
 
@@ -194,13 +209,37 @@ export abstract class StepInputComponent extends BaseInput {
             .subscribe(() => {
                 this.isErrorState = this.status === 'error';
             });
+
+        this.alignInput$
+            .asObservable()
+            .pipe(
+                switchMap((align) =>
+                    this._rtlService.rtl.pipe(
+                        map(
+                            (isRtl): AlignInputType => {
+                                if (!(['left', 'center', 'right'] as Array<AlignInputType>).includes(align)) {
+                                    return null;
+                                }
+                                if (isRtl && align === 'left') {
+                                    return 'right';
+                                }
+                                if (isRtl && align === 'right') {
+                                    return 'left';
+                                }
+                                return align;
+                            }
+                        )
+                    )
+                ),
+                takeUntil(this._destroyed)
+            )
+            .subscribe((align) => {
+                this._align = align;
+                this.detectChanges();
+            });
     }
 
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
-    }
-
-    /** @hidden
+    /**@hidden
      * Override writeValue method to keep input view value up to date
      */
     writeValue(value: number) {
@@ -240,8 +279,7 @@ export abstract class StepInputComponent extends BaseInput {
         this.decrease(step);
     }
 
-    /**
-     * @hidden
+    /**@hidden
      * Commit new entered value from view.
      */
     commitEnteredValue(value: string): void {
@@ -265,13 +303,17 @@ export abstract class StepInputComponent extends BaseInput {
         }
     }
 
-    /** Indicates when input gets focused */
+    /**@hidden
+     * Indicates when input gets focused
+     */
     onFocus() {
         super._onFocusChanged(true);
         this._updateViewValue();
     }
 
-    /** Indicates when input loses focus */
+    /**@hidden
+     * Indicates when input loses focus
+     */
     onBlur() {
         super._onFocusChanged(false);
         this._updateViewValue();
@@ -285,19 +327,13 @@ export abstract class StepInputComponent extends BaseInput {
     /** Create valueChange event */
     abstract createChangeEvent(value: number): PlatformStepInputChange;
 
-    /**
-     * Format value for view presentation
-     */
+    /** Format value for view presentation */
     abstract formatValue(value: number): string;
 
-    /**
-     * Format value for "in focus" mode.
-     */
+    /** Format value for "in focus" mode */
     abstract formatValueInFocusMode(value: number): string;
 
-    /**
-     * Parse value entered "in focus" mode.
-     */
+    /** Parse value entered "in focus" mode */
     abstract parseValueInFocusMode(value: string): number | null;
 
     /** @hidden */
@@ -329,7 +365,7 @@ export abstract class StepInputComponent extends BaseInput {
             const calculatedStep = this._stepFn(this._value, action);
             return calculatedStep;
         }
-        return this._step;
+        return this.step;
     }
 
     /** @hidden */

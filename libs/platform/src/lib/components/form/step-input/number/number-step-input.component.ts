@@ -7,10 +7,13 @@ import {
     Optional,
     Self,
     LOCALE_ID,
-    Inject
+    Inject,
+    ViewEncapsulation
 } from '@angular/core';
 import { formatNumber } from '@angular/common';
 import { NgControl, NgForm } from '@angular/forms';
+
+import { RtlService } from '@fundamental-ngx/core';
 
 import { FormFieldControl } from '../../form-control';
 import { StepInputComponent, PlatformStepInputChange } from '../base.step-input';
@@ -23,6 +26,7 @@ export class PlatformNumberStepInputChange extends PlatformStepInputChange<Numbe
     selector: 'fdp-number-step-input',
     templateUrl: 'number-step-input.component.html',
     styleUrls: ['number-step-input.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: FormFieldControl, useExisting: NumberStepInputComponent, multi: true },
@@ -40,9 +44,10 @@ export class NumberStepInputComponent extends StepInputComponent {
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @Self() public ngForm: NgForm,
         renderer: Renderer2,
+        rtlService: RtlService,
         @Inject(LOCALE_ID) readonly localeId: string
     ) {
-        super(_cd, ngControl, ngForm, config, renderer);
+        super(_cd, ngControl, ngForm, config, renderer, rtlService);
     }
 
     /**@hidden
@@ -83,6 +88,8 @@ export class NumberStepInputComponent extends StepInputComponent {
      * Used to parse entered value
      */
     parseValueInFocusMode(value: string | null): number | null {
+        // if user leaves input empty we should consider it as '0' by default
+        value = value === '' ? '0' : value;
         const parsedValue = Number.parseFloat(value);
         return isNaN(parsedValue) ? null : parsedValue;
     }
