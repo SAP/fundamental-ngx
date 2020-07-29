@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as panelExpandableExample from '!raw-loader!./platform-panel-examples/platform-panel-expandable-example.component.html';
+import * as panelExpandableHtmlExample from '!raw-loader!./platform-panel-examples/platform-panel-expandable-example.component.html';
+import * as panelExpandableTsExample from '!raw-loader!./platform-panel-examples/platform-panel-expandable-example.component.ts';
 import * as panelActionsExample from '!raw-loader!./platform-panel-examples/platform-panel-actions-example.component.html';
 import * as panelFixedExample from '!raw-loader!./platform-panel-examples/platform-panel-fixed-example.component.html';
 import * as panelFixedHeightExample from '!raw-loader!./platform-panel-examples/platform-panel-fixed-height-example.component.html';
@@ -19,7 +20,12 @@ export class PlatformPanelDocsComponent {
     panelExpandable: ExampleFile[] = [
         {
             language: 'html',
-            code: panelExpandableExample,
+            code: panelExpandableHtmlExample,
+            fileName: 'platform-panel-expandable-example'
+        },
+        {
+            language: 'typescript',
+            code: panelExpandableTsExample,
             fileName: 'platform-panel-expandable-example'
         }
     ];
