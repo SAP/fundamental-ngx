@@ -1,12 +1,4 @@
-import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    Input,
-    OnChanges,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 type TileType = '' | 'kpi' | 'launch' | 'feed' | 'slide' | 'line';
@@ -75,5 +67,4 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
     elementRef(): ElementRef<any> {
         return this.ref;
     }
-
 }

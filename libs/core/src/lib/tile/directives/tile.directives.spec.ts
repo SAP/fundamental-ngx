@@ -55,7 +55,7 @@ import {
             <div fd-tile-footer-text></div>
             <div fd-tile-section></div>
         </div>
-    <div #container fd-tile-container [list]="true"></div>
+        <div #container fd-tile-container [list]="true"></div>
     `
 })
 export class TestComponent {
@@ -140,11 +140,15 @@ describe('TileDirectives', () => {
         expect(component.refresh.elementRef().nativeElement.className).toContain('sap-icon--refresh');
         expect(component.profileImg.nativeElement.className).toContain('fd-tile__profile-img');
         expect(component.profileImg.nativeElement.id).toContain('fd-profileTile-');
-        expect(component.profileImg.nativeElement.style.getPropertyValue('background-image')).toContain('url("https://placeimg.com/60/60/nature")');
+        expect(component.profileImg.nativeElement.style.getPropertyValue('background-image')).toContain(
+            'url("https://placeimg.com/60/60/nature")'
+        );
         expect(component.container.nativeElement.className).toContain('fd-tile-container');
         expect(component.container.nativeElement.className).toContain('fd-tile-container--list');
         expect(component.backgroundImg.nativeElement.className).toContain('fd-tile__background-img');
-        expect(component.backgroundImg.nativeElement.style.getPropertyValue('background-image')).toContain('url("https://placeimg.com/60/60/nature")');
+        expect(component.backgroundImg.nativeElement.style.getPropertyValue('background-image')).toContain(
+            'url("https://placeimg.com/60/60/nature")'
+        );
         expect(component.slideContainer.nativeElement.className).toContain('fd-tile__container');
         expect(component.dot.nativeElement.className).toContain('fd-tile__dot');
         expect(component.dot.nativeElement.className).toContain('fd-tile__dot--active');

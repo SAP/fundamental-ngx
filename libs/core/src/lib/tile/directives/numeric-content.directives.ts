@@ -56,8 +56,11 @@ export class NumericContentDirective implements OnInit, OnChanges {
     /** @hidden */
     private _isSmallTile(): boolean {
         let retVal = false;
-        if (this._elementRef.nativeElement.parentElement && this._elementRef.nativeElement.parentElement.parentElement &&
-        this._elementRef.nativeElement.parentElement.parentElement.classList.contains('fd-tile--s')) {
+        if (
+            this._elementRef.nativeElement.parentElement &&
+            this._elementRef.nativeElement.parentElement.parentElement &&
+            this._elementRef.nativeElement.parentElement.parentElement.classList.contains('fd-tile--s')
+        ) {
             retVal = true;
         }
         return retVal;

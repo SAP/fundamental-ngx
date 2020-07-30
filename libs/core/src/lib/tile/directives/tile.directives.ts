@@ -304,9 +304,7 @@ export class TileActionCloseDirective implements OnInit, OnChanges {
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return ['fd-tile__action-close', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+        return ['fd-tile__action-close', this.class].filter((x) => x !== '').join(' ');
     }
 
     /** @hidden */
@@ -341,9 +339,7 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges {
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return ['fd-tile__action-indicator', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+        return ['fd-tile__action-indicator', this.class].filter((x) => x !== '').join(' ');
     }
 
     /** @hidden */
@@ -360,4 +356,3 @@ export class TileActionContainerDirective {
     @HostBinding('class.fd-tile__action-container')
     baseClass: boolean = true;
 }
-

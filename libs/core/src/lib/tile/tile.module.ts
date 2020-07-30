@@ -22,7 +22,10 @@ import {
     TilePageIndicatorDirective,
     TileDotDirective,
     TileActionCloseDirective,
-    TileActionIndicatorDirective, TileTitleContainerDirective, TileActionContainerDirective, TileSlideContainerDirective
+    TileActionIndicatorDirective,
+    TileTitleContainerDirective,
+    TileActionContainerDirective,
+    TileSlideContainerDirective
 } from './directives/tile.directives';
 import {
     NumericContentDirective,

@@ -15,7 +15,8 @@ import {
 @Component({
     selector: 'fd-test-component',
     template: `
-        <div class="fd-tile--s"> <!-- tile should be two elements up from numeric content -->
+        <div class="fd-tile--s">
+            <!-- tile should be two elements up from numeric content -->
             <div>
                 <div fd-numeric-content [size]="'l'">
                     <div fd-numeric-content-launch-icon [glyph]="'add'"></div>
@@ -75,7 +76,9 @@ describe('NumericContentDirectives', () => {
         component.numericContent.ngOnChanges();
         expect(component.numericContent.elementRef().nativeElement.className).toContain('fd-numeric-content');
         expect(component.numericContent.elementRef().nativeElement.className).toContain('fd-numeric-content--l');
-        expect(component.numericContent.elementRef().nativeElement.className).toContain('fd-numeric-content--small-tile');
+        expect(component.numericContent.elementRef().nativeElement.className).toContain(
+            'fd-numeric-content--small-tile'
+        );
         component.launchIcon.ngOnChanges();
         expect(component.launchIcon.elementRef().nativeElement.className).toContain('fd-numeric-content__launch-icon');
         expect(component.launchIcon.elementRef().nativeElement.className).toContain('sap-icon--add');
