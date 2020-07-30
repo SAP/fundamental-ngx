@@ -46,11 +46,9 @@ function sanitize(array: string[]): string [] {
     return array.filter(Boolean)
 }
 
-/** Returns an array1[index] if first array1 and array2 shared element */
+/** Returns an array1[index] of first array1 and array2 shared element */
 function firstCommonElementIndex(array1: string[], array2): number {
-    const firstCommonElement = array2.find(element => array1.includes(element));
-    const index = array2.indexOf(firstCommonElement);
-
+    const index = array2.findIndex(element => array1.indexOf(element) !== -1);
     return index === -1 ? 0 : index;
 }
 
