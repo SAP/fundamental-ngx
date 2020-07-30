@@ -240,6 +240,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.meridian || changes.time) {
             this.setDisplayedHour();
+            this._setUpTimeGrid();
         }
     }
 
