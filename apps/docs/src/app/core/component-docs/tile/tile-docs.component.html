@@ -1,8 +1,97 @@
 <fd-docs-section-title [id]="'generic'" [componentName]="'tile'">
+    Generic Tile Sizes
 </fd-docs-section-title>
+<description>
+    The large (default) tiles are designed for screens larger than 374px. For smaller screens use the small tiles <code>[size]="'s'"</code>.
+    The generic tile also supports two tile dimensions - 1×1 (default) and 2×1 (<code>[double]="true"</code>).
+</description>
 <component-example>
     <div class="grid">
         <fd-tile-generic-example></fd-tile-generic-example>
     </div>
 </component-example>
 <code-example [exampleFiles]="genericTile"></code-example>
+
+<fd-docs-section-title [id]="'columns'" [componentName]="'tile'">
+    Generic Tile Content Columns
+</fd-docs-section-title>
+<description>
+    The tiles header, content and footer can be split into two columns with a 0.25rem vertical padding. Use the
+    <code>[twoColumn]="true"</code> input to achieve the 2-col design.
+</description>
+<component-example>
+    <div class="grid">
+        <fd-tile-columns-example></fd-tile-columns-example>
+    </div>
+</component-example>
+<code-example [exampleFiles]="columnsTile"></code-example>
+
+<fd-docs-section-title [id]="'launch'" [componentName]="'tile'">
+    Launch Tile
+</fd-docs-section-title>
+<component-example>
+    <div class="grid">
+        <fd-launch-tile-example></fd-launch-tile-example>
+    </div>
+</component-example>
+<code-example [exampleFiles]="launch"></code-example>
+
+<fd-docs-section-title [id]="'kpi'" [componentName]="'tile'">
+    Kpi Tile
+</fd-docs-section-title>
+<component-example>
+    <div class="grid">
+        <fd-kpi-tile-example></fd-kpi-tile-example>
+    </div>
+</component-example>
+<code-example [exampleFiles]="kpi"></code-example>
+
+<!--TODO: wip fd-docs-section-title [id]="'slide'" [componentName]="'tile'">
+    Slide Tile
+</fd-docs-section-title>
+<component-example>
+    <div class="grid">
+        <fd-slide-tile-example></fd-slide-tile-example>
+    </div>
+</component-example>
+<code-example [exampleFiles]="slide"></code-example-->
+
+<fd-docs-section-title [id]="'action'" [componentName]="'tile'">
+    Action Tile
+</fd-docs-section-title>
+<component-example>
+    <div class="grid">
+        <fd-action-tile-example></fd-action-tile-example>
+    </div>
+</component-example>
+<code-example [exampleFiles]="action"></code-example>
+
+<fd-docs-section-title [id]="'badge'" [componentName]="'tile'">
+    Badge Tile
+</fd-docs-section-title>
+<component-example>
+    <div class="grid">
+        <fd-badge-tile-example></fd-badge-tile-example>
+    </div>
+</component-example>
+<code-example [exampleFiles]="badge"></code-example>
+
+<fd-docs-section-title [id]="'feed'" [componentName]="'tile'">
+    Feed Tile
+</fd-docs-section-title>
+<component-example>
+    <div class="grid">
+        <fd-feed-tile-example></fd-feed-tile-example>
+    </div>
+</component-example>
+<code-example [exampleFiles]="feed"></code-example>
+
+<fd-docs-section-title [id]="'line'" [componentName]="'tile'">
+    Line Tile
+</fd-docs-section-title>
+<component-example>
+    <div class="grid">
+        <fd-line-tile-example></fd-line-tile-example>
+    </div>
+</component-example>
+<code-example [exampleFiles]="line"></code-example>

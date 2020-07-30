@@ -5,7 +5,14 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { API_FILES } from '../../api-files';
 import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
 import { TileDocsComponent } from './tile-docs.component';
-import { TileGenericExampleComponent } from './examples/tile-generic-example.component';
+import {
+    ActionTileExampleComponent, BadgeTileExampleComponent, FeedTileExampleComponent,
+    KpiTileExampleComponent,
+    LaunchTileExampleComponent, LineTileExampleComponent,
+    SlideTileExampleComponent,
+    TileColumnsExampleComponent,
+    TileGenericExampleComponent
+} from './examples/tile-examples.component';
 import { IdentifierModule, TileModule, BadgeModule, ButtonModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -32,6 +39,14 @@ const routes: Routes = [
     declarations: [
         TileDocsComponent,
         TileGenericExampleComponent,
+        TileColumnsExampleComponent,
+        LaunchTileExampleComponent,
+        KpiTileExampleComponent,
+        SlideTileExampleComponent,
+        ActionTileExampleComponent,
+        BadgeTileExampleComponent,
+        FeedTileExampleComponent,
+        LineTileExampleComponent,
         TileDocsHeaderComponent
     ]
 })

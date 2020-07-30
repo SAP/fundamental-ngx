@@ -1,0 +1,25 @@
+<fd-tile [type]="'launch'" [action]="true">
+    <button fd-button fd-tile-action-close [compact]="true" [fdType]="'transparent'" (click)="window.alert('Close clicked')"></button>
+    <button fd-button fd-tile-action-indicator [compact]="true" [fdType]="'transparent'" (click)="window.alert('More clicked')"></button>
+    <div fd-tile-header>
+        <div fd-tile-title>
+            Launch Tile Title Text
+        </div>
+        <div fd-tile-subtitle>
+            Launch Tile Subtitle
+        </div>
+    </div>
+    <div fd-tile-content>
+        <div fd-numeric-content>
+            <div fd-numeric-content-launch-icon-container>
+                <span fd-numeric-content-launch-icon [glyph]="'line-charts'"></span>
+            </div>
+            <div fd-numeric-content-kpi-container>
+                <div fd-numeric-content-kpi [state]="'positive'">1234</div>
+            </div>
+        </div>
+    </div>
+    <div fd-tile-footer>
+        <span fd-tile-footer-text>Unit, Notification</span>
+    </div>
+</fd-tile>

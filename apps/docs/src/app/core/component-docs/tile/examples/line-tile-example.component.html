@@ -1,0 +1,21 @@
+<div fd-tile-container>
+    <fd-tile [type]="'line'">
+        <div fd-tile-header>
+            <div fd-tile-title-container>
+                <fd-badge>Badge</fd-badge>
+                <div fd-tile-title>Line Tile Title</div>
+            </div>
+            <div fd-tile-subtitle>Line Tile Subtitle</div>
+        </div>
+    </fd-tile>
+    <fd-tile [type]="'line'" [action]="true">
+        <div fd-tile-header>
+            <div fd-tile-title>Line Tile Title sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            <div fd-tile-subtitle>Line Tile Subtitle aute irure dolor in reprehenderit in voluptate velit esse cillum</div>
+        </div>
+        <div fd-tile-action-container>
+            <button fd-button fd-tile-action-close [compact]="true" [fdType]="'transparent'" (click)="window.alert('Close clicked')"></button>
+            <button fd-button fd-tile-action-indicator [compact]="true" [fdType]="'transparent'" (click)="window.alert('More clicked')"></button>
+        </div>
+    </fd-tile>
+</div>

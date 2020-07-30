@@ -218,12 +218,22 @@ export class TileToggleDirective {
 })
 export class TileContainerDirective {
     /** @hidden */
-    @HostBinding('class.fd-tile__container')
+    @HostBinding('class.fd-tile-container')
     baseClass: boolean = true;
 
     /** Whether or not the container is a 'list' type (used on screens smaller than 450px). */
+    @HostBinding('class.fd-tile-container--list')
     @Input()
     list: boolean = false;
+}
+
+@Directive({
+    selector: '[fdTileSlideContainer], [fd-tile-slide-container]'
+})
+export class TileSlideContainerDirective {
+    /** @hidden */
+    @HostBinding('class.fd-tile__container')
+    baseClass: boolean = true;
 }
 
 @Directive({

@@ -1,0 +1,20 @@
+<fd-tile [type]="'slide'">
+    <div fd-tile-background-img [backgroundImage]="'https://placeimg.com/200/200/nature'"></div>
+    <button fd-tile-toggle></button>
+    <div fd-tile-slide-container>
+        <div fd-tile-header>
+            <div fd-tile-title>Wind Map: Monitoring Real-Time</div>
+            <div fd-tile-subtitle>SAP News</div>
+        </div>
+        <div fd-tile-footer>
+            <span fd-tile-footer-text>May 14, 2020</span>
+        </div>
+        <div fd-tile-page-indicator>
+            <span fd-tile-dot></span>
+            <span fd-tile-dot></span>
+            <span fd-tile-dot [active]="true"></span>
+            <span fd-tile-dot></span>
+            <span fd-tile-dot></span>
+        </div>
+    </div>
+</fd-tile>
