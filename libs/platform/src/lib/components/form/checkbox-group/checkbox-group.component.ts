@@ -47,7 +47,7 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
      * To Dispaly multiple checkboxes in a line
      */
     @Input()
-    isInline: boolean = false;
+    isInline = false;
 
     /** Children checkboxes passed as content */
     @ContentChildren(CheckboxComponent)

@@ -149,7 +149,7 @@ export class FormFieldComponent
      * marks field as disabled. used in reactive form approach.
      */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     @Output()
     onChange: EventEmitter<string> = new EventEmitter<string>();
