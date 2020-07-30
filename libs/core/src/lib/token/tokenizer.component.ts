@@ -120,11 +120,24 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     hiddenCozyTokenCount = 0;
 
     /** @hidden */
+    shiftKeyPressed: boolean = false;
+
+    /** @hidden */
+    ctrlKeyPressed: boolean = false;
+
+
+    /** @hidden */
     ngAfterViewInit(): void {
         if (this.input && this.input.elementRef()) {
             this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
                 this.handleKeyDown(event, this.tokenList.length);
             });
+            this.tokenizerInnerEl.nativeElement.addEventListener('keydown', (event) => {
+              this.handleKeyDown(event, this.tokenList.length);
+          });
+            this.tokenizerInnerEl.nativeElement.addEventListener('keyup', (event) => {
+              this.handleKeyUp(event);
+          });
         }
     }
 
@@ -208,12 +221,39 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
                 event.stopPropagation();
                 this.focusTokenElement(index);
-                this.tokenList.forEach(shadowedToken => {
-                    if (shadowedToken !== token) {
-                        shadowedToken.selected = false;
-                    }
-                });
+                const elementIndexSelected = index;
+                if (!this.ctrlKeyPressed && !this.shiftKeyPressed) {
+                  this.tokenList.forEach(shadowedToken => {
+                      if (shadowedToken !== token) {
+                          shadowedToken.selected = false;
+                      }
+                  });
+                  token.selected = true;
+                }
+                else if (this.ctrlKeyPressed) {
                 token.selected = true;
+                }
+                else if (this.shiftKeyPressed) {
+                  let before;
+                  this.tokenList.forEach((element, indexAfter) => {
+                    if (before === undefined && indexAfter === index) {
+                      element.selected = true;
+                      before = true;
+                    }
+                    if (before === undefined && element.selected) {
+                      before = indexAfter > index;
+                    }
+                    if (before !== undefined && !before && indexAfter <= index) {
+                      element.selected = true;
+                    }
+                    else if (before !== undefined && before && indexAfter >= index) {
+                      if (element.selected && indexAfter !== index) {
+                        before = undefined;
+                      }
+                      element.selected = true;
+                    }
+                  });
+                }
             }));
         });
     }
@@ -263,6 +303,15 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.previousElementWidth = elementWidth;
         }
     }
+    /** @hidden */
+    handleKeyUp(event: KeyboardEvent): void {
+      if (KeyUtil.isKey(event, 'Shift')) {
+        this.shiftKeyPressed = false;
+      } else if (KeyUtil.isKey(event, 'Ctrl')) {
+        this.ctrlKeyPressed = false
+      }
+    }
+
 
     /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
@@ -273,6 +322,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenList.forEach(shadowedToken => {if (shadowedToken !== token) {shadowedToken.selected = false}});
             token.selected = !token.selected;
             event.preventDefault();
+        } 
+        else if (KeyUtil.isKey(event, 'Shift')) {
+          this.shiftKeyPressed = true;
+        } else if (KeyUtil.isKey(event, 'Ctrl')) {
+          this.ctrlKeyPressed = true;
         } else if (KeyUtil.isKey(event, 'Enter')) {
             this.input.elementRef().nativeElement.focus();
         } else if ((KeyUtil.isKey(event, 'ArrowLeft') && !rtl) || (KeyUtil.isKey(event, 'ArrowRight') && rtl)) {
@@ -282,6 +336,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
         } else if (KeyUtil.isKey(event, 'KeyA') && this.input.elementRef().nativeElement.value === '') {
+          console.log('ge');
             if (event.ctrlKey || event.metaKey) {
                 if (!this.input.elementRef().nativeElement.value) {
                     event.preventDefault();
@@ -291,8 +346,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
                 });
             }
         }
-        if (
-            newIndex === this.tokenList.length &&
+        if (newIndex === this.tokenList.length &&
             ((KeyUtil.isKey(event, 'ArrowRight') && !rtl) || (KeyUtil.isKey(event, 'ArrowLeft') && rtl))
         ) {
             this.input.elementRef().nativeElement.focus();

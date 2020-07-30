@@ -348,7 +348,9 @@ export class MultiInputComponent implements
         if (checked) {
             this.selected.push(value);
         } else {
-            this.selected.splice(this.selected.indexOf(value), 1);
+          this.selected.forEach(token => {
+            this.selected.splice(this.selected.indexOf(token), 1);
+            });
         }
 
         // Handle popover placement update
