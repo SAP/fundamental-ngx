@@ -1,30 +1,13 @@
-/**
- * @license
- * SAP
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- *
- */
 import { NgControl, NgForm } from '@angular/forms';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { Component, EventEmitter, Input, Optional, Output, Self } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Optional, Output, Self } from '@angular/core';
 import { ViewEncapsulation, ViewChild } from '@angular/core';
 import { CalendarType, CalendarYearGrid, DatePickerComponent as CoreDatePickerComponent } from '@fundamental-ngx/core';
 import { DaysOfWeek, FdCalendarView, FdDate, FdRangeDate, SpecialDayRule } from '@fundamental-ngx/core';
 import { Placement } from 'popper.js';
 import { FormFieldControl } from '../form-control';
 import { BaseInput } from '../base.input';
+import { FormStates } from 'dist/libs/core/lib/form/form-control/form-states';
 
 /**
  * Date-Picker implementation based on the
@@ -42,7 +25,7 @@ import { BaseInput } from '../base.input';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FormFieldControl, useExisting: DatePickerComponent, multi: true }]
 })
-export class DatePickerComponent extends BaseInput {
+export class DatePickerComponent extends BaseInput implements OnInit {
     /**
      * core datepicker as child
      */
@@ -68,7 +51,7 @@ export class DatePickerComponent extends BaseInput {
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
-    format: string = 'MM/dd/yyyy';
+    format = 'MM/dd/yyyy';
 
     /** Locale for date pipe. See more https://angular.io/guide/i18n */
     @Input()
@@ -91,23 +74,23 @@ export class DatePickerComponent extends BaseInput {
      * Works only on range mode, when start date is selected on Day View.
      */
     @Input()
-    rangeHoverEffect: boolean = false;
+    rangeHoverEffect = false;
 
     /** Whether to validate the date picker input. */
     @Input()
-    useValidation: boolean = true;
+    useValidation = true;
 
     /** Aria label for the datepicker input. */
     @Input()
-    dateInputLabel: string = 'Date input';
+    dateInputLabel = 'Date input';
 
     /** Aria label for the button to show/hide the calendar. */
     @Input()
-    displayCalendarToggleLabel: string = 'Display calendar toggle';
+    displayCalendarToggleLabel = 'Display calendar toggle';
 
     /** Whether a null input is considered valid. */
     @Input()
-    allowNull: boolean = true;
+    allowNull = true;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
@@ -122,13 +105,31 @@ export class DatePickerComponent extends BaseInput {
 
     /** Defines if date picker should be closed after date choose */
     @Input()
-    closeOnDateChoose: boolean = true;
+    closeOnDateChoose = true;
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
+    private _stateType: FormStates;
+
+    @Input()
+    get stateType(): FormStates {
+        if (this.status) {
+            return this.status;
+        }
+        return this._stateType;
+    }
+
+    set stateType(state: FormStates) {
+        this._stateType = state;
+    }
 
     /**
      * Whether AddOn Button should be focusable, set to true by default
      */
     @Input()
-    buttonFocusable: boolean = true;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -166,13 +167,13 @@ export class DatePickerComponent extends BaseInput {
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
      */
     @Input()
-    markWeekends: boolean = true;
+    markWeekends = true;
 
     /**
      * Whether user wants to show week numbers next to days
      */
     @Input()
-    showWeekNumbers: boolean = true;
+    showWeekNumbers = true;
 
     /** Fired when a new date is selected. */
     @Output()

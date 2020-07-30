@@ -47,14 +47,14 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
         <fdp-button
             [contentDensity]="'compact'"
             (buttonClicked)="setLocale('en-gb')"
-            [type]="isSelected('en-gb') ? 'emphasized' : ''"
+            [buttonType]="isSelected('en-gb') ? 'emphasized' : ''"
             >English
         </fdp-button>
         |
         <fdp-button
             [contentDensity]="'compact'"
             (buttonClicked)="setLocale('fr')"
-            [type]="isSelected('fr') ? 'emphasized' : ''"
+            [buttonType]="isSelected('fr') ? 'emphasized' : ''"
         >
             French</fdp-button
         >
@@ -62,21 +62,21 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
         <fdp-button
             [contentDensity]="'compact'"
             (buttonClicked)="setLocale('de')"
-            [type]="isSelected('de') ? 'emphasized' : ''"
+            [buttonType]="isSelected('de') ? 'emphasized' : ''"
             >German</fdp-button
         >
         |
         <fdp-button
             [contentDensity]="'compact'"
             (buttonClicked)="setLocale('bg')"
-            [type]="isSelected('bg') ? 'emphasized' : ''"
+            [buttonType]="isSelected('bg') ? 'emphasized' : ''"
             >Bulgarian
         </fdp-button>
         |
         <fdp-button
             [contentDensity]="'compact'"
             (buttonClicked)="setLocale('pl')"
-            [type]="isSelected('pl') ? 'emphasized' : ''"
+            [buttonType]="isSelected('pl') ? 'emphasized' : ''"
             >Polish</fdp-button
         >
 
@@ -133,11 +133,11 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
 export class PlatformDatePickerComplexI18nExampleComponent {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent;
 
-    actualLocale: string = '';
+    actualLocale = '';
 
-    actualFormat: string = 'shortDate';
+    actualFormat = 'shortDate';
 
-    actualMomentJsLang: string = '';
+    actualMomentJsLang = '';
 
     public date: FdDate = FdDate.getToday();
 

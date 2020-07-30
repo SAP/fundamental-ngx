@@ -3,7 +3,7 @@
  * Some part of code has been modified to integrate platform capabilities.
  */
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { FdDate, FdRangeDate } from '@fundamental-ngx/core';
 
 @Component({
@@ -16,11 +16,12 @@ export class PlatformDatePickerExampleComponent {
         start: new FdDate(2020, 5, 14),
         end: new FdDate(2020, 5, 24)
     };
-    public datePickerForm = new FormGroup({});
+    public datePickerForm = new FormGroup({
+        holiday: new FormControl(this.holiday)
+    });
 
     public data = {
-        birthday: this.birthday,
-        holiday: this.holiday
+        birthday: this.birthday
     };
 
     // Template driven form
@@ -28,6 +29,7 @@ export class PlatformDatePickerExampleComponent {
     birthdayPicker = '';
     holidayPicker = '';
     dateOutsideForm = '';
+    rangedateOutsideForm = '';
 
     constructor() {}
 

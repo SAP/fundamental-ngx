@@ -53,9 +53,9 @@ import { FdDate } from '@fundamental-ngx/core';
             </ng-template>
         </fdp-form-group>
 
-        <p>Birthday: {{ datePickerForm.get('birthday').value?.toDateString() }}</p>
-        <p>Exam Start Date: {{ datePickerForm.get('examdate').value?.start.toDateString() }}</p>
-        <span>Exam End Date: {{ datePickerForm.get('examdate').value?.end.toDateString() }}</span>
+        <p>Birthday: {{ datePickerForm.controls.birthday?.value?.toDateString() }}</p>
+        <p>Exam Start Date: {{ datePickerForm.controls.examdate?.value?.start.toDateString() }}</p>
+        <span>Exam End Date: {{ datePickerForm.controls.examdate?.value?.end.toDateString() }}</span>
     `
 })
 export class PlatformDisabledFuncDatePickerComponent {
@@ -84,7 +84,7 @@ export class PlatformDisabledFuncDatePickerComponent {
 
     /** Get date for next 14 days. */
     private _getFutureDate(fdDate: FdDate): FdDate {
-        const amountOfDaysInFuture: number = 14;
+        const amountOfDaysInFuture = 14;
         for (let i = 0; i < amountOfDaysInFuture; i++) {
             fdDate = fdDate.nextDay();
         }
