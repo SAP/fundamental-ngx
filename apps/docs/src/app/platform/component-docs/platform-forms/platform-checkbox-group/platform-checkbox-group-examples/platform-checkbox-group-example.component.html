@@ -1,0 +1,55 @@
+<h3>Checkbox group created from passed checkboxes and value is required</h3>
+<fdp-form-group [multiLayout]="true" [formGroup]="form1" [object]="favourites">
+    <fdp-form-field #fl1 [id]="'fruitsEx'" [label]="'My favourite fruits:'" [required]="true" zone="zLeft" rank="1">
+        <fdp-checkbox-group [isInline]="true" [name]="'fruits'" [formControl]="fl1.formControl">
+            <fdp-checkbox [value]="'apple'" [label]="'Apple'"></fdp-checkbox>
+            <fdp-checkbox [value]="'banana'" [label]="'Banana'"></fdp-checkbox>
+            <fdp-checkbox [value]="'grapes'" [label]="'Grapes'"></fdp-checkbox>
+        </fdp-checkbox-group>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span>Value is required.</span>
+        </ng-container>
+    </ng-template>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Favourites: {{ form1.controls.fruitsEx?.value }}</span>
+
+<h3>Checkbox group created from list of values and value is required</h3>
+<fdp-form-group [multiLayout]="true" [formGroup]="form2">
+    <fdp-form-field #fl2 [id]="'fruits1'" [label]="'My favourite fruits:'" [required]="true" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [isInline]="true"
+            [name]="'fruits'"
+            [list]="fruits"
+            [formControl]="fl2.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span>Value is required.</span>
+        </ng-container>
+    </ng-template>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Favourites: {{ form2.controls.fruits1?.value }}</span>
+
+<h3>Checkbox group created from list of SelectItem Objects and value is required</h3>
+<fdp-form-group [multiLayout]="true" [formGroup]="form3">
+    <fdp-form-field #fl3 [id]="'language'" [label]="'Languages Known:'" [required]="true" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [isInline]="true"
+            [name]="'language'"
+            [list]="languages"
+            [formControl]="fl3.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span>Value is required.</span>
+        </ng-container>
+    </ng-template>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Languages Known: {{ form3.controls.language?.value }}</span>
