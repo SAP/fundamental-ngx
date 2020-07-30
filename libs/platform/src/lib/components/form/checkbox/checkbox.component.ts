@@ -25,7 +25,7 @@ export class PlatformCheckboxChange {
  * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Checkbox-Component-Technical-Design
  * documents.
  */
-let nextUniqueId: number = 0;
+let nextUniqueId = 0;
 
 @Component({
     selector: 'fdp-checkbox',

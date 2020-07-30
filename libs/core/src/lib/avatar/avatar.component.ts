@@ -13,7 +13,7 @@ import { ANY_LANGUAGE_LETTERS_REGEX } from '../utils/consts';
 
 export type AvatarSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ColorAccent = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-let avatarUniqueId: number = 0;
+let avatarUniqueId = 0;
 
 @Component({
     // TODO to be discussed
@@ -32,7 +32,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Id of the Avatar. */
     @Input()
     @HostBinding('attr.id')
-    id: string = `fd-avatar-${avatarUniqueId++}`;
+    id = `fd-avatar-${avatarUniqueId++}`;
 
     /** Aria-label for Avatar. */
     @Input()
@@ -61,19 +61,19 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input() zoomGlyph: string = null;
 
     /** Whether or not to apply a circle style to the Avatar. */
-    @Input() circle: boolean = false;
+    @Input() circle = false;
 
     /** Whether or not to apply a transparent style to the Avatar. */
-    @Input() transparent: boolean = false;
+    @Input() transparent = false;
 
     /** Whether or not to apply a placeholder background style to the Avatar. */
-    @Input() placeholder: boolean = false;
+    @Input() placeholder = false;
 
     /** Whether or not to apply a tile background style to the Avatar. */
-    @Input() tile: boolean = false;
+    @Input() tile = false;
 
     /** Whether or not to apply a border to the Avatar. */
-    @Input() border: boolean = false;
+    @Input() border = false;
 
     /** A number from 1 to 10 representing the background color of the Avatar. */
     @Input() colorAccent: ColorAccent = null;
