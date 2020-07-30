@@ -38,7 +38,7 @@ class TesNestedMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
     @ViewChild('menuItem') menuItem: MenuItemComponent;
 
-    menuItemTitle: string = 'Test item title';
+    menuItemTitle = 'Test item title';
 
     constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) {}
 }

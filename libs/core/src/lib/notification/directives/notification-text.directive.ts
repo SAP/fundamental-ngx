@@ -6,5 +6,5 @@ import { Directive, HostBinding } from '@angular/core';
 export class NotificationTextDirective {
     /** @hidden */
     @HostBinding('class.fd-notification__text')
-    fdNotificationTextClass: boolean = true;
+    fdNotificationTextClass = true;
 }

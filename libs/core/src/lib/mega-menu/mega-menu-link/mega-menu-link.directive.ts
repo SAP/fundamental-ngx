@@ -16,18 +16,18 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 export class MegaMenuLinkDirective {
     /** @hidden */
     @HostBinding('class.fd-mega-menu__link')
-    fdMegaMenuClass: boolean = true;
+    fdMegaMenuClass = true;
 
     /** @hidden */
     @Input()
     @HostBinding('class.has-child')
     @HostBinding('attr.aria-haspopup')
-    hasChild: boolean = false;
+    hasChild = false;
 
     /** @hidden */
     @Input()
     @HostBinding('attr.aria-expanded')
-    isExpanded: boolean = false;
+    isExpanded = false;
 
     /** @hidden */
     constructor(public itemEl: ElementRef) {}

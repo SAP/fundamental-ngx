@@ -39,7 +39,7 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
     childContent: TemplateRef<any> | Type<any> | DefaultDialogObject = undefined;
 
     /** @hidden */
-    private _class: string = '';
+    private _class = '';
 
     /** @hidden */
     private _componentRef: ComponentRef<any> | EmbeddedViewRef<any>;

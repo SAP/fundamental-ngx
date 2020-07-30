@@ -24,17 +24,17 @@ import {
 export class TokenComponent {
     /** Whether the token is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Whether the token is compact. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** @hidden */
     @ViewChild('tokenWrapperElement')
     tokenWrapperElement: ElementRef;
 
-    private _selected: boolean = false;
+    private _selected = false;
 
     /** Whether the token is selected. */
     @Input()
@@ -51,7 +51,7 @@ export class TokenComponent {
 
     /** Whether the token is read-only. */
     @Input()
-    readOnly: boolean = false;
+    readOnly = false;
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()

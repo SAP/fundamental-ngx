@@ -17,8 +17,8 @@ class TestComponent {
     @ViewChild('panelRef', { read: ElementRef })
     panelRef: ElementRef;
 
-    isCompact: boolean = false;
-    isFixed: boolean = false;
+    isCompact = false;
+    isFixed = false;
 }
 
 describe('PanelComponent', () => {

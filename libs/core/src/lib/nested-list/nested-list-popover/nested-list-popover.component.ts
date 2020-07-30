@@ -34,7 +34,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
      * For Internal Usage - Gets information about title, which should be displayed inside popover
      */
     @Input()
-    title: string = '';
+    title = '';
 
     /** @hidden */
     @ViewChild(PopoverComponent)
@@ -42,7 +42,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__popover')
-    popoverClass: boolean = true;
+    popoverClass = true;
 
     /** @hidden */
     @ContentChild(NestedLinkDirective)
@@ -62,7 +62,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     placement$: Observable<string>;
 
     /** @hidden */
-    open: boolean = false;
+    open = false;
 
     /** @hidden */
     constructor(

@@ -10,9 +10,9 @@ export class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
-    horizontal: boolean = false;
+    horizontal = false;
 
-    inline: boolean = false;
+    inline = false;
 }
 
 describe('FormItemComponent', () => {

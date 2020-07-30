@@ -52,11 +52,11 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     /** Index of the selected tab panel. */
     @Input()
-    selectedIndex: number = 0;
+    selectedIndex = 0;
 
     /** Whether user wants to use tab component in compact mode */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()

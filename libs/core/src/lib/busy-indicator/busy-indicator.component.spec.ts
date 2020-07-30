@@ -11,9 +11,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     `
 })
 class TestWrapperComponent {
-    block: boolean = true;
-    loading: boolean = true;
-    hasContent: boolean = true;
+    block = true;
+    loading = true;
+    hasContent = true;
     size: 's' | 'm' | 'l' = 'm';
 }
 

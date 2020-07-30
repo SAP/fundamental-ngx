@@ -39,7 +39,7 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     /** Whether condensed mode is included */
     @Input()
     @HostBinding('class.fd-side-nav--condensed')
-    condensed: boolean = false;
+    condensed = false;
 
     /** Whether clicking on elements should change selected state of items */
     @Input()

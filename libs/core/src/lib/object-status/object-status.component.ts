@@ -47,15 +47,15 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
 
     /** Whether the Object Status is clickable. */
     @Input()
-    clickable: boolean = false;
+    clickable = false;
 
     /** Whether the Object Status is inverted. */
     @Input()
-    inverted: boolean = false;
+    inverted = false;
 
     /** Whether the Object Status is in Large Design. */
     @Input()
-    large: boolean = false;
+    large = false;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}

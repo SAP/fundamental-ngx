@@ -24,7 +24,7 @@ class TestWrapperComponent {
 
     value: string;
 
-    optionVisible: boolean = true;
+    optionVisible = true;
 }
 
 describe('SelectComponent', () => {

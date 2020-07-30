@@ -6,5 +6,5 @@ import { Directive, HostBinding } from '@angular/core';
 export class NotificationAvatarDirective {
     /** @hidden */
     @HostBinding('class.fd-notification__avatar')
-    fdNotificationAvatarClass: boolean = true;
+    fdNotificationAvatarClass = true;
 }

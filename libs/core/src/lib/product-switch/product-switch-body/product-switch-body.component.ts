@@ -20,7 +20,7 @@ import { ProductSwitchItem } from './product-switch.item';
 export class ProductSwitchBodyComponent implements OnInit {
     /** Defines if drag and drop functionality should be included in product switch*/
     @Input()
-    dragAndDropEnabled: boolean = true;
+    dragAndDropEnabled = true;
 
     /** The product switch's product items. */
     @Input()
@@ -36,7 +36,7 @@ export class ProductSwitchBodyComponent implements OnInit {
 
     /** Defines if the product switcher should be displayed in list mode, no matter what is the size of window */
     @Input()
-    forceListMode: boolean = false;
+    forceListMode = false;
 
     /**
      * @hidden

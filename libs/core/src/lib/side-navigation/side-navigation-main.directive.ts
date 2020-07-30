@@ -11,5 +11,5 @@ export class SideNavigationMainDirective {
 
     /** @hidden */
     @HostBinding('class.fd-side-nav__main-navigation')
-    classSideNavMainNavigation: boolean = true;
+    classSideNavMainNavigation = true;
 }

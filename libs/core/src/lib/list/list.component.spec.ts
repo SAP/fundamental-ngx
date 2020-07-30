@@ -21,15 +21,15 @@ class TestComponent {
     @ViewChild('componentElement', { read: ElementRef, static: false })
     ref: ElementRef;
 
-    dropdown: boolean = false;
+    dropdown = false;
 
-    multiInput: boolean = false;
+    multiInput = false;
 
-    compact: boolean = false;
+    compact = false;
 
-    hasMessage: boolean = false;
+    hasMessage = false;
 
-    noBorder: boolean = false;
+    noBorder = false;
 }
 
 describe('ListComponent', () => {

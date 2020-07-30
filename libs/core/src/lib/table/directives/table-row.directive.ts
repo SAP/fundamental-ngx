@@ -26,27 +26,27 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
 
     /** @hidden */
     @HostBinding('class.fd-table__row')
-    fdTableRowClass: boolean = true;
+    fdTableRowClass = true;
 
     /** Whether or not the table row is activable */
     @HostBinding('class.fd-table__row--activable')
     @Input()
-    activable: boolean = false;
+    activable = false;
 
     /** Whether or not the table row is hoverable */
     @HostBinding('class.fd-table__row--hoverable')
     @Input()
-    hoverable: boolean = false;
+    hoverable = false;
 
     /** Whether or not the table row is main row, it's concerned only on pop in mode */
     @HostBinding('class.fd-table__row--main')
     @Input()
-    main: boolean = false;
+    main = false;
 
     /** Whether or not the table row is secondary row, it's concerned only on pop in mode */
     @HostBinding('class.fd-table__row--secondary')
     @Input()
-    secondary: boolean = false;
+    secondary = false;
 
     /** @hidden */
     propagateKeysSubscription: Subscription;

@@ -7,5 +7,5 @@ import { Directive, HostBinding } from '@angular/core';
 export class MegaMenuTitleDirective {
     /** @hidden */
     @HostBinding('class.fd-mega-menu__title')
-    fdMegaMenuTitleClass: boolean = true;
+    fdMegaMenuTitleClass = true;
 }

@@ -7,12 +7,12 @@ export class NestedListStateService {
      * @hidden
      * The condensed state is modified by the parent and read by nested lists.
      */
-    condensed: boolean = false;
+    condensed = false;
 
     /**
      * @hidden
      */
-    selectable: boolean = true;
+    selectable = true;
 
     /** @hidden */
     onSelected: Subject<string> = new Subject<string>();

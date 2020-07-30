@@ -26,7 +26,7 @@ export class AutoCompleteDirective {
 
     /** Whether the auto complete directive should be enabled */
     @Input()
-    enable: boolean = true;
+    enable = true;
 
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
