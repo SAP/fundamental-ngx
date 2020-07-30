@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.40...v0.20.1-rc.41) (2020-07-30)
+
+
+### Bug Fixes
+
+* (platform) Introduce checkbox group as component ([#2774](https://github.com/SAP/fundamental-ngx/issues/2774)) ([b8b01db](https://github.com/SAP/fundamental-ngx/commit/b8b01db9405a44d1341577a1ca42d05864e496b9))
+* avatar enhancements ([#2905](https://github.com/SAP/fundamental-ngx/issues/2905)) ([696a44b](https://github.com/SAP/fundamental-ngx/commit/696a44b83d28e6273cf823c9841cd4394de87955))
+
 ### [0.20.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.39...v0.20.1-rc.40) (2020-07-29)
 
 ### [0.20.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.38...v0.20.1-rc.39) (2020-07-29)
