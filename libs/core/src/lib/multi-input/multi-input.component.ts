@@ -275,14 +275,12 @@ export class MultiInputComponent implements
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-multi-input',
             'fd-multi-input-custom',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     elementRef(): ElementRef<any> {

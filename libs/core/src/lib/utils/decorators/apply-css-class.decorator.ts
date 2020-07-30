@@ -1,5 +1,4 @@
 import { ELEMENT_REF_EXCEPTION } from '../interfaces/has-element-ref.interface';
-import { getStringFromHashMap } from '../functions/get-string-from-hashmap';
 import { uuidv4 } from '../functions/uuidv4-generator';
 
 /**
@@ -13,12 +12,12 @@ import { uuidv4 } from '../functions/uuidv4-generator';
  */
 export function applyCssClass(target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
     const originalMethod = descriptor.value;
-    descriptor.value = function (): string {
+    descriptor.value = function (): string[] {
         if (!this.elementRef) {
             throw ELEMENT_REF_EXCEPTION;
         }
 
-        const _class = originalMethod.apply(this);
+        const newComponentClassList: string[] = sanitize(originalMethod.apply(this));
         const elementRef = this.elementRef.apply(this);
 
         if (elementRef) {
@@ -30,13 +29,36 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
                 this._uuidv4 = uuidv4();
             }
 
-            elementRef.nativeElement._classMap[this._uuidv4] = `${_class} ${this.class ? this.class : ''}`;
+            const allClassList = [...elementRef.nativeElement.classList];
+            const previousComponentClassList = elementRef.nativeElement._classMap[this._uuidv4] || [];
+            const newClassList = updateComponentClassList(allClassList, previousComponentClassList, newComponentClassList);
 
-            (elementRef.nativeElement as HTMLElement).className = getStringFromHashMap<string>(
-                elementRef.nativeElement._classMap
-            );
+            elementRef.nativeElement._classMap[this._uuidv4] = newComponentClassList;
+            (elementRef.nativeElement as HTMLElement).className = newClassList.join(' ');
         }
 
-        return _class;
+        return newComponentClassList;
     };
+}
+
+/** Removes falsy elements from string array */
+function sanitize(array: string[]): string [] {
+    return array.filter(Boolean)
+}
+
+/** Returns an array1[index] if first array1 and array2 shared element */
+function firstCommonElementIndex(array1: string[], array2): number {
+    const firstCommonElement = array2.find(element => array1.includes(element));
+    const index = array2.indexOf(firstCommonElement);
+
+    return index === -1 ? 0 : index;
+}
+
+/** Replaces previous set of component classes with new set of component classes */
+function updateComponentClassList(allClasses: string[],  previousComponentClassList, newComponentClassList: string[]): string[] {
+    const index = firstCommonElementIndex(allClasses, previousComponentClassList);
+    const externalClasses = allClasses.filter(element => !previousComponentClassList.includes(element));
+    externalClasses.splice(index, 0, ...newComponentClassList);
+
+    return externalClasses;
 }

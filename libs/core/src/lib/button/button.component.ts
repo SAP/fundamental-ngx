@@ -7,7 +7,7 @@ import {
     OnChanges,
     OnInit, HostBinding
 } from '@angular/core';
-import { CssClassBuilder } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 export type ButtonType =
     | ''
@@ -80,9 +80,6 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
     @Input()
     public fdMenu = false;
 
-    @HostBinding('class')
-    classList: string;
-
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
@@ -91,18 +88,19 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
      * function should build css style
      */
     public ngOnChanges(): void {
-        this.classList = this.buildComponentCssClass();
+        this.buildComponentCssClass();
     }
 
     public ngOnInit(): void {
-        this.classList = this.buildComponentCssClass();
+        this.buildComponentCssClass();
     }
 
+    @applyCssClass
     /** CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-button',
             this.fdType ? `fd-button--${this.fdType}` : '',
@@ -110,9 +108,7 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
             this.fdMenu ? `fd-button--menu` : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** HasElementRef interface implementation
