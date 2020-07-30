@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { ButtonModule, CalendarModule, FdDate, FdRangeDate } from '@fundamental-ngx/core';
 import { DatePickerModule, DatePickerComponent as CoreDatePickerComponent } from '@fundamental-ngx/core';
 import { FormModule, IconModule, InputGroupModule, PopoverModule } from '@fundamental-ngx/core';
@@ -10,7 +10,7 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
 @Component({
     selector: 'fdp-test-date-picker',
     template: `
-        <fdp-form-group #ffg [formGroup]="datePickerForm">
+        <fdp-form-group #ffg [formGroup]="datePickerForm" [object]="datePickerFormData">
             <fdp-form-field
                 #ffl1
                 [id]="'birthday'"
@@ -20,7 +20,12 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
                 [placeholder]="'Enter your birthday'"
                 [label]="'Birth Date:'"
             >
-                <fdp-date-picker [name]="'birthday'" [type]="'single'" [formControl]="ffl1.formControl">
+                <fdp-date-picker
+                    [name]="'birthday'"
+                    [type]="'single'"
+                    [allowNull]="false"
+                    [formControl]="ffl1.formControl"
+                >
                 </fdp-date-picker>
             </fdp-form-field>
 
@@ -39,7 +44,7 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
                     [allowNull]="false"
                     [contentDensity]="'compact'"
                     [placeholder]="'When are you travelling?'"
-                    [formControl]="ffl2.formControl"
+                    formControlName="journeydate"
                 >
                 </fdp-date-picker>
             </fdp-form-field>
@@ -53,10 +58,20 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
     `
 })
 class TestDatePickerComponent {
-    datePickerForm = new FormGroup({});
-
     @ViewChildren(DatePickerComponent)
     datepicker: QueryList<DatePickerComponent>;
+
+    public birthday: FdDate = new FdDate(1990, 1, 2);
+    public journeydate: FdRangeDate = {
+        start: new FdDate(2020, 5, 14),
+        end: new FdDate(2020, 5, 24)
+    };
+
+    datePickerForm = new FormGroup({
+        journeydate: new FormControl(this.journeydate)
+    });
+
+    datePickerFormData = { birthday: this.birthday };
 }
 
 describe('TestDatePickerComponent', () => {
@@ -101,10 +116,9 @@ describe('TestDatePickerComponent', () => {
 
         const datepicker = host.datepicker.toArray()[0];
         datepicker.coreDatePicker.isOpen = false;
-        datepicker.coreDatePicker.isInvalidDateInput = true;
         datepicker.coreDatePicker.openCalendar();
         expect(datepicker.coreDatePicker.isOpen).toBeTruthy();
-        expect(datepicker.coreDatePicker.inputFieldDate).toBeFalsy();
+        expect(datepicker.coreDatePicker.inputFieldDate).toBeTruthy();
     });
 
     it('should not open the calendar if the component is disabled', async () => {
@@ -124,7 +138,7 @@ describe('TestDatePickerComponent', () => {
         datepicker.coreDatePicker.isOpen = true;
         datepicker.coreDatePicker.isInvalidDateInput = true;
         datepicker.coreDatePicker.closeCalendar();
-        expect(datepicker.coreDatePicker.inputFieldDate).toBeFalsy();
+        expect(datepicker.coreDatePicker.inputFieldDate).toBeTruthy();
         expect(datepicker.coreDatePicker.isOpen).not.toBeTruthy();
     });
 
@@ -133,6 +147,8 @@ describe('TestDatePickerComponent', () => {
         spyOn(host.datepicker.toArray()[0], 'onChange');
 
         const datepicker = host.datepicker.toArray()[0];
+        expect(datepicker.coreDatePicker.inputFieldDate).toEqual('01/02/1990');
+
         spyOn(datepicker.selectedDateChange, 'emit');
         const date = FdDate.getToday();
         const dateStr = (<any>datepicker.coreDatePicker)._formatDate(date);
@@ -149,6 +165,8 @@ describe('TestDatePickerComponent', () => {
         spyOn(host.datepicker.toArray()[1], 'onChange');
 
         const datepicker = host.datepicker.toArray()[1];
+        expect(datepicker.coreDatePicker.inputFieldDate).toEqual('05/14/2020 - 05/24/2020');
+
         spyOn(datepicker.selectedRangeDateChange, 'emit');
         const dateStart = FdDate.getToday();
         const dateLast = FdDate.getToday();
@@ -194,8 +212,10 @@ describe('TestDatePickerComponent', () => {
 
         const datepicker = host.datepicker.toArray()[0];
         datepicker.writeValue(null);
-        expect(datepicker.coreDatePicker.selectedDate).toBeUndefined();
-        expect(datepicker.coreDatePicker.inputFieldDate).toBe('');
+
+        // prevous input date
+        expect(datepicker.coreDatePicker.selectedDate).toEqual(new FdDate(1990, 1, 2));
+        expect(datepicker.coreDatePicker.inputFieldDate).toBe('01/02/1990');
     });
 
     it('Should handle correct write value for range mode', async () => {
@@ -226,8 +246,13 @@ describe('TestDatePickerComponent', () => {
         const dateStart = null;
         const dateEnd = null;
         datepicker.writeValue({ start: dateStart, end: dateEnd });
-        expect(datepicker.coreDatePicker.selectedRangeDate).toEqual({ start: dateStart, end: dateEnd });
-        expect(datepicker.coreDatePicker.inputFieldDate).toBe('');
+
+        // previous input date
+        expect(datepicker.coreDatePicker.selectedRangeDate).toEqual({
+            start: new FdDate(2020, 5, 14),
+            end: new FdDate(2020, 5, 24)
+        });
+        expect(datepicker.coreDatePicker.inputFieldDate).toBe('05/14/2020 - 05/24/2020');
     });
 
     it('Should register invalid string date and not call event for single mode', async () => {
@@ -346,7 +371,7 @@ describe('TestDatePickerComponent', () => {
 
         const datePickerFormGroup = host.datePickerForm;
         // for single type date picker
-        expect(datePickerFormGroup.controls.birthday.valid).toBeFalsy();
+        expect(datePickerFormGroup.controls.birthday.valid).toBeTruthy();
 
         const date = FdDate.getToday();
         const datepicker = host.datepicker.toArray()[0];
@@ -364,7 +389,7 @@ describe('TestDatePickerComponent', () => {
         expect(datepicker.value).toEqual(date.nextDay());
 
         // for range type date picker
-        expect(datePickerFormGroup.controls.journeydate.valid).toBeFalsy();
+        expect(datePickerFormGroup.controls.journeydate.valid).toBeTruthy();
 
         const rangeDate: FdRangeDate = { start: FdDate.getToday(), end: FdDate.getToday() };
         const rangeDateNextday: FdRangeDate = { start: FdDate.getToday().nextDay(), end: FdDate.getToday().nextDay() };
@@ -386,7 +411,7 @@ describe('TestDatePickerComponent', () => {
     it('control should be invalid if wrong value set', async () => {
         const datePickerFormGroup = host.datePickerForm;
         // for single type date picker
-        expect(datePickerFormGroup.controls.birthday.valid).toBeFalsy();
+        expect(datePickerFormGroup.controls.birthday.valid).toBeTruthy();
 
         const datepicker = host.datepicker.toArray()[0];
 
@@ -397,7 +422,7 @@ describe('TestDatePickerComponent', () => {
         expect(datePickerFormGroup.controls.birthday.value).toBeFalsy();
 
         // for range type date picker
-        expect(datePickerFormGroup.controls.journeydate.valid).toBeFalsy();
+        expect(datePickerFormGroup.controls.journeydate.valid).toBeTruthy();
 
         const rangeDatepicker = host.datepicker.toArray()[1];
 

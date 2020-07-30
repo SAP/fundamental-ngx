@@ -67,7 +67,7 @@ const localized_values = {
     providedIn: 'root'
 })
 export class LanguageService {
-    selectedLanguage: string = 'bg';
+    selectedLanguage = 'bg';
 
     setLanguage(newLanguage: string) {
         this.selectedLanguage = newLanguage;
@@ -110,17 +110,17 @@ export class CustomCalendarI18n extends CalendarI18n {
 // Aria labels i18n
 @Injectable()
 export class CustomI18nLabels extends CalendarI18nLabels {
-    yearSelectionLabel: string = 'Sélection de l\'année';
+    yearSelectionLabel = 'Sélection de l\'année';
 
-    previousYearLabel: string = 'Année précédente';
+    previousYearLabel = 'Année précédente';
 
-    nextYearLabel: string = 'Année suivante';
+    nextYearLabel = 'Année suivante';
 
-    monthSelectionLabel: string = 'Sélection du mois';
+    monthSelectionLabel = 'Sélection du mois';
 
-    previousMonthLabel: string = 'Mois précédent';
+    previousMonthLabel = 'Mois précédent';
 
-    nextMonthLabel: string = 'Mois suivant';
+    nextMonthLabel = 'Mois suivant';
 }
 
 @Component({
@@ -130,27 +130,27 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         <fdp-button
             [contentDensity]="'compact'"
             (buttonClicked)="setFrench()"
-            [type]="isSelected('fr') ? 'emphasized' : ''"
+            [buttonType]="isSelected('fr') ? 'emphasized' : ''"
             >French
         </fdp-button>
         |
         <fdp-button
             [contentDensity]="'compact'"
             (buttonClicked)="setGerman()"
-            [type]="isSelected('de') ? 'emphasized' : ''"
+            [buttonType]="isSelected('de') ? 'emphasized' : ''"
             >German
         </fdp-button>
         |
         <fdp-button
             [contentDensity]="'compact'"
             (buttonClicked)="setBulgarian()"
-            [type]="isSelected('bg') ? 'emphasized' : ''"
+            [buttonType]="isSelected('bg') ? 'emphasized' : ''"
             >Bulgarian
         </fdp-button>
         <br />
         <br />
         <div style="width:20%">
-            <fdp-date-picker [id]="'intz'" [name]="'intz'" [(ngModel)]="date" [startingDayOfWeek]="1"></fdp-date-picker>
+            <fdp-date-picker [id]="'intz'" [name]="'intz'" [(ngModel)]="date"></fdp-date-picker>
         </div>
         <p i18n>selected: {{ date.toDateString() }}</p>
     `,
@@ -168,7 +168,7 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     ]
 })
 export class PlatformDatePickerI18nExampleComponent implements AfterViewInit {
-    selected: number = 3;
+    selected = 3;
 
     constructor(
         private languageService: LanguageService,
