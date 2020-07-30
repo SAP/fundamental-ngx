@@ -1,19 +1,19 @@
 <fdp-form-group [multiLayout]="true">
-    <fdp-form-field label="Default Semantic Switch" zone="zLeft" rank="1">
+    <fdp-form-field id="semantic-switch" label="Default Semantic Switch" zone="zLeft" rank="1">
         <fdp-switch
-            name="switch-disabled"
-            ariaLabel="Switch disabled"
-            ariaLabelledby="switch-disabled-label"
+            name="semantic-switch"
+            ariaLabel="Semantic Switch"
+            ariaLabelledby="semantic-switch-label"
             [semantic]="true"
             (switchChange)="onSwitchChange($event)">
         </fdp-switch>
     </fdp-form-field>
 
-    <fdp-form-field label="Default Semantic Compact Switch" zone="zLeft" rank="1">
+    <fdp-form-field id="semantic-switch-compact" label="Default Semantic Compact Switch" zone="zLeft" rank="1">
         <fdp-switch
-            name="switch-disabled"
-            ariaLabel="Switch disabled"
-            ariaLabelledby="switch-disabled-label"
+            name="semantic-switch-compact"
+            ariaLabel="Semantic Switch Compact"
+            ariaLabelledby="semantic-switch-compact-label"
             contentDensity="compact"
             [semantic]="true"
             [(ngModel)]="switched"

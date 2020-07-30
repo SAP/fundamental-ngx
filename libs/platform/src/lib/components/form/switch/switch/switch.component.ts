@@ -91,6 +91,16 @@ export class SwitchComponent extends BaseInput {
         super(_changeDetector, ngControl, ngForm);
     }
 
+    /** @hidden change formcontrol value */
+    onClick(event: KeyboardEvent | MouseEvent) {
+        event.stopPropagation();
+        if (!this.disabled) {
+            if (super.getValue() !== undefined) {
+                this.onChange(super.getValue());
+            }
+        }
+    }
+
     /** update controller on switch state change */
     onValueChange(modelValue: boolean): void {
         this._updateModel(modelValue);
