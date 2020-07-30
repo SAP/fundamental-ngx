@@ -29,7 +29,7 @@ import { FormModule, RadioModule } from '@fundamental-ngx/core';
 })
 class TestComponentContent {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
-    favoriteSeason: string = '';
+    favoriteSeason = '';
     customForm = new FormGroup({
         example1: new FormControl({ value: '', disabled: false })
     });
@@ -142,7 +142,7 @@ describe('RadioGroupComponent', () => {
 class TestComponentList {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
-    favoriteSeason: string = '';
+    favoriteSeason = '';
 
     @ViewChild(RadioGroupComponent)
     radioGroup: RadioGroupComponent;

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['popover-programmatic-open-example.component.scss']
 })
 export class PopoverProgrammaticOpenExampleComponent {
-    isOpen: boolean = false;
+    isOpen = false;
 
     list = ['Option 1', 'Option 2', 'Option 3'];
 }

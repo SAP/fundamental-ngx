@@ -6,7 +6,7 @@ import { MobileModeConfig } from '@fundamental-ngx/core';
     templateUrl: './combobox-mobile-example.component.html',
 })
 export class ComboboxMobileExampleComponent {
-    selectedValue: string = '';
+    selectedValue = '';
 
     mobileConfig: MobileModeConfig = {
         title: 'Title',

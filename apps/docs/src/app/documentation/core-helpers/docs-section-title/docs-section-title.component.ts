@@ -24,10 +24,10 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     sectionTitle: ElementRef;
 
     @Input()
-    id: string = '';
+    id = '';
 
     @Input()
-    componentName: string = '';
+    componentName = '';
 
     readonly currentLibrary: Libraries = null;
 

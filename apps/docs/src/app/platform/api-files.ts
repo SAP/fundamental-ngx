@@ -8,6 +8,7 @@ export const API_FILES = {
     actionbar: ['actionbarcomponent'],
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
+    checkboxGroup: ['CheckboxGroupComponent'],
     infoLabel: ['InfoLabelComponent'],
     link: ['LinkComponent'],
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],

@@ -195,10 +195,9 @@ describe('DatePickerComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
     });
 
-    it('Should handle single date blocked by disable function', () => {
+    it('Should handle single date blocked by disable function and set invalid', () => {
         spyOn(component.selectedDateChange, 'emit');
         spyOn(component, 'onChange');
-        const invalidDate = (<any>component)._invalidDate();
         component.disableFunction = (fdDate: FdDate) => true;
         const todayDate = FdDate.getToday();
         const date = new FdDate(2000, 10, 10);
@@ -208,15 +207,13 @@ describe('DatePickerComponent', () => {
         expect(component.isInvalidDateInput).toBe(true);
         expect(component.calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
         expect(component.calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
-        expect(component.selectedDateChange.emit).toHaveBeenCalledWith(invalidDate);
-        expect(component.onChange).toHaveBeenCalledWith(invalidDate);
+        expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
+        expect(component.onChange).toHaveBeenCalledWith(date);
     });
 
-    it('Should handle both range dates blocked by disable function', () => {
+    it('Should handle both range dates blocked by disable function and set invalid', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
-        const invalidDate = (<any>component)._invalidDate();
-        const rangeDateInvalidObject: FdRangeDate = { start: invalidDate, end: invalidDate };
         component.type = 'range';
         component.disableRangeStartFunction = (fdDate: FdDate) => true;
         component.disableRangeEndFunction = (fdDate: FdDate) => true;
@@ -226,6 +223,7 @@ describe('DatePickerComponent', () => {
         const date2 = new FdDate(2000, 10, 10);
         const strDate1 = (<any>component)._formatDate(date1);
         const strDate2 = (<any>component)._formatDate(date2);
+        const rangeDateInvalidObject: FdRangeDate = { start: date2, end: date1 };
 
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
@@ -236,10 +234,9 @@ describe('DatePickerComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
 
-    it('Should handle end range date blocked by disable function', () => {
+    it('Should handle end range date blocked by disable function and set invalid', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
-        const invalidDate = (<any>component)._invalidDate();
         component.type = 'range';
         component.disableRangeEndFunction = (fdDate: FdDate) =>
             fdDate.getTimeStamp() > FdDate.getToday().getTimeStamp();
@@ -249,7 +246,7 @@ describe('DatePickerComponent', () => {
         const strDate1 = (<any>component)._formatDate(date1);
         const strDate2 = (<any>component)._formatDate(date2);
 
-        const rangeDateInvalidObject: FdRangeDate = { start: date1, end: invalidDate };
+        const rangeDateInvalidObject: FdRangeDate = { start: date1, end: date2 };
 
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 

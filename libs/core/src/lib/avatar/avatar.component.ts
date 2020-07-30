@@ -9,10 +9,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { ANY_LANGUAGE_LETTERS_REGEX } from '../utils/consts';
 
 export type AvatarSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ColorAccent = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-let avatarUniqueId: number = 0;
+let avatarUniqueId = 0;
 
 @Component({
     // TODO to be discussed
@@ -31,7 +32,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Id of the Avatar. */
     @Input()
     @HostBinding('attr.id')
-    id: string = `fd-avatar-${avatarUniqueId++}`;
+    id = `fd-avatar-${avatarUniqueId++}`;
 
     /** Aria-label for Avatar. */
     @Input()
@@ -43,6 +44,13 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     @HostBinding('attr.aria-labelledby')
     ariaLabelledby: string = null;
 
+    /** Localized text for label */
+    @Input()
+    set label(value: string) {
+        this.ariaLabel = value || null;
+        this.abbreviate = this._getAbbreviate(value);
+    }
+
     /** The size of the Avatar. Options include: *xs*, *s*, *m*, *l* and *xl*. */
     @Input() size: AvatarSize = 'l';
 
@@ -53,37 +61,60 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input() zoomGlyph: string = null;
 
     /** Whether or not to apply a circle style to the Avatar. */
-    @Input() circle: boolean = false;
+    @Input() circle = false;
 
     /** Whether or not to apply a transparent style to the Avatar. */
-    @Input() transparent: boolean = false;
+    @Input() transparent = false;
 
     /** Whether or not to apply a placeholder background style to the Avatar. */
-    @Input() placeholder: boolean = false;
+    @Input() placeholder = false;
 
     /** Whether or not to apply a tile background style to the Avatar. */
-    @Input() tile: boolean = false;
+    @Input() tile = false;
 
     /** Whether or not to apply a border to the Avatar. */
-    @Input() border: boolean = false;
+    @Input() border = false;
 
     /** A number from 1 to 10 representing the background color of the Avatar. */
     @Input() colorAccent: ColorAccent = null;
 
+    /**
+    * @deprecated
+    * Deprecated according to Rename `backgroundImage` to `image`
+    * */
     /** Background image url. */
     @Input()
-    backgroundImage: string = null;
+    set backgroundImage(value: string) {
+        this._setImage(value);
+    };
+
+    /** Background image resource: url or base64. */
+    @Input()
+    set image(value: string) {
+        this._setImage(value);
+    }
 
     /** @hidden */
     @HostBinding('style.background-image')
-    get image(): string {
-        return 'url(' + this.backgroundImage + ')';
+    get bgImage(): string {
+        return this._image;
     }
 
     /** @hidden */
     @HostBinding('attr.role')
     get role(): string {
         return this.zoomGlyph ? 'button' : 'presentation';
+    }
+
+    /** @hidden */
+    abbreviate: string = null;
+
+    /** @hidden */
+    private _image: string = null;
+
+    /** @hidden */
+    private get showDefault(): boolean {
+        return !this.abbreviate && !this._image && !this.glyph;
     }
 
     /** @hidden */
@@ -108,6 +139,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return [
             'fd-avatar',
             this.size ? `fd-avatar--${this.size}` : '',
+            this.showDefault ? 'sap-icon--person-placeholder' : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.colorAccent ? `fd-avatar--accent-color-${this.colorAccent}` : '',
             this.circle ? 'fd-avatar--circle' : '',
@@ -124,5 +156,31 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** @hidden Get an abbreviate from the label or return null if not fit requirements */
+    private _getAbbreviate(label: string): string | null {
+        if (!label || this._image) {
+            return null;
+        }
+
+        const maxLettersCount = 3;
+        const firstLetters = label.split(' ').map(word => word.charAt(0));
+        const abbreviate = firstLetters.join('');
+
+        if (firstLetters.length > maxLettersCount || !abbreviate.match(ANY_LANGUAGE_LETTERS_REGEX)) {
+            return null;
+        }
+
+        return abbreviate;
+    }
+
+    /** @hidden */
+    private _setImage(value: string): void {
+        if (value) {
+            this._image = 'url(' + value + ')';
+        } else {
+            this._image = null;
+        }
     }
 }

@@ -16,7 +16,16 @@
  *
  *
  */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Optional, Self } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Input,
+    OnInit,
+    Optional,
+    Self
+} from '@angular/core';
 import { FormFieldControl } from '../form-control';
 import { NgControl, NgForm } from '@angular/forms';
 import { BaseInput } from '../base.input';
@@ -36,7 +45,7 @@ export type InputType = 'text' | 'number' | 'email';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FormFieldControl, useExisting: InputComponent, multi: true }]
 })
-export class InputComponent extends BaseInput {
+export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     @Input()
     type: InputType = 'text';
 

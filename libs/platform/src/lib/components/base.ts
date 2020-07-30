@@ -10,8 +10,8 @@ let randomId = 0;
  */
 @Directive()
 export abstract class BaseComponent {
-    protected defaultId: string = `fdp-id-${randomId++}`;
-    protected _disabled: boolean = false;
+    protected defaultId = `fdp-id-${randomId++}`;
+    protected _disabled = false;
 
     /** id for the Element */
     @Input()

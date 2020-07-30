@@ -4,27 +4,27 @@ import { TimeI18n } from '@fundamental-ngx/core';
 // Aria labels i18n
 @Injectable()
 export class CustomI18nLabels extends TimeI18n {
-    increaseHoursLabel: string = 'Aumentar horas';
+    increaseHoursLabel = 'Aumentar horas';
 
-    hoursLabel: string = 'Horas';
+    hoursLabel = 'Horas';
 
-    decreaseHoursLabel: string = 'Disminuir horas';
+    decreaseHoursLabel = 'Disminuir horas';
 
-    increaseMinutesLabel: string = 'Aumentar minutos';
+    increaseMinutesLabel = 'Aumentar minutos';
 
-    minutesLabel: string = 'Minutos';
+    minutesLabel = 'Minutos';
 
-    decreaseMinutesLabel: string = 'Disminuir minutos';
+    decreaseMinutesLabel = 'Disminuir minutos';
 
-    increaseSecondsLabel: string = 'Aumentar segundos';
+    increaseSecondsLabel = 'Aumentar segundos';
 
-    secondsLabel: string = 'Segundos';
+    secondsLabel = 'Segundos';
 
-    decreaseSecondsLabel: string = 'Disminuir segundos';
+    decreaseSecondsLabel = 'Disminuir segundos';
 
-    meridianAm: string = 'vorm.';
+    meridianAm = 'vorm.';
 
-    meridianPm: string = 'nachm.';
+    meridianPm = 'nachm.';
 }
 
 @Component({

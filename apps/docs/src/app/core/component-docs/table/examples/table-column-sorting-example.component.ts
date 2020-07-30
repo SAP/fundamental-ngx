@@ -16,9 +16,9 @@ interface ExampleRow {
 export class TableColumnSortingExampleComponent implements OnInit {
     tableRows: ExampleRow[];
     displayedRows: ExampleRow[];
-    column1SortDir: string = 'asc';
-    filterVal: string = '';
-    open: boolean = false;
+    column1SortDir = 'asc';
+    filterVal = '';
+    open = false;
 
     sortColumn1(dir: string): void {
         this.column1SortDir = dir;

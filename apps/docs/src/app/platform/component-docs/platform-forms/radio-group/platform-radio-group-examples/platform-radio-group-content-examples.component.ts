@@ -6,9 +6,9 @@ import { FormGroup, FormControl } from '@angular/forms';
     templateUrl: './platform-radio-group-content-example.component.html'
 })
 export class PlatformRadioGroupContentExampleComponent implements DoCheck {
-    favoriteSeason: string = '';
-    favoriteSeason2: string = '';
-    favoriteMonth: string = '';
+    favoriteSeason = '';
+    favoriteSeason2 = '';
+    favoriteMonth = '';
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
     customForm = new FormGroup({

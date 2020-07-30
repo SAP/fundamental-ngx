@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './table-semantic-example.component.html'
 })
 export class TableSemanticExampleComponent {
-    selectMasterModel: boolean = false;
+    selectMasterModel = false;
 
     tableRows: any[] = [
         {

@@ -5,9 +5,9 @@ import { Component } from '@angular/core';
     templateUrl: './table-checkboxes-example.component.html'
 })
 export class TableCheckboxesExampleComponent {
-    checkboxValue: boolean = false;
-    checkboxValueCompact: boolean = false;
-    checkboxValueCondensed: boolean = false;
+    checkboxValue = false;
+    checkboxValueCompact = false;
+    checkboxValueCondensed = false;
 
     tableRows: any[] = [
         {
