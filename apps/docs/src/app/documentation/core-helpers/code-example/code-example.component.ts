@@ -11,7 +11,7 @@ import {
 import { CopyService } from '../../services/copy.service';
 import { ExampleFile } from './example-file';
 import { height } from '../../utilities/animations/collapse';
-import { AlertService } from '@fundamental-ngx/core';
+import { AlertConfig, AlertService } from '@fundamental-ngx/core';
 import { StackblitzService } from '../stackblitz/stackblitz.service';
 import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 
@@ -53,7 +53,7 @@ export class CodeExampleComponent implements OnInit {
 
     copyText(): void {
         this.copyService.copyText(this.exampleFiles[this.selectedFileIndex].code.default);
-        this.alertService.open('Code copied!', { type: 'success', duration: 5000 });
+        this.alertService.open('Code copied!', { type: 'success', duration: 5000 } as AlertConfig);
     }
 
     ngOnInit(): void {
