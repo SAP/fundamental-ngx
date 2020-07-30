@@ -26,7 +26,7 @@
     <label fd-form-label for="input-54">
         Warning Input - Example of message triggered only on focus/blur
     </label>
-    <fd-form-input-message-group [closeOnEscapeKey]="false" [closeOnOutsideClick]="false" [triggers]="['focus', 'blur']">
+    <fd-form-input-message-group [closeOnEscapeKey]="false" [closeOnOutsideClick]="false" [triggers]="['focusin', 'focusout']">
         <input fd-form-control type="text" id="input-54" placeholder="Field placeholder text" [state]="'warning'" />
         <fd-form-message [type]="'warning'">
             Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
