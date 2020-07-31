@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './panel-expandable-example.component.html'
 })
 export class PanelExpandableExampleComponent {
-    expanded: boolean = true;
+    expanded = true;
 }

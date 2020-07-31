@@ -6,8 +6,8 @@ import { RtlService } from '../utils/services/rtl.service';
 
 @Injectable()
 export class CalendarService {
-    rowAmount: number = 3;
-    colAmount: number = 4;
+    rowAmount = 3;
+    colAmount = 4;
 
     /** Event thrown, when the element is selected by space or enter keys */
     onKeySelect: Subject<number> = new Subject<number>();
@@ -57,6 +57,8 @@ export class CalendarService {
      */
     static datesEqual(date1: FdDate, date2: FdDate): boolean {
         if (!date1 || !date2) {
+            return false;
+        } else if (!date1.toDateString() && !date2.toDateString()) {
             return false;
         } else {
             return date1.toDateString() === date2.toDateString();

@@ -34,7 +34,7 @@ import { Placement, PopperOptions } from 'popper.js';
 import { RtlService } from '../utils/services/rtl.service';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
 
-let menuUniqueId: number = 0;
+let menuUniqueId = 0;
 
 /**
  * The component that represents a menu.
@@ -91,23 +91,23 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
 
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /** Whether the popover is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
-    closeOnEscapeKey: boolean = true;
+    closeOnEscapeKey = true;
 
     /** Display menu in compact mode */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Open submenu on hover after given milliseconds */
     @Input()
-    openOnHoverTime: number = 0;
+    openOnHoverTime = 0;
 
     /** Display menu without integrated popover */
     @Input()
@@ -123,7 +123,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
 
     /** Id of the control. */
     @Input()
-    id: string = `fd-menu-${menuUniqueId++}`;
+    id = `fd-menu-${menuUniqueId++}`;
 
     /** Emits array of active menu items */
     @Output()
@@ -150,10 +150,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     menuItems: QueryList<MenuItemComponent>;
 
     /** Whether use menu in mobile mode */
-    mobile: boolean = false;
+    mobile = false;
 
     /** @hidden Whether Popover with the menu is opened */
-    isOpen: boolean = false;
+    isOpen = false;
 
     /** @hidden */
     private _eventRef: Function[] = [];

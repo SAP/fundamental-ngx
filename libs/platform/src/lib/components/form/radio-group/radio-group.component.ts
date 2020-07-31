@@ -10,7 +10,7 @@ import {
     Output,
     Self,
     Optional,
-    ViewChildren
+    ViewChildren, AfterContentChecked, OnDestroy
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
@@ -26,7 +26,7 @@ let nextUniqueId = 0;
     templateUrl: './radio-group.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit {
+export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit, AfterContentChecked, OnDestroy {
     /** value of selected radio button */
     @Input()
     get value(): any {
@@ -40,19 +40,19 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
      * To Dispaly Radio buttons in a line
      */
     @Input()
-    isInline: boolean = false;
+    isInline = false;
 
     /**
      * None value radio button created
      */
     @Input()
-    hasNoValue: boolean = false;
+    hasNoValue = false;
 
     /**
      * Label for None value radio button
      */
     @Input()
-    noValueLabel: string = 'None';
+    noValueLabel = 'None';
 
     /** Children radio buttons part of Group radio button, passed as content */
     @ContentChildren(RadioButtonComponent)

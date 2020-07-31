@@ -11,7 +11,7 @@ export class MenuKeyboardService {
     public readonly itemClicked: Subject<number> = new Subject<number>();
 
     /** Whether user wants to remove keyboard handling */
-    disableKeydownHandling: boolean = false;
+    disableKeydownHandling = false;
 
     /** Function that is supposed to be called, when focus escape before list */
     focusEscapeBeforeList: Function;

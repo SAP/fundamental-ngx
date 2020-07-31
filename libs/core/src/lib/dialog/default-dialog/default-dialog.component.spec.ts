@@ -59,9 +59,9 @@ describe('DefaultDialogComponent', () => {
     });
 
     it('should handle callback', () => {
-        let cancelClicked: boolean = false;
-        let approveClicked: boolean = false;
-        let closeClicked: boolean = false;
+        let cancelClicked = false;
+        let approveClicked = false;
+        let closeClicked = false;
         component.defaultDialogConfig = {
             ...component.defaultDialogConfig,
             closeButtonCallback: () => closeClicked = true,

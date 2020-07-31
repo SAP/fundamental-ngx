@@ -13,7 +13,7 @@ import { RtlService } from '@fundamental-ngx/core';
 })
 export class DirectionalityComponent implements OnInit {
     id: string;
-    isChecked: boolean = false;
+    isChecked = false;
     @Input()
     label: string;
 

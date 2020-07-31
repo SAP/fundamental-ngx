@@ -9,5 +9,5 @@ import { Directive, HostBinding } from '@angular/core';
 export class ShellbarSidenavDirective {
     /** @hidden */
     @HostBinding('class.fd-shellbar-side-nav-control')
-    classSideNavUtility: boolean = true;
+    classSideNavUtility = true;
 }

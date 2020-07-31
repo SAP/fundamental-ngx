@@ -48,7 +48,7 @@ export class SplitButtonComponent {
 
     /** The icon to include in the button. See the icon page for the list of icons. */
     @Input()
-    glyph: string = 'slim-arrow-down';
+    glyph = 'slim-arrow-down';
 
     /** The icon to include in the button. See the icon page for the list of icons. */
     @Input()
@@ -65,7 +65,7 @@ export class SplitButtonComponent {
 
     /** Aria-label used to describe expand button*/
     @Input()
-    expandButtonAriaLabel: string = 'More';
+    expandButtonAriaLabel = 'More';
 
     /** Event sent when primary button is clicked */
     @Output()

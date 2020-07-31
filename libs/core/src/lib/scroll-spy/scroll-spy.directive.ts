@@ -17,7 +17,7 @@ export class ScrollSpyDirective {
      * Whether events are still fired if there is no tag present on the user's screen.
      */
     @Input()
-    public fireEmpty: boolean = false;
+    public fireEmpty = false;
 
     /**
      * A number that represent at what location in the container the event is fired.
@@ -25,14 +25,14 @@ export class ScrollSpyDirective {
      * 0 for the top and 1 for the bottom.
      */
     @Input()
-    public targetPercent: number = 0;
+    public targetPercent = 0;
 
     /**
      * Number that represents the offset in pixels for fired target. `100` value means that the event will be fired for
      * target that is 100 pixels below the spy container.
      */
     @Input()
-    public targetOffset: number = 0;
+    public targetOffset = 0;
 
     /**
      * Event fired on the scroll element when a new item becomes activated by the scrollspy .

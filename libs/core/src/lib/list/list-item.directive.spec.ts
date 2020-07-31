@@ -9,7 +9,7 @@ class TestComponent {
     @ViewChild('directiveElement', { static: true })
     ref: ElementRef;
 
-    selected: boolean = false;
+    selected = false;
 }
 
 describe('ListItemDirective', () => {

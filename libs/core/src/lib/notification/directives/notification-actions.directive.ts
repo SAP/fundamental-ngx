@@ -6,5 +6,5 @@ import { Directive, HostBinding } from '@angular/core';
 export class NotificationActionsDirective {
     /** @hidden */
     @HostBinding('class.fd-notification__actions')
-    fdNotificationMetaDataClass: boolean = true;
+    fdNotificationMetaDataClass = true;
 }

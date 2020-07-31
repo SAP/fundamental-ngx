@@ -10,5 +10,5 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 export class NotificationFooterComponent {
     /** @hidden */
     @HostBinding('class.fd-notification__footer')
-    fdNotificationFooterClass: boolean = true;
+    fdNotificationFooterClass = true;
 }

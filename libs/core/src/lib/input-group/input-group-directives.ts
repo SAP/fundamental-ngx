@@ -22,7 +22,7 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     class: string;
 
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
@@ -70,7 +70,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     @HostBinding('class.fd-input-group__addon')
-    fdInputGroupAddonClass: boolean = true;
+    fdInputGroupAddonClass = true;
 
     /**
      * The placement of the add-on. Options include *before* and *after*
@@ -80,7 +80,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
 
     /** Whether to apply compact mode to the AddOn. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /**
      * The placement of the add-on. Options include *before* and *after*
@@ -99,7 +99,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
      * Whether the icon add-on or the text add-on is a button.
      */
     @Input()
-    button: boolean = false;
+    button = false;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, private renderer: Renderer2) {}

@@ -17,7 +17,7 @@ export class SectionsToolbarComponent implements OnInit {
     @Input()
     sideCollapsed: BehaviorSubject<boolean>;
 
-    search: string = '';
+    search = '';
 
     private get _smallScreen(): boolean {
         return window.innerWidth < SMALL_SCREEN_BREAKPOINT;

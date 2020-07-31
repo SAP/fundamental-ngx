@@ -7,12 +7,12 @@ import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator'
 export class TileContentDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__content')
-    baseClass: boolean = true;
+    baseClass = true;
 
     /** Divides the tile content in to two columns. */
     @HostBinding('class.fd-tile__content--2-col')
     @Input()
-    twoColumn: boolean = false;
+    twoColumn = false;
 }
 
 @Directive({
@@ -21,7 +21,7 @@ export class TileContentDirective {
 export class TileContentBylineDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__content-byline')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -30,7 +30,7 @@ export class TileContentBylineDirective {
 export class TileContentTextDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__content-text')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -39,12 +39,12 @@ export class TileContentTextDirective {
 export class TileFooterDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__footer')
-    baseClass: boolean = true;
+    baseClass = true;
 
     /** Divides the tile footer in to two columns. */
     @HostBinding('class.fd-tile__footer--2-col')
     @Input()
-    twoColumn: boolean = false;
+    twoColumn = false;
 }
 
 @Directive({
@@ -53,7 +53,7 @@ export class TileFooterDirective {
 export class TileFooterTextDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__footer-text')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -62,12 +62,12 @@ export class TileFooterTextDirective {
 export class TileHeaderDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__header')
-    baseClass: boolean = true;
+    baseClass = true;
 
     /** Divides the tile header in to two columns. */
     @HostBinding('class.fd-tile__header--2-col')
     @Input()
-    twoColumn: boolean = false;
+    twoColumn = false;
 }
 
 @Directive({
@@ -76,7 +76,7 @@ export class TileHeaderDirective {
 export class TileHeaderContentDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__header-content')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -85,7 +85,7 @@ export class TileHeaderContentDirective {
 export class TileSectionDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__section')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -94,7 +94,7 @@ export class TileSectionDirective {
 export class TileSubtitleDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__subtitle')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -103,7 +103,7 @@ export class TileSubtitleDirective {
 export class TileTitleDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__title')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -112,7 +112,7 @@ export class TileTitleDirective {
 export class TileTitleContainerDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__title-container')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -156,7 +156,7 @@ export class TileRefreshDirective implements OnInit, OnChanges {
     }
 }
 
-let profileTileUniqueId: number = 0;
+let profileTileUniqueId = 0;
 
 @Directive({
     selector: '[fdTileProfileImg], [fd-tile-profile-img]',
@@ -167,12 +167,12 @@ let profileTileUniqueId: number = 0;
 export class TileProfileImgDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__profile-img')
-    baseClass: boolean = true;
+    baseClass = true;
 
     /** Id of the tile. */
     @Input()
     @HostBinding('attr.id')
-    id: string = `fd-profileTile-${profileTileUniqueId++}`;
+    id = `fd-profileTile-${profileTileUniqueId++}`;
 
     /** Aria-label for tile. */
     @Input()
@@ -201,7 +201,7 @@ export class TileProfileImgDirective {
 export class TileLogoDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__logo')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -210,7 +210,7 @@ export class TileLogoDirective {
 export class TileToggleDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__toggle')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -219,12 +219,12 @@ export class TileToggleDirective {
 export class TileContainerDirective {
     /** @hidden */
     @HostBinding('class.fd-tile-container')
-    baseClass: boolean = true;
+    baseClass = true;
 
     /** Whether or not the container is a 'list' type (used on screens smaller than 450px). */
     @HostBinding('class.fd-tile-container--list')
     @Input()
-    list: boolean = false;
+    list = false;
 }
 
 @Directive({
@@ -233,7 +233,7 @@ export class TileContainerDirective {
 export class TileSlideContainerDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__container')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -242,7 +242,7 @@ export class TileSlideContainerDirective {
 export class TileBackgroundImgDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__background-img')
-    baseClass: boolean = true;
+    baseClass = true;
 
     /** Background image url. */
     @Input()
@@ -261,7 +261,7 @@ export class TileBackgroundImgDirective {
 export class TilePageIndicatorDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__page-indicator')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -270,12 +270,12 @@ export class TilePageIndicatorDirective {
 export class TileDotDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__dot')
-    baseClass: boolean = true;
+    baseClass = true;
 
     /** Whether or not this dot is active. */
     @HostBinding('class.fd-tile__dot--active')
     @Input()
-    active: boolean = false;
+    active = false;
 }
 
 @Directive({
@@ -354,5 +354,5 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges {
 export class TileActionContainerDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__action-container')
-    baseClass: boolean = true;
+    baseClass = true;
 }

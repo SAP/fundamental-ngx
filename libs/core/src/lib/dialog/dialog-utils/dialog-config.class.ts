@@ -43,25 +43,25 @@ export class DialogConfig implements DynamicComponentConfig {
     ariaDescribedBy?: string = null;
 
     /** Whether the dialog should have a backdrop. */
-    hasBackdrop?: boolean = true;
+    hasBackdrop = true;
 
     /** Whether clicking on the backdrop should close the dialog. Only works if hasBackdrop is true. */
-    backdropClickCloseable?: boolean = true;
+    backdropClickCloseable = true;
 
     /** Global classes to apply to the backdrop. */
-    backdropClass?: string = '';
+    backdropClass = '';
 
     /** Classes to apply to the `fd-dialog-container`  */
-    containerClass?: string = '';
+    containerClass = '';
 
     /** Global classes to apply to the dialog panel. */
-    dialogPanelClass?: string = '';
+    dialogPanelClass = '';
 
     /** Whether the escape key should close the dialog. */
-    escKeyCloseable?: boolean = true;
+    escKeyCloseable = true;
 
     /** Whether the dialog should be focus trapped. */
-    focusTrapped?: boolean = true;
+    focusTrapped = true;
 
     /** The container that the dialog is appended to. By default, it is appended to the body. */
     container?: HTMLElement | 'body' = 'body';
@@ -85,7 +85,7 @@ export class DialogConfig implements DynamicComponentConfig {
     resizable?: boolean;
 
     /** Whether the dialog should have vertical padding. */
-    verticalPadding?: boolean = true;
+    verticalPadding = true;
 
     /** Whether the dialog should have responsive horizontal padding changing with Dialogs window width.
      * max-width: 599px                         - .fd-dialog__content--s
@@ -93,5 +93,5 @@ export class DialogConfig implements DynamicComponentConfig {
      * min-width: 1024px and max-width: 1439px  - .fd-dialog__content--l
      * min-width: 1440px                        - .fd-dialog__content--xl
      * */
-    responsivePadding?: boolean = false;
+    responsivePadding = false;
 }

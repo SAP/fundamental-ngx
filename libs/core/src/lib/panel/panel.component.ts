@@ -9,12 +9,14 @@ import {
     OnChanges,
     OnInit,
     ViewEncapsulation,
-    Output
+    Output,
+    ContentChild
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { PanelContentDirective } from './panel-content/panel-content.directive';
 
-let panelUniqueId: number = 0;
-let panelExpandUniqueId: number = 0;
+let panelUniqueId = 0;
+let panelExpandUniqueId = 0;
 
 /**
  * The panel is a container for grouping and displaying information
@@ -66,6 +68,10 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit {
     /** Output event triggered when the Expand button is clicked */
     @Output()
     expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Reference to panel content */
+    @ContentChild(PanelContentDirective)
+    panelContent: PanelContentDirective;
 
     /** @hidden */
     constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef) {}

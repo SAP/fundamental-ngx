@@ -24,5 +24,5 @@ export class ActionBarDescriptionDirective {
      */
     @Input()
     @HostBinding('class.fd-action-bar__description--back')
-    withBackBtn: boolean = false;
+    withBackBtn = false;
 }

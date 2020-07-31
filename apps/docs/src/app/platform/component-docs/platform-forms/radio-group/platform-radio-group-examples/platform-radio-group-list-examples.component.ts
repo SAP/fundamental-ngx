@@ -8,8 +8,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class PlatformRadioGroupListExampleComponent implements DoCheck {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
-    favoriteOption: string = '';
-    favoriteOption2: string = '';
+    favoriteOption = '';
+    favoriteOption2 = '';
     customForm = new FormGroup({
         example1: new FormControl({ value: '', disabled: false }),
         example2: new FormControl({ value: '', disabled: false })

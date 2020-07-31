@@ -10,5 +10,5 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 export class NotificationGroupComponent {
     /** @hidden */
     @HostBinding('class.fd-notification--group')
-    fdNotificationGroupClass: boolean = true;
+    fdNotificationGroupClass = true;
 }

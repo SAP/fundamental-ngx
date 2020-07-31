@@ -35,10 +35,10 @@ let randomId = 0;
 @Directive()
 export abstract class BaseInput extends BaseComponent
     implements FormFieldControl<any>, ControlValueAccessor, OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
-    protected defaultId: string = `fdp-input-id-${randomId++}`;
+    protected defaultId = `fdp-input-id-${randomId++}`;
     protected _disabled: boolean;
     protected _value: any;
-    protected _editable: boolean = true;
+    protected _editable = true;
     protected _destroyed = new Subject<void>();
 
     @Input()
@@ -97,7 +97,7 @@ export abstract class BaseInput extends BaseComponent
     /**
      * See @FormFieldControl
      */
-    focused: boolean = false;
+    focused = false;
 
     /**
      * See @FormFieldControl

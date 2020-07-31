@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class FileInputCustomExampleComponent {
     files: File[] = [];
-    state: string = 'default';
+    state = 'default';
 
     selectHandler(passedFiles) {
         passedFiles.forEach((file) => {

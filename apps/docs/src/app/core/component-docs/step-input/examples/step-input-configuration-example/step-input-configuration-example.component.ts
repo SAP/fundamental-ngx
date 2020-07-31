@@ -60,14 +60,14 @@ import { Component } from '@angular/core';
     `
 })
 export class StepInputConfigurationExampleComponent {
-    value1: number = 0;
-    value2: number = 0;
-    value3: number = 0;
-    value4: number = 10000.55;
-    value5: number = 0;
-    value6: number = 0;
-    value7: number = 0;
-    value8: number = 0;
+    value1 = 0;
+    value2 = 0;
+    value3 = 0;
+    value4 = 10000.55;
+    value5 = 0;
+    value6 = 0;
+    value7 = 0;
+    value8 = 0;
 
     constructor() {}
 }

@@ -29,7 +29,7 @@ export class DndContainerDirective implements AfterContentInit {
     readonly started: EventEmitter<void> = new EventEmitter<void>();
 
     /** Whether this element should stick in one place, without changing position */
-    @Input() stickInPlace: boolean = false;
+    @Input() stickInPlace = false;
 
     /** @hidden */
     @ContentChild(CdkDrag)

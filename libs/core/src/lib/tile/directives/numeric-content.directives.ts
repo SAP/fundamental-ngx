@@ -15,7 +15,7 @@ export class NumericContentDirective implements OnInit, OnChanges {
 
     /** @hidden */
     @HostBinding('class.fd-numeric-content')
-    baseClass: boolean = true;
+    baseClass = true;
 
     @Input()
     size: NumericContentSize = '';
@@ -74,7 +74,7 @@ export class NumericContentDirective implements OnInit, OnChanges {
 export class NumericContentLaunchIconContainerDirective {
     /** @hidden */
     @HostBinding('class.fd-numeric-content__launch-icon-container')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -126,7 +126,7 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges {
 export class NumericContentKpiContainerDirective {
     /** @hidden */
     @HostBinding('class.fd-numeric-content__kpi-container')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
@@ -182,14 +182,14 @@ export class NumericContentKpiDirective implements OnInit, OnChanges {
 export class NumericContentScaleContainerDirective {
     /** @hidden */
     @HostBinding('class.fd-numeric-content__scale-container')
-    baseClass: boolean = true;
+    baseClass = true;
 }
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-numeric-content-scale-arrow]'
 })
-export class NumericContentScaleArrowDirective {
+export class NumericContentScaleArrowDirective implements OnInit, OnChanges {
     /** Apply user custom styles */
     @Input()
     class: string;
@@ -276,5 +276,5 @@ export class NumericContentScaleDirective implements OnInit, OnChanges {
 export class NumericContentScaleTextDirective {
     /** @hidden */
     @HostBinding('class.fd-numeric-content__scale-text')
-    baseClass: boolean = true;
+    baseClass = true;
 }

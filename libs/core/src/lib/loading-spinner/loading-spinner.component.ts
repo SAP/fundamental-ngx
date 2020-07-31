@@ -20,9 +20,9 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 export class LoadingSpinnerComponent {
     /** Whether to display the loading indicator animation. */
     @Input()
-    loading: boolean = false;
+    loading = false;
 
     /** Aria label for the 'loading' spinner. */
     @Input()
-    loadingLabel: string = 'Loading';
+    loadingLabel = 'Loading';
 }

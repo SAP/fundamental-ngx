@@ -6,5 +6,5 @@ import { Directive, HostBinding } from '@angular/core';
 export class NotificationMetadataDirective {
     /** @hidden */
     @HostBinding('class.fd-notification__metadata')
-    fdNotificationMetaDataClass: boolean = true;
+    fdNotificationMetaDataClass = true;
 }

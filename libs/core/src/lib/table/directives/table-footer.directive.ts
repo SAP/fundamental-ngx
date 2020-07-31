@@ -6,5 +6,5 @@ import { Directive, HostBinding } from '@angular/core';
 export class TableFooterDirective {
     /** @hidden */
     @HostBinding('class.fd-table__footer')
-    fdTableFooterClass: boolean = true;
+    fdTableFooterClass = true;
 }

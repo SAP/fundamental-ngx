@@ -29,11 +29,11 @@ export class PreparedNestedListComponent {
      * Defines if the component is first
      */
     @Input()
-    first: boolean = true;
+    first = true;
 
     /** Defines if list should be displayed in condensed mode */
     @Input()
-    condensed: boolean = false;
+    condensed = false;
 
     /** List configuration*/
     @Input()

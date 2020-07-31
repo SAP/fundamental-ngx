@@ -11,7 +11,7 @@ export class MenuTitleDirective {
 
     /** @hidden */
     @HostBinding('class.fd-menu__title')
-    fdMenuTitleClass: boolean = true;
+    fdMenuTitleClass = true;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}

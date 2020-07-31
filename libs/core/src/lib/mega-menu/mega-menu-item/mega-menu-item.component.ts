@@ -79,7 +79,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     /** Variable that specifies if the sublist menu is opened. */
     @Input()
-    open: boolean = false;
+    open = false;
 
     /** Defines what should be position for sublist */
     @Input()

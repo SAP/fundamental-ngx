@@ -46,7 +46,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     /** Whether the popover is open. Can be used through two-way binding. */
     @Input()
-    isOpen: boolean = false;
+    isOpen = false;
 
     /** Reference to external popover trigger responsible for opening/closing the popover */
     @Input()
@@ -59,7 +59,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     /** Whether the popover should display the default arrow. */
     @Input()
-    noArrow: boolean = true;
+    noArrow = true;
 
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
@@ -68,20 +68,20 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     /** Whether the popover should be focusTrapped. */
     @Input()
-    focusTrapped: boolean = false;
+    focusTrapped = false;
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
-    closeOnEscapeKey: boolean = true;
+    closeOnEscapeKey = true;
 
     /** Whether the popover is disabled. */
     @Input()
     @HostBinding('class.fd-popover-custom--disabled')
-    disabled: boolean = false;
+    disabled = false;
 
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /** The element to which the popover should be appended. */
     @Input()
@@ -125,7 +125,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     private containerRef: ComponentRef<PopoverContainer>;
     private popper: Popper;
     private eventRef: Function[] = [];
-    private isSetup: boolean = false;
+    private isSetup = false;
     private _outsideClickEventReference: () => void;
 
     /** @hidden */

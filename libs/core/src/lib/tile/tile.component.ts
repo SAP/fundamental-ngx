@@ -22,7 +22,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
 
     /** Optional 'double' modifier to double the tile width. */
     @Input()
-    double: boolean = false;
+    double = false;
 
     /** Type of tile.  Options are 'kpi', 'launch', 'feed', 'slide', 'line', or leave blank for default. */
     @Input()
@@ -30,7 +30,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
 
     /** Whether or not the tile is in 'action' mode. */
     @Input()
-    action: boolean = false;
+    action = false;
 
     /** @hidden */
     @ViewChild('tileDiv')

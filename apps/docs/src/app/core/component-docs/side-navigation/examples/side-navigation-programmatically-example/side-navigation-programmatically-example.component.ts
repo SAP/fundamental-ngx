@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './side-navigation-programmatically-example.component.html'
 })
 export class SideNavigationProgrammaticallyExampleComponent {
-    open: boolean = true;
+    open = true;
 
-    selected: boolean = true;
+    selected = true;
 }
