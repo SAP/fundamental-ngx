@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Input, Output, EventEmitter, Renderer2, Directive } from '@angular/core';
+import { ChangeDetectorRef, Input, Output, EventEmitter, Renderer2, Directive, OnInit } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
@@ -25,7 +25,7 @@ type AlignInputType = 'left' | 'center' | 'right';
  * This holds base Step Input functionality that can be abstracted
  */
 @Directive()
-export abstract class StepInputComponent extends BaseInput {
+export abstract class StepInputComponent extends BaseInput implements OnInit {
     /** content Density of element. cozy | compact */
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
