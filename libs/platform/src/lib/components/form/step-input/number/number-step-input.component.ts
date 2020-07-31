@@ -16,11 +16,11 @@ import { NgControl, NgForm } from '@angular/forms';
 import { RtlService } from '@fundamental-ngx/core';
 
 import { FormFieldControl } from '../../form-control';
-import { StepInputComponent, PlatformStepInputChange } from '../base.step-input';
+import { StepInputComponent, StepInputChangeEvent } from '../base.step-input';
 import { StepInputConfig } from '../step-input.config';
 
 /** Change event object emitted by Platform Number Step Input. */
-export class PlatformNumberStepInputChange extends PlatformStepInputChange<NumberStepInputComponent, number> {}
+export class NumberStepInputChangeEvent extends StepInputChangeEvent<NumberStepInputComponent, number> {}
 
 @Component({
     selector: 'fdp-number-step-input',
@@ -54,7 +54,7 @@ export class NumberStepInputComponent extends StepInputComponent {
      * Create change event instance
      */
     createChangeEvent(value: number) {
-        const event = new PlatformNumberStepInputChange();
+        const event = new NumberStepInputChangeEvent();
         event.source = this;
         event.payload = value;
         return event;

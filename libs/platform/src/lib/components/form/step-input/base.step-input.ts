@@ -6,11 +6,12 @@ import { takeUntil, switchMap, map } from 'rxjs/operators';
 import { RtlService } from '@fundamental-ngx/core';
 
 import { BaseInput } from '../base.input';
-import { StepInputConfig } from './step-input.config';
 import { ContentDensity } from '../form-control';
+import { StepInputConfig } from './step-input.config';
+import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
 
 /** Change event object emitted by Platform Step Input component */
-export class PlatformStepInputChange<T extends StepInputComponent = StepInputComponent, K = number> {
+export class StepInputChangeEvent<T extends StepInputComponent = StepInputComponent, K = number> {
     /** The source Step Input of the event. */
     source: T;
     /** The new value of a control. */
@@ -133,7 +134,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** Emits new value when control value has changed */
     @Output()
-    valueChange: EventEmitter<PlatformStepInputChange> = new EventEmitter<PlatformStepInputChange>();
+    valueChange: EventEmitter<StepInputChangeEvent> = new EventEmitter<StepInputChangeEvent>();
 
     /** @hidden */
     lastEmittedValue: number;
@@ -252,7 +253,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         if (!this.canIncrement) {
             return;
         }
-        const value = this._addAndCutFloatingNumberDistortion(this._value, step);
+        const value = addAndCutFloatingNumberDistortion(this._value, step);
         this.value = this._validateValueByLimits(value);
         this._emitChangedValue();
     }
@@ -262,7 +263,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         if (!this.canDecrement) {
             return;
         }
-        const value = this._addAndCutFloatingNumberDistortion(this._value, -step);
+        const value = addAndCutFloatingNumberDistortion(this._value, -step);
         this.value = this._validateValueByLimits(value);
         this._emitChangedValue();
     }
@@ -308,7 +309,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
      */
     onFocus() {
         super._onFocusChanged(true);
-        this._updateViewValue();
+        this._updateViewValue(true);
     }
 
     /**@hidden
@@ -325,7 +326,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** Create valueChange event */
-    abstract createChangeEvent(value: number): PlatformStepInputChange;
+    abstract createChangeEvent(value: number): StepInputChangeEvent;
 
     /** Format value for view presentation */
     abstract formatValue(value: number): string;
@@ -335,18 +336,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** Parse value entered "in focus" mode */
     abstract parseValueInFocusMode(value: string): number | null;
-
-    /** @hidden */
-    private _addAndCutFloatingNumberDistortion(value: number, step: number): number {
-        value = value || 0;
-        const stepDecimals = `${step}`.split('.')[1];
-        const valueDecimals = `${value}`.split('.')[1];
-        const stepDecimalsLength = stepDecimals ? stepDecimals.length : 0;
-        const valueDecimalsLength = valueDecimals ? valueDecimals.length : 0;
-        const longestDecimal = Math.max(valueDecimalsLength, stepDecimalsLength);
-
-        return Number((value + step).toFixed(longestDecimal));
-    }
 
     /** @hidden */
     private _emitChangedValue(): void {
@@ -369,7 +358,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    private _updateViewValue(): void {
+    private _updateViewValue(keepSelection = false): void {
         if (this._value === null) {
             return;
         }
@@ -379,18 +368,18 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         } else {
             formatted = this.formatValue(this._value);
         }
-        this._renderValue(formatted);
+        this._renderValue(formatted, keepSelection);
     }
 
     /** @hidden */
-    private _renderValue(value: string, keepSelection = true): void {
+    private _renderValue(value: string, keepSelection = false): void {
         const inputEl = this._elementRef.nativeElement as HTMLInputElement | null;
         const startSelectionPos = inputEl?.selectionStart;
         const endSelectionPos = inputEl?.selectionEnd;
 
         this._renderer.setProperty(this._elementRef.nativeElement, 'value', value);
 
-        if (keepSelection && startSelectionPos > 0 && endSelectionPos > 0) {
+        if (keepSelection && endSelectionPos - startSelectionPos > 0) {
             inputEl.setSelectionRange(startSelectionPos, endSelectionPos);
         }
     }
@@ -419,15 +408,10 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    private _getNumberDecimalLength(value: number): number {
-        return ((value || 0).toString().split('.')[0] || '').length;
-    }
-
-    /** @hidden */
     private _checkAndThrowErrorIfStepDoesntMatchPrecision(precision: number, step: number) {
         // Check if "precision" is valid comparing to "step"
-        const stepDecimalLength = this._getNumberDecimalLength(step);
-        const precisionDecimalLength = this._getNumberDecimalLength(precision);
+        const stepDecimalLength = getNumberDecimalLength(step);
+        const precisionDecimalLength = getNumberDecimalLength(precision);
         if (stepDecimalLength > precisionDecimalLength) {
             throw Error(
                 `Step input: The value of step property can not contain more digits after the decimal point than what is set to the precision property`

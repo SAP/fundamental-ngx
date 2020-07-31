@@ -12,7 +12,7 @@ import {
     FdpFormGroupModule
 } from '@fundamental-ngx/platform';
 
-import { NumberStepInputComponent, PlatformNumberStepInputChange } from './number-step-input.component';
+import { NumberStepInputComponent, NumberStepInputChangeEvent } from './number-step-input.component';
 
 @Component({
     template: `<fdp-number-step-input name="number"></fdp-number-step-input>`
@@ -96,7 +96,7 @@ class NumberStepInputMainFunctionalityHostComponent {
 
     stepFn: (value: number, action: 'increase' | 'decrease') => number;
 
-    onValueChanged(event: PlatformNumberStepInputChange) {
+    onValueChanged(event: NumberStepInputChangeEvent) {
         this.value = event.payload;
     }
 }
