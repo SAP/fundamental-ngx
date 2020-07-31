@@ -46,6 +46,9 @@
     .fd-multi-input-show-all {
         float: right;
         background-color: transparent;
+        .fd-link:active {
+            color: inherit;
+        }
     }
 
     .fd-multi-input-checkbox {
