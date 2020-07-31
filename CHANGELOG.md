@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.44...v0.20.1-rc.45) (2020-07-31)
+
+
+### Bug Fixes
+
+* multi cozy token count bug ([#2924](https://github.com/SAP/fundamental-ngx/issues/2924)) ([e19c136](https://github.com/SAP/fundamental-ngx/commit/e19c1363bfba226891bede246f78e113fbc4579d))
+
 ### [0.20.1-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.43...v0.20.1-rc.44) (2020-07-31)
 
 ### [0.20.1-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.42...v0.20.1-rc.43) (2020-07-31)
