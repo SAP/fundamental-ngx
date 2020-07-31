@@ -58,29 +58,29 @@ export class PaginationComponent implements OnChanges, OnInit {
 
     /** Whether to display the total number of items. */
     @Input()
-    displayTotalItems: boolean = true;
+    displayTotalItems = true;
 
     /**
      * The text appended to the total number of items.
      * The default text is set to 'items'
      */
     @Input()
-    displayText: string = 'items';
+    displayText = 'items';
 
     /** Label for the 'previous' page button. */
     @Input()
-    previousLabel: string = 'Previous';
+    previousLabel = 'Previous';
 
     /** Label for the 'next' page button. */
     @Input()
-    nextLabel: string = 'Next';
+    nextLabel = 'Next';
 
     /** Event fired when the page is changed. */
     @Output()
     pageChangeStart = new EventEmitter<number>();
 
     /** @hidden */
-    rtl: boolean = false;
+    rtl = false;
 
     /** @hidden */
     get customClasses(): string {

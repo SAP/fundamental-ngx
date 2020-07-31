@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DialogExampleComponent } from './dialog-example.component';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-component-based-dialog-example',
@@ -29,7 +29,7 @@ export class ComponentBasedDialogExampleComponent {
                 ]
             },
             width: '400px'
-        });
+        } as DialogConfig);
 
         dialogRef.afterClosed.subscribe(
             (result) => {

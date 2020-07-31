@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-popover-dialog-example',
@@ -12,6 +12,6 @@ export class PopoverDialogExampleComponent {
         this._dialogService.open(template, {
             width: '500px',
             responsivePadding: true
-        });
+        } as DialogConfig);
     }
 }

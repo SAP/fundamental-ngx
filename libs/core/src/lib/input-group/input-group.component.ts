@@ -62,7 +62,7 @@ export class InputGroupComponent implements ControlValueAccessor {
 
     /** Whether the input group is in compact mode. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Whether the input group is inline. */
     @Input()
@@ -78,7 +78,7 @@ export class InputGroupComponent implements ControlValueAccessor {
 
     /** Whether AddOn Button should be focusable */
     @Input()
-    buttonFocusable: boolean = true;
+    buttonFocusable = true;
 
     /**
      * @deprecated, leaving for backwards compatibility, it will be removed in `0.17.0`.
@@ -88,7 +88,7 @@ export class InputGroupComponent implements ControlValueAccessor {
 
     /** The type of the input, used in Input Group. By default value is set to 'text' */
     @Input()
-    type: string = 'text';
+    type = 'text';
 
     /** The icon value for the add-on. */
     @Input()
@@ -113,11 +113,11 @@ export class InputGroupComponent implements ControlValueAccessor {
      * Whether the input group is a popover control
      */
     @Input()
-    isControl: boolean = false;
+    isControl = false;
 
     /** @hidden */
     @Input()
-    isExpanded: boolean = false;
+    isExpanded = false;
 
     /** Event emitted when the add-on button is clicked. */
     @Output()
@@ -133,7 +133,7 @@ export class InputGroupComponent implements ControlValueAccessor {
      * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
      * @hidden
      */
-    inShellbar: boolean = false;
+    inShellbar = false;
 
     /** @hidden */
     onChange: any = () => {};

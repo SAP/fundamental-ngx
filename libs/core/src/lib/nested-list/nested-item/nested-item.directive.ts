@@ -16,7 +16,7 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { NestedListStateService } from '../nested-list-state.service';
 
-let sideNavigationItemUniqueId: number = 0;
+let sideNavigationItemUniqueId = 0;
 
 @Directive({
     selector: '[fdNestedItem], [fd-nested-list-item]',
@@ -48,7 +48,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__item')
-    fdNestedListItemClass: boolean = true;
+    fdNestedListItemClass = true;
 
     /**
      * @hidden
@@ -73,7 +73,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     ) {}
 
     /** @hidden */
-    private _expanded: boolean = false;
+    private _expanded = false;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();

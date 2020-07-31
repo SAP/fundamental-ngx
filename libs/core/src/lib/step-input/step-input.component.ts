@@ -23,7 +23,7 @@ import { defer, fromEvent, interval, merge, Observable, Subscription, timer } fr
 import { switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;
 
-let stepInputUniqueId: number = 0;
+let stepInputUniqueId = 0;
 
 @Component({
     selector: 'fd-step-input',
@@ -63,19 +63,19 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets icon displayed in Increment Button */
     @Input()
-    incrementButtonIcon: string = 'add';
+    incrementButtonIcon = 'add';
 
     /** Sets icon displayed in Decrement Button */
     @Input()
-    decrementButtonIcon: string = 'less';
+    decrementButtonIcon = 'less';
 
     /** Sets Increment Button title attribute */
     @Input()
-    incrementButtonTitle: string = '';
+    incrementButtonTitle = '';
 
     /** Sets Decrement Button title attribute */
     @Input()
-    decrementButtonTitle: string = '';
+    decrementButtonTitle = '';
 
     /** Sets input aria-label attribute */
     @Input()
@@ -83,7 +83,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets input id */
     @Input()
-    inputId: string = `fd-step-input-${stepInputUniqueId++}`;
+    inputId = `fd-step-input-${stepInputUniqueId++}`;
 
     /** Set control value */
     @Input('value')
@@ -115,7 +115,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets input step value */
     @Input()
-    step: number = 1;
+    step = 1;
 
     /** Sets input name attribute */
     @Input()
@@ -123,7 +123,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets input title attribute */
     @Input()
-    inputTitle: string = '';
+    inputTitle = '';
 
     /** Sets formatting mode */
     @Input()
@@ -139,7 +139,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Whether to use grouping when formatting value */
     @Input()
-    useGrouping: boolean = true;
+    useGrouping = true;
 
     /** Defines minimal number of fractional digits for control value */
     @Input()
@@ -159,7 +159,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Whether StepInput should display Increase/Decrease buttons */
     @Input()
-    hasStepButtons: boolean = true;
+    hasStepButtons = true;
 
     /** Horizontally aligns value inside input */
     @Input()

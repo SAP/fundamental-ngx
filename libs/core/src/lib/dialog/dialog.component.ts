@@ -101,7 +101,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
     private _focusTrap: FocusTrap;
 
     /** @hidden */
-    private _class: string = '';
+    private _class = '';
 
     /** @hidden */
     private _subscriptions = new Subscription();

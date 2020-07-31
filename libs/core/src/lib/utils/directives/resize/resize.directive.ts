@@ -30,7 +30,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
 
     /** Whether resizable behaviour should be disabled */
     // tslint:disable-next-line:no-input-rename
-    @Input('fdResizeDisabled') disabled: boolean = false;
+    @Input('fdResizeDisabled') disabled = false;
 
     /** Localization of resize handle inside resizable container */
     // tslint:disable-next-line:no-input-rename

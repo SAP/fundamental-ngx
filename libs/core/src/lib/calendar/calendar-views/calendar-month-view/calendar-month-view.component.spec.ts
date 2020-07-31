@@ -7,7 +7,7 @@ import { CalendarService } from '../../calendar.service';
 describe('CalendarMonthViewComponent', () => {
     let component: CalendarMonthViewComponent;
     let fixture: ComponentFixture<CalendarMonthViewComponent>;
-    const testMonth: number = 5;
+    const testMonth = 5;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

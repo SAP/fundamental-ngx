@@ -15,7 +15,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 @Component({
     selector: 'fd-tile',
     host: {
-        '[attr.role]': "(this.isButton === true ? 'button' : '')"
+        '[attr.role]': '(this.isButton === true ? \'button\' : \'\')'
     },
     templateUrl: './tile.component.html',
     styleUrls: ['./tile.component.scss'],
@@ -23,10 +23,10 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 })
 export class TileComponent extends AbstractFdNgxClass {
     /** Whether the tile is disabled. */
-    @Input() disabled: boolean = false;
+    @Input() disabled = false;
 
     /** Whether the tile is rendered as a button. */
-    @Input() isButton: boolean = false;
+    @Input() isButton = false;
 
     /** Specifies the number of rows a tile should span. */
     @Input() rowSpan: number;

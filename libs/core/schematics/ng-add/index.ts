@@ -135,7 +135,7 @@ function addFontsToStyles(options: any): Rule {
         const stylesFilePath = '/src/styles.scss';
         const stylesFileContent = tree.read('/src/styles.scss');
         const defaultFontStyleString = defaultFontStyle;
-        const sapThemingImport: string = 'node_modules/@sap-theming/theming-base-content/content/Base/baseLib';
+        const sapThemingImport = 'node_modules/@sap-theming/theming-base-content/content/Base/baseLib';
 
         if (options.styleFonts) {
             if (!stylesFileContent) {

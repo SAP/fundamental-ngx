@@ -16,7 +16,7 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
 export class MegaMenuSublinkDirective {
     /** @hidden */
     @HostBinding('class.fd-mega-menu__sublink')
-    fdMegaMenuClass: boolean = true;
+    fdMegaMenuClass = true;
 
     /** @hidden */
     constructor(public itemEl: ElementRef) {}

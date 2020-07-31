@@ -65,11 +65,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** Used to add focus class to the tokenizer-example */
     @Input()
-    tokenizerHasFocus: boolean = false;
+    tokenizerHasFocus = false;
 
     /** Whether the tokenizer is compact */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** The value for the tokenizer input */
     @Input()
@@ -81,14 +81,14 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** Word to use for when there are extra tokens. */
     @Input()
-    moreTerm: string = 'more';
+    moreTerm = 'more';
 
     /** @hidden */
     @Input()
     open: boolean;
 
     /** @hidden */
-    inputFocused: boolean = false;
+    inputFocused = false;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -113,7 +113,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     tokenListClickSubscriptions: Subscription[] = [];
 
     /** @hidden */
-    hiddenCozyTokenCount: number = 0;
+    hiddenCozyTokenCount = 0;
 
     /** @hidden */
     ngAfterViewInit(): void {

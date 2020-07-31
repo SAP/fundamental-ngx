@@ -24,7 +24,7 @@ export class ListTitleDirective {
      */
     @Input()
     @HostBinding('class.fd-list__title--no-wrap')
-    noWrap: boolean = false;
+    noWrap = false;
 }
 
 @Directive({
@@ -41,7 +41,7 @@ export class ListSecondaryDirective {
      */
     @Input()
     @HostBinding('class.fd-list__secondary--no-wrap')
-    noWrap: boolean = false;
+    noWrap = false;
 }
 
 @Directive({

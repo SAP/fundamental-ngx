@@ -14,18 +14,18 @@ export class MenuAddonDirective {
     /** Whether is used as submenu indicator */
     @Input()
     @HostBinding('class.fd-menu__addon-after--submenu')
-    submenuIndicator: boolean = false;
+    submenuIndicator = false;
 
     /** Sets Aria hidden attribute */
     @Input()
     @HostBinding('attr.aria-hidden')
-    ariaHidden: boolean = true;
+    ariaHidden = true;
 
     /** @hidden */
     @HostBinding('class.fd-menu__addon-after')
-    fdAddonAfterClass: boolean = true;
+    fdAddonAfterClass = true;
 
     /** @hidden */
     @HostBinding('class.fd-menu__addon-before')
-    fdAddonBeforeClass: boolean = false;
+    fdAddonBeforeClass = false;
 }
