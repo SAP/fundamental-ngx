@@ -71,6 +71,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     @Input()
     compact = false;
 
+    /** Whether to use cozy visuals but compact collapsing behavior. */
+    @Input()
+    compactCollapse = false;
+
     /** The value for the tokenizer input */
     @Input()
     inputValue: string;
@@ -140,7 +144,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.previousTokenCount = this.tokenList.length;
             this.handleTokenClickSubscriptions();
         });
-        if (!this.compact) {
+        if (!this.compact && !this.compactCollapse) {
             this._handleInitCozyTokenCount();
         }
     }
@@ -340,9 +344,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
             // and then hide any tokens from the right that no longer fit
             this._collapseTokens('right');
-        }
 
-        this.cdRef.detectChanges();
+            this.cdRef.detectChanges();
+        }
     }
 
     /** @hidden */
@@ -354,14 +358,14 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
             // and then hide any tokens from the left that no longer fit
             this._collapseTokens('left');
-        }
 
-        this.cdRef.detectChanges();
+            this.cdRef.detectChanges();
+        }
     }
 
     /** @hidden */
     private _collapseTokens(side?: string): void {
-        if (this.compact) {
+        if (this.compact || this.compactCollapse) {
             let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
             let i = 0;
@@ -395,7 +399,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     private _expandTokens(): void {
-        if (this.compact) {
+        if (this.compact || this.compactCollapse) {
             let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
 
