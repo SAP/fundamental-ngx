@@ -9,7 +9,11 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
 export class FileUploaderDragndropDirective {
     /** Whether multiple files can be dropped at once. */
     @Input()
+<<<<<<< HEAD
     multiple = true;
+=======
+    multiple: boolean = true;
+>>>>>>> [ci skip] Fix(File Uploader):Introduncing new fiori3 file uploader component
 
     /** Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
@@ -17,11 +21,19 @@ export class FileUploaderDragndropDirective {
 
     /** Whether selecting of new files is disabled. */
     @Input()
+<<<<<<< HEAD
     disabled = false;
 
     /** Whether drag and drop is enabled. Disables this directive. */
     @Input()
     dragndrop = true;
+=======
+    disabled: boolean = false;
+
+    /** Whether drag and drop is enabled. Disables this directive. */
+    @Input()
+    dragndrop: boolean = true;
+>>>>>>> [ci skip] Fix(File Uploader):Introduncing new fiori3 file uploader component
 
     /** Event emitted when files are selected. Passes back an array of files. */
     @Output()
@@ -39,7 +51,11 @@ export class FileUploaderDragndropDirective {
     @Output()
     readonly dragLeave: EventEmitter<void> = new EventEmitter<void>();
 
+<<<<<<< HEAD
     private elementStateCounter = 0;
+=======
+    private elementStateCounter: number = 0;
+>>>>>>> [ci skip] Fix(File Uploader):Introduncing new fiori3 file uploader component
 
     /** @hidden */
     @HostListener('dragover', ['$event'])
