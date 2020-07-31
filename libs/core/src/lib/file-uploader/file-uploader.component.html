@@ -1,0 +1,52 @@
+<div
+    style="display: block;"
+    class="fd-file-uploader"
+    fdFileDragnDrop
+    [accept]="accept"
+    [dragndrop]="dragndrop"
+    [disabled]="disabled"
+    [multiple]="multiple"
+    (fileChanged)="selectHandler($event)"
+    (invalidFileDrop)="selectedInvalidFiles.emit($event)"
+    (dragEntered)="onDragEnter.emit()"
+    (dragLeave)="onDragLeave.emit()"
+>
+    <input
+        #textInput
+        [id]="id"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
+        [class.fd-input--compact]="compact"
+        class="fd-input fd-file-uploader__input"
+        (click)="open()"
+        [title]="ariaLabel"
+        aria-live="polite"
+        autocomplete="off"
+        type="text"
+        [placeholder]="placeholder"
+        tabindex="-1"
+        readonly
+        [value]=""
+    />
+
+    <button
+        fd-button
+        [attr.aria-label]="buttonAriaLabel"
+        class="file-uploader__button"
+        (click)="open()"
+        [compact]="compact"
+    >
+        {{ buttonLabel }}
+    </button>
+    <ng-content select="[fd-form-control]"></ng-content>
+</div>
+<input
+    #fileInput
+    class="fd-file-uploader__hidden"
+    type="file"
+    [attr.accept]="accept"
+    (onFileSelect)="selectHandler($event)"
+    [multiple]="multiple"
+    [disabled]="disabled"
+    fdFileSelect
+/>

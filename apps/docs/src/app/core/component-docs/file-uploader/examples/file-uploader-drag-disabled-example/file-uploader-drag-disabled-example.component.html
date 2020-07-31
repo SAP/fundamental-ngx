@@ -1,0 +1,24 @@
+<fd-file-uploader
+    [id]="'fileInput'"
+    [ariaLabel]="'Choose file'"
+    [ariaLabelledBy]="'Choose file'"
+    [placeholder]="'Choose File to upload'"
+    [buttonLabel]="'Drag a .jpg file on me!'"
+    [buttonAriaLabel]="'browse file'"
+    (selectedFilesChanged)="this.files = $event"
+    (selectedInvalidFiles)="this.invalidFiles = $event"
+    [accept]="'.png'"
+>
+</fd-file-uploader>
+
+<br /><br />
+
+Files Selected:
+<br />
+<span *ngFor="let file of files">  <span style="color: green;">{{ file.name }} </span><br /> </span>
+
+<br />
+
+Invalid Files:
+<br />
+<span *ngFor="let file of invalidFiles">  <span style="color: red;">{{ file.name }} </span><br /></span>

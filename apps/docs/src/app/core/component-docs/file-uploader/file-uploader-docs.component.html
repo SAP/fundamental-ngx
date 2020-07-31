@@ -1,0 +1,94 @@
+<fd-docs-section-title [id]="'file-uploader-simple'" [componentName]="'file-uploader'">
+    Simple File Upload
+</fd-docs-section-title>
+<description>Used in this context, it will only allow a set of extensions to be added.</description>
+<component-example>
+    <fd-file-uploader-example></fd-file-uploader-example>
+</component-example>
+<code-example [exampleFiles]="fileUpladerExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'file-uploader-simple'" [componentName]="'file-uploader'">
+    File Uploader Truncation example
+</fd-docs-section-title>
+<description>Long placeholder for the input element will be truncated.</description>
+<component-example>
+    <fd-file-uploader-truncation-example></fd-file-uploader-truncation-example>
+</component-example>
+<code-example [exampleFiles]="fileUpladerExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'file-uploader-simple'" [componentName]="'file-uploader'">
+    Compact File Upload
+</fd-docs-section-title>
+<description>Fiori3 recommended file uploader example.</description>
+<component-example>
+    <fd-file-uploader-compact-example></fd-file-uploader-compact-example>
+</component-example>
+<code-example [exampleFiles]="fileUpladerFiori3Example"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'file-uploader-invalid'" [componentName]="'file-uploader'">
+    Invalid File Upload
+</fd-docs-section-title>
+<description>
+    An event is fired when invalid files are added through the drag and drop feature. These files can be retrieved and
+    displayed to the user at will.
+</description>
+<component-example>
+    <fd-file-uploader-drag-disabled-example></fd-file-uploader-drag-disabled-example>
+</component-example>
+<code-example [exampleFiles]="fileInvalidCustom"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'file-uploader-minMaxSize'" [componentName]="'file-uploader'">
+    Min and Max File Size
+</fd-docs-section-title>
+<description>
+    It is possible to control the size of the file through the input <code>minFileSize</code> and
+    <code>maxFileSize</code>. The size you can specify in Byte, KB, MB, GB, TB. This feature allows the user to specify
+    the minimum and maximum size, but someone knowledgeable enough could potentially bypass this. <br /><br />
+    <strong>NOTE: It is possible to bypass this client-side limit so a server-side check is still necessary.</strong>
+</description>
+<component-example>
+    <fd-file-uploader-min-and-max-size-example></fd-file-uploader-min-and-max-size-example>
+</component-example>
+<code-example [exampleFiles]="fileMinMaxSize"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'file-uploader-minSize'" [componentName]="'file-uploader'">
+    Min File Size
+</fd-docs-section-title>
+<description>
+    It is possible to control the size of the file through the input <code>minFileSize</code>. The number is in bytes.
+    This feature will keep casual users from entering smaller files to reduce network traffic, but someone knowledgeable
+    enough could potentially bypass this. <br /><br />
+    <strong>NOTE: It is possible to bypass this client-side limit so a server-side check is still necessary.</strong>
+</description>
+<component-example>
+    <fd-file-uploader-min-example></fd-file-uploader-min-example>
+</component-example>
+<code-example [exampleFiles]="fileMinSize"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'file-uploader-maxSize'" [componentName]="'file-uploader'">
+    Max File Size
+</fd-docs-section-title>
+<description>
+    It is possible to control the size of the file through the input <code>maxFileSize</code>. The number is in bytes.
+    This feature will keep casual users from entering larger files, but someone knowledgeable enough could potentially
+    bypass this. <br /><br />
+    <strong>NOTE: It is possible to bypass this client-side limit so a server-side check is still necessary.</strong>
+</description>
+<component-example>
+    <fd-file-uploader-max-example></fd-file-uploader-max-example>
+</component-example>
+<code-example [exampleFiles]="fileMaxSize"></code-example>
+
+<separator></separator>
