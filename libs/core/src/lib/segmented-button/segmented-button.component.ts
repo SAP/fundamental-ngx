@@ -22,5 +22,5 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 export class SegmentedButtonComponent {
     /** @hidden */
     @HostBinding('class.fd-segmented-button')
-    fdSegmentedButtonClass: boolean = true;
+    fdSegmentedButtonClass = true;
 }

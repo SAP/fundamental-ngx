@@ -22,7 +22,7 @@ export type LabelType = 'numeric' | 'only-icon' | 'icon';
 export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     /** user's custom classes */
     @Input()
-    class: string = '';
+    class = '';
 
     /**
      * The LabelType represented by the info label .

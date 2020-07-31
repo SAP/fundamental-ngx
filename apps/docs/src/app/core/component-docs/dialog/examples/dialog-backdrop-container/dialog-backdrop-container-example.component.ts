@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-dialog-backdrop-container-example',
@@ -26,7 +26,7 @@ export class DialogBackdropContainerExampleComponent {
             responsivePadding: true,
             backdropClass: 'dialog-custom-overlay-example',
             data: `This dialog has a custom backdrop!`
-        });
+        } as DialogConfig);
     }
 
     openInCustomContainer(dialog, containerRef: HTMLElement): void {
@@ -35,7 +35,7 @@ export class DialogBackdropContainerExampleComponent {
             container: containerRef,
             responsivePadding: true,
             data: `This dialog has been opened inside a local div!`
-        });
+        } as DialogConfig);
     }
 
     openStaticDialog(dialog, containerRef: HTMLElement): void {
@@ -46,6 +46,6 @@ export class DialogBackdropContainerExampleComponent {
             responsivePadding: true,
             backdropClass: 'static-dialog',
             data: `This dialog has been opened inside a local div and displayed as a static element!`
-        });
+        } as DialogConfig);
     }
 }

@@ -25,7 +25,7 @@ export class ListItemDirective {
     /** Whether tab is selected */
     @Input()
     @HostBinding('class.is-selected')
-    selected: boolean = false;
+    selected = false;
 
     /** @hidden */
     @ContentChild(CheckboxComponent, { static: false })

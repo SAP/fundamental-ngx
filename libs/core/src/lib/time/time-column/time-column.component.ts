@@ -23,7 +23,7 @@ import { Subject, Subscription } from 'rxjs';
 import { buffer, debounceTime, map } from 'rxjs/operators';
 
 
-let timeColumnUniqueId: number = 0;
+let timeColumnUniqueId = 0;
 
 
 export interface TimeColumnItemOutput {
@@ -47,7 +47,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** items in row */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /**
      * @Input when set to true, time inputs won't allow to have 1 digit
@@ -55,13 +55,13 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
      * but 12 will be kept as 12.
      */
     @Input()
-    keepTwoDigits: boolean = false;
+    keepTwoDigits = false;
 
     /**
      * @Input When set to false, hides the buttons that increment and decrement the corresponding columns.
      */
     @Input()
-    spinners: boolean = true;
+    spinners = true;
 
     /** Currently chosen, centered time column item */
     @Input()
@@ -91,12 +91,12 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         return this._active;
     }
 
-    private _active: boolean = false;
+    private _active = false;
 
     /** Whether time column is meridian */
     @Input()
     @HostBinding('class.fd-time__col--period')
-    meridian: boolean = false;
+    meridian = false;
 
     /** Id of column, initiated with some default value */
     @Input()
@@ -111,7 +111,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
      * In case of having more items in carousel than 1, middle element should be active
      */
     @Input()
-    offset: number = 3;
+    offset = 3;
 
     /** Event emitted, when active item is changed, by carousel */
     @Output()
@@ -131,13 +131,13 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /* Whether the action bar also has a back button. */
     @HostBinding('class.fd-time__col')
-    fdTimeColClass: boolean = true;
+    fdTimeColClass = true;
 
     /**
      * Time to wait in milliseconds after the last keydown before focusing or selecting option based on numeric/alpha
      * keys.
      */
-    typeaheadDebounceInterval: number = 750;
+    typeaheadDebounceInterval = 750;
 
     config: CarouselConfig;
     currentIndicatorId: string = this.id + '-current-indicator';
@@ -152,10 +152,10 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     private _activeCarouselItem: CarouselItemDirective;
 
     /** @hidden */
-    private _isDragging: boolean = false;
+    private _isDragging = false;
 
     /** @hidden */
-    private _initialised: boolean = false;
+    private _initialised = false;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();

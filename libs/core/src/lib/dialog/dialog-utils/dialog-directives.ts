@@ -38,7 +38,7 @@ export class DialogCloseButtonDirective {
 
     /** Displays dialog close button in mobile mode */
     @Input()
-    mobile: boolean = false;
+    mobile = false;
 }
 
 /**

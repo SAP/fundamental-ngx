@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
-let messageStripUniqueId: number = 0;
+let messageStripUniqueId = 0;
 
 /**
  * The component that represents a message-strip. It can only be used inline.
@@ -34,18 +34,18 @@ let messageStripUniqueId: number = 0;
 export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */
     @Input()
-    class: string = '';
+    class = '';
 
     /** Whether the message strip is dismissible. */
     @Input()
-    dismissible: boolean = true;
+    dismissible = true;
 
     /** The default message strip does not have an icon.
      * The other types (warning, success, information and error) have icons by default.
      * To remove the icon set the property to true.
      */
     @Input()
-    noIcon: boolean = false;
+    noIcon = false;
 
     /** The type of the message strip.
      * Can be one of *warning*, *success*, *information*, *error* or null.
@@ -67,7 +67,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
 
     /** Aria label for the dismiss button. */
     @Input()
-    dismissLabel: string = 'Dismiss';
+    dismissLabel = 'Dismiss';
 
     /** Width of the message-strip. */
     @Input()

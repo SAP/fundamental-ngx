@@ -10,7 +10,7 @@ export class NestedListHeaderDirective {
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__group-header')
-    fdNestedListHeaderClass: boolean = true;
+    fdNestedListHeaderClass = true;
 
 }
 
@@ -21,7 +21,7 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
 
     /** The property allows user to pass additional css classes */
     @Input()
-    class: string = '';
+    class = '';
 
     /**
      * The icon name to display. See the icon page for the list of icons
@@ -31,7 +31,7 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__icon')
-    fdNestedListIconClass: boolean = true;
+    fdNestedListIconClass = true;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
@@ -72,7 +72,7 @@ export class NestedListTitleDirective {
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__title')
-    fdNestedListTitleClass: boolean = true;
+    fdNestedListTitleClass = true;
 
     /** @hidden */
     constructor(
@@ -96,7 +96,7 @@ export class NestedListExpandIconDirective {
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__expand-icon')
-    fdNestedListTitleClass: boolean = true;
+    fdNestedListTitleClass = true;
 
     /**
      * @hidden
@@ -104,7 +104,7 @@ export class NestedListExpandIconDirective {
      */
     @HostBinding('class.is-expanded')
     @HostBinding('attr.aria-expanded')
-    expanded: boolean = false;
+    expanded = false;
 
     constructor (
         private _itemService: NestedItemService

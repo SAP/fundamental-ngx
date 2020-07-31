@@ -23,10 +23,10 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 export class LayoutPanelBodyComponent {
     /** @hidden */
     @HostBinding('class.fd-layout-panel__body')
-    fdLayoutPanelBodyClass: boolean = true;
+    fdLayoutPanelBodyClass = true;
 
     /** Whether the edges of the panel should have bleeding padding. */
     @Input()
     @HostBinding('class.fd-layout-panel__body--bleed')
-    bleed: boolean = false;
+    bleed = false;
 }

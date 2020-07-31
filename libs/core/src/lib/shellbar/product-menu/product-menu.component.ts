@@ -24,11 +24,11 @@ export class ProductMenuComponent {
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
-    closeOnEscapeKey: boolean = true;
+    closeOnEscapeKey = true;
 
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
@@ -42,7 +42,7 @@ export class ProductMenuComponent {
 
     /** Whether the popover is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /**
      * Preset options for the popover body width.
@@ -69,7 +69,7 @@ export class ProductMenuComponent {
 
     /** When set to true, popover list will be closed after selecting the option */
     @Input()
-    closePopoverOnSelect: boolean = false;
+    closePopoverOnSelect = false;
 
     /** @hidden */
     @ViewChild(MenuComponent)

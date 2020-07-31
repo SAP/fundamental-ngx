@@ -91,7 +91,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** Icon to display in the right-side button. */
     @Input()
-    glyph: string = 'navigation-down-arrow';
+    glyph = 'navigation-down-arrow';
 
     /**
      *  The trigger events that will open/close the options popover.
@@ -102,13 +102,13 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** Whether the combobox should close, when a click is performed outside its boundaries. True by default */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /**
      * Whether the combobox should open, when any key is pressed in input (except Escape, Space, Enter). True by default
      */
     @Input()
-    openOnKeyboardEvent: boolean = true;
+    openOnKeyboardEvent = true;
 
     /**
      *  The state of the form control - applies css classes.
@@ -132,7 +132,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
-    maxHeight: string = '50vh';
+    maxHeight = '50vh';
 
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
@@ -140,29 +140,29 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** Whether the search input should be displayed in compact mode. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Whether the matching string should be highlighted during filtration. */
     @Input()
-    highlighting: boolean = true;
+    highlighting = true;
 
     /** Whether the popover should close when a user selects a result. */
     @Input()
-    closeOnSelect: boolean = true;
+    closeOnSelect = true;
 
     /** Whether the input field should be populated with the result picked by the user. */
     @Input()
-    fillOnSelect: boolean = true;
+    fillOnSelect = true;
 
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
-    autoComplete: boolean = true;
+    autoComplete = true;
 
     /** Defines if combobox should behave same as dropdown. When it's enabled writing inside text input won't
      * trigger onChange function, until it matches one of displayed dropdown values. Also communicating with combobox
      * can be achieved only by objects with same type as dropdownValue */
     @Input()
-    communicateByObject: boolean = false;
+    communicateByObject = false;
 
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
@@ -173,15 +173,15 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** Whether AddOn Button should be focusable, set to false by default */
     @Input()
-    buttonFocusable: boolean = false;
+    buttonFocusable = false;
 
     /** Whether the combobox is readonly. */
     @Input()
-    readOnly: boolean = false;
+    readOnly = false;
 
     /** Whether the combobox should be built on mobile mode */
     @Input()
-    mobile: boolean = false;
+    mobile = false;
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
@@ -246,13 +246,13 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     ];
 
     /** Whether the combobox is opened. */
-    open: boolean = false;
+    open = false;
 
     /**
      * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
      * @hidden
      */
-    inShellbar: boolean = false;
+    inShellbar = false;
 
     /** @hidden */
     displayedValues: any[] = [];

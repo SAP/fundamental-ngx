@@ -60,10 +60,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     inputFieldDate: string = null;
 
     /** @hidden Whether the date input is invalid */
-    isInvalidDateInput: boolean = false;
+    isInvalidDateInput = false;
 
     /** @hidden Whether the date picker is open */
-    isOpen: boolean = false;
+    isOpen = false;
 
     /** @hidden */
     @ViewChild(CalendarComponent)
@@ -75,11 +75,11 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** Date picker input placeholder string */
     @Input()
-    placeholder: string = 'mm/dd/yyyy';
+    placeholder = 'mm/dd/yyyy';
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
-    format: string = 'MM/dd/yyyy';
+    format = 'MM/dd/yyyy';
 
     /** Locale for date pipe. See more https://angular.io/guide/i18n */
     @Input()
@@ -87,7 +87,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** Whether this is the compact input date picker */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** The currently selected CalendarDay model */
     @Input()
@@ -106,23 +106,23 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      * Works only on range mode, when start date is selected on Day View.
      */
     @Input()
-    rangeHoverEffect: boolean = false;
+    rangeHoverEffect = false;
 
     /** Whether to validate the date picker input. */
     @Input()
-    useValidation: boolean = true;
+    useValidation = true;
 
     /** Aria label for the datepicker input. */
     @Input()
-    dateInputLabel: string = 'Date input';
+    dateInputLabel = 'Date input';
 
     /** Aria label for the button to show/hide the calendar. */
     @Input()
-    displayCalendarToggleLabel: string = 'Display calendar toggle';
+    displayCalendarToggleLabel = 'Display calendar toggle';
 
     /** Whether a null input is considered valid. */
     @Input()
-    allowNull: boolean = true;
+    allowNull = true;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
@@ -141,7 +141,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** Defines if date picker should be closed after date choose */
     @Input()
-    closeOnDateChoose: boolean = true;
+    closeOnDateChoose = true;
 
     /**
      *  The state of the form control - applies css classes.
@@ -154,7 +154,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      * Whether AddOn Button should be focusable, set to true by default
      */
     @Input()
-    buttonFocusable: boolean = true;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -192,13 +192,13 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
      */
     @Input()
-    markWeekends: boolean = true;
+    markWeekends = true;
 
     /**
      * Whether user wants to show week numbers next to days
      */
     @Input()
-    showWeekNumbers: boolean = true;
+    showWeekNumbers = true;
 
     /** Fired when a new date is selected. */
     @Output()

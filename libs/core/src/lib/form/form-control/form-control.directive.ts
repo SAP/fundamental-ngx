@@ -26,7 +26,7 @@ export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges 
      * Whether form is in compact mode
      */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     @Input()
     type: string;

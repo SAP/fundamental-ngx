@@ -27,7 +27,7 @@ export class KeyUtil {
      * */
     static isKey(event: KeyboardEvent, key: string | string[]): boolean {
         if (Array.isArray(key)) {
-            return key.some(key => this.isKey(event, key));
+            return key.some(_key => this.isKey(event, _key));
         }
 
         if (event && keyMap.get(key)) {

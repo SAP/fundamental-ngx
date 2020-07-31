@@ -6,8 +6,8 @@ import { RtlService } from '../utils/services/rtl.service';
 
 @Injectable()
 export class CalendarService {
-    rowAmount: number = 3;
-    colAmount: number = 4;
+    rowAmount = 3;
+    colAmount = 4;
 
     /** Event thrown, when the element is selected by space or enter keys */
     onKeySelect: Subject<number> = new Subject<number>();

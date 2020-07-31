@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MobileModeConfig } from '@fundamental-ngx/core';
+import { DialogConfig, MobileModeConfig } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-multi-input-mobile-example',
@@ -14,7 +14,7 @@ export class MultiInputMobileExampleComponent {
         hasCloseButton: true,
         dialogConfig: {
             ariaLabel: 'Select fruits dialog'
-        }
+        } as DialogConfig
     };
 
     values: any[] = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange'];

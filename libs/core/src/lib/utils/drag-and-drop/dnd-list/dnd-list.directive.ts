@@ -34,7 +34,7 @@ export class DndListDirective implements AfterContentInit {
 
     /** Defines if the distance between elements should be counted only by vertical distance */
     @Input()
-    listMode: boolean = false;
+    listMode = false;
 
     /** Array of items, that will be sorted */
     @Input()
@@ -48,7 +48,7 @@ export class DndListDirective implements AfterContentInit {
     private elementChords: ElementChord[];
 
     /** @hidden */
-    private draggedItemIndex: number = 1000000;
+    private draggedItemIndex = 1000000;
 
     /** @hidden */
     private closestLinkIndex: number = null;
@@ -165,7 +165,7 @@ export class DndListDirective implements AfterContentInit {
      */
     private isBefore(draggedElement: ElementRef, targetElement: ElementRef): boolean {
         /** Sometimes the element are not straight in one column, that's why offset is needed */
-        const VERTICAL_OFFSET: number = 20;
+        const VERTICAL_OFFSET = 20;
 
         /** Distances from the top of screen */
         const draggedElementBound = <DOMRect>draggedElement.nativeElement.getBoundingClientRect();

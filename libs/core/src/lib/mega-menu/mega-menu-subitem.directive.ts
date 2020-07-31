@@ -17,7 +17,7 @@ import { MegaMenuSublinkDirective } from './mega-menu-sublink.directive';
 export class MegaMenuSubitemDirective implements DefaultMenuItem {
     /** @hidden */
     @HostBinding('class.fd-mega-menu__subitem')
-    fdMegaMenuClass: boolean = true;
+    fdMegaMenuClass = true;
 
     /** @hidden */
     @ContentChild(MegaMenuSublinkDirective)

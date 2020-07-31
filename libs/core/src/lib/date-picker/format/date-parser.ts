@@ -17,7 +17,7 @@ export abstract class DateFormatParser {
     /**
      * Delimiter for the range. This should not show up in the string representation of the dates.
      */
-    rangeDelimiter: string = ' - ';
+    rangeDelimiter = ' - ';
 
     /**
      * Should take in a string value and return a FdDate model object.

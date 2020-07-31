@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-dialog-state-example',
@@ -13,7 +13,7 @@ export class DialogStateExample {
             width: '300px',
             responsivePadding: true,
             data: 'This Dialog will be closed after 4s'
-        });
+        } as DialogConfig);
         setTimeout(() => dialogRef.close(), 4000);
     }
 
@@ -22,7 +22,7 @@ export class DialogStateExample {
             width: '300px',
             responsivePadding: true,
             data: 'This Dialog will be dismissed after 4s'
-        });
+        } as DialogConfig);
         setTimeout(() => dialogRef.dismiss(), 4000);
     }
 
@@ -31,7 +31,7 @@ export class DialogStateExample {
             width: '300px',
             responsivePadding: true,
             data: 'This Dialog will be hidden after 4s'
-        });
+        } as DialogConfig);
         setTimeout(() => dialogRef.hide(true), 4000);
     }
 
@@ -39,7 +39,7 @@ export class DialogStateExample {
         const dialogRef = this.dialogService.open(template, {
             width: '300px',
             responsivePadding: true
-        });
+        } as DialogConfig);
         dialogRef.loading(true);
     }
 }

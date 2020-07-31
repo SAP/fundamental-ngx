@@ -152,21 +152,21 @@ describe('CarouselDirective', () => {
 
         expect(verticalDirective.dragStateChange.emit).toHaveBeenCalledWith(true);
 
-        const firstDelta: number = -10;
+        const firstDelta = -10;
         (<any>verticalDirective)._handlePan(firstDelta);
 
         verticalFixture.detectChanges();
 
         expect(verticalDirective['_currentTransitionPx']).toBe(firstDelta);
 
-        const secondDelta: number = -20;
+        const secondDelta = -20;
         (<any>verticalDirective)._handlePan(secondDelta);
 
         verticalFixture.detectChanges();
 
         expect(verticalDirective['_currentTransitionPx']).toBe(secondDelta);
 
-        const thirdDelta: number = -120;
+        const thirdDelta = -120;
         (<any>verticalDirective)._handlePan(thirdDelta);
 
         verticalFixture.detectChanges();
@@ -218,21 +218,21 @@ describe('CarouselDirective', () => {
 
         expect(horizontalDirective.dragStateChange.emit).toHaveBeenCalledWith(true);
 
-        const firstDelta: number = -10;
+        const firstDelta = -10;
         (<any>horizontalDirective)._handlePan(firstDelta);
 
         horizontalFixture.detectChanges();
 
         expect(horizontalDirective['_currentTransitionPx']).toBe(firstDelta);
 
-        const secondDelta: number = -20;
+        const secondDelta = -20;
         (<any>horizontalDirective)._handlePan(secondDelta);
 
         horizontalFixture.detectChanges();
 
         expect(horizontalDirective['_currentTransitionPx']).toBe(secondDelta);
 
-        const thirdDelta: number = -120;
+        const thirdDelta = -120;
         (<any>horizontalDirective)._handlePan(thirdDelta);
 
         horizontalFixture.detectChanges();

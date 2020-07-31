@@ -11,11 +11,11 @@ export class MenuInteractiveDirective {
 
     /** @hidden */
     @HostBinding('attr.tabindex')
-    tabindex: number = 0;
+    tabindex = 0;
 
     /** @hidden */
     @HostBinding('class.is-disabled')
-    disabled: boolean = false;
+    disabled = false;
 
     /** @hidden */
     @HostBinding('attr.aria-controls')
@@ -24,11 +24,11 @@ export class MenuInteractiveDirective {
     /** @hidden */
     @HostBinding('class.is-selected')
     @HostBinding('attr.aria-expanded')
-    selected: boolean = false;
+    selected = false;
 
     /** @hidden */
     @HostBinding('attr.aria-haspopup')
-    ariaHaspopup: boolean = false;
+    ariaHaspopup = false;
 
     /** @hidden */
     @HostBinding('class.fd-menu__link')

@@ -34,7 +34,7 @@ class TestNavWrapperComponent {
     @ViewChild('fdTabLink', { read: TabLinkDirective })
     tabLink: TabLinkDirective;
 
-    showLastTab: boolean = true;
+    showLastTab = true;
 }
 
 describe('TabNavDirective', () => {

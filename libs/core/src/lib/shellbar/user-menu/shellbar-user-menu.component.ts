@@ -44,19 +44,19 @@ export class ShellbarUserMenuComponent {
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
-    closeOnEscapeKey: boolean = true;
+    closeOnEscapeKey = true;
 
     /** Display menu in compact mode */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /** Whether the popover is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */

@@ -27,7 +27,7 @@ import { MenuService } from '../services/menu.service';
 import { defer, fromEvent, Observable, Subscription, timer } from 'rxjs';
 import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
 
-let menuUniqueId: number = 0;
+let menuUniqueId = 0;
 
 export interface BaseSubmenu {
     templateRef: TemplateRef<any>;
@@ -55,11 +55,11 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Set the Menu Item as disabled/enabled */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Menu Item id attribute value */
     @Input()
-    itemId: string = `fd-menu-item-${menuUniqueId++}`;
+    itemId = `fd-menu-item-${menuUniqueId++}`;
 
     /** Reference to sub-menu component */
     @Input()
@@ -77,7 +77,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     menuInteractive: MenuInteractiveDirective;
 
     /** @hidden Whether sub-menu is currently visible*/
-    submenuVisible: boolean = false;
+    submenuVisible = false;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();

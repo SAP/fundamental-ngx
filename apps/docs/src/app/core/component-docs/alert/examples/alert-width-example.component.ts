@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertService } from '@fundamental-ngx/core';
+import { AlertConfig, AlertService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-alert-width-example',
@@ -16,7 +16,7 @@ export class AlertWidthExampleComponent {
             width: '250px',
             dismissible: true,
             duration: 7500
-        });
+        } as AlertConfig);
     }
 
     openAlert2() {
@@ -26,7 +26,7 @@ export class AlertWidthExampleComponent {
             width: '550px',
             dismissible: false,
             duration: 7500
-        });
+        } as AlertConfig);
     }
 
     openAlert3() {
@@ -36,7 +36,7 @@ export class AlertWidthExampleComponent {
             width: '70vw',
             dismissible: true,
             duration: 7500
-        });
+        } as AlertConfig);
     }
 
     openAlert4() {
@@ -46,6 +46,6 @@ export class AlertWidthExampleComponent {
             width: '100vw',
             dismissible: false,
             duration: 7500
-        });
+        } as AlertConfig);
     }
 }

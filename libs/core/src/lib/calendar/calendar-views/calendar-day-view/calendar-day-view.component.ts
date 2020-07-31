@@ -38,8 +38,8 @@ import { compareObjects } from '../../../utils/public_api';
 })
 export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     private readonly _amountOfCols: number = 7; // Days per week
-    private _isOnRangePick: boolean = false;
-    private _isInited: boolean = false;
+    private _isOnRangePick = false;
+    private _isInited = false;
 
     /** @hidden */
     newFocusedDayIndex: number;
@@ -52,7 +52,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     @HostBinding('class.fd-calendar__dates')
-    fdCalendarDateViewClass: boolean = true;
+    fdCalendarDateViewClass = true;
 
     /** Currently displayed month and year for days */
     @Input()
@@ -121,19 +121,19 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * Works only on range mode, when start date is selected.
      */
     @Input()
-    rangeHoverEffect: boolean = false;
+    rangeHoverEffect = false;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
      */
     @Input()
-    markWeekends: boolean = false;
+    markWeekends = false;
 
     /**
      * Whether user wants to show week numbers next to days
      */
     @Input()
-    showWeekNumbers: boolean = true;
+    showWeekNumbers = true;
 
     /** Function that allows to specify which function would be called, when focus wants to escape */
     @Input()
