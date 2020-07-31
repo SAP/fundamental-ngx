@@ -41,13 +41,13 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
      * and does not display a period control.
      */
     @Input()
-    meridian: boolean = false;
+    meridian = false;
 
     /**
      *  @Input When set to false, does not set the input field to invalid state on invalid entry.
      */
     @Input()
-    validate: boolean = true;
+    validate = true;
 
     /**
      * @Input when set to true, time inputs won't allow to have 1 digit
@@ -55,7 +55,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
      * but 12 will be kept as 12.
      */
     @Input()
-    keepTwoDigits: boolean = false;
+    keepTwoDigits = false;
 
     /**
      * @Input Disables the component.
@@ -67,25 +67,25 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
      * @Input When set to false, hides the input for seconds.
      */
     @Input()
-    displaySeconds: boolean = true;
+    displaySeconds = true;
 
     /** @Input When set to false, hides the input for minutes. */
     @Input()
-    displayMinutes: boolean = true;
+    displayMinutes = true;
 
     /**
      * When set to false, hides the input for hours
      */
     @Input()
-    displayHours: boolean = true;
+    displayHours = true;
 
     /** Defines if time component should be used with compact mode */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Defines if time component should be used with tablet mode */
     @Input()
-    tablet: boolean = false;
+    tablet = false;
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
@@ -100,7 +100,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     /** @Input Whether to show spinner buttons */
     @Input()
-    spinnerButtons: boolean = true;
+    spinnerButtons = true;
 
     /** @hidden
      * Used only in meridian mode. Stores information the current am/pm state.
@@ -123,7 +123,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
      * For meridian mode ranging from 0 to 12,
      * For non-meridian mode ranging from 0 to 23, and reflects the hour value
      */
-    displayedHour: number = 0;
+    displayedHour = 0;
 
     /** @hidden */
     onChange = (time: TimeObject) => {

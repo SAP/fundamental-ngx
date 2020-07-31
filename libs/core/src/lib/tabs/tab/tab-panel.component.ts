@@ -14,7 +14,7 @@ import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
 import { TabsService } from '../tabs.service';
 
-let tabPanelUniqueId: number = 0;
+let tabPanelUniqueId = 0;
 
 /**
  * Represents the body of a tab element. It also contains elements pertaining to the associated tab header.
@@ -44,7 +44,7 @@ export class TabPanelComponent implements OnChanges {
     /** @hidden
      * Flag to inform if body for this tab should be displayed
      */
-    expanded: boolean = false;
+    expanded = false;
 
     /** @hidden */
     index: number;
@@ -71,11 +71,11 @@ export class TabPanelComponent implements OnChanges {
 
     /** Glyph icon, it can be used only on  */
     @Input()
-    header: boolean = false;
+    header = false;
 
     /** Disabled state for tab item */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Semantic type of the tab item */
     @Input()

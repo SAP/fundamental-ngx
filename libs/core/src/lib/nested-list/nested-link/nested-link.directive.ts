@@ -25,7 +25,7 @@ export class NestedLinkDirective {
     /** Whether this element is selected*/
     @Input()
     @HostBinding('class.is-selected')
-    selected: boolean = false;
+    selected = false;
 
     /** Event thrown, when selected state is changed */
     @Output()
@@ -33,13 +33,13 @@ export class NestedLinkDirective {
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__link')
-    fdNestedListItemClass: boolean = true;
+    fdNestedListItemClass = true;
 
     /**
      * @hidden
      */
     @HostBinding('attr.tabindex')
-    tabIndex: number = 0;
+    tabIndex = 0;
 
     /**
      *  @hidden

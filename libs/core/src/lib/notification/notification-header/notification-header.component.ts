@@ -18,7 +18,7 @@ import {
 export class NotificationHeaderComponent {
     /** @hidden */
     @HostBinding('class.fd-notification__header')
-    fdNotificationHeaderClass: boolean = true;
+    fdNotificationHeaderClass = true;
 
     /** type of Notification 'success' | 'warning' | 'information' | 'error' */
     @Input()
@@ -26,7 +26,7 @@ export class NotificationHeaderComponent {
 
     /** Whether user wants to hide close button at the top. It's shown by default. */
     @Input()
-    closeButton: boolean = true;
+    closeButton = true;
 
     /** Event thrown always, when the close button is clicked */
     @Output()

@@ -30,7 +30,7 @@ import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 export class MegaMenuListDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.fd-mega-menu__list')
-    fdMegaMenuClass: boolean = true;
+    fdMegaMenuClass = true;
 
     /** @hidden */
     @ContentChildren(MegaMenuItemComponent)

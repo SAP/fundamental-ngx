@@ -13,19 +13,19 @@ export class ToolbarSpacerComponent {
      */
     @HostBinding('style.width')
     @Input()
-    width: string = '0px';
+    width = '0px';
 
     /** Property allows user to pass additional class
      */
     @Input()
-    class: string = '';
+    class = '';
 
     /** Determines if spacer should take only size taken from width property
      * Default value: false
      * Default behaviour: spacer takes remaining space automatically
      */
     @Input()
-    fixed: boolean = false;
+    fixed = false;
 
     @HostBinding('attr.class')
     get css(): string {

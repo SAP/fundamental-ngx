@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-dialog-mobile-example',
@@ -12,6 +12,6 @@ export class DialogMobileExampleComponent {
         this._dialogService.open(dialogTemplate, {
             mobile: true,
             responsivePadding: true
-        });
+        } as DialogConfig);
     }
 }

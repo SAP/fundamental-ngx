@@ -22,7 +22,7 @@ import { TabsModule } from './tabs.module';
     </fd-tab-list>`
 })
 class TestWrapperComponent {
-    showDisabled: boolean = true;
+    showDisabled = true;
 }
 
 describe('TabListComponent', () => {

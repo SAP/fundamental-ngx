@@ -69,23 +69,23 @@ export class MultiInputComponent implements
 
     /** Placeholder for the input field. */
     @Input()
-    placeholder: string = '';
+    placeholder = '';
 
     /** Whether the input is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Whether the input is in compact mode. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
-    maxHeight: string = '300px';
+    maxHeight = '300px';
 
     /** Icon of the button on the right of the input field. */
     @Input()
-    glyph: string = 'value-help';
+    glyph = 'value-help';
 
     /** Values to be displayed in the unfiltered dropdown. */
     @Input()
@@ -97,7 +97,7 @@ export class MultiInputComponent implements
 
     /** Whether the search term should be highlighted in results. */
     @Input()
-    highlight: boolean = true;
+    highlight = true;
 
     /** Selected dropdown items. */
     @Input()
@@ -128,7 +128,7 @@ export class MultiInputComponent implements
 
     /** Aria label for the multi input body. */
     @Input()
-    multiInputBodyLabel: string = 'Multi input body';
+    multiInputBodyLabel = 'Multi input body';
 
     /**
      * Preset options for the popover body width.
@@ -148,19 +148,19 @@ export class MultiInputComponent implements
 
     /** Whether AddOn Button should be focusable, set to false by default */
     @Input()
-    buttonFocusable: boolean = false;
+    buttonFocusable = false;
 
     /** Whether the multi-input allows the creation of new tokens. */
     @Input()
-    allowNewTokens: boolean = false;
+    allowNewTokens = false;
 
     /** Whether the multi-input should be built on mobile mode */
     @Input()
-    mobile: boolean = false;
+    mobile = false;
 
     /** Whether the multi-input should have show all button. */
     @Input()
-    showAllButton: boolean = true;
+    showAllButton = true;
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
@@ -176,7 +176,7 @@ export class MultiInputComponent implements
 
     /** Whether multi input popover body should be opened */
     @Input()
-    open: boolean = false;
+    open = false;
 
     /** Event emitted, when the multi input's popover body is opened or closed */
     @Output()

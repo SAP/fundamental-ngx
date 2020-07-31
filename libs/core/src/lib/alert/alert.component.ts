@@ -25,7 +25,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 import { AlertRef } from './alert-utils/alert-ref';
 import { AlertConfig } from './alert-utils/alert-config';
 
-let alertUniqueId: number = 0;
+let alertUniqueId = 0;
 
 /**
  * @deprecated
@@ -59,7 +59,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** Whether the alert is dismissible. */
     @Input()
-    dismissible: boolean = true;
+    dismissible = true;
 
     /** The type of the alert. Can be one of *warning*, *success*, *information*, *error* or null. */
     @Input()
@@ -71,11 +71,11 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite. */
     @Input()
-    duration: number = 10000;
+    duration = 10000;
 
     /** Whether the alert should stay open if the mouse is hovering over it. */
     @Input()
-    mousePersist: boolean = false;
+    mousePersist = false;
 
     /** Id of the element that labels the alert. */
     @Input()
@@ -87,7 +87,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** Aria label for the dismiss button. */
     @Input()
-    dismissLabel: string = 'Dismiss';
+    dismissLabel = 'Dismiss';
 
     /** Width of the alert. */
     @Input()
@@ -106,7 +106,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     /** @hidden */
-    mouseInAlert: boolean = false;
+    mouseInAlert = false;
 
     /** @hidden */
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;

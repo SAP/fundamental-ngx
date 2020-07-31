@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertContentComponent } from './alert-content.component';
-import { AlertService } from '@fundamental-ngx/core';
+import { AlertConfig, AlertService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-alert-component-as-content-example',
@@ -19,7 +19,7 @@ export class AlertComponentAsContentExampleComponent {
             data: {
                 label: 'This alert was opened by providing a component as content!'
             }
-        });
+        } as AlertConfig);
     }
 
     openFromString() {
@@ -28,7 +28,7 @@ export class AlertComponentAsContentExampleComponent {
             type: 'information',
             dismissible: false,
             duration: 7500
-        });
+        } as AlertConfig);
     }
 
     openFromTemplate(template): void {
@@ -39,7 +39,7 @@ export class AlertComponentAsContentExampleComponent {
                 firstLine: 'This alert passes data to the template.',
                 secondLine: 'It also has [duration]="-1" and will not disappear automatically.'
             }
-        });
+        } as AlertConfig);
 
         alertRef.afterDismissed.subscribe((data) => {
             // Do something after closing, receive data

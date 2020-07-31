@@ -91,7 +91,7 @@ class TestNestedContainerComponent {
     @ViewChild(SideNavigationComponent)
     sideNav: SideNavigationComponent;
 
-    expanded: boolean = false;
+    expanded = false;
 
 }
 

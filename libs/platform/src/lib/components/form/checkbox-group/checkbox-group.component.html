@@ -1,0 +1,65 @@
+<fd-form-group [isInline]="isInline">
+    <ng-container *ngIf="!list">
+        <ng-container *ngFor="let checkbox of contentCheckboxes; let i = index">
+            <ng-container
+                *ngTemplateOutlet="
+                    checkboxtmpt;
+                    context: {
+                        id: id + i,
+                        name: name,
+                        checkboxValue: checkbox.checkboxValue,
+                        contentDensity: contentDensity,
+                        labeltext: checkbox.label,
+                        disabled: disabled || checkbox.disabled
+                    }
+                "
+            >
+            </ng-container>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="list">
+        <ng-container *ngTemplateOutlet="listvalues"></ng-container>
+    </ng-container>
+</fd-form-group>
+
+<ng-template #listvalues>
+    <ng-container *ngFor="let item of list; let i = index">
+        <ng-container
+            *ngTemplateOutlet="
+                checkboxtmpt;
+                context: {
+                    id: id + i,
+                    name: name,
+                    checkboxValue: getLookupValue(item),
+                    contentDensity: contentDensity,
+                    labeltext: getDisplayValue(item),
+                    disabled: item.disabled ? item.disabled : disabled
+                }
+            "
+        >
+        </ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template
+    #checkboxtmpt
+    let-id="id"
+    let-name="name"
+    let-checkboxValue="checkboxValue"
+    let-contentDensity="contentDensity"
+    let-labeltext="labeltext"
+    let-checkboxDisabled="disabled"
+>
+    <fdp-checkbox
+        [id]="id"
+        [name]="name"
+        [value]="checkboxValue"
+        [label]="labeltext"
+        [contentDensity]="contentDensity"
+        [disabled]="checkboxDisabled"
+        [stateType]="status"
+        [(ngModel)]="value"
+        (change)="groupValueChanges($event)"
+    >
+    </fdp-checkbox>
+</ng-template>

@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { SelectProxy } from '../select-proxy.service';
 
-let optionUniqueId: number = 0;
+let optionUniqueId = 0;
 
 /**
  * Used to represent an option of the select component.
@@ -51,7 +51,7 @@ export class OptionComponent implements OnInit, OnDestroy {
 
     /** Option id attribute */
     @Input()
-    id: string = `fd-option-${optionUniqueId++}`;
+    id = `fd-option-${optionUniqueId++}`;
 
     /** Value of the option. Similar to how a native select operates. */
     @Input()
@@ -59,11 +59,11 @@ export class OptionComponent implements OnInit, OnDestroy {
 
     /** Whether to disable this option specifically. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** @hidden */
     @HostBinding('class.is-selected')
-    selected: boolean = false;
+    selected = false;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();

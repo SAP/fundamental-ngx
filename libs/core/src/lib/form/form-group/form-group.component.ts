@@ -31,7 +31,7 @@ import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
 })
 export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     @HostBinding('class.fd-form-group')
-    fdFormGroupClass: boolean = true;
+    fdFormGroupClass = true;
 
     /** Determines if form items should be displayed inline or not
      * Default value is set to false;

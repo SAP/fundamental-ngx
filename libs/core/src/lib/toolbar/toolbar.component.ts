@@ -46,7 +46,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
      * Default value: false
      */
     @Input()
-    shouldOverflow: boolean = false;
+    shouldOverflow = false;
 
     /** Determines the type of toolbar
      * Available options: 'solid' | 'transparent' | 'auto' | 'info'
@@ -66,19 +66,19 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
      * Default value: false
      */
     @Input()
-    hasTitle: boolean = false;
+    hasTitle = false;
 
     /** Determines if toolbar should has active state (only when fdType == 'info')
      * Default value: false
      */
     @Input()
-    active: boolean = false;
+    active = false;
 
     /** Determines if toolbar should clear border bottom
      * Default value: false
      */
     @Input()
-    clearBorder: boolean = false;
+    clearBorder = false;
 
     /** @hidden */
     @ViewChild('toolbar')
@@ -121,7 +121,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     private _normalElements: ToolbarItemDirective[] = [];
 
     /** @hidden */
-    private _alive: boolean = true;
+    private _alive = true;
 
     /** @hidden */
     constructor(private _cd: ChangeDetectorRef, private _renderer: Renderer2) {}

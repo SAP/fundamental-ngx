@@ -20,25 +20,25 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 export class FormLabelComponent {
     /** @hidden */
     @HostBinding('class.fd-form-label')
-    fdFormLabelClass: boolean = true;
+    fdFormLabelClass = true;
 
     /** Whether form is required */
     @Input()
     @HostBinding('class.fd-form-label--required')
-    required: boolean = false;
+    required = false;
 
     /** Whether label is for checkbox */
     @Input()
     @HostBinding('class.fd-form-label--checkbox')
-    checkbox: boolean = false;
+    checkbox = false;
 
     /** Whether label is for radio */
     @Input()
     @HostBinding('class.fd-form-label--radio')
-    radio: boolean = false;
+    radio = false;
 
     /** Whether label is for inline-help */
     @Input()
     @HostBinding('class.fd-form-label--inline-help')
-    inlineHelp: boolean = false;
+    inlineHelp = false;
 }

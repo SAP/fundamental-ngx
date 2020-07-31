@@ -54,11 +54,11 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
 
     /** Whether close button should be shown */
     @Input()
-    mobileLandscape: boolean = false;
+    mobileLandscape = false;
 
     /** Whether compact mode should be included into calendar */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Event emitted when the active view should change. */
     @Output()

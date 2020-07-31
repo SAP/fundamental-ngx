@@ -9,7 +9,7 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
 export class FileDragndropDirective {
     /** Whether multiple files can be dropped at once. */
     @Input()
-    multiple: boolean = true;
+    multiple = true;
 
     /** Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
@@ -17,11 +17,11 @@ export class FileDragndropDirective {
 
     /** Whether selecting of new files is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Whether drag and drop is enabled. Disables this directive. */
     @Input()
-    dragndrop: boolean = true;
+    dragndrop = true;
 
     /** Event emitted when files are selected. Passes back an array of files. */
     @Output()
@@ -39,7 +39,7 @@ export class FileDragndropDirective {
     @Output()
     readonly onDragLeave: EventEmitter<void> = new EventEmitter<void>();
 
-    private elementStateCounter: number = 0;
+    private elementStateCounter = 0;
 
     /** @hidden */
     @HostListener('dragover', ['$event'])

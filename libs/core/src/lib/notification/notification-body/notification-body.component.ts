@@ -10,5 +10,5 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 export class NotificationBodyComponent {
     /** @hidden */
     @HostBinding('class.fd-notification__body')
-    fdNotificationHeaderBody: boolean = true;
+    fdNotificationHeaderBody = true;
 }
