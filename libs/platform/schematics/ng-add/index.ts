@@ -9,6 +9,7 @@ import {
     addLocalizeLib,
     callLocalizeSchematic
 } from '../utils/translation-utils';
+import { supportedLanguages } from '../utils/supported-languages';
 
 /**
  * ng add schematic that
@@ -112,7 +113,7 @@ function readTranslationFiles(options: any) {
                     }
                     const projectObject = angularJsonFileObject.projects[project];
                     // todo get the languages supported from platform, and fetch from a separate file probably
-                    const languages = ['ar', 'fr'];
+                    const languages = supportedLanguages;
 
                     let availableLanguages = 0;
                     languages.forEach((language) => {
