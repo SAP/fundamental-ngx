@@ -13,37 +13,25 @@ import { FdpFormGroupModule } from './../form-group/fdp-form.module';
         <fdp-form-group #ffg [formGroup]="datePickerForm" [object]="datePickerFormData">
             <fdp-form-field
                 #ffl1
-                [id]="'birthday'"
+                id="birthday"
                 zone="zLeft"
                 rank="1"
-                [required]="true"
-                [placeholder]="'Enter your birthday'"
-                [label]="'Birth Date:'"
+                required="true"
+                placeholder="Enter your birthday"
+                label="Birth Date:"
             >
-                <fdp-date-picker
-                    [name]="'birthday'"
-                    [type]="'single'"
-                    [allowNull]="false"
-                    [formControl]="ffl1.formControl"
-                >
+                <fdp-date-picker name="birthday" type="single" allowNull="false" [formControl]="ffl1.formControl">
                 </fdp-date-picker>
             </fdp-form-field>
 
-            <fdp-form-field
-                #ffl2
-                [id]="'journeydate'"
-                zone="zRight"
-                rank="3"
-                [label]="'Journey Date:'"
-                [required]="true"
-            >
+            <fdp-form-field #ffl2 id="journeydate" zone="zRight" rank="3" label="Journey Date:" required="true">
                 <fdp-date-picker
-                    [name]="'journeydate'"
-                    [type]="'range'"
-                    [format]="'MM/dd/yyyy'"
-                    [allowNull]="false"
-                    [contentDensity]="'compact'"
-                    [placeholder]="'When are you travelling?'"
+                    name="journeydate"
+                    type="range"
+                    format="MM/dd/yyyy"
+                    allowNull="false"
+                    contentDensity="compact"
+                    placeholder="When are you travelling?"
                     formControlName="journeydate"
                 >
                 </fdp-date-picker>

@@ -5,9 +5,8 @@ import { ViewEncapsulation, ViewChild } from '@angular/core';
 import { CalendarType, CalendarYearGrid, DatePickerComponent as CoreDatePickerComponent } from '@fundamental-ngx/core';
 import { DaysOfWeek, FdCalendarView, FdDate, FdRangeDate, SpecialDayRule } from '@fundamental-ngx/core';
 import { Placement } from 'popper.js';
-import { FormFieldControl } from '../form-control';
+import { FormFieldControl, Status } from '../form-control';
 import { BaseInput } from '../base.input';
-import { FormStates } from 'dist/libs/core/lib/form/form-control/form-states';
 
 /**
  * Date-Picker implementation based on the
@@ -53,9 +52,18 @@ export class DatePickerComponent extends BaseInput implements OnInit {
     @Input()
     format = 'MM/dd/yyyy';
 
+    private _locale: string;
+
     /** Locale for date pipe. See more https://angular.io/guide/i18n */
     @Input()
-    locale: string;
+    get locale(): string {
+        return this._locale;
+    }
+
+    set locale(locale: string) {
+        this._locale = locale;
+        this._cd.detectChanges();
+    }
 
     /** The currently selected CalendarDay model */
     @Input()
@@ -111,17 +119,17 @@ export class DatePickerComponent extends BaseInput implements OnInit {
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
-    private _stateType: FormStates;
+    private _stateType: Status;
 
     @Input()
-    get stateType(): FormStates {
+    get stateType(): Status {
         if (this.status) {
             return this.status;
         }
         return this._stateType;
     }
 
-    set stateType(state: FormStates) {
+    set stateType(state: Status) {
         this._stateType = state;
     }
 

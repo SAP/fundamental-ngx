@@ -11,20 +11,20 @@ import { FormGroup } from '@angular/forms';
         <fdp-form-group #ffg [formGroup]="datePickerForm" (onSubmit)="save(ffg)" [multiLayout]="true">
             <fdp-form-field
                 #ffl1
-                [id]="'birthday'"
+                id="birthday"
                 zone="zLeft"
                 rank="1"
-                [required]="true"
-                [label]="'Placement is Top End:'"
-                [placeholder]="'Enter your birthday'"
+                required="true"
+                label="Placement is Top End:"
+                placeholder="Enter your birthday"
             >
                 <fdp-date-picker
-                    [name]="'birthday'"
-                    [type]="'single'"
-                    [format]="'dd/MM/yyyy'"
-                    [contentDensity]="'compact'"
-                    [allowNull]="false"
-                    [placement]="'top-end'"
+                    name="birthday"
+                    type="single"
+                    format="dd/MM/yyyy"
+                    contentDensity="compact"
+                    allowNull="false"
+                    placement="top-end"
                     [formControl]="ffl1.formControl"
                 >
                 </fdp-date-picker>
@@ -32,20 +32,20 @@ import { FormGroup } from '@angular/forms';
 
             <fdp-form-field
                 #ffl2
-                [id]="'birthday1'"
+                id="birthday1"
                 zone="zRight"
                 rank="1"
-                [required]="true"
-                [label]="'Placement is Bottom End:'"
-                [placeholder]="'Enter your birthday'"
+                required="true"
+                label="Placement is Bottom End:"
+                placeholder="Enter your birthday"
             >
                 <fdp-date-picker
-                    [name]="'birthday1'"
-                    [type]="'single'"
-                    [format]="'dd/MM/yyyy'"
-                    [contentDensity]="'compact'"
-                    [allowNull]="false"
-                    [placement]="'bottom-end'"
+                    name="birthday1"
+                    type="single"
+                    format="dd/MM/yyyy"
+                    contentDensity="compact"
+                    allowNull="false"
+                    placement="bottom-end"
                     [formControl]="ffl2.formControl"
                 >
                 </fdp-date-picker>
@@ -53,20 +53,20 @@ import { FormGroup } from '@angular/forms';
 
             <fdp-form-field
                 #ffl3
-                [id]="'birthday2'"
+                id="birthday2"
                 zone="zLeft"
                 rank="2"
-                [required]="true"
-                [label]="'Placement is Top Start:'"
-                [placeholder]="'Enter your birthday'"
+                required="true"
+                label="Placement is Top Start:"
+                placeholder="Enter your birthday"
             >
                 <fdp-date-picker
-                    [name]="'birthday2'"
-                    [type]="'single'"
-                    [format]="'dd/MM/yyyy'"
-                    [contentDensity]="'compact'"
-                    [allowNull]="false"
-                    [placement]="'top-start'"
+                    name="birthday2"
+                    type="single"
+                    format="dd/MM/yyyy"
+                    contentDensity="compact"
+                    allowNull="false"
+                    placement="top-start"
                     [formControl]="ffl3.formControl"
                 >
                 </fdp-date-picker>
@@ -74,20 +74,20 @@ import { FormGroup } from '@angular/forms';
 
             <fdp-form-field
                 #ffl4
-                [id]="'birthday3'"
+                id="birthday3"
                 zone="zRight"
                 rank="2"
-                [required]="true"
-                [label]="'Placement is Bottom Start:'"
-                [placeholder]="'Enter your birthday'"
+                required="true"
+                label="Placement is Bottom Start:"
+                placeholder="Enter your birthday"
             >
                 <fdp-date-picker
-                    [name]="'birthday3'"
-                    [type]="'single'"
-                    [format]="'dd/MM/yyyy'"
-                    [contentDensity]="'compact'"
-                    [allowNull]="false"
-                    [placement]="'bottom-start'"
+                    name="birthday3"
+                    type="single"
+                    format="dd/MM/yyyy"
+                    contentDensity="compact"
+                    allowNull="false"
+                    placement="bottom-start"
                     [formControl]="ffl4.formControl"
                 >
                 </fdp-date-picker>

@@ -128,21 +128,21 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     template: `
         <label fd-form-label for="language">Select language:</label>
         <fdp-button
-            [contentDensity]="'compact'"
+            contentDensity="compact"
             (buttonClicked)="setFrench()"
             [buttonType]="isSelected('fr') ? 'emphasized' : ''"
             >French
         </fdp-button>
         |
         <fdp-button
-            [contentDensity]="'compact'"
+            contentDensity="compact"
             (buttonClicked)="setGerman()"
             [buttonType]="isSelected('de') ? 'emphasized' : ''"
             >German
         </fdp-button>
         |
         <fdp-button
-            [contentDensity]="'compact'"
+            contentDensity="compact"
             (buttonClicked)="setBulgarian()"
             [buttonType]="isSelected('bg') ? 'emphasized' : ''"
             >Bulgarian
@@ -150,7 +150,7 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         <br />
         <br />
         <div style="width:20%">
-            <fdp-date-picker [id]="'intz'" [name]="'intz'" [(ngModel)]="date"></fdp-date-picker>
+            <fdp-date-picker id="intz" name="intz" [(ngModel)]="date"></fdp-date-picker>
         </div>
         <p i18n>selected: {{ date.toDateString() }}</p>
     `,

@@ -12,33 +12,33 @@ import { FdDate } from '@fundamental-ngx/core';
         <fdp-form-group #ffg [formGroup]="datePickerForm" (onSubmit)="save(ffg)" [multiLayout]="true">
             <fdp-form-field
                 #ffl1
-                [id]="'birthday'"
+                id="birthday"
                 zone="zLeft"
                 rank="1"
-                [required]="true"
-                [label]="'Birthday:'"
-                [placeholder]="'Enter your birthday'"
+                required="true"
+                label="Birthday:"
+                placeholder="Enter your birthday"
             >
                 <fdp-date-picker
-                    [name]="'birthday'"
-                    [type]="'single'"
-                    [format]="'dd/MM/yyyy'"
-                    [contentDensity]="'compact'"
-                    [allowNull]="false"
+                    name="birthday"
+                    type="single"
+                    format="dd/MM/yyyy"
+                    contentDensity="compact"
+                    allowNull="false"
                     [disableFunction]="disableFunction"
                     [formControl]="ffl1.formControl"
                 >
                 </fdp-date-picker>
             </fdp-form-field>
 
-            <fdp-form-field #ffl2 [id]="'examdate'" [label]="'Exam Date:'" zone="zRight" rank="1" [required]="true">
+            <fdp-form-field #ffl2 id="examdate" label="Exam Date:" zone="zRight" rank="1" required="true">
                 <fdp-date-picker
-                    [name]="'examdate'"
-                    [type]="'range'"
-                    [format]="'MM/dd/yyyy'"
-                    [allowNull]="false"
-                    [contentDensity]="'compact'"
-                    [placeholder]="'Enter dates'"
+                    name="examdate"
+                    type="range"
+                    format="MM/dd/yyyy"
+                    allowNull="false"
+                    contentDensity="compact"
+                    placeholder="Enter dates"
                     [disableRangeStartFunction]="disabledStartFunction"
                     [disableRangeEndFunction]="disabledEndFunction"
                     [formControl]="ffl2.formControl"

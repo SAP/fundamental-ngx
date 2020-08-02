@@ -1,4 +1,4 @@
-<fd-docs-section-title [id]="'def'" [componentName]="'DatePicker'">
+<fd-docs-section-title id="datepickerExample" componentName="DatePicker">
     Simple Date Picker and Range Date Picker in Platform Form.
 </fd-docs-section-title>
 
@@ -39,7 +39,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'def'" [componentName]="'DatePicker'">
+<fd-docs-section-title id="internationalExample" componentName="'DatePickerInternational'">
     Internationalization
 </fd-docs-section-title>
 <description>
@@ -53,8 +53,10 @@
 
 <separator></separator>
 <description>
-    <h3>Complex i18n Example.</h3>
-    To change format or locale options in DatePicker component, we need to set [format] and [locale] properties value.
+    <h3>Internationalisation using moment.js library.</h3>
+    By using moment library, internationalisation of calendar becomes easy. here we only set locale value according to
+    desired language and translation is taken care by the library. <br />
+    Here in this approach we don't have to pass weekdays, months, fullMonths separately as done in above example.
 </description>
 <component-example>
     <fdp-date-picker-complex-i18n-example></fdp-date-picker-complex-i18n-example>

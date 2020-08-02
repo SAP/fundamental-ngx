@@ -7,7 +7,7 @@ import { Component, Injectable, ViewChild } from '@angular/core';
 import { CalendarI18n, FdDate } from '@fundamental-ngx/core';
 import { DatePickerComponent } from '@fundamental-ngx/platform';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/en-gb';
 import 'moment/locale/de';
@@ -24,7 +24,7 @@ import localeDe from '@angular/common/locales/de';
 @Injectable()
 export class CustomI18nMomentCalendar extends CalendarI18n {
     getDayAriaLabel(date: Date): string {
-        return date.getDate() + ' ' + moment.months()[date.getMonth()] + ' ' + date.getFullYear();
+        return moment(date).format('L');
     }
 
     getAllFullMonthNames(): string[] {
@@ -45,14 +45,14 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
     template: `
         <label fd-form-label>Languages</label>
         <fdp-button
-            [contentDensity]="'compact'"
-            (buttonClicked)="setLocale('en-gb')"
-            [buttonType]="isSelected('en-gb') ? 'emphasized' : ''"
+            contentDensity="compact"
+            (buttonClicked)="setLocale('en')"
+            [buttonType]="isSelected('en') ? 'emphasized' : ''"
             >English
         </fdp-button>
         |
         <fdp-button
-            [contentDensity]="'compact'"
+            contentDensity="compact"
             (buttonClicked)="setLocale('fr')"
             [buttonType]="isSelected('fr') ? 'emphasized' : ''"
         >
@@ -60,21 +60,21 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
         >
         |
         <fdp-button
-            [contentDensity]="'compact'"
+            contentDensity="compact"
             (buttonClicked)="setLocale('de')"
             [buttonType]="isSelected('de') ? 'emphasized' : ''"
             >German</fdp-button
         >
         |
         <fdp-button
-            [contentDensity]="'compact'"
+            contentDensity="compact"
             (buttonClicked)="setLocale('bg')"
             [buttonType]="isSelected('bg') ? 'emphasized' : ''"
             >Bulgarian
         </fdp-button>
         |
         <fdp-button
-            [contentDensity]="'compact'"
+            contentDensity="compact"
             (buttonClicked)="setLocale('pl')"
             [buttonType]="isSelected('pl') ? 'emphasized' : ''"
             >Polish</fdp-button
@@ -82,21 +82,15 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
 
         <br />
         <fdp-form-group [multiLayout]="true">
-            <fdp-form-field
-                [id]="'birthday'"
-                zone="zLeft"
-                rank="1"
-                [label]="'Date Format:'"
-                [placeholder]="'Enter date format'"
-            >
+            <fdp-form-field id="birthday" zone="zLeft" rank="1" label="Date Format:" placeholder="Enter date format">
                 <fd-input-group
                     id="docs-date-picker-format"
-                    [placeholder]="'Date Format'"
+                    placeholder="Date Format"
                     [(ngModel)]="actualFormat"
                     class="docs-example-fd-form-group"
                     [button]="true"
                     (addOnButtonClicked)="refresh()"
-                    [addOnText]="'Refresh'"
+                    addOnText="Refresh"
                 >
                 </fd-input-group>
                 <fd-form-message type="help">
@@ -107,15 +101,9 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
                 </fd-form-message>
             </fdp-form-field>
 
-            <fdp-form-field
-                [id]="'datepicker'"
-                zone="zRight"
-                rank="1"
-                [label]="'Selected:'"
-                [placeholder]="'dd/MM/yyyy'"
-            >
+            <fdp-form-field id="datepicker" zone="zRight" rank="1" label="Selected:" placeholder="dd/MM/yyyy">
                 <fdp-date-picker
-                    [name]="'datepicker'"
+                    name="datepicker"
                     [format]="actualFormat"
                     [locale]="actualLocale"
                     [(ngModel)]="date"
@@ -145,9 +133,9 @@ export class PlatformDatePickerComplexI18nExampleComponent {
         registerLocaleData(localeFrench, 'fr');
         registerLocaleData(localePolish, 'pl');
         registerLocaleData(localeBulgarian, 'bg');
-        registerLocaleData(localeGb, 'en-gb');
+        registerLocaleData(localeGb, 'en');
         registerLocaleData(localeDe, 'de');
-        moment.locale('en-gb');
+        moment.locale('en');
     }
 
     public refresh(): void {
