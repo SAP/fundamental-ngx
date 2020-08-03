@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.49...v0.20.1-rc.50) (2020-08-03)
+
+
+### Bug Fixes
+
+* Change focusing strategy on multi input list ([#2942](https://github.com/SAP/fundamental-ngx/issues/2942)) ([c50be42](https://github.com/SAP/fundamental-ngx/commit/c50be423454df562adb37d8f0d39e9e3dc39fc67))
+
 ### [0.20.1-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.48...v0.20.1-rc.49) (2020-08-02)
 
 ### [0.20.1-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.47...v0.20.1-rc.48) (2020-08-02)
