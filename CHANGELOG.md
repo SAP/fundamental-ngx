@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.50...v0.20.1-rc.51) (2020-08-03)
+
+
+### Bug Fixes
+
+* ie11 mute mouse click on indeterminate state ([#2949](https://github.com/SAP/fundamental-ngx/issues/2949)) ([00fca91](https://github.com/SAP/fundamental-ngx/commit/00fca911b278b2168233c0a1bda731301297805d))
+
 ### [0.20.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.49...v0.20.1-rc.50) (2020-08-03)
 
 
