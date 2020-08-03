@@ -1,4 +1,4 @@
-export const addAndCutFloatingNumberDistortion = (value: number, step: number) => {
+export const addAndCutFloatingNumberDistortion = (value: number, step: number): number => {
     value = value || 0;
     const stepDecimals = `${step}`.split('.')[1];
     const valueDecimals = `${value}`.split('.')[1];
@@ -9,7 +9,7 @@ export const addAndCutFloatingNumberDistortion = (value: number, step: number) =
     return Number((value + step).toFixed(longestDecimal));
 };
 
-export const getNumberDecimalLength = (value: number) => {
+export const getNumberDecimalLength = (value: number): number => {
     const numberStr = (value || 0).toString();
     return (numberStr.split('.')[0] || '').length;
 };

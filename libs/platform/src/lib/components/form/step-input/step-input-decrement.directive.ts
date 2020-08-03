@@ -1,5 +1,6 @@
 import { Directive, HostListener, SkipSelf } from '@angular/core';
 import { startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { StepInputComponent } from './base.step-input';
 import { streamUntilMouseUp$ } from './step-input-increment.directive';
@@ -12,14 +13,15 @@ import { streamUntilMouseUp$ } from './step-input-increment.directive';
 })
 export class StepInputDecrementDirective {
     /** @hidden */
-    readonly _streamUntilMouseUp$ = streamUntilMouseUp$;
+    private _streamUntilMouseUp$: Observable<number> = streamUntilMouseUp$;
 
     /** @hidden */
     constructor(@SkipSelf() private stepInput: StepInputComponent) {}
 
+    /** @hidden */
     @HostListener('mousedown', ['$event'])
-    click($event: Event) {
-        if (!this.stepInput._canChangeValue) {
+    click($event: Event): void {
+        if (!this.stepInput.canChangeValue) {
             return;
         }
 

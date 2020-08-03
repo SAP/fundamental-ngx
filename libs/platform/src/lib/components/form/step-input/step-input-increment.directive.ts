@@ -1,10 +1,10 @@
 import { Directive, HostListener, SkipSelf } from '@angular/core';
-import { fromEvent, timer, interval } from 'rxjs';
+import { fromEvent, timer, interval, Observable } from 'rxjs';
 import { switchMap, takeUntil, startWith } from 'rxjs/operators';
 
 import { StepInputComponent } from './base.step-input';
 
-export const streamUntilMouseUp$ = timer(500).pipe(
+export const streamUntilMouseUp$: Observable<number> = timer(500).pipe(
     switchMap(() => interval(40)),
     takeUntil(fromEvent(window, 'mouseup', { capture: true, once: true }))
 );
@@ -17,14 +17,15 @@ export const streamUntilMouseUp$ = timer(500).pipe(
 })
 export class StepInputIncrementDirective {
     /** @hidden */
-    readonly _streamUntilMouseUp$ = streamUntilMouseUp$;
+    private _streamUntilMouseUp$: Observable<number> = streamUntilMouseUp$;
 
     /** @hidden */
     constructor(@SkipSelf() private stepInput: StepInputComponent) {}
 
+    /** @hidden */
     @HostListener('mousedown', ['$event'])
-    click($event: Event) {
-        if (!this.stepInput._canChangeValue) {
+    click($event: Event): void {
+        if (!this.stepInput.canChangeValue) {
             return;
         }
 

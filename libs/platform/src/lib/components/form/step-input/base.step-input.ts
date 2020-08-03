@@ -12,10 +12,12 @@ import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './ste
 
 /** Change event object emitted by Platform Step Input component */
 export class StepInputChangeEvent<T extends StepInputComponent = StepInputComponent, K = number> {
-    /** The source Step Input of the event. */
-    source: T;
-    /** The new value of a control. */
-    payload: K;
+    constructor(
+        /** The source Step Input of the event. */
+        public source: T,
+        /** The new value of a control. */
+        public payload: K
+    ) {}
 }
 
 type AlignInputType = 'left' | 'center' | 'right';
@@ -52,7 +54,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this._min = !isNaN(min) ? min : -Number.MAX_VALUE;
         this._calculateCanDecrement();
     }
-    get min() {
+    get min(): number {
         return this._min;
     }
 
@@ -62,7 +64,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this._max = !isNaN(max) ? max : Number.MAX_VALUE;
         this._calculateCanIncrement();
     }
-    get max() {
+    get max(): number {
         return this._max;
     }
 
@@ -73,7 +75,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this._step = step;
         this._calculateCanDecrementIncrement();
     }
-    get step() {
+    get step(): number {
         return this._step;
     }
 
@@ -105,20 +107,20 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     /** Horizontally aligns value inside input */
     @Input()
     set align(align: AlignInputType) {
-        this.alignInput$.next(align);
+        this._alignInput$.next(align);
     }
 
     /**
      * ARIA label for increment button
      */
     @Input()
-    incrementLabel = this.config.incrementLabel;
+    incrementLabel: string = this.config.incrementLabel;
 
     /**
      * ARIA label for decrement button
      */
     @Input()
-    decrementLabel = this.config.decrementLabel;
+    decrementLabel: string = this.config.decrementLabel;
 
     /**
      * ARIA label for input element
@@ -151,24 +153,24 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     isErrorState = false;
 
     /** @hidden */
-    _contentDensity = this.config.contentDensity;
+    get canChangeValue(): boolean {
+        return !(this.disabled || !this.editable);
+    }
 
     /** @hidden */
-    isCompact = this._contentDensity === 'compact';
+    _contentDensity: ContentDensity = this.config.contentDensity;
+
+    /** @hidden */
+    isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
     _align: AlignInputType;
 
     /** @hidden */
-    get _canChangeValue(): boolean {
-        return !(this.disabled || !this.editable);
-    }
+    private _max: number = Number.MAX_VALUE;
 
     /** @hidden */
-    private _max = Number.MAX_VALUE;
-
-    /** @hidden */
-    private _min = -Number.MAX_VALUE;
+    private _min: number = -Number.MAX_VALUE;
 
     /** @hidden */
     private _step = 1;
@@ -177,10 +179,10 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _stepFn: (value: number, action: 'increase' | 'decrease') => number;
 
     /** @hidden */
-    private _precision;
+    private _precision: number;
 
     /** @hidden */
-    private alignInput$ = new BehaviorSubject<AlignInputType>(null);
+    private _alignInput$: BehaviorSubject<AlignInputType> = new BehaviorSubject<AlignInputType>(null);
 
     /** @hidden */
     constructor(
@@ -195,7 +197,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         super.ngOnInit();
 
         this._calculateCanDecrementIncrement();
@@ -211,7 +213,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
                 this.isErrorState = this.status === 'error';
             });
 
-        this.alignInput$
+        this._alignInput$
             .asObservable()
             .pipe(
                 switchMap((align) =>
@@ -243,13 +245,13 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     /**@hidden
      * Override writeValue method to keep input view value up to date
      */
-    writeValue(value: number) {
+    writeValue(value: number): void {
         super.writeValue(value);
         this._updateViewValue();
     }
 
     /** Increase value */
-    increase(step = this._getStepValue('increase')) {
+    increase(step = this._getStepValue('increase')): void {
         if (!this.canIncrement) {
             return;
         }
@@ -259,7 +261,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** Decrease value */
-    decrease(step = this._getStepValue('decrease')) {
+    decrease(step = this._getStepValue('decrease')): void {
         if (!this.canDecrement) {
             return;
         }
@@ -269,13 +271,13 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** Increase value by large step */
-    largeStepIncrease() {
+    largeStepIncrease(): void {
         const step = this._getStepValue('increase') * this.largerStep;
         this.increase(step);
     }
 
     /** Decrease value by large step */
-    largeStepDecrease() {
+    largeStepDecrease(): void {
         const step = this._getStepValue('decrease') * this.largerStep;
         this.decrease(step);
     }
@@ -307,7 +309,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     /**@hidden
      * Indicates when input gets focused
      */
-    onFocus() {
+    onFocus(): void {
         super._onFocusChanged(true);
         this._updateViewValue(true);
     }
@@ -315,13 +317,13 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     /**@hidden
      * Indicates when input loses focus
      */
-    onBlur() {
+    onBlur(): void {
         super._onFocusChanged(false);
         this._updateViewValue();
     }
 
     /** @hidden */
-    detectChanges() {
+    detectChanges(): void {
         this._cd.detectChanges();
     }
 
@@ -385,19 +387,19 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    private _calculateCanIncrement() {
+    private _calculateCanIncrement(): void {
         const step = this._getStepValue('increase');
         this.canIncrement = (this._value || 0) + step <= this._max;
     }
 
     /** @hidden */
-    private _calculateCanDecrement() {
+    private _calculateCanDecrement(): void {
         const step = this._getStepValue('decrease');
         this.canDecrement = (this._value || 0) - step >= this._min;
     }
 
     /** @hidden */
-    private _calculateCanDecrementIncrement() {
+    private _calculateCanDecrementIncrement(): void {
         this._calculateCanDecrement();
         this._calculateCanIncrement();
     }
@@ -408,7 +410,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    private _checkAndThrowErrorIfStepDoesntMatchPrecision(precision: number, step: number) {
+    private _checkAndThrowErrorIfStepDoesntMatchPrecision(precision: number, step: number): void {
         // Check if "precision" is valid comparing to "step"
         const stepDecimalLength = getNumberDecimalLength(step);
         const precisionDecimalLength = getNumberDecimalLength(precision);

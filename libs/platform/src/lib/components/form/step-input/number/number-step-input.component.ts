@@ -37,7 +37,7 @@ export class NumberStepInputComponent extends StepInputComponent {
     /** Set description */
     @Input() description: string;
 
-    /**@hidden */
+    /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
         config: StepInputConfig,
@@ -54,9 +54,7 @@ export class NumberStepInputComponent extends StepInputComponent {
      * Create change event instance
      */
     createChangeEvent(value: number) {
-        const event = new NumberStepInputChangeEvent();
-        event.source = this;
-        event.payload = value;
+        const event: NumberStepInputChangeEvent = new NumberStepInputChangeEvent(this, value);
         return event;
     }
 

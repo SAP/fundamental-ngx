@@ -19,11 +19,11 @@ export class StepInputControlDirective {
      * Handle "change" event
      */
     @HostListener('change', ['$event'])
-    onChange() {
-        if (!this.stepInput._canChangeValue) {
+    onChange(): void {
+        if (!this.stepInput.canChangeValue) {
             return;
         }
-        const value = ((event.target as HTMLInputElement).value || '').trim();
+        const value: string = ((event.target as HTMLInputElement).value || '').trim();
         this.stepInput.commitEnteredValue(value);
         this.stepInput.detectChanges();
     }
@@ -33,7 +33,7 @@ export class StepInputControlDirective {
      * Handle "focus" event
      */
     @HostListener('focus')
-    onFocus() {
+    onFocus(): void {
         this.stepInput.onFocus();
         this.stepInput.detectChanges();
     }
@@ -43,7 +43,7 @@ export class StepInputControlDirective {
      * Handle "blur" event
      */
     @HostListener('blur')
-    onBlur() {
+    onBlur(): void {
         this.stepInput.onBlur();
         this.stepInput.detectChanges();
     }
@@ -54,7 +54,7 @@ export class StepInputControlDirective {
      */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
-        if (!this.stepInput._canChangeValue) {
+        if (!this.stepInput.canChangeValue) {
             return;
         }
         if (KeyUtil.isKey(event, 'ArrowUp')) {
@@ -81,7 +81,7 @@ export class StepInputControlDirective {
      */
     @HostListener('wheel', ['$event'])
     onMouseWheel(event: WheelEvent): void {
-        if (!this.stepInput._canChangeValue || !this.stepInput.focused) {
+        if (!this.stepInput.canChangeValue || !this.stepInput.focused) {
             return;
         }
         event.preventDefault();
@@ -96,7 +96,7 @@ export class StepInputControlDirective {
      * @hidden
      * Mute event
      */
-    private _muteEvent(e: Event) {
+    private _muteEvent(e: Event): void {
         e.stopPropagation();
         e.preventDefault();
     }
