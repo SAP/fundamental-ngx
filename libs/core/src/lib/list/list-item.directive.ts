@@ -28,29 +28,15 @@ export class ListItemDirective {
     selected = false;
 
     /** @hidden */
-    @ContentChild(CheckboxComponent, { static: false })
-    checkboxComponent: CheckboxComponent;
-
-    /** @hidden */
     constructor(public itemEl: ElementRef) {}
 
     /** @hidden */
     public focus(): void {
-        if (this.checkboxComponent) {
-            // if there is a checkbox in this list item, we want to focus its input label
-            this.checkboxComponent.inputLabel.nativeElement.focus();
-        } else {
-            this.itemEl.nativeElement.focus();
-        }
+        this.itemEl.nativeElement.focus();
     }
 
     /** @hidden */
     public click(): void {
-        if (this.checkboxComponent) {
-            // if there is a checkbox in this list item, we want to click its input label
-            this.checkboxComponent.inputLabel.nativeElement.click();
-        } else {
-            this.itemEl.nativeElement.click();
-        }
+        this.itemEl.nativeElement.click();
     }
 }
