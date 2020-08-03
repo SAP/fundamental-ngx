@@ -326,6 +326,9 @@ export class MultiInputComponent implements
 
     /** @hidden */
     openChangeHandle(open: boolean): void {
+        if (this.disabled) {
+            return ;
+        }
         if (this.open !== open) {
             this.openChange.emit(open);
         }
@@ -561,6 +564,4 @@ export class MultiInputComponent implements
     private shouldFilterValues(changes): boolean {
         return this.dropdownValues && (changes.dropdownValues || changes.searchTerm);
     }
-
-
 }
