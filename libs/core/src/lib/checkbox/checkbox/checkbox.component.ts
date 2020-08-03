@@ -88,6 +88,9 @@ export class CheckboxComponent implements ControlValueAccessor {
     public checkboxValue: any;
     /** Stores current checkbox state. */
     public checkboxState: fdCheckboxTypes;
+    /** @hidden */
+    private _previousState: fdCheckboxTypes;
+
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
@@ -122,7 +125,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     /** @hidden prevent event from propagating */
-    public muteKey(event: KeyboardEvent): void {
+    public muteKey(event: KeyboardEvent | MouseEvent): void {
         event.stopPropagation();
     }
 
@@ -138,8 +141,8 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
-    public checkByClick() {
-        this._nextValueEvent(true);
+    public checkByClick(event: MouseEvent) {
+        this._nextValueEvent(true, event);
     }
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
@@ -174,7 +177,6 @@ export class CheckboxComponent implements ControlValueAccessor {
                     this.tristate && this.tristateSelectable ? this.values.thirdStateValue : this.values.trueValue;
                 break;
         }
-
         this._setState();
         this.onValueChange(this.checkboxValue);
         this._detectChanges();
@@ -189,16 +191,23 @@ export class CheckboxComponent implements ControlValueAccessor {
         } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
         }
+        this._previousState = this.checkboxState;
     }
 
     /** @hidden */
-    private _nextValueEvent(triggeredByClick?: boolean): void {
-        if (this._isIE() && this.checkboxState === 'indeterminate') {
+    private _nextValueEvent(triggeredByClick?: boolean, event?: MouseEvent): void {
+        if (this._isIE() &&
+            this._previousState === 'indeterminate' &&
+            this.checkboxState === 'indeterminate') {
             this.checkboxState = 'force-checked';
             this._detectChanges();
             /** Prevents from keeping the old value */
             if (triggeredByClick) {
                 this.nextValue('force-checked');
+                if (event) {
+                    this.muteKey(event);
+                    event.preventDefault();
+                }
             }
         }
     }
