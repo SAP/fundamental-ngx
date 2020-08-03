@@ -47,7 +47,7 @@ export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
         }
     ];
 
-    ngDoCheck() {
+    ngDoCheck(): void {
         this.customForm.get('example1').setErrors({ invalid: true });
         this.customForm.get('example1').markAsTouched();
     }

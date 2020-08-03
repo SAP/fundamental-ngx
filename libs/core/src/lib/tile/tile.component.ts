@@ -38,7 +38,7 @@ export class TileComponent extends AbstractFdNgxClass {
     @Input() colorAccent: number;
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         this._addClassToElement('fd-tile');
         if (this.disabled) {
             this._addClassToElement('is-disabled');

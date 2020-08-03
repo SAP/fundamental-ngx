@@ -49,7 +49,7 @@ export class ScrollSpyDirective {
 
     /** @hidden */
     @HostListener('scroll', ['$event'])
-    onScroll(event: any) {
+    onScroll(event: any): void {
         let spiedTag: HTMLElement;
         const children = this.elRef.nativeElement.children;
         const targetScrollTop = event.target.scrollTop;

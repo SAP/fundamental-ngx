@@ -111,7 +111,7 @@ export class IdentifierDocsComponent {
         this.schema = this.schemaFactory.getComponent('identifier');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

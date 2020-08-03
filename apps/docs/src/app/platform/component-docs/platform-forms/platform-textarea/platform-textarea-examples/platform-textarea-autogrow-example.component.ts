@@ -17,5 +17,5 @@ export class PlatformTextareaAutogrowExampleComponent implements OnInit {
         this.textareaValidator = [Validators.maxLength(6)];
     }
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

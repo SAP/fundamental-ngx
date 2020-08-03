@@ -57,7 +57,7 @@ export class PaginationDocsComponent {
         this.schema = this.schemaFactory.getComponent('pagination');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

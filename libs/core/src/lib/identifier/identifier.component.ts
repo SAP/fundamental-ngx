@@ -46,7 +46,7 @@ export class IdentifierComponent extends AbstractFdNgxClass {
     @Input() glyph: string;
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         this._addClassToElement('fd-identifier');
         if (this.size) {
             this._addClassToElement('fd-identifier--' + this.size);

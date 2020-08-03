@@ -37,7 +37,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     private menuItemHoverChangeSubscription: Subscription = Subscription.EMPTY;
 
     @Input('fdpMenuTriggerFor')
-    get menu() {
+    get menu(): MenuComponent {
         return this._menu;
     }
     set menu(menu: MenuComponent) {
@@ -56,7 +56,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         @Optional() private _parentMenu: MenuComponent
     ) {}
 
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         if (this._isMenuItem()) {
             // mark menu item as trigger
             this._menuItem.isTrigger = true;
@@ -74,7 +74,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         }
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         if (this._overlayRef) {
             this._overlayRef.dispose();
             this._overlayRef = null;
@@ -85,7 +85,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this.menuItemHoverChangeSubscription.unsubscribe();
     }
 
-    @HostListener('click', ['$event']) onTriggerClick($event: MouseEvent) {
+    @HostListener('click', ['$event']) onTriggerClick($event: MouseEvent): void {
         // Need to interupt default menu behavior of closing the menu
         if (this._isMenuItem()) {
             $event.preventDefault();
@@ -94,7 +94,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this.toggleMenu();
     }
 
-    @HostListener('keydown', ['$event']) onTriggerKeydown($event: KeyboardEvent) {
+    @HostListener('keydown', ['$event']) onTriggerKeydown($event: KeyboardEvent): void {
         switch ($event.key) {
             case 'Enter':
                 // Need to interupt default menu item behavior of closing the menu
@@ -123,11 +123,11 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         return this._isMenuOpen;
     }
 
-    toggleMenu() {
+    toggleMenu(): void {
         this._isMenuOpen ? this.destroyMenu() : this.openMenu();
     }
 
-    openMenu() {
+    openMenu(): void {
         // create overlay
         const overlayConfig = this._getOverlayConfig();
         this._overlayRef = this._overlay.create(overlayConfig);
@@ -176,11 +176,11 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this._isMenuOpen = true;
     }
 
-    closeMenu() {
+    closeMenu(): void {
         this._menu.closeMenu();
     }
 
-    destroyMenu() {
+    destroyMenu(): void {
         if (!this._overlayRef || !this._isMenuOpen) {
             return;
         }

@@ -39,5 +39,5 @@ export class PlatformSelectTypesNoBorderExampleComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

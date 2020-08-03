@@ -2,7 +2,7 @@ import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 import { FormStyle, getLocaleDayNames, getLocaleMonthNames, TranslationWidth } from '@angular/common';
 import { Subject } from 'rxjs';
 
-export function CALENDAR_I18N_FACTORY(locale) {
+export function CALENDAR_I18N_FACTORY(locale): CalendarI18nDefault {
     return new CalendarI18nDefault(locale);
 }
 
