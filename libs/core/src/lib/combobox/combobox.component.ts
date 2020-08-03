@@ -317,7 +317,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             if (this.searchFn) {
                 this.searchFn();
             }
-            this._moveCursorToInputEnd();
         } else if (KeyUtil.isKey(event, 'ArrowDown')) {
             if (event.altKey) {
                 this._resetDisplayedValues();
@@ -472,7 +471,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
                 forceClose: false
             });
         }
-        this._moveCursorToInputEnd();
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
@@ -590,12 +588,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** @hidden */
     private _hasDisplayedValues(): boolean {
         return this.open && this.displayedValues && this.displayedValues.length > 0;
-    }
-
-    /** @hidden */
-    private _moveCursorToInputEnd(): void {
-        const value = this.searchInputElement.nativeElement.value;
-        this.searchInputElement.nativeElement.setSelectionRange(value.length, value.length);
     }
 
     /** @hidden */
