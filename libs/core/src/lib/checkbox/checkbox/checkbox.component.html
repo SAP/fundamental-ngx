@@ -15,7 +15,7 @@
 />
 <label class="fd-checkbox__label"
        #labelElement
-       (click)="checkByClick()"
+       (click)="checkByClick($event)"
        [for]="inputId"
        [class.fd-checkbox__label--compact]="compact">
     <ng-container *ngIf="label">
