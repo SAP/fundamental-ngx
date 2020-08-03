@@ -5,7 +5,8 @@ import {Placeholder} from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
     selector: 'fd-time-picker-locale-example',
-    templateUrl: './time-picker-locale-example.component.html'
+    templateUrl: './time-picker-locale-example.component.html',
+    styleUrls: ['./time-picker-locale-example.component.scss']
 })
 
 export class TimePickerLocaleExampleComponent implements OnInit {

@@ -17,6 +17,7 @@ import * as timePickerOnlyHoursSrcTs from '!raw-loader!./examples/time-picker-on
 import * as timePickerOtherDelimiterSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.html';
 import * as timePickerOtherDelimiterTsSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.ts';
 import * as timePickerLocaleHtmlSrc from '!raw-loader!./examples/time-picker-locale-example/time-picker-locale-example.component.html';
+import * as timePickerLocaleCsssSrc from '!raw-loader!./examples/time-picker-locale-example/time-picker-locale-example.component.scss';
 import * as timePickerLocaleTsSrc from '!raw-loader!./examples/time-picker-locale-example/time-picker-locale-example.component.ts';
 import * as timePickerFormHtmlSrc from '!raw-loader!./examples/time-picker-form-example.component.html';
 import * as timePickerFormTsSrc from '!raw-loader!./examples/time-picker-form-example.component.ts';
@@ -132,6 +133,7 @@ export class TimePickerDocsComponent {
           language: 'html',
           code: timePickerLocaleHtmlSrc,
           fileName: 'time-picker-locale-example',
+          scssFileCode: timePickerLocaleCsssSrc
       },
       {
           language: 'typescript',
