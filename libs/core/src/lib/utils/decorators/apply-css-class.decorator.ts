@@ -27,6 +27,7 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
 
             if (!this._uuidv4) {
                 this._uuidv4 = uuidv4();
+                elementRef.nativeElement._classMap[this._uuidv4] = [newComponentClassList];
             }
 
             const allClassList = [...elementRef.nativeElement.classList];

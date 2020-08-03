@@ -38,7 +38,7 @@ export type ButtonType =
     template: ` <ng-content></ng-content> `,
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
     /**
