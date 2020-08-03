@@ -75,17 +75,17 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
      * ARIA label for button when the Panel is collapsed
      */
     @Input()
-    expandLabel = this._panelConfig.expandLabel;
+    expandLabel: string = this._panelConfig.expandLabel;
 
     /**
      * ARIA label for button when the Panel is expanded
      */
     @Input()
-    collapseLabel = this._panelConfig.collapseLabel;
+    collapseLabel: string = this._panelConfig.collapseLabel;
 
     /** Output event triggered when the Expand button is clicked */
     @Output()
-    panelExpandChange = new EventEmitter<PanelExpandChangeEvent>();
+    panelExpandChange: EventEmitter<PanelExpandChangeEvent> = new EventEmitter<PanelExpandChangeEvent>();
 
     /**
      * @hidden
@@ -106,13 +106,13 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     panelTitleDirective: PanelTitleDirective;
 
     /** @hidden */
-    _contentDensity = this._panelConfig.contentDensity;
+    _contentDensity: ContentDensity = this._panelConfig.contentDensity;
 
     /**
      * @hidden
      * Whether "contentDensity" is "compact"
      */
-    isCompact = this._contentDensity === 'compact';
+    isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
     constructor(protected _cd: ChangeDetectorRef, protected _panelConfig: PanelConfig) {
@@ -120,21 +120,19 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this._calculateExpandAriaLabel();
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         if (changes.expanded) {
             this._calculateExpandAriaLabel();
         }
     }
 
-    /**
-     *  Handles expanded/collapsed event
-     */
-    onExpandedChange(expanded: boolean) {
+    /** Handles expanded/collapsed event */
+    onExpandedChange(expanded: boolean): void {
         this.expanded = expanded;
         const event = new PanelExpandChangeEvent(this, expanded);
         this.panelExpandChange.emit(event);
@@ -145,7 +143,7 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
      * @hidden
      * Calculate expandAriaLabel based on panel state
      */
-    private _calculateExpandAriaLabel() {
+    private _calculateExpandAriaLabel(): void {
         this.expandAriaLabel = this.expanded ? this.collapseLabel : this.expandLabel;
     }
 }
