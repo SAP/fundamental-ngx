@@ -29,7 +29,7 @@ export class MegaMenuSubitemDirective implements DefaultMenuItem {
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
+    handleKeyboardEvent(event: KeyboardEvent): void {
         this.keyDown.emit(event);
     }
 

@@ -41,5 +41,5 @@ export class PlatformSelectTypesWithIconExampleComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

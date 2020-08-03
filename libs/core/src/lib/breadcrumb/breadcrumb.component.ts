@@ -202,25 +202,25 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
         return this.collapsedBreadcrumbItems[this.collapsedBreadcrumbItems.length - 1];
     }
 
-    private getBreadcrumbToCheck(collapsedItemToPop: BreadcrumbItemDirective) {
+    private getBreadcrumbToCheck(collapsedItemToPop: BreadcrumbItemDirective): BreadcrumbItemDirective {
         return this.breadcrumbItems.filter((item) => item === collapsedItemToPop)[0];
     }
 
-    private applyStylesToBreadcrumb(breadcrumb: BreadcrumbItemDirective) {
+    private applyStylesToBreadcrumb(breadcrumb: BreadcrumbItemDirective): void {
         breadcrumb.elementRef.nativeElement.style.display = 'inline-block';
         breadcrumb.elementRef.nativeElement.style.visibility = 'hidden';
     }
 
-    private popLastElement() {
+    private popLastElement(): void {
         this.collapsedBreadcrumbItems.pop();
         // make the breadcrumb we checked visible
     }
 
-    private makeBreadcrumbVisible(breadcrumb: BreadcrumbItemDirective) {
+    private makeBreadcrumbVisible(breadcrumb: BreadcrumbItemDirective): void {
         breadcrumb.elementRef.nativeElement.style.visibility = 'visible';
     }
 
-    private makeBreadcrumbInvisible(breadcrumb: BreadcrumbItemDirective) {
+    private makeBreadcrumbInvisible(breadcrumb: BreadcrumbItemDirective): void {
         breadcrumb.elementRef.nativeElement.style.display = 'none';
     }
 }

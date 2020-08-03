@@ -25,7 +25,7 @@ class TestComponent {
     @Input() actionBarDescription: string;
     @Input() showBackButton = false;
     public backButtonClicked = false;
-    onBackButtonClick() {
+    onBackButtonClick(): void {
         this.backButtonClicked = true;
     }
 }

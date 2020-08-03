@@ -104,7 +104,7 @@ export class ListDocsComponent {
         this.schema = this.schemaFactory.getComponent('list');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

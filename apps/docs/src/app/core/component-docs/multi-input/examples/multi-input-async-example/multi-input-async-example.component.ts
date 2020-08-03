@@ -17,7 +17,7 @@ export class MultiInputAsyncExampleComponent implements OnInit {
 
     constructor(private http: HttpClient) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.dropdownValues = this.getDropdownValues();
     }
 }

@@ -53,7 +53,7 @@ export class SegmentedButtonDirective extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         this._addClassToElement('fd-segmented-button');
         if (this.fdButtonClass) {
             this._addClassToElement('fd-button');

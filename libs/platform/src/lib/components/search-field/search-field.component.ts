@@ -54,7 +54,7 @@ export interface ValueLabelItem {
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
     constructor(private element: ElementRef) { }
-    focus() {
+    focus(): void {
         this.element.nativeElement.focus();
     }
 }
@@ -226,7 +226,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         super(_cd);
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         const baseId = 'fdp-search-field';
         this.inputId = `${baseId}-input-${searchFieldIdCount++}`;
         this.submitId = `${baseId}-submit-${searchFieldIdCount++}`;
@@ -238,7 +238,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         if (!!this._suggestionOverlayRef) {
             this._suggestionOverlayRef.dispose();
             this._suggestionOverlayRef = null;
@@ -248,7 +248,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._dataSourceSubscription.unsubscribe();
     }
 
-    onKeydown($event: KeyboardEvent) {
+    onKeydown($event: KeyboardEvent): void {
         if (!$event) {
             return;
         }
@@ -269,7 +269,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Capturing value change in input text field of combobox.
      * @hidden
      */
-    onValueChange($event: string) {
+    onValueChange($event: string): void {
         if ($event.length > 0) {
             this.openSuggestionMenu();
         } else {
@@ -294,7 +294,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Capturing item selection from dropdown menu of combobox.
      * @hidden
      */
-    onItemClick($event: string) {
+    onItemClick($event: string): void {
         this.inputText = $event;
         const searchInput: SearchInput = {
             text: $event,
@@ -310,7 +310,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Callback function which gets executed on keyboard enter of input text field.
      * @hidden
      */
-    onSearchSubmit() {
+    onSearchSubmit(): void {
         if (this.isLoading) {
             this.cancelSearch.emit();
         } else {
@@ -328,7 +328,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         }
     }
 
-    onCancelSearch() {
+    onCancelSearch(): void {
         this.cancelSearch.emit();
     }
 
@@ -336,7 +336,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Sets current category.
      * @hidden
      */
-    setCurrentCategory(category: ValueLabelItem) {
+    setCurrentCategory(category: ValueLabelItem): void {
         this.currentCategory = category;
         this.inputChange.emit({
             text: this.inputText,
@@ -431,7 +431,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         });
     }
 
-    _initializeDataSource(dataSource: SearchFieldDataSource<any>) {
+    _initializeDataSource(dataSource: SearchFieldDataSource<any>): void {
         this._dataSourceSubscription = dataSource.open().subscribe((data) => {
             this.dropdownValues$ = of(data);
         });
@@ -443,7 +443,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     name: 'suggestionMatches'
 })
 export class SuggestionMatchesPipe implements PipeTransform {
-    transform(values: string[], match: string) {
+    transform(values: string[], match: string): string[] {
         return values.filter((value) => value.toLowerCase().indexOf(match.toLowerCase()) > -1);
     }
 }

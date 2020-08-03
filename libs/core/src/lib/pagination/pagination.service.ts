@@ -86,7 +86,7 @@ export class PaginationService {
      * Provides validation for the pagination object.
      * @param pagination An object of type *Pagination*.
      */
-    public validate(pagination: Pagination) {
+    public validate(pagination: Pagination): void {
         if (!pagination.totalItems && isDevMode()) {
             console.warn(`No pages provided in the Pagination object. This warning only appears in development mode.`);
         }

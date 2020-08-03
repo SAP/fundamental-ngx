@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class PlatformActionBarWithDescriptionExampleComponent {
 
-    onBackBuutonClick() {
+    onBackBuutonClick(): void {
         alert('Back button clicked');
     }
 }

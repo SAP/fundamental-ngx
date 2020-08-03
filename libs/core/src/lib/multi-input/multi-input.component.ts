@@ -240,7 +240,7 @@ export class MultiInputComponent implements
     ) {}
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
@@ -249,7 +249,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
         if (this.shouldFilterValues(changes)) {
             this.displayedValues = this.dropdownValues;

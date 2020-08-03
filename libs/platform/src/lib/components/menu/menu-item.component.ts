@@ -44,24 +44,24 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     @HostBinding('attr.tabindex') tabindex = '-1';
 
     // Handle selection of item via keyboard 'Enter' or mouseclick
-    @HostListener('keydown', ['$event']) onItemKeydown(event: KeyboardEvent) {
+    @HostListener('keydown', ['$event']) onItemKeydown(event: KeyboardEvent): void {
         if (event && event.key === 'Enter') {
             this.itemSelect.emit();
         }
     }
-    @HostListener('click') onItemClick() {
+    @HostListener('click') onItemClick(): void {
         this.itemSelect.emit();
     }
 
-    @HostListener('mouseenter') onMouseEnter() {
+    @HostListener('mouseenter') onMouseEnter(): void {
         this.hovered.next(this);
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.hovered.complete();
     }
 
-    focus() {
+    focus(): void {
         this.elementRef.nativeElement.focus();
     }
 }

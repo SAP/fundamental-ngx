@@ -93,7 +93,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     }
 
     /** @hidden */
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this._setMenuService();
         this._initialiseItemState();
         this._listenOnMenuLinkClick();
@@ -102,7 +102,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         if (changes['disabled'] && !changes['disabled'].firstChange) {
             this.menuInteractive.setDisabled(this.disabled);
         }
@@ -112,7 +112,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._hoverSubscriptions.unsubscribe();
     }
