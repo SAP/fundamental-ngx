@@ -421,7 +421,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             this.searchFn();
         }
         event.preventDefault();
-        event.stopPropagation();
         this._resetDisplayedValues();
         this.isOpenChangeHandle(!this.open);
         this.searchInputElement.nativeElement.focus();
