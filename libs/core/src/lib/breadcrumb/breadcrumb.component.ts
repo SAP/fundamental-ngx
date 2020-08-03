@@ -46,7 +46,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
 
     /** Whenever links wrapped inside overflow should be displayed in compact mode  */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))

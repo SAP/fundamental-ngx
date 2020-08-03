@@ -25,7 +25,7 @@ export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'ne
 export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     /** Apply user custom styles */
     @Input()
-    class: string = '';
+    class = '';
 
     /** Semantic type of the tab item */
     @Input()
@@ -39,11 +39,11 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     @Input()
     @HostBinding('attr.aria-disabled')
     @HostBinding('class.is-disabled')
-    disabled: boolean = false;
+    disabled = false;
 
     /** Defines if there will be added fd-tabs__item class. Enabled by default. */
     @Input()
-    fdTabItemClass: boolean = true;
+    fdTabItemClass = true;
 
     /** @hidden */
     @ContentChild(TabLinkDirective)

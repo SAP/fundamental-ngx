@@ -11,7 +11,7 @@ export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
 
     /** Hide shortcuts in mobile mode */
     @Input()
-    hideOnMobile: boolean = true;
+    hideOnMobile = true;
 
     /** @hidden */
     @HostBinding('class.fd-menu__shortcut')

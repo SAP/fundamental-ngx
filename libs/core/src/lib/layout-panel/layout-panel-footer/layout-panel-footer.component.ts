@@ -20,5 +20,5 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 export class LayoutPanelFooterComponent {
     /** @hidden */
     @HostBinding('class.fd-layout-panel__footer')
-    fdLayoutPanelFooterClass: boolean = true;
+    fdLayoutPanelFooterClass = true;
 }

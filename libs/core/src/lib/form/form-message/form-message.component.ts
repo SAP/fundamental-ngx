@@ -19,9 +19,9 @@ export class FormMessageComponent {
 
     /** Whether to apply compact mode to the message. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Whether message should be in static mode, without popover. It's mostly used for forms component, that contain dropdown */
     @Input()
-    static: boolean = false;
+    static = false;
 }

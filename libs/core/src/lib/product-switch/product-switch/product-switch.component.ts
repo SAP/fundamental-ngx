@@ -16,5 +16,5 @@ export class ProductSwitchComponent extends PopoverComponent {
 
     /**Input to set the aria label */
     @Input ()
-    ariaLabel: string = 'popover-button';
+    ariaLabel = 'popover-button';
 }

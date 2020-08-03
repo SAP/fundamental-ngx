@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
 import { compareObjects } from '../../utils/public_api';
 
-let checkboxUniqueId: number = 0;
+let checkboxUniqueId = 0;
 
 export type fdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force-checked';
 
@@ -42,7 +42,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
-    inputId: string = `fd-checkbox-${checkboxUniqueId++}`;
+    inputId = `fd-checkbox-${checkboxUniqueId++}`;
 
     /** State of control, changes visual appearance of control. */
     @Input()
@@ -70,7 +70,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** Allows to prevent user from manually selecting controls third state. */
     @Input()
-    tristateSelectable: boolean = true;
+    tristateSelectable = true;
 
     /** Sets values returned by control. */
     @Input('values')

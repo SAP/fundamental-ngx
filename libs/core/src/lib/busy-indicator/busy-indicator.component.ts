@@ -38,11 +38,11 @@ export class BusyIndicatorComponent {
 
     /** Whether to use loader as block element */
     @Input()
-    block: boolean = false;
+    block = false;
 
     /** Aria label attribute value. */
     @Input()
-    ariaLabel: string = 'Loading';
+    ariaLabel = 'Loading';
 
     /** Aria live attribute value. */
     @Input()

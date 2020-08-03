@@ -22,5 +22,5 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 export class LayoutPanelActionsComponent {
     /** @hidden */
     @HostBinding('class.fd-layout-panel__actions')
-    fdLayoutPanelActionsClass: boolean = true;
+    fdLayoutPanelActionsClass = true;
 }

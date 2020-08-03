@@ -38,7 +38,7 @@
         [isControl]="true"
         [glyph]="glyph"
         (addOnButtonClicked)="addOnButtonClicked()">
-        <fd-tokenizer [compact]="compact" [open]="open" (moreClickedEvent)="moreClicked()"
+        <fd-tokenizer [compactCollapse]="compactCollapse" [compact]="compact" [open]="open" (moreClickedEvent)="moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
                       [class.fd-multi-input-tokenizer-custom--compact]="compact"
         >
@@ -51,18 +51,18 @@
                 <span [innerHtml]="token | displayFnPipe: displayFn"></span>
             </fd-token>
             <input (focusin)="tokenizer.inputFocused = true;" (focusout)="tokenizer.inputFocused = false;"
-                type="text"
-                class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
-                fd-form-control
-                fd-input-group-input
-                #searchInputElement
-                [placeholder]="placeholder"
-                [(ngModel)]="searchTerm"
-                [compact]="compact"
-                [ngClass]="{ 'fd-input--compact': compact }"
-                (ngModelChange)="handleSearchTermChange()"
-                (keydown)="handleInputKeydown($event)"
-                [ngModelOptions]="{standalone: true}"
+                   type="text"
+                   class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
+                   fd-form-control
+                   fd-input-group-input
+                   #searchInputElement
+                   [placeholder]="placeholder"
+                   [(ngModel)]="searchTerm"
+                   [compact]="compact"
+                   [ngClass]="{ 'fd-input--compact': compact }"
+                   (ngModelChange)="handleSearchTermChange()"
+                   (keydown)="handleInputKeydown($event)"
+                   [ngModelOptions]="{standalone: true}"
             />
         </fd-tokenizer>
     </fd-input-group>
@@ -79,22 +79,24 @@
         <li
             (click)="handleSelect(selected.indexOf(value) === -1, value, $event)"
             fd-list-item
+            tabindex="0"
             class="fd-multi-input-item"
+            (keydown)="handleKeyDown($event, ind)"
             *ngFor="let value of displayedValues; let ind = index"
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
                 [ngModel]="selected.indexOf(value) !== -1"
                 class="fd-multi-input-checkbox"
-                (keydown)="handleKeyDown($event, ind)"
             >
-                    <span
-                        [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight"
-                    ></span>
+                <span
+                    [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight"
+                ></span>
             </fd-checkbox>
         </li>
-        <li fd-list-item class="fd-multi-input-show-all" *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)">
-            <a fd-link (click)="showAllClicked($event)" href>Show All ({{ dropdownValues.length }})</a>
+        <li (click)="showAllClicked($event)" fd-list-item class="fd-multi-input-show-all"
+            *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)">
+            <a fd-link href>Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>
 </ng-template>

@@ -8,23 +8,23 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
 
     /** @hidden */
     @HostBinding('class.fd-table__icon')
-    fdTableIconClass: boolean = true;
+    fdTableIconClass = true;
 
     /** The property allows user to pass additional css classes
      */
     @Input()
-    public class: string = '';
+    public class = '';
 
     /** The icon to include in the button. See the icon page for the list of icons.
      * Setter is used to control when css class have to be rebuilded.
      * Default value is set to ''.
      */
     @Input()
-    public glyph: string = '';
+    public glyph = '';
 
     /** Whether or no icon is used as navigation  */
     @Input()
-    navigation: boolean = false;
+    navigation = false;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}

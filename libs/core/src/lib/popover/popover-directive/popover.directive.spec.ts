@@ -112,13 +112,13 @@ describe('PopoverDirective', () => {
         expect(popover._shouldClose(mouseEvent)).toEqual(true);
     });
 
-    it("shouldn't call close", () => {
+    it('shouldn\'t call close', () => {
         const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
         const mouseEvent = { target: fixtureTemplate.componentInstance.divElement.nativeElement };
         expect(popover._shouldClose(mouseEvent)).not.toEqual(true);
     });
 
-    it("shouldn't call close on inside click", () => {
+    it('shouldn\'t call close on inside click', () => {
         const popover = <any>fixtureTemplate.componentInstance.popoverDirective;
         popover.open();
         const mouseEvent = { target: popover.elRef.nativeElement };

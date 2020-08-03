@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.49...v0.20.1-rc.50) (2020-08-03)
+
+
+### Bug Fixes
+
+* Change focusing strategy on multi input list ([#2942](https://github.com/SAP/fundamental-ngx/issues/2942)) ([c50be42](https://github.com/SAP/fundamental-ngx/commit/c50be423454df562adb37d8f0d39e9e3dc39fc67))
+
+### [0.20.1-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.48...v0.20.1-rc.49) (2020-08-02)
+
+### [0.20.1-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.47...v0.20.1-rc.48) (2020-08-02)
+
+### [0.20.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.46...v0.20.1-rc.47) (2020-08-02)
+
+### [0.20.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.45...v0.20.1-rc.46) (2020-08-02)
+
+### [0.20.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.44...v0.20.1-rc.45) (2020-07-31)
+
+
+### Bug Fixes
+
+* multi cozy token count bug ([#2924](https://github.com/SAP/fundamental-ngx/issues/2924)) ([e19c136](https://github.com/SAP/fundamental-ngx/commit/e19c1363bfba226891bede246f78e113fbc4579d))
+
+### [0.20.1-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.43...v0.20.1-rc.44) (2020-07-31)
+
+### [0.20.1-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.42...v0.20.1-rc.43) (2020-07-31)
+
+
+### Bug Fixes
+
+* (core) update angular.json for tslint ([#2941](https://github.com/SAP/fundamental-ngx/issues/2941)) ([c1dda9d](https://github.com/SAP/fundamental-ngx/commit/c1dda9d2df15679af6bc1698d9718728af180edd))
+
+### [0.20.1-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.41...v0.20.1-rc.42) (2020-07-31)
+
 ### [0.20.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.40...v0.20.1-rc.41) (2020-07-30)
 
 

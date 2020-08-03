@@ -65,11 +65,15 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** Used to add focus class to the tokenizer-example */
     @Input()
-    tokenizerHasFocus: boolean = false;
+    tokenizerHasFocus = false;
 
     /** Whether the tokenizer is compact */
     @Input()
-    compact: boolean = false;
+    compact = false;
+
+    /** Whether to use cozy visuals but compact collapsing behavior. */
+    @Input()
+    compactCollapse = false;
 
     /** The value for the tokenizer input */
     @Input()
@@ -81,14 +85,14 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** Word to use for when there are extra tokens. */
     @Input()
-    moreTerm: string = 'more';
+    moreTerm = 'more';
 
     /** @hidden */
     @Input()
     open: boolean;
 
     /** @hidden */
-    inputFocused: boolean = false;
+    inputFocused = false;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -113,7 +117,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     tokenListClickSubscriptions: Subscription[] = [];
 
     /** @hidden */
-    hiddenCozyTokenCount: number = 0;
+    hiddenCozyTokenCount = 0;
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -140,7 +144,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.previousTokenCount = this.tokenList.length;
             this.handleTokenClickSubscriptions();
         });
-        if (!this.compact) {
+        if (!this.compact && !this.compactCollapse) {
             this._handleInitCozyTokenCount();
         }
     }
@@ -340,9 +344,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
             // and then hide any tokens from the right that no longer fit
             this._collapseTokens('right');
-        }
 
-        this.cdRef.detectChanges();
+            this.cdRef.detectChanges();
+        }
     }
 
     /** @hidden */
@@ -354,14 +358,14 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
             // and then hide any tokens from the left that no longer fit
             this._collapseTokens('left');
-        }
 
-        this.cdRef.detectChanges();
+            this.cdRef.detectChanges();
+        }
     }
 
     /** @hidden */
     private _collapseTokens(side?: string): void {
-        if (this.compact) {
+        if (this.compact || this.compactCollapse) {
             let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
             let i = 0;
@@ -395,7 +399,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     private _expandTokens(): void {
-        if (this.compact) {
+        if (this.compact || this.compactCollapse) {
             let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
 

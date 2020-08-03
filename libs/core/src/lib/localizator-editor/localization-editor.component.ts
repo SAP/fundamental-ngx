@@ -34,7 +34,7 @@ import { LocalizationEditorMainComponent } from './localization-editor-main/loca
 export class LocalizationEditorComponent {
     /** @hidden */
     @HostBinding('class.fd-localization-editor')
-    fdLocalizationEditorClass: boolean = true;
+    fdLocalizationEditorClass = true;
 
     /** @hidden */
     @ContentChild(LocalizationEditorMainComponent)
@@ -52,15 +52,15 @@ export class LocalizationEditorComponent {
 
     /** Whether the popover is open. Can be used through two-way binding. */
     @Input()
-    isOpen: boolean = false;
+    isOpen = false;
 
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
-    closeOnEscapeKey: boolean = true;
+    closeOnEscapeKey = true;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -72,7 +72,7 @@ export class LocalizationEditorComponent {
 
     /** Whether the inputs are in compact mode. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /**
      * Toggles the popover open state.

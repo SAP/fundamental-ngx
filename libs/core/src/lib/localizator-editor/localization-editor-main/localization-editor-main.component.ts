@@ -34,5 +34,5 @@ export class LocalizationEditorMainComponent extends LocalizationEditorItemCompo
      * Whether AddOn Button should be focusable, set to true by default
      */
     @Input()
-    buttonFocusable: boolean = true;
+    buttonFocusable = true;
 }

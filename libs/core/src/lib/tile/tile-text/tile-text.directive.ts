@@ -15,5 +15,5 @@ import { Directive, HostBinding } from '@angular/core';
 export class TileTextDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__text')
-    fdTileTextClass: boolean = true;
+    fdTileTextClass = true;
 }

@@ -29,7 +29,7 @@ export class LayoutPanelComponent implements OnChanges, OnInit {
 
     /** @hidden */
     @HostBinding('class.fd-layout-panel')
-    fdLayoutPanelClass: boolean = true;
+    fdLayoutPanelClass = true;
 
     constructor(private elRef: ElementRef) {}
 

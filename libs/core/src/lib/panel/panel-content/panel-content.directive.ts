@@ -1,6 +1,6 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
-let panelContentUniqueId: number = 0;
+let panelContentUniqueId = 0;
 
 /**
  * Applies the panel content style to a div element.
@@ -46,7 +46,7 @@ export class PanelContentDirective {
     /** role attribute of the host element. */
     @Input()
     @HostBinding('attr.role')
-    role: string = 'region';
+    role = 'region';
 
     /** Id of the host element. */
     @Input()
@@ -55,5 +55,5 @@ export class PanelContentDirective {
 
     /** Tabindex of the content section. */
     @HostBinding('attr.tabindex')
-    tabindex: number = 0;
+    tabindex = 0;
 }

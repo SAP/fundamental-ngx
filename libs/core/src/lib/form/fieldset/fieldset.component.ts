@@ -21,5 +21,5 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 export class FieldsetComponent {
     /** @hidden */
     @HostBinding('class.fd-fieldset')
-    fdFieldClass: boolean = true;
+    fdFieldClass = true;
 }

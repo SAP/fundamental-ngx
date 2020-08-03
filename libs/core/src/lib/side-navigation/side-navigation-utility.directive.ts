@@ -11,5 +11,5 @@ export class SideNavigationUtilityDirective {
 
     /** @hidden */
     @HostBinding('class.fd-side-nav__utility')
-    classSideNavUtility: boolean = true;
+    classSideNavUtility = true;
 }

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { DialogRef, DialogService, TableComponent, TableRowDirective } from '@fundamental-ngx/core';
+import { DialogConfig, DialogRef, DialogService, TableComponent, TableRowDirective } from '@fundamental-ngx/core';
 import { TableCustomDialogComponent } from './table-custom-dialog.component';
 
 export interface DisplayedColumn {
@@ -60,7 +60,7 @@ export class TableCustomColumnsExampleComponent {
             data: {
                 columns: this.originalDisplayedColumns
             }
-        });
+        } as DialogConfig);
 
 
         dialogRef.afterClosed.subscribe(

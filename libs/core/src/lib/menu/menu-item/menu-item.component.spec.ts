@@ -21,7 +21,7 @@ class TestMenuItemComponent {
     @ViewChild(MenuItemComponent) menuItem: MenuItemComponent;
     @ViewChild(MenuInteractiveDirective) menuInteractive: MenuInteractiveDirective;
 
-    disabled: boolean = false;
+    disabled = false;
 }
 
 describe('MenuItemComponent', () => {

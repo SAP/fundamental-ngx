@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { MOBILE_MODE_CONFIG, MobileModeControl, MobileModeConfigToken } from '@fundamental-ngx/core';
+import { MOBILE_MODE_CONFIG, MobileModeControl, MobileModeConfigToken, DialogConfig } from '@fundamental-ngx/core';
 
 const SELECT_MOBILE_CONFIG: MobileModeConfigToken = {
     target: MobileModeControl.SELECT,
-    config: { hasCloseButton: true, dialogConfig: { mobileOuterSpacing: true } }
+    config: { hasCloseButton: true, dialogConfig: { mobileOuterSpacing: true } as DialogConfig }
 };
 
 @NgModule({

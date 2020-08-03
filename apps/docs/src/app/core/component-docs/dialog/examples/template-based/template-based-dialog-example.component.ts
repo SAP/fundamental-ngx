@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-dialog-open-template-example',
@@ -11,7 +11,7 @@ export class TemplateBasedDialogExampleComponent {
     constructor(private _dialogService: DialogService) {}
 
     openDialog(dialog: TemplateRef<any>): void {
-        const dialogRef = this._dialogService.open(dialog, { responsivePadding: true });
+        const dialogRef = this._dialogService.open(dialog, { responsivePadding: true } as DialogConfig);
 
         dialogRef.afterClosed.subscribe(
             (result) => {

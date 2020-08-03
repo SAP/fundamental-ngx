@@ -33,5 +33,5 @@ import { alertContainerNgIf } from './alert-animations';
 export class AlertContainerComponent {
     /** @hidden */
     @HostBinding('class.fd-alert-container')
-    fdAlertContainerClass: boolean = true;
+    fdAlertContainerClass = true;
 }

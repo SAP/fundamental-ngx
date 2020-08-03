@@ -15,7 +15,7 @@ import { Directive, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, Vi
 export class LocalizationEditorInputDirective {
     /** @hidden */
     @HostBinding('class.fd-input-group__input')
-    fdInputGroupInputClass: boolean = true;
+    fdInputGroupInputClass = true;
 }
 
 /**
@@ -40,13 +40,13 @@ export class LocalizationEditorTextareaDirective {
 
     /** @hidden */
     @HostBinding('class.fd-input-group__input')
-    fdInputGroupInputClass: boolean = true;
+    fdInputGroupInputClass = true;
 
     /**
      * @hidden
      */
     @HostBinding('class.fd-localization-editor-textarea')
-    public fdLocalizationEditorTextareaClass: boolean = true;
+    public fdLocalizationEditorTextareaClass = true;
 }
 
 /**
@@ -83,7 +83,7 @@ export class LocalizationEditorLabel {}
 export class LocalizationEditorElement {
     /** @hidden */
     @HostBinding('class.fd-localization-editor__language')
-    fdLocalizationEditorLanguage: boolean = true;
+    fdLocalizationEditorLanguage = true;
 }
 
 /**

@@ -40,7 +40,7 @@ export class TestMenuComponent {
     @ViewChildren(MenuItemComponent)
     menuItems: QueryList<MenuItemComponent>;
 
-    disabled: boolean = false;
+    disabled = false;
 }
 
 describe('MenuService', () => {
