@@ -72,6 +72,10 @@ export class CheckboxComponent implements ControlValueAccessor {
     @Input()
     tristateSelectable = true;
 
+    /** Assigns given class to checkbox label element */
+    @Input()
+    labelClass: string;
+
     /** Sets values returned by control. */
     @Input('values')
     set _values(checkboxValues: FdCheckboxValues) {

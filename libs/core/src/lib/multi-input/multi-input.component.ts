@@ -191,10 +191,6 @@ export class MultiInputComponent implements
     popoverRef: PopoverComponent;
 
     /** @hidden */
-    @ViewChildren(CheckboxComponent)
-    checkboxComponents: QueryList<CheckboxComponent>;
-
-    /** @hidden */
     @ViewChild('control', { read: TemplateRef })
     controlTemplate: TemplateRef<any>;
 
@@ -268,7 +264,6 @@ export class MultiInputComponent implements
         if (this.mobile) {
             this._setUpMobileMode();
         }
-        this.setUpCheckboxSubscription();
     }
 
     /** @hidden */
@@ -511,20 +506,6 @@ export class MultiInputComponent implements
         } else {
             this.focusTrap.deactivate();
         }
-    }
-
-    /** @hidden */
-    private _applyClassToCheckboxes(): void {
-        this.checkboxComponents.forEach(
-            _checkbox => _checkbox.labelElement.nativeElement.classList.add('fd-list__label')
-        );
-    }
-
-    /** @hidden */
-    private setUpCheckboxSubscription(): void {
-        this._subscriptions.add(
-            this.checkboxComponents.changes.subscribe(() => this._applyClassToCheckboxes())
-        );
     }
 
     /** @hidden */
