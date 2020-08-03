@@ -40,7 +40,7 @@ let nextUniqueId = 0;
     providers: [{ provide: FormFieldControl, useExisting: RadioGroupComponent, multi: true }]
 })
 export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit, AfterContentChecked, OnDestroy {
-    /** value of selected radio button */
+    /** Value of selected radio button */
     @Input()
     get value(): any {
         return super.getValue();
@@ -75,7 +75,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     @ViewChildren(RadioButtonComponent)
     viewRadioButtons: QueryList<RadioButtonComponent>;
 
-    /** selected radio button change event raised */
+    /** Selected radio button change event raised */
     @Output()
     change: EventEmitter<RadioButtonComponent> = new EventEmitter<RadioButtonComponent>();
 
@@ -94,7 +94,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * controlvalue accessor
+     * Control Value Accessor
      */
     writeValue(value: any): void {
         if (value) {
@@ -104,21 +104,21 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * acess display value for objects, acts as checkbox label.
+     * Acess display value for objects, acts as checkbox label.
      */
     public getDisplayValue(item: any): string {
         return this.displayValue(item);
     }
 
     /**
-     * acess lookup value for objects, acts as checkbox value.
+     * Acess lookup value for objects, acts as checkbox value.
      */
     public getLookupValue(item: any): string {
         return this.lookupValue(item);
     }
 
     /**
-     * called on button click for view radio button, created from list of values
+     * Called on button click for view radio button, created from list of values
      * @param event
      */
     public selected(event: RadioButtonComponent): void {
@@ -126,7 +126,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * @hidden selecting default button as provided as input
+     * @hidden Selecting default button as provided as input
      */
     ngAfterContentChecked(): void {
         if (!this._validateRadioButtons()) {
@@ -177,7 +177,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * select radio button with provided value
+     * Select radio button with provided value
      */
     private _initViewRadioButtons(): void {
         if (this.viewRadioButtons && this.viewRadioButtons.length > 0) {
@@ -190,7 +190,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * selects given button, if value matches
+     * Selects given button, if value matches
      * @param button
      */
     private _selectUnselect(button: RadioButtonComponent): void {
@@ -224,7 +224,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
 
     /**
      *
-     * @param button set inital values, used while content children creation
+     * @param button Set inital values, used while content children creation
      */
     private _setProperties(button: RadioButtonComponent): void {
         if (button) {
