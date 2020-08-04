@@ -233,7 +233,7 @@ export class FormFieldComponent
         return this._editable && this._control && this._control.status === 'error';
     }
 
-    private validateFieldControlComponent() {
+    private validateFieldControlComponent(): void {
         if (!this._control) {
             throw new Error('fdp-form-field must contain component implemented FormFieldControl.');
         }
@@ -243,7 +243,7 @@ export class FormFieldComponent
         }
     }
 
-    private validateErrorHandler() {
+    private validateErrorHandler(): void {
         if (this._editable && this._control && this.hasValidators() && !this.i18Strings) {
             throw new Error('Validation strings are required for the any provided validations.');
         }
@@ -253,7 +253,7 @@ export class FormFieldComponent
         return this.validators && this.validators.length > 1;
     }
 
-    private initFormControl() {
+    private initFormControl(): void {
         if (this._control && this._control.ngControl && this._control.ngControl.control) {
             if (this.required) {
                 this.validators.push(Validators.required);
@@ -276,7 +276,7 @@ export class FormFieldComponent
      *
      *  Todo: use more elegant way to set these properties.
      */
-    private updateControlProperties() {
+    private updateControlProperties(): void {
         if (this._control && this._editable) {
             this._control.id = this.id;
             this._control.placeholder = this.placeholder;

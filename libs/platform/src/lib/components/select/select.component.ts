@@ -97,7 +97,7 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
         this['unselectOptions'] = () => {};
     }
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 
     writeValue(newValue: any): void {
         if (newValue && newValue !== this._value) {

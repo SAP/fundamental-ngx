@@ -59,7 +59,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         if (changes['disabled']) {
             if (changes['disabled'].previousValue === false && changes['disabled'].currentValue === true) {
                 this._subscriptions.unsubscribe();
@@ -70,14 +70,14 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         if (!this.disabled) {
             this._setResizeListeners();
         }
     }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 

@@ -78,5 +78,5 @@ export class PlatformSelectDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

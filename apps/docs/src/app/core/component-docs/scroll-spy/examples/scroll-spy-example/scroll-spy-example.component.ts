@@ -9,7 +9,7 @@ export class ScrollSpyExampleComponent implements OnInit {
     selectedSpy = 'element-0';
     items: any[] = [];
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.generateItems(9);
     }
 

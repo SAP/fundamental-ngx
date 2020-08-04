@@ -21,5 +21,5 @@ export class PlatformTextareaI18nExampleComponent implements OnInit {
         this.textareaValidator = [Validators.maxLength(10), Validators.required];
     }
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

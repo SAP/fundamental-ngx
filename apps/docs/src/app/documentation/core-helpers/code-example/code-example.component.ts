@@ -61,7 +61,7 @@ export class CodeExampleComponent implements OnInit {
     }
 
     @HostListener('window:resize', ['$event'])
-    onResize() {
+    onResize(): void {
         this.smallScreen = window.innerWidth <= 768;
     }
 }

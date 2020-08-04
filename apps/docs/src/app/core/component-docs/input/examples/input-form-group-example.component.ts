@@ -12,7 +12,7 @@ export class InputFormGroupExampleComponent implements OnInit {
 
     constructor(private fb: FormBuilder) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.myForm = this.fb.group({
             inputControl: new FormControl('', Validators.required),
             disabledInputControl: new FormControl({ value: 'initial value', disabled: true }, Validators.required),
@@ -20,17 +20,17 @@ export class InputFormGroupExampleComponent implements OnInit {
         });
     }
 
-    createItem() {
+    createItem(): FormGroup {
         return this.fb.group({
             primaryInput: [''],
             secondaryInput: ['']
         });
     }
 
-    addItem() {
+    addItem(): void {
         this.arr = this.myForm.get('arr') as FormArray;
         this.arr.push(this.createItem());
     }
 
-    onSubmit() {}
+    onSubmit(): void {}
 }

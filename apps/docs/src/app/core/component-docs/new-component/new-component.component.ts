@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './new-component.component.html'
 })
 export class NewComponentComponent {
-    onLoad(event) {}
-    onError(event) {}
+    onLoad(event): void {}
+    onError(event): void {}
 }

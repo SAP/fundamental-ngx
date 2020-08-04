@@ -125,9 +125,9 @@ export class SegmentedButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('segmentedButton');
     }
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

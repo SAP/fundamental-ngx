@@ -128,27 +128,27 @@ export class ShellbarCollapsibleExampleComponent {
         }
     ];
 
-    settingsCallback($event) {
+    settingsCallback($event): void {
         console.log($event);
         alert('Settings Clicked');
     }
 
-    signOutCallback($event) {
+    signOutCallback($event): void {
         console.log($event);
         alert('Sign Out Clicked');
     }
 
-    actionNotificationCallback($event) {
+    actionNotificationCallback($event): void {
         console.log($event);
         alert('Notification Action Clicked');
     }
 
-    actionPoolCallback($event) {
+    actionPoolCallback($event): void {
         console.log($event);
         alert('Pool Action Clicked');
     }
 
-    productSwitcherCallback(product) {
+    productSwitcherCallback(product): void {
         alert(product + 'Product Clicked');
     }
 }
