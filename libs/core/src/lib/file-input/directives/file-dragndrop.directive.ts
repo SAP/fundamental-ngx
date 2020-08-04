@@ -43,7 +43,7 @@ export class FileDragndropDirective {
 
     /** @hidden */
     @HostListener('dragover', ['$event'])
-    public onDragover(event) {
+    public onDragover(event): void {
         if (this.dragndrop) {
             event.preventDefault();
             event.stopPropagation();
@@ -52,7 +52,7 @@ export class FileDragndropDirective {
 
     /** @hidden */
     @HostListener('dragenter', [])
-    public onDragenter() {
+    public onDragenter(): void {
         ++this.elementStateCounter;
         if (this.dragndrop && this.elementStateCounter === 1) {
             this.onDragEnter.emit();
@@ -61,7 +61,7 @@ export class FileDragndropDirective {
 
     /** @hidden */
     @HostListener('dragleave', ['$event'])
-    public onDragleave(event) {
+    public onDragleave(event): void {
         --this.elementStateCounter;
         if (this.dragndrop && this.elementStateCounter === 0) {
             event.preventDefault();
@@ -72,7 +72,7 @@ export class FileDragndropDirective {
 
     /** @hidden */
     @HostListener('drop', ['$event'])
-    public onDrop(event) {
+    public onDrop(event): void {
         this.elementStateCounter = 0;
 
         if (!this.dragndrop || this.disabled) {

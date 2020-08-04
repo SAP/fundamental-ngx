@@ -135,11 +135,11 @@ class TestMenuButtonComponent {
 
     public menuButtonClicked = false;
 
-    clicked(event: any) {
+    clicked(event: any): void {
         this.menuButtonClicked = true;
     }
 
-    onItemSelect(item: string) {
+    onItemSelect(item: string): void {
         this.currentSelectedItem = item;
     }
     constructor() {}

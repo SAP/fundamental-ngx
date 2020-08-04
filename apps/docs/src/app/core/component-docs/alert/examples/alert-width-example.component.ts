@@ -9,7 +9,7 @@ import { AlertConfig, AlertService } from '@fundamental-ngx/core';
 export class AlertWidthExampleComponent {
     constructor(public alertService: AlertService) {}
 
-    openAlert1() {
+    openAlert1(): void {
         const alertContent = 'A dismissible warning-type alert with customizable width of 250px.';
         this.alertService.open(alertContent, {
             type: 'warning',
@@ -19,7 +19,7 @@ export class AlertWidthExampleComponent {
         } as AlertConfig);
     }
 
-    openAlert2() {
+    openAlert2(): void {
         const alertContent = 'A non-dismissible information-type alert with customizable width of 550px';
         this.alertService.open(alertContent, {
             type: 'information',
@@ -29,7 +29,7 @@ export class AlertWidthExampleComponent {
         } as AlertConfig);
     }
 
-    openAlert3() {
+    openAlert3(): void {
         const alertContent = 'A dismissible success-type alert with customizable width of 70vw';
         this.alertService.open(alertContent, {
             type: 'success',
@@ -39,7 +39,7 @@ export class AlertWidthExampleComponent {
         } as AlertConfig);
     }
 
-    openAlert4() {
+    openAlert4(): void {
         const alertContent = ' A non-dismissible error-type alert with customizable (default) width of 100vw';
         this.alertService.open(alertContent, {
             type: 'error',

@@ -21,7 +21,7 @@ export class PlatformSearchFieldCategoriesExampleComponent implements OnInit {
     public compactInputText = '';
     public compactInputCategory = '';
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.suggestions = [
             {
                 value: 'Apple'
@@ -93,22 +93,22 @@ export class PlatformSearchFieldCategoriesExampleComponent implements OnInit {
         ];
     }
 
-    onSearchSubmit($event: SearchInput) {
+    onSearchSubmit($event: SearchInput): void {
         this.searchTerm = $event.text;
         this.searchCategory = $event.category;
     }
 
-    onInputChange($event: SearchInput) {
+    onInputChange($event: SearchInput): void {
         this.inputText = $event.text;
         this.inputCategory = $event.category;
     }
 
-    onCompactSearchSubmit($event: SearchInput) {
+    onCompactSearchSubmit($event: SearchInput): void {
         this.compactSearchTerm = $event.text;
         this.compactSearchCategory = $event.category;
     }
 
-    onCompactInputChange($event: SearchInput) {
+    onCompactInputChange($event: SearchInput): void {
         this.compactInputText = $event.text;
         this.compactInputCategory = $event.category;
     }

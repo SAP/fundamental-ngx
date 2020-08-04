@@ -27,7 +27,7 @@ export class DialogFooterComponent implements AfterContentInit {
     }
 
     /** @hidden */
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this._assignCustomTemplates();
     }
 

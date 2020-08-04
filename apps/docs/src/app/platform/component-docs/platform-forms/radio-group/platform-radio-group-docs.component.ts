@@ -73,5 +73,5 @@ export class PlatformRadioGroupDocsComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

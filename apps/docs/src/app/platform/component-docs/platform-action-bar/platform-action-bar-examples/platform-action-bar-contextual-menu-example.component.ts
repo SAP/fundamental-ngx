@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class PlatformActionBarWithContextualMenuExampleComponent {
 
-    onBackButtonClick() {
+    onBackButtonClick(): void {
         alert('Back button clicked');
     }
 }

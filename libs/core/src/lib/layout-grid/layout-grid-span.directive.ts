@@ -10,7 +10,7 @@ export class LayoutGridSpanDirective extends AbstractFdNgxClass {
     columnSpan: number;
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         if (this.columnSpan) {
             this._addClassToElement('fd-layout-grid__span-column-' + this.columnSpan);
         }

@@ -15,7 +15,7 @@ export class DatePickerRangeExampleComponent {
         end: FdDate.getToday().nextDay()
     };
 
-    getSelectedFirstDate() {
+    getSelectedFirstDate(): string {
         let retVal = 'null';
         if (this.selectedRange.start) {
             retVal = this.selectedRange.start.toDateString();
@@ -23,7 +23,7 @@ export class DatePickerRangeExampleComponent {
         return retVal;
     }
 
-    getSelectedLastDate() {
+    getSelectedLastDate(): string {
         let retVal = 'null';
         if (this.selectedRange.end) {
             retVal = this.selectedRange.end.toDateString();

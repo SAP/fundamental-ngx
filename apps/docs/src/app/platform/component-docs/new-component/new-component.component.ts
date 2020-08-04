@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 export class NewComponentComponent implements OnInit {
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 
-    onLoad(event) {}
-    onError(event) {}
+    onLoad(event): void {}
+    onError(event): void {}
 }

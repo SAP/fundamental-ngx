@@ -18,7 +18,7 @@ export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {
 
     public dataSource: SearchFieldDataSource<any>;
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.dataSource = new SearchFieldDataSource(new SearchFieldDataProvider());
         this.categories = [
             {
@@ -52,12 +52,12 @@ export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {
         ];
     }
 
-    onSearchSubmit($event: SearchInput) {
+    onSearchSubmit($event: SearchInput): void {
         this.searchTerm = $event.text;
         this.searchCategory = $event.category;
     }
 
-    onInputChange($event: SearchInput) {
+    onInputChange($event: SearchInput): void {
         this.inputText = $event.text;
         this.inputCategory = $event.category;
     }

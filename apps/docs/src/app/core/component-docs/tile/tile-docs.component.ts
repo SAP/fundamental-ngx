@@ -139,7 +139,7 @@ export class TileDocsComponent {
         this.schema = this.schemaFactory.getComponent('tile');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

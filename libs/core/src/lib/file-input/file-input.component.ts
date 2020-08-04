@@ -110,7 +110,7 @@ export class FileInputComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    selectHandler(event: File[]) {
+    selectHandler(event: File[]): void {
         if (this.maxFileSize) {
             const valid_files: File[] = [];
             const invalid_files: File[] = [];

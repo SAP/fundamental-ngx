@@ -16,7 +16,7 @@ export class SchemaComponent implements OnInit {
 
     schemaGroup: FormGroup;
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.schemaGroup = this._constructProperties(this.schema.properties);
         this.schemaGroup.patchValue(this.initialValues);
 
@@ -25,7 +25,7 @@ export class SchemaComponent implements OnInit {
         });
     }
 
-    private _constructProperties(properties: Properties) {
+    private _constructProperties(properties: Properties): FormGroup {
         const formGroup = {};
         for (const property in properties) {
             if (properties[property].type === 'object') {

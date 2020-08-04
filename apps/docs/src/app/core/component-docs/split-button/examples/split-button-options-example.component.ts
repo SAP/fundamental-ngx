@@ -12,11 +12,11 @@ import { Component } from '@angular/core';
     ]
 })
 export class ButtonSplitOptionsExampleComponent {
-    itemClicked() {
+    itemClicked(): void {
         alert('Item Clicked!');
     }
 
-    primaryButtonClicked() {
+    primaryButtonClicked(): void {
         alert('Primary Button Clicked!');
     }
 }
