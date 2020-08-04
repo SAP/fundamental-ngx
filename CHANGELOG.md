@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.54...v0.20.1-rc.55) (2020-08-04)
+
+
+### Bug Fixes
+
+* Combobox keep full width ([#2970](https://github.com/SAP/fundamental-ngx/issues/2970)) ([497c02c](https://github.com/SAP/fundamental-ngx/commit/497c02c146bea85cbace12bdbebb3a5da6fda8dd))
+
 ### [0.20.1-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.53...v0.20.1-rc.54) (2020-08-04)
 
 ### [0.20.1-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.52...v0.20.1-rc.53) (2020-08-04)
