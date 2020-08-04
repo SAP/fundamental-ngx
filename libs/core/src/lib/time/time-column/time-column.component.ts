@@ -216,6 +216,12 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         }
     }
 
+    public setValue(): void {
+        if (this._active) {
+            this._setUpInitialValue();
+        }
+    }
+
 
     /** It prevents from accidentally change the item by click event */
     handleDrag(isDragging: boolean): void {

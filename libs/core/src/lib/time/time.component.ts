@@ -5,15 +5,15 @@ import {
     forwardRef,
     Input,
     OnChanges,
-    OnInit,
-    SimpleChanges,
+    OnInit, QueryList,
+    SimpleChanges, ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
-import { TimeColumnItemOutput } from './time-column/time-column.component';
+import { TimeColumnComponent, TimeColumnItemOutput } from './time-column/time-column.component';
 import { KeyUtil } from '../utils/functions/key-util';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
@@ -102,6 +102,9 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     @Input()
     spinnerButtons = true;
 
+    @ViewChildren(TimeColumnComponent)
+    columns: QueryList<TimeColumnComponent>;
+
     /** @hidden
      * Used only in meridian mode. Stores information the current am/pm state.
      */
@@ -159,6 +162,10 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     /** @hidden */
     ngOnInit(): void {
         this._setUpTimeGrid();
+    }
+
+    refresh(): void {
+        this.columns.forEach(column => column.setValue());
     }
 
     /** @hidden */

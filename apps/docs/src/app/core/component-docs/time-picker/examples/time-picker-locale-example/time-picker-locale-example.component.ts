@@ -12,14 +12,14 @@ import {Placeholder} from '@angular/compiler/src/i18n/i18n_ast';
 export class TimePickerLocaleExampleComponent implements OnInit {
 
   timeMeridianObject = { hour: 12, minute: 0, second: 0 };
-  locale: string = 'en';
-  meridian: boolean = false;
+  locale = 'en';
+  meridian = false;
   placeholder: string;
-  ngOnInit() {
+  ngOnInit(): void  {
     this.onOptionChange('en');
   }
 
-  onOptionChange(event) {
+  onOptionChange(event): void {
     moment.locale(event);
     if (moment().format('LT').includes('AM') || moment().format('LT').includes('PM')) {
       this.placeholder = 'hh:mm:ss am';

@@ -85,7 +85,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
     @Input()
     displayHours = true;
 
-    /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds. 
+    /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds.
      * Otherwise It can be set to a default value
     */
     @Input()
@@ -215,13 +215,15 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
         if (isOpen) {
             this.popover.directiveRef.loaded
                 .pipe(
-                    filter(() => !this.child.activeView),
                     first(),
                     takeUntil(this._onDestroy$),
                     delay(0)
                 )
                 .subscribe(() => {
-                    this.child.changeActive('hour');
+                    if (!this.child.activeView) {
+                        this.child.changeActive('hour');
+                    }
+                    this.child.refresh();
                 });
         }
     }
