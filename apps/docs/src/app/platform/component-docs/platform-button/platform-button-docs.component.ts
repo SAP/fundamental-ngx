@@ -117,8 +117,8 @@ export class PlatformButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
-    ngOnInit() { }
-    onSchemaValues(data) {
+    ngOnInit(): void { }
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

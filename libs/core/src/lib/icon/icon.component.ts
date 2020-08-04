@@ -44,7 +44,7 @@ export class IconComponent extends AbstractFdNgxClass {
     @Input() size = '';
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         if (this.glyph) {
             this._addClassToElement(PREFIX_ICON_CLASS + this.glyph);
         }

@@ -24,7 +24,7 @@ export class NotificationOptionsExampleComponent {
 
     constructor(private notificationService: NotificationService) {}
 
-    openNotifications() {
+    openNotifications(): void {
         this.ref.clear();
 
         this.notificationService.open(NotificationOptionsContentComponent, {

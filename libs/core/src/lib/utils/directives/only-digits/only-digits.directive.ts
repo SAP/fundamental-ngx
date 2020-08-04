@@ -5,7 +5,7 @@ import { Directive, HostListener } from '@angular/core';
 })
 export class OnlyDigitsDirective {
     @HostListener('keydown', ['$event'])
-    onKeyDown(e: KeyboardEvent) {
+    onKeyDown(e: KeyboardEvent): void {
         if (
             // Allow: Delete, Backspace, Tab, Escape, Enter
             [46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||

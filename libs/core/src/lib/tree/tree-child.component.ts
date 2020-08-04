@@ -26,11 +26,11 @@ export class TreeChildComponent implements OnInit {
 
     @Output() deleteClicked: EventEmitter<any> = new EventEmitter<any>();
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.hideChildren = false;
     }
 
-    toggleDisplayChildren(hideAll?) {
+    toggleDisplayChildren(hideAll?): void {
         if (hideAll !== undefined) {
             this.hideChildren = hideAll;
         } else {
@@ -38,7 +38,7 @@ export class TreeChildComponent implements OnInit {
         }
     }
 
-    typeOf(variable?) {
+    typeOf(variable?): string {
         let retVal;
         if (typeof variable === 'string') {
             retVal = 'string';
@@ -49,13 +49,13 @@ export class TreeChildComponent implements OnInit {
         return retVal;
     }
 
-    editTreeItem(row?) {
+    editTreeItem(row?): void {
         if (row) {
             this.editClicked.emit(row);
         }
     }
 
-    deleteTreeItem(row?) {
+    deleteTreeItem(row?): void {
         if (row) {
             this.deleteClicked.emit(row);
         }

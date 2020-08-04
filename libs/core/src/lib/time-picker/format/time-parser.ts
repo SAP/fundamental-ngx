@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TimeObject } from '../../time/time-object';
 
-export function TIME_FORMAT_FACTORY() {
+export function TIME_FORMAT_FACTORY(): TimeFormatParserDefault {
     return new TimeFormatParserDefault();
 }
 

@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.53...v0.20.1-rc.54) (2020-08-04)
+
+### [0.20.1-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.52...v0.20.1-rc.53) (2020-08-04)
+
+
+### Bug Fixes
+
+* (core) Add Checkbox label class input | Simplify Multi Input ([#2973](https://github.com/SAP/fundamental-ngx/issues/2973)) ([09195b4](https://github.com/SAP/fundamental-ngx/commit/09195b49375f5d4fb5962efcce5a10e78b48ebe2))
+
+### [0.20.1-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.51...v0.20.1-rc.52) (2020-08-03)
+
+### [0.20.1-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.50...v0.20.1-rc.51) (2020-08-03)
+
+
+### Bug Fixes
+
+* ie11 mute mouse click on indeterminate state ([#2949](https://github.com/SAP/fundamental-ngx/issues/2949)) ([00fca91](https://github.com/SAP/fundamental-ngx/commit/00fca911b278b2168233c0a1bda731301297805d))
+
 ### [0.20.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.49...v0.20.1-rc.50) (2020-08-03)
 
 

@@ -106,7 +106,7 @@ export class TableCustomDialogComponent {
         }
     }
 
-    dropHandle(event: CdkDragDrop<string[]>) {
+    dropHandle(event: CdkDragDrop<string[]>): void {
         moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
         this.columns = [...this.columns];
     }

@@ -34,7 +34,7 @@ export class ObjectStatusTextIconExampleComponent {}
     styleUrls: ['./object-status-examples.component.scss']
 })
 export class ObjectStatusClickableAndIconExampleComponent {
-    showAlert() {
+    showAlert(): void {
         alert('you clicked the clickable ObjectStatus');
     }
 }
@@ -59,7 +59,7 @@ export class ObjectStatusInvertedGenericTextExampleComponent {}
     styleUrls: ['./object-status-examples.component.scss']
 })
 export class ObjectStatusLargeExampleComponent {
-    showAlert(index) {
+    showAlert(index): void {
         alert('clicked alert large at index:- ' + index);
     }
 }

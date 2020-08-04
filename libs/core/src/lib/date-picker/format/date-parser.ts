@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FdDate } from '../../calendar/models/fd-date';
 import { DatePipe } from '@angular/common';
 
-export function DATE_FORMAT_FACTORY() {
+export function DATE_FORMAT_FACTORY(): DateFormatParserDefault {
     return new DateFormatParserDefault();
 }
 

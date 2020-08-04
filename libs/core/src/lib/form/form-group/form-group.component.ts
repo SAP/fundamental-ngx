@@ -46,7 +46,7 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
-    ngOnChanges() {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
