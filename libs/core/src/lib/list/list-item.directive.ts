@@ -1,5 +1,4 @@
-import { ContentChild, Directive, ElementRef, HostBinding, Input } from '@angular/core';
-import { CheckboxComponent } from '../checkbox/checkbox/checkbox.component';
+import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 /**
  * The component that represents a list item.
