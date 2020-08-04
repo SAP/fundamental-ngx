@@ -1,4 +1,5 @@
 export * from './lib/platform.module';
+export * from './lib/platform.config';
 export * from './lib/components/button/public_api';
 export * from './lib/components/action-bar/public_api';
 export * from './lib/components/action-button-group/public_api';
@@ -11,3 +12,4 @@ export * from './lib/components/select/public_api';
 export * from './lib/components/split-menu-button/public_api';
 export * from './lib/domain/public_api';
 export * from './lib/components/info-label/public_api';
+export * from './lib/components/panel/public_api';
