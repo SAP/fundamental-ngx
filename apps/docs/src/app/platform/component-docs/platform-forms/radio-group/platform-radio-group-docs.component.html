@@ -1,48 +1,46 @@
-<fd-docs-section-title [id]="'projection'" [componentName]="'Radio Button Group'">
-    Radio Button Group With Radio Buttons Passed as Content.
+<fd-docs-section-title id="projection" componentName="RadioGroup">
+    Radio Group With Radio Buttons Passed as Content Projection
 </fd-docs-section-title>
 
 <description>
-    Platform Radio Buttons Passed as Content
+    Radio group is created from platform radio buttons. which is passed as content projection
 </description>
 <component-example>
     <fdp-platform-radio-group-content-example></fdp-platform-radio-group-content-example>
 </component-example>
 <code-example [exampleFiles]="contentRadioGroup"></code-example>
 
-<fd-docs-section-title [id]="'list'" [componentName]="'Disabled Radio Button Group'">
-    Radio Button Group Creates Radio Buttons With List of String Values.
+<fd-docs-section-title id="list" componentName="Disabled Radio Button Group">
+    Radio Group Creates Radio Buttons With List of String Values
 </fd-docs-section-title>
 <description>
-    Creating Platform Radio Buttons with List of String Values.<br />
-    eg. ['Summer', 'Winter', 'Autumn'], Radio buttons are created with these values.
+    Creating platform radio buttons with list of string values
 </description>
 <component-example>
     <fdp-platform-radio-group-list-example></fdp-platform-radio-group-list-example>
 </component-example>
 <code-example [exampleFiles]="listRadioGroup"></code-example>
 
-<fd-docs-section-title [id]="'listobject'" [componentName]="'Radio Button Group'">
-    Radio Button Group Creates Platform Radio Buttons With List of Objects. <br />
+<fd-docs-section-title id="listobject" componentName="RadioGroup">
+    Radio Button Group Creates Platform Radio Buttons With List of Objects
 </fd-docs-section-title>
 
 <description>
-    Creating Platform Radio Buttons with List of Object.<br />
-    Here value, label and disabled properties of SelectItem object or LookupKey and DisaplayKey of any objects are used
-    to Create Individual Radio Buttons.
+    Creating platform radio buttons with list of Object. This object can be of type SelectItem or any other class
+    object. <br />
+    For any unknown object, we have to assign lookupKey and displayKey to work as radio value and label respectively
 </description>
 <component-example>
     <fdp-platform-radio-group-list-items-example></fdp-platform-radio-group-list-items-example>
 </component-example>
 <code-example [exampleFiles]="listItemsRadioGroup"></code-example>
 
-<fd-docs-section-title [id]="'disabled'" [componentName]="'Disabled Radio Button Group'">
-    Radio Button Group for Disable Radio Buttons. Here One or More Radio Buttons Can be Disabled and Others Can be
-    Enabled State.
+<fd-docs-section-title id="disabled" componentName="DisabledRadioGroup">
+    Creating Disabled Radio Buttons in Radio Group.
 </fd-docs-section-title>
 <description>
-    Creation of disabled radio buttons. This can be done when radio buttons passed as content or created with list of
-    values.
+    Creating disabled radio buttons is possible when radio buttons are passed as content or created with a list of
+    values.One or more radio buttons can either be in a disabled or enabled state
 </description>
 <component-example>
     <fdp-platform-radio-group-disabled-example></fdp-platform-radio-group-disabled-example>
