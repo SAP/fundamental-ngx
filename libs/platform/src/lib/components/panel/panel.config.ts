@@ -26,7 +26,7 @@ export class PanelConfig {
     /**
      * Create Provider factory function
      */
-    static createProviderFactory(obj: Partial<PanelConfig>) {
+    static createProviderFactory(obj: Partial<PanelConfig>): (platformConfig: PlatformConfig) => PanelConfig {
         const useFactory = (platformConfig: PlatformConfig): PanelConfig => {
             return Object.assign(new PanelConfig(platformConfig), obj);
         };

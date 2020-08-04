@@ -85,7 +85,7 @@ class SimplePanelComponent {
     expandLabel = 'Collapse Panel';
     collapseLabel = 'Expand Panel';
 
-    onExpandChange(event: PanelExpandChangeEvent) {
+    onExpandChange(event: PanelExpandChangeEvent): void {
         this.expanded = event.payload;
     }
 }

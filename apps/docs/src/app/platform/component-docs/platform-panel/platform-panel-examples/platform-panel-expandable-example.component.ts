@@ -8,7 +8,7 @@ import { PanelExpandChangeEvent } from '@fundamental-ngx/platform';
 export class PlatformPanelExpandableExampleComponent {
     public expanded = true;
 
-    public onExpandChange(event: PanelExpandChangeEvent) {
+    public onExpandChange(event: PanelExpandChangeEvent): void {
         this.expanded = event.payload;
     }
 }
