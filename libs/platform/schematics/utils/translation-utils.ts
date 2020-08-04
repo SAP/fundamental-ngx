@@ -88,7 +88,7 @@ export function addLocalizeSchematic(options: any): Rule {
  * @param angularJsonFileObject the angular.json file
  * @param language the language that will be added to the build and serve configurations
  */
-export function writeToAngularConfig(tree: Tree, options: any, angularJsonFileObject: any, language: string) {
+export function writeToAngularConfig(tree: Tree, options: any, angularJsonFileObject: any, language: string): void {
     const srcPath = getSourceTreePath(tree, options);
     const distPath = getDistPath(tree, options);
     const project = options.project ? options.project : Object.keys(angularJsonFileObject['projects'])[0];
@@ -135,7 +135,7 @@ export function writeToAngularConfig(tree: Tree, options: any, angularJsonFileOb
  * @param options options passed for this schematic
  * @param language the language for which translations from lib will be applied to
  */
-export function createExtractionFiles(tree: Tree, options: any, language: string) {
+export function createExtractionFiles(tree: Tree, options: any, language: string): void {
     const srcPath = getSourceTreePath(tree, options);
     const libXlfFileContent = tree.read(
         'node_modules/@fundamental-ngx/platform/schematics/locale/' + language + '/messages.' + language + '.xlf'
@@ -144,7 +144,7 @@ export function createExtractionFiles(tree: Tree, options: any, language: string
         const builder = new (require('xml2js').Builder)(); // builder that will write back to xml
         let finalXlfContent: any;
 
-        require('xml2js').parseString(libXlfFileContent.toString(), function (err: any, libFile: any) {
+        require('xml2js').parseString(libXlfFileContent.toString(), function (err: any, libFile: any): void {
             if (err) {
                 console.log(err);
             }

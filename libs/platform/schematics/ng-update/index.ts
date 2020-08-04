@@ -26,7 +26,7 @@ export function ngUpdate(_options: any): Rule {
  * adds/updates translations, including existing ones, to host application's translation files
  * @param options options passed for this schematic
  */
-function readTranslationFiles(options: any) {
+function readTranslationFiles(options: any): Rule {
     return (tree: Tree, context: SchematicContext) => {
         if (options.translations) {
             try {
@@ -90,7 +90,7 @@ function readTranslationFiles(options: any) {
  * @param fileContent the host applications language .xlf file
  * @param language the language for which translations from lib will be applied to
  */
-function updateExtractionFiles(tree: Tree, options: any, fileContent: any, language: string) {
+function updateExtractionFiles(tree: Tree, options: any, fileContent: any, language: string): void {
     const srcPath = getSourceTreePath(tree, options);
     const libXlfFileContent = tree.read(
         'node_modules/@fundamental-ngx/platform/schematics/locale/' + language + '/messages.' + language + '.xlf'
@@ -99,7 +99,7 @@ function updateExtractionFiles(tree: Tree, options: any, fileContent: any, langu
     if (libXlfFileContent) {
         const builder = new (require('xml2js').Builder)();
         let finalXlfContent: any;
-        require('xml2js').parseString(libXlfFileContent.toString(), function (err: any, libFile: any) {
+        require('xml2js').parseString(libXlfFileContent.toString(), function (err: any, libFile: any): void {
             if (err) {
                 console.log(err);
             }
@@ -109,7 +109,7 @@ function updateExtractionFiles(tree: Tree, options: any, fileContent: any, langu
             if (fileContent) {
                 // don't simply overwrite, merge here with existing file
                 // add the transUnits from lib to this file
-                require('xml2js').parseString(fileContent.toString(), function (error: any, hostFile: any) {
+                require('xml2js').parseString(fileContent.toString(), function (error: any, hostFile: any): void {
                     if (error) {
                         console.log(error);
                     }
