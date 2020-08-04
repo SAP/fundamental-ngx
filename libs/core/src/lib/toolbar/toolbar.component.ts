@@ -169,7 +169,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden */
     @applyCssClass
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-toolbar',
             `fd-toolbar--${this.fdType}`,
@@ -177,9 +177,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             `${this.size === 'cozy' ? 'fd-toolbar--cozy' : ''}`,
             `${this.hasTitle ? 'fd-toolbar--title' : ''}`,
             `${this.clearBorder ? 'fd-toolbar--clear' : ''}`
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */

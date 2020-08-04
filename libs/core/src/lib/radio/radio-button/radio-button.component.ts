@@ -145,12 +145,12 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
      *  should be used with @applyCssClass decorator
      */
     @applyCssClass
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-radio',
             this.compact ? 'fd-radio--compact' : '',
             this.state !== 'default' ? `is-${this.state}` : ''
-        ].join(' ');
+        ];
     }
 
     /** @hidden */

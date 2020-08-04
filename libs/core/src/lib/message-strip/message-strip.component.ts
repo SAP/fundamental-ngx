@@ -113,15 +113,13 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-message-strip',
             this.type ? `fd-message-strip--${this.type}` : '',
             this.dismissible ? 'fd-message-strip--dismissible' : '',
             this.noIcon ? 'fd-message-strip--no-icon' : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 }

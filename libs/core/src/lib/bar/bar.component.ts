@@ -72,7 +72,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-bar',
             this.cosy ? 'fd-bar--cosy' : '',
@@ -82,9 +82,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
             this.inHomePage && !this.size ? 'fd-bar--home-page' : '',
             this.inHomePage && this.size ? `fd-bar--home-page-${this.size}` : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     elementRef(): ElementRef<any> {
