@@ -10,10 +10,10 @@
     <div fd-tile-content>
         <div fd-numeric-content>
             <div fd-numeric-content-kpi-container>
-                <span fd-numeric-content-kpi [glyph]="'line-charts'"></span>
+                <span fd-numeric-content-kpi [state]="'negative'" [glyph]="'line-charts'"></span>
             </div>
             <div fd-numeric-content-kpi-container>
-                <div fd-numeric-content-kpi>1Ñç</div>
+                <div fd-numeric-content-kpi [state]="'negative'">1Ñç</div>
             </div>
             <div fd-numeric-content-scale-container>
                 <div fd-numeric-content-scale>
@@ -48,14 +48,14 @@
     <div fd-tile-content>
         <div fd-numeric-content>
             <div fd-numeric-content-kpi-container>
-                <span fd-numeric-content-kpi [glyph]="'line-charts'"></span>
+                <span fd-numeric-content-kpi [state]="'positive'" [glyph]="'line-charts'"></span>
             </div>
             <div fd-numeric-content-kpi-container>
-                <div fd-numeric-content-kpi>1Ñç</div>
+                <div fd-numeric-content-kpi [state]="'positive'">1Ñç</div>
             </div>
             <div fd-numeric-content-scale-container>
                 <div fd-numeric-content-scale>
-                    <span fd-numeric-content-scale-arrow [glyph]="'down'"></span>
+                    <span fd-numeric-content-scale-arrow [glyph]="'up'"></span>
                     <span fd-numeric-content-scale-text>M</span>
                 </div>
             </div>

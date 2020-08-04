@@ -1,32 +1,42 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
-type TileType = '' | 'kpi' | 'launch' | 'feed' | 'slide' | 'line';
-type TileSize = '' | 's';
+type TileType = null | 'kpi' | 'launch' | 'feed' | 'slide' | 'line';
+type TileSize = null | 's';
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'fd-tile',
     templateUrl: './tile.component.html',
     styleUrls: ['./tile.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges {
     /** user's custom classes */
     @Input()
     class: string;
 
-    /** Size modifier. Options are '' and 's'. */
+    /** Size modifier. Options are null (default) and 's'. */
     @Input()
-    size: TileSize = '';
+    size: TileSize;
 
     /** Optional 'double' modifier to double the tile width. */
     @Input()
     double = false;
 
-    /** Type of tile.  Options are 'kpi', 'launch', 'feed', 'slide', 'line', or leave blank for default. */
+    /** Type of tile.  Options are 'kpi', 'launch', 'feed', 'slide', 'line', or leave null for default. */
     @Input()
-    type: TileType = '';
+    type: TileType;
 
     /** Whether or not the tile is in 'action' mode. */
     @Input()
