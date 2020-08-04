@@ -39,7 +39,7 @@ describe('ButtonComponent', () => {
         componentInstance.fdType = 'standard';
         componentInstance.buildComponentCssClass();
 
-        const cssClass = componentInstance.buildComponentCssClass();
+        const cssClass = componentInstance.buildComponentCssClass().join(' ');
         expect(cssClass).toContain('someGlyph');
         expect(cssClass).toContain('standard');
     });

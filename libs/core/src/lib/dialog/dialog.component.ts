@@ -151,15 +151,13 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
 
     /** @hidden */
     @applyCssClass
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             this.dialogConfig.hasBackdrop ? 'fd-dialog' : '',
             this.showDialogWindow ? 'fd-dialog--active' : '',
             this._class,
             this.dialogConfig.backdropClass
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */

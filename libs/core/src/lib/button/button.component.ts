@@ -41,7 +41,6 @@ export type ButtonType =
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
-
     /**
      * Native type of button element
      */
@@ -101,7 +100,7 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-button',
             this.fdType ? `fd-button--${this.fdType}` : '',
@@ -109,9 +108,7 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
             this.fdMenu ? `fd-button--menu` : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** HasElementRef interface implementation
