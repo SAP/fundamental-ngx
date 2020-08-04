@@ -26,7 +26,7 @@ describe('SwitchComponent', () => {
         fixture.detectChanges();
     });
 
-    function detectChangesOnPush() {
+    function detectChangesOnPush(): void {
         changeDetectorRef.markForCheck();
         fixture.detectChanges();
     }
@@ -42,6 +42,15 @@ describe('SwitchComponent', () => {
         detectChangesOnPush();
 
         expect(input.id).toBe(component.innerInputId);
+    });
+
+    it('should accept custom name', () => {
+        const name = 'custom-name';
+        component.name = name;
+
+        detectChangesOnPush();
+
+        expect(input.getAttribute('ng-reflect-name')).toEqual(component.name);
     });
 
     it('should auto-generate id', () => {

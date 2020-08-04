@@ -25,7 +25,7 @@ export class DirectionalityComponent implements OnInit {
 
     constructor(private rtlService: RtlService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         if (this.label) {
             this.id = this.label + Date.now() + '-rtl';
         } else {
@@ -33,7 +33,7 @@ export class DirectionalityComponent implements OnInit {
         }
     }
 
-    onChange() {
+    onChange(): void {
         const dirValue = this.isChecked ? 'rtl' : 'ltr';
         this.rtlService.rtl.next(this.isChecked);
 

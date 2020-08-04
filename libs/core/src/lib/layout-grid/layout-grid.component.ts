@@ -25,7 +25,7 @@ export class LayoutGridComponent extends AbstractFdNgxClass {
     gapSize: number;
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         this._addClassToElement('fd-layout-grid');
 
         if (this.nogap) {

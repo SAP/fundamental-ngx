@@ -551,6 +551,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         if (this.fillOnSelect) {
             this.inputText = this.displayFn(term);
             this.searchInputElement.nativeElement.value = this.inputText;
+            this._cdRef.detectChanges();
 
             if (this.mobile) {
                 this._propagateChange();

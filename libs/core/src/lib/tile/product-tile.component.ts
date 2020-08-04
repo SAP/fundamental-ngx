@@ -32,7 +32,7 @@ export class ProductTileComponent extends AbstractFdNgxClass {
     @Input() isButton = false;
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         this._addClassToElement('fd-product-tile');
         if (this.disabled) {
             this._addClassToElement('is-disabled');

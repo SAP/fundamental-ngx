@@ -65,11 +65,11 @@ const localized_values = {
 export class LanguageService {
     selectedLanguage = 'bg';
 
-    setLanguage(newLanguage: string) {
+    setLanguage(newLanguage: string): void {
         this.selectedLanguage = newLanguage;
     }
 
-    getLanguage() {
+    getLanguage(): string {
         return this.selectedLanguage;
     }
 }
@@ -157,7 +157,7 @@ export class DatePickerI18nExampleComponent implements AfterViewInit {
 
     date = FdDate.getToday();
 
-    isSelected(language: string) {
+    isSelected(language: string): string {
         switch (language) {
             case 'fr': {
                 return this.selected === 1 ? 'selected' : '';
@@ -171,19 +171,19 @@ export class DatePickerI18nExampleComponent implements AfterViewInit {
         }
     }
 
-    setGerman() {
+    setGerman(): void {
         this.selected = 2;
         this.languageService.setLanguage('de');
         this.refresh();
     }
 
-    setFrench() {
+    setFrench(): void {
         this.selected = 1;
         this.languageService.setLanguage('fr');
         this.refresh();
     }
 
-    setBulgarian() {
+    setBulgarian(): void {
         this.selected = 3;
         this.languageService.setLanguage('bg');
         this.refresh();

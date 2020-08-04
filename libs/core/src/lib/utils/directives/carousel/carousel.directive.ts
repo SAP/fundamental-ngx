@@ -112,7 +112,7 @@ export class CarouselDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    private _handlePanEnd(delta: number) {
+    private _handlePanEnd(delta: number): void {
         this._handlePan(delta);
 
         const closestItem: CarouselItemDirective = this._getClosest();
@@ -235,7 +235,7 @@ export class CarouselDirective implements AfterContentInit {
     /**
      * Animates the carousel to the currently selected slide.
      */
-    private _transitionCarousel(transitionPx: number) {
+    private _transitionCarousel(transitionPx: number): void {
 
         this._currentTransitionPx = transitionPx;
 

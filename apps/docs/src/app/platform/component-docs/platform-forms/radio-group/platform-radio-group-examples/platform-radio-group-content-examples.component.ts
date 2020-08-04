@@ -18,7 +18,7 @@ export class PlatformRadioGroupContentExampleComponent implements DoCheck {
         example4: new FormControl({ value: '', disabled: false })
     });
 
-    ngDoCheck() {
+    ngDoCheck(): void {
         this.customForm.get('example4').setErrors({ invalid: true });
         this.customForm.get('example4').markAsTouched();
     }

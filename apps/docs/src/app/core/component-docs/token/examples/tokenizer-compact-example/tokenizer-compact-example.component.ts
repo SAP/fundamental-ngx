@@ -31,7 +31,7 @@ export class TokenizerCompactExampleComponent implements OnInit {
 
     constructor(private fb: FormBuilder) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.tokenizerExampleForm = this.fb.group({
             inputControl: new FormControl('', Validators.required)
         });

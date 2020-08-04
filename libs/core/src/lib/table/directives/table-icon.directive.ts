@@ -46,15 +46,13 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-table__icon',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.navigation ? 'fd-table__icon--navigation' : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** HasElementRef interface implementation

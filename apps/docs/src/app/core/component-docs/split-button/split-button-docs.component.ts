@@ -85,7 +85,7 @@ export class SplitButtonDocsComponent {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

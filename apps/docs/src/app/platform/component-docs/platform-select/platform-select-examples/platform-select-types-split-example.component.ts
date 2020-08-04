@@ -39,5 +39,5 @@ export class PlatformSelectTypesSplitExampleComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

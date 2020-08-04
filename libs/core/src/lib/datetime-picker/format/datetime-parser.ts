@@ -3,7 +3,7 @@ import { FdDatetime } from '../models/fd-datetime';
 import { FdDate } from '../../calendar/models/fd-date';
 import { DatePipe } from '@angular/common';
 
-export function DATE_TIME_FORMAT_FACTORY() {
+export function DATE_TIME_FORMAT_FACTORY(): DateTimeFormatParserDefault {
     return new DateTimeFormatParserDefault();
 }
 

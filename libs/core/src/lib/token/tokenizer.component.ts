@@ -150,7 +150,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     }
 
     /** @hidden */
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this.previousElementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
         this.onResize();
     }
@@ -189,12 +189,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     elementRef(): ElementRef<any> {

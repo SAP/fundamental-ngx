@@ -127,7 +127,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     constructor(private _cd: ChangeDetectorRef, private _renderer: Renderer2) {}
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         fromEvent(window, 'resize')
             .pipe(
                 takeWhile(() => this._alive && this.shouldOverflow),
@@ -139,7 +139,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     }
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         if (this.shouldOverflow) {
             of(true)
                 .pipe(
@@ -153,12 +153,12 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     }
 
     /** @hidden */
-    ngAfterViewChecked() {
+    ngAfterViewChecked(): void {
         this.buildComponentCssClass();
     }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._alive = false;
     }
 
@@ -169,7 +169,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden */
     @applyCssClass
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-toolbar',
             `fd-toolbar--${this.fdType}`,
@@ -177,9 +177,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             `${this.size === 'cozy' ? 'fd-toolbar--cozy' : ''}`,
             `${this.hasTitle ? 'fd-toolbar--title' : ''}`,
             `${this.clearBorder ? 'fd-toolbar--clear' : ''}`
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */

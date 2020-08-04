@@ -261,7 +261,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     }
 
     /** @hidden */
-    private _manageKeyboardSupport(shouldHaveKeyboardSupport?: boolean) {
+    private _manageKeyboardSupport(shouldHaveKeyboardSupport?: boolean): void {
         if (shouldHaveKeyboardSupport) {
             this._menuService.addKeyboardSupport();
         } else {
@@ -296,7 +296,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     }
 
     /** @hidden Listen on menu mode */
-    private _listenOnMenuMode() {
+    private _listenOnMenuMode(): void {
         this._subscriptions.add(
             this._menuService.isMobileMode.subscribe(isMobile => {
                 if (this.isOpen) {

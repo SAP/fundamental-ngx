@@ -15,5 +15,5 @@ export class PlatformTextareaCounterTemplateExampleComponent implements OnInit {
         this.textareaValidator = [Validators.maxLength(10)];
     }
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }
