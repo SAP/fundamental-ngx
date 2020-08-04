@@ -44,6 +44,15 @@ describe('SwitchComponent', () => {
         expect(input.id).toBe(component.innerInputId);
     });
 
+    it('should accept custom name', () => {
+        const name = 'custom-name';
+        component.name = name;
+
+        detectChangesOnPush();
+
+        expect(input.getAttribute('ng-reflect-name')).toEqual(component.name);
+    });
+
     it('should auto-generate id', () => {
         expect(component.id).toBeTruthy();
     });

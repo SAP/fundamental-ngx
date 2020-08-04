@@ -59,6 +59,7 @@
                    [placeholder]="placeholder"
                    [(ngModel)]="searchTerm"
                    [compact]="compact"
+                   [disabled]="disabled"
                    [ngClass]="{ 'fd-input--compact': compact }"
                    (ngModelChange)="handleSearchTermChange()"
                    (keydown)="handleInputKeydown($event)"
