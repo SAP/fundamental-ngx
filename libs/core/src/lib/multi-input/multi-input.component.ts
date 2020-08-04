@@ -30,7 +30,6 @@ import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
-import { CheckboxComponent } from '../checkbox/checkbox/checkbox.component';
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
 
