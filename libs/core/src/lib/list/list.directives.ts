@@ -85,10 +85,8 @@ export class ListIconDirective implements OnChanges, OnInit {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-list__icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-list__icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
 
     /** @hidden */

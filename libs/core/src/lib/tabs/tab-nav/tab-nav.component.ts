@@ -93,16 +93,14 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             `fd-tabs`,
             this.mode ? 'fd-tabs--' + this.mode : '',
             this.compact ? 'fd-tabs--compact' : '',
             `fd-tabs--${this.size}`,
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** HasElementRef interface implementation
