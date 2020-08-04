@@ -92,7 +92,7 @@ export class SwitchComponent extends BaseInput {
     }
 
     /** @hidden change formcontrol value */
-    onClick(event: KeyboardEvent | MouseEvent) {
+    onClick(event: KeyboardEvent | MouseEvent): void {
         event.stopPropagation();
         if (!this.disabled) {
             if (super.getValue() !== undefined) {

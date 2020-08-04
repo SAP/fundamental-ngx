@@ -15,7 +15,7 @@ export class SwitchConfig {
     /**
      * Create Provider factory function
      */
-    static createProviderFactory(obj: Partial<SwitchConfig>) {
+    static createProviderFactory(obj: Partial<SwitchConfig>): () => SwitchConfig {
         const useFactory = (): SwitchConfig => {
             return Object.assign(new SwitchConfig(), obj);
         };
