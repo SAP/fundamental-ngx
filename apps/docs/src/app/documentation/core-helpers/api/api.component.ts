@@ -18,7 +18,7 @@ export class ApiComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private apiService: ApiDocsService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         if (this.route.snapshot.data) {
             this.files = this.route.snapshot.data.content;
         }

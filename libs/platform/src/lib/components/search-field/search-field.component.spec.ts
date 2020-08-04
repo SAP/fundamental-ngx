@@ -97,15 +97,15 @@ class TestComponent {
 
     constructor() { }
 
-    onInputChange($event) {
+    onInputChange($event): void {
         this.inputValue = $event;
     }
 
-    onSearchSubmit($event) {
+    onSearchSubmit($event): void {
         this.submitValue = $event;
     }
 
-    onCancelSearch($event) {
+    onCancelSearch($event): void {
         this.isSearchCanceled = true;
     }
 }
@@ -787,19 +787,19 @@ class DataSourceTestComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.dataSource = new SearchFieldDataSource(new SearchFieldDataProvider());
     }
 
-    onInputChange($event) {
+    onInputChange($event): void {
         this.inputValue = $event;
     }
 
-    onSearchSubmit($event) {
+    onSearchSubmit($event): void {
         this.submitValue = $event;
     }
 
-    onCancelSearch($event) {
+    onCancelSearch($event): void {
         this.isSearchCanceled = true;
     }
 }

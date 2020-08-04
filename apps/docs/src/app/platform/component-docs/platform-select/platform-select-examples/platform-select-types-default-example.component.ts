@@ -39,5 +39,5 @@ export class PlatformSelectTypesDefaultExampleComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

@@ -14,7 +14,7 @@ export class NotificationComponentAsContentExampleComponent {
 
     constructor(private notificationService: NotificationService) {}
 
-    open() {
+    open(): void {
         const notificationService = this.notificationService.open(NotificationContentComponent, {
             data: {
                 title: 'Notification Title',

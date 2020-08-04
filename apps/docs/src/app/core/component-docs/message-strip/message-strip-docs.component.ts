@@ -90,7 +90,7 @@ export class MessageStripDocsComponent {
         this.schema = this.schemaFactory.getComponent('messageStrip');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

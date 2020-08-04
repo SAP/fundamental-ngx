@@ -214,7 +214,7 @@ export class ComboBoxComponent extends CollectionBaseInput implements OnInit, On
     /**
      * Patching query with our custom lookup logic
      */
-    private patchQueryMethod() {
+    private patchQueryMethod(): void {
         if (this._comboBox) {
             this._comboBox.handleSearchTermChange = () => {
                 this.ds.match(this._comboBox.inputTextValue);

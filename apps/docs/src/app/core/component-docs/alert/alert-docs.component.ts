@@ -132,7 +132,7 @@ export class AlertDocsComponent {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

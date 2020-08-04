@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './core-home.component.html'
 })
 export class HomeDocsComponent {
-    onLoad(event) {}
-    onError(event) {}
+    onLoad(event): void {}
+    onError(event): void {}
 }

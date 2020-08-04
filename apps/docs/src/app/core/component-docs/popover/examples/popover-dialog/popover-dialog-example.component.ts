@@ -8,7 +8,7 @@ import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 export class PopoverDialogExampleComponent {
     constructor(private _dialogService: DialogService) {}
 
-    openDialog(template: TemplateRef<any>) {
+    openDialog(template: TemplateRef<any>): void {
         this._dialogService.open(template, {
             width: '500px',
             responsivePadding: true

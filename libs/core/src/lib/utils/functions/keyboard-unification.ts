@@ -1,4 +1,4 @@
-export function unifyKeyboardKey(event: KeyboardEvent) {
+export function unifyKeyboardKey(event: KeyboardEvent): string {
     const ieKeys = {
         left: 'ArrowLeft',
         right: 'ArrowRight',

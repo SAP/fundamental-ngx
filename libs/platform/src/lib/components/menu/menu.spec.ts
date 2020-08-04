@@ -32,7 +32,7 @@ class SimpleMenuComponent {
 
     constructor() {}
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }
@@ -371,7 +371,7 @@ class CascadingMenuComponent {
 
     constructor() {}
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }
@@ -742,7 +742,7 @@ class CascadingBeforeMenuComponent {
 
     constructor() {}
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }
@@ -859,7 +859,7 @@ class CascadingAfterRTLMenuComponent {
 
     constructor() {}
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }
@@ -985,7 +985,7 @@ class CascadingBeforeRTLMenuComponent {
 
     constructor() {}
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }

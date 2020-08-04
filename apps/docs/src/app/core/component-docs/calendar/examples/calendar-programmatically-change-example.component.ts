@@ -20,7 +20,7 @@ import { FdDate } from '@fundamental-ngx/core';
 export class CalendarProgrammaticallyChangeExampleComponent {
     date = FdDate.getToday();
 
-    public changeDay() {
+    public changeDay(): void {
         this.date = this.date.nextDay();
     }
 }

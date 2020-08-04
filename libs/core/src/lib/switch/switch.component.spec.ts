@@ -26,7 +26,7 @@ describe('SwitchComponent', () => {
         fixture.detectChanges();
     });
 
-    function detectChangesOnPush() {
+    function detectChangesOnPush(): void {
         changeDetectorRef.markForCheck();
         fixture.detectChanges();
     }

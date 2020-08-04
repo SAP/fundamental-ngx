@@ -12,7 +12,7 @@ import { ModifierKeys } from '@angular/cdk/testing';
  * Creates a browser MouseEvent with the specified options.
  * @docs-private
  */
-export function createMouseEvent(type: string, x = 0, y = 0, button = 0) {
+export function createMouseEvent(type: string, x = 0, y = 0, button = 0): MouseEvent {
     const event = document.createEvent('MouseEvent');
     const originalPreventDefault = event.preventDefault.bind(event);
 
@@ -39,7 +39,7 @@ export function createMouseEvent(type: string, x = 0, y = 0, button = 0) {
     Object.defineProperty(event, 'buttons', { get: () => 1 });
 
     // IE won't set `defaultPrevented` on synthetic events so we need to do it manually.
-    event.preventDefault = function () {
+    event.preventDefault = function (): Event {
         Object.defineProperty(event, 'defaultPrevented', { get: () => true });
         return originalPreventDefault();
     };
@@ -51,7 +51,7 @@ export function createMouseEvent(type: string, x = 0, y = 0, button = 0) {
  * Creates a browser TouchEvent with the specified pointer coordinates.
  * @docs-private
  */
-export function createTouchEvent(type: string, pageX = 0, pageY = 0) {
+export function createTouchEvent(type: string, pageX = 0, pageY = 0): Event {
     // In favor of creating events that work for most of the browsers, the event is created
     // as a basic UI Event. The necessary details for the event will be set manually.
     const event = document.createEvent('UIEvent');
@@ -81,7 +81,7 @@ export function createKeyboardEvent(
     key: string = '',
     target?: Element,
     modifiers: ModifierKeys = {}
-) {
+): KeyboardEvent {
     const event = document.createEvent('KeyboardEvent') as any;
     const originalPreventDefault = event.preventDefault;
 
@@ -145,7 +145,7 @@ export function createKeyboardEvent(
     });
 
     // IE won't set `defaultPrevented` on synthetic events so we need to do it manually.
-    event.preventDefault = function () {
+    event.preventDefault = function (): Event {
         Object.defineProperty(event, 'defaultPrevented', { get: () => true });
         return originalPreventDefault.apply(this, arguments);
     };
@@ -157,7 +157,7 @@ export function createKeyboardEvent(
  * Creates a fake event object with any desired event type.
  * @docs-private
  */
-export function createFakeEvent(type: string, canBubble = false, cancelable = true) {
+export function createFakeEvent(type: string, canBubble = false, cancelable = true): Event {
     const event = document.createEvent('Event');
     event.initEvent(type, canBubble, cancelable);
     return event;
