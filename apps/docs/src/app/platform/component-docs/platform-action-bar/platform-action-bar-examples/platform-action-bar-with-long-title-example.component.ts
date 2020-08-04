@@ -6,7 +6,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class PlatformActionBarWithLongPageTitleExampleComponent {
 
-    onBackBuutonClick() {
+    onBackBuutonClick(): void {
         alert('Back button clicked');
     }
 }

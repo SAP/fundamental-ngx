@@ -26,7 +26,7 @@ export class ComponentExampleComponent implements OnInit {
     id: string;
     id2: string;
 
-    ngOnInit() {
+    ngOnInit(): void {
         const exampleName: string = 'ex' + componentExampleUniqueId++;
         this.id = 'rtl-' + exampleName;
         this.id2 = 'background-' + exampleName;

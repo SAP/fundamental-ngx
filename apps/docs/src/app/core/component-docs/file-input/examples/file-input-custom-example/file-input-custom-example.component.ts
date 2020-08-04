@@ -9,7 +9,7 @@ export class FileInputCustomExampleComponent {
     files: File[] = [];
     state = 'default';
 
-    selectHandler(passedFiles) {
+    selectHandler(passedFiles): void {
         passedFiles.forEach((file) => {
             if (this.files.filter((eFile) => file.name === eFile.name).length === 0) {
                 this.files.push(file);
@@ -18,7 +18,7 @@ export class FileInputCustomExampleComponent {
         this.state = 'default';
     }
 
-    removeFile(index: number) {
+    removeFile(index: number): void {
         this.files.splice(index, 1);
     }
 }

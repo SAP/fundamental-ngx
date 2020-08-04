@@ -41,16 +41,14 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     color: string;
 
     @applyCssClass
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-info-label',
             this.type ? `fd-info-label--${this.type}` : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.color ? `fd-info-label--accent-color-${this.color}` : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */

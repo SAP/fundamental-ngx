@@ -18,7 +18,7 @@ export class SchemaGroupComponent implements OnInit {
         enum: [any];
     }> = [];
 
-    ngOnInit() {
+    ngOnInit(): void {
         const controls = this.schemaGroup.controls;
         for (const key in controls) {
             if (controls.hasOwnProperty(key)) {

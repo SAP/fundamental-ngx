@@ -62,7 +62,7 @@ export class ImageDocsComponent {
         this.schema = this.schemaFactory.getComponent('image');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

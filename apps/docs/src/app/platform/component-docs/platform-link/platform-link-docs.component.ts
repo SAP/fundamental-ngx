@@ -71,5 +71,5 @@ export class PlatformLinkDocsComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

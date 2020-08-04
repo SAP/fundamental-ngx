@@ -23,7 +23,7 @@ export class PlatformTextareaBasicExampleComponent implements OnInit {
                 'This is a readonly description where you can scroll down to read but cannot edit anything.'
         );
     }
-    ngOnInit() {}
+    ngOnInit(): void {}
 }
 class ReadonlyDescriptionObject {
     constructor(public readonlyDescription: string) {}

@@ -28,7 +28,7 @@ export class TableCdkExampleComponent {
     displayedColumns: string[] = ['column1', 'column2', 'column3', 'date', 'type'];
     dataSource = CELL_DATA;
 
-    dropRow(event) {
+    dropRow(event): void {
         const previousIndex = this.dataSource.findIndex((d) => d === event.item.data);
         moveItemInArray(this.dataSource, previousIndex, event.currentIndex);
         this.table.renderRows();

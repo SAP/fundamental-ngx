@@ -135,7 +135,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-avatar',
             this.size ? `fd-avatar--${this.size}` : '',
@@ -148,9 +148,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
             this.placeholder ? 'fd-avatar--placeholder' : '',
             this.tile ? 'fd-avatar--tile' : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */

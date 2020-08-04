@@ -1,10 +1,7 @@
 //TODO evaluate whether this should be in fd-styles
 
 .fd-multi-input-tokenizer-custom {
-    width: calc(100% - 2.25rem);
-    &--compact {
-        width: calc(100% - 2rem);
-    }
+    flex-grow: 1;
 }
 
 .fd-multi-input-input-group-custom {
@@ -26,14 +23,17 @@
 
     .fd-multi-input-popover-custom {
         display: block;
+
         .fd-tokenizer {
             height: 100%;
         }
     }
 
     .fd-multi-input-menu-overflow {
+        max-width: 100%;
         overflow: auto;
     }
+
     .fd-input {
         &.fd-multi-input-tokenizer-input {
             margin-top: 0;
@@ -46,6 +46,7 @@
     .fd-multi-input-show-all {
         float: right;
         background-color: transparent;
+
         .fd-link:active {
             color: inherit;
         }
@@ -58,5 +59,9 @@
         .fd-checkbox__label {
             color: inherit;
         }
+    }
+
+    .fd-list--multi-input {
+        max-width: 100%;
     }
 }

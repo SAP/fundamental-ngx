@@ -60,8 +60,8 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
 
     /** @hidden */
     @applyCssClass
-    buildComponentCssClass(): string {
-        return [this.dialogConfig.containerClass, this._class].filter((x) => x !== '').join(' ');
+    buildComponentCssClass(): string[] {
+        return [this.dialogConfig.containerClass, this._class];
     }
 
     /** @hidden */

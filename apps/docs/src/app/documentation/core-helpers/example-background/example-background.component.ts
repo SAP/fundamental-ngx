@@ -19,7 +19,7 @@ export class ExampleBackgroundComponent {
     @Input()
     className: string;
 
-    onChange() {
+    onChange(): void {
         const className = 'docs-tile-example-background';
         if (this.label) {
             document.getElementById(this.label).classList.toggle(className);

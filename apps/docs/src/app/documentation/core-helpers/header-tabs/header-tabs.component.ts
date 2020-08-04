@@ -8,5 +8,5 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderTabsComponent implements OnInit {
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

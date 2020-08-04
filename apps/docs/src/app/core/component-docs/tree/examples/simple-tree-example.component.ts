@@ -44,12 +44,12 @@ export class SimpleTreeExampleComponent {
         }
     ];
 
-    editRowClicked(row) {
+    editRowClicked(row): void {
         alert('Edit row clicked');
         console.log(row);
     }
 
-    deleteRowClicked(row) {
+    deleteRowClicked(row): void {
         alert('Delete row clicked');
         console.log(row);
     }

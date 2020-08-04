@@ -9,9 +9,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 export class PlatformMenuBasicExampleComponent implements OnInit {
     public item = '';
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 
-    onItemSelect(item: string) {
+    onItemSelect(item: string): void {
         this.item = item;
     }
 }

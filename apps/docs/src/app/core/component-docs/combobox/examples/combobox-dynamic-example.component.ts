@@ -10,7 +10,7 @@ export class ComboboxDynamicExampleComponent {
 
     dropdownValues = ['Apple', 'Banana', 'Kiwi', 'Strawberry', 'Tomato', 'Pineapple'];
 
-    selectItem(event: string) {
+    selectItem(event: string): void {
         const index: number = this.dropdownValues.findIndex(item => item === event);
 
         if (index > -1) {
