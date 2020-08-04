@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.59...v0.20.1-rc.60) (2020-08-04)
+
+
+### Bug Fixes
+
+* Update class builder ([#2937](https://github.com/SAP/fundamental-ngx/issues/2937)) ([e6f0059](https://github.com/SAP/fundamental-ngx/commit/e6f0059c8affbe353e40ecd6b61783ce50f3fa1b))
+
 ### [0.20.1-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.58...v0.20.1-rc.59) (2020-08-04)
 
 
