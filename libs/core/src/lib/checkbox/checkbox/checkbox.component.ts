@@ -40,6 +40,37 @@ export class CheckboxComponent implements ControlValueAccessor {
     @ViewChild('labelElement')
     labelElement: ElementRef;
 
+    /**
+     * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
+     * take precedence so this may be omitted.
+     */
+    @Input('aria-label')
+    ariaLabel = '';
+
+    /**
+     * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+     */
+    @Input('aria-labelledby')
+    ariaLabelledby = null;
+
+    /** The 'aria-describedby' attribute is read after the element's label and field type. */
+    @Input('aria-describedby')
+    ariaDescribedby: string;
+
+    /** The 'aria-disabled' for giving accessibility for disabled checkbox element. */
+    @Input('aria-disabled')
+    ariaDisabled: boolean;
+
+    /** sets checkbox tooltip */
+    @Input()
+    title: string;
+
+    /**
+     * Includes the checkbox in the page tab sequence.
+     */
+    @Input()
+    tabIndex = 0;
+
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
     inputId = `fd-checkbox-${checkboxUniqueId++}`;
@@ -154,6 +185,10 @@ export class CheckboxComponent implements ControlValueAccessor {
         if (this._isSpaceBarEvent(event) && this._isIE()) {
             this._nextValueEvent();
             this.muteKey(event);
+        } else if (this._isEnterKeyEvent(event)) {
+            // Check or Uncheck checkbox on Enter key
+            this.nextValue();
+            this.muteKey(event);
         }
     }
 
@@ -184,6 +219,17 @@ export class CheckboxComponent implements ControlValueAccessor {
         this._setState();
         this.onValueChange(this.checkboxValue);
         this._detectChanges();
+    }
+
+    /**
+     * returns mixed for indeterminate checkbox on third state.
+     */
+    _getAriaChecked(): 'true' | 'false' | 'mixed' {
+        if (this.isChecked) {
+            return 'true';
+        }
+
+        return this.tristate ? 'mixed' : 'false';
     }
 
     /** @hidden Based on current control value sets new control state. */
@@ -233,6 +279,11 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Determines event source based on key code */
     private _isSpaceBarEvent(event: KeyboardEvent): boolean {
         return event.keyCode === 32;
+    }
+
+    /** @hidden Determines event source based on key code */
+    private _isEnterKeyEvent(event: KeyboardEvent): boolean {
+        return event.keyCode === 13;
     }
 
     /** Method to trigger change detection in component */

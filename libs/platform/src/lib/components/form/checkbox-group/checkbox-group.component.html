@@ -1,4 +1,9 @@
-<fd-form-group [isInline]="isInline">
+<fd-form-group
+    [isInline]="isInline"
+    role="group"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledById"
+>
     <ng-container *ngIf="!list">
         <ng-container *ngFor="let checkbox of contentCheckboxes; let i = index">
             <ng-container

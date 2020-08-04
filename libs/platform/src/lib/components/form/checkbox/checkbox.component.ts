@@ -53,6 +53,39 @@ let nextUniqueId = 0;
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxComponent), multi: true }]
 })
 export class CheckboxComponent extends BaseInput implements AfterViewInit {
+    /**
+     * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
+     * take precedence so this may be omitted.
+     */
+    @Input('aria-label')
+    ariaLabel = '';
+
+    /**
+     * Users can specify the `aria-labelledby` attribute which will be forwarded to the core checkbox
+     */
+    @Input('aria-labelledby')
+    ariaLabelledby = null;
+
+    /** The 'aria-describedby' attribute is read after the element's label and field type. */
+    @Input('aria-describedby')
+    ariaDescribedby: string;
+
+    /** The 'aria-disabled' for giving accessibility for disabled checkbox element. */
+    @Input('aria-disabled')
+    ariaDisabled: boolean;
+
+    /**
+     * Checkbox tooltip
+     */
+    @Input()
+    title: string;
+
+    /**
+     * Includes the checkbox in the page tab sequence.
+     */
+    @Input()
+    tabIndex = 0;
+
     /** set to true if binary checkbox */
     @Input()
     isBinary = false;

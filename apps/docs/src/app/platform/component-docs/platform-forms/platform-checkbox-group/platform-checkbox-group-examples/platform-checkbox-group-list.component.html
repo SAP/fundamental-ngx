@@ -85,3 +85,17 @@
         <fdp-checkbox-group [list]="sports" [name]="'sports'" [disabled]="true"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
+
+<separator></separator>
+<p>Example showing Checkbox Group accessibility</p>
+<p id="sportsAvailable">Options for sports</p>
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field id="sportsOptions" zone="zLeft" rank="1">
+        <fdp-checkbox-group
+            [list]="sports"
+            [name]="'sportsOptions'"
+            ariaLabel="this is label for sports options"
+            [(ngModel)]="selectedSports"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>

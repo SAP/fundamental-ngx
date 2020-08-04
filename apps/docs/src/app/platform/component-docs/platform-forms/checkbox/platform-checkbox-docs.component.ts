@@ -9,6 +9,8 @@ import * as checkboxNoFormhtml from '!raw-loader!./platform-checkbox-examples/pl
 import * as checkboxNoFormSrc from '!raw-loader!./platform-checkbox-examples/platform-binary-checkbox-no-form.component.ts';
 import * as triCheckboxhtml from '!raw-loader!./platform-checkbox-examples/platform-tristate-checkbox.component.html';
 import * as triCheckboxSrc from '!raw-loader!./platform-checkbox-examples/platform-tristate-checkbox.component.ts';
+import * as a11yCheckboxhtml from '!raw-loader!./platform-checkbox-examples/platform-checkbox-a11y.component.html';
+import * as a11yCheckboxSrc from '!raw-loader!./platform-checkbox-examples/platform-checkbox-a11y.component.ts';
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -85,4 +87,18 @@ export class PlatformCheckboxDocsComponent {
             component: 'PlatformChekboxTristateComponent'
         }
     ];
+
+    a11yCheckbox: ExampleFile[] = [
+        {
+            language: 'html',
+            code: a11yCheckboxhtml,
+            fileName: 'platform-checkbox-a11y'
+        },
+        {
+            language: 'typescript',
+            code: a11yCheckboxSrc,
+            fileName: 'platform-checkbox-a11y',
+            component: 'PlatformChekboxA11yExampleComponent'
+        }
+    ]
 }
