@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.56...v0.20.1-rc.57) (2020-08-04)
+
+
+### Bug Fixes
+
+* Update value on combobox pick ([#2974](https://github.com/SAP/fundamental-ngx/issues/2974)) ([315ee59](https://github.com/SAP/fundamental-ngx/commit/315ee5965d8c12b33889848dde0c67bd4ffc1b10))
+
 ### [0.20.1-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.55...v0.20.1-rc.56) (2020-08-04)
 
 
