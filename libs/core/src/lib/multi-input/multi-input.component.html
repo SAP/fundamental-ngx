@@ -40,7 +40,7 @@
         (addOnButtonClicked)="addOnButtonClicked()">
         <fd-tokenizer [compactCollapse]="compactCollapse" [compact]="compact" [open]="open" (moreClickedEvent)="moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
-                      [class.fd-multi-input-tokenizer-custom--compact]="compact"
+                      [class]="compact ? 'fd-multi-input-tokenizer-custom--compact' : ''"
         >
             <fd-token
                 *ngFor="let token of selected"
