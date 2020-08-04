@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.55...v0.20.1-rc.56) (2020-08-04)
+
+
+### Bug Fixes
+
+* (core) add name property to switch component ([#2981](https://github.com/SAP/fundamental-ngx/issues/2981)) ([8384f61](https://github.com/SAP/fundamental-ngx/commit/8384f61997fdb994c117c88faaf7bcb2f2369b25))
+
 ### [0.20.1-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.54...v0.20.1-rc.55) (2020-08-04)
 
 
