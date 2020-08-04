@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.63...v0.20.1-rc.64) (2020-08-04)
+
+
+### Bug Fixes
+
+* fix product switch arrow ([#2963](https://github.com/SAP/fundamental-ngx/issues/2963)) ([8017c79](https://github.com/SAP/fundamental-ngx/commit/8017c79389a3b00a60453542707b53b812c20423))
+
 ### [0.20.1-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.62...v0.20.1-rc.63) (2020-08-04)
 
 
