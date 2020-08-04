@@ -16,11 +16,11 @@ export class ShellbarBasicExampleComponent {
         { text: 'Sign Out', callback: this.signOutCallback }
     ];
 
-    settingsCallback() {
+    settingsCallback(): void {
         alert('Settings Clicked');
     }
 
-    signOutCallback() {
+    signOutCallback(): void {
         alert('Sign Out Clicked');
     }
 }

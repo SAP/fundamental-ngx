@@ -57,7 +57,7 @@ export class InputGroupNumberComponent implements ControlValueAccessor {
     onTouched: any = () => {};
 
     /** Get the value of the text input. */
-    get inputText() {
+    get inputText(): number {
         return this.inputTextValue;
     }
 
@@ -72,18 +72,18 @@ export class InputGroupNumberComponent implements ControlValueAccessor {
     constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
-    writeValue(value: any) {
+    writeValue(value: any): void {
         this.inputTextValue = value;
         this.changeDetectorRef.markForCheck();
     }
 
     /** @hidden */
-    registerOnChange(fn) {
+    registerOnChange(fn): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn) {
+    registerOnTouched(fn): void {
         this.onTouched = fn;
     }
 
@@ -94,14 +94,14 @@ export class InputGroupNumberComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    stepUpClicked() {
+    stepUpClicked(): void {
         this.inputTextValue++;
         this.onChange(this.inputTextValue);
         this.onTouched();
     }
 
     /** @hidden */
-    stepDownClicked() {
+    stepDownClicked(): void {
         this.inputTextValue--;
         this.onChange(this.inputTextValue);
         this.onTouched();

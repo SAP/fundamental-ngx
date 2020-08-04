@@ -26,7 +26,7 @@ export class DocumentationBaseComponent implements OnInit {
 
     smallScreen: boolean = window.innerWidth < SMALL_SCREEN_BREAKPOINT;
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.components.sort((el1, el2) => {
             if (el1.name < el2.name) {
                 return -1;
@@ -39,7 +39,7 @@ export class DocumentationBaseComponent implements OnInit {
         });
     }
 
-    skipNavClicked() {
+    skipNavClicked(): void {
         if (this.contentElRef) {
             this.contentElRef.nativeElement.focus();
         }
@@ -53,7 +53,7 @@ export class DocumentationBaseComponent implements OnInit {
         this.sideCollapsed.next(true);
     }
 
-    onActivate() {
+    onActivate(): void {
         if (this.contentElRef) {
             this.contentElRef.nativeElement.scrollTop = 0;
         }
@@ -63,12 +63,12 @@ export class DocumentationBaseComponent implements OnInit {
         }
     }
 
-    windowSize() {
+    windowSize(): void {
         this.smallScreen = window.innerWidth < SMALL_SCREEN_BREAKPOINT;
     }
 
     @HostListener('window:resize', ['$event'])
-    onResize() {
+    onResize(): void {
         this.windowSize();
         this._isCollapsed();
     }

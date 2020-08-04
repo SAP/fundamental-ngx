@@ -39,7 +39,7 @@ export class TabLinkDirective extends AbstractFdNgxClass {
     readonly keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         this._addClassToElement('fd-tabs__link');
         if (this.active) {
             this._addClassToElement('is-selected');
@@ -53,7 +53,7 @@ export class TabLinkDirective extends AbstractFdNgxClass {
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    onKeyDown(e: KeyboardEvent) {
+    onKeyDown(e: KeyboardEvent): void {
         this.keyDown.emit(e);
     }
 }

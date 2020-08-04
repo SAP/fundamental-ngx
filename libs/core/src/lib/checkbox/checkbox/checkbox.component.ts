@@ -72,6 +72,10 @@ export class CheckboxComponent implements ControlValueAccessor {
     @Input()
     tristateSelectable = true;
 
+    /** Assigns given class to checkbox label element */
+    @Input()
+    labelClass: string;
+
     /** Sets values returned by control. */
     @Input('values')
     set _values(checkboxValues: FdCheckboxValues) {
@@ -141,7 +145,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
-    public checkByClick(event: MouseEvent) {
+    public checkByClick(event: MouseEvent): void {
         this._nextValueEvent(true, event);
     }
 

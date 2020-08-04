@@ -19,11 +19,11 @@ export class CalendarFormExamplesComponent {
         })
     });
 
-    setInvalid() {
+    setInvalid(): void {
         this.customForm.controls['date'].setValue(new FdDate(null, null, null));
     }
 
-    setInvalidRange() {
+    setInvalidRange(): void {
         this.customForm.controls['dateRange'].setValue(new FdDate(null, null, null));
     }
 }

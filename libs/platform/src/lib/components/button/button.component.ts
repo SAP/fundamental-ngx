@@ -73,7 +73,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     /**
      *  Handles button click
      */
-    public onBtnClick($event: any) {
+    public onBtnClick($event: any): void {
         this.buttonClicked.emit($event);
     }
 

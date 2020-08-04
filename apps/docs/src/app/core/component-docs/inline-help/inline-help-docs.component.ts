@@ -74,7 +74,7 @@ export class InlineHelpDocsComponent {
         this.schema = this.schemaFactory.getComponent('inlineHelp');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

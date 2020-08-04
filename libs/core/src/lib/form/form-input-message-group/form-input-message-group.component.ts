@@ -64,7 +64,7 @@ export class FormInputMessageGroupComponent {
     /**
      * Function is called every time message changes isOpen attribute
      */
-    public openChanged(isOpen: boolean) {
+    public openChanged(isOpen: boolean): void {
         this.isOpenChange.emit(isOpen);
     }
 }

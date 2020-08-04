@@ -20,7 +20,7 @@ export class BreadcrumbLinkDirective {
     @Input()
     routerLink = '';
 
-    get elementRef() {
+    get elementRef(): ElementRef {
         return this._elementRef;
     }
 

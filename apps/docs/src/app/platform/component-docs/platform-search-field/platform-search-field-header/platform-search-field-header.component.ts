@@ -7,5 +7,5 @@ import { Component, OnInit } from '@angular/core';
 export class PlatformSearchFieldHeaderComponent implements OnInit {
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

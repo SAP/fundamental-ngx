@@ -13,7 +13,7 @@ function getCheckboxLabel(fixture: ComponentFixture<any>): any {
     return fixture.nativeElement.querySelector('.fd-checkbox__label');
 }
 
-function checkboxDetectChanges(checkbox: CheckboxComponent) {
+function checkboxDetectChanges(checkbox: CheckboxComponent): void {
     checkbox['_changeDetectorRef'].detectChanges();
 }
 

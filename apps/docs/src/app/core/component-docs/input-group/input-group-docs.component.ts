@@ -176,7 +176,7 @@ export class InputGroupDocsComponent {
         this.schema = this.schemaFactory.getComponent('inputGroup');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

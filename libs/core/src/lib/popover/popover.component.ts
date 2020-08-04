@@ -165,7 +165,7 @@ export class PopoverComponent {
     /**
      * Function is called every time popover changes open attribute
      */
-    public openChanged(isOpen: boolean) {
+    public openChanged(isOpen: boolean): void {
         this.isOpenChange.emit(isOpen);
         this.updateDropdownIsOpen(isOpen);
     }
@@ -180,7 +180,7 @@ export class PopoverComponent {
     /** @hidden
      *  Function that allows us to control aria-expanded on dropdown child
      * */
-    private updateDropdownIsOpen(isOpen: boolean) {
+    private updateDropdownIsOpen(isOpen: boolean): void {
         if (this.dropdownComponent) {
             this.dropdownComponent.isOpen = isOpen;
         }

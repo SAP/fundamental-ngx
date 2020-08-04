@@ -22,7 +22,7 @@ export class CodeSnippetComponent implements AfterViewInit {
     @ViewChild('code', {read: ElementRef})
     codeContainerRef: ElementRef;
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         /** Highlight.js init */
          hljs.highlightBlock(this.codeContainerRef.nativeElement);
     }

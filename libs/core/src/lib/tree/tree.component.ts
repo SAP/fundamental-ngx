@@ -34,11 +34,11 @@ export class TreeComponent implements OnInit, AfterContentInit {
 
     @ViewChildren(TreeChildComponent) treeChildren: QueryList<TreeChildComponent>;
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.hideAll = false;
     }
 
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         if (this.treeData && this.treeData.length) {
             this.treeData.forEach((row) => {
                 this.getChildDepth(row, 0);
@@ -47,14 +47,14 @@ export class TreeComponent implements OnInit, AfterContentInit {
         }
     }
 
-    toggleDisplayAll() {
+    toggleDisplayAll(): void {
         this.hideAll = !this.hideAll;
         this.treeChildren.forEach((child) => {
             child.toggleDisplayChildren(this.hideAll);
         });
     }
 
-    getChildDepth(row, depth) {
+    getChildDepth(row, depth): void {
         if (depth > 0) {
             row.sublevelClass = 'fd-tree__group--sublevel-' + depth;
         }
@@ -66,7 +66,7 @@ export class TreeComponent implements OnInit, AfterContentInit {
         }
     }
 
-    handleEmptyTrailingCells(row) {
+    handleEmptyTrailingCells(row): void {
         if (
             row &&
             row.rowData &&
@@ -94,11 +94,11 @@ export class TreeComponent implements OnInit, AfterContentInit {
         }
     }
 
-    editClicked(row) {
+    editClicked(row): void {
         this.editRowClicked.emit(row);
     }
 
-    deleteClicked(row) {
+    deleteClicked(row): void {
         this.deleteRowClicked.emit(row);
     }
 }

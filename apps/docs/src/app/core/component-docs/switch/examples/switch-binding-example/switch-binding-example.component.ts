@@ -9,16 +9,16 @@ export class SwitchBindingExampleComponent {
     firstSwitch = false;
     secondSwitch = false;
 
-    switchBoth() {
+    switchBoth(): void {
         this.firstSwitch = !this.firstSwitch;
         this.secondSwitch = !this.secondSwitch;
     }
 
-    switchOne() {
+    switchOne(): void {
         this.firstSwitch = !this.firstSwitch;
     }
 
-    switchTwo() {
+    switchTwo(): void {
         this.secondSwitch = !this.secondSwitch;
     }
 }
