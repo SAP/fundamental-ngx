@@ -51,7 +51,11 @@ export class SwitchComponent implements ControlValueAccessor {
 
     /** Id for the switch component. If omitted, a unique one is generated. */
     @Input()
-    id: string = 'fd-switch-' + switchUniqueId++;
+    id = `fd-switch-${switchUniqueId++}`;
+
+    /** Sets input name attribute. */
+    @Input()
+    name: string;
 
     /** Whether the switch is checked. */
     @Input()
