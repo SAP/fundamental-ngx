@@ -84,7 +84,7 @@ export class DynamicComponentService {
     private _passExternalContent<V>(
         componentRef: ComponentRef<V>,
         content: TemplateRef<any> | Type<any> | string | Object
-    ) {
+    ): void {
         if (componentRef.instance.hasOwnProperty('childContent')) {
             (componentRef.instance as any).childContent = content;
         }

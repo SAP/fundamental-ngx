@@ -197,7 +197,7 @@ export class TabsDocsComponent {
         this.schema = this.schemaFactory.getComponent('tabs');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

@@ -73,7 +73,7 @@ export const DATA_PROVIDERS = new InjectionToken<Map<string, DataProvider<any>>>
 export interface DataSource<T> {
     open(): Observable<T[]>;
 
-    close();
+    close(): void;
 }
 
 export function isDataSource(value: any): value is DataSource<any> {
@@ -125,7 +125,7 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
 
     constructor(public dataProvider: DataProvider<any>) {}
 
-    match(predicate?: string | Map<string, string>) {
+    match(predicate?: string | Map<string, string>): void {
         const searchParam = new Map();
 
         if (typeof predicate === 'string') {
@@ -149,7 +149,7 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
         return this.dataChanges.asObservable();
     }
 
-    close() {}
+    close(): void {}
 }
 
 export class SearchFieldDataSource<T> extends ComboBoxDataSource<T> {

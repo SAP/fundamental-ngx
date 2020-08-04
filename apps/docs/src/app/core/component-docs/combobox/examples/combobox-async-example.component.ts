@@ -13,7 +13,7 @@ export class ComboboxAsyncExampleComponent implements OnInit {
 
     constructor(private http: HttpClient) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.dropdownValues = this.http.get<any[]>('./assets/search-input-values.json');
     }
 }

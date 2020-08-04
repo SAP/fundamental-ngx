@@ -254,7 +254,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this._listenOnButtonsClick();
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 

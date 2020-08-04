@@ -219,7 +219,7 @@ describe('TimePickerComponent', () => {
     it('should handle input group click', () => {
         component.isOpen = false;
         component.disabled = false;
-        const event = { stopPropagation: function () {} };
+        const event = { stopPropagation: function (): void {} };
         spyOn(event, 'stopPropagation').and.callThrough();
         component.inputGroupClicked(<any>event);
         expect(event.stopPropagation).toHaveBeenCalled();
@@ -228,7 +228,7 @@ describe('TimePickerComponent', () => {
 
     it('should handle addon button click', () => {
         component.disabled = false;
-        const event = { stopPropagation: function () {} };
+        const event = { stopPropagation: function (): void {} };
         spyOn(event, 'stopPropagation').and.callThrough();
         component.addOnButtonClicked();
         expect(component.isOpen).toBe(true);

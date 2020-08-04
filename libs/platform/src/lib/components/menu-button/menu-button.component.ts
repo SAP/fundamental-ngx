@@ -42,7 +42,7 @@ export class MenuButtonComponent extends BaseComponent {
     /**
      *  Handles menu-button click
      */
-    public onButtonClick($event: any) {
+    public onButtonClick($event: any): void {
         this.buttonClicked.emit($event);
     }
 }

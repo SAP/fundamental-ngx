@@ -73,12 +73,12 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     }
 
     /** @hidden */
-    ngOnChanges() {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 

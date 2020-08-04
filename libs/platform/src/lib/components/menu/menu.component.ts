@@ -101,9 +101,9 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
         });
     }
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         if (!this.menuId) {
             this.menuId = MENU_ID_ROOT + menuIdCounter++;
         }
@@ -115,17 +115,17 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
         }
     }
 
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this._setMenuItemCascadeDirection();
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.close.complete();
         this._tabSubscription.unsubscribe();
         this._dirChangeSubscription.unsubscribe();
     }
 
-    onKeydown($event: KeyboardEvent) {
+    onKeydown($event: KeyboardEvent): void {
         const code = $event.key;
         switch (code) {
             case 'Left':

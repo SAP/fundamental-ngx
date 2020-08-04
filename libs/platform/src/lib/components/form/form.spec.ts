@@ -19,7 +19,7 @@ interface TestUser {
 
 @Component({
     template: `
-    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit($event)">
+    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
         <fdp-form-group #userForm
             [object]="user"
             [formGroup]="userFormGroup"
@@ -74,7 +74,7 @@ class SimpleFormTestComponent {
 
     public result: any = null;
 
-    onSubmit() {
+    onSubmit(): void {
         this.result = this.userFormGroup.value;
     }
 }
@@ -158,7 +158,7 @@ describe('Simple Form', () => {
 
 @Component({
     template: `
-    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit($event)">
+    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
         <fdp-form-group #userForm
             [object]="user"
             [formGroup]="userFormGroup">
@@ -225,7 +225,7 @@ class NestedFormGroupsTestComponent {
 
     public result: any = null;
 
-    onSubmit() {
+    onSubmit(): void {
         this.result = this.userFormGroup.value;
     }
 
