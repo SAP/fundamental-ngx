@@ -8,7 +8,7 @@ import { NumberStepInputChangeEvent } from '@fundamental-ngx/platform';
 export class PlatformNumberStepInputExampleComponent {
     value = 100;
 
-    onValueChange(event: NumberStepInputChangeEvent) {
+    onValueChange(event: NumberStepInputChangeEvent): void {
         this.value = event.payload;
     }
 }

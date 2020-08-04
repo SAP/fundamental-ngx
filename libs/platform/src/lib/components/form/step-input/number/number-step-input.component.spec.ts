@@ -96,7 +96,7 @@ class NumberStepInputMainFunctionalityHostComponent {
 
     stepFn: (value: number, action: 'increase' | 'decrease') => number;
 
-    onValueChanged(event: NumberStepInputChangeEvent) {
+    onValueChanged(event: NumberStepInputChangeEvent): void {
         this.value = event.payload;
     }
 }
@@ -452,7 +452,7 @@ class NumberStepInputFormTestWrapperComponent {
 
     public result: any = null;
 
-    onSubmit() {
+    onSubmit(): void {
         this.result = this.form.value;
     }
 }
@@ -476,7 +476,7 @@ describe('Basic number Step Input withing platforms form', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }

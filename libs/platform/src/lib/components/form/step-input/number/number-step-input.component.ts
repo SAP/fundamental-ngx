@@ -53,7 +53,7 @@ export class NumberStepInputComponent extends StepInputComponent {
     /**@hidden
      * Create change event instance
      */
-    createChangeEvent(value: number) {
+    createChangeEvent(value: number): NumberStepInputChangeEvent {
         const event: NumberStepInputChangeEvent = new NumberStepInputChangeEvent(this, value);
         return event;
     }
