@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.58...v0.20.1-rc.59) (2020-08-04)
+
+
+### Bug Fixes
+
+* (core) Add even more disabled attributes ([#2975](https://github.com/SAP/fundamental-ngx/issues/2975)) ([5dc5097](https://github.com/SAP/fundamental-ngx/commit/5dc50973134e477c2e42148cf96893a44d2e8ba2))
+
 ### [0.20.1-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.57...v0.20.1-rc.58) (2020-08-04)
 
 
