@@ -120,24 +120,18 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     hiddenCozyTokenCount = 0;
 
     /** @hidden */
-    shiftKeyPressed: boolean = false;
+    shiftKeyPressed = false;
 
     /** @hidden */
-    ctrlKeyPressed: boolean = false;
+    ctrlKeyPressed = false;
 
 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.input && this.input.elementRef()) {
-            this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
-                this.handleKeyDown(event, this.tokenList.length);
-            });
-            this.tokenizerInnerEl.nativeElement.addEventListener('keydown', (event) => {
-              this.handleKeyDown(event, this.tokenList.length);
-          });
-            this.tokenizerInnerEl.nativeElement.addEventListener('keyup', (event) => {
-              this.handleKeyUp(event);
-          });
+            this.inputKeydownEvent();
+            this.tokenizerKeydownEvent();
+            this.tokenizerKeyupEvent();
         }
     }
 
@@ -221,38 +215,12 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
                 event.stopPropagation();
                 this.focusTokenElement(index);
-                const elementIndexSelected = index;
                 if (!this.ctrlKeyPressed && !this.shiftKeyPressed) {
-                  this.tokenList.forEach(shadowedToken => {
-                      if (shadowedToken !== token) {
-                          shadowedToken.selected = false;
-                      }
-                  });
-                  token.selected = true;
-                }
-                else if (this.ctrlKeyPressed) {
+                  this.basicSelected(token);
+                } else if (this.ctrlKeyPressed) {
                 token.selected = true;
-                }
-                else if (this.shiftKeyPressed) {
-                  let before;
-                  this.tokenList.forEach((element, indexAfter) => {
-                    if (before === undefined && indexAfter === index) {
-                      element.selected = true;
-                      before = true;
-                    }
-                    if (before === undefined && element.selected) {
-                      before = indexAfter > index;
-                    }
-                    if (before !== undefined && !before && indexAfter <= index) {
-                      element.selected = true;
-                    }
-                    else if (before !== undefined && before && indexAfter >= index) {
-                      if (element.selected && indexAfter !== index) {
-                        before = undefined;
-                      }
-                      element.selected = true;
-                    }
-                  });
+                } else if (this.shiftKeyPressed) {
+                  this.shiftSelected(index);
                 }
             }));
         });
@@ -322,8 +290,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenList.forEach(shadowedToken => {if (shadowedToken !== token) {shadowedToken.selected = false}});
             token.selected = !token.selected;
             event.preventDefault();
-        } 
-        else if (KeyUtil.isKey(event, 'Shift')) {
+        } else if (KeyUtil.isKey(event, 'Shift')) {
           this.shiftKeyPressed = true;
         } else if (KeyUtil.isKey(event, 'Ctrl')) {
           this.ctrlKeyPressed = true;
@@ -336,7 +303,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
         } else if (KeyUtil.isKey(event, 'KeyA') && this.input.elementRef().nativeElement.value === '') {
-          console.log('ge');
             if (event.ctrlKey || event.metaKey) {
                 if (!this.input.elementRef().nativeElement.value) {
                     event.preventDefault();
@@ -535,5 +501,53 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
                 subscription.unsubscribe();
             });
         }
+    }
+
+    private inputKeydownEvent(): void {
+      this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
+        this.handleKeyDown(event, this.tokenList.length);
+      });
+    }
+
+    private tokenizerKeydownEvent(): void {
+      this.tokenizerInnerEl.nativeElement.addEventListener('keydown', (event) => {
+        this.handleKeyDown(event, this.tokenList.length);
+      });
+    }
+
+    private tokenizerKeyupEvent(): void {
+      this.tokenizerInnerEl.nativeElement.addEventListener('keyup', (event) => {
+        this.handleKeyUp(event);
+      });
+    }
+
+    private basicSelected(token): void {
+      this.tokenList.forEach(shadowedToken => {
+        if (shadowedToken !== token) {
+            shadowedToken.selected = false;
+        }
+    });
+    token.selected = true;
+    }
+
+    private shiftSelected(index): void {
+      let before;
+      this.tokenList.forEach((element, indexAfter) => {
+        if (before === undefined && indexAfter === index) {
+          element.selected = true;
+          before = true;
+        }
+        if (before === undefined && element.selected) {
+          before = indexAfter > index;
+        }
+        if (before !== undefined && !before && indexAfter <= index) {
+          element.selected = true;
+        } else if (before !== undefined && before && indexAfter >= index) {
+          if (element.selected && indexAfter !== index) {
+            before = undefined;
+          }
+          element.selected = true;
+        }
+      });
     }
 }
