@@ -178,6 +178,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
     public checkByClick(event: MouseEvent): void {
         this._nextValueEvent(true, event);
+        this.muteKey(event);
     }
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
