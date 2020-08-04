@@ -20,7 +20,7 @@ export class PlatformRadioGroupListExampleComponent implements DoCheck {
         month: new FormControl('Winter')
     });
 
-    ngDoCheck() {
+    ngDoCheck(): void {
         if (this.form1.controls.radiol1) {
             this.form1.controls.radiol1.setErrors({ invalid: true });
             this.form1.controls.radiol1.markAsTouched();

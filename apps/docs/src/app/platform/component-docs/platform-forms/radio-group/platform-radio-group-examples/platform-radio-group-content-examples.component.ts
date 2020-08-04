@@ -24,7 +24,7 @@ export class PlatformRadioGroupContentExampleComponent implements DoCheck {
         month: new FormControl('february')
     });
 
-    ngDoCheck() {
+    ngDoCheck(): void {
         if (this.form4.controls.radioc4) {
             this.form4.controls.radioc4.setErrors({ invalid: true });
             this.form4.controls.radioc4.markAsTouched();
