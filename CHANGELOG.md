@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.57...v0.20.1-rc.58) (2020-08-04)
+
+
+### Bug Fixes
+
+* (platform) Introduce platform panel ([#2907](https://github.com/SAP/fundamental-ngx/issues/2907)) ([b0953d5](https://github.com/SAP/fundamental-ngx/commit/b0953d5d79f188605c7dd4c609748e687d04a54b))
+* Apply disabled state on multi input textbox, prevent from open change state ([#2971](https://github.com/SAP/fundamental-ngx/issues/2971)) ([120b7f4](https://github.com/SAP/fundamental-ngx/commit/120b7f487bbdf0c5a68db656e4889f4bcdd4d576))
+
 ### [0.20.1-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.56...v0.20.1-rc.57) (2020-08-04)
 
 
