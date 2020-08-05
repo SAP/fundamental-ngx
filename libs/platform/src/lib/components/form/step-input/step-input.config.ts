@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ContentDensity } from '../form-control';
 
 /**
- * Default options for platform panel
+ * Default options for platform step input
  */
 
 @Injectable({ providedIn: 'root' })
