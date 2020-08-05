@@ -7,7 +7,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 @Component({
     template: `
         <div #directiveElement fd-dnd-list>
-            <div fd-dnd-container *ngFor="let item of list">
+            <div fd-dnd-item *ngFor="let item of list">
                 <div cdkDrag>
                     <div>{{ item }}</div>
                 </div>

@@ -1,13 +1,16 @@
-import { AfterContentInit, ContentChild, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
+import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { CdkDragMove, DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-dnd-container]',
+    selector: '[fd-dnd-item]',
     host: {
         class: 'fd-dnd-container'
-    }
+    },
+    providers: [
+        DragDrop
+    ]
 })
 export class DndContainerDirective implements AfterContentInit {
     /** Class added to element, when it's dragged. */
@@ -16,6 +19,7 @@ export class DndContainerDirective implements AfterContentInit {
     private placeholderElement: HTMLElement;
 
     private lineElement: HTMLElement;
+    private replaceIndicator: HTMLElement;
     /** Event thrown when the element is moved by 1px */
     @Output()
     readonly moved: EventEmitter<CdkDragMove> = new EventEmitter<CdkDragMove>();
@@ -29,13 +33,15 @@ export class DndContainerDirective implements AfterContentInit {
     readonly started: EventEmitter<void> = new EventEmitter<void>();
 
     /** Whether this element should stick in one place, without changing position */
-    @Input() stickInPlace = false;
+    @Input() stickInPlace: boolean = false;
 
-    /** @hidden */
-    @ContentChild(CdkDrag)
-    cdkDrag: CdkDrag;
+    /** */
+    @Input()
+    disabled: boolean = false;
 
-    constructor(public element: ElementRef) {}
+    private _dragRef: DragRef;
+
+    constructor(public element: ElementRef, private _dragDrop: DragDrop) {}
 
     /** @hidden */
     public getElementChord(isBefore: boolean, listMode: boolean): ElementChord {
@@ -58,43 +64,50 @@ export class DndContainerDirective implements AfterContentInit {
 
     /** @hidden */
     public ngAfterContentInit(): void {
-        this.cdkDrag.moved.subscribe((event: CdkDragMove) => {
+        this._dragRef = this._dragDrop.createDrag(this.element);
+        this._dragRef.moved.subscribe((event: any) => {
             this.onCdkMove(event);
         });
-        this.cdkDrag.released.subscribe(() => {
+        this._dragRef.released.subscribe(() => {
             this.onCdkDragReleased();
         });
-        this.cdkDrag.started.subscribe(() => {
+        this._dragRef.started.subscribe(() => {
             this.onCdkDragStart();
         });
     }
 
     /** @hidden */
     public onCdkMove(cdkMovedEvent: CdkDragMove): void {
-        this.moved.emit(cdkMovedEvent);
+        if (!this.disabled) {
+            this.moved.emit(cdkMovedEvent);
+        }
     }
 
     /** @hidden */
     public onCdkDragReleased(): void {
-        /** Remove class which is added, when element is dragged */
-        this.element.nativeElement.classList.remove(this.CLASS_WHEN_ELEMENT_DRAGGED);
-        this.released.emit();
+        if (!this.disabled) {
+            /** Remove class which is added, when element is dragged */
+            this.element.nativeElement.classList.remove(this.CLASS_WHEN_ELEMENT_DRAGGED);
+            this.released.emit();
 
-        /** Resets the position of element. */
-        this.cdkDrag.reset();
+            /** Resets the position of element. */
+            this._dragRef.reset();
 
-        /** Removes placeholder element */
-        this.removePlaceholder();
+            /** Removes placeholder element */
+            this.removePlaceholder();
+        }
     }
 
     /** @hidden */
     public onCdkDragStart(): void {
-        /** Adds class */
-        this.element.nativeElement.classList.add(this.CLASS_WHEN_ELEMENT_DRAGGED);
-        if (!this.placeholderElement) {
-            this.createPlaceHolder();
+        if (!this.disabled) {
+            /** Adds class */
+            this.element.nativeElement.classList.add(this.CLASS_WHEN_ELEMENT_DRAGGED);
+            if (!this.placeholderElement) {
+                this.createPlaceHolder();
+            }
+            this.started.emit();
         }
-        this.started.emit();
     }
 
     /** @hidden */
@@ -113,6 +126,21 @@ export class DndContainerDirective implements AfterContentInit {
             this.lineElement.parentNode.removeChild(this.lineElement);
             this.lineElement = null;
         }
+    }
+
+    public removeReplacement(): void {
+        if (this.replaceIndicator && this.replaceIndicator.parentNode) {
+            // IE11 workaround
+            this.replaceIndicator.parentNode.removeChild(this.replaceIndicator);
+            this.replaceIndicator = null;
+        }
+    }
+
+    public createReplaceIndicator(): void {
+        this.replaceIndicator = document.createElement('DIV');
+        this.replaceIndicator.classList.add('fd-replace-indicator');
+        this.replaceIndicator.classList.add('fd-replace-indicator');
+        this.element.nativeElement.appendChild(this.replaceIndicator);
     }
 
     /** @hidden */
@@ -140,14 +168,38 @@ export class DndContainerDirective implements AfterContentInit {
     /** @hidden */
     private createPlaceHolder(): void {
         /** Cloning container element */
-        const clone = this.cdkDrag.element.nativeElement.cloneNode(true);
+        const clone = this.element.nativeElement.cloneNode(true);
 
         /** Taking cloned element reference */
         this.placeholderElement = clone.firstChild.parentElement;
 
         this.placeholderElement.classList.add('fd-dnd-placeholder');
+        this._setPlaceholderStyles();
 
         /** Including element to the container */
-        this.element.nativeElement.appendChild(clone);
+        this.element.nativeElement.after(clone);
+    }
+
+    private _setPlaceholderStyles(): void {
+        const offset = this._getOffsetToParent(this.element.nativeElement);
+
+        this.placeholderElement.style.top = offset.y + 'px';
+        this.placeholderElement.style.left = offset.x + 'px';
+        this.placeholderElement.style.position = 'absolute';
+        this.placeholderElement.style.width = this.element.nativeElement.offsetWidth;
+        this.placeholderElement.style.height = this.element.nativeElement.offsetHeight;
+    }
+
+    private _getOffsetToParent(element: any): { x: number, y: number } {
+        const parentElement = element.parentElement;
+
+        const parentTop = parentElement.getBoundingClientRect().top;
+        const parentLeft = parentElement.getBoundingClientRect().left;
+
+        return {
+            x: Math.abs(element.getBoundingClientRect().left - parentLeft),
+            y: Math.abs(element.getBoundingClientRect().top - parentTop)
+        }
+
     }
 }

@@ -7,7 +7,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 @Component({
     template: `
         <span>
-            <div #directiveElement fd-dnd-container>
+            <div #directiveElement fd-dnd-item>
                 <div cdkDrag>
                     <div></div>
                 </div>
