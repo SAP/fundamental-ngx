@@ -97,7 +97,7 @@ export class DndListDirective implements AfterContentInit {
             this.closestLinkIndex = lowestDistanceItem.index;
             this.closestLinkPosition = this.elementChords[lowestDistanceItem.index].position;
             // If closest item index is same as dragged item, just remove indicators
-            if (lowestDistanceItem.index !== this.draggedItemIndex) {
+            if (lowestDistanceItem.index === this.draggedItemIndex) {
                 this._removeAllLines();
                 this._removeAllReplaceIndicators();
                 return;
