@@ -18,5 +18,11 @@ export const API_FILES = {
     select: ['SelectPlatformComponent'],
     splitMenuButton: ['SplitMenuButtonComponent'],
     textarea: ['TextAreaComponent'],
+    panel: [
+        'PlatformPanelComponent',
+        'PlatformPanelContentComponent',
+        'PlatformPanelActionsComponent',
+        'PlatformPanelConfig'
+    ],
     switch: ['SwitchComponent']
 };

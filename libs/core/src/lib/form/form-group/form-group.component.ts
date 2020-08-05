@@ -60,8 +60,8 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
      *  should be used with @applyCssClass decorator
      */
     @applyCssClass
-    buildComponentCssClass(): string {
-        return this.isInline ? 'fd-form-group--inline' : '';
+    buildComponentCssClass(): string[] {
+        return [ this.isInline ? 'fd-form-group--inline' : '' ];
     }
 
     /** @hidden */

@@ -162,13 +162,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/list/list-docs.module').then((m) => m.ListDocsModule)
             },
             {
-                path: 'loadingSpinner',
-                loadChildren: () =>
-                    import('./component-docs/loading-spinner-docs/loading-spinner-docs.module').then(
-                        (m) => m.LoadingSpinnerDocsModule
-                    )
-            },
-            {
                 path: 'localizationEditor',
                 loadChildren: () =>
                     import('./component-docs/localization-editor/localization-editor-docs.module').then(

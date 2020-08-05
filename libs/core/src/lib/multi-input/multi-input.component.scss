@@ -1,7 +1,10 @@
 //TODO evaluate whether this should be in fd-styles
 
 .fd-multi-input-tokenizer-custom {
-    flex-grow: 1;
+    width: calc(100% - 2.25rem);
+    &--compact {
+        width: calc(100% - 2rem);
+    }
 }
 
 .fd-multi-input-input-group-custom {
@@ -23,16 +26,15 @@
 
     .fd-multi-input-popover-custom {
         display: block;
-
         .fd-tokenizer {
             height: 100%;
         }
     }
 
     .fd-multi-input-menu-overflow {
+        max-width: 100%;
         overflow: auto;
     }
-
     .fd-input {
         &.fd-multi-input-tokenizer-input {
             margin-top: 0;
@@ -45,7 +47,6 @@
     .fd-multi-input-show-all {
         float: right;
         background-color: transparent;
-
         .fd-link:active {
             color: inherit;
         }

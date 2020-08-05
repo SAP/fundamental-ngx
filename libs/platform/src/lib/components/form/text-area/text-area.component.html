@@ -22,15 +22,9 @@
 
 <!-- ICU recommends full text in format -->
 <div class="fd-textarea-counter" *ngIf="showExceededText" role="alert" aria-atomic="true">
-    <!-- 
-        The above will work only when i18n marker is used. Without i18n, the code works, but tests fail as the spec is apparently 
-        internally dependent on i18n marker.
-        Instead, we use I18nPluralPipe or I18nSelectPipe to achieve the same result but without using i18n markers or having failing tests.
-        Will revert to the above code once we bring in i18n and localize lib to ngx.
-    -->
-    <span>
-        {{ exceededCharCount }}
-        {{ exceededCharCount | i18nPlural: { '=1': 'character', other: 'characters' } }}
-        {{ counterExcessOrRemaining | i18nSelect: { excess: 'over the limit', remaining: 'remaining' } }}</span
+    <span i18n="textarea counter|The counter message for this textarea element@@platformI18nTextareaCounterMessage">
+        {{ exceededCharCount | number: '1.0-0' }} {exceededCharCount, plural, =1{ character {counterExcessOrRemaining,
+        select, excess {over the limit} remaining {remaining}} } other { characters {counterExcessOrRemaining, select,
+        excess {over the limit} remaining {remaining}} } }</span
     >
 </div>

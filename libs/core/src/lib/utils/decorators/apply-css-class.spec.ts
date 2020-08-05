@@ -24,8 +24,8 @@ export class TestDirective implements OnInit, OnChanges, CssClassBuilder {
     }
 
     @applyCssClass
-    buildComponentCssClass(): string {
-        return testDirectiveClass;
+    buildComponentCssClass(): string[] {
+        return [ testDirectiveClass ];
     }
 
     elementRef(): ElementRef<any> {

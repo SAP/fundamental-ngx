@@ -48,14 +48,12 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
 
     @applyCssClass
     /** CssClassBuilder interface implementation */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-nested-list__icon',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** HasElementRef interface implementation */

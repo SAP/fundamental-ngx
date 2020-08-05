@@ -8,6 +8,7 @@ import { PlatformTextAreaModule } from './text-area.module';
 import { By } from '@angular/platform-browser';
 import { createKeyboardEvent } from '../../../testing/event-objects';
 import { DELETE } from '@angular/cdk/keycodes';
+import '@angular/localize/init';
 
 @Component({
     selector: 'fdp-test-textarea',
