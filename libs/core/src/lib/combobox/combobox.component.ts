@@ -410,7 +410,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     }
 
     /** @hidden */
-    onPrimaryButtonClick(event: MouseEvent): void {
+    onPrimaryButtonClick(): void {
         // Prevent primary button click behaviour on mobiles
         if (this.mobile) {
             return;
@@ -419,7 +419,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         if (this.searchFn) {
             this.searchFn();
         }
-        event.preventDefault();
         this._resetDisplayedValues();
         this.isOpenChangeHandle(!this.open);
         this.searchInputElement.nativeElement.focus();
@@ -456,8 +455,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** Method that handles complete event from auto complete directive, setting the new value, and closing popover */
     handleAutoComplete(event: AutoCompleteEvent): void {
-        this.inputText = event.term;
-        this.handleSearchTermChange();
+        if (this.inputText !== event.term) {
+            this.inputText = event.term;
+            this.handleSearchTermChange();
+        }
         if (event.forceClose) {
             this.isOpenChangeHandle(false);
         }
@@ -567,8 +568,8 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         try {
             this.focusTrap = focusTrap(this._elementRef.nativeElement, {
                 clickOutsideDeactivates: true,
-                returnFocusOnDeactivate: true,
-                escapeDeactivates: false
+                escapeDeactivates: false,
+                initialFocus: this._elementRef.nativeElement
             });
         } catch (e) {
             console.warn('Unsuccessful attempting to focus trap the Combobox.');
