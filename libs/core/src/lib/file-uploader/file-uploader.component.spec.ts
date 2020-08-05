@@ -126,19 +126,19 @@ describe('FileUploaderComponent', () => {
 
     it('should verify diffrent invalid file size of parsing', () => {
 
-        expect(function () {
+        expect(function (): void {
             component.parseFileSize('KB')
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
 
-        expect(function () {
+        expect(function (): void {
             component.parseFileSize('hb')
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
 
-        expect(function () {
+        expect(function (): void {
             component.parseFileSize('2vf')
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
 
-        expect(function () {
+        expect(function (): void {
             component.parseFileSize('gb3')
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
 

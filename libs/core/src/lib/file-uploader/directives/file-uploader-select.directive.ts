@@ -10,11 +10,7 @@ import { HostListener, HostBinding } from '@angular/core';
 export class FileUploaderSelectDirective {
     /** Whether the input should accept multiple file selections. */
     @Input()
-<<<<<<< HEAD
     private multiple = true;
-=======
-    private multiple: boolean = true;
->>>>>>> [ci skip] Fix(File Uploader):Introduncing new fiori3 file uploader component
 
     /** Event emitted when files are selected. */
     @Output()

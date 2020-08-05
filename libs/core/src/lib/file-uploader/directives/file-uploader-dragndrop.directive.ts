@@ -9,11 +9,7 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
 export class FileUploaderDragndropDirective {
     /** Whether multiple files can be dropped at once. */
     @Input()
-<<<<<<< HEAD
     multiple = true;
-=======
-    multiple: boolean = true;
->>>>>>> [ci skip] Fix(File Uploader):Introduncing new fiori3 file uploader component
 
     /** Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
@@ -21,19 +17,11 @@ export class FileUploaderDragndropDirective {
 
     /** Whether selecting of new files is disabled. */
     @Input()
-<<<<<<< HEAD
     disabled = false;
 
     /** Whether drag and drop is enabled. Disables this directive. */
     @Input()
     dragndrop = true;
-=======
-    disabled: boolean = false;
-
-    /** Whether drag and drop is enabled. Disables this directive. */
-    @Input()
-    dragndrop: boolean = true;
->>>>>>> [ci skip] Fix(File Uploader):Introduncing new fiori3 file uploader component
 
     /** Event emitted when files are selected. Passes back an array of files. */
     @Output()
@@ -51,15 +39,11 @@ export class FileUploaderDragndropDirective {
     @Output()
     readonly dragLeave: EventEmitter<void> = new EventEmitter<void>();
 
-<<<<<<< HEAD
     private elementStateCounter = 0;
-=======
-    private elementStateCounter: number = 0;
->>>>>>> [ci skip] Fix(File Uploader):Introduncing new fiori3 file uploader component
 
     /** @hidden */
     @HostListener('dragover', ['$event'])
-    public onDragover(event) {
+    public onDragover(event): void {
         if (this.dragndrop) {
             event.preventDefault();
             event.stopPropagation();
@@ -68,7 +52,7 @@ export class FileUploaderDragndropDirective {
 
     /** @hidden */
     @HostListener('dragenter', [])
-    public onDragenter() {
+    public onDragenter(): void {
         ++this.elementStateCounter;
         if (this.dragndrop && this.elementStateCounter === 1) {
             this.dragEntered.emit();
@@ -77,7 +61,7 @@ export class FileUploaderDragndropDirective {
 
     /** @hidden */
     @HostListener('dragleave', ['$event'])
-    public onDragleave(event) {
+    public onDragleave(event): void {
         --this.elementStateCounter;
         if (this.dragndrop && this.elementStateCounter === 0) {
             event.preventDefault();
@@ -88,7 +72,7 @@ export class FileUploaderDragndropDirective {
 
     /** @hidden */
     @HostListener('drop', ['$event'])
-    public onDrop(event) {
+    public onDrop(event): void {
         this.elementStateCounter = 0;
 
         if (!this.dragndrop || this.disabled) {

@@ -159,7 +159,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    selectHandler(event: File[]) {
+    selectHandler(event: File[]): void {
 
         this.validateFiles(event);
         if (this.validFiles.length > 0) {
@@ -177,7 +177,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     }
 
-    validateFiles(event: File[]) {
+    validateFiles(event: File[]): void {
         if (this.fileLimit && event.length > this.fileLimit) {
             throw new Error('FileLimitError - Selected files count is more than specified limit ');
         }
@@ -213,7 +213,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     }
 
-    setInputValue(selectedFiles: File[]) {
+    setInputValue(selectedFiles: File[]): void {
         let fileName = '';
         selectedFiles.forEach((file) => {
             fileName = fileName.concat(' ' + file.name);
@@ -222,7 +222,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
         this.inputRefText.nativeElement.title = fileName;
     }
 
-    parseFileSize(fileSize: string) {
+    parseFileSize(fileSize: string): Number {
         const sizes = fileSize.match(/[\d\.]+|\D+/g);
         if (sizes.length > 1) {
             const size = Number(sizes[0].replace(/ +/g, ''));
