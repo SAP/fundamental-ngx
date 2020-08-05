@@ -9,7 +9,7 @@
     [multiple]="true"
     [accept]="'.png,.jpg'"
     [compact]="true"
-    (selectedFilesChanged)="displayFileName($event)"
+    (selectedFilesChanged)="this.files = $event"
 >
 </fd-file-uploader>
 
@@ -17,5 +17,5 @@
 Files Selected:
 <br />
 <span *ngFor="let file of files">
-    <span style="color: green;">{{ file.name }} </span><br />
+    <span class="green">{{ file.name }} </span><br />
 </span>

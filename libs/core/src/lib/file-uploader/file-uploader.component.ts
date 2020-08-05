@@ -40,7 +40,7 @@ const filesizemap = new Map([['KB', 1024], ['MB', 1048576], ['GB', 1073741824], 
 export class FileUploaderComponent implements ControlValueAccessor {
     /** @hidden */
     @HostBinding('class.fd-file-uploader')
-    fdFileInputClass: boolean = true;
+    fdFileInputClass = true;
 
     /** @hidden */
     @ViewChild('fileInput')
@@ -51,11 +51,11 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     /** Whether the file input is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Whether the file input should accept multiple files. */
     @Input()
-    multiple: boolean = true;
+    multiple = true;
 
     /** Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
@@ -63,7 +63,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     /** Whether the file input accepts drag and dropped files. */
     @Input()
-    dragndrop: boolean = true;
+    dragndrop = true;
 
     /** Max file size in bytes that the input will accept. */
     @Input()
@@ -97,22 +97,19 @@ export class FileUploaderComponent implements ControlValueAccessor {
     @Input()
     buttonAriaLabel: string;
 
-    /**boolean value to enable compact mode */
+    /** boolean value to enable compact mode */
     @Input()
     compact: boolean;
 
-    /**specifies number of files to allow to select */
+    /** specifies number of files to allow to select */
     @Input()
     fileLimit: number;
 
+    /*** It stores the valid files  */
+    validFiles: File[] = [];
 
-    fileName: string = '';
-
-    valid_files: File[] = [];
-
-    invalid_files: File[] = [];
-
-
+    /*** It stores the invalid files  */
+    invalidFiles: File[] = [];
 
     /** Event fired when files are selected. Passed object is the array of files selected. */
     @Output()
@@ -165,13 +162,13 @@ export class FileUploaderComponent implements ControlValueAccessor {
     selectHandler(event: File[]) {
 
         this.validateFiles(event);
-        if (this.valid_files.length > 0) {
-            this.setInputValue(this.valid_files);
-            this.onChange(this.valid_files);
-            this.selectedFilesChanged.emit(this.valid_files);
+        if (this.validFiles.length > 0) {
+            this.setInputValue(this.validFiles);
+            this.onChange(this.validFiles);
+            this.selectedFilesChanged.emit(this.validFiles);
         }
-        if (this.invalid_files.length > 0) {
-            this.selectedInvalidFiles.emit(this.invalid_files);
+        if (this.invalidFiles.length > 0) {
+            this.selectedInvalidFiles.emit(this.invalidFiles);
         } else {
             this.setInputValue(event);
             this.onChange(event);
@@ -182,35 +179,34 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     validateFiles(event: File[]) {
         if (this.fileLimit && event.length > this.fileLimit) {
-            throw ('FileLimitError - Selected files count is more than specified limit ');
+            throw new Error('FileLimitError - Selected files count is more than specified limit ');
         }
-
         if (this.maxFileSize && this.minFileSize) {
             const maxsize = this.parseFileSize(this.maxFileSize);
             const minsize = this.parseFileSize(this.minFileSize);
             event.forEach((file) => {
                 if (file.size < maxsize && file.size > minsize) {
-                    this.valid_files.push(file);
+                    this.validFiles.push(file);
                 } else {
-                    this.invalid_files.push(file);
+                    this.invalidFiles.push(file);
                 }
             });
         } else if (this.maxFileSize) {
             const maxsize = this.parseFileSize(this.maxFileSize);
             event.forEach((file) => {
                 if (file.size < maxsize) {
-                    this.valid_files.push(file);
+                    this.validFiles.push(file);
                 } else {
-                    this.invalid_files.push(file);
+                    this.invalidFiles.push(file);
                 }
             });
         } else if (this.minFileSize) {
             const minsize = this.parseFileSize(this.minFileSize);
             event.forEach((file) => {
                 if (file.size > minsize) {
-                    this.valid_files.push(file);
+                    this.validFiles.push(file);
                 } else {
-                    this.invalid_files.push(file);
+                    this.invalidFiles.push(file);
                 }
             });
         }
@@ -226,34 +222,31 @@ export class FileUploaderComponent implements ControlValueAccessor {
         this.inputRefText.nativeElement.title = fileName;
     }
 
-    parseFileSize(filesize: string) {
-        const sizes = filesize.match(/[\d\.]+|\D+/g);
+    parseFileSize(fileSize: string) {
+        const sizes = fileSize.match(/[\d\.]+|\D+/g);
         if (sizes.length > 1) {
-            const size = Number(sizes[0]);
-            const unit = sizes[1].toUpperCase().trim();
+            const size = Number(sizes[0].replace(/ +/g, ''));
+            const unit = sizes[1].replace(/ +/g, '').toUpperCase();
             if (isNaN(size)) {
                 throw new Error('FileSizeError - Invalid File size please check.');
-            }
-            else if (unit === ('B' || 'BYTE' || 'BYTES')) {
+            } else if (unit === 'B' || unit === 'BYTE' || unit === 'BYTES') {
                 return size;
-            }
-            else if (unit === 'KB') {
+            } else if (unit === 'KB') {
                 return filesizemap.get(unit) * size;
-            }
-            else if (unit === 'MB') {
+            } else if (unit === 'MB') {
                 return filesizemap.get(unit) * size;
-            }
-            else if (unit === 'GB') {
+            } else if (unit === 'GB') {
                 return filesizemap.get(unit) * size;
-            }
-            else if (unit === 'TB') {
+            } else if (unit === 'TB') {
                 return filesizemap.get(unit) * size;
+            } else {
+                throw new Error('FileSizeError - Invalid File size please check.');
             }
-        }
-        else {
+        } else {
             if (isNaN(Number(sizes))) {
-                throw new Error('FileSizeError - Invalid File size please check');
+                throw new Error('FileSizeError - Invalid File size please check.');
             }
+            alert(sizes);
             return (Number(sizes));
         }
     }

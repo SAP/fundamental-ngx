@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-file-uploader-truncation-example',
@@ -7,5 +7,5 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileUploaderTruncationExampleComponent {
 
-    files: File[]; // You can also receive the files as a File[].
+    files: File[];
 }

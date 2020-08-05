@@ -3,7 +3,8 @@ import { FileUploaderComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-file-uploader-compact-example',
-    templateUrl: './file-uploader-compact-example.component.html'
+    templateUrl: './file-uploader-compact-example.component.html',
+    styleUrls: ['./file-uploader-compact-example.component.scss']
 })
 export class FileUploaderCompactExampleComponent {
 
@@ -13,15 +14,5 @@ export class FileUploaderCompactExampleComponent {
     @ViewChild(FileUploaderComponent) fileuploader: FileUploaderComponent;
 
     files: File[];
-
-
-
-    displayFileName(selectedfiles) {
-        // selectedfiles.map(file => {
-        //   this.inputElement.nativeElement.value = file.name;
-        // })
-    }
-
-
 
 }

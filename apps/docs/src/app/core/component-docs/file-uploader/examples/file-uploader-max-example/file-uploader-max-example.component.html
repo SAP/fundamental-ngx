@@ -8,7 +8,7 @@
     [multiple]="true"
     [(ngModel)]="files"
     (selectedFilesChanged)="this.files = $event"
-    (selectedInvalidFiles)="this.invalid_files = $event"
+    (selectedInvalidFiles)="this.invalidFiles = $event"
     [maxFileSize]="'1MB'"
 >
 </fd-file-uploader>
@@ -25,6 +25,6 @@ Files Selected:
 
 Invalid Files:
 <br />
-<span *ngFor="let file of invalid_files">
+<span *ngFor="let file of invalidFiles">
     <span style="color: red;">{{ file.name }} </span><br
 /></span>

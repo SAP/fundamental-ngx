@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
 })
 export class FileUploaderMaxExampleComponent {
     files: File[];
-    invalid_files: File[];
+    invalidFiles: File[];
 }

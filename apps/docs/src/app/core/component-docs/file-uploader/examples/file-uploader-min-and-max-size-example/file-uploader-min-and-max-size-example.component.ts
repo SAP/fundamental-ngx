@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-file-uploader-min-and-max-size-example',
@@ -7,6 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileUploaderMinAndMaxSizeExampleComponent {
     files: File[];
-    invalid_files: File[];
+    invalidFiles: File[];
 
 }
