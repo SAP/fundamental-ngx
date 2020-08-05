@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.67...v0.20.1-rc.68) (2020-08-05)
+
+
+### Bug Fixes
+
+* (platform) add switch component ([#2918](https://github.com/SAP/fundamental-ngx/issues/2918)) ([545db97](https://github.com/SAP/fundamental-ngx/commit/545db97be0149d2f37792c0bc79f613f69a427d8))
+
 ### [0.20.1-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.66...v0.20.1-rc.67) (2020-08-05)
 
 
