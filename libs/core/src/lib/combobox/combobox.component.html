@@ -21,7 +21,10 @@
 </ng-template>
 
 <ng-template let-term="term" #itemSource>
-    <span *ngIf="!itemTemplate" [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting">
+    <span
+        *ngIf="!itemTemplate"
+        [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting:filterHighlight"
+    >
     </span>
     <ng-container *ngIf="itemTemplate">
         <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: term }"></ng-container>
@@ -31,7 +34,6 @@
 <ng-template #mobileTemplate>
     <ng-container *ngIf="!open" [ngTemplateOutlet]="controlTemplate"></ng-container>
 </ng-template>
-
 
 <ng-template #controlTemplate>
     <fd-input-group
@@ -45,7 +47,8 @@
         (addOnButtonClicked)="onPrimaryButtonClick($event)"
         [isExpanded]="!mobile && open && displayedValues.length"
         [attr.aria-readonly]="readOnly"
-        (click)="mobile && isOpenChangeHandle(true)">
+        (click)="mobile && isOpenChangeHandle(true)"
+    >
         <input
             fd-auto-complete
             [enable]="autoComplete && !mobile"
@@ -81,9 +84,7 @@
     >
         <ng-content></ng-content>
         <ng-container *ngIf="groupFn">
-            <ng-container
-                *ngFor="let group of displayedValues | listGroupPipe: groupFn | keyvalue"
-            >
+            <ng-container *ngFor="let group of displayedValues | listGroupPipe: groupFn | keyvalue">
                 <li fd-list-group-header>
                     {{ group.key }}
                 </li>
@@ -113,10 +114,7 @@
                 class="fd-combobox-list-item"
                 [selected]="inputText === (term | displayFnPipe: displayFn)"
             >
-                <ng-container
-                    [ngTemplateOutlet]="itemSource"
-                    [ngTemplateOutletContext]="{ term: term }"
-                ></ng-container>
+                <ng-container [ngTemplateOutlet]="itemSource" [ngTemplateOutletContext]="{ term: term }"></ng-container>
             </li>
         </ng-container>
     </ul>

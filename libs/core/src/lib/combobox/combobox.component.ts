@@ -146,6 +146,10 @@ export class ComboboxComponent
     @Input()
     highlighting: boolean = true;
 
+    /** Whether the matching string should be highlighted after combobox value is selected. */
+    @Input()
+    filterHighlight: boolean = true;
+
     /** Whether the popover should close when a user selects a result. */
     @Input()
     closeOnSelect: boolean = true;
@@ -348,7 +352,7 @@ export class ComboboxComponent
         if (value) {
             const index: number = this.dropdownValues.findIndex((_value) => _value === value);
             this._handleClickActions(value);
-            this.highlighting = false;
+            this.filterHighlight = false;
             this.itemClicked.emit({ item: value, index: index });
         }
     }
@@ -419,6 +423,7 @@ export class ComboboxComponent
         this._resetDisplayedValues();
         this.isOpenChangeHandle(!this.open);
         this.searchInputElement.nativeElement.focus();
+        this.filterHighlight = false;
     }
 
     /** @hidden */
@@ -510,7 +515,7 @@ export class ComboboxComponent
 
     /** @hidden */
     private _defaultFilter(contentArray: any[], searchTerm: any): any[] {
-        this.highlighting = true;
+        this.filterHighlight = true;
         if (typeof searchTerm === 'string') {
             const searchLower = searchTerm.toLocaleLowerCase();
             return contentArray.filter((item) => {
