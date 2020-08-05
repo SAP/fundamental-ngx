@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.66...v0.20.1-rc.67) (2020-08-05)
+
+
+### Bug Fixes
+
+* combobox IE11 focus/blur crashing  ([#2966](https://github.com/SAP/fundamental-ngx/issues/2966)) ([d6fa85a](https://github.com/SAP/fundamental-ngx/commit/d6fa85a9a9c47857d8b1136f5c9398284a6b63c4))
+
 ### [0.20.1-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.65...v0.20.1-rc.66) (2020-08-05)
 
 
