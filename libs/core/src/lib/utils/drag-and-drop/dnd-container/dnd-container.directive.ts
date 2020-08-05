@@ -6,7 +6,7 @@ import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-dnd-item]',
     host: {
-        class: 'fd-dnd-container'
+        class: 'fd-dnd-item'
     },
     providers: [
         DragDrop
@@ -22,25 +22,27 @@ export class DndContainerDirective implements AfterContentInit {
     private replaceIndicator: HTMLElement;
     /** Event thrown when the element is moved by 1px */
     @Output()
-    readonly moved: EventEmitter<CdkDragMove> = new EventEmitter<CdkDragMove>();
+    readonly moved = new EventEmitter<CdkDragMove>();
 
     /** Event thrown when the element is released */
     @Output()
-    readonly released: EventEmitter<void> = new EventEmitter<void>();
+    readonly released = new EventEmitter<void>();
 
     /** Event thrown when the element is started to be dragged */
     @Output()
-    readonly started: EventEmitter<void> = new EventEmitter<void>();
+    readonly started = new EventEmitter<void>();
 
     /** Whether this element should stick in one place, without changing position */
     @Input()
     stickInPlace = false;
 
-    /**  */
+    /** Defines if element is disabled from drag and drop */
     @Input()
-    disabled = false;
+    dndDisabled = false;
 
-    /** */
+    /** @hidden
+     * Drag reference, object created from DND CDK Service
+     */
     private _dragRef: DragRef;
 
     constructor(public element: ElementRef, private _dragDrop: DragDrop) {}
@@ -66,43 +68,37 @@ export class DndContainerDirective implements AfterContentInit {
 
     /** @hidden */
     public ngAfterContentInit(): void {
-        if (!this.disabled) {
+        if (!this.dndDisabled) {
             this._setCDKDrag();
         }
     }
 
     /** @hidden */
     public onCdkMove(cdkMovedEvent: CdkDragMove): void {
-        if (!this.disabled) {
-            this.moved.emit(cdkMovedEvent);
-        }
+        this.moved.emit(cdkMovedEvent);
     }
 
     /** @hidden */
     public onCdkDragReleased(): void {
-        if (!this.disabled) {
-            /** Remove class which is added, when element is dragged */
-            this.element.nativeElement.classList.remove(this.CLASS_WHEN_ELEMENT_DRAGGED);
-            this.released.emit();
+        /** Remove class which is added, when element is dragged */
+        this.element.nativeElement.classList.remove(this.CLASS_WHEN_ELEMENT_DRAGGED);
+        this.released.emit();
 
-            /** Resets the position of element. */
-            this._dragRef.reset();
+        /** Resets the position of element. */
+        this._dragRef.reset();
 
-            /** Removes placeholder element */
-            this.removePlaceholder();
-        }
+        /** Removes placeholder element */
+        this.removePlaceholder();
     }
 
     /** @hidden */
     public onCdkDragStart(): void {
-        if (!this.disabled) {
-            /** Adds class */
-            this.element.nativeElement.classList.add(this.CLASS_WHEN_ELEMENT_DRAGGED);
-            if (!this.placeholderElement) {
-                this.createPlaceHolder();
-            }
-            this.started.emit();
+        /** Adds class */
+        this.element.nativeElement.classList.add(this.CLASS_WHEN_ELEMENT_DRAGGED);
+        if (!this.placeholderElement) {
+            this.createPlaceHolder();
         }
+        this.started.emit();
     }
 
     /** @hidden */
@@ -174,6 +170,7 @@ export class DndContainerDirective implements AfterContentInit {
         this.element.nativeElement.after(clone);
     }
 
+    /** @hidden */
     private _setPlaceholderStyles(): void {
         const offset = this._getOffsetToParent(this.element.nativeElement);
 
@@ -187,6 +184,7 @@ export class DndContainerDirective implements AfterContentInit {
         this.placeholderElement.style.height = this.element.nativeElement.offsetHeight + 'px';
     }
 
+    /** @hidden */
     private _getOffsetToParent(element: any): { x: number, y: number } {
         const parentElement = element.parentElement;
 
@@ -200,6 +198,7 @@ export class DndContainerDirective implements AfterContentInit {
 
     }
 
+    /** @hidden */
     private _setCDKDrag(): void {
         this._dragRef = this._dragDrop.createDrag(this.element);
         this._dragRef.moved.subscribe((event: any) => {
