@@ -42,7 +42,7 @@
         [buttonFocusable]="buttonFocusable"
         [disabled]="disabled || readOnly"
         [isControl]="true"
-        (addOnButtonClicked)="onPrimaryButtonClick($event)"
+        (addOnButtonClicked)="onPrimaryButtonClick()"
         [isExpanded]="!mobile && open && displayedValues.length"
         [attr.aria-readonly]="readOnly"
         (click)="mobile && isOpenChangeHandle(true)">
