@@ -5,7 +5,6 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    OnInit,
     Output,
     QueryList
 } from '@angular/core';
@@ -34,10 +33,10 @@ export class DndListDirective implements AfterContentInit {
 
     /** Defines if the distance between elements should be counted only by vertical distance */
     @Input()
-    listMode: boolean = false;
+    listMode = false;
 
     @Input()
-    replaceMode: boolean = false;
+    replaceMode = false;
 
     /** Array of items, that will be sorted */
     @Input()
@@ -51,7 +50,7 @@ export class DndListDirective implements AfterContentInit {
     private elementChords: ElementChord[];
 
     /** @hidden */
-    private draggedItemIndex: number = 1000000;
+    private draggedItemIndex = 1000000;
 
     /** @hidden */
     private closestLinkIndex: number = null;
@@ -64,8 +63,8 @@ export class DndListDirective implements AfterContentInit {
 
     /** @hidden */
     public ngAfterContentInit(): void {
-        this.refreshQueryList();
-        this.dndContainerItems.changes.subscribe(() => this.refreshQueryList());
+        this._refreshQueryList();
+        this.dndContainerItems.changes.subscribe(() => this._refreshQueryList());
     }
 
     /** Method called, when the item is being moved by 1 px */
@@ -94,14 +93,20 @@ export class DndListDirective implements AfterContentInit {
         });
 
         /** If the closest element is different than the old one, new one is picked. It prevents from performance issues */
-        if (lowestDistanceItem.index !== this.closestLinkIndex && lowestDistanceItem.index !== this.draggedItemIndex) {
+        if (lowestDistanceItem.index !== this.closestLinkIndex) {
             this.closestLinkIndex = lowestDistanceItem.index;
             this.closestLinkPosition = this.elementChords[lowestDistanceItem.index].position;
+            // If closest item index is same as dragged item, just remove indicators
+            if (lowestDistanceItem.index !== this.draggedItemIndex) {
+                this._removeAllLines();
+                this._removeAllReplaceIndicators();
+                return;
+            }
             /** Generating line, that shows where the element will be placed, on drop */
             if (this.replaceMode) {
                 this.generateReplacementIndicator(this.closestLinkIndex);
             } else {
-                this.generateLine(this.closestLinkIndex, this.closestLinkPosition);
+                this._generateLine(this.closestLinkIndex, this.closestLinkPosition);
             }
         }
     }
@@ -113,7 +118,7 @@ export class DndListDirective implements AfterContentInit {
         /** Counting all of the elements's chords */
         this.elementChords = this.dndContainerItems
             .toArray()
-            .map((link) => link.getElementChord(this.isBefore(draggedItemElement, link.element), this.listMode));
+            .map((link) => link.getElementChord(this._isBefore(draggedItemElement, link.element), this.listMode));
     }
 
     /** Method called, when element is released */
@@ -137,8 +142,8 @@ export class DndListDirective implements AfterContentInit {
 
         this.itemsChange.emit(this.items);
 
-        this.removeAllLines();
-        this.removeReplacements();
+        this._removeAllLines();
+        this._removeAllReplaceIndicators();
 
         /** Reset */
         this.elementChords = [];
@@ -147,29 +152,29 @@ export class DndListDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    private removeAllLines(): void {
+    private _removeAllLines(): void {
         this.dndContainerItems.forEach((item) => item.removeLine());
     }
 
     /** @hidden */
-    private removeReplacements(): void {
+    private _removeAllReplaceIndicators(): void {
         this.dndContainerItems.forEach((item) => item.removeReplacement());
     }
 
     /** @hidden */
-    private generateLine(closestLinkIndex: number, linkPosition: LinkPosition): void {
-        this.removeAllLines();
+    private _generateLine(closestLinkIndex: number, linkPosition: LinkPosition): void {
+        this._removeAllLines();
         this.dndContainerItems.toArray()[closestLinkIndex].createLine(linkPosition, this.listMode);
     }
 
     /** @hidden */
     private generateReplacementIndicator(closestLinkIndex: number): void {
-        this.removeReplacements();
+        this._removeAllReplaceIndicators();
         this.dndContainerItems.toArray()[closestLinkIndex].createReplaceIndicator();
     }
 
     /** @hidden */
-    private refreshQueryList(): void {
+    private _refreshQueryList(): void {
         this.refresh$.next();
         this.dndContainerItems.forEach((item, index) => {
             item.moved.pipe(takeUntil(this.refresh$)).subscribe((eventMove) => this.onMove(eventMove));
@@ -182,9 +187,9 @@ export class DndListDirective implements AfterContentInit {
      *  @hidden
      * Return information if element is placed before the dragged element
      */
-    private isBefore(draggedElement: ElementRef, targetElement: ElementRef): boolean {
+    private _isBefore(draggedElement: ElementRef, targetElement: ElementRef): boolean {
         /** Sometimes the element are not straight in one column, that's why offset is needed */
-        const VERTICAL_OFFSET: number = 20;
+        const VERTICAL_OFFSET = 20;
 
         /** Distances from the top of screen */
         const draggedElementBound = <DOMRect>draggedElement.nativeElement.getBoundingClientRect();

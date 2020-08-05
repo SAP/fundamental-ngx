@@ -33,12 +33,14 @@ export class DndContainerDirective implements AfterContentInit {
     readonly started: EventEmitter<void> = new EventEmitter<void>();
 
     /** Whether this element should stick in one place, without changing position */
-    @Input() stickInPlace: boolean = false;
+    @Input()
+    stickInPlace = false;
+
+    /**  */
+    @Input()
+    disabled = false;
 
     /** */
-    @Input()
-    disabled: boolean = false;
-
     private _dragRef: DragRef;
 
     constructor(public element: ElementRef, private _dragDrop: DragDrop) {}
@@ -64,16 +66,9 @@ export class DndContainerDirective implements AfterContentInit {
 
     /** @hidden */
     public ngAfterContentInit(): void {
-        this._dragRef = this._dragDrop.createDrag(this.element);
-        this._dragRef.moved.subscribe((event: any) => {
-            this.onCdkMove(event);
-        });
-        this._dragRef.released.subscribe(() => {
-            this.onCdkDragReleased();
-        });
-        this._dragRef.started.subscribe(() => {
-            this.onCdkDragStart();
-        });
+        if (!this.disabled) {
+            this._setCDKDrag();
+        }
     }
 
     /** @hidden */
@@ -139,7 +134,6 @@ export class DndContainerDirective implements AfterContentInit {
     public createReplaceIndicator(): void {
         this.replaceIndicator = document.createElement('DIV');
         this.replaceIndicator.classList.add('fd-replace-indicator');
-        this.replaceIndicator.classList.add('fd-replace-indicator');
         this.element.nativeElement.appendChild(this.replaceIndicator);
     }
 
@@ -186,8 +180,11 @@ export class DndContainerDirective implements AfterContentInit {
         this.placeholderElement.style.top = offset.y + 'px';
         this.placeholderElement.style.left = offset.x + 'px';
         this.placeholderElement.style.position = 'absolute';
-        this.placeholderElement.style.width = this.element.nativeElement.offsetWidth;
-        this.placeholderElement.style.height = this.element.nativeElement.offsetHeight;
+        this.placeholderElement.style.zIndex = '0';
+        this.placeholderElement.style.opacity = '0.3';
+
+        this.placeholderElement.style.width = this.element.nativeElement.offsetWidth + 'px';
+        this.placeholderElement.style.height = this.element.nativeElement.offsetHeight + 'px';
     }
 
     private _getOffsetToParent(element: any): { x: number, y: number } {
@@ -201,5 +198,18 @@ export class DndContainerDirective implements AfterContentInit {
             y: Math.abs(element.getBoundingClientRect().top - parentTop)
         }
 
+    }
+
+    private _setCDKDrag(): void {
+        this._dragRef = this._dragDrop.createDrag(this.element);
+        this._dragRef.moved.subscribe((event: any) => {
+            this.onCdkMove(event);
+        });
+        this._dragRef.released.subscribe(() => {
+            this.onCdkDragReleased();
+        });
+        this._dragRef.started.subscribe(() => {
+            this.onCdkDragStart();
+        });
     }
 }

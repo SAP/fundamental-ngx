@@ -26,14 +26,6 @@
         }
     }
 
-    .fd-dnd-placeholder {
-        top: 0;
-        left: 0;
-        position: absolute;
-        opacity: 0.3;
-        z-index: -1;
-    }
-
     .fd-dnd-container {
         position: relative;
 
@@ -42,7 +34,7 @@
             background-color: var(--sapList_Background, #fff);
             z-index: 15;
 
-            .fd-product-switch__item {
+            &.fd-product-switch__item {
                 .fd-product-switch__title {
                     &:before,
                     &:after {
@@ -50,42 +42,32 @@
                         background-color: var(--sapList_Background, #fff);
                     }
                 }
-            }
 
-            .fd-product-switch__item:active .fd-product-switch__icon {
-                color: #0854A0;
-                color: var(--sapContent_IconColor, #0854A0);
-            }
+                .fd-product-switch__icon {
+                    color: #0854A0;
+                    color: var(--sapContent_IconColor, #0854A0);
+                }
 
-            .fd-product-switch__item:active .fd-product-switch__title {
-                color: #32363A;
-                color: var(--sapGroup_TitleTextColor, #32363A);
-            }
+                .fd-product-switch__title {
+                    color: #32363A;
+                    color: var(--sapGroup_TitleTextColor, #32363A);
+                }
 
-            .fd-product-switch__item:active .fd-product-switch__subtitle {
-                color: #6A6D70;
-                color: var(--sapContent_LabelColor, #6A6D70);
+                .fd-product-switch__subtitle {
+                    color: #6A6D70;
+                    color: var(--sapContent_LabelColor, #6A6D70);
+                }
+
+                &:active {
+                    background-color: #fff;
+                    background-color: var(--sapList_Background, #fff);
+                }
             }
 
             &.selected {
                 background-color: #fff;
                 background-color: var(--sapList_Background, #fff);
             }
-
-            .fd-product-switch__item:active {
-                background-color: #fff;
-                background-color: var(--sapList_Background, #fff);
-            }
-        }
-    }
-
-    .fd-product-switch__fullfill {
-        width: 500px;
-    }
-
-    .fd-product-switch__body--mobile {
-        .fd-product-switch__fullfill {
-            width: 100%;
         }
     }
 
@@ -163,8 +145,4 @@
                 border-color: var(--sapContent_DragAndDropActiveColor, #0854A0);
             }
         }
-    }
-
-    .fd-product-switch__list > li {
-        list-style-type: none;
     }
