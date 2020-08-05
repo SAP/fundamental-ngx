@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { MenuHeaderComponent } from './menu-header/menu-header.component';
 import { MenuDocsComponent } from './menu-docs.component';
@@ -14,6 +13,7 @@ import {
 
 import { MenuMobileModule, MenuModule } from '@fundamental-ngx/core';
 import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MenuModule, MenuMobileModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MenuModule, MenuMobileModule],
     exports: [RouterModule],
     declarations: [
         MenuDocsComponent,

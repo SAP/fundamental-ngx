@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
     {
@@ -23,12 +23,10 @@ const routes: Routes = [
     declarations: [AppComponent],
     imports: [
         BrowserAnimationsModule,
-        RouterModule.forRoot(routes, { useHash: true }),
         HttpClientModule,
+        RouterModule.forRoot(routes, { useHash: true }),
         MarkdownModule.forRoot({ loader: HttpClient })
     ],
-    bootstrap: [AppComponent],
-
-    entryComponents: []
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

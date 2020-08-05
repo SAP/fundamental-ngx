@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { ObjectStatusDocsComponent } from './object-status-docs.component';
 import {
     ObjectStatusDefaultExampleComponent,
@@ -16,6 +15,7 @@ import {
 } from './examples/object-status-examples.component';
 import { ObjectStatusHeaderComponent } from './object-status-header/object-status-header.component';
 import { ObjectStatusModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ObjectStatusModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ObjectStatusModule],
     exports: [RouterModule],
     declarations: [
         ObjectStatusDocsComponent,

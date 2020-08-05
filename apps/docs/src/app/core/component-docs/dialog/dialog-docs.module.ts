@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { DialogDocsHeaderComponent } from './dialog-docs-header/dialog-docs-header.component';
 import { DialogDocsComponent } from './dialog-docs.component';
-import { DialogModule, DialogService, ListModule } from '@fundamental-ngx/core';
+import { DialogModule, DialogService, FormModule, ListModule } from '@fundamental-ngx/core';
 import { DialogExampleComponent } from './examples/component-based/dialog-example.component';
 import { ComponentBasedDialogExampleComponent } from './examples/component-based/component-based-dialog-example.component';
 import { TemplateBasedDialogExampleComponent } from './examples/template-based/template-based-dialog-example.component';
@@ -19,6 +18,7 @@ import { DialogBackdropContainerExampleComponent } from './examples/dialog-backd
 import { DialogComplexExampleComponent } from './examples/dialog-complex/dialog-complex-example.component';
 import { DialogStateExample } from './examples/dialog-state/dialog-state-example.component';
 import { DialogObjectExampleComponent } from './examples/dialog-object-example/dialog-object-example.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -32,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, DialogModule, ListModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, DialogModule, ListModule],
     exports: [RouterModule],
     declarations: [
         DialogStateExample,

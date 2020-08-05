@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { ListHeaderComponent } from './list-header/list-header.component';
 import { ListDocsComponent } from './list-docs.component';
@@ -13,6 +12,7 @@ import {
     ListSecondaryExampleComponent
 } from './examples/list-examples.component';
 import { CheckboxModule, InfiniteScrollModule, LinkModule, ListModule, RadioModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -28,7 +28,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule,
+        SharedDocumentationPageModule,
         ListModule,
         LinkModule,
         CheckboxModule,

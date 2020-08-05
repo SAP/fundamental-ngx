@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 import { PlatformMenuHeaderComponent } from './platform-menu-header/platform-menu-header.component';
 import { PlatformMenuDocsComponent } from './platform-menu-docs.component';
@@ -28,7 +28,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         ImageModule,
-        SharedDocumentationModule,
+        SharedDocumentationPageModule,
         PlatformMenuModule,
         PlatformButtonModule
     ],

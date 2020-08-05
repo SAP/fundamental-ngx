@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { FormMessageHeaderComponent } from './form-message-header/form-message-header.component';
 import { FormMessageDocsComponent } from './form-message-docs.component';
 import {
     FormMessageExampleComponent,
 } from './examples/form-message-example.component';
-import { DatePickerModule, FormModule } from '@fundamental-ngx/core';
+import { FormModule, InputGroupModule, PopoverModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -22,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, DatePickerModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, PopoverModule, InputGroupModule],
     exports: [RouterModule],
     declarations: [
         FormMessageDocsComponent,

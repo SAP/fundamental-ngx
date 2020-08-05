@@ -8,7 +8,9 @@ import { PlatformInputReactiveValidationExampleComponent } from './platform-inpu
 import { PlatformInputAutoCompleteValidationExampleComponent } from './platform-input-example/platform-input-auto-complete-validation-example.component';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
-import { SharedDocumentationModule } from '../../../../documentation/shared-documentation.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
+import { PopoverModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -23,11 +25,14 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        PlatformInputModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PopoverModule,
         FdpFormGroupModule,
-        PlatformButtonModule
+        PlatformInputModule,
+        PlatformButtonModule,
+        SharedDocumentationPageModule,
+        RouterModule.forChild(routes),
     ],
     exports: [RouterModule],
     declarations: [

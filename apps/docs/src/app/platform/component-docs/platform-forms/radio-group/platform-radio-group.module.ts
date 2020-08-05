@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
-import { SharedDocumentationModule } from '../../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 
 import { PlatformRadioGroupHeaderComponent } from './platform-radio-group-header/platform-radio-group-header.component';
 import { PlatformRadioGroupDocsComponent } from './platform-radio-group-docs.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformRadioGroupModule, FdpFormGroupModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformRadioGroupModule, FdpFormGroupModule],
     exports: [RouterModule],
     declarations: [
         PlatformRadioGroupDocsComponent,
