@@ -9,7 +9,7 @@
         'fd-token--readonly': readOnly
     }"
 >
-    <span class="fd-token__text">
+    <span class="fd-token__text no-text-select">
         <ng-content></ng-content>
     </span>
     <span (click)="closeClickHandler($event)" *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></span>

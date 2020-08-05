@@ -125,12 +125,22 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     ctrlKeyPressed = false;
 
+    /** @hidden */
+    private firstElement: number;
+
+    /** @hidden */
+    private lastElement: number;
+
+    /** @hidden */
+    private ctrlPrevious: boolean;
+
+    /** @hidden */
+    private directionRight: boolean;
 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.input && this.input.elementRef()) {
             this.inputKeydownEvent();
-            this.tokenizerKeydownEvent();
             this.tokenizerKeyupEvent();
         }
     }
@@ -215,12 +225,15 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
                 event.stopPropagation();
                 this.focusTokenElement(index);
-                if (!this.ctrlKeyPressed && !this.shiftKeyPressed) {
-                  this.basicSelected(token);
-                } else if (this.ctrlKeyPressed) {
-                token.selected = true;
+                 if (this.ctrlKeyPressed) {
+                this.ctrlPrevious = true;
+                this.ctrlSelected(token, index);
+                } else if (!this.ctrlKeyPressed && !this.shiftKeyPressed  || this.ctrlPrevious) {
+                  this.basicSelected(token, index);
+                  this.ctrlPrevious = false;
                 } else if (this.shiftKeyPressed) {
                   this.shiftSelected(index);
+                  this.ctrlPrevious = false;
                 }
             }));
         });
@@ -509,45 +522,75 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
       });
     }
 
-    private tokenizerKeydownEvent(): void {
-      this.tokenizerInnerEl.nativeElement.addEventListener('keydown', (event) => {
-        this.handleKeyDown(event, this.tokenList.length);
-      });
-    }
-
     private tokenizerKeyupEvent(): void {
       this.tokenizerInnerEl.nativeElement.addEventListener('keyup', (event) => {
         this.handleKeyUp(event);
       });
     }
 
-    private basicSelected(token): void {
+    private basicSelected(token, index): void {
       this.tokenList.forEach(shadowedToken => {
         if (shadowedToken !== token) {
             shadowedToken.selected = false;
         }
     });
+    this.firstElement = index;
+    this.lastElement = index;
     token.selected = true;
     }
 
     private shiftSelected(index): void {
-      let before;
-      this.tokenList.forEach((element, indexAfter) => {
-        if (before === undefined && indexAfter === index) {
-          element.selected = true;
-          before = true;
-        }
-        if (before === undefined && element.selected) {
-          before = indexAfter > index;
-        }
-        if (before !== undefined && !before && indexAfter <= index) {
-          element.selected = true;
-        } else if (before !== undefined && before && indexAfter >= index) {
-          if (element.selected && indexAfter !== index) {
-            before = undefined;
-          }
-          element.selected = true;
+
+      if (index < this.firstElement) {
+        this.directionRight = false;
+        this.firstElement = index;
+      } else if (index > this.lastElement) {
+        this.directionRight = true;
+        this.lastElement = index;
+      }
+      if (this.lastElement === this.firstElement) {
+        this.directionRight = null;
+      }
+      if (!this.directionRight) {
+        this.firstElement = index;
+      } else if (this.directionRight) {
+        this.lastElement = index;
+      }
+
+      this.tokenList.forEach((token, indexOfToken) => {
+        if (indexOfToken >= this.firstElement && indexOfToken <= this.lastElement) {
+          token.selected = true;
+        } else {
+          token.selected = false;
         }
       });
+    }
+
+    private ctrlSelected(token, index): void {
+      this.firstElement = null;
+      this.lastElement = null;
+      const selected = token.selected;
+      token.selected = true;
+      if (index < this.firstElement) {
+        this.firstElement = index;
+      } else if (index < this.lastElement) {
+        this.lastElement = index;
+      }
+      if (selected) {
+        token.selected = false;
+        this.tokenList.forEach((element, indexOfToken) => {
+          if (!this.firstElement) {
+            if (element.selected) {this.firstElement = indexOfToken}
+          } else {
+            this.lastElement = indexOfToken;
+          }
+        });
+        if (index === this.lastElement) {
+          this.lastElement = this.lastElement - 1;
+        }
+        if (index === this.firstElement) {
+          this.firstElement = this.firstElement - 1;
+        }
+      }
     }
 }
