@@ -28,7 +28,8 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/radio-group', name: 'Radio Button Group' },
             { url: 'platform/search-field', name: 'Search Field' },
             { url: 'platform/split-menu-button', name: 'Split Menu Button' },
-            { url: 'platform/textarea', name: 'Textarea' }
+            { url: 'platform/textarea', name: 'Textarea' },
+            { url: 'platform/switch', name: 'Switch' }
         ];
 
         this.layouts = [];

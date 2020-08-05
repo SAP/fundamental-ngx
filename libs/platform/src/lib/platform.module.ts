@@ -17,6 +17,7 @@ import { PlatformCheckboxModule } from './components/form/checkbox/checkbox.modu
 import { PlatformTextAreaModule } from './components/form/text-area/text-area.module';
 import { PlatformCheckboxGroupModule } from './components/form/checkbox-group/checkbox-group.module';
 import { PlatformPanelModule } from './components/panel/panel.module';
+import { PlatformSwitchModule } from './components/form/switch/switch.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -37,7 +38,8 @@ import { PlatformPanelModule } from './components/panel/panel.module';
         PlatformInfoLabelModule,
         PlatformTextAreaModule,
         PlatformInfoLabelModule,
-        PlatformPanelModule
+        PlatformPanelModule,
+        PlatformSwitchModule
     ]
 })
 export class FundamentalNgxPlatformModule {}

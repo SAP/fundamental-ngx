@@ -23,5 +23,6 @@ export const API_FILES = {
         'PlatformPanelContentComponent',
         'PlatformPanelActionsComponent',
         'PlatformPanelConfig'
-    ]
+    ],
+    switch: ['SwitchComponent']
 };

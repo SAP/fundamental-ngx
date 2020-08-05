@@ -104,6 +104,12 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-panel/platform-panel.module').then(
                         (m) => m.PlatformPanelDocsModule
                     )
+            },
+            {
+              path: 'switch',
+              loadChildren: () =>
+                import('./component-docs/platform-forms/switch/platform-switch-docs.module')
+                  .then(m => m.PlatformSwitchDocsModule)
             }
         ]
     }
