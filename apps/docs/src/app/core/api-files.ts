@@ -59,7 +59,7 @@ export const API_FILES = {
     infoLabel: ['InfoLabelComponent'],
     infiniteScroll: ['InfiniteScrollDirective'],
     inlineHelp: ['InlineHelpComponent'],
-    inputGroup: ['InputGroupComponent', 'InputGroupNumberComponent'],
+    inputGroup: ['InputGroupComponent'],
     layoutGrid: ['LayoutGridComponent', 'LayoutGridSpanDirective'],
     layoutPanel: [
         'LayoutPanelComponent',
