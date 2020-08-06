@@ -1,0 +1,10 @@
+<fdp-form-group [multiLayout]="true" [formGroup]="customForm">
+    <fdp-form-field id="switch-config" label="Switch with Config" zone="zLeft" rank="4">
+        <fdp-switch
+            name="switch-config"
+            formControlName="switch"
+        ></fdp-switch>
+    </fdp-form-field>
+</fdp-form-group>
+
+<div style="padding-left: 2rem;">form value: {{ customForm.getRawValue() | json }}</div>

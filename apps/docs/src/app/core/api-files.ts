@@ -83,7 +83,6 @@ export const API_FILES = {
         'ListIconDirective',
         'ListFooterDirective'
     ],
-    loadingSpinner: ['LoadingSpinnerComponent'],
     localizationEditor: [
         'LocalizationEditorComponent',
         'LocalizationEditorItemComponent',

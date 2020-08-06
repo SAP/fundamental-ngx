@@ -87,7 +87,9 @@ export const ROUTES: Routes = [
             {
                 path: 'info-label',
                 loadChildren: () =>
-                    import('./component-docs/platform-info-label/platform-info-label-docs-module').then((m) => m.PlatformInfoLabelDocsModule)
+                    import('./component-docs/platform-info-label/platform-info-label-docs-module').then(
+                        (m) => m.PlatformInfoLabelDocsModule
+                    )
             },
             {
                 path: 'textarea',
@@ -95,6 +97,19 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-forms/platform-textarea/platform-textarea-docs.module').then(
                         (m) => m.PlatformTextareaDocsModule
                     )
+            },
+            {
+                path: 'panel',
+                loadChildren: () =>
+                    import('./component-docs/platform-panel/platform-panel.module').then(
+                        (m) => m.PlatformPanelDocsModule
+                    )
+            },
+            {
+              path: 'switch',
+              loadChildren: () =>
+                import('./component-docs/platform-forms/switch/platform-switch-docs.module')
+                  .then(m => m.PlatformSwitchDocsModule)
             }
         ]
     }

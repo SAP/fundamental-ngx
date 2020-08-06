@@ -42,10 +42,8 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-input', 'fd-input-group__input', this.compact ? 'fd-input--compact' : '']
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-input', 'fd-input-group__input', this.compact ? 'fd-input--compact' : ''];
     }
 
     elementRef(): ElementRef<any> {
@@ -128,16 +126,14 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-input-group__addon',
             this.button ? 'fd-input-group__addon--button' : '',
             this.type ? 'fd-input-group__addon--' + this.type : '',
             this.state ? 'is-' + this.state : '',
             this.compact ? 'fd-input-group__addon--compact' : ''
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     elementRef(): ElementRef<any> {
