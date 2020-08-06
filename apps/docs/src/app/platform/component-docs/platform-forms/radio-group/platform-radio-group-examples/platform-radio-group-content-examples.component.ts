@@ -7,19 +7,27 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class PlatformRadioGroupContentExampleComponent implements DoCheck {
     favoriteSeason = '';
-    favoriteSeason2 = '';
+    favoriteSeason2 = 'spring';
     favoriteMonth = '';
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
-    customForm = new FormGroup({
-        example1: new FormControl({ value: '', disabled: false }),
-        example2: new FormControl({ value: '', disabled: false }),
-        example3: new FormControl({ value: 'Winter', disabled: false }),
-        example4: new FormControl({ value: '', disabled: false })
+    form1 = new FormGroup({});
+
+    form2 = new FormGroup({});
+
+    form3 = new FormGroup({});
+    form3Data = { radioc3: 'winter' };
+
+    form4 = new FormGroup({});
+
+    form5 = new FormGroup({
+        month: new FormControl('february')
     });
 
-    ngDoCheck() {
-        this.customForm.get('example4').setErrors({ invalid: true });
-        this.customForm.get('example4').markAsTouched();
+    ngDoCheck(): void {
+        if (this.form4.controls.radioc4) {
+            this.form4.controls.radioc4.setErrors({ invalid: true });
+            this.form4.controls.radioc4.markAsTouched();
+        }
     }
 }

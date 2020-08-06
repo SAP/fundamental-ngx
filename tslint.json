@@ -48,6 +48,7 @@
         "one-line": [true, "check-open-brace", "check-catch", "check-else", "check-whitespace"],
         "prefer-const": true,
         "prefer-for-of": false,
+        "typedef": [true,  "call-signature"],
         "quotemark": [true, "single"],
         "radix": true,
         "semicolon": ["always"],

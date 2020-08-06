@@ -7,7 +7,7 @@ import * as ts from 'typescript';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
 // Adds an import to the root module.
-export function addImportToRootModule(tree: Tree, moduleName: string, src: string, modulePath: string) {
+export function addImportToRootModule(tree: Tree, moduleName: string, src: string, modulePath: string): void {
     const moduleSource = getSourceFile(tree, modulePath);
     if (!moduleSource) {
         throw new SchematicsException(`Module not found ${modulePath}`);

@@ -30,7 +30,6 @@ import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
-import { CheckboxComponent } from '../checkbox/checkbox/checkbox.component';
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
 
@@ -78,6 +77,10 @@ export class MultiInputComponent implements
     /** Whether the input is in compact mode. */
     @Input()
     compact = false;
+
+    /** Whether to use cozy visuals but compact collapsing behavior. */
+    @Input()
+    compactCollapse = false;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
@@ -187,10 +190,6 @@ export class MultiInputComponent implements
     popoverRef: PopoverComponent;
 
     /** @hidden */
-    @ViewChildren(CheckboxComponent)
-    checkboxComponents: QueryList<CheckboxComponent>;
-
-    /** @hidden */
     @ViewChild('control', { read: TemplateRef })
     controlTemplate: TemplateRef<any>;
 
@@ -236,7 +235,7 @@ export class MultiInputComponent implements
     ) {}
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
@@ -245,7 +244,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
         if (this.shouldFilterValues(changes)) {
             this.displayedValues = this.dropdownValues;
@@ -264,7 +263,6 @@ export class MultiInputComponent implements
         if (this.mobile) {
             this._setUpMobileMode();
         }
-        this.setUpCheckboxSubscription();
     }
 
     /** @hidden */
@@ -277,14 +275,12 @@ export class MultiInputComponent implements
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-multi-input',
             'fd-multi-input-custom',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     elementRef(): ElementRef<any> {
@@ -322,6 +318,9 @@ export class MultiInputComponent implements
 
     /** @hidden */
     openChangeHandle(open: boolean): void {
+        if (this.disabled) {
+            return ;
+        }
         if (this.open !== open) {
             this.openChange.emit(open);
         }
@@ -510,20 +509,6 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    private _applyClassToCheckboxes(): void {
-        this.checkboxComponents.forEach(
-            _checkbox => _checkbox.labelElement.nativeElement.classList.add('fd-list__label')
-        );
-    }
-
-    /** @hidden */
-    private setUpCheckboxSubscription(): void {
-        this._subscriptions.add(
-            this.checkboxComponents.changes.subscribe(() => this._applyClassToCheckboxes())
-        );
-    }
-
-    /** @hidden */
     private _propagateChange(emitInMobile?: boolean): void {
         if (!this.mobile || emitInMobile) {
             this.onChange(this.selected);
@@ -557,6 +542,4 @@ export class MultiInputComponent implements
     private shouldFilterValues(changes): boolean {
         return this.dropdownValues && (changes.dropdownValues || changes.searchTerm);
     }
-
-
 }

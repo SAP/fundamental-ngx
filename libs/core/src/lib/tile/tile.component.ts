@@ -14,7 +14,6 @@ type TileType = null | 'kpi' | 'launch' | 'feed' | 'slide' | 'line';
 type TileSize = null | 's';
 
 @Component({
-    // tslint:disable-next-line:component-selector
     selector: 'fd-tile',
     templateUrl: './tile.component.html',
     styleUrls: ['./tile.component.scss'],

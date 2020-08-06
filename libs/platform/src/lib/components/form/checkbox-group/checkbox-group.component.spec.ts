@@ -108,7 +108,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }
@@ -332,6 +332,7 @@ class TestTemplateDrivenCheckboxGroupComponnet {
         new LanguageKnown('Python', 'python', false),
         new LanguageKnown('GoLang', 'go', true)
     ];
+    language: LanguageKnown;
 
     invoiceItems = [
         new Item('1', 'coffee', 'Coffee', 100, 12),
@@ -359,7 +360,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }
@@ -625,7 +626,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }

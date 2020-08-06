@@ -87,5 +87,4 @@ export class TileDocsComponent {
             fileName: 'line-example'
         }
     ];
-
 }

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlatformActionBarCozyModeExampleComponent {
 
-    onBackBuutonClick() {
+    onBackBuutonClick(): void {
         alert('Back button clicked');
     }
 

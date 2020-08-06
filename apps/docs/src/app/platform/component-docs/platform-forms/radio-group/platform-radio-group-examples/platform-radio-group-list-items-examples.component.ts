@@ -7,48 +7,69 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
     favoriteOption = '';
-    favoriteOption2 = '';
+    favoriteOption2 = 'winter';
+    favBrand = 'xiomi'
 
-    customForm = new FormGroup({
-        example1: new FormControl(''),
-        example2: new FormControl('')
+    form1 = new FormGroup({
+        example1: new FormControl('')
     });
+
+    form2 = new FormGroup({
+        example2: new FormControl('winter')
+    });
+
+    form3 = new FormGroup({});
+
+    form3Data = {
+        radiolo3: 'spring'
+    };
+
+    form4 = new FormGroup({});
+    form4Data = {
+        radiolo4: 'samsung'
+    };
+
+    invoiceItems = [
+        new Item('1', 'samsung', 'Samsung', 1, 12000),
+        new Item('2', 'xiomi', 'Xiomi', 1, 10500),
+        new Item('3', 'motorola', 'Motorola', 1, 5530)
+    ];
 
     items = [
         {
-            label: 'Option 1',
-            value: 'Option 1',
-            state: 'default',
+            label: 'Winter',
+            value: 'winter',
             disabled: false
         },
         {
-            label: 'Option 2',
-            value: 'Option 2',
-            state: 'valid',
+            label: 'Spring',
+            value: 'spring',
             disabled: false
         },
         {
-            label: 'Option 3',
-            value: 'Option 3',
-            state: 'invalid',
+            label: 'Summer',
+            value: 'summer',
             disabled: false
         },
         {
-            label: 'Option 4',
-            value: 'Option 4',
-            state: 'warning',
-            disabled: false
-        },
-        {
-            label: 'Option 5',
-            value: 'Option 5',
-            state: 'information',
+            label: 'Autumn',
+            value: 'autumn',
             disabled: false
         }
     ];
 
-    ngDoCheck() {
-        this.customForm.get('example1').setErrors({ invalid: true });
-        this.customForm.get('example1').markAsTouched();
+    ngDoCheck(): void {
+        this.form1.controls.example1.setErrors({ invalid: true });
+        this.form1.controls.example1.markAsTouched();
     }
+}
+
+class Item {
+    constructor(
+        public itemId: string,
+        public item: string,
+        public itemType: string,
+        public quantity: number,
+        public rate: number
+    ) {}
 }

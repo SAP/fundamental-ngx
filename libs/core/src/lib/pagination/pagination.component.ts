@@ -96,7 +96,7 @@ export class PaginationComponent implements OnChanges, OnInit {
     constructor(private paginationService: PaginationService, @Optional() private rtlService: RtlService) {}
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         if (changes && changes.currentPage) {
             this.currentPage = changes.currentPage.currentValue;
         }
@@ -128,7 +128,7 @@ export class PaginationComponent implements OnChanges, OnInit {
      * @param page The number of the page.
      * @param $event The keyboard event.
      */
-    onKeypressHandler(page: number, $event: KeyboardEvent) {
+    onKeypressHandler(page: number, $event: KeyboardEvent): void {
         if ($event.key === ' ' || $event.key === 'Enter') {
             $event.preventDefault();
             this.goToPage(page);
@@ -140,7 +140,7 @@ export class PaginationComponent implements OnChanges, OnInit {
      * @param page The number of the page to navigate to.
      * @param $event The mouse event (optional).
      */
-    goToPage(page: number, $event?: MouseEvent) {
+    goToPage(page: number, $event?: MouseEvent): void {
         if ($event) {
             $event.preventDefault();
         }

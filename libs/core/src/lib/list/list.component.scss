@@ -376,15 +376,12 @@
 }
 .fd-list--dropdown .fd-list__item {
     height: auto;
-    padding: .75rem 1rem
+    padding: .75rem 1rem;
+    border: none;
 }
 .fd-list--dropdown.fd-list--compact .fd-list__item {
     height: auto;
     padding: .5rem 1rem
-}
-.fd-list--multi-input .fd-list__item {
-    padding: 0;
-    height: auto
 }
 .fd-list--multi-input .fd-list__label {
     font-size: .875rem;
@@ -467,12 +464,10 @@
 .fd-list--multi-input {
     display: block;
     min-width: 5rem;
-    max-width: 37.5rem
 }
 .fd-list--dropdown .fd-list__item,
 .fd-list--multi-input .fd-list__item {
     cursor: pointer;
-    border: none
 }
 .fd-list--dropdown .fd-list__item.is-selected,
 .fd-list--dropdown .fd-list__item[aria-selected=true],
@@ -526,4 +521,5 @@
 
 .fd-list--dropdown {
     max-width: 100%;
+    max-width: 37.5rem
 }

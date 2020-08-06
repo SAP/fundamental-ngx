@@ -10,6 +10,7 @@ export const API_FILES = {
     checkbox: ['CheckboxComponent'],
     checkboxGroup: ['CheckboxGroupComponent'],
     infoLabel: ['InfoLabelComponent'],
+    input: ['InputComponent'],
     link: ['LinkComponent'],
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
     menuButton: ['MenuButtonComponent'],
@@ -17,5 +18,12 @@ export const API_FILES = {
     searchField: ['SearchFieldComponent'],
     select: ['SelectPlatformComponent'],
     splitMenuButton: ['SplitMenuButtonComponent'],
-    textarea: ['TextAreaComponent']
+    textarea: ['TextAreaComponent'],
+    panel: [
+        'PlatformPanelComponent',
+        'PlatformPanelContentComponent',
+        'PlatformPanelActionsComponent',
+        'PlatformPanelConfig'
+    ],
+    switch: ['SwitchComponent']
 };

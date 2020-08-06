@@ -187,7 +187,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     }
 
     /** @hidden */
-    ngAfterViewChecked() {
+    ngAfterViewChecked(): void {
         // when value is custom set(initial value is present), the heights don't get
         // set to show the full text in the ngAfterViewInit immediately. therefore, we call autoGrowTextArea in
         // ngAfterViewChecked and detect changes again.
@@ -252,7 +252,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     }
 
     /** handle auto growing of textarea */
-    autoGrowTextArea() {
+    autoGrowTextArea(): void {
         if (this.growing) {
             this.textareaElement.nativeElement.style.height = 'inherit';
             const textareaTotalHeight = this._getTextareaTotalHeight();
@@ -292,7 +292,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /* else handle autogrow case
     */
     @HostListener('keyup', ['$event'])
-    handleBackPress(event: KeyboardEvent) {
+    handleBackPress(event: KeyboardEvent): void {
         // if not showing exceeded text message/interactions or growing, and custom value set
         if (this.growing) {
             this.autoGrowTextArea();
@@ -353,7 +353,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     }
 
     /** @hidden set initial max height **/
-    private _setMaxHeight() {
+    private _setMaxHeight(): void {
         if (this.growing && this.textareaElement && this.textareaElement.nativeElement) {
             if (this.growingMaxLines) {
                 this.textareaElement.nativeElement.style.maxHeight =

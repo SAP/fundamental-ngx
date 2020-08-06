@@ -57,6 +57,20 @@ export abstract class BaseInput extends BaseComponent
     }
 
     /**
+	 * readOnly Value to Mark component read only
+	 */
+    @Input()
+    readonly: boolean;
+
+    /** Binds to control aria-labelledBy attribute */
+    @Input()
+    ariaLabelledBy: string = null;
+
+    /** Sets control aria-label attribute value */
+    @Input()
+    ariaLabel: string = null;
+
+    /**
      * Tell  the component if we are in editing mode.
      *
      */
@@ -189,7 +203,7 @@ export abstract class BaseInput extends BaseComponent
      *
      * Keeps track of element focus
      */
-    _onFocusChanged(isFocused: boolean) {
+    _onFocusChanged(isFocused: boolean): void {
         if (isFocused !== this.focused && (!this.disabled || !isFocused)) {
             this.focused = isFocused;
             this.stateChanges.next('_onFocusChanged');
@@ -226,7 +240,7 @@ export abstract class BaseInput extends BaseComponent
      *  Need re-validates errors on every CD iteration to make sure we are also
      *  covering non-control errors, errors that happens outside of this control
      */
-    protected updateErrorState() {
+    protected updateErrorState(): void {
         const oldState = this.status === 'error';
         const parent = this.ngForm;
         const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
@@ -238,7 +252,7 @@ export abstract class BaseInput extends BaseComponent
         }
     }
 
-    protected setValue(value: any) {
+    protected setValue(value: any): void {
         if (value !== this._value) {
             this.writeValue(value);
             this._cd.markForCheck();

@@ -8,11 +8,12 @@ import { PlatformTextAreaModule } from './text-area.module';
 import { By } from '@angular/platform-browser';
 import { createKeyboardEvent } from '../../../testing/event-objects';
 import { DELETE } from '@angular/cdk/keycodes';
+import '@angular/localize/init';
 
 @Component({
     selector: 'fdp-test-textarea',
     template: `
-        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form">
                 <fdp-form-field
                     #basicTextareaField
@@ -65,7 +66,7 @@ class BasicTextareaTestWrapperComponent {
 
     public result: any = null;
 
-    onSubmit() {
+    onSubmit(): void {
         this.result = this.form.value;
     }
 }
@@ -88,7 +89,7 @@ describe('Basic Textarea', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }
@@ -158,7 +159,7 @@ describe('Advanced Textarea', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }

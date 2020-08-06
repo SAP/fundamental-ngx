@@ -21,13 +21,16 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/checkbox', name: 'Checkbox' },
             { url: 'platform/checkbox-group', name: 'Checkbox Group' },
             { url: 'platform/info-label', name: 'Info Label' },
+            { url: 'platform/input', name: 'Input' },
             { url: 'platform/link', name: 'Link' },
             { url: 'platform/menu', name: 'Menu' },
             { url: 'platform/menu-button', name: 'Menu Button' },
+            { url: 'platform/panel', name: 'Panel' },
             { url: 'platform/radio-group', name: 'Radio Button Group' },
             { url: 'platform/search-field', name: 'Search Field' },
             { url: 'platform/split-menu-button', name: 'Split Menu Button' },
-            { url: 'platform/textarea', name: 'Textarea' }
+            { url: 'platform/textarea', name: 'Textarea' },
+            { url: 'platform/switch', name: 'Switch' }
         ];
 
         this.layouts = [];

@@ -10,7 +10,7 @@ import { AlertConfig, AlertService } from '@fundamental-ngx/core';
 export class AlertComponentAsContentExampleComponent {
     constructor(public alertService: AlertService) {}
 
-    openFromComponent() {
+    openFromComponent(): void {
         this.alertService.open(AlertContentComponent, {
             type: 'warning',
             minWidth: '300px',
@@ -22,7 +22,7 @@ export class AlertComponentAsContentExampleComponent {
         } as AlertConfig);
     }
 
-    openFromString() {
+    openFromString(): void {
         const alertContent = 'This is the content! The alert is not dismissible, but will disappear after 7500ms.';
         this.alertService.open(alertContent, {
             type: 'information',

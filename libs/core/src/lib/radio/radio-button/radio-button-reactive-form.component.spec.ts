@@ -50,7 +50,7 @@ describe('RadioButtonComponent reactive forms', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<any> {
         changeDetectorRef.markForCheck();
         componentFixture.detectChanges();
         await componentFixture.whenStable();

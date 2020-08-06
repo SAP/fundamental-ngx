@@ -184,7 +184,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** @hidden */
     @HostListener('click')
-    onItemClick() {
+    onItemClick(): void {
         this.activeStateChange.emit();
     }
 
