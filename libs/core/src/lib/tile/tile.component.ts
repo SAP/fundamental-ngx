@@ -43,7 +43,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
     action = false;
 
     /** @hidden */
-    @ViewChild('tileDiv')
+    @ViewChild('container')
     ref: ElementRef;
 
     /** @hidden */
@@ -74,6 +74,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
             .join(' ');
     }
 
+    /** @hidden */
     elementRef(): ElementRef<any> {
         return this.ref;
     }

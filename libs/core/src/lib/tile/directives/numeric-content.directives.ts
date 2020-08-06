@@ -13,12 +13,13 @@ export class NumericContentDirective implements OnInit, OnChanges {
     @Input()
     class: string;
 
+    /** Size of the numeric content */
+    @Input()
+    size: NumericContentSize;
+
     /** @hidden */
     @HostBinding('class.fd-numeric-content')
     baseClass = true;
-
-    @Input()
-    size: NumericContentSize;
 
     constructor(private _elementRef: ElementRef) {}
 

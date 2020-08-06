@@ -1,5 +1,5 @@
-<div class="fd-tile" #tileDiv tabindex="0">
-    <div *ngIf="action && !(type === 'line')" class="fd-tile__overlay"></div>
+<div class="fd-tile" #container tabindex="0">
+    <div *ngIf="action && type !== 'line'" class="fd-tile__overlay"></div>
     <ng-content select="[fd-tile-action-close]"></ng-content>
     <ng-content select="[fd-tile-action-indicator]"></ng-content>
     <ng-content select="[fd-badge]"></ng-content>

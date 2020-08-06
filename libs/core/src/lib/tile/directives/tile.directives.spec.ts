@@ -61,24 +61,34 @@ import {
 export class TestComponent {
     @ViewChild('header')
     header: ElementRef;
+
     @ViewChild('content')
     content: ElementRef;
+
     @ViewChild('footer')
     footer: ElementRef;
+
     @ViewChild(TileRefreshDirective)
     refresh: TileRefreshDirective;
+
     @ViewChild('profileImg')
     profileImg: ElementRef;
+
     @ViewChild('backgroundImg')
     backgroundImg: ElementRef;
+
     @ViewChild('container')
     container: ElementRef;
+
     @ViewChild('slideContainer')
     slideContainer: ElementRef;
+
     @ViewChild('dot')
     dot: ElementRef;
+
     @ViewChild(TileActionCloseDirective)
     actionClose: TileActionCloseDirective;
+
     @ViewChild(TileActionIndicatorDirective)
     actionIndicator: TileActionIndicatorDirective;
 }

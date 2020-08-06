@@ -1,9 +1,14 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    selector: 'fd-badge',
-    template: `<div class="fd-badge"><ng-content></ng-content></div>`,
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-badge]',
+    template: `<ng-content></ng-content>`,
     styleUrls: ['./badge.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class BadgeComponent {}
+export class BadgeComponent {
+    /** @hidden */
+    @HostBinding('class.fd-badge')
+    baseClass = true;
+}

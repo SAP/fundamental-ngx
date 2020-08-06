@@ -23,13 +23,27 @@ export class TileColumnsExampleComponent {}
     selector: 'fd-launch-tile-example',
     templateUrl: './launch-tile-example.component.html'
 })
-export class LaunchTileExampleComponent {}
+export class LaunchTileExampleComponent {
+    window: any;
+
+    constructor() {
+        this.window = window;
+    }
+
+}
 
 @Component({
     selector: 'fd-kpi-tile-example',
     templateUrl: './kpi-tile-example.component.html'
 })
-export class KpiTileExampleComponent {}
+export class KpiTileExampleComponent {
+    window: any;
+
+    constructor() {
+        this.window = window;
+    }
+
+}
 
 @Component({
     selector: 'fd-slide-tile-example',

@@ -6,14 +6,17 @@ import { API_FILES } from '../../api-files';
 import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
 import { TileDocsComponent } from './tile-docs.component';
 import {
-    ActionTileExampleComponent, BadgeTileExampleComponent, FeedTileExampleComponent,
+    ActionTileExampleComponent,
+    BadgeTileExampleComponent,
+    FeedTileExampleComponent,
     KpiTileExampleComponent,
-    LaunchTileExampleComponent, LineTileExampleComponent,
+    LaunchTileExampleComponent,
+    LineTileExampleComponent,
     SlideTileExampleComponent,
     TileColumnsExampleComponent,
     TileGenericExampleComponent
 } from './examples/tile-examples.component';
-import { IdentifierModule, TileModule, BadgeModule, ButtonModule } from '@fundamental-ngx/core';
+import { IdentifierModule, TileModule, BadgeModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -32,8 +35,7 @@ const routes: Routes = [
         SharedDocumentationModule,
         IdentifierModule,
         TileModule,
-        BadgeModule,
-        ButtonModule
+        BadgeModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -1,4 +1,4 @@
-import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
+import { Component, DebugElement, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
     NumericContentDirective,
@@ -31,12 +31,16 @@ import {
 export class TestComponent {
     @ViewChild(NumericContentDirective)
     numericContent: NumericContentDirective;
+
     @ViewChild(NumericContentLaunchIconDirective)
     launchIcon: NumericContentLaunchIconDirective;
+
     @ViewChild(NumericContentScaleArrowDirective)
     scaleArrow: NumericContentScaleArrowDirective;
+
     @ViewChild(NumericContentScaleDirective)
     scale: NumericContentScaleDirective;
+
     @ViewChild(NumericContentKpiDirective)
     kpi: NumericContentKpiDirective;
 }

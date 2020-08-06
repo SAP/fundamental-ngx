@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../../..';
 
 @Directive({
     selector: '[fdTileContent], [fd-tile-content]'
@@ -316,7 +317,7 @@ export class TileActionCloseDirective implements OnInit, OnChanges {
 @Directive({
     selector: '[fdTileActionIndicator], [fd-tile-action-indicator]'
 })
-export class TileActionIndicatorDirective implements OnInit, OnChanges {
+export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
     @Input()
     class: string;
