@@ -42,4 +42,4 @@ import { PlatformSwitchModule } from './components/form/switch/switch.module';
         PlatformSwitchModule
     ]
 })
-export class FundamentalNgxPlatformModule {}
+export class FundamentalNgxPlatformModule { }
