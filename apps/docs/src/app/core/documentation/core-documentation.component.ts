@@ -42,7 +42,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/inputGroup', name: 'Input Group' },
             { url: 'core/link', name: 'Link' },
             { url: 'core/list', name: 'List' },
-            { url: 'core/loadingSpinner', name: 'Loading Spinner' },
             { url: 'core/localizationEditor', name: 'Localization Editor' },
             { url: 'core/mega-menu', name: 'Mega Menu' },
             { url: 'core/menu', name: 'Menu' },
