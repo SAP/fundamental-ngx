@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { NgControl } from '@angular/forms';
 
 export type ContentDensity = 'compact' | 'cozy';
-export type Status = 'error' | 'warning' | void;
+export type Status = 'success' | 'error' | 'warning' | 'default' | 'information';
 
 export abstract class FormFieldControl<T> {
     /**
