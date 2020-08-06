@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DndListDirective, ElementChord } from './dnd-list.directive';
 import { Component, ViewChild } from '@angular/core';
-import { DndContainerDirective } from '../dnd-container/dnd-container.directive';
+import { DndItemDirective } from '../dnd-item/dnd-item.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -31,7 +31,7 @@ describe('DndListDirective', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [DragDropModule],
-            declarations: [DndListDirective, TestDndListComponent, DndContainerDirective]
+            declarations: [DndListDirective, TestDndListComponent, DndItemDirective]
         }).compileComponents();
     }));
 

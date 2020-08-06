@@ -9,7 +9,7 @@ import {
     QueryList
 } from '@angular/core';
 import { CdkDragMove } from '@angular/cdk/drag-drop';
-import { DndContainerDirective } from '../dnd-container/dnd-container.directive';
+import { DndItemDirective } from '../dnd-item/dnd-item.directive';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -28,13 +28,14 @@ export interface ElementChord {
 })
 export class DndListDirective implements AfterContentInit {
     /** @hidden */
-    @ContentChildren(DndContainerDirective)
-    dndContainerItems: QueryList<DndContainerDirective>;
+    @ContentChildren(DndItemDirective)
+    dndContainerItems: QueryList<DndItemDirective>;
 
     /** Defines if the distance between elements should be counted only by vertical distance */
     @Input()
     listMode = false;
 
+    /** When enabled, replace indicator will appear on whole element, instead of horizontal/vertical line */
     @Input()
     replaceMode = false;
 
@@ -104,7 +105,7 @@ export class DndListDirective implements AfterContentInit {
             }
             /** Generating line, that shows where the element will be placed, on drop */
             if (this.replaceMode) {
-                this.generateReplacementIndicator(this.closestLinkIndex);
+                this._generateReplacementIndicator(this.closestLinkIndex);
             } else {
                 this._generateLine(this.closestLinkIndex, this.closestLinkPosition);
             }
@@ -168,7 +169,7 @@ export class DndListDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    private generateReplacementIndicator(closestLinkIndex: number): void {
+    private _generateReplacementIndicator(closestLinkIndex: number): void {
         this._removeAllReplaceIndicators();
         this.dndContainerItems.toArray()[closestLinkIndex].createReplaceIndicator();
     }

@@ -12,7 +12,7 @@ import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
         DragDrop
     ]
 })
-export class DndContainerDirective implements AfterContentInit {
+export class DndItemDirective implements AfterContentInit {
     /** Class added to element, when it's dragged. */
     readonly CLASS_WHEN_ELEMENT_DRAGGED: string = 'fd-dnd-on-drag';
 
@@ -119,6 +119,7 @@ export class DndContainerDirective implements AfterContentInit {
         }
     }
 
+    /** @hidden */
     public removeReplacement(): void {
         if (this.replaceIndicator && this.replaceIndicator.parentNode) {
             // IE11 workaround
@@ -127,6 +128,7 @@ export class DndContainerDirective implements AfterContentInit {
         }
     }
 
+    /** @hidden */
     public createReplaceIndicator(): void {
         this.replaceIndicator = document.createElement('DIV');
         this.replaceIndicator.classList.add('fd-replace-indicator');

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DndContainerDirective } from './dnd-container.directive';
+import { DndItemDirective } from './dnd-item.directive';
 import { Component, ViewChild } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -16,19 +16,19 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     `
 })
 class TestDndContainerComponent {
-    @ViewChild('directiveElement', { static: true, read: DndContainerDirective })
-    directive: DndContainerDirective;
+    @ViewChild('directiveElement', { static: true, read: DndItemDirective })
+    directive: DndItemDirective;
 }
 
-describe('DndContainerDirective', () => {
+describe('DndItemDirective', () => {
     let component: TestDndContainerComponent;
-    let directive: DndContainerDirective;
+    let directive: DndItemDirective;
     let fixture: ComponentFixture<TestDndContainerComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [DragDropModule],
-            declarations: [TestDndContainerComponent, DndContainerDirective]
+            declarations: [TestDndContainerComponent, DndItemDirective]
         }).compileComponents();
     }));
 
