@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { FormModule as FdFormModule } from '@fundamental-ngx/core';
 import { InputComponent } from './input.component';
+import { CommonModule } from '@angular/common';
+import { FormModule } from '@fundamental-ngx/core';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [InputComponent],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, FdFormModule],
+    imports: [CommonModule, FormModule, FormsModule],
     exports: [InputComponent]
 })
-export class FdpInputModule {}
+export class PlatformInputModule {}

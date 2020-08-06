@@ -57,6 +57,20 @@ export abstract class BaseInput extends BaseComponent
     }
 
     /**
+	 * readOnly Value to Mark component read only
+	 */
+    @Input()
+    readonly: boolean;
+
+    /** Binds to control aria-labelledBy attribute */
+    @Input()
+    ariaLabelledBy: string = null;
+
+    /** Sets control aria-label attribute value */
+    @Input()
+    ariaLabel: string = null;
+
+    /**
      * Tell  the component if we are in editing mode.
      *
      */
