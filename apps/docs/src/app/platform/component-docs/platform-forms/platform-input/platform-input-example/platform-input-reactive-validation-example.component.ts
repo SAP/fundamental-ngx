@@ -11,15 +11,15 @@ export class PlatformInputReactiveValidationExampleComponent implements OnInit {
     validate = [Validators.requiredTrue];
     constructor(private fb: FormBuilder) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.formGroupRegister = new FormGroup({});
     }
 
-    hasError() {
+    hasError(): boolean {
         return this.formGroupRegister.invalid && this.submitted;
     }
 
-    onSubmit() {
+    onSubmit(): void {
         // stop here if form is invalid
         if (this.formGroupRegister.invalid) {
             this.submitted = true;

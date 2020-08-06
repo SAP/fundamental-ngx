@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class PlatformInputAutoCompleteValidationExampleComponent implements OnInit {
     submitted = false;
-    inputText: string = '';
+    inputText: string;
     state = false;
     options: string[];
 
@@ -27,7 +27,7 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
 
     /** Whether the combobox is opened. */
     @Input()
-    open: boolean = false;
+    open: boolean;
 
     /**
      * The template with which to display the individual listed items.
@@ -38,7 +38,7 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
 
     constructor(private fb: FormBuilder) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.options = this.sportsData;
     }
 
@@ -47,12 +47,12 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
         return this.sportsData.filter((item: string) => item.toLowerCase().includes(filterValue));
     }
 
-    onSearchChange() {
+    onSearchChange(): void {
         this.options = this.filter(this.inputText);
         this.open = true;
     }
 
-    onItemClick(clickedValue) {
+    onItemClick(clickedValue): void {
         this.inputText = clickedValue;
         this.open = false;
     }

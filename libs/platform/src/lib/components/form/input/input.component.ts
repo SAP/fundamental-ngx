@@ -24,9 +24,11 @@ import {
     Input,
     OnInit,
     Optional,
-    Self
+    Self,
+    ViewChild,
+    ElementRef
 } from '@angular/core';
-import { FormFieldControl } from '../form-control';
+import { FormFieldControl, Status } from '../form-control';
 import { NgControl, NgForm } from '@angular/forms';
 import { BaseInput } from '../base.input';
 
