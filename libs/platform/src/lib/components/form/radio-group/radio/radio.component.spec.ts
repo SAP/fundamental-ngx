@@ -36,7 +36,7 @@ describe('RadioButtonComponent', () => {
         const inputElem = fixture.debugElement.query(By.css('input'));
         expect(inputElem.nativeElement.type).toEqual('radio');
         expect(inputElem.nativeElement.getAttribute('id')).toBeTruthy();
-        expect(inputElem.nativeElement.getAttribute('ng-reflect-is-disabled')).toBeFalsy();
+        expect(inputElem.nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
         expect(inputElem.nativeElement.getAttribute('ng-reflect-name')).toEqual('radio1');
         expect(inputElem.nativeElement.getAttribute('ng-reflect-value')).toEqual('radio1');
 

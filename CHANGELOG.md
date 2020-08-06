@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.20.1-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.69...v0.20.1-rc.70) (2020-08-06)
+
+
+### Bug Fixes
+
+* (platform) Updating Documentation and Example for Radio Group ([#2822](https://github.com/SAP/fundamental-ngx/issues/2822)) ([b7e8400](https://github.com/SAP/fundamental-ngx/commit/b7e8400060b681cc3b7cb9cb0d94366b4c88f088))
+
 ### [0.20.1-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.68...v0.20.1-rc.69) (2020-08-06)
 
 ### [0.20.1-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.67...v0.20.1-rc.68) (2020-08-05)

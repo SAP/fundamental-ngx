@@ -1,8 +1,31 @@
 <header>Radio Button Group</header>
 <description>
-    The radio-group Component is used to select amoung pre-defined options.
+    Platform Radio Button group creates multiple radios by using list of values or by passing individual radio buttons.
+    <a [routerLink]="'/core'">@fundamental-ngx/core</a> does not have an implementation of radio group, instead requires
+    user to build group using individual radio components. Platform Radio Button Group handles all these radios together
+    and selection of only one radio is possible for a form field. It is implemented to work with Platform Form.
+    <br />
+    <br />
+    <import module="PlatformRadioGroupModule"></import>
+    <br />
+    <h3>Platform specific enhancements:</h3>
+    <ul>
+        <li>Radio group can create multiple radios by using list of string values</li>
+        <li>
+            Multiple radios can be created using list of
+            <a
+                [routerLink]="'https://github.com/SAP/fundamental-ngx/blob/master/libs/platform/src/lib/domain/data-model.ts'">
+                SelectItem Objects
+            </a>
+        </li>
+        <li>Radio group can be created by passing radios under radio group</li>
+        <li>It is implemented to work with Platform Form</li>
+        <li>Radio group creates Platform Radio Buttons</li>
+        <li>
+            Radio group can be created using list of Plain Objects (Entities) and specifying lookupKey and displayKey
+        </li>
+    </ul>
 </description>
-<import module="PlatformRadioGroupModule"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>
