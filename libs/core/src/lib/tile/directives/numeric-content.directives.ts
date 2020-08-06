@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
+import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | null | 'neutral';
 type NumericContentSize = 's' | 'm' | 'l' | null;
@@ -8,7 +8,7 @@ type NumericContentSize = 's' | 'm' | 'l' | null;
     // tslint:disable-next-line:directive-selector
     selector: '[fd-numeric-content]'
 })
-export class NumericContentDirective implements OnInit, OnChanges {
+export class NumericContentDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
     @Input()
     class: string;
@@ -38,15 +38,13 @@ export class NumericContentDirective implements OnInit, OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-numeric-content',
             this.size ? 'fd-numeric-content--' + this.size : '',
             this.class,
             this._isSmallTile() ? 'fd-numeric-content--small-tile' : ''
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */
@@ -82,7 +80,7 @@ export class NumericContentLaunchIconContainerDirective {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-numeric-content-launch-icon]'
 })
-export class NumericContentLaunchIconDirective implements OnInit, OnChanges {
+export class NumericContentLaunchIconDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
     @Input()
     class: string;
@@ -108,10 +106,8 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-numeric-content__launch-icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-numeric-content__launch-icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
 
     /** @hidden */
@@ -134,7 +130,7 @@ export class NumericContentKpiContainerDirective {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-numeric-content-kpi]'
 })
-export class NumericContentKpiDirective implements OnInit, OnChanges {
+export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBuilder {
     /** State of the KPI. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
     @Input()
     state: NumericContentState;
@@ -164,10 +160,8 @@ export class NumericContentKpiDirective implements OnInit, OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-numeric-content__kpi', this.state ? 'fd-numeric-content__kpi--' + this.state : '', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-numeric-content__kpi', this.state ? 'fd-numeric-content__kpi--' + this.state : '', this.class];
     }
 
     /** @hidden */
@@ -190,7 +184,7 @@ export class NumericContentScaleContainerDirective {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-numeric-content-scale-arrow]'
 })
-export class NumericContentScaleArrowDirective implements OnInit, OnChanges {
+export class NumericContentScaleArrowDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
     @Input()
     class: string;
@@ -216,10 +210,8 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-numeric-content__scale-arrow', this.glyph ? 'sap-icon--' + this.glyph : '', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-numeric-content__scale-arrow', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
 
     /** @hidden */
@@ -232,7 +224,7 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-numeric-content-scale]'
 })
-export class NumericContentScaleDirective implements OnInit, OnChanges {
+export class NumericContentScaleDirective implements OnInit, OnChanges, CssClassBuilder {
     /** State of the SCALE. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
     @Input()
     state: NumericContentState;
@@ -258,10 +250,8 @@ export class NumericContentScaleDirective implements OnInit, OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-numeric-content__scale', this.state ? 'fd-numeric-content__scale--' + this.state : '', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-numeric-content__scale', this.state ? 'fd-numeric-content__scale--' + this.state : '', this.class];
     }
 
     /** @hidden */

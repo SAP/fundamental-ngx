@@ -60,7 +60,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-tile',
             this.size ? 'fd-tile--' + this.size : '',
@@ -68,9 +68,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
             this.type ? 'fd-tile--' + this.type : '',
             this.action ? 'fd-tile--action' : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */

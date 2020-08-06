@@ -1,6 +1,5 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
-import { CssClassBuilder } from '../../..';
+import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 @Directive({
     selector: '[fdTileContent], [fd-tile-content]'
@@ -119,7 +118,7 @@ export class TileTitleContainerDirective {
 @Directive({
     selector: '[fdTileRefresh], [fd-tile-refresh]'
 })
-export class TileRefreshDirective implements OnInit, OnChanges {
+export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Glyph */
     @Input()
     glyph: string;
@@ -145,10 +144,8 @@ export class TileRefreshDirective implements OnInit, OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-tile__refresh', this.glyph ? 'sap-icon--' + this.glyph : '', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-tile__refresh', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
 
     /** @hidden */
@@ -282,7 +279,7 @@ export class TileDotDirective {
 @Directive({
     selector: '[fdTileActionClose], [fd-tile-action-close]'
 })
-export class TileActionCloseDirective implements OnInit, OnChanges {
+export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
     @Input()
     class: string;
@@ -304,8 +301,8 @@ export class TileActionCloseDirective implements OnInit, OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-tile__action-close', this.class].filter((x) => x !== '').join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-tile__action-close', this.class];
     }
 
     /** @hidden */
@@ -339,8 +336,8 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-tile__action-indicator', this.class].filter((x) => x !== '').join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-tile__action-indicator', this.class];
     }
 
     /** @hidden */
