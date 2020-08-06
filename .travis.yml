@@ -15,6 +15,12 @@ jobs:
   - stage: "Lint and Test"
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     script: npm run lint && npm run test && npm run test:coveralls && npm run build-pack-library
+  - stage: "Run remote multi browser tests"
+    if: branch = master AND type = push
+    before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
+    env:
+      - KARMA_PARALLEL_EXECUTERS=1
+    script: npm run test:saucelabs -- core && npm run test:saucelabs -- platform
   - stage: "Pre-release"
     if: branch = master AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
