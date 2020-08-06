@@ -223,7 +223,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
                     if (!this.child.activeView) {
                         this.child.changeActive('hour');
                     }
-                    this.child.refresh();
+                    this.child.refreshTime();
                 });
         }
     }

@@ -164,8 +164,9 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
         this._setUpTimeGrid();
     }
 
-    refresh(): void {
-        this.columns.forEach(column => column.setValue());
+    /** @hidden */
+    refreshTime(): void {
+        this.columns.forEach(column => column.setValueOfActive());
     }
 
     /** @hidden */

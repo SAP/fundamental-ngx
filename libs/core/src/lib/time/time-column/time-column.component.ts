@@ -216,7 +216,8 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         }
     }
 
-    public setValue(): void {
+    /** @hidden */
+    public setValueOfActive(): void {
         if (this._active) {
             this._setUpInitialValue();
         }
