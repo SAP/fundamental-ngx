@@ -45,25 +45,25 @@ describe('DndItemDirective', () => {
 
     it('should react to start drag', () => {
         spyOn(directive.started, 'emit');
-        expect((directive as any).placeholderElement).toBeFalsy();
+        expect((directive as any)._placeholderElement).toBeFalsy();
         directive.onCdkDragStart();
-        expect((directive as any).placeholderElement).not.toBeFalsy();
+        expect((directive as any)._placeholderElement).not.toBeFalsy();
         expect(directive.started.emit).toHaveBeenCalled();
     });
 
     it('should react to drag release', () => {
         spyOn(directive.released, 'emit');
-        (directive as any).placeholderElement = document.createElement('div');
-        directive.element.nativeElement.appendChild((directive as any).placeholderElement);
+        (directive as any)._placeholderElement = document.createElement('div');
+        directive.element.nativeElement.appendChild((directive as any)._placeholderElement);
         directive.onCdkDragReleased();
-        expect((directive as any).placeholderElement).toBeFalsy();
+        expect((directive as any)._placeholderElement).toBeFalsy();
         expect(directive.released.emit).toHaveBeenCalled();
     });
 
     it('should create proper horizontal line', () => {
         directive.createLine('before', true);
-        expect((directive as any).lineElement).not.toBeFalsy();
-        const classes: string[] = (directive as any).lineElement.classList;
+        expect((directive as any)._lineElement).not.toBeFalsy();
+        const classes: string[] = (directive as any)._lineElement.classList;
         expect(classes).toContain('drop-area__line');
         expect(classes).toContain('drop-area__line--horizontal');
         expect(classes).toContain('before');
@@ -71,8 +71,8 @@ describe('DndItemDirective', () => {
 
     it('should create proper vertical line', () => {
         directive.createLine('before', false);
-        expect((directive as any).lineElement).not.toBeFalsy();
-        const classes: string[] = (directive as any).lineElement.classList;
+        expect((directive as any)._lineElement).not.toBeFalsy();
+        const classes: string[] = (directive as any)._lineElement.classList;
         expect(classes).toContain('drop-area__line');
         expect(classes).toContain('drop-area__line--vertical');
         expect(classes).toContain('before');

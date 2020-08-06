@@ -13,13 +13,6 @@ import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
     ]
 })
 export class DndItemDirective implements AfterContentInit {
-    /** Class added to element, when it's dragged. */
-    readonly CLASS_WHEN_ELEMENT_DRAGGED: string = 'fd-dnd-on-drag';
-
-    private placeholderElement: HTMLElement;
-
-    private lineElement: HTMLElement;
-    private replaceIndicator: HTMLElement;
     /** Event thrown when the element is moved by 1px */
     @Output()
     readonly moved = new EventEmitter<CdkDragMove>();
@@ -40,10 +33,17 @@ export class DndItemDirective implements AfterContentInit {
     @Input()
     dndDisabled = false;
 
+    /** Class added to element, when it's dragged. */
+    readonly CLASS_WHEN_ELEMENT_DRAGGED: string = 'fd-dnd-on-drag';
+
     /** @hidden
      * Drag reference, object created from DND CDK Service
      */
     private _dragRef: DragRef;
+
+    private _placeholderElement: HTMLElement;
+    private _lineElement: HTMLElement;
+    private _replaceIndicator: HTMLElement;
 
     constructor(public element: ElementRef, private _dragDrop: DragDrop) {}
 
@@ -95,7 +95,7 @@ export class DndItemDirective implements AfterContentInit {
     public onCdkDragStart(): void {
         /** Adds class */
         this.element.nativeElement.classList.add(this.CLASS_WHEN_ELEMENT_DRAGGED);
-        if (!this.placeholderElement) {
+        if (!this._placeholderElement) {
             this.createPlaceHolder();
         }
         this.started.emit();
@@ -103,58 +103,58 @@ export class DndItemDirective implements AfterContentInit {
 
     /** @hidden */
     public removePlaceholder(): void {
-        if (this.placeholderElement && this.placeholderElement.parentNode) {
+        if (this._placeholderElement && this._placeholderElement.parentNode) {
             // IE11 workaround
-            this.placeholderElement.parentNode.removeChild(this.placeholderElement);
-            this.placeholderElement = null;
+            this._placeholderElement.parentNode.removeChild(this._placeholderElement);
+            this._placeholderElement = null;
         }
     }
 
     /** @hidden */
     public removeLine(): void {
-        if (this.lineElement && this.lineElement.parentNode) {
+        if (this._lineElement && this._lineElement.parentNode) {
             // IE11 workaround
-            this.lineElement.parentNode.removeChild(this.lineElement);
-            this.lineElement = null;
+            this._lineElement.parentNode.removeChild(this._lineElement);
+            this._lineElement = null;
         }
     }
 
     /** @hidden */
     public removeReplacement(): void {
-        if (this.replaceIndicator && this.replaceIndicator.parentNode) {
+        if (this._replaceIndicator && this._replaceIndicator.parentNode) {
             // IE11 workaround
-            this.replaceIndicator.parentNode.removeChild(this.replaceIndicator);
-            this.replaceIndicator = null;
+            this._replaceIndicator.parentNode.removeChild(this._replaceIndicator);
+            this._replaceIndicator = null;
         }
     }
 
     /** @hidden */
     public createReplaceIndicator(): void {
-        this.replaceIndicator = document.createElement('DIV');
-        this.replaceIndicator.classList.add('fd-replace-indicator');
-        this.element.nativeElement.appendChild(this.replaceIndicator);
+        this._replaceIndicator = document.createElement('DIV');
+        this._replaceIndicator.classList.add('fd-replace-indicator');
+        this.element.nativeElement.appendChild(this._replaceIndicator);
     }
 
     /** @hidden */
     public createLine(position: LinkPosition, listMode: boolean): void {
         /** Creating of line element */
-        this.lineElement = document.createElement('DIV');
+        this._lineElement = document.createElement('DIV');
         if (listMode) {
-            this.lineElement.classList.add('drop-area__line');
-            this.lineElement.classList.add('drop-area__line--horizontal');
+            this._lineElement.classList.add('drop-area__line');
+            this._lineElement.classList.add('drop-area__line--horizontal');
         } else {
-            this.lineElement.classList.add('drop-area__line');
-            this.lineElement.classList.add('drop-area__line--vertical');
+            this._lineElement.classList.add('drop-area__line');
+            this._lineElement.classList.add('drop-area__line--vertical');
         }
         if (position === 'after') {
-            this.lineElement.classList.add('after');
+            this._lineElement.classList.add('after');
         }
         if (position === 'before') {
-            this.lineElement.classList.add('before');
+            this._lineElement.classList.add('before');
         }
 
         /** Putting element to the container */
-        this.element.nativeElement.appendChild(this.lineElement);
+        this.element.nativeElement.appendChild(this._lineElement);
     }
 
     /** @hidden */
@@ -163,9 +163,9 @@ export class DndItemDirective implements AfterContentInit {
         const clone = this.element.nativeElement.cloneNode(true);
 
         /** Taking cloned element reference */
-        this.placeholderElement = clone.firstChild.parentElement;
+        this._placeholderElement = clone.firstChild.parentElement;
 
-        this.placeholderElement.classList.add('fd-dnd-placeholder');
+        this._placeholderElement.classList.add('fd-dnd-placeholder');
         this._setPlaceholderStyles();
 
         /** Including element to the container */
@@ -176,14 +176,14 @@ export class DndItemDirective implements AfterContentInit {
     private _setPlaceholderStyles(): void {
         const offset = this._getOffsetToParent(this.element.nativeElement);
 
-        this.placeholderElement.style.top = offset.y + 'px';
-        this.placeholderElement.style.left = offset.x + 'px';
-        this.placeholderElement.style.position = 'absolute';
-        this.placeholderElement.style.zIndex = '0';
-        this.placeholderElement.style.opacity = '0.3';
+        this._placeholderElement.style.top = offset.y + 'px';
+        this._placeholderElement.style.left = offset.x + 'px';
+        this._placeholderElement.style.position = 'absolute';
+        this._placeholderElement.style.zIndex = '0';
+        this._placeholderElement.style.opacity = '0.3';
 
-        this.placeholderElement.style.width = this.element.nativeElement.offsetWidth + 'px';
-        this.placeholderElement.style.height = this.element.nativeElement.offsetHeight + 'px';
+        this._placeholderElement.style.width = this.element.nativeElement.offsetWidth + 'px';
+        this._placeholderElement.style.height = this.element.nativeElement.offsetHeight + 'px';
     }
 
     /** @hidden */
