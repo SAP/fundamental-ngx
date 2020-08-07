@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.21.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.21.0-rc.1...v0.21.0-rc.2) (2020-08-07)
+
+
+### Bug Fixes
+
+* (platform) Bug fix for multiple menu triggers with same menu ([#2722](https://github.com/SAP/fundamental-ngx/issues/2722)) ([0e57ce8](https://github.com/SAP/fundamental-ngx/commit/0e57ce89ebea756b312f26d08b84515998777fdf))
+
 ## [0.21.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.21.0-rc.0...v0.21.0-rc.1) (2020-08-07)
 
 ## [0.21.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.70...v0.21.0-rc.0) (2020-08-06)
