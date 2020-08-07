@@ -19,6 +19,4 @@ export * from './text-area/text-area.module';
 export * from './switch/switch.module';
 export * from './switch/switch/switch.config';
 export * from './switch/switch/switch.component';
-export * from './step-input/step-input.module';
-export * from './step-input/step-input.config';
-export * from './step-input/number/number-step-input.component';
+export * from './step-input/public_api';

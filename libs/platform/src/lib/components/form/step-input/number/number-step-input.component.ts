@@ -22,6 +22,19 @@ import { StepInputConfig } from '../step-input.config';
 /** Change event object emitted by Platform Number Step Input. */
 export class NumberStepInputChangeEvent extends StepInputChangeEvent<NumberStepInputComponent, number> {}
 
+/**
+ * Fundamental number-step-input component
+ *
+ * Example of usage
+ * ```html
+ * <fdp-number-step-input
+ *   name="number"
+ *   [value]="value"
+ *   (valueChange)="onValueChange($event)"
+ * ></fdp-number-step-input>
+ * ```
+ *
+ * */
 @Component({
     selector: 'fdp-number-step-input',
     templateUrl: 'number-step-input.component.html',
@@ -54,8 +67,7 @@ export class NumberStepInputComponent extends StepInputComponent {
      * Create change event instance
      */
     createChangeEvent(value: number): NumberStepInputChangeEvent {
-        const event: NumberStepInputChangeEvent = new NumberStepInputChangeEvent(this, value);
-        return event;
+        return new NumberStepInputChangeEvent(this, value);
     }
 
     /**@hidden

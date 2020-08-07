@@ -11,7 +11,7 @@ import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
 
 /** Change event object emitted by Platform Step Input component */
-export class StepInputChangeEvent<T extends StepInputComponent = StepInputComponent, K = number> {
+export abstract class StepInputChangeEvent<T extends StepInputComponent = StepInputComponent, K = number> {
     constructor(
         /** The source Step Input of the event. */
         public source: T,
@@ -20,7 +20,16 @@ export class StepInputChangeEvent<T extends StepInputComponent = StepInputCompon
     ) {}
 }
 
-type AlignInputType = 'left' | 'center' | 'right';
+export const enum StepInputAlign {
+    Left = 'left',
+    Center = 'center',
+    Right = 'right'
+}
+
+export type StepInputStepFunctionAction = 'increase' | 'decrease';
+export type StepInputStepFunction = (value: number, action: StepInputStepFunctionAction) => number;
+
+const ALIGN_INPUT_OPTIONS_LIST = [StepInputAlign.Left, StepInputAlign.Center, StepInputAlign.Right];
 
 /**
  * StepInputComponent is a base abstract class that should be used
@@ -81,7 +90,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** Custom function to calculate step dynamically */
     @Input()
-    set stepFn(stepFn: (value: number, action: 'increase' | 'decrease') => number) {
+    set stepFn(stepFn: StepInputStepFunction) {
         this._stepFn = stepFn;
         this._calculateCanDecrementIncrement();
     }
@@ -106,8 +115,8 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** Horizontally aligns value inside input */
     @Input()
-    set align(align: AlignInputType) {
-        this._alignInput$.next(align);
+    set align(align: StepInputAlign) {
+        this._align$.next(align);
     }
 
     /**
@@ -164,7 +173,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
-    _align: AlignInputType;
+    _align: StepInputAlign;
 
     /** @hidden */
     private _max: number = Number.MAX_VALUE;
@@ -176,13 +185,13 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _step = 1;
 
     /** @hidden */
-    private _stepFn: (value: number, action: 'increase' | 'decrease') => number;
+    private _stepFn: StepInputStepFunction;
 
     /** @hidden */
     private _precision: number;
 
     /** @hidden */
-    private _alignInput$: BehaviorSubject<AlignInputType> = new BehaviorSubject<AlignInputType>(null);
+    private _align$: BehaviorSubject<StepInputAlign> = new BehaviorSubject<StepInputAlign>(null);
 
     /** @hidden */
     constructor(
@@ -206,40 +215,9 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
         this.lastEmittedValue = this._value;
 
-        this.stateChanges
-            .asObservable()
-            .pipe(takeUntil(this._destroyed))
-            .subscribe(() => {
-                this.isErrorState = this.status === 'error';
-            });
+        this._listenToFormErrorState();
 
-        this._alignInput$
-            .asObservable()
-            .pipe(
-                switchMap((align) =>
-                    this._rtlService.rtl.pipe(
-                        map(
-                            (isRtl): AlignInputType => {
-                                if (!(['left', 'center', 'right'] as Array<AlignInputType>).includes(align)) {
-                                    return null;
-                                }
-                                if (isRtl && align === 'left') {
-                                    return 'right';
-                                }
-                                if (isRtl && align === 'right') {
-                                    return 'left';
-                                }
-                                return align;
-                            }
-                        )
-                    )
-                ),
-                takeUntil(this._destroyed)
-            )
-            .subscribe((align) => {
-                this._align = align;
-                this.detectChanges();
-            });
+        this._listenToAlign();
     }
 
     /**@hidden
@@ -251,7 +229,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** Increase value */
-    increase(step = this._getStepValue('increase')): void {
+    increase(step = this._getStepValueForIncrease()): void {
         if (!this.canIncrement) {
             return;
         }
@@ -261,7 +239,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** Decrease value */
-    decrease(step = this._getStepValue('decrease')): void {
+    decrease(step = this._getStepValueForDecrease()): void {
         if (!this.canDecrement) {
             return;
         }
@@ -272,13 +250,13 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** Increase value by large step */
     largeStepIncrease(): void {
-        const step = this._getStepValue('increase') * this.largerStep;
+        const step = this._getStepValueForIncrease() * this.largerStep;
         this.increase(step);
     }
 
     /** Decrease value by large step */
     largeStepDecrease(): void {
-        const step = this._getStepValue('decrease') * this.largerStep;
+        const step = this._getStepValueForDecrease() * this.largerStep;
         this.decrease(step);
     }
 
@@ -311,7 +289,14 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
      */
     onFocus(): void {
         super._onFocusChanged(true);
-        this._updateViewValue(true);
+        // When focus happend by "Tab" key an input field value gets selected by default.
+        // In cases when new_formatted_value !== previous_value the selection gets lost.
+        // So it's needed to track selection before new value rendering and restore it.
+        const { selectionStart, selectionEnd } = this._getValueSelection();
+        this._updateViewValue();
+        if (selectionEnd - selectionStart > 0) {
+            this._setValueSelection(selectionStart, selectionEnd);
+        }
     }
 
     /**@hidden
@@ -340,6 +325,47 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     abstract parseValueInFocusMode(value: string): number | null;
 
     /** @hidden */
+    private _listenToFormErrorState(): void {
+        this.stateChanges
+            .asObservable()
+            .pipe(takeUntil(this._destroyed))
+            .subscribe(() => {
+                this.isErrorState = this.status === 'error';
+            });
+    }
+
+    /** @hidden */
+    private _listenToAlign(): void {
+        this._align$
+            .asObservable()
+            .pipe(
+                switchMap((align) =>
+                    this._rtlService.rtl.pipe(
+                        map(
+                            (isRtl): StepInputAlign => {
+                                if (!ALIGN_INPUT_OPTIONS_LIST.includes(align)) {
+                                    return null;
+                                }
+                                if (isRtl && align === StepInputAlign.Left) {
+                                    return StepInputAlign.Right;
+                                }
+                                if (isRtl && align === StepInputAlign.Right) {
+                                    return StepInputAlign.Left;
+                                }
+                                return align;
+                            }
+                        )
+                    )
+                ),
+                takeUntil(this._destroyed)
+            )
+            .subscribe((align) => {
+                this._align = align;
+                this.detectChanges();
+            });
+    }
+
+    /** @hidden */
     private _emitChangedValue(): void {
         const value = this._value;
         this.lastEmittedValue = value;
@@ -347,10 +373,20 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this.onChange(value);
     }
 
+    /** @hidden */
+    private _getStepValueForIncrease(): number {
+        return this._getStepValue('increase');
+    }
+
+    /** @hidden */
+    private _getStepValueForDecrease(): number {
+        return this._getStepValue('decrease');
+    }
+
     /** @hidden
      * Get step value based either on "stepFn" or "step"
      */
-    private _getStepValue(action: 'increase' | 'decrease'): number {
+    private _getStepValue(action: StepInputStepFunctionAction): number {
         // steFn has precedence
         if (typeof this._stepFn === 'function') {
             const calculatedStep = this._stepFn(this._value, action);
@@ -360,41 +396,59 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    private _updateViewValue(keepSelection = false): void {
+    private _updateViewValue(): void {
         if (this._value === null) {
             return;
         }
-        let formatted = '';
-        if (this.focused) {
-            formatted = this.formatValueInFocusMode(this._value);
-        } else {
-            formatted = this.formatValue(this._value);
-        }
-        this._renderValue(formatted, keepSelection);
+        const formatted = this._formatValue();
+        this._renderValue(formatted);
     }
 
     /** @hidden */
-    private _renderValue(value: string, keepSelection = false): void {
-        const inputEl = this._elementRef.nativeElement as HTMLInputElement | null;
-        const startSelectionPos = inputEl?.selectionStart;
-        const endSelectionPos = inputEl?.selectionEnd;
-
-        this._renderer.setProperty(this._elementRef.nativeElement, 'value', value);
-
-        if (keepSelection && endSelectionPos - startSelectionPos > 0) {
-            inputEl.setSelectionRange(startSelectionPos, endSelectionPos);
+    private _formatValue(value = this._value): string {
+        if (this.focused) {
+            return this.formatValueInFocusMode(value);
         }
+        return this.formatValue(value);
+    }
+
+    /** @hidden */
+    private _renderValue(value: string): void {
+        const inputEl = this._getInputNativeElement();
+        this._renderer.setProperty(inputEl, 'value', value);
+    }
+
+    /** @hidden */
+    private _getInputNativeElement(): HTMLInputElement | null {
+        return this._elementRef.nativeElement as HTMLInputElement | null;
+    }
+
+    /** @hidden */
+    private _getValueSelection(): { selectionStart: number; selectionEnd: number } {
+        const inputEl = this._getInputNativeElement();
+        const selectionStart = inputEl?.selectionStart || 0;
+        const selectionEnd = inputEl?.selectionEnd || 0;
+        return { selectionStart: selectionStart, selectionEnd: selectionEnd };
+    }
+
+    /** @hidden */
+    private _setValueSelection(selectionStart: number, selectionEnd: number): void {
+        const inputEl = this._getInputNativeElement();
+        if (!inputEl) {
+            return;
+        }
+        inputEl.setSelectionRange(selectionStart, selectionEnd);
     }
 
     /** @hidden */
     private _calculateCanIncrement(): void {
-        const step = this._getStepValue('increase');
+        const step = this._getStepValueForIncrease();
         this.canIncrement = (this._value || 0) + step <= this._max;
     }
 
     /** @hidden */
     private _calculateCanDecrement(): void {
-        const step = this._getStepValue('decrease');
+        const step = this._getStepValueForDecrease();
         this.canDecrement = (this._value || 0) - step >= this._min;
     }
 
