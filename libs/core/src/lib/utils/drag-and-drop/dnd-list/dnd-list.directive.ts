@@ -23,11 +23,17 @@ export interface ElementChord {
     stickToPosition?: boolean;
 }
 
+export interface FdDropEvent<T> {
+    items: Array<T>,
+    replacedItemIndex: number;
+    draggedItemIndex: number;
+}
+
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-dnd-list]'
 })
-export class DndListDirective implements AfterContentInit, OnDestroy {
+export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     /** @hidden */
     @ContentChildren(DndItemDirective)
     dndItems: QueryList<DndItemDirective>;
@@ -42,11 +48,15 @@ export class DndListDirective implements AfterContentInit, OnDestroy {
 
     /** Array of items, that will be sorted */
     @Input()
-    items: Array<any>;
+    items: Array<T>;
 
     /** Event that is thrown, when the item is dropped */
     @Output()
-    readonly itemsChange = new EventEmitter<any>();
+    readonly itemsChange = new EventEmitter<Array<T>>();
+
+    /** Event that is thrown, when the item is dropped */
+    @Output()
+    readonly itemDropped = new EventEmitter<FdDropEvent<T>>();
 
     /** @hidden */
     private _elementCoordinates: ElementChord[];
@@ -153,6 +163,12 @@ export class DndListDirective implements AfterContentInit, OnDestroy {
 
         this.itemsChange.emit(this.items);
 
+        this.itemDropped.emit({
+            replacedItemIndex: replacedItemIndex,
+            draggedItemIndex: draggedItemIndex,
+            items: this.items
+        })
+
         this._removeAllLines();
         this._removeAllReplaceIndicators();
 
@@ -186,7 +202,6 @@ export class DndListDirective implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _refreshQueryList(): void {
-        console.log('done');
         const refresh$ = merge(
             this._refresh$,
             this._onDestroy$

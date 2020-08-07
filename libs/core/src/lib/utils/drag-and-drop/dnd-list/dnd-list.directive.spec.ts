@@ -15,7 +15,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 })
 class TestDndListComponent {
     @ViewChild('directiveElement', { static: true, read: DndListDirective })
-    directive: DndListDirective;
+    directive: DndListDirective<string>;
 
     list: string[] = [];
 }
@@ -23,7 +23,7 @@ class TestDndListComponent {
 describe('DndListDirective', () => {
     let component: TestDndListComponent;
     let fixture: ComponentFixture<TestDndListComponent>;
-    let directive: DndListDirective;
+    let directive: DndListDirective<string>;
     let elementCoordinates: ElementChord[];
 
     beforeEach(async(() => {
@@ -87,13 +87,16 @@ describe('DndListDirective', () => {
     });
 
     it('should handle dragend', () => {
-        spyOn(directive.itemsChange, 'emit');
+        spyOn(directive.itemDropped, 'emit');
         spyOn(directive as any, '_removeAllLines');
         directive.items = [...component.list];
 
         directive.dragEnd(3);
-
-        expect(directive.itemsChange.emit).toHaveBeenCalledWith(['item1', 'item4', 'item2', 'item3']);
+        expect(directive.itemDropped.emit).toHaveBeenCalledWith({
+            replacedItemIndex: 1,
+            draggedItemIndex: 3,
+            items: ['item1', 'item4', 'item2', 'item3']
+        });
 
         expect((directive as any)._removeAllLines).toHaveBeenCalled();
     });

@@ -10,7 +10,7 @@
         class="fd-product-switch__list"
         [items]="products"
         [gridMode]="!isListMode()"
-        (itemsChange)="productSwitchItemsChangeHandle($event)"
+        (itemDropped)="productSwitchItemsChangeHandle($event)"
     >
         <li fd-dnd-item
             *ngFor="let product of products"

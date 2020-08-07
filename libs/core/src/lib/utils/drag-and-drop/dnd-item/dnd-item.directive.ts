@@ -146,7 +146,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     createLine(position: LinkPosition, gridMode: boolean): void {
         /** Creating of line element */
-        this._lineElement = document.createElement('DIV');
+        this._lineElement = document.createElement('div');
         this._lineElement.classList.add('drop-area__line');
 
         if (gridMode) {
