@@ -3,6 +3,11 @@ import { CdkDragMove, DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
 import { Subscription } from 'rxjs';
 
+export interface ElementPosition {
+    x: number;
+    y: number;
+}
+
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-dnd-item]',
@@ -16,7 +21,7 @@ import { Subscription } from 'rxjs';
 export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** Event thrown when the element is moved by 1px */
     @Output()
-    readonly moved = new EventEmitter<CdkDragMove>();
+    readonly moved = new EventEmitter<ElementPosition>();
 
     /** Event thrown when the element is released */
     @Output()
@@ -82,8 +87,8 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    onCdkMove(cdkMovedEvent: CdkDragMove): void {
-        this.moved.emit(cdkMovedEvent);
+    onCdkMove(position: ElementPosition): void {
+        this.moved.emit(position);
     }
 
     /** @hidden */
@@ -212,7 +217,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     private _setCDKDrag(): void {
         this._dragRef = this._dragDrop.createDrag(this.element);
         this._subscriptions.add(
-            this._dragRef.moved.subscribe((event: any) => this.onCdkMove(event))
+            this._dragRef.moved.subscribe(event => this.onCdkMove(event.pointerPosition))
         );
         this._subscriptions.add(
             this._dragRef.released.subscribe(() => this.onCdkDragReleased())

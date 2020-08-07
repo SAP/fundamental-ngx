@@ -10,7 +10,7 @@ import {
     QueryList
 } from '@angular/core';
 import { CdkDragMove } from '@angular/cdk/drag-drop';
-import { DndItemDirective } from '../dnd-item/dnd-item.directive';
+import { DndItemDirective, ElementPosition } from '../dnd-item/dnd-item.directive';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
@@ -59,7 +59,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     readonly itemDropped = new EventEmitter<FdDropEvent<T>>();
 
     /** @hidden */
-    private _elementCoordinates: ElementChord[];
+    private _elementsCoordinates: ElementChord[];
 
     /** @hidden */
     private _closestItemIndex: number = null;
@@ -90,20 +90,14 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     }
 
     /** Method called, when the item is being moved by 1 px */
-    onMove(event: CdkDragMove, draggedItemIndex: number): void {
-        /** Taking mouse position */
-        const mousePosition: {
-            x: number;
-            y: number;
-        } = event.pointerPosition;
-
+    onMove(mousePosition: ElementPosition, draggedItemIndex: number): void {
         /** Temporary object, to store lowest distance values */
         let closestItem: {
             index: number;
             distance: number;
         } = null;
 
-        this._elementCoordinates.forEach((element, index) => {
+        this._elementsCoordinates.forEach((element, index) => {
             /** Check if element can be replaced */
             if (!element.stickToPosition) {
                 /** Counting the distances by the mileage of the corner of element and cursor position */
@@ -117,7 +111,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         /** If the closest element is different than the old one, new one is picked. It prevents from performance issues */
         if (closestItem.index !== this._closestItemIndex) {
             this._closestItemIndex = closestItem.index;
-            this._closestItemPosition = this._elementCoordinates[closestItem.index].position;
+            this._closestItemPosition = this._elementsCoordinates[closestItem.index].position;
             // If closest item index is same as dragged item, just remove indicators
             if (closestItem.index === draggedItemIndex) {
                 this._removeAllLines();
@@ -137,7 +131,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     dragStart(index: number): void {
         const draggedItemElement = this.dndItems.toArray()[index].element;
         /** Counting all of the elements's chords */
-        this._elementCoordinates = this.dndItems
+        this._elementsCoordinates = this.dndItems
             .toArray()
             .map((item) => item.getElementCoordinates(this._isBefore(draggedItemElement, item.element), this.gridMode));
     }
@@ -173,7 +167,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         this._removeAllReplaceIndicators();
 
         /** Reset */
-        this._elementCoordinates = [];
+        this._elementsCoordinates = [];
         this._closestItemIndex = null;
         this._closestItemPosition = null;
     }
@@ -208,7 +202,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         );
         this._refresh$.next();
         this.dndItems.forEach((item, index) => {
-            item.moved.pipe(takeUntil(refresh$)).subscribe((eventMove) => this.onMove(eventMove, index));
+            item.moved.pipe(takeUntil(refresh$)).subscribe((position: ElementPosition) => this.onMove(position, index));
             item.started.pipe(takeUntil(refresh$)).subscribe(() => this.dragStart(index));
             item.released.pipe(takeUntil(refresh$)).subscribe(() => this.dragEnd(index));
         });

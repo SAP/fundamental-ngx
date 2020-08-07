@@ -52,10 +52,10 @@ describe('DndListDirective', () => {
     });
 
     it('Should handle dragStart', () => {
-        expect((directive as any)._elementCoordinates).toBeFalsy();
+        expect((directive as any)._elementsCoordinates).toBeFalsy();
+        (directive as any)._closestItemIndex = 1;
         directive.dragStart(3);
-        expect((directive as any)._draggedItemIndex).toBe(3);
-        expect((directive as any)._elementCoordinates.length).toBe(4);
+        expect((directive as any)._elementsCoordinates.length).toBe(4);
     });
 
     it('Should handle move and detect good target (1)', () => {
@@ -63,7 +63,7 @@ describe('DndListDirective', () => {
         const pointerPosition = { pointerPosition: { x: 150, y: 150 } };
         (directive as any)._closestItemIndex = 100;
         (directive as any)._closestItemPosition = 'after';
-        (directive as any)._elementCoordinates = elementCoordinates;
+        (directive as any)._elementsCoordinates = elementCoordinates;
 
         directive.onMove(<any>pointerPosition, 3);
 
@@ -77,7 +77,7 @@ describe('DndListDirective', () => {
         const pointerPosition = { pointerPosition: { x: 230, y: 230 } };
         (directive as any)._closestItemIndex = 1000;
         (directive as any)._closestItemPosition = 'after';
-        (directive as any)._elementCoordinates = elementCoordinates;
+        (directive as any)._elementsCoordinates = elementCoordinates;
 
         directive.onMove(<any>pointerPosition, 3);
 
@@ -91,6 +91,7 @@ describe('DndListDirective', () => {
         spyOn(directive as any, '_removeAllLines');
         directive.items = [...component.list];
 
+        (directive as any)._closestItemIndex = 1;
         directive.dragEnd(3);
         expect(directive.itemDropped.emit).toHaveBeenCalledWith({
             replacedItemIndex: 1,
@@ -111,7 +112,7 @@ describe('DndListDirective', () => {
         /** This is element tht should be ignored */
         elementCoordinates.push({ x: 235, y: 230, stickToPosition: true, position: 'after' });
 
-        (directive as any)._elementCoordinates = elementCoordinates;
+        (directive as any)._elementsCoordinates = elementCoordinates;
 
         directive.onMove(<any>pointerPosition, 3);
 
