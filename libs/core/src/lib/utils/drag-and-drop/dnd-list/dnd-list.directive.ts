@@ -9,7 +9,6 @@ import {
     Output,
     QueryList
 } from '@angular/core';
-import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { DndItemDirective, ElementPosition } from '../dnd-item/dnd-item.directive';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';

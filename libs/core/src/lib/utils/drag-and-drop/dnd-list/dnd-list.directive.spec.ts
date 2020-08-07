@@ -60,12 +60,12 @@ describe('DndListDirective', () => {
 
     it('Should handle move and detect good target (1)', () => {
         spyOn(directive as any, '_createLine');
-        const pointerPosition = { pointerPosition: { x: 150, y: 150 } };
+        const pointerPosition = { x: 150, y: 150 };
         (directive as any)._closestItemIndex = 100;
         (directive as any)._closestItemPosition = 'after';
         (directive as any)._elementsCoordinates = elementCoordinates;
 
-        directive.onMove(<any>pointerPosition, 3);
+        directive.onMove(pointerPosition, 3);
 
         expect((directive as any)._closestItemIndex).toBe(0);
         expect((directive as any)._closestItemPosition).toBe('before');
@@ -74,12 +74,12 @@ describe('DndListDirective', () => {
 
     it('Should handle move and detect good target (2)', () => {
         spyOn(directive as any, '_createLine');
-        const pointerPosition = { pointerPosition: { x: 230, y: 230 } };
+        const pointerPosition = { x: 230, y: 230 };
         (directive as any)._closestItemIndex = 1000;
         (directive as any)._closestItemPosition = 'after';
         (directive as any)._elementsCoordinates = elementCoordinates;
 
-        directive.onMove(<any>pointerPosition, 3);
+        directive.onMove(pointerPosition, 3);
 
         expect((directive as any)._closestItemIndex).toBe(2);
         expect((directive as any)._closestItemPosition).toBe('before');

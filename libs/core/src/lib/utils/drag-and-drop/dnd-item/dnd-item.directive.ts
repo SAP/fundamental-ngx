@@ -1,5 +1,5 @@
 import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { CdkDragMove, DragDrop, DragRef } from '@angular/cdk/drag-drop';
+import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
 import { Subscription } from 'rxjs';
 
