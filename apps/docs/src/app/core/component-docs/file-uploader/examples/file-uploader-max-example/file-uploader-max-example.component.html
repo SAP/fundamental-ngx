@@ -1,5 +1,6 @@
 <fd-file-uploader
-    [id]="'fileInputMax'"
+    #fileUploaderMax
+    [id]="fileUploaderMax"
     [ariaLabel]="'Choose file'"
     [ariaLabelledBy]="'Choose file'"
     [placeholder]="'Choose File to upload'"
@@ -18,7 +19,7 @@
 Files Selected:
 <br />
 <span *ngFor="let file of files">
-    <span style="color: green;">{{ file.name }} </span><br
+    <span class="green">{{ file.name }} </span><br
 /></span>
 
 <br />
@@ -26,5 +27,5 @@ Files Selected:
 Invalid Files:
 <br />
 <span *ngFor="let file of invalidFiles">
-    <span style="color: red;">{{ file.name }} </span><br
+    <span class="red">{{ file.name }} </span><br
 /></span>

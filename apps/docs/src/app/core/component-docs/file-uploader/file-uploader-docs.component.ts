@@ -32,7 +32,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 })
 export class FileUploaderDocsComponent {
 
-    fileUpladerFiori3Example: ExampleFile[] = [
+    fileUpladerCompactExample: ExampleFile[] = [
         {
             language: 'html',
             code: fileUploaderCompactH,

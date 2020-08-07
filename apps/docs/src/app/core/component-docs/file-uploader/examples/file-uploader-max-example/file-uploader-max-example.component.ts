@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-file-uploader-max-example',
-    templateUrl: './file-uploader-max-example.component.html'
+    templateUrl: './file-uploader-max-example.component.html',
+    styleUrls: ['./file-uploader-max-example.component.scss']
 })
 export class FileUploaderMaxExampleComponent {
     files: File[];
