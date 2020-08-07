@@ -18,7 +18,7 @@ export class StepInputControlDirective {
      * @hidden
      * Handle "change" event
      */
-    @HostListener('change', ['$event'])
+    @HostListener('change')
     onChange(): void {
         if (!this.stepInput.canChangeValue) {
             return;
