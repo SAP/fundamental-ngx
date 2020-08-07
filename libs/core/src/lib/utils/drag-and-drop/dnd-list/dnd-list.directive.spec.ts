@@ -105,7 +105,7 @@ describe('DndListDirective', () => {
     it('should handle stickToPosition', () => {
         spyOn(directive as any, '_createLine');
 
-        const pointerPosition = { pointerPosition: { x: 230, y: 230 } };
+        const pointerPosition = { x: 230, y: 230 };
         (directive as any)._closestItemIndex = 1000;
         (directive as any)._closestItemPosition = 'after';
 
@@ -114,7 +114,7 @@ describe('DndListDirective', () => {
 
         (directive as any)._elementsCoordinates = elementCoordinates;
 
-        directive.onMove(<any>pointerPosition, 3);
+        directive.onMove(pointerPosition, 3);
 
         expect((directive as any)._closestItemIndex).toBe(2);
         expect((directive as any)._closestItemPosition).toBe('before');
