@@ -4,9 +4,11 @@ import {
     Component,
     forwardRef,
     Input,
+    QueryList,
     OnChanges,
-    OnInit, QueryList,
-    SimpleChanges, ViewChildren,
+    OnInit,
+    SimpleChanges,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { TimeObject } from './time-object';
@@ -102,6 +104,7 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     @Input()
     spinnerButtons = true;
 
+    /** @hidden */
     @ViewChildren(TimeColumnComponent)
     columns: QueryList<TimeColumnComponent>;
 
