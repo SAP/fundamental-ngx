@@ -106,10 +106,18 @@ export const ROUTES: Routes = [
                     )
             },
             {
-              path: 'switch',
-              loadChildren: () =>
-                import('./component-docs/platform-forms/switch/platform-switch-docs.module')
-                  .then(m => m.PlatformSwitchDocsModule)
+                path: 'switch',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/switch/platform-switch-docs.module').then(
+                        (m) => m.PlatformSwitchDocsModule
+                    )
+            },
+            {
+                path: 'input',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/platform-input/platform-input-docs.module').then(
+                        (m) => m.PlatformInputDocsModule
+                    )
             }
         ]
     }
