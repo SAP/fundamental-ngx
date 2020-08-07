@@ -61,7 +61,7 @@ describe('DndItemDirective', () => {
     });
 
     it('should create proper horizontal line', () => {
-        directive.createLine('before', true);
+        directive.createLine('before', false);
         expect((directive as any)._lineElement).not.toBeFalsy();
         const classes: string[] = (directive as any)._lineElement.classList;
         expect(classes).toContain('drop-area__line');
@@ -70,7 +70,7 @@ describe('DndItemDirective', () => {
     });
 
     it('should create proper vertical line', () => {
-        directive.createLine('before', false);
+        directive.createLine('before', true);
         expect((directive as any)._lineElement).not.toBeFalsy();
         const classes: string[] = (directive as any)._lineElement.classList;
         expect(classes).toContain('drop-area__line');

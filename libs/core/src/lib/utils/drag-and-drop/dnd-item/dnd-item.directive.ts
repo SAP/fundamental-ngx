@@ -1,6 +1,7 @@
-import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { CdkDragMove, DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
+import { Subscription } from 'rxjs';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
@@ -12,7 +13,7 @@ import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
         DragDrop
     ]
 })
-export class DndItemDirective implements AfterContentInit {
+export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** Event thrown when the element is moved by 1px */
     @Output()
     readonly moved = new EventEmitter<CdkDragMove>();
@@ -34,13 +35,15 @@ export class DndItemDirective implements AfterContentInit {
     dndDisabled = false;
 
     /** Class added to element, when it's dragged. */
-    readonly CLASS_WHEN_ELEMENT_DRAGGED: string = 'fd-dnd-on-drag';
+    @Input()
+    classWhenElementDragged = 'fd-dnd-on-drag';
 
     /** @hidden
      * Drag reference, object created from DND CDK Service
      */
     private _dragRef: DragRef;
 
+    private _subscriptions = new Subscription();
     private _placeholderElement: HTMLElement;
     private _lineElement: HTMLElement;
     private _replaceIndicator: HTMLElement;
@@ -48,14 +51,14 @@ export class DndItemDirective implements AfterContentInit {
     constructor(public element: ElementRef, private _dragDrop: DragDrop) {}
 
     /** @hidden */
-    public getElementChord(isBefore: boolean, listMode: boolean): ElementChord {
+    getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord {
         /** Takes distance from the beginning of window page */
         const rect = <DOMRect>this.element.nativeElement.getBoundingClientRect();
 
         const position: LinkPosition = isBefore ? 'before' : 'after';
 
         /** Depending on the position, gets the left or right side of element */
-        const x = rect.left + (isBefore || listMode ? 0 : this.element.nativeElement.offsetWidth);
+        const x = rect.left + (isBefore || gridMode ? this.element.nativeElement.offsetWidth : 0);
 
         /** Vertically distance is counted by distance from top of the side + half of the element height */
         return {
@@ -67,21 +70,26 @@ export class DndItemDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    public ngAfterContentInit(): void {
+    ngAfterContentInit(): void {
         if (!this.dndDisabled) {
             this._setCDKDrag();
         }
     }
 
     /** @hidden */
-    public onCdkMove(cdkMovedEvent: CdkDragMove): void {
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    onCdkMove(cdkMovedEvent: CdkDragMove): void {
         this.moved.emit(cdkMovedEvent);
     }
 
     /** @hidden */
-    public onCdkDragReleased(): void {
+    onCdkDragReleased(): void {
         /** Remove class which is added, when element is dragged */
-        this.element.nativeElement.classList.remove(this.CLASS_WHEN_ELEMENT_DRAGGED);
+        this.element.nativeElement.classList.remove(this.classWhenElementDragged);
         this.released.emit();
 
         /** Resets the position of element. */
@@ -92,9 +100,9 @@ export class DndItemDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    public onCdkDragStart(): void {
+    onCdkDragStart(): void {
         /** Adds class */
-        this.element.nativeElement.classList.add(this.CLASS_WHEN_ELEMENT_DRAGGED);
+        this.element.nativeElement.classList.add(this.classWhenElementDragged);
         if (!this._placeholderElement) {
             this.createPlaceHolder();
         }
@@ -102,7 +110,7 @@ export class DndItemDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    public removePlaceholder(): void {
+    removePlaceholder(): void {
         if (this._placeholderElement && this._placeholderElement.parentNode) {
             // IE11 workaround
             this._placeholderElement.parentNode.removeChild(this._placeholderElement);
@@ -111,7 +119,7 @@ export class DndItemDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    public removeLine(): void {
+    removeLine(): void {
         if (this._lineElement && this._lineElement.parentNode) {
             // IE11 workaround
             this._lineElement.parentNode.removeChild(this._lineElement);
@@ -120,7 +128,7 @@ export class DndItemDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    public removeReplacement(): void {
+    removeReplacement(): void {
         if (this._replaceIndicator && this._replaceIndicator.parentNode) {
             // IE11 workaround
             this._replaceIndicator.parentNode.removeChild(this._replaceIndicator);
@@ -129,22 +137,22 @@ export class DndItemDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    public createReplaceIndicator(): void {
+    createReplaceIndicator(): void {
         this._replaceIndicator = document.createElement('DIV');
         this._replaceIndicator.classList.add('fd-replace-indicator');
         this.element.nativeElement.appendChild(this._replaceIndicator);
     }
 
     /** @hidden */
-    public createLine(position: LinkPosition, listMode: boolean): void {
+    createLine(position: LinkPosition, gridMode: boolean): void {
         /** Creating of line element */
         this._lineElement = document.createElement('DIV');
-        if (listMode) {
-            this._lineElement.classList.add('drop-area__line');
-            this._lineElement.classList.add('drop-area__line--horizontal');
-        } else {
-            this._lineElement.classList.add('drop-area__line');
+        this._lineElement.classList.add('drop-area__line');
+
+        if (gridMode) {
             this._lineElement.classList.add('drop-area__line--vertical');
+        } else {
+            this._lineElement.classList.add('drop-area__line--horizontal');
         }
         if (position === 'after') {
             this._lineElement.classList.add('after');
@@ -187,7 +195,7 @@ export class DndItemDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    private _getOffsetToParent(element: any): { x: number, y: number } {
+    private _getOffsetToParent(element: Element): { x: number, y: number } {
         const parentElement = element.parentElement;
 
         const parentTop = parentElement.getBoundingClientRect().top;
@@ -203,14 +211,14 @@ export class DndItemDirective implements AfterContentInit {
     /** @hidden */
     private _setCDKDrag(): void {
         this._dragRef = this._dragDrop.createDrag(this.element);
-        this._dragRef.moved.subscribe((event: any) => {
-            this.onCdkMove(event);
-        });
-        this._dragRef.released.subscribe(() => {
-            this.onCdkDragReleased();
-        });
-        this._dragRef.started.subscribe(() => {
-            this.onCdkDragStart();
-        });
+        this._subscriptions.add(
+            this._dragRef.moved.subscribe((event: any) => this.onCdkMove(event))
+        );
+        this._subscriptions.add(
+            this._dragRef.released.subscribe(() => this.onCdkDragReleased())
+        )
+        this._subscriptions.add(
+            this._dragRef.started.subscribe(() => this.onCdkDragStart())
+        );
     }
 }

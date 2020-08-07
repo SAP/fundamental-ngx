@@ -5,13 +5,14 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    OnDestroy,
     Output,
     QueryList
 } from '@angular/core';
 import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { DndItemDirective } from '../dnd-item/dnd-item.directive';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 
 export type LinkPosition = 'after' | 'before';
 
@@ -26,14 +27,14 @@ export interface ElementChord {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-dnd-list]'
 })
-export class DndListDirective implements AfterContentInit {
+export class DndListDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     @ContentChildren(DndItemDirective)
-    dndContainerItems: QueryList<DndItemDirective>;
+    dndItems: QueryList<DndItemDirective>;
 
     /** Defines if the distance between elements should be counted only by vertical distance */
     @Input()
-    listMode = false;
+    gridMode = false;
 
     /** When enabled, replace indicator will appear on whole element, instead of horizontal/vertical line */
     @Input()
@@ -41,35 +42,45 @@ export class DndListDirective implements AfterContentInit {
 
     /** Array of items, that will be sorted */
     @Input()
-    public items: Array<any>;
+    items: Array<any>;
 
     /** Event that is thrown, when the item is dropped */
     @Output()
     readonly itemsChange = new EventEmitter<any>();
 
     /** @hidden */
-    private _elementChords: ElementChord[];
+    private _elementCoordinates: ElementChord[];
 
     /** @hidden */
-    private _draggedItemIndex = 1000000;
+    private _closestItemIndex: number = null;
 
     /** @hidden */
-    private _closestLinkIndex: number = null;
-
-    /** @hidden */
-    private _closestLinkPosition: 'before' | 'after' = null;
+    private _closestItemPosition: 'before' | 'after' = null;
 
     /** An RxJS Subject that will kill the current data stream (for unsubscribing)  */
     private readonly _refresh$ = new Subject<void>();
 
     /** @hidden */
-    public ngAfterContentInit(): void {
-        this._refreshQueryList();
-        this.dndContainerItems.changes.subscribe(() => this._refreshQueryList());
+    private readonly _onDestroy$  = new Subject<void>();
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this.dndItems.changes
+            .pipe(
+                takeUntil(this._onDestroy$),
+                startWith(0)
+            )
+            .subscribe(() => this._refreshQueryList());
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** Method called, when the item is being moved by 1 px */
-    onMove(event: CdkDragMove): void {
+    onMove(event: CdkDragMove, draggedItemIndex: number): void {
         /** Taking mouse position */
         const mousePosition: {
             x: number;
@@ -77,55 +88,53 @@ export class DndListDirective implements AfterContentInit {
         } = event.pointerPosition;
 
         /** Temporary object, to store lowest distance values */
-        let lowestDistanceItem: {
+        let closestItem: {
             index: number;
             distance: number;
         } = null;
 
-        this._elementChords.forEach((element, index) => {
+        this._elementCoordinates.forEach((element, index) => {
             /** Check if element can be replaced */
             if (!element.stickToPosition) {
                 /** Counting the distances by the mileage of the corner of element and cursor position */
                 const distance = Math.hypot(element.x - mousePosition.x, element.y - mousePosition.y);
-                if (!lowestDistanceItem || distance < lowestDistanceItem.distance) {
-                    lowestDistanceItem = { distance: distance, index: index };
+                if (!closestItem || distance < closestItem.distance) {
+                    closestItem = { distance: distance, index: index };
                 }
             }
         });
 
         /** If the closest element is different than the old one, new one is picked. It prevents from performance issues */
-        if (lowestDistanceItem.index !== this._closestLinkIndex) {
-            this._closestLinkIndex = lowestDistanceItem.index;
-            this._closestLinkPosition = this._elementChords[lowestDistanceItem.index].position;
+        if (closestItem.index !== this._closestItemIndex) {
+            this._closestItemIndex = closestItem.index;
+            this._closestItemPosition = this._elementCoordinates[closestItem.index].position;
             // If closest item index is same as dragged item, just remove indicators
-            if (lowestDistanceItem.index === this._draggedItemIndex) {
+            if (closestItem.index === draggedItemIndex) {
                 this._removeAllLines();
                 this._removeAllReplaceIndicators();
                 return;
             }
             /** Generating line, that shows where the element will be placed, on drop */
             if (this.replaceMode) {
-                this._generateReplacementIndicator(this._closestLinkIndex);
+                this._createReplacementIndicator(this._closestItemIndex);
             } else {
-                this._generateLine(this._closestLinkIndex, this._closestLinkPosition);
+                this._createLine(this._closestItemIndex, this._closestItemPosition);
             }
         }
     }
 
     /** Method called, when element is started to be dragged */
-    dragStart(ind: number): void {
-        this._draggedItemIndex = ind;
-        const draggedItemElement = this.dndContainerItems.toArray()[ind].element;
+    dragStart(index: number): void {
+        const draggedItemElement = this.dndItems.toArray()[index].element;
         /** Counting all of the elements's chords */
-        this._elementChords = this.dndContainerItems
+        this._elementCoordinates = this.dndItems
             .toArray()
-            .map((link) => link.getElementChord(this._isBefore(draggedItemElement, link.element), this.listMode));
+            .map((item) => item.getElementCoordinates(this._isBefore(draggedItemElement, item.element), this.gridMode));
     }
 
     /** Method called, when element is released */
-    dragEnd(): void {
-        const draggedItemIndex = this._draggedItemIndex;
-        const replacedItemIndex = this._closestLinkIndex;
+    dragEnd(draggedItemIndex: number): void {
+        const replacedItemIndex = this._closestItemIndex;
         const draggedItem = this.items[draggedItemIndex];
 
         if (draggedItemIndex < replacedItemIndex) {
@@ -138,6 +147,7 @@ export class DndListDirective implements AfterContentInit {
             }
         }
 
+
         /** Replacing items */
         this.items[replacedItemIndex] = draggedItem;
 
@@ -147,40 +157,45 @@ export class DndListDirective implements AfterContentInit {
         this._removeAllReplaceIndicators();
 
         /** Reset */
-        this._elementChords = [];
-        this._closestLinkIndex = null;
-        this._closestLinkPosition = null;
+        this._elementCoordinates = [];
+        this._closestItemIndex = null;
+        this._closestItemPosition = null;
     }
 
     /** @hidden */
     private _removeAllLines(): void {
-        this.dndContainerItems.forEach((item) => item.removeLine());
+        this.dndItems.forEach((item) => item.removeLine());
     }
 
     /** @hidden */
     private _removeAllReplaceIndicators(): void {
-        this.dndContainerItems.forEach((item) => item.removeReplacement());
+        this.dndItems.forEach((item) => item.removeReplacement());
     }
 
     /** @hidden */
-    private _generateLine(closestLinkIndex: number, linkPosition: LinkPosition): void {
+    private _createLine(closestItemIndex: number, linkPosition: LinkPosition): void {
         this._removeAllLines();
-        this.dndContainerItems.toArray()[closestLinkIndex].createLine(linkPosition, this.listMode);
+        this.dndItems.toArray()[closestItemIndex].createLine(linkPosition, this.gridMode);
     }
 
     /** @hidden */
-    private _generateReplacementIndicator(closestLinkIndex: number): void {
+    private _createReplacementIndicator(closestItemIndex: number): void {
         this._removeAllReplaceIndicators();
-        this.dndContainerItems.toArray()[closestLinkIndex].createReplaceIndicator();
+        this.dndItems.toArray()[closestItemIndex].createReplaceIndicator();
     }
 
     /** @hidden */
     private _refreshQueryList(): void {
+        console.log('done');
+        const refresh$ = merge(
+            this._refresh$,
+            this._onDestroy$
+        );
         this._refresh$.next();
-        this.dndContainerItems.forEach((item, index) => {
-            item.moved.pipe(takeUntil(this._refresh$)).subscribe((eventMove) => this.onMove(eventMove));
-            item.started.pipe(takeUntil(this._refresh$)).subscribe(() => this.dragStart(index));
-            item.released.pipe(takeUntil(this._refresh$)).subscribe(() => this.dragEnd());
+        this.dndItems.forEach((item, index) => {
+            item.moved.pipe(takeUntil(refresh$)).subscribe((eventMove) => this.onMove(eventMove, index));
+            item.started.pipe(takeUntil(refresh$)).subscribe(() => this.dragStart(index));
+            item.released.pipe(takeUntil(refresh$)).subscribe(() => this.dragEnd(index));
         });
     }
 

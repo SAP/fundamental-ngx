@@ -9,7 +9,7 @@
         fd-dnd-list
         class="fd-product-switch__list"
         [items]="products"
-        [listMode]="isListMode()"
+        [gridMode]="!isListMode()"
         (itemsChange)="productSwitchItemsChangeHandle($event)"
     >
         <li fd-dnd-item
