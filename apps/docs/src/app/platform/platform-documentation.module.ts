@@ -20,6 +20,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         RouterModule.forChild(ROUTES),
         ScrollingModule
     ],
-    providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }, StackblitzService]
+    providers: [
+        { provide: 'CURRENT_LIB', useValue: 'platform' },
+        StackblitzService
+    ]
 })
 export class PlatformDocumentationModule {}

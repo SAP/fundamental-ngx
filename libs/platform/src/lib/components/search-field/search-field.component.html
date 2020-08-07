@@ -47,7 +47,7 @@
         <nav class="fd-menu" tabindex="-1" [ngClass]="{ 'fd-menu--compact': contentDensity === 'compact'}"
             [attr.id]="menuId" (keydown)="onKeydown($event)">
             <ul class="fd-menu__list" role="menu">
-                <li fdpSearchFieldSuggestion class="fdp-search-field__suggestion-item fd-menu__item"
+                <li fdpSearchFieldSuggestion class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
                     *ngFor="let value of dropdownValues$ | async | suggestionMatches:inputText"
                     (keydown.enter)="onItemClick(value)" (click)="onItemClick(value)"
                     [innerHTML]="value | highlight:inputText:true" role="menuitem">

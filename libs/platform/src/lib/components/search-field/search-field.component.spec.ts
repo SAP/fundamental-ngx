@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import {
     SearchFieldComponent,
     SearchInput,
@@ -281,7 +281,7 @@ describe('SearchFieldComponent', () => {
         expect(categoryDropdown.length).toBe(0);
     });
 
-    it('should change the category label to the selected category', () => {
+    it('should change the category label to the selected category', fakeAsync(() => {
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
@@ -291,6 +291,7 @@ describe('SearchFieldComponent', () => {
         // click on category button
         const button = fixture.debugElement.query(By.css('.fdp-search-field__category-button'));
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // click on category item
@@ -306,6 +307,7 @@ describe('SearchFieldComponent', () => {
 
         // click on category button
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // click on category item
@@ -318,7 +320,7 @@ describe('SearchFieldComponent', () => {
         categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
         expect(categoryLabel.nativeElement.textContent).toBe(CATEGORIES[1].label);
         expect(host.inputValue.category).toBe(CATEGORIES[1].value);
-    });
+    }));
 
     it('should allow user to set the size of the component', () => {
         host.placeholder = 'Search';
@@ -863,10 +865,11 @@ describe('SearchFieldComponent with DataSource', () => {
         expect(items[1].textContent).toBe('Orange');
     });
 
-    it('should be able to filter data source by category', () => {
+    it('should be able to filter data source by category', fakeAsync(() => {
         // click on category button
         const button = fixture.debugElement.query(By.css('.fdp-search-field__category-button'));
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // click on category item
@@ -889,5 +892,5 @@ describe('SearchFieldComponent with DataSource', () => {
         expect(items.length).toBe(2);
         expect(items[0].textContent).toBe('Almond');
         expect(items[1].textContent).toBe('Walnut');
-    });
+    }));
 });

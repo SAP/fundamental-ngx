@@ -1,6 +1,6 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { By } from '@angular/platform-browser';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { ElementRef, ViewChild, Component } from '@angular/core';
 import { ButtonModule, RtlService, IconModule } from '@fundamental-ngx/core';
 import { ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
@@ -81,12 +81,13 @@ describe('SplitMenuButtonComponent', () => {
         expect(host.actionValue).toEqual('Default Button');
     });
 
-    it('should Open Menu and click first Item', () => {
+    it('should Open Menu and click first Item', fakeAsync(() => {
         /**
          * FIRST-CLICK On Menu Button (OPEN MENU)
          */
         const buttons = fixture.debugElement.queryAll(By.css('button'));
         buttons[1].nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -106,6 +107,7 @@ describe('SplitMenuButtonComponent', () => {
          */
         const buttons1 = fixture.debugElement.queryAll(By.css('button'));
         buttons1[1].nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items1 = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -124,5 +126,5 @@ describe('SplitMenuButtonComponent', () => {
         items1[1].dispatchEvent(keyboardEvent);
         fixture.detectChanges();
         expect(host.actionValue).toBe('Second Item');
-    });
+    }));
 });

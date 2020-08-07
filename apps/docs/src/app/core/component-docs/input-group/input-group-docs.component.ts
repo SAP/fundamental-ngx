@@ -4,8 +4,6 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as inputGroupButtonSrc from '!raw-loader!./examples/input-group-button-example.component.html';
 import * as inputGroupIconSrc from '!raw-loader!./examples/input-group-icon-example.component.html';
-import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-example/input-group-number-example.component.html';
-import * as inputGroupNumberSrcTs from '!raw-loader!./examples/input-group-number-example/input-group-number-example.component.ts';
 import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.html';
 import * as inputGroupSearchSrcTs from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.ts';
 import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
@@ -111,16 +109,6 @@ export class InputGroupDocsComponent {
         }
     ];
 
-    numberInput: ExampleFile[] = [
-        {
-            language: 'html',
-            code: inputGroupNumberSrc,
-            fileName: 'input-group-number-example',
-            typescriptFileCode: inputGroupNumberSrcTs,
-            component: 'InputGroupNumberExampleComponent'
-        }
-    ];
-
     searchInput: ExampleFile[] = [
         {
             language: 'html',
@@ -158,7 +146,7 @@ export class InputGroupDocsComponent {
         {
             language: 'html',
             code: complexInputHtml,
-            fileName: 'input-group-number-example'
+            fileName: 'input-group-complex-example'
         }
     ];
 
