@@ -1,4 +1,4 @@
-import { Component, AfterViewChecked } from '@angular/core';
+import { Component, AfterViewChecked, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
     selector: 'fdp-tristate-checkbox',
     templateUrl: 'platform-tristate-checkbox.component.html'
 })
-export class PlatformChekboxTristateComponent implements AfterViewChecked {
+export class PlatformChekboxTristateComponent implements AfterViewChecked, AfterViewInit {
     public havana = false;
     public beirut: boolean = null;
     public budapest = 'Yes';
@@ -24,6 +24,12 @@ export class PlatformChekboxTristateComponent implements AfterViewChecked {
     });
 
     public choices: Object = { termsAndConditions: true, marketing: true, newsletter: false };
+
+    constructor(private _cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
 
     // code for nested form group with tristate checkbox.
     ngAfterViewChecked(): void {

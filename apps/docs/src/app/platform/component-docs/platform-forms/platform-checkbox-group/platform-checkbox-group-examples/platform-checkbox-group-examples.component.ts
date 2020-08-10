@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SelectItem } from '@fundamental-ngx/platform';
 
@@ -6,7 +6,7 @@ import { SelectItem } from '@fundamental-ngx/platform';
     selector: 'fdp-platform-checkbox-group-example',
     templateUrl: './platform-checkbox-group-example.component.html'
 })
-export class PlatformCheckboxGroupExampleComponent {
+export class PlatformCheckboxGroupExampleComponent implements AfterViewInit {
     fruits: string[] = ['Apple', 'Banana', 'Grapes'];
     favourites = { fruitsEx: ['banana'] };
     favourites1 = { fruits1: ['Apple'] };
@@ -20,6 +20,12 @@ export class PlatformCheckboxGroupExampleComponent {
     form1 = new FormGroup({});
     form2 = new FormGroup({});
     form3 = new FormGroup({});
+
+    constructor(private _cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
 }
 
 class LanguageKnown implements SelectItem {

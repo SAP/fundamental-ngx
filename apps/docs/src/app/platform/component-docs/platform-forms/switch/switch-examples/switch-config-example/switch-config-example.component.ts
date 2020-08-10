@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SwitchConfig } from '@fundamental-ngx/platform';
 
@@ -16,8 +16,14 @@ export const customSwitchConfigProvider = {
     templateUrl: './switch-config-example.component.html',
     providers: [customSwitchConfigProvider]
 })
-export class SwitchConfigExampleComponent {
+export class SwitchConfigExampleComponent implements AfterViewInit {
     customForm = new FormGroup({
         switch: new FormControl(false)
     });
+
+    constructor(private _cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
 }
