@@ -8,7 +8,6 @@ import { IconDocsComponent } from './icon/icon-docs.component';
 import { IdentifierDocsComponent } from './identifier/identifier-docs.component';
 import { InlineHelpDocsComponent } from './inline-help/inline-help-docs.component';
 import { InputGroupDocsComponent } from './input-group/input-group-docs.component';
-import { ImageDocsComponent } from './image/image-docs.component';
 import { PaginationDocsComponent } from './pagination/pagination-docs.component';
 import { ListDocsComponent } from './list/list-docs.component';
 import { TabsDocsComponent } from './tabs/tabs-docs.component';
@@ -28,7 +27,6 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     identifier: IdentifierDocsComponent.schema,
     inlineHelp: InlineHelpDocsComponent.schema,
     inputGroup: InputGroupDocsComponent.schema,
-    image: ImageDocsComponent.schema,
     pagination: PaginationDocsComponent.schema,
     messageStrip: MessageStripDocsComponent.schema,
     dialog: DialogDocsComponent.schema,

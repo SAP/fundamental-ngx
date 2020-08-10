@@ -112,10 +112,6 @@ export const ROUTES: Routes = [
                     import('./component-docs/identifier/identifier-docs.module').then((m) => m.IdentifierDocsModule)
             },
             {
-                path: 'image',
-                loadChildren: () => import('./component-docs/image/image-docs.module').then((m) => m.ImageDocsModule)
-            },
-            {
                 path: 'info-label',
                 loadChildren: () =>
                     import('./component-docs/info-label/info-label-docs.module').then((m) => m.InfoLabelDocsModule)
