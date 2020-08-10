@@ -65,13 +65,13 @@ export class DatetimePickerComplexI18nExampleComponent {
         moment.locale('en-ca');
     }
 
-    meridian: boolean = true;
+    meridian = true;
 
-    actualLocale: string = '';
+    actualLocale = '';
 
-    selectedLocale: string = 'en-ca';
+    selectedLocale = 'en-ca';
 
-    actualFormat: string = 'mm/dd/yyyy, hh:mm a';
+    actualFormat = 'mm/dd/yyyy, hh:mm a';
 
     actualMomentJsLang = '';
 
@@ -95,8 +95,7 @@ export class DatetimePickerComplexI18nExampleComponent {
       if (moment().format('LT').includes('AM') || moment().format('LT').includes('PM')) {
         this.actualFormat = 'mm/dd/yyyy, hh:mm a';
         this.meridian = true;
-      }
-      else {
+      } else {
         this.actualFormat = 'mm/dd/yyyy, hh:mm';
         this.meridian = false;
       }
