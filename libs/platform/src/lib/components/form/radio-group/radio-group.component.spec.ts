@@ -18,7 +18,7 @@ import { SelectItem } from '../../../domain/data-model';
                     [id]="'radio1'"
                     [name]="'radio1'"
                     [contentDensity]="'compact'"
-                    [value]="'Spring'"
+                    [selected]="'Spring'"
                     [isInline]="false"
                     formControlName="example1"
                 >
@@ -132,7 +132,7 @@ describe('RadioGroupComponent', () => {
                 <fdp-radio-group
                     [id]="'radio1'"
                     [name]="'radio1'"
-                    [value]="'Spring'"
+                    [selected]="'Spring'"
                     [list]="seasons"
                     [isInline]="false"
                     [(ngModel)]="favoriteSeason"

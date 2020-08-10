@@ -25,6 +25,12 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
 
     public choices: Object = { termsAndConditions: true, marketing: true, newsletter: false };
 
+    constructor(private _cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
+
     // code for nested form group with tristate checkbox.
     ngAfterViewInit(): void {
         this.setAgreementsOnAcceptAllChange();

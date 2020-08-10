@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-disabled-example',
     templateUrl: './platform-radio-group-disabled-example.component.html'
 })
-export class PlatformRadioGroupDisabledExampleComponent {
+export class PlatformRadioGroupDisabledExampleComponent implements AfterViewInit {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
     items = [
@@ -72,4 +72,10 @@ export class PlatformRadioGroupDisabledExampleComponent {
         example4: new FormControl({ value: 'winter', disabled: true }),
         example5: new FormControl({ value: 'winter', disabled: false })
     });
+
+    constructor(private _cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
 }

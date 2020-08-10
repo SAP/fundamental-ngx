@@ -1,4 +1,10 @@
-<fd-form-group [isInline]="isInline">
+<fd-form-group
+    [isInline]="isInline"
+    role="radiogroup"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledById"
+    [attr.aria-orientation]="isInline ? 'horizontal' : 'vertical'"
+>
     <ng-container *ngIf="!list">
         <ng-container *ngFor="let radio of contentRadioButtons">
             <div fd-form-item>

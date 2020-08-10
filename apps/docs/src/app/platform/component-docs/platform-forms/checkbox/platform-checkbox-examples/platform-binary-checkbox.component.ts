@@ -1,17 +1,23 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, Optional } from '@angular/core';
+import { Component, Optional, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-binary-checkbox',
     templateUrl: 'platform-binary-checkbox.component.html'
 })
-export class PlatformCompactChekboxExampleComponent {
+export class PlatformCompactChekboxExampleComponent implements AfterViewInit {
     customForm = new FormGroup({});
     data: DataObject = new DataObject(false, true);
 
     yellow = false;
     white = true;
     violet: boolean;
+
+    constructor(private _cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
 
     public checkedChangeFunction(event: any): void {}
 

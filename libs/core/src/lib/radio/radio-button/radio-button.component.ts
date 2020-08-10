@@ -34,6 +34,37 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     @ViewChild('inputElement')
     inputElement: ElementRef;
 
+    /**
+     * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
+     * take precedence so this may be omitted.
+     */
+    @Input('aria-label')
+    ariaLabel = '';
+
+    /**
+     * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+     */
+    @Input('aria-labelledby')
+    ariaLabelledby = null;
+
+    /** The 'aria-describedby' attribute is read after the element's label and field type. */
+    @Input('aria-describedby')
+    ariaDescribedby: string;
+
+    /** The 'aria-disabled' for giving accessibility for disabled checkbox element. */
+    @Input('aria-disabled')
+    ariaDisabled: boolean;
+
+    /** sets checkbox tooltip */
+    @Input()
+    title: string;
+
+    /**
+     * Includes the checkbox in the page tab sequence.
+     */
+    @Input()
+    tabIndex = -1;
+
     /** Whether to apply compact mode to the radio button.
      * Value: true or false
      * By default field is set to false
@@ -159,9 +190,10 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     }
 
     /** @hidden */
-    labelClicked(): void {
+    labelClicked(event: any): void {
         this.valueChange(this.value);
         this._setFocusOnNativeElement();
+        event.stopPropagation();
     }
 
     /** @hidden */

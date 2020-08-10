@@ -6,6 +6,12 @@
         [state]="state"
         [compact]="contentDensity === 'compact'"
         [disabled]="disabled"
+        [tabIndex]="ischecked() ? 0 : tabIndex"
+        [title]="title"
+        [aria-label]="ariaLabel"
+        [aria-labelledby]="ariaLabelledby"
+        [aria-describedby]="ariaDescribedby"
+        [aria-disabled]="ariaDisabled"
         (click)="onClick($event)"
     >
         <ng-content></ng-content>

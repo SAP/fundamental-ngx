@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SelectItem } from '@fundamental-ngx/platform';
 
@@ -6,7 +6,7 @@ import { SelectItem } from '@fundamental-ngx/platform';
     selector: 'fdp-platform-checkbox-group-list-object',
     templateUrl: './platform-checkbox-group-list-object.component.html'
 })
-export class PlatformCheckboxGroupListObjectComponent {
+export class PlatformCheckboxGroupListObjectComponent implements AfterViewInit {
     countryCurrency = [new Country('Australia', 'AUD'), new Country('India', 'INR'), new Country('USA', 'USD')];
     currency = ['AUD', 'USD'];
 
@@ -37,6 +37,12 @@ export class PlatformCheckboxGroupListObjectComponent {
     languagesKnown = '';
     currencies = ['INR', 'USD'];
     itemsData = ['pen'];
+
+    constructor(private _cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
 }
 
 class Country implements SelectItem {

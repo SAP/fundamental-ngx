@@ -6,6 +6,7 @@ import {
     Component,
     ContentChildren,
     EventEmitter,
+    HostListener,
     Input,
     OnDestroy,
     Optional,
@@ -19,6 +20,8 @@ import {
     Host
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -26,6 +29,7 @@ import { RadioButtonComponent } from './radio/radio.component';
 import { CollectionBaseInput } from '../collection-base.input';
 import { FormFieldControl } from '../form-control';
 import { FormField } from '../form-field';
+
 
 /**
  * Radio group implementation based on the
@@ -45,8 +49,20 @@ let nextUniqueId = 0;
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => RadioGroupComponent), multi: true }]
 })
 export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit, AfterContentChecked, OnDestroy {
-    /** Value of selected radio button */
+    /**
+     * CBG label for accessibility
+     */
     @Input()
+    ariaLabel: string;
+
+    /**
+     * Element id to label the group.
+     */
+    @Input()
+    ariaLabelledById: string;
+
+    /** Value of selected radio button */
+    @Input('selected')
     get value(): any {
         return super.getValue();
     }
@@ -79,6 +95,9 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     /** Children radio buttons part of Group radio button, created from list of values */
     @ViewChildren(RadioButtonComponent)
     viewRadioButtons: QueryList<RadioButtonComponent>;
+
+    // FocusKeyManager instance
+    private keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
 
     /** Selected radio button change event raised */
     @Output()
@@ -173,18 +192,42 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
         return this.disabled || typeof item === 'string' ? this.disabled : item.disabled;
     }
 
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    handleKeydown(event: KeyboardEvent): void {
+        event.stopImmediatePropagation();
+        if (this.keyboardEventsManager) {
+            if (event.keyCode === DOWN_ARROW || event.keyCode === UP_ARROW) {
+                // passing the event to key manager so we get a change fired
+                this.keyboardEventsManager.onKeydown(event);
+            }
+        }
+    }
+
     /**
      * Initializing all content radio buttons with given properties and
-     * subscribing to radio button radiobuttonclicked event
+     * subscribing to radio button clicked event
      */
     private _initContentRadioButtons(): void {
         if (this.contentRadioButtons && this.contentRadioButtons.length > 0) {
-            this.contentRadioButtons.forEach((button) => {
+            let firstEnabledButtonIndex = -1;
+
+            this.contentRadioButtons.forEach((button, i) => {
                 this._setProperties(button);
                 this._selectUnselect(button);
-                this.onChange(this._value);
+
+                // finding first enabled button to set tabindex=0
+                if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
+                    firstEnabledButtonIndex = i;
+                }
+                this.onChange(this.value);
                 button.click.pipe(takeUntil(this.destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
             });
+            // accessibility requirement
+            if (!this._selected && this.contentRadioButtons && firstEnabledButtonIndex > -1) {
+                this.contentRadioButtons.toArray()[firstEnabledButtonIndex].tabIndex = 0;
+            }
+            this.keyboardEventsManager = new FocusKeyManager(this.contentRadioButtons).withWrap();
         }
     }
 
@@ -193,11 +236,23 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
      */
     private _initViewRadioButtons(): void {
         if (this.viewRadioButtons && this.viewRadioButtons.length > 0) {
-            this.viewRadioButtons.forEach((button) => {
+            let firstEnabledButtonIndex = -1;
+
+            this.viewRadioButtons.forEach((button, i) => {
                 button.status = this.status;
                 this._selectUnselect(button);
-                this.onChange(this._value);
+
+                // finding first enabled button to set tabindex=0
+                if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
+                    firstEnabledButtonIndex = i;
+                }
+                this.onChange(this.value);
             });
+            // accessibility requirement
+            if (!this._selected && this.viewRadioButtons && firstEnabledButtonIndex > -1) {
+                this.viewRadioButtons.toArray()[firstEnabledButtonIndex].tabIndex = 0;
+            }
+            this.keyboardEventsManager = new FocusKeyManager(this.viewRadioButtons).withWrap();
         }
     }
 
@@ -206,32 +261,29 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
      * @param button
      */
     private _selectUnselect(button: RadioButtonComponent): void {
-        if (!this._value) {
-            button.unselect();
-        } else {
-            if (button.value === this._value) {
-                // selected button
-                if (this._selected !== button) {
-                    this._selected = button;
-                }
-                if (!button.ischecked()) {
-                    button.select();
-                }
+        if (button.value === this.value) {
+            // selected button
+            if (this._selected !== button) {
+                this._selected = button;
+            }
+            if (!button.ischecked()) {
+                button.select();
             }
         }
     }
 
-    /** Called everytime a radio button is clicked, In content child as well as viewchild */
+    /** Called every time a radio button is clicked, In content child as well as viewchild */
     private _selectedValueChanged(button: RadioButtonComponent): void {
         if (this._selected !== button) {
             if (this._selected) {
                 this._selected.unselect();
+                this._selected.tabIndex = -1;
             }
             this._selected = button;
         }
-        this._value = button.value;
+        this.value = button.value;
         this.change.emit(button);
-        this.onChange(this._value);
+        this.onChange(this.value);
     }
 
     /**

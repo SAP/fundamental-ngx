@@ -13,7 +13,7 @@ import {
     Host
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
-
+import { FocusableOption } from '@angular/cdk/a11y';
 import { RadioButtonComponent as CoreRadioButtonComponent, stateType } from '@fundamental-ngx/core';
 
 import { BaseInput } from '../../base.input';
@@ -27,7 +27,38 @@ let uniqueId = 0;
     templateUrl: './radio.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RadioButtonComponent extends BaseInput {
+export class RadioButtonComponent extends BaseInput implements FocusableOption {
+    /**
+     * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
+     * take precedence so this may be omitted.
+     */
+    @Input('aria-label')
+    ariaLabel = '';
+
+    /**
+     * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+     */
+    @Input('aria-labelledby')
+    ariaLabelledby = null;
+
+    /** The 'aria-describedby' attribute is read after the element's label and field type. */
+    @Input('aria-describedby')
+    ariaDescribedby: string;
+
+    /** The 'aria-disabled' for giving accessibility for disabled checkbox element. */
+    @Input('aria-disabled')
+    ariaDisabled: boolean;
+
+    /** sets checkbox tooltip */
+    @Input()
+    title: string;
+
+    /**
+     * Includes the checkbox in the page tab sequence.
+     */
+    @Input()
+    tabIndex = -1;
+
     /** value for Radio button */
     @Input()
     get value(): any {
@@ -43,9 +74,6 @@ export class RadioButtonComponent extends BaseInput {
     set status(newStatus: Status) {
         this._status = newStatus;
         this.state = newStatus;
-        if (newStatus !== 'error' && newStatus !== 'warning') {
-            this.state = 'default';
-        }
         this._cd.markForCheck();
     }
 
@@ -87,7 +115,7 @@ export class RadioButtonComponent extends BaseInput {
     }
 
     /** @hidden change formcontrol value, emits the event*/
-    onClick(event: KeyboardEvent | MouseEvent): void {
+    public onClick(event: KeyboardEvent | MouseEvent): void {
         event.stopPropagation();
         if (!this.disabled) {
             if (super.getValue() !== undefined) {
@@ -97,28 +125,30 @@ export class RadioButtonComponent extends BaseInput {
         }
     }
 
+    public focus(): void {
+        this.coreRadioButton.elementRef().nativeElement.focus();
+    }
+
     /**
      * checked status of radio button
      */
-    ischecked(): boolean {
-        if (this.coreRadioButton && this.coreRadioButton.elementRef()) {
-            return this.coreRadioButton.elementRef().nativeElement.checked;
-        }
-        return false;
+    public ischecked(): boolean {
+        return this.coreRadioButton?.checked;
     }
 
     /** @hidden method to select radio button */
-    select(): void {
-        if (this.coreRadioButton && this.coreRadioButton.inputElement) {
-            this.coreRadioButton.elementRef().nativeElement.checked = true;
+    public select(): void {
+        if (this.coreRadioButton) {
+            this.coreRadioButton.currentValue = this.value;
             this._cd.detectChanges();
         }
     }
 
     /** @hidden method to uncheck radio button */
-    unselect(): void {
-        if (this.coreRadioButton && this.coreRadioButton.inputElement) {
-            this.coreRadioButton.elementRef().nativeElement.checked = false;
+    public unselect(): void {
+        if (this.coreRadioButton) {
+            this.coreRadioButton.currentValue = undefined;
+            this.coreRadioButton.tabIndex = -1;
             this._cd.detectChanges();
         }
     }
