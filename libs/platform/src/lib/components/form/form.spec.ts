@@ -35,7 +35,7 @@ interface TestUser {
                     zone="zTop"
                     required="true"
                 >
-                    <fdp-input [formControl]="firstName.formControl"></fdp-input>
+                    <fdp-input [formControl]="firstName.formControl" name="firstName"></fdp-input>
                 </fdp-form-field>
                 <fdp-form-field
                     #lastName
@@ -45,7 +45,7 @@ interface TestUser {
                     zone="zTop"
                     required="true"
                 >
-                    <fdp-input [formControl]="lastName.formControl"></fdp-input>
+                    <fdp-input [formControl]="lastName.formControl" name="lastName"></fdp-input>
                 </fdp-form-field>
                 <fdp-form-field
                     #favoriteColor
@@ -54,7 +54,7 @@ interface TestUser {
                     hint="What is your favorite color?"
                     zone="zBottom"
                 >
-                    <fdp-input [formControl]="favoriteColor.formControl"></fdp-input>
+                    <fdp-input [formControl]="favoriteColor.formControl" name="favoriteColor"></fdp-input>
                 </fdp-form-field>
                 <ng-template #i18n let-errors>
                     <span *ngIf="errors && errors.required" class="error">This field is required.</span>
@@ -167,23 +167,23 @@ describe('Simple Form', () => {
             <fdp-form-field #firstName
                 id="firstName"
                 label="First Name">
-                <fdp-input [formControl]="firstName.formControl"></fdp-input>
+                <fdp-input [formControl]="firstName.formControl" name="firstName"></fdp-input>
             </fdp-form-field>
             <fdp-form-field #lastName
                 id="lastName"
                 label="Last Name">
-                <fdp-input [formControl]="lastName.formControl"></fdp-input>
+                <fdp-input [formControl]="lastName.formControl" name="lastName"></fdp-input>
             </fdp-form-field>
             <fdp-form-field #favoriteColor
                 id="favoriteColor"
                 label="Favorite Color">
-                <fdp-input [formControl]="favoriteColor.formControl"></fdp-input>
+                <fdp-input [formControl]="favoriteColor.formControl" name="favoriteColor"></fdp-input>
             </fdp-form-field>
             <fdp-form-group #addressGroup>
                 <fdp-form-field #street
                     id="street"
                     label="Street">
-                    <fdp-input [formControl]="street.formControl"></fdp-input>
+                    <fdp-input [formControl]="street.formControl" name="street"></fdp-input>
                 </fdp-form-field>
                 <fdp-form-field #lastName id="lastName" label="Last Name">
                     <fdp-input
@@ -223,6 +223,7 @@ describe('Simple Form', () => {
                     </fdp-form-field>
                 </fdp-form-group>
             </fdp-form-group>
+            </fdp-form-group>
             <button type="submit" #submitButton>Submit</button>
         </form>
     `
@@ -254,7 +255,7 @@ class NestedFormGroupsTestComponent {
     public result: any = null;
 
     onSubmit(): void {
-        this.result = this.userFormGroup.value;
+        this.result = this.userFormGroup.getRawValue();
     }
 }
 
