@@ -55,7 +55,7 @@ export class TokenComponent {
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
-    readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
+    readonly onCloseClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     /** Emitted when a token is clicked. */
     @Output()
