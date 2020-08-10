@@ -5,6 +5,8 @@ import * as toolbarTitleExampleHtml from '!raw-loader!./examples/toolbar-title-e
 import * as toolbarSpacerExampleHtml from '!raw-loader!./examples/toolbar-spacer-example.component.html';
 import * as toolbarSeparatorExampleHtml from '!raw-loader!./examples/toolbar-separator-example.component.html';
 import * as toolbarOverflowExampleHtml from '!raw-loader!./examples/toolbar-overflow-example.component.html';
+import * as toolbarOverflowPriorityExampleHtml from '!raw-loader!./examples/toolbar-overflow-priority-example.component.html';
+import * as toolbarOverflowGroupingExampleHtml from '!raw-loader!./examples/toolbar-overflow-grouping-example.component.html';
 import * as toolbarSizeExampleHtml from '!raw-loader!./examples/toolbar-size-example.component.html';
 
 @Component({
@@ -50,6 +52,22 @@ export class ToolbarDocsComponent {
             language: 'html',
             code: toolbarOverflowExampleHtml,
             fileName: 'toolbar-overflow-example'
+        }
+    ];
+
+    toolbarOverflowPriorityExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: toolbarOverflowPriorityExampleHtml,
+            fileName: 'toolbar-overflow-priority-example'
+        }
+    ];
+
+    toolbarOverflowGroupingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: toolbarOverflowGroupingExampleHtml,
+            fileName: 'toolbar-overflow-grouping-example'
         }
     ];
 

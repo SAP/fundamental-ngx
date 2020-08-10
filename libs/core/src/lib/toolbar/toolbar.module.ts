@@ -9,6 +9,8 @@ import { ToolbarSeparatorComponent } from './toolbar-separator.component';
 import { ToolbarSpacerComponent } from './toolbar-spacer.component';
 import { ToolbarLabelDirective } from './toolbar-label.directive';
 import { ToolbarFormLabelDirective } from './toolbar-form-label.directive';
+import { ToolbarOverflowPriorityDirective } from './toolbar-overflow-priority.directive';
+import { ToolbarOverflowGroupDirective } from './toolbar-overflow-group.directive';
 
 const components = [
     ToolbarComponent,
@@ -16,7 +18,9 @@ const components = [
     ToolbarSpacerComponent,
     ToolbarSeparatorComponent,
     ToolbarFormLabelDirective,
-    ToolbarLabelDirective
+    ToolbarLabelDirective,
+    ToolbarOverflowPriorityDirective,
+    ToolbarOverflowGroupDirective
 ];
 
 @NgModule({

@@ -23,6 +23,8 @@ import {
     ToolbarSpacerExampleComponent,
     ToolbarSeparatorExampleComponent,
     ToolbarOverflowExampleComponent,
+    ToolbarOverflowPriorityExampleComponent,
+    ToolbarOverflowGroupingExampleComponent,
     ToolbarSizeExampleComponent
 } from './examples/toolbar-example.component';
 
@@ -32,6 +34,8 @@ const examples = [
     ToolbarSpacerExampleComponent,
     ToolbarSeparatorExampleComponent,
     ToolbarOverflowExampleComponent,
+    ToolbarOverflowPriorityExampleComponent,
+    ToolbarOverflowGroupingExampleComponent,
     ToolbarSizeExampleComponent
 ];
 
