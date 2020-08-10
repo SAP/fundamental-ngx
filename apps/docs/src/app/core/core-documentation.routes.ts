@@ -83,11 +83,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
             },
             {
-                path: 'dropdown',
-                loadChildren: () =>
-                    import('./component-docs/dropdown/dropdown-docs.module').then((m) => m.DropdownDocsModule)
-            },
-            {
                 path: 'file-input',
                 loadChildren: () =>
                     import('./component-docs/file-input/file-input-docs.module').then((m) => m.FileInputDocsModule)
