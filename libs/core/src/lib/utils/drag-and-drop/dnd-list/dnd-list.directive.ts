@@ -33,11 +33,10 @@ export interface FdDropEvent<T> {
     selector: '[fd-dnd-list]'
 })
 export class DndListDirective<T> implements AfterContentInit, OnDestroy {
-    /** @hidden */
-    @ContentChildren(DndItemDirective)
-    dndItems: QueryList<DndItemDirective>;
-
-    /** Defines if the distance between elements should be counted only by vertical distance */
+    /**
+     * Defines if the the element is allowed to be dragged in 2 dimensions,
+     * replace indicator will be displayed vertically
+     */
     @Input()
     gridMode = false;
 
@@ -49,6 +48,13 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     @Input()
     items: Array<T>;
 
+    /** Defines if drag and drop feature should be enabled for list items */
+    @Input()
+    set draggable(draggable: boolean) {
+        this._draggable = draggable;
+        this._changeDraggableState(draggable);
+    }
+
     /** Event that is thrown, when the item is dropped */
     @Output()
     readonly itemsChange = new EventEmitter<Array<T>>();
@@ -56,6 +62,10 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     /** Event that is thrown, when the item is dropped */
     @Output()
     readonly itemDropped = new EventEmitter<FdDropEvent<T>>();
+
+    /** @hidden */
+    @ContentChildren(DndItemDirective)
+    dndItems: QueryList<DndItemDirective>;
 
     /** @hidden */
     private _elementsCoordinates: ElementChord[];
@@ -71,6 +81,12 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     private readonly _onDestroy$  = new Subject<void>();
+
+    /** @hidden  */
+    private _dndItemReference: DndItemDirective[];
+
+    /** @hidden */
+    private _draggable = true;
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -128,11 +144,12 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /** Method called, when element is started to be dragged */
     dragStart(index: number): void {
-        const draggedItemElement = this.dndItems.toArray()[index].element;
+        const draggedItemElement = this._dndItemReference[index].element;
         /** Counting all of the elements's chords */
-        this._elementsCoordinates = this.dndItems
-            .toArray()
-            .map((item) => item.getElementCoordinates(this._isBefore(draggedItemElement, item.element), this.gridMode));
+        this._elementsCoordinates = this._dndItemReference
+            .map((item: DndItemDirective) =>
+                item.getElementCoordinates(this._isBefore(draggedItemElement, item.element), this.gridMode)
+            );
     }
 
     /** Method called, when element is released */
@@ -184,13 +201,13 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     /** @hidden */
     private _createLine(closestItemIndex: number, linkPosition: LinkPosition): void {
         this._removeAllLines();
-        this.dndItems.toArray()[closestItemIndex].createLine(linkPosition, this.gridMode);
+        this._dndItemReference[closestItemIndex].createLine(linkPosition, this.gridMode);
     }
 
     /** @hidden */
     private _createReplacementIndicator(closestItemIndex: number): void {
         this._removeAllReplaceIndicators();
-        this.dndItems.toArray()[closestItemIndex].createReplaceIndicator();
+        this._dndItemReference[closestItemIndex].createReplaceIndicator();
     }
 
     /** @hidden */
@@ -200,6 +217,9 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             this._onDestroy$
         );
         this._refresh$.next();
+
+        this._dndItemReference = this.dndItems.toArray();
+
         this.dndItems.forEach((item, index) => {
             item.moved.pipe(takeUntil(refresh$)).subscribe((position: ElementPosition) => this.onMove(position, index));
             item.started.pipe(takeUntil(refresh$)).subscribe(() => this.dragStart(index));
@@ -229,5 +249,12 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             /** If elements are in same level, the horizontal position decides if it's before/after */
             return draggedElementBound.left - targetElementBound.left > 0;
         }
+    }
+
+    private _changeDraggableState(draggable: boolean): void {
+        this.dndItems.forEach(item => {
+            item.listDraggable = draggable;
+            item.changeCDKDragState();
+        })
     }
 }

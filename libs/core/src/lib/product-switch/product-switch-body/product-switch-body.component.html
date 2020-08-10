@@ -18,7 +18,7 @@
             class="fd-product-switch__item"
             [ngClass]="{ selected: product.selected }"
             (click)="itemClick(product, $event)"
-            [dndDisabled]="product.disabledDragAndDrop || !dragAndDropEnabled"
+            [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
             [stickInPlace]="product.stickToPosition">
             <div class="fd-product-switch__icon" [ngClass]="product.icon ? 'sap-icon--' + product.icon : ''">
                 <img *ngIf="product.image" [src]="product.image"/>

@@ -31,28 +31,48 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     @Output()
     readonly started = new EventEmitter<void>();
 
-    /** Whether this element should stick in one place, without changing position */
+    /**
+     *  Defines if the item is prevented from being moved by other elements.
+     * So nothing can be placed just before and just after it
+     */
     @Input()
     stickInPlace = false;
 
-    /** Defines if element is disabled from drag and drop */
+    /** Defines if element is draggable */
     @Input()
-    dndDisabled = false;
+    set draggable(draggable: boolean) {
+        this._draggable = draggable;
+        this.changeCDKDragState();
+    }
 
     /** Class added to element, when it's dragged. */
     @Input()
     classWhenElementDragged = 'fd-dnd-on-drag';
+
+    /** Defines if every element in list is draggable */
+    listDraggable = true;
 
     /** @hidden
      * Drag reference, object created from DND CDK Service
      */
     private _dragRef: DragRef;
 
+    /** @hidden */
+    private _draggable = true;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
     private _placeholderElement: HTMLElement;
+
+    /** @hidden */
     private _lineElement: HTMLElement;
+
+    /** @hidden */
     private _replaceIndicator: HTMLElement;
 
+    /** @hidden */
     constructor(public element: ElementRef, private _dragDrop: DragDrop) {}
 
     /** @hidden */
@@ -63,7 +83,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         const position: LinkPosition = isBefore ? 'before' : 'after';
 
         /** Depending on the position, gets the left or right side of element */
-        const x = rect.left + (isBefore || gridMode ? this.element.nativeElement.offsetWidth : 0);
+        const x = rect.left + ((isBefore && gridMode) ? this.element.nativeElement.offsetWidth : 0);
 
         /** Vertically distance is counted by distance from top of the side + half of the element height */
         return {
@@ -76,9 +96,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (!this.dndDisabled) {
-            this._setCDKDrag();
-        }
+        this._setCDKDrag();
     }
 
     /** @hidden */
@@ -171,6 +189,13 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
+    changeCDKDragState(): void {
+        if (this._dragRef) {
+            this._dragRef.disabled = !(this._draggable || this.listDraggable);
+        }
+    }
+
+    /** @hidden */
     private createPlaceHolder(): void {
         /** Cloning container element */
         const clone = this.element.nativeElement.cloneNode(true);
@@ -216,6 +241,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     private _setCDKDrag(): void {
         this._dragRef = this._dragDrop.createDrag(this.element);
+        this._dragRef.disabled = !this._draggable;
         this._subscriptions.add(
             this._dragRef.moved.subscribe(event => this.onCdkMove(event.pointerPosition))
         );
