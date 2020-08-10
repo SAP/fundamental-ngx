@@ -9,12 +9,15 @@ import {
     ViewChild,
     ViewEncapsulation,
     HostListener,
-    AfterViewChecked, OnInit, AfterViewInit
+    AfterViewChecked,
+    OnInit,
+    AfterViewInit
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { BaseInput } from '../base.input';
-import { FormFieldControl, Status } from '../form-control';
+import { FormFieldControl, Status, ContentDensity } from '../form-control';
 import { DELETE, BACKSPACE } from '@angular/cdk/keycodes';
+import { TextAreaConfig } from './text-area.config';
 
 const VALID_WRAP_TYPES = ['hard', 'soft', 'off'];
 
@@ -39,6 +42,15 @@ export type WrapType = 'hard' | 'soft' | 'off';
     ]
 })
 export class TextAreaComponent extends BaseInput implements AfterViewChecked, OnInit, AfterViewInit {
+    /**
+     * content Density of element. 'cozy' | 'compact'
+     */
+    @Input()
+    set contentDensity(contentDensity: ContentDensity) {
+        this._contentDensity = contentDensity;
+        this.isCompact = contentDensity === 'compact';
+    }
+
     /**
      * The height to which the textarea will grow when `growing` is set.
      */
@@ -122,6 +134,15 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     }
 
     /** @hidden */
+    _contentDensity = this._textAreaConfig.contentDensity;
+
+    /**
+     * @hidden
+     * Whether "contentDensity" is "compact"
+     */
+    isCompact: boolean = this._contentDensity === 'compact';
+
+    /** @hidden */
     @ViewChild('textareaElement')
     textareaElement: ElementRef;
 
@@ -149,6 +170,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     private readonly excessText = 'excess';
 
     constructor(
+        protected _textAreaConfig: TextAreaConfig,
         protected _cd: ChangeDetectorRef,
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @Self() public ngForm: NgForm
