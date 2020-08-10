@@ -15,7 +15,13 @@
                         checkboxValue: checkbox.checkboxValue,
                         contentDensity: contentDensity,
                         labeltext: checkbox.label,
-                        disabled: disabled || checkbox.disabled
+                        disabled: disabled || checkbox.disabled,
+                        ariabLabel: checkbox.ariaLabel,
+                        ariabLabelledby: checkbox.ariaLabelledby,
+                        ariabDescribedby: checkbox.ariaDescribedby,
+                        ariaDisabled: checkbox.ariaDisabled,
+                        tabIndex: checkbox.tabIndex,
+                        title: checkbox.title
                     }
                 "
             >
@@ -54,12 +60,24 @@
     let-contentDensity="contentDensity"
     let-labeltext="labeltext"
     let-checkboxDisabled="disabled"
+    let-ariabLabel="ariabLabel"
+    let-ariabLabelledby="ariabLabelledby"
+    let-ariabDescribedby="ariabDescribedby"
+    let-ariaDisabled="ariaDisabled"
+    let-tabIndex="tabIndex"
+    let-title="title"
 >
     <fdp-checkbox
         [id]="id"
         [name]="name"
         [value]="checkboxValue"
         [label]="labeltext"
+        [aria-label]="ariabLabel"
+        [aria-labelledby]="ariabLabelledby"
+        [aria-describedby]="ariabDescribedby"
+        [aria-disabled]="ariaDisabled"
+        [tabIndex]="tabIndex"
+        [title]="title"
         [contentDensity]="contentDensity"
         [disabled]="checkboxDisabled"
         [stateType]="status"

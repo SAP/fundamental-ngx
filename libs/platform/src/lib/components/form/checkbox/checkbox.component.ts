@@ -84,7 +84,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      * Includes the checkbox in the page tab sequence.
      */
     @Input()
-    tabIndex = 0;
+    tabIndex: string;
 
     /** set to true if binary checkbox */
     @Input()
