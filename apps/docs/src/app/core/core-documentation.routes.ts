@@ -236,13 +236,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/radio/radio-docs.module').then((m) => m.RadioDocsModule)
             },
             {
-                path: 'select-native',
-                loadChildren: () =>
-                    import('./component-docs/select-native/select-native-docs.module').then(
-                        (m) => m.SelectNativeDocsModule
-                    )
-            },
-            {
                 path: 'scroll-spy',
                 loadChildren: () =>
                     import('./component-docs/scroll-spy/scroll-spy-docs.module').then((m) => m.ScrollSpyDocsModules)
