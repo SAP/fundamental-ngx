@@ -12,7 +12,6 @@ import { ImageDocsComponent } from './image/image-docs.component';
 import { PaginationDocsComponent } from './pagination/pagination-docs.component';
 import { ListDocsComponent } from './list/list-docs.component';
 import { TabsDocsComponent } from './tabs/tabs-docs.component';
-import { DropdownDocsComponent } from './dropdown/dropdown-docs.component';
 import { TreeDocsComponent } from './tree/tree-docs.component';
 import { DialogDocsComponent } from './dialog/dialog-docs.component';
 import { MessageStripDocsComponent } from './message-strip/message-strip-docs.component';
