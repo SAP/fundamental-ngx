@@ -63,7 +63,13 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
      * Includes the checkbox in the page tab sequence.
      */
     @Input()
-    tabIndex = -1;
+    get tabIndex(): number {
+        return this._tabIndex;
+    }
+
+    set tabIndex(tabindex: number) {
+        this._tabIndex = tabindex;
+    }
 
     /** Whether to apply compact mode to the radio button.
      * Value: true or false
@@ -126,6 +132,9 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
 
     /** @hidden */
     currentValue: any;
+
+    /** @hidden */
+    _tabIndex: number;
 
     /** @hidden */
     constructor(private changeDetectionRef: ChangeDetectorRef) {}

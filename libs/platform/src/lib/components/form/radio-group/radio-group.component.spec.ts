@@ -86,21 +86,21 @@ describe('RadioGroupComponent', () => {
         await wait(fixture);
         expect(host.customForm.get('example1').value).toEqual('Spring');
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[0].nativeElement.click();
+        fdradiobuttonsLabels[0].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example1').value).toEqual('Winter');
 
-        fdradiobuttonsElem[1].nativeElement.click();
+        fdradiobuttonsLabels[1].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example1').value).toEqual('Spring');
 
-        fdradiobuttonsElem[2].nativeElement.click();
+        fdradiobuttonsLabels[2].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example1').value).toEqual('Summer');
 
-        fdradiobuttonsElem[3].nativeElement.click();
+        fdradiobuttonsLabels[3].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example1').value).toEqual('Autumn');
     });
@@ -206,21 +206,21 @@ describe('GroupRadioButtonComponent', () => {
 
         expect(host.favoriteSeason).toEqual('Spring');
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[0].nativeElement.click();
+        fdradiobuttonsLabels[0].nativeElement.click();
         fixture.detectChanges();
         expect(host.favoriteSeason).toEqual('Winter');
 
-        fdradiobuttonsElem[1].nativeElement.click();
+        fdradiobuttonsLabels[1].nativeElement.click();
         fixture.detectChanges();
         expect(host.favoriteSeason).toEqual('Spring');
 
-        fdradiobuttonsElem[2].nativeElement.click();
+        fdradiobuttonsLabels[2].nativeElement.click();
         fixture.detectChanges();
         expect(host.favoriteSeason).toEqual('Summer');
 
-        fdradiobuttonsElem[3].nativeElement.click();
+        fdradiobuttonsLabels[3].nativeElement.click();
         fixture.detectChanges();
         expect(host.favoriteSeason).toEqual('Autumn');
     });
@@ -344,29 +344,29 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
         // pre-selection based on formcontrol value inside formGroup
         expect(component.form1.controls.sizeOrdered.value).toEqual('5');
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[0].nativeElement.click();
+        fdradiobuttonsLabels[0].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.pizzaBrand.value).toEqual('Dominos');
 
-        fdradiobuttonsElem[1].nativeElement.click();
+        fdradiobuttonsLabels[1].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.pizzaBrand.value).toEqual('Pizza Hut');
 
-        fdradiobuttonsElem[2].nativeElement.click();
+        fdradiobuttonsLabels[2].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.pizzaBrand.value).toEqual('Papa Johns');
 
-        fdradiobuttonsElem[3].nativeElement.click();
+        fdradiobuttonsLabels[3].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.sizeOrdered.value).toEqual('5');
 
-        fdradiobuttonsElem[4].nativeElement.click();
+        fdradiobuttonsLabels[4].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.sizeOrdered.value).toEqual('8');
 
-        fdradiobuttonsElem[5].nativeElement.click();
+        fdradiobuttonsLabels[5].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.sizeOrdered.value).toEqual('12');
     });
@@ -375,18 +375,18 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[6].nativeElement.click();
+        fdradiobuttonsLabels[6].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.deliver.value).toEqual('home');
 
-        fdradiobuttonsElem[7].nativeElement.click();
+        fdradiobuttonsLabels[7].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.deliver.value).toEqual('office');
 
         // disabled radio
-        fdradiobuttonsElem[8].nativeElement.click();
+        fdradiobuttonsLabels[8].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.deliver.value).toEqual('office');
     });
@@ -395,25 +395,25 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[9].nativeElement.click();
+        fdradiobuttonsLabels[9].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.payment.value).toEqual('citi debit');
 
-        fdradiobuttonsElem[10].nativeElement.click();
+        fdradiobuttonsLabels[10].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.payment.value).toEqual('hdfc debit');
 
-        fdradiobuttonsElem[11].nativeElement.click();
+        fdradiobuttonsLabels[11].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.payment.value).toEqual('icici credit');
 
-        fdradiobuttonsElem[12].nativeElement.click();
+        fdradiobuttonsLabels[12].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.payment.value).toEqual('paytm wallet');
 
-        fdradiobuttonsElem[13].nativeElement.click();
+        fdradiobuttonsLabels[13].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.payment.value).toEqual('cod');
     });
@@ -424,21 +424,21 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
 
         expect(component.form1.controls.season.value).toEqual('winter');
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[14].nativeElement.click();
+        fdradiobuttonsLabels[14].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.season.value).toEqual('winter');
 
-        fdradiobuttonsElem[15].nativeElement.click();
+        fdradiobuttonsLabels[15].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.season.value).toEqual('spring');
 
-        fdradiobuttonsElem[16].nativeElement.click();
+        fdradiobuttonsLabels[16].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.season.value).toEqual('summer');
 
-        fdradiobuttonsElem[17].nativeElement.click();
+        fdradiobuttonsLabels[17].nativeElement.click();
         fixture.detectChanges();
         expect(component.form1.controls.season.value).toEqual('autumn');
     });
@@ -577,29 +577,45 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
         expect(component.favPizzaBrand).toEqual('Pizza Hut');
         expect(component.sizeOrdered).toEqual('5');
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const inputElem = fixture.debugElement.queryAll(By.css('input'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[0].nativeElement.click();
+        fdradiobuttonsLabels[0].nativeElement.click();
         fixture.detectChanges();
         expect(component.favPizzaBrand).toEqual('Dominos');
+        expect(inputElem[0].nativeElement.getAttribute('aria-checked')).toEqual('true');
+        expect(inputElem[0].nativeElement.getAttribute('tabIndex')).toEqual('0');
 
-        fdradiobuttonsElem[1].nativeElement.click();
+        expect(inputElem[1].nativeElement.getAttribute('aria-checked')).toEqual('false');
+        expect(inputElem[1].nativeElement.getAttribute('tabIndex')).toEqual('-1');
+        expect(inputElem[2].nativeElement.getAttribute('aria-checked')).toEqual('false');
+        expect(inputElem[2].nativeElement.getAttribute('tabIndex')).toEqual('-1');
+
+        fdradiobuttonsLabels[1].nativeElement.click();
+        await wait(fixture);
         fixture.detectChanges();
         expect(component.favPizzaBrand).toEqual('Pizza Hut');
+        expect(inputElem[0].nativeElement.getAttribute('aria-checked')).toEqual('false');
+        expect(inputElem[0].nativeElement.getAttribute('tabIndex')).toEqual('-1');
 
-        fdradiobuttonsElem[2].nativeElement.click();
+        expect(inputElem[1].nativeElement.getAttribute('aria-checked')).toEqual('true');
+        expect(inputElem[1].nativeElement.getAttribute('tabIndex')).toEqual('0');
+        expect(inputElem[2].nativeElement.getAttribute('aria-checked')).toEqual('false');
+        expect(inputElem[2].nativeElement.getAttribute('tabIndex')).toEqual('-1');
+
+        fdradiobuttonsLabels[2].nativeElement.click();
         fixture.detectChanges();
         expect(component.favPizzaBrand).toEqual('Papa Johns');
 
-        fdradiobuttonsElem[3].nativeElement.click();
+        fdradiobuttonsLabels[3].nativeElement.click();
         fixture.detectChanges();
         expect(component.sizeOrdered).toEqual('5');
 
-        fdradiobuttonsElem[4].nativeElement.click();
+        fdradiobuttonsLabels[4].nativeElement.click();
         fixture.detectChanges();
         expect(component.sizeOrdered).toEqual('8');
 
-        fdradiobuttonsElem[5].nativeElement.click();
+        fdradiobuttonsLabels[5].nativeElement.click();
         fixture.detectChanges();
         expect(component.sizeOrdered).toEqual('12');
     });
@@ -608,18 +624,18 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[6].nativeElement.click();
+        fdradiobuttonsLabels[6].nativeElement.click();
         fixture.detectChanges();
         expect(component.favDeliverMethod).toEqual('home');
 
-        fdradiobuttonsElem[7].nativeElement.click();
+        fdradiobuttonsLabels[7].nativeElement.click();
         fixture.detectChanges();
         expect(component.favDeliverMethod).toEqual('office');
 
         // disabled radio
-        fdradiobuttonsElem[8].nativeElement.click();
+        fdradiobuttonsLabels[8].nativeElement.click();
         fixture.detectChanges();
         expect(component.favDeliverMethod).toEqual('office');
     });
@@ -628,25 +644,25 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[9].nativeElement.click();
+        fdradiobuttonsLabels[9].nativeElement.click();
         fixture.detectChanges();
         expect(component.favPaymentMethod).toEqual('citi debit');
 
-        fdradiobuttonsElem[10].nativeElement.click();
+        fdradiobuttonsLabels[10].nativeElement.click();
         fixture.detectChanges();
         expect(component.favPaymentMethod).toEqual('hdfc debit');
 
-        fdradiobuttonsElem[11].nativeElement.click();
+        fdradiobuttonsLabels[11].nativeElement.click();
         fixture.detectChanges();
         expect(component.favPaymentMethod).toEqual('icici credit');
 
-        fdradiobuttonsElem[12].nativeElement.click();
+        fdradiobuttonsLabels[12].nativeElement.click();
         fixture.detectChanges();
         expect(component.favPaymentMethod).toEqual('paytm wallet');
 
-        fdradiobuttonsElem[13].nativeElement.click();
+        fdradiobuttonsLabels[13].nativeElement.click();
         fixture.detectChanges();
         expect(component.favPaymentMethod).toEqual('cod');
     });
@@ -657,21 +673,21 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
 
         expect(component.favSeason).toEqual('winter');
 
-        const fdradiobuttonsElem = fixture.debugElement.queryAll(By.css('fd-radio-button'));
+        const fdradiobuttonsLabels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
 
-        fdradiobuttonsElem[14].nativeElement.click();
+        fdradiobuttonsLabels[14].nativeElement.click();
         fixture.detectChanges();
         expect(component.favSeason).toEqual('winter');
 
-        fdradiobuttonsElem[15].nativeElement.click();
+        fdradiobuttonsLabels[15].nativeElement.click();
         fixture.detectChanges();
         expect(component.favSeason).toEqual('spring');
 
-        fdradiobuttonsElem[16].nativeElement.click();
+        fdradiobuttonsLabels[16].nativeElement.click();
         fixture.detectChanges();
         expect(component.favSeason).toEqual('summer');
 
-        fdradiobuttonsElem[17].nativeElement.click();
+        fdradiobuttonsLabels[17].nativeElement.click();
         fixture.detectChanges();
         expect(component.favSeason).toEqual('autumn');
     });

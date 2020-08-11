@@ -15,7 +15,12 @@
                             name: name,
                             value: radio.value,
                             contentDensity: contentDensity,
-                            disabled: disabled || radio.disabled
+                            disabled: disabled || radio.disabled,
+                            ariabLabel: radio.ariaLabel,
+                            ariabLabelledby: radio.ariaLabelledby,
+                            ariabDescribedby: radio.ariaDescribedby,
+                            ariaDisabled: radio.ariaDisabled,
+                            title: radio.title
                         }
                     "
                 ></ng-container>

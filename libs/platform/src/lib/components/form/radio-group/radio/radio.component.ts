@@ -126,7 +126,9 @@ export class RadioButtonComponent extends BaseInput implements FocusableOption {
     }
 
     public focus(): void {
-        this.coreRadioButton.elementRef().nativeElement.focus();
+        if (this.coreRadioButton) {
+            this.coreRadioButton.elementRef().nativeElement.focus();
+        }
     }
 
     /**

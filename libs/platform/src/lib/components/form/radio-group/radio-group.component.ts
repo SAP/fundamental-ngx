@@ -211,6 +211,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     private _initContentRadioButtons(): void {
         if (this.contentRadioButtons && this.contentRadioButtons.length > 0) {
             let firstEnabledButtonIndex = -1;
+            this.keyboardEventsManager = new FocusKeyManager(this.contentRadioButtons).withWrap();
 
             this.contentRadioButtons.forEach((button, i) => {
                 this._setProperties(button);
@@ -227,7 +228,6 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
             if (!this._selected && this.contentRadioButtons && firstEnabledButtonIndex > -1) {
                 this.contentRadioButtons.toArray()[firstEnabledButtonIndex].tabIndex = 0;
             }
-            this.keyboardEventsManager = new FocusKeyManager(this.contentRadioButtons).withWrap();
         }
     }
 
@@ -237,6 +237,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     private _initViewRadioButtons(): void {
         if (this.viewRadioButtons && this.viewRadioButtons.length > 0) {
             let firstEnabledButtonIndex = -1;
+            this.keyboardEventsManager = new FocusKeyManager(this.viewRadioButtons).withWrap();
 
             this.viewRadioButtons.forEach((button, i) => {
                 button.status = this.status;
@@ -252,7 +253,6 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
             if (!this._selected && this.viewRadioButtons && firstEnabledButtonIndex > -1) {
                 this.viewRadioButtons.toArray()[firstEnabledButtonIndex].tabIndex = 0;
             }
-            this.keyboardEventsManager = new FocusKeyManager(this.viewRadioButtons).withWrap();
         }
     }
 
@@ -268,6 +268,9 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
             }
             if (!button.ischecked()) {
                 button.select();
+                if (this.keyboardEventsManager) {
+                    this.keyboardEventsManager.setActiveItem(button);
+                }
             }
         }
     }
@@ -278,6 +281,9 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
             if (this._selected) {
                 this._selected.unselect();
                 this._selected.tabIndex = -1;
+            }
+            if (this.keyboardEventsManager) {
+                this.keyboardEventsManager.setActiveItem(button);
             }
             this._selected = button;
         }
