@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, ValidatorFn, Validators, FormControl } from '@angular/forms';
+import { ValidatorFn, Validators } from '@angular/forms';
 
 const MAX_VALUE = 20;
 const MIN_VALUE = 10;

@@ -307,11 +307,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this._updateViewValue();
     }
 
-    /** @hidden */
-    markForCheck(): void {
-        this._cd.markForCheck();
-    }
-
     /** Create valueChange event */
     abstract createChangeEvent(value: number): StepInputChangeEvent;
 
