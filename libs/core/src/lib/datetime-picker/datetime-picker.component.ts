@@ -515,13 +515,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     private _activateTimeComponent(): void {
         this.popover.directiveRef.loaded
             .pipe(
-                filter(() => !this.timeComponent.activeView),
                 first(),
                 takeUntil(this._onDestroy$),
                 delay(0)
             )
             .subscribe(() => {
+              if (!this.timeComponent.activeView) {
                 this.timeComponent.changeActive('hour');
+              }
                 this.timeComponent.refreshTime();
             });
     }
