@@ -126,21 +126,25 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     ctrlKeyPressed = false;
 
     /** @hidden */
-    private firstElement: number;
+    /*Variable which will keep the index of the first token pressed in the tokenizer*/
+    private _firstElementInSelection: number;
 
     /** @hidden */
-    private lastElement: number;
+    /*Variable which will keep the index of the last token pressed in the tokenizer*/
+    private _lastElementInSelection: number;
 
     /** @hidden */
-    private ctrlPrevious: boolean;
+    /*Flag which will say if the last keyboard and click operation they used was using control*/
+    private _ctrlPrevious: boolean;
 
     /** @hidden */
-    private directionRight: boolean;
+    /*Flag which will say if they held shift and clicked highlighting elements before or*/
+    private _directionShiftIsRight: boolean;
 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.input && this.input.elementRef()) {
-            this.inputKeydownEvent();
+            this._inputKeydownEvent();
             this.tokenizerKeyupEvent();
         }
     }
@@ -225,15 +229,12 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
                 event.stopPropagation();
                 this.focusTokenElement(index);
-                 if (this.ctrlKeyPressed) {
-                this.ctrlPrevious = true;
-                this.ctrlSelected(token, index);
-                } else if (!this.ctrlKeyPressed && !this.shiftKeyPressed  || this.ctrlPrevious) {
-                  this.basicSelected(token, index);
-                  this.ctrlPrevious = false;
+                if (this.ctrlKeyPressed) {
+                this._ctrlSelected(token, index);
+                } else if (!this.ctrlKeyPressed && !this.shiftKeyPressed  || this._ctrlPrevious) {
+                  this._basicSelected(token, index);
                 } else if (this.shiftKeyPressed) {
-                  this.shiftSelected(index);
-                  this.ctrlPrevious = false;
+                  this._shiftSelected(index);
                 }
             }));
         });
@@ -516,7 +517,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         }
     }
 
-    private inputKeydownEvent(): void {
+    private _inputKeydownEvent(): void {
       this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
         this.handleKeyDown(event, this.tokenList.length);
       });
@@ -528,69 +529,83 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
       });
     }
 
-    private basicSelected(token, index): void {
+    /** @hidden */
+    /*
+    *Method which handles what happens to token when it is clicked and no key is being held down.
+    */
+    private _basicSelected(token, index): void {
       this.tokenList.forEach(shadowedToken => {
         if (shadowedToken !== token) {
             shadowedToken.selected = false;
         }
     });
-    this.firstElement = index;
-    this.lastElement = index;
-    token.selected = true;
+      this._firstElementInSelection = index;
+      this._lastElementInSelection = index;
+      token.selected = true;
+      this._ctrlPrevious = false;
     }
 
-    private shiftSelected(index): void {
-
-      if (index < this.firstElement) {
-        this.directionRight = false;
-        this.firstElement = index;
-      } else if (index > this.lastElement) {
-        this.directionRight = true;
-        this.lastElement = index;
+    /** @hidden */
+    /*
+    *Method which handles what happens to token when it is clicked and the shift key is being held down.
+    */
+    private _shiftSelected(index): void {
+      if (index < this._firstElementInSelection) {
+        this._directionShiftIsRight = false;
+        this._firstElementInSelection = index;
+      } else if (index > this._lastElementInSelection) {
+        this._directionShiftIsRight = true;
+        this._lastElementInSelection = index;
       }
-      if (this.lastElement === this.firstElement) {
-        this.directionRight = null;
+      if (this._lastElementInSelection === this._firstElementInSelection) {
+        this._directionShiftIsRight = null;
       }
-      if (!this.directionRight) {
-        this.firstElement = index;
-      } else if (this.directionRight) {
-        this.lastElement = index;
+      if (!this._directionShiftIsRight) {
+        this._firstElementInSelection = index;
+      } else if (this._directionShiftIsRight) {
+        this._lastElementInSelection = index;
       }
 
       this.tokenList.forEach((token, indexOfToken) => {
-        if (indexOfToken >= this.firstElement && indexOfToken <= this.lastElement) {
+        if (indexOfToken >= this._firstElementInSelection && indexOfToken <= this._lastElementInSelection) {
           token.selected = true;
         } else {
           token.selected = false;
         }
       });
+      this._ctrlPrevious = false;
     }
 
-    private ctrlSelected(token, index): void {
-      this.firstElement = null;
-      this.lastElement = null;
+    /** @hidden */
+    /*
+    *Method which handles what happens to token when it is clicked and the control or meta key is being held down.
+    */
+    private _ctrlSelected(token, index): void {
+      this._firstElementInSelection = null;
+      this._lastElementInSelection = null;
       const selected = token.selected;
       token.selected = true;
-      if (index < this.firstElement) {
-        this.firstElement = index;
-      } else if (index < this.lastElement) {
-        this.lastElement = index;
+      if (index < this._firstElementInSelection) {
+        this._firstElementInSelection = index;
+      } else if (index < this._lastElementInSelection) {
+        this._lastElementInSelection = index;
       }
       if (selected) {
         token.selected = false;
         this.tokenList.forEach((element, indexOfToken) => {
-          if (!this.firstElement) {
-            if (element.selected) {this.firstElement = indexOfToken}
+          if (!this._firstElementInSelection) {
+            if (element.selected) {this._firstElementInSelection = indexOfToken}
           } else {
-            this.lastElement = indexOfToken;
+            this._lastElementInSelection = indexOfToken;
           }
         });
-        if (index === this.lastElement) {
-          this.lastElement = this.lastElement - 1;
+        if (index === this._lastElementInSelection) {
+          this._lastElementInSelection = this._lastElementInSelection - 1;
         }
-        if (index === this.firstElement) {
-          this.firstElement = this.firstElement - 1;
+        if (index === this._firstElementInSelection) {
+          this._firstElementInSelection = this._firstElementInSelection - 1;
         }
       }
+      this._ctrlPrevious = true;
     }
 }
