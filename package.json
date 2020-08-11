@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.21.0-rc.3",
+  "version": "0.21.0-rc.6",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library.",
@@ -110,13 +110,13 @@
     "popper.js": "1.16.1",
     "raw-loader": "4.0.1",
     "rxjs": "6.6.2",
-    "tslib": "2.0.0",
+    "tslib": "2.0.1",
     "web-animations-js": "2.3.2",
     "zone.js": "0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.4",
-    "@angular-devkit/build-ng-packagr": "~0.1000.4",
+    "@angular-devkit/build-ng-packagr": "~0.1000.5",
     "@angular-devkit/core": "~10.0.4",
     "@angular/cli": "~10.0.5",
     "@angular/compiler-cli": "~10.0.5",
@@ -162,7 +162,7 @@
     "standard-version": "8.0.2",
     "ts-node": "8.10.2",
     "tslint": "6.1.2",
-    "typedoc": "0.17.8",
+    "typedoc": "0.18.0",
     "typescript": "3.9.7"
   },
   "pre-commit": {
