@@ -102,11 +102,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/icon/icon-docs.module').then((m) => m.IconDocsModule)
             },
             {
-                path: 'identifier',
-                loadChildren: () =>
-                    import('./component-docs/identifier/identifier-docs.module').then((m) => m.IdentifierDocsModule)
-            },
-            {
                 path: 'info-label',
                 loadChildren: () =>
                     import('./component-docs/info-label/info-label-docs.module').then((m) => m.InfoLabelDocsModule)
