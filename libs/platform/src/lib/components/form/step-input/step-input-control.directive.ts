@@ -25,7 +25,6 @@ export class StepInputControlDirective {
         }
         const value: string = ((event.target as HTMLInputElement).value || '').trim();
         this.stepInput.commitEnteredValue(value);
-        this.stepInput.detectChanges();
     }
 
     /**
@@ -35,7 +34,6 @@ export class StepInputControlDirective {
     @HostListener('focus')
     onFocus(): void {
         this.stepInput.onFocus();
-        this.stepInput.detectChanges();
     }
 
     /**
@@ -45,7 +43,6 @@ export class StepInputControlDirective {
     @HostListener('blur')
     onBlur(): void {
         this.stepInput.onBlur();
-        this.stepInput.detectChanges();
     }
 
     /**

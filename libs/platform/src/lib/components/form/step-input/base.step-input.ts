@@ -308,8 +308,8 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    detectChanges(): void {
-        this._cd.detectChanges();
+    markForCheck(): void {
+        this._cd.markForCheck();
     }
 
     /** Create valueChange event */
@@ -361,7 +361,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
             )
             .subscribe((align) => {
                 this._align = align;
-                this.detectChanges();
+                this._cd.markForCheck();
             });
     }
 
@@ -370,7 +370,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         const value = this._value;
         this.lastEmittedValue = value;
         this.valueChange.emit(this.createChangeEvent(value));
-        this.onChange(value);
     }
 
     /** @hidden */

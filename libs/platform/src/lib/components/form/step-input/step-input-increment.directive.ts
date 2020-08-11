@@ -33,7 +33,6 @@ export class StepInputIncrementDirective {
 
         this._streamUntilMouseUp$.pipe(startWith(null)).subscribe(() => {
             this.stepInput.increase();
-            this.stepInput.detectChanges();
         });
     }
 }

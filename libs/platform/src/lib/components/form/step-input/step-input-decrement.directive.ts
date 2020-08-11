@@ -29,7 +29,6 @@ export class StepInputDecrementDirective {
 
         this._streamUntilMouseUp$.pipe(startWith(null)).subscribe(() => {
             this.stepInput.decrease();
-            this.stepInput.detectChanges();
         });
     }
 }

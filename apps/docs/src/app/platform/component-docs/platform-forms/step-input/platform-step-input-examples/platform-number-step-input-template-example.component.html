@@ -1,8 +1,7 @@
 <main class="fd-page">
     <div class="fd-page__content fd-has-background-color-neutral-2">
-        <fdp-form-group #formGroup [multiLayout]="true">
+        <fdp-form-group [multiLayout]="true">
             <fdp-form-field
-                #formField
                 id="number"
                 label="Quantity"
                 placeholder="Things quantity"
@@ -10,7 +9,6 @@
                 zone="zLeft"
                 rank="10"
                 hintPlacement="left"
-                [required]="true"
                 [validators]="stepInputQtyValidators"
             >
                 <fdp-number-step-input name="qty" [(ngModel)]="qty"></fdp-number-step-input>
