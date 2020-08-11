@@ -1,11 +1,13 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ObjectStatus } from '@fundamental-ngx/core';
 
 export type IndicationColorType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 @Component({
     selector: 'fdp-object-status',
-    templateUrl: './object-status.component.html'
+    templateUrl: './object-status.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObjectStatusComponent {
     /**

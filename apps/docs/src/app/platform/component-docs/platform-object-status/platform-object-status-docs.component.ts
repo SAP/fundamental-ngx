@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 import * as PlatformObjectStatusDefaultExample from '!raw-loader!./platform-object-status-example/platform-object-status-example.component.html';
@@ -12,7 +12,9 @@ import * as PlatformObjectStatusLargeExample from '!raw-loader!./platform-object
 
 @Component({
     selector: 'fdp-platform-object-status-docs',
-    templateUrl: './platform-object-status-docs.component.html'
+    templateUrl: './platform-object-status-docs.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformObjectStatusDocsComponent {
     platformDefaultObjectStatusHtmlType: ExampleFile[] = [
