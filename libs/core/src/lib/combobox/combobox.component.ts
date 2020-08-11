@@ -147,7 +147,6 @@ export class ComboboxComponent
     highlighting: boolean = true;
 
     /** Whether the matching string should be highlighted after combobox value is selected. */
-    @Input()
     filterHighlight: boolean = true;
 
     /** Whether the popover should close when a user selects a result. */

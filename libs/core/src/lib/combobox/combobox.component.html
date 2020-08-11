@@ -23,7 +23,7 @@
 <ng-template let-term="term" #itemSource>
     <span
         *ngIf="!itemTemplate"
-        [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting:filterHighlight"
+        [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting && filterHighlight"
     >
     </span>
     <ng-container *ngIf="itemTemplate">
