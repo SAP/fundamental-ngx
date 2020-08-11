@@ -71,7 +71,7 @@ export class DatetimePickerComplexI18nExampleComponent {
 
     selectedLocale = 'en-ca';
 
-    actualFormat = 'mm/dd/yyyy, hh:mm a';
+    actualFormat = 'MM/dd/yyyy, h:mm a';
 
     actualMomentJsLang = '';
 
@@ -80,6 +80,7 @@ export class DatetimePickerComplexI18nExampleComponent {
     public date: FdDatetime = FdDatetime.getToday();
 
     public refresh(): void {
+      console.log(this.date);
         this.datetimePickerComponent.locale = this.actualLocale;
         this.datetimePickerComponent.format = this.actualFormat;
         this.placeholder = placeholders.get(this.actualLocale);
@@ -93,10 +94,10 @@ export class DatetimePickerComplexI18nExampleComponent {
       this.actualLocale = locale;
       moment.locale(locale);
       if (moment().format('LT').includes('AM') || moment().format('LT').includes('PM')) {
-        this.actualFormat = 'mm/dd/yyyy, hh:mm a';
+        this.actualFormat = 'MM/dd/yyyy, h:mm a';
         this.meridian = true;
       } else {
-        this.actualFormat = 'mm/dd/yyyy, hh:mm';
+        this.actualFormat = 'MM/dd/yyyy, H:mm';
         this.meridian = false;
       }
       this.refresh();

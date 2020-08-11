@@ -84,7 +84,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
-    format = 'MM/dd/yyyy, HH:mm:ss';
+    format = 'MM/dd/yyyy, HH:mm:ss a';
 
     /** Locale for date pipe. See more https://angular.io/guide/i18n */
     @Input()
