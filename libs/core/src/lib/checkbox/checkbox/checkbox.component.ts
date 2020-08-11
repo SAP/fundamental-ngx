@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
-import { compareObjects } from '../../utils/public_api';
+import { compareObjects, KeyUtil } from '../../utils/public_api';
 
 let checkboxUniqueId = 0;
 
@@ -123,6 +123,8 @@ export class CheckboxComponent implements ControlValueAccessor {
     public checkboxValue: any;
     /** Stores current checkbox state. */
     public checkboxState: fdCheckboxTypes;
+    /** Returns checkbox state for aria-checked attribute. */
+    public ariaChecked: 'true' | 'false' | 'mixed';
     /** @hidden */
     private _previousState: fdCheckboxTypes;
 
@@ -222,25 +224,17 @@ export class CheckboxComponent implements ControlValueAccessor {
         this._detectChanges();
     }
 
-    /**
-     * returns mixed for indeterminate checkbox on third state.
-     */
-    _getAriaChecked(): 'true' | 'false' | 'mixed' {
-        if (this.isChecked) {
-            return 'true';
-        }
-
-        return this.tristate ? 'mixed' : 'false';
-    }
-
     /** @hidden Based on current control value sets new control state. */
     private _setState(): void {
         if (this._compare(this.checkboxValue, this.values.trueValue)) {
             this.checkboxState = 'checked';
+            this.ariaChecked = 'true';
         } else if (this._compare(this.checkboxValue, this.values.falseValue)) {
             this.checkboxState = 'unchecked';
+            this.ariaChecked = 'false';
         } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
+            this.ariaChecked = 'mixed';
         }
         this._previousState = this.checkboxState;
     }
@@ -279,12 +273,12 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Determines event source based on key code */
     private _isSpaceBarEvent(event: KeyboardEvent): boolean {
-        return event.keyCode === 32;
+        return KeyUtil.isKey(event, ' ');
     }
 
     /** @hidden Determines event source based on key code */
     private _isEnterKeyEvent(event: KeyboardEvent): boolean {
-        return event.keyCode === 13;
+        return KeyUtil.isKey(event, 'Enter');
     }
 
     /** Method to trigger change detection in component */
