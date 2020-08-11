@@ -31,6 +31,7 @@ class TestRadioButtonComponentReactiveForms {
     });
 }
 
+// look here
 describe('RadioButtonComponent reactive forms', () => {
     let component: TestRadioButtonComponentReactiveForms;
     let fixture: ComponentFixture<TestRadioButtonComponentReactiveForms>;
@@ -68,7 +69,7 @@ describe('RadioButtonComponent reactive forms', () => {
     it('should check second radio', async () => {
       await fixture.whenStable();
       component.radioButton2.inputElement.nativeElement.click();
-      fixture.detectChanges();
+      await fixture.detectChanges();
       expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
       expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
     });

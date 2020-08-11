@@ -57,6 +57,7 @@ describe('RadioButtonComponent', () => {
         expect(component.radioButton1.value).toEqual(1);
     });
 
+    // not working
     it('should check second radio', () => {
         component.radioButton2.valueChange(2);
 
