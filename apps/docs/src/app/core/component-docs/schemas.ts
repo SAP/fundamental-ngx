@@ -5,7 +5,6 @@ import { ButtonDocsComponent } from './button/button-docs.component';
 import { SegmentedButtonDocsComponent } from './segmented-button/segmented-button-docs.component';
 import { AlertDocsComponent } from './alert/alert-docs.component';
 import { IconDocsComponent } from './icon/icon-docs.component';
-import { IdentifierDocsComponent } from './identifier/identifier-docs.component';
 import { InlineHelpDocsComponent } from './inline-help/inline-help-docs.component';
 import { InputGroupDocsComponent } from './input-group/input-group-docs.component';
 import { PaginationDocsComponent } from './pagination/pagination-docs.component';
@@ -24,7 +23,6 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     segmentedButton: SegmentedButtonDocsComponent.schema,
     alert: AlertDocsComponent.schema,
     icon: IconDocsComponent.schema,
-    identifier: IdentifierDocsComponent.schema,
     inlineHelp: InlineHelpDocsComponent.schema,
     inputGroup: InputGroupDocsComponent.schema,
     pagination: PaginationDocsComponent.schema,
