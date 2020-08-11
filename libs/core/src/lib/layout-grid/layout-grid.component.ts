@@ -18,14 +18,14 @@ export class LayoutGridComponent extends AbstractFdNgxClass {
 
     /** Whether the grid should have a gap. */
     @Input()
-    nogap: boolean = false;
+    nogap = false;
 
     /** Whether the grid should have a gap. */
     @Input()
     gapSize: number;
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         this._addClassToElement('fd-layout-grid');
 
         if (this.nogap) {

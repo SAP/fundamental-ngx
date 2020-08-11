@@ -115,7 +115,7 @@ export class MenuService {
         }
     }
 
-    onDestroy() {
+    onDestroy(): void {
         this.removeKeyboardSupport();
     }
 

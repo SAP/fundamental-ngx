@@ -91,7 +91,7 @@ export class ComboboxComponent
 
     /** Icon to display in the right-side button. */
     @Input()
-    glyph: string = 'navigation-down-arrow';
+    glyph = 'navigation-down-arrow';
 
     /**
      *  The trigger events that will open/close the options popover.
@@ -102,13 +102,13 @@ export class ComboboxComponent
 
     /** Whether the combobox should close, when a click is performed outside its boundaries. True by default */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /**
      * Whether the combobox should open, when any key is pressed in input (except Escape, Space, Enter). True by default
      */
     @Input()
-    openOnKeyboardEvent: boolean = true;
+    openOnKeyboardEvent = true;
 
     /**
      *  The state of the form control - applies css classes.
@@ -132,7 +132,7 @@ export class ComboboxComponent
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
-    maxHeight: string = '50vh';
+    maxHeight = '50vh';
 
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
@@ -140,32 +140,32 @@ export class ComboboxComponent
 
     /** Whether the search input should be displayed in compact mode. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Whether the matching string should be highlighted during filtration. */
     @Input()
-    highlighting: boolean = true;
+    highlighting = true;
 
     /** Whether the matching string should be highlighted after combobox value is selected. */
     filterHighlight: boolean = true;
 
     /** Whether the popover should close when a user selects a result. */
     @Input()
-    closeOnSelect: boolean = true;
+    closeOnSelect = true;
 
     /** Whether the input field should be populated with the result picked by the user. */
     @Input()
-    fillOnSelect: boolean = true;
+    fillOnSelect = true;
 
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
-    autoComplete: boolean = true;
+    autoComplete = true;
 
     /** Defines if combobox should behave same as dropdown. When it's enabled writing inside text input won't
      * trigger onChange function, until it matches one of displayed dropdown values. Also communicating with combobox
      * can be achieved only by objects with same type as dropdownValue */
     @Input()
-    communicateByObject: boolean = false;
+    communicateByObject = false;
 
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
@@ -176,15 +176,15 @@ export class ComboboxComponent
 
     /** Whether AddOn Button should be focusable, set to false by default */
     @Input()
-    buttonFocusable: boolean = false;
+    buttonFocusable = false;
 
     /** Whether the combobox is readonly. */
     @Input()
-    readOnly: boolean = false;
+    readOnly = false;
 
     /** Whether the combobox should be built on mobile mode */
     @Input()
-    mobile: boolean = false;
+    mobile = false;
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
@@ -247,13 +247,13 @@ export class ComboboxComponent
     readonly closingKeys: string[] = ['Escape'];
 
     /** Whether the combobox is opened. */
-    open: boolean = false;
+    open = false;
 
     /**
      * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
      * @hidden
      */
-    inShellbar: boolean = false;
+    inShellbar = false;
 
     /** @hidden */
     displayedValues: any[] = [];
@@ -315,7 +315,6 @@ export class ComboboxComponent
             if (this.searchFn) {
                 this.searchFn();
             }
-            this._moveCursorToInputEnd();
         } else if (KeyUtil.isKey(event, 'ArrowDown')) {
             if (event.altKey) {
                 this._resetDisplayedValues();
@@ -408,7 +407,7 @@ export class ComboboxComponent
     }
 
     /** @hidden */
-    onPrimaryButtonClick(event: MouseEvent): void {
+    onPrimaryButtonClick(): void {
         // Prevent primary button click behaviour on mobiles
         if (this.mobile) {
             return;
@@ -417,8 +416,6 @@ export class ComboboxComponent
         if (this.searchFn) {
             this.searchFn();
         }
-        event.preventDefault();
-        event.stopPropagation();
         this._resetDisplayedValues();
         this.isOpenChangeHandle(!this.open);
         this.searchInputElement.nativeElement.focus();
@@ -456,8 +453,10 @@ export class ComboboxComponent
 
     /** Method that handles complete event from auto complete directive, setting the new value, and closing popover */
     handleAutoComplete(event: AutoCompleteEvent): void {
-        this.inputText = event.term;
-        this.handleSearchTermChange();
+        if (this.inputText !== event.term) {
+            this.inputText = event.term;
+            this.handleSearchTermChange();
+        }
         if (event.forceClose) {
             this.isOpenChangeHandle(false);
         }
@@ -471,7 +470,6 @@ export class ComboboxComponent
                 forceClose: false
             });
         }
-        this._moveCursorToInputEnd();
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
@@ -548,6 +546,7 @@ export class ComboboxComponent
         if (this.fillOnSelect) {
             this.inputText = this.displayFn(term);
             this.searchInputElement.nativeElement.value = this.inputText;
+            this._cdRef.detectChanges();
 
             if (this.mobile) {
                 this._propagateChange();
@@ -566,8 +565,8 @@ export class ComboboxComponent
         try {
             this.focusTrap = focusTrap(this._elementRef.nativeElement, {
                 clickOutsideDeactivates: true,
-                returnFocusOnDeactivate: true,
-                escapeDeactivates: false
+                escapeDeactivates: false,
+                initialFocus: this._elementRef.nativeElement
             });
         } catch (e) {
             console.warn('Unsuccessful attempting to focus trap the Combobox.');
@@ -586,12 +585,6 @@ export class ComboboxComponent
     /** @hidden */
     private _hasDisplayedValues(): boolean {
         return this.open && this.displayedValues && this.displayedValues.length > 0;
-    }
-
-    /** @hidden */
-    private _moveCursorToInputEnd(): void {
-        const value = this.searchInputElement.nativeElement.value;
-        this.searchInputElement.nativeElement.setSelectionRange(value.length, value.length);
     }
 
     /** @hidden */

@@ -29,7 +29,7 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     /** Whether this element is selected*/
     @Input()
     @HostBinding('class.is-selected')
-    selected: boolean = false;
+    selected = false;
 
     /** Event thrown, when selected state is changed */
     @Output()
@@ -45,14 +45,14 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__content')
-    fdNestedListContentClass: boolean = true;
+    fdNestedListContentClass = true;
 
     /**
      * @hidden
      * Attribute controlled by the parent `NestedItemDirective`
      */
     @HostBinding('class.has-child')
-    hasChildren: boolean = false;
+    hasChildren = false;
 
     @ContentChild(NestedLinkDirective)
     nestedLink: NestedLinkDirective;

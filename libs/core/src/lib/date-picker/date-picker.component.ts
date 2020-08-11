@@ -60,10 +60,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     inputFieldDate: string = null;
 
     /** @hidden Whether the date input is invalid */
-    isInvalidDateInput: boolean = false;
+    isInvalidDateInput = false;
 
     /** @hidden Whether the date picker is open */
-    isOpen: boolean = false;
+    isOpen = false;
 
     /** @hidden */
     @ViewChild(CalendarComponent)
@@ -75,11 +75,11 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** Date picker input placeholder string */
     @Input()
-    placeholder: string = 'mm/dd/yyyy';
+    placeholder = 'mm/dd/yyyy';
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
-    format: string = 'MM/dd/yyyy';
+    format = 'MM/dd/yyyy';
 
     /** Locale for date pipe. See more https://angular.io/guide/i18n */
     @Input()
@@ -87,7 +87,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** Whether this is the compact input date picker */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** The currently selected CalendarDay model */
     @Input()
@@ -106,23 +106,23 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      * Works only on range mode, when start date is selected on Day View.
      */
     @Input()
-    rangeHoverEffect: boolean = false;
+    rangeHoverEffect = false;
 
     /** Whether to validate the date picker input. */
     @Input()
-    useValidation: boolean = true;
+    useValidation = true;
 
     /** Aria label for the datepicker input. */
     @Input()
-    dateInputLabel: string = 'Date input';
+    dateInputLabel = 'Date input';
 
     /** Aria label for the button to show/hide the calendar. */
     @Input()
-    displayCalendarToggleLabel: string = 'Display calendar toggle';
+    displayCalendarToggleLabel = 'Display calendar toggle';
 
     /** Whether a null input is considered valid. */
     @Input()
-    allowNull: boolean = true;
+    allowNull = true;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
@@ -141,7 +141,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** Defines if date picker should be closed after date choose */
     @Input()
-    closeOnDateChoose: boolean = true;
+    closeOnDateChoose = true;
 
     /**
      *  The state of the form control - applies css classes.
@@ -154,7 +154,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      * Whether AddOn Button should be focusable, set to true by default
      */
     @Input()
-    buttonFocusable: boolean = true;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -192,13 +192,13 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
      */
     @Input()
-    markWeekends: boolean = true;
+    markWeekends = true;
 
     /**
      * Whether user wants to show week numbers next to days
      */
     @Input()
-    showWeekNumbers: boolean = true;
+    showWeekNumbers = true;
 
     /** Fired when a new date is selected. */
     @Output()
@@ -422,7 +422,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         this.inputFieldDate = date;
         /** Case when there is single mode */
         if (this.type === 'single') {
-            let fdDate = this.dateAdapter.parse(date);
+            const fdDate = this.dateAdapter.parse(date);
 
             /** Check if dates are equal, if so, there is no need to make any changes */
             if (!CalendarService.datesEqual(fdDate, this.selectedDate)) {
@@ -431,10 +431,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                 /** Check if date is valid, if it's not, there is no need to refresh calendar */
                 if (!this.isInvalidDateInput && date) {
                     this._refreshCurrentlyDisplayedCalendarDate(fdDate);
-                } else {
-                    /** Whether string is invalid, by passed block or disable functions there is forced Invalid Object, */
-                    fdDate = this._invalidDate();
                 }
+
                 /**
                  * Date in model is changed no matter if the parsed date from string is valid or not.
                  */
@@ -467,16 +465,6 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                 }
 
                 this.isInvalidDateInput = !this._isRangeModelValid(selectedRangeDate);
-
-                /** If start date is invalid, because of format, block or disable function, there is invalidDate forced */
-                if (!this._isStartDateValid(selectedRangeDate.start)) {
-                    selectedRangeDate.start = this._invalidDate();
-                }
-
-                /** If end date is invalid, because of format, block or disable function, there is invalidDate forced */
-                if (!this._isEndDateValid(selectedRangeDate.end)) {
-                    selectedRangeDate.end = this._invalidDate();
-                }
 
                 /** Whole object is changed, even it's invalid */
                 this.selectedRangeDate = selectedRangeDate;
@@ -533,10 +521,6 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** Method that returns info if end date model given is valid */
     private _isFdDateValid(fdDate: FdDate): boolean {
         return fdDate && fdDate instanceof FdDate && fdDate.isDateValid();
-    }
-
-    private _invalidDate(): FdDate {
-        return this.dateAdapter.parse('InVaLiDDaTe');
     }
 
     /** @hidden */

@@ -23,11 +23,11 @@ export class DialogFooterComponent implements AfterContentInit {
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
     constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {
-        this.dialogConfig = this.dialogConfig || {};
+        this.dialogConfig = this.dialogConfig || {} as DialogConfig;
     }
 
     /** @hidden */
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this._assignCustomTemplates();
     }
 

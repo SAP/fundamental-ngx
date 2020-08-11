@@ -19,17 +19,17 @@ export class ImageComponent {
      * The size of the image.
      * The predefined values for the size are *s*, *m*, and *l*.
      */
-    @Input() size: string = 'm';
+    @Input() size = 'm';
 
     /**
      * Whether to render a circle style for the image.
      */
-    @Input() circle: boolean = false;
+    @Input() circle = false;
 
     /**
      * The image label.
      */
-    @Input() label: string = 'Image label';
+    @Input() label = 'Image label';
 
     /**
      * The image url.

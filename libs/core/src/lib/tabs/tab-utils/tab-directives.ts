@@ -64,7 +64,7 @@ export class TabLoadTitleDirective implements OnInit {
 export class TabCountDirective {
     /** @hidden */
     @HostBinding('class.fd-tabs__count')
-    fdTabsCountClass: boolean = true;
+    fdTabsCountClass = true;
 }
 
 /**
@@ -81,7 +81,7 @@ export class TabIconDirective implements CssClassBuilder, OnChanges {
     class: string;
 
     /** Defines if there will be added fd-tabs-icon class. Enabled by default. */
-    fdTabIconClass: boolean = true;
+    fdTabIconClass = true;
 
     /**
      * The icon to include inside the element
@@ -107,10 +107,8 @@ export class TabIconDirective implements CssClassBuilder, OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return [this.fdTabIconClass ? 'fd-tabs__icon' : '', this.icon ? `sap-icon--${this.icon}` : '', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return [this.fdTabIconClass ? 'fd-tabs__icon' : '', this.icon ? `sap-icon--${this.icon}` : '', this.class];
     }
 
     /** HasElementRef interface implementation

@@ -48,7 +48,7 @@ export class RadioButtonComponent extends BaseInput {
      * used for radio button creation if list value present
      */
     @Input()
-    forceRender: boolean = false;
+    forceRender = false;
 
     /** click event to emit */
     @Output()
@@ -79,7 +79,7 @@ export class RadioButtonComponent extends BaseInput {
     }
 
     /** @hidden change formcontrol value, emits the event*/
-    onClick(event: KeyboardEvent | MouseEvent) {
+    onClick(event: KeyboardEvent | MouseEvent): void {
         event.stopPropagation();
         if (!this.disabled) {
             if (super.getValue() !== undefined) {
@@ -100,7 +100,7 @@ export class RadioButtonComponent extends BaseInput {
     }
 
     /** @hidden method to select radio button */
-    select() {
+    select(): void {
         if (this.coreRadioButton && this.coreRadioButton.inputElement) {
             this.coreRadioButton.elementRef().nativeElement.checked = true;
             this._cd.detectChanges();
@@ -108,7 +108,7 @@ export class RadioButtonComponent extends BaseInput {
     }
 
     /** @hidden method to uncheck radio button */
-    unselect() {
+    unselect(): void {
         if (this.coreRadioButton && this.coreRadioButton.inputElement) {
             this.coreRadioButton.elementRef().nativeElement.checked = false;
             this._cd.detectChanges();

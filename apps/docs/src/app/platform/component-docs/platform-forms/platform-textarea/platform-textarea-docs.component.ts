@@ -92,5 +92,5 @@ export class PlatformTextareaDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit(): void {}
 }

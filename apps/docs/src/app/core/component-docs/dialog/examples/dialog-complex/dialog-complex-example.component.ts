@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { DialogRef, DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core';
 
 interface Fruit {
     id: number;
@@ -35,7 +35,7 @@ export class DialogComplexExampleComponent {
 
     dialogRef: DialogRef;
 
-    searchedPhrase: string = '';
+    searchedPhrase = '';
 
     constructor(public _dialogService: DialogService) {}
 
@@ -47,7 +47,7 @@ export class DialogComplexExampleComponent {
             resizable: true,
             verticalPadding: false,
             backdropClickCloseable: false
-        });
+        } as DialogConfig);
         this.dialogRef.loading(true);
         setTimeout(() => this.dialogRef.loading(false), 2000);
     }

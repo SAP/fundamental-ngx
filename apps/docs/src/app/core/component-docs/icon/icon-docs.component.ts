@@ -63,7 +63,7 @@ export class IconDocsComponent {
         this.schema = this.schemaFactory.getComponent('icon');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

@@ -129,13 +129,13 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
     name: string;
 
     @Input()
-    editable: boolean = true;
+    editable = true;
 
     @Input()
-    noLabelLayout: boolean = false;
+    noLabelLayout = false;
 
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     @Input()
     labelLayout: 'horizontal' | 'vertical' = 'vertical';
@@ -219,8 +219,8 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
     @ContentChildren(FormFieldComponent, { descendants: true })
     _fieldChildren: QueryList<FormFieldComponent>;
 
-    private _useForm: boolean = false;
-    private _multiLayout: boolean = false;
+    private _useForm = false;
+    private _multiLayout = false;
     private _hintPlacement: 'left' | 'right' = 'right';
 
     protected _destroyed = new Subject<void>();
@@ -257,7 +257,7 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         this._destroyed.complete();
     }
 
-    trackByFieldName(index, zoneField: GroupField) {
+    trackByFieldName(index, zoneField: GroupField): string|undefined {
         return zoneField ? zoneField.name : undefined;
     }
 
@@ -277,7 +277,7 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
      * Since I want to have it cached I know zones ahead of time, but you can have this generic and
      * store everything in Map. Since here we have OnPush CD strategy it should not be a big deal.
      */
-    private updateFieldByZone() {
+    private updateFieldByZone(): void {
         const zLeft: Array<GroupField> = [];
         const zRight: Array<GroupField> = [];
 
@@ -319,7 +319,7 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
      * field we are using here a setter method to initialize the
      *
      */
-    private updateFormProperties(item: FormFieldComponent) {
+    private updateFormProperties(item: FormFieldComponent): void {
         item.hintPlacement = this._hintPlacement;
         item.i18Strings = this.i18Strings;
         item.formGroup = this.formGroup;
@@ -425,7 +425,7 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
      * 6-column width layout as left and right side are not even.
      *
      */
-    private evenFields(zLeft: GroupField[], zRight: GroupField[]) {
+    private evenFields(zLeft: GroupField[], zRight: GroupField[]): void {
         zLeft.sort((a, b) => a.rank - b.rank);
 
         if (zRight.length === 0) {

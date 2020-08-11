@@ -17,7 +17,7 @@ export class SectionsToolbarComponent implements OnInit {
     @Input()
     sideCollapsed: BehaviorSubject<boolean>;
 
-    search: string = '';
+    search = '';
 
     private get _smallScreen(): boolean {
         return window.innerWidth < SMALL_SCREEN_BREAKPOINT;
@@ -29,7 +29,7 @@ export class SectionsToolbarComponent implements OnInit {
         this.onActivate();
     }
 
-    onKeypressHandler(event: KeyboardEvent) {
+    onKeypressHandler(event: KeyboardEvent): void {
         if (event.code === 'Enter' || event.code === 'Space') {
             event.preventDefault();
             const _event = new MouseEvent('click');
@@ -37,17 +37,17 @@ export class SectionsToolbarComponent implements OnInit {
         }
     }
 
-    onItemClick() {
+    onItemClick(): void {
         this.sideCollapsed.next(false);
     }
 
-    onActivate() {
+    onActivate(): void {
         if (this._smallScreen && !this.sideCollapsed.value) {
             this._setCollapseState(true);
         }
     }
 
-    windowSize() {
+    windowSize(): void {
         if (!this._smallScreen) {
             this._setCollapseState(false);
             return;
@@ -57,7 +57,7 @@ export class SectionsToolbarComponent implements OnInit {
         this.sideCollapsedChange.emit(this.sideCollapsed.value);
     }
 
-    private _setCollapseState(state: boolean) {
+    private _setCollapseState(state: boolean): void {
         this.sideCollapsed?.next(state);
         this.sideCollapsedChange.emit(state);
     }

@@ -20,7 +20,7 @@ export class PaginationExampleComponent {
 
     @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
 
-    newPageClicked(event) {
+    newPageClicked(event): void {
         this.http.get('assets/pagination-data.json').subscribe(
             (data) => {
                 /*
@@ -41,7 +41,7 @@ export class PaginationExampleComponent {
         );
     }
 
-    goToPage1() {
+    goToPage1(): void {
         this.paginationComponent.goToPage(1);
     }
 

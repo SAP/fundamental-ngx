@@ -1,5 +1,5 @@
 import { Component, ViewChildren, ViewChild, ElementRef, QueryList } from '@angular/core';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { MenuComponent } from './menu.component';
 import { MenuItemComponent } from './menu-item.component';
 import { MenuTriggerDirective } from './menu-trigger.directive';
@@ -7,7 +7,6 @@ import { PlatformMenuModule } from './menu.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { createKeyboardEvent, createMouseEvent } from '../../testing/event-objects';
 import { DOWN_ARROW, ESCAPE, UP_ARROW, ENTER, TAB, RIGHT_ARROW, LEFT_ARROW } from '@angular/cdk/keycodes';
-import { Directionality } from '@angular/cdk/bidi';
 import { of } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/core';
 
@@ -30,9 +29,9 @@ class SimpleMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() {}
+    constructor() { }
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }
@@ -69,7 +68,7 @@ describe('Simple Menu', () => {
         trigger = component.trigger;
     });
 
-    it('should be able to toggle menu by clicking on trigger element', () => {
+    it('should be able to toggle menu by clicking on trigger element', fakeAsync(() => {
         /**
          * PRE-CLICK CHECKS
          */
@@ -84,6 +83,7 @@ describe('Simple Menu', () => {
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // check state of trigger element
@@ -97,6 +97,7 @@ describe('Simple Menu', () => {
          * SECOND-CLICK (CLOSE MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // check state of trigger element
@@ -105,7 +106,7 @@ describe('Simple Menu', () => {
         // check menu element is not shown
         menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEl.length).toBe(0);
-    });
+    }));
 
     it('should not open the menu on trigger hover if the trigger is not a menu item', () => {
         /**
@@ -123,11 +124,12 @@ describe('Simple Menu', () => {
         expect(menuEl.length).toBe(0);
     });
 
-    it('should close the menu when user clicks outside of menu area', () => {
+    it('should close the menu when user clicks outside of menu area', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // check state of trigger element
@@ -141,6 +143,7 @@ describe('Simple Menu', () => {
          * CLICK OUTSIDE OF MENU
          */
         otherButton.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // check state of trigger elememt
@@ -149,13 +152,14 @@ describe('Simple Menu', () => {
         // check menu element is not shown
         menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEl.length).toBe(0);
-    });
+    }));
 
-    it('should close the menu when the user hits the ESC key', () => {
+    it('should close the menu when the user hits the ESC key', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // check state of trigger element
@@ -178,13 +182,14 @@ describe('Simple Menu', () => {
         // check menu element is not shown
         menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEl.length).toBe(0);
-    });
+    }));
 
-    it('should close the menu after user TABs off of menu', () => {
+    it('should close the menu after user TABs off of menu', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // check state of trigger element
@@ -207,13 +212,14 @@ describe('Simple Menu', () => {
         // check menu element is not shown
         menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEl.length).toBe(0);
-    });
+    }));
 
-    it('should allow keyboard navigation of items after opening of menu', () => {
+    it('should allow keyboard navigation of items after opening of menu', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const menuEl = overlayContainerEl.querySelector('.fd-menu');
@@ -248,13 +254,14 @@ describe('Simple Menu', () => {
         fixture.detectChanges();
 
         expect(items[1]).toBe(document.activeElement);
-    });
+    }));
 
-    it('should restore focus to the originating trigger after menu close', () => {
+    it('should restore focus to the originating trigger after menu close', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         // check menu element is shown
@@ -273,13 +280,14 @@ describe('Simple Menu', () => {
         fixture.detectChanges();
 
         expect(button.nativeElement).toBe(document.activeElement as HTMLElement);
-    });
+    }));
 
-    it('should allow item selection to be captured as events', () => {
+    it('should allow item selection to be captured as events', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -291,13 +299,14 @@ describe('Simple Menu', () => {
         items[0].dispatchEvent(keyboardEvent);
         fixture.detectChanges();
         expect(component.currentSelectedItem).toBe('Apple');
-    });
+    }));
 
-    it('should close the menu after user keyboard selection of an item', () => {
+    it('should close the menu after user keyboard selection of an item', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -312,13 +321,14 @@ describe('Simple Menu', () => {
         // check menu element is not shown
         const menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEl.length).toBe(0);
-    });
+    }));
 
-    it('should close the menu after user mouse click of an item', () => {
+    it('should close the menu after user mouse click of an item', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -333,7 +343,7 @@ describe('Simple Menu', () => {
         // check menu element is not shown
         const menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEl.length).toBe(0);
-    });
+    }));
 });
 
 @Component({
@@ -369,9 +379,9 @@ class CascadingMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() {}
+    constructor() { }
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }
@@ -405,11 +415,12 @@ describe('Cascading Menu', () => {
         trigger = component.trigger;
     });
 
-    it('should identify menu items which trigger submenu with arrow icon', () => {
+    it('should identify menu items which trigger submenu with arrow icon', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -417,13 +428,14 @@ describe('Cascading Menu', () => {
         expect(items[1].classList.contains('trigger')).toBeTruthy();
         expect(items[2].classList.contains('trigger')).toBeFalsy();
         expect(items[3].classList.contains('trigger')).toBeFalsy();
-    });
+    }));
 
-    it('should expand cascading menu on mouse hover of menu item', () => {
+    it('should expand cascading menu on mouse hover of menu item', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -438,13 +450,14 @@ describe('Cascading Menu', () => {
         // check menu elements are shown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(2);
-    });
+    }));
 
-    it('should expand cascading menu on keyboard enter', () => {
+    it('should expand cascading menu on keyboard enter', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -459,13 +472,14 @@ describe('Cascading Menu', () => {
         // check menu elements are shown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(2);
-    });
+    }));
 
-    it('should expand multiple cascading menus on keyboard enter', () => {
+    it('should expand multiple cascading menus on keyboard enter', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -483,13 +497,14 @@ describe('Cascading Menu', () => {
         // check menu elements are shown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(3);
-    });
+    }));
 
-    it('should hide all menus when a non-trigger menu sub item is selected with mouse click', () => {
+    it('should hide all menus when a non-trigger menu sub item is selected with mouse click', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -516,13 +531,14 @@ describe('Cascading Menu', () => {
         // check menu element are not shown
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
-    });
+    }));
 
-    it('should hide all menus when a non-trigger menu sub item is selected with keyboard ENTER', () => {
+    it('should hide all menus when a non-trigger menu sub item is selected with keyboard ENTER', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -555,13 +571,14 @@ describe('Cascading Menu', () => {
         // check menu element are not shown
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
-    });
+    }));
 
-    it('should hide all menus when when the user hits the ESC key', () => {
+    it('should hide all menus when when the user hits the ESC key', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -587,13 +604,14 @@ describe('Cascading Menu', () => {
         // check menu element are not shown
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
-    });
+    }));
 
-    it('should hide all menus when when the user TABs off of menu', () => {
+    it('should hide all menus when when the user TABs off of menu', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -619,13 +637,14 @@ describe('Cascading Menu', () => {
         // check menu element are not shown
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
-    });
+    }));
 
-    it('should hide branch of trigger menu item if another trigger menu item is selected', () => {
+    it('should hide branch of trigger menu item if another trigger menu item is selected', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -657,13 +676,14 @@ describe('Cascading Menu', () => {
         // check menu element are not shown
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-    });
+    }));
 
-    it('should be able to show sub menu on RIGHT ARROW click of trigger menu item (non-RTL)', () => {
+    it('should be able to show sub menu on RIGHT ARROW click of trigger menu item (non-RTL)', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -678,13 +698,14 @@ describe('Cascading Menu', () => {
         // check menu element are shown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(2);
-    });
+    }));
 
-    it('should be able to hide sub menu on LEFT ARROW click of menu item (non-RTL)', () => {
+    it('should be able to hide sub menu on LEFT ARROW click of menu item (non-RTL)', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -710,7 +731,7 @@ describe('Cascading Menu', () => {
 
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-    });
+    }));
 });
 
 @Component({
@@ -740,9 +761,9 @@ class CascadingBeforeMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() {}
+    constructor() { }
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }
@@ -776,11 +797,12 @@ describe('Cascading Menu - Position Before', () => {
         trigger = component.trigger;
     });
 
-    it('should be able to show sub menu on LEFT ARROW click of trigger menu item (position-before, non-RTL)', () => {
+    it('should be able to show sub menu on LEFT ARROW click of trigger menu item (position-before, non-RTL)', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -795,13 +817,14 @@ describe('Cascading Menu - Position Before', () => {
         // check menu element are shown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(2);
-    });
+    }));
 
-    it('should be able to hide sub menu on RIGHT ARROW click of menu item (non-RTL)', () => {
+    it('should be able to hide sub menu on RIGHT ARROW click of menu item (non-RTL)', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -827,7 +850,7 @@ describe('Cascading Menu - Position Before', () => {
 
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-    });
+    }));
 });
 
 @Component({
@@ -857,9 +880,9 @@ class CascadingAfterRTLMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() {}
+    constructor() { }
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }
@@ -902,11 +925,12 @@ describe('Cascading Menu - Position After, RTL', () => {
         trigger = component.trigger;
     });
 
-    it('should be able to show sub menu on LEFT ARROW click of trigger menu item (position-after, RTL)', () => {
+    it('should be able to show sub menu on LEFT ARROW click of trigger menu item (position-after, RTL)', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -921,13 +945,14 @@ describe('Cascading Menu - Position After, RTL', () => {
         // check menu element are shown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(2);
-    });
+    }));
 
-    it('should be able to hide sub menu on RIGHT ARROW click of menu item (position-after, RTL)', () => {
+    it('should be able to hide sub menu on RIGHT ARROW click of menu item (position-after, RTL)', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -953,7 +978,7 @@ describe('Cascading Menu - Position After, RTL', () => {
 
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-    });
+    }));
 });
 
 @Component({
@@ -983,9 +1008,9 @@ class CascadingBeforeRTLMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() {}
+    constructor() { }
 
-    onSelect(item: string) {
+    onSelect(item: string): void {
         this.currentSelectedItem = item;
     }
 }
@@ -1028,11 +1053,12 @@ describe('Cascading Menu - Position Before, RTL', () => {
         trigger = component.trigger;
     });
 
-    it('should be able to show sub menu on RIGHT ARROW click of trigger menu item (position-before, RTL)', () => {
+    it('should be able to show sub menu on RIGHT ARROW click of trigger menu item (position-before, RTL)', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -1047,13 +1073,14 @@ describe('Cascading Menu - Position Before, RTL', () => {
         // check menu element are shown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(2);
-    });
+    }));
 
-    it('should be able to hide sub menu on LEFT ARROW click of menu item (position-before, RTL)', () => {
+    it('should be able to hide sub menu on LEFT ARROW click of menu item (position-before, RTL)', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         button.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -1079,5 +1106,90 @@ describe('Cascading Menu - Position Before, RTL', () => {
 
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
+    }));
+});
+
+@Component({
+    template: `
+        <button [fdpMenuTriggerFor]="menu" #fruitButton>Fruit</button>
+        <button [fdpMenuTriggerFor]="menu" #snackButton>Snack</button>
+        <button [fdpMenuTriggerFor]="menu" #foodButton>Food</button>
+        <fdp-menu #menu>
+            <fdp-menu-item (itemSelect)="onSelect('Apple')">Apple</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Banana')">Banana</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
+            <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
+        </fdp-menu> `
+})
+class MultipleTriggersMenuComponent {
+    @ViewChild('fruitButton') fruitButton: ElementRef<HTMLElement>;
+    @ViewChild('snackButton') snackButton: ElementRef<HTMLElement>;
+    @ViewChild('foodButton') foodButton: ElementRef<HTMLElement>;
+    @ViewChild(MenuComponent) menu: MenuComponent;
+    @ViewChildren(MenuItemComponent) menuItems: QueryList<MenuItemComponent>;
+
+    public currentSelectedItem = '';
+
+    constructor() { }
+
+    onSelect(item: string): void {
+        this.currentSelectedItem = item;
+    }
+}
+describe('Multiple triggers sharing same menu', () => {
+    let component: MultipleTriggersMenuComponent;
+    let fixture: ComponentFixture<MultipleTriggersMenuComponent>;
+    let overlayContainerEl: HTMLElement;
+
+    const dirProvider = {
+        rtl: of(false)
+    };
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformMenuModule],
+            declarations: [MultipleTriggersMenuComponent],
+            providers: [
+                {
+                    provide: RtlService,
+                    useFactory: () => dirProvider
+                }
+            ]
+        }).compileComponents();
+
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(MultipleTriggersMenuComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
     });
+
+    it('should open menu on click of different triggers attached to same menu', fakeAsync(() => {
+        /**
+         * CLICK ON FIRST BUTTON
+         */
+        component.fruitButton.nativeElement.click();
+        tick(10);
+        fixture.detectChanges();
+
+        // check menu element is shown
+        let menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
+        expect(menuEl.length).toBe(1);
+
+        /**
+         * CLICK ON SECOND BUTTON
+         */
+        component.snackButton.nativeElement.click();
+        tick(10);
+        fixture.detectChanges();
+
+        // check menu element is shown
+        menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
+        expect(menuEl.length).toBe(1);
+    }));
+
 });

@@ -1,5 +1,5 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { Component, Input, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ButtonModule, RtlService, IconModule } from '@fundamental-ngx/core';
@@ -56,7 +56,7 @@ class DisabledMenuButtonComponent {
     @Input()
     type = 'standard';
 
-    constructor() {}
+    constructor() { }
 }
 
 describe('Menu Button Disabled test and Type, size test', () => {
@@ -125,7 +125,7 @@ class TestMenuButtonComponent {
     @Input()
     type = 'standard';
 
-    currentSelectedItem: string = '';
+    currentSelectedItem = '';
 
     @ViewChild(MenuButtonComponent, { static: true })
     component: MenuButtonComponent;
@@ -135,14 +135,14 @@ class TestMenuButtonComponent {
 
     public menuButtonClicked = false;
 
-    clicked(event: any) {
+    clicked(event: any): void {
         this.menuButtonClicked = true;
     }
 
-    onItemSelect(item: string) {
+    onItemSelect(item: string): void {
         this.currentSelectedItem = item;
     }
-    constructor() {}
+    constructor() { }
 }
 
 describe('Menu Button click on Item select', () => {
@@ -185,12 +185,13 @@ describe('Menu Button click on Item select', () => {
         expect(host.menuButtonClicked).toBeTruthy();
     });
 
-    it('select item on click', () => {
+    it('select item on click', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
         const menubutton = fixture.debugElement.query(By.css('fdp-menu-button'));
         menubutton.nativeElement.click();
+        tick(1);
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
@@ -202,5 +203,5 @@ describe('Menu Button click on Item select', () => {
         items[0].dispatchEvent(keyboardEvent);
         fixture.detectChanges();
         expect(host.currentSelectedItem).toBe('First Item');
-    });
+    }));
 });

@@ -41,10 +41,10 @@ export class IconComponent extends AbstractFdNgxClass {
      * The predefined values for the input size are *xs*, *s*, *l*, and *xl*.
      * *size* can accept any other string, for example *xxs*, which will be translated into class *sap-icon--xxs*.
      */
-    @Input() size: string = '';
+    @Input() size = '';
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         if (this.glyph) {
             this._addClassToElement(PREFIX_ICON_CLASS + this.glyph);
         }

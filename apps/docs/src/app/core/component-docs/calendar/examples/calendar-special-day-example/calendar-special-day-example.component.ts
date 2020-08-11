@@ -8,10 +8,10 @@ import { FdDate, SpecialDayRule } from '@fundamental-ngx/core';
 export class CalendarSpecialDayExampleComponent {
     specialDays: SpecialDayRule[] = [];
 
-    markWeekends: boolean = false;
-    markNextWeek: boolean = false;
-    markAllMondays: boolean = false;
-    markPastDays: boolean = false;
+    markWeekends = false;
+    markNextWeek = false;
+    markAllMondays = false;
+    markPastDays = false;
 
     refreshRules(): void {
         this.specialDays = [];
@@ -45,7 +45,7 @@ export class CalendarSpecialDayExampleComponent {
 
     /** Get date for next 7 days. */
     private _getFutureDate(fdDate: FdDate): FdDate {
-        const amountOfDaysInFuture: number = 7;
+        const amountOfDaysInFuture = 7;
         for (let i = 0; i < amountOfDaysInFuture; i++) {
             fdDate = fdDate.nextDay();
         }

@@ -22,7 +22,7 @@ export type LabelType = 'numeric' | 'only-icon' | 'icon';
 export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     /** user's custom classes */
     @Input()
-    class: string = '';
+    class = '';
 
     /**
      * The LabelType represented by the info label .
@@ -41,16 +41,14 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     color: string;
 
     @applyCssClass
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-info-label',
             this.type ? `fd-info-label--${this.type}` : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.color ? `fd-info-label--accent-color-${this.color}` : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */

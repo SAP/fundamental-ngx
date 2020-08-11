@@ -15,8 +15,8 @@ import {
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
 
-let panelUniqueId: number = 0;
-let panelExpandUniqueId: number = 0;
+let panelUniqueId = 0;
+let panelExpandUniqueId = 0;
 
 /**
  * The panel is a container for grouping and displaying information
@@ -91,10 +91,8 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-panel', this.fixed ? 'fd-panel--fixed' : '', this.compact ? 'fd-panel--compact' : '', this.class]
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-panel', this.fixed ? 'fd-panel--fixed' : '', this.compact ? 'fd-panel--compact' : '', this.class];
     }
 
     /** @hidden */

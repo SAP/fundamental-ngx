@@ -36,7 +36,7 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-confi
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 
-let selectUniqueId: number = 0;
+let selectUniqueId = 0;
 
 export type SelectControlState = 'error' | 'success' | 'warning' | 'information';
 
@@ -67,7 +67,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
 
     /** Id of the control. */
     @Input()
-    controlId: string = `fd-select-${selectUniqueId++}`;
+    controlId = `fd-select-${selectUniqueId++}`;
 
     /** Whether the select component is disabled. */
     @Input()
@@ -75,7 +75,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
 
     /** Whether the select component should be displayed in mobile mode. */
     @Input()
-    mobile: boolean = false;
+    mobile = false;
 
     /** Whether the select component is disabled. */
     @Input()
@@ -83,11 +83,11 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
 
     /** Whether the select component is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Whether the select component is readonly. */
     @Input()
-    readonly: boolean = false;
+    readonly = false;
 
     /** Placeholder for the select. Appears in the triggerbox if no option is selected. */
     @Input()
@@ -105,7 +105,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
 
     /** Whether the select is in compact mode. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
@@ -113,11 +113,11 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
 
     /** Glyph to add icon in the select component. */
     @Input()
-    glyph: string = 'slim-arrow-down';
+    glyph = 'slim-arrow-down';
 
     /** Whether close the popover on outside click. */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /** Popper.js options of the popover. */
     @Input()
@@ -155,11 +155,11 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
      * possible options and chosen value.
      */
     @Input()
-    unselectMissingOption: boolean = true;
+    unselectMissingOption = true;
 
     /** Time to wait in milliseconds after the last keydown before focusing or selecting option based on alphanumeric keys. */
     @Input()
-    typeaheadDebounceInterval: number = 250;
+    typeaheadDebounceInterval = 250;
 
     /** Binds to control aria-labelledBy attribute */
     @Input()
@@ -203,7 +203,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     selectViewValue: string;
 
     /** Whether popover is opened */
-    isOpen: boolean = false;
+    isOpen = false;
 
     /** @hidden Cashed options as as Array */
     private _options: OptionComponent[];

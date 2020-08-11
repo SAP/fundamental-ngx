@@ -41,7 +41,7 @@ export class PopoverContainer implements AfterViewInit, OnDestroy {
     containerRef: ViewContainerRef;
 
     @HostBinding('class.fd-popover__popper--no-arrow')
-    noArrow: boolean = true;
+    noArrow = true;
 
     @Output()
     isSetup = new EventEmitter<undefined>();

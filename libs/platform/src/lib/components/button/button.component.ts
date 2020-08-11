@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, AfterViewInit, HostBinding } from '@angular/core';
 import { BaseComponent } from '../base';
 
 export type ButtonType =
@@ -64,7 +64,14 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
 
     /** Event sent when button is clicked */
     @Output()
-    buttonClicked = new EventEmitter();
+    buttonClicked: EventEmitter<any> = new EventEmitter();
+
+    /**
+     * Take host element out of tab order, so that child button can
+     * be properly focused on.
+     */
+    @HostBinding('attr.tabindex')
+    tabIndex = '-1';
 
     constructor(protected _changeDetector: ChangeDetectorRef, private _elementRef: ElementRef) {
         super(_changeDetector);
@@ -73,7 +80,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     /**
      *  Handles button click
      */
-    public onBtnClick($event: any) {
+    public onBtnClick($event: any): void {
         this.buttonClicked.emit($event);
     }
 

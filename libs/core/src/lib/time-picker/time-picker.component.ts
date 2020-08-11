@@ -58,12 +58,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
 
     /** @Input Uses compact time picker. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** @Input When set to true, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control. */
     @Input()
-    meridian: boolean = false;
+    meridian = false;
 
     /** @Input Disables the component. */
     @Input()
@@ -71,21 +71,21 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
 
     /** @Input Whether to show spinner buttons */
     @Input()
-    spinnerButtons: boolean = true;
+    spinnerButtons = true;
 
     /** @Input When set to false, hides the input for seconds. */
     @Input()
-    displaySeconds: boolean = true;
+    displaySeconds = true;
 
     /** @Input When set to false, hides the input for minutes. */
     @Input()
-    displayMinutes: boolean = true;
+    displayMinutes = true;
 
     /** @Input When set to false, hides the input for hours. */
     @Input()
-    displayHours: boolean = true;
+    displayHours = true;
 
-    /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds. 
+    /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds.
      * Otherwise It can be set to a default value
     */
     @Input()
@@ -93,15 +93,15 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
 
     /** Aria label for the time picker input. */
     @Input()
-    timePickerInputLabel: string = 'Time picker input';
+    timePickerInputLabel = 'Time picker input';
 
     /** Whether a null input is considered valid(success). */
     @Input()
-    allowNull: boolean = true;
+    allowNull = true;
 
     /** Defines if time component should be used with tablet mode */
     @Input()
-    tablet: boolean = false;
+    tablet = false;
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
@@ -121,7 +121,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
      * Whether AddOn Button should be focusable, set to true by default
      */
     @Input()
-    buttonFocusable: boolean = true;
+    buttonFocusable = true;
 
     /**
      * @Input when set to true, time inputs won't allow to have 1 digit
@@ -129,7 +129,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
      * but 12 will be kept as 12.
      */
     @Input()
-    keepTwoDigitsTime: boolean = false;
+    keepTwoDigitsTime = false;
 
     /** @hidden */
     @HostBinding('class.fd-time-picker')
@@ -144,7 +144,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
     popover: PopoverComponent;
 
     /** @hidden Whether the input time is valid(success). Internal use. */
-    isInvalidTimeInput: boolean = false;
+    isInvalidTimeInput = false;
 
     /** @hidden */
     period: string;
@@ -215,13 +215,15 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
         if (isOpen) {
             this.popover.directiveRef.loaded
                 .pipe(
-                    filter(() => !this.child.activeView),
                     first(),
                     takeUntil(this._onDestroy$),
                     delay(0)
                 )
                 .subscribe(() => {
-                    this.child.changeActive('hour');
+                    if (!this.child.activeView) {
+                        this.child.changeActive('hour');
+                    }
+                    this.child.refreshTime();
                 });
         }
     }

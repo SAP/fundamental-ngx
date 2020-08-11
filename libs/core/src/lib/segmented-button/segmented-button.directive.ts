@@ -24,7 +24,7 @@ export class SegmentedButtonDirective extends AbstractFdNgxClass {
     /** Defines if there will be added fd-button class.
      * Enabled by default.
      */
-    @Input() fdButtonClass: boolean = true;
+    @Input() fdButtonClass = true;
 
     /** Glyph (icon) of the button. */
     @Input()
@@ -39,11 +39,11 @@ export class SegmentedButtonDirective extends AbstractFdNgxClass {
      */
     @Input()
     @HostBinding('class.fd-button--compact')
-    compact: boolean = false;
+    compact = false;
 
     /** @hidden */
     @HostBinding('class.fd-segmented-button')
-    fdsegmentedButtonClass: boolean = true;
+    fdsegmentedButtonClass = true;
 
     /** @hidden */
     constructor(private elementRef: ElementRef) {
@@ -53,7 +53,7 @@ export class SegmentedButtonDirective extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         this._addClassToElement('fd-segmented-button');
         if (this.fdButtonClass) {
             this._addClassToElement('fd-button');

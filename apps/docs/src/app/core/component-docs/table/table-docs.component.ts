@@ -265,7 +265,7 @@ export class TableDocsComponent {
         this.schema = this.schemaFactory.getComponent('table');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

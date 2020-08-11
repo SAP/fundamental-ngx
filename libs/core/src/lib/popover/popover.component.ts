@@ -13,7 +13,7 @@ import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
 import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
 
-let popoverUniqueId: number = 0;
+let popoverUniqueId = 0;
 
 /**
  * The popover is a wrapping component that accepts a *control* as well as a *body*.
@@ -42,7 +42,7 @@ export class PopoverComponent {
 
     /** Whether the popover should have an arrow. */
     @Input()
-    noArrow: boolean = true;
+    noArrow = true;
 
     /** Whether the popover container needs an extra class for styling. */
     @Input()
@@ -51,13 +51,13 @@ export class PopoverComponent {
     /** Whether the popover is disabled. */
     @Input()
     @HostBinding('class.fd-popover-custom--disabled')
-    disabled: boolean = false;
+    disabled = false;
 
     /** @deprecated
      * Left for backward compatibility. It's going to be removed on 0.20.0
      */
     @Input()
-    isDropdown: boolean = false;
+    isDropdown = false;
 
     /** The element to which the popover should be appended. */
     @Input()
@@ -75,7 +75,7 @@ export class PopoverComponent {
 
     /** Whether the popover is open. Can be used through two-way binding. */
     @Input()
-    isOpen: boolean = false;
+    isOpen = false;
 
     /** List of additional classes that will be added to popover container element */
     @Input()
@@ -97,7 +97,7 @@ export class PopoverComponent {
 
     /** Whether the popover should be focusTrapped. */
     @Input()
-    focusTrapped: boolean = false;
+    focusTrapped = false;
 
     /**
      * Preset options for the popover body width.
@@ -110,11 +110,11 @@ export class PopoverComponent {
 
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
-    closeOnEscapeKey: boolean = true;
+    closeOnEscapeKey = true;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -165,7 +165,7 @@ export class PopoverComponent {
     /**
      * Function is called every time popover changes open attribute
      */
-    public openChanged(isOpen: boolean) {
+    public openChanged(isOpen: boolean): void {
         this.isOpenChange.emit(isOpen);
         this.updateDropdownIsOpen(isOpen);
     }
@@ -180,7 +180,7 @@ export class PopoverComponent {
     /** @hidden
      *  Function that allows us to control aria-expanded on dropdown child
      * */
-    private updateDropdownIsOpen(isOpen: boolean) {
+    private updateDropdownIsOpen(isOpen: boolean): void {
         if (this.dropdownComponent) {
             this.dropdownComponent.isOpen = isOpen;
         }

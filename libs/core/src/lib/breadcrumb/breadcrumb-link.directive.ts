@@ -18,9 +18,9 @@ import { Directive, ElementRef, Input } from '@angular/core';
 export class BreadcrumbLinkDirective {
     /** @hidden */
     @Input()
-    routerLink: string = '';
+    routerLink = '';
 
-    get elementRef() {
+    get elementRef(): ElementRef {
         return this._elementRef;
     }
 

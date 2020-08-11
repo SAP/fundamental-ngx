@@ -22,7 +22,7 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     class: string;
 
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
@@ -42,10 +42,8 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-input', 'fd-input-group__input', this.compact ? 'fd-input--compact' : '']
-            .filter((x) => x !== '')
-            .join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-input', 'fd-input-group__input', this.compact ? 'fd-input--compact' : ''];
     }
 
     elementRef(): ElementRef<any> {
@@ -70,7 +68,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     @HostBinding('class.fd-input-group__addon')
-    fdInputGroupAddonClass: boolean = true;
+    fdInputGroupAddonClass = true;
 
     /**
      * The placement of the add-on. Options include *before* and *after*
@@ -80,7 +78,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
 
     /** Whether to apply compact mode to the AddOn. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /**
      * The placement of the add-on. Options include *before* and *after*
@@ -99,7 +97,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
      * Whether the icon add-on or the text add-on is a button.
      */
     @Input()
-    button: boolean = false;
+    button = false;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, private renderer: Renderer2) {}
@@ -128,16 +126,14 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-input-group__addon',
             this.button ? 'fd-input-group__addon--button' : '',
             this.type ? 'fd-input-group__addon--' + this.type : '',
             this.state ? 'is-' + this.state : '',
             this.compact ? 'fd-input-group__addon--compact' : ''
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     elementRef(): ElementRef<any> {

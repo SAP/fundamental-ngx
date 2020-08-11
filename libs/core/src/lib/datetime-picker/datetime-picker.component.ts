@@ -65,11 +65,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Placeholder for the inner input element. */
     @Input()
-    placeholder: string = 'mm/dd/yyyy, hh:mm:ss am';
+    placeholder = 'mm/dd/yyyy, hh:mm:ss am';
 
     /** Whether the component should be in compact mode. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
@@ -80,11 +80,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Whether the time component should be meridian (am/pm). */
     @Input()
-    meridian: boolean = true;
+    meridian = true;
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
-    format: string = 'MM/dd/yyyy, HH:mm:ss';
+    format = 'MM/dd/yyyy, HH:mm:ss';
 
     /** Locale for date pipe. See more https://angular.io/guide/i18n */
     @Input()
@@ -96,19 +96,19 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Whether the time component shows seconds. */
     @Input()
-    displaySeconds: boolean = true;
+    displaySeconds = true;
 
     /** Whether the time component shows minutes. */
     @Input()
-    displayMinutes: boolean = true;
+    displayMinutes = true;
 
     /** Whether the time component shows hours. */
     @Input()
-    displayHours: boolean = true;
+    displayHours = true;
 
     /** Whether to perform visual validation on the picker input. */
     @Input()
-    useValidation: boolean = true;
+    useValidation = true;
 
     /** Current selected date. Two-way binding is supported. */
     @Input()
@@ -116,7 +116,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Whether the popover is open. Two-way binding is supported. */
     @Input()
-    isOpen: boolean = false;
+    isOpen = false;
 
     /** The disableFunction for the calendar. */
     @Input()
@@ -128,22 +128,22 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Aria label for the datetime picker input. */
     @Input()
-    datetimeInputLabel: string = 'Datetime input';
+    datetimeInputLabel = 'Datetime input';
 
     /** Aria label for the button to show/hide the calendar. */
     @Input()
-    displayDatetimeToggleLabel: string = 'Display calendar toggle';
+    displayDatetimeToggleLabel = 'Display calendar toggle';
 
     /** Whether a null input is considered valid. */
     @Input()
-    allowNull: boolean = true;
+    allowNull = true;
 
     /**
      * @Input when set to true, time inputs won't allow to have 1 digit
      * for example 9 will become 09
      * but 12 will be kept as 12.
      */
-    @Input() keepTwoDigitsTime: boolean = false;
+    @Input() keepTwoDigitsTime = false;
 
     /**
      *  The state of the form control - applies css classes.
@@ -156,7 +156,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * Whether AddOn Button should be focusable, set to true by default
      */
     @Input()
-    buttonFocusable: boolean = true;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -194,17 +194,17 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
      */
     @Input()
-    markWeekends: boolean = true;
+    markWeekends = true;
 
     /** @Input Whether to show spinner buttons */
     @Input()
-    spinnerButtons: boolean = true;
+    spinnerButtons = true;
 
     /**
      * Whether user wants to show week numbers next to days
      */
     @Input()
-    showWeekNumbers: boolean = true;
+    showWeekNumbers = true;
 
     /** Event thrown every time calendar active view is changed */
     @Output()
@@ -245,7 +245,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     inputFieldDate: string = null;
 
     /** @hidden The Time object which interacts with the inner Time component. Internal use. */
-    isInvalidDateInput: boolean = false;
+    isInvalidDateInput = false;
 
     /** @hidden The Time object which interacts with the inner Time component. Internal use. */
     time: TimeObject = { hour: 0, minute: 0, second: 0 };

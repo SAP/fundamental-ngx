@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
-let uniqueCarouselItemId: number = 0;
+let uniqueCarouselItemId = 0;
 
 @Directive({
     selector: '[fd-carousel-item], [fdCarouselItem]',

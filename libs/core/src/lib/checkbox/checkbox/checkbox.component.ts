@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
 import { compareObjects } from '../../utils/public_api';
 
-let checkboxUniqueId: number = 0;
+let checkboxUniqueId = 0;
 
 export type fdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force-checked';
 
@@ -42,7 +42,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
-    inputId: string = `fd-checkbox-${checkboxUniqueId++}`;
+    inputId = `fd-checkbox-${checkboxUniqueId++}`;
 
     /** State of control, changes visual appearance of control. */
     @Input()
@@ -70,7 +70,11 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** Allows to prevent user from manually selecting controls third state. */
     @Input()
-    tristateSelectable: boolean = true;
+    tristateSelectable = true;
+
+    /** Assigns given class to checkbox label element */
+    @Input()
+    labelClass: string;
 
     /** Sets values returned by control. */
     @Input('values')
@@ -88,6 +92,9 @@ export class CheckboxComponent implements ControlValueAccessor {
     public checkboxValue: any;
     /** Stores current checkbox state. */
     public checkboxState: fdCheckboxTypes;
+    /** @hidden */
+    private _previousState: fdCheckboxTypes;
+
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
@@ -122,7 +129,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     /** @hidden prevent event from propagating */
-    public muteKey(event: KeyboardEvent): void {
+    public muteKey(event: KeyboardEvent | MouseEvent): void {
         event.stopPropagation();
     }
 
@@ -138,8 +145,8 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
-    public checkByClick() {
-        this._nextValueEvent(true);
+    public checkByClick(event: MouseEvent): void {
+        this._nextValueEvent(true, event);
     }
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
@@ -174,7 +181,6 @@ export class CheckboxComponent implements ControlValueAccessor {
                     this.tristate && this.tristateSelectable ? this.values.thirdStateValue : this.values.trueValue;
                 break;
         }
-
         this._setState();
         this.onValueChange(this.checkboxValue);
         this._detectChanges();
@@ -189,16 +195,23 @@ export class CheckboxComponent implements ControlValueAccessor {
         } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
         }
+        this._previousState = this.checkboxState;
     }
 
     /** @hidden */
-    private _nextValueEvent(triggeredByClick?: boolean): void {
-        if (this._isIE() && this.checkboxState === 'indeterminate') {
+    private _nextValueEvent(triggeredByClick?: boolean, event?: MouseEvent): void {
+        if (this._isIE() &&
+            this._previousState === 'indeterminate' &&
+            this.checkboxState === 'indeterminate') {
             this.checkboxState = 'force-checked';
             this._detectChanges();
             /** Prevents from keeping the old value */
             if (triggeredByClick) {
                 this.nextValue('force-checked');
+                if (event) {
+                    this.muteKey(event);
+                    event.preventDefault();
+                }
             }
         }
     }

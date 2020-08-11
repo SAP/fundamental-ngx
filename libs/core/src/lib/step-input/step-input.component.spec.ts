@@ -31,11 +31,11 @@ class TestWrapperComponent {
     @ViewChild(StepInputComponent, {read: ElementRef, static: true})
     stepInputElement: ElementRef;
 
-    step: number = 1;
+    step = 1;
 
     value: number = initialValue;
 
-    compact: boolean = false;
+    compact = false;
 
     unit: string = null;
 
@@ -45,7 +45,7 @@ class TestWrapperComponent {
 
     ariaLabel: string = null;
 
-    locale: string = 'en-US';
+    locale = 'en-US';
 
     inputTitle: string = null;
 

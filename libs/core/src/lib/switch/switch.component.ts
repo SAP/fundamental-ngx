@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-let switchUniqueId: number = 0;
+let switchUniqueId = 0;
 
 /**
  * The Switch component is used to activate or deactivate an element.
@@ -43,27 +43,31 @@ export class SwitchComponent implements ControlValueAccessor {
 
     /** If the switch should have text in it or not. */
     @Input()
-    optionalText: boolean = false;
+    optionalText = false;
 
     /** Whether the switch is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Id for the switch component. If omitted, a unique one is generated. */
     @Input()
-    id: string = 'fd-switch-' + switchUniqueId++;
+    id = `fd-switch-${switchUniqueId++}`;
+
+    /** Sets input name attribute. */
+    @Input()
+    name: string;
 
     /** Whether the switch is checked. */
     @Input()
-    checked: boolean = false;
+    checked = false;
 
     /** Whether the switch is semantic */
     @Input()
-    semantic: boolean = false;
+    semantic = false;
 
     /** Whether the switch is compact */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** aria-label attribute of the inner input element. */
     @Input()

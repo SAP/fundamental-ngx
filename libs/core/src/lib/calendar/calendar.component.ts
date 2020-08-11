@@ -22,9 +22,11 @@ import { SpecialDayRule } from './models/special-day-rule';
 import { CalendarService } from './calendar.service';
 import { CalendarYearGrid } from './models/calendar-year-grid';
 import { AggregatedYear } from './models/aggregated-year';
-import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import {
+    CalendarAggregatedYearViewComponent
+} from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 
-let calendarUniqueId: number = 0;
+let calendarUniqueId = 0;
 
 /** Type of calendar */
 export type CalendarType = 'single' | 'range';
@@ -81,11 +83,11 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /** @hidden */
     @HostBinding('class.fd-calendar')
-    fdCalendarClass: boolean = true;
+    fdCalendarClass = true;
 
     /** @hidden */
     @HostBinding('class.fd-has-display-block')
-    fdHasDisplayBlockClass: boolean = true;
+    fdHasDisplayBlockClass = true;
 
     /** Currently displayed days depending on month and year */
     currentlyDisplayed: CalendarCurrent;
@@ -97,29 +99,29 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /** Whether compact mode should be included into calendar */
     @Input()
     @HostBinding('class.fd-calendar--compact')
-    compact: boolean = false;
+    compact = false;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
      */
     @Input()
-    markWeekends: boolean = true;
+    markWeekends = true;
 
     /**
      * Whether user wants to show week numbers next to days
      */
     @Input()
-    showWeekNumbers: boolean = false;
+    showWeekNumbers = false;
 
     /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
     @Input()
     @HostBinding('class.fd-calendar--mobile-landscape')
-    mobileLandscape: boolean = false;
+    mobileLandscape = false;
 
     /** Whether calendar is used inside mobile in portrait mode */
     @Input()
     @HostBinding('class.fd-calendar--mobile-portrait')
-    mobilePortrait: boolean = false;
+    mobilePortrait = false;
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
@@ -178,7 +180,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * Works only on range mode, when start date is selected on Day View.
      */
     @Input()
-    rangeHoverEffect: boolean = false;
+    rangeHoverEffect = false;
 
     /** Event thrown every time active view is changed */
     @Output()
@@ -258,7 +260,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms.
      */
     writeValue(selected: FdRangeDate | FdDate): void {
-        let valid: boolean = true;
+        let valid = true;
         if (selected) {
             if (this.calType === 'single') {
                 selected = <FdDate>selected;

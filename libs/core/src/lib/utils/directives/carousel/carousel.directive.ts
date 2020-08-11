@@ -31,7 +31,7 @@ export interface PanEndOutput {
     after: boolean;
 }
 
-export const DEFAULT_TRANSITION_DURATION: string = '150ms';
+export const DEFAULT_TRANSITION_DURATION = '150ms';
 
 
 @Directive({
@@ -66,13 +66,13 @@ export class CarouselDirective implements AfterContentInit {
     private _previousActiveItem: CarouselItemDirective;
 
     /** @hidden */
-    private _lastDistance: number = 0;
+    private _lastDistance = 0;
 
     /** @hidden */
-    private _prePanTransitionPx: number = 0;
+    private _prePanTransitionPx = 0;
 
     /** @hidden */
-    private _currentTransitionPx: number = 0;
+    private _currentTransitionPx = 0;
 
     /** @hidden */
     constructor(
@@ -112,7 +112,7 @@ export class CarouselDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    private _handlePanEnd(delta: number) {
+    private _handlePanEnd(delta: number): void {
         this._handlePan(delta);
 
         const closestItem: CarouselItemDirective = this._getClosest();
@@ -235,7 +235,7 @@ export class CarouselDirective implements AfterContentInit {
     /**
      * Animates the carousel to the currently selected slide.
      */
-    private _transitionCarousel(transitionPx: number) {
+    private _transitionCarousel(transitionPx: number): void {
 
         this._currentTransitionPx = transitionPx;
 

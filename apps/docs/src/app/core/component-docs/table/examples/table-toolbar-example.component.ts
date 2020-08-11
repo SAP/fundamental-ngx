@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class TableToolbarExampleComponent implements OnInit {
     tableRows: any[];
     displayedRows: any[];
-    searchTerm: string = '';
+    searchTerm = '';
     confirmationReason: string;
     myForm: FormGroup;
 
@@ -68,7 +68,7 @@ export class TableToolbarExampleComponent implements OnInit {
     }
 
     openDialog(dialog: TemplateRef<any>): void {
-        const dialogRef = this._dialogService.open(dialog, { responsivePadding: true });
+        const dialogRef = this._dialogService.open(dialog, { responsivePadding: true } as DialogConfig);
 
         dialogRef.afterClosed.subscribe(
             (result) => {

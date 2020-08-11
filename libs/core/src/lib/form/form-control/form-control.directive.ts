@@ -26,7 +26,7 @@ export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges 
      * Whether form is in compact mode
      */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     @Input()
     type: string;
@@ -40,15 +40,13 @@ export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges 
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             this.state ? 'is-' + this.state : '',
             this._getFormClass(),
             this.compact ? this._getFormClass() + '--compact' : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     private _getFormClass(): string {

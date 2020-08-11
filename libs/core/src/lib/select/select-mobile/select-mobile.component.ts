@@ -45,18 +45,18 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     }
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this._listenOnSelectOpenChange();
     }
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this._openDialog();
         this.dialogRef.hide(true);
     }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.dialogRef.close();
         super.onDestroy();
     }

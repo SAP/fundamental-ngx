@@ -31,7 +31,7 @@ import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
 })
 export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     @HostBinding('class.fd-form-group')
-    fdFormGroupClass: boolean = true;
+    fdFormGroupClass = true;
 
     /** Determines if form items should be displayed inline or not
      * Default value is set to false;
@@ -46,7 +46,7 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
-    ngOnChanges() {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
@@ -60,8 +60,8 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
      *  should be used with @applyCssClass decorator
      */
     @applyCssClass
-    buildComponentCssClass(): string {
-        return this.isInline ? 'fd-form-group--inline' : '';
+    buildComponentCssClass(): string[] {
+        return [ this.isInline ? 'fd-form-group--inline' : '' ];
     }
 
     /** @hidden */

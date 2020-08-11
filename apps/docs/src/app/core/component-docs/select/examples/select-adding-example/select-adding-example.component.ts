@@ -10,7 +10,7 @@ export class SelectAddingExampleComponent {
 
     selectedValue: string;
 
-    addedOptions: number = 1;
+    addedOptions = 1;
 
     addOption(): void {
         this.options.push(`New option ${this.addedOptions++}`);

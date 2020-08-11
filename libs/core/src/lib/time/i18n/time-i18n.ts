@@ -6,44 +6,44 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class TimeI18n {
     /** Aria label for the 'increase hours' button */
-    increaseHoursLabel: string = 'Increase hours';
+    increaseHoursLabel = 'Increase hours';
 
     /** label for the 'hours' column */
-    hoursLabel: string = 'Hours';
+    hoursLabel = 'Hours';
 
     /** Aria label for the 'decrease hours' button */
-    decreaseHoursLabel: string = 'Decrease hours';
+    decreaseHoursLabel = 'Decrease hours';
 
     /** Aria label for the 'increase minutes' button */
-    increaseMinutesLabel: string = 'Increase minutes';
+    increaseMinutesLabel = 'Increase minutes';
 
     /** label for the 'minutes' column */
-    minutesLabel: string = 'Minutes';
+    minutesLabel = 'Minutes';
 
     /** Aria label for the 'decrease minutes' button */
-    decreaseMinutesLabel: string = 'Decrease minutes';
+    decreaseMinutesLabel = 'Decrease minutes';
 
     /** Aria label for the 'increase seconds' button */
-    increaseSecondsLabel: string = 'Increase seconds';
+    increaseSecondsLabel = 'Increase seconds';
 
     /** label for the 'seconds' column */
-    secondsLabel: string = 'Seconds';
+    secondsLabel = 'Seconds';
 
     /** Aria label for the 'decrease seconds' button */
-    decreaseSecondsLabel: string = 'Decrease seconds';
+    decreaseSecondsLabel = 'Decrease seconds';
 
     /** Aria label for the 'increase period' button */
-    increasePeriodLabel: string = 'Increase period';
+    increasePeriodLabel = 'Increase period';
 
     /** label for the 'period' column */
-    periodLabel: string = 'Period';
+    periodLabel = 'Period';
 
     /** Aria label for the 'decrease period' button */
-    decreasePeriodLabel: string = 'Decrease period';
+    decreasePeriodLabel = 'Decrease period';
 
     /** Ante Meridian value, which will be displayed on period column */
-    meridianAm: string = 'am';
+    meridianAm = 'am';
 
     /** Post Meridian value, which will be displayed on period column */
-    meridianPm: string = 'pm';
+    meridianPm = 'pm';
 }

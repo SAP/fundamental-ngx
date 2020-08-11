@@ -38,7 +38,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class FileInputComponent implements ControlValueAccessor {
     /** @hidden */
     @HostBinding('class.fd-file-input')
-    fdFileInputClass: boolean = true;
+    fdFileInputClass = true;
 
     /** @hidden */
     @ViewChild('input')
@@ -46,11 +46,11 @@ export class FileInputComponent implements ControlValueAccessor {
 
     /** Whether the file input is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** Whether the file input should accept multiple files. */
     @Input()
-    multiple: boolean = true;
+    multiple = true;
 
     /** Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
@@ -58,7 +58,7 @@ export class FileInputComponent implements ControlValueAccessor {
 
     /** Whether the file input accepts drag and dropped files. */
     @Input()
-    dragndrop: boolean = true;
+    dragndrop = true;
 
     /** Max file size in bytes that the input will accept. */
     @Input()
@@ -110,7 +110,7 @@ export class FileInputComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    selectHandler(event: File[]) {
+    selectHandler(event: File[]): void {
         if (this.maxFileSize) {
             const valid_files: File[] = [];
             const invalid_files: File[] = [];

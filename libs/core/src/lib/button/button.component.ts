@@ -41,31 +41,30 @@ export type ButtonType =
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
-
     /**
      * Native type of button element
      */
     @Input()
     @HostBinding('attr.type')
-    type: string = 'button';
+    type = 'button';
 
     /** The property allows user to pass additional css classes
      */
     @Input()
-    public class: string = '';
+    public class = '';
 
     /** The icon to include in the button. See the icon page for the list of icons.
      * Setter is used to control when css class have to be rebuilded.
      * Default value is set to ''.
      */
     @Input()
-    public glyph: string = '';
+    public glyph = '';
 
     /** Whether to apply compact mode to the button.
      * Default value is set to false
      */
     @Input()
-    public compact: boolean = false;
+    public compact = false;
 
     /** The type of the button. Types include:
      * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
@@ -79,7 +78,7 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
      * Default value is set to false
      */
     @Input()
-    public fdMenu: boolean = false;
+    public fdMenu = false;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
@@ -101,7 +100,7 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-button',
             this.fdType ? `fd-button--${this.fdType}` : '',
@@ -109,9 +108,7 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
             this.fdMenu ? `fd-button--menu` : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** HasElementRef interface implementation

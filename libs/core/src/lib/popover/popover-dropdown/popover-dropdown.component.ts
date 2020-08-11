@@ -31,11 +31,11 @@ import { ButtonType } from '../../button/button.component';
 export class PopoverDropdownComponent {
     /** Whether the popover should have an arrow. */
     @Input()
-    noArrow: boolean = true;
+    noArrow = true;
 
     /** Whether the popover is disabled. */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** The glyph to display. */
     @Input()
@@ -47,15 +47,15 @@ export class PopoverDropdownComponent {
 
     /** Whether the dropdown is in compact format. */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Whether the dropdown is in a toolbar. */
     @Input()
-    toolbar: boolean = false;
+    toolbar = false;
 
     /** Whether the dropdown is opened. */
     @Input()
-    isOpen: boolean = false;
+    isOpen = false;
 
     constructor() {
         if (isDevMode()) {

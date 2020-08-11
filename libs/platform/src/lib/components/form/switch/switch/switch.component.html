@@ -1,0 +1,12 @@
+<fd-switch
+    [id]="id"
+    [name]="name"
+    [compact]="isCompact"
+    [disabled]="disabled"
+    [semantic]="semantic"
+    [ariaLabel]="ariaLabel"
+    [ariaLabelledby]="ariaLabelledby"
+    [checked]="switchCurrentValue"
+    (checkedChange)="onValueChange($event)"
+    (click)="onClick($event)"
+></fd-switch>

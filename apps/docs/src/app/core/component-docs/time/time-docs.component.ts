@@ -170,7 +170,7 @@ export class TimeDocsComponent {
         this.schema = this.schemaFactory.getComponent('time');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

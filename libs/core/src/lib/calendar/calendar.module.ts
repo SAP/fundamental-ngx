@@ -8,7 +8,9 @@ import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view
 import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
 import { CalendarComponent } from './calendar.component';
 import { ButtonModule } from '../button/button.module';
-import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import {
+    CalendarAggregatedYearViewComponent
+} from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { CalendarCloseButtonDirective } from './calendar-directives';
 
 @NgModule({

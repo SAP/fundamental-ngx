@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FdDate } from '../../calendar/models/fd-date';
 import { DatePipe } from '@angular/common';
 
-export function DATE_FORMAT_FACTORY() {
+export function DATE_FORMAT_FACTORY(): DateFormatParserDefault {
     return new DateFormatParserDefault();
 }
 
@@ -17,7 +17,7 @@ export abstract class DateFormatParser {
     /**
      * Delimiter for the range. This should not show up in the string representation of the dates.
      */
-    rangeDelimiter: string = ' - ';
+    rangeDelimiter = ' - ';
 
     /**
      * Should take in a string value and return a FdDate model object.

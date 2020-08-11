@@ -16,8 +16,8 @@ export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuild
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
-        return ['fd-tokenizer__input', this.class].filter((x) => x !== '').join(' ');
+    buildComponentCssClass(): string[] {
+        return ['fd-tokenizer__input', this.class];
     }
 
     /** @hidden */

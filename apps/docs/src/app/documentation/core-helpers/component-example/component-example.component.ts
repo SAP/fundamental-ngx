@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/core';
 
-let componentExampleUniqueId: number = 0;
+let componentExampleUniqueId = 0;
 
 @Component({
     selector: 'component-example',
@@ -26,7 +26,7 @@ export class ComponentExampleComponent implements OnInit {
     id: string;
     id2: string;
 
-    ngOnInit() {
+    ngOnInit(): void {
         const exampleName: string = 'ex' + componentExampleUniqueId++;
         this.id = 'rtl-' + exampleName;
         this.id2 = 'background-' + exampleName;

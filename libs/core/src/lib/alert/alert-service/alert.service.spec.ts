@@ -8,6 +8,7 @@ import { AlertContainerComponent } from '../alert-utils/alert-container.componen
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { AlertRef } from '../alert-utils/alert-ref';
 import { ButtonModule } from '../../button/button.module';
+import { AlertConfig } from '../alert-utils/alert-config';
 
 @Component({
     template: `
@@ -44,7 +45,7 @@ describe('AlertService', () => {
     });
 
     it('should open alert container', () => {
-        const alertRef: AlertRef = service.open('teststring', { dismissible: false, duration: -1 });
+        const alertRef: AlertRef = service.open('teststring', { dismissible: false, duration: -1 } as AlertConfig);
         expect(service['alertContainerRef']).toBeTruthy();
     });
 
@@ -54,7 +55,7 @@ describe('AlertService', () => {
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
-        const alertRef: AlertRef = service.open('teststring', { dismissible: false, duration: -1 });
+        const alertRef: AlertRef = service.open('teststring', { dismissible: false, duration: -1 } as AlertConfig);
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 
@@ -71,7 +72,7 @@ describe('AlertService', () => {
         expect(service['alertContainerRef']).toBeFalsy();
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
-        const alertRef: AlertRef = service.open(fixtureElTmp, { dismissible: false, duration: -1 });
+        const alertRef: AlertRef = service.open(fixtureElTmp, { dismissible: false, duration: -1 } as AlertConfig);
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 
@@ -87,7 +88,7 @@ describe('AlertService', () => {
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
-        const alertRef: AlertRef = service.open(TemplateTestComponent, { dismissible: false, duration: -1 });
+        const alertRef: AlertRef = service.open(TemplateTestComponent, { dismissible: false, duration: -1 } as AlertConfig);
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 

@@ -7,12 +7,12 @@ import { map } from 'rxjs/operators';
     templateUrl: 'platform-tristate-checkbox.component.html'
 })
 export class PlatformChekboxTristateComponent implements AfterViewChecked {
-    public havana: boolean = false;
+    public havana = false;
     public beirut: boolean = null;
-    public budapest: string = 'Yes';
-    public lisbon: boolean = false;
+    public budapest = 'Yes';
+    public lisbon = false;
     public istanbul: boolean = null;
-    public busan: boolean = true;
+    public busan = true;
     public dubrovnik: boolean = null;
     public jaipur: boolean = null;
 

@@ -47,15 +47,15 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
 
     /** Whether the Object Status is clickable. */
     @Input()
-    clickable: boolean = false;
+    clickable = false;
 
     /** Whether the Object Status is inverted. */
     @Input()
-    inverted: boolean = false;
+    inverted = false;
 
     /** Whether the Object Status is in Large Design. */
     @Input()
-    large: boolean = false;
+    large = false;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
@@ -75,7 +75,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-object-status',
             this.inverted ? 'fd-object-status--inverted' : '',
@@ -85,9 +85,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
             this.indicationColor ? `fd-object-status--indication-${this.indicationColor}` : '',
             this.clickable ? 'fd-object-status--link' : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */

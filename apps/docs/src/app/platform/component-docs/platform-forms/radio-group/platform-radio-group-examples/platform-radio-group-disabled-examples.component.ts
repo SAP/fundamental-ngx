@@ -1,4 +1,3 @@
-import { of } from 'rxjs';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -11,21 +10,23 @@ export class PlatformRadioGroupDisabledExampleComponent {
 
     items = [
         {
-            label: 'Option 1',
-            value: 'Option 1',
-            state: 'default',
+            label: 'Winter',
+            value: 'winter',
             disabled: false
         },
         {
-            label: 'Option 2',
-            value: 'Option 2',
-            state: 'valid',
+            label: 'Spring',
+            value: 'spring',
             disabled: false
         },
         {
-            label: 'Option 3',
-            value: 'Option 3',
-            state: 'invalid',
+            label: 'Summer',
+            value: 'summer',
+            disabled: false
+        },
+        {
+            label: 'Autumn',
+            value: 'autumn',
             disabled: false
         }
     ];
@@ -33,31 +34,42 @@ export class PlatformRadioGroupDisabledExampleComponent {
     disabledItems = [
         {
             label: 'Not disabled',
-            value: 'Option 1',
-            state: 'default'
+            value: 'fall',
+            disabled: false
         },
         {
-            label: 'Option 2',
-            value: 'Option 2',
-            state: 'valid',
+            label: 'Winter',
+            value: 'winter',
+            disabled: false
+        },
+        {
+            label: 'Spring',
+            value: 'spring',
             disabled: true
         },
         {
-            label: 'Option 3',
-            value: 'Option 3',
-            state: 'invalid',
+            label: 'Summer',
+            value: 'summer',
+            disabled: true
+        },
+        {
+            label: 'Autumn',
+            value: 'autumn',
             disabled: true
         }
     ];
 
-    favoriteSeason1: string = '';
-    favoriteSeason2: string = '';
-    favoriteSeason3: string = '';
-    favoriteSeason4: string = '';
+    favoriteSeason1: string;
+    favoriteSeason2: string;
+    favoriteSeason3: string;
+    favoriteSeason4: string;
+    favoriteSeason5: string;
 
     customForm = new FormGroup({
         example1: new FormControl({ value: '', disabled: true }),
-        example2: new FormControl({ value: '', disabled: true }),
-        example3: new FormControl({ value: 'Winter', disabled: true })
+        example2: new FormControl({ value: '', disabled: false }),
+        example3: new FormControl({ value: '', disabled: true }),
+        example4: new FormControl({ value: 'winter', disabled: true }),
+        example5: new FormControl({ value: 'winter', disabled: false })
     });
 }

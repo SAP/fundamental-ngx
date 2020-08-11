@@ -5,15 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {
     InputGroupComponent,
-    InputGroupNumberComponent,
     InputGroupModule
 } from 'libs/core/src/lib/input-group/public_api';
 import { icons, semanticStates } from '../../utils';
 
 export default {
     title: 'Fd input-group',
-    component: InputGroupNumberComponent,
-    InputGroupComponent,
+    component: InputGroupComponent,
     moduleMetadata: moduleMetadata,
     decorators: [
         withKnobs,
@@ -24,26 +22,6 @@ export default {
         })
     ]
 };
-
-export const InputGroupNumber = () => ({
-    template: `
-        <label fd-form-label>Input Group</label>
-        <fd-input-group-number
-        [placeholder]="placeholderVar"
-        [disabled]="disabledVar"
-        [stepDownLabel]="stepDownLabel"
-        [stepUpLabel]="stepUpLabel"
-        [(ngModel)]="number"
-        ></fd-input-group-number>
-  `,
-    props: {
-        placeholderVar: text('Placeholder', 'Choose a number'),
-        disabledVar: boolean('Disabled', false),
-        stepDownLabel: text('Step down aria label', 'step-down'),
-        stepUpLabel: text('Step up aria label', 'step-up'),
-        number: number('Number', 0)
-    }
-});
 
 export const InputGroup = () => ({
     template: `

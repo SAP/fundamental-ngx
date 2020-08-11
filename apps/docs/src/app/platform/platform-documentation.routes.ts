@@ -33,6 +33,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'checkbox-group',
+                loadChildren: () =>
+                    import(
+                        './component-docs/platform-forms/platform-checkbox-group/platform-checkbox-group-docs.module'
+                    ).then((m) => m.PlatformCheckboxGroupDocsModule)
+            },
+            {
                 path: 'link',
                 loadChildren: () =>
                     import('./component-docs/platform-link/platform-link.module').then((m) => m.PlatformLinkDocsModule)
@@ -80,13 +87,36 @@ export const ROUTES: Routes = [
             {
                 path: 'info-label',
                 loadChildren: () =>
-                    import('./component-docs/platform-info-label/platform-info-label-docs-module').then((m) => m.PlatformInfoLabelDocsModule)
+                    import('./component-docs/platform-info-label/platform-info-label-docs-module').then(
+                        (m) => m.PlatformInfoLabelDocsModule
+                    )
             },
             {
                 path: 'textarea',
                 loadChildren: () =>
                     import('./component-docs/platform-forms/platform-textarea/platform-textarea-docs.module').then(
                         (m) => m.PlatformTextareaDocsModule
+                    )
+            },
+            {
+                path: 'panel',
+                loadChildren: () =>
+                    import('./component-docs/platform-panel/platform-panel.module').then(
+                        (m) => m.PlatformPanelDocsModule
+                    )
+            },
+            {
+                path: 'switch',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/switch/platform-switch-docs.module').then(
+                        (m) => m.PlatformSwitchDocsModule
+                    )
+            },
+            {
+                path: 'input',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/platform-input/platform-input-docs.module').then(
+                        (m) => m.PlatformInputDocsModule
                     )
             }
         ]

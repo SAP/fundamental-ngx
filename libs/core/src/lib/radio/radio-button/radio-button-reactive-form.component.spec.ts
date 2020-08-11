@@ -50,7 +50,7 @@ describe('RadioButtonComponent reactive forms', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<any> {
         changeDetectorRef.markForCheck();
         componentFixture.detectChanges();
         await componentFixture.whenStable();
@@ -65,15 +65,11 @@ describe('RadioButtonComponent reactive forms', () => {
         expect(component.radioButton1.value).toEqual(1);
     });
 
-    // Randomly failing - TODO investigate
-    xit('should check second radio', async () => {
-        await wait(fixture);
-
-        component.radioButton2.inputElement.nativeElement.click();
-
-        await wait(fixture);
-
-        expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
-        expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
+    it('should check second radio', async () => {
+      await fixture.whenStable();
+      component.radioButton2.inputElement.nativeElement.click();
+      fixture.detectChanges();
+      expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
+      expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
     });
 });

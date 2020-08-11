@@ -39,7 +39,7 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
      * By default field is set to false
      */
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
@@ -53,7 +53,7 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
      * by default disabled state is set to false
      */
     @Input()
-    disabled: boolean = false;
+    disabled = false;
 
     /** The field should be only used with reactive forms
      * Its purpose is to pass a current selected value from froumGroup
@@ -75,7 +75,7 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
      * uniqueId to a radio button
      */
     @Input()
-    id: string = `radio-id-${uniqueId++}`;
+    id = `radio-id-${uniqueId++}`;
 
     /** Value field stores information about holding value by radio button
      * The field is mandatory
@@ -145,12 +145,12 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
      *  should be used with @applyCssClass decorator
      */
     @applyCssClass
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-radio',
             this.compact ? 'fd-radio--compact' : '',
             this.state !== 'default' ? `is-${this.state}` : ''
-        ].join(' ');
+        ];
     }
 
     /** @hidden */
@@ -177,10 +177,10 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     /** @hidden */
     private _checkMandatoryFields(): void {
         if (this.name === undefined) {
-            throw 'name field is required';
+            throw new Error('name field is required');
         }
         if (this.value === undefined) {
-            throw 'value field is required';
+            throw new Error('value field is required');
         }
     }
 

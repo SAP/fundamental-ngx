@@ -106,6 +106,22 @@
                                     "with": "apps/docs/src/environments/environment.prod.ts"
                                 }
                             ]
+                        },
+                        "fr": {
+                            "aot": true,
+                            "outputPath": "dist/libs/platform/locale/fr",
+                            "i18nFile": "apps/docs/src/app/platform/locale/fr/messages.fr.xlf",
+                            "i18nFormat": "xlf",
+                            "i18nLocale": "fr",
+                            "i18nMissingTranslation": "error"
+                        },
+                        "ar": {
+                            "aot": true,
+                            "outputPath": "dist/libs/platform/locale/ar",
+                            "i18nFile": "apps/docs/src/app/platform/locale/ar/messages.ar.xlf",
+                            "i18nFormat": "xlf",
+                            "i18nLocale": "ar",
+                            "i18nMissingTranslation": "error"
                         }
                     }
                 },
@@ -120,6 +136,12 @@
                         },
                         "hmr": {
                             "browserTarget": "docs:build:hmr"
+                        },
+                        "fr": {
+                            "browserTarget": "docs:build:fr"
+                        },
+                        "ar": {
+                            "browserTarget": "docs:build:ar"
                         }
                     }
                 },
@@ -137,7 +159,6 @@
                             "apps/docs/tsconfig.spec.json"
                         ],
                         "exclude": [
-                            "**/node_modules/**",
                             "!apps/docs/**"
                         ]
                     }
@@ -184,8 +205,7 @@
                     "options": {
                         "tsConfig": "apps/docs-e2e/tsconfig.e2e.json",
                         "exclude": [
-                            "**/node_modules/**",
-                            "!apps/docs/**"
+                            "!apps/docs-e2e/**"
                         ]
                     }
                 }
@@ -217,8 +237,7 @@
                             "libs/core/tsconfig.spec.json"
                         ],
                         "exclude": [
-                            "**/node_modules/**",
-                            "!apps/docs/**"
+                            "!libs/core/**"
                         ]
                     }
                 },
@@ -263,7 +282,6 @@
                             "libs/platform/tsconfig.spec.json"
                         ],
                         "exclude": [
-                            "**/node_modules/**",
                             "!libs/platform/**"
                         ]
                     }

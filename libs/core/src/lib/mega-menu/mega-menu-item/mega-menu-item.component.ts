@@ -79,7 +79,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     /** Variable that specifies if the sublist menu is opened. */
     @Input()
-    open: boolean = false;
+    open = false;
 
     /** Defines what should be position for sublist */
     @Input()
@@ -242,7 +242,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         );
     }
 
-    private _keyboardLtr(event: KeyboardEvent) {
+    private _keyboardLtr(event: KeyboardEvent): void {
         switch (this.getKeyCode(event)) {
             case 'ArrowLeft': {
                 this._handleCloseSubList();
@@ -255,7 +255,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         }
     }
 
-    private _keyboardRtl(event: KeyboardEvent) {
+    private _keyboardRtl(event: KeyboardEvent): void {
         switch (this.getKeyCode(event)) {
             case 'ArrowRight': {
                 this._handleCloseSubList();
@@ -268,7 +268,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         }
     }
 
-    private _keyboardDefault(event: KeyboardEvent) {
+    private _keyboardDefault(event: KeyboardEvent): void {
         switch (this.getKeyCode(event)) {
             case ' ':
             case 'Enter': {
@@ -282,12 +282,12 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         }
     }
 
-    private _handleCloseSubList() {
+    private _handleCloseSubList(): void {
         this.closeSubList();
         this.link.focus();
     }
 
-    private _handleOpenSubList(event: KeyboardEvent) {
+    private _handleOpenSubList(event: KeyboardEvent): void {
         this.openSubList();
         this.changeDetectionRef.detectChanges();
         if (this.subItems.first) {
@@ -300,7 +300,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         return unifyKeyboardKey(event);
     }
 
-    private subscribeToRtl() {
+    private subscribeToRtl(): void {
         if (this.rtlService) {
             this.rtlService.rtl.pipe(takeUntil(this.onDestroy$)).subscribe((rtl) => {
                 this.subListPosition = rtl ? 'left' : 'right';

@@ -24,7 +24,7 @@ class TestWrapperComponent {
 
     value: string;
 
-    optionVisible: boolean = true;
+    optionVisible = true;
 }
 
 describe('SelectComponent', () => {
@@ -50,7 +50,7 @@ describe('SelectComponent', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<any> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }

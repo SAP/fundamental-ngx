@@ -46,7 +46,7 @@ import { ProductSwitchComponent } from '../../product-switch/product-switch/prod
 })
 export class ShellbarActionsComponent implements OnInit {
     /** @hidden */
-    actionsCollapsed: boolean = false;
+    actionsCollapsed = false;
 
     /** The user data. */
     @Input()
@@ -58,11 +58,11 @@ export class ShellbarActionsComponent implements OnInit {
 
     /** When set to true, popover list will be closed after selecting the option */
     @Input()
-    closePopoverOnSelect: boolean = false;
+    closePopoverOnSelect = false;
 
     /** Label for the collapsed item menu. */
     @Input()
-    collapsedItemMenuLabel: string = 'Collapsed Item Menu';
+    collapsedItemMenuLabel = 'Collapsed Item Menu';
 
     /** @hidden */
     @ContentChildren(ShellbarActionComponent)

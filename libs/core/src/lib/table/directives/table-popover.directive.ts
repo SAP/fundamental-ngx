@@ -6,5 +6,5 @@ import { Directive, HostBinding } from '@angular/core';
 export class TablePopoverDirective {
     /** @hidden */
     @HostBinding('class')
-    fdTablePopoverClass: string = 'fd-table__popover fd-table__popover--custom';
+    fdTablePopoverClass = 'fd-table__popover fd-table__popover--custom';
 }

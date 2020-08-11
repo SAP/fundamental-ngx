@@ -52,9 +52,9 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     id: string;
 
-    escKeyCloseable: boolean = true;
+    escKeyCloseable = true;
 
-    focusTrapped: boolean = true;
+    focusTrapped = true;
 
     ariaLabelledBy: string = null;
 
@@ -66,11 +66,11 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     childContent: TemplateRef<any> | Type<any> | NotificationDefault = undefined;
 
-    backdropClickCloseable: boolean = true;
+    backdropClickCloseable = true;
 
-    hasBackdrop: boolean = true;
+    hasBackdrop = true;
 
-    notificationPanelClass: string = '';
+    notificationPanelClass = '';
 
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 

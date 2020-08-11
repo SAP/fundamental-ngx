@@ -26,13 +26,13 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 })
 export class ProductTileComponent extends AbstractFdNgxClass {
     /** Whether the product tile is disabled. */
-    @Input() disabled: boolean = false;
+    @Input() disabled = false;
 
     /** Whether the product tile is rendered as a button. */
-    @Input() isButton: boolean = false;
+    @Input() isButton = false;
 
     /** @hidden */
-    _setProperties() {
+    _setProperties(): void {
         this._addClassToElement('fd-product-tile');
         if (this.disabled) {
             this._addClassToElement('is-disabled');

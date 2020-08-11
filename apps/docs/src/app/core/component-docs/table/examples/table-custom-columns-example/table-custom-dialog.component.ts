@@ -88,8 +88,8 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
 export class TableCustomDialogComponent {
     filterPhrase: string;
     columns: DisplayedColumn[] = [];
-    allSelected: boolean = false;
-    showError: boolean = false;
+    allSelected = false;
+    showError = false;
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
         this.columns = this.dialogRef.data.columns;
@@ -106,7 +106,7 @@ export class TableCustomDialogComponent {
         }
     }
 
-    dropHandle(event: CdkDragDrop<string[]>) {
+    dropHandle(event: CdkDragDrop<string[]>): void {
         moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
         this.columns = [...this.columns];
     }

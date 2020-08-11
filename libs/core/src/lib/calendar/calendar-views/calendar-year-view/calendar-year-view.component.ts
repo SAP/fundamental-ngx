@@ -119,7 +119,7 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
     }
 
     /** Method that sends the year to the parent component when it is clicked. */
-    selectYear(selectedYear: number, event?: MouseEvent) {
+    selectYear(selectedYear: number, event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
         }

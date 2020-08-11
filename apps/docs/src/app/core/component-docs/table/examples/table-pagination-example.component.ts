@@ -10,9 +10,9 @@ import { map } from 'rxjs/operators';
 export class TablePaginationExampleComponent implements OnInit {
     tableRows: any[];
     displayedRows: any[];
-    totalItems: number = 25;
-    itemsPerPage: number = 5;
-    currentPage: number = 3;
+    totalItems = 25;
+    itemsPerPage = 5;
+    currentPage = 3;
     itemsPerPageOptions: number[] = [3, 5, 10];
     rtl$: Observable<boolean>;
 

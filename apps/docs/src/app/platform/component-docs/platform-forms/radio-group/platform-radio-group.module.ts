@@ -10,7 +10,7 @@ import { PlatformRadioGroupContentExampleComponent } from './platform-radio-grou
 import { PlatformRadioGroupDisabledExampleComponent } from './platform-radio-group-examples/platform-radio-group-disabled-examples.component';
 import { PlatformRadioGroupListExampleComponent } from './platform-radio-group-examples/platform-radio-group-list-examples.component';
 import { PlatformRadioGroupListItemsExampleComponent } from './platform-radio-group-examples/platform-radio-group-list-items-examples.component';
-import { PlatformRadioGroupModule } from '@fundamental-ngx/platform';
+import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformRadioGroupModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformRadioGroupModule, FdpFormGroupModule],
     exports: [RouterModule],
     declarations: [
         PlatformRadioGroupDocsComponent,

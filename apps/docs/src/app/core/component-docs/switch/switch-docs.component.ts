@@ -114,7 +114,7 @@ export class SwitchDocsComponent {
         this.schema = this.schemaFactory.getComponent('switch');
     }
 
-    onSchemaValues(data) {
+    onSchemaValues(data): void {
         this.data = data;
     }
 }

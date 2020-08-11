@@ -29,7 +29,7 @@ export class FormInputMessageGroupComponent {
      *  Whether the popover should close when a click is made outside its boundaries.
      */
     @Input()
-    closeOnOutsideClick: boolean = true;
+    closeOnOutsideClick = true;
 
     /**
      * Preset options for the message body width.
@@ -42,11 +42,11 @@ export class FormInputMessageGroupComponent {
 
     /** Whether the popover should have an arrow. */
     @Input()
-    noArrow: boolean = true;
+    noArrow = true;
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
-    closeOnEscapeKey: boolean = true;
+    closeOnEscapeKey = true;
 
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
@@ -55,7 +55,7 @@ export class FormInputMessageGroupComponent {
 
     /** Whether the message is open. Can be used through two-way binding. */
     @Input()
-    isOpen: boolean = false;
+    isOpen = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -64,7 +64,7 @@ export class FormInputMessageGroupComponent {
     /**
      * Function is called every time message changes isOpen attribute
      */
-    public openChanged(isOpen: boolean) {
+    public openChanged(isOpen: boolean): void {
         this.isOpenChange.emit(isOpen);
     }
 }

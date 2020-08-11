@@ -3,7 +3,7 @@ import { DateFormatParser, FdDate, FdRangeDate } from '@fundamental-ngx/core';
 
 @Injectable()
 export class DateFormatDashes extends DateFormatParser {
-    rangeDelimiter: string = ' to ';
+    rangeDelimiter = ' to ';
 
     public parse(value: string): FdDate {
         const values: number[] = value.split('-').map(Number);

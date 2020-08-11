@@ -5,28 +5,30 @@ import { AvatarComponent } from './avatar.component';
 
 @Component({
     selector: 'fd-test-object-status',
-    template:  `<fd-avatar 
-                    [size]="size" 
-                    [glyph]="glyph" 
+    template:  `<fd-avatar
+                    [size]="size"
+                    [glyph]="glyph"
                     [circle]="circle"
-                    [transparent]="transparent" 
+                    [transparent]="transparent"
                     [placeholder]="placeholder"
-                    [tile]="tile"  
+                    [tile]="tile"
                     [colorAccent]="colorAccent"
                     [zoomGlyph]="zoomGlyph"
-                    [border]="border">
+                    [border]="border"
+                    [label]="label">
                 </fd-avatar>`
 })
 class TestComponent {
     size: 'xs' |'s' | 'm' | 'l' | 'xl' = 'm';
-    glyph: string = null; 
-    circle: boolean = false;
-    transparent: boolean = false;
-    placeholder: boolean = false;
-    tile: boolean = false;
+    glyph: string = null;
+    circle = false;
+    transparent = false;
+    placeholder = false;
+    tile = false;
     colorAccent: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = null;
     zoomGlyph: string = null;
-    border: boolean = false;
+    border = false;
+    label: string = null;
 }
 
 describe('AvatarComponent', () => {
@@ -70,7 +72,6 @@ describe('AvatarComponent', () => {
         component.size = 'xl';
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-avatar--xl')).toBeTruthy();
-        
     });
 
     it('Should Add Glyph', () => {
@@ -129,5 +130,15 @@ describe('AvatarComponent', () => {
         const zoomElement = fixture.debugElement.nativeElement;
         expect(zoomElement.querySelector('.fd-avatar__zoom-icon')).toBeTruthy();
         expect(zoomElement.querySelector('.sap-icon--edit')).toBeTruthy();
+    });
+
+    it('Should Add Abbreviate', () => {
+        component.label = 'Jane Doe';
+        fixture.detectChanges();
+        expect(fixture.debugElement.nativeElement.innerText).toEqual('JD');
+
+        component.label = 'Marjolein van Veen';
+        fixture.detectChanges();
+        expect(fixture.debugElement.nativeElement.innerText).toEqual('MvV');
     });
 });

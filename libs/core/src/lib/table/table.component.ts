@@ -21,32 +21,32 @@ import { TableService } from './table.service';
 export class TableComponent implements AfterViewInit {
     /** @hidden */
     @HostBinding('class.fd-table')
-    fdTableClass: boolean = true;
+    fdTableClass = true;
 
     /** Whether or not to show the table's horizontal borders */
     @HostBinding('class.fd-table--no-horizontal-borders')
     @Input()
-    noBorderX: boolean = false;
+    noBorderX = false;
 
     /** Whether or not to show the table's vertical borders */
     @HostBinding('class.fd-table--no-vertical-borders')
     @Input()
-    noBorderY: boolean = false;
+    noBorderY = false;
 
     /** Whether or not to display the table in compact mode */
     @HostBinding('class.fd-table--compact')
     @Input()
-    compact: boolean = false;
+    compact = false;
 
     /** Whether or not to display the table in condensed mode */
     @HostBinding('class.fd-table--condensed')
     @Input()
-    condensed: boolean = false;
+    condensed = false;
 
     /** Whether or not to display the table in pop in mode, it also require change of markup */
     @HostBinding('class.fd-table--pop-in')
     @Input()
-    popIn: boolean = false;
+    popIn = false;
 
     /** List of keys that identifies single columns */
     @Input()

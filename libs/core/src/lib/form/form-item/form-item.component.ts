@@ -21,19 +21,19 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 export class FormItemComponent {
     /** @deprecated  */
     @Input()
-    isCheck: boolean = false;
+    isCheck = false;
 
     /** Whether the form item is inline. */
     @Input()
     @HostBinding('class.fd-form-item--inline')
-    isInline: boolean = false;
+    isInline = false;
 
     /** Whether the form item is horizontal. */
     @Input()
     @HostBinding('class.fd-form-item--horizontal')
-    horizontal: boolean = false;
+    horizontal = false;
 
     /** @hidden */
     @HostBinding('class.fd-form-item')
-    fdFormItemClass: boolean = true;
+    fdFormItemClass = true;
 }
