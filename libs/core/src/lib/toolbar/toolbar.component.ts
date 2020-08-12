@@ -144,7 +144,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     private _alive = true;
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, private _renderer: Renderer2, private el: ElementRef) {}
+    constructor(private _cd: ChangeDetectorRef, private _renderer: Renderer2) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -267,7 +267,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         this._normalElements.push(...this.toolbarItems.filter(item => normalItems.indexOf(item) >= 0));
         this._overflowElements.push(...this.toolbarItems.filter(item => overflowItems.indexOf(item) >= 0));
         this._addToolbarItemToOverflow(this._overflowElements);
-        this._disappearElements.forEach(i => this._removeToolbarItemFromDOM(i));
+        this._disappearElements.forEach(this._removeToolbarItemFromDOM.bind(this));
 
         this.toolbarItems.forEach((x) =>
             this._changeItemVisibilityState(x.elementRef.nativeElement, true)
@@ -408,7 +408,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     private _removeToolbarItemFromDOM(toolbarItem: ToolbarItemDirective): void {
         if (toolbarItem.elementRef.nativeElement && toolbarItem.elementRef.nativeElement.parentNode) {
             // IE11 workaround element.remove() is not supported
-            this._renderer.removeChild(this.el.nativeElement, toolbarItem.elementRef.nativeElement);
+            this._renderer.removeChild(this.elementRef().nativeElement, toolbarItem.elementRef.nativeElement);
         }
     }
 
