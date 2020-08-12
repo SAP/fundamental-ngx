@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { BarDocsComponent } from './bar-docs.component';
 import {
     BarSubHeaderExampleComponent,
