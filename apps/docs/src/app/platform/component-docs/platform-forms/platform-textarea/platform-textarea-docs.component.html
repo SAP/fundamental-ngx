@@ -61,8 +61,17 @@
     Textarea with internationalization support.
 </fd-docs-section-title>
 <description
-    >This example shows how Textarea works with i18n markers to achieve internationalization support. Support for
-    translation of the counter message directly from the library is planned in the near future.
+    >This example shows how Textarea works with i18n markers to achieve internationalization support. Translation of the
+    counter message is available directly from the library and will be added to your application's .xlf files on using
+    the following commands from version 0.21.0 onwards:
+    <br />
+    <code>ng add @fundamental-ngx/platform</code> - if you don't already have ngx/platform installed, use this; or
+    <br />
+    <code>ng update @fundamental-ngx/platform --migrate-only --from=0.20.0</code> - if you have ngx/platform installed
+    and want to get the library translations, use this.
+    <br />
+    You can modify the counter message translation by looking for the i18n trans-unit id
+    <code>platformI18nTextareaCounterMessage</code> in your application's .xlf files.
     <br />
 </description>
 <component-example>

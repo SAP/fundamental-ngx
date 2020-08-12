@@ -199,7 +199,7 @@ describe('ComboboxComponent', () => {
         spyOn(component, 'searchFn');
         spyOn(component, 'isOpenChangeHandle');
         component.open = false;
-        component.onPrimaryButtonClick(new MouseEvent('click'));
+        component.onPrimaryButtonClick();
         expect(component.searchFn).toHaveBeenCalled();
         expect(component.isOpenChangeHandle).toHaveBeenCalledWith(true);
     });
@@ -248,7 +248,7 @@ describe('ComboboxComponent', () => {
         component.inputText = 'displayedValue2';
         (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
-        component.onPrimaryButtonClick(<any>{ stopPropagation: () => {}, preventDefault: () => {} });
+        component.onPrimaryButtonClick();
         expect(component.displayedValues.length).toBe(2);
     });
 

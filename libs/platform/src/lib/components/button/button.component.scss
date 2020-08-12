@@ -1,10 +1,14 @@
 :host {
-  display: inline-block;
+    display: inline-block;
+}
+
+:host(:focus) {
+    outline: none;
 }
 
 .fd-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }

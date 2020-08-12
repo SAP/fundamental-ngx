@@ -15,7 +15,6 @@ import {
 } from './examples/input-group-examples.component';
 import { InputGroupStatesExampleComponent } from './examples/input-group-states-example/input-group-states-example.component';
 import { InputGroupSearchExampleComponent } from './examples/input-group-search-example/input-group-search-example.component';
-import { InputGroupNumberExampleComponent } from './examples/input-group-number-example/input-group-number-example.component';
 import { InputGroupModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -41,9 +40,8 @@ const routes: Routes = [
         InputGroupButtonExampleComponent,
         InputGroupStatesExampleComponent,
         InputGroupSearchExampleComponent,
-        InputGroupNumberExampleComponent,
         InputGroupComplexExampleComponent,
         InputGroupTextCompactExampleComponent
     ]
 })
-export class InputGroupDocsModules {}
+export class InputGroupDocsModules { }

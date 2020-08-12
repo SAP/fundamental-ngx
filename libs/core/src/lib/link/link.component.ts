@@ -46,16 +46,14 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
     /** CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    buildComponentCssClass(): string[] {
         return [
             'fd-link',
             this.emphasized ? 'fd-link--emphasized' : '',
             this.disabled ? 'is-disabled' : '',
             this.inverted ? `fd-link--inverted` : '',
             this.class
-        ]
-            .filter((x) => x !== '')
-            .join(' ');
+        ];
     }
 
     /** @hidden */

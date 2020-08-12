@@ -36,6 +36,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     private parentMenuCloseSubscription: Subscription = Subscription.EMPTY;
     private menuItemHoverChangeSubscription: Subscription = Subscription.EMPTY;
 
+    /** Set Menu Component for which this trigger will be associated. */
     @Input('fdpMenuTriggerFor')
     get menu(): MenuComponent {
         return this._menu;
@@ -54,7 +55,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         private _viewContainerRef: ViewContainerRef,
         @Optional() @Self() private _menuItem: MenuItemComponent,
         @Optional() private _parentMenu: MenuComponent
-    ) {}
+    ) { }
 
     ngAfterContentInit(): void {
         if (this._isMenuItem()) {
@@ -85,6 +86,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this.menuItemHoverChangeSubscription.unsubscribe();
     }
 
+    /** @hidden Handle click on trigger element. */
     @HostListener('click', ['$event']) onTriggerClick($event: MouseEvent): void {
         // Need to interupt default menu behavior of closing the menu
         if (this._isMenuItem()) {
@@ -94,6 +96,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this.toggleMenu();
     }
 
+    /** @hidden Handled keypress which focus is on trigger element. */
     @HostListener('keydown', ['$event']) onTriggerKeydown($event: KeyboardEvent): void {
         switch ($event.key) {
             case 'Enter':
@@ -119,14 +122,25 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         }
     }
 
+    /** Flag to determine if associated menu is open. */
     get isMenuOpen(): boolean {
         return this._isMenuOpen;
     }
 
+    /** @hidden Toggle display of associated menu. */
     toggleMenu(): void {
-        this._isMenuOpen ? this.destroyMenu() : this.openMenu();
+        /**
+         * Need to add delay here to ensure that any "closeMenu" operation which
+         * has been invoked within an "outsideClickSubscription" gets resolved
+         * before "openMenu" is called. This can happen when there are multiple
+         * triggers for the same menu.
+         */
+        setTimeout(() => {
+            this._isMenuOpen ? this.destroyMenu() : this.openMenu();
+        }, 0);
     }
 
+    /** @hidden open associated menu. */
     openMenu(): void {
         // create overlay
         const overlayConfig = this._getOverlayConfig();
@@ -137,6 +151,9 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this._overlayRef.attach(this._portal);
 
         // add subscription to capture clicks outside menu
+        if (this.outsideClickSubscription) {
+            this.outsideClickSubscription.unsubscribe();
+        }
         this.outsideClickSubscription = fromEvent<MouseEvent>(document, 'click')
             .pipe(
                 filter((event) => {
@@ -155,6 +172,9 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             });
 
         // add subscription to menu 'close' event
+        if (this.menuCloseSubscription) {
+            this.menuCloseSubscription.unsubscribe();
+        }
         this.menuCloseSubscription = this._menu.close.subscribe((method: MenuCloseMethod) => {
             this.destroyMenu();
             // Need to close parent menu if closing of menu was done by terminating action
@@ -165,6 +185,9 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
 
         // add subscription to parent menu 'close' event
         if (this._parentMenu) {
+            if (this.parentMenuCloseSubscription) {
+                this.parentMenuCloseSubscription.unsubscribe();
+            }
             this.parentMenuCloseSubscription = this._parentMenu.close.subscribe((method: MenuCloseMethod) => {
                 this.closeMenu();
             });
@@ -176,10 +199,12 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this._isMenuOpen = true;
     }
 
+    /** @hidden close associated menu. */
     closeMenu(): void {
         this._menu.closeMenu();
     }
 
+    /** @hidden destroy associated menu. */
     destroyMenu(): void {
         if (!this._overlayRef || !this._isMenuOpen) {
             return;
@@ -189,6 +214,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this._isMenuOpen = false;
     }
 
+    /** @hidden */
     private _getOverlayConfig(): OverlayConfig {
         const positions = this._getPositions();
         const positionStrategy = this._overlay
@@ -207,6 +233,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         return overlayConfig;
     }
 
+    /** @hidden */
     private _getPositions(): ConnectedPosition[] {
         let positions: ConnectedPosition[] = [];
         const offsetYPosition = 0;
@@ -292,6 +319,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         return positions;
     }
 
+    /** @hidden */
     private _isMenuItem(): boolean {
         return !!(this._parentMenu && this._menuItem);
     }
