@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, QueryList, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { FileUploaderComponent } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-file-uploader-compact-example',
@@ -7,11 +6,6 @@ import { FileUploaderComponent } from '@fundamental-ngx/core';
     styleUrls: ['./file-uploader-compact-example.component.scss']
 })
 export class FileUploaderCompactExampleComponent {
-
-    @ViewChild('fileInput', { static: false }) inputElement: ElementRef;
-    constructor() { }
-
-    @ViewChild(FileUploaderComponent) fileuploader: FileUploaderComponent;
 
     files: File[];
 

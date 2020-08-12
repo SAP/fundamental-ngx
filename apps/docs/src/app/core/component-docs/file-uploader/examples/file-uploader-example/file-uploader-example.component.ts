@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
     styleUrls: ['./file-uploader-example.component.scss']
 })
 export class FileUploaderExampleComponent {
+
     files: File[];
+
+    handleFileSection(): void {
+        alert('Files selected successfully!!!');
+    }
 }

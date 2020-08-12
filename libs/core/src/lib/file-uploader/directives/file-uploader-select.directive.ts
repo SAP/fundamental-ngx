@@ -14,7 +14,7 @@ export class FileUploaderSelectDirective {
 
     /** Event emitted when files are selected. */
     @Output()
-    readonly onFileSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly fileSelected = new EventEmitter<File[]>();
 
     /** @hidden */
     @HostBinding('attr.multiple')
@@ -26,11 +26,11 @@ export class FileUploaderSelectDirective {
     @HostListener('change', ['$event'])
     onChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
-            const elRef: HTMLInputElement = <HTMLInputElement>event.target;
-            const files: FileList = elRef.files;
-            const fileArray: File[] = Array.from(files);
+            const elRef = <HTMLInputElement>event.target;
+            const files = elRef.files;
+            const fileArray = Array.from(files);
             if (files.length) {
-                this.onFileSelect.emit(fileArray);
+                this.fileSelected.emit(fileArray);
             }
         }
     }

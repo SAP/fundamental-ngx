@@ -6,9 +6,10 @@
     [placeholder]="'Choose File to upload'"
     [buttonLabel]="'Browse...'"
     [buttonAriaLabel]="'browse file'"
+    [(ngModel)]="files"
     [multiple]="true"
-    (selectedFilesChanged)="this.files = $event"
-    (selectedInvalidFiles)="this.invalidFiles = $event"
+    (selectedFilesChanged)="handleFileSection()"
+    (selectedInvalidFiles)="handleInvalidFiles($event)"
     [minFileSize]="'1KB'"
     [maxFileSize]="'1MB'"
 >

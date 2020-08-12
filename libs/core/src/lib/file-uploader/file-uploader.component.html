@@ -44,7 +44,7 @@
     class="fd-file-uploader__hidden"
     type="file"
     [attr.accept]="accept"
-    (onFileSelect)="selectHandler($event)"
+    (fileSelected)="selectHandler($event)"
     [multiple]="multiple"
     [disabled]="disabled"
     fdFileSelect

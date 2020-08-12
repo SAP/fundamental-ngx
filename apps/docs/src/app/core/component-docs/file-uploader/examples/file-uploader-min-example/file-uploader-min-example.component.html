@@ -8,9 +8,9 @@
     [buttonAriaLabel]="'browse file'"
     [multiple]="true"
     [(ngModel)]="files"
-    (selectedFilesChanged)="this.files = $event"
-    (selectedInvalidFiles)="this.invalidFiles = $event"
-    [minFileSize]="'2byte'"
+    (selectedFilesChanged)="handleFileSection()"
+    (selectedInvalidFiles)="handleInvalidFiles($event)"
+    [minFileSize]="'3KB'"
 >
 </fd-file-uploader>
 

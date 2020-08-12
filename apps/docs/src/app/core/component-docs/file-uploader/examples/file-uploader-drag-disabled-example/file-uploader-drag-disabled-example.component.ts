@@ -6,6 +6,16 @@ import { Component } from '@angular/core';
     styleUrls: ['./file-uploader-drag-disabled-example.component.scss']
 })
 export class FileUploaderDragDisabledExampleComponent {
+
     files: File[];
     invalidFiles: File[];
+
+    handleFileSection(): void {
+        alert('Files selected successfully!!!');
+    }
+
+    handleInvalidFiles($event): void {
+        alert(' Invalid file selection ');
+        this.invalidFiles = $event;
+    }
 }

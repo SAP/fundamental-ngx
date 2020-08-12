@@ -8,15 +8,14 @@
     [buttonAriaLabel]="'browse file'"
     [multiple]="true"
     [(ngModel)]="files"
-    (selectedFilesChanged)="this.files = $event"
-    (selectedInvalidFiles)="this.invalidFiles = $event"
+    (selectedFilesChanged)="handleFileSection()"
+    (selectedInvalidFiles)="handleInvalidFiles($event)"
     [maxFileSize]="'1MB'"
->
-</fd-file-uploader>
+></fd-file-uploader>
 
-<br /><br />
-
-Files Selected:
+<br />
+<br />
+Selected Files:
 <br />
 <span *ngFor="let file of files">
     <span class="green">{{ file.name }} </span><br

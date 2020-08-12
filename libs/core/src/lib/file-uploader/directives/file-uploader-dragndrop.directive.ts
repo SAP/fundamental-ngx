@@ -25,28 +25,27 @@ export class FileUploaderDragndropDirective {
 
     /** Event emitted when files are selected. Passes back an array of files. */
     @Output()
-    readonly fileChanged: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly fileChanged = new EventEmitter<File[]>();
 
     /** Event emitted when invalid files are selected. Passes back an array of files. */
     @Output()
-    readonly invalidFileDrop: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly invalidFileDrop = new EventEmitter<File[]>();
 
     /** Event emitted when the dragged file enters the dropzone. */
     @Output()
-    readonly dragEntered: EventEmitter<void> = new EventEmitter<void>();
+    readonly dragEntered = new EventEmitter<void>();
 
     /** Event emitted when the dragged file exits the dropzone. */
     @Output()
-    readonly dragLeave: EventEmitter<void> = new EventEmitter<void>();
+    readonly dragLeave = new EventEmitter<void>();
 
     private elementStateCounter = 0;
 
     /** @hidden */
     @HostListener('dragover', ['$event'])
-    public onDragover(event): void {
+    public onDragover(event: Event): void {
         if (this.dragndrop) {
-            event.preventDefault();
-            event.stopPropagation();
+            this._muteEvent(event);
         }
     }
 
@@ -61,27 +60,23 @@ export class FileUploaderDragndropDirective {
 
     /** @hidden */
     @HostListener('dragleave', ['$event'])
-    public onDragleave(event): void {
+    public onDragleave(event: Event): void {
         --this.elementStateCounter;
         if (this.dragndrop && this.elementStateCounter === 0) {
-            event.preventDefault();
-            event.stopPropagation();
+            this._muteEvent(event);
             this.dragLeave.emit();
         }
     }
 
     /** @hidden */
     @HostListener('drop', ['$event'])
-    public onDrop(event): void {
+    public onDrop(event: any): void {
         this.elementStateCounter = 0;
 
         if (!this.dragndrop || this.disabled) {
             return;
         }
-
-        event.preventDefault();
-        event.stopPropagation();
-
+        this._muteEvent(event);
         const rawFiles = event.dataTransfer.files;
         const files: File[] = Array.from(rawFiles);
 
@@ -90,28 +85,34 @@ export class FileUploaderDragndropDirective {
             return;
         }
 
-        const valid_files: File[] = [];
-        const invalid_files: File[] = [];
+        const validFiles: File[] = [];
+        const invalidFiles: File[] = [];
         if (files.length > 0) {
             if (!this.accept) {
                 files.forEach((file: File) => {
-                    valid_files.push(file);
+                    validFiles.push(file);
                 });
             } else {
-                const allowed_extensions = this.accept.toLocaleLowerCase().replace(/[\s.]/g, '').split(',');
+                const allowedExtensions = this.accept.toLocaleLowerCase().replace(/[\s.]/g, '').split(',');
                 files.forEach((file: File) => {
-                    const ext = file.name.split('.')[file.name.split('.').length - 1];
-                    if (allowed_extensions.lastIndexOf(ext) !== -1) {
-                        valid_files.push(file);
+                    const extension = file.name.split('.')[file.name.split('.').length - 1];
+                    if (allowedExtensions.lastIndexOf(extension) !== -1) {
+                        validFiles.push(file);
                     } else {
-                        invalid_files.push(file);
+                        invalidFiles.push(file);
                     }
                 });
             }
-            this.fileChanged.emit(valid_files);
-            if (invalid_files.length > 0) {
-                this.invalidFileDrop.emit(invalid_files);
-            }
+            this.fileChanged.emit(validFiles);
+            this.invalidFileDrop.emit(invalidFiles);
+
         }
+    }
+
+    private _muteEvent(event: Event): void {
+
+        event.preventDefault();
+        event.stopPropagation();
+
     }
 }

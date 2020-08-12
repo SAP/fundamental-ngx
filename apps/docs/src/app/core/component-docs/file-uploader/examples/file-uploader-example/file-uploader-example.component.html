@@ -1,6 +1,7 @@
 <fd-file-uploader
     #fileUploader
     [id]="fileUploader"
+    [(ngModel)]="files"
     [ariaLabel]="'Choose file'"
     [ariaLabelledBy]="'Choose file'"
     [placeholder]="'Select the file '"
@@ -8,7 +9,7 @@
     [buttonAriaLabel]="'browse file'"
     [multiple]="true"
     [accept]="'.png,.jpg'"
-    (selectedFilesChanged)="this.files = $event"
+    (selectedFilesChanged)="handleFileSection()"
 >
 </fd-file-uploader>
 

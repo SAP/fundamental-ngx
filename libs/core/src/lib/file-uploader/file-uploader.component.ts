@@ -67,11 +67,11 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     /** Max file size in bytes that the input will accept. */
     @Input()
-    maxFileSize: string;
+    maxFileSize = '';
 
     /** Min file size in bytes that the input will accept. */
     @Input()
-    minFileSize: string;
+    minFileSize = '';
 
     /** Id for the input element. */
     @Input()
@@ -113,19 +113,19 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     /** Event fired when files are selected. Passed object is the array of files selected. */
     @Output()
-    readonly selectedFilesChanged: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly selectedFilesChanged = new EventEmitter<File[]>();
 
     /** Event fired when some invalid files are selected. Passed object is the array of invalid files. */
     @Output()
-    readonly selectedInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly selectedInvalidFiles = new EventEmitter<File[]>();
 
     /** Event fired when the dragged file enters the component boundaries. */
     @Output()
-    readonly onDragEnter: EventEmitter<void> = new EventEmitter<void>();
+    readonly onDragEnter = new EventEmitter<void>();
 
     /** Event fired when the dragged file exits the component boundaries. */
     @Output()
-    readonly onDragLeave: EventEmitter<void> = new EventEmitter<void>();
+    readonly onDragLeave = new EventEmitter<void>();
 
     constructor(private changeDetRef: ChangeDetectorRef) { }
 
@@ -160,8 +160,8 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     /** @hidden */
     selectHandler(event: File[]): void {
-
         this.validateFiles(event);
+
         if (this.validFiles.length > 0) {
             this.setInputValue(this.validFiles);
             this.onChange(this.validFiles);
@@ -169,10 +169,6 @@ export class FileUploaderComponent implements ControlValueAccessor {
         }
         if (this.invalidFiles.length > 0) {
             this.selectedInvalidFiles.emit(this.invalidFiles);
-        } else {
-            this.setInputValue(event);
-            this.onChange(event);
-            this.selectedFilesChanged.emit(event);
         }
 
     }
@@ -181,35 +177,16 @@ export class FileUploaderComponent implements ControlValueAccessor {
         if (this.fileLimit && event.length > this.fileLimit) {
             throw new Error('FileLimitError - Selected files count is more than specified limit ');
         }
-        if (this.maxFileSize && this.minFileSize) {
-            const maxsize = this.parseFileSize(this.maxFileSize);
-            const minsize = this.parseFileSize(this.minFileSize);
-            event.forEach((file) => {
-                if (file.size < maxsize && file.size > minsize) {
-                    this.validFiles.push(file);
-                } else {
-                    this.invalidFiles.push(file);
-                }
-            });
-        } else if (this.maxFileSize) {
-            const maxsize = this.parseFileSize(this.maxFileSize);
-            event.forEach((file) => {
-                if (file.size < maxsize) {
-                    this.validFiles.push(file);
-                } else {
-                    this.invalidFiles.push(file);
-                }
-            });
-        } else if (this.minFileSize) {
-            const minsize = this.parseFileSize(this.minFileSize);
-            event.forEach((file) => {
-                if (file.size > minsize) {
-                    this.validFiles.push(file);
-                } else {
-                    this.invalidFiles.push(file);
-                }
-            });
+        const maxSize = this.parseFileSize(this.maxFileSize);
+        const minSize = this.parseFileSize(this.minFileSize);
+        const checkSize = (fileSize: number): boolean => {
+            if (this.maxFileSize && fileSize > maxSize) { return false; }
+            if (this.minFileSize && fileSize < minSize) { return false; }
+            return true;
         }
+
+        this.validFiles = event.filter(file => checkSize(file.size));
+        this.invalidFiles = event.filter(file => !checkSize(file.size));
 
     }
 
@@ -222,7 +199,11 @@ export class FileUploaderComponent implements ControlValueAccessor {
         this.inputRefText.nativeElement.title = fileName;
     }
 
-    parseFileSize(fileSize: string): Number {
+    parseFileSize(fileSize: string): number {
+
+        if (fileSize === '') {
+            return 0;
+        }
         const sizes = fileSize.match(/[\d\.]+|\D+/g);
         if (sizes.length > 1) {
             const size = Number(sizes[0].replace(/ +/g, ''));
@@ -246,7 +227,6 @@ export class FileUploaderComponent implements ControlValueAccessor {
             if (isNaN(Number(sizes))) {
                 throw new Error('FileSizeError - Invalid File size please check.');
             }
-            alert(sizes);
             return (Number(sizes));
         }
     }
