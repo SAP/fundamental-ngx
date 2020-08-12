@@ -38,7 +38,6 @@ export const API_FILES = {
     checkbox: ['CheckboxComponent'],
     datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
     datetimePicker: ['DatetimePickerComponent', 'FdDateTime', 'DateTimeFormatParser', 'DateTimeFormatParserDefault'],
-    dropdown: ['PopoverDropdownComponent'],
     fileInput: ['FileInputComponent', 'FileSelectDirective', 'FileDragndropDirective'],
     form: [
         'FormControlDirective',
@@ -54,8 +53,6 @@ export const API_FILES = {
     globalConfig: [
     ],
     icon: ['IconComponent'],
-    identifier: ['IdentifierComponent'],
-    image: ['ImageComponent'],
     infoLabel: ['InfoLabelComponent'],
     infiniteScroll: ['InfiniteScrollDirective'],
     inlineHelp: ['InlineHelpComponent'],
