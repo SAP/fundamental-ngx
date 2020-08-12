@@ -23,6 +23,6 @@
             </ng-template>
         </fdp-form-group>
     </div>
-    <pre>Form result: {{ fg.formGroup.value.qty }}</pre>
+    <pre>Form result: {{ fg.formGroup.value | json }}</pre>
     <pre>Form Status: {{ fg.formGroup.status }}</pre>
 </main>
