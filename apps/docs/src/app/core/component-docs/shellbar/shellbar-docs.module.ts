@@ -10,7 +10,6 @@ import { ShellbarSideNavExampleComponent } from './examples/shellbar-side-nav/sh
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
 import {
     ComboboxModule,
-    IdentifierModule,
     LayoutPanelModule,
     ProductSwitchModule,
     ShellbarModule,
@@ -36,7 +35,6 @@ const routes: Routes = [
         ShellbarModule,
         ComboboxModule,
         SideNavigationModule,
-        IdentifierModule,
         ProductSwitchModule,
         TileModule,
         LayoutPanelModule

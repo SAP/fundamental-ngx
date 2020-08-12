@@ -10,7 +10,6 @@ import { NotificationFooterComponent } from 'libs/core/src/lib/notification/noti
 import { NotificationGroupComponent } from 'libs/core/src/lib/notification/notification-group/notification-group.component';
 import { NotificationHeaderComponent } from 'libs/core/src/lib/notification/notification-header/notification-header.component';
 import { DefaultNotificationComponent } from 'libs/core/src/lib/notification/notification-utils/default-notification/default-notification.component';
-import { IdentifierModule } from '@fundamental-ngx/core';
 import { ButtonModule } from 'libs/core/src/lib/button/button.module';
 import { semanticStates } from '../../utils';
 
@@ -27,7 +26,7 @@ export default {
         withKnobs,
         withA11y,
         moduleMetadata({
-            imports: [NotificationModule, IdentifierModule, ButtonModule],
+            imports: [NotificationModule, ButtonModule],
             declarations: []
         })
     ]

@@ -5,7 +5,7 @@ import { NotificationService } from '@fundamental-ngx/core';
     selector: 'fd-notification-component-as-object-example',
     template: `
         <ng-template #avatarRef>
-            <span fd-identifier [size]="'s'" [circle]="true" aria-label="John Doe">JD</span>
+            <span fd-identifier aria-label="John Doe">JD</span>
         </ng-template>
         <button fd-button (click)="open()">Open from Object</button>
         <span style="margin-left: 24px;">{{ closeReason }}</span>

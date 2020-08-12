@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { NotificationDocsHeaderComponent } from './notification-docs-header/notification-docs-header.component';
 import { NotificationDocsComponent } from './notification-docs.component';
@@ -11,7 +12,7 @@ import { NotificationOptionsContentComponent } from './examples/notification-opt
 import { NotificationOptionsExampleComponent } from './examples/notification-options/notification-options-example.component';
 import { NotificationOpenTemplateExampleComponent } from './examples/template-as-content/notification-open-template-example.component';
 import { NotificationAsObjectExampleComponent } from './examples/notification-as-object.component';
-import { IdentifierModule, NotificationModule, NotificationService } from '@fundamental-ngx/core';
+import { NotificationModule, NotificationService } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, NotificationModule, IdentifierModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, NotificationModule],
     exports: [RouterModule],
     declarations: [
         NotificationDocsComponent,

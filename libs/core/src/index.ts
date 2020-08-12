@@ -16,8 +16,6 @@ export * from './lib/file-input/public_api';
 export * from './lib/file-uploader/public_api';
 export * from './lib/form/public_api';
 export * from './lib/icon/public_api';
-export * from './lib/identifier/public_api';
-export * from './lib/image/public_api';
 export * from './lib/infinite-scroll/public_api';
 export * from './lib/inline-help/public_api';
 export * from './lib/input-group/public_api';
