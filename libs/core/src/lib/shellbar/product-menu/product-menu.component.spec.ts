@@ -4,7 +4,6 @@ import { ProductMenuComponent } from './product-menu.component';
 import { PopoverModule } from '../../popover/popover.module';
 import { MenuModule } from '../../menu/menu.module';
 import { IconModule } from '../../icon/icon.module';
-import { IdentifierModule } from '../../identifier/identifier.module';
 
 describe('ProductMenuComponent', () => {
     let component: ProductMenuComponent;
@@ -13,7 +12,7 @@ describe('ProductMenuComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ProductMenuComponent],
-            imports: [PopoverModule, MenuModule, IconModule, IdentifierModule]
+            imports: [PopoverModule, MenuModule, IconModule]
         }).compileComponents();
     }));
 

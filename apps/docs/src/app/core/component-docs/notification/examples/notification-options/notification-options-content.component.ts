@@ -13,7 +13,7 @@ import { NotificationRef } from '@fundamental-ngx/core';
         <fd-notification-body>
             <div fd-notification-content>
                 <div fd-notification-avatar>
-                    <span fd-identifier [size]="'s'" [circle]="true" aria-label="John Doe">JD</span>
+                    <span fd-identifier aria-label="John Doe">JD</span>
                 </div>
                 <div fd-notification-text>
                     <div fd-notification-description>

@@ -94,18 +94,11 @@
                                 <span
                                     *ngIf="data.properties.transparent === true; else colorAccentTemplate"
                                     fd-identifier
-                                    [size]="data.properties.size"
-                                    [glyph]="data.properties.glyphs"
-                                    [transparent]="data.properties.transparent"
                                 ></span>
 
                                 <ng-template #colorAccentTemplate>
                                     <span
                                         fd-identifier
-                                        [size]="data.properties.size"
-                                        [glyph]="data.properties.glyphs"
-                                        [colorAccent]="data.properties.colorAccent"
-                                        [circle]="data.properties.circle"
                                     ></span>
                                 </ng-template>
                             </span>
@@ -146,7 +139,6 @@
                                 </fd-popover-body>
                             </fd-popover>
                         </div>
-                    </fd-tile>
 
                     <fd-product-tile
                         [disabled]="data.properties.disabled"
@@ -159,8 +151,6 @@
                             <p>{{ data.properties.description }}</p>
                         </div>
                     </fd-product-tile>
-                </p>
             </div>
         </div>
-    </div>
 </playground>
