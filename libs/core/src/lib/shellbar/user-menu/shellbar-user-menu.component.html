@@ -7,8 +7,6 @@
                 fd-identifier
                 size="xs"
                 *ngIf="!user.image"
-                [colorAccent]="user.colorAccent"
-                [circle]="true"
             >
                 {{ user.initials }}
             </span>
@@ -16,8 +14,6 @@
                 fd-identifier
                 size="xs"
                 *ngIf="user.image"
-                [colorAccent]="user.colorAccent"
-                [circle]="true"
                 [ngStyle]="{ 'background-image': 'url(' + user.image + ')' }"
             ></span>
         </button>

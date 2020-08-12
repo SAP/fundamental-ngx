@@ -13,8 +13,6 @@ import { PopoverPlacementExampleComponent } from './examples/popover-placement/p
 import { PopoverProgrammaticOpenExampleComponent } from './examples/popover-programmatic/popover-programmatic-open-example.component';
 import { PopoverExampleComponent } from './examples/popover-simple/popover-example.component';
 import {
-    IdentifierModule,
-    ImageModule,
     DialogModule,
     MultiInputModule,
     PopoverModule,
@@ -40,8 +38,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         PopoverModule,
-        ImageModule,
-        IdentifierModule,
         SideNavigationModule,
         MultiInputModule,
         DialogModule,
