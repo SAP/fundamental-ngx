@@ -1,8 +1,8 @@
 <fdp-button [fdpMenuTriggerFor]="basicMenu">Button</fdp-button>
 <fdp-button [buttonType]="'menu'" [fdpMenuTriggerFor]="basicMenu">Menu Button</fdp-button>
 <fdp-button [glyph]="'overflow'" [fdpMenuTriggerFor]="basicMenu"></fdp-button>
-<fd-image style="margin-right: 10px;" [size]="'m'" [photo]="'https://placeimg.com/400/400/nature'"
-    [fdpMenuTriggerFor]="basicMenu" tabindex="0"></fd-image>
+<fd-avaar style="margin-right: 10px;" size="m" image="https://placeimg.com/400/400/nature"
+    [fdpMenuTriggerFor]="basicMenu" tabindex="0"></fd-avaar>
 
 <fdp-menu #basicMenu id="basic-menu">
     <fdp-menu-item (itemSelect)="onItemSelect('First Item')">First Item</fdp-menu-item>

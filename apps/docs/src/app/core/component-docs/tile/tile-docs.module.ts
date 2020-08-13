@@ -13,7 +13,7 @@ import {
     TileMediaExampleComponent,
     TileProductExampleComponent
 } from './examples/tile-examples.component';
-import { ListModule, TileModule } from '@fundamental-ngx/core';
+import { AvatarModule, ListModule, TileModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -31,6 +31,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         TileModule,
+        AvatarModule,
         ListModule
     ],
     exports: [RouterModule],
