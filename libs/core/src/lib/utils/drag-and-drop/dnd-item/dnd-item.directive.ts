@@ -63,7 +63,9 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @hidden
+     * Element that indicates position of dragged element. It's ghost copy of dragged element.
+     */
     private _placeholderElement: HTMLElement;
 
     /** @hidden */
