@@ -79,12 +79,20 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     placement: Placement = 'bottom-start';
 
     /** Whether the time component should be meridian (am/pm). */
+    /** @hidden */
+    private _meridian;
+
+
+    /** Setter for the _meridian property. */
     @Input()
-    meridian = true;
+    set meridian (value) {
+      this.format = this._meridian ? 'MM/dd/yyyy, h:mm:ss a' : 'MM/dd/yyyy, H:mm:ss';
+      this._meridian = value;
+    };
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
-    format: string;
+    format = 'MM/dd/yyyy, HH:mm:ss';
 
     /** Locale for date pipe. See more https://angular.io/guide/i18n */
     @Input()
@@ -261,7 +269,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     onTouched: any = () => {};
-
+  
     /**
      * Function used to disable certain dates in the calendar.
      * @param fdDate FdDate
@@ -281,11 +289,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     ngOnInit(): void {
-        this.format = this.meridian ? 'MM/dd/yyyy, h:mm:ss a' : 'MM/dd/yyyy, H:mm:ss';
-        if (this.date && this.inputFieldDate !== null) {
-            this.selectedDate = this.date.date;
-            this.time = this.date.time;
-        }
+      if (this.date && this.inputFieldDate !== null) {
+          this.selectedDate = this.date.date;
+          this.time = this.date.time;
+      }
     }
 
     /** @hidden */

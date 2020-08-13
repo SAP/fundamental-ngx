@@ -55,6 +55,7 @@ describe('DatetimePickerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(DatetimePickerComponent);
         component = fixture.componentInstance;
+        component.ngOnInit();
         component.date = new FdDatetime(FdDate.getToday().nextDay(), FdDatetime.getToday().time);
         component.selectedDate = FdDate.getToday().nextDay();
         fixture.detectChanges();
@@ -180,6 +181,7 @@ describe('DatetimePickerComponent', () => {
         component.writeValue(dateTime);
         const invalidTime = { hour: 50, minute: 30, second: 20 };
         const invalidDate = new FdDatetime(dateTime.date, invalidTime);
+        fixture.detectChanges();
         component.handleInputChange(internalParser(invalidDate));
         expect(component.inputFieldDate).toEqual(internalParser(dateTime));
         expect(component.isInvalidDateInput).toBeTruthy();
