@@ -2,8 +2,8 @@
     <fdp-button [fdpMenuTriggerFor]="basicMenu">Button</fdp-button>
     <fdp-button [buttonType]="'menu'" [fdpMenuTriggerFor]="basicMenu">Menu Button</fdp-button>
     <fdp-button [glyph]="'menu'" [fdpMenuTriggerFor]="basicMenu"></fdp-button>
-    <fd-image style="margin-right: 10px;" [size]="'m'" [photo]="'https://placeimg.com/400/400/nature'"
-        [fdpMenuTriggerFor]="basicMenu"></fd-image>
+    <fd-avatar style="margin-right: 10px;" size="m" image="https://placeimg.com/400/400/nature"
+        [fdpMenuTriggerFor]="basicMenu"></fd-avatar>
     <div style="margin-top: 1rem;"><label>Item Selected:</label> {{ item }}</div>
 
     <fdp-menu #basicMenu [xPosition]="'before'" id="basic-menu">

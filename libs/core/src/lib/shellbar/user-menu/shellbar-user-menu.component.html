@@ -3,19 +3,21 @@
         <button class="fd-button fd-shellbar__button fd-user-menu__control"
                 [disabled]="disabled"
                 [fdMenuTrigger]="menu">
-            <span
-                fd-identifier
+            <fd-avatar
                 size="xs"
                 *ngIf="!user.image"
+                colorAccent="user.colorAccent"
+                [circle]="true"
             >
                 {{ user.initials }}
-            </span>
-            <span
-                fd-identifier
+            </fd-avatar>
+            <fd-avatar
+                colorAccent="user.colorAccent"
+                [circle]="true"
                 size="xs"
                 *ngIf="user.image"
                 [ngStyle]="{ 'background-image': 'url(' + user.image + ')' }"
-            ></span>
+            ></fd-avatar>
         </button>
         <fd-menu #menu
                  [options]="options"

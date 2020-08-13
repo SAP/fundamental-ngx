@@ -10,6 +10,8 @@ import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { AvatarModule } from '@fundamental-ngx/core';
+
 
 @NgModule({
     declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
@@ -18,7 +20,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES),
-        ScrollingModule
+        ScrollingModule,
+        AvatarModule
     ],
     providers: [
         { provide: 'CURRENT_LIB', useValue: 'platform' },
