@@ -14,8 +14,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
     declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
     imports: [
-        ScrollingModule,
         SharedDocumentationModule,
+        SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS)

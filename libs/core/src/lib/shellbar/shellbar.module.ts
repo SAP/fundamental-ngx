@@ -19,6 +19,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductSwitchModule } from '../product-switch/product-switch.module';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarActionsMobileComponent } from './shellbar-actions/shellbar-actions-mobile.component';
+import { AvatarModule } from '@fundamental-ngx/core';
+
 
 @NgModule({
     declarations: [
@@ -41,7 +43,8 @@ import { ShellbarActionsMobileComponent } from './shellbar-actions/shellbar-acti
         DragAndDropModule,
         DragDropModule,
         ProductSwitchModule,
-        IconModule
+        IconModule,
+        AvatarModule
     ],
     exports: [
         ShellbarComponent,
