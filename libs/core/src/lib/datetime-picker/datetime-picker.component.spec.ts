@@ -175,6 +175,7 @@ describe('DatetimePickerComponent', () => {
     });
 
     it('should stick to last valid, on invalid string.', () => {
+        component.meridian = false;
         const dateTime = new FdDatetime(FdDate.getToday(), { hour: 12, minute: 11, second: 10 });
         component.writeValue(dateTime);
         const invalidTime = { hour: 50, minute: 30, second: 20 };
