@@ -80,7 +80,6 @@ export class DatetimePickerComplexI18nExampleComponent {
     public date: FdDatetime = FdDatetime.getToday();
 
     public refresh(): void {
-      console.log(this.date);
         this.datetimePickerComponent.locale = this.actualLocale;
         this.datetimePickerComponent.format = this.actualFormat;
         this.placeholder = placeholders.get(this.actualLocale);
