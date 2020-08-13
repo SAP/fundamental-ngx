@@ -109,10 +109,9 @@ export class FileUploaderDragndropDirective {
         }
     }
 
+    /** @hidden */
     private _muteEvent(event: Event): void {
-
         event.preventDefault();
         event.stopPropagation();
-
     }
 }
