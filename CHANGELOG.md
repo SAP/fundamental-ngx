@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.21.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.21.0-rc.9...v0.21.0-rc.10) (2020-08-13)
+
+
+### Bug Fixes
+
+* add locale to i18n example of datetime picker ([#2923](https://github.com/SAP/fundamental-ngx/issues/2923)) ([3920897](https://github.com/SAP/fundamental-ngx/commit/3920897e1be706ef7821cbd66191307258c88b5d))
+
 ## [0.21.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.21.0-rc.8...v0.21.0-rc.9) (2020-08-13)
 
 
