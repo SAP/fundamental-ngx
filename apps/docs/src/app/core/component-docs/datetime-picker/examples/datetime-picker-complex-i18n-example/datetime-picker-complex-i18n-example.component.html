@@ -1,34 +1,8 @@
 <label fd-form-label>Languages</label>
-<fd-segmented-button id="language" style="margin-bottom: 20px;">
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('en-gb')" [state]="isSelected('en-gb')">
-        English
-    </button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('fr')" [state]="isSelected('fr')">French</button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('de')" [state]="isSelected('de')">German</button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('bg')" [state]="isSelected('bg')">Bulgarian</button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('pl')" [state]="isSelected('pl')">Polish</button>
-</fd-segmented-button>
+<div class="example">
+  <fd-select (valueChange)="setLocale($event)" placeholder="Select an option" [(value)]="selectedLocale">
+    <fd-option *ngFor="let option of ['en-ca','fr','de','bg','pl']" [value]="option">{{ option }}</fd-option>
+  </fd-select>
+</div>
 
-<br />
-<fieldset fd-fieldset>
-    <div fd-form-item>
-        <label fd-form-label for="docs-date-picker-format">Date Format</label>
-        <fd-input-group
-            id="docs-date-picker-format"
-            [placeholder]="'Date Format'"
-            [(ngModel)]="actualFormat"
-            class="docs-example-fd-form-group"
-            [button]="true"
-            (addOnButtonClicked)="refresh()"
-            [addOnText]="'Refresh'"
-        >
-        </fd-input-group>
-        <fd-form-message type="help">
-            Full list of formats can be found in
-            <a href="https://angular.io/api/common/DatePipe" target="_blank">
-                Official Angular Documentation
-            </a>
-        </fd-form-message>
-    </div>
-</fieldset>
-<fd-datetime-picker [placeholder]="placeholder" [meridian]="false"  [displaySeconds]="false" [format]="actualFormat" [locale]="actualLocale" [(ngModel)]="date"></fd-datetime-picker>
+<fd-datetime-picker [placeholder]="placeholder" [meridian]="meridian"  [displaySeconds]="false" [format]="actualFormat" [locale]="actualLocale" [(ngModel)]="date"></fd-datetime-picker>

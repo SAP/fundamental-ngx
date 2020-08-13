@@ -79,8 +79,16 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     placement: Placement = 'bottom-start';
 
     /** Whether the time component should be meridian (am/pm). */
+    /** @hidden */
+    private _meridian;
+
+
+    /** Setter for the _meridian property. */
     @Input()
-    meridian = true;
+    set meridian (value) {
+      this.format = this._meridian ? 'MM/dd/yyyy, h:mm:ss a' : 'MM/dd/yyyy, H:mm:ss';
+      this._meridian = value;
+    };
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
@@ -261,7 +269,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     onTouched: any = () => {};
-
+  
     /**
      * Function used to disable certain dates in the calendar.
      * @param fdDate FdDate
@@ -281,10 +289,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.date && this.inputFieldDate !== null) {
-            this.selectedDate = this.date.date;
-            this.time = this.date.time;
-        }
+      if (this.date && this.inputFieldDate !== null) {
+          this.selectedDate = this.date.date;
+          this.time = this.date.time;
+      }
     }
 
     /** @hidden */
@@ -515,13 +523,15 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     private _activateTimeComponent(): void {
         this.popover.directiveRef.loaded
             .pipe(
-                filter(() => !this.timeComponent.activeView),
                 first(),
                 takeUntil(this._onDestroy$),
                 delay(0)
             )
             .subscribe(() => {
+              if (!this.timeComponent.activeView) {
                 this.timeComponent.changeActive('hour');
+              }
+                this.timeComponent.refreshTime();
             });
     }
 
