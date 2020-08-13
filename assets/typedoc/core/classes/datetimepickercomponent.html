@@ -6,7 +6,7 @@
 			<p>The datetime picker component is an opinionated composition of the fd-popover,
 				fd-calendar and fd-time components to accomplish the UI pattern for picking a date and time.
 			Supports Angular Forms.</p>
-			<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-date-time-picker</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"dateTime"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fd-date-time-picker</span>&gt;</span></code></pre>
+			<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-date-time-picker</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">&quot;dateTime&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fd-date-time-picker</span>&gt;</span></code></pre>
 		</div>
 	</div>
 </section>
@@ -22,6 +22,7 @@
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
 		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
 		<li><span class="tsd-signature-type">Validator</span></li>
 	</ul>
@@ -35,7 +36,7 @@
 		<div class="tsd-signature tsd-kind-icon">active<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdCalendarView</span><span class="tsd-signature-symbol"> = &quot;day&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L149">lib/datetime-picker/datetime-picker.component.ts:149</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L135">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:135</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -51,7 +52,7 @@
 		<div class="tsd-signature tsd-kind-icon">allow<wbr>Null<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L161">lib/datetime-picker/datetime-picker.component.ts:161</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L147">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:147</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -67,7 +68,7 @@
 		<div class="tsd-signature tsd-kind-icon">button<wbr>Focusable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L181">lib/datetime-picker/datetime-picker.component.ts:181</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L167">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:167</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -83,7 +84,7 @@
 		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L90">lib/datetime-picker/datetime-picker.component.ts:90</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L72">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:72</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -99,7 +100,7 @@
 		<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdDatetime</span><span class="tsd-signature-symbol"> = FdDatetime.getToday()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L137">lib/datetime-picker/datetime-picker.component.ts:137</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L123">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:123</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -115,7 +116,7 @@
 		<div class="tsd-signature tsd-kind-icon">datetime<wbr>Input<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;Datetime input&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L153">lib/datetime-picker/datetime-picker.component.ts:153</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L139">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:139</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -131,7 +132,7 @@
 		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L113">lib/datetime-picker/datetime-picker.component.ts:113</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L103">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:103</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -147,7 +148,7 @@
 		<div class="tsd-signature tsd-kind-icon">display<wbr>Datetime<wbr>Toggle<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;Display calendar toggle&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L157">lib/datetime-picker/datetime-picker.component.ts:157</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L143">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:143</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -163,7 +164,7 @@
 		<div class="tsd-signature tsd-kind-icon">display<wbr>Hours<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L129">lib/datetime-picker/datetime-picker.component.ts:129</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L115">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:115</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -179,7 +180,7 @@
 		<div class="tsd-signature tsd-kind-icon">display<wbr>Minutes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L125">lib/datetime-picker/datetime-picker.component.ts:125</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L111">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:111</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -195,7 +196,7 @@
 		<div class="tsd-signature tsd-kind-icon">display<wbr>Seconds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L121">lib/datetime-picker/datetime-picker.component.ts:121</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L107">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:107</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -211,7 +212,7 @@
 		<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;MM/dd/yyyy, HH:mm:ss&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L105">lib/datetime-picker/datetime-picker.component.ts:105</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L95">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:95</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -227,7 +228,7 @@
 		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L141">lib/datetime-picker/datetime-picker.component.ts:141</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L127">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:127</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -243,7 +244,7 @@
 		<div class="tsd-signature tsd-kind-icon">keep<wbr>Two<wbr>Digits<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L168">lib/datetime-picker/datetime-picker.component.ts:168</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L154">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:154</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -263,7 +264,7 @@
 		<div class="tsd-signature tsd-kind-icon">locale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L109">lib/datetime-picker/datetime-picker.component.ts:109</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L99">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:99</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -279,28 +280,12 @@
 		<div class="tsd-signature tsd-kind-icon">mark<wbr>Weekends<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L219">lib/datetime-picker/datetime-picker.component.ts:219</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L205">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:205</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Whether user wants to mark sunday/saturday with <code>fd-calendar__item--weekend</code> class</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="meridian" class="tsd-anchor"></a>
-		<h3>meridian</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">meridian<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L101">lib/datetime-picker/datetime-picker.component.ts:101</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether the time component should be meridian (am/pm).</p>
 			</div>
 		</div>
 	</section>
@@ -311,7 +296,7 @@
 		<div class="tsd-signature tsd-kind-icon">placeholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;mm/dd/yyyy, hh:mm:ss am&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L86">lib/datetime-picker/datetime-picker.component.ts:86</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L68">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:68</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -327,7 +312,7 @@
 		<div class="tsd-signature tsd-kind-icon">placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Placement</span><span class="tsd-signature-symbol"> = &quot;bottom-start&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L97">lib/datetime-picker/datetime-picker.component.ts:97</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L79">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:79</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -344,7 +329,7 @@
 		<div class="tsd-signature tsd-kind-icon">show<wbr>Week<wbr>Numbers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L225">lib/datetime-picker/datetime-picker.component.ts:225</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L215">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:215</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -360,7 +345,7 @@
 		<div class="tsd-signature tsd-kind-icon">special<wbr>Days<wbr>Rules<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SpecialDayRule</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L191">lib/datetime-picker/datetime-picker.component.ts:191</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L177">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:177</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -374,19 +359,21 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="spinners" class="tsd-anchor"></a>
-		<h3>spinners</h3>
+		<a name="spinnerbuttons" class="tsd-anchor"></a>
+		<h3>spinner<wbr>Buttons</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">spinners<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+		<div class="tsd-signature tsd-kind-icon">spinner<wbr>Buttons<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L117">lib/datetime-picker/datetime-picker.component.ts:117</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L209">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:209</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether the time component shows spinners for changing the time.</p>
-			</div>
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Whether to show spinner buttons</p>
+				</dd>
+			</dl>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
@@ -396,7 +383,7 @@
 		<div class="tsd-signature tsd-kind-icon">starting<wbr>Day<wbr>OfWeek<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DaysOfWeek</span><span class="tsd-signature-symbol"> = 1</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L145">lib/datetime-picker/datetime-picker.component.ts:145</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L131">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:131</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -412,7 +399,7 @@
 		<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormStates</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L175">lib/datetime-picker/datetime-picker.component.ts:175</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L161">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:161</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -429,7 +416,7 @@
 		<div class="tsd-signature tsd-kind-icon">use<wbr>Validation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L133">lib/datetime-picker/datetime-picker.component.ts:133</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L119">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:119</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -437,6 +424,35 @@
 				<p>Whether to perform visual validation on the picker input.</p>
 			</div>
 		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="meridian" class="tsd-anchor"></a>
+		<h3>meridian</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> meridian<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L88">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:88</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Setter for the _meridian property.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="disablefunction" class="tsd-anchor"></a>
@@ -449,7 +465,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L258">lib/datetime-picker/datetime-picker.component.ts:258</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L278">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:278</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -479,7 +495,7 @@
 		<div class="tsd-signature tsd-kind-icon">aggregated<wbr>Year<wbr>Grid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L209">lib/datetime-picker/datetime-picker.component.ts:209</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L195">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:195</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -495,7 +511,7 @@
 			<div class="tsd-signature tsd-kind-icon">cols<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 3</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L211">lib/datetime-picker/datetime-picker.component.ts:211</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L197">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:197</a></li>
 				</ul>
 			</aside>
 		</section>
@@ -506,7 +522,7 @@
 			<div class="tsd-signature tsd-kind-icon">rows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 4</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L210">lib/datetime-picker/datetime-picker.component.ts:210</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L196">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:196</a></li>
 				</ul>
 			</aside>
 		</section>
@@ -521,7 +537,7 @@
 				<li class="tsd-description">
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L212">lib/datetime-picker/datetime-picker.component.ts:212</a></li>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L198">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:198</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-parameters-title">Parameters</h4>
@@ -542,7 +558,7 @@
 		<div class="tsd-signature tsd-kind-icon">year<wbr>Grid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L198">lib/datetime-picker/datetime-picker.component.ts:198</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L184">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:184</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -558,7 +574,7 @@
 			<div class="tsd-signature tsd-kind-icon">cols<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 5</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L200">lib/datetime-picker/datetime-picker.component.ts:200</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L186">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:186</a></li>
 				</ul>
 			</aside>
 		</section>
@@ -569,7 +585,7 @@
 			<div class="tsd-signature tsd-kind-icon">rows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 4</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L199">lib/datetime-picker/datetime-picker.component.ts:199</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L185">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:185</a></li>
 				</ul>
 			</aside>
 		</section>
@@ -584,7 +600,7 @@
 				<li class="tsd-description">
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L201">lib/datetime-picker/datetime-picker.component.ts:201</a></li>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L187">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:187</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-parameters-title">Parameters</h4>
@@ -603,12 +619,12 @@
 	<h2>Outputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="activeviewchange" class="tsd-anchor"></a>
-		<h3>active<wbr>View<wbr>Change</h3>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> active<wbr>View<wbr>Change</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">active<wbr>View<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FdCalendarView</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;FdCalendarView&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L229">lib/datetime-picker/datetime-picker.component.ts:229</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L219">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:219</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -619,12 +635,12 @@
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="calendarchange" class="tsd-anchor"></a>
-		<h3>calendar<wbr>Change</h3>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> calendar<wbr>Change</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">calendar<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FdDatetime</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;FdDatetime&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L237">lib/datetime-picker/datetime-picker.component.ts:237</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L227">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:227</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -635,12 +651,12 @@
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="datechange" class="tsd-anchor"></a>
-		<h3>date<wbr>Change</h3>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> date<wbr>Change</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">date<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FdDatetime</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;FdDatetime&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L233">lib/datetime-picker/datetime-picker.component.ts:233</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L223">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:223</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -651,12 +667,12 @@
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="onclose" class="tsd-anchor"></a>
-		<h3>on<wbr>Close</h3>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> on<wbr>Close</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">on<wbr>Close<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;void&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L245">lib/datetime-picker/datetime-picker.component.ts:245</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L235">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:235</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -667,12 +683,12 @@
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="timechange" class="tsd-anchor"></a>
-		<h3>time<wbr>Change</h3>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> time<wbr>Change</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">time<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FdDatetime</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;FdDatetime&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L241">lib/datetime-picker/datetime-picker.component.ts:241</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L231">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:231</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -691,7 +707,7 @@
 		<div class="tsd-signature tsd-kind-icon">date<wbr>Time<wbr>Adapter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DateTimeFormatParser</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L345">lib/datetime-picker/datetime-picker.component.ts:345</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L286">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:286</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -709,7 +725,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L306">lib/datetime-picker/datetime-picker.component.ts:306</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L349">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:349</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -732,7 +748,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L293">lib/datetime-picker/datetime-picker.component.ts:293</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L335">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:335</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -761,7 +777,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L451">lib/datetime-picker/datetime-picker.component.ts:451</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L480">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:480</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -784,7 +800,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L298">lib/datetime-picker/datetime-picker.component.ts:298</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L340">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:340</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -807,7 +823,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/e688207b/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L281">lib/datetime-picker/datetime-picker.component.ts:281</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/4281e1d4/libs/core/src/lib/datetime-picker/datetime-picker.component.ts#L323">libs/core/src/lib/datetime-picker/datetime-picker.component.ts:323</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

@@ -65,30 +65,31 @@
 		</li>
 		<li><p><strong>Import the modules you want to use.</strong></p>
 			<p> To add the entire library, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { FundamentalNgxCoreModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core'</span>;
+			<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { FundamentalNgxCoreModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@fundamental-ngx/core&#x27;</span>;
 
- @NgModule({
-     ...
-     imports: [FundamentalNgxCoreModule],
- })
- <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
+@NgModule({
+    ...
+    imports: [FundamentalNgxCoreModule],
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
 			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
 			<p> For example, to use Switchs, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { CheckboxModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core’'</span>;</code></pre>
+			<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { CheckboxModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@fundamental-ngx/core’&#x27;</span>;</code></pre>
 			<p> For models prior to 0.10 use <code>fundamental-ngx</code></p>
-			<pre><code> <span class="hljs-keyword">import</span> { CheckboxModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core'</span>;
+			<pre><code><span class="hljs-keyword">import</span> { CheckboxModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@fundamental-ngx/core&#x27;</span>;
 
- @NgModule({
-     ...
-     imports: [CheckboxModule],
- })
- <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> { }</span></code></pre></li>
+@NgModule({
+    ...
+    imports: [CheckboxModule],
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> { }</span></code></pre>
+		</li>
 		<li><p><strong>Provide the RtlService.</strong>
 				In your main application module, add <code>RtlService</code> to the list of providers. This service is needed to ensure proper right-to-left functionality for
 			users with their browser set to an RTL language.</p>
 		</li>
 		<li><p><strong>Add the component to your HTML.</strong></p>
-			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-checkbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Fundamental Ngx Checkbox"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fd-checkbox</span>&gt;</span></code></pre>
+			<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-checkbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;Fundamental Ngx Checkbox&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fd-checkbox</span>&gt;</span></code></pre>
 		</li>
 	</ol>
 	<a href="#5-known-issues" id="5-known-issues" style="color: inherit; text-decoration: none;">

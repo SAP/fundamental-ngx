@@ -61,30 +61,30 @@
 		<li><p><strong>Import the modules you want to use.</strong></p>
 			<p> To add the entire library, add the following import to your main application module.</p>
 			<pre><code class="language-javascript">
- <span class="hljs-keyword">import</span> { FundamentalNgxPlatformModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/platform'</span>;
+<span class="hljs-keyword">import</span> { FundamentalNgxPlatformModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@fundamental-ngx/platform&#x27;</span>;
 
- @NgModule({
-     ...
-     imports: [FundamentalNgxPlatformModule],
- })
- <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
+@NgModule({
+    ...
+    imports: [FundamentalNgxPlatformModule],
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
 			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
 			<p> For example, to use Link, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { PlatformLinkModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/platform'</span>;</code></pre>
+			<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { PlatformLinkModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@fundamental-ngx/platform&#x27;</span>;</code></pre>
 			<p> Note: Be careful while importing the entire <code>FundamentalNgxPlatformModule</code> as it loads all modules; we recommend to only import relevant modules as needed.</p>
 			<p> For models prior to 0.11.1 use <code>fundamental-ngx</code></p>
-			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { PlatformLinkModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/platform'</span>;
+			<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { PlatformLinkModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@fundamental-ngx/platform&#x27;</span>;
 
- @NgModule({
-     ...
-     imports: [PlatformLinkModule],
- })
- <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
+@NgModule({
+    ...
+    imports: [PlatformLinkModule],
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
 		</li>
 		<li><p><strong>Add the component to your HTML.</strong></p>
-			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fdp-link</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"'http://www.google.com'"</span> [<span class="hljs-attr">title</span>]=<span class="hljs-string">"'Extra info as tooltip text and aria-label'"</span>&gt;</span>
-     Standard Link
- <span class="hljs-tag">&lt;/<span class="hljs-name">fdp-link</span>&gt;</span></code></pre>
+			<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fdp-link</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">&quot;&#x27;http://www.google.com&#x27;&quot;</span> [<span class="hljs-attr">title</span>]=<span class="hljs-string">&quot;&#x27;Extra info as tooltip text and aria-label&#x27;&quot;</span>&gt;</span>
+    Standard Link
+<span class="hljs-tag">&lt;/<span class="hljs-name">fdp-link</span>&gt;</span></code></pre>
 		</li>
 	</ol>
 	<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
