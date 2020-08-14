@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -31,13 +30,13 @@ import { RadioButtonComponent } from '../../radio/radio-button/radio-button.comp
     encapsulation: ViewEncapsulation.None
 })
 export class ListItemComponent implements DefaultMenuItem {
-    /** Whether list is selected */
+    /** Whether list item is selected */
     @Input()
     @HostBinding('attr.aria-selected')
     @HostBinding('class.is-selected')
     selected = false;
 
-    /** Whether list is selected */
+    /** Whether list item contains link */
     @Input()
     @HostBinding('class.fd-list__item--link')
     link = false;
@@ -82,7 +81,7 @@ export class ListItemComponent implements DefaultMenuItem {
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
-    onClick(event: MouseEvent): void {
+    onClick(): void {
         if (this.checkbox) {
             this.checkbox.nextValue();
         }

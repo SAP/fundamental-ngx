@@ -19,7 +19,7 @@ import { startWith, takeUntil } from 'rxjs/operators';
  */
 @Component({
     // tslint:disable-next-line:component-selector
-    selector: '[fd-list]',
+    selector: '[fd-list], [fdList]',
     templateUrl: `./list.component.html`,
     host: {
         class: 'fd-list',
@@ -54,17 +54,17 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     @HostBinding('class.fd-list--no-border')
     noBorder = false;
 
-    /** Whether list component has removed borders */
+    /** Whether list component includes links */
     @Input()
     @HostBinding('class.fd-list--navigation')
     hasNavigation = false;
 
-    /** Whether list component has removed borders */
+    /** Whether list component has navigation indicators */
     @Input()
     @HostBinding('class.fd-list--navigation-indication')
     navigationIndication = false;
 
-    /** Whether list component has removed borders */
+    /** Whether list component has checkboxes or radio buttons included */
     @Input()
     @HostBinding('class.fd-list--selection')
     selection = false;
@@ -83,6 +83,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(
         @Optional() private _keyboardService: MenuKeyboardService
     ) {}

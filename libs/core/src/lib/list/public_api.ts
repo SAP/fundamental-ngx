@@ -2,6 +2,7 @@ export * from './list.module';
 export * from './list-item/list-item.component';
 export * from './list-message.directive';
 export * from './directives/list-footer.directive';
+export * from './directives/list-group-header.directive';
 export * from './directives/list-icon.directive';
 export * from './directives/list-link.directive';
 export * from './directives/list-secondary.directive';
