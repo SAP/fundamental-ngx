@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TileComponent } from './tile.component';
+import { TileModule } from '@fundamental-ngx/core';
 
 describe('TileComponent', () => {
     let component: TileComponent;
@@ -8,7 +9,8 @@ describe('TileComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TileComponent]
+            declarations: [TileComponent],
+            imports: [TileModule]
         }).compileComponents();
     }));
 
@@ -16,28 +18,39 @@ describe('TileComponent', () => {
         fixture = TestBed.createComponent(TileComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-
-        spyOn(component, '_setProperties').and.callThrough();
-        spyOn(component, '_addClassToElement');
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
-        component.ngOnInit();
-        expect(component._setProperties).toHaveBeenCalled();
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-tile');
+        expect(component).toBeDefined();
     });
 
-    it('should add the appropriate classes', () => {
-        component.disabled = true;
-        component.rowSpan = 1;
-        component.columnSpan = 2;
-        component.colorAccent = 3;
-        component.ngOnInit();
-        expect(component._setProperties).toHaveBeenCalled();
-        expect(component._addClassToElement).toHaveBeenCalledWith('is-disabled');
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-has-grid-row-span-1');
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-has-grid-column-span-2');
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-has-background-color-accent-3');
+    it('should buildComponentCssClass after view init', () => {
+        spyOn(component, 'buildComponentCssClass');
+        component.ngAfterViewInit();
+        expect(component.buildComponentCssClass).toHaveBeenCalled();
+    });
+
+    it('should buildComponentCssClass after changes', () => {
+        spyOn(component, 'buildComponentCssClass');
+        component.ngOnChanges();
+        expect(component.buildComponentCssClass).toHaveBeenCalled();
+    });
+
+    it('should return the proper string fro buildComponentCssClass', () => {
+        component.type = 'kpi';
+        component.action = true;
+        component.double = true;
+        component.size = 's';
+        component.class = 'test-class';
+
+        const retVal = component.buildComponentCssClass();
+
+        expect(retVal).toContain('fd-tile');
+        expect(retVal).toContain('fd-tile--s');
+        expect(retVal).toContain('fd-tile--double');
+        expect(retVal).toContain('fd-tile--kpi');
+        expect(retVal).toContain('fd-tile--action');
+        expect(retVal).toContain('test-class');
     });
 });

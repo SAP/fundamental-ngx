@@ -6,14 +6,17 @@ import { API_FILES } from '../../api-files';
 import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
 import { TileDocsComponent } from './tile-docs.component';
 import {
-    TileActionsExampleComponent,
-    TileButtonExampleComponent,
-    TileDisabledExampleComponent,
-    TileExampleComponent,
-    TileMediaExampleComponent,
-    TileProductExampleComponent
+    ActionTileExampleComponent,
+    BadgeTileExampleComponent,
+    FeedTileExampleComponent,
+    KpiTileExampleComponent,
+    LaunchTileExampleComponent,
+    LineTileExampleComponent,
+    SlideTileExampleComponent,
+    TileColumnsExampleComponent,
+    TileGenericExampleComponent
 } from './examples/tile-examples.component';
-import { IdentifierModule, ImageModule, ListModule, TileModule } from '@fundamental-ngx/core';
+import { IdentifierModule, TileModule, BadgeModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -32,19 +35,21 @@ const routes: Routes = [
         SharedDocumentationModule,
         IdentifierModule,
         TileModule,
-        ListModule,
-        ImageModule
+        BadgeModule
     ],
     exports: [RouterModule],
     declarations: [
         TileDocsComponent,
-        TileExampleComponent,
-        TileDocsHeaderComponent,
-        TileMediaExampleComponent,
-        TileButtonExampleComponent,
-        TileActionsExampleComponent,
-        TileProductExampleComponent,
-        TileDisabledExampleComponent
+        TileGenericExampleComponent,
+        TileColumnsExampleComponent,
+        LaunchTileExampleComponent,
+        KpiTileExampleComponent,
+        SlideTileExampleComponent,
+        ActionTileExampleComponent,
+        BadgeTileExampleComponent,
+        FeedTileExampleComponent,
+        LineTileExampleComponent,
+        TileDocsHeaderComponent
     ]
 })
 export class TileDocsModule {}

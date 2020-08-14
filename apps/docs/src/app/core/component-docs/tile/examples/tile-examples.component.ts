@@ -1,37 +1,90 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-tile-example',
-    templateUrl: './tile-example.component.html'
+    selector: 'fd-tile-generic-example',
+    templateUrl: './tile-generic-example.component.html'
 })
-export class TileExampleComponent {}
+export class TileGenericExampleComponent {
+    window: any;
+
+    constructor() {
+        this.window = window;
+    }
+
+}
 
 @Component({
-    selector: 'fd-tile-media-example',
-    templateUrl: './tile-media-example.component.html'
+    selector: 'fd-tile-columns-example',
+    templateUrl: './tile-columns-example.component.html'
 })
-export class TileMediaExampleComponent {}
+export class TileColumnsExampleComponent {}
 
 @Component({
-    selector: 'fd-tile-actions-example',
-    templateUrl: './tile-actions-example.component.html'
+    selector: 'fd-launch-tile-example',
+    templateUrl: './launch-tile-example.component.html'
 })
-export class TileActionsExampleComponent {}
+export class LaunchTileExampleComponent {
+    window: any;
+
+    constructor() {
+        this.window = window;
+    }
+
+}
 
 @Component({
-    selector: 'fd-tile-product-example',
-    templateUrl: './tile-product-example.component.html'
+    selector: 'fd-kpi-tile-example',
+    templateUrl: './kpi-tile-example.component.html'
 })
-export class TileProductExampleComponent {}
+export class KpiTileExampleComponent {
+    window: any;
+
+    constructor() {
+        this.window = window;
+    }
+
+}
 
 @Component({
-    selector: 'fd-tile-disabled-example',
-    templateUrl: './tile-disabled-example.component.html'
+    selector: 'fd-slide-tile-example',
+    templateUrl: './slide-tile-example.component.html'
 })
-export class TileDisabledExampleComponent {}
+export class SlideTileExampleComponent {}
 
 @Component({
-    selector: 'fd-tile-button-example',
-    templateUrl: './tile-button-example.component.html'
+    selector: 'fd-action-tile-example',
+    templateUrl: './action-tile-example.component.html'
 })
-export class TileButtonExampleComponent {}
+export class ActionTileExampleComponent {
+    window: any;
+
+    constructor() {
+        this.window = window;
+    }
+
+}
+
+@Component({
+    selector: 'fd-line-tile-example',
+    templateUrl: './line-tile-example.component.html'
+})
+export class LineTileExampleComponent {
+    window: any;
+
+    constructor() {
+        this.window = window;
+    }
+
+}
+
+@Component({
+    selector: 'fd-badge-tile-example',
+    templateUrl: './badge-tile-example.component.html'
+})
+export class BadgeTileExampleComponent {}
+
+@Component({
+    selector: 'fd-feed-tile-example',
+    templateUrl: './feed-tile-example.component.html'
+})
+export class FeedTileExampleComponent {}
