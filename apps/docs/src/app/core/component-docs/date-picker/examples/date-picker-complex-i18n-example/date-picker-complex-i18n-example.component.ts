@@ -1,7 +1,7 @@
 import { Component, Injectable, ViewChild } from '@angular/core';
 import { CalendarI18n, DatePickerComponent, FdDate } from '@fundamental-ngx/core';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/en-gb';
 import 'moment/locale/de';
