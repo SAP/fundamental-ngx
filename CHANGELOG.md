@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.4...v0.21.1-rc.5) (2020-08-14)
+
+
+### Features
+
+* (platform) introduce step-input ([#3005](https://github.com/SAP/fundamental-ngx/issues/3005)) ([10e446d](https://github.com/SAP/fundamental-ngx/commit/10e446db063a9fae8e173b69e74d66a19f19bea3))
+
+
+### Bug Fixes
+
+* (platform) fix for textarea styles breaking ([#3003](https://github.com/SAP/fundamental-ngx/issues/3003)) ([a679f52](https://github.com/SAP/fundamental-ngx/commit/a679f52942a80ce21ca7193ca722b2d5b214a62b))
+
 ### [0.21.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.3...v0.21.1-rc.4) (2020-08-14)
 
 
