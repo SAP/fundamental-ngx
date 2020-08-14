@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.21.0...v0.21.1-rc.0) (2020-08-14)
+
+
+### Features
+
+* refactor DND directive ([#2996](https://github.com/SAP/fundamental-ngx/issues/2996)) ([9e6d021](https://github.com/SAP/fundamental-ngx/commit/9e6d0217622eef2cf0994f1d6c08066bc9e91275))
+
 ## [0.21.0](https://github.com/SAP/fundamental-ngx/compare/v0.21.0-rc.10...v0.21.0) (2020-08-13)
 
 ## [0.21.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.21.0-rc.9...v0.21.0-rc.10) (2020-08-13)
