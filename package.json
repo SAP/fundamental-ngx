@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.21.0-rc.7",
+  "version": "0.21.1-rc.1",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library.",
@@ -70,7 +70,7 @@
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "help": "./node_modules/.bin/nx help",
-    "std-version": "standard-version --infile ./CHANGELOG.md -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\"",
+    "std-version": "standard-version --infile ./CHANGELOG.md --releaseCommitMessageFormat \"chore(release): version {{currentTag}} build ${TRAVIS_BUILD_NUMBER} [ci skip]\"",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "nx": "nx",

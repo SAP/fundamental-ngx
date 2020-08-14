@@ -1,7 +1,7 @@
-import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
-import { CalendarI18n, DatetimePickerComponent, FdDate, FdDatetime } from '@fundamental-ngx/core';
+import { Component, Injectable, ViewChild } from '@angular/core';
+import { CalendarI18n, DatetimePickerComponent, FdDatetime } from '@fundamental-ngx/core';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/en-gb';
 import 'moment/locale/de';
@@ -12,11 +12,11 @@ import { registerLocaleData } from '@angular/common';
 import localeFrench from '@angular/common/locales/fr';
 import localePolish from '@angular/common/locales/pl';
 import localeBulgarian from '@angular/common/locales/bg';
-import localeGb from '@angular/common/locales/en-GB';
+import localeCa from '@angular/common/locales/en-CA';
 import localeDe from '@angular/common/locales/de';
 
 const placeholders = new Map([
-  ['en-gb', 'mm/dd/yyyy, hh:mm'],
+  ['en-ca', 'mm/dd/yyyy, hh:mm a'],
   ['fr', 'dd/mm/yyyy  hh:mm'],
   ['bg', 'дд/мм/гг чч:мм'],
   ['de', 'dd.mm.yy, hh:mm'],
@@ -60,14 +60,18 @@ export class DatetimePickerComplexI18nExampleComponent {
         registerLocaleData(localeFrench, 'fr');
         registerLocaleData(localePolish, 'pl');
         registerLocaleData(localeBulgarian, 'bg');
-        registerLocaleData(localeGb, 'en-gb');
+        registerLocaleData(localeCa, 'en-ca');
         registerLocaleData(localeDe, 'de');
-        moment.locale('en-gb');
+        moment.locale('en-ca');
     }
+
+    meridian = true;
 
     actualLocale = '';
 
-    actualFormat = 'short';
+    selectedLocale = 'en-ca';
+
+    actualFormat = 'MM/dd/yyyy, h:mm a';
 
     actualMomentJsLang = '';
 
@@ -85,10 +89,17 @@ export class DatetimePickerComplexI18nExampleComponent {
     }
 
     public setLocale(locale: string): void {
-        this.actualMomentJsLang = locale;
-        this.actualLocale = locale;
-        moment.locale(locale);
-        this.refresh();
+      this.actualMomentJsLang = locale;
+      this.actualLocale = locale;
+      moment.locale(locale);
+      if (moment().format('LT').includes('AM') || moment().format('LT').includes('PM')) {
+        this.actualFormat = 'MM/dd/yyyy, h:mm a';
+        this.meridian = true;
+      } else {
+        this.actualFormat = 'MM/dd/yyyy, H:mm';
+        this.meridian = false;
+      }
+      this.refresh();
     }
 
     public isSelected(momentJsLang: string): string {
