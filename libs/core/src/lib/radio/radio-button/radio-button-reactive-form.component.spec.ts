@@ -9,13 +9,13 @@ import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angul
         <form [formGroup]="radioForm">
             <fd-radio-button
                 #radio1
-                [selectedValue]="radioForm.controls.radioInput.value"
+                [selectedValue]="radioForm.controls.radioInput1.value"
                 [value]="1"
                 name="radio"
             ></fd-radio-button>
             <fd-radio-button
                 #radio2
-                [selectedValue]="radioForm.controls.radioInput.value"
+                [selectedValue]="radioForm.controls.radioInput2.value"
                 [value]="2"
                 name="radio"
             ></fd-radio-button>
@@ -27,7 +27,8 @@ class TestRadioButtonComponentReactiveForms {
     @ViewChild('radio2') radioButton2: RadioButtonComponent;
 
     radioForm = new FormGroup({
-        radioInput: new FormControl(1)
+        radioInput1: new FormControl(true),
+        radioInput2: new FormControl(true)
     });
 }
 
@@ -65,11 +66,14 @@ describe('RadioButtonComponent reactive forms', () => {
         expect(component.radioButton1.value).toEqual(1);
     });
 
-    it('should check second radio', async () => {
+    it('should check second radio', async() => {
       await fixture.whenStable();
-      component.radioButton2.inputElement.nativeElement.click();
-      fixture.detectChanges();
-      expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
-      expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
+      new Promise(async () => {
+        component.radioButton2.inputElement.nativeElement.click();
+        await fixture.detectChanges();
+      }).then(() => {
+        expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
+        expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
+      });
     });
 });
