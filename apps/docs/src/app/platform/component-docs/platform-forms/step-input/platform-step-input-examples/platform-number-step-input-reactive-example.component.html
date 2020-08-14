@@ -1,0 +1,28 @@
+<main class="fd-page">
+    <div class="fd-page__content fd-has-background-color-neutral-2">
+        <h4>Enter value between {{ MIN_VALUE }} and {{ MAX_VALUE }}</h4>
+        <fdp-form-group #fg [multiLayout]="true">
+            <fdp-form-field
+                #formField
+                id="qty"
+                label="Quantity"
+                placeholder="Things quantity"
+                hint="This is tooltip to help"
+                zone="zLeft"
+                rank="10"
+                hintPlacement="left"
+                [validators]="stepInputQtyValidators"
+            >
+                <fdp-number-step-input name="qty" [formControl]="formField.formControl"></fdp-number-step-input>
+            </fdp-form-field>
+
+            <ng-template #i18n let-errors>
+                <span *ngIf="errors.required"> Value is required </span>
+                <span *ngIf="errors.min"> Value must be more than {{ MIN_VALUE }} </span>
+                <span *ngIf="errors.max"> Value must be less than {{ MAX_VALUE }} </span>
+            </ng-template>
+        </fdp-form-group>
+    </div>
+    <pre>Form result: {{ fg.formGroup.value | json }}</pre>
+    <pre>Form Status: {{ fg.formGroup.status }}</pre>
+</main>
