@@ -155,33 +155,6 @@ describe('MultiInputComponent', () => {
         expect(fixture.nativeElement.querySelector('fd-token')).toBeFalsy();
     });
 
-    it('should handle onMenuKeydownHandler, arrow up on the first item', async () => {
-        await fixture.whenStable();
-        const event: any = {
-            key: 'ArrowUp',
-            preventDefault: () => {}
-        };
-        spyOn(event, 'preventDefault');
-        spyOn(component.searchInputElement.nativeElement, 'focus');
-        component.handleKeyDown(event, 0);
-        expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
-    });
-
-    it('should handle onMenuKeydownHandler, arrow up', async () => {
-        await fixture.whenStable();
-        const event: any = {
-            key: 'ArrowUp',
-            preventDefault: () => {},
-            stopPropagation: () => {}
-        };
-        spyOn(component.listItems.first, 'focus');
-        spyOn(event, 'preventDefault');
-        component.handleKeyDown(event, 1);
-        expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.listItems.first.focus).toHaveBeenCalled();
-    });
-
     it('should bring back values, if canceled on mobile mode and dont emit changes', async () => {
         component.mobile = true;
 
