@@ -9,6 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ProductSwitchItem } from './product-switch.item';
+import { FdDropEvent } from '../../utils/drag-and-drop/dnd-list/dnd-list.directive';
 
 @Component({
     selector: 'fd-product-switch-body',
@@ -59,9 +60,9 @@ export class ProductSwitchBodyComponent implements OnInit {
     }
 
     /** Method called on products change */
-    productSwitchItemsChangeHandle(items: any[]): void {
-        this.productsChange.emit(items);
-        this.products = items;
+    productSwitchItemsChangeHandle(dropEvent: FdDropEvent<ProductSwitchItem>): void {
+        this.productsChange.emit(dropEvent.items);
+        this.products = dropEvent.items;
     }
 
     /** @hidden */
