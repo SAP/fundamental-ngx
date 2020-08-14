@@ -11,6 +11,7 @@ import { PlatformMenuCascadeExampleComponent } from './platform-menu-examples/pl
 import { PlatformMenuScrollingExampleComponent } from './platform-menu-examples/platform-menu-scrolling-example.component';
 import { PlatformMenuXPositionExampleComponent } from './platform-menu-examples/platform-menu-x-position-example.component';
 import { PlatformMenuModule, PlatformButtonModule, } from '@fundamental-ngx/platform';
+import { AvatarModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -28,7 +29,8 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         PlatformMenuModule,
-        PlatformButtonModule
+        PlatformButtonModule,
+        AvatarModule
     ],
     exports: [RouterModule],
     declarations: [
