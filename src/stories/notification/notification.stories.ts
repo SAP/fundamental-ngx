@@ -42,7 +42,7 @@ export const Notifications = () => ({
         <fd-notification-body>
             <div fd-notification-content>
                 <div fd-notification-avatar>
-                    <span fd-identifier [size]="'s'" [circle]="true" aria-label="John Doe">JD</span>
+                    <fd-avatar size="s" [circle]="true" label="John Doe">JD</fd-avatar>
                 </div>
                 <div fd-notification-text>
                     <div fd-notification-description>
