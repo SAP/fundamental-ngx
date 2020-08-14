@@ -1,23 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DndListDirective, ElementChord } from './dnd-list.directive';
 import { Component, ViewChild } from '@angular/core';
-import { DndContainerDirective } from '../dnd-container/dnd-container.directive';
+import { DndItemDirective } from '../dnd-item/dnd-item.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
     template: `
         <div #directiveElement fd-dnd-list>
-            <div fd-dnd-container *ngFor="let item of list">
-                <div cdkDrag>
-                    <div>{{ item }}</div>
-                </div>
+            <div fd-dnd-item *ngFor="let item of list">
+                <div>{{ item }}</div>
             </div>
         </div>
     `
 })
 class TestDndListComponent {
     @ViewChild('directiveElement', { static: true, read: DndListDirective })
-    directive: DndListDirective;
+    directive: DndListDirective<string>;
 
     list: string[] = [];
 }
@@ -25,13 +23,13 @@ class TestDndListComponent {
 describe('DndListDirective', () => {
     let component: TestDndListComponent;
     let fixture: ComponentFixture<TestDndListComponent>;
-    let directive: DndListDirective;
-    let elementChords: ElementChord[];
+    let directive: DndListDirective<string>;
+    let elementCoordinates: ElementChord[];
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [DragDropModule],
-            declarations: [DndListDirective, TestDndListComponent, DndContainerDirective]
+            declarations: [DndListDirective, TestDndListComponent, DndItemDirective]
         }).compileComponents();
     }));
 
@@ -40,7 +38,7 @@ describe('DndListDirective', () => {
         component = fixture.componentInstance;
         directive = component.directive;
         component.list = ['item1', 'item2', 'item3', 'item4'];
-        elementChords = [
+        elementCoordinates = [
             { x: 145, y: 145, position: 'before' },
             { x: 200, y: 200, position: 'before' },
             { x: 250, y: 250, position: 'before' },
@@ -54,73 +52,72 @@ describe('DndListDirective', () => {
     });
 
     it('Should handle dragStart', () => {
-        expect((directive as any).elementChords).toBeFalsy();
+        expect((directive as any)._elementsCoordinates).toBeFalsy();
+        (directive as any)._closestItemIndex = 1;
         directive.dragStart(3);
-        expect((directive as any).draggedItemIndex).toBe(3);
-        expect((directive as any).elementChords.length).toBe(4);
+        expect((directive as any)._elementsCoordinates.length).toBe(4);
     });
 
     it('Should handle move and detect good target (1)', () => {
-        spyOn(directive as any, 'generateLine');
-        const pointerPosition = { pointerPosition: { x: 150, y: 150 } };
-        (directive as any).closestLinkIndex = 100;
-        (directive as any).closestLinkPosition = 'after';
-        (directive as any).draggedItemIndex = 3;
-        (directive as any).elementChords = elementChords;
+        spyOn(directive as any, '_createLine');
+        const pointerPosition = { x: 150, y: 150 };
+        (directive as any)._closestItemIndex = 100;
+        (directive as any)._closestItemPosition = 'after';
+        (directive as any)._elementsCoordinates = elementCoordinates;
 
-        directive.onMove(<any>pointerPosition);
+        directive.onMove(pointerPosition, 3);
 
-        expect((directive as any).closestLinkIndex).toBe(0);
-        expect((directive as any).closestLinkPosition).toBe('before');
-        expect((directive as any).generateLine).toHaveBeenCalledWith(0, 'before');
+        expect((directive as any)._closestItemIndex).toBe(0);
+        expect((directive as any)._closestItemPosition).toBe('before');
+        expect((directive as any)._createLine).toHaveBeenCalledWith(0, 'before');
     });
 
     it('Should handle move and detect good target (2)', () => {
-        spyOn(directive as any, 'generateLine');
-        const pointerPosition = { pointerPosition: { x: 230, y: 230 } };
-        (directive as any).closestLinkIndex = 1000;
-        (directive as any).closestLinkPosition = 'after';
-        (directive as any).draggedItemIndex = 3;
-        (directive as any).elementChords = elementChords;
+        spyOn(directive as any, '_createLine');
+        const pointerPosition = { x: 230, y: 230 };
+        (directive as any)._closestItemIndex = 1000;
+        (directive as any)._closestItemPosition = 'after';
+        (directive as any)._elementsCoordinates = elementCoordinates;
 
-        directive.onMove(<any>pointerPosition);
+        directive.onMove(pointerPosition, 3);
 
-        expect((directive as any).closestLinkIndex).toBe(2);
-        expect((directive as any).closestLinkPosition).toBe('before');
-        expect((directive as any).generateLine).toHaveBeenCalledWith(2, 'before');
+        expect((directive as any)._closestItemIndex).toBe(2);
+        expect((directive as any)._closestItemPosition).toBe('before');
+        expect((directive as any)._createLine).toHaveBeenCalledWith(2, 'before');
     });
 
     it('should handle dragend', () => {
-        spyOn(directive.itemsChange, 'emit');
-        spyOn(directive as any, 'removeAllLines');
-        (directive as any).draggedItemIndex = 3;
-        (directive as any).closestLinkIndex = 1;
+        spyOn(directive.itemDropped, 'emit');
+        spyOn(directive as any, '_removeAllLines');
         directive.items = [...component.list];
 
-        directive.dragEnd();
+        (directive as any)._closestItemIndex = 1;
+        directive.dragEnd(3);
+        expect(directive.itemDropped.emit).toHaveBeenCalledWith({
+            replacedItemIndex: 1,
+            draggedItemIndex: 3,
+            items: ['item1', 'item4', 'item2', 'item3']
+        });
 
-        expect(directive.itemsChange.emit).toHaveBeenCalledWith(['item1', 'item4', 'item2', 'item3']);
-
-        expect((directive as any).removeAllLines).toHaveBeenCalled();
+        expect((directive as any)._removeAllLines).toHaveBeenCalled();
     });
 
     it('should handle stickToPosition', () => {
-        spyOn(directive as any, 'generateLine');
+        spyOn(directive as any, '_createLine');
 
-        const pointerPosition = { pointerPosition: { x: 230, y: 230 } };
-        (directive as any).closestLinkIndex = 1000;
-        (directive as any).closestLinkPosition = 'after';
-        (directive as any).draggedItemIndex = 3;
+        const pointerPosition = { x: 230, y: 230 };
+        (directive as any)._closestItemIndex = 1000;
+        (directive as any)._closestItemPosition = 'after';
 
         /** This is element tht should be ignored */
-        elementChords.push({ x: 235, y: 230, stickToPosition: true, position: 'after' });
+        elementCoordinates.push({ x: 235, y: 230, stickToPosition: true, position: 'after' });
 
-        (directive as any).elementChords = elementChords;
+        (directive as any)._elementsCoordinates = elementCoordinates;
 
-        directive.onMove(<any>pointerPosition);
+        directive.onMove(pointerPosition, 3);
 
-        expect((directive as any).closestLinkIndex).toBe(2);
-        expect((directive as any).closestLinkPosition).toBe('before');
-        expect((directive as any).generateLine).toHaveBeenCalledWith(2, 'before');
+        expect((directive as any)._closestItemIndex).toBe(2);
+        expect((directive as any)._closestItemPosition).toBe('before');
+        expect((directive as any)._createLine).toHaveBeenCalledWith(2, 'before');
     });
 });
