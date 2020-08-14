@@ -36,7 +36,6 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     list: ListDocsComponent.schema,
     tabs: TabsDocsComponent.schema,
     table: TableDocsComponent.schema,
-    tile: TileDocsComponent.schema,
     time: TimeDocsComponent.schema,
     // tree: TreeDocsComponent.schema,
     switch: SwitchDocsComponent.schema,

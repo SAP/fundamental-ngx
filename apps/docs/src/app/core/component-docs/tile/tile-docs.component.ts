@@ -1,145 +1,90 @@
 import { Component } from '@angular/core';
-import { Schema } from '../../../schema/models/schema.model';
-import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-
-import * as tileActionsSrc from '!raw-loader!./examples/tile-actions-example.component.html';
-import * as tileButtonSrc from '!raw-loader!./examples/tile-button-example.component.html';
-import * as tileDisabledSrc from '!raw-loader!./examples/tile-disabled-example.component.html';
-import * as tileSrc from '!raw-loader!./examples/tile-example.component.html';
-import * as tileMediaSrc from '!raw-loader!./examples/tile-media-example.component.html';
-import * as tileProductSrc from '!raw-loader!./examples/tile-product-example.component.html';
+import * as tileGenericSrc from '!raw-loader!./examples/tile-generic-example.component.html';
+import * as tileColumnsSrc from '!raw-loader!./examples/tile-columns-example.component.html';
+import * as launchSrc from '!raw-loader!./examples/launch-tile-example.component.html';
+import * as kpiSrc from '!raw-loader!./examples/kpi-tile-example.component.html';
+import * as slideSrc from '!raw-loader!./examples/slide-tile-example.component.html';
+import * as actionSrc from '!raw-loader!./examples/action-tile-example.component.html';
+import * as badgeSrc from '!raw-loader!./examples/badge-tile-example.component.html';
+import * as feedSrc from '!raw-loader!./examples/feed-tile-example.component.html';
+import * as lineSrc from '!raw-loader!./examples/line-tile-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
     selector: 'app-tile',
     templateUrl: './tile-docs.component.html'
 })
 export class TileDocsComponent {
-    static schema: any = {
-        properties: {
-            properties: {
-                type: 'object',
-                properties: {
-                    type: {
-                        type: 'string',
-                        enum: ['simple', 'media', 'product']
-                    },
-                    hasActions: {
-                        type: 'boolean'
-                    },
-                    title: {
-                        type: 'string'
-                    },
-                    description: {
-                        type: 'string'
-                    },
-                    size: {
-                        type: 'string',
-                        enum: ['s', 'm', 'l']
-                    },
-                    circle: {
-                        type: 'boolean'
-                    },
-                    transparent: {
-                        type: 'boolean'
-                    },
-                    colorAccent: {
-                        type: 'string',
-                        enum: ['default', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-                    },
-                    glyphs: {
-                        type: 'string',
-                        enum: Icons
-                    },
-                    imageUrl: {
-                        type: 'string'
-                    },
-                    isButton: {
-                        type: 'boolean'
-                    },
-                    disabled: {
-                        type: 'boolean'
-                    }
-                }
-            }
-        },
-        type: 'object'
-    };
 
-    schema: Schema;
-
-    data: any = {
-        properties: {
-            type: 'simple',
-            hasActions: false,
-            title: 'Tile Title',
-            descending: '',
-            size: 'm',
-            circle: false,
-            transparent: true,
-            colorAccent: 'default',
-            initials: '',
-            glyphs: 'home',
-            imageUrl: '',
-            isButton: false,
-            disabled: false
-        }
-    };
-
-    simpleTile: ExampleFile[] = [
+    genericTile: ExampleFile[] = [
         {
             language: 'html',
-            code: tileSrc,
-            fileName: 'tile-example'
+            code: tileGenericSrc,
+            fileName: 'tile-generic-example'
         }
     ];
 
-    mediaTile: ExampleFile[] = [
+    columnsTile: ExampleFile[] = [
         {
             language: 'html',
-            code: tileMediaSrc,
-            fileName: 'tile-media-example'
+            code: tileColumnsSrc,
+            fileName: 'tile-columns-example'
         }
     ];
 
-    actionsTile: ExampleFile[] = [
+    launch: ExampleFile[] = [
         {
             language: 'html',
-            code: tileActionsSrc,
-            fileName: 'tile-action-example'
+            code: launchSrc,
+            fileName: 'launch-example'
         }
     ];
 
-    buttonTile: ExampleFile[] = [
+    kpi: ExampleFile[] = [
         {
             language: 'html',
-            code: tileButtonSrc,
-            fileName: 'tile-button-example'
+            code: kpiSrc,
+            fileName: 'kpi-example'
         }
     ];
 
-    productTile: ExampleFile[] = [
+    slide: ExampleFile[] = [
         {
             language: 'html',
-            code: tileProductSrc,
-            fileName: 'tile-product-example'
+            code: slideSrc,
+            fileName: 'slide-example'
         }
     ];
 
-    disabledTile: ExampleFile[] = [
+    action: ExampleFile[] = [
         {
             language: 'html',
-            code: tileDisabledSrc,
-            fileName: 'tile-disabled-example'
+            code: actionSrc,
+            fileName: 'action-example'
         }
     ];
 
-    constructor(private schemaFactory: SchemaFactoryService) {
-        this.schema = this.schemaFactory.getComponent('tile');
-    }
+    badge: ExampleFile[] = [
+        {
+            language: 'html',
+            code: badgeSrc,
+            fileName: 'badge-example'
+        }
+    ];
 
-    onSchemaValues(data): void {
-        this.data = data;
-    }
+    feed: ExampleFile[] = [
+        {
+            language: 'html',
+            code: feedSrc,
+            fileName: 'feed-example'
+        }
+    ];
+
+    line: ExampleFile[] = [
+        {
+            language: 'html',
+            code: lineSrc,
+            fileName: 'line-example'
+        }
+    ];
 }
