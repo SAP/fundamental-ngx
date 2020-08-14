@@ -17,4 +17,12 @@
     .fd-shellbar__action .fd-shellbar__input-group:hover {
         background-color: transparent;
     }
+
+    .fd-button.fd-shellbar__button.is-expanded {
+        background-color: transparent;
+    }
+
+    .fd-input-group__addon {
+        background-color: transparent;
+    }
 }
