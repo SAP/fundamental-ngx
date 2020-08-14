@@ -8,7 +8,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class TimeFormExampleComponent {
     customForm = new FormGroup({
-        time: new FormControl(''),
-        disabledTime: new FormControl({ value: '', disabled: true })
+        time: new FormControl('')
     });
 }
