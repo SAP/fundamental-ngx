@@ -13,7 +13,7 @@ import { ListModule } from '../list.module';
     </li> `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('directiveElement', { read: ElementRef })
     ref: ElementRef;
 
     selected = false;
@@ -22,7 +22,7 @@ class TestComponent {
     action = false;
 }
 
-describe('ListItemDirective', () => {
+describe('ListItemComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
