@@ -27,7 +27,7 @@ let uniqueId = 0;
     templateUrl: './radio.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RadioButtonComponent extends BaseInput implements FocusableOption {
+export class RadioButtonComponent extends BaseInput implements AfterViewInit, FocusableOption {
     /**
      * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
      * take precedence so this may be omitted.
@@ -45,11 +45,11 @@ export class RadioButtonComponent extends BaseInput implements FocusableOption {
     @Input('aria-describedby')
     ariaDescribedby: string;
 
-    /** The 'aria-disabled' for giving accessibility for disabled checkbox element. */
+    /** The 'aria-disabled' for giving accessibility for disabled radio button element. */
     @Input('aria-disabled')
     ariaDisabled: boolean;
 
-    /** sets checkbox tooltip */
+    /** sets radio button tooltip */
     @Input()
     title: string;
 
@@ -62,19 +62,25 @@ export class RadioButtonComponent extends BaseInput implements FocusableOption {
     /** value for Radio button */
     @Input()
     get value(): any {
-        return super.getValue();
+        return this.getValue();
     }
     set value(newValue: any) {
-        if (super.getValue() !== newValue) {
-            super.setValue(newValue);
+        if (newValue) {
+            this._value = newValue;
         }
     }
 
-    /** set status value */
-    set status(newStatus: Status) {
-        this._status = newStatus;
-        this.state = newStatus;
-        this._cd.markForCheck();
+    /** set state of individual radio.Used by RBG to set radio states */
+    @Input()
+    get stateType(): Status {
+        return this._state;
+    }
+
+    set stateType(state: Status) {
+        if (state) {
+            this._state = state;
+            this._cd.markForCheck();
+        }
     }
 
     /** @hidden
@@ -95,7 +101,13 @@ export class RadioButtonComponent extends BaseInput implements FocusableOption {
     @ViewChild('renderer')
     renderer: TemplateRef<any>;
 
-    state: Status | stateType = 'default';
+    _state: Status = 'default';
+
+    /** @hidden */
+    currentValue: any;
+
+    /** @hidden Radio checked status */
+    isChecked = false;
 
     constructor(
         cd: ChangeDetectorRef,
@@ -110,8 +122,21 @@ export class RadioButtonComponent extends BaseInput implements FocusableOption {
             this.ngControl.valueAccessor = this;
         }
         // @hidden have to set default initial values as base class has check and throws error
-        this.id = `radio-id-${uniqueId++}`;
-        this.name = `radio-id-${uniqueId++}`;
+        this.id = `fdp-radio-id-${uniqueId}`;
+        this.name = `fdp-radio-name-${uniqueId}`;
+        uniqueId++;
+    }
+
+    /** @hidden Controlvalue accessor */
+    writeValue(value: any): void {
+        if (value) {
+            this.valueChange(value);
+        }
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        super.ngAfterViewInit();
     }
 
     /** @hidden change formcontrol value, emits the event*/
@@ -119,39 +144,41 @@ export class RadioButtonComponent extends BaseInput implements FocusableOption {
         event.stopPropagation();
         if (!this.disabled) {
             if (super.getValue() !== undefined) {
-                this.onChange(super.getValue());
+                this.valueChange(this.value);
                 this.click.emit(this);
             }
         }
     }
 
+    /** @hidden */
+    public valueChange(value: any): void {
+        this.currentValue = value;
+        this.isChecked = this.currentValue === this.getValue();
+        this.tabIndex = this.isChecked ? 0 : -1;
+        this._cd.detectChanges();
+        this.onChange(value);
+    }
+
+    /** method for cdk FocusKeymanager */
     public focus(): void {
         if (this.coreRadioButton) {
             this.coreRadioButton.elementRef().nativeElement.focus();
         }
     }
 
-    /**
-     * checked status of radio button
-     */
-    public ischecked(): boolean {
-        return this.coreRadioButton?.checked;
-    }
-
-    /** @hidden method to select radio button */
+    /** method to select radio button */
     public select(): void {
-        if (this.coreRadioButton) {
-            this.coreRadioButton.currentValue = this.value;
-            this._cd.detectChanges();
-        }
+        this.valueChange(this.getValue());
     }
 
-    /** @hidden method to uncheck radio button */
+    /** method to uncheck radio button */
     public unselect(): void {
-        if (this.coreRadioButton) {
-            this.coreRadioButton.currentValue = undefined;
-            this.coreRadioButton.tabIndex = -1;
-            this._cd.detectChanges();
-        }
+        this.valueChange(undefined);
+    }
+
+    /** Setting tabIndex for radio accessibility */
+    public setTabIndex(index: 0 | -1): void {
+        this.tabIndex = index;
+        this._cd.markForCheck();
     }
 }

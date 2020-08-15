@@ -4,8 +4,7 @@
     [disabled]="disabled"
     [id]="id"
     [name]="name"
-    [attr.tabIndex]="checked ? 0 : tabIndex"
-    [attr.title]="title"
+    [attr.tabIndex]="tabIndex"
     [attr.aria-label]="ariaLabel"
     [attr.aria-labelledby]="ariaLabelledby"
     [attr.aria-describedby]="ariaDescribedby"
@@ -16,6 +15,6 @@
     #inputElement
     [value]="value"
 />
-<label class="fd-radio__label" [for]="id" (click)="labelClicked($event)">
+<label class="fd-radio__label" [attr.title]="title" [for]="id" (click)="labelClicked($event)">
     <ng-content></ng-content>
 </label>
