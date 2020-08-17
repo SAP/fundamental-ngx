@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { SelectItem } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-checkbox-group-example',
+    selector: 'fdp-platform-checkbox-group-examples',
     templateUrl: './platform-checkbox-group-example.component.html'
 })
 export class PlatformCheckboxGroupExampleComponent {

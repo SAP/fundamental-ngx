@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
-    selector: 'fdp-platform-checkbox-group-content',
+    selector: 'fdp-platform-checkbox-group-content-checkbox',
     templateUrl: './platform-checkbox-group-content-checkbox.component.html'
 })
 export class PlatformCheckboxGroupContentCheckboxComponent {

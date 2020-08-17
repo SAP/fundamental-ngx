@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fdp-checkbox-a11y',
+    selector: 'fdp-platform-checkbox-a11y',
     templateUrl: 'platform-checkbox-a11y.component.html'
 })
 export class PlatformChekboxA11yExampleComponent {

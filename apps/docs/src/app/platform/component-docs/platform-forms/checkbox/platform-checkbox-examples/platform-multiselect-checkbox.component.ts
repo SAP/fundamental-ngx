@@ -2,7 +2,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fdp-multiselect-checkbox',
+    selector: 'fdp-platform-multiselect-checkbox',
     templateUrl: 'platform-multiselect-checkbox.component.html'
 })
 export class PlatformCozyChekboxExampleComponent {

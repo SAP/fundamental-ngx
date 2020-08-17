@@ -22,12 +22,12 @@ export class PlatformCheckboxDocsComponent {
         {
             language: 'html',
             code: multiselectCheckboxhtml,
-            fileName: 'platform-cozy-checkbox-example'
+            fileName: 'platform-multiselect-checkbox'
         },
         {
             language: 'typescript',
             code: multiselectCheckboxSrc,
-            fileName: 'platform-cozy-checkbox-example',
+            fileName: 'platform-multiselect-checkbox',
             component: 'PlatformCozyChekboxExampleComponent'
         }
     ];
@@ -36,12 +36,12 @@ export class PlatformCheckboxDocsComponent {
         {
             language: 'html',
             code: binaryCheckboxhtml,
-            fileName: 'platform-compact-checkbox-example'
+            fileName: 'platform-binary-checkbox'
         },
         {
             language: 'typescript',
             code: binaryCheckboxSrc,
-            fileName: 'platform-compact-checkbox-example',
+            fileName: 'platform-binary-checkbox',
             component: 'PlatformCompactChekboxExampleComponent'
         }
     ];
@@ -50,12 +50,12 @@ export class PlatformCheckboxDocsComponent {
         {
             language: 'html',
             code: checkboxStylehtml,
-            fileName: 'platform-checkbox-styling'
+            fileName: 'platform-checkbox-error-handling'
         },
         {
             language: 'typescript',
             code: checkboxStyleSrc,
-            fileName: 'platform-checkbox-styling',
+            fileName: 'platform-checkbox-error-handling',
             component: 'PlatformChekboxStyleComponent'
         }
     ];
@@ -64,12 +64,12 @@ export class PlatformCheckboxDocsComponent {
         {
             language: 'html',
             code: checkboxNoFormhtml,
-            fileName: 'platform-checkbox-no-form'
+            fileName: 'platform-binary-checkbox-no-form'
         },
         {
             language: 'typescript',
             code: checkboxNoFormSrc,
-            fileName: 'platform-checkbox-no-form',
+            fileName: 'platform-binary-checkbox-no-form',
             component: 'PlatformChekboxNoFormComponent'
         }
     ];
@@ -78,12 +78,12 @@ export class PlatformCheckboxDocsComponent {
         {
             language: 'html',
             code: triCheckboxhtml,
-            fileName: 'platform-checkbox-tristate'
+            fileName: 'platform-tristate-checkbox'
         },
         {
             language: 'typescript',
             code: triCheckboxSrc,
-            fileName: 'platform-checkbox-tristate',
+            fileName: 'platform-tristate-checkbox',
             component: 'PlatformChekboxTristateComponent'
         }
     ];

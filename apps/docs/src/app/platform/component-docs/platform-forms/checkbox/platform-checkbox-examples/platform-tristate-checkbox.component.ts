@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
 @Component({
-    selector: 'fdp-tristate-checkbox',
+    selector: 'fdp-platform-tristate-checkbox',
     templateUrl: 'platform-tristate-checkbox.component.html'
 })
 export class PlatformChekboxTristateComponent implements AfterViewInit {
