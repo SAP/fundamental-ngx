@@ -141,7 +141,5 @@ describe('FileUploaderComponent', () => {
         expect(function (): void {
             component.parseFileSize('gb3')
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-
     });
 });
