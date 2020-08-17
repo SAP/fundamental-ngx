@@ -1,0 +1,64 @@
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <label>Default Number Step Input</label>
+        <br />
+        <fdp-number-step-input name="number"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label>Compact</label>
+        <br />
+        <fdp-number-step-input
+            name="compact"
+            contentDensity="compact"
+            [value]="value"
+            (valueChange)="onValueChange($event)"
+        ></fdp-number-step-input>
+        <br />
+        <small>value: {{ value }}</small>
+    </div>
+    <div class="step-input-example">
+        <label>Min Max limits <small>(min: -20, max: 20)</small></label>
+        <br />
+        <fdp-number-step-input name="minMaxLimits" [value]="0" [min]="-20" [max]="20"></fdp-number-step-input>
+    </div>
+</div>
+
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <label>Precision</label>
+        <br />
+        <fdp-number-step-input name="precision" [value]="0" [precision]="2" [step]="0.25"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label>Disabled</label>
+        <br />
+        <fdp-number-step-input name="stepNumberDisabled" [value]="50" [disabled]="true"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label>Read Only</label>
+        <br />
+        <fdp-number-step-input name="stepNumberReadOnly" [value]="50" [editable]="false"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label>With description</label>
+        <br />
+        <fdp-number-step-input name="stepNumberDescription" description="PC" [value]="25"></fdp-number-step-input>
+    </div>
+</div>
+
+<label>Horizontal alignment in the input field</label>
+<br />
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <small>Left</small><br />
+        <fdp-number-step-input name="alignment" align="left" [value]="100"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <small>Center</small><br />
+        <fdp-number-step-input name="alignment" align="center" [value]="100"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <small>Right</small><br />
+        <fdp-number-step-input name="alignment" align="right" [value]="100"></fdp-number-step-input>
+    </div>
+</div>

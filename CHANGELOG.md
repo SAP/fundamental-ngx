@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.9...v0.21.1-rc.10) (2020-08-16)
+
+### [0.21.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.8...v0.21.1-rc.9) (2020-08-16)
+
+### [0.21.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.7...v0.21.1-rc.8) (2020-08-16)
+
+### [0.21.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.6...v0.21.1-rc.7) (2020-08-16)
+
+### [0.21.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.5...v0.21.1-rc.6) (2020-08-14)
+
+
+### Bug Fixes
+
+* highlight on combobox ([#2932](https://github.com/SAP/fundamental-ngx/issues/2932)) ([d9635c1](https://github.com/SAP/fundamental-ngx/commit/d9635c13988c3311e408ea99e5052694b09045ce))
+
+### [0.21.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.4...v0.21.1-rc.5) (2020-08-14)
+
+
+### Features
+
+* (platform) introduce step-input ([#3005](https://github.com/SAP/fundamental-ngx/issues/3005)) ([10e446d](https://github.com/SAP/fundamental-ngx/commit/10e446db063a9fae8e173b69e74d66a19f19bea3))
+
+
+### Bug Fixes
+
+* (platform) fix for textarea styles breaking ([#3003](https://github.com/SAP/fundamental-ngx/issues/3003)) ([a679f52](https://github.com/SAP/fundamental-ngx/commit/a679f52942a80ce21ca7193ca722b2d5b214a62b))
+
+### [0.21.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.3...v0.21.1-rc.4) (2020-08-14)
+
+
+### Features
+
+* introduce generic tile ([#2946](https://github.com/SAP/fundamental-ngx/issues/2946)) ([bb76e93](https://github.com/SAP/fundamental-ngx/commit/bb76e935c30442b2e167205ae6327f1bfecc4fe0))
+
+### [0.21.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.2...v0.21.1-rc.3) (2020-08-14)
+
 ### [0.21.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.1...v0.21.1-rc.2) (2020-08-14)
 
 ### [0.21.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.0...v0.21.1-rc.1) (2020-08-14)
