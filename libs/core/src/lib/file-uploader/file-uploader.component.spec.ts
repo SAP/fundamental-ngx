@@ -39,7 +39,9 @@ describe('FileUploaderComponent', () => {
     it('should selectHandler with no maxFileSize', () => {
         spyOn(component, 'onChange').and.callThrough();
         spyOn(component.selectedFilesChanged, 'emit').and.callThrough();
-        const event: File[] = [];
+        const file1: MockFile = new File([''], 'file1');
+        spyOnProperty(file1, 'size').and.returnValue(1024);
+        const event: File[] = [file1];
         component.selectHandler(event);
         expect(component.onChange).toHaveBeenCalledWith(event);
         expect(component.selectedFilesChanged.emit).toHaveBeenCalledWith(event);
@@ -141,5 +143,6 @@ describe('FileUploaderComponent', () => {
         expect(function (): void {
             component.parseFileSize('gb3')
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
+
     });
 });
