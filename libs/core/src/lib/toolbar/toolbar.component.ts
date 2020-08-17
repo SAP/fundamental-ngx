@@ -230,8 +230,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             if (shouldItemBeRemovedByWidth && itemGroup && !shouldNeverBeInOverflow) {
                 const lowestGroup = this._getLowestGroupByPriority(itemGroup);
                 let itemsToRemove = this._groupedCollection[lowestGroup];
+                delete this._groupedCollection[lowestGroup];
+                delete this._groupedCollectionPriority[lowestGroup];
+
                 if (lowestGroup !== itemGroup) {
                     itemsToRemove = [...itemsToRemove, ...this._groupedCollection[itemGroup]];
+                    delete this._groupedCollection[itemGroup];
+                    delete this._groupedCollectionPriority[itemGroup];
                 }
 
                 // tslint:disable-next-line:no-unused-expression
@@ -246,11 +251,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
                         overflowItems.push(item);
                     }
                 });
-
-                delete this._groupedCollection[lowestGroup];
-                delete this._groupedCollection[itemGroup];
-                delete this._groupedCollectionPriority[lowestGroup];
-                delete this._groupedCollectionPriority[itemGroup];
 
                 return MAX_CONTENT_SIZE;
             }
