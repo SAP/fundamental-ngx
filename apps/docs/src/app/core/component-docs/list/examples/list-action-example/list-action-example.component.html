@@ -6,11 +6,11 @@
         </span>
     </li>
     <li fd-list-item [action]="true">
-        <fd-busy-indicator size="l" class="fd-busy-indicator-custom" [block]="true" [loading]="loading">
-            <button fd-list-title (click)="loadMore()">
-                Load More
-            </button>
-        </fd-busy-indicator>
+        <button fd-list-title (click)="loadMore()" class="fd-list__title--growing">
+            <fd-busy-indicator size="m" class="fd-busy-indicator-custom" [block]="true" [loading]="loading">
+            </fd-busy-indicator>
+            Show More
+        </button>
     </li>
     <li fd-list-footer>List Footer</li>
 </ul>

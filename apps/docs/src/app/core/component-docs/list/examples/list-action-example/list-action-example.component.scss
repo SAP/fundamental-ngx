@@ -1,4 +1,9 @@
 .fd-busy-indicator-custom {
-    width: 100%;
-    height: 100%;
+    margin-right: 0.5rem;
+}
+
+.fd-list__title--growing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

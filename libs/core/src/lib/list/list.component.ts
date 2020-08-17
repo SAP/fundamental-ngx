@@ -27,7 +27,10 @@ import { startWith, takeUntil } from 'rxjs/operators';
         class: 'fd-list',
         role: 'list'
     },
-    styleUrls: ['./list.component.scss'],
+    styleUrls: [
+        './list.component.scss',
+        '../utils/drag-and-drop/drag-and-drop.scss'
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
