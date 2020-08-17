@@ -3,6 +3,11 @@
     display: block;
 }
 
-fd-datetime-picker {
-    width: 100%;
+fd-select, fd-datetime-picker {
+  padding: 0.5rem;
+  padding-left: 0;
+  
+  .example {
+    width: 230px;
+  }
 }

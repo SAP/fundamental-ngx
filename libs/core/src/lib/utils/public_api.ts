@@ -17,7 +17,7 @@ export * from './pipes/search-highlight.pipe';
 
 export * from './drag-and-drop/drag-and-drop.module';
 export * from './drag-and-drop/dnd-list/dnd-list.directive';
-export * from './drag-and-drop/dnd-container/dnd-container.directive';
+export * from './drag-and-drop/dnd-item/dnd-item.directive';
 
 export * from './interfaces/css-class-builder.interface';
 export * from './interfaces/css-style-builder.interface';
