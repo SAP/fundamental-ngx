@@ -120,12 +120,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     hiddenCozyTokenCount = 0;
 
     /** @hidden */
-    shiftKeyPressed = false;
-
-    /** @hidden */
-    ctrlKeyPressed = false;
-
-    /** @hidden */
     /*Variable which will keep the index of the first token pressed in the tokenizer*/
     private _firstElementInSelection: number;
 
@@ -145,7 +139,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     ngAfterViewInit(): void {
         if (this.input && this.input.elementRef()) {
             this._inputKeydownEvent();
-            this.tokenizerKeyupEvent();
         }
     }
 
@@ -229,11 +222,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
                 event.stopPropagation();
                 this.focusTokenElement(index);
-                if (this.ctrlKeyPressed) {
+                if (event.ctrlKey || event.metaKey) {
                 this._ctrlSelected(token, index);
-                } else if (!this.ctrlKeyPressed && !this.shiftKeyPressed  || this._ctrlPrevious) {
+                } else if (!event.ctrlKey && !event.metaKey && !event.shiftKey  || this._ctrlPrevious) {
                   this._basicSelected(token, index);
-                } else if (this.shiftKeyPressed) {
+                } else if (event.shiftKey) {
                   this._shiftSelected(index);
                 }
             }));
@@ -285,14 +278,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.previousElementWidth = elementWidth;
         }
     }
-    /** @hidden */
-    handleKeyUp(event: KeyboardEvent): void {
-      if (KeyUtil.isKey(event, 'Shift')) {
-        this.shiftKeyPressed = false;
-      } else if (KeyUtil.isKey(event, 'Ctrl')) {
-        this.ctrlKeyPressed = false
-      }
-    }
 
 
     /** @hidden */
@@ -304,10 +289,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenList.forEach(shadowedToken => {if (shadowedToken !== token) {shadowedToken.selected = false}});
             token.selected = !token.selected;
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'Shift')) {
-          this.shiftKeyPressed = true;
-        } else if (KeyUtil.isKey(event, 'Ctrl')) {
-          this.ctrlKeyPressed = true;
         } else if (KeyUtil.isKey(event, 'Enter')) {
             this.input.elementRef().nativeElement.focus();
         } else if ((KeyUtil.isKey(event, 'ArrowLeft') && !rtl) || (KeyUtil.isKey(event, 'ArrowRight') && rtl)) {
@@ -520,12 +501,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     private _inputKeydownEvent(): void {
       this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
         this.handleKeyDown(event, this.tokenList.length);
-      });
-    }
-
-    private tokenizerKeyupEvent(): void {
-      this.tokenizerInnerEl.nativeElement.addEventListener('keyup', (event) => {
-        this.handleKeyUp(event);
       });
     }
 
