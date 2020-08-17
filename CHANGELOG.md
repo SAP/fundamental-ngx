@@ -130,38 +130,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.20.1-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.65...v0.20.1-rc.66) (2020-08-05)
 
--   remove input group number
-
-### Bug Fixes
-
-* (platform) Input Component and documentation code changes  ([#2615](https://github.com/SAP/fundamental-ngx/issues/2615)) ([3bcb9a2](https://github.com/SAP/fundamental-ngx/commit/3bcb9a2d815e1c7e1a98ac8e676e1f5b9d9d5f68)), closes [#2644](https://github.com/SAP/fundamental-ngx/issues/2644)
-* remove input group number ([#2993](https://github.com/SAP/fundamental-ngx/issues/2993)) ([cbc165a](https://github.com/SAP/fundamental-ngx/commit/cbc165a806ddb009d22ddfd36f53cf444387b304))
-
-### [0.20.1-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.69...v0.20.1-rc.70) (2020-08-06)
-
-
-### Bug Fixes
-
-* (platform) Updating Documentation and Example for Radio Group ([#2822](https://github.com/SAP/fundamental-ngx/issues/2822)) ([b7e8400](https://github.com/SAP/fundamental-ngx/commit/b7e8400060b681cc3b7cb9cb0d94366b4c88f088))
-
-### [0.20.1-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.68...v0.20.1-rc.69) (2020-08-06)
-
-### [0.20.1-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.67...v0.20.1-rc.68) (2020-08-05)
-
-
-### Bug Fixes
-
-* (platform) add switch component ([#2918](https://github.com/SAP/fundamental-ngx/issues/2918)) ([545db97](https://github.com/SAP/fundamental-ngx/commit/545db97be0149d2f37792c0bc79f613f69a427d8))
-
-### [0.20.1-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.66...v0.20.1-rc.67) (2020-08-05)
-
-
-### Bug Fixes
-
-* combobox IE11 focus/blur crashing  ([#2966](https://github.com/SAP/fundamental-ngx/issues/2966)) ([d6fa85a](https://github.com/SAP/fundamental-ngx/commit/d6fa85a9a9c47857d8b1136f5c9398284a6b63c4))
-
-### [0.20.1-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.20.1-rc.65...v0.20.1-rc.66) (2020-08-05)
-
 
 ### Bug Fixes
 
