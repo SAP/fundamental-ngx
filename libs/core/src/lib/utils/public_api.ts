@@ -24,6 +24,7 @@ export * from './interfaces/css-style-builder.interface';
 export * from './interfaces/has-element-ref.interface';
 export * from './interfaces/mobile-mode-config';
 export * from './interfaces/keyboard-support-item.interface';
+export * from './interfaces/mobile-control.interface';
 
 
 export * from './decorators/apply-css-class.decorator';

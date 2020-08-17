@@ -1,0 +1,49 @@
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
+    <fdp-form-field id="optionItemTemplate" placeholder="Type some text..." label="Option Item Template" zone="zLeft"
+                    rank="4">
+        <fdp-combobox
+            name="optionItemTemplate"
+            [dataSource]="dataSource"
+            displayKey="name"
+            (selectionChange)="onSelect($event)">
+            <ng-template fdTemplate="optionItemTemplate" let-item let-index="index">
+                <div class="fd-template-container-div">
+                    <fd-icon glyph="accept" size="l" class="fd-template-icon"></fd-icon>
+                    <span [innerText]="item.name"></span>
+                </div>
+            </ng-template>
+        </fdp-combobox>
+        <p>Selected: {{ selectedItem }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="groupItemTemplate" placeholder="Type some text..." label="Group Item Template" zone="zLeft"
+                    rank="4">
+        <fdp-combobox
+            name="groupItemTemplate"
+            [dataSource]="dataSource"
+            displayKey="name"
+            group="true"
+            groupKey="type"
+            (selectionChange)="onSelect1($event)">
+            <ng-template fdTemplate="groupItemTemplate" let-item>
+                <li class="fd-list__group-header" [innerText]="'Type: '+ item.label"></li>
+            </ng-template>
+        </fdp-combobox>
+        <p>Selected: {{ selectedItem1 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="secondaryItemTemplate" placeholder="Type some text..." label="Secondary Item Template"
+                    zone="zLeft" rank="4">
+        <fdp-combobox
+            name="secondaryItemTemplate"
+            [dataSource]="dataSource"
+            displayKey="name"
+            [showSecondaryText]="true"
+            (selectionChange)="onSelect2($event)">
+            <ng-template fdTemplate="secondaryItemTemplate" let-item>
+                <span class="fd-list__secondary" [innerText]="item.type"></span>
+            </ng-template>
+        </fdp-combobox>
+        <p>Selected: {{ selectedItem2 }}</p>
+    </fdp-form-field>
+</fdp-form-group>

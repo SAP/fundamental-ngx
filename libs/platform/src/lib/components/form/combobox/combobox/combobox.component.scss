@@ -1,0 +1,13 @@
+@import '~fundamental-styles/dist/list.css';
+
+.fd-select-overlay {
+    width: 100%;
+}
+
+.fd-combobox-input-menu-overflow {
+    overflow: auto;
+}
+
+.fd-list__item.fd-combobox-list-item {
+    cursor: pointer;
+}

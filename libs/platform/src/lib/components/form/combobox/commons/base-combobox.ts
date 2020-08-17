@@ -1,0 +1,670 @@
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Directive,
+    ElementRef,
+    Inject,
+    Injector,
+    Input,
+    OnDestroy,
+    Optional,
+    QueryList,
+    Self,
+    TemplateRef,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
+import { NgControl, NgForm } from '@angular/forms';
+import { isDataSource } from '@angular/cdk/collections';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
+
+import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import {
+    DIALOG_CONFIG,
+    DialogConfig,
+    DynamicComponentService,
+    KeyUtil,
+    ListItemDirective,
+    MenuKeyboardService,
+    MobileModeConfig
+} from '@fundamental-ngx/core';
+import {
+    ArrayComboBoxDataSource,
+    ComboBoxDataSource,
+    isOptionItem,
+    MatchingBy,
+    ObservableComboBoxDataSource,
+    OptionItem
+} from '../../../../domain';
+
+import { isFunction, isJsObject, isString } from '../../../../utils/lang';
+import { CollectionBaseInput } from '../../collection-base.input';
+import { ComboboxComponent } from '../combobox/combobox.component';
+import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
+import { COMBOBOX_COMPONENT } from '../combobox.interface';
+import { ComboboxConfig } from '../combobox.config';
+import { isArray } from 'util';
+
+export class ComboboxSelectionChangeEvent {
+    constructor(
+        public source: ComboboxComponent,
+        public payload: any // Contains selected item
+    ) {}
+}
+
+type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
+
+@Directive()
+export abstract class BaseCombobox<T> extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+    @Input()
+    maxHeight = '250px';
+
+    @Input()
+    get dataSource(): FdpComboBoxDataSource<any> {
+        return this._dataSource;
+    }
+
+    set dataSource(value: FdpComboBoxDataSource<any>) {
+        if (value) {
+            this._initializeDataSource(value);
+        }
+    }
+
+    /** Whether the autocomplete should be enabled; Enabled by default */
+    autoComplete = true;
+
+    /** Whether the combobox is readonly. */
+    readOnly = false;
+
+    /** Whether the combobox should be built on mobile mode */
+    mobile = false;
+
+    /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
+    mobileConfig: MobileModeConfig;
+
+    /** Tells the combo if we need to group items */
+    group = false;
+
+    /** A field name to use to group data by (support dotted notation) */
+    groupKey: string | null = null;
+
+    /** The field to show data in secondary column */
+    secondaryKey: string | null = null;
+
+    /** Show the second column (Applicable for two columns layout) */
+    showSecondaryText;
+
+    /** Horizontally align text inside the second column (Applicable for two columns layout) */
+    secondaryTextAlignment: 'left' | 'center' | 'right' = 'left';
+
+    /** Turns on/off Adjustable Width feature */
+    autoResize = false;
+
+    /** Indicates that data should be sorted.  */
+    sortItems = false;
+
+    /** @hidden */
+    searchInputElement: ElementRef;
+
+    /** @hidden */
+    multiple = false;
+
+    @Input()
+    get value(): any {
+        return super.getValue();
+    }
+
+    set value(value: any) {
+        const optionItem = this._convertToOptionItems(Array.isArray(value) ? value : [value]);
+        this.setAsSelected(optionItem);
+        super.setValue(value);
+    }
+
+    /**
+     * Overlay pane containing the options.
+     *
+     * @hidden
+     */
+    @ViewChild(CdkConnectedOverlay)
+    overlayDir: CdkConnectedOverlay;
+
+    /** @hidden */
+    @ViewChildren(ListItemDirective)
+    listItems: QueryList<ListItemDirective>;
+
+    /** @hidden */
+    inputTextValue: string;
+
+    /** @hidden */
+    controlTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    listTemplate: TemplateRef<any>;
+
+    /** Get the input text of the input. */
+    get inputText(): string {
+        return this.inputTextValue;
+    }
+
+    /** Set the input text of the input. */
+    set inputText(value: string) {
+        this.inputTextValue = value;
+
+        this.onTouched();
+    }
+
+    /** Whether the combobox is opened. */
+    isOpen = false;
+
+    get canClose(): boolean {
+        return !(this.mobile && this.mobileConfig.approveButtonText);
+    }
+
+    /** @hidden */
+    _suggestions: OptionItem[];
+
+    /** @hidden */
+    protected abstract selected: T;
+
+    /** @hidden */
+    maxWidth: number | null = null;
+
+    /** @hidden */
+    minWidth: number | null = null;
+
+    /**
+     * Need for mobile
+     *
+     * @hidden
+     */
+    openChange = new Subject<boolean>();
+
+    /** @hidden */
+    matchingStrategy = this._comboboxConfig.matchingStrategy;
+
+    protected _dataSource: FdpComboBoxDataSource<any>;
+
+    private _dsSubscription: Subscription | null;
+    private _element: HTMLElement = this.elementRef.nativeElement;
+    /** Keys, that won't trigger the popover's open state, when dispatched on search input */
+    private readonly nonOpeningKeys: string[] = [
+        'Escape',
+        'Enter',
+        'ArrowLeft',
+        'ArrowRight',
+        'ArrowDown',
+        'ArrowUp',
+        'Ctrl',
+        'Tab',
+        'Shift'
+    ];
+
+    displayFn = (value: any) => {
+        return this.displayValue(value);
+    };
+
+    secondaryFn = (value: any) => {
+        if (isOptionItem(value)) {
+            return value.secondaryText;
+        } else if (isJsObject(value) && this.secondaryKey) {
+            const currentItem = this.objectGet(value, this.secondaryKey);
+
+            return isFunction(currentItem) ? currentItem() : currentItem;
+        } else {
+            return value;
+        }
+    };
+
+    constructor(
+        readonly _cd: ChangeDetectorRef,
+        protected readonly elementRef: ElementRef,
+        @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @Self() readonly ngForm: NgForm,
+        @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
+        protected readonly _dynamicComponentService: DynamicComponentService,
+        protected _menuKeyboardService: MenuKeyboardService,
+        protected _comboboxConfig: ComboboxConfig
+    ) {
+        super(_cd, ngControl, ngForm);
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._setupKeyboardService();
+        this._initWindowResize();
+        super.ngAfterViewInit();
+
+        if (this.mobile) {
+            this._setUpMobileMode();
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        super.ngOnDestroy();
+
+        if (isDataSource(this.dataSource)) {
+            (this.dataSource as ComboBoxDataSource<any>).close();
+        }
+
+        if (this._dsSubscription) {
+            this._dsSubscription.unsubscribe();
+        }
+    }
+
+    /** @hidden
+     * Method to emit change event
+     */
+    abstract emitChangeEvent<K>(value: K): void;
+
+    /** @hidden
+     * Define is this item selected
+     */
+    abstract isSelectedOptionItem(selectedItem: OptionItem): boolean;
+
+    /** @hidden
+     * Emit select OptionItem
+     * */
+    abstract selectOptionItem(item: OptionItem): void;
+
+    /** @hidden
+     * Define value as selected
+     * */
+    abstract setAsSelected(item: OptionItem[]): void;
+
+    /** write value for ControlValueAccessor */
+    writeValue(value: any): void {
+        const optionItem = this._convertToOptionItems(Array.isArray(value) ? value : [value]);
+        this.setAsSelected(optionItem);
+        super.writeValue(value);
+    }
+
+    /** @hidden
+     * Close list
+     * */
+    close(event: MouseEvent = null, forceClose: boolean = false): void {
+        if (event) {
+            const target = event.target as HTMLInputElement;
+            if (target && target.id === this.id) {
+                return;
+            }
+        }
+
+        if (this.isOpen && (forceClose || this.canClose)) {
+            this.isOpen = false;
+            this._cd.markForCheck();
+            this.onTouched();
+        }
+    }
+
+    /** @hidden */
+    searchTermChanged(text: string = this.inputText): void {
+        const map = new Map();
+        map.set('query', text);
+        map.set('limit', 12);
+
+        this.ds.match(map);
+    }
+
+    /** @hidden */
+    showList(isOpen: boolean): void {
+        /** Reset displayed values on every mobile open */
+        if (this.mobile && !this.isOpen) {
+            this.searchTermChanged('');
+        }
+
+        if (this.isOpen !== isOpen) {
+            this.isOpen = isOpen;
+            this.onTouched();
+            this.openChange.next(isOpen);
+        }
+
+        this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    handleOptionItem(value: any): void {
+        if (value) {
+            this.selectOptionItem(value);
+        }
+    }
+
+    /**
+     * Handle Keydown Actions
+     * @hidden
+     */
+    onListKeydownHandler(event: KeyboardEvent): void {
+        const index: number = this.listItems.toArray().findIndex(
+            item => item.itemEl.nativeElement === document.activeElement
+        );
+        this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
+    }
+
+    /**
+     * Handle Click on Button
+     * @hidden
+     */
+    onPrimaryButtonClick(): void {
+        // Prevent primary button click behaviour on mobiles
+        if (this.mobile) {
+            return;
+        }
+
+        this.showList(!this.isOpen);
+        this.searchInputElement.nativeElement.focus();
+    }
+
+    /**
+     * Handle Keydown on Input
+     * @hidden
+     */
+    onInputKeydownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+            event.preventDefault();
+
+            if (event.altKey) {
+                this.showList(true);
+            }
+
+            if (this.isOpen && this.listItems && this.listItems.first) {
+                this.listItems.first.focus();
+            } else if (!this.isOpen) {
+                this._chooseOtherItem(1);
+            }
+        } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
+            event.preventDefault();
+
+            this._chooseOtherItem(-1);
+        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
+            event.stopPropagation();
+
+            this.showList(false);
+        } else if (!event.ctrlKey && !KeyUtil.isKey(event, this.nonOpeningKeys)) {
+            this.showList(true);
+        }
+    }
+
+    /** Handle dialog dismissing, closes popover and sets backup data. */
+    dialogDismiss(term: string): void {
+        this.inputText = term;
+        this.showList(false);
+    }
+
+    /** Handle dialog approval, closes popover and propagates data changes. */
+    dialogApprove(): void {
+        this.showList(false);
+    }
+
+    protected get ds(): ComboBoxDataSource<any> {
+        return (<ComboBoxDataSource<any>>this.dataSource);
+    }
+
+    /** @hidden */
+    private _setupKeyboardService(): void {
+        this._menuKeyboardService.itemClicked
+            .pipe(takeUntil(this._destroyed))
+            .subscribe((index) => this.handleOptionItem(index));
+        this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
+    }
+
+    /** Method that picks other value moved from current one by offset, called only when combobox is closed */
+    private _chooseOtherItem(offset: number): void {
+        const activeValue: OptionItem = this._getSelectItemByValue(this.inputTextValue);
+        const index: number = this._suggestions.findIndex(value => value === activeValue);
+
+        if (this._suggestions[index + offset]) {
+            this.handleOptionItem(this._suggestions[index + offset]);
+        }
+    }
+
+    /** @hidden */
+    private _getSelectItemByValue(displayValue: string): OptionItem {
+        return this._suggestions.find(value => value.label === displayValue);
+    }
+
+    /** @hidden */
+    private _setUpMobileMode(): void {
+        this._dynamicComponentService.createDynamicComponent(
+            { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
+            ComboboxMobileComponent,
+            { container: this._element },
+            { injector: Injector.create({ providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }] }) }
+        );
+    }
+
+    /** @hidden */
+    private _initializeDataSource(ds: FdpComboBoxDataSource<any>): void {
+        this._suggestions = [];
+
+        if (isDataSource(this.dataSource)) {
+            (this.dataSource as ComboBoxDataSource<any>).close();
+
+            if (this._dsSubscription) {
+                this._dsSubscription.unsubscribe();
+                this._dsSubscription = null;
+            }
+        }
+        // Convert whatever comes in as DataSource so we can work with it identically
+        this._dataSource = this._openDataStream(ds);
+    }
+
+    /** @hidden */
+    private _openDataStream(ds: FdpComboBoxDataSource<any>): ComboBoxDataSource<any> {
+        const initDataSource = this._toDataStream(ds);
+
+        if (initDataSource === undefined) {
+            throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
+        }
+        /**
+         * This is single point of data entry to the component. We dont want to set data on different
+         * places. If any new data comes in either you do a search and you want to pass initial data
+         * its here.
+         */
+        this._dsSubscription = initDataSource
+            .open()
+            .pipe(takeUntil(this._destroyed))
+            .subscribe(data => {
+                this._suggestions = this._convertToOptionItems(data);
+                if (this._suggestions.length === 0) {
+                    this.isOpen = false;
+
+                    return;
+                }
+
+                this.stateChanges.next('initDataSource.open().');
+
+                this._cd.markForCheck();
+            });
+
+        initDataSource.dataProvider.setLookupKey(this.lookupKey);
+        const matchingBy: MatchingBy = {
+            firstBy: this.displayFn
+        };
+
+        if (this.secondaryKey) {
+            matchingBy.secondaryBy = this.secondaryFn;
+        }
+
+        initDataSource.dataProvider.setMatchingBy(matchingBy);
+        initDataSource.dataProvider.setMatchingStrategy(this.matchingStrategy);
+
+        // initial data fetch
+        const map = new Map();
+        map.set('query', '*');
+        map.set('limit', 12);
+        initDataSource.match(map);
+
+        return initDataSource;
+    }
+
+    /** @hidden */
+    private _toDataStream(ds: FdpComboBoxDataSource<any>): ComboBoxDataSource<any> | undefined {
+        if (isDataSource(ds)) {
+            return ds as ComboBoxDataSource<any>;
+        } else if (Array.isArray(ds)) {
+            // default implementation to work on top of arrays
+            return new ArrayComboBoxDataSource<any>(ds);
+        } else if (isObservable(ds)) {
+            return new ObservableComboBoxDataSource<any>(ds);
+        }
+
+        return undefined;
+    }
+
+    /** @hidden */
+    private _initWindowResize(): void {
+        this._getOptionsListWidth();
+
+        if (!this.autoResize) {
+            return;
+        }
+
+        fromEvent(window, 'resize')
+            .pipe(takeUntil(this._destroyed))
+            .subscribe(() => this._getOptionsListWidth());
+    }
+
+    /** @hidden */
+    private _getOptionsListWidth(): void {
+        const body = document.body;
+        const rect = (this._element.querySelector('fd-input-group') as HTMLElement)
+            .getBoundingClientRect();
+        const scrollBarWidth = body.offsetWidth - body.clientWidth;
+        this.maxWidth = (window.innerWidth - scrollBarWidth) - rect.left;
+        this.minWidth = rect.width - 2;
+    }
+
+    /**
+     * Convert original data to OptionItems Interface
+     * @hidden
+     */
+    private _convertToOptionItems(items: any[]): OptionItem[] {
+        const item = items[0];
+
+        const elementTypeIsOptionItem = isOptionItem(item);
+        if (elementTypeIsOptionItem) {
+            return items as OptionItem[];
+        }
+
+        const elementTypeIsObject = isJsObject(item);
+        if (elementTypeIsObject) {
+            return this._convertObjectsToOptionItems(items);
+        }
+
+        const elementTypeIsString = isString(item);
+        if (elementTypeIsString) {
+            return this._convertPrimitiveToOptionItems(items);
+        }
+
+        return [];
+    }
+
+    /**
+     * Convert data to OptionItems Interface
+     * @hidden
+     */
+    private _convertObjectsToOptionItems(items: any[]): OptionItem[] {
+        if (this.group && this.groupKey) {
+            return this._convertObjectsToGroupOptionItems(items);
+        } else if (this.showSecondaryText && this.secondaryKey) {
+            return this._convertObjectsToSecondaryOptionItems(items);
+        } else {
+            return this._convertObjectsToDefaultOptionItems(items);
+        }
+    }
+
+    /**
+     * Convert object[] data to Group OptionItems Interface
+     * @hidden
+     */
+    private _convertObjectsToGroupOptionItems<K>(items: K[]): OptionItem[] {
+        const group: { [key: string]: K[] } = {};
+
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const keyValue = item[this.groupKey];
+            if (!keyValue) {
+                continue;
+            }
+
+            if (!group[keyValue]) {
+                group[keyValue] = [];
+            }
+
+            group[keyValue].push(item);
+        }
+
+        return Object.keys(group).map(key => {
+            const selectItem: OptionItem = {
+                label: key,
+                value: null,
+                isGroup: true
+            };
+
+            const currentGroup = group[key];
+
+            if (this.showSecondaryText && this.secondaryKey) {
+                selectItem.children = this._convertObjectsToSecondaryOptionItems(currentGroup);
+            } else {
+                selectItem.children = this._convertObjectsToDefaultOptionItems(currentGroup);
+            }
+
+            return selectItem;
+        });
+    }
+
+    /**
+     * Convert object[] data to Secondary OptionItems Interface
+     * @hidden
+     */
+    private _convertObjectsToSecondaryOptionItems<K>(items: K[]): OptionItem[] {
+        const selectItems: OptionItem[] = [];
+
+        for (let i = 0; i < items.length; i++) {
+            const value = items[i];
+            selectItems.push({
+                label: this.displayValue(value),
+                secondaryText: this.objectGet(value, this.secondaryKey),
+                value: value
+            });
+        }
+
+        return selectItems;
+    }
+
+    /**
+     * Convert Primitive data(Boolean, String, Number) to OptionItems Interface
+     * @hidden
+     */
+    private _convertPrimitiveToOptionItems(items: any[]): OptionItem[] {
+        const selectItems: OptionItem[] = [];
+
+        for (let i = 0; i < items.length; i++) {
+            const value = items[i];
+            selectItems.push({ label: value, value: value });
+        }
+
+        return selectItems;
+    }
+
+    /**
+     * Convert object[] to OptionItems Interface (Default)
+     * @hidden
+     */
+    private _convertObjectsToDefaultOptionItems(items: any[]): OptionItem[] {
+        const selectItems: OptionItem[] = [];
+
+        for (let i = 0; i < items.length; i++) {
+            const value = items[i];
+            selectItems.push({
+                label: this.displayValue(value),
+                value: value
+            });
+        }
+
+        return selectItems;
+    }
+}

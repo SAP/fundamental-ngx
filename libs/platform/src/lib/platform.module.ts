@@ -20,6 +20,8 @@ import { PlatformPanelModule } from './components/panel/panel.module';
 import { PlatformSwitchModule } from './components/form/switch/switch.module';
 import { PlatformObjectStatusModule } from './components/object-status/object-status.module';
 import { PlatformInputModule, PlatformStepInputModule, PlatformInputGroupModule } from './components/form/public_api';
+import { PlatformComboboxMobileModule } from './components/form/combobox/combobox-mobile/combobox-mobile.module';
+import { PlatformComboboxModule } from './components/form/combobox';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -46,7 +48,9 @@ import { PlatformInputModule, PlatformStepInputModule, PlatformInputGroupModule 
         PlatformObjectStatusModule,
         PlatformInputModule,
         PlatformStepInputModule,
-        PlatformInputGroupModule
+        PlatformInputGroupModule,
+        PlatformComboboxModule,
+        PlatformComboboxMobileModule
     ]
 })
 export class FundamentalNgxPlatformModule {}

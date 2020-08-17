@@ -1,0 +1,207 @@
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false" [formGroup]="customForm">
+    <fdp-form-field id="test000000" placeholder="Type some text..." label="Default 0" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test000000"
+            [dataSource]="dataSource"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test000000" placeholder="Type some text..." label="Default 0" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test000000"
+            [dataSource]="dataSource"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test111111111111" placeholder="Type some text..." label="Default 1" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test111111111111"
+            [dataSource]="dataSource2"
+            [value]="dataSource2[3]"
+            displayKey="name"
+            lookupKey="name"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test1111111111111" placeholder="Type some text..." label="Default compact" zone="zLeft"
+                    rank="4">
+        <fdp-combobox
+            name="test1111111111111"
+            contentDensity="compact"
+            value="Apple"
+            [dataSource]="dataSource2"
+            lookupKey="type"
+            displayKey="name"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test22222222" placeholder="Type some text..." label="Group" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test22222222"
+            [dataSource]="dataSource2"
+            value="Apple"
+            displayKey="name"
+            group="true"
+            groupKey="type"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test333333333" placeholder="Type some text..." label="Group without Key" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test333333333"
+            [dataSource]="dataSource2"
+            value="Apple"
+            displayKey="name"
+            group="true"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test5555555555" placeholder="Type some text..." label="Lookup" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test5555555555"
+            [dataSource]="dataSource2"
+            value="Apple"
+            displayKey="name"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test6666666" placeholder="Type some text..." label="readonly" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test6666666"
+            placeholder="Test placeholder test6666666"
+            [dataSource]="dataSource2"
+            value="Apple"
+            readOnly="true"
+            displayKey="name"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test666666126" placeholder="Type some text..." label="disabled" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test666666126"
+            placeholder="Test placeholder test666126666"
+            [dataSource]="dataSource2"
+            disabled="true"
+            displayKey="name"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test88888888" placeholder="Type some text..." label="mobile" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test88888888"
+            [dataSource]="dataSource2"
+            [mobile]="true"
+            [mobileConfig]="mobileConfig"
+            displayKey="name"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test9999999" placeholder="Type some text..." label="Observable" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test99999999"
+            [dataSource]="dataSourceOf"
+            displayKey="name"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test999129999" placeholder="Type some text..." label="optionItemTemplate" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test9999129999"
+            [dataSource]="dataSource2"
+            displayKey="name"
+            (selectionChange)="onSelect($event)">
+            <ng-template fdTemplate="optionItemTemplate" let-item let-index="index">
+                <div class="fd-template-container-div">
+                    <fd-icon glyph="accept" size="l" class="fd-template-icon"></fd-icon>
+                    <span [innerText]="item.name"></span>
+                </div>
+            </ng-template>
+        </fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test99912129999" placeholder="Type some text..." label="groupItemTemplate" zone="zLeft"
+                    rank="4">
+        <fdp-combobox
+            name="test999912129999"
+            [dataSource]="dataSource2"
+            displayKey="name"
+            group="true"
+            groupKey="type"
+            (selectionChange)="onSelect($event)">
+            <ng-template fdTemplate="groupItemTemplate" let-item>
+                <h1 [innerText]="item.label"></h1>
+            </ng-template>
+        </fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test77777777" placeholder="Type some text..." label="Secondary Text" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test77777777"
+            [dataSource]="dataSource2"
+            displayKey="name"
+            secondaryKey="type"
+            showSecondaryText="true"
+            secondaryTextAlignment="right"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="field" placeholder="Type some text..." label="basic secondaryItemTemplate" zone="zLeft"
+                    rank="4">
+        <fdp-combobox
+            name="field"
+            [dataSource]="dataSource2"
+            displayKey="name"
+            secondaryKey="type"
+            [showSecondaryText]="showSecondaryText"
+            secondaryTextAlignment="center"
+            (selectionChange)="onSelect($event)">
+        </fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test9991122129999" placeholder="Type some text..." label="secondaryItemTemplate" zone="zLeft"
+                    rank="4">
+        <fdp-combobox
+            name="test99991212129999"
+            [dataSource]="dataSource2"
+            displayKey="name"
+            [showSecondaryText]="true"
+            (selectionChange)="onSelect($event)">
+            <ng-template fdTemplate="secondaryItemTemplate" let-item>
+                <h1>{{ item.type }} USD</h1>
+            </ng-template>
+        </fdp-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="test4444444444" placeholder="Type some text..." [label]="'Red'" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="test4444444444"
+            [dataSource]="dataSource3"
+            [mobile]="false"
+            [mobileConfig]="mobileConfig"
+            lookupKey="firstName"
+            displayKey="name"
+            readonly="true"
+            group="true"
+            groupKey="type"
+            secondaryKey="firstName"
+            showSecondaryText="true"
+            secondaryTextAlignment="center"
+            autoResize="true"
+            sortItems="true"
+            entityClass=""
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+</fdp-form-group>

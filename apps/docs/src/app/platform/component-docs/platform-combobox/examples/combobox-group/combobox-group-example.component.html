@@ -1,0 +1,25 @@
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
+    <fdp-form-field id="group" placeholder="Type some text..." label="Group with Key" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="group"
+            [dataSource]="dataSource"
+            displayKey="name"
+            group="true"
+            groupKey="type"
+            (selectionChange)="onSelect($event)"
+        ></fdp-combobox>
+        <p>Selected: {{ selectedItem }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="group-without-key" placeholder="Type some text..." label="Group without Key" zone="zLeft"
+                    rank="4">
+        <fdp-combobox
+            name="group-without-key"
+            [dataSource]="dataSource"
+            displayKey="name"
+            group="true"
+            (selectionChange)="onSelect1($event)"
+        ></fdp-combobox>
+        <p>Selected: {{ selectedItem1 }}</p>
+    </fdp-form-field>
+</fdp-form-group>

@@ -1,0 +1,136 @@
+<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+
+<ng-template #desktopTemplate>
+    <div cdkOverlayOrigin #selectTrigger="cdkOverlayOrigin">
+        <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
+    </div>
+
+    <!-- Option panel using Material CDK overlay system -->
+    <ng-template
+        cdk-connected-overlay
+        [cdkConnectedOverlayOrigin]="selectTrigger"
+        [cdkConnectedOverlayOpen]="isOpen"
+        (overlayOutsideClick)="close($event)"
+        [cdkConnectedOverlayMinWidth]="minWidth">
+        <div class="fd-select-overlay fd-popover__body--no-arrow fd-popover__body--dropdown">
+            <ng-container [ngTemplateOutlet]="listTemplate"></ng-container>
+        </div>
+    </ng-template>
+</ng-template>
+
+<ng-template #mobileTemplate>
+    <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
+</ng-template>
+
+<ng-template #controlTemplate>
+    <fd-input-group
+        style="display: inline-block"
+        [compact]="isCompact"
+        [button]="true"
+        glyph="navigation-down-arrow"
+        [state]="status === 'error' ? 'error' : null"
+        [buttonFocusable]="false"
+        [disabled]="disabled"
+        [isControl]="true"
+        (addOnButtonClicked)="onPrimaryButtonClick()"
+        [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
+        [attr.aria-disabled]="disabled"
+        [attr.aria-readonly]="readOnly"
+        (click)="mobile && showList(true)">
+        <ng-container></ng-container>
+        <input
+            #searchInputElement
+            fdp-auto-complete
+            [options]="_suggestions"
+            [inputText]="inputText"
+            type="text"
+            fd-input-group-input
+            tabindex="0"
+            [id]="id"
+            [name]="name"
+            [compact]="isCompact"
+            (keydown)="onInputKeydownHandler($event)"
+            [disabled]="disabled"
+            [(ngModel)]="inputText"
+            (ngModelChange)="searchTermChanged()"
+            [placeholder]="placeholder"
+            (focus)="onTouched()"
+            [attr.aria-expanded]="isOpen && _suggestions.length > 0"
+            [readonly]="readOnly"
+            [attr.aria-readonly]="readOnly"
+        />
+        <span *ngIf="readOnly" fd-input-group-addon style="display: none;"></span>
+    </fd-input-group>
+</ng-template>
+
+<ng-template #listTemplate>
+    <ul fd-list
+        [dropdownMode]="true"
+        class="fd-combobox-input-menu-overflow"
+        [style.maxHeight]="!mobile && maxHeight"
+        [style.maxWidth]="autoResize && maxWidth + 'px'">
+        <ng-content></ng-content>
+        <ng-container *ngIf="isGroup">
+            <ng-container *ngFor="let group of _suggestions">
+                <ng-container *ngIf="!groupItemTemplate">
+                    <li fd-list-group-header [innerText]="group.label"></li>
+                </ng-container>
+
+                <ng-container *ngIf="groupItemTemplate">
+                    <ng-container [ngTemplateOutlet]="groupItemTemplate"
+                                  [ngTemplateOutletContext]="{$implicit: {label: group.label}}"></ng-container>
+                </ng-container>
+
+                <ng-container [ngTemplateOutlet]="list"
+                              [ngTemplateOutletContext]="{ terms: group.children }"></ng-container>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="!isGroup">
+            <ng-container
+                [ngTemplateOutlet]="list"
+                [ngTemplateOutletContext]="{ terms: _suggestions }"
+            ></ng-container>
+        </ng-container>
+    </ul>
+</ng-template>
+
+<ng-template let-terms="terms" #list>
+    <li *ngFor="let term of terms; let i = index;"
+        (click)="handleOptionItem(term)"
+        (keydown)="onListKeydownHandler($event)"
+        fd-list-item
+        tabindex="0"
+        class="fd-combobox-list-item"
+        [selected]="isSelectedOptionItem(term)">
+        <ng-container [ngTemplateOutlet]="optionItemSource"
+                      [ngTemplateOutletContext]="{ term: term, index: i }"></ng-container>
+
+        <ng-container [ngTemplateOutlet]="secondaryTextSource"
+                      [ngTemplateOutletContext]="{ term: term }"></ng-container>
+    </li>
+</ng-template>
+
+<ng-template let-term="term" let-index="index" #optionItemSource>
+    <ng-container *ngIf="!optionItemTemplate">
+        <span [innerHTML]="term.label | highlight: inputText"></span>
+    </ng-container>
+
+    <ng-container *ngIf="optionItemTemplate">
+        <ng-container [ngTemplateOutlet]="optionItemTemplate"
+                      [ngTemplateOutletContext]="{$implicit: term.value, index: index}"></ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template let-term="term" #secondaryTextSource>
+    <ng-container *ngIf="showSecondaryText">
+        <ng-container *ngIf="!secondaryItemTemplate">
+            <span [style.text-align]="secondaryTextAlignment" fd-list-secondary [innerHTML]="term.secondaryText | highlight: inputText"></span>
+        </ng-container>
+
+        <ng-container *ngIf="secondaryItemTemplate">
+            <ng-container [ngTemplateOutlet]="secondaryItemTemplate"
+                          [ngTemplateOutletContext]="{$implicit: term.value}"></ng-container>
+        </ng-container>
+    </ng-container>
+</ng-template>

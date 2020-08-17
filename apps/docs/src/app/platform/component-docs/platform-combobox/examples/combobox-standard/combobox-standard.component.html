@@ -1,0 +1,65 @@
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
+    <fdp-form-field id="standard" placeholder="Type some text..." label="Standard" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="standard"
+            [dataSource]="dataSource"
+            (selectionChange)="onSelect1($event)"
+        ></fdp-combobox>
+        <p>Selected: {{ selectedItem1 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="compact" placeholder="Type some text..." label="Compact" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="compact"
+            contentDensity="compact"
+            [dataSource]="dataSource"
+            (selectionChange)="onSelect2($event)"
+        ></fdp-combobox>
+        <p>Selected: {{ selectedItem2 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="readOnly" placeholder="Type some text..." label="ReadOnly" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="readOnly"
+            [dataSource]="dataSource"
+            [value]="dataSource[0]"
+            readOnly="true"
+            (selectionChange)="onSelect3($event)"
+        ></fdp-combobox>
+        <p>Selected: {{ selectedItem3 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="disabled" placeholder="Type some text..." label="Disabled" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="disabled"
+            [dataSource]="dataSource"
+            [value]="dataSource[1]"
+            disabled="true"
+            (selectionChange)="onSelect4($event)"
+        ></fdp-combobox>
+        <p>Selected: {{ selectedItem4 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="max-height" placeholder="Type some text..." label="Max Height" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="disabled"
+            [dataSource]="dataSource"
+            maxHeight="400px"
+            (selectionChange)="onSelect5($event)"
+        ></fdp-combobox>
+        <p>Selected: {{ selectedItem5 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="auto-resize" placeholder="Type some text..." zone="zLeft" rank="4">
+        <h3>Auto-Resize</h3>
+
+        <p>The width of the option list adapts to its content. The minimum width is the
+            input field plus the dropdown arrow.</p>
+        <fdp-combobox
+            [dataSource]="dataSourceAutoResize"
+            autoResize="true"
+            (selectionChange)="onSelect6($event)"
+        ></fdp-combobox>
+        <p>Selected: {{ selectedItem6 }}</p>
+    </fdp-form-field>
+</fdp-form-group>

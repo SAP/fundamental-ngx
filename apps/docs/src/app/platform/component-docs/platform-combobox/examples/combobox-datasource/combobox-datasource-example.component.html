@@ -1,0 +1,34 @@
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
+    <fdp-form-field id="test111111111111" placeholder="Type some text..." label="Array of Strings" zone="zLeft"
+                    rank="4">
+        <fdp-combobox
+            name="test111111111111"
+            [dataSource]="dataSourceStrings"
+            (selectionChange)="onSelect1($event)"
+        ></fdp-combobox>
+        <p>Selected Item: {{ selectedItem1 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="array-of-objects" placeholder="Type some text..." label="Array of Objects" zone="zLeft"
+                    rank="4">
+        <fdp-combobox
+            name="array-of-objects"
+            [dataSource]="dataSource"
+            displayKey="name"
+            lookupKey="name"
+            (selectionChange)="onSelect2($event)"
+        ></fdp-combobox>
+        <p>Selected Item: {{ selectedItem2 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="observable" placeholder="Type some text..." label="Observable" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="observable"
+            [dataSource]="dataSourceOf"
+            displayKey="name"
+            lookupKey="name"
+            (selectionChange)="onSelect3($event)"
+        ></fdp-combobox>
+        <p>Selected Item: {{ selectedItem3 }}</p>
+    </fdp-form-field>
+</fdp-form-group>
