@@ -229,9 +229,14 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
             if (shouldItemBeRemovedByWidth && itemGroup && !shouldNeverBeInOverflow) {
                 const lowestGroup = this._getLowestGroupByPriority(itemGroup);
-                const itemsToRemove = this._groupedCollection[lowestGroup];
+                let itemsToRemove = this._groupedCollection[lowestGroup];
+                if (lowestGroup !== itemGroup) {
+                    itemsToRemove = [...itemsToRemove, ...this._groupedCollection[itemGroup]];
+                }
+
                 // tslint:disable-next-line:no-unused-expression
                 itemsToRemove && itemsToRemove.forEach(item => {
+                    this._removeItemFromArray(normalItems, item);
                     const isDisappear = this._getElementPriority(item) === OverflowPriorityEnum.DISAPPEAR;
                     if (isDisappear) {
                         this._disappearElements.push(item);
@@ -243,7 +248,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
                 });
 
                 delete this._groupedCollection[lowestGroup];
+                delete this._groupedCollection[itemGroup];
                 delete this._groupedCollectionPriority[lowestGroup];
+                delete this._groupedCollectionPriority[itemGroup];
 
                 return MAX_CONTENT_SIZE;
             }
@@ -402,6 +409,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
             return lowestGroup;
         }, itemGroup);
+    }
+
+    /** @hidden */
+    private _removeItemFromArray(toolbarItems: ToolbarItemDirective[], toolbarItem: ToolbarItemDirective): ToolbarItemDirective | null {
+        const itemIndex = toolbarItems.indexOf(toolbarItem);
+
+        return itemIndex >= 0 ? toolbarItems.splice(itemIndex, 1)[0] : null;
     }
 
     /** @hidden */
