@@ -1,11 +1,11 @@
-import { Component, DoCheck, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { AfterViewInit, Component, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormControl, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-content-example',
     templateUrl: './platform-radio-group-content-example.component.html'
 })
-export class PlatformRadioGroupContentExampleComponent implements DoCheck {
+export class PlatformRadioGroupContentExampleComponent implements AfterViewInit {
     favoriteSeason = '';
     favoriteSeason2 = 'spring';
     favoriteMonth = '';
@@ -24,10 +24,16 @@ export class PlatformRadioGroupContentExampleComponent implements DoCheck {
         month: new FormControl('february')
     });
 
-    ngDoCheck(): void {
-        if (this.form4.controls.radioc4) {
-            this.form4.controls.radioc4.setErrors({ invalid: true });
+    constructor(private _cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
+
+    onSubmit(form: NgForm): void {
+        if (this.form4.controls.radioc4.status === 'INVALID' && form.submitted) {
             this.form4.controls.radioc4.markAsTouched();
+            this._cd.detectChanges();
         }
     }
 }

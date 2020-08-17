@@ -1,12 +1,20 @@
 <h3>Use With Reactive Form</h3>
 <p>Platform radio buttons created with given list of string values and have validation error</p>
-<fdp-form-group multiLayout="true" [formGroup]="form1">
-    <fdp-form-field #fl1 id="radiol1" zone="zLeft" rank="1">
-        <fdp-radio-group name="radiol1" [list]="seasons" [isInline]="false" contentDensity="cozy"
-            [formControl]="fl1.formControl">
-        </fdp-radio-group>
-    </fdp-form-field>
-</fdp-form-group>
+<form #listform="ngForm" (ngSubmit)="onSubmit(listform)">
+    <fdp-form-group multiLayout="true" [formGroup]="form1">
+        <fdp-form-field #fl1 id="radiol1" zone="zLeft" rank="1" [required]="true">
+            <fdp-radio-group name="radiol1" [list]="seasons" [isInline]="true" contentDensity="cozy"
+                [formControl]="fl1.formControl">
+            </fdp-radio-group>
+        </fdp-form-field>
+        <ng-template #i18n let-errors>
+            <ng-container *ngIf="errors.required">
+                <span>Value is required.</span>
+            </ng-container>
+        </ng-template>
+    </fdp-form-group>
+    <button type="submit" style="margin-left: 2rem;">Submit</button>
+</form>
 <p style="margin-left: 2rem;">Selected value: {{ form1.controls.radiol1?.value }}</p>
 <br />
 

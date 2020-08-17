@@ -51,16 +51,16 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     @Input('aria-describedby')
     ariaDescribedby: string;
 
-    /** The 'aria-disabled' for giving accessibility for disabled checkbox element. */
+    /** The 'aria-disabled' for giving accessibility for disabled radio element. */
     @Input('aria-disabled')
     ariaDisabled: boolean;
 
-    /** sets checkbox tooltip */
+    /** sets radio tooltip */
     @Input()
     title: string;
 
     /**
-     * Includes the checkbox in the page tab sequence.
+     * Includes the radio in the page tab sequence.
      */
     @Input()
     tabIndex: number;

@@ -50,7 +50,7 @@ let nextUniqueId = 0;
 })
 export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit, AfterContentChecked, OnDestroy {
     /**
-     * CBG label for accessibility
+     * RBG label for accessibility
      */
     @Input()
     ariaLabel: string;
@@ -157,7 +157,10 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
         if (!this._validateRadioButtons()) {
             throw new Error('fdp-radio-button-group must contain a fdp-radio-button');
         }
-        this._changeDetector.detectChanges();
+        this.contentRadioButtons.forEach((button) => {
+            button.stateType = this.status;
+        });
+        this._changeDetector.markForCheck();
     }
 
     /**
@@ -204,14 +207,14 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * Acess display value for objects, acts as checkbox label.
+     * Acess display value for objects, acts as Radio label.
      */
     public getDisplayValue(item: any): string {
         return this.displayValue(item);
     }
 
     /**
-     * Acess lookup value for objects, acts as checkbox value.
+     * Acess lookup value for objects, acts as Radio value.
      */
     public getLookupValue(item: any): string {
         return this.lookupValue(item);
@@ -244,13 +247,13 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
                 if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
                     firstEnabledButtonIndex = i;
                 }
-                this.onChange(this.value);
                 button.click.pipe(takeUntil(this.destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
             });
             // accessibility requirement
             if (!this._selected && this.contentRadioButtons && firstEnabledButtonIndex > -1) {
                 this.contentRadioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
             }
+            this.onChange(this.value);
         }
     }
 

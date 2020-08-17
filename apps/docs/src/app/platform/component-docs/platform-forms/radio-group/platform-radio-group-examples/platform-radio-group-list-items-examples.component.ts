@@ -1,14 +1,14 @@
-import { Component, DoCheck, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { FormGroup, FormControl, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-list-items-example',
     templateUrl: './platform-radio-group-list-items-example.component.html'
 })
-export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
+export class PlatformRadioGroupListItemsExampleComponent implements AfterViewInit {
     favoriteOption = '';
     favoriteOption2 = 'winter';
-    favBrand = 'xiomi'
+    favBrand = 'xiomi';
 
     form1 = new FormGroup({
         example1: new FormControl('')
@@ -58,9 +58,17 @@ export class PlatformRadioGroupListItemsExampleComponent implements DoCheck {
         }
     ];
 
-    ngDoCheck(): void {
-        this.form1.controls.example1.setErrors({ invalid: true });
-        this.form1.controls.example1.markAsTouched();
+    constructor(private _cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
+
+    onSubmit(form: NgForm): void {
+        if (this.form1.controls.radiolo1.status === 'INVALID' && form.submitted) {
+            this.form1.controls.radiolo1.markAsTouched();
+            this._cd.detectChanges();
+        }
     }
 }
 

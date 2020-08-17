@@ -1,11 +1,11 @@
-import { FormGroup } from '@angular/forms';
-import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-multiselect-checkbox',
     templateUrl: 'platform-multiselect-checkbox.component.html'
 })
-export class PlatformCozyChekboxExampleComponent implements AfterViewInit {
+export class PlatformCozyChekboxExampleComponent {
     field1: string[] = [];
     field2: string[] = ['vega'];
     field3: string[] = [];
@@ -18,12 +18,6 @@ export class PlatformCozyChekboxExampleComponent implements AfterViewInit {
 
     form3 = new FormGroup({});
     form3data = new Form3data(['faraday', 'edison']);
-
-    constructor(private _cd: ChangeDetectorRef) {}
-
-    ngAfterViewInit(): void {
-        this._cd.detectChanges();
-    }
 
     public checkedChangeFunction(event: any): void {}
 

@@ -1,11 +1,11 @@
-import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-list',
     templateUrl: './platform-checkbox-group-list.component.html'
 })
-export class PlatformCheckboxGroupListComponent implements AfterViewInit {
+export class PlatformCheckboxGroupListComponent {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
     sports: string[] = ['cycling', 'running', 'visit gym', 'swimming'];
     phoneslist: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
@@ -22,10 +22,4 @@ export class PlatformCheckboxGroupListComponent implements AfterViewInit {
     // template driven
     countrySeason = '';
     selectedSports = ['running', 'swimming'];
-
-    constructor(private _cd: ChangeDetectorRef) {}
-
-    ngAfterViewInit(): void {
-        this._cd.detectChanges();
-    }
 }

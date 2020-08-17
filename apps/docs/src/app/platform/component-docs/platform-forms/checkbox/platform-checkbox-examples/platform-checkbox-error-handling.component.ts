@@ -1,25 +1,22 @@
 import { FormGroup, Validators, ValidatorFn } from '@angular/forms';
-import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-checkbox-error-handling',
     templateUrl: 'platform-checkbox-error-handling.component.html'
 })
-export class PlatformChekboxStyleComponent implements AfterViewInit {
+export class PlatformChekboxStyleComponent {
     customForm: FormGroup;
     data: SomeObject;
     validators: ValidatorFn[];
 
-    constructor(private _cd: ChangeDetectorRef) {
+    constructor() {
         this.customForm = new FormGroup({});
         this.validators = [Validators.requiredTrue];
 
         this.data = new SomeObject(true, true);
     }
 
-    ngAfterViewInit(): void {
-        this._cd.detectChanges();
-    }
     onSubmit(): void {
         alert('Status: ' + this.customForm.status);
     }
