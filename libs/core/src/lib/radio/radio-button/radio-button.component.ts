@@ -34,26 +34,17 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     @ViewChild('inputElement')
     inputElement: ElementRef;
 
-    /**
-     * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
-     * take precedence so this may be omitted.
-     */
-    @Input('aria-label')
-    ariaLabel = '';
+    /** Sets the `aria-label` attribute to the element. */
+    @Input()
+    ariaLabel = null;
 
-    /**
-     * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-     */
-    @Input('aria-labelledby')
-    ariaLabelledby = null;
+    /** Sets the `aria-labelledby` attribute to the element. */
+    @Input()
+    ariaLabelledBy = null;
 
-    /** The 'aria-describedby' attribute is read after the element's label and field type. */
-    @Input('aria-describedby')
-    ariaDescribedby: string;
-
-    /** The 'aria-disabled' for giving accessibility for disabled radio element. */
-    @Input('aria-disabled')
-    ariaDisabled: boolean;
+    /** Sets the `aria-describedby` attribute to the element. */
+    @Input()
+    ariaDescribedBy: string;
 
     /** sets radio tooltip */
     @Input()

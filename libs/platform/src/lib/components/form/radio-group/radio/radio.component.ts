@@ -28,27 +28,6 @@ let uniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RadioButtonComponent extends BaseInput implements AfterViewInit, FocusableOption {
-    /**
-     * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
-     * take precedence so this may be omitted.
-     */
-    @Input('aria-label')
-    ariaLabel = '';
-
-    /**
-     * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-     */
-    @Input('aria-labelledby')
-    ariaLabelledby = null;
-
-    /** The 'aria-describedby' attribute is read after the element's label and field type. */
-    @Input('aria-describedby')
-    ariaDescribedby: string;
-
-    /** The 'aria-disabled' for giving accessibility for disabled radio button element. */
-    @Input('aria-disabled')
-    ariaDisabled: boolean;
-
     /** sets radio button tooltip */
     @Input()
     title: string;

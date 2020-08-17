@@ -49,18 +49,6 @@ let nextUniqueId = 0;
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => RadioGroupComponent), multi: true }]
 })
 export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit, AfterContentChecked, OnDestroy {
-    /**
-     * RBG label for accessibility
-     */
-    @Input()
-    ariaLabel: string;
-
-    /**
-     * Element id to label the group.
-     */
-    @Input()
-    ariaLabelledById: string;
-
     /** Value of selected radio button */
     @Input('selected')
     get value(): any {

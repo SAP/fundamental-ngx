@@ -2,7 +2,7 @@
     [isInline]="isInline"
     role="radiogroup"
     [attr.aria-label]="ariaLabel"
-    [attr.aria-labelledby]="ariaLabelledById"
+    [attr.aria-labelledby]="ariaLabelledBy"
     [attr.aria-orientation]="isInline ? 'horizontal' : 'vertical'"
 >
     <ng-container *ngIf="!list">
@@ -17,10 +17,9 @@
                             contentDensity: contentDensity,
                             stateType: status,
                             disabled: disabled || radio.disabled,
-                            ariabLabel: radio.ariaLabel,
-                            ariabLabelledby: radio.ariaLabelledby,
-                            ariabDescribedby: radio.ariaDescribedby,
-                            ariaDisabled: radio.ariaDisabled,
+                            ariaLabel: radio.ariaLabel,
+                            ariaLabelledBy: radio.ariaLabelledBy,
+                            ariaDescribedBy: radio.ariaDescribedBy,
                             title: radio.title
                         }
                     "
