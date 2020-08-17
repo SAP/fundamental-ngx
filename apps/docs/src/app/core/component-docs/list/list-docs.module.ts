@@ -18,7 +18,8 @@ import {
     ListModule,
     RadioModule,
     DragAndDropModule,
-    BusyIndicatorModule
+    BusyIndicatorModule,
+    ToolbarModule
 } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ListDndExampleComponent } from './examples/list-dnd-example/list-dnd-example.component';
@@ -28,6 +29,7 @@ import { ListActionExampleComponent } from './examples/list-action-example/list-
 import { ListNavigationExampleComponent } from './examples/list-navigation-example/list-navigation-example.component';
 import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/list-keyboard-example.component';
 import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
+import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
 
 const routes: Routes = [
     {
@@ -50,7 +52,8 @@ const routes: Routes = [
         RadioModule,
         InfiniteScrollModule,
         DragAndDropModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        ToolbarModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -67,7 +70,8 @@ const routes: Routes = [
         ListActionExampleComponent,
         ListNavigationExampleComponent,
         ListKeyboardExampleComponent,
-        ListNavIndicatorExampleComponent
+        ListNavIndicatorExampleComponent,
+        ListDataExampleComponent
     ]
 })
 export class ListDocsModule {}

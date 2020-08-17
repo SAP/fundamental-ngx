@@ -17,8 +17,10 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
                 <ng-template fdTemplate="subheader">
                     <div fd-bar-middle>
                         <fd-bar-element>
-                            <button fd-button [compact]="true" (click)="sortAlphabetically(true)" fdType="transparent" [glyph]="'arrow-top'"></button>
-                            <button fd-button [compact]="true" (click)="sortAlphabetically()" fdType="transparent" [glyph]="'arrow-bottom'"></button>
+                            <button fd-button [compact]="true" (click)="sortAlphabetically(true)" fdType="transparent"
+                                    [glyph]="'arrow-top'"></button>
+                            <button fd-button [compact]="true" (click)="sortAlphabetically()" fdType="transparent"
+                                    [glyph]="'arrow-bottom'"></button>
                         </fd-bar-element>
                         <fd-bar-element [fullWidth]="true">
                             <fd-input-group name="filter" [(ngModel)]="filterPhrase" [compact]="true" [glyph]="'search'"></fd-input-group>
@@ -43,7 +45,7 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
                         </fd-checkbox>
                     </li>
 
-                    <li *ngFor="let column of columns | tableFilter : filterPhrase : 'key'"
+                    <li *ngFor="let column of columns | filter : filterPhrase : 'key'"
                         cdkDrag
                         fd-list-item
                         [selected]="column.checked">
@@ -61,22 +63,22 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
             <fd-dialog-footer>
                 <fd-dialog-footer-button>
                     <button
-                        fd-button
-                        fd-dialog-decisive-button
-                        fdType="emphasized"
-                        [compact]="true"
-                        (click)="save()"
+                            fd-button
+                            fd-dialog-decisive-button
+                            fdType="emphasized"
+                            [compact]="true"
+                            (click)="save()"
                     >
                         Save and Close
                     </button>
                 </fd-dialog-footer-button>
                 <fd-dialog-footer-button>
                     <button
-                        fd-button
-                        fd-dialog-decisive-button
-                        fdType="transparent"
-                        [compact]="true"
-                        (click)="dismiss()"
+                            fd-button
+                            fd-dialog-decisive-button
+                            fdType="transparent"
+                            [compact]="true"
+                            (click)="dismiss()"
                     >
                         Close without Saving
                     </button>

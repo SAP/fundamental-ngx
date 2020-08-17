@@ -16,6 +16,8 @@ import {
 } from '@fundamental-ngx/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SortByPipe } from './core-helpers/pipes/sort.pipe';
+import { FilterPipe } from './core-helpers/pipes/filter.pipe';
 
 /** PROVIDES DEPENDENCIES REQUIRED TO BUILD DOCUMENTATION SHELL */
 
@@ -23,7 +25,9 @@ import { FormsModule } from '@angular/forms';
     declarations: [
         SearchPipe,
         ToolbarDocsComponent,
-        SectionsToolbarComponent
+        SectionsToolbarComponent,
+        SortByPipe,
+        FilterPipe
     ],
     imports: [
         MenuModule,
@@ -43,6 +47,8 @@ import { FormsModule } from '@angular/forms';
         SchemaModule,
         ToolbarDocsComponent,
         SectionsToolbarComponent,
+        SortByPipe,
+        FilterPipe
     ]
 })
 export class SharedDocumentationModule {

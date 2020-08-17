@@ -6,16 +6,16 @@
                     <fd-popover-control>
                         <div fd-table-inner>
                             Column 1
-                            <fd-icon fd-table-icon [glyph]="column1SortDir === 'asc' ? 'sort-ascending' : 'sort-descending'"></fd-icon>
+                            <fd-icon fd-table-icon [glyph]="ascending ? 'sort-ascending' : 'sort-descending'"></fd-icon>
                         </div>
                     </fd-popover-control>
                     <fd-popover-body>
                         <ul fd-list [compact]="true">
-                            <li fd-list-item (click)="sortColumn1('asc')">
+                            <li fd-list-item (click)="sortColumn1(true)">
                                 <fd-icon fd-list-icon [glyph]="'sort-ascending'"></fd-icon>
                                 <span fd-list-title>Sort Ascending</span>
                             </li>
-                            <li fd-list-item (click)="sortColumn1('desc')">
+                            <li fd-list-item (click)="sortColumn1(false)">
                                 <fd-icon fd-list-icon [glyph]="'sort-descending'"></fd-icon>
                                 <span fd-list-title>Sort Descending</span>
                             </li>
@@ -38,7 +38,7 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of displayedRows | sortTableBy: column1SortDir | filterTableBy: filterVal" fd-table-row>
+        <tr *ngFor="let row of displayedRows | sortBy: ascending: 'column1' | filter: filterVal" fd-table-row>
             <td fd-table-cell class="fd-has-font-weight-semi">
                 <a href="#">{{ row.column1 }}</a>
             </td>

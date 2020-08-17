@@ -1,5 +1,14 @@
 @import "~fundamental-styles/dist/list";
 
+
+.fd-list__item.is-focus:before, .fd-list__item:focus:before {
+    pointer-events: none;
+}
+
+.fd-list__title {
+    pointer-events: all;
+}
+
 .cdk-drag-dragging {
     z-index: 15;
     background-color: #fff;

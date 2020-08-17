@@ -1,0 +1,31 @@
+<fd-toolbar>
+    <label fd-toolbar-label>
+        Filter for list elements
+    </label>
+    <fd-toolbar-spacer></fd-toolbar-spacer>
+    <fd-input-group
+        [compact]="true"
+        [disabled]="false"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="handleSearchTermChange($event)"
+        [glyph]="'decline'"
+        [placeholder]="'Search'"
+        [button]="true"
+        (addOnButtonClicked)="searchTerm = ''"
+    >
+    </fd-input-group>
+    <button fd-button compact="true" glyph="sort-ascending" (click)="changeSort(true)"></button>
+    <button fd-button compact="true" glyph="sort-descending" (click)="changeSort(false)"></button>
+</fd-toolbar>
+<ul fd-list>
+    <li fd-list-item *ngFor="let item of displayedItems | sortBy : ascendingSort ">
+        <span fd-list-title>
+            {{ item }} {{ ascendingSort }}
+        </span>
+    </li>
+    <li fd-list-item [noData]="true" *ngIf="!displayedItems || displayedItems.length === 0">
+        <span fd-list-title>
+            No results found!
+        </span>
+    </li>
+</ul>

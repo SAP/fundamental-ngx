@@ -15,6 +15,9 @@ import * as listIndicatorH from '!raw-loader!./examples/list-nav-indicator-examp
 import * as listNavH from '!raw-loader!./examples/list-navigation-example/list-navigation-example.component.html';
 import * as listSelectionH from '!raw-loader!./examples/list-selection-example/list-selection-example.component.html';
 import * as listSelectionTs from '!raw-loader!./examples/list-selection-example/list-selection-example.component.ts';
+import * as listFilterTs from '!raw-loader!./examples/list-data-example/list-data-example.component.ts';
+import * as listFilterH from '!raw-loader!./examples/list-data-example/list-data-example.component.html';
+import * as listSortPipe from '!raw-loader!../../../documentation/core-helpers/pipes/sort.pipe.ts';
 import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
 import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
@@ -90,6 +93,28 @@ export class ListDocsComponent {
             code: dndListTs,
             fileName: 'list-dnd-example',
             component: 'ListDndExampleComponent'
+        }
+    ];
+
+    listData: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listFilterH,
+            fileName: 'list-data-example'
+        },
+        {
+            language: 'typescript',
+            code: listFilterTs,
+            fileName: 'list-data-example',
+            component: 'listDataExampleComponent'
+        },
+        {
+            language: 'typescript',
+            component: 'SortPipe',
+            code: listSortPipe,
+            pipe: true,
+            fileName: 'sort',
+            name: 'Sort Pipe'
         }
     ];
 

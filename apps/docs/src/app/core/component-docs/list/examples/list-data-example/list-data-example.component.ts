@@ -1,0 +1,37 @@
+import { Component, OnInit } from '@angular/core';
+
+export type SortDirections = 'asc' | 'desc';
+
+@Component({
+  selector: 'fd-list-data-example',
+  templateUrl: './list-data-example.component.html',
+  styleUrls: ['./list-data-example.component.scss']
+})
+export class ListDataExampleComponent implements OnInit {
+    items = [
+        'Apple',
+        'Banana',
+        'Orange',
+        'Pineapple',
+        'Strawberry'
+    ];
+
+    ascendingSort = true;
+
+    displayedItems = [];
+
+    searchTerm = '';
+
+    ngOnInit(): void {
+        this.handleSearchTermChange('');
+    }
+
+    handleSearchTermChange(searchTerm: string): void {
+        this.searchTerm = searchTerm;
+        this.displayedItems = this.items.filter(item => item.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+    }
+
+    changeSort(ascending: boolean): void {
+        this.ascendingSort = ascending;
+    }
+}

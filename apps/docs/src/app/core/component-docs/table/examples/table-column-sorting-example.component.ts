@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { boolean } from '@storybook/addon-knobs';
 
 interface ExampleRow {
     column1: any,
@@ -16,12 +17,12 @@ interface ExampleRow {
 export class TableColumnSortingExampleComponent implements OnInit {
     tableRows: ExampleRow[];
     displayedRows: ExampleRow[];
-    column1SortDir = 'asc';
+    ascending = true;
     filterVal = '';
     open = false;
 
-    sortColumn1(dir: string): void {
-        this.column1SortDir = dir;
+    sortColumn1(asc: boolean): void {
+        this.ascending = asc;
         this.open = false;
     }
 
