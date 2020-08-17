@@ -81,7 +81,7 @@ export class ListItemComponent implements DefaultMenuItem {
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
-    onClick(): void {
+    onClick(event: MouseEvent): void {
         if (this.checkbox) {
             this.checkbox.nextValue();
         }
