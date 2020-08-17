@@ -20,7 +20,7 @@
 <ul fd-list>
     <li fd-list-item *ngFor="let item of displayedItems | sortBy : ascendingSort ">
         <span fd-list-title>
-            {{ item }} {{ ascendingSort }}
+            {{ item }}
         </span>
     </li>
     <li fd-list-item [noData]="true" *ngIf="!displayedItems || displayedItems.length === 0">
