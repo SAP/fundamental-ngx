@@ -25,6 +25,7 @@ import { RadioButtonComponent } from '../../radio/radio-button/radio-button.comp
     templateUrl: './list-item.component.html',
     host: {
         class: 'fd-list__item',
+        role: 'listitem'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None

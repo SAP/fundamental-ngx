@@ -4,7 +4,9 @@ import {
     Component,
     ContentChildren,
     HostBinding,
-    Input, OnDestroy, Optional,
+    Input,
+    OnDestroy,
+    Optional,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
@@ -23,6 +25,7 @@ import { startWith, takeUntil } from 'rxjs/operators';
     templateUrl: `./list.component.html`,
     host: {
         class: 'fd-list',
+        role: 'list'
     },
     styleUrls: ['./list.component.scss'],
     encapsulation: ViewEncapsulation.None,

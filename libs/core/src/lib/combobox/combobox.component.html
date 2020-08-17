@@ -91,7 +91,6 @@
                 <li
                     *ngFor="let term of group.value"
                     (click)="onMenuClickHandler(term)"
-                    (keydown)="onListKeydownHandler($event)"
                     fd-list-item
                     tabindex="0"
                     class="fd-combobox-list-item"
@@ -108,7 +107,6 @@
             <li
                 *ngFor="let term of displayedValues"
                 (click)="onMenuClickHandler(term)"
-                (keydown)="onListKeydownHandler($event)"
                 fd-list-item
                 tabindex="0"
                 class="fd-combobox-list-item"

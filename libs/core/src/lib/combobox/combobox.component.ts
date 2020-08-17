@@ -338,14 +338,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     }
 
     /** @hidden */
-    onListKeydownHandler(event: KeyboardEvent): void {
-        const index: number = this.listItems
-            .toArray()
-            .findIndex((item) => item.elementRef.nativeElement === document.activeElement);
-        this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
-    }
-
-    /** @hidden */
     onMenuClickHandler(value: any): void {
         if (value) {
             const index: number = this.dropdownValues.findIndex((_value) => _value === value);

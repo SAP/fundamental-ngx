@@ -103,21 +103,6 @@ describe('ComboboxComponent', () => {
         expect(component.listItems.first.focus).toHaveBeenCalled();
     });
 
-    it('should handle onListKeydownHandler, arrow up on the first item', () => {
-        component.listItems.first.focus();
-        const event: any = {
-            key: 'ArrowUp',
-            preventDefault: () => {
-            }
-        };
-        spyOn(event, 'preventDefault');
-        spyOn(component.searchInputElement.nativeElement, 'focus');
-        event.key = 'ArrowUp';
-        component.onListKeydownHandler(event);
-        expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
-    });
-
     it('should set inputText', () => {
         spyOn(component, 'onChange');
         spyOn(component, 'onTouched');
