@@ -105,6 +105,44 @@ describe('TokenizerComponent', () => {
         expect(component.focusTokenElement).toHaveBeenCalledWith(component.tokenList.length - 1);
     });
 
+    it('should select using control or command', () => {
+        const event = new MouseEvent('click', {
+            'ctrlKey': true
+        });
+        component.ngAfterViewChecked();
+        (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token')  as HTMLElement).dispatchEvent(event);
+
+        expect(component.tokenList.first.selected).toBeTruthy();
+        expect(component.tokenList.last.selected).toBeTruthy();
+    });
+
+    it('should deselect using control or command', () => {
+      component.ngAfterViewChecked();
+      const event = new MouseEvent('click', {
+        'ctrlKey': true
+      });
+      (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+      (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token')  as HTMLElement).dispatchEvent(event);
+      (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token')  as HTMLElement).dispatchEvent(event);
+
+      expect(component.tokenList.first.selected).toBeTruthy();
+      expect(component.tokenList.last.selected).toBeFalsy();
+    });
+
+    it('should select using shift', () => {
+      component.ngAfterViewChecked();
+      const event = new MouseEvent('click', {
+        'ctrlKey': false,
+        'shiftKey': true
+      });
+      (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+      // (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token')  as HTMLElement).dispatchEvent(event);
+
+      expect(component.tokenList.first.selected).toBeTruthy();
+      // expect(component.tokenList.last.selected).toBeTruthy();
+    });
+
     it('should focus a token element', async () => {
         component.tokenList.forEach((token) =>
             spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus')

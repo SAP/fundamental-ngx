@@ -222,6 +222,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
                 event.stopPropagation();
                 this.focusTokenElement(index);
+                this.resetFirstAndLastElement();
                 if (event.ctrlKey || event.metaKey) {
                 this._ctrlSelected(token, index);
                 } else if (!event.ctrlKey && !event.metaKey && !event.shiftKey  || this._ctrlPrevious) {
@@ -522,14 +523,36 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     /*
+    *Restart first and last elements for shift selection.
+    */
+    private resetFirstAndLastElement(): void {
+      let reset = true;
+      this.tokenList.forEach((token) => {
+        if (token.selected) {
+        } else {
+          reset = false;
+        };
+      });
+      if (reset) {
+        this._firstElementInSelection = null;
+        this._lastElementInSelection = null;
+      }
+    }
+    /** @hidden */
+    /*
     *Method which handles what happens to token when it is clicked and the shift key is being held down.
     */
     private _shiftSelected(index): void {
       if (index < this._firstElementInSelection) {
         this._directionShiftIsRight = false;
+        this._lastElementInSelection = this._firstElementInSelection;
         this._firstElementInSelection = index;
       } else if (index > this._lastElementInSelection) {
         this._directionShiftIsRight = true;
+        this._firstElementInSelection = this._lastElementInSelection;
+        this._lastElementInSelection = index;
+      } else if (!this._lastElementInSelection) {
+        this._firstElementInSelection = index;
         this._lastElementInSelection = index;
       }
       if (this._lastElementInSelection === this._firstElementInSelection) {
@@ -552,9 +575,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     }
 
     /** @hidden */
-    /*
-    *Method which handles what happens to token when it is clicked and the control or meta key is being held down.
-    */
+    /*Method which handles what happens to token when it is clicked and the control or meta key is being held down.*/
     private _ctrlSelected(token, index): void {
       this._firstElementInSelection = null;
       this._lastElementInSelection = null;
