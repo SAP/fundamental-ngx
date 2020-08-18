@@ -1,12 +1,22 @@
 import {
     ElementRef, HostBinding, Input, ChangeDetectorRef, EventEmitter,
-    Output, HostListener, ViewChild, AfterViewChecked, OnInit
+    Output, HostListener, ViewChild, AfterViewChecked, OnInit, Directive, TemplateRef, ViewContainerRef
 } from '@angular/core';
 import { CheckboxComponent, RadioButtonComponent } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 let nextListItemId = 0;
 export type TextType = 'negative' | 'critical' | 'positive' | 'informative';
+
+
+
+
+/** Base interface for a list variant definition.
+ *  Captures a list item template definition. */
+export interface ItemDef {
+    templateRef?: TemplateRef<any>;
+}
+
 
 /**
  * Interface for defining more actions on list item
@@ -21,7 +31,8 @@ interface SecondaryActionItem {
  * This class contains common properties used across list Item components.
  * this can be extended to reduce the code duplication across list Item components.
  */
-export class BaseListItem extends BaseComponent implements AfterViewChecked, OnInit {
+@Directive({ selector: '[fdpItemDef]' })
+export class BaseListItem extends BaseComponent implements AfterViewChecked, OnInit, ItemDef {
 
     /** event emitter for selected item*/
     @Output()
@@ -39,29 +50,30 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
     /** Whether Navigation mode is included to list component
     * for all the items
     */
-    hasNavigation: boolean = false;
+    hasNavigation = false;
 
     /** Whether Navigation mode is included to list component
      * only a subset of the list items are navigable
      * you should indicate those by displaying a navigation arrow
     */
-    showNavigationArrow: boolean = false;
+    showNavigationArrow = false;
 
 
     /** Whether Navigation mode is included to for
      *  current list item component
    */
-    @Input()
-    partialNavigation?: boolean = false;
+    // @Input()
+    // partialNavigation?= false;
 
     /**By default selection mode is '' */
     selectionMode: String = '';
 
 
+    enableDnd: boolean;
     /** Whether By line mode is included to list component, by which
      *  list item will accomdate the data in 2 column
      */
-    hasByLine: boolean = false;
+    hasByLine = false;
 
     /** href value to navigate to */
     @Input()
@@ -108,6 +120,10 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
     @Input()
     secondary?: string;
 
+    /** attribute to hold counter text*/
+    @Input()
+    counter?: string;
+
     /**
      * Enabling this flag causes forcing secondary item directive to not wrap text,
      * instead of wrapping there will be text truncation
@@ -122,7 +138,7 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
     // /** Whether listitem is selected */
     @Input()
     @HostBinding('class.is-selected')
-    selected: boolean = false;
+    selected = false;
 
     /** The type of the secondary text.fd-list__byline-right--*
     *  Can be one of *positive*, *negative*, *informative*, *critical*, *neutral* */
@@ -147,6 +163,10 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
     @HostBinding('attr.aria-posinet')
     ariaPosinet: number;
 
+    /** @hidden */
+    @HostBinding('attr.tabindex')
+    tabindex = 0;
+
     /**
     * list of values, it can be of type Item or String.
     */
@@ -167,8 +187,9 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
         this.name = item.name ? item.name : '';
         this.target = item.target;
         this.href = item.href;
+        this.enableDnd = item.enableDnd;
+        this.counter = item.counter;
         this.textType = item.textType;
-        this.partialNavigation = item.partialNavigation;
         this.secondary = item.secondary;
         this.description = item.description;
         if (item.secondaryIcons !== null && item.secondaryIcons !== undefined) {
@@ -179,8 +200,9 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
     }
 
     /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef) {
+    constructor(protected _changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef, public templateRef?: TemplateRef<any>) {
         super(_changeDetectorRef);
+
     }
 
     /** @hidden */
@@ -208,7 +230,7 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
 
     // /** @hidden */
     @HostListener('keydown', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
+    handleKeyboardEvent(event: KeyboardEvent): void {
         if (event.keyCode === ENTER || event.keyCode === SPACE) {
             this.itemSelected.emit(event);
             this._changeDetectorRef.markForCheck();

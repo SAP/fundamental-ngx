@@ -1,5 +1,5 @@
 <h3>Cozy Mode</h3>
-<fdp-list>
+<fdp-list [enableDnd]="true">
     <fdp-list-group-header>Group header 1</fdp-list-group-header>
     <fdp-standard-list-item title="List item 1">
         <div fd-list-secondary #fdpactiongroup>
@@ -18,7 +18,7 @@
 
 <h3>Compact Mode</h3>
 
-<fdp-list [contentDensity]="'compact'">
+<fdp-list [contentDensity]="'compact'" [enableDnd]="true">
     <fdp-list-group-header>Group header 1</fdp-list-group-header>
     <fdp-standard-list-item title="List item 1">
     </fdp-standard-list-item>

@@ -11,7 +11,7 @@ export class PlatformListWithSelectionExampleComponent {
         { 'title': 'Item3', 'checkboxValue': 'check3' },
         { 'title': 'Item4', 'checkboxValue': 'check4' }];
 
-    showItemInfo(event: any) {
+    showItemInfo(event: any): void {
         this.selectedItems = event;
     }
 

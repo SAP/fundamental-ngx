@@ -25,9 +25,9 @@ export class PlatformListWithFooterExampleComponent {
 export class PlatformListWithItemCounterExampleComponent {
 
     items: any[] = [
-        { 'title': 'Item1', 'secondary': '2134' },
-        { 'title': 'Item2', 'secondary': '34562' },
-        { 'title': 'Item3', 'secondary': '739' }];
+        { 'title': 'Item1', 'counter': '2134' },
+        { 'title': 'Item2', 'counter': '34562' },
+        { 'title': 'Item3', 'counter': '739' }];
 }
 
 @Component({
@@ -42,7 +42,7 @@ export class PlatformListWithSingleSelectionExampleComponent {
         { 'title': 'Item3', 'name': 'singleSelect' },
         { 'title': 'Item4', 'name': 'singleSelect' }];
 
-    showItemInfo(event: any) {
+    showItemInfo(event: any): void {
         this.selectedItems = event[0].id;
     }
 
@@ -56,7 +56,7 @@ export class PlatformListWithNavigationExampleComponent {
     items: any[] = [
         { 'title': 'Item1' },
         { 'title': 'Item2' },
-        { 'title': 'Item3' }];
+        { 'title': 'Item3', 'href': '.' }];
 }
 
 @Component({

@@ -15,12 +15,12 @@ import { PlatformListModule } from './list.module';
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef, static: false })
-    c
-    noBorder: boolean = false;
-    hasByLine: boolean = false;
-    multiSelect: boolean = false;
-    showNavigationArrow: boolean = false;
-    hasNavigation: boolean = false;
+
+    noBorder = false;
+    hasByLine = false;
+    multiSelect = false;
+    showNavigationArrow = false;
+    hasNavigation = false;
 }
 
 

@@ -63,7 +63,7 @@ export class PlatformStandardListItemWithSelectionExampleComponent {
             'secondary': 'Second text item in Byline (Can be semantic (Status) or not)'
         }];
 
-    showItemInfo(event: any) {
+    showItemInfo(event: any): void {
         this.selectedItems = event;
     }
 
@@ -82,10 +82,12 @@ export class PlatformStandardListItemWithNavigationExampleComponent {
         },
         {
             'title': 'Item2', 'description': 'First text item in Byline (Standard text item)',
-            'secondary': 'Second text item in Byline (Can be semantic (Status) or not)'
+            'secondary': 'Second text item in Byline (Can be semantic (Status) or not)',
+            'href': '#'
         },
         {
             'title': 'Item3', 'description': 'First text item in Byline (Standard text item)',
-            'secondary': 'Second text item in Byline (Can be semantic (Status) or not)'
+            'secondary': 'Second text item in Byline (Can be semantic (Status) or not)',
+            'href': '#'
         }];
 }

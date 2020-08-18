@@ -99,7 +99,7 @@ export class PlatformStandardListItemDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit() { }
+    ngOnInit(): void { }
     constructor() { }
 
 }

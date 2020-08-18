@@ -14,14 +14,14 @@ export class PlatformListWithDeleteButtonExampleComponent {
 
     // Handle deletion of item via  mouseclick
     @HostListener('click', ['$event'])
-    deleteRow(event: any) {
+    deleteRow(event: any): void {
         if (event.target.tagName.toLowerCase() === 'button') {
             event.target.parentNode.parentNode.parentNode.parentNode.style.display = 'none';
         }
     }
 
     // Handle deletion of item via keyboard 'Enter' or mouseclick
-    @HostListener('keyup', ['$event']) onKeydown(event: any) {
+    @HostListener('keyup', ['$event']) onKeydown(event: any): void {
         if (event && event.key === 'Enter') {
             if (event.target.tagName.toLowerCase() === 'button') {
                 event.target.parentNode.parentNode.parentNode.parentNode.style.display = 'none';

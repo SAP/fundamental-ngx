@@ -28,7 +28,7 @@ export class PlatformStandardListItemWithSingleSelectionExampleComponent {
             'secondary': 'Second text item in Byline (Can be semantic (Status) or not)'
         }];
 
-    showItemInfo(event: any) {
+    showItemInfo(event: any): void {
         this.selectedItems = event[0].id;
     }
 

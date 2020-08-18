@@ -1,4 +1,7 @@
-import { Component, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, forwardRef, AfterViewInit, Input } from '@angular/core';
+import {
+    Component, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, forwardRef, AfterViewInit,
+    TemplateRef, ViewContainerRef
+} from '@angular/core';
 import { BaseListItem } from '../base-list-item';
 
 
@@ -30,14 +33,20 @@ export class StandardListItemComponent extends BaseListItem implements AfterView
     /** @hidden */
     _addClassToElement(className: string): void {
         const secItems = this.listItemRef.nativeElement.querySelectorAll('.fd-list__byline-right');
-        secItems.forEach(function (secItem: any) {
+        secItems.forEach(function (secItem: any): void {
             secItem.classList.add(...className.split(' '));
         });
     }
 
     /** @hidden */
-    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef) {
+    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
+        public template?: TemplateRef<any>,
+        public viewContainerRef?: ViewContainerRef) {
         super(_changeDetectorRef, itemEl);
+
+
+        this.viewContainerRef.createEmbeddedView(this.template);
+        console.log('template=====>', template);
     }
 
 }

@@ -1,18 +1,22 @@
 import {
     ChangeDetectionStrategy, Component, Input, ViewEncapsulation,
     ContentChildren, QueryList, HostBinding, ViewChild,
-    ElementRef, AfterContentInit, Output, EventEmitter, HostListener, ChangeDetectorRef, OnInit
+    ElementRef, AfterContentInit, Output, EventEmitter, HostListener, ChangeDetectorRef, OnInit, TemplateRef, AfterViewInit, OnDestroy
 } from '@angular/core';
 import { BaseComponent } from '../base';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { UP_ARROW, DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { BaseListItem } from './base-list-item';
 import { SelectionModel } from '@angular/cdk/collections';
+import { ListDataSource, isDataSource } from '../../domain/data-source';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
-export type SelectionType = '' | 'multi' | 'single';
+export type SelectionType = '' | 'multi' | 'single' | 'delete';
 let nextListId = 0;
 let nextListGrpHeaderId = 0;
+export type FdpListDataSource<T> = ListDataSource<T> | T[];
 
 /**
  * The List component represents a container for list item types.
@@ -27,8 +31,7 @@ let nextListGrpHeaderId = 0;
 })
 
 
-export class ListComponent extends BaseComponent implements AfterContentInit, OnInit {
-
+export class ListComponent extends BaseComponent implements AfterContentInit, OnInit, AfterViewInit, OnDestroy {
 
     /**
     * Child items of the List.
@@ -61,18 +64,21 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
 
     /** Whether list component has removed borders */
     @Input()
-    noBorder: boolean = false;
+    noBorder = false;
 
     /** Whether list component has multiselection */
-    multiSelect: boolean = false;
+    multiSelect = false;
 
     /** The type of the selection. Types include:
-    *''| 'multi' | 'single'.
+    *''| 'multi' | 'single'|'delete'.
     * Leave empty for default ().'
     * Default value is set to ''
     */
     @Input()
     public selectionMode: SelectionType = '';
+
+    @Input()
+    public enableDnd = false;
 
     /**  An array that holds a list of all selected items**/
     @Input()
@@ -84,17 +90,52 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     @HostBinding('attr.role')
     role = 'list';
 
+
     /** define size of items for screen reader */
+    @Input()
     @HostBinding('attr.aria-setsize')
     ariaSetsize: number;
 
     /** Defines whether items are multiseletable for screen reader */
+    @Input()
     @HostBinding('attr.aria-multiselectable')
     ariaMultiselectable = this.multiSelect;
 
     /** define label of list for screen reader */
+    @Input()
     @HostBinding('attr.aria-label')
     ariaLabel: string;
+
+
+    /**
+     * Datasource for suggestion list
+     */
+    @Input()
+    get dataSource(): FdpListDataSource<any> {
+        return this._dataSource;
+    }
+    set dataSource(value: FdpListDataSource<any>) {
+        if (value) {
+            this.initializeDS(value);
+        }
+    }
+    protected _destroyed = new Subject<void>();
+
+
+    @Input() templateRef: TemplateRef<any>;
+    items = [];
+    protected _dataSource: FdpListDataSource<any>;
+    private _dsSubscription: Subscription | null;
+
+    /**
+   * Todo: Name of the entity for which DataProvider will be loaded. You can either pass list of
+   * items or use this entityClass and internally we should be able to do lookup to some registry
+   * and retrieve the best matching DataProvider that is set on application level
+   *
+   *
+   */
+    @Input()
+    entityClass: string;
 
     /** The model backing of the component. */
     selection: SelectionModel<BaseListItem>;
@@ -133,11 +174,10 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     }
 
     /**  filter to get Selected items from a list**/
-    onSelectionChanged(event: any) {
+    onSelectionChanged(event: any): void {
         if (event.target.checked) {
             this.selection.select(event.target.parentNode.parentNode);
-        }
-        else {
+        } else {
             this.selection.deselect(event.target.parentNode.parentNode);
         }
     }
@@ -175,8 +215,7 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
             event.target.checked = true;
             event.target.parentNode.parentNode.classList.add('is-selected');
             this.selection.select(event.target.parentNode.parentNode);
-        }
-        else if (event.target.querySelector('fd-radio-button') !== undefined &&
+        } else if (event.target.querySelector('fd-radio-button') !== undefined &&
             event.target.querySelector('fd-radio-button') !== null) {
             event.target.querySelector('.fd-radio').checked = true;
             event.target.classList.add('is-selected');
@@ -193,21 +232,18 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
             if (event.target.checked) {
                 event.target.parentNode.parentNode.classList.add('is-selected');
                 this.selection.select(event.target.parentNode.parentNode);
-            }
-            else {
+            } else {
                 event.target.parentNode.parentNode.classList.remove('is-selected');
                 this.selection.deselect(event.target.parentNode.parentNode);
             }
-        }
-        else if (event.target !== null && event.target.querySelector('fd-checkbox') !== undefined
+        } else if (event.target !== null && event.target.querySelector('fd-checkbox') !== undefined
             && event.target.querySelector('fd-checkbox') !== null) {
             event.target.querySelector('fd-checkbox').childNodes[0].checked =
                 !event.target.querySelector('fd-checkbox').childNodes[0].checked;
             if (event.target.querySelector('fd-checkbox').childNodes[0].checked) {
                 event.target.classList.add('is-selected');
                 this.selection.select(event.target);
-            }
-            else {
+            } else {
                 event.target.classList.remove('is-selected');
                 this.selection.deselect(event.target);
             }
@@ -217,13 +253,17 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
     /** @hidden */
     /** Instailization of list with selection mode*/
     ngOnInit(): void {
+
+        // // if we have both prefer dataSource
+        // if (!this.dataSource && this.entityClass && this.providers.has(this.entityClass)) {
+        //     this.dataSource = new ListDataSource(this.providers.get(this.entityClass));
+        // }
         this.id = `fdp-list-${nextListId++}`;
 
         // using selection Model for multiselect
         if (this.selectionMode === 'multi') {
             this.multiSelect = true;
-        }
-        else { this.multiSelect = false; }
+        } else { this.multiSelect = false; }
         this.selection = new SelectionModel<BaseListItem>(
             this.multiSelect,
             this.selectedItems
@@ -258,7 +298,18 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
             item.contentDensity = this.contentDensity;
             item.selectionMode = this.selectionMode;
             item.hasByLine = this._hasByLine;
+            item.enableDnd = this.enableDnd;
         });
+    }
+
+    ngOnDestroy(): void {
+
+        if (isDataSource(this.dataSource)) {
+            this.dataSource.close();
+        }
+        if (this._dsSubscription) {
+            this._dsSubscription.unsubscribe();
+        }
     }
 
     /** @hidden */
@@ -282,6 +333,48 @@ export class ListComponent extends BaseComponent implements AfterContentInit, On
         super(_changeDetectorRef);
     }
 
+    private initializeDS(ds: FdpListDataSource<any>): void {
+        this.items = [];
+        if (isDataSource(this.dataSource)) {
+            this.dataSource.close();
+            if (this._dsSubscription) {
+                this._dsSubscription.unsubscribe();
+                this._dsSubscription = null;
+            }
+        }
+        // Convert ListDataSource<T> | T[] as DataSource
+        this._dataSource = this.openDataStream(ds);
+    }
+    private toDataStream(ds: FdpListDataSource<any>): ListDataSource<any> {
+        if (isDataSource(ds)) {
+            return ds;
+        }
+        return undefined;
+    }
+    private openDataStream(ds: FdpListDataSource<any>): ListDataSource<any> {
+        const initDataSource = this.toDataStream(ds);
+        if (initDataSource === undefined) {
+            throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
+        }
+        /**
+         * This is single point of data entry to the component. We dont want to set data on different
+         * places. If any new data comes in either you do a search and you want to pass initial data
+         * its here.
+         */
+        this._dsSubscription = initDataSource
+            .open()
+            .pipe(takeUntil(this._destroyed))
+            .subscribe((data) => {
+                this.items = data || [];
+                console.log('isnide data source   this.items >>>>>>>', this.items.length);
+                this._cd.markForCheck();
+            });
+        // initial data fetch
+        initDataSource.match('*');
+        return initDataSource;
+    }
+
+
 }
 
 @Component({
@@ -299,7 +392,7 @@ export class ListFooter extends BaseComponent { }
     {{grpheaderTitle}} <ng-content></ng-content>
 </li>`
 })
-export class ListGroupHeader extends BaseListItem {
+export class ListGroupHeader extends BaseListItem implements OnInit {
     /**
     *  Displays list goup header title
    */

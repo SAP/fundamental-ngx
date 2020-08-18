@@ -1,6 +1,47 @@
 // Temporary solution until the core list is updated with latest styles
 .fd-list__item.is-active,
 .fd-list__item:active {
-  background: #f5f5f5;
-  background: var(--sapList_Hover_Background, #f5f5f5);
+    background: #f5f5f5;
+    background: var(--sapList_Hover_Background, #f5f5f5);
+}
+
+//temparory fix untill styles are updated in fundamental-styles
+.fd-list__counter {
+    font-size: 0.875rem;
+    color: #0e7581;
+    padding-left: 1rem;
+    text-shadow: none;
+    flex: none;
+
+    :active {
+        color: #fff;
+    }
+}
+.fd-list-item__nodata {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #32363a;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0 1rem !important;
+    height: 3rem;
+    text-align: center;
+    white-space: pre-wrap;
+}
+
+.fd-list-item__no-data-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    line-height: 1.6;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.fd-list-item__no-seprator {
+    border-bottom: 0px;
 }

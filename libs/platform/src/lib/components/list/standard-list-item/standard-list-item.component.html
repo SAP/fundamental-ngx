@@ -1,7 +1,8 @@
 <!--  list item navigation with Arrow-->
 <ng-container *ngIf="showNavigationArrow || hasNavigation">
-    <li #listItem fd-list-item [attr.id]="id" tabindex="-1" [selected]="selected" class="fd-list__item--link"
+    <li #listItem fd-list-item [attr.id]="id" [selected]="selected" class="fd-list__item--link"
         (keydown)="onKeyDown($event)" (keyup)="onKeyUp($event)">
+        <!--angular routing requiured-->
         <a #link class="fd-list__link fd-link fdp-link-truncate__txt"
             [class.fd-list__link--navigation-indicator]="showNavigationArrow" [attr.href]="href" [attr.target]="target">
             <ng-container *ngTemplateOutlet="hasByLine ? byLineTemplate: commonTemplate"></ng-container>
@@ -11,7 +12,7 @@
 
 <!--  list item without navigation and used for simple list display-->
 <ng-container *ngIf="!showNavigationArrow && !hasNavigation">
-    <li #listItem fd-list-item [attr.id]="id" tabindex="-1" [selected]="selected" (keydown)="onKeyDown($event)"
+    <li #listItem fd-list-item [attr.id]="id" [selected]="selected" (keydown)="onKeyDown($event)"
         (keyup)="onKeyUp($event)">
         <ng-container *ngTemplateOutlet="hasByLine ? byLineTemplate: commonTemplate"></ng-container>
     </li>
@@ -22,8 +23,13 @@
     <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
     <span *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap"
         [attr.title]="title">{{title}}</span>
-    <span fd-list-secondary [attr.aria-label]="secondary" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
+    <span fd-list-secondary [attr.aria-label]="secondary" *ngIf="secondary!== null && secondary!== undefined"
+        [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
         {{secondary}}
+    </span>
+    <span fd-list-secondary class="fd-list__counter" [attr.aria-label]="counter"
+        *ngIf="counter!== null && counter!== undefined" [attr.title]="counter">
+        {{counter}}
     </span>
     <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
         <span *ngFor="let secondaryIcon of secondaryIcons">
