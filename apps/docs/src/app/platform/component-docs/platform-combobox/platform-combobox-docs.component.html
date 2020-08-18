@@ -29,9 +29,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="dataSource" componentName="combobox">DataSource Types</fd-docs-section-title>
+<fd-docs-section-title id="dataSource" componentName="combobox">DataSource</fd-docs-section-title>
 <description>
-    To use Combobox in mobile mode:
+    Input <code>[dataSource]</code> has this type <code>type FdpComboBoxDataSource&lt;T&gt; = ComboBoxDataSource&lt;T&gt;
+    | Observable&lt;T[]&gt; | T[];</code>
 </description>
 <component-example>
     <fdp-combobox-datasource-example></fdp-combobox-datasource-example>
@@ -42,8 +43,8 @@
 
 <fd-docs-section-title id="columns" componentName="combobox">Combobox with Two Columns</fd-docs-section-title>
 <description>
-    The <code>[itemTemplate]</code> input can be used to create a combobox with two columns of information. Note that a
-    <code>displayFn</code> is required for this example so the combobox knows how to display the selected item.
+    Combobox with two columns of information.
+    Note that a <code>secondaryKey</code> and <code>shoSecondaryText</code> is required
 </description>
 <component-example>
     <fdp-combobox-columns-example></fdp-combobox-columns-example>
@@ -56,10 +57,8 @@
     Combobox with Groups
 </fd-docs-section-title>
 <description>
-    Grouping data within a set of values can be achieved by passing a function to the <code>[groupFn]</code> input. This
-    function should accept an object of key/value pairs as the parameter. Each key will be a group name and the
-    corresponding value for that key will be an array of any type. A <code>[displayFn]</code> can be used to specify
-    what to display from that array.
+    Combobox with Groups.
+    Note that a <code>group</code> and <code>groupKey</code> is required
 </description>
 <component-example>
     <fdp-combobox-group-example></fdp-combobox-group-example>

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-combobox-standard',
-    templateUrl: './combobox-standard.component.html'
+    templateUrl: './combobox-standard.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxStandardComponent {
     dataSource = [
@@ -29,12 +30,12 @@ export class ComboboxStandardComponent {
         'Spinach'
     ];
 
-    selectedItem1 = '';
-    selectedItem2 = '';
-    selectedItem3 = '';
-    selectedItem4 = '';
-    selectedItem5 = '';
-    selectedItem6 = '';
+    selectedItem1 = null;
+    selectedItem2 = null;
+    selectedItem3 = null;
+    selectedItem4 = null;
+    selectedItem5 = null;
+    selectedItem6 = null;
 
     onSelect1(item: ComboboxSelectionChangeEvent): void {
        this.selectedItem1 = item.payload;

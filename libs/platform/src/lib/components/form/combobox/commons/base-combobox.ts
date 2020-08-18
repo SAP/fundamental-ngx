@@ -15,7 +15,6 @@ import {
     ViewChildren
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { isDataSource } from '@angular/cdk/collections';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 
@@ -34,6 +33,7 @@ import {
 import {
     ArrayComboBoxDataSource,
     ComboBoxDataSource,
+    isDataSource,
     isOptionItem,
     MatchingBy,
     ObservableComboBoxDataSource,
@@ -46,7 +46,6 @@ import { ComboboxComponent } from '../combobox/combobox.component';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
 import { COMBOBOX_COMPONENT } from '../combobox.interface';
 import { ComboboxConfig } from '../combobox.config';
-import { isArray } from 'util';
 
 export class ComboboxSelectionChangeEvent {
     constructor(
@@ -59,6 +58,7 @@ type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
 
 @Directive()
 export abstract class BaseCombobox<T> extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+    /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
 
@@ -89,10 +89,10 @@ export abstract class BaseCombobox<T> extends CollectionBaseInput implements Aft
     group = false;
 
     /** A field name to use to group data by (support dotted notation) */
-    groupKey: string | null = null;
+    groupKey?: string;
 
     /** The field to show data in secondary column */
-    secondaryKey: string | null = null;
+    secondaryKey?: string;
 
     /** Show the second column (Applicable for two columns layout) */
     showSecondaryText;

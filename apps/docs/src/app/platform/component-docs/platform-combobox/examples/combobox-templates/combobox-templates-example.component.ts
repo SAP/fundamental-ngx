@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-combobox-templates-example',
     templateUrl: './combobox-templates-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [
         '.fd-template-container-div { display: flex; align-items: center; cursor: pointer;}',
         '.fd-template-container-div:hover { background-color: var(--fd-color-background-hover); }',
@@ -22,9 +23,10 @@ export class ComboboxTemplatesExampleComponent {
         { name: 'Spinach', type: 'Vegetables' }
     ];
 
-    selectedItem = '';
-    selectedItem1 = '';
-    selectedItem2 = '';
+    selectedItem = null;
+    selectedItem1 = null;
+    selectedItem2 = null;
+    selectedItem3 = null;
 
     onSelect(item: ComboboxSelectionChangeEvent): void {
         this.selectedItem = item.payload;
@@ -36,5 +38,9 @@ export class ComboboxTemplatesExampleComponent {
 
     onSelect2(item: ComboboxSelectionChangeEvent): void {
         this.selectedItem2 = item.payload;
+    }
+
+    onSelect3(item: ComboboxSelectionChangeEvent): void {
+        this.selectedItem3 = item.payload;
     }
 }

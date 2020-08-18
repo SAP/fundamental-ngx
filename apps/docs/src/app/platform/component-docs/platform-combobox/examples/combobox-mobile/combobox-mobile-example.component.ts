@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MobileModeConfig } from '@fundamental-ngx/core';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-combobox-mobile-example',
     templateUrl: './combobox-mobile-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxMobileExampleComponent {
     dataSource = [

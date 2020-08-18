@@ -103,11 +103,17 @@
         tabindex="0"
         class="fd-combobox-list-item"
         [selected]="isSelectedOptionItem(term)">
-        <ng-container [ngTemplateOutlet]="optionItemSource"
-                      [ngTemplateOutletContext]="{ term: term, index: i }"></ng-container>
+        <ng-container *ngIf="isSelectedOptionItem(term) && !!selectedItemTemplate"
+                      [ngTemplateOutlet]="selectedItemTemplate"
+                      [ngTemplateOutletContext]="{ $implicit: term.value, index: i }"></ng-container>
 
-        <ng-container [ngTemplateOutlet]="secondaryTextSource"
-                      [ngTemplateOutletContext]="{ term: term }"></ng-container>
+        <ng-container *ngIf="!(isSelectedOptionItem(term) && selectedItemTemplate)">
+            <ng-container [ngTemplateOutlet]="optionItemSource"
+                          [ngTemplateOutletContext]="{ term: term, index: i }"></ng-container>
+
+            <ng-container [ngTemplateOutlet]="secondaryTextSource"
+                          [ngTemplateOutletContext]="{ term: term }"></ng-container>
+        </ng-container>
     </li>
 </ng-template>
 

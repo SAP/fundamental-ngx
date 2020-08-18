@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-combobox-columns-example',
-    templateUrl: './combobox-columns-example.component.html'
+    templateUrl: './combobox-columns-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxColumnsExampleComponent {
     dataSource = [

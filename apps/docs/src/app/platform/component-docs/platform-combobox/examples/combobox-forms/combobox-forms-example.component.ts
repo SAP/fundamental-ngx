@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fdp-combobox-forms-example',
-    templateUrl: './combobox-forms-example.component.html'
+    templateUrl: './combobox-forms-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxFormsExampleComponent {
     dataSource = [

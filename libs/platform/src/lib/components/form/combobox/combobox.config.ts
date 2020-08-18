@@ -10,7 +10,7 @@ export enum MatchingStrategy {
 }
 
 /**
- * Default options for platform panel
+ * Default options for Combobox
  */
 @Injectable({ providedIn: 'root' })
 export class ComboboxConfig {

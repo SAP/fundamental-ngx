@@ -13,14 +13,17 @@ import {
     Output,
     QueryList,
     Self,
-    TemplateRef, ViewChild
+    TemplateRef,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
 import {
     DIALOG_CONFIG,
     DialogConfig,
-    DynamicComponentService, MenuKeyboardService,
+    DynamicComponentService,
+    MenuKeyboardService,
     MobileModeConfig,
     TemplateDirective
 } from '@fundamental-ngx/core';
@@ -35,6 +38,7 @@ import { OptionItem } from '../../../../domain';
     templateUrl: './combobox.component.html',
     styleUrls: ['./combobox.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: ComboboxComponent, multi: true }]
 })
 export class ComboboxComponent extends BaseCombobox<string> implements OnInit, AfterViewInit {
@@ -77,11 +81,11 @@ export class ComboboxComponent extends BaseCombobox<string> implements OnInit, A
 
     /** A field name to use to group data by (support dotted notation) */
     @Input()
-    groupKey: string | null = null;
+    groupKey?: string;
 
     /** The field to show data in secondary column */
     @Input()
-    secondaryKey: string | null = null;
+    secondaryKey?: string;
 
     /** Show the second column (Applicable for two columns layout) */
     @Input()
@@ -119,6 +123,9 @@ export class ComboboxComponent extends BaseCombobox<string> implements OnInit, A
 
     /** @hidden */
     secondaryItemTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    selectedItemTemplate: TemplateRef<any>;
 
     @Output()
     selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
@@ -246,6 +253,9 @@ export class ComboboxComponent extends BaseCombobox<string> implements OnInit, A
                     break;
                 case 'secondaryItemTemplate':
                     this.secondaryItemTemplate = template.templateRef;
+                    break;
+                case 'selectedItemTemplate':
+                    this.selectedItemTemplate = template.templateRef;
                     break;
             }
         });
