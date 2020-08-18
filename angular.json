@@ -300,6 +300,46 @@
                     "styleext": "scss"
                 }
             }
+        },
+        "app-shell": {
+            "projectType": "library",
+            "root": "libs/app-shell",
+            "sourceRoot": "libs/app-shell/src",
+            "prefix": "fundamental-ngx",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "options": {
+                        "tsConfig": "libs/app-shell/tsconfig.lib.json",
+                        "project": "libs/app-shell/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/app-shell/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["libs/app-shell/tsconfig.lib.json", "libs/app-shell/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**", "!libs/app-shell/**/*"]
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/app-shell/src/test.ts",
+                        "tsConfig": "libs/app-shell/tsconfig.spec.json",
+                        "karmaConfig": "libs/app-shell/karma.conf.js"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "style": "scss"
+                }
+            }
         }
     },
     "defaultProject": "docs",
