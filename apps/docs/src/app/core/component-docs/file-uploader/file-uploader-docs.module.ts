@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { FileUploaderHeaderComponent } from './file-uploader-header/file-uploader-header.component';
 import { FileUploaderDocsComponent } from './file-uploader-docs.component';
 import { API_FILES } from '../../api-files';
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FileUploaderModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FileUploaderModule],
     exports: [RouterModule],
     declarations: [
         FileUploaderDocsComponent,
