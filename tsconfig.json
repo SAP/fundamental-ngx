@@ -17,7 +17,8 @@
         "esModuleInterop": true,
         "paths": {
             "@fundamental-ngx/core": ["dist/libs/core", "libs/core/src/index.ts"],
-            "@fundamental-ngx/platform": ["libs/platform/src/index.ts"]
+            "@fundamental-ngx/platform": ["libs/platform/src/index.ts"],
+            "@fundamental-ngx/app-shell": ["libs/app-shell/src/index.ts"]
         }
     }
 }

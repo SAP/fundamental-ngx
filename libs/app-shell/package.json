@@ -1,0 +1,21 @@
+{
+  "name": "@fundamental-ngx/app-shell",
+  "version": "0.1.0",
+  "schematics": "./schematics/collection.json",
+  "description": "Fundamentals App Shell for microfrontend",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SAP/fundamental-ngx"
+  },
+  "engine": {
+    "node": ">= 10"
+  },
+  "peerDependencies": {
+    "@angular/common": "^10.0.5",
+    "@angular/core": "^10.0.5"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}
