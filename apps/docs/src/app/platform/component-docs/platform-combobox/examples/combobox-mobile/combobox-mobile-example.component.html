@@ -8,6 +8,6 @@
             [mobileConfig]="mobileConfig"
             (selectionChange)="onSelect($event)"
         ></fdp-combobox>
-        <p>Selected: {{ selectedItem }}</p>
+        <p>Selected: {{ selectedItem | json }}</p>
     </fdp-form-field>
 </fdp-form-group>

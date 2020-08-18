@@ -1,21 +1,22 @@
 import {
     AfterViewInit,
     ChangeDetectorRef,
+    ContentChildren,
     Directive,
     ElementRef,
+    EventEmitter,
     Inject,
     Injector,
     Input,
     OnDestroy,
     Optional,
+    Output,
     QueryList,
     Self,
     TemplateRef,
-    ViewChild,
     ViewChildren
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
@@ -28,7 +29,7 @@ import {
     KeyUtil,
     ListItemDirective,
     MenuKeyboardService,
-    MobileModeConfig
+    MobileModeConfig, TemplateDirective
 } from '@fundamental-ngx/core';
 import {
     ArrayComboBoxDataSource,
@@ -45,7 +46,11 @@ import { CollectionBaseInput } from '../../collection-base.input';
 import { ComboboxComponent } from '../combobox/combobox.component';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
 import { COMBOBOX_COMPONENT } from '../combobox.interface';
-import { ComboboxConfig } from '../combobox.config';
+import { ComboboxConfig, MatchingStrategy } from '../combobox.config';
+import { ContentDensity } from '../../form-control';
+
+export type TextAlignment = 'left' | 'right';
+export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
 
 export class ComboboxSelectionChangeEvent {
     constructor(
@@ -54,10 +59,8 @@ export class ComboboxSelectionChangeEvent {
     ) {}
 }
 
-type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
-
 @Directive()
-export abstract class BaseCombobox<T> extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+export abstract class BaseCombobox extends CollectionBaseInput implements AfterViewInit, OnDestroy {
     /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
@@ -74,43 +77,61 @@ export abstract class BaseCombobox<T> extends CollectionBaseInput implements Aft
     }
 
     /** Whether the autocomplete should be enabled; Enabled by default */
+    @Input()
     autoComplete = true;
 
+    /**
+     * content Density of element. 'cozy' | 'compact'
+     */
+    @Input()
+    set contentDensity(contentDensity: ContentDensity) {
+        this._contentDensity = contentDensity;
+        this.isCompact = contentDensity === 'compact';
+    }
+
+    /**
+     * Todo: Name of the entity for which DataProvider will be loaded. You can either pass list of
+     * items or use this entityClass and internally we should be able to do lookup to some registry
+     * and retrieve the best matching DataProvider that is set on application level
+     */
+    @Input()
+    entityClass: string;
+
     /** Whether the combobox is readonly. */
+    @Input()
     readOnly = false;
 
     /** Whether the combobox should be built on mobile mode */
+    @Input()
     mobile = false;
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
+    @Input()
     mobileConfig: MobileModeConfig;
 
     /** Tells the combo if we need to group items */
+    @Input()
     group = false;
 
     /** A field name to use to group data by (support dotted notation) */
+    @Input()
     groupKey?: string;
 
     /** The field to show data in secondary column */
+    @Input()
     secondaryKey?: string;
 
     /** Show the second column (Applicable for two columns layout) */
-    showSecondaryText;
+    @Input()
+    showSecondaryText = false;
 
     /** Horizontally align text inside the second column (Applicable for two columns layout) */
-    secondaryTextAlignment: 'left' | 'center' | 'right' = 'left';
+    @Input()
+    secondaryTextAlignment: TextAlignment = 'right';
 
     /** Turns on/off Adjustable Width feature */
+    @Input()
     autoResize = false;
-
-    /** Indicates that data should be sorted.  */
-    sortItems = false;
-
-    /** @hidden */
-    searchInputElement: ElementRef;
-
-    /** @hidden */
-    multiple = false;
 
     @Input()
     get value(): any {
@@ -118,22 +139,53 @@ export abstract class BaseCombobox<T> extends CollectionBaseInput implements Aft
     }
 
     set value(value: any) {
-        const optionItem = this._convertToOptionItems(Array.isArray(value) ? value : [value]);
-        this.setAsSelected(optionItem);
+        const selectedItems = Array.isArray(value) ? value : [value];
+        this.setAsSelected(selectedItems);
         super.setValue(value);
     }
 
-    /**
-     * Overlay pane containing the options.
-     *
-     * @hidden
-     */
-    @ViewChild(CdkConnectedOverlay)
-    overlayDir: CdkConnectedOverlay;
+    @Output()
+    selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
 
     /** @hidden */
     @ViewChildren(ListItemDirective)
     listItems: QueryList<ListItemDirective>;
+
+    /** @hidden */
+    @ContentChildren(TemplateDirective)
+    customTemplates: QueryList<TemplateDirective>;
+
+    /** @hidden
+     * Custom Option item Template
+     * */
+    optionItemTemplate: TemplateRef<any>;
+
+    /** @hidden
+     * Custom Group Header item Template
+     * */
+    groupItemTemplate: TemplateRef<any>;
+
+    /** @hidden
+     * Custom Secondary item Template
+     * */
+    secondaryItemTemplate: TemplateRef<any>;
+
+    /** @hidden
+     * Custom Selected option item Template
+     * */
+    selectedItemTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    searchInputElement: ElementRef;
+
+    /** @hidden */
+    _contentDensity: ContentDensity = this._comboboxConfig.contentDensity;
+
+    /**
+     * @hidden
+     * Whether "contentDensity" is "compact"
+     */
+    isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
     inputTextValue: string;
@@ -163,31 +215,35 @@ export abstract class BaseCombobox<T> extends CollectionBaseInput implements Aft
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
 
-    /** @hidden */
+    /** @hidden
+     * List of matched suggestions
+     * */
     _suggestions: OptionItem[];
 
-    /** @hidden */
-    protected abstract selected: T;
+    /** @hidden
+     * Max width of list container
+     * */
+    maxWidth?: number;
 
-    /** @hidden */
-    maxWidth: number | null = null;
-
-    /** @hidden */
-    minWidth: number | null = null;
+    /** @hidden
+     * Min width of list container
+     * */
+    minWidth?: number;
 
     /**
-     * Need for mobile
+     * Need for opening mobile version
      *
      * @hidden
      */
     openChange = new Subject<boolean>();
 
-    /** @hidden */
-    matchingStrategy = this._comboboxConfig.matchingStrategy;
-
     protected _dataSource: FdpComboBoxDataSource<any>;
 
-    private _dsSubscription: Subscription | null;
+    /** @hidden */
+    private matchingStrategy: MatchingStrategy = this._comboboxConfig.matchingStrategy;
+    /** @hidden */
+    private _dsSubscription?: Subscription;
+    /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     private readonly nonOpeningKeys: string[] = [
@@ -235,6 +291,7 @@ export abstract class BaseCombobox<T> extends CollectionBaseInput implements Aft
     ngAfterViewInit(): void {
         this._setupKeyboardService();
         this._initWindowResize();
+        this._assignCustomTemplates();
         super.ngAfterViewInit();
 
         if (this.mobile) {
@@ -273,12 +330,12 @@ export abstract class BaseCombobox<T> extends CollectionBaseInput implements Aft
     /** @hidden
      * Define value as selected
      * */
-    abstract setAsSelected(item: OptionItem[]): void;
+    abstract setAsSelected(item: any[]): void;
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        const optionItem = this._convertToOptionItems(Array.isArray(value) ? value : [value]);
-        this.setAsSelected(optionItem);
+        const selectedItems = Array.isArray(value) ? value : [value];
+        this.setAsSelected(selectedItems);
         super.writeValue(value);
     }
 
@@ -666,5 +723,27 @@ export abstract class BaseCombobox<T> extends CollectionBaseInput implements Aft
         }
 
         return selectItems;
+    }
+
+    /** @hidden
+     * Assign custom templates
+     * */
+    private _assignCustomTemplates(): void {
+        this.customTemplates.forEach(template => {
+            switch (template.getName()) {
+                case 'optionItemTemplate':
+                    this.optionItemTemplate = template.templateRef;
+                    break;
+                case 'groupItemTemplate':
+                    this.groupItemTemplate = template.templateRef;
+                    break;
+                case 'secondaryItemTemplate':
+                    this.secondaryItemTemplate = template.templateRef;
+                    break;
+                case 'selectedItemTemplate':
+                    this.selectedItemTemplate = template.templateRef;
+                    break;
+            }
+        });
     }
 }

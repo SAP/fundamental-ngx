@@ -9,6 +9,6 @@
             secondaryTextAlignment="right"
             (selectionChange)="onSelect($event)"
         ></fdp-combobox>
-        <p>Selected Item: {{ selectedItem }}</p>
+        <p>Selected Item: {{ selectedItem | json }}</p>
     </fdp-form-field>
 </fdp-form-group>
