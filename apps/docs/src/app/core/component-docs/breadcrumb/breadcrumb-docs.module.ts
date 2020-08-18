@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import {
     BreadcrumbHrefExampleComponent,
     BreadcrumbResponsiveExampleComponent,
@@ -11,6 +10,7 @@ import {
 import { BreadcrumbHeaderComponent } from './breadcrumb-header/breadcrumb-header.component';
 import { BreadcrumbDocsComponent } from './breadcrumb-docs.component';
 import { BreadcrumbModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, BreadcrumbModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, BreadcrumbModule],
     exports: [RouterModule],
     declarations: [
         BreadcrumbDocsComponent,

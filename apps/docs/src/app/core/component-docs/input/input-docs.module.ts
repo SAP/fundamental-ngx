@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { InputHeaderComponent } from './input-header/input-header.component';
 import { InputDocsComponent } from './input-docs.component';
@@ -11,7 +10,8 @@ import {
     InputInlineHelpExampleComponent,
     InputStateExampleComponent
 } from './examples/input-examples.component';
-import { FormModule } from '@fundamental-ngx/core';
+import { FormModule, InlineHelpModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -25,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InlineHelpModule],
     exports: [RouterModule],
     declarations: [
         InputDocsComponent,

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { DatePickerHeaderComponent } from './date-picker-header/date-picker-header.component';
 import { DatePickerDocsComponent } from './date-picker-docs.component';
 import { DatePickerRangeExampleComponent } from './examples/date-picker-range-example.component';
@@ -17,21 +16,29 @@ import { DatePickerFormatExampleComponent } from './examples/date-picker-format-
 import { DatePickerComplexI18nExampleComponent } from './examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
 import { DatePickerRangeDisabledExampleComponent } from './examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
 import { DatePickerDisableFuncExampleComponent } from './examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
-import { SegmentedButtonModule, DatePickerModule } from '@fundamental-ngx/core';
+import { DatePickerModule, FormModule, InputGroupModule, SegmentedButtonModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
         path: '',
         component: DatePickerHeaderComponent,
         children: [
-            { path: '', component: DatePickerDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.datePicker } }
+            {path: '', component: DatePickerDocsComponent},
+            {path: 'api', component: ApiComponent, data: {content: API_FILES.datePicker}}
         ]
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, DatePickerModule, SegmentedButtonModule],
+    imports: [
+        FormModule,
+        DatePickerModule,
+        InputGroupModule,
+        SegmentedButtonModule,
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+    ],
     exports: [RouterModule],
     declarations: [
         DatePickerDocsComponent,
@@ -50,4 +57,5 @@ const routes: Routes = [
         DatePickerRangeDisabledExampleComponent
     ]
 })
-export class DatePickerDocsModule {}
+export class DatePickerDocsModule {
+}

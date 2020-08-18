@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { TableDocsHeaderComponent } from './table-docs-header/table-docs-header.component';
 import { TableDocsComponent } from './table-docs.component';
@@ -13,13 +13,15 @@ import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-exa
 import { TableCustomColumnsExampleComponent } from './examples/table-custom-columns-example/table-custom-columns-example.component';
 import {
     CheckboxModule,
+    DialogModule,
+    FormModule,
+    InputGroupModule,
     ListModule,
     ObjectStatusModule,
-    TableModule,
     PaginationModule,
-    ToolbarModule,
-    DialogModule,
-    MessageStripModule
+    PopoverModule,
+    TableModule,
+    ToolbarModule
 } from '@fundamental-ngx/core';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
@@ -32,30 +34,36 @@ import { FilterTableByPipe } from './examples/table-example-filter.pipe';
 import { TableToolbarExampleComponent } from './examples/table-toolbar-example.component';
 import { TableFilterPipe } from './examples/table-custom-columns-example/table-filter.pipe';
 import { TableCustomDialogComponent } from './examples/table-custom-columns-example/table-custom-dialog.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
     {
         path: '',
         component: TableDocsHeaderComponent,
         children: [
-            { path: '', component: TableDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.table } }
+            {path: '', component: TableDocsComponent},
+            {path: 'api', component: ApiComponent, data: {content: API_FILES.table}}
         ]
     }
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        TableModule,
-        CheckboxModule,
-        ObjectStatusModule,
-        PaginationModule,
+        FormModule,
         ListModule,
-        ToolbarModule,
+        TableModule,
         DialogModule,
-        MessageStripModule
+        PopoverModule,
+        ToolbarModule,
+        DragDropModule,
+        CdkTableModule,
+        CheckboxModule,
+        InputGroupModule,
+        PaginationModule,
+        ObjectStatusModule,
+        SharedDocumentationPageModule,
+        RouterModule.forChild(routes),
     ],
     exports: [RouterModule, SortTableByPipe, FilterTableByPipe],
     declarations: [
@@ -83,4 +91,5 @@ const routes: Routes = [
         TableCustomDialogComponent
     ]
 })
-export class TableDocsModule {}
+export class TableDocsModule {
+}

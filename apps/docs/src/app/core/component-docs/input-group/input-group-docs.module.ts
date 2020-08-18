@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { InputGroupHeaderComponent } from './input-group-header/input-group-header.component';
 import { InputGroupDocsComponent } from './input-group-docs.component';
@@ -15,7 +14,8 @@ import {
 } from './examples/input-group-examples.component';
 import { InputGroupStatesExampleComponent } from './examples/input-group-states-example/input-group-states-example.component';
 import { InputGroupSearchExampleComponent } from './examples/input-group-search-example/input-group-search-example.component';
-import { InputGroupModule } from '@fundamental-ngx/core';
+import { FormModule, InputGroupModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, InputGroupModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InputGroupModule],
     exports: [RouterModule],
     declarations: [
         InputGroupDocsComponent,

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { LinkHeaderComponent } from './link-header/link-header.component';
 import { LinkDocsComponent } from './link-docs.component';
 import { LinkExampleComponent } from './examples/link-example.component';
 import { LinkModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -20,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, LinkModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LinkModule],
     exports: [RouterModule],
     declarations: [LinkDocsComponent, LinkHeaderComponent, LinkExampleComponent]
 })

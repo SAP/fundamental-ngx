@@ -12,7 +12,7 @@ import {
     DatetimePickerModule
 } from '@fundamental-ngx/core';
 
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ToolbarDocsComponent } from './toolbar-docs.component';
 import { ToolbarHeaderComponent } from './toolbar-header/toolbar-header.component';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -49,7 +49,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule,
+        SharedDocumentationPageModule,
         ToolbarModule,
         ButtonModule,
         SegmentedButtonModule,

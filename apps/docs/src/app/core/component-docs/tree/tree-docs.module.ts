@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { TreeDocsComponent } from './tree-docs.component';
 import { TreeHeaderComponent } from './tree-header/tree-header.component';
@@ -20,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TreeModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TreeModule],
     exports: [RouterModule],
     declarations: [TreeDocsComponent, TreeHeaderComponent, SimpleTreeExampleComponent]
 })

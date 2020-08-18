@@ -16,7 +16,6 @@ import {
     SELECT_MOBILE_CONFIG
 } from '../documentation/utilities/consts';
 
-
 @NgModule({
     declarations: [HomeDocsComponent, NewComponentComponent, CoreDocumentationComponent],
     imports: [SharedDocumentationModule, MarkdownModule.forChild(), RouterModule.forChild(ROUTES)],

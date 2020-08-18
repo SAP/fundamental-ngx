@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { LayoutPanelDocsHeaderComponent } from './layout-panel-docs-header/layout-panel-docs-header.component';
 import { LayoutPanelDocsComponent } from './layout-panel-docs.component';
 import { LayoutPanelExampleComponent } from './examples/layout-panel-examples.component';
 import { LayoutPanelEdgeBleedExampleComponent } from './examples/layout-panel-edge-bleed-example.component';
 import { LayoutPanelModule, TableModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, LayoutPanelModule, TableModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutPanelModule, TableModule],
     exports: [RouterModule],
     declarations: [LayoutPanelDocsComponent, LayoutPanelExampleComponent, LayoutPanelDocsHeaderComponent, LayoutPanelEdgeBleedExampleComponent]
 })

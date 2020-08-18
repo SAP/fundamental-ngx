@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import {
     SelectNativeExampleComponent,
@@ -11,7 +11,7 @@ import {
 import { SelectNativeFormGroupExampleComponent } from './examples/select-native-form-group-example.component';
 import { SelectNativeHeaderComponent } from './select-native-header/select-native-header.component';
 import { SelectNativeDocsComponent } from './select-native-docs.component';
-import { FormModule, MessageStripModule } from '@fundamental-ngx/core';
+import { FormModule, InlineHelpModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -25,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, MessageStripModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InlineHelpModule],
     exports: [RouterModule],
     declarations: [
         SelectNativeDocsComponent,

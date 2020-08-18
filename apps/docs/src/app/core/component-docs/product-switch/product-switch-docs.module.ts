@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { ProductSwitchSmallExampleComponent } from './examples/product-switch-small-example.component';
 import { ProductSwitchDndExampleComponent } from './examples/product-switch-dnd-example.component';
 import { ProductSwitchDocsHeaderComponent } from './product-switch-docs-header/product-switch-docs-header.component';
 import { ProductSwitchListComponent } from './examples/product-switch-list/product-switch-list-example.component';
 import { ProductSwitchDocsComponent } from './product-switch-docs.component';
-import { ProductSwitchModule } from '@fundamental-ngx/core';
+import { ProductSwitchModule, ShellbarModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -22,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ProductSwitchModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ProductSwitchModule, ShellbarModule],
     exports: [RouterModule],
     declarations: [
         ProductSwitchDocsComponent,

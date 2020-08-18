@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 import { PlatformLinkHeaderComponent } from './platform-link-header/platform-link-header.component';
 import { PlatformLinkDocsComponent } from './platform-link-docs.component';
@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformLinkModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformLinkModule],
     exports: [RouterModule],
     declarations: [
         PlatformLinkDocsComponent,

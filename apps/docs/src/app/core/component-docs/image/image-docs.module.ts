@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { ImageHeaderComponent } from './image-header/image-header.component';
 import { ImageDocsComponent } from './image-docs.component';
 import { ImageShapesExampleComponent, ImageSizesExampleComponent } from './examples/image-examples.component';
-import { ImageModule, MessageStripModule } from '@fundamental-ngx/core';
+import { ImageModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -20,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ImageModule, MessageStripModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ImageModule],
     exports: [RouterModule],
     declarations: [ImageDocsComponent, ImageHeaderComponent, ImageSizesExampleComponent, ImageShapesExampleComponent]
 })

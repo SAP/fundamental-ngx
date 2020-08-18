@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { MegaMenuHeaderComponent } from './mega-menu-header/mega-menu-header.component';
 import { MegaMenuDocsComponent } from './mega-menu-docs.component';
@@ -10,7 +9,8 @@ import {
     MegaMenuGroupExampleComponent,
     MegaMenuPositionExampleComponent
 } from './examples/mega-menu-examples.component';
-import { MegaMenuModule, MessageStripModule } from '@fundamental-ngx/core';
+import { MegaMenuModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MegaMenuModule, MessageStripModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MegaMenuModule],
     exports: [RouterModule],
     declarations: [
         MegaMenuDocsComponent,

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { InlineHelpHeaderComponent } from './inline-help-header/inline-help-header.component';
 import { InlineHelpDocsComponent } from './inline-help-docs.component';
@@ -10,7 +9,8 @@ import {
     InlineHelpStyledExampleComponent,
     InlineHelpTriggerExampleComponent
 } from './examples/inline-help-examples.component';
-import { InlineHelpModule } from '@fundamental-ngx/core';
+import { FormModule, InlineHelpModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, InlineHelpModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InlineHelpModule],
     exports: [RouterModule],
     declarations: [
         InlineHelpDocsComponent,
