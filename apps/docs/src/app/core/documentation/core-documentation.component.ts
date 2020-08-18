@@ -33,6 +33,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/dialog', name: 'Dialog' },
             { url: 'core/dropdown', name: 'Dropdown' },
             { url: 'core/icon', name: 'Icon' },
+            { url: 'core/file-uploader', name: 'File Uploader' },
             { url: 'core/form-message', name: 'Form Message' },
             { url: 'core/identifier', name: 'Identifier' },
             { url: 'core/image', name: 'Image' },

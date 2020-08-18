@@ -14,6 +14,7 @@ import { CheckboxModule } from './checkbox/checkbox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FileInputModule } from './file-input/file-input.module';
+import { FileUploaderModule } from './file-uploader/file-uploader.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
 import { IdentifierModule } from './identifier/identifier.module';
@@ -86,6 +87,7 @@ import { CarouselModule } from './utils/directives/carousel/carousel.module';
         DatetimePickerModule,
         DragAndDropModule,
         FileInputModule,
+        FileUploaderModule,
         FormModule,
         IconModule,
         IdentifierModule,

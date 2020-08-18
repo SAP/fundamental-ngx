@@ -1,0 +1,32 @@
+<fd-file-uploader
+    #fileUploaderMinAndMax
+    [id]="fileUploaderMinAndMax"
+    [ariaLabel]="'Choose file'"
+    [ariaLabelledBy]="'Choose file'"
+    [placeholder]="'Choose File to upload'"
+    [buttonLabel]="'Browse...'"
+    [buttonAriaLabel]="'browse file'"
+    [(ngModel)]="files"
+    [multiple]="true"
+    (selectedFilesChanged)="handleFileSection()"
+    (selectedInvalidFiles)="handleInvalidFiles($event)"
+    [minFileSize]="'1KB'"
+    [maxFileSize]="'1MB'"
+>
+</fd-file-uploader>
+
+<br /><br />
+
+Files Selected:
+<br />
+<span *ngFor="let file of files">
+    <span class="green">{{ file.name }} </span><br
+/></span>
+
+<br />
+
+Invalid Files:
+<br />
+<span *ngFor="let file of invalidFiles">
+    <span class="red">{{ file.name }} </span><br
+/></span>
