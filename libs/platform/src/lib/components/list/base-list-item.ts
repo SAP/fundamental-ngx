@@ -32,7 +32,7 @@ interface SecondaryActionItem {
  * this can be extended to reduce the code duplication across list Item components.
  */
 @Directive({ selector: '[fdpItemDef]' })
-export class BaseListItem extends BaseComponent implements AfterViewChecked, OnInit, ItemDef {
+export class BaseListItem extends BaseComponent implements AfterViewChecked, OnInit {
 
     /** event emitter for selected item*/
     @Output()
@@ -187,7 +187,6 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
         this.name = item.name ? item.name : '';
         this.target = item.target;
         this.href = item.href;
-        this.enableDnd = item.enableDnd;
         this.counter = item.counter;
         this.textType = item.textType;
         this.secondary = item.secondary;
@@ -200,7 +199,7 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
     }
 
     /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef, public templateRef?: TemplateRef<any>) {
+    constructor(protected _changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef) {
         super(_changeDetectorRef);
 
     }
@@ -257,10 +256,6 @@ export class BaseListItem extends BaseComponent implements AfterViewChecked, OnI
     /** Show navigation for single list*/
     ngOnInit(): void {
         this.id = `fdp-list-item-${nextListItemId++}`;
-        if (this.partialNavigation === true) {
-            this.hasNavigation = true;
-            this.showNavigationArrow = true;
-        }
     }
 
 }

@@ -39,14 +39,8 @@ export class StandardListItemComponent extends BaseListItem implements AfterView
     }
 
     /** @hidden */
-    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
-        public template?: TemplateRef<any>,
-        public viewContainerRef?: ViewContainerRef) {
+    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef) {
         super(_changeDetectorRef, itemEl);
-
-
-        this.viewContainerRef.createEmbeddedView(this.template);
-        console.log('template=====>', template);
     }
 
 }

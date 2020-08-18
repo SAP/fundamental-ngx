@@ -1,20 +1,18 @@
-<ul fd-list #fdlist [attr.id]="id" [compact]="contentDensity === 'compact'" [noBorder]="noBorder" *ngIf="!enableDnd"
+<ul *ngIf="!enableDnd" fd-list #fdlist [attr.id]="id" [compact]="contentDensity === 'compact'" [noBorder]="noBorder"
     (keydown)="keyManager.onKeydown($event);handleKeyDown($event);" (change)="onSelectionChanged($event)">
-
-    <!-- <ng-content selector="fd-toolbar"></ng-content>
-    <ng-content></ng-content>
-</ul>
-
-<ul fd-list fd-dnd-list #fdlist  [attr.id]="id" [compact]="contentDensity === 'compact'" [noBorder]="noBorder" *ngIf="!enableDnd"
-    (keydown)="keyManager.onKeydown($event);handleKeyDown($event);" (change)="onSelectionChanged($event)">
-
-  <ng-content selector="fd-toolbar"></ng-content>
-    <ng-content></ng-content>
-</ul>-->
-
-
+    <ng-content selector="fd-toolbar"></ng-content>
     <ng-template *ngIf="items.length !== 0; then thenBlock else elseBlock"></ng-template>
 </ul>
+<ul *ngIf="enableDnd" fd-list fd-dnd-list #fdlist [attr.id]="id" [compact]="contentDensity === 'compact'"
+    [noBorder]="noBorder" (keydown)="keyManager.onKeydown($event);handleKeyDown($event);"
+    (change)="onSelectionChanged($event)">
+    <ng-content selector="fd-toolbar"></ng-content>
+    <ng-template *ngIf="items.length !== 0; then thenBlock else elseBlock"></ng-template>
+</ul>
+
+
+
+
 <ng-template #thenBlock>
     <ng-template *ngFor="let item of items; let i = index">
         <ng-container [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{$implicit: item}">
@@ -24,5 +22,3 @@
 <ng-template #elseBlock>
     <ng-content></ng-content>
 </ng-template>
-
-<!-- <ng-template #standard let-item>{{item}}</ng-template> -->

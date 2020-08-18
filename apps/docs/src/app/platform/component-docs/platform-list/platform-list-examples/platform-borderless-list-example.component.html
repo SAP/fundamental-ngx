@@ -1,6 +1,5 @@
 <h3>Cozy Mode</h3>
 <fdp-list [noBorder]="true" [dataSource]="dataSource">
-
     <fdp-standard-list-item *itemDef="let item" title=item.title></fdp-standard-list-item>
 </fdp-list>
 
@@ -10,7 +9,7 @@
 <!-- <fdp-list [contentDensity]="'compact'" [noBorder]="true">
     <fdp-standard-list-item *ngFor="let item of items" [item]="item"></fdp-standard-list-item>
 </fdp-list> -->
-<fdp-list [contentDensity]="'compact'">
+<fdp-list [contentDensity]="'compact'" [enableDnd]="true">
     <fdp-standard-list-item title="Title1">
     </fdp-standard-list-item>
     <fdp-standard-list-item title="Title2">
