@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { PlatformObjectStatusHeaderComponent } from './platform-object-status-header/platform-object-status-header.component';
 import { PlatformObjectStatusDocsComponent } from './platform-object-status-docs.component';
 import {
@@ -16,6 +15,7 @@ import {
     PlatformObjectStatusLargeExampleComponent
 } from './platform-object-status-example/platform-object-status-example.component';
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformObjectStatusModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformObjectStatusModule],
     exports: [RouterModule],
     declarations: [
         PlatformObjectStatusDocsComponent,
