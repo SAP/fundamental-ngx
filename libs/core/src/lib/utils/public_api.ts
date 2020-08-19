@@ -23,6 +23,7 @@ export * from './interfaces/css-class-builder.interface';
 export * from './interfaces/css-style-builder.interface';
 export * from './interfaces/has-element-ref.interface';
 export * from './interfaces/mobile-mode-config';
+export * from './interfaces/keyboard-support-item.interface';
 
 
 export * from './decorators/apply-css-class.decorator';
@@ -34,6 +35,7 @@ export * from './dynamic-component/dynamic-component.service';
 
 export * from './datatypes/hash.datatype';
 export * from './services/rtl.service';
+export * from './services/keyboard-support/keyboard-support.service';
 
 export * from './functions/compare-objects';
 export * from './functions/closest-element';

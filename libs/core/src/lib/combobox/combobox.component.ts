@@ -38,6 +38,7 @@ import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
+import { ListComponent } from '../..';
 
 /**
  * Allows users to filter through results and select a value.
@@ -203,8 +204,8 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     inputTextChange: EventEmitter<string> = new EventEmitter<string>();
 
     /** @hidden */
-    @ViewChildren(ListItemComponent)
-    listItems: QueryList<ListItemComponent>;
+    @ViewChild(ListComponent)
+    listComponent: ListComponent;
 
     /** @hidden */
     @ViewChild('searchInputElement')
@@ -276,7 +277,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** @hidden */
     constructor(
         private _elementRef: ElementRef,
-        private _menuKeyboardService: MenuKeyboardService,
         private _cdRef: ChangeDetectorRef,
         private _dynamicComponentService: DynamicComponentService
     ) {}
@@ -302,7 +302,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._setupKeyboardService();
         this._addShellbarClass();
         if (this.mobile) {
             this._setUpMobileMode();
@@ -320,8 +319,8 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
                 this._resetDisplayedValues();
                 this.isOpenChangeHandle(true);
             }
-            if (this.open && this.listItems && this.listItems.first) {
-                this.listItems.first.focus();
+            if (this.open && this.listComponent) {
+                this.listComponent.setItemActive(0);
             } else if (!this.open) {
                 this._chooseOtherItem(1);
             }
@@ -388,6 +387,12 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** @hidden */
     registerOnTouched(fn): void {
         this.onTouched = fn;
+    }
+
+    /** Method passed to list component */
+    focusSearchInputElement = (keyboardEvent: KeyboardEvent): void => {
+        this.searchInputElement.nativeElement.focus();
+        keyboardEvent.stopPropagation();
     }
 
     /** @hidden */
@@ -476,15 +481,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** Method that reset filtering for displayed values. It overrides displayed values by all possible dropdown values */
     private _resetDisplayedValues(): void {
         this.displayedValues = this.dropdownValues;
-    }
-
-    /** @hidden */
-    private _setupKeyboardService(): void {
-        this._menuKeyboardService.itemClicked
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((index) => this.onMenuClickHandler(index));
-        this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this._menuKeyboardService.focusEscapeAfterList = () => {};
     }
 
     /** @hidden */

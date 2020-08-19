@@ -77,8 +77,9 @@
 <ng-template #listTemplate>
     <ul
         fd-list
-        [dropdownMode]="true"
         class="fd-combobox-custom-list fd-combobox-input-menu-overflow"
+        [escapeBeforeListCallback]="focusSearchInputElement"
+        [dropdownMode]="true"
         [style.maxHeight]="!mobile && maxHeight"
         [hasMessage]="listMessages && listMessages.length > 0"
     >

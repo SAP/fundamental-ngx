@@ -4,16 +4,17 @@ import {
     Component,
     ContentChildren,
     HostBinding,
+    HostListener,
     Input,
-    OnDestroy,
-    Optional,
+    OnDestroy, OnInit,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { ListItemComponent } from './list-item/list-item.component';
-import { MenuKeyboardService } from '../menu/menu-keyboard.service';
-import { merge, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
+import { KeyboardSupportService } from '../utils/services/keyboard-support/keyboard-support.service';
+import { KeyUtil } from '../utils/functions/key-util';
 
 /**
  * The directive that represents a list.
@@ -25,7 +26,8 @@ import { startWith, takeUntil } from 'rxjs/operators';
     templateUrl: `./list.component.html`,
     host: {
         class: 'fd-list',
-        role: 'list'
+        role: 'list',
+        tabindex: '0'
     },
     styleUrls: [
         './list.component.scss',
@@ -33,8 +35,11 @@ import { startWith, takeUntil } from 'rxjs/operators';
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        KeyboardSupportService
+    ]
 })
-export class ListComponent implements AfterContentInit, OnDestroy {
+export class ListComponent implements AfterContentInit, OnDestroy, OnInit {
     /** Whether dropdown mode is included to component, used for Select and Combobox */
     @Input()
     @HostBinding('class.fd-list--dropdown')
@@ -60,11 +65,6 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     @HostBinding('class.fd-list--no-border')
     noBorder = false;
 
-    /** Whether list component includes links */
-    @Input()
-    @HostBinding('class.fd-list--navigation')
-    hasNavigation = false;
-
     /** Whether list component has navigation indicators */
     @Input()
     @HostBinding('class.fd-list--navigation-indication')
@@ -77,7 +77,19 @@ export class ListComponent implements AfterContentInit, OnDestroy {
 
     /** Whether internal keyboard support should be enabled. It's enabled by default */
     @Input()
-    enableKeyboardSupport = true
+    enableKeyboardSupport = true;
+
+    /** Function that is supposed to be called, when focus escape before list */
+    @Input()
+    escapeBeforeListCallback: (keyboardEvent: KeyboardEvent) => void;
+
+    /** Function that is supposed to be called, when focus escape after list */
+    @Input()
+    escapeAfterListCallback: (keyboardEvent: KeyboardEvent) => void;
+
+    /** Whether list component includes links */
+    @HostBinding('class.fd-list--navigation')
+    hasNavigation = false;
 
     /** @hidden */
     @ContentChildren(ListItemComponent)
@@ -86,44 +98,59 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
-    private readonly _onRefresh$: Subject<void> = new Subject<void>();
-
     /** @hidden */
     constructor(
-        @Optional() private _keyboardService: MenuKeyboardService
+        private _keyboardSupportService: KeyboardSupportService<ListItemComponent>
     ) {}
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        if (this.enableKeyboardSupport && this._keyboardService) {
-            this.items.changes
-                .pipe(
-                    takeUntil(this._onDestroy$),
-                    startWith(0)
-                ).subscribe(() => this._refreshSubscription())
-            ;
+    @HostListener('keydown', ['$event'])
+    keyDownHandler(event: KeyboardEvent): void {
+        if (this.enableKeyboardSupport && this._keyboardSupportService) {
+            if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+                if (this._keyboardSupportService.keyManager && this._keyboardSupportService.keyManager.activeItem) {
+                    this._keyboardSupportService.keyManager.activeItem.click();
+                    event.preventDefault();
+                }
+            } else {
+                this._keyboardSupportService.onKeyDown(event)
+            }
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._keyboardSupportService.focusEscapeBeforeList = this.escapeBeforeListCallback;
+        this._keyboardSupportService.focusEscapeAfterList = this.escapeAfterListCallback;
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this._keyboardSupportService.setKeyboardService(this.items, false);
+
+        this.items.changes
+            .pipe(
+                takeUntil(this._onDestroy$),
+                startWith(0)
+            ).subscribe(() => this._recheckLinks())
+        ;
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._keyboardSupportService.onDestroy$.next();
+        this._keyboardSupportService.onDestroy$.complete();
+    }
+
+    setItemActive(index: number): void {
+        this._keyboardSupportService.keyManager.setActiveItem(index);
     }
 
     /** @hidden */
-    private _refreshSubscription(): void {
-        /** Finish all of the streams, form before */
-        this._onRefresh$.next();
-
-        /** Merge refresh/destroy observables */
-        const refreshObs = merge(this._onRefresh$, this._onDestroy$);
-
-        this.items.forEach((item, index) =>
-            item.keyDown
-                .pipe(takeUntil(refreshObs))
-                .subscribe((event: KeyboardEvent) => this._keyboardService.keyDownHandler(event, index, this.items.toArray()))
-        );
+    private _recheckLinks(): void {
+        const items = this.items.filter(item => item.link);
+        this.hasNavigation = items.length > 0;
     }
 }

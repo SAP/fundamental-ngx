@@ -32,6 +32,7 @@ import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
+import { ListComponent } from '../..';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -198,8 +199,8 @@ export class MultiInputComponent implements
     listTemplate: TemplateRef<any>;
 
     /** @hidden */
-    @ViewChildren(ListItemComponent)
-    listItems: QueryList<ListItemComponent>;
+    @ViewChild(ListComponent)
+    listComponent: ListComponent;
 
     /** @hidden */
     @ViewChild('searchInputElement')
@@ -230,7 +231,6 @@ export class MultiInputComponent implements
     constructor(
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
-        private _menuKeyboardService: MenuKeyboardService,
         private _dynamicComponentService: DynamicComponentService
     ) {}
 
@@ -257,8 +257,6 @@ export class MultiInputComponent implements
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this._menuKeyboardService.focusEscapeAfterList = () => {};
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -313,6 +311,12 @@ export class MultiInputComponent implements
             this.selected = selected;
         }
         this._changeDetRef.markForCheck();
+    }
+
+    /** Method passed to list component */
+    focusSearchInputElement = (keyboardEvent: KeyboardEvent): void => {
+        this.searchInputElement.nativeElement.focus();
+        keyboardEvent.stopPropagation();
     }
 
     /** @hidden */
@@ -381,8 +385,8 @@ export class MultiInputComponent implements
             if (event.altKey) {
                 this.openChangeHandle(true);
             }
-            if (this.listItems.first) {
-                this.listItems.first.focus();
+            if (this.listComponent) {
+                this.listComponent.setItemActive(0);
                 event.preventDefault();
             }
         }

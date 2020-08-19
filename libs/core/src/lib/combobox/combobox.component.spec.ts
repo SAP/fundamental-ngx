@@ -60,47 +60,8 @@ describe('ComboboxComponent', () => {
         expect(component.searchFn).toHaveBeenCalled();
         event.key = 'ArrowDown';
         spyOn(event, 'preventDefault');
-        spyOn(component.listItems.first, 'focus');
         component.onInputKeydownHandler(<any>event);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.listItems.first.focus).toHaveBeenCalled();
-    });
-
-    it('should fire selected event onListKeydownHandler, arrow down', () => {
-        component.displayFn = (item: any): string => {
-            return item.displayedValue;
-        };
-        const event: any = {
-            key: 'Enter',
-            preventDefault: () => {}
-        };
-
-        fixture.detectChanges();
-        spyOn(component, 'onChange');
-        (<any>component)._menuKeyboardService.keyDownHandler(event, 0, component.listItems.toArray());
-        fixture.detectChanges();
-        expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[0].displayedValue);
-        spyOn(event, 'preventDefault');
-        spyOn(component.listItems.toArray()[1], 'focus');
-        event.key = 'ArrowDown';
-        (<any>component)._menuKeyboardService.keyDownHandler(event, 0, component.listItems.toArray());
-        fixture.detectChanges();
-        expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.listItems.toArray()[1].focus).toHaveBeenCalled();
-    });
-
-    it('should handle onListKeydownHandler, arrow up', () => {
-        const event: any = {
-            key: 'ArrowUp',
-            preventDefault: () => {}
-        };
-
-        spyOn(component.listItems.first, 'focus');
-        spyOn(event, 'preventDefault');
-        (<any>component)._menuKeyboardService.keyDownHandler(event, 1, component.listItems.toArray());
-
-        expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.listItems.first.focus).toHaveBeenCalled();
     });
 
     it('should set inputText', () => {
