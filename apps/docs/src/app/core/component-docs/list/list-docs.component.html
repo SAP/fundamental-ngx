@@ -134,9 +134,9 @@
 </fd-docs-section-title>
 <description>
     Keyboard support is built inside the list component, it supports Arrow Down/Up and emits click event,
-    when Enter/Space keys triggered. To make it work user needs to provide <code>MenuKeyboardService</code>.
-    It can be disabled, by passing <code>[enableKeyboardSupport]="false"</code> to list component.
-    Also methods triggered on list leave can be customised as on example.
+    when Enter/Space keys triggered. It can be disabled, by passing <code>[enableKeyboardSupport]="false"</code> to
+    list component. Also methods triggered on list leave can be customised as on example, by passing
+    <code>[escapeBeforeListCallback]</code> and <code>[escapeAfterListCallback]</code>.
 </description>
 <component-example>
     <fd-list-keyboard-example></fd-list-keyboard-example>

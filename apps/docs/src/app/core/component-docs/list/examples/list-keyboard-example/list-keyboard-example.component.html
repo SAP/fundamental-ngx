@@ -1,5 +1,8 @@
-<button fd-button>Element focused, when keyboard service goes before list</button>
-<ul fd-list>
+<button fd-button (click)="focusFirst()">Element focused, when keyboard service goes before list</button>
+<ul fd-list
+    [escapeBeforeListCallback]="approachBeginCallback"
+    [escapeAfterListCallback]="approachEndCallback"
+>
     <li fd-list-item>
         <span fd-list-title>
             List item 1

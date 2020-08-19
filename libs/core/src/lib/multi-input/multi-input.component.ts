@@ -32,7 +32,7 @@ import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
-import { ListComponent } from '../..';
+import { ListComponent } from '../list/list.component';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a

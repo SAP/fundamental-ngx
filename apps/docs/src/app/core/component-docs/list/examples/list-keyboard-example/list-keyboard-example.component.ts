@@ -1,24 +1,17 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ButtonComponent, MenuKeyboardService } from '@fundamental-ngx/core';
+import { ButtonComponent, ListComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-list-keyboard-example',
-    templateUrl: './list-keyboard-example.component.html',
-    providers: [
-        MenuKeyboardService
-    ]
+    templateUrl: './list-keyboard-example.component.html'
 })
 export class ListKeyboardExampleComponent {
 
     @ViewChild(ButtonComponent, { read: ElementRef })
     button: ElementRef
 
-    constructor(
-        private _menuKeyboardService: MenuKeyboardService
-    ) {
-        this._menuKeyboardService.focusEscapeAfterList = this.approachEndCallback;
-        this._menuKeyboardService.focusEscapeBeforeList = this.approachBeginCallback;
-    }
+    @ViewChild(ListComponent)
+    list: ListComponent
 
     approachEndCallback = () => {
         alert('End of list approached');
@@ -26,5 +19,9 @@ export class ListKeyboardExampleComponent {
 
     approachBeginCallback = () => {
         this.button.nativeElement.focus();
+    }
+
+    focusFirst(): void {
+        this.list.setItemActive(0);
     }
 }
