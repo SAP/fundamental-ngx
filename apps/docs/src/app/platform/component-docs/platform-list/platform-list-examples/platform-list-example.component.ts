@@ -1,10 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, TemplateRef } from '@angular/core';
+import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-list-example',
     templateUrl: './platform-list-example.component.html'
 })
 export class PlatformListExampleComponent { }
+
+
+
+@Component({
+    selector: 'fdp-list-with-nodata-example',
+    templateUrl: './platform-list-with-nodata-example.component.html'
+})
+export class PlatformListWithNoDataExampleComponent { }
 
 @Component({
     selector: 'fdp-list-with-footer-example',
@@ -56,11 +65,36 @@ export class PlatformListWithNavigationExampleComponent {
     items: any[] = [
         { 'title': 'Item1' },
         { 'title': 'Item2' },
-        { 'title': 'Item3', 'href': '.' }];
+        { 'title': 'Item3' }];
 }
 
 @Component({
     selector: 'fdp-list-with-buttons-example',
     templateUrl: './platform-list-with-buttons-example.component.html'
 })
-export class PlatformListWithButtonsExampleComponent { }
+export class PlatformListWithButtonsExampleComponent {
+
+    // Handle deletion of item via  mouseclick
+    @HostListener('click', ['$event'])
+    deleteRow(event: any): void {
+        if (event.target.tagName.toLowerCase() === 'button') {
+            if (event.target.classList.contains('sap-icon--edit')) {
+                alert('Requested for Edit');
+            } else {
+                alert('Accepted');
+            }
+        }
+    }
+    // Handle deletion of item via keyboard 'Enter' or mouseclick
+    @HostListener('keyup', ['$event']) onKeydown(event: any): void {
+        if (event && event.key === 'Enter') {
+            if (event.target.tagName.toLowerCase() === 'button') {
+                if (event.target.classList.contains('sap-icon--edit')) {
+                    alert('Requested for Edit');
+                } else {
+                    alert('Accepted');
+                }
+            }
+        }
+    }
+}

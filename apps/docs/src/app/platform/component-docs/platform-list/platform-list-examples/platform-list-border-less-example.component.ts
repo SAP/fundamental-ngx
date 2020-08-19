@@ -2,41 +2,32 @@ import { Component } from '@angular/core';
 import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 import { Observable, of } from 'rxjs';
 
-const LIST_ELEMENTS: ListItem[] = [{ title: 'Item1', templateType: 'standard' },
-{ title: 'Item2', templateType: 'standard' }];
+const LIST_ELEMENTS: Address[] = [{ name: 'Name1' }, { name: 'Name2' }, { name: 'Name3' }, { name: 'Name4' }];
 @Component({
     selector: 'fdp-borderless-list-example',
     templateUrl: './platform-borderless-list-example.component.html'
 })
 export class PlatformListBorderLessExampleComponent {
 
-    // items: any[] = [
-    //     { 'title': 'Item1' },
-    //     { 'title': 'Item2' },
-    //     { 'title': 'Item3' },
-    //     { 'title': 'Item4' }];
-
-    dataSource = new ListDataSource<ListItem>(new ListDataProvider());
+    dataSource = new ListDataSource<Address>(new ListDataProvider());
 
 }
 // it is from application point of to show as example,they refer internal structurs in general
-export interface ListItem {
-    title: string;
-    templateType: string;
+export interface Address {
+    name: string;
 }
 
 
-export class ListDataProvider extends DataProvider<string> {
+export class ListDataProvider extends DataProvider<Address> {
     constructor() {
         super();
     }
-
-    fetch(params: Map<string, string>): Observable<string[]> {
+    fetch(params: Map<string, string>): Observable<Address[]> {
         let data = LIST_ELEMENTS;
-        if (!!params.get('title')) {
-            const keyword = params.get('title').toLowerCase();
-            data = data.filter((item) => item.title.toLowerCase().indexOf(keyword) > -1);
+        if (!!params.get('name')) {
+            const keyword = params.get('name').toLowerCase();
+            data = data.filter((city) => city.name.toLowerCase().indexOf(keyword) > -1);
         }
-        return of(data.map((item) => item.title));
+        return of(data);
     }
 }

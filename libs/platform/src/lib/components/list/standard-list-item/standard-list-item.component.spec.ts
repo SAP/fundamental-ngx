@@ -1,39 +1,66 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ElementRef, ViewChild, Component } from '@angular/core';
 import { ListComponent } from '../list.component';
 import { StandardListItemComponent } from './standard-list-item.component';
 import { PlatformListModule } from '../list.module';
 import { StandardListItemModule } from './standard-list-item.module';
 import { By } from '@angular/platform-browser';
-import { ElementRef, ViewChild, Component } from '@angular/core';
+import { DataProvider, ListDataSource } from '../../../domain/public_api';
+import { Observable, of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ENTER } from '@angular/cdk/keycodes';
+import { BaseListItem } from '../base-list-item';
 
+const LIST_ELEMENTS: Address[] = [
+    { name: 'City1' },
+    { name: 'City2' },
+    { name: 'City3' },
+    { name: 'City4' }];
 
+export interface Address {
+    name: string;
+}
 
+export class ListDataProvider extends DataProvider<Address> {
+    constructor() {
+        super();
+    }
+    fetch(params: Map<string, string>): Observable<Address[]> {
+        let data = LIST_ELEMENTS;
+        if (!!params.get('name')) {
+            const keyword = params.get('name').toLowerCase();
+            data = data.filter((city) => city.name.toLowerCase().indexOf(keyword) > -1);
+        }
+        return of(data);
+    }
+}
 @Component({
+    selector: 'fdp-standard-list-item-test',
     template: `
-        <fdp-standard-list-item #componentElement
-         [title]="title">List Title Test Text</fdp-standard-list-item>
+    <fdp-list #componentElement>
+           <fdp-standard-list-item [title]="Title1"></fdp-standard-list-item></fdp-list>
+
     `
 })
-class TestComponent {
-    @ViewChild('componentElement', { read: ElementRef, static: false })
+class StandardListItemComponentTest {
+    @ViewChild('StandardListItemComponent', { read: ElementRef, static: true })
     ref: ElementRef;
-    title: String;
 }
 
 
 describe('StandardListItemComponent', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
+    let component: StandardListItemComponentTest;
+    let fixture: ComponentFixture<StandardListItemComponentTest>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, StandardListItemComponent, ListComponent],
-            imports: [StandardListItemModule, PlatformListModule]
+            declarations: [StandardListItemComponentTest, StandardListItemComponent, ListComponent],
+            imports: [StandardListItemModule, PlatformListModule, RouterTestingModule]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponent);
+        fixture = TestBed.createComponent(StandardListItemComponentTest);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -43,33 +70,60 @@ describe('StandardListItemComponent', () => {
     });
 
     it('should render a list item', () => {
-        const listElement = fixture.debugElement.query(By.css('li'));
-        expect(listElement.nativeElement.classList).toContain('fd-list__item');
-    });
-
-    it('should contain fd-list__secondary class', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.query(By.css('span'));
-        expect(listElement.nativeElement.classList).toContain('fd-list__secondary');
-    });
-
-    it('list item should have title', () => {
-        component.title = 'title 1';
-        fixture.detectChanges();
-        const listElement = fixture.debugElement.query(By.css('span'));
-        expect(listElement.nativeElement.getAttribute('title')).toEqual('title 1');
+        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        expect(listElement.classList).toContain('fd-list__item');
     });
 
     it('list item should have tabindex', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.query(By.css('li'));
-        expect(listElement.nativeElement.getAttribute('tabindex')).toEqual('-1');
+        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        expect(listElement.getAttribute('tabindex')).toEqual('0');
     });
 
     it('list item should have id', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.query(By.css('li'));
-        expect(listElement.nativeElement.getAttribute('id')).toContain('fdp-list-item-');
+        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        expect(listElement.getAttribute('id')).toContain('fdp-list-item-');
     });
 
+});
+
+@Component({
+    selector: 'fdp-standard-list-item-test',
+    template: `
+    <fdp-list #component [dataSource]="dataSource">
+    <fdp-standard-list-item #childComponent *fdpItemDef="let address" [title]="address.name">
+    </fdp-standard-list-item>
+</fdp-list>
+    `
+})
+class StandardListItemDataSourceTestComponent {
+    @ViewChild(ListComponent, { static: true }) component: ListComponent;
+    @ViewChild(StandardListItemComponent, { static: true }) childComponent: StandardListItemComponent;
+    public dataSource = new ListDataSource<Address>(new ListDataProvider());
+}
+
+describe('Standard  List Item Component with DataSource', () => {
+    let host: StandardListItemDataSourceTestComponent;
+    let fixture: ComponentFixture<StandardListItemDataSourceTestComponent>;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [StandardListItemDataSourceTestComponent, StandardListItemComponent, ListComponent],
+            imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(StandardListItemDataSourceTestComponent);
+        host = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('Standard list item should retive the data from datasource', () => {
+        fixture.detectChanges();
+        const listElement = fixture.debugElement.queryAll(By.css('.fd-list__item'));
+        expect(listElement.length).toBe(4);
+    });
 });

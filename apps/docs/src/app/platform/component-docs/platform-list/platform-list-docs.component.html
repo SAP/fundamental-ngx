@@ -10,7 +10,7 @@
 </component-example>
 <code-example [exampleFiles]="borderLesssList"></code-example>
 <separator></separator>
-<!-- 
+
 <fd-docs-section-title [id]="'list2'" [componentName]="'List'">
     List - Footer
 </fd-docs-section-title>
@@ -106,7 +106,6 @@
 </component-example>
 <code-example [exampleFiles]="listWithSelection"></code-example>
 <separator></separator>
-
 <fd-docs-section-title [id]="'list9'" [componentName]="'List'">
     List - Single Selection
 </fd-docs-section-title>
@@ -126,9 +125,9 @@
 <fd-docs-section-title [id]="'list10'" [componentName]="'List'">
     List - Navigation
 </fd-docs-section-title>
-<description>List with Navigation Option.<code>[hasNavigation]="true"</code> will enables navigation on click of list
+<description>List with Navigation Option.<code>[navigated]="true"</code> will enables navigation on click of list
     item,
-    <code> [showNavigationArrow]="true"</code> will provide <code>">"</code> indicator,
+    <code> [navigationIndicator]="true"</code> will provide <code>">"</code> indicator,
     [href] and [target] will help to get into the desiced destination on click of navigation.Below examples show both
     imperative and declarative way to use it.</description>
 <component-example>
@@ -141,16 +140,45 @@
 <fd-docs-section-title [id]="'list11'" [componentName]="'List'">
     List - Virtual scroll
 </fd-docs-section-title>
-<description> We will take help of <code>&lt;cdk-virtual-scroll-viewport&gt;</code>of **scrollingModule** from
-    angular CDK by setting <code>textSize</code> will help us to achive virtual scrolling.
-    Loading hundreds of elements can be slow in any browser; virtual scrolling enables a performant way to simulate
-    all
-    items being rendered by making the height of the container element the same as the height of the total number of
-    elements to be rendered, and then only rendering the items in view.
+<description>By setting <code>[loadMore]="true"</code> will start the loazy load of data and
+    <code>[onScroll]="true"</code> helps to load data on scroll and <code>[itemSize]="5"</code> is for number
+    items needs to be appended per event.Where as <code>[delay]="200"</code> sets the time period to load the data.
+    <code>[scrollOffsetPercentage]="40"</code>scroll hit on viewport to start fecthing the next data.
 </description>
 <component-example>
     <fdp-list-with-infinite-scroll-example>
     </fdp-list-with-infinite-scroll-example>
 </component-example>
 <code-example [exampleFiles]="listWithInfiniteScroll"></code-example>
-<separator></separator> -->
+<separator></separator>
+
+<fd-docs-section-title [id]="'list12'" [componentName]="'List'">
+    List - Load data on button click
+</fd-docs-section-title>
+<description>By setting <code>[loadMore]="true"</code> will start the loazy load of data and
+    <code>[onScroll]="false"</code> helps to load data on button click and <code>[itemSize]="5"</code> is for number
+    items needs to be appended per event.Where as <code>[delay]="200"</code> sets the time period to load the data.
+    <code>[loadTitle]="More"</code>sets the title on button, on click of which data is loaded.
+</description>
+<component-example>
+    <fdp-list-with-more-button-example>
+    </fdp-list-with-more-button-example>
+</component-example>
+<code-example [exampleFiles]="listWithMoreButton"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'list13'" [componentName]="'List'">
+    List - With No Data
+</fd-docs-section-title>
+<description>List with no data, property.<code>[noDataText]="..."</code>
+    will help user to pass information to get
+    displayed when no data is present. <code>[noSeprator]="true"</code>
+    will help user to have bottom of list item with no border.
+
+</description>
+<component-example>
+    <fdp-list-with-nodata-example>
+    </fdp-list-with-nodata-example>
+</component-example>
+<code-example [exampleFiles]="listWithNoData"></code-example>
+<separator></separator>

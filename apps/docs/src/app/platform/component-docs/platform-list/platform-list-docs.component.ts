@@ -15,7 +15,9 @@ import * as listWithSingleSelection from '!raw-loader!./platform-list-examples/p
 import * as listWithNavigation from '!raw-loader!./platform-list-examples/platform-list-with-navigation-example.component.html';
 import * as listWithInfiniteScroll from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.html';
 import * as listWithInfiniteScrollTs from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.ts';
-
+import * as listWithMoreButton from '!raw-loader!./platform-list-examples/platform-list-with-more-button-example.component.html';
+import * as listWithMoreButtonTs from '!raw-loader!./platform-list-examples/platform-list-with-more-button-example.component.ts';
+import * as listWithNoData from '!raw-loader!./platform-list-examples/platform-list-with-nodata-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -140,7 +142,27 @@ export class PlatformListDocsComponent implements OnInit {
             fileName: 'platform-list-with-infinite-scroll-example'
         }
     ];
+    listWithMoreButton: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithMoreButton,
+            fileName: 'platform-list-with-more-button-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithMoreButtonExampleComponent',
+            code: listWithMoreButtonTs,
+            fileName: 'platform-list-with-more-button-example'
+        }
+    ];
 
+    listWithNoData: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithNoData,
+            fileName: 'platform-list-with-nodata-example',
+        }
+    ];
     ngOnInit(): void { }
     constructor() { }
 }

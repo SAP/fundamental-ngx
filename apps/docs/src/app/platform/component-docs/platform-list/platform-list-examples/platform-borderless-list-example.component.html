@@ -1,15 +1,20 @@
-<h3>Cozy Mode</h3>
+<h3>Imperative Approach</h3>
+<h5>Cozy Mode</h5>
 <fdp-list [noBorder]="true" [dataSource]="dataSource">
-    <fdp-standard-list-item *itemDef="let item" title=item.title></fdp-standard-list-item>
+    <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name">
+    </fdp-standard-list-item>
+</fdp-list>
+<br><br>
+<h5>Compact Mode</h5>
+<fdp-list [noBorder]="true" [dataSource]="dataSource" [contentDensity]="'compact'">
+    <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name"></fdp-standard-list-item>
 </fdp-list>
 
+<br><br>
 
-<h3>Compact Mode</h3>
-
-<!-- <fdp-list [contentDensity]="'compact'" [noBorder]="true">
-    <fdp-standard-list-item *ngFor="let item of items" [item]="item"></fdp-standard-list-item>
-</fdp-list> -->
-<fdp-list [contentDensity]="'compact'" [enableDnd]="true">
+<h3>Declrative Approach</h3>
+<h5>Cozy Mode</h5>
+<fdp-list [noBorder]="true">
     <fdp-standard-list-item title="Title1">
     </fdp-standard-list-item>
     <fdp-standard-list-item title="Title2">
@@ -19,7 +24,15 @@
     <fdp-standard-list-item title="Title4">
     </fdp-standard-list-item>
 </fdp-list>
-
-<!-- <fdp-list [dataSource]="dataSource">
-    <fdp-standard-list-item templateType='standard' title="{{title}}"></fdp-standard-list-item>
-</fdp-list> -->
+<br><br>
+<h5>Compact Mode</h5>
+<fdp-list [contentDensity]="'compact'" [noBorder]=" true">
+    <fdp-standard-list-item title="Title1">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item title="Title2">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item title="Title3">
+    </fdp-standard-list-item>
+    <fdp-standard-list-item title="Title4">
+    </fdp-standard-list-item>
+</fdp-list>

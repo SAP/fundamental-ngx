@@ -7,7 +7,6 @@ export interface User {
     lastName: string;
 }
 
-
 const list_elements: User[] = [
     { 'firstName': 'Alabama', 'lastName': 'Montgomery' },
     { 'firstName': 'Alaska', 'lastName': 'Juneau' },
@@ -113,7 +112,6 @@ const list_elements: User[] = [
     { 'firstName': 'Wyoming', 'lastName': 'Cheyenne' }
 
 ];
-
 export class ListDataProvider extends DataProvider<User> {
     constructor() {
         super();
@@ -130,10 +128,12 @@ export class ListDataProvider extends DataProvider<User> {
     }
 }
 @Component({
-    selector: 'fdp-list-with-infinite-scroll-example',
-    templateUrl: './platform-list-with-infinite-scroll-example.component.html',
+    selector: 'fdp-list-with-more-button-example',
+    templateUrl: './platform-list-with-more-button-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlatformListWithInfiniteScrollExampleComponent {
+export class PlatformListWithMoreButtonExampleComponent {
     dataSource = new ListDataSource<User>(new ListDataProvider());
+
 }
+

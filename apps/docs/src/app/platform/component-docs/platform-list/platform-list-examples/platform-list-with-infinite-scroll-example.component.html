@@ -1,5 +1,5 @@
-<fdp-list>
-    <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
-        <fdp-standard-list-item *cdkVirtualFor="let item of displayedElements" [item]="item"></fdp-standard-list-item>
-    </cdk-virtual-scroll-viewport>
+<h3>Load On Scroll</h3>
+<fdp-list [dataSource]="dataSource" [loadMore]="true" [onScroll]="true" [itemSize]="5" [delayTime]="2000"
+    [scrollOffsetPercentage]="40" [maxHeight]="'200px'">
+    <fdp-standard-list-item *fdpItemDef="let user" [title]="user.firstName"></fdp-standard-list-item>
 </fdp-list>

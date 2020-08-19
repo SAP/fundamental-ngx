@@ -181,6 +181,7 @@ export class ListDataSource<T> extends ComboBoxDataSource<T> {
         super(dataProvider);
     }
     // sort
+
     sort(listItems: [] | Map<string, string>): void {
         const sortedItems = new Map();
 

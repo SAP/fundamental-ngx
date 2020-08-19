@@ -1,23 +1,25 @@
-<ul *ngIf="!enableDnd" fd-list #fdlist [attr.id]="id" [compact]="contentDensity === 'compact'" [noBorder]="noBorder"
-    (keydown)="keyManager.onKeydown($event);handleKeyDown($event);" (change)="onSelectionChanged($event)">
-    <ng-content selector="fd-toolbar"></ng-content>
-    <ng-template *ngIf="items.length !== 0; then thenBlock else elseBlock"></ng-template>
-</ul>
-<ul *ngIf="enableDnd" fd-list fd-dnd-list #fdlist [attr.id]="id" [compact]="contentDensity === 'compact'"
-    [noBorder]="noBorder" (keydown)="keyManager.onKeydown($event);handleKeyDown($event);"
-    (change)="onSelectionChanged($event)">
-    <ng-content selector="fd-toolbar"></ng-content>
-    <ng-template *ngIf="items.length !== 0; then thenBlock else elseBlock"></ng-template>
-</ul>
-
-
-
-
-<ng-template #thenBlock>
-    <ng-template *ngFor="let item of items; let i = index">
-        <ng-container [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{$implicit: item}">
-        </ng-container>
+<ul fd-list fdInfiniteScroll #fdlist [attr.id]="id" [compact]="isCompact" [noBorder]="noBorder"
+    (keydown)="keyManager.onKeydown($event);handleKeyDown($event);" (change)="onSelectionChanged($event)"
+    (onScrollAction)="scrollHandler()" [scrollPercent]="scrollOffsetPercentage" style="overflow-y: scroll"
+    [ngStyle]="{'max-height': maxHeight}">
+    <ng-template *ngIf="items.length !== 0; then thenBlock else elseBlock">
     </ng-template>
+    <li #listItem *ngIf="loadMore && !onScroll" (click)="getMoreData()" fd-list-item
+        class="fd-list__item fd-list__item--action" tabindex="0" role="'listitem'" [attr.aria-label]="loadTitle">
+        <button class="fd-list__title fd-list__title--growing">
+            <fd-busy-indicator size="m" class="fd-busy-indicator-custom" [block]="true" [loading]="loading">
+            </fd-busy-indicator>
+            {{loadTitle}} <ng-content selector="#load"></ng-content>
+        </button>
+    </li>
+    <fd-busy-indicator *ngIf="loadMore && onScroll" size="l" class="fd-busy-indicator-custom" [block]="true"
+        [loading]="true" style="vertical-align: middle;"></fd-busy-indicator>
+</ul>
+<ng-template #thenBlock>
+    <ng-container *ngFor="let item of items; let i = index">
+        <ng-container *ngTemplateOutlet="listItemDef.templateRef;context:{$implicit: item}">
+        </ng-container>
+    </ng-container>
 </ng-template>
 <ng-template #elseBlock>
     <ng-content></ng-content>

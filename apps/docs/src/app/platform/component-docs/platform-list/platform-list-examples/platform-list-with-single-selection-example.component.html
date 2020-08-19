@@ -1,5 +1,5 @@
 <h3>Cozy Mode</h3>
-<fdp-list [noBorder]="true" [selectionMode]="'single'" [(selectedItems)]="selectedItems"
+<fdp-list [noBorder]="true" [selectionMode]="'single'" [(ngModel)]="selectedItems"
     (selectedItemChange)="showItemInfo($event)">
     <fd-toolbar [fdType]="'info'" [active]="true">
         <label fd-toolbar-label>{{selectedItems}} : is selected</label>

@@ -1,24 +1,17 @@
-<h3>Cozy Mode</h3>
-<fdp-list [enableDnd]="true">
+<h3>Declarative Approach</h3>
+<h5>Cozy Mode</h5>
+<fdp-list>
     <fdp-list-group-header>Group header 1</fdp-list-group-header>
     <fdp-standard-list-item title="List item 1">
-        <div fd-list-secondary #fdpactiongroup>
-            <fd-icon [glyph]="'camera'">
-            </fd-icon>
-            <fd-icon [glyph]="'address-book'">
-            </fd-icon>
-            <fd-icon [glyph]="'folder-blank'">
-            </fd-icon>
-        </div>
     </fdp-standard-list-item>
     <fdp-standard-list-item title="List item 2">
     </fdp-standard-list-item>
     <fdp-list-footer>List footer</fdp-list-footer>
 </fdp-list>
 
-<h3>Compact Mode</h3>
+<h5>Compact Mode</h5>
 
-<fdp-list [contentDensity]="'compact'" [enableDnd]="true">
+<fdp-list [contentDensity]="'compact'">
     <fdp-list-group-header>Group header 1</fdp-list-group-header>
     <fdp-standard-list-item title="List item 1">
     </fdp-standard-list-item>

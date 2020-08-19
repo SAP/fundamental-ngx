@@ -42,23 +42,25 @@ export class PlatformStandardListItemWithSelectionExampleComponent {
     selectedItems: any[] = [];
     items: any[] = [
         {
-            'titleIcon': 'cancel-share', 'title': 'Item1', 'checkboxValue': 'check1',
+            'avatarSrc': 'https://placeimg.com/400/400/nature',
+            'avatarTitle': 'nature', 'title': 'Item1',
             'description': 'First text item in Byline (Standard text item)',
             'secondary': 'Second text item in Byline (Can be semantic (Status) or not)'
         },
         {
-            'titleIcon': 'fob-watch', 'title': 'Item2', 'checkboxValue':
-                'check2', 'description': 'First text item in Byline (Standard text item)',
+            'avatarSrc': 'https://placeimg.com/400/400/nature',
+            'avatarTitle': 'nature', 'title': 'Item2', 'description': 'First text item in Byline (Standard text item)',
             'secondary': 'Second text item in Byline (Can be semantic (Status) or not)'
         },
         {
-            'titleIcon': 'folder-full', 'title': 'Item3', 'checkboxValue': 'check3',
+            'avatarSrc': 'https://placeimg.com/400/400/nature',
+            'avatarTitle': 'nature', 'title': 'Item3',
             'description': 'First text item in Byline (Standard text item)',
             'secondary': 'Second text item in Byline (Can be semantic (Status) or not)'
         },
         {
-            'titleIcon': 'heating-cooling', 'title': 'Item4',
-            'checkboxValue': 'check4',
+            'avatarSrc': 'https://placeimg.com/400/400/nature',
+            'avatarTitle': 'nature', 'title': 'Item4',
             'description': 'First text item in Byline (Standard text item)',
             'secondary': 'Second text item in Byline (Can be semantic (Status) or not)'
         }];
@@ -83,11 +85,11 @@ export class PlatformStandardListItemWithNavigationExampleComponent {
         {
             'title': 'Item2', 'description': 'First text item in Byline (Standard text item)',
             'secondary': 'Second text item in Byline (Can be semantic (Status) or not)',
-            'href': '#'
+            'routerLink': '#'
         },
         {
             'title': 'Item3', 'description': 'First text item in Byline (Standard text item)',
             'secondary': 'Second text item in Byline (Can be semantic (Status) or not)',
-            'href': '#'
+            'routerLink': '#'
         }];
 }

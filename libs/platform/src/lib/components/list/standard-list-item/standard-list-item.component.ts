@@ -1,14 +1,16 @@
 import {
-    Component, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, forwardRef, AfterViewInit,
-    TemplateRef, ViewContainerRef
+    Component, ChangeDetectionStrategy, ElementRef,
+    ChangeDetectorRef, forwardRef, AfterViewInit
 } from '@angular/core';
 import { BaseListItem } from '../base-list-item';
+import { ListConfig } from '../list.config';
 
 
 @Component({
     selector: 'fdp-standard-list-item',
     templateUrl: './standard-list-item.component.html',
-    styleUrls: ['./standard-list-item.component.scss'],
+    styleUrls: ['./standard-list-item.component.scss',
+        '../drag-and-drop.scss'],
     providers: [
         { provide: BaseListItem, useExisting: forwardRef(() => StandardListItemComponent) }
     ],
@@ -16,6 +18,15 @@ import { BaseListItem } from '../base-list-item';
 
 })
 export class StandardListItemComponent extends BaseListItem implements AfterViewInit {
+
+    /** @hidden */
+    _contentDensity = this._listConfig.contentDensity;
+
+    /**
+     * @hidden
+     * Used to define if contentDensity value is 'compact' or not.
+     */
+    isCompact = this._contentDensity === 'compact';
 
     /** @hidden */
     /** message type styles to secondary text in Byline*/
@@ -38,9 +49,10 @@ export class StandardListItemComponent extends BaseListItem implements AfterView
         });
     }
 
+
     /** @hidden */
-    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef) {
-        super(_changeDetectorRef, itemEl);
+    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef, protected _listConfig: ListConfig) {
+        super(_changeDetectorRef, itemEl, _listConfig);
     }
 
 }
