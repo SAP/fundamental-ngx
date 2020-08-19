@@ -1,21 +1,39 @@
-import { AutoCompleteDirective } from './auto-complete.directive';
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { OptionItem } from '@fundamental-ngx/platform';
+import { AutoCompleteDirective } from './auto-complete.directive';
+
 @Component({
-    template: ` <input [options]="values" fd-auto-complete>`
+    template: '<input [options]="options" fdp-auto-complete>'
 })
 class TestComponent {
     @ViewChild(AutoCompleteDirective)
     autoCompleteDirective: AutoCompleteDirective;
 
-    values: string[] = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];
+    options: OptionItem[] = [{
+        label: 'Apple',
+        value: 'Apple'
+    }, {
+        label: 'Pineapple',
+        value: 'Pineapple'
+    }, {
+        label: 'Banana',
+        value: 'Banana'
+    }, {
+        label: 'Kiwi',
+        value: 'Kiwi'
+    }, {
+        label: 'Strawberry',
+        value: 'Strawberry'
+    }];
 }
 
 describe('AutoCompleteDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let directive: AutoCompleteDirective;
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [AutoCompleteDirective, TestComponent]

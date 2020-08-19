@@ -1,11 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ComboboxMobileComponent } from './combobox-mobile.component';
 import { EventEmitter } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComboboxComponent } from '../../combobox/combobox.component';
+
 import { DialogModule, DynamicComponentService, MobileModeConfig } from '@fundamental-ngx/core';
+
+import { ComboboxComponent } from '../../combobox/combobox.component';
 import { COMBOBOX_COMPONENT } from '../../combobox.interface';
+import { ComboboxMobileComponent } from './combobox-mobile.component';
 
 describe('ComboboxMobileComponent', () => {
     let component: ComboboxMobileComponent;
@@ -16,28 +17,41 @@ describe('ComboboxMobileComponent', () => {
         title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true
     };
 
-
     let comboboxInputComponent: Partial<ComboboxComponent> = {
-        mobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
-        dialogDismiss: (backupArgument: string) => {},
-        dialogApprove: () => {},
+        mobileConfig: {
+            title: 'title',
+            approveButtonText: 'approve',
+            cancelButtonText: 'cancel',
+            hasCloseButton: true
+        },
+        dialogDismiss: (backupArgument: string) => {
+        },
+        dialogApprove: () => {
+        },
         openChange: new EventEmitter<boolean>()
     };
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ DialogModule, BrowserAnimationsModule ],
+            imports: [DialogModule, BrowserAnimationsModule],
             declarations: [ComboboxMobileComponent],
-            providers: [ DynamicComponentService, {provide: COMBOBOX_COMPONENT, useValue: comboboxInputComponent} ]
+            providers: [DynamicComponentService, { provide: COMBOBOX_COMPONENT, useValue: comboboxInputComponent }]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
         comboboxInputComponent = {
-            mobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
-            dialogDismiss: (backupArgument: string) => {},
-            dialogApprove: () => {},
+            mobileConfig: {
+                title: 'title',
+                approveButtonText: 'approve',
+                cancelButtonText: 'cancel',
+                hasCloseButton: true
+            },
+            dialogDismiss: (backupArgument: string) => {
+            },
+            dialogApprove: () => {
+            },
             openChange: new EventEmitter<boolean>()
         };
         fixture = TestBed.createComponent(ComboboxMobileComponent);

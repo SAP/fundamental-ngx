@@ -2,8 +2,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core';
-import { SelectItem } from '../../../../domain/data-model';
-import { MatchingStrategy } from '../combobox.config';
+import { OptionItem } from '../../../../domain/data-model';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -17,7 +16,7 @@ export interface AutoCompleteEvent {
 export class AutoCompleteDirective {
     /** Values that will fill missing text in the input. */
     @Input()
-    options: SelectItem[];
+    options: OptionItem[];
 
     /**
      * Input text, that is taken from ngModel of formControl,
@@ -25,9 +24,6 @@ export class AutoCompleteDirective {
      */
     @Input()
     inputText: string;
-
-    @Input()
-    matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
 
     /** Event thrown, when the auto ahead text is accepted */
     @Output()
@@ -69,7 +65,7 @@ export class AutoCompleteDirective {
             }
 
             this.oldValue = this.inputText;
-            const item = this.searchByStrategy(this.matchingStrategy);
+            const item = this.searchByStrategy();
             if (item) {
                 this._typeahead(item.label);
             }
@@ -105,8 +101,7 @@ export class AutoCompleteDirective {
         });
     }
 
-    private searchByStrategy(strategy: MatchingStrategy = MatchingStrategy.STARTS_WITH): SelectItem | undefined {
-        const findBy = strategy === MatchingStrategy.STARTS_WITH ? this.findByStrategyStartsWith : this.findByStrategyContains;
+    private searchByStrategy(): OptionItem | undefined {
         const firstItem = this.options[0];
 
         if (!firstItem) {
@@ -114,10 +109,10 @@ export class AutoCompleteDirective {
         }
 
         if (firstItem.isGroup) {
-            let matchedSelectItem: SelectItem | undefined;
+            let matchedSelectItem: OptionItem | undefined;
 
             for (const option of this.options) {
-                matchedSelectItem = findBy(option.children, this.inputText)
+                matchedSelectItem = this.findByStrategyStartsWith(option.children, this.inputText)
 
                 if (matchedSelectItem) {
                     break;
@@ -129,16 +124,11 @@ export class AutoCompleteDirective {
             }
         }
 
-        return findBy(this.options, this.inputText);
+        return this.findByStrategyStartsWith(this.options, this.inputText);
     }
 
-    private findByStrategyStartsWith(options: SelectItem[], inputText: string): SelectItem | undefined {
+    private findByStrategyStartsWith(options: OptionItem[], inputText: string): OptionItem | undefined {
         return options.find(option => option.label.toLocaleLowerCase()
             .startsWith(inputText.toLocaleLowerCase()));
-    }
-
-    private findByStrategyContains(options: SelectItem[], inputText: string): SelectItem | undefined {
-        return options.find(option => option.label.toLocaleLowerCase()
-            .indexOf(inputText.toLocaleLowerCase()));
     }
 }
