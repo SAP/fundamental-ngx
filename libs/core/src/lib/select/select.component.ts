@@ -147,7 +147,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
 
     /** The element to which the popover should be appended. */
     @Input()
-    appendTo: HTMLElement | 'body' = 'body';
+    appendTo: HTMLElement | 'body';
 
     /**
      * If the option should be unselected and value changed to undefined, when the current value is
