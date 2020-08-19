@@ -78,6 +78,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     placement: Placement = 'bottom-start';
 
+    /** The element to which the popover should be appended. */
+    @Input()
+    appendTo: HTMLElement | 'body' = 'body';
+
     /** Whether the time component should be meridian (am/pm). */
     /** @hidden */
     private _meridian;
