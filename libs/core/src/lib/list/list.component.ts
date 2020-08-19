@@ -137,7 +137,7 @@ export class ListComponent implements AfterContentInit, OnDestroy, OnInit {
             if (KeyUtil.isKey(event, [' ', 'Enter'])) {
                 if (this._keyboardSupportService.keyManager && this._keyboardSupportService.keyManager.activeItem) {
                     this._keyboardSupportService.keyManager.activeItem.click();
-                    event.preventDefault();
+                    event.stopPropagation();
                 }
             } else {
                 this._keyboardSupportService.onKeyDown(event)
