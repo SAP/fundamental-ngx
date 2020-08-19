@@ -5,10 +5,10 @@ import { ListModule } from '../list.module';
 @Component({
     template: ` <li #directiveElement
                     fd-list-item
-                    [link]="link"
                     [noData]="noData"
                     [action]="action"
                     [selected]="selected">
+        <a *ngIf="link" fd-list-link>link</a>
         List Item Test Text
     </li> `
 })
@@ -50,12 +50,16 @@ describe('ListItemComponent', () => {
     it('should assign classes', () => {
         component.selected = true;
         component.noData = true;
-        component.link = true;
         component.action = true;
         fixture.detectChanges();
         expect(component.ref.nativeElement.classList).toContain('is-selected');
-        expect(component.ref.nativeElement.classList).toContain('fd-list__item--link');
         expect(component.ref.nativeElement.classList).toContain('fd-list__item--no-data');
         expect(component.ref.nativeElement.classList).toContain('fd-list__item--action');
+    });
+
+    it('should assign link class', () => {
+        component.link = true;
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.classList).toContain('fd-list__item--link');
     });
 });
