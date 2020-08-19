@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { TimePickerHeaderComponent } from './time-picker-header/time-picker-header.component';
 import { TimePickerDocsComponent } from './time-picker-docs.component';
@@ -15,7 +15,7 @@ import { TimePickerOnlyHoursExampleComponent } from './examples/time-picker-only
 import { TimePickerNoSecondsExampleComponent } from './examples/time-picker-no-seconds-example.component';
 import { TimePickerAllowNullExampleComponent } from './examples/time-picker-allow-null-example.component';
 import { TimePickerOtherDelimiterExampleComponent } from './examples/time-picker-other-delimiter-example.component';
-import { TimePickerModule, SegmentedButtonModule, SelectModule } from '@fundamental-ngx/core';
+import { TimePickerModule, SegmentedButtonModule, FormModule, SelectModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -29,7 +29,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TimePickerModule, SegmentedButtonModule, SelectModule],
+    imports: [
+        FormModule,
+        SelectModule,
+        TimePickerModule,
+        SegmentedButtonModule,
+        SharedDocumentationPageModule,
+        RouterModule.forChild(routes),
+    ],
     exports: [RouterModule],
     declarations: [
         TimePickerDocsComponent,

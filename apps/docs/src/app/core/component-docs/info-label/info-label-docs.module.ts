@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { InfoLabelDocsComponent } from './info-label-docs.component';
 import {
     InfoLableDefaultExampleComponent,
@@ -12,6 +11,7 @@ import {
 } from './examples/info-label-examples.component';
 import { InfoLabelHeaderComponent } from './info-label-header/info-label-header.component';
 import { InfoLabelModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -25,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, InfoLabelModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, InfoLabelModule],
     exports: [RouterModule],
     declarations: [
         InfoLabelDocsComponent,

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { IdentifierHeaderComponent } from './identifier-header/identifier-header.component';
 import { IdentifierDocsComponent } from './identifier-docs.component';
@@ -12,7 +11,8 @@ import {
     InitialsIdentifierExampleComponent,
     TransparentIdentifierExampleComponent
 } from './examples/identifier-examples.component';
-import { IdentifierModule, MessageStripModule } from '@fundamental-ngx/core';
+import { IdentifierModule } from '@fundamental-ngx/core';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, IdentifierModule, MessageStripModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, IdentifierModule],
     exports: [RouterModule],
     declarations: [
         IdentifierDocsComponent,

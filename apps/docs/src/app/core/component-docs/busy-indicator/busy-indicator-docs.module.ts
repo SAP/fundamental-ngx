@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { BusyIndicatorHeaderComponent } from './busy-indicator-header/busy-indicator-header.component';
 import { BusyIndicatorDocsComponent } from './busy-indicator-docs.component';
 import { BusyIndicatorBasicExampleComponent } from './examples/busy-indicator-basic-example.component';
 import { BusyIndicatorWrapperExampleComponent } from './examples/busy-indicator-wrapper-example.component';
 import { BusyIndicatorModule } from '@fundamental-ngx/core';
 import { BusyIndicatorSizeExampleComponent } from './examples/busy-indicator-size-example.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -22,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, BusyIndicatorModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, BusyIndicatorModule],
     exports: [RouterModule],
     declarations: [
         BusyIndicatorDocsComponent,

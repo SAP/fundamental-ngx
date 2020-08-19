@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { ComboboxHeaderComponent } from './combobox-header/combobox-header.component';
 import { ComboboxDocsComponent } from './combobox-docs.component';
 import { ComboboxAsyncExampleComponent } from './examples/combobox-async-example.component';
@@ -17,22 +16,29 @@ import { ComboboxHeightExampleComponent } from './examples/combobox-height-examp
 import { ComboboxOpenControlExampleComponent } from './examples/combobox-open-control-example.component';
 import { ComboboxColumnsExampleComponent } from './examples/combobox-columns-example.component';
 import { ComboboxGroupExampleComponent } from './examples/combobox-group-example.component';
-import { ComboboxMobileModule, ComboboxModule, ListModule } from '@fundamental-ngx/core';
+import { ComboboxMobileModule, ComboboxModule, FormModule } from '@fundamental-ngx/core';
 import { ComboboxMobileExampleComponent } from './examples/combobox-mobile/combobox-mobile-example.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
         path: '',
         component: ComboboxHeaderComponent,
         children: [
-            { path: '', component: ComboboxDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.combobox } }
+            {path: '', component: ComboboxDocsComponent},
+            {path: 'api', component: ApiComponent, data: {content: API_FILES.combobox}}
         ]
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ComboboxModule, ListModule, ComboboxMobileModule],
+    imports: [
+        FormModule,
+        ComboboxModule,
+        ComboboxMobileModule,
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+    ],
     exports: [RouterModule],
     declarations: [
         ComboboxDocsComponent,
@@ -52,4 +58,5 @@ const routes: Routes = [
         ComboboxMobileExampleComponent
     ]
 })
-export class ComboboxDocsModule {}
+export class ComboboxDocsModule {
+}

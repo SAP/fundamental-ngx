@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { SplitButtonHeaderComponent } from './split-button-header/split-button-header.component';
 import { SplitButtonDocsComponent } from './split-button-docs.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SplitButtonModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SplitButtonModule],
     exports: [RouterModule],
     declarations: [
         SplitButtonDocsComponent,

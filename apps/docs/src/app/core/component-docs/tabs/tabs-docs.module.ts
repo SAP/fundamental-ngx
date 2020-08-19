@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { TabsHeaderComponent } from './tabs-header/tabs-header.component';
 import { TabsDocsComponent } from './tabs-docs.component';
@@ -41,7 +41,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TabsModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TabsModule],
     exports: [RouterModule],
     declarations: [
         TabsDocsComponent,

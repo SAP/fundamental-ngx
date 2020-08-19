@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { SwitchHeaderComponent } from './switch-header/switch-header.component';
 import { SwitchDocsComponent } from './switch-docs.component';
@@ -10,7 +10,7 @@ import { SwitchFormsExampleComponent } from './examples/switch-form-example/swit
 import { SwitchBindingExampleComponent } from './examples/switch-binding-example/switch-binding-example.component';
 import { SemanticSwitchExampleComponent } from './examples/semantic-switch-example/semantic-switch-example.component';
 import { DisabledSwitchExampleComponent } from './examples/disabled-switch-example/disabled-switch-example.component';
-import { SwitchModule } from '@fundamental-ngx/core';
+import { FormModule, SwitchModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SwitchModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, SwitchModule],
     exports: [RouterModule],
     declarations: [
         SwitchDocsComponent,

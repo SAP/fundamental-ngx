@@ -5,8 +5,8 @@ import { BehaviorSubject } from 'rxjs';
 const SMALL_SCREEN_BREAKPOINT = 992;
 @Component({
     selector: 'sections-toolbar',
-    styleUrls: ['./sections-toolbar.component.scss'],
-    templateUrl: './sections-toolbar.component.html'
+    templateUrl: './sections-toolbar.component.html',
+    styleUrls: ['./sections-toolbar.component.scss']
 })
 export class SectionsToolbarComponent implements OnInit {
     @Input() sections: SectionInterface[];

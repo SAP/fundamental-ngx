@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { TokenHeaderComponent } from './token-header/token-header.component';
 import { TokenDocsComponent } from './token-docs.component';
@@ -11,7 +11,7 @@ import { TokenCompactExampleComponent } from './examples/token-compact-example/t
 import { TokenSelectedExampleComponent } from './examples/token-selected-example/token-selected-example.component';
 import { TokenReadOnlyExampleComponent } from './examples/token-readonly-example/token-readonly-example.component';
 import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
-import { TokenModule } from '@fundamental-ngx/core';
+import { FormModule, TokenModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -25,7 +25,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TokenModule],
+    imports: [
+        FormModule,
+        TokenModule,
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule
+    ],
     exports: [RouterModule],
     declarations: [
         TokenDocsComponent,
