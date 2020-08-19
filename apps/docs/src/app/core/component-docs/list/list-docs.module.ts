@@ -19,7 +19,8 @@ import {
     RadioModule,
     DragAndDropModule,
     BusyIndicatorModule,
-    ToolbarModule
+    ToolbarModule,
+    InputGroupModule
 } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ListDndExampleComponent } from './examples/list-dnd-example/list-dnd-example.component';
@@ -53,7 +54,8 @@ const routes: Routes = [
         InfiniteScrollModule,
         DragAndDropModule,
         BusyIndicatorModule,
-        ToolbarModule
+        ToolbarModule,
+        InputGroupModule
     ],
     exports: [RouterModule],
     declarations: [
