@@ -2,21 +2,26 @@ import {
     Component,
     ContentChildren,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     EventEmitter,
     Input,
-    Optional,
     Output,
     QueryList,
-    Self,
     ViewEncapsulation,
-    ViewChildren
+    ViewChildren,
+    forwardRef,
+    ChangeDetectorRef,
+    Optional,
+    Self,
+    SkipSelf,
+    Host
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { NgForm, NgControl } from '@angular/forms';
+
 import { CollectionBaseInput } from '../collection-base.input';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { PlatformCheckboxChange } from '../checkbox/checkbox.component';
 import { FormFieldControl } from '../form-control';
+import { FormField } from '../form-group/form-field/form-field';
 
 /**
  * Checkbox group implementation based on the
@@ -30,7 +35,7 @@ import { FormFieldControl } from '../form-control';
     templateUrl: './checkbox-group.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: CheckboxGroupComponent, multi: true }]
+    providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }]
 })
 export class CheckboxGroupComponent extends CollectionBaseInput {
     /**
@@ -61,11 +66,13 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     readonly valueChange: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
 
     constructor(
-        private _changeDetector: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        cd: ChangeDetectorRef,
+        @Optional() @Self() ngForm: NgForm,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(_changeDetector, ngControl, ngForm);
+        super(cd, ngForm, ngControl, formField, formControl);
     }
 
     writeValue(value: any): void {

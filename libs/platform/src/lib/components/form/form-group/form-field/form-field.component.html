@@ -3,11 +3,7 @@
 </ng-template>
 
 <ng-template #renderer>
-    <div
-        (click)="_control && _control.onContainerClick($event)"
-        [horizontal]="labelLayout === 'horizontal'"
-        fd-form-item
-    >
+    <div (click)="control && control.onContainerClick($event)" [horizontal]="labelLayout === 'horizontal'" fd-form-item>
         <label [attr.for]="id" [inlineHelp]="!!hint" [required]="editable && required" fd-form-label>
             <span *ngIf="!noLabelLayout">{{ label }}</span>
 
@@ -31,9 +27,9 @@
             <ng-content></ng-content>
         </ng-template>
 
-        <fd-form-message *ngIf="hasErrors()" [type]="'error'">
+        <fd-form-message *ngIf="hasErrors()" type="error">
             <ng-container *ngIf="i18Strings">
-                <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: _control?.ngControl.errors }">
+                <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: control?.ngControl.errors }">
                 </ng-container>
             </ng-container>
         </fd-form-message>

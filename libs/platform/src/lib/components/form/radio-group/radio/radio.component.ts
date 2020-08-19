@@ -1,19 +1,24 @@
 import {
     Component,
-    ChangeDetectorRef,
     EventEmitter,
     Input,
     Output,
-    Optional,
-    Self,
     ViewChild,
     TemplateRef,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Optional,
+    Self,
+    SkipSelf,
+    Host
 } from '@angular/core';
+import { NgForm, NgControl } from '@angular/forms';
+
 import { RadioButtonComponent as CoreRadioButtonComponent, stateType } from '@fundamental-ngx/core';
-import { NgControl, NgForm } from '@angular/forms';
+
 import { BaseInput } from '../../base.input';
-import { Status } from '../../form-control';
+import { Status, FormFieldControl } from '../../form-control';
+import { FormField } from '../../form-group/form-field/form-field';
 
 let uniqueId = 0;
 
@@ -65,11 +70,14 @@ export class RadioButtonComponent extends BaseInput {
     state: Status | stateType = 'default';
 
     constructor(
-        protected _cd: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        cd: ChangeDetectorRef,
+        @Optional() @Self() ngForm: NgForm,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(_cd, ngControl, ngForm);
+        super(cd, ngForm, ngControl, formField, formControl);
+
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }

@@ -19,18 +19,22 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     Input,
     OnInit,
+    ViewChild,
+    ElementRef,
+    ChangeDetectorRef,
     Optional,
     Self,
-    ViewChild,
-    ElementRef
+    SkipSelf,
+    Host
 } from '@angular/core';
+import { NgForm, NgControl } from '@angular/forms';
+
 import { FormFieldControl, Status } from '../form-control';
-import { NgControl, NgForm } from '@angular/forms';
 import { BaseInput } from '../base.input';
+import { FormField } from '../form-group/form-field/form-field';
 
 const VALID_INPUT_TYPES = ['text', 'number', 'email', 'password'];
 
@@ -74,11 +78,13 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     }
 
     constructor(
-        protected _cd: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        cd: ChangeDetectorRef,
+        @Optional() @Self() ngForm: NgForm,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(_cd, ngControl, ngForm);
+        super(cd, ngForm, ngControl, formField, formControl);
     }
 
     ngOnInit(): void {

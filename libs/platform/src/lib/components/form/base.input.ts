@@ -8,16 +8,20 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
+    ViewChild,
     Optional,
     Self,
-    SimpleChanges,
-    ViewChild
+    SkipSelf,
+    Host
 } from '@angular/core';
-import { FormFieldControl, Status } from './form-control';
-import { BaseComponent } from '../base';
 import { ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
+
+import { BaseComponent } from '../base';
+
+import { FormFieldControl, Status } from './form-control';
+import { FormField } from './form-group/form-field/form-field';
 
 let randomId = 0;
 
@@ -57,8 +61,8 @@ export abstract class BaseInput extends BaseComponent
     }
 
     /**
-	 * readOnly Value to Mark component read only
-	 */
+     * readOnly Value to Mark component read only
+     */
     @Input()
     readonly: boolean;
 
@@ -123,6 +127,10 @@ export abstract class BaseInput extends BaseComponent
      */
     readonly stateChanges: Subject<any> = new Subject<any>();
 
+    readonly formField: FormField | null = null;
+
+    private _registered = false;
+
     // @formatter:off
     onChange = (_: any) => {};
     onTouched = () => {};
@@ -130,24 +138,40 @@ export abstract class BaseInput extends BaseComponent
     // @formatter:on
 
     constructor(
-        protected _cd: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        cd: ChangeDetectorRef,
+        @Optional() @Self() readonly ngForm: NgForm,
+        @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(_cd);
+        /**
+         * We do not use Injector.get() approach here because there is a bug
+         * with this signature https://github.com/angular/angular/issues/31776
+         * where "get()" method doesn't take into account "flag" option"
+         *
+         */
+        super(cd);
+
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
+
+        // We have to ignore "formField" if there is "formControl" wrapper
+        this.formField = formField && !formControl ? formField : null;
+    }
+
+    ngOnChanges(): void {
+        if (!this._registered && this.formField && this.ngControl) {
+            this._registered = true;
+            this.formField.registerFormFieldControl(this);
+        }
+        this.stateChanges.next('input: ngOnChanges');
     }
 
     ngOnInit(): void {
         if (!this.id || !this.name) {
             throw new Error('form input must have [id] and [name] attribute.');
         }
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        this.stateChanges.next('input: ngOnChanges');
     }
 
     /**
@@ -173,6 +197,9 @@ export abstract class BaseInput extends BaseComponent
     }
 
     ngOnDestroy(): void {
+        if (this.formField && this.ngControl) {
+            this.formField.unregisterFormFieldControl(this);
+        }
         this.stateChanges.complete();
         this._destroyed.next();
         this._destroyed.complete();

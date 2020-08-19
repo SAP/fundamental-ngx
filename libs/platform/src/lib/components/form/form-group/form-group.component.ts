@@ -17,7 +17,6 @@
  *
  */
 import {
-    AfterContentChecked,
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -36,9 +35,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlContainer, FormGroup } from '@angular/forms';
-import { FormFieldComponent } from './form-field/form-field.component';
 import { Subject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+
+// import { FormFieldComponent } from './form-field/form-field.component';
+import { FormField } from './form-field/form-field';
+import { FormGroupContainer } from './form-group';
+import { LabelLayout, HintPlacement, FormZone } from './form-options';
 
 /**
  *
@@ -119,9 +122,10 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
     templateUrl: 'form-group.component.html',
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [{ provide: FormGroupContainer, useExisting: FormGroupComponent }]
 })
-export class FormGroupComponent implements OnInit, AfterContentInit, AfterContentChecked, AfterViewInit, OnDestroy {
+export class FormGroupComponent implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy {
     @Input()
     id: string;
 
@@ -138,7 +142,7 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
     compact = false;
 
     @Input()
-    labelLayout: 'horizontal' | 'vertical' = 'vertical';
+    labelLayout: LabelLayout = 'vertical';
 
     @Input()
     formGroup: FormGroup;
@@ -168,11 +172,11 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
     i18Strings: TemplateRef<any>;
 
     @Input()
-    get hintPlacement(): 'left' | 'right' {
+    get hintPlacement(): HintPlacement {
         return this._hintPlacement;
     }
 
-    set hintPlacement(value: 'left' | 'right') {
+    set hintPlacement(value: HintPlacement) {
         this._hintPlacement = value;
         this._cd.markForCheck();
     }
@@ -216,12 +220,12 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
      *  We want to make sure that we dont include content and then try to somehow position it as it
      *  would lead to the UI where user can see elementing moving as you try to position it.
      */
-    @ContentChildren(FormFieldComponent, { descendants: true })
-    _fieldChildren: QueryList<FormFieldComponent>;
+    @ContentChildren(FormField, { descendants: true })
+    _formFieldChildren: QueryList<FormField>;
 
     private _useForm = false;
     private _multiLayout = false;
-    private _hintPlacement: 'left' | 'right' = 'right';
+    private _hintPlacement: HintPlacement = 'right';
 
     protected _destroyed = new Subject<void>();
 
@@ -235,16 +239,10 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         }
     }
 
-    ngAfterContentChecked(): void {
-        if (!this.validateFormFields()) {
-            throw new Error('fdp-form-group must contain a fdp-form-field.');
-        }
-    }
-
     ngAfterContentInit(): void {
         this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
-
         this.updateFieldByZone();
+        this.updateFormFieldsProperties();
         this._cd.markForCheck();
     }
 
@@ -257,17 +255,27 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         this._destroyed.complete();
     }
 
-    trackByFieldName(index, zoneField: GroupField): string|undefined {
-        return zoneField ? zoneField.name : undefined;
+    addFormField(formField: FormField): void {
+        this.updateFormFieldProperties(formField);
+
+        const control = formField.control?.ngControl?.control;
+        if (control) {
+            this.formGroup.addControl(formField.id, control);
+            // letting control to set value. when provided value is 'false'.
+            if (this.object) {
+                control.patchValue(this.object[formField.id]);
+            }
+        }
     }
 
-    /**
-     * Make sure we have expected childs.
-     */
-    private validateFormFields(): boolean {
-        return (
-            this._fieldChildren.filter((item) => !(item instanceof FormFieldComponent || item['renderer'])).length === 0
-        );
+    removeFormField(formField: FormField): void {
+        if (formField.control?.ngControl) {
+            this.formGroup.removeControl(formField.id);
+        }
+    }
+
+    trackByFieldName(index: number, zoneField: GroupField): string | undefined {
+        return zoneField ? zoneField.name : undefined;
     }
 
     /**
@@ -281,9 +289,8 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         const zLeft: Array<GroupField> = [];
         const zRight: Array<GroupField> = [];
 
-        this._fieldChildren.forEach((item, index) => {
-            this.updateFormProperties(item);
-            const zone = this._multiLayout ? item.zone || 'zLeft' : 'zLeft';
+        this._formFieldChildren.forEach((item, index) => {
+            const zone: FormZone = this._multiLayout ? item.zone || 'zLeft' : 'zLeft';
             const field = new GroupField(zone, item.id, item.rank || index, item.renderer, item.columns, item.fluid);
 
             switch (zone) {
@@ -314,22 +321,22 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterConten
         this.mZone = this.calculateMainZone(zLeft, zRight);
     }
 
+    /** @hidden */
+    private updateFormFieldsProperties(): void {
+        this._formFieldChildren.forEach((formField) => this.updateFormFieldProperties(formField));
+    }
+
     /**
      * Pass some global properties to each field. Even formGroup cna be inject directly inside form
      * field we are using here a setter method to initialize the
      *
      */
-    private updateFormProperties(item: FormFieldComponent): void {
-        item.hintPlacement = this._hintPlacement;
-        item.i18Strings = this.i18Strings;
-        item.formGroup = this.formGroup;
-        item.editable = this.editable;
-        item.noLabelLayout = this.noLabelLayout;
-        item.labelLayout = this.labelLayout;
-        // letting control to set value. when provided value is 'false'.
-        if (this.object) {
-            item.formControl.patchValue(this.object[item.id]);
-        }
+    private updateFormFieldProperties(formField: FormField): void {
+        formField.hintPlacement = this._hintPlacement;
+        formField.i18Strings = this.i18Strings;
+        formField.editable = this.editable;
+        formField.noLabelLayout = this.noLabelLayout;
+        formField.labelLayout = this.labelLayout;
     }
 
     /**

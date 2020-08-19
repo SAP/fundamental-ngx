@@ -1,9 +1,27 @@
-import { AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy, Component, EventEmitter } from '@angular/core';
-import { Input, NgZone, Optional, Output, Self, ViewChild, ViewEncapsulation } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    NgZone,
+    Output,
+    ViewChild,
+    ViewEncapsulation,
+    forwardRef,
+    Optional,
+    Self,
+    SkipSelf,
+    Host
+} from '@angular/core';
+import { NgForm, NgControl } from '@angular/forms';
+
 import { CheckboxComponent as CoreCheckboxComponent } from '@fundamental-ngx/core';
+
 import { BaseInput } from '../base.input';
 import { FormFieldControl, Status } from '../form-control';
+import { FormField } from '../form-group/form-field/form-field';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -32,7 +50,7 @@ let nextUniqueId = 0;
     templateUrl: './checkbox.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: CheckboxComponent, multi: true }]
+    providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxComponent), multi: true }]
 })
 export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /** set to true if binary checkbox */
@@ -134,12 +152,14 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     private _state: Status;
 
     constructor(
+        @Optional() @Self() ngForm: NgForm,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         protected _changeDetector: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm,
         private _ngZone: NgZone
     ) {
-        super(_changeDetector, ngControl, ngForm);
+        super(_changeDetector, ngForm, ngControl, formField, formControl);
         // necessary to fulfill baseInput check.
         // case: fdp-checkbox passed in decalarative fdp-checkbox-group without id and name.
         this.name = `fdp-checkbox-${nextUniqueId++}`;

@@ -12,25 +12,21 @@ import {
     OnInit,
     Output,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    Optional
 } from '@angular/core';
-import { InlineHelpComponent } from '@fundamental-ngx/core';
-import { FormFieldControl } from '../../form-control';
+import { FormControl, FormGroup, ValidatorFn, Validators, NgControl, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 
-export abstract class FormField {
-    i18Strings: TemplateRef<any>;
-    editable?: boolean;
-    noLabelLayout?: boolean;
-    labelLayout?: 'horizontal' | 'vertical';
-    formControl?: FormControl;
-}
+import { InlineHelpComponent } from '@fundamental-ngx/core';
 
-export type FormZone = 'zTop' | 'zBottom' | 'zLeft' | 'zRight';
-export type Column = 1 | 2 | 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+import { FormFieldControl } from '../../form-control';
+import { FormZone, Column, LabelLayout, HintPlacement } from '../form-options';
+import { FormGroupContainer } from '../form-group';
+
+import { FormField } from './form-field';
 
 /**
  * Form Field represent actual row and aggregates common behavior for the input field such as
@@ -43,7 +39,8 @@ export type Column = 1 | 2 | 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
     selector: 'fdp-form-field',
     templateUrl: 'form-field.component.html',
     styleUrls: ['./form-field.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: FormField, useExisting: FormFieldComponent }]
 })
 export class FormFieldComponent
     implements FormField, AfterContentInit, AfterContentChecked, AfterViewInit, OnDestroy, OnInit {
@@ -57,13 +54,13 @@ export class FormFieldComponent
     zone: FormZone;
 
     @Input()
-    hintPlacement: 'left' | 'right' = 'right';
+    hintPlacement: HintPlacement = 'right';
 
     @Input()
     hint: string;
 
     @Input()
-    labelLayout: 'horizontal' | 'vertical' = 'vertical';
+    labelLayout: LabelLayout = 'vertical';
 
     @Input()
     noLabelLayout = false;
@@ -95,21 +92,6 @@ export class FormFieldComponent
      */
     @Input()
     i18Strings: TemplateRef<any>;
-
-    /**
-     * When used as standalone without form-group you can set FormGroup, otherwise it is set from
-     * parent
-     */
-    @Input()
-    get formGroup(): FormGroup {
-        return this._formGroup;
-    }
-
-    set formGroup(value: FormGroup) {
-        this._formGroup = value;
-        this.initFormControl();
-        this._cd.markForCheck();
-    }
 
     @Input()
     get required(): boolean {
@@ -160,18 +142,26 @@ export class FormFieldComponent
     @ContentChild(InlineHelpComponent, { static: false })
     _hintChild: InlineHelpComponent;
 
-    @ContentChild(FormFieldControl, { static: false })
-    _control: FormFieldControl<any>;
+    /**
+     * @hidden
+     * Child FormFieldControl
+     */
+    control: FormFieldControl<any>;
+
+    /**
+     * @hidden
+     * Optional FormControl
+     */
+    public formControl: FormControl;
 
     protected _columns: Column = 6;
     protected _editable = true;
     protected _formGroup: FormGroup;
     protected _required = false;
 
-    formControl: FormControl;
     protected _destroyed = new Subject<void>();
 
-    constructor(private _cd: ChangeDetectorRef) {
+    constructor(private _cd: ChangeDetectorRef, @Optional() private formGroupContainer: FormGroupContainer) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
     }
@@ -191,36 +181,12 @@ export class FormFieldComponent
     }
 
     ngAfterContentInit(): void {
-        // this.validateFieldControlComponent();
-
-        if (this._control && this._control.stateChanges) {
-            this._control.stateChanges.pipe(startWith(null)).subscribe((s) => {
-                this.updateControlProperties();
-                // need to call explicitly detectChanges() instead of markForCheck before the
-                // modified validation state of the control passes over checked phase
-                this.onChange.emit('stateChanges');
-                this._cd.detectChanges();
-            });
-        }
-
-        // Refresh UI when value changes
-        if (this._control && this._control.ngControl && this._control.ngControl.valueChanges) {
-            this._control.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe((v) => {
-                // this.onChange.emit('valueChangess');
-                this._cd.markForCheck();
-            });
-        }
-
-        if (this.required) {
-            this.validators.push(Validators.required);
-        }
         this._cd.markForCheck();
     }
 
     ngAfterViewInit(): void {
+        // this.updateControlProperties();
         this.validateErrorHandler();
-        this.initFormControl();
-        this.updateControlProperties();
         this._cd.detectChanges();
     }
 
@@ -230,21 +196,59 @@ export class FormFieldComponent
     }
 
     hasErrors(): boolean {
-        return this._editable && this._control && this._control.status === 'error';
+        return this._editable && this.control?.status === 'error';
+    }
+
+    registerFormFieldControl(formFieldControl: FormFieldControl<any>): void {
+        if (this.control) {
+            this.unregisterFormFieldControl(this.control);
+        }
+
+        this.control = formFieldControl;
+
+        formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed)).subscribe((s) => {
+            this.updateControlProperties();
+            // need to call explicitly detectChanges() instead of markForCheck before the
+            // modified validation state of the control passes over checked phase
+            this.onChange.emit('stateChanges');
+            this._cd.detectChanges();
+        });
+
+        // Refresh UI when value changes
+        if (formFieldControl?.ngControl) {
+            formFieldControl.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
+                // this.onChange.emit('valueChangess');
+                this._cd.markForCheck();
+            });
+        }
+
+        this.attachFormControl(formFieldControl.ngControl.control);
+
+        this._cd.markForCheck();
+    }
+
+    unregisterFormFieldControl(formFieldControl: FormFieldControl<any>): void {
+        if (formFieldControl !== this.control) {
+            return;
+        }
+
+        this.control = null;
+
+        this.detachFormControl();
     }
 
     private validateFieldControlComponent(): void {
-        if (!this._control) {
+        if (!this.control) {
             throw new Error('fdp-form-field must contain component implemented FormFieldControl.');
         }
 
-        if (this._control.ngControl && !this.id) {
+        if (this.control.ngControl && !this.id) {
             throw new Error('fdp-form-field must contain [id] binding.');
         }
     }
 
     private validateErrorHandler(): void {
-        if (this._editable && this._control && this.hasValidators() && !this.i18Strings) {
+        if (this._editable && this.control && this.hasValidators() && !this.i18Strings) {
             throw new Error('Validation strings are required for the any provided validations.');
         }
     }
@@ -253,20 +257,33 @@ export class FormFieldComponent
         return this.validators && this.validators.length > 1;
     }
 
-    private initFormControl(): void {
-        if (this._control && this._control.ngControl && this._control.ngControl.control) {
-            if (this.required) {
-                this.validators.push(Validators.required);
-            }
+    private attachFormControl(control: AbstractControl): void {
+        if (!control) {
+            return;
+        }
 
-            // if form control is disabled, in reactive form approach
-            if (this.disabled) {
-                this._control.ngControl.control.disable();
-            }
+        if (this.required && !this.validators.includes(Validators.required)) {
+            this.validators.push(Validators.required);
+        }
 
-            this.formGroup.addControl(this.id, this._control.ngControl.control);
-            this._control.ngControl.control.setValidators(Validators.compose(this.validators));
-            this._control.ngControl.control.updateValueAndValidity();
+        // if form control is disabled, in reactive form approach
+        if (this.disabled) {
+            control.disable();
+        }
+
+        Promise.resolve().then(() => {
+            control.setValidators(Validators.compose(this.validators));
+            control.updateValueAndValidity({ emitEvent: false });
+        });
+
+        if (this.formGroupContainer) {
+            this.formGroupContainer.addFormField(this);
+        }
+    }
+
+    private detachFormControl(): void {
+        if (this.formGroupContainer) {
+            this.formGroupContainer.removeFormField(this);
         }
     }
 
@@ -277,9 +294,9 @@ export class FormFieldComponent
      *  Todo: use more elegant way to set these properties.
      */
     private updateControlProperties(): void {
-        if (this._control && this._editable) {
-            this._control.id = this.id;
-            this._control.placeholder = this.placeholder;
+        if (this.control && this._editable) {
+            this.control.id = this.id;
+            this.control.placeholder = this.placeholder;
         }
     }
 }
