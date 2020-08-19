@@ -2,41 +2,41 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TokenComponent } from './token.component';
 
-describe( 'TokenComponent', () => {
-  let component: TokenComponent;
-  let fixture: ComponentFixture<TokenComponent>;
+describe('TokenComponent', () => {
+    let component: TokenComponent;
+    let fixture: ComponentFixture<TokenComponent>;
 
-  beforeEach( async( () => {
-    TestBed.configureTestingModule( {
-      declarations: [ TokenComponent ]
-    } ).compileComponents();
-  } ) );
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TokenComponent]
+        }).compileComponents();
+    }));
 
-  beforeEach( () => {
-    fixture = TestBed.createComponent( TokenComponent );
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  } );
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TokenComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it( 'should create', () => {
-    expect( component ).toBeTruthy();
-  } );
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 
-  it( 'should not fire onCloseClick when clicking text', () => {
-    spyOn( component.onCloseClick, 'emit' );
-    const content = fixture.nativeElement.querySelector( '.fd-token__text' );
-    content.click();
+    it('should not fire onCloseClick when clicking text', () => {
+        spyOn(component.onCloseClick, 'emit');
+        const content = fixture.nativeElement.querySelector('.fd-token__text');
+        content.click();
 
-    fixture.detectChanges();
-    expect( component.onCloseClick.emit ).not.toHaveBeenCalled();
-  } );
+        fixture.detectChanges();
+        expect(component.onCloseClick.emit).not.toHaveBeenCalled();
+    });
 
-  it( 'should fire onCloseClick when clicking x', () => {
-    spyOn( component.onCloseClick, 'emit' );
-    const content = fixture.nativeElement.querySelector( '.fd-token__close' );
-    content.click();
+    it('should fire onCloseClick when clicking x', () => {
+        spyOn(component.onCloseClick, 'emit');
+        const content = fixture.nativeElement.querySelector('.fd-token__close');
+        content.click();
 
-    fixture.detectChanges();
-    expect( component.onCloseClick.emit ).toHaveBeenCalled();
-  } );
-} );
+        fixture.detectChanges();
+        expect(component.onCloseClick.emit).toHaveBeenCalled();
+    });
+});

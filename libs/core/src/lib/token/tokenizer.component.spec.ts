@@ -111,36 +111,36 @@ describe('TokenizerComponent', () => {
         });
         component.ngAfterViewChecked();
         (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
-        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token')  as HTMLElement).dispatchEvent(event);
 
         expect(component.tokenList.first.selected).toBeTruthy();
         expect(component.tokenList.last.selected).toBeTruthy();
     });
 
     it('should deselect using control or command', () => {
-        component.ngAfterViewChecked();
-        const event = new MouseEvent('click', {
-            'ctrlKey': true
-        });
-        (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
-        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
-        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+      component.ngAfterViewChecked();
+      const event = new MouseEvent('click', {
+        'ctrlKey': true
+      });
+      (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+      (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token')  as HTMLElement).dispatchEvent(event);
+      (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token')  as HTMLElement).dispatchEvent(event);
 
-        expect(component.tokenList.first.selected).toBeTruthy();
-        expect(component.tokenList.last.selected).toBeFalsy();
+      expect(component.tokenList.first.selected).toBeTruthy();
+      expect(component.tokenList.last.selected).toBeFalsy();
     });
 
     it('should select using shift', () => {
-        component.ngAfterViewChecked();
-        const event = new MouseEvent('click', {
-            'ctrlKey': false,
-            'shiftKey': true
-        });
-        (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
-        // (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token')  as HTMLElement).dispatchEvent(event);
+      component.ngAfterViewChecked();
+      const event = new MouseEvent('click', {
+        'ctrlKey': false,
+        'shiftKey': true
+      });
+      (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+      // (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token')  as HTMLElement).dispatchEvent(event);
 
-        expect(component.tokenList.first.selected).toBeTruthy();
-        // expect(component.tokenList.last.selected).toBeTruthy();
+      expect(component.tokenList.first.selected).toBeTruthy();
+      // expect(component.tokenList.last.selected).toBeTruthy();
     });
 
     it('should focus a token element', async () => {
@@ -255,7 +255,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should get the hidden cozy token count AfterViewChecked', async () => {
-        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ left: 1 });
+        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({left: 1});
         component.tokenList.forEach((token) => {
             spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').and.returnValue({ right: 0 });
         });
