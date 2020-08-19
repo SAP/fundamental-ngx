@@ -31,6 +31,7 @@ import { ListNavigationExampleComponent } from './examples/list-navigation-examp
 import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/list-keyboard-example.component';
 import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
 import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -55,7 +56,8 @@ const routes: Routes = [
         DragAndDropModule,
         BusyIndicatorModule,
         ToolbarModule,
-        InputGroupModule
+        InputGroupModule,
+        SharedDocumentationModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -18,9 +18,12 @@
     <button fd-button compact="true" glyph="sort-descending" (click)="changeSort(false)"></button>
 </fd-toolbar>
 <ul fd-list>
-    <li fd-list-item *ngFor="let item of displayedItems | sortBy : ascendingSort ">
+    <li fd-list-item *ngFor="let item of displayedItems | sortBy : ascendingSort ; let ind = index">
         <span fd-list-title>
             {{ item }}
+        </span>
+        <span fd-list-secondary>
+            <button fd-button [compact]="true" [glyph]="'delete'" (click)="removeItem(ind)"></button>
         </span>
     </li>
     <li fd-list-item [noData]="true" *ngIf="!displayedItems || displayedItems.length === 0">

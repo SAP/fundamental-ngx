@@ -26,6 +26,10 @@ export class ListDataExampleComponent implements OnInit {
         this.handleSearchTermChange('');
     }
 
+    removeItem(index: number): void {
+        this.displayedItems.splice(index, 1);
+    }
+
     handleSearchTermChange(searchTerm: string): void {
         this.searchTerm = searchTerm;
         this.displayedItems = this.items.filter(item => item.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
