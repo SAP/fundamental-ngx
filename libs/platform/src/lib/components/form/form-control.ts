@@ -1,8 +1,7 @@
 import { Observable } from 'rxjs';
 import { NgControl } from '@angular/forms';
 
-export type ContentDensity = 'compact' | 'cozy';
-export type Status = 'success' | 'error' | 'warning' | 'default' | 'information';
+import { ContentDensity, Status } from './form-options';
 
 export abstract class FormFieldControl<T> {
     /**
@@ -62,3 +61,5 @@ export abstract class FormFieldControl<T> {
      */
     abstract onContainerClick(event: MouseEvent): void;
 }
+
+export { Status, ContentDensity };

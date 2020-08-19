@@ -34,7 +34,7 @@ import { NgForm, NgControl } from '@angular/forms';
 
 import { FormFieldControl, Status } from '../form-control';
 import { BaseInput } from '../base.input';
-import { FormField } from '../form-group/form-field/form-field';
+import { FormField } from '../form-field';
 
 const VALID_INPUT_TYPES = ['text', 'number', 'email', 'password'];
 

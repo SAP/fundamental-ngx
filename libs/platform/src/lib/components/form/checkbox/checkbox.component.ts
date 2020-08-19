@@ -21,7 +21,7 @@ import { CheckboxComponent as CoreCheckboxComponent } from '@fundamental-ngx/cor
 
 import { BaseInput } from '../base.input';
 import { FormFieldControl, Status } from '../form-control';
-import { FormField } from '../form-group/form-field/form-field';
+import { FormField } from '../form-field';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {

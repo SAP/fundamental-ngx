@@ -21,7 +21,7 @@ import { Subject } from 'rxjs';
 import { BaseComponent } from '../base';
 
 import { FormFieldControl, Status } from './form-control';
-import { FormField } from './form-group/form-field/form-field';
+import { FormField } from './form-field';
 
 let randomId = 0;
 

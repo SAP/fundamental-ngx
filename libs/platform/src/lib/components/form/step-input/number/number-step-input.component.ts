@@ -20,7 +20,7 @@ import { RtlService } from '@fundamental-ngx/core';
 import { FormFieldControl } from '../../form-control';
 import { StepInputComponent, StepInputChangeEvent } from '../base.step-input';
 import { StepInputConfig } from '../step-input.config';
-import { FormField } from '../../form-group/form-field/form-field';
+import { FormField } from '../../form-field';
 
 /** Change event object emitted by Platform Number Step Input. */
 export class NumberStepInputChangeEvent extends StepInputChangeEvent<NumberStepInputComponent, number> {}

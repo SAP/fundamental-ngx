@@ -13,9 +13,11 @@ import {
     Output,
     TemplateRef,
     ViewChild,
-    Optional
+    Optional,
+    Provider,
+    forwardRef
 } from '@angular/core';
-import { FormControl, FormGroup, ValidatorFn, Validators, NgControl, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
@@ -23,10 +25,14 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import { InlineHelpComponent } from '@fundamental-ngx/core';
 
 import { FormFieldControl } from '../../form-control';
-import { FormZone, Column, LabelLayout, HintPlacement } from '../form-options';
-import { FormGroupContainer } from '../form-group';
+import { FormField } from '../../form-field';
+import { FormZone, Column, LabelLayout, HintPlacement } from '../../form-options';
+import { FormGroupContainer } from '../../form-group';
 
-import { FormField } from './form-field';
+export const formFieldProvider: Provider = {
+    provide: FormField,
+    useExisting: forwardRef(() => FormFieldComponent)
+};
 
 /**
  * Form Field represent actual row and aggregates common behavior for the input field such as
@@ -40,7 +46,7 @@ import { FormField } from './form-field';
     templateUrl: 'form-field.component.html',
     styleUrls: ['./form-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormField, useExisting: FormFieldComponent }]
+    providers: [formFieldProvider]
 })
 export class FormFieldComponent
     implements FormField, AfterContentInit, AfterContentChecked, AfterViewInit, OnDestroy, OnInit {
@@ -143,7 +149,6 @@ export class FormFieldComponent
     _hintChild: InlineHelpComponent;
 
     /**
-     * @hidden
      * Child FormFieldControl
      */
     control: FormFieldControl<any>;
@@ -159,13 +164,16 @@ export class FormFieldComponent
     protected _formGroup: FormGroup;
     protected _required = false;
 
+    /** @hidden */
     protected _destroyed = new Subject<void>();
 
+    /** @hidden */
     constructor(private _cd: ChangeDetectorRef, @Optional() private formGroupContainer: FormGroupContainer) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
     }
 
+    /** @hidden */
     ngOnInit(): void {
         if (this.columns && (this.columns < 1 || this.columns > 12)) {
             throw new Error('[columns] accepts numbers between 1 - 12');
@@ -176,29 +184,38 @@ export class FormFieldComponent
         }
     }
 
+    /** @hidden */
     ngAfterContentChecked(): void {
         // this.validateFieldControlComponent();
     }
 
+    /** @hidden */
     ngAfterContentInit(): void {
         this._cd.markForCheck();
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
-        // this.updateControlProperties();
+        this.updateControlProperties();
         this.validateErrorHandler();
         this._cd.detectChanges();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
     }
 
+    /** @hidden */
     hasErrors(): boolean {
         return this._editable && this.control?.status === 'error';
     }
 
+    /**
+     * Register underlying form control
+     * @param formFieldControl
+     */
     registerFormFieldControl(formFieldControl: FormFieldControl<any>): void {
         if (this.control) {
             this.unregisterFormFieldControl(this.control);
@@ -227,6 +244,10 @@ export class FormFieldComponent
         this._cd.markForCheck();
     }
 
+    /**
+     * Unregister underlying form control
+     * @param formFieldControl
+     */
     unregisterFormFieldControl(formFieldControl: FormFieldControl<any>): void {
         if (formFieldControl !== this.control) {
             return;
@@ -237,6 +258,7 @@ export class FormFieldComponent
         this.detachFormControl();
     }
 
+    /** @hidden */
     private validateFieldControlComponent(): void {
         if (!this.control) {
             throw new Error('fdp-form-field must contain component implemented FormFieldControl.');
@@ -247,16 +269,19 @@ export class FormFieldComponent
         }
     }
 
+    /** @hidden */
     private validateErrorHandler(): void {
         if (this._editable && this.control && this.hasValidators() && !this.i18Strings) {
             throw new Error('Validation strings are required for the any provided validations.');
         }
     }
 
+    /** @hidden */
     private hasValidators(): boolean {
         return this.validators && this.validators.length > 1;
     }
 
+    /** @hidden */
     private attachFormControl(control: AbstractControl): void {
         if (!control) {
             return;
@@ -281,6 +306,7 @@ export class FormFieldComponent
         }
     }
 
+    /** @hidden */
     private detachFormControl(): void {
         if (this.formGroupContainer) {
             this.formGroupContainer.removeFormField(this);

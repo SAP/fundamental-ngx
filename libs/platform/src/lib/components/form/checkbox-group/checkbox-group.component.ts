@@ -21,7 +21,7 @@ import { CollectionBaseInput } from '../collection-base.input';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { PlatformCheckboxChange } from '../checkbox/checkbox.component';
 import { FormFieldControl } from '../form-control';
-import { FormField } from '../form-group/form-field/form-field';
+import { FormField } from '../form-field';
 
 /**
  * Checkbox group implementation based on the

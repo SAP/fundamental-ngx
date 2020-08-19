@@ -12,11 +12,11 @@ import {
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
 
-import { ContentDensity, FormFieldControl } from '../../form-control';
+import { FormFieldControl, ContentDensity } from '../../form-control';
 import { BaseInput } from '../../base.input';
+import { FormField } from '../../form-field';
 
 import { SwitchConfig } from './switch.config';
-import { FormField } from '../../form-group/form-field/form-field';
 
 /** Switch change event instance */
 export class SwitchChangeEvent {

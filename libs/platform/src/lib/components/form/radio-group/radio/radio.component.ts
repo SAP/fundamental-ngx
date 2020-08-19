@@ -18,7 +18,7 @@ import { RadioButtonComponent as CoreRadioButtonComponent, stateType } from '@fu
 
 import { BaseInput } from '../../base.input';
 import { Status, FormFieldControl } from '../../form-control';
-import { FormField } from '../../form-group/form-field/form-field';
+import { FormField } from '../../form-field';
 
 let uniqueId = 0;
 

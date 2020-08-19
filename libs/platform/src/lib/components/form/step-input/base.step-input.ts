@@ -9,7 +9,7 @@ import { BaseInput } from '../base.input';
 import { ContentDensity, FormFieldControl } from '../form-control';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
-import { FormField } from '../form-group/form-field/form-field';
+import { FormField } from '../form-field';
 
 /** Change event object emitted by Platform Step Input component */
 export abstract class StepInputChangeEvent<T extends StepInputComponent = StepInputComponent, K = number> {

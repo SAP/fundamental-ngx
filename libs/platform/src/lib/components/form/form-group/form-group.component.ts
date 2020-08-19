@@ -32,16 +32,22 @@ import {
     Output,
     QueryList,
     TemplateRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Provider,
+    forwardRef
 } from '@angular/core';
 import { ControlContainer, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-// import { FormFieldComponent } from './form-field/form-field.component';
-import { FormField } from './form-field/form-field';
-import { FormGroupContainer } from './form-group';
-import { LabelLayout, HintPlacement, FormZone } from './form-options';
+import { FormField } from '../form-field';
+import { FormGroupContainer } from '../form-group';
+import { LabelLayout, HintPlacement, FormZone } from '../form-options';
+
+export const formGroupProvider: Provider = {
+    provide: FormGroupContainer,
+    useExisting: forwardRef(() => FormGroupComponent)
+};
 
 /**
  *
@@ -123,7 +129,7 @@ import { LabelLayout, HintPlacement, FormZone } from './form-options';
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormGroupContainer, useExisting: FormGroupComponent }]
+    providers: [formGroupProvider]
 })
 export class FormGroupComponent implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy {
     @Input()

@@ -20,8 +20,9 @@ import { DELETE, BACKSPACE } from '@angular/cdk/keycodes';
 
 import { BaseInput } from '../base.input';
 import { FormFieldControl, Status, ContentDensity } from '../form-control';
+import { FormField } from '../form-field';
+
 import { TextAreaConfig } from './text-area.config';
-import { FormField } from '../form-group/form-field/form-field';
 
 const VALID_WRAP_TYPES = ['hard', 'soft', 'off'];
 

@@ -16,18 +16,18 @@ import {
     SkipSelf,
     Host
 } from '@angular/core';
+import { NgForm, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { ComboboxComponent as FdComboBoxComponent } from '@fundamental-ngx/core';
 
-import { FormFieldControl } from '../form-control';
-import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider, isDataSource } from '../../../domain/data-source';
 import { ArrayComboBoxDataSource } from '../../../domain/array-data-source';
+import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider, isDataSource } from '../../../domain/data-source';
 import { isJsObject } from '../../../utils/lang';
+import { FormFieldControl } from '../form-control';
 import { CollectionBaseInput } from '../collection-base.input';
-import { NgForm, NgControl } from '@angular/forms';
-import { FormField } from '../form-group/form-field/form-field';
+import { FormField } from '../form-field';
 
 type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | T[];
 
