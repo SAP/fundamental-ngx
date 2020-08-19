@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { boolean } from '@storybook/addon-knobs';
 
 interface ExampleRow {
     column1: any,

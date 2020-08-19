@@ -3,13 +3,16 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild, ContentChildren,
+    ContentChild,
+    ContentChildren,
     ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
-    Input, OnDestroy,
-    Output, QueryList,
+    Input,
+    OnDestroy,
+    Output,
+    QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { CheckboxComponent } from '../../checkbox/checkbox/checkbox.component';
@@ -75,10 +78,6 @@ export class ListItemComponent implements FocusableOption, AfterContentInit, OnD
     /** @hidden */
     @ContentChildren(ListLinkDirective)
     linkDirectives: QueryList<ListLinkDirective>;
-
-    /** @hidden
-     * Event thrown, when link component is
-     */
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();

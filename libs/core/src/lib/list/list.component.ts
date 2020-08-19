@@ -6,7 +6,8 @@ import {
     HostBinding,
     HostListener,
     Input,
-    OnDestroy, OnInit,
+    OnDestroy,
+    OnInit,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
@@ -104,21 +105,6 @@ export class ListComponent implements AfterContentInit, OnDestroy, OnInit {
     ) {}
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        if (this.enableKeyboardSupport && this._keyboardSupportService) {
-            if (KeyUtil.isKey(event, [' ', 'Enter'])) {
-                if (this._keyboardSupportService.keyManager && this._keyboardSupportService.keyManager.activeItem) {
-                    this._keyboardSupportService.keyManager.activeItem.click();
-                    event.preventDefault();
-                }
-            } else {
-                this._keyboardSupportService.onKeyDown(event)
-            }
-        }
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         this._keyboardSupportService.focusEscapeBeforeList = this.escapeBeforeListCallback;
         this._keyboardSupportService.focusEscapeAfterList = this.escapeAfterListCallback;
@@ -144,6 +130,22 @@ export class ListComponent implements AfterContentInit, OnDestroy, OnInit {
         this._keyboardSupportService.onDestroy$.complete();
     }
 
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keyDownHandler(event: KeyboardEvent): void {
+        if (this.enableKeyboardSupport && this._keyboardSupportService) {
+            if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+                if (this._keyboardSupportService.keyManager && this._keyboardSupportService.keyManager.activeItem) {
+                    this._keyboardSupportService.keyManager.activeItem.click();
+                    event.preventDefault();
+                }
+            } else {
+                this._keyboardSupportService.onKeyDown(event)
+            }
+        }
+    }
+
+    /** Set fake focus on element with passed index */
     setItemActive(index: number): void {
         this._keyboardSupportService.keyManager.setActiveItem(index);
     }

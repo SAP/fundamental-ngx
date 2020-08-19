@@ -1,4 +1,4 @@
-import { FocusKeyManager, FocusOrigin } from '@angular/cdk/a11y';
+import { FocusKeyManager } from '@angular/cdk/a11y';
 import { QueryList } from '@angular/core';
 import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-item.interface';
 import { merge, Subject } from 'rxjs';
@@ -20,8 +20,10 @@ export class KeyboardSupportService<T> {
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     private _keyManager: FocusKeyManager<T>;
 
+    /** @hidden */
     setKeyboardService(queryList: QueryList<KeyboardSupportItemInterface & T>, wrap?: boolean): void {
         this._keyManager = new FocusKeyManager(queryList).withWrap(wrap);
         queryList.changes.pipe(
@@ -30,10 +32,12 @@ export class KeyboardSupportService<T> {
         ).subscribe(() => this._refreshEscapeLogic(queryList));
     }
 
+    /** @hidden */
     onKeyDown(event: KeyboardEvent): void {
         this._keyManager.onKeydown(event);
     }
 
+    /** @hidden */
     get keyManager(): FocusKeyManager<T> {
         return this._keyManager;
     }

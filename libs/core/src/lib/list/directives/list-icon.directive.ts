@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '../../utils/public_api';
+import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 
 @Directive({
   selector: '[fdListIcon], [fd-list-icon]'
