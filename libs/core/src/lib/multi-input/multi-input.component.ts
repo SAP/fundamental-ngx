@@ -232,7 +232,7 @@ export class MultiInputComponent implements
         private _changeDetRef: ChangeDetectorRef,
         private _menuKeyboardService: MenuKeyboardService,
         private _dynamicComponentService: DynamicComponentService
-    ) {}
+    ) { }
 
     /** @hidden */
     ngOnInit(): void {
@@ -348,18 +348,18 @@ export class MultiInputComponent implements
         if (checked) {
             this.selected.push(value);
         } else {
-          // first remove the token whose close button was explicitly clicked
-          this.selected.splice(this.selected.indexOf(value), 1);
-          // then look through the tokenizer list for any tokens that are marked for deletion and remove those
-          this.tokenizer.tokenList.forEach(token => {
-              if (token.selected) {
-                 this.selected.forEach((selectedToken, i) => {
-                     if (token.elementRef.nativeElement.innerText === selectedToken) {
-                         this.selected.splice(i, 1);
-                     }
-                 })
-              }
-          })
+            // first remove the token whose close button was explicitly clicked
+            this.selected.splice(this.selected.indexOf(value), 1);
+            // then look through the tokenizer list for any tokens that are marked for deletion and remove those
+            this.tokenizer.tokenList.forEach(token => {
+                if (token.selected) {
+                    this.selected.forEach((selectedToken, i) => {
+                        if (token.elementRef.nativeElement.innerText === selectedToken) {
+                            this.selected.splice(i, 1);
+                        }
+                    })
+                }
+            })
         }
 
         // Handle popover placement update

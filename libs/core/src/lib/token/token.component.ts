@@ -76,5 +76,5 @@ export class TokenComponent {
         this.onTokenClick.emit(event);
     }
 
-    constructor(public elementRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
+    constructor(public elementRef: ElementRef, private _cdRef: ChangeDetectorRef) { }
 }
