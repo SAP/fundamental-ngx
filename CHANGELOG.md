@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.12...v0.21.1-rc.13) (2020-08-19)
+
+
+### Bug Fixes
+
+* (core) fix class binding for input-group ([#3050](https://github.com/SAP/fundamental-ngx/issues/3050)) ([e1289f5](https://github.com/SAP/fundamental-ngx/commit/e1289f5a39144e0ff4cab52433aa0457b2890fb5))
+
 ### [0.21.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.11...v0.21.1-rc.12) (2020-08-19)
 
 
