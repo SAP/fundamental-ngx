@@ -4,6 +4,7 @@ import { MenuComponent } from '../menu.component';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { isTemplateExpression } from 'typescript';
 
 interface MenuNode {
     item: MenuItemComponent;
@@ -132,6 +133,14 @@ export class MenuService {
         this._removeActiveSibling(menuItem);
         this.activeNodePath.push(menuNode);
         menuNode.item.setSelected(true);
+        this.sendSelected(menuNode.item)
+    }
+
+    /** @hidden Sends current selected menu item*/
+    sendSelected(menuItem: MenuItemComponent): void {
+        if (!menuItem.submenu) {
+            this._emitSelected(menuItem.menuItemTitle.title)
+        }
     }
 
     /** @hidden Removes given element and all its successors from the Active Node Path and setts as inactive*/
@@ -257,6 +266,11 @@ export class MenuService {
         this.menu.activePath.emit(
             this.activeNodePath.map(node => node.item)
         );
+    }
+
+    /** @hidden Emits an array of the selected menu item */
+    private _emitSelected(title: string): void {
+        this.menu.selected.emit(title);
     }
 
     /** @hidden Depending on direction returns closest enabled sibling of given node */

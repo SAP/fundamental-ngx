@@ -129,6 +129,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     @Output()
     readonly activePath: EventEmitter<MenuItemComponent[]> = new EventEmitter<MenuItemComponent[]>();
 
+    /** Emits array of active menu items */
+    @Output()
+    readonly selected: EventEmitter<string> = new EventEmitter<string>();
+
     /** @hidden Emits event when the menu is opened/closed */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -142,11 +146,11 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     menuWithPopover: TemplateRef<any>;
 
     /** @hidden Reference  the container where component views are instantiated */
-    @ViewChild('viewContainer', {read: ViewContainerRef})
+    @ViewChild('viewContainer', { read: ViewContainerRef })
     viewContainer: ViewContainerRef;
 
     /** @hidden Reference to all menu Items */
-    @ContentChildren(MenuItemComponent, {descendants: true})
+    @ContentChildren(MenuItemComponent, { descendants: true })
     menuItems: QueryList<MenuItemComponent>;
 
     /** Whether use menu in mobile mode */
@@ -168,13 +172,13 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
     constructor(public elementRef: ElementRef,
-                @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
-                private _rendered: Renderer2,
-                private _menuService: MenuService,
-                private _changeDetectorRef: ChangeDetectorRef,
-                private _componentFactoryResolver: ComponentFactoryResolver,
-                @Optional() private _rtlService: RtlService,
-                @Optional() private _dynamicComponentService: DynamicComponentService) {
+        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
+        private _rendered: Renderer2,
+        private _menuService: MenuService,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _componentFactoryResolver: ComponentFactoryResolver,
+        @Optional() private _rtlService: RtlService,
+        @Optional() private _dynamicComponentService: DynamicComponentService) {
     }
 
     /** @hidden */
@@ -187,6 +191,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     ngAfterViewInit(): void {
         this._listenOnMenuMode();
         this._menuService.setMenuMode(this.mobile);
+        this._menuService.sendSelected(this.menuItems.first);
     }
 
     /** @hidden */
@@ -283,8 +288,9 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
                 MenuMobileComponent,
                 { container: this.elementRef.nativeElement },
                 {
-                    injector: Injector.create({providers: [{ provide: MENU_COMPONENT, useValue: this }]}),
-                    services: [this._menuService, this._rtlService] }
+                    injector: Injector.create({ providers: [{ provide: MENU_COMPONENT, useValue: this }] }),
+                    services: [this._menuService, this._rtlService]
+                }
             )
     }
 

@@ -6,11 +6,14 @@ import {
     Input,
     Output,
     TemplateRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    AfterContentInit,
+    ChangeDetectorRef
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { ButtonType } from '../button/button.component';
 import { MenuComponent } from '../menu/menu.component';
+import { takeUntil } from 'rxjs/operators';
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
@@ -40,7 +43,7 @@ import { MenuComponent } from '../menu/menu.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent {
+export class SplitButtonComponent implements AfterContentInit {
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -55,8 +58,15 @@ export class SplitButtonComponent {
     disabled: boolean;
 
     /** The Title for main  action button */
-    @Input()
-    mainActionTitle: string;
+    private _mainActionTitle: string;
+
+    set mainActionTitle(title: string) {
+        this._mainActionTitle = title;
+    }
+
+    get mainActionTitle(): string {
+        return this._mainActionTitle;
+    }
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
@@ -79,9 +89,18 @@ export class SplitButtonComponent {
     @ContentChild(MenuComponent)
     menu: MenuComponent;
 
+    constructor(private _changeDetectorRef: ChangeDetectorRef) { }
+
     /** @hidden Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {
         this.primaryButtonClicked.emit(event);
         event.stopPropagation();
+    }
+
+    ngAfterContentInit(): void {
+        this.menu.selected.subscribe(value => {
+            this.mainActionTitle = value;
+            this._changeDetectorRef.detectChanges();
+        })
     }
 }

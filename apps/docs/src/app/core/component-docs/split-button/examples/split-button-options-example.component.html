@@ -1,64 +1,58 @@
-<fd-split-button [mainActionTitle]="'Disabled Button'" [disabled]="true" (primaryButtonClicked)="primaryButtonClicked()">
+<fd-split-button [disabled]="true" (primaryButtonClicked)="primaryButtonClicked()">
     <fd-menu>
         <li fd-menu-item (click)="itemClicked()">
             <div fd-menu-interactive>
-                <span fd-menu-title>Option 1</span>
+                <span fd-menu-title>Disabled 1</span>
             </div>
         </li>
         <li fd-menu-item (click)="itemClicked()">
             <div fd-menu-interactive>
-                <span fd-menu-title>Option 2</span>
+                <span fd-menu-title>Disabled 2</span>
             </div>
         </li>
     </fd-menu>
 </fd-split-button>
 
-<fd-split-button [mainActionTitle]="'Default Button'" (primaryButtonClicked)="primaryButtonClicked()">
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()">
     <fd-menu>
         <li fd-menu-item (click)="itemClicked()">
             <div fd-menu-interactive>
-                <span fd-menu-title>Option 1</span>
+                <span fd-menu-title>Default Button 1</span>
             </div>
         </li>
         <li fd-menu-item (click)="itemClicked()">
             <div fd-menu-interactive>
-                <span fd-menu-title>Option 1</span>
+                <span fd-menu-title>Default Button 1</span>
             </div>
         </li>
     </fd-menu>
 </fd-split-button>
 
-<fd-split-button
-    [fdType]="'emphasized'"
-    [mainActionTitle]="'Emphasized Button'"
-    (primaryButtonClicked)="primaryButtonClicked()">
+<fd-split-button [fdType]="'emphasized'" (primaryButtonClicked)="primaryButtonClicked()">
     <fd-menu>
         <li fd-menu-item (click)="itemClicked()">
             <div fd-menu-interactive>
-                <span fd-menu-title>Option 1</span>
+                <span fd-menu-title>Emphasized Button 1</span>
             </div>
         </li>
         <li fd-menu-item (click)="itemClicked()">
             <div fd-menu-interactive>
-                <span fd-menu-title>Option 2</span>
+                <span fd-menu-title>Emphasized Button 2</span>
             </div>
         </li>
     </fd-menu>
 </fd-split-button>
 
-<fd-split-button
-    [fdType]="'transparent'"
-    [mainActionTitle]="'Light Button'"
-    (primaryButtonClicked)="primaryButtonClicked()">
+<fd-split-button [fdType]="'transparent'" (primaryButtonClicked)="primaryButtonClicked()">
     <fd-menu>
         <li fd-menu-item (click)="itemClicked()">
             <div fd-menu-interactive>
-                <span fd-menu-title>Option 1</span>
+                <span fd-menu-title>Light Button 1</span>
             </div>
         </li>
         <li fd-menu-item (click)="itemClicked()">
             <div fd-menu-interactive>
-                <span fd-menu-title>Option 2</span>
+                <span fd-menu-title>Light Button 2</span>
             </div>
         </li>
     </fd-menu>
