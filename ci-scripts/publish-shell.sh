@@ -10,9 +10,10 @@ rm -Rf ./dist
 PACKAGES=(app-shell)
 CURRENT_BRANCH=appshell
 
- npm run build-pack-library
+npm run build-pack-library
 
- cd ./dist/libs/
+cd ./dist/libs/
+NPM_BIN="$(which npm)"
 
 NEW_VERSION=$(node -p "require('./app-shell/package.json').version")
 echo $NEW_VERSION
@@ -25,11 +26,11 @@ for P in ${PACKAGES[@]};
 do
      echo publish "@fundamental-ngx/${P}"
     cd ${P}
-    npm publish --access public
+    $NPM_BIN publish --access public
     cd ..
 done
 
 
-
+cd ../../
 
 

@@ -24,10 +24,10 @@ jobs:
     - stage: Release
       before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
       script:
-        - echo "######AAAAAAaa Deploying.and publishing..."
         - git checkout appshell
         - bash ./ci-scripts/setup-npm.sh
         - bash ./ci-scripts/publish-shell.sh
+        skip_cleanup: true
 notifications:
   email:
     on_failure: always
