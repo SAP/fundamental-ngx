@@ -21,6 +21,7 @@ import { ListLinkDirective } from '../directives/list-link.directive';
 import { FocusableOption } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
+import { KeyUtil } from '../../..';
 
 /**
  * The component that represents a list item.
@@ -85,7 +86,8 @@ export class ListItemComponent implements FocusableOption, AfterContentInit, OnD
     constructor(
         public elementRef: ElementRef,
         private _changeDet: ChangeDetectorRef
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -95,7 +97,7 @@ export class ListItemComponent implements FocusableOption, AfterContentInit, OnD
         ).subscribe(() => {
             this.link = this.linkDirectives.length > 0;
             this._changeDet.detectChanges();
-        })
+        });
     }
 
     /** @hidden */
@@ -107,6 +109,11 @@ export class ListItemComponent implements FocusableOption, AfterContentInit, OnD
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKey(event, [' ', 'Enter']) && this.checkbox) {
+            this.checkbox.nextValue();
+            event.stopPropagation();
+            event.preventDefault();
+        }
         this.keyDown.emit(event);
     }
 

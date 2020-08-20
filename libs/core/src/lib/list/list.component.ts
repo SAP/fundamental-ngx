@@ -138,7 +138,6 @@ export class ListComponent implements AfterContentInit, OnDestroy, OnInit {
                 if (this._keyboardSupportService.keyManager.activeItem) {
                     this._keyboardSupportService.keyManager.activeItem.click();
                 }
-                event.stopPropagation();
             } else {
                 this._keyboardSupportService.onKeyDown(event)
             }
