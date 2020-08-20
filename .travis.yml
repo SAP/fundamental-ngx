@@ -28,7 +28,6 @@ jobs:
         - git checkout appshell
         - bash ./ci-scripts/setup-npm.sh
         - bash ./ci-scripts/publish-shell.sh
-        skip_cleanup: true
 notifications:
   email:
     on_failure: always
