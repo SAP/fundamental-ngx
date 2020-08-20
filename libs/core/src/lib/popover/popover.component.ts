@@ -61,7 +61,7 @@ export class PopoverComponent {
 
     /** The element to which the popover should be appended. */
     @Input()
-    appendTo: HTMLElement | 'body' = 'body';
+    appendTo: HTMLElement | 'body';
 
     /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
