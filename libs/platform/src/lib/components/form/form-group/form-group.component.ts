@@ -115,7 +115,7 @@ export const formGroupProvider: Provider = {
  * [Field E]
  * [Field B]
  *
- * Fields nicely merge together. they dont wrap.
+ * Fields nicely merge together. they don't wrap.
  *
  *
  * Besides this layout support it also wraps form functionality and it can work with FormGroup.
@@ -212,7 +212,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     onSubmit: EventEmitter<any> = new EventEmitter<any>();
 
     /**
-     * Cached fields so we dont have recalculate them every time
+     * Cached fields so we don't have recalculate them every time
      */
     mZone: Array<GroupField>;
     tZone: Array<GroupField>;
@@ -223,7 +223,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      *  able to add number of FormFields, and based on given configuration (zone, rank) render them
      *  under correct zone  (top, bottom, left, right).
      *
-     *  We want to make sure that we dont include content and then try to somehow position it as it
+     *  We want to make sure that we don't include content and then try to somehow position it as it
      *  would lead to the UI where user can see elementing moving as you try to position it.
      */
     @ContentChildren(FormField)

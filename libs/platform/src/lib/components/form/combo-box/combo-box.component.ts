@@ -101,8 +101,8 @@ export class ComboBoxComponent extends CollectionBaseInput implements OnInit, On
 
     constructor(
         cd: ChangeDetectorRef,
-        @Optional() @Self() ngForm: NgForm,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         /**
@@ -112,7 +112,7 @@ export class ComboBoxComponent extends CollectionBaseInput implements OnInit, On
         @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         private _renderer: Renderer2
     ) {
-        super(cd, ngForm, ngControl, formField, formControl);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     ngOnInit(): void {

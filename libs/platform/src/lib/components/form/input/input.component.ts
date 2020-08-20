@@ -79,12 +79,12 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
 
     constructor(
         cd: ChangeDetectorRef,
-        @Optional() @Self() ngForm: NgForm,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(cd, ngForm, ngControl, formField, formControl);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     ngOnInit(): void {

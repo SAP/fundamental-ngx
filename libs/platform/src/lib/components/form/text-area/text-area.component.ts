@@ -176,13 +176,13 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
     constructor(
         cd: ChangeDetectorRef,
-        @Optional() @Self() ngForm: NgForm,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         protected _textAreaConfig: TextAreaConfig
     ) {
-        super(cd, ngForm, ngControl, formField, formControl);
+        super(cd, ngControl, ngForm, formField, formControl);
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }

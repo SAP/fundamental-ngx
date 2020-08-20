@@ -56,8 +56,8 @@ export class NumberStepInputComponent extends StepInputComponent {
     /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
-        @Optional() @Self() ngForm: NgForm,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         config: StepInputConfig,
@@ -65,7 +65,7 @@ export class NumberStepInputComponent extends StepInputComponent {
         rtlService: RtlService,
         @Inject(LOCALE_ID) readonly localeId: string
     ) {
-        super(cd, ngForm, ngControl, formField, formControl, config, renderer, rtlService);
+        super(cd, ngControl, ngForm, formField, formControl, config, renderer, rtlService);
     }
 
     /**@hidden

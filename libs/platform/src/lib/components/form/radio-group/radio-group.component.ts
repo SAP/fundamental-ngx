@@ -91,12 +91,12 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
 
     constructor(
         protected _changeDetector: ChangeDetectorRef,
-        @Optional() @Self() ngForm: NgForm,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(_changeDetector, ngForm, ngControl, formField, formControl);
+        super(_changeDetector, ngControl, ngForm, formField, formControl);
         this.id = `radio-group-${nextUniqueId++}`;
     }
 

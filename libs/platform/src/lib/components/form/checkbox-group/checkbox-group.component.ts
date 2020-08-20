@@ -49,7 +49,7 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     }
 
     /**
-     * To Dispaly multiple checkboxes in a line
+     * To Display multiple checkboxes in a line
      */
     @Input()
     isInline = false;
@@ -67,12 +67,12 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
 
     constructor(
         cd: ChangeDetectorRef,
-        @Optional() @Self() ngForm: NgForm,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(cd, ngForm, ngControl, formField, formControl);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     writeValue(value: any): void {
@@ -92,14 +92,14 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     }
 
     /**
-     * acess display value for objects, acts as checkbox label.
+     * access display value for objects, acts as checkbox label.
      */
     public getDisplayValue(item: any): string {
         return this.displayValue(item);
     }
 
     /**
-     * acess lookup value for objects, acts as checkbox value.
+     * access lookup value for objects, acts as checkbox value.
      */
     public getLookupValue(item: any): string {
         return this.lookupValue(item);

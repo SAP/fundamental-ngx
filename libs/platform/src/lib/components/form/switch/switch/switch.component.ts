@@ -86,13 +86,13 @@ export class SwitchComponent extends BaseInput {
 
     constructor(
         cd: ChangeDetectorRef,
-        @Optional() @Self() ngForm: NgForm,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         protected _switchConfig: SwitchConfig
     ) {
-        super(cd, ngForm, ngControl, formField, formControl);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden change formcontrol value */

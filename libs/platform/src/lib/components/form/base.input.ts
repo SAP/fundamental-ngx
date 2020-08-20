@@ -139,8 +139,8 @@ export abstract class BaseInput extends BaseComponent
 
     constructor(
         cd: ChangeDetectorRef,
-        @Optional() @Self() readonly ngForm: NgForm,
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -276,6 +276,7 @@ export abstract class BaseInput extends BaseComponent
         if (newState !== oldState) {
             this._status = newState ? 'error' : undefined;
             this.stateChanges.next('updateErrorState');
+            this._cd.markForCheck();
         }
     }
 

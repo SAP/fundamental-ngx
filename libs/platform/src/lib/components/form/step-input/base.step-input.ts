@@ -197,15 +197,15 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
-        ngForm: NgForm,
         ngControl: NgControl,
+        ngForm: NgForm,
         formField: FormField,
         formControl: FormFieldControl<any>,
         protected config: StepInputConfig,
         private _renderer: Renderer2,
         private _rtlService: RtlService
     ) {
-        super(cd, ngForm, ngControl, formField, formControl);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */

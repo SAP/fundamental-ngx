@@ -152,20 +152,20 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     private _state: Status;
 
     constructor(
-        @Optional() @Self() ngForm: NgForm,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         protected _changeDetector: ChangeDetectorRef,
         private _ngZone: NgZone
     ) {
-        super(_changeDetector, ngForm, ngControl, formField, formControl);
+        super(_changeDetector, ngControl, ngForm, formField, formControl);
         // necessary to fulfill baseInput check.
-        // case: fdp-checkbox passed in decalarative fdp-checkbox-group without id and name.
+        // case: fdp-checkbox passed in declarative fdp-checkbox-group without id and name.
         this.name = `fdp-checkbox-${nextUniqueId++}`;
     }
 
-    /** ControlvalueAccessor */
+    /** ControlValueAccessor */
     writeValue(value: any): void {
         this._initialiseCheckboxWithControl(value);
         super.writeValue(value);
