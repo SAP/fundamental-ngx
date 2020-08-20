@@ -82,13 +82,16 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     private _meridian;
 
-
     /** Setter for the _meridian property. */
     @Input()
-    set meridian (value) {
-      this.format = this._meridian ? 'MM/dd/yyyy, h:mm:ss a' : 'MM/dd/yyyy, H:mm:ss';
-      this._meridian = value;
+    set meridian(value) {
+        this.format = this._meridian ? 'MM/dd/yyyy, h:mm:ss a' : 'MM/dd/yyyy, H:mm:ss';
+        this._meridian = value;
     };
+
+    get meridian(): boolean {
+        return this._meridian;
+    }
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
@@ -265,11 +268,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: any = (selected: any) => {};
+    onChange: any = (selected: any) => { };
 
     /** @hidden */
-    onTouched: any = () => {};
-  
+    onTouched: any = () => { };
+
     /**
      * Function used to disable certain dates in the calendar.
      * @param fdDate FdDate
@@ -285,14 +288,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         private _changeDetRef: ChangeDetectorRef,
         public dateTimeAdapter: DateTimeFormatParser,
         @Optional() private _datePipe: DatePipe
-    ) {}
+    ) { }
 
     /** @hidden */
     ngOnInit(): void {
-      if (this.date && this.inputFieldDate !== null) {
-          this.selectedDate = this.date.date;
-          this.time = this.date.time;
-      }
+        if (this.date && this.inputFieldDate !== null) {
+            this.selectedDate = this.date.date;
+            this.time = this.date.time;
+        }
     }
 
     /** @hidden */
@@ -313,10 +316,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         return this.isCurrentModelValid() && !this.isInvalidDateInput
             ? null
             : {
-                  dateValidation: {
-                      valid: false
-                  }
-              };
+                dateValidation: {
+                    valid: false
+                }
+            };
     }
 
     /** Toggles the popover. */
@@ -528,9 +531,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
                 delay(0)
             )
             .subscribe(() => {
-              if (!this.timeComponent.activeView) {
-                this.timeComponent.changeActive('hour');
-              }
+                if (!this.timeComponent.activeView) {
+                    this.timeComponent.changeActive('hour');
+                }
                 this.timeComponent.refreshTime();
             });
     }
