@@ -10,7 +10,7 @@ rm -Rf ./dist
 PACKAGES=(app-shell)
 CURRENT_BRANCH=appshell
 
-npm run build-pack-library
+npm run build-deploy-library
 
 cd ./dist/libs/
 NPM_BIN="$(which npm)"
