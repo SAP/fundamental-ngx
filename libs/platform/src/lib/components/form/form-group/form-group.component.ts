@@ -226,7 +226,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      *  We want to make sure that we dont include content and then try to somehow position it as it
      *  would lead to the UI where user can see elementing moving as you try to position it.
      */
-    @ContentChildren(FormField, { descendants: true })
+    @ContentChildren(FormField)
     _formFieldChildren: QueryList<FormField>;
 
     private _useForm = false;
@@ -266,7 +266,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
         const control = formField.control?.ngControl?.control;
         if (control) {
-            this.formGroup.addControl(formField.id, control);
+            this.formGroup.setControl(formField.id, control);
             // letting control to set value. when provided value is 'false'.
             if (this.object) {
                 control.patchValue(this.object[formField.id]);

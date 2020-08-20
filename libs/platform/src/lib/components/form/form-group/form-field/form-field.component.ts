@@ -168,7 +168,7 @@ export class FormFieldComponent
     protected _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, @Optional() private formGroupContainer: FormGroupContainer) {
+    constructor(private _cd: ChangeDetectorRef, @Optional() readonly formGroupContainer: FormGroupContainer) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
     }
@@ -234,7 +234,7 @@ export class FormFieldComponent
         // Refresh UI when value changes
         if (formFieldControl?.ngControl) {
             formFieldControl.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
-                // this.onChange.emit('valueChangess');
+                // this.onChange.emit('valueChanges');
                 this._cd.markForCheck();
             });
         }

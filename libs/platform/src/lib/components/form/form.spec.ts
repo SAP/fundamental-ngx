@@ -1,20 +1,22 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormGroupComponent } from '@fundamental-ngx/platform';
 
 import { FdpFormGroupModule } from './form-group/fdp-form.module';
 import { PlatformInputModule } from './input/fdp-input.module';
-import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
-import { FormGroupComponent } from '@fundamental-ngx/core';
-import { By } from '@angular/platform-browser';
 
 interface TestUser {
     firstName: string;
     lastName: string;
     favoriteColor: string;
-    street?: string;
-    city?: string;
-    state?: string;
+    address?: {
+        street: string;
+        city: string;
+        state: string;
+    };
 }
 
 @Component({
@@ -35,7 +37,7 @@ interface TestUser {
                     zone="zTop"
                     required="true"
                 >
-                    <fdp-input [formControl]="firstName.formControl"></fdp-input>
+                    <fdp-input name="firstName" [formControl]="firstName.formControl"></fdp-input>
                 </fdp-form-field>
                 <fdp-form-field
                     #lastName
@@ -45,7 +47,7 @@ interface TestUser {
                     zone="zTop"
                     required="true"
                 >
-                    <fdp-input [formControl]="lastName.formControl"></fdp-input>
+                    <fdp-input name="lastName" [formControl]="lastName.formControl"></fdp-input>
                 </fdp-form-field>
                 <fdp-form-field
                     #favoriteColor
@@ -54,7 +56,7 @@ interface TestUser {
                     hint="What is your favorite color?"
                     zone="zBottom"
                 >
-                    <fdp-input [formControl]="favoriteColor.formControl"></fdp-input>
+                    <fdp-input name="favoriteColor" [formControl]="favoriteColor.formControl"></fdp-input>
                 </fdp-form-field>
                 <ng-template #i18n let-errors>
                     <span *ngIf="errors && errors.required" class="error">This field is required.</span>
@@ -125,11 +127,11 @@ describe('Simple Form', () => {
         const userFormGroup: FormGroup = host.userFormGroup;
 
         const firstName: FormFieldComponent = host.firstName;
-        expect(firstName.formGroup).toBe(userFormGroup);
+        expect(firstName.formGroupContainer.formGroup).toBe(userFormGroup);
         const lastName: FormFieldComponent = host.lastName;
-        expect(lastName.formGroup).toBe(userFormGroup);
+        expect(lastName.formGroupContainer.formGroup).toBe(userFormGroup);
         const favoriteColor: FormFieldComponent = host.favoriteColor;
-        expect(favoriteColor.formGroup).toBe(userFormGroup);
+        expect(favoriteColor.formGroupContainer.formGroup).toBe(userFormGroup);
 
         expect(userFormGroup.contains('firstName')).toBeTruthy();
         expect(userFormGroup.contains('lastName')).toBeTruthy();
@@ -160,66 +162,26 @@ describe('Simple Form', () => {
 
 @Component({
     template: `
-    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
-        <fdp-form-group #userForm
-            [object]="user"
-            [formGroup]="userFormGroup">
-            <fdp-form-field #firstName
-                id="firstName"
-                label="First Name">
-                <fdp-input [formControl]="firstName.formControl"></fdp-input>
-            </fdp-form-field>
-            <fdp-form-field #lastName
-                id="lastName"
-                label="Last Name">
-                <fdp-input [formControl]="lastName.formControl"></fdp-input>
-            </fdp-form-field>
-            <fdp-form-field #favoriteColor
-                id="favoriteColor"
-                label="Favorite Color">
-                <fdp-input [formControl]="favoriteColor.formControl"></fdp-input>
-            </fdp-form-field>
-            <fdp-form-group #addressGroup>
-                <fdp-form-field #street
-                    id="street"
-                    label="Street">
-                    <fdp-input [formControl]="street.formControl"></fdp-input>
+        <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+            <fdp-form-group #userForm [formGroup]="userFormGroup" [object]="user">
+                <fdp-form-field #firstName id="firstName" label="First Name">
+                    <fdp-input name="firstName" [formControl]="firstName.formControl"></fdp-input>
                 </fdp-form-field>
                 <fdp-form-field #lastName id="lastName" label="Last Name">
-                    <fdp-input
-                        [name]="'input_test5'"
-                        [id]="'input_test5'"
-                        [formControl]="lastName.formControl"
-                    ></fdp-input>
+                    <fdp-input name="lastName" [formControl]="lastName.formControl"></fdp-input>
                 </fdp-form-field>
                 <fdp-form-field #favoriteColor id="favoriteColor" label="Favorite Color">
-                    <fdp-input
-                        [name]="'input_test6'"
-                        [id]="'input_test6'"
-                        [formControl]="favoriteColor.formControl"
-                    ></fdp-input>
+                    <fdp-input name="favoriteColor" [formControl]="favoriteColor.formControl"></fdp-input>
                 </fdp-form-field>
-                <fdp-form-group #addressGroup>
+                <fdp-form-group #addressGroup [formGroup]="userFormGroup.get('address')" [object]="user.address">
                     <fdp-form-field #street id="street" label="Street">
-                        <fdp-input
-                            [name]="'input_test7'"
-                            [id]="'input_test7'"
-                            [formControl]="street.formControl"
-                        ></fdp-input>
+                        <fdp-input name="street" [formControl]="street.formControl"></fdp-input>
                     </fdp-form-field>
                     <fdp-form-field #city id="city" label="City">
-                        <fdp-input
-                            [name]="'input_test8'"
-                            [id]="'input_test8'"
-                            [formControl]="city.formControl"
-                        ></fdp-input>
+                        <fdp-input name="city" [formControl]="city.formControl"></fdp-input>
                     </fdp-form-field>
                     <fdp-form-field #state id="state" label="State">
-                        <fdp-input
-                            [name]="'input_test9'"
-                            [id]="'input_test9'"
-                            [formControl]="state.formControl"
-                        ></fdp-input>
+                        <fdp-input name="state" [formControl]="state.formControl"></fdp-input>
                     </fdp-form-field>
                 </fdp-form-group>
             </fdp-form-group>
@@ -240,15 +202,19 @@ class NestedFormGroupsTestComponent {
 
     @ViewChild('submitButton') submitButton: ElementRef<HTMLElement>;
 
-    public userFormGroup: FormGroup = new FormGroup({});
+    public userFormGroup: FormGroup = new FormGroup({
+        address: new FormGroup({})
+    });
 
     public user: TestUser = {
         firstName: 'Angelica',
         lastName: 'Mercado',
         favoriteColor: 'red',
-        street: '123 Main St',
-        city: 'Springfield',
-        state: 'AK'
+        address: {
+            street: '123 Main St',
+            city: 'Springfield',
+            state: 'AK'
+        }
     };
 
     public result: any = null;
@@ -278,20 +244,29 @@ describe('Nested Form Groups', () => {
 
     it('should be able to automatically register child formControls to parent formGroup', () => {
         const userFormGroup: FormGroup = host.userFormGroup;
-
-        const firstName: FormFieldComponent = host.firstName;
-        expect(firstName.formGroup).toBe(userFormGroup);
-        const lastName: FormFieldComponent = host.lastName;
-        expect(lastName.formGroup).toBe(userFormGroup);
-        const favoriteColor: FormFieldComponent = host.favoriteColor;
-        expect(favoriteColor.formGroup).toBe(userFormGroup);
+        const addressGroup: FormGroup = userFormGroup.get('address') as FormGroup;
 
         expect(userFormGroup.contains('firstName')).toBeTruthy();
         expect(userFormGroup.contains('lastName')).toBeTruthy();
         expect(userFormGroup.contains('favoriteColor')).toBeTruthy();
+        // Child address group controls
+        expect(addressGroup.contains('street')).toBeTruthy();
+        expect(addressGroup.contains('city')).toBeTruthy();
+        expect(addressGroup.contains('state')).toBeTruthy();
     });
 
-    it('should emit "onSubmit" event on click of a child submit button', () => {
+    it('should render nested form group controls as well', () => {
+        const street = fixture.debugElement.query(By.css('#street'));
+        expect(street.nativeElement).toBeTruthy();
+
+        const city = fixture.debugElement.query(By.css('#city'));
+        expect(city.nativeElement).toBeTruthy();
+
+        const state = fixture.debugElement.query(By.css('#state'));
+        expect(state.nativeElement).toBeTruthy();
+    });
+
+    it('should emit "onSubmit" event on submit button click', () => {
         const submitButton = host.submitButton.nativeElement;
         submitButton.click();
         fixture.detectChanges();
@@ -300,9 +275,11 @@ describe('Nested Form Groups', () => {
             firstName: 'Angelica',
             lastName: 'Mercado',
             favoriteColor: 'red',
-            street: '123 Main St',
-            city: 'Springfield',
-            state: 'AK'
+            address: {
+                street: '123 Main St',
+                city: 'Springfield',
+                state: 'AK'
+            }
         });
     });
 });
