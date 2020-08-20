@@ -58,7 +58,7 @@ export abstract class FormField {
     /**
      * A reference to the underlying FormFieldControl.
      */
-    control: FormFieldControl<any>;
+    control: FormFieldControl<any> | null;
     /**
      * Register underlying form control
      */
