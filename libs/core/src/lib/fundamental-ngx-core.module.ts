@@ -65,6 +65,7 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
 import { StepInputModule } from './step-input/step-input.module';
 import { ComboboxMobileModule } from './combobox/combobox-mobile/combobox-mobile.module';
 import { CarouselModule } from './utils/directives/carousel/carousel.module';
+import { ToolbarModule } from './toolbar/toolbar.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -128,6 +129,7 @@ import { CarouselModule } from './utils/directives/carousel/carousel.module';
         TileModule,
         TimeModule,
         TimePickerModule,
+        ToolbarModule,
         SwitchModule,
         TokenModule,
         TreeModule

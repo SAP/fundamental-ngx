@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.13...v0.21.1-rc.14) (2020-08-20)
+
+
+### Bug Fixes
+
+* export toolbar module ([#3055](https://github.com/SAP/fundamental-ngx/issues/3055)) ([9748655](https://github.com/SAP/fundamental-ngx/commit/9748655ac53d97e61bb172daf35846195911cd77))
+* Platform wrapper component for object status with document changes ([#2764](https://github.com/SAP/fundamental-ngx/issues/2764)) ([40e3dfb](https://github.com/SAP/fundamental-ngx/commit/40e3dfb41c12c1b0acbfc5ad826125b2fb107ee0)), closes [#2751](https://github.com/SAP/fundamental-ngx/issues/2751)
+
+### [0.21.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.12...v0.21.1-rc.13) (2020-08-19)
+
+
+### Bug Fixes
+
+* (core) fix class binding for input-group ([#3050](https://github.com/SAP/fundamental-ngx/issues/3050)) ([e1289f5](https://github.com/SAP/fundamental-ngx/commit/e1289f5a39144e0ff4cab52433aa0457b2890fb5))
+
 ### [0.21.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.11...v0.21.1-rc.12) (2020-08-19)
 
 

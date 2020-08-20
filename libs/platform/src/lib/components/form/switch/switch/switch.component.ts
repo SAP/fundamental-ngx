@@ -68,7 +68,7 @@ export class SwitchComponent extends BaseInput {
     }
 
     /** @hidden */
-    _contentDensity = this._switchConfig.contentDensity;
+    _contentDensity: ContentDensity = this._switchConfig.contentDensity;
 
     /**
      * @hidden
