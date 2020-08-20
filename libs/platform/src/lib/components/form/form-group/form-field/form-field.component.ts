@@ -301,7 +301,7 @@ export class FormFieldComponent
          * and on the next loop a child form-filed extends it and make
          * the form-group INVALID.
          * In such case we get the error
-         * "ValueHasBeenChangedAfterItBadBeenChecked. Previous value is ng-valid, current value is ng-invalid".
+         * "ExpressionChangedAfterItHasBeenCheckedError. Previous value is ng-valid, current value is ng-invalid".
          * To fix it we have to postpone adding form-field validators
          *
          */
