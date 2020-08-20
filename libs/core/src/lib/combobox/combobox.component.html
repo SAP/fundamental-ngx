@@ -38,8 +38,8 @@
 <ng-template #controlTemplate>
     <fd-input-group
         [compact]="compact"
-        [button]="true"
-        [glyph]="glyph"
+        [button]="displayAddonButton"
+        [glyph]="displayAddonButton ? glyph : ''"
         [state]="state"
         [buttonFocusable]="buttonFocusable"
         [disabled]="disabled || readOnly"

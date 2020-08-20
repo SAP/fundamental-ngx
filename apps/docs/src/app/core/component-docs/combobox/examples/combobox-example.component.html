@@ -61,3 +61,16 @@ Readonly
 
 <span>Search Term: {{ searchTermFive }}</span>
 <br/><br/>
+
+Hide Addon Button
+<fd-combobox
+    [(ngModel)]="searchTermSix"
+    [dropdownValues]="dropdownValues"
+    [placeholder]="'Type some text...'"
+    [maxHeight]="'250px'"
+    [displayAddonButton]="false"
+>
+</fd-combobox>
+
+<span>Search Term: {{ searchTermSix }}</span>
+<br/><br/>

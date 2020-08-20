@@ -190,6 +190,10 @@ export class ComboboxComponent
     @Input()
     mobileConfig: MobileModeConfig;
 
+    /** Whether or not to display the addon button. */
+    @Input()
+    displayAddonButton = true;
+
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
