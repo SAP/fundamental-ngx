@@ -134,7 +134,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     }
 
     /** @hidden */
-    _contentDensity = this._textAreaConfig.contentDensity;
+    _contentDensity: ContentDensity = this._textAreaConfig.contentDensity;
 
     /**
      * @hidden
