@@ -24,6 +24,7 @@ jobs:
     - stage: Release
       before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
       script:
+        - echo "###### Deploying app shell "
         - git checkout appshell
         - bash ./ci-scripts/setup-npm.sh
         - bash ./ci-scripts/publish-shell.sh
