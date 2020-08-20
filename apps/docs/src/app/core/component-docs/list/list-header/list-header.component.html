@@ -4,6 +4,40 @@
     Both usually contain homogeneous data, but lists generally have rather basic data,
     whereas the data in tables tends to be more complex. Lists are mostly used in the master list
     for a master-detail scenario using the flexible column layout, as well as in popovers or dialogs.
+
+    The list component displays a list of items with basic homogeneous information.
+    Lists are usually used in the master list for a master-detail scenario using a flexible column layout,
+    as well as in Popovers or Dialogs. (these should link to those components).
+
+    List item anchors, action buttons and checkboxes are keyboard navigable via the Tab key, provided that they have
+    <code>[routerLink]</code> or <code>[attr.href]</code> attributes.
+    List checkboxes can also be selected with the space bar.
+
+    <h3>Usage</h3>
+
+    <h4>Use the list if:</h4>
+    <ul>
+        <li>
+            You want to display a homogeneous set of basic data.
+        </li>
+        <li>
+            You need to sort, group, or filter simple datasets.
+        </li>
+        <li>
+            You need to display a single-level hierarchy for a simple use case.
+        </li>
+    </ul>
+
+    <h4>Do not use the list if:</h4>
+    <ul>
+        <li>
+            You want to manage complex datasets that need to be extensively sorted, grouped, filtered, or edited.
+            Instead, use <code>Table</code>.
+        </li>
+        <li>
+            You work with complex hierarchies. In this case, use <code>Tree</code>.
+        </li>
+    </ul>
 </description>
 <import module="ListModule"></import>
 

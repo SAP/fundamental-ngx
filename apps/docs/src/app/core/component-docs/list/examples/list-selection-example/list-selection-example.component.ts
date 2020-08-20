@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ListSelectionExampleComponent {
     selectionValue: string = null;
+    selectionValueTwo: string = null;
 
     cozyObject = [
         {

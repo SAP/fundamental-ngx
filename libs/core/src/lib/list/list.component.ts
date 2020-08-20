@@ -133,12 +133,12 @@ export class ListComponent implements AfterContentInit, OnDestroy, OnInit {
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
-        if (this.enableKeyboardSupport && this._keyboardSupportService) {
+        if (this.enableKeyboardSupport) {
             if (KeyUtil.isKey(event, [' ', 'Enter'])) {
-                if (this._keyboardSupportService.keyManager && this._keyboardSupportService.keyManager.activeItem) {
+                if (this._keyboardSupportService.keyManager.activeItem) {
                     this._keyboardSupportService.keyManager.activeItem.click();
-                    event.stopPropagation();
                 }
+                event.stopPropagation();
             } else {
                 this._keyboardSupportService.onKeyDown(event)
             }

@@ -26,9 +26,10 @@
     Navigation Indicator
 </fd-docs-section-title>
 <description>
-    If only a subset of the list items are navigable you should indicate those by displaying a navigation arrow.
-    This is achieved by adding <code>[navigationIndication]="true"</code> property to the <code>fd-list</code> element.
-    Do not show arrows if all items are navigable. In this case use a Standard List with Navigation.
+    If there is only a subset of list items that are navigable, they should be indicated with a navigation arrow.
+    Do not show arrows if all items are navigable, instead use a Standard List with Navigation.
+    To add navigation indicators, add <code>[navigationIndication]="true"</code> property to the
+    <code>fd-list</code> element.
 </description>
 <component-example>
     <fd-list-nav-indicator-example></fd-list-nav-indicator-example>
@@ -90,7 +91,7 @@
     Borderless List
 </fd-docs-section-title>
 <description>
-    Also there is a way to remove bottom borders, by passing <code>[noBorder]="true"</code>.
+    It is possible to also remove the borders from the list items by passing <code>[noBorder]="true"</code>.
 </description>
 <component-example>
     <fd-list-borderless-example></fd-list-borderless-example>
@@ -100,10 +101,10 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'iconComplex'" [componentName]="'list'">
-    Complex Borderless List with Group Headers and Footer
+    Complex List
 </fd-docs-section-title>
 <description>
-    In ListComponent items can be split to different groups, there is also available footer element.
+    List items can be split into different groups with individual headers, accompanied by a footer at the bottom.
 </description>
 <component-example>
     <fd-list-complex-example></fd-list-complex-example>
@@ -116,7 +117,7 @@
     Selection
 </fd-docs-section-title>
 <description>
-    To achieve selection:
+    You can also make the list items selectable by adding specific classes to the list and list items.
     <ul>
         <li>Add <code>[selection]="true"</code> to list</li>
         <li>Add <code>fd-checkbox</code> or <code>fd-radio-button</code> inside list item</li>
