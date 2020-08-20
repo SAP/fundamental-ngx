@@ -10,7 +10,7 @@ export default function(options: Schema): Rule {
         addPackageJsonDependency(host, {
             type: NodeDependencyType.Default,
             name: '@fundamental-ngx/app-shell',
-            version: 'VERSION_PLACEHOLDER'
+            version: 'SHELL_PLACEHOLDER'
 
         });
         context.addTask(new NodePackageInstallTask());
