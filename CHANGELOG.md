@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.14...v0.21.1-rc.15) (2020-08-20)
+
+
+### Bug Fixes
+
+* (platform) add types to contentDensity to fix build error ([#3040](https://github.com/SAP/fundamental-ngx/issues/3040)) ([b61fd62](https://github.com/SAP/fundamental-ngx/commit/b61fd6235b13f7b39523c528ecb6e7ba2a1e2717))
+
 ### [0.21.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.13...v0.21.1-rc.14) (2020-08-20)
 
 
