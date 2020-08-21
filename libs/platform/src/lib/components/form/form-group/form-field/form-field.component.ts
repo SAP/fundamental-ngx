@@ -1,5 +1,4 @@
 import {
-    AfterContentChecked,
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -48,8 +47,7 @@ export const formFieldProvider: Provider = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [formFieldProvider]
 })
-export class FormFieldComponent
-    implements FormField, AfterContentInit, AfterContentChecked, AfterViewInit, OnDestroy, OnInit {
+export class FormFieldComponent implements FormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit {
     @Input()
     label: string;
 
@@ -167,8 +165,6 @@ export class FormFieldComponent
     /** @hidden */
     protected _destroyed = new Subject<void>();
 
-    private _isAddedToFormGroup = false;
-
     /** @hidden */
     constructor(private _cd: ChangeDetectorRef, @Optional() readonly formGroupContainer: FormGroupContainer) {
         // provides capability to make a field disabled. useful in reactive form approach.
@@ -186,11 +182,6 @@ export class FormFieldComponent
         }
 
         this.addToFormGroup();
-    }
-
-    /** @hidden */
-    ngAfterContentChecked(): void {
-        // this.validateFieldControlComponent();
     }
 
     /** @hidden */
@@ -307,11 +298,10 @@ export class FormFieldComponent
      * Add FormField to FormGroup
      */
     private addToFormGroup(): void {
-        if (!this.formGroupContainer || this._isAddedToFormGroup) {
+        if (!this.formGroupContainer) {
             return;
         }
         this.formGroupContainer.addFormField(this);
-        this._isAddedToFormGroup = true;
     }
 
     /**
@@ -319,11 +309,10 @@ export class FormFieldComponent
      * Remove FormField from FormGroup
      */
     private removeFromFormGroup(): void {
-        if (!this.formGroupContainer || !this._isAddedToFormGroup) {
+        if (!this.formGroupContainer) {
             return;
         }
         this.formGroupContainer.removeFormField(this);
-        this._isAddedToFormGroup = false;
     }
 
     /**
