@@ -168,6 +168,11 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
         this.destroy$.complete();
     }
 
+    /** @hidden */
+    public getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
+        return this.disabled || typeof item === 'string' ? this.disabled : item.disabled;
+    }
+
     /**
      * Initializing all content radio buttons with given properties and
      * subscribing to radio button radiobuttonclicked event

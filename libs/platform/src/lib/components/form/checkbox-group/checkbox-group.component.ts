@@ -107,6 +107,6 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
 
     /** @hidden */
     public getListItemDisabledValue(item: CheckboxGroupComponent['list'][number]): boolean {
-        return typeof item === 'string' ? this.disabled : item.disabled;
+        return this.disabled || typeof item === 'string' ? this.disabled : item.disabled;
     }
 }

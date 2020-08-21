@@ -23,20 +23,18 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
-    ContentChildren,
     EventEmitter,
     Input,
     OnDestroy,
     OnInit,
     Optional,
     Output,
-    QueryList,
     TemplateRef,
     ViewEncapsulation,
     Provider,
     forwardRef
 } from '@angular/core';
-import { ControlContainer, FormGroup } from '@angular/forms';
+import { ControlContainer, FormGroup, AbstractControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
@@ -219,6 +217,8 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     bZone: Array<GroupField>;
 
     /**
+     *  Keep track of added form fields children.
+     *
      *  Form fields within the formGroup is driven by multi-zone layout support. We need to be
      *  able to add number of FormFields, and based on given configuration (zone, rank) render them
      *  under correct zone  (top, bottom, left, right).
@@ -226,8 +226,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      *  We want to make sure that we don't include content and then try to somehow position it as it
      *  would lead to the UI where user can see elementing moving as you try to position it.
      */
-    @ContentChildren(FormField)
-    _formFieldChildren: QueryList<FormField>;
+    protected formFieldChildren: FormField[] = [];
 
     private _useForm = false;
     private _multiLayout = false;
@@ -262,22 +261,25 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     }
 
     addFormField(formField: FormField): void {
+        this.formFieldChildren.push(formField);
         this.updateFormFieldProperties(formField);
-
-        const control = formField.control?.ngControl?.control;
-        if (control) {
-            this.formGroup.setControl(formField.id, control);
-            // letting control to set value. when provided value is 'false'.
-            if (this.object) {
-                control.patchValue(this.object[formField.id]);
-            }
-        }
     }
 
     removeFormField(formField: FormField): void {
-        if (formField.control?.ngControl) {
-            this.formGroup.removeControl(formField.id);
+        this.formFieldChildren = this.formFieldChildren.filter((ff) => ff !== formField);
+        this.removeFormControl(formField.id);
+    }
+
+    addFormControl(name: string, control: AbstractControl): void {
+        this.formGroup.setControl(name, control);
+        // letting control to set value. when provided value is 'false'.
+        if (this.object) {
+            control.patchValue(this.object[name]);
         }
+    }
+
+    removeFormControl(name: string): void {
+        this.formGroup.removeControl(name);
     }
 
     trackByFieldName(index: number, zoneField: GroupField): string | undefined {
@@ -295,7 +297,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         const zLeft: Array<GroupField> = [];
         const zRight: Array<GroupField> = [];
 
-        this._formFieldChildren.forEach((item, index) => {
+        this.formFieldChildren.forEach((item, index) => {
             const zone: FormZone = this._multiLayout ? item.zone || 'zLeft' : 'zLeft';
             const field = new GroupField(zone, item.id, item.rank || index, item.renderer, item.columns, item.fluid);
 
@@ -329,7 +331,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     /** @hidden */
     private updateFormFieldsProperties(): void {
-        this._formFieldChildren.forEach((formField) => this.updateFormFieldProperties(formField));
+        this.formFieldChildren.forEach((formField) => this.updateFormFieldProperties(formField));
     }
 
     /**

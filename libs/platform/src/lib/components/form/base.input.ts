@@ -129,8 +129,6 @@ export abstract class BaseInput extends BaseComponent
 
     readonly formField: FormField | null = null;
 
-    private _registered = false;
-
     // @formatter:off
     onChange = (_: any) => {};
     onTouched = () => {};
@@ -161,16 +159,16 @@ export abstract class BaseInput extends BaseComponent
     }
 
     ngOnChanges(): void {
-        if (!this._registered && this.formField && this.ngControl) {
-            this._registered = true;
-            this.formField.registerFormFieldControl(this);
-        }
         this.stateChanges.next('input: ngOnChanges');
     }
 
     ngOnInit(): void {
         if (!this.id || !this.name) {
             throw new Error('form input must have [id] and [name] attribute.');
+        }
+
+        if (this.formField) {
+            this.formField.registerFormFieldControl(this);
         }
     }
 
@@ -197,12 +195,12 @@ export abstract class BaseInput extends BaseComponent
     }
 
     ngOnDestroy(): void {
-        if (this.formField && this.ngControl) {
-            this.formField.unregisterFormFieldControl(this);
-        }
         this.stateChanges.complete();
         this._destroyed.next();
         this._destroyed.complete();
+        if (this.formField) {
+            this.formField.unregisterFormFieldControl(this);
+        }
     }
 
     setDisabledState(isDisabled: boolean): void {

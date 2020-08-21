@@ -1,4 +1,4 @@
-import { Component, AfterViewChecked } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
     selector: 'fdp-tristate-checkbox',
     templateUrl: 'platform-tristate-checkbox.component.html'
 })
-export class PlatformChekboxTristateComponent implements AfterViewChecked {
+export class PlatformChekboxTristateComponent implements AfterViewInit {
     public havana = false;
     public beirut: boolean = null;
     public budapest = 'Yes';
@@ -26,7 +26,7 @@ export class PlatformChekboxTristateComponent implements AfterViewChecked {
     public choices: Object = { termsAndConditions: true, marketing: true, newsletter: false };
 
     // code for nested form group with tristate checkbox.
-    ngAfterViewChecked(): void {
+    ngAfterViewInit(): void {
         this.setAgreementsOnAcceptAllChange();
         this.setControlOnAgreementsChange();
     }
@@ -42,8 +42,9 @@ export class PlatformChekboxTristateComponent implements AfterViewChecked {
     }
 
     private setControlOnAgreementsChange(): void {
-        this.registrationForm.controls.agreements.valueChanges
-            .pipe(
+        this.registrationForm
+            .get('agreements')
+            .valueChanges.pipe(
                 map((agreements) => this.getValuesFromObject(agreements)),
                 map((agreementsValues: boolean[]) => {
                     const agreeAll = agreementsValues.reduce((overall, value) => value && overall, true);
@@ -62,19 +63,25 @@ export class PlatformChekboxTristateComponent implements AfterViewChecked {
 
     private acceptAll(accept: boolean): void {
         if (accept !== null) {
-            this.registrationForm.controls.agreements.patchValue({
-                marketing: accept,
-                newsletter: accept,
-                termsAndConditions: accept
-            });
+            this.registrationForm.controls?.agreements.patchValue(
+                {
+                    marketing: accept,
+                    newsletter: accept,
+                    termsAndConditions: accept
+                },
+                { emitEvent: false }
+            );
         }
     }
 
     private setAcceptAll(value: boolean): void {
-        if (this.registrationForm.controls.acceptAll.value !== value) {
-            this.registrationForm.patchValue({
-                acceptAll: value
-            });
+        if (this.registrationForm.controls?.acceptAll?.value !== value) {
+            this.registrationForm.patchValue(
+                {
+                    acceptAll: value
+                },
+                { emitEvent: false }
+            );
         }
     }
 

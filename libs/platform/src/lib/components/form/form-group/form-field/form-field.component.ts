@@ -167,6 +167,8 @@ export class FormFieldComponent
     /** @hidden */
     protected _destroyed = new Subject<void>();
 
+    private _isAddedToFormGroup = false;
+
     /** @hidden */
     constructor(private _cd: ChangeDetectorRef, @Optional() readonly formGroupContainer: FormGroupContainer) {
         // provides capability to make a field disabled. useful in reactive form approach.
@@ -182,6 +184,8 @@ export class FormFieldComponent
         if (this.fluid) {
             this.columns = 12;
         }
+
+        this.addToFormGroup();
     }
 
     /** @hidden */
@@ -203,6 +207,7 @@ export class FormFieldComponent
 
     /** @hidden */
     ngOnDestroy(): void {
+        this.removeFromFormGroup();
         this._destroyed.next();
         this._destroyed.complete();
     }
@@ -218,7 +223,7 @@ export class FormFieldComponent
      */
     registerFormFieldControl(formFieldControl: FormFieldControl<any>): void {
         if (this.control) {
-            this.unregisterFormFieldControl(this.control);
+            throw Error('Form field can contain only one FormFieldControl');
         }
 
         this.control = formFieldControl;
@@ -239,7 +244,34 @@ export class FormFieldComponent
             });
         }
 
-        this.attachFormControl(formFieldControl.ngControl.control);
+        if (formFieldControl?.ngControl?.control) {
+            const control = formFieldControl.ngControl.control;
+
+            if (this.required && !this.validators.includes(Validators.required)) {
+                this.validators.push(Validators.required);
+            }
+
+            // if form control is disabled, in reactive form approach
+            if (this.disabled) {
+                control.disable();
+            }
+
+            /**
+             * There is a case when a "form-group" initial state is VALID,
+             * and on the next loop a child form-filed extends it and make
+             * the form-group INVALID.
+             * In such case we get the error
+             * "ExpressionChangedAfterItHasBeenCheckedError. Previous value is ng-valid, current value is ng-invalid".
+             * To fix it we have to postpone adding form-field validators
+             *
+             */
+            Promise.resolve().then(() => {
+                control.setValidators(Validators.compose(this.validators));
+                control.updateValueAndValidity({ emitEvent: false });
+            });
+
+            this.addControlToFormGroup(formFieldControl?.ngControl?.control);
+        }
 
         this._cd.markForCheck();
     }
@@ -255,18 +287,7 @@ export class FormFieldComponent
 
         this.control = null;
 
-        this.detachFormControl();
-    }
-
-    /** @hidden */
-    private validateFieldControlComponent(): void {
-        if (!this.control) {
-            throw new Error('fdp-form-field must contain component implemented FormFieldControl.');
-        }
-
-        if (this.control.ngControl && !this.id) {
-            throw new Error('fdp-form-field must contain [id] binding.');
-        }
+        this.removeControlFromFormGroup();
     }
 
     /** @hidden */
@@ -281,45 +302,50 @@ export class FormFieldComponent
         return this.validators && this.validators.length > 1;
     }
 
-    /** @hidden */
-    private attachFormControl(control: AbstractControl): void {
-        if (!control) {
+    /**
+     * @hidden
+     * Add FormField to FormGroup
+     */
+    private addToFormGroup(): void {
+        if (!this.formGroupContainer || this._isAddedToFormGroup) {
             return;
         }
-
-        if (this.required && !this.validators.includes(Validators.required)) {
-            this.validators.push(Validators.required);
-        }
-
-        // if form control is disabled, in reactive form approach
-        if (this.disabled) {
-            control.disable();
-        }
-
-        /**
-         * There is a case when a "form-group" initial state is VALID,
-         * and on the next loop a child form-filed extends it and make
-         * the form-group INVALID.
-         * In such case we get the error
-         * "ExpressionChangedAfterItHasBeenCheckedError. Previous value is ng-valid, current value is ng-invalid".
-         * To fix it we have to postpone adding form-field validators
-         *
-         */
-        Promise.resolve().then(() => {
-            control.setValidators(Validators.compose(this.validators));
-            control.updateValueAndValidity({ emitEvent: false });
-        });
-
-        if (this.formGroupContainer) {
-            this.formGroupContainer.addFormField(this);
-        }
+        this.formGroupContainer.addFormField(this);
+        this._isAddedToFormGroup = true;
     }
 
-    /** @hidden */
-    private detachFormControl(): void {
-        if (this.formGroupContainer) {
-            this.formGroupContainer.removeFormField(this);
+    /**
+     * @hidden
+     * Remove FormField from FormGroup
+     */
+    private removeFromFormGroup(): void {
+        if (!this.formGroupContainer || !this._isAddedToFormGroup) {
+            return;
         }
+        this.formGroupContainer.removeFormField(this);
+        this._isAddedToFormGroup = false;
+    }
+
+    /**
+     * @hidden
+     * Add FormControl from FormGroup
+     */
+    private addControlToFormGroup(control: AbstractControl): void {
+        if (!this.formGroupContainer) {
+            return;
+        }
+        this.formGroupContainer.addFormControl(this.id, control);
+    }
+
+    /**
+     * @hidden
+     * Remove FormControl from FormGroup
+     */
+    private removeControlFromFormGroup(): void {
+        if (!this.formGroupContainer) {
+            return;
+        }
+        this.formGroupContainer.removeFormControl(this.id);
     }
 
     /**
@@ -332,6 +358,17 @@ export class FormFieldComponent
         if (this.control && this._editable) {
             this.control.id = this.id;
             this.control.placeholder = this.placeholder;
+        }
+    }
+
+    /** @hidden */
+    private validateFieldControlComponent(): void {
+        if (!this.control) {
+            throw new Error('fdp-form-field must contain component implemented FormFieldControl.');
+        }
+
+        if (this.control.ngControl && !this.id) {
+            throw new Error('fdp-form-field must contain [id] binding.');
         }
     }
 }
