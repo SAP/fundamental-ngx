@@ -543,12 +543,16 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     */
     private _shiftSelected(index): void {
         if (index < this._firstElementInSelection) {
+            if (this._directionShiftIsRight) {
+                this._lastElementInSelection = this._firstElementInSelection;
+            }
             this._directionShiftIsRight = false;
-            this._lastElementInSelection = this._firstElementInSelection;
             this._firstElementInSelection = index;
         } else if (index > this._lastElementInSelection) {
+            if (!this._directionShiftIsRight) {
+                this._firstElementInSelection = this._lastElementInSelection;
+            }
             this._directionShiftIsRight = true;
-            this._firstElementInSelection = this._lastElementInSelection;
             this._lastElementInSelection = index;
         } else if (!this._lastElementInSelection) {
             this._firstElementInSelection = index;
