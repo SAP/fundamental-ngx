@@ -205,7 +205,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         return of(true).pipe(
             takeWhile(() => this._alive),
             tap(() => this._reset()),
-            delay(5),
             tap(() => this._collapseItems())
         );
     }
@@ -439,7 +438,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         this._overflowElements.forEach(this._removeToolbarItemFromDOM.bind(this));
 
         this.toolbarItems.map((x) => {
-            this._changeItemVisibilityState(x.elementRef.nativeElement, false);
             this._renderer.insertBefore(this._toolbar, x.elementRef.nativeElement, this.overflowSpacer.nativeElement);
         });
 
