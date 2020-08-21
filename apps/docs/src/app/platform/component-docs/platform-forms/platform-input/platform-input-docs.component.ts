@@ -24,7 +24,7 @@ export class PlatformInputDocsComponent {
             language: 'typescript',
             code: platformInputDefaultTypesTsSrc,
             fileName: 'platform-input-example',
-            component: 'PlatformInputDefaultExampleComponent'
+            component: 'PlatformInputExampleComponent'
         }
     ];
 

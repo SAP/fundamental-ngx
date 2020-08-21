@@ -54,8 +54,8 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     state: Status = 'default';
 
     /** @hidden */
-    @ViewChild('inputElement')
-    inputElement: ElementRef;
+    @ViewChild('inputElemRef')
+    inputElemRef: ElementRef;
 
     /** return the value in the text box */
     @Input()
@@ -69,7 +69,7 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
 
     /** @hidden */
     elementRef(): ElementRef<any> {
-        return this.inputElement;
+        return this.inputElemRef;
     }
 
     constructor(
@@ -85,5 +85,9 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         if (!this.type || VALID_INPUT_TYPES.indexOf(this.type) === -1) {
             throw new Error(` Input type ${this.type} is not supported`);
         }
+    }
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.inputElemRef.nativeElement.style.display = 'block';
     }
 }
