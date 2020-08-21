@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -16,7 +16,9 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 @Component({
     selector: 'app-split-button',
-    templateUrl: './split-button-docs.component.html'
+    templateUrl: './split-button-docs.component.html',
+    styleUrls: ['./split-button-docs.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class SplitButtonDocsComponent {
     schema: Schema;
