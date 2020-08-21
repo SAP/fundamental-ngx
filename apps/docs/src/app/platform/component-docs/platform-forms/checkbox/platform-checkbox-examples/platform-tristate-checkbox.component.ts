@@ -63,7 +63,7 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
 
     private acceptAll(accept: boolean): void {
         if (accept !== null) {
-            this.registrationForm.controls?.agreements.patchValue(
+            this.registrationForm.get('agreements').patchValue(
                 {
                     marketing: accept,
                     newsletter: accept,
@@ -75,7 +75,7 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
     }
 
     private setAcceptAll(value: boolean): void {
-        if (this.registrationForm.controls?.acceptAll?.value !== value) {
+        if (this.registrationForm.get('acceptAll')?.value !== value) {
             this.registrationForm.patchValue(
                 {
                     acceptAll: value
