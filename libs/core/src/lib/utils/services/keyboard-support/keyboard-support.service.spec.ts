@@ -28,8 +28,6 @@ describe('MenuKeyboardService', () => {
             last: new MockKeyboardListElement(),
             first: new MockKeyboardListElement()
         }
-        service.focusEscapeAfterList = jasmine.createSpy();
-        service.focusEscapeBeforeList = jasmine.createSpy();
     });
 
     it('should refresh listeners', () => {
@@ -46,8 +44,14 @@ describe('MenuKeyboardService', () => {
         let escapeAfter = false;
         let escapeBefore = false;
 
-        service.focusEscapeAfterList = () => escapeAfter = true;
-        service.focusEscapeBeforeList = () => escapeBefore = true;
+        service.focusEscapeList.subscribe(direction => {
+            if (direction === 'up') {
+                escapeAfter = true;
+            }
+            if (direction === 'down') {
+                escapeBefore = true
+            }
+        });
 
         const keyDownEventUp = new KeyboardEvent('keydown', {
             key: 'ArrowUp'
