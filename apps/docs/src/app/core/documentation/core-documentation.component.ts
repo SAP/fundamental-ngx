@@ -32,7 +32,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/datetime-picker', name: 'Datetime Picker' },
             { url: 'core/dialog', name: 'Dialog' },
             { url: 'core/icon', name: 'Icon' },
-            { url: 'core/file-uploader', name: 'File Uploader' },
             { url: 'core/form-message', name: 'Form Message' },
             { url: 'core/info-label', name: 'Info Label' },
             { url: 'core/inlineHelp', name: 'Inline Help' },

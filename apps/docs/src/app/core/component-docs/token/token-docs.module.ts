@@ -11,7 +11,7 @@ import { TokenCompactExampleComponent } from './examples/token-compact-example/t
 import { TokenSelectedExampleComponent } from './examples/token-selected-example/token-selected-example.component';
 import { TokenReadOnlyExampleComponent } from './examples/token-readonly-example/token-readonly-example.component';
 import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
-import { FormModule, TokenModule } from '@fundamental-ngx/core';
+import { TokenModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -25,12 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        FormModule,
-        TokenModule,
-        RouterModule.forChild(routes),
-        SharedDocumentationModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, TokenModule],
     exports: [RouterModule],
     declarations: [
         TokenDocsComponent,

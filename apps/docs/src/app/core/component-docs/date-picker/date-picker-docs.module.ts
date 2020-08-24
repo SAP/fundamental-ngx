@@ -16,7 +16,7 @@ import { DatePickerFormatExampleComponent } from './examples/date-picker-format-
 import { DatePickerComplexI18nExampleComponent } from './examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
 import { DatePickerRangeDisabledExampleComponent } from './examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
 import { DatePickerDisableFuncExampleComponent } from './examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
-import { DatePickerModule, FormModule, InputGroupModule, SegmentedButtonModule } from '@fundamental-ngx/core';
+import { SegmentedButtonModule, DatePickerModule } from '@fundamental-ngx/core';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
@@ -24,21 +24,14 @@ const routes: Routes = [
         path: '',
         component: DatePickerHeaderComponent,
         children: [
-            {path: '', component: DatePickerDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.datePicker}}
+            { path: '', component: DatePickerDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.datePicker } }
         ]
     }
 ];
 
 @NgModule({
-    imports: [
-        FormModule,
-        DatePickerModule,
-        InputGroupModule,
-        SegmentedButtonModule,
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, DatePickerModule, SegmentedButtonModule],
     exports: [RouterModule],
     declarations: [
         DatePickerDocsComponent,

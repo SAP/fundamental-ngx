@@ -11,13 +11,7 @@ import { CalendarFormExamplesComponent } from './examples/calendar-form-example.
 import { CalendarProgrammaticallyChangeExampleComponent } from './examples/calendar-programmatically-change-example.component';
 import { CalendarI18nExampleComponent } from './examples/calendar-i18n-example.component';
 import { CalendarI18nMomentExampleComponent } from './examples/calendar--i18n-moment-example.component';
-import {
-    SegmentedButtonModule,
-    CalendarModule,
-    DialogModule,
-    FormModule,
-    CheckboxModule
-} from '@fundamental-ngx/core';
+import { SegmentedButtonModule, CalendarModule, FundamentalNgxCoreModule, DialogModule } from '@fundamental-ngx/core';
 import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example/calendar-mobile-example.component';
 import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
 import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
@@ -38,13 +32,12 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        FormModule,
-        DialogModule,
-        CheckboxModule,
-        CalendarModule,
-        SegmentedButtonModule,
-        SharedDocumentationModule,
         RouterModule.forChild(routes),
+        SharedDocumentationModule,
+        CalendarModule,
+        DialogModule,
+        SegmentedButtonModule,
+        FundamentalNgxCoreModule
     ],
     exports: [RouterModule],
     declarations: [

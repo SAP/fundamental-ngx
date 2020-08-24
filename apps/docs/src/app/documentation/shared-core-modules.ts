@@ -1,17 +1,32 @@
 import {
-    TabsModule,
-    MenuModule,
-    IconModule,
-    SwitchModule,
+    AlertModule,
     ButtonModule,
-    MessageStripModule
+    FormModule,
+    IconModule,
+    InlineHelpModule,
+    InputGroupModule,
+    MenuModule,
+    PopoverModule,
+    SelectModule,
+    ShellbarModule,
+    SwitchModule,
+    TabsModule,
+    SideNavigationModule
 } from '@fundamental-ngx/core';
 
 export const sharedCoreModules = [
-    TabsModule,
-    MenuModule,
-    IconModule,
-    SwitchModule,
+    AlertModule,
     ButtonModule,
-    MessageStripModule
+    IconModule,
+    InputGroupModule,
+    ShellbarModule,
+    IconModule,
+    TabsModule,
+    SelectModule,
+    SwitchModule,
+    FormModule,
+    InlineHelpModule,
+    PopoverModule,
+    MenuModule,
+    SideNavigationModule
 ];

@@ -8,7 +8,7 @@ import { LocalizationEditorExampleComponent } from './examples/localization-edit
 import { LocalizationEditorFormsExampleComponent } from './examples/localization-editor-forms-example.component';
 import { LocalizationEditorTextareaExampleComponent } from './examples/localization-editor-textarea-example.component';
 import { LocalizationEditorTemplateExampleComponent } from './examples/localization-editor-template-example.component';
-import { FormModule, LocalizationEditorModule } from '@fundamental-ngx/core';
+import { LocalizationEditorModule } from '@fundamental-ngx/core';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
@@ -23,12 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        FormModule,
-        LocalizationEditorModule,
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, LocalizationEditorModule],
     exports: [RouterModule],
     declarations: [
         LocalizationEditorDocsComponent,

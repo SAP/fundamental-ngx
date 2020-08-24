@@ -8,7 +8,7 @@ import { ProductSwitchDndExampleComponent } from './examples/product-switch-dnd-
 import { ProductSwitchDocsHeaderComponent } from './product-switch-docs-header/product-switch-docs-header.component';
 import { ProductSwitchListComponent } from './examples/product-switch-list/product-switch-list-example.component';
 import { ProductSwitchDocsComponent } from './product-switch-docs.component';
-import { ProductSwitchModule, ShellbarModule } from '@fundamental-ngx/core';
+import { ProductSwitchModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -22,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ProductSwitchModule, ShellbarModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ProductSwitchModule],
     exports: [RouterModule],
     declarations: [
         ProductSwitchDocsComponent,

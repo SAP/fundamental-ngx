@@ -10,7 +10,7 @@ import { MultiInputExampleComponent } from './examples/multi-input-example/multi
 import { MultiInputFilterExampleComponent } from './examples/multi-input-filter-example/multi-input-filter-example.component';
 import { MultiInputFormExampleComponent } from './examples/multi-input-form-example/multi-input-form-example.component';
 import { MultiInputCompactExampleComponent } from './examples/multi-input-compact-example/multi-input-compact-example.component';
-import { MultiInputModule, MultiInputMobileModule, FormModule } from '@fundamental-ngx/core';
+import { MultiInputModule, MultiInputMobileModule } from '@fundamental-ngx/core';
 import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
 import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-example/multi-input-mobile-example.component';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, MultiInputModule, MultiInputMobileModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MultiInputModule, MultiInputMobileModule],
     exports: [RouterModule],
     declarations: [
         MultiInputDocsComponent,

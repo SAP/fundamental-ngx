@@ -4,7 +4,7 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { DialogDocsHeaderComponent } from './dialog-docs-header/dialog-docs-header.component';
 import { DialogDocsComponent } from './dialog-docs.component';
-import { DialogModule, DialogService, FormModule, ListModule } from '@fundamental-ngx/core';
+import { DialogModule, DialogService, ListModule } from '@fundamental-ngx/core';
 import { DialogExampleComponent } from './examples/component-based/dialog-example.component';
 import { ComponentBasedDialogExampleComponent } from './examples/component-based/component-based-dialog-example.component';
 import { TemplateBasedDialogExampleComponent } from './examples/template-based/template-based-dialog-example.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, DialogModule, ListModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, DialogModule, ListModule],
     exports: [RouterModule],
     declarations: [
         DialogStateExample,

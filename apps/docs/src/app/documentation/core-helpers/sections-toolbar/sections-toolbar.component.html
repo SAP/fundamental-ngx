@@ -1,12 +1,12 @@
 <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed | async }">
     <div class="fd-docs-search">
         <fd-input-group
-            glyph="decline"
-            placeholder="Search"
-            buttonType="transparent"
-            [button]="true"
             [disabled]="false"
             [(ngModel)]="search"
+            [glyph]="'decline'"
+            [button]="true"
+            [buttonType]="'transparent'"
+            [placeholder]="'Search'"
             (addOnButtonClicked)="search = ''"
         >
         </fd-input-group>
@@ -39,12 +39,12 @@
                                                 *ngIf="subItem.url === 'home' || (subItem | docsSearch: search)"
                                             >
                                                 <a
+                                                    fd-nested-list-link
+                                                    [routerLink]="'/' + subItem.url"
+                                                    routerLinkActive="is-selected"
+                                                    (keypress)="onKeypressHandler($event)"
                                                     tabindex="0"
                                                     role="button"
-                                                    fd-nested-list-link
-                                                    routerLinkActive="is-selected"
-                                                    [routerLink]="'/' + subItem.url"
-                                                    (keypress)="onKeypressHandler($event)"
                                                 >
                                                     <span fd-nested-list-title>{{ subItem.name }}</span>
                                                 </a>

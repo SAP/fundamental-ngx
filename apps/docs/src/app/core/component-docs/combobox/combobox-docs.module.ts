@@ -16,7 +16,7 @@ import { ComboboxHeightExampleComponent } from './examples/combobox-height-examp
 import { ComboboxOpenControlExampleComponent } from './examples/combobox-open-control-example.component';
 import { ComboboxColumnsExampleComponent } from './examples/combobox-columns-example.component';
 import { ComboboxGroupExampleComponent } from './examples/combobox-group-example.component';
-import { ComboboxMobileModule, ComboboxModule, FormModule } from '@fundamental-ngx/core';
+import { ComboboxMobileModule, ComboboxModule, ListModule } from '@fundamental-ngx/core';
 import { ComboboxMobileExampleComponent } from './examples/combobox-mobile/combobox-mobile-example.component';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
@@ -25,20 +25,13 @@ const routes: Routes = [
         path: '',
         component: ComboboxHeaderComponent,
         children: [
-            {path: '', component: ComboboxDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.combobox}}
-        ]
+            { path: '', component: ComboboxDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.combobox } }        ]
     }
 ];
 
 @NgModule({
-    imports: [
-        FormModule,
-        ComboboxModule,
-        ComboboxMobileModule,
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ComboboxModule, ListModule, ComboboxMobileModule],
     exports: [RouterModule],
     declarations: [
         ComboboxDocsComponent,

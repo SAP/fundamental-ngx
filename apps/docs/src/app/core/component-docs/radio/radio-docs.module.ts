@@ -7,27 +7,21 @@ import { RadioHeaderComponent } from './radio-header/radio-header.component';
 import { RadioDocsComponent } from './radio-docs.component';
 import { RadioExamplesComponent } from './examples/radio-examples.component';
 import { RadioFormGroupExampleComponent } from './examples/radio-form-group-example.component';
-import { FormModule, LinkModule, RadioModule } from '@fundamental-ngx/core';
+import { LinkModule, MessageStripModule, RadioModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
         path: '',
         component: RadioHeaderComponent,
         children: [
-            {path: '', component: RadioDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
-        ]
+            { path: '', component: RadioDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.form } }
+         ]
     }
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationModule,
-        RadioModule,
-        FormModule,
-        LinkModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, RadioModule, MessageStripModule, LinkModule],
     exports: [RouterModule],
     declarations: [RadioDocsComponent, RadioHeaderComponent, RadioExamplesComponent, RadioFormGroupExampleComponent]
 })

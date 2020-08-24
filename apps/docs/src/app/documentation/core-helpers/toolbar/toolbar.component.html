@@ -2,8 +2,8 @@
     <button fd-shellbar-side-nav
             fd-button
             aria-expanded="false"
-            fdType="transparent"
-            glyph="menu2"
+            [fdType]="'transparent'"
+            [glyph]="'menu2'"
             aria-label="Switch Navigation"
             (click)="this.btnClicked.emit()"></button>
 
@@ -84,4 +84,4 @@
     </fd-shellbar-actions>
 </fd-shellbar>
 <link rel="stylesheet"
-      [href]="cssUrl"/>
+      [href]="cssUrl" />

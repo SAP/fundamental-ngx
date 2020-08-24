@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/core';
 
 let componentExampleUniqueId = 0;
@@ -6,13 +6,13 @@ let componentExampleUniqueId = 0;
 @Component({
     selector: 'component-example',
     template: `
-        <div class="docs-tile docs-component docs-tile-example-background" [id]="id">
+        <div class="docs-tile docs-component docs-tile-example-background" id="{{ id }}">
             <div class="docs-tile__content docs-tile-content-example">
                 <div class="component-example__features">
                     <rtl-switch [label]="id2"></rtl-switch>
                     <background-switch [label]="id"></background-switch>
                 </div>
-                <div class="fd-doc-component" [id]="id2">
+                <div class="fd-doc-component" id="{{ id2 }}">
                     <ng-content></ng-content>
                 </div>
             </div>

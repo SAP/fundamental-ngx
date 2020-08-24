@@ -10,7 +10,7 @@ import {
     InputInlineHelpExampleComponent,
     InputStateExampleComponent
 } from './examples/input-examples.component';
-import { FormModule, InlineHelpModule } from '@fundamental-ngx/core';
+import { FormModule } from '@fundamental-ngx/core';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
@@ -25,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, InlineHelpModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule],
     exports: [RouterModule],
     declarations: [
         InputDocsComponent,

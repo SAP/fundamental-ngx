@@ -8,7 +8,7 @@ import { FileInputExampleComponent } from './examples/file-input-example/file-in
 import { FileInputCustomExampleComponent } from './examples/file-input-custom-example/file-input-custom-example.component';
 import { FileInputDragDisabledExampleComponent } from './examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
 import { FileInputMaxExampleComponent } from './examples/file-input-max-example/file-input-max-example.component';
-import { FileInputModule, FormModule } from '@fundamental-ngx/core';
+import { FileInputModule } from '@fundamental-ngx/core';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, FileInputModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FileInputModule],
     exports: [RouterModule],
     declarations: [
         FileInputDocsComponent,

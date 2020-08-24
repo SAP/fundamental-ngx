@@ -12,7 +12,7 @@ import { DatetimeFormatExampleComponent } from './examples/datetime-format-examp
 import { DatetimeFormExampleComponent } from './examples/datetime-form-example/datetime-form-example.component';
 import { DatetimePickerAllowNullExampleComponent } from './examples/datetime-allow-null-example/datetime-allow-null-example.component';
 import { DatetimeDisabledExampleComponent } from './examples/datetime-disabled-example/datetime-disabled-example.component';
-import { SegmentedButtonModule, DatetimePickerModule, FormModule, InputGroupModule, SelectModule } from '@fundamental-ngx/core';
+import { DatetimePickerModule, SelectModule } from '@fundamental-ngx/core';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
@@ -27,15 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        FormModule,
-        SelectModule,
-        InputGroupModule,
-        DatetimePickerModule,
-        SegmentedButtonModule,
-        SharedDocumentationModule,
-        RouterModule.forChild(routes),
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, DatetimePickerModule, SelectModule],
     exports: [RouterModule],
     declarations: [
         DatetimeExampleComponent,

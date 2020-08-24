@@ -7,7 +7,7 @@ import { FormMessageDocsComponent } from './form-message-docs.component';
 import {
     FormMessageExampleComponent,
 } from './examples/form-message-example.component';
-import { FormModule, InputGroupModule, PopoverModule } from '@fundamental-ngx/core';
+import { DatePickerModule, FormModule } from '@fundamental-ngx/core';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
@@ -22,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, PopoverModule, InputGroupModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, DatePickerModule],
     exports: [RouterModule],
     declarations: [
         FormMessageDocsComponent,
