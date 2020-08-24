@@ -18,7 +18,7 @@ import { DialogBackdropContainerExampleComponent } from './examples/dialog-backd
 import { DialogComplexExampleComponent } from './examples/dialog-complex/dialog-complex-example.component';
 import { DialogStateExample } from './examples/dialog-state/dialog-state-example.component';
 import { DialogObjectExampleComponent } from './examples/dialog-object-example/dialog-object-example.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -32,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, DialogModule, ListModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, DialogModule, ListModule],
     exports: [RouterModule],
     declarations: [
         DialogStateExample,

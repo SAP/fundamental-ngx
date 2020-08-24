@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { PlatformInfoLabelDocsComponent } from './platform-info-label-docs.component';
 import { PlatformInfoLabelHeaderComponent } from './platform-info-label-header/platform-info-label-header.component';
 import { API_FILES } from '../../api-files';
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformInfoLabelModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformInfoLabelModule],
     exports: [RouterModule],
     declarations: [
         PlatformInfoLabelDocsComponent,

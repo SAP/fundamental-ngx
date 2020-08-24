@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { SideNavigationHeaderComponent } from './side-navigation-header/side-navigation-header.component';
 import { SideNavigationDocsComponent } from './side-navigation-docs.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SideNavigationModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SideNavigationModule],
     exports: [RouterModule],
     declarations: [
         SideNavigationDocsComponent,

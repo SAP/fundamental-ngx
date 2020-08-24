@@ -8,7 +8,7 @@ import { BusyIndicatorBasicExampleComponent } from './examples/busy-indicator-ba
 import { BusyIndicatorWrapperExampleComponent } from './examples/busy-indicator-wrapper-example.component';
 import { BusyIndicatorModule } from '@fundamental-ngx/core';
 import { BusyIndicatorSizeExampleComponent } from './examples/busy-indicator-size-example.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -22,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, BusyIndicatorModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, BusyIndicatorModule],
     exports: [RouterModule],
     declarations: [
         BusyIndicatorDocsComponent,

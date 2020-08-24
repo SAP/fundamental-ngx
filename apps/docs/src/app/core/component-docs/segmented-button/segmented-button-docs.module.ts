@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { SegmentedButtonDocsComponent } from './segmented-button-docs.component';
 import { SegmentedButtonHeaderComponent } from './segmented-button-header/segmented-button-header.component';
 import { SegmentedButtonToggleExampleComponent } from './examples/segmented-button-toggle-example.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SegmentedButtonModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SegmentedButtonModule],
     exports: [RouterModule],
     declarations: [
         SegmentedButtonDocsComponent,

@@ -23,7 +23,7 @@ import { CalendarOptionsExampleComponent } from './examples/calendar-options-exa
 import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
 import { CalendarSpecialDayExampleComponent } from './examples/calendar-special-day-example/calendar-special-day-example.component';
 import { CalendarMarkHoverComponent } from './examples/calendar-mark-hover/calendar-mark-hover.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -43,7 +43,7 @@ const routes: Routes = [
         CheckboxModule,
         CalendarModule,
         SegmentedButtonModule,
-        SharedDocumentationPageModule,
+        SharedDocumentationModule,
         RouterModule.forChild(routes),
     ],
     exports: [RouterModule],

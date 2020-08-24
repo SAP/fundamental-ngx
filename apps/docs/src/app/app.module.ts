@@ -27,6 +27,7 @@ const routes: Routes = [
         RouterModule.forRoot(routes, { useHash: true }),
         MarkdownModule.forRoot({ loader: HttpClient })
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: []
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { PopoverDirectiveHeaderComponent } from './popover-directive-header/popover-directive-header.component';
 import { PopoverDirectiveDocsComponent } from './popover-directive-docs.component';
@@ -23,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PopoverModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PopoverModule],
     exports: [RouterModule],
     declarations: [
         PopoverFillComponent,

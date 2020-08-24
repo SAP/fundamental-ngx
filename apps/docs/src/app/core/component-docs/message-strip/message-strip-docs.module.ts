@@ -7,7 +7,7 @@ import { MessageStripExampleComponent } from './examples/message-strip-example.c
 import { MessageStripNoIconExampleComponent } from './examples/message-strip-noicon-example.component';
 import { MessageStripWidthExampleComponent } from './examples/message-strip-width-example.component';
 import { MessageStripHeaderComponent } from './message-strip-header/message-strip-header.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule],
     exports: [RouterModule],
     declarations: [
         MessageStripHeaderComponent,

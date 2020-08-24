@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { SwitchHeaderComponent } from './switch-header/switch-header.component';
 import { SwitchDocsComponent } from './switch-docs.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, SwitchModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, SwitchModule],
     exports: [RouterModule],
     declarations: [
         SwitchDocsComponent,

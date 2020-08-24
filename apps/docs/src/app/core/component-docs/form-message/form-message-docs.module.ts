@@ -8,7 +8,7 @@ import {
     FormMessageExampleComponent,
 } from './examples/form-message-example.component';
 import { FormModule, InputGroupModule, PopoverModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -22,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, PopoverModule, InputGroupModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, PopoverModule, InputGroupModule],
     exports: [RouterModule],
     declarations: [
         FormMessageDocsComponent,

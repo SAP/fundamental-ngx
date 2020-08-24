@@ -18,7 +18,7 @@ import { ComboboxColumnsExampleComponent } from './examples/combobox-columns-exa
 import { ComboboxGroupExampleComponent } from './examples/combobox-group-example.component';
 import { ComboboxMobileModule, ComboboxModule, FormModule } from '@fundamental-ngx/core';
 import { ComboboxMobileExampleComponent } from './examples/combobox-mobile/combobox-mobile-example.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -37,7 +37,7 @@ const routes: Routes = [
         ComboboxModule,
         ComboboxMobileModule,
         RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
+        SharedDocumentationModule,
     ],
     exports: [RouterModule],
     declarations: [

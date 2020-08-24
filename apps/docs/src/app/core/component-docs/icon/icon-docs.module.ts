@@ -6,7 +6,7 @@ import { IconHeaderComponent } from './icon-header/icon-header.component';
 import { IconDocsComponent } from './icon-docs.component';
 import { IconExampleComponent } from './examples/icon-example.component';
 import { IconModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -20,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, IconModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, IconModule],
     exports: [RouterModule],
     declarations: [IconDocsComponent, IconHeaderComponent, IconExampleComponent]
 })

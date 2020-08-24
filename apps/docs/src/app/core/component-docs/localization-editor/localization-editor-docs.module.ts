@@ -9,7 +9,7 @@ import { LocalizationEditorFormsExampleComponent } from './examples/localization
 import { LocalizationEditorTextareaExampleComponent } from './examples/localization-editor-textarea-example.component';
 import { LocalizationEditorTemplateExampleComponent } from './examples/localization-editor-template-example.component';
 import { FormModule, LocalizationEditorModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -27,7 +27,7 @@ const routes: Routes = [
         FormModule,
         LocalizationEditorModule,
         RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
+        SharedDocumentationModule,
     ],
     exports: [RouterModule],
     declarations: [

@@ -10,7 +10,7 @@ import {
     MegaMenuPositionExampleComponent
 } from './examples/mega-menu-examples.component';
 import { MegaMenuModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MegaMenuModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MegaMenuModule],
     exports: [RouterModule],
     declarations: [
         MegaMenuDocsComponent,

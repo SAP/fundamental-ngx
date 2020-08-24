@@ -13,7 +13,7 @@ import { MultiInputCompactExampleComponent } from './examples/multi-input-compac
 import { MultiInputModule, MultiInputMobileModule, FormModule } from '@fundamental-ngx/core';
 import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
 import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-example/multi-input-mobile-example.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, MultiInputModule, MultiInputMobileModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, MultiInputModule, MultiInputMobileModule],
     exports: [RouterModule],
     declarations: [
         MultiInputDocsComponent,

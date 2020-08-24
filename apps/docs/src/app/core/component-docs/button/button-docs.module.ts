@@ -12,7 +12,7 @@ import {
     ButtonTypesExampleComponent
 } from './examples/button-examples.component';
 import { ButtonModule, CarouselModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -30,7 +30,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ButtonModule, CarouselModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ButtonModule, CarouselModule],
     exports: [RouterModule],
     declarations: [
         ButtonDocsComponent,

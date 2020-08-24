@@ -12,7 +12,7 @@ import {
     ListSecondaryExampleComponent
 } from './examples/list-examples.component';
 import { CheckboxModule, InfiniteScrollModule, LinkModule, ListModule, RadioModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -28,7 +28,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
+        SharedDocumentationModule,
         ListModule,
         LinkModule,
         CheckboxModule,

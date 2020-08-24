@@ -12,7 +12,7 @@ import { SwitchFormsExampleComponent } from './switch-examples/switch-form-examp
 import { SwitchSizesExampleComponent } from './switch-examples/switch-sizes-example/switch-sizes-example.component';
 import { SwitchHeaderComponent } from './switch-header/switch-header.component';
 import { SwitchConfigExampleComponent } from './switch-examples/switch-config-example/switch-config-example.component';
-import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformSwitchModule, FdpFormGroupModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformSwitchModule, FdpFormGroupModule],
     exports: [RouterModule],
     declarations: [
         SwitchHeaderComponent,

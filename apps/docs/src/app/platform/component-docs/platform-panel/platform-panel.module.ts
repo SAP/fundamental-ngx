@@ -5,7 +5,7 @@ import { PlatformPanelModule, PlatformButtonModule } from '@fundamental-ngx/plat
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 import { PlatformPanelHeaderComponent } from './platform-panel-header/platform-panel-header.component';
 import { PlatformPanelDocsComponent } from './platform-panel-docs.component';
@@ -28,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformPanelModule, PlatformButtonModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformPanelModule, PlatformButtonModule],
     exports: [RouterModule],
     declarations: [
         PlatformPanelDocsComponent,

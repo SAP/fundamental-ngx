@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { TimeHeaderComponent } from './time-header/time-header.component';
 import { TimeDocsComponent } from './time-docs.component';
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, TimeModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, TimeModule],
     exports: [RouterModule],
     declarations: [
         TimeDocsComponent,

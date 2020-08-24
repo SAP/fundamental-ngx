@@ -6,7 +6,7 @@ import { InfiniteScrollHeaderComponent } from './infinite-scroll-header/infinite
 import { InfiniteScrollDocsComponent } from './infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
 import { InfiniteScrollModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -20,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, InfiniteScrollModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, InfiniteScrollModule],
     exports: [RouterModule],
     declarations: [InfiniteScrollDocsComponent, InfiniteScrollHeaderComponent, InfiniteScrollBasicExampleComponent]
 })

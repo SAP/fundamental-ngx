@@ -11,7 +11,7 @@ import { PlatformStepInputHeaderComponent } from './platform-step-input-header/p
 import { PlatformNumberStepInputExampleComponent } from './platform-step-input-examples/platform-number-step-input-example.component';
 import { PlatformNumberStepInputFormExampleComponent } from './platform-step-input-examples/platform-number-step-input-reactive-example.component';
 import { PlatformNumberStepInputTemplateFormExampleComponent } from './platform-step-input-examples/platform-number-step-input-template-example.component';
-import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -25,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformStepInputModule, FdpFormGroupModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformStepInputModule, FdpFormGroupModule],
     exports: [RouterModule],
     declarations: [
         PlatformStepInputDocsComponent,

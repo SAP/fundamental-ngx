@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
-import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../../documentation/shared-documentation.module';
 
 import { PlatformTextAreaModule, FdpFormGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 import { PlatformTextareaHeaderComponent } from './platform-textarea-header/platform-textarea-header.component';
@@ -27,7 +27,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
+        SharedDocumentationModule,
         PlatformTextAreaModule,
         FdpFormGroupModule,
         PlatformButtonModule,

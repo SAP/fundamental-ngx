@@ -11,7 +11,7 @@ import { CheckboxReactiveFormsExampleComponent } from './examples/checkbox-react
 import { CheckboxStatesExampleComponent } from './examples/checkbox-states-example.component';
 import { CheckboxTristateExampleComponent } from './examples/checkbox-tristate-example.component';
 import { CheckboxModule, FormModule, LinkModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -30,7 +30,7 @@ const routes: Routes = [
         FormModule,
         CheckboxModule,
         RouterModule.forChild(routes),
-        SharedDocumentationPageModule
+        SharedDocumentationModule
     ],
     exports: [RouterModule],
     declarations: [

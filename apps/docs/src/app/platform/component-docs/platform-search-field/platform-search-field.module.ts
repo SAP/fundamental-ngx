@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 import { PlatformSearchFieldHeaderComponent } from './platform-search-field-header/platform-search-field-header.component';
 import { PlatformSearchFieldDocsComponent } from './platform-search-field-docs.component';
@@ -23,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformSearchFieldModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformSearchFieldModule],
     exports: [RouterModule],
     declarations: [
         PlatformSearchFieldDocsComponent,

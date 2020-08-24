@@ -9,7 +9,7 @@ import { PlatformInputAutoCompleteValidationExampleComponent } from './platform-
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../../documentation/shared-documentation.module';
 import { PopoverModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -31,7 +31,7 @@ const routes: Routes = [
         FdpFormGroupModule,
         PlatformInputModule,
         PlatformButtonModule,
-        SharedDocumentationPageModule,
+        SharedDocumentationModule,
         RouterModule.forChild(routes),
     ],
     exports: [RouterModule],

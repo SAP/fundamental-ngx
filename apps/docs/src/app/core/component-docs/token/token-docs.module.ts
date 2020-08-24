@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { TokenHeaderComponent } from './token-header/token-header.component';
 import { TokenDocsComponent } from './token-docs.component';
@@ -29,7 +29,7 @@ const routes: Routes = [
         FormModule,
         TokenModule,
         RouterModule.forChild(routes),
-        SharedDocumentationPageModule
+        SharedDocumentationModule
     ],
     exports: [RouterModule],
     declarations: [

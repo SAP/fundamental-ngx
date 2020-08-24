@@ -70,5 +70,5 @@ import { RouterModule } from '@angular/router';
         sharedCoreModules
     ]
 })
-export class SharedDocumentationPageModule {
+export class SharedDocumentationModule {
 }

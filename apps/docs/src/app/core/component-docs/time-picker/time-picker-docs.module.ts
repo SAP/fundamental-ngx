@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { TimePickerHeaderComponent } from './time-picker-header/time-picker-header.component';
 import { TimePickerDocsComponent } from './time-picker-docs.component';
@@ -34,7 +34,7 @@ const routes: Routes = [
         SelectModule,
         TimePickerModule,
         SegmentedButtonModule,
-        SharedDocumentationPageModule,
+        SharedDocumentationModule,
         RouterModule.forChild(routes),
     ],
     exports: [RouterModule],

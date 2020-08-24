@@ -15,7 +15,7 @@ import {
     PlatformObjectStatusLargeExampleComponent
 } from './platform-object-status-example/platform-object-status-example.component';
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformObjectStatusModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, PlatformObjectStatusModule],
     exports: [RouterModule],
     declarations: [
         PlatformObjectStatusDocsComponent,

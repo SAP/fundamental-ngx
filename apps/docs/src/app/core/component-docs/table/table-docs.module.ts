@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { TableDocsHeaderComponent } from './table-docs-header/table-docs-header.component';
 import { TableDocsComponent } from './table-docs.component';
@@ -62,7 +62,7 @@ const routes: Routes = [
         InputGroupModule,
         PaginationModule,
         ObjectStatusModule,
-        SharedDocumentationPageModule,
+        SharedDocumentationModule,
         RouterModule.forChild(routes),
     ],
     exports: [RouterModule, SortTableByPipe, FilterTableByPipe],

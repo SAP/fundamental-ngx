@@ -11,7 +11,7 @@ import {
 } from './examples/info-label-examples.component';
 import { InfoLabelHeaderComponent } from './info-label-header/info-label-header.component';
 import { InfoLabelModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -25,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, InfoLabelModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, InfoLabelModule],
     exports: [RouterModule],
     declarations: [
         InfoLabelDocsComponent,

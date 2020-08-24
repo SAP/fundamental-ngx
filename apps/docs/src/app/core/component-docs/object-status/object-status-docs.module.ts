@@ -15,7 +15,7 @@ import {
 } from './examples/object-status-examples.component';
 import { ObjectStatusHeaderComponent } from './object-status-header/object-status-header.component';
 import { ObjectStatusModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ObjectStatusModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, ObjectStatusModule],
     exports: [RouterModule],
     declarations: [
         ObjectStatusDocsComponent,

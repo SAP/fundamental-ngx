@@ -12,7 +12,7 @@ import {
 } from './examples/layout-grid-examples.component';
 import { LayoutGridDocsHeaderComponent } from './layout-grid-docs-header/layout-grid-docs-header.component';
 import { LayoutGridModule, LayoutPanelModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutGridModule, LayoutPanelModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, LayoutGridModule, LayoutPanelModule],
     exports: [RouterModule],
     declarations: [
         LayoutGridDocsComponent,

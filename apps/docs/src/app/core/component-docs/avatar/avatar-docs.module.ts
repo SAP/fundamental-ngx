@@ -15,7 +15,7 @@ import { AvatarPlaceholderExampleComponent } from './examples/avatar-examples.co
 import { AvatarTransparentExampleComponent } from './examples/avatar-examples.component';
 import { AvatarTileExampleComponent } from './examples/avatar-examples.component';
 import { AvatarZoomIconExampleComponent } from './examples/avatar-examples.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, AvatarModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, AvatarModule],
     exports: [RouterModule],
     declarations: [
         AvatarAccentColorsExampleComponent,

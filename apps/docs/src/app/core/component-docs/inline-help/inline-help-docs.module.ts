@@ -10,7 +10,7 @@ import {
     InlineHelpTriggerExampleComponent
 } from './examples/inline-help-examples.component';
 import { FormModule, InlineHelpModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InlineHelpModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, InlineHelpModule],
     exports: [RouterModule],
     declarations: [
         InlineHelpDocsComponent,

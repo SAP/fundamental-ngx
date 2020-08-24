@@ -15,7 +15,7 @@ import {
 import { InputGroupStatesExampleComponent } from './examples/input-group-states-example/input-group-states-example.component';
 import { InputGroupSearchExampleComponent } from './examples/input-group-search-example/input-group-search-example.component';
 import { FormModule, InputGroupModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InputGroupModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, FormModule, InputGroupModule],
     exports: [RouterModule],
     declarations: [
         InputGroupDocsComponent,

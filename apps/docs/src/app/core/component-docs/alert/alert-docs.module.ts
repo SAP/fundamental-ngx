@@ -10,7 +10,7 @@ import { AlertInlineExampleComponent } from './examples/alert-inline-example.com
 import { AlertWidthExampleComponent } from './examples/alert-width-example.component';
 import { AlertHeaderComponent } from './alert-header/alert-header.component';
 import { AlertModule, AlertService } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, AlertModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, AlertModule],
     exports: [RouterModule],
     declarations: [
         AlertHeaderComponent,

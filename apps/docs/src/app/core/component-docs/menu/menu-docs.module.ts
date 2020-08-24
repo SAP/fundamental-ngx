@@ -13,7 +13,7 @@ import {
 
 import { MenuMobileModule, MenuModule } from '@fundamental-ngx/core';
 import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MenuModule, MenuMobileModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MenuModule, MenuMobileModule],
     exports: [RouterModule],
     declarations: [
         MenuDocsComponent,
