@@ -93,8 +93,12 @@ export class NestedListTitleDirective {
 export class NestedListExpandIconDirective {
 
     /** @hidden */
-    @HostBinding('class.fd-nested-list__expand-icon')
+    @HostBinding('class.fd-nested-list__button')
     fdNestedListTitleClass = true;
+
+    /** @hidden */
+    @HostBinding('class.fd-button')
+    fdButtonClass = true;
 
     /**
      * @hidden

@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { BarComponent, BarModule } from 'libs/core/src/lib/bar/public_api';
 import { ButtonModule } from 'libs/core/src/lib/button/public_api';
-import { ImageModule } from 'libs/core/src/lib/image/public_api';
 
 export default {
     title: 'Fd bar',
@@ -15,7 +14,7 @@ export default {
         withKnobs,
         withA11y,
         moduleMetadata({
-            imports: [BarModule, ButtonModule, ImageModule, ReactiveFormsModule],
+            imports: [BarModule, ButtonModule, ReactiveFormsModule],
             declarations: []
         })
     ]
@@ -38,7 +37,7 @@ const sizes = {
 export const Bar = () => ({
     template: `
     <div style="padding:20px;">
-        <div fd-bar 
+        <div fd-bar
             [barDesign]="barDesignVar"
             [cosy]="cosy"
             [inHomePage]="inHomePage"
@@ -46,7 +45,7 @@ export const Bar = () => ({
             [size]="size">
             <div fd-bar-left *ngIf="showLeft">
                 <fd-bar-element>
-                    <button fd-button 
+                    <button fd-button
                         [glyph]="'basket'">btn
                     </button>
                 </fd-bar-element>
@@ -56,7 +55,7 @@ export const Bar = () => ({
             </div>
             <div fd-bar-middle *ngIf="showMiddle">
                 <fd-bar-element [fullWidth]="fullwidthVar">
-                    <button fd-button 
+                    <button fd-button
                         [glyph]="'basket'">btn
                     </button>
                 </fd-bar-element>
@@ -64,7 +63,7 @@ export const Bar = () => ({
                 Middle Section
                 </fd-bar-element>
                 <fd-bar-element>
-                    <button fd-button 
+                    <button fd-button
                         [glyph]="'basket'">btn
                     </button>
                 </fd-bar-element>
@@ -74,7 +73,7 @@ export const Bar = () => ({
                 Right Section
                 </fd-bar-element>
                 <fd-bar-element>
-                    <button fd-button 
+                    <button fd-button
                         [glyph]="'basket'">btn
                     </button>
                 </fd-bar-element>

@@ -42,8 +42,8 @@ import {
             <div fd-tile-content-text></div>
             <div fd-tile-content-byline></div>
             <span fd-tile-refresh [glyph]="'refresh'"></span>
-            <span #profileImg fd-tile-profile-img [backgroundImage]="'https://placeimg.com/60/60/nature'"></span>
-            <span #backgroundImg fd-tile-background-img [backgroundImage]="'https://placeimg.com/60/60/nature'"></span>
+            <span #profileImg fd-tile-profile-img [backgroundImage]="'http://lorempixel.com/60/60/nature'"></span>
+            <span #backgroundImg fd-tile-background-img [backgroundImage]="'http://lorempixel.com/60/60/nature'"></span>
             <span fd-tile-logo></span>
             <span fd-tile-toggle></span>
         </div>
@@ -151,13 +151,13 @@ describe('TileDirectives', () => {
         expect(component.profileImg.nativeElement.className).toContain('fd-tile__profile-img');
         expect(component.profileImg.nativeElement.id).toContain('fd-profileTile-');
         expect(component.profileImg.nativeElement.style.getPropertyValue('background-image')).toContain(
-            'url("https://placeimg.com/60/60/nature")'
+            'url("http://lorempixel.com/60/60/nature")'
         );
         expect(component.container.nativeElement.className).toContain('fd-tile-container');
         expect(component.container.nativeElement.className).toContain('fd-tile-container--list');
         expect(component.backgroundImg.nativeElement.className).toContain('fd-tile__background-img');
         expect(component.backgroundImg.nativeElement.style.getPropertyValue('background-image')).toContain(
-            'url("https://placeimg.com/60/60/nature")'
+            'url("http://lorempixel.com/60/60/nature")'
         );
         expect(component.slideContainer.nativeElement.className).toContain('fd-tile__container');
         expect(component.dot.nativeElement.className).toContain('fd-tile__dot');
