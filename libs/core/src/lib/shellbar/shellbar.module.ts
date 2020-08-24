@@ -4,7 +4,6 @@ import { ShellbarComponent } from './shellbar.component';
 import { ProductMenuComponent } from './product-menu/product-menu.component';
 import { PopoverModule } from '../popover/popover.module';
 import { MenuModule } from '../menu/menu.module';
-import { IdentifierModule } from '../identifier/identifier.module';
 import { ButtonModule } from '../button/button.module';
 
 import { ShellbarSubtitleComponent } from './shellbar-subtitle/shellbar-subtitle.component';
@@ -20,6 +19,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductSwitchModule } from '../product-switch/product-switch.module';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarActionsMobileComponent } from './shellbar-actions/shellbar-actions-mobile.component';
+import { AvatarModule } from '../../lib/avatar/avatar.module'
 
 @NgModule({
     declarations: [
@@ -38,12 +38,12 @@ import { ShellbarActionsMobileComponent } from './shellbar-actions/shellbar-acti
         CommonModule,
         PopoverModule,
         MenuModule,
-        IdentifierModule,
         ButtonModule,
         DragAndDropModule,
         DragDropModule,
         ProductSwitchModule,
-        IconModule
+        IconModule,
+        AvatarModule
     ],
     exports: [
         ShellbarComponent,

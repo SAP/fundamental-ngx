@@ -83,11 +83,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
             },
             {
-                path: 'dropdown',
-                loadChildren: () =>
-                    import('./component-docs/dropdown/dropdown-docs.module').then((m) => m.DropdownDocsModule)
-            },
-            {
                 path: 'file-input',
                 loadChildren: () =>
                     import('./component-docs/file-input/file-input-docs.module').then((m) => m.FileInputDocsModule)
@@ -110,15 +105,6 @@ export const ROUTES: Routes = [
             {
                 path: 'icon',
                 loadChildren: () => import('./component-docs/icon/icon-docs.module').then((m) => m.IconDocsModule)
-            },
-            {
-                path: 'identifier',
-                loadChildren: () =>
-                    import('./component-docs/identifier/identifier-docs.module').then((m) => m.IdentifierDocsModule)
-            },
-            {
-                path: 'image',
-                loadChildren: () => import('./component-docs/image/image-docs.module').then((m) => m.ImageDocsModule)
             },
             {
                 path: 'info-label',
@@ -239,13 +225,6 @@ export const ROUTES: Routes = [
             {
                 path: 'radio',
                 loadChildren: () => import('./component-docs/radio/radio-docs.module').then((m) => m.RadioDocsModule)
-            },
-            {
-                path: 'select-native',
-                loadChildren: () =>
-                    import('./component-docs/select-native/select-native-docs.module').then(
-                        (m) => m.SelectNativeDocsModule
-                    )
             },
             {
                 path: 'scroll-spy',

@@ -6,7 +6,6 @@ import { MenuModule } from '../../menu/menu.module';
 import { PopoverModule } from '../../popover/popover.module';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { ButtonModule } from '../../button/button.module';
-import { IdentifierModule } from '../../identifier/identifier.module';
 import { ProductSwitchModule } from '../../product-switch/product-switch.module';
 import { IconModule } from '../../icon/icon.module';
 import { ShellbarActionsMobileComponent } from './shellbar-actions-mobile.component';
@@ -21,7 +20,7 @@ describe('ShellbarActionsComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ShellbarActionsComponent, ShellbarActionsMobileComponent, ShellbarUserMenuComponent],
-            imports: [MenuModule, PopoverModule, ButtonModule, IconModule, IdentifierModule, ProductSwitchModule],
+            imports: [MenuModule, PopoverModule, ButtonModule, IconModule, ProductSwitchModule],
             providers: [{ provide: 'window', useFactory: () => windowMock }]
         }).compileComponents();
     }));

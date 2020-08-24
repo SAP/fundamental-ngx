@@ -14,7 +14,7 @@ import { BarHeaderExampleComponent } from './examples/bar-header-example.compone
 import { BarPageExampleComponent } from './examples/bar-page-example.component';
 import { BarPageResponsiveExampleComponent } from './examples/bar-page-responsive-example.component';
 import { BarHeaderComponent } from './bar-header/bar-header.component';
-import { BarModule, ImageModule } from '@fundamental-ngx/core';
+import { AvatarModule, BarModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, BarModule, ImageModule],
+    imports: [RouterModule.forChild(routes), AvatarModule, SharedDocumentationPageModule, BarModule],
     exports: [RouterModule],
     declarations: [
         BarDocsComponent,

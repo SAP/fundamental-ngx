@@ -13,13 +13,12 @@ import { PopoverPlacementExampleComponent } from './examples/popover-placement/p
 import { PopoverProgrammaticOpenExampleComponent } from './examples/popover-programmatic/popover-programmatic-open-example.component';
 import { PopoverExampleComponent } from './examples/popover-simple/popover-example.component';
 import {
-    IdentifierModule,
-    ImageModule,
     DialogModule,
     MultiInputModule,
     PopoverModule,
     SideNavigationModule,
     BarModule,
+    AvatarModule,
     ListModule
 } from '@fundamental-ngx/core';
 import { PopoverComplexExampleComponent } from './examples/popover-complex-example/popover-complex-example.component';
@@ -40,12 +39,11 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PopoverModule,
-        ImageModule,
-        IdentifierModule,
         SideNavigationModule,
         MultiInputModule,
         DialogModule,
         ListModule,
+        AvatarModule,
         BarModule
     ],
     exports: [RouterModule],

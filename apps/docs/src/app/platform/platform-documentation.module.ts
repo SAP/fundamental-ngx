@@ -10,11 +10,14 @@ import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { AvatarModule } from '@fundamental-ngx/core';
+
 
 @NgModule({
     declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
     imports: [
         ScrollingModule,
+        AvatarModule,
         SharedDocumentationModule,
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES),
