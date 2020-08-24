@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.18...v0.21.1-rc.19) (2020-08-24)
+
+
+### Bug Fixes
+
+* (core) toolbar enhancements ([#3019](https://github.com/SAP/fundamental-ngx/issues/3019)) ([b0e8cad](https://github.com/SAP/fundamental-ngx/commit/b0e8cad5c7a7d86acc869b579869b95e844ac207))
+
+### [0.21.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.17...v0.21.1-rc.18) (2020-08-23)
+
+### [0.21.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.16...v0.21.1-rc.17) (2020-08-21)
+
+
+### Bug Fixes
+
+* time picker meridian input  ([#3053](https://github.com/SAP/fundamental-ngx/issues/3053)) ([9ada0fc](https://github.com/SAP/fundamental-ngx/commit/9ada0fc7522cb497fb38ef33df84da13ddcf7aa5))
+
+### [0.21.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.15...v0.21.1-rc.16) (2020-08-20)
+
+
+### Bug Fixes
+
+* revert including fundamental styles version 0.11 ([#3056](https://github.com/SAP/fundamental-ngx/issues/3056)) ([143c53a](https://github.com/SAP/fundamental-ngx/commit/143c53a31677c0a42b4bb7f6039c51ffee1fd747))
+
+### [0.21.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.14...v0.21.1-rc.15) (2020-08-20)
+
+
+### Bug Fixes
+
+* (platform) add types to contentDensity to fix build error ([#3040](https://github.com/SAP/fundamental-ngx/issues/3040)) ([b61fd62](https://github.com/SAP/fundamental-ngx/commit/b61fd6235b13f7b39523c528ecb6e7ba2a1e2717))
+
+### [0.21.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.13...v0.21.1-rc.14) (2020-08-20)
+
+
+### Bug Fixes
+
+* export toolbar module ([#3055](https://github.com/SAP/fundamental-ngx/issues/3055)) ([9748655](https://github.com/SAP/fundamental-ngx/commit/9748655ac53d97e61bb172daf35846195911cd77))
+* Platform wrapper component for object status with document changes ([#2764](https://github.com/SAP/fundamental-ngx/issues/2764)) ([40e3dfb](https://github.com/SAP/fundamental-ngx/commit/40e3dfb41c12c1b0acbfc5ad826125b2fb107ee0)), closes [#2751](https://github.com/SAP/fundamental-ngx/issues/2751)
+
 ### [0.21.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.12...v0.21.1-rc.13) (2020-08-19)
 
 
