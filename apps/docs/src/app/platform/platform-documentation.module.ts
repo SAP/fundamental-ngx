@@ -5,7 +5,7 @@ import { ROUTES } from './platform-documentation.routes';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { MarkdownModule } from 'ngx-markdown';
-import { NewComponentComponent } from './component-docs/new-component/new-component.component';
+import { NewComponentComponent } from '../platform/component-docs/new-component/new-component.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
@@ -18,7 +18,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES),
-        SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS)
+        ScrollingModule,
+        AvatarModule
     ],
     providers: [
         { provide: 'CURRENT_LIB', useValue: 'platform' },

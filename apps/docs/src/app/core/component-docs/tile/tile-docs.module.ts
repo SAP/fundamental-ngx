@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { API_FILES } from '../../api-files';
 import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
 import { TileDocsComponent } from './tile-docs.component';
@@ -16,7 +16,7 @@ import {
     TileColumnsExampleComponent,
     TileGenericExampleComponent
 } from './examples/tile-examples.component';
-import { IdentifierModule, TileModule, BadgeModule } from '@fundamental-ngx/core';
+import { AvatarModule, ListModule, TileModule, BadgeModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -32,10 +32,11 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        IdentifierModule,
+        SharedDocumentationModule,
         TileModule,
-        BadgeModule
+        BadgeModule,
+        AvatarModule,
+        ListModule
     ],
     exports: [RouterModule],
     declarations: [

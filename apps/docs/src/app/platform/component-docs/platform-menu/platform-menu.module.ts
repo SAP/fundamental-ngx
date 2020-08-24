@@ -27,7 +27,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
+        SharedDocumentationModule,
         PlatformMenuModule,
         PlatformButtonModule,
         AvatarModule
