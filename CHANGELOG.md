@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.18...v0.21.1-rc.19) (2020-08-24)
+
+
+### Bug Fixes
+
+* (core) toolbar enhancements ([#3019](https://github.com/SAP/fundamental-ngx/issues/3019)) ([b0e8cad](https://github.com/SAP/fundamental-ngx/commit/b0e8cad5c7a7d86acc869b579869b95e844ac207))
+
 ### [0.21.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.17...v0.21.1-rc.18) (2020-08-23)
 
 ### [0.21.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.16...v0.21.1-rc.17) (2020-08-21)
