@@ -272,12 +272,14 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     private createContainer(): void {
+        console.log('1');
         if (this.containerRef) {
             return;
         }
 
         const factory = this.resolver.resolveComponentFactory(PopoverContainer);
         this.containerRef = factory.create(this.injector);
+        console.log('2');
 
         // Set instance properties
         this.containerRef.instance.context = this;
@@ -285,6 +287,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         this.containerRef.instance.focusTrapped = this.focusTrapped;
         this.containerRef.instance.noArrow = this.noArrow;
         this.containerRef.instance.closeOnEscapeKey = this.closeOnEscapeKey;
+        console.log('3');
 
         if (this.additionalClasses.length > 0) {
             this.containerRef.location.nativeElement.classList.add(...this.additionalClasses);
@@ -298,10 +301,15 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             setupRef.unsubscribe();
         });
         const containerEl = (this.containerRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+        console.log('4');
         if (this.appendTo === 'body') {
-
+            console.log('body');
+            console.log(containerEl);
             document.body.appendChild(containerEl);
         } else {
+            console.log('no-nody');
+            console.log(containerEl);
+            console.log(this.appendTo);
             this.appendTo.appendChild(containerEl);
         }
     }

@@ -18,10 +18,10 @@ import {
 import { CheckboxComponent } from '../../checkbox/checkbox/checkbox.component';
 import { RadioButtonComponent } from '../../radio/radio-button/radio-button.component';
 import { ListLinkDirective } from '../directives/list-link.directive';
-import { FocusableOption } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { KeyUtil } from '../../..';
+import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
+import { KeyUtil } from '../../utils/functions/key-util';
 
 /**
  * The component that represents a list item.
@@ -38,7 +38,7 @@ import { KeyUtil } from '../../..';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class ListItemComponent implements FocusableOption, AfterContentInit, OnDestroy {
+export class ListItemComponent implements KeyboardSupportItemInterface, AfterContentInit, OnDestroy {
     /** Whether list item is selected */
     @Input()
     @HostBinding('attr.aria-selected')
@@ -64,6 +64,10 @@ export class ListItemComponent implements FocusableOption, AfterContentInit, OnD
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
+    /** Mouse click event emitter */
+    @Output()
+    clicked: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
     /** Whether list item contains link */
     @HostBinding('class.fd-list__item--link')
     link = false;
@@ -85,19 +89,12 @@ export class ListItemComponent implements FocusableOption, AfterContentInit, OnD
 
     constructor(
         public elementRef: ElementRef,
-        private _changeDet: ChangeDetectorRef
-    ) {
-    }
+        private _changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.linkDirectives.changes.pipe(
-            takeUntil(this._onDestroy$),
-            startWith(0)
-        ).subscribe(() => {
-            this.link = this.linkDirectives.length > 0;
-            this._changeDet.detectChanges();
-        });
+        this._listenOnLinkQueryChange();
     }
 
     /** @hidden */
@@ -109,10 +106,15 @@ export class ListItemComponent implements FocusableOption, AfterContentInit, OnD
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, [' ', 'Enter']) && this.checkbox) {
-            this.checkbox.nextValue();
-            event.stopPropagation();
-            event.preventDefault();
+        if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+            if (this.checkbox) {
+                this.checkbox.nextValue();
+                this._muteEvent(event);
+            }
+            if (this.radio) {
+                this.radio.labelClicked();
+                this._muteEvent(event);
+            }
         }
         this.keyDown.emit(event);
     }
@@ -120,6 +122,7 @@ export class ListItemComponent implements FocusableOption, AfterContentInit, OnD
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
+        this.clicked.emit(event);
         if (this.checkbox) {
             this.checkbox.nextValue();
         }
@@ -136,5 +139,22 @@ export class ListItemComponent implements FocusableOption, AfterContentInit, OnD
     /** @hidden */
     focus(): void {
         this.elementRef.nativeElement.focus();
+    }
+
+    /** @hidden */
+    private _listenOnLinkQueryChange(): void {
+        this.linkDirectives.changes.pipe(
+            takeUntil(this._onDestroy$),
+            startWith(0)
+        ).subscribe(() => {
+            this.link = this.linkDirectives.length > 0;
+            this._changeDetectorRef.detectChanges();
+        });
+    }
+
+    /** @hidden */
+    private _muteEvent(event: Event): void {
+        event.stopPropagation();
+        event.preventDefault();
     }
 }

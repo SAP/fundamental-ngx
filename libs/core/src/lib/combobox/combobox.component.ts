@@ -39,6 +39,7 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { ListComponent } from '../list/list.component';
+import { FocusEscapeDirection } from '../..';
 
 /**
  * Allows users to filter through results and select a value.
@@ -390,9 +391,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     }
 
     /** Method passed to list component */
-    focusSearchInputElement = (keyboardEvent: KeyboardEvent): void => {
-        this.searchInputElement.nativeElement.focus();
-        keyboardEvent.stopPropagation();
+    handleListFocusEscape(direction: FocusEscapeDirection): void {
+        if (direction === 'up') {
+            this.searchInputElement.nativeElement.focus();
+        }
     }
 
     /** @hidden */

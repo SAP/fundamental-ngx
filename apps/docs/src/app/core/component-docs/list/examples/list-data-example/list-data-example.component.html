@@ -4,13 +4,13 @@
     </label>
     <fd-toolbar-spacer></fd-toolbar-spacer>
     <fd-input-group
-        [compact]="true"
-        [disabled]="false"
+        button="true"
+        compact="true"
+        disabled="false"
+        glyph="decline"
+        placeholder="Search"
         [(ngModel)]="searchTerm"
         (ngModelChange)="handleSearchTermChange($event)"
-        [glyph]="'decline'"
-        [placeholder]="'Search'"
-        [button]="true"
         (addOnButtonClicked)="handleSearchTermChange('')"
     >
     </fd-input-group>
@@ -23,10 +23,10 @@
             {{ item }}
         </span>
         <span fd-list-secondary>
-            <button fd-button [compact]="true" [glyph]="'delete'" (click)="removeItem(ind)"></button>
+            <button fd-button compact="true" glyph="delete" (click)="removeItem(ind)"></button>
         </span>
     </li>
-    <li fd-list-item [noData]="true" *ngIf="!displayedItems || displayedItems.length === 0">
+    <li fd-list-item noData="true" *ngIf="!displayedItems || displayedItems.length === 0">
         <span fd-list-title>
             No results found!
         </span>

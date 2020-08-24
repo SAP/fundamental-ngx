@@ -75,7 +75,7 @@
         *ngIf="displayedValues && displayedValues.length"
         fd-list
         class="fd-multi-input-menu-overflow"
-        [escapeBeforeListCallback]="focusSearchInputElement"
+        (focusEscapeList)="handleListFocusEscape($event)"
         [multiInputMode]="true"
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
     >

@@ -78,7 +78,7 @@
     <ul
         fd-list
         class="fd-combobox-custom-list fd-combobox-input-menu-overflow"
-        [escapeBeforeListCallback]="focusSearchInputElement"
+        (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
         [style.maxHeight]="!mobile && maxHeight"
         [hasMessage]="listMessages && listMessages.length > 0"

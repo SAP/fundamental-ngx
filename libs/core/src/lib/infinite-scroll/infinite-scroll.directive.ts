@@ -1,5 +1,6 @@
 import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 
 /**
  * Tool directive used to achieve the infinite scroll mechanism.
@@ -28,14 +29,12 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        this._setUpSubscription();
+        this._setScrollSubscription();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this._subscription) {
-            this._subscription.unsubscribe();
-        }
+        this._subscription.unsubscribe();
     }
 
     /** @hidden **/
@@ -50,14 +49,14 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private _setUpSubscription(): void {
+    private _setScrollSubscription(): void {
         this._subscription.add(
             fromEvent(this._element.nativeElement, 'scroll')
-                .subscribe(() => {
-                    if (this._shouldTriggerAction()) {
-                        this.onScrollAction.emit(null);
-                    }
-                })
+                .pipe(
+                    debounceTime(10),
+                    filter(() => this._shouldTriggerAction())
+                )
+                .subscribe(() => this.onScrollAction.emit(null))
         );
     }
 }

@@ -10,18 +10,7 @@ export class ListInfiniteScrollExampleComponent {
     readonly ITEMS_AMOUNT_ON_LOAD = 5;
 
     // List that is displayed to the user
-    items = [
-        'Initially shown element',
-        'Initially shown element',
-        'Initially shown element',
-        'Initially shown element',
-        'Initially shown element',
-        'Initially shown element',
-        'Initially shown element',
-        'Initially shown element',
-        'Initially shown element',
-        'Initially shown element'
-    ];
+    items = new Array(10).fill('Initially shown items');
 
     loading = false;
 
@@ -45,11 +34,10 @@ export class ListInfiniteScrollExampleComponent {
     }
 
     private _getNewItems(): string[] {
-        const lastItemIndex = this.items.length;
-        const items = [];
-        for (let i = lastItemIndex; i < lastItemIndex + this.ITEMS_AMOUNT_ON_LOAD; ++i) {
-            items.push('Element' + i);
-        }
-        return items;
+        let index = this.items.length;
+
+        return Array(this.ITEMS_AMOUNT_ON_LOAD)
+            .fill(undefined)
+            .map(_ => `Element ${index++}`)
     }
 }

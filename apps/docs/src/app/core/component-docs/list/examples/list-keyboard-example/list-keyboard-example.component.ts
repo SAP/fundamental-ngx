@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ButtonComponent, ListComponent } from '@fundamental-ngx/core';
+import { ButtonComponent, FocusEscapeDirection, ListComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-list-keyboard-example',
@@ -13,12 +13,12 @@ export class ListKeyboardExampleComponent {
     @ViewChild(ListComponent)
     list: ListComponent
 
-    approachEndCallback = () => {
-        alert('End of list approached');
-    }
-
-    approachBeginCallback = () => {
-        this.button.nativeElement.focus();
+    handleFocusEscape(direction: FocusEscapeDirection): void {
+        if (direction === 'up') {
+            this.button.nativeElement.focus();
+        } else {
+            alert('End of list approached');
+        }
     }
 
     focusFirst(): void {

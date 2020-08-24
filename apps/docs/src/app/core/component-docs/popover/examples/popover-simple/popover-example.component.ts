@@ -8,11 +8,13 @@ import { map } from 'rxjs/operators';
     selector: 'fd-popover-example',
     templateUrl: './popover-example.component.html',
     styleUrls: ['popover-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PopoverExampleComponent {
     leftPlacement$: Observable<Placement>;
     rightPlacement$: Observable<Placement>;
+
+    isOpen = false
 
     constructor(private _rtlService: RtlService) {
         this.leftPlacement$ = this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'right' : 'left')));

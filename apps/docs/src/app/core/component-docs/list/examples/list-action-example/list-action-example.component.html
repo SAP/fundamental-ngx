@@ -6,8 +6,8 @@
         </span>
     </li>
     <li fd-list-item [action]="true">
-        <button fd-list-title (click)="loadMore()" class="fd-list__title--growing">
-            <fd-busy-indicator size="m" class="fd-busy-indicator-custom" [block]="true" [loading]="loading">
+        <button fd-list-title (click)="loadMore()">
+            <fd-busy-indicator class="fd-busy-indicator-custom" [block]="false" [loading]="loading">
             </fd-busy-indicator>
             Show More
         </button>

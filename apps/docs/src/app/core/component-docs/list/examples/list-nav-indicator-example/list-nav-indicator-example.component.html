@@ -1,14 +1,14 @@
-<ul fd-list [navigationIndication]="true">
+<ul fd-list navigationIndicator="true">
     <li fd-list-item>
-        <a fd-list-link [navigationIndicator]="true">
+        <a fd-list-link navigationIndicator="true">
             <span fd-list-title>
                 Link List item 1
             </span>
         </a>
     </li>
     <li fd-list-item>
-        <a fd-list-link [navigationIndicator]="true" [navigated]="true">
-            <span fd-list-icon [glyph]="'history'"></span>
+        <a fd-list-link navigationIndicator="true" navigated="true">
+            <span fd-list-icon glyph="history"></span>
             <span fd-list-title>
                 Link List item 2
             </span>
@@ -20,8 +20,8 @@
         </span>
     </li>
     <li fd-list-item>
-        <a fd-list-link [navigationIndicator]="true" [selected]="true">
-            <span fd-list-icon [glyph]="'cart'"></span>
+        <a fd-list-link navigationIndicator="true" selected="true">
+            <span fd-list-icon glyph="cart"></span>
             <span fd-list-title>
                 Link List item 4
             </span>

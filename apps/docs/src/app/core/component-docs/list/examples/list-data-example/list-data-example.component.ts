@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-export type SortDirections = 'asc' | 'desc';
-
 @Component({
   selector: 'fd-list-data-example',
   templateUrl: './list-data-example.component.html',

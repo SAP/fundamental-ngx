@@ -12,11 +12,9 @@ import {
     OnDestroy,
     OnInit,
     Output,
-    QueryList,
     SimpleChanges,
     TemplateRef,
     ViewChild,
-    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -25,8 +23,7 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
-import { ListItemComponent } from '../list/list-item/list-item.component';
-import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
@@ -314,9 +311,10 @@ export class MultiInputComponent implements
     }
 
     /** Method passed to list component */
-    focusSearchInputElement = (keyboardEvent: KeyboardEvent): void => {
-        this.searchInputElement.nativeElement.focus();
-        keyboardEvent.stopPropagation();
+    handleListFocusEscape(direction: FocusEscapeDirection): void {
+        if (direction === 'up') {
+            this.searchInputElement.nativeElement.focus();
+        }
     }
 
     /** @hidden */
