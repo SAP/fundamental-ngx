@@ -192,7 +192,7 @@ export class ComboboxComponent
 
     /** Whether or not to display the addon button. */
     @Input()
-    displayAddonButton = true;
+    showDropdownButton = true;
 
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
