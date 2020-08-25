@@ -91,10 +91,12 @@ export class SplitButtonComponent implements AfterContentChecked {
 
     ngAfterContentChecked(): void {
         if (!this.mainActionTitle) {
-            this.menu.selected.subscribe(value => {
-                this.mainActionTitle = value;
-                this._changeDetectorRef.detectChanges();
-            });
+            if (this.menu) {
+                this.menu.selected.subscribe(value => {
+                    this.mainActionTitle = value;
+                    this._changeDetectorRef.detectChanges();
+                });
+            }
         }
     }
 }

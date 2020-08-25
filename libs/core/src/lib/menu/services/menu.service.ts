@@ -138,8 +138,12 @@ export class MenuService {
 
     /** @hidden Sends current selected menu item*/
     sendSelected(menuItem: MenuItemComponent): void {
-        if (!menuItem.submenu) {
-            this._emitSelected(menuItem.menuItemTitle.title)
+        if (menuItem) {
+            if (!menuItem.submenu) {
+                if (menuItem.menuItemTitle) {
+                    this._emitSelected(menuItem.menuItemTitle.title)
+                }
+            }
         }
     }
 
