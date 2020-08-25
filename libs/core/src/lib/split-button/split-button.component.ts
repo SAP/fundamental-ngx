@@ -7,7 +7,7 @@ import {
     Output,
     TemplateRef,
     ViewEncapsulation,
-    AfterContentInit,
+    AfterContentChecked,
     ChangeDetectorRef
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
@@ -43,7 +43,7 @@ import { takeUntil } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent implements AfterContentInit {
+export class SplitButtonComponent implements AfterContentChecked {
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -58,15 +58,7 @@ export class SplitButtonComponent implements AfterContentInit {
     disabled: boolean;
 
     /** The Title for main  action button */
-    private _mainActionTitle: string;
-
-    set mainActionTitle(title: string) {
-        this._mainActionTitle = title;
-    }
-
-    get mainActionTitle(): string {
-        return this._mainActionTitle;
-    }
+    @Input() mainActionTitle: string;
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
@@ -97,10 +89,12 @@ export class SplitButtonComponent implements AfterContentInit {
         event.stopPropagation();
     }
 
-    ngAfterContentInit(): void {
-        this.menu.selected.subscribe(value => {
-            this.mainActionTitle = value;
-            this._changeDetectorRef.detectChanges();
-        })
+    ngAfterContentChecked(): void {
+        if (!this.mainActionTitle) {
+            this.menu.selected.subscribe(value => {
+                this.mainActionTitle = value;
+                this._changeDetectorRef.detectChanges();
+            });
+        }
     }
 }
