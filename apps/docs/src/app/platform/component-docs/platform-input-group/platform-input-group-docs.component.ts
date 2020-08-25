@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 import * as inputGroupStandardExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-standard-example.component.html';
+import * as inputGroupCompactExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-compact-example.component.html';
+import * as inputGroupStateExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-state-example.component.html';
 
 @Component({
     selector: 'app-input-group',
@@ -14,6 +16,22 @@ export class PlatformInputGroupDocsComponent {
             language: 'html',
             code: inputGroupStandardExampleHtml,
             fileName: 'platform-input-group-standard-example'
+        }
+    ];
+
+    inputGroupCompact: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupCompactExampleHtml,
+            fileName: 'platform-input-group-compact-example'
+        }
+    ];
+
+    inputGroupState: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupStateExampleHtml,
+            fileName: 'platform-input-group-state-example'
         }
     ];
 }

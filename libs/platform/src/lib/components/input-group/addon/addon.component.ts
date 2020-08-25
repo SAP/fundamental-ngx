@@ -14,7 +14,8 @@ import { startWith } from 'rxjs/operators';
 
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core';
 
-import { ButtonComponent, ContentDensity } from '@fundamental-ngx/platform';
+import { ContentDensity } from '../../form/form-control';
+import { ButtonComponent } from '../../button/public_api';
 
 import { InputGroupComponent } from '../input-group.component';
 
@@ -70,7 +71,7 @@ export class InputGroupAddonComponent implements CssClassBuilder, OnInit, OnChan
     buildComponentCssClass(): string[] {
         return [
             'fd-input-group__addon',
-            this._fdpButtons ? 'fd-input-group__addon--button' : '',
+            this._fdpButtons?.length > 0 ? 'fd-input-group__addon--button' : '',
             this._contentDensity === 'compact' ? 'fd-input-group__addon--compact' : ''
         ];
     }

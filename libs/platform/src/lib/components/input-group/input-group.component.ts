@@ -11,19 +11,18 @@ import {
     ChangeDetectorRef,
     Renderer2
 } from '@angular/core';
+import { startWith } from 'rxjs/operators';
 
-import { InputComponent } from '@fundamental-ngx/platform';
-
+import { InputComponent } from '../form/input/input.component';
 import { ContentDensity, Status } from '../form/form-control';
 import { BaseComponent } from '../base';
 
 import { InputGroupConfig } from './input-group.config';
-import { startWith } from 'rxjs/operators';
 
 /**
  * Fundamental input group component
  *
- * */
+ */
 @Component({
     selector: 'fdp-input-group',
     templateUrl: './input-group.component.html',
@@ -44,10 +43,12 @@ export class InputGroupComponent extends BaseComponent implements AfterContentIn
     }
 
     /**
-     * constrol state: 'success' | 'error' | 'warning' | 'default' | 'information'
+     * control state: 'success' | 'error' | 'warning' | 'default' | 'information'
      */
     @Input()
-    state: Status = 'default';
+    set state(state: Status) {
+        this._controlStateClass = `is-${state}`;
+    }
 
     /**
      * @hidden
@@ -63,6 +64,8 @@ export class InputGroupComponent extends BaseComponent implements AfterContentIn
 
     /** @hidden */
     _contentDensity: ContentDensity = this._inputGroupConfig.contentDensity;
+
+    _controlStateClass: string;
 
     /** @hidden */
     constructor(
