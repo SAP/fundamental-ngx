@@ -135,6 +135,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     placement: Placement = 'bottom-start';
 
+    /** The element to which the popover should be appended. */
+    @Input()
+    appendTo: HTMLElement | 'body' = 'body';
+
     /** Whether the date picker is disabled. */
     @Input()
     disabled: boolean;
