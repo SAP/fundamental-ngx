@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1](https://github.com/SAP/fundamental-ngx/compare/v0.21.0...v0.21.1) (2020-08-25)
+
+
+### Bug Fixes
+
+* (platform) fix switch component build error in consuming applications ([bc51a97](https://github.com/SAP/fundamental-ngx/commit/bc51a97a15ccaa8e44aeffea2e6ac2781e3da8aa))
+* (platform) fix wrong path after build ([#3080](https://github.com/SAP/fundamental-ngx/issues/3080)) ([45b994c](https://github.com/SAP/fundamental-ngx/commit/45b994cc6d71e055c27776ffb481fa5900a679c4))
+
 ## [0.21.0](https://github.com/SAP/fundamental-ngx/compare/v0.21.0-rc.10...v0.21.0) (2020-08-13)
 
 ## [0.21.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.21.0-rc.9...v0.21.0-rc.10) (2020-08-13)
