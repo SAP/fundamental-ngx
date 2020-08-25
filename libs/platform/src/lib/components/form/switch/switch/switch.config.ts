@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ContentDensity } from '../../../form/form-control';
+import { ContentDensity } from '../../form-control';
 
 /**
  * Default options for platform Switch
