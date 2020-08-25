@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.7...v0.22.0-rc.8) (2020-08-25)
+
+
+### Bug Fixes
+
+* append datepicker and datetime picker popovers to body ([#3052](https://github.com/SAP/fundamental-ngx/issues/3052)) ([6911b6b](https://github.com/SAP/fundamental-ngx/commit/6911b6b0408d200f9f71c672c412d96b7dfdc09c))
+
 ## [0.22.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.6...v0.22.0-rc.7) (2020-08-25)
 
 
