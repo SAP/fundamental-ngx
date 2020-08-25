@@ -151,7 +151,6 @@ export class PopoverComponent {
     public open(): void {
         if (!this.isOpen) {
             this.isOpen = true;
-            console.log('open1');
             this.isOpenChange.emit(this.isOpen);
         }
     }

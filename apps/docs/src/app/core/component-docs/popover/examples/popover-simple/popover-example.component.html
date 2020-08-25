@@ -54,9 +54,7 @@
         </fd-popover-body>
     </fd-popover>
 
-    <button fd-button (click)="isOpen = true">Open</button>
-
-    <fd-popover [placement]="rightPlacement$ | async" [(isOpen)]="isOpen">
+    <fd-popover [placement]="rightPlacement$ | async">
         <fd-popover-control>
             <button fd-button>Button</button>
         </fd-popover-control>
