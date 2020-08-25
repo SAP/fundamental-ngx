@@ -8,7 +8,9 @@ import {
     AfterContentInit,
     ContentChildren,
     QueryList,
-    Renderer2
+    Renderer2,
+    SkipSelf,
+    Optional
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
@@ -42,7 +44,7 @@ export class InputGroupAddonComponent implements CssClassBuilder, OnInit, OnChan
     constructor(
         private _elementRef: ElementRef<any>,
         private _renderer: Renderer2,
-        private _inputGroup: InputGroupComponent
+        @Optional() @SkipSelf() private _inputGroup: InputGroupComponent
     ) {}
 
     /**@hidden */

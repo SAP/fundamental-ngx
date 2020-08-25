@@ -37,6 +37,9 @@ export class InputGroupComponent extends BaseComponent implements AfterContentIn
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
+        if (this._inputControls) {
+            this.setupChildInputControls(this._inputControls);
+        }
     }
     get contentDensity(): ContentDensity {
         return this._contentDensity;
@@ -65,6 +68,7 @@ export class InputGroupComponent extends BaseComponent implements AfterContentIn
     /** @hidden */
     _contentDensity: ContentDensity = this._inputGroupConfig.contentDensity;
 
+    /** @hidden */
     _controlStateClass: string;
 
     /** @hidden */
@@ -82,19 +86,19 @@ export class InputGroupComponent extends BaseComponent implements AfterContentIn
         this._inputControls.changes
             .pipe(startWith(this._inputControls))
             .subscribe((inputControls: QueryList<InputComponent>) => {
-                inputControls.forEach((control) => {
-                    this.setupFdpInputComponent(control);
-                    this.setupClassesForChildInputElements();
-                });
+                this.setupChildInputControls(inputControls);
+                this.setupClassesForChildInputElements();
             });
     }
 
-    private setupFdpInputComponent(inputComponent: InputComponent): void {
-        if (this._contentDensity) {
-            inputComponent.contentDensity = this._contentDensity;
-        }
+    /** @hidden */
+    private setupChildInputControls(inputControls = this._inputControls): void {
+        inputControls.forEach((control) => {
+            control.contentDensity = this._contentDensity;
+        });
     }
 
+    /** @hidden */
     private setupClassesForChildInputElements(): void {
         const hostElement: HTMLElement = this._elementRef.nativeElement;
 
