@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.4...v0.22.0-rc.5) (2020-08-25)
+
+
+### Bug Fixes
+
+* remove hardcoded segmented button styling ([#3076](https://github.com/SAP/fundamental-ngx/issues/3076)) ([e6f441d](https://github.com/SAP/fundamental-ngx/commit/e6f441d94ec5ec26d6be985fef7bfd7d3aa050d2))
+
+## [0.22.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.3...v0.22.0-rc.4) (2020-08-25)
+
+
+### Bug Fixes
+
+* (platform) fix wrong path after build ([#3080](https://github.com/SAP/fundamental-ngx/issues/3080)) ([3512b4a](https://github.com/SAP/fundamental-ngx/commit/3512b4aaa3732253459ec3de86239ac72d23a24a))
+
+## [0.22.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.2...v0.22.0-rc.3) (2020-08-25)
+
 ## [0.22.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.1...v0.22.0-rc.2) (2020-08-25)
 
 ## [0.22.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.0...v0.22.0-rc.1) (2020-08-25)
