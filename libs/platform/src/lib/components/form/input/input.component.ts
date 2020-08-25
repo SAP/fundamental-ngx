@@ -44,6 +44,7 @@ export type InputType = 'text' | 'number' | 'email' | 'password';
 @Component({
     selector: 'fdp-input',
     templateUrl: 'input.component.html',
+    styleUrls: ['./input.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FormFieldControl, useExisting: InputComponent, multi: true }]
 })
@@ -85,9 +86,5 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         if (!this.type || VALID_INPUT_TYPES.indexOf(this.type) === -1) {
             throw new Error(` Input type ${this.type} is not supported`);
         }
-    }
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.inputElemRef.nativeElement.style.display = 'block';
     }
 }
