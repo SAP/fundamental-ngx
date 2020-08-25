@@ -16,7 +16,7 @@ import {
     TileColumnsExampleComponent,
     TileGenericExampleComponent
 } from './examples/tile-examples.component';
-import { IdentifierModule, TileModule, BadgeModule } from '@fundamental-ngx/core';
+import { AvatarModule, TileModule, BadgeModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -33,8 +33,8 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        IdentifierModule,
         TileModule,
+        AvatarModule,
         BadgeModule
     ],
     exports: [RouterModule],

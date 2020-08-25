@@ -75,7 +75,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
     buildComponentCssClass(): string[] {
         return [
             'fd-bar',
-            this.cosy ? 'fd-bar--cosy' : '',
+            this.cosy ? 'fd-bar--cozy' : '',
             this.barDesign ? `fd-bar--${this.barDesign}` : '',
             this.inPage && !this.size ? 'fd-bar--page' : '',
             this.inPage && this.size ? `fd-bar--page-${this.size}` : '',

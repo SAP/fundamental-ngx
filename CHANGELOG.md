@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.1...v0.22.0-rc.2) (2020-08-25)
+
+## [0.22.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.0...v0.22.0-rc.1) (2020-08-25)
+
+## [0.22.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.19...v0.22.0-rc.0) (2020-08-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed select-native, identifier (use Avatar instead), image component (use Avatar instead), dropdown component, replaced image in shellbar user-menu with avatar
+
+### Bug Fixes
+
+* implement fundamental-styles version 0.11 ([#3073](https://github.com/SAP/fundamental-ngx/issues/3073)) ([1ce2b1f](https://github.com/SAP/fundamental-ngx/commit/1ce2b1f443c1c13db1938e4376bfc9bff2a36eb7))
+
 ### [0.21.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.21.1-rc.18...v0.21.1-rc.19) (2020-08-24)
 
 

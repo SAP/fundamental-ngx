@@ -17,8 +17,6 @@ import { FileInputModule } from './file-input/file-input.module';
 import { FileUploaderModule } from './file-uploader/file-uploader.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
-import { IdentifierModule } from './identifier/identifier.module';
-import { ImageModule } from './image/image.module';
 import { InfiniteScrollModule } from './infinite-scroll/infinite-scroll.module';
 import { InlineHelpModule } from './inline-help/inline-help.module';
 import { InputGroupModule } from './input-group/input-group.module';
@@ -91,11 +89,8 @@ import { ToolbarModule } from './toolbar/toolbar.module';
         FileUploaderModule,
         FormModule,
         IconModule,
-        IdentifierModule,
-        ImageModule,
         InfoLabelModule,
         InlineHelpModule,
-        IdentifierModule,
         InfiniteScrollModule,
         InputGroupModule,
         LayoutGridModule,
