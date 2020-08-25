@@ -5,6 +5,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import * as inputGroupStandardExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-standard-example.component.html';
 import * as inputGroupCompactExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-compact-example.component.html';
 import * as inputGroupStateExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-state-example.component.html';
+import * as inputGroupDisabledExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-disabled-example.component.html';
 
 @Component({
     selector: 'app-input-group',
@@ -32,6 +33,14 @@ export class PlatformInputGroupDocsComponent {
             language: 'html',
             code: inputGroupStateExampleHtml,
             fileName: 'platform-input-group-state-example'
+        }
+    ];
+
+    inputGroupDisabled: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupDisabledExampleHtml,
+            fileName: 'platform-input-group-disabled-example'
         }
     ];
 }
