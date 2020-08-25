@@ -1,37 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FieldsetComponent } from './fieldset/fieldset.component';
-import { FormControlDirective } from './form-control/form-control.directive';
-import { FormItemComponent } from './form-item/form-item.component';
-import { FormLabelComponent } from './form-label/form-label.component';
-import { FormLegendDirective } from './form-legend/form-legend.directive';
-import { FormMessageComponent } from './form-message/form-message.component';
-import { FormGroupComponent } from './form-group/form-group.component';
-import { FormInputMessageGroupComponent } from './form-input-message-group/form-input-message-group.component';
 import { PopoverModule } from '../popover/popover.module';
+import { FieldSetModule } from './fieldset/fieldset.module';
+import { FormControlModule } from './form-control/form-control.module';
+import { FormItemModule } from './form-item/form-item.module';
+import { FormLabelModule } from './form-label/form-label.module';
+import { FormLegendModule } from './form-legend/form-legend.module';
+import { FormMessageModule } from './form-message/form-message.module';
+import { FormInputMessageGroupModule } from './form-input-message-group/form-input-message-group.module';
+import { FormGroupModule } from './form-group/form-group.module';
 
 @NgModule({
     imports: [CommonModule, PopoverModule],
     exports: [
-        FieldsetComponent,
-        FormControlDirective,
-        FormItemComponent,
-        FormLabelComponent,
-        FormLegendDirective,
-        FormMessageComponent,
-        FormInputMessageGroupComponent,
-        FormGroupComponent
-    ],
-    declarations: [
-        FieldsetComponent,
-        FormControlDirective,
-        FormItemComponent,
-        FormLabelComponent,
-        FormLegendDirective,
-        FormMessageComponent,
-        FormInputMessageGroupComponent,
-        FormGroupComponent
+        FieldSetModule,
+        FormControlModule,
+        FormItemModule,
+        FormLabelModule,
+        FormLegendModule,
+        FormMessageModule,
+        FormInputMessageGroupModule,
+        FormGroupModule
     ]
 })
 export class FormModule {}

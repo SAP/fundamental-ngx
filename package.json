@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.22.0-rc.1",
+  "version": "0.22.0-rc.5",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library.",
@@ -105,7 +105,7 @@
     "intl": "1.2.5",
     "jasminewd2": "2.2.0",
     "moment": "2.27.0",
-    "ngx-markdown": "10.1.0",
+    "ngx-markdown": "10.1.1",
     "npm": "6.14.7",
     "popper.js": "1.16.1",
     "raw-loader": "4.0.1",
