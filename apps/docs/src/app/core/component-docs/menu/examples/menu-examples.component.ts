@@ -9,7 +9,8 @@ export class MenuExampleComponent {
 
 @Component({
     selector: 'fd-menu-addon-example',
-    templateUrl: './menu-addon-example.component.html'
+    templateUrl: './menu-addon-example.component.html',
+    styleUrls: ['./menu-addon-example.component.scss']
 })
 export class MenuAddonExampleComponent {
 }

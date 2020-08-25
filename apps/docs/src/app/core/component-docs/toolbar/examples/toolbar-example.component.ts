@@ -31,6 +31,18 @@ export class ToolbarSeparatorExampleComponent {}
 export class ToolbarOverflowExampleComponent {}
 
 @Component({
+    selector: 'fd-toolbar-overflow-priority-example',
+    templateUrl: './toolbar-overflow-priority-example.component.html'
+})
+export class ToolbarOverflowPriorityExampleComponent {}
+
+@Component({
+    selector: 'fd-toolbar-overflow-grouping-example',
+    templateUrl: './toolbar-overflow-grouping-example.component.html'
+})
+export class ToolbarOverflowGroupingExampleComponent {}
+
+@Component({
     selector: 'fd-toolbar-size-example',
     templateUrl: './toolbar-size-example.component.html'
 })

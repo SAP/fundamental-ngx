@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShellbarActionComponent } from './shellbar-action.component';
 import { ButtonModule } from '../../button/button.module';
-import { IdentifierModule } from '../../identifier/identifier.module';
 
 describe('ShellbarActionComponent', () => {
     let component: ShellbarActionComponent;
@@ -10,7 +9,7 @@ describe('ShellbarActionComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule, IdentifierModule],
+            imports: [ButtonModule],
             declarations: [ShellbarActionComponent]
         }).compileComponents();
     }));

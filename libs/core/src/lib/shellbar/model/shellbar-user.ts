@@ -1,6 +1,6 @@
 export interface ShellbarUser {
     /** Initials of user name */
-    initials: string;
+    initials?: string;
 
     /** Url of user image (optional) */
     image?: string;
