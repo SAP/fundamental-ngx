@@ -6,9 +6,9 @@
     <fd-input-group
         button="true"
         compact="true"
-        disabled="false"
         glyph="decline"
         placeholder="Search"
+        [disabled]="false"
         [(ngModel)]="searchTerm"
         (ngModelChange)="handleSearchTermChange($event)"
         (addOnButtonClicked)="handleSearchTermChange('')"

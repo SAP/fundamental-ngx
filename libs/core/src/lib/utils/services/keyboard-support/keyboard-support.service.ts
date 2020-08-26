@@ -49,8 +49,10 @@ export class KeyboardSupportService<T> {
     /** @hidden */
     private _refreshEscapeLogic(queryList: QueryList<KeyboardSupportItemInterface & T>): void {
 
-        const createEscapeListener = (onKey: string, escapeDirection: FocusEscapeDirection): void => {
-            queryList.first.keyDown.pipe(
+        const createEscapeListener = (
+            listItem: KeyboardSupportItemInterface & T, onKey: string, escapeDirection: FocusEscapeDirection
+        ): void => {
+            listItem.keyDown.pipe(
                 takeUntil(unsubscribe$),
                 filter(event => KeyUtil.isKey(event, onKey)),
                 tap(() => event.preventDefault())
@@ -63,8 +65,8 @@ export class KeyboardSupportService<T> {
         const unsubscribe$ = merge(this._onRefresh$, this._onDestroy$);
 
         if (queryList.length) {
-            createEscapeListener('ArrowDown', 'down');
-            createEscapeListener('ArrowUp', 'up');
+            createEscapeListener(queryList.last, 'ArrowDown', 'down');
+            createEscapeListener(queryList.first, 'ArrowUp', 'up');
         }
     }
 }

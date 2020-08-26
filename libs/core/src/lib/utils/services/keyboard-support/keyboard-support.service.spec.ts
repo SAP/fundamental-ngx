@@ -21,12 +21,13 @@ describe('MenuKeyboardService', () => {
             new MockKeyboardListElement(),
             new MockKeyboardListElement(),
             new MockKeyboardListElement()
-        ]
+        ];
         service = new KeyboardSupportService();
         menuItems = {
             changes: new Subject(),
-            last: new MockKeyboardListElement(),
-            first: new MockKeyboardListElement()
+            length: items.length,
+            last: items[0],
+            first: items[items.length - 1]
         }
     });
 
