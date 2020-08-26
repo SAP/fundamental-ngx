@@ -25,7 +25,8 @@ export class PlatformPanelDocsComponent {
         {
             language: 'typescript',
             code: panelExpandableTsExample,
-            fileName: 'platform-panel-expandable-example'
+            fileName: 'platform-panel-expandable-example',
+            component: 'PlatformPanelExpandableExampleComponent'
         }
     ];
 

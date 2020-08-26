@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.8...v0.22.0-rc.9) (2020-08-26)
+
+
+### Bug Fixes
+
+* **platform:** Addressing stackblitz error and Input error ([#3064](https://github.com/SAP/fundamental-ngx/issues/3064)) ([440622a](https://github.com/SAP/fundamental-ngx/commit/440622a2c831f0cb9ab101316969b6c8adb95371))
+
+## [0.22.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.7...v0.22.0-rc.8) (2020-08-25)
+
+
+### Bug Fixes
+
+* append datepicker and datetime picker popovers to body ([#3052](https://github.com/SAP/fundamental-ngx/issues/3052)) ([6911b6b](https://github.com/SAP/fundamental-ngx/commit/6911b6b0408d200f9f71c672c412d96b7dfdc09c))
+
+## [0.22.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.6...v0.22.0-rc.7) (2020-08-25)
+
+
+### Bug Fixes
+
+* add flags to combobox and multiinput to hide addon button ([#3062](https://github.com/SAP/fundamental-ngx/issues/3062)) ([7b3cddf](https://github.com/SAP/fundamental-ngx/commit/7b3cddf7035ffb2507f8cf2f1261a35d563cdaa2))
+
+## [0.22.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.5...v0.22.0-rc.6) (2020-08-25)
+
 ## [0.22.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.4...v0.22.0-rc.5) (2020-08-25)
 
 

@@ -25,7 +25,8 @@ export class PlatformStepInputDocsComponent {
         {
             language: 'typescript',
             code: exampleTs,
-            fileName: 'platform-number-step-input-example'
+            fileName: 'platform-number-step-input-example',
+            component: 'PlatformNumberStepInputExampleComponent'
         }
     ];
 
@@ -33,12 +34,13 @@ export class PlatformStepInputDocsComponent {
         {
             language: 'html',
             code: reactiveFormExampleHtml,
-            fileName: 'platform-number-step-input-form-example'
+            fileName: 'platform-number-step-input-reactive-example'
         },
         {
             language: 'typescript',
             code: reactiveFormExampleTs,
-            fileName: 'platform-number-step-input-form-example'
+            fileName: 'platform-number-step-input-reactive-example',
+            component: 'PlatformNumberStepInputFormExampleComponent'
         }
     ];
 
@@ -46,12 +48,13 @@ export class PlatformStepInputDocsComponent {
         {
             language: 'html',
             code: templateFormExampleHtml,
-            fileName: 'platform-number-step-input-template-form-example'
+            fileName: 'platform-number-step-input-template-example'
         },
         {
             language: 'typescript',
             code: templateFormExampleTs,
-            fileName: 'platform-number-step-input-template-form-example'
+            fileName: 'platform-number-step-input-template-example',
+            component: 'PlatformNumberStepInputTemplateExample'
         }
     ];
 }

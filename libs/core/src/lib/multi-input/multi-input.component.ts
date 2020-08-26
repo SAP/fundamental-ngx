@@ -181,6 +181,10 @@ export class MultiInputComponent implements
     @Input()
     open = false;
 
+    /** Whether or not to display the addon button. */
+    @Input()
+    displayAddonButton = true;
+
     /** Event emitted, when the multi input's popover body is opened or closed */
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();

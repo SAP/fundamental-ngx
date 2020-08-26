@@ -18,3 +18,16 @@ Selected: [{{ selected.toLocaleString() }}]
 ></fd-multi-input>
 
 Selected: [{{ secondSelected.toLocaleString() }}]
+
+<br /><br />
+
+<label fd-label for="noAddonMultiInput1">Hidden Addon Button</label>
+<fd-multi-input
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+    [placeholder]="'Search here...'"
+    id="noAddonMultiInput1"
+    [(ngModel)]="thirdSelected"
+    [displayAddonButton]="false"
+></fd-multi-input>
+
+Selected: [{{ thirdSelected.toLocaleString() }}]

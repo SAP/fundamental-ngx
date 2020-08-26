@@ -1,7 +1,7 @@
 Standard
 <fd-combobox
     [(ngModel)]="searchTermOne"
-    [dropdownValues]="dropdownValues"
+    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
     [placeholder]="'Type some text...'"
     [maxHeight]="'250px'"
 >
@@ -13,7 +13,7 @@ Standard
 Disable Highlighting
 <fd-combobox
     [(ngModel)]="searchTermTwo"
-    [dropdownValues]="dropdownValues"
+    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
     [highlighting]="false"
     [placeholder]="'Type some text...'"
     [maxHeight]="'250px'"
@@ -26,7 +26,7 @@ Disable Highlighting
 Disable Auto Complete
 <fd-combobox
     [(ngModel)]="searchTermThree"
-    [dropdownValues]="dropdownValues"
+    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
     [autoComplete]="false"
     [placeholder]="'Type some text...'"
     [maxHeight]="'250px'"
@@ -39,7 +39,7 @@ Disable Auto Complete
 Compact
 <fd-combobox
     [(ngModel)]="searchTermFour"
-    [dropdownValues]="dropdownValues"
+    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
     [compact]="true"
     [placeholder]="'Type some text...'"
     [maxHeight]="'250px'"
@@ -52,7 +52,7 @@ Compact
 Readonly
 <fd-combobox
     [(ngModel)]="searchTermFive"
-    [dropdownValues]="dropdownValues"
+    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
     [placeholder]="'Type some text...'"
     [maxHeight]="'250px'"
     [readOnly]="true"
@@ -60,4 +60,17 @@ Readonly
 </fd-combobox>
 
 <span>Search Term: {{ searchTermFive }}</span>
+<br/><br/>
+
+Hide Addon Button
+<fd-combobox
+    [(ngModel)]="searchTermSix"
+    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
+    [placeholder]="'Type some text...'"
+    [maxHeight]="'250px'"
+    [showDropdownButton]="false"
+>
+</fd-combobox>
+
+<span>Search Term: {{ searchTermSix }}</span>
 <br/><br/>
