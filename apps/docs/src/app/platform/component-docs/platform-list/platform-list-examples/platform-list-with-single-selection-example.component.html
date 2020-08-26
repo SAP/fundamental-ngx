@@ -1,8 +1,10 @@
 <h3>Cozy Mode</h3>
-<fdp-list [noBorder]="true" [selectionMode]="'single'" [(ngModel)]="selectedItems"
-    (selectedItemChange)="showItemInfo($event)">
-    <fd-toolbar [fdType]="'info'" [active]="true">
-        <label fd-toolbar-label>{{selectedItems}} : is selected</label>
-    </fd-toolbar>
-    <fdp-standard-list-item *ngFor="let item of radioItems" [item]="item"></fdp-standard-list-item>
+<fd-toolbar fdType="info" active="true">
+    <label fd-toolbar-label>{{selectedItems}} : selected</label>
+</fd-toolbar>
+<fdp-list [noBorder]="true" [dataSource]="dataSource" [selectionMode]="'single'" [(ngModel)]="selectedItems"
+    (selectedItemChange)="showItemInfo($event)" selection="true">
+    <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name" [name]="'radio1'" [value]="address.id"
+        [id]="address.id">
+    </fdp-standard-list-item>
 </fdp-list>

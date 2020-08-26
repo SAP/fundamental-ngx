@@ -1,15 +1,13 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ElementRef, ViewChild, Component } from '@angular/core';
-import { ListComponent } from '../list.component';
-import { StandardListItemComponent } from './standard-list-item.component';
-import { PlatformListModule } from '../list.module';
-import { StandardListItemModule } from './standard-list-item.module';
-import { By } from '@angular/platform-browser';
-import { DataProvider, ListDataSource } from '../../../domain/public_api';
 import { Observable, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ENTER } from '@angular/cdk/keycodes';
-import { BaseListItem } from '../base-list-item';
+import { By } from '@angular/platform-browser';
+import { DataProvider, ListDataSource } from '../../../domain/public_api';
+import { PlatformListModule } from '../list.module';
+import { ListComponent } from '../list.component';
+import { StandardListItemComponent } from './standard-list-item.component';
+import { StandardListItemModule } from './standard-list-item.module';
 
 const LIST_ELEMENTS: Address[] = [
     { name: 'City1' },

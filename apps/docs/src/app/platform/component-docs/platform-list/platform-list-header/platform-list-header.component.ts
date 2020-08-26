@@ -5,11 +5,4 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './platform-list-header.component.html',
     styleUrls: ['./platform-list-header.component.scss']
 })
-export class PlatformListHeaderComponent implements OnInit {
-
-    constructor() { }
-
-    ngOnInit(): void {
-    }
-
-}
+export class PlatformListHeaderComponent { }

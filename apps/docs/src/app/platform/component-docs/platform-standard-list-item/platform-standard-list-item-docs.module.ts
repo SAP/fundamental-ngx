@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ToolbarModule } from '@fundamental-ngx/core';
+import { PlatformListModule, StandardListItemModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
@@ -9,14 +11,15 @@ import {
     PlatformStandardListItemExampleComponent,
     PlatformStandardListItemWithSecondaryTypeExampleComponent,
     PlatformStandardListItemWithFooterExampleComponent,
-    PlatformStandardListItemWithSelectionExampleComponent,
-    PlatformStandardListItemWithNavigationExampleComponent
+    PlatformStandardListItemWithNavigationExampleComponent,
+    PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent,
+    PlatformNonByLineStandardListItemExampleComponent
 } from './platform-standard-list-item-examples/platform-standard-list-item-example.component';
-import { PlatformListModule, StandardListItemModule, PlatformButtonModule } from '@fundamental-ngx/platform';
-import { ToolbarModule } from '@fundamental-ngx/core';
+
 import { PlatformStandardListItemBorderLessExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component';
 import { PlatformStandardListItemtWithGroupHeaderExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component';
 import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component';
+import { PlatformStandardListItemWithSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component';
 const routes: Routes = [
     {
         path: '',
@@ -32,9 +35,9 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
+        ToolbarModule,
         PlatformListModule,
         PlatformButtonModule,
-        ToolbarModule,
         StandardListItemModule
     ],
     exports: [RouterModule],
@@ -48,7 +51,9 @@ const routes: Routes = [
         PlatformStandardListItemtWithGroupHeaderExampleComponent,
         PlatformStandardListItemWithSelectionExampleComponent,
         PlatformStandardListItemWithNavigationExampleComponent,
-        PlatformStandardListItemWithSingleSelectionExampleComponent
+        PlatformStandardListItemWithSingleSelectionExampleComponent,
+        PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent,
+        PlatformNonByLineStandardListItemExampleComponent
     ]
 })
 export class PlatformStandardListItemDocsModule {

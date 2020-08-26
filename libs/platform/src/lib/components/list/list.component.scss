@@ -1,7 +1,5 @@
 @import "~fundamental-styles/dist/list";
-.fd-list-item__no-seprator {
-    border-bottom: 0px;
-}
+
 .fd-busy-indicator-custom {
     margin-right: 0.5rem;
 }
@@ -10,4 +8,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.fd-list--byline.fd-list--no-border .fd-list__item:last-child {
+    padding-bottom: 0.5rem !important;
+}
+
+.fd-list__item--inactive
+{
+    pointer-events:none;
 }

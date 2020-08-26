@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import * as listSrc from '!raw-loader!./platform-list-examples/platform-list-example.component.html';
 import * as borderLessListSrc from '!raw-loader!./platform-list-examples/platform-borderless-list-example.component.html';
 import * as borderLessListTs from '!raw-loader!./platform-list-examples/platform-list-border-less-example.component.ts';
@@ -12,19 +12,22 @@ import * as listWithItemCounter from '!raw-loader!./platform-list-examples/platf
 import * as listWithSelection from '!raw-loader!./platform-list-examples/platform-list-with-selection-example.component.html';
 import * as listWithSelectionTs from '!raw-loader!./platform-list-examples/platform-list-with-selection-example.component.ts';
 import * as listWithSingleSelection from '!raw-loader!./platform-list-examples/platform-list-with-single-selection-example.component.html';
+import * as listWithSingleSelectionTs from '!raw-loader!./platform-list-examples/platform-list-with-single-selection-example.component.ts';
 import * as listWithNavigation from '!raw-loader!./platform-list-examples/platform-list-with-navigation-example.component.html';
 import * as listWithInfiniteScroll from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.html';
 import * as listWithInfiniteScrollTs from '!raw-loader!./platform-list-examples/platform-list-with-infinite-scroll-example.component.ts';
 import * as listWithMoreButton from '!raw-loader!./platform-list-examples/platform-list-with-more-button-example.component.html';
 import * as listWithMoreButtonTs from '!raw-loader!./platform-list-examples/platform-list-with-more-button-example.component.ts';
 import * as listWithNoData from '!raw-loader!./platform-list-examples/platform-list-with-nodata-example.component.html';
+import * as listWithUnRead from '!raw-loader!./platform-list-examples/platform-list-with-unread-example.component.html';
+import * as listWithNoSeperator from '!raw-loader!./platform-list-examples/platform-list-with-no-seperator-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-list',
     templateUrl: './platform-list-docs.component.html'
 })
-export class PlatformListDocsComponent implements OnInit {
+export class PlatformListDocsComponent {
     simpleList: ExampleFile[] = [
         {
             language: 'html',
@@ -118,6 +121,12 @@ export class PlatformListDocsComponent implements OnInit {
             language: 'html',
             code: listWithSingleSelection,
             fileName: 'platform-list-with-single-selection-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithSingleSelectionExampleComponent',
+            code: listWithSingleSelectionTs,
+            fileName: 'platform-list-with-single-selection-example'
         }
     ];
 
@@ -163,6 +172,20 @@ export class PlatformListDocsComponent implements OnInit {
             fileName: 'platform-list-with-nodata-example',
         }
     ];
-    ngOnInit(): void { }
-    constructor() { }
+
+    listWithNoSeperator: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithNoSeperator,
+            fileName: 'platform-list-with-no-seperator-example',
+        }
+    ];
+
+    listWithUnRead: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listWithUnRead,
+            fileName: 'platform-list-with-unread-example',
+        }
+    ];
 }

@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 import { Observable, of } from 'rxjs';
+import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
+
 
 const LIST_ELEMENTS: Address[] = [
-    { name: 'Name1' },
-    { name: 'Name2' },
-    { name: 'Name3' },
-    { name: 'Name4' }];
+    { id: '1', name: 'Name1' },
+    { id: '2', name: 'Name2' },
+    { id: '3', name: 'Name3' },
+    { id: '4', name: 'Name4' }];
 export interface Address {
+    id: string;
     name: string;
 }
 
@@ -25,15 +27,17 @@ export class ListDataProvider extends DataProvider<Address> {
     }
 }
 @Component({
-    selector: 'fdp-list-with-selection-example',
-    templateUrl: './platform-list-with-selection-example.component.html'
+    selector: 'fdp-list-with-single-selection-example',
+    templateUrl: './platform-list-with-single-selection-example.component.html'
 })
-export class PlatformListWithSelectionExampleComponent {
+export class PlatformListWithSingleSelectionExampleComponent {
     dataSource = new ListDataSource<Address>(new ListDataProvider());
     selectedItems: any[] = [];
 
     showItemInfo(event: any): void {
-        this.selectedItems = event.selectedItems;
+        if (event.selectedItems[0] !== undefined) {
+            this.selectedItems = event.selectedItems[0].id;
+        }
     }
 
 }

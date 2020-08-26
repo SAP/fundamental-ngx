@@ -35,8 +35,12 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/switch', name: 'Switch' },
             { url: 'platform/step-input', name: 'Step Input' },
             { url: 'platform/combobox', name: 'Combobox' },
-            { url: 'platform/list', name: 'List' },
-            { url: 'platform/standard-list-item', name: 'Standard List Item' }
+            {
+                name: 'List And Items',
+                subItems: [{ url: 'platform/list', name: 'List' },
+                { url: 'platform/standard-list-item', name: 'Standard List Item' }]
+
+            }
         ];
 
         this.layouts = [];

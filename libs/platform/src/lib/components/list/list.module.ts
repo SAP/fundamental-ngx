@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
 import { FormModule, ToolbarModule, ListModule, BusyIndicatorModule, InfiniteScrollModule } from '@fundamental-ngx/core';
-import { PlatformButtonModule } from '../button/button.module';
-import { PlatformLinkModule } from '../link/link.module';
+import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
 
 @NgModule({
     declarations: [ListComponent, ListFooter, ListGroupHeader],
@@ -12,8 +10,6 @@ import { PlatformLinkModule } from '../link/link.module';
         CommonModule,
         FormsModule,
         FormModule,
-        PlatformButtonModule,
-        PlatformLinkModule,
         ToolbarModule,
         ListModule,
         BusyIndicatorModule,

@@ -11,11 +11,12 @@ import {
     PlatformListWithFooterExampleComponent,
     PlatformListWithItemCounterExampleComponent,
     PlatformListWithNavigationExampleComponent,
-    PlatformListWithSingleSelectionExampleComponent,
     PlatformListWithButtonsExampleComponent,
-    PlatformListWithNoDataExampleComponent
+    PlatformListWithNoDataExampleComponent,
+    PlatformListWithNoSeperatorExampleComponent,
+    PlatformListWithUnReadExampleComponent
 } from './platform-list-examples/platform-list-example.component';
-import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform';
+import { PlatformListModule, StandardListItemModule, PlatformInputModule, PlatformButtonModule, FdpFormGroupModule } from '@fundamental-ngx/platform';
 import { ToolbarModule, CheckboxModule, IconModule, ButtonModule, BusyIndicatorModule, DragAndDropModule } from '@fundamental-ngx/core';
 import { PlatformListBorderLessExampleComponent } from './platform-list-examples/platform-list-border-less-example.component';
 import { PlatformListWithGroupHeaderExampleComponent } from './platform-list-examples/platform-list-with-group-header-example.component';
@@ -23,6 +24,7 @@ import { PlatformListWithInfiniteScrollExampleComponent } from './platform-list-
 import { PlatformListWithMoreButtonExampleComponent } from './platform-list-examples/platform-list-with-more-button-example.component';
 import { PlatformListWithDeleteButtonExampleComponent } from './platform-list-examples/platform-list-with-delete-button-example.component';
 import { PlatformListWithSelectionExampleComponent } from './platform-list-examples/platform-list-with-selection-example.component';
+import { PlatformListWithSingleSelectionExampleComponent } from './platform-list-examples/platform-list-with-single-selection-example.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
@@ -50,7 +52,10 @@ const routes: Routes = [
         IconModule,
         FormsModule,
         BusyIndicatorModule,
-        DragAndDropModule
+        DragAndDropModule,
+        PlatformInputModule,
+        PlatformButtonModule,
+        FdpFormGroupModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -68,7 +73,9 @@ const routes: Routes = [
         PlatformListWithInfiniteScrollExampleComponent,
         PlatformListWithButtonsExampleComponent,
         PlatformListWithNoDataExampleComponent,
-        PlatformListWithMoreButtonExampleComponent
+        PlatformListWithMoreButtonExampleComponent,
+        PlatformListWithNoSeperatorExampleComponent,
+        PlatformListWithUnReadExampleComponent
     ]
 })
 export class PlatformListDocsModule {

@@ -1,10 +1,13 @@
 <!--  list item navigation with Arrow-->
 <ng-container *ngIf="navigationIndicator || navigated && !(noDataText!==null && noDataText!== undefined) ">
-    <li #listItem fd-list-item [attr.id]="id" [selected]="selected" class="fd-list__item--link" tabIndex="0"
-        [attr.aria-selected]="selected" (keydown)="onKeyDown($event)" (keyup)="onKeyUp($event)"
-        [class.fd-list-item__unread]="unRead">
-        <a #link class="fd-list__link fd-link fdp-link-truncate__txt" [routerLink]="routerLink"
-            [class.fd-list__link--navigation-indicator]="navigationIndicator">
+    <li #listItem fd-list-item [attr.id]="id" [selected]="selected" tabIndex="0" [attr.aria-selected]="selected"
+        (keydown)="onKeyDown($event)" (keyup)="onKeyUp($event)" class="fd-list__item--link" role="listitem"
+        [class.fd-list__item--inactive]="listType === 'inactive'" [attr.ariaLabelledBy]="ariaLabelledBy"
+        [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
+        <ng-container *ngTemplateOutlet=" selectionTemplate">
+        </ng-container>
+        <a #link fd-list-link [routerLink]="routerLink" [navigationIndicator]="navigationIndicator"
+            [navigated]="navigated">
             <ng-container *ngTemplateOutlet="hasByLine ? byLineTemplate: commonTemplate"></ng-container>
         </a>
     </li>
@@ -13,94 +16,108 @@
 <!--  list item without navigation and used for simple list display-->
 <ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText!==null && noDataText!== undefined)">
     <li #listItem fd-list-item [attr.id]="id" [selected]="selected" (keydown)="onKeyDown($event)" tabIndex="0"
-        (keyup)="onKeyUp($event)" [class.fd-list-item__unread]="unRead">
+        role="listitem" (keyup)="onKeyUp($event)" [attr.ariaLabelledBy]="ariaLabelledBy" [attr.aria-level]="ariaLevel"
+        [attr.aria-posinet]="ariaPosinet" [class.fd-list__item--inactive]="listType === 'inactive'">
+        <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
         <ng-container *ngTemplateOutlet="hasByLine ? byLineTemplate: commonTemplate"></ng-container>
     </li>
 </ng-container>
 
 <ng-container *ngIf="noDataText!==null && noDataText!== undefined">
-    <li #listItem fd-list-item [attr.id]="id" tabindex="0" class="fd-list__item--no-data">
+    <li #listItem fd-list-item [attr.id]="id" tabindex="0" [attr.ariaLabelledBy]="ariaLabelledBy"
+        [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
         <span fd-list-title [attr.aria-label]="noDataText" [attr.title]="noDataText">{{noDataText}}</span>
     </li>
 </ng-container>
 
 <ng-template #commonTemplate>
-    <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
     <span *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap"
-        [attr.title]="title">{{title}}</span>
+        [class.fd-list-title__unread]="unRead" [attr.title]="title">{{title}}</span>
     <span fd-list-secondary [attr.aria-label]="secondary" *ngIf="secondary!== null && secondary!== undefined"
-        [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
+        [attr.title]="secondary" [attr.nowrap]="secondaryWrap" [class.fd-list-title__unread]="unRead">
         {{secondary}}
     </span>
-    <span fd-list-secondary class="fd-list__counter" [attr.aria-label]="counter"
+    <span fd-list-secondary class="fd-list__counter" [attr.aria-label]="counter" [class.fd-list-title__unread]="unRead"
         *ngIf="counter!== null && counter!== undefined" [attr.title]="counter">
         {{counter}}
     </span>
     <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
         <span *ngFor="let secondaryIcon of secondaryIcons">
             <fd-icon *ngIf="!(secondaryIcon.isButton)" class="fd-list__icon" [glyph]="secondaryIcon.icon"
-                [attr.alt]="secondaryIcon.icon" [attr.role]="'img'" (click)="onActionButtonClick($event)">
+                [attr.alt]="secondaryIcon.icon" role="img" (click)="onActionButtonClick($event)">
             </fd-icon>
-            <button fd-button *ngIf="secondaryIcon.isButton" [attr.role]="'button'"
-                (click)="onActionButtonClick($event)" [compact]="isCompact" [fdType]="'transparent'"
-                [glyph]="secondaryIcon.icon">
+            <button fd-button *ngIf="secondaryIcon.isButton" role="button" (click)="onActionButtonClick($event)"
+                [compact]="isCompact" [fdType]="'transparent'" [glyph]="secondaryIcon.icon">
             </button>
         </span>
     </span>
-    <button fd-button *ngIf="listType === 'detail'" [attr.role]="'button'" [compact]="isCompact"
-        [fdType]="'transparent'" [glyph]="'edit'" (click)="onActionButtonClick($event)">
+    <button fd-button *ngIf="listType === 'detail'" role="button" [compact]="isCompact" fdType="transparent"
+        glyph="edit" (click)="onActionButtonClick($event)">
     </button>
-    <button fd-button *ngIf="selectionMode === 'delete'" [attr.role]="'button'" [compact]="isCompact"
-        [fdType]="'transparent'" [glyph]="'decline'" (click)="onActionButtonClick($event)">
+    <button fd-button *ngIf="selectionMode === 'delete'" role="button" [compact]="isCompact" fdType="transparent"
+        glyph="decline" (click)="onActionButtonClick($event)">
     </button>
 </ng-template>
 
 <ng-template #byLineTemplate>
-    <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
+
     <div class="fd-list__content">
-        <div *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">
+        <div *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title"
+            [class.fd-list-title__unread]="unRead">
             {{title}}</div>
         <div class="fd-list__byline fd-list__byline--2-col">
             <span *ngIf="description" class="fd-list__byline-left" [attr.aria-label]="description"
-                [attr.title]="description" [attr.nowrap]="titleWrap">{{description}}</span>
-            <span #rt class="fd-list__byline-right" *ngIf="secondary" [attr.aria-label]="secondary"
-                [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
+                [class.fd-list-title__unread]="unRead" [attr.title]="description"
+                [attr.nowrap]="titleWrap">{{description}}</span>
+            <span #rt *ngIf="secondary && !inverted" [attr.aria-label]="secondary" class="fd-list__byline-right"
+                [ngClass]="statusType ? 'fd-list__byline-right--' + statusType : ''"
+                [class.fd-list-title__unread]="unRead" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
                 {{secondary}}
+            </span>
+            <span #rt1 class="fd-list__byline-right" *ngIf="inverted" [attr.aria-label]="secondary"
+                [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
+                <fdp-object-status [status]="statusType" [inverted]="inverted" [class.fd-list-title__unread]="unRead">
+                    {{secondary}}</fdp-object-status>
             </span>
             <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
                 <span *ngFor="let secondaryIcon of secondaryIcons">
                     <fd-icon class="fd-list__byline-right fd-list__icon" *ngIf="!(secondaryIcon.isButton)"
-                        [glyph]="secondaryIcon.icon" [attr.alt]="secondaryIcon.icon" [attr.role]="'img'"
+                        [glyph]="secondaryIcon.icon" [attr.alt]="secondaryIcon.icon" role="img"
                         (click)="onActionButtonClick($event)">
                     </fd-icon>
-                    <button fd-button class="fd-list__byline-right" *ngIf="secondaryIcon.isButton"
-                        [attr.role]="'button'" [compact]="isCompact" [fdType]="'transparent'"
-                        [glyph]="secondaryIcon.icon" (click)="onActionButtonClick($event)">
+                    <button fd-button class="fd-list__byline-right" *ngIf="secondaryIcon.isButton" role="button"
+                        [compact]="isCompact" fdType="transparent" [glyph]="secondaryIcon.icon"
+                        (click)="onActionButtonClick($event)">
                     </button>
                 </span>
             </span>
-            <button fd-button class="fd-list__byline-right" *ngIf="listType === 'detail'" [attr.role]="'button'"
-                [compact]="isCompact" [fdType]="'transparent'" [glyph]="'edit'" (click)="onActionButtonClick($event)">
+            <button fd-button *ngIf="listType === 'detail'" role="button" [compact]="isCompact" fdType="transparent"
+                glyph="edit" (click)="onActionButtonClick($event)" [attr.aria-label]="'detail'">
             </button>
-            <button fd-button class="fd-list__byline-right" *ngIf="selectionMode === 'delete'" [attr.role]="'button'"
-                [compact]="isCompact" [fdType]="'transparent'" [glyph]="'delete'" (click)="onActionButtonClick($event)">
+            <button fd-button *ngIf="selectionMode === 'delete'" role="button" [compact]="isCompact"
+                [attr.aria-label]="'delete'" fdType="transparent" glyph="decline" (click)="onActionButtonClick($event)">
             </button>
         </div>
     </div>
 </ng-template>
 
 <ng-template #selectionTemplate>
-    <fd-checkbox #checkbox *ngIf="selectionMode === 'multi'" [attr.aria-checked]="selected" [attr.role]="'checkbox'"
-        [compact]="isCompact" [(ngModel)]="selected">
-    </fd-checkbox>
-    <fd-radio-button #radio *ngIf="selectionMode === 'single'" [value]="title" [name]="name" [attr.role]="'radio'"
-        [attr.aria-checked]="selected" [compact]="isCompact" [(ngModel)]="selected">
-    </fd-radio-button>
+    <div fd-form-item class="fd-list__form-item" *ngIf="selectionMode === 'multi' || selectionMode === 'single'">
+        <fd-checkbox #checkbox *ngIf="selectionMode === 'multi'" [attr.aria-checked]="selected" role="checkbox"
+            [compact]="isCompact" [(ngModel)]="selected">
+        </fd-checkbox>
+        <fd-radio-button #radio *ngIf="selectionMode === 'single'" [value]="value" [name]="name" [attr.role]="'radio'"
+            [attr.aria-checked]="selected" [compact]="isCompact" [(ngModel)]="selectionValue">
+        </fd-radio-button>
+    </div>
+</ng-template>
+<ng-template #iconTemplate>
     <fd-icon class="fd-list__icon" [class.fd-list__thumbnail]="hasByLine" *ngIf="titleIcon" [glyph]="titleIcon"
-        [attr.alt]="titleIcon" [attr.role]="'img'">
+        [attr.alt]="titleIcon" role="img">
     </fd-icon>
-    <fd-avatar class="fd-list__icon" [size]="'s'" [image]="avatarSrc" [class.fd-list__thumbnail]="hasByLine"
-        *ngIf="avatarSrc!==null && avatarSrc!==undefined" [attr.alt]="avatarTitle" [label]="avatarTitle"
-        [attr.role]="'img'">
+    <fd-avatar class="fd-list__icon" size="s" [image]="avatarSrc" [class.fd-list__thumbnail]="hasByLine"
+        *ngIf="avatarSrc!==null && avatarSrc!==undefined" [attr.alt]="avatarTitle" [label]="avatarTitle" role="img">
     </fd-avatar>
 </ng-template>

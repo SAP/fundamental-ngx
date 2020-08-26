@@ -1,9 +1,9 @@
 <h3>Cozy Mode</h3>
-<fdp-list [noBorder]="true" [dataSource]="dataSource" [selectionMode]="'multi'" [(ngModel)]="selectedItems"
-    (selectedItemChange)="showItemInfo($event)">
-    <fd-toolbar [fdType]="'info'" [active]="true">
-        <label fd-toolbar-label>({{selectedItems.length}}) Items selected</label>
-    </fd-toolbar>
+<fd-toolbar fdType="info" active="true">
+    <label fd-toolbar-label>({{selectedItems.length}}) Items selected</label>
+</fd-toolbar>
+<fdp-list noBorder="true" [dataSource]="dataSource" selectionMode="multi" [(ngModel)]="selectedItems"
+    (selectedItemChange)="showItemInfo($event)" selection="true">
     <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name">
     </fdp-standard-list-item>
 </fdp-list>

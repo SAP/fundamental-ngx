@@ -1,7 +1,7 @@
-<fd-docs-section-title [id]="'list1'" [componentName]="'List'">
+<fd-docs-section-title id="list1" componentName="List">
     List - Border Less
 </fd-docs-section-title>
-<description>A list without border, setting <code>[noBorder]="true"</code> will help to do this, by default its
+<description>A list without border, setting <code>noBorder="true"</code> will help to do this, by default its
     value is false. Below examples show both imperative and declarative way to bind the list items.
     Where we can pass list items individually where a number of items are less, and if the items are more
     we can pass the items in the array as well.</description>
@@ -11,11 +11,11 @@
 <code-example [exampleFiles]="borderLesssList"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'list2'" [componentName]="'List'">
+<fd-docs-section-title id="list2" componentName="List">
     List - Footer
 </fd-docs-section-title>
 <description>Footer of List. <code>&lt;fdp-list-footer&gt;</code> tag will help to set the footer for the list.
-    Below examples show both imperative and declarative
+    Below examples show declarative
     way to use footer.
 </description>
 <component-example>
@@ -24,12 +24,12 @@
 <code-example [exampleFiles]="listWithFooter"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'list3'" [componentName]="'List'">
+<fd-docs-section-title id="list3" componentName="List">
     List - Group header
 </fd-docs-section-title>
 <description>List with the group header. <code>&lt;fdp-list-group-header&gt;</code> tag will help to set the Header for
     the
-    group of list items.Below examples show both imperative and declarative
+    group of list items.Below examples show declarative
     way to bind the list items and how to bind the group header to them.
 </description>
 <component-example>
@@ -39,7 +39,7 @@
 <code-example [exampleFiles]="listWithGroupHeader"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'list4'" [componentName]="'List'">
+<fd-docs-section-title id="list4" componentName="List">
     List- Interactive state
 </fd-docs-section-title>
 <description>A simple list. Which shows interactive states of List.</description>
@@ -49,42 +49,27 @@
 <code-example [exampleFiles]="simpleList"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'list5'" [componentName]="'List'">
+<fd-docs-section-title id="list5" componentName="List">
     List - Item Counter
 </fd-docs-section-title>
 <description>List with Item Counter.
-    Attributes<code> [secondary]="secondary text"</code> will
+    Attributes<code> secondary="secondary text"</code> will
     help to insert secondary data.
-    Below examples show both imperative and declarative way to use it.</description>
+    Below examples show declarative way to use it.</description>
 <component-example>
     <fdp-list-with-item-counter-example>
     </fdp-list-with-item-counter-example>
 </component-example>
 <code-example [exampleFiles]="listWithItemCounter"></code-example>
 <separator></separator>
-
-<fd-docs-section-title [id]="'list6'" [componentName]="'List'">
-    List - buttons
-</fd-docs-section-title>
-<description>For more image and button options on list item property<code>[secondaryIcons]="'['icons':'iconname',
-    'isButton':'true/false']'"</code> will help.
-    IsButton setting to false to set an image and true will set a button with sepficed icon.
-</description>
-<component-example>
-    <fdp-list-with-buttons-example></fdp-list-with-buttons-example>
-</component-example>
-<code-example [exampleFiles]="listWithButtons"></code-example>
-<separator></separator>
-
-
-<fd-docs-section-title [id]="'list7'" [componentName]="'List'">
+<fd-docs-section-title id="list7" componentName="List">
     List - Deletion button
 </fd-docs-section-title>
-<description>For delete option on list item <code>[secondaryIcons]="['icons':decline/delete, 'isButton':'true']"</code>
+<description>For delete option on list item <code>selectionMode="delete"</code>
     will help. Its
     button on click of it
     delete operation can be invoked.
-    Below examples show both imperative and declarative way to use it.
+    Below examples show declarative way to use it.
 </description>
 <component-example>
     <fdp-list-with-delete-button-example></fdp-list-with-delete-button-example>
@@ -92,29 +77,32 @@
 <code-example [exampleFiles]="listWithDeleteButton"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'list8'" [componentName]="'List'">
+<fd-docs-section-title id="list8" componentName="List">
     List - Multi Selection
 </fd-docs-section-title>
-<description>List with Multi Selection Option. <code>[selectionMode]="'multi'"</code> will help us to provide checkbox
+<description>List with Multi Selection Option. <code>selectionMode="multi"</code> will help us to provide checkbox
     along with
     list item.
-    .Below examples show both imperative and declarative way to use it.
-    Note:selection of listitem using keyboard can be performed by *space bar* (as per Fiori3 standards.) </description>
+    .Below examples show imperative way to use it.
+    Note:selection of listitem using keyboard can be performed by *space bar* or by enter button(as per Fiori3
+    standards.) </description>
 <component-example>
     <fdp-list-with-selection-example>
     </fdp-list-with-selection-example>
 </component-example>
 <code-example [exampleFiles]="listWithSelection"></code-example>
 <separator></separator>
-<fd-docs-section-title [id]="'list9'" [componentName]="'List'">
+
+<fd-docs-section-title id="list9" componentName="List">
     List - Single Selection
 </fd-docs-section-title>
 <description>List with Single Selection Option.
-    <code>[selectionMode]="'single'", [name]="name to group all radiobuttons"</code> will
+    <code>selectionMode="single"</code> will
     help us to provide single select(radiobutton) along with
     list item
-    .Below examples show both imperative and declarative way to use it.
-    Note: selection of listitem using keyboard can be performed by *space bar* (as per Fiori3 standards.) </description>
+    .Below examples show imperative way to use it.
+    Note: selection of listitem using keyboard can be performed by *space bar* or enter button (as per Fiori3
+    standards.) </description>
 <component-example>
     <fdp-list-with-single-selection-example>
     </fdp-list-with-single-selection-example>
@@ -122,14 +110,14 @@
 <code-example [exampleFiles]="listWithSingleSelection"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'list10'" [componentName]="'List'">
-    List - Navigation
+<fd-docs-section-title id="list10" componentName="List">
+    List - Navigation Indicator
 </fd-docs-section-title>
 <description>List with Navigation Option.<code>[navigated]="true"</code> will enables navigation on click of list
     item,
     <code> [navigationIndicator]="true"</code> will provide <code>">"</code> indicator,
-    [href] and [target] will help to get into the desiced destination on click of navigation.Below examples show both
-    imperative and declarative way to use it.</description>
+    <code>[link]="path"</code> will help to get into the desired destination on click of navigation.Below examples show
+    declarative way to use it.</description>
 <component-example>
     <fdp-list-with-navigation-example>
     </fdp-list-with-navigation-example>
@@ -137,13 +125,13 @@
 <code-example [exampleFiles]="listWithNavigation"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'list11'" [componentName]="'List'">
+<fd-docs-section-title id="list11" componentName="List">
     List - Virtual scroll
 </fd-docs-section-title>
-<description>By setting <code>[loadMore]="true"</code> will start the loazy load of data and
-    <code>[onScroll]="true"</code> helps to load data on scroll and <code>[itemSize]="5"</code> is for number
-    items needs to be appended per event.Where as <code>[delay]="200"</code> sets the time period to load the data.
-    <code>[scrollOffsetPercentage]="40"</code>scroll hit on viewport to start fecthing the next data.
+<description>By setting <code>loadMore="true"</code> will start the loazy load of data and
+    <code>loadOnScroll="true"</code> helps to load data on scroll and <code>itemSize="5"</code> is for number
+    items needs to be appended per event.Where as <code>delay="200"</code> sets the time period to load the data.
+    <code>scrollOffsetPercentage="40"</code>scroll hit on viewport to start fecthing the next data.
 </description>
 <component-example>
     <fdp-list-with-infinite-scroll-example>
@@ -151,14 +139,13 @@
 </component-example>
 <code-example [exampleFiles]="listWithInfiniteScroll"></code-example>
 <separator></separator>
-
-<fd-docs-section-title [id]="'list12'" [componentName]="'List'">
+<fd-docs-section-title id="list12" componentName="List">
     List - Load data on button click
 </fd-docs-section-title>
-<description>By setting <code>[loadMore]="true"</code> will start the loazy load of data and
-    <code>[onScroll]="false"</code> helps to load data on button click and <code>[itemSize]="5"</code> is for number
+<description>By setting <code>loadMore="true"</code> will start the loazy load of data and
+    <code>loadOnScroll="false"</code> helps to load data on button click and <code>itemSize="5"</code> is for number
     items needs to be appended per event.Where as <code>[delay]="200"</code> sets the time period to load the data.
-    <code>[loadTitle]="More"</code>sets the title on button, on click of which data is loaded.
+    <code>[loadTitle]="'More'"</code>sets the title on button, on click of which data is loaded.
 </description>
 <component-example>
     <fdp-list-with-more-button-example>
@@ -167,13 +154,26 @@
 <code-example [exampleFiles]="listWithMoreButton"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'list13'" [componentName]="'List'">
+<fd-docs-section-title id="list6" componentName="List">
+    List - buttons
+</fd-docs-section-title>
+<description>EditIcon to the list item will be added by <code>listType="detail"</code> and for more image and button
+    options property<code>[secondaryIcons]="'['icons':'iconname',
+    'isButton':'true/false']'"</code> will help.
+    IsButton setting to false to set an image and true will set a button with specified icon.
+</description>
+<component-example>
+    <fdp-list-with-buttons-example></fdp-list-with-buttons-example>
+</component-example>
+<code-example [exampleFiles]="listWithButtons"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="list13" componentName="List">
     List - With No Data
 </fd-docs-section-title>
 <description>List with no data, property.<code>[noDataText]="..."</code>
     will help user to pass information to get
-    displayed when no data is present. <code>[noSeprator]="true"</code>
-    will help user to have bottom of list item with no border.
+    displayed when no data is present.
 
 </description>
 <component-example>
@@ -181,4 +181,31 @@
     </fdp-list-with-nodata-example>
 </component-example>
 <code-example [exampleFiles]="listWithNoData"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="list14" componentName="List">
+    List - With No Seperator
+</fd-docs-section-title>
+<description>List with <code>noSeprator="true"</code>
+    will help user to have bottom of list item with no border.
+
+</description>
+<component-example>
+    <fdp-list-with-no-seperator-example>
+    </fdp-list-with-no-seperator-example>
+</component-example>
+<code-example [exampleFiles]="listWithNoSeperator"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="list15" componentName="List">
+    List - With Unread data
+</fd-docs-section-title>
+<description>List with <code>unRead="true"</code>
+    helps to set the item as unread.
+</description>
+<component-example>
+    <fdp-list-with-unread-example>
+    </fdp-list-with-unread-example>
+</component-example>
+<code-example [exampleFiles]="listWithUnRead"></code-example>
 <separator></separator>

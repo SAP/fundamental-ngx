@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
     IconModule, FormModule, CheckboxModule, RadioModule,
-    ToolbarModule, ButtonModule,
-    ListModule, AvatarModule
+    ButtonModule, ListModule, AvatarModule
 } from '@fundamental-ngx/core';
 import { PlatformLinkModule } from '../../link/link.module';
-import { StandardListItemComponent } from './standard-list-item.component';
+import { PlatformObjectStatusModule } from '../../object-status/object-status.module';
 import { ListItemDef } from '../base-list-item';
+import { StandardListItemComponent } from './standard-list-item.component';
 
 @NgModule({
     declarations: [StandardListItemComponent, ListItemDef],
@@ -22,10 +22,10 @@ import { ListItemDef } from '../base-list-item';
         RadioModule,
         ButtonModule,
         PlatformLinkModule,
-        ToolbarModule,
         ListModule,
         AvatarModule,
-        RouterModule
+        RouterModule,
+        PlatformObjectStatusModule
 
     ],
     exports: [StandardListItemComponent, ListItemDef]

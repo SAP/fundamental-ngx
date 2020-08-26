@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { ContentDensity } from '../../components/form/form-control';
 
 /**

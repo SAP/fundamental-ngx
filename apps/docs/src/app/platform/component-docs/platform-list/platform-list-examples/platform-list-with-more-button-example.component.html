@@ -1,5 +1,4 @@
 <h3>Load On Button Click</h3>
-<fdp-list [dataSource]="dataSource" [loadMore]="true" [onScroll]="false" [itemSize]="5" [delayTime]="2000"
-    [loadTitle]="'Show More'">
+<fdp-list [dataSource]="dataSource" [loadMore]="true" [itemSize]="5" [delayTime]="2000" [loadTitle]="'Show More'">
     <fdp-standard-list-item *fdpItemDef="let user" [title]="user.firstName"></fdp-standard-list-item>
 </fdp-list>

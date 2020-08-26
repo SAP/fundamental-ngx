@@ -1,22 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import * as sliSrc from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-example.component.html';
 import * as borderLessSLISrc from '!raw-loader!./platform-standard-list-item-examples/platform-borderless-standard-list-item-example.component.html';
 import * as borderLessSLITs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component.ts';
 import * as groupHeaderSLITs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component.ts';
 import * as sliWithSecondaryType from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-secondary-type-example.component.html';
+import * as sliWithInvertedSecondaryType from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-inverted-secondary-type-example.component.html';
 import * as sliWithFooter from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-footer-example.component.html';
 import * as sliWithGroupHeader from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component.html';
 import * as sliWithSelection from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component.html';
+import * as sliWithSelectionTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component.ts';
 import * as sliWithSingleSelection from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.html';
 import * as sliWithSingleSelectionTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.ts';
 import * as sliWithNavigation from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component.html';
-import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import * as sli from '!raw-loader!./platform-standard-list-item-examples/platform-non-byline-standard-list-item-example.component.html';
+
 
 @Component({
     selector: 'app-standard-list-item',
     templateUrl: './platform-standard-list-item-docs.component.html'
 })
-export class PlatformStandardListItemDocsComponent implements OnInit {
+export class PlatformStandardListItemDocsComponent {
     simpleSLI: ExampleFile[] = [
         {
             language: 'html',
@@ -25,6 +29,13 @@ export class PlatformStandardListItemDocsComponent implements OnInit {
         }
     ];
 
+    sli: ExampleFile[] = [
+        {
+            language: 'html',
+            code: sli,
+            fileName: 'platform-non-byline-standard-list-item-example',
+        }
+    ];
     borderLessSLI: ExampleFile[] = [
         {
             language: 'html',
@@ -44,6 +55,14 @@ export class PlatformStandardListItemDocsComponent implements OnInit {
             language: 'html',
             code: sliWithSecondaryType,
             fileName: 'platform-standard-list-item-with-secondary-type-example',
+        }
+    ];
+
+    sliWithInvertedSecondaryType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: sliWithInvertedSecondaryType,
+            fileName: 'platform-standard-list-item-with-inverted-secondary-type-example',
         }
     ];
 
@@ -74,6 +93,12 @@ export class PlatformStandardListItemDocsComponent implements OnInit {
             language: 'html',
             code: sliWithSelection,
             fileName: 'platform-standard-list-item-with-selection-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListWithSelectExampleComponent',
+            code: sliWithSelectionTs,
+            fileName: 'platform-standard-list-item-with-selection-example'
         }
     ];
 
@@ -98,8 +123,5 @@ export class PlatformStandardListItemDocsComponent implements OnInit {
             fileName: 'platform-standard-list-item-with-navigation-example',
         }
     ];
-
-    ngOnInit(): void { }
-    constructor() { }
 
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 import { Observable, of } from 'rxjs';
+import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
+
+
 const LIST_ELEMENTS: Address[] = [
     {
         img: 'https://placeimg.com/400/400/nature',
@@ -38,29 +40,30 @@ export interface Address {
     info: string;
 
 }
+
 export class ListDataProvider extends DataProvider<Address> {
     constructor() {
         super();
     }
     fetch(params: Map<string, string>): Observable<Address[]> {
         let data = LIST_ELEMENTS;
-        if (!!params.get('name')) {
-            const keyword = params.get('name').toLowerCase();
+        if (!!params.get(name)) {
+            const keyword = params.get(name).toLowerCase();
             data = data.filter((city) => city.name.toLowerCase().indexOf(keyword) > -1);
         }
         return of(data);
     }
 }
 @Component({
-    selector: 'fdp-standard-list-item-with-single-selection-example',
-    templateUrl: './platform-standard-list-item-with-single-selection-example.component.html'
+    selector: 'fdp-standard-list-item-with-selection-example',
+    templateUrl: './platform-standard-list-item-with-selection-example.component.html'
 })
-export class PlatformStandardListItemWithSingleSelectionExampleComponent {
+export class PlatformStandardListItemWithSelectionExampleComponent {
     dataSource = new ListDataSource<Address>(new ListDataProvider());
     selectedItems: any[] = [];
 
     showItemInfo(event: any): void {
-        this.selectedItems = event.selectedItems[0].getAttribute('id');
+        this.selectedItems = event.selectedItems;
     }
 
 }
