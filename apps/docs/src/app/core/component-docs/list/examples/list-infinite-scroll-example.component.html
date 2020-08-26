@@ -3,9 +3,9 @@
     <ul
         fd-list
         fdInfiniteScroll
-        (onScrollAction)="scrollHandler()"
-        [scrollOffset]="40"
         style="overflow-y: scroll; max-height: 250px;"
+        [scrollOffset]="40"
+        (onScrollAction)="scrollHandler()"
     >
         <li fd-list-item *ngFor="let item of items">
             {{ item }}

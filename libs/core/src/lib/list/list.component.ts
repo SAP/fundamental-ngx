@@ -8,6 +8,7 @@ import {
     HostListener,
     Input,
     OnDestroy,
+    OnInit,
     Output,
     QueryList,
     ViewEncapsulation
@@ -15,7 +16,10 @@ import {
 import { ListItemComponent } from './list-item/list-item.component';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { FocusEscapeDirection, KeyboardSupportService } from '../utils/services/keyboard-support/keyboard-support.service';
+import {
+    FocusEscapeDirection,
+    KeyboardSupportService
+} from '../utils/services/keyboard-support/keyboard-support.service';
 
 /**
  * The directive that represents a list.
@@ -40,7 +44,7 @@ import { FocusEscapeDirection, KeyboardSupportService } from '../utils/services/
         KeyboardSupportService
     ]
 })
-export class ListComponent implements AfterContentInit, OnDestroy {
+export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     /** Whether dropdown mode is included to component, used for Select and Combobox */
     @Input()
     @HostBinding('class.fd-list--dropdown')
@@ -80,14 +84,6 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     @Input()
     keyboardSupport = true;
 
-    /** Function that is supposed to be called, when focus escape before list */
-    @Input()
-    escapeBeforeListCallback: (keyboardEvent: KeyboardEvent) => void;
-
-    /** Function that is supposed to be called, when focus escape after list */
-    @Input()
-    escapeAfterListCallback: (keyboardEvent: KeyboardEvent) => void;
-
     /** Event thrown, when focus escapes the list */
     @Output()
     focusEscapeList = new EventEmitter<FocusEscapeDirection>();
@@ -107,12 +103,11 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(
-        private _keyboardSupportService: KeyboardSupportService<ListItemComponent>
-    ) {
-        this._keyboardSupportService.focusEscapeList.pipe(
-            takeUntil(this._onDestroy$)
-        ).subscribe(direction => this.focusEscapeList.emit(direction))
+    constructor(private _keyboardSupportService: KeyboardSupportService<ListItemComponent>) { }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._listenOnListFocusEscape();
     }
 
     /** @hidden */
@@ -144,17 +139,17 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     private _listenOnQueryChange(): void {
         this.items.changes
             .pipe(
-                takeUntil(this._onDestroy$),
-                startWith(0)
-            ).subscribe(() => {
+                startWith(0),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe(() => {
                 this._recheckLinks();
-                this._listenToItemsClick();
-            })
-        ;
+                this._listenOnItemsClick();
+            });
     }
 
     /** @hidden */
-    private _listenToItemsClick(): void {
+    private _listenOnItemsClick(): void {
         /** Finish all of the streams, from before */
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
@@ -170,5 +165,12 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     private _recheckLinks(): void {
         const items = this.items.filter(item => item.link);
         this.hasNavigation = items.length > 0;
+    }
+
+    /** @hidden */
+    private _listenOnListFocusEscape(): void {
+        this._keyboardSupportService.focusEscapeList
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(direction => this.focusEscapeList.emit(direction))
     }
 }

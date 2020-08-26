@@ -2,7 +2,7 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
 import { QueryList } from '@angular/core';
 import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-item.interface';
 import { merge, Subject } from 'rxjs';
-import { filter, startWith, takeUntil } from 'rxjs/operators';
+import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
 import { KeyUtil } from '../../functions/key-util';
 
 export type FocusEscapeDirection = 'up' | 'down';
@@ -10,7 +10,7 @@ export type FocusEscapeDirection = 'up' | 'down';
 export class KeyboardSupportService<T> {
 
     /** Subject that is thrown, when focus escapes the list */
-    focusEscapeList = new Subject<FocusEscapeDirection>()
+    focusEscapeList = new Subject<FocusEscapeDirection>();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -20,6 +20,11 @@ export class KeyboardSupportService<T> {
 
     /** @hidden */
     private _keyManager: FocusKeyManager<T>;
+
+    /** @hidden */
+    get keyManager(): FocusKeyManager<T> {
+        return this._keyManager;
+    }
 
     /** @hidden */
     setKeyboardService(queryList: QueryList<KeyboardSupportItemInterface & T>, wrap?: boolean): void {
@@ -35,12 +40,8 @@ export class KeyboardSupportService<T> {
         this._keyManager.onKeydown(event);
     }
 
-    /** @hidden */
-    get keyManager(): FocusKeyManager<T> {
-        return this._keyManager;
-    }
-
-    public onDestroy(): void {
+    /** Destroys KeyboardSupportService dependencies */
+    onDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
@@ -48,28 +49,22 @@ export class KeyboardSupportService<T> {
     /** @hidden */
     private _refreshEscapeLogic(queryList: QueryList<KeyboardSupportItemInterface & T>): void {
 
+        const createEscapeListener = (onKey: string, escapeDirection: FocusEscapeDirection): void => {
+            queryList.first.keyDown.pipe(
+                takeUntil(unsubscribe$),
+                filter(event => KeyUtil.isKey(event, onKey)),
+                tap(() => event.preventDefault())
+            ).subscribe(() => this.focusEscapeList.next(escapeDirection));
+        };
+
         /** Finish all of the streams, form before */
         this._onRefresh$.next();
-        /** Merge refresh/destroy observables */
-        const refreshObs = merge(this._onRefresh$, this._onDestroy$);
-        if (queryList.first) {
-            queryList.first.keyDown.pipe(
-                takeUntil(refreshObs),
-                filter(event => KeyUtil.isKey(event, 'ArrowUp'))
-            ).subscribe(() => {
-                event.preventDefault();
-                this.focusEscapeList.next('up');
-            })
-        }
 
-        if (queryList.last) {
-            queryList.last.keyDown.pipe(
-                takeUntil(refreshObs),
-                filter(event => KeyUtil.isKey(event, 'ArrowDown'))
-            ).subscribe(() => {
-                event.preventDefault();
-                this.focusEscapeList.next('down');
-            })
+        const unsubscribe$ = merge(this._onRefresh$, this._onDestroy$);
+
+        if (queryList.length) {
+            createEscapeListener('ArrowDown', 'down');
+            createEscapeListener('ArrowUp', 'up');
         }
     }
 }

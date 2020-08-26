@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
+const ITEMS_AMOUNT_ON_LOAD = 5;
+
 @Component({
     selector: 'fd-list-infinite-scroll-example',
     templateUrl: './list-infinite-scroll-example.component.html'
 })
 export class ListInfiniteScrollExampleComponent {
-    readonly ITEMS_AMOUNT_ON_LOAD = 5;
 
     // List that is displayed to the user
     items = new Array(10).fill('Initially shown items');
@@ -17,14 +18,11 @@ export class ListInfiniteScrollExampleComponent {
     loadMore(): void {
         this.loading = true;
         of(this._getNewItems())
-            .pipe(
-                delay(2000)
-            )
+            .pipe(delay(2000))
             .subscribe(result => {
                 this.items = this.items.concat(result);
                 this.loading = false;
-            })
-        ;
+            });
     }
 
     scrollHandler(): void {
@@ -36,7 +34,7 @@ export class ListInfiniteScrollExampleComponent {
     private _getNewItems(): string[] {
         let index = this.items.length;
 
-        return Array(this.ITEMS_AMOUNT_ON_LOAD)
+        return Array(ITEMS_AMOUNT_ON_LOAD)
             .fill(undefined)
             .map(_ => `Element ${index++}`)
     }

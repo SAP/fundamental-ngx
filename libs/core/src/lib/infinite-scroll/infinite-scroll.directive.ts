@@ -29,7 +29,7 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        this._setScrollSubscription();
+        this._listenOnScroll();
     }
 
     /** @hidden */
@@ -49,14 +49,14 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private _setScrollSubscription(): void {
+    private _listenOnScroll(): void {
         this._subscription.add(
             fromEvent(this._element.nativeElement, 'scroll')
                 .pipe(
-                    debounceTime(10),
+                    debounceTime(50),
                     filter(() => this._shouldTriggerAction())
                 )
-                .subscribe(() => this.onScrollAction.emit(null))
+                .subscribe(() => this.onScrollAction.emit())
         );
     }
 }
