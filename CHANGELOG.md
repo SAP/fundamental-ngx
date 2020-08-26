@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.8...v0.22.0-rc.9) (2020-08-26)
+
+
+### Bug Fixes
+
+* **platform:** Addressing stackblitz error and Input error ([#3064](https://github.com/SAP/fundamental-ngx/issues/3064)) ([440622a](https://github.com/SAP/fundamental-ngx/commit/440622a2c831f0cb9ab101316969b6c8adb95371))
+
 ## [0.22.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.7...v0.22.0-rc.8) (2020-08-25)
 
 
