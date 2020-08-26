@@ -366,7 +366,7 @@ export class MultiInputComponent implements
         let allSelected = true;
         if (KeyUtil.isKey(event, ['Delete', 'Backspace']) && !this.searchTerm) {
             this.tokenizer.tokenList.forEach(token => {
-                if (token.selected) {
+                if (token.selected || token.tokenWrapperElement.nativeElement === document.activeElement) {
                     this.handleSelect(false, token.elementRef.nativeElement.innerText);
                 } else {
                     allSelected = false;

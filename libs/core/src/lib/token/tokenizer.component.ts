@@ -222,12 +222,12 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
                 event.stopPropagation();
                 this.focusTokenElement(index);
-                this.resetFirstAndLastElement();
                 if (event.ctrlKey || event.metaKey) {
                     this._ctrlSelected(token, index);
                 } else if (!event.ctrlKey && !event.metaKey && !event.shiftKey || this._ctrlPrevious) {
                     this._basicSelected(token, index);
                 } else if (event.shiftKey) {
+                    this.resetFirstAndLastElement();
                     this._shiftSelected(index);
                 }
             }));
@@ -526,12 +526,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     *Restart first and last elements for shift selection.
     */
     private resetFirstAndLastElement(): void {
-        let reset = true;
-        this.tokenList.forEach((token) => {
-            if (!token.selected) {
-                reset = false;
-            }
-        });
+        const reset = !this.tokenList.some(token => token.selected)
         if (reset) {
             this._firstElementInSelection = null;
             this._lastElementInSelection = null;
@@ -542,29 +537,29 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     *Method which handles what happens to token when it is clicked and the shift key is being held down.
     */
     private _shiftSelected(index): void {
-        if (index < this._firstElementInSelection) {
-            if (this._directionShiftIsRight) {
-                this._lastElementInSelection = this._firstElementInSelection;
-            }
-            this._directionShiftIsRight = false;
-            this._firstElementInSelection = index;
-        } else if (index > this._lastElementInSelection) {
-            if (!this._directionShiftIsRight) {
-                this._firstElementInSelection = this._lastElementInSelection;
-            }
-            this._directionShiftIsRight = true;
-            this._lastElementInSelection = index;
-        } else if (!this._lastElementInSelection) {
+        if (!this._firstElementInSelection && !this._lastElementInSelection) {
             this._firstElementInSelection = index;
             this._lastElementInSelection = index;
-        }
-        if (this._lastElementInSelection === this._firstElementInSelection) {
             this._directionShiftIsRight = null;
-        }
-        if (!this._directionShiftIsRight) {
-            this._firstElementInSelection = index;
-        } else if (this._directionShiftIsRight) {
-            this._lastElementInSelection = index;
+        } else {
+            if (index < this._firstElementInSelection) {
+                if (this._directionShiftIsRight) {
+                    this._lastElementInSelection = this._firstElementInSelection;
+                }
+                this._directionShiftIsRight = false;
+                this._firstElementInSelection = index;
+            } else if (index > this._lastElementInSelection) {
+                if (!this._directionShiftIsRight) {
+                    this._firstElementInSelection = this._lastElementInSelection;
+                }
+                this._directionShiftIsRight = true;
+                this._lastElementInSelection = index;
+            }
+            if (!this._directionShiftIsRight) {
+                this._firstElementInSelection = index;
+            } else if (this._directionShiftIsRight) {
+                this._lastElementInSelection = index;
+            }
         }
 
         this.tokenList.forEach((token, indexOfToken) => {
