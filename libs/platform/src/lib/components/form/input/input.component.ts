@@ -44,6 +44,7 @@ export type InputType = 'text' | 'number' | 'email' | 'password';
 @Component({
     selector: 'fdp-input',
     templateUrl: 'input.component.html',
+    styleUrls: ['./input.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FormFieldControl, useExisting: InputComponent, multi: true }]
 })
@@ -54,8 +55,8 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     state: Status = 'default';
 
     /** @hidden */
-    @ViewChild('inputElement')
-    inputElement: ElementRef;
+    @ViewChild('inputElemRef')
+    inputElemRef: ElementRef;
 
     /** return the value in the text box */
     @Input()
@@ -69,7 +70,7 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
 
     /** @hidden */
     elementRef(): ElementRef<any> {
-        return this.inputElement;
+        return this.inputElemRef;
     }
 
     constructor(
