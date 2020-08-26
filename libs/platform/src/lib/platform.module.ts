@@ -19,7 +19,7 @@ import { PlatformCheckboxGroupModule } from './components/form/checkbox-group/ch
 import { PlatformPanelModule } from './components/panel/panel.module';
 import { PlatformSwitchModule } from './components/form/switch/switch.module';
 import { PlatformObjectStatusModule } from './components/object-status/object-status.module';
-import { PlatformInputModule } from './components/form/public_api';
+import { PlatformInputModule, PlatformStepInputModule } from './components/form/public_api';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -44,7 +44,8 @@ import { PlatformInputModule } from './components/form/public_api';
         PlatformSwitchModule,
         PlatformTextAreaModule,
         PlatformObjectStatusModule,
-        PlatformInputModule
+        PlatformInputModule,
+        PlatformStepInputModule
     ]
 })
 export class FundamentalNgxPlatformModule {}
