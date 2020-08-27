@@ -56,7 +56,12 @@ export const API_FILES = {
     datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
     datetimePicker: ['DatetimePickerComponent', 'FdDateTime', 'DateTimeFormatParser', 'DateTimeFormatParserDefault'],
     fileInput: ['FileInputComponent', 'FileSelectDirective', 'FileDragndropDirective'],
-    fileUploader: ['FileUploaderComponent', 'FileUploaderSelectDirective', 'FileUploaderDragndropDirective', 'FileUploaderService'],
+    fileUploader: [
+        'FileUploaderComponent',
+        'FileUploaderSelectDirective',
+        'FileUploaderDragndropDirective',
+        'FileUploaderService'
+    ],
     fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective'],
     form: [
         'FormControlComponent',
