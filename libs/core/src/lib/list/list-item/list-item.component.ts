@@ -60,13 +60,9 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     @HostBinding('class.fd-list__item--action')
     action = false;
 
-    /** Keydown Event emitter */
+    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
-    /** Mouse click event emitter */
-    @Output()
-    clicked: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     /** Whether list item contains link */
     @HostBinding('class.fd-list__item--link')
@@ -83,6 +79,9 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     /** @hidden */
     @ContentChildren(ListLinkDirective)
     linkDirectives: QueryList<ListLinkDirective>;
+
+    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
+    clicked = new EventEmitter<MouseEvent>();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();

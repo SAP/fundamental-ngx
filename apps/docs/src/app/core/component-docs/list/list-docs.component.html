@@ -1,6 +1,10 @@
 <fd-docs-section-title id="list-simple" componentName="list">
-    Simple List
+    Simple list
 </fd-docs-section-title>
+<description>
+    To create a simple list extend your HTML list implementation with following directives: <code>fd-list</code>, <code>fd-list-item</code>,
+    <code>fd-list-title</code> directives.
+</description>
 <component-example>
     <fd-list-example></fd-list-example>
 </component-example>
@@ -9,7 +13,7 @@
 <separator></separator>
 
 <fd-docs-section-title id="list-navigation" componentName="list">
-    Navigation
+    Navigation list
 </fd-docs-section-title>
 <description>
     For a standard list with navigation links add anchor elements with <code>fd-list-link</code> directive.
@@ -23,11 +27,11 @@
 <separator></separator>
 
 <fd-docs-section-title id="list-indicator" componentName="list">
-    Navigation Indicator
+    Navigation indicator
 </fd-docs-section-title>
 <description>
     If there is only a subset of list items that are navigable, they should be indicated with a navigation arrow.
-    Do not show arrows if all items are navigable, instead use a Standard List with Navigation.
+    Do not show arrows if all items are navigable, instead use a standard list with navigation.
     To add navigation indicators, add <code>[navigationIndication]="true"</code> property to the
     <code>fd-list</code> element.
 </description>
@@ -39,10 +43,11 @@
 <separator></separator>
 
 <fd-docs-section-title id="list-action" componentName="list">
-    Action List
+    Action list
 </fd-docs-section-title>
 <description>
-    To create action item, add <code>[action]="true"</code> to certain item.
+    The action list is used to trigger an action directly from a list of options. To create an action item, add <code>[action]="true"</code>
+    to the item. Following example features "Show More" button as an action list element.
 </description>
 <component-example>
     <fd-list-action-example></fd-list-action-example>
@@ -52,11 +57,12 @@
 <separator></separator>
 
 <fd-docs-section-title id="list-sorting-filtering" componentName="list">
-    List with filtering and sorting
+    Filter and sort list
 </fd-docs-section-title>
 <description>
-    Functionalities like filtering or sorting the data are not provided inside list component. It can be easily added
-    by user, by putting some pipes. Below there is example how it can be achieved with toolbar.
+    Functionalities like filtering or sorting the data are not provided inside list component. To implement those
+    features we recommend creating and using pipes to perform operations on list items collection. Following example
+    presents list with filtering and sorting features composed with <a routerLink="/core/toolbar">Toolbar Component</a>.
 </description>
 <component-example>
     <fd-list-data-example></fd-list-data-example>
@@ -66,7 +72,7 @@
 <separator></separator>
 
 <fd-docs-section-title id="secondary-list" componentName="list">
-    Secondary Item on List
+    Secondary item on list
 </fd-docs-section-title>
 <description>The list component can be customized by adding additional information in additional columns.</description>
 <component-example>
@@ -77,7 +83,7 @@
 <separator></separator>
 
 <fd-docs-section-title id="icon-list" componentName="list">
-    List with Icons
+    List with icons
 </fd-docs-section-title>
 <description>It is possible to put icons on both sides.</description>
 <component-example>
@@ -88,7 +94,7 @@
 <separator></separator>
 
 <fd-docs-section-title id="borderless-list" componentName="list">
-    Borderless List
+    Borderless list
 </fd-docs-section-title>
 <description>
     It is possible to also remove the borders from the list items by passing <code>[noBorder]="true"</code>.
@@ -101,7 +107,7 @@
 <separator></separator>
 
 <fd-docs-section-title id="icon-complex" componentName="list">
-    Complex List
+    Complex list
 </fd-docs-section-title>
 <description>
     List items can be split into different groups with individual headers, accompanied by a footer at the bottom.
@@ -131,13 +137,12 @@
 <separator></separator>
 
 <fd-docs-section-title id="keyboard-list" componentName="list">
-    Keyboard Support
+    Keyboard support
 </fd-docs-section-title>
 <description>
-    Keyboard support is built inside the list component, it supports Arrow Down/Up and emits click event,
-    when Enter/Space keys triggered. It can be disabled, by passing <code>[enableKeyboardSupport]="false"</code> to
-    list component. Also methods triggered on list leave can be customised as on example, by listening to
-    <code>(focusEscapeList)</code> event.
+    By default list supports keyboard navigation. Keyboard support can be disabled by passing <code>[enableKeyboardSupport]="false"</code>
+    to the list component. To implement custom handling of the list navigation escaping list boundaries use <code>(focusEscapeList)</code>
+    as features in following example.
 </description>
 <component-example>
     <fd-list-keyboard-example></fd-list-keyboard-example>
@@ -147,11 +152,11 @@
 <separator></separator>
 
 <fd-docs-section-title id="dnd-list" componentName="list">
-    Drag and Drop
+    Drag and drop
 </fd-docs-section-title>
 <description>
-    List can be used along with <code>DragAndDropModule</code>. To achieve it, user should add <code>fd-dnd-list</code>
-    to list element and <code>fd-dnd-item</code> to every list item.
+    To use drag and drop list features in your list import <code>DragAndDropModule</code> and add
+    <code>fd-dnd-list</code> directive to the list element and <code>fd-dnd-item</code> to each list item.
 </description>
 <component-example>
     <fd-list-dnd-example></fd-list-dnd-example>
@@ -161,7 +166,7 @@
 <separator></separator>
 
 <fd-docs-section-title id="infinite-scroll-list" componentName="list">
-    Infinite Scroll List
+    Infinite scroll list
 </fd-docs-section-title>
 <description>
     It is possible to implement an infinite scroll function using the fdInfiniteScroll directive. It allows you to load
