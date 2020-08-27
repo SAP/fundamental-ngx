@@ -5,11 +5,11 @@ import {
     ContentChildren,
     QueryList,
     ElementRef,
-    AfterContentInit,
     ViewEncapsulation,
-    HostBinding,
     ChangeDetectorRef,
-    Renderer2
+    Renderer2,
+    AfterViewInit,
+    OnInit
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
@@ -18,6 +18,11 @@ import { ContentDensity, Status } from '../form/form-control';
 import { BaseComponent } from '../base';
 
 import { InputGroupConfig } from './input-group.config';
+
+const CSS_CLASS_NAME = {
+    inputGroup: 'fdp-input-group',
+    inputGroupInnerInput: 'fd-input-group__input'
+} as const;
 
 /**
  * Fundamental input group component
@@ -30,7 +35,7 @@ import { InputGroupConfig } from './input-group.config';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputGroupComponent extends BaseComponent implements AfterContentInit {
+export class InputGroupComponent extends BaseComponent implements OnInit, AfterViewInit {
     /**
      * content Density of element: 'cozy' | 'compact'
      */
@@ -53,14 +58,6 @@ export class InputGroupComponent extends BaseComponent implements AfterContentIn
         this._controlStateClass = `is-${state}`;
     }
 
-    /**
-     * @hidden
-     * Assign predefined className to host element
-     * to make css selector stronger
-     */
-    @HostBinding('class')
-    className = 'fdp-input-group';
-
     /** @hidden */
     @ContentChildren(InputComponent)
     _inputControls: QueryList<InputComponent>;
@@ -82,12 +79,24 @@ export class InputGroupComponent extends BaseComponent implements AfterContentIn
     }
 
     /** @hidden */
-    ngAfterContentInit(): void {
+    ngOnInit(): void {
+        /**
+         * Assign predefined className to host element
+         * to make css selector stronger
+         */
+        this._renderer.addClass(this._elementRef.nativeElement, CSS_CLASS_NAME.inputGroup);
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        /**
+         * Can't subscribe to input controls in ngAfterContentInit
+         * because we need to have access to inputElemRef
+         */
         this._inputControls.changes
             .pipe(startWith(this._inputControls))
             .subscribe((inputControls: QueryList<InputComponent>) => {
                 this.setupChildInputControls(inputControls);
-                this.setupClassesForChildInputElements();
             });
     }
 
@@ -95,19 +104,10 @@ export class InputGroupComponent extends BaseComponent implements AfterContentIn
     private setupChildInputControls(inputControls = this._inputControls): void {
         inputControls.forEach((control) => {
             control.contentDensity = this._contentDensity;
-        });
-    }
-
-    /** @hidden */
-    private setupClassesForChildInputElements(): void {
-        const hostElement: HTMLElement = this._elementRef.nativeElement;
-
-        if (!hostElement) {
-            return;
-        }
-
-        hostElement.querySelectorAll('input:not([type="button"])').forEach((inputElement) => {
-            this._renderer.addClass(inputElement, 'fd-input-group__input');
+            const inputEl = control.inputElemRef.nativeElement as HTMLInputElement | null;
+            if (inputEl) {
+                this._renderer.addClass(inputEl, CSS_CLASS_NAME.inputGroupInnerInput);
+            }
         });
     }
 }

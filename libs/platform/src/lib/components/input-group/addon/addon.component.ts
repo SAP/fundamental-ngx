@@ -21,6 +21,13 @@ import { ButtonComponent } from '../../button/public_api';
 
 import { InputGroupComponent } from '../input-group.component';
 
+const CSS_CLASS_NAME = {
+    addon: 'fd-input-group__addon',
+    addonButton: 'fd-input-group__addon--button',
+    addonCompact: 'fd-input-group__addon--compact',
+    innerButton: 'fd-input-group__button'
+} as const;
+
 @Component({
     selector: 'fdp-input-group-addon',
     templateUrl: './addon.component.html',
@@ -72,9 +79,9 @@ export class InputGroupAddonComponent implements CssClassBuilder, OnInit, OnChan
     /**@hidden */
     buildComponentCssClass(): string[] {
         return [
-            'fd-input-group__addon',
-            this._fdpButtons?.length > 0 ? 'fd-input-group__addon--button' : '',
-            this._contentDensity === 'compact' ? 'fd-input-group__addon--compact' : ''
+            CSS_CLASS_NAME.addon,
+            this._fdpButtons?.length > 0 ? CSS_CLASS_NAME.addonButton : '',
+            this._contentDensity === 'compact' ? CSS_CLASS_NAME.addonCompact : ''
         ];
     }
 
@@ -95,7 +102,7 @@ export class InputGroupAddonComponent implements CssClassBuilder, OnInit, OnChan
         }
 
         element.querySelectorAll('button').forEach((button) => {
-            this._renderer.addClass(button, 'fd-input-group__button');
+            this._renderer.addClass(button, CSS_CLASS_NAME.innerButton);
         });
     }
 }
