@@ -42,8 +42,7 @@ import { delay, filter, first, takeUntil } from 'rxjs/operators';
     templateUrl: './datetime-picker.component.html',
     styleUrls: ['./datetime-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()',
-        '[class.fd-datetime-host]': 'true'
+        '(blur)': 'onTouched()'
     },
     providers: [
         {
