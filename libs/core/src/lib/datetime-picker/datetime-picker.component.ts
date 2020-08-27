@@ -24,7 +24,7 @@ import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calen
 import { FdDatetime } from './models/fd-datetime';
 import { FormStates } from '../form/form-control/form-states';
 import { DatePipe } from '@angular/common';
-import { CalendarYearGrid, SpecialDayRule } from '../..';
+import { CalendarYearGrid, PopoverBodyComponent, SpecialDayRule } from '../..';
 import { PopoverComponent } from '../popover/popover.component';
 import { Subject, Subscription } from 'rxjs';
 import { delay, filter, first, takeUntil } from 'rxjs/operators';
@@ -252,6 +252,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @ViewChild(PopoverComponent)
     popover: PopoverComponent;
 
+    /** @hidden */
+    @ViewChild(PopoverBodyComponent)
+    popoverBodyComponent: PopoverBodyComponent;
+
     /**
      * @hidden Date of the input field. Internal use.
      * For programmatic selection, use two-way binding on the date input.
@@ -374,7 +378,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     @HostListener('document:click', ['$event'])
     public onGlobalClick(event: MouseEvent): void {
-        if (!this._elRef.nativeElement.contains(event.target)) {
+        if (!this._elRef.nativeElement.contains(event.target) && !this.popoverBodyComponent.elRef.nativeElement.contains(event.target)) {
             this.closePopover();
         }
     }
