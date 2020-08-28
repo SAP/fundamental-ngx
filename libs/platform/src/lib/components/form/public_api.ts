@@ -5,6 +5,7 @@ export * from './checkbox-group/checkbox-group.component';
 export * from './combo-box/fdp-combo-box.module';
 export * from './combo-box/combo-box.component';
 export * from './form-control';
+export * from './form-options';
 export * from './form-group/fdp-form.module';
 export * from './form-group/form-group.component';
 export * from './form-group/form-field/form-field.component';

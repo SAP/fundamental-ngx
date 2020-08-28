@@ -42,7 +42,7 @@
                 [name]="name"
                 [value]="getLookupValue(item)"
                 [contentDensity]="contentDensity"
-                [disabled]="item.disabled ? item.disabled : disabled"
+                [disabled]="getListItemDisabledValue(item)"
                 [forceRender]="true"
                 (click)="selected($event)"
             >

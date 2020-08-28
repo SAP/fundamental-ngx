@@ -415,7 +415,7 @@ describe('NumberStepInputComponent main functionality', () => {
 @Component({
     template: `
         <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
-            <fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form">
+            <fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form" [object]="initialFormModel">
                 <fdp-form-field
                     #ff
                     id="qty"
@@ -427,7 +427,7 @@ describe('NumberStepInputComponent main functionality', () => {
                     hintPlacement="left"
                     [validators]="stepInputValidators"
                 >
-                    <fdp-number-step-input name="qty" formControlName="qty"></fdp-number-step-input>
+                    <fdp-number-step-input name="qty" [formControl]="ff.formControl"></fdp-number-step-input>
                 </fdp-form-field>
                 <ng-template #i18n let-errors>
                     <span *ngIf="errors && errors.required" class="error">This field is required.</span>
@@ -444,9 +444,9 @@ class NumberStepInputFormTestWrapperComponent {
 
     @ViewChild('submitButton') submitButton: ElementRef<HTMLElement>;
 
-    form: FormGroup = new FormGroup({
-        qty: new FormControl(100)
-    });
+    form: FormGroup = new FormGroup({});
+
+    initialFormModel = { qty: 100 };
 
     stepInputValidators: ValidatorFn[] = [Validators.required];
 
@@ -498,7 +498,7 @@ describe('Basic number Step Input withing platforms form', () => {
         expect(controlHint).toBe('This is tooltip help');
 
         const controlDefaultValue = host.form.get('qty').value;
-        expect(controlDefaultValue).toBe(100);
+        expect(controlDefaultValue).toBe(host.initialFormModel.qty);
     });
 
     it('should propagate control value to a form instance', async () => {
@@ -521,8 +521,9 @@ describe('Basic number Step Input withing platforms form', () => {
         expect(formControl.value).toBe(100);
         expect(stepInputEl.classes['is-error']).not.toBeTrue();
 
-        stepInputComponent.value = null;
         formControl.markAsTouched();
+        await wait(fixture);
+        stepInputComponent.value = null;
         await wait(fixture);
 
         expect(formControl.value).toBe(null);

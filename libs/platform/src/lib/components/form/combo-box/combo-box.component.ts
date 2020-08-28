@@ -1,26 +1,33 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     Inject,
-    Input, OnDestroy, OnInit,
-    Optional,
+    Input,
+    OnDestroy,
+    OnInit,
     Renderer2,
-    Self,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    ChangeDetectorRef,
+    Optional,
+    Self,
+    SkipSelf,
+    Host
 } from '@angular/core';
-import { FormFieldControl } from '../form-control';
-import { NgControl, NgForm } from '@angular/forms';
-import { ComboboxComponent as FdComboBoxComponent } from '@fundamental-ngx/core';
-import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider, isDataSource } from '../../../domain/data-source';
+import { NgForm, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { ComboboxComponent as FdComboBoxComponent } from '@fundamental-ngx/core';
+
 import { ArrayComboBoxDataSource } from '../../../domain/array-data-source';
+import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider, isDataSource } from '../../../domain/data-source';
 import { isJsObject } from '../../../utils/lang';
+import { FormFieldControl } from '../form-control';
 import { CollectionBaseInput } from '../collection-base.input';
+import { FormField } from '../form-field';
 
 type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | T[];
 
@@ -93,17 +100,19 @@ export class ComboBoxComponent extends CollectionBaseInput implements OnInit, On
     private _dsSubscription: Subscription | null;
 
     constructor(
-        protected _cd: ChangeDetectorRef,
+        cd: ChangeDetectorRef,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         /**
          * This data providers is initial implementation, but in the future we expect actual Service to
          * handle the registry of data providers
          */
         @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
-        private _renderer: Renderer2,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        private _renderer: Renderer2
     ) {
-        super(_cd, ngControl, ngForm);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     ngOnInit(): void {

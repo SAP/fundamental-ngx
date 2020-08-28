@@ -13,14 +13,19 @@ import {
     QueryList,
     Self,
     ViewEncapsulation,
-    ViewChildren
+    ViewChildren,
+    forwardRef,
+    SkipSelf,
+    Host
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+
 import { RadioButtonComponent } from './radio/radio.component';
 import { CollectionBaseInput } from '../collection-base.input';
 import { FormFieldControl } from '../form-control';
+import { FormField } from '../form-field';
 
 /**
  * Radio group implementation based on the
@@ -37,7 +42,7 @@ let nextUniqueId = 0;
     templateUrl: './radio-group.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: RadioGroupComponent, multi: true }]
+    providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => RadioGroupComponent), multi: true }]
 })
 export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit, AfterContentChecked, OnDestroy {
     /** Value of selected radio button */
@@ -50,7 +55,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * To Dispaly Radio buttons in a line
+     * To Display Radio buttons in a line
      */
     @Input()
     isInline = false;
@@ -86,10 +91,12 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
 
     constructor(
         protected _changeDetector: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(_changeDetector, ngControl, ngForm);
+        super(_changeDetector, ngControl, ngForm, formField, formControl);
         this.id = `radio-group-${nextUniqueId++}`;
     }
 
@@ -104,14 +111,14 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * Acess display value for objects, acts as checkbox label.
+     * Access display value for objects, acts as checkbox label.
      */
     public getDisplayValue(item: any): string {
         return this.displayValue(item);
     }
 
     /**
-     * Acess lookup value for objects, acts as checkbox value.
+     * Access lookup value for objects, acts as checkbox value.
      */
     public getLookupValue(item: any): string {
         return this.lookupValue(item);
@@ -159,6 +166,11 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.complete();
+    }
+
+    /** @hidden */
+    public getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
+        return this.disabled || typeof item === 'string' ? this.disabled : item.disabled;
     }
 
     /**
@@ -224,7 +236,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
 
     /**
      *
-     * @param button Set inital values, used while content children creation
+     * @param button Set initial values, used while content children creation
      */
     private _setProperties(button: RadioButtonComponent): void {
         if (button) {

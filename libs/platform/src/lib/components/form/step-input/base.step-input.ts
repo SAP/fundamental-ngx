@@ -1,14 +1,15 @@
-import { ChangeDetectorRef, Input, Output, EventEmitter, Renderer2, Directive, OnInit } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { Input, Output, EventEmitter, Renderer2, Directive, OnInit, ChangeDetectorRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
+import { NgForm, NgControl } from '@angular/forms';
 
 import { RtlService } from '@fundamental-ngx/core';
 
 import { BaseInput } from '../base.input';
-import { ContentDensity } from '../form-control';
+import { ContentDensity, FormFieldControl } from '../form-control';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
+import { FormField } from '../form-field';
 
 /** Change event object emitted by Platform Step Input component */
 export abstract class StepInputChangeEvent<T extends StepInputComponent = StepInputComponent, K = number> {
@@ -195,14 +196,16 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** @hidden */
     constructor(
-        protected _cd: ChangeDetectorRef,
-        public ngControl: NgControl,
-        public ngForm: NgForm,
+        cd: ChangeDetectorRef,
+        ngControl: NgControl,
+        ngForm: NgForm,
+        formField: FormField,
+        formControl: FormFieldControl<any>,
         protected config: StepInputConfig,
         private _renderer: Renderer2,
         private _rtlService: RtlService
     ) {
-        super(_cd, ngControl, ngForm);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */
@@ -325,7 +328,11 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
             .asObservable()
             .pipe(takeUntil(this._destroyed))
             .subscribe(() => {
+                const oldValue = this.isErrorState;
                 this.isErrorState = this.status === 'error';
+                if (this.isErrorState !== oldValue) {
+                    this._cd.markForCheck();
+                }
             });
     }
 

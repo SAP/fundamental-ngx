@@ -1,18 +1,21 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
-    NgZone,
-    Optional,
     Output,
-    Self
+    ChangeDetectorRef,
+    Optional,
+    Self,
+    SkipSelf,
+    Host
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { NgForm, NgControl } from '@angular/forms';
 
-import { ContentDensity, FormFieldControl } from '../../form-control';
+import { FormFieldControl, ContentDensity } from '../../form-control';
 import { BaseInput } from '../../base.input';
+import { FormField } from '../../form-field';
+
 import { SwitchConfig } from './switch.config';
 
 /** Switch change event instance */
@@ -82,13 +85,14 @@ export class SwitchComponent extends BaseInput {
     switchCurrentValue = false;
 
     constructor(
-        protected _switchConfig: SwitchConfig,
-        protected _changeDetector: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm,
-        private _ngZone: NgZone
+        cd: ChangeDetectorRef,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        protected _switchConfig: SwitchConfig
     ) {
-        super(_changeDetector, ngControl, ngForm);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden change formcontrol value */
