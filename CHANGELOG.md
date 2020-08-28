@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.10...v0.22.0-rc.11) (2020-08-28)
+
+
+### Features
+
+* add keyboard support with shift and control ([#2945](https://github.com/SAP/fundamental-ngx/issues/2945)) ([3c96802](https://github.com/SAP/fundamental-ngx/commit/3c96802e5a596ce0e5e60050ce9e0098838a89ac))
+
 ## [0.22.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.9...v0.22.0-rc.10) (2020-08-28)
 
 
