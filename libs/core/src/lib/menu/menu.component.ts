@@ -61,6 +61,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     @Input()
     placement: Placement = 'bottom-start';
 
+    /** Whether or not to display the popover arrow. */
+    @Input()
+    noArrow = true;
+
     /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
     @Input()
