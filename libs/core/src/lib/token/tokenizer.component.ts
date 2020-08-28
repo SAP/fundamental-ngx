@@ -187,8 +187,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         this.buildComponentCssClass();
     }
 
-    constructor(private _elementRef: ElementRef, private cdRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService, private _renderer: Renderer2) {
+    constructor(private _elementRef: ElementRef,
+        private cdRef: ChangeDetectorRef,
+        @Optional() private _rtlService: RtlService,
+        private _renderer: Renderer2) {
         this._renderer.listen('window', 'click', (e: Event) => {
             if (this.elementRef().nativeElement.contains(e.target) === false) {
                 this.tokenList.forEach(token => {
@@ -287,7 +289,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
         if (KeyUtil.isKey(event, ' ') && document.activeElement !== this.input.elementRef().nativeElement) {
             const token = this.tokenList.find((element, index) => index === fromIndex);
-            this.tokenList.forEach(shadowedToken => { if (shadowedToken !== token) { shadowedToken.selected = false } });
+            this.tokenList.forEach(shadowedToken => {
+                if (shadowedToken !== token) {
+                    shadowedToken.selected = false
+                }
+            });
             token.selected = !token.selected;
             event.preventDefault();
         } else if (KeyUtil.isKey(event, 'Enter')) {
@@ -505,10 +511,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         });
     }
 
-    /** @hidden */
-    /*
-    *Method which handles what happens to token when it is clicked and no key is being held down.
-    */
+    /** @hidden Method which handles what happens to token when it is clicked and no key is being held down.*/
     private _basicSelected(token, index): void {
         this.tokenList.forEach(shadowedToken => {
             if (shadowedToken !== token) {
@@ -521,10 +524,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         this._ctrlPrevious = false;
     }
 
-    /** @hidden */
-    /*
-    *Restart first and last elements for shift selection.
-    */
+    /** @hidden Restart first and last elements for shift selection.*/
     private resetFirstAndLastElement(): void {
         const reset = !this.tokenList.some(token => token.selected)
         if (reset) {
@@ -532,10 +532,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this._lastElementInSelection = null;
         }
     }
-    /** @hidden */
-    /*
-    *Method which handles what happens to token when it is clicked and the shift key is being held down.
-    */
+    /** @hidden Method which handles what happens to token when it is clicked and the shift key is being held down.*/
     private _shiftSelected(index): void {
         if (!this._firstElementInSelection && !this._lastElementInSelection) {
             this._firstElementInSelection = index;
@@ -572,8 +569,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         this._ctrlPrevious = false;
     }
 
-    /** @hidden */
-    /*Method which handles what happens to token when it is clicked and the control or meta key is being held down.*/
+    /** @hidden Method which handles what happens to token when it is clicked and the control or meta key is being held down.*/
     private _ctrlSelected(token, index): void {
         this._firstElementInSelection = null;
         this._lastElementInSelection = null;
@@ -588,7 +584,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             token.selected = false;
             this.tokenList.forEach((element, indexOfToken) => {
                 if (!this._firstElementInSelection) {
-                    if (element.selected) { this._firstElementInSelection = indexOfToken }
+                    if (element.selected) {
+                        this._firstElementInSelection = indexOfToken
+                    }
                 } else {
                     this._lastElementInSelection = indexOfToken;
                 }
