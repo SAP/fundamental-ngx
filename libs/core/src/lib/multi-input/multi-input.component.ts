@@ -236,7 +236,7 @@ export class MultiInputComponent implements
         private _changeDetRef: ChangeDetectorRef,
         private _menuKeyboardService: MenuKeyboardService,
         private _dynamicComponentService: DynamicComponentService
-    ) {}
+    ) { }
 
     /** @hidden */
     ngOnInit(): void {
@@ -353,6 +353,7 @@ export class MultiInputComponent implements
         if (checked) {
             this.selected.push(value);
         } else {
+            // remove the token whose close button was explicitly clicked
             this.selected.splice(this.selected.indexOf(value), 1);
         }
 
@@ -370,7 +371,7 @@ export class MultiInputComponent implements
         let allSelected = true;
         if (KeyUtil.isKey(event, ['Delete', 'Backspace']) && !this.searchTerm) {
             this.tokenizer.tokenList.forEach(token => {
-                if (token.selected) {
+                if (token.selected || token.tokenWrapperElement.nativeElement === document.activeElement) {
                     this.handleSelect(false, token.elementRef.nativeElement.innerText);
                 } else {
                     allSelected = false;
