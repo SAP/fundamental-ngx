@@ -8,6 +8,7 @@ import { DatetimePickerComponent } from './datetime-picker.component';
 import { TimeModule } from '../time/time.module';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
+import { BarModule } from '../bar/bar.module';
 
 @NgModule({
     declarations: [DatetimePickerComponent],
@@ -19,7 +20,8 @@ import { InputGroupModule } from '../input-group/input-group.module';
         FormsModule,
         TimeModule,
         InputGroupModule,
-        ButtonModule
+        ButtonModule,
+        BarModule
     ],
     exports: [DatetimePickerComponent]
 })

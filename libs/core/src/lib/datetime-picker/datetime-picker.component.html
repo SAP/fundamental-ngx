@@ -46,8 +46,8 @@
                     [activeView]="activeView"
                     (activeViewChange)="handleCalendarActiveViewChange($event)"
                     [disableFunction]="disableFunction ? disableFunction : null"
-                    [selectedDate]="selectedDate"
                     (selectedDateChange)="handleDateChange($event)"
+                    [selectedDate]="tempDate"
                     (isValidDateChange)="isInvalidDateInputHandler($event)"
                     [escapeFocusFunction]="null"
                     [compact]="compact"
@@ -63,7 +63,7 @@
                     [disabled]="disabled"
                     [keepTwoDigits]="keepTwoDigitsTime"
                     [meridian]="meridian"
-                    [ngModel]="time"
+                    [ngModel]="tempTime"
                     [compact]="compact"
                     [spinnerButtons]="spinnerButtons"
                     (ngModelChange)="handleTimeChange($event)"
@@ -72,6 +72,18 @@
                     [displayHours]="displayHours"
                     (focusArrowLeft)="focusArrowLeft()"
                 ></fd-time>
+            </div>
+            <div fd-popover-body-footer>
+                <div fd-bar [barDesign]="'footer'" [cosy]="true">
+                    <div fd-bar-right>
+                        <fd-bar-element>
+                            <button fd-button [fdType]="'emphasized'" [compact]="true" (click)="submit()">Submit</button>
+                        </fd-bar-element>
+                        <fd-bar-element>
+                            <button fd-button [compact]="true" (click)="cancel()">Cancel</button>
+                        </fd-bar-element>
+                    </div>
+                </div>
             </div>
         </fd-popover-body>
     </fd-popover>

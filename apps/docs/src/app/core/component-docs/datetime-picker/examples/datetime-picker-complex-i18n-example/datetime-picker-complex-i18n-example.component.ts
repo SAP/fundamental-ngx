@@ -84,7 +84,7 @@ export class DatetimePickerComplexI18nExampleComponent {
         this.datetimePickerComponent.format = this.actualFormat;
         this.placeholder = placeholders.get(this.actualLocale);
 
-        this.datetimePickerComponent.handleDateChange(this.date.date);
+        this.datetimePickerComponent.submit();
         this.calendarI18nService.i18nChange.next();
     }
 
