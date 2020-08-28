@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    Attribute,
     ChangeDetectorRef,
     ChangeDetectionStrategy,
     Component,
@@ -54,37 +55,10 @@ let nextUniqueId = 0;
 })
 export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /**
-     * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
-     * take precedence so this may be omitted.
-     */
-    @Input('aria-label')
-    ariaLabel = '';
-
-    /**
-     * Users can specify the `aria-labelledby` attribute which will be forwarded to the core checkbox
-     */
-    @Input('aria-labelledby')
-    ariaLabelledby = null;
-
-    /** The 'aria-describedby' attribute is read after the element's label and field type. */
-    @Input('aria-describedby')
-    ariaDescribedby: string;
-
-    /** The 'aria-disabled' for giving accessibility for disabled checkbox element. */
-    @Input('aria-disabled')
-    ariaDisabled: boolean;
-
-    /**
      * Checkbox tooltip
      */
     @Input()
     title: string;
-
-    /**
-     * Includes the checkbox in the page tab sequence.
-     */
-    @Input()
-    tabIndex: string;
 
     /** set to true if binary checkbox */
     @Input()
@@ -190,12 +164,14 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         protected _changeDetector: ChangeDetectorRef,
-        private _ngZone: NgZone
+        private _ngZone: NgZone,
+        @Attribute('tabIndexValue') public tabIndexValue: number = 0
     ) {
         super(_changeDetector, ngControl, ngForm, formField, formControl);
         // necessary to fulfill baseInput check.
         // case: fdp-checkbox passed in declarative fdp-checkbox-group without id and name.
         this.name = `fdp-checkbox-${nextUniqueId++}`;
+        this.tabIndexValue = tabIndexValue;
     }
 
     /** ControlValueAccessor */

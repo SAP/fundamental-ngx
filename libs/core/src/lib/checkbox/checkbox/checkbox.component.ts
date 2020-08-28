@@ -1,4 +1,5 @@
 import {
+    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -11,7 +12,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
-import { compareObjects, KeyUtil } from '../../utils/public_api';
+import { compareObjects } from '../../utils/public_api';
 
 let checkboxUniqueId = 0;
 
@@ -40,36 +41,21 @@ export class CheckboxComponent implements ControlValueAccessor {
     @ViewChild('labelElement')
     labelElement: ElementRef;
 
-    /**
-     * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
-     * take precedence so this may be omitted.
-     */
-    @Input('aria-label')
+    /** Sets the `aria-label` attribute to the element. */
+    @Input()
     ariaLabel = '';
 
-    /**
-     * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-     */
-    @Input('aria-labelledby')
-    ariaLabelledby = null;
+    /** Sets the `aria-labelledby` attribute to the element. */
+    @Input()
+    ariaLabelledBy = null;
 
-    /** The 'aria-describedby' attribute is read after the element's label and field type. */
-    @Input('aria-describedby')
-    ariaDescribedby: string;
-
-    /** The 'aria-disabled' for giving accessibility for disabled checkbox element. */
-    @Input('aria-disabled')
-    ariaDisabled: boolean;
+    /** Sets the `aria-describedby` attribute to the element. */
+    @Input()
+    ariaDescribedBy: string;
 
     /** sets checkbox tooltip */
     @Input()
     title: string;
-
-    /**
-     * Includes the checkbox in the page tab sequence.
-     */
-    @Input()
-    tabIndex = 0;
 
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
@@ -134,7 +120,13 @@ export class CheckboxComponent implements ControlValueAccessor {
     public onValueChange = (newValue) => {};
 
     /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef, public elementRef: ElementRef) {}
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        public elementRef: ElementRef,
+        @Attribute('tabIndexValue') public tabIndexValue: number = 0
+    ) {
+        this.tabIndexValue = tabIndexValue;
+    }
 
     /** @hidden Used to define if control is in 'indeterminate' state.*/
     get isIndeterminate(): boolean {
@@ -187,10 +179,6 @@ export class CheckboxComponent implements ControlValueAccessor {
     public checkByKey(event: KeyboardEvent): void {
         if (this._isSpaceBarEvent(event) && this._isIE()) {
             this._nextValueEvent();
-            this.muteKey(event);
-        } else if (this._isEnterKeyEvent(event)) {
-            // Check or Uncheck checkbox on Enter key
-            this.nextValue();
             this.muteKey(event);
         }
     }
@@ -273,12 +261,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Determines event source based on key code */
     private _isSpaceBarEvent(event: KeyboardEvent): boolean {
-        return KeyUtil.isKey(event, ' ');
-    }
-
-    /** @hidden Determines event source based on key code */
-    private _isEnterKeyEvent(event: KeyboardEvent): boolean {
-        return KeyUtil.isKey(event, 'Enter');
+        return event.keyCode === 32;
     }
 
     /** Method to trigger change detection in component */

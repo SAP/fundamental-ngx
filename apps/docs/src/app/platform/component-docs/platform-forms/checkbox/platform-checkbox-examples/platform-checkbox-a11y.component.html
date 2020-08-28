@@ -2,17 +2,17 @@
 <p id="checkboxLable">checkbox using aria-labelledby</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'a11y1'" [noLabelLayout]="true" zone="zLeft" rank="1">
-        <fdp-checkbox [name]="'checkboxA11y1'" [isBinary]="true" aria-label="checkbox using aria-label"
+        <fdp-checkbox [name]="'checkboxA11y1'" [isBinary]="true" ariaLabel="checkbox using aria-label"
             [(ngModel)]="checkboxA11y1"></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field [id]="'a11y2'" zone="zLeft" rank="2">
-        <fdp-checkbox [name]="'checkboxA11y2'" [isBinary]="true" aria-labelledby="checkboxLable"
+        <fdp-checkbox [name]="'checkboxA11y2'" [isBinary]="true" ariaLabelledBy="checkboxLable"
             [(ngModel)]="checkboxA11y2"></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field [id]="'a11y3'" [label]="'Disabled checkbox using aria-disabled'" zone="zLeft" rank="3">
-        <fdp-checkbox [name]="'checkboxA11y3'" [isBinary]="true" [aria-disabled]="true"
-            title="It is a disabled checkbox" [(ngModel)]="checkboxA11y3"></fdp-checkbox>
+        <fdp-checkbox [name]="'checkboxA11y3'" [isBinary]="true" title="It is a disabled checkbox" disabled="true"
+            [(ngModel)]="checkboxA11y3"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>

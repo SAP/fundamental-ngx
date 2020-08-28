@@ -1,9 +1,9 @@
 <h3>Binary Checkbox in Template Driven Form</h3>
 <fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
     <fdp-form-field [id]="'yellow'" [label]="'Yellow'" [noLabelLayout]="true" zone="zLeft" rank="4" [editable]="true">
-        <fdp-checkbox [name]="'yellow-cb'" [isBinary]="true" title="Yellow"
-            (checkedChange)="checkedChangeFunction($event)" (indeterminateChange)="indeterminateChangeFunction($event)"
-            (change)="changeFunction($event)" [(ngModel)]="yellow"></fdp-checkbox>
+        <fdp-checkbox [name]="'yellow-cb'" [isBinary]="true" (checkedChange)="checkedChangeFunction($event)"
+            (indeterminateChange)="indeterminateChangeFunction($event)" (change)="changeFunction($event)"
+            [(ngModel)]="yellow"></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field [id]="'white'" zone="zLeft" rank="4" [label]="'White'">
@@ -47,7 +47,7 @@
 <h3>Disabled Checkbox</h3>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field #disabled [id]="'disabled'" [label]="'Red'" zone="zLeft" rank="1">
-        <fdp-checkbox [name]="'disabled-cb'" [isBinary]="true" [aria-disabled]="true" title="Red"
+        <fdp-checkbox [name]="'disabled-cb'" [isBinary]="true" title="Red"
             (checkedChange)="checkedChangeFunction($event)" (indeterminateChange)="indeterminateChangeFunction($event)"
             (change)="changeFunction($event)" [contentDensity]="'compact'" [disabled]="true"></fdp-checkbox>
     </fdp-form-field>

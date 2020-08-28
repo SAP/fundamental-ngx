@@ -1,9 +1,4 @@
-<fd-form-group
-    [isInline]="isInline"
-    role="group"
-    [attr.aria-label]="ariaLabel"
-    [attr.aria-labelledby]="ariaLabelledById"
->
+<fd-form-group [isInline]="isInline" role="group" [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy">
     <ng-container *ngIf="!list">
         <ng-container *ngFor="let checkbox of contentCheckboxes; let i = index">
             <ng-container
@@ -16,11 +11,9 @@
                         contentDensity: contentDensity,
                         labeltext: checkbox.label,
                         disabled: disabled || checkbox.disabled,
-                        ariabLabel: checkbox.ariaLabel,
-                        ariabLabelledby: checkbox.ariaLabelledby,
-                        ariabDescribedby: checkbox.ariaDescribedby,
-                        ariaDisabled: checkbox.ariaDisabled,
-                        tabIndex: checkbox.tabIndex,
+                        ariaLabel: checkbox.ariaLabel,
+                        ariaLabelledBy: checkbox.ariaLabelledBy,
+                        ariaDescribedBy: checkbox.ariaDescribedBy,
                         title: checkbox.title
                     }
                 "
@@ -60,11 +53,9 @@
     let-contentDensity="contentDensity"
     let-labeltext="labeltext"
     let-checkboxDisabled="disabled"
-    let-ariabLabel="ariabLabel"
-    let-ariabLabelledby="ariabLabelledby"
-    let-ariabDescribedby="ariabDescribedby"
-    let-ariaDisabled="ariaDisabled"
-    let-tabIndex="tabIndex"
+    let-ariaLabel="ariaLabel"
+    let-ariaLabelledBy="ariaLabelledBy"
+    let-ariaDescribedBy="ariaDescribedBy"
     let-title="title"
 >
     <fdp-checkbox
@@ -72,11 +63,9 @@
         [name]="name"
         [value]="checkboxValue"
         [label]="labeltext"
-        [aria-label]="ariabLabel"
-        [aria-labelledby]="ariabLabelledby"
-        [aria-describedby]="ariabDescribedby"
-        [aria-disabled]="ariaDisabled"
-        [tabIndex]="tabIndex"
+        [ariaLabel]="ariaLabel"
+        [ariaLabelledBy]="ariaLabelledBy"
+        [ariaDescribedBy]="ariaDescribedBy"
         [title]="title"
         [contentDensity]="contentDensity"
         [disabled]="checkboxDisabled"
