@@ -141,7 +141,7 @@ export class MenuService {
         if (menuItem) {
             if (!menuItem.submenu) {
                 if (menuItem.menuItemTitle) {
-                    this._emitSelected(menuItem.menuItemTitle.title)
+                    this._emitSelected(menuItem)
                 }
             }
         }
@@ -273,8 +273,8 @@ export class MenuService {
     }
 
     /** @hidden Emits an array of the selected menu item */
-    private _emitSelected(title: string): void {
-        this.menu.selected.emit(title);
+    private _emitSelected(item: MenuItemComponent): void {
+        this.menu.selected.emit(item);
     }
 
     /** @hidden Depending on direction returns closest enabled sibling of given node */
