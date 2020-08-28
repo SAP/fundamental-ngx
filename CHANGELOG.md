@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.11...v0.22.0-rc.12) (2020-08-28)
+
+
+### Bug Fixes
+
+* datetime picker not rendering correctly ([#3110](https://github.com/SAP/fundamental-ngx/issues/3110)) ([b09b369](https://github.com/SAP/fundamental-ngx/commit/b09b36901b31acaa80cd796c6379bf5718879524))
+
 ## [0.22.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.10...v0.22.0-rc.11) (2020-08-28)
 
 
