@@ -126,7 +126,7 @@
     "@nrwl/schematics": "8.12.11",
     "@nrwl/workspace": "10.0.6",
     "@schematics/angular": "10.0.4",
-    "@storybook/addon-a11y": "6.0.17",
+    "@storybook/addon-a11y": "6.0.20",
     "@storybook/addon-actions": "6.0.17",
     "@storybook/addon-knobs": "6.0.17",
     "@storybook/addon-links": "6.0.17",
