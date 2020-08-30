@@ -1,6 +1,8 @@
 import { Directive, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 /**
+ * @deprecated
+ * Localization Editor component is depricated since version 0.22.0
  * Directive which is used along with input elements, inside the localization editor item or main.
  *  ```html
  *  <fd-localization-editor-item>
@@ -64,7 +66,7 @@ export class LocalizationEditorTextareaDirective {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-localization-editor-label]'
 })
-export class LocalizationEditorLabel {}
+export class LocalizationEditorLabel { }
 
 /**
  * Directive that is used to wrap whole localization field inside li element.
@@ -102,7 +104,7 @@ export class LocalizationEditorLoadLabel implements OnInit {
     private contentRef: EmbeddedViewRef<any>;
 
     /** @hidden */
-    constructor(private viewRef: ViewContainerRef) {}
+    constructor(private viewRef: ViewContainerRef) { }
 
     /** @hidden */
     ngOnInit(): void {

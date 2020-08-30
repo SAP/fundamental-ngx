@@ -10,8 +10,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { LocalizationEditorLabel } from '../localization-editor.directives';
-
 /**
+ * @deprecated
+ * Localization Editor component is depricated since version 0.22.0
  *  Component that represents field with add-on.
  *  ```html
  *  <fd-localization-editor-item [label]="'EN'">
