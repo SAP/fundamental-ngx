@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     Component,
     EventEmitter,
     Input,
@@ -14,7 +15,7 @@ import {
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
 import { FocusableOption } from '@angular/cdk/a11y';
-import { RadioButtonComponent as CoreRadioButtonComponent, stateType } from '@fundamental-ngx/core';
+import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-ngx/core';
 
 import { BaseInput } from '../../base.input';
 import { Status, FormFieldControl } from '../../form-control';

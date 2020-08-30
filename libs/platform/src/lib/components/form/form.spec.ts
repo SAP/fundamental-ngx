@@ -185,7 +185,6 @@ describe('Simple Form', () => {
                     </fdp-form-field>
                 </fdp-form-group>
             </fdp-form-group>
-            </fdp-form-group>
             <button type="submit" #submitButton>Submit</button>
         </form>
     `
@@ -221,7 +220,7 @@ class NestedFormGroupsTestComponent {
     public result: any = null;
 
     onSubmit(): void {
-        this.result = this.userFormGroup.getRawValue();
+        this.result = this.userFormGroup.value;
     }
 }
 

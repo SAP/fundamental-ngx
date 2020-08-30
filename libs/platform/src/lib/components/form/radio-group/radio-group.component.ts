@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
+import { UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -29,7 +29,6 @@ import { RadioButtonComponent } from './radio/radio.component';
 import { CollectionBaseInput } from '../collection-base.input';
 import { FormFieldControl } from '../form-control';
 import { FormField } from '../form-field';
-
 
 /**
  * Radio group implementation based on the
@@ -195,28 +194,6 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * Acess display value for objects, acts as Radio label.
-     */
-    public getDisplayValue(item: any): string {
-        return this.displayValue(item);
-    }
-
-    /**
-     * Acess lookup value for objects, acts as Radio value.
-     */
-    public getLookupValue(item: any): string {
-        return this.lookupValue(item);
-    }
-
-    /**
-     * Called on button click for view radio button, created from list of values
-     * @param event
-     */
-    public selected(event: RadioButtonComponent): void {
-        this._selectedValueChanged(event);
-    }
-
-    /**
      * Initializing all content radio buttons with given properties and
      * subscribing to radio button clicked event
      */
@@ -231,7 +208,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
                 this._setProperties(button);
                 this._selectUnselect(button);
 
-                // finding first enabled button to set tabindex=0
+                // finding first enabled button to set tabIndex=0
                 if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
                     firstEnabledButtonIndex = i;
                 }
@@ -295,6 +272,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     private _selectedValueChanged(button: RadioButtonComponent): void {
         this.onTouched();
         if (this._selected !== button) {
+            this.resetTabIndex(button);
             if (this._selected) {
                 this._selected.unselect();
             }
@@ -307,6 +285,18 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
         this.value = button.value;
         this.change.emit(button);
         this.onChange(this.value);
+    }
+
+    /** resets tabIndex for first radio in radio group. for accessibility tabIndex was set */
+    private resetTabIndex(selectedRadio: RadioButtonComponent): void {
+        if (this.viewRadioButtons || this.contentRadioButtons) {
+            const radios = this.viewRadioButtons.length ? this.viewRadioButtons : this.contentRadioButtons;
+            radios.forEach((radio) => {
+                if (radio !== selectedRadio && radio.tabIndex === 0) {
+                    radio.tabIndex = -1;
+                }
+            });
+        }
     }
 
     /**
@@ -323,7 +313,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * Make sure we have expected childs.
+     * Make sure we have expected child.
      */
     private _validateRadioButtons(): boolean {
         return (
