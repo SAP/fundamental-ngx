@@ -79,7 +79,8 @@ export const API_FILES = {
         'ListSecondaryDirective',
         'ListGroupHeaderDirective',
         'ListIconDirective',
-        'ListFooterDirective'
+        'ListFooterDirective',
+        'ListMessageDirective'
     ],
     localizationEditor: [
         'LocalizationEditorComponent',

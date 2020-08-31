@@ -3,8 +3,7 @@ import { MessageStates } from '../form/form-message/form-message.component';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[fd-list-message]'
+    selector: '[fd-list-message], [fdListMessage]'
 })
 export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder {
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
@@ -15,6 +14,7 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
     @Input()
     class: string;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -33,7 +33,11 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return ['fd-list__message', this.type ? 'fd-list__message--' + this.type : '', this.class];
+        return [
+            'fd-list__message',
+            this.type ? 'fd-list__message--' + this.type : '',
+            this.class
+        ];
     }
 
     /** @hidden */

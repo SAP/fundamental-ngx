@@ -63,9 +63,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    /** @hidden
-     * Element that indicates position of dragged element. It's ghost copy of dragged element.
-     */
+    /** @hidden */
     private _placeholderElement: HTMLElement;
 
     /** @hidden */
@@ -193,7 +191,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     changeCDKDragState(): void {
         if (this._dragRef) {
-            this._dragRef.disabled = !(this._draggable || this.listDraggable);
+            this._dragRef.disabled = !(this._draggable && this.listDraggable);
         }
     }
 

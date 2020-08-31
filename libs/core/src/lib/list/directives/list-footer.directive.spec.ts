@@ -1,18 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ListModule } from './list.module';
+import { ListModule } from '../list.module';
 
 @Component({
-    template: ` <li #directiveElement fd-list-item [selected]="selected">List Item Test Text</li> `
+    template: `
+        <li
+            #componentElement
+            fd-list-footer
+        >
+            ListFooterDirective
+        </li>
+    `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: true })
+    @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
-
-    selected = false;
 }
 
-describe('ListItemDirective', () => {
+describe('ListFooterComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -34,12 +39,6 @@ describe('ListItemDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list__item');
-    });
-
-    it('should assign is selected', () => {
-        component.selected = true;
-        fixture.detectChanges();
-        expect(component.ref.nativeElement.classList).toContain('is-selected');
+        expect(component.ref.nativeElement.className).toBe('fd-list__footer');
     });
 });

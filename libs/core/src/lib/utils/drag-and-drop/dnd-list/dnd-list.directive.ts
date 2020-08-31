@@ -90,6 +90,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this._changeDraggableState(this._draggable);
         this.dndItems.changes
             .pipe(
                 takeUntil(this._onDestroy$),

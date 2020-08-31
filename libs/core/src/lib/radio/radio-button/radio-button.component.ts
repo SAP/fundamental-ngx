@@ -119,7 +119,7 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     onTouched: any = () => {};
 
     /** @hidden */
-    registerOnChange(fn: (selected: any) => { void }): void {
+    registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 

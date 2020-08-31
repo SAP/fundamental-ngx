@@ -1,46 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
+const ITEMS_AMOUNT_ON_LOAD = 5;
 
 @Component({
     selector: 'fd-list-infinite-scroll-example',
     templateUrl: './list-infinite-scroll-example.component.html'
 })
-export class ListInfiniteScrollExampleComponent implements OnInit {
+export class ListInfiniteScrollExampleComponent {
+
     // List that is displayed to the user
-    displayedList = [
-        { label: 'Initially shown element' },
-        { label: 'Initially shown element' },
-        { label: 'Initially shown element' },
-        { label: 'Initially shown element' },
-        { label: 'Initially shown element' }
-    ];
+    items = new Array(10).fill('Initially shown items');
 
-    // Data to add. Can also come from an observable, service...
-    // Here it comes from the generateArray() method
-    data = [];
+    loading = false;
 
-    // Used to emulate paging in this static example
-    private dataSelector = 0;
-    private increment = 5;
+    loadMore(): void {
+        this.loading = true;
+        of(this._getNewItems())
+            .pipe(delay(2000))
+            .subscribe(result => {
+                this.items = this.items.concat(result);
+                this.loading = false;
+            });
+    }
 
-    // The scroll percent at which to load more elements
-    scrollPercent = 80;
-
-    loadMoreElements(): void {
-        if (this.dataSelector < this.data.length) {
-            this.displayedList = this.displayedList.concat(
-                this.data.slice(this.dataSelector, this.dataSelector + this.increment)
-            );
-            this.dataSelector += this.increment;
+    scrollHandler(): void {
+        if (!this.loading) {
+            this.loadMore();
         }
     }
 
-    ngOnInit(): void {
-        this.generateArray(1000);
-    }
+    private _getNewItems(): string[] {
+        let index = this.items.length;
 
-    generateArray(size: number): void {
-        for (let i = 0; i < size; ++i) {
-            this.data.push({ label: 'Element ' + i });
-        }
+        return Array(ITEMS_AMOUNT_ON_LOAD)
+            .fill(undefined)
+            .map(_ => `Element ${index++}`)
     }
 }

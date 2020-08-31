@@ -72,19 +72,20 @@
 
 <ng-template #list>
     <ul
-        fd-list
-        class="fd-list--multi-input fd-multi-input-menu-overflow"
         *ngIf="displayedValues && displayedValues.length"
+        fd-list
+        class="fd-multi-input-menu-overflow"
+        (focusEscapeList)="handleListFocusEscape($event)"
+        [multiInputMode]="true"
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
     >
         <li
-            (click)="handleSelect(selected.indexOf(value) === -1, value, $event)"
+            *ngFor="let value of displayedValues; let ind = index"
             fd-list-item
             tabindex="0"
             class="fd-multi-input-item"
-            (keydown)="handleKeyDown($event, ind)"
-            *ngFor="let value of displayedValues; let ind = index"
             [selected]="selected.indexOf(value) !== -1"
+            (click)="handleSelect(selected.indexOf(value) === -1, value, $event)"
         >
             <fd-checkbox
                 class="fd-multi-input-checkbox"
@@ -96,8 +97,10 @@
                 ></span>
             </fd-checkbox>
         </li>
-        <li (click)="showAllClicked($event)" fd-list-item class="fd-multi-input-show-all"
-            *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)">
+        <li *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)"
+            fd-list-item
+            class="fd-multi-input-show-all"
+            (click)="showAllClicked($event)">
             <a fd-link href>Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>

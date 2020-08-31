@@ -18,7 +18,7 @@ import { ListModule } from './list.module';
     `
 })
 class TestComponent {
-    @ViewChild('componentElement', { read: ElementRef, static: false })
+    @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
     dropdown = false;

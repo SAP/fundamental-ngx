@@ -21,7 +21,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ListItemDirective } from '../list/list-item.directive';
+import { ListItemComponent } from '../list/list-item/list-item.component';
 import { ListMessageDirective } from '../list/list-message.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
@@ -38,6 +38,8 @@ import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
+import { ListComponent } from '../list/list.component';
+import { FocusEscapeDirection } from '../..';
 
 /**
  * Allows users to filter through results and select a value.
@@ -70,8 +72,8 @@ import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.compo
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComboboxComponent
-    implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ComboboxComponent implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
+
     /** Values to be filtered in the search input. */
     @Input()
     dropdownValues: any[] = [];
@@ -207,8 +209,8 @@ export class ComboboxComponent
     inputTextChange: EventEmitter<string> = new EventEmitter<string>();
 
     /** @hidden */
-    @ViewChildren(ListItemDirective)
-    listItems: QueryList<ListItemDirective>;
+    @ViewChild(ListComponent)
+    listComponent: ListComponent;
 
     /** @hidden */
     @ViewChild('searchInputElement')
@@ -280,7 +282,6 @@ export class ComboboxComponent
     /** @hidden */
     constructor(
         private _elementRef: ElementRef,
-        private _menuKeyboardService: MenuKeyboardService,
         private _cdRef: ChangeDetectorRef,
         private _dynamicComponentService: DynamicComponentService
     ) {}
@@ -306,7 +307,6 @@ export class ComboboxComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._setupKeyboardService();
         this._addShellbarClass();
         if (this.mobile) {
             this._setUpMobileMode();
@@ -324,8 +324,8 @@ export class ComboboxComponent
                 this._resetDisplayedValues();
                 this.isOpenChangeHandle(true);
             }
-            if (this.open && this.listItems && this.listItems.first) {
-                this.listItems.first.focus();
+            if (this.open && this.listComponent) {
+                this.listComponent.setItemActive(0);
             } else if (!this.open) {
                 this._chooseOtherItem(1);
             }
@@ -339,14 +339,6 @@ export class ComboboxComponent
         } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKey(event, this.nonOpeningKeys)) {
             this.isOpenChangeHandle(true);
         }
-    }
-
-    /** @hidden */
-    onListKeydownHandler(event: KeyboardEvent): void {
-        const index: number = this.listItems
-            .toArray()
-            .findIndex((item) => item.itemEl.nativeElement === document.activeElement);
-        this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
     }
 
     /** @hidden */
@@ -400,6 +392,13 @@ export class ComboboxComponent
     /** @hidden */
     registerOnTouched(fn): void {
         this.onTouched = fn;
+    }
+
+    /** Method passed to list component */
+    handleListFocusEscape(direction: FocusEscapeDirection): void {
+        if (direction === 'up') {
+            this.searchInputElement.nativeElement.focus();
+        }
     }
 
     /** @hidden */
@@ -488,15 +487,6 @@ export class ComboboxComponent
     /** Method that reset filtering for displayed values. It overrides displayed values by all possible dropdown values */
     private _resetDisplayedValues(): void {
         this.displayedValues = this.dropdownValues;
-    }
-
-    /** @hidden */
-    private _setupKeyboardService(): void {
-        this._menuKeyboardService.itemClicked
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((index) => this.onMenuClickHandler(index));
-        this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this._menuKeyboardService.focusEscapeAfterList = () => {};
     }
 
     /** @hidden */
