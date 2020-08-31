@@ -1,0 +1,9 @@
+<ng-container *ngIf="checkbox || radio">
+    <div fd-form-item class="fd-list__form-item">
+        <ng-content select="fd-checkbox"></ng-content>
+        <ng-content select="fd-radio-button"></ng-content>
+    </div>
+</ng-container>
+
+<ng-content></ng-content>
+

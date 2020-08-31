@@ -2,21 +2,26 @@ import {
     Component,
     ContentChildren,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     EventEmitter,
     Input,
-    Optional,
     Output,
     QueryList,
-    Self,
     ViewEncapsulation,
-    ViewChildren
+    ViewChildren,
+    forwardRef,
+    ChangeDetectorRef,
+    Optional,
+    Self,
+    SkipSelf,
+    Host
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { NgForm, NgControl } from '@angular/forms';
+
 import { CollectionBaseInput } from '../collection-base.input';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { PlatformCheckboxChange } from '../checkbox/checkbox.component';
 import { FormFieldControl } from '../form-control';
+import { FormField } from '../form-field';
 
 /**
  * Checkbox group implementation based on the
@@ -30,7 +35,7 @@ import { FormFieldControl } from '../form-control';
     templateUrl: './checkbox-group.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: CheckboxGroupComponent, multi: true }]
+    providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }]
 })
 export class CheckboxGroupComponent extends CollectionBaseInput {
     /**
@@ -44,7 +49,7 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     }
 
     /**
-     * To Dispaly multiple checkboxes in a line
+     * To Display multiple checkboxes in a line
      */
     @Input()
     isInline = false;
@@ -61,11 +66,13 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     readonly valueChange: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
 
     constructor(
-        private _changeDetector: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        cd: ChangeDetectorRef,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(_changeDetector, ngControl, ngForm);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     writeValue(value: any): void {
@@ -85,16 +92,21 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     }
 
     /**
-     * acess display value for objects, acts as checkbox label.
+     * access display value for objects, acts as checkbox label.
      */
     public getDisplayValue(item: any): string {
         return this.displayValue(item);
     }
 
     /**
-     * acess lookup value for objects, acts as checkbox value.
+     * access lookup value for objects, acts as checkbox value.
      */
     public getLookupValue(item: any): string {
         return this.lookupValue(item);
+    }
+
+    /** @hidden */
+    public getListItemDisabledValue(item: CheckboxGroupComponent['list'][number]): boolean {
+        return this.disabled || typeof item === 'string' ? this.disabled : item.disabled;
     }
 }

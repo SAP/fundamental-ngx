@@ -14,7 +14,10 @@ import { FdDropEvent } from '../../utils/drag-and-drop/dnd-list/dnd-list.directi
 @Component({
     selector: 'fd-product-switch-body',
     templateUrl: './product-switch-body.component.html',
-    styleUrls: ['./product-switch-body.component.scss'],
+    styleUrls: [
+        './product-switch-body.component.scss',
+        '../../utils/drag-and-drop/drag-and-drop.scss'
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

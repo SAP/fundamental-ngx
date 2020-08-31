@@ -1,5 +1,6 @@
 import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 
 /**
  * Tool directive used to achieve the infinite scroll mechanism.
@@ -12,30 +13,50 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
     @Input()
     scrollPercent = 75;
 
+    /** Scroll PX at which the onScrollAction event is fired. */
+    @Input()
+    scrollOffset: number = null;
+
     /** Event emitted when the scrollPercent threshold is met. */
     @Output()
-    onScrollAction = new EventEmitter<any>();
-
-    private scrollEvent: Observable<any>;
-    private subscription: Subscription;
+    onScrollAction = new EventEmitter<void>();
 
     /** @hidden */
-    constructor(private element: ElementRef) {}
+    private _subscription = new Subscription();
+
+    /** @hidden */
+    constructor(private _element: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this.scrollEvent = fromEvent(this.element.nativeElement, 'scroll');
-
-        this.subscription = this.scrollEvent.subscribe((e: any) => {
-            if ((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > this.scrollPercent / 100) {
-                this.onScrollAction.emit(null);
-            }
-        });
+        this._listenOnScroll();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
+        this._subscription.unsubscribe();
+    }
+
+    /** @hidden **/
+    private _shouldTriggerAction(): boolean {
+        const element = this._element.nativeElement;
+        const offset: number = element.scrollTop + element.offsetHeight;
+        if (this.scrollOffset) {
+            return offset > (element.scrollHeight - this.scrollOffset);
+        } else {
+            return (offset / element.scrollHeight) > this.scrollPercent / 100
         }
+    }
+
+    /** @hidden */
+    private _listenOnScroll(): void {
+        this._subscription.add(
+            fromEvent(this._element.nativeElement, 'scroll')
+                .pipe(
+                    debounceTime(50),
+                    filter(() => this._shouldTriggerAction())
+                )
+                .subscribe(() => this.onScrollAction.emit())
+        );
     }
 }

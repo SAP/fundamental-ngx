@@ -12,11 +12,9 @@ import {
     OnDestroy,
     OnInit,
     Output,
-    QueryList,
     SimpleChanges,
     TemplateRef,
     ViewChild,
-    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -25,13 +23,13 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
-import { ListItemDirective } from '../list/list-item.directive';
-import { applyCssClass, CssClassBuilder, DynamicComponentService, KeyUtil } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
+import { ListComponent } from '../list/list.component';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -202,8 +200,8 @@ export class MultiInputComponent implements
     listTemplate: TemplateRef<any>;
 
     /** @hidden */
-    @ViewChildren(ListItemDirective)
-    listItems: QueryList<ListItemDirective>;
+    @ViewChild(ListComponent)
+    listComponent: ListComponent;
 
     /** @hidden */
     @ViewChild('searchInputElement')
@@ -234,9 +232,8 @@ export class MultiInputComponent implements
     constructor(
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
-        private _menuKeyboardService: MenuKeyboardService,
         private _dynamicComponentService: DynamicComponentService
-    ) {}
+    ) { }
 
     /** @hidden */
     ngOnInit(): void {
@@ -261,9 +258,6 @@ export class MultiInputComponent implements
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this._menuKeyboardService.focusEscapeAfterList = () => {
-        };
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -320,6 +314,13 @@ export class MultiInputComponent implements
         this._changeDetRef.markForCheck();
     }
 
+    /** Method passed to list component */
+    handleListFocusEscape(direction: FocusEscapeDirection): void {
+        if (direction === 'up') {
+            this.searchInputElement.nativeElement.focus();
+        }
+    }
+
     /** @hidden */
     openChangeHandle(open: boolean): void {
         if (this.disabled) {
@@ -353,6 +354,7 @@ export class MultiInputComponent implements
         if (checked) {
             this.selected.push(value);
         } else {
+            // remove the token whose close button was explicitly clicked
             this.selected.splice(this.selected.indexOf(value), 1);
         }
 
@@ -370,7 +372,7 @@ export class MultiInputComponent implements
         let allSelected = true;
         if (KeyUtil.isKey(event, ['Delete', 'Backspace']) && !this.searchTerm) {
             this.tokenizer.tokenList.forEach(token => {
-                if (token.selected) {
+                if (token.selected || token.tokenWrapperElement.nativeElement === document.activeElement) {
                     this.handleSelect(false, token.elementRef.nativeElement.innerText);
                 } else {
                     allSelected = false;
@@ -381,20 +383,13 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleKeyDown(event: KeyboardEvent, index: number): void {
-        if (!this.mobile) {
-            this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
-        }
-    }
-
-    /** @hidden */
     handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKey(event, 'ArrowDown') && !this.mobile) {
             if (event.altKey) {
                 this.openChangeHandle(true);
             }
-            if (this.listItems.first) {
-                this.listItems.first.focus();
+            if (this.listComponent) {
+                this.listComponent.setItemActive(0);
                 event.preventDefault();
             }
         }

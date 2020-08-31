@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { SwitchConfig } from '@fundamental-ngx/platform';
 
 export const switchConfigFactory = SwitchConfig.createProviderFactory({
@@ -17,7 +16,7 @@ export const customSwitchConfigProvider = {
     providers: [customSwitchConfigProvider]
 })
 export class SwitchConfigExampleComponent {
-    customForm = new FormGroup({
-        switch: new FormControl(false)
-    });
+    model: { switch: boolean } = {
+        switch: true
+    };
 }

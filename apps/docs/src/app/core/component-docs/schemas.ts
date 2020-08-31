@@ -28,7 +28,6 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     pagination: PaginationDocsComponent.schema,
     messageStrip: MessageStripDocsComponent.schema,
     dialog: DialogDocsComponent.schema,
-    list: ListDocsComponent.schema,
     tabs: TabsDocsComponent.schema,
     table: TableDocsComponent.schema,
     time: TimeDocsComponent.schema,

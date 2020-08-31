@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -15,4 +15,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PopoverBodyComponent {}
+export class PopoverBodyComponent {
+
+    constructor(public elRef: ElementRef) {}
+
+}

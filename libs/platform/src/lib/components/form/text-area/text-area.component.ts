@@ -1,22 +1,27 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     Input,
-    Optional,
-    Self,
     ViewChild,
     ViewEncapsulation,
     HostListener,
     AfterViewChecked,
     OnInit,
-    AfterViewInit
+    AfterViewInit,
+    ChangeDetectorRef,
+    Optional,
+    Self,
+    SkipSelf,
+    Host
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { NgForm, NgControl } from '@angular/forms';
+import { DELETE, BACKSPACE } from '@angular/cdk/keycodes';
+
 import { BaseInput } from '../base.input';
 import { FormFieldControl, Status, ContentDensity } from '../form-control';
-import { DELETE, BACKSPACE } from '@angular/cdk/keycodes';
+import { FormField } from '../form-field';
+
 import { TextAreaConfig } from './text-area.config';
 
 const VALID_WRAP_TYPES = ['hard', 'soft', 'off'];
@@ -170,12 +175,14 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     private readonly excessText = 'excess';
 
     constructor(
-        protected _textAreaConfig: TextAreaConfig,
-        protected _cd: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        cd: ChangeDetectorRef,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        protected _textAreaConfig: TextAreaConfig
     ) {
-        super(_cd, ngControl, ngForm);
+        super(cd, ngControl, ngForm, formField, formControl);
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }

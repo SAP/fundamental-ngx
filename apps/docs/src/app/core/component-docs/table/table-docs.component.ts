@@ -8,8 +8,8 @@ import * as tableWithoutBordersHtmlSrc from '!raw-loader!./examples/table-withou
 import * as tableWithoutBordersTsSrc from '!raw-loader!./examples/table-without-borders-example.component.ts';
 import * as tableColumnSortHtmlSrc from '!raw-loader!./examples/table-column-sorting-example.component.html';
 import * as tableColumnSortTsSrc from '!raw-loader!./examples/table-column-sorting-example.component.ts';
-import * as tableColumnSortPipeTs from '!raw-loader!./examples/table-example-sort.pipe.ts';
-import * as tableColumnFilterPipeTs from '!raw-loader!./examples/table-example-filter.pipe.ts';
+import * as tableColumnSortPipeTs from '!raw-loader!../../../documentation/core-helpers/pipes/sort.pipe.ts';
+import * as tableColumnFilterPipeTs from '!raw-loader!../../../documentation/core-helpers/pipes/filter.pipe.ts';
 import * as tableActivableHtmlSrc from '!raw-loader!./examples/table-activable-example.component.html';
 import * as tableActivableTsSrc from '!raw-loader!./examples/table-activable-example.component.ts';
 import * as tableToolbarHtmlSrc from '!raw-loader!./examples/table-toolbar-example.component.html';
@@ -30,7 +30,7 @@ import * as tablePopInHtml from '!raw-loader!./examples/table-popin-example/tabl
 import * as tableCustomHtml from '!raw-loader!./examples/table-custom-columns-example/table-custom-columns-example.component.html';
 import * as tableCustomTs from '!raw-loader!./examples/table-custom-columns-example/table-custom-columns-example.component.ts';
 import * as tableDialogCustom from '!raw-loader!./examples/table-custom-columns-example/table-custom-dialog.component.ts';
-import * as tableFilterPipe from '!raw-loader!./examples/table-custom-columns-example/table-filter.pipe.ts';
+import * as tableFilterPipe from '!raw-loader!../../../documentation/core-helpers/pipes/filter.pipe.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -139,8 +139,8 @@ export class TableDocsComponent {
         {
             language: 'typescript',
             code: tableFilterPipe,
-            fileName: 'table-filter',
-            component: 'TableFilterPipe',
+            fileName: 'filter-pipe',
+            component: 'FilterPipe',
             pipe: true,
             name: 'Filter Pipe'
         }
@@ -160,7 +160,7 @@ export class TableDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'SortTableByPipe',
+            component: 'SortPipe',
             code: tableColumnSortPipeTs,
             pipe: true,
             fileName: 'table-example-sorting',
@@ -168,7 +168,7 @@ export class TableDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'FilterTableByPipe',
+            component: 'FilterPipe',
             code: tableColumnFilterPipeTs,
             pipe: true,
             fileName: 'table-example-filter',

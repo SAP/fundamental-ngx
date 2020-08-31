@@ -1,23 +1,26 @@
 import {
-    ChangeDetectorRef,
     ChangeDetectionStrategy,
     Component,
     Input,
     Renderer2,
-    Optional,
-    Self,
     LOCALE_ID,
     Inject,
-    ViewEncapsulation
+    ViewEncapsulation,
+    ChangeDetectorRef,
+    Optional,
+    Self,
+    SkipSelf,
+    Host
 } from '@angular/core';
 import { formatNumber } from '@angular/common';
-import { NgControl, NgForm } from '@angular/forms';
+import { NgForm, NgControl } from '@angular/forms';
 
 import { RtlService } from '@fundamental-ngx/core';
 
 import { FormFieldControl } from '../../form-control';
 import { StepInputComponent, StepInputChangeEvent } from '../base.step-input';
 import { StepInputConfig } from '../step-input.config';
+import { FormField } from '../../form-field';
 
 /** Change event object emitted by Platform Number Step Input. */
 export class NumberStepInputChangeEvent extends StepInputChangeEvent<NumberStepInputComponent, number> {}
@@ -52,15 +55,17 @@ export class NumberStepInputComponent extends StepInputComponent {
 
     /** @hidden */
     constructor(
-        protected _cd: ChangeDetectorRef,
+        cd: ChangeDetectorRef,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         config: StepInputConfig,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm,
         renderer: Renderer2,
         rtlService: RtlService,
         @Inject(LOCALE_ID) readonly localeId: string
     ) {
-        super(_cd, ngControl, ngForm, config, renderer, rtlService);
+        super(cd, ngControl, ngForm, formField, formControl, config, renderer, rtlService);
     }
 
     /**@hidden
