@@ -122,10 +122,10 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         this.clicked.emit(event);
-        if (this.checkbox) {
+        if (this.checkbox && !this.link) {
             this.checkbox.nextValue();
         }
-        if (this.radio) {
+        if (this.radio && !this.link) {
             this.radio.labelClicked();
         }
     }
