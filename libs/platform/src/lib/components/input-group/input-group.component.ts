@@ -9,15 +9,17 @@ import {
     ChangeDetectorRef,
     Renderer2,
     AfterViewInit,
-    OnInit
+    OnInit,
+    AfterContentInit
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
+import { BaseComponent } from '../base';
 import { InputComponent } from '../form/input/input.component';
 import { ContentDensity, Status } from '../form/form-control';
-import { BaseComponent } from '../base';
 
 import { InputGroupConfig } from './input-group.config';
+import { InputGroupAddonComponent } from './addon/addon.component';
 
 const CSS_CLASS_NAME = {
     inputGroup: 'fdp-input-group',
@@ -27,6 +29,13 @@ const CSS_CLASS_NAME = {
 /**
  * Fundamental input group component
  *
+ * ```html
+ * <fdp-input-group>
+ *   <fdp-input-group-addon>$</fdp-input-group-addon>
+ *   <fdp-input type="number" name="price"></fdp-input>
+ * </fdp-input-group>
+ * ```
+ *
  */
 @Component({
     selector: 'fdp-input-group',
@@ -35,16 +44,16 @@ const CSS_CLASS_NAME = {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputGroupComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class InputGroupComponent extends BaseComponent implements OnInit, AfterContentInit, AfterViewInit {
     /**
      * content Density of element: 'cozy' | 'compact'
      */
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        if (this._inputControls) {
-            this.setupChildInputControls(this._inputControls);
-        }
+
+        this._setInputControlsOptions();
+        this._setAddonControlsOptions();
     }
     get contentDensity(): ContentDensity {
         return this._contentDensity;
@@ -60,10 +69,14 @@ export class InputGroupComponent extends BaseComponent implements OnInit, AfterV
 
     /** @hidden */
     @ContentChildren(InputComponent)
-    _inputControls: QueryList<InputComponent>;
+    private _inputControls: QueryList<InputComponent>;
 
     /** @hidden */
-    _contentDensity: ContentDensity = this._inputGroupConfig.contentDensity;
+    @ContentChildren(InputGroupAddonComponent)
+    private _addonControls: QueryList<InputGroupAddonComponent>;
+
+    /** @hidden */
+    private _contentDensity: ContentDensity = this._inputGroupConfig.contentDensity;
 
     /** @hidden */
     _controlStateClass: string;
@@ -88,26 +101,59 @@ export class InputGroupComponent extends BaseComponent implements OnInit, AfterV
     }
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        /**
-         * Can't subscribe to input controls in ngAfterContentInit
-         * because we need to have access to inputElemRef
-         */
+    ngAfterContentInit(): void {
         this._inputControls.changes
             .pipe(startWith(this._inputControls))
-            .subscribe((inputControls: QueryList<InputComponent>) => {
-                this.setupChildInputControls(inputControls);
+            .subscribe(() => this._setInputControlsOptions());
+
+        this._addonControls.changes
+            .pipe(startWith(this._addonControls))
+            .subscribe(() => this._setAddonControlsOptions());
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        /**
+         * Subscribe to input changes separately in ngAfterContentInit
+         * to have access to it's view inputElemRef
+         */
+        this._inputControls.changes.pipe(startWith(this._inputControls)).subscribe(() => this._setInputClassName());
+    }
+
+    /** @hidden */
+    private _setInputControlsOptions(inputControls = this._inputControls): void {
+        if (!inputControls) {
+            return;
+        }
+
+        inputControls.forEach((control) => {
+            control.contentDensity = this._contentDensity;
+            control.markForCheck();
+        });
+    }
+
+    /** @hidden */
+    private _setInputClassName(inputControls = this._inputControls): void {
+        if (!inputControls) {
+            return;
+        }
+
+        inputControls
+            .map(({ inputElemRef }) => inputElemRef.nativeElement)
+            .filter((inputEl) => !!inputEl)
+            .forEach((inputEl: HTMLElement) => {
+                this._renderer.addClass(inputEl, CSS_CLASS_NAME.inputGroupInnerInput);
             });
     }
 
     /** @hidden */
-    private setupChildInputControls(inputControls = this._inputControls): void {
-        inputControls.forEach((control) => {
-            control.contentDensity = this._contentDensity;
-            const inputEl = control.inputElemRef.nativeElement as HTMLInputElement | null;
-            if (inputEl) {
-                this._renderer.addClass(inputEl, CSS_CLASS_NAME.inputGroupInnerInput);
-            }
+    private _setAddonControlsOptions(addonControls = this._addonControls): void {
+        if (!addonControls) {
+            return;
+        }
+
+        addonControls.forEach((addon) => {
+            addon.contentDensity = this._contentDensity;
         });
     }
 }

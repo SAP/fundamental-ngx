@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { By } from '@angular/platform-browser';
 
 import { PlatformInputGroupModule } from '../input-group.module';
 import { InputGroupComponent } from '../input-group.component';
