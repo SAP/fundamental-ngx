@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    OnDestroy,
     Output,
     QueryList
 } from '@angular/core';
@@ -40,7 +41,7 @@ export const DEFAULT_TRANSITION_DURATION = '150ms';
         class: 'fd-carousel'
     }
 })
-export class CarouselDirective implements AfterContentInit {
+export class CarouselDirective implements AfterContentInit, OnDestroy {
 
     /** Configuration for carousel */
     @Input()
@@ -75,6 +76,9 @@ export class CarouselDirective implements AfterContentInit {
     private _currentTransitionPx = 0;
 
     /** @hidden */
+    private _hammer: Hammer = null;
+
+    /** @hidden */
     constructor(
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef
@@ -84,6 +88,13 @@ export class CarouselDirective implements AfterContentInit {
     ngAfterContentInit(): void {
         if (this.config.gestureSupport) {
             this._hammerSetup();
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this._hammer) {
+            this._hammer.destroy();
         }
     }
 
@@ -210,18 +221,18 @@ export class CarouselDirective implements AfterContentInit {
 
     /** @hidden */
     private _hammerSetup(): void {
-        const hammer = new Hammer(this._elementRef.nativeElement, new HammerConfig());
+        this._hammer = new Hammer(this._elementRef.nativeElement, new HammerConfig());
 
-        hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+        this._hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 
         if (this.config.vertical) {
-            hammer.on('panmove', (event) => this._handlePan(event.deltaY));
-            hammer.on('panstart', () => this._handlePanStart());
-            hammer.on('panend', (event) => this._handlePanEnd(event.deltaY));
+            this._hammer.on('panmove', (event) => this._handlePan(event.deltaY));
+            this._hammer.on('panstart', () => this._handlePanStart());
+            this._hammer.on('panend', (event) => this._handlePanEnd(event.deltaY));
         } else {
-            hammer.on('panmove', (event) => this._handlePan(event.deltaX));
-            hammer.on('panstart', () => this._handlePanStart());
-            hammer.on('panend', (event) => this._handlePanEnd(event.deltaX));
+            this._hammer.on('panmove', (event) => this._handlePan(event.deltaX));
+            this._hammer.on('panstart', () => this._handlePanStart());
+            this._hammer.on('panend', (event) => this._handlePanEnd(event.deltaX));
         }
     }
 
