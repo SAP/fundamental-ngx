@@ -15,14 +15,13 @@
                     type="text"
                     class="fd-input"
                     fd-input-group-input
-                    [attr.aria-label]="datetimeInputLabel"
                     [(ngModel)]="inputFieldDate"
-                    (ngModelChange)="handleInputChange($event)"
+                    [attr.aria-label]="datetimeInputLabel"
                     [placeholder]="placeholder"
-                    (click)="openPopover()"
                     [compact]="compact"
                     [ngClass]="{ 'is-error': isInvalidDateInput && useValidation }"
                     [disabled]="disabled"
+                    (ngModelChange)="handleInputChange($event)"
                 />
                 <span fd-input-group-addon [state]="state" [compact]="compact" [button]="true">
                     <button
@@ -32,9 +31,9 @@
                         [fdType]="'transparent'"
                         [compact]="compact"
                         [attr.tabindex]="buttonFocusable ? 0 : -1"
-                        (click)="togglePopover()"
                         [attr.aria-label]="displayDatetimeToggleLabel"
                         [attr.aria-expanded]="isOpen"
+                        (click)="togglePopover()"
                     ></button>
                 </span>
             </fd-input-group>
@@ -44,11 +43,8 @@
                 <fd-calendar
                     calType="single"
                     [activeView]="activeView"
-                    (activeViewChange)="handleCalendarActiveViewChange($event)"
                     [disableFunction]="disableFunction ? disableFunction : null"
-                    (selectedDateChange)="handleDateChange($event)"
                     [selectedDate]="tempDate"
-                    (isValidDateChange)="isInvalidDateInputHandler($event)"
                     [escapeFocusFunction]="null"
                     [compact]="compact"
                     [markWeekends]="markWeekends"
@@ -57,6 +53,9 @@
                     [aggregatedYearGrid]="aggregatedYearGrid"
                     [yearGrid]="yearGrid"
                     [startingDayOfWeek]="startingDayOfWeek"
+                    (activeViewChange)="handleCalendarActiveViewChange($event)"
+                    (selectedDateChange)="handleDateChange($event)"
+                    (isValidDateChange)="isInvalidDateInputHandler($event)"
                 ></fd-calendar>
                 <div class="fd-datetime__separator"></div>
                 <fd-time
@@ -66,21 +65,21 @@
                     [ngModel]="tempTime"
                     [compact]="compact"
                     [spinnerButtons]="spinnerButtons"
-                    (ngModelChange)="handleTimeChange($event)"
                     [displaySeconds]="displaySeconds"
                     [displayMinutes]="displayMinutes"
                     [displayHours]="displayHours"
+                    (ngModelChange)="handleTimeChange($event)"
                     (focusArrowLeft)="focusArrowLeft()"
                 ></fd-time>
             </div>
             <div fd-popover-body-footer>
-                <div fd-bar [barDesign]="'footer'" [cosy]="true">
+                <div fd-bar [barDesign]="'footer'" [cosy]="!compact">
                     <div fd-bar-right>
                         <fd-bar-element>
-                            <button fd-button [fdType]="'emphasized'" [compact]="true" (click)="submit()">Submit</button>
+                            <button fd-button [fdType]="'emphasized'" [compact]="compact" (click)="submit()">Submit</button>
                         </fd-bar-element>
                         <fd-bar-element>
-                            <button fd-button [compact]="true" (click)="cancel()">Cancel</button>
+                            <button fd-button [compact]="compact" (click)="cancel()">Cancel</button>
                         </fd-bar-element>
                     </div>
                 </div>
