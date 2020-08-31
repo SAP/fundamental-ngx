@@ -4,6 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { ContentDensity, Status } from '../form/form-control';
+import { InputComponent } from '../form/input/input.component';
 
 import { InputGroupComponent } from './input-group.component';
 import { PlatformInputGroupModule } from './input-group.module';
@@ -20,6 +21,7 @@ import { PlatformInputGroupModule } from './input-group.module';
 })
 class InputGroupHostComponent {
     @ViewChild(InputGroupComponent) inputGroupComponent: InputGroupComponent;
+    @ViewChild(InputComponent) inputComponent: InputComponent;
 
     contentDensity: ContentDensity = 'cozy';
     disabled = false;
@@ -29,6 +31,7 @@ describe('InputGroup component', () => {
     let host: InputGroupHostComponent;
     let fixture: ComponentFixture<InputGroupHostComponent>;
     let inputGroupComponent: InputGroupComponent;
+    let inputComponent: InputComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -42,6 +45,7 @@ describe('InputGroup component', () => {
         host = fixture.componentInstance;
         fixture.detectChanges();
         inputGroupComponent = host.inputGroupComponent;
+        inputComponent = host.inputComponent;
     });
 
     it('Should render input group', () => {
@@ -94,6 +98,6 @@ describe('InputGroup component', () => {
     it('Should pass down contentDensity to input component', () => {
         host.contentDensity = 'compact';
         fixture.detectChanges();
-        expect(inputGroupComponent._inputControls.first.contentDensity === 'compact').toBeTrue();
+        expect(inputComponent.contentDensity === 'compact').toBeTrue();
     });
 });
