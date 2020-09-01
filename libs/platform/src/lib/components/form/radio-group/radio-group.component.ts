@@ -144,9 +144,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
         if (!this._validateRadioButtons()) {
             throw new Error('fdp-radio-button-group must contain a fdp-radio-button');
         }
-        this.contentRadioButtons.forEach((button) => {
-            button.stateType = this.status;
-        });
+        this.contentRadioButtons.forEach((button) => (button.stateType = this.status));
         this._changeDetector.markForCheck();
     }
 

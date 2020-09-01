@@ -181,7 +181,7 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     }
 
     /** @hidden */
-    labelClicked(event: any): void {
+    labelClicked(event: MouseEvent | KeyboardEvent): void {
         this.valueChange(this.value);
         this._setFocusOnNativeElement();
         event.stopPropagation();
