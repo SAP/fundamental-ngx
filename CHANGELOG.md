@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.18...v0.22.0-rc.19) (2020-09-01)
+
+
+### Bug Fixes
+
+* Includes accessibility requirements for checkbox in core and platform ([#2989](https://github.com/SAP/fundamental-ngx/issues/2989)) ([b3f5ac2](https://github.com/SAP/fundamental-ngx/commit/b3f5ac22562eef12f7c34445062fd0b5cdb336f8))
+* Time performance ([#3166](https://github.com/SAP/fundamental-ngx/issues/3166)) ([0953b63](https://github.com/SAP/fundamental-ngx/commit/0953b63c17a77790ca087355a8b7c279ae1ad482))
+
 ## [0.22.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.17...v0.22.0-rc.18) (2020-08-31)
 
 ## [0.22.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.16...v0.22.0-rc.17) (2020-08-31)
