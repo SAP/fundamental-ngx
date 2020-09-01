@@ -27,7 +27,7 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
 
             if (!this._uuidv4) {
                 this._uuidv4 = uuidv4();
-                elementRef.nativeElement._classMap[this._uuidv4] = [newComponentClassList];
+                elementRef.nativeElement._classMap[this._uuidv4] = newComponentClassList;
             }
 
             const allClassList = [...elementRef.nativeElement.classList];
@@ -54,9 +54,9 @@ function firstCommonElementIndex(array1: string[], array2): number {
 }
 
 /** Replaces previous set of component classes with new set of component classes */
-function updateComponentClassList(allClasses: string[],  previousComponentClassList, newComponentClassList: string[]): string[] {
+function updateComponentClassList(allClasses: string[],  previousComponentClassList: string[], newComponentClassList: string[]): string[] {
     const index = firstCommonElementIndex(allClasses, previousComponentClassList);
-    const externalClasses = allClasses.filter(element => !previousComponentClassList.includes(element));
+    const externalClasses = allClasses.filter(element => previousComponentClassList.indexOf(element) === -1);
     externalClasses.splice(index, 0, ...newComponentClassList);
 
     return externalClasses;
