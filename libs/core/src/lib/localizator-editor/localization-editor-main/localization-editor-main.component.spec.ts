@@ -3,7 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LocalizationEditorModule } from '../localization-editor.module';
 import { CommonModule } from '@angular/common';
 import { LocalizationEditorMainComponent } from './localization-editor-main.component';
-
+/**
+ * @deprecated
+ * Localization Editor component is depricated since version 0.22.0
+ */
 @Component({
     selector: 'fd-localization-main-test',
     template: `<fd-localization-editor-main>
@@ -13,7 +16,7 @@ import { LocalizationEditorMainComponent } from './localization-editor-main.comp
         <input fd-localization-editor-input />
     </fd-localization-editor-main>`
 })
-class TestLocalizationMainComponent {}
+class TestLocalizationMainComponent { }
 
 describe('LocalizationEditorMainComponent', () => {
     let component: LocalizationEditorMainComponent;

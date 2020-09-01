@@ -12,6 +12,8 @@ import { Placement } from 'popper.js';
 import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
 
 /**
+ * @deprecated
+ * Localization Editor component is depricated since version 0.22.0
  *  The component that represents a list of fields with add-ons inside popover
  *  ```html
  * <fd-localization-editor>
