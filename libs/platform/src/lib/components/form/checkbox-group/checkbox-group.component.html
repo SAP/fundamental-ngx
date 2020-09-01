@@ -1,4 +1,4 @@
-<fd-form-group [isInline]="isInline">
+<fd-form-group [isInline]="isInline" role="group" [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy">
     <ng-container *ngIf="!list">
         <ng-container *ngFor="let checkbox of contentCheckboxes; let i = index">
             <ng-container
@@ -10,7 +10,11 @@
                         checkboxValue: checkbox.checkboxValue,
                         contentDensity: contentDensity,
                         labeltext: checkbox.label,
-                        disabled: disabled || checkbox.disabled
+                        disabled: disabled || checkbox.disabled,
+                        ariaLabel: checkbox.ariaLabel,
+                        ariaLabelledBy: checkbox.ariaLabelledBy,
+                        ariaDescribedBy: checkbox.ariaDescribedBy,
+                        title: checkbox.title
                     }
                 "
             >
@@ -49,12 +53,20 @@
     let-contentDensity="contentDensity"
     let-labeltext="labeltext"
     let-checkboxDisabled="disabled"
+    let-ariaLabel="ariaLabel"
+    let-ariaLabelledBy="ariaLabelledBy"
+    let-ariaDescribedBy="ariaDescribedBy"
+    let-title="title"
 >
     <fdp-checkbox
         [id]="id"
         [name]="name"
         [value]="checkboxValue"
         [label]="labeltext"
+        [ariaLabel]="ariaLabel"
+        [ariaLabelledBy]="ariaLabelledBy"
+        [ariaDescribedBy]="ariaDescribedBy"
+        [title]="title"
         [contentDensity]="contentDensity"
         [disabled]="checkboxDisabled"
         [stateType]="status"

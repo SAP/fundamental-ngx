@@ -1,4 +1,5 @@
 import {
+    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -39,6 +40,22 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden */
     @ViewChild('labelElement')
     labelElement: ElementRef;
+
+    /** Sets the `aria-label` attribute to the element. */
+    @Input()
+    ariaLabel = '';
+
+    /** Sets the `aria-labelledby` attribute to the element. */
+    @Input()
+    ariaLabelledBy = null;
+
+    /** Sets the `aria-describedby` attribute to the element. */
+    @Input()
+    ariaDescribedBy: string;
+
+    /** sets checkbox tooltip */
+    @Input()
+    title: string;
 
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
@@ -92,6 +109,8 @@ export class CheckboxComponent implements ControlValueAccessor {
     public checkboxValue: any;
     /** Stores current checkbox state. */
     public checkboxState: fdCheckboxTypes;
+    /** Returns checkbox state for aria-checked attribute. */
+    public ariaChecked: 'true' | 'false' | 'mixed';
     /** @hidden */
     private _previousState: fdCheckboxTypes;
 
@@ -101,7 +120,13 @@ export class CheckboxComponent implements ControlValueAccessor {
     public onValueChange = (newValue) => {};
 
     /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef, public elementRef: ElementRef) {}
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        public elementRef: ElementRef,
+        @Attribute('tabIndexValue') public tabIndexValue: number = 0
+    ) {
+        this.tabIndexValue = tabIndexValue;
+    }
 
     /** @hidden Used to define if control is in 'indeterminate' state.*/
     get isIndeterminate(): boolean {
@@ -147,6 +172,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
     public checkByClick(event: MouseEvent): void {
         this._nextValueEvent(true, event);
+        this.muteKey(event);
     }
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
@@ -190,10 +216,13 @@ export class CheckboxComponent implements ControlValueAccessor {
     private _setState(): void {
         if (this._compare(this.checkboxValue, this.values.trueValue)) {
             this.checkboxState = 'checked';
+            this.ariaChecked = 'true';
         } else if (this._compare(this.checkboxValue, this.values.falseValue)) {
             this.checkboxState = 'unchecked';
+            this.ariaChecked = 'false';
         } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
+            this.ariaChecked = 'mixed';
         }
         this._previousState = this.checkboxState;
     }

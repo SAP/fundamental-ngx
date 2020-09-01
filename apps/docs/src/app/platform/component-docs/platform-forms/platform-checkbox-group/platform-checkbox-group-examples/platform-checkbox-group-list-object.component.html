@@ -3,13 +3,8 @@
 <p>Inline checkboxes</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form4">
     <fdp-form-field #fl1 [id]="'languages'" [label]="'Programming Languages Known: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group
-            [list]="languages"
-            [isInline]="true"
-            [name]="'languages'"
-            [contentDensity]="'compact'"
-            [formControl]="fl1.formControl"
-        ></fdp-checkbox-group>
+        <fdp-checkbox-group [list]="languages" [isInline]="true" [name]="'languages'" [contentDensity]="'compact'"
+            ariaLabel="Programming Languages Known" [formControl]="fl1.formControl"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
 <span style="margin-left: 2rem;">Languages: {{ form4.controls.languages?.value }}</span>
@@ -19,11 +14,8 @@
 <p>Pre-selection based on control value passed</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form5" [object]="visited">
     <fdp-form-field #fl2 [id]="'visited'" [label]="'Country visited: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group
-            [list]="countryVisited"
-            [name]="'visited'"
-            [formControl]="fl2.formControl"
-        ></fdp-checkbox-group>
+        <fdp-checkbox-group [list]="countryVisited" [name]="'visited'" ariaLabel="Country visited"
+            [formControl]="fl2.formControl"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
 <span style="margin-left: 2rem;">Visited Country: {{ form5.controls.visited?.value }}</span>
@@ -33,11 +25,8 @@
 <p>Pre-selection based on control value passed from formGroup</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form6" [object]="visited">
     <fdp-form-field #fl4 [id]="'currencies'" [label]="'Currencies Exchanging: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group
-            [list]="countryCurrency"
-            [name]="'currency'"
-            formControlName="currencies"
-        ></fdp-checkbox-group>
+        <fdp-checkbox-group [list]="countryCurrency" [name]="'currency'" ariaLabel="Currencies Exchanging"
+            formControlName="currencies"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
 <span style="margin-left: 2rem;">Currencies: {{ form6.controls.currencies?.value }}</span>
@@ -47,13 +36,8 @@
 <p>Lookup key and Disaplay key usages.</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form7">
     <fdp-form-field #fl5 [id]="'items'" [label]="'Purchased Items: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group
-            [list]="invoiceItems"
-            [name]="'invoices'"
-            [lookupKey]="'item'"
-            [displayKey]="'itemType'"
-            [formControl]="fl5.formControl"
-        ></fdp-checkbox-group>
+        <fdp-checkbox-group [list]="invoiceItems" [name]="'invoices'" [lookupKey]="'item'" [displayKey]="'itemType'"
+            ariaLabel="Purchased Items" [formControl]="fl5.formControl"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
 <span style="margin-left: 2rem;">Purchased Items: {{ form7.controls.items?.value }}</span>
@@ -62,35 +46,22 @@
 <br />
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form6">
-    <fdp-form-field
-        #fl3
-        [id]="'disabled currencies'"
-        [label]="'Disabled checkbox Group: '"
-        [disabled]="true"
-        zone="zLeft"
-        rank="1"
-    >
-        <fdp-checkbox-group
-            [list]="countryCurrency"
-            [name]="'currencies'"
-            [formControl]="fl3.formControl"
-        ></fdp-checkbox-group>
+    <fdp-form-field #fl3 [id]="'disabled currencies'" [label]="'Disabled checkbox Group: '" [disabled]="true"
+        zone="zLeft" rank="1">
+        <fdp-checkbox-group [list]="countryCurrency" [name]="'currencies'" ariaLabel="Currencies"
+            [formControl]="fl3.formControl"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
 
-<separator></separator>
+<hr/>
 
 <h3>Template Driven Form</h3>
 <h3>Checkboxes created from from list of selectItem Objects</h3>
 <p>Inline checkboxes</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'languages known'" [label]="'Programming Languages Known: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group
-            [list]="languages"
-            [isInline]="true"
-            [name]="'languages'"
-            [(ngModel)]="languagesKnown"
-        ></fdp-checkbox-group>
+        <fdp-checkbox-group [list]="languages" [isInline]="true" [name]="'languages'"
+            ariaLabel="Programming Languages Known" [(ngModel)]="languagesKnown"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
 <span style="margin-left: 2rem;">Languages: {{ languagesKnown }}</span>
@@ -100,12 +71,8 @@
 <p>Pre-selection based on value passed</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'currency'" [label]="'Currencies in country: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group
-            [list]="countryCurrency"
-            [name]="'currencies'"
-            [contentDensity]="'compact'"
-            [(ngModel)]="currencies"
-        ></fdp-checkbox-group>
+        <fdp-checkbox-group [list]="countryCurrency" [name]="'currencies'" [contentDensity]="'compact'"
+            ariaLabel="Currencies in country" [(ngModel)]="currencies"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
 <span style="margin-left: 2rem;">Currencies: {{ currencies }}</span>
@@ -115,13 +82,8 @@
 <p>Lookup key and Disaplay key usages.</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'itemst'" [label]="'Purchased Items: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group
-            [list]="invoiceItems"
-            [name]="'items'"
-            [lookupKey]="'item'"
-            [displayKey]="'itemType'"
-            [(ngModel)]="itemsData"
-        ></fdp-checkbox-group>
+        <fdp-checkbox-group [list]="invoiceItems" [name]="'items'" [lookupKey]="'item'" [displayKey]="'itemType'"
+            ariaLabel="Purchased Items" [(ngModel)]="itemsData"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
 <span style="margin-left: 2rem;">Purchased Items: {{ itemsData }}</span>
@@ -130,6 +92,7 @@
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'disabled currency'" [label]="'Disabled checkbox Group: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group [list]="countryCurrency" [disabled]="true" [name]="'currencies'"></fdp-checkbox-group>
+        <fdp-checkbox-group [list]="countryCurrency" [disabled]="true" [name]="'currencies'"
+            ariaLabel="Disabled checkbox"></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>

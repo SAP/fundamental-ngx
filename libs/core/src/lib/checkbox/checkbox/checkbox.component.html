@@ -6,17 +6,25 @@
     [name]="name"
     [disabled]="disabled"
     [indeterminate]="isIndeterminate"
+    [attr.tabIndex]="tabIndexValue"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledBy"
+    [attr.aria-checked]="ariaChecked"
+    [attr.aria-describedby]="ariaDescribedBy"
+    [attr.aria-disabled]="disabled"
     [class.fd-checkbox--compact]="compact"
     [ngClass]="state ? 'is-' + state : ''"
     [ngModel]="isChecked"
     (ngModelChange)="nextValue()"
     (keydown)="checkByKey($event)"
     (keyup)="$event.stopPropagation()"
+    (click)="$event.stopPropagation()"
 />
 <label class="fd-checkbox__label"
        #labelElement
        [for]="inputId"
        [ngClass]="labelClass"
+       [attr.title]="title"
        [class.fd-checkbox__label--compact]="compact"
        (click)="checkByClick($event)">
     <ng-container *ngIf="label">

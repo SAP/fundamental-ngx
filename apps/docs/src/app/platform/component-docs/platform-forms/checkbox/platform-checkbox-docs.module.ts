@@ -10,6 +10,8 @@ import { PlatformCompactChekboxExampleComponent } from './platform-checkbox-exam
 import { PlatformChekboxStyleComponent } from './platform-checkbox-examples/platform-checkbox-error-handling.component';
 import { PlatformChekboxNoFormComponent } from './platform-checkbox-examples/platform-binary-checkbox-no-form.component';
 import { PlatformChekboxTristateComponent } from './platform-checkbox-examples/platform-tristate-checkbox.component';
+import { PlatformChekboxA11yExampleComponent } from './platform-checkbox-examples/platform-checkbox-a11y.component';
+
 import { PlatformCheckboxModule, FdpFormGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
@@ -40,6 +42,7 @@ const routes: Routes = [
         PlatformChekboxStyleComponent,
         PlatformChekboxNoFormComponent,
         PlatformChekboxTristateComponent,
+        PlatformChekboxA11yExampleComponent
     ]
 })
-export class CheckboxDocsModule { }
+export class CheckboxDocsModule {}

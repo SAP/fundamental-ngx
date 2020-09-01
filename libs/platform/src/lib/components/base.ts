@@ -13,6 +13,18 @@ export abstract class BaseComponent {
     protected defaultId = `fdp-id-${randomId++}`;
     protected _disabled = false;
 
+    /** Sets the `aria-label` attribute to the element. */
+    @Input()
+    ariaLabel = null;
+
+    /** Sets the `aria-labelledby` attribute to the element. */
+    @Input()
+    ariaLabelledBy = null;
+
+    /** Sets the `aria-describedby` attribute to the element. */
+    @Input()
+    ariaDescribedBy: string;
+
     /** id for the Element */
     @Input()
     id: string = this.defaultId;

@@ -2,12 +2,12 @@
 <fdp-form-group #fg [hintPlacement]="'left'" [multiLayout]="true" [formGroup]="customForm" [object]="data">
     <fdp-form-field #ffr1 [id]="'presence'" [validators]="validators" [label]="'Your presence is necessary'"
         [hint]="'presence is necessary'" [hintPlacement]="'left'" [rank]="10" zone="zLeft">
-        <fdp-checkbox [name]="'presence-cb'" [isBinary]="true" [formControl]="ffr1.formControl"></fdp-checkbox>
+        <fdp-checkbox [name]="'presence-cb'" [isBinary]="true" title="Your presence is necessary" [formControl]="ffr1.formControl"></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field #ffr2 [id]="'aggrement'" [validators]="validators" [hint]="'this selection is mandatory'"
         [hintPlacement]="'left'" [rank]="15" zone="zRight">
-        <fdp-checkbox [name]="'aggrement-cb'" [isBinary]="true" [formControl]="ffr2.formControl">
+        <fdp-checkbox [name]="'aggrement-cb'" [isBinary]="true" title="Agree with terms" [formControl]="ffr2.formControl">
             Do you Agree with <a href="#"> Terms and Conditions</a>?
         </fdp-checkbox>
     </fdp-form-field>
