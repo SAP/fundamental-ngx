@@ -3,33 +3,34 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ElementRef,
+    ElementRef, Host,
     Inject, Injector,
     OnInit,
     Optional,
-    Self,
+    Self, SkipSelf,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+import { Direction } from '@angular/cdk/bidi';
 import { filter, takeUntil } from 'rxjs/operators';
 
 import {
     DIALOG_CONFIG,
     DialogConfig,
     DynamicComponentService,
-    MenuKeyboardService, RtlService
+    RtlService
 } from '@fundamental-ngx/core';
 import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider } from '../../../../domain/data-source';
 import { FormFieldControl } from '../../form-control';
 import { BaseCombobox, ComboboxSelectionChangeEvent } from '../commons/base-combobox';
 import { ComboboxConfig } from '../combobox.config';
 import { OptionItem } from '../../../../domain';
-import { Direction } from '@angular/cdk/bidi';
 import { ComboboxMobileComponent } from '..';
 import { COMBOBOX_COMPONENT } from '../combobox.interface';
+import { FormField } from '../../form-field';
 
 @Component({
     selector: 'fdp-combobox',
@@ -67,18 +68,19 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     }
 
     constructor(
-        readonly _cd: ChangeDetectorRef,
+        readonly cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
         @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
-        protected _menuKeyboardService: MenuKeyboardService,
         readonly _comboboxConfig: ComboboxConfig,
-        private _rtlService: RtlService
+        private _rtlService: RtlService,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(_cd, elementRef, ngControl, ngForm, dialogConfig, _menuKeyboardService, _comboboxConfig);
+        super(cd, elementRef, ngControl, ngForm, dialogConfig, _comboboxConfig, formField, formControl);
     }
 
     /** @hidden */
@@ -95,7 +97,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
                 filter(isOpen => !this.mobile && !isOpen)
             )
             .subscribe(() => {
-                if (this.isSelectedOptionItemByDisplayValue(this.inputText)) {
+                if (!this.selected || this.isSelectedOptionItemByDisplayValue(this.inputText)) {
                     return;
                 }
 

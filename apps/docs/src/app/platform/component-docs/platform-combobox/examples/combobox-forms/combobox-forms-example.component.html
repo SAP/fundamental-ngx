@@ -1,8 +1,9 @@
 <fdp-form-group [multiLayout]="true" [noLabelLayout]="false" [formGroup]="customForm">
-    <fdp-form-field id="field" placeholder="Type some text..." label="Array of Strings" zone="zLeft"
+    <fdp-form-field id="field" label="Array of Strings" zone="zLeft"
                     rank="4">
         <fdp-combobox
             name="field"
+            placeholder="Type some text..."
             [dataSource]="dataSource"
             displayKey="name"
             (selectionChange)="onSelect($event)"

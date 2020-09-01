@@ -1,7 +1,8 @@
 <fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
-    <fdp-form-field id="columns" placeholder="Type some text..." label="Two Columns" zone="zLeft" rank="4">
+    <fdp-form-field id="columns" label="Two Columns" zone="zLeft" rank="4">
         <fdp-combobox
             name="columns"
+            placeholder="Type some text..."
             [dataSource]="dataSource"
             displayKey="name"
             secondaryKey="type"

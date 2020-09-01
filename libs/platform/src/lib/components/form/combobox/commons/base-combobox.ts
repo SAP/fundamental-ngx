@@ -4,15 +4,15 @@ import {
     ContentChildren,
     Directive,
     ElementRef,
-    EventEmitter,
+    EventEmitter, Host,
     Inject,
     Input,
     OnDestroy,
     Optional,
     Output,
     QueryList,
-    Self,
-    TemplateRef,
+    Self, SkipSelf,
+    TemplateRef, ViewChild,
     ViewChildren
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
@@ -34,9 +34,9 @@ import { takeUntil } from 'rxjs/operators';
 
 import {
     DIALOG_CONFIG,
-    DialogConfig,
-    KeyUtil,
-    ListItemDirective,
+    DialogConfig, FocusEscapeDirection,
+    KeyUtil, ListComponent,
+    ListItemComponent,
     MenuKeyboardService,
     MobileModeConfig, TemplateDirective
 } from '@fundamental-ngx/core';
@@ -56,7 +56,8 @@ import { ComboboxComponent } from '../combobox/combobox.component';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
 import { COMBOBOX_COMPONENT } from '../combobox.interface';
 import { ComboboxConfig, MatchingStrategy } from '../combobox.config';
-import { ContentDensity } from '../../form-control';
+import { ContentDensity, FormFieldControl } from '../../form-control';
+import { FormField } from '../../form-field';
 
 export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
@@ -157,8 +158,8 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
 
     /** @hidden */
-    @ViewChildren(ListItemDirective)
-    listItems: QueryList<ListItemDirective>;
+    @ViewChild(ListComponent)
+    listComponent: ListComponent;
 
     /** @hidden */
     @ContentChildren(TemplateDirective)
@@ -277,15 +278,16 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     };
 
     constructor(
-        readonly _cd: ChangeDetectorRef,
+        readonly cd: ChangeDetectorRef,
         protected readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
-        protected _menuKeyboardService: MenuKeyboardService,
-        protected _comboboxConfig: ComboboxConfig
+        protected _comboboxConfig: ComboboxConfig,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(_cd, ngControl, ngForm);
+        super(cd, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */
@@ -390,16 +392,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         }
     }
 
-    /**
-     * Handle Keydown Actions
-     * @hidden
-     */
-    onListKeydownHandler(event: KeyboardEvent): void {
-        const listItemsArray = this.listItems.toArray();
-        const index: number = listItemsArray.findIndex(
-            item => item.itemEl.nativeElement === document.activeElement
-        );
-        this._menuKeyboardService.keyDownHandler(event, index, listItemsArray);
+    /** @hidden */
+    handlePressEnter(event: KeyboardEvent, value: OptionItem): void {
+        if (!KeyUtil.isKeyCode(event, ENTER)) {
+            return;
+        }
+
+        this.handleOptionItem(value);
     }
 
     /**
@@ -432,8 +431,8 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
                 this.showList(true);
             }
 
-            if (this.isOpen && this.listItems && this.listItems.first) {
-                this.listItems.first.focus();
+            if (this.isOpen && this.listComponent) {
+                this.listComponent.setItemActive(0);
             } else if (!this.isOpen) {
                 this._chooseOtherItem(1);
             }
@@ -447,6 +446,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             this.showList(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
             this.showList(true);
+        }
+    }
+
+    /** Method passed to list component */
+    handleListFocusEscape(direction: FocusEscapeDirection): void {
+        if (direction === 'up') {
+            this.searchInputElement.nativeElement.focus();
         }
     }
 
@@ -502,12 +508,12 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             .pipe(takeUntil(this._destroyed))
             .subscribe(data => {
                 this._suggestions = this._convertToOptionItems(data);
-                if (this._suggestions.length === 0) {
-                    this.isOpen = false;
-                    this.openChange.next(this.isOpen);
-
-                    return;
-                }
+                // if (this._suggestions.length === 0) {
+                //     this.isOpen = false;
+                //     this.openChange.next(this.isOpen);
+                //
+                //     return;
+                // }
 
                 this.stateChanges.next('initDataSource.open().');
 
