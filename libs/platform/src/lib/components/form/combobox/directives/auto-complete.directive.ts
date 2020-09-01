@@ -65,7 +65,7 @@ export class AutoCompleteDirective {
             }
 
             this.oldValue = this.inputText;
-            const item = this.searchByStrategy();
+            const item = this._searchByStrategy();
             if (item) {
                 this._typeahead(item.label);
             }
@@ -101,7 +101,7 @@ export class AutoCompleteDirective {
         });
     }
 
-    private searchByStrategy(): OptionItem | undefined {
+    private _searchByStrategy(): OptionItem | undefined {
         const firstItem = this.options[0];
 
         if (!firstItem) {
@@ -112,7 +112,7 @@ export class AutoCompleteDirective {
             let matchedSelectItem: OptionItem | undefined;
 
             for (const option of this.options) {
-                matchedSelectItem = this.findByStrategyStartsWith(option.children, this.inputText)
+                matchedSelectItem = this._findByStrategyStartsWith(option.children, this.inputText)
 
                 if (matchedSelectItem) {
                     break;
@@ -124,10 +124,10 @@ export class AutoCompleteDirective {
             }
         }
 
-        return this.findByStrategyStartsWith(this.options, this.inputText);
+        return this._findByStrategyStartsWith(this.options, this.inputText);
     }
 
-    private findByStrategyStartsWith(options: OptionItem[], inputText: string): OptionItem | undefined {
+    private _findByStrategyStartsWith(options: OptionItem[], inputText: string): OptionItem | undefined {
         return options.find(option => option.label.toLocaleLowerCase()
             .startsWith(inputText.toLocaleLowerCase()));
     }

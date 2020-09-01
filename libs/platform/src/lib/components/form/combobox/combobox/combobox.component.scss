@@ -1,13 +1,11 @@
 @import '~fundamental-styles/dist/list.css';
 
-.fd-select-overlay {
+.fd-popover__popper {
     width: 100% !important;
+    position: static !important;
+    overflow: hidden;
 }
 
 .fd-combobox-input-menu-overflow {
     overflow: auto;
-}
-
-.fd-list__item.fd-combobox-list-item {
-    cursor: pointer;
 }

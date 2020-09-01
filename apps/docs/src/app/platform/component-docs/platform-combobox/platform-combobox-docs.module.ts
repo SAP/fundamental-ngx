@@ -12,7 +12,6 @@ import {
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { PlatformComboboxDocsComponent } from './platform-combobox-docs.component';
 import { PlatformComboboxHeaderComponent } from './platform-combobox-header/platform-combobox-header.component';
 import { COMBOBOX_MOBILE_CONFIG } from '../../../documentation/utilities/consts';
@@ -23,6 +22,7 @@ import { ComboboxColumnsExampleComponent } from './examples/combobox-columns/com
 import { ComboboxTemplatesExampleComponent } from './examples/combobox-templates/combobox-templates-example.component';
 import { ComboboxGroupExampleComponent } from './examples/combobox-group/combobox-group-example.component';
 import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobox-forms-example.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
     {
@@ -38,7 +38,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule,
+        SharedDocumentationPageModule,
         PlatformComboboxModule,
         PlatformComboboxMobileModule,
         FdpFormGroupModule,

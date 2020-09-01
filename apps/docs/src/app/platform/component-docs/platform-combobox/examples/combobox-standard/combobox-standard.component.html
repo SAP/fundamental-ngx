@@ -18,12 +18,12 @@
         <p>Selected: {{ selectedItem2 }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="readOnly" placeholder="Type some text..." label="ReadOnly" zone="zLeft" rank="4">
+    <fdp-form-field id="readonly" placeholder="Type some text..." label="ReadOnly" zone="zLeft" rank="4">
         <fdp-combobox
-            name="readOnly"
+            name="readonly"
             [dataSource]="dataSource"
-            [value]="dataSource[0]"
-            readOnly="true"
+            [value]="selectedItem3"
+            readonly="true"
             (selectionChange)="onSelect3($event)"
         ></fdp-combobox>
         <p>Selected: {{ selectedItem3 }}</p>
@@ -33,7 +33,7 @@
         <fdp-combobox
             name="disabled"
             [dataSource]="dataSource"
-            [value]="dataSource[1]"
+            [value]="selectedItem4"
             disabled="true"
             (selectionChange)="onSelect4($event)"
         ></fdp-combobox>

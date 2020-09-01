@@ -9,6 +9,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
 
 import {
     DialogService,
@@ -19,7 +20,6 @@ import {
 } from '@fundamental-ngx/core';
 
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-combobox-mobile',

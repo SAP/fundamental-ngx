@@ -32,8 +32,8 @@ export class ComboboxStandardComponent {
 
     selectedItem1 = null;
     selectedItem2 = null;
-    selectedItem3 = null;
-    selectedItem4 = null;
+    selectedItem3 = this.dataSource[4];
+    selectedItem4 = this.dataSource[3];
     selectedItem5 = null;
     selectedItem6 = null;
 

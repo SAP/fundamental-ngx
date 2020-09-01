@@ -6,7 +6,6 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
-    Injector,
     Input,
     OnDestroy,
     Optional,
@@ -17,7 +16,18 @@ import {
     ViewChildren
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
+import {
+    ALT,
+    CONTROL,
+    DOWN_ARROW,
+    ENTER,
+    ESCAPE,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SHIFT,
+    TAB,
+    UP_ARROW
+} from '@angular/cdk/keycodes';
 
 import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -25,7 +35,6 @@ import { takeUntil } from 'rxjs/operators';
 import {
     DIALOG_CONFIG,
     DialogConfig,
-    DynamicComponentService,
     KeyUtil,
     ListItemDirective,
     MenuKeyboardService,
@@ -97,10 +106,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     entityClass: string;
 
-    /** Whether the combobox is readonly. */
-    @Input()
-    readOnly = false;
-
     /** Whether the combobox should be built on mobile mode */
     @Input()
     mobile = false;
@@ -139,8 +144,12 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     set value(value: any) {
+        if (!value) {
+            return;
+        }
+
         const selectedItems = Array.isArray(value) ? value : [value];
-        this.setAsSelected(selectedItems);
+        this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
     }
 
@@ -246,16 +255,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
-    private readonly nonOpeningKeys: string[] = [
-        'Escape',
-        'Enter',
-        'ArrowLeft',
-        'ArrowRight',
-        'ArrowDown',
-        'ArrowUp',
-        'Ctrl',
-        'Tab',
-        'Shift'
+    private readonly nonOpeningKeys: number[] = [
+        ESCAPE, ENTER, CONTROL, TAB, SHIFT,
+        UP_ARROW, RIGHT_ARROW, DOWN_ARROW, LEFT_ARROW
     ];
 
     displayFn = (value: any) => {
@@ -280,7 +282,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
-        protected readonly _dynamicComponentService: DynamicComponentService,
         protected _menuKeyboardService: MenuKeyboardService,
         protected _comboboxConfig: ComboboxConfig
     ) {
@@ -289,14 +290,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._setupKeyboardService();
         this._initWindowResize();
         this._assignCustomTemplates();
         super.ngAfterViewInit();
-
-        if (this.mobile) {
-            this._setUpMobileMode();
-        }
     }
 
     /** @hidden */
@@ -330,12 +326,16 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden
      * Define value as selected
      * */
-    abstract setAsSelected(item: any[]): void;
+    abstract setAsSelected(item: OptionItem[]): void;
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
+        if (!value) {
+            return;
+        }
+
         const selectedItems = Array.isArray(value) ? value : [value];
-        this.setAsSelected(selectedItems);
+        this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.writeValue(value);
     }
 
@@ -352,6 +352,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
         if (this.isOpen && (forceClose || this.canClose)) {
             this.isOpen = false;
+            this.openChange.next(this.isOpen);
             this._cd.markForCheck();
             this.onTouched();
         }
@@ -369,7 +370,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden */
     showList(isOpen: boolean): void {
         /** Reset displayed values on every mobile open */
-        if (this.mobile && !this.isOpen) {
+        if (!this.isOpen) {
             this.searchTermChanged('');
         }
 
@@ -383,7 +384,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     /** @hidden */
-    handleOptionItem(value: any): void {
+    handleOptionItem(value: OptionItem): void {
         if (value) {
             this.selectOptionItem(value);
         }
@@ -394,10 +395,11 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * @hidden
      */
     onListKeydownHandler(event: KeyboardEvent): void {
-        const index: number = this.listItems.toArray().findIndex(
+        const listItemsArray = this.listItems.toArray();
+        const index: number = listItemsArray.findIndex(
             item => item.itemEl.nativeElement === document.activeElement
         );
-        this._menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
+        this._menuKeyboardService.keyDownHandler(event, index, listItemsArray);
     }
 
     /**
@@ -419,6 +421,10 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * @hidden
      */
     onInputKeydownHandler(event: KeyboardEvent): void {
+        if (this.readonly && KeyUtil.isKeyCode(event, [ALT, DOWN_ARROW, UP_ARROW])) {
+            return;
+        }
+
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             event.preventDefault();
 
@@ -439,32 +445,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             event.stopPropagation();
 
             this.showList(false);
-        } else if (!event.ctrlKey && !KeyUtil.isKey(event, this.nonOpeningKeys)) {
+        } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
             this.showList(true);
         }
     }
 
-    /** Handle dialog dismissing, closes popover and sets backup data. */
-    dialogDismiss(term: string): void {
-        this.inputText = term;
-        this.showList(false);
-    }
-
-    /** Handle dialog approval, closes popover and propagates data changes. */
-    dialogApprove(): void {
-        this.showList(false);
-    }
-
     protected get ds(): ComboBoxDataSource<any> {
         return (<ComboBoxDataSource<any>>this.dataSource);
-    }
-
-    /** @hidden */
-    private _setupKeyboardService(): void {
-        this._menuKeyboardService.itemClicked
-            .pipe(takeUntil(this._destroyed))
-            .subscribe((index) => this.handleOptionItem(index));
-        this._menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
@@ -480,16 +467,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden */
     private _getSelectItemByValue(displayValue: string): OptionItem {
         return this._suggestions.find(value => value.label === displayValue);
-    }
-
-    /** @hidden */
-    private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
-            { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
-            ComboboxMobileComponent,
-            { container: this._element },
-            { injector: Injector.create({ providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }] }) }
-        );
     }
 
     /** @hidden */
@@ -527,6 +504,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
                 this._suggestions = this._convertToOptionItems(data);
                 if (this._suggestions.length === 0) {
                     this.isOpen = false;
+                    this.openChange.next(this.isOpen);
 
                     return;
                 }

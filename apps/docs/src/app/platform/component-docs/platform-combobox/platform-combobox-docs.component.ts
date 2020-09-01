@@ -17,6 +17,9 @@ import * as comboboxColumnsTs from '!raw-loader!./examples/combobox-columns/comb
 import * as comboboxGroupHtml from '!raw-loader!./examples/combobox-group/combobox-group-example.component.html';
 import * as comboboxGroupTs from '!raw-loader!./examples/combobox-group/combobox-group-example.component';
 
+import * as comboboxTemplatesHtml from '!raw-loader!./examples/combobox-templates/combobox-templates-example.component.html';
+import * as comboboxTemplatesTs from '!raw-loader!./examples/combobox-templates/combobox-templates-example.component';
+
 import * as comboboxFormHtml from '!raw-loader!./examples/combobox-forms/combobox-forms-example.component.html';
 import * as comboboxFormTs from '!raw-loader!./examples/combobox-forms/combobox-forms-example.component';
 
@@ -69,6 +72,15 @@ export class PlatformComboboxDocsComponent {
         language: 'typescript',
         fileName: 'combobox-group-example',
         code: comboboxGroupTs
+    }];
+    comboboxTemplatesExample: ExampleFile[] = [{
+        language: 'html',
+        fileName: 'combobox-templates-example',
+        code: comboboxTemplatesHtml
+    }, {
+        language: 'typescript',
+        fileName: 'combobox-templates-example',
+        code: comboboxTemplatesTs
     }];
     comboboxFormExample: ExampleFile[] = [{
         language: 'html',

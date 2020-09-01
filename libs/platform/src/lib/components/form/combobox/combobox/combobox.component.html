@@ -12,7 +12,7 @@
         [cdkConnectedOverlayOpen]="isOpen"
         (overlayOutsideClick)="close($event)"
         [cdkConnectedOverlayMinWidth]="minWidth">
-        <div class="fd-select-overlay fd-popover__body--no-arrow fd-popover__body--dropdown">
+        <div class="fd-popover__popper fd-popover__body--no-arrow">
             <ng-container [ngTemplateOutlet]="listTemplate"></ng-container>
         </div>
     </ng-template>
@@ -35,7 +35,7 @@
         (addOnButtonClicked)="onPrimaryButtonClick()"
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
         [attr.aria-disabled]="disabled"
-        [attr.aria-readonly]="readOnly"
+        [attr.aria-readonly]="readonly"
         (click)="mobile && showList(true)">
         <ng-container></ng-container>
         <input
@@ -56,10 +56,10 @@
             [placeholder]="placeholder"
             (focus)="onTouched()"
             [attr.aria-expanded]="isOpen && _suggestions.length > 0"
-            [readonly]="readOnly"
-            [attr.aria-readonly]="readOnly"
+            [readonly]="readonly"
+            [attr.aria-readonly]="readonly"
         />
-        <span *ngIf="readOnly" fd-input-group-addon style="display: none;"></span>
+        <span *ngIf="readonly" fd-input-group-addon style="display: none;"></span>
     </fd-input-group>
 </ng-template>
 
@@ -101,7 +101,6 @@
         (keydown)="onListKeydownHandler($event)"
         fd-list-item
         tabindex="0"
-        class="fd-combobox-list-item"
         [selected]="isSelectedOptionItem(term)">
         <ng-container *ngIf="isSelectedOptionItem(term) && !!selectedItemTemplate"
                       [ngTemplateOutlet]="selectedItemTemplate"
