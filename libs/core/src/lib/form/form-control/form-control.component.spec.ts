@@ -1,4 +1,4 @@
-import { FormControlDirective } from './form-control.directive';
+import { FormControlComponent } from './form-control.component';
 import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -9,7 +9,7 @@ import { By } from '@angular/platform-browser';
 })
 export class TestComponent {}
 
-describe('FormControlDirective', () => {
+describe('FormControlComponent', () => {
     let fixture: ComponentFixture<TestComponent>,
         component: TestComponent,
         debugElement: DebugElement,
@@ -19,7 +19,7 @@ describe('FormControlDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [FormControlDirective, TestComponent]
+            declarations: [FormControlComponent, TestComponent]
         });
     }));
 
@@ -29,8 +29,8 @@ describe('FormControlDirective', () => {
         debugElement = fixture.debugElement;
         element = debugElement.nativeElement;
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(FormControlDirective));
-        directiveInstance = directive.injector.get(FormControlDirective);
+        directive = debugElement.query(By.directive(FormControlComponent));
+        directiveInstance = directive.injector.get(FormControlComponent);
 
         spyOn(directiveInstance, 'buildComponentCssClass').and.callThrough();
     });

@@ -2,12 +2,12 @@ import { moduleMetadata } from '@storybook/angular';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormControlDirective, FormModule } from 'libs/core/src/lib/form/public_api';
+import { FormControlComponent, FormModule } from 'libs/core/src/lib/form/public_api';
 import { semanticStates } from '../../utils';
 
 export default {
     title: 'Fd form-control',
-    component: FormControlDirective,
+    component: FormControlComponent,
     moduleMetadata: moduleMetadata,
     decorators: [
         withKnobs,
