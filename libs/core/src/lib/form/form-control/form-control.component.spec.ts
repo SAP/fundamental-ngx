@@ -15,7 +15,7 @@ describe('FormControlComponent', () => {
         debugElement: DebugElement,
         element: HTMLElement;
 
-    let directive, directiveInstance;
+    let directive, componentInstance;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -30,19 +30,19 @@ describe('FormControlComponent', () => {
         element = debugElement.nativeElement;
         fixture.detectChanges();
         directive = debugElement.query(By.directive(FormControlComponent));
-        directiveInstance = directive.injector.get(FormControlComponent);
+        componentInstance = directive.injector.get(FormControlComponent);
 
-        spyOn(directiveInstance, 'buildComponentCssClass').and.callThrough();
+        spyOn(componentInstance, 'buildComponentCssClass').and.callThrough();
     });
 
     it('should create', () => {
-        expect(directive).toBeTruthy();
-        directiveInstance.ngOnInit();
-        expect(directiveInstance.buildComponentCssClass).toHaveBeenCalled();
+        expect(component).toBeTruthy();
+        componentInstance.ngOnInit();
+        expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should add appropriate classes', () => {
-        directiveInstance.ngOnChanges();
-        expect(directiveInstance.buildComponentCssClass).toHaveBeenCalled();
+        componentInstance.ngOnChanges();
+        expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
     });
 });
