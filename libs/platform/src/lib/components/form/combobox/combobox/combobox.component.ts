@@ -3,11 +3,14 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ElementRef, Host,
-    Inject, Injector,
+    ElementRef,
+    Host,
+    Inject,
+    Injector,
     OnInit,
     Optional,
-    Self, SkipSelf,
+    Self,
+    SkipSelf,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -28,7 +31,7 @@ import { FormFieldControl } from '../../form-control';
 import { BaseCombobox, ComboboxSelectionChangeEvent } from '../commons/base-combobox';
 import { ComboboxConfig } from '../combobox.config';
 import { OptionItem } from '../../../../domain';
-import { ComboboxMobileComponent } from '..';
+import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
 import { COMBOBOX_COMPONENT } from '../combobox.interface';
 import { FormField } from '../../form-field';
 

@@ -1,11 +1,13 @@
-@import '~fundamental-styles/dist/list.css';
+.fdp-combobox {
+    &__list-container {
+        &.fd-popover__popper {
+            width: 100% !important;
+            position: static !important;
+            overflow: hidden;
+        }
+    }
 
-.fd-popover__popper {
-    width: 100% !important;
-    position: static !important;
-    overflow: hidden;
-}
-
-.fd-combobox-input-menu-overflow {
-    overflow: auto;
+    &__list {
+        overflow: auto;
+    }
 }

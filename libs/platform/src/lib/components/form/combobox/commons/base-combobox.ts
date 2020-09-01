@@ -4,16 +4,18 @@ import {
     ContentChildren,
     Directive,
     ElementRef,
-    EventEmitter, Host,
+    EventEmitter,
+    Host,
     Inject,
     Input,
     OnDestroy,
     Optional,
     Output,
     QueryList,
-    Self, SkipSelf,
-    TemplateRef, ViewChild,
-    ViewChildren
+    Self,
+    SkipSelf,
+    TemplateRef,
+    ViewChild
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import {
@@ -34,11 +36,12 @@ import { takeUntil } from 'rxjs/operators';
 
 import {
     DIALOG_CONFIG,
-    DialogConfig, FocusEscapeDirection,
-    KeyUtil, ListComponent,
-    ListItemComponent,
-    MenuKeyboardService,
-    MobileModeConfig, TemplateDirective
+    DialogConfig,
+    FocusEscapeDirection,
+    KeyUtil,
+    ListComponent,
+    MobileModeConfig,
+    TemplateDirective
 } from '@fundamental-ngx/core';
 import {
     ArrayComboBoxDataSource,
@@ -53,8 +56,6 @@ import {
 import { isFunction, isJsObject, isString } from '../../../../utils/lang';
 import { CollectionBaseInput } from '../../collection-base.input';
 import { ComboboxComponent } from '../combobox/combobox.component';
-import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
-import { COMBOBOX_COMPONENT } from '../combobox.interface';
 import { ComboboxConfig, MatchingStrategy } from '../combobox.config';
 import { ContentDensity, FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
@@ -508,12 +509,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             .pipe(takeUntil(this._destroyed))
             .subscribe(data => {
                 this._suggestions = this._convertToOptionItems(data);
-                // if (this._suggestions.length === 0) {
-                //     this.isOpen = false;
-                //     this.openChange.next(this.isOpen);
-                //
-                //     return;
-                // }
 
                 this.stateChanges.next('initDataSource.open().');
 

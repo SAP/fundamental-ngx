@@ -1,7 +1,7 @@
 <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
 
 <ng-template #desktopTemplate>
-    <div cdkOverlayOrigin #selectTrigger="cdkOverlayOrigin">
+    <div class="fdp-combobox" cdkOverlayOrigin #selectTrigger="cdkOverlayOrigin">
         <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
     </div>
 
@@ -12,7 +12,7 @@
         [cdkConnectedOverlayOpen]="isOpen && _suggestions.length > 0"
         (overlayOutsideClick)="close($event)"
         [cdkConnectedOverlayMinWidth]="minWidth">
-        <div class="fd-popover__popper fd-popover__body--no-arrow">
+        <div class="fdp-combobox__list-container fd-popover__popper fd-popover__body--no-arrow">
             <ng-container [ngTemplateOutlet]="listTemplate"></ng-container>
         </div>
     </ng-template>
@@ -67,7 +67,7 @@
     <ul fd-list
         (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
-        class="fd-combobox-input-menu-overflow"
+        class="fdp-combobox__list"
         [style.maxHeight]="!mobile && maxHeight"
         [style.maxWidth]="autoResize && maxWidth + 'px'">
         <ng-content></ng-content>

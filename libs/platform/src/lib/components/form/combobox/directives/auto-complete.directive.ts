@@ -44,10 +44,10 @@ export class AutoCompleteDirective {
         ESCAPE
     ];
 
-    private oldValue: string;
-    private lastKeyUpEvent: KeyboardEvent;
+    private _oldValue: string;
+    private _lastKeyUpEvent: KeyboardEvent;
 
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private readonly _elementRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
@@ -64,14 +64,14 @@ export class AutoCompleteDirective {
                 return;
             }
 
-            this.oldValue = this.inputText;
+            this._oldValue = this.inputText;
             const item = this._searchByStrategy();
             if (item) {
                 this._typeahead(item.label);
             }
         }
 
-        this.lastKeyUpEvent = event;
+        this._lastKeyUpEvent = event;
     }
 
     private _typeahead(displayedValue: string): void {
@@ -88,9 +88,9 @@ export class AutoCompleteDirective {
 
     private _triggerTypeAhead(): boolean {
         return !(
-            this.lastKeyUpEvent &&
-            KeyUtil.isKeyCode(this.lastKeyUpEvent, CONTROL) &&
-            this.inputText === this.oldValue
+            this._lastKeyUpEvent &&
+            KeyUtil.isKeyCode(this._lastKeyUpEvent, CONTROL) &&
+            this.inputText === this._oldValue
         )
     }
 

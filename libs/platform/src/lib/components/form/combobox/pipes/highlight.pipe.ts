@@ -14,17 +14,17 @@ export class HighlightPipe implements PipeTransform {
         }
 
         if (matchingStrategy === MatchingStrategy.STARTS_WITH) {
-            return this.searchByStrategyStartsWith(value, searchText);
+            return this._searchByStrategyStartsWith(value, searchText);
         }
 
         if (matchingStrategy === MatchingStrategy.CONTAINS) {
-            return this.searchByStrategyContains(value, searchText);
+            return this._searchByStrategyContains(value, searchText);
         }
 
         return value;
     }
 
-    private searchByStrategyStartsWith(value: string, searchText: string): string {
+    private _searchByStrategyStartsWith(value: string, searchText: string): string {
         const valueLowerCase = value.toLowerCase();
         const searchTextLowerCase = searchText.toLowerCase();
         if (!valueLowerCase.startsWith(searchTextLowerCase)) {
@@ -38,7 +38,7 @@ export class HighlightPipe implements PipeTransform {
         }
     }
 
-    private searchByStrategyContains(value: string, searchText: string): string {
+    private _searchByStrategyContains(value: string, searchText: string): string {
         return value.replace(new RegExp(`(${searchText})`, 'gi'), '<strong>$1</strong>');
     }
 }
