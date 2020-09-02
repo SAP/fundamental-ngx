@@ -85,7 +85,7 @@ export class InputGroupComponent extends BaseComponent implements OnInit, AfterC
     constructor(
         _cd: ChangeDetectorRef,
         private _renderer: Renderer2,
-        protected _elementRef: ElementRef<any>,
+        protected _elementRef: ElementRef<HTMLElement>,
         protected _inputGroupConfig: InputGroupConfig
     ) {
         super(_cd);
@@ -113,11 +113,7 @@ export class InputGroupComponent extends BaseComponent implements OnInit, AfterC
 
     /** @hidden */
     ngAfterViewInit(): void {
-        /**
-         * Subscribe to input changes separately in ngAfterContentInit
-         * to have access to it's view inputElemRef
-         */
-        this._inputControls.changes.pipe(startWith(this._inputControls)).subscribe(() => this._setInputClassName());
+        this._inputControls.changes.pipe(startWith(null)).subscribe(() => this._setInputClassName());
     }
 
     /** @hidden */
@@ -133,17 +129,16 @@ export class InputGroupComponent extends BaseComponent implements OnInit, AfterC
     }
 
     /** @hidden */
-    private _setInputClassName(inputControls = this._inputControls): void {
-        if (!inputControls) {
+    private _setInputClassName(): void {
+        const hostElement = this._elementRef.nativeElement;
+
+        if (!hostElement) {
             return;
         }
 
-        inputControls
-            .map(({ inputElemRef }) => inputElemRef.nativeElement)
-            .filter((inputEl) => !!inputEl)
-            .forEach((inputEl: HTMLElement) => {
-                this._renderer.addClass(inputEl, CSS_CLASS_NAME.inputGroupInnerInput);
-            });
+        hostElement.querySelectorAll('fdp-input input').forEach((inputEl: HTMLElement) => {
+            this._renderer.addClass(inputEl, CSS_CLASS_NAME.inputGroupInnerInput);
+        });
     }
 
     /** @hidden */
