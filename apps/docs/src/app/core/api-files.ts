@@ -41,7 +41,7 @@ export const API_FILES = {
     fileInput: ['FileInputComponent', 'FileSelectDirective', 'FileDragndropDirective'],
     fileUploader: ['FileUploaderComponent', 'FileUploaderSelectDirective', 'FileUploaderDragndropDirective'],
     form: [
-        'FormControlDirective',
+        'FormControlComponent',
         'FormGroupComponent',
         'FormItemComponent',
         'FormLabelComponent',

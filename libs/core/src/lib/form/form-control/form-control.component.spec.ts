@@ -1,4 +1,4 @@
-import { FormControlDirective } from './form-control.directive';
+import { FormControlComponent } from './form-control.component';
 import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -9,17 +9,17 @@ import { By } from '@angular/platform-browser';
 })
 export class TestComponent {}
 
-describe('FormControlDirective', () => {
+describe('FormControlComponent', () => {
     let fixture: ComponentFixture<TestComponent>,
         component: TestComponent,
         debugElement: DebugElement,
         element: HTMLElement;
 
-    let directive, directiveInstance;
+    let directive, componentInstance;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [FormControlDirective, TestComponent]
+            declarations: [FormControlComponent, TestComponent]
         });
     }));
 
@@ -29,20 +29,20 @@ describe('FormControlDirective', () => {
         debugElement = fixture.debugElement;
         element = debugElement.nativeElement;
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(FormControlDirective));
-        directiveInstance = directive.injector.get(FormControlDirective);
+        directive = debugElement.query(By.directive(FormControlComponent));
+        componentInstance = directive.injector.get(FormControlComponent);
 
-        spyOn(directiveInstance, 'buildComponentCssClass').and.callThrough();
+        spyOn(componentInstance, 'buildComponentCssClass').and.callThrough();
     });
 
     it('should create', () => {
-        expect(directive).toBeTruthy();
-        directiveInstance.ngOnInit();
-        expect(directiveInstance.buildComponentCssClass).toHaveBeenCalled();
+        expect(component).toBeTruthy();
+        componentInstance.ngOnInit();
+        expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should add appropriate classes', () => {
-        directiveInstance.ngOnChanges();
-        expect(directiveInstance.buildComponentCssClass).toHaveBeenCalled();
+        componentInstance.ngOnChanges();
+        expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
     });
 });

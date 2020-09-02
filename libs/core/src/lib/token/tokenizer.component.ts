@@ -20,7 +20,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FormControlDirective } from '../form/form-control/form-control.directive';
+import { FormControlComponent } from '../form/form-control/form-control.component';
 import { TokenComponent } from './token.component';
 import { RtlService } from '../utils/services/rtl.service';
 import { Subscription } from 'rxjs';
@@ -44,8 +44,8 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     tokenList: QueryList<TokenComponent>;
 
     /** @hidden */
-    @ContentChild(forwardRef(() => FormControlDirective))
-    input: FormControlDirective;
+    @ContentChild(forwardRef(() => FormControlComponent))
+    input: FormControlComponent;
 
     /** @hidden */
     @ViewChild('tokenizerInner')
