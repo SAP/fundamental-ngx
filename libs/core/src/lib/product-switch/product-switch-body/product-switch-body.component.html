@@ -17,6 +17,7 @@
             tabindex="0"
             class="fd-product-switch__item"
             [ngClass]="{ selected: product.selected }"
+            (keydown)="keyDownHandle($event)"
             (click)="itemClick(product, $event)"
             [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
             [stickInPlace]="product.stickToPosition">

@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { ProductSwitchItem } from './product-switch.item';
 import { FdDropEvent } from '../../utils/drag-and-drop/dnd-list/dnd-list.directive';
+import { KeyUtil } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-product-switch-body',
@@ -72,6 +73,14 @@ export class ProductSwitchBodyComponent implements OnInit {
     @HostListener('window:resize', [])
     onResize(): void {
         this.checkSize();
+    }
+
+    /** @hidden */
+    keyDownHandle(event: KeyboardEvent): void {
+        if (KeyUtil.isKey(event, ['Enter', ' '])) {
+            (<HTMLElement>event.target).click();
+            event.preventDefault();
+        }
     }
 
     /** @hidden */
