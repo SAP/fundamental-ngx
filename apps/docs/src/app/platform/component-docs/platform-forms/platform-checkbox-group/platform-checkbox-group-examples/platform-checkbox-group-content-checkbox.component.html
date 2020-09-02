@@ -2,7 +2,7 @@
 <h3>Checkbox group created from projected checkboxes</h3>
 <fdp-form-group [multiLayout]="true" [formGroup]="form1">
     <fdp-form-field #fl1 [id]="'fruits'" [label]="'My favourite fruits:'" zone="zLeft" rank="1">
-        <fdp-checkbox-group [name]="'fruits'" [formControl]="fl1.formControl">
+        <fdp-checkbox-group [name]="'fruits'" ariaLabel="My favourite fruits" [formControl]="fl1.formControl">
             <fdp-checkbox [value]="'apple'" [label]="'Apple'" [disabled]="true"></fdp-checkbox>
             <fdp-checkbox [value]="'banana'" [label]="'Banana'"></fdp-checkbox>
             <fdp-checkbox [value]="'guava'" [label]="'Guava'" [disabled]="true"></fdp-checkbox>
@@ -15,7 +15,7 @@
 <p>Pre-selection based on value passed</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form2" [object]="hobbies">
     <fdp-form-field #fl2 [id]="'hobbies'" [label]="'My Hobbies:'" zone="zLeft" rank="1">
-        <fdp-checkbox-group [name]="'hobby'" [formControl]="fl2.formControl">
+        <fdp-checkbox-group [name]="'hobby'" ariaLabel="My Hobbies" [formControl]="fl2.formControl">
             <fdp-checkbox [value]="'cooking'" [label]="'Cooking'"></fdp-checkbox>
             <fdp-checkbox [value]="'painting'" [label]="'Painting'"></fdp-checkbox>
             <fdp-checkbox [value]="'coding'" [label]="'Coding'"></fdp-checkbox>
@@ -30,7 +30,7 @@
 <p>Pre-selection based on value passed from FormGroup</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form3">
     <fdp-form-field #fl4 [id]="'visited1'" [label]="'visited countries'" zone="zLeft" rank="1">
-        <fdp-checkbox-group [name]="'countries'" formControlName="visited">
+        <fdp-checkbox-group [name]="'countries'" ariaLabel="visited countries" formControlName="visited">
             <fdp-checkbox [value]="'Italy'" [label]="'Italy'"></fdp-checkbox>
             <fdp-checkbox [value]="'France'" [label]="'France'"></fdp-checkbox>
             <fdp-checkbox [value]="'Switzerland'" [label]="'Switzerland'"></fdp-checkbox>
@@ -43,15 +43,9 @@
 <br />
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true" [formGroup]="form3">
-    <fdp-form-field
-        #fl3
-        [id]="'visited countries'"
-        [label]="'Disabled checkbox Group: '"
-        [disabled]="true"
-        zone="zLeft"
-        rank="1"
-    >
-        <fdp-checkbox-group [name]="'countries'" [formControl]="fl3.formControl">
+    <fdp-form-field #fl3 [id]="'visited countries'" [label]="'Disabled checkbox Group: '" [disabled]="true" zone="zLeft"
+        rank="1">
+        <fdp-checkbox-group [name]="'countries'" ariaLabel="Disabled checkbox Group" [formControl]="fl3.formControl">
             <fdp-checkbox [value]="'Italy'" [label]="'Italy'"></fdp-checkbox>
             <fdp-checkbox [value]="'France'" [label]="'France'"></fdp-checkbox>
             <fdp-checkbox [value]="'Switzerland'" [label]="'Switzerland'"></fdp-checkbox>
@@ -60,12 +54,12 @@
     </fdp-form-field>
 </fdp-form-group>
 
-<separator></separator>
+<hr/>
 <h3>Template Driven Form Examples:</h3>
 <h3>Checkbox group created from projected checkboxes</h3>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'subjects'" [label]="'Subjects selected:'" zone="zLeft" rank="1">
-        <fdp-checkbox-group [name]="'semester1'" [(ngModel)]="subjects">
+        <fdp-checkbox-group [name]="'semester1'" ariaLabel="Subjects selected" [(ngModel)]="subjects">
             <fdp-checkbox [value]="'Math'" [label]="'Math'" [disabled]="true"></fdp-checkbox>
             <fdp-checkbox [value]="'Chemistry'" [label]="'Chemistry'"></fdp-checkbox>
             <fdp-checkbox [value]="'Physics'" [label]="'Physics'"></fdp-checkbox>
@@ -78,7 +72,7 @@
 <p>Pre-selection based on value passed</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'reptiles'" [label]="'All reptiles:'" zone="zLeft" rank="1">
-        <fdp-checkbox-group [name]="'reptiles'" [(ngModel)]="reptiles">
+        <fdp-checkbox-group [name]="'reptiles'" ariaLabel="All reptiles" [(ngModel)]="reptiles">
             <fdp-checkbox [value]="'Snakes'" [label]="'Snakes'"></fdp-checkbox>
             <fdp-checkbox [value]="'Crocodiles'" [label]="'Crocodiles'"></fdp-checkbox>
             <fdp-checkbox [value]="'Lizards'" [label]="'Lizards'"></fdp-checkbox>
@@ -91,7 +85,7 @@
 <p>Disabled checkbox group</p>
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field [id]="'countries'" [label]="'Disabled checkbox Group: '" zone="zLeft" rank="1">
-        <fdp-checkbox-group [name]="'visited countries'" [disabled]="true">
+        <fdp-checkbox-group [name]="'visited countries'" ariaLabel="Disabled checkbox Group" [disabled]="true">
             <fdp-checkbox [value]="'Italy'" [label]="'Italy'"></fdp-checkbox>
             <fdp-checkbox [value]="'France'" [label]="'France'"></fdp-checkbox>
             <fdp-checkbox [value]="'Switzerland'" [label]="'Switzerland'"></fdp-checkbox>

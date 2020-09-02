@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Input, Component, ViewEncapsulation } from '@angular/core';
 import { LocalizationEditorItemComponent } from '../localization-editor-item/localization-editor-item.component';
 import { FormStates } from '../../form/form-control/form-states';
-
 /**
+ * @deprecated
+ * Localization Editor component is depricated since version 0.22.0
  *  Component that represents the field which is always visible and is rendered outside the popover.
  *  ```html
  *  <fd-localization-editor-main [label]="'EN'">

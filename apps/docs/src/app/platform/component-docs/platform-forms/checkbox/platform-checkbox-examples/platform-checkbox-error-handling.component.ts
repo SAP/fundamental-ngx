@@ -2,7 +2,7 @@ import { FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fdp-checkbox-error-handling',
+    selector: 'fdp-platform-checkbox-error-handling',
     templateUrl: 'platform-checkbox-error-handling.component.html'
 })
 export class PlatformChekboxStyleComponent {

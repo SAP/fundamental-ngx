@@ -72,6 +72,10 @@ export class ShellbarUserMenuComponent {
         }
     };
 
+    /** Whether or not to show the popover arrow */
+    @Input()
+    noArrow = false;
+
     /** Event emitted on item click */
     @Output()
     itemClicked: EventEmitter<void> = new EventEmitter<void>();

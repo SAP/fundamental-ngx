@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    Attribute,
     ChangeDetectorRef,
     ChangeDetectionStrategy,
     Component,
@@ -53,6 +54,12 @@ let nextUniqueId = 0;
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxComponent), multi: true }]
 })
 export class CheckboxComponent extends BaseInput implements AfterViewInit {
+    /**
+     * Checkbox tooltip
+     */
+    @Input()
+    title: string;
+
     /** set to true if binary checkbox */
     @Input()
     isBinary = false;
@@ -157,12 +164,14 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         protected _changeDetector: ChangeDetectorRef,
-        private _ngZone: NgZone
+        private _ngZone: NgZone,
+        @Attribute('tabIndexValue') public tabIndexValue: number = 0
     ) {
         super(_changeDetector, ngControl, ngForm, formField, formControl);
         // necessary to fulfill baseInput check.
         // case: fdp-checkbox passed in declarative fdp-checkbox-group without id and name.
         this.name = `fdp-checkbox-${nextUniqueId++}`;
+        this.tabIndexValue = tabIndexValue;
     }
 
     /** ControlValueAccessor */

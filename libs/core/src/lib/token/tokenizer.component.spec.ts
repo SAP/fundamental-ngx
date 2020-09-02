@@ -3,7 +3,7 @@ import { Component, ViewChild, ContentChildren, forwardRef, QueryList } from '@a
 import { RtlService, TokenizerInputDirective } from '@fundamental-ngx/core';
 
 import { whenStable } from '../utils/tests/when-stable';
-import { FormControlDirective } from '../form/form-control/form-control.directive';
+import { FormControlComponent } from '../form/form-control/form-control.component';
 import { TokenComponent, TokenizerComponent } from './public_api';
 @Component({
     selector: 'fd-tokenizer-test-component',
@@ -18,7 +18,7 @@ import { TokenComponent, TokenizerComponent } from './public_api';
 })
 class TokenizerWrapperComponent {
     @ViewChild(TokenizerComponent) tokenizer: TokenizerComponent;
-    @ViewChild(FormControlDirective) formControl: FormControlDirective;
+    @ViewChild(FormControlComponent) formControl: FormControlComponent;
 
     @ContentChildren(TokenComponent, { read: TokenComponent })
     tokenList: QueryList<TokenComponent>;
@@ -34,7 +34,7 @@ describe('TokenizerComponent', () => {
                 TokenizerComponent,
                 TokenComponent,
                 TokenizerWrapperComponent,
-                FormControlDirective,
+                FormControlComponent,
                 TokenizerInputDirective
             ],
             providers: [RtlService]

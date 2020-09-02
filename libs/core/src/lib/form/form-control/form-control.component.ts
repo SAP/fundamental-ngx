@@ -1,4 +1,4 @@
-import { Input, ElementRef, Directive, OnInit, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormStates } from './form-states';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
@@ -9,12 +9,15 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
  * <input type="text" fd-form-control />
  * ```
  */
-@Directive({
-    // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
-    selector: '[fd-form-control]'
+@Component({
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-form-control]',
+    template: `<ng-content></ng-content>`,
+    styleUrls: ['./form-control.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges {
+export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges {
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fdp-binary-checkbox-no-form',
+    selector: 'fdp-platform-binary-checkbox-no-form',
     templateUrl: 'platform-binary-checkbox-no-form.component.html'
 })
 export class PlatformChekboxNoFormComponent {

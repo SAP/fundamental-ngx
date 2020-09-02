@@ -4,7 +4,10 @@ import { LocalizationEditorItemComponent } from './localization-editor-item.comp
 import { LocalizationEditorModule } from '../localization-editor.module';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
+/**
+ * @deprecated
+ * Localization Editor component is depricated since version 0.22.0
+ */
 @Component({
     selector: 'fd-localization-item-test',
     template: `<fd-localization-editor-item>
@@ -14,7 +17,7 @@ import { Component } from '@angular/core';
         <input fd-localization-editor-input />
     </fd-localization-editor-item>`
 })
-class TestLocalizationItemComponent {}
+class TestLocalizationItemComponent { }
 
 describe('LocalizationEditorItemComponent', () => {
     let component: LocalizationEditorItemComponent;

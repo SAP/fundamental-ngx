@@ -8,6 +8,10 @@
         [tristateSelectable]="tristateSelectable"
         [state]="stateType"
         [compact]="contentDensity === 'compact'"
+        [title]="title"
+        [ariaLabel]="ariaLabel || null"
+        [ariaLabelledBy]="ariaLabelledBy"
+        [ariaDescribedBy]="ariaDescribedBy"
         [ngModel]="checkboxCurrentValue"
         (ngModelChange)="onModelChange()"
     >

@@ -15,6 +15,10 @@ import { LocalizationEditorItemComponent } from './localization-editor-item/loca
 import { ButtonModule } from '../button/button.module';
 import { ListModule } from '../list/list.module';
 
+/**
+ * @deprecated
+ * Localization Editor component is depricated since version 0.22.0
+ */
 @NgModule({
     declarations: [
         LocalizationEditorComponent,
@@ -38,4 +42,4 @@ import { ListModule } from '../list/list.module';
     ],
     imports: [CommonModule, PopoverModule, InputGroupModule, ListModule, ButtonModule]
 })
-export class LocalizationEditorModule {}
+export class LocalizationEditorModule { }

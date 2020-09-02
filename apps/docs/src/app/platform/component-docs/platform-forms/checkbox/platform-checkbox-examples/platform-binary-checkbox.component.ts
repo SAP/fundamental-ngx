@@ -2,7 +2,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Component, Optional } from '@angular/core';
 
 @Component({
-    selector: 'fdp-binary-checkbox',
+    selector: 'fdp-platform-binary-checkbox',
     templateUrl: 'platform-binary-checkbox.component.html'
 })
 export class PlatformCompactChekboxExampleComponent {

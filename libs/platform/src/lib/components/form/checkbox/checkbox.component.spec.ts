@@ -303,24 +303,29 @@ describe('Checkbox test Component', () => {
 
         const checkboxes = host.fdpCheckboxes.toArray();
         const checkboxLables = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
+        const inputElem = fixture.debugElement.queryAll(By.css('input'));
+        expect(inputElem[7].nativeElement.getAttribute('aria-checked')).toEqual('true');
 
         // fisrt click to unchecked state
         checkboxLables[7].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example5').value).toBeFalsy();
         expect(checkboxes[7].checkboxCurrentValue).toEqual(false);
+        expect(inputElem[7].nativeElement.getAttribute('aria-checked')).toEqual('false');
 
         // second click to intermediate state
         checkboxLables[7].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example5').value).toBeFalsy();
         expect(checkboxes[7].checkboxCurrentValue).toEqual(null);
+        expect(inputElem[7].nativeElement.getAttribute('aria-checked')).toEqual('mixed');
 
         // third click to checked state
         checkboxLables[7].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example5').value).toBeTruthy();
         expect(checkboxes[7].checkboxCurrentValue).toEqual(true);
+        expect(inputElem[7].nativeElement.getAttribute('aria-checked')).toEqual('true');
     });
 });
 
