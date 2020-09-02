@@ -23,6 +23,9 @@
         },
         "app-shell": {
             "tags": ["app"]
+        },
+        "app-shell-app": {
+            "tags": []
         }
     }
 }

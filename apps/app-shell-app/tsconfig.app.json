@@ -1,8 +1,9 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
     "types": [
-      "jasmine"
+
     ],
     "paths": {
       "@fundamental-ngx/core": [
@@ -10,16 +11,11 @@
       ],
       "@fundamental-ngx/platform": [
         "libs/platform/src/index.ts"
-      ],
-      "@fundamental-ngx/app-shell": [
-        "libs/app-shell/src/index.ts"
       ]
     }
   },
-  "angularCompilerOptions": {
-    "enableIvy": true
-  },
-  "include": [
-    "**/*.ts"
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
   ]
 }
