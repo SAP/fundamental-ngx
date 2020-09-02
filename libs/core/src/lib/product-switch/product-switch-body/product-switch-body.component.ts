@@ -77,9 +77,16 @@ export class ProductSwitchBodyComponent implements OnInit {
 
     /** @hidden */
     keyDownHandle(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, ['Enter', ' '])) {
-            (<HTMLElement>event.target).click();
+        const target = (<HTMLElement>event.target);
+        if (!KeyUtil.isKey(event, 'Tab')) {
             event.preventDefault();
+        }
+        if (KeyUtil.isKey(event, ['Enter', ' '])) {
+            target.click();
+        } else if (!this.isListMode()) {
+            this.handleNoListKeydown(event);
+        } else if (this.isListMode() && KeyUtil.isKey(event, ['ArrowDown', 'ArrowUp'])) {
+            this.handleListArrowUpDown(event);
         }
     }
 
@@ -99,6 +106,69 @@ export class ProductSwitchBodyComponent implements OnInit {
             this.listMode = window.innerWidth < 588;
         } else {
             this.listMode = window.innerWidth < 776;
+        }
+    }
+
+    /** @hidden */
+    private handleNoListKeydown(event: KeyboardEvent): void {
+        const target = (<HTMLElement>event.target);
+        if (KeyUtil.isKey(event, 'ArrowLeft') && target.previousElementSibling) {
+            (<HTMLElement>target.previousElementSibling).focus();
+        } else if (KeyUtil.isKey(event, 'ArrowRight') && target.nextElementSibling) {
+            (<HTMLElement>target.nextElementSibling).focus();
+        } else if (KeyUtil.isKey(event, ['ArrowDown', 'ArrowUp'])) {
+            if (this.products.length >= 7) {
+                this.handleNoListMoreThanSeven(event);
+            } else if (this.products.length < 7) {
+                this.handleNoListLessThanSeven(event);
+            }
+        }
+    }
+
+    /** @hidden */
+    private handleNoListMoreThanSeven(event: KeyboardEvent): void {
+        const target = (<HTMLElement>event.target);
+        if (KeyUtil.isKey(event, 'ArrowDown')) {
+            if (target.nextElementSibling && target.nextElementSibling.nextElementSibling &&
+                target.nextElementSibling.nextElementSibling.nextElementSibling &&
+                target.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling) {
+                (<HTMLElement>target.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling).focus();
+            }
+        }
+        if (KeyUtil.isKey(event, 'ArrowUp')) {
+            if (target.previousElementSibling && target.previousElementSibling.previousElementSibling &&
+                target.previousElementSibling.previousElementSibling.previousElementSibling &&
+                target.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling) {
+                (<HTMLElement>target.previousElementSibling.previousElementSibling.previousElementSibling
+                    .previousElementSibling).focus();
+            }
+        }
+    }
+
+    /** @hidden */
+    private handleNoListLessThanSeven(event: KeyboardEvent): void {
+        const target = (<HTMLElement>event.target);
+        if (KeyUtil.isKey(event, 'ArrowDown')) {
+            if (target.nextElementSibling && target.nextElementSibling.nextElementSibling &&
+                target.nextElementSibling.nextElementSibling.nextElementSibling) {
+                (<HTMLElement>target.nextElementSibling.nextElementSibling.nextElementSibling).focus();
+            }
+        }
+        if (KeyUtil.isKey(event, 'ArrowUp')) {
+            if (target.previousElementSibling && target.previousElementSibling.previousElementSibling &&
+                target.previousElementSibling.previousElementSibling.previousElementSibling) {
+                (<HTMLElement>target.previousElementSibling.previousElementSibling.previousElementSibling).focus();
+            }
+        }
+    }
+
+    /** @hidden */
+    private handleListArrowUpDown(event: KeyboardEvent): void {
+        const target = (<HTMLElement>event.target);
+        if (this.isListMode() && KeyUtil.isKey(event, 'ArrowDown') && target.nextElementSibling) {
+            (<HTMLElement>target.nextElementSibling).focus();
+        } else if (this.isListMode() && KeyUtil.isKey(event, 'ArrowUp') && target.previousElementSibling) {
+            (<HTMLElement>target.previousElementSibling).focus();
         }
     }
 }
