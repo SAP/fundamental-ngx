@@ -33,6 +33,7 @@ import { TableToolbarExampleComponent } from './examples/table-toolbar-example.c
 import { TableCustomDialogComponent } from './examples/table-custom-columns-example/table-custom-dialog.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 
 const routes: Routes = [
     {
@@ -61,6 +62,7 @@ const routes: Routes = [
         ObjectStatusModule,
         SharedDocumentationPageModule,
         RouterModule.forChild(routes),
+        SharedDocumentationModule
     ],
     exports: [RouterModule],
     declarations: [
