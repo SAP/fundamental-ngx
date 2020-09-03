@@ -18,6 +18,7 @@ import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FileInputModule } from './file-input/file-input.module';
 import { FileUploaderModule } from './file-uploader/file-uploader.module';
+import { FixedCardLayoutModule } from './fixed-card-layout/fixed-card-layout.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
 import { InfiniteScrollModule } from './infinite-scroll/infinite-scroll.module';
@@ -88,6 +89,7 @@ import { CardModule } from './card/card.module';
         DragAndDropModule,
         FileInputModule,
         FileUploaderModule,
+        FixedCardLayoutModule,
         FormModule,
         IconModule,
         InfoLabelModule,

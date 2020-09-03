@@ -1,0 +1,77 @@
+<div style="margin-bottom: 1rem;">
+    Show/Hide Cards:
+    <button fd-button (click)="showHideCard('card1')">{{ card1Visibility ? 'Hide Card1' : 'Show Card1' }}</button>
+    |
+    <button fd-button (click)="showHideCard('card2')">{{ card2Visibility ? 'Hide Card2' : 'Show Card2' }}</button>
+    |
+    <button fd-button (click)="showHideCard('card3')">{{ card3Visibility ? 'Hide Card3' : 'Show Card3' }}</button>
+</div>
+
+<fd-fixed-card-layout>
+    <ng-container *ngIf="card1Visibility">
+        <fd-card *fdCardDef style="color: blueviolet;" header="1">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut facilis natus vitae architecto similique eos
+            atque, quas quibusdam saepe culpa ipsum ad! Laudantium dignissimos temporibus facere quas architecto tenetur
+            asperiores, porro vel! In unde cumque enim rem molestias optio nam.
+        </fd-card>
+    </ng-container>
+    <ng-container *ngIf="card2Visibility">
+        <fd-card *fdCardDef style="color: red;" header="2">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit culpa aperiam a, doloribus nostrum
+            quidem quos, totam dolores maiores facilis numquam inventore repellat tempora explicabo dolore sit suscipit
+            error nemo. Sapiente, beatae omnis maxime officia fuga, dolorem nam rem dignissimos repudiandae repellat
+            tenetur fugiat quia alias enim cupiditate a. Quo error natus, aliquam nam quidem corrupti similique quaerat,
+            saepe eligendi odit est, ut nisi numquam ea dicta atque perspiciatis necessitatibus. Vero sint
+            exercitationem nobis cum obcaecati. Quam obcaecati quae ad?
+        </fd-card>
+    </ng-container>
+    <ng-container *ngIf="card3Visibility">
+        <fd-card *fdCardDef style="color: green;" header="3">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, labore similique temporibus quos ea quas nihil
+            dolor sit vitae? Non natus iste, molestiae praesentium perferendis iure dolor mollitia nemo blanditiis
+            quidem necessitatibus earum eaque ducimus facere labore laborum repellat! Quis alias error earum quas
+            blanditiis!
+        </fd-card>
+    </ng-container>
+    <fd-card *fdCardDef style="color: rgb(87, 35, 211);" header="4">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, facilis. Quas omnis recusandae hic laboriosam
+        delectus, libero, nostrum maiores ratione nobis cupiditate molestias ipsum nulla inventore minima earum at
+        quidem sapiente ducimus labore quasi unde eligendi dignissimos totam facilis? Vero. Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Ex ipsam quod eos facilis sequi consequatur.
+    </fd-card>
+    <fd-card *fdCardDef header="5">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi suscipit beatae quos incidunt quis. Optio eos
+        porro sed facilis omnis?
+    </fd-card>
+    <fd-card *fdCardDef header="6">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium doloribus inventore incidunt impedit
+        voluptate, quasi nam earum dolorem vero ut adipisci nobis at maiores. Illo perspiciatis dolor atque quidem,
+        accusamus quaerat magni quia dignissimos mollitia quam minima reiciendis, incidunt ex!
+    </fd-card>
+    <fd-card *fdCardDef header="7">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, enim molestias atque amet laboriosam libero
+        maxime ullam consequuntur accusamus necessitatibus excepturi tempore error recusandae in. Veniam, ea! Quisquam
+        dolorum repellat excepturi perspiciatis, pariatur similique? Cum aut debitis iste porro? Voluptate, ullam sunt?
+        Placeat possimus consequatur voluptatibus modi. Odit, a similique eaque dolor alias atque adipisci perferendis,
+        ullam explicabo nemo dignissimos et vel! Doloribus labore voluptatem, ab neque saepe cumque magni! Sint,
+        delectus. Itaque animi exercitationem reprehenderit dolorem in facere impedit.
+    </fd-card>
+    <fd-card *fdCardDef header="8">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora adipisci inventore laborum nisi quas odio
+        placeat? Dolor perspiciatis hic omnis praesentium, debitis distinctio voluptatum expedita maxime ratione
+        pariatur magnam quo modi atque sapiente quia, tempore cum quisquam doloremque, repellat aperiam nobis rem.
+        Numquam distinctio ab, tempora culpa eaque iure aspernatur, dicta assumenda nobis porro, rem nemo. Laborum
+        recusandae soluta quas ex. Fugiat, dignissimos harum dicta ex obcaecati repudiandae provident ea itaque soluta
+        neque quae repellendus exercitationem dolorem ipsa corrupti eius suscipit autem voluptatum quia doloribus
+        placeat, delectus numquam facilis quam. Odit incidunt amet praesentium commodi ipsam repellat odio eum id.
+    </fd-card>
+    <fd-card *fdCardDef header="9">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita harum cum obcaecati soluta sint atque.
+        Aliquid fuga iusto ut tempora unde dignissimos aspernatur error, ab est, architecto beatae dolorum nulla eveniet
+        blanditiis modi quos rerum accusantium aliquam? Nemo adipisci exercitationem dolore ducimus non facere neque qui
+        quis, similique, veritatis at repudiandae consectetur quaerat modi, natus odio suscipit vitae animi totam soluta
+        sint corrupti perspiciatis. Ratione pariatur cum deleniti expedita. Neque voluptate nemo sapiente in odio ab
+        dolorum, explicabo quo pariatur nisi delectus, perspiciatis molestiae aut nulla eveniet accusantium. Porro quia
+        veniam perferendis facere ratione quam, possimus corporis cupiditate magni delectus.
+    </fd-card>
+</fd-fixed-card-layout>
