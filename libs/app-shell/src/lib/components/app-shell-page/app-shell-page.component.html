@@ -1,0 +1,23 @@
+<div class="fd-shell fd-shell--fundamentals">
+    <div class="fd-shell__header" *ngIf="!hideHeader">
+        <ng-template [ngIf]="!header" [ngIfElse]="appProvidedHeader">
+            <fds-app-header></fds-app-header>
+        </ng-template>
+    </div>
+
+    <div class="fd-shell__app">
+        <div class="fd-app">
+            <main class="fd-app__main">
+                <ng-content select="fds-app-content"></ng-content>
+            </main>
+        </div>
+    </div>
+
+    <div class="fd-shell__footer" *ngIf="!hideFooter">
+        <ng-content select="fds-app-footer"></ng-content>
+    </div>
+</div>
+
+<ng-template #appProvidedHeader>
+    <ng-content select="fds-app-header"></ng-content>
+</ng-template>

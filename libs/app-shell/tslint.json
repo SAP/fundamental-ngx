@@ -1,10 +1,22 @@
 {
-    "extends": "../../tslint.json",
-    "rules": {
-        "directive-selector": [true, "attribute", "fundamentalNgx", "camelCase"],
-        "component-selector": [true, "element", "fundamental-ngx", "kebab-case"]
-    },
-    "linterOptions": {
-        "exclude": ["!**/*"]
-    }
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "fds",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "fds",
+      "kebab-case"
+    ]
+  },
+  "linterOptions": {
+    "exclude": [
+      "!**/*"
+    ]
+  }
 }
