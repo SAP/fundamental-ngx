@@ -6,8 +6,8 @@ import { DragAndDropModule } from '../../utils/drag-and-drop/drag-and-drop.modul
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { createKeyboardEvent } from '../../../../../platform/src/lib/testing/event-objects';
-import { ENTER, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { createKeyboardEvent } from '../../utils/tests/event-objects';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'fd-test-component',
@@ -44,7 +44,7 @@ export class TestComponent {
     ];
 }
 
-fdescribe('ProductSwitchBodyComponent', () => {
+describe('ProductSwitchBodyComponent', () => {
     let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement, element: HTMLElement;
 
     let component, componentInstance: ProductSwitchBodyComponent;
@@ -100,6 +100,41 @@ fdescribe('ProductSwitchBodyComponent', () => {
         const keyboardEvent = createKeyboardEvent('keydown', LEFT_ARROW, 'ArrowLeft', nextEl);
         nextEl.dispatchEvent(keyboardEvent);
 
+        expect(document.activeElement).toBe(el.nativeElement);
+    });
+
+    it('should handle no list keydown arrow down', () => {
+        spyOn(componentInstance, 'isListMode').and.returnValue(false);
+        const el = fixture.debugElement.query(By.css('li'));
+        const nextElDown = el.nativeElement.nextElementSibling.nextElementSibling.nextElementSibling;
+        el.nativeElement.focus();
+        const keyboardEvent = createKeyboardEvent('keydown', DOWN_ARROW, 'ArrowDown', el.nativeElement);
+        el.nativeElement.dispatchEvent(keyboardEvent);
+
+        expect(document.activeElement).toBe(nextElDown);
+    });
+
+    it('should handle no list keydown arrow up', () => {
+        spyOn(componentInstance, 'isListMode').and.returnValue(false);
+        const el = fixture.debugElement.query(By.css('li'));
+        const nextElDown = el.nativeElement.nextElementSibling.nextElementSibling.nextElementSibling;
+        nextElDown.focus();
+        const keyboardEvent = createKeyboardEvent('keydown', UP_ARROW, 'ArrowUp', nextElDown);
+        nextElDown.dispatchEvent(keyboardEvent);
+
+        expect(document.activeElement).toBe(el.nativeElement);
+    });
+
+    it('should handle list arrow up/down', () => {
+        spyOn(componentInstance, 'isListMode').and.returnValue(true);
+        const el = fixture.debugElement.query(By.css('li'));
+        const nextElDown = el.nativeElement.nextElementSibling;
+        el.nativeElement.focus();
+        let keyboardEvent = createKeyboardEvent('keydown', DOWN_ARROW, 'ArrowDown', el.nativeElement);
+        el.nativeElement.dispatchEvent(keyboardEvent);
+        expect(document.activeElement).toBe(nextElDown);
+        keyboardEvent = createKeyboardEvent('keydown', UP_ARROW, 'ArrowUp', nextElDown);
+        nextElDown.dispatchEvent(keyboardEvent);
         expect(document.activeElement).toBe(el.nativeElement);
     });
 });
