@@ -9,6 +9,7 @@
             [disabled]="disabled"
             [closeOnOutsideClick]="true"
             [fillControlMode]="fillControlMode"
+            [appendTo]="'body'"
             class="fd-multi-input-popover-custom"
         >
             <fd-popover-control>
@@ -78,6 +79,7 @@
         (focusEscapeList)="handleListFocusEscape($event)"
         [multiInputMode]="true"
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
+        [style.minWidth]="'100%'"
     >
         <li
             *ngFor="let value of displayedValues; let ind = index"
