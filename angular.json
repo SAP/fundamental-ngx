@@ -382,10 +382,16 @@
                         "main": "apps/app-shell-app/src/main.ts",
                         "polyfills": "apps/app-shell-app/src/polyfills.ts",
                         "tsConfig": "apps/app-shell-app/tsconfig.app.json",
-                        "aot": true,
-                        "assets": ["apps/app-shell-app/src/favicon.ico", "apps/app-shell-app/src/assets"],
-                        "styles": ["apps/app-shell-app/src/styles.scss"],
-                        "scripts": []
+                      "aot": true,
+                      "assets": [
+                        "apps/app-shell-app/src/favicon.ico",
+                        "apps/app-shell-app/src/assets"
+                      ],
+                      "styles": [
+                        "node_modules/fundamental-styles/dist/icon.css",
+                        "apps/app-shell-app/src/styles.scss"
+                      ],
+                      "scripts": []
                     },
                     "configurations": {
                         "production": {

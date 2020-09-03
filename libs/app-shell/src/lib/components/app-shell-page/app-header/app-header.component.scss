@@ -1,0 +1,49 @@
+.fd-shellbar {
+    &__logo {
+        display: inline-block;
+        font-size: 20px;
+        line-height: 1.5;
+        font-weight: 700;
+        margin: 0;
+        text-align: center;
+        color: #fff;
+        color: var(--sapShell_TextColor, #fff);
+        text-decoration: none;
+        margin-left: 10px;
+
+        @media (min-width: 576px) {
+            font-size: 24px;
+        }
+    }
+
+    &__spacer {
+        flex: 1 1 auto;
+    }
+}
+
+.fd-button.fds-app--theme-menu {
+    margin: 0 0.5rem;
+    color: #fff;
+    color: var(--sapShell_TextColor, #fff);
+
+    &:hover {
+        color: #fff;
+        color: var(--sapShell_TextColor, #fff);
+    }
+}
+
+
+.logo-github {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 0.5rem;
+    fill: #fff;
+    fill: var(--sapShell_TextColor, #fff);
+    vertical-align: middle;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+

@@ -1,21 +1,18 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "outDir": "../../dist/out-tsc",
     "types": [
-
-    ],
-    "paths": {
-      "@fundamental-ngx/core": [
-        "libs/core/src/index.ts"
-      ],
-      "@fundamental-ngx/platform": [
-        "libs/platform/src/index.ts"
-      ]
-    }
+      "node"
+    ]
   },
   "files": [
     "src/main.ts",
     "src/polyfills.ts"
+  ],
+  "include": [
+    "src/*.d.ts"
   ]
 }
