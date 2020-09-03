@@ -47,11 +47,6 @@ If you want to contribute, please check the [CONTRIBUTING.md](https://github.com
 
 Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/master/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
 
-## <a name="6"></a>6. License
-
-Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
-This file is licensed under the Apache Software License, v.2 except as noted otherwise in the [LICENSE file](https://github.com/SAP/fundamental-ngx/blob/master/LICENSE.txt).
-
 ## Similar Projects
 ## <a name="7"></a>7. Similar Projects
 
