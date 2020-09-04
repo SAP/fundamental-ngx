@@ -221,6 +221,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     showWeekNumbers = true;
 
+    /** Whether or not to show the datetime picker footer with submit/cancel buttons. */
+    @Input()
+    showFooter = true;
+
     /** Event thrown every time calendar active view is changed */
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
@@ -435,6 +439,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      */
     handleDateChange(date: FdDate): void {
         this.tempDate = date;
+        if (!this.showFooter) {
+            this.submit();
+        }
     }
 
     /**
@@ -443,6 +450,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      */
     handleTimeChange(time: TimeObject): void {
         this.tempTime = time;
+        if (!this.showFooter) {
+            this.submit();
+        }
     }
 
     /**
@@ -462,7 +472,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.isInvalidDateInput = !this.isCurrentModelValid();
         this._setInput(this.date);
         this.onChange(this.date);
-        this.closePopover();
+        if (this.showFooter) {
+            this.closePopover();
+        }
     }
 
     /**

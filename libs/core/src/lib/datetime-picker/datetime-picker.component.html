@@ -72,11 +72,11 @@
                     (focusArrowLeft)="focusArrowLeft()"
                 ></fd-time>
             </div>
-            <div fd-popover-body-footer>
-                <div fd-bar [barDesign]="'footer'" [cosy]="!compact">
+            <div fd-popover-body-footer *ngIf="showFooter">
+                <div fd-bar barDesign="footer" [cosy]="!compact">
                     <div fd-bar-right>
                         <fd-bar-element>
-                            <button fd-button [fdType]="'emphasized'" [compact]="compact" (click)="submit()">Submit</button>
+                            <button fd-button fdType="emphasized" [compact]="compact" (click)="submit()">Submit</button>
                         </fd-bar-element>
                         <fd-bar-element>
                             <button fd-button [compact]="compact" (click)="cancel()">Cancel</button>
