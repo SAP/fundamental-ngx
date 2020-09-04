@@ -13,6 +13,7 @@ import { ComboboxModule } from './combobox/combobox.module';
 import { CheckboxModule } from './checkbox/checkbox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
+import { FileInputModule } from './file-input/file-input.module';
 import { FileUploaderModule } from './file-uploader/file-uploader.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
@@ -83,7 +84,8 @@ import { ToolbarModule } from './toolbar/toolbar.module';
         CheckboxModule,
         DatePickerModule,
         DatetimePickerModule,
-        DragAndDropModule,  
+        DragAndDropModule,
+        FileInputModule,
         FileUploaderModule,
         FormModule,
         IconModule,

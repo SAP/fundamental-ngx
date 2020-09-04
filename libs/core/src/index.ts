@@ -12,6 +12,7 @@ export * from './lib/checkbox/public_api';
 export * from './lib/combobox/public_api';
 export * from './lib/date-picker/public_api';
 export * from './lib/datetime-picker/public_api';
+export * from './lib/file-input/public_api';
 export * from './lib/file-uploader/public_api';
 export * from './lib/form/public_api';
 export * from './lib/icon/public_api';
