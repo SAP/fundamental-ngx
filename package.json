@@ -34,7 +34,7 @@
     "ng": "ng",
     "release": "./scripts/publish-release.sh",
     "release:create": "create-release",
-    "start": "node --max_old_space_size=12288 ./node_modules/@angular/cli/bin/ng serve",
+    "start": "ng serve",
     "test": "ng test core --watch false --code-coverage true --browsers=ChromeHeadless",
     "test:platform": "ng test platform --watch false --code-coverage true --browsers=ChromeHeadless",
     "active-test": "ng test core --watch true --browsers=ChromeHeadless",
