@@ -1,6 +1,9 @@
 <div class="fd-shell fd-shell--fundamentals">
     <div class="fd-shell__header" *ngIf="!hideHeader">
         <ng-template [ngIf]="!header" [ngIfElse]="appProvidedHeader">
+            <!--
+               Use API to initialize AppHeader (Shellbar)
+               -->
             <fds-app-header></fds-app-header>
         </ng-template>
     </div>
