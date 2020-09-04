@@ -3,7 +3,7 @@
     "schematics": {
         "ng-add": {
             "description": "Adds @fundamental-ngx/app-shell to the project.",
-            "factory": "./ng-add/index#ngAdd",
+            "factory": "./ng-add/index",
             "schema": "./ng-add/schema.json"
         }
     }

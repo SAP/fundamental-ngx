@@ -1,27 +1,41 @@
 {
-    "$schema": "http://json-schema.org/schema",
-    "id": "fundamental-ngx-ng-add",
-    "title": "Fundamental Library for Angular ng-add schematic",
-    "type": "object",
-    "properties": {
-        "animations": {
-            "type": "boolean",
-            "default": true,
-            "description": "Whether Angular browser animations should be set up.",
-            "x-prompt": "Set up browser animations for Fundamental Library for Angular?"
-        },
-        "styleFonts": {
-            "type": "boolean",
-            "default": true,
-            "description": "Whether default fonts from theming should be added to styles.scss.",
-            "x-prompt": "Add default font imports into styles.scss?"
-        },
-        "project": {
-            "type": "string",
-            "description": "The name of the project.",
-            "$default": {
-                "$source": "projectName"
-            }
-        }
+  "$schema": "http://json-schema.org/schema",
+  "id": "fundamental-ngx-ng-add",
+  "title": "Fundamental Library for Angular ng-add schematic",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "path": {
+      "type": "string",
+      "description": "Root path to the selected project  - a place where template files will be copied"
+    },
+    "moduleName": {
+      "type": "string",
+      "description": "Name of the module"
+    },
+    "addModuleAnimation": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether Angular browser animations should be set up.",
+      "x-prompt": "Add BrowserAnimationsModule?"
+    },
+    "addCustomStyleFile": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether default fonts from theming should be added to custom file fundamental-styles.scss.",
+      "x-prompt": "Create custom fundamental style file?"
+    },
+    "addAppShellModule": {
+      "type": "boolean",
+      "default": true,
+      "description": "Tells developer if we want to add import for the AppShellModule.",
+      "x-prompt": "Add AppShellModule?"
     }
+  }
 }

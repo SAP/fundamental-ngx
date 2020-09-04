@@ -8,19 +8,13 @@ export interface Schema {
     /**
      * Works with specific module within the project
      */
-    moduleName: string;
-
-    /** Dont add package.json dependencies. */
-    skipDependencies: boolean;
-
-    /** Dont run npm install. */
-    skipNpmInstall: boolean;
+    module: string;
 
 
-    /** Dont add anything to angular.json script section. */
-    skipScripts: boolean;
+    addModuleAnimation: boolean;
 
 
-    /** Dont add anything to angular.json style section. */
-    skipStyles: boolean;
+    addCustomStyleFile: boolean;
+
+    addAppShellModule: boolean;
 }
