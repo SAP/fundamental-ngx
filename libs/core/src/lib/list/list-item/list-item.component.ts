@@ -111,7 +111,7 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
                 this._muteEvent(event);
             }
             if (this.radio) {
-                this.radio.labelClicked();
+                this.radio.labelClicked(event);
                 this._muteEvent(event);
             }
         }
@@ -126,7 +126,7 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
             this.checkbox.nextValue();
         }
         if (this.radio && !this.link) {
-            this.radio.labelClicked();
+            this.radio.labelClicked(event);
         }
     }
 

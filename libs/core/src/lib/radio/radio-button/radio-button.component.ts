@@ -34,6 +34,28 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     @ViewChild('inputElement')
     inputElement: ElementRef;
 
+    /** Sets the `aria-label` attribute to the element. */
+    @Input()
+    ariaLabel = null;
+
+    /** Sets the `aria-labelledby` attribute to the element. */
+    @Input()
+    ariaLabelledBy = null;
+
+    /** Sets the `aria-describedby` attribute to the element. */
+    @Input()
+    ariaDescribedBy: string;
+
+    /** sets radio tooltip */
+    @Input()
+    title: string;
+
+    /**
+     * Includes the radio in the page tab sequence.
+     */
+    @Input()
+    tabIndex: number;
+
     /** Whether to apply compact mode to the radio button.
      * Value: true or false
      * By default field is set to false
@@ -159,9 +181,10 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     }
 
     /** @hidden */
-    labelClicked(): void {
+    labelClicked(event: MouseEvent | KeyboardEvent): void {
         this.valueChange(this.value);
         this._setFocusOnNativeElement();
+        event.stopPropagation();
     }
 
     /** @hidden */

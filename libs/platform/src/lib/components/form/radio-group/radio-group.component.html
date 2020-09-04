@@ -1,4 +1,10 @@
-<fd-form-group [isInline]="isInline">
+<fd-form-group
+    [isInline]="isInline"
+    role="radiogroup"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledBy"
+    [attr.aria-orientation]="isInline ? 'horizontal' : 'vertical'"
+>
     <ng-container *ngIf="!list">
         <ng-container *ngFor="let radio of contentRadioButtons">
             <div fd-form-item>
@@ -9,7 +15,12 @@
                             name: name,
                             value: radio.value,
                             contentDensity: contentDensity,
-                            disabled: disabled || radio.disabled
+                            stateType: status,
+                            disabled: disabled || radio.disabled,
+                            ariaLabel: radio.ariaLabel,
+                            ariaLabelledBy: radio.ariaLabelledBy,
+                            ariaDescribedBy: radio.ariaDescribedBy,
+                            title: radio.title
                         }
                     "
                 ></ng-container>
@@ -28,6 +39,7 @@
                 [name]="name"
                 [value]="'None'"
                 [contentDensity]="contentDensity"
+                [stateType]="status"
                 [disabled]="disabled"
                 [forceRender]="true"
                 (click)="selected($event)"
@@ -42,6 +54,7 @@
                 [name]="name"
                 [value]="getLookupValue(item)"
                 [contentDensity]="contentDensity"
+                [stateType]="status"
                 [disabled]="getListItemDisabledValue(item)"
                 [forceRender]="true"
                 (click)="selected($event)"

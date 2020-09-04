@@ -2,7 +2,7 @@
 <p>Compact radio group with 'default' state and with default selection</p>
 <fdp-form-group multiLayout="true" [formGroup]="form1">
     <fdp-form-field #ffl1 id="radioc1" zone="zLeft" rank="1">
-        <fdp-radio-group name="radioc1" contentDensity="compact" value="spring" [isInline]="false"
+        <fdp-radio-group name="radioc1" contentDensity="compact" selected="spring" [isInline]="false"
             [formControl]="ffl1.formControl">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
@@ -43,24 +43,33 @@
 <br />
 
 <p>Radio group with disabled button and validation error</p>
-<fdp-form-group multiLayout="true" [formGroup]="form4">
-    <fdp-form-field #ffl4 id="radioc4" zone="zLeft" rank="1">
-        <fdp-radio-group name="radioc4" contentDensity="compact" value="march" [isInline]="false"
-            [formControl]="ffl4.formControl">
-            <fdp-radio-button value="january" disabled="true">January</fdp-radio-button>
-            <fdp-radio-button value="february">February</fdp-radio-button>
-            <fdp-radio-button value="march">March</fdp-radio-button>
-            <fdp-radio-button value="april">April</fdp-radio-button>
-        </fdp-radio-group>
-    </fdp-form-field>
-</fdp-form-group>
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <fdp-form-group multiLayout="true" [formGroup]="form4">
+        <fdp-form-field #ffl4 id="radioc4" zone="zLeft" rank="1" [required]="true">
+            <fdp-radio-group name="radioc4" contentDensity="compact" [isInline]="true" [formControl]="ffl4.formControl">
+                <fdp-radio-button value="january">January</fdp-radio-button>
+                <fdp-radio-button value="february">February</fdp-radio-button>
+                <fdp-radio-button value="march">March</fdp-radio-button>
+                <fdp-radio-button value="april">April</fdp-radio-button>
+            </fdp-radio-group>
+        </fdp-form-field>
+
+        <ng-template #i18n let-errors>
+            <ng-container *ngIf="errors.required">
+                <span>Value is required.</span>
+            </ng-container>
+        </ng-template>
+    </fdp-form-group>
+    <button type="submit" style="margin-left: 2rem;">Submit</button>
+</form>
 <p style="margin-left: 2rem;">Selected value: {{ form4.controls.radioc4?.value }}</p>
 <br />
 
 <p>Radio group using FormGroup and FormControl</p>
 <fdp-form-group multiLayout="true" [formGroup]="form5">
     <fdp-form-field id="radioc5" zone="zLeft" rank="1">
-        <fdp-radio-group name="radioc5" contentDensity="compact" value="march" [isInline]="false" formControlName="month">
+        <fdp-radio-group name="radioc5" contentDensity="compact" selected="march" [isInline]="false"
+            formControlName="month">
             <fdp-radio-button value="january" disabled="true">January</fdp-radio-button>
             <fdp-radio-button value="february">February</fdp-radio-button>
             <fdp-radio-button value="march">March</fdp-radio-button>
@@ -70,7 +79,7 @@
 </fdp-form-group>
 <p style="margin-left: 2rem;">Selected value: {{ form5.controls.month?.value }}</p>
 
-<separator></separator>
+<hr/>
 <h3>Use With Template Driven Form</h3>
 <p>Inline compact radio group with default selection</p>
 <fdp-form-group multiLayout="true">

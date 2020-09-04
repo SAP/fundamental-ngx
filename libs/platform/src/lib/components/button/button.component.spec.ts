@@ -33,7 +33,7 @@ describe('ButtonComponent', () => {
         const element = fixture.debugElement.nativeElement.querySelector('button');
         component.ariaSelected = false;
         fixture.detectChanges();
-        expect(element.ariaSelected).toBeFalsy();
+        expect(element.ariaSelected).toBe('false');
     });
 
     it('should have a content disabled button', () => {
