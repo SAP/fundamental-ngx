@@ -315,6 +315,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     onInputKeydownHandler(event: KeyboardEvent): void {
+        if (this.readOnly) {
+            return;
+        }
+
         if (KeyUtil.isKey(event, 'Enter')) {
             if (this.searchFn) {
                 this.searchFn();
