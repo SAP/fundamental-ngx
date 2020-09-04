@@ -402,17 +402,34 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
+    /** @hidden */
     private _shouldClose(event: MouseEvent): boolean {
         return (
             this.containerRef &&
             this.isOpen &&
             this.closeOnOutsideClick &&
-            event.target !== this.triggerRef.nativeElement &&
-            !this.triggerRef.nativeElement.contains(event.target) &&
-            !this.containerRef.location.nativeElement.contains(event.target)
+            !this._triggerContainsTarget(event) &&
+            !this._containerContainsTarget(event)
         );
     }
 
+    /** @hidden */
+    private _containerContainsTarget(event: Event): boolean {
+        const containerElement = this.containerRef.location.nativeElement;
+        return containerElement.contains(event.target) ||
+            containerElement.contains(event.composedPath()[0])
+        ;
+    }
+
+    /** @hidden */
+    private _triggerContainsTarget(event: Event): boolean {
+        const triggerElement = this.triggerRef.nativeElement;
+        return triggerElement.contains(event.target) ||
+            triggerElement.contains(event.composedPath()[0])
+        ;
+    }
+
+    /** @hidden */
     private _handleRtlChange(rtl: boolean): void {
         if (this.placement) {
             if (rtl) {
