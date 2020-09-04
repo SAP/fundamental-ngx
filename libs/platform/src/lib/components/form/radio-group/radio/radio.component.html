@@ -3,9 +3,16 @@
         [id]="id"
         [name]="name"
         [value]="value"
-        [state]="state"
+        [state]="stateType || 'default'"
         [compact]="contentDensity === 'compact'"
         [disabled]="disabled"
+        [tabIndex]="isChecked ? 0 : tabIndex"
+        [title]="title"
+        [ariaLabel]="ariaLabel"
+        [ariaLabelledBy]="ariaLabelledBy"
+        [ariaDescribedBy]="ariaDescribedBy"
+        [ngModel]="currentValue"
+        (ngModelChange)="valueChange($event)"
         (click)="onClick($event)"
     >
         <ng-content></ng-content>

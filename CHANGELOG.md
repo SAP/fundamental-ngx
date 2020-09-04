@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.21...v0.22.0-rc.22) (2020-09-03)
+
+
+### Bug Fixes
+
+* Transform form-control to component ([#3183](https://github.com/SAP/fundamental-ngx/issues/3183)) ([69989b0](https://github.com/SAP/fundamental-ngx/commit/69989b0ede18bed5825af3f79da7485eb1515f40))
+
 ## [0.22.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.20...v0.22.0-rc.21) (2020-09-01)
 
 ## [0.22.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.19...v0.22.0-rc.20) (2020-09-01)
