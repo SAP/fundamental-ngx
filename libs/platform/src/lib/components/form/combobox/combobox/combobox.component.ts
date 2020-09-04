@@ -66,6 +66,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     /** @hidden */
     private _direction: Direction = 'ltr';
 
+    /** @hidden */
     get isGroup(): boolean {
         return !!(this.group && this.groupKey);
     }
@@ -94,18 +95,18 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
             this.dataSource = new ComboBoxDataSource(providers.get(this.entityClass));
         }
 
-        this.openChange
-            .pipe(
-                takeUntil(this._destroyed),
-                filter(isOpen => !this.mobile && !isOpen)
-            )
-            .subscribe(() => {
-                if (!this.selected || this.isSelectedOptionItemByDisplayValue(this.inputText)) {
-                    return;
-                }
-
-                this._reset();
-            });
+        // this.openChange
+        //     .pipe(
+        //         takeUntil(this._destroyed),
+        //         filter(isOpen => !this.mobile && !isOpen)
+        //     )
+        //     .subscribe(() => {
+        //         if (!this.selected || this.isSelectedOptionItemByDisplayValue(this.inputText)) {
+        //             return;
+        //         }
+        //
+        //         this._updateModel(this.inputText);
+        //     });
     }
 
     /** @hidden */
@@ -126,6 +127,25 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
         if (this.mobile) {
             this._setUpMobileMode();
         }
+    }
+
+    onBlur(event: FocusEvent): void {
+        if (this.selected && this.selected.label === this.inputText) {
+            return;
+        }
+
+        const isList = (event.relatedTarget as HTMLElement).classList.contains('fd-list__item');
+        if (!isList) {
+            this._updateModel(this.inputText);
+
+            return;
+        }
+
+        if (this._connectedOverlay.open) {
+            return;
+        }
+
+        this._updateModel(this.inputText);
     }
 
     /** @hidden
@@ -232,6 +252,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
         );
     }
 
+    /** @hidden */
     private _reset(): void {
         this.selected = null;
         this.inputText = '';

@@ -1,8 +1,9 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core';
 import { OptionItem } from '../../../../domain/data-model';
+import { fromEvent, Subscription } from 'rxjs';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -13,7 +14,7 @@ export interface AutoCompleteEvent {
     // tslint:disable-next-line:directive-selector
     selector: '[fdp-auto-complete]'
 })
-export class AutoCompleteDirective {
+export class AutoCompleteDirective implements OnDestroy {
     /** Values that will fill missing text in the input. */
     @Input()
     options: OptionItem[];
@@ -44,10 +45,25 @@ export class AutoCompleteDirective {
         ESCAPE
     ];
 
+    private readonly _fromEventSub: Subscription;
+
     private _oldValue: string;
     private _lastKeyUpEvent: KeyboardEvent;
 
-    constructor(private readonly _elementRef: ElementRef) {}
+    constructor(private readonly _elementRef: ElementRef) {
+        this._fromEventSub = fromEvent(this._elementRef.nativeElement, 'blur')
+            .subscribe(() => {
+                const inputTextLength = this.inputText.length;
+                this._elementRef.nativeElement.value = this.inputText;
+                this._setSelectionRange(inputTextLength, inputTextLength);
+            });
+    }
+
+    ngOnDestroy(): void {
+        if (this._fromEventSub) {
+            this._fromEventSub.unsubscribe();
+        }
+    }
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
@@ -75,11 +91,18 @@ export class AutoCompleteDirective {
     }
 
     private _typeahead(displayedValue: string): void {
-        const el = this._elementRef.nativeElement;
         const selectionStartIndex = this.inputText.length;
-        const direction = el.selectionDirection;
+        const el = this._elementRef.nativeElement;
         el.value = displayedValue;
-        el.setSelectionRange(selectionStartIndex, displayedValue.length, direction);
+
+        this._setSelectionRange(selectionStartIndex, displayedValue.length);
+    }
+
+    private _setSelectionRange(selectionStart: number, selectionEnd: number): void {
+        const el = this._elementRef.nativeElement;
+        const direction = el.selectionDirection;
+
+        el.setSelectionRange(selectionStart, selectionEnd, direction);
     }
 
     private _isControlKey(event: KeyboardEvent): boolean {
@@ -91,7 +114,7 @@ export class AutoCompleteDirective {
             this._lastKeyUpEvent &&
             KeyUtil.isKeyCode(this._lastKeyUpEvent, CONTROL) &&
             this.inputText === this._oldValue
-        )
+        );
     }
 
     private _sendCompleteEvent(forceClose: boolean): void {
@@ -103,7 +126,6 @@ export class AutoCompleteDirective {
 
     private _searchByStrategy(): OptionItem | undefined {
         const firstItem = this.options[0];
-
         if (!firstItem) {
             return;
         }
@@ -112,7 +134,7 @@ export class AutoCompleteDirective {
             let matchedSelectItem: OptionItem | undefined;
 
             for (const option of this.options) {
-                matchedSelectItem = this._findByStrategyStartsWith(option.children, this.inputText)
+                matchedSelectItem = this._findByStrategyStartsWith(option.children, this.inputText);
 
                 if (matchedSelectItem) {
                     break;

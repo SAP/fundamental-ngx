@@ -76,6 +76,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     maxHeight = '250px';
 
+    /** Datasource for suggestion list */
     @Input()
     get dataSource(): FdpComboBoxDataSource<any> {
         return this._dataSource;
@@ -155,6 +156,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         super.setValue(value);
     }
 
+    /** Event emitted when item is selected. */
     @Output()
     selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
 
@@ -190,16 +192,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     searchInputElement: ElementRef;
 
     /** @hidden */
-    _contentDensity: ContentDensity = this._comboboxConfig.contentDensity;
+    _contentDensity: ContentDensity = this.comboboxConfig.contentDensity;
 
     /**
      * @hidden
      * Whether "contentDensity" is "compact"
      */
     isCompact: boolean = this._contentDensity === 'compact';
-
-    /** @hidden */
-    inputTextValue: string;
 
     /** @hidden */
     controlTemplate: TemplateRef<any>;
@@ -209,12 +208,12 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** Get the input text of the input. */
     get inputText(): string {
-        return this.inputTextValue;
+        return this._inputTextValue;
     }
 
     /** Set the input text of the input. */
     set inputText(value: string) {
-        this.inputTextValue = value;
+        this._inputTextValue = value;
 
         this.onTouched();
     }
@@ -251,22 +250,26 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     protected _dataSource: FdpComboBoxDataSource<any>;
 
     /** @hidden */
-    private matchingStrategy: MatchingStrategy = this._comboboxConfig.matchingStrategy;
+    private _inputTextValue: string;
+    /** @hidden */
+    private _matchingStrategy: MatchingStrategy = this.comboboxConfig.matchingStrategy;
     /** @hidden */
     private _dsSubscription?: Subscription;
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
-    private readonly nonOpeningKeys: number[] = [
+    private readonly _nonOpeningKeys: number[] = [
         ESCAPE, ENTER, CONTROL, TAB, SHIFT,
         UP_ARROW, RIGHT_ARROW, DOWN_ARROW, LEFT_ARROW
     ];
 
-    displayFn = (value: any) => {
+    /** @hidden */
+    private _displayFn = (value: any) => {
         return this.displayValue(value);
     };
 
-    secondaryFn = (value: any) => {
+    /** @hidden */
+    private _secondaryFn = (value: any) => {
         if (isOptionItem(value)) {
             return value.secondaryText;
         } else if (isJsObject(value) && this.secondaryKey) {
@@ -284,7 +287,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
-        protected _comboboxConfig: ComboboxConfig,
+        protected comboboxConfig: ComboboxConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -356,7 +359,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         if (this.isOpen && (forceClose || this.canClose)) {
             this.isOpen = false;
             this.openChange.next(this.isOpen);
-            this._cd.markForCheck();
+            this.cd.markForCheck();
             this.onTouched();
         }
     }
@@ -372,18 +375,17 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     showList(isOpen: boolean): void {
-        /** Reset displayed values on every mobile open */
-        if (!this.isOpen) {
-            this.searchTermChanged('');
-        }
-
         if (this.isOpen !== isOpen) {
             this.isOpen = isOpen;
             this.onTouched();
             this.openChange.next(isOpen);
         }
 
-        this._cd.detectChanges();
+        if (!this.isOpen) {
+            this.searchTermChanged('');
+        }
+
+        this.cd.detectChanges();
     }
 
     /** @hidden */
@@ -406,13 +408,17 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * Handle Click on Button
      * @hidden
      */
-    onPrimaryButtonClick(): void {
+    onPrimaryButtonClick(isOpen: boolean): void {
         // Prevent primary button click behaviour on mobiles
         if (this.mobile) {
             return;
         }
 
-        this.showList(!this.isOpen);
+        if (!isOpen) {
+            this.searchTermChanged('');
+        }
+
+        this.showList(!isOpen);
         this.searchInputElement.nativeElement.focus();
     }
 
@@ -421,7 +427,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * @hidden
      */
     onInputKeydownHandler(event: KeyboardEvent): void {
-        if (this.readonly && KeyUtil.isKeyCode(event, [ALT, DOWN_ARROW, UP_ARROW])) {
+        if (this.readonly) {
             return;
         }
 
@@ -445,7 +451,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             event.stopPropagation();
 
             this.showList(false);
-        } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
+        } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             this.showList(true);
         }
     }
@@ -457,13 +463,15 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         }
     }
 
+    /** @hidden */
     protected get ds(): ComboBoxDataSource<any> {
         return (<ComboBoxDataSource<any>>this.dataSource);
     }
 
-    /** Method that picks other value moved from current one by offset, called only when combobox is closed */
+    /** @hidden
+     * Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
-        const activeValue: OptionItem = this._getSelectItemByValue(this.inputTextValue);
+        const activeValue: OptionItem = this._getSelectItemByValue(this.inputText);
         const index: number = this._suggestions.findIndex(value => value === activeValue);
 
         if (this._suggestions[index + offset]) {
@@ -512,20 +520,20 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
                 this.stateChanges.next('initDataSource.open().');
 
-                this._cd.markForCheck();
+                this.cd.markForCheck();
             });
 
         initDataSource.dataProvider.setLookupKey(this.lookupKey);
         const matchingBy: MatchingBy = {
-            firstBy: this.displayFn
+            firstBy: this._displayFn
         };
 
         if (this.secondaryKey) {
-            matchingBy.secondaryBy = this.secondaryFn;
+            matchingBy.secondaryBy = this._secondaryFn;
         }
 
         initDataSource.dataProvider.setMatchingBy(matchingBy);
-        initDataSource.dataProvider.setMatchingStrategy(this.matchingStrategy);
+        initDataSource.dataProvider.setMatchingStrategy(this._matchingStrategy);
 
         // initial data fetch
         const map = new Map();

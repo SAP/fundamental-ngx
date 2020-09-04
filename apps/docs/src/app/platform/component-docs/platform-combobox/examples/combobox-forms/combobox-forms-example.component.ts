@@ -24,7 +24,7 @@ export class ComboboxFormsExampleComponent {
         field: new FormControl(this.dataSource[3])
     });
 
-    selectedItem = null;
+    selectedItem = this.dataSource[3];
 
     onSelect(item: ComboboxSelectionChangeEvent): void {
         this.selectedItem = item.payload;
