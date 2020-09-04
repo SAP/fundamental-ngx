@@ -87,6 +87,9 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     @Output()
     change: EventEmitter<RadioButtonComponent> = new EventEmitter<RadioButtonComponent>();
 
+    /** @hidden */
+    private _activeItemSet = false;
+
     /** The currently selected radio button. Should match value. */
     private _selected: RadioButtonComponent | null = null;
 
@@ -179,6 +182,12 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     public handleKeydown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
         if (this.keyboardEventsManager) {
+            // sets Active item. so arrow key starts after the active item.
+            // Need to do only once, when one radio is already selected
+            if (this._selected && !this._activeItemSet) {
+                this.keyboardEventsManager.setActiveItem(this._selected);
+                this._activeItemSet = true
+            }
             if (
                 event.keyCode === DOWN_ARROW ||
                 event.keyCode === UP_ARROW ||
@@ -259,9 +268,6 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
             }
             if (!button.isChecked) {
                 button.select();
-                if (this.keyboardEventsManager) {
-                    this.keyboardEventsManager.setActiveItem(button);
-                }
             }
         }
     }
@@ -273,9 +279,6 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
             this.resetTabIndex(button);
             if (this._selected) {
                 this._selected.unselect();
-            }
-            if (this.keyboardEventsManager) {
-                this.keyboardEventsManager.setActiveItem(button);
             }
             this._selected = button;
             button.select();
