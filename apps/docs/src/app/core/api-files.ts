@@ -39,6 +39,7 @@ export const API_FILES = {
     datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
     datetimePicker: ['DatetimePickerComponent', 'FdDateTime', 'DateTimeFormatParser', 'DateTimeFormatParserDefault'],
     dropdown: ['PopoverDropdownComponent'],
+    fileInput: ['FileInputComponent', 'FileInputSelectDirective', 'FileInputDragndropDirective'],
     fileUploader: ['FileUploaderComponent', 'FileUploaderSelectDirective', 'FileUploaderDragndropDirective'],
     form: [
         'FormControlComponent',

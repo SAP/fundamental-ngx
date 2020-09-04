@@ -14,6 +14,11 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
+ * /**
+ * @deprecated
+ * File Input component is depricated since version 0.22.0
+ * File Uploader component should be used instead.
+ * 
  * Tool to facilitate the input of files from the user.
  * It supports drag and drop, multiple input, max file size and more.
  * The drag events make it very easy to create and style elements like a dropzone.
