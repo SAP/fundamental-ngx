@@ -7,7 +7,8 @@ import {
     Renderer2,
     AfterContentInit,
     Provider,
-    forwardRef
+    forwardRef,
+    ChangeDetectionStrategy
 } from '@angular/core';
 
 import { ButtonComponent } from '../../button/button.component';
@@ -43,7 +44,8 @@ export const inputGroupAddonChildProvider: Provider = {
 @Component({
     selector: 'fdp-input-group-addon',
     template: '<ng-template><ng-content></ng-content></ng-template>',
-    providers: [inputGroupAddonChildProvider]
+    providers: [inputGroupAddonChildProvider],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupAddonComponent implements AfterContentInit {
     /** @hidden */

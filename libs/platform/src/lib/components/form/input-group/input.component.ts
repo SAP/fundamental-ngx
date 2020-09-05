@@ -1,4 +1,4 @@
-import { Provider, forwardRef, Component, Input } from '@angular/core';
+import { Provider, forwardRef, Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { InputType } from '../input/input.component';
 
@@ -32,7 +32,8 @@ export const inputGroupInputChildProvider: Provider = {
 @Component({
     selector: 'fdp-input-group-input',
     template: '',
-    providers: [inputGroupInputChildProvider]
+    providers: [inputGroupInputChildProvider],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupInputComponent {
     /** InputType 'text' | 'number' | 'email' | 'password' */
