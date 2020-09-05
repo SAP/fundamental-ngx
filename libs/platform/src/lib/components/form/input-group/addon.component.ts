@@ -10,10 +10,10 @@ import {
     forwardRef
 } from '@angular/core';
 
-import { ButtonComponent } from '../../../button/button.component';
-import { ContentDensity } from '../../form-options';
+import { ButtonComponent } from '../../button/button.component';
+import { ContentDensity } from '../form-options';
 
-import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from '../constants';
+import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
 
 export const inputGroupAddonChildProvider: Provider = {
     provide: INPUT_GROUP_CHILD_TOKEN,

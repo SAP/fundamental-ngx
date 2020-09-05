@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { ContentDensity } from '../../public_api';
-import { PlatformInputGroupModule } from '../input-group.module';
+import { ContentDensity } from '../form-options';
+import { PlatformInputGroupModule } from './input-group.module';
 import { InputGroupAddonBodyComponent } from './addon-body.component';
 
 @Component({

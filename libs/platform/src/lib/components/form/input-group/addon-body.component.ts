@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy, OnInit, ElementRef, Renderer2, Input } from '@angular/core';
 
-import { ContentDensity } from '../../form-control';
+import { ContentDensity } from '../form-options';
 
-import { CSS_CLASS_NAME } from '../constants';
+import { CSS_CLASS_NAME } from './constants';
 
 /**
  * Fundamental input group addon body component

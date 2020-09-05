@@ -1,8 +1,8 @@
 import { Provider, forwardRef, Component, Input } from '@angular/core';
 
-import { InputType } from '../../input/input.component';
+import { InputType } from '../input/input.component';
 
-import { INPUT_GROUP_CHILD_TOKEN } from '../constants';
+import { INPUT_GROUP_CHILD_TOKEN } from './constants';
 
 /**
  * fdp-input-group needs it's own input component to
@@ -22,9 +22,11 @@ export const inputGroupInputChildProvider: Provider = {
  * This component is intended to be used inside `<fdp-input-group>`
  *
  * Example:
+ * ```
  * <fdp-input-group name="group">
  *   <fdp-input-group-input type="email"></fdp-input-group-input>
  * </fdp-input-group>
+ * ```
  *
  */
 @Component({

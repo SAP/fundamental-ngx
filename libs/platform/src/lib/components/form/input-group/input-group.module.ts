@@ -6,7 +6,9 @@ import { PlatformButtonModule } from '../../button/button.module';
 import { PlatformInputModule } from '../input/fdp-input.module';
 
 import { InputGroupComponent } from './input-group.component';
-import { InputGroupAddonComponent, InputGroupAddonBodyComponent, InputGroupInputComponent } from './addon';
+import { InputGroupAddonComponent } from './addon.component';
+import { InputGroupAddonBodyComponent } from './addon-body.component';
+import { InputGroupInputComponent } from './input.component';
 
 @NgModule({
     declarations: [

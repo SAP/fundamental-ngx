@@ -27,10 +27,10 @@ import { FormField } from '../form-field';
 import { InputComponent } from '../input/input.component';
 import { ContentDensity, Status, FormFieldControl } from '../form-control';
 
-import { InputGroupConfig } from './input-group.config';
-import { InputGroupAddonComponent } from './addon';
 import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
-import { InputGroupInputComponent } from './addon/input.component';
+import { InputGroupConfig } from './input-group.config';
+import { InputGroupAddonComponent } from './addon.component';
+import { InputGroupInputComponent } from './input.component';
 
 /**
  * Fundamental input group component

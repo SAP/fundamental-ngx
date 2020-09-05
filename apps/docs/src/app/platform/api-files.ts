@@ -28,5 +28,5 @@ export const API_FILES = {
     ],
     switch: ['SwitchComponent'],
     stepInput: ['NumberStepInputComponent', 'StepInputComponent', 'StepInputConfig'],
-    inputGroup: ['InputGroupConfig', 'InputGroupComponent', 'InputGroupAddonComponent']
+    inputGroup: ['InputGroupConfig', 'InputGroupComponent', 'InputGroupAddonComponent', 'InputGroupInputComponent']
 };
