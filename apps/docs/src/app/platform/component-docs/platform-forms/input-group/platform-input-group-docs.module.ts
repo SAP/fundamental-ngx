@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PlatformInputGroupModule } from '@fundamental-ngx/platform';
+import { PlatformInputGroupModule, FdpFormGroupModule, PlatformStepInputModule } from '@fundamental-ngx/platform';
 
-import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { API_FILES } from '../../api-files';
-import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
+import { API_FILES } from '../../../api-files';
+import { SharedDocumentationModule } from '../../../../documentation/shared-documentation.module';
+import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 
 import { PlatformInputGroupHeaderComponent } from './platform-input-group-header/platform-input-group-header.component';
 import { PlatformInputGroupDocsComponent } from './platform-input-group-docs.component';
@@ -15,6 +15,7 @@ import { PlatformInputGroupStandardExampleComponent } from './platform-input-gro
 import { PlatformInputGroupCompactExampleComponent } from './platform-input-group-examples/platform-input-group-compact-example.component';
 import { PlatformInputGroupStateExampleComponent } from './platform-input-group-examples/platform-input-group-state-example.component';
 import { PlatformInputGroupDisabledExampleComponent } from './platform-input-group-examples/platform-input-group-disabled-example.component';
+import { PlatformInputGroupFormExampleComponent } from './platform-input-group-examples/platform-input-group-form-example.component';
 
 const routes: Routes = [
     {
@@ -32,7 +33,9 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         SharedDocumentationPageModule,
-        PlatformInputGroupModule
+        FdpFormGroupModule,
+        PlatformInputGroupModule,
+        PlatformStepInputModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -41,7 +44,8 @@ const routes: Routes = [
         PlatformInputGroupStandardExampleComponent,
         PlatformInputGroupCompactExampleComponent,
         PlatformInputGroupStateExampleComponent,
-        PlatformInputGroupDisabledExampleComponent
+        PlatformInputGroupDisabledExampleComponent,
+        PlatformInputGroupFormExampleComponent
     ]
 })
 export class PlatformInputGroupDocsModule {}

@@ -4,6 +4,7 @@
 * 'fundamental-styles/dist/input-group' relies on certain element's nesting using
 * "nth-child" functions and does not support additional inners/wrappers.
 * That's why we need to override some styles and add support for input's wrapper
+*
 */
 
 .fdp-input-group {

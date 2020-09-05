@@ -1,21 +1,19 @@
 <!--
   Does it make sense to have some other state than error?
 -->
-<input
-    #inputElemRef
-    fd-form-control
-    [(ngModel)]="value"
-    [ngModelOptions]="{ standalone: true }"
-    [attr.id]="id"
-    [attr.name]="name"
-    [attr.type]="type"
-    [attr.placeholder]="placeholder"
-    [disabled]="disabled"
-    [compact]="contentDensity == 'compact'"
-    [state]="status"
-    [readOnly]="readonly"
-    (blur)="_onFocusChanged(false)"
-    (focus)="_onFocusChanged(true)"
-    [attr.aria-label]="ariaLabel"
-    [attr.aria-labelledby]="ariaLabelledBy"
-/>
+<input #inputElemRef
+       fd-form-control
+       [(ngModel)]="value"
+       [ngModelOptions]="{ standalone: true }"
+       [attr.id]="id"
+       [attr.name]="name"
+       [attr.type]="type"
+       [attr.placeholder]="placeholder"
+       [disabled]="disabled"
+       [compact]="contentDensity == 'compact'"
+       [state]="status"
+       [readOnly]="readonly"
+       (blur)="_onFocus()"
+       (focus)="_onBlur()"
+       [attr.aria-label]="ariaLabel"
+       [attr.aria-labelledby]="ariaLabelledBy" />

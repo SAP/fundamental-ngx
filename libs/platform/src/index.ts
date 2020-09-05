@@ -14,4 +14,3 @@ export * from './lib/domain/public_api';
 export * from './lib/components/info-label/public_api';
 export * from './lib/components/panel/public_api';
 export * from './lib/components/object-status/public_api';
-export * from './lib/components/input-group/public_api';

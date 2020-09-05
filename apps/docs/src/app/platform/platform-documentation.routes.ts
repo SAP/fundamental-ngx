@@ -136,7 +136,7 @@ export const ROUTES: Routes = [
             {
                 path: 'input-group',
                 loadChildren: () =>
-                    import('./component-docs/platform-input-group/platform-input-group-docs.module').then(
+                    import('./component-docs/platform-forms/input-group/platform-input-group-docs.module').then(
                         (m) => m.PlatformInputGroupDocsModule
                     )
             }

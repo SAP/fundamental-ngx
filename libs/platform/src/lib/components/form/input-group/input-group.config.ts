@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { PlatformConfig } from '../../platform.config';
-import { ContentDensity } from '../form/form-control';
+import { PlatformConfig } from '../../../platform.config';
+import { ContentDensity } from '../form-control';
 
 /**
  * Default options for platform input group

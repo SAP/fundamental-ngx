@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 import * as inputGroupStandardExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-standard-example.component.html';
 import * as inputGroupCompactExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-compact-example.component.html';
 import * as inputGroupStateExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-state-example.component.html';
 import * as inputGroupDisabledExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-disabled-example.component.html';
+import * as inputGroupFormExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-form-example.component.html';
 
 @Component({
     selector: 'app-input-group',
@@ -41,6 +42,14 @@ export class PlatformInputGroupDocsComponent {
             language: 'html',
             code: inputGroupDisabledExampleHtml,
             fileName: 'platform-input-group-disabled-example'
+        }
+    ];
+
+    inputGroupForm: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupFormExampleHtml,
+            fileName: 'platform-input-group-form-example'
         }
     ];
 }

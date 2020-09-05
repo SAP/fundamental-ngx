@@ -21,3 +21,4 @@ export * from './switch/switch.module';
 export * from './switch/switch/switch.config';
 export * from './switch/switch/switch.component';
 export * from './step-input/public_api';
+export * from './input-group/public_api';
