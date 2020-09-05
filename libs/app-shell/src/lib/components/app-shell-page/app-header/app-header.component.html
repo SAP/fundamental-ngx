@@ -34,7 +34,7 @@
                  [fillControlMode]="null"
                  placement="bottom-end">
             <li fd-menu-item *ngFor="let theme of themes">
-                <div fd-menu-interactive (click)="onSelectTheme(theme.id)">
+                <div fd-menu-interactive (click)="onSelectTheme(theme.id, theme.name)">
                     <span fd-menu-title>{{ theme.name }}</span>
                 </div>
             </li>

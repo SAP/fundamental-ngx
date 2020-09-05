@@ -13,7 +13,8 @@
   },
   "peerDependencies": {
     "@angular/common": "^10.0.5",
-    "@angular/core": "^10.0.5"
+    "@angular/core": "^10.0.5",
+    "@pscoped/ngx-pub-sub": "3.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

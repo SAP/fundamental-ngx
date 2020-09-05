@@ -39,7 +39,7 @@ export class CarouselItemDirective {
         return this._elementRef.nativeElement.getBoundingClientRect().height || this.initialHeight;
     }
 
-    /** Native element  */
+    /** NATIVE element  */
     getElement(): any {
         return this._elementRef.nativeElement;
     }

@@ -156,7 +156,7 @@ export class CarouselDirective implements AfterContentInit, OnDestroy {
             }
         }
 
-        /** Changing order of elements in QueryList and Native HTML */
+        /** Changing order of elements in QueryList and NATIVE HTML */
         this.items.reset(array);
         this.items.forEach(item => item.getElement().parentNode.appendChild(item.getElement()));
 
