@@ -14,6 +14,7 @@ import {
     DomSanitizer,
     SafeResourceUrl
 } from '@angular/platform-browser';
+import { AppShellProviderService } from '../../../api/app-shell-provider.service';
 
 
 /**
@@ -102,8 +103,14 @@ export class AppShellHeaderComponent implements OnInit {
     };
 
     userMenu: ShellbarUserMenu[] = [
-        { text: 'Settings', callback: () => {} },
-        { text: 'Sign Out', callback: () => {} }
+        {
+            text: 'Settings', callback: () => {
+            }
+        },
+        {
+            text: 'Sign Out', callback: () => {
+            }
+        }
     ];
 
     themes = [
@@ -125,17 +132,18 @@ export class AppShellHeaderComponent implements OnInit {
         }
     ];
 
-    constructor(private sanitizer: DomSanitizer) {
+    constructor(private sanitizer: DomSanitizer, private appShell: AppShellProviderService) {
     }
 
 
     ngOnInit(): void {
         this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/theme/sap_fiori_3.css');
-        console.log(this.cssUrl)
+        this.appShell.themeAPI.themeChanged(this.themes[0].id, this.themes[0].name);
     }
 
-    onSelectTheme(selectedTheme: string): void {
-        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/theme/' + selectedTheme + '.css');
+    onSelectTheme(id: string, name: string): void {
+        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/theme/' + id + '.css');
+        this.appShell.themeAPI.themeChanged(id, name);
     }
 
     onLogoClick($event: Event): void {

@@ -20,7 +20,7 @@ export abstract class CalendarI18n {
 
     /**
      * Aria label for a specific date.
-     * @param date Native date object to use for the label.
+     * @param date NATIVE date object to use for the label.
      */
     abstract getDayAriaLabel(date: Date): string;
 
@@ -99,7 +99,7 @@ export class CalendarI18nDefault extends CalendarI18n {
     /**
      * Aria label for a specific date. Default implementation produces the label: {Date} {Month} {Year}.
      *
-     * @param date Native date object to use for the label.
+     * @param date NATIVE date object to use for the label.
      */
     getDayAriaLabel(date: Date): string {
         return date.getDate() + ' ' + this._monthsFull[date.getMonth()] + ' ' + date.getFullYear();

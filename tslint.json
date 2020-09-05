@@ -23,7 +23,7 @@
             }
         ],
         "no-arg": true,
-        "no-bitwise": true,
+        "no-bitwise": false,
         "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
         "no-construct": true,
         "max-classes-per-file": [false],

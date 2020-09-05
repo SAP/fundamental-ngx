@@ -89,7 +89,7 @@ export class FdDate {
     /**
      * Get number of weekday ex. Sunday = 1, Monday = 2, Tuesday = 3 etc.
      * -1 is thrown when some some of properties (day,month,year) are not defined
-     * Native javascript date getDay() function returns Sunday as 0, Monday as 1, etc, to it's needed to increment value
+     * NATIVE javascript date getDay() function returns Sunday as 0, Monday as 1, etc, to it's needed to increment value
      *
      */
     getDay(): number {

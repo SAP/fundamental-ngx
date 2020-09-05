@@ -56,14 +56,14 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     anchor: ElementRef;
 
     /**
-     * href value to Navigate to. sets href to Native anchor.
+     * href value to Navigate to. sets href to NATIVE anchor.
      */
     @Input()
     href: string;
 
     /**
      * target where navigation will happen, Default=same frame
-     * sets target to Native anchor.
+     * sets target to NATIVE anchor.
      */
     @Input()
     target?: NavigationTarget;
@@ -74,7 +74,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
 
     /**
      * type of link. possible values text|application|audio|font|example|image|message|model|multipart|video.
-     * sets type to Native anchor.
+     * sets type to NATIVE anchor.
      */
     @Input()
     type = 'text';
@@ -94,32 +94,32 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
 
     /**
      * Tooltip text to show when focused for more than  timeout value
-     * sets title to Native anchor.
+     * sets title to NATIVE anchor.
      * */
     @Input()
     title?: string;
 
     /**
      * Specifies the language of the linked document.
-     * sets language to Native anchor.
+     * sets language to NATIVE anchor.
      */
     @Input()
     hreflang?: string;
 
     /** Specifies that the target will be downloaded when a user clicks on the hyperlink
-     * sets download property to Native anchor.
+     * sets download property to NATIVE anchor.
      */
     @Input()
     download?: string;
 
     /** Specifies what media/device the linked document is optimized for
-     * sets media property to Native anchor.
+     * sets media property to NATIVE anchor.
      */
     @Input()
     media?: string;
 
     /** Specifies the relationship between the current document and the linked document
-     * sets relation property to Native anchor.
+     * sets relation property to NATIVE anchor.
      */
     @Input()
     rel?: string;

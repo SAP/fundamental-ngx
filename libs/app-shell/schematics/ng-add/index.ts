@@ -72,9 +72,9 @@ function addDependencies(): Rule {
         const coreDeps: NodeDependency[] = [
             { type: NodeDependencyType.Default, version: '^VERSION_PLACEHOLDER', name: '@fundamental-ngx/core' },
             { type: NodeDependencyType.Default, version: 'SHELL_VER_PLACEHOLDER', name: '@fundamental-ngx/app-shell' },
-            { type: NodeDependencyType.Default, version: 'CDK_VER_PLACEHOLDER', name: '@angular/cdk' }
+            { type: NodeDependencyType.Default, version: 'CDK_VER_PLACEHOLDER', name: '@angular/cdk' },
+            { type: NodeDependencyType.Default, version: '3.0.0', name: '@pscoped/ngx-pub-sub' }
         ];
-
 
         coreDeps.forEach(dependency => {
             addPackageJsonDependency(host, dependency);
