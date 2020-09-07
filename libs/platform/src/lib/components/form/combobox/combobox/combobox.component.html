@@ -26,17 +26,17 @@
     <fd-input-group
         style="display: inline-block"
         [compact]="isCompact"
-        [button]="true"
-        glyph="navigation-down-arrow"
+        [button]="!readonly"
+        [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
         [state]="status === 'error' ? 'error' : null"
         [buttonFocusable]="false"
-        [disabled]="disabled"
+        [disabled]="disabled || readonly"
         [isControl]="true"
-        (addOnButtonClicked)="onPrimaryButtonClick(_connectedOverlay.open)"
+        (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
-        [attr.aria-disabled]="disabled"
+        [attr.aria-disabled]="disabled || readonly"
         [attr.aria-readonly]="readonly"
-        (click)="mobile && showList(true)">
+        (click)="mobile && showList(!this.isOpen)">
         <ng-container></ng-container>
         <input
             #searchInputElement
@@ -55,12 +55,11 @@
             (ngModelChange)="searchTermChanged()"
             [placeholder]="placeholder"
             (focus)="onTouched()"
-            (blur)="onBlur($event)"
+            (blur)="!mobile && onBlur($event)"
             [attr.aria-expanded]="isOpen && _suggestions.length > 0"
             [readonly]="readonly"
             [attr.aria-readonly]="readonly"
         />
-        <span *ngIf="readonly" fd-input-group-addon style="display: none;"></span>
     </fd-input-group>
 </ng-template>
 

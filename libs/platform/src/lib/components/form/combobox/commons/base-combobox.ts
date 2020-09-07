@@ -19,7 +19,6 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import {
-    ALT,
     CONTROL,
     DOWN_ARROW,
     ENTER,
@@ -409,11 +408,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * @hidden
      */
     onPrimaryButtonClick(isOpen: boolean): void {
-        // Prevent primary button click behaviour on mobiles
-        if (this.mobile) {
-            return;
-        }
-
         if (!isOpen) {
             this.searchTermChanged('');
         }

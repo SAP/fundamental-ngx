@@ -18,7 +18,7 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Direction } from '@angular/cdk/bidi';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import {
     DIALOG_CONFIG,
@@ -94,19 +94,6 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
         if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
             this.dataSource = new ComboBoxDataSource(providers.get(this.entityClass));
         }
-
-        // this.openChange
-        //     .pipe(
-        //         takeUntil(this._destroyed),
-        //         filter(isOpen => !this.mobile && !isOpen)
-        //     )
-        //     .subscribe(() => {
-        //         if (!this.selected || this.isSelectedOptionItemByDisplayValue(this.inputText)) {
-        //             return;
-        //         }
-        //
-        //         this._updateModel(this.inputText);
-        //     });
     }
 
     /** @hidden */
@@ -130,22 +117,21 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     }
 
     onBlur(event: FocusEvent): void {
+        const target = event.relatedTarget as HTMLElement;
+        if (target) {
+            const isList = target.closest('.fdp-combobox__list-container');
+            if (isList) {
+                return;
+            }
+        }
+
         if (this.selected && this.selected.label === this.inputText) {
             return;
         }
 
-        const isList = (event.relatedTarget as HTMLElement).classList.contains('fd-list__item');
-        if (!isList) {
-            this._updateModel(this.inputText);
+        const optionItem = this._getSelectedOptionItem(this.inputText);
 
-            return;
-        }
-
-        if (this._connectedOverlay.open) {
-            return;
-        }
-
-        this._updateModel(this.inputText);
+        this._updateModel(optionItem ? optionItem.value : this.inputText);
     }
 
     /** @hidden
@@ -183,8 +169,8 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
             return;
         }
 
-        this.inputText = this.displayValue(selectedItem);
-        this.selected = selectedItem;
+        this.selected = this.isGroup ? selectedItem.children ? selectedItem.children[0] : selectedItem : selectedItem;
+        this.inputText = this.displayValue(this.selected);
     }
 
     /** @hidden
@@ -205,7 +191,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     /** Handle dialog dismissing, closes popover and sets backup data. */
     dialogDismiss(term: string): void {
         if (this.selected && term !== this.selected.label) {
-            this.selected = this._suggestions.find(item => item.label === term);
+            this.selected = this._getSelectedOptionItem(term);
         }
 
         this.inputText = term;
@@ -214,10 +200,14 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
 
     /** Handle dialog approval, closes popover and propagates data changes. */
     dialogApprove(): void {
-        if (this.selected) {
-            this.inputText = this.displayValue(this.selected);
+        if (this.selected && this.selected.label === this.inputText) {
             this._updateModel(this.selected.value);
+        } else {
+            const optionItem = this._getSelectedOptionItem(this.inputText);
+
+            this._updateModel(optionItem ? optionItem.value : this.inputText);
         }
+
         this.showList(false);
     }
 
@@ -239,7 +229,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
         // setting value, it will call setValue()
         this.value = value;
 
-        this.emitChangeEvent(value);
+        this.emitChangeEvent(value ? value : null);
     }
 
     /** @hidden */
@@ -253,9 +243,17 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     }
 
     /** @hidden */
-    private _reset(): void {
-        this.selected = null;
-        this.inputText = '';
-        this._updateModel(null);
+    private _getSelectedOptionItem(text: string): OptionItem | undefined {
+        if (!this.isGroup) {
+            return this._suggestions.find(item => item.label === text);
+        }
+
+        return this._suggestions
+            .reduce((result: OptionItem[], item: OptionItem) => {
+                result.push(...item.children);
+
+                return result;
+            }, [])
+            .find(item => item.label === text);
     }
 }

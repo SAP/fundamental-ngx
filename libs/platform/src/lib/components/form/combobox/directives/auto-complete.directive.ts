@@ -4,6 +4,7 @@ import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } fr
 import { KeyUtil } from '@fundamental-ngx/core';
 import { OptionItem } from '../../../../domain/data-model';
 import { fromEvent, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -52,6 +53,7 @@ export class AutoCompleteDirective implements OnDestroy {
 
     constructor(private readonly _elementRef: ElementRef) {
         this._fromEventSub = fromEvent(this._elementRef.nativeElement, 'blur')
+            .pipe(filter(() => !!this.inputText))
             .subscribe(() => {
                 const inputTextLength = this.inputText.length;
                 this._elementRef.nativeElement.value = this.inputText;
