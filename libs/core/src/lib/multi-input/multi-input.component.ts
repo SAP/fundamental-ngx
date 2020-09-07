@@ -204,7 +204,7 @@ export class MultiInputComponent implements
     listComponent: ListComponent;
 
     /** @hidden */
-    @ViewChild('searchInputElement')
+    @ViewChild('searchInputElement', { read: ElementRef })
     searchInputElement: ElementRef;
 
     /** @hidden */
@@ -343,6 +343,14 @@ export class MultiInputComponent implements
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
+    }
+
+    /** @hidden */
+    onItemKeyDownHandler(event: KeyboardEvent, value: any): void {
+        if (KeyUtil.isKey(event, ['Enter', ' '])) {
+            const checked = this.selected.find(_value => value === _value);
+            this.handleSelect(!checked, value)
+        }
     }
 
     /** @hidden */

@@ -1,9 +1,15 @@
 <ng-container *ngIf="checkbox || radio">
-    <div fd-form-item class="fd-list__form-item">
-        <ng-content select="fd-checkbox"></ng-content>
-        <ng-content select="fd-radio-button"></ng-content>
+    <div fd-form-item class="fd-list__form-item" *ngIf="!inMultiInput">
+        <ng-container *ngTemplateOutlet="checkboxesTemplate"></ng-container>
     </div>
+    <ng-container *ngIf="inMultiInput">
+        <ng-container *ngTemplateOutlet="checkboxesTemplate"></ng-container>
+    </ng-container>
 </ng-container>
 
 <ng-content></ng-content>
 
+<ng-template #checkboxesTemplate>
+    <ng-content select="fd-checkbox"></ng-content>
+    <ng-content select="fd-radio-button"></ng-content>
+</ng-template>

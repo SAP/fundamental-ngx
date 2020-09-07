@@ -39,7 +39,8 @@
         [isControl]="true"
         [glyph]="displayAddonButton ? glyph : ''"
         (addOnButtonClicked)="addOnButtonClicked()">
-        <fd-tokenizer [compactCollapse]="compactCollapse" [compact]="compact" [open]="open" (moreClickedEvent)="moreClicked()"
+        <fd-tokenizer [compactCollapse]="compactCollapse" [compact]="compact" [open]="open"
+                      (moreClickedEvent)="moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
                       [class]="compact ? 'fd-multi-input-tokenizer-custom--compact' : ''"
         >
@@ -76,9 +77,9 @@
         *ngIf="displayedValues && displayedValues.length"
         fd-list
         class="fd-multi-input-menu-overflow"
-        (focusEscapeList)="handleListFocusEscape($event)"
         [multiInputMode]="true"
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
+        (focusEscapeList)="handleListFocusEscape($event)"
         [style.minWidth]="'100%'"
     >
         <li
@@ -86,17 +87,18 @@
             fd-list-item
             tabindex="0"
             class="fd-multi-input-item"
+            [inMultiInput]="true"
             [selected]="selected.indexOf(value) !== -1"
             (click)="handleSelect(selected.indexOf(value) === -1, value, $event)"
+            (keyDown)="onItemKeyDownHandler($event, value)"
         >
             <fd-checkbox
+                tabIndexValue="-1"
                 class="fd-multi-input-checkbox"
                 labelClass="fd-list__label"
                 [ngModel]="selected.indexOf(value) !== -1"
             >
-                <span
-                    [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight"
-                ></span>
+                <span [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight"></span>
             </fd-checkbox>
         </li>
         <li *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)"
