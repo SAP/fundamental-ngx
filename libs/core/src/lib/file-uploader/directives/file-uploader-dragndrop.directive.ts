@@ -4,7 +4,7 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
  * Directive that handles the drag and drop feature of the file input.
  */
 @Directive({
-    selector: '[fdFileDragnDrop]'
+    selector: '[fdFileDragnDrop], [fd-file-drag-n-drop]'
 })
 export class FileUploaderDragndropDirective {
     /** Whether multiple files can be dropped at once. */
@@ -105,7 +105,6 @@ export class FileUploaderDragndropDirective {
             }
             this.fileChanged.emit(validFiles);
             this.invalidFileDrop.emit(invalidFiles);
-
         }
     }
 

@@ -13,8 +13,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+let fileUploaderInputUniqueId = 0;
 
 const filesizemap = new Map([['KB', 1024], ['MB', 1048576], ['GB', 1073741824], ['TB', 1099511627776]]);
+
 /**
  * Tool to facilitate the input of files from the user.
  * It supports drag and drop, multiple input, max file size and more.
@@ -75,7 +77,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     /** Id for the input element. */
     @Input()
-    id: string;
+    id: string = 'fd-file-uploader-input' + fileUploaderInputUniqueId++;
 
     /** aria-label value for input element. */
     @Input()
@@ -127,14 +129,13 @@ export class FileUploaderComponent implements ControlValueAccessor {
     @Output()
     readonly onDragLeave = new EventEmitter<void>();
 
-    constructor(private changeDetRef: ChangeDetectorRef) { }
+    constructor(private changeDetRef: ChangeDetectorRef) {}
 
     /** @hidden */
-    onChange: Function = () => { };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => { };
-
+    onTouched: Function = () => {};
 
 
     /** @hidden */
@@ -179,15 +180,24 @@ export class FileUploaderComponent implements ControlValueAccessor {
         }
         const maxSize = this.parseFileSize(this.maxFileSize);
         const minSize = this.parseFileSize(this.minFileSize);
+
         const checkSize = (fileSize: number): boolean => {
-            if (this.maxFileSize && fileSize > maxSize) { return false; }
-            if (this.minFileSize && fileSize < minSize) { return false; }
+            if (this.maxFileSize && fileSize > maxSize) {
+                return false;
+            }
+            if (this.minFileSize && fileSize < minSize) {
+                return false;
+            }
             return true;
+        };
+
+        let allowedExtensions = null;
+        if (this.accept) {
+            allowedExtensions = this.accept.toLocaleLowerCase().replace(/[\s.]/g, '').split(',')
         }
 
-        this.validFiles = event.filter(file => checkSize(file.size));
-        this.invalidFiles = event.filter(file => !checkSize(file.size));
-
+        this.validFiles = event.filter(file => checkSize(file.size) && this._checkExtension(file, allowedExtensions));
+        this.invalidFiles = event.filter(file => !checkSize(file.size) || !this._checkExtension(file, allowedExtensions));
     }
 
     setInputValue(selectedFiles: File[]): void {
@@ -245,4 +255,11 @@ export class FileUploaderComponent implements ControlValueAccessor {
         this.inputRef.nativeElement.value = '';
         this.onChange([]);
     }
+
+    /** @hidden */
+    private _checkExtension(file: File, allowedExtensions?: string[]): boolean {
+        const extension = file.name.split('.')[file.name.split('.').length - 1];
+        return !allowedExtensions || allowedExtensions.lastIndexOf(extension) !== -1;
+    }
+
 }

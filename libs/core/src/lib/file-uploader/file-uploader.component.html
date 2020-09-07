@@ -12,19 +12,19 @@
 >
     <input
         #textInput
+        readonly
+        class="fd-input fd-file-uploader__input"
+        aria-live="polite"
+        autocomplete="off"
+        type="text"
+        tabindex="-1"
         [id]="id"
         [attr.aria-label]="ariaLabel"
         [attr.aria-labelledby]="ariaLabelledBy"
         [class.fd-input--compact]="compact"
-        class="fd-input fd-file-uploader__input"
-        (click)="open()"
         [title]="ariaLabel"
-        aria-live="polite"
-        autocomplete="off"
-        type="text"
         [placeholder]="placeholder"
-        tabindex="-1"
-        readonly
+        (click)="open()"
         [value]=""
     />
 
