@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.29...v0.22.0-rc.30) (2020-09-07)
+
+
+### Bug Fixes
+
+* Bring support for shadow dom on Popover ([#3196](https://github.com/SAP/fundamental-ngx/issues/3196)) ([0c451ac](https://github.com/SAP/fundamental-ngx/commit/0c451acf8c4af0443c0adb3c1c40b5dd7f601137))
+
 ## [0.22.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.28...v0.22.0-rc.29) (2020-09-07)
 
 
