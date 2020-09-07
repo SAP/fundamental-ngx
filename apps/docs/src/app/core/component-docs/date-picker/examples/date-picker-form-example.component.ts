@@ -9,13 +9,19 @@ import { FdDate } from '@fundamental-ngx/core';
             <div>
                 <div fd-form-item>
                     <label fd-form-label>Date Picker</label>
-                    <fd-date-picker [state]="isValid() ? 'success' : 'error'" formControlName="date"> </fd-date-picker>
-                    <fd-form-message *ngIf="isValid()" [type]="'success'"
-                        >This is valid(success) DatePicker</fd-form-message
-                    >
-                    <fd-form-message *ngIf="!isValid()" [type]="'error'"
-                        >This is invalid(error) DatePicker</fd-form-message
-                    >
+                    <fd-date-picker [state]="isValid() ? 'success' : 'error'" formControlName="date" [(isOpen)]="isOpen">
+                        <fd-form-message *ngIf="!isValid()" [type]="'error'" [inline]="true">
+                            This is invalid(error) DatePicker
+                        </fd-form-message>
+                    </fd-date-picker>
+                    <ng-container *ngIf="!isOpen">
+                        <fd-form-message *ngIf="isValid()" [type]="'success'">
+                            This is valid(success) DatePicker
+                        </fd-form-message>
+                        <fd-form-message *ngIf="!isValid()" [type]="'error'">
+                            This is invalid(error) DatePicker
+                        </fd-form-message>
+                    </ng-container>
                 </div>
                 <br />
                 Touched: {{ customForm.controls.date.touched }}<br />
@@ -50,6 +56,8 @@ export class DatePickerFormExampleComponent {
         date: new FormControl(FdDate.getToday()),
         disabledDate: new FormControl({ value: FdDate.getToday(), disabled: true })
     });
+
+    isOpen = false;
 
     isValid(): boolean {
         return this.customForm.get('date').valid;

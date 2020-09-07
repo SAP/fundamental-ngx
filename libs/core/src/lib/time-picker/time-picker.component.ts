@@ -2,11 +2,11 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
+    Component, EventEmitter,
     forwardRef,
     HostBinding,
     Input,
-    OnDestroy,
+    OnDestroy, Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -131,6 +131,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
     @Input()
     keepTwoDigitsTime = false;
 
+    /** Event emitted when the state of the isOpen property changes. */
+    @Output()
+    isOpenChange = new EventEmitter<boolean>();
+
     /** @hidden */
     @HostBinding('class.fd-time-picker')
     timePickerClass = true;
@@ -212,6 +216,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
      */
     handleIsOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
+        this.isOpenChange.emit(this.isOpen);
         if (isOpen) {
             this.popover.directiveRef.loaded
                 .pipe(

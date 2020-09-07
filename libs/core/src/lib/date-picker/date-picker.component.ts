@@ -62,9 +62,6 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** @hidden Whether the date input is invalid */
     isInvalidDateInput = false;
 
-    /** @hidden Whether the date picker is open */
-    isOpen = false;
-
     /** @hidden */
     @ViewChild(CalendarComponent)
     calendarComponent: CalendarComponent;
@@ -204,6 +201,14 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     showWeekNumbers = true;
 
+    /** Whether the date picker is open. Can be used through two-way binding. */
+    @Input()
+    isOpen = false;
+
+    /** Event emitted when the state of the isOpen property changes. */
+    @Output()
+    isOpenChange = new EventEmitter<boolean>();
+
     /** Fired when a new date is selected. */
     @Output()
     public readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();
@@ -268,6 +273,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         if (!this.disabled) {
             this.onTouched();
             this.isOpen = true;
+            this.isOpenChange.emit(this.isOpen);
         }
     }
 
@@ -275,12 +281,14 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     public toggleCalendar(): void {
         this.onTouched();
         this.isOpen = !this.isOpen;
+        this.isOpenChange.emit(this.isOpen);
     }
 
     /** Closes the calendar if it is open */
     public closeCalendar(): void {
         if (this.isOpen) {
             this.isOpen = false;
+            this.isOpenChange.emit(this.isOpen);
         }
     }
 

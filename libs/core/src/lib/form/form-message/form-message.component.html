@@ -3,7 +3,8 @@
     [ngClass]="[
         type ? ' fd-form-message--' + type : '',
         compact ? ' fd-form-message--' + compact : '',
-        static ? ' fd-form-message--static' : ''
+        static ? ' fd-form-message--static' : '',
+        inline? ' fd-form-message--inline' : ''
     ]"
 >
     <ng-content></ng-content>
