@@ -17,8 +17,8 @@ import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { Placement } from 'popper.js';
-import { Subject, Subscription } from 'rxjs';
-import { delay, filter, first, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { delay, first, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-time-picker',
