@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.28...v0.22.0-rc.29) (2020-09-07)
+
+
+### Bug Fixes
+
+* Stop emitting change events on ViewInit and OnChanges ([#3190](https://github.com/SAP/fundamental-ngx/issues/3190)) ([fca0646](https://github.com/SAP/fundamental-ngx/commit/fca0646223ad5197f1cdefd14be225bf01c0811c))
+
 ## [0.22.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.27...v0.22.0-rc.28) (2020-09-06)
 
 ## [0.22.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.26...v0.22.0-rc.27) (2020-09-06)
