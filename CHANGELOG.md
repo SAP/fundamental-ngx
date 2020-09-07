@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.27...v0.22.0-rc.28) (2020-09-06)
+
+## [0.22.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.26...v0.22.0-rc.27) (2020-09-06)
+
+## [0.22.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.25...v0.22.0-rc.26) (2020-09-06)
+
+## [0.22.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.24...v0.22.0-rc.25) (2020-09-06)
+
+## [0.22.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.23...v0.22.0-rc.24) (2020-09-06)
+
+## [0.22.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.22...v0.22.0-rc.23) (2020-09-04)
+
+
+### Bug Fixes
+
+* (core) fix combobox readonly mode ([#3198](https://github.com/SAP/fundamental-ngx/issues/3198)) ([458b705](https://github.com/SAP/fundamental-ngx/commit/458b705b4ab03a395f2773eee6807211b0cb6d1d))
+* Fix Radio Group Accessibility for core and platform and code improvement ([#3036](https://github.com/SAP/fundamental-ngx/issues/3036)) ([06cc3b8](https://github.com/SAP/fundamental-ngx/commit/06cc3b829ffa235d21b90422e2ede90d6c6a83e0))
+
 ## [0.22.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.21...v0.22.0-rc.22) (2020-09-03)
 
 
