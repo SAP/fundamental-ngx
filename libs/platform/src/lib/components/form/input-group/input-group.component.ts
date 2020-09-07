@@ -165,7 +165,6 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
                     return;
                 }
                 this.state = this._status;
-                this._cd.markForCheck();
             });
     }
 
