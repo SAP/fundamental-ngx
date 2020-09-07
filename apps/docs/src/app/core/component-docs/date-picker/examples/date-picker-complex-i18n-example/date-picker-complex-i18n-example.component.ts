@@ -80,6 +80,6 @@ export class DatePickerComplexI18nExampleComponent {
     }
 
     public isSelected(momentJsLang: string): string {
-        return this.actualMomentJsLang === momentJsLang ? 'selected' : '';
+        return this.actualMomentJsLang === momentJsLang ? 'is-selected' : '';
     }
 }
