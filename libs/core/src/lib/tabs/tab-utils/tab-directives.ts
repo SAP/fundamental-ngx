@@ -1,13 +1,16 @@
 import {
+    ChangeDetectionStrategy,
+    Component,
     Directive,
     ElementRef,
     EmbeddedViewRef,
     HostBinding,
     Input,
+    OnChanges,
     OnInit,
     TemplateRef,
     ViewContainerRef,
-    OnChanges
+    ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
@@ -70,12 +73,20 @@ export class TabCountDirective {
 /**
  * Directive for icon element, available in most of modes on `tab` component
  */
-@Directive({
-    // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
-    selector: '[fd-tab-icon]'
+@Component({
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-tab-icon]',
+    template: `
+        <fd-icon [glyph]="icon"></fd-icon>
+        <ng-content></ng-content>
+    `,
+    styleUrls: [
+        './tab-icon.component.scss'
+    ],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabIconDirective implements CssClassBuilder, OnChanges {
+export class TabIconComponent implements CssClassBuilder, OnChanges {
     /** Apply user custom styles */
     @Input()
     class: string;
@@ -108,7 +119,7 @@ export class TabIconDirective implements CssClassBuilder, OnChanges {
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [this.fdTabIconClass ? 'fd-tabs__icon' : '', this.icon ? `sap-icon--${this.icon}` : '', this.class];
+        return [this.fdTabIconClass ? 'fd-tabs__icon' : '', this.class];
     }
 
     /** HasElementRef interface implementation

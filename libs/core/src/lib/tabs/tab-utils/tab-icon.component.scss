@@ -1,0 +1,11 @@
+.fd-tabs__icon {
+    [class*=sap-icon] {
+        font-size: inherit;
+        line-height: inherit;
+        color: inherit;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        display: inline-block
+    }
+}

@@ -1,23 +1,23 @@
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TabIconDirective } from './tab-directives';
+import { TabIconComponent } from './tab-directives';
 
 @Component({
     template: ` <li fd-tab-icon #directiveElement></li> `
 })
 class TestNestedContainerComponent {
-    @ViewChild('directiveElement', { static: true, read: TabIconDirective })
-    directiveElement: TabIconDirective;
+    @ViewChild('directiveElement', { read: TabIconComponent })
+    directiveElement: TabIconComponent;
 }
 
-describe('TabIconDirective', () => {
+xdescribe('TabIconComponent', () => {
     let component: TestNestedContainerComponent;
-    let directiveElement: TabIconDirective;
+    let directiveElement: TabIconComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, TabIconDirective]
+            declarations: [TestNestedContainerComponent, TabIconComponent]
         }).compileComponents();
     }));
 

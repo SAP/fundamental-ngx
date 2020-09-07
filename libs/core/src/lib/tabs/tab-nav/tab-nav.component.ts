@@ -22,10 +22,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-tab-nav]',
-    template: `
-        <div class="fd-tabs-custom">
-            <ng-content></ng-content>
-        </div>`,
+    template: `<ng-content></ng-content>`,
     providers: [TabsService],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
