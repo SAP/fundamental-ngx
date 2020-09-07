@@ -10,15 +10,15 @@ import { FdDate } from '@fundamental-ngx/core';
                 <div fd-form-item>
                     <label fd-form-label>Date Picker</label>
                     <fd-date-picker [state]="isValid() ? 'success' : 'error'" formControlName="date" [(isOpen)]="isOpen">
-                        <fd-form-message *ngIf="!isValid()" [type]="'error'" [inline]="true">
+                        <fd-form-message *ngIf="!isValid()" type="error" inline="true">
                             This is invalid(error) DatePicker
                         </fd-form-message>
                     </fd-date-picker>
                     <ng-container *ngIf="!isOpen">
-                        <fd-form-message *ngIf="isValid()" [type]="'success'">
+                        <fd-form-message *ngIf="isValid()" type="success">
                             This is valid(success) DatePicker
                         </fd-form-message>
-                        <fd-form-message *ngIf="!isValid()" [type]="'error'">
+                        <fd-form-message *ngIf="!isValid()" type="error">
                             This is invalid(error) DatePicker
                         </fd-form-message>
                     </ng-container>

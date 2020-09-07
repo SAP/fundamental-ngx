@@ -2,11 +2,13 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, EventEmitter,
+    Component,
+    EventEmitter,
     forwardRef,
     HostBinding,
     Input,
-    OnDestroy, Output,
+    OnDestroy,
+    Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
