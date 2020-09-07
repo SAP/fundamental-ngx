@@ -4,14 +4,9 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { CheckboxHeaderComponent } from './checkbox-header/checkbox-header.component';
 import { CheckboxDocsComponent } from './checkbox-docs.component';
-import { CheckboxCustomLabelExampleComponent } from './examples/checkbox-custom-label-example.component';
-import { CheckboxCustomValuesExampleComponent } from './examples/checkbox-custom-values-example.component';
-import { CheckboxDefaultExampleComponent } from './examples/checkbox-default-example.component';
-import { CheckboxReactiveFormsExampleComponent } from './examples/checkbox-reactive-forms-example.component';
-import { CheckboxStatesExampleComponent } from './examples/checkbox-states-example.component';
-import { CheckboxTristateExampleComponent } from './examples/checkbox-tristate-example.component';
 import { CheckboxModule, FormModule, LinkModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { examples } from './examples';
 
 const routes: Routes = [
     {
@@ -34,14 +29,9 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
+        examples,
         CheckboxDocsComponent,
         CheckboxHeaderComponent,
-        CheckboxCustomLabelExampleComponent,
-        CheckboxCustomValuesExampleComponent,
-        CheckboxDefaultExampleComponent,
-        CheckboxReactiveFormsExampleComponent,
-        CheckboxStatesExampleComponent,
-        CheckboxTristateExampleComponent
     ]
 })
 export class CheckboxDocsModule {}
