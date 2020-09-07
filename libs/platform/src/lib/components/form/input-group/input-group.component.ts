@@ -20,7 +20,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { takeUntil, startWith, filter } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 
 import { BaseInput } from '../base.input';
 import { FormField } from '../form-field';
@@ -71,8 +71,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
      */
     @Input()
     set state(status: Status) {
-        this._controlStateClass = `is-${status}`;
-        this._lastState = status;
+        this._status = status;
     }
 
     /** Input value */
@@ -105,7 +104,10 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
     _afterInputAddons: InputGroupAddonComponent[] = [];
 
     /** @hidden */
-    _controlStateClass: string;
+    get _controlStateClass(): string {
+        const status = this.status;
+        return status ? `is-${status}` : null;
+    }
 
     /** @hidden */
     private _contentDensity: ContentDensity = this._inputGroupConfig.contentDensity;
@@ -135,8 +137,6 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
          * to make css selector stronger
          */
         this._addClassNameToHostElement(CSS_CLASS_NAME.host);
-
-        this._listenToFormErrorState();
     }
 
     /** @hidden */
@@ -150,22 +150,6 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
             this._createAddonsGroups();
             this._setAddonsOptions();
         });
-    }
-
-    /** @hidden */
-    private _listenToFormErrorState(): void {
-        this.stateChanges
-            .asObservable()
-            .pipe(
-                filter(() => !!this.ngControl),
-                takeUntil(this._destroyed)
-            )
-            .subscribe(() => {
-                if (this._status === this._lastState) {
-                    return;
-                }
-                this.state = this._status;
-            });
     }
 
     /** @hidden */
