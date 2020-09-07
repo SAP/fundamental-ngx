@@ -73,8 +73,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 
-    constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {
-    }
+    constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -101,7 +100,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
      * Function to select a new tab from an index.
      * @param tabIndex Index of the tab to select.
      */
-    selectTab(tabIndex: number): void {
+    selectTab(tabIndex: number, emitEvent?: boolean): void {
         if (this._canBeSelected(tabIndex)) {
             timer(10)
                 .pipe(takeUntil(this._onDestroy$))
@@ -110,7 +109,9 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
                         tab.triggerExpandedPanel(index === tabIndex);
                     });
                     this.selectedIndex = tabIndex;
-                    this.selectedIndexChange.emit(tabIndex);
+                    if (emitEvent) {
+                        this.selectedIndexChange.emit(tabIndex);
+                    }
                     this._detectChanges();
                 });
         }
@@ -119,7 +120,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** @hidden */
     tabHeaderClickHandler(tabIndex: number): void {
         if (tabIndex !== this.selectedIndex) {
-            this.selectTab(tabIndex);
+            this.selectTab(tabIndex, true);
         }
     }
 
@@ -139,7 +140,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
                 takeUntil(this._onDestroy$),
                 filter(index => index !== this.selectedIndex)
             )
-            .subscribe((index) => this.selectTab(index));
+            .subscribe((index) => this.selectTab(index, true));
     }
 
     /**
@@ -175,7 +176,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     /** @hidden */
     private _resetTabHook(): void {
-        this.selectTab(0);
+        this.selectTab(0, true);
     }
 
     private _detectChanges(): void {
