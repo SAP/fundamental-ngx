@@ -1,76 +1,78 @@
-Standard
-<fd-combobox
-    [(ngModel)]="searchTermOne"
-    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
-    [placeholder]="'Type some text...'"
-    [maxHeight]="'250px'"
->
-</fd-combobox>
+<div class="examples-column">
+    <div fd-form-item>
+        <label fd-form-label>Standard</label>
+        <fd-combobox
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermOne">
+        </fd-combobox>
 
-<span>Search Term: {{ searchTermOne }}</span>
-<br/><br/>
+        <small>Search Term: {{ searchTermOne }}</small>
+    </div>
 
-Disable Highlighting
-<fd-combobox
-    [(ngModel)]="searchTermTwo"
-    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
-    [highlighting]="false"
-    [placeholder]="'Type some text...'"
-    [maxHeight]="'250px'"
->
-</fd-combobox>
+    <div fd-form-item>
+        <label fd-form-label>Disable Highlighting</label>
+        <fd-combobox
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [highlighting]="false"
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermTwo">
+        </fd-combobox>
 
-<span>Search Term: {{ searchTermTwo }}</span>
-<br/><br/>
+        <small>Search Term: {{ searchTermTwo }}</small>
+    </div>
 
-Disable Auto Complete
-<fd-combobox
-    [(ngModel)]="searchTermThree"
-    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
-    [autoComplete]="false"
-    [placeholder]="'Type some text...'"
-    [maxHeight]="'250px'"
->
-</fd-combobox>
+    <div fd-form-item>
+        <label fd-form-label>Disable Auto Complete</label>
+        <fd-combobox
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [autoComplete]="false"
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermThree">
+        </fd-combobox>
 
-<span>Search Term: {{ searchTermThree }}</span>
-<br/><br/>
+        <small>Search Term: {{ searchTermThree }}</small>
+    </div>
 
-Compact
-<fd-combobox
-    [(ngModel)]="searchTermFour"
-    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
-    [compact]="true"
-    [placeholder]="'Type some text...'"
-    [maxHeight]="'250px'"
->
-</fd-combobox>
+    <div fd-form-item>
+        <label fd-form-label>Compact</label>
+        <fd-combobox
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [compact]="true"
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermFour">
+        </fd-combobox>
 
-<span>Search Term: {{ searchTermFour }}</span>
-<br/><br/>
+        <small>Search Term: {{ searchTermFour }}</small>
+    </div>
 
-Readonly
-<fd-combobox
-    [(ngModel)]="searchTermFive"
-    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
-    [placeholder]="'Type some text...'"
-    [maxHeight]="'250px'"
-    [readOnly]="true"
->
-</fd-combobox>
+    <div fd-form-item>
+        <label fd-form-label>Readonly</label>
+        <fd-combobox
+            readOnly="true"
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermFive">
+        </fd-combobox>
 
-<span>Search Term: {{ searchTermFive }}</span>
-<br/><br/>
+        <small>Search Term: {{ searchTermFive }}</small>
+    </div>
 
-Hide Addon Button
-<fd-combobox
-    [(ngModel)]="searchTermSix"
-    [dropdownValues]="['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry']"
-    [placeholder]="'Type some text...'"
-    [maxHeight]="'250px'"
-    [showDropdownButton]="false"
->
-</fd-combobox>
+    <div fd-form-item>
+        <label fd-form-label>Hide Addon Button</label>
+        <fd-combobox
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [dropdownValues]="fruits"
+            [showDropdownButton]="false"
+            [(ngModel)]="searchTermSix">
+        </fd-combobox>
 
-<span>Search Term: {{ searchTermSix }}</span>
-<br/><br/>
+        <small>Search Term: {{ searchTermSix }}</small>
+    </div>
+</div>

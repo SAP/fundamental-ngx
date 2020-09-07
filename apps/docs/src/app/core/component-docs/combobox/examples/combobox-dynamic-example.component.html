@@ -1,12 +1,11 @@
 <fd-combobox
+    placeholder="Type to filter the list..."
     [ngModel]="selected"
-    (ngModelChange)="selectItem($event)"
-    [dropdownValues]="dropdownValues"
-    [placeholder]="'Type to filter the list...'"
     [filterFn]="customFilter"
->
+    [dropdownValues]="dropdownValues"
+    (ngModelChange)="selectItem($event)">
 </fd-combobox>
-<br />
-<span>Selected: {{ selected }}</span>
-<br />
-<span>Selected Index: {{ selectedIndex }}</span>
+
+<small>Selected: {{ selected }}</small>
+<br/>
+<small>Selected Index: {{ selectedIndex }}</small>
