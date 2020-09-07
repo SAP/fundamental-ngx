@@ -17,16 +17,13 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
-    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ListItemComponent } from '../list/list-item/list-item.component';
 import { ListMessageDirective } from '../list/list-message.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
@@ -342,6 +339,13 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             event.stopPropagation();
         } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKey(event, this.nonOpeningKeys)) {
             this.isOpenChangeHandle(true);
+        }
+    }
+
+    /** @hidden */
+    onItemKeyDownHandler(event: KeyboardEvent, value: any): void {
+        if (KeyUtil.isKey(event, 'Enter')) {
+            this.onMenuClickHandler(value);
         }
     }
 
