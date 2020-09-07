@@ -4,7 +4,7 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { CheckboxHeaderComponent } from './checkbox-header/checkbox-header.component';
 import { CheckboxDocsComponent } from './checkbox-docs.component';
-import { CheckboxModule, FormModule, LinkModule } from '@fundamental-ngx/core';
+import { CheckboxModule, FormModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
 
@@ -21,7 +21,6 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        LinkModule,
         FormModule,
         CheckboxModule,
         RouterModule.forChild(routes),
