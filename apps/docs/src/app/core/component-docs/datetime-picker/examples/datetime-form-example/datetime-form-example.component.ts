@@ -4,15 +4,7 @@ import { FdDate, FdDatetime } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-datetime-form-example',
-    templateUrl: './datetime-form-example.component.html',
-    styles: [
-        `
-            .fd-form-message--custom {
-                max-width: 100%;
-                box-shadow: none;
-            }
-        `
-    ]
+    templateUrl: './datetime-form-example.component.html'
 })
 export class DatetimeFormExampleComponent {
     customForm = new FormGroup({
