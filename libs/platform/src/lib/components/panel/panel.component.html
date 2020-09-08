@@ -10,7 +10,7 @@
 
     <ng-container *ngIf="panelActionsComponent">
         <fd-toolbar [size]="_contentDensity" [shouldOverflow]="true" fdType="transparent" [clearBorder]="true">
-            <ng-content select="fdp-panel-actions"></ng-content>
+            <ng-container *ngTemplateOutlet="panelActionsComponent.contentTemplateRef"></ng-container>
         </fd-toolbar>
     </ng-container>
 
