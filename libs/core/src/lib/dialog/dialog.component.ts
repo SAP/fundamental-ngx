@@ -24,6 +24,7 @@ import { fromEvent, Subscription } from 'rxjs';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 import { debounceTime } from 'rxjs/operators';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
     selector: 'fd-dialog',
@@ -55,6 +56,10 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
     set embeddedDialogConfig(value: DialogConfig) {
         this.dialogConfig = value;
     }
+
+    /** Whether or not to close the dialog on a router navigation event. */
+    @Input()
+    closeOnNavigation = true;
 
     /** @hidden */
     @ViewChild('dialogWindow')
@@ -110,8 +115,17 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
         @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         @Optional() @Inject(DIALOG_REF) private _dialogRef: DialogRef,
         private _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef
-    ) {}
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _router: Router
+    ) {
+        this._subscriptions.add(
+            _router.events.subscribe(event => {
+                if (event instanceof NavigationStart && this.closeOnNavigation) {
+                    this._dialogRef.dismiss();
+                }
+            })
+        );
+    }
 
     /** @hidden */
     ngOnInit(): void {
