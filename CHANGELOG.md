@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.34...v0.22.0-rc.35) (2020-09-08)
+
+
+### Bug Fixes
+
+* multi input should attach to body ([#3193](https://github.com/SAP/fundamental-ngx/issues/3193)) ([ba0760f](https://github.com/SAP/fundamental-ngx/commit/ba0760f3f22842342593a9531818bb145ee085fd))
+
 ## [0.22.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.33...v0.22.0-rc.34) (2020-09-08)
 
 ## [0.22.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.32...v0.22.0-rc.33) (2020-09-08)
