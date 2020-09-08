@@ -3,8 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fd-input-group-form-example',
-    templateUrl: './input-group-form-example.component.html',
-    styleUrls: ['input-group-form-example.component.scss']
+    templateUrl: './input-group-form-example.component.html'
 })
 export class InputGroupFormExampleComponent {
     customForm = new FormGroup({

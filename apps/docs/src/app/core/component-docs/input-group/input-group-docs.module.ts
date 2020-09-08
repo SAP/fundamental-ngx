@@ -4,18 +4,9 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { InputGroupHeaderComponent } from './input-group-header/input-group-header.component';
 import { InputGroupDocsComponent } from './input-group-docs.component';
-import { InputGroupFormExampleComponent } from './examples/input-group-form-example.component';
-import {
-    InputGroupButtonExampleComponent,
-    InputGroupComplexExampleComponent,
-    InputGroupIconExampleComponent,
-    InputGroupTextCompactExampleComponent,
-    InputGroupTextExampleComponent
-} from './examples/input-group-examples.component';
-import { InputGroupStatesExampleComponent } from './examples/input-group-states-example/input-group-states-example.component';
-import { InputGroupSearchExampleComponent } from './examples/input-group-search-example/input-group-search-example.component';
 import { FormModule, InputGroupModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { examples } from './examples';
 
 const routes: Routes = [
     {
@@ -32,16 +23,9 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InputGroupModule],
     exports: [RouterModule],
     declarations: [
+        examples,
         InputGroupDocsComponent,
-        InputGroupHeaderComponent,
-        InputGroupFormExampleComponent,
-        InputGroupIconExampleComponent,
-        InputGroupTextExampleComponent,
-        InputGroupButtonExampleComponent,
-        InputGroupStatesExampleComponent,
-        InputGroupSearchExampleComponent,
-        InputGroupComplexExampleComponent,
-        InputGroupTextCompactExampleComponent
+        InputGroupHeaderComponent
     ]
 })
 export class InputGroupDocsModules { }

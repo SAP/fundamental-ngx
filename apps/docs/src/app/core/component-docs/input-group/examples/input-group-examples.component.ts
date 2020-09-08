@@ -29,3 +29,9 @@ export class InputGroupTextCompactExampleComponent {}
     templateUrl: './input-group-complex-example.component.html'
 })
 export class InputGroupComplexExampleComponent {}
+
+@Component({
+    selector: 'fd-input-group-states-example',
+    templateUrl: './input-group-states-example.component.html'
+})
+export class InputGroupStatesExampleComponent {}

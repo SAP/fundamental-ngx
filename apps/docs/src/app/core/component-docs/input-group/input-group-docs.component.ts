@@ -8,12 +8,10 @@ import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-
 import * as inputGroupSearchSrcTs from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.ts';
 import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
 import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
-import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts';
-import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html';
+import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example/input-group-form-example.component.ts';
+import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example/input-group-form-example.component.html';
 import * as complexInputHtml from '!raw-loader!./examples/input-group-complex-example.component.html';
-import * as formInputScssSrc from '!raw-loader!./examples/input-group-form-example.component.scss';
-import * as statesInputGroupTsCode from '!raw-loader!./examples/input-group-states-example/input-group-states-example.component.ts';
-import * as statesInputHtml from '!raw-loader!./examples/input-group-states-example/input-group-states-example.component.html';
+import * as statesInputHtml from '!raw-loader!./examples/input-group-states-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -132,7 +130,6 @@ export class InputGroupDocsComponent {
             language: 'html',
             code: formInputHtmlSrc,
             fileName: 'input-group-form-example',
-            scssFileCode: formInputScssSrc
         },
         {
             language: 'typescript',
@@ -155,8 +152,6 @@ export class InputGroupDocsComponent {
             language: 'html',
             code: statesInputHtml,
             fileName: 'input-group-states-example',
-            typescriptFileCode: statesInputGroupTsCode,
-            component: 'InputGroupStatesExampleComponent'
         }
     ];
 

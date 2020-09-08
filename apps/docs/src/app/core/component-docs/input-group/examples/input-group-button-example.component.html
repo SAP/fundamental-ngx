@@ -1,11 +1,19 @@
-<label fd-form-label>Left Aligned Icon Button Add-on</label>
-<fd-input-group [button]="true" [placement]="'before'" [glyph]="'accelerated'" [placeholder]="'Amount'">
-</fd-input-group>
-<br />
-<div fd-form-group>
-    <div fd-form-item>
-        <label fd-form-label>Right Aligned Text Button Add-on</label>
-        <fd-input-group [button]="true" [placement]="'after'" [addOnText]="'Submit'" [placeholder]="'Amount'">
-        </fd-input-group>
-    </div>
+<div fd-form-item>
+    <label fd-form-label>Left Aligned Icon Button Add-on</label>
+    <fd-input-group button="true"
+                    placement="before"
+                    glyph="accelerated"
+                    placeholder="Amount">
+    </fd-input-group>
+</div>
+
+<br/>
+
+<div fd-form-item>
+    <label fd-form-label>Right Aligned Text Button Add-on</label>
+    <fd-input-group button="true"
+                    placement="after"
+                    addOnText="Submit"
+                    placeholder="Amount">
+    </fd-input-group>
 </div>
