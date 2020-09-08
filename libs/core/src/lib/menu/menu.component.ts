@@ -129,9 +129,9 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     @Output()
     readonly activePath: EventEmitter<MenuItemComponent[]> = new EventEmitter<MenuItemComponent[]>();
 
-    /** Emits array of active menu items */
+    /** Emits menu item which is selected */
     @Output()
-    readonly selected: EventEmitter<MenuItemComponent> = new EventEmitter<MenuItemComponent>();
+    selected: EventEmitter<MenuItemComponent>;
 
     /** @hidden Emits event when the menu is opened/closed */
     @Output()
@@ -189,6 +189,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this.selected = new EventEmitter<MenuItemComponent>();
         this._listenOnMenuMode();
         this._menuService.setMenuMode(this.mobile);
     }

@@ -8,7 +8,7 @@ import {
     Output,
     TemplateRef,
     ViewEncapsulation,
-    AfterContentChecked,
+    AfterContentInit,
     ChangeDetectorRef
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
@@ -46,7 +46,7 @@ import { Subject } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent implements AfterContentChecked, OnDestroy {
+export class SplitButtonComponent implements AfterContentInit, OnDestroy {
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -103,12 +103,16 @@ export class SplitButtonComponent implements AfterContentChecked, OnDestroy {
 
     /** @hidden Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {
-        this.mainButtonClicked();
+        if (this.mainActionTitle) {
+            this.primaryButtonClicked.emit(event);
+        } else {
+            this.firstElement.menuInteractive.elementRef.nativeElement.click();
+        }
         event.stopPropagation();
     }
 
-    ngAfterContentChecked(): void {
-        this.selectedSubscribed();
+    ngAfterContentInit(): void {
+        this.listenOnSelectedAction();
         this.getFirstMenuItem();
     }
 
@@ -119,24 +123,15 @@ export class SplitButtonComponent implements AfterContentChecked, OnDestroy {
     }
 
     /** @hidden */
-    private mainButtonClicked(): void {
-        if (this.mainActionTitle) {
-            this.primaryButtonClicked.emit(event);
-        } else {
-            this.firstElement.menuInteractive.elementRef.nativeElement.click();
-        }
-    }
-
-    /** @hidden */
     private getFirstMenuItem(): void {
-        if (!this.mainActionTitle) {
+        if (!this.mainActionTitle && this.menu) {
             this.firstElement = this.menu.menuItems.first;
             this.mainActionTitle = this.firstElement.menuItemTitle.title;
         }
     }
 
     /** @hidden */
-    private selectedSubscribed(): void {
+    private listenOnSelectedAction(): void {
         if (!this.mainActionTitle && this.menu) {
             this.menu.selected.pipe(takeUntil(this._onDestroy$)).subscribe(value => {
                 this.mainActionTitle = value.menuItemTitle.title;
