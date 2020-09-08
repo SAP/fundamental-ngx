@@ -1,10 +1,18 @@
 <main class="fd-page">
     <div class="fd-page__content">
         <fdp-form-group #fg [multiLayout]="true">
-            <fdp-form-field #ff id="qty" label="Quantity" placeholder="Things quantity" hint="This is tooltip to help"
-                zone="zLeft" rank="1" hintPlacement="left" [required]="true">
-
-                <fdp-input-group name="qty" [formControl]="ff.formControl">
+            <fdp-form-field
+                #ff
+                id="qty"
+                label="Quantity"
+                placeholder="Things quantity"
+                hint="This is tooltip to help"
+                zone="zLeft"
+                rank="1"
+                hintPlacement="left"
+                [required]="true"
+            >
+                <fdp-input-group name="qty" state="success" [formControl]="ff.formControl">
                     <fdp-input-group-addon>$</fdp-input-group-addon>
                     <fdp-input-group-input type="number"></fdp-input-group-input>
                     <fdp-input-group-addon>0.00</fdp-input-group-addon>
@@ -12,7 +20,6 @@
                         <fdp-button>Submit</fdp-button>
                     </fdp-input-group-addon>
                 </fdp-input-group>
-
             </fdp-form-field>
 
             <ng-template #i18n let-errors>

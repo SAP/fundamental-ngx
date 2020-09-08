@@ -67,11 +67,16 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
     }
 
     /**
-     * control status: 'success' | 'error' | 'warning' | 'default' | 'information'
+     * control state: 'success' | 'error' | 'warning' | 'default' | 'information'
      */
     @Input()
-    set state(status: Status) {
-        this._status = status;
+    get state(): Status {
+        const inputStatus = this.status; // status from baseInput based on FormControl instance
+        return inputStatus ? inputStatus : this._state;
+    }
+
+    set state(state: Status) {
+        this._state = state;
     }
 
     /** Input value */
@@ -105,7 +110,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
 
     /** @hidden */
     get _controlStateClass(): string {
-        const status = this.status;
+        const status = this.state;
         return status ? `is-${status}` : null;
     }
 
@@ -113,7 +118,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
     private _contentDensity: ContentDensity = this._inputGroupConfig.contentDensity;
 
     /** @hidden */
-    private _lastState: Status;
+    private _state: Status;
 
     /** @hidden */
     constructor(
