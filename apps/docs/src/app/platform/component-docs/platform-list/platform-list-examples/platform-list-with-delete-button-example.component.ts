@@ -7,7 +7,6 @@ import { Component, HostListener } from '@angular/core';
 export class PlatformListWithDeleteButtonExampleComponent {
 
     // Handle deletion of item via  mouseclick
-    @HostListener('click', ['$event'])
     deleteRow(event: any): void {
         if (event.target.tagName.toLowerCase() === 'button' &&
             event.target.classList.contains('sap-icon--decline')) {
@@ -17,10 +16,7 @@ export class PlatformListWithDeleteButtonExampleComponent {
     // Handle deletion of item via keyboard 'Enter' or mouseclick
     @HostListener('keyup', ['$event']) onKeydown(event: any): void {
         if (event && event.key === 'Enter') {
-            if (event.target.tagName.toLowerCase() === 'button' &&
-                event.target.classList.contains('sap-icon--decline')) {
-                event.target.parentNode.parentNode.style.display = 'none';
-            }
+            this.deleteRow(event);
         }
     }
 }

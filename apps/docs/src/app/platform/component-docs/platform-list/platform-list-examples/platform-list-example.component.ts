@@ -76,9 +76,8 @@ export class PlatformListWithButtonsExampleComponent {
     }
     // Handle deletion of item via keyboard 'Enter' or mouseclick
     @HostListener('keyup', ['$event']) onKeydown(event: any): void {
-        if (event && event.key === 'Enter' && event.target.tagName.toLowerCase() === 'button') {
-            const msg = event.target.classList.contains('sap-icon--edit') ? 'Requested for Edit' : 'Accepted';
-            alert(msg);
+        if (event && event.key === 'Enter') {
+            this.accept(event);
         }
     }
 }

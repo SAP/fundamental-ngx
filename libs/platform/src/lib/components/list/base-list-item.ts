@@ -1,18 +1,17 @@
 import {
-    ElementRef, HostBinding, Input, ChangeDetectorRef, EventEmitter,
+    ElementRef, Input, ChangeDetectorRef, EventEmitter,
     Output, HostListener, ViewChild, AfterViewChecked, OnInit, Directive, TemplateRef
 } from '@angular/core';
 
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { CheckboxComponent, RadioButtonComponent } from '@fundamental-ngx/core';
 import { ContentDensity } from '../form/form-control';
+import { SelectionType, ListType } from './list.component';
 import { BaseComponent } from '../base';
 import { ListConfig } from './list.config';
 
 let nextListItemId = 0;
 export type StatusType = 'negative' | 'critical' | 'positive' | 'informative';
-export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
-export type ListType = 'inactive' | 'active' | 'detail';
 
 /** Base interface for a list variant definition.
  *  Captures a list item template definition. */
@@ -51,7 +50,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** Whether there is no data inside list item */
     @Input()
-    noDataText?: string;
+    noDataText: string;
 
     /** The type of the secondary text.fd-list__byline-right--*
     *  Can be one of *positive*, *negative*, *informative*, *critical*, *neutral* */
@@ -154,7 +153,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /** Whether listitem is selected */
     selected: boolean;
 
-    public selectionValue: string;
+    selectionValue: string;
 
     /**
      * @hidden
@@ -165,16 +164,14 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** event emitter for selected item*/
     @Output()
-    itemSelected: EventEmitter<any> = new EventEmitter<any>();
+    itemSelected = new EventEmitter<KeyboardEvent | MouseEvent | TouchEvent>();
 
     /** Event sent when delete, details or any other action buttons are clicked */
     @Output()
-    buttonClicked: EventEmitter<any> = new EventEmitter();
+    buttonClicked = new EventEmitter<KeyboardEvent | MouseEvent | TouchEvent>();
 
-    @ViewChild('listItem')
-    listItemRef: ElementRef;
 
-    @ViewChild('listItem', { read: ElementRef, static: false })
+    @ViewChild('listItem', { read: ElementRef })
     listItem: ElementRef;
 
     /** Access child element, for checking link content*/
@@ -204,10 +201,10 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     }
 
     /**
-       * @hidden
-       * list of values, it can be of type Item or String.
-       */
-    private _item: any;
+    * @hidden
+    * list of values, it can be of type Item or String.
+    */
+    _item: any;
 
     /** setter and getter for _link */
     @Input('link')
@@ -295,7 +292,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * @hidden
      * On item click event will be emitted */
     @HostListener('click')
-    onItemClick(): void {
+    onItemClick(event: KeyboardEvent | MouseEvent | TouchEvent): void {
         this.itemSelected.emit(event);
         this._changeDetectorRef.markForCheck();
     }
@@ -343,7 +340,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** @hidden */
     /**on keydown append active styles on actionable item */
-    onKeyDown(event: any): void {
+    onKeyDown(event: KeyboardEvent): void {
         if (this.anchor !== undefined && (event.keyCode === ENTER || event.keyCode === SPACE)) {
             this.anchor.nativeElement.classList.add('is-active');
         }
@@ -351,7 +348,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** @hidden */
     /**on keyup remove active styles from actionable item*/
-    onKeyUp(event: any): void {
+    onKeyUp(event: KeyboardEvent): void {
         if (this.anchor !== undefined && (event.keyCode === ENTER || event.keyCode === SPACE)) {
             this.anchor.nativeElement.classList.remove('is-active');
         }
@@ -362,7 +359,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      *  @hidden
      *  Handles action button click
      */
-    public onActionButtonClick($event: any): void {
+    public onActionButtonClick($event: KeyboardEvent | MouseEvent | TouchEvent): void {
         this.buttonClicked.emit($event);
     }
 

@@ -197,10 +197,15 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     role = 'list';
 
     _destroyed = new Subject<void>();
+    /**@hidden
+     * for data source handling
+     */
     _dsSubscription: Subscription | null;
+
+    /**@hidden
+        * for items impertaive and declartive approaches
+        */
     _itemsSubscription: Subscription | null;
-
-
 
 
     /**
@@ -212,7 +217,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
     set dataSource(value: FdpListDataSource<any>) {
         if (value) {
-            this.initializeDS(value);
+            this._initializeDS(value);
         }
     }
     protected _dataSource: FdpListDataSource<any>;
@@ -387,7 +392,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /**handline keyboard operations
     *  on list and list items
     */
-    handleKeyDown(event: any): boolean {
+    handleKeyDown(event: KeyboardEvent): boolean {
         event.stopImmediatePropagation();
         if (this.keyManager) {
             if (event.keyCode === DOWN_ARROW || event.keyCode === UP_ARROW) {
@@ -399,7 +404,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         }
     }
 
-    private initializeDS(ds: FdpListDataSource<any>): void {
+    _initializeDS(ds: FdpListDataSource<any>): void {
         this.dsItems = [];
         if (isDataSource(this.dataSource)) {
             this.dataSource.close();
@@ -409,18 +414,18 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             }
         }
         // Convert ListDataSource<T> | T[] as DataSource
-        this._dataSource = this.openDataStream(ds);
+        this._dataSource = this._openDataStream(ds);
     }
 
-    private toDataStream(ds: FdpListDataSource<any>): ListDataSource<any> {
+    _toDataStream(ds: FdpListDataSource<any>): ListDataSource<any> {
         if (isDataSource(ds)) {
             return ds;
         }
         return undefined;
     }
 
-    private openDataStream(ds: FdpListDataSource<any>): ListDataSource<any> {
-        const initDataSource = this.toDataStream(ds);
+    _openDataStream(ds: FdpListDataSource<any>): ListDataSource<any> {
+        const initDataSource = this._toDataStream(ds);
         if (initDataSource === undefined) {
             throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
         }
@@ -480,7 +485,8 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         this.tempItems = this.dsItems.slice(this.startIndex, this.lastIndex);
         return this.tempItems;
     }
-    /**  filter to get Selected items from a list**/
+    /**  filter to get Selected items from a list
+     * event:any to avoid code duplication**/
     onSelectionChanged(event: any): void {
         if (event.target.checked) {
             this.selectionModel.select(event.target.parentNode.parentNode.parentNode);
@@ -490,7 +496,8 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
-    /**  Update navgiation styles for non navigated items**/
+    /**  Update navgiation styles for non navigated items
+     * event:any to avoid code duplication**/
     @HostListener('click', ['$event'])
     updateNavigation(event: any): void {
         this.ListItems.forEach((item) => {
@@ -506,7 +513,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
     }
     /** @hidden */
-    /**List item with radio button styles,check,uncheckupdates */
+    /**List item with radio button styles,check,uncheckupdates
+     * event:any to avoid code duplication
+     */
     handleSingleSelect(event: any): void {
         // clean up single selection items
         if (event.target !== null && event.target !== undefined && this.selectionMode === 'single') {
@@ -559,7 +568,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
-    /**List item with checkbox styles,check,uncheckupdates */
+    /**List item with checkbox styles,check,uncheckupdates
+     * event:any to avoid code duplication
+     */
     handleMultiSelect(event: any): void {
         if (event.target !== null &&
             event.target !== undefined &&
@@ -644,4 +655,3 @@ export class ListGroupHeader extends BaseListItem implements OnInit {
         this.id = `fdp-list-${nextListGrpHeaderId++}`;
     }
 }
-
