@@ -348,6 +348,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Open suggestion menu
      */
     openSuggestionMenu(): void {
+        this.closeSuggestionMenu();
         this._suggestionkeyManager = new FocusKeyManager(this.suggestionItems);
         if (this.showDropdown) {
             return;
