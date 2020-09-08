@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.36...v0.22.0-rc.37) (2020-09-08)
+
+
+### Bug Fixes
+
+* programmatically click product menu item on space/enter and add keyboard arrow navigation ([#3187](https://github.com/SAP/fundamental-ngx/issues/3187)) ([6d401b9](https://github.com/SAP/fundamental-ngx/commit/6d401b99dfca52d6da7a6221d513ce8b64037d14))
+
 ## [0.22.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.35...v0.22.0-rc.36) (2020-09-08)
 
 ## [0.22.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.34...v0.22.0-rc.35) (2020-09-08)
