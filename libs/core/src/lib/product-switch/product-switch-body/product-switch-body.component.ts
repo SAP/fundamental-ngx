@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { ProductSwitchItem } from './product-switch.item';
 import { FdDropEvent } from '../../utils/drag-and-drop/dnd-list/dnd-list.directive';
+import { KeyUtil } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-product-switch-body',
@@ -49,7 +50,7 @@ export class ProductSwitchBodyComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this.checkSize();
+        this._checkSize();
     }
 
     /**
@@ -71,7 +72,23 @@ export class ProductSwitchBodyComponent implements OnInit {
     /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
-        this.checkSize();
+        this._checkSize();
+    }
+
+    /** @hidden */
+    keyDownHandle(event: KeyboardEvent): void {
+        const target = <HTMLElement>event.target;
+        const i = Array.from(target.parentElement.children).indexOf(target);
+        if (!KeyUtil.isKey(event, 'Tab')) {
+            event.preventDefault();
+        }
+        if (KeyUtil.isKey(event, ['Enter', ' '])) {
+            target.click();
+        } else if (!this.isListMode()) {
+            this._handleNoListKeydown(event, target, i);
+        } else if (this.isListMode() && KeyUtil.isKey(event, ['ArrowDown', 'ArrowUp'])) {
+            this._handleListArrowUpDown(event, target);
+        }
     }
 
     /** @hidden */
@@ -85,11 +102,63 @@ export class ProductSwitchBodyComponent implements OnInit {
     }
 
     /** @hidden */
-    private checkSize(): void {
+    private _checkSize(): void {
         if (this.isSmallMode()) {
             this.listMode = window.innerWidth < 588;
         } else {
             this.listMode = window.innerWidth < 776;
+        }
+    }
+
+    /** @hidden */
+    private _handleNoListKeydown(event: KeyboardEvent, target: HTMLElement, i: number): void {
+        if (KeyUtil.isKey(event, 'ArrowLeft') && target.previousElementSibling) {
+            (<HTMLElement>target.previousElementSibling).focus();
+        } else if (KeyUtil.isKey(event, 'ArrowRight') && target.nextElementSibling) {
+            (<HTMLElement>target.nextElementSibling).focus();
+        } else if (KeyUtil.isKey(event, ['ArrowDown', 'ArrowUp'])) {
+            if (this.products.length >= 7) {
+                this._handleNoListMoreThanSeven(event, target, i);
+            } else if (this.products.length < 7) {
+                this._handleNoListLessThanSeven(event, target, i);
+            }
+        }
+    }
+
+    /** @hidden */
+    private _handleNoListMoreThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
+        if (KeyUtil.isKey(event, 'ArrowDown')) {
+            if (target.parentElement.children[i + 4]) {
+                (<HTMLElement>target.parentElement.children[i + 4]).focus();
+            }
+        }
+        if (KeyUtil.isKey(event, 'ArrowUp')) {
+            if (target.parentElement.children[i - 4]) {
+                (<HTMLElement>target.parentElement.children[i - 4]).focus();
+            }
+        }
+    }
+
+    /** @hidden */
+    private _handleNoListLessThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
+        if (KeyUtil.isKey(event, 'ArrowDown')) {
+            if (target.parentElement.children[i + 3]) {
+                (<HTMLElement>target.parentElement.children[i + 3]).focus();
+            }
+        }
+        if (KeyUtil.isKey(event, 'ArrowUp')) {
+            if (target.parentElement.children[i - 3]) {
+                (<HTMLElement>target.parentElement.children[i - 3]).focus();
+            }
+        }
+    }
+
+    /** @hidden */
+    private _handleListArrowUpDown(event: KeyboardEvent, target: HTMLElement): void {
+        if (this.isListMode() && KeyUtil.isKey(event, 'ArrowDown') && target.nextElementSibling) {
+            (<HTMLElement>target.nextElementSibling).focus();
+        } else if (this.isListMode() && KeyUtil.isKey(event, 'ArrowUp') && target.previousElementSibling) {
+            (<HTMLElement>target.previousElementSibling).focus();
         }
     }
 }
