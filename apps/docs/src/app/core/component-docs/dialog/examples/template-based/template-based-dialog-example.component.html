@@ -13,11 +13,10 @@
             <fd-dialog-footer-button>
                 <button
                     fd-button
+                    compact="true"
                     fdType="emphasized"
                     fd-dialog-decisive-button
-                    [compact]="true"
-                    (click)="dialog.close('Continue')"
-                >
+                    (click)="dialog.close('Continue')">
                     Interested
                 </button>
             </fd-dialog-footer-button>
@@ -25,12 +24,11 @@
             <fd-dialog-footer-button>
                 <button
                     fd-button
+                    compact="true"
                     fdType="transparent"
                     fd-initial-focus
                     fd-dialog-decisive-button
-                    [compact]="true"
-                    (click)="dialog.dismiss('Cancel')"
-                >
+                    (click)="dialog.dismiss('Cancel')">
                     Cancel
                 </button>
             </fd-dialog-footer-button>

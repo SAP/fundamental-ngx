@@ -9,7 +9,7 @@
                 </div>
                 <div fd-bar-right>
                     <fd-bar-element>
-                        <button fd-button fdType="transparent" [compact]="true" (click)="clear()">
+                        <button fd-button fdType="transparent" compact="true" (click)="clear()">
                             Clear
                         </button>
                     </fd-bar-element>
@@ -18,15 +18,15 @@
 
             <ng-template fdTemplate="subheader">
                 <div fd-bar-middle>
-                    <fd-bar-element [fullWidth]="true">
+                    <fd-bar-element fullWidth="true">
                         <fd-input-group
                             fd-initial-focus
+                            button="true"
+                            compact="true"
                             glyph="search"
                             placement="after"
                             placeholder="Search"
                             [(ngModel)]="searchedPhrase"
-                            [button]="true"
-                            [compact]="true"
                         >
                         </fd-input-group>
                     </fd-bar-element>
@@ -35,7 +35,7 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <ul *ngIf="!(dialogRef.onLoading | async)" fd-list [compact]="true">
+            <ul *ngIf="!(dialogRef.onLoading | async)" fd-list compact="true">
                 <li
                     *ngFor="let fruit of filterFruits(fruitCollection, searchedPhrase)"
                     fd-list-item
@@ -60,7 +60,7 @@
                             fd-dialog-decisive-button
                             glyph="cart"
                             fdType="emphasized"
-                            [compact]="true"
+                            compact="true"
                             (click)="checkout()"
                         >
                             Checkout
