@@ -25,7 +25,7 @@ import { startWith } from 'rxjs/operators';
 import { BaseInput } from '../base.input';
 import { FormField } from '../form-field';
 import { InputComponent } from '../input/input.component';
-import { ContentDensity, Status, FormFieldControl } from '../form-control';
+import { ContentDensity, FormFieldControl } from '../form-control';
 
 import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
 import { InputGroupConfig } from './input-group.config';
@@ -66,19 +66,6 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         return this._contentDensity;
     }
 
-    /**
-     * control state: 'success' | 'error' | 'warning' | 'default' | 'information'
-     */
-    @Input()
-    get state(): Status {
-        const inputStatus = this.status; // status from baseInput based on FormControl instance
-        return inputStatus ? inputStatus : this._state;
-    }
-
-    set state(state: Status) {
-        this._state = state;
-    }
-
     /** Input value */
     @Input()
     get value(): any {
@@ -110,15 +97,12 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
 
     /** @hidden */
     get _controlStateClass(): string {
-        const status = this.state;
+        const status = this.status;
         return status ? `is-${status}` : null;
     }
 
     /** @hidden */
     private _contentDensity: ContentDensity = this._inputGroupConfig.contentDensity;
-
-    /** @hidden */
-    private _state: Status;
 
     /** @hidden */
     constructor(

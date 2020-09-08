@@ -13,7 +13,6 @@ import { PlatformInputGroupDocsComponent } from './platform-input-group-docs.com
 
 import { PlatformInputGroupStandardExampleComponent } from './platform-input-group-examples/platform-input-group-standard-example.component';
 import { PlatformInputGroupCompactExampleComponent } from './platform-input-group-examples/platform-input-group-compact-example.component';
-import { PlatformInputGroupStateExampleComponent } from './platform-input-group-examples/platform-input-group-state-example.component';
 import { PlatformInputGroupDisabledExampleComponent } from './platform-input-group-examples/platform-input-group-disabled-example.component';
 import { PlatformInputGroupFormExampleComponent } from './platform-input-group-examples/platform-input-group-form-example.component';
 
@@ -43,7 +42,6 @@ const routes: Routes = [
         PlatformInputGroupHeaderComponent,
         PlatformInputGroupStandardExampleComponent,
         PlatformInputGroupCompactExampleComponent,
-        PlatformInputGroupStateExampleComponent,
         PlatformInputGroupDisabledExampleComponent,
         PlatformInputGroupFormExampleComponent
     ]

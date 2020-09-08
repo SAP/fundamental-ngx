@@ -13,7 +13,7 @@ import { InputGroupComponent } from './input-group.component';
 
 @Component({
     template: `
-        <fdp-input-group name="example" [contentDensity]="contentDensity" [disabled]="disabled" [state]="state">
+        <fdp-input-group name="example" [contentDensity]="contentDensity" [disabled]="disabled">
             <fdp-input-group-addon>$</fdp-input-group-addon>
             <fdp-input-group-input></fdp-input-group-input>
             <fdp-input-group-addon>0.00</fdp-input-group-addon>
@@ -28,7 +28,6 @@ class InputGroupHostComponent {
 
     contentDensity: ContentDensity = 'cozy';
     disabled = false;
-    state: Status = 'default';
 }
 describe('InputGroup component', () => {
     let host: InputGroupHostComponent;
@@ -80,20 +79,6 @@ describe('InputGroup component', () => {
         host.disabled = true;
         fixture.detectChanges();
         expect(fixture.debugElement.query(By.css('.is-disabled'))).toBeTruthy();
-    });
-
-    it('Should add class to show current state', () => {
-        host.state = 'error';
-        fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('.is-error'))).toBeTruthy();
-
-        host.state = 'success';
-        fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('.is-success'))).toBeTruthy();
-
-        host.state = 'warning';
-        fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('.is-warning'))).toBeTruthy();
     });
 });
 

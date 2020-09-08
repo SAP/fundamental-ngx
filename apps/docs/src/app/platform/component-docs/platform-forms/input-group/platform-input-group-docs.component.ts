@@ -4,7 +4,6 @@ import { ExampleFile } from '../../../../documentation/core-helpers/code-example
 
 import * as inputGroupStandardExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-standard-example.component.html';
 import * as inputGroupCompactExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-compact-example.component.html';
-import * as inputGroupStateExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-state-example.component.html';
 import * as inputGroupDisabledExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-disabled-example.component.html';
 import * as inputGroupFormExampleHtml from '!raw-loader!./platform-input-group-examples/platform-input-group-form-example.component.html';
 
@@ -26,14 +25,6 @@ export class PlatformInputGroupDocsComponent {
             language: 'html',
             code: inputGroupCompactExampleHtml,
             fileName: 'platform-input-group-compact-example'
-        }
-    ];
-
-    inputGroupState: ExampleFile[] = [
-        {
-            language: 'html',
-            code: inputGroupStateExampleHtml,
-            fileName: 'platform-input-group-state-example'
         }
     ];
 
