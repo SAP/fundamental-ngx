@@ -4,11 +4,9 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { BusyIndicatorHeaderComponent } from './busy-indicator-header/busy-indicator-header.component';
 import { BusyIndicatorDocsComponent } from './busy-indicator-docs.component';
-import { BusyIndicatorBasicExampleComponent } from './examples/busy-indicator-basic-example.component';
-import { BusyIndicatorWrapperExampleComponent } from './examples/busy-indicator-wrapper-example.component';
-import { BusyIndicatorModule } from '@fundamental-ngx/core';
-import { BusyIndicatorSizeExampleComponent } from './examples/busy-indicator-size-example.component';
+import { BusyIndicatorModule, FormModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { examples } from './examples';
 
 const routes: Routes = [
     {
@@ -22,14 +20,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, BusyIndicatorModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, BusyIndicatorModule, FormModule],
     exports: [RouterModule],
     declarations: [
+        examples,
         BusyIndicatorDocsComponent,
         BusyIndicatorHeaderComponent,
-        BusyIndicatorSizeExampleComponent,
-        BusyIndicatorBasicExampleComponent,
-        BusyIndicatorWrapperExampleComponent
     ]
 })
 export class BusyIndicatorDocsModule {}

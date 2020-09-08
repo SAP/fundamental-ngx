@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-combobox-example',
-    templateUrl: './combobox-example.component.html'
+    templateUrl: './combobox-example.component.html',
+    styleUrls: ['combobox-example.component.scss']
 })
 export class ComboboxExampleComponent {
     searchTermOne = '';
@@ -11,4 +12,5 @@ export class ComboboxExampleComponent {
     searchTermFour = '';
     searchTermFive = '';
     searchTermSix = '';
+    fruits = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];
 }

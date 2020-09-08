@@ -1,2 +1,5 @@
-<fd-combobox [(ngModel)]="searchTerm" [dropdownValues]="dropdownValues | async" [placeholder]="'Type some text...'">
+<fd-combobox
+    placeholder="Type some text..."
+    [dropdownValues]="dropdownValues | async"
+    [(ngModel)]="searchTerm">
 </fd-combobox>
