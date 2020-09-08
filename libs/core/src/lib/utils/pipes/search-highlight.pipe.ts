@@ -7,9 +7,10 @@ export class SearchHighlightPipe implements PipeTransform {
     transform(value: string, args: string, active: boolean = true, includeSpans: boolean = false): string {
         let result: string = value;
         if (args && value && active) {
-            const startIndex = value.toLowerCase().indexOf(args.toLowerCase());
+            const testStr: string = args.trim().toLowerCase();
+            const startIndex = value.toLowerCase().indexOf(testStr);
             if (startIndex !== -1) {
-                const matchingString = value.substr(startIndex, args.length);
+                const matchingString = value.substr(startIndex, testStr.length);
                 result = value.replace(matchingString, '<strong>' + matchingString + '</strong>');
             }
         }

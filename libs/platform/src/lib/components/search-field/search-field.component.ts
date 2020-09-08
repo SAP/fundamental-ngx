@@ -270,14 +270,15 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * @hidden
      */
     onValueChange($event: string): void {
-        if ($event.length > 0) {
-            this.openSuggestionMenu();
-        } else {
+        const inputStr: string = $event.trim();
+        if (inputStr.length === 0) {
             this.closeSuggestionMenu();
+            return;
         }
+        this.openSuggestionMenu();
         if (this.dataSource) {
             const match = new Map();
-            match.set('keyword', $event);
+            match.set('keyword', inputStr);
             match.set(
                 'category',
                 this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
@@ -285,7 +286,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             this.dataSource.match(match);
         }
         this.inputChange.emit({
-            text: $event,
+            text: inputStr,
             category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
         });
     }
@@ -445,6 +446,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     transform(values: string[], match: string): string[] {
-        return values.filter((value) => value.toLowerCase().indexOf(match.toLowerCase()) > -1);
+        return values.filter((value) => value.toLowerCase().indexOf(match.trim().toLowerCase()) > -1);
     }
 }
