@@ -12,7 +12,10 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "types": [],
-    "lib": ["dom", "es2015"]
+    "lib": [
+      "dom",
+      "es2015"
+    ]
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
@@ -22,5 +25,11 @@
     "enableResourceInlining": true,
     "enableIvy": false
   },
-  "exclude": ["src/test.ts", "**/*.spec.ts"]
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
 }

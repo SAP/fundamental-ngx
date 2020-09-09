@@ -9,5 +9,21 @@
 </head>
 <body>
 <fundamental-ngx-root></fundamental-ngx-root>
+
+
+
+<script type="text/javascript">
+    window.onload = function(e){
+        console.log('w = ', window.appShellProviderService)
+
+        window.appShellProviderService.zone.run(() => {
+            window.appShellProviderService.ref.themeManager.onChange((aaa) => {
+                console.log('JS: ', aaa)
+            });
+        });
+    }
+
+</script>
+
 </body>
 </html>

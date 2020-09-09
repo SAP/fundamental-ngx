@@ -2,7 +2,7 @@ import {
     Channel,
     DeliveryModel,
     EventType
-} from './event-bus';
+} from './message-bus';
 import { Injectable } from '@angular/core';
 
 @Injectable({

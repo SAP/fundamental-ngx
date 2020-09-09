@@ -138,12 +138,12 @@ export class AppShellHeaderComponent implements OnInit {
 
     ngOnInit(): void {
         this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/theme/sap_fiori_3.css');
-        this.appShell.themeAPI.themeChanged(this.themes[0].id, this.themes[0].name);
+        this.appShell.themeManager.themeChanged(this.themes[0].id, this.themes[0].name);
     }
 
     onSelectTheme(id: string, name: string): void {
         this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/theme/' + id + '.css');
-        this.appShell.themeAPI.themeChanged(id, name);
+        this.appShell.themeManager.themeChanged(id, name);
     }
 
     onLogoClick($event: Event): void {

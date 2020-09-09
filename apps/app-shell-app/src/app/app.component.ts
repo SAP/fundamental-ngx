@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.appShellProvider.themeAPI.onChange((m: MapMessage<string>) => {
+        this.appShellProvider.themeManager.onChange((m: MapMessage<string>) => {
             if (m) {
                 this.currentTheme = m.get('name');
             }
