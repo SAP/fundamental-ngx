@@ -8,7 +8,7 @@ import {
  * Basic interface to implement to have Topic based messaging system. We need to thing if we have one implementation
  * of Publisher/Subscriber or different implementation that take into account security, and other things.
  */
-export interface EventBus<T extends Message> {
+export interface MessageBus<T extends Message> {
     createPublisher(topic: string, type: EventType): TopicPublisher<T>;
 
     createSubscriber(topic: string, type: EventType, messageSelector?: (msg: Message) => boolean): TopicSubscriber<T>;

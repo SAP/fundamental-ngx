@@ -3,7 +3,7 @@ import {
     MapMessage,
     TopicPublisher,
     TopicSubscriber
-} from '../events/event-bus';
+} from '../events/message-bus';
 import {
     Injectable,
     OnDestroy
