@@ -56,7 +56,6 @@ export default function(options: Schema): Rule {
             options.addAppShellModule ? addModuleToRootModuleFile('AppShellModule',
                 '@fundamental-ngx/app-shell') : noop(),
             options.addCustomStyleFile ? createCustomStyles() : noop(),
-            options.addCustomStyleFile ? createCustomStyles() : noop(),
             addStylesToAngularJson(),
             copyThemesToAssets(),
             info()
