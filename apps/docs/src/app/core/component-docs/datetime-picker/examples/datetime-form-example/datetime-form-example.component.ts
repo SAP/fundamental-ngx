@@ -12,8 +12,6 @@ export class DatetimeFormExampleComponent {
         disabledDate: new FormControl({ value: FdDatetime.getToday(), disabled: true })
     });
 
-    isOpen = false;
-
     isValid(): boolean {
         return this.customForm.get('date').valid;
     }

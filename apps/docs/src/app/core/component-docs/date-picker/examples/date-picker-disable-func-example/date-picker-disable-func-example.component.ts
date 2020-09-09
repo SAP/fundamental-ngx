@@ -11,8 +11,6 @@ export class DatePickerDisableFuncExampleComponent {
         date: new FormControl(FdDate.getToday())
     });
 
-    isOpen = false;
-
     isValid(): boolean {
         return this.customForm.get('date').valid;
     }
