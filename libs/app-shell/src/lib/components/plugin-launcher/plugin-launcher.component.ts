@@ -29,7 +29,7 @@ export class PluginLauncherComponent implements OnInit {
     viewContainer: ViewContainerRef;
 
     @Input()
-    type: Scope = Scope.Widget;
+    type: Scope = Scope.Page;
 
     @Input()
     name: string;
