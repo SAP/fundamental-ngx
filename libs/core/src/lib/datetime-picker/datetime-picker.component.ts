@@ -27,8 +27,8 @@ import { DatePipe } from '@angular/common';
 import { CalendarYearGrid, SpecialDayRule } from '../..';
 import { PopoverComponent } from '../popover/popover.component';
 import { PopoverBodyComponent } from '../popover/popover-body/popover-body.component';
-import { Subject, Subscription } from 'rxjs';
-import { delay, filter, first, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { delay, first, takeUntil } from 'rxjs/operators';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -368,20 +368,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     isInvalidDateInputHandler(e): void {
         this.isInvalidDateInput = e;
-    }
-
-    /** @hidden */
-    @HostListener('document:keydown.escape', [])
-    onEscapeKeydownHandler(): void {
-        this.closePopover();
-    }
-
-    /** @hidden */
-    @HostListener('document:click', ['$event'])
-    public onGlobalClick(event: MouseEvent): void {
-        if (!this._elRef.nativeElement.contains(event.target) && !this.popoverBodyComponent.elRef.nativeElement.contains(event.target)) {
-            this.closePopover();
-        }
     }
 
     /** @hidden */

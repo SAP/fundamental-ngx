@@ -27,7 +27,7 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
 
             if (!this._uuidv4) {
                 this._uuidv4 = uuidv4();
-                elementRef.nativeElement._classMap[this._uuidv4] = [newComponentClassList];
+                elementRef.nativeElement._classMap[this._uuidv4] = newComponentClassList;
             }
 
             const allClassList = [...elementRef.nativeElement.classList];
@@ -42,22 +42,23 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
     };
 }
 
-/** Removes falsy elements from string array */
+/** Splits merged classes and removes falsy elements from string array */
 function sanitize(array: string[]): string [] {
-    return array.filter(Boolean)
+    return array
+        .filter(Boolean)
+        .reduce((classList: string[], cssClass: string) => [...classList, ...cssClass.split(' ')], []);
 }
 
 /** Returns an array1[index] of first array1 and array2 shared element */
-function firstCommonElementIndex(array1: string[], array2): number {
-    const index = array2.findIndex(element => array1.indexOf(element) !== -1);
-    return index === -1 ? 0 : index;
+function firstCommonElementIndex(array1: string[], array2: string[]): number {
+    return array1.findIndex(element => array2.indexOf(element) !== -1);
 }
 
 /** Replaces previous set of component classes with new set of component classes */
-function updateComponentClassList(allClasses: string[],  previousComponentClassList, newComponentClassList: string[]): string[] {
-    const index = firstCommonElementIndex(allClasses, previousComponentClassList);
-    const externalClasses = allClasses.filter(element => !previousComponentClassList.includes(element));
-    externalClasses.splice(index, 0, ...newComponentClassList);
+function updateComponentClassList(allClasses: string[], previousComponentClassList: string[], newComponentClassList: string[]): string[] {
+    let index = firstCommonElementIndex(allClasses, previousComponentClassList);
+    index = index === -1 ? 0 : index;
+    allClasses.splice(index, previousComponentClassList.length, ...newComponentClassList);
 
-    return externalClasses;
+    return allClasses;
 }

@@ -1,12 +1,12 @@
 <label fd-form-label>Languages</label>
 <fd-segmented-button id="language" style="margin-bottom: 20px;">
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('en-gb')" [state]="isSelected('en-gb')">
+    <button fd-button (click)="setLocale('en-gb')" [class]="isSelected('en-gb')">
         English
     </button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('fr')" [state]="isSelected('fr')">French</button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('de')" [state]="isSelected('de')">German</button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('bg')" [state]="isSelected('bg')">Bulgarian</button>
-    <button fd-segmented-button [size]="'xs'" (click)="setLocale('pl')" [state]="isSelected('pl')">Polish</button>
+    <button fd-button (click)="setLocale('fr')" [class]="isSelected('fr')">French</button>
+    <button fd-button (click)="setLocale('de')" [class]="isSelected('de')">German</button>
+    <button fd-button (click)="setLocale('bg')" [class]="isSelected('bg')">Bulgarian</button>
+    <button fd-button (click)="setLocale('pl')" [class]="isSelected('pl')">Polish</button>
 </fd-segmented-button>
 
 <br />

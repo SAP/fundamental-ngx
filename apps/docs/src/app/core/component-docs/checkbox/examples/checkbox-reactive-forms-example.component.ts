@@ -8,9 +8,9 @@ import { map } from 'rxjs/operators';
         <form [formGroup]="registrationForm">
             <fd-checkbox
                 formControlName="acceptAll"
-                [tristate]="true"
-                [tristateSelectable]="false"
                 label="Accept all"
+                tristate="true"
+                [tristateSelectable]="false"
             ></fd-checkbox>
             <fieldset formGroupName="agreements">
                 <fd-checkbox formControlName="termsAndConditions" label="I accept Terms and Conditions"></fd-checkbox>
