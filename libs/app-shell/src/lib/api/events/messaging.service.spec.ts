@@ -8,7 +8,7 @@ import {
     EventType,
     Message,
     TextMessage
-} from './event-bus';
+} from './message-bus';
 
 describe('MessagingService', () => {
     beforeEach(() => {
