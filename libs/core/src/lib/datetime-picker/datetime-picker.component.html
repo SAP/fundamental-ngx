@@ -1,8 +1,6 @@
 <div class="fd-datetime">
     <fd-popover
         [(isOpen)]="isOpen"
-        [closeOnOutsideClick]="false"
-        [closeOnEscapeKey]="false"
         [focusTrapped]="true"
         [triggers]="[]"
         [disabled]="disabled"
@@ -19,7 +17,6 @@
                     [(ngModel)]="inputFieldDate"
                     (ngModelChange)="handleInputChange($event)"
                     [placeholder]="placeholder"
-                    (click)="openPopover()"
                     [compact]="compact"
                     [ngClass]="{ 'is-error': isInvalidDateInput && useValidation }"
                     [disabled]="disabled"
