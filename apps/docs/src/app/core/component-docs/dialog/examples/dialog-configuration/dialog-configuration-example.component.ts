@@ -32,4 +32,12 @@ export class DialogConfigurationExample {
             backdropClickCloseable: false
         } as DialogConfig);
     }
+
+    openNavigationDialog(template): void {
+        this._dialogService.open(template, {
+            width: '300px',
+            responsivePadding: true,
+            closeOnNavigation: false
+        } as DialogConfig);
+    }
 }
