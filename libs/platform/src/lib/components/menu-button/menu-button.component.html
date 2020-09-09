@@ -8,8 +8,9 @@
     [disabled]="disabled"
     (click)="onButtonClick($event)"
     [fdType]="type"
-    tabindex="0"
+    [attr.tabindex]="0"
     [attr.title]="title"
+    [attr.aria-haspopup]="true"
 >
     <ng-content></ng-content>
 </button>

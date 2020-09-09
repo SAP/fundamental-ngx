@@ -1,140 +1,89 @@
 <div>Menu Button Disabled</div>
-<fdp-menu-button
-    [id]="'menu-button-14'"
-    [contentDensity]="'cozy'"
-    [icon]="'world'"
-    [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-14" contentDensity="cozy" icon="world" [fdpMenuTriggerFor]="basicMenu">
     Default Button
 </fdp-menu-button>
 
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button
-    [id]="'menu-button-15'"
-    [contentDensity]="'cozy'"
-    [icon]="'world'"
-    [disabled]="true"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-15" contentDensity="cozy" icon="world" title="disabled menu button" [disabled]="true"
+    [fdpMenuTriggerFor]="basicMenu">
     Default Disabled Button
 </fdp-menu-button>
 
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button
-    [id]="'menu-button-16'"
-    [contentDensity]="'compact'"
-    [icon]="'world'"
-    [disabled]="true"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-16" contentDensity="compact" icon="world" [disabled]="true"
+    title="disabled menu button with only icon" [fdpMenuTriggerFor]="basicMenu">
 </fdp-menu-button>
 
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button [id]="'menu-button-17'" [contentDensity]="'compact'" [disabled]="true" [fdpMenuTriggerFor]="basicMenu">
+<fdp-menu-button id="menu-button-17" contentDensity="compact" [disabled]="true" [fdpMenuTriggerFor]="basicMenu"
+    title="disabled menu button without icon and text">
 </fdp-menu-button>
 
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button [id]="'menu-button-18'" [contentDensity]="'compact'" [disabled]="true" [fdpMenuTriggerFor]="basicMenu">
+<fdp-menu-button id="menu-button-18" contentDensity="compact" [disabled]="true" [fdpMenuTriggerFor]="basicMenu">
     Default Button
 </fdp-menu-button>
 
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button
-    [id]="'menu-button-19'"
-    [contentDensity]="'compact'"
-    [disabled]="true"
-    [type]="'emphasized'"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-19" contentDensity="compact" [disabled]="true" type="emphasized"
+    [fdpMenuTriggerFor]="basicMenu">
     Default Button
 </fdp-menu-button>
 <br />
 <br />
 
 <div>Menu Button with and without Icon</div>
-<fdp-menu-button
-    [id]="'menu-button-20'"
-    [contentDensity]="'cozy'"
-    [icon]="'world'"
-    [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-20" contentDensity="cozy" icon="world" [disabled]="false"
+    [fdpMenuTriggerFor]="basicMenu">
     Default Button
 </fdp-menu-button>
 
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button [id]="'menu-button-21'" [contentDensity]="'cozy'" [disabled]="false" [fdpMenuTriggerFor]="basicMenu">
+<fdp-menu-button id="menu-button-21" contentDensity="cozy" [disabled]="false" [fdpMenuTriggerFor]="basicMenu">
     Default Button
 </fdp-menu-button>
 
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button
-    [id]="'menu-button-22'"
-    [contentDensity]="'cozy'"
-    [icon]="'world'"
-    [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-22" contentDensity="cozy" icon="world" [disabled]="false" title="menu button with icon"
+    ariaLabel="menu button with icon" [fdpMenuTriggerFor]="basicMenu">
 </fdp-menu-button>
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button [id]="'menu-button-23'" [contentDensity]="'cozy'" [disabled]="false" [fdpMenuTriggerFor]="basicMenu">
+<fdp-menu-button id="menu-button-23" contentDensity="cozy" [disabled]="false" title="menu button without icon and text"
+    ariaLabel="menu button without icon and text" [fdpMenuTriggerFor]="basicMenu">
 </fdp-menu-button>
 
 <br />
 <br />
 <div>Compact Menu Button with and without Icon</div>
-<fdp-menu-button
-    [id]="'menu-button-24'"
-    [contentDensity]="'compact'"
-    [icon]="'world'"
-    [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-24" contentDensity="compact" icon="world" [disabled]="false"
+    [fdpMenuTriggerFor]="basicMenu">
     Default Button
 </fdp-menu-button>
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button
-    [id]="'menu-button-25'"
-    [contentDensity]="'compact'"
-    [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-25" contentDensity="compact" [disabled]="false" [fdpMenuTriggerFor]="basicMenu">
     Default Button
 </fdp-menu-button>
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button
-    [id]="'menu-button-26'"
-    [contentDensity]="'compact'"
-    [icon]="'world'"
-    [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-26" contentDensity="compact" icon="world" [disabled]="false"
+    title="compact menu button with only icon" ariaLabel="compact menu button with icon"
+    [fdpMenuTriggerFor]="basicMenu">
 </fdp-menu-button>
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button
-    [id]="'menu-button-27'"
-    [contentDensity]="'compact'"
-    [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
->
+<fdp-menu-button id="menu-button-27" contentDensity="compact" [disabled]="false"
+    title="compact menu button without icon and text" ariaLabel="compact menu button without icon and text"
+    [fdpMenuTriggerFor]="basicMenu">
 </fdp-menu-button>
 
 <br />
 <br />
 <div>Long text Menu Button with and without Icon</div>
-<fdp-menu-button
-    [id]="'menu-button-28'"
-    [contentDensity]="'cozy'"
-    [icon]="'world'"
-    [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
-    [width]="'100px'"
->
-    Default Button with long text
+<fdp-menu-button id="menu-button-28" contentDensity="cozy" icon="world" [disabled]="false"
+    [fdpMenuTriggerFor]="basicMenu" title="Default menu button with icon and long text" width="100px">
+    Default Button with long text and icon
 </fdp-menu-button>
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<fdp-menu-button [contentDensity]="'cozy'" [disabled]="false" [fdpMenuTriggerFor]="basicMenu" [width]="'100px'">
+<fdp-menu-button contentDensity="cozy" [disabled]="false" title="Default menu button with long text"
+    [fdpMenuTriggerFor]="basicMenu" width="100px">
     Default Button with long text
 </fdp-menu-button>
 
