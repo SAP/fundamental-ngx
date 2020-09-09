@@ -1,14 +1,14 @@
 import {
-    AfterContentInit,
+    AfterContentInit, AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
+    ContentChild, ElementRef,
     EventEmitter,
-    Input,
+    Input, OnChanges,
     OnDestroy,
-    Output,
-    TemplateRef,
+    Output, SimpleChanges,
+    TemplateRef, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
@@ -45,7 +45,7 @@ import { Subscription } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent implements AfterContentInit, OnDestroy {
+export class SplitButtonComponent implements AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -76,6 +76,10 @@ export class SplitButtonComponent implements AfterContentInit, OnDestroy {
     @Input()
     selected: MenuItemComponent;
 
+    /** Whether or not the element should keep a fixed width. The width could change if the text changes length. */
+    @Input()
+    fixedWidth = true;
+
     /** Event sent when primary button is clicked */
     @Output()
     readonly primaryButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
@@ -89,10 +93,17 @@ export class SplitButtonComponent implements AfterContentInit, OnDestroy {
     menu: MenuComponent;
 
     /** @hidden */
+    @ViewChild('mainActionButton', { read: ElementRef })
+    mainAction: ElementRef;
+
+    /** @hidden */
+    mainButtonWidth: number;
+
+    /** @hidden */
     private _menuItemSubscriptions = new Subscription();
 
     /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef) {}
+    constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {}
 
     /** @hidden Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {
@@ -112,13 +123,29 @@ export class SplitButtonComponent implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        if (this.fixedWidth) {
+            this.mainButtonWidth = parseInt(this.mainAction.nativeElement.offsetWidth, 10);
+        }
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
         this._menuItemSubscriptions.unsubscribe();
     }
 
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes && changes.selected) {
+            this.selectMenuItem(this.selected);
+        }
+    }
+
     /** Function called to select a menu item for the split button */
     selectMenuItem(menuItem: MenuItemComponent): void {
-        menuItem.setSelected(true);
+        if (menuItem) {
+            menuItem.setSelected(true);
+        }
     }
 
     /** @hidden */

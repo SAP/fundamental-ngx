@@ -1,5 +1,6 @@
 <div class="fd-button-split fd-has-margin-right-small" role="group" aria-label="button-split" [fdMenuTrigger]="menu">
-    <button fd-button
+    <button fd-button #mainActionButton
+            [ngStyle]="{'width': mainButtonWidth + 'px'}"
             [fdType]="fdType"
             [compact]="compact"
             [disabled]="disabled"
