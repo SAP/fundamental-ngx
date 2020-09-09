@@ -20,7 +20,7 @@ export const API_FILES = {
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
     button: ['ButtonComponent'],
-    segmentedButton: ['SegmentedButtonComponent', 'SegmentedButtonDirective'],
+    segmentedButton: ['SegmentedButtonComponent'],
     calendar: [
         'CalendarComponent',
         'CalendarDayViewComponent',
