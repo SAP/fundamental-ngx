@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.39...v0.22.0-rc.40) (2020-09-09)
+
+
+### Bug Fixes
+
+* applyCssClass value initialization ([#3182](https://github.com/SAP/fundamental-ngx/issues/3182)) ([064ab65](https://github.com/SAP/fundamental-ngx/commit/064ab65e3c60417c4af1abbd67fbc802be1f7cc3))
+
 ## [0.22.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.38...v0.22.0-rc.39) (2020-09-09)
 
 
