@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.44...v0.22.0-rc.45) (2020-09-09)
+
+
+### Bug Fixes
+
+* add submit/cancel buttons for datetime picker ([#3136](https://github.com/SAP/fundamental-ngx/issues/3136)) ([3ad3fde](https://github.com/SAP/fundamental-ngx/commit/3ad3fdef1e551e77776e0510984923ba9f05719b))
+
 ## [0.22.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.43...v0.22.0-rc.44) (2020-09-09)
 
 
