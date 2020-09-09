@@ -21,11 +21,11 @@
                     <fd-bar-element fullWidth="true">
                         <fd-input-group
                             fd-initial-focus
-                            button="true"
-                            compact="true"
                             glyph="search"
                             placement="after"
                             placeholder="Search"
+                            [button]="true"
+                            [compact]="true"
                             [(ngModel)]="searchedPhrase"
                         >
                         </fd-input-group>
@@ -60,7 +60,7 @@
                             fd-dialog-decisive-button
                             glyph="cart"
                             fdType="emphasized"
-                            compact="true"
+                            [compact]="true"
                             (click)="checkout()"
                         >
                             Checkout
