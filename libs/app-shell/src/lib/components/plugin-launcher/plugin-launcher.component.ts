@@ -11,7 +11,7 @@ import {
 import { LookupService } from '../../api/extensions/lookup.service';
 import {
     PluginDescriptor,
-    PluginType
+    Scope
 } from '../../api/extensions/plugin-definition.model';
 import { loadRemoteModule } from '../../api/extensions/federation-utils';
 
@@ -29,7 +29,7 @@ export class PluginLauncherComponent implements OnInit {
     viewContainer: ViewContainerRef;
 
     @Input()
-    type: PluginType = PluginType.Widget;
+    type: Scope = Scope.Widget;
 
     @Input()
     name: string;
