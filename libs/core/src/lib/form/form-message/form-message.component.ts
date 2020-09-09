@@ -30,5 +30,5 @@ export class FormMessageComponent {
      * When it is enabled box shadow is removed and message is expanded to whole container width
      */
     @Input()
-    inline = false;
+    embedded = false;
 }
