@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.43...v0.22.0-rc.44) (2020-09-09)
+
+
+### Bug Fixes
+
+* **File Input:** Deprecate File Input component. ([#3047](https://github.com/SAP/fundamental-ngx/issues/3047)) ([c2321a8](https://github.com/SAP/fundamental-ngx/commit/c2321a81bc6ced9fcb529955a8e86e88a4a86946))
+* (platform) Fixed detached menu while scrolling ([#3195](https://github.com/SAP/fundamental-ngx/issues/3195)) ([049b6a3](https://github.com/SAP/fundamental-ngx/commit/049b6a33f853d1f607e56e7a0d56f12dab0df577))
+
 ## [0.22.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.42...v0.22.0-rc.43) (2020-09-09)
 
 ## [0.22.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.41...v0.22.0-rc.42) (2020-09-09)
