@@ -5,9 +5,8 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { API_FILES } from '../../api-files';
 import { RadioHeaderComponent } from './radio-header/radio-header.component';
 import { RadioDocsComponent } from './radio-docs.component';
-import { RadioExamplesComponent } from './examples/radio-examples.component';
-import { RadioFormGroupExampleComponent } from './examples/radio-form-group-example.component';
-import { FormModule, LinkModule, RadioModule } from '@fundamental-ngx/core';
+import { FormModule, RadioModule } from '@fundamental-ngx/core';
+import { examples } from './examples';
 
 const routes: Routes = [
     {
@@ -26,10 +25,13 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         RadioModule,
         FormModule,
-        LinkModule
     ],
     exports: [RouterModule],
-    declarations: [RadioDocsComponent, RadioHeaderComponent, RadioExamplesComponent, RadioFormGroupExampleComponent]
+    declarations: [
+        examples,
+        RadioDocsComponent,
+        RadioHeaderComponent
+    ]
 })
 export class RadioDocsModule {
 }
