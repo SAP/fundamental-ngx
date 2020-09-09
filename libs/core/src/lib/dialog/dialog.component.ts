@@ -117,19 +117,12 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _router: Router
-    ) {
-        this._subscriptions.add(
-            _router.events.subscribe(event => {
-                if (event instanceof NavigationStart && this.closeOnNavigation) {
-                    this._dialogRef.dismiss();
-                }
-            })
-        );
-    }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._listenOnHidden();
+        this._subscribeToNavigation();
     }
 
     /** @hidden */
@@ -257,5 +250,16 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
                     .subscribe(() => this.adjustResponsivePadding())
             );
         }
+    }
+
+    /** @hidden Subscribes to router navigation for the closing of dialog on navigation start. */
+    private _subscribeToNavigation(): void {
+        this._subscriptions.add(
+            this._router.events.subscribe(event => {
+                if (event instanceof NavigationStart && this.closeOnNavigation) {
+                    this._dialogRef.dismiss();
+                }
+            })
+        );
     }
 }
