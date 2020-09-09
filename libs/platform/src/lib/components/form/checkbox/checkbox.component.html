@@ -13,6 +13,7 @@
         [ariaLabelledBy]="ariaLabelledBy"
         [ariaDescribedBy]="ariaDescribedBy"
         [ngModel]="checkboxCurrentValue"
+        (click)="$event.stopPropagation()"
         (ngModelChange)="onModelChange()"
     >
         <ng-content></ng-content>
