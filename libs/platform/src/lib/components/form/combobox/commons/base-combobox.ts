@@ -413,7 +413,10 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         }
 
         this.showList(!isOpen);
-        this.searchInputElement.nativeElement.focus();
+
+        if (!this.mobile) {
+            this.searchInputElement.nativeElement.focus();
+        }
     }
 
     /**

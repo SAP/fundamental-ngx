@@ -36,7 +36,7 @@
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
         [attr.aria-disabled]="disabled || readonly"
         [attr.aria-readonly]="readonly"
-        (click)="mobile && showList(!this.isOpen)">
+        (click)="mobile && onPrimaryButtonClick(false)">
         <ng-container></ng-container>
         <input
             #searchInputElement

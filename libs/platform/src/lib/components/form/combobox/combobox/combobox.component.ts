@@ -21,6 +21,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { takeUntil } from 'rxjs/operators';
 
 import {
+    closestElement,
     DIALOG_CONFIG,
     DialogConfig,
     DynamicComponentService,
@@ -119,7 +120,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     onBlur(event: FocusEvent): void {
         const target = event.relatedTarget as HTMLElement;
         if (target) {
-            const isList = target.closest('.fdp-combobox__list-container');
+            const isList = !!closestElement('.fdp-combobox__list-container', target);
             if (isList) {
                 return;
             }
@@ -149,7 +150,8 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     selectOptionItem(item: OptionItem): void {
         if (this.mobile) {
             this.selected = item;
-            this.inputText = this.displayValue(item);
+            this.inputText = item.label;
+            this.cd.detectChanges();
 
             return;
         }
