@@ -7,7 +7,7 @@
         [disabled]="disabled"
         [fdType]="type"
         [glyph]="icon"
-        tabindex="0"
+        [attr.tabindex]="0"
         [compact]="contentDensity === 'compact'"
         (click)="primaryButtonClicked($event)"
     >
@@ -21,10 +21,9 @@
         [glyph]="'slim-arrow-down'"
         [disabled]="disabled"
         [fdType]="type"
-        tabindex="0"
+        [attr.tabindex]="0"
         [compact]="contentDensity === 'compact'"
         [fdpMenuTriggerFor]="menu"
         [attr.aria-haspopup]="true"
-        [attr.aria-expanded]="false"
     ></button>
 </div>

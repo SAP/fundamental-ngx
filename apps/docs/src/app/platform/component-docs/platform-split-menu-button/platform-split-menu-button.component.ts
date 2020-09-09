@@ -15,13 +15,13 @@ export class PlatformDocsSplitMenuButtonComponent {
         {
             language: 'html',
             code: splitMenuButtonExampleHtml,
-            fileName: 'platform-split-menu-button-example',
+            fileName: 'platform-split-menu-button-examples',
         },
         {
             language: 'typescript',
             code: splitMenuButtonExampleCode,
-            fileName: 'platform-split-menu-button-example',
-            component: 'PlatformSplitMenuButtonExampleComponent',
+            fileName: 'platform-split-menu-button-examples',
+            component: 'PlatformDocsSplitMenuButtonExampleComponent',
         },
     ];
 
@@ -35,7 +35,7 @@ export class PlatformDocsSplitMenuButtonComponent {
             language: 'typescript',
             code: splitMenuButtonOptionsCode,
             fileName: 'platform-split-menu-button-options',
-            component: 'PlatformSplitMenuButtonExampleComponent',
+            component: 'PlatformDocsSplitMenuButtonOptionsComponent',
         },
     ];
 }

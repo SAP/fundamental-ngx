@@ -1,34 +1,51 @@
 <h3>Cozy Split Menu Button</h3>
-<ng-container *ngFor="let buttonType of buttonTypes">
-    <fdp-split-menu-button
-        [id]="'split-menu-button3'"
-        [name]="'split-menu-button3'"
-        [menu]="basicMenuCozy"
-        [buttonLabel]="label"
-        [icon]="'world'"
-        [type]="buttonType"
-        [title]="'Default action button with list of other available action items'"
-        [menuTitle]="'More options'"
-        (primaryButtonClick)="onPrimaryButtonClickCozy()"
-    >
+
+<div>
+    <fdp-split-menu-button id="splitButton1" [menu]="basicMenuCozyStandard" [buttonLabel]="labelStandardCozy"
+        icon="world" type="standard" title="Default action button with list of other available action items"
+        menuTitle="More options" (primaryButtonClick)="onPrimaryButtonClickCozyStandard()">
     </fdp-split-menu-button>
+</div>
+<br />
 
-    <span>&nbsp;&nbsp; {{ buttonType | titlecase }}</span>
-    <br />
-    <br />
-</ng-container>
+<div>
+    <fdp-split-menu-button id="splitButton2" [menu]="basicMenuCozyPositive" [buttonLabel]="labelPositiveCozy"
+        icon="world" type="positive" title="Default action button with list of other available action items"
+        menuTitle="More options" (primaryButtonClick)="onPrimaryButtonClickCozyPositive()">
+    </fdp-split-menu-button>
+</div>
+<br />
 
-<fdp-split-menu-button
-    [id]="'split-menu-button3'"
-    [name]="'split-menu-button3'"
-    [menu]="basicMenuCozy"
-    [disabled]="true"
-    [buttonLabel]="label"
-    [icon]="'world'"
-    (primaryButtonClick)="onPrimaryButtonClickCozy()"
->
-</fdp-split-menu-button>
-<span>&nbsp;&nbsp;Disabled</span>
+<div>
+    <fdp-split-menu-button id="splitButton3" [menu]="basicMenuCozyNegative" [buttonLabel]="labelNegativeCozy"
+        icon="world" type="negative" title="Default action button with list of other available action items"
+        menuTitle="More options" (primaryButtonClick)="onPrimaryButtonClickCozyNegative()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button id="splitButton4" [menu]="basicMenuCozyGhost" [buttonLabel]="labelGhostCozy" icon="world"
+        type="ghost" title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCozyGhost()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button id="splitButton5" [menu]="basicMenuCozyTransparent" [buttonLabel]="labelTransparentCozy"
+        icon="world" type="transparent" title="Default action button with list of other available action items"
+        menuTitle="More options" (primaryButtonClick)="onPrimaryButtonClickCozyTransparent()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button id="splitButton6" [menu]="basicMenuCozyEmphasized" [buttonLabel]="labelEmphasizedCozy"
+        icon="world" type="emphasized" title="Default action button with list of other available action items"
+        menuTitle="More options" (primaryButtonClick)="onPrimaryButtonClickCozyEmphasized()">
+    </fdp-split-menu-button>
+</div>
 <br />
 <br />
 <p>Selected Item: {{ selectedCozyItem }}</p>
@@ -36,63 +53,145 @@
 <br />
 
 <h3>Compact Split Menu Button</h3>
-<ng-container *ngFor="let buttonType of buttonTypes">
-    <fdp-split-menu-button
-        [id]="'split-menu-button3'"
-        [name]="'split-menu-button3'"
-        [menu]="basicMenuCompact"
-        [buttonLabel]="label"
-        [contentDensity]="'compact'"
-        [icon]="'world'"
-        [type]="buttonType"
-        (primaryButtonClick)="onPrimaryButtonClickCompact()"
-    >
+
+<div>
+    <fdp-split-menu-button id="splitButton7" [menu]="basicMenuCompactStandard" [buttonLabel]="labelStandardCompact"
+        icon="world" type="standard" title="Default action button with list of other available action items"
+        menuTitle="More options" contentDensity="compact" (primaryButtonClick)="onPrimaryButtonClickCompactStandard()">
     </fdp-split-menu-button>
+</div>
+<br />
 
-    <span>&nbsp;&nbsp; {{ buttonType | titlecase }}</span>
-    <br />
-    <br />
-</ng-container>
+<div>
+    <fdp-split-menu-button id="splitButton8" [menu]="basicMenuCompactPositive" [buttonLabel]="labelPositiveCompact"
+        icon="world" type="positive" title="Default action button with list of other available action items"
+        menuTitle="More options" contentDensity="compact" (primaryButtonClick)="onPrimaryButtonClickCompactPositive()">
+    </fdp-split-menu-button>
+</div>
+<br />
 
-<fdp-split-menu-button
-    [id]="'split-menu-button3'"
-    [name]="'split-menu-button3'"
-    [menu]="basicMenuCompact"
-    [contentDensity]="'compact'"
-    [disabled]="true"
-    [buttonLabel]="label"
-    [icon]="'world'"
-    (primaryButtonClick)="onPrimaryButtonClickCompact()"
->
+<div>
+    <fdp-split-menu-button id="splitButton9" [menu]="basicMenuCompactNegative" [buttonLabel]="labelNegativeCompact"
+        icon="world" type="negative" title="Default action button with list of other available action items"
+        menuTitle="More options" contentDensity="compact" (primaryButtonClick)="onPrimaryButtonClickCompactNegative()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button id="splitButton10" [menu]="basicMenuCompactGhost" [buttonLabel]="labelGhostCompact"
+        icon="world" type="ghost" contentDensity="compact"
+        title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCompactGhost()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button id="splitButton11" [menu]="basicMenuCompactTransparent"
+        [buttonLabel]="labelTransparentCompact" icon="world" contentDensity="compact" type="transparent"
+        title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCompactTransparent()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button id="splitButton12" [menu]="basicMenuCompactEmphasized" [buttonLabel]="labelEmphasizedCompact"
+        icon="world" contentDensity="compact" type="emphasized"
+        title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCompactEmphasized()">
+    </fdp-split-menu-button>
+</div>
+
+<br />
+<fdp-split-menu-button id="splitButton13" contentDensity="compact" [disabled]="true" [buttonLabel]="labelStandardCozy"
+    icon="world" contentDensity="compact">
 </fdp-split-menu-button>
-<span>&nbsp;&nbsp;Disabled</span>
 <br />
 <br />
 <p>Selected Item: {{ selectedCompactItem }}</p>
 
-<h3>Internationalisation support with i18n directive</h3>
-<fdp-split-menu-button
-    [id]="'split-menu-button4'"
-    [name]="'split-menu-button4'"
-    [menu]="basicMenuCompact"
-    [icon]="'world'"
-    i18n-buttonLabel
-    buttonLabel="Default Action"
-    i18n-title
-    title="Default action button with list of other available action items"
-    (primaryButtonClick)="onPrimaryButtonClickCompact()"
-    i18n="@@basicSplitMenuBtn"
->
+<h3>Internationalization support with i18n directive</h3>
+<fdp-split-menu-button id="splitButton14" [menu]="basicMenuIntz" icon="world" i18n-buttonLabel [buttonLabel]="label"
+    i18n-title title="Default action button with list of other available action items"
+    (primaryButtonClick)="onPrimaryButtonClickIntz()" i18n="@@basicSplitMenuBtn">
 </fdp-split-menu-button>
 
-<fdp-menu #basicMenuCozy id="basic-menu">
-    <fdp-menu-item (itemSelect)="onItemSelectCozy('First Item')">First Item</fdp-menu-item>
-    <fdp-menu-item (itemSelect)="onItemSelectCozy('Second Item')">Second Item</fdp-menu-item>
-    <fdp-menu-item (itemSelect)="onItemSelectCozy('Third Item')">Third Item</fdp-menu-item>
+<fdp-menu #basicMenuIntz id="basic-menu-intz">
+    <fdp-menu-item (itemSelect)="onItemSelectIntz('Standard Button')">Standard Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectIntz('Standard Button 2')">Standard Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectIntz('Standard Button 3')">Standard Button 3</fdp-menu-item>
 </fdp-menu>
 
-<fdp-menu #basicMenuCompact id="basic-menu">
-    <fdp-menu-item (itemSelect)="onItemSelectCompact('First Item')">First Item</fdp-menu-item>
-    <fdp-menu-item (itemSelect)="onItemSelectCompact('Second Item')">Second Item</fdp-menu-item>
-    <fdp-menu-item (itemSelect)="onItemSelectCompact('Third Item')">Third Item</fdp-menu-item>
+<fdp-menu #basicMenuCozyStandard id="basic-menu-cozy-standard">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyStandard('Standard Button')">Standard Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyStandard('Standard Button 2')">Standard Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyStandard('Standard Button 3')">Standard Button 3</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCozyPositive id="basic-menu-cozy-positive">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyPositive('Positive Button')">Positive Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyPositive('Positive Button 2')">Positive Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyPositive('Positive Button 3')">Positive Button 3</fdp-menu-item>
+</fdp-menu>
+<fdp-menu #basicMenuCozyNegative id="basic-menu-cozy-negative">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyNegative('Negative Button')">Negative Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyNegative('Negative Button 2')">Negative Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyNegative('Negative Button 3')">Negative Button 3</fdp-menu-item>
+</fdp-menu>
+<fdp-menu #basicMenuCozyGhost id="basic-menu-cozy-ghost">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyGhost('Ghost Button')">Ghost Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyGhost('Ghost Button 2')">Ghost Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyGhost('Ghost Button 3')">Ghost Button 3</fdp-menu-item>
+</fdp-menu>
+<fdp-menu #basicMenuCozyTransparent id="basic-menu-cozy-transparent">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyTransparent('Transparent Button')">Transparent Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyTransparent('Transparent Button 2')">Transparent Button 2
+    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyTransparent('Transparent Button 3')">Transparent Button 3
+    </fdp-menu-item>
+</fdp-menu>
+<fdp-menu #basicMenuCozyEmphasized id="basic-menu-cozy-emphasized">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyEmphasized('Emphasized Button')">Emphasized Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyEmphasized('Emphasized Button 2')">Emphasized Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyEmphasized('Emphasized Button 3')">Emphasized Button 3</fdp-menu-item>
+</fdp-menu>
+
+
+<fdp-menu #basicMenuCompactStandard id="basic-menu-Compact-standard">
+    <fdp-menu-item (itemSelect)="onItemSelectCompactStandard('Standard Button')">Standard Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactStandard('Standard Button 2')">Standard Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactStandard('Standard Button 3')">Standard Button 3</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCompactPositive id="basic-menu-Compact-positive">
+    <fdp-menu-item (itemSelect)="onItemSelectCompactPositive('Positive Button')">Positive Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactPositive('Positive Button 2')">Positive Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactPositive('Positive Button 3')">Positive Button 3</fdp-menu-item>
+</fdp-menu>
+<fdp-menu #basicMenuCompactNegative id="basic-menu-Compact-negative">
+    <fdp-menu-item (itemSelect)="onItemSelectCompactNegative('Negative Button')">Negative Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactNegative('Negative Button 2')">Negative Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactNegative('Negative Button 3')">Negative Button 3</fdp-menu-item>
+</fdp-menu>
+<fdp-menu #basicMenuCompactGhost id="basic-menu-Compact-ghost">
+    <fdp-menu-item (itemSelect)="onItemSelectCompactGhost('Ghost Button')">Ghost Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactGhost('Ghost Button 2')">Ghost Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactGhost('Ghost Button 3')">Ghost Button 3</fdp-menu-item>
+</fdp-menu>
+<fdp-menu #basicMenuCompactTransparent id="basic-menu-Compact-transparent">
+    <fdp-menu-item (itemSelect)="onItemSelectCompactTransparent('Transparent Button')">Transparent Button
+    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactTransparent('Transparent Button 2')">Transparent Button 2
+    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactTransparent('Transparent Button 3')">Transparent Button 3
+    </fdp-menu-item>
+</fdp-menu>
+<fdp-menu #basicMenuCompactEmphasized id="basic-menu-Compact-emphasized">
+    <fdp-menu-item (itemSelect)="onItemSelectCompactEmphasized('Emphasized Button')">Emphasized Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactEmphasized('Emphasized Button 2')">Emphasized Button 2
+    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCompactEmphasized('Emphasized Button 3')">Emphasized Button 3
+    </fdp-menu-item>
 </fdp-menu>
