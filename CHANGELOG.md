@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.40...v0.22.0-rc.41) (2020-09-09)
+
+
+### Bug Fixes
+
+* stop opening pickers on input click ([#3210](https://github.com/SAP/fundamental-ngx/issues/3210)) ([8e9cc0a](https://github.com/SAP/fundamental-ngx/commit/8e9cc0a960c319820c85909f9182b9a47cdcbbee))
+
 ## [0.22.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.39...v0.22.0-rc.40) (2020-09-09)
 
 
