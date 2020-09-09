@@ -57,10 +57,6 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
         this.dialogConfig = value;
     }
 
-    /** Whether or not to close the dialog on a router navigation event. */
-    @Input()
-    closeOnNavigation = true;
-
     /** @hidden */
     @ViewChild('dialogWindow')
     dialogWindow: ElementRef;
@@ -256,7 +252,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
     private _subscribeToNavigation(): void {
         this._subscriptions.add(
             this._router.events.subscribe(event => {
-                if (event instanceof NavigationStart && this.closeOnNavigation) {
+                if (event instanceof NavigationStart && this.dialogConfig.closeOnNavigation) {
                     this._dialogRef.dismiss();
                 }
             })
