@@ -139,28 +139,24 @@ describe('NumberStepInputComponent main functionality', () => {
 
     it('Should not allow value be less than minimum', () => {
         const nativeElement: HTMLInputElement = getInputDebugElement().nativeElement;
-        const commitEnteredValueSpy = spyOn(stepInputComponent, 'commitEnteredValue').and.callThrough();
         const enteredValue = (component.min - 1).toString();
         nativeElement.value = enteredValue;
+        nativeElement.dispatchEvent(new InputEvent('input'));
         nativeElement.dispatchEvent(new InputEvent('change'));
 
         fixture.detectChanges();
-
-        expect(commitEnteredValueSpy).toHaveBeenCalledWith(enteredValue);
 
         expect(stepInputComponent.value).toEqual(component.min);
     });
 
     it('Should not allow value be more than maximum', () => {
         const nativeElement: HTMLInputElement = getInputDebugElement().nativeElement;
-        const commitEnteredValueSpy = spyOn(stepInputComponent, 'commitEnteredValue').and.callThrough();
         const enteredValue = (component.max + 1).toString();
         nativeElement.value = enteredValue;
+        nativeElement.dispatchEvent(new InputEvent('input'));
         nativeElement.dispatchEvent(new InputEvent('change'));
 
         fixture.detectChanges();
-
-        expect(commitEnteredValueSpy).toHaveBeenCalledWith(enteredValue);
 
         expect(stepInputComponent.value).toEqual(component.max);
     });
@@ -391,7 +387,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(component.value).toEqual(value);
     });
 
-    it('Should commit changes on input "change" event', () => {
+    it('Should catch changes on "input" event and apply them on "change" event', () => {
         const value = 10;
         const step = 2;
 
@@ -399,12 +395,12 @@ describe('NumberStepInputComponent main functionality', () => {
         component.step = step;
         fixture.detectChanges();
 
-        const inputChangeEvent = new InputEvent('change');
         const inputEl: HTMLInputElement = getInputDebugElement().nativeElement;
 
         inputEl.focus();
         inputEl.value = '25';
-        inputEl.dispatchEvent(inputChangeEvent);
+        inputEl.dispatchEvent(new InputEvent('input'));
+        inputEl.dispatchEvent(new InputEvent('change'));
         fixture.detectChanges();
 
         expect(component.value).toEqual(25);
@@ -542,7 +538,8 @@ describe('Basic number Step Input withing platforms form', () => {
 
         expect(stepInputEl.classes['is-error']).not.toBeTrue();
 
-        stepInputComponent.commitEnteredValue('not a valid number');
+        stepInputComponent.onEnterValue('not a valid number');
+        stepInputComponent.commitEnteredValue();
         await wait(fixture);
 
         expect(formControl.value).toBe(null);
