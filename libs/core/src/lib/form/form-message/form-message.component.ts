@@ -24,4 +24,11 @@ export class FormMessageComponent {
     /** Whether message should be in static mode, without popover. It's mostly used for forms component, that contain dropdown */
     @Input()
     static = false;
+
+    /**
+     * Whether message is used inside popovers or dialogs.
+     * When it is enabled box shadow is removed and message is expanded to whole container width
+     */
+    @Input()
+    embedded = false;
 }

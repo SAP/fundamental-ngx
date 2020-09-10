@@ -3,3 +3,8 @@
 .fd-form-message {
     display: block;
 }
+
+.fd-form-message--embedded {
+    box-shadow: none;
+    max-width: 100%;
+}

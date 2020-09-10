@@ -225,6 +225,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     showFooter = true;
 
+    /** Event emitted when the state of the isOpen property changes. */
+    @Output()
+    isOpenChange = new EventEmitter<boolean>();
+
     /** Event thrown every time calendar active view is changed */
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
@@ -363,6 +367,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         if (!this.isOpen && !this.disabled) {
             this.onTouched();
             this.isOpen = true;
+            this.isOpenChange.emit(this.isOpen);
             this._activateTimeComponent();
         }
     }
@@ -373,6 +378,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.handleInputChange(this.inputFieldDate);
             this.onClose.emit();
             this.isOpen = false;
+            this.isOpenChange.emit(this.isOpen);
         }
     }
 

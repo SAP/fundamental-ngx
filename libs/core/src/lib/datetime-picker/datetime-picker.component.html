@@ -37,6 +37,7 @@
             </fd-input-group>
         </fd-popover-control>
         <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen" [style.display]="'block'">
+            <ng-content></ng-content>
             <div class="fd-datetime__container">
                 <fd-calendar
                     calType="single"
