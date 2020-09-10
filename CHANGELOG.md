@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.48...v0.22.0-rc.49) (2020-09-10)
+
+
+### Features
+
+* (platform) introduce combobox component ([#3048](https://github.com/SAP/fundamental-ngx/issues/3048)) ([7d4650a](https://github.com/SAP/fundamental-ngx/commit/7d4650a5945d21d52820e796019d6f33073922b1))
+
 ## [0.22.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.47...v0.22.0-rc.48) (2020-09-10)
 
 
