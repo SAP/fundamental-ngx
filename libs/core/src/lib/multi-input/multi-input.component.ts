@@ -346,14 +346,6 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    onItemKeyDownHandler(event: KeyboardEvent, value: any): void {
-        if (KeyUtil.isKey(event, ['Enter', ' '])) {
-            const checked = this.selected.find(_value => value === _value);
-            this.handleSelect(!checked, value)
-        }
-    }
-
-    /** @hidden */
     handleSelect(checked: any, value: any, event?: MouseEvent): void {
         if (event) {
             event.preventDefault(); // prevent this function from being called twice when checkbox updates
