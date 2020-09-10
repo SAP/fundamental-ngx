@@ -67,10 +67,14 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
     private doCreateRxJSPublisher<T extends Message>(publisher: RxJSTopicPublisher<T>): TopicPublisher<T> {
         switch (publisher.eventType) {
             case EventType.DURABLE:
-                this._pubSubService.registerEventWithHistory(publisher.topic, this._config.durableEventSize);
+                if (!this._pubSubService['eventObservableMapping'][publisher.topic]) {
+                    this._pubSubService.registerEventWithHistory(publisher.topic, this._config.durableEventSize);
+                }
                 break;
             case EventType.ONLY_LAST:
-                this._pubSubService.registerEventWithLastValue(publisher.topic, undefined);
+                if (!this._pubSubService['eventObservableMapping'][publisher.topic]) {
+                    this._pubSubService.registerEventWithLastValue(publisher.topic, undefined);
+                }
                 break;
             default:
                 this._pubSubService['createSubjectIfNotExist'](publisher.topic);
@@ -82,7 +86,21 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
 
 
     private doCreateRxJSSubscriber<T extends Message>(subscriber: RxJSTopicSubscriber<T>): TopicSubscriber<T> {
-        this._pubSubService['createSubjectIfNotExist'](subscriber.topic);
+        switch (subscriber.eventType) {
+            case EventType.DURABLE:
+                if (!this._pubSubService['eventObservableMapping'][subscriber.topic]) {
+                    this._pubSubService.registerEventWithHistory(subscriber.topic, this._config.durableEventSize);
+                }
+                break;
+            case EventType.ONLY_LAST:
+                if (!this._pubSubService['eventObservableMapping'][subscriber.topic]) {
+                    this._pubSubService.registerEventWithLastValue(subscriber.topic, undefined);
+                }
+                break;
+            default:
+                this._pubSubService['createSubjectIfNotExist'](subscriber.topic);
+        }
+
         subscriber.subject = this._pubSubService['eventObservableMapping'][subscriber.topic].ref;
         return subscriber;
     }
