@@ -68,10 +68,6 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     @HostBinding('class.fd-list__item--link')
     link = false;
 
-    /** Defines if list item is used inside MultiInputComponent */
-    @Input()
-    inMultiInput = false;
-
     /** @hidden */
     @ContentChild(CheckboxComponent)
     checkbox: CheckboxComponent;

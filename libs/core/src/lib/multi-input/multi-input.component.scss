@@ -13,6 +13,15 @@
 
 .fd-multi-input-custom {
     display: block;
+
+    // TODO: Remove after adjusting in styles
+    .fd-multi-input-list-item-custom {
+        height: 2.5rem;
+
+        .fd-checkbox__label {
+            padding: 0.5625rem;
+        }
+    }
 }
 
 .fd-multi-input-item {

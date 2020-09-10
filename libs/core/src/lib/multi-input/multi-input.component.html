@@ -77,29 +77,24 @@
         *ngIf="displayedValues && displayedValues.length"
         fd-list
         class="fd-multi-input-menu-overflow"
-        [multiInputMode]="true"
+        [selection]="true"
+        [compact]="compact"
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
         (focusEscapeList)="handleListFocusEscape($event)"
         [style.minWidth]="'100%'"
     >
         <li
-            *ngFor="let value of displayedValues; let ind = index"
+            *ngFor="let value of displayedValues"
             fd-list-item
-            tabindex="0"
-            class="fd-multi-input-item"
-            [inMultiInput]="true"
+            class="fd-multi-input-list-item-custom"
             [selected]="selected.indexOf(value) !== -1"
-            (click)="handleSelect(selected.indexOf(value) === -1, value, $event)"
-            (keyDown)="onItemKeyDownHandler($event, value)"
         >
             <fd-checkbox
-                tabIndexValue="-1"
-                class="fd-multi-input-checkbox"
-                labelClass="fd-list__label"
-                [ngModel]="selected.indexOf(value) !== -1"
-            >
-                <span [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight"></span>
+                [compact]="compact"
+                (ngModelChange)="handleSelect($event, value)"
+                [ngModel]="selected.indexOf(value) !== -1">
             </fd-checkbox>
+            <span fd-list-title [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight"></span>
         </li>
         <li *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)"
             fd-list-item
