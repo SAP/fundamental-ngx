@@ -128,6 +128,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /** Used for placeing navigation Link */
     link: string;
 
+    /** list item with no bottom border
+    */
     noSeperator: boolean;
 
     /** Whether By line mode is included to list component, by which
@@ -146,28 +148,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * you should indicate those by displaying a navigation arrow
     */
     navigationIndicator = false;
-
-    /** @hidden
-     * Whether listitem is selected binded to template */
-    selected: boolean;
-
-    /** @hidden
-     * radio button selected value binded to template */
-    selectionValue: string;
-
-    /** @hidden */
-    _contentDensity = this._listConfig.contentDensity;
-
-    /**
-     * @hidden
-     * Used to define if contentDensity value is 'compact' or not.
-     */
-    isCompact = this._contentDensity === 'compact';
-
-    /**@hidden
-   * list of values, it can be of type Item or String.
-   */
-    _item: any;
 
     @ViewChild('listItem', { read: ElementRef })
     listItem: ElementRef;
@@ -192,17 +172,41 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @Output()
     buttonClicked = new EventEmitter<KeyboardEvent | MouseEvent | TouchEvent>();
 
+
+    /** @hidden */
+    _contentDensity = this._listConfig.contentDensity;
+
+    /**@hidden
+   * list of values, it can be of type Item or String.
+   */
+    _item: any;
+
+    /**
+     * @hidden
+     * Used to define if contentDensity value is 'compact' or not.
+     */
+    isCompact = this._contentDensity === 'compact';
+
+    /** @hidden
+    * Whether listitem is selected binded to template */
+    selected: boolean;
+
+    /** @hidden
+     * radio button selected value binded to template */
+    _selectionValue: string;
+
+
     @Input('selectionValue')
-    get selectionValueDetails(): string {
-        return this.selectionValue;
+    get selectionValue(): string {
+        return this._selectionValue;
     }
 
-    set selectionValueDetails(value: string) {
+    set selectionValue(value: string) {
         this.selected = false;
-        this.selectionValue = value;
-        if (this.selectionValue !== undefined &&
+        this._selectionValue = value;
+        if (this._selectionValue !== undefined &&
             this.selectionValue !== null) {
-            this.selected = this.value === this.selectionValue;
+            this.selected = this.value === this._selectionValue;
         }
     }
 
@@ -254,6 +258,31 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         }
         this.secondaryWrap = item.secondaryWrap ? true : false;
 
+    }
+
+    /** @hidden */
+    constructor(protected _changeDetectorRef: ChangeDetectorRef,
+        public itemEl: ElementRef, protected _listConfig: ListConfig) {
+        super(_changeDetectorRef);
+
+    }
+
+    /** @hidden */
+    /** Show navigation for single list*/
+    ngOnInit(): void {
+        this.id = `fdp-list-item-${nextListItemId++}`;
+    }
+
+    /** @hidden */
+    /**To detect changes from parent-listbox to list item
+     * for example single, multi option selection those details
+     * will be deducted in list item
+     */
+    ngAfterViewChecked(): void {
+        this._changeDetectorRef.detectChanges();
+        if (this.noSeperator) {
+            this.itemEl.nativeElement.querySelector('li').classList.add('fd-list-item__no-seprator');
+        }
     }
 
     /** @hidden */
@@ -336,32 +365,4 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     onActionButtonClick($event: KeyboardEvent | MouseEvent | TouchEvent): void {
         this.buttonClicked.emit($event);
     }
-
-
-    /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef,
-        public itemEl: ElementRef, protected _listConfig: ListConfig) {
-        super(_changeDetectorRef);
-
-    }
-
-    /** @hidden */
-    /** Show navigation for single list*/
-    ngOnInit(): void {
-        this.id = `fdp-list-item-${nextListItemId++}`;
-    }
-
-    /** @hidden */
-    /**To detect changes from parent-listbox to list item
-     * for example single, multi option selection those details
-     * will be deducted in list item
-     */
-    ngAfterViewChecked(): void {
-        this._changeDetectorRef.detectChanges();
-        if (this.noSeperator) {
-            this.itemEl.nativeElement.querySelector('li').classList.add('fd-list-item__no-seprator');
-        }
-    }
-
-
 }

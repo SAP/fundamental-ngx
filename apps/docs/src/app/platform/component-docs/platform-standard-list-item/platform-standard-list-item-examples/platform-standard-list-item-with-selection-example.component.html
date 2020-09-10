@@ -1,7 +1,7 @@
 <fd-toolbar fdType="info" active="true">
     <label fd-toolbar-label>({{selectedItems.length}}) Items selected</label>
 </fd-toolbar>
-<fdp-list noBorder="true" selection="true" [dataSource]="dataSource" selectionMode="multi" [(ngModel)]="selectedItems"
+<fdp-list selection="true" [dataSource]="dataSource" selectionMode="multi" [(ngModel)]="selectedItems"
     (selectedItemChange)="showItemInfo($event)" [hasByLine]="true">
     <fdp-standard-list-item *fdpItemDef="let address" [avatarSrc]="address.img" [avatarTitle]="address.imgInfo"
         [description]="address.description" [secondary]="address.info" [title]="address.name">

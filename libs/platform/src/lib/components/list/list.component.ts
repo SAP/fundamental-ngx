@@ -111,22 +111,45 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @Input()
     selectionMode: SelectionType = 'none';
 
+    protected _dataSource: FdpListDataSource<any>;
+
+    /**
+    * Child items of the List.
+    */
+    @ContentChildren(BaseListItem, { descendants: true })
+    ListItems: QueryList<BaseListItem>;
+
+    @ContentChild(ListItemDef)
+    listItemDef: ListItemDef;
+
+    /** Access child element, for checking link content*/
+    @ViewChild('link', { read: ElementRef })
+    anchor: ElementRef;
+
+    /** role */
+    @HostBinding('attr.role')
+    role = 'list';
+
+    /** @hidden */
+    @Output()
+    selectedItemChange: EventEmitter<SelectionChangeEvent> = new EventEmitter<SelectionChangeEvent>();
+
     /**
      * Whether Navigation mode is included to list component
      * for all the items
     */
-    navigated: boolean;
+    _navigated: boolean;
 
     /**
      * Whether Navigation mode is included to list component
      * only a subset of the list items are navigable
      * you should indicate those by displaying a navigation arrow
     */
-    navigationIndicator: boolean;
+    _navigationIndicator: boolean;
 
     /**
      * Whether By line is present in list item*/
-    hasByLine: boolean;
+    _hasByLine: boolean;
 
     /**@hidden
      * To display loading symbol */
@@ -139,7 +162,8 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      */
     keyManager: FocusKeyManager<BaseListItem>;
 
-    /** The model backing of the component. */
+    /**@hidden
+     * The model backing of the component. */
     selectionModel: SelectionModel<BaseListItem>;
 
     /**@hidden
@@ -147,8 +171,10 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * binding in tempate to append class */
     multiSelect = false;
 
+    /**@hidden */
     items = [];
 
+    /**@hidden */
     selectedvalue: string;
 
     /** @hidden */
@@ -190,26 +216,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     */
     _itemsSubscription: Subscription | null;
 
-    /**
-    * Child items of the List.
-    */
-    @ContentChildren(BaseListItem, { descendants: true })
-    ListItems: QueryList<BaseListItem>;
-
-    @ContentChild(ListItemDef)
-    listItemDef: ListItemDef;
-
-    /** Access child element, for checking link content*/
-    @ViewChild('link', { read: ElementRef })
-    anchor: ElementRef;
-
-    /** role */
-    @HostBinding('attr.role')
-    role = 'list';
-
-    /** @hidden */
-    @Output()
-    selectedItemChange: EventEmitter<SelectionChangeEvent> = new EventEmitter<SelectionChangeEvent>();
 
     /**
     * Datasource for suggestion list
@@ -223,7 +229,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             this._initializeDS(value);
         }
     }
-    protected _dataSource: FdpListDataSource<any>;
 
     /**
     * content Density of element. 'cozy' | 'compact'
@@ -236,34 +241,34 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
     /** setter and getter for _navigated */
     @Input('navigated')
-    get navigatedValue(): boolean {
-        return this.navigated;
+    get navigated(): boolean {
+        return this._navigated;
     }
 
-    set navigatedValue(value: boolean) {
-        this.navigated = value;
+    set navigated(value: boolean) {
+        this._navigated = value;
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--navigation');
     }
 
     /** setter and getter for _navigationIndicator */
     @Input('navigationIndicator')
-    get navigationIndicatorValue(): boolean {
-        return this.navigationIndicator;
+    get navigationIndicator(): boolean {
+        return this._navigationIndicator;
     }
 
-    set navigationIndicatorValue(value: boolean) {
-        this.navigationIndicator = value;
+    set navigationIndicator(value: boolean) {
+        this._navigationIndicator = value;
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--navigation-indication');
     }
 
     /** setter and getter for hasByLine*/
     @Input('hasByLine')
-    get hasByLineValue(): boolean {
-        return this.hasByLine;
+    get hasByLine(): boolean {
+        return this._hasByLine;
     }
 
-    set hasByLineValue(value: boolean) {
-        this.hasByLine = value;
+    set hasByLine(value: boolean) {
+        this._hasByLine = value;
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--byline');
     }
 
@@ -275,89 +280,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
     set value(value: any) {
         super.setValue(value);
-    }
-
-
-    /** @hidden */
-    /**handline keyboard operations
-    * in template on list and list items
-    */
-    handleKeyDown(event: KeyboardEvent): boolean {
-        event.stopImmediatePropagation();
-        if (this.keyManager) {
-            if (event.keyCode === DOWN_ARROW || event.keyCode === UP_ARROW) {
-                return false;
-            } else if (event.keyCode === ENTER || event.keyCode === SPACE) {
-                this.updateNavigation(event);
-                return false;
-            }
-        }
-    }
-
-    /**@hidden
-     * binded in template on scroll
-     */
-    scrollHandler(): void {
-        if (!this.loading && this.loadOnScroll) {
-            this.getMoreData();
-        }
-    }
-
-    /**@hidden
-   *  Handles lazy loading data
-   * used in template
-   * onscroll and on more button click
-   */
-    getMoreData(): void {
-        this.loading = true;
-        of(this._loadNewItems())
-            .pipe(
-                tap(data => {
-                    if (data === null || data === undefined) {
-                        console.error('===Invalid Response recived===');
-                    }
-                }),
-                delay(this.delayTime)
-            ).subscribe(result => {
-                if (result !== null && result !== undefined) {
-                    for (let i = this.items.length, j = 0; j < result.length; ++i, ++j) {
-                        this.items[i] = result[j];
-                    }
-                }
-                this.loading = false;
-                this.stateChanges.next(this.items);
-                this._changeDetectorRef.markForCheck();
-
-            });
-    }
-
-    /**@hidden
- *  used in tempate to get Selected items from a list
- * event:any to avoid code duplication**/
-    onSelectionChanged(event: any): void {
-        if (event.target.checked) {
-            this.selectionModel.select(event.target.parentNode.parentNode.parentNode);
-        } else {
-            this.selectionModel.deselect(event.target.parentNode.parentNode.parentNode);
-        }
-    }
-
-    /** @hidden */
-    /**  on Update navgiation styles for non navigated items
-     * event:any to avoid code duplication**/
-    @HostListener('click', ['$event'])
-    updateNavigation(event: any): void {
-        this.ListItems.forEach((item) => {
-            if (item.anchor !== undefined) {
-                item.anchor.nativeElement.classList.remove('is-navigated');
-            }
-        });
-        if (event.target !== null && event.target.tagName.toLowerCase() === 'a') {
-            event.target.classList.add('is-navigated');
-        }
-        this._handleSingleSelect(event);
-        this._handleMultiSelect(event);
-
     }
 
     /** @hidden */
@@ -466,6 +388,89 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         if (this._itemsSubscription) {
             this._itemsSubscription.unsubscribe();
         }
+    }
+
+
+    /** @hidden */
+    /**handline keyboard operations
+    * in template on list and list items
+    */
+    handleKeyDown(event: KeyboardEvent): boolean {
+        event.stopImmediatePropagation();
+        if (this.keyManager) {
+            if (event.keyCode === DOWN_ARROW || event.keyCode === UP_ARROW) {
+                return false;
+            } else if (event.keyCode === ENTER || event.keyCode === SPACE) {
+                this.updateNavigation(event);
+                return false;
+            }
+        }
+    }
+
+    /**@hidden
+     * binded in template on scroll
+     */
+    scrollHandler(): void {
+        if (!this.loading && this.loadOnScroll) {
+            this.getMoreData();
+        }
+    }
+
+    /**@hidden
+   *  Handles lazy loading data
+   * used in template
+   * onscroll and on more button click
+   */
+    getMoreData(): void {
+        this.loading = true;
+        of(this._loadNewItems())
+            .pipe(
+                tap(data => {
+                    if (data === null || data === undefined) {
+                        console.error('===Invalid Response recived===');
+                    }
+                }),
+                delay(this.delayTime)
+            ).subscribe(result => {
+                if (result !== null && result !== undefined) {
+                    for (let i = this.items.length, j = 0; j < result.length; ++i, ++j) {
+                        this.items[i] = result[j];
+                    }
+                }
+                this.loading = false;
+                this.stateChanges.next(this.items);
+                this._changeDetectorRef.markForCheck();
+
+            });
+    }
+
+    /**@hidden
+ *  used in tempate to get Selected items from a list
+ * event:any to avoid code duplication**/
+    onSelectionChanged(event: any): void {
+        if (event.target.checked) {
+            this.selectionModel.select(event.target.parentNode.parentNode.parentNode);
+        } else {
+            this.selectionModel.deselect(event.target.parentNode.parentNode.parentNode);
+        }
+    }
+
+    /** @hidden */
+    /**  on Update navgiation styles for non navigated items
+     * event:any to avoid code duplication**/
+    @HostListener('click', ['$event'])
+    updateNavigation(event: any): void {
+        this.ListItems.forEach((item) => {
+            if (item.anchor !== undefined) {
+                item.anchor.nativeElement.classList.remove('is-navigated');
+            }
+        });
+        if (event.target !== null && event.target.tagName.toLowerCase() === 'a') {
+            event.target.classList.add('is-navigated');
+        }
+        this._handleSingleSelect(event);
+        this._handleMultiSelect(event);
+
     }
 
     _initializeDS(ds: FdpListDataSource<any>): void {
