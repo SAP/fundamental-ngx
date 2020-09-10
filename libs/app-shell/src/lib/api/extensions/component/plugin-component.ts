@@ -14,7 +14,8 @@ import { TopicPublisher } from '../../events/message-bus';
 export interface PluginComponent {
     initialize(context: PluginContext): void;
 
-    configure(): Partial<PluginConfiguration>;
+    getConfiguration(): Partial<PluginConfiguration>;
+
 }
 
 export class PluginContext {
@@ -31,6 +32,6 @@ export class PluginContext {
      *
      * Plus maybe inject some other services
      */
-    constructor(public messageBuss: Map<string, TopicPublisher<any>>) {
+    constructor(public messageBus: Map<string, TopicPublisher<any>>, ) {
     }
 }

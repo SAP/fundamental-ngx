@@ -4,10 +4,20 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Scope } from '../lookup/plugin-descriptor.model';
+import { Message } from '../../events/message-bus';
 
 
 export interface PluginConfiguration {
     getId(): string
+
+    /**
+     * Should this be permissions? for now let's keep it simple
+     *
+     * Is it ok for plugin to give us permission, or should we have some other service that assign permission and based
+     * on plugin ID, we retrieve permission?
+     *
+     */
+    getPermission(): Permission;
 
     getAngularVersionCompatibility(): string
 
@@ -105,13 +115,25 @@ export class Action {
  */
 export class Listener {
 
-    constructor(public name: string,
-                /**
-                 * What about i18n, should be the registering apps responsible for add right label?
-                 * based on locale
-                 */
+    constructor(public description: string,
                 public topic: string,
-                handler: Subject<any>
+                public onMessage: (message: Message) => any
     ) {
     }
+}
+
+
+/**
+ * should be expose TemplateRef?
+ */
+export class Permission {
+
+    constructor(public themingChange: boolean = true,
+                public changeTitle: boolean = false,
+                public talkToAppShell: boolean = false,
+                public propagateErrors: boolean = false,
+                public readGlobalState: boolean = false
+    ) {
+    }
+
 }
