@@ -80,6 +80,10 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     @Input()
     fixedWidth = true;
 
+    /** Whether or not the main action title should remain set as the button's action after another option is selected. */
+    @Input()
+    keepMainAction = false;
+
     /** Event sent when primary button is clicked */
     @Output()
     readonly primaryButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
@@ -107,7 +111,11 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {
-        this.primaryButtonClicked.emit(event);
+        if (!this.selected) {
+            this.primaryButtonClicked.emit(event);
+        } else {
+            this.selected.elementRef.nativeElement.click();
+        }
         event.stopPropagation();
     }
 
@@ -117,7 +125,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
 
         if (!this.mainActionTitle && !this.selected) {
             this.selectMenuItem(this.menu.menuItems.first);
-        } else if (this.selected) {
+        } else if (!this.mainActionTitle && this.selected) {
             this.selectMenuItem(this.selected);
         }
     }
@@ -136,14 +144,12 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes && changes.selected) {
-            this.selectMenuItem(this.selected);
-        }
+        console.log(changes);
     }
 
     /** Function called to select a menu item for the split button */
     selectMenuItem(menuItem: MenuItemComponent): void {
-        if (menuItem) {
+        if (menuItem && !this.keepMainAction) {
             menuItem.setSelected(true);
         }
     }
@@ -153,8 +159,11 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
         this.menu.menuItems.map((menuItem: MenuItemComponent) => {
             this._menuItemSubscriptions.add(
                 menuItem.onSelect.subscribe(() => {
-                    this.mainActionTitle = menuItem.menuItemTitle.title;
-                    this._cdRef.detectChanges();
+                    if (!this.keepMainAction) {
+                        this.selected = menuItem;
+                        this.mainActionTitle = menuItem.menuItemTitle.title;
+                        this._cdRef.detectChanges();
+                    }
                 })
             );
         });

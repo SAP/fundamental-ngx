@@ -65,6 +65,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     @Input()
     submenu: BaseSubmenu;
 
+    /** Emitted when the menu item is selected. */
     @Output()
     onSelect: EventEmitter<void> = new EventEmitter<void>();
 

@@ -11,6 +11,7 @@ import { ButtonSplitProgrammaticalExampleComponent } from './examples/split-butt
 import { ButtonSplitOptionsExampleComponent } from './examples/split-button-options-example.component';
 import { ButtonSplitTypesIconsComponent } from './examples/split-button-icons-example.component';
 import { SplitButtonModule } from '@fundamental-ngx/core';
+import { ButtonSplitBehaviorsComponent } from './examples/split-button-behaviors-example.component';
 
 const routes: Routes = [
     {
@@ -33,7 +34,8 @@ const routes: Routes = [
         ButtonSplitTypesExampleComponent,
         ButtonSplitOptionsExampleComponent,
         ButtonSplitTemplateExampleComponent,
-        ButtonSplitProgrammaticalExampleComponent
+        ButtonSplitProgrammaticalExampleComponent,
+        ButtonSplitBehaviorsComponent
     ]
 })
 export class SplitButtonDocsModule {}

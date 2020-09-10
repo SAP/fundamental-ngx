@@ -7,6 +7,8 @@ import * as buttonSplitProgrammaticalyExampleTs from '!raw-loader!./examples/spl
 import * as buttonSplitTemplateExampleTs from '!raw-loader!./examples/split-button-template-example.component.ts';
 import * as buttonTypesExampleTs from '!raw-loader!./examples/split-button-types-example.component.ts';
 import * as buttonSplitIconsTs from '!raw-loader!./examples/split-button-icons-example.component.ts';
+import * as buttonSplitBehaviorsHtml from '!raw-loader!./examples/split-button-behaviors-example.component.html';
+import * as buttonSplitBehaviorsTs from '!raw-loader!./examples/split-button-behaviors-example.component.ts';
 import * as buttonTypesExample from '!raw-loader!./examples/split-button-types-example.component.html';
 import * as buttonSplitProgrammaticalyExample from '!raw-loader!./examples/split-button-programmatical-example.component.html';
 import * as buttonSplitOptionsExample from '!raw-loader!./examples/split-button-options-example.component.html';
@@ -80,6 +82,16 @@ export class SplitButtonDocsComponent {
             fileName: 'split-button-icons-example',
             typescriptFileCode: buttonSplitIconsTs,
             component: 'ButtonSplitTypesIconsComponent'
+        }
+    ];
+
+    buttonSplitBehaviors: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonSplitBehaviorsHtml,
+            fileName: 'split-button-behaviors-example',
+            typescriptFileCode: buttonSplitBehaviorsTs,
+            component: 'ButtonSplitBehaviorsComponent'
         }
     ];
 
