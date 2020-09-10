@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.46...v0.22.0-rc.47) (2020-09-10)
+
+
+### Bug Fixes
+
+* fix DND on IE11 ([#3222](https://github.com/SAP/fundamental-ngx/issues/3222)) ([ec4a785](https://github.com/SAP/fundamental-ngx/commit/ec4a78594446840381bc4683f02a9693a24429da))
+
 ## [0.22.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.45...v0.22.0-rc.46) (2020-09-10)
 
 
