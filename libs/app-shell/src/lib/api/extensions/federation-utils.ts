@@ -1,4 +1,14 @@
-import { PluginDescriptor } from './plugin-definition.model';
+import { PluginDescriptor } from './lookup/plugin-descriptor.model';
+
+declare const __webpack_init_sharing__: (shareScope: string) => Promise<void>;
+declare const __webpack_share_scopes__: { default: string };
+
+type Factory = () => any;
+
+interface Container {
+    init(shareScope: string): void;
+    get(module: string): Factory;
+}
 
 const moduleMap = {};
 
@@ -25,7 +35,6 @@ function loadRemoteEntry(remoteEntry: string): Promise<void> {
 
 async function lookupExposedModule<T>(remoteName: string, exposedModule: string): Promise<T> {
     // Initializes the share scope. This fills it with known provided modules from this build and all remotes
-    console.log('__webpack_init_sharing__');
     await __webpack_init_sharing__('default');
     const container = window[remoteName] as Container; // or get the container somewhere else
     // Initialize the container, it may provide shared modules

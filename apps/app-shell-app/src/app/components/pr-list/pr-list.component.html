@@ -1,0 +1,24 @@
+<h3>Recent Requests</h3>
+
+<table fd-table [noBorderX]="true" [noBorderY]="true">
+  <thead fd-table-header>
+  <tr fd-table-row>
+    <th fd-table-cell>PR ID</th>
+    <th fd-table-cell>Title</th>
+    <th fd-table-cell>Need By</th>
+    <th fd-table-cell>No. items</th>
+    <th fd-table-cell>Amount</th>
+  </tr>
+  </thead>
+  <tbody fd-table-body>
+  <tr *ngFor="let row of tableRows" fd-table-row>
+    <td fd-table-cell>
+      <a fd-link href="#">{{ row.column1 }}</a>
+    </td>
+    <td fd-table-cell>{{ row.column2 }}</td>
+    <td fd-table-cell>{{ row.column3 }}</td>
+    <td fd-table-cell>{{ row.column4 }}</td>
+    <td fd-table-cell>{{ row.column5 }}</td>
+  </tr>
+  </tbody>
+</table>

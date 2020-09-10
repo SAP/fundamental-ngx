@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "fundamentalNgx",
+      ["fundamentalNgx", "aba"],
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "fundamental-ngx",
+      ["fundamentalNgx", "aba"],
       "kebab-case"
     ]
   },

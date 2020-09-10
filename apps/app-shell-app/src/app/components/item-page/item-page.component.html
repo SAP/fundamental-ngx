@@ -1,0 +1,76 @@
+<fd-breadcrumb>
+  <fd-breadcrumb-item>
+    <a fd-breadcrumb-link [routerLink]="'#'">IT hardware and software </a>
+  </fd-breadcrumb-item>
+  <fd-breadcrumb-item>
+    <a fd-breadcrumb-link [routerLink]="'#'">All laptops</a>
+  </fd-breadcrumb-item>
+  <fd-breadcrumb-item>
+    <a fd-breadcrumb-link [routerLink]="'#'" [queryParams]="'#'">Apple</a>
+  </fd-breadcrumb-item>
+  <fd-breadcrumb-item>
+    <span>Breadcrumb Level 4</span>
+  </fd-breadcrumb-item>
+</fd-breadcrumb>
+
+
+<h4>Apple - MapBook Pro - 16" Display with Touch Bar - Intel Core i7 - 16MB RAM</h4>
+
+<div class="header-detail">
+  <div class="product-image">
+    <img
+      src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16touch-space-select-201911?wid=904&hei=840&fmt=jpeg&qlt=80&op_usm=0.5,0.5&.v=1572825197207"
+    >
+  </div>
+
+  <div class="shopping-details">
+
+    <span class="label">Product Description:</span>
+    <p>
+    <ul>
+      <li>2.6GHz 6-core 9th-generation Intel Core i7 processor</li>
+      <li>Turbo Boost up to 4.5GHz</li>
+      <li>AMD Radeon Pro 5300M with 4GB of GDDR6 memory</li>
+      <li>16GB of 2666MHz DDR4 memory</li>
+      <li>512GB of SSD storage¹</li>
+      <li>16-inch Retina display with True Tone</li>
+      <li>Magic Keyboard</li>
+      <li>Touch Bar and Touch ID</li>
+      <li>Four Thunderbolt 3 ports</li>
+    </ul>
+
+    <div class="actions">
+      <button fd-button [fdType]="'emphasized'">Add to cart</button>
+    </div>
+  </div>
+</div>
+
+<div class="item-content">
+  <fd-tab-list>
+    <fd-tab [title]="'Specification'">
+      <ng-container *ngTemplateOutlet="tabContent; context: {$implicit: 1}">
+      </ng-container>
+    </fd-tab>
+    <fd-tab [title]="'Accessories'">
+      <ng-container *ngTemplateOutlet="tabContent; context: {$implicit: 2}">
+      </ng-container>
+    </fd-tab>
+    <fd-tab [title]="'Related Items'">
+      <ng-container *ngTemplateOutlet="tabContent; context: {$implicit: 3}">
+      </ng-container>
+    </fd-tab>
+
+    <fd-tab [title]="'Customer Reviews'">
+      <ng-container *ngTemplateOutlet="tabContent; context: {$implicit: 4}">
+      </ng-container>
+    </fd-tab>
+  </fd-tab-list>
+</div>
+
+<ng-template #tabContent let-tabIndex>
+
+  <div class="tab-content">
+      This is Content For tabs {{tabIndex}}
+  </div>
+
+</ng-template>

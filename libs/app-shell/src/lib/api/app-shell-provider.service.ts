@@ -17,3 +17,8 @@ export class AppShellProviderService {
         window['appShellProviderService'] = {ref: this, zone: ngZone};
     }
 }
+
+
+export class PluginLifeCycle {
+    
+}

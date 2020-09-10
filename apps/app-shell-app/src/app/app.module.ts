@@ -3,14 +3,36 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppShellModule } from '@fundamental-ngx/app-shell';
-import { RouterModule } from '@angular/router';
+import { LandingComponent } from './landing/landing.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
+import { PrListModule } from './components/pr-list/pr-list.module';
+import { YourFavoritesModule } from './components/your-favorites/your-favorites.module';
+import { ItemPageModule } from './components/item-page/item-page.module';
+import {
+    IconModule,
+    LayoutGridModule,
+    LayoutPanelModule,
+    LinkModule
+} from '@fundamental-ngx/core';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [
+        AppComponent,
+        LandingComponent
+    ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppShellModule,
-        RouterModule
+        PrListModule,
+        YourFavoritesModule,
+        ItemPageModule,
+        IconModule,
+        LinkModule,
+        LayoutGridModule,
+        LayoutPanelModule,
+        AppRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent]
