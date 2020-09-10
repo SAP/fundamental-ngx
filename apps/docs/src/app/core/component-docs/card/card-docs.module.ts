@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CardModule } from '@fundamental-ngx/core';
+import { CardModule, ButtonModule } from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -23,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, CardModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, CardModule, ButtonModule],
     exports: [RouterModule],
     declarations: [CardDocsComponent, CardHeaderComponent, CardExampleComponent]
 })
