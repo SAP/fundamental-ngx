@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.49...v0.22.0-rc.50) (2020-09-10)
+
+
+### Bug Fixes
+
+* Add proper messages for pickers ([#3216](https://github.com/SAP/fundamental-ngx/issues/3216)) ([50b23b7](https://github.com/SAP/fundamental-ngx/commit/50b23b7e337a2dfd1a72402cb0103f77e678ef3b))
+
 ## [0.22.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.48...v0.22.0-rc.49) (2020-09-10)
 
 
