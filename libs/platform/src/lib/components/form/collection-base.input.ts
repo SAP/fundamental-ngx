@@ -1,7 +1,7 @@
 import { Input, Directive } from '@angular/core';
 import { BaseInput } from './base.input';
 import { isSelectItem } from '../../domain/data-model';
-import { isFunction, isJsObject } from '../../utils/lang';
+import { isFunction, isJsObject, isString } from '../../utils/lang';
 import { SelectItem } from '../../domain/data-model';
 
 /**
@@ -48,9 +48,23 @@ export abstract class CollectionBaseInput extends BaseInput {
         if (isSelectItem(item)) {
             return item.label;
         } else if (isJsObject(item) && this.displayKey) {
-            return isFunction(item[this.displayKey]) ? item[this.displayKey]() : item[this.displayKey];
+            const currentItem = this.objectGet(item, this.displayKey);
+
+            return isFunction(currentItem) ? currentItem() : currentItem;
         } else {
             return item;
+        }
+    }
+
+    protected objectGet(obj: any, is: string | string[]): any {
+        if (!isJsObject(obj)) {
+            return obj;
+        } else if (isString(is)) {
+            return this.objectGet(obj, is.split('.'));
+        } else if (is.length === 0) {
+            return obj;
+        } else {
+            return this.objectGet(obj[is[0]], is.slice(1));
         }
     }
 }

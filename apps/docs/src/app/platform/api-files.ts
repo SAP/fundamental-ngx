@@ -28,5 +28,6 @@ export const API_FILES = {
     ],
     switch: ['SwitchComponent'],
     stepInput: ['NumberStepInputComponent', 'StepInputComponent', 'StepInputConfig'],
-    inputGroup: ['InputGroupConfig', 'InputGroupComponent', 'InputGroupAddonComponent', 'InputGroupInputComponent']
+    inputGroup: ['InputGroupConfig', 'InputGroupComponent', 'InputGroupAddonComponent', 'InputGroupInputComponent'],
+    combobox: ['ComboboxComponent', 'BaseCombobox', 'ComboboxConfig']
 };

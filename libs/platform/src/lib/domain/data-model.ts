@@ -2,7 +2,7 @@
  * Interface SelectItem is used to deal with complex object in order to be able to format
  * custom label that is shown in the options.
  *
- * Used in various controls: Select, RadioGroup, CheckboxGroup
+ * Used in various controls: Select, RadioGroup, CheckboxGroup, Combobox
  */
 export interface SelectItem {
     /**
@@ -21,8 +21,28 @@ export interface SelectItem {
      * Trigger values is a text for selected item
      */
     triggerValue?: string;
+
+    isGroup?: boolean;
+    secondaryText?: string;
+    children?: SelectItem[];
+}
+
+export interface OptionItem {
+    /** Item text */
+    label: string;
+
+    /**
+     * References to the object instance
+     */
+    value: any;
+
+    isGroup?: boolean;
+    secondaryText?: string;
+    children?: OptionItem[];
 }
 
 export function isSelectItem(item: SelectItem): item is SelectItem {
     return item && item.label !== undefined && item.value !== undefined;
 }
+
+export const isOptionItem = isSelectItem;
