@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.47...v0.22.0-rc.48) (2020-09-10)
+
+
+### Bug Fixes
+
+* (platform) add input group ([#3165](https://github.com/SAP/fundamental-ngx/issues/3165)) ([534261b](https://github.com/SAP/fundamental-ngx/commit/534261b8242d72933d20622a6f3e60825c4a8f37))
+
 ## [0.22.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.46...v0.22.0-rc.47) (2020-09-10)
 
 
