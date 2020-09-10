@@ -17,6 +17,7 @@ export const API_FILES = {
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
+    card: ['CardComponent'],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
     button: ['ButtonComponent'],
@@ -52,8 +53,7 @@ export const API_FILES = {
         'FormInputMessageGroupComponent'
     ],
     formMessage: ['FormInputMessageGroupComponent'],
-    globalConfig: [
-    ],
+    globalConfig: [],
     icon: ['IconComponent'],
     infoLabel: ['InfoLabelComponent'],
     infiniteScroll: ['InfiniteScrollDirective'],
