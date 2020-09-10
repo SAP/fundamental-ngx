@@ -151,7 +151,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
         this._menuSubscription.unsubscribe();
     }
 
-    /** Function called to select a menu item for the split button */
+    /** Function called to select a menu item for the split button. */
     selectMenuItem(menuItem: MenuItemComponent): void {
         if (menuItem && !this.keepMainAction) {
             menuItem.setSelected(true);

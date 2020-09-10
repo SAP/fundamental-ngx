@@ -1,24 +1,98 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SplitButtonComponent } from './split-button.component';
-import { SplitButtonModule } from './split-button.module';
+import { Component, DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { MenuModule } from '../menu/menu.module';
+
+@Component({
+    selector: 'fd-test-component',
+    template: `
+        <fd-split-button>
+            <fd-menu>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Option 1</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Option 2</span>
+                    </div>
+                </li>
+            </fd-menu>
+        </fd-split-button>
+    `
+})
+export class TestComponent {}
 
 describe('SplitButtonComponent', () => {
-    let component: SplitButtonComponent;
-    let fixture: ComponentFixture<SplitButtonComponent>;
+    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement, element: HTMLElement;
+
+    let component, componentInstance: SplitButtonComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [SplitButtonModule]
-        }).compileComponents();
+            imports: [MenuModule],
+            declarations: [SplitButtonComponent, TestComponent]
+        });
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SplitButtonComponent);
-        component = fixture.componentInstance;
+        fixture = TestBed.createComponent(TestComponent);
+        debugElement = fixture.debugElement;
+        element = debugElement.nativeElement;
         fixture.detectChanges();
+        component = debugElement.query(By.directive(SplitButtonComponent));
+        componentInstance = component.injector.get(SplitButtonComponent);
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
+        expect(componentInstance).toBeTruthy();
+    });
+
+    it('should handle content init - no selected item', () => {
+        spyOn(componentInstance, 'selectMenuItem');
+        componentInstance.mainActionTitle = null;
+        componentInstance.ngAfterContentInit();
+        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu.menuItems.first);
+        expect(componentInstance.selected).toBe(componentInstance.menu.menuItems.first);
+    });
+
+    it('should handle content init - selected item', () => {
+        spyOn(componentInstance, 'selectMenuItem');
+        componentInstance.selected = componentInstance.menu.menuItems.last;
+        componentInstance.mainActionTitle = null;
+        componentInstance.ngAfterContentInit();
+        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu.menuItems.last);
+        componentInstance.menu.menuItems.last.onSelect.emit();
+        fixture.detectChanges();
+        expect(componentInstance.mainActionTitle).toBe('Option 2');
+    });
+
+    it('should handle the main button click - no selected item', () => {
+        const mouseEvent = new MouseEvent('click');
+        spyOn(mouseEvent, 'stopPropagation');
+        spyOn(componentInstance.primaryButtonClicked, 'emit');
+        componentInstance.selected = null;
+
+        componentInstance.onMainButtonClick(mouseEvent);
+
+        expect(componentInstance.primaryButtonClicked.emit).toHaveBeenCalledWith(mouseEvent);
+        expect(mouseEvent.stopPropagation).toHaveBeenCalled();
+    });
+
+    it('should handle the main button click - selected item', () => {
+        const mouseEvent = new MouseEvent('click');
+        spyOn(mouseEvent, 'stopPropagation');
+        spyOn(componentInstance.primaryButtonClicked, 'emit');
+        componentInstance.selected = componentInstance.menu.menuItems.first;
+        spyOn(componentInstance.selected.elementRef.nativeElement, 'click');
+
+        componentInstance.onMainButtonClick(mouseEvent);
+
+        expect(componentInstance.primaryButtonClicked.emit).not.toHaveBeenCalled();
+        expect(mouseEvent.stopPropagation).toHaveBeenCalled();
+        expect(componentInstance.selected.elementRef.nativeElement.click).toHaveBeenCalled();
     });
 });
