@@ -67,6 +67,7 @@
  */
 import { BehaviorSubject, Observable } from 'rxjs';
 import { InjectionToken } from '@angular/core';
+import { MatchingStrategy } from '../components/form/combobox/combobox.config';
 
 export const DATA_PROVIDERS = new InjectionToken<Map<string, DataProvider<any>>>('DataProviderRegistry');
 
@@ -74,6 +75,13 @@ export interface DataSource<T> {
     open(): Observable<T[]>;
 
     close(): void;
+}
+
+export type MatchBy = (item: any) => any;
+
+export interface MatchingBy {
+    firstBy: MatchBy;
+    secondaryBy?: MatchBy;
 }
 
 export function isDataSource(value: any): value is DataSource<any> {
@@ -87,6 +95,8 @@ export function isDataSource(value: any): value is DataSource<any> {
  */
 export abstract class DataProvider<T> {
     protected _keyPath: string;
+    protected _matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
+    protected _matchingBy: MatchingBy | null = null;
 
     abstract fetch(params: Map<string, any>): Observable<T[]>;
 
@@ -116,6 +126,14 @@ export abstract class DataProvider<T> {
 
     setLookupKey(key: string): void {
         this._keyPath = key;
+    }
+
+    setMatchingBy(matchingBy: MatchingBy): void {
+        this._matchingBy = matchingBy;
+    }
+
+    setMatchingStrategy(strategy: MatchingStrategy): void {
+        this._matchingStrategy = strategy;
     }
 }
 

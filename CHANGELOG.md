@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.48...v0.22.0-rc.49) (2020-09-10)
+
+
+### Features
+
+* (platform) introduce combobox component ([#3048](https://github.com/SAP/fundamental-ngx/issues/3048)) ([7d4650a](https://github.com/SAP/fundamental-ngx/commit/7d4650a5945d21d52820e796019d6f33073922b1))
+
+## [0.22.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.47...v0.22.0-rc.48) (2020-09-10)
+
+
+### Bug Fixes
+
+* (platform) add input group ([#3165](https://github.com/SAP/fundamental-ngx/issues/3165)) ([534261b](https://github.com/SAP/fundamental-ngx/commit/534261b8242d72933d20622a6f3e60825c4a8f37))
+
+## [0.22.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.46...v0.22.0-rc.47) (2020-09-10)
+
+
+### Bug Fixes
+
+* fix DND on IE11 ([#3222](https://github.com/SAP/fundamental-ngx/issues/3222)) ([ec4a785](https://github.com/SAP/fundamental-ngx/commit/ec4a78594446840381bc4683f02a9693a24429da))
+
+## [0.22.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.45...v0.22.0-rc.46) (2020-09-10)
+
+
+### Bug Fixes
+
+* (platform) Defect fixes for platform link components ([#3226](https://github.com/SAP/fundamental-ngx/issues/3226)) ([7f85da8](https://github.com/SAP/fundamental-ngx/commit/7f85da89dac71868566b00a164feefb57a52e03d))
+
+## [0.22.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.44...v0.22.0-rc.45) (2020-09-09)
+
+
+### Bug Fixes
+
+* add submit/cancel buttons for datetime picker ([#3136](https://github.com/SAP/fundamental-ngx/issues/3136)) ([3ad3fde](https://github.com/SAP/fundamental-ngx/commit/3ad3fdef1e551e77776e0510984923ba9f05719b))
+
+## [0.22.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.43...v0.22.0-rc.44) (2020-09-09)
+
+
+### Bug Fixes
+
+* **File Input:** Deprecate File Input component. ([#3047](https://github.com/SAP/fundamental-ngx/issues/3047)) ([c2321a8](https://github.com/SAP/fundamental-ngx/commit/c2321a81bc6ced9fcb529955a8e86e88a4a86946))
+* (platform) Fixed detached menu while scrolling ([#3195](https://github.com/SAP/fundamental-ngx/issues/3195)) ([049b6a3](https://github.com/SAP/fundamental-ngx/commit/049b6a33f853d1f607e56e7a0d56f12dab0df577))
+
+## [0.22.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.42...v0.22.0-rc.43) (2020-09-09)
+
+## [0.22.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.41...v0.22.0-rc.42) (2020-09-09)
+
 ## [0.22.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.40...v0.22.0-rc.41) (2020-09-09)
 
 

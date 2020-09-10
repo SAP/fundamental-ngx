@@ -22,6 +22,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/checkbox-group', name: 'Checkbox Group' },
             { url: 'platform/info-label', name: 'Info Label' },
             { url: 'platform/input', name: 'Input' },
+            { url: 'platform/input-group', name: 'Input Group' },
             { url: 'platform/link', name: 'Link' },
             { url: 'platform/menu', name: 'Menu' },
             { url: 'platform/menu-button', name: 'Menu Button' },
@@ -32,7 +33,8 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/split-menu-button', name: 'Split Menu Button' },
             { url: 'platform/textarea', name: 'Textarea' },
             { url: 'platform/switch', name: 'Switch' },
-            { url: 'platform/step-input', name: 'Step Input' }
+            { url: 'platform/step-input', name: 'Step Input' },
+            { url: 'platform/combobox', name: 'Combobox' }
         ];
 
         this.layouts = [];

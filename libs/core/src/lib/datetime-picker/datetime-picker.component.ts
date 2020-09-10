@@ -221,6 +221,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     showWeekNumbers = true;
 
+    /** Whether or not to show the datetime picker footer with submit/cancel buttons. */
+    @Input()
+    showFooter = true;
+
     /** Event thrown every time calendar active view is changed */
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
@@ -269,8 +273,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden The Time object which interacts with the inner Time component. Internal use. */
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
+    /** @hidden The temporary Time object for use before 'Submit' is pressed. Internal use. */
+    tempTime: TimeObject;
+
     /** @hidden The CalendarDay object which interacts with the inner Calendar component. Internal use. */
     selectedDate: FdDate;
+
+    /** @hidden The temporary CalendarDay object for use before 'Submit' is pressed. Internal use. */
+    tempDate: FdDate;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -300,9 +310,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.date && this.inputFieldDate !== null) {
+        if (this.date) {
             this.selectedDate = this.date.date;
             this.time = this.date.time;
+            this._setTempDateTime();
         }
     }
 
@@ -398,6 +409,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
         this.selectedDate = selected.date;
         this.time = selected.time;
+        this._setTempDateTime();
         this.date = new FdDatetime(this.selectedDate, this.time);
         if (this.isCurrentModelValid()) {
             this._refreshCurrentlyDisplayedCalendarDate(this.date.date);
@@ -412,14 +424,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * If invalid time model is detected, it takes time model data from TimeComponent.
      */
     handleDateChange(date: FdDate): void {
-        this.selectedDate = date;
-        if (!this.date.isTimeValid()) {
-            this.time = this.timeComponent.time;
+        this.tempDate = date;
+        if (!this.showFooter) {
+            this.submit();
         }
-        this.date = new FdDatetime(this.selectedDate, this.time);
-        this.isInvalidDateInput = !this.isCurrentModelValid();
-        this._setInput(this.date);
-        this.onChange(this.date);
     }
 
     /**
@@ -427,7 +435,22 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * Method that is triggered by events from time component, when there is selected time changed
      */
     handleTimeChange(time: TimeObject): void {
-        this.time = time;
+        this.tempTime = time;
+        if (!this.showFooter) {
+            this.submit();
+        }
+    }
+
+    /**
+     * @hidden
+     * Method that is triggered when 'Submit' button is pressed.
+     */
+    submit(): void {
+        this.selectedDate = this.tempDate;
+        this.time = this.tempTime;
+        if (!this.date.isTimeValid()) {
+            this.time = this.timeComponent.time;
+        }
         if (!this.selectedDate || !this.selectedDate.isDateValid()) {
             this.selectedDate = FdDate.getToday();
         }
@@ -435,6 +458,19 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.isInvalidDateInput = !this.isCurrentModelValid();
         this._setInput(this.date);
         this.onChange(this.date);
+        if (this.showFooter) {
+            this.closePopover();
+        }
+    }
+
+    /**
+     * @hidden
+     * Function that is called when 'Cancel' button is pressed.
+     */
+    cancel(): void {
+        this.tempDate = this.selectedDate;
+        this.tempTime = this.time;
+        this.closePopover();
     }
 
     /** @hidden */
@@ -455,6 +491,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         if (!this.isInvalidDateInput) {
             this.selectedDate = fdTimeDate.date;
             this.time = fdTimeDate.time;
+            this._setTempDateTime();
             this.date = new FdDatetime(this.selectedDate, this.time);
             this.onChange(fdTimeDate);
             this._refreshCurrentlyDisplayedCalendarDate(fdTimeDate.date);
@@ -466,6 +503,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.date = FdDatetime.getToday();
             this.selectedDate = this.date.date;
             this.time = this.date.time;
+            this._setTempDateTime();
             this._refreshCurrentlyDisplayedCalendarDate(this.date.date);
             this.onChange(null);
         } else if (!date && !this.allowNull) {
@@ -530,6 +568,12 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
                 }
                 this.timeComponent.refreshTime();
             });
+    }
+
+    /** @hidden */
+    private _setTempDateTime(): void {
+        this.tempDate = this.selectedDate;
+        this.tempTime = this.time;
     }
 
 }

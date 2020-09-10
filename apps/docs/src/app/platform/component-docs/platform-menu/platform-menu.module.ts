@@ -12,6 +12,7 @@ import { PlatformMenuScrollingExampleComponent } from './platform-menu-examples/
 import { PlatformMenuXPositionExampleComponent } from './platform-menu-examples/platform-menu-x-position-example.component';
 import { PlatformMenuModule, PlatformButtonModule, } from '@fundamental-ngx/platform';
 import { AvatarModule } from '@fundamental-ngx/core';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 const routes: Routes = [
@@ -31,7 +32,8 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         PlatformMenuModule,
         PlatformButtonModule,
-        AvatarModule
+        AvatarModule,
+        ScrollingModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -43,4 +45,4 @@ const routes: Routes = [
         PlatformMenuXPositionExampleComponent
     ]
 })
-export class PlatformMenuDocsModule {}
+export class PlatformMenuDocsModule { }

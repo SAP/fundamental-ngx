@@ -112,14 +112,15 @@ describe('DatetimePickerComponent', () => {
 
     it('should update input from time but no date', () => {
         spyOn(component, 'onChange');
-        component.selectedDate = FdDate.getToday();
+        component.tempDate = FdDate.getToday();
         const timeModel = { hour: 12, minute: 30, second: 45 };
-        const dateTime = new FdDatetime(component.selectedDate, timeModel);
+        const dateTime = new FdDatetime(component.tempDate, timeModel);
         component.handleTimeChange(timeModel);
+        component.submit();
 
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
         expect(component.inputFieldDate).toEqual(
-            (<any>component)._formatDateTime(new FdDatetime(component.selectedDate, timeModel))
+            (<any>component)._formatDateTime(new FdDatetime(component.tempDate, timeModel))
         );
     });
 
@@ -143,14 +144,15 @@ describe('DatetimePickerComponent', () => {
 
     it('should update input from calendar', () => {
         spyOn(component, 'onChange');
-        component.time = FdDatetime.getToday().time;
+        component.tempTime = FdDatetime.getToday().time;
         const date = new FdDate(2018, 10, 10);
-        const dateTime = new FdDatetime(date, component.time);
+        const dateTime = new FdDatetime(date, component.tempTime);
         component.handleDateChange(date);
+        component.submit();
 
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
         expect(component.inputFieldDate).toEqual(
-            (<any>component)._formatDateTime(new FdDatetime(date, component.time))
+            (<any>component)._formatDateTime(new FdDatetime(date, component.tempTime))
         );
     });
 
@@ -185,6 +187,20 @@ describe('DatetimePickerComponent', () => {
         component.handleInputChange(internalParser(invalidDate));
         expect(component.inputFieldDate).toEqual(internalParser(dateTime));
         expect(component.isInvalidDateInput).toBeTruthy();
+    });
+
+    it('should cancel', () => {
+        component.selectedDate = FdDate.getToday();
+        component.tempDate = null;
+        component.time = {hour: 1, minute: 1, second: 1};
+        component.tempTime = null;
+        spyOn(component, 'closePopover');
+
+        component.cancel();
+
+        expect(component.tempDate).toEqual(component.selectedDate);
+        expect(component.tempTime).toEqual(component.time);
+        expect(component.closePopover).toHaveBeenCalled();
     });
 
     it('should handle other types than FdTimeDate', () => {
