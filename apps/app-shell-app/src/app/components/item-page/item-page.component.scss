@@ -1,0 +1,36 @@
+.header-detail {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .product-image {
+    width: 50%;
+    margin-left: 20px;
+    align-self: center;
+
+    img {
+      width: 50%;
+      align-self: center;
+    }
+  }
+
+
+  .shopping-details {
+    .actions {
+      width: 300px;
+    }
+
+
+  }
+
+
+}
+
+.item-content {
+  margin-top: 25px;
+}
+
+
+.tab-content {
+  padding: 30px;
+}

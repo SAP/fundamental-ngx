@@ -2,11 +2,10 @@ import {
     Component,
     OnInit
 } from '@angular/core';
-import { AppShellProviderService } from '../../../../libs/app-shell/src/lib/api/app-shell-provider.service';
-import { MapMessage } from '../../../../libs/app-shell/src/lib/api/events/event-bus';
+import { MapMessage, AppShellProviderService } from '@fundamental-ngx/app-shell';
 
 @Component({
-    selector: 'fundamental-ngx-root',
+    selector: 'aba-ngx-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })

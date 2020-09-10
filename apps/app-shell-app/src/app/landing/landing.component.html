@@ -1,0 +1,52 @@
+<fd-layout-grid [col]="6">
+  <fd-layout-panel fdLayoutGridSpan [columnSpan]="4">
+    <fd-layout-panel-body>
+      <router-outlet name="pr-list"></router-outlet>
+    </fd-layout-panel-body>
+  </fd-layout-panel>
+  <fd-layout-panel fdLayoutGridSpan [columnSpan]="2">
+    <fd-layout-panel-body>
+      <h4>Quick Links</h4>
+      <hr/>
+      <a href="" fd-link>
+        <fd-icon glyph="activity-items" [size]="'s'"></fd-icon>
+        Request Non-catalog Item</a><br/><br/>
+
+      <a href="" fd-link>
+        <fd-icon glyph="batch-payments" [size]="'s'"></fd-icon>
+        Request By Plant</a><br/><br/>
+      <a href="" fd-link>
+        <fd-icon glyph="cart" [size]="'s'"></fd-icon>
+        Create Project</a><br/><br/>
+    </fd-layout-panel-body>
+  </fd-layout-panel>
+
+  <fd-layout-panel fdLayoutGridSpan [columnSpan]="5">
+    <fd-layout-panel-body>
+      <h4>Recomended Categories</h4>
+      <hr/>
+
+      <div class="carousel-container">
+        <img
+          src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/homepod-select-white-201801_FV1?wid=1868&hei=882&fmt=jpeg&qlt=80&op_usm=0.5,0.5&.v=1565208972383"
+          width="250px">
+        <img
+          src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/HM8K2?wid=1144&hei=1144&fmt=jpeg&qlt=95&op_usm=0.5%2C0.5&.v=1551128606308"
+          width="250px">
+        <img
+          src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/HMUA2?wid=890&hei=890&fmt=jpeg&qlt=80&op_usm=0.5,0.5&.v=1573666299753"
+          width="250px">
+
+      </div>
+
+
+    </fd-layout-panel-body>
+  </fd-layout-panel>
+  <fd-layout-panel fdLayoutGridSpan [columnSpan]="1">
+    <fd-layout-panel-body>
+      <aba-your-favorites></aba-your-favorites>
+    </fd-layout-panel-body>
+  </fd-layout-panel>
+</fd-layout-grid>
+
+

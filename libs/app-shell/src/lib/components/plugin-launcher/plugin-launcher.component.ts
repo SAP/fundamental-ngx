@@ -8,12 +8,12 @@ import {
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
-import { LookupService } from '../../api/extensions/lookup.service';
+import { loadRemoteModule } from '../../api/extensions/federation-utils';
 import {
     PluginDescriptor,
     Scope
-} from '../../api/extensions/plugin-definition.model';
-import { loadRemoteModule } from '../../api/extensions/federation-utils';
+} from '../../api/extensions/lookup/plugin-descriptor.model';
+import { LookupService } from '../../api/extensions/lookup/lookup.service';
 
 
 /**
