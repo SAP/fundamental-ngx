@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-split-button-types-example',
@@ -11,5 +11,4 @@ import { Component } from '@angular/core';
         `
     ]
 })
-export class ButtonSplitTypesExampleComponent {
-}
+export class ButtonSplitTypesExampleComponent {}

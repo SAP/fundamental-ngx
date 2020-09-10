@@ -1,14 +1,18 @@
 import {
-    AfterContentInit, AfterViewInit,
+    AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild, ElementRef,
+    ContentChild,
+    ElementRef,
     EventEmitter,
-    Input, OnChanges,
+    Input,
+    OnChanges,
     OnDestroy,
-    Output, SimpleChanges,
-    TemplateRef, ViewChild,
+    Output,
+    TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
@@ -45,7 +49,7 @@ import { Subscription } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent implements AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
+export class SplitButtonComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -107,6 +111,9 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     private _menuItemSubscriptions = new Subscription();
 
     /** @hidden */
+    private _menuSubscription = new Subscription();
+
+    /** @hidden */
     constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {}
 
     /** @hidden Emits event when main button is clicked */
@@ -121,6 +128,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this._setupMenuSubscription();
         this._setupMenuItemSubscriptions();
 
         if (!this.mainActionTitle && !this.selected) {
@@ -140,11 +148,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     ngOnDestroy(): void {
         this._menuItemSubscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes);
+        this._menuSubscription.unsubscribe();
     }
 
     /** Function called to select a menu item for the split button */
@@ -166,6 +170,15 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
                     }
                 })
             );
+        });
+    }
+
+    /** @hidden */
+    private _setupMenuSubscription(): void {
+        this._menuSubscription = this.menu.menuItems.changes.subscribe(() => {
+            this._menuItemSubscriptions.unsubscribe();
+            this._menuItemSubscriptions.closed = false;
+            this._setupMenuItemSubscriptions();
         });
     }
 }
