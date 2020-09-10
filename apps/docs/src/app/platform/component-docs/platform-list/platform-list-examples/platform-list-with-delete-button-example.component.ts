@@ -14,7 +14,8 @@ export class PlatformListWithDeleteButtonExampleComponent {
         }
     }
     // Handle deletion of item via keyboard 'Enter' or mouseclick
-    @HostListener('keyup', ['$event']) onKeydown(event: any): void {
+    @HostListener('keyup', ['$event'])
+    onKeydown(event: any): void {
         if (event && event.key === 'Enter') {
             this.deleteRow(event);
         }

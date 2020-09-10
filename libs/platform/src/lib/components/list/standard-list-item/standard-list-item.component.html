@@ -31,7 +31,11 @@
 </ng-container>
 
 <ng-template #commonTemplate>
-    <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
+    <fd-icon class="fd-list__icon" *ngIf="titleIcon" [glyph]="titleIcon" [attr.alt]="titleIcon" role="img">
+    </fd-icon>
+    <fd-avatar class="fd-list__icon" size="s" [image]="avatarSrc" *ngIf="avatarSrc!==null && avatarSrc!==undefined"
+        [attr.alt]="avatarTitle" [label]="avatarTitle" role="img">
+    </fd-avatar>
     <span *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap"
         [class.fd-list-title__unread]="unRead" [attr.title]="title">{{title}}</span>
     <span fd-list-secondary [attr.aria-label]="secondary" *ngIf="secondary!== null && secondary!== undefined"
@@ -42,26 +46,16 @@
         *ngIf="counter!== null && counter!== undefined" [attr.title]="counter">
         {{counter}}
     </span>
-    <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
-        <span *ngFor="let secondaryIcon of secondaryIcons">
-            <fd-icon *ngIf="!(secondaryIcon.isButton)" class="fd-list__icon" [glyph]="secondaryIcon.icon"
-                [attr.alt]="secondaryIcon.icon" role="img" (click)="onActionButtonClick($event)">
-            </fd-icon>
-            <button fd-button *ngIf="secondaryIcon.isButton" role="button" (click)="onActionButtonClick($event)"
-                [compact]="isCompact" [fdType]="'transparent'" [glyph]="secondaryIcon.icon">
-            </button>
-        </span>
-    </span>
-    <button fd-button *ngIf="listType === 'detail'" role="button" [compact]="isCompact" fdType="transparent"
-        glyph="edit" (click)="onActionButtonClick($event)">
-    </button>
-    <button fd-button *ngIf="selectionMode === 'delete'" role="button" [compact]="isCompact" fdType="transparent"
-        glyph="decline" (click)="onActionButtonClick($event)">
-    </button>
+    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
 </ng-template>
 
 <ng-template #byLineTemplate>
-    <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
+    <fd-icon class="fd-list__icon fd-list__thumbnail" *ngIf="titleIcon" [glyph]="titleIcon" [attr.alt]="titleIcon"
+        role="img">
+    </fd-icon>
+    <fd-avatar class="fd-list__icon fd-list__thumbnail" size="s" [image]="avatarSrc"
+        *ngIf="avatarSrc!==null && avatarSrc!==undefined" [attr.alt]="avatarTitle" [label]="avatarTitle" role="img">
+    </fd-avatar>
 
     <div class="fd-list__content">
         <div *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title"
@@ -81,26 +75,9 @@
                 <fdp-object-status [status]="statusType" [inverted]="inverted" [class.fd-list-title__unread]="unRead">
                     {{secondary}}</fdp-object-status>
             </span>
-            <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
-                <span *ngFor="let secondaryIcon of secondaryIcons">
-                    <fd-icon class="fd-list__byline-right fd-list__icon" *ngIf="!(secondaryIcon.isButton)"
-                        [glyph]="secondaryIcon.icon" [attr.alt]="secondaryIcon.icon" role="img"
-                        (click)="onActionButtonClick($event)">
-                    </fd-icon>
-                    <button fd-button class="fd-list__byline-right" *ngIf="secondaryIcon.isButton" role="button"
-                        [compact]="isCompact" fdType="transparent" [glyph]="secondaryIcon.icon"
-                        (click)="onActionButtonClick($event)">
-                    </button>
-                </span>
-            </span>
-            <button fd-button *ngIf="listType === 'detail'" role="button" [compact]="isCompact" fdType="transparent"
-                glyph="edit" (click)="onActionButtonClick($event)" [attr.aria-label]="'detail'">
-            </button>
-            <button fd-button *ngIf="selectionMode === 'delete'" role="button" [compact]="isCompact"
-                [attr.aria-label]="'delete'" fdType="transparent" glyph="decline" (click)="onActionButtonClick($event)">
-            </button>
         </div>
     </div>
+    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
 </ng-template>
 
 <ng-template #selectionTemplate>
@@ -113,11 +90,21 @@
         </fd-radio-button>
     </div>
 </ng-template>
-<ng-template #iconTemplate>
-    <fd-icon class="fd-list__icon" [class.fd-list__thumbnail]="hasByLine" *ngIf="titleIcon" [glyph]="titleIcon"
-        [attr.alt]="titleIcon" role="img">
-    </fd-icon>
-    <fd-avatar class="fd-list__icon" size="s" [image]="avatarSrc" [class.fd-list__thumbnail]="hasByLine"
-        *ngIf="avatarSrc!==null && avatarSrc!==undefined" [attr.alt]="avatarTitle" [label]="avatarTitle" role="img">
-    </fd-avatar>
+<ng-template #actionsTemplate>
+    <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
+        <span *ngFor="let secondaryIcon of secondaryIcons">
+            <fd-icon class="fd-list__icon" *ngIf="!(secondaryIcon.isButton)" [glyph]="secondaryIcon.icon"
+                [attr.alt]="secondaryIcon.icon" role="img" (click)="onActionButtonClick($event)">
+            </fd-icon>
+            <button fd-button *ngIf="secondaryIcon.isButton" role="button" [compact]="isCompact" fdType="transparent"
+                [glyph]="secondaryIcon.icon" (click)="onActionButtonClick($event)">
+            </button>
+        </span>
+    </span>
+    <button fd-button *ngIf="listType === 'detail'" role="button" [compact]="isCompact" fdType="transparent"
+        glyph="edit" (click)="onActionButtonClick($event)" [attr.aria-label]="'detail'">
+    </button>
+    <button fd-button *ngIf="selectionMode === 'delete'" role="button" [compact]="isCompact"
+        [attr.aria-label]="'delete'" fdType="transparent" glyph="decline" (click)="onActionButtonClick($event)">
+    </button>
 </ng-template>

@@ -45,56 +45,6 @@ export class SelectionChangeEvent {
 
 export class ListComponent extends CollectionBaseInput implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
 
-    /**Enables lazy loadMore of data */
-    @Input()
-    loadMore: boolean;
-
-    /**Enables data load on scroll for true
-     * false: enables data loading on button
-     * click
-     */
-    @Input()
-    loadOnScroll: boolean;
-
-    /**Wait time for new items */
-    @Input()
-    delayTime: number;
-
-    /**Max height for viewport to display scroll */
-    @Input()
-    maxHeight: string;
-
-    /**Items to be loaded at once */
-    @Input()
-    itemSize: number;
-
-    /**Scroll offset percentage to trigger scroll event */
-    @Input()
-    scrollOffsetPercentage: number;
-
-    /** Whether list component has removed borders */
-    @Input()
-    noBorder = false;
-
-    @Input()
-    selection = false;
-
-    /** Whether list component has removed bottom borders */
-    @Input()
-    noSeperator: boolean;
-
-    /** The type of the selection. Types include:
-    *'none'| 'multi' | 'single'|'delete'.
-    * Leave empty for default ().'
-    * Default value is set to ''
-    */
-    @Input()
-    selectionMode: SelectionType = 'none';
-
-    /**ListType 'inactive' | 'active' | 'navigation' | 'detail' */
-    @Input()
-    listType: ListType = 'active';
-
     /**  An array that holds a list of all selected items**/
     @Input()
     selectedItems: BaseListItem[];
@@ -111,35 +61,55 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @Input()
     loadTitle: string;
 
-    /**
-   * Todo: Name of the entity for which DataProvider will be loaded.
-   *  You can either pass list of
-   * items or use this entityClass and internally we should be able
-   * to do lookup to some registry
-   * and retrieve the best matching DataProvider that is set on application level
-   *
-   *
-   */
+    /**Wait time for new items */
     @Input()
-    entityClass: string;
+    delayTime: number;
 
+    /**Items to be loaded at once */
+    @Input()
+    itemSize: number;
 
-    /**
-      * Child items of the List.
-      */
-    @ContentChildren(BaseListItem, { descendants: true }) ListItems: QueryList<BaseListItem>;
+    /**Enables lazy loadMore of data */
+    @Input()
+    loadMore: boolean;
 
-    @ContentChild(ListItemDef) listItemDef: ListItemDef;
-
-    /** Access child element, for checking link content*/
-    @ViewChild('link', { read: ElementRef })
-    anchor: ElementRef;
-
-    /**
-     * @hidden
-     * keyManger to handle keybord events
+    /**Enables data load on scroll for true
+     * false: enables data loading on button
+     * click
      */
-    keyManager: FocusKeyManager<BaseListItem>;
+    @Input()
+    loadOnScroll: boolean;
+
+    /**ListType 'inactive' | 'active' | 'navigation' | 'detail' */
+    @Input()
+    listType: ListType = 'active';
+
+    /**Max height for viewport to display scroll */
+    @Input()
+    maxHeight: string;
+
+    /** Whether list component has removed borders */
+    @Input()
+    noBorder = false;
+
+    /** Whether list component has removed bottom borders */
+    @Input()
+    noSeperator: boolean;
+
+    /**Scroll offset percentage to trigger scroll event */
+    @Input()
+    scrollOffsetPercentage: number;
+
+    @Input()
+    selection = false;
+
+    /** The type of the selection. Types include:
+    *'none'| 'multi' | 'single'|'delete'.
+    * Leave empty for default ().'
+    * Default value is set to ''
+    */
+    @Input()
+    selectionMode: SelectionType = 'none';
 
     /**
      * Whether Navigation mode is included to list component
@@ -162,24 +132,22 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * To display loading symbol */
     loading = false;
 
+    /**
+     * @hidden
+     * keyManger to handle keybord events
+     * used in template
+     */
+    keyManager: FocusKeyManager<BaseListItem>;
+
     /** The model backing of the component. */
     selectionModel: SelectionModel<BaseListItem>;
 
     /**@hidden
-     * Whether list component has multiselection */
+     * Whether list component has multiselection
+     * binding in tempate to append class */
     multiSelect = false;
 
-    /** @hidden
-    * To store */
-    tempItems = [];
-
-    startIndex = 0;
-
-    lastIndex = this.itemSize;
-
     items = [];
-
-    dsItems = [];
 
     selectedvalue: string;
 
@@ -192,21 +160,56 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      */
     isCompact = this._contentDensity === 'compact';
 
-    /** role */
-    @HostBinding('attr.role')
-    role = 'list';
+    /** @hidden
+    * To store */
+    _tempItems = [];
 
+    /** @hidden
+    */
+    _startIndex = 0;
+
+    /** @hidden
+    */
+    _lastIndex = this.itemSize;
+
+    /** @hidden
+    */
+    _dsItems = [];
+
+    /** @hidden
+    */
     _destroyed = new Subject<void>();
+
     /**@hidden
      * for data source handling
      */
     _dsSubscription: Subscription | null;
 
     /**@hidden
-        * for items impertaive and declartive approaches
-        */
+    * for items impertaive and declartive approaches
+    */
     _itemsSubscription: Subscription | null;
 
+    /**
+    * Child items of the List.
+    */
+    @ContentChildren(BaseListItem, { descendants: true })
+    ListItems: QueryList<BaseListItem>;
+
+    @ContentChild(ListItemDef)
+    listItemDef: ListItemDef;
+
+    /** Access child element, for checking link content*/
+    @ViewChild('link', { read: ElementRef })
+    anchor: ElementRef;
+
+    /** role */
+    @HostBinding('attr.role')
+    role = 'list';
+
+    /** @hidden */
+    @Output()
+    selectedItemChange: EventEmitter<SelectionChangeEvent> = new EventEmitter<SelectionChangeEvent>();
 
     /**
     * Datasource for suggestion list
@@ -237,7 +240,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         return this.navigated;
     }
 
-
     set navigatedValue(value: boolean) {
         this.navigated = value;
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--navigation');
@@ -248,7 +250,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     get navigationIndicatorValue(): boolean {
         return this.navigationIndicator;
     }
-
 
     set navigationIndicatorValue(value: boolean) {
         this.navigationIndicator = value;
@@ -261,15 +262,103 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         return this.hasByLine;
     }
 
-
     set hasByLineValue(value: boolean) {
         this.hasByLine = value;
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--byline');
     }
 
+    /** setter and getter for radio button and checkbox*/
+    @Input()
+    get value(): any {
+        return super.getValue();
+    }
+
+    set value(value: any) {
+        super.setValue(value);
+    }
+
+
     /** @hidden */
-    @Output()
-    selectedItemChange: EventEmitter<SelectionChangeEvent> = new EventEmitter<SelectionChangeEvent>();
+    /**handline keyboard operations
+    * in template on list and list items
+    */
+    handleKeyDown(event: KeyboardEvent): boolean {
+        event.stopImmediatePropagation();
+        if (this.keyManager) {
+            if (event.keyCode === DOWN_ARROW || event.keyCode === UP_ARROW) {
+                return false;
+            } else if (event.keyCode === ENTER || event.keyCode === SPACE) {
+                this.updateNavigation(event);
+                return false;
+            }
+        }
+    }
+
+    /**@hidden
+     * binded in template on scroll
+     */
+    scrollHandler(): void {
+        if (!this.loading && this.loadOnScroll) {
+            this.getMoreData();
+        }
+    }
+
+    /**@hidden
+   *  Handles lazy loading data
+   * used in template
+   * onscroll and on more button click
+   */
+    getMoreData(): void {
+        this.loading = true;
+        of(this._loadNewItems())
+            .pipe(
+                tap(data => {
+                    if (data === null || data === undefined) {
+                        console.error('===Invalid Response recived===');
+                    }
+                }),
+                delay(this.delayTime)
+            ).subscribe(result => {
+                if (result !== null && result !== undefined) {
+                    for (let i = this.items.length, j = 0; j < result.length; ++i, ++j) {
+                        this.items[i] = result[j];
+                    }
+                }
+                this.loading = false;
+                this.stateChanges.next(this.items);
+                this._changeDetectorRef.markForCheck();
+
+            });
+    }
+
+    /**@hidden
+ *  used in tempate to get Selected items from a list
+ * event:any to avoid code duplication**/
+    onSelectionChanged(event: any): void {
+        if (event.target.checked) {
+            this.selectionModel.select(event.target.parentNode.parentNode.parentNode);
+        } else {
+            this.selectionModel.deselect(event.target.parentNode.parentNode.parentNode);
+        }
+    }
+
+    /** @hidden */
+    /**  on Update navgiation styles for non navigated items
+     * event:any to avoid code duplication**/
+    @HostListener('click', ['$event'])
+    updateNavigation(event: any): void {
+        this.ListItems.forEach((item) => {
+            if (item.anchor !== undefined) {
+                item.anchor.nativeElement.classList.remove('is-navigated');
+            }
+        });
+        if (event.target !== null && event.target.tagName.toLowerCase() === 'a') {
+            event.target.classList.add('is-navigated');
+        }
+        this._handleSingleSelect(event);
+        this._handleMultiSelect(event);
+
+    }
 
     /** @hidden */
     constructor(protected _changeDetectorRef: ChangeDetectorRef,
@@ -285,13 +374,13 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /** @hidden */
     /** Instailization of list with selection mode*/
     ngOnInit(): void {
-        if (this.dsItems.length !== null && this.itemSize !== 0) {
-            this.startIndex = 0;
-            this.lastIndex = this.itemSize;
+        if (this._dsItems.length !== null && this.itemSize !== 0) {
+            this._startIndex = 0;
+            this._lastIndex = this.itemSize;
             this.items = [];
-            this.items = this.dsItems.slice(this.startIndex, this.lastIndex);
+            this.items = this._dsItems.slice(this._startIndex, this._lastIndex);
         } else {
-            this.items = this.dsItems;
+            this.items = this._dsItems;
         }
         this.stateChanges.next(this.items);
         this.id = `fdp-list-${nextListId++}`;
@@ -320,12 +409,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /** @hidden */
     /**Keyboard manager on list items, set values when passed via array */
     ngAfterViewInit(): void {
-
         this.keyManager = new FocusKeyManager<BaseListItem>(this.ListItems).withWrap();
         this.ListItems.forEach((item) => {
             item.navigated = this.navigated;
             item.navigationIndicator = this.navigationIndicator;
             item.contentDensity = this.contentDensity;
+            item.isCompact = this.isCompact;
             item.selectionMode = this.selectionMode;
             item.listType = this.listType;
             item.hasByLine = this.hasByLine;
@@ -351,6 +440,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                 item.navigated = this.navigated;
                 item.navigationIndicator = this.navigationIndicator;
                 item.contentDensity = this.contentDensity;
+                item.isCompact = this.isCompact;
                 item.selectionMode = this.selectionMode;
                 item.listType = this.listType;
                 item.hasByLine = this.hasByLine;
@@ -378,34 +468,8 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         }
     }
 
-    @Input()
-    get value(): any {
-        return super.getValue();
-    }
-
-    set value(value: any) {
-        super.setValue(value);
-    }
-
-
-    /** @hidden */
-    /**handline keyboard operations
-    *  on list and list items
-    */
-    handleKeyDown(event: KeyboardEvent): boolean {
-        event.stopImmediatePropagation();
-        if (this.keyManager) {
-            if (event.keyCode === DOWN_ARROW || event.keyCode === UP_ARROW) {
-                return false;
-            } else if (event.keyCode === ENTER || event.keyCode === SPACE) {
-                this.updateNavigation(event);
-                return false;
-            }
-        }
-    }
-
     _initializeDS(ds: FdpListDataSource<any>): void {
-        this.dsItems = [];
+        this._dsItems = [];
         if (isDataSource(this.dataSource)) {
             this.dataSource.close();
             if (this._dsSubscription) {
@@ -438,8 +502,8 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             .open()
             .pipe(takeUntil(this._destroyed))
             .subscribe((data) => {
-                this.dsItems = data || [];
-                this.stateChanges.next(this.dsItems);
+                this._dsItems = data || [];
+                this.stateChanges.next(this._dsItems);
                 this._cd.markForCheck();
             });
         // initial data fetch
@@ -447,76 +511,18 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         return initDataSource;
     }
 
-    scrollHandler(): void {
-        if (!this.loading && this.loadOnScroll) {
-            this.getMoreData();
-        }
+    _loadNewItems(): any[] {
+        this._startIndex = this._startIndex + this.itemSize;
+        this._lastIndex = this._lastIndex + this.itemSize;
+        this._tempItems = this._dsItems.slice(this._startIndex, this._lastIndex);
+        return this._tempItems;
     }
 
     /**
-   *  Handles lazy loading data
-   * onscroll and on more button click
-   */
-    public getMoreData(): void {
-        this.loading = true;
-        of(this._loadNewItems())
-            .pipe(
-                tap(data => {
-                    if (data === null || data === undefined) {
-                        console.error('===Invalid Response recived===');
-                    }
-                }),
-                delay(this.delayTime)
-            ).subscribe(result => {
-                if (result !== null && result !== undefined) {
-                    for (let i = this.items.length, j = 0; j < result.length; ++i, ++j) {
-                        this.items[i] = result[j];
-                    }
-                }
-                this.loading = false;
-                this.stateChanges.next(this.items);
-                this._changeDetectorRef.markForCheck();
-
-            });
-    }
-    _loadNewItems(): any[] {
-        this.startIndex = this.startIndex + this.itemSize;
-        this.lastIndex = this.lastIndex + this.itemSize;
-        this.tempItems = this.dsItems.slice(this.startIndex, this.lastIndex);
-        return this.tempItems;
-    }
-    /**  filter to get Selected items from a list
-     * event:any to avoid code duplication**/
-    onSelectionChanged(event: any): void {
-        if (event.target.checked) {
-            this.selectionModel.select(event.target.parentNode.parentNode.parentNode);
-        } else {
-            this.selectionModel.deselect(event.target.parentNode.parentNode.parentNode);
-        }
-    }
-
-    /** @hidden */
-    /**  Update navgiation styles for non navigated items
-     * event:any to avoid code duplication**/
-    @HostListener('click', ['$event'])
-    updateNavigation(event: any): void {
-        this.ListItems.forEach((item) => {
-            if (item.anchor !== undefined) {
-                item.anchor.nativeElement.classList.remove('is-navigated');
-            }
-        });
-        if (event.target !== null && event.target.tagName.toLowerCase() === 'a') {
-            event.target.classList.add('is-navigated');
-        }
-        this.handleSingleSelect(event);
-        this.handleMultiSelect(event);
-
-    }
-    /** @hidden */
     /**List item with radio button styles,check,uncheckupdates
      * event:any to avoid code duplication
      */
-    handleSingleSelect(event: any): void {
+    _handleSingleSelect(event: any): void {
         // clean up single selection items
         if (event.target !== null && event.target !== undefined && this.selectionMode === 'single') {
             this.ListItems.forEach((item) => {
@@ -571,7 +577,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /**List item with checkbox styles,check,uncheckupdates
      * event:any to avoid code duplication
      */
-    handleMultiSelect(event: any): void {
+    _handleMultiSelect(event: any): void {
         if (event.target !== null &&
             event.target !== undefined &&
             this.selectionMode === 'multi') {
@@ -646,7 +652,6 @@ export class ListGroupHeader extends BaseListItem implements OnInit {
     *  Displays list goup header title
    */
     @Input()
-
     grpheaderTitle?: string;
 
     /** @hidden */

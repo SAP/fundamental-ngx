@@ -12,7 +12,7 @@
             </ng-template>
         </div>
     </fd-busy-indicator>
-    <div *ngIf="!loadOnScroll" width="100%">
+    <ng-container *ngIf="!loadOnScroll">
         <ng-template *ngIf="items.length !==0; then thenBlock else elseBlock">
         </ng-template>
         <li #listItem *ngIf="loadMore && !loadOnScroll" (click)="getMoreData()" fd-list-item
@@ -23,7 +23,7 @@
                 {{loadTitle}} <ng-content selector="#load"></ng-content>
             </button>
         </li>
-    </div>
+    </ng-container>
 </ul>
 
 <ng-template #thenBlock>

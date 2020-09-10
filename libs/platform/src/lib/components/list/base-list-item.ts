@@ -39,10 +39,33 @@ interface SecondaryActionItem {
 @Directive()
 export class BaseListItem extends BaseComponent implements OnInit, AfterViewChecked {
 
-    /** sets the list item in bold text
-     * which respresents unread data */
+    /** define label for screen reader */
     @Input()
-    unRead: boolean;
+    ariaLabelledBy: string;
+
+    /** define level of item for screen reader */
+    @Input()
+    ariaLevel: number;
+
+    /** define position of item for screen reader */
+    @Input()
+    ariaPosinet: number;
+
+    /** attribute to hold avatar path*/
+    @Input()
+    avatarSrc?: string;
+
+    /** attribute to hold avatar title for a11y*/
+    @Input()
+    avatarTitle: string;
+
+    /** attribute to hold counter value*/
+    @Input()
+    counter?: string;
+
+    /**Description of the title*/
+    @Input()
+    description: string;
 
     /** To invert the status of secondary text*/
     @Input()
@@ -57,49 +80,14 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @Input()
     statusType?: StatusType;
 
-    /**Description of the title*/
-    @Input()
-    description: string;
-
-    /** Tooltip text to show when focused for more than timeout value*/
-    @Input()
-    title?: string;
-
-    /**radio button value */
-    @Input()
-    value: string;
-
-    /**
-    * Enabling this flag causes forcing title directive to not wrap text,
-    * instead of wrapping there will be text truncation
-    */
-    @Input()
-    titleWrap?: boolean;
-
-    /** attribute to hold primary/title icon*/
-    @Input()
-    titleIcon?: string;
-
     /** attribute to hold secondary text*/
     @Input()
     secondary?: string;
 
-    /** attribute to hold counter value*/
-    @Input()
-    counter?: string;
-
-    /** attribute to hold avatar path*/
-    @Input()
-    avatarSrc?: string;
-
-    /** attribute to hold avatar title for a11y*/
-    @Input()
-    avatarTitle: string;
-
     /**
-     * Enabling this flag causes forcing secondary item directive to not wrap text,
-     * instead of wrapping there will be text truncation
-     */
+    * Enabling this flag causes forcing secondary item directive to not wrap text,
+    * instead of wrapping there will be text truncation
+   */
     @Input()
     secondaryWrap?: boolean;
 
@@ -107,28 +95,29 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @Input()
     secondaryIcons?: SecondaryActionItem[];
 
-    /** define label for screen reader */
+    /** Tooltip text to show when focused for more than timeout value*/
     @Input()
-    ariaLabelledBy: string;
+    title?: string;
 
-    /** define level of item for screen reader */
+    /**
+    * Enabling this flag causes forcing title directive to not wrap text,
+    * instead of wrapping there will be text truncation
+   */
     @Input()
-    ariaLevel: number;
+    titleWrap?: boolean;
 
-    /** define position of item for screen reader */
+    /** attribute to hold primary/title icon*/
     @Input()
-    ariaPosinet: number;
+    titleIcon?: string;
 
-    /** Whether Navigation mode is included to list component
-    * for all the items
-    */
-    navigated = false;
+    /** sets the list item in bold text
+    * which respresents unread data */
+    @Input()
+    unRead: boolean;
 
-    /** Whether Navigation mode is included to list component
-     * only a subset of the list items are navigable
-     * you should indicate those by displaying a navigation arrow
-    */
-    navigationIndicator = false;
+    /**radio button value */
+    @Input()
+    value: string;
 
     /**By default selection mode is 'none' */
     selectionMode: SelectionType = 'none';
@@ -146,14 +135,28 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      */
     hasByLine = false;
 
-    /** @hidden */
-    _contentDensity = this._listConfig.contentDensity;
 
+    /** Whether Navigation mode is included to list component
+    * for all the items
+    */
+    navigated = false;
 
-    /** Whether listitem is selected */
+    /** Whether Navigation mode is included to list component
+     * only a subset of the list items are navigable
+     * you should indicate those by displaying a navigation arrow
+    */
+    navigationIndicator = false;
+
+    /** @hidden
+     * Whether listitem is selected binded to template */
     selected: boolean;
 
+    /** @hidden
+     * radio button selected value binded to template */
     selectionValue: string;
+
+    /** @hidden */
+    _contentDensity = this._listConfig.contentDensity;
 
     /**
      * @hidden
@@ -161,15 +164,10 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      */
     isCompact = this._contentDensity === 'compact';
 
-
-    /** event emitter for selected item*/
-    @Output()
-    itemSelected = new EventEmitter<KeyboardEvent | MouseEvent | TouchEvent>();
-
-    /** Event sent when delete, details or any other action buttons are clicked */
-    @Output()
-    buttonClicked = new EventEmitter<KeyboardEvent | MouseEvent | TouchEvent>();
-
+    /**@hidden
+   * list of values, it can be of type Item or String.
+   */
+    _item: any;
 
     @ViewChild('listItem', { read: ElementRef })
     listItem: ElementRef;
@@ -186,6 +184,14 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @ViewChild(RadioButtonComponent)
     radioButtonComponent: RadioButtonComponent;
 
+    /** event emitter for selected item*/
+    @Output()
+    itemSelected = new EventEmitter<KeyboardEvent | MouseEvent | TouchEvent>();
+
+    /** Event sent when delete, details or any other action buttons are clicked */
+    @Output()
+    buttonClicked = new EventEmitter<KeyboardEvent | MouseEvent | TouchEvent>();
+
     @Input('selectionValue')
     get selectionValueDetails(): string {
         return this.selectionValue;
@@ -199,12 +205,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
             this.selected = this.value === this.selectionValue;
         }
     }
-
-    /**
-    * @hidden
-    * list of values, it can be of type Item or String.
-    */
-    _item: any;
 
     /** setter and getter for _link */
     @Input('link')
@@ -257,34 +257,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     }
 
     /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef,
-        public itemEl: ElementRef, protected _listConfig: ListConfig) {
-        super(_changeDetectorRef);
-
-    }
-
-    /** @hidden */
-    /** Show navigation for single list*/
-    ngOnInit(): void {
-        this.id = `fdp-list-item-${nextListItemId++}`;
-    }
-
-    /** @hidden */
-    /**To detect changes from parent-listbox to list item
-     * for example single, multi option selection those details
-     * will be deducted in list item
-     */
-    ngAfterViewChecked(): void {
-        this._changeDetectorRef.detectChanges();
-        if (this.noSeperator) {
-            this.itemEl.nativeElement.querySelector('li').classList.add('fd-list-item__no-seprator');
-        }
-    }
-
-    /** @hidden */
     /**Created focus on list item on mouseclick,
      * Up,down arrow press */
-    public focus(): void {
+    focus(): void {
         this.listItem.nativeElement.focus();
     }
 
@@ -310,6 +285,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
 
     }
+
     /** @hidden */
     onKeyboardClick(event: KeyboardEvent): void {
         if (this.checkboxComponent) {
@@ -322,7 +298,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         this.itemSelected.emit(event);
     }
 
-    /** Handler for mouse events */
+    /**@hidden
+     * Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         if (this.checkboxComponent && !this.anchor) {
@@ -335,8 +312,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         this.itemSelected.emit(event);
 
     }
-
-
 
     /** @hidden */
     /**on keydown append active styles on actionable item */
@@ -354,13 +329,38 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         }
     }
 
-
     /**
      *  @hidden
      *  Handles action button click
      */
-    public onActionButtonClick($event: KeyboardEvent | MouseEvent | TouchEvent): void {
+    onActionButtonClick($event: KeyboardEvent | MouseEvent | TouchEvent): void {
         this.buttonClicked.emit($event);
+    }
+
+
+    /** @hidden */
+    constructor(protected _changeDetectorRef: ChangeDetectorRef,
+        public itemEl: ElementRef, protected _listConfig: ListConfig) {
+        super(_changeDetectorRef);
+
+    }
+
+    /** @hidden */
+    /** Show navigation for single list*/
+    ngOnInit(): void {
+        this.id = `fdp-list-item-${nextListItemId++}`;
+    }
+
+    /** @hidden */
+    /**To detect changes from parent-listbox to list item
+     * for example single, multi option selection those details
+     * will be deducted in list item
+     */
+    ngAfterViewChecked(): void {
+        this._changeDetectorRef.detectChanges();
+        if (this.noSeperator) {
+            this.itemEl.nativeElement.querySelector('li').classList.add('fd-list-item__no-seprator');
+        }
     }
 
 
