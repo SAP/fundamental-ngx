@@ -91,7 +91,6 @@
         >
             <fd-checkbox
                 [compact]="compact"
-                (click)="$event.stopPropagation()"
                 (ngModelChange)="handleSelect($event, value)"
                 [ngModel]="selected.indexOf(value) !== -1">
             </fd-checkbox>
