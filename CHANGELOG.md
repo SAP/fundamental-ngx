@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.50...v0.22.0-rc.51) (2020-09-11)
+
+
+### Bug Fixes
+
+* (platform) defect fix for the input width reduced ([#3247](https://github.com/SAP/fundamental-ngx/issues/3247)) ([4e2336d](https://github.com/SAP/fundamental-ngx/commit/4e2336d3896b61ea695815f88f974e2b2d615bea))
+
 ## [0.22.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.49...v0.22.0-rc.50) (2020-09-10)
 
 
