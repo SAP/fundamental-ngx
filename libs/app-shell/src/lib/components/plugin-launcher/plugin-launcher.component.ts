@@ -50,10 +50,7 @@ export class PluginLauncherComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
-        const query = new Map().set('type', this.type).set('name', this.name).set('category', this.category)
-            .set('provider', this.provider).set('id', this.id);
-
-        const item = this.lookupService.lookup(query);
+        const item = this.lookupService.lookup(this.initQuery());
         this.doCreateComponent(item.descriptor);
         this._cd.markForCheck();
 
@@ -69,4 +66,18 @@ export class PluginLauncherComponent implements OnInit {
         this.viewContainer.createComponent(factory, null, this.injector);
     }
 
+    private initQuery(): Map<string, any> {
+        const query = new Map();
+        if (this.provider) {
+            query.set('provider', this.provider);
+        }
+        if (this.category) {
+            query.set('category', this.category);
+        }
+
+        if (this.id) {
+            query.set('id', this.id);
+        }
+        return query;
+    }
 }

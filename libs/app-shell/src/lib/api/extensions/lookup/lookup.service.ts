@@ -25,7 +25,6 @@ export class LookupService {
         if (found.length === 0) {
             throw new Error('No Plugin found. Please check your configuration.' + query.get('id'));
         }
-
         const item: LookupItem = {
             id: found[0].id,
             attributes: query,
