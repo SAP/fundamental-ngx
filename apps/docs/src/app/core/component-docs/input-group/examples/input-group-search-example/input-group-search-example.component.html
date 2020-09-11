@@ -1,9 +1,9 @@
 <div fd-form-item>
     <label fd-form-label>Search input</label>
     <fd-input-group
-        button="true"
         glyph="decline"
         placeholder="Search"
+        [button]="true"
         [disabled]="false"
         [(ngModel)]="searchTerm"
         (addOnButtonClicked)="searchTerm = ''"
@@ -17,10 +17,10 @@
 <div fd-form-item>
     <label fd-form-label>Search input with search type</label>
     <fd-input-group
-        button="true"
         type="search"
         glyph="search"
         placeholder="Search"
+        [button]="true"
         [disabled]="false"
         [(ngModel)]="searchTermSecond"
     >
