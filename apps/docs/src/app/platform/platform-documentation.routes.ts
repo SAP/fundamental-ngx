@@ -92,6 +92,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'table',
+                loadChildren: () =>
+                    import('./component-docs/platform-table/platform-table.module').then(
+                        (m) => m.PlatformTableDocsModule
+                    )
+            },
+            {
                 path: 'textarea',
                 loadChildren: () =>
                     import('./component-docs/platform-forms/platform-textarea/platform-textarea-docs.module').then(
