@@ -76,11 +76,8 @@ export class PluginManagerService {
                 private httpClient: HttpClient) {
     }
 
-    loadConfiguration(url: string): void {
-        this.httpClient.get<PluginDescriptor[]>(url).subscribe((config) => {
-            // maybe add some additional process..
-            config.forEach(c => this.lookupService.addPlugin(c));
-        });
+    loadConfiguration(plugins: Array<Partial<PluginDescriptor>>): void {
+        plugins.forEach(c => this.lookupService.addPlugin(c));
     }
 
     register(descriptor: Partial<PluginDescriptor>, plugin?: PluginComponent): void {
