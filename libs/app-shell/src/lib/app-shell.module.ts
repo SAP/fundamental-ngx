@@ -19,7 +19,8 @@ import { BrowserModule } from '@angular/platform-browser';
         PluginLauncherModule
     ],
     exports: [
-        AppShellPageModule
+        AppShellPageModule,
+        PluginLauncherModule
     ]
 })
 export class AppShellModule {
