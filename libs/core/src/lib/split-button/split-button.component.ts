@@ -141,7 +141,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
         this._setupMenuItemSubscriptions();
         this._handleMainActionObject();
 
-        if (!this.mainActionTitle && !this.selected) {
+        if (!this.mainActionTitle && !this.titleTemplate && !this.selected) {
             this.selectMenuItem(this.menu.menuItems.first);
         } else if (!this.mainActionTitle && this.selected) {
             this.selectMenuItem(this.selected);
@@ -151,7 +151,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.fixedWidth) {
-            this.mainButtonWidth = parseInt(this.mainActionBtn.nativeElement.offsetWidth, 10);
+            this.mainButtonWidth = parseInt(this.mainActionBtn.nativeElement.offsetWidth + 1, 10);
         }
     }
 
@@ -184,6 +184,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
                 menuItem.onSelect.subscribe(() => {
                     if (!this.keepMainAction) {
                         this.selected = menuItem;
+                        this.titleTemplate = null;
                         this.mainActionTitle = menuItem.menuItemTitle.title;
                         this._cdRef.detectChanges();
                     }
