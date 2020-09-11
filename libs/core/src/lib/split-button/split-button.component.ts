@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -51,7 +50,7 @@ import { MainAction } from './main-action';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
+export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy {
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -121,6 +120,9 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     private _menuSubscription = new Subscription();
 
+    /** @hideen */
+    private _init = true;
+
     /** @hidden */
     constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {}
 
@@ -149,18 +151,6 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     }
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        if (this.fixedWidth && !this.titleTemplate) {
-            this._getMainButtonWidth();
-        } else if (this.fixedWidth && this.titleTemplate) {
-            // need to wait for titleTemplate to render, for some reason this is not available yet immediately after view init
-            setTimeout(() => {
-                this._getMainButtonWidth();
-            }, 500)
-        }
-    }
-
-    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes && changes.selected) {
             this.selectMenuItem(this.selected);
@@ -184,7 +174,9 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _getMainButtonWidth(): void {
-        this.mainButtonWidth = this.mainActionBtn.nativeElement.getBoundingClientRect().width + 'px';
+        if (this.mainActionBtn && this.mainActionBtn.nativeElement) {
+            this.mainButtonWidth = this.mainActionBtn.nativeElement.getBoundingClientRect().width + 'px';
+        }
     }
 
     /** @hidden */
@@ -194,6 +186,10 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
                 menuItem.onSelect.subscribe(() => {
                     if (!this.keepMainAction) {
                         this.selected = menuItem;
+                        if (this._init) {
+                            this._getMainButtonWidth();
+                            this._init = false;
+                        }
                         this.titleTemplate = null;
                         this.mainActionTitle = menuItem.menuItemTitle.title;
                         this._cdRef.detectChanges();
