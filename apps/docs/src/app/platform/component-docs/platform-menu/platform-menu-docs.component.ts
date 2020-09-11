@@ -7,12 +7,15 @@ import * as platformBasicMenuScss from '!raw-loader!./platform-menu-examples/pla
 
 import * as platformXPositionMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-x-position-example.component.html';
 import * as platformXPositionMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-x-position-example.component.ts';
+import * as platformXPositionMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-x-position-example.component.scss';
 
 import * as platformCascadeMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-cascade-example.component.html';
 import * as platformCascadeMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-cascade-example.component.ts';
+import * as platformCascadeMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-cascade-example.component.scss';
 
 import * as platformScrollingMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-scrolling-example.component.html';
 import * as platformScrollingMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-scrolling-example.component.ts';
+import * as platformScrollingMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-scrolling-example.component.scss';
 
 @Component({
     selector: 'app-menu',
@@ -39,13 +42,13 @@ export class PlatformMenuDocsComponent implements OnInit {
             language: 'html',
             code: platformXPositionMenuSrc,
             fileName: 'platform-menu-x-position-example',
-            scssFileCode: platformBasicMenuScss
+            scssFileCode: platformXPositionMenuScss
         },
         {
             language: 'typescript',
             code: platformXPositionMenuTsCode,
             fileName: 'platform-menu-x-position-example',
-            component: 'PlatformMenuBasicExampleComponent'
+            component: 'PlatformMenuXPositionExampleComponent'
         }
     ];
 
@@ -54,7 +57,7 @@ export class PlatformMenuDocsComponent implements OnInit {
             language: 'html',
             code: platformCascadeMenuSrc,
             fileName: 'platform-menu-cascade-example',
-            scssFileCode: platformBasicMenuScss
+            scssFileCode: platformCascadeMenuScss
         },
         {
             language: 'typescript',
@@ -69,7 +72,7 @@ export class PlatformMenuDocsComponent implements OnInit {
             language: 'html',
             code: platformScrollingMenuSrc,
             fileName: 'platform-menu-scrolling-example',
-            scssFileCode: platformBasicMenuScss
+            scssFileCode: platformScrollingMenuScss
         },
         {
             language: 'typescript',
@@ -79,5 +82,5 @@ export class PlatformMenuDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 }
