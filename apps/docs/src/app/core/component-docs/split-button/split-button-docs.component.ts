@@ -90,8 +90,13 @@ export class SplitButtonDocsComponent {
             language: 'html',
             code: buttonSplitBehaviorsHtml,
             fileName: 'split-button-behaviors-example',
-            typescriptFileCode: buttonSplitBehaviorsTs,
             component: 'ButtonSplitBehaviorsComponent'
+        },
+        {
+            language: 'typescript',
+            component: 'ButtonSplitBehaviorsComponent',
+            code: buttonSplitBehaviorsTs,
+            fileName: 'split-button-behaviors-example'
         }
     ];
 

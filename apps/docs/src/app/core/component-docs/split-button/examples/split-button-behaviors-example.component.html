@@ -17,7 +17,7 @@ Default behavior:
 <br/><br/>
 
 Main Action Title:
-<fd-split-button (primaryButtonClicked)="alert('primary button clicked')" mainActionTitle="Primary Button">
+<fd-split-button (primaryButtonClicked)="alert('primary button clicked')" [mainAction]="mainActionObject">
     <fd-menu>
         <li fd-menu-item (click)="alert('option1 clicked')">
             <div fd-menu-interactive>

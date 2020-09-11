@@ -21,6 +21,7 @@ import { ButtonType } from '../button/button.component';
 import { MenuComponent } from '../menu/menu.component';
 import { MenuItemComponent } from '../menu/menu-item/menu-item.component';
 import { Subscription } from 'rxjs';
+import { MainAction } from './main-action';
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
@@ -64,7 +65,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     @Input()
     disabled: boolean;
 
-    /** The Title for main  action button */
+    /** @deprecated The Title for main action button. This will be deprecated as an input but will remain a property on this component. */
     @Input()
     mainActionTitle: string;
 
@@ -89,6 +90,12 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     @Input()
     keepMainAction = false;
 
+    /**
+     * The object that contains the mainActionTitle and the callback function that should be executed when the button is clicked.
+     */
+    @Input()
+    mainAction: MainAction;
+
     /** Event sent when primary button is clicked */
     @Output()
     readonly primaryButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
@@ -103,7 +110,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     @ViewChild('mainActionButton', { read: ElementRef })
-    mainAction: ElementRef;
+    mainActionBtn: ElementRef;
 
     /** @hidden */
     mainButtonWidth: number;
@@ -119,10 +126,11 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {
-        if (!this.selected) {
-            this.primaryButtonClicked.emit(event);
-        } else {
+        this.primaryButtonClicked.emit(event);
+        if (this.selected) {
             this.selected.elementRef.nativeElement.click();
+        } else if (this.mainAction && this.mainAction.callback) {
+            this.mainAction.callback();
         }
         event.stopPropagation();
     }
@@ -131,6 +139,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     ngAfterContentInit(): void {
         this._setupMenuSubscription();
         this._setupMenuItemSubscriptions();
+        this._handleMainActionObject();
 
         if (!this.mainActionTitle && !this.selected) {
             this.selectMenuItem(this.menu.menuItems.first);
@@ -142,7 +151,7 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.fixedWidth) {
-            this.mainButtonWidth = parseInt(this.mainAction.nativeElement.offsetWidth, 10);
+            this.mainButtonWidth = parseInt(this.mainActionBtn.nativeElement.offsetWidth, 10);
         }
     }
 
@@ -150,6 +159,8 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     ngOnChanges(changes: SimpleChanges): void {
         if (changes && changes.selected) {
             this.selectMenuItem(this.selected);
+        } else if (changes && changes.mainAction) {
+            this._handleMainActionObject();
         }
     }
 
@@ -188,5 +199,14 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
             this._menuItemSubscriptions.closed = false;
             this._setupMenuItemSubscriptions();
         });
+    }
+
+    /** @hidden */
+    private _handleMainActionObject(): void {
+        if (this.mainAction && typeof this.mainAction.mainActionTitle === 'string') {
+            this.mainActionTitle = this.mainAction.mainActionTitle;
+        } else if (this.mainAction && this.mainAction.mainActionTitle instanceof TemplateRef) {
+            this.titleTemplate = this.mainAction.mainActionTitle;
+        }
     }
 }

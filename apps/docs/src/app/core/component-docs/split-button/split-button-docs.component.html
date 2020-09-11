@@ -3,11 +3,14 @@
 </fd-docs-section-title>
 <description>
     A <code>MenuItemComponent</code> can be passed to the <code>[selected]</code> input to select a menu item. A button
-    title can be provided through the <code>[mainActionTitle]</code> input. This title and the corresponding button
-    action will be changed when another option in the menu is selected, unless <code>[keepMainAction]</code> is set to true.
-    If no <code>[mainActionTitle]</code> is provided, the text and functionality of the first menu item will be set on load.
-    By default, the main action button will keep its original width on load, regardless of the length of the text of the
-    selected option. To have the button width change with the text length, set <code>[fixedWidth]="false"</code>.
+    title and callback function can be provided as an object through the <code>[mainAction]</code> input. This object
+    can contain two properties, <code>mainActionTitle</code> and <code>callback</code>, the first of which is a string
+    for the button title and the second is a function that will be called when the button is clicked. Callback is optional.
+    This title and the corresponding button action will be changed when another option in the menu is selected,
+    unless <code>[keepMainAction]</code> is set to true. If no <code>[mainAction]</code> is provided, the text and
+    functionality of the first menu item will be set on load. By default, the main action button will keep its original
+    width on load, regardless of the length of the text of the selected option. To have the button width change with the
+    text length, set <code>[fixedWidth]="false"</code>.
 </description>
 <component-example>
     <fd-split-button-behaviors-example></fd-split-button-behaviors-example>

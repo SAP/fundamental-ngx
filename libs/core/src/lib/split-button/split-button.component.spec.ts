@@ -3,6 +3,7 @@ import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MenuModule } from '../menu/menu.module';
+import createSpy = jasmine.createSpy;
 
 @Component({
     selector: 'fd-test-component',
@@ -75,10 +76,15 @@ describe('SplitButtonComponent', () => {
         spyOn(mouseEvent, 'stopPropagation');
         spyOn(componentInstance.primaryButtonClicked, 'emit');
         componentInstance.selected = null;
+        componentInstance.mainAction = {
+            mainActionTitle: 'title',
+            callback: createSpy()
+        };
 
         componentInstance.onMainButtonClick(mouseEvent);
 
         expect(componentInstance.primaryButtonClicked.emit).toHaveBeenCalledWith(mouseEvent);
+        expect(componentInstance.mainAction.callback).toHaveBeenCalled();
         expect(mouseEvent.stopPropagation).toHaveBeenCalled();
     });
 
@@ -91,7 +97,7 @@ describe('SplitButtonComponent', () => {
 
         componentInstance.onMainButtonClick(mouseEvent);
 
-        expect(componentInstance.primaryButtonClicked.emit).not.toHaveBeenCalled();
+        expect(componentInstance.primaryButtonClicked.emit).toHaveBeenCalledWith(mouseEvent);
         expect(mouseEvent.stopPropagation).toHaveBeenCalled();
         expect(componentInstance.selected.elementRef.nativeElement.click).toHaveBeenCalled();
     });

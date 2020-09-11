@@ -13,6 +13,11 @@ import { Component } from '@angular/core';
 })
 export class ButtonSplitBehaviorsComponent {
 
+    mainActionObject = {
+        mainActionTitle: 'Main Action',
+        callback: () => {window.alert('main action clicked')}
+    };
+
     alert(message: string): void {
         window.alert(message);
     }
