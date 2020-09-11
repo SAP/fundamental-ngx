@@ -165,6 +165,8 @@ function info(): Rule {
 function createCustomStyles(): Rule {
     return (host: Tree, context: SchematicContext) => {
         try {
+            context.logger.log('info', 'Creating file with custom styles');
+
             const styleContent = createFundamentalStyles();
 
             if (!projectSettings.projectWorkspace.sourceRoot) {
@@ -179,6 +181,8 @@ function createCustomStyles(): Rule {
             host.create(newStyleFile, styleContent);
 
             projectSettings.hasCustomStyleFile = true;
+
+
 
 
         } catch (e) {
@@ -198,6 +202,7 @@ function setupOptions(host: Tree, options: Schema, context: SchematicContext): v
         module: options.module,
         addCustomStyleFile: options.addCustomStyleFile,
         addModuleAnimation: options.addModuleAnimation,
+        hasModuleFederation: options.hasModuleFederation,
         hasCustomStyleFile: false
     };
     const file = host.get(CONFIG_FILE_NAME);
@@ -227,10 +232,15 @@ function setupOptions(host: Tree, options: Schema, context: SchematicContext): v
     if (!projectSettings.projectWorkspace) {
         throw new SchematicsException('Could not find a project workspace');
     }
+    let mainBootstrapPath = '';
+    if (projectSettings.hasModuleFederation) {
+        mainBootstrapPath = 'src/bootstrap.ts'
+    } else {
+        mainBootstrapPath = getProjectTargetOptions(projectSettings.projectWorkspace, 'build').main;
+    }
 
 
-    const mainPath = getProjectTargetOptions(projectSettings.projectWorkspace, 'build').main;
-    projectSettings.module = normalize(`./${getAppModulePath(host, mainPath)}`);
+    projectSettings.module = normalize(`./${getAppModulePath(host, mainBootstrapPath)}`);
 
 }
 

@@ -36,6 +36,12 @@
       "default": true,
       "description": "Tells developer if we want to add import for the AppShellModule.",
       "x-prompt": "Add AppShellModule?"
+    },
+    "hasModuleFederation": {
+      "type": "boolean",
+      "default": true,
+      "description": "If we are using module federation , then main.ts is not bootstrap file. ",
+      "x-prompt": "Are you using Module Federation?"
     }
   }
 }
