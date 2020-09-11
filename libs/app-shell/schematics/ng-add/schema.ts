@@ -17,4 +17,7 @@ export interface Schema {
     addCustomStyleFile: boolean;
 
     addAppShellModule: boolean;
+
+
+    hasModuleFederation: boolean;
 }
