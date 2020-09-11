@@ -332,6 +332,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         }, {});
 
         const groupIds = Object.keys(groups).map(g => parseInt(g, 10)).filter(g => g !== 0);
+
         return groupIds
             .map(g => {
                 let minIndex = Number.MAX_SAFE_INTEGER;
@@ -343,7 +344,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
                 return { group: groups[g].map(({ element }) => element), minIndex: minIndex, maxPriority: maxPriority };
             })
-            .concat(groups[0].map(item => {
+            .concat(!groups[0] ? [] : groups[0].map(item => {
                 return {
                     group: [item.element],
                     maxPriority: OVERFLOW_PRIORITY_SCORE.get(this._getElementPriority(item.element)),
