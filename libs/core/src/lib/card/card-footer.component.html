@@ -1,1 +1,7 @@
-<ng-content></ng-content>
+<fd-toolbar [shouldOverflow]="true">
+    <!-- 
+      ng-content does not work with "overflow" as we have to assign 
+      "fd-toolbar-item" directive to fd-button to make it working. 
+    -->
+    <ng-content></ng-content>
+</fd-toolbar>

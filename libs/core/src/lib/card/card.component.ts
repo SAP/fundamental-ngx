@@ -7,12 +7,11 @@ import {
     ChangeDetectionStrategy,
     Input,
     Output,
-    EventEmitter
+    EventEmitter,
+    HostListener
 } from '@angular/core';
 
 import { CLASS_NAME } from './constants';
-
-export type HeaderPosition = 'top' | 'bottom';
 
 @Component({
     selector: 'fd-card',
@@ -22,13 +21,7 @@ export type HeaderPosition = 'top' | 'bottom';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnInit {
-    @Input() headerPosition: HeaderPosition = 'top';
-
-    @Input() title: string;
-
-    @Input() subtitle: string;
-
-    @Input() counter: string;
+    @Input() badge: string[] = [];
 
     @Output() cardSwipe: EventEmitter<Event> = new EventEmitter<Event>();
 
@@ -38,6 +31,18 @@ export class CardComponent implements OnInit {
     /** @hidden */
     ngOnInit(): void {
         this._addClassNameToHostElement(CLASS_NAME.card);
+    }
+
+    @HostListener('swipeLeft')
+    /** @hidden */
+    _swipeLeft(): void {
+        console.log('swipeLeft');
+    }
+
+    @HostListener('swipeRight')
+    /** @hidden */
+    _swipeRight(): void {
+        console.log('swipeRight');
     }
 
     /**@hidden */

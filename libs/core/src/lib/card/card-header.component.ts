@@ -4,46 +4,55 @@ import {
     ChangeDetectionStrategy,
     ElementRef,
     Renderer2,
-    Input,
     Output,
     EventEmitter,
-    forwardRef
+    ContentChild
 } from '@angular/core';
 
-import { CLASS_NAME, CARD_CHILD_TOKEN } from './constants';
+import { AvatarComponent } from '../avatar/avatar.component';
+
+import { CLASS_NAME } from './constants';
 
 @Component({
     selector: 'fd-card-header',
     templateUrl: './card-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: CARD_CHILD_TOKEN,
-            useExisting: forwardRef(() => CardHeaderComponent)
-        }
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardHeaderComponent implements OnInit {
-    @Input() avatarSource: string;
+    @Output() headerClick: EventEmitter<void> = new EventEmitter<void>();
 
-    @Input() title: string;
-
-    @Input() subtitle: string;
-
-    @Input() counter: string;
-
-    @Output() headerClick: EventEmitter<Event> = new EventEmitter<Event>();
+    /** @hidden */
+    @ContentChild(AvatarComponent) avatar: AvatarComponent;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
     /** @hidden */
     ngOnInit(): void {
+        this._setAttributeToHostElement('tabindex', 0);
+
         this._addClassNameToHostElement(CLASS_NAME.cardHeader);
+
+        this._listenToClick();
     }
 
     /**@hidden */
     private _addClassNameToHostElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
+        this._addClassName(this._elementRef.nativeElement, className);
+    }
+
+    /**@hidden */
+    private _addClassName(element: HTMLElement, className: string): void {
+        this._renderer.addClass(element, className);
+    }
+
+    /**@hidden */
+    private _setAttributeToHostElement(attribute: string, value: any): void {
+        this._renderer.setAttribute(this._elementRef.nativeElement, attribute, value);
+    }
+
+    /**@hidden */
+    private _listenToClick(): void {
+        this._renderer.listen(this._elementRef.nativeElement, 'click', () => this.headerClick.emit());
     }
 }

@@ -1,23 +1,29 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, forwardRef } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    ElementRef,
+    Renderer2,
+    ContentChildren,
+    QueryList
+} from '@angular/core';
 
-import { CLASS_NAME, CARD_CHILD_TOKEN } from './constants';
+import { CLASS_NAME } from './constants';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
     selector: 'fd-card-footer',
     templateUrl: './card-footer.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: CARD_CHILD_TOKEN,
-            useExisting: forwardRef(() => CardFooterComponent)
-        }
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardFooterComponent implements OnInit {
+    @ContentChildren(ButtonComponent) buttons: QueryList<ButtonComponent>;
+
     constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
     ngOnInit(): void {
         this._addClassNameToHostElement(CLASS_NAME.cardFooter);
+        window['__footer'] = this;
     }
 
     /**@hidden */

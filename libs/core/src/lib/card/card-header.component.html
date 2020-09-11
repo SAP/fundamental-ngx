@@ -1,1 +1,19 @@
+<ng-container *ngIf="avatar">
+    <fd-avatar
+        class="fd-card__avatar"
+        size="s"
+        [circle]="true"
+        [image]="avatar.image"
+        [glyph]="avatar.glyph"
+    ></fd-avatar>
+</ng-container>
 
+<div class="fd-card__header-text">
+    <div class="fd-card__title-area">
+        <ng-content select="fd-card-title"></ng-content>
+        <ng-content select="fd-card-counter"></ng-content>
+    </div>
+    <div class="fd-card__subtitle-area">
+        <ng-content select="fd-card-subtitle"></ng-content>
+    </div>
+</div>

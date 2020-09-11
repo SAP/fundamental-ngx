@@ -1,17 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, forwardRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2 } from '@angular/core';
 
 import { CLASS_NAME } from './constants';
 
 @Component({
-    selector: 'fd-card-content',
-    templateUrl: './card-content.component.html',
+    selector: 'fd-card-subtitle',
+    template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardContentComponent implements OnInit {
+export class CardSubtitleComponent implements OnInit {
+    /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
+    /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.cardContent);
+        this._addClassNameToHostElement(CLASS_NAME.cardSubTitle);
     }
 
     /**@hidden */
