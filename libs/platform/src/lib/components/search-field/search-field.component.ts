@@ -270,6 +270,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * @hidden
      */
     onValueChange($event: string): void {
+        this.inputChange.emit({
+            text: $event,
+            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
+        });
         const inputStr: string = $event.trim();
         if (inputStr.length === 0) {
             this.closeSuggestionMenu();
@@ -285,10 +289,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             );
             this.dataSource.match(match);
         }
-        this.inputChange.emit({
-            text: inputStr,
-            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
-        });
     }
 
     /**
