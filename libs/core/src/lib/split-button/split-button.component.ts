@@ -11,6 +11,7 @@ import {
     OnChanges,
     OnDestroy,
     Output,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -49,7 +50,7 @@ import { Subscription } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export class SplitButtonComponent implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -142,6 +143,13 @@ export class SplitButtonComponent implements AfterContentInit, AfterViewInit, On
     ngAfterViewInit(): void {
         if (this.fixedWidth) {
             this.mainButtonWidth = parseInt(this.mainAction.nativeElement.offsetWidth, 10);
+        }
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes && changes.selected) {
+            this.selectMenuItem(this.selected);
         }
     }
 
