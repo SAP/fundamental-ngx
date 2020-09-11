@@ -72,11 +72,11 @@
             >
             </fdp-textarea>
             <fd-form-message
-                class="custom-form-message"
                 *ngIf="textarea.value && textarea.value.length > 10"
-                [type]="'warning'"
+                type="warning"
                 >This is an example warning when used without forms.
             </fd-form-message>
         </div>
+        <br />
     </div>
 </main>
