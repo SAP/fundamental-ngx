@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.54...v0.22.0-rc.55) (2020-09-11)
+
+
+### Bug Fixes
+
+* (platform) fix for textarea breaking ([#3221](https://github.com/SAP/fundamental-ngx/issues/3221)) ([b75c902](https://github.com/SAP/fundamental-ngx/commit/b75c9027dc5322e25a32e934108272c60ba2f960))
+
 ## [0.22.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.53...v0.22.0-rc.54) (2020-09-11)
 
 
