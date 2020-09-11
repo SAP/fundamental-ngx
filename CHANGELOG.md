@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.55...v0.22.0-rc.56) (2020-09-11)
+
+
+### Bug Fixes
+
+* (core) remove icon-only prop of Info Label and fix the vertical alignment ([#3246](https://github.com/SAP/fundamental-ngx/issues/3246)) ([209f523](https://github.com/SAP/fundamental-ngx/commit/209f523b7f53f7c7f645dceccf3f2135037b5b32))
+* (platform) list and standard list item components ([#3082](https://github.com/SAP/fundamental-ngx/issues/3082)) ([681f19b](https://github.com/SAP/fundamental-ngx/commit/681f19b4d1ff9dc5d48469bb0a7ec124e2abb519))
+
 ## [0.22.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.54...v0.22.0-rc.55) (2020-09-11)
 
 
