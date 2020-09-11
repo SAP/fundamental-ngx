@@ -5,7 +5,10 @@ import {
     Input,
     OnChanges,
     ViewEncapsulation,
-    OnInit
+    OnInit,
+    AfterViewInit,
+    Renderer2,
+    ViewChild
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
@@ -19,7 +22,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
+export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit {
     /** User's custom classes */
     @Input()
     class: string;
@@ -58,8 +61,20 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     large = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, private renderer: Renderer2) {}
 
+    ngAfterViewInit(): void {
+        if (this.clickable) {
+            if (!this.inverted) {
+                const parent = this._elementRef.nativeElement.parentNode;
+                const icon: HTMLImageElement = this.renderer.createElement('i');
+                icon.classList.add('fd-object-status__icon');
+                icon.classList.add('sap-icon--' + this.glyph);
+                icon.classList.add('fd-object-status--' + this.status);
+                this.renderer.insertBefore(parent, icon, this._elementRef.nativeElement);
+            }
+        }
+    }
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
@@ -76,16 +91,28 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            'fd-object-status',
-            this.inverted ? 'fd-object-status--inverted' : '',
-            this.large ? 'fd-object-status--large' : '',
-            this.status ? `fd-object-status--${this.status}` : '',
-            this.glyph ? `sap-icon--${this.glyph}` : '',
-            this.indicationColor ? `fd-object-status--indication-${this.indicationColor}` : '',
-            this.clickable ? 'fd-object-status--link' : '',
-            this.class
-        ];
+        if (this.clickable) {
+            return [
+                'fd-object-status',
+                this.inverted ? 'fd-object-status--inverted' : '',
+                this.large ? 'fd-object-status--large' : '',
+                this.status ? `fd-object-status--${this.status}` : '',
+                this.indicationColor ? `fd-object-status--indication-${this.indicationColor}` : '',
+                this.clickable ? 'fd-object-status--link' : '',
+                this.class
+            ];
+        } else {
+            return [
+                'fd-object-status',
+                this.inverted ? 'fd-object-status--inverted' : '',
+                this.large ? 'fd-object-status--large' : '',
+                this.status ? `fd-object-status--${this.status}` : '',
+                this.glyph ? `sap-icon--${this.glyph}` : '',
+                this.indicationColor ? `fd-object-status--indication-${this.indicationColor}` : '',
+                this.clickable ? 'fd-object-status--link' : '',
+                this.class
+            ];
+        }
     }
 
     /** @hidden */
