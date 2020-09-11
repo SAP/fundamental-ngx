@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
     Injector,
@@ -29,6 +30,9 @@ export class PluginLauncherComponent implements OnInit {
     viewContainer: ViewContainerRef;
 
     @Input()
+    id: string;
+
+    @Input()
     type: Scope = Scope.Page;
 
     @Input()
@@ -38,30 +42,28 @@ export class PluginLauncherComponent implements OnInit {
     category: string;
 
     @Input()
-    provider: string;
+    provider: string = 'Ariba';
 
     constructor(private injector: Injector, private cfr: ComponentFactoryResolver,
+                private _cd: ChangeDetectorRef,
                 private lookupService: LookupService) {
     }
 
     async ngOnInit(): Promise<void> {
         const query = new Map().set('type', this.type).set('name', this.name).set('category', this.category)
-            .set('provider', this.provider);
+            .set('provider', this.provider).set('id', this.id);
 
-        this.lookupService.lookup(query).subscribe((items) => {
-            if (items.length > 1) {
-                throw new Error('Found more plugins registered under the same name');
-            }
-            this.doCreateComponent(items[0].descriptor);
-        });
+        const item = this.lookupService.lookup(query);
+        this.doCreateComponent(item.descriptor);
+        this._cd.markForCheck();
 
     }
 
 
-    async doCreateComponent(plugin: PluginDescriptor): Promise<void> {
+    async doCreateComponent(plugin: Partial<PluginDescriptor>): Promise<void> {
         const component = await loadRemoteModule(plugin)
             .then(m => m[plugin.componentName]);
-
+        console.log(component);
         const factory = this.cfr.resolveComponentFactory(component);
 
         this.viewContainer.createComponent(factory, null, this.injector);
