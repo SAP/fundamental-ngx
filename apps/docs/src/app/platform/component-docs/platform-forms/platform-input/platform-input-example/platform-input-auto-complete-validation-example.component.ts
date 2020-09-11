@@ -54,6 +54,7 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
 
     onItemClick(clickedValue): void {
         this.inputText = clickedValue;
+        this.options = this.filter(this.inputText);
         this.open = false;
     }
 }
