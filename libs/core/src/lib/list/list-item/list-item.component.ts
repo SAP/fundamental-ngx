@@ -89,7 +89,7 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     constructor(
         public elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef
-    ) {}
+    ) { }
 
     /** @hidden */
     ngAfterContentInit(): void {

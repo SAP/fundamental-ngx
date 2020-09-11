@@ -37,7 +37,7 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import(
                         './component-docs/platform-forms/platform-checkbox-group/platform-checkbox-group-docs.module'
-                        ).then((m) => m.PlatformCheckboxGroupDocsModule)
+                    ).then((m) => m.PlatformCheckboxGroupDocsModule)
             },
             {
                 path: 'link',
@@ -145,6 +145,17 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/platform-combobox/platform-combobox-docs.module')
                         .then(m => m.PlatformComboboxDocsModule)
+            },
+            {
+                path: 'list',
+                loadChildren: () =>
+                    import('./component-docs/platform-list/platform-list-docs.module').then((m) => m.PlatformListDocsModule)
+            },
+            {
+                path: 'standard-list-item',
+                loadChildren: () =>
+                    import('./component-docs/platform-standard-list-item/platform-standard-list-item-docs.module').then((m) =>
+                        m.PlatformStandardListItemDocsModule)
             }
         ]
     }
