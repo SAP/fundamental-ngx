@@ -13,16 +13,6 @@
 
 .fd-multi-input-custom {
     display: block;
-
-    // TODO: Remove after adjusting in styles
-    .fd-multi-input-list-item-custom {
-        height: 2.5rem;
-
-        .fd-checkbox__label {
-            padding-top: 0.5625rem;
-            padding-bottom: 0.5625rem;
-        }
-    }
 }
 
 .fd-multi-input-item {
@@ -37,6 +27,7 @@
 
 .fd-multi-input-popover-custom {
     display: block;
+    width: 100%;
     .fd-tokenizer {
         height: 100%;
     }
@@ -45,6 +36,16 @@
 .fd-multi-input-menu-overflow {
     max-width: 100%;
     overflow: auto;
+    
+    // TODO: Remove after adjusting in styles
+    .fd-multi-input-list-item-custom {
+        height: 2.5rem;
+
+        .fd-checkbox__label {
+            padding-top: 0.5625rem;
+            padding-bottom: 0.5625rem;
+        }
+    }
 }
 .fd-input {
     &.fd-multi-input-tokenizer-input {
