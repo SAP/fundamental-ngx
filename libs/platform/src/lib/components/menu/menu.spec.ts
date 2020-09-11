@@ -1196,7 +1196,6 @@ describe('Multiple triggers sharing same menu', () => {
 
         // check menu element is shown
         menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
-        console.log(menuEl)
         expect(menuEl.length).toBeGreaterThan(0);
     }));
 
