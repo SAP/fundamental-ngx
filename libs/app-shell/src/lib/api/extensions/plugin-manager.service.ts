@@ -12,6 +12,7 @@ import {
 import { ThemeTopics } from '../theming/topic.model';
 import { PluginDescriptor } from './lookup/plugin-descriptor.model';
 import { Message } from '../events/message-bus';
+import { HttpClient } from '@angular/common/http';
 
 
 /**
@@ -71,24 +72,27 @@ import { Message } from '../events/message-bus';
 export class PluginManagerService {
     private registry: Map<string, RegistrationEntry> = new Map<string, RegistrationEntry>();
 
-    constructor(private lookupService: LookupService, private messageBus: MessagingService) {
+    constructor(private lookupService: LookupService, private messageBus: MessagingService,
+                private httpClient: HttpClient) {
     }
 
     loadConfiguration(url: string): void {
-
+        this.httpClient.get<PluginDescriptor[]>(url).subscribe((config) => {
+            // maybe add some additional process..
+            config.forEach(c => this.lookupService.addPlugin(c));
+        });
     }
 
+    register(descriptor: Partial<PluginDescriptor>, plugin?: PluginComponent): void {
+        let configuration: Partial<PluginConfiguration>;
+        if (plugin) {
+            configuration = plugin.getConfiguration();
+            this.doConfigureTheming(configuration);
 
-    register(plugin: PluginComponent, descriptor: Partial<PluginDescriptor>): void {
-        const configuration = plugin.getConfiguration();
-        this.doConfigureTheming(configuration);
-
-        const context = new PluginContext(new Map());
-        plugin.initialize(context);
-
+            const context = new PluginContext(new Map());
+            plugin.initialize(context);
+        }
         this.registry.set(descriptor.id, new RegistrationEntry(descriptor, configuration, plugin));
-
-
     }
 
 
@@ -97,7 +101,7 @@ export class PluginManagerService {
     }
 
     private doConfigureTheming(configuration: Partial<PluginConfiguration>): void {
-        console.log('doConfigureTheming')
+        console.log('doConfigureTheming');
         if (!configuration.getPermission().themingChange || configuration.addListeners().length === 0) {
             return;
         }
