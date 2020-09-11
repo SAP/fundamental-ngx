@@ -56,11 +56,11 @@ export class ListDataProvider extends DataProvider<Address> {
     templateUrl: './platform-standard-list-item-with-single-selection-example.component.html'
 })
 export class PlatformStandardListItemWithSingleSelectionExampleComponent {
-    dataSource = new ListDataSource<Address>(new ListDataProvider());
-    selectedItems: any[] = [];
+    _dataSource = new ListDataSource<Address>(new ListDataProvider());
+    _selectedItems: any[] = [];
 
-    showItemInfo(event: any): void {
-        this.selectedItems = event.selectedItems[0].getAttribute('id');
+    _showItemInfo(event: any): void {
+        this._selectedItems = event.selectedItems[0].getAttribute('id');
     }
 
 }

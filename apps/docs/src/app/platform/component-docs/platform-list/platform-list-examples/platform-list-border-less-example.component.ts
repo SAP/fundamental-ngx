@@ -10,7 +10,7 @@ const LIST_ELEMENTS: Address[] = [{ name: 'Name1' }, { name: 'Name2' }, { name: 
 })
 export class PlatformListBorderLessExampleComponent {
 
-    dataSource = new ListDataSource<Address>(new ListDataProvider());
+    _dataSource = new ListDataSource<Address>(new ListDataProvider());
 
 }
 // it is from application point of to show as example,they refer internal structurs in general

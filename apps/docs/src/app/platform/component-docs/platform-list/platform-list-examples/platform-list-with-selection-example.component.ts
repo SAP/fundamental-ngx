@@ -29,11 +29,11 @@ export class ListDataProvider extends DataProvider<Address> {
     templateUrl: './platform-list-with-selection-example.component.html'
 })
 export class PlatformListWithSelectionExampleComponent {
-    dataSource = new ListDataSource<Address>(new ListDataProvider());
-    selectedItems: any[] = [];
+    _dataSource = new ListDataSource<Address>(new ListDataProvider());
+    _selectedItems: any[] = [];
 
-    showItemInfo(event: any): void {
-        this.selectedItems = event.selectedItems;
+    _showItemInfo(event: any): void {
+        this._selectedItems = event.selectedItems;
     }
 
 }

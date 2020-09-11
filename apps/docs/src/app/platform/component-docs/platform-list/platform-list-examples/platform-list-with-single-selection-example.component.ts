@@ -31,12 +31,12 @@ export class ListDataProvider extends DataProvider<Address> {
     templateUrl: './platform-list-with-single-selection-example.component.html'
 })
 export class PlatformListWithSingleSelectionExampleComponent {
-    dataSource = new ListDataSource<Address>(new ListDataProvider());
-    selectedItems: any[] = [];
+    _dataSource = new ListDataSource<Address>(new ListDataProvider());
+    _selectedItems: any[] = [];
 
-    showItemInfo(event: any): void {
+    _showItemInfo(event: any): void {
         if (event.selectedItems[0] !== undefined) {
-            this.selectedItems = event.selectedItems[0].id;
+            this._selectedItems = event.selectedItems[0].id;
         }
     }
 

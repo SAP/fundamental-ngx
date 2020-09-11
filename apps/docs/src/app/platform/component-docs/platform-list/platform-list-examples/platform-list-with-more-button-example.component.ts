@@ -133,7 +133,7 @@ export class ListDataProvider extends DataProvider<User> {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlatformListWithMoreButtonExampleComponent {
-    dataSource = new ListDataSource<User>(new ListDataProvider());
+    _dataSource = new ListDataSource<User>(new ListDataProvider());
 
 }
 
