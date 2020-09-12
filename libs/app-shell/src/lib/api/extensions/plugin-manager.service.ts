@@ -98,7 +98,6 @@ export class PluginManagerService {
     }
 
     private doConfigureTheming(configuration: Partial<PluginConfiguration>): void {
-        console.log('doConfigureTheming');
         if (!configuration.getPermission().themingChange || configuration.addListeners().length === 0) {
             return;
         }
