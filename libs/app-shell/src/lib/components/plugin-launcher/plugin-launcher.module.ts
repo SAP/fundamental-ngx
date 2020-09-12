@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PluginLauncherComponent } from './plugin-launcher.component';
+import { PluginPageLauncherComponent } from './plugin-page-launcher.component';
 
 @NgModule({
     imports: [
-        CommonModule,
+        CommonModule
 
     ],
     declarations: [
-        PluginLauncherComponent
+        PluginLauncherComponent,
+        PluginPageLauncherComponent
     ],
     exports: [
-        PluginLauncherComponent
+        PluginLauncherComponent,
+        PluginPageLauncherComponent
     ]
 })
 export class PluginLauncherModule {

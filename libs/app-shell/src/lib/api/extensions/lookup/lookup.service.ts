@@ -14,16 +14,16 @@ export class LookupService {
 
 
     lookup(query: Map<string, string>): LookupItem {
-        // we start from provider, then going down to category
-        // and then compare IDs
-        const found = this.pluginsRepository.filter((p) =>
-            query.has('provider') && p.provider === query.get('provider')
-        ).filter((p) =>
-            !query.has('category') || p.category === query.get('category')
-        ).filter((p) => p.id === query.get('id'));
+        const found = this.pluginsRepository.filter((p) => {
+            let match;
+            query.forEach((v, k) => {
+                match = (match === undefined) ? p[k] === v : (match && p[k] === v);
+            });
+            return match;
+        });
 
         if (found.length === 0) {
-            throw new Error('No Plugin found. Please check your configuration.' + query.get('id'));
+            throw new Error('No Plugin found. Please check your configuration.');
         }
         const item: LookupItem = {
             id: found[0].id,

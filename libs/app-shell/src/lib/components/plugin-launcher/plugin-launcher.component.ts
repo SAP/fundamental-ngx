@@ -5,7 +5,7 @@ import {
     ComponentFactoryResolver,
     Injector,
     Input,
-    OnInit,
+    OnChanges,
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
@@ -25,7 +25,7 @@ import { LookupService } from '../../api/extensions/lookup/lookup.service';
     template: '<ng-container #view></ng-container>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PluginLauncherComponent implements OnInit {
+export class PluginLauncherComponent implements OnChanges {
     @ViewChild('view', { read: ViewContainerRef, static: true })
     viewContainer: ViewContainerRef;
 
@@ -42,28 +42,37 @@ export class PluginLauncherComponent implements OnInit {
     category: string;
 
     @Input()
-    provider: string = 'Ariba';
+    provider: string;
+
+    @Input()
+    descriptor: Partial<PluginDescriptor>;
 
     constructor(private injector: Injector, private cfr: ComponentFactoryResolver,
                 private _cd: ChangeDetectorRef,
                 private lookupService: LookupService) {
     }
 
-    async ngOnInit(): Promise<void> {
-        const item = this.lookupService.lookup(this.initQuery());
-        this.doCreateComponent(item.descriptor);
-        this._cd.markForCheck();
+    async ngOnChanges(): Promise<void> {
+        this.viewContainer.clear();
 
+        if (!this.descriptor) {
+            const item = this.lookupService.lookup(this.initQuery());
+            if (!item) {
+                return;
+            }
+            this.descriptor = item.descriptor;
+        }
+        this.doCreateComponent(this.descriptor);
     }
 
 
     async doCreateComponent(plugin: Partial<PluginDescriptor>): Promise<void> {
         const component = await loadRemoteModule(plugin)
             .then(m => m[plugin.componentName]);
-        console.log(component);
         const factory = this.cfr.resolveComponentFactory(component);
 
         this.viewContainer.createComponent(factory, null, this.injector);
+        this._cd.detectChanges();
     }
 
     private initQuery(): Map<string, any> {
