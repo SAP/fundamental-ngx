@@ -32,6 +32,13 @@ export class PluginContext {
      *
      * Plus maybe inject some other services
      */
-    constructor(public messageBus: Map<string, TopicPublisher<any>>, ) {
+    constructor(public messageBus: Map<string, TopicPublisher<any>>) {
     }
+}
+
+
+export function isPluginComponent(cmp: PluginComponent): cmp is PluginComponent {
+    const pluginComponentType = cmp as PluginComponent;
+    return pluginComponentType.initialize !== undefined &&
+        pluginComponentType.getConfiguration !== undefined;
 }
