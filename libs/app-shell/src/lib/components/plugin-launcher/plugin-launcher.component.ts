@@ -15,7 +15,8 @@ import {
     Scope
 } from '../../api/extensions/lookup/plugin-descriptor.model';
 import { LookupService } from '../../api/extensions/lookup/lookup.service';
-
+import { isPluginComponent } from '../../api/extensions/component/plugin-component';
+import { PluginManagerService } from '../../api/extensions/plugin-manager.service';
 
 /**
  * FDS stands for fundamental-shell
@@ -49,6 +50,7 @@ export class PluginLauncherComponent implements OnChanges {
 
     constructor(private injector: Injector, private cfr: ComponentFactoryResolver,
                 private _cd: ChangeDetectorRef,
+                private _pluginMgr: PluginManagerService,
                 private lookupService: LookupService) {
     }
 
@@ -66,10 +68,14 @@ export class PluginLauncherComponent implements OnChanges {
     }
 
 
-    async doCreateComponent(plugin: Partial<PluginDescriptor>): Promise<void> {
-        const component = await loadRemoteModule(plugin)
-            .then(m => m[plugin.componentName]);
+    async doCreateComponent(descriptor: Partial<PluginDescriptor>): Promise<void> {
+        const component = await loadRemoteModule(descriptor)
+            .then(m => m[descriptor.componentName]);
         const factory = this.cfr.resolveComponentFactory(component);
+
+        if (isPluginComponent(component.prototype)) {
+            this._pluginMgr.register(descriptor, new component());
+        }
 
         this.viewContainer.createComponent(factory, null, this.injector);
         this._cd.detectChanges();

@@ -80,16 +80,16 @@ export class PluginManagerService {
         plugins.forEach(c => this.lookupService.addPlugin(c));
     }
 
-    register(descriptor: Partial<PluginDescriptor>, plugin?: PluginComponent): void {
+    register(descriptor: Partial<PluginDescriptor>, pluginComponent?: PluginComponent): void {
         let configuration: Partial<PluginConfiguration>;
-        if (plugin) {
-            configuration = plugin.getConfiguration();
+        if (pluginComponent) {
+            configuration = pluginComponent.getConfiguration();
             this.doConfigureTheming(configuration);
 
             const context = new PluginContext(new Map());
-            plugin.initialize(context);
+            pluginComponent.initialize(context);
         }
-        this.registry.set(descriptor.id, new RegistrationEntry(descriptor, configuration, plugin));
+        this.registry.set(descriptor.id, new RegistrationEntry(descriptor, configuration, pluginComponent));
     }
 
 
