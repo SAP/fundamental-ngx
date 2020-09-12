@@ -6,6 +6,7 @@ export interface PluginDescriptor {
     untilVersion: string;
     remoteEntry: string;
     remoteName: string;
+    remoteRoute: string;
     exposedModule: string;
     displayName: string;
     componentName: string;
