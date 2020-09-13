@@ -85,6 +85,7 @@ export class PluginManagerService {
         if (pluginComponent) {
             configuration = pluginComponent.getConfiguration();
             this.doConfigureTheming(configuration);
+            this.doConfigureMenus(configuration);
 
             const context = new PluginContext(new Map());
             pluginComponent.initialize(context);
@@ -111,6 +112,10 @@ export class PluginManagerService {
                 });
             }
         });
+    }
+
+    private doConfigureMenus(configuration: Partial<PluginConfiguration>): void {
+
     }
 }
 

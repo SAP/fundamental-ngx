@@ -132,7 +132,8 @@ export class Permission {
                 public changeTitle: boolean = false,
                 public talkToAppShell: boolean = false,
                 public propagateErrors: boolean = false,
-                public readGlobalState: boolean = false
+                public readGlobalState: boolean = false,
+                public createCustomTopic: boolean = false
     ) {
     }
 
