@@ -125,7 +125,7 @@
     "@babel/core": "7.11.0",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/workspace": "10.0.6",
-    "@schematics/angular": "10.0.4",
+    "@schematics/angular": "10.1.1",
     "@storybook/addon-a11y": "6.0.21",
     "@storybook/addon-actions": "6.0.21",
     "@storybook/addon-knobs": "6.0.21",
