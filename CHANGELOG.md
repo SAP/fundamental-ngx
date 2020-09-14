@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.63...v0.22.0-rc.64) (2020-09-14)
+
+
+### Bug Fixes
+
+* (platform) step input component defects ([#3234](https://github.com/SAP/fundamental-ngx/issues/3234)) ([f0b2f4c](https://github.com/SAP/fundamental-ngx/commit/f0b2f4c4baac24a7e8d641a4ef7132269aa2996f))
+
 ## [0.22.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.62...v0.22.0-rc.63) (2020-09-14)
 
 
