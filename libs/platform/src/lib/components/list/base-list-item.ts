@@ -172,7 +172,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /**
     * content Density of element. 'cozy' | 'compact'
     */
-    @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
         this._isCompact = contentDensity === 'compact';

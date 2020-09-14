@@ -67,7 +67,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
     /**Items to be loaded at once */
     @Input()
-    itemSize: number;
+    itemSize = 0;
 
     /**Enables lazy loadMore of data */
     @Input()
@@ -129,7 +129,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /**
    * content Density of element. 'cozy' | 'compact'
    */
-    @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
         this._isCompact = contentDensity === 'compact';
