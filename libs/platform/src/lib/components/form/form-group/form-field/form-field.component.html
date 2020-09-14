@@ -3,7 +3,7 @@
 </ng-template>
 
 <ng-template #renderer>
-    <div (click)="control && control.onContainerClick($event)" [horizontal]="labelLayout === 'horizontal'" fd-form-item>
+    <div [horizontal]="labelLayout === 'horizontal'" fd-form-item>
         <label [attr.for]="id" [inlineHelp]="!!hint" [required]="editable && required" fd-form-label>
             <span *ngIf="!noLabelLayout">{{ label }}</span>
 

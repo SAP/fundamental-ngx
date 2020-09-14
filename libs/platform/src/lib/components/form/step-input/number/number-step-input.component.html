@@ -8,18 +8,18 @@
     [class.is-error]="isErrorState"
 >
     <button
-        fd-button
-        fdType="transparent"
         class="fd-step-input__button"
-        fdpStepInputDecrement
         tabindex="-1"
         type="button"
+        fd-button
+        fdType="transparent"
         [compact]="isCompact"
+        [glyph]="showLabels ? null : 'less'"
+        fdpStepInputDecrement
         [attr.aria-disabled]="disabled || !canDecrement"
         [attr.title]="decrementLabel"
         [attr.aria-label]="decrementLabel"
         [attr.aria-controls]="id"
-        [glyph]="showLabels ? null : 'less'"
     >
         {{ showLabels ? decrementLabel : '' }}
     </button>
@@ -41,17 +41,17 @@
     />
     <button
         class="fd-step-input__button"
+        tabindex="-1"
+        type="button"
         fd-button
         fdType="transparent"
         [compact]="isCompact"
+        [glyph]="showLabels ? null : 'add'"
         fdpStepInputIncrement
-        tabindex="-1"
-        type="button"
         [attr.aria-disabled]="disabled || !canIncrement"
         [attr.title]="incrementLabel"
         [attr.aria-label]="incrementLabel"
         [attr.aria-controls]="id"
-        [glyph]="showLabels ? null : 'add'"
     >
         {{ showLabels ? incrementLabel : '' }}
     </button>
