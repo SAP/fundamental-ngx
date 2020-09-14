@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.62...v0.22.0-rc.63) (2020-09-14)
+
+
+### Bug Fixes
+
+* (platform) fix for menu position in menu button ([#3231](https://github.com/SAP/fundamental-ngx/issues/3231)) ([52e1377](https://github.com/SAP/fundamental-ngx/commit/52e137753bb57d7194b6e87945fb935fddf6b8f9))
+
 ## [0.22.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.61...v0.22.0-rc.62) (2020-09-14)
 
 ## [0.22.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.60...v0.22.0-rc.61) (2020-09-13)
