@@ -35,7 +35,7 @@ Main Action:
 <br/><br/>
 
 Keep Main Action:
-<fd-split-button (primaryButtonClicked)="alert('primary button clicked')" mainActionTitle="Primary Button" [keepMainAction]="true">
+<fd-split-button (primaryButtonClicked)="alert('primary button clicked')" [mainAction]="{mainActionTitle: 'Primary Button', keepMainAction: true}">
     <fd-menu>
         <li fd-menu-item (click)="alert('option1 clicked')">
             <div fd-menu-interactive>

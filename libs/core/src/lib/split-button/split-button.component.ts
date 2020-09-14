@@ -85,12 +85,9 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     @Input()
     fixedWidth = true;
 
-    /** Whether or not the main action title should remain set as the button's action after another option is selected. */
-    @Input()
-    keepMainAction = false;
-
     /**
-     * The object that contains the mainActionTitle and the callback function that should be executed when the button is clicked.
+     * The object that contains the mainActionTitle, keepMainAction option and the callback function that should be
+     * executed when the button is clicked.
      */
     @Input()
     mainAction: MainAction;
@@ -167,7 +164,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** Function called to select a menu item for the split button. */
     selectMenuItem(menuItem: MenuItemComponent): void {
-        if (menuItem && !this.keepMainAction) {
+        if (menuItem && !this.mainAction && this.mainAction.keepMainAction) {
             menuItem.setSelected(true);
         }
     }
@@ -184,7 +181,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         this.menu.menuItems.map((menuItem: MenuItemComponent) => {
             this._menuItemSubscriptions.add(
                 menuItem.onSelect.subscribe(() => {
-                    if (!this.keepMainAction) {
+                    if (!this.mainAction && this.mainAction.keepMainAction) {
                         this.selected = menuItem;
                         if (this._init) {
                             this._getMainButtonWidth();
