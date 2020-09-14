@@ -1,7 +1,10 @@
 <fd-toolbar [shouldOverflow]="true">
     <!-- 
-      ng-content does not work with "overflow" as we have to assign 
-      "fd-toolbar-item" directive to fd-button to make it working. 
+      <ng-content> approach does not work with "overflow" as we have to assign 
+      "fd-toolbar-item" directive to each fd-button to make it working.
+      The ContentChildren(FdButton) list approach with rendering in the template 
+      does not work as we can not access FdButton projected content and render it here
+      withing a loop.
     -->
     <ng-content></ng-content>
 </fd-toolbar>

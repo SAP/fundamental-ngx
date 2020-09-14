@@ -4,7 +4,7 @@ import { CLASS_NAME } from './constants';
 
 @Component({
     selector: 'fd-card-content',
-    templateUrl: './card-content.component.html',
+    template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardContentComponent implements OnInit {

@@ -1,13 +1,4 @@
-import {
-    Component,
-    OnInit,
-    ChangeDetectionStrategy,
-    ElementRef,
-    Renderer2,
-    Output,
-    EventEmitter,
-    ContentChild
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, ContentChild } from '@angular/core';
 
 import { AvatarComponent } from '../avatar/avatar.component';
 
@@ -19,10 +10,9 @@ import { CLASS_NAME } from './constants';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardHeaderComponent implements OnInit {
-    @Output() headerClick: EventEmitter<void> = new EventEmitter<void>();
-
     /** @hidden */
-    @ContentChild(AvatarComponent) avatar: AvatarComponent;
+    @ContentChild(AvatarComponent)
+    _avatar: AvatarComponent;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
@@ -32,8 +22,6 @@ export class CardHeaderComponent implements OnInit {
         this._setAttributeToHostElement('tabindex', 0);
 
         this._addClassNameToHostElement(CLASS_NAME.cardHeader);
-
-        this._listenToClick();
     }
 
     /**@hidden */
@@ -49,10 +37,5 @@ export class CardHeaderComponent implements OnInit {
     /**@hidden */
     private _setAttributeToHostElement(attribute: string, value: any): void {
         this._renderer.setAttribute(this._elementRef.nativeElement, attribute, value);
-    }
-
-    /**@hidden */
-    private _listenToClick(): void {
-        this._renderer.listen(this._elementRef.nativeElement, 'click', () => this.headerClick.emit());
     }
 }

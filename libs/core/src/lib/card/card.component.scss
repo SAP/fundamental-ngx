@@ -112,7 +112,7 @@
 
 .fd-card__header.is-focus,
 .fd-card__header:focus {
-    z-index: 5;
+    z-index: 4;
     outline-style: dotted;
     outline-width: .0625rem;
     outline-width: var(--sapContent_FocusWidth, .0625rem);
@@ -127,7 +127,7 @@
     border-top: .0625rem solid var(--sapTile_SeparatorColor, #ccc)
 }
 
-.fd-card__avatar {
+fd-avatar.fd-card__avatar {
     margin-right: .75rem
 }
 
@@ -870,4 +870,13 @@
 
 .fd-card--object .fd-card__content {
     padding: 1rem
+}
+
+/* Defined locally as fundamental-styles does not provide it */
+
+.fd-card__loader {
+    min-height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

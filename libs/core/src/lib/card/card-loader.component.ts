@@ -3,15 +3,17 @@ import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2 } fro
 import { CLASS_NAME } from './constants';
 
 @Component({
-    selector: 'fd-card-footer',
-    templateUrl: './card-footer.component.html',
+    selector: 'fd-card-loader',
+    template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardFooterComponent implements OnInit {
+export class CardLoaderComponent implements OnInit {
+    /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
+    /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.cardFooter);
+        this._addClassNameToHostElement(CLASS_NAME.cardLoader);
     }
 
     /**@hidden */

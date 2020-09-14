@@ -1,2 +1,15 @@
-<ng-content></ng-content>
-<ng-content select="fd-card-footer"></ng-content>
+<ng-container *ngIf="!isLoading; else loaderTmpl">
+    <!-- Badge -->
+    <div *ngIf="badge" fd-badge>{{ badge }}</div>
+
+    <!-- Header and Content -->
+    <ng-content></ng-content>
+
+    <!-- Footer -->
+    <ng-content select="fd-card-footer"></ng-content>
+</ng-container>
+
+<!-- Loader -->
+<ng-template #loaderTmpl>
+    <ng-content select="fd-card-loader"></ng-content>
+</ng-template>

@@ -17,7 +17,13 @@ export const API_FILES = {
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
-    card: ['CardComponent'],
+    card: [
+        'CardComponent',
+        'CardHeaderComponent',
+        'CardContentComponent',
+        'CardFooterComponent',
+        'CardLoaderComponent'
+    ],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
     button: ['ButtonComponent'],

@@ -1,10 +1,15 @@
-<ng-container *ngIf="avatar">
+<ng-container *ngIf="_avatar">
     <fd-avatar
         class="fd-card__avatar"
         size="s"
         [circle]="true"
-        [image]="avatar.image"
-        [glyph]="avatar.glyph"
+        [image]="_avatar.image"
+        [glyph]="_avatar.glyph"
+        [label]="_avatar.abbreviate"
+        [id]="_avatar.id"
+        [label]="_avatar.label"
+        [ariaLabelledby]="_avatar.ariaLabelledby"
+        role="presentation"
     ></fd-avatar>
 </ng-container>
 

@@ -3,3 +3,5 @@ export { CardComponent } from './card.component';
 export { CardHeaderComponent } from './card-header.component';
 export { CardContentComponent } from './card-content.component';
 export { CardFooterComponent } from './card-footer.component';
+export { CardLoaderComponent } from './card-loader.component';
+export { CardType } from './constants';
