@@ -13,6 +13,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 import { getMobileModeViewElements, whenStable } from '../../utils/tests';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const MOBILE_CONFIG_TEST_TOKEN = new InjectionToken<MobileModeConfig>('For test purposes');
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
@@ -59,7 +60,7 @@ describe('MenuMobileComponent', () => {
                 SubmenuComponent,
                 MenuComponent
             ],
-            imports: [CommonModule, PopoverModule, MenuMobileModule, NoopAnimationsModule],
+            imports: [CommonModule, PopoverModule, MenuMobileModule, NoopAnimationsModule, RouterTestingModule],
         })
             .compileComponents();
     }));

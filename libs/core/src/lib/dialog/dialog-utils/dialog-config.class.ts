@@ -94,4 +94,7 @@ export class DialogConfig implements DynamicComponentConfig {
      * min-width: 1440px                        - .fd-dialog__content--xl
      * */
     responsivePadding = false;
+
+    /** Whether to close the dialog on router navigation start. */
+    closeOnNavigation = true;
 }
