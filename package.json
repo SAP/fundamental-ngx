@@ -92,7 +92,7 @@
     "@angular/platform-browser-dynamic": "~10.0.5",
     "@angular/router": "~10.0.5",
     "@nrwl/angular": "~10.0.6",
-    "@sap-theming/theming-base-content": "11.1.21",
+    "@sap-theming/theming-base-content": "11.1.22",
     "@stackblitz/sdk": "1.5.0",
     "@types/node": "14.0.26",
     "classlist.js": "1.1.20150312",
