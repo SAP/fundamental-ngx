@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.64...v0.22.0-rc.65) (2020-09-14)
+
+
+### Bug Fixes
+
+* add flag for closing dialog on route change ([#3227](https://github.com/SAP/fundamental-ngx/issues/3227)) ([4589bac](https://github.com/SAP/fundamental-ngx/commit/4589bac445ecffde21c9012d61e12095ad9f5596))
+
 ## [0.22.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.63...v0.22.0-rc.64) (2020-09-14)
 
 
