@@ -51,5 +51,29 @@ export abstract class BaseComponent {
         this._disabled = disabled;
     }
 
-    constructor(protected _cd: ChangeDetectorRef) { }
+    constructor(protected _cd: ChangeDetectorRef) {}
+
+    /**
+     * @hidden
+     * For internal usage only
+     *
+     * Since all components use OnPush strategy in the fundamental lib
+     * it's tricky to update a child input directly from a parent component class
+     *
+     */
+    markForCheck(): void {
+        this._cd.markForCheck();
+    }
+
+    /**
+     * @hidden
+     * For internal usage only
+     *
+     * Since all components use OnPush strategy in the fundamental lib
+     * it's tricky to update a child input directly from a parent component class
+     *
+     */
+    detectChanges(): void {
+        this._cd.detectChanges();
+    }
 }

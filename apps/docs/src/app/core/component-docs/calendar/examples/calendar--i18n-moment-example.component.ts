@@ -33,28 +33,28 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
     selector: 'fd-calendar-i18n-moment-example',
     template: ` <label fd-form-label for="language">Select language:</label>
         <fd-segmented-button id="language" style="margin-bottom:20px">
-            <button fd-segmented-button [size]="'xs'" (click)="setLocale('en-gb')" [state]="isSelected('en-gb')">
+            <button fd-button (click)="setLocale('en-gb')" [class]="isSelected('en-gb')">
                 English
             </button>
-            <button fd-segmented-button [size]="'xs'" (click)="setLocale('fr')" [state]="isSelected('fr')">
+            <button fd-button (click)="setLocale('fr')" [class]="isSelected('fr')">
                 French
             </button>
-            <button fd-segmented-button [size]="'xs'" (click)="setLocale('de')" [state]="isSelected('de')">
+            <button fd-button (click)="setLocale('de')" [class]="isSelected('de')">
                 German
             </button>
-            <button fd-segmented-button [size]="'xs'" (click)="setLocale('es')" [state]="isSelected('es')">
+            <button fd-button (click)="setLocale('es')" [class]="isSelected('es')">
                 Spanish
             </button>
-            <button fd-segmented-button [size]="'xs'" (click)="setLocale('bg')" [state]="isSelected('bg')">
+            <button fd-button (click)="setLocale('bg')" [class]="isSelected('bg')">
                 Bulgarian
             </button>
-            <button fd-segmented-button [size]="'xs'" (click)="setLocale('zh-cn')" [state]="isSelected('zh-cn')">
+            <button fd-button (click)="setLocale('zh-cn')" [class]="isSelected('zh-cn')">
                 Chinese CN
             </button>
-            <button fd-segmented-button [size]="'xs'" (click)="setLocale('zh-hk')" [state]="isSelected('zh-hk')">
+            <button fd-button (click)="setLocale('zh-hk')" [class]="isSelected('zh-hk')">
                 Chinese HK
             </button>
-            <button fd-segmented-button [size]="'xs'" (click)="setLocale('zh-tw')" [state]="isSelected('zh-tw')">
+            <button fd-button (click)="setLocale('zh-tw')" [class]="isSelected('zh-tw')">
                 Chinese TW
             </button>
         </fd-segmented-button>
@@ -76,7 +76,7 @@ export class CalendarI18nMomentExampleComponent {
     }
 
     isSelected(language: string): string {
-        return moment.locale() === language ? 'selected' : '';
+        return moment.locale() === language ? 'is-selected' : '';
     }
 
     setLocale(language: string): void {

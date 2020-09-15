@@ -195,6 +195,24 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _align$: BehaviorSubject<StepInputAlign> = new BehaviorSubject<StepInputAlign>(null);
 
     /** @hidden */
+    private _pendingEnteredValue: number | Error | null = null;
+
+    /** @hidden */
+    private get _currentValue(): number | null {
+        const pendingValue = this._pendingEnteredValue;
+
+        if (pendingValue instanceof Error) {
+            return null;
+        }
+
+        if (pendingValue === null) {
+            return this._value;
+        }
+
+        return pendingValue;
+    }
+
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         ngControl: NgControl,
@@ -229,6 +247,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     writeValue(value: number): void {
         super.writeValue(value);
         this._updateViewValue();
+        this._resetPendingEnteredValue();
     }
 
     /** Increase value */
@@ -236,7 +255,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         if (!this.canIncrement) {
             return;
         }
-        const value = addAndCutFloatingNumberDistortion(this._value, step);
+        const value = addAndCutFloatingNumberDistortion(this._currentValue, step);
         this.value = this._validateValueByLimits(value);
         this._emitChangedValue();
     }
@@ -246,7 +265,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         if (!this.canDecrement) {
             return;
         }
-        const value = addAndCutFloatingNumberDistortion(this._value, -step);
+        const value = addAndCutFloatingNumberDistortion(this._currentValue, -step);
         this.value = this._validateValueByLimits(value);
         this._emitChangedValue();
     }
@@ -264,15 +283,29 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /**@hidden
-     * Commit new entered value from view.
+     * catch value during entering from view.
      */
-    commitEnteredValue(value: string): void {
+    onEnterValue(value: string): void {
         const parsedValue = this.parseValueInFocusMode(value);
-        let newValue = parsedValue;
+        let pendingValue = parsedValue;
 
-        if (newValue !== null) {
-            newValue = this._validateValueByLimits(newValue);
+        if (pendingValue !== null) {
+            pendingValue = this._validateValueByLimits(pendingValue);
         }
+
+        // could not parse value, value is invalid
+        if (pendingValue === null) {
+            this._setPendingEnteredValue(new Error('value is invalid'));
+        } else {
+            this._setPendingEnteredValue(pendingValue);
+        }
+    }
+
+    /**@hidden
+     * Commit entered value from view.
+     */
+    commitEnteredValue(): void {
+        const newValue = this._currentValue;
 
         const needToUpdateView = this._value === newValue;
 
@@ -292,7 +325,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
      */
     onFocus(): void {
         super._onFocusChanged(true);
-        // When focus happend by "Tab" key an input field value gets selected by default.
+        // When focus happens by "Tab" key an input field value gets selected by default.
         // In cases when new_formatted_value !== previous_value the selection gets lost.
         // So it's needed to track selection before new value rendering and restore it.
         const { selectionStart, selectionEnd } = this._getValueSelection();
@@ -390,7 +423,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _getStepValue(action: StepInputStepFunctionAction): number {
         // steFn has precedence
         if (typeof this._stepFn === 'function') {
-            const calculatedStep = this._stepFn(this._value, action);
+            const calculatedStep = this._stepFn(this._currentValue, action);
             return calculatedStep;
         }
         return this.step;
@@ -474,5 +507,15 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
                 `Step input: The value of step property can not contain more digits after the decimal point than what is set to the precision property`
             );
         }
+    }
+
+    /** @hidden */
+    private _setPendingEnteredValue(value: number | Error): void {
+        this._pendingEnteredValue = value;
+    }
+
+    /** @hidden */
+    private _resetPendingEnteredValue(): void {
+        this._pendingEnteredValue = null;
     }
 }

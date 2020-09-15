@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 import { whenStable } from '../../utils/tests/when-stable';
 import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN } from '../../utils/tests';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true };
 
@@ -35,7 +36,7 @@ describe('SelectComponent in mobile mode', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
-            imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule]
+            imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule, RouterTestingModule]
         }).overrideComponent(
             SelectComponent,
             {set: {changeDetection: ChangeDetectionStrategy.Default}}

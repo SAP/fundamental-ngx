@@ -59,5 +59,6 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
         this.inputText = clickedValue;
         this.options = [];
         this.typeahead.close();
+
     }
 }

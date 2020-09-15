@@ -1,4 +1,5 @@
 <fd-popover [(isOpen)]="isOpen"
+            (isOpenChange)="isOpenChange.emit($event)"
             [triggers]="[]"
             [disabled]="disabled"
             [placement]="placement"
@@ -26,7 +27,6 @@
                 [placeholder]="placeholder"
                 [attr.aria-label]="timePickerInputLabel"
                 (keyup.enter)="timeInputChanged($event.currentTarget.value)"
-                (click)="inputGroupClicked($event)"
             />
         </fd-input-group>
     </fd-popover-control>

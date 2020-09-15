@@ -1,0 +1,13 @@
+.fdp-combobox {
+    &__list-container {
+        &.fd-popover__popper {
+            width: 100% !important;
+            position: static !important;
+            overflow: hidden;
+        }
+    }
+
+    &__list {
+        overflow: auto;
+    }
+}

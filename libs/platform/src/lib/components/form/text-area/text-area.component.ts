@@ -148,7 +148,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
-    @ViewChild('textareaElement')
+    @ViewChild('textareaElement', { read: ElementRef })
     textareaElement: ElementRef;
 
     /** @hidden */

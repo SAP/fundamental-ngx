@@ -132,6 +132,30 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-object-status/platform-object-status-docs.module').then(
                         (m) => m.PlatformObjectStatusDocsModule
                     )
+            },
+            {
+                path: 'input-group',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/input-group/platform-input-group-docs.module').then(
+                        (m) => m.PlatformInputGroupDocsModule
+                    )
+            },
+            {
+                path: 'combobox',
+                loadChildren: () =>
+                    import('./component-docs/platform-combobox/platform-combobox-docs.module')
+                        .then(m => m.PlatformComboboxDocsModule)
+            },
+            {
+                path: 'list',
+                loadChildren: () =>
+                    import('./component-docs/platform-list/platform-list-docs.module').then((m) => m.PlatformListDocsModule)
+            },
+            {
+                path: 'standard-list-item',
+                loadChildren: () =>
+                    import('./component-docs/platform-standard-list-item/platform-standard-list-item-docs.module').then((m) =>
+                        m.PlatformStandardListItemDocsModule)
             }
         ]
     }

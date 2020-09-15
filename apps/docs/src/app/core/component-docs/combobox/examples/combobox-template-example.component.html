@@ -1,14 +1,15 @@
 <fd-combobox
+    placeholder="Select an icon..."
     [dropdownValues]="values"
     [itemTemplate]="template"
-    (itemClicked)="selected = $event"
     [displayFn]="displayFunction"
-    [placeholder]="'Select an icon...'"
+    (itemClicked)="selected = $event"
     [(ngModel)]="searchTerm"
 ></fd-combobox>
-Returned from itemClicked Event: {{ selected | json }}
+
+<small>Search Term: {{ searchTerm }}</small>
 <br/>
-<span>Search Term: {{ searchTerm }}</span>
+<small>Returned from itemClicked Event: {{ selected | json }}</small>
 
 <!-- Note that in this case you are responsible for highlighting. -->
 <ng-template #template let-item>

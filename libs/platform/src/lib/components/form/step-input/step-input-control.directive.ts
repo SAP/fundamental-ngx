@@ -16,15 +16,27 @@ export class StepInputControlDirective {
 
     /**
      * @hidden
-     * Handle "change" event
+     * Handle "input" event to keep track of what user is entering
+     */
+    @HostListener('input')
+    onInput(): void {
+        if (!this.stepInput.canChangeValue) {
+            return;
+        }
+        const value: string = ((event.target as HTMLInputElement).value || '').trim();
+        this.stepInput.onEnterValue(value);
+    }
+
+    /**
+     * @hidden
+     * Handle "change" event to commit entered value
      */
     @HostListener('change')
     onChange(): void {
         if (!this.stepInput.canChangeValue) {
             return;
         }
-        const value: string = ((event.target as HTMLInputElement).value || '').trim();
-        this.stepInput.commitEnteredValue(value);
+        this.stepInput.commitEnteredValue();
     }
 
     /**

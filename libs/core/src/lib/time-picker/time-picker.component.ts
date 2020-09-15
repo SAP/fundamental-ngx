@@ -3,10 +3,12 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     forwardRef,
     HostBinding,
     Input,
     OnDestroy,
+    Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -17,8 +19,8 @@ import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { Placement } from 'popper.js';
-import { Subject, Subscription } from 'rxjs';
-import { delay, filter, first, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { delay, first, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-time-picker',
@@ -131,6 +133,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
     @Input()
     keepTwoDigitsTime = false;
 
+    /** Event emitted when the state of the isOpen property changes. */
+    @Output()
+    isOpenChange = new EventEmitter<boolean>();
+
     /** @hidden */
     @HostBinding('class.fd-time-picker')
     timePickerClass = true;
@@ -212,6 +218,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
      */
     handleIsOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
+        this.isOpenChange.emit(this.isOpen);
         if (isOpen) {
             this.popover.directiveRef.loaded
                 .pipe(

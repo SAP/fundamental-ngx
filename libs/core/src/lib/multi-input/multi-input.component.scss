@@ -13,55 +13,55 @@
 
 .fd-multi-input-custom {
     display: block;
+}
 
-    .fd-multi-input-item {
-        cursor: pointer;
-        padding: 0;
-    }
+.fd-multi-input-item {
+    cursor: pointer;
+    padding: 0;
+}
 
-    .fd-multi-input-popover-size {
-        overflow: auto;
-        display: block;
-    }
+.fd-multi-input-popover-size {
+    overflow: auto;
+    display: block;
+}
 
-    .fd-multi-input-popover-custom {
-        display: block;
-        .fd-tokenizer {
-            height: 100%;
-        }
+.fd-multi-input-popover-custom {
+    display: block;
+    .fd-tokenizer {
+        height: 100%;
     }
+}
 
-    .fd-multi-input-menu-overflow {
-        max-width: 100%;
-        overflow: auto;
-    }
-    .fd-input {
-        &.fd-multi-input-tokenizer-input {
-            margin-top: 0;
-            margin-bottom: 0;
-            padding-left: 0;
-            background-color: transparent;
-        }
-    }
-
-    .fd-multi-input-show-all {
-        float: right;
+.fd-multi-input-menu-overflow {
+    max-width: 100%;
+    overflow: auto;
+}
+.fd-input {
+    &.fd-multi-input-tokenizer-input {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-left: 0;
         background-color: transparent;
-        .fd-link:active {
-            color: inherit;
-        }
     }
+}
 
-    .fd-multi-input-checkbox {
-        width: 100%;
-        cursor: pointer;
-
-        .fd-checkbox__label {
-            color: inherit;
-        }
+.fd-multi-input-show-all {
+    float: right;
+    background-color: transparent;
+    .fd-link:active {
+        color: inherit;
     }
+}
 
-    .fd-list--multi-input {
-        max-width: 100%;
+.fd-multi-input-checkbox {
+    width: 100%;
+    cursor: pointer;
+
+    .fd-checkbox__label {
+        color: inherit;
     }
+}
+
+.fd-list--multi-input {
+    max-width: 100%;
 }

@@ -1,9 +1,9 @@
 <ng-template [ngIf]="items?.length > 0" [ngIfElse]="subHeader">
 
     <button fd-button
-            fdMenu="true"
             fdType="transparent"
             class="fd-shellbar__button--menu"
+            [fdMenu]="true"
             [disabled]="disabled"
             [fdMenuTrigger]="menu">
         <span class="fd-shellbar__title">{{ control }}</span>

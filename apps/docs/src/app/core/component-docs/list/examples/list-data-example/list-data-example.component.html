@@ -4,10 +4,10 @@
     </label>
     <fd-toolbar-spacer></fd-toolbar-spacer>
     <fd-input-group
-        button="true"
-        compact="true"
         glyph="decline"
         placeholder="Search"
+        [button]="true"
+        [compact]="true"
         [disabled]="false"
         [(ngModel)]="searchTerm"
         (ngModelChange)="handleSearchTermChange($event)"

@@ -21,6 +21,10 @@
             outline-style: var(--sapContent_FocusStyle, dotted);
         }
 
+        &[tabindex="-1"] {
+            outline: none;
+        }
+
         &--inline {
             display: inline-block;
         }

@@ -1,0 +1,74 @@
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
+    <fdp-form-field id="optionItemTemplate" label="Option Item Template" zone="zLeft"
+                    rank="4">
+        <span>Allows to customize display item template</span>
+        <fdp-combobox
+            name="optionItemTemplate"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            (selectionChange)="onSelect($event)">
+            <ng-template fdTemplate="optionItemTemplate" let-item let-index="index">
+                <div class="fd-template-container-div">
+                    <fd-icon glyph="accept" size="l" class="fd-template-icon"></fd-icon>
+                    <span [innerText]="item.name"></span>
+                </div>
+            </ng-template>
+        </fdp-combobox>
+        <p>Selected: {{ selectedItem | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="groupItemTemplate" label="Group Item Template" zone="zLeft"
+                    rank="4">
+        <span>Allows to customize group header item template</span>
+        <fdp-combobox
+            name="groupItemTemplate"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            group="true"
+            groupKey="type"
+            (selectionChange)="onSelect1($event)">
+            <ng-template fdTemplate="groupItemTemplate" let-item>
+                <li class="fd-list__group-header" [innerText]="'Type: '+ item.label"></li>
+            </ng-template>
+        </fdp-combobox>
+        <p>Selected: {{ selectedItem1 | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="secondaryItemTemplate" label="Secondary Item Template"
+                    zone="zLeft" rank="4">
+        <span>Allows to customize secondary item template</span>
+        <fdp-combobox
+            name="secondaryItemTemplate"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            [showSecondaryText]="true"
+            (selectionChange)="onSelect2($event)">
+            <ng-template fdTemplate="secondaryItemTemplate" let-item>
+                <span class="fd-list__secondary" [innerText]="item.type"></span>
+            </ng-template>
+        </fdp-combobox>
+        <p>Selected: {{ selectedItem2 | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="selectedItemTemplate" label="Selected Item Template"
+                    zone="zLeft" rank="4">
+        <span>Allows to customize selected item template</span>
+        <fdp-combobox
+            name="secondaryItemTemplate"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            (selectionChange)="onSelect3($event)">
+            <ng-template fdTemplate="selectedItemTemplate" let-item>
+                <div class="fd-template-container-div">
+                    <fd-icon glyph="accept" size="l" class="fd-template-icon"></fd-icon>
+                    <span [innerText]="item.name"></span>
+                </div>
+            </ng-template>
+        </fdp-combobox>
+        <p>Selected: {{ selectedItem3 | json }}</p>
+    </fdp-form-field>
+</fdp-form-group>

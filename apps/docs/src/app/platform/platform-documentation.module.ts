@@ -28,4 +28,4 @@ import { AvatarModule } from '@fundamental-ngx/core';
         StackblitzService
     ]
 })
-export class PlatformDocumentationModule {}
+export class PlatformDocumentationModule { }

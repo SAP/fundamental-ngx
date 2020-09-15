@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormModule as FdFormModule } from '@fundamental-ngx/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextAreaComponent } from './text-area.component';
+import { FormControlModule } from '@fundamental-ngx/core';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, FdFormModule],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, FormControlModule],
     exports: [TextAreaComponent],
     declarations: [TextAreaComponent]
 })

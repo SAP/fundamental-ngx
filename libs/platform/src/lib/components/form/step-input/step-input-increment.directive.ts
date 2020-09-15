@@ -1,13 +1,7 @@
-import { Directive, HostListener, SkipSelf } from '@angular/core';
-import { fromEvent, timer, interval, Observable } from 'rxjs';
-import { switchMap, takeUntil, startWith } from 'rxjs/operators';
+import { Directive, SkipSelf } from '@angular/core';
 
 import { StepInputComponent } from './base.step-input';
-
-export const streamUntilMouseUp$: Observable<number> = timer(500).pipe(
-    switchMap(() => interval(40)),
-    takeUntil(fromEvent(window, 'mouseup', { capture: true, once: true }))
-);
+import { StepInputActionButton } from './step-input-action-button';
 
 /**
  * This Directive is used to be assigned to increment button.
@@ -15,24 +9,17 @@ export const streamUntilMouseUp$: Observable<number> = timer(500).pipe(
 @Directive({
     selector: '[fdpStepInputIncrement]'
 })
-export class StepInputIncrementDirective {
+export class StepInputIncrementDirective extends StepInputActionButton {
     /** @hidden */
-    private _streamUntilMouseUp$: Observable<number> = streamUntilMouseUp$;
+    constructor(@SkipSelf() private stepInput: StepInputComponent) {
+        super();
+    }
 
-    /** @hidden */
-    constructor(@SkipSelf() private stepInput: StepInputComponent) {}
+    canHandleAction(): boolean {
+        return !!this.stepInput.canChangeValue;
+    }
 
-    /** @hidden */
-    @HostListener('mousedown', ['$event'])
-    click($event: Event): void {
-        if (!this.stepInput.canChangeValue) {
-            return;
-        }
-
-        $event.preventDefault();
-
-        this._streamUntilMouseUp$.pipe(startWith(null)).subscribe(() => {
-            this.stepInput.increase();
-        });
+    runAction(): void {
+        this.stepInput.increase();
     }
 }

@@ -39,37 +39,37 @@
     <fd-input-group
         [compact]="compact"
         [button]="showDropdownButton"
-        [glyph]="showDropdownButton ? glyph : ''"
+        [glyph]="showDropdownButton ? glyph : ' '"
         [state]="state"
         [buttonFocusable]="buttonFocusable"
         [disabled]="disabled || readOnly"
         [isControl]="true"
-        (addOnButtonClicked)="onPrimaryButtonClick()"
         [isExpanded]="!mobile && open && displayedValues.length"
         [attr.aria-readonly]="readOnly"
+        (addOnButtonClicked)="onPrimaryButtonClick()"
         (click)="mobile && isOpenChangeHandle(true)"
     >
         <input
+            #searchInputElement
             fd-auto-complete
+            fd-input-group-input
+            type="text"
             [enable]="autoComplete && !mobile"
             [displayFn]="displayFn"
             [options]="dropdownValues"
             [inputText]="inputText"
-            (onComplete)="handleAutoComplete($event)"
-            #searchInputElement
-            type="text"
-            fd-input-group-input
             [compact]="compact"
-            (keydown)="onInputKeydownHandler($event)"
             [disabled]="disabled"
-            [(ngModel)]="inputText"
-            (ngModelChange)="handleSearchTermChange()"
-            [placeholder]="placeholder"
-            (focus)="onTouched()"
-            (blur)="handleBlur()"
             [attr.aria-expanded]="open && displayedValues.length"
             [readonly]="readOnly"
             [attr.aria-readonly]="readOnly"
+            [placeholder]="placeholder"
+            [(ngModel)]="inputText"
+            (onComplete)="handleAutoComplete($event)"
+            (keydown)="onInputKeydownHandler($event)"
+            (ngModelChange)="handleSearchTermChange()"
+            (focus)="onTouched()"
+            (blur)="handleBlur()"
         />
     </fd-input-group>
 </ng-template>
@@ -78,10 +78,10 @@
     <ul
         fd-list
         class="fd-combobox-custom-list fd-combobox-input-menu-overflow"
-        (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
         [style.maxHeight]="!mobile && maxHeight"
         [hasMessage]="listMessages && listMessages.length > 0"
+        (focusEscapeList)="handleListFocusEscape($event)"
     >
         <ng-content></ng-content>
         <ng-container *ngIf="groupFn">
@@ -90,12 +90,13 @@
                     {{ group.key }}
                 </li>
                 <li
-                    *ngFor="let term of group.value"
-                    (click)="onMenuClickHandler(term)"
                     fd-list-item
                     tabindex="0"
                     class="fd-combobox-list-item"
+                    *ngFor="let term of group.value"
                     [selected]="inputText === (term | displayFnPipe: displayFn)"
+                    (keyDown)="onItemKeyDownHandler($event, term)"
+                    (click)="onMenuClickHandler(term)"
                 >
                     <ng-container
                         [ngTemplateOutlet]="itemSource"
@@ -106,12 +107,13 @@
         </ng-container>
         <ng-container *ngIf="!groupFn">
             <li
-                *ngFor="let term of displayedValues"
-                (click)="onMenuClickHandler(term)"
                 fd-list-item
                 tabindex="0"
                 class="fd-combobox-list-item"
+                *ngFor="let term of displayedValues"
                 [selected]="inputText === (term | displayFnPipe: displayFn)"
+                (keyDown)="onItemKeyDownHandler($event, term)"
+                (click)="onMenuClickHandler(term)"
             >
                 <ng-container [ngTemplateOutlet]="itemSource" [ngTemplateOutletContext]="{ term: term }"></ng-container>
             </li>
