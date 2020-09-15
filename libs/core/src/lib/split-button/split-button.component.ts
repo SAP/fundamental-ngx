@@ -164,7 +164,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** Function called to select a menu item for the split button. */
     selectMenuItem(menuItem: MenuItemComponent): void {
-        if (menuItem && !this.mainAction && this.mainAction.keepMainAction) {
+        if (menuItem && (!this.mainAction || !this.mainAction.keepMainAction)) {
             menuItem.setSelected(true);
         }
     }
@@ -181,7 +181,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         this.menu.menuItems.map((menuItem: MenuItemComponent) => {
             this._menuItemSubscriptions.add(
                 menuItem.onSelect.subscribe(() => {
-                    if (!this.mainAction && this.mainAction.keepMainAction) {
+                    if (!this.mainAction || !this.mainAction.keepMainAction) {
                         this.selected = menuItem;
                         if (this._init) {
                             this._getMainButtonWidth();
