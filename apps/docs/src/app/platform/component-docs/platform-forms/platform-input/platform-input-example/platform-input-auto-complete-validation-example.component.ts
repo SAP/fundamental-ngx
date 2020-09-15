@@ -1,5 +1,6 @@
-import { Component, OnInit, TemplateRef, Input } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { PopoverComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-platform-input-auto-complete-form-validation-example',
@@ -29,31 +30,34 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
     @Input()
     open: boolean;
 
-    /**
-     * The template with which to display the individual listed items.
-     * Use it by passing an ng-template with implicit content. See examples for more info.
-     */
-    @Input()
-    itemTemplate: TemplateRef<any>;
+    @ViewChild('typeahead')
+    typeahead: PopoverComponent;
 
     constructor(private fb: FormBuilder) {}
 
     ngOnInit(): void {
-        this.options = this.sportsData;
+        this.options = [];
     }
 
     filter(value: string): string[] {
         const filterValue = value.toLowerCase();
+        if (filterValue.length === 0) {
+            return [];
+        }
         return this.sportsData.filter((item: string) => item.toLowerCase().includes(filterValue));
     }
 
     onSearchChange(): void {
         this.options = this.filter(this.inputText);
-        this.open = true;
+        if (this.options.length > 0) {
+            this.typeahead.open();
+        }
+        this.typeahead.updatePopover();
     }
 
     onItemClick(clickedValue): void {
         this.inputText = clickedValue;
-        this.open = false;
+        this.options = [];
+        this.typeahead.close();
     }
 }
