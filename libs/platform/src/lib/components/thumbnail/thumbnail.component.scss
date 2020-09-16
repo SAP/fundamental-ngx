@@ -1,0 +1,38 @@
+.fdp-thumbnail-container {
+
+  $fdp-thumnail-container-size: 20rem;
+
+  display: inline-flex;
+
+  &.fdp-thumbnail-container--horizontal {
+    display: block;
+
+    .fdp-media-container {
+      margin-bottom: 4rem;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+  }
+
+  video {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+  }
+  .fdp-media-container {
+    width: $fdp-thumnail-container-size;
+    height: $fdp-thumnail-container-size;
+    padding-top: 3rem;
+    margin-left: 4rem;
+
+    [dir='rtl'] & {
+      margin-left: 0;
+      margin-right: 4rem;
+    }
+  }
+
+}

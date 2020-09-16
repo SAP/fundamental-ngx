@@ -32,4 +32,5 @@ export const API_FILES = {
     combobox: ['ComboboxComponent', 'BaseCombobox', 'ComboboxConfig'],
     list: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     standardlistitem: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
+    thumbnail: ['ThumbnailComponent']
 };

@@ -1,0 +1,13 @@
+<div class="fdp-thumbnail-image-container">
+    <div
+        [class]="isHorizontal ? 'fdp-thumbnail-image--horizontal' : 'fdp-thumbnail-image'"
+        *ngFor="let image of mediaList"
+        (click)="thumbNailClick(image)"
+        tabindex="0"
+        role="button"
+        aria-pressed="false"
+        [title]="image.label"
+    >
+        <fd-avatar [image]="image.thumbnailUrl" size="m"></fd-avatar>
+    </div>
+</div>

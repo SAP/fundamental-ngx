@@ -1,0 +1,33 @@
+.fdp-thumbnail-image-container {
+
+  $fdp-thumnail-image-size: 4rem;
+  $fdp-thumnail-image-margin-size: 0.5rem;
+
+  display: block;
+
+  .fdp-thumbnail-image {
+    width: $fdp-thumnail-image-size;
+    height: $fdp-thumnail-image-size;
+    margin-top: $fdp-thumnail-image-margin-size;
+    margin-bottom: $fdp-thumnail-image-margin-size;
+    border: 0.015rem solid transparent;
+    &:hover {
+        cursor: pointer;
+        border: 0.015rem solid rgb(0, 153, 255);
+        border-radius: 0.25rem;
+    }
+  }
+
+  .fdp-thumbnail-image--horizontal {
+    display: inline-block;
+    margin-left: $fdp-thumnail-image-margin-size;
+    margin-right: $fdp-thumnail-image-margin-size;
+    border: 0.015rem solid transparent;
+    background-clip: border-box;
+    &:hover {
+        cursor: pointer;
+        border: 0.015rem solid rgb(0, 153, 255);
+        border-radius: 0.25rem;
+    }
+  }
+}
