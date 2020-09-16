@@ -177,15 +177,11 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** @hidden */
     private _setupMenuItemSubscriptions(): void {
         this.menu.menuItems.forEach(menuItem => {
-            this._menuItemSubscriptions.add(
-                menuItem.onSelect.pipe(
-                    first()
-                ).subscribe(() => {
-                    if (this.fixedWidth) {
-                        this._getMainButtonWidth();
-                    }
-                })
-            );
+            menuItem.onSelect.pipe(first()).subscribe(() => {
+                if (this.fixedWidth) {
+                    this._getMainButtonWidth();
+                }
+            });
             this._menuItemSubscriptions.add(
                 menuItem.onSelect.subscribe(() => {
                     if (!this.mainAction || !this.mainAction.keepMainAction) {
