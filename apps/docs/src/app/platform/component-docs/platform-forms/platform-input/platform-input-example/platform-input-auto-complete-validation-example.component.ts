@@ -1,5 +1,4 @@
-import { Component, OnInit, TemplateRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PopoverComponent } from '@fundamental-ngx/core';
 
 @Component({
@@ -8,10 +7,13 @@ import { PopoverComponent } from '@fundamental-ngx/core';
     styleUrls: ['./platform-input-auto-complete-validation-example.component.scss']
 })
 export class PlatformInputAutoCompleteValidationExampleComponent implements OnInit {
-    submitted = false;
-    inputText: string;
-    state = false;
-    options: string[];
+
+    public inputText: string;
+    public options: string[];
+
+    /** Whether the combobox is opened. */
+    public open: boolean;
+
 
     public sportsData: string[] = [
         'American Football',
@@ -26,14 +28,10 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
         'Tennis'
     ];
 
-    /** Whether the combobox is opened. */
-    @Input()
-    open: boolean;
-
     @ViewChild('typeahead')
     typeahead: PopoverComponent;
 
-    constructor(private fb: FormBuilder) {}
+    constructor() {}
 
     ngOnInit(): void {
         this.options = [];
@@ -49,15 +47,13 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
 
     onSearchChange(): void {
         this.options = this.filter(this.inputText);
-        if (this.options.length > 0) {
-            this.typeahead.open();
-        }
+        this.open = (this.options.length > 0);
         this.typeahead.updatePopover();
     }
 
     onItemClick(clickedValue): void {
         this.inputText = clickedValue;
         this.options = [];
-        this.typeahead.close();
+        this.open = false;
     }
 }
