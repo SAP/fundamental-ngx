@@ -4,7 +4,8 @@ import {
     IconModule,
     SwitchModule,
     ButtonModule,
-    MessageStripModule
+    MessageStripModule,
+    FormLabelModule
 } from '@fundamental-ngx/core';
 
 export const sharedCoreModules = [
@@ -13,5 +14,6 @@ export const sharedCoreModules = [
     IconModule,
     SwitchModule,
     ButtonModule,
-    MessageStripModule
+    MessageStripModule,
+    FormLabelModule
 ];
