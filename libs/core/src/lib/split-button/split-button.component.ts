@@ -21,6 +21,7 @@ import { MenuComponent } from '../menu/menu.component';
 import { MenuItemComponent } from '../menu/menu-item/menu-item.component';
 import { Subscription } from 'rxjs';
 import { MainAction } from './main-action';
+import { first } from 'rxjs/operators';
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
@@ -180,13 +181,18 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     private _setupMenuItemSubscriptions(): void {
         this.menu.menuItems.forEach(menuItem => {
             this._menuItemSubscriptions.add(
+                menuItem.onSelect.pipe(
+                    first()
+                ).subscribe(() => {
+                    if (this.fixedWidth) {
+                        this._getMainButtonWidth();
+                    }
+                })
+            );
+            this._menuItemSubscriptions.add(
                 menuItem.onSelect.subscribe(() => {
                     if (!this.mainAction || !this.mainAction.keepMainAction) {
                         this.selected = menuItem;
-                        if (this._init) {
-                            this._getMainButtonWidth();
-                            this._init = false;
-                        }
                         this.titleTemplate = null;
                         this.mainActionTitle = menuItem.menuItemTitle.title;
                         this._cdRef.detectChanges();
