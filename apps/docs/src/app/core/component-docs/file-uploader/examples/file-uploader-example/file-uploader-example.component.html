@@ -7,7 +7,7 @@
     [buttonAriaLabel]="'browse file'"
     [multiple]="true"
     [accept]="'.png,.jpg'"
-    (selectedFilesChanged)="handleFileSection()"
+    (selectedFilesChanged)="handleFileSection($event)"
 >
 </fd-file-uploader>
 

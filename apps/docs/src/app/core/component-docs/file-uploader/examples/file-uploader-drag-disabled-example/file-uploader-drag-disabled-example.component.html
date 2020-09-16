@@ -5,7 +5,7 @@
     [placeholder]="'Choose File to upload'"
     [buttonLabel]="'Drag a .jpg file on me!'"
     [buttonAriaLabel]="'browse file'"
-    (selectedFilesChanged)="handleFileSection()"
+    (selectedFilesChanged)="handleFileSection($event)"
     (selectedInvalidFiles)="handleInvalidFiles($event)"
     [accept]="'.png'"
 >

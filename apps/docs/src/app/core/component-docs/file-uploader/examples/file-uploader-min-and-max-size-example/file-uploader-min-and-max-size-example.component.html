@@ -8,7 +8,7 @@
     [buttonAriaLabel]="'browse file'"
     [(ngModel)]="files"
     [multiple]="true"
-    (selectedFilesChanged)="handleFileSection()"
+    (selectedFilesChanged)="handleFileSection($event)"
     (selectedInvalidFiles)="handleInvalidFiles($event)"
     [minFileSize]="'1KB'"
     [maxFileSize]="'1MB'"
