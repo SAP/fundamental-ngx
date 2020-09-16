@@ -23,14 +23,8 @@ export class FileUploaderService {
         maxFileSize: string,
         acceptedExtensions: string
     ): FileUploadOutput {
-        console.log(minFileSize);
-        console.log(maxFileSize);
-
         const maxSize = this._parseFileSize(maxFileSize);
         const minSize = this._parseFileSize(minFileSize);
-
-        console.log(minSize);
-        console.log(maxSize);
 
         let allowedExtensions = null;
         if (acceptedExtensions) {
@@ -38,7 +32,6 @@ export class FileUploaderService {
         }
 
         const fileUploadOutput: FileUploadOutput = {};
-        console.log(allowedExtensions);
 
         fileUploadOutput.validFiles =
             files.filter(file => this._checkSize(file.size, maxSize, minSize) && this._checkExtension(file, allowedExtensions));
@@ -88,11 +81,9 @@ export class FileUploaderService {
 
     private _checkSize(fileSize: number, maxSize: number, minSize: number): boolean {
         if (maxSize && fileSize > maxSize) {
-            console.log('maxSize error');
             return false;
         }
         if (minSize && fileSize < minSize) {
-            console.log('min error');
             return false;
         }
         return true;
