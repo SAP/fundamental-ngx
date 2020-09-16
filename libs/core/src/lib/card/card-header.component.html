@@ -2,23 +2,31 @@
     <fd-avatar
         class="fd-card__avatar"
         size="s"
+        [id]="_avatar.id"
         [circle]="true"
         [image]="_avatar.image"
-        [glyph]="_avatar.glyph"
         [label]="_avatar.abbreviate"
-        [id]="_avatar.id"
-        [label]="_avatar.label"
+        [ariaLabel]="_avatar.ariaLabel"
         [ariaLabelledby]="_avatar.ariaLabelledby"
         role="presentation"
     ></fd-avatar>
 </ng-container>
 
 <div class="fd-card__header-text">
+    <!-- Title -->
     <div class="fd-card__title-area">
         <ng-content select="fd-card-title"></ng-content>
         <ng-content select="fd-card-counter"></ng-content>
     </div>
+
+    <!-- Subtitle -->
     <div class="fd-card__subtitle-area">
         <ng-content select="fd-card-subtitle"></ng-content>
     </div>
+
+    <!-- KPI -->
+    <ng-content select="fd-card-kpi-header"></ng-content>
+
+    <!-- Second Subtitle -->
+    <ng-content select="fd-card-second-subtitle"></ng-content>
 </div>

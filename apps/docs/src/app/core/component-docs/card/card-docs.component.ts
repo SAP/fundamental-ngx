@@ -4,6 +4,8 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 import * as cardExampleHtml from '!raw-loader!./examples/card-example.component.html';
 import * as cardLoaderExampleHtml from '!raw-loader!./examples/card-loader-example.component.html';
+import * as cardFooterExampleHtml from '!raw-loader!./examples/card-footer-example.component.html';
+import * as cardKpiExampleHtml from '!raw-loader!./examples/card-kpi-example.component.html';
 
 @Component({
     templateUrl: './card-docs.component.html'
@@ -22,6 +24,22 @@ export class CardDocsComponent {
             language: 'html',
             code: cardLoaderExampleHtml,
             fileName: 'card-loader-example'
+        }
+    ];
+
+    footer: ExampleFile[] = [
+        {
+            language: 'html',
+            code: cardFooterExampleHtml,
+            fileName: 'card-footer-example'
+        }
+    ];
+
+    kpi: ExampleFile[] = [
+        {
+            language: 'html',
+            code: cardKpiExampleHtml,
+            fileName: 'card-kpi-example'
         }
     ];
 }

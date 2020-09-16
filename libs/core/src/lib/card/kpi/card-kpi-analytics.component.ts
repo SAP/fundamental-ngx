@@ -1,19 +1,19 @@
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2 } from '@angular/core';
 
-import { CLASS_NAME } from './constants';
+import { CLASS_NAME } from '../constants';
 
 @Component({
-    selector: 'fd-card-content',
+    selector: 'fd-card-kpi-analytics',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardContentComponent implements OnInit {
+export class CardKpiAnalyticsComponent implements OnInit {
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.cardContent);
+        this._addClassNameToHostElement(CLASS_NAME.cardAnalytics);
     }
 
     /**@hidden */

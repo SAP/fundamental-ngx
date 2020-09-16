@@ -1,3 +1,4 @@
+@import '~fundamental-styles/dist/numeric-content';
 // @import '~fundamental-styles/dist/card';
 
 // TODO delete it once card styles is released
@@ -12,7 +13,6 @@
  * Copyright (c) 2020 SAP SE or an SAP affiliate company.
  * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/master/LICENSE)
  */
-@charset "UTF-8";
 
 .fd-card {
     font-size: .875rem;
@@ -879,4 +879,12 @@ fd-avatar.fd-card__avatar {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.fd-card__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    border-top: .0625rem solid #ccc;
+    border-top: .0625rem solid var(--sapTile_SeparatorColor, #ccc);
 }

@@ -13,7 +13,7 @@ export class CardSubtitleComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.cardSubTitle);
+        this._addClassNameToHostElement(CLASS_NAME.cardSubtitle);
     }
 
     /**@hidden */

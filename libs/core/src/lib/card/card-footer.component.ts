@@ -8,8 +8,10 @@ import { CLASS_NAME } from './constants';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardFooterComponent implements OnInit {
+    /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
+    /** @hidden */
     ngOnInit(): void {
         this._addClassNameToHostElement(CLASS_NAME.cardFooter);
     }
