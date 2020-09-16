@@ -184,15 +184,20 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
             });
             this._menuItemSubscriptions.add(
                 menuItem.onSelect.subscribe(() => {
-                    if (!this.mainAction || !this.mainAction.keepMainAction) {
-                        this.selected = menuItem;
-                        this.titleTemplate = null;
-                        this.mainActionTitle = menuItem.menuItemTitle.title;
-                        this._cdRef.detectChanges();
-                    }
+                    this._handleMenuItemSelection(menuItem);
                 })
             );
         });
+    }
+
+    /** @hidden */
+    private _handleMenuItemSelection(menuItem: MenuItemComponent): void {
+        if (!this.mainAction || !this.mainAction.keepMainAction) {
+            this.selected = menuItem;
+            this.titleTemplate = null;
+            this.mainActionTitle = menuItem.menuItemTitle.title;
+            this._cdRef.detectChanges();
+        }
     }
 
     /** @hidden */
