@@ -5,6 +5,8 @@
       The ContentChildren(FdButton) list approach with rendering in the template 
       does not work as we can not access FdButton projected content and render it here
       withing a loop.
+      We need to find a way to make button projected content available here to keep 
+      control over its rendering in order to make working overflow and force some options
     -->
     <ng-content></ng-content>
 </fd-toolbar>
