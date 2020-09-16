@@ -118,9 +118,6 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** @hidden */
     private _menuSubscription = new Subscription();
 
-    /** @hideen */
-    private _init = true;
-
     /** @hidden */
     constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {}
 
