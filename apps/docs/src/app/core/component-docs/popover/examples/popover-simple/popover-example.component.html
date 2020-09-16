@@ -1,12 +1,12 @@
 <div class="fd-docs-flex-display-helper">
     <fd-popover [placement]="leftPlacement$ | async">
         <fd-popover-control>
-            <fd-avatar size="s" [circle]="true" image="'http://lorempixel.com/400/400/nature'"></fd-avatar>
+            <fd-avatar size="s" [circle]="true" image="http://lorempixel.com/400/400/nature"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
                 <li fd-list-item *ngFor="let option of list1">
-                    <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
+                    <a fd-list-title>{{option.text}}</a>
                 </li>
             </ul>
         </fd-popover-body>
@@ -19,7 +19,7 @@
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
                 <li fd-list-item *ngFor="let option of list1">
-                    <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
+                    <a fd-list-title>{{option.text}}</a>
                 </li>
             </ul>
         </fd-popover-body>

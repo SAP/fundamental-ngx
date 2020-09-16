@@ -55,7 +55,7 @@ export class KeyboardSupportService<T> {
             listItem.keyDown.pipe(
                 takeUntil(unsubscribe$),
                 filter(event => KeyUtil.isKey(event, onKey)),
-                tap(() => event.preventDefault())
+                tap(event => event.preventDefault())
             ).subscribe(() => this.focusEscapeList.next(escapeDirection));
         };
 

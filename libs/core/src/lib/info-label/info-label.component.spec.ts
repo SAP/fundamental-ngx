@@ -40,14 +40,6 @@ describe('InfoLabelComponent', () => {
         expect(component.elementRef().nativeElement.classList.contains('fd-info-label--numeric')).toBe(true);
     });
 
-    it('Should Add  label Type only icon', () => {
-        component.ngOnInit();
-        component.type = 'only-icon';
-        component.buildComponentCssClass();
-        fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-info-label--only-icon')).toBe(true);
-    });
-
     it('Should Add  label Type icon', () => {
         component.ngOnInit();
         component.type = 'icon';

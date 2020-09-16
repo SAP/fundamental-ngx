@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
     selector: 'fd-popover-example',
     templateUrl: './popover-example.component.html',
     styleUrls: ['popover-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PopoverExampleComponent {
     leftPlacement$: Observable<Placement>;

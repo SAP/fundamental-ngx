@@ -1,11 +1,11 @@
-import { Component, DoCheck } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-radio-group-list-example',
     templateUrl: './platform-radio-group-list-example.component.html'
 })
-export class PlatformRadioGroupListExampleComponent implements DoCheck {
+export class PlatformRadioGroupListExampleComponent {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
     favoriteOption = '';
@@ -20,9 +20,8 @@ export class PlatformRadioGroupListExampleComponent implements DoCheck {
         month: new FormControl('Winter')
     });
 
-    ngDoCheck(): void {
-        if (this.form1.controls.radiol1) {
-            this.form1.controls.radiol1.setErrors({ invalid: true });
+    onSubmit(form: NgForm): void {
+        if (this.form1.controls.radiol1.status === 'INVALID' && form.submitted) {
             this.form1.controls.radiol1.markAsTouched();
         }
     }

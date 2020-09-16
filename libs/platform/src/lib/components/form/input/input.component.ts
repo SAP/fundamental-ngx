@@ -28,7 +28,9 @@ import {
     Optional,
     Self,
     SkipSelf,
-    Host
+    Host,
+    Output,
+    EventEmitter
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
 
@@ -72,6 +74,9 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         super.setValue(value);
     }
 
+    /** Emits event on focus change */
+    @Output() focusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this.inputElemRef;
@@ -92,5 +97,19 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         if (!this.type || VALID_INPUT_TYPES.indexOf(this.type) === -1) {
             throw new Error(` Input type ${this.type} is not supported`);
         }
+    }
+
+    /** @hidden */
+    _onFocus(): void {
+        this._onFocusChanged(true);
+        // propagate event
+        this.focusChange.emit(true);
+    }
+
+    /** @hidden */
+    _onBlur(): void {
+        this._onFocusChanged(false);
+        // propagate event
+        this.focusChange.emit(false);
     }
 }

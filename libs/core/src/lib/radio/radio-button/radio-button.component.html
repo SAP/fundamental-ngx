@@ -4,11 +4,17 @@
     [disabled]="disabled"
     [id]="id"
     [name]="name"
+    [attr.tabindex]="tabIndex"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledBy"
+    [attr.aria-describedby]="ariaDescribedBy"
+    [attr.aria-disabled]="disabled"
+    [attr.aria-checked]="checked"
     [ngModel]="currentValue"
     (ngModelChange)="valueChange($event)"
     #inputElement
     [value]="value"
 />
-<label class="fd-radio__label" [for]="id" (click)="labelClicked()">
+<label class="fd-radio__label" [attr.title]="title" [for]="id" (click)="labelClicked($event)">
     <ng-content></ng-content>
 </label>

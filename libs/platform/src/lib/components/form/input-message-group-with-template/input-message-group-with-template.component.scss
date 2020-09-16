@@ -12,3 +12,8 @@
 .fd-popover__control {
   cursor: auto !important;
 }
+
+// the default style display:inline-block is restricting/shrinking the width, therefore we are overriding it to take flex width.
+.fd-popover-custom {
+  display: flex;
+}

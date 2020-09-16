@@ -2,7 +2,6 @@
     #dialogWindow
     role="dialog"
     tabindex="-1"
-    attr.aria-modal="true"
     fdResize
     fdResizeBoundary=".fd-dialog"
     cdkDrag
@@ -25,6 +24,7 @@
     [fdResizeDisabled]="!dialogConfig.resizable"
     [@dialog-fade]
     [attr.id]="dialogConfig.id"
+    [attr.aria-modal]="true"
     [attr.aria-label]="dialogConfig.ariaLabel"
     [attr.aria-labelledby]="dialogConfig.ariaLabelledBy"
     [attr.aria-describedby]="dialogConfig.ariaDescribedBy"

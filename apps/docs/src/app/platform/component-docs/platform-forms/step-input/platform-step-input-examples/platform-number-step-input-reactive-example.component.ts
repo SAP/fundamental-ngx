@@ -5,7 +5,7 @@ const MAX_VALUE = 20;
 const MIN_VALUE = 10;
 
 @Component({
-    selector: 'fdp-platform-number-step-input-form-example',
+    selector: 'fdp-platform-number-step-input-reactive-example',
     templateUrl: './platform-number-step-input-reactive-example.component.html'
 })
 export class PlatformNumberStepInputFormExampleComponent implements AfterViewInit {

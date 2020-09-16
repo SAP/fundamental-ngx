@@ -1,5 +1,17 @@
-<label fd-form-label>Left Aligned Text Add-on</label>
-<fd-input-group [placement]="'before'" [addOnText]="'$'" [placeholder]="'Amount'"></fd-input-group>
-<br />
-<label fd-form-label>Right Aligned Text Add-on</label>
-<fd-input-group [placement]="'after'" [addOnText]="'$'" [placeholder]="'Amount'"></fd-input-group>
+<div fd-form-item>
+    <label fd-form-label>Left Aligned Text Add-on</label>
+    <fd-input-group addOnText="$"
+                    placement="before"
+                    placeholder="Amount">
+    </fd-input-group>
+</div>
+
+<br/>
+
+<div fd-form-item>
+    <label fd-form-label>Right Aligned Text Add-on</label>
+    <fd-input-group addOnText="$"
+                    placement="after"
+                    placeholder="Amount">
+    </fd-input-group>
+</div>

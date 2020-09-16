@@ -1,9 +1,7 @@
-import { Directive, HostListener, SkipSelf } from '@angular/core';
-import { startWith } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Directive, SkipSelf } from '@angular/core';
 
 import { StepInputComponent } from './base.step-input';
-import { streamUntilMouseUp$ } from './step-input-increment.directive';
+import { StepInputActionButton } from './step-input-action-button';
 
 /**
  * This Directive is used to be assigned to decrement button.
@@ -11,24 +9,17 @@ import { streamUntilMouseUp$ } from './step-input-increment.directive';
 @Directive({
     selector: '[fdpStepInputDecrement]'
 })
-export class StepInputDecrementDirective {
+export class StepInputDecrementDirective extends StepInputActionButton {
     /** @hidden */
-    private _streamUntilMouseUp$: Observable<number> = streamUntilMouseUp$;
+    constructor(@SkipSelf() private stepInput: StepInputComponent) {
+        super();
+    }
 
-    /** @hidden */
-    constructor(@SkipSelf() private stepInput: StepInputComponent) {}
+    canHandleAction(): boolean {
+        return !!this.stepInput.canChangeValue;
+    }
 
-    /** @hidden */
-    @HostListener('mousedown', ['$event'])
-    click($event: Event): void {
-        if (!this.stepInput.canChangeValue) {
-            return;
-        }
-
-        $event.preventDefault();
-
-        this._streamUntilMouseUp$.pipe(startWith(null)).subscribe(() => {
-            this.stepInput.decrease();
-        });
+    runAction(): void {
+        this.stepInput.decrease();
     }
 }

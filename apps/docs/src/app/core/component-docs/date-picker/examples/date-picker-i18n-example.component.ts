@@ -124,9 +124,9 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     template: `
         <label fd-form-label for="language">Select language:</label>
         <fd-segmented-button id="language" style="margin-bottom:20px">
-            <button fd-segmented-button [size]="'xs'" (click)="setFrench()" [state]="isSelected('fr')">French</button>
-            <button fd-segmented-button [size]="'xs'" (click)="setGerman()" [state]="isSelected('de')">German</button>
-            <button fd-segmented-button [size]="'xs'" (click)="setBulgarian()" [state]="isSelected('bg')">
+            <button fd-button (click)="setFrench()" [class]="isSelected('fr')">French</button>
+            <button fd-button (click)="setGerman()" [class]="isSelected('de')">German</button>
+            <button fd-button (click)="setBulgarian()" [class]="isSelected('bg')">
                 Bulgarian
             </button>
         </fd-segmented-button>
@@ -160,13 +160,13 @@ export class DatePickerI18nExampleComponent implements AfterViewInit {
     isSelected(language: string): string {
         switch (language) {
             case 'fr': {
-                return this.selected === 1 ? 'selected' : '';
+                return this.selected === 1 ? 'is-selected' : '';
             }
             case 'de': {
-                return this.selected === 2 ? 'selected' : '';
+                return this.selected === 2 ? 'is-selected' : '';
             }
             case 'bg': {
-                return this.selected === 3 ? 'selected' : '';
+                return this.selected === 3 ? 'is-selected' : '';
             }
         }
     }

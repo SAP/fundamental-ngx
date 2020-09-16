@@ -20,7 +20,7 @@ export const API_FILES = {
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
     button: ['ButtonComponent'],
-    segmentedButton: ['SegmentedButtonComponent', 'SegmentedButtonDirective'],
+    segmentedButton: ['SegmentedButtonComponent'],
     calendar: [
         'CalendarComponent',
         'CalendarDayViewComponent',
@@ -38,7 +38,8 @@ export const API_FILES = {
     checkbox: ['CheckboxComponent'],
     datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
     datetimePicker: ['DatetimePickerComponent', 'FdDateTime', 'DateTimeFormatParser', 'DateTimeFormatParserDefault'],
-    fileInput: ['FileInputComponent', 'FileSelectDirective', 'FileDragndropDirective'],
+    dropdown: ['PopoverDropdownComponent'],
+    fileInput: ['FileInputComponent', 'FileInputSelectDirective', 'FileInputDragndropDirective'],
     fileUploader: ['FileUploaderComponent', 'FileUploaderSelectDirective', 'FileUploaderDragndropDirective'],
     form: [
         'FormControlComponent',

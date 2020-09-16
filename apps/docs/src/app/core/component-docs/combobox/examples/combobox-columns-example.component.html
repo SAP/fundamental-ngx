@@ -1,14 +1,13 @@
 <fd-combobox
-    [(ngModel)]="searchTerm"
-    [dropdownValues]="dropdownValues"
-    [itemTemplate]="columnTemplate"
-    [placeholder]="'Type some text...'"
-    [maxHeight]="'250px'"
+    maxHeight="250px"
+    placeholder="Type some text..."
     [displayFn]="displayFunc"
->
+    [itemTemplate]="columnTemplate"
+    [dropdownValues]="dropdownValues"
+    [(ngModel)]="searchTerm">
 </fd-combobox>
 
-<span>Search Term: {{ searchTerm }}</span>
+<small>Search Term: {{ searchTerm }}</small>
 
 <ng-template #columnTemplate let-item>
     <span fd-list-title>{{ item.name }}</span>

@@ -198,16 +198,15 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     private createPlaceHolder(): void {
         /** Cloning container element */
-        const clone = this.element.nativeElement.cloneNode(true);
-
-        /** Taking cloned element reference */
-        this._placeholderElement = clone.firstChild.parentElement;
+        this._placeholderElement = this.element.nativeElement.cloneNode(true);
 
         this._placeholderElement.classList.add('fd-dnd-placeholder');
         this._setPlaceholderStyles();
 
-        /** Including element to the container */
-        this.element.nativeElement.after(clone);
+        /** Including element to the container
+         *  IE11 equivalent to `this.element.nativeElement.after(clone);`
+         */
+        this._placeAfter(this.element.nativeElement, this._placeholderElement);
     }
 
     /** @hidden */
@@ -252,4 +251,12 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
             this._dragRef.started.subscribe(() => this.onCdkDragStart())
         );
     }
+
+    /** IE11 equivalent of Node.after() Method */
+    private _placeAfter(element: Element, cloneNode: Node): void {
+        const docFrag = document.createDocumentFragment();
+        docFrag.appendChild(cloneNode);
+        element.parentNode.insertBefore(docFrag, element.nextSibling)
+    }
 }
+

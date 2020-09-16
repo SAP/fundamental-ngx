@@ -8,6 +8,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DIALOG_REF, DialogRef } from './dialog-utils/dialog-ref.class';
 import { DIALOG_CONFIG, DialogConfig } from './dialog-utils/dialog-config.class';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
     template: `
@@ -40,13 +43,17 @@ describe('DialogComponent', () => {
     let dialogService: DialogService;
     const dialogRef = new DialogRef();
     const dialogConfig = new DialogConfig();
+    const routerEventsSubject = new Subject<RouterEvent>();
+    const mockRouter = { events: routerEventsSubject.asObservable() };
+    let router: Router;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [TestModule],
+            imports: [TestModule, RouterModule, RouterTestingModule],
             providers: [
                 { provide: DIALOG_REF, useValue: dialogRef },
-                { provide: DIALOG_CONFIG, useValue: dialogConfig }
+                { provide: DIALOG_CONFIG, useValue: dialogConfig },
+                { provide: Router, useValue: mockRouter }
             ]
         });
     }));
@@ -60,6 +67,7 @@ describe('DialogComponent', () => {
         fixture.detectChanges();
         dialogService = TestBed.inject<DialogService>(DialogService);
         dialogComponent = fixture.componentInstance.dialog;
+        router = TestBed.inject(Router)
     }
 
     it('should create', () => {
@@ -203,5 +211,14 @@ describe('DialogComponent', () => {
         expect(dialogWindowEl.getAttribute('aria-label')).toEqual(customDialogConfig.ariaLabel);
         expect(dialogWindowEl.getAttribute('aria-labelledby')).toEqual(customDialogConfig.ariaLabelledBy);
         expect(dialogWindowEl.getAttribute('aria-describedby')).toEqual(customDialogConfig.ariaDescribedBy);
+    });
+
+    it('should close the dialog on router navigation start', () => {
+        setup();
+        const event = new NavigationStart(42, '/');
+        spyOn(dialogRef, 'dismiss');
+        routerEventsSubject.next(event);
+
+        expect(dialogRef.dismiss).toHaveBeenCalled();
     });
 });

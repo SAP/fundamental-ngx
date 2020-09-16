@@ -17,6 +17,7 @@
             tabindex="0"
             class="fd-product-switch__item"
             [ngClass]="{ selected: product.selected }"
+            (keydown)="keyDownHandle($event)"
             (click)="itemClick(product, $event)"
             [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
             [stickInPlace]="product.stickToPosition">
@@ -25,7 +26,7 @@
             </div>
             <div class="fd-product-switch__text">
                 <div class="fd-product-switch__title">{{ product.title }}</div>
-                <div class="fd-product-switch__subtitle">{{ product.subtitle }}</div>
+                <div *ngIf="product.subtitle" class="fd-product-switch__subtitle">{{ product.subtitle }}</div>
             </div>
         </li>
     </ul>

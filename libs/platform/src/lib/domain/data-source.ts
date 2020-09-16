@@ -67,6 +67,7 @@
  */
 import { BehaviorSubject, Observable } from 'rxjs';
 import { InjectionToken } from '@angular/core';
+import { MatchingStrategy } from '../components/form/combobox/combobox.config';
 
 export const DATA_PROVIDERS = new InjectionToken<Map<string, DataProvider<any>>>('DataProviderRegistry');
 
@@ -74,6 +75,13 @@ export interface DataSource<T> {
     open(): Observable<T[]>;
 
     close(): void;
+}
+
+export type MatchBy = (item: any) => any;
+
+export interface MatchingBy {
+    firstBy: MatchBy;
+    secondaryBy?: MatchBy;
 }
 
 export function isDataSource(value: any): value is DataSource<any> {
@@ -87,6 +95,8 @@ export function isDataSource(value: any): value is DataSource<any> {
  */
 export abstract class DataProvider<T> {
     protected _keyPath: string;
+    protected _matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
+    protected _matchingBy: MatchingBy | null = null;
 
     abstract fetch(params: Map<string, any>): Observable<T[]>;
 
@@ -117,13 +127,21 @@ export abstract class DataProvider<T> {
     setLookupKey(key: string): void {
         this._keyPath = key;
     }
+
+    setMatchingBy(matchingBy: MatchingBy): void {
+        this._matchingBy = matchingBy;
+    }
+
+    setMatchingStrategy(strategy: MatchingStrategy): void {
+        this._matchingStrategy = strategy;
+    }
 }
 
 export class ComboBoxDataSource<T> implements DataSource<T> {
     static readonly MaxLimit = 5;
     protected dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
 
-    constructor(public dataProvider: DataProvider<any>) {}
+    constructor(public dataProvider: DataProvider<any>) { }
 
     match(predicate?: string | Map<string, string>): void {
         const searchParam = new Map();
@@ -149,7 +167,7 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
         return this.dataChanges.asObservable();
     }
 
-    close(): void {}
+    close(): void { }
 }
 
 export class SearchFieldDataSource<T> extends ComboBoxDataSource<T> {
@@ -157,3 +175,58 @@ export class SearchFieldDataSource<T> extends ComboBoxDataSource<T> {
         super(dataProvider);
     }
 }
+
+export class ListDataSource<T> extends ComboBoxDataSource<T> {
+    constructor(public dataProvider: DataProvider<any>) {
+        super(dataProvider);
+    }
+    // sort
+
+    sort(listItems: [] | Map<string, string>): void {
+        const sortedItems = new Map();
+
+        if (listItems instanceof Array) {
+            sortedItems.set('query', listItems.sort);
+        } else if (listItems instanceof Map) {
+            this.sortMap(listItems).forEach((v, k) => sortedItems.set(k, v));
+        } else {
+            throw new Error('DataSource.sort() listItem can only accepts array and Map');
+        }
+        sortedItems.set('query', listItems);
+        this.dataProvider.fetch(sortedItems).subscribe((result: T[]) => {
+            this.dataChanges.next(result);
+        });
+    }
+
+    // filter
+    match(predicate?: string | Map<string, string> | []): void {
+        const searchParam = new Map();
+
+        if (typeof predicate === 'string') {
+            searchParam.set('query', predicate);
+        } else if (predicate instanceof Map) {
+            predicate.forEach((v, k) => searchParam.set(k, v));
+        } else {
+            throw new Error('DataSource.match() predicate can only accepts string and Map');
+        }
+
+        if (!searchParam.has('limit')) {
+            searchParam.set('limit', ListDataSource.MaxLimit);
+        }
+
+        this.dataProvider.fetch(searchParam).subscribe((result: T[]) => {
+            this.dataChanges.next(result);
+        });
+    }
+
+    sortMap(list: any): any {
+        const keys: string[] = Object.keys(list);
+        const sortedKeys = keys.sort(); // reverse if you need or not
+        const sortedList: any = {};
+        sortedKeys.forEach(x => {
+            sortedList[x] = list[x];
+        });
+        return sortedList;
+    }
+}
+

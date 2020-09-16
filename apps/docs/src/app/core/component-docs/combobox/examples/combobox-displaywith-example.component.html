@@ -1,9 +1,8 @@
 <fd-combobox
+    placeholder="Search here..."
     [dropdownValues]="values"
-    [placeholder]="'Search here...'"
-    [(ngModel)]="searchTerm"
     [displayFn]="displayFunc"
->
+    [(ngModel)]="searchTerm">
 </fd-combobox>
 
-<span>Search Term: {{ searchTerm }}</span>
+<small>Search Term: {{ searchTerm }}</small>
