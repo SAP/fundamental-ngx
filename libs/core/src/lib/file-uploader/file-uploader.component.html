@@ -2,11 +2,12 @@
     class="fd-file-uploader"
     fdFileDragnDrop
     [accept]="accept"
+    [maxFileSize]="maxFileSize"
+    [minFileSize]="minFileSize"
     [dragndrop]="dragndrop"
     [disabled]="disabled"
     [multiple]="multiple"
-    (fileChanged)="selectHandler($event)"
-    (invalidFileDrop)="selectedInvalidFiles.emit($event)"
+    (fileChanged)="handleDrop($event)"
     (dragEntered)="onDragEnter.emit()"
     (dragLeave)="onDragLeave.emit()"
 >

@@ -9,13 +9,13 @@ export class FileUploaderMinAndMaxSizeExampleComponent {
     files: File[];
     invalidFiles: File[];
 
-    handleFileSection(): void {
-        alert('Files selected successfully!!!');
+    handleFileSection(files: File[]): void {
+        alert(files.length + ' Files selected successfully!!!');
     }
 
-    handleInvalidFiles($event): void {
-        alert(' Invalid file selection ');
-        this.invalidFiles = $event;
+    handleInvalidFiles(files: File[]): void {
+        alert(files.length + ' Invalid files selected ');
+        this.invalidFiles = files;
     }
 
 }

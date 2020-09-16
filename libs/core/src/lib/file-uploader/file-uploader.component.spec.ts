@@ -106,43 +106,4 @@ describe('FileUploaderComponent', () => {
         expect(component.inputRef.nativeElement.value).toEqual('');
         expect(component.onChange).toHaveBeenCalledWith([]);
     });
-
-    it('should verify diffrent valid file size of parsing', () => {
-        let size;
-        size = component.parseFileSize('2byte');
-        expect(size === 2);
-        size = component.parseFileSize('2KB');
-        expect(size === 2048);
-        size = component.parseFileSize('5kb');
-        expect(size === 5120);
-        size = component.parseFileSize('12Mb ');
-        expect(size === 12582912);
-        size = component.parseFileSize('2 gb');
-        expect(size === 2147483648);
-        size = component.parseFileSize('2 k b');
-        expect(size === 2048);
-        size = component.parseFileSize('120');
-        expect(size === 120);
-    });
-
-
-    it('should verify diffrent invalid file size of parsing', () => {
-
-        expect(function (): void {
-            component.parseFileSize('KB')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-        expect(function (): void {
-            component.parseFileSize('hb')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-        expect(function (): void {
-            component.parseFileSize('2vf')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-        expect(function (): void {
-            component.parseFileSize('gb3')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-    });
 });

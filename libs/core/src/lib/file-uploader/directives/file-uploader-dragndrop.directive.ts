@@ -1,4 +1,5 @@
 import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { FileUploaderService, FileUploadOutput } from '../file-uploader.service';
 
 /**
  * Directive that handles the drag and drop feature of the file input.
@@ -15,6 +16,14 @@ export class FileUploaderDragndropDirective {
     @Input()
     accept: string;
 
+    /** Max file size in bytes that the input will accept. */
+    @Input()
+    maxFileSize = '';
+
+    /** Min file size in bytes that the input will accept. */
+    @Input()
+    minFileSize = '';
+
     /** Whether selecting of new files is disabled. */
     @Input()
     disabled = false;
@@ -23,13 +32,9 @@ export class FileUploaderDragndropDirective {
     @Input()
     dragndrop = true;
 
-    /** Event emitted when files are selected. Passes back an array of files. */
+    /** Event emitted when files are dropped. Passes back an array of files. */
     @Output()
-    readonly fileChanged = new EventEmitter<File[]>();
-
-    /** Event emitted when invalid files are selected. Passes back an array of files. */
-    @Output()
-    readonly invalidFileDrop = new EventEmitter<File[]>();
+    readonly fileChanged = new EventEmitter<FileUploadOutput>();
 
     /** Event emitted when the dragged file enters the dropzone. */
     @Output()
@@ -40,6 +45,10 @@ export class FileUploaderDragndropDirective {
     readonly dragLeave = new EventEmitter<void>();
 
     private elementStateCounter = 0;
+
+    constructor(
+        private _fileUploadService: FileUploaderService,
+    ) {}
 
     /** @hidden */
     @HostListener('dragover', ['$event'])
@@ -81,31 +90,18 @@ export class FileUploaderDragndropDirective {
         const files: File[] = Array.from(rawFiles);
 
         if (!this.multiple && files.length > 1) {
-            this.invalidFileDrop.emit(files);
+            this.fileChanged.emit({
+                validFiles: [],
+                invalidFiles: files
+            });
             return;
         }
 
-        const validFiles: File[] = [];
-        const invalidFiles: File[] = [];
-        if (files.length > 0) {
-            if (!this.accept) {
-                files.forEach((file: File) => {
-                    validFiles.push(file);
-                });
-            } else {
-                const allowedExtensions = this.accept.toLocaleLowerCase().replace(/[\s.]/g, '').split(',');
-                files.forEach((file: File) => {
-                    const extension = file.name.split('.')[file.name.split('.').length - 1];
-                    if (allowedExtensions.lastIndexOf(extension) !== -1) {
-                        validFiles.push(file);
-                    } else {
-                        invalidFiles.push(file);
-                    }
-                });
-            }
-            this.fileChanged.emit(validFiles);
-            this.invalidFileDrop.emit(invalidFiles);
-        }
+        const fileOutput: FileUploadOutput = this._fileUploadService.validateFiles(
+            files, this.minFileSize, this.maxFileSize, this.accept
+        )
+
+        this.fileChanged.emit(fileOutput);
     }
 
     /** @hidden */
