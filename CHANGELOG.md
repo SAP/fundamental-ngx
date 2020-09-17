@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.66...v0.22.0-rc.67) (2020-09-17)
+
+
+### Bug Fixes
+
+* remove spacing between message and select ([#3305](https://github.com/SAP/fundamental-ngx/issues/3305)) ([41c4e60](https://github.com/SAP/fundamental-ngx/commit/41c4e608ce69189375bd96217022ba5f060b1cfa))
+
 ## [0.22.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.65...v0.22.0-rc.66) (2020-09-16)
 
 ## [0.22.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.64...v0.22.0-rc.65) (2020-09-14)
