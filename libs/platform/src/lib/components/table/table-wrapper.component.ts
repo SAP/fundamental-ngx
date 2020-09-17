@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
 @Component({
     selector: 'fdp-table-wrapper',
     template: `<ng-content></ng-content>`,
-    styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

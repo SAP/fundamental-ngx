@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'fdp-table-default-example',
-    templateUrl: './platform-table-default-example.component.html'
+    selector: 'fdp-table-different-examples',
+    templateUrl: './platform-table-different-examples.component.html'
 })
-export class PlatformTableDefaultExampleComponent implements OnInit {
+export class PlatformTableDifferentExamplesComponent implements OnInit {
     source: any[] = [];
 
     constructor() {}

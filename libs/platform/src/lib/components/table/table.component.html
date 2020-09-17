@@ -1,1 +1,7 @@
-<p>table works!</p>
+<ng-container *ngIf="dataSource; else emptyTableTemplate">
+    <ng-content></ng-content>
+</ng-container>
+
+<ng-template #emptyTableTemplate>
+    <div>{{ emptyTableMessage }}</div>
+</ng-template>

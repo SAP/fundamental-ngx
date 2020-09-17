@@ -1,3 +1,43 @@
-<table fdp-table>
-    <p>table works!</p>
-</table>
+<fdp-table
+       [dataSource]="source"
+       [contentDensity]="'compact'"
+       [selectionMode]="'single'"
+       [emptyTableMessage]="'No data found'"
+       (rowSelectionChange)="onRowSelectionChange($event)">
+
+    <!-- Toolbar -->
+    <fdp-table-toolbar
+        title="Order Line Items"
+        [hideItemCount]="false">
+        <fdp-table-toolbar-actions>
+            <fdp-button>Edit</fdp-button>
+            <fdp-button>Delete</fdp-button>
+        </fdp-table-toolbar-actions>
+    </fdp-table-toolbar>
+
+    <!--<fdp-column
+        name="id"
+        key="orderId"
+        label="Id"
+        align="start">
+    </fdp-column>
+
+    <fdp-column
+        name="fullName"
+        key="requestor.fullName"
+        label="Submitted By"
+        align="start">
+    </fdp-column>
+
+    <fdp-column
+        name="amount"
+        key="Amount"
+        label="Amount">
+    </fdp-column>
+
+    <fdp-column
+        name="quantity"
+        key="quantity"
+        label="Quantity">
+    </fdp-column>-->
+</fdp-table>

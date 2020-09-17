@@ -1,0 +1,9 @@
+<fd-toolbar [clearBorder]="true" [hasTitle]="!!title" >
+    <label fd-toolbar-label>{{ title }} <span *ngIf="!hideItemCount">(0)</span></label>
+
+    <ng-container *ngIf="tableToolbarActionsComponent">
+        <fd-toolbar-spacer></fd-toolbar-spacer>
+
+        <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
+    </ng-container>
+</fd-toolbar>

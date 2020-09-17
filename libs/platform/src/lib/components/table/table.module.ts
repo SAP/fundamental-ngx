@@ -1,13 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TableWrapperComponent } from './table-wrapper.component';
+import { TableModule, ToolbarModule } from '@fundamental-ngx/core';
+
 import { TableComponent } from './table.component';
+import { TableWrapperComponent } from './table-wrapper.component';
+import { TableColumnComponent } from './table-column/table-column.component';
+import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
+import { TableToolbarActionsComponent } from './table-toolbar-actions/table-toolbar-actions.component';
+import { TableBodyDirective } from './directives/table-body.directive';
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [TableComponent, TableWrapperComponent],
-    exports: [TableComponent, TableWrapperComponent],
+    imports: [CommonModule, TableModule, ToolbarModule],
+    declarations: [
+        TableComponent,
+        TableWrapperComponent,
+        TableColumnComponent,
+        TableToolbarComponent,
+        TableToolbarActionsComponent,
+        TableBodyDirective
+    ],
+    exports: [
+        TableComponent,
+        TableWrapperComponent,
+        TableColumnComponent,
+        TableToolbarComponent,
+        TableToolbarActionsComponent,
+        TableBodyDirective
+    ],
     providers: []
 })
 export class PlatformTableModule {}
