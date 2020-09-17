@@ -36,7 +36,8 @@ export class IconComponent extends AbstractFdNgxClass {
      * */
     @Input() glyph;
 
-    /**
+    /** @deprecated
+     * Icon size is deprecated. The size can be set by font-size. It will be removed after version 0.23
      * The size of the icon
      * The predefined values for the input size are *xs*, *s*, *l*, and *xl*.
      * *size* can accept any other string, for example *xxs*, which will be translated into class *sap-icon--xxs*.
@@ -47,10 +48,6 @@ export class IconComponent extends AbstractFdNgxClass {
     _setProperties(): void {
         if (this.glyph) {
             this._addClassToElement(PREFIX_ICON_CLASS + this.glyph);
-        }
-
-        if (this.size) {
-            this._addClassToElement(PREFIX_ICON_CLASS + this.size);
         }
     }
 
