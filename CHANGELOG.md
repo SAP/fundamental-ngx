@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.68...v0.22.0-rc.69) (2020-09-17)
+
+
+### Bug Fixes
+
+* (platform) fix of defects related to Search Field ([#3237](https://github.com/SAP/fundamental-ngx/issues/3237)) ([cc12e3b](https://github.com/SAP/fundamental-ngx/commit/cc12e3b720723f6027239a6be804fac7f1aef323))
+
 ## [0.22.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.67...v0.22.0-rc.68) (2020-09-17)
 
 
