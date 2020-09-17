@@ -3,7 +3,15 @@ $sub-header--margin-left: 20px;
 :host {
     display: block;
     padding: 20px;
-    border: 1px #eee solid;
+    border-width: 0.0625rem;
+    border-width: var(--sapElement_BorderWidth, 0.0625rem);
+    border-color: #89919a;
+    border-color: var(--sapField_BorderColor, #89919a);
+    border-style: solid;
+    border-radius: 0.25rem;
+    border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+    background-color: #f7f7f7;
+    background-color: var(--sapBackgroundColor, #f7f7f7);
 }
 
 .form-group {
@@ -37,6 +45,8 @@ $sub-header--margin-left: 20px;
 .schema--sub-header {
     margin-left: $sub-header--margin-left;
     margin-bottom: 10px;
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
     :host + & {
         margin-top: 15px;
     }
