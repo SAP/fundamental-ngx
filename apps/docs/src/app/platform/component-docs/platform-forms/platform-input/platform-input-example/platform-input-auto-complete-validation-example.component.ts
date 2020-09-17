@@ -1,5 +1,5 @@
-import { Component, OnInit, TemplateRef, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PopoverComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-platform-input-auto-complete-form-validation-example',
@@ -7,10 +7,13 @@ import { FormBuilder } from '@angular/forms';
     styleUrls: ['./platform-input-auto-complete-validation-example.component.scss']
 })
 export class PlatformInputAutoCompleteValidationExampleComponent implements OnInit {
-    submitted = false;
-    inputText: string;
-    state = false;
-    options: string[];
+
+    public inputText: string;
+    public options: string[];
+
+    /** Whether the combobox is opened. */
+    public open: boolean;
+
 
     public sportsData: string[] = [
         'American Football',
@@ -25,36 +28,32 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
         'Tennis'
     ];
 
-    /** Whether the combobox is opened. */
-    @Input()
-    open: boolean;
+    @ViewChild('typeahead')
+    typeahead: PopoverComponent;
 
-    /**
-     * The template with which to display the individual listed items.
-     * Use it by passing an ng-template with implicit content. See examples for more info.
-     */
-    @Input()
-    itemTemplate: TemplateRef<any>;
-
-    constructor(private fb: FormBuilder) {}
+    constructor() {}
 
     ngOnInit(): void {
-        this.options = this.sportsData;
+        this.options = [];
     }
 
     filter(value: string): string[] {
         const filterValue = value.toLowerCase();
+        if (filterValue.length === 0) {
+            return [];
+        }
         return this.sportsData.filter((item: string) => item.toLowerCase().includes(filterValue));
     }
 
     onSearchChange(): void {
         this.options = this.filter(this.inputText);
-        this.open = true;
+        this.open = (this.options.length > 0);
+        this.typeahead.updatePopover();
     }
 
     onItemClick(clickedValue): void {
         this.inputText = clickedValue;
-        this.options = this.filter(this.inputText);
+        this.options = [];
         this.open = false;
     }
 }
