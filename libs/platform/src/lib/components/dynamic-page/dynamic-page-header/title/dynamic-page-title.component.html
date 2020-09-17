@@ -1,0 +1,45 @@
+<!-- <div class="fd-dynamic-page__title-area fd-dynamic-page__title-area--xl" tabindex="0"> -->
+<!-- <ul class="fd-dynamic-page__breadcrumb fd-breadcrumb">
+        <li class="fd-breadcrumb__item"><a class="fd-breadcrumb__link" tabindex="0" href="#">Men</a></li>
+        <li class="fd-breadcrumb__item"><a class="fd-breadcrumb__link" tabindex="0" href="#">Shoes</a></li>
+        <li class="fd-breadcrumb__item">
+            <a class="fd-breadcrumb__link" tabindex="0" href="#">Running Shoes</a>
+        </li>
+    </ul> -->
+<!-- todo check if templateref can be taken and class added for breadcrumb -->
+<!-- <ng-container *ngIf="size === 'medium' ? tabletDisplay : normalDisplay"> </ng-container> -->
+<!-- <ng-container *ngIf="size === 'medium'; then tabletDisplay; else normalDisplay"></ng-container> -->
+<!-- <div>
+    <ng-template [ngIf]="size === 'medium'">
+        <ng-container *ngTemplateOutlet="tabletDisplay"></ng-container>
+    </ng-template>
+    <ng-template [ngIf]="size !== 'medium'">
+        <ng-container *ngTemplateOutlet="normalDisplay"></ng-container>
+    </ng-template>
+</div>
+
+<ng-template #tabletDisplay>
+    <div class="fd-dynamic-page__breadcrumb-container">
+        <ng-content select="fd-breadcrumb"></ng-content>
+        <ng-content select="fdp-dynamic-page-layout-actions"></ng-content>
+    </div>
+    <div class="fd-dynamic-page__title-container">
+        <div class="fd-dynamic-page__title">{{ title }}</div>
+        <ng-content select="fdp-dynamic-page-key-info"></ng-content>
+        <ng-content select="fdp-dynamic-page-global-actions"></ng-content>
+    </div>
+</ng-template>
+<ng-template #normalDisplay> -->
+<!-- <div class="fd-dynamic-page__breadcrumb"><ng-content select="fd-breadcrumb"></ng-content></div> -->
+<ng-content select="fd-breadcrumb"></ng-content>
+<div class="fd-dynamic-page__title-container">
+    <div class="fd-dynamic-page__title">{{ title }}</div>
+    <!-- <div class="fd-dynamic-page__title-content">Some RANDOM things</div> -->
+    <ng-content select="fdp-dynamic-page-key-info"></ng-content>
+    <ng-content select="fdp-dynamic-page-global-actions"></ng-content>
+    <ng-content select="fdp-dynamic-page-layout-actions"></ng-content>
+</div>
+<!-- </ng-template> -->
+<div class="fd-dynamic-page__subtitle" *ngIf="subtitle">{{ subtitle }}</div>
+
+<!-- </div> -->

@@ -1,0 +1,24 @@
+<header>Dynamic Page</header>
+<description>
+    The dynamic page is the foundation for all pages in SAP Fiori. It is a generic layout designed to support various
+    use cases; there, the content of both the header and page can vary.
+    <br />
+    <br />
+    The header of the dynamic page is collapsible, which helps the users focus on the actual page content but still
+    ensures that important header information and actions are readily available.
+    <br />
+    <br />
+    <br />
+
+    <h3>Platform specific enhancements:</h3>
+    <ul>
+        <li>
+            Automatic generation of tab navigation and control of multiple content panels.
+        </li>
+    </ul>
+</description>
+<br />
+<import module="PlatformDynamicPageModule"></import>
+
+<fd-header-tabs></fd-header-tabs>
+<router-outlet></router-outlet>

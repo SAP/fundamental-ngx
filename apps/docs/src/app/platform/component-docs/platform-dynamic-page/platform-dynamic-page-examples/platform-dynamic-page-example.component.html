@@ -1,0 +1,177 @@
+<!-- <fdp-dynamic-page></fdp-dynamic-page> -->
+<!-- <div> -->
+<fdp-dynamic-page background="transparent" size="medium" ariaLabel="Example Dynamic Page">
+    <fdp-dynamic-page-title [title]="'Page Title'" [subtitle]="'Page Summary'">
+        <!-- breadcrumb content -->
+        <fd-breadcrumb>
+            <fd-breadcrumb-item>
+                <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 1</a>
+            </fd-breadcrumb-item>
+            <fd-breadcrumb-item>
+                <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 2</a>
+            </fd-breadcrumb-item>
+            <fd-breadcrumb-item>
+                <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 3</a>
+            </fd-breadcrumb-item>
+            <fd-breadcrumb-item>
+                <span>Breadcrumb Level 4</span>
+            </fd-breadcrumb-item>
+        </fd-breadcrumb>
+
+        <fdp-dynamic-page-key-info>
+            <!-- key information content -->
+            Some random stuff here
+        </fdp-dynamic-page-key-info>
+        <!-- <div class="fd-dynamic-page__toolbar fd-toolbar fd-toolbar--clear fd-toolbar--transparent">
+            <button class="fd-button fd-button--compact fd-button--positive">Accept</button>
+            <button class="fd-button fd-button--compact fd-button--reject">Reject</button>
+            <div class="fd-dynamic-page__toolbar--actions fd-toolbar fd-toolbar--clear fd-toolbar--transparent">
+                <button class="fd-button fd-button--transparent" aria-label="Survey">
+                    <i class="sap-icon--survey"></i>
+                </button>
+                <button class="fd-button fd-button--transparent" aria-label="Pool">
+                    <i class="sap-icon--pool"></i>
+                </button>
+                <button class="fd-button fd-button--transparent" aria-label="Chart">
+                    <i class="sap-icon--pie-chart"></i>
+                </button>
+            </div>
+        </div> -->
+        <fdp-dynamic-page-global-actions>
+            <!-- global actions -->
+            <fd-toolbar [fdType]="'transparent'" [clearBorder]="true">
+                <button
+                    fd-toolbar-item
+                    fd-button
+                    [compact]="true"
+                    [fdType]="'positive'"
+                    (click)="$event.stopPropagation()"
+                >
+                    Accept
+                </button>
+                <button
+                    fd-toolbar-item
+                    fd-button
+                    [compact]="true"
+                    [fdType]="'negative'"
+                    (click)="$event.stopPropagation()"
+                >
+                    Reject
+                </button>
+                <!-- <button fd-toolbar-item fd-button [compact]="true">Button</button>
+                <button
+                    fd-toolbar-item
+                    fd-button
+                    [compact]="true"
+                    [glyph]="'cart'"
+                    aria-label="Add to Cart"
+                    title="Add to Cart"
+                ></button> -->
+            </fd-toolbar>
+        </fdp-dynamic-page-global-actions>
+        <fdp-dynamic-page-layout-actions>
+            <!-- layout actions -->
+            <fd-toolbar [fdType]="'transparent'" [clearBorder]="true">
+                <button fd-button [fdType]="'transparent'" aria-label="Survey" (click)="surveyClicked($event)">
+                    <i class="sap-icon--survey"></i>
+                </button>
+                <button fd-button [fdType]="'transparent'" aria-label="Pool" (click)="$event.stopPropagation()">
+                    <i class="sap-icon--pool"></i>
+                </button>
+                <button fd-button [fdType]="'transparent'" aria-label="Chart" (click)="$event.stopPropagation()">
+                    <i class="sap-icon--pie-chart"></i>
+                </button>
+            </fd-toolbar>
+        </fdp-dynamic-page-layout-actions>
+    </fdp-dynamic-page-title>
+    <fdp-dynamic-page-header
+        [collapsible]="true"
+        [pinnable]="true"
+        [collapsed]="false"
+        (collapseChange)="onCollapseChange($event)"
+    >
+        <!-- collapsible header content goes here -->
+        <span
+            >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto perspiciatis,
+            delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit repellendus esse,
+            facere autem optio consequatur nobis?</span
+        >
+    </fdp-dynamic-page-header>
+    <fdp-dynamic-page-content style="overflow: scroll; height: 20rem;" id="basic">
+        <!-- page content goes here -->
+        Normal Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam maiores.
+        Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis, nobis.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident similique, voluptatibus
+        obcaecati perferendis excepturi.
+        <br />
+        <br />
+        <br />
+        Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora
+        aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto dignissimos reprehenderit
+        perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel ipsam debitis fuga
+        sequi eveniet perspiciatis?
+        <br />
+        <br />
+        <br />
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed odit?
+        Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore, eos iusto sed.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam maiores. Unde quas
+        quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis, nobis. Lorem
+        ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident similique, voluptatibus obcaecati
+        perferendis excepturi.
+        <br />
+        <br />
+        <br />
+        Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora
+        aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto dignissimos reprehenderit
+        perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel ipsam debitis fuga
+        sequi eveniet perspiciatis?
+        <br />
+        <br />
+        <br />
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed odit?
+        Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore, eos iusto sed.
+        <br />
+        <br />
+        <br />
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus eligendi dolore omnis veritatis! Et voluptatibus
+        error, commodi, dignissimos nostrum nemo deleniti est cumque fuga reiciendis, fugiat impedit explicabo
+        voluptates at?
+        <br />
+        <br />
+        <br />
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, praesentium placeat temporibus facilis
+        similique ut nobis, possimus mollitia dolorum blanditiis error quidem labore natus saepe dolore veritatis iusto
+        minima. Eius. Normal
+    </fdp-dynamic-page-content>
+
+    <fdp-dynamic-page-footer>
+        <!-- page footer content goes here -->
+
+        <!-- <div class="fd-bar fd-bar--floating-footer">
+            <div class="fd-bar__right">
+                <div class="fd-bar__element">
+                    <button aria-label="button" class="fd-button fd-button--emphasized fd-button--compact">
+                        Save
+                    </button>
+                </div>
+                <div class="fd-bar__element">
+                    <button aria-label="button" class="fd-button fd-button--transparent fd-button--compact">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div> -->
+        <div fd-bar [barDesign]="'floating-footer'">
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <button fd-button [fdType]="'emphasized'" [compact]="true">Save</button>
+                </fd-bar-element>
+                <fd-bar-element>
+                    <button fd-button [fdType]="'transparent'" [compact]="true">Cancel</button>
+                </fd-bar-element>
+            </div>
+        </div>
+    </fdp-dynamic-page-footer>
+</fdp-dynamic-page>
+<!-- </div> -->

@@ -9,6 +9,7 @@ export const API_FILES = {
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
     checkboxGroup: ['CheckboxGroupComponent'],
+    dynamicPage: ['DynamicPageComponent'],
     infoLabel: ['InfoLabelComponent'],
     input: ['InputComponent'],
     link: ['LinkComponent'],

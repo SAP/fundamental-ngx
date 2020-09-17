@@ -49,7 +49,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             }
         ];
 
-        this.layouts = [];
+        this.layouts = [{ url: 'platform/dynamic-page', name: 'Dynamic Page' }];
 
         this.utilities = [];
 

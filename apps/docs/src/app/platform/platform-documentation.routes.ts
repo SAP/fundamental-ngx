@@ -41,6 +41,13 @@ export const ROUTES: Routes = [
                     ).then((m) => m.PlatformCheckboxGroupDocsModule)
             },
             {
+                path: 'dynamic-page',
+                loadChildren: () =>
+                    import('./component-docs/platform-dynamic-page/platform-dynamic-page.module').then(
+                        (m) => m.PlatformDynamicPageDocsModule
+                    )
+            },
+            {
                 path: 'link',
                 loadChildren: () =>
                     import('./component-docs/platform-link/platform-link.module').then((m) => m.PlatformLinkDocsModule)
