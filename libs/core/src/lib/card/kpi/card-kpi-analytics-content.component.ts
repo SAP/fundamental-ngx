@@ -1,10 +1,11 @@
-import { OnInit, ElementRef, Renderer2, Component } from '@angular/core';
+import { OnInit, ElementRef, Renderer2, Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { CLASS_NAME } from '../constants';
 
 @Component({
     selector: 'fd-card-kpi-analytics-content',
-    template: '<ng-content></ng-content>'
+    template: '<ng-content></ng-content>',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardKpiAnalyticsContentComponent implements OnInit {
     /** @hidden */
