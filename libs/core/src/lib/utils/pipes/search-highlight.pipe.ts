@@ -4,14 +4,19 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'highlight'
 })
 export class SearchHighlightPipe implements PipeTransform {
-    transform(value: string, args: string, active: boolean = true): string {
+    transform(value: string, args: string, active: boolean = true, includeSpans: boolean = false): string {
+        let result: string = value;
         if (args && value && active) {
-            const startIndex = value.toLowerCase().indexOf(args.toLowerCase());
+            const testStr: string = args.trim().toLowerCase();
+            const startIndex = value.toLowerCase().indexOf(testStr);
             if (startIndex !== -1) {
-                const matchingString = value.substr(startIndex, args.length);
-                return value.replace(matchingString, '<strong>' + matchingString + '</strong>');
+                const matchingString = value.substr(startIndex, testStr.length);
+                result = value.replace(matchingString, '<strong>' + matchingString + '</strong>');
             }
         }
-        return value;
+        if (includeSpans) {
+            result = '<span>' + result + '</span>';
+        }
+        return result;
     }
 }

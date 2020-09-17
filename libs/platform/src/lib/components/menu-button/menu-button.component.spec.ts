@@ -9,6 +9,13 @@ import { PlatformMenuModule } from '../menu/menu.module';
 import { MenuButtonComponent } from './menu-button.component';
 import { MenuItemComponent } from './../menu/menu-item.component';
 
+function mouseClickOnElement(el: Element): void {
+    const event: MouseEvent = new MouseEvent('click', {
+        detail: 1
+    });
+    el.dispatchEvent(event);
+}
+
 describe('MenuButtonComponent', () => {
     let component: MenuButtonComponent;
     let fixture: ComponentFixture<MenuButtonComponent>;
@@ -180,7 +187,7 @@ describe('Menu Button click on Item select', () => {
 
     it('buttonclick should change variable value', () => {
         const menubuttonElement = fixture.debugElement.query(By.css('fdp-menu-button'));
-        menubuttonElement.nativeElement.click();
+        mouseClickOnElement(menubuttonElement.nativeElement);
         fixture.detectChanges();
         expect(host.menuButtonClicked).toBeTruthy();
     });
@@ -190,7 +197,7 @@ describe('Menu Button click on Item select', () => {
          * FIRST-CLICK (OPEN MENU)
          */
         const menubutton = fixture.debugElement.query(By.css('fdp-menu-button'));
-        menubutton.nativeElement.click();
+        mouseClickOnElement(menubutton.nativeElement);
         tick(1);
         fixture.detectChanges();
 

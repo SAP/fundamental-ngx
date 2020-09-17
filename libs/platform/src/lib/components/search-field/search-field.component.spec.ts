@@ -57,6 +57,13 @@ function getDropdownItems(menu: Element): NodeList {
     return items;
 }
 
+function mouseClickOnElement(el: Element): void {
+    const event: MouseEvent = new MouseEvent('click', {
+        detail: 1
+    });
+    el.dispatchEvent(event);
+}
+
 @Component({
     selector: 'fdp-test',
     template: `
@@ -290,7 +297,7 @@ describe('SearchFieldComponent', () => {
 
         // click on category button
         const button = fixture.debugElement.query(By.css('.fdp-search-field__category-button'));
-        button.nativeElement.click();
+        mouseClickOnElement(button.nativeElement);
         tick(1);
         fixture.detectChanges();
 
@@ -306,7 +313,7 @@ describe('SearchFieldComponent', () => {
         expect(host.inputValue.category).toBe(CATEGORIES[2].value);
 
         // click on category button
-        button.nativeElement.click();
+        mouseClickOnElement(button.nativeElement);
         tick(1);
         fixture.detectChanges();
 
@@ -868,7 +875,7 @@ describe('SearchFieldComponent with DataSource', () => {
     it('should be able to filter data source by category', fakeAsync(() => {
         // click on category button
         const button = fixture.debugElement.query(By.css('.fdp-search-field__category-button'));
-        button.nativeElement.click();
+        mouseClickOnElement(button.nativeElement);
         tick(1);
         fixture.detectChanges();
 

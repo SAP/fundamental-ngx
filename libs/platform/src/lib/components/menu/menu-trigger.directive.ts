@@ -93,7 +93,11 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             $event.preventDefault();
             $event.stopPropagation();
         }
-        this.toggleMenu();
+        // filter out clicks initiated by keyboard enter
+        if ($event.detail > 0) {
+            this.toggleMenu();
+        }
+
     }
 
     /** @hidden Handled keypress which focus is on trigger element. */

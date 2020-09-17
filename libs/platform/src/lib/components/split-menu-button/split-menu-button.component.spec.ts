@@ -8,6 +8,13 @@ import { createKeyboardEvent } from '../../testing/event-objects';
 import { PlatformMenuModule } from '../menu/menu.module';
 import { SplitMenuButtonComponent } from './split-menu-button.component';
 
+function mouseClickOnElement(el: Element): void {
+    const event: MouseEvent = new MouseEvent('click', {
+        detail: 1
+    });
+    el.dispatchEvent(event);
+}
+
 @Component({
     selector: 'fdp-test-fdp-split-menu-button',
     template: `
@@ -86,7 +93,7 @@ describe('SplitMenuButtonComponent', () => {
          * FIRST-CLICK On Menu Button (OPEN MENU)
          */
         const buttons = fixture.debugElement.queryAll(By.css('button'));
-        buttons[1].nativeElement.click();
+        mouseClickOnElement(buttons[1].nativeElement);
         tick(1);
         fixture.detectChanges();
 
@@ -106,7 +113,7 @@ describe('SplitMenuButtonComponent', () => {
          * FIRST-CLICK On Menu Button (OPEN MENU)
          */
         const buttons1 = fixture.debugElement.queryAll(By.css('button'));
-        buttons1[1].nativeElement.click();
+        mouseClickOnElement(buttons[1].nativeElement);
         tick(1);
         fixture.detectChanges();
 
