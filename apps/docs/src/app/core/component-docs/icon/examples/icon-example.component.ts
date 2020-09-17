@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 export class IconExampleComponent {
     icons: string[] = [
-        '',
         'accelerated',
         'accept',
         'accidental-leave',

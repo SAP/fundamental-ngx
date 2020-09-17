@@ -17,6 +17,8 @@ rtl-switch {
 .docs-tile.docs-tile-example-background {
     background-color: #f7f7f7;
     background-color: var(--sapBackgroundColor, #f7f7f7);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
 }
 
 span.fd-badge,
