@@ -1,6 +1,8 @@
 <div class="fd-button-split" role="group" aria-label="split-button" [attr.dir]="dir">
     <button
         fd-button
+        #primaryBtn
+        [ngStyle]="{ width: primaryButtonWidth }"
         [attr.id]="id"
         [attr.name]="name"
         [attr.title]="title"

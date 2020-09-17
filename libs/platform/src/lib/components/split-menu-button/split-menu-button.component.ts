@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    ChangeDetectionStrategy,
+    ElementRef,
+    EventEmitter,
+    ViewChild
+} from '@angular/core';
 import { Input, Output, OnInit, OnDestroy, Optional } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ButtonType, RtlService } from '@fundamental-ngx/core';
@@ -18,7 +26,11 @@ import { BaseComponent } from '../base';
     styleUrls: ['split-menu-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SplitMenuButtonComponent extends BaseComponent implements OnInit, OnDestroy {
+export class SplitMenuButtonComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
+    /** Whether or not the element should keep a fixed width. The width could change if the text changes length. */
+    @Input()
+    fixedWidth = true;
+
     /** text for tooltip */
     @Input()
     title: string;
@@ -49,6 +61,10 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, O
     @Output()
     primaryButtonClick: EventEmitter<any> = new EventEmitter();
 
+    /** @hidden */
+    @ViewChild('primaryBtn', { read: ElementRef })
+    primaryBtn: ElementRef;
+
     /** used as id for Menu Button
      * @hidden
      */
@@ -58,6 +74,9 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, O
      * @hidden */
     public dir: string;
 
+    /** @hidden */
+    primaryButtonWidth: string;
+
     /** handles rtl service
      * @hidden */
     private _rtlChangeSubscription = Subscription.EMPTY;
@@ -66,6 +85,7 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, O
         super(_cd);
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this.secondaryId = 'secondary-' + this.id;
         // if no title provided.
@@ -76,6 +96,14 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, O
         });
     }
 
+    /** @hidden */
+    ngAfterViewInit(): void {
+        if (this.fixedWidth) {
+            this._setPrimaryButtonWidth();
+        }
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
         this._rtlChangeSubscription.unsubscribe();
     }
@@ -86,5 +114,12 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, O
     public primaryButtonClicked(event: any): void {
         event.stopPropagation();
         this.primaryButtonClick.emit();
+    }
+
+    /** @hidden */
+    private _setPrimaryButtonWidth(): void {
+        if (this.primaryBtn && this.primaryBtn.nativeElement) {
+            this.primaryButtonWidth = this.primaryBtn.nativeElement.getBoundingClientRect().width + 'px';
+        }
     }
 }
