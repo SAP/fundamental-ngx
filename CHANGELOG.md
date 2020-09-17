@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.70...v0.22.0-rc.71) (2020-09-17)
+
+
+### Bug Fixes
+
+* add partial keyword in DialogConfig ([#3307](https://github.com/SAP/fundamental-ngx/issues/3307)) ([7d7aa88](https://github.com/SAP/fundamental-ngx/commit/7d7aa88519181dceca5f10afe8eaa9d49bac2652))
+
 ## [0.22.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.69...v0.22.0-rc.70) (2020-09-17)
 
 
