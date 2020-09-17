@@ -20,9 +20,19 @@ export const API_FILES = {
     card: [
         'CardComponent',
         'CardHeaderComponent',
+        'CardTitleComponent',
+        'CardSubtitleComponent',
+        'CardSecondSubtitleComponent',
         'CardContentComponent',
         'CardFooterComponent',
-        'CardLoaderComponent'
+        'CardLoaderComponent',
+        'CardKpiHeaderComponent',
+        'CardKpiValueComponent',
+        'CardKpiScaleIconComponent',
+        'CardKpiScaleTextComponent',
+        'CardKpiAnalyticsComponent',
+        'CardKpiAnalyticsLabelComponent',
+        'CardKpiAnalyticsContentComponent'
     ],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],

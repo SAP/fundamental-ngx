@@ -40,7 +40,10 @@ export class CardComponent implements OnInit {
     @Input()
     isLoading = false;
 
-    /** Indicates when card should show a loader  */
+    /**
+     * cardType can be 'object' | 'standard' | 'component' | 'analytical' | 'list' | 'table' | 'quickView' | 'linkList'
+     * to indicate what card's type it belongs to
+     */
     @Input()
     set cardType(cardType: CardType) {
         this._setCardType(cardType);

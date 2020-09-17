@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 import * as cardExampleHtml from '!raw-loader!./examples/card-example.component.html';
+import * as cardCompactExampleHtml from '!raw-loader!./examples/card-compact-example.component.html';
 import * as cardLoaderExampleHtml from '!raw-loader!./examples/card-loader-example.component.html';
 import * as cardFooterExampleHtml from '!raw-loader!./examples/card-footer-example.component.html';
 import * as cardKpiExampleHtml from '!raw-loader!./examples/card-kpi-example.component.html';
@@ -16,6 +17,14 @@ export class CardDocsComponent {
             language: 'html',
             code: cardExampleHtml,
             fileName: 'card-example'
+        }
+    ];
+
+    compact: ExampleFile[] = [
+        {
+            language: 'html',
+            code: cardCompactExampleHtml,
+            fileName: 'card-compact-example'
         }
     ];
 

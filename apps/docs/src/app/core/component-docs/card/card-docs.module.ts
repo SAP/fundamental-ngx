@@ -10,6 +10,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardDocsComponent } from './card-docs.component';
 import { CardExampleComponent } from './examples/card-example.component';
+import { CardCompactExampleComponent } from './examples/card-compact-example.component';
 import { CardLoaderExampleComponent } from './examples/card-loader-example.component';
 import { CardFooterExampleComponent } from './examples/card-footer-example.component';
 import { CardKpiExampleComponent } from './examples/card-kpi-example.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
         CardDocsComponent,
         CardHeaderComponent,
         CardExampleComponent,
+        CardCompactExampleComponent,
         CardLoaderExampleComponent,
         CardFooterExampleComponent,
         CardKpiExampleComponent
