@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.69...v0.22.0-rc.70) (2020-09-17)
+
+
+### Bug Fixes
+
+* (platform) Fixing styles for input auto-complete example ([#3192](https://github.com/SAP/fundamental-ngx/issues/3192)) ([366523d](https://github.com/SAP/fundamental-ngx/commit/366523d1ab4516e1d350aca058795c4ec6e28d17))
+
 ## [0.22.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.68...v0.22.0-rc.69) (2020-09-17)
 
 
