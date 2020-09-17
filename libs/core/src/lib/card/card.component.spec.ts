@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { CardModule } from './card.module';
 import { CardComponent } from './card.component';
-import { By } from '@angular/platform-browser';
-import { CardType } from './constants';
+import { CardType, CLASS_NAME } from './constants';
+import { getCardModifierClassNameByCardType } from './utils';
 
 @Component({
     template: `
@@ -19,7 +21,7 @@ import { CardType } from './constants';
         </fd-card>
     `
 })
-class CardHostCardComponentTestComponent {
+class CardHostTestComponent {
     @ViewChild(CardComponent) card: CardComponent;
 
     badgeText = 'New';
@@ -33,26 +35,31 @@ class CardHostCardComponentTestComponent {
     cardType: CardType = 'standard';
 }
 describe('CardComponent', () => {
-    let fixture: ComponentFixture<CardHostCardComponentTestComponent>;
-    let host: CardHostCardComponentTestComponent;
+    let fixture: ComponentFixture<CardHostTestComponent>;
+    let host: CardHostTestComponent;
     let card: CardComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [CardModule],
-            declarations: [CardComponent]
+            imports: [CommonModule, CardModule],
+            declarations: [CardHostTestComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CardHostCardComponentTestComponent);
+        fixture = TestBed.createComponent(CardHostTestComponent);
         host = fixture.componentInstance;
-        card = host.card;
         fixture.detectChanges();
+        card = host.card;
     });
 
     it('should create', () => {
         expect(host).toBeTruthy();
+    });
+
+    it('should add card className to host', () => {
+        const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
+        expect(cardDebugEl.classes[CLASS_NAME.card]).toBeTrue();
     });
 
     describe('badge option', () => {
@@ -86,30 +93,14 @@ describe('CardComponent', () => {
             expect(card.isLoading).toBe(host.isLoading);
         });
 
-        it('should render loader template if isLoading = true', () => {
+        it('should render only loader template if isLoading = true', () => {
             host.isLoading = true;
 
             fixture.detectChanges();
 
             const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
 
-            expect(cardEl.textContent.includes(host.loaderText)).toBeTruthy();
-            expect(cardEl.textContent.includes(host.titleText)).not.toBeTruthy();
-            expect(cardEl.textContent.includes(host.contentText)).not.toBeTruthy();
-            expect(cardEl.textContent.includes(host.footerText)).not.toBeTruthy();
-        });
-
-        it('should not render other content if isLoading = true', () => {
-            host.isLoading = true;
-
-            fixture.detectChanges();
-
-            const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
-
-            expect(cardEl.textContent.includes(host.loaderText)).toBeTruthy();
-            expect(cardEl.textContent.includes(host.titleText)).not.toBeTruthy();
-            expect(cardEl.textContent.includes(host.contentText)).not.toBeTruthy();
-            expect(cardEl.textContent.includes(host.footerText)).not.toBeTruthy();
+            expect(cardEl.textContent).toEqual(host.loaderText);
         });
     });
 
@@ -119,7 +110,33 @@ describe('CardComponent', () => {
         });
 
         it('should apply corresponding className', () => {
-            //
+            host.isCompact = true;
+
+            fixture.detectChanges();
+
+            const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
+
+            expect(cardDebugEl.classes[CLASS_NAME.cardCompact]).toBeTrue();
+        });
+    });
+
+    describe('cardType', () => {
+        it('should has banding', () => {
+            expect(card.cardType).toBe(host.cardType);
+        });
+
+        it('should apply corresponding className and remove previous', () => {
+            const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
+
+            const prevCardType = card.cardType;
+            const prevCardTypeModifier = getCardModifierClassNameByCardType(prevCardType);
+            expect(cardDebugEl.classes[prevCardTypeModifier]).toBeTrue();
+
+            host.cardType = 'analytical';
+            const analyticalModifier = getCardModifierClassNameByCardType('analytical');
+            fixture.detectChanges();
+            expect(cardDebugEl.classes[analyticalModifier]).toBeTrue();
+            expect(cardDebugEl.classes[prevCardTypeModifier]).not.toBeTrue();
         });
     });
 });
