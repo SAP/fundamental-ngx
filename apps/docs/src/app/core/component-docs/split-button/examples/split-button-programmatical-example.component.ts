@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuItemComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-split-button-programmatical-example',
@@ -15,4 +16,11 @@ import { Component } from '@angular/core';
     ]
 })
 export class ButtonSplitProgrammaticalExampleComponent {
+
+    selectedOption: MenuItemComponent;
+
+    select(option: MenuItemComponent): void {
+        this.selectedOption = option;
+    }
+
 }

@@ -65,8 +65,9 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     @Input()
     submenu: BaseSubmenu;
 
+    /** Emitted when the menu item is selected. */
     @Output()
-    selected: EventEmitter<void> = new EventEmitter<void>();
+    onSelect: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden Reference to the Menu Item title */
     @ContentChild(MenuTitleDirective)
@@ -141,6 +142,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     setSelected(isSelected: boolean): void {
         this.menuInteractive.setSelected(isSelected);
         this.submenuVisible = isSelected && !!this.submenu;
+        this.onSelect.emit();
         this._changeDetectorRef.markForCheck();
     }
 

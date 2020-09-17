@@ -1,16 +1,27 @@
 import {
+    AfterContentInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
+    ElementRef,
     EventEmitter,
     Input,
+    OnChanges,
+    OnDestroy,
     Output,
+    SimpleChanges,
     TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { ButtonType } from '../button/button.component';
 import { MenuComponent } from '../menu/menu.component';
+import { MenuItemComponent } from '../menu/menu-item/menu-item.component';
+import { Subscription } from 'rxjs';
+import { MainAction } from './main-action';
+import { first } from 'rxjs/operators';
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
@@ -40,7 +51,7 @@ import { MenuComponent } from '../menu/menu.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent {
+export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy {
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -54,7 +65,7 @@ export class SplitButtonComponent {
     @Input()
     disabled: boolean;
 
-    /** The Title for main  action button */
+    /** @deprecated The Title for main action button. This will be deprecated as an input but will remain a property on this component. */
     @Input()
     mainActionTitle: string;
 
@@ -66,6 +77,21 @@ export class SplitButtonComponent {
     /** Aria-label used to describe expand button*/
     @Input()
     expandButtonAriaLabel = 'More';
+
+    /** Selected menu item */
+    @Input()
+    selected: MenuItemComponent;
+
+    /** Whether or not the element should keep a fixed width. The width could change if the text changes length. */
+    @Input()
+    fixedWidth = true;
+
+    /**
+     * The object that contains the mainActionTitle, keepMainAction option and the callback function that should be
+     * executed when the button is clicked.
+     */
+    @Input()
+    mainAction: MainAction;
 
     /** Event sent when primary button is clicked */
     @Output()
@@ -79,9 +105,116 @@ export class SplitButtonComponent {
     @ContentChild(MenuComponent)
     menu: MenuComponent;
 
+    /** @hidden */
+    @ViewChild('mainActionButton', { read: ElementRef })
+    mainActionBtn: ElementRef;
+
+    /** @hidden */
+    mainButtonWidth: string;
+
+    /** @hidden */
+    private _menuItemSubscriptions = new Subscription();
+
+    /** @hidden */
+    private _menuSubscription = new Subscription();
+
+    /** @hidden */
+    constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {}
+
     /** @hidden Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {
         this.primaryButtonClicked.emit(event);
+        if (this.selected) {
+            this.selected.elementRef.nativeElement.click();
+        } else if (this.mainAction && this.mainAction.callback) {
+            this.mainAction.callback();
+        }
         event.stopPropagation();
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this._setupMenuSubscription();
+        this._setupMenuItemSubscriptions();
+        this._handleMainActionObject();
+
+        if (!this.mainActionTitle && !this.titleTemplate && !this.selected) {
+            this.selectMenuItem(this.menu.menuItems.first);
+        } else if (!this.mainActionTitle && this.selected) {
+            this.selectMenuItem(this.selected);
+        }
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes && changes.selected) {
+            this.selectMenuItem(this.selected);
+        } else if (changes && changes.mainAction) {
+            this._handleMainActionObject();
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._menuItemSubscriptions.unsubscribe();
+        this._menuSubscription.unsubscribe();
+    }
+
+    /** Function called to select a menu item for the split button. */
+    selectMenuItem(menuItem: MenuItemComponent): void {
+        if (menuItem && (!this.mainAction || !this.mainAction.keepMainAction)) {
+            menuItem.setSelected(true);
+        }
+    }
+
+    /** @hidden */
+    private _getMainButtonWidth(): void {
+        if (this.mainActionBtn && this.mainActionBtn.nativeElement) {
+            this.mainButtonWidth = this.mainActionBtn.nativeElement.getBoundingClientRect().width + 'px';
+        }
+    }
+
+    /** @hidden */
+    private _setupMenuItemSubscriptions(): void {
+        this.menu.menuItems.forEach(menuItem => {
+            menuItem.onSelect.pipe(first()).subscribe(() => {
+                if (this.fixedWidth) {
+                    this._getMainButtonWidth();
+                }
+            });
+            this._menuItemSubscriptions.add(
+                menuItem.onSelect.subscribe(() => {
+                    this._handleMenuItemSelection(menuItem);
+                })
+            );
+        });
+    }
+
+    /** @hidden */
+    private _handleMenuItemSelection(menuItem: MenuItemComponent): void {
+        if (!this.mainAction || !this.mainAction.keepMainAction) {
+            this.selected = menuItem;
+            this.titleTemplate = null;
+            this.mainActionTitle = menuItem.menuItemTitle.title;
+            this._cdRef.detectChanges();
+        }
+    }
+
+    /** @hidden */
+    private _setupMenuSubscription(): void {
+        this._menuSubscription = this.menu.menuItems.changes.subscribe(() => {
+            this._menuItemSubscriptions.unsubscribe();
+            this._menuItemSubscriptions.closed = false;
+            this._setupMenuItemSubscriptions();
+        });
+    }
+
+    /** @hidden */
+    private _handleMainActionObject(): void {
+        if (this.mainAction && typeof this.mainAction.mainActionTitle === 'string') {
+            this.mainActionTitle = this.mainAction.mainActionTitle;
+        } else if (this.mainAction && this.mainAction.mainActionTitle instanceof TemplateRef) {
+            this.titleTemplate = this.mainAction.mainActionTitle;
+        }
     }
 }
