@@ -21,7 +21,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
-import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
 import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection, KeyUtil } from '../utils/public_api';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
@@ -204,7 +203,7 @@ export class MultiInputComponent implements
     listComponent: ListComponent;
 
     /** @hidden */
-    @ViewChild('searchInputElement')
+    @ViewChild('searchInputElement', { read: ElementRef })
     searchInputElement: ElementRef;
 
     /** @hidden */
@@ -213,9 +212,6 @@ export class MultiInputComponent implements
 
     /** @hidden */
     displayedValues: any[] = [];
-
-    /** @hidden */
-    focusTrap: FocusTrap;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -241,7 +237,6 @@ export class MultiInputComponent implements
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
-        this.setupFocusTrap();
     }
 
     /** @hidden */
@@ -393,6 +388,13 @@ export class MultiInputComponent implements
                 event.preventDefault();
             }
         }
+
+        if (KeyUtil.isKey(event, 'Tab') && this.open) {
+            if (this.listComponent) {
+                this.listComponent.setItemActive(0);
+                event.preventDefault();
+            }
+        }
     }
 
     /** @hidden */
@@ -482,29 +484,12 @@ export class MultiInputComponent implements
         return str;
     }
 
-    private setupFocusTrap(): void {
-        try {
-            this.focusTrap = focusTrap(this._elementRef.nativeElement, {
-                clickOutsideDeactivates: true,
-                returnFocusOnDeactivate: true,
-                escapeDeactivates: false
-            });
-        } catch (e) {
-            console.warn('Unsuccessful attempting to focus trap the Multi Input.');
-        }
-    }
-
     /**
      * @hidden
      */
     private _popoverOpenHandle(open: boolean): void {
         this.open = open;
         this.onTouched();
-        if (this.open) {
-            this.focusTrap.activate();
-        } else {
-            this.focusTrap.deactivate();
-        }
     }
 
     /** @hidden */
