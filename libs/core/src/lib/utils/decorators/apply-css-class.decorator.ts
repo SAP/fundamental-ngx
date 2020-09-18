@@ -52,7 +52,7 @@ function unique(value: unknown, index: number, list: unknown[]): boolean {
     return list.indexOf(value) === index;
 }
 
-/** Splits merged classes, removes falsy elements and leave only unique items */
+/** Splits merged classes, removes falsy elements and leaves only unique items */
 function sanitize(array: string[]): string[] {
     return array
         .filter(Boolean)
