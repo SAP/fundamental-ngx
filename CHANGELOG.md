@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.72...v0.22.0-rc.73) (2020-09-18)
+
+
+### Bug Fixes
+
+* Bring valid selection into multi input component ([#3213](https://github.com/SAP/fundamental-ngx/issues/3213)) ([95f0fa3](https://github.com/SAP/fundamental-ngx/commit/95f0fa3161cb257b66e70497424292882847bac1))
+
 ## [0.22.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.71...v0.22.0-rc.72) (2020-09-17)
 
 ## [0.22.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.70...v0.22.0-rc.71) (2020-09-17)
