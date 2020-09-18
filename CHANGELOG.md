@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.73...v0.22.0-rc.74) (2020-09-18)
+
+
+### Bug Fixes
+
+* (platform) split menu button fix for label change on action selection from menu ([#3230](https://github.com/SAP/fundamental-ngx/issues/3230)) ([ff0e21f](https://github.com/SAP/fundamental-ngx/commit/ff0e21f1d2eb2e057e104a3dc0326e1b35794e86))
+
 ## [0.22.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.72...v0.22.0-rc.73) (2020-09-18)
 
 
