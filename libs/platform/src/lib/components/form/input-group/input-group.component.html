@@ -14,8 +14,9 @@
                    [placeholder]="placeholder"
                    [contentDensity]="contentDensity"
                    [type]="_input.type"
-                   [(ngModel)]="value"
-                   [ngModelOptions]="{ standalone: true }"
+                   [disabled]="disabled"
+                   [value]="value"
+                   (input)="_onChangeInputValue($event.target.value)"
                    (focusChange)="_onFocusChanged($event)"></fdp-input>
     </ng-container>
 
