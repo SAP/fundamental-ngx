@@ -58,6 +58,15 @@ export class InputGroupAddonComponent implements AfterContentInit {
     }
 
     /** @hidden */
+    set disabled(disabled: boolean) {
+        this._disabled = disabled;
+        this._setButtonControlOptions();
+    }
+    get disabled(): boolean {
+        return this._disabled;
+    }
+
+    /** @hidden */
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;
 
@@ -73,6 +82,9 @@ export class InputGroupAddonComponent implements AfterContentInit {
 
     /** @hidden */
     private _contentDensity: ContentDensity;
+
+    /** @hidden */
+    private _disabled = false;
 
     /** @hidden */
     constructor(private _renderer: Renderer2) {}
@@ -91,6 +103,8 @@ export class InputGroupAddonComponent implements AfterContentInit {
         }
 
         button.contentDensity = this._contentDensity;
+        button.disabled = this._disabled;
+
         button.markForCheck();
     }
 
