@@ -1,4 +1,4 @@
-<fd-popover
+<fd-cdk-popover
     [(isOpen)]="isOpen"
     [triggers]="[]"
     [focusTrapped]="false"
@@ -16,7 +16,7 @@
             </li>
         </ul>
     </fd-popover-body>
-</fd-popover>
+</fd-cdk-popover>
 
 <button fd-button label="Open Popover" (click)="this.isOpen = true"></button>
 <button fd-button label="Close Popover" (click)="this.isOpen = false"></button>

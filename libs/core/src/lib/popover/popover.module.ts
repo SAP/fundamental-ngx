@@ -11,6 +11,8 @@ import { PopoverBodyHeaderDirective } from './popover-body/popover-body-directiv
 import { PopoverBodyFooterDirective } from './popover-body/popover-body-directives/popover-body-footer.directive';
 
 import { ButtonModule } from '../button/button.module';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkPopoverComponent } from './cdk-overlay/cdk-popover.component';
 
 @NgModule({
     declarations: [
@@ -21,9 +23,10 @@ import { ButtonModule } from '../button/button.module';
         PopoverContainer,
         PopoverDropdownComponent,
         PopoverBodyHeaderDirective,
-        PopoverBodyFooterDirective
+        PopoverBodyFooterDirective,
+        CdkPopoverComponent
     ],
-    imports: [CommonModule, ButtonModule],
+    imports: [CommonModule, ButtonModule, OverlayModule],
     exports: [
         PopoverComponent,
         PopoverControlComponent,
@@ -31,7 +34,8 @@ import { ButtonModule } from '../button/button.module';
         PopoverDirective,
         PopoverDropdownComponent,
         PopoverBodyHeaderDirective,
-        PopoverBodyFooterDirective
+        PopoverBodyFooterDirective,
+        CdkPopoverComponent
     ],
     entryComponents: [PopoverContainer]
 })

@@ -162,6 +162,7 @@ export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlV
         private _timeI18nLabels: TimeI18n,
         private _changeDetRef: ChangeDetectorRef
     ) {
+        console.log('init');
     }
 
     /** @hidden */
