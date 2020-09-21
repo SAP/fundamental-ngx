@@ -1,7 +1,7 @@
 <div class="header-container">
     <div class="header-item" *ngFor="let item of items" [ngClass]="{ selected: selectedSpy === item.id }">
         <span class="fd-scroll-spy-example-icon-class icon">
-            <fd-icon [glyph]="'arrow-right'" [size]="'xs'"></fd-icon> </span
+            <fd-icon [glyph]="'arrow-right'"></fd-icon> </span
         >{{ item.name }}
     </div>
 </div>
