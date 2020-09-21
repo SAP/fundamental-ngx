@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { CarouselItemDirective } from './carousel-item.directive';
 import * as Hammer from 'hammerjs';
-import { HammerConfig } from './hammer.config';
 
 export interface CarouselConfig {
     /** Defines if carousel items are placed vertically */
@@ -221,7 +220,7 @@ export class CarouselDirective implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _hammerSetup(): void {
-        this._hammer = new Hammer(this._elementRef.nativeElement, new HammerConfig());
+        this._hammer = new Hammer(this._elementRef.nativeElement);
 
         this._hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 

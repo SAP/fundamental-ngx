@@ -2,8 +2,6 @@ import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CarouselConfig, CarouselDirective } from './carousel.directive';
 import { CarouselItemDirective } from './carousel-item.directive';
-import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { HammerConfig } from './hammer.config';
 import { CommonModule } from '@angular/common';
 
 
@@ -87,11 +85,7 @@ describe('CarouselDirective', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule],
-            declarations: [HorizontalCarouselComponent, VerticalCarouselComponent, CarouselItemDirective, CarouselDirective],
-            providers: [ {
-                provide: HAMMER_GESTURE_CONFIG,
-                useClass: HammerConfig
-            }]
+            declarations: [HorizontalCarouselComponent, VerticalCarouselComponent, CarouselItemDirective, CarouselDirective]
         }).compileComponents();
     }));
 
