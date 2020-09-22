@@ -1,6 +1,9 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    ContentChild,
     ContentChildren,
     EventEmitter,
     forwardRef,
@@ -13,6 +16,7 @@ import {
 
 import { ContentDensity, SelectionMode } from './types';
 import { TableColumnComponent } from './table-column/table-column.component';
+import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
 
 class SelectionChangeEvent<T> {
     selection: T[]; // currently selected items
@@ -31,7 +35,7 @@ export class TableRowSelectionChangeEvent<T> extends SelectionChangeEvent<T> {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, AfterViewInit {
     /** Data source for table data. */
     @Input() dataSource: any[];
 
@@ -52,6 +56,10 @@ export class TableComponent implements OnInit {
     columns: QueryList<TableColumnComponent>;
 
     /** @hidden */
+    @ContentChild(TableToolbarComponent)
+    tableToolbarComponent: TableToolbarComponent;
+
+    /** @hidden */
     @HostBinding('class.fd-table') fdTable = true;
 
     /** @hidden */
@@ -70,11 +78,15 @@ export class TableComponent implements OnInit {
     unchecked = [];
 
     /** @hidden */
-    constructor() {}
+    constructor(private readonly _cd: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnInit(): void {
         this.rows = this.dataSource.map(c => ({checked: false, value: c}));
+    }
+
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
     }
 
     /** @hidden Select/unselect one row in 'multiple' mode. */

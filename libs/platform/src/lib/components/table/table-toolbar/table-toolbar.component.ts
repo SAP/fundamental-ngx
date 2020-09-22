@@ -5,6 +5,8 @@ import {
     Component,
     ContentChild,
     Input,
+    TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -26,6 +28,9 @@ export class TableToolbarComponent implements AfterViewInit {
     /** @hidden */
     @ContentChild(TableToolbarActionsComponent)
     tableToolbarActionsComponent: TableToolbarActionsComponent;
+
+    /** @hidden */
+    @ViewChild(TemplateRef) contentTemplateRef: TemplateRef<any>;
 
     /** @hidden */
     constructor(private readonly cd: ChangeDetectorRef) {}

@@ -1,5 +1,7 @@
 <ng-container *ngIf="rows && rows.length; else emptyTableTemplate">
-    <ng-content select="fdp-table-toolbar"></ng-content>
+    <ng-container *ngIf="tableToolbarComponent">
+        <ng-container *ngTemplateOutlet="tableToolbarComponent.contentTemplateRef; context: { counter: rows.length || 0, size: contentDensity }"></ng-container>
+    </ng-container>
 
     <table fd-table>
         <thead fd-table-header>
