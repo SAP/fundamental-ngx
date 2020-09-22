@@ -38,14 +38,3 @@ Split Menu Button with only Icon and Without icon & text
 </fdp-menu>
 <br />
 selected value: {{ selectedItem3 }}
-<br /><br />
-
-<fdp-split-menu-button [menu]="menu4" type="standard" [buttonLabel]="label4" title="Split button without icon and text"
-    [fixedWidth]="false" ariaLabel="Split button without icon and text" (primaryButtonClick)="onPrimaryButtonClick4()">
-</fdp-split-menu-button>
-<fdp-menu #menu4 xPosition="before">
-    <fdp-menu-item (itemSelect)="onItemSelect4('')">Option 1 with blank value</fdp-menu-item>
-    <fdp-menu-item (itemSelect)="onItemSelect4('Option 2 with text')">Option 2 with text</fdp-menu-item>
-</fdp-menu>
-<br />
-selected value: {{ selectedItem4 }}
