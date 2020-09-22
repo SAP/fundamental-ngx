@@ -4,12 +4,25 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     Directive,
-    ElementRef, EmbeddedViewRef, EventEmitter, HostBinding, HostListener,
-    Injector, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges,
+    ElementRef,
+    EmbeddedViewRef,
+    EventEmitter,
+    HostBinding,
+    Injector,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    Renderer2,
+    Optional,
+    SimpleChanges,
     TemplateRef
 } from '@angular/core';
 import { PopoverContainer } from './popover-container';
 import Popper, { Placement, PopperOptions } from 'popper.js';
+import { startWith } from 'rxjs/operators';
+import { RtlService } from '../../utils/services/rtl.service';
 
 export type PopoverFillMode = 'at-least' | 'equal';
 
@@ -24,10 +37,9 @@ export type PopoverFillMode = 'at-least' | 'equal';
  * ```
  */
 @Directive({
-    selector: '[fdPopover]',
+    selector: '[fdPopover]'
 })
 export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
-
     /** Content of the popover. Used through the actual directive tag. Accepts strings or TemplateRefs. */
     @Input('fdPopover')
     content: TemplateRef<any> | string;
@@ -48,7 +60,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
     @Input()
-    placement: Placement;
+    placement: Placement = 'bottom-start';
 
     /** Whether the popover should be focusTrapped. */
     @Input()
@@ -106,15 +118,18 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     private popper: Popper;
     private eventRef: Function[] = [];
     private isSetup: boolean = false;
+    private _outsideClickEventReference: () => void;
 
     /** @hidden */
-    constructor(private elRef: ElementRef,
-                private cdRef: ChangeDetectorRef,
-                private resolver: ComponentFactoryResolver,
-                private injector: Injector,
-                private appRef: ApplicationRef,
-                private renderer: Renderer2) {
-    }
+    constructor(
+        private elRef: ElementRef,
+        private cdRef: ChangeDetectorRef,
+        private resolver: ComponentFactoryResolver,
+        private injector: Injector,
+        private appRef: ApplicationRef,
+        private renderer: Renderer2,
+        @Optional() private _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -123,7 +138,15 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
 
         this.setupFillBehaviour();
-        this.initPlacement();
+        if (this.placement) {
+            this._initPlacement(this.placement);
+        }
+
+        if (this._rtlService && this._rtlService.rtl) {
+            this._rtlService.rtl.pipe(
+                startWith(this._rtlService.rtl.getValue())
+            ).subscribe(rtl => this._handleRtlChange(rtl));
+        }
 
         this.addTriggerListeners();
         this.isSetup = true;
@@ -171,7 +194,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
         if (changes.placement) {
             setTimeout(() => {
-                this.initPlacement();
+                this._initPlacement(this.placement);
             });
         }
 
@@ -199,6 +222,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     public open(fireEvent: boolean = true): void {
         if (!this.isOpen && !this.disabled) {
             this.createContainer();
+            this._addListenerForOutsideClick();
             this.isOpen = true;
 
             if (fireEvent) {
@@ -211,6 +235,11 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
      * Closes the popover.
      */
     public close(fireEvent: boolean = true): void {
+        if (this._outsideClickEventReference) {
+            this._outsideClickEventReference();
+            this._outsideClickEventReference = null;
+        }
+
         if (this.isOpen) {
             this.destroyContainer();
             this.isOpen = false;
@@ -252,6 +281,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         this.appRef.attachView(this.containerRef.hostView);
         const setupRef = this.containerRef.instance.isSetup.subscribe(() => {
             this.createPopper();
+            this.updatePopper();
             setupRef.unsubscribe();
         });
 
@@ -262,12 +292,11 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         } else {
             this.appendTo.appendChild(containerEl);
         }
-
     }
 
     private destroyTriggerListeners(): void {
         if (this.eventRef && this.eventRef.length > 0) {
-            this.eventRef.forEach(event => {
+            this.eventRef.forEach((event) => {
                 event();
             });
             this.eventRef = [];
@@ -319,13 +348,11 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         return data;
     }
 
-    private initPlacement(): void {
-        if (this.placement) {
-            if (this.options) {
-                this.options.placement = this.placement;
-            } else {
-                this.options = {placement: this.placement}
-            }
+    private _initPlacement(placement: Placement): void {
+        if (this.options) {
+            this.options.placement = placement;
+        } else {
+            this.options = { placement: placement };
         }
     }
 
@@ -336,7 +363,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
                     enabled: true,
                     fn: this.fillControlMode === 'equal' ? this.fillReference : this.atLeastReference,
                     order: 840
-                }
+                };
             } else {
                 this.options = {
                     modifiers: {
@@ -351,18 +378,46 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    /** @hidden */
-    @HostListener('document:click', ['$event'])
-    clickHandler(event: MouseEvent): void {
-        if (this.containerRef &&
+    private _addListenerForOutsideClick(): void {
+        if (!this._outsideClickEventReference) {
+            this._outsideClickEventReference = this.renderer.listen('document', 'click', (event: MouseEvent) => {
+                if (this._shouldClose(event)) {
+                    this.close();
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            });
+        }
+    }
+
+    private _shouldClose(event: MouseEvent): boolean {
+        return (
+            this.containerRef &&
             this.isOpen &&
             this.closeOnOutsideClick &&
             event.target !== this.elRef.nativeElement &&
             !this.elRef.nativeElement.contains(event.target) &&
-            !this.containerRef.location.nativeElement.contains(event.target)) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.close();
+            !this.containerRef.location.nativeElement.contains(event.target)
+        );
+    }
+
+    private _handleRtlChange(rtl: boolean): void {
+        if (this.placement) {
+            if (rtl) {
+                const hash = {
+                    end: 'start',
+                    start: 'end',
+                    left: 'right',
+                    right: 'left'
+                };
+                const placement = <Placement>this.placement.replace(
+                    /start|end|right|left/g,
+                    matched => hash[matched]
+                );
+                this._initPlacement(placement);
+            } else {
+                this._initPlacement(this.placement);
+            }
         }
     }
 }
