@@ -1,6 +1,7 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { WizardContentComponent } from '../wizard-content/wizard-content.component';
 
-export type StepType = 'completed' | 'current' | 'upcoming' | 'no-label' | 'stacked' | 'stacked-top' | 'active';
+export type StepType = 'completed' | 'current' | 'upcoming' | 'active';
 
 @Component({
     selector: 'fd-wizard-step',
@@ -16,7 +17,7 @@ export class WizardStepComponent {
     ariaLabel: string;
 
     /**
-     * The type of step ('completed', 'current', 'upcoming', 'no-label', 'stacked', 'stacked-top', and 'active'.)
+     * The type of step ('completed', 'current', 'upcoming', and 'active'.)
      */
     @Input()
     status: StepType;
@@ -39,8 +40,7 @@ export class WizardStepComponent {
     @Input()
     optionalText: string;
 
-    /**
-     * If this step is the active one in the wizard.
-     */
-    active = false;
+    /** @hidden */
+    @ContentChild(WizardContentComponent)
+    content: WizardContentComponent;
 }

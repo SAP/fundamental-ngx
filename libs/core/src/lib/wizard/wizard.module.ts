@@ -24,7 +24,9 @@ import { WizardNextStepComponent } from './wizard-next-step/wizard-next-step.com
         WizardNavigationComponent,
         WizardProgressBarComponent,
         WizardStepComponent,
-        WizardStepIndicatorComponent
+        WizardStepIndicatorComponent,
+        WizardNextStepComponent,
+        WizardContentComponent
     ]
 })
 export class WizardModule {}

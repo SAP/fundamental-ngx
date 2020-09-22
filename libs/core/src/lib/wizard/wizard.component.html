@@ -1,3 +1,4 @@
 <section class="fd-wizard">
-    <ng-content></ng-content>
+    <ng-content select="fd-wizard-navigation"></ng-content>
+    <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
 </section>

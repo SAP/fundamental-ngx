@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as wizardHtml from '!raw-loader!./examples/wizard-example.component.ts';
+import * as wizardHtml from '!raw-loader!./examples/wizard-example.component.html';
 
 @Component({
     selector: 'app-wizard',
