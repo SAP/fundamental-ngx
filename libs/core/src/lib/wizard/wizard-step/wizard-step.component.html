@@ -1,0 +1,19 @@
+<li class="fd-wizard__step" [ngClass]="status ? 'fd-wizard__step--' + status : ''">
+    <div class="fd-wizard__step-wrapper">
+        <a class="fd-wizard__step-container" [attr.aria-label]="ariaLabel">
+            <ng-content></ng-content>
+            <div class="fd-wizard__label-container" [ngClass]="optionalText ? 'fd-wizard__label-container--optional' : ''">
+                <span class="fd-wizard__label">{{label}}</span>
+                <span *ngIf="optionalText" class="fd-wizard__optional-text">{{optionalText}}</span>
+            </div>
+        </a>
+        <span
+            class="fd-wizard__connector"
+            [ngClass]="[
+                active ? 'fd-wizard__connector--active' : '',
+                branching ? 'fd-wizard__connector--branching' : ''
+            ]"
+        >
+        </span>
+    </div>
+</li>

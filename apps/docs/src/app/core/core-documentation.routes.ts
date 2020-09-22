@@ -304,6 +304,10 @@ export const ROUTES: Routes = [
             {
                 path: 'tree',
                 loadChildren: () => import('./component-docs/tree/tree-docs.module').then((m) => m.TreeDocsModule)
+            },
+            {
+                path: 'wizard',
+                loadChildren: () => import('./component-docs/wizard/wizard-docs.module').then((m) => m.WizardDocsModule)
             }
         ]
     }
