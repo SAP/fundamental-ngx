@@ -1,5 +1,45 @@
-<ng-container *ngIf="dataSource; else emptyTableTemplate">
-    <ng-content></ng-content>
+<ng-container *ngIf="rows && rows.length; else emptyTableTemplate">
+    <ng-content select="fdp-table-toolbar"></ng-content>
+
+    <table fd-table>
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell
+                    [class.fd-table__cell--checkbox]="selectionMode === 'multiple'"
+                    *ngIf="selectionMode === 'single' || selectionMode === 'multiple'">
+                    <fd-checkbox
+                        [compact]="contentDensity !== 'cozy'"
+                        *ngIf="selectionMode === 'multiple'"
+                        [(ngModel)]="checkedAll"
+                        (ngModelChange)="selectAll($event)"
+                    ></fd-checkbox>
+                </th>
+                <th fd-table-cell
+                    [style.textAlign]="column.align"
+                    *ngFor="let column of columns">{{ column.label }}</th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <tr fd-table-row
+                *ngFor="let row of rows; let i = index"
+                [attr.aria-selected]="rows[i].checked">
+                <td fd-table-cell
+                    [class.fd-table__cell--checkbox]="selectionMode === 'multiple'"
+                    *ngIf="selectionMode === 'single' || selectionMode === 'multiple'"
+                    (click)="selectSingle(i, row)">
+                    <fd-checkbox
+                        [compact]="contentDensity !== 'cozy'"
+                        *ngIf="selectionMode === 'multiple'"
+                        [(ngModel)]="row.checked"
+                        (ngModelChange)="select(i, row, $event)"
+                    ></fd-checkbox>
+                </td>
+                <td fd-table-cell
+                    [style.textAlign]="column.align"
+                    *ngFor="let column of columns">{{ _getCellValue(column.key, row.value)}}</td>
+            </tr>
+        </tbody>
+    </table>
 </ng-container>
 
 <ng-template #emptyTableTemplate>

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-import { TableModule, ToolbarModule } from '@fundamental-ngx/core';
+import { CheckboxModule, TableModule, ToolbarModule } from '@fundamental-ngx/core';
 
 import { TableComponent } from './table.component';
 import { TableWrapperComponent } from './table-wrapper.component';
@@ -11,7 +12,13 @@ import { TableToolbarActionsComponent } from './table-toolbar-actions/table-tool
 import { TableBodyDirective } from './directives/table-body.directive';
 
 @NgModule({
-    imports: [CommonModule, TableModule, ToolbarModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        TableModule,
+        ToolbarModule,
+        CheckboxModule
+    ],
     declarations: [
         TableComponent,
         TableWrapperComponent,
