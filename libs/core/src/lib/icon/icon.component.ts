@@ -17,7 +17,7 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
  * The component that represents an icon.
  *
  * ```html
- * <fd-icon [glyph]="cart-approval" [size]="'l'"></fd-icon>
+ * <fd-icon [glyph]="cart-approval"></fd-icon>
  * ```
  */
 @Component({
