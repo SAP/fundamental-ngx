@@ -1,13 +1,15 @@
 import {
     Component,
     OnInit,
-    Renderer2,
+    OnChanges,
     ElementRef,
     ViewEncapsulation,
     ChangeDetectionStrategy,
     Input,
     HostBinding
 } from '@angular/core';
+
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 import { CLASS_NAME, CardType } from './constants';
 import { getCardModifierClassNameByCardType } from './utils';
@@ -21,7 +23,7 @@ let cardId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Badge */
     @Input() badge: string;
 
@@ -29,12 +31,7 @@ export class CardComponent implements OnInit {
      * Whether to apply compact mode
      */
     @Input()
-    set compact(compact: boolean) {
-        this._setCompact(compact);
-    }
-    get compact(): boolean {
-        return this._compact;
-    }
+    compact: boolean;
 
     /** Indicates when card should show a loader  */
     @Input()
@@ -45,12 +42,7 @@ export class CardComponent implements OnInit {
      * to indicate what card's type it belongs to
      */
     @Input()
-    set cardType(cardType: CardType) {
-        this._setCardType(cardType);
-    }
-    get cardType(): CardType {
-        return this._cardType;
-    }
+    cardType: CardType = 'standard';
 
     /** Card Id, it has some default value if not set,  */
     @Input()
@@ -63,61 +55,33 @@ export class CardComponent implements OnInit {
     role = 'region';
 
     /** @hidden */
-    private _compact = false;
+    class: string;
 
     /** @hidden */
-    private _cardType: CardType;
+    constructor(private _elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
-    private _cardTypeClassName: string;
-
-    /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {
-        this._setCardType('standard');
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.card);
+        this.buildComponentCssClass();
     }
 
-    /**@hidden */
-    private _setCompact(compact: boolean): void {
-        this._compact = compact;
-        const compactClassName = CLASS_NAME.cardCompact;
-
-        if (compact) {
-            this._addClassNameToHostElement(compactClassName);
-        } else {
-            this._removeClassNameToHostElement(compactClassName);
-        }
+    @applyCssClass
+    /** @hidden */
+    buildComponentCssClass(): string[] {
+        return [
+            CLASS_NAME.card,
+            this.cardType ? getCardModifierClassNameByCardType(this.cardType) : null,
+            this.compact ? CLASS_NAME.cardCompact : null
+        ];
     }
 
-    /**@hidden */
-    private _setCardType(cardType: CardType): void {
-        if (cardType === this._cardType) {
-            return;
-        }
-
-        this._cardType = cardType;
-
-        if (this._cardTypeClassName) {
-            this._removeClassNameToHostElement(this._cardTypeClassName);
-        }
-
-        this._cardTypeClassName = getCardModifierClassNameByCardType(cardType);
-        if (this._cardTypeClassName) {
-            this._addClassNameToHostElement(this._cardTypeClassName);
-        }
-    }
-
-    /**@hidden */
-    private _addClassNameToHostElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
-    }
-
-    /**@hidden */
-    private _removeClassNameToHostElement(className: string): void {
-        this._renderer.removeClass(this._elementRef.nativeElement, className);
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }

@@ -1,16 +1,35 @@
-<fd-card>
+<fd-card cardType="list">
     <fd-card-header>
-        <fd-card-title>Card Title</fd-card-title>
+        <h2 fd-card-title>Card Title</h2>
     </fd-card-header>
     <fd-card-content>
-        <ul>
-            <li>Row</li>
-            <li>Row</li>
-            <li>Row</li>
+        <ul fd-list [noBorder]="true">
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 1
+                </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 2
+                </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 3
+                </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 4
+                </span>
+            </li>
         </ul>
     </fd-card-content>
     <fd-card-footer>
-        <button fd-button fdType="positive" [compact]="true">Approve</button>
-        <button fd-button fdType="negative" [compact]="true">Reject</button>
+        <fd-toolbar size="compact" fdType="transparent" [clearBorder]="true">
+            <button fd-toolbar-item fd-button fdType="positive" [compact]="true">Approve</button>
+            <button fd-toolbar-item fd-button fdType="negative" [compact]="true">Reject</button>
+        </fd-toolbar>
     </fd-card-footer>
 </fd-card>

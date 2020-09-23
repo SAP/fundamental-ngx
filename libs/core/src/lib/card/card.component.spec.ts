@@ -12,7 +12,7 @@ import { getCardModifierClassNameByCardType } from './utils';
     template: `
         <fd-card [badge]="badgeText" [isLoading]="isLoading" [compact]="isCompact" [cardType]="cardType">
             <fd-card-header>
-                <fd-card-title>{{ titleText }}</fd-card-title>
+                <h2 fd-card-title>{{ titleText }}</h2>
             </fd-card-header>
             <fd-card-content>{{ contentText }}</fd-card-content>
             <fd-card-footer>{{ footerText }}</fd-card-footer>
@@ -63,7 +63,7 @@ describe('CardComponent', () => {
     });
 
     describe('badge option', () => {
-        it('should has banding', () => {
+        it('should has binding', () => {
             expect(card.badge).toBe(host.badgeText);
         });
 
@@ -89,7 +89,7 @@ describe('CardComponent', () => {
     });
 
     describe('loader', () => {
-        it('should has banding', () => {
+        it('should has binding', () => {
             expect(card.isLoading).toBe(host.isLoading);
         });
 
@@ -105,7 +105,7 @@ describe('CardComponent', () => {
     });
 
     describe('compact', () => {
-        it('should has banding', () => {
+        it('should has binding', () => {
             expect(card.compact).toBe(host.isCompact);
         });
 
@@ -121,7 +121,7 @@ describe('CardComponent', () => {
     });
 
     describe('cardType', () => {
-        it('should has banding', () => {
+        it('should has binding', () => {
             expect(card.cardType).toBe(host.cardType);
         });
 

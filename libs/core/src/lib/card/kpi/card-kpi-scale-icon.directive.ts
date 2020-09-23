@@ -1,15 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import { Directive, OnInit, ElementRef } from '@angular/core';
 
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 import { CLASS_NAME } from '../constants';
 
-@Component({
-    selector: 'fd-card-kpi-header',
-    templateUrl: './card-kpi-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+@Directive({
+    // tslint:disable-next-line: directive-selector
+    selector: '[fd-card-kpi-scale-icon]'
 })
-export class CardKpiHeaderComponent implements OnInit, CssClassBuilder {
+export class CardKpiScaleIconDirective implements OnInit, CssClassBuilder {
     /** @hidden */
     class: string;
 
@@ -24,7 +23,7 @@ export class CardKpiHeaderComponent implements OnInit, CssClassBuilder {
     @applyCssClass
     /** @hidden */
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardAnalyticalArea];
+        return [CLASS_NAME.cardAnalyticsScaleIcon];
     }
 
     /** @hidden */

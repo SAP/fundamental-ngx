@@ -7,6 +7,7 @@ import * as cardCompactExampleHtml from '!raw-loader!./examples/card-compact-exa
 import * as cardLoaderExampleHtml from '!raw-loader!./examples/card-loader-example.component.html';
 import * as cardFooterExampleHtml from '!raw-loader!./examples/card-footer-example.component.html';
 import * as cardKpiExampleHtml from '!raw-loader!./examples/card-kpi-example.component.html';
+import * as cardTableExampleHtml from '!raw-loader!./examples/card-table-example.component.html';
 
 @Component({
     templateUrl: './card-docs.component.html'
@@ -49,6 +50,14 @@ export class CardDocsComponent {
             language: 'html',
             code: cardKpiExampleHtml,
             fileName: 'card-kpi-example'
+        }
+    ];
+
+    table: ExampleFile[] = [
+        {
+            language: 'html',
+            code: cardTableExampleHtml,
+            fileName: 'card-table-example'
         }
     ];
 }

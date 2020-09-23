@@ -1,23 +1,34 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 import { CLASS_NAME } from './constants';
 
 @Component({
     selector: 'fd-card-footer',
-    templateUrl: './card-footer.component.html',
+    template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardFooterComponent implements OnInit {
+export class CardFooterComponent implements OnInit, CssClassBuilder {
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
+    class: string;
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.cardFooter);
+        this.buildComponentCssClass();
     }
 
-    /**@hidden */
-    private _addClassNameToHostElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
+    @applyCssClass
+    /** @hidden */
+    buildComponentCssClass(): string[] {
+        return [CLASS_NAME.cardFooter];
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }

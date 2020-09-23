@@ -1,5 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, ContentChild } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    ElementRef,
+    ContentChild,
+    Input,
+    HostBinding
+} from '@angular/core';
 
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { AvatarComponent } from '../avatar/avatar.component';
 
 import { CLASS_NAME } from './constants';
@@ -9,33 +18,35 @@ import { CLASS_NAME } from './constants';
     templateUrl: './card-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardHeaderComponent implements OnInit {
+export class CardHeaderComponent implements OnInit, CssClassBuilder {
+    /** @hidden */
+    @Input()
+    @HostBinding('attr.tabindex')
+    tabindex = '0';
+
+    /** @hidden */
+    class: string;
+
     /** @hidden */
     @ContentChild(AvatarComponent)
     _avatar: AvatarComponent;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this._setAttributeToHostElement('tabindex', 0);
-
-        this._addClassNameToHostElement(CLASS_NAME.cardHeader);
+        this.buildComponentCssClass();
     }
 
-    /**@hidden */
-    private _addClassNameToHostElement(className: string): void {
-        this._addClassName(this._elementRef.nativeElement, className);
+    @applyCssClass
+    /** @hidden */
+    buildComponentCssClass(): string[] {
+        return [CLASS_NAME.cardHeader];
     }
 
-    /**@hidden */
-    private _addClassName(element: HTMLElement, className: string): void {
-        this._renderer.addClass(element, className);
-    }
-
-    /**@hidden */
-    private _setAttributeToHostElement(attribute: string, value: any): void {
-        this._renderer.setAttribute(this._elementRef.nativeElement, attribute, value);
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }

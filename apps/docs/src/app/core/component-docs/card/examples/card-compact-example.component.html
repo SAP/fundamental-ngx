@@ -1,14 +1,31 @@
-<fd-card [compact]="true">
+<fd-card [compact]="true" cardType="list">
     <fd-card-header>
-        <fd-card-title>Card Title</fd-card-title>
-        <fd-card-subtitle>Card Subtitle</fd-card-subtitle>
-        <fd-card-counter>3 of 10</fd-card-counter>
+        <h2 fd-card-title>Card Title</h2>
+        <h3 fd-card-subtitle>Card Subtitle</h3>
+        <span fd-card-counter>3 of 10</span>
     </fd-card-header>
     <fd-card-content>
-        <ul>
-            <li>Card content 1</li>
-            <li>Card content 2</li>
-            <li>Card content 3</li>
+        <ul fd-list [noBorder]="true" [compact]="true">
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 1
+                </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 2
+                </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 3
+                </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 4
+                </span>
+            </li>
         </ul>
     </fd-card-content>
 </fd-card>

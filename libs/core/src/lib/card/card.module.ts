@@ -10,40 +10,40 @@ import { TileModule } from '../tile/tile.module';
 
 import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header.component';
-import { CardTitleComponent } from './card-title.component';
-import { CardSubtitleComponent } from './card-subtitle.component';
-import { CardSecondSubtitleComponent } from './card-second-subtitle.component';
-import { CardCounterComponent } from './card-counter.component';
+import { CardTitleDirective } from './card-title.directive';
+import { CardSubtitleDirective } from './card-subtitle.directive';
+import { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
+import { CardCounterDirective } from './card-counter.directive';
 import { CardContentComponent } from './card-content.component';
 import { CardFooterComponent } from './card-footer.component';
 import { CardLoaderComponent } from './card-loader.component';
 
 import { CardKpiHeaderComponent } from './kpi/card-kpi-header.component';
-import { CardKpiValueComponent } from './kpi/card-kpi-value.component';
-import { CardKpiScaleIconComponent } from './kpi/card-kpi-scale-icon.component';
-import { CardKpiScaleTextComponent } from './kpi/card-kpi-scale-text.component';
-import { CardKpiAnalyticsComponent } from './kpi/card-kpi-analytics.component';
-import { CardKpiAnalyticsLabelComponent } from './kpi/card-kpi-analytics-label.component';
-import { CardKpiAnalyticsContentComponent } from './kpi/card-kpi-analytics-content.component';
+import { CardKpiValueDirective } from './kpi/card-kpi-value.directive';
+import { CardKpiScaleIconDirective } from './kpi/card-kpi-scale-icon.directive';
+import { CardKpiScaleTextDirective } from './kpi/card-kpi-scale-text.directive';
+import { CardKpiAnalyticsDirective } from './kpi/card-kpi-analytics.directive';
+import { CardKpiAnalyticsLabelDirective } from './kpi/card-kpi-analytics-label.directive';
+import { CardKpiAnalyticsContentDirective } from './kpi/card-kpi-analytics-content.directive';
 
 const components = [
     CardComponent,
     CardHeaderComponent,
     CardContentComponent,
     CardFooterComponent,
-    CardTitleComponent,
-    CardSubtitleComponent,
-    CardSecondSubtitleComponent,
-    CardCounterComponent,
+    CardTitleDirective,
+    CardSubtitleDirective,
+    CardSecondSubtitleDirective,
+    CardCounterDirective,
     CardLoaderComponent,
 
     CardKpiHeaderComponent,
-    CardKpiValueComponent,
-    CardKpiScaleIconComponent,
-    CardKpiScaleTextComponent,
-    CardKpiAnalyticsComponent,
-    CardKpiAnalyticsLabelComponent,
-    CardKpiAnalyticsContentComponent
+    CardKpiValueDirective,
+    CardKpiScaleIconDirective,
+    CardKpiScaleTextDirective,
+    CardKpiAnalyticsDirective,
+    CardKpiAnalyticsLabelDirective,
+    CardKpiAnalyticsContentDirective
 ];
 
 @NgModule({

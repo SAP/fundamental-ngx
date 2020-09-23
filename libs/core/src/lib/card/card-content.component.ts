@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 import { CLASS_NAME } from './constants';
 
@@ -7,17 +9,26 @@ import { CLASS_NAME } from './constants';
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardContentComponent implements OnInit {
+export class CardContentComponent implements OnInit, CssClassBuilder {
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
+    class: string;
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.cardContent);
+        this.buildComponentCssClass();
     }
 
-    /**@hidden */
-    private _addClassNameToHostElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
+    @applyCssClass
+    /** @hidden */
+    buildComponentCssClass(): string[] {
+        return [CLASS_NAME.cardContent];
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }

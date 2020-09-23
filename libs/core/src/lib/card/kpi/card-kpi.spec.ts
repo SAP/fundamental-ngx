@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -7,40 +7,33 @@ import { CardModule } from '../card.module';
 import { CLASS_NAME } from '../constants';
 
 import { CardKpiHeaderComponent } from './card-kpi-header.component';
-import { CardKpiValueComponent } from './card-kpi-value.component';
-import { CardKpiScaleIconComponent } from './card-kpi-scale-icon.component';
-import { CardKpiScaleTextComponent } from './card-kpi-scale-text.component';
-import { CardKpiAnalyticsComponent } from './card-kpi-analytics.component';
-import { CardKpiAnalyticsContentComponent } from './card-kpi-analytics-content.component';
-import { CardKpiAnalyticsLabelComponent } from './card-kpi-analytics-label.component';
+import { CardKpiValueDirective } from './card-kpi-value.directive';
+import { CardKpiScaleIconDirective } from './card-kpi-scale-icon.directive';
+import { CardKpiScaleTextDirective } from './card-kpi-scale-text.directive';
+import { CardKpiAnalyticsDirective } from './card-kpi-analytics.directive';
+import { CardKpiAnalyticsContentDirective } from './card-kpi-analytics-content.directive';
+import { CardKpiAnalyticsLabelDirective } from './card-kpi-analytics-label.directive';
 
 @Component({
     template: `
         <fd-card-kpi-header>
-            <fd-card-kpi-value>KPI</fd-card-kpi-value>
-            <fd-card-kpi-scale-icon>Icon</fd-card-kpi-scale-icon>
-            <fd-card-kpi-scale-text>K</fd-card-kpi-scale-text>
+            <strong fd-card-kpi-value>KPI</strong>
+            <span fd-card-kpi-scale-icon>Icon</span>
+            <span fd-card-kpi-scale-text>K</span>
 
-            <fd-card-kpi-analytics>
-                <fd-card-kpi-analytics-label>Label</fd-card-kpi-analytics-label>
-                <fd-card-kpi-analytics-content>Content</fd-card-kpi-analytics-content>
-            </fd-card-kpi-analytics>
-            <fd-card-kpi-analytics>
-                <fd-card-kpi-analytics-label>Label</fd-card-kpi-analytics-label>
-                <fd-card-kpi-analytics-content>Content</fd-card-kpi-analytics-content>
-            </fd-card-kpi-analytics>
+            <div fd-card-kpi-analytics>
+                <label fd-card-kpi-analytics-label>Label</label>
+                <span fd-card-kpi-analytics-content>Content</span>
+            </div>
+            <div fd-card-kpi-analytics>
+                <label fd-card-kpi-analytics-label>Label</label>
+                <span fd-card-kpi-analytics-content>Content</span>
+            </div>
         </fd-card-kpi-header>
     `
 })
-class CardKpiHeaderHostTestComponent {
-    @ViewChild(CardKpiHeaderComponent) header: CardKpiHeaderComponent;
-    @ViewChild(CardKpiValueComponent) kpiValue: CardKpiValueComponent;
-    @ViewChild(CardKpiScaleIconComponent) scaleIcon: CardKpiScaleIconComponent;
-    @ViewChild(CardKpiScaleTextComponent) scaleText: CardKpiScaleTextComponent;
-    @ViewChild(CardKpiAnalyticsComponent) analytics: CardKpiAnalyticsComponent;
-    @ViewChild(CardKpiAnalyticsLabelComponent) analyticsLabel: CardKpiAnalyticsLabelComponent;
-    @ViewChild(CardKpiAnalyticsContentComponent) analyticsContent: CardKpiAnalyticsContentComponent;
-}
+class CardKpiHeaderHostTestComponent {}
+
 describe('CardKpiHeaderComponent', () => {
     let fixture: ComponentFixture<CardKpiHeaderHostTestComponent>;
     let host: CardKpiHeaderHostTestComponent;
@@ -69,7 +62,7 @@ describe('CardKpiHeaderComponent', () => {
 
     describe('KPI value option', () => {
         it('should add className to its host element', () => {
-            const debugEl = fixture.debugElement.query(By.directive(CardKpiValueComponent));
+            const debugEl = fixture.debugElement.query(By.directive(CardKpiValueDirective));
             expect(debugEl.classes[CLASS_NAME.cardAnalyticsKpiValue]).toBeTrue();
         });
     });
@@ -77,14 +70,14 @@ describe('CardKpiHeaderComponent', () => {
     describe('KPI scale', () => {
         describe('icon', () => {
             it('should add className to its host element', () => {
-                const debugEl = fixture.debugElement.query(By.directive(CardKpiScaleIconComponent));
+                const debugEl = fixture.debugElement.query(By.directive(CardKpiScaleIconDirective));
                 expect(debugEl.classes[CLASS_NAME.cardAnalyticsScaleIcon]).toBeTrue();
             });
         });
 
         describe('text', () => {
             it('should add className to its host element', () => {
-                const debugEl = fixture.debugElement.query(By.directive(CardKpiScaleTextComponent));
+                const debugEl = fixture.debugElement.query(By.directive(CardKpiScaleTextDirective));
                 expect(debugEl.classes[CLASS_NAME.cardAnalyticsScaleText]).toBeTrue();
             });
         });
@@ -92,20 +85,20 @@ describe('CardKpiHeaderComponent', () => {
 
     describe('analytics area', () => {
         it('should add className to its host element', () => {
-            const debugEl = fixture.debugElement.query(By.directive(CardKpiAnalyticsComponent));
+            const debugEl = fixture.debugElement.query(By.directive(CardKpiAnalyticsDirective));
             expect(debugEl.classes[CLASS_NAME.cardAnalytics]).toBeTrue();
         });
 
         describe('label', () => {
             it('should add className to its host element', () => {
-                const debugEl = fixture.debugElement.query(By.directive(CardKpiAnalyticsLabelComponent));
+                const debugEl = fixture.debugElement.query(By.directive(CardKpiAnalyticsLabelDirective));
                 expect(debugEl.classes[CLASS_NAME.cardAnalyticsText]).toBeTrue();
             });
         });
 
         describe('value', () => {
             it('should add className to its host element', () => {
-                const debugEl = fixture.debugElement.query(By.directive(CardKpiAnalyticsContentComponent));
+                const debugEl = fixture.debugElement.query(By.directive(CardKpiAnalyticsContentDirective));
                 expect(debugEl.classes[CLASS_NAME.cardAnalyticsContent]).toBeTrue();
             });
         });

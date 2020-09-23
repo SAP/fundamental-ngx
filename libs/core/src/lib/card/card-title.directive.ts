@@ -1,15 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import { Directive, OnInit, ElementRef } from '@angular/core';
 
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 import { CLASS_NAME } from './constants';
 
-@Component({
-    selector: 'fd-card-loader',
-    template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.OnPush
+@Directive({
+    // tslint:disable-next-line: directive-selector
+    selector: '[fd-card-title]'
 })
-export class CardLoaderComponent implements OnInit, CssClassBuilder {
+export class CardTitleDirective implements OnInit, CssClassBuilder {
     /** @hidden */
     class: string;
 
@@ -24,7 +23,7 @@ export class CardLoaderComponent implements OnInit, CssClassBuilder {
     @applyCssClass
     /** @hidden */
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardLoader];
+        return [CLASS_NAME.cardTitle];
     }
 
     /** @hidden */

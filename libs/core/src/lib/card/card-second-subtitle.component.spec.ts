@@ -1,24 +1,31 @@
+import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
+import { By } from '@angular/platform-browser';
 
-import { CardSecondSubtitleComponent } from './card-second-subtitle.component';
+import { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
 import { CLASS_NAME } from './constants';
 
+@Component({
+    template: `<span fd-card-second-subtitle>Second subtitle</span>`
+})
+class TestComponent {}
+
 describe('CardSecondSubtitleComponent', () => {
-    let fixture: ComponentFixture<CardSecondSubtitleComponent>;
-    let component: CardSecondSubtitleComponent;
+    let fixture: ComponentFixture<TestComponent>;
+    let debugElement: DebugElement;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule],
-            declarations: [CardSecondSubtitleComponent]
+            declarations: [TestComponent, CardSecondSubtitleDirective]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CardSecondSubtitleComponent);
-        component = fixture.componentInstance;
+        fixture = TestBed.createComponent(TestComponent);
+
         fixture.detectChanges();
+
+        debugElement = fixture.debugElement.query(By.directive(CardSecondSubtitleDirective));
     });
 
     it('should create', () => {
@@ -26,6 +33,6 @@ describe('CardSecondSubtitleComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(fixture.debugElement.classes[CLASS_NAME.cardSecondSubtitle]).toBeTrue();
+        expect(debugElement.classes[CLASS_NAME.cardSecondSubtitle]).toBeTrue();
     });
 });
