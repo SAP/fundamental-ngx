@@ -8,15 +8,27 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
-    Input, OnInit,
+    Input,
+    OnDestroy,
     Output,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
 
+import { isObservable, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import { ContentDensity, SelectionMode } from './types';
 import { TableColumnComponent } from './table-column/table-column.component';
 import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
+import {
+    ArrayTableDataSource,
+    isDataSource,
+    ObservableTableDataSource,
+    TableDataSource
+} from '../../../';
+
+export type FdpTableDataSource<T> = TableDataSource<T> | T[];
 
 class SelectionChangeEvent<T> {
     selection: T[]; // currently selected items
@@ -35,9 +47,17 @@ export class TableRowSelectionChangeEvent<T> extends SelectionChangeEvent<T> {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements AfterViewInit, OnDestroy {
     /** Data source for table data. */
-    @Input() dataSource: any[];
+    @Input()
+    set dataSource(value: FdpTableDataSource<any>) {
+        if (value) {
+            this._initializeDS(value);
+        }
+    }
+    get dataSource(): FdpTableDataSource<any> {
+        return this._dataSource;
+    }
 
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
     @Input() contentDensity: ContentDensity = 'cozy';
@@ -68,8 +88,6 @@ export class TableComponent implements OnInit, AfterViewInit {
     /** @hidden */
     @HostBinding('class.fd-table--condensed') get isCondensed(): boolean { return this.contentDensity === 'condensed' };
 
-    /** @hidden Formatted rows data. */
-    rows;
     /** @hidden */
     checkedAll = false;
     /** @hidden */
@@ -78,15 +96,32 @@ export class TableComponent implements OnInit, AfterViewInit {
     unchecked = [];
 
     /** @hidden */
+    protected _dataSource: FdpTableDataSource<any>;
+
+    /** @hidden */
+    readonly stateChanges: Subject<any> = new Subject<any>();
+
+    /** @hidden Formatted rows data. */
+    rows: any[];
+
+    /** @hidden for data source handling */
+    private _dsSubscription: Subscription | null;
+
+    /** @hidden */
+    private _destroyed = new Subject<void>();
+
+    /** @hidden */
     constructor(private readonly _cd: ChangeDetectorRef) {}
 
     /** @hidden */
-    ngOnInit(): void {
-        this.rows = this.dataSource.map(c => ({checked: false, value: c}));
-    }
-
     ngAfterViewInit(): void {
         this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._destroyed.next();
+        this._destroyed.complete();
     }
 
     /** @hidden Select/unselect one row in 'multiple' mode. */
@@ -138,6 +173,11 @@ export class TableComponent implements OnInit, AfterViewInit {
     }
 
     /** @hidden */
+    _getCellValue(key: string, row: any): any {
+        return key.split('.').reduce((a, b) => a[b], row);
+    }
+
+    /** @hidden */
     private _checkAll(): void {
         this.rows.forEach(r => {
             if (!r.checked) {
@@ -166,11 +206,6 @@ export class TableComponent implements OnInit, AfterViewInit {
     }
 
     /** @hidden */
-    private _getCellValue(key: string, row: any): any {
-        return key.split('.').reduce((a, b) => a[b], row);
-    }
-
-    /** @hidden */
     private _emitChange(index?: number): void {
         const selected = this.rows.filter(r => r.checked).map(r => r.value);
         this.rowSelectionChange.emit({
@@ -186,5 +221,57 @@ export class TableComponent implements OnInit, AfterViewInit {
                 return indexes;
             }, [])
         })
+    }
+
+    /** @hidden */
+    private _initializeDS(ds: FdpTableDataSource<any>): void {
+        this.rows = [];
+        if (isDataSource(this.dataSource)) {
+            this.dataSource.close();
+            if (this._dsSubscription) {
+                this._dsSubscription.unsubscribe();
+                this._dsSubscription = null;
+            }
+        }
+
+        this._dataSource = this._openDataStream(ds);
+    }
+
+    /** @hidden */
+    private _openDataStream(ds: FdpTableDataSource<any>): TableDataSource<any> {
+        const initDataSource = this._toDataStream(ds);
+        if (initDataSource === undefined) {
+            throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
+        }
+        /**
+         * This is single point of data entry to the component. We dont want to set data on different
+         * places. If any new data comes in either you do a search and you want to pass initial data
+         * its here.
+         */
+        this._dsSubscription = initDataSource
+            .open()
+            .pipe(takeUntil(this._destroyed))
+            .subscribe((data) => {
+                this.rows = data.map(c => ({checked: false, value: c})) || [];
+                this.stateChanges.next(this.rows);
+                this._cd.markForCheck();
+            });
+        // initial data fetch
+        initDataSource.match('*');
+        return initDataSource;
+    }
+
+    /** @hidden */
+    private _toDataStream(ds: FdpTableDataSource<any>): TableDataSource<any> {
+        if (isDataSource(ds)) {
+            return ds as TableDataSource<any>;
+        } else if (Array.isArray(ds)) {
+            // default implementation to work on top of arrays
+            return new ArrayTableDataSource<any>(ds);
+        } else if (isObservable(ds)) {
+            return new ObservableTableDataSource<any>(ds);
+        }
+
+        return undefined;
     }
 }
