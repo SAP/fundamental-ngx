@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ObjectMarkerComponent } from './object-marker.component';
 
 @Component({
@@ -31,17 +32,8 @@ describe('ObjectMarkerComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Add Icon', () => {
-        component.glyph = 'flag';
-        component.ngAfterViewInit();
-        component.buildComponentCssClass();
-        fixture.detectChanges();
-        expect(component.elementRef().nativeElement.firstElementChild.classList.contains('sap-icon--flag')).toBe(true);
-    });
-
     it('Should Add Clickable Class', () => {
         component.clickable = true;
-        component.ngAfterViewInit();
         component.buildComponentCssClass();
         fixture.detectChanges();
         expect(component.elementRef().nativeElement.classList.contains('fd-object-marker--link')).toBe(true);

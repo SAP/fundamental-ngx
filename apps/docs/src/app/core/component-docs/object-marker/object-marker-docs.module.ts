@@ -8,10 +8,10 @@ import { API_FILES } from '../../api-files';
 import {
     ObjectMarkerExampleComponent,
     ObjectMarkerIconAndTextExampleComponent,
-    ObjectMarkerClickableExampleComponent,
     ObjectMarkerTextExampleComponent
 } from './examples/object-marker-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { ObjectMarkerClickableExampleComponent } from './examples/object-marker-clickable-example.component';
 
 const routes: Routes = [
     {

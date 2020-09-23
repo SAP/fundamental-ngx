@@ -14,12 +14,13 @@ import { CssClassBuilder, applyCssClass } from '../utils/public_api';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-object-marker]',
-    template: `<ng-content></ng-content>`,
+    template: ` <i class="fd-object-marker__icon" [ngClass]="' sap-icon--' + glyph" *ngIf="glyph"></i>
+        <ng-content></ng-content>`,
     styleUrls: ['./object-marker.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit {
+export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
     @Input()
     class: string;
@@ -40,31 +41,12 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef, private readonly renderer: Renderer2) {}
 
-    ngAfterViewInit(): void {
-        if (this.glyph) {
-            this.oldGlyph = this.glyph;
-            this.icon = this.renderer.createElement('i');
-            this.icon.classList.add('fd-object-marker__icon');
-            this.icon.classList.add('sap-icon--' + this.glyph);
-            this.renderer.insertBefore(
-                this._elementRef.nativeElement,
-                this.icon,
-                this._elementRef.nativeElement.firstChild
-            );
-        }
-    }
-
     @applyCssClass
     /** CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        if (this.icon) {
-            this.renderer.removeClass(this.icon, 'sap-icon--' + this.oldGlyph);
-            this.renderer.addClass(this.icon, 'sap-icon--' + this.glyph);
-            this.oldGlyph = this.glyph;
-        }
         return ['fd-object-marker', this.clickable ? 'fd-object-marker--link' : '', this.class];
     }
 
@@ -79,7 +61,7 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     }
 
     /** @hidden */
-    elementRef(): ElementRef<HTMLElement> {
+    elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 }

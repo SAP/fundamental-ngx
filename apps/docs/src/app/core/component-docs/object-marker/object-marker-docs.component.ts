@@ -4,6 +4,7 @@ import * as ObjectMarkerExample from '!raw-loader!./examples/object-marker-examp
 import * as ObjectMarkerIconandText from '!raw-loader!./examples/object-marker-Icon-text-example.component.html';
 import * as ObjectMarkerClickable from '!raw-loader!./examples/object-marker-clickable-example.component.html';
 import * as ObjectMarkerText from '!raw-loader!./examples/object-marker-text-example.component.html';
+import * as ObjectMarkerClickAble from '!raw-loader!./examples/object-marker-clickable-example.component.ts';
 
 @Component({
     selector: 'fd-object-marker-docs',
@@ -36,6 +37,12 @@ export class ObjectMarkerDocsComponent {
             language: 'html',
             code: ObjectMarkerClickable,
             fileName: 'object-marker-clickable-example'
+        },
+        {
+            language: 'typescript',
+            code: ObjectMarkerClickAble,
+            fileName: 'object-marker-clickable-example',
+            component: 'ObjectMarkerClickableExampleComponent'
         }
     ];
 }
