@@ -1,5 +1,5 @@
 Default behavior:
-<fdp-split-menu-button [menu]="menu1" [buttonLabel]="label1" type="standard"
+<fdp-split-menu-button [menu]="menu1" [buttonLabel]="label1" [title]="label1" type="standard"
     title="Default behavior for split menu button" menuTitle="More options"
     (primaryButtonClick)="onPrimaryButtonClick1()">
 </fdp-split-menu-button>
@@ -12,7 +12,7 @@ Default behavior:
 <br /><br />
 
 Longer text in menu:
-<fdp-split-menu-button [menu]="menu2" [buttonLabel]="label2" type="standard"
+<fdp-split-menu-button [menu]="menu2" [buttonLabel]="label2" [title]="label2" type="standard"
     title="option with longer text gets truncated" menuTitle="More options"
     (primaryButtonClick)="onPrimaryButtonClick2()">
 </fdp-split-menu-button>
@@ -24,7 +24,7 @@ Longer text in menu:
 <br /><br />
 
 fixedWidth=false:
-<fdp-split-menu-button [menu]="menu3" [buttonLabel]="label3" [fixedWidth]="false" type="standard"
+<fdp-split-menu-button [menu]="menu3" [buttonLabel]="label3" [title]="label3" [fixedWidth]="false" type="standard"
     title="option with longer text gets truncated" menuTitle="More options"
     (primaryButtonClick)="onPrimaryButtonClick3()">
 </fdp-split-menu-button>

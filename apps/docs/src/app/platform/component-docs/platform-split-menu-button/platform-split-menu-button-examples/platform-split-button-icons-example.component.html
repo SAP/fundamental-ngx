@@ -1,5 +1,5 @@
 Cozy Split Menu Button:
-<fdp-split-menu-button [menu]="menu1" [buttonLabel]="label1" icon="world" type="standard"
+<fdp-split-menu-button [menu]="menu1" [buttonLabel]="label1" [title]="label1" icon="world" type="standard"
     title="Default behavior for split menu button" menuTitle="More options" [fixedWidth]="false"
     (primaryButtonClick)="onPrimaryButtonClick1()">
 </fdp-split-menu-button>
@@ -13,7 +13,7 @@ selected value: {{ selectedItem1 }}
 <br /><br />
 
 Compact Split Menu Button:
-<fdp-split-menu-button [menu]="menu2" [buttonLabel]="label2" icon="world" contentDensity="compact" type="standard"
+<fdp-split-menu-button [menu]="menu2" [buttonLabel]="label2" [title]="label2" icon="world" contentDensity="compact" type="standard"
     title="option with longer text gets truncated" menuTitle="More options" [fixedWidth]="false"
     (primaryButtonClick)="onPrimaryButtonClick2()">
 </fdp-split-menu-button>
@@ -28,7 +28,7 @@ selected value: {{ selectedItem2 }}
 <hr />
 Split Menu Button with only Icon and Without icon & text
 <br />
-<fdp-split-menu-button [menu]="menu3" icon="world" [buttonLabel]="label3" title="Split button with icon"
+<fdp-split-menu-button [menu]="menu3" icon="world" [buttonLabel]="label3" [title]="title3" menuTitle="More options"
     [fixedWidth]="false" ariaLabel="Split button with icon" type="standard"
     (primaryButtonClick)="onPrimaryButtonClick3()">
 </fdp-split-menu-button>
