@@ -8,6 +8,11 @@ addons:
 
 git:
   depth: false
+env:
+  global:
+    - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+    - BUILD_ID=$TRAVIS_BUILD_ID
+    - JOB_URL=$TRAVIS_JOB_WEB_URL
 script:
   - npm run build-all
 jobs:
@@ -15,6 +20,19 @@ jobs:
   - stage: "Lint and Test"
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     script: npm run lint && npm run test && npm run test:coveralls && npm run build-pack-library
+
+  - stage: "Lint and Test"
+    name: Sauce Labs - Core tests
+    if: branch = feature/setup-saucelabs-integration
+    env:
+#      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_USERNAME=el.protonmail
+#      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=7c2ab45f-1ea7-4efd-8365-000310331737
+    script:
+      - npm run test:core:saucelabs
+      - npm run test:platform:saucelabs
+
   - stage: "Pre-release"
     if: branch = master AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
@@ -66,9 +84,9 @@ jobs:
       on:
         all_branches: true
 notifications:
-  email:
-    on_failure: always
-    on_success: change
-  slack:
-    rooms:
-      - ui-fundamentals:zVRyxlqkYnQFD7p8QHkWM8Fd#ngx-automated
+  email: false
+#    on_failure: always
+#    on_success: change
+#  slack:
+#    rooms:
+#      - ui-fundamentals:zVRyxlqkYnQFD7p8QHkWM8Fd#ngx-automated
