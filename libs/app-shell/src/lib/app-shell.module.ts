@@ -1,8 +1,9 @@
 import {
     APP_INITIALIZER,
-    InjectionToken,
     ModuleWithProviders,
-    NgModule
+    NgModule,
+    NgZone,
+    Optional
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppShellPageModule } from './components/app-shell-page/app-shell-page.module';
@@ -15,8 +16,18 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { PluginManagerService } from './api/extensions/plugin-manager.service';
 import { PluginDescriptor } from './api/extensions/lookup/plugin-descriptor.model';
-
-export const ConfigUrl = new InjectionToken<string>('appShell.configUrl');
+import { ShellBarService } from './api/extensions/shell-bar.service';
+import { AppShellProviderService } from './api/app-shell-provider.service';
+import { ThemeManagerService } from './api/theming/theme-manager.service';
+import { MessagingService } from './api/events/messaging.service';
+import { MessagingConfig } from './api/events/messaging.config';
+import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
+import { LookupService } from './api/extensions/lookup/lookup.service';
+import {
+    CONFIG_URL,
+    IS_APPSHELL_STANDALONE
+} from './tokens';
+import { RtlService } from '@fundamental-ngx/core';
 
 
 @NgModule({
@@ -35,34 +46,71 @@ export const ConfigUrl = new InjectionToken<string>('appShell.configUrl');
 })
 export class AppShellModule {
 
-    static forRoot(configUrl: string): ModuleWithProviders<AppShellModule> {
+    static forRoot(configUrl: string, isStandalone: boolean = false): ModuleWithProviders<AppShellModule> {
 
         return {
             ngModule: AppShellModule,
             providers: [
-                { provide: ConfigUrl, useValue: configUrl },
+                MessagingConfig,
+                LookupService,
+                RtlService,
+                { provide: CONFIG_URL, useValue: configUrl },
+                { provide: IS_APPSHELL_STANDALONE, useValue: isStandalone },
+                {
+                    provide: ShellBarService,
+                    useFactory: shellBarSrv,
+                    deps: [IS_APPSHELL_STANDALONE]
+                },
+                {
+                    provide: MessagingService,
+                    useClass: MessagingService,
+                    deps: [MessagingConfig, NgxPubSubService]
+                },
+                {
+                    provide: PluginManagerService,
+                    useClass: PluginManagerService,
+                    deps: [LookupService, MessagingService]
+                },
+                {
+                    provide: ThemeManagerService,
+                    useClass: ThemeManagerService,
+                    deps: [MessagingService]
+                },
+                {
+                    provide: AppShellProviderService,
+                    useClass: AppShellProviderService,
+                    deps: [NgZone, ThemeManagerService, [new Optional(), ShellBarService]]
+                },
                 {
                     'provide': APP_INITIALIZER,
                     useFactory: loadConfiguration,
                     multi: true,
-                    deps: [HttpClient, PluginManagerService, ConfigUrl]
+                    deps: [HttpClient, PluginManagerService, CONFIG_URL]
                 }
             ]
         };
     }
 }
 
+export function shellBarSrv(isStandalone: boolean): ShellBarService | null {
+    return isStandalone ? new ShellBarService() : null;
+}
 
 export function loadConfiguration(http: HttpClient, plugins: PluginManagerService, url: string): Promise<void> {
     const cFnc = function config(h: HttpClient, p: PluginManagerService, u: string): Promise<void> {
 
-        const promise: Promise<void> = new Promise((resolve: any) => {
-            http.get(url).toPromise().then((conf: Partial<PluginDescriptor[]>) => {
-                plugins.loadConfiguration(conf);
+        if (url) {
+            return new Promise((resolve: any) => {
+                http.get(url).toPromise().then((conf: Partial<PluginDescriptor[]>) => {
+                    plugins.loadConfiguration(conf);
+                    resolve(true);
+                });
+            });
+        } else {
+            return new Promise<void>((resolve: any) => {
                 resolve(true);
             });
-        });
-        return promise;
+        }
     };
     return cFnc.bind(http, plugins, url);
 }

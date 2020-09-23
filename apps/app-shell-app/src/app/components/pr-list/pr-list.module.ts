@@ -21,7 +21,7 @@ import {
 export class PrListModule implements PluginComponent {
 
     constructor(private pluginMgr: PluginManagerService) {
-        pluginMgr.register(this, { id: 'PrList' });
+        pluginMgr.register({ name: 'PrList' }, this);
     }
 
     initialize(context: PluginContext): void {

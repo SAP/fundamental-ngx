@@ -1,25 +1,23 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
     EventEmitter,
+    Inject,
     Input,
     OnInit,
     Output
 } from '@angular/core';
-import {
-    ShellbarUser,
-    ShellbarUserMenu
-} from '@fundamental-ngx/core';
+import { ShellbarComponent } from '@fundamental-ngx/core';
 import {
     DomSanitizer,
     SafeResourceUrl
 } from '@angular/platform-browser';
 import { AppShellProviderService } from '../../../api/app-shell-provider.service';
+import { ShellBarService } from '../../../api/extensions/shell-bar.service';
+import { IS_APPSHELL_STANDALONE } from '../../../tokens';
 
 
-/**
- * FDS stands for fundamental-shell
- */
 @Component({
     selector: 'fds-app-header',
     templateUrl: './app-header.component.html',
@@ -40,114 +38,47 @@ export class AppShellHeaderComponent implements OnInit {
     logoAlt: string;
 
     /**
-     * Shellbar title.
-     */
-    @Input()
-    title: string;
-
-    /**
-     * Shellbar sub-title.
-     */
-    @Input()
-    subTitle: string;
-
-    /**
-     * Toggles display of "product menu".
-     */
-    @Input()
-    hasProductMenu = false;
-
-    /**
-     * Hide display of "product switcher" button.
-     */
-    @Input()
-    hideProductSwitcher = false;
-
-    /**
-     * Tooltip label for product switcher button.
-     */
-    @Input()
-    productSwitcherLabel = 'Product Switcher';
-
-    /**
-     * Show "back" button.
-     */
-    @Input()
-    showBackButton = false;
-
-    /**
-     * "back" button label.
-     */
-    @Input()
-    backButtonLabel = 'Go Back';
-
-    cssUrl: SafeResourceUrl;
-
-    /**
-     * Emitted event when "back" button is clicked.
-     */
-    @Output()
-    backButtonClick: EventEmitter<void> = new EventEmitter();
-
-    /**
      * Emitted event when "logo" is clicked.
      */
     @Output()
     logoClick: EventEmitter<void> = new EventEmitter();
 
+    @ContentChild(ShellbarComponent, { static: true })
+    shellBar: ShellbarComponent;
 
-    // todo: replace all this with logic and object that we have in the app-framework
-    user: ShellbarUser = {
-        initials: 'WW',
-        colorAccent: 11
-    };
 
-    userMenu: ShellbarUserMenu[] = [
-        {
-            text: 'Settings', callback: () => {
-            }
-        },
-        {
-            text: 'Sign Out', callback: () => {
-            }
-        }
-    ];
+    /**
+     * @hidden
+     */
+    _cssUrl: SafeResourceUrl;
 
-    themes = [
-        {
-            id: 'sap_fiori_3',
-            name: 'Fiori 3'
-        },
-        {
-            id: 'sap_fiori_3_dark',
-            name: 'Fiori 3 Dark'
-        },
-        {
-            id: 'sap_fiori_3_hcb',
-            name: 'High Contrast Black'
-        },
-        {
-            id: 'sap_fiori_3_hcw',
-            name: 'High Contrast White'
-        }
-    ];
-
-    constructor(private sanitizer: DomSanitizer, private appShell: AppShellProviderService) {
+    constructor(private sanitizer: DomSanitizer,
+                public _appShell: AppShellProviderService,
+                @Inject(IS_APPSHELL_STANDALONE) public _isStandalone: boolean) {
     }
 
 
     ngOnInit(): void {
-        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/theme/sap_fiori_3.css');
-        this.appShell.themeManager.themeChanged(this.themes[0].id, this.themes[0].name);
+        if (this._isStandalone) {
+            this._cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/theme/sap_fiori_3.css');
+        }
     }
 
     onSelectTheme(id: string, name: string): void {
-        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/theme/' + id + '.css');
-        this.appShell.themeManager.themeChanged(id, name);
+        this._cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/theme/' + id + '.css');
+        this._appShell.themeManager.themeChanged(id, name);
     }
 
     onLogoClick($event: Event): void {
         $event.preventDefault();
         this.logoClick.emit();
+    }
+
+    private initShellBar(shellBar: ShellBarService): void {
+        if (!shellBar) {
+            return;
+        }
+
+
     }
 }

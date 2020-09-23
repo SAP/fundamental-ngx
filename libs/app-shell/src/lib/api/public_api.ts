@@ -10,4 +10,5 @@ export * from './extensions/component/plugin-configuration.model';
 export * from './extensions/plugin-manager.service';
 export * from './theming/theme-manager.service';
 export * from './app-shell-provider.service';
+export * from './extensions/shell-bar.service';
 

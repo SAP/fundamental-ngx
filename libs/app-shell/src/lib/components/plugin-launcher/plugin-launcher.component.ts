@@ -18,21 +18,13 @@ import { LookupService } from '../../api/extensions/lookup/lookup.service';
 import { isPluginComponent } from '../../api/extensions/component/plugin-component';
 import { PluginManagerService } from '../../api/extensions/plugin-manager.service';
 
-/**
- * FDS stands for fundamental-shell
- */
+
 @Component({
     selector: 'fds-plugin-laucher',
     template: '<ng-container #view></ng-container>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PluginLauncherComponent implements OnChanges {
-    @ViewChild('view', { read: ViewContainerRef, static: true })
-    viewContainer: ViewContainerRef;
-
-    @Input()
-    id: string;
-
     @Input()
     type: Scope = Scope.Page;
 
@@ -47,6 +39,10 @@ export class PluginLauncherComponent implements OnChanges {
 
     @Input()
     descriptor: Partial<PluginDescriptor>;
+
+    @ViewChild('view', { read: ViewContainerRef, static: true })
+    viewContainer: ViewContainerRef;
+
 
     constructor(private injector: Injector, private cfr: ComponentFactoryResolver,
                 private _cd: ChangeDetectorRef,
@@ -90,8 +86,8 @@ export class PluginLauncherComponent implements OnChanges {
             query.set('category', this.category);
         }
 
-        if (this.id) {
-            query.set('id', this.id);
+        if (this.name) {
+            query.set('name', this.name);
         }
         return query;
     }

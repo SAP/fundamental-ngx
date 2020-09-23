@@ -1,8 +1,9 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    OnInit
+    Inject
 } from '@angular/core';
+import { IS_APPSHELL_STANDALONE } from '../../../tokens';
 
 
 @Component({
@@ -11,9 +12,10 @@ import {
     styleUrls: ['./app-content.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppShellContentComponent implements OnInit {
+export class AppShellContentComponent {
 
-    ngOnInit(): void {
-        // API here to subscribe to provider
+
+    constructor(@Inject(IS_APPSHELL_STANDALONE) public _isStandalone: boolean) {
     }
+
 }

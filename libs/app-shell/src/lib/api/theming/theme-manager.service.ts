@@ -12,9 +12,7 @@ import { MessagingService } from '../events/messaging.service';
 
 const TOPIC_THEME_CHANGE = 'theme:change';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ThemeManagerService implements OnDestroy {
 
     private publisher: TopicPublisher<MapMessage<string>>;
