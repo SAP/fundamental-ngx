@@ -1,6 +1,7 @@
-import { Directive, OnInit, ElementRef } from '@angular/core';
+import { Directive, OnInit, ElementRef, Input, OnChanges } from '@angular/core';
 
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { ObjectStatus, buildObjectStatusCssClasses } from '../object-status/object-status.component';
 
 import { CLASS_NAME } from './constants';
 
@@ -8,12 +9,24 @@ import { CLASS_NAME } from './constants';
     // tslint:disable-next-line: directive-selector
     selector: '[fd-card-counter]'
 })
-export class CardCounterDirective implements OnInit, CssClassBuilder {
+export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder {
+    /**
+     * The status represented by the Object Status.
+     * Can be one of the following: 'negative' | 'critical' | 'positive' | 'informative'
+     */
+    @Input()
+    status: ObjectStatus;
+
     /** @hidden */
     class: string;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>) {}
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -23,7 +36,8 @@ export class CardCounterDirective implements OnInit, CssClassBuilder {
     @applyCssClass
     /** @hidden */
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardCounter];
+        const objectStatusClasses = buildObjectStatusCssClasses(this);
+        return [CLASS_NAME.cardCounter, ...objectStatusClasses];
     }
 
     /** @hidden */

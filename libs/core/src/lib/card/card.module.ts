@@ -48,7 +48,7 @@ const components = [
 
 @NgModule({
     declarations: [...components],
-    imports: [CommonModule, BadgeModule, ButtonModule, AvatarModule, ObjectStatusModule, ToolbarModule, TileModule],
+    imports: [CommonModule, BadgeModule, ButtonModule, AvatarModule, ObjectStatusModule],
     exports: [ButtonModule, AvatarModule, TileModule, ...components]
 })
 export class CardModule {}

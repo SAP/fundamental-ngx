@@ -1,40 +1,36 @@
-<fd-card badge="New" cardType="list">
+<fd-card>
     <fd-card-header>
-        <fd-avatar image="http://lorempixel.com/400/400/nature/4/"></fd-avatar>
         <h2 fd-card-title>Card Title</h2>
-        <h3 fd-card-subtitle>Card Subtitle</h3>
-        <span fd-card-counter>3 of 10</span>
     </fd-card-header>
     <fd-card-content>
-        <ul fd-list [noBorder]="true">
-            <li fd-list-item>
-                <span fd-list-title>
-                    item 1
-                </span>
-            </li>
-            <li fd-list-item>
-                <span fd-list-title>
-                    item 2
-                </span>
-            </li>
-            <li fd-list-item>
-                <span fd-list-title>
-                    item 3
-                </span>
-            </li>
-            <li fd-list-item>
-                <span fd-list-title>
-                    item 4
-                </span>
-            </li>
-        </ul>
+        <div class="card-content-placeholder">Any content</div>
     </fd-card-content>
 </fd-card>
 
 <br />
 <br />
+
 <h3>Card header can be at the bottom as well</h3>
+<fd-card>
+    <fd-card-content>
+        <div class="card-content-placeholder">Any content</div>
+    </fd-card-content>
+    <fd-card-header>
+        <h2 fd-card-title>Card Title</h2>
+    </fd-card-header>
+</fd-card>
+
+<br />
+<br />
+
+<h3>Card header with avatar, subtitle, counter and badge</h3>
 <fd-card badge="New" cardType="list">
+    <fd-card-header>
+        <fd-avatar image="http://lorempixel.com/400/400/nature/4/"></fd-avatar>
+        <h2 fd-card-title>Card Title</h2>
+        <h3 fd-card-subtitle>Card Subtitle</h3>
+        <span fd-card-counter status="positive">3 of 10</span>
+    </fd-card-header>
     <fd-card-content>
         <ul fd-list [noBorder]="true">
             <li fd-list-item>
@@ -59,10 +55,4 @@
             </li>
         </ul>
     </fd-card-content>
-    <fd-card-header>
-        <fd-avatar image="http://lorempixel.com/400/400/nature/4/"></fd-avatar>
-        <h2 fd-card-title>Card Title</h2>
-        <h3 fd-card-subtitle>Card Subtitle</h3>
-        <span fd-card-counter>3 of 10</span>
-    </fd-card-header>
 </fd-card>
