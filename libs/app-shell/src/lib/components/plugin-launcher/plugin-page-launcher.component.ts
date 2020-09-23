@@ -4,14 +4,11 @@ import {
     Component,
     OnInit
 } from '@angular/core';
-import { LookupService } from '../../api/extensions/lookup/lookup.service';
 import { ActivatedRoute } from '@angular/router';
+import { LookupService } from '../../api/extensions/lookup/lookup.service';
 import { PluginDescriptor } from '../../api/extensions/lookup/plugin-descriptor.model';
 
 
-/**
- * FDS stands for fundamental-shell
- */
 @Component({
     template: `
         <fds-plugin-laucher [descriptor]="_pluginDescriptor"></fds-plugin-laucher>

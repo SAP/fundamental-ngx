@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PluginDescriptor } from './plugin-descriptor.model';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class LookupService {
     private pluginsRepository: Array<Partial<PluginDescriptor>>;
 
@@ -26,7 +24,7 @@ export class LookupService {
             throw new Error('No Plugin found. Please check your configuration.');
         }
         const item: LookupItem = {
-            id: found[0].id,
+            id: found[0].name,
             attributes: query,
             version: found[0].version,
             descriptor: found[0]
@@ -37,7 +35,7 @@ export class LookupService {
     }
 
     addPlugin(plugin: Partial<PluginDescriptor>): void {
-        const found = this.pluginsRepository.find((p) => p.id === plugin.id);
+        const found = this.pluginsRepository.find((p) => p.name === plugin.name);
         if (!found) {
             this.pluginsRepository.push(plugin);
         }

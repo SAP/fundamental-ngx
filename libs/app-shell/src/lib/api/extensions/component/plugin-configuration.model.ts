@@ -8,7 +8,8 @@ import { Message } from '../../events/message-bus';
 
 
 export interface PluginConfiguration {
-    getId(): string
+
+    getName(): string
 
     /**
      * Should this be permissions? for now let's keep it simple

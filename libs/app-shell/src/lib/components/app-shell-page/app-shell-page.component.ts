@@ -2,11 +2,11 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    Input,
-    OnInit,
-    ViewChild
+    Inject,
+    OnInit
 } from '@angular/core';
 import { AppShellHeaderComponent } from './app-header/app-header.component';
+import { IS_APPSHELL_STANDALONE } from '../../tokens';
 
 
 /**
@@ -22,18 +22,9 @@ export class AppShellPageComponent implements OnInit {
     @ContentChild(AppShellHeaderComponent, { static: true })
     header: AppShellHeaderComponent;
 
-    /**
-     * Hides shell header.
-     */
-    @Input()
-    hideHeader: boolean;
 
-    /**
-     * Hides shell footer.
-     */
-    @Input()
-    hideFooter: boolean;
-
+    constructor(@Inject(IS_APPSHELL_STANDALONE) public _isStandalone: boolean) {
+    }
 
     ngOnInit(): void {
 

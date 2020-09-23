@@ -1,8 +1,8 @@
 import {
     Channel,
-    MessageBus,
     EventType,
     Message,
+    MessageBus,
     NativeTopicPublisher,
     NativeTopicSubscriber,
     RxJSTopicPublisher,
@@ -25,9 +25,7 @@ import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
  *  - Last Value Event:
  *  - History Value Event:
  */
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class MessagingService implements MessageBus<Message>, OnDestroy {
     private eventsRegistered: Map<string, EventType> = new Map<string, EventType>();
 

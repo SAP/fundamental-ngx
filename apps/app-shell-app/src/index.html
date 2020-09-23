@@ -14,10 +14,10 @@
 
 <script type="text/javascript">
     window.onload = function(e){
-        console.log('w = ', window.appShellProviderService)
+        console.log('w = ', window.appShellProvider)
 
-        window.appShellProviderService.zone.run(() => {
-            window.appShellProviderService.ref.themeManager.onChange((aaa) => {
+        window.appShellProvider.zone.run(() => {
+            window.appShellProvider.ref.themeManager.onChange((aaa) => {
                 console.log('JS: ', aaa)
             });
         });

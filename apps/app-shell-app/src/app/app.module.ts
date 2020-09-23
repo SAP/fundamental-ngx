@@ -24,7 +24,7 @@ import {
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        AppShellModule,
+        AppShellModule.forRoot(null, true),
         PrListModule,
         YourFavoritesModule,
         ItemPageModule,

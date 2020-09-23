@@ -9,12 +9,22 @@ import {
     Message,
     TextMessage
 } from './message-bus';
+import { MessagingConfig } from '@fundamental-ngx/app-shell';
+import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
 
 describe('MessagingService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 MessagingModule
+            ],
+            providers: [
+                MessagingConfig,
+                {
+                    provide: MessagingService,
+                    useClass: MessagingService,
+                    deps: [MessagingConfig, NgxPubSubService]
+                },
             ]
         });
     });

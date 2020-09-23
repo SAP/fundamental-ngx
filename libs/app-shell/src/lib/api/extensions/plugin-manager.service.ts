@@ -12,7 +12,6 @@ import {
 import { ThemeTopics } from '../theming/topic.model';
 import { PluginDescriptor } from './lookup/plugin-descriptor.model';
 import { Message } from '../events/message-bus';
-import { HttpClient } from '@angular/common/http';
 
 
 /**
@@ -23,7 +22,7 @@ import { HttpClient } from '@angular/common/http';
  * MF Federation Flow 1:
  * ---------------------
  *  Initial Idea was to have decentralized Lookup Microservices, where teams would register their services (with lease)
- *  and there would be a process discovery to retrieve these configuration and only then we could perform lookup
+ *  and there would be a process discovery to retrieve these configurations and only then we could perform lookup
  *  procedure. For simplicity now it is going to work as:
  *
  *  1. Plugin Manager is going to be used by AppShell (Application) to load required configuration in format of
@@ -72,8 +71,7 @@ import { HttpClient } from '@angular/common/http';
 export class PluginManagerService {
     private registry: Map<string, RegistrationEntry> = new Map<string, RegistrationEntry>();
 
-    constructor(private lookupService: LookupService, private messageBus: MessagingService,
-                private httpClient: HttpClient) {
+    constructor(private lookupService: LookupService, private messageBus: MessagingService) {
     }
 
     loadConfiguration(plugins: Array<Partial<PluginDescriptor>>): void {
@@ -82,6 +80,7 @@ export class PluginManagerService {
 
     register(descriptor: Partial<PluginDescriptor>, pluginComponent?: PluginComponent): void {
         let configuration: Partial<PluginConfiguration>;
+        const name = descriptor ? descriptor.name : pluginComponent.getConfiguration().getName();
         if (pluginComponent) {
             configuration = pluginComponent.getConfiguration();
             this.doConfigureTheming(configuration);
@@ -90,7 +89,7 @@ export class PluginManagerService {
             const context = new PluginContext(new Map());
             pluginComponent.initialize(context);
         }
-        this.registry.set(descriptor.id, new RegistrationEntry(descriptor, configuration, pluginComponent));
+        this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
     }
 
 
