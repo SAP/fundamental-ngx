@@ -3,7 +3,18 @@
         <h2 fd-card-title>Card Title</h2>
     </fd-card-header>
     <fd-card-content>
-        <div class="card-content-placeholder">Content</div>
+        <ul fd-list [noBorder]="true">
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 1
+                </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 2
+                </span>
+            </li>
+        </ul>
     </fd-card-content>
 </fd-card>
 
@@ -13,7 +24,18 @@
 <h3>Card header can be at the bottom as well</h3>
 <fd-card>
     <fd-card-content>
-        <div class="card-content-placeholder">Content</div>
+        <ul fd-list [noBorder]="true">
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 1
+                </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title>
+                    item 2
+                </span>
+            </li>
+        </ul>
     </fd-card-content>
     <fd-card-header>
         <h2 fd-card-title>Card Title</h2>
