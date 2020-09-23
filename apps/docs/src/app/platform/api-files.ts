@@ -24,7 +24,8 @@ export const API_FILES = {
         'TableComponent',
         'TableWrapperComponent',
         'TableToolbarComponent',
-        'TableToolbarActionsComponent'
+        'TableToolbarActionsComponent',
+        'TableColumnComponent'
     ],
     textarea: ['TextAreaComponent'],
     panel: [

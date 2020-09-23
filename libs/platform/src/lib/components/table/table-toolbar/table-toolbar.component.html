@@ -1,5 +1,5 @@
 <ng-template let-size="size" let-counter="counter">
-    <fd-toolbar [clearBorder]="true" [hasTitle]="!!title" [size]="size !== 'cozy' ? 'compact' : 'cozy'">
+    <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title" [size]="size !== 'cozy' ? 'compact' : 'cozy'">
         <label fd-toolbar-label>{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
 
         <ng-container *ngIf="tableToolbarActionsComponent">

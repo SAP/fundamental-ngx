@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-const ITEMS = [{
+export const ITEMS = [{
     'name': 'implementation',
     'description': 'sit amet consectetuer adipiscing elit',
     'price': {
@@ -86,12 +86,8 @@ const ITEMS = [{
     selector: 'fdp-table-default-example',
     templateUrl: './platform-table-default-example.component.html'
 })
-export class PlatformTableDefaultExampleComponent implements OnInit {
+export class PlatformTableDefaultExampleComponent {
     source: any[] = ITEMS;
-
-    constructor() {}
-
-    ngOnInit(): void {}
 
     onRowSelectionChange(event): void {
         console.log(event);

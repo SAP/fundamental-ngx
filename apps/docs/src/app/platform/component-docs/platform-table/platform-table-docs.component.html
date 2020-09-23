@@ -19,3 +19,48 @@
 <code-example [exampleFiles]="different"></code-example>
 
 <separator></separator>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fdp-table
+        [dataSource]="tableData"
+        [contentDensity]="data.table.contentDensity"
+        [selectionMode]="data.table.selectionMode"
+        [emptyTableMessage]="'No data found'"
+        (rowSelectionChange)="onRowSelectionChange($event)">
+        <fdp-table-toolbar
+            [title]="data['table-toolbar'].title"
+            [hideItemCount]="data['table-toolbar'].hideItemCount">
+            <fdp-table-toolbar-actions>
+                <fdp-button>Edit</fdp-button>
+                <fdp-button>Delete</fdp-button>
+            </fdp-table-toolbar-actions>
+        </fdp-table-toolbar>
+
+        <fdp-column
+            name="name"
+            key="name"
+            label="Name"
+            align="start">
+        </fdp-column>
+
+        <fdp-column
+            name="description"
+            key="description"
+            label="Description">
+        </fdp-column>
+
+        <fdp-column
+            name="price"
+            key="price.value"
+            label="Price"
+            align="end">
+        </fdp-column>
+
+        <fdp-column
+            name="status"
+            key="status"
+            label="Status"
+            align="center">
+        </fdp-column>
+    </fdp-table>
+</playground>
