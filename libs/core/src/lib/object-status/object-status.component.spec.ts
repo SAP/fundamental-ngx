@@ -39,13 +39,6 @@ describe('ObjectStatusComponent', () => {
         expect(component.elementRef().nativeElement.classList.contains('fd-object-status--positive')).toBe(true);
     });
 
-    it('Should Add Glyph', () => {
-        component.glyph = 'status-negative';
-        component.buildComponentCssClass();
-        fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('sap-icon--status-negative')).toBe(true);
-    });
-
     it('Should Add Indication Color', () => {
         component.indicationColor = 2;
         component.buildComponentCssClass();

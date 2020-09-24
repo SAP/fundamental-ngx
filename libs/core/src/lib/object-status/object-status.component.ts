@@ -14,7 +14,12 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-object-status]',
-    template: `<ng-content></ng-content>`,
+    template: `
+        <i class="fd-object-status__icon" *ngIf="glyph" [ngClass]="'sap-icon--' + glyph" role="presentation"></i>
+        <span class="fd-object-status__text">
+            <ng-content></ng-content>
+        </span>
+    `,
     styleUrls: ['./object-status.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -81,7 +86,6 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
             this.inverted ? 'fd-object-status--inverted' : '',
             this.large ? 'fd-object-status--large' : '',
             this.status ? `fd-object-status--${this.status}` : '',
-            this.glyph ? `sap-icon--${this.glyph}` : '',
             this.indicationColor ? `fd-object-status--indication-${this.indicationColor}` : '',
             this.clickable ? 'fd-object-status--link' : '',
             this.class
