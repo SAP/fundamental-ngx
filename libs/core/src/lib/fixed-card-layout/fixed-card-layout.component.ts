@@ -1,6 +1,7 @@
 import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
     AfterContentInit,
+    AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -9,14 +10,16 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
-    HostListener,
     Input,
-    NgZone,
+    OnDestroy,
+    OnInit,
     Output,
     QueryList,
     TemplateRef,
     ViewChild
 } from '@angular/core';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
 const CARD_GAP_WIDTH = 16; // gap=1rem==16px
@@ -27,7 +30,7 @@ export class CardDefinitionDirective {
 }
 
 class Layout {
-    constructor(public noOfColumns: number, public screenSize: number) {}
+    constructor(public numberOfColumns: number, public screenSize: number) {}
 }
 
 class CardDropped {
@@ -42,7 +45,7 @@ type CardColumn = CardDefinitionDirective[];
     styleUrls: ['./fixed-card-layout.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FixedCardLayoutComponent implements AfterContentInit, AfterViewInit {
+export class FixedCardLayoutComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
     /** @hidden */
     @ContentChildren(CardDefinitionDirective)
     cards: QueryList<CardDefinitionDirective>;
@@ -51,7 +54,7 @@ export class FixedCardLayoutComponent implements AfterContentInit, AfterViewInit
     @ViewChild('layout')
     layout: ElementRef;
 
-    /** Drag drop behaviour can be disabled */
+    /** Drag drop behavior can be disabled */
     @Input()
     disableDragDrop: boolean;
 
@@ -66,39 +69,36 @@ export class FixedCardLayoutComponent implements AfterContentInit, AfterViewInit
     /** Array of CardDefinitionDirective Array.To make Table kind of layout.*/
     public columns: CardColumn[];
     /** @hidden Number of Columns in layout */
-    private numberOfColumns = 3;
+    private _numberOfColumns: number;
     /** @hidden */
-    private previousNumberOfColumns: number;
+    private _previousNumberOfColumns: number;
 
-    /** @hidden */
-    @HostListener('window:resize', [])
-    onResize(): void {
-        this.ngZone.runOutsideAngular(() => {
-            this.numberOfColumns = this._getNumberOfColumns();
-        });
-        if (this.previousNumberOfColumns !== this.numberOfColumns) {
-            this.ngZone.run(() => {
-                this.previousNumberOfColumns = this.numberOfColumns;
-                this._renderLayout();
-            });
-        }
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    constructor(private readonly _changeDetector: ChangeDetectorRef) {}
+
+    ngOnInit(): void {
+        this._listenOnResize();
     }
-
-    constructor(private readonly _cd: ChangeDetectorRef, private readonly ngZone: NgZone) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
-        // subscribe to number of card change
-        this.cards.changes.subscribe(() => this._renderLayout());
+        this._listenOnCardsChange();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.numberOfColumns = this._getNumberOfColumns();
+        this._createColumnsLayout();
+    }
 
-        // initialise previousNumberOfColumns with starting numberOfColumns
-        this.previousNumberOfColumns = this.numberOfColumns;
-        this._renderLayout();
+    ngAfterViewChecked(): void {
+        this._updateColumnsLayout();
+    }
+
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden Arranges cards on drop of dragged card */
@@ -113,9 +113,50 @@ export class FixedCardLayoutComponent implements AfterContentInit, AfterViewInit
         this.cardDraggedDropped.emit(new CardDropped(event.container, event.previousIndex, event.currentIndex));
     }
 
+    /** Distribute cards on window resize */
+    public onResize(): void {
+        this._numberOfColumns = this._getNumberOfColumns();
+        if (this._previousNumberOfColumns !== this._numberOfColumns) {
+            this._previousNumberOfColumns = this._numberOfColumns;
+            this._renderLayout();
+        }
+    }
+
     /** Return available width for fd-card-layout */
     public getWidthAvailable(): number {
         return this.layout.nativeElement.getBoundingClientRect().width;
+    }
+
+    /** @hidden Listen window resize and distribute cards on column change */
+    private _listenOnResize(): void {
+        fromEvent(window, 'resize')
+            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
+            .subscribe(() => this.onResize());
+    }
+
+    /** @hidden Listen card change and distribute cards on column change */
+    private _listenOnCardsChange(): void {
+        this.cards.changes.subscribe(() => this._renderLayout());
+    }
+
+    /** @hidden Create column layout when view is initialized */
+    private _createColumnsLayout(): void {
+        this._numberOfColumns = this._getNumberOfColumns();
+
+        // initialize previousNumberOfColumns with starting numberOfColumns
+        this._previousNumberOfColumns = this._numberOfColumns;
+        this._renderLayout();
+    }
+
+    /**
+     * @hidden Update column layout when orientation of screen changes.
+     * actual width is returned when view is stable. In AfterViewInit, correct value does not come.
+     */
+    private _updateColumnsLayout(): void {
+        this._numberOfColumns = this._getNumberOfColumns();
+        if (this._numberOfColumns !== this._previousNumberOfColumns) {
+            this._renderLayout();
+        }
     }
 
     /** @hidden Returns number of columns that can fit in current available width for fd-card-layout */
@@ -134,7 +175,7 @@ export class FixedCardLayoutComponent implements AfterContentInit, AfterViewInit
             columnCount = numberOfCardsWithNoGap;
         }
 
-        // minumum number of column to 1
+        // minimum number of column to 1
         columnCount = columnCount ? columnCount : 1;
         this.layoutChange.emit(new Layout(columnCount, availableLayoutWidth));
         return columnCount;
@@ -144,9 +185,9 @@ export class FixedCardLayoutComponent implements AfterContentInit, AfterViewInit
      * @hidden Renders layout on column changes.
      */
     private _renderLayout(): void {
-        this._initializeColumns(this.numberOfColumns);
+        this._initializeColumns(this._numberOfColumns);
         this._distributeCards(this.cards, this.columns);
-        this._cd.detectChanges();
+        this._changeDetector.detectChanges();
     }
 
     /**
@@ -163,9 +204,9 @@ export class FixedCardLayoutComponent implements AfterContentInit, AfterViewInit
      * @hidden Redistribute cards among columns
      */
     private _distributeCards(cards: QueryList<CardDefinitionDirective>, columns: CardColumn[]): void {
-        const length = columns.length;
+        const numberOfColumns = columns.length;
         cards?.forEach((card, i) => {
-            const index = i % length;
+            const index = i % numberOfColumns;
             columns[index].push(card);
         });
     }

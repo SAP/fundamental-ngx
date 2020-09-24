@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-fixed-card-layout-disabled-drag',
-    templateUrl: './fixed-card-layout-disabled-drag.component.html'
+    templateUrl: './fixed-card-layout-disabled-drag.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FixedCardLayoutDisabledDragExampleComponent {
     dragDisabled = false;
-
-    constructor() {}
 
     public changeDragBehaviour(): void {
         this.dragDisabled = !this.dragDisabled;
