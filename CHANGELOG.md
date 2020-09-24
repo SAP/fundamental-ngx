@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.78...v0.22.0-rc.80) (2020-09-24)
+
+
+### Bug Fixes
+
+* (core) applyCssClass decorator ([#3328](https://github.com/SAP/fundamental-ngx/issues/3328)) ([f452eb6](https://github.com/SAP/fundamental-ngx/commit/f452eb66133478d201850cf5298d0929e4dd3d25))
+* (platform) input group states ([#3333](https://github.com/SAP/fundamental-ngx/issues/3333)) ([a29828c](https://github.com/SAP/fundamental-ngx/commit/a29828ca5dfe4ecd6765fd3119343cb86aa7f2be))
+* Remove hammer config ([#3332](https://github.com/SAP/fundamental-ngx/issues/3332)) ([b91c937](https://github.com/SAP/fundamental-ngx/commit/b91c937eeeed24e519dd3f6d7336efe498b2f8da))
+
 ## [0.22.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.78...v0.22.0-rc.79) (2020-09-21)
 
 
