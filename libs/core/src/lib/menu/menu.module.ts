@@ -10,9 +10,10 @@ import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.compo
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
 import { PopoverModule } from '../popover/popover.module';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
+import { IconModule } from '../icon/icon.module';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule],
+    imports: [CommonModule, PopoverModule, IconModule],
     declarations: [
         MenuComponent,
         MenuItemComponent,
