@@ -1,0 +1,10 @@
+.item-margin {
+    margin-right: 1rem;
+
+    @at-root {
+        [dir='rtl'] & {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+    }
+}
