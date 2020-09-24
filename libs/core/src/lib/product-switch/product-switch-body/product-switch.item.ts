@@ -6,7 +6,7 @@ export interface ProductSwitchItem {
     subtitle?: string;
 
     /** @deprecated
-     * Use icon property instead of image
+     * Use icon property instead
      */
     image?: string;
 
