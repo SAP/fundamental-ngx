@@ -13,6 +13,6 @@ export class DialogPositionExampleComponent {
             width: '300px',
             responsivePadding: true,
             position: { bottom: '100px', right: '100px' }
-        } as DialogConfig);
+        });
     }
 }

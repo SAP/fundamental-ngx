@@ -12,6 +12,6 @@ export class PopoverDialogExampleComponent {
         this._dialogService.open(template, {
             width: '500px',
             responsivePadding: true
-        } as DialogConfig);
+        });
     }
 }

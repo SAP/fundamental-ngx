@@ -3,7 +3,7 @@ import { MOBILE_MODE_CONFIG, MobileModeControl, MobileModeConfigToken, DialogCon
 
 const SELECT_MOBILE_CONFIG: MobileModeConfigToken = {
     target: MobileModeControl.SELECT,
-    config: { hasCloseButton: true, dialogConfig: { mobileOuterSpacing: true } as DialogConfig }
+    config: { hasCloseButton: true, dialogConfig: { mobileOuterSpacing: true } }
 };
 
 @NgModule({

@@ -18,7 +18,7 @@ export class CalendarMobileExampleComponent {
             verticalPadding: false,
             width: '640px',
             height: '400px'
-        } as DialogConfig);
+        });
     }
 
     openPortraitDialog(dialog: TemplateRef<any>): void {
@@ -28,7 +28,7 @@ export class CalendarMobileExampleComponent {
             verticalPadding: false,
             width: '360px',
             height: '640px'
-        } as DialogConfig);
+        });
     }
 
     dateChanged(date: FdDate): void {

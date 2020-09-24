@@ -36,6 +36,6 @@ export class FirstDialogExampleComponent {
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, public _dialogService: DialogService) {}
 
     openDialog(): void {
-        this._dialogService.open(SecondDialogExampleComponent, { responsivePadding: true } as DialogConfig);
+        this._dialogService.open(SecondDialogExampleComponent, { responsivePadding: true });
     }
 }
