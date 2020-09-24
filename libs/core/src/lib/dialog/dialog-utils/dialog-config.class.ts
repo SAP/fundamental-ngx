@@ -1,3 +1,4 @@
+/* tslint:disable:no-inferrable-types */
 /**
  * Configuration for opening a dialog with the DialogService.
  */
@@ -43,25 +44,25 @@ export class DialogConfig implements DynamicComponentConfig {
     ariaDescribedBy?: string = null;
 
     /** Whether the dialog should have a backdrop. */
-    hasBackdrop = true;
+    hasBackdrop?: boolean = true;
 
     /** Whether clicking on the backdrop should close the dialog. Only works if hasBackdrop is true. */
-    backdropClickCloseable = true;
+    backdropClickCloseable?: boolean = true;
 
     /** Global classes to apply to the backdrop. */
-    backdropClass = '';
+    backdropClass?: string;
 
     /** Classes to apply to the `fd-dialog-container`  */
-    containerClass = '';
+    containerClass?: string;
 
     /** Global classes to apply to the dialog panel. */
-    dialogPanelClass = '';
+    dialogPanelClass?: string;
 
     /** Whether the escape key should close the dialog. */
-    escKeyCloseable = true;
+    escKeyCloseable?: boolean = true;
 
     /** Whether the dialog should be focus trapped. */
-    focusTrapped = true;
+    focusTrapped?: boolean = true;
 
     /** The container that the dialog is appended to. By default, it is appended to the body. */
     container?: HTMLElement | 'body' = 'body';
@@ -85,7 +86,7 @@ export class DialogConfig implements DynamicComponentConfig {
     resizable?: boolean;
 
     /** Whether the dialog should have vertical padding. */
-    verticalPadding = true;
+    verticalPadding?: boolean = true;
 
     /** Whether the dialog should have responsive horizontal padding changing with Dialogs window width.
      * max-width: 599px                         - .fd-dialog__content--s
@@ -93,8 +94,8 @@ export class DialogConfig implements DynamicComponentConfig {
      * min-width: 1024px and max-width: 1439px  - .fd-dialog__content--l
      * min-width: 1440px                        - .fd-dialog__content--xl
      * */
-    responsivePadding = false;
+    responsivePadding?: boolean = false;
 
     /** Whether to close the dialog on router navigation start. */
-    closeOnNavigation = true;
+    closeOnNavigation?: boolean = true;
 }

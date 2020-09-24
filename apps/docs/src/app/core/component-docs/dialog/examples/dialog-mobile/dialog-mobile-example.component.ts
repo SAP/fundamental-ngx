@@ -12,6 +12,6 @@ export class DialogMobileExampleComponent {
         this._dialogService.open(dialogTemplate, {
             mobile: true,
             responsivePadding: true
-        } as DialogConfig);
+        });
     }
 }
