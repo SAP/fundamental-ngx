@@ -8,39 +8,39 @@ import { Media } from '@fundamental-ngx/platform';
 export class PlatformThumbnailHorizontalExampleComponent {
 
     data: Media[] = [{
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        thumbnailUrl: 'http://lorempixel.com/640/480/nature/2',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/400/400/nature',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        mediaUrl: 'http://lorempixel.com/640/480/nature/2',
+        alt: 'Failed to load http://lorempixel.com/640/480/nature/2',
         label: 'nature'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/400/400/',
+        thumbnailUrl: 'http://lorempixel.com/480/640/animals/2',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/400/400/',
-        alt: 'Failed to load http://lorempixel.com/400/400/',
+        mediaUrl: 'http://lorempixel.com/480/640/animals/2',
+        alt: 'Failed to load http://lorempixel.com/480/640/animals/2',
         label: 'animal'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/g/400/200/',
+        thumbnailUrl: 'http://lorempixel.com/600/600/city/2',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/g/400/200/',
-        alt: 'Failed to load http://lorempixel.com/g/400/200/',
+        mediaUrl: 'http://lorempixel.com/600/600/city/2',
+        alt: 'Failed to load http://lorempixel.com/600/600/city/2',
         label: 'culture'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/400/200/sports/1/',
+        thumbnailUrl: 'http://lorempixel.com/640/480/sports/2',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/400/200/sports/1/',
-        alt: 'Failed to load http://lorempixel.com/400/200/sports/1/',
-        label: 'dance'
+        mediaUrl: 'http://lorempixel.com/640/480/sports/2',
+        alt: 'Failed to load http://lorempixel.com/640/480/sports/2',
+        label: 'sports'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        thumbnailUrl: 'http://lorempixel.com/400/400/abstract/2',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/400/400/nature',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature',
-        label: 'nature'
+        mediaUrl: 'http://lorempixel.com/400/400/abstract/2',
+        alt: 'Failed to load http://lorempixel.com/400/400/abstract/2',
+        label: 'art'
     }
     ];
 

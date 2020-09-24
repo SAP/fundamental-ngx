@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Media } from '../thumbnail.component';
 
 @Component({
     selector: 'fdp-thumbnail-image',
     templateUrl: './thumbnail-image.component.html',
-    styleUrls: ['./thumbnail-image.component.scss']
+    styleUrls: ['./thumbnail-image.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ThumbnailImageComponent {
 

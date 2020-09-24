@@ -1,6 +1,6 @@
 .fdp-thumbnail-container {
-
-  $fdp-thumnail-container-size: 20rem;
+  $fdp-thumbnail-container-size: 34.5rem;
+  $fdp-thumbnail-container-margin: 1rem;
 
   display: inline-flex;
 
@@ -8,30 +8,55 @@
     display: block;
 
     .fdp-media-container {
-      margin-bottom: 4rem;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: $fdp-thumbnail-container-margin;
+
+      [dir='rtl'] & {
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
   }
 
   img {
-    max-width: 100%;
     max-height: 100%;
-    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
 
   video {
-    max-width: 100%;
     max-height: 100%;
-    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
+
   .fdp-media-container {
-    width: $fdp-thumnail-container-size;
-    height: $fdp-thumnail-container-size;
-    padding-top: 3rem;
-    margin-left: 4rem;
+    position: relative;
+    width: $fdp-thumbnail-container-size;
+    height: $fdp-thumbnail-container-size;
+    margin-top: $fdp-thumbnail-container-margin;
+    margin-left: $fdp-thumbnail-container-margin;
+
+    background-color: var(--sapNeutralBackground);
 
     [dir='rtl'] & {
       margin-left: 0;
-      margin-right: 4rem;
+      margin-right: $fdp-thumbnail-container-margin;
     }
   }
 
