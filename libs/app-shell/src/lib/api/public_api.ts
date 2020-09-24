@@ -2,6 +2,7 @@ export * from './events/message-bus';
 export * from './events/messaging.config';
 export * from './events/messaging.module';
 export * from './events/messaging.service';
+export * from './events/topics.service';
 export * from './extensions/federation-utils';
 export * from './extensions/lookup/lookup.service';
 export * from './extensions/lookup/plugin-descriptor.model';

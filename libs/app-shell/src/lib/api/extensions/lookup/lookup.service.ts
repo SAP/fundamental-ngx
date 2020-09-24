@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import {
+    Injectable,
+    OnDestroy
+} from '@angular/core';
 import { PluginDescriptor } from './plugin-descriptor.model';
 
 @Injectable()
-export class LookupService {
+export class LookupService implements OnDestroy {
     private pluginsRepository: Array<Partial<PluginDescriptor>>;
 
 
@@ -39,6 +42,10 @@ export class LookupService {
         if (!found) {
             this.pluginsRepository.push(plugin);
         }
+    }
+
+    ngOnDestroy(): void {
+        this.pluginsRepository = null;
     }
 }
 

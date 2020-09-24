@@ -1,4 +1,7 @@
-import { Injectable } from '@angular/core';
+import {
+    Injectable,
+    OnDestroy
+} from '@angular/core';
 import { LookupService } from './lookup/lookup.service';
 import {
     PluginComponent,
@@ -9,9 +12,14 @@ import {
     Listener,
     PluginConfiguration
 } from './component/plugin-configuration.model';
-import { ThemeTopics } from '../theming/topic.model';
 import { PluginDescriptor } from './lookup/plugin-descriptor.model';
-import { Message } from '../events/message-bus';
+import {
+    EventType,
+    MapMessage,
+    Message,
+    TopicPublisher
+} from '../events/message-bus';
+import { MessagingTopics } from '../../api/events/topics.service';
 
 
 /**
@@ -63,58 +71,71 @@ import { Message } from '../events/message-bus';
  *
  *
  *
- *
+ * todo: Maybe create some factory to make the Topic Message easier.
  */
-@Injectable({
-    providedIn: 'root'
-})
-export class PluginManagerService {
+@Injectable()
+export class PluginManagerService implements OnDestroy {
     private registry: Map<string, RegistrationEntry> = new Map<string, RegistrationEntry>();
+    private pluginTopic: TopicPublisher<MapMessage<string>>;
 
-    constructor(private lookupService: LookupService, private messageBus: MessagingService) {
+    constructor(private lookupService: LookupService, private messageBus: MessagingService,
+                private topics: MessagingTopics) {
+        this.topics.addTopic({ prefix: 'system:', eventType: EventType.DEFAULT, name: 'system:plugin' });
+
+        this.pluginTopic = this.messageBus.createPublisher<MapMessage<string>>('system:plugin', EventType.DEFAULT);
     }
 
     loadConfiguration(plugins: Array<Partial<PluginDescriptor>>): void {
+        const m = new MapMessage<string>('system:plugin');
+        m.set('type', 'load started');
+        this.pluginTopic.publish(m);
         plugins.forEach(c => this.lookupService.addPlugin(c));
+
+        m.set('type', 'load finish');
+        this.pluginTopic.publish(m);
     }
 
     register(descriptor: Partial<PluginDescriptor>, pluginComponent?: PluginComponent): void {
+        const m = new MapMessage<string>('system:plugin');
+        m.set('type', 'register started');
+        m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
+
         let configuration: Partial<PluginConfiguration>;
         const name = descriptor ? descriptor.name : pluginComponent.getConfiguration().getName();
         if (pluginComponent) {
             configuration = pluginComponent.getConfiguration();
             this.doConfigureTheming(configuration);
-            this.doConfigureMenus(configuration);
 
+            // as part of communication strategies pass only things that are needed.
             const context = new PluginContext(new Map());
             pluginComponent.initialize(context);
         }
         this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
+
+        m.set('type', 'register finished');
+        m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
     }
 
 
-    unRegister(plugin: PluginComponent, descriptor: PluginDescriptor): void {
-
+    ngOnDestroy(): void {
+        this.registry.clear();
     }
+
 
     private doConfigureTheming(configuration: Partial<PluginConfiguration>): void {
         if (!configuration.getPermission().themingChange || configuration.addListeners().length === 0) {
             return;
         }
 
-
         configuration.addListeners().forEach((listener: Listener) => {
-            if (listener.topic.includes(ThemeTopics.Prefix)) {
-                const subscriber = this.messageBus.createSubscriber(listener.topic, ThemeTopics.EventType);
+            if (this.topics.hasTopic(listener.topic)) {
+                const topic = this.topics.getTopic(listener.topic);
+                const subscriber = this.messageBus.createSubscriber(listener.topic, topic.eventType);
                 subscriber.onMessage((m: Message) => {
                     listener.onMessage(m);
                 });
             }
         });
-    }
-
-    private doConfigureMenus(configuration: Partial<PluginConfiguration>): void {
-
     }
 }
 
