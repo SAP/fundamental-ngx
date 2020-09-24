@@ -49,10 +49,10 @@ describe('DefaultThumbnailImageComponent', () => {
     });
     it('should emit on thumbNailClicked', () => {
 
-        spyOn(thumbNailImageComponent.thumbNailClicked, 'emit')
-        thumbNailImageComponent.thumbNailClick(component.mediaList[0]);
-        expect(thumbNailImageComponent.thumbNailClicked.emit).toHaveBeenCalled();
-        expect(thumbNailImageComponent.thumbNailClicked.emit).toHaveBeenCalledWith(component.mediaList[0]);
+        spyOn(thumbNailImageComponent.thumbnailClicked, 'emit')
+        thumbNailImageComponent.thumbnailClick(component.mediaList[0]);
+        expect(thumbNailImageComponent.thumbnailClicked.emit).toHaveBeenCalled();
+        expect(thumbNailImageComponent.thumbnailClicked.emit).toHaveBeenCalledWith(component.mediaList[0]);
 
     });
 

@@ -16,11 +16,11 @@ export class ThumbnailImageComponent {
     isHorizontal = false;
 
     @Output()
-    thumbNailClicked: EventEmitter<Media> = new EventEmitter();
+    thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
     /** @hidden */
-    thumbNailClick(selectedMedia: Media): void {
-        this.thumbNailClicked.emit(selectedMedia);
+    thumbnailClick(selectedMedia: Media): void {
+        this.thumbnailClicked.emit(selectedMedia);
     }
 
 

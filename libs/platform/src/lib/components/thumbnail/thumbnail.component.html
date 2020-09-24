@@ -3,7 +3,7 @@
         *ngIf="!isHorizontal"
         [mediaList]="mediaList"
         [isHorizontal]="isHorizontal"
-        (thumbNailClicked)="thumbNailClickHandle($event)"
+        (thumbnailClicked)="thumbnailClickHandle($event)"
     ></fdp-thumbnail-image>
     <div class="fdp-media-container">
         <img
@@ -20,6 +20,6 @@
         *ngIf="isHorizontal"
         [mediaList]="mediaList"
         [isHorizontal]="isHorizontal"
-        (thumbNailClicked)="thumbNailClickHandle($event)"
+        (thumbnailClicked)="thumbnailClickHandle($event)"
     ></fdp-thumbnail-image>
 </div>

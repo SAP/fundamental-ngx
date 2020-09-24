@@ -42,7 +42,7 @@ export class ThumbnailComponent implements OnInit {
         this.selectedMedia = this.mediaList[0];
     }
 
-    thumbNailClickHandle(selectedMedia: Media): void {
+    thumbnailClickHandle(selectedMedia: Media): void {
 
         this.selectedMedia = selectedMedia;
         this.thumbnailClicked.emit(this.createClickEvent(this.selectedMedia));
