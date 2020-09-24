@@ -10,7 +10,7 @@
             (selectionChange)="onSelect($event)">
             <ng-template fdTemplate="optionItemTemplate" let-item let-index="index">
                 <div class="fd-template-container-div">
-                    <fd-icon glyph="accept" size="l" class="fd-template-icon"></fd-icon>
+                    <fd-icon glyph="accept" class="fd-template-icon"></fd-icon>
                     <span [innerText]="item.name"></span>
                 </div>
             </ng-template>
@@ -64,7 +64,7 @@
             (selectionChange)="onSelect3($event)">
             <ng-template fdTemplate="selectedItemTemplate" let-item>
                 <div class="fd-template-container-div">
-                    <fd-icon glyph="accept" size="l" class="fd-template-icon"></fd-icon>
+                    <fd-icon glyph="accept" class="fd-template-icon"></fd-icon>
                     <span [innerText]="item.name"></span>
                 </div>
             </ng-template>
