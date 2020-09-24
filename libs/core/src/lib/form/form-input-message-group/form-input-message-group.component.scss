@@ -19,3 +19,8 @@
         display: block;
     }
 }
+
+.fd-popover__popper.fd-popover__popper--input-message-group {
+    margin-top: 0 !important;
+    z-index: 999;
+}
