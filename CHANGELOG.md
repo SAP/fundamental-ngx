@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.80...v0.22.0-rc.81) (2020-09-24)
+
+
+### Bug Fixes
+
+* (core) make router in dialog optional ([#3360](https://github.com/SAP/fundamental-ngx/issues/3360)) ([f2fa015](https://github.com/SAP/fundamental-ngx/commit/f2fa015169122c6d5c17b08840d23982ab2e52e4))
+
 ## [0.22.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.78...v0.22.0-rc.80) (2020-09-24)
 
 
