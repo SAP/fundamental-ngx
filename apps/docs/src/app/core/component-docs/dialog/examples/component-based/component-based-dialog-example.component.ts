@@ -29,7 +29,7 @@ export class ComponentBasedDialogExampleComponent {
                 ]
             },
             width: '400px'
-        } as DialogConfig);
+        });
 
         dialogRef.afterClosed.subscribe(
             (result) => {
