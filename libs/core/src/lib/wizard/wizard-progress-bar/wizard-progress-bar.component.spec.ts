@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WizardProgressBarComponent } from './wizard-progress-bar.component';
+import { WizardProgressBarDirective } from './wizard-progress-bar.directive';
 
 describe('WizardProgressBarComponent', () => {
-    let component: WizardProgressBarComponent;
-    let fixture: ComponentFixture<WizardProgressBarComponent>;
+    let component: WizardProgressBarDirective;
+    let fixture: ComponentFixture<WizardProgressBarDirective>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [WizardProgressBarComponent]
+            declarations: [WizardProgressBarDirective]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(WizardProgressBarComponent);
+        fixture = TestBed.createComponent(WizardProgressBarDirective);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

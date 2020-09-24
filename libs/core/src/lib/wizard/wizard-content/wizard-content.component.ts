@@ -1,4 +1,5 @@
 import { Component, Input, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { WizardSize } from '../wizard-progress-bar/wizard-progress-bar.directive';
 
 export type WizardContentBackground = 'solid' | 'list' | 'transparent';
 
@@ -13,7 +14,13 @@ export class WizardContentComponent {
      * The type of wizard background ('solid', 'list', or 'transparent').
      */
     @Input()
-    background: WizardContentBackground;
+    contentBackground: WizardContentBackground;
+
+    /**
+     * Size of the wizard progress bar.
+     */
+    @Input()
+    size: WizardSize;
 
     /** @hidden */
     @ViewChild('contentTemplate')

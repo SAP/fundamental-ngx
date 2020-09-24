@@ -1,10 +1,10 @@
 <fd-wizard>
     <fd-wizard-navigation>
-        <ul fd-wizard-progress-bar>
+        <ul fd-wizard-progress-bar size="sm">
             <li fd-wizard-step [status]="step1status" label="Step 1: One Line">
                 <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
-                <fd-wizard-content>
-                    Wizard Content for step 1
+                <fd-wizard-content size="md" contentBackground="solid">
+                    This wizard content has a 'solid' background and padding set with the size input.
                     <fd-wizard-next-step>
                         <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(2)">
                             Go to Step 2
@@ -12,9 +12,9 @@
                     </fd-wizard-next-step>
                 </fd-wizard-content>
             </li>
-            <li fd-wizard-step [status]="step2status" label="Step 2: Very long label that truncates on the second line">
+            <li fd-wizard-step [status]="step2status" branching="true" label="Step 2: This step has a 'Branching' connector">
                 <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
-                <fd-wizard-content>
+                <fd-wizard-content size="md">
                     Wizard Content for step 2
                     <fd-wizard-next-step>
                         <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(3)">
@@ -25,24 +25,8 @@
             </li>
             <li fd-wizard-step [status]="step3status" label="Step 3: One line truncates" optionalText="(Optional)">
                 <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
-                <fd-wizard-content>
+                <fd-wizard-content size="md">
                     Wizard Content for step 3
-                    <fd-wizard-next-step>
-                        <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(4)">
-                            Go to Step 4
-                        </button>
-                    </fd-wizard-next-step>
-                </fd-wizard-content>
-            </li>
-            <li fd-wizard-step [status]="step4status" label="Step 4: Future Step">
-                <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
-                <fd-wizard-content>
-                    Wizard Content for step 4
-                    <fd-wizard-next-step>
-                        <button fd-button [compact]="true" fdType="emphasized">
-                            Submit
-                        </button>
-                    </fd-wizard-next-step>
                 </fd-wizard-content>
             </li>
         </ul>

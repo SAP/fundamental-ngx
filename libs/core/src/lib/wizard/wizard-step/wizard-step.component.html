@@ -1,22 +1,20 @@
-<li class="fd-wizard__step" [ngClass]="status ? 'fd-wizard__step--' + status : ''">
-    <div class="fd-wizard__step-wrapper">
-        <a class="fd-wizard__step-container" [attr.aria-label]="ariaLabel">
-            <ng-content select="fd-wizard-step-indicator"></ng-content>
-            <div
-                class="fd-wizard__label-container"
-                [ngClass]="optionalText ? 'fd-wizard__label-container--optional' : ''"
-            >
-                <span class="fd-wizard__label">{{ label }}</span>
-                <span *ngIf="optionalText" class="fd-wizard__optional-text">{{ optionalText }}</span>
-            </div>
-        </a>
-        <span
-            class="fd-wizard__connector"
-            [ngClass]="[
-                status === 'completed' ? 'fd-wizard__connector--active' : '',
-                branching ? 'fd-wizard__connector--branching' : ''
-            ]"
+<div class="fd-wizard__step-wrapper">
+    <a class="fd-wizard__step-container" [attr.aria-label]="ariaLabel">
+        <ng-content select="fd-wizard-step-indicator"></ng-content>
+        <div
+            class="fd-wizard__label-container"
+            [ngClass]="optionalText ? 'fd-wizard__label-container--optional' : ''"
         >
-        </span>
-    </div>
-</li>
+            <span class="fd-wizard__label">{{ label }}</span>
+            <span *ngIf="optionalText" class="fd-wizard__optional-text">{{ optionalText }}</span>
+        </div>
+    </a>
+    <span *ngIf="!finalStep"
+        class="fd-wizard__connector"
+        [ngClass]="[
+            status === 'completed' ? 'fd-wizard__connector--active' : '',
+            branching ? 'fd-wizard__connector--branching' : ''
+        ]"
+    >
+    </span>
+</div>

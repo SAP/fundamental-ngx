@@ -8,6 +8,8 @@ import { WizardExampleComponent } from './examples/wizard-example.component';
 import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
 import { WizardModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { WizardCustomizableExampleComponent } from './examples/wizard-customizable-example.component';
+import { WizardMobileExampleComponent } from './examples/wizard-mobile-example.component';
 
 const routes: Routes = [
     {
@@ -23,6 +25,12 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationModule, WizardModule, SharedDocumentationPageModule],
     exports: [RouterModule],
-    declarations: [WizardHeaderComponent, WizardDocsComponent, WizardExampleComponent]
+    declarations: [
+        WizardHeaderComponent,
+        WizardDocsComponent,
+        WizardExampleComponent,
+        WizardCustomizableExampleComponent,
+        WizardMobileExampleComponent
+    ]
 })
 export class WizardDocsModule {}
