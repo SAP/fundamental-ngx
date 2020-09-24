@@ -10,7 +10,7 @@ class TestNestedContainerComponent {
     directiveElement: TabIconComponent;
 }
 
-describe('TabIconDirective', () => {
+describe('TabIconComponent', () => {
     let component: TestNestedContainerComponent;
     let directiveElement: TabIconComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
@@ -29,21 +29,9 @@ describe('TabIconDirective', () => {
     });
 
     it('Should have good classes', () => {
-        directiveElement.icon = 'menu';
         directiveElement.buildComponentCssClass();
         fixture.detectChanges();
 
         expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__icon')).toBeTruthy();
-        expect((directiveElement as any)._elementRef.nativeElement.classList.contains('sap-icon--menu')).toBeTruthy();
-    });
-
-    it('Should be able to change icon', () => {
-        directiveElement.icon = 'edit';
-        directiveElement.buildComponentCssClass();
-        fixture.detectChanges();
-
-        directiveElement.icon = 'menu';
-        directiveElement.buildComponentCssClass();
-        expect((directiveElement as any)._elementRef.nativeElement.classList.contains('sap-icon--menu')).toBeTruthy();
     });
 });

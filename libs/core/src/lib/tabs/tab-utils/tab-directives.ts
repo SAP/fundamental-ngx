@@ -1,13 +1,16 @@
 import {
+    ChangeDetectionStrategy,
+    Component,
     Directive,
     ElementRef,
     EmbeddedViewRef,
     HostBinding,
     Input,
+    OnChanges,
     OnInit,
     TemplateRef,
     ViewContainerRef,
-    OnChanges, Component
+    ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
@@ -71,21 +74,19 @@ export class TabCountDirective {
  * Directive for icon element, available in most of modes on `tab` component
  */
 @Component({
-    // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
+    // tslint:disable-next-line:directive-selector component-selector
     selector: '[fd-tab-icon]',
     template: `
         <fd-icon role="presentation" *ngIf="icon" [glyph]="icon"></fd-icon>
         <ng-content></ng-content>
-    `
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class TabIconComponent implements CssClassBuilder, OnChanges {
     /** Apply user custom styles */
     @Input()
     class: string;
-
-    /** Defines if there will be added fd-tabs-icon class. Enabled by default. */
-    fdTabIconClass = true;
 
     /**
      * The icon to include inside the element
@@ -112,7 +113,7 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [this.fdTabIconClass ? 'fd-tabs__icon' : '', this.class];
+        return ['fd-tabs__icon', this.class];
     }
 
     /** HasElementRef interface implementation
