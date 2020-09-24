@@ -10,14 +10,12 @@ export interface Schema {
      */
     module: string;
 
+    standalone: boolean;
+
+    hasModuleFederation: boolean;
 
     addModuleAnimation: boolean;
 
 
-    addCustomStyleFile: boolean;
-
     addAppShellModule: boolean;
-
-
-    hasModuleFederation: boolean;
 }

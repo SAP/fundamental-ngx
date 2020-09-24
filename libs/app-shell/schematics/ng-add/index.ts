@@ -38,7 +38,7 @@ export type ProjectSettings = Schema & {
     workspace: WorkspaceSchema;
     projectWorkspace: WorkspaceProject;
     config: any;
-    hasCustomStyleFile: boolean;
+    standalone: boolean;
 };
 const FUNDAMENTAL_STYLES = 'fundamental-styles.scss';
 const CONFIG_FILE_NAME = 'angular.json';
@@ -55,7 +55,7 @@ export default function(options: Schema): Rule {
                 '@angular/platform-browser/animations') : noop(),
             options.addAppShellModule ? addModuleToRootModuleFile('AppShellModule',
                 '@fundamental-ngx/app-shell') : noop(),
-            options.addCustomStyleFile ? createCustomStyles() : noop(),
+            createCustomStyles(),
             addStylesToAngularJson(),
             copyThemesToAssets(),
             info()
@@ -91,21 +91,19 @@ function addStylesToAngularJson(): Rule {
     return (host: Tree, context: SchematicContext) => {
         context.logger.log('info', `✅️ Added styles entry`);
         const styleEntries = ['node_modules/fundamental-styles/dist/icon.css'];
-        if (projectSettings.hasCustomStyleFile) {
+
+        if (projectSettings.standalone) {
             const newStyleFile = normalize(join(normalize(projectSettings.projectWorkspace.sourceRoot),
                 FUNDAMENTAL_STYLES));
             styleEntries.push(newStyleFile);
         }
 
         const buildOptions = getProjectTargetOptions(projectSettings.projectWorkspace, 'build');
-
         if (!buildOptions.styles) {
             buildOptions.styles = [...styleEntries];
         } else {
             buildOptions.styles.unshift(...styleEntries);
         }
-        context.logger.log('info', `✅️ Added styles entry => custom styles ${projectSettings.hasCustomStyleFile}`);
-
         host.overwrite(CONFIG_FILE_NAME, JSON.stringify(projectSettings.workspace, null, 2));
         return host;
     };
@@ -115,6 +113,9 @@ function addStylesToAngularJson(): Rule {
 function copyThemesToAssets(): Rule {
     return (host: Tree, context: SchematicContext) => {
         try {
+            if (!projectSettings.standalone) {
+                return;
+            }
             const movePath = join(normalize(projectSettings.projectWorkspace.sourceRoot), 'assets', 'theme');
             context.logger.log('info', `✅️ Copying themes files to application asset folder ${movePath}`);
             if (host.exists(movePath)) {
@@ -165,8 +166,10 @@ function info(): Rule {
 function createCustomStyles(): Rule {
     return (host: Tree, context: SchematicContext) => {
         try {
+            if (!projectSettings.standalone) {
+                return;
+            }
             context.logger.log('info', 'Creating file with custom styles');
-
             const styleContent = createFundamentalStyles();
 
             if (!projectSettings.projectWorkspace.sourceRoot) {
@@ -179,12 +182,6 @@ function createCustomStyles(): Rule {
                     `✅️ Skipping updateStyle task. ${FUNDAMENTAL_STYLES} already exists`);
             }
             host.create(newStyleFile, styleContent);
-
-            projectSettings.hasCustomStyleFile = true;
-
-
-
-
         } catch (e) {
             context.logger.log('warn',
                 `✅️ Failed to add scripts into angular.json`);
@@ -200,10 +197,9 @@ function setupOptions(host: Tree, options: Schema, context: SchematicContext): v
         project: options.project,
         path: options.path,
         module: options.module,
-        addCustomStyleFile: options.addCustomStyleFile,
         addModuleAnimation: options.addModuleAnimation,
         hasModuleFederation: options.hasModuleFederation,
-        hasCustomStyleFile: false
+        standalone: options.standalone
     };
     const file = host.get(CONFIG_FILE_NAME);
     if (!file) {
@@ -234,7 +230,7 @@ function setupOptions(host: Tree, options: Schema, context: SchematicContext): v
     }
     let mainBootstrapPath = '';
     if (projectSettings.hasModuleFederation) {
-        mainBootstrapPath = 'src/bootstrap.ts'
+        mainBootstrapPath = 'src/bootstrap.ts';
     } else {
         mainBootstrapPath = getProjectTargetOptions(projectSettings.projectWorkspace, 'build').main;
     }
@@ -246,7 +242,16 @@ function setupOptions(host: Tree, options: Schema, context: SchematicContext): v
 
 
 function addModuleToRootModuleFile(moduleName: string, path: string): Rule {
-    return (host: Tree) => {
+    return (host: Tree, context: SchematicContext) => {
+        if (moduleName === 'AppShellModule') {
+            if (projectSettings.standalone) {
+                moduleName = 'AppShellModule.forRoot(\'pathToPluginJSON\', true)️';
+            } else {
+                moduleName = 'AppShellModule.forRoot(\'pathToPluginJSON\')️';
+            }
+        }
+        context.logger.log('info',
+            `✅️ Adding module import ${moduleName}`);
         addModuleImportToModule(
             host,
             projectSettings.module,
