@@ -9,6 +9,7 @@ import {
     OnDestroy
 } from '@angular/core';
 import { MessagingService } from '../events/messaging.service';
+import { MessagingTopics } from '../../api/events/topics.service';
 
 const TOPIC_THEME_CHANGE = 'theme:change';
 
@@ -18,7 +19,7 @@ export class ThemeManagerService implements OnDestroy {
     private publisher: TopicPublisher<MapMessage<string>>;
     private subscriber: TopicSubscriber<MapMessage<string>>;
 
-    constructor(private messagingService: MessagingService) {
+    constructor(private messagingService: MessagingService, private topics: MessagingTopics) {
         // we always want to get last set value
         this.publisher = this.messagingService.createPublisher<MapMessage<string>>(TOPIC_THEME_CHANGE,
             EventType.ONLY_LAST);
@@ -26,8 +27,7 @@ export class ThemeManagerService implements OnDestroy {
         this.subscriber = this.messagingService.createSubscriber<MapMessage<string>>(TOPIC_THEME_CHANGE,
             EventType.ONLY_LAST);
 
-        console.log('Theme Manager read', this.subscriber)
-
+        this.topics.addTopic({ prefix: 'theme:', eventType: EventType.ONLY_LAST, name: 'theme:change' });
     }
 
     themeChanged(id: string, name: string): void {

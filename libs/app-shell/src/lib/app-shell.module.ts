@@ -28,6 +28,7 @@ import {
     IS_APPSHELL_STANDALONE
 } from './tokens';
 import { RtlService } from '@fundamental-ngx/core';
+import { MessagingTopics } from './api/events/topics.service';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ export class AppShellModule {
                 MessagingConfig,
                 LookupService,
                 RtlService,
+                MessagingTopics,
                 { provide: CONFIG_URL, useValue: configUrl },
                 { provide: IS_APPSHELL_STANDALONE, useValue: isStandalone },
                 {
@@ -69,12 +71,12 @@ export class AppShellModule {
                 {
                     provide: PluginManagerService,
                     useClass: PluginManagerService,
-                    deps: [LookupService, MessagingService]
+                    deps: [LookupService, MessagingService, MessagingTopics]
                 },
                 {
                     provide: ThemeManagerService,
                     useClass: ThemeManagerService,
-                    deps: [MessagingService]
+                    deps: [MessagingService, MessagingTopics]
                 },
                 {
                     provide: AppShellProviderService,
