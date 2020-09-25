@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.90...v0.22.0-rc.91) (2020-09-25)
+
+
+### Bug Fixes
+
+* **core:** introduce Card component ([#3344](https://github.com/SAP/fundamental-ngx/issues/3344)) ([bc0ebca](https://github.com/SAP/fundamental-ngx/commit/bc0ebcaa7ef31de9ea7903bdcddaad271c41b0ac))
+
 ## [0.22.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.89...v0.22.0-rc.90) (2020-09-25)
 
 
