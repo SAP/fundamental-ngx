@@ -91,15 +91,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            'fd-object-status',
-            this.inverted ? 'fd-object-status--inverted' : '',
-            this.large ? 'fd-object-status--large' : '',
-            this.status ? `fd-object-status--${this.status}` : '',
-            this.indicationColor ? `fd-object-status--indication-${this.indicationColor}` : '',
-            this.clickable ? 'fd-object-status--link' : '',
-            this.class
-        ];
+        return buildObjectStatusCssClasses(this);
     }
 
     /** @hidden */
@@ -107,3 +99,29 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
         return this._elementRef;
     }
 }
+
+export const buildObjectStatusCssClasses = ({
+    status,
+    inverted,
+    large,
+    indicationColor,
+    clickable,
+    class: className
+}: Partial<{
+    status: ObjectStatus;
+    inverted: boolean;
+    large: boolean;
+    indicationColor: number;
+    clickable: boolean;
+    class: string;
+}>): string[] => {
+    return [
+        'fd-object-status',
+        inverted ? 'fd-object-status--inverted' : '',
+        large ? 'fd-object-status--large' : '',
+        status ? `fd-object-status--${status}` : '',
+        indicationColor ? `fd-object-status--indication-${indicationColor}` : '',
+        clickable ? 'fd-object-status--link' : '',
+        className
+    ];
+};
