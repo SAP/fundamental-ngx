@@ -27,7 +27,7 @@ export class ThemeManagerService implements OnDestroy {
         this.subscriber = this.messagingService.createSubscriber<MapMessage<string>>(TOPIC_THEME_CHANGE,
             EventType.ONLY_LAST);
 
-        this.topics.addTopic({ prefix: 'theme:', eventType: EventType.ONLY_LAST, name: 'theme:change' });
+        this.topics.addTopic({ prefix: 'theme:', eventType: EventType.ONLY_LAST, name: TOPIC_THEME_CHANGE });
     }
 
     themeChanged(id: string, name: string): void {

@@ -21,7 +21,7 @@ import {
 } from '../events/message-bus';
 import { MessagingTopics } from '../../api/events/topics.service';
 
-
+const TOPIC_SYSTEM_PLUGIN = 'system:plugin';
 /**
  * Plugin is our AppShell Extensions
  * -------------------------------
@@ -80,13 +80,13 @@ export class PluginManagerService implements OnDestroy {
 
     constructor(private lookupService: LookupService, private messageBus: MessagingService,
                 private topics: MessagingTopics) {
-        this.topics.addTopic({ prefix: 'system:', eventType: EventType.DEFAULT, name: 'system:plugin' });
+        this.topics.addTopic({ prefix: 'system:', eventType: EventType.DEFAULT, name: TOPIC_SYSTEM_PLUGIN });
 
-        this.pluginTopic = this.messageBus.createPublisher<MapMessage<string>>('system:plugin', EventType.DEFAULT);
+        this.pluginTopic = this.messageBus.createPublisher<MapMessage<string>>(TOPIC_SYSTEM_PLUGIN, EventType.DEFAULT);
     }
 
     loadConfiguration(plugins: Array<Partial<PluginDescriptor>>): void {
-        const m = new MapMessage<string>('system:plugin');
+        const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
         m.set('type', 'load started');
         this.pluginTopic.publish(m);
         plugins.forEach(c => this.lookupService.addPlugin(c));
@@ -96,7 +96,7 @@ export class PluginManagerService implements OnDestroy {
     }
 
     register(descriptor: Partial<PluginDescriptor>, pluginComponent?: PluginComponent): void {
-        const m = new MapMessage<string>('system:plugin');
+        const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
         m.set('type', 'register started');
         m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
 
