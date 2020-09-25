@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.92...v0.22.0-rc.93) (2020-09-25)
+
+
+### Bug Fixes
+
+* Adapt Tile to 0.12.0 Fundamental Styles ([#3383](https://github.com/SAP/fundamental-ngx/issues/3383)) ([4fcbd35](https://github.com/SAP/fundamental-ngx/commit/4fcbd358711dc3c42d24d9a6e203411fe7d010f5))
+
 ## [0.22.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.91...v0.22.0-rc.92) (2020-09-25)
 
 
