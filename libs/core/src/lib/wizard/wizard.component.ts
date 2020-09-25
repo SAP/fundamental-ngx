@@ -68,7 +68,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 })
             );
         });
-        this._previousWidth = this._elRef.nativeElement.clientWidth;
+        this._previousWidth = this._elRef.nativeElement.getBoundingClientRect().width;
     }
 
     /** @hidden */
