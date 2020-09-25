@@ -43,7 +43,7 @@ export class FileUploaderService {
 
     /** @hidden */
     private _checkExtension(file: File, allowedExtensions: string[]): boolean {
-        const extension = file.name.split('.')[file.name.split('.').length - 1];
+        const extension = file.name.split('.')[file.name.split('.').length - 1].toLocaleLowerCase();
         return !allowedExtensions || allowedExtensions.lastIndexOf(extension) !== -1;
     }
 
