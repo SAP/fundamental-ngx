@@ -7,7 +7,7 @@ import { FdDate } from '@fundamental-ngx/core';
         <fd-calendar [calType]="'single'" [(ngModel)]="date"> </fd-calendar>
         <br />
         <div>Selected Date: {{ date.toDateString() }}</div>
-        <button fd-button (click)="changeDay()">Next Day</button>
+        <button fd-button label="Next Day" (click)="changeDay()"></button>
     `,
     styles: [
         `

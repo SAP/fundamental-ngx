@@ -7,7 +7,7 @@
         Selected Date:
         {{ customForm.controls.date.value.toDateString() ? customForm.controls.date.value.toDateString() : 'null' }}
         <br />
-        <button fd-button (click)="setInvalid()">Set Invalid Single Date</button>
+        <button fd-button label="Set Invalid Single Date" (click)="setInvalid()"></button>
     </div>
     <div fd-form-item>
         <fd-calendar [calType]="'range'" formControlName="dateRange" [startingDayOfWeek]="1"> </fd-calendar>
@@ -24,6 +24,6 @@
         {{ customForm.controls.dateRange.value.end ? customForm.controls.dateRange.value.end.toDateString() : 'null' }}
         <br />
         Valid: {{ customForm.controls.dateRange.valid }} <br />
-        <button fd-button (click)="setInvalidRange()">Set Invalid Range Date</button>
+        <button fd-button label="Set Invalid Range Date" (click)="setInvalidRange()"></button>
     </div>
 </form>
