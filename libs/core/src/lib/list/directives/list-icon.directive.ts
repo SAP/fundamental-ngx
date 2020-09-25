@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 
 @Directive({
@@ -15,6 +15,11 @@ export class ListIconDirective implements OnChanges, OnInit {
     /** Apply user custom styles */
     @Input()
     class: string;
+
+    /** Role attribute for list icon */
+    @Input()
+    @HostBinding('attr.role')
+    role = 'presentation'
 
     constructor(private _elementRef: ElementRef) {}
 
