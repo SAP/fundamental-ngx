@@ -3,14 +3,14 @@
 
     <li fd-list-group-header>Fruits</li>
     <fd-option *ngFor="let option of fruits" [value]="option">
-        <span fd-list-icon [glyph]="'add'"></span>
+        <i fd-list-icon [glyph]="'add'"></i>
         <span fd-list-title>{{option.name}}</span>
         <span fd-list-secondary>{{option.kCal}} kcal</span>
     </fd-option>
 
     <li fd-list-group-header>Vegetables</li>
     <fd-option *ngFor="let option of vegetables" [value]="option">
-        <span fd-list-icon [glyph]="'add'"></span>
+        <i fd-list-icon [glyph]="'add'"></i>
         <span fd-list-title>{{option.name}}</span>
         <span fd-list-secondary>{{option.kCal}} kcal</span>
     </fd-option>
