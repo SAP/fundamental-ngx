@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.91...v0.22.0-rc.92) (2020-09-25)
+
+
+### Bug Fixes
+
+* Adapt Avatar to 0.12.0 Fundamental Styles ([#3382](https://github.com/SAP/fundamental-ngx/issues/3382)) ([66868aa](https://github.com/SAP/fundamental-ngx/commit/66868aacfd167536dc293dd51970e0a714d9a466))
+
 ## [0.22.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.90...v0.22.0-rc.91) (2020-09-25)
 
 
