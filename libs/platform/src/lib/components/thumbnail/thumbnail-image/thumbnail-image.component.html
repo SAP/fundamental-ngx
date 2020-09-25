@@ -3,6 +3,7 @@
         [class]="isHorizontal ? 'fdp-thumbnail-image--horizontal' : 'fdp-thumbnail-image'"
         *ngFor="let image of mediaList"
         (click)="thumbnailClick(image)"
+        (keydown.enter)="thumbnailClick(image)"
         tabindex="0"
         role="button"
         aria-pressed="false"
