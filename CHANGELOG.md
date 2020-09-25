@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.89...v0.22.0-rc.90) (2020-09-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* (menu) - fd-menu-addon changed to component,  can't be used with fd-icon anymore
+
+### Bug Fixes
+
+* Update menu addon to 0.12.0 styles ([#3391](https://github.com/SAP/fundamental-ngx/issues/3391)) ([2b0766b](https://github.com/SAP/fundamental-ngx/commit/2b0766b63be53d8665bc817c7301098bc69013f8))
+
 ## [0.22.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.88...v0.22.0-rc.89) (2020-09-25)
 
 ## [0.22.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.87...v0.22.0-rc.88) (2020-09-25)
