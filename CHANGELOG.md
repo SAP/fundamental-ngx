@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.96...v0.22.0-rc.97) (2020-09-25)
+
+
+### Bug Fixes
+
+* Migrate nested list icon due to 0.12.0 styles ([#3390](https://github.com/SAP/fundamental-ngx/issues/3390)) ([cd3e708](https://github.com/SAP/fundamental-ngx/commit/cd3e70849976f43e07e647150a927f3dab6203ba))
+
 ## [0.22.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.95...v0.22.0-rc.96) (2020-09-25)
 
 
