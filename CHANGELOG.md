@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.95...v0.22.0-rc.96) (2020-09-25)
+
+
+### Bug Fixes
+
+* Migrate A11y changes from 0.12.0 to numeric content and tiles ([#3384](https://github.com/SAP/fundamental-ngx/issues/3384)) ([9fe2b87](https://github.com/SAP/fundamental-ngx/commit/9fe2b87fafc4c5985735b7fa0b529bbdc8814432))
+
 ## [0.22.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.94...v0.22.0-rc.95) (2020-09-25)
 
 ## [0.22.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.93...v0.22.0-rc.94) (2020-09-25)
