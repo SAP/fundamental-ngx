@@ -1,7 +1,12 @@
 {{ abbreviate }}
-<span
-    *ngIf="zoomGlyph"
-    role="presentation"
-    class="fd-avatar__zoom-icon"
-    [ngClass]="zoomGlyph ? ' sap-icon--' + zoomGlyph : ''">
-</span>
+
+<i *ngIf="zoomGlyph"
+   role="presentation"
+   class="fd-avatar__zoom-icon"
+   [ngClass]="zoomGlyph ? ' sap-icon--' + zoomGlyph : ''">
+</i>
+<i *ngIf="glyph"
+   class="fd-avatar__icon"
+   [ngClass]="glyph ? ' sap-icon--' + glyph : ''"
+   role="presentation">
+</i>

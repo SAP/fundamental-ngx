@@ -146,7 +146,6 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
             'fd-avatar',
             this.size ? `fd-avatar--${this.size}` : '',
             this.showDefault ? 'sap-icon--person-placeholder' : '',
-            this.glyph ? `sap-icon--${this.glyph}` : '',
             this.colorAccent ? `fd-avatar--accent-color-${this.colorAccent}` : '',
             this.circle ? 'fd-avatar--circle' : '',
             this.border ? 'fd-avatar--border' : '',
