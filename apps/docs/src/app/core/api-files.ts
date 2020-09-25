@@ -204,7 +204,7 @@ export const API_FILES = {
         'TabLinkDirective',
         'TabItemDirective',
         'TabTagDirective',
-        'TabIconDirective',
+        'TabIconComponent',
         'TabCountDirective',
         'TabLabelDirective',
         'TabProcessDirective',
