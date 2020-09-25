@@ -25,15 +25,17 @@ import { NotificationRef } from '@fundamental-ngx/core';
                 </div>
             </div>
             <fd-notification-footer>
-                <button fd-button [fdType]="'transparent'">
-                    {{ notificationRef.data.moreInfo }}
-                </button>
+                <button fd-button [fdType]="'transparent'" [label]="notificationRef.data.moreInfo"></button>
                 <div fd-notification-actions>
-                    <button fd-button [fdType]="'positive'" (click)="notificationRef.close('Approve Button Click')">
-                        {{ notificationRef.data.approve }}
+                    <button fd-button
+                            [fdType]="'positive'"
+                            [label]="notificationRef.data.approve"
+                            (click)="notificationRef.close('Approve Button Click')">
                     </button>
-                    <button fd-button [fdType]="'negative'" (click)="notificationRef.dismiss('Cancel Button Click')">
-                        {{ notificationRef.data.cancel }}
+                    <button fd-button
+                            [fdType]="'negative'"
+                            [label]="notificationRef.data.cancel"
+                            (click)="notificationRef.dismiss('Cancel Button Click')">
                     </button>
                 </div>
             </fd-notification-footer>

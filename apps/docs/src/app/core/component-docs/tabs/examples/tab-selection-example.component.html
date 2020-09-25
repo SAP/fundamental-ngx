@@ -12,11 +12,7 @@
 <br />
 
 <!-- First method, requires maintaining a flag -->
-<button fd-button (click)="selectedTab = 0">
-    Select Tab 1
-</button>
+<button fd-button label="Select Tab 1" (click)="selectedTab = 0"></button>
 
 <!-- Second method, does not require a flag -->
-<button fd-button (click)="tabList.selectTab(1)">
-    Select Tab 2
-</button>
+<button fd-button label="Select Tab 2" (click)="tabList.selectTab(1)"></button>

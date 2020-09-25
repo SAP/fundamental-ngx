@@ -23,10 +23,9 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
                         fd-button
                         fdType="emphasized"
                         fd-dialog-decisive-button
+                        label="Interesting"
                         [compact]="true"
-                        (click)="this.dialogRef.close('Continue')"
-                    >
-                        Interesting
+                        (click)="this.dialogRef.close('Continue')">
                     </button>
                 </fd-dialog-footer-button>
 
@@ -36,10 +35,9 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
                         fdType="transparent"
                         fd-dialog-decisive-button
                         fd-initial-focus
+                        label="Cancel"
                         [compact]="true"
-                        (click)="this.dialogRef.dismiss('Cancel')"
-                    >
-                        Cancel
+                        (click)="this.dialogRef.dismiss('Cancel')">
                     </button>
                 </fd-dialog-footer-button>
             </fd-dialog-footer>

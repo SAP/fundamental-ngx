@@ -74,7 +74,7 @@ export const ToolbarWithSegmentedButtonAndMenuButton = () => ({
         <fd-select fd-toolbar-item [compact]="true" placeholder="Select an option" [closeOnOutsideClick]="false">
             <fd-option *ngFor="let option of ['Apple', 'Pineapple', 'Tomato', 'Strawberry']" [value]="option">{{option}}</fd-option>
         </fd-select>
-        
+
         <button fd-toolbar-item fd-button [compact]="true">Button</button>
 
         <fd-checkbox fd-toolbar-item label="Option 1" [tristate]="true"> </fd-checkbox>
@@ -86,18 +86,18 @@ export const ToolbarWithSegmentedButtonAndMenuButton = () => ({
                 Action
             </ng-template>
         </fd-split-button>
-      
+
         <label fd-toolbar-item fd-toolbar-label fd-form-label for="input-1">Default Input</label>
         <input [compact]="true" fd-toolbar-item fd-form-control type="text" id="input-1" placeholder="Field placeholder text" style="max-width:200px"/>
 
-        <button fd-toolbar-item fd-button [fdMenu]="true" [compact]="true">Button</button>
-        
+        <button fd-toolbar-item label="Button" fd-button [fdMenu]="true" [compact]="true"></button>
+
         <fd-segmented-button fd-toolbar-item>
             <button fd-button [compact]="true">Left</button>
             <button fd-button [compact]="true">Middle</button>
             <button fd-button [compact]="true">Right</button>
         </fd-segmented-button>
-        
+
         <button fd-toolbar-item fd-button [compact]="true">Button</button>
         <button fd-toolbar-item fd-button [compact]="true">Button</button>
         <fd-toolbar-spacer fd-toolbar-item [fixed]="true" [width]="'200px'"></fd-toolbar-spacer>

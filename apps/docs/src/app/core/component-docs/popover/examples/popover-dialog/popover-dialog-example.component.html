@@ -1,6 +1,4 @@
-<button fd-button (click)="openDialog(template)">
-    Open Dialog
-</button>
+<button fd-button label="Open Dialog" (click)="openDialog(template)"></button>
 
 <ng-template #template let-dialog let-dialogConfig="dialogConfig">
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
@@ -12,7 +10,7 @@
         <fd-dialog-body>
             <fd-popover [noArrow]="false" [placement]="'bottom'">
                 <fd-popover-control>
-                    <button fd-button>Click me!</button>
+                    <button fd-button label="Click me!"></button>
                 </fd-popover-control>
                 <fd-popover-body>
                     <div style="padding: 12px;">

@@ -21,10 +21,9 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
                         fdType="emphasized"
                         fd-initial-focus
                         fd-dialog-decisive-button
+                        label="Close"
                         [compact]="true"
-                        (click)="dialogRef.close()"
-                    >
-                        Close
+                        (click)="dialogRef.close()">
                     </button>
                 </fd-dialog-footer-button>
             </fd-dialog-footer>
