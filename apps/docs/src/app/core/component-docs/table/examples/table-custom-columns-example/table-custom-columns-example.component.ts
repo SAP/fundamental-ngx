@@ -60,7 +60,7 @@ export class TableCustomColumnsExampleComponent {
             data: {
                 columns: this.originalDisplayedColumns
             }
-        } as DialogConfig);
+        });
 
 
         dialogRef.afterClosed.subscribe(

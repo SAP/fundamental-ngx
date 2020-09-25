@@ -13,7 +13,7 @@ export class DialogConfigurationExample {
             width: '300px',
             draggable: true,
             responsivePadding: true
-        } as DialogConfig);
+        });
     }
 
     openResizableDialog(template): void {
@@ -21,7 +21,7 @@ export class DialogConfigurationExample {
             width: '300px',
             resizable: true,
             responsivePadding: true
-        } as DialogConfig);
+        });
     }
 
     openClosableByButtonDialog(template): void {
@@ -30,6 +30,6 @@ export class DialogConfigurationExample {
             escKeyCloseable: false,
             responsivePadding: true,
             backdropClickCloseable: false
-        } as DialogConfig);
+        });
     }
 }

@@ -2,6 +2,84 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.93...v0.22.0-rc.94) (2020-09-25)
+
+
+### Bug Fixes
+
+* update A11y regarding to 0.12.0 styles ([#3385](https://github.com/SAP/fundamental-ngx/issues/3385)) ([ba54fcb](https://github.com/SAP/fundamental-ngx/commit/ba54fcbca5be10e03d4e3001ada3398c128f4c76))
+
+## [0.22.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.92...v0.22.0-rc.93) (2020-09-25)
+
+
+### Bug Fixes
+
+* Adapt Tile to 0.12.0 Fundamental Styles ([#3383](https://github.com/SAP/fundamental-ngx/issues/3383)) ([4fcbd35](https://github.com/SAP/fundamental-ngx/commit/4fcbd358711dc3c42d24d9a6e203411fe7d010f5))
+
+## [0.22.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.91...v0.22.0-rc.92) (2020-09-25)
+
+
+### Bug Fixes
+
+* Adapt Avatar to 0.12.0 Fundamental Styles ([#3382](https://github.com/SAP/fundamental-ngx/issues/3382)) ([66868aa](https://github.com/SAP/fundamental-ngx/commit/66868aacfd167536dc293dd51970e0a714d9a466))
+
+## [0.22.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.90...v0.22.0-rc.91) (2020-09-25)
+
+
+### Bug Fixes
+
+* **core:** introduce Card component ([#3344](https://github.com/SAP/fundamental-ngx/issues/3344)) ([bc0ebca](https://github.com/SAP/fundamental-ngx/commit/bc0ebcaa7ef31de9ea7903bdcddaad271c41b0ac))
+
+## [0.22.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.89...v0.22.0-rc.90) (2020-09-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* (menu) - fd-menu-addon changed to component,  can't be used with fd-icon anymore
+
+### Bug Fixes
+
+* Update menu addon to 0.12.0 styles ([#3391](https://github.com/SAP/fundamental-ngx/issues/3391)) ([2b0766b](https://github.com/SAP/fundamental-ngx/commit/2b0766b63be53d8665bc817c7301098bc69013f8))
+
+## [0.22.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.88...v0.22.0-rc.89) (2020-09-25)
+
+## [0.22.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.87...v0.22.0-rc.88) (2020-09-25)
+
+
+### Bug Fixes
+
+* migrate switch changes to 0.12.0 styles ([#3379](https://github.com/SAP/fundamental-ngx/issues/3379)) ([2e6fe94](https://github.com/SAP/fundamental-ngx/commit/2e6fe941a3550a272a11c38ad3a9450a522c60e9))
+
+## [0.22.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.86...v0.22.0-rc.87) (2020-09-25)
+
+
+### Bug Fixes
+
+* Migrate object status to 0.12.0 ([#3381](https://github.com/SAP/fundamental-ngx/issues/3381)) ([6859aa2](https://github.com/SAP/fundamental-ngx/commit/6859aa230bb73764db2c8df4b131eed45870477b))
+
+## [0.22.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.85...v0.22.0-rc.86) (2020-09-25)
+
+
+### Bug Fixes
+
+* migrate product switch to 0.12.0 styles ([#3380](https://github.com/SAP/fundamental-ngx/issues/3380)) ([08e3ec5](https://github.com/SAP/fundamental-ngx/commit/08e3ec5d4132460f920f8a1155eebdc41ba09b4c))
+
+## [0.22.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.84...v0.22.0-rc.85) (2020-09-25)
+
+
+### Bug Fixes
+
+* migrate tabs to 0.12.0 styles ([#3378](https://github.com/SAP/fundamental-ngx/issues/3378)) ([1971bb8](https://github.com/SAP/fundamental-ngx/commit/1971bb879137e4b95e4b251ff049d9036aff0f17))
+
+## [0.22.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.83...v0.22.0-rc.84) (2020-09-25)
+
+
+### Bug Fixes
+
+* **core:** Disable inferrable-types | cleanup ([#3377](https://github.com/SAP/fundamental-ngx/issues/3377)) ([4254588](https://github.com/SAP/fundamental-ngx/commit/42545889b9ff04e50738f0c3957bc6995a7564dc))
+
+## [0.22.0-rc.83](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.82...v0.22.0-rc.83) (2020-09-24)
+
 ## [0.22.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.81...v0.22.0-rc.82) (2020-09-24)
 
 ## [0.22.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.80...v0.22.0-rc.81) (2020-09-24)

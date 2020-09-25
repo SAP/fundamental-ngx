@@ -5,7 +5,7 @@ const DEFAULT_CONFIG: DialogConfig = {
     draggable: true,
     escKeyCloseable: false,
     backdropClickCloseable: false
-} as DialogConfig;
+};
 
 @NgModule({
     providers: [{ provide: DIALOG_DEFAULT_CONFIG, useValue: DEFAULT_CONFIG }]

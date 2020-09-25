@@ -41,7 +41,7 @@ import {
         <div #content fd-tile-content [twoColumn]="true">
             <div fd-tile-content-text></div>
             <div fd-tile-content-byline></div>
-            <span fd-tile-refresh [glyph]="'refresh'"></span>
+            <i fd-tile-refresh [glyph]="'refresh'"></i>
             <span #profileImg fd-tile-profile-img [backgroundImage]="'http://lorempixel.com/60/60/nature'"></span>
             <span #backgroundImg fd-tile-background-img [backgroundImage]="'http://lorempixel.com/60/60/nature'"></span>
             <span fd-tile-logo></span>
