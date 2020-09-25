@@ -1,0 +1,22 @@
+<ng-container *ngIf="glyphPosition === 'before' && glyph">
+    <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
+</ng-container>
+
+<span class="fd-button__text" *ngIf="label">
+    {{label}}
+</span>
+
+<ng-content></ng-content>
+
+<ng-container *ngIf="glyphPosition === 'after' && glyph">
+    <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
+</ng-container>
+
+<fd-icon glyph="slim-arrow-down" *ngIf="fdMenu" role="presentation"></fd-icon>
+
+<ng-template #iconTemplate>
+    <fd-icon
+        role="presentation"
+        [glyph]="glyph">
+    </fd-icon>
+</ng-template>
