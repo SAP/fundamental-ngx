@@ -8,7 +8,7 @@ import {
     TabCountDirective,
     TabCounterHeaderDirective,
     TabHeaderDirective,
-    TabIconDirective,
+    TabIconComponent,
     TabLabelDirective,
     TabLoadTitleDirective,
     TabProcessDirective,
@@ -20,6 +20,7 @@ import {
 import { TabNavComponent } from './tab-nav/tab-nav.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
+import { IconModule } from '../icon/icon.module';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,7 @@ import { TabItemDirective } from './tab-item/tab-item.directive';
         TabLinkDirective,
         TabItemDirective,
         TabTagDirective,
-        TabIconDirective,
+        TabIconComponent,
         TabCountDirective,
         TabLabelDirective,
         TabProcessDirective,
@@ -40,7 +41,7 @@ import { TabItemDirective } from './tab-item/tab-item.directive';
         TabProcessIconDirective,
         TabSeparatorDirective
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, IconModule],
     exports: [
         TabListComponent,
         TabPanelComponent,
@@ -50,7 +51,7 @@ import { TabItemDirective } from './tab-item/tab-item.directive';
         TabItemDirective,
         TabLinkDirective,
         TabTagDirective,
-        TabIconDirective,
+        TabIconComponent,
         TabCountDirective,
         TabLabelDirective,
         TabProcessDirective,
