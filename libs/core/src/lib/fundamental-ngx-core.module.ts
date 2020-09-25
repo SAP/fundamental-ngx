@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { ActionBarModule } from './action-bar/action-bar.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
@@ -44,9 +47,6 @@ import { TimePickerModule } from './time-picker/time-picker.module';
 import { SegmentedButtonModule } from './segmented-button/public_api';
 import { SwitchModule } from './switch/switch.module';
 import { TokenModule } from './token/token.module';
-
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { LocalizationEditorModule } from './localizator-editor/localization-editor.module';
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { LayoutGridModule } from './layout-grid/layout-grid.module';
@@ -64,6 +64,7 @@ import { StepInputModule } from './step-input/step-input.module';
 import { ComboboxMobileModule } from './combobox/combobox-mobile/combobox-mobile.module';
 import { CarouselModule } from './utils/directives/carousel/carousel.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
+import { CardModule } from './card/card.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -127,8 +128,9 @@ import { ToolbarModule } from './toolbar/toolbar.module';
         ToolbarModule,
         SwitchModule,
         TokenModule,
-        TreeModule
+        TreeModule,
+        CardModule
     ],
     providers: [AlertService, DialogService, NotificationService]
 })
-export class FundamentalNgxCoreModule { }
+export class FundamentalNgxCoreModule {}
