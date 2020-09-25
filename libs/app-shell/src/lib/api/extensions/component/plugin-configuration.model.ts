@@ -116,8 +116,8 @@ export class Action {
  */
 export class Listener {
 
-    constructor(public description: string,
-                public topic: string,
+    constructor(public topic: string,
+                public description: string,
                 public onMessage: (message: Message) => any
     ) {
     }

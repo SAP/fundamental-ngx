@@ -44,7 +44,7 @@ export class PrListPluginConf implements Partial<PluginConfiguration> {
     }
 
     addListeners(): Array<Listener> {
-        const themeChange = new Listener('Listening for Theming changes', 'theme:change',
+        const themeChange = new Listener('theme:change', 'Listening for Theming changes',
             (m: Message) => {
                 console.log('Theme changed....', m);
             });
