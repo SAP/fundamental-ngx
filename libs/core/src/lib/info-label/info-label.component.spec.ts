@@ -1,19 +1,32 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InfoLabelComponent } from './info-label.component';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-test-info-label',
-    template: `<span fd-info-label>info Label</span>`
+    template: `
+        <fd-info-label
+            [type]="type"
+            [label]="label"
+            [color]="color"
+            [glyph]="glyph">
+        </fd-info-label>
+    `
 })
 class TestInfoLabelComponent {
-    @ViewChild(InfoLabelComponent, { static: true })
-    infoLabelComponent: InfoLabelComponent;
+    @ViewChild(InfoLabelComponent, {static: true, read: ElementRef})
+    infoLabelElementRef: ElementRef;
+
+    type: string;
+    label: string;
+    color: string;
+    glyph: string;
 }
 
 describe('InfoLabelComponent', () => {
-    let component: InfoLabelComponent;
+    let infoLabelElementRef: ElementRef;
+    let testComponent: TestInfoLabelComponent;
     let fixture: ComponentFixture<TestInfoLabelComponent>;
 
     beforeEach(async(() => {
@@ -24,51 +37,51 @@ describe('InfoLabelComponent', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestInfoLabelComponent);
-        component = fixture.componentInstance.infoLabelComponent;
+        infoLabelElementRef = fixture.componentInstance.infoLabelElementRef;
+        testComponent = fixture.componentInstance;
         fixture.detectChanges();
     });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
+    it('Should create', () => {
+        expect(testComponent).toBeTruthy();
+        expect(infoLabelElementRef).toBeTruthy();
     });
 
-    it('Should Add label Type', () => {
-        component.ngOnInit();
-        component.type = 'numeric';
-        component.buildComponentCssClass();
+    it('Should add numeric label type', () => {
+        testComponent.type = 'numeric';
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-info-label--numeric')).toBe(true);
+        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--numeric')).toBeTrue();
     });
 
-    it('Should Add  label Type icon', () => {
-        component.ngOnInit();
-        component.type = 'icon';
-        component.buildComponentCssClass();
+    it('Should add icon label type', () => {
+        testComponent.type = 'icon';
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-info-label--icon')).toBe(true);
+        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--icon')).toBeTrue();
     });
 
-    it('Should Add Accent Color', () => {
-        component.ngOnInit();
-        component.color = '2';
-        component.buildComponentCssClass();
+    it('Should add accent color', () => {
+        testComponent.color = '2';
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-info-label--accent-color-2')).toBe(true);
+        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--accent-color-2')).toBeTrue();
     });
 
-    it('Should Add icon', () => {
-        component.ngOnInit();
-        component.glyph = 'future';
-        component.buildComponentCssClass();
+    it('Should add icon', () => {
+        testComponent.glyph = 'future';
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('sap-icon--future')).toBe(true);
+        const iconElement = fixture.nativeElement.querySelector('i');
+
+        expect(iconElement).toBeTruthy();
+        expect(iconElement.classList.contains('sap-icon--future')).toBeTrue();
     });
 
-    it('Should Add icon', () => {
-        component.ngOnInit();
-        component.glyph = 'add-activity-2';
-        component.buildComponentCssClass();
+    it('Should display label', () => {
+        const label = 'Test label';
+        testComponent.label = label;
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('sap-icon--add-activity-2')).toBe(true);
+
+        const labelTextElement = fixture.nativeElement.querySelector('.fd-info-label__text');
+
+        expect(labelTextElement).toBeTruthy();
+        expect(labelTextElement.textContent.trim()).toBe(label);
     });
 });
