@@ -116,7 +116,7 @@ export class TileTitleContainerDirective {
 }
 
 @Directive({
-    selector: '[fdTileRefresh], [fd-tile-refresh]'
+    selector: '[fdTileRefresh], [fd-tile-refresh]',
 })
 export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Glyph */
@@ -126,6 +126,11 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
     /** Apply user custom styles */
     @Input()
     class: string;
+
+    /** Apply user custom styles */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel = 'Refresh';
 
     constructor(private _elementRef: ElementRef) {}
 
