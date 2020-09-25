@@ -39,6 +39,7 @@ import { FocusKeyManager, FocusOrigin } from '@angular/cdk/a11y';
 import { Observable, merge, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { RtlService } from '@fundamental-ngx/core';
+import { ContentDensity } from './../form/form-control';
 
 /**
  * Variables for generating menu IDs.
@@ -67,6 +68,10 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
         // Use 'id' property to create menu ID for aria-control purposes.
         this.menuId = MENU_ID_ROOT + id;
     }
+
+    /** Density for Menu */
+    @Input()
+    contentDensity: ContentDensity
 
     /**
      * Horizontal position of menu in relation to trigger element.

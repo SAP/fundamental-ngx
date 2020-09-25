@@ -97,7 +97,7 @@
     [contentDensity]="'compact'"
     [icon]="'world'"
     [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
+    [fdpMenuTriggerFor]="basicMenuCompact"
 >
     Default Button
 </fdp-menu-button>
@@ -106,7 +106,7 @@
     [id]="'menu-button-25'"
     [contentDensity]="'compact'"
     [disabled]="false"
-    [fdpMenuTriggerFor]="basicMenu"
+    [fdpMenuTriggerFor]="basicMenuCompact"
 >
     Default Button
 </fdp-menu-button>
@@ -118,7 +118,7 @@
     [disabled]="false"
     title="compact menu button with only icon"
     ariaLabel="compact menu button with icon"
-    [fdpMenuTriggerFor]="basicMenu"
+    [fdpMenuTriggerFor]="basicMenuCompact"
 >
 </fdp-menu-button>
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -149,6 +149,12 @@
 </fdp-menu-button>
 
 <fdp-menu #basicMenu id="basic-menu">
+    <fdp-menu-item (itemSelect)="onItemSelect('First Item')">First Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">Second Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCompact id="basic-menu-compact" contentDensity="compact">
     <fdp-menu-item (itemSelect)="onItemSelect('First Item')">First Item</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">Second Item</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
