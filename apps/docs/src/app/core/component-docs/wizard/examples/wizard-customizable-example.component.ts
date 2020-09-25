@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { StepType } from '../../../../../../../../libs/core/src/lib/wizard/wizard-step/wizard-step.component';
 
 @Component({
     selector: 'fd-wizard-customizable-example',
@@ -7,9 +6,9 @@ import { StepType } from '../../../../../../../../libs/core/src/lib/wizard/wizar
 })
 export class WizardCustomizableExampleComponent {
 
-    step1status: StepType = 'current';
-    step2status: StepType = 'upcoming';
-    step3status: StepType = 'upcoming';
+    step1status = 'current';
+    step2status = 'upcoming';
+    step3status = 'upcoming';
 
     goToStep(step: number): void {
         switch (step) {

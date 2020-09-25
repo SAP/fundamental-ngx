@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { StepType } from '../../../../../../../../libs/core/src/lib/wizard/wizard-step/wizard-step.component';
 
 @Component({
     selector: 'fd-wizard-mobile-example',
@@ -15,6 +14,6 @@ import { StepType } from '../../../../../../../../libs/core/src/lib/wizard/wizar
 })
 export class WizardMobileExampleComponent {
 
-    step1status: StepType = 'current';
+    step1status = 'current';
 
 }

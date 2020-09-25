@@ -10,8 +10,8 @@ export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
         '[class.fd-wizard__progress-bar--s]': 'size === "s"',
         '[class.fd-wizard__progress-bar--m]': 'size === "m"',
         '[class.fd-wizard__progress-bar--l]': 'size === "l"',
-        '[class.fd-wizard__progress-bar--xl]': 'size === "xl"',
-    },
+        '[class.fd-wizard__progress-bar--xl]': 'size === "xl"'
+    }
 })
 export class WizardProgressBarDirective {
     /**

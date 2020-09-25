@@ -7,11 +7,9 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
     styleUrls: ['./wizard-next-step.component.scss']
 })
 export class WizardNextStepComponent {
-
     /**
      * Whether or not the next step button should float directly above the footer.
      */
     @Input()
     floating = false;
-
 }

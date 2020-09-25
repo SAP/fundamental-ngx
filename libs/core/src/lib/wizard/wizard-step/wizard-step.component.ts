@@ -1,11 +1,13 @@
 import {
     Component,
     ContentChild,
+    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
     Output,
     SimpleChanges,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
@@ -20,7 +22,7 @@ export type StepType = 'completed' | 'current' | 'upcoming' | 'active';
         '[class.fd-wizard__step--completed]': 'status === "completed"',
         '[class.fd-wizard__step--current]': 'status === "current"',
         '[class.fd-wizard__step--upcoming]': 'status === "upcoming"',
-        '[class.fd-wizard__step--active]': 'status === "active"',
+        '[class.fd-wizard__step--active]': 'status === "active"'
     },
     templateUrl: './wizard-step.component.html',
     encapsulation: ViewEncapsulation.None,
@@ -67,8 +69,15 @@ export class WizardStepComponent implements OnChanges {
     @ContentChild(WizardContentComponent)
     content: WizardContentComponent;
 
+    /** The wizard label span element. */
+    @ViewChild('wizardLabel', { read: ElementRef })
+    wizardLabel: ElementRef;
+
     /** @hidden */
     finalStep = false;
+
+    /** @hidden */
+    constructor(public elRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
