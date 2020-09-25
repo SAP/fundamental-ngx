@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.97...v0.22.0-rc.98) (2020-09-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* made Info Label component
+
+* fix(core) Change Info Label into component | Improve tests (#3399) ([557b761](https://github.com/SAP/fundamental-ngx/commit/557b761b62a62fd07897b1632adadbe4297f8a2d)), closes [#3399](https://github.com/SAP/fundamental-ngx/issues/3399)
+
 ## [0.22.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.96...v0.22.0-rc.97) (2020-09-25)
 
 
