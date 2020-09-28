@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.102...v0.22.0-rc.103) (2020-09-28)
+
+
+### Bug Fixes
+
+* bring temporary the old styling of Notifications ([#3430](https://github.com/SAP/fundamental-ngx/issues/3430)) ([64e4a1c](https://github.com/SAP/fundamental-ngx/commit/64e4a1ca0f7e88e106c6b54c46af58438f2115c5))
+
 ## [0.22.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.101...v0.22.0-rc.102) (2020-09-28)
 
 ## [0.22.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.100...v0.22.0-rc.101) (2020-09-28)
