@@ -43,7 +43,7 @@
                     fd-button
                     [compact]="compact"
                     [fdType]="'transparent'"
-                    [label]="currentlyDisplayed.year + ' - ' + currentlyDisplayed.year + amountOfYearsPerPeriod()"
+                    [label]="currentlyDisplayed.year + ' - ' + (currentlyDisplayed.year + amountOfYearsPerPeriod())"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
                     (click)="processViewChange('aggregatedYear', $event)"
                     type="button">
