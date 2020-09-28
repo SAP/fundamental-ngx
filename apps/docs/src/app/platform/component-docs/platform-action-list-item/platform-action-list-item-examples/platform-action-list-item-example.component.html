@@ -1,0 +1,16 @@
+<h3>Declarative Approach</h3>
+<fdp-list>
+    <fdp-action-list-item title="Action 1">
+    </fdp-action-list-item>
+    <fdp-action-list-item title="Action 2">
+    </fdp-action-list-item>
+    <fdp-action-list-item title="Action 3">
+    </fdp-action-list-item>
+    <fdp-action-list-item title="Action 4">
+    </fdp-action-list-item>
+</fdp-list>
+
+<h3>Imperative Approach</h3>
+<fdp-list>
+    <fdp-action-list-item *ngFor="let item of items" [item]="item"></fdp-action-list-item>
+</fdp-list>

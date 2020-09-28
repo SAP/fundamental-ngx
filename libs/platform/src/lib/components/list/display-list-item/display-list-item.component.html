@@ -1,0 +1,30 @@
+<!--  list item navigation with Arrow-->
+<ng-container *ngIf="navigationIndicator || navigated && !(noDataText!==null && noDataText!== undefined) ">
+    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" tabIndex="0" [attr.aria-selected]="_selected"
+        (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)" class="fd-list__item--link" role="listitem"
+        [class.fd-list__item--inactive]="listType === 'inactive'" [attr.ariaLabelledBy]="ariaLabelledBy"
+        [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
+        <a #link fd-list-link [routerLink]="routerLink" [navigationIndicator]="navigationIndicator"
+            [navigated]="navigated">
+            <ng-container *ngTemplateOutlet="commonTemplate"></ng-container>
+        </a>
+    </li>
+</ng-container>
+
+<!--  list item without navigation and used for simple list display-->
+<ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText!==null && noDataText!== undefined)">
+    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" (keydown)="_onKeyDown($event)" tabIndex="0"
+        role="listitem" (keyup)="_onKeyUp($event)" [attr.ariaLabelledBy]="ariaLabelledBy" [attr.aria-level]="ariaLevel"
+        [attr.aria-posinet]="ariaPosinet" [class.fd-list__item--inactive]="listType === 'inactive'">
+        <ng-container *ngTemplateOutlet="commonTemplate"></ng-container>
+    </li>
+</ng-container>
+
+
+<ng-template #commonTemplate>
+    <span *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap"
+        [attr.title]="title">{{title}}</span>
+    <span fd-list-secondary [attr.aria-label]="secondary" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
+        {{secondary}}
+    </span>
+</ng-template>

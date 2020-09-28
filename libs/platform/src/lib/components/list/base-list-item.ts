@@ -5,7 +5,6 @@ import {
 
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { CheckboxComponent, RadioButtonComponent } from '@fundamental-ngx/core';
-import { ContentDensity } from '../form/form-control';
 import { SelectionType, ListType } from './list.component';
 import { BaseComponent } from '../base';
 import { ListConfig } from './list.config';
@@ -38,6 +37,67 @@ interface SecondaryActionItem {
  */
 @Directive()
 export class BaseListItem extends BaseComponent implements OnInit, AfterViewChecked {
+
+    @Input()
+    testObject: { string: [] };
+
+    /** define label for screen reader */
+    @Input()
+    text: string;
+    /** define label for screen reader */
+    @Input()
+    icon: string;
+
+    @Input()
+    indicationColor: string;
+
+    @Input()
+    status: string;
+
+    @Input()
+    glyph: string;
+
+
+    /** define label for screen reader */
+    @Input()
+    introductionText: string;
+
+    /** define label for screen reader */
+    @Input()
+    amount: string;
+
+    /** define currency */
+    @Input()
+    currency: string;
+
+    /** label for avatar */
+    @Input()
+    label: string;
+
+    /** Is avatar in circle */
+    @Input()
+    circle: boolean;
+
+    /** Is avatar has placeholder */
+    @Input()
+    placeholder: boolean;
+
+    /** Is avatar has tile */
+    @Input()
+    tile: boolean;
+
+    /** Is avatar has colorAccent */
+    @Input()
+    colorAccent: number;
+
+    /** Avatar image path */
+    @Input()
+    image: string;
+
+    /** Avatar is transparent */
+    @Input()
+    transparent: boolean;
+
 
     /** define label for screen reader */
     @Input()
@@ -172,6 +232,25 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /**Getter and setter the list of items */
     @Input()
     set item(item: any) {
+        this.text = item.text;
+        this.icon = item.icon;
+        this.indicationColor = item.indicationColor;
+        this.status = item.status;
+        this.glyph = item.glyph;
+        this.testObject = item.testObject;
+        this.label = item.label;
+        this.circle = item.circle;
+        this.placeholder = item.placeholder;
+        this.tile = item.tile;
+        this.colorAccent = item.colorAccent;
+        this.image = item.image;
+        this.transparent = item.transparent;
+        this.currency = item.currency;
+        this.amount = item.amount;
+        this.introductionText = item.introductionText;
+        this.navigationIndicator = item.navigationIndicator;
+        this.navigated = item.navigated;
+        this.listType = item.listType;
         this.title = item.title ? item.title : '';
         this.titleWrap = item.titleWrap ? true : false;
         this.titleIcon = item.titleIcon;

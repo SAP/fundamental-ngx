@@ -1,0 +1,138 @@
+<!--  list item navigation with Arrow-->
+<ng-container *ngIf="navigationIndicator || navigated && !(noDataText!==null && noDataText!== undefined) ">
+    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" tabIndex="0" [attr.aria-selected]="_selected"
+        (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)" class="fd-list__item--link" role="listitem"
+        [class.fd-list__item--inactive]="listType === 'inactive'" [attr.ariaLabelledBy]="ariaLabelledBy"
+        [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
+        <ng-container *ngTemplateOutlet=" selectionTemplate">
+        </ng-container>
+        <a #link fd-list-link [routerLink]="routerLink" [navigationIndicator]="navigationIndicator"
+            [navigated]="navigated">
+            <ng-container *ngTemplateOutlet="objectTemplate"></ng-container>
+        </a>
+    </li>
+</ng-container>
+
+<!--  list item without navigation and used for simple list display-->
+<ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText!==null && noDataText!== undefined)">
+    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" (keydown)="_onKeyDown($event)" tabIndex="0"
+        role="listitem" (keyup)="_onKeyUp($event)" [attr.ariaLabelledBy]="ariaLabelledBy" [attr.aria-level]="ariaLevel"
+        [attr.aria-posinet]="ariaPosinet" [class.fd-list__item--inactive]="listType === 'inactive'">
+        <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
+        <ng-container *ngTemplateOutlet="objectTemplate"></ng-container>
+    </li>
+</ng-container>
+
+<ng-container *ngIf="noDataText!==null && noDataText!== undefined">
+    <li #listItem fd-list-item [attr.id]="id" tabindex="0" [attr.ariaLabelledBy]="ariaLabelledBy"
+        [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
+        <span fd-list-title [attr.aria-label]="noDataText" [attr.title]="noDataText">{{noDataText}}</span>
+    </li>
+</ng-container>
+
+<ng-template #objectTemplate>
+    <div class="fd-list__content">
+        <div class="fd-list-optional">
+            <span class="fd-list-optional__text">{{introductionText}}</span>
+        </div>
+        <div class="fd-list__object fd-list__object--top-row">
+            <fd-avatar size="s" [glyph]="glyph" [label]="label" [circle]="circle" [placeholder]="placeholder"
+                [tile]="tile" [colorAccent]="colorAccent" [image]="image" [transparent]="transparent"></fd-avatar>
+            <div class="fd-list__object fd-list__object--top-left">
+                <div class="fd-object-identifier">
+                    <p class="fd-object-identifier__title">
+                        {{title}}
+                    </p>
+                </div>
+            </div>
+            <div class="fd-list__object fd-list__object--top-right">
+                <span class="fd-object-number fd-object-number--critical">
+                    <span class="fd-object-number__text">{{amount}}</span>
+                    <span class="fd-object-number__unit">{{currency}}</span>
+                </span>
+            </div>
+        </div>
+        <div class="fd-list__object fd-list__object--bottom">
+            <!-- <div class="fd-list__object fd-list__object--bottom-row">
+                <div class="fd-list__object fd-list__object--bottom-left">
+                    <span class="fd-list-attribute">First Attribute</span>
+                </div>
+                <div class="fd-list__object fd-list__object--bottom-right">
+                    <div class="fd-object-marker">
+                        <i class="fd-object-marker__icon sap-icon--flag" aria-label="icon for flag"></i>
+                    </div>
+                    <div class="fd-object-marker">
+                        <i class="fd-object-marker__icon sap-icon--favorite" aria-label="icon for favourite"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="fd-list__object fd-list__object--bottom-row">
+                <div class="fd-list__object fd-list__object--bottom-left">
+                    <span class="fd-list-attribute">secondAttribute</span>
+                </div>
+                <div class="fd-list__object fd-list__object--bottom-right">
+                    <fdp-object-status [indicationColor]="1" [status]="status" [glyph]="glyph" [inverted]="true">
+                        itemStatus
+                    </fdp-object-status>
+                </div>
+            </div>
+            <div class="fd-list__object fd-list__object--bottom-row">
+                <div class="fd-list__object fd-list__object--bottom-left">
+                    <span class="fd-list-attribute">thirdAttribute</span>
+                </div>
+            </div> -->
+
+            <div *ngFor="let test of testObject | keyvalue" class="fd-list__object fd-list__object--bottom-row">
+                <div class="fd-list__object fd-list__object--bottom-left">
+                    <span class="fd-list-attribute">{{test.key}}</span>
+                </div>
+                <div class="fd-list__object fd-list__object--bottom-right">
+                    <ng-container *ngFor="let tt of test.value">
+                        <div class="fd-object-marker" *ngIf="tt.marker">
+                            <em class="fd-object-marker__icon"
+                                [ngClass]="tt.icon !== null && tt.icon !== undefined ? 'sap-icon--' + tt.icon : ''"
+                                role="presentation"></em>
+                            <span class="fd-object-marker__text">{{tt.text}}</span>
+                        </div>
+                        <fdp-object-status *ngIf="tt.status" [indicationColor]="tt.indicationColor" [status]="tt.status"
+                            [glyph]="tt.glyph" [inverted]="tt.inverted">
+                            {{tt.text}}
+                        </fdp-object-status>
+                    </ng-container>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
+</ng-template>
+
+<ng-template #selectionTemplate>
+    <div fd-form-item class="fd-list__form-item" *ngIf="selectionMode === 'multi' || selectionMode === 'single'">
+        <fd-checkbox #checkbox *ngIf="selectionMode === 'multi'" [attr.aria-checked]="_selected" role="checkbox"
+            [compact]="_isCompact" [(ngModel)]="_selected">
+        </fd-checkbox>
+        <fd-radio-button #radio *ngIf="selectionMode === 'single'" [value]="value" [name]="name" [attr.role]="'radio'"
+            [attr.aria-checked]="_selected" [compact]="_isCompact" [(ngModel)]="selectionValue">
+        </fd-radio-button>
+    </div>
+</ng-template>
+<ng-template #actionsTemplate>
+    <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
+        <span *ngFor="let secondaryIcon of secondaryIcons">
+            <fd-icon class="fd-list__icon" *ngIf="!(secondaryIcon.isButton)" [glyph]="secondaryIcon.icon"
+                [attr.alt]="secondaryIcon.icon" role="img" (click)="_onActionButtonClick($event)">
+            </fd-icon>
+            <button fd-button *ngIf="secondaryIcon.isButton" role="button" compact="_isCompact" fdType="transparent"
+                glyph="secondaryIcon.icon" (click)="_onActionButtonClick($event)">
+            </button>
+        </span>
+    </span>
+    <button fd-button *ngIf="listType === 'detail'" role="button" compact="_isCompact" fdType="transparent" glyph="edit"
+        (click)="_onActionButtonClick($event)" [attr.aria-label]="'detail'">
+    </button>
+    <button fd-button *ngIf="selectionMode === 'delete'" role="button" compact="_isCompact" [attr.aria-label]="'delete'"
+        fdType="transparent" glyph="decline" (click)="_onActionButtonClick($event)">
+    </button>
+</ng-template>

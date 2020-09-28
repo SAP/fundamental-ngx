@@ -4,7 +4,7 @@ import {
     ElementRef, AfterContentInit, Output, EventEmitter,
     HostListener, ChangeDetectorRef, OnInit, AfterViewInit, ContentChild, Self, Optional, SkipSelf, Host, OnDestroy
 } from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
+import { FocusKeyManager, FocusOrigin } from '@angular/cdk/a11y';
 import { UP_ARROW, DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -160,6 +160,17 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--byline');
     }
 
+    /** setter and getter for hasObject*/
+    @Input('hasObject')
+    get hasObject(): boolean {
+        return this._hasObject;
+    }
+
+    set hasObject(value: boolean) {
+        this._hasObject = value;
+        this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--object');
+    }
+
     @Input()
     get value(): any {
         return super.getValue();
@@ -258,6 +269,11 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * Whether By line is present in list item*/
     private _hasByLine: boolean;
 
+    /**@hidden
+     * Whether object present in list item*/
+    private _hasObject: boolean;
+
+
     /** @hidden
     * To store */
     private _tempItems = [];
@@ -283,6 +299,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     * for items impertaive and declartive approaches
     */
     private _itemsSubscription: Subscription | null;
+
+
+    /**
+    * @hidden
+    * Verfies partial navigation enabled */
+    protected _partialNavigation = false;
 
     /** @hidden */
     constructor(protected _changeDetectorRef: ChangeDetectorRef,
@@ -335,12 +357,20 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     ngAfterViewInit(): void {
         this._keyManager = new FocusKeyManager<BaseListItem>(this.ListItems).withWrap();
         this.ListItems.forEach((item) => {
-            item.navigated = this.navigated;
-            item.navigationIndicator = this.navigationIndicator;
+            if (item.navigationIndicator) {
+                this._partialNavigation = true;
+            }
+        });
+        this.ListItems.forEach((item) => {
+            console.log('this._partialNavigation==>', this._partialNavigation);
+            if (!this._partialNavigation) {
+                item.navigated = this.navigated;
+                item.navigationIndicator = this.navigationIndicator;
+                item.listType = this.listType;
+            }
             item.contentDensity = this.contentDensity;
             item._isCompact = this._isCompact;
             item.selectionMode = this.selectionMode;
-            item.listType = this.listType;
             item._hasByLine = this.hasByLine;
             item._noSeperator = this.noSeperator;
             this.stateChanges.next(item);
@@ -360,13 +390,22 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      */
     ngAfterContentInit(): void {
         this._itemsSubscription = this.ListItems.changes.subscribe((items) => {
+            // verfiying partial navgation set for all items in one go
             items.forEach((item) => {
-                item.navigated = this.navigated;
-                item.navigationIndicator = this.navigationIndicator;
+                if (item.navigationIndicator) {
+                    this._partialNavigation = true;
+                }
+            });
+            items.forEach((item) => {
+                console.log('this._partialNavigation==>', this._partialNavigation);
+                if (!this._partialNavigation) {
+                    item.navigated = this.navigated;
+                    item.navigationIndicator = this.navigationIndicator;
+                    item.listType = this.listType;
+                }
                 item.contentDensity = this.contentDensity;
                 item._isCompact = this._isCompact;
                 item.selectionMode = this.selectionMode;
-                item.listType = this.listType;
                 item._hasByLine = this.hasByLine;
                 item._noSeperator = this.noSeperator;
                 this.stateChanges.next(item);

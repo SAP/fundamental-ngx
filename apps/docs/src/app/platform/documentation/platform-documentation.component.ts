@@ -40,10 +40,12 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/combobox', name: 'Combobox' },
             {
                 name: 'List And Items',
-                subItems: [
-                    { url: 'platform/list', name: 'List' },
-                    { url: 'platform/standard-list-item', name: 'Standard List Item' }
-                ]
+                subItems: [{ url: 'platform/list', name: 'List' },
+                { url: 'platform/standard-list-item', name: 'Standard List Item' },
+                { url: 'platform/action-list-item', name: 'Action List Item' },
+                { url: 'platform/display-list-item', name: 'Display List Item' },
+                { url: 'platform/object-list-item', name: 'Object List Item' }]
+
             }
         ];
 

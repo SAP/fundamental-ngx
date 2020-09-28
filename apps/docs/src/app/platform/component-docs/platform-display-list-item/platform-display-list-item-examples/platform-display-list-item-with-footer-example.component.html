@@ -1,0 +1,16 @@
+<h5> Declarative Approach</h5>
+<fdp-list>
+    <fdp-display-list-item title="Title1">
+    </fdp-display-list-item>
+    <fdp-display-list-item title="Title2">
+    </fdp-display-list-item>
+    <fdp-display-list-item title="Title3">
+    </fdp-display-list-item>
+    <fdp-list-footer>List footer</fdp-list-footer>
+</fdp-list>
+
+<h5>Imperative Approach</h5>
+<fdp-list>
+    <fdp-display-list-item *ngFor="let item of items" [item]="item"></fdp-display-list-item>
+    <fdp-list-footer>List footer</fdp-list-footer>
+</fdp-list>

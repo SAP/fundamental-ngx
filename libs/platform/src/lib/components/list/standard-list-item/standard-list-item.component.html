@@ -1,6 +1,6 @@
 <!--  list item navigation with Arrow-->
 <ng-container *ngIf="navigationIndicator || navigated && !(noDataText!==null && noDataText!== undefined) ">
-    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" tabIndex="0" [attr.aria-selected]="_selected"
+    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" tabIndex="-1" [attr.aria-selected]="_selected"
         (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)" class="fd-list__item--link" role="listitem"
         [class.fd-list__item--inactive]="listType === 'inactive'" [attr.ariaLabelledBy]="ariaLabelledBy"
         [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
@@ -15,7 +15,7 @@
 
 <!--  list item without navigation and used for simple list display-->
 <ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText!==null && noDataText!== undefined)">
-    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" (keydown)="_onKeyDown($event)" tabIndex="0"
+    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" (keydown)="_onKeyDown($event)" tabIndex="-1"
         role="listitem" (keyup)="_onKeyUp($event)" [attr.ariaLabelledBy]="ariaLabelledBy" [attr.aria-level]="ariaLevel"
         [attr.aria-posinet]="ariaPosinet" [class.fd-list__item--inactive]="listType === 'inactive'">
         <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>

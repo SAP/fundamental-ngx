@@ -1,0 +1,9 @@
+<h3>Cozy Mode</h3>
+<fdp-list noBorder="true" [navigationIndicator]="true">
+    <fdp-display-list-item *ngFor="let item of items" [item]="item"></fdp-display-list-item>
+</fdp-list>
+
+<h3>Compact Mode</h3>
+<fdp-list contentDensity="compact" noBorder="true" [navigationIndicator]="true">
+    <fdp-display-list-item *ngFor="let item of items" [item]="item"></fdp-display-list-item>
+</fdp-list>
