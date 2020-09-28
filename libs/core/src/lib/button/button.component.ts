@@ -2,12 +2,11 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostBinding,
     Input,
-    ViewEncapsulation,
     OnChanges,
     OnInit,
-    HostBinding,
-    ViewChild
+    ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
@@ -93,10 +92,6 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
      */
     @Input()
     public fdMenu = false;
-
-    /** @hidden */
-    @ViewChild('textElementRef')
-    textElementRef: ElementRef;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
