@@ -13,13 +13,15 @@ import {
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     QueryList,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { RtlService } from '../utils/services/rtl.service';
 
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
 const CARD_GAP_WIDTH = 16; // gap=1rem==16px
@@ -68,6 +70,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** Array of CardDefinitionDirective Array.To make Table kind of layout.*/
     public columns: CardColumn[];
+    /** handles rtl service
+     * @hidden */
+    public dir: string;
     /** @hidden Number of Columns in layout */
     private _numberOfColumns: number;
     /** @hidden */
@@ -76,10 +81,19 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(private readonly _changeDetector: ChangeDetectorRef) {}
+    /** Subscription to rtl service
+     * @hidden */
+    private _rtlChangeSubscription = Subscription.EMPTY;
+
+    constructor(private readonly _changeDetector: ChangeDetectorRef, @Optional() private _rtl: RtlService) {}
 
     ngOnInit(): void {
         this._listenOnResize();
+
+        this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
+            this.dir = isRtl ? 'rtl' : 'ltr';
+            this._changeDetector.detectChanges();
+        });
     }
 
     /** @hidden */
@@ -104,6 +118,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+
+        this._rtlChangeSubscription.unsubscribe();
     }
 
     /** @hidden Arranges cards on drop of dragged card */
