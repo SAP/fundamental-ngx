@@ -17,25 +17,23 @@
             <div class="fd-calendar__action">
                 <button
                     fd-button
+                    type="button"
                     [compact]="compact"
                     [fdType]="'transparent'"
+                    [label]="monthLabel"
                     [attr.aria-label]="calendarI18nLabels.monthSelectionLabel + ' ' + monthLabel"
-                    (click)="processViewChange('month', $event)"
-                    type="button"
-                >
-                    {{ monthLabel }}
+                    (click)="processViewChange('month', $event)">
                 </button>
             </div>
             <div class="fd-calendar__action">
                 <button
                     fd-button
+                    type="button"
                     [compact]="compact"
                     [fdType]="'transparent'"
+                    [label]="currentlyDisplayed.year"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
-                    (click)="processViewChange('year', $event)"
-                    type="button"
-                >
-                    {{ currentlyDisplayed.year }}
+                    (click)="processViewChange('year', $event)">
                 </button>
             </div>
         </ng-container>
@@ -45,12 +43,10 @@
                     fd-button
                     [compact]="compact"
                     [fdType]="'transparent'"
+                    [label]="currentlyDisplayed.year + ' - ' + currentlyDisplayed.year + amountOfYearsPerPeriod()"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
                     (click)="processViewChange('aggregatedYear', $event)"
-                    type="button"
-                >
-                    {{ currentlyDisplayed.year }} -
-                    {{ currentlyDisplayed.year + amountOfYearsPerPeriod() }}
+                    type="button">
                 </button>
             </div>
         </ng-container>

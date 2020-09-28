@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<button fd-button>Button</button>'
+    template: '<button fd-button label="Button"></button>'
 })
 export class TestComponent {}
 
