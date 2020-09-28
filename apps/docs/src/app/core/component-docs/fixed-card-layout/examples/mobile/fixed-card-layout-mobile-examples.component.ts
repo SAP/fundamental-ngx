@@ -25,6 +25,6 @@ export class FixedCardLayoutMobileExampleComponent {
             this.mobileWidth = landscapeWidth;
             this.mobileHeight = portraitWidth;
         }
-        this.layout.onResize();
+        this.layout.updateLayout();
     }
 }

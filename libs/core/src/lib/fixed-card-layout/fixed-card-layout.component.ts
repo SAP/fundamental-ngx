@@ -89,11 +89,16 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._createColumnsLayout();
+        /** Create column layout when view is initialized */
+        this.updateLayout();
     }
 
     ngAfterViewChecked(): void {
-        this._updateColumnsLayout();
+        /**
+         * Update column layout when orientation of screen changes.
+         * actual width is returned when view is stable. In AfterViewInit, correct value does not come.
+         */
+        this.updateLayout();
     }
 
     ngOnDestroy(): void {
@@ -114,7 +119,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** Distribute cards on window resize */
-    public onResize(): void {
+    public updateLayout(): void {
         this._numberOfColumns = this._getNumberOfColumns();
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
@@ -131,32 +136,12 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     private _listenOnResize(): void {
         fromEvent(window, 'resize')
             .pipe(debounceTime(60), takeUntil(this._onDestroy$))
-            .subscribe(() => this.onResize());
+            .subscribe(() => this.updateLayout());
     }
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
         this.cards.changes.subscribe(() => this._renderLayout());
-    }
-
-    /** @hidden Create column layout when view is initialized */
-    private _createColumnsLayout(): void {
-        this._numberOfColumns = this._getNumberOfColumns();
-
-        // initialize previousNumberOfColumns with starting numberOfColumns
-        this._previousNumberOfColumns = this._numberOfColumns;
-        this._renderLayout();
-    }
-
-    /**
-     * @hidden Update column layout when orientation of screen changes.
-     * actual width is returned when view is stable. In AfterViewInit, correct value does not come.
-     */
-    private _updateColumnsLayout(): void {
-        this._numberOfColumns = this._getNumberOfColumns();
-        if (this._numberOfColumns !== this._previousNumberOfColumns) {
-            this._renderLayout();
-        }
     }
 
     /** @hidden Returns number of columns that can fit in current available width for fd-card-layout */

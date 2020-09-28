@@ -56,7 +56,7 @@ describe('FixedCardLayoutComponent', () => {
 
         spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(1600);
 
-        component.fixedCardLayout.onResize();
+        component.fixedCardLayout.updateLayout();
         whenStable(fixture);
 
         expect(component.fixedCardLayout.columns.length).toEqual(4);
@@ -67,7 +67,7 @@ describe('FixedCardLayoutComponent', () => {
 
         spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(500);
 
-        component.fixedCardLayout.onResize();
+        component.fixedCardLayout.updateLayout();
         whenStable(fixture);
 
         expect(component.fixedCardLayout.columns.length).toEqual(1);
@@ -78,7 +78,7 @@ describe('FixedCardLayoutComponent', () => {
 
         spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(656);
 
-        component.fixedCardLayout.onResize();
+        component.fixedCardLayout.updateLayout();
         whenStable(fixture);
 
         expect(component.fixedCardLayout.columns.length).toEqual(2);
@@ -89,7 +89,7 @@ describe('FixedCardLayoutComponent', () => {
 
         spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(992);
 
-        component.fixedCardLayout.onResize();
+        component.fixedCardLayout.updateLayout();
         whenStable(fixture);
 
         expect(component.fixedCardLayout.columns.length).toEqual(3);
@@ -100,7 +100,7 @@ describe('FixedCardLayoutComponent', () => {
 
         spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(1664);
 
-        component.fixedCardLayout.onResize();
+        component.fixedCardLayout.updateLayout();
         whenStable(fixture);
 
         expect(component.fixedCardLayout.columns.length).toEqual(5);
@@ -111,7 +111,7 @@ describe('FixedCardLayoutComponent', () => {
 
         spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(300);
 
-        component.fixedCardLayout.onResize();
+        component.fixedCardLayout.updateLayout();
         whenStable(fixture);
 
         expect(component.fixedCardLayout.columns.length).toEqual(1);
