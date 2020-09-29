@@ -17,3 +17,27 @@
     border-top: 0.0625rem solid #ccc;
     border-top: 0.0625rem solid var(--sapTile_SeparatorColor, #ccc);
 }
+
+.fd-card {
+    /* Should be removed once https://github.com/SAP/fundamental-styles/issues/1715 is resolved */
+    .fd-card__avatar {
+        margin-right: 0.75rem;
+
+        @at-root {
+            [dir='rtl'] & {
+                margin-right: 0;
+                margin-left: 0.75rem;
+            }
+        }
+    }
+
+    /* Should be removed once https://github.com/SAP/fundamental-styles/issues/1729 is resolved */
+    .fd-card__analytics-content {
+        @at-root {
+            [dir='rtl'] & {
+                direction: ltr;
+                text-align: right;
+            }
+        }
+    }
+}
