@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component, ViewChild } from '@angular/core';
-import { CardModule } from '@fundamental-ngx/core';
+import { CardModule } from '../card/card.module';
+import { RtlService } from '../utils/services/rtl.service';
 
 import { FixedCardLayoutComponent, CardDefinitionDirective } from './fixed-card-layout.component';
 import { whenStable } from './../utils/tests/when-stable';
@@ -31,7 +32,8 @@ describe('FixedCardLayoutComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [FixedCardLayoutComponent, CardDefinitionDirective, TestFixedCardLayoutComponent],
-            imports: [CommonModule, DragDropModule, CardModule]
+            imports: [CommonModule, DragDropModule, CardModule],
+            providers: [RtlService]
         }).compileComponents();
     }));
 
