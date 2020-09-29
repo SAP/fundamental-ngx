@@ -42,6 +42,10 @@ $fixedCardGroup: #{$fd-namespace}-fixed-card-group;
         max-width: 25rem;
     }
 
+    &--card:last-child {
+        margin-bottom: 0rem;
+    }
+
     &--card-placeholder {
         opacity: 0.1;
         border-style: dashed;

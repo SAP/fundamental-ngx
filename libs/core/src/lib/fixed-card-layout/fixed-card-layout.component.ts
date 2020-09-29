@@ -17,7 +17,8 @@ import {
     Output,
     QueryList,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -45,7 +46,8 @@ type CardColumn = CardDefinitionDirective[];
     selector: 'fd-fixed-card-layout',
     templateUrl: './fixed-card-layout.component.html',
     styleUrls: ['./fixed-card-layout.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class FixedCardLayoutComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
     /** @hidden */
@@ -70,30 +72,26 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** Array of CardDefinitionDirective Array.To make Table kind of layout.*/
     public columns: CardColumn[];
+
     /** handles rtl service
      * @hidden */
     public dir: string;
+
     /** @hidden Number of Columns in layout */
     private _numberOfColumns: number;
+
     /** @hidden */
     private _previousNumberOfColumns: number;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** Subscription to rtl service
-     * @hidden */
-    private _rtlChangeSubscription = Subscription.EMPTY;
+    constructor(private readonly _changeDetector: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
 
-    constructor(private readonly _changeDetector: ChangeDetectorRef, @Optional() private _rtl: RtlService) {}
-
+    /** @hidden */
     ngOnInit(): void {
         this._listenOnResize();
-
-        this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
-            this._changeDetector.detectChanges();
-        });
+        this._subscribeToRtl();
     }
 
     /** @hidden */
@@ -107,6 +105,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         this.updateLayout();
     }
 
+    /** @hidden */
     ngAfterViewChecked(): void {
         /**
          * Update column layout when orientation of screen changes.
@@ -115,11 +114,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         this.updateLayout();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
-
-        this._rtlChangeSubscription.unsubscribe();
     }
 
     /** @hidden Arranges cards on drop of dragged card */
@@ -146,6 +144,14 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** Return available width for fd-card-layout */
     public getWidthAvailable(): number {
         return this.layout.nativeElement.getBoundingClientRect().width;
+    }
+
+    /** @hidden Rtl change subscription */
+    private _subscribeToRtl(): void {
+        this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
+            this.dir = isRtl ? 'rtl' : 'ltr';
+            this._changeDetector.detectChanges();
+        });
     }
 
     /** @hidden Listen window resize and distribute cards on column change */
