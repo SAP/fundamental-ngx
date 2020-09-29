@@ -11,7 +11,7 @@ import { PaginationComponent } from '@fundamental-ngx/core';
             [currentPage]="currentPage"
         ></fd-pagination>
         <br /><br />
-        <button fd-button (click)="goToPage1()">Go to page 1</button>`
+        <button fd-button label="Go to page 1" (click)="goToPage1()"></button>`
 })
 export class PaginationExampleComponent {
     totalItems = 50;

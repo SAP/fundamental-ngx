@@ -1,14 +1,13 @@
 <div class="fd-button-split fd-has-margin-right-small" role="group" aria-label="button-split" [fdMenuTrigger]="menu">
     <button fd-button #mainActionButton
+            [label]="mainActionTitle"
             [ngStyle]="{width: mainButtonWidth}"
             [fdType]="fdType"
             [compact]="compact"
             [disabled]="disabled"
             (click)="onMainButtonClick($event)">
 
-        <ng-container *ngTemplateOutlet="titleTemplate || buttonTitle"></ng-container>
-
-        <ng-template #buttonTitle>{{ mainActionTitle }}</ng-template>
+        <ng-container *ngTemplateOutlet="titleTemplate"></ng-container>
 
     </button>
 

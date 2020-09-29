@@ -1,1 +1,11 @@
 @import '~fundamental-styles/dist/button';
+
+// TODO: Remove after adding flex to buttons on fundamental-styles library
+.fd-button--menu {
+    display: inline-flex;
+    align-items: center;
+
+    .fd-button__text {
+        line-height: 1rem;
+    }
+}

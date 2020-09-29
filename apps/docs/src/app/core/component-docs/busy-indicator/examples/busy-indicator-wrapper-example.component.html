@@ -21,12 +21,10 @@
 
 <h5>Use Busy Indicator as a inline wrapper</h5>
 <fd-busy-indicator [loading]="loading" size="s">
-    <button fd-button>Save</button>
+    <button fd-button label="Save"></button>
 </fd-busy-indicator>
 
 <br/>
 <br/>
 
-<button fd-button (click)="loading = !loading">
-    {{loading ? 'Disable' : 'Enable'}} loading
-</button>
+<button fd-button [label]="loading ? 'Disable' : 'Enable' + ' loading'" (click)="loading = !loading"></button>

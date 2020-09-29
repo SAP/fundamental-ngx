@@ -1,6 +1,6 @@
 <div class="example-btn-holder">
-    <button fd-button (click)="addOption()">Add Option</button>
-    <button fd-button (click)="removeOption()">Remove Option</button>
+    <button fd-button label="Add Option" (click)="addOption()"></button>
+    <button fd-button label="Remove Option" (click)="removeOption()"></button>
 </div>
 
 <fd-select placeholder="Select an option" [(value)]="selectedValue" [closeOnOutsideClick]="false">

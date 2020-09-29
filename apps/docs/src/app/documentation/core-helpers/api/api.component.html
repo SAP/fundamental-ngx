@@ -4,9 +4,9 @@
 
     <button *ngIf="files.length > 1"
             fd-button
+            [label]="'Select a file (' + files.length + ')'"
             [fdMenu]="true"
             [fdMenuTrigger]="menu">
-        Select a file ({{ files.length }})
     </button>
 
     <fd-menu #menu

@@ -23,9 +23,8 @@
                 fdType="emphasized"
                 fd-dialog-decisive-button
                 [compact]="true"
-                (click)="approveButtonClicked()"
-            >
-                {{defaultDialogConfig?.approveButton}}
+                [label]="defaultDialogConfig?.approveButton"
+                (click)="approveButtonClicked()">
             </button>
         </fd-dialog-footer-button>
 
@@ -35,9 +34,8 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 [compact]="true"
-                (click)="cancelButtonClicked()"
-            >
-                {{defaultDialogConfig?.cancelButton}}
+                [label]="defaultDialogConfig?.cancelButton"
+                (click)="cancelButtonClicked()">
             </button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>

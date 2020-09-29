@@ -1,10 +1,11 @@
-<button fd-button placement="bottom" fdPopover="This popover is created from a string!" [noArrow]="false">
-    Popover from String
+<button fd-button
+        placement="bottom"
+        fdPopover="This popover is created from a string!"
+        label="Popover from String"
+        [noArrow]="false">
 </button>
 
-<button fd-button placement="bottom" [fdPopover]="template" [noArrow]="false">
-    Popover from Template
-</button>
+<button fd-button placement="bottom" label="Popover from Template" [fdPopover]="template" [noArrow]="false"></button>
 
 <ng-template #template>
     <p>
