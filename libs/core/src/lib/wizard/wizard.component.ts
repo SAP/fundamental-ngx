@@ -93,7 +93,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _wizardGrowing(): void {
-
+        this._shrinkWhileAnyStepIsTooNarrow();
     }
 
     /** @hidden */
@@ -150,14 +150,19 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
-        this._resetStepClasses();
         this._setContentTemplate();
+        this._shrinkWhileAnyStepIsTooNarrow();
+        this._cdRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _shrinkWhileAnyStepIsTooNarrow(): void {
+        this._resetStepClasses();
         let i = 0;
         while (this._anyStepIsTooNarrow() && i < this.steps.length - 1) {
             i++;
-            this.resizeHandler();
+            this._wizardShrinking();
         }
-        this._cdRef.detectChanges();
     }
 
     /** @hidden */
