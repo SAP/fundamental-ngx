@@ -4,9 +4,7 @@
     (onInvalidFiles)="this.invalidFiles = $event"
     [accept]="'.png'"
 >
-    <button fd-button (click)="fileInput.open()">
-        Drag a .jpg file on me!
-    </button>
+    <button fd-button label="Drag a .jpg file on me!" (click)="fileInput.open()"></button>
 </fd-file-input>
 
 <br /><br />

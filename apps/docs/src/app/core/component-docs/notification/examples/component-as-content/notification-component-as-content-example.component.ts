@@ -5,7 +5,7 @@ import { NotificationContentComponent } from './notification-content.component';
 @Component({
     selector: 'fd-notification-component-as-content-example',
     template: `
-        <button fd-button (click)="open()">Open from Component</button>
+        <button fd-button label="Open from Component" (click)="open()"></button>
         <span style="margin-left: 24px;">{{ closeReason }}</span>
     `
 })

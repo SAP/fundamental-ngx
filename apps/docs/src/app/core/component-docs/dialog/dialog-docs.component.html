@@ -196,7 +196,7 @@
 <code-example [exampleFiles]="customBackdropContainer"></code-example>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <button fd-button (click)="openDialog(playgroundDialog)">Open Dialog</button>
+    <button fd-button label="Open Dialog" (click)="openDialog(playgroundDialog)"></button>
 </playground>
 
 <ng-template let-dialog let-dialogConfig="dialogConfig" #playgroundDialog>
@@ -214,12 +214,11 @@
             <fd-dialog-footer-button>
                 <button
                     fd-button
-                    fdType="emphasized"
                     fd-dialog-decisive-button
+                    fdType="emphasized"
+                    label="Close"
                     [compact]="true"
-                    (click)="dialog.close()"
-                >
-                    Close
+                    (click)="dialog.close()">
                 </button>
             </fd-dialog-footer-button>
         </fd-dialog-footer>

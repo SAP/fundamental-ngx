@@ -7,7 +7,7 @@ import { NotificationService } from '@fundamental-ngx/core';
         <ng-template #avatarRef>
             <fd-avatar size="s" [circle]="true" label="John Doe">JD</fd-avatar>
         </ng-template>
-        <button fd-button (click)="open()">Open from Object</button>
+        <button fd-button label="Open from Object" (click)="open()"></button>
         <span style="margin-left: 24px;">{{ closeReason }}</span>
     `
 })

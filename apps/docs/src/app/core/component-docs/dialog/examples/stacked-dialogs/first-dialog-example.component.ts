@@ -22,10 +22,9 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
                         fdType="emphasized"
                         fd-initial-focus
                         fd-dialog-decisive-button
+                        label="Open Second Dialog"
                         [compact]="true"
-                        (click)="openDialog()"
-                    >
-                        Open Second Dialog
+                        (click)="openDialog()">
                     </button>
                 </fd-dialog-footer-button>
             </fd-dialog-footer>

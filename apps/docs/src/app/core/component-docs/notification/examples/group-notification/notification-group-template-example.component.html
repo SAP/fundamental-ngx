@@ -1,5 +1,5 @@
-<button fd-button *ngIf="!currentGroup" (click)="newGroup(notificationGroupTemplate)">Create Group</button>
-<button fd-button *ngIf="currentGroup" (click)="addToGroup(notificationTemplate)">Add To Group</button>
+<button fd-button label="Create Group" *ngIf="!currentGroup" (click)="newGroup(notificationGroupTemplate)"></button>
+<button fd-button label="Add To Group" *ngIf="currentGroup" (click)="addToGroup(notificationTemplate)"></button>
 <span style="margin-left: 20px;">{{ closeReason }}</span>
 
 <ng-template let-notification #notificationTemplate>
@@ -17,13 +17,11 @@
             </div>
         </div>
         <fd-notification-footer>
-            <button fd-button [fdType]="'transparent'">More Info</button>
+            <button fd-button label="More Info" [fdType]="'transparent'"></button>
             <div fd-notification-actions>
-                <button fd-button [fdType]="'positive'" (click)="notification.close('Approve Button Click')">
-                    Approve
+                <button fd-button label="Approve" [fdType]="'positive'" (click)="notification.close('Approve Button Click')">
                 </button>
-                <button fd-button [fdType]="'negative'" (click)="notification.dismiss('Reject Button Click')">
-                    Reject
+                <button fd-button label="Reject" [fdType]="'negative'" (click)="notification.dismiss('Reject Button Click')">
                 </button>
             </div>
         </fd-notification-footer>
@@ -48,13 +46,17 @@
             </div>
         </div>
         <fd-notification-footer>
-            <button fd-button [fdType]="'transparent'">More Info</button>
+            <button fd-button label="More Info" [fdType]="'transparent'"></button>
             <div fd-notification-actions>
-                <button fd-button [fdType]="'positive'" (click)="notification.closeWholeGroup('Approve Button Click')">
-                    Approve All
+                <button fd-button
+                        label="Approve All"
+                        [fdType]="'positive'"
+                        (click)="notification.closeWholeGroup('Approve Button Click')">
                 </button>
-                <button fd-button [fdType]="'negative'" (click)="notification.dismissWholeGroup('Reject Button Click')">
-                    Reject All
+                <button fd-button
+                        label="Reject All"
+                        [fdType]="'negative'"
+                        (click)="notification.dismissWholeGroup('Reject Button Click')">
                 </button>
             </div>
         </fd-notification-footer>

@@ -29,9 +29,8 @@
                 <button fd-button
                         fdType="emphasized"
                         fd-dialog-decisive-button
-                        (click)="handleApprove()"
-                >
-                    {{mobileConfig?.approveButtonText}}
+                        [label]="mobileConfig?.approveButtonText"
+                        (click)="handleApprove()">
                 </button>
             </fd-dialog-footer-button>
 
@@ -39,9 +38,8 @@
                 <button fd-button
                         fdType="transparent"
                         fd-dialog-decisive-button
-                        (click)="handleDismiss()"
-                >
-                    {{mobileConfig?.cancelButtonText}}
+                        [label]="mobileConfig?.cancelButtonText"
+                        (click)="handleDismiss()">
                 </button>
             </fd-dialog-footer-button>
         </fd-dialog-footer>

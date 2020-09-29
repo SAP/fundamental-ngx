@@ -12,15 +12,15 @@
         <fd-dialog-footer>
             <fd-dialog-footer-button>
                 <button fd-button
-                        fdType="emphasized"
                         fd-initial-focus
                         fd-dialog-decisive-button
+                        fdType="emphasized"
+                        label="Interesting"
                         (click)="dialog.close()">
-                    Interesting
                 </button>
             </fd-dialog-footer-button>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
 
-<button fd-button (click)="openDialog(dialogTemplate)">Open in mobile mode</button>
+<button fd-button label="Open in mobile mode" (click)="openDialog(dialogTemplate)"></button>

@@ -2,12 +2,16 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostBinding,
     Input,
-    ViewEncapsulation,
     OnChanges,
-    OnInit, HostBinding
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+
+export type GlyphPosition = 'before' | 'after';
+
 
 export type ButtonType =
     | ''
@@ -27,15 +31,15 @@ export type ButtonType =
  * ``` selector: button[fd-button], a[fd-button] ```
  *
  * ```html
- * <button fd-button>Button Text</button>
- * <a fd-button>Button Text</a>
+ * <button fd-button [label]="'Button Text'"></button>
+ * <a fd-button [label]="'Button Text'"></a>
  * ```
  */
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'button[fd-button], a[fd-button]',
     exportAs: 'fd-button',
-    template: ` <ng-content></ng-content> `,
+    templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -48,10 +52,13 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
     @HostBinding('attr.type')
     type = 'button';
 
-    /** The property allows user to pass additional css classes
-     */
+    /** The property allows user to pass additional css classes*/
     @Input()
     public class = '';
+
+    /** Position of glyph related to text */
+    @Input()
+    public glyphPosition: GlyphPosition = 'before';
 
     /** The icon to include in the button. See the icon page for the list of icons.
      * Setter is used to control when css class have to be rebuilded.
@@ -73,6 +80,12 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
      */
     @Input()
     public fdType: ButtonType = 'standard';
+
+    /**
+     * Text rendered inside button component
+     */
+    @Input()
+    label: string;
 
     /** Whether to apply menu mode to the button.
      * Default value is set to false
@@ -106,7 +119,6 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
             this.fdType ? `fd-button--${this.fdType}` : '',
             this.compact ? 'fd-button--compact' : '',
             this.fdMenu ? `fd-button--menu` : '',
-            this.glyph ? `sap-icon--${this.glyph}` : '',
             this.class
         ];
     }

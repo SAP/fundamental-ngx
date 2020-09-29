@@ -65,22 +65,20 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
                     <button
                             fd-button
                             fd-dialog-decisive-button
+                            label="Save and Close"
                             fdType="emphasized"
                             [compact]="true"
-                            (click)="save()"
-                    >
-                        Save and Close
+                            (click)="save()">
                     </button>
                 </fd-dialog-footer-button>
                 <fd-dialog-footer-button>
                     <button
                             fd-button
                             fd-dialog-decisive-button
+                            label="Close without Saving"
                             fdType="transparent"
                             [compact]="true"
-                            (click)="dismiss()"
-                    >
-                        Close without Saving
+                            (click)="dismiss()">
                     </button>
                 </fd-dialog-footer-button>
             </fd-dialog-footer>

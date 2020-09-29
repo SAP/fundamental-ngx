@@ -42,8 +42,8 @@
                         id="menu-mobile-approve-button"
                         fdType="emphasized"
                         fd-dialog-decisive-button
+                        [label]="mobileConfig.approveButtonText"
                         (click)="close()">
-                    {{mobileConfig.approveButtonText}}
                 </button>
             </fd-dialog-footer-button>
 
@@ -52,8 +52,8 @@
                         id="menu-mobile-cancel-button"
                         fdType="transparent"
                         fd-dialog-decisive-button
+                        [label]="mobileConfig.cancelButtonText"
                         (click)="close()">
-                    {{mobileConfig.cancelButtonText}}
                 </button>
             </fd-dialog-footer-button>
         </fd-dialog-footer>

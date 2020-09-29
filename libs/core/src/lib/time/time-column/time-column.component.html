@@ -1,6 +1,9 @@
 <label class="fd-time__slider-label">{{timeConfig?.label}}</label>
-<button class="fd-button fd-button fd-button--transparent sap-icon--navigation-up-arrow"
-        *ngIf="active && spinners"
+<button *ngIf="active && spinners"
+        fd-button
+        fdType="transparent"
+        glyph="navigation-up-arrow"
+        [compact]="compact"
         [attr.aria-label]="timeConfig?.decreaseLabel"
         (keydown)="spinnerButtonKeydownHandle($event, true)"
         (click)="scrollUp($event)"></button>
@@ -34,8 +37,11 @@
             {{activeValue | twoDigits: keepTwoDigits}}
     </span>
 </div>
-<button class="fd-button fd-button fd-button--transparent sap-icon--navigation-down-arrow"
-        *ngIf="active && spinners"
+<button *ngIf="active && spinners"
+        fd-button
+        fdType="transparent"
+        glyph="navigation-down-arrow"
+        [compact]="compact"
         [attr.aria-label]="timeConfig?.increaseLabel"
         (keydown)="spinnerButtonKeydownHandle($event)"
         (click)="scrollDown()">

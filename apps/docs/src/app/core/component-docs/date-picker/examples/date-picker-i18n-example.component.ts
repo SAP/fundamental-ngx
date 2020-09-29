@@ -124,11 +124,9 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     template: `
         <label fd-form-label for="language">Select language:</label>
         <fd-segmented-button id="language" style="margin-bottom:20px">
-            <button fd-button (click)="setFrench()" [class]="isSelected('fr')">French</button>
-            <button fd-button (click)="setGerman()" [class]="isSelected('de')">German</button>
-            <button fd-button (click)="setBulgarian()" [class]="isSelected('bg')">
-                Bulgarian
-            </button>
+            <button fd-button label="French" (click)="setFrench()" [class]="isSelected('fr')"></button>
+            <button fd-button label="German" (click)="setGerman()" [class]="isSelected('de')"></button>
+            <button fd-button label="Bulgarian" (click)="setBulgarian()" [class]="isSelected('bg')"></button>
         </fd-segmented-button>
         <br />
         <fd-date-picker [(ngModel)]="date" [startingDayOfWeek]="1"></fd-date-picker>
