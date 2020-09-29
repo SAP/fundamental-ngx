@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.105...v0.22.0-rc.106) (2020-09-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* The value for the text button is now passed as an input property, not as content projection.
+
+### Bug Fixes
+
+* migrate buttons 0.12.0 ([#3400](https://github.com/SAP/fundamental-ngx/issues/3400)) ([5ac24c2](https://github.com/SAP/fundamental-ngx/commit/5ac24c2bef9b4a4e27e30be504a4ecd799b54cd5))
+
 ## [0.22.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.104...v0.22.0-rc.105) (2020-09-29)
 
 ## [0.22.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.103...v0.22.0-rc.104) (2020-09-29)
