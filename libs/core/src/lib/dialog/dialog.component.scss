@@ -1,4 +1,5 @@
 @import '~fundamental-styles/dist/dialog';
+@import '~fundamental-styles/dist/title.css';
 
 .fd-dialog {
     z-index: 1000;
@@ -18,8 +19,8 @@
 
     &--with-header {
         .fd-dialog__body {
-            border-top-left-radius: 0px;
-            border-top-right-radius: 0px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
         }
     }
 }

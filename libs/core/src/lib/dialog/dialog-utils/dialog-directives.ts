@@ -11,7 +11,8 @@ import { Directive, Input } from '@angular/core';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-dialog-title]',
     host: {
-        '[class.fd-dialog__title]': 'true'
+        '[class.fd-title]': 'true',
+        '[class.fd-title--h5]': 'true'
     }
 })
 export class DialogTitleDirective {}
