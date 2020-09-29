@@ -5,7 +5,7 @@ export interface Media {
     mediaType: string;
     mediaUrl: string;
     alt: string;
-    label: string;
+    label: string
 }
 
 export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailComponent, K = Media> {
@@ -25,31 +25,35 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
 })
 export class ThumbnailComponent implements OnInit {
 
-    /** variable to input any type of object. */
+    /** List of media objects to display. */
     @Input()
     mediaList: Media[];
 
+    /** Display orientation of Thumnail component. */
     @Input()
     isHorizontal = false;
 
-    selectedMedia: Media;
-
+    /** Event emitted upon click of a thumbnail. */
     @Output()
     thumbnailClicked: EventEmitter<ThumbnailClickedEvent> = new EventEmitter();
 
+    /** @hidden Currently selected media. */
+    public selectedMedia: Media;
 
+    /** @hidden Select first media object on init. */
     ngOnInit(): void {
-        this.selectedMedia = this.mediaList[0];
+        if (Array.isArray(this.mediaList) && this.mediaList.length > 0) {
+            this.selectedMedia = this.mediaList[0];
+        }
     }
 
+    /** @hidden */
     thumbnailClickHandle(selectedMedia: Media): void {
-
         this.selectedMedia = selectedMedia;
         this.thumbnailClicked.emit(this.createClickEvent(this.selectedMedia));
-
     }
 
-    /**@hidden
+    /** @hidden
      * Create Thumbnail click event instance
      */
     createClickEvent(value: Media): ThumbnailClickedEvent {
