@@ -180,6 +180,7 @@ export const API_FILES = {
         'PopoverBodyFooterDirective'
     ],
     popoverDirective: ['PopoverDirective'],
+    objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
     scrollSpy: ['ScrollSpyDirective'],
     select: ['SelectComponent', 'OptionComponent'],

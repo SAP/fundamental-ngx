@@ -333,6 +333,10 @@ export const ROUTES: Routes = [
             {
                 path: 'tree',
                 loadChildren: () => import('./component-docs/tree/tree-docs.module').then((m) => m.TreeDocsModule)
+            },
+            {
+                path: 'object-number',
+                loadChildren: () => import('./component-docs/object-number/object-number-docs.module').then((m) => m.ObjectNumberDocsModule)
             }
         ]
     }
