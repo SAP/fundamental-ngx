@@ -1,5 +1,3 @@
-import { AfterViewInit } from '@angular/core';
-import { Renderer2 } from '@angular/core';
 import {
     Component,
     OnInit,
@@ -15,6 +13,7 @@ import { CssClassBuilder, applyCssClass } from '../utils/public_api';
     // tslint:disable-next-line:component-selector
     selector: '[fd-object-marker]',
     template: ` <i class="fd-object-marker__icon" [ngClass]="' sap-icon--' + glyph" *ngIf="glyph"></i>
+        <span *ngIf="label" class="fd-object-marker__text">{{ label }}</span>
         <ng-content></ng-content>`,
     styleUrls: ['./object-marker.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -34,12 +33,12 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     @Input()
     clickable = false;
 
-    private icon: HTMLElement;
-
-    private oldGlyph: string;
+    /** Define the text content of the Object Status */
+    @Input()
+    label: string;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, private readonly renderer: Renderer2) {}
+    constructor(private readonly _elementRef: ElementRef) {}
 
     @applyCssClass
     /** CssClassBuilder interface implementation
