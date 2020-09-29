@@ -1,6 +1,15 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit
+} from '@angular/core';
 import { MessageStates } from '../form/form-message/form-message.component';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../utils/public_api';
 
 @Directive({
     selector: '[fd-list-message], [fdListMessage]'
@@ -15,7 +24,8 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnChanges(): void {

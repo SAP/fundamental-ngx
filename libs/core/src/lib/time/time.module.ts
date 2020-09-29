@@ -15,4 +15,5 @@ import { CarouselModule } from '../utils/directives/carousel/carousel.module';
     imports: [CommonModule, FormsModule, FormModule, ButtonModule, PipeModule, CarouselModule],
     exports: [TimeComponent, OnlyDigitsDirective]
 })
-export class TimeModule {}
+export class TimeModule {
+}

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
 
 export type MessageStates = 'success' | 'error' | 'warning' | 'information';
 

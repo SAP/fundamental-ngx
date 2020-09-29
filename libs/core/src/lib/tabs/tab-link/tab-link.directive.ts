@@ -1,4 +1,12 @@
-import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    EventEmitter,
+    HostBinding,
+    HostListener,
+    Input,
+    Output
+} from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
@@ -39,16 +47,16 @@ export class TabLinkDirective extends AbstractFdNgxClass {
     readonly keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
     /** @hidden */
+    constructor(public elementRef: ElementRef) {
+        super(elementRef);
+    }
+
+    /** @hidden */
     _setProperties(): void {
         this._addClassToElement('fd-tabs__link');
         if (this.active) {
             this._addClassToElement('is-selected');
         }
-    }
-
-    /** @hidden */
-    constructor(public elementRef: ElementRef) {
-        super(elementRef);
     }
 
     /** @hidden */

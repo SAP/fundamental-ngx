@@ -12,17 +12,27 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
-import { Observable, of } from 'rxjs';
+import {
+    Observable,
+    of
+} from 'rxjs';
 import { MenuService } from '../services/menu.service';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import {
+    map,
+    startWith,
+    takeUntil
+} from 'rxjs/operators';
 import { RtlService } from '../../utils/services/rtl.service';
-import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
+import {
+    MENU_COMPONENT,
+    MenuInterface
+} from '../menu.interface';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
-    MobileModeControl,
-    MobileModeConfigToken
+    MobileModeConfigToken,
+    MobileModeControl
 } from '../../utils/base-class/mobile-mode.class';
 
 @Component({
@@ -123,7 +133,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
     private _listenOnMenuOpenChange(): void {
         this._component.isOpenChange.pipe(takeUntil(this._onDestroy$))
-            .subscribe(isOpen => isOpen ? this._openDialog() : this.dialogRef.close())
+            .subscribe(isOpen => isOpen ? this._openDialog() : this.dialogRef.close());
     }
 
     /** @hidden Sets navigation arrow depending on text direction */

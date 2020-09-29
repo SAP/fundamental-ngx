@@ -15,9 +15,16 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TabPanelComponent } from './tab/tab-panel.component';
-import { merge, Subject, timer } from 'rxjs';
+import {
+    merge,
+    Subject,
+    timer
+} from 'rxjs';
 import { TabsService } from './tabs.service';
-import { filter, takeUntil } from 'rxjs/operators';
+import {
+    filter,
+    takeUntil
+} from 'rxjs/operators';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
@@ -46,34 +53,29 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** @hidden */
     @ViewChildren(TabLinkDirective)
     tabLinks: QueryList<TabLinkDirective>;
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
     /** Index of the selected tab panel. */
     @Input()
     selectedIndex = 0;
-
     /** Whether user wants to use tab component in compact mode */
     @Input()
     compact = false;
-
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
     size: TabSizes = 'm';
-
     /**
      * Whether user wants to use tab component in certain mode. Modes available:
      * 'icon-only' | 'process' | 'filter'
      */
     @Input()
     mode: TabModes;
-
     /** Event emitted when the selected panel changes. */
     @Output()
     selectedIndexChange = new EventEmitter<number>();
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {}
+    constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {

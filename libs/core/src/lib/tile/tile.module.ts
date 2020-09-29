@@ -3,29 +3,29 @@ import { CommonModule } from '@angular/common';
 
 import { TileComponent } from './tile.component';
 import {
+    TileActionCloseDirective,
+    TileActionContainerDirective,
+    TileActionIndicatorDirective,
+    TileBackgroundImgDirective,
+    TileContainerDirective,
+    TileContentBylineDirective,
     TileContentDirective,
-    TileHeaderDirective,
+    TileContentTextDirective,
+    TileDotDirective,
     TileFooterDirective,
-    TileSectionDirective,
-    TileSubtitleDirective,
-    TileTitleDirective,
-    TileRefreshDirective,
     TileFooterTextDirective,
     TileHeaderContentDirective,
-    TileProfileImgDirective,
+    TileHeaderDirective,
     TileLogoDirective,
-    TileContentBylineDirective,
-    TileContentTextDirective,
-    TileBackgroundImgDirective,
-    TileToggleDirective,
-    TileContainerDirective,
     TilePageIndicatorDirective,
-    TileDotDirective,
-    TileActionCloseDirective,
-    TileActionIndicatorDirective,
+    TileProfileImgDirective,
+    TileRefreshDirective,
+    TileSectionDirective,
+    TileSlideContainerDirective,
+    TileSubtitleDirective,
     TileTitleContainerDirective,
-    TileActionContainerDirective,
-    TileSlideContainerDirective
+    TileTitleDirective,
+    TileToggleDirective
 } from './directives/tile.directives';
 import {
     NumericContentDirective,
@@ -112,4 +112,5 @@ import {
         NumericContentScaleTextDirective
     ]
 })
-export class TileModule {}
+export class TileModule {
+}

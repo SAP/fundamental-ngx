@@ -1,12 +1,12 @@
 import {
     AfterContentInit,
+    ContentChildren,
     Directive,
     ElementRef,
+    forwardRef,
     HostBinding,
     Input,
-    QueryList,
-    ContentChildren,
-    forwardRef
+    QueryList
 } from '@angular/core';
 import { CheckboxComponent } from '../../checkbox/checkbox/checkbox.component';
 
@@ -56,9 +56,10 @@ export class TableCellDirective implements AfterContentInit {
     @Input()
     key: string;
 
-    constructor (
+    constructor(
         public elementRef: ElementRef
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {

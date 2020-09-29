@@ -1,5 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
+import {
+    async,
+    ComponentFixture,
+    TestBed
+} from '@angular/core/testing';
+import {
+    Component,
+    ViewChild
+} from '@angular/core';
 import { ListModule } from './list.module';
 import { ListMessageDirective } from './list-message.directive';
 import { MessageStates } from '../form/form-message/form-message.component';

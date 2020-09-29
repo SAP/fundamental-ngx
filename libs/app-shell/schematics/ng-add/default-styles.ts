@@ -1,4 +1,3 @@
-
 export function createFundamentalStyles(): string {
     return `
 @import "~@angular/cdk/overlay-prebuilt.css";

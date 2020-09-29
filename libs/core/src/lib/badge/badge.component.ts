@@ -1,4 +1,8 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    HostBinding,
+    ViewEncapsulation
+} from '@angular/core';
 
 @Component({
     // tslint:disable-next-line:component-selector

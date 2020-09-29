@@ -20,14 +20,15 @@ export class ThemeManagerService implements OnDestroy {
     private subscriber: TopicSubscriber<MapMessage<string>>;
 
     constructor(private messagingService: MessagingService, private topics: MessagingTopics) {
-        // we always want to get last set value
+        this.topics.addTopic({
+            prefix: 'theme:', eventType: EventType.ONLY_LAST, name: TOPIC_THEME_CHANGE,
+            shared: true
+        });
         this.publisher = this.messagingService.createPublisher<MapMessage<string>>(TOPIC_THEME_CHANGE,
             EventType.ONLY_LAST);
 
         this.subscriber = this.messagingService.createSubscriber<MapMessage<string>>(TOPIC_THEME_CHANGE,
             EventType.ONLY_LAST);
-
-        this.topics.addTopic({ prefix: 'theme:', eventType: EventType.ONLY_LAST, name: TOPIC_THEME_CHANGE });
     }
 
     themeChanged(id: string, name: string): void {

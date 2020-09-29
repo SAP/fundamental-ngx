@@ -1,8 +1,18 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import {
+    Directive,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnInit
+} from '@angular/core';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../../utils/public_api';
 
 @Directive({
-  selector: '[fdTableIcon], [fd-table-icon]'
+    selector: '[fdTableIcon], [fd-table-icon]'
 })
 export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
 
@@ -27,7 +37,8 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
     navigation = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** Function runs when component is initialized
      * function should build component css class

@@ -8,4 +8,5 @@ import { BadgeComponent } from './badge.component';
     imports: [CommonModule],
     exports: [BadgeComponent]
 })
-export class BadgeModule {}
+export class BadgeModule {
+}

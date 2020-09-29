@@ -7,4 +7,5 @@ import { FormLegendDirective } from './form-legend.directive';
     exports: [FormLegendDirective],
     declarations: [FormLegendDirective]
 })
-export class FormLegendModule {}
+export class FormLegendModule {
+}

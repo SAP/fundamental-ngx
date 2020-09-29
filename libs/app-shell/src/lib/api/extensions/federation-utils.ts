@@ -7,6 +7,7 @@ type Factory = () => any;
 
 interface Container {
     init(shareScope: string): void;
+
     get(module: string): Factory;
 }
 

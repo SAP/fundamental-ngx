@@ -12,4 +12,5 @@ import { MenuModule } from '../menu/menu.module';
     imports: [CommonModule, ButtonModule, IconModule, PopoverModule, MenuModule],
     exports: [TreeComponent, TreeChildComponent]
 })
-export class TreeModule {}
+export class TreeModule {
+}

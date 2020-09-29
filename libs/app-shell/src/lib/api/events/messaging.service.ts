@@ -16,6 +16,7 @@ import {
 } from '@angular/core';
 import { MessagingConfig } from './messaging.config';
 import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
+import { MessagingTopics } from './topics.service';
 
 
 /**
@@ -30,11 +31,12 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
     private eventsRegistered: Map<string, EventType> = new Map<string, EventType>();
 
 
-    constructor(private _config: MessagingConfig, private _pubSubService: NgxPubSubService) {
+    constructor(private _config: MessagingConfig, private _pubSubService: NgxPubSubService,
+                private topics: MessagingTopics) {
     }
 
     createPublisher<T extends Message>(topic: string, type?: EventType): TopicPublisher<T> {
-        this.assertTopicName(topic);
+        this.assertTopicName(topic, type);
         const eventType = type || this._config.eventType;
 
         if (this._config.channel === Channel.RxJS) {
@@ -47,8 +49,9 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
     }
 
 
-    createSubscriber<T extends Message>(topic: string, type?: EventType): TopicSubscriber<T> {
-        this.assertTopicName(topic);
+    createSubscriber<T extends Message>(topic: string, type?: EventType,
+                                        messageSelector?: (msg: Message) => boolean): TopicSubscriber<T> {
+        this.assertTopicName(topic, type);
         const eventType = type || this._config.eventType;
 
         if (this._config.channel === Channel.RxJS) {
@@ -57,10 +60,12 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
         } else {
             return new NativeTopicSubscriber(topic, eventType);
         }
-
         this.eventsRegistered.set(topic, eventType);
     }
 
+    ngOnDestroy(): void {
+        this.eventsRegistered.forEach((v, k) => this._pubSubService.completeEvent(k));
+    }
 
     private doCreateRxJSPublisher<T extends Message>(publisher: RxJSTopicPublisher<T>): TopicPublisher<T> {
         switch (publisher.eventType) {
@@ -82,7 +87,6 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
         return publisher;
     }
 
-
     private doCreateRxJSSubscriber<T extends Message>(subscriber: RxJSTopicSubscriber<T>): TopicSubscriber<T> {
         switch (subscriber.eventType) {
             case EventType.DURABLE:
@@ -103,14 +107,14 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
         return subscriber;
     }
 
-    private assertTopicName(topicName: string): void {
+    private assertTopicName(topicName: string, type: EventType): void {
         if (!topicName) {
             throw new Error('Topic is not provided!');
         }
-    }
+        if (!this.topics.hasTopic(topicName) || this.topics.getTopic(topicName).eventType !== type) {
+            throw new Error(`Incorrect Topic Type. ${topicName}`);
+        }
 
-    ngOnDestroy(): void {
-        this.eventsRegistered.forEach((v, k) => this._pubSubService.completeEvent(k));
     }
 
 

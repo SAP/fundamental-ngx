@@ -15,12 +15,23 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { CarouselConfig, CarouselDirective, PanEndOutput } from '../../utils/directives/carousel/carousel.directive';
+import {
+    CarouselConfig,
+    CarouselDirective,
+    PanEndOutput
+} from '../../utils/directives/carousel/carousel.directive';
 import { CarouselItemDirective } from '../../utils/directives/carousel/carousel-item.directive';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { TimeColumnConfig } from './time-column-config';
-import { Subject, Subscription } from 'rxjs';
-import { buffer, debounceTime, map } from 'rxjs/operators';
+import {
+    Subject,
+    Subscription
+} from 'rxjs';
+import {
+    buffer,
+    debounceTime,
+    map
+} from 'rxjs/operators';
 
 
 let timeColumnUniqueId = 0;
@@ -62,18 +73,63 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
      */
     @Input()
     spinners = true;
-
-    /** Currently chosen, centered time column item */
+    /** Whether time column is meridian */
     @Input()
-    set activeValue(value: any) {
-        if (this._initialised && this._activeValue !== value) {
-            this._pickTime(this._getItem(value), true);
-        }
-        this._activeValue = value;
-    }
+    @HostBinding('class.fd-time__col--period')
+    meridian = false;
+    /** Id of column, initiated with some default value */
+    @Input()
+    id: string = 'fd-time-column-' + timeColumnUniqueId++;
+    /** I18n and labels */
+    @Input()
+    timeConfig: TimeColumnConfig;
+    /**
+     * Offset for carousel directive, active item is always the first one.
+     * In case of having more items in carousel than 1, middle element should be active
+     */
+    @Input()
+    offset = 3;
+    /** Event emitted, when active item is changed, by carousel */
+    @Output()
+    activeValueChange: EventEmitter<TimeColumnItemOutput> = new EventEmitter<TimeColumnItemOutput>();
+    /** Event emitted, when certain column is activated */
+    @Output()
+    activeStateChange: EventEmitter<void> = new EventEmitter<void>();
+    /** @hidden */
+    @ViewChild(CarouselDirective)
+    carousel: CarouselDirective;
+    /** @hidden */
+    @ViewChildren(CarouselItemDirective)
+    items: QueryList<CarouselItemDirective>;
+    /* Whether the action bar also has a back button. */
+    @HostBinding('class.fd-time__col')
+    fdTimeColClass = true;
+    /**
+     * Time to wait in milliseconds after the last keydown before focusing or selecting option based on numeric/alpha
+     * keys.
+     */
+    typeaheadDebounceInterval = 750;
+    config: CarouselConfig;
+    currentIndicatorId: string = this.id + '-current-indicator';
+    /** @hidden */
+    private _queryKeyDownEvent: Subject<string> = new Subject<string>();
+    /** @hidden */
+    private _activeCarouselItem: CarouselItemDirective;
+    /** @hidden */
+    private _isDragging = false;
+    /** @hidden */
+    private _initialised = false;
+    /** @hidden */
+    private _subscriptions: Subscription = new Subscription();
 
-    get activeValue(): any {
-        return this._activeValue;
+    constructor(
+        private _changeDetRef: ChangeDetectorRef
+    ) { }
+
+    private _active = false;
+
+    get active(): boolean {
+        return this._active;
     }
 
     /** Defines if column is active, it has impact on behaviour and visual  */
@@ -87,82 +143,21 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
         }
     }
 
-    get active(): boolean {
-        return this._active;
-    }
-
-    private _active = false;
-
-    /** Whether time column is meridian */
-    @Input()
-    @HostBinding('class.fd-time__col--period')
-    meridian = false;
-
-    /** Id of column, initiated with some default value */
-    @Input()
-    id: string = 'fd-time-column-' + timeColumnUniqueId++;
-
-    /** I18n and labels */
-    @Input()
-    timeConfig: TimeColumnConfig;
-
-    /**
-     * Offset for carousel directive, active item is always the first one.
-     * In case of having more items in carousel than 1, middle element should be active
-     */
-    @Input()
-    offset = 3;
-
-    /** Event emitted, when active item is changed, by carousel */
-    @Output()
-    activeValueChange: EventEmitter<TimeColumnItemOutput> = new EventEmitter<TimeColumnItemOutput>();
-
-    /** Event emitted, when certain column is activated */
-    @Output()
-    activeStateChange: EventEmitter<void> = new EventEmitter<void>();
-
-    /** @hidden */
-    @ViewChild(CarouselDirective)
-    carousel: CarouselDirective;
-
-    /** @hidden */
-    @ViewChildren(CarouselItemDirective)
-    items: QueryList<CarouselItemDirective>;
-
-    /* Whether the action bar also has a back button. */
-    @HostBinding('class.fd-time__col')
-    fdTimeColClass = true;
-
-    /**
-     * Time to wait in milliseconds after the last keydown before focusing or selecting option based on numeric/alpha
-     * keys.
-     */
-    typeaheadDebounceInterval = 750;
-
-    config: CarouselConfig;
-    currentIndicatorId: string = this.id + '-current-indicator';
-
-    /** @hidden */
-    private _queryKeyDownEvent: Subject<string> = new Subject<string>();
-
     /** @hidden */
     private _activeValue: any;
 
-    /** @hidden */
-    private _activeCarouselItem: CarouselItemDirective;
+    get activeValue(): any {
+        return this._activeValue;
+    }
 
-    /** @hidden */
-    private _isDragging = false;
-
-    /** @hidden */
-    private _initialised = false;
-
-    /** @hidden */
-    private _subscriptions: Subscription = new Subscription();
-
-    constructor(
-        private _changeDetRef: ChangeDetectorRef
-    ) { }
+    /** Currently chosen, centered time column item */
+    @Input()
+    set activeValue(value: any) {
+        if (this._initialised && this._activeValue !== value) {
+            this._pickTime(this._getItem(value), true);
+        }
+        this._activeValue = value;
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -206,7 +201,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
             if (upButton) {
                 this.scrollUp();
             } else {
-                this.scrollDown()
+                this.scrollDown();
             }
 
             event.stopPropagation();

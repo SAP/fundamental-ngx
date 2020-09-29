@@ -1,6 +1,17 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormStates } from './form-states';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../../utils/public_api';
 
 /**
  * Directive intended for use on form controls.
@@ -38,6 +49,10 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges 
     @Input()
     class: string;
 
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {
+    }
+
     @applyCssClass
     /** CssClassBuilder interface implementation
      * function must return single string
@@ -52,20 +67,6 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges 
         ];
     }
 
-    private _getFormClass(): string {
-        switch (this._getElementTag()) {
-            case 'input':
-                return 'fd-input';
-            case 'select':
-                return 'fd-form-select';
-            case 'textarea':
-                return 'fd-textarea';
-        }
-    }
-
-    /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
-
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
@@ -79,6 +80,17 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges 
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    private _getFormClass(): string {
+        switch (this._getElementTag()) {
+            case 'input':
+                return 'fd-input';
+            case 'select':
+                return 'fd-form-select';
+            case 'textarea':
+                return 'fd-textarea';
+        }
     }
 
     /** @hidden */

@@ -7,4 +7,5 @@ import { FormItemComponent } from './form-item.component';
     exports: [FormItemComponent],
     declarations: [FormItemComponent]
 })
-export class FormItemModule {}
+export class FormItemModule {
+}

@@ -7,4 +7,5 @@ import { FormControlComponent } from './form-control.component';
     exports: [FormControlComponent],
     declarations: [FormControlComponent]
 })
-export class FormControlModule {}
+export class FormControlModule {
+}

@@ -20,7 +20,10 @@ import { CheckboxComponent } from '../../checkbox/checkbox/checkbox.component';
 import { RadioButtonComponent } from '../../radio/radio-button/radio-button.component';
 import { ListLinkDirective } from '../directives/list-link.directive';
 import { Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import {
+    startWith,
+    takeUntil
+} from 'rxjs/operators';
 import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from './list-item-utils';
@@ -92,7 +95,8 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     constructor(
         public elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef
-    ) { }
+    ) {
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {

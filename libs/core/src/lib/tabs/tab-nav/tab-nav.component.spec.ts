@@ -1,5 +1,14 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
+import {
+    async,
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    tick
+} from '@angular/core/testing';
+import {
+    Component,
+    ViewChild
+} from '@angular/core';
 import { TabsModule } from '../tabs.module';
 import { TabNavComponent } from './tab-nav.component';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
@@ -81,8 +90,14 @@ describe('TabNavDirective', () => {
 
         spyOn(component, 'selectTab').and.callThrough();
 
-        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'ArrowRight', preventDefault: () => {} });
-        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'Enter', preventDefault: () => {} });
+        fixture.componentInstance.tabLink.keyDown.emit(<any>{
+            key: 'ArrowRight', preventDefault: () => {
+            }
+        });
+        fixture.componentInstance.tabLink.keyDown.emit(<any>{
+            key: 'Enter', preventDefault: () => {
+            }
+        });
 
         tick(10);
         fixture.detectChanges();
@@ -95,8 +110,14 @@ describe('TabNavDirective', () => {
 
         spyOn(component, 'selectTab').and.callThrough();
 
-        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'ArrowRight', preventDefault: () => {} });
-        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'Enter', preventDefault: () => {} });
+        fixture.componentInstance.tabLink.keyDown.emit(<any>{
+            key: 'ArrowRight', preventDefault: () => {
+            }
+        });
+        fixture.componentInstance.tabLink.keyDown.emit(<any>{
+            key: 'Enter', preventDefault: () => {
+            }
+        });
 
         tick(10);
         fixture.detectChanges();

@@ -7,4 +7,5 @@ import { FieldsetComponent } from './fieldset.component';
     exports: [FieldsetComponent],
     declarations: [FieldsetComponent]
 })
-export class FieldSetModule {}
+export class FieldSetModule {
+}

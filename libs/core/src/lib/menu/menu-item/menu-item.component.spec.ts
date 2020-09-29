@@ -1,9 +1,21 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    tick
+} from '@angular/core/testing';
 
-import { MenuItemComponent, SubmenuComponent } from './menu-item.component';
-import { Component, ViewChild } from '@angular/core';
+import {
+    MenuItemComponent,
+    SubmenuComponent
+} from './menu-item.component';
+import {
+    Component,
+    ViewChild
+} from '@angular/core';
 import { MenuComponent } from '../menu.component';
-import { MenuInteractiveDirective } from '../directives/menu-interactive.directive'
+import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { CommonModule } from '@angular/common';
 import { PopoverModule } from '@fundamental-ngx/core';
 

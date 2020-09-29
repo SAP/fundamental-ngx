@@ -1,6 +1,17 @@
-import { ContentChild, Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
+import {
+    ContentChild,
+    Directive,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnInit
+} from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../../utils/public_api';
 
 export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'neutral';
 
@@ -50,7 +61,8 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     linkItem: TabLinkDirective;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnChanges(): void {

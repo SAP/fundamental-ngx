@@ -1,4 +1,9 @@
-import { Injectable, ComponentRef, TemplateRef, Type } from '@angular/core';
+import {
+    ComponentRef,
+    Injectable,
+    TemplateRef,
+    Type
+} from '@angular/core';
 import { AlertComponent } from '../alert.component';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 import { AlertConfig } from '../alert-utils/alert-config';
@@ -18,7 +23,8 @@ export class AlertService {
     private alertContainerRef: ComponentRef<AlertContainerComponent>;
 
     /** @hidden */
-    constructor(private dynamicComponentService: DynamicComponentService) {}
+    constructor(private dynamicComponentService: DynamicComponentService) {
+    }
 
     /**
      * Returns true if there are some alerts currently open. False otherwise.

@@ -2,17 +2,20 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     HostBinding,
     Input,
     OnChanges,
     OnInit,
-    ViewEncapsulation,
     Output,
-    ContentChild
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../utils/public_api';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
 
 let panelUniqueId = 0;
@@ -74,7 +77,8 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit {
     panelContent: PanelContentDirective;
 
     /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef) {}
+    constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnInit(): void {

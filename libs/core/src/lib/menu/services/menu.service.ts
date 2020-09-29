@@ -1,8 +1,14 @@
-import { Injectable, Renderer2 } from '@angular/core';
+import {
+    Injectable,
+    Renderer2
+} from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
 import { KeyUtil } from '../../utils/functions/key-util';
-import { Observable, Subject } from 'rxjs';
+import {
+    Observable,
+    Subject
+} from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 interface MenuNode {
@@ -23,27 +29,27 @@ export class MenuService {
 
     /** Collection of active menu nodes */
     activeNodePath: MenuNode[] = [];
+    /** @hidden */
+    private _destroyKeyboardHandlerListener: () => void;
+
+    constructor(private _renderer: Renderer2) {
+    }
 
     /** Collection of active menu nodes */
     private _isMobileMode: Subject<boolean> = new Subject();
 
+    /** Returns menu mode observable */
+    get isMobileMode(): Observable<boolean> {
+        return this._isMobileMode.asObservable()
+            .pipe(distinctUntilChanged());
+    }
+
     /** @hidden */
     private _menu: MenuComponent;
-
-    /** @hidden */
-    private _destroyKeyboardHandlerListener: () => void;
-
-    constructor(private _renderer: Renderer2) { }
 
     /** Reference to menu component */
     get menu(): MenuComponent {
         return this._menu;
-    }
-
-    /** Returns menu mode observable */
-    get isMobileMode(): Observable<boolean> {
-        return this._isMobileMode.asObservable()
-            .pipe(distinctUntilChanged())
     }
 
     /** Sets menu mode */
@@ -65,7 +71,7 @@ export class MenuService {
         }
 
         if (isActive) {
-            this._addToActivePath(menuItem)
+            this._addToActivePath(menuItem);
         } else {
             this._removeFromActivePath(menuItem);
         }
@@ -141,7 +147,7 @@ export class MenuService {
 
         if (pathIndex !== -1) {
             this.activeNodePath.splice(pathIndex)
-                .forEach(removedActiveNode => removedActiveNode.item.setSelected(false))
+                .forEach(removedActiveNode => removedActiveNode.item.setSelected(false));
         }
     }
 
@@ -164,7 +170,7 @@ export class MenuService {
                 children: menuItem.submenu
                     ? menuItem.submenu.menuItems.toArray().map(subMenuItem => buildNode(subMenuItem))
                     : []
-            }
+            };
         }
 
         function setParents(node: MenuNode, parent: MenuNode): void {

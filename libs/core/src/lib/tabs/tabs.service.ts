@@ -1,4 +1,7 @@
-import { Injectable, Optional } from '@angular/core';
+import {
+    Injectable,
+    Optional
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { RtlService } from '../utils/services/rtl.service';
 import { KeyUtil } from '../utils/functions/key-util';
@@ -14,7 +17,8 @@ export class TabsService {
     /** Event is thrown always, when some property is changed */
     readonly tabPanelPropertyChanged: Subject<void> = new Subject<void>();
 
-    constructor(@Optional() private _rtlService: RtlService) {}
+    constructor(@Optional() private _rtlService: RtlService) {
+    }
 
     /** @hidden */
     tabHeaderKeyHandler(index: number, event: any, elements: HTMLElement[]): void {

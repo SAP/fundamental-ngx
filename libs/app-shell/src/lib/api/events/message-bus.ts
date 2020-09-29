@@ -5,7 +5,6 @@ import {
 } from 'rxjs';
 
 
-
 /**
  * Basic interface to implement to have Topic based messaging system. We need to thing if we have one implementation
  * of Publisher/Subscriber or different implementation that take into account security, and other things.
@@ -88,14 +87,17 @@ export class RxJSTopicSubscriber<T extends Message> implements TopicSubscriber<T
     subject: Subject<T>;
     private _subscription: Subscription;
 
-    constructor(public topic: string, public eventType: EventType) {
+    constructor(public topic: string, public eventType: EventType = EventType.DEFAULT,
+                public messageSelector?: (msg: Message) => boolean) {
     }
 
 
     onMessage(next?: (value: any) => void, error?: (error: any) => any, complete?: () => void): void {
-        this._subscription = this.subject.subscribe(next, error, complete);
-
-
+        this._subscription = this.subject.subscribe((value => {
+            if (!this.messageSelector || this.messageSelector(value)) {
+                next(value);
+            }
+        }), error, complete);
     }
 
     asObservable(): Observable<T> {
@@ -174,13 +176,11 @@ export abstract class Message {
 }
 
 export class TextMessage extends Message {
-    private _text: string;
-
-
     constructor(topic: string, id?: string, timestamp?: number, priority?: number) {
         super(id, timestamp, priority, topic);
     }
 
+    private _text: string;
 
     get text(): string {
         return this._text;
@@ -214,12 +214,11 @@ export class MapMessage<T> extends Message {
 }
 
 export class ObjectMessage<T> extends Message {
-    private _object: T;
-
-
     constructor(topic: string, id?: string, timestamp?: number, priority?: number) {
         super(id, timestamp, priority, topic);
     }
+
+    private _object: T;
 
     get object(): T {
         return this._object;

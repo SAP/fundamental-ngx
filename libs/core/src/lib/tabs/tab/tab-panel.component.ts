@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -82,7 +81,8 @@ export class TabPanelComponent implements OnChanges {
     tabState: TabItemState;
 
     /** @hidden */
-    constructor(private _changeDetRef: ChangeDetectorRef, @Optional() private _tabsService: TabsService) {}
+    constructor(private _changeDetRef: ChangeDetectorRef, @Optional() private _tabsService: TabsService) {
+    }
 
     /** @hidden
      * Thanks to OnPush change strategy detection on tab-list parent component,

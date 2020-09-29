@@ -1,4 +1,10 @@
-import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnDestroy
+} from '@angular/core';
 import { MenuComponent } from '../menu.component';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
@@ -7,6 +13,19 @@ import { startWith } from 'rxjs/operators';
     selector: '[fdMenuTrigger]'
 })
 export class MenuTriggerDirective implements OnDestroy {
+
+    @HostBinding('attr.aria-haspopup')
+    ariaHasPopup: boolean;
+    @HostBinding('attr.aria-controls')
+    ariaControls: string;
+    @HostBinding('attr.aria-expanded')
+    ariaExpanded: boolean;
+    /** @hidden */
+    private _isExpandedSubscription: Subscription;
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** Set reference to Menu Component */
     @Input('fdMenuTrigger')
@@ -17,21 +36,6 @@ export class MenuTriggerDirective implements OnDestroy {
         }
         this._setAriaAttributes(menu);
     }
-
-    @HostBinding('attr.aria-haspopup')
-    ariaHasPopup: boolean;
-
-    @HostBinding('attr.aria-controls')
-    ariaControls: string;
-
-    @HostBinding('attr.aria-expanded')
-    ariaExpanded: boolean;
-
-    /** @hidden */
-    private _isExpandedSubscription: Subscription;
-
-    /** @hidden */
-    constructor(private _elementRef: ElementRef) { }
 
     /** @hidden */
     ngOnDestroy(): void {

@@ -7,4 +7,5 @@ import { FormMessageComponent } from './form-message.component';
     exports: [FormMessageComponent],
     declarations: [FormMessageComponent]
 })
-export class FormMessageModule {}
+export class FormMessageModule {
+}

@@ -1,16 +1,16 @@
-<div class="fd-tree fd-tree--header" *ngIf="headers.length > 0">
+<div *ngIf="headers.length > 0" class="fd-tree fd-tree--header">
     <div class="fd-tree__row fd-tree__row--header">
         <div class="fd-tree__col fd-tree__col--control">
             <button
                 (click)="toggleDisplayAll()"
-                class="fd-tree__control"
-                aria-label="Expand all"
-                [ngClass]="{ 'is-pressed': !hideAll }"
                 [attr.aria-pressed]="!hideAll"
+                [ngClass]="{ 'is-pressed': !hideAll }"
+                aria-label="Expand all"
+                class="fd-tree__control"
             ></button>
             {{ headers[0] }}
         </div>
-        <div class="fd-tree__col" *ngFor="let header of headers | slice: 1">
+        <div *ngFor="let header of headers | slice: 1" class="fd-tree__col">
             {{ header }}
         </div>
         <div class="fd-tree__col fd-tree__col--actions"></div>
@@ -18,10 +18,10 @@
 </div>
 <ul class="fd-tree" id="ENusD653" role="tree">
     <fd-tree-child
-        (editClicked)="editClicked($event)"
         (deleteClicked)="deleteClicked($event)"
-        [displayTreeActions]="displayTreeActions"
+        (editClicked)="editClicked($event)"
         *ngFor="let row of treeData"
+        [displayTreeActions]="displayTreeActions"
         [row]="row"
     ></fd-tree-child>
 </ul>

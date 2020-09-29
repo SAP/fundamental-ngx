@@ -10,6 +10,7 @@ import { ListTitleDirective } from './directives/list-title.directive';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListSecondaryDirective } from './directives/list-secondary.directive';
 import { ListIconDirective } from './directives/list-icon.directive';
+
 @NgModule({
     declarations: [
         ListComponent,
@@ -20,7 +21,7 @@ import { ListIconDirective } from './directives/list-icon.directive';
         ListFooterDirective,
         ListGroupHeaderDirective,
         ListMessageDirective,
-        ListLinkDirective,
+        ListLinkDirective
     ],
     imports: [CommonModule, FormModule],
     exports: [
@@ -32,7 +33,8 @@ import { ListIconDirective } from './directives/list-icon.directive';
         ListSecondaryDirective,
         ListIconDirective,
         ListMessageDirective,
-        ListLinkDirective,
+        ListLinkDirective
     ]
 })
-export class ListModule {}
+export class ListModule {
+}

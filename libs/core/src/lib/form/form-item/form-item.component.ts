@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
 
 /**
  * Directive to be applied to the parent of a form control.

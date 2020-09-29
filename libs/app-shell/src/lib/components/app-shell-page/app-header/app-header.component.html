@@ -1,4 +1,4 @@
-<ng-template [ngIf]="shellBar" [ngIfElse]="default">
+<ng-template [ngIfElse]="default" [ngIf]="shellBar">
     <!--
        Application is using fd-shellbar directly
        -->
@@ -9,15 +9,15 @@
 <ng-template #default>
     <fd-shellbar>
         <fd-shellbar-logo>
-            <ng-template [ngIf]="logoSrc" [ngIfElse]="defaultLogo">
+            <ng-template [ngIfElse]="defaultLogo" [ngIf]="logoSrc">
                 <h4>customer logo</h4>
-                <a href="#" class="fd-shellbar__logo"
-                   style="cursor: pointer"
-                   tabindex="0"
+                <a (click)="onLogoClick($event)" [attr.title]="logoAlt || 'SAP Logo'"
+                   class="fd-shellbar__logo"
                    data-tag="shellbar__logo"
-                   role="button" (click)="onLogoClick($event)"
-                   [attr.title]="logoAlt || 'SAP Logo'">
-                    <img [attr.src]="logoSrc" width="48" height="24" [attr.alt]="logoAlt || 'SAP logo'">
+                   href="#"
+                   role="button" style="cursor: pointer"
+                   tabindex="0">
+                    <img [attr.alt]="logoAlt || 'SAP logo'" [attr.src]="logoSrc" height="24" width="48">
                 </a>
             </ng-template>
         </fd-shellbar-logo>
@@ -26,9 +26,9 @@
             IF we have pMenu then dont show <fd-shellbar-title>
         -->
         <fd-product-menu *ngIf="(_appShell?.shellBar._productMenu$ | async) as pMenu"
+                         [closePopoverOnSelect]="true"
                          [control]="_appShell?.shellBar._title$ | async"
-                         [items]="pMenu"
-                         [closePopoverOnSelect]="true">
+                         [items]="pMenu">
         </fd-product-menu>
 
         <ng-template [ngIf]="(_appShell?.shellBar._productMenu$ | async) === null">
@@ -44,24 +44,24 @@
         </fd-shellbar-subtitle>
 
 
-        <fd-shellbar-actions [user]="(_appShell?.shellBar._user$ | async)"
+        <fd-shellbar-actions [closePopoverOnSelect]="true"
                              [userMenu]="(_appShell?.shellBar._userMenu$ | async)"
-                             [closePopoverOnSelect]="true">
+                             [user]="(_appShell?.shellBar._user$ | async)">
 
-            <button fd-button
-                    *ngIf="(_appShell?.shellBar._themeMenu$ | async) as themeMenu"
-                    glyph="palette"
-                    class="fd-shellbar__button--menu fds-app--theme-menu"
-                    fdType="transparent"
+            <button *ngIf="(_appShell?.shellBar._themeMenu$ | async) as themeMenu"
+                    [fdMenuTrigger]="themesMenu"
                     [fdMenu]="true"
-                    [fdMenuTrigger]="themesMenu">
+                    class="fd-shellbar__button--menu fds-app--theme-menu"
+                    fd-button
+                    fdType="transparent"
+                    glyph="palette">
             </button>
 
             <fd-menu #themesMenu
                      [fillControlMode]="null"
                      placement="bottom-end">
-                <li fd-menu-item *ngFor="let theme of (_appShell?.shellBar._themeMenu$ | async) as themes">
-                    <div fd-menu-interactive (click)="onSelectTheme(theme.id, theme.name)">
+                <li *ngFor="let theme of (_appShell?.shellBar._themeMenu$ | async) as themes" fd-menu-item>
+                    <div (click)="onSelectTheme(theme.id, theme.name)" fd-menu-interactive>
                         <span fd-menu-title>{{ theme.name }}</span>
                     </div>
                 </li>
@@ -72,12 +72,12 @@
 
     </fd-shellbar>
 
-    <link rel="stylesheet" [href]="_cssUrl"/>
+    <link [href]="_cssUrl" rel="stylesheet"/>
 
 </ng-template>
 
 
 <ng-template #defaultLogo>
-    <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"
-       (click)="onLogoClick($event)"></a>
+    <a (click)="onLogoClick($event)" aria-label="SAP" class="fd-shellbar__logo fd-shellbar__logo--image-replaced"
+       href="#"></a>
 </ng-template>

@@ -1,4 +1,8 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import {
+    Directive,
+    HostBinding,
+    Input
+} from '@angular/core';
 
 let panelTitleUniqueId = 0;
 

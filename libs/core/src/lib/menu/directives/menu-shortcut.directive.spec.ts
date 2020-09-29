@@ -1,13 +1,20 @@
 import { MenuShortcutDirective } from './menu-shortcut.directive';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { async, fakeAsync, tick } from '@angular/core/testing';
-import { Observable, Subject } from 'rxjs';
+import {
+    async,
+    fakeAsync,
+    tick
+} from '@angular/core/testing';
+import {
+    Observable,
+    Subject
+} from 'rxjs';
 
 describe('MenuShortcutDirective', () => {
     const buildMenuItem = (subject: Subject<boolean>) => ({
         menuService: {
             get isMobileMode(): Observable<boolean> {
-                return subject.asObservable()
+                return subject.asObservable();
             }
         }
     } as MenuItemComponent);
@@ -25,7 +32,7 @@ describe('MenuShortcutDirective', () => {
 
     beforeEach(async(() => {
         isMobileSubject = new Subject<boolean>();
-        directive = new MenuShortcutDirective(buildMenuItem(isMobileSubject), elementRefMock)
+        directive = new MenuShortcutDirective(buildMenuItem(isMobileSubject), elementRefMock);
     }));
 
     it('should create an instance', () => {

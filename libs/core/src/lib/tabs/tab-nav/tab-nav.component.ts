@@ -5,19 +5,31 @@ import {
     ContentChildren,
     ElementRef,
     Input,
-    OnDestroy,
-    QueryList,
-    ViewEncapsulation,
     OnChanges,
-    OnInit
+    OnDestroy,
+    OnInit,
+    QueryList,
+    ViewEncapsulation
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
 import { TabsService } from '../tabs.service';
-import { merge, Subject } from 'rxjs';
-import { TabModes, TabSizes } from '../tab-list.component';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
-import { filter, takeUntil } from 'rxjs/operators';
+import {
+    merge,
+    Subject
+} from 'rxjs';
+import {
+    TabModes,
+    TabSizes
+} from '../tab-list.component';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../../utils/public_api';
+import {
+    filter,
+    takeUntil
+} from 'rxjs/operators';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -63,7 +75,20 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(private _tabsService: TabsService, private _elementRef: ElementRef) {}
+    constructor(private _tabsService: TabsService, private _elementRef: ElementRef) {
+    }
+
+    /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
+    get tabLinks(): TabLinkDirective[] {
+        let tabLinks: TabLinkDirective[] = [];
+        if (this.links) {
+            tabLinks = tabLinks.concat(this.links.map((link) => link));
+        }
+        if (this.items) {
+            tabLinks = tabLinks.concat(this.items.filter((item) => !!item.linkItem).map((item) => item.linkItem));
+        }
+        return tabLinks;
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -108,18 +133,6 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
      */
     elementRef(): ElementRef<any> {
         return this._elementRef;
-    }
-
-    /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
-    get tabLinks(): TabLinkDirective[] {
-        let tabLinks: TabLinkDirective[] = [];
-        if (this.links) {
-            tabLinks = tabLinks.concat(this.links.map((link) => link));
-        }
-        if (this.items) {
-            tabLinks = tabLinks.concat(this.items.filter((item) => !!item.linkItem).map((item) => item.linkItem));
-        }
-        return tabLinks;
     }
 
     /**

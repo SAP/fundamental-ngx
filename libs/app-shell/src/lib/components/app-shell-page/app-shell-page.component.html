@@ -108,8 +108,8 @@
         we show only a content
 -->
 <div class="fd-shell fd-shell--fundamentals">
-    <div class="fd-shell__header" *ngIf="_isStandalone">
-        <ng-template [ngIf]="!header" [ngIfElse]="appProvidedHeader">
+    <div *ngIf="_isStandalone" class="fd-shell__header">
+        <ng-template [ngIfElse]="appProvidedHeader" [ngIf]="!header">
             <!--
                Use API to initialize AppHeader (Shellbar)
                -->
@@ -125,7 +125,7 @@
         </div>
     </div>
 
-    <div class="fd-shell__footer" *ngIf="_isStandalone">
+    <div *ngIf="_isStandalone" class="fd-shell__footer">
         <ng-content select="fds-app-footer"></ng-content>
     </div>
 </div>

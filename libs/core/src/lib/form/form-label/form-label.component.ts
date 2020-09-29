@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
 
 /**
  * Label to be linked to a form control.

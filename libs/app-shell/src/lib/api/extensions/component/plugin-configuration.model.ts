@@ -118,7 +118,8 @@ export class Listener {
 
     constructor(public topic: string,
                 public description: string,
-                public onMessage: (message: Message) => any
+                public onMessage: (message: Message) => any,
+                public messageSelector?: (msg: Message) => boolean
     ) {
     }
 }

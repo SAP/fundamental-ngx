@@ -19,4 +19,5 @@ import { ButtonModule } from '../button/button.module';
     entryComponents: [AlertContainerComponent, AlertComponent],
     providers: [AlertService, DynamicComponentService]
 })
-export class AlertModule {}
+export class AlertModule {
+}

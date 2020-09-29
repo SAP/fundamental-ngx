@@ -1,4 +1,7 @@
-import { EventEmitter, InjectionToken } from '@angular/core';
+import {
+    EventEmitter,
+    InjectionToken
+} from '@angular/core';
 import { DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MobileMode } from '../utils/interfaces/mobile-control.interface';

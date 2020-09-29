@@ -1,20 +1,20 @@
 <ul
-    class="fd-tabs"
     [ngClass]="(compact ? 'fd-tabs--compact ' : '') + (mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
+    class="fd-tabs"
     role="tablist"
 >
     <ng-container *ngFor="let tab of panelTabs.toArray(); let i = index">
-        <li fd-tab-item [header]="tab.header" [tabItemState]="tab.tabState">
+        <li [header]="tab.header" [tabItemState]="tab.tabState" fd-tab-item>
             <a
-                fd-tab-link
+                (click)="tabHeaderClickHandler(i)"
+                (keydown)="tabHeaderKeyHandler(i, $event)"
                 [active]="tab.expanded"
-                [attr.tabindex]="0"
                 [attr.aria-controls]="tab.id"
                 [attr.aria-label]="tab.ariaLabel || null"
                 [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
+                [attr.tabindex]="0"
                 [disabled]="tab.disabled"
-                (keydown)="tabHeaderKeyHandler(i, $event)"
-                (click)="tabHeaderClickHandler(i)"
+                fd-tab-link
             >
                 <ng-container *ngIf="tab.titleTemplate">
                     <ng-container [fd-tab-load-title]="tab.titleTemplate"></ng-container>
@@ -22,12 +22,12 @@
 
                 <ng-container *ngIf="!tab.titleTemplate" [ngSwitch]="mode">
                     <ng-container *ngSwitchCase="'filter'">
-                        <span fd-tab-header *ngIf="tab.header">
-                            <span fd-tab-counter-header *ngIf="tab.count">{{ tab.count }}</span>
-                            <span fd-tab-label *ngIf="tab.title">{{ tab.title }}</span>
+                        <span *ngIf="tab.header" fd-tab-header>
+                            <span *ngIf="tab.count" fd-tab-counter-header>{{ tab.count }}</span>
+                            <span *ngIf="tab.title" fd-tab-label>{{ tab.title }}</span>
                         </span>
                         <ng-container *ngIf="!tab.header">
-                            <span fd-tab-icon [icon]="tab.glyph">
+                            <span [icon]="tab.glyph" fd-tab-icon>
                                 <p fd-tab-count>{{ tab.count }}</p>
                             </span>
                             <span fd-tab-label>{{ tab.title }}</span>
@@ -35,26 +35,26 @@
                     </ng-container>
 
                     <ng-container *ngSwitchCase="'icon-only'">
-                        <span fd-tab-icon [icon]="tab.glyph">
+                        <span [icon]="tab.glyph" fd-tab-icon>
                             <p fd-tab-count>{{ tab.count }}</p>
                         </span>
                     </ng-container>
 
                     <ng-container *ngSwitchCase="'process'">
-                        <span fd-tab-icon *ngIf="tab.glyph" [icon]="tab.glyph"></span>
+                        <span *ngIf="tab.glyph" [icon]="tab.glyph" fd-tab-icon></span>
                         <div fd-tab-process>
-                            <span fd-tab-label *ngIf="tab.count">{{ tab.count }}</span>
-                            <span fd-tab-label *ngIf="tab.title">{{ tab.title }}</span>
+                            <span *ngIf="tab.count" fd-tab-label>{{ tab.count }}</span>
+                            <span *ngIf="tab.title" fd-tab-label>{{ tab.title }}</span>
                         </div>
                     </ng-container>
 
                     <ng-container *ngSwitchDefault>
-                        <p fd-tab-count *ngIf="tab.count">{{ tab.count }}</p>
+                        <p *ngIf="tab.count" fd-tab-count>{{ tab.count }}</p>
                         <span fd-tab-tag>{{ tab.title }}</span>
                     </ng-container>
                 </ng-container>
             </a>
-            <div fd-tab-process-icon *ngIf="mode === 'process' && i !== panelTabs.length - 1"></div>
+            <div *ngIf="mode === 'process' && i !== panelTabs.length - 1" fd-tab-process-icon></div>
         </li>
 
         <div *ngIf="tab.header" fd-tab-separator></div>

@@ -7,7 +7,10 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../utils/public_api';
 
 export type SizeType = '' | 's' | 'm_l' | 'xl';
 export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer';
@@ -55,7 +58,8 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
     cosy: boolean;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnInit(): void {

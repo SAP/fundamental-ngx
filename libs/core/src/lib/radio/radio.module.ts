@@ -8,4 +8,5 @@ import { FormsModule } from '@angular/forms';
     exports: [RadioButtonComponent],
     imports: [CommonModule, FormsModule]
 })
-export class RadioModule {}
+export class RadioModule {
+}

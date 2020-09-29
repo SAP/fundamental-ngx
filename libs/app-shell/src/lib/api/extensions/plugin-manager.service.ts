@@ -17,11 +17,17 @@ import {
     EventType,
     MapMessage,
     Message,
+    ObjectMessage,
+    TextMessage,
     TopicPublisher
 } from '../events/message-bus';
-import { MessagingTopics } from '../../api/events/topics.service';
+import {
+    MessagingTopics,
+    Topic
+} from '../../api/events/topics.service';
 
 const TOPIC_SYSTEM_PLUGIN = 'system:plugin';
+
 /**
  * Plugin is our AppShell Extensions
  * -------------------------------
@@ -80,24 +86,29 @@ export class PluginManagerService implements OnDestroy {
 
     constructor(private lookupService: LookupService, private messageBus: MessagingService,
                 private topics: MessagingTopics) {
-        this.topics.addTopic({ prefix: 'system:', eventType: EventType.DEFAULT, name: TOPIC_SYSTEM_PLUGIN });
-
+        this.topics.addTopic({
+            prefix: 'system:', eventType: EventType.DEFAULT, name: TOPIC_SYSTEM_PLUGIN,
+            shared: true
+        });
         this.pluginTopic = this.messageBus.createPublisher<MapMessage<string>>(TOPIC_SYSTEM_PLUGIN, EventType.DEFAULT);
     }
 
     loadConfiguration(plugins: Array<Partial<PluginDescriptor>>): void {
         const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
-        m.set('type', 'load started');
+        m.set('type', 'configuration');
+        m.set('status', 'start');
         this.pluginTopic.publish(m);
         plugins.forEach(c => this.lookupService.addPlugin(c));
 
-        m.set('type', 'load finish');
+        m.set('type', 'configuration');
+        m.set('type', 'end');
         this.pluginTopic.publish(m);
     }
 
     register(descriptor: Partial<PluginDescriptor>, pluginComponent?: PluginComponent): void {
         const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
-        m.set('type', 'register started');
+        m.set('type', 'register');
+        m.set('status', 'start');
         m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
 
         let configuration: Partial<PluginConfiguration>;
@@ -107,12 +118,12 @@ export class PluginManagerService implements OnDestroy {
             this.doConfigureTheming(configuration);
 
             // as part of communication strategies pass only things that are needed.
-            const context = new PluginContext(new Map());
-            pluginComponent.initialize(context);
+            pluginComponent.initialize(this.createPluginContext());
         }
         this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
 
-        m.set('type', 'register finished');
+        m.set('type', 'register');
+        m.set('status', 'end');
         m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
     }
 
@@ -121,16 +132,28 @@ export class PluginManagerService implements OnDestroy {
         this.registry.clear();
     }
 
+    private createPluginContext(): PluginContext {
+        const topics = new Map<string, TopicPublisher<TextMessage | MapMessage<any> | ObjectMessage<any>>>();
+        this.topics.topicsDef.forEach((t: Topic) => {
+            if (t.shared) {
+                topics.set(t.name, this.messageBus.createPublisher(t.name, t.eventType));
+            }
+        });
+        const context = new PluginContext(topics);
+        return context;
+    }
+
 
     private doConfigureTheming(configuration: Partial<PluginConfiguration>): void {
         if (!configuration.getPermission().themingChange || configuration.addListeners().length === 0) {
             return;
         }
-
         configuration.addListeners().forEach((listener: Listener) => {
             if (this.topics.hasTopic(listener.topic)) {
                 const topic = this.topics.getTopic(listener.topic);
-                const subscriber = this.messageBus.createSubscriber(listener.topic, topic.eventType);
+                const subscriber = this.messageBus.createSubscriber(listener.topic, topic.eventType,
+                    listener.messageSelector);
+
                 subscriber.onMessage((m: Message) => {
                     listener.onMessage(m);
                 });

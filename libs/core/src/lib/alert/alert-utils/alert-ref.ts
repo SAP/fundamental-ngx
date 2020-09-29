@@ -1,4 +1,7 @@
-import { Observable, Subject } from 'rxjs';
+import {
+    Observable,
+    Subject
+} from 'rxjs';
 
 /**
  * @deprecated
@@ -10,13 +13,11 @@ import { Observable, Subject } from 'rxjs';
  * For a template, add let-alert to your ng-template tag. Now using *alert* in the template refers to this class.
  */
 export class AlertRef {
-    private readonly _afterDismissed: Subject<any> = new Subject<any>();
-
-    /** Observable that is triggered when the alert is dismissed. */
-    public afterDismissed: Observable<any> = this._afterDismissed.asObservable();
-
     /** Data passed from the service open method. */
     public data: any;
+    private readonly _afterDismissed: Subject<any> = new Subject<any>();
+    /** Observable that is triggered when the alert is dismissed. */
+    public afterDismissed: Observable<any> = this._afterDismissed.asObservable();
 
     /**
      * Dismisses the alert.
