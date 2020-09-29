@@ -32,7 +32,7 @@ export type ButtonType =
  *
  * ```html
  * <button fd-button [label]="'Button Text'"></button>
- * <a fd-button>Button Text</a>
+ * <a fd-button [label]="'Button Text'"></a>
  * ```
  */
 @Component({
