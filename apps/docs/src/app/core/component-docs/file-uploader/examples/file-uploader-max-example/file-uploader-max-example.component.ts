@@ -9,7 +9,7 @@ export class FileUploaderMaxExampleComponent {
     files: File[];
     invalidFiles: File[];
 
-    handleFileSection(files: File[]): void {
+    handleFileSelection(files: File[]): void {
         alert(files.length + ' Files selected successfully!!!');
     }
 
