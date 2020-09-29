@@ -5,9 +5,9 @@ import 'moment/locale/en-gb';
 import 'moment/locale/de';
 import 'moment/locale/fr';
 import 'moment/locale/bg';
-import 'moment/locale/zh-cn';
-import 'moment/locale/zh-hk';
-import 'moment/locale/zh-tw';
+import 'moment/locale/ja';
+import 'moment/locale/tr';
+import 'moment/locale/uk';
 import { CalendarI18n, FdDate } from '@fundamental-ngx/core';
 
 @Injectable()
@@ -48,14 +48,14 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
             <button fd-button (click)="setLocale('bg')" [class]="isSelected('bg')">
                 Bulgarian
             </button>
-            <button fd-button (click)="setLocale('zh-cn')" [class]="isSelected('zh-cn')">
-                Chinese CN
+            <button fd-button (click)="setLocale('ja')" [class]="isSelected('ja')">
+                Japanese
             </button>
-            <button fd-button (click)="setLocale('zh-hk')" [class]="isSelected('zh-hk')">
-                Chinese HK
+            <button fd-button (click)="setLocale('tr')" [class]="isSelected('tr')">
+                Turkish
             </button>
-            <button fd-button (click)="setLocale('zh-tw')" [class]="isSelected('zh-tw')">
-                Chinese TW
+            <button fd-button (click)="setLocale('uk')" [class]="isSelected('uk')">
+            Ukrainian
             </button>
         </fd-segmented-button>
         <fd-calendar [(ngModel)]="date"></fd-calendar>`,
