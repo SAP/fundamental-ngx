@@ -32,7 +32,8 @@
     }
 
     /* Should be removed once https://github.com/SAP/fundamental-styles/issues/1729 is resolved */
-    .fd-card__analytics-content {
+    .fd-card__analytics-content,
+    .fd-numeric-content__kpi {
         @at-root {
             [dir='rtl'] & {
                 direction: ltr;
