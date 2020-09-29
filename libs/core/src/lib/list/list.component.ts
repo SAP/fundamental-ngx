@@ -14,8 +14,14 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ListItemComponent } from './list-item/list-item.component';
-import { merge, Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import {
+    merge,
+    Subject
+} from 'rxjs';
+import {
+    startWith,
+    takeUntil
+} from 'rxjs/operators';
 import {
     FocusEscapeDirection,
     KeyboardSupportService
@@ -108,7 +114,8 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(private _keyboardSupportService: KeyboardSupportService<ListItemComponent>) { }
+    constructor(private _keyboardSupportService: KeyboardSupportService<ListItemComponent>) {
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -131,7 +138,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this.keyboardSupport) {
-            this._keyboardSupportService.onKeyDown(event)
+            this._keyboardSupportService.onKeyDown(event);
         }
     }
 
@@ -176,6 +183,6 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     private _listenOnListFocusEscape(): void {
         this._keyboardSupportService.focusEscapeList
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(direction => this.focusEscapeList.emit(direction))
+            .subscribe(direction => this.focusEscapeList.emit(direction));
     }
 }

@@ -10,17 +10,18 @@ export class MessagingTopics {
     }
 
     addTopic(topic: Topic): void {
-        if (this.topicsDef.filter((t) => t.name = topic.name).length === 0) {
+        const length = this.topicsDef.filter((t) => t.name === topic.name).length;
+        if (length === 0) {
             this.topicsDef.push(topic);
         }
     }
 
     hasTopic(name: string): boolean {
-        return this.topicsDef.filter((t) => t.name = name).length > 0;
+        return this.topicsDef.filter((t) => t.name === name).length > 0;
     }
 
     getTopic(name: string): Topic {
-        return this.topicsDef.filter((t) => t.name = name)[0];
+        return this.topicsDef.filter((t) => t.name === name)[0];
     }
 }
 
@@ -29,4 +30,9 @@ export interface Topic {
     prefix: string;
     eventType: EventType;
     name: string;
+
+    /**
+     * Is this topic internal and only private to AppShell API
+     */
+    shared: boolean;
 }

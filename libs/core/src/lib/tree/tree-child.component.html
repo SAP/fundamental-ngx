@@ -3,16 +3,16 @@
         <div
             *ngFor="let cell of row.rowData; let i = index"
             [attr.data-index]="i"
-            class="fd-tree__col"
             [ngClass]="{ 'fd-tree__col--control': i === 0 }"
+            class="fd-tree__col"
         >
             <button
                 (click)="toggleDisplayChildren()"
                 *ngIf="row.children && i === 0"
-                class="fd-tree__control"
-                aria-label="Expand"
-                [ngClass]="{ 'is-pressed': !hideChildren }"
                 [attr.aria-pressed]="!hideChildren"
+                [ngClass]="{ 'is-pressed': !hideChildren }"
+                aria-label="Expand"
+                class="fd-tree__control"
             ></button>
             <ng-container *ngIf="typeOf(cell) === 'string'">
                 {{ cell }}
@@ -35,39 +35,39 @@
         </div>
         <div class="fd-tree__col fd-tree__col--actions">
             <ng-container *ngIf="displayTreeActions">
-                <button fd-button
+                <button [fdMenuTrigger]="menu"
+                        fd-button
                         fdType="transparent"
-                        glyph="vertical-grip"
-                        [fdMenuTrigger]="menu">
+                        glyph="vertical-grip">
                 </button>
 
                 <fd-menu #menu>
-                    <li fd-menu-item (click)="editTreeItem(row)">
-                        <div fd-menu-interactive>
-                            <span fd-menu-title>Edit</span>
-                        </div>
-                    </li>
-                    <li fd-menu-item (click)="deleteTreeItem(row)">
-                        <div fd-menu-interactive>
-                            <span fd-menu-title>Delete</span>
-                        </div>
-                    </li>
-                </fd-menu>
-            </ng-container>
-        </div>
+<li (click)="editTreeItem(row)" fd-menu-item>
+    <div fd-menu-interactive>
+        <span fd-menu-title>Edit</span>
     </div>
-    <ul
-        *ngIf="row.children && row.children.length > 0"
-        [ngClass]="{ 'is-hidden': hideChildren }"
-        class="fd-tree__group"
-        role="group"
+</li>
+<li (click)="deleteTreeItem(row)" fd-menu-item>
+    <div fd-menu-interactive>
+        <span fd-menu-title>Delete</span>
+    </div>
+</li>
+</fd-menu>
+</ng-container>
+</div>
+</div>
+<ul
+    *ngIf="row.children && row.children.length > 0"
+    [ngClass]="{ 'is-hidden': hideChildren }"
+    class="fd-tree__group"
+    role="group"
+>
+    <fd-tree-child
+        *ngFor="let child of row.children"
+        [displayTreeActions]="displayTreeActions"
+        [ngClass]="child.sublevelClass"
+        [row]="child"
     >
-        <fd-tree-child
-            *ngFor="let child of row.children"
-            [displayTreeActions]="displayTreeActions"
-            [row]="child"
-            [ngClass]="child.sublevelClass"
-        >
-        </fd-tree-child>
-    </ul>
+    </fd-tree-child>
+</ul>
 </li>

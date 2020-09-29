@@ -1,7 +1,18 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    tick
+} from '@angular/core/testing';
 
 import { MenuComponent } from './menu.component';
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+    Component,
+    QueryList,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 import { MenuModule } from './menu.module';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
@@ -134,7 +145,7 @@ describe('MenuComponent', () => {
 
         tick();
 
-        menu.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Escape'}));
+        menu.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
         fixture.detectChanges();
 
         expect(closeSpy).toHaveBeenCalled();

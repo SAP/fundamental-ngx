@@ -64,9 +64,14 @@ export class AppShellModule {
                     deps: [IS_APPSHELL_STANDALONE]
                 },
                 {
+                    provide: ThemeManagerService,
+                    useClass: ThemeManagerService,
+                    deps: [MessagingService, MessagingTopics]
+                },
+                {
                     provide: MessagingService,
                     useClass: MessagingService,
-                    deps: [MessagingConfig, NgxPubSubService]
+                    deps: [MessagingConfig, NgxPubSubService, MessagingTopics]
                 },
                 {
                     provide: PluginManagerService,
@@ -74,14 +79,9 @@ export class AppShellModule {
                     deps: [LookupService, MessagingService, MessagingTopics]
                 },
                 {
-                    provide: ThemeManagerService,
-                    useClass: ThemeManagerService,
-                    deps: [MessagingService, MessagingTopics]
-                },
-                {
                     provide: AppShellProviderService,
                     useClass: AppShellProviderService,
-                    deps: [NgZone, ThemeManagerService, [new Optional(), ShellBarService]]
+                    deps: [NgZone, MessagingTopics, ThemeManagerService, [new Optional(), ShellBarService]]
                 },
                 {
                     'provide': APP_INITIALIZER,

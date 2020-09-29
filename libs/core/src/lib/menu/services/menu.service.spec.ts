@@ -1,7 +1,18 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    tick
+} from '@angular/core/testing';
 
 import { MenuService } from './menu.service';
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+    Component,
+    QueryList,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 import { MenuComponent } from '../menu.component';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuModule } from '../menu.module';
@@ -156,7 +167,7 @@ describe('MenuService', () => {
         const activateSpy = spyOn(menuItems.first, 'setSelected');
         menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: 'ArrowRight'}));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowRight' }));
 
         tick();
 
@@ -170,7 +181,7 @@ describe('MenuService', () => {
         const activateSpy = spyOn(menuItems.first, 'setSelected');
         menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: 'ArrowRight'}));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowRight' }));
 
         tick();
 
@@ -186,7 +197,7 @@ describe('MenuService', () => {
         menuService.setActive(true, menuItems.first);
         menuService.focusedNode = menuService.menuMap.get(nestedMenuItem);
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: 'ArrowLeft'}));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
 
         expect(setActiveSpy).toHaveBeenCalledWith(false, menuItems.first);
         expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.first);
@@ -197,7 +208,7 @@ describe('MenuService', () => {
 
         menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: 'ArrowDown'}));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 
         expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.toArray()[1]);
     });
@@ -207,7 +218,7 @@ describe('MenuService', () => {
 
         menuService.focusedNode = menuService.menuMap.get(menuItems.toArray()[1]);
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: 'ArrowUp'}));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 
         expect(setFocusedSpy).toHaveBeenCalledWith(menuItems.first);
     });
@@ -217,8 +228,8 @@ describe('MenuService', () => {
 
         menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: 'Enter'}));
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: ' '}));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'Enter' }));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: ' ' }));
 
         expect(clickSpy).toHaveBeenCalledTimes(2);
     });
@@ -226,7 +237,7 @@ describe('MenuService', () => {
     it('should close menu on Escape', () => {
         const closeSpy = spyOn(menu, 'close');
 
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: 'Escape'}));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'Escape' }));
 
         expect(closeSpy).toHaveBeenCalled();
     });
@@ -238,7 +249,7 @@ describe('MenuService', () => {
         const setFocusedSpy = spyOn(menuService, 'setFocused');
 
         menuService.focusedNode = menuService.menuMap.get(menuItemsArray[2]);
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: 'ArrowUp'}));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 
         expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[0]);
     });
@@ -250,7 +261,7 @@ describe('MenuService', () => {
         const setFocusedSpy = spyOn(menuService, 'setFocused');
 
         menuService.focusedNode = menuService.menuMap.get(menuItemsArray[0]);
-        menuService['_handleKey'](new KeyboardEvent('keydown', {key: 'ArrowDown'}));
+        menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 
         expect(setFocusedSpy).toHaveBeenCalledWith(menuItemsArray[2]);
     });

@@ -1,8 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    TestBed
+} from '@angular/core/testing';
 
 import { RadioButtonComponent } from './radio-button.component';
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+    ChangeDetectorRef,
+    Component,
+    ViewChild
+} from '@angular/core';
+import {
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule
+} from '@angular/forms';
 
 @Component({
     template: `
@@ -66,14 +79,14 @@ describe('RadioButtonComponent reactive forms', () => {
         expect(component.radioButton1.value).toEqual(1);
     });
 
-    it('should check second radio', async() => {
-      await fixture.whenStable();
-      new Promise(async () => {
-        component.radioButton2.inputElement.nativeElement.click();
-        await fixture.detectChanges();
-      }).then(() => {
-        expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
-        expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
-      });
+    it('should check second radio', async () => {
+        await fixture.whenStable();
+        new Promise(async () => {
+            component.radioButton2.inputElement.nativeElement.click();
+            await fixture.detectChanges();
+        }).then(() => {
+            expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
+            expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
+        });
     });
 });

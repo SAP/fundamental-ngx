@@ -61,4 +61,5 @@ import { IconModule } from '../icon/icon.module';
         TabSeparatorDirective
     ]
 })
-export class TabsModule {}
+export class TabsModule {
+}

@@ -1,5 +1,15 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import {
+    Directive,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnInit
+} from '@angular/core';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../../utils/public_api';
 
 type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | null | 'neutral';
 type NumericContentSize = 's' | 'm' | 'l' | null;
@@ -21,7 +31,8 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
     @HostBinding('class.fd-numeric-content')
     baseClass = true;
 
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -89,7 +100,8 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges, Css
     @Input()
     glyph: string;
 
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -143,7 +155,8 @@ export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBu
     @Input()
     glyph: string;
 
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -193,7 +206,8 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
     @Input()
     glyph: string;
 
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -233,7 +247,8 @@ export class NumericContentScaleDirective implements OnInit, OnChanges, CssClass
     @Input()
     class: string;
 
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnChanges(): void {

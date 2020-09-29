@@ -8,7 +8,12 @@
  *  router it could be defined as Application scope
  */
 import { PluginConfiguration } from './plugin-configuration.model';
-import { TopicPublisher } from '../../events/message-bus';
+import {
+    MapMessage,
+    ObjectMessage,
+    TextMessage,
+    TopicPublisher
+} from '../../events/message-bus';
 
 
 export interface PluginComponent {
@@ -32,7 +37,7 @@ export class PluginContext {
      *
      * Plus maybe inject some other services
      */
-    constructor(public messageBus: Map<string, TopicPublisher<any>>) {
+    constructor(public messageBus: Map<string, TopicPublisher<TextMessage | MapMessage<any> | ObjectMessage<any>>>) {
     }
 }
 

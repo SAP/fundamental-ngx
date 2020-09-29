@@ -1,6 +1,13 @@
 import { TabItemDirective } from './tab-item.directive';
-import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    Component,
+    ViewChild
+} from '@angular/core';
+import {
+    async,
+    ComponentFixture,
+    TestBed
+} from '@angular/core/testing';
 
 @Component({
     template: ` <li fd-tab-item #directiveElement></li> `

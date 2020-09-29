@@ -1,4 +1,8 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    HostBinding,
+    ViewEncapsulation
+} from '@angular/core';
 
 /**
  * Used for easily displaying forms with a margin. Not necessary for fundamental forms to be functional.

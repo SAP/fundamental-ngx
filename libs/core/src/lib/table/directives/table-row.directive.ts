@@ -5,7 +5,8 @@ import {
     Directive,
     HostBinding,
     Input,
-    OnDestroy, OnInit,
+    OnDestroy,
+    OnInit,
     QueryList
 } from '@angular/core';
 import { TableCellDirective } from './table-cell.directive';
@@ -54,7 +55,8 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _tableService: TableService
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -115,6 +117,6 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
 
     /** @hidden */
     private _hideElement(element: TableCellDirective): void {
-        element.elementRef.nativeElement.classList.add(HIDDEN_CLASS_NAME)
+        element.elementRef.nativeElement.classList.add(HIDDEN_CLASS_NAME);
     }
 }

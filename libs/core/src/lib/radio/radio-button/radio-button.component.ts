@@ -1,20 +1,27 @@
 import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
     forwardRef,
     Input,
-    ViewChild,
-    ChangeDetectionStrategy,
     OnChanges,
-    ViewEncapsulation,
-    AfterViewInit
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import {
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR
+} from '@angular/forms';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../../utils/public_api';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
+
 @Component({
     selector: 'fd-radio-button',
     templateUrl: './radio-button.component.html',
@@ -76,6 +83,29 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
      */
     @Input()
     disabled = false;
+    /** The name of the radio button
+     * The field is mandatory
+     */
+    @Input()
+    name: string;
+    /**
+     * uniqueId to a radio button
+     */
+    @Input()
+    id = `radio-id-${uniqueId++}`;
+    /** Value field stores information about holding value by radio button
+     * The field is mandatory
+     */
+    @Input()
+    value: any;
+    /** @hidden */
+    class: string;
+    /** @hidden */
+    currentValue: any;
+
+    /** @hidden */
+    constructor(private changeDetectionRef: ChangeDetectorRef) {
+    }
 
     /** The field should be only used with reactive forms
      * Its purpose is to pass a current selected value from froumGroup
@@ -87,39 +117,12 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
         this._setNativeElementCheckedState();
     }
 
-    /** The name of the radio button
-     * The field is mandatory
-     */
-    @Input()
-    name: string;
-
-    /**
-     * uniqueId to a radio button
-     */
-    @Input()
-    id = `radio-id-${uniqueId++}`;
-
-    /** Value field stores information about holding value by radio button
-     * The field is mandatory
-     */
-    @Input()
-    value: any;
-
     get checked(): boolean {
         if (this.value === undefined) {
             return false;
         }
         return this.currentValue === this.value;
     }
-
-    /** @hidden */
-    class: string;
-
-    /** @hidden */
-    currentValue: any;
-
-    /** @hidden */
-    constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -135,10 +138,12 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = () => {};
+    onChange: any = () => {
+    };
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = () => {
+    };
 
     /** @hidden */
     registerOnChange(fn: any): void {
@@ -160,6 +165,7 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     writeValue(value: any): void {
         this.valueChange(value);
     }
+
     // End implementation
 
     /** This method is responsible for building a css class based on current state

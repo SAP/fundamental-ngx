@@ -8,4 +8,5 @@ import { LinkComponent } from './link.component';
     imports: [CommonModule],
     exports: [LinkComponent]
 })
-export class LinkModule {}
+export class LinkModule {
+}

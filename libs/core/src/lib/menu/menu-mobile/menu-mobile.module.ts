@@ -12,6 +12,7 @@ import { ButtonModule } from '../../button/button.module';
         ButtonModule
     ],
     exports: [MenuMobileComponent],
-    entryComponents: [MenuMobileComponent],
+    entryComponents: [MenuMobileComponent]
 })
-export class MenuMobileModule { }
+export class MenuMobileModule {
+}

@@ -4,10 +4,13 @@ import {
     ElementRef,
     Input,
     OnChanges,
-    ViewEncapsulation,
-    OnInit
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../utils/public_api';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -35,7 +38,8 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
     inverted: boolean;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnChanges(): void {

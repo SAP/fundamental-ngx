@@ -1,4 +1,10 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    tick
+} from '@angular/core/testing';
 import { Component } from '@angular/core';
 
 import { TabListComponent } from './tab-list.component';

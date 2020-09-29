@@ -1,4 +1,8 @@
-import { Directive, ElementRef, HostBinding } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    HostBinding
+} from '@angular/core';
 
 /**
  * The directive that represents the menu title.
@@ -14,7 +18,8 @@ export class MenuTitleDirective {
     fdMenuTitleClass = true;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** Returns element title text */
     get title(): string {

@@ -8,4 +8,5 @@ import { PopoverModule } from '../../popover/public_api';
     exports: [FormInputMessageGroupComponent],
     declarations: [FormInputMessageGroupComponent]
 })
-export class FormInputMessageGroupModule {}
+export class FormInputMessageGroupModule {
+}

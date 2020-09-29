@@ -1,9 +1,19 @@
 import { MenuTriggerDirective } from './menu-trigger.directive';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    tick
+} from '@angular/core/testing';
 import { MenuComponent } from '../menu.component';
-import { Component, EventEmitter, ViewChild } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    ViewChild
+} from '@angular/core';
 
-@Component({ template: '<div [fdMenuTrigger]="null"></div>'})
+@Component({ template: '<div [fdMenuTrigger]="null"></div>' })
 class TestComponent {
     @ViewChild(MenuTriggerDirective) menuTrigger: MenuTriggerDirective;
 }
@@ -25,7 +35,8 @@ describe('MenuTriggerDirective', () => {
             id: 'menu-id',
             isOpen: false,
             isOpenChange: new EventEmitter<boolean>(),
-            set trigger(value) {}
+            set trigger(value) {
+            }
         };
 
         fixture.detectChanges();

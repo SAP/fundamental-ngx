@@ -1,6 +1,11 @@
 import { AlertService } from './alert.service';
 import { TestBed } from '@angular/core/testing';
-import { NgModule, TemplateRef, Component, ViewChild } from '@angular/core';
+import {
+    Component,
+    NgModule,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
 import { AlertComponent } from '../alert.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,7 +32,8 @@ class TemplateTestComponent {
     providers: [AlertService, DynamicComponentService],
     entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
 })
-class TestModule {}
+class TestModule {
+}
 
 describe('AlertService', () => {
     let service: AlertService;

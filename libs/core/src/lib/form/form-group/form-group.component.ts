@@ -1,14 +1,17 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    HostBinding,
-    ViewEncapsulation,
     ElementRef,
+    HostBinding,
     Input,
     OnChanges,
-    OnInit
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
+import {
+    applyCssClass,
+    CssClassBuilder
+} from '../../utils/public_api';
 
 /**
  * Represents a form group element.
@@ -43,7 +46,8 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -61,7 +65,7 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
      */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [ this.isInline ? 'fd-form-group--inline' : '' ];
+        return [this.isInline ? 'fd-form-group--inline' : ''];
     }
 
     /** @hidden */

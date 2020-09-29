@@ -1,8 +1,19 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    tick
+} from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
 import { AlertService } from './alert-service/alert.service';
-import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
+import {
+    Component,
+    NgModule,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
 import { AlertContainerComponent } from './alert-utils/alert-container.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,7 +39,8 @@ class TemplateTestComponent {
     providers: [AlertService, DynamicComponentService],
     entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
 })
-class TestModule {}
+class TestModule {
+}
 
 describe('AlertComponent', () => {
     let component: AlertComponent;

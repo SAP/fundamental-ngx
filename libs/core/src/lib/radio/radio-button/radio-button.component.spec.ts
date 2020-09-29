@@ -1,7 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    TestBed
+} from '@angular/core/testing';
 
 import { RadioButtonComponent } from './radio-button.component';
-import { Component, ViewChild } from '@angular/core';
+import {
+    Component,
+    ViewChild
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({

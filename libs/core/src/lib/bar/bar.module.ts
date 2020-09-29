@@ -12,4 +12,5 @@ import { BarElementDirective } from './directives/bar-element.directive';
     imports: [CommonModule],
     exports: [BarComponent, BarLeftDirective, BarMiddleDirective, BarRightDirective, BarElementDirective]
 })
-export class BarModule {}
+export class BarModule {
+}

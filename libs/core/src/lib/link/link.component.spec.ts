@@ -1,6 +1,13 @@
 import { LinkComponent } from './link.component';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
+import {
+    async,
+    ComponentFixture,
+    TestBed
+} from '@angular/core/testing';
+import {
+    Component,
+    ViewChild
+} from '@angular/core';
 
 @Component({
     selector: 'fd-test-tabs',

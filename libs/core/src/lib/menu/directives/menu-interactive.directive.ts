@@ -1,4 +1,8 @@
-import { Directive, ElementRef, HostBinding } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    HostBinding
+} from '@angular/core';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
@@ -35,7 +39,8 @@ export class MenuInteractiveDirective {
     readonly fdMenuLinkClass: boolean = true;
 
     /** @hidden */
-    constructor(public elementRef: ElementRef) { }
+    constructor(public elementRef: ElementRef) {
+    }
 
     /** @hidden */
     setSelected(isSelected: boolean): void {

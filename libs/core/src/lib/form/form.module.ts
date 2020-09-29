@@ -24,4 +24,5 @@ import { FormGroupModule } from './form-group/form-group.module';
         FormGroupModule
     ]
 })
-export class FormModule {}
+export class FormModule {
+}

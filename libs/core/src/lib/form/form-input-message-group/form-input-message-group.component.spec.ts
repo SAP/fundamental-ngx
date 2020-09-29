@@ -1,4 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    TestBed
+} from '@angular/core/testing';
 
 import { FormInputMessageGroupComponent } from './form-input-message-group.component';
 import { PopoverModule } from '../../popover/popover.module';

@@ -6,7 +6,7 @@ describe('MenuLinkDirective', () => {
     let directive: MenuInteractiveDirective;
 
     beforeEach(async(() => {
-        directive = new MenuInteractiveDirective(new MockElementRef())
+        directive = new MenuInteractiveDirective(new MockElementRef());
     }));
 
     it('should create an instance', () => {

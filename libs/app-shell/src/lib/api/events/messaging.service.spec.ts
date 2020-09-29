@@ -3,29 +3,23 @@ import {
     TestBed
 } from '@angular/core/testing';
 import { MessagingService } from './messaging.service';
-import { MessagingModule } from './messaging.module';
 import {
     EventType,
     Message,
     TextMessage
 } from './message-bus';
-import { MessagingConfig } from '@fundamental-ngx/app-shell';
-import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
+import {
+    AppShellModule,
+    MessagingTopics
+} from '@fundamental-ngx/app-shell';
 
 describe('MessagingService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
-                MessagingModule
+                AppShellModule.forRoot('')
             ],
-            providers: [
-                MessagingConfig,
-                {
-                    provide: MessagingService,
-                    useClass: MessagingService,
-                    deps: [MessagingConfig, NgxPubSubService]
-                },
-            ]
+            providers: []
         });
     });
 
@@ -41,7 +35,14 @@ describe('MessagingService', () => {
 
 
         it('should not receive any message when subscribing after its published', inject(
-            [MessagingService], (service: MessagingService) => {
+            [MessagingService, MessagingTopics],
+            (service: MessagingService, t: MessagingTopics) => {
+
+                t.addTopic({
+                    name: 'system:events',
+                    eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
+                });
+
 
                 const eventType = EventType.DEFAULT;
                 const publisher = service.createPublisher('system:events', eventType);
@@ -63,7 +64,13 @@ describe('MessagingService', () => {
         ));
 
         it('should receive message by specific topic when subscribing before its published', inject(
-            [MessagingService], (service: MessagingService) => {
+            [MessagingService, MessagingTopics],
+            (service: MessagingService, t: MessagingTopics) => {
+
+                t.addTopic({
+                    name: 'system:events',
+                    eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
+                });
 
                 const publisher = service.createPublisher('system:events', EventType.DEFAULT);
                 const subscriber = service.createSubscriber('system:events', EventType.DEFAULT);
@@ -86,7 +93,18 @@ describe('MessagingService', () => {
 
         it('should receive message by specific topic and more topics exists, when subscribing before its published',
             inject(
-                [MessagingService], (service: MessagingService) => {
+                [MessagingService, MessagingTopics],
+                (service: MessagingService, t: MessagingTopics) => {
+
+                    t.addTopic({
+                        name: 'system:events',
+                        eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
+                    });
+
+                    t.addTopic({
+                        name: 'system:XXX',
+                        eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
+                    });
 
                     const publisher = service.createPublisher('system:events', EventType.DEFAULT);
                     const publisherXXXX = service.createPublisher('system:XXX', EventType.DEFAULT);
@@ -115,7 +133,13 @@ describe('MessagingService', () => {
 
 
         it('should receive a message when subscribing after its published', inject(
-            [MessagingService], (service: MessagingService) => {
+            [MessagingService, MessagingTopics],
+            (service: MessagingService, t: MessagingTopics) => {
+
+                t.addTopic({
+                    name: 'system:events',
+                    eventType: EventType.ONLY_LAST, shared: true, prefix: 'system:'
+                });
 
                 const eventType = EventType.ONLY_LAST;
                 const publisher = service.createPublisher('system:events', eventType);
@@ -144,7 +168,14 @@ describe('MessagingService', () => {
         ));
 
         it('should receive only last message message, when subscribing before publish ', inject(
-            [MessagingService], (service: MessagingService) => {
+            [MessagingService, MessagingTopics],
+            (service: MessagingService, t: MessagingTopics) => {
+
+                t.addTopic({
+                    name: 'system:events',
+                    eventType: EventType.ONLY_LAST, shared: true, prefix: 'system:'
+                });
+
 
                 const publisher = service.createPublisher('system:events', EventType.ONLY_LAST);
                 const subscriber = service.createSubscriber('system:events', EventType.ONLY_LAST);
@@ -176,7 +207,14 @@ describe('MessagingService', () => {
 
 
         it('should receive all message when subscribing after its published', inject(
-            [MessagingService], (service: MessagingService) => {
+            [MessagingService, MessagingTopics],
+            (service: MessagingService, t: MessagingTopics) => {
+
+                t.addTopic({
+                    name: 'system:events',
+                    eventType: EventType.DURABLE, shared: true, prefix: 'system:'
+                });
+
 
                 const eventType = EventType.DURABLE;
                 const publisher = service.createPublisher('system:events', eventType);

@@ -1,13 +1,20 @@
 import { MenuTitleDirective } from './menu-title.directive';
-import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    Component,
+    ViewChild
+} from '@angular/core';
+import {
+    async,
+    ComponentFixture,
+    TestBed
+} from '@angular/core/testing';
 
 
-@Component({template: '<div fd-menu-title>{{ menuTitle }}</div>'})
+@Component({ template: '<div fd-menu-title>{{ menuTitle }}</div>' })
 class TestComponent {
     @ViewChild(MenuTitleDirective) menuTitleDirective: MenuTitleDirective;
 
-    menuTitle = 'Test title'
+    menuTitle = 'Test title';
 }
 
 describe('MenuTitleDirective', () => {

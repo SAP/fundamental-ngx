@@ -24,8 +24,19 @@ import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuService } from '../services/menu.service';
-import { defer, fromEvent, Observable, Subscription, timer } from 'rxjs';
-import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
+import {
+    defer,
+    fromEvent,
+    Observable,
+    Subscription,
+    timer
+} from 'rxjs';
+import {
+    filter,
+    sample,
+    switchMap,
+    takeUntil
+} from 'rxjs/operators';
 
 let menuUniqueId = 0;
 
@@ -93,6 +104,11 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
                 @Optional() @Inject(SUBMENU) private _submenu: BaseSubmenu) {
     }
 
+    /** Whether menu item has popup (desktop mode)  */
+    get hasPopup(): boolean {
+        return this.submenu && !this.menuService.menu.mobile;
+    }
+
     /** @hidden */
     ngAfterContentInit(): void {
         this._setMenuService();
@@ -116,11 +132,6 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._hoverSubscriptions.unsubscribe();
-    }
-
-    /** Whether menu item has popup (desktop mode)  */
-    get hasPopup(): boolean {
-        return this.submenu && !this.menuService.menu.mobile;
     }
 
     /** Focuses Menu Item interactive element */
@@ -151,7 +162,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         this._subscriptions.add(
             fromEvent(this.menuInteractive.elementRef.nativeElement, 'click')
                 .subscribe(() => this.menuService.setActive(true, this))
-        )
+        );
     }
 
     /** @hidden Creates hover listeners for activating/deactivating menu item */
@@ -167,7 +178,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         );
 
         const timerFactory$ = defer(() => {
-            return timer(this.menuService.menu.openOnHoverTime).pipe(takeUntil(mouseLeave$))
+            return timer(this.menuService.menu.openOnHoverTime).pipe(takeUntil(mouseLeave$));
         });
 
         const timeTrigger$ = mouseEnter$.pipe(switchMap(() => timerFactory$));
@@ -213,10 +224,9 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
             fromEvent(this.menuInteractive.elementRef.nativeElement, 'focus').pipe(
                 filter(() => this.menuService.focusedNode !== this.menuService.menuMap.get(this))
             ).subscribe(() => this.menuService.setFocused(this))
-        )
+        );
     }
 }
-
 
 
 @Component({
@@ -228,7 +238,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{provide: SUBMENU, useExisting: SubmenuComponent}],
+    providers: [{ provide: SUBMENU, useExisting: SubmenuComponent }],
     exportAs: 'fdSubmenu'
 })
 export class SubmenuComponent implements BaseSubmenu {

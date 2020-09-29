@@ -19,4 +19,5 @@ import { ButtonModule } from '../button/button.module';
         PanelTitleDirective
     ]
 })
-export class PanelModule { }
+export class PanelModule {
+}

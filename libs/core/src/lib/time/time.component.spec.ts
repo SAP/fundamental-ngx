@@ -1,4 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    TestBed
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
 import { TimeObject } from './time-object';
@@ -178,7 +182,7 @@ describe('TimeComponent', () => {
         expect(component.time.hour).toBe(4);
     });
 
-    it ('should change period to pm, depending on new later hour', () => {
+    it('should change period to pm, depending on new later hour', () => {
         component.displayedHour = 5;
 
         component.period = 'am';
@@ -188,7 +192,7 @@ describe('TimeComponent', () => {
         expect(component.period).toBe('pm');
     });
 
-    it ('should change period to am, depending on new later hour', () => {
+    it('should change period to am, depending on new later hour', () => {
         component.displayedHour = 7;
 
         component.period = 'pm';
@@ -198,7 +202,7 @@ describe('TimeComponent', () => {
         expect(component.period).toBe('am');
     });
 
-    it ('should change period to am, depending on new previous hour', () => {
+    it('should change period to am, depending on new previous hour', () => {
         component.displayedHour = 10;
 
         component.period = 'pm';
@@ -208,14 +212,14 @@ describe('TimeComponent', () => {
         expect(component.period).toBe('am');
     });
 
-    it ('should change period to pm, depending on new previous hour', () => {
+    it('should change period to pm, depending on new previous hour', () => {
         component.displayedHour = 10;
 
         component.period = 'am';
 
         (<any>component)._periodByHoursChange(11, false);
 
-        expect(component.period).toBe('pm')
+        expect(component.period).toBe('pm');
     });
 
 });

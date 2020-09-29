@@ -1,13 +1,21 @@
 import { FormControlComponent } from './form-control.component';
-import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    Component,
+    DebugElement
+} from '@angular/core';
+import {
+    async,
+    ComponentFixture,
+    TestBed
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-test-component',
     template: '<div fd-form-control="">FormControl</div>'
 })
-export class TestComponent {}
+export class TestComponent {
+}
 
 describe('FormControlComponent', () => {
     let fixture: ComponentFixture<TestComponent>,

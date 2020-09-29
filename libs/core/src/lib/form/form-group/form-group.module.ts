@@ -7,4 +7,5 @@ import { FormGroupComponent } from './form-group.component';
     exports: [FormGroupComponent],
     declarations: [FormGroupComponent]
 })
-export class FormGroupModule {}
+export class FormGroupModule {
+}

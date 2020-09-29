@@ -7,4 +7,5 @@ import { FormLabelComponent } from './form-label.component';
     exports: [FormLabelComponent],
     declarations: [FormLabelComponent]
 })
-export class FormLabelModule {}
+export class FormLabelModule {
+}

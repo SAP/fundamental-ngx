@@ -1,8 +1,8 @@
 <div class="fd-flex-row">
-    <div tabindex="0"  id="page-content"
+    <div [class.content--with-footer]="_isStandalone" [class.content--with-header]="_isStandalone"
          class="content"
-         [class.content--with-footer]="_isStandalone"
-         [class.content--with-header]="_isStandalone"
+         id="page-content"
+         tabindex="0"
     >
         <div class="content-margin">
             <ng-content></ng-content>

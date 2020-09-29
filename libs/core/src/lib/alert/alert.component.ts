@@ -1,24 +1,24 @@
 import {
-    Component,
-    Input,
-    OnInit,
-    ElementRef,
+    AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
-    ViewChild,
+    Component,
     ComponentFactoryResolver,
     ComponentRef,
-    Type,
-    AfterViewInit,
-    ViewContainerRef,
-    TemplateRef,
-    Optional,
+    ElementRef,
     EmbeddedViewRef,
-    Output,
     EventEmitter,
-    ViewEncapsulation,
     HostListener,
+    Input,
     NgZone,
-    ChangeDetectionStrategy
+    OnInit,
+    Optional,
+    Output,
+    TemplateRef,
+    Type,
+    ViewChild,
+    ViewContainerRef,
+    ViewEncapsulation
 } from '@angular/core';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';

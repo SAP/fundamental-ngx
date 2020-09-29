@@ -1,4 +1,8 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import {
+    Directive,
+    HostBinding,
+    Input
+} from '@angular/core';
 
 let panelContentUniqueId = 0;
 
@@ -11,7 +15,7 @@ let panelContentUniqueId = 0;
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-panel-content]',
+    selector: '[fd-panel-content]'
 })
 export class PanelContentDirective {
     /** @hidden */
