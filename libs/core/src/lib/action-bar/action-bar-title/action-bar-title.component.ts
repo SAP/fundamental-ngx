@@ -15,9 +15,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     // tslint:disable-next-line:component-selector
     selector: '[fd-action-bar-title]',
     template: `
-        <h1 class="fd-title fd-title--h3">
+        <h2 class="fd-title fd-title--h3">
             <ng-content></ng-content>
-        </h1>
+        </h2>
     `,
     host: {
         class: 'fd-action-bar__title'
