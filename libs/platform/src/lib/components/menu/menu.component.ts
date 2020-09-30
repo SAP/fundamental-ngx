@@ -43,7 +43,7 @@ import { ContentDensity } from './../form/form-control';
 
 /**
  * Variables for generating menu IDs.
- * Needed for establising 'aria-control' between trigger and menu.
+ * Needed for establishing 'aria-control' between trigger and menu.
  */
 const MENU_ID_ROOT = 'fdp-menu-';
 let menuIdCounter = 0;
@@ -71,7 +71,7 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
 
     /** Density for Menu */
     @Input()
-    contentDensity: ContentDensity
+    contentDensity: ContentDensity = 'cozy';
 
     /**
      * Horizontal position of menu in relation to trigger element.
