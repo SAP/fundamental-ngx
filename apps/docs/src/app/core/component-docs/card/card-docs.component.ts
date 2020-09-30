@@ -7,6 +7,7 @@ import * as cardCompactExampleHtml from '!raw-loader!./examples/card-compact-exa
 import * as cardLoaderExampleHtml from '!raw-loader!./examples/card-loader-example.component.html';
 import * as cardFooterExampleHtml from '!raw-loader!./examples/card-footer-example.component.html';
 import * as cardKpiExampleHtml from '!raw-loader!./examples/card-kpi-example.component.html';
+import * as cardKpiExampleScss from '!raw-loader!./examples/card-kpi-example.component.scss';
 import * as cardKpiExampleTs from '!raw-loader!./examples/card-kpi-example.component.ts';
 import * as cardTableExampleHtml from '!raw-loader!./examples/card-table-example.component.html';
 import * as cardBarChartListExampleHtml from '!raw-loader!./examples/bar-chart-list-card/bar-chart-list-card-example.component.html';
@@ -60,6 +61,11 @@ export class CardDocsComponent {
         {
             language: 'html',
             code: cardKpiExampleHtml,
+            fileName: 'card-kpi-example'
+        },
+        {
+            language: 'scss',
+            code: cardKpiExampleScss,
             fileName: 'card-kpi-example'
         }
     ];

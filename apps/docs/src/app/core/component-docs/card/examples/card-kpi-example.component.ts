@@ -1,4 +1,12 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    ViewChild,
+    ElementRef,
+    AfterViewInit,
+    ChangeDetectorRef
+} from '@angular/core';
+import { delay, tap } from 'rxjs/operators';
 
 import { GoogleChartService, Visualization } from './charts/google-charts.service';
 
@@ -9,15 +17,28 @@ import { GoogleChartService, Visualization } from './charts/google-charts.servic
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardKpiExampleComponent implements AfterViewInit {
+    isLoading = true;
+
     @ViewChild('chart')
     private chartContainer: ElementRef<HTMLElement>;
 
-    constructor(private googleChartService: GoogleChartService) {}
+    constructor(private googleChartService: GoogleChartService, private changeDetectorRef: ChangeDetectorRef) {}
 
     ngAfterViewInit(): void {
-        this.googleChartService.getVisualization().subscribe((visualization) => {
-            this.drawChart(visualization);
-        });
+        this.googleChartService
+            .getVisualization()
+            .pipe(
+                tap({
+                    complete: () => {
+                        this.isLoading = false;
+                        this.changeDetectorRef.markForCheck();
+                    }
+                }),
+                delay(0)
+            )
+            .subscribe((visualization) => {
+                this.drawChart(visualization);
+            });
     }
 
     drawChart(visualization: Visualization): void {
@@ -31,8 +52,6 @@ export class CardKpiExampleComponent implements AfterViewInit {
         // Instantiate and draw our chart, passing in some options.
         const chart = new visualization.ColumnChart(this.chartContainer.nativeElement);
         chart.draw(data, {
-            width: 400,
-            height: 380,
             legend: { position: 'bottom' },
             isStacked: true
         });

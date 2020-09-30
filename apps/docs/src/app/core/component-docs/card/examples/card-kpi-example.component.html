@@ -1,5 +1,6 @@
 <fd-card
     cardType="analytical"
+    [isLoading]="isLoading"
     class="analytical-card"
 >
     <fd-card-header>
@@ -24,6 +25,12 @@
         <h4 fd-card-second-subtitle>Q1, 2019</h4>
     </fd-card-header>
     <fd-card-content>
-        <div #chart></div>
+        <div
+            #chart
+            class="chart-container"
+        ></div>
     </fd-card-content>
+    <fd-card-loader>
+        <fd-busy-indicator [loading]="true"></fd-busy-indicator>
+    </fd-card-loader>
 </fd-card>
