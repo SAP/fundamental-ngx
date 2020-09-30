@@ -39,6 +39,7 @@ export class TableCheckboxesExampleComponent {
             column2: 'Row 1',
             column3: 'Row 1',
             date: '09-07-18',
+            type: 'search',
             checked: false
         },
         {
@@ -46,6 +47,7 @@ export class TableCheckboxesExampleComponent {
             column2: 'Row 2',
             column3: 'Row 2',
             date: '09-07-18',
+            type: 'cart',
             checked: false
         },
         {
@@ -53,6 +55,7 @@ export class TableCheckboxesExampleComponent {
             column2: 'Row 3',
             column3: 'Row 3',
             date: '09-07-18',
+            type: 'calendar',
             checked: false
         }
     ];
@@ -63,6 +66,7 @@ export class TableCheckboxesExampleComponent {
             column2: 'Row 1',
             column3: 'Row 1',
             date: '09-07-18',
+            type: 'search',
             checked: false
         },
         {
@@ -70,6 +74,7 @@ export class TableCheckboxesExampleComponent {
             column2: 'Row 2',
             column3: 'Row 2',
             date: '09-07-18',
+            type: 'cart',
             checked: false
         },
         {
@@ -77,6 +82,7 @@ export class TableCheckboxesExampleComponent {
             column2: 'Row 3',
             column3: 'Row 3',
             date: '09-07-18',
+            type: 'calendar',
             checked: false
         }
     ];
