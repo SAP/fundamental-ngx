@@ -17,45 +17,60 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
             throw ELEMENT_REF_EXCEPTION;
         }
 
-        const newComponentClassList: string[] = sanitize(originalMethod.apply(this));
+        const classListToApply: string[] = sanitize(originalMethod.apply(this));
+
         const elementRef = this.elementRef.apply(this);
 
-        if (elementRef) {
-            if (!elementRef.nativeElement._classMap) {
-                elementRef.nativeElement._classMap = {};
+        const nativeElement: HTMLElement & { _classMap?: any } = elementRef?.nativeElement;
+
+        if (nativeElement) {
+            if (!nativeElement._classMap) {
+                nativeElement._classMap = {};
             }
 
             if (!this._uuidv4) {
                 this._uuidv4 = uuidv4();
-                elementRef.nativeElement._classMap[this._uuidv4] = newComponentClassList;
             }
 
-            const allClassList = [...elementRef.nativeElement.classList];
-            const previousComponentClassList = elementRef.nativeElement._classMap[this._uuidv4] || [];
-            const newClassList = updateComponentClassList(allClassList, previousComponentClassList, newComponentClassList);
+            const currentClassList = Array.from(nativeElement.classList);
 
-            elementRef.nativeElement._classMap[this._uuidv4] = newComponentClassList;
-            (elementRef.nativeElement as HTMLElement).className = newClassList.join(' ');
+            const previousClassListToApply = nativeElement._classMap[this._uuidv4] || [];
+
+            const newClassList = createComponentClassList(currentClassList, previousClassListToApply, classListToApply);
+
+            nativeElement.className = newClassList.join(' ');
+
+            nativeElement._classMap[this._uuidv4] = classListToApply;
         }
 
-        return newComponentClassList;
+        return classListToApply;
     };
 }
 
-/** Splits merged classes and removes falsy elements from string array */
-function sanitize(array: string[]): string [] {
+/** Filter list to unique items */
+function unique(value: unknown, index: number, list: unknown[]): boolean {
+    return list.indexOf(value) === index;
+}
+
+/** Splits merged classes, removes falsy elements and leaves only unique items */
+function sanitize(array: string[]): string[] {
     return array
         .filter(Boolean)
-        .reduce((classList: string[], cssClass: string) => [...classList, ...cssClass.split(' ')], []);
+        .reduce((classList: string[], cssClass: string) => [...classList, ...cssClass.split(/\s+/)], [])
+        .filter(unique);
 }
 
-/** Returns an array1[index] of first array1 and array2 shared element */
 function firstCommonElementIndex(array1: string[], array2: string[]): number {
-    return array1.findIndex(element => array2.indexOf(element) !== -1);
+    return array1.findIndex((element) => array2.indexOf(element) !== -1);
 }
 
-/** Replaces previous set of component classes with new set of component classes */
-function updateComponentClassList(allClasses: string[], previousComponentClassList: string[], newComponentClassList: string[]): string[] {
+/** Create set of component classes based on previous set and new set */
+function createComponentClassList(
+    allClasses: string[],
+    previousComponentClassList: string[],
+    newComponentClassList: string[]
+): string[] {
+    allClasses = allClasses.slice();
     let index = firstCommonElementIndex(allClasses, previousComponentClassList);
     index = index === -1 ? 0 : index;
     allClasses.splice(index, previousComponentClassList.length, ...newComponentClassList);

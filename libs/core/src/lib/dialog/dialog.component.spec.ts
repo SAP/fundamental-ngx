@@ -76,6 +76,13 @@ describe('DialogComponent', () => {
         expect(dialogComponent).toBeTruthy();
     });
 
+    it('should create w/o Router', () => {
+        setup([{ token: Router, provider: { useValue: null } }]);
+        expect(router).toBeNull();
+        expect(component).toBeTruthy();
+        expect(dialogComponent).toBeTruthy();
+    });
+
     it('should hide dialog', () => {
         setup();
 

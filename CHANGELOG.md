@@ -2,6 +2,195 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.107...v0.22.0-rc.108) (2020-09-30)
+
+
+### Bug Fixes
+
+* refactor Object Status to use an input property instead of content projection ([#3434](https://github.com/SAP/fundamental-ngx/issues/3434)) ([bae50da](https://github.com/SAP/fundamental-ngx/commit/bae50dac8d38cc68ed3ecec311d3c90db5492393))
+
+## [0.22.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.106...v0.22.0-rc.107) (2020-09-30)
+
+
+### Bug Fixes
+
+* (core) Introduce Fixed card layout as component in Core ([#3341](https://github.com/SAP/fundamental-ngx/issues/3341)) ([3e0b5b6](https://github.com/SAP/fundamental-ngx/commit/3e0b5b65a41247f999cc25c63f5bfca574ace600))
+
+## [0.22.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.105...v0.22.0-rc.106) (2020-09-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* The value for the text button is now passed as an input property, not as content projection.
+
+### Bug Fixes
+
+* migrate buttons 0.12.0 ([#3400](https://github.com/SAP/fundamental-ngx/issues/3400)) ([5ac24c2](https://github.com/SAP/fundamental-ngx/commit/5ac24c2bef9b4a4e27e30be504a4ecd799b54cd5))
+
+## [0.22.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.104...v0.22.0-rc.105) (2020-09-29)
+
+## [0.22.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.103...v0.22.0-rc.104) (2020-09-29)
+
+## [0.22.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.102...v0.22.0-rc.103) (2020-09-28)
+
+
+### Bug Fixes
+
+* bring temporary the old styling of Notifications ([#3430](https://github.com/SAP/fundamental-ngx/issues/3430)) ([64e4a1c](https://github.com/SAP/fundamental-ngx/commit/64e4a1ca0f7e88e106c6b54c46af58438f2115c5))
+
+## [0.22.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.101...v0.22.0-rc.102) (2020-09-28)
+
+## [0.22.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.100...v0.22.0-rc.101) (2020-09-28)
+
+## [0.22.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.99...v0.22.0-rc.100) (2020-09-28)
+
+## [0.22.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.98...v0.22.0-rc.99) (2020-09-27)
+
+## [0.22.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.97...v0.22.0-rc.98) (2020-09-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* made Info Label component
+
+* fix(core) Change Info Label into component | Improve tests (#3399) ([557b761](https://github.com/SAP/fundamental-ngx/commit/557b761b62a62fd07897b1632adadbe4297f8a2d)), closes [#3399](https://github.com/SAP/fundamental-ngx/issues/3399)
+
+## [0.22.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.96...v0.22.0-rc.97) (2020-09-25)
+
+
+### Bug Fixes
+
+* Migrate nested list icon due to 0.12.0 styles ([#3390](https://github.com/SAP/fundamental-ngx/issues/3390)) ([cd3e708](https://github.com/SAP/fundamental-ngx/commit/cd3e70849976f43e07e647150a927f3dab6203ba))
+
+## [0.22.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.95...v0.22.0-rc.96) (2020-09-25)
+
+
+### Bug Fixes
+
+* Migrate A11y changes from 0.12.0 to numeric content and tiles ([#3384](https://github.com/SAP/fundamental-ngx/issues/3384)) ([9fe2b87](https://github.com/SAP/fundamental-ngx/commit/9fe2b87fafc4c5985735b7fa0b529bbdc8814432))
+
+## [0.22.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.94...v0.22.0-rc.95) (2020-09-25)
+
+## [0.22.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.93...v0.22.0-rc.94) (2020-09-25)
+
+
+### Bug Fixes
+
+* update A11y regarding to 0.12.0 styles ([#3385](https://github.com/SAP/fundamental-ngx/issues/3385)) ([ba54fcb](https://github.com/SAP/fundamental-ngx/commit/ba54fcbca5be10e03d4e3001ada3398c128f4c76))
+
+## [0.22.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.92...v0.22.0-rc.93) (2020-09-25)
+
+
+### Bug Fixes
+
+* Adapt Tile to 0.12.0 Fundamental Styles ([#3383](https://github.com/SAP/fundamental-ngx/issues/3383)) ([4fcbd35](https://github.com/SAP/fundamental-ngx/commit/4fcbd358711dc3c42d24d9a6e203411fe7d010f5))
+
+## [0.22.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.91...v0.22.0-rc.92) (2020-09-25)
+
+
+### Bug Fixes
+
+* Adapt Avatar to 0.12.0 Fundamental Styles ([#3382](https://github.com/SAP/fundamental-ngx/issues/3382)) ([66868aa](https://github.com/SAP/fundamental-ngx/commit/66868aacfd167536dc293dd51970e0a714d9a466))
+
+## [0.22.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.90...v0.22.0-rc.91) (2020-09-25)
+
+
+### Bug Fixes
+
+* **core:** introduce Card component ([#3344](https://github.com/SAP/fundamental-ngx/issues/3344)) ([bc0ebca](https://github.com/SAP/fundamental-ngx/commit/bc0ebcaa7ef31de9ea7903bdcddaad271c41b0ac))
+
+## [0.22.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.89...v0.22.0-rc.90) (2020-09-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* (menu) - fd-menu-addon changed to component,  can't be used with fd-icon anymore
+
+### Bug Fixes
+
+* Update menu addon to 0.12.0 styles ([#3391](https://github.com/SAP/fundamental-ngx/issues/3391)) ([2b0766b](https://github.com/SAP/fundamental-ngx/commit/2b0766b63be53d8665bc817c7301098bc69013f8))
+
+## [0.22.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.88...v0.22.0-rc.89) (2020-09-25)
+
+## [0.22.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.87...v0.22.0-rc.88) (2020-09-25)
+
+
+### Bug Fixes
+
+* migrate switch changes to 0.12.0 styles ([#3379](https://github.com/SAP/fundamental-ngx/issues/3379)) ([2e6fe94](https://github.com/SAP/fundamental-ngx/commit/2e6fe941a3550a272a11c38ad3a9450a522c60e9))
+
+## [0.22.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.86...v0.22.0-rc.87) (2020-09-25)
+
+
+### Bug Fixes
+
+* Migrate object status to 0.12.0 ([#3381](https://github.com/SAP/fundamental-ngx/issues/3381)) ([6859aa2](https://github.com/SAP/fundamental-ngx/commit/6859aa230bb73764db2c8df4b131eed45870477b))
+
+## [0.22.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.85...v0.22.0-rc.86) (2020-09-25)
+
+
+### Bug Fixes
+
+* migrate product switch to 0.12.0 styles ([#3380](https://github.com/SAP/fundamental-ngx/issues/3380)) ([08e3ec5](https://github.com/SAP/fundamental-ngx/commit/08e3ec5d4132460f920f8a1155eebdc41ba09b4c))
+
+## [0.22.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.84...v0.22.0-rc.85) (2020-09-25)
+
+
+### Bug Fixes
+
+* migrate tabs to 0.12.0 styles ([#3378](https://github.com/SAP/fundamental-ngx/issues/3378)) ([1971bb8](https://github.com/SAP/fundamental-ngx/commit/1971bb879137e4b95e4b251ff049d9036aff0f17))
+
+## [0.22.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.83...v0.22.0-rc.84) (2020-09-25)
+
+
+### Bug Fixes
+
+* **core:** Disable inferrable-types | cleanup ([#3377](https://github.com/SAP/fundamental-ngx/issues/3377)) ([4254588](https://github.com/SAP/fundamental-ngx/commit/42545889b9ff04e50738f0c3957bc6995a7564dc))
+
+## [0.22.0-rc.83](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.82...v0.22.0-rc.83) (2020-09-24)
+
+## [0.22.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.81...v0.22.0-rc.82) (2020-09-24)
+
+## [0.22.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.80...v0.22.0-rc.81) (2020-09-24)
+
+
+### Bug Fixes
+
+* (core) make router in dialog optional ([#3360](https://github.com/SAP/fundamental-ngx/issues/3360)) ([f2fa015](https://github.com/SAP/fundamental-ngx/commit/f2fa015169122c6d5c17b08840d23982ab2e52e4))
+
+## [0.22.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.78...v0.22.0-rc.80) (2020-09-24)
+
+
+### Bug Fixes
+
+* (core) applyCssClass decorator ([#3328](https://github.com/SAP/fundamental-ngx/issues/3328)) ([f452eb6](https://github.com/SAP/fundamental-ngx/commit/f452eb66133478d201850cf5298d0929e4dd3d25))
+* (platform) input group states ([#3333](https://github.com/SAP/fundamental-ngx/issues/3333)) ([a29828c](https://github.com/SAP/fundamental-ngx/commit/a29828ca5dfe4ecd6765fd3119343cb86aa7f2be))
+* Remove hammer config ([#3332](https://github.com/SAP/fundamental-ngx/issues/3332)) ([b91c937](https://github.com/SAP/fundamental-ngx/commit/b91c937eeeed24e519dd3f6d7336efe498b2f8da))
+
+## [0.22.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.78...v0.22.0-rc.79) (2020-09-21)
+
+
+### Bug Fixes
+
+* (core) applyCssClass decorator ([#3328](https://github.com/SAP/fundamental-ngx/issues/3328)) ([f452eb6](https://github.com/SAP/fundamental-ngx/commit/f452eb66133478d201850cf5298d0929e4dd3d25))
+* (platform) input group states ([#3333](https://github.com/SAP/fundamental-ngx/issues/3333)) ([a29828c](https://github.com/SAP/fundamental-ngx/commit/a29828ca5dfe4ecd6765fd3119343cb86aa7f2be))
+* Remove hammer config ([#3332](https://github.com/SAP/fundamental-ngx/issues/3332)) ([b91c937](https://github.com/SAP/fundamental-ngx/commit/b91c937eeeed24e519dd3f6d7336efe498b2f8da))
+
+## [0.22.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.77...v0.22.0-rc.78) (2020-09-21)
+
+## [0.22.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.76...v0.22.0-rc.77) (2020-09-21)
+
+## [0.22.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.75...v0.22.0-rc.76) (2020-09-21)
+
+## [0.22.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.74...v0.22.0-rc.75) (2020-09-20)
+
+## [0.22.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.73...v0.22.0-rc.74) (2020-09-18)
+
+
+### Bug Fixes
+
+* (platform) split menu button fix for label change on action selection from menu ([#3230](https://github.com/SAP/fundamental-ngx/issues/3230)) ([ff0e21f](https://github.com/SAP/fundamental-ngx/commit/ff0e21f1d2eb2e057e104a3dc0326e1b35794e86))
+
 ## [0.22.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.72...v0.22.0-rc.73) (2020-09-18)
 
 

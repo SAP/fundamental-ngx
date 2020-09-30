@@ -29,6 +29,11 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
      */
     @Input() glyph: string;
 
+    /** Role attribute */
+    @Input()
+    @HostBinding('attr.role')
+    role = 'presentation';
+
     /** @hidden */
     @HostBinding('class.fd-nested-list__icon')
     fdNestedListIconClass = true;

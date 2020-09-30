@@ -4,9 +4,7 @@
     (onInvalidFiles)="this.invalid_files = $event"
     [maxFileSize]="1048576"
 >
-    <button fd-button (click)="fileInput.open()">
-        Files larger than 1mb are rejected!
-    </button>
+    <button fd-button label="Files larger than 1mb are rejected!" (click)="fileInput.open()"></button>
 </fd-file-input>
 
 <br /><br />

@@ -1,4 +1,4 @@
-<button fd-button [fdMenu]="true" [fdMenuTrigger]="menu">Menu with submenu</button>
+<button fd-button label="Menu with submenu" [fdMenu]="true" [fdMenuTrigger]="menu"></button>
 
 <div style="display: inline-block">
     <span style="padding-left: .5rem">Active path:</span>
@@ -11,21 +11,21 @@
     <li fd-menu-item [submenu]="fruits">
         <div fd-menu-interactive>
             <span fd-menu-title>Fruits</span>
-            <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
         </div>
     </li>
 
     <li fd-menu-item [submenu]="vegetables">
         <div fd-menu-interactive>
             <span fd-menu-title>Vegetables</span>
-            <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
         </div>
     </li>
 
     <li fd-menu-item [submenu]="milkProducts">
         <div fd-menu-interactive>
             <span fd-menu-title>Milk products</span>
-            <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
         </div>
     </li>
 </fd-menu>
@@ -62,14 +62,14 @@
     <li fd-menu-item [submenu]="cheeses">
         <div fd-menu-interactive>
             <span fd-menu-title>Cheese</span>
-            <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
         </div>
     </li>
 
     <li fd-menu-item [submenu]="yogurts">
         <div fd-menu-interactive>
             <span fd-menu-title>Yogurts</span>
-            <fd-icon fd-menu-addon [submenuIndicator]="true"></fd-icon>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
         </div>
     </li>
 </fd-submenu>

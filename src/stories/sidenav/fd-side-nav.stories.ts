@@ -28,19 +28,19 @@ export const SideNavigation = () => ({
                         [textOnly]="mainTextOnlyVar">
                     <li fd-nested-list-item>
                         <a fd-nested-list-link>
-                            <span *ngIf="!mainTextOnlyVar" fd-nested-list-icon [glyph]="icon"></span>
+                            <i *ngIf="!mainTextOnlyVar" fd-nested-list-icon [glyph]="icon"></i>
                             <span fd-nested-list-title>{{textValue1}}</span>
                         </a>
                     </li>
                     <li fd-nested-list-item>
                         <a fd-nested-list-link>
-                            <span *ngIf="!mainTextOnlyVar" fd-nested-list-icon [glyph]="icon"></span>
+                            <i *ngIf="!mainTextOnlyVar" fd-nested-list-icon [glyph]="icon"></i>
                             <span fd-nested-list-title>{{textValue1}}</span>
                         </a>
                     </li>
                     <li fd-nested-list-item>
                         <a fd-nested-list-link>
-                            <span *ngIf="!mainTextOnlyVar" fd-nested-list-icon [glyph]="icon"></span>
+                            <i *ngIf="!mainTextOnlyVar" fd-nested-list-icon [glyph]="icon"></i>
                             <span fd-nested-list-title>{{textValue1}}</span>
                         </a>
                         <ul fd-nested-list [textOnly]="true">
@@ -63,13 +63,13 @@ export const SideNavigation = () => ({
                         [textOnly]="utilityTextOnlyVar">
                     <li fd-nested-list-item>
                         <a fd-nested-list-link>
-                            <span *ngIf="!utilityTextOnlyVar" fd-nested-list-icon [glyph]="iconUtility"></span>
+                            <i *ngIf="!utilityTextOnlyVar" fd-nested-list-icon [glyph]="iconUtility"></i>
                             <span fd-nested-list-title>{{textValue1}}</span>
                         </a>
                     </li>
                     <li fd-nested-list-item>
                         <a fd-nested-list-link>
-                            <span *ngIf="!utilityTextOnlyVar" fd-nested-list-icon [glyph]="iconUtility"></span>
+                            <i *ngIf="!utilityTextOnlyVar" fd-nested-list-icon [glyph]="iconUtility"></i>
                             <span fd-nested-list-title>{{textValue1}}</span>
                         </a>
                     </li>
@@ -96,18 +96,18 @@ export const SideNavigationCondensed = () => ({
             <ul fd-nested-list [compact]="mainCompactVar">
                 <li fd-nested-list-item>
                     <a fd-nested-list-link>
-                        <span fd-nested-list-icon [glyph]="icon"></span>
+                        <i fd-nested-list-icon [glyph]="icon"></i>
                     </a>
                 </li>
                 <li fd-nested-list-item>
                     <a fd-nested-list-link>
-                        <span fd-nested-list-icon [glyph]="icon"></span>
+                        <i fd-nested-list-icon [glyph]="icon"></i>
                     </a>
                 </li>
                 <li fd-nested-list-item>
                     <fd-nested-list-popover>
                         <a fd-nested-list-link>
-                            <span fd-nested-list-icon [glyph]="icon"></span>
+                            <i fd-nested-list-icon [glyph]="icon"></i>
                             <span fd-nested-list-title>{{textValue1}}</span>
 
                         </a>
@@ -137,7 +137,7 @@ export const SideNavigationCondensed = () => ({
                 </li>
                 <li fd-nested-list-item>
                     <a fd-nested-list-link>
-                        <span fd-nested-list-icon [glyph]="icon"></span>
+                        <i fd-nested-list-icon [glyph]="icon"></i>
                         <span fd-nested-list-title>{{textValue1}}</span>
                     </a>
                 </li>
@@ -148,12 +148,12 @@ export const SideNavigationCondensed = () => ({
             <ul fd-nested-list [compact]="utilityCompactVar">
                 <li fd-nested-list-item>
                     <a fd-nested-list-link>
-                        <span fd-nested-list-icon [glyph]="icon"></span>
+                        <i fd-nested-list-icon [glyph]="icon"></i>
                     </a>
                 </li>
                 <li fd-nested-list-item>
                     <a fd-nested-list-link>
-                        <span fd-nested-list-icon [glyph]="icon"></span>
+                        <i fd-nested-list-icon [glyph]="icon"></i>
                     </a>
                 </li>
             </ul>

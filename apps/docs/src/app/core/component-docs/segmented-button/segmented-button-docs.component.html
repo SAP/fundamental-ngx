@@ -29,18 +29,16 @@
         <button
             *ngIf="data.properties.label2.length > 0"
             fd-button
+            [label]="data.properties.label2"
             [compact]="data.properties.compact"
-            [class]="data.properties.state2"
-        >
-            {{ data.properties.label2 }}
+            [class]="data.properties.state2">
         </button>
         <button
             *ngIf="data.properties.label3.length > 0"
             fd-button
+            [label]="data.properties.label3"
             [compact]="data.properties.compact"
-            [class]="data.properties.state3"
-        >
-            {{ data.properties.label3 }}
+            [class]="data.properties.state3">
         </button>
         <button
             *ngIf="data.properties.icon4.length > 0"

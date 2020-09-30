@@ -51,7 +51,7 @@
     <div class="outer-div">
         <div class="inner-div" [ngClass]="{ 'state-over': state === 'over' }">
             <div class="content-div" *ngIf="!files || files.length === 0">
-                <fd-icon [glyph]="'upload-to-cloud'" [size]="'xl'"></fd-icon>
+                <fd-icon [glyph]="'upload-to-cloud'"></fd-icon>
                 <span style="margin-top: 10px;">
                     Drop files here, or
                     <a style="cursor: pointer;" (click)="fdInput.open()"> browse </a>.
@@ -63,7 +63,7 @@
                         {{ file.name }}
                         <span style="flex-grow: 1;"></span>
                         <span class="delete-icon">
-                            <fd-icon [glyph]="'sys-cancel'" [size]="'l'" (click)="removeFile(i)"></fd-icon>
+                            <fd-icon [glyph]="'sys-cancel'" (click)="removeFile(i)"></fd-icon>
                         </span>
                     </li>
                 </ul>

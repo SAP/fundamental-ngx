@@ -96,7 +96,7 @@ describe('MenuMobileComponent', () => {
     it('should use custom dialog configuration', fakeAsync(() => {
         const customDialogClass = 'test-dialog-class';
 
-        setup({ dialogConfig: { dialogPanelClass: customDialogClass } as DialogConfig});
+        setup({ dialogConfig: { dialogPanelClass: customDialogClass }});
 
         menu.open();
         fixture.detectChanges();

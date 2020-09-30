@@ -14,7 +14,19 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-object-status]',
-    template: `<ng-content></ng-content>`,
+    template: `
+        <i
+            class="fd-object-status__icon"
+            *ngIf="glyph"
+            [ngClass]="'sap-icon--' + glyph"
+            [attr.role]="glyphAriaLabel ? 'presentation' : ''"
+            [attr.aria-label]="glyphAriaLabel"
+        ></i>
+        <span *ngIf="label" class="fd-object-status__text">{{ label }}</span>
+
+        <!-- DEPRECATED - Remove in v0.23.0 -->
+        <ng-content></ng-content>
+    `,
     styleUrls: ['./object-status.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -37,6 +49,16 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      */
     @Input()
     glyph: string;
+
+    /** Define the text content of the Object Status */
+    @Input()
+    label: string;
+
+    /**
+     * Label applied to glyph element, should be used when there is not text included
+     */
+    @Input()
+    glyphAriaLabel: string;
 
     /**
      * A number representing the indication color.
@@ -76,16 +98,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            'fd-object-status',
-            this.inverted ? 'fd-object-status--inverted' : '',
-            this.large ? 'fd-object-status--large' : '',
-            this.status ? `fd-object-status--${this.status}` : '',
-            this.glyph ? `sap-icon--${this.glyph}` : '',
-            this.indicationColor ? `fd-object-status--indication-${this.indicationColor}` : '',
-            this.clickable ? 'fd-object-status--link' : '',
-            this.class
-        ];
+        return buildObjectStatusCssClasses(this);
     }
 
     /** @hidden */
@@ -93,3 +106,29 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
         return this._elementRef;
     }
 }
+
+export const buildObjectStatusCssClasses = ({
+    status,
+    inverted,
+    large,
+    indicationColor,
+    clickable,
+    class: className
+}: Partial<{
+    status: ObjectStatus;
+    inverted: boolean;
+    large: boolean;
+    indicationColor: number;
+    clickable: boolean;
+    class: string;
+}>): string[] => {
+    return [
+        'fd-object-status',
+        inverted ? 'fd-object-status--inverted' : '',
+        large ? 'fd-object-status--large' : '',
+        status ? `fd-object-status--${status}` : '',
+        indicationColor ? `fd-object-status--indication-${indicationColor}` : '',
+        clickable ? 'fd-object-status--link' : '',
+        className
+    ];
+};

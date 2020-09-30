@@ -7,7 +7,7 @@ import { CalendarYearGrid, FdDate, SpecialDayRule } from '@fundamental-ngx/core'
         <fd-calendar [calType]="'single'" [(ngModel)]="date" [disableFunction]="myDisableFunction"> </fd-calendar>
         <br />
         <div>Selected Date: {{ date.toDateString() }}</div>
-        <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
+        <button fd-button label="Disable Wednesday" (click)="disableWednesday()"></button>
     `,
     styles: [
         `

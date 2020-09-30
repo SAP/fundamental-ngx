@@ -112,8 +112,8 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
         @Optional() @Inject(DIALOG_REF) private _dialogRef: DialogRef,
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _router: Router
-    ) {}
+        @Optional() private _router?: Router
+    ) { }
 
     /** @hidden */
     ngOnInit(): void {
@@ -159,7 +159,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
             this.dialogConfig.hasBackdrop ? 'fd-dialog' : '',
             this.showDialogWindow ? 'fd-dialog--active' : '',
             this._class,
-            this.dialogConfig.backdropClass
+            this.dialogConfig.backdropClass ? this.dialogConfig.backdropClass : ''
         ];
     }
 
@@ -250,12 +250,14 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
 
     /** @hidden Subscribes to router navigation for the closing of dialog on navigation start. */
     private _subscribeToNavigation(): void {
-        this._subscriptions.add(
-            this._router.events.subscribe(event => {
-                if (event instanceof NavigationStart && this.dialogConfig.closeOnNavigation) {
-                    this._dialogRef.dismiss();
-                }
-            })
-        );
+        if (this._router) {
+            this._subscriptions.add(
+                this._router.events.subscribe(event => {
+                    if (event instanceof NavigationStart && this.dialogConfig.closeOnNavigation) {
+                        this._dialogRef.dismiss();
+                    }
+                })
+            );
+        }
     }
 }

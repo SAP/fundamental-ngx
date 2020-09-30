@@ -14,7 +14,7 @@ export class MultiInputMobileExampleComponent {
         hasCloseButton: true,
         dialogConfig: {
             ariaLabel: 'Select fruits dialog'
-        } as DialogConfig
+        }
     };
 
     values: any[] = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange'];

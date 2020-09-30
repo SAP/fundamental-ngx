@@ -9,9 +9,7 @@
                 </div>
                 <div fd-bar-right>
                     <fd-bar-element>
-                        <button fd-button fdType="transparent" compact="true" (click)="clear()">
-                            Clear
-                        </button>
+                        <button fd-button fdType="transparent" compact="true" label="Clear" (click)="clear()"></button>
                     </fd-bar-element>
                 </div>
             </ng-template>
@@ -60,10 +58,9 @@
                             fd-dialog-decisive-button
                             glyph="cart"
                             fdType="emphasized"
+                            label="Checkout"
                             [compact]="true"
-                            (click)="checkout()"
-                        >
-                            Checkout
+                            (click)="checkout()">
                         </button>
                     </fd-bar-element>
                 </div>
@@ -72,4 +69,4 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button (click)="openDialog(dialogTemplate)">Open with custom configuration</button>
+<button fd-button label="Open with custom configuration" (click)="openDialog(dialogTemplate)"></button>

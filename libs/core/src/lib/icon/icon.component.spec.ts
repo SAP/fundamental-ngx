@@ -9,11 +9,10 @@ const ICON_SIZE = 'l';
 
 @Component({
     selector: 'fd-test-icon',
-    template: ` <fd-icon [glyph]="iconName" [size]="iconSize"></fd-icon> `
+    template: ` <fd-icon [glyph]="iconName"></fd-icon> `
 })
 class TestWrapperComponent {
     readonly iconName = ICON_NAME;
-    readonly iconSize = ICON_SIZE;
 }
 
 describe('IconComponent', () => {
@@ -40,6 +39,5 @@ describe('IconComponent', () => {
     it('Should Add icon class with glyph on input', () => {
         const icon = fixture.debugElement.nativeElement.querySelector('fd-icon');
         expect(icon.className).toContain('sap-icon--' + ICON_NAME);
-        expect(icon.className).toContain('sap-icon--' + ICON_SIZE);
     });
 });

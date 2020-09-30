@@ -5,7 +5,7 @@ import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-component-based-dialog-example',
     template: `
-        <button fd-button (click)="open()">Open from Component</button>
+        <button fd-button label="Open from Component" (click)="open()"></button>
         <p>{{ closeReason }}</p>
     `
 })
@@ -29,7 +29,7 @@ export class ComponentBasedDialogExampleComponent {
                 ]
             },
             width: '400px'
-        } as DialogConfig);
+        });
 
         dialogRef.afterClosed.subscribe(
             (result) => {

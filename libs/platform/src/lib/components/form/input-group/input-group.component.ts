@@ -133,6 +133,20 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         this._listenToChildrenQueryListChanges();
     }
 
+    /**
+     * @hidden
+     * override base functionality to catch new disabled state
+     */
+    setDisabledState(disabled: boolean): void {
+        super.setDisabledState(disabled);
+        this._setAddonsOptions();
+    }
+
+    /** @hidden */
+    _onChangeInputValue(value: string): void {
+        this.value = value;
+    }
+
     /** @hidden */
     private _listenToChildrenQueryListChanges(): void {
         this._children.changes.pipe(startWith(this._children)).subscribe(() => {
@@ -189,6 +203,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         const after = this._afterInputAddons || [];
         [...before, ...after].forEach((addon) => {
             addon.contentDensity = this._contentDensity;
+            addon.disabled = this.disabled;
         });
     }
 

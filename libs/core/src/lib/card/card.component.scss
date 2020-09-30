@@ -1,0 +1,19 @@
+@import '~fundamental-styles/dist/numeric-content';
+@import '~fundamental-styles/dist/card';
+
+/* Defined locally as fundamental-styles does not provide it */
+
+.fd-card__loader {
+    min-height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fd-card__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    border-top: 0.0625rem solid #ccc;
+    border-top: 0.0625rem solid var(--sapTile_SeparatorColor, #ccc);
+}

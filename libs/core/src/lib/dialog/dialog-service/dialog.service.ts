@@ -34,7 +34,7 @@ export class DialogService {
      * @param contentType Content of the dialog component.
      * @param dialogConfig Configuration of the dialog component.
      */
-    public open(contentType: Type<any> | TemplateRef<any> | DefaultDialogObject, dialogConfig?: Partial<DialogConfig>): DialogRef {
+    public open(contentType: Type<any> | TemplateRef<any> | DefaultDialogObject, dialogConfig?: DialogConfig): DialogRef {
         const dialogRef: DialogRef = new DialogRef();
 
         dialogConfig = this._applyDefaultConfig(dialogConfig, this._defaultConfig || new DialogConfig());
@@ -77,7 +77,7 @@ export class DialogService {
     }
 
     /** @hidden Extends dialog config using default values*/
-    private _applyDefaultConfig(config: Partial<DialogConfig>, defaultConfig: DialogConfig): DialogConfig {
+    private _applyDefaultConfig(config: DialogConfig, defaultConfig: DialogConfig): DialogConfig {
         return { ...defaultConfig, ...config };
     }
 }

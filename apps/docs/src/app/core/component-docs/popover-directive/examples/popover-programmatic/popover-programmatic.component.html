@@ -12,6 +12,7 @@
 
 <button
     fd-button
+    label="Hover Custom Trigger"
     placement="bottom"
     [fdPopover]="hoverTemplate"
     [noArrow]="false"
@@ -20,7 +21,6 @@
     (mouseenter)="isOpenHover = true"
     (mouseleave)="isOpenHover = false"
 >
-    Hover Custom Trigger
 </button>
 
 <ng-template #clickTemplate>

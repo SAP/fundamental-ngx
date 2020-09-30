@@ -23,6 +23,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/breadcrumb', name: 'Breadcrumb' },
             { url: 'core/busyIndicator', name: 'Busy Indicator' },
             { url: 'core/button', name: 'Button' },
+            { url: 'core/card', name: 'Card' },
             { url: 'core/segmentedButton', name: 'Segmented Button' },
             { url: 'core/checkbox', name: 'Checkbox' },
             { url: 'core/splitButton', name: 'Split Button' },
@@ -70,6 +71,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.layouts = [
+            { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
             { url: 'core/layoutPanel', name: 'Layout Panel' },
             { url: 'core/layoutGrid', name: 'Layout Grid' }
         ];

@@ -1,1 +1,13 @@
 @import '~fundamental-styles/dist/button-split';
+
+// TODO: Remove after fix on styles https://github.com/SAP/fundamental-styles/issues/1721
+.fd-button-split {
+    .fd-button {
+        display: flex;
+        align-items: center;
+
+        &__text {
+            display: inline-block;
+        }
+    }
+}

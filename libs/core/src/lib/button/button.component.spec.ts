@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<button fd-button>Button</button>'
+    template: '<button fd-button label="Button"></button>'
 })
 export class TestComponent {}
 
@@ -33,14 +33,15 @@ describe('ButtonComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should add appropriate classes', () => {
+   it('should add appropriate classes', () => {
         componentInstance.compact = true;
-        componentInstance.glyph = 'someGlyph';
         componentInstance.fdType = 'standard';
+        componentInstance.fdMenu = true;
         componentInstance.buildComponentCssClass();
 
         const cssClass = componentInstance.buildComponentCssClass().join(' ');
-        expect(cssClass).toContain('someGlyph');
         expect(cssClass).toContain('standard');
+        expect(cssClass).toContain('fd-button--menu');
+        expect(cssClass).toContain('compact');
     });
 });

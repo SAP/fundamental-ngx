@@ -22,25 +22,26 @@
         </div>
     </div>
     <fd-notification-footer>
-        <button fd-button [fdType]="'transparent'" *ngIf="defaultConfigurationNotification?.moreInfo">
-            {{ defaultConfigurationNotification?.moreInfo }}
+        <button fd-button
+                [label]="defaultConfigurationNotification?.moreInfo"
+                [fdType]="'transparent'"
+                *ngIf="defaultConfigurationNotification?.moreInfo">
         </button>
         <div fd-notification-actions>
             <button
                 fd-button
                 [fdType]="'positive'"
+                [label]="defaultConfigurationNotification?.approve"
                 *ngIf="defaultConfigurationNotification?.approve"
-                (click)="handleApproveButtonClick()"
-            >
-                {{ defaultConfigurationNotification?.approve }}
+                (click)="handleApproveButtonClick()">
             </button>
             <button
                 fd-button
                 [fdType]="'negative'"
+                [label]="defaultConfigurationNotification?.cancel"
                 *ngIf="defaultConfigurationNotification?.cancel"
                 (click)="handleCancelButtonClick()"
             >
-                {{ defaultConfigurationNotification?.cancel }}
             </button>
         </div>
     </fd-notification-footer>

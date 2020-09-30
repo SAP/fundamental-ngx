@@ -1,7 +1,5 @@
 <fd-file-input #fileInput [(ngModel)]="files" [multiple]="true" [accept]="'.png,.jpg'">
-    <button fd-button (click)="fileInput.open()">
-        Browse (.jpg or .png)
-    </button>
+    <button fd-button label="Browse (.jpg or .png)" (click)="fileInput.open()"></button>
 </fd-file-input>
 
 <br /><br />

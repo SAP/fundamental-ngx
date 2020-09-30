@@ -1,0 +1,90 @@
+<h3>Cozy Split Menu Button</h3>
+
+<div>
+    <fdp-split-menu-button [menu]="basicMenuCozyStandard" [buttonLabel]="labelStandardCozy" type="standard"
+        title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCozyStandard()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button [menu]="basicMenuCozyPositive" [buttonLabel]="labelPositiveCozy" type="positive"
+        title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCozyPositive()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button [menu]="basicMenuCozyNegative" [buttonLabel]="labelNegativeCozy" type="negative"
+        title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCozyNegative()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button [menu]="basicMenuCozyGhost" [buttonLabel]="labelGhostCozy" type="ghost"
+        title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCozyGhost()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button [menu]="basicMenuCozyTransparent" [buttonLabel]="labelTransparentCozy" type="transparent"
+        title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCozyTransparent()">
+    </fdp-split-menu-button>
+</div>
+<br />
+
+<div>
+    <fdp-split-menu-button [menu]="basicMenuCozyEmphasized" [buttonLabel]="labelEmphasizedCozy" type="emphasized"
+        title="Default action button with list of other available action items" menuTitle="More options"
+        (primaryButtonClick)="onPrimaryButtonClickCozyEmphasized()">
+    </fdp-split-menu-button>
+</div>
+<br />
+<br />
+<p>Selected Item: {{ selectedCozyItem }}</p>
+
+<!--To be attached Menu. For Cozy-->
+<fdp-menu #basicMenuCozyStandard xPosition="before">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyStandard('Standard Button')">Standard Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyStandard('Standard Button 2')">Standard Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyStandard('Standard Button 3')">Standard Button 3</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCozyPositive xPosition="before">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyPositive('Positive Button')">Positive Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyPositive('Positive Button 2')">Positive Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyPositive('Positive Button 3')">Positive Button 3</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCozyNegative xPosition="before">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyNegative('Negative Button')">Negative Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyNegative('Negative Button 2')">Negative Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyNegative('Negative Button 3')">Negative Button 3</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCozyGhost xPosition="before">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyGhost('Ghost Button')">Ghost Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyGhost('Ghost Button 2')">Ghost Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyGhost('Ghost Button 3')">Ghost Button 3</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCozyTransparent xPosition="before">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyTransparent('Transparent Button')">Transparent Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyTransparent('Transparent Button 2')">Transparent Button 2
+    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyTransparent('Transparent Button 3')">Transparent Button 3
+    </fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCozyEmphasized xPosition="before">
+    <fdp-menu-item (itemSelect)="onItemSelectCozyEmphasized('Emphasized Button')">Emphasized Button</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyEmphasized('Emphasized Button 2')">Emphasized Button 2</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelectCozyEmphasized('Emphasized Button 3')">Emphasized Button 3</fdp-menu-item>
+</fdp-menu>

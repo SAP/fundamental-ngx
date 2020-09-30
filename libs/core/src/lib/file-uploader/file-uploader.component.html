@@ -33,9 +33,8 @@
         [attr.aria-label]="buttonAriaLabel"
         class="file-uploader__button"
         (click)="open()"
-        [compact]="compact"
-    >
-        {{ buttonLabel }}
+        [label]="buttonLabel"
+        [compact]="compact">
     </button>
     <ng-content select="[fd-form-control]"></ng-content>
 </div>

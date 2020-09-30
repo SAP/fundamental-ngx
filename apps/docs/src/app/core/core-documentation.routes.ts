@@ -45,6 +45,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/button/button-docs.module').then((m) => m.ButtonDocsModule)
             },
             {
+                path: 'card',
+                loadChildren: () => import('./component-docs/card/card-docs.module').then((m) => m.CardDocsModule)
+            },
+            {
                 path: 'segmentedButton',
                 loadChildren: () =>
                     import('./component-docs/segmented-button/segmented-button-docs.module').then(
@@ -90,17 +94,30 @@ export const ROUTES: Routes = [
             {
                 path: 'file-uploader',
                 loadChildren: () =>
-                    import('./component-docs/file-uploader/file-uploader-docs.module').then((m) => m.FileUploaderDocsModule)
+                    import('./component-docs/file-uploader/file-uploader-docs.module').then(
+                        (m) => m.FileUploaderDocsModule
+                    )
+            },
+            {
+                path: 'fixed-card-layout',
+                loadChildren: () =>
+                    import('./component-docs/fixed-card-layout/fixed-card-layout-docs.module').then(
+                        (m) => m.FixedCardLayoutDocsModule
+                    )
             },
             {
                 path: 'form-message',
                 loadChildren: () =>
-                    import('./component-docs/form-message/form-message-docs.module').then((m) => m.FormMessageDocsModule)
+                    import('./component-docs/form-message/form-message-docs.module').then(
+                        (m) => m.FormMessageDocsModule
+                    )
             },
             {
                 path: 'global-config',
                 loadChildren: () =>
-                    import('./component-docs/global-config/global-config-docs.module').then((m) => m.GlobalConfigDocsModule)
+                    import('./component-docs/global-config/global-config-docs.module').then(
+                        (m) => m.GlobalConfigDocsModule
+                    )
             },
             {
                 path: 'icon',
@@ -258,9 +275,7 @@ export const ROUTES: Routes = [
             {
                 path: 'step-input',
                 loadChildren: () =>
-                    import('./component-docs/step-input/step-input-docs.module').then(
-                        (m) => m.StepInputDocsModule
-                    )
+                    import('./component-docs/step-input/step-input-docs.module').then((m) => m.StepInputDocsModule)
             },
             {
                 path: 'switch',

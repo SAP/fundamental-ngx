@@ -22,10 +22,9 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
                         fdType="emphasized"
                         fd-initial-focus
                         fd-dialog-decisive-button
+                        label="Open Second Dialog"
                         [compact]="true"
-                        (click)="openDialog()"
-                    >
-                        Open Second Dialog
+                        (click)="openDialog()">
                     </button>
                 </fd-dialog-footer-button>
             </fd-dialog-footer>
@@ -36,6 +35,6 @@ export class FirstDialogExampleComponent {
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, public _dialogService: DialogService) {}
 
     openDialog(): void {
-        this._dialogService.open(SecondDialogExampleComponent, { responsivePadding: true } as DialogConfig);
+        this._dialogService.open(SecondDialogExampleComponent, { responsivePadding: true });
     }
 }

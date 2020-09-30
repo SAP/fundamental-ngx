@@ -79,25 +79,28 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input() colorAccent: ColorAccent = null;
 
     /**
-    * @deprecated
-    * Deprecated according to Rename `backgroundImage` to `image`
-    * */
+     * @deprecated
+     * Deprecated according to Rename `backgroundImage` to `image`
+     * */
     /** Background image url. */
     @Input()
     set backgroundImage(value: string) {
         this._setImage(value);
-    };
+    }
 
     /** Background image resource: url or base64. */
     @Input()
     set image(value: string) {
         this._setImage(value);
     }
+    get image(): string {
+        return this._image;
+    }
 
     /** @hidden */
     @HostBinding('style.background-image')
     get bgImage(): string {
-        return this._image;
+        return this._bgImage;
     }
 
     /** @hidden */
@@ -111,6 +114,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     private _image: string = null;
+
+    /** @hidden */
+    private _bgImage: string = null;
 
     /** @hidden */
     private get showDefault(): boolean {
@@ -140,7 +146,6 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
             'fd-avatar',
             this.size ? `fd-avatar--${this.size}` : '',
             this.showDefault ? 'sap-icon--person-placeholder' : '',
-            this.glyph ? `sap-icon--${this.glyph}` : '',
             this.colorAccent ? `fd-avatar--accent-color-${this.colorAccent}` : '',
             this.circle ? 'fd-avatar--circle' : '',
             this.border ? 'fd-avatar--border' : '',
@@ -163,7 +168,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         }
 
         const maxLettersCount = 3;
-        const firstLetters = label.split(' ').map(word => word.charAt(0));
+        const firstLetters = label.split(' ').map((word) => word.charAt(0));
         const abbreviate = firstLetters.join('');
 
         if (firstLetters.length > maxLettersCount || !abbreviate.match(ANY_LANGUAGE_LETTERS_REGEX)) {
@@ -175,10 +180,12 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     private _setImage(value: string): void {
+        this._image = value;
+
         if (value) {
-            this._image = 'url(' + value + ')';
+            this._bgImage = 'url(' + value + ')';
         } else {
-            this._image = null;
+            this._bgImage = null;
         }
     }
 }
