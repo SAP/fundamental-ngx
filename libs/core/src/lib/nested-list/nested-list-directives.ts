@@ -1,4 +1,16 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input, OnChanges, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Directive,
+    ElementRef,
+    HostBinding,
+    HostListener,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import { NestedItemService } from './nested-item/nested-item.service';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
@@ -88,14 +100,21 @@ export class NestedListTitleDirective {
     }
 }
 
-@Directive({
+@Component({
+    // tslint:disable-next-line:component-selector
     selector: '[fdNestedListExpandIcon], [fd-nested-list-expand-icon]',
+    template: `
+        <ng-content></ng-content>
+        <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : 'navigation-right-arrow'"></fd-icon>
+    `,
     host: {
         'aria-haspopup': 'true',
         'tabindex': '-1'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
-export class NestedListExpandIconDirective {
+export class NestedListExpandIconComponent {
 
     /** @hidden */
     @HostBinding('class.fd-nested-list__button')
@@ -114,7 +133,8 @@ export class NestedListExpandIconDirective {
     expanded = false;
 
     constructor (
-        private _itemService: NestedItemService
+        private _itemService: NestedItemService,
+        private _changeDetRef: ChangeDetectorRef
     ) {}
 
     /** Mouse event handler */
@@ -129,5 +149,11 @@ export class NestedListExpandIconDirective {
     @HostListener('focus')
     onFocus(): void {
         this._itemService.focus.next();
+    }
+
+    /** @hidden */
+    changeExpandedState(expanded: boolean): void {
+        this.expanded = expanded;
+        this._changeDetRef.detectChanges();
     }
 }
