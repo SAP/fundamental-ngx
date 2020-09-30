@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { PopoverModule } from '../../popover/popover.module';
 import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
-import { NestedListExpandIconDirective } from '../nested-list-directives';
+import { NestedListExpandIconComponent } from '../nested-list-directives';
 import { NestedListModule } from '../nested-list.module';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
@@ -72,11 +72,11 @@ class TestNestedContainerComponent {
     @ViewChild('emptyItemDirective', { read: NestedItemDirective })
     emptyItemDirective: NestedItemDirective;
 
-    @ViewChild('iconElementPopover', { read: NestedListExpandIconDirective })
-    popoverIconElement: NestedListExpandIconDirective;
+    @ViewChild('iconElementPopover', { read: NestedListExpandIconComponent })
+    popoverIconElement: NestedListExpandIconComponent;
 
-    @ViewChild('iconElement', { read: NestedListExpandIconDirective })
-    iconElement: NestedListExpandIconDirective;
+    @ViewChild('iconElement', { read: NestedListExpandIconComponent })
+    iconElement: NestedListExpandIconComponent;
 
     @ViewChild('linkElement', {read: NestedLinkDirective })
     linkDirective: NestedLinkDirective;
@@ -88,7 +88,7 @@ describe('NestedItemDirective', () => {
     let nestedItemListDirective: NestedItemDirective;
     let subItemElement: NestedItemDirective;
     let popoverSubItemElement: NestedItemDirective;
-    let iconElement: NestedListExpandIconDirective;
+    let iconElement: NestedListExpandIconComponent;
     let emptyItemDirective: NestedItemDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
     let itemService: NestedItemService;

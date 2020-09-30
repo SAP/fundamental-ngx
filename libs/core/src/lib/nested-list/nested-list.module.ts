@@ -3,7 +3,7 @@ import { NestedListDirective } from './nested-list/nested-list.directive';
 import { NestedLinkDirective } from './nested-link/nested-link.directive';
 import { NestedItemDirective } from './nested-item/nested-item.directive';
 import {
-    NestedListExpandIconDirective,
+    NestedListExpandIconComponent,
     NestedListHeaderDirective,
     NestedListIconDirective,
     NestedListTitleDirective
@@ -17,12 +17,14 @@ import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nes
 import { NestedListStateService } from './nested-list-state.service';
 import { RouterModule } from '@angular/router';
 import { NestedListContentDirective } from './nested-content/nested-list-content.directive';
+import { IconModule } from '../icon/icon.module';
 
 @NgModule({
     imports: [
         CommonModule,
         PopoverModule,
-        RouterModule
+        RouterModule,
+        IconModule
     ],
     declarations: [
         NestedListDirective,
@@ -33,7 +35,7 @@ import { NestedListContentDirective } from './nested-content/nested-list-content
         NestedListHeaderDirective,
         NestedListPopoverComponent,
         PreparedNestedListComponent,
-        NestedListExpandIconDirective,
+        NestedListExpandIconComponent,
         NestedListContentDirective
     ],
     exports: [
@@ -45,7 +47,7 @@ import { NestedListContentDirective } from './nested-content/nested-list-content
         NestedListHeaderDirective,
         NestedListPopoverComponent,
         PreparedNestedListComponent,
-        NestedListExpandIconDirective,
+        NestedListExpandIconComponent,
         NestedListContentDirective
     ],
     providers: [
