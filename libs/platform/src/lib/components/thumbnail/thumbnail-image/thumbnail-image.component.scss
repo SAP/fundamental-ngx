@@ -15,7 +15,7 @@
     border-radius: $fdp-thumbnail-image-border-radius;
     &:hover {
       cursor: pointer;
-      border-color: rgb(0, 153, 255);
+      border-color: var(--sapLink_Hover_Color);
     }
   }
 
@@ -26,7 +26,7 @@
     margin-right: $fdp-thumbnail-image-margin-size;
     &:hover {
         cursor: pointer;
-        border-color: rgb(0, 153, 255);
+        border-color: var(--sapLink_Hover_Color);
         border-radius: $fdp-thumbnail-image-border-radius;
     }
     [dir='rtl'] & {
