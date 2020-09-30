@@ -533,7 +533,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden*/
     private _popoverOpenHandle(): void {
-        if (this._hasDisplayedValues) {
+        if (this._hasDisplayedValues()) {
             this.focusTrap.activate();
         } else {
             this.focusTrap.deactivate();
