@@ -1,5 +1,6 @@
 // @import url("../../../node_modules/fundamental-styles/dist/fundamental-styles.css");
 @import "~@angular/cdk/overlay-prebuilt.css";
+@import "~fundamental-styles/dist/info-label.css";
 
 $gutter-size: 15px;
 
@@ -281,4 +282,8 @@ body {
     .dialog-custom-overlay-example {
         background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(0, 0, 0, 0.48) 100%);
     }
+}
+
+.fd-info-label + .fd-info-label {
+    margin-left: 0.3rem;
 }
