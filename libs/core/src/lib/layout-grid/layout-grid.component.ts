@@ -1,48 +1,50 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 
 /**
  * Use a layout grid to arrange components evenly in a grid layout.
  */
 @Component({
-    selector: 'fd-layout-grid',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
+    selector: 'fd-layout-grid, [fdLayoutGrid]',
+    template: `
+        <ng-content></ng-content>
+    `,
     styleUrls: ['./layout-grid.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutGridComponent extends AbstractFdNgxClass {
-    /** @Input Column span for the grid system */
+export class LayoutGridComponent implements CssClassBuilder {
+
+    /** Custom classes */
     @Input()
-    col: number;
+    set class(userClass: string) {
+        this._class = userClass;
+        this.buildComponentCssClass();
+    }
 
     /** Whether the grid should have a gap. */
     @Input()
-    nogap = false;
-
-    /** Whether the grid should have a gap. */
-    @Input()
-    gapSize: number;
+    noGap: boolean;
 
     /** @hidden */
-    _setProperties(): void {
-        this._addClassToElement('fd-layout-grid');
+    private _class = '';
 
-        if (this.nogap) {
-            this._addClassToElement('fd-layout-grid--no-gap');
-        }
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) { }
 
-        if (this.gapSize) {
-            this._addClassToElement('fd-layout-grid--gap-' + this.gapSize);
-        }
-
-        if (this.col) {
-            this._addClassToElement('fd-layout-grid--col-' + this.col);
-        }
+    /** @hidden */
+    elementRef(): ElementRef {
+        return this._elementRef;
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-container',
+            this.noGap ? 'fd-container--no-gap' : '',
+            this._class
+        ];
     }
 }
