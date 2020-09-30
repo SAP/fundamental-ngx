@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.112](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.111...v0.22.0-rc.112) (2020-09-30)
+
+
+### Bug Fixes
+
+* (core) card RTL mode ([#3461](https://github.com/SAP/fundamental-ngx/issues/3461)) ([10f6eff](https://github.com/SAP/fundamental-ngx/commit/10f6eff848c2e5c5c5f282f1f243ea5e64472bfa))
+
 ## [0.22.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.110...v0.22.0-rc.111) (2020-09-30)
 
 
