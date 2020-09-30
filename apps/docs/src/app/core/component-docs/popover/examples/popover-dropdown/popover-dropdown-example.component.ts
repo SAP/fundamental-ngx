@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const bottomStart = 'bottom-start';

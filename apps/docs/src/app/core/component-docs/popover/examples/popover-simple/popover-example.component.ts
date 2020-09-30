@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
     selector: 'fd-popover-example',
     templateUrl: './popover-example.component.html',
     styleUrls: ['popover-example.component.scss'],
-    encapsulation: ViewEncapsulation.ShadowDom
+    encapsulation: ViewEncapsulation.None
 })
 export class PopoverExampleComponent {
     leftPlacement$: Observable<Placement>;
@@ -23,11 +23,5 @@ export class PopoverExampleComponent {
         { text: 'Option 1', url: '#' },
         { text: 'Option 2', url: '#' },
         { text: 'Option 3', url: '#' }
-    ];
-
-    list2 = [
-        { text: 'Option 3', url: '#' },
-        { text: 'Option 4', url: '#' },
-        { text: 'Option 5', url: '#' }
     ];
 }
