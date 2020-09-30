@@ -6,13 +6,14 @@ import {
     ElementRef,
     forwardRef,
     HostBinding,
-    Input,
+    Input, Optional,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
-import { BrowserDetection, compareObjects } from '../../utils/public_api';
+import { BrowserDetection, compareObjects, KeyUtil } from '../../utils/public_api';
+import { ListItemComponent } from '../../list/list-item/list-item.component';
 
 let checkboxUniqueId = 0;
 
@@ -121,9 +122,10 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden */
     constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
         public elementRef: ElementRef,
-        @Attribute('tabIndexValue') public tabIndexValue: number = 0
+        @Attribute('tabIndexValue') public tabIndexValue: number = 0,
+        private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _listItemComponent: ListItemComponent
     ) {
         this.tabIndexValue = tabIndexValue;
     }
@@ -210,6 +212,16 @@ export class CheckboxComponent implements ControlValueAccessor {
         this._setState();
         this.onValueChange(this.checkboxValue);
         this._detectChanges();
+    }
+
+    /** Space event should be handled separately, when used inside list component and in firefox browser */
+    handleInputKeyUp(event: KeyboardEvent): void {
+        event.stopPropagation();
+        if (this._listItemComponent &&
+            BrowserDetection.isFirefox() &&
+            KeyUtil.isKey(event, ' ')) {
+            event.preventDefault();
+        }
     }
 
     /** @hidden Based on current control value sets new control state. */
