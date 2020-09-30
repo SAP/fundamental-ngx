@@ -19,10 +19,6 @@ import * as fileUploaderMaxH from '!raw-loader!./examples/file-uploader-max-exam
 import * as fileUploaderMinT from '!raw-loader!./examples/file-uploader-min-example/file-uploader-min-example.component.ts';
 import * as fileUploaderMinH from '!raw-loader!./examples/file-uploader-min-example/file-uploader-min-example.component.html';
 
-import * as fileUploaderMinMaxT from '!raw-loader!./examples/file-uploader-min-and-max-size-example/file-uploader-min-and-max-size-example.component.ts';
-import * as fileUploaderMinMaxH from '!raw-loader!./examples/file-uploader-min-and-max-size-example/file-uploader-min-and-max-size-example.component.html';
-
-
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -70,20 +66,6 @@ export class FileUploaderDocsComponent {
             component: 'FileUploaderDragDisabledExampleComponent',
             code: fileUploaderInvalidT,
             fileName: 'file-uploader-drag-disabled-example'
-        }
-    ];
-
-    fileMinMaxSize: ExampleFile[] = [
-        {
-            language: 'html',
-            code: fileUploaderMinMaxH,
-            fileName: 'file-uploader-min-and-max-example'
-        },
-        {
-            language: 'typescript',
-            component: 'FileUploaderMinMaxExampleComponent',
-            code: fileUploaderMinMaxT,
-            fileName: 'file-uploader-min-and-max-example'
         }
     ];
 
