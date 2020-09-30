@@ -13,8 +13,6 @@
 
 <!-- Note that in this case you are responsible for highlighting. -->
 <ng-template #template let-item>
-    <div class="fd-template-container-div">
-        <fd-icon [glyph]="item.icon" class="fd-template-icon"></fd-icon>
-        <span>{{ item.name }}</span>
-    </div>
+    <i fd-list-icon [glyph]="item.icon"></i>
+    <span fd-list-title>{{ item.name }}</span>
 </ng-template>
