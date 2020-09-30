@@ -8,17 +8,18 @@
                         Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium nibh lorem
                         malesuada diam. Nulla quis arcu aliquet, feugiat massa semper, volutpat diam. Nam vitae ante
                         posuere, molestie neque sit amet, dapibus velit. Maecenas eleifend tempor lorem. Mauris vitae
-                        elementum mi, sed eleifend ligula. Nulla tempor vulputate dolor, nec dignissim quam convallis ut.
-                        Praesent vitae commodo felis, ut iaculis felis. Fusce quis eleifend sapien, eget facilisis nibh.
-                        Suspendisse est velit, scelerisque ut commodo eget, dignissim quis metus. Cras faucibus consequat
-                        gravida. Curabitur vitae quam felis. Phasellus ac leo eleifend, commodo tortor et, varius quam.
-                        Aliquam erat volutpat
-                        <fd-wizard-next-step>
-                            <button fd-button [compact]="true" fdType="emphasized">
-                                Go to Step 2
-                            </button>
-                        </fd-wizard-next-step>
+                        elementum mi, sed eleifend ligula. Nulla tempor vulputate dolor, nec dignissim quam convallis
+                        ut. Praesent vitae commodo felis, ut iaculis felis. Fusce quis eleifend sapien, eget facilisis
+                        nibh. Suspendisse est velit, scelerisque ut commodo eget, dignissim quis metus. Cras faucibus
+                        consequat gravida. Curabitur vitae quam felis. Phasellus ac leo eleifend, commodo tortor et,
+                        varius quam. Aliquam erat volutpat
                     </fd-wizard-content>
+                </li>
+                <li fd-wizard-step status="upcoming" label="Step 2: Very long label that truncates on the second line">
+                    <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
+                </li>
+                <li fd-wizard-step status="upcoming" label="Step 3">
+                    <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
                 </li>
             </ul>
         </fd-wizard-navigation>
@@ -30,13 +31,17 @@
                 <li fd-wizard-step [status]="step1status" label="Step 1: One Line">
                     <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
                     <fd-wizard-content>
-                        <img src="http://lorempixel.com/220/220/nature/4/" role="presentation">
-                        <fd-wizard-next-step>
-                            <button fd-button [compact]="true" fdType="emphasized">
-                                Go to Step 2
-                            </button>
-                        </fd-wizard-next-step>
+                        <img src="http://lorempixel.com/220/220/nature/4/" role="presentation" />
                     </fd-wizard-content>
+                </li>
+                <li fd-wizard-step status="upcoming" label="Step 2: Very long label that truncates on the second line">
+                    <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
+                    <fd-wizard-content>
+                        Wizard Content for step 2
+                    </fd-wizard-content>
+                </li>
+                <li fd-wizard-step status="upcoming" label="Step 3">
+                    <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
                 </li>
             </ul>
         </fd-wizard-navigation>

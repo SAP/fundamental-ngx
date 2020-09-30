@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './wizard-customizable-example.component.html'
 })
 export class WizardCustomizableExampleComponent {
-
     step1status = 'current';
     step2status = 'upcoming';
     step3status = 'upcoming';
@@ -32,5 +31,4 @@ export class WizardCustomizableExampleComponent {
             }
         }
     }
-
 }

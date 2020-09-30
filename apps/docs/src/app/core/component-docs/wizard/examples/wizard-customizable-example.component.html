@@ -12,7 +12,12 @@
                     </fd-wizard-next-step>
                 </fd-wizard-content>
             </li>
-            <li fd-wizard-step [status]="step2status" branching="true" label="Step 2: This step has a 'Branching' connector">
+            <li
+                fd-wizard-step
+                [status]="step2status"
+                branching="true"
+                label="Step 2: This step has a 'Branching' connector"
+            >
                 <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
                 <fd-wizard-content size="md">
                     Wizard Content for step 2

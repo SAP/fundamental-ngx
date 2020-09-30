@@ -40,9 +40,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     @HostListener('window:resize')
     resizeHandler(): void {
-        // Check if any step is narrower than 168px and also get the current step
         const wizardWidth = this._elRef.nativeElement.getBoundingClientRect().width;
-        if (wizardWidth <= this._previousWidth) {
+        if (!this._previousWidth || wizardWidth <= this._previousWidth) {
             this._wizardShrinking();
         } else if (wizardWidth > this._previousWidth) {
             this._wizardGrowing();
@@ -52,14 +51,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        setTimeout(() => { // fixes ExpressionChangedAfterItHasBeenCheckedError
+        setTimeout(() => {
+            // fixes ExpressionChangedAfterItHasBeenCheckedError
             this._setContentTemplate();
             this._subscriptions.add(
                 this.steps.changes.subscribe(() => {
                     this._handleStepOrStatusChanges();
                 })
             );
-            this.steps.forEach(step => {
+            this.steps.forEach((step) => {
                 this._subscriptions.add(
                     step.statusChange.subscribe(() => {
                         this._handleStepOrStatusChanges();
@@ -141,7 +141,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _resetStepClasses(): void {
-        this.steps.forEach(step => {
+        this.steps.forEach((step) => {
             step.elRef.nativeElement.classList.remove('fd-wizard__step--stacked-top');
             step.elRef.nativeElement.classList.remove('fd-wizard__step--stacked');
             step.elRef.nativeElement.classList.remove('fd-wizard__step--no-label');
@@ -168,7 +168,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _anyStepIsTooNarrow(): boolean {
         let foundNarrowStep = false;
-        this.steps.forEach(step => {
+        this.steps.forEach((step) => {
             if (step.elRef.nativeElement.clientWidth < 168) {
                 foundNarrowStep = true;
             }

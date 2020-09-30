@@ -13,7 +13,5 @@ import { Component, ViewEncapsulation } from '@angular/core';
     ]
 })
 export class WizardMobileExampleComponent {
-
     step1status = 'current';
-
 }
