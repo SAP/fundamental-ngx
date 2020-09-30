@@ -8,12 +8,15 @@ import {
     HostListener,
     Input,
     OnChanges,
-    OnInit,
+    OnInit, Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { NestedItemService } from './nested-item/nested-item.service';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
+import { RtlService } from '../utils/services/rtl.service';
+import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 @Directive({
     selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]'
@@ -105,7 +108,7 @@ export class NestedListTitleDirective {
     selector: '[fdNestedListExpandIcon], [fd-nested-list-expand-icon]',
     template: `
         <ng-content></ng-content>
-        <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : 'navigation-right-arrow'"></fd-icon>
+        <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : ( sideArrowIcon$ | async )"></fd-icon>
     `,
     host: {
         'aria-haspopup': 'true',
@@ -132,10 +135,16 @@ export class NestedListExpandIconComponent {
     @HostBinding('attr.aria-expanded')
     expanded = false;
 
+    /** @hidden */
+    sideArrowIcon$: Observable<string>;
+
     constructor (
         private _itemService: NestedItemService,
-        private _changeDetRef: ChangeDetectorRef
-    ) {}
+        private _changeDetRef: ChangeDetectorRef,
+        @Optional() private _rtlService: RtlService
+    ) {
+        this._listenOnTextDirection();
+    }
 
     /** Mouse event handler */
     @HostListener('click', ['$event'])
@@ -155,5 +164,12 @@ export class NestedListExpandIconComponent {
     changeExpandedState(expanded: boolean): void {
         this.expanded = expanded;
         this._changeDetRef.detectChanges();
+    }
+
+    /** @hidden Sets expand arrow depending on text direction */
+    private _listenOnTextDirection(): void {
+        this.sideArrowIcon$ = this._rtlService
+            ? this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'navigation-left-arrow' : 'navigation-right-arrow'))
+            : of('navigation-right-arrow');
     }
 }
