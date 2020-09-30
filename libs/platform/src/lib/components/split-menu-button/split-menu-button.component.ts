@@ -5,8 +5,7 @@ import {
     ChangeDetectionStrategy,
     ElementRef,
     EventEmitter,
-    ViewChild,
-    Renderer2
+    ViewChild
 } from '@angular/core';
 import { Input, Output, OnInit, OnDestroy, Optional } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -21,9 +20,6 @@ import { BaseComponent } from '../base';
  *
  *
  */
-
-const PRIMARY_BUTTON_MAX_WIDTH_COZY = '9.75rem'; // Cozy 9.75rem. (Max width) 12rem - 2.25rem (menu button width)
-const PRIMARY_BUTTON_MAX_WIDTH_COMPACT = '10rem'; // Compact 10rem. (Max width) 12rem - 2rem (menu button width)
 @Component({
     selector: 'fdp-split-menu-button',
     templateUrl: './split-menu-button.component.html',
@@ -85,11 +81,10 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
      * @hidden */
     private _rtlChangeSubscription = Subscription.EMPTY;
 
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        @Optional() private _rtl: RtlService,
-        private readonly renderer: Renderer2
-    ) {
+    /** Defined max width of Split menu button */
+    splitButtonMaxWidth = '12rem';
+
+    constructor(protected _cd: ChangeDetectorRef, @Optional() private _rtl: RtlService) {
         super(_cd);
     }
 
@@ -106,13 +101,6 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
 
     /** @hidden */
     ngAfterViewInit(): void {
-        // Max width to splt menu button is 12rem
-        if (this.contentDensity === 'compact') {
-            this.renderer.setStyle(this.primaryBtn.nativeElement, 'max-width', PRIMARY_BUTTON_MAX_WIDTH_COMPACT);
-        } else if (this.contentDensity === 'cozy') {
-            this.renderer.setStyle(this.primaryBtn.nativeElement, 'max-width', PRIMARY_BUTTON_MAX_WIDTH_COZY);
-        }
-
         if (this.fixedWidth) {
             this._setPrimaryButtonWidth();
         }

@@ -1,8 +1,9 @@
-<div class="fd-button-split" role="group" aria-label="split-button" [attr.dir]="dir">
+<div class="fd-button-split" role="group" aria-label="split-button" [attr.dir]="dir" [style.max-width]="splitButtonMaxWidth">
     <button
         fd-button
         #primaryBtn
-        [ngStyle]="{ width: primaryButtonWidth }"
+        [label]="buttonLabel"
+        [ngStyle]="{ width: primaryButtonWidth, overflow: 'hidden' }"
         [attr.id]="id"
         [attr.name]="name"
         [attr.title]="title"
@@ -14,7 +15,6 @@
         [compact]="contentDensity === 'compact'"
         (click)="primaryButtonClicked($event)"
     >
-        {{ buttonLabel }}
     </button>
     <button
         fd-button
