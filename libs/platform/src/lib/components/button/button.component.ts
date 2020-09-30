@@ -11,12 +11,24 @@ export type ButtonType =
     | 'transparent'
     | 'emphasized'
     | 'menu';
+
+export type GlyphPosition = 'before' | 'after';
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent extends BaseComponent implements AfterViewInit {
+
+    /** Position of glyph related to text */
+    @Input()
+    public glyphPosition: GlyphPosition = 'before';
+
+    /**
+    * Text rendered inside button component
+    */
+    @Input()
+    label: string;
 
     /** The icon to include in the button. See the icon page for the list of icons.
      * Setter is used to control when css class have to be rebuilded.
