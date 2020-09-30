@@ -22,6 +22,7 @@ import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
 import { KeyUtil } from '../../utils/functions/key-util';
+import { BrowserDetection } from '../../utils/functions/browser-detection';
 
 /**
  * The component that represents a list item.
@@ -107,7 +108,9 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     keydownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKey(event, [' ', 'Enter'])) {
             if (this.checkbox) {
-                this.checkbox.nextValue();
+                if (!BrowserDetection.isFirefox() || !KeyUtil.isKey(event, ' ')) {
+                    this.checkbox.nextValue();
+                }
                 this._muteEvent(event);
             }
             if (this.radio) {

@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
-import { compareObjects } from '../../utils/public_api';
+import { BrowserDetection, compareObjects } from '../../utils/public_api';
 
 let checkboxUniqueId = 0;
 
@@ -177,7 +177,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
     public checkByKey(event: KeyboardEvent): void {
-        if (this._isSpaceBarEvent(event) && this._isIE()) {
+        if (this._isSpaceBarEvent(event) && BrowserDetection.isIE()) {
             this._nextValueEvent();
             this.muteKey(event);
         }
@@ -229,7 +229,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden */
     private _nextValueEvent(triggeredByClick?: boolean, event?: MouseEvent): void {
-        if (this._isIE() &&
+        if (BrowserDetection.isIE() &&
             this._previousState === 'indeterminate' &&
             this.checkboxState === 'indeterminate') {
             this.checkboxState = 'force-checked';
@@ -248,15 +248,6 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Compares values */
     private _compare(val1: any, val2: any): boolean {
         return typeof val1 === 'object' ? compareObjects(val1, val2) : val1 === val2;
-    }
-
-    /** @hidden */
-    private _isIE(): boolean {
-        const ua = window.navigator.userAgent; // Check the userAgent property of the window.navigator object
-        const msie = ua.indexOf('MSIE '); // IE 10 or older
-        const trident = ua.indexOf('Trident/'); // IE 11
-
-        return msie > 0 || trident > 0;
     }
 
     /** @hidden Determines event source based on key code */
