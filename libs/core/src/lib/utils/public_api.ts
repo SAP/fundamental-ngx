@@ -42,6 +42,5 @@ export * from './functions/closest-element';
 export * from './functions/keyboard-unification';
 export * from './functions/uuidv4-generator';
 export * from './functions/key-util';
-export * from './functions/browser-detection';
 
 export * from './base-class/mobile-mode.class';

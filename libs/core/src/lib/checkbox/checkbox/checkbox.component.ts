@@ -13,8 +13,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
-import { BrowserDetection, compareObjects, KeyUtil } from '../../utils/public_api';
+import { compareObjects, KeyUtil } from '../../utils/public_api';
 import { ListItemComponent } from '../../list/list-item/list-item.component';
+import { Platform } from '@angular/cdk/platform';
 
 let checkboxUniqueId = 0;
 
@@ -125,6 +126,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     constructor(
         public elementRef: ElementRef,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
+        private _platform: Platform,
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _listItemComponent: ListItemComponent
     ) {
@@ -180,7 +182,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
     public checkByKey(event: KeyboardEvent): void {
-        if (this._isSpaceBarEvent(event) && BrowserDetection.isIE()) {
+        if (this._isSpaceBarEvent(event) && this._platform.TRIDENT) {
             this._nextValueEvent();
             this.muteKey(event);
         }
@@ -219,7 +221,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     handleInputKeyUp(event: KeyboardEvent): void {
         event.stopPropagation();
         if (this._listItemComponent &&
-            BrowserDetection.isFirefox() &&
+            this._platform.FIREFOX &&
             KeyUtil.isKey(event, ' ')) {
             event.preventDefault();
         }
@@ -242,7 +244,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden */
     private _nextValueEvent(triggeredByClick?: boolean, event?: MouseEvent): void {
-        if (BrowserDetection.isIE() &&
+        if (this._platform.TRIDENT &&
             this._previousState === 'indeterminate' &&
             this.checkboxState === 'indeterminate') {
             this.checkboxState = 'force-checked';
