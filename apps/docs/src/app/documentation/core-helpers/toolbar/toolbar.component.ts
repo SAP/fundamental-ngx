@@ -22,7 +22,12 @@ export class ToolbarDocsComponent implements OnInit {
 
     library: string;
 
-    version: string = environment.version;
+    version = {
+        id: environment.version,
+        url: ''
+    };
+
+    versions: any[];
 
     items: ShellbarMenuItem[] = [
         {
@@ -69,9 +74,23 @@ export class ToolbarDocsComponent implements OnInit {
 
     ngOnInit(): void {
         this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/sap_fiori_3.css');
+
+        this.versions = [
+            {id: '0.21.0', url: 'https://5f355f63718e9200075585e1--fundamental-ngx.netlify.app/'},
+            {id: '0.20.0', url: 'https://5f0630964a7a370007f93dc4--fundamental-ngx.netlify.app/'},
+            {id: '0.19.0', url: 'https://5ef288ca158ebd0008946f4d--fundamental-ngx.netlify.app/'},
+            {id: '0.18.0', url: 'https://5ec04b7f46b9bd000648f8ec--fundamental-ngx.netlify.app/'},
+            {id: '0.17.0', url: 'https://5e9f10c885a1fe0006fac9a9--fundamental-ngx.netlify.app/'},
+        ];
+
+        this.versions.unshift(this.version);
     }
 
     selectTheme(selectedTheme: string): void {
         this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/' + selectedTheme + '.css');
+    }
+
+    selectVersion(version: any): void {
+        location.assign(version.url);
     }
 }

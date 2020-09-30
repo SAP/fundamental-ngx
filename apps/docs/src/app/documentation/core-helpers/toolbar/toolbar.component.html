@@ -42,7 +42,21 @@
             </li>
         </fd-menu>
 
-        <span class="fd-docs--toolbar__version">v {{ version }}</span>
+        <button fd-button fdType="transparent" [fdMenu]="true" [fdMenuTrigger]="versionsMenu"
+                class="fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu">
+            v {{ version.id }}
+        </button>
+
+        <fd-menu #versionsMenu
+                 [fillControlMode]="null"
+                 placement="bottom-end">
+            <li fd-menu-item *ngFor="let version of versions">
+                <div fd-menu-interactive (click)="selectVersion(version)">
+                    <span fd-menu-title>{{ version.id }}</span>
+                </div>
+            </li>
+        </fd-menu>
+
         <a href="https://github.com/SAP/fundamental-ngx"
            title="Find us on Github!"
            class="fd-button fd-button--standard fd-shellbar__button fd-shellbar__button">
