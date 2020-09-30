@@ -1,17 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActionBarTitleDirective } from './action-bar-title.directive';
 import { ActionBarModule } from '../action-bar.module';
 
 @Component({
-    template: ` <h1 #directiveElement fd-action-bar-title>Action Bar Title Test Text</h1> `
+    template: `<div #componentElement fd-action-bar-title>Action Bar Title Test Text</div> `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 }
 
-describe('ActionBarTitleDirective', () => {
+describe('ActionBarTitleComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
