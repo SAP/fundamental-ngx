@@ -31,7 +31,7 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
     /**
      * tracking the background value
      */
-    _background: BACKGROUND_TYPE;
+    private _background: BACKGROUND_TYPE;
 
     /**
      * sets background for content to List, Transparent or Solid background color.
@@ -52,7 +52,7 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
     /**
      * tracks the size for responsive padding
      */
-    _size: RESPONSIVE_SIZE;
+    private _size: RESPONSIVE_SIZE;
 
     /**
      * sets size which in turn adds corresponding padding for the size type.
@@ -81,10 +81,11 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
     }
 
     /**
+     * @hidden
      * sets the style classes for background property
      * @param background
      */
-    _setBackgroundStyles(background: BACKGROUND_TYPE): any {
+    private _setBackgroundStyles(background: BACKGROUND_TYPE): any {
         const hostElement = this._elementRef.nativeElement.querySelector('.fd-dynamic-page__content');
         switch (background) {
             case 'transparent':
@@ -101,10 +102,11 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
         }
     }
     /**
+     * @hidden
      * sets the padding classes
      * @param sizeType
      */
-    _setSize(sizeType: RESPONSIVE_SIZE): any {
+    private _setSize(sizeType: RESPONSIVE_SIZE): any {
         const hostElement = this._elementRef.nativeElement.querySelector('.fd-dynamic-page__content');
 
         switch (sizeType) {
@@ -122,6 +124,12 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
                 this._addClassNameToCustomElement(hostElement, CLASS_NAME.dynamicPageContentAreaExtraLarge);
                 break;
         }
+    }
+    /**
+     * get reference to this element
+     */
+    getElementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
     }
 
     /**@hidden */

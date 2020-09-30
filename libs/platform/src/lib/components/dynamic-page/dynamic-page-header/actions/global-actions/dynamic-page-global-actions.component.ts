@@ -1,19 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, Input } from '@angular/core';
-
-import { CLASS_NAME } from '../../../constants';
-import { addClassNameToElement } from '../../../utils';
+import { Component, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'fdp-dynamic-page-global-actions',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicPageGlobalActionsComponent implements OnInit {
+export class DynamicPageGlobalActionsComponent {
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>) {}
 
-    /** @hidden */
-    ngOnInit(): void {
-        addClassNameToElement(this._renderer, this._elementRef.nativeElement, CLASS_NAME.dynamicPageGlobalActions);
+    /**
+     * get reference to this element
+     */
+    elementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
     }
 }

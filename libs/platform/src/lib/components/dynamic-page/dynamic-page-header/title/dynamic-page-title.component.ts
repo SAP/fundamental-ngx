@@ -14,7 +14,6 @@ import {
 } from '@angular/core';
 import { BACKGROUND_TYPE, CLASS_NAME, RESPONSIVE_SIZE } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
-import { BreadcrumbComponent } from '@fundamental-ngx/core';
 import { addClassNameToElement, removeClassNameFromElement } from '../../utils';
 
 @Component({
@@ -56,15 +55,6 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         return this._size;
     }
 
-    /** @hidden */
-    constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private _renderer: Renderer2,
-        public focusMonitor: FocusMonitor,
-        private _dynamicPageService: DynamicPageService,
-        private _ngZone: NgZone
-    ) {}
-
     @Input()
     title: string;
 
@@ -80,11 +70,18 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
      * tracks the size for responsive padding
      */
     _size: RESPONSIVE_SIZE;
+    /** @hidden */
+    constructor(
+        private _elementRef: ElementRef<HTMLElement>,
+        private _renderer: Renderer2,
+        public focusMonitor: FocusMonitor,
+        private _dynamicPageService: DynamicPageService,
+        private _ngZone: NgZone
+    ) {}
 
     ngAfterViewInit(): void {
         this.focusMonitor.monitor(this._elementRef).subscribe((origin) =>
             this._ngZone.run(() => {
-                console.log('origin iis ' + origin);
                 if (origin === 'keyboard') {
                     this._dynamicPageService.expandHeader();
                 }
@@ -97,10 +94,9 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         }
     }
 
-    getLabel?(): string {
-        throw new Error('Method not implemented.');
-    }
-
+    /**
+     * get reference to this element
+     */
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
@@ -118,7 +114,12 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         }
     }
 
-    _setBackgroundStyles(background: BACKGROUND_TYPE): any {
+    /**
+     * @hidden
+     * sets the style classes for background property
+     * @param background
+     */
+    private _setBackgroundStyles(background: BACKGROUND_TYPE): any {
         switch (background) {
             case 'transparent':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleAreaTransparentBg);
@@ -135,7 +136,12 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         }
     }
 
-    _setSize(sizeType: RESPONSIVE_SIZE): any {
+    /**
+     * @hidden
+     * sets the padding classes
+     * @param sizeType
+     */
+    private _setSize(sizeType: RESPONSIVE_SIZE): any {
         switch (sizeType) {
             case 'small':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleAreaSmall);

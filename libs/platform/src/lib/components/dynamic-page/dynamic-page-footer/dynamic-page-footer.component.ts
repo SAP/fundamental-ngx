@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, forwardRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from '@angular/core';
 
-import { CLASS_NAME, DYNAMIC_PAGE_CHILD_TOKEN } from '../constants';
+import { DYNAMIC_PAGE_CHILD_TOKEN } from '../constants';
 
 @Component({
     selector: 'fdp-dynamic-page-footer',
@@ -14,14 +14,7 @@ import { CLASS_NAME, DYNAMIC_PAGE_CHILD_TOKEN } from '../constants';
     ]
 })
 export class DynamicPageFooterComponent implements OnInit {
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
+    constructor() {}
 
-    ngOnInit(): void {
-        // this._addClassNameToHostElement(CLASS_NAME.dynamicPageContent);
-    }
-
-    /**@hidden */
-    private _addClassNameToHostElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
-    }
+    ngOnInit(): void {}
 }

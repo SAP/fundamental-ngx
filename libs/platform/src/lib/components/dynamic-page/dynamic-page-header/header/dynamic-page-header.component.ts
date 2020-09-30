@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { BACKGROUND_TYPE, CLASS_NAME, RESPONSIVE_SIZE } from '../../constants';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
+import { addClassNameToElement, removeClassNameFromElement } from '../../utils';
 
 /** Dynamic Page collapse change event */
 export class DynamicPageCollapseChangeEvent {
@@ -31,12 +32,23 @@ let dynamicPageHeaderId = 0;
     encapsulation: ViewEncapsulation.None
 })
 export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
+    /**
+     * whether the header can be collapsed. True by default. If set to false, both pin/collapse buttons disappear
+     * and the header stays visible
+     */
     @Input()
     collapsible = true;
 
+    /**
+     * whether the header should be allowed to be pinned or unpinned. When set, the pin button shows up.
+     * Pinning the header will make the header stay visible and the collapse button(if present) will disappear until unpinned.
+     */
     @Input()
     pinnable = false;
 
+    /**
+     * the initial state of the header. Set to true if header should be collapsed.
+     */
     @Input()
     collapsed = false;
 
@@ -52,53 +64,40 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     @Input()
     collapseLabel: string = this._dynamicPageConfig.collapseLabel;
 
-    /**
-     * @hidden
-     * expand/collapse aria label based on the current state
-     */
-    expandCollapseAriaLabel: string;
-
-    /** Collapse/Expand change event raised */
-    @Output()
-    collapseChange: EventEmitter<DynamicPageCollapseChangeEvent> = new EventEmitter<DynamicPageCollapseChangeEvent>();
-
-    toggleSubscription: Subscription;
-    expandSubscription: Subscription;
-    collapseSubscription: Subscription;
-
-    pinned = false;
-    //  tracking collapsible for pinning
-    _collapsible = this.collapsible;
-
-    _background: BACKGROUND_TYPE;
-    /** Reference to page header content */
-    @ViewChild('headerContent')
-    headerContent: ElementRef<HTMLElement>;
-
     /** Header role  */
     @Input()
     @HostBinding('attr.role')
     role = 'region';
 
+    /**
+     * id for header
+     */
     @Input()
     @HostBinding('attr.id')
     id = 'fdp-dynamic-page-header-id-' + dynamicPageHeaderId++;
 
+    /**
+     * aria label for header
+     */
     @Input()
     headerAriaLabel: string;
 
     /**
-     * @hidden
-     * pn/unpin aria label based on the current state
+     * aria label for pin state of pin button
      */
-    pinUnpinAriaLabel: string;
-
     @Input()
     pinAriaLabel: string = this._dynamicPageConfig.pinLabel;
 
+    /**
+     * aria label for unpin state of pin button
+     */
     @Input()
     unpinAriaLabel: string = this._dynamicPageConfig.unpinLabel;
 
+    /**
+     * sets background for content to List, Transparent or Solid background color.
+     * Default is `solid`.
+     */
     @Input()
     set background(backgroundType: BACKGROUND_TYPE) {
         if (backgroundType) {
@@ -110,9 +109,15 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     get background(): BACKGROUND_TYPE {
         return this._background;
     }
-
+    /**
+     * tracks the size for responsive padding
+     */
     _size: RESPONSIVE_SIZE;
 
+    /**
+     * sets size which in turn adds corresponding padding for the size type.
+     * size can be `small`, `medium`, `large`, or `extra-large`.
+     */
     @Input()
     set size(sizeType: RESPONSIVE_SIZE) {
         if (sizeType) {
@@ -125,6 +130,55 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         return this._size;
     }
 
+    /** Collapse/Expand change event raised */
+    @Output()
+    collapseChange: EventEmitter<DynamicPageCollapseChangeEvent> = new EventEmitter<DynamicPageCollapseChangeEvent>();
+
+    /** Reference to page header content */
+    @ViewChild('headerContent')
+    headerContent: ElementRef<HTMLElement>;
+
+    /**
+     * subscription for when toggle header is called
+     */
+    toggleSubscription: Subscription;
+    /**
+     * subscription for when expand header is called
+     */
+    expandSubscription: Subscription;
+    /**
+     * subscription for when collapse header is called
+     */
+    collapseSubscription: Subscription;
+    // tabbedSubscription: Subscription;
+
+    /**
+     * @hidden
+     * expand/collapse aria label based on the current state
+     */
+    expandCollapseAriaLabel: string;
+
+    /**
+     * tracking if pin button is pinned
+     */
+    pinned = false;
+    /**
+     *  tracking collapsible for pinning
+     *  */
+
+    _collapsible = this.collapsible;
+
+    /**
+     * tracking the background value
+     */
+    _background: BACKGROUND_TYPE;
+
+    /**
+     * @hidden
+     * pn/unpin aria label based on the current state
+     */
+    pinUnpinAriaLabel: string;
+
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -134,15 +188,12 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     ) {
         if (this.collapsible) {
             this.toggleSubscription = this._dynamicPageService.$toggle.subscribe((val) => {
-                console.log('subscriibied to dyn page serviicee header' + val);
                 this.toggleCollapse();
             });
             this.expandSubscription = this._dynamicPageService.$expand.subscribe(() => {
-                console.log('subscriibied to expand');
                 this.collapseHeader(false);
             });
             this.collapseSubscription = this._dynamicPageService.$collapse.subscribe(() => {
-                console.log('subscriibied to collapse');
                 this.collapseHeader(true);
             });
         }
@@ -150,8 +201,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
 
     /** @hidden */
     ngOnInit(): void {
-        // this._addClassNameToHostElement(CLASS_NAME.dynamicPageHeader); // not getting this to work right
-        // this._addClassNameToHostElement(CLASS_NAME.dynamicPageHeaderExtraLarge);
         if (this._isCollapsibleCollapsed()) {
             this._setStyleToHostElement('z-index', 1);
         }
@@ -167,12 +216,14 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
             this._setSize(this.size);
         }
     }
-    collapseHeader(val: any): any {
+    collapseHeader(val: boolean): any {
         if (this._isPinned()) {
             return;
         }
-        this.collapsed = val;
-        this.expandCollapseActions();
+        if (this.collapsed !== val) {
+            this.collapsed = val;
+            this.expandCollapseActions();
+        }
     }
     /** Handles expanded/collapsed event */
     public toggleCollapse(): void {
@@ -180,9 +231,12 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
             return;
         }
         this.collapsed = !this.collapsed;
+
         this.expandCollapseActions();
-        // this._calculateExpandAriaLabel();
     }
+    /**
+     * handles actions like style changes and emit methods on expand/collapse
+     */
     private expandCollapseActions(): void {
         if (this._isCollapsibleCollapsed()) {
             this._setStyleToHostElement('z-index', 1);
@@ -203,80 +257,108 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     }
 
     // scenarioi where collapsible = false and pinnable = true is buggy due to html viisibility
+    /**
+     * return whether this collapse/expand button is collapsed
+     */
     private _isCollapsibleCollapsed(): boolean {
         return this.collapsible && this.collapsed && this._collapsible;
     }
 
+    /**
+     * return whether the pin button is pinned
+     */
     private _isPinned(): boolean {
         return !this._collapsible && this.pinned;
     }
 
+    /**
+     * click action on pin button
+     */
     onPinned(): void {
-        this.pinned = !this.pinned; // true false
-        // const collapsible = this.collapsible; // false true
-        // this._collapsible = !this.pinned; // should be false, and pinend should be true
-        // collapsible should be true pinend should be false,
+        this.pinned = !this.pinned;
         if (this.pinned) {
             this._collapsible = false;
         } else {
             this._collapsible = this.collapsible; // reset
         }
         this._calculatePinUnpinAriaLabel();
-
-        // else {
-        //     // this.collapsible = collapsible;
-        // }
     }
 
+    /**
+     * return the element reference.
+     */
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 
+    /**@hidden */
     ngOnDestroy(): void {
-        console.log('calling ngdestroy');
-
         this.toggleSubscription.unsubscribe();
         this.expandSubscription.unsubscribe();
         this.collapseSubscription.unsubscribe();
     }
 
-    _setBackgroundStyles(background: BACKGROUND_TYPE): any {
-        switch (background) {
-            case 'transparent':
-                // this._addClassNameToHostElement(CLASS_NAME.dynamicPageHeaderTransparentBg);
-                if (this.headerContent) {
-                    this._addClassNameToElement(CLASS_NAME.dynamicPageHeaderTransparentBg, this.headerContent);
-                }
-                break;
-            case 'list':
-            case 'solid':
-            default:
-                if (this.headerContent) {
-                    this._removeClassNameFromElement(CLASS_NAME.dynamicPageHeaderTransparentBg, this.headerContent);
-                }
-                // this._removeClassNameToHostElement(CLASS_NAME.dynamicPageHeaderTransparentBg);
-                break;
+    /**
+     * @hidden
+     * sets the style classes for background property
+     * @param background
+     */
+    private _setBackgroundStyles(background: BACKGROUND_TYPE): any {
+        if (this.headerContent) {
+            switch (background) {
+                case 'transparent':
+                    this._addClassNameToCustomElement(
+                        this.headerContent.nativeElement,
+                        CLASS_NAME.dynamicPageCollapsibleHeaderTransparentBg
+                    );
+                    break;
+                case 'list':
+                case 'solid':
+                default:
+                    removeClassNameFromElement(
+                        this._renderer,
+                        this.headerContent.nativeElement,
+                        CLASS_NAME.dynamicPageCollapsibleHeaderTransparentBg
+                    );
+                    break;
+            }
         }
     }
 
-    _setSize(sizeType: RESPONSIVE_SIZE): any {
+    /**
+     * @hidden
+     * sets the padding classes
+     * @param sizeType
+     */
+    private _setSize(sizeType: RESPONSIVE_SIZE): any {
         if (this.headerContent) {
             switch (sizeType) {
                 case 'small':
-                    this._addClassNameToElement(CLASS_NAME.dynamicPageHeaderSmall, this.headerContent);
+                    this._addClassNameToCustomElement(
+                        this.headerContent.nativeElement,
+                        CLASS_NAME.dynamicPageCollapsibleHeaderSmall
+                    );
                     break;
                 case 'medium':
-                    this._addClassNameToElement(CLASS_NAME.dynamicPageHeaderMedium, this.headerContent);
+                    this._addClassNameToCustomElement(
+                        this.headerContent.nativeElement,
+                        CLASS_NAME.dynamicPageCollapsibleHeaderMedium
+                    );
 
                     break;
                 case 'large':
-                    this._addClassNameToElement(CLASS_NAME.dynamicPageHeaderLarge, this.headerContent);
+                    this._addClassNameToCustomElement(
+                        this.headerContent.nativeElement,
+                        CLASS_NAME.dynamicPageCollapsibleHeaderLarge
+                    );
 
                     break;
                 case 'extra-large':
                 default:
-                    this._addClassNameToElement(CLASS_NAME.dynamicPageHeaderExtraLarge, this.headerContent);
-
+                    this._addClassNameToCustomElement(
+                        this.headerContent.nativeElement,
+                        CLASS_NAME.dynamicPageCollapsibleHeaderExtraLarge
+                    );
                     break;
             }
         }
@@ -299,14 +381,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     }
 
     /**@hidden */
-    private _addClassNameToHostElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
-    }
-    /**@hidden */
-    private _removeClassNameToHostElement(className: string): void {
-        this._renderer.removeClass(this._elementRef.nativeElement, className);
-    }
-    /**@hidden */
     private _setStyleToHostElement(attribute: string, value: any): void {
         this._renderer.setStyle(this._elementRef.nativeElement, attribute, value);
     }
@@ -314,12 +388,8 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     private _removeStyleFromHostElement(styleName: string): void {
         this._renderer.removeStyle(this._elementRef.nativeElement, styleName);
     }
-
-    private _addClassNameToElement(className: string, element: ElementRef<HTMLElement>): void {
-        this._renderer.addClass(element.nativeElement, className);
-    }
-
-    private _removeClassNameFromElement(className: string, element: ElementRef<HTMLElement>): void {
-        this._renderer.removeClass(element.nativeElement, className);
+    /**@hidden */
+    private _addClassNameToCustomElement(element: Element, className: string): void {
+        addClassNameToElement(this._renderer, element, className);
     }
 }

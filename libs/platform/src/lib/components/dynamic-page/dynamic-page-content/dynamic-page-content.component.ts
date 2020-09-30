@@ -1,6 +1,5 @@
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -11,12 +10,10 @@ import {
     OnInit,
     Renderer2,
     TemplateRef,
-    ViewChild,
-    ContentChild
+    ViewChild
 } from '@angular/core';
 import { BACKGROUND_TYPE, CLASS_NAME, DYNAMIC_PAGE_CHILD_TOKEN, RESPONSIVE_SIZE } from '../constants';
 import { DynamicPageService } from '../dynamic-page.service';
-import { TabPanelComponent } from '@fundamental-ngx/core';
 import { addClassNameToElement } from '../utils';
 
 @Component({
@@ -58,7 +55,7 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     /**
      * tracking the background value
      */
-    _background: BACKGROUND_TYPE;
+    private _background: BACKGROUND_TYPE;
 
     /**
      * sets background for content to List, Transparent or Solid background color.
@@ -79,7 +76,7 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     /**
      * tracks the size for responsive padding
      */
-    _size: RESPONSIVE_SIZE;
+    private _size: RESPONSIVE_SIZE;
 
     /**
      * sets size which in turn adds corresponding padding for the size type.
@@ -109,6 +106,7 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
 
     /**@hidden */
     ngOnInit(): void {
+        this._addClassNameToHostElement(CLASS_NAME.dynamicPageContent);
         if (this.background) {
             this._setBackgroundStyles(this.background);
         }
@@ -118,10 +116,11 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     }
 
     /**
+     * @hidden
      * sets the style classes for background property
      * @param background
      */
-    _setBackgroundStyles(background: BACKGROUND_TYPE): any {
+    private _setBackgroundStyles(background: BACKGROUND_TYPE): any {
         switch (background) {
             case 'transparent':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentTransparentBg);
@@ -138,10 +137,11 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     }
 
     /**
+     * @hidden
      * sets the padding classes
      * @param sizeType
      */
-    _setSize(sizeType: RESPONSIVE_SIZE): any {
+    private _setSize(sizeType: RESPONSIVE_SIZE): any {
         switch (sizeType) {
             case 'small':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaSmall);
@@ -157,6 +157,13 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaExtraLarge);
                 break;
         }
+    }
+
+    /**
+     * get reference to this element
+     */
+    getElementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
     }
 
     /**@hidden */

@@ -1,6 +1,3 @@
-<!-- <ng-content></ng-content> -->
-<!-- <div class="fd-dynamic-page__content"> -->
-<!-- <ng-template let-tabLabel="tabLabel" #myTemplateRef> -->
 <ng-container *ngIf="tabLabel">
     <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
 </ng-container>
@@ -8,7 +5,4 @@
 <ng-container *ngIf="!tabLabel">
     <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
 </ng-container>
-<!-- <ng-template #contentTpl><ng-content></ng-content></ng-template> -->
 <ng-template #contentTemplate><ng-content></ng-content></ng-template>
-<!-- </div> -->
-<!-- </ng-template> -->
