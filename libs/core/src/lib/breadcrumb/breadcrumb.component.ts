@@ -18,6 +18,7 @@ import { RtlService } from '../utils/services/rtl.service';
 import { BehaviorSubject } from 'rxjs';
 import { KeyUtil } from '../utils/public_api';
 import { MenuComponent } from '../menu/menu.component';
+import { Placement } from 'popper.js';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -63,7 +64,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     previousContainerWidth: number;
 
     /** @hidden */
-    placement$: BehaviorSubject<string> = new BehaviorSubject<string>('bottom-start');
+    placement$ = new BehaviorSubject<Placement>('bottom-start');
 
     /**
      * The element to act as the breadcrumb container. When provided, the breadcrumb's responsive collapsing behavior
