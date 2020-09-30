@@ -1,18 +1,10 @@
-import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, AfterViewInit, HostBinding } from '@angular/core';
+import {
+    Component, Input, Output, EventEmitter, ElementRef,
+    ChangeDetectorRef, AfterViewInit, HostBinding
+} from '@angular/core';
+import { GlyphPosition, ButtonType } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
 
-export type ButtonType =
-    | ''
-    | 'standard'
-    | 'positive'
-    | 'negative'
-    | 'attention'
-    | 'ghost'
-    | 'transparent'
-    | 'emphasized'
-    | 'menu';
-
-export type GlyphPosition = 'before' | 'after';
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
@@ -22,7 +14,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
 
     /** Position of glyph related to text */
     @Input()
-    public glyphPosition: GlyphPosition = 'before';
+    glyphPosition: GlyphPosition = 'before';
 
     /**
     * Text rendered inside button component
@@ -42,7 +34,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      'transparent', 'emphasized','menu'.
      *Leave empty for default (standard button).'*/
     @Input()
-    buttonType: ButtonType;
+    buttonType: ButtonType = 'standard';
 
     /** arialabel, tooltip for truncated text
      * for acccesiblity of the element */
