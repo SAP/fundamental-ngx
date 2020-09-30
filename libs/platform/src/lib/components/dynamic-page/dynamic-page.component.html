@@ -1,8 +1,5 @@
 <!-- <ng-container> -->
 <div class="fd-dynamic-page" [attr.aria-label]="ariaLabel" #pageWindow>
-    <ng-container *ngIf="summaryLine ? true : false">
-        <ng-content select="fdp-dynamic-page-summarized-title"></ng-content>
-    </ng-container>
     <div (click)="toggleCollapse()">
         <ng-content select="fdp-dynamic-page-title"></ng-content>
     </div>
@@ -31,9 +28,7 @@
                     <!-- <fdp-dynamic-page-content #tabContent> -->
                     <!-- <ng-template fdTemplate="conteent"> -->
                     <fdp-dynamic-page-tabbed-content [background]="background" [size]="size">
-                        <ng-container
-                            *ngTemplateOutlet="tab.contentTemplate; context: { tabLabel: tabLabel }"
-                        ></ng-container>
+                        <ng-container *ngTemplateOutlet="tab.contentTemplate"></ng-container>
                     </fdp-dynamic-page-tabbed-content>
                     <!-- </ng-template> -->
                     <!-- </fdp-dynamic-page-content> -->

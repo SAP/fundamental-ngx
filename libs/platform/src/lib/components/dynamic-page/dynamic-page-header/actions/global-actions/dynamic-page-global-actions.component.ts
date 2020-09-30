@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, Input } from '@angular/core';
 
 import { CLASS_NAME } from '../../../constants';
+import { addClassNameToElement } from '../../../utils';
 
 @Component({
     selector: 'fdp-dynamic-page-global-actions',
@@ -13,11 +14,6 @@ export class DynamicPageGlobalActionsComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.dynamicPageGlobalActions);
-    }
-
-    /**@hidden */
-    private _addClassNameToHostElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
+        addClassNameToElement(this._renderer, this._elementRef.nativeElement, CLASS_NAME.dynamicPageGlobalActions);
     }
 }

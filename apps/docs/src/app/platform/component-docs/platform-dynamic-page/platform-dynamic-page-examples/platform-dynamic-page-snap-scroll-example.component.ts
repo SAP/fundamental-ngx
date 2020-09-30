@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector: 'fdp-dynamic-page-example',
-    templateUrl: './platform-dynamic-page-example.component.html',
+    selector: 'fdp-dynamic-page-snap-scroll-example',
+    templateUrl: './platform-dynamic-page-snap-scroll-example.component.html',
+    styleUrls: ['./platform-dynamic-page-snap-scroll-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformDynamicPageExampleComponent {
+export class PlatformDynamicPageSnapScrollExampleComponent {
     onCollapseChange(event: Event): any {
         console.log('collapse changed');
     }

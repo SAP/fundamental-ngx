@@ -17,6 +17,7 @@ import {
 import { BACKGROUND_TYPE, CLASS_NAME, DYNAMIC_PAGE_CHILD_TOKEN, RESPONSIVE_SIZE } from '../constants';
 import { DynamicPageService } from '../dynamic-page.service';
 import { TabPanelComponent } from '@fundamental-ngx/core';
+import { addClassNameToElement } from '../utils';
 
 @Component({
     selector: 'fdp-dynamic-page-content',
@@ -30,52 +31,39 @@ import { TabPanelComponent } from '@fundamental-ngx/core';
         }
     ]
 })
-export class DynamicPageContentComponent extends CdkScrollable implements OnInit, AfterViewInit, OnDestroy {
+export class DynamicPageContentComponent extends CdkScrollable implements OnInit, OnDestroy {
+    /**
+     * label for the tab. If label is provided, tab navigation will be internally set up.
+     */
     @Input()
     tabLabel: string;
-    // set tabLabel(label: string) {
-    //     if (label) {
-    //         this._label = label;
-    //     }
-    // }
 
-    // get tabLabel(): string {
-    //     return this._label;
-    // }
-
+    /**
+     *  sets the selected tab index as the active one.
+     */
     @Input()
     activeTab = 0;
 
-    private _label: string;
+    /**
+     * gets the underlying cdk scrollable field
+     */
     @ViewChild(CdkScrollable)
     cdkScrollable: CdkScrollable;
 
-    toggledVal = false;
-
-    @ViewChild('dynPage')
-    dynPage: ElementRef;
-    isVisible = true;
-
-    /** @hidden */
-    // @ViewChild('tabbed')
-    // contentTemplateRef: TemplateRef<any>;
-    /** @hidden */
-    // @ViewChild('contentTpl')
-    // contentTemplate: TemplateRef<any>;
-
-    // @ViewChild('contentTemplate')
-    // contentTemplate: TemplateRef<any>;
-
+    /**
+     * the underlying content template
+     */
     @ViewChild(TemplateRef) contentTemplate: TemplateRef<any>;
 
-    /** @hidden */
-    @ViewChild(TabPanelComponent)
-    content: TabPanelComponent;
-
-    tab: TabPanelComponent;
-
+    /**
+     * tracking the background value
+     */
     _background: BACKGROUND_TYPE;
 
+    /**
+     * sets background for content to List, Transparent or Solid background color.
+     * Default is `solid`.
+     */
     @Input()
     set background(backgroundType: BACKGROUND_TYPE) {
         if (backgroundType) {
@@ -87,8 +75,16 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     get background(): BACKGROUND_TYPE {
         return this._background;
     }
+
+    /**
+     * tracks the size for responsive padding
+     */
     _size: RESPONSIVE_SIZE;
 
+    /**
+     * sets size which in turn adds corresponding padding for the size type.
+     * size can be `small`, `medium`, `large`, or `extra-large`.
+     */
     @Input()
     set size(sizeType: RESPONSIVE_SIZE) {
         if (sizeType) {
@@ -100,6 +96,7 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     get size(): RESPONSIVE_SIZE {
         return this._size;
     }
+
     constructor(
         public _elementRef: ElementRef<HTMLElement>,
         public _renderer: Renderer2,
@@ -108,171 +105,67 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
         public _dynamicPageService: DynamicPageService
     ) {
         super(_elementRef, scrollDispatcher, zone);
-        // this._setAttributeToHostElement('cdkScrollable', '');
-        // this.scrollDispatcher.register(this.scrollable);
-        // this._dynamicPageService.$toggle.subscribe((val) => {
-        //     console.log('subscriibied to dyn page serviicee in content' + val);
-        //     this.toggledVal = val;
-        // });
-        // this.scrollDispatcher.scrolled().subscribe((cdk: CdkScrollable) => {
-        //     this.zone.run(() => {
-        //         // Your update here!
-        //         console.log('scrolled from ' + cdk.getElementRef().nativeElement.innerHTML);
-        //         // improperly used, currently detecting doc scroll.
-        //         // this._dynamicPageService.toggleHeader(!this.toggledVal);
-        //     });
-        // });
     }
 
+    /**@hidden */
     ngOnInit(): void {
-        // this._addClassNameToHostElement(CLASS_NAME.dynamicPageContent);
         if (this.background) {
             this._setBackgroundStyles(this.background);
         }
         if (this.size) {
             this._setSize(this.size);
         }
-        // if (this.tabLabel) {
-        // add tabbed content
-        // todo add to the fd-tab class properly
-        // this._addClassNameToHostElement(CLASS_NAME.dynamicPageTabs);
-        // this._removeClassNameToHostElement(CLASS_NAME.dynamicPageContent);
-        // this._addClassNameToHostElement(CLASS_NAME.dynamicPageTabsExtraLarge);
-        // this._removeClassNameToHostElement(CLASS_NAME.dynamicPageContentExtraLarge);
-
-        // this._setStyleToHostElement('overflow', 'scroll');
-        // }
     }
 
-    // ngAfterViewInit(): void{
-    //     this.content.expanded =
-    // }
-
+    /**
+     * sets the style classes for background property
+     * @param background
+     */
     _setBackgroundStyles(background: BACKGROUND_TYPE): any {
-        const hostElement = this._elementRef.nativeElement.querySelector('.fd-dynamic-page__content');
         switch (background) {
             case 'transparent':
-                this._addClassNameToHostElement(hostElement, CLASS_NAME.dynamicPageContentTransparentBg);
+                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentTransparentBg);
                 break;
             case 'list':
-                this._addClassNameToHostElement(hostElement, CLASS_NAME.dynamicPageContentListBg);
+                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentListBg);
                 break;
             case 'solid':
             default:
-                this._removeClassNameToHostElement(hostElement, CLASS_NAME.dynamicPageContentTransparentBg);
-                this._removeClassNameToHostElement(hostElement, CLASS_NAME.dynamicPageContentListBg);
+                this._removeClassNameToHostElement(CLASS_NAME.dynamicPageContentTransparentBg);
+                this._removeClassNameToHostElement(CLASS_NAME.dynamicPageContentListBg);
                 break;
         }
     }
+
+    /**
+     * sets the padding classes
+     * @param sizeType
+     */
     _setSize(sizeType: RESPONSIVE_SIZE): any {
-        const hostElement = this._elementRef.nativeElement.querySelector('.fd-dynamic-page__content');
         switch (sizeType) {
             case 'small':
-                this._addClassNameToHostElement(hostElement, CLASS_NAME.dynamicPageContentAreaSmall);
+                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaSmall);
                 break;
             case 'medium':
-                this._addClassNameToHostElement(hostElement, CLASS_NAME.dynamicPageContentAreaMedium);
+                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaMedium);
                 break;
             case 'large':
-                this._addClassNameToHostElement(hostElement, CLASS_NAME.dynamicPageContentAreaLarge);
+                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaLarge);
                 break;
             case 'extra-large':
             default:
-                this._addClassNameToHostElement(hostElement, CLASS_NAME.dynamicPageContentAreaExtraLarge);
+                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaExtraLarge);
                 break;
         }
     }
-    ngAfterViewInit(): void {
-        // this.scrollDispatcher.register(this.cdkScrollable);
-        // console.log('has?' + this.scrollDispatcher.scrollContainers.has(this.cdkScrollable));
-        // this.scrollDispatcher.scrolled(100).subscribe((cdk: CdkScrollable) => {
-        //     this.zone.run(() => {
-        //         // Your update here!
-        //         console.log('scrolled' + cdk);
-        //         // improperly used, currently detecting doc scroll.
-        //         const scrollPosition = cdk.getElementRef().nativeElement.scrollTop;
-        //         console.log(scrollPosition);
-        //         this._dynamicPageService.toggleHeader(!this.toggledVal);
-        //     });
-        // });
-        // this.scrollDispatcher.
-        // this.scrollDispatcher.scrolled().subscribe((cdk: CdkScrollable) => {
-        //     this.zone.run(() => {
-        //         // Your update here!
-        //         console.log('scrolled');
-        //     });
-        // });
-        // this.scrollable.elementScrolled().subscribe((scrolled) => console.log('scrolled', scrolled));
-        // this.scrollable.elementScrolled().subscribe((scrolled) => {
-        //     this.zone.run(() => {
-        //         // Your update here!
-        //         console.log('scrolled');
-        //         // improperly used, currently detecting doc scroll.
-        //     });
-        // });
-        console.log('in after viieiw');
-        // const scroll$ = fromEvent(window, 'scroll').pipe(
-        //     throttleTime(10),
-        //     map(() => window.pageYOffset),
-        //     pairwise(),
-        //     map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
-        //     distinctUntilChanged(),
-        //     share()
-        // );
 
-        // const scrollUp$ = scroll$.pipe(filter((direction) => direction === Direction.Up));
-
-        // const scrollDown = scroll$.pipe(filter((direction) => direction === Direction.Down));
-
-        // scrollUp$.subscribe(() => {
-        //     console.log('UPPPP');
-        //     this.isVisible = true;
-        //     this._dynamicPageService.toggleHeader(!this.toggledVal);
-        // });
-        // scrollDown.subscribe(() => (this.isVisible = false));
-
-        // this works in parent scroll
-        // this.zone.run(() => {
-        //     const content = document.querySelector('.fd-dynamic-page__content');
-
-        //     const scroll$ = fromEvent(content, 'scroll').pipe(
-        //         throttleTime(10),
-        //         map(() => content.scrollTop),
-        //         pairwise(),
-        //         map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
-        //         distinctUntilChanged(),
-        //         share()
-        //     );
-        //     const scrollUp$ = scroll$.pipe(filter((direction) => direction === Direction.Up));
-        //     const scrollDown$ = scroll$.pipe(filter((direction) => direction === Direction.Down));
-        //     scrollUp$.subscribe(() => {
-        //         console.log('UPPPP');
-        //         this.isVisible = true;
-        //         this._dynamicPageService.toggleHeader(!this.toggledVal);
-        //     });
-        //     scrollDown$.subscribe(() => (this.isVisible = false));
-        //     console.log(scroll$);
-        // });
-    }
-    // @HostBinding('@toggle')
-    // get toggle(): VisibilityState {
-    //     return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
-    // }
-
-    // @HostListener('scroll', ['$event'])
-    // onElementScroll($event): void {
-    //     console.log('scrollinig');
-    // }
-
+    /**@hidden */
     ngOnDestroy(): void {
         this.scrollDispatcher.deregister(this.cdkScrollable);
     }
+
     /**@hidden */
-    protected _addClassNameToHostElement(element: Element, className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
-    }
-    /**@hidden */
-    protected _removeClassNameToHostElement(element: Element, className: string): void {
+    protected _removeClassNameToHostElement(className: string): void {
         this._renderer.removeClass(this._elementRef.nativeElement, className);
     }
     /**@hidden */
@@ -282,5 +175,10 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     /**@hidden */
     protected _setStyleToHostElement(attribute: string, value: any): void {
         this._renderer.setStyle(this._elementRef.nativeElement, attribute, value);
+    }
+
+    /**@hidden */
+    private _addClassNameToHostElement(className: string): void {
+        addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
     }
 }

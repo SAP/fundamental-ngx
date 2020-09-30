@@ -15,6 +15,7 @@ import {
 import { BACKGROUND_TYPE, CLASS_NAME, RESPONSIVE_SIZE } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { BreadcrumbComponent } from '@fundamental-ngx/core';
+import { addClassNameToElement, removeClassNameFromElement } from '../../utils';
 
 @Component({
     selector: 'fdp-dynamic-page-title',
@@ -23,6 +24,10 @@ import { BreadcrumbComponent } from '@fundamental-ngx/core';
     encapsulation: ViewEncapsulation.None
 })
 export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
+    /**
+     * sets background for content to List, Transparent or Solid background color.
+     * Default is `solid`.
+     */
     @Input()
     set background(backgroundType: BACKGROUND_TYPE) {
         if (backgroundType) {
@@ -35,6 +40,10 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         return this._background;
     }
 
+    /**
+     * sets size which in turn adds corresponding padding for the size type.
+     * size can be `small`, `medium`, `large`, or `extra-large`.
+     */
     @Input()
     set size(sizeType: RESPONSIVE_SIZE) {
         if (sizeType) {
@@ -47,10 +56,6 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         return this._size;
     }
 
-    // toggledVal = false;
-    // @ViewChild(DynamicPageHeaderComponent)
-    // private headerComponent: DynamicPageHeaderComponent;
-
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -58,12 +63,7 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         public focusMonitor: FocusMonitor,
         private _dynamicPageService: DynamicPageService,
         private _ngZone: NgZone
-    ) {
-        // this._dynamicPageService.$toggle.subscribe((val) => {
-        //     console.log('subscriibied to dyn page serviicee in content' + val);
-        //     this.toggledVal = val;
-        // });
-    }
+    ) {}
 
     @Input()
     title: string;
@@ -71,8 +71,14 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
     @Input()
     subtitle: string;
 
+    /**
+     * tracking the background value
+     */
     _background: BACKGROUND_TYPE;
 
+    /**
+     * tracks the size for responsive padding
+     */
     _size: RESPONSIVE_SIZE;
 
     ngAfterViewInit(): void {
@@ -82,32 +88,18 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
                 if (origin === 'keyboard') {
                     this._dynamicPageService.expandHeader();
                 }
-                //   this.origin = this.formatOrigin(origin);
-                //   this._cdr.markForCheck();
             })
         );
 
         const breadcrumb = this._elementRef.nativeElement.querySelector('fd-breadcrumb');
         if (breadcrumb) {
-            console.log('valid breadcrum');
-            this._renderer.addClass(breadcrumb, CLASS_NAME.dynamicPageBreadcrumb);
+            this._addClassNameToCustomElement(breadcrumb, CLASS_NAME.dynamicPageBreadcrumb);
         }
     }
 
     getLabel?(): string {
         throw new Error('Method not implemented.');
     }
-
-    // focus(): void {
-    //     this._elementRef.nativeElement.focus();
-    //     console.log('focused, do somethiing here like opening header');
-    // }
-
-    // toggleCollapse(): any {
-    //     console.log('ini tiitle');
-
-    //     this.headerComponent.toggleCollapse();
-    // }
 
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
@@ -117,7 +109,6 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleArea); // not getting this to work right
         this._setAttributeToHostElement('tabindex', 0);
 
-        // this._addFocusListener();
         if (this.background) {
             this._setBackgroundStyles(this.background);
         }
@@ -135,7 +126,11 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
             case 'list':
             case 'solid':
             default:
-                this._removeClassNameToHostElement(CLASS_NAME.dynamicPageTitleAreaTransparentBg);
+                removeClassNameFromElement(
+                    this._renderer,
+                    this._elementRef.nativeElement,
+                    CLASS_NAME.dynamicPageTitleAreaTransparentBg
+                );
                 break;
         }
     }
@@ -157,22 +152,19 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
                 break;
         }
     }
-    /**@hidden */
-    private _addClassNameToHostElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
-    }
 
-    /**@hidden */
-    private _removeClassNameToHostElement(className: string): void {
-        this._renderer.removeClass(this._elementRef.nativeElement, className);
-    }
     /**@hidden */
     private _setAttributeToHostElement(attribute: string, value: any): void {
         this._renderer.setAttribute(this._elementRef.nativeElement, attribute, value);
     }
-    // private _addFocusListener(): void {
-    //     this._renderer.listen(this._elementRef.nativeElement, 'focus', (event: Event) => {
-    //         console.log('focused called' + event.type);
-    //     });
-    // }
+
+    /**@hidden */
+    private _addClassNameToHostElement(className: string): void {
+        addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
+    }
+
+    /**@hidden */
+    private _addClassNameToCustomElement(element: Element, className: string): void {
+        addClassNameToElement(this._renderer, element, className);
+    }
 }

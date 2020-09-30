@@ -1,7 +1,7 @@
 <fd-docs-section-title id="dynamicPageBasic" componentName="dynamicPage">
     Basic Dynamic Page
 </fd-docs-section-title>
-<description> It's possible to set height of panel content by <code>[contentHeight]</code> option. </description>
+<description> </description>
 <component-example>
     <fdp-dynamic-page-example></fdp-dynamic-page-example>
 </component-example>
@@ -9,14 +9,40 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="dynamicPageSnapScroll" componentName="dynamicPage">
+    Dynamic Page that snaps on scrolling
+</fd-docs-section-title>
+<description>
+    Other than the expand/collapse/pin buttons and Snap on Click feature, scrolling the content also snaps the header.
+    Scrolling down will hide the header, and scrolling back up to the top will bring back the header into view.
+</description>
+<component-example>
+    <fdp-dynamic-page-snap-scroll-example></fdp-dynamic-page-snap-scroll-example>
+</component-example>
+<code-example [exampleFiles]="dynamicPageSnapScroll"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="dynamicPageTabbed" componentName="dynamicPage">
     Tabbed Dynamic Page
 </fd-docs-section-title>
-<description>
-    It's possible to specify the <code>[tabLabel]</code> option to internally set up tabbed content for the
-    page.</description
->
+<description> Specify the <code>[tabLabel]</code> option to internally set up tabbed content for the page.</description>
 <component-example>
-    <fdp-dynamic-page-tabbed></fdp-dynamic-page-tabbed>
+    <fdp-dynamic-page-tabbed-example></fdp-dynamic-page-tabbed-example>
 </component-example>
 <code-example [exampleFiles]="dynamicPageTabbed"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dynamicPageResponsivePadding" componentName="dynamicPage">
+    Page Responsive Behavior
+</fd-docs-section-title>
+<description>
+    The left and right paddings of the Dynamic Page can be adjusted according to the width of the container with the
+    <code>[size]</code> property. Available values are: <code>small</code>, <code>medium</code>, <code>large</code> and
+    <code>extra-large</code>
+</description>
+<component-example>
+    <fdp-dynamic-page-responsive-padding-example></fdp-dynamic-page-responsive-padding-example>
+</component-example>
+<code-example [exampleFiles]="dynamicPageResponsivePadding"></code-example>

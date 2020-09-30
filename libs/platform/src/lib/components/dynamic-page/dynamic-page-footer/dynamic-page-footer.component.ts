@@ -4,7 +4,7 @@ import { CLASS_NAME, DYNAMIC_PAGE_CHILD_TOKEN } from '../constants';
 
 @Component({
     selector: 'fdp-dynamic-page-footer',
-    template: '<ng-content></ng-content>',
+    template: '<div style="position:relative"><ng-content></ng-content></div>',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {

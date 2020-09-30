@@ -1,11 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector: 'fdp-dynamic-page-example',
-    templateUrl: './platform-dynamic-page-example.component.html',
+    selector: 'fdp-dynamic-page-responsive-padding-example',
+    templateUrl: './platform-dynamic-page-responsive-padding-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformDynamicPageExampleComponent {
+export class PlatformDynamicPageResponsivePaddingExampleComponent {
     onCollapseChange(event: Event): any {
         console.log('collapse changed');
     }

@@ -11,7 +11,9 @@ import { PlatformDynamicPageDocsComponent } from './platform-dynamic-page-docs.c
 import { PlatformDynamicPageExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-example.component';
 import { BreadcrumbModule, ToolbarModule, BarModule } from '@fundamental-ngx/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { PlatformDynamicPageTabbedComponent } from './platform-dynamic-page-examples/platform-dynamic-page-tabbed.component';
+import { PlatformDynamicPageTabbedExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component';
+import { PlatformDynamicPageSnapScrollExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component';
+import { PlatformDynamicPageResponsivePaddingExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component';
 
 const routes: Routes = [
     {
@@ -40,7 +42,9 @@ const routes: Routes = [
         PlatformDynamicPageDocsComponent,
         PlatformDynamicPageHeaderComponent,
         PlatformDynamicPageExampleComponent,
-        PlatformDynamicPageTabbedComponent
+        PlatformDynamicPageSnapScrollExampleComponent,
+        PlatformDynamicPageTabbedExampleComponent,
+        PlatformDynamicPageResponsivePaddingExampleComponent
     ]
 })
 export class PlatformDynamicPageDocsModule {}

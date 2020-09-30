@@ -1,20 +1,21 @@
-<!-- <fdp-dynamic-page></fdp-dynamic-page> -->
-<!-- <div> -->
-<fdp-dynamic-page background="list" summaryLine="Summarized tiitle ">
-    <fdp-dynamic-page-title [title]="'Page Title'" [subtitle]="'Page Summary'">
+<fdp-dynamic-page background="list">
+    <fdp-dynamic-page-title
+        title="Balenciaga Tripple S Trainers"
+        subtitle="Oversized multimaterial sneakers with quilted effect"
+    >
         <!-- breadcrumb content -->
         <fd-breadcrumb>
             <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 1</a>
+                <a fd-breadcrumb-link [attr.href]="'#'">Men</a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 2</a>
+                <a fd-breadcrumb-link [attr.href]="'#'">Shoes</a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 3</a>
+                <a fd-breadcrumb-link [attr.href]="'#'">Running Shoes</a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
-                <span>Breadcrumb Level 4</span>
+                <span>Jogging</span>
             </fd-breadcrumb-item>
         </fd-breadcrumb>
 
@@ -22,47 +23,39 @@
             <!-- key information content -->
             Some random stuff here
         </fdp-dynamic-page-key-info>
-        <!-- <div class="fd-dynamic-page__toolbar fd-toolbar fd-toolbar--clear fd-toolbar--transparent">
-            <button class="fd-button fd-button--compact fd-button--positive">Accept</button>
-            <button class="fd-button fd-button--compact fd-button--reject">Reject</button>
-            <div class="fd-dynamic-page__toolbar--actions fd-toolbar fd-toolbar--clear fd-toolbar--transparent">
-                <button class="fd-button fd-button--transparent" aria-label="Survey">
-                    <i class="sap-icon--survey"></i>
-                </button>
-                <button class="fd-button fd-button--transparent" aria-label="Pool">
-                    <i class="sap-icon--pool"></i>
-                </button>
-                <button class="fd-button fd-button--transparent" aria-label="Chart">
-                    <i class="sap-icon--pie-chart"></i>
-                </button>
-            </div>
-        </div> -->
         <fdp-dynamic-page-global-actions>
             <!-- global actions -->
             <fd-toolbar [fdType]="'transparent'" [clearBorder]="true">
-                <button fd-toolbar-item fd-button [compact]="true" [fdType]="'positive'">Accept</button>
-                <button fd-toolbar-item fd-button [compact]="true" [fdType]="'negative'">Reject</button>
-                <!-- <button fd-toolbar-item fd-button [compact]="true">Button</button>
                 <button
                     fd-toolbar-item
                     fd-button
                     [compact]="true"
-                    [glyph]="'cart'"
-                    aria-label="Add to Cart"
-                    title="Add to Cart"
-                ></button> -->
+                    [fdType]="'positive'"
+                    (click)="$event.stopPropagation()"
+                >
+                    Accept
+                </button>
+                <button
+                    fd-toolbar-item
+                    fd-button
+                    [compact]="true"
+                    [fdType]="'negative'"
+                    (click)="$event.stopPropagation()"
+                >
+                    Reject
+                </button>
             </fd-toolbar>
         </fdp-dynamic-page-global-actions>
         <fdp-dynamic-page-layout-actions>
             <!-- layout actions -->
             <fd-toolbar [fdType]="'transparent'" [clearBorder]="true">
-                <button fd-button [fdType]="'transparent'" aria-label="Survey">
+                <button fd-button [fdType]="'transparent'" aria-label="Survey" (click)="$event.stopPropagation()">
                     <i class="sap-icon--survey"></i>
                 </button>
-                <button fd-button [fdType]="'transparent'" aria-label="Pool">
+                <button fd-button [fdType]="'transparent'" aria-label="Pool" (click)="$event.stopPropagation()">
                     <i class="sap-icon--pool"></i>
                 </button>
-                <button fd-button [fdType]="'transparent'" aria-label="Chart">
+                <button fd-button [fdType]="'transparent'" aria-label="Chart" (click)="$event.stopPropagation()">
                     <i class="sap-icon--pie-chart"></i>
                 </button>
             </fd-toolbar>
@@ -75,13 +68,11 @@
         (collapseChange)="onCollapseChange($event)"
     >
         <!-- collapsible header content goes here -->
-        <span
-            >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto perspiciatis,
-            delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit repellendus esse,
-            facere autem optio consequatur nobis?</span
-        >
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto perspiciatis,
+        delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit repellendus esse,
+        facere autem optio consequatur nobis?
     </fdp-dynamic-page-header>
-    <fdp-dynamic-page-content tabLabel="tab1" id="tab_1">
+    <fdp-dynamic-page-content tabLabel="Tab 1" id="tab_1">
         <div class="scrollable-container" cdkScrollable>
             <!-- page content goes here -->
             tab1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam maiores.
@@ -117,9 +108,11 @@
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed odit?
             Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore, eos iusto
             sed.
+            <br />
+            <br />
         </div>
     </fdp-dynamic-page-content>
-    <fdp-dynamic-page-content tabLabel="tab2" id="tab_2">
+    <fdp-dynamic-page-content tabLabel="Tab 2" id="tab_2">
         <div class="scrollable-container" cdkScrollable>
             <!-- page content goes here -->
             tabs 2 Lorem ipsum dolor sasdasit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam
@@ -155,6 +148,8 @@
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed odit?
             Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore, eos iusto
             sed.
+            <br />
+            <br />
         </div>
     </fdp-dynamic-page-content>
     <fdp-dynamic-page-footer>
