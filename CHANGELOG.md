@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.114](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.113...v0.22.0-rc.114) (2020-09-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* side navigation expand icon changed from directive to component
+
+### Bug Fixes
+
+* Show side navigation expand icon ([#3510](https://github.com/SAP/fundamental-ngx/issues/3510)) ([ea73993](https://github.com/SAP/fundamental-ngx/commit/ea73993e5d97f80a7c5a64b2d291b3280e354fc6))
+
 ## [0.22.0-rc.113](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.112...v0.22.0-rc.113) (2020-09-30)
 
 ## [0.22.0-rc.112](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.111...v0.22.0-rc.112) (2020-09-30)
