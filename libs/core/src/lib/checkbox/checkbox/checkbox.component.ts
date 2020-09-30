@@ -6,7 +6,8 @@ import {
     ElementRef,
     forwardRef,
     HostBinding,
-    Input, Optional,
+    Input,
+    Optional,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
