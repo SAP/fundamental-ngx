@@ -59,6 +59,7 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
                             [(ngModel)]="column.checked"
                             (ngModelChange)="handleChange(column, $event)">
                         </fd-checkbox>
+                        <span fd-list-title>{{column.key}}</span>
                     </li>
                 </ul>
             </fd-dialog-body>
