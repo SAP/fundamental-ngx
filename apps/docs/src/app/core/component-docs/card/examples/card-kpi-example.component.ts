@@ -34,6 +34,7 @@ export class CardKpiExampleComponent implements AfterViewInit {
                         this.changeDetectorRef.markForCheck();
                     }
                 }),
+                // postpone until the next tick to get view updated
                 delay(0)
             )
             .subscribe((visualization) => {
