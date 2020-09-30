@@ -1,23 +1,14 @@
 .custom-select-trigger-styling {
     display: flex;
+    align-items: center;
+
+    span {
+        color: darkgrey;
+        padding-left: 0.5rem;
+    }
 
     fd-icon {
         display: flex;
-        padding: 0 .5rem;
-        animation: spin 1s infinite ease-in-out;
-    }
-
-    span {
-        padding: 0 .5rem;
-        color: darkgrey;
-    }
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
+        padding-right: 0.5rem;
     }
 }
