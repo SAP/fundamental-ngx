@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.110...v0.22.0-rc.111) (2020-09-30)
+
+
+### Bug Fixes
+
+* fix files validation on file uploader, add unique ID ([#3207](https://github.com/SAP/fundamental-ngx/issues/3207)) ([2b98f29](https://github.com/SAP/fundamental-ngx/commit/2b98f29e2003328ca66d3ad7319192c295689517))
+
 ## [0.22.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.109...v0.22.0-rc.110) (2020-09-30)
 
 ## [0.22.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.108...v0.22.0-rc.109) (2020-09-30)
