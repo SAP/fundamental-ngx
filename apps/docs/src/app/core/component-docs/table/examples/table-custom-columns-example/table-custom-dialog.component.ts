@@ -7,42 +7,47 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <ng-template fdTemplate="header">
-                    <div fd-bar-middle>
-                        <fd-bar-element>
-                            <h1 fd-dialog-title>Table Customization</h1>
-                        </fd-bar-element>
-                    </div>
-                </ng-template>
+                <h1 fd-dialog-title>Table Customization</h1>
                 <ng-template fdTemplate="subheader">
                     <div fd-bar-middle>
                         <fd-bar-element>
-                            <button fd-button [compact]="true" (click)="sortAlphabetically(true)" fdType="transparent"
-                                    [glyph]="'arrow-top'"></button>
-                            <button fd-button [compact]="true" (click)="sortAlphabetically()" fdType="transparent"
-                                    [glyph]="'arrow-bottom'"></button>
+                            <button fd-button
+                                    fdType="transparent"
+                                    glyph="arrow-top"
+                                    [compact]="true"
+                                    (click)="sortAlphabetically(true)">
+                            </button>
+                            <button fd-button
+                                    fdType="transparent"
+                                    glyph="arrow-bottom"
+                                    [compact]="true"
+                                    (click)="sortAlphabetically()">
+                            </button>
                         </fd-bar-element>
                         <fd-bar-element [fullWidth]="true">
-                            <fd-input-group name="filter" [(ngModel)]="filterPhrase" [compact]="true" [glyph]="'search'"></fd-input-group>
+                            <fd-input-group glyph="search"
+                                            name="filter"
+                                            [compact]="true"
+                                            [(ngModel)]="filterPhrase">
+                            </fd-input-group>
                         </fd-bar-element>
                     </div>
                 </ng-template>
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <fd-message-strip [type]="'error'" [dismissible]="false" *ngIf="showError">
+                <fd-message-strip *ngIf="showError" type="error" [dismissible]="false">
                     At least 1 column has to be selected
                 </fd-message-strip>
-                <ul cdkDropList (cdkDropListDropped)="dropHandle($event)" fd-list>
 
+                <ul fd-list [selection]="true" cdkDropList (cdkDropListDropped)="dropHandle($event)">
                     <li fd-list-item [selected]="allSelected">
                         <fd-checkbox
-                                name="All Keys"
-                                label="allKeys"
-                                [ngModel]="allSelected"
-                                (ngModelChange)="handleAllChange($event)"
-                        >
+                            name="All Keys"
+                            [ngModel]="allSelected"
+                            (ngModelChange)="handleAllChange($event)">
                         </fd-checkbox>
+                        <span fd-list-title>All Keys</span>
                     </li>
 
                     <li *ngFor="let column of columns | filter : filterPhrase : 'key'"
@@ -50,11 +55,9 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
                         fd-list-item
                         [selected]="column.checked">
                         <fd-checkbox
-                                name="{{column.key}}"
-                                label="{{column.key}}"
-                                [(ngModel)]="column.checked"
-                                (ngModelChange)="handleChange(column, $event)"
-                        >
+                            [name]="column.key"
+                            [(ngModel)]="column.checked"
+                            (ngModelChange)="handleChange(column, $event)">
                         </fd-checkbox>
                     </li>
                 </ul>
@@ -63,22 +66,22 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
             <fd-dialog-footer>
                 <fd-dialog-footer-button>
                     <button
-                            fd-button
-                            fd-dialog-decisive-button
-                            label="Save and Close"
-                            fdType="emphasized"
-                            [compact]="true"
-                            (click)="save()">
+                        fd-button
+                        fd-dialog-decisive-button
+                        fdType="emphasized"
+                        label="Save"
+                        [compact]="true"
+                        (click)="save()">
                     </button>
                 </fd-dialog-footer-button>
                 <fd-dialog-footer-button>
                     <button
-                            fd-button
-                            fd-dialog-decisive-button
-                            label="Close without Saving"
-                            fdType="transparent"
-                            [compact]="true"
-                            (click)="dismiss()">
+                        fd-button
+                        fd-dialog-decisive-button
+                        fdType="transparent"
+                        label="Cancel"
+                        [compact]="true"
+                        (click)="dismiss()">
                     </button>
                 </fd-dialog-footer-button>
             </fd-dialog-footer>
@@ -86,8 +89,8 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
     `
 })
 export class TableCustomDialogComponent {
-    filterPhrase: string;
     columns: DisplayedColumn[] = [];
+    filterPhrase: string;
     allSelected = false;
     showError = false;
 
@@ -154,6 +157,6 @@ export class TableCustomDialogComponent {
     }
 
     private _isAnySelected(): boolean {
-        return !!this.columns.find(c => c.checked);
+        return this.columns.some(c => c.checked);
     }
 }
