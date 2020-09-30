@@ -64,7 +64,7 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     ariaLabel: string = null;
 
     /** @hidden */
-    numberPipeConfig = '';
+    _numberPipeConfig = '';
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {
@@ -102,7 +102,7 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
 
     /** @hidden */
     buildNumberPipeConfig(): void {
-        this.numberPipeConfig = `0.${this.decimal}-${this.decimal}`;
+        this._numberPipeConfig = `0.${this.decimal}-${this.decimal}`;
     }
 
     /** @hidden */
