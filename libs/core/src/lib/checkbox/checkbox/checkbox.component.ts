@@ -7,12 +7,15 @@ import {
     forwardRef,
     HostBinding,
     Input,
+    Optional,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
-import { compareObjects } from '../../utils/public_api';
+import { compareObjects, KeyUtil } from '../../utils/public_api';
+import { ListItemComponent } from '../../list/list-item/list-item.component';
+import { Platform } from '@angular/cdk/platform';
 
 let checkboxUniqueId = 0;
 
@@ -121,9 +124,11 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden */
     constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
         public elementRef: ElementRef,
-        @Attribute('tabIndexValue') public tabIndexValue: number = 0
+        @Attribute('tabIndexValue') public tabIndexValue: number = 0,
+        private _platform: Platform,
+        private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _listItemComponent: ListItemComponent
     ) {
         this.tabIndexValue = tabIndexValue;
     }
@@ -177,7 +182,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
     public checkByKey(event: KeyboardEvent): void {
-        if (this._isSpaceBarEvent(event) && this._isIE()) {
+        if (this._isSpaceBarEvent(event) && this._platform.TRIDENT) {
             this._nextValueEvent();
             this.muteKey(event);
         }
@@ -212,6 +217,16 @@ export class CheckboxComponent implements ControlValueAccessor {
         this._detectChanges();
     }
 
+    /** Space event should be handled separately, when used inside list component and in firefox browser */
+    handleInputKeyUp(event: KeyboardEvent): void {
+        event.stopPropagation();
+        if (this._listItemComponent &&
+            this._platform.FIREFOX &&
+            KeyUtil.isKey(event, ' ')) {
+            event.preventDefault();
+        }
+    }
+
     /** @hidden Based on current control value sets new control state. */
     private _setState(): void {
         if (this._compare(this.checkboxValue, this.values.trueValue)) {
@@ -229,7 +244,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden */
     private _nextValueEvent(triggeredByClick?: boolean, event?: MouseEvent): void {
-        if (this._isIE() &&
+        if (this._platform.TRIDENT &&
             this._previousState === 'indeterminate' &&
             this.checkboxState === 'indeterminate') {
             this.checkboxState = 'force-checked';
@@ -248,15 +263,6 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Compares values */
     private _compare(val1: any, val2: any): boolean {
         return typeof val1 === 'object' ? compareObjects(val1, val2) : val1 === val2;
-    }
-
-    /** @hidden */
-    private _isIE(): boolean {
-        const ua = window.navigator.userAgent; // Check the userAgent property of the window.navigator object
-        const msie = ua.indexOf('MSIE '); // IE 10 or older
-        const trident = ua.indexOf('Trident/'); // IE 11
-
-        return msie > 0 || trident > 0;
     }
 
     /** @hidden Determines event source based on key code */
