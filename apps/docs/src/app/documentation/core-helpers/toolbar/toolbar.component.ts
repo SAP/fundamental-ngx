@@ -97,6 +97,6 @@ export class ToolbarDocsComponent implements OnInit {
     }
 
     selectVersion(version: any): void {
-        location.assign(version.url);
+        window.open(version.url, '_blank');
     }
 }
