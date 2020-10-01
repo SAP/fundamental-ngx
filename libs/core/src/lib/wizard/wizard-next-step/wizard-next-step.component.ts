@@ -3,8 +3,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-wizard-next-step',
     templateUrl: './wizard-next-step.component.html',
-    encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./wizard-next-step.component.scss']
+    encapsulation: ViewEncapsulation.None
 })
 export class WizardNextStepComponent {
     /**

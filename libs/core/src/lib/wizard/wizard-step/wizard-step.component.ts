@@ -25,8 +25,7 @@ export type StepType = 'completed' | 'current' | 'upcoming' | 'active';
         '[class.fd-wizard__step--active]': 'status === "active"'
     },
     templateUrl: './wizard-step.component.html',
-    encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./wizard-step.component.scss']
+    encapsulation: ViewEncapsulation.None
 })
 export class WizardStepComponent implements OnChanges {
     /**
