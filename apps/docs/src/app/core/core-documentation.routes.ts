@@ -205,6 +205,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'object-marker',
+                loadChildren: () =>
+                    import('./component-docs/object-marker/object-marker-docs.module').then(
+                        (m) => m.ObjectMarkerDocsModule
+                    )
+            },
+            {
                 path: 'object-status',
                 loadChildren: () =>
                     import('./component-docs/object-status/object-status-docs.module').then(
