@@ -50,7 +50,7 @@ export class AppShellHeaderComponent implements OnInit {
     /**
      * @hidden
      */
-    _cssUrl: SafeResourceUrl;
+        _cssUrl: SafeResourceUrl;
 
     constructor(private sanitizer: DomSanitizer,
                 public _appShell: AppShellProviderService,

@@ -9,9 +9,10 @@ import {
     TextMessage
 } from './message-bus';
 import {
-    AppShellModule,
-    MessagingTopics
-} from '@fundamental-ngx/app-shell';
+    AppShellModule
+} from '../../app-shell.module';
+import { MessagingTopics } from '../../api/events/topics.service';
+
 
 describe('MessagingService', () => {
     beforeEach(() => {
