@@ -1,107 +1,79 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ObjectIdentifierComponent } from './object-identifier.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ObjectIdentifierComponent } from './object-identifier.component';
+import { LinkComponent } from '../link/link.component';
 
 @Component({
-    selector: 'fd-test-object-status',
+    selector: 'fd-test-object-identifier',
     template: `
-        <span
-            fd-object-status
-            [status]="status"
-            [glyph]="glyph"
-            [label]="label"
-            [indicationColor]="indicationColor"
-            [clickable]="clickable"
-            [inverted]="inverted"
+        <fd-object-identifier
+            #objectRef
             [large]="large"
-        >
-        </span>
+            [bold]="bold"
+            [description]="description">
+            <a #linkRef fd-link>Link</a>
+        </fd-object-identifier>
     `
 })
-class TestObjectStatusComponent {
-    @ViewChild(ObjectIdentifierComponent, { static: true, read: ElementRef })
-    objectStatusElementRef: ElementRef;
+class TestObjectIdentifierComponent {
 
-    status: 'negative' | 'critical' | 'positive' | 'informative';
-    glyph: string;
-    label: string;
-    indicationColor: number;
-    clickable: boolean;
-    inverted: boolean;
+    @ViewChild('objectRef', { read: ElementRef })
+    objectIdentifierElementRef: ElementRef;
+
+    @ViewChild('linkRef', { read: ElementRef })
+    linkElementRef: ElementRef;
+
+    description: string;
+    bold: boolean;
     large: boolean;
+
+    getTitleElementClassList(): DOMTokenList {
+        const elements = document.getElementsByClassName('fd-object-identifier__title');
+        return elements.item(0).classList;
+    }
 }
 
-describe('ObjectStatusComponent', () => {
-    let objectStatusElementRef: ElementRef;
-    let testComponent: TestObjectStatusComponent;
-    let fixture: ComponentFixture<TestObjectStatusComponent>;
+fdescribe('ObjectIdentifierComponent', () => {
+    let objectIdentifierElementRef: ElementRef;
+    let testComponent: TestObjectIdentifierComponent;
+    let fixture: ComponentFixture<TestObjectIdentifierComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectIdentifierComponent, TestObjectStatusComponent]
+            declarations: [
+                ObjectIdentifierComponent,
+                TestObjectIdentifierComponent,
+                LinkComponent
+            ]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestObjectStatusComponent);
-        objectStatusElementRef = fixture.componentInstance.objectStatusElementRef;
+        fixture = TestBed.createComponent(TestObjectIdentifierComponent);
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
+        objectIdentifierElementRef = fixture.componentInstance.objectIdentifierElementRef;
     });
 
     it('Should create', () => {
         expect(testComponent).toBeTruthy();
-        expect(objectStatusElementRef).toBeTruthy();
     });
 
-    it('Should add status', () => {
-        testComponent.status = 'positive';
+    it('Should add medium class', () => {
+        testComponent.large = false;
         fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--positive')).toBeTrue();
+        expect(testComponent.objectIdentifierElementRef.nativeElement.classList.contains('fd-object-identifier--medium')).toBeTrue();
     });
 
-    it('Should add indication color', () => {
-        testComponent.indicationColor = 2;
+    it('Should add classes to title', () => {
+        testComponent.bold = true;
         fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--indication-2')).toBeTrue();
+        expect(testComponent.getTitleElementClassList().contains('fd-object-identifier__title--bold')).toBeTrue();
     });
 
-    it('Should add icon', () => {
-        testComponent.glyph = 'future';
+    it('Should add class to fd-link', () => {
         fixture.detectChanges();
-        const iconElement = fixture.nativeElement.querySelector('i');
-
-        expect(iconElement).toBeTruthy();
-        expect(iconElement.classList.contains('sap-icon--future')).toBeTrue();
-    });
-
-    it('Should add inverted class', () => {
-        testComponent.inverted = true;
-        fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--inverted')).toBeTrue();
-    });
-
-    it('Should add large design', () => {
-        testComponent.large = true;
-        fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--large')).toBeTrue();
-    });
-
-    it('Should add clickable class', () => {
-        testComponent.clickable = true;
-        fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--link')).toBeTrue();
-    });
-
-    it('Should display label', () => {
-        const label = 'Test label';
-        testComponent.label = label;
-        fixture.detectChanges();
-
-        const labelTextElement = fixture.nativeElement.querySelector('.fd-object-status__text');
-
-        expect(labelTextElement).toBeTruthy();
-        expect(labelTextElement.textContent.trim()).toBe(label);
+        expect(testComponent.linkElementRef.nativeElement.classList.contains('fd-object-identifier__link')).toBeTrue();
     });
 });

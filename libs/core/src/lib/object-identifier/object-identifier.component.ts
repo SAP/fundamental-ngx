@@ -8,7 +8,9 @@ import {
     QueryList,
     AfterContentInit,
     ChangeDetectorRef,
-    OnDestroy, OnChanges, SimpleChanges
+    OnDestroy,
+    OnChanges,
+    SimpleChanges
 } from '@angular/core';
 import { LinkComponent } from '../link/link.component';
 import { startWith, takeUntil } from 'rxjs/operators';
@@ -17,11 +19,9 @@ import { Subject } from 'rxjs';
 @Component({
     selector: 'fd-object-identifier',
     template: `
-        <ng-content select="[fd-object-identifier-title]"></ng-content>
-        <p  class="fd-object-identifier__title"
-            [ngClass]="{
-                'fd-object-identifier__title--bold': bold,
-                'fd-object-identifier__title--link': link
+        <p class="fd-object-identifier__title"
+           [ngClass]="{
+                'fd-object-identifier__title--bold': bold
             }">
             <ng-content></ng-content>
         </p>
@@ -42,10 +42,6 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy, O
     /** Whether the title should be bolded */
     @Input()
     bold = false;
-
-    /** Whether the there is link mode inside object identifier */
-    @Input()
-    link = false;
 
     /** */
     @Input()
