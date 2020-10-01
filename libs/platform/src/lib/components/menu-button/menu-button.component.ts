@@ -9,6 +9,10 @@ import { BaseComponent } from '../base';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuButtonComponent extends BaseComponent {
+    /** Label for menu button */
+    @Input()
+    label: string;
+
     /** text for tooltip */
     @Input()
     title: string;
