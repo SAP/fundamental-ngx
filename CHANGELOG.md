@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.124](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.123...v0.22.0-rc.124) (2020-10-01)
+
+
+### Features
+
+* (Core) component for object marker with document changes ([#3178](https://github.com/SAP/fundamental-ngx/issues/3178)) ([48961d4](https://github.com/SAP/fundamental-ngx/commit/48961d446d3123af4552e1d97b130a61da84fd95))
+
+
+### Bug Fixes
+
+* (platform) Removed Invalid examples and compact menu button fix ([#3363](https://github.com/SAP/fundamental-ngx/issues/3363)) ([80b95f3](https://github.com/SAP/fundamental-ngx/commit/80b95f3589d13890a51c50916023d9f1f0bac288))
+* (platform) set max width to split menu button ([#3362](https://github.com/SAP/fundamental-ngx/issues/3362)) ([95665e3](https://github.com/SAP/fundamental-ngx/commit/95665e315d7ee2a7eda31bdfc54fe09170b78f51))
+* add fix for broken product menu in Shellbar ([#3470](https://github.com/SAP/fundamental-ngx/issues/3470)) ([ef81011](https://github.com/SAP/fundamental-ngx/commit/ef81011c35a6258c119612e73dd772e39741dc99))
+
 ## [0.22.0-rc.123](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.122...v0.22.0-rc.123) (2020-10-01)
 
 
