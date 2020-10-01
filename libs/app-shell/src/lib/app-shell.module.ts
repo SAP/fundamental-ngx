@@ -81,7 +81,8 @@ export class AppShellModule {
                 {
                     provide: AppShellProviderService,
                     useClass: AppShellProviderService,
-                    deps: [NgZone, MessagingTopics, ThemeManagerService, [new Optional(), ShellBarService]]
+                    deps: [NgZone, PluginManagerService, MessagingTopics, ThemeManagerService,
+                        [new Optional(), ShellBarService]]
                 },
                 {
                     'provide': APP_INITIALIZER,

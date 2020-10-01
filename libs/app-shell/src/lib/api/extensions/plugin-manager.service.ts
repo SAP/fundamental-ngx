@@ -17,9 +17,8 @@ import {
     EventType,
     MapMessage,
     Message,
-    ObjectMessage,
-    TextMessage,
-    TopicPublisher
+    TopicPublisher,
+    TopicSubscriber
 } from '../events/message-bus';
 import {
     MessagingTopics,
@@ -109,6 +108,8 @@ export class PluginManagerService implements OnDestroy {
         const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
         m.set('type', 'register');
         m.set('status', 'start');
+
+        // todo: this can be undefined too .getName()
         m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
 
         let configuration: Partial<PluginConfiguration>;
@@ -132,20 +133,31 @@ export class PluginManagerService implements OnDestroy {
         this.registry.clear();
     }
 
-    private createPluginContext(): PluginContext {
-        const topics = new Map<string, TopicPublisher<TextMessage | MapMessage<any> | ObjectMessage<any>>>();
+    createPluginContext(all: boolean = false): PluginContext {
+        const publishers = new Map<string, TopicPublisher<Message>>();
         this.topics.topicsDef.forEach((t: Topic) => {
             if (t.shared) {
-                topics.set(t.name, this.messageBus.createPublisher(t.name, t.eventType));
+                publishers.set(t.name, this.messageBus.createPublisher(t.name, t.eventType));
             }
         });
-        const context = new PluginContext(topics);
+
+        const subscribers = new Map<string, TopicSubscriber<Message>>();
+        if (all) {
+            this.topics.topicsDef.forEach((t: Topic) => {
+                if (t.shared) {
+                    const subscriber = this.messageBus.createSubscriber(t.name, t.eventType);
+                    subscribers.set(t.name, subscriber);
+                }
+            });
+        }
+        const context = new PluginContext(publishers, subscribers);
         return context;
     }
 
 
     private doConfigureTheming(configuration: Partial<PluginConfiguration>): void {
-        if (!configuration.getPermission().themingChange || configuration.addListeners().length === 0) {
+        if (!configuration.getPermission || !configuration.addListeners || !configuration.getPermission().themingChange ||
+            configuration.addListeners().length === 0) {
             return;
         }
         configuration.addListeners().forEach((listener: Listener) => {

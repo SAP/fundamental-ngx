@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
+    ComponentRef,
     Injector,
     Input,
     OnChanges,
@@ -69,11 +70,12 @@ export class PluginLauncherComponent implements OnChanges {
             .then(m => m[descriptor.componentName]);
         const factory = this.cfr.resolveComponentFactory(component);
 
-        if (isPluginComponent(component.prototype)) {
-            this._pluginMgr.register(descriptor, new component());
-        }
 
-        this.viewContainer.createComponent(factory, null, this.injector);
+        const componentRef: ComponentRef<any> = this.viewContainer.createComponent(factory, null, this.injector);
+
+        if (isPluginComponent(componentRef.instance)) {
+            this._pluginMgr.register(descriptor, componentRef.instance);
+        }
         this._cd.detectChanges();
     }
 
