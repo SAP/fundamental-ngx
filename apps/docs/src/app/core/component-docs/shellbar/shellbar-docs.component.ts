@@ -8,7 +8,6 @@ import * as sideNavShellbarHtml from '!raw-loader!./examples/shellbar-side-nav/s
 import * as sideNavShellbarTs from '!raw-loader!./examples/shellbar-side-nav/shellbar-side-nav-example.component.ts';
 import * as sideNavShellbarScss from '!raw-loader!./examples/shellbar-side-nav/shellbar-side-nav-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import dropdownPopoverScss from "!raw-loader!*";
 
 @Component({
     selector: 'app-shellbar',
