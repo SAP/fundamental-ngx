@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.125](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.124...v0.22.0-rc.125) (2020-10-01)
+
+
+### Bug Fixes
+
+* add fix for ShellBar user menu button using Avatar ([#3468](https://github.com/SAP/fundamental-ngx/issues/3468)) ([d2ddddc](https://github.com/SAP/fundamental-ngx/commit/d2ddddcbec2eb18b397c4ecba27f09d86a39b04e))
+
 ## [0.22.0-rc.124](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.123...v0.22.0-rc.124) (2020-10-01)
 
 
