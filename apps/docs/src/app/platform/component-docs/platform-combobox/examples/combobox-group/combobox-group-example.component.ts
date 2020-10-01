@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
