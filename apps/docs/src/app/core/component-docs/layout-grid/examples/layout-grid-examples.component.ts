@@ -23,3 +23,9 @@ export class LayoutGridOffsetExampleComponent {}
     templateUrl: './layout-grid-responsive-example.component.html'
 })
 export class LayoutGridResponsiveExampleComponent {}
+
+@Component({
+    selector: 'fd-layout-grid-row-example',
+    templateUrl: './layout-grid-row-example.component.html'
+})
+export class LayoutGridRowExampleComponent {}
