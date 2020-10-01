@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.120](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.119...v0.22.0-rc.120) (2020-10-01)
+
+
+### Bug Fixes
+
+* Firefox double triggered checkbox ([#3506](https://github.com/SAP/fundamental-ngx/issues/3506)) ([b9b7646](https://github.com/SAP/fundamental-ngx/commit/b9b7646f65011c6fbf81e18003b6b59cd125ade4))
+
 ## [0.22.0-rc.119](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.118...v0.22.0-rc.119) (2020-10-01)
 
 ## [0.22.0-rc.118](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.117...v0.22.0-rc.118) (2020-10-01)
