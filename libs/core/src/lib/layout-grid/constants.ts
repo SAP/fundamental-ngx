@@ -1,0 +1,16 @@
+export const CSS_CLASS_NAME = {
+    layoutGrid: 'fd-container',
+    layoutGridNoGap: 'fd-container--no-gap',
+
+    col: 'fd-col',
+
+    colSizePrefix: 'fd-col--',
+    mdColSizePrefix: 'fd-col-md--',
+    lgColSizePrefix: 'fd-col-lg--',
+    xlColSizePrefix: 'fd-col-xl--',
+
+    colOffsetPrefix: 'fd-col--offset-',
+    mdColOffsetPrefix: 'fd-col-md--offset-',
+    lgColOffsetPrefix: 'fd-col-lg--offset-',
+    xlColOffsetPrefix: 'fd-col-xl--offset-',
+} as const;

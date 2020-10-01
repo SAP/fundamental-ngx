@@ -1,6 +1,15 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
+import { CSS_CLASS_NAME } from './constants';
 
 /**
  * Use a layout grid to arrange components evenly in a grid layout.
@@ -14,7 +23,7 @@ import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutGridComponent implements CssClassBuilder {
+export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
 
     /** Custom classes */
     @Input()
@@ -34,6 +43,16 @@ export class LayoutGridComponent implements CssClassBuilder {
     constructor(private _elementRef: ElementRef) { }
 
     /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
     elementRef(): ElementRef {
         return this._elementRef;
     }
@@ -42,8 +61,8 @@ export class LayoutGridComponent implements CssClassBuilder {
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
-            'fd-container',
-            this.noGap ? 'fd-container--no-gap' : '',
+            CSS_CLASS_NAME.layoutGrid,
+            this.noGap ? CSS_CLASS_NAME.layoutGridNoGap : '',
             this._class
         ];
     }

@@ -3,16 +3,16 @@ import { LayoutGridColBase } from './layout-grid-col.base';
 import { CSS_CLASS_NAME } from '../constants';
 
 @Directive({
-    selector: '[fdLayoutGridCol]'
+    selector: '[fdLayoutGridColOffsetLg]'
 })
-export class LayoutGridColDirective extends LayoutGridColBase implements OnInit, OnChanges {
+export class LayoutGridColOffsetLgDirective extends LayoutGridColBase implements OnInit, OnChanges {
 
-    @Input('fdLayoutGridCol')
+    @Input('fdLayoutGridColOffsetLg')
     _numberOfColumns: number;
 
     /** @hidden */
     constructor(elementRef: ElementRef<HTMLElement>, renderer: Renderer2) {
-        super(renderer, elementRef, CSS_CLASS_NAME.colSizePrefix);
+        super(renderer, elementRef, CSS_CLASS_NAME.lgColOffsetPrefix);
     }
 
     /** @hidden */
@@ -24,4 +24,5 @@ export class LayoutGridColDirective extends LayoutGridColBase implements OnInit,
     ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
     }
+
 }

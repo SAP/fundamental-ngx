@@ -5,8 +5,8 @@ import { LayoutGridComponent } from './layout-grid.component';
 import { directives } from './directives';
 
 @NgModule({
-    declarations: [LayoutGridComponent, directives],
+    declarations: [LayoutGridComponent, ...directives],
     imports: [CommonModule],
-    exports: [LayoutGridComponent, directives]
+    exports: [LayoutGridComponent, ...directives]
 })
 export class LayoutGridModule {}
