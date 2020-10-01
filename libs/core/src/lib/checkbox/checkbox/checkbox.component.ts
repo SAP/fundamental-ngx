@@ -6,6 +6,7 @@ import {
     ElementRef,
     forwardRef,
     HostBinding,
+    Inject,
     Input,
     Optional,
     ViewChild,
@@ -14,8 +15,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
 import { compareObjects, KeyUtil } from '../../utils/public_api';
-import { ListItemComponent } from '../../list/list-item/list-item.component';
 import { Platform } from '@angular/cdk/platform';
+import { LIST_ITEM_COMPONENT, ListItemInterface } from '../../list/list-item/list-item-utils';
 
 let checkboxUniqueId = 0;
 
@@ -128,7 +129,7 @@ export class CheckboxComponent implements ControlValueAccessor {
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
         private _platform: Platform,
         private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _listItemComponent: ListItemComponent
+        @Optional() @Inject(LIST_ITEM_COMPONENT) private _listItemComponent: ListItemInterface
     ) {
         this.tabIndexValue = tabIndexValue;
     }
