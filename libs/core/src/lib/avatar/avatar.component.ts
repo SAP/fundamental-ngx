@@ -118,8 +118,8 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     private _bgImage: string = null;
 
-    /** @hidden */
-    private get showDefault(): boolean {
+    /** If a default placeholder should be displayed */
+    get showDefault(): boolean {
         return !this.abbreviate && !this._image && !this.glyph;
     }
 
@@ -145,7 +145,6 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return [
             'fd-avatar',
             this.size ? `fd-avatar--${this.size}` : '',
-            this.showDefault ? 'sap-icon--person-placeholder' : '',
             this.colorAccent ? `fd-avatar--accent-color-${this.colorAccent}` : '',
             this.circle ? 'fd-avatar--circle' : '',
             this.border ? 'fd-avatar--border' : '',
