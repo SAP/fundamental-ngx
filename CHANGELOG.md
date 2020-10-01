@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.123](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.122...v0.22.0-rc.123) (2020-10-01)
+
+
+### Bug Fixes
+
+* Shellbar Examples and Size added ([#3513](https://github.com/SAP/fundamental-ngx/issues/3513)) ([ea576f2](https://github.com/SAP/fundamental-ngx/commit/ea576f2ff8313287c58644ed3831e26bfc8acba6))
+
 ## [0.22.0-rc.122](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.121...v0.22.0-rc.122) (2020-10-01)
 
 
