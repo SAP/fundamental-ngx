@@ -9,10 +9,9 @@
  */
 import { PluginConfiguration } from './plugin-configuration.model';
 import {
-    MapMessage,
-    ObjectMessage,
-    TextMessage,
-    TopicPublisher
+    Message,
+    TopicPublisher,
+    TopicSubscriber
 } from '../../events/message-bus';
 
 
@@ -37,7 +36,23 @@ export class PluginContext {
      *
      * Plus maybe inject some other services
      */
-    constructor(public messageBus: Map<string, TopicPublisher<TextMessage | MapMessage<any> | ObjectMessage<any>>>) {
+    constructor(private messageBusPub: Map<string, TopicPublisher<Message>>,
+                private messageBusSub?: Map<string, TopicSubscriber<Message>>) {
+    }
+
+
+    subscriber(topic: string): TopicSubscriber<Message> {
+        if (!this.messageBusSub.has(topic)) {
+            throw new Error('Invalid topic name');
+        }
+        return this.messageBusSub.get(topic);
+    }
+
+    publisher(topic: string): TopicPublisher<Message> {
+        if (!this.messageBusPub.has(topic)) {
+            throw new Error('Invalid topic name');
+        }
+        return this.messageBusPub.get(topic);
     }
 }
 
