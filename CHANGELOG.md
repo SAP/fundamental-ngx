@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.122](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.121...v0.22.0-rc.122) (2020-10-01)
+
+
+### Bug Fixes
+
+* (platform) addressed list header label issue ([#3457](https://github.com/SAP/fundamental-ngx/issues/3457)) ([584392f](https://github.com/SAP/fundamental-ngx/commit/584392f9d4713898c1898454e98553ccdff0589c))
+
 ## [0.22.0-rc.121](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.120...v0.22.0-rc.121) (2020-10-01)
 
 ## [0.22.0-rc.120](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.119...v0.22.0-rc.120) (2020-10-01)
