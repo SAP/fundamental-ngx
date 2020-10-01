@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.117](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.116...v0.22.0-rc.117) (2020-10-01)
+
+
+### Bug Fixes
+
+* Update Dialog title styling ([#3463](https://github.com/SAP/fundamental-ngx/issues/3463)) ([d0f8cae](https://github.com/SAP/fundamental-ngx/commit/d0f8cae61f7c451e3fa4871655e3d0b313d9fe6c))
+
 ## [0.22.0-rc.116](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.115...v0.22.0-rc.116) (2020-09-30)
 
 
