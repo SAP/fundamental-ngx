@@ -17,8 +17,8 @@
     <fd-menu #menu [options]="{ placement: 'bottom-end' }" [fillControlMode]="null">
         <li fd-menu-item *ngFor="let action of shellbarActions" (click)="actionClicked(action, $event)">
             <div fd-menu-interactive>
-                <fd-icon fd-menu-addon position="before" [glyph]="action.glyph"></fd-icon>
-                {{ action.label }}
+                <fd-menu-addon position="before" [glyph]="action.glyph"></fd-menu-addon>
+                <span fd-menu-title>{{ action.label }}</span>
             </div>
         </li>
     </fd-menu>
