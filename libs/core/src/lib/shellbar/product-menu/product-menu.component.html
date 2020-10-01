@@ -1,20 +1,23 @@
 <ng-template [ngIf]="items?.length > 0" [ngIfElse]="subHeader">
-
-    <button fd-button
-            fdType="transparent"
-            class="fd-shellbar__button--menu"
-            [fdMenu]="true"
-            [disabled]="disabled"
-            [fdMenuTrigger]="menu">
+    <button
+        fd-button
+        fdType="transparent"
+        class="fd-shellbar__button--menu"
+        [disabled]="disabled"
+        [fdMenuTrigger]="menu"
+    >
         <span class="fd-shellbar__title">{{ control }}</span>
+        <i role="presentation" class="sap-icon--megamenu fd-shellbar__button--icon"></i>
     </button>
 
-    <fd-menu #menu
-             [placement]="placement"
-             [triggers]="triggers"
-             [fillControlMode]="fillControlMode"
-             [closeOnEscapeKey]="closeOnEscapeKey"
-             [closeOnOutsideClick]="closeOnOutsideClick">
+    <fd-menu
+        #menu
+        [placement]="placement"
+        [triggers]="triggers"
+        [fillControlMode]="fillControlMode"
+        [closeOnEscapeKey]="closeOnEscapeKey"
+        [closeOnOutsideClick]="closeOnOutsideClick"
+    >
         <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item>
             <a [attr.href]="item.link ? item.link : null" fd-menu-interactive>
                 <span fd-menu-title>{{ item.name }}</span>
