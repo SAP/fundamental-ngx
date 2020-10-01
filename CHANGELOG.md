@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.127](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.126...v0.22.0-rc.127) (2020-10-01)
+
+
+### Bug Fixes
+
+* Remove circular dep between checkbox and list component ([#3519](https://github.com/SAP/fundamental-ngx/issues/3519)) ([b913ddb](https://github.com/SAP/fundamental-ngx/commit/b913ddbcc73b0945d1ddbf802f39ab9aea0abdd6))
+
 ## [0.22.0-rc.126](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.125...v0.22.0-rc.126) (2020-10-01)
 
 
