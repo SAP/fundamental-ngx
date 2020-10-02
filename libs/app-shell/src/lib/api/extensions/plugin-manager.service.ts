@@ -105,24 +105,36 @@ export class PluginManagerService implements OnDestroy {
     }
 
     register(descriptor: Partial<PluginDescriptor>, pluginComponent?: PluginComponent): void {
+        // todo: this can be undefined too .getName()
+        const name = descriptor ? descriptor.name : pluginComponent.getConfiguration().getName();
+        if (this.registry.has(name)) {
+            // we should probably clean up also possible listeners
+            const entry = this.registry.get(name);
+            if (entry.subscribers) {
+                entry.subscribers.forEach(subscriber => {
+                    subscriber.unSubscribe();
+                });
+            }
+            this.registry.delete(name);
+        }
+
         const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
         m.set('type', 'register');
         m.set('status', 'start');
-
-        // todo: this can be undefined too .getName()
         m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
-
         let configuration: Partial<PluginConfiguration>;
-        const name = descriptor ? descriptor.name : pluginComponent.getConfiguration().getName();
+
         if (pluginComponent) {
             configuration = pluginComponent.getConfiguration();
-            this.doConfigureTheming(configuration);
+            const listeners = this.doConfigureListeners(configuration, pluginComponent);
 
             // as part of communication strategies pass only things that are needed.
-            pluginComponent.initialize(this.createPluginContext());
+            const pluginContext = this.createPluginContext();
+            pluginComponent.initialize(pluginContext);
+            this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent, listeners));
+        } else {
+            this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
         }
-        this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
-
         m.set('type', 'register');
         m.set('status', 'end');
         m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
@@ -130,6 +142,7 @@ export class PluginManagerService implements OnDestroy {
 
 
     ngOnDestroy(): void {
+        // todo: do proper cleanup of subscribers also here. 
         this.registry.clear();
     }
 
@@ -155,11 +168,12 @@ export class PluginManagerService implements OnDestroy {
     }
 
 
-    private doConfigureTheming(configuration: Partial<PluginConfiguration>): void {
-        if (!configuration.getPermission || !configuration.addListeners || !configuration.getPermission().themingChange ||
-            configuration.addListeners().length === 0) {
+    private doConfigureListeners(configuration: Partial<PluginConfiguration>,
+                                 pluginComponent?: PluginComponent): Array<TopicSubscriber<Message>> {
+        if (!configuration.addListeners || configuration.addListeners().length === 0) {
             return;
         }
+        const subscribers = [];
         configuration.addListeners().forEach((listener: Listener) => {
             if (this.topics.hasTopic(listener.topic)) {
                 const topic = this.topics.getTopic(listener.topic);
@@ -167,15 +181,22 @@ export class PluginManagerService implements OnDestroy {
                     listener.messageSelector);
 
                 subscriber.onMessage((m: Message) => {
-                    listener.onMessage(m);
+                    if (pluginComponent) {
+                        //  since we are wrapping rxjs we need to also pass THIS to current callback
+                        listener.onMessage.call(pluginComponent, m);
+                    } else {
+                        listener.onMessage(m);
+                    }
                 });
+                subscribers.push(subscriber);
             }
         });
+        return subscribers;
     }
 }
 
 export class RegistrationEntry {
     constructor(public descriptor: Partial<PluginDescriptor>, public configuration: Partial<PluginConfiguration>,
-                public pluginComponent: PluginComponent) {
+                public pluginComponent: PluginComponent, public subscribers?: Array<TopicSubscriber<Message>>) {
     }
 }

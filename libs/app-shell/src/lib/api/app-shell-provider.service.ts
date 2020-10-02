@@ -8,8 +8,7 @@ import { MessagingTopics } from './events/topics.service';
 import {
     EventType,
     Message,
-    TopicPublisher,
-    TopicSubscriber
+    TopicPublisher
 } from './events/message-bus';
 import { PluginManagerService } from './extensions/plugin-manager.service';
 import { PluginContext } from './extensions/component/plugin-component';
@@ -44,9 +43,9 @@ export class AppShellProviderService {
         window['appShellProvider'] = { ref: this, zone: ngZone };
     }
 
-
-    subscriber(topic: string): TopicSubscriber<Message> {
-        return this.pluginContext.subscriber(topic);
+    subscriber(topic: string, onMessage: (m: Message) => void): void {
+        const topicSubscriber = this.pluginContext.subscriber(topic);
+        topicSubscriber.onMessage(onMessage);
     }
 
     publisher(topic: string): TopicPublisher<Message> {
