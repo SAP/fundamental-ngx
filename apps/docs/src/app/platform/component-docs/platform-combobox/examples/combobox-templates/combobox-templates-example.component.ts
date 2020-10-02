@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
@@ -7,8 +8,7 @@ import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
     changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [
         '.fd-template-container-div { display: flex; align-items: center; cursor: pointer;}',
-        '.fd-template-container-div:hover { background-color: var(--fd-color-background-hover); }',
-        '.fd-template-icon { margin-right: 12px; }'
+        '.fd-template-text { margin-right: 12px; margin-left: 12px; }'
     ]
 })
 export class ComboboxTemplatesExampleComponent {
