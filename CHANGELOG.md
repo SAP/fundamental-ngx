@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0-rc.129](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.128...v0.22.0-rc.129) (2020-10-02)
+
+
+### Bug Fixes
+
+* (platform) combobox width, custom template and groupKey issues ([#3527](https://github.com/SAP/fundamental-ngx/issues/3527)) ([35479b7](https://github.com/SAP/fundamental-ngx/commit/35479b710a8bcb221804630c5f0fa18047ae1300))
+
 ## [0.22.0-rc.128](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.127...v0.22.0-rc.128) (2020-10-02)
 
 
