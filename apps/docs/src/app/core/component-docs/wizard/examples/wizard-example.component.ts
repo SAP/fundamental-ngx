@@ -1,8 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-wizard-example',
-    templateUrl: './wizard-example.component.html'
+    templateUrl: './wizard-example.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styles: [
+        `
+        .fd-wizard-example .fd-wizard__content {
+            min-height: 300px;
+        }
+        `
+    ],
+    host: {
+        class: 'fd-wizard-example'
+    }
 })
 export class WizardExampleComponent {
     step1status = 'current';

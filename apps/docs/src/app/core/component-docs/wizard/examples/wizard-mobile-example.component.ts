@@ -9,9 +9,26 @@ import { Component, ViewEncapsulation } from '@angular/core';
             .fd-wizard-mobile-docs .fd-wizard {
                 max-width: 300px;
             }
+            .fd-wizard-mobile-docs .fd-wizard__content {
+                min-height: 300px;
+            }
         `
-    ]
+    ],
+    host: {
+        class: 'fd-wizard-mobile-docs'
+    }
 })
 export class WizardMobileExampleComponent {
     step1status = 'current';
+    step2status = 'upcoming';
+
+    goToStep(step: number): void {
+        switch (step) {
+            case 2: {
+                this.step1status = 'completed';
+                this.step2status = 'current';
+                break;
+            }
+        }
+    }
 }

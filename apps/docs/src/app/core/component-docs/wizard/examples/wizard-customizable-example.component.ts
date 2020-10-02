@@ -1,8 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-wizard-customizable-example',
-    templateUrl: './wizard-customizable-example.component.html'
+    templateUrl: './wizard-customizable-example.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styles: [
+        `
+        .fd-wizard-example .fd-wizard__content {
+            min-height: 300px;
+        }
+        `
+    ],
+    host: {
+        class: 'fd-wizard-example'
+    }
 })
 export class WizardCustomizableExampleComponent {
     step1status = 'current';
