@@ -174,13 +174,6 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-thumbnail/platform-thumbnail-docs.module').then(
                         (m) => m.PlatformThumbnailDocsModule
                     )
-            },
-            {
-                path: 'object-marker',
-                loadChildren: () =>
-                    import('./component-docs/platform-standard-list-item/platform-standard-list-item-docs.module').then(
-                        (m) => m.PlatformStandardListItemDocsModule
-                    )
             }
         ]
     }

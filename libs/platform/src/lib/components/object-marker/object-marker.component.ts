@@ -6,14 +6,18 @@ import { Component, Input } from '@angular/core';
 })
 export class PlatformObjectMarkerComponent {
     /**
-     * Glyph (icon) of the Object Status.
+     * Glyph (icon) of the Object marker.
      */
     @Input()
     glyph: string;
 
-    /** Whether the Object Status is clickable. */
+    /** Whether the Object marker is clickable. */
     @Input()
     clickable: boolean;
+
+    /** label for adding text to the marker */
+    @Input()
+    label: string;
 
     /** Sets control aria-label attribute value */
     @Input()
