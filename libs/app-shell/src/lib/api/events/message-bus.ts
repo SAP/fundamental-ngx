@@ -78,6 +78,7 @@ export class RxJSTopicPublisher<T extends Message> implements TopicPublisher<T> 
     }
 
     publish(message: T, deliveryModel: DeliveryModel = DeliveryModel.NON_PERSIST): void {
+        message.topic = this.topic;
         this.subject.next(message);
     }
 }
@@ -176,18 +177,8 @@ export abstract class Message {
 }
 
 export class TextMessage extends Message {
-    constructor(topic: string, id?: string, timestamp?: number, priority?: number) {
+    constructor(public text: string, topic?: string, id?: string, timestamp?: number, priority?: number) {
         super(id, timestamp, priority, topic);
-    }
-
-    private _text: string;
-
-    get text(): string {
-        return this._text;
-    }
-
-    set text(value: string) {
-        this._text = value;
     }
 }
 
