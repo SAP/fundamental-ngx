@@ -1,0 +1,47 @@
+.fd-object-list__object-attribute {
+    font-size: var(--sapFontSize);
+    line-height: var(--sapContent_LineHeight);
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--sapContent_LabelColor);
+
+    &:visited {
+        text-decoration: none;
+        color: var(--sapLink_Visited_Color);
+    }
+
+    &:hover {
+        text-decoration: underline;
+        color: var(--sapLink_Hover_Color);
+    }
+
+    &:focus {
+        z-index: 5;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        outline-offset: -0.0625rem;
+        outline-width: var(--sapContent_FocusWidth);
+        outline-color: var(--sapContent_FocusColor);
+        outline-style: var(--sapContent_FocusStyle);
+    }
+
+    &:active {
+        text-decoration: none;
+        color: var(--sapLinkColor);
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+        opacity: 0.4;
+    }
+}

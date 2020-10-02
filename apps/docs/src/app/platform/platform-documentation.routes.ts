@@ -141,6 +141,12 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'object-attribute',
+                loadChildren: () =>
+                    import('./component-docs/platform-object-attribute/platform-object-attribute-docs.module').then((m) =>
+                        m.PlatformObjectAttributeDocsModule)
+            },
+            {
                 path: 'input-group',
                 loadChildren: () =>
                     import('./component-docs/platform-forms/input-group/platform-input-group-docs.module').then(
