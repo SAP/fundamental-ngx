@@ -15,7 +15,7 @@ const routes: Routes = [
         component: ObjectIdentifierHeaderComponent,
         children: [
             { path: '', component: ObjectIdentifierDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.objectStatus } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.objectIdentifier } }
         ]
     }
 ];

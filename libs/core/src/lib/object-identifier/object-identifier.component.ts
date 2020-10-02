@@ -20,9 +20,7 @@ import { Subject } from 'rxjs';
     selector: 'fd-object-identifier',
     template: `
         <p class="fd-object-identifier__title"
-           [ngClass]="{
-                'fd-object-identifier__title--bold': bold
-            }">
+           [ngClass]="{'fd-object-identifier__title--bold': bold}">
             <ng-content></ng-content>
         </p>
         <p class="fd-object-identifier__text" *ngIf="description">
@@ -43,7 +41,7 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy, O
     @Input()
     bold = false;
 
-    /** */
+    /** Whether the title is larger - enabled by default */
     @Input()
     large = true;
 
@@ -62,7 +60,7 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy, O
 
     constructor(
         private _changeDetectorRef: ChangeDetectorRef
-    ) { }
+    ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -87,9 +85,7 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy, O
         this.linkComponents.changes.pipe(
             takeUntil(this._onDestroy$),
             startWith(0)
-        ).subscribe(() => {
-            this.linkComponents.forEach(link => this._addIdentifierClass(link))
-        });
+        ).subscribe(() => this.linkComponents.forEach(link => this._addIdentifierClass(link)));
     }
 
     /** @hidden */
