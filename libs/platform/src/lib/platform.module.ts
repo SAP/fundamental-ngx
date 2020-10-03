@@ -24,7 +24,7 @@ import { PlatformComboboxMobileModule } from './components/form/combobox/combobo
 import { PlatformComboboxModule } from './components/form/combobox';
 import { PlatformThumbnailModule } from './components/thumbnail/public_api';
 import { PlatformObjectMarkerModule } from './components/object-marker/object-marker.module';
-import { PlatformObjectAttributeModule } from './components/object-attribute/public_api';
+import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],

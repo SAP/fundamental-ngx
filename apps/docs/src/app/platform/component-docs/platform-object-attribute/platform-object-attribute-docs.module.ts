@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { API_FILES } from '../../api-files';
 
 import { PlatformObjectAttributeHeaderComponent } from './platform-object-attribute-header/platform-object-attribute-header.component';
 import { PlatformObjectAttributeDocsComponent } from './platform-object-attribute-docs.component';
@@ -10,6 +11,9 @@ import {
     PlatformObjectAttributeExampleComponent,
     PlatformObjectAttributeTruncateExampleComponent
 } from './platform-object-attribute-examples/platform-object-attribute-examples.component';
+import {
+    PlatformObjectAttributeLinkExampleComponent
+} from './platform-object-attribute-examples/platform-object-attribute-link-example.component';
 import { PlatformObjectAttributeModule, PlatformLinkModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
@@ -35,7 +39,8 @@ const routes: Routes = [
         PlatformObjectAttributeDocsComponent,
         PlatformObjectAttributeHeaderComponent,
         PlatformObjectAttributeExampleComponent,
-        PlatformObjectAttributeTruncateExampleComponent
+        PlatformObjectAttributeTruncateExampleComponent,
+        PlatformObjectAttributeLinkExampleComponent
     ]
 })
 export class PlatformObjectAttributeDocsModule { }

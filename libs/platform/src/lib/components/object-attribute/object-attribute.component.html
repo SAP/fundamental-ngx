@@ -1,4 +1,8 @@
-<div class="fd-object-list__object-attribute" [attr.aria-label]="label" [attr.title]="label">
-    {{label}}
-    <ng-content></ng-content>
-</div>
+{{label}}
+<ng-content></ng-content>
+<ng-container *ngIf="linkText !== null && linkText !== undefined">
+    <span (click)="onObjectAttributeClick($event)" tabindex="0" [attr.aria-label]="linkText" [attr.title]="linkText"
+        [ngClass]="islink? 'fd-object-attribute--link': ''" aria-disabled="disabled" [attr.disabled]="disabled">
+        {{linkText}}
+    </span>
+</ng-container>

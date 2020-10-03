@@ -1,9 +1,11 @@
-.fd-object-list__object-attribute {
-    font-size: var(--sapFontSize);
-    line-height: var(--sapContent_LineHeight);
-    color: var(--sapTextColor);
-    font-family: var(--sapFontFamily);
-    font-weight: normal;
+.fd-object-attribute {
+    font-size: 0.875rem;
+    font-size: var(--sapFontSize, 0.875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -13,35 +15,52 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--sapContent_LabelColor);
+    color: #6a6d70;
+    color: var(--sapContent_LabelColor, #6a6d70);
+    display: block;
 
-    &:visited {
+    &--link {
+        cursor: pointer;
         text-decoration: none;
-        color: var(--sapLink_Visited_Color);
-    }
-
-    &:hover {
-        text-decoration: underline;
-        color: var(--sapLink_Hover_Color);
-    }
-
-    &:focus {
-        z-index: 5;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        outline-offset: -0.0625rem;
-        outline-width: var(--sapContent_FocusWidth);
-        outline-color: var(--sapContent_FocusColor);
-        outline-style: var(--sapContent_FocusStyle);
-    }
-
-    &:active {
-        text-decoration: none;
+        color: #0a6ed1;
         color: var(--sapLinkColor);
-    }
 
-    &:disabled,
-    &[aria-disabled="true"] {
-        opacity: 0.4;
+        &:visited {
+            text-decoration: none;
+            color: #0a6ed1;
+            color: var(--sapLink_Visited_Color);
+        }
+
+        &:hover {
+            text-decoration: underline;
+            color: #0854a0;
+            color: var(--sapLink_Hover_Color);
+        }
+
+        &[disabled] {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        &:focus {
+            text-decoration: underline;
+            z-index: 5;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline-offset: -0.0625rem;
+            outline-width: 0.0625 * 1rem;
+            outline-width: var(--sapContent_FocusWidth);
+            outline-color: #000000;
+            outline-color: var(--sapContent_FocusColor);
+            outline-style: dotted;
+            outline-style: var(--sapContent_FocusStyle);
+        }
     }
+}
+
+.fd-object-attribute::after,
+.fd-object-attribute::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
 }

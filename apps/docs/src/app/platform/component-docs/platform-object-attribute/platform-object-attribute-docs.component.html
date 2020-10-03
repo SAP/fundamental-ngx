@@ -1,4 +1,4 @@
-<fd-docs-section-title [id]="'objectAttribute1'" [componentName]="'objectAttribute'"> Object attribute standlone text
+<fd-docs-section-title id="objectAttribute1" componentName="objectAttribute"> Object attribute standlone text
 </fd-docs-section-title>
 <description>
     Use <code class="code-snippet">label="text"</code>,to set the object attribute as standlone text.
@@ -9,7 +9,7 @@
 <code-example [exampleFiles]="objectAttribute"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'objectAttributetruncate'" [componentName]="'objectAttribute'">
+<fd-docs-section-title id="objectAttributetruncate" componentName="objectAttribute">
     Object Attributes with long text truncation
 </fd-docs-section-title>
 <description>
@@ -21,5 +21,22 @@
     </fdp-object-attribute-truncate-example>
 </component-example>
 <code-example [exampleFiles]="objectAttributeTruncate"></code-example>
+<separator></separator>
 
+
+<fd-docs-section-title id="objectAttributelink" componentName="objectAttribute">
+    Object Attributes with link option
+</fd-docs-section-title>
+<description>
+    Use <code class="code-snippet">islink="true"</code> along with <code
+        class="code-snippet">linkedText="linktext"</code>. Will help to give option to
+    bind required operation on click of link item.
+    <br>
+    <code class="code-snippet">disabled="true"</code> make the link non operable.
+</description>
+<component-example>
+    <fdp-object-attribute-link-example>
+    </fdp-object-attribute-link-example>
+</component-example>
+<code-example [exampleFiles]="objectAttributeLink"></code-example>
 <separator></separator>
