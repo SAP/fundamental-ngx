@@ -119,7 +119,7 @@
     "@angular-devkit/build-angular": "~0.1001.3",
     "@angular-devkit/build-ng-packagr": "~0.1001.1",
     "@angular-devkit/core": "~10.1.2",
-    "@angular/cli": "~10.0.5",
+    "@angular/cli": "~10.1.4",
     "@angular/compiler-cli": "~10.0.5",
     "@angular/language-service": "~10.1.4",
     "@angularclass/hmr": "2.1.3",
