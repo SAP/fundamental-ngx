@@ -1,4 +1,5 @@
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -12,6 +13,7 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
+
 import { BACKGROUND_TYPE, CLASS_NAME, DYNAMIC_PAGE_CHILD_TOKEN, RESPONSIVE_SIZE } from '../constants';
 import { DynamicPageService } from '../dynamic-page.service';
 import { addClassNameToElement } from '../utils';
@@ -42,22 +44,6 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     activeTab = 0;
 
     /**
-     * gets the underlying cdk scrollable field
-     */
-    @ViewChild(CdkScrollable)
-    cdkScrollable: CdkScrollable;
-
-    /**
-     * the underlying content template
-     */
-    @ViewChild(TemplateRef) contentTemplate: TemplateRef<any>;
-
-    /**
-     * tracking the background value
-     */
-    private _background: BACKGROUND_TYPE;
-
-    /**
      * sets background for content to List, Transparent or Solid background color.
      * Default is `solid`.
      */
@@ -74,11 +60,6 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     }
 
     /**
-     * tracks the size for responsive padding
-     */
-    private _size: RESPONSIVE_SIZE;
-
-    /**
      * sets size which in turn adds corresponding padding for the size type.
      * size can be `small`, `medium`, `large`, or `extra-large`.
      */
@@ -93,6 +74,29 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     get size(): RESPONSIVE_SIZE {
         return this._size;
     }
+
+    /**
+     * gets the underlying cdk scrollable field
+     */
+    @ViewChild(CdkScrollable)
+    cdkScrollable: CdkScrollable;
+
+    /**
+     * the underlying content template
+     */
+    @ViewChild(TemplateRef) contentTemplate: TemplateRef<any>;
+
+    /**
+     * @hidden
+     * tracking the background value
+     */
+    private _background: BACKGROUND_TYPE;
+
+    /**
+     * @hidden
+     * tracks the size for responsive padding
+     */
+    private _size: RESPONSIVE_SIZE;
 
     constructor(
         public _elementRef: ElementRef<HTMLElement>,
@@ -113,6 +117,18 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
         if (this.size) {
             this._setSize(this.size);
         }
+    }
+
+    /**@hidden */
+    ngOnDestroy(): void {
+        this.scrollDispatcher.deregister(this.cdkScrollable);
+    }
+
+    /**
+     * get reference to this element
+     */
+    getElementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
     }
 
     /**
@@ -159,28 +175,16 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
         }
     }
 
-    /**
-     * get reference to this element
-     */
-    getElementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
-    }
-
     /**@hidden */
-    ngOnDestroy(): void {
-        this.scrollDispatcher.deregister(this.cdkScrollable);
-    }
-
-    /**@hidden */
-    protected _removeClassNameToHostElement(className: string): void {
+    private _removeClassNameToHostElement(className: string): void {
         this._renderer.removeClass(this._elementRef.nativeElement, className);
     }
     /**@hidden */
-    protected _setAttributeToHostElement(attribute: string, value: any): void {
+    private _setAttributeToHostElement(attribute: string, value: any): void {
         this._renderer.setAttribute(this._elementRef.nativeElement, attribute, value);
     }
     /**@hidden */
-    protected _setStyleToHostElement(attribute: string, value: any): void {
+    private _setStyleToHostElement(attribute: string, value: any): void {
         this._renderer.setStyle(this._elementRef.nativeElement, attribute, value);
     }
 

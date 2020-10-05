@@ -1,18 +1,19 @@
-import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
+import { ScrollDispatcher, ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
+import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import {
+    CLASS_NAME,
     DynamicPageComponent,
-    PlatformDynamicPageModule,
     DynamicPageService,
-    CLASS_NAME
+    PlatformDynamicPageModule
 } from '@fundamental-ngx/platform';
+
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
-import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
-import { ScrollDispatcher, ScrollingModule } from '@angular/cdk/scrolling';
+import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 
 @Component({
     template: `<fdp-dynamic-page [size]="size" [background]="background">

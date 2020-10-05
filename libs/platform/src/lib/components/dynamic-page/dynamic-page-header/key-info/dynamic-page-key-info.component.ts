@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2 } from '@angular/core';
 
 import { CLASS_NAME } from '../../constants';
 import { addClassNameToElement } from '../../utils';

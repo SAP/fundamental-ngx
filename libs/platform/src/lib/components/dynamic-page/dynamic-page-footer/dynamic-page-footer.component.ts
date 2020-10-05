@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, forwardRef } from '@angular/core';
 
 import { DYNAMIC_PAGE_CHILD_TOKEN } from '../constants';
 
@@ -13,8 +13,4 @@ import { DYNAMIC_PAGE_CHILD_TOKEN } from '../constants';
         }
     ]
 })
-export class DynamicPageFooterComponent implements OnInit {
-    constructor() {}
-
-    ngOnInit(): void {}
-}
+export class DynamicPageFooterComponent {}

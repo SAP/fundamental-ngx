@@ -1,7 +1,9 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+
 import { TabsModule } from '@fundamental-ngx/core';
+
 import { PlatformButtonModule } from '../button/public_api';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageTabbedContentComponent } from './dynamic-page-content/dynamic-page-tabbed-content.component';

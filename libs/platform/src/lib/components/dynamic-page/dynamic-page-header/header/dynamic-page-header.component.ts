@@ -14,6 +14,7 @@ import {
     HostBinding
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+
 import { BACKGROUND_TYPE, CLASS_NAME, RESPONSIVE_SIZE } from '../../constants';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
@@ -109,10 +110,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     get background(): BACKGROUND_TYPE {
         return this._background;
     }
-    /**
-     * tracks the size for responsive padding
-     */
-    _size: RESPONSIVE_SIZE;
 
     /**
      * sets size which in turn adds corresponding padding for the size type.
@@ -162,22 +159,30 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * tracking if pin button is pinned
      */
     pinned = false;
-    /**
-     *  tracking collapsible for pinning
-     *  */
-
-    _collapsible = this.collapsible;
-
-    /**
-     * tracking the background value
-     */
-    _background: BACKGROUND_TYPE;
 
     /**
      * @hidden
      * pn/unpin aria label based on the current state
      */
     pinUnpinAriaLabel: string;
+
+    /**
+     *  tracking collapsible for pinning
+     *
+     */
+    _collapsible = this.collapsible;
+
+    /**
+     * @hidden
+     * tracking the background value
+     */
+    private _background: BACKGROUND_TYPE;
+
+    /**
+     * @hidden
+     * tracks the size for responsive padding
+     */
+    private _size: RESPONSIVE_SIZE;
 
     /** @hidden */
     constructor(
@@ -207,6 +212,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         this._calculateExpandCollapseAriaLabel();
         this._calculatePinUnpinAriaLabel();
     }
+
     /** @hidden */
     ngAfterViewInit(): void {
         if (this._background) {
@@ -216,6 +222,14 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
             this._setSize(this.size);
         }
     }
+
+    /**@hidden */
+    ngOnDestroy(): void {
+        this.toggleSubscription.unsubscribe();
+        this.expandSubscription.unsubscribe();
+        this.collapseSubscription.unsubscribe();
+    }
+
     collapseHeader(val: boolean): any {
         if (this._isPinned()) {
             return;
@@ -225,50 +239,15 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
             this.expandCollapseActions();
         }
     }
+
     /** Handles expanded/collapsed event */
-    public toggleCollapse(): void {
+    toggleCollapse(): void {
         if (this._isPinned()) {
             return;
         }
         this.collapsed = !this.collapsed;
 
         this.expandCollapseActions();
-    }
-    /**
-     * handles actions like style changes and emit methods on expand/collapse
-     */
-    private expandCollapseActions(): void {
-        if (this._isCollapsibleCollapsed()) {
-            this._setStyleToHostElement('z-index', 1);
-        } else {
-            this._removeStyleFromHostElement('z-index');
-            // reset the styles TODO not working correctly
-            if (this._background) {
-                this._setBackgroundStyles(this._background);
-            }
-            if (this.size) {
-                this._setSize(this.size);
-            }
-        }
-        const event = new DynamicPageCollapseChangeEvent(this, this.collapsed);
-        // this._dynamicPageService.toggleHeader(this.collapsed);
-        this.collapseChange.emit(event);
-        this._calculateExpandCollapseAriaLabel();
-    }
-
-    // scenarioi where collapsible = false and pinnable = true is buggy due to html viisibility
-    /**
-     * return whether this collapse/expand button is collapsed
-     */
-    private _isCollapsibleCollapsed(): boolean {
-        return this.collapsible && this.collapsed && this._collapsible;
-    }
-
-    /**
-     * return whether the pin button is pinned
-     */
-    private _isPinned(): boolean {
-        return !this._collapsible && this.pinned;
     }
 
     /**
@@ -291,11 +270,40 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         return this._elementRef;
     }
 
-    /**@hidden */
-    ngOnDestroy(): void {
-        this.toggleSubscription.unsubscribe();
-        this.expandSubscription.unsubscribe();
-        this.collapseSubscription.unsubscribe();
+    /**
+     * handles actions like style changes and emit methods on expand/collapse
+     */
+    private expandCollapseActions(): void {
+        if (this._isCollapsibleCollapsed()) {
+            this._setStyleToHostElement('z-index', 1);
+        } else {
+            this._removeStyleFromHostElement('z-index');
+            // reset the styles TODO not working correctly
+            if (this._background) {
+                this._setBackgroundStyles(this._background);
+            }
+            if (this.size) {
+                this._setSize(this.size);
+            }
+        }
+        const event = new DynamicPageCollapseChangeEvent(this, this.collapsed);
+        // this._dynamicPageService.toggleHeader(this.collapsed);
+        this.collapseChange.emit(event);
+        this._calculateExpandCollapseAriaLabel();
+    }
+
+    /**
+     * return whether this collapse/expand button is collapsed
+     */
+    private _isCollapsibleCollapsed(): boolean {
+        return this.collapsible && this.collapsed && this._collapsible;
+    }
+
+    /**
+     * return whether the pin button is pinned
+     */
+    private _isPinned(): boolean {
+        return !this._collapsible && this.pinned;
     }
 
     /**
@@ -384,10 +392,12 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     private _setStyleToHostElement(attribute: string, value: any): void {
         this._renderer.setStyle(this._elementRef.nativeElement, attribute, value);
     }
+
     /**@hidden */
     private _removeStyleFromHostElement(styleName: string): void {
         this._renderer.removeStyle(this._elementRef.nativeElement, styleName);
     }
+
     /**@hidden */
     private _addClassNameToCustomElement(element: Element, className: string): void {
         addClassNameToElement(this._renderer, element, className);

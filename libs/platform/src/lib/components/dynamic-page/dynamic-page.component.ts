@@ -21,6 +21,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
+
 import { BaseComponent } from '../base';
 import { BACKGROUND_TYPE, CLASS_NAME, RESPONSIVE_SIZE } from './constants';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
@@ -83,7 +84,7 @@ export class DynamicPageComponent extends BaseComponent implements OnInit, After
 
     /** reference to content component  */
     @ViewChild(DynamicPageContentComponent)
-    _userContent: DynamicPageContentComponent;
+    userContent: DynamicPageContentComponent;
 
     /** reference to content component  */
     @ContentChild(DynamicPageContentComponent)
@@ -99,7 +100,7 @@ export class DynamicPageComponent extends BaseComponent implements OnInit, After
 
     /** Reference to the CdkScrollable instance that wraps the scrollable content. */
     get scrollable(): CdkScrollable {
-        return this._userContent || this.childcontent;
+        return this.userContent || this.childcontent;
     }
     /**
      * track whether the header was toggled or not
@@ -194,6 +195,7 @@ export class DynamicPageComponent extends BaseComponent implements OnInit, After
         this._scrollSubscription.unsubscribe();
         this._subscriptions.unsubscribe();
     }
+
     /**
      * Snap the header to expand or collapse based on scrolling. Uses CDKScrollable.
      */

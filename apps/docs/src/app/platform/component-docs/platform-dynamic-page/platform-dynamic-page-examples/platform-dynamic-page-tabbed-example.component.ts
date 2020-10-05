@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { DynamicPageCollapseChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-dynamic-page-tabbed-example',
@@ -7,7 +8,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformDynamicPageTabbedExampleComponent {
-    onCollapseChange(event: Event): any {
+    onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
         console.log('collapse changed');
     }
 }

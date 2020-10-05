@@ -1,4 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
+
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,10 +9,9 @@ import {
     NgZone,
     OnInit,
     Renderer2,
-    ViewEncapsulation,
-    ContentChild,
-    ViewChild
+    ViewEncapsulation
 } from '@angular/core';
+
 import { BACKGROUND_TYPE, CLASS_NAME, RESPONSIVE_SIZE } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement, removeClassNameFromElement } from '../../utils';
@@ -23,6 +23,12 @@ import { addClassNameToElement, removeClassNameFromElement } from '../../utils';
     encapsulation: ViewEncapsulation.None
 })
 export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
+    @Input()
+    title: string;
+
+    @Input()
+    subtitle: string;
+
     /**
      * sets background for content to List, Transparent or Solid background color.
      * Default is `solid`.
@@ -55,21 +61,18 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         return this._size;
     }
 
-    @Input()
-    title: string;
-
-    @Input()
-    subtitle: string;
-
     /**
+     * @hidden
      * tracking the background value
      */
-    _background: BACKGROUND_TYPE;
+    private _background: BACKGROUND_TYPE;
 
     /**
+     * @hidden
      * tracks the size for responsive padding
      */
-    _size: RESPONSIVE_SIZE;
+    private _size: RESPONSIVE_SIZE;
+
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -94,12 +97,6 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         }
     }
 
-    /**
-     * get reference to this element
-     */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
-    }
     /** @hidden */
     ngOnInit(): void {
         this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleArea); // not getting this to work right
@@ -112,6 +109,13 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         if (this.size) {
             this._setSize(this.size);
         }
+    }
+
+    /**
+     * get reference to this element
+     */
+    elementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
     }
 
     /**

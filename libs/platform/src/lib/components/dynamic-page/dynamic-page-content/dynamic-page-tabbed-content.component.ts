@@ -9,6 +9,7 @@ import {
     ViewChild,
     Input
 } from '@angular/core';
+
 import { DYNAMIC_PAGE_CHILD_TOKEN, BACKGROUND_TYPE, RESPONSIVE_SIZE, CLASS_NAME } from '../constants';
 import { DynamicPageService } from '../dynamic-page.service';
 import { addClassNameToElement } from '../utils';
@@ -25,14 +26,6 @@ import { addClassNameToElement } from '../utils';
     ]
 })
 export class DynamicPageTabbedContentComponent extends CdkScrollable {
-    @ViewChild(CdkScrollable)
-    cdkScrollable: CdkScrollable;
-
-    /**
-     * tracking the background value
-     */
-    private _background: BACKGROUND_TYPE;
-
     /**
      * sets background for content to List, Transparent or Solid background color.
      * Default is `solid`.
@@ -50,11 +43,6 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
     }
 
     /**
-     * tracks the size for responsive padding
-     */
-    private _size: RESPONSIVE_SIZE;
-
-    /**
      * sets size which in turn adds corresponding padding for the size type.
      * size can be `small`, `medium`, `large`, or `extra-large`.
      */
@@ -69,6 +57,21 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
     get size(): RESPONSIVE_SIZE {
         return this._size;
     }
+
+    @ViewChild(CdkScrollable)
+    cdkScrollable: CdkScrollable;
+
+    /**
+     * @hidden
+     * tracking the background value
+     */
+    private _background: BACKGROUND_TYPE;
+
+    /**
+     * @hidden
+     * tracks the size for responsive padding
+     */
+    private _size: RESPONSIVE_SIZE;
 
     constructor(
         public _elementRef: ElementRef<HTMLElement>,

@@ -25,7 +25,7 @@
         </fdp-dynamic-page-key-info>
         <fdp-dynamic-page-global-actions>
             <!-- global actions -->
-            <fd-toolbar [fdType]="'transparent'" [clearBorder]="true">
+            <fd-toolbar fdType="transparent" [clearBorder]="true">
                 <button
                     fd-toolbar-item
                     fd-button
@@ -48,14 +48,14 @@
         </fdp-dynamic-page-global-actions>
         <fdp-dynamic-page-layout-actions>
             <!-- layout actions -->
-            <fd-toolbar [fdType]="'transparent'" [clearBorder]="true">
-                <button fd-button [fdType]="'transparent'" aria-label="Survey" (click)="surveyClicked($event)">
+            <fd-toolbar fdType="transparent" [clearBorder]="true">
+                <button fd-button fdType="transparent" aria-label="Survey" (click)="surveyClicked($event)">
                     <i class="sap-icon--survey"></i>
                 </button>
-                <button fd-button [fdType]="'transparent'" aria-label="Pool" (click)="$event.stopPropagation()">
+                <button fd-button fdType="transparent" aria-label="Pool" (click)="$event.stopPropagation()">
                     <i class="sap-icon--pool"></i>
                 </button>
-                <button fd-button [fdType]="'transparent'" aria-label="Chart" (click)="$event.stopPropagation()">
+                <button fd-button fdType="transparent" aria-label="Chart" (click)="$event.stopPropagation()">
                     <i class="sap-icon--pie-chart"></i>
                 </button>
             </fd-toolbar>
@@ -127,13 +127,13 @@
 
     <fdp-dynamic-page-footer>
         <!-- page footer content goes here -->
-        <div fd-bar [barDesign]="'floating-footer'">
+        <div fd-bar barDesign="floating-footer">
             <div fd-bar-right>
                 <fd-bar-element>
-                    <button fd-button [fdType]="'emphasized'" [compact]="true">Save</button>
+                    <button fd-button fdType="emphasized" [compact]="true">Save</button>
                 </fd-bar-element>
                 <fd-bar-element>
-                    <button fd-button [fdType]="'transparent'" [compact]="true">Cancel</button>
+                    <button fd-button fdType="transparent" [compact]="true">Cancel</button>
                 </fd-bar-element>
             </div>
         </div>
