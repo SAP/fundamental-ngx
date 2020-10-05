@@ -20,7 +20,7 @@ import { Subject } from 'rxjs';
     selector: 'fd-object-identifier',
     template: `
         <p class="fd-object-identifier__title"
-           [ngClass]="{'fd-object-identifier__title--bold': bold}">
+           [class.fd-object-identifier__title--bold]="bold">
             <ng-content></ng-content>
         </p>
         <p class="fd-object-identifier__text" *ngIf="description">
