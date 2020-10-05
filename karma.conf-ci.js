@@ -13,16 +13,28 @@ module.exports = function (config) {
     const build = process.env.BUILD_ID || '';
 
     const customLaunchers = {
-        sl_chrome: {
+        sl_chrome_macOS: {
             base: 'SauceLabs',
             browserName: 'chrome',
+            platform: 'macOS 10.15',
             version: 'latest'
         },
-        // sl_firefox: {
-        //     base: 'SauceLabs',
-        //     browserName: 'firefox',
-        //     version: 'latest'
-        // }
+        sl_firefox_macOS: {
+             base: 'SauceLabs',
+             platform: 'macOS 10.15',
+             browserName: 'firefox',
+             version: 'latest'
+        },
+        sl_chrome_win_10: {
+            base: 'SauceLabs',
+            browserName: 'firefox',
+            version: 'latest'
+        },
+        sl_firefox_win_10: {
+            base: 'SauceLabs',
+            browserName: 'firefox',
+            version: 'latest'
+        }
     };
 
     config.set({
@@ -55,6 +67,7 @@ module.exports = function (config) {
             build,
             region: 'eu',
             startConnect: true,
+            maxDuration: 10800,
             testName: 'fundamental-ngx',
             recordScreenshots: false,
             connectOptions: {

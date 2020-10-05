@@ -13,7 +13,7 @@ class TestComponent {
     constructor() {}
 }
 
-describe('LinkComponent', () => {
+fdescribe('LinkComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 

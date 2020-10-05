@@ -26,9 +26,9 @@ jobs:
     if: branch = feature/setup-saucelabs-integration
     env:
 #      - SAUCE_USERNAME=$SAUCE_USERNAME
-      - SAUCE_USERNAME=el.protonmail
+      - SAUCE_USERNAME=tonyolkh
 #      - SAUCE_USERNAME=$SAUCE_USERNAME
-      - SAUCE_ACCESS_KEY=7c2ab45f-1ea7-4efd-8365-000310331737
+      - SAUCE_ACCESS_KEY=b257d608-6df5-4ee8-8785-0a8815dfab84
     script:
       - npm run test:core:saucelabs
       - npm run test:platform:saucelabs
