@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CarouselNewModule } from '@fundamental-ngx/core';
+import { CarouselModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -12,6 +12,7 @@ import { CarouselMultipleActiveItemComponent } from './examples/carousel-multipl
 import { CarouselHiddenNavigationComponent } from './examples/carousel-hidden-navigation.component';
 import { CarouselContentNavigationComponent } from './examples/carousel-content-navigation.component';
 import { CarouselLoopedNavigationComponent } from './examples/carousel-looped-navigation.component';
+import { CarouselErrorMessageComponent } from './examples/carousel-error-message.component';
 
 const routes: Routes = [
     {
@@ -25,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, CarouselNewModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, CarouselModule],
     exports: [RouterModule],
     declarations: [
         CarouselDocsComponent,
@@ -35,7 +36,8 @@ const routes: Routes = [
         CarouselNoPageIndicatorComponent,
         CarouselHiddenNavigationComponent,
         CarouselContentNavigationComponent,
-        CarouselLoopedNavigationComponent
+        CarouselLoopedNavigationComponent,
+        CarouselErrorMessageComponent
     ]
 })
 export class CarouselDocsModule {}

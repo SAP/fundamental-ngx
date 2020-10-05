@@ -1,29 +1,48 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     HostBinding,
+    HostListener,
     Input,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     QueryList,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { RtlService } from '../utils/services/rtl.service';
+import { RtlService } from '@fundamental-ngx/core';
+import { FdCarouselResourceStrings, CarouselResourceStringsEN } from './i18n/carousel-resources';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
+import { CarouselService, CarouselConfig } from '../utils/services/carousel.service';
 
+/** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
+
+export const CarouselIndicatorsOrientation = {
+    bottom: 'bottom',
+    top: 'top'
+};
+
+export enum SlideDirection {
+    None,
+    NEXT,
+    PREVIOUS
+}
+
 let carouselUniqueId = 0;
 
-class CarouselActiveItem {
-    constructor(public readonly activeItem: CarouselItemComponent, public readonly slideDirection: number) {}
+class CarouselActiveSlides {
+    constructor(public readonly activeItems: CarouselItemComponent[], public readonly slideDirection: string) {}
 }
 
 @Component({
@@ -33,11 +52,7 @@ class CarouselActiveItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
-    /** @hidden */
-    @ContentChildren(CarouselItemComponent)
-    items: QueryList<CarouselItemComponent>;
-
+export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
     /** Id for the Carousel. */
     @Input()
     @HostBinding('attr.id')
@@ -45,7 +60,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** Sets aria-label attribute for carousel */
     @Input()
-    ariaLabel: string;
+    ariaLabel = 'carousel';
 
     /** Sets aria-labelledby attribute for carousel */
     @Input()
@@ -55,49 +70,112 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
     @Input()
     ariaDescribedBy: string;
 
+    /** Sets position of page indicator container. Default position is bottom. */
+    @Input()
+    carouselIndicatorsOrientation = CarouselIndicatorsOrientation.bottom;
+
+    /** Height for carousel container */
+    @Input()
+    height: string;
+
+    /** Width for carousel container */
+    @Input()
+    width: string;
+
+    /** If carousel is in circular loop */
+    @Input()
+    loop = false;
+
     /** Label for left navigation button */
     @Input()
     leftNavigationBtnLabel = 'Go to previous item';
 
-    /** Label for right navigation button*/
+    /** Label for right navigation button */
     @Input()
     rightNavigationBtnLabel = 'Go to next item';
 
-    /** Start position for visible items. Starts with position 0 */
-    @Input()
-    visibleItemsStartPosition = 0;
-
-    /** Number of items to be visible at a time */
-    @Input()
-    visibleItemsCount = 1;
-
-    /** Shows/hides optional page indicator container  */
-    @Input()
-    showPageIndicatorContainer = true;
-
-    /** Shows/hides optional page indicator */
-    @Input()
-    showPageIndicator = true;
-
     /** Shows/hides optional navigation button */
     @Input()
-    showNavigator = true;
-
-    /** Sets position of page indicator container. Default position is bottom. */
-    @Input()
-    pageIndicatorContainerPlacement: 'top' | 'bottom' = 'bottom';
+    navigation = true;
 
     /** Show navigation button in page indicator container or inside content. Default is page indicator container on true value */
     @Input()
     navigatorInPageIndicator = true;
 
-    /** If carousel is in circular loop */
+    /** Convert to Numeric page indicator */
     @Input()
-    isCircular = false;
+    numericIndicator = false;
 
-    /** Event thrown, when active element is changed */
+    /** Shows/hides optional page indicator container  */
+    @Input()
+    pageIndicatorContainer = true;
+
+    /** Shows/hides optional page indicator */
+    @Input()
+    pageIndicator = true;
+
+    /**
+     * An accessor that sets the resource strings.
+     * By default it uses EN resources.
+     */
+    @Input()
+    set resourceStrings(value: FdCarouselResourceStrings) {
+        this._resourceStrings = Object.assign({}, this._resourceStrings, value);
+    }
+
+    /**
+     * An accessor that returns the resource strings.
+     */
+    get resourceStrings(): FdCarouselResourceStrings {
+        return this._resourceStrings;
+    }
+
+    /**
+     * Returns the `role` attribute of the carousel.
+     */
+    @HostBinding('attr.role')
+    role = 'region';
+
+    /** Sets sliding duration */
+    @Input()
+    slideTransitionDuration = '150ms';
+
+    /** Is swipe enabled */
+    @Input()
+    swipeEnabled = false;
+
+    /**
+     * Returns the `tabIndex` of the carousel component.
+     */
+    @HostBinding('attr.tabindex')
+    get tabIndex(): number {
+        return 0;
+    }
+
+    /** Is carousel is vertical. Default value is false. */
+    @Input()
+    vertical = false;
+
+    /** Number of items to be visible at a time */
+    @Input()
+    visibleSlidesCount = 1;
+
+    /** An event that is emitted after a slide transition has happened */
     @Output()
-    readonly activeChange: EventEmitter<CarouselActiveItem> = new EventEmitter<CarouselActiveItem>();
+    readonly onSlideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
+
+    /** @hidden */
+    @ContentChildren(CarouselItemComponent, { descendants: true })
+    slides: QueryList<CarouselItemComponent>;
+
+    @ViewChild('slideContainer')
+    slideContainer: ElementRef;
+
+    /** @hidden Start index of currently active items */
+    currentActiveSlidesStartIndex = 0;
+
+    /** @hidden handles rtl service */
+    dir: string;
 
     /** @hidden Make left navigation button disabled */
     leftButtonDisabled = false;
@@ -105,27 +183,19 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
     /** @hidden Make right navigation button disabled */
     rightButtonDisabled = false;
 
-    /** @hidden Convert to Numeric page indicator */
-    numericIndicator = false;
-
-    /** @hidden Display error message when no carousel item is loaded */
-    displayErrorMessage = false;
-
     /** @hidden Fake array for counting number of page indicator */
     pageIndicatorsCountArray: number[] = [];
 
-    /** @hidden Start index of currently active items */
-    currentActiveItemsStartIndex = 0;
+    private _resourceStrings = CarouselResourceStringsEN;
 
-    /** handles rtl service
-     * @hidden */
-    public dir: string;
+    private _config: CarouselConfig = {};
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
+        private readonly _carouselService: CarouselService,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -136,19 +206,28 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.currentActiveItemsStartIndex = this.visibleItemsStartPosition;
-
-        if (this.items.length > 0) {
-            this._initializeCarousel();
-        } else {
-            this.displayErrorMessage = true;
-        }
+        // On carousel load, display first slide + number of slide visible
+        this.currentActiveSlidesStartIndex = 0;
 
         // Change pagination display to numeric, if item count is more than 8
-        if (this.items.length > ICON_PAGE_INDICATOR_LIMIT) {
+        if (this.slides.length > ICON_PAGE_INDICATOR_LIMIT) {
             this.numericIndicator = true;
         }
+
+        if (this.slides.length > 0) {
+            this._initializeCarousel();
+        } else {
+            this.leftButtonDisabled = true;
+            this.rightButtonDisabled = true;
+        }
+
         this._changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._initializeServiceConfig();
+        this._carouselService.initialise(this._config, this.slides, this.slideContainer);
     }
 
     /** @hidden */
@@ -157,135 +236,71 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
         this._onDestroy$.complete();
     }
 
-    /** Shows/hides slide based on direction */
-    public setCurrentSlide(slideDirection: number): void {
-        if (slideDirection === -1) {
-            // Moving to previous slide
-            this.rightButtonDisabled = false;
-            this._hideSlide(slideDirection);
-            this._adjustActiveItemPosition(slideDirection);
-            this._showSlide(slideDirection);
+    /** @hidden */
+    public get getPageIndicatorLabel(): string {
+        return `${this.currentActiveSlidesStartIndex + 1} ${this.resourceStrings.fd_carousel_of} ${
+            this.pageIndicatorsCountArray.length
+        }`;
+    }
+
+    /** @hidden */
+    public get screenReaderLabel(): string {
+        return `${this.resourceStrings.fd_carousel_reader} ${this.currentActiveSlidesStartIndex + 1} ${
+            this.resourceStrings.fd_carousel_of
+        } ${this.pageIndicatorsCountArray.length}`;
+    }
+
+    /** @hidden */
+    @HostListener('keydown.arrowright', ['$event'])
+    public onKeydownArrowRight(event): void {
+        event.preventDefault();
+        if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
+            return;
         } else {
-            // Moving to next slide
-            this.leftButtonDisabled = false;
-            this._hideSlide(slideDirection);
-            this._adjustActiveItemPosition(slideDirection);
-            this._showSlide(slideDirection);
+            this.next();
         }
-        this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
-            this._changeDetectorRef.detectChanges();
-        });
-    }
-
-    /** @hidden Add new visible item to carousel */
-    private _showSlide(slideDirection: number): void {
-        let slidePositionToShow: number;
-
-        if (slideDirection === -1) {
-            slidePositionToShow = this.currentActiveItemsStartIndex;
+    /** @hidden */
+    @HostListener('keydown.arrowleft', ['$event'])
+    public onKeydownArrowLeft(event): void {
+        event.preventDefault();
+        if (!this.loop && this.currentActiveSlidesStartIndex <= 0) {
+            return;
         } else {
-            slidePositionToShow = this.currentActiveItemsStartIndex + this.visibleItemsCount - 1;
-        }
-
-        // Show left slide of previous first visible slide
-        this.items.toArray()[slidePositionToShow].showItem();
-
-        this.activeChange.emit(new CarouselActiveItem(this.items.toArray()[slidePositionToShow], slideDirection));
-
-        // Add margin between visible items
-        if (this.visibleItemsCount > 1) {
-            if (slideDirection === 1) {
-                this.items.toArray()[slidePositionToShow - 1].addMargin();
-            } else {
-                this.items.toArray()[slidePositionToShow].addMargin();
-            }
+            this.previous();
         }
     }
 
-    /** @hidden When moved left, hide the right most slide */
-    private _hideSlide(slideDirection: number): void {
-        let slidePositionToHide: number;
-
-        if (slideDirection === -1) {
-            slidePositionToHide = this.currentActiveItemsStartIndex + this.visibleItemsCount - 1;
-        } else if (slideDirection === 1) {
-            slidePositionToHide = this.currentActiveItemsStartIndex;
-        }
-        // Remove previously set margin
-        if (this.visibleItemsCount > 1) {
-            if (slideDirection === -1) {
-                this.items.toArray()[slidePositionToHide - 1].removeMargin();
-            } else {
-                this.items.toArray()[slidePositionToHide].removeMargin();
-            }
-        }
-
-        // Remove right most slide
-        this.items.toArray()[slidePositionToHide].hideItem();
+    /** Transitions to the previous slide in the carousel. */
+    public previous(): void {
+        this.rightButtonDisabled = false;
+        this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
+        this._carouselService.pickPrevious();
+        this._notifySlideChange(SlideDirection.PREVIOUS);
     }
 
-    /** @hidden  Initialize carousel with visible items */
-    private _initializeCarousel(): void {
-        // Handles navigator button enabled/disabled state
-        this._initializeButtonVisibility();
-
-        // set page indicator count with fake array, to use in template
-        this.pageIndicatorsCountArray = new Array(this.items.length - this.visibleItemsCount + 1);
-
-        // Make slide visible. Multiple item will be visible for multi item carousel.
-        for (let visibleItemIndex = 0; visibleItemIndex < this.visibleItemsCount; visibleItemIndex++) {
-            this.items.toArray()[this.visibleItemsStartPosition + visibleItemIndex].showItem();
-
-            // add margin-right except the last slide
-            if (visibleItemIndex + 1 !== this.visibleItemsCount) {
-                this.items.toArray()[this.visibleItemsStartPosition + visibleItemIndex].addMargin();
-            }
-        }
-    }
-
-    /** @hidden Handles navigation button visibility */
-    private _initializeButtonVisibility(): void {
-        if (!this.isCircular) {
-            // Navigation will be disabled if carousel has only one element
-            if (this.items.length === 0) {
-                this.leftButtonDisabled = true;
-                this.rightButtonDisabled = true;
-            }
-
-            if (this.visibleItemsStartPosition === 0) {
-                this.leftButtonDisabled = true;
-            } else if (this.visibleItemsStartPosition === this.items.length - 1) {
-                this.rightButtonDisabled = true;
-            }
-
-            // Disables right navigation button
-            if (this.visibleItemsCount > 1) {
-                if (this.currentActiveItemsStartIndex + this.visibleItemsCount >= this.items.length - 1) {
-                    this.rightButtonDisabled = true;
-                }
-            }
-        }
+    /** Transitions to the next slide in the carousel. */
+    public next(): void {
+        // Moving to next slide
+        this.leftButtonDisabled = false;
+        this._adjustActiveItemPosition(SlideDirection.NEXT);
+        this._carouselService.pickNext();
+        this._notifySlideChange(SlideDirection.NEXT);
     }
 
     /** @hidden Adjust position of active item, based on slide direction */
-    private _adjustActiveItemPosition(slideDirection: number): void {
+    private _adjustActiveItemPosition(slideDirection: SlideDirection): void {
         // Move one step in the direction
-        this.currentActiveItemsStartIndex = this.currentActiveItemsStartIndex + slideDirection;
+        const positionAdjustment = slideDirection === SlideDirection.NEXT ? 1 : -1;
+        this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex + positionAdjustment;
 
         // If carousel set to loop
-        if (this.isCircular) {
-            if (this.currentActiveItemsStartIndex < 0) {
-                this.currentActiveItemsStartIndex = this.items.length - 1;
-            }
-
-            if (this.currentActiveItemsStartIndex === this.items.length) {
-                this.currentActiveItemsStartIndex = 0;
+        if (this.loop) {
+            if (this.currentActiveSlidesStartIndex < 0) {
+                this.currentActiveSlidesStartIndex = this.slides.length - 1;
+            } else if (this.currentActiveSlidesStartIndex === this.slides.length) {
+                this.currentActiveSlidesStartIndex = 0;
             }
         } else {
             this._disableNavigationButton();
@@ -295,15 +310,78 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnDestroy {
     /** @hidden Disable navigation if either side limit reached */
     private _disableNavigationButton(): void {
         // Need to disable navigation button if either direction limit has reached.
-        if (this.currentActiveItemsStartIndex === 0) {
+        if (this.currentActiveSlidesStartIndex === 0) {
             this.leftButtonDisabled = true;
-        } else if (this.items.length - 1 === this.currentActiveItemsStartIndex) {
+        } else if (this.slides.length - 1 === this.currentActiveSlidesStartIndex) {
             this.rightButtonDisabled = true;
         } else if (
-            this.visibleItemsCount > 1 &&
-            this.currentActiveItemsStartIndex + this.visibleItemsCount === this.items.length
+            this.visibleSlidesCount > 1 &&
+            this.currentActiveSlidesStartIndex + this.visibleSlidesCount === this.slides.length
         ) {
             this.rightButtonDisabled = true;
         }
+    }
+
+    /** @hidden Initialize carousel with visible items */
+    private _initializeCarousel(): void {
+        // Handles navigator button enabled/disabled state
+        this._initializeButtonVisibility();
+
+        // set page indicator count with fake array, to use in template
+        this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
+    }
+
+    /** @hidden Initialize config for Carousel service */
+    private _initializeServiceConfig(): void {
+        this._config.vertical = this.vertical;
+        this._config.elementsAtOnce = this.visibleSlidesCount;
+        this._config.gestureSupport = this.swipeEnabled;
+        this._config.infinite = this.loop;
+        this._config.transition = this.slideTransitionDuration;
+    }
+
+    /** @hidden Handles navigation button visibility */
+    private _initializeButtonVisibility(): void {
+        if (!this.loop) {
+            // Navigation will be disabled if carousel has only one element
+            if (this.slides.length === 1) {
+                this.leftButtonDisabled = true;
+                this.rightButtonDisabled = true;
+            }
+
+            if (this.currentActiveSlidesStartIndex === 0) {
+                this.leftButtonDisabled = true;
+            } else if (this.currentActiveSlidesStartIndex === this.slides.length - 1) {
+                this.rightButtonDisabled = true;
+            }
+
+            // Disables right navigation button
+            if (this.visibleSlidesCount > 1) {
+                if (this.currentActiveSlidesStartIndex + this.visibleSlidesCount >= this.slides.length - 1) {
+                    this.rightButtonDisabled = true;
+                }
+            }
+        }
+    }
+
+    /** @hidden Handles notification on visible slide change */
+    private _notifySlideChange(slideDirection: SlideDirection): void {
+        const activeSlides: CarouselItemComponent[] = new Array();
+        const slides = this.slides.toArray();
+
+        for (let activeSlideIndex = 0; activeSlideIndex < this.visibleSlidesCount; activeSlideIndex++) {
+            activeSlides.push(slides[this.currentActiveSlidesStartIndex + activeSlideIndex]);
+        }
+
+        const direction = slideDirection === SlideDirection.NEXT ? 'Next' : 'Previous';
+        this.onSlideChange.emit(new CarouselActiveSlides(activeSlides, direction));
+    }
+
+    /** @hidden Rtl change subscription */
+    private _subscribeToRtl(): void {
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
+            this.dir = isRtl ? 'rtl' : 'ltr';
+            this._changeDetectorRef.detectChanges();
+        });
     }
 }

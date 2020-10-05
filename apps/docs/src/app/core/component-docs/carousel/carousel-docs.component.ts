@@ -11,6 +11,8 @@ import * as carouselContentNavigatorTs from '!raw-loader!./examples/carousel-con
 import * as carouselContentNavigatorHtml from '!raw-loader!./examples/carousel-content-navigation.component.html';
 import * as carouselLoopedNavigationTs from '!raw-loader!./examples/carousel-looped-navigation.component.ts';
 import * as carouselLoopedNavigationHtml from '!raw-loader!./examples/carousel-looped-navigation.component.html';
+import * as carouselErrorMessageTs from '!raw-loader!./examples/carousel-error-message.component.ts';
+import * as carouselErrorMessageHtml from '!raw-loader!./examples/carousel-error-message.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -105,6 +107,21 @@ export class CarouselDocsComponent {
             fileName: 'carousel-looped-navigation',
             component: 'CarouselLoopedNavigationComponent',
             code: carouselLoopedNavigationHtml
+        }
+    ];
+
+    carouselErrorMessage: ExampleFile[] = [
+        {
+            language: 'typescript',
+            fileName: 'carousel-error-message',
+            component: 'CarouselErrorMessageComponent',
+            code: carouselErrorMessageTs
+        },
+        {
+            language: 'html',
+            fileName: 'carousel-error-message',
+            component: 'CarouselErrorMessageComponent',
+            code: carouselErrorMessageHtml
         }
     ];
 }

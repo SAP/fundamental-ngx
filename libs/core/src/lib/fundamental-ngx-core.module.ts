@@ -12,7 +12,6 @@ import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
 import { ButtonModule } from './button/button.module';
 import { CalendarModule } from './calendar/calendar.module';
-import { CarouselNewModule } from './carousel/carousel.module';
 import { ComboboxModule } from './combobox/combobox.module';
 import { CheckboxModule } from './checkbox/checkbox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
@@ -87,7 +86,6 @@ import { MessageToastService } from './message-toast/message-toast-service/messa
         SegmentedButtonModule,
         CalendarModule,
         CarouselModule,
-        CarouselNewModule,
         ComboboxModule,
         ComboboxMobileModule,
         CheckboxModule,
