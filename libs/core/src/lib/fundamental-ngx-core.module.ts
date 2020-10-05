@@ -15,6 +15,7 @@ import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FileInputModule } from './file-input/file-input.module';
 import { FileUploaderModule } from './file-uploader/file-uploader.module';
+import { FormattedTextModule } from './formatted-text/formatted-text.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
 import { InfiniteScrollModule } from './infinite-scroll/infinite-scroll.module';
@@ -88,6 +89,7 @@ import { ToolbarModule } from './toolbar/toolbar.module';
         FileInputModule,
         FileUploaderModule,
         FormModule,
+        FormattedTextModule,
         IconModule,
         InfoLabelModule,
         InlineHelpModule,

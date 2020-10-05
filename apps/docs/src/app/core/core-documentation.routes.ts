@@ -98,6 +98,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/form-message/form-message-docs.module').then((m) => m.FormMessageDocsModule)
             },
             {
+                path: 'formatted-text',
+                loadChildren: () =>
+                    import('./component-docs/formatted-text/formatted-text-docs.module').then((m) => m.FormattedTextDocsModule)
+            },
+            {
                 path: 'global-config',
                 loadChildren: () =>
                     import('./component-docs/global-config/global-config-docs.module').then((m) => m.GlobalConfigDocsModule)
