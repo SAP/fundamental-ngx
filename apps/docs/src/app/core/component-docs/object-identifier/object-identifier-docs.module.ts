@@ -5,7 +5,12 @@ import { API_FILES } from '../../api-files';
 import { ObjectIdentifierDocsComponent } from './object-identifier-docs.component';
 import { ObjectIdentifierHeaderComponent } from './object-identifier-header/object-identifier-header.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { ObjectIdentifierDefaultExampleComponent, ObjectIdentifierLinkExampleComponent } from './examples/object-identifier-components';
+import {
+    ObjectIdentifierBoldExampleComponent,
+    ObjectIdentifierDefaultExampleComponent,
+    ObjectIdentifierDescriptiveExampleComponent,
+    ObjectIdentifierLinkExampleComponent
+} from './examples/object-identifier-components';
 import { ObjectIdentifierTableExampleComponent } from './examples/object-identifier-table-example.component';
 import { ObjectIdentifierModule, TableModule } from '@fundamental-ngx/core';
 
@@ -27,7 +32,9 @@ const routes: Routes = [
         ObjectIdentifierHeaderComponent,
         ObjectIdentifierDefaultExampleComponent,
         ObjectIdentifierLinkExampleComponent,
-        ObjectIdentifierTableExampleComponent
+        ObjectIdentifierTableExampleComponent,
+        ObjectIdentifierBoldExampleComponent,
+        ObjectIdentifierDescriptiveExampleComponent
     ]
 })
 export class ObjectIdentifierDocsModule {}

@@ -31,7 +31,7 @@ import { Subject } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy, OnChanges {
+export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
 
     /** Description text */
     @Input()
@@ -41,12 +41,10 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy, O
     @Input()
     bold = false;
 
-    /** Whether the title is larger - enabled by default */
+    /** Whether the title is medium size */
     @Input()
-    large = true;
-
     @HostBinding('class.fd-object-identifier--medium')
-    objectIdentifierMedium = !this.large;
+    medium = false;
 
     /** @hidden */
     @HostBinding('class.fd-object-identifier')
@@ -65,13 +63,6 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy, O
     /** @hidden */
     ngAfterContentInit(): void {
         this._listenOnLinkQueryChange();
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes && changes['large']) {
-            this.objectIdentifierMedium = !changes['large'].currentValue;
-        }
     }
 
     /** @hidden */

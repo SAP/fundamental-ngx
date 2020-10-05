@@ -9,7 +9,7 @@ import { LinkComponent } from '../link/link.component';
     template: `
         <fd-object-identifier
             #objectRef
-            [large]="large"
+            [medium]="medium"
             [bold]="bold"
             [description]="description">
             <a #linkRef fd-link>Link</a>
@@ -26,7 +26,7 @@ class TestObjectIdentifierComponent {
 
     description: string;
     bold: boolean;
-    large: boolean;
+    medium: boolean;
 
     getTitleElementClassList(): DOMTokenList {
         const elements = document.getElementsByClassName('fd-object-identifier__title');
@@ -61,7 +61,7 @@ fdescribe('ObjectIdentifierComponent', () => {
     });
 
     it('Should add medium class', () => {
-        testComponent.large = false;
+        testComponent.medium = true;
         fixture.detectChanges();
         expect(testComponent.objectIdentifierElementRef.nativeElement.classList.contains('fd-object-identifier--medium')).toBeTrue();
     });
