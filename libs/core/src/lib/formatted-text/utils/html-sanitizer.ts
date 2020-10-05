@@ -7,47 +7,9 @@ interface SanitizeWrapper {
     iframeDoc: Document | null;
 }
 
-export type LinkTargetType = '' | '_blank' | '_self' | '_top' | '_parent' | '_search';
-
 export class HtmlSanitizer {
-    private tagWhitelist: StringKey<string | boolean> = {
-        A: true,
-        ABBR: true,
-        BLOCKQUOTE: true,
-        BR: true,
-        CITE: true,
-        CODE: true,
-        DL: true,
-        DT: true,
-        DD: true,
-        EM: true,
-        H1: true,
-        H2: true,
-        H3: true,
-        H4: true,
-        H5: true,
-        H6: true,
-        P: true,
-        PRE: true,
-        STRONG: true,
-        SPAN: true,
-        U: true,
-        UL: true,
-        OL: true,
-        LI: true
-    };
-
-    private attributeWhitelist: StringKey<string | boolean | Function> = {
-        class: true,
-        style: true,
-        href: true,
-        target: '_blank',
-        download: true,
-        hreflang: true,
-        rel: true,
-        type: true,
-        title: true
-    };
+    tagWhitelist: StringKey<boolean> = {};
+    attributeWhitelist: StringKey<string | boolean | Function> = {};
 
     private schemaWhiteList: string[] = ['http', 'https', 'ftp', 'mailto'];
 
@@ -63,12 +25,56 @@ export class HtmlSanitizer {
     constructor() {
         this.extendTags();
     }
+
+    get defTagWhitelist(): StringKey<boolean> {
+        return {
+            A: true,
+            ABBR: true,
+            BLOCKQUOTE: true,
+            BR: true,
+            CITE: true,
+            CODE: true,
+            DL: true,
+            DT: true,
+            DD: true,
+            EM: true,
+            H1: true,
+            H2: true,
+            H3: true,
+            H4: true,
+            H5: true,
+            H6: true,
+            P: true,
+            PRE: true,
+            STRONG: true,
+            SPAN: true,
+            U: true,
+            UL: true,
+            OL: true,
+            LI: true
+        };
+    }
+
+    get defAttributeWhitelist(): StringKey<string | boolean | Function> {
+        return {
+            class: true,
+            style: true,
+            href: true,
+            target: '_blank',
+            download: true,
+            hreflang: true,
+            rel: true,
+            type: true,
+            title: true
+        };
+    }
+
     extendTags(customTags?: StringKey<boolean | string>): void {
-        this.tagWhitelist = { ...this.tagWhitelist, ...customTags, BODY: true };
+        this.tagWhitelist = { ...this.defTagWhitelist, ...customTags, BODY: true };
     }
 
     extendAttrs(customAttrs?: StringKey<boolean | string>): void {
-        this.attributeWhitelist = { ...this.attributeWhitelist, ...customAttrs };
+        this.attributeWhitelist = { ...this.defAttributeWhitelist, ...customAttrs };
     }
 
     sanitizeHtml(input: string): string {
@@ -185,10 +191,10 @@ export class HtmlSanitizer {
     }
 
     private validateBySchema(value: string): boolean {
-        return value.indexOf(':') > -1 && !this.startsWithAny(value, this.schemaWhiteList);
+        return !!value && value.indexOf(':') > -1 && !this.startsWithAny(value, this.schemaWhiteList);
     }
 
     private startsWithAny(str: string, substrings: string[]): boolean {
-        return substrings.some((value) => str.indexOf(value) === 0);
+        return !!str && substrings.some((value) => str.indexOf(value) === 0);
     }
 }
