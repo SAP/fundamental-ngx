@@ -30,20 +30,18 @@
                     fd-toolbar-item
                     fd-button
                     [compact]="true"
-                    [fdType]="'positive'"
+                    fdType="positive"
                     (click)="$event.stopPropagation()"
-                >
-                    Accept
-                </button>
+                    label="Accept"
+                ></button>
                 <button
                     fd-toolbar-item
                     fd-button
                     [compact]="true"
-                    [fdType]="'negative'"
+                    fdType="negative"
                     (click)="$event.stopPropagation()"
-                >
-                    Reject
-                </button>
+                    label="Reject"
+                ></button>
             </fd-toolbar>
         </fdp-dynamic-page-global-actions>
         <fdp-dynamic-page-layout-actions>
@@ -130,10 +128,10 @@
         <div fd-bar barDesign="floating-footer">
             <div fd-bar-right>
                 <fd-bar-element>
-                    <button fd-button fdType="emphasized" [compact]="true">Save</button>
+                    <button fd-button fdType="emphasized" [compact]="true" label="Save"></button>
                 </fd-bar-element>
                 <fd-bar-element>
-                    <button fd-button fdType="transparent" [compact]="true">Cancel</button>
+                    <button fd-button fdType="transparent" [compact]="true" label="Cancel"></button>
                 </fd-bar-element>
             </div>
         </div>
