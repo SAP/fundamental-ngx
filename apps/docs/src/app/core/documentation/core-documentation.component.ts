@@ -48,6 +48,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/multi-input', name: 'Multi Input' },
             { url: 'core/notification', name: 'Notification' },
             { url: 'core/object-marker', name: 'Object Marker' },
+            { url: 'core/object-identifier', name: 'Object Identifier' },
             { url: 'core/object-status', name: 'Object Status' },
             { url: 'core/pagination', name: 'Pagination' },
             { url: 'core/panel', name: 'Panel' },

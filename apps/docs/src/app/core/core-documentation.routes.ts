@@ -205,6 +205,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'object-identifier',
+                loadChildren: () =>
+                    import('./component-docs/object-identifier/object-identifier-docs.module').then(
+                        (m) => m.ObjectIdentifierDocsModule
+                    )
+            },
+            {
                 path: 'object-marker',
                 loadChildren: () =>
                     import('./component-docs/object-marker/object-marker-docs.module').then(
