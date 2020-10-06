@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.22.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.4...v0.22.1-rc.5) (2020-10-06)
+
+
+### Features
+
+* (Core) introduce new Object Identifier ([#3526](https://github.com/SAP/fundamental-ngx/issues/3526)) ([7f861b5](https://github.com/SAP/fundamental-ngx/commit/7f861b543a4b60714c6c3f20f626213c910089aa))
+
 ### [0.22.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.3...v0.22.1-rc.4) (2020-10-06)
 
 ### [0.22.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.2...v0.22.1-rc.3) (2020-10-04)
