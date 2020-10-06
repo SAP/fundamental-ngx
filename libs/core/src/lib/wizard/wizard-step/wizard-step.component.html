@@ -7,7 +7,7 @@
         (keypress)="stepContainerKeypress($event)"
     >
         <ng-content select="fd-wizard-step-indicator"></ng-content>
-        <div class="fd-wizard__label-container" [ngClass]="optionalText ? 'fd-wizard__label-container--optional' : ''">
+        <div class="fd-wizard__label-container" [class.fd-wizard__label-container--optional]="optionalText">
             <div #wizardLabel>
                 <span class="fd-wizard__label">{{ label }}</span>
                 <span *ngIf="optionalText" class="fd-wizard__optional-text">{{ optionalText }}</span>
