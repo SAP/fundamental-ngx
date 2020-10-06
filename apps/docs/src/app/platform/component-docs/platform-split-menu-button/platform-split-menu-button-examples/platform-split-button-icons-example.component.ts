@@ -8,12 +8,11 @@ export class PlatformDocsSplitMenuButtonIconsComponent {
     label1 = 'Option 1';
     label2 = 'Option 1';
     label3 = '';
-    label4 = '';
 
+    title3 = 'Split button with icon';
     selectedItem1: string;
     selectedItem2: string;
     selectedItem3: string;
-    selectedItem4: string;
 
     public onItemSelect1(menuItemValue: string): void {
         this.selectedItem1 = menuItemValue;
@@ -36,18 +35,10 @@ export class PlatformDocsSplitMenuButtonIconsComponent {
     public onItemSelect3(menuItemValue: string): void {
         this.selectedItem3 = menuItemValue;
         this.label3 = menuItemValue;
+        this.title3 = menuItemValue ? menuItemValue : this.title3;
     }
 
     public onPrimaryButtonClick3(): void {
         this.selectedItem3 = this.label3;
-    }
-
-    public onItemSelect4(menuItemValue: string): void {
-        this.selectedItem4 = menuItemValue;
-        this.label4 = menuItemValue;
-    }
-
-    public onPrimaryButtonClick4(): void {
-        this.selectedItem4 = this.label4;
     }
 }

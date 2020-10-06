@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
  * <div fd-action-bar-description>
  * <div fd-action-bar-header>
  * <div fd-action-bar-mobile>
- * <h1 fd-action-bar-title>
+ * <div fd-action-bar-title>
  * ```
  */
 @Component({

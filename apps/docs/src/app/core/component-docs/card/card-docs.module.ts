@@ -23,6 +23,8 @@ import { CardLoaderExampleComponent } from './examples/card-loader-example.compo
 import { CardFooterExampleComponent } from './examples/card-footer-example.component';
 import { CardKpiExampleComponent } from './examples/card-kpi-example.component';
 import { CardTableExampleComponent } from './examples/card-table-example.component';
+import { BarChartListCardExampleComponent } from './examples/bar-chart-list-card/bar-chart-list-card-example.component';
+import { CardBarComponent } from './examples/bar-chart-list-card/card-bar.component';
 
 const routes: Routes = [
     {
@@ -56,7 +58,9 @@ const routes: Routes = [
         CardLoaderExampleComponent,
         CardFooterExampleComponent,
         CardKpiExampleComponent,
-        CardTableExampleComponent
+        CardTableExampleComponent,
+        BarChartListCardExampleComponent,
+        CardBarComponent
     ]
 })
 export class CardDocsModule {}

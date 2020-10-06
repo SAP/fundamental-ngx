@@ -1,19 +1,21 @@
 //@import '~fundamental-styles/dist/form-input-message-group';
 
 .fd-popover-container-custom--message {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .fd-popover-container-custom {
-  border: none;
+    border: none;
 }
 
 // when disabled, this class adds the grabber cursor type on textarea. Overriding it to auto instead of pointer.
 .fd-popover__control {
-  cursor: auto !important;
+    cursor: auto !important;
 }
 
 // the default style display:inline-block is restricting/shrinking the width, therefore we are overriding it to take flex width.
-.fd-popover-custom {
-  display: flex;
+fdp-input-message-group {
+    .fd-popover-custom {
+        display: flex;
+    }
 }

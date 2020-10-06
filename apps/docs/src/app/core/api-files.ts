@@ -7,12 +7,12 @@
 export const API_FILES = {
     actionBar: [
         'ActionBarComponent',
+        'ActionBarTitleComponent',
         'ActionBarActionsDirective',
         'ActionBarBackDirective',
         'ActionBarDescriptionDirective',
         'ActionBarHeaderDirective',
-        'ActionBarMobileDirective',
-        'ActionBarTitleDirective'
+        'ActionBarMobileDirective'
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
@@ -55,9 +55,13 @@ export const API_FILES = {
     checkbox: ['CheckboxComponent'],
     datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
     datetimePicker: ['DatetimePickerComponent', 'FdDateTime', 'DateTimeFormatParser', 'DateTimeFormatParserDefault'],
-    dropdown: ['PopoverDropdownComponent'],
-    fileInput: ['FileInputComponent', 'FileInputSelectDirective', 'FileInputDragndropDirective'],
-    fileUploader: ['FileUploaderComponent', 'FileUploaderSelectDirective', 'FileUploaderDragndropDirective'],
+    fileInput: ['FileInputComponent', 'FileSelectDirective', 'FileDragndropDirective'],
+    fileUploader: [
+        'FileUploaderComponent',
+        'FileUploaderSelectDirective',
+        'FileUploaderDragndropDirective',
+        'FileUploaderService'
+    ],
     fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective'],
     form: [
         'FormControlComponent',
@@ -161,6 +165,7 @@ export const API_FILES = {
         'NotificationDefault',
         'NotificationRef'
     ],
+    objectMarker: ['ObjectMarkerComponent'],
     objectStatus: ['ObjectStatusModule', 'ObjectStatusComponent'],
     pagination: ['PaginationComponent', 'PaginationModel', 'PaginationService'],
     panel: ['PanelComponent', 'PanelTitleDirective'],

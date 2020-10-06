@@ -2,6 +2,148 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.22.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.2...v0.22.1-rc.3) (2020-10-04)
+
+### [0.22.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.1...v0.22.1-rc.2) (2020-10-04)
+
+### [0.22.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.0...v0.22.1-rc.1) (2020-10-04)
+
+### [0.22.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.22.0...v0.22.1-rc.0) (2020-10-03)
+
+## [0.22.0](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.129...v0.22.0) (2020-10-02)
+
+## [0.22.0-rc.129](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.128...v0.22.0-rc.129) (2020-10-02)
+
+
+### Bug Fixes
+
+* (platform) combobox width, custom template and groupKey issues ([#3527](https://github.com/SAP/fundamental-ngx/issues/3527)) ([35479b7](https://github.com/SAP/fundamental-ngx/commit/35479b710a8bcb221804630c5f0fa18047ae1300))
+
+## [0.22.0-rc.128](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.127...v0.22.0-rc.128) (2020-10-02)
+
+
+### Bug Fixes
+
+* (platform) updating button with styles 0.12.0 ([#3514](https://github.com/SAP/fundamental-ngx/issues/3514)) ([75a2ea7](https://github.com/SAP/fundamental-ngx/commit/75a2ea77607b10653dda56d210b4d5188a3ee57c))
+
+## [0.22.0-rc.127](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.126...v0.22.0-rc.127) (2020-10-01)
+
+
+### Bug Fixes
+
+* Remove circular dep between checkbox and list component ([#3519](https://github.com/SAP/fundamental-ngx/issues/3519)) ([b913ddb](https://github.com/SAP/fundamental-ngx/commit/b913ddbcc73b0945d1ddbf802f39ab9aea0abdd6))
+
+## [0.22.0-rc.126](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.125...v0.22.0-rc.126) (2020-10-01)
+
+
+### Bug Fixes
+
+* bring temporary v0.11.0 styling for Layout Grid ([#3521](https://github.com/SAP/fundamental-ngx/issues/3521)) ([ff731e2](https://github.com/SAP/fundamental-ngx/commit/ff731e2264e32990c68f1fab38237893e6c48bef))
+
+## [0.22.0-rc.125](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.124...v0.22.0-rc.125) (2020-10-01)
+
+
+### Bug Fixes
+
+* add fix for ShellBar user menu button using Avatar ([#3468](https://github.com/SAP/fundamental-ngx/issues/3468)) ([d2ddddc](https://github.com/SAP/fundamental-ngx/commit/d2ddddcbec2eb18b397c4ecba27f09d86a39b04e))
+
+## [0.22.0-rc.124](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.123...v0.22.0-rc.124) (2020-10-01)
+
+
+### Features
+
+* (Core) component for object marker with document changes ([#3178](https://github.com/SAP/fundamental-ngx/issues/3178)) ([48961d4](https://github.com/SAP/fundamental-ngx/commit/48961d446d3123af4552e1d97b130a61da84fd95))
+
+
+### Bug Fixes
+
+* (platform) Removed Invalid examples and compact menu button fix ([#3363](https://github.com/SAP/fundamental-ngx/issues/3363)) ([80b95f3](https://github.com/SAP/fundamental-ngx/commit/80b95f3589d13890a51c50916023d9f1f0bac288))
+* (platform) set max width to split menu button ([#3362](https://github.com/SAP/fundamental-ngx/issues/3362)) ([95665e3](https://github.com/SAP/fundamental-ngx/commit/95665e315d7ee2a7eda31bdfc54fe09170b78f51))
+* add fix for broken product menu in Shellbar ([#3470](https://github.com/SAP/fundamental-ngx/issues/3470)) ([ef81011](https://github.com/SAP/fundamental-ngx/commit/ef81011c35a6258c119612e73dd772e39741dc99))
+
+## [0.22.0-rc.123](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.122...v0.22.0-rc.123) (2020-10-01)
+
+
+### Bug Fixes
+
+* Shellbar Examples and Size added ([#3513](https://github.com/SAP/fundamental-ngx/issues/3513)) ([ea576f2](https://github.com/SAP/fundamental-ngx/commit/ea576f2ff8313287c58644ed3831e26bfc8acba6))
+
+## [0.22.0-rc.122](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.121...v0.22.0-rc.122) (2020-10-01)
+
+
+### Bug Fixes
+
+* (platform) addressed list header label issue ([#3457](https://github.com/SAP/fundamental-ngx/issues/3457)) ([584392f](https://github.com/SAP/fundamental-ngx/commit/584392f9d4713898c1898454e98553ccdff0589c))
+
+## [0.22.0-rc.121](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.120...v0.22.0-rc.121) (2020-10-01)
+
+## [0.22.0-rc.120](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.119...v0.22.0-rc.120) (2020-10-01)
+
+
+### Bug Fixes
+
+* Firefox double triggered checkbox ([#3506](https://github.com/SAP/fundamental-ngx/issues/3506)) ([b9b7646](https://github.com/SAP/fundamental-ngx/commit/b9b7646f65011c6fbf81e18003b6b59cd125ade4))
+
+## [0.22.0-rc.119](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.118...v0.22.0-rc.119) (2020-10-01)
+
+## [0.22.0-rc.118](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.117...v0.22.0-rc.118) (2020-10-01)
+
+## [0.22.0-rc.117](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.116...v0.22.0-rc.117) (2020-10-01)
+
+
+### Bug Fixes
+
+* Update Dialog title styling ([#3463](https://github.com/SAP/fundamental-ngx/issues/3463)) ([d0f8cae](https://github.com/SAP/fundamental-ngx/commit/d0f8cae61f7c451e3fa4871655e3d0b313d9fe6c))
+
+## [0.22.0-rc.116](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.115...v0.22.0-rc.116) (2020-09-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* fd-action-bar-title directive is now a component.
+
+### Bug Fixes
+
+* refactor Action Bar title to follow the latest fund-styles ([#3466](https://github.com/SAP/fundamental-ngx/issues/3466)) ([5d80c05](https://github.com/SAP/fundamental-ngx/commit/5d80c0561128f45e0fa1eb153cec34b979424b74))
+
+## [0.22.0-rc.115](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.114...v0.22.0-rc.115) (2020-09-30)
+
+## [0.22.0-rc.114](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.113...v0.22.0-rc.114) (2020-09-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* side navigation expand icon changed from directive to component
+
+### Bug Fixes
+
+* Show side navigation expand icon ([#3510](https://github.com/SAP/fundamental-ngx/issues/3510)) ([ea73993](https://github.com/SAP/fundamental-ngx/commit/ea73993e5d97f80a7c5a64b2d291b3280e354fc6))
+
+## [0.22.0-rc.113](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.112...v0.22.0-rc.113) (2020-09-30)
+
+## [0.22.0-rc.112](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.111...v0.22.0-rc.112) (2020-09-30)
+
+
+### Bug Fixes
+
+* (core) card RTL mode ([#3461](https://github.com/SAP/fundamental-ngx/issues/3461)) ([10f6eff](https://github.com/SAP/fundamental-ngx/commit/10f6eff848c2e5c5c5f282f1f243ea5e64472bfa))
+
+## [0.22.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.110...v0.22.0-rc.111) (2020-09-30)
+
+
+### Bug Fixes
+
+* fix files validation on file uploader, add unique ID ([#3207](https://github.com/SAP/fundamental-ngx/issues/3207)) ([2b98f29](https://github.com/SAP/fundamental-ngx/commit/2b98f29e2003328ca66d3ad7319192c295689517))
+
+## [0.22.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.109...v0.22.0-rc.110) (2020-09-30)
+
+## [0.22.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.108...v0.22.0-rc.109) (2020-09-30)
+
+
+### Features
+
+* (platform)Introducing new Thumbnail component ([#3309](https://github.com/SAP/fundamental-ngx/issues/3309)) ([4326274](https://github.com/SAP/fundamental-ngx/commit/43262749181d0397507103d999c8e6714204aacb))
+
 ## [0.22.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.22.0-rc.107...v0.22.0-rc.108) (2020-09-30)
 
 

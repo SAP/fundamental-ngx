@@ -7,7 +7,9 @@
         cursor: pointer;
     }
 
-    .fd-nested-list__expand-icon {
-        background-color: transparent;
+    .fd-nested-list__content {
+        .fd-nested-list__button.fd-button {
+            background: none;
+        }
     }
 }

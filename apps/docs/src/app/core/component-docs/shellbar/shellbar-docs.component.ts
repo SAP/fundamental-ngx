@@ -6,6 +6,7 @@ import * as shellbarCollapsibleHTMLSrc from '!raw-loader!./examples/shellbar-col
 import * as shellbarCollapsibleTSSrc from '!raw-loader!./examples/shellbar-collapsible-example.component.ts';
 import * as sideNavShellbarHtml from '!raw-loader!./examples/shellbar-side-nav/shellbar-side-nav-example.component.html';
 import * as sideNavShellbarTs from '!raw-loader!./examples/shellbar-side-nav/shellbar-side-nav-example.component.ts';
+import * as sideNavShellbarScss from '!raw-loader!./examples/shellbar-side-nav/shellbar-side-nav-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -51,7 +52,15 @@ export class ShellbarDocsComponent {
             language: 'typescript',
             component: 'ShellbarSideNavExampleComponent',
             code: sideNavShellbarTs,
-            fileName: 'shellbar-side-nav-example'
+            fileName: 'shellbar-side-nav-example',
+            scssFileCode: sideNavShellbarScss
+        },
+        {
+            language: 'scss',
+            code: sideNavShellbarScss,
+            fileName: 'shellbar-side-nav-example',
+            component: 'ShellbarSideNavExampleComponent',
+            scssFileCode: sideNavShellbarScss
         }
     ];
 }

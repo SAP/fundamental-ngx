@@ -1,0 +1,25 @@
+.fd-card-bar-example {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+
+    .bar-row {
+        flex: 1 1 0;
+        height: 0.6rem;
+        display: flex;
+        background-color: #d5dadc;
+    }
+
+    .value {
+        min-width: 20%;
+        white-space: nowrap;
+        text-align: right;
+
+        @at-root {
+            [dir='rtl'] & {
+                text-align: left;
+            }
+        }
+    }
+}

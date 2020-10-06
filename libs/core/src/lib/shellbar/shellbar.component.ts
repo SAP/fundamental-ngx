@@ -5,11 +5,15 @@ import {
     ContentChild,
     ContentChildren,
     forwardRef,
+    Input,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { ComboboxComponent } from '../combobox/combobox.component';
+
+export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
+
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -24,6 +28,11 @@ import { ComboboxComponent } from '../combobox/combobox.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarComponent implements AfterContentInit {
+
+    /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
+    @Input()
+    size: ShellbarSizes = 'm';
+
     /** @hidden */
     @ContentChild(ComboboxComponent, { static: false })
     comboboxComponent: ComboboxComponent;

@@ -1,6 +1,4 @@
 <fd-file-uploader
-    #fileUploaderMax
-    [id]="fileUploaderMax"
     [ariaLabel]="'Choose file'"
     [ariaLabelledBy]="'Choose file'"
     [placeholder]="'Choose File to upload'"
@@ -8,7 +6,7 @@
     [buttonAriaLabel]="'browse file'"
     [multiple]="true"
     [(ngModel)]="files"
-    (selectedFilesChanged)="handleFileSection()"
+    (selectedFilesChanged)="handleFileSelection($event)"
     (selectedInvalidFiles)="handleInvalidFiles($event)"
     [maxFileSize]="'1MB'"
 ></fd-file-uploader>

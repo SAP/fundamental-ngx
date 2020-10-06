@@ -32,6 +32,7 @@ export * from './lib/multi-input/public_api';
 export * from './lib/message-strip/public_api';
 export * from './lib/nested-list/public_api';
 export * from './lib/notification/public_api';
+export * from './lib/object-marker/public_api';
 export * from './lib/pagination/public_api';
 export * from './lib/panel/public_api';
 export * from './lib/popover/public_api';

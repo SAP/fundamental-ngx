@@ -111,7 +111,6 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
                 .subscribe(() => this._connectedOverlay.overlayRef.setDirection(this._direction));
         }
 
-
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -221,7 +220,9 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
             return;
         }
 
-        this._updateModel(modelValue.value);
+        const optionItem = this._getSelectedOptionItem(this.inputText);
+
+        this._updateModel(optionItem ? optionItem.value : this.inputText);
     }
 
     /** @hidden

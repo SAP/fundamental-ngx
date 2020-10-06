@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedListModule } from '../nested-list.module';
 import { NestedListStateService } from '../nested-list-state.service';
-import { NestedListExpandIconDirective } from '../nested-list-directives';
+import { NestedListExpandIconComponent } from '../nested-list-directives';
 import { NestedItemService } from '../nested-item/nested-item.service';
 
 @Component({
@@ -21,14 +21,14 @@ class TestNestedContainerComponent {
     @ViewChild(NestedListContentDirective)
     directiveElement: NestedListContentDirective;
 
-    @ViewChild(NestedListExpandIconDirective)
-    iconElement: NestedListExpandIconDirective;
+    @ViewChild(NestedListExpandIconComponent)
+    iconElement: NestedListExpandIconComponent;
 }
 
 describe('NestedContentDirective', () => {
     let component: TestNestedContainerComponent;
     let directiveElement: NestedListContentDirective;
-    let iconElement: NestedListExpandIconDirective;
+    let iconElement: NestedListExpandIconComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
     beforeEach(async(() => {

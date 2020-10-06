@@ -17,7 +17,7 @@
     [ngModel]="isChecked"
     (ngModelChange)="nextValue()"
     (keydown)="checkByKey($event)"
-    (keyup)="$event.stopPropagation()"
+    (keyup)="handleInputKeyUp($event)"
     (click)="$event.stopPropagation()"
 />
 <label class="fd-checkbox__label"
