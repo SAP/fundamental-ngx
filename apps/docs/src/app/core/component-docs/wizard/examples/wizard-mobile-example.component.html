@@ -2,7 +2,12 @@
     <fd-wizard>
         <fd-wizard-navigation>
             <ul fd-wizard-progress-bar>
-                <li fd-wizard-step [status]="step1status" label="Step 1: One Line">
+                <li
+                    fd-wizard-step
+                    [status]="step1status"
+                    (statusChange)="step1status = $event"
+                    label="Step 1: One Line"
+                >
                     <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
                     <fd-wizard-content>
                         Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium nibh lorem
@@ -17,7 +22,12 @@
                         </fd-wizard-next-step>
                     </fd-wizard-content>
                 </li>
-                <li fd-wizard-step [status]="step2status" label="Step 2: Very long label that truncates on the second line">
+                <li
+                    fd-wizard-step
+                    [status]="step2status"
+                    (statusChange)="step2status = $event"
+                    label="Step 2: Very long label that truncates on the second line"
+                >
                     <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
                 </li>
                 <li fd-wizard-step status="upcoming" label="Step 3">
@@ -40,7 +50,12 @@
     <fd-wizard>
         <fd-wizard-navigation>
             <ul fd-wizard-progress-bar>
-                <li fd-wizard-step [status]="step1status" label="Step 1: One Line">
+                <li
+                    fd-wizard-step
+                    [status]="step1status"
+                    (statusChange)="step1status = $event"
+                    label="Step 1: One Line"
+                >
                     <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
                     <fd-wizard-content>
                         <img src="http://lorempixel.com/220/220/nature/4/" role="presentation" />
@@ -51,7 +66,12 @@
                         </fd-wizard-next-step>
                     </fd-wizard-content>
                 </li>
-                <li fd-wizard-step [status]="step2status" label="Step 2: Very long label that truncates on the second line">
+                <li
+                    fd-wizard-step
+                    [status]="step2status"
+                    (statusChange)="step2status = $event"
+                    label="Step 2: Very long label that truncates on the second line"
+                >
                     <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
                     <fd-wizard-content>
                         Wizard Content for step 2

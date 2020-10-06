@@ -1,7 +1,7 @@
 <fd-wizard>
     <fd-wizard-navigation>
         <ul fd-wizard-progress-bar size="sm">
-            <li fd-wizard-step [status]="step1status" label="Step 1: One Line">
+            <li fd-wizard-step [status]="step1status" (statusChange)="step1status = $event" label="Step 1: One Line">
                 <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
                 <fd-wizard-content size="md" contentBackground="solid">
                     This wizard content has a 'solid' background and padding set with the size input.
@@ -15,6 +15,7 @@
             <li
                 fd-wizard-step
                 [status]="step2status"
+                (statusChange)="step2status = $event"
                 branching="true"
                 label="Step 2: This step has a 'Branching' connector"
             >
@@ -28,7 +29,13 @@
                     </fd-wizard-next-step>
                 </fd-wizard-content>
             </li>
-            <li fd-wizard-step [status]="step3status" label="Step 3: One line truncates" optionalText="(Optional)">
+            <li
+                fd-wizard-step
+                [status]="step3status"
+                (statusChange)="step3status = $event"
+                label="Step 3: One line truncates"
+                optionalText="(Optional)"
+            >
                 <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
                 <fd-wizard-content size="md">
                     Wizard Content for step 3

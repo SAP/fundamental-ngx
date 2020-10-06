@@ -23,7 +23,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, WizardModule, SharedDocumentationPageModule, BarModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationModule,
+        WizardModule,
+        SharedDocumentationPageModule,
+        BarModule
+    ],
     exports: [RouterModule],
     declarations: [
         WizardHeaderComponent,

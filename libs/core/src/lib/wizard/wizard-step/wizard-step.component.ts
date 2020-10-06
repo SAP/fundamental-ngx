@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
@@ -11,6 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
+import { KeyUtil } from '@fundamental-ngx/core';
 
 export type StepType = 'completed' | 'current' | 'upcoming' | 'active';
 
@@ -64,6 +66,12 @@ export class WizardStepComponent implements OnChanges {
     @Output()
     statusChange = new EventEmitter<StepType>();
 
+    /**
+     * Event emitted when a step is clicked.
+     */
+    @Output()
+    stepClicked = new EventEmitter<WizardStepComponent>();
+
     /** @hidden */
     @ContentChild(WizardContentComponent)
     content: WizardContentComponent;
@@ -79,9 +87,14 @@ export class WizardStepComponent implements OnChanges {
     constructor(public elRef: ElementRef) {}
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes && changes.status) {
-            this.statusChange.emit(this.status);
+    ngOnChanges(): void {
+        this.statusChange.emit(this.status);
+    }
+
+    /** @hidden */
+    stepContainerKeypress(event?: KeyboardEvent): void {
+        if (!event || KeyUtil.isKey(event, ['Space', 'Enter'])) {
+            this.stepClicked.emit(this);
         }
     }
 }

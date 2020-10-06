@@ -61,6 +61,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             );
             this.steps.forEach((step) => {
                 this._subscriptions.add(
+                    step.stepClicked.subscribe((event) => {
+                        this._stepClicked(event);
+                    })
+                );
+                this._subscriptions.add(
                     step.statusChange.subscribe(() => {
                         this._handleStepOrStatusChanges();
                     })
@@ -150,9 +155,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
+        console.log('_handleStepOrStatusChanges');
         this._setContentTemplate();
         this._shrinkWhileAnyStepIsTooNarrow();
-        this._cdRef.detectChanges();
+        this._cdRef.markForCheck();
     }
 
     /** @hidden */
@@ -174,5 +180,23 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             }
         });
         return foundNarrowStep;
+    }
+
+    /** @hidden */
+    private _stepClicked(clickedStep: WizardStepComponent): void {
+        this.steps.forEach((step) => {
+            if (step === clickedStep) {
+                step.status = 'current';
+                step.statusChange.emit('current');
+            } else if (step !== clickedStep) {
+                if (this.steps.toArray().indexOf(step) < this.steps.toArray().indexOf(clickedStep)) {
+                    step.status = 'completed';
+                    step.statusChange.emit('completed');
+                } else if (this.steps.toArray().indexOf(step) > this.steps.toArray().indexOf(clickedStep)) {
+                    step.status = 'upcoming';
+                    step.statusChange.emit('upcoming');
+                }
+            }
+        });
     }
 }

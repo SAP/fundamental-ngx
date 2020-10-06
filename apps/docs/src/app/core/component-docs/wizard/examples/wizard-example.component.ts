@@ -6,9 +6,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None,
     styles: [
         `
-        .fd-wizard-example .fd-wizard__content {
-            min-height: 300px;
-        }
+            .fd-wizard-example .fd-wizard__content {
+                min-height: 300px;
+            }
         `
     ],
     host: {
