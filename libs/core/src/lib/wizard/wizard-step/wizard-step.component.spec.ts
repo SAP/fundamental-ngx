@@ -21,4 +21,10 @@ describe('WizardStepComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should handle key press (or mouse click if no event is passed)', () => {
+        spyOn(component.stepClicked, 'emit');
+        component.stepContainerKeypress();
+        expect(component.stepClicked.emit).toHaveBeenCalled();
+    });
 });

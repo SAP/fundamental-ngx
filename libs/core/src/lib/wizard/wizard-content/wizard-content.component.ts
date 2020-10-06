@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { WizardSize } from '../wizard-progress-bar/wizard-progress-bar.directive';
 
 export type WizardContentBackground = 'solid' | 'list' | 'transparent';
@@ -6,7 +6,8 @@ export type WizardContentBackground = 'solid' | 'list' | 'transparent';
 @Component({
     selector: 'fd-wizard-content',
     templateUrl: './wizard-content.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardContentComponent {
     /**
