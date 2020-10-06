@@ -34,7 +34,7 @@ class TestObjectIdentifierComponent {
     }
 }
 
-fdescribe('ObjectIdentifierComponent', () => {
+describe('ObjectIdentifierComponent', () => {
     let objectIdentifierElementRef: ElementRef;
     let testComponent: TestObjectIdentifierComponent;
     let fixture: ComponentFixture<TestObjectIdentifierComponent>;
