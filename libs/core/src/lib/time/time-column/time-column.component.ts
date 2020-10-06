@@ -162,8 +162,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     constructor(
         private _changeDetRef: ChangeDetectorRef
-    ) {
-    }
+    ) { }
 
     /** @hidden */
     ngOnInit(): void {
@@ -173,7 +172,6 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._setUpInitialValue();
         this._initialised = true;
     }
 
