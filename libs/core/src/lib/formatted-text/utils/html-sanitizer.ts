@@ -100,20 +100,20 @@ export class HtmlSanitizer {
         return resultElement.innerHTML;
     }
 
-    private makeSanitizedCopy(node: any): HTMLElement {
+    private makeSanitizedCopy(node: Node): HTMLElement {
         let newNode = node;
         if (node.nodeType === Node.TEXT_NODE) {
-            newNode = node.cloneNode(true);
-        } else if (node.nodeType === Node.ELEMENT_NODE && this.tagWhitelist[node.tagName]) {
-            newNode = this.extendLinkTarget(this.implementTag(node));
+            newNode = node.cloneNode(true) as HTMLElement;
+        } else if (node.nodeType === Node.ELEMENT_NODE && this.tagWhitelist[(node as HTMLElement).tagName]) {
+            newNode = this.extendLinkTarget(this.implementTag(node as HTMLElement));
         } else {
             newNode = document.createDocumentFragment();
         }
 
-        return newNode;
+        return newNode as HTMLElement;
     }
 
-    private implementTag(node: any): HTMLElement {
+    private implementTag(node: HTMLElement): HTMLElement {
         const newNode = this.safeWrapper.iframeDoc.createElement(node.tagName);
 
         for (const key in this.attributeWhitelist) {
@@ -144,7 +144,7 @@ export class HtmlSanitizer {
             }
         }
 
-        for (const child of node.childNodes) {
+        for (const child of Array.from(node.childNodes)) {
             const subCopy = this.makeSanitizedCopy(child);
             if (subCopy) {
                 newNode.appendChild(subCopy);

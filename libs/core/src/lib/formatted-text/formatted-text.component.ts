@@ -55,16 +55,16 @@ export class FormattedTextComponent implements OnInit, OnChanges {
     /**
      * Height style for component.
      */
+    @Input()
     @HostBinding('class.fd-formatted-text-with-height')
     @HostBinding('style.height')
-    @Input()
     height?: string;
     /**
      * Width style for component.
      */
+    @Input()
     @HostBinding('class.fd-formatted-text-with-width')
     @HostBinding('style.width')
-    @Input()
     width?: string;
 
     /** @hidden */
