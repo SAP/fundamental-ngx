@@ -166,6 +166,7 @@ export const API_FILES = {
         'NotificationDefault',
         'NotificationRef'
     ],
+    objectIdentifier: ['ObjectIdentifierComponent'],
     objectMarker: ['ObjectMarkerComponent'],
     objectStatus: ['ObjectStatusModule', 'ObjectStatusComponent'],
     pagination: ['PaginationComponent', 'PaginationModel', 'PaginationService'],
