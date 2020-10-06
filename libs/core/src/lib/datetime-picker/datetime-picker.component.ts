@@ -269,7 +269,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     onTouched: any = () => {};
-  
+
     /**
      * Function used to disable certain dates in the calendar.
      * @param fdDate FdDate

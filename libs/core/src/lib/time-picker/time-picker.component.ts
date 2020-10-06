@@ -43,7 +43,7 @@ import { delay, filter, first, takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent implements ControlValueAccessor, OnDestroy, AfterViewInit, Validator {
+export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Validator {
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
@@ -87,7 +87,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
 
     /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds.
      * Otherwise It can be set to a default value
-    */
+     */
     @Input()
     placeholder: string = this.getPlaceholder();
 
@@ -164,11 +164,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
     constructor(private _cd: ChangeDetectorRef, private _timeAdapter: TimeFormatParser) {}
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this.child.changeActive(null);
-    }
-
-    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -220,9 +215,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
                     delay(0)
                 )
                 .subscribe(() => {
-                    if (!this.child.activeView) {
-                        this.child.changeActive('hour');
-                    }
                     this.child.refreshTime();
                 });
         }
@@ -239,7 +231,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Aft
             if (this.allowNull && timeFromInput === '') {
                 this.isInvalidTimeInput = false;
                 this.onChange({ hour: null, minutes: null, seconds: null });
-                this.child.setDisplayedHour();
+                if (this.child) {
+                    this.child.setDisplayedHour();
+                }
             } else {
                 this.isInvalidTimeInput = true;
                 this.onChange(time);

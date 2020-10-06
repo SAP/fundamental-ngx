@@ -33,6 +33,7 @@
     <fd-popover-body *ngIf="displaySeconds || displayMinutes || displayHours">
         <ng-content></ng-content>
         <fd-time
+            *ngIf="isOpen"
             [tablet]="tablet"
             [compact]="compact"
             [disabled]="disabled"
