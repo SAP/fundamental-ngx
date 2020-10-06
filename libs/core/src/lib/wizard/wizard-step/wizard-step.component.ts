@@ -87,8 +87,10 @@ export class WizardStepComponent implements OnChanges {
     constructor(public elRef: ElementRef) {}
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.statusChange.emit(this.status);
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes && changes.status) {
+            this.statusChange.emit(this.status);
+        }
     }
 
     /** @hidden */

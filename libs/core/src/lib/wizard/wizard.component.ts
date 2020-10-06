@@ -61,7 +61,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             );
             this.steps.forEach((step) => {
                 this._subscriptions.add(
-                    step.stepClicked.subscribe((event) => {
+                    step.stepClicked.subscribe(event => {
                         this._stepClicked(event);
                     })
                 );
@@ -105,7 +105,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     private _setContentTemplate(): void {
         this.steps.forEach((step) => {
             step.finalStep = false;
-            if (step.status === 'current') {
+            if (step.status === 'current' && step.content) {
                 this.contentTemplate = step.content.contentTemplate;
             }
         });
@@ -155,10 +155,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
-        console.log('_handleStepOrStatusChanges');
         this._setContentTemplate();
         this._shrinkWhileAnyStepIsTooNarrow();
-        this._cdRef.markForCheck();
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
