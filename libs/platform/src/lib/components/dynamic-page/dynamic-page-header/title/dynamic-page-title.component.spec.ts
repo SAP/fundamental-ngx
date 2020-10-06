@@ -155,7 +155,9 @@ describe('DynamicPageTitleComponent', () => {
         pageTitleKeyInfoComponent = component.dynamicPageKeyInfoComponent;
         fixture.detectChanges();
         expect(
-            pageTitleKeyInfoComponent.elementRef().nativeElement.classList.contains(CLASS_NAME.dynamicPageKeyInfo)
+            fixture.debugElement
+                .query(By.directive(DynamicPageKeyInfoComponent))
+                .nativeElement.classList.contains(CLASS_NAME.dynamicPageKeyInfo)
         ).toBeTruthy();
     });
 });

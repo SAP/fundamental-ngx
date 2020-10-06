@@ -39,7 +39,5 @@ export class DynamicPageConfig {
         return useFactory;
     }
 
-    constructor(platformConfig: PlatformConfig) {
-        // this.contentDensity = platformConfig.contentDensity;
-    }
+    constructor(platformConfig: PlatformConfig) {}
 }

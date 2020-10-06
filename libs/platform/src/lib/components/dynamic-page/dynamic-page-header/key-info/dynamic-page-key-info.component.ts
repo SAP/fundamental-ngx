@@ -16,11 +16,4 @@ export class DynamicPageKeyInfoComponent implements OnInit {
     ngOnInit(): void {
         addClassNameToElement(this._renderer, this._elementRef.nativeElement, CLASS_NAME.dynamicPageKeyInfo);
     }
-
-    /**
-     * get reference to this element
-     */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
-    }
 }
