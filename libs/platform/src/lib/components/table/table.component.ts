@@ -88,10 +88,15 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.fd-table--condensed') get isCondensed(): boolean { return this.contentDensity === 'condensed' };
 
+    /** @hidden Formatted rows data. */
+    rows: any[];
+
     /** @hidden */
     checkedAll = false;
+
     /** @hidden */
     checked = [];
+
     /** @hidden */
     unchecked = [];
 
@@ -100,9 +105,6 @@ export class TableComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     readonly stateChanges: Subject<any> = new Subject<any>();
-
-    /** @hidden Formatted rows data. */
-    rows: any[];
 
     /** @hidden for data source handling */
     private _dsSubscription: Subscription | null;
@@ -173,7 +175,7 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    _getCellValue(key: string, row: any): any {
+    getCellValue(key: string, row: any): any {
         return key.split('.').reduce((a, b) => a[b], row);
     }
 

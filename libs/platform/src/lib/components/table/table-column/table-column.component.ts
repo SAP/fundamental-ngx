@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     Input,
     OnDestroy,
     OnInit,
@@ -13,6 +14,8 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core';
 import { ColumnAlign } from '../types';
+import { FdpCellDef } from '../directives/table-cell.directive';
+import { FdpHeaderCellDef } from '../directives/table-header.directive';
 
 enum ColumnAlignEnum {
     Start = 'left',
@@ -60,6 +63,12 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     get align(): string {
         return this._align;
     }
+
+    /** @hidden */
+    @ContentChild(FdpCellDef) fdpCellDef: FdpCellDef;
+
+    /** @hidden */
+    @ContentChild(FdpHeaderCellDef) fdpHeaderCellDef: FdpHeaderCellDef;
 
     /** @hidden */
     private _align$: BehaviorSubject<ColumnAlignEnum> = new BehaviorSubject<ColumnAlignEnum>(null);

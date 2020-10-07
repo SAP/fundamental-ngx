@@ -1,4 +1,4 @@
-<fd-docs-section-title [id]="'def'" [componentName]="'Table'">
+<fd-docs-section-title [id]="'default-table'" [componentName]="'Table'">
     Default Table
 </fd-docs-section-title>
 <description>This example shows table default implementation </description>
@@ -9,14 +9,36 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'def'" [componentName]="'Table'">
-    Default Table
+<fd-docs-section-title [id]="'custom-columns-table'" [componentName]="'Table'">
+    Custom Column
 </fd-docs-section-title>
-<description>This example shows table default implementation </description>
+<description>This example shows custom column definition implementation </description>
 <component-example>
-    <fdp-table-different-examples></fdp-table-different-examples>
+    <fdp-table-custom-column-example></fdp-table-custom-column-example>
 </component-example>
-<code-example [exampleFiles]="different"></code-example>
+<code-example [exampleFiles]="customColumnTable"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'single-row-selection'" [componentName]="'Table'">
+    Single Row Selection
+</fd-docs-section-title>
+<description>This example shows single row selection </description>
+<component-example>
+    <fdp-table-single-row-selection-example></fdp-table-single-row-selection-example>
+</component-example>
+<code-example [exampleFiles]="singleRowSelection"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'multiple-row-selection'" [componentName]="'Table'">
+    Multiple Row Selection
+</fd-docs-section-title>
+<description>This example shows multiple row selection </description>
+<component-example>
+    <fdp-table-multiple-row-selection-example></fdp-table-multiple-row-selection-example>
+</component-example>
+<code-example [exampleFiles]="multipleRowSelection"></code-example>
 
 <separator></separator>
 
@@ -31,8 +53,8 @@
             [title]="data['table-toolbar'].title"
             [hideItemCount]="data['table-toolbar'].hideItemCount">
             <fdp-table-toolbar-actions>
-                <fdp-button>Edit</fdp-button>
-                <fdp-button>Delete</fdp-button>
+                <fdp-button label="Action One"></fdp-button>
+                <fdp-button label="Action Two"></fdp-button>
             </fdp-table-toolbar-actions>
         </fdp-table-toolbar>
 

@@ -18,7 +18,14 @@
                 </th>
                 <th fd-table-cell
                     [style.textAlign]="column.align"
-                    *ngFor="let column of columns">{{ column.label }}</th>
+                    *ngFor="let column of columns">
+                    <ng-container *ngIf="column?.fdpHeaderCellDef?.templateRef; else defaultTableHeaderCellTemplate">
+                        <ng-container *ngTemplateOutlet="column.fdpHeaderCellDef.templateRef">
+                        </ng-container>
+                    </ng-container>
+
+                    <ng-template #defaultTableHeaderCellTemplate>{{ column.label }}</ng-template>
+                </th>
             </tr>
         </thead>
         <tbody fd-table-body>
@@ -38,7 +45,14 @@
                 </td>
                 <td fd-table-cell
                     [style.textAlign]="column.align"
-                    *ngFor="let column of columns">{{ _getCellValue(column.key, row.value)}}</td>
+                    *ngFor="let column of columns">
+                    <ng-container *ngIf="column?.fdpCellDef?.templateRef; else defaultTableCellTemplate">
+                        <ng-container *ngTemplateOutlet="column.fdpCellDef.templateRef; context:{$implicit: row.value}">
+                        </ng-container>
+                    </ng-container>
+
+                    <ng-template #defaultTableCellTemplate>{{ getCellValue(column.key, row.value) }}</ng-template>
+                </td>
             </tr>
         </tbody>
     </table>

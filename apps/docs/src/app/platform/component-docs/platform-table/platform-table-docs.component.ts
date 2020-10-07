@@ -6,17 +6,17 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import {
-    ITEMS,
-    PlatformTableDefaultExampleComponent
-} from './platform-table-examples/platform-table-default-example.component';
-import { PlatformTableDifferentExamplesComponent } from './platform-table-examples/platform-table-different-examples.component';
+import { PlatformTableDefaultExampleComponent } from './platform-table-examples/platform-table-default-example.component';
 
 import * as platformTableDefaultSrc from '!raw-loader!./platform-table-examples/platform-table-default-example.component.html';
 import * as platformTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-default-example.component.ts';
+import * as platformTableCustomColumnSrc from '!raw-loader!./platform-table-examples/platform-table-custom-column-example.component.html';
+import * as platformTableCustomColumnTsSrc from '!raw-loader!./platform-table-examples/platform-table-custom-column-example.component.ts';
+import * as platformTableSingleRowSelectionSrc from '!raw-loader!./platform-table-examples/platform-table-single-row-selection-example.component.html';
+import * as platformTableSingleRowSelectionTsSrc from '!raw-loader!./platform-table-examples/platform-table-single-row-selection-example.component.ts';
+import * as platformTableMultipleRowSelectionSrc from '!raw-loader!./platform-table-examples/platform-table-multiple-row-selection-example.component.html';
+import * as platformTableMultipleRowSelectionTsSrc from '!raw-loader!./platform-table-examples/platform-table-multiple-row-selection-example.component.ts';
 
-import * as platformTableDifferentSrc from '!raw-loader!./platform-table-examples/platform-table-different-examples.component.html';
-import * as platformTableDifferentTsSrc from '!raw-loader!./platform-table-examples/platform-table-different-examples.component.ts';
 
 @Component({
     selector: 'fdp-table-docs',
@@ -83,17 +83,45 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    different: ExampleFile[] = [
+    customColumnTable: ExampleFile[] = [
         {
             language: 'html',
-            code: platformTableDifferentSrc,
-            fileName: 'platform-table-different-examples'
+            code: platformTableCustomColumnSrc,
+            fileName: 'platform-table-custom-column-example'
         },
         {
             language: 'typescript',
-            code: platformTableDifferentTsSrc,
-            fileName: 'platform-table-different-examples',
-            component: 'PlatformTableDifferentExamplesComponent'
+            code: platformTableCustomColumnTsSrc,
+            fileName: 'platform-table-custom-column-example',
+            component: 'PlatformTableCustomColumnExampleComponent'
+        }
+    ];
+
+    singleRowSelection: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableSingleRowSelectionSrc,
+            fileName: 'platform-table-single-row-selection-example'
+        },
+        {
+            language: 'typescript',
+            code: platformTableSingleRowSelectionTsSrc,
+            fileName: 'platform-table-single-row-selection-example',
+            component: 'PlatformTableSingleRowSelectionExampleComponent'
+        }
+    ];
+
+    multipleRowSelection: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableMultipleRowSelectionSrc,
+            fileName: 'platform-table-multiple-row-selection-example'
+        },
+        {
+            language: 'typescript',
+            code: platformTableMultipleRowSelectionTsSrc,
+            fileName: 'platform-table-multiple-row-selection-example',
+            component: 'PlatformTableMultipleRowSelectionExampleComponent'
         }
     ];
 
@@ -110,3 +138,85 @@ export class PlatformTableDocsComponent {
         console.log(ev);
     }
 }
+
+export const ITEMS = [{
+    'name': 'implementation',
+    'description': 'sit amet consectetuer adipiscing elit',
+    'price': {
+        'value': 2.06,
+        'currency': 'IDR'
+    },
+    'status': 'valid'
+}, {
+    'name': 'moderator',
+    'description': 'luctus et ultrices posuere cubilia curae donec',
+    'price': {
+        'value': 33.34,
+        'currency': 'MZN'
+    },
+    'status': 'warning'
+}, {
+    'name': 'focus group',
+    'description': 'at velit vivamus vel nulla eget eros',
+    'price': {
+        'value': 72.12,
+        'currency': 'CNY'
+    },
+    'status': 'error'
+}, {
+    'name': 'contingency',
+    'description': 'posuere nonummy integer',
+    'price': {
+        'value': 6.25,
+        'currency': 'CNY'
+    },
+    'status': 'information'
+}, {
+    'name': 'matrix',
+    'description': 'congue etiam justo etiam pretium iaculis',
+    'price': {
+        'value': 54.29,
+        'currency': 'NZD'
+    },
+    'status': 'warning'
+}, {
+    'name': 'Persistent',
+    'description': 'ipsum praesent blandit',
+    'price': {
+        'value': 14.59,
+        'currency': 'UGX'
+    },
+    'status': 'information'
+}, {
+    'name': 'paradigm',
+    'description': 'nec condimentum neque',
+    'price': {
+        'value': 9.37,
+        'currency': 'IDR'
+    },
+    'status': 'warning'
+}, {
+    'name': 'content-based',
+    'description': 'non mauris morbi non lectus aliquam',
+    'price': {
+        'value': 10.17,
+        'currency': 'EGP'
+    },
+    'status': 'error'
+}, {
+    'name': 'multimedia',
+    'description': 'pede morbi porttitor lorem id ligula',
+    'price': {
+        'value': 8.06,
+        'currency': 'IDR'
+    },
+    'status': 'information'
+}, {
+    'name': 'high-level',
+    'description': 'ligula nec sem',
+    'price': {
+        'value': 27.13,
+        'currency': 'EUR'
+    },
+    'status': 'valid'
+}];

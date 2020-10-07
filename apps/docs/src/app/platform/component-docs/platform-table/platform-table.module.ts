@@ -5,12 +5,15 @@ import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
+import { ObjectStatusModule } from '@fundamental-ngx/core';
 import { PlatformButtonModule, PlatformTableModule } from '@fundamental-ngx/platform';
 
 import { PlatformTableHeaderComponent } from './platform-table-header/platform-table-header.component';
 import { PlatformTableDocsComponent } from './platform-table-docs.component';
 import { PlatformTableDefaultExampleComponent } from './platform-table-examples/platform-table-default-example.component';
-import { PlatformTableDifferentExamplesComponent } from './platform-table-examples/platform-table-different-examples.component';
+import { PlatformTableCustomColumnExampleComponent } from './platform-table-examples/platform-table-custom-column-example.component';
+import { PlatformTableMultipleRowSelectionExampleComponent } from './platform-table-examples/platform-table-multiple-row-selection-example.component';
+import { PlatformTableSingleRowSelectionExampleComponent } from './platform-table-examples/platform-table-single-row-selection-example.component';
 
 const routes: Routes = [
     {
@@ -29,14 +32,17 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         CdkTableModule,
         PlatformTableModule,
-        PlatformButtonModule
+        PlatformButtonModule,
+        ObjectStatusModule
     ],
     exports: [RouterModule],
     declarations: [
         PlatformTableDocsComponent,
         PlatformTableHeaderComponent,
         PlatformTableDefaultExampleComponent,
-        PlatformTableDifferentExamplesComponent
+        PlatformTableCustomColumnExampleComponent,
+        PlatformTableSingleRowSelectionExampleComponent,
+        PlatformTableMultipleRowSelectionExampleComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

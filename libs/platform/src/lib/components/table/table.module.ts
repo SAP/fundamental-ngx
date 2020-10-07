@@ -10,6 +10,8 @@ import { TableColumnComponent } from './table-column/table-column.component';
 import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
 import { TableToolbarActionsComponent } from './table-toolbar-actions/table-toolbar-actions.component';
 import { TableBodyDirective } from './directives/table-body.directive';
+import { FdpCellDef, FdpTableCell } from './directives/table-cell.directive';
+import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
 
 @NgModule({
     imports: [
@@ -25,7 +27,11 @@ import { TableBodyDirective } from './directives/table-body.directive';
         TableColumnComponent,
         TableToolbarComponent,
         TableToolbarActionsComponent,
-        TableBodyDirective
+        TableBodyDirective,
+        FdpTableCell,
+        FdpCellDef,
+        FdpTableHeader,
+        FdpHeaderCellDef
     ],
     exports: [
         TableComponent,
@@ -33,7 +39,11 @@ import { TableBodyDirective } from './directives/table-body.directive';
         TableColumnComponent,
         TableToolbarComponent,
         TableToolbarActionsComponent,
-        TableBodyDirective
+        TableBodyDirective,
+        FdpTableCell,
+        FdpCellDef,
+        FdpTableHeader,
+        FdpHeaderCellDef
     ],
     providers: []
 })
