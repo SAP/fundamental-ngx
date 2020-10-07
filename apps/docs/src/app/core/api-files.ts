@@ -14,7 +14,11 @@ export const API_FILES = {
         'ActionBarHeaderDirective',
         'ActionBarMobileDirective'
     ],
-    actionSheet: ['ActionSheetComponent'],
+    actionSheet: [
+        'ActionSheetComponent',
+        'ActionSheetControlComponent',
+        'ActionSheetItemComponent'
+    ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],

@@ -1,15 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 import { ActionSheetComponent } from './action-sheet.component';
-import { IconModule } from '../icon/icon.module';
-import { PopoverModule } from '../popover/popover.module';
-import { MenuModule } from '../menu/menu.module';
+import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
+import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
+
+
 
 @NgModule({
-    imports: [CommonModule, IconModule, PopoverModule, MenuModule, RouterModule],
-    exports: [ActionSheetComponent],
-    declarations: [ActionSheetComponent]
+    imports: [
+        CommonModule
+    ],
+    exports: [
+        ActionSheetComponent,
+        ActionSheetControlComponent
+    ],
+    declarations: [
+        ActionSheetComponent,
+        ActionSheetControlComponent,
+        ActionSheetItemComponent
+    ]
 })
 export class ActionSheetModule {}

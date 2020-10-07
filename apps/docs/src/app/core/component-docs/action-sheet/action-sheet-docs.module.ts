@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
-import {
-    ActionSheetCompactExampleComponent,
-    ActionSheetCozyExampleComponent,
-    ActionSheetMobileExampleComponent
-} from './examples/action-sheet-examples.component';
 import { ActionSheetHeaderComponent } from './action-sheet-header/action-sheet-header.component';
 import { ActionSheetDocsComponent } from './action-sheet-docs.component';
-import { ActionSheetModule } from '@fundamental-ngx/core';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { ActionSheetCompactExampleComponent } from './examples/action-sheet-compact/action-sheet-compact-example.component';
+import { ActionSheetCosyExampleComponent } from './examples/action-sheet-cosy/action-sheet-cosy-example.component';
+import {
+    ActionSheetModule,
+} from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -24,14 +23,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ActionSheetModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ActionSheetModule,
+    ],
     exports: [RouterModule],
     declarations: [
         ActionSheetDocsComponent,
         ActionSheetHeaderComponent,
         ActionSheetCompactExampleComponent,
-        ActionSheetCozyExampleComponent,
-        ActionSheetMobileExampleComponent
+        ActionSheetCosyExampleComponent
     ]
 })
 export class ActionSheetDocsModule {}

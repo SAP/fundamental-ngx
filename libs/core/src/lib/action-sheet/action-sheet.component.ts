@@ -2,16 +2,14 @@ import {
     AfterContentInit,
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
+    ElementRef, EventEmitter,
     Input,
     OnInit,
-    Optional,
-    ViewChild,
+    Optional, Output,
     ViewEncapsulation
 } from '@angular/core';
 import { RtlService } from '../utils/services/rtl.service';
 import { BehaviorSubject } from 'rxjs';
-import { MenuComponent } from '../menu/menu.component';
 import { Placement } from 'popper.js';
 
 
@@ -25,16 +23,16 @@ import { Placement } from 'popper.js';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActionSheetComponent implements AfterContentInit, OnInit {
+export class ActionSheetComponent implements AfterContentInit {
 
     /** Whenever links wrapped inside overflow should be displayed in compact mode  */
     @Input()
     compact = false;
 
-    /** @hidden */
-    @ViewChild(MenuComponent)
-    menuComponent: MenuComponent;
 
+    /** Event emitted when the state of the isOpen property changes. */
+    @Output()
+    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
     placement$ = new BehaviorSubject<Placement>('bottom-start');
@@ -43,13 +41,12 @@ export class ActionSheetComponent implements AfterContentInit, OnInit {
     ngAfterContentInit(): void {
     }
 
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.rtlService) {
-            this.rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'));
-        }
+    /**
+     * Function is called every time popover changes open attribute
+     */
+    public openChanged(isOpen: boolean): void {
+        this.isOpenChange.emit(isOpen);
     }
 
-    constructor(public elementRef: ElementRef, @Optional() private rtlService: RtlService) {}
 
 }

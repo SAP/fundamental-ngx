@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import * as actionSheetCompactExample from '!raw-loader!./examples/action-sheet-compact-example.component.html';
-import * as actionSheetCozyExample from '!raw-loader!./examples/action-sheet-cozy-example.component.html';
-import * as actionSheetMobileExample from '!raw-loader!./examples/action-sheet-mobile-example.component.html';
+import * as actionSheetCompactSrc from '!raw-loader!./examples/action-sheet-compact/action-sheet-compact-example.component.html';
+import * as actionSheetCompactSrcTs from '!raw-loader!./examples/action-sheet-compact/action-sheet-compact-example.component.ts';
+import * as actionSheetCosySrc from '!raw-loader!./examples/action-sheet-cosy/action-sheet-cosy-example.component.ts';
+import * as actionSheetCosySrcTs from '!raw-loader!./examples/action-sheet-cosy/action-sheet-cosy-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -10,27 +11,23 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './action-sheet-docs.component.html'
 })
 export class ActionSheetDocsComponent {
-    actionSheetCompactHtml: ExampleFile[] = [
+    actionSheetCompactExample: ExampleFile[] = [
         {
             language: 'html',
-            code: actionSheetCompactExample,
-            fileName: 'fd-action-sheet-compact-example'
+            code: actionSheetCompactSrc,
+            fileName: 'action-sheet-compact-example',
+            typescriptFileCode: actionSheetCompactSrcTs,
+            component: 'ActionSheetCompactExampleComponent'
         }
     ];
 
-    actionSheetCozyHtml: ExampleFile[] = [
+    actionSheetCosyExample: ExampleFile[] = [
         {
             language: 'html',
-            code: actionSheetCozyExample,
-            fileName: 'fd-action-sheet-cozy-example'
-        }
-    ];
-
-    actionSheetMobileHtml: ExampleFile[] = [
-        {
-            language: 'html',
-            code: actionSheetMobileExample,
-            fileName: 'fd-action-sheet-mobile-example'
+            code: actionSheetCosySrc,
+            fileName: 'action-sheet-cosy-example',
+            typescriptFileCode: actionSheetCosySrcTs,
+            component: 'ActionSheetCosyExampleComponent'
         }
     ];
 }

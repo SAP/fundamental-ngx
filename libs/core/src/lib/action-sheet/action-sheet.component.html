@@ -1,0 +1,16 @@
+<div #actionSheetContainer>
+    <div
+        class="fd-action-sheet__control"
+    >
+        <ng-content select="fd-action-sheet-control"></ng-content>
+    </div>
+    <ng-template #actionSheetItem>
+        <ng-container *ngTemplateOutlet="actionSheetBodyTpl"></ng-container>
+    </ng-template>
+</div>
+
+<ng-template #popoverBodyTpl>
+    <div [attr.aria-hidden]="disabled ? true : !isOpen">
+        <ng-content select="fd-action-sheet-item"></ng-content>
+    </div>
+</ng-template>
