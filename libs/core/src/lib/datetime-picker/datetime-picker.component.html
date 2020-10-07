@@ -58,6 +58,7 @@
                 ></fd-calendar>
                 <div class="fd-datetime__separator"></div>
                 <fd-time
+                    *ngIf="isOpen"
                     [disabled]="disabled"
                     [keepTwoDigits]="keepTwoDigitsTime"
                     [meridian]="meridian"
@@ -68,7 +69,6 @@
                     [displayMinutes]="displayMinutes"
                     [displayHours]="displayHours"
                     (ngModelChange)="handleTimeChange($event)"
-                    (focusArrowLeft)="focusArrowLeft()"
                 ></fd-time>
             </div>
             <div fd-popover-body-footer *ngIf="showFooter">
