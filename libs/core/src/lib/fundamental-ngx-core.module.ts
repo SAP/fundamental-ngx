@@ -66,6 +66,7 @@ import { ComboboxMobileModule } from './combobox/combobox-mobile/combobox-mobile
 import { CarouselModule } from './utils/directives/carousel/carousel.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { CardModule } from './card/card.module';
+import { ObjectIdentifierModule } from './object-identifier/object-identifier.module';
 import { ObjectMarkerModule } from './object-marker/object-marker.module';
 
 @NgModule({
@@ -110,6 +111,7 @@ import { ObjectMarkerModule } from './object-marker/object-marker.module';
         MultiInputMobileModule,
         NestedListModule,
         NotificationModule,
+        ObjectIdentifierModule,
         ObjectMarkerModule,
         ObjectStatusModule,
         PaginationModule,
