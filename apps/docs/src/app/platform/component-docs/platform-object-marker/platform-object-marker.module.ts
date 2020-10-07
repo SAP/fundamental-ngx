@@ -10,10 +10,10 @@ import {
 import { ObjectMarkerHeaderComponent } from './object-marker-header/object-marker-header.component';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { API_FILES } from '../../../core/api-files';
 import { PlatformObjectMarkerDocsComponent } from './platform-object-marker-docs.component';
 
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { API_FILES } from '../../api-files';
 
 const routes: Routes = [
     {
