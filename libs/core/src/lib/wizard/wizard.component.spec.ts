@@ -97,10 +97,10 @@ describe('WizardComponent', () => {
     it('should handle resize - screen getting smaller', () => {
         component.resizeHandler();
 
-        expect(component.steps.first.elRef.nativeElement.classList.contains('fd-wizard__step--no-label')).toBeTruthy();
-        expect(component.steps.first.elRef.nativeElement.classList.contains('fd-wizard__step--stacked')).toBeTruthy();
+        expect(component.steps.first.getClassList().contains('fd-wizard__step--no-label')).toBeTruthy();
+        expect(component.steps.first.getClassList().contains('fd-wizard__step--stacked')).toBeTruthy();
         expect(
-            component.steps.toArray()[1].elRef.nativeElement.classList.contains('fd-wizard__step--stacked-top')
+            component.steps.toArray()[1].getClassList().contains('fd-wizard__step--stacked-top')
         ).toBeTruthy();
     });
 
@@ -111,10 +111,10 @@ describe('WizardComponent', () => {
         step3.nativeElement.style.width = '200px';
         component.resizeHandler();
 
-        expect(component.steps.first.elRef.nativeElement.classList.contains('fd-wizard__step--no-label')).toBeFalsy();
-        expect(component.steps.first.elRef.nativeElement.classList.contains('fd-wizard__step--stacked')).toBeFalsy();
+        expect(component.steps.first.getClassList().contains('fd-wizard__step--no-label')).toBeFalsy();
+        expect(component.steps.first.getClassList().contains('fd-wizard__step--stacked')).toBeFalsy();
         expect(
-            component.steps.toArray()[1].elRef.nativeElement.classList.contains('fd-wizard__step--stacked-top')
+            component.steps.toArray()[1].getClassList().contains('fd-wizard__step--stacked-top')
         ).toBeFalsy();
     });
 });

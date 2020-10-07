@@ -19,6 +19,11 @@ export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
 export const STEP_STACKED_CLASS = 'fd-wizard__step--stacked';
 export const STEP_NO_LABEL_CLASS = 'fd-wizard__step--no-label';
 
+export const ACTIVE_STEP_STATUS = 'active';
+export const CURRENT_STEP_STATUS = 'current';
+export const UPCOMING_STEP_STATUS = 'upcoming';
+export const COMPLETED_STEP_STATUS = 'completed';
+
 @Component({
     selector: 'fd-wizard',
     templateUrl: './wizard.component.html',
@@ -49,7 +54,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         if (!this._previousWidth || wizardWidth <= this._previousWidth) {
             this._wizardShrinking();
         } else if (wizardWidth > this._previousWidth) {
-            this._wizardGrowing();
+            this._shrinkWhileAnyStepIsTooNarrow();
         }
         this._previousWidth = wizardWidth;
     }
@@ -89,7 +94,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             })
         );
         // need to call wizardShrinking for each step < 168px on first load
-        if (step.wizardLabel && step.elRef.nativeElement.clientWidth < STEP_MIN_WIDTH) {
+        if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
             this._wizardShrinking();
         }
     }
@@ -97,9 +102,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _wizardShrinking(): void {
         this.steps.forEach((step) => {
-            if (step.status === 'active' || step.status === 'current') {
+            if (step.status === ACTIVE_STEP_STATUS || step.status === CURRENT_STEP_STATUS) {
                 const currentStep = step;
-                if (step.wizardLabel && step.elRef.nativeElement.clientWidth < STEP_MIN_WIDTH) {
+                if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
                     this._hideSomeStep(currentStep);
                 }
             }
@@ -107,15 +112,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    private _wizardGrowing(): void {
-        this._shrinkWhileAnyStepIsTooNarrow();
-    }
-
-    /** @hidden */
     private _setContentTemplate(): void {
         this.steps.forEach((step) => {
             step.finalStep = false;
-            if (step.status === 'current' && step.content) {
+            if (step.status === CURRENT_STEP_STATUS && step.content) {
                 this.contentTemplate = step.content.contentTemplate;
             }
         });
@@ -127,7 +127,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         // If a small step was found, get the step with a visible label furthest away from the current step and hide the label
         let stepsArray = this.steps.toArray();
         stepsArray = stepsArray.filter((step) => {
-            return !step.elRef.nativeElement.classList.contains(STEP_NO_LABEL_CLASS);
+            return !step.hasLabel(STEP_NO_LABEL_CLASS);
         });
         if (stepsArray.length > 1) {
             let currentStepIndex = 0,
@@ -138,8 +138,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             currentStepIndex > (stepsArray.length - 1) / 2
                 ? (stepToHide = stepsArray[0])
                 : (stepToHide = stepsArray[stepsArray.length - 1]);
-            stepToHide.elRef.nativeElement.classList.add(STEP_NO_LABEL_CLASS);
-            stepToHide.elRef.nativeElement.classList.add(STEP_STACKED_CLASS);
+            stepToHide.getClassList().add(STEP_NO_LABEL_CLASS);
+            stepToHide.getClassList().add(STEP_STACKED_CLASS);
             this._setStackedTop(currentStep);
         }
     }
@@ -147,9 +147,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _setStackedTop(currentStep: WizardStepComponent): void {
         this.steps.forEach((step, index) => {
-            step.elRef.nativeElement.classList.remove(STEP_STACKED_TOP_CLASS);
+            step.getClassList().remove(STEP_STACKED_TOP_CLASS);
             if (this.steps.toArray()[index + 1] === currentStep) {
-                step.elRef.nativeElement.classList.add(STEP_STACKED_TOP_CLASS);
+                step.getClassList().add(STEP_STACKED_TOP_CLASS);
             }
         });
     }
@@ -157,9 +157,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _resetStepClasses(): void {
         this.steps.forEach((step) => {
-            step.elRef.nativeElement.classList.remove(STEP_STACKED_TOP_CLASS);
-            step.elRef.nativeElement.classList.remove(STEP_STACKED_CLASS);
-            step.elRef.nativeElement.classList.remove(STEP_NO_LABEL_CLASS);
+            step.getClassList().remove(STEP_STACKED_TOP_CLASS);
+            step.getClassList().remove(STEP_STACKED_CLASS);
+            step.getClassList().remove(STEP_NO_LABEL_CLASS);
         });
     }
 
@@ -182,28 +182,22 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _anyStepIsTooNarrow(): boolean {
-        let foundNarrowStep = false;
-        this.steps.forEach((step) => {
-            if (step.elRef.nativeElement.clientWidth < STEP_MIN_WIDTH) {
-                foundNarrowStep = true;
-            }
-        });
-        return foundNarrowStep;
+        return this.steps.some(step => step.getStepClientWidth() < STEP_MIN_WIDTH);
     }
 
     /** @hidden */
     private _stepClicked(clickedStep: WizardStepComponent): void {
         this.steps.forEach((step) => {
             if (step === clickedStep) {
-                step.status = 'current';
-                step.statusChange.emit('current');
+                step.status = CURRENT_STEP_STATUS;
+                step.statusChange.emit(CURRENT_STEP_STATUS);
             } else if (step !== clickedStep) {
                 if (this.steps.toArray().indexOf(step) < this.steps.toArray().indexOf(clickedStep)) {
-                    step.status = 'completed';
-                    step.statusChange.emit('completed');
+                    step.status = COMPLETED_STEP_STATUS;
+                    step.statusChange.emit(COMPLETED_STEP_STATUS);
                 } else if (this.steps.toArray().indexOf(step) > this.steps.toArray().indexOf(clickedStep)) {
-                    step.status = 'upcoming';
-                    step.statusChange.emit('upcoming');
+                    step.status = UPCOMING_STEP_STATUS;
+                    step.statusChange.emit(UPCOMING_STEP_STATUS);
                 }
             }
         });

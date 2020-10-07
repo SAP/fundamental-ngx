@@ -14,7 +14,7 @@ import {
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
 import { KeyUtil } from '../../utils/public_api';
 
-export type StepType = 'completed' | 'current' | 'upcoming' | 'active';
+export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -27,7 +27,6 @@ export type StepType = 'completed' | 'current' | 'upcoming' | 'active';
         '[class.fd-wizard__step--active]': 'status === "active"'
     },
     templateUrl: './wizard-step.component.html',
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardStepComponent implements OnChanges {
@@ -41,7 +40,7 @@ export class WizardStepComponent implements OnChanges {
      * The type of step ('completed', 'current', 'upcoming', and 'active'.)
      */
     @Input()
-    status: StepType;
+    status: WizardStepStatus;
 
     /**
      * Whether or not this is a 'branching' step.
@@ -65,7 +64,7 @@ export class WizardStepComponent implements OnChanges {
      * Event emitted when the wizard step's status changes.
      */
     @Output()
-    statusChange = new EventEmitter<StepType>();
+    statusChange = new EventEmitter<WizardStepStatus>();
 
     /**
      * Event emitted when a step is clicked.
@@ -85,7 +84,7 @@ export class WizardStepComponent implements OnChanges {
     finalStep = false;
 
     /** @hidden */
-    constructor(public elRef: ElementRef) {}
+    constructor(private _elRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -99,5 +98,20 @@ export class WizardStepComponent implements OnChanges {
         if (!event || KeyUtil.isKey(event, ['Space', 'Enter'])) {
             this.stepClicked.emit(this);
         }
+    }
+
+    /** @hidden */
+    getClassList(): DOMTokenList {
+        return this._elRef.nativeElement.classList;
+    }
+
+    /** @hidden */
+    hasLabel(label: string): boolean {
+        return this._elRef.nativeElement.classList.contains(label);
+    }
+
+    /** @hidden */
+    getStepClientWidth(): number {
+        return this._elRef.nativeElement.clientWidth;
     }
 }

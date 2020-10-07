@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { WizardStepStatus } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-wizard-customizable-example',
@@ -16,9 +17,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
     }
 })
 export class WizardCustomizableExampleComponent {
-    step1status = 'current';
-    step2status = 'upcoming';
-    step3status = 'upcoming';
+    step1status: WizardStepStatus = 'current';
+    step2status: WizardStepStatus = 'upcoming';
+    step3status: WizardStepStatus = 'upcoming';
 
     goToStep(step: number): void {
         switch (step) {

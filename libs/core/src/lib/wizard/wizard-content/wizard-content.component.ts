@@ -6,7 +6,6 @@ export type WizardContentBackground = 'solid' | 'list' | 'transparent';
 @Component({
     selector: 'fd-wizard-content',
     templateUrl: './wizard-content.component.html',
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardContentComponent {

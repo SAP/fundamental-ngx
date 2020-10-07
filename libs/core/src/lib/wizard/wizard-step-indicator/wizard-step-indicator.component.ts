@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 @Component({
     selector: 'fd-wizard-step-indicator',
     templateUrl: './wizard-step-indicator.component.html',
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardStepIndicatorComponent {
