@@ -6,35 +6,88 @@ import { Component } from '@angular/core';
 export class PlatformObjectListItemBorderLessExampleComponent {
     items: any[] = [
         {
-            'title': 'Action 1', 'introductionText': 'intro 1', 'currency': 'Euro', 'amount': '123,57', 'image': 'http://lorempixel.com/400/400/nature'
-            , 'testObject': {
-                'first attribute': [{ 'icon': 'flag', 'text': 'Flag', 'marker': true }, { 'icon': 'flag', 'text': 'Flag', 'marker': true }],
-                'second attribute': [{ 'inverted': true, 'text': 'avaliable', 'status': true }],
-                'third attribute': [],
-            }
+            title: 'Webcam',
+            introductionText: 'First product with discount',
+            currency: 'Euro',
+            amount: 817.50,
+            image: 'http://lorempixel.com/400/400/nature',
+            gylp1: 'add-favorite',
+            gylp2: 'user-edit',
+            attribute1: '345kg',
+            attribute2: '155 x 140 cm',
+            attribute3: '145 x 140 x 360 cm',
+            status1: 'critical',
+            statusgyph1: 'status-critical',
+            statuslabel1: 'Critical',
+            inverted1: false,
+            status2: 'informative',
+            statusgyph2: 'hint',
+            statuslabel2: 'Informative',
+            inverted2: true,
+            decimal: 2
         },
         {
-            'title': 'Action 2', 'introductionText': 'intro 2', 'currency': 'Euro', 'amount': '723,57', 'image': 'http://lorempixel.com/400/400/nature'
-            , 'testObject': {
-                'first attribute': [],
-                'second attribute': [{ 'inverted': true, 'text': 'avaliable', 'status': true }],
-                'third attribute': [{ 'text': 'avalible' }],
-            }
+            title: 'Power Projector 4713',
+            introductionText: '',
+            currency: 'Euro',
+            amount: 871.50,
+            image: 'http://lorempixel.com/400/400/nature',
+            gylp1: 'add-favorite',
+            gylp2: 'flag',
+            attribute3: '',
+            attribute2: '125 g',
+            attribute1: '145 x 140 x 360 cm',
+            status1: '',
+            statusgyph1: 'to-be-reviewed',
+            statuslabel1: 'Default',
+            inverted1: true,
+            status2: '',
+            statusgyph2: '',
+            statuslabel2: '',
+            inverted2: false,
+            decimal: 2
         },
         {
-            'title': 'Action 3', 'introductionText': 'intro 3', 'currency': 'Euro', 'amount': '173,57', 'image': 'http://lorempixel.com/400/400/nature'
-            , 'testObject': {
-                'first attribute': [{ 'icon': 'flag', 'text': 'Flag', 'marker': true }],
-                'second attribute': [{ 'inverted': true, 'text': 'avaliable', 'status': true }],
-                'third attribute': [{ 'text': 'avalible' }],
-            }
+            title: 'Gladiator MX',
+            introductionText: 'Gladiator product with discount',
+            currency: 'Euro',
+            amount: 27.50,
+            image: 'http://lorempixel.com/400/400/nature',
+            gylp1: 'request',
+            gylp2: 'private',
+            attribute2: '',
+            attribute1: '125 g',
+            attribute3: '145 x 140 x 360 cm',
+            status1: 'positive',
+            statusgyph1: '',
+            statuslabel1: 'Positive',
+            inverted1: false,
+            status2: 'negative',
+            statusgyph2: 'status-negative',
+            statuslabel2: '',
+            inverted2: true,
+            decimal: 2
         },
         {
-            'title': 'Action 4', 'introductionText': 'intro 4', 'currency': 'Euro', 'amount': '823,57', 'image': 'http://lorempixel.com/400/400/nature'
-            , 'testObject': {
-                'first attribute': [{ 'icon': 'flag', 'text': 'Flag', 'marker': true }],
-                'second attribute': [{ 'inverted': true, 'text': 'avaliable', 'status': true }],
-                'third attribute': [{ 'text': 'avalible' }],
-            }
-        }];
+            title: 'Hurricane GX',
+            introductionText: 'resale product',
+            currency: 'Euro',
+            amount: 487.50,
+            image: 'http://lorempixel.com/400/400/nature',
+            gylp1: 'private',
+            gylp2: 'flag',
+            attribute1: '125.43 kg',
+            attribute2: '125 g',
+            attribute3: '145 x 140 x 360 cm',
+            status2: 'critical',
+            statusgyph2: 'status-critical',
+            statuslabel2: 'Critical',
+            inverted2: false,
+            status1: 'informative',
+            statusgyph1: 'hint',
+            statuslabel1: 'Informative',
+            inverted1: false,
+            decimal: 2
+        }
+    ];
 }

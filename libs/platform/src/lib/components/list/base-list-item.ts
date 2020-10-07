@@ -1,13 +1,18 @@
 import {
     ElementRef, Input, ChangeDetectorRef, EventEmitter,
-    Output, HostListener, ViewChild, AfterViewChecked, OnInit, Directive, TemplateRef
+    Output, HostListener, ViewChild, AfterViewChecked,
+    OnInit, Directive, TemplateRef
 } from '@angular/core';
 
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { CheckboxComponent, RadioButtonComponent } from '@fundamental-ngx/core';
+
+import { ContentDensity } from '../../components/form/form-control';
 import { SelectionType, ListType } from './list.component';
 import { BaseComponent } from '../base';
 import { ListConfig } from './list.config';
+import { Router } from '@angular/router';
+
 
 let nextListItemId = 0;
 export type StatusType = 'negative' | 'critical' | 'positive' | 'informative';
@@ -38,43 +43,35 @@ interface SecondaryActionItem {
 @Directive()
 export class BaseListItem extends BaseComponent implements OnInit, AfterViewChecked {
 
-    @Input()
-    testObject: { string: [] };
-
-    /** define label for screen reader */
-    @Input()
-    text: string;
-    /** define label for screen reader */
-    @Input()
-    icon: string;
-
-    @Input()
-    indicationColor: string;
-
-    @Input()
-    status: string;
-
-    @Input()
-    glyph: string;
-
-
     /** define label for screen reader */
     @Input()
     introductionText: string;
 
-    /** define label for screen reader */
+    /** holds object number */
     @Input()
-    amount: string;
+    amount: number;
 
-    /** define currency */
+    /** holds object number unit */
     @Input()
     currency: string;
 
-    /** label for avatar */
+    /** object number amount decimal limitation */
+    @Input()
+    decimal: number;
+
+    /** object number status */
+    @Input()
+    numberStatus: StatusType;
+
+    /** holds avatar label */
     @Input()
     label: string;
 
-    /** Is avatar in circle */
+    /** holds avatar icon as image */
+    @Input()
+    glyph: string;
+
+    /** Avatar to be circle or not */
     @Input()
     circle: boolean;
 
@@ -97,7 +94,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /** Avatar is transparent */
     @Input()
     transparent: boolean;
-
 
     /** define label for screen reader */
     @Input()
@@ -189,7 +185,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** By default selection mode is 'active' */
     @Input()
-    listType: ListType;
+    listType: ListType = 'active';
 
     /*** Whether Navigation mode is included to list component
     * for all the items
@@ -218,7 +214,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         }
     }
 
-
     /** setter and getter for _link */
     @Input('link')
     get routerLink(): string {
@@ -232,12 +227,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /**Getter and setter the list of items */
     @Input()
     set item(item: any) {
-        this.text = item.text;
-        this.icon = item.icon;
-        this.indicationColor = item.indicationColor;
-        this.status = item.status;
+        this.decimal = item.decimal;
         this.glyph = item.glyph;
-        this.testObject = item.testObject;
         this.label = item.label;
         this.circle = item.circle;
         this.placeholder = item.placeholder;
@@ -327,6 +318,11 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      */
     _isCompact = this._contentDensity === 'compact';
 
+
+    /** @hidden
+  * Whether listitem has row level selection enabled */
+    selectRow: boolean;
+
     /** @hidden
     * Whether listitem is selected binded to template */
     _selected: boolean;
@@ -337,7 +333,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** @hidden */
     constructor(protected _changeDetectorRef: ChangeDetectorRef,
-        public itemEl: ElementRef, protected _listConfig: ListConfig) {
+        public itemEl: ElementRef, protected _listConfig: ListConfig,
+        private router: Router) {
         super(_changeDetectorRef);
 
     }
@@ -372,8 +369,12 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * On item click event will be emitted */
     @HostListener('click')
     _onItemClick(event: KeyboardEvent | MouseEvent | TouchEvent): void {
+        if (this.selectRow && this.selectionMode === 'multi') {
+            this._selected = !this._selected;
+        }
         this.itemSelected.emit(event);
         this._changeDetectorRef.markForCheck();
+
     }
 
     /** @hidden */
@@ -383,10 +384,21 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
             if (this.checkboxComponent || this.radioButtonComponent) {
                 this._onKeyboardClick(event);
             }
+            if (this.anchor) {
+                const path = this.anchor.nativeElement.getAttribute('ng-reflect-router-link');
+                if (path !== null && path !== undefined) {
+                    this.router.navigate([this.anchor.nativeElement.getAttribute('ng-reflect-router-link')]);
+                }
+            }
+            if (this.selectRow) {
+                this._selected = !this._selected;
+            }
             this.itemSelected.emit(event);
             this._changeDetectorRef.markForCheck();
         }
     }
+
+    // method appply the listcomponent changes to
 
     /**@hidden
      * Handler for mouse events */

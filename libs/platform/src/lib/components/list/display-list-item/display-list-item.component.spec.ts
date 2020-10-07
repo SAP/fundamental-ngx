@@ -1,9 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+
 import { ListComponent } from '../list.component';
 import { PlatformListModule } from '../list.module';
 import { DisplayListItemComponent } from './display-list-item.component';
+import { DisplayListItemModule } from './display-list-item.module';
+
 
 
 @Component({
@@ -34,7 +38,7 @@ describe('DisplayListItemComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule],
+            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
             declarations: [DisplayListItemComponentTest, DisplayListItemComponent, ListComponent]
         })
             .compileComponents();
@@ -68,16 +72,14 @@ describe('DisplayListItemComponent', () => {
         expect(listItems.length).toEqual(4);
     });
 
-    it('Displayable items should has aria-label attribute', () => {
-        const displayListElems = fixture.debugElement.queryAll(By.css('li'));
-        expect(displayListElems.length).toEqual(4);
-        displayListElems.forEach((listElem) => {
-            expect(listElem.nativeElement.getAttribute('aria-label')).toBeTruthy();
-        });
+    it('Display items should has aria-label attribute', () => {
+        const spanElems = fixture.debugElement.queryAll(By.css('span'));
+        expect(spanElems.length).toEqual(8);
+        expect(spanElems[0].nativeElement.getAttribute('aria-label')).toContain('title 1');
     });
 
-    it('Should display display item  with role as list item', () => {
-        const listContainer = fixture.debugElement.query(By.css('fdp-display-list-item'));
+    it('Should display item role as list item', () => {
+        const listContainer = fixture.debugElement.query(By.css('li'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('listitem');
     });
@@ -100,7 +102,7 @@ describe('DisplayListItemComponent', () => {
     it('Should has span element have fd list secondary', () => {
         const spans = fixture.debugElement.queryAll(By.css('span'));
         fixture.detectChanges();
-        expect(spans[0].nativeElement.getAttribute('fd-list-secondary')).toBeTruthy();
+        expect(spans[1].nativeElement.getAttribute('title')).toContain('secondary 1');
     });
 
     it('Should has span element should have aria-label for accessibility', () => {
@@ -110,11 +112,12 @@ describe('DisplayListItemComponent', () => {
     });
 
     it('Should has partial Navigation on 2 list item', () => {
-        const naviationItems = fixture.debugElement.queryAll(By.css('a'));
-        expect(naviationItems.length).toEqual(2);
+        const naviationItems = fixture.debugElement.queryAll(By.css('li'));
+        expect(naviationItems.length).toEqual(4);
         fixture.detectChanges();
-        expect(naviationItems[0].nativeElement.classList).toContain('fd-list__link--navigation-indicator');
-        expect(naviationItems[1].nativeElement.classList).toContain('fd-list__link--navigation-indicator');
+        naviationItems.forEach((navElem) => {
+            expect(navElem.nativeElement.classList.contains('fd-list__item--link'));
+        });
     });
 });
 
@@ -125,7 +128,7 @@ describe('DisplayListItemComponent functions', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule],
+            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
             declarations: [DisplayListItemComponent, ListComponent]
         })
             .compileComponents();
@@ -168,7 +171,7 @@ describe('DisplayListItemComponent Imperative', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule],
+            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
             declarations: [TestComponentContent, DisplayListItemComponent]
         }).compileComponents();
     }));
@@ -206,30 +209,34 @@ describe('DisplayListItemComponent Imperative', () => {
 
     it('Title and secondary should to present for all Items', () => {
 
-        const displayElems0 = fixture.debugElement.queryAll(By.css('li'))[0];
+        const li0 = fixture.debugElement.queryAll(By.css('li'))[0];
+        const displayElems0 = li0.queryAll(By.css('span'));
         expect(displayElems0[0].nativeElement.getAttribute('title')).toEqual('title 1');
         expect(displayElems0[1].nativeElement.getAttribute('title')).toEqual('secondary 1');
 
-        const displayElems1 = fixture.debugElement.queryAll(By.css('li'))[1];
+
+        const li1 = fixture.debugElement.queryAll(By.css('li'))[1];
+        const displayElems1 = li1.queryAll(By.css('span'));
         expect(displayElems1[0].nativeElement.getAttribute('title')).toEqual('title 2');
         expect(displayElems1[1].nativeElement.getAttribute('title')).toEqual('secondary 2');
 
-        const displayElems2 = fixture.debugElement.queryAll(By.css('li'))[2];
+        const li2 = fixture.debugElement.queryAll(By.css('li'))[2];
+        const displayElems2 = li2.queryAll(By.css('span'));
         expect(displayElems2[0].nativeElement.getAttribute('title')).toEqual('title 3');
         expect(displayElems2[1].nativeElement.getAttribute('title')).toEqual('secondary 3');
 
 
-        const displayElems3 = fixture.debugElement.queryAll(By.css('li'))[3];
+        const li3 = fixture.debugElement.queryAll(By.css('li'))[3];
+        const displayElems3 = li3.queryAll(By.css('span'));
         expect(displayElems3[0].nativeElement.getAttribute('title')).toEqual('title 4');
         expect(displayElems3[1].nativeElement.getAttribute('title')).toEqual('secondary 4');
     });
 
-    it('Should have partial Navigation enabled 2 list item', () => {
-        const naviationItemsImp = fixture.debugElement.queryAll(By.css('a'));
-        expect(naviationItemsImp.length).toEqual(2);
+    it('Should have partial Navigation enabled 4 list item', () => {
+        const naviationItemsImp = fixture.debugElement.queryAll(By.css('li'));
+        expect(naviationItemsImp.length).toEqual(4);
         fixture.detectChanges();
-        expect(naviationItemsImp[0].nativeElement.classList).toContain('fd-list__link fd-link fdp-link-truncate__txt fd-list__link--navigation-indicator');
-        expect(naviationItemsImp[1].nativeElement.classList).toContain('fd-list__link fd-link fdp-link-truncate__txt fd-list__link--navigation-indicator');
+        expect(naviationItemsImp[0].nativeElement.classList).toContain('fd-list__item--link');
     });
 
 });

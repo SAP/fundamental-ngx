@@ -1,13 +1,16 @@
-import { Component, ChangeDetectorRef, ElementRef, ChangeDetectionStrategy, forwardRef } from '@angular/core';
+import {
+    Component, ChangeDetectorRef, ElementRef,
+    ChangeDetectionStrategy, forwardRef, Input
+} from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { Router } from '@angular/router';
+
 import { ListConfig } from '../list.config';
 import { BaseListItem } from '../base-list-item';
-
 
 @Component({
     selector: 'fdp-action-list-item',
     templateUrl: './action-list-item.component.html',
-    styleUrls: ['./action-list-item.component.scss'],
     providers: [
         { provide: BaseListItem, useExisting: forwardRef(() => ActionListItemComponent) }
     ],
@@ -15,10 +18,12 @@ import { BaseListItem } from '../base-list-item';
 })
 export class ActionListItemComponent extends BaseListItem {
 
+    @Input()
+    title: string;
 
     /** @hidden */
     /**on keydown append active styles on actionable item */
-    onKeyDown(event: any): void {
+    _onKeyDown(event: any): void {
         if (event.keyCode === ENTER || event.keyCode === SPACE) {
             this.itemEl.nativeElement.querySelector('button').classList.add('is-active');
         }
@@ -26,7 +31,7 @@ export class ActionListItemComponent extends BaseListItem {
 
     /** @hidden */
     /**on keyup remove active styles from actionable item*/
-    onKeyUp(event: any): void {
+    _onKeyUp(event: any): void {
         if (event.keyCode === ENTER || event.keyCode === SPACE) {
             this.itemEl.nativeElement.querySelector('button').classList.remove('is-active');
         }
@@ -34,8 +39,8 @@ export class ActionListItemComponent extends BaseListItem {
 
     /** @hidden */
     constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
-        protected _listConfig: ListConfig) {
-        super(_changeDetectorRef, itemEl, _listConfig);
+        protected _listConfig: ListConfig, private _router: Router) {
+        super(_changeDetectorRef, itemEl, _listConfig, _router);
     }
 
 }

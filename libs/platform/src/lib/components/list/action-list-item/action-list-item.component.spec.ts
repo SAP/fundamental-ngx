@@ -1,9 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActionListItemComponent } from './action-list-item.component';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
+
 import { ListComponent } from '../list.component';
 import { PlatformListModule } from '../list.module';
+import { ActionListItemComponent } from './action-list-item.component';
+
 
 
 @Component({
@@ -45,7 +48,7 @@ describe('ActionListItemComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule],
+            imports: [PlatformListModule, RouterTestingModule],
             declarations: [ActionListItemComponentTest, ActionListItemComponent, ListComponent]
         })
             .compileComponents();
@@ -87,7 +90,7 @@ describe('ActionListItemComponent', () => {
     });
 
     it('Should display action item  with role as list item', () => {
-        const listContainer = fixture.debugElement.query(By.css('fdp-action-list-item'));
+        const listContainer = fixture.debugElement.query(By.css('li'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('listitem');
     });
@@ -127,7 +130,7 @@ describe('ActionListItemComponent functions', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule],
+            imports: [PlatformListModule, RouterTestingModule],
             declarations: [ActionListItemComponent, ListComponent]
         })
             .compileComponents();
@@ -170,7 +173,7 @@ describe('ActionListItemComponent Imperative', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule],
+            imports: [PlatformListModule, RouterTestingModule],
             declarations: [TestComponentContent, ActionListItemComponent]
         }).compileComponents();
     }));

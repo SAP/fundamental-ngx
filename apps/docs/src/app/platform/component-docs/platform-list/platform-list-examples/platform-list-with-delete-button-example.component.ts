@@ -8,8 +8,7 @@ export class PlatformListWithDeleteButtonExampleComponent {
 
     // Handle deletion of item via  mouseclick
     _deleteRow(event: any): void {
-        if (event.target.tagName.toLowerCase() === 'button' &&
-            event.target.classList.contains('sap-icon--decline')) {
+        if (event.target.tagName.toLowerCase() === 'button') {
             event.target.parentNode.parentNode.style.display = 'none';
         }
     }

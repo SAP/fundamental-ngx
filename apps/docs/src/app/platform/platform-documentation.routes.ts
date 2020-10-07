@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
