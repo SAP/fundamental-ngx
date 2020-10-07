@@ -46,6 +46,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/mega-menu', name: 'Mega Menu' },
             { url: 'core/menu', name: 'Menu' },
             { url: 'core/message-strip', name: 'Message Strip' },
+            { url: 'core/message-toast', name: 'Message Toast' },
             { url: 'core/multi-input', name: 'Multi Input' },
             { url: 'core/notification', name: 'Notification' },
             { url: 'core/object-marker', name: 'Object Marker' },

@@ -200,6 +200,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'message-toast',
+                loadChildren: () =>
+                    import('./component-docs/message-toast/message-toast-docs.module').then(
+                        (m) => m.MessageToastDocsModule
+                    )
+            },
+            {
                 path: 'multi-input',
                 loadChildren: () =>
                     import('./component-docs/multi-input/multi-input-docs.module').then((m) => m.MultiInputDocsModule)
