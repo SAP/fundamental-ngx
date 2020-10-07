@@ -80,12 +80,6 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input()
     buttonFocusable = true;
 
-    /**
-     * @deprecated, leaving for backwards compatibility, it will be removed in `0.17.0`.
-     */
-    @Input()
-    buttonType: ButtonType;
-
     /** The type of the input, used in Input Group. By default value is set to 'text' */
     @Input()
     type = 'text';
