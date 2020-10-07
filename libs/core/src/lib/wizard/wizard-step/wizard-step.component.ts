@@ -12,7 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
-import { KeyUtil } from '@fundamental-ngx/core';
+import { KeyUtil } from '../../utils/public_api';
 
 export type StepType = 'completed' | 'current' | 'upcoming' | 'active';
 
