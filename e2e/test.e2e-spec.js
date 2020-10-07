@@ -8,7 +8,7 @@ describe('Test Sauclab', function() {
         await browser.get('/');
         expect(true).toBe(true);
     });
-    it('should fail', function() {
+    xit('should fail', function() {
         expect(false).toBe(true);
     });
 

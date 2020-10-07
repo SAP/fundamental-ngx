@@ -37,7 +37,7 @@
     "start": "ng serve",
     "test": "ng test core --watch false --code-coverage true --browsers=ChromeHeadless",
     "test:platform": "ng test platform --watch false --code-coverage true --browsers=ChromeHeadless",
-    "test:e2e:saucelabs": "SAUCE_USERNAME=tonyolkh SAUCE_ACCESS_KEY=b257d608-6df5-4ee8-8785-0a8815dfab84 npm run protractor protractor-ci.conf.js",
+    "test:e2e:saucelabs": "SAUCE_USERNAME='tonyolkh' SAUCE_ACCESS_KEY='b257d608-6df5-4ee8-8785-0a8815dfab84' node_modules/.bin/protractor protractor-ci.conf.js",
     "active-test": "ng test core --watch true --browsers=ChromeHeadless",
     "test:coveralls": "cat ./coverage/libs/core/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
     "compile-typedoc-all": "npm run compile-typedoc-core && npm run compile-typedoc-platform",

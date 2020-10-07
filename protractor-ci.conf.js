@@ -7,12 +7,19 @@ exports.config = {
     allScriptsTimeout: 11000,
     sauceUser: process.env.SAUCE_USERNAME,
     sauceKey: process.env.SAUCE_ACCESS_KEY,
+    sauceRegion: 'eu',
     specs: [
         './e2e/**/*.e2e-spec.js'
     ],
     multiCapabilities: [
         {
             'browserName': 'internet explorer',
+            'version': 'latest',
+            'name': 'tests-Protractor',
+        },
+        {
+            'browserName': 'chrome',
+            'platform': 'MAC',
             'version': 'latest',
             'name': 'tests-Protractor',
         }
