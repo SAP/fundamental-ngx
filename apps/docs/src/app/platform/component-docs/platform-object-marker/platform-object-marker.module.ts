@@ -21,7 +21,7 @@ const routes: Routes = [
         component: ObjectMarkerHeaderComponent,
         children: [
             { path: '', component: PlatformObjectMarkerDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.infoLabel } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.objectMarker } }
         ]
     }
 ];
