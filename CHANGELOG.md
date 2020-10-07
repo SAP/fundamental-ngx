@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.22.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.6...v0.22.1-rc.7) (2020-10-07)
+
+
+### Bug Fixes
+
+* remove deprecated input isDropdown from popover ([#3570](https://github.com/SAP/fundamental-ngx/issues/3570)) ([9b4ad00](https://github.com/SAP/fundamental-ngx/commit/9b4ad000bcf3acddac5a4ffbc62740b6cf3f4b0a))
+
 ### [0.22.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.5...v0.22.1-rc.6) (2020-10-07)
 
 
