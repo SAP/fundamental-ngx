@@ -9,8 +9,9 @@ exports.config = {
     sauceKey: process.env.SAUCE_ACCESS_KEY,
     sauceRegion: 'eu',
     specs: [
-        './e2e/**/*.e2e-spec.js'
+        './e2e/**/test.e2e-spec.js'
     ],
+
     multiCapabilities: [
         {
             'browserName': 'internet explorer',
