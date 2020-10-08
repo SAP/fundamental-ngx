@@ -9,7 +9,7 @@ export class MessagingTopics {
 
     }
 
-    addTopic(topic: Topic): void {
+    defineTopic(topic: Topic): void {
         const length = this.topicsDef.filter((t) => t.name === topic.name).length;
         if (length === 0) {
             this.topicsDef.push(topic);

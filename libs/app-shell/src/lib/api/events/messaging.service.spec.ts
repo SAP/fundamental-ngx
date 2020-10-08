@@ -39,7 +39,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.addTopic({
+                t.defineTopic({
                     name: 'system:events',
                     eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
                 });
@@ -68,7 +68,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.addTopic({
+                t.defineTopic({
                     name: 'system:events',
                     eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
                 });
@@ -97,12 +97,12 @@ describe('MessagingService', () => {
                 [MessagingService, MessagingTopics],
                 (service: MessagingService, t: MessagingTopics) => {
 
-                    t.addTopic({
+                    t.defineTopic({
                         name: 'system:events',
                         eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
                     });
 
-                    t.addTopic({
+                    t.defineTopic({
                         name: 'system:XXX',
                         eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
                     });
@@ -137,7 +137,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.addTopic({
+                t.defineTopic({
                     name: 'system:events',
                     eventType: EventType.ONLY_LAST, shared: true, prefix: 'system:'
                 });
@@ -172,7 +172,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.addTopic({
+                t.defineTopic({
                     name: 'system:events',
                     eventType: EventType.ONLY_LAST, shared: true, prefix: 'system:'
                 });
@@ -211,7 +211,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.addTopic({
+                t.defineTopic({
                     name: 'system:events',
                     eventType: EventType.DURABLE, shared: true, prefix: 'system:'
                 });

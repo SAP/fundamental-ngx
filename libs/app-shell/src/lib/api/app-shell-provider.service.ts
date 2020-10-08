@@ -26,11 +26,11 @@ export class AppShellProviderService {
         /**
          * Create AppShell Level topics
          */
-        this.topics.addTopic({
+        this.topics.defineTopic({
             prefix: 'app:', eventType: EventType.ONLY_LAST, name: 'app:event',
             shared: true
         });
-        this.topics.addTopic({
+        this.topics.defineTopic({
             prefix: 'app:', eventType: EventType.ONLY_LAST, name: 'app:search',
             shared: true
         });

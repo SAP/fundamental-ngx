@@ -50,7 +50,7 @@ export class PluginContext {
 
     publisher(topic: string): TopicPublisher<Message> {
         if (!this.messageBusPub.has(topic)) {
-            throw new Error('Invalid topic name');
+            throw new Error('Invalid topic name: ' + topic);
         }
         return this.messageBusPub.get(topic);
     }

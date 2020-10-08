@@ -1,7 +1,6 @@
 import {
     Channel,
-    DeliveryModel,
-    EventType
+    DeliveryModel
 } from './message-bus';
 import { Injectable } from '@angular/core';
 
@@ -13,8 +12,6 @@ export class MessagingConfig {
     channel: Channel = Channel.RxJS;
 
     durableEventSize: number;
-
-    eventType: EventType = EventType.ONLY_LAST;
 
     /**
      * Here we can have some other properties related to current session, user, context app that could check certain
@@ -34,7 +31,6 @@ export class MessagingConfig {
             newConfig.channel = config.channel || newConfig.channel;
             newConfig.deliveryMode = config.deliveryMode || newConfig.deliveryMode;
             newConfig.durableEventSize = config.durableEventSize || 6;
-            newConfig.eventType = config.eventType || newConfig.eventType;
 
             return newConfig;
         };

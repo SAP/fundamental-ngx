@@ -174,11 +174,19 @@ export abstract class Message {
             });
         return uuid;
     }
+
+    toString(): string {
+        return `id: ${this.id}, timestamp: ${this.timestamp}, topic: ${this.topic} `;
+    }
 }
 
 export class TextMessage extends Message {
     constructor(public text: string, topic?: string, id?: string, timestamp?: number, priority?: number) {
         super(id, timestamp, priority, topic);
+    }
+
+    toString(): string {
+        return `TextMessage {${super.toString()}, text: ${this.text} }`;
     }
 }
 
@@ -202,6 +210,16 @@ export class MapMessage<T> extends Message {
     get(key: string): T {
         return this._map.get(key);
     }
+
+    toString(): string {
+        let msg = 'MapMessage {';
+        msg += super.toString();
+        this._map.forEach((v, k) => {
+            msg += `${k} : ${v}`;
+        });
+        msg += '}';
+        return msg;
+    }
 }
 
 export class ObjectMessage<T> extends Message {
@@ -217,6 +235,10 @@ export class ObjectMessage<T> extends Message {
 
     set object(value: T) {
         this._object = value;
+    }
+
+    toString(): string {
+        return `ObjectMessage { ${super.toString()}, object: ${this._object.toString()}`;
     }
 }
 
