@@ -17,6 +17,7 @@ import {
 import { isObservable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { KeyUtil } from '@fundamental-ngx/core';
 import { ContentDensity, SelectionMode } from './types';
 import { TableColumnComponent } from './table-column/table-column.component';
 import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
@@ -212,6 +213,19 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     getCellValue(key: string, row: SelectableRow): any {
         return key.split('.').reduce((a, b) => a[b], row.value);
+    }
+
+    /** @hidden */
+    onKeydown(event: KeyboardEvent): void {
+        // TODO: since the table should be able the focusable cells, needs to implement arrow buttons navigation in next phases
+
+        event.stopPropagation();
+        const click = new MouseEvent('click');
+
+        if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+            event.target.dispatchEvent(click);
+            event.preventDefault();
+        }
     }
 
     /** @hidden */
