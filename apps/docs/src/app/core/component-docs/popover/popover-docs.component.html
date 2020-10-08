@@ -1,3 +1,32 @@
+<fd-docs-section-title [id]="'simple'" [componentName]="'popover'">
+    Simple Popovers
+</fd-docs-section-title>
+<description>
+    Making use of simple popovers is very easy. Open an fd-popover component, place a control and body inside. You are
+    not required to keep track of the popover state.
+</description>
+<component-example>
+    <fd-popover-example></fd-popover-example>
+</component-example>
+<code-example [exampleFiles]="popoverExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'headerAndFooter'" [componentName]="'popover'">
+    Popover with Header and Footer
+</fd-docs-section-title>
+<description>
+    Popover body can be created with header and footer components. To add header, there can be added
+    <code>fd-popover-body-header</code> component, for footer there is dedicated
+    <code>fd-popover-body-footer</code> component.
+</description>
+<component-example>
+    <fd-popover-complex-example></fd-popover-complex-example>
+</component-example>
+<code-example [exampleFiles]="popoverComplex"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'placement'" [componentName]="'popover'">
     Popover Placement
 </fd-docs-section-title>
@@ -24,3 +53,73 @@
     <fd-popover-programmatic-open-example></fd-popover-programmatic-open-example>
 </component-example>
 <code-example [exampleFiles]="popoverProgrammaticExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'popoversDialogs'" [componentName]="'popover'">
+    Popovers in Dialogs
+</fd-docs-section-title>
+<description>
+    Popovers are functional inside dialogs. The default behaviour is to overflow the dialog, though that can be changed
+    with the <code>options</code> input, which accepts Popper.js settings.
+</description>
+<component-example>
+    <fd-popover-dialog-example></fd-popover-dialog-example>
+</component-example>
+<code-example [exampleFiles]="popoverDialogExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'fillControlWidth'" [componentName]="'popover'">
+    Fill Control Width
+</fd-docs-section-title>
+<description>
+    A custom Popper modifier allows the directive to match its popover size to that of the control.
+</description>
+<component-example>
+    <fd-popover-c-fill></fd-popover-c-fill>
+</component-example>
+<code-example [exampleFiles]="popoverFillExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'appendTo'" [componentName]="'popover'">
+    Popover Body Container
+</fd-docs-section-title>
+<description>
+
+</description>
+<component-example>
+    <fd-popover-container-example></fd-popover-container-example>
+</component-example>
+<code-example [exampleFiles]="popoverFillExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'dynamicBodyHeight'" [componentName]="'popover'">
+    Dynamic Body Height
+</fd-docs-section-title>
+<description>
+    In case of height change inside popover body, the position of popover is not automatically changed, mostly cause of
+    optimization reasons. To force change of the position, it is needed to call <code>updatePopover()</code> method
+    inside popover, as it is on example. There is used <code>SideNavigation</code> component.
+</description>
+<component-example>
+    <fd-popover-dynamic-example></fd-popover-dynamic-example>
+</component-example>
+<code-example [exampleFiles]="popoverDynamicExample"></code-example>
+
+<separator></separator>
+<separator></separator>
+
+<fd-docs-section-title [id]="'dropdown'" [componentName]="'popover'">
+    Dropdown Popover
+</fd-docs-section-title>
+<description>
+    Dropdown is a composition of basic <code>popover</code> and <code>button</code> with
+    <code>[fdMenu]="true"</code>.
+</description>
+<component-example>
+    <fd-popover-dropdown-example></fd-popover-dropdown-example>
+</component-example>
+<code-example [exampleFiles]="dropdownPopover"></code-example>\

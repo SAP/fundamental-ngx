@@ -24,6 +24,9 @@ import {
     SegmentedButtonModule
 } from '@fundamental-ngx/core';
 import { PopoverComplexExampleComponent } from './examples/popover-complex-example/popover-complex-example.component';
+import {
+    PopoverContainerExampleComponent
+} from './examples/popover-container-example/popover-container-example.component';
 
 const routes: Routes = [
     {
@@ -61,7 +64,8 @@ const routes: Routes = [
         PopoverDropdownExampleComponent,
         PopoverPlacementExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
-        PopoverComplexExampleComponent
+        PopoverComplexExampleComponent,
+        PopoverContainerExampleComponent
     ]
 })
 export class PopoverDocsModule {}

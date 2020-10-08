@@ -60,4 +60,16 @@ export class BasePopoverClass {
     @Input()
     placement: Placement;
 
+    @Input()
+    fillControlMode
+
+    @Input()
+    appendTo
+
+    @Input()
+    additionalClasses
+
+    @Input()
+    addContainerClass
+
 }

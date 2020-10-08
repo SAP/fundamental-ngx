@@ -1,0 +1,75 @@
+<div>
+
+    <label fd-form-label>Origin X</label>
+    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
+        <button fd-button
+                *ngFor="let option of xPositions"
+                (click)="originX = option; refresh()"
+                [class]="originX === option ? 'is-selected': ''"
+                [label]="option">
+        </button>
+    </fd-segmented-button>
+
+    <br>
+
+    <label fd-form-label>Origin Y</label>
+    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
+        <button fd-button
+                *ngFor="let option of yPositions"
+                (click)="originY = option; refresh()"
+                [class]="originY === option ? 'is-selected': ''"
+                [label]="option">
+        </button>
+    </fd-segmented-button>
+
+    <br>
+
+    <label fd-form-label>Overlay X</label>
+    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
+        <button fd-button
+                *ngFor="let option of xPositions"
+                (click)="overlayX = option; refresh()"
+                [class]="overlayX === option ? 'is-selected': ''"
+                [label]="option">
+        </button>
+    </fd-segmented-button>
+
+    <br>
+
+    <label fd-form-label>Overlay Y</label>
+    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
+        <button fd-button
+                *ngFor="let option of yPositions"
+                (click)="overlayY = option; refresh()"
+                [class]="overlayY === option ? 'is-selected': ''"
+                [label]="option">
+        </button>
+    </fd-segmented-button>
+
+
+</div>
+
+
+<br><br>
+
+<div style="width: 300px; height: 300px; display: flex; align-items: center; justify-content: center;">
+
+    <fd-cdk-popover [cdkPositions]="cdkPosition"
+                    [noArrow]="false"
+                    [isOpen]="true"
+                    [triggers]="[]"
+                    [closeOnEscapeKey]="false"
+                    [closeOnOutsideClick]="false" >
+        <fd-popover-control>
+            <button fd-button [glyph]="'navigation-up-arrow'"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list">
+                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                </li>
+            </ul>
+        </fd-popover-body>
+    </fd-cdk-popover>
+
+</div>

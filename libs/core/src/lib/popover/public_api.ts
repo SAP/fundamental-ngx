@@ -9,3 +9,5 @@ export * from './popover-directive/popover.directive';
 export * from './popover-dropdown/popover-dropdown.component';
 export * from './popover-control/popover-control.component';
 export * from './cdk-overlay/cdk-popover.component';
+export * from './cdk-overlay/popover-position';
+export * from './cdk-overlay/popover-container.directive';

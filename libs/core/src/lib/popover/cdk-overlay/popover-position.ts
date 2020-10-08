@@ -1,4 +1,4 @@
-import { ConnectedPosition, FlexibleConnectedPositionStrategy } from '@angular/cdk/overlay';
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import { isDevMode } from '@angular/core';
 
 const popoverPlacementMap: {[key: string]: ConnectedPosition} = {

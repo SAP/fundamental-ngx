@@ -41,7 +41,7 @@ let popoverUniqueId = 0;
  * PopoverComponent is an abstraction of PopoverDirective.
  */
 @Component({
-    selector: 'fd-cdk-popover',
+    selector: 'fd-cdk-popover, fd-popover',
     templateUrl: './cdk-popover.component.html',
     host: {
         '[class.fd-popover-custom]': 'true',
@@ -190,7 +190,9 @@ export class CdkPopoverComponent extends BasePopoverClass
 
     /** Method called to refresh position of opened popover */
     refreshPosition(): void {
-        this._overlayRef.updatePosition();
+        if (this._overlayRef) {
+            this._overlayRef.updatePosition();
+        }
     }
 
     /** Listener for click events */

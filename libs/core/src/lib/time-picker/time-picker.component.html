@@ -1,4 +1,4 @@
-<fd-cdk-popover [(isOpen)]="isOpen"
+<fd-popover [(isOpen)]="isOpen"
             (isOpenChange)="isOpenChange.emit($event)"
             [triggers]="[]"
             [disabled]="disabled"
@@ -33,7 +33,6 @@
     <fd-popover-body *ngIf="displaySeconds || displayMinutes || displayHours">
         <ng-content></ng-content>
         <fd-time
-            *ngIf="isOpen"
             [tablet]="tablet"
             [compact]="compact"
             [disabled]="disabled"
@@ -47,4 +46,4 @@
             [spinnerButtons]="spinnerButtons"
         ></fd-time>
     </fd-popover-body>
-</fd-cdk-popover>
+</fd-popover>
