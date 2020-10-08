@@ -113,6 +113,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'formatted-text',
+                loadChildren: () =>
+                    import('./component-docs/formatted-text/formatted-text-docs.module').then(
+                        (m) => m.FormattedTextDocsModule
+                    )
+            },
+            {
                 path: 'global-config',
                 loadChildren: () =>
                     import('./component-docs/global-config/global-config-docs.module').then(
