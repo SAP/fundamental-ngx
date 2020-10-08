@@ -1,23 +1,27 @@
 <header>Message Toast</header>
-<description
-    >Message Toast is a small, non-disruptive popup for success messages that disappears automatically after a few
-    seconds. <br /><br />
+<description>
+    <p>
+        The message toast is a small, non-disruptive popup for success messages that disappears automatically after a
+        few seconds. When message toast is displayed, it is always centered horizontally at the bottom of the screen and
+        fades in and out automatically. <br /><br />
+        <b>Note:</b> The timing and duration of the message toast is defined by the application, the standard value
+        being 3000 ms. The duration can be above 3000 ms, but it's not recommended to be less than 3000 ms.
+    </p>
 
-    <b>Usage</b><br />
-    Use Message Toast in the following cases:<br />
-    - To display a short success message. <br />
-    - To avoid interrupting the user while they are performing an action.<br />
-    - To confirm a successful action.<br /><br />
+    <h2>Usage</h2>
+    <b>Use message toast if:</b>
+    <ul>
+        <li>To display a short success message.</li>
+        <li>To avoid interrupting the user while they are performing an action.</li>
+        <li>To confirm a successful action.</li>
+    </ul>
 
-    <b>Position</b><br />
-
-    The message toast is always centered horizontally at the bottom of the screen.<br /><br />
-
-    <b>Behavior and Interaction</b><br />
-
-    The message toast fades in and out automatically. The timing and duration of the message toast is defined by the
-    app. The standard value is 3000 ms. The duration can be set to more than 3000 ms, but it's not recommended to set it
-    to less than 3000 ms.
+    <b>Do not use the message toast if:</b>
+    <ul>
+        <li>You want to display an error or warning message.</li>
+        <li>You want to interrupt users while they are performing an action.</li>
+        <li>You want to make sure that users read the message before they leave the page.</li>
+    </ul>
 </description>
 <import module="MessageToastModule"></import>
 

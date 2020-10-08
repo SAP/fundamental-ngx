@@ -13,7 +13,7 @@ export class MessageToastExampleComponent {
     openFromComponent(): void {
         this.messageToastService.open(MessageToastContentExampleComponent, {
             mousePersist: true,
-            duration: 7500,
+            duration: 5000,
             maxWidth: '25rem'
         } as MessageToastConfig);
     }

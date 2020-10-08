@@ -12,7 +12,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
                 z-index: 5000;
                 align-items: center;
                 bottom: 0;
-                width: 100%;
+                left: 50%;
+                transform: translateX(-50%);
             }
         `
     ],
