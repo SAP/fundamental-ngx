@@ -84,6 +84,9 @@ export class WizardStepComponent implements OnChanges {
     finalStep = false;
 
     /** @hidden */
+    visited = false;
+
+    /** @hidden */
     constructor(private _elRef: ElementRef) {}
 
     /** @hidden */
@@ -95,7 +98,10 @@ export class WizardStepComponent implements OnChanges {
 
     /** @hidden */
     stepContainerKeypress(event?: KeyboardEvent): void {
-        if (!event || KeyUtil.isKey(event, ['Space', 'Enter'])) {
+        if (event) {
+            event.preventDefault();
+        }
+        if (this.visited && (!event || KeyUtil.isKey(event, [' ', 'Enter']))) {
             this.stepClicked.emit(this);
         }
     }

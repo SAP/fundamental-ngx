@@ -116,6 +116,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         this.steps.forEach((step) => {
             step.finalStep = false;
             if (step.status === CURRENT_STEP_STATUS && step.content) {
+                step.visited = true;
                 this.contentTemplate = step.content.contentTemplate;
             }
         });
@@ -188,14 +189,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _stepClicked(clickedStep: WizardStepComponent): void {
         this.steps.forEach((step) => {
+            const clickedStepIndex = this.steps.toArray().indexOf(clickedStep);
             if (step === clickedStep) {
                 step.status = CURRENT_STEP_STATUS;
                 step.statusChange.emit(CURRENT_STEP_STATUS);
             } else if (step !== clickedStep) {
-                if (this.steps.toArray().indexOf(step) < this.steps.toArray().indexOf(clickedStep)) {
+                if (this.steps.toArray().indexOf(step) < clickedStepIndex) {
                     step.status = COMPLETED_STEP_STATUS;
                     step.statusChange.emit(COMPLETED_STEP_STATUS);
-                } else if (this.steps.toArray().indexOf(step) > this.steps.toArray().indexOf(clickedStep)) {
+                } else if (this.steps.toArray().indexOf(step) > clickedStepIndex) {
                     step.status = UPCOMING_STEP_STATUS;
                     step.statusChange.emit(UPCOMING_STEP_STATUS);
                 }

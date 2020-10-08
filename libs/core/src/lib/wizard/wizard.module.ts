@@ -7,6 +7,7 @@ import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { WizardStepIndicatorComponent } from './wizard-step-indicator/wizard-step-indicator.component';
 import { WizardContentComponent } from './wizard-content/wizard-content.component';
 import { WizardNextStepComponent } from './wizard-next-step/wizard-next-step.component';
+import { IconModule } from '../icon/icon.module';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,7 @@ import { WizardNextStepComponent } from './wizard-next-step/wizard-next-step.com
         WizardContentComponent,
         WizardNextStepComponent
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, IconModule],
     exports: [
         WizardComponent,
         WizardNavigationComponent,
