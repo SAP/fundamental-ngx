@@ -5,7 +5,7 @@ import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
-import { ObjectStatusModule } from '@fundamental-ngx/core';
+import { ObjectStatusModule, TableModule } from '@fundamental-ngx/core';
 import { PlatformButtonModule, PlatformTableModule } from '@fundamental-ngx/platform';
 
 import { PlatformTableHeaderComponent } from './platform-table-header/platform-table-header.component';
@@ -31,6 +31,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         CdkTableModule,
+        TableModule,
         PlatformTableModule,
         PlatformButtonModule,
         ObjectStatusModule

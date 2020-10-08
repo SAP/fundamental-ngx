@@ -5,8 +5,7 @@ import {
     ContentChild,
     Input,
     OnDestroy,
-    OnInit,
-    ViewEncapsulation
+    OnInit
 } from '@angular/core';
 
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -23,11 +22,29 @@ enum ColumnAlignEnum {
     End = 'right'
 }
 
+/**
+ * The component that represents a table column.
+ * ```html
+ * <fdp-column
+ *  name="name"
+ *  key="name"
+ *  label="Name"
+ *  align="start">
+ * </fdp-column>
+ *
+ * <fdp-column
+ *  name="price"
+ *  key="price.value">
+ *  <fdp-table-header *fdpHeaderCellDef>Price</fdp-table-header>
+ *  <fdp-table-cell *fdpCellDef="let item">
+ *   {{item.price.value}} {{item.price.currency}}
+ *  </fdp-table-cell>
+ * </fdp-column>
+ * ```
+ * */
 @Component({
     selector: 'fdp-column',
-    templateUrl: './table-column.component.html',
-    styleUrls: ['./table-column.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+    template: '',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableColumnComponent implements OnInit, OnDestroy {

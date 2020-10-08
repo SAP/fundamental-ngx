@@ -22,7 +22,6 @@ export const API_FILES = {
     splitMenuButton: ['SplitMenuButtonComponent'],
     table: [
         'TableComponent',
-        'TableWrapperComponent',
         'TableToolbarComponent',
         'TableToolbarActionsComponent',
         'TableColumnComponent'

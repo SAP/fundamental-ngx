@@ -11,8 +11,7 @@ import {
     Input,
     OnDestroy,
     Output,
-    QueryList,
-    ViewEncapsulation
+    QueryList
 } from '@angular/core';
 
 import { isObservable, Subject, Subscription } from 'rxjs';
@@ -41,10 +40,45 @@ export class TableRowSelectionChangeEvent<T> extends SelectionChangeEvent<T> {
     source: TableComponent;
 }
 
+/** @hidden */
+interface SelectableRow {
+    checked: boolean;
+    value: any;
+}
+
+/**
+ * The component that represents a table.
+ * A table is a set of tabular data. Line items can support data, images and actions.
+ * ```html
+ * <fdp-table
+ *  [dataSource]="source"
+ *  contentDensity="compact"
+ *  selectionMode="multiple"
+ *  emptyTableMessage="No data found">
+ *
+ *  <fdp-table-toolbar
+ *   title="Order Line Items"
+ *   [hideItemCount]="false">
+ *  </fdp-table-toolbar>
+ *
+ *  <fdp-column
+ *   name="name"
+ *   key="name"
+ *   label="Name"
+ *   align="start">
+ *  </fdp-column>
+ *
+ *  <fdp-column
+ *   name="description"
+ *   key="description"
+ *   label="Description">
+ *  </fdp-column>
+ * </fdp-table>
+ * ```
+ */
 @Component({
     selector: 'fdp-table',
     templateUrl: './table.component.html',
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent implements AfterViewInit, OnDestroy {
@@ -89,7 +123,7 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     @HostBinding('class.fd-table--condensed') get isCondensed(): boolean { return this.contentDensity === 'condensed' };
 
     /** @hidden Formatted rows data. */
-    rows: any[];
+    rows: SelectableRow[];
 
     /** @hidden */
     checkedAll = false;
@@ -127,15 +161,16 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden Select/unselect one row in 'multiple' mode. */
-    select(index: number, row: any, checked: boolean): void {
+    select(index: number, row: SelectableRow, checked: boolean): void {
         this._reset();
+        row.checked = checked;
         this.checkedAll = !checked ? false : this.rows.reduce((check, r) => check && r.checked, true);
         checked ? this.checked.push(row.value) : this.unchecked.push(row.value);
         this._emitChange(index);
     }
 
     /** @hidden Select one row in 'single' mode. */
-    selectSingle(index: number, row: any): void {
+    selectSingle(index: number, row: SelectableRow): void {
         if (this.selectionMode !== 'single') {
             return;
         }
@@ -175,8 +210,8 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    getCellValue(key: string, row: any): any {
-        return key.split('.').reduce((a, b) => a[b], row);
+    getCellValue(key: string, row: SelectableRow): any {
+        return key.split('.').reduce((a, b) => a[b], row.value);
     }
 
     /** @hidden */

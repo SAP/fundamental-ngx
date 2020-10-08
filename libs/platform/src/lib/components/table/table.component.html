@@ -12,7 +12,7 @@
                     <fd-checkbox
                         [compact]="contentDensity !== 'cozy'"
                         *ngIf="selectionMode === 'multiple'"
-                        [(ngModel)]="checkedAll"
+                        [ngModel]="checkedAll"
                         (ngModelChange)="selectAll($event)"
                     ></fd-checkbox>
                 </th>
@@ -34,12 +34,14 @@
                 [attr.aria-selected]="rows[i].checked">
                 <td fd-table-cell
                     [class.fd-table__cell--checkbox]="selectionMode === 'multiple'"
+                    [tabIndex]="selectionMode === 'single' ? 0 : -1"
+                    [attr.role]="selectionMode === 'single' ? 'checkbox' : 'cell'"
                     *ngIf="selectionMode === 'single' || selectionMode === 'multiple'"
                     (click)="selectSingle(i, row)">
                     <fd-checkbox
                         [compact]="contentDensity !== 'cozy'"
                         *ngIf="selectionMode === 'multiple'"
-                        [(ngModel)]="row.checked"
+                        [ngModel]="row.checked"
                         (ngModelChange)="select(i, row, $event)"
                     ></fd-checkbox>
                 </td>
@@ -51,7 +53,7 @@
                         </ng-container>
                     </ng-container>
 
-                    <ng-template #defaultTableCellTemplate>{{ getCellValue(column.key, row.value) }}</ng-template>
+                    <ng-template #defaultTableCellTemplate>{{ getCellValue(column.key, row) }}</ng-template>
                 </td>
             </tr>
         </tbody>

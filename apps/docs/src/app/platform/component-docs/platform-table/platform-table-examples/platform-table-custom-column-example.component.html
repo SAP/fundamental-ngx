@@ -1,10 +1,9 @@
 <fdp-table
        [dataSource]="source"
-       [contentDensity]="'compact'"
-       [emptyTableMessage]="'No data found'"
+       contentDensity="compact"
+       emptyTableMessage="No data found"
        (rowSelectionChange)="onRowSelectionChange($event)">
 
-    <!-- Toolbar -->
     <fdp-table-toolbar
         title="Order Line Items"
         [hideItemCount]="true">

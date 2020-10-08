@@ -6,16 +6,23 @@ import {
     ContentChild,
     Input,
     TemplateRef,
-    ViewChild,
-    ViewEncapsulation
+    ViewChild
 } from '@angular/core';
 
 import { TableToolbarActionsComponent } from '../table-toolbar-actions/table-toolbar-actions.component';
 
+/**
+ * The component that represents a table toolbar.
+ * ```html
+ * <fdp-table-toolbar
+ *  title="Order Line Items"
+ *  [hideItemCount]="false">
+ * </fdp-table-toolbar>
+ * ```
+ * */
 @Component({
     selector: 'fdp-table-toolbar',
     templateUrl: './table-toolbar.component.html',
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableToolbarComponent implements AfterViewInit {

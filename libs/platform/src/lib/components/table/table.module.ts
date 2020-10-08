@@ -5,11 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { CheckboxModule, TableModule, ToolbarModule } from '@fundamental-ngx/core';
 
 import { TableComponent } from './table.component';
-import { TableWrapperComponent } from './table-wrapper.component';
 import { TableColumnComponent } from './table-column/table-column.component';
 import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
 import { TableToolbarActionsComponent } from './table-toolbar-actions/table-toolbar-actions.component';
-import { TableBodyDirective } from './directives/table-body.directive';
 import { FdpCellDef, FdpTableCell } from './directives/table-cell.directive';
 import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
 
@@ -23,11 +21,9 @@ import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.dire
     ],
     declarations: [
         TableComponent,
-        TableWrapperComponent,
         TableColumnComponent,
         TableToolbarComponent,
         TableToolbarActionsComponent,
-        TableBodyDirective,
         FdpTableCell,
         FdpCellDef,
         FdpTableHeader,
@@ -35,11 +31,9 @@ import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.dire
     ],
     exports: [
         TableComponent,
-        TableWrapperComponent,
         TableColumnComponent,
         TableToolbarComponent,
         TableToolbarActionsComponent,
-        TableBodyDirective,
         FdpTableCell,
         FdpCellDef,
         FdpTableHeader,
