@@ -1,5 +1,7 @@
 import {
     APP_INITIALIZER,
+    ErrorHandler,
+    Injector,
     ModuleWithProviders,
     NgModule,
     NgZone,
@@ -29,7 +31,19 @@ import {
 } from './tokens';
 import { RtlService } from '@fundamental-ngx/core';
 import { MessagingTopics } from './api/events/topics.service';
+import {
+    DefaultFormatter,
+    ERROR_FORMATTER,
+    ErrorFormatter
+} from './api/error/error-formatter';
+import {
+    ConsoleErrorNotifier,
+    ERROR_NOTIFIERS,
+    ErrorNotifier
+} from './api/error/error-notifier';
+import { DefaultErrorHandlerService } from './api/error/default-error-handler.service';
 
+export type Constructor<T> = new (...args: any[]) => T
 
 @NgModule({
     imports: [
@@ -47,7 +61,9 @@ import { MessagingTopics } from './api/events/topics.service';
 })
 export class AppShellModule {
 
-    static forRoot(configUrl: string, isStandalone: boolean = false): ModuleWithProviders<AppShellModule> {
+    static forRoot(configUrl: string,
+                   isStandalone: boolean = false,
+                   notifiers: Constructor<ErrorFormatter>[] = []): ModuleWithProviders<AppShellModule> {
 
         return {
             ngModule: AppShellModule,
@@ -56,6 +72,8 @@ export class AppShellModule {
                 LookupService,
                 RtlService,
                 MessagingTopics,
+                ConsoleErrorNotifier,
+                DefaultFormatter,
                 { provide: CONFIG_URL, useValue: configUrl },
                 { provide: IS_APPSHELL_STANDALONE, useValue: isStandalone },
                 {
@@ -82,7 +100,22 @@ export class AppShellModule {
                     provide: AppShellProviderService,
                     useClass: AppShellProviderService,
                     deps: [NgZone, PluginManagerService, MessagingTopics, ThemeManagerService,
-                        [new Optional(), ShellBarService]]
+                        ShellBarService]
+                },
+                {
+                    provide: ERROR_FORMATTER,
+                    useClass: DefaultFormatter
+                },
+                {
+                    provide: ERROR_NOTIFIERS,
+                    useFactory: createNotifiers,
+                    deps: [Injector, [new Optional(), notifiers]]
+                },
+                {
+                    provide: ErrorHandler,
+                    useClass: DefaultErrorHandlerService,
+                    deps: [MessagingService, MessagingTopics, ERROR_FORMATTER,
+                        [new Optional(), ERROR_NOTIFIERS]]
                 },
                 {
                     'provide': APP_INITIALIZER,
@@ -118,6 +151,11 @@ export function loadConfiguration(http: HttpClient, plugins: PluginManagerServic
     return cFnc.bind(http, plugins, url);
 }
 
-
+export function createNotifiers(injector: Injector, notifiers?: Constructor<ErrorNotifier>[]): ErrorNotifier[] {
+    if (!notifiers || notifiers.length === 0) {
+        return [injector.get(ConsoleErrorNotifier)];
+    }
+    return notifiers.map(handler => injector.get(handler));
+}
 
 

@@ -85,7 +85,7 @@ export class PluginManagerService implements OnDestroy {
 
     constructor(private lookupService: LookupService, private messageBus: MessagingService,
                 private topics: MessagingTopics) {
-        this.topics.addTopic({
+        this.topics.defineTopic({
             prefix: 'system:', eventType: EventType.DEFAULT, name: TOPIC_SYSTEM_PLUGIN,
             shared: true
         });
@@ -142,7 +142,7 @@ export class PluginManagerService implements OnDestroy {
 
 
     ngOnDestroy(): void {
-        // todo: do proper cleanup of subscribers also here. 
+        // todo: do proper cleanup of subscribers also here.
         this.registry.clear();
     }
 

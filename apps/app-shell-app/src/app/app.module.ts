@@ -2,10 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {
-    AppShellModule,
-    MessagingTopics
-} from '@fundamental-ngx/app-shell';
+import { AppShellModule } from '@fundamental-ngx/app-shell';
 import { LandingComponent } from './landing/landing.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';

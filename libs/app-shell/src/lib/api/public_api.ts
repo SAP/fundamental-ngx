@@ -12,4 +12,7 @@ export * from './extensions/plugin-manager.service';
 export * from './theming/theme-manager.service';
 export * from './app-shell-provider.service';
 export * from './extensions/shell-bar.service';
+export * from './error/error-notifier';
+export * from './error/default-error-handler.service';
+export * from './error/error-formatter';
 

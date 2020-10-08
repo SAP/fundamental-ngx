@@ -37,7 +37,7 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
 
     createPublisher<T extends Message>(topic: string, type?: EventType): TopicPublisher<T> {
         this.assertTopicName(topic, type);
-        const eventType = type || this._config.eventType;
+        const eventType = type || this.topics.getTopic((topic))?.eventType;
 
         if (this._config.channel === Channel.RxJS) {
             const publisher = new RxJSTopicPublisher<T>(topic, eventType);
@@ -52,7 +52,7 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
     createSubscriber<T extends Message>(topic: string, type?: EventType,
                                         messageSelector?: (msg: Message) => boolean): TopicSubscriber<T> {
         this.assertTopicName(topic, type);
-        const eventType = type || this._config.eventType;
+        const eventType = type || this.topics.getTopic((topic))?.eventType;
 
         if (this._config.channel === Channel.RxJS) {
             const publisher = new RxJSTopicSubscriber<T>(topic, eventType);
