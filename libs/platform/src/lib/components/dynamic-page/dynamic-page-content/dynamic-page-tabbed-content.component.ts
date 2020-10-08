@@ -1,44 +1,31 @@
-import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    forwardRef,
-    NgZone,
-    Renderer2,
-    ViewChild,
-    Input
-} from '@angular/core';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
+import { ChangeDetectionStrategy, Component, ElementRef, NgZone, Renderer2, Input } from '@angular/core';
 
-import { DYNAMIC_PAGE_CHILD_TOKEN, BACKGROUND_TYPE, RESPONSIVE_SIZE, CLASS_NAME } from '../constants';
+import { DynamicPageBackgroundType, DynamicPageResponsiveSize, CLASS_NAME } from '../constants';
 import { DynamicPageService } from '../dynamic-page.service';
 import { addClassNameToElement } from '../utils';
 
 @Component({
     selector: 'fdp-dynamic-page-tabbed-content',
-    template: '<div class="fd-dynamic-page__content"><ng-content></ng-content></div>',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: DYNAMIC_PAGE_CHILD_TOKEN,
-            useExisting: forwardRef(() => DynamicPageTabbedContentComponent)
-        }
-    ]
+    template: `<div class="fd-dynamic-page__content" [style.margin-top]="contentTop">
+        <ng-content></ng-content>
+    </div>`,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicPageTabbedContentComponent extends CdkScrollable {
+export class DynamicPageTabbedContentComponent {
     /**
      * sets background for content to List, Transparent or Solid background color.
      * Default is `solid`.
      */
     @Input()
-    set background(backgroundType: BACKGROUND_TYPE) {
+    set background(backgroundType: DynamicPageBackgroundType) {
         if (backgroundType) {
             this._background = backgroundType;
             this._setBackgroundStyles(backgroundType);
         }
     }
 
-    get background(): BACKGROUND_TYPE {
+    get background(): DynamicPageBackgroundType {
         return this._background;
     }
 
@@ -47,31 +34,48 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
      * size can be `small`, `medium`, `large`, or `extra-large`.
      */
     @Input()
-    set size(sizeType: RESPONSIVE_SIZE) {
+    set size(sizeType: DynamicPageResponsiveSize) {
         if (sizeType) {
             this._size = sizeType;
             this._setSize(sizeType);
         }
     }
 
-    get size(): RESPONSIVE_SIZE {
+    get size(): DynamicPageResponsiveSize {
         return this._size;
     }
 
-    @ViewChild(CdkScrollable)
-    cdkScrollable: CdkScrollable;
+    /**
+     * @hidden
+     * used internally to set margin top correctly for the content
+     */
+    @Input()
+    set contentTop(height: string) {
+        if (height) {
+            this._height = height;
+        }
+    }
+    get contentTop(): string {
+        return this._height;
+    }
 
     /**
      * @hidden
      * tracking the background value
      */
-    private _background: BACKGROUND_TYPE;
+    private _background: DynamicPageBackgroundType;
 
     /**
      * @hidden
      * tracks the size for responsive padding
      */
-    private _size: RESPONSIVE_SIZE;
+    private _size: DynamicPageResponsiveSize;
+
+    /**
+     * @hidden
+     * tracks the height attribute
+     */
+    private _height: string;
 
     constructor(
         public _elementRef: ElementRef<HTMLElement>,
@@ -79,16 +83,14 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
         public scrollDispatcher: ScrollDispatcher,
         public zone: NgZone,
         public _dynamicPageService: DynamicPageService
-    ) {
-        super(_elementRef, scrollDispatcher, zone);
-    }
+    ) {}
 
     /**
      * @hidden
      * sets the style classes for background property
      * @param background
      */
-    private _setBackgroundStyles(background: BACKGROUND_TYPE): any {
+    private _setBackgroundStyles(background: DynamicPageBackgroundType): void {
         const hostElement = this._elementRef.nativeElement.querySelector('.fd-dynamic-page__content');
         switch (background) {
             case 'transparent':
@@ -104,12 +106,13 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
                 break;
         }
     }
+
     /**
      * @hidden
      * sets the padding classes
      * @param sizeType
      */
-    private _setSize(sizeType: RESPONSIVE_SIZE): any {
+    private _setSize(sizeType: DynamicPageResponsiveSize): void {
         const hostElement = this._elementRef.nativeElement.querySelector('.fd-dynamic-page__content');
 
         switch (sizeType) {
@@ -136,16 +139,8 @@ export class DynamicPageTabbedContentComponent extends CdkScrollable {
     }
 
     /**@hidden */
-    protected _removeClassNameToHostElement(className: string): void {
+    private _removeClassNameToHostElement(className: string): void {
         this._renderer.removeClass(this._elementRef.nativeElement, className);
-    }
-    /**@hidden */
-    protected _setAttributeToHostElement(attribute: string, value: any): void {
-        this._renderer.setAttribute(this._elementRef.nativeElement, attribute, value);
-    }
-    /**@hidden */
-    protected _setStyleToHostElement(attribute: string, value: any): void {
-        this._renderer.setStyle(this._elementRef.nativeElement, attribute, value);
     }
 
     /**@hidden */

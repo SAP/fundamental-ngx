@@ -2,3 +2,18 @@
     height: 20rem;
     overflow-y: scroll;
 }
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+}
+
+.overlay-content {
+    position: relative;
+    width: 100%;
+}

@@ -40,7 +40,7 @@ import { DynamicPageTitleComponent } from './dynamic-page-title.component';
 
         <fdp-dynamic-page-layout-actions>
             <fd-toolbar [fdType]="'transparent'" [clearBorder]="true">
-                <button fd-button [fdType]="'transparent'" aria-label="Survey" (click)="surveyClicked($event)">
+                <button fd-button [fdType]="'transparent'" aria-label="Resize" (click)="resizeClicked($event)">
                     <i class="sap-icon--survey"></i>
                 </button>
             </fd-toolbar>

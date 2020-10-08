@@ -140,20 +140,6 @@ describe('DynamicPageComponent default values', () => {
             scrollFixture.detectChanges();
         }));
 
-        it('should register cdkscrollable', () => {
-            const componentScrollable = component.dynamicPage.scrollable;
-            expect(scroll.scrollContainers.has(componentScrollable)).toBe(true);
-        });
-
-        it('should deregister cdkscrollable', () => {
-            const componentScrollable = component.dynamicPage.scrollable;
-            expect(scroll.scrollContainers.has(componentScrollable)).toBe(true);
-
-            component.dynamicPage.ngOnDestroy();
-            scrollFixture.detectChanges();
-            expect(scroll.scrollContainers.has(componentScrollable)).toBe(false);
-        });
-
         it('should trigger the scrollable subscriptions on scrolling', fakeAsync(() => {
             const throttleTime = 100;
             spyOn(component.dynamicPageHeaderComponent, 'collapseHeader');

@@ -11,11 +11,12 @@ import {
     Renderer2,
     ViewChild,
     ViewEncapsulation,
-    HostBinding
+    HostBinding,
+    ChangeDetectorRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { BACKGROUND_TYPE, CLASS_NAME, RESPONSIVE_SIZE } from '../../constants';
+import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement, removeClassNameFromElement } from '../../utils';
@@ -51,7 +52,14 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * the initial state of the header. Set to true if header should be collapsed.
      */
     @Input()
-    collapsed = false;
+    set collapsed(collapsed: boolean) {
+        this._collapsed = collapsed;
+        this._dynamicPageService?.setCollapseValue(collapsed);
+    }
+
+    get collapsed(): boolean {
+        return this._collapsed;
+    }
 
     /**
      * ARIA label for button when the header is collapsed
@@ -100,14 +108,14 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * Default is `solid`.
      */
     @Input()
-    set background(backgroundType: BACKGROUND_TYPE) {
+    set background(backgroundType: DynamicPageBackgroundType) {
         if (backgroundType) {
             this._background = backgroundType;
             this._setBackgroundStyles(backgroundType);
         }
     }
 
-    get background(): BACKGROUND_TYPE {
+    get background(): DynamicPageBackgroundType {
         return this._background;
     }
 
@@ -116,14 +124,14 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * size can be `small`, `medium`, `large`, or `extra-large`.
      */
     @Input()
-    set size(sizeType: RESPONSIVE_SIZE) {
+    set size(sizeType: DynamicPageResponsiveSize) {
         if (sizeType) {
             this._size = sizeType;
             this._setSize(sizeType);
         }
     }
 
-    get size(): RESPONSIVE_SIZE {
+    get size(): DynamicPageResponsiveSize {
         return this._size;
     }
 
@@ -138,22 +146,15 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /**
      * subscription for when toggle header is called
      */
-    toggleSubscription: Subscription;
+    _toggleSubscription: Subscription;
     /**
      * subscription for when expand header is called
      */
-    expandSubscription: Subscription;
+    _expandSubscription: Subscription;
     /**
      * subscription for when collapse header is called
      */
-    collapseSubscription: Subscription;
-    // tabbedSubscription: Subscription;
-
-    /**
-     * @hidden
-     * expand/collapse aria label based on the current state
-     */
-    expandCollapseAriaLabel: string;
+    _collapseSubscription: Subscription;
 
     /**
      * tracking if pin button is pinned
@@ -167,6 +168,11 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     pinUnpinAriaLabel: string;
 
     /**
+     * tracking expand/collapse button
+     */
+    _collapsed = false;
+
+    /**
      *  tracking collapsible for pinning
      *
      */
@@ -174,31 +180,38 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
 
     /**
      * @hidden
+     * expand/collapse aria label based on the current state
+     */
+    _expandCollapseAriaLabel: string;
+
+    /**
+     * @hidden
      * tracking the background value
      */
-    private _background: BACKGROUND_TYPE;
+    private _background: DynamicPageBackgroundType;
 
     /**
      * @hidden
      * tracks the size for responsive padding
      */
-    private _size: RESPONSIVE_SIZE;
+    private _size: DynamicPageResponsiveSize;
 
     /** @hidden */
     constructor(
+        private _cd: ChangeDetectorRef,
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
         protected _dynamicPageConfig: DynamicPageConfig,
         private _dynamicPageService: DynamicPageService
     ) {
         if (this.collapsible) {
-            this.toggleSubscription = this._dynamicPageService.$toggle.subscribe((val) => {
+            this._toggleSubscription = this._dynamicPageService.$toggle.subscribe(() => {
                 this.toggleCollapse();
             });
-            this.expandSubscription = this._dynamicPageService.$expand.subscribe(() => {
+            this._expandSubscription = this._dynamicPageService.$expand.subscribe(() => {
                 this.collapseHeader(false);
             });
-            this.collapseSubscription = this._dynamicPageService.$collapse.subscribe(() => {
+            this._collapseSubscription = this._dynamicPageService.$collapse.subscribe(() => {
                 this.collapseHeader(true);
             });
         }
@@ -225,9 +238,9 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
 
     /**@hidden */
     ngOnDestroy(): void {
-        this.toggleSubscription.unsubscribe();
-        this.expandSubscription.unsubscribe();
-        this.collapseSubscription.unsubscribe();
+        this._toggleSubscription.unsubscribe();
+        this._expandSubscription.unsubscribe();
+        this._collapseSubscription.unsubscribe();
     }
 
     collapseHeader(val: boolean): any {
@@ -245,8 +258,8 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         if (this._isPinned()) {
             return;
         }
-        this.collapsed = !this.collapsed;
 
+        this.collapsed = !this._dynamicPageService.getIsCollapsed();
         this.expandCollapseActions();
     }
 
@@ -287,9 +300,10 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
             }
         }
         const event = new DynamicPageCollapseChangeEvent(this, this.collapsed);
-        // this._dynamicPageService.toggleHeader(this.collapsed);
         this.collapseChange.emit(event);
         this._calculateExpandCollapseAriaLabel();
+        this._cd.detectChanges();
+        this._dynamicPageService?.setCollapseValue(this._dynamicPageService.getIsCollapsed());
     }
 
     /**
@@ -311,7 +325,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * sets the style classes for background property
      * @param background
      */
-    private _setBackgroundStyles(background: BACKGROUND_TYPE): any {
+    private _setBackgroundStyles(background: DynamicPageBackgroundType): any {
         if (this.headerContent) {
             switch (background) {
                 case 'transparent':
@@ -338,7 +352,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * sets the padding classes
      * @param sizeType
      */
-    private _setSize(sizeType: RESPONSIVE_SIZE): any {
+    private _setSize(sizeType: DynamicPageResponsiveSize): any {
         if (this.headerContent) {
             switch (sizeType) {
                 case 'small':
@@ -377,7 +391,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * Calculate expandAriaLabel based on header
      */
     private _calculateExpandCollapseAriaLabel(): void {
-        this.expandCollapseAriaLabel = this.collapsed ? this.expandLabel : this.collapseLabel;
+        this._expandCollapseAriaLabel = this.collapsed ? this.expandLabel : this.collapseLabel;
     }
 
     /**

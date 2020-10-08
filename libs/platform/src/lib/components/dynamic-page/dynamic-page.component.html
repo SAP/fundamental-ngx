@@ -1,23 +1,37 @@
-<div class="fd-dynamic-page" [attr.aria-label]="ariaLabel" #pageWindow>
-    <div class="fd-dynamic-page__header">
-        <div (click)="toggleCollapse()">
-            <ng-content select="fdp-dynamic-page-title"></ng-content>
+<section class="fd-dynamic-page" [attr.aria-label]="ariaLabel">
+    <header style="left: 0; right: 0; z-index: 3; position: fixed;" class="fd-dynamic-page__header" #header>
+        <div>
+            <div (click)="toggleCollapse()">
+                <ng-content select="fdp-dynamic-page-title"></ng-content>
+            </div>
+            <ng-content select="fdp-dynamic-page-header"></ng-content>
         </div>
-        <ng-content select="fdp-dynamic-page-header"></ng-content>
-        <div class="fd-dynamic-page__tabs fd-dynamic-page__tabs--overflow" *ngIf="isTabbed">
-            <fd-tab-list size="xl">
-                <ng-container *ngFor="let tab of tabs; let i = index">
-                    <fd-tab [title]="tab.tabLabel">
-                        <fdp-dynamic-page-tabbed-content [background]="background" [size]="size">
-                            <ng-container *ngTemplateOutlet="tab.contentTemplate"></ng-container>
-                        </fdp-dynamic-page-tabbed-content>
-                    </fd-tab>
-                </ng-container>
-            </fd-tab-list>
-        </div>
+    </header>
+
+    <div
+        class="fd-dynamic-page__tabs--overflow"
+        *ngIf="isTabbed"
+        style="left: 0; right: 0; position: relative; top: 0;"
+        #contentContainer
+    >
+        <fd-tab-list size="xl">
+            <ng-container *ngFor="let tab of tabs; let i = index">
+                <fd-tab [title]="tab.tabLabel">
+                    <fdp-dynamic-page-tabbed-content
+                        [background]="background"
+                        [size]="size"
+                        [contentTop]="tab.contentTop"
+                    >
+                        <ng-container *ngTemplateOutlet="tab.contentTemplate"></ng-container>
+                    </fdp-dynamic-page-tabbed-content>
+                </fd-tab>
+            </ng-container>
+        </fd-tab-list>
     </div>
     <ng-container *ngIf="!isTabbed">
         <ng-content select="fdp-dynamic-page-content"></ng-content>
     </ng-container>
-    <ng-content select="fdp-dynamic-page-footer"></ng-content>
-</div>
+    <footer class="footer-sticker">
+        <ng-content select="fdp-dynamic-page-footer"></ng-content>
+    </footer>
+</section>

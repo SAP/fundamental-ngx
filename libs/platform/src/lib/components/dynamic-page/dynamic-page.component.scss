@@ -1,6 +1,6 @@
 // @import '~fundamental-styles/dist/dynamic-page';
 /*!
- * Fundamental Library Styles v0.12.1-rc.14
+ * Fundamental Library Styles v0.13.0-rc.0
  * Copyright (c) 2020 SAP SE or an SAP affiliate company.
  * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/master/LICENSE)
  */
@@ -300,7 +300,12 @@
 }
 .fd-dynamic-page .fd-toolbar.fd-dynamic-page__toolbar {
     padding: 0 0 0 1rem;
-    margin-left: auto;
+    -webkit-box-flex: 2;
+    -ms-flex: 2;
+    flex: 2;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
 }
 .fd-dynamic-page .fd-toolbar.fd-dynamic-page__toolbar[dir='rtl'],
 [dir='rtl'] .fd-dynamic-page .fd-toolbar.fd-dynamic-page__toolbar {
@@ -310,6 +315,11 @@
 }
 .fd-dynamic-page .fd-toolbar.fd-dynamic-page__toolbar--actions {
     padding: 0;
+}
+.fd-dynamic-page .fd-toolbar.fd-dynamic-page__toolbar--sm {
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
 }
 .fd-dynamic-page__summarized-title-area {
     font-size: 0.875rem;
@@ -723,4 +733,18 @@
 .fd-dynamic-page__content--transparent-bg {
     background-color: transparent;
     background-color: var(--fdDynamicPage_Content_Transparent_Background, transparent);
+}
+
+.sticker {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.footer-sticker {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 0.5rem 0.5rem;
 }

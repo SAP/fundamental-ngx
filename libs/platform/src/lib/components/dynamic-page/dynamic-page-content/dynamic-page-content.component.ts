@@ -1,20 +1,18 @@
-import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
 
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    forwardRef,
     Input,
     NgZone,
-    OnDestroy,
     OnInit,
     Renderer2,
     TemplateRef,
     ViewChild
 } from '@angular/core';
 
-import { BACKGROUND_TYPE, CLASS_NAME, DYNAMIC_PAGE_CHILD_TOKEN, RESPONSIVE_SIZE } from '../constants';
+import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from '../constants';
 import { DynamicPageService } from '../dynamic-page.service';
 import { addClassNameToElement } from '../utils';
 
@@ -22,15 +20,9 @@ import { addClassNameToElement } from '../utils';
     selector: 'fdp-dynamic-page-content',
     templateUrl: './dynamic-page-content.component.html',
     styleUrls: ['./dynamic-page-content.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: DYNAMIC_PAGE_CHILD_TOKEN,
-            useExisting: forwardRef(() => DynamicPageContentComponent)
-        }
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicPageContentComponent extends CdkScrollable implements OnInit, OnDestroy {
+export class DynamicPageContentComponent implements OnInit {
     /**
      * label for the tab. If label is provided, tab navigation will be internally set up.
      */
@@ -48,14 +40,14 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
      * Default is `solid`.
      */
     @Input()
-    set background(backgroundType: BACKGROUND_TYPE) {
+    set background(backgroundType: DynamicPageBackgroundType) {
         if (backgroundType) {
             this._background = backgroundType;
             this._setBackgroundStyles(backgroundType);
         }
     }
 
-    get background(): BACKGROUND_TYPE {
+    get background(): DynamicPageBackgroundType {
         return this._background;
     }
 
@@ -64,22 +56,16 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
      * size can be `small`, `medium`, `large`, or `extra-large`.
      */
     @Input()
-    set size(sizeType: RESPONSIVE_SIZE) {
+    set size(sizeType: DynamicPageResponsiveSize) {
         if (sizeType) {
             this._size = sizeType;
             this._setSize(sizeType);
         }
     }
 
-    get size(): RESPONSIVE_SIZE {
+    get size(): DynamicPageResponsiveSize {
         return this._size;
     }
-
-    /**
-     * gets the underlying cdk scrollable field
-     */
-    @ViewChild(CdkScrollable)
-    cdkScrollable: CdkScrollable;
 
     /**
      * the underlying content template
@@ -88,15 +74,21 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
 
     /**
      * @hidden
+     * used internally to set margin top correctly for tabbed content
+     */
+    contentTop: string;
+
+    /**
+     * @hidden
      * tracking the background value
      */
-    private _background: BACKGROUND_TYPE;
+    private _background: DynamicPageBackgroundType;
 
     /**
      * @hidden
      * tracks the size for responsive padding
      */
-    private _size: RESPONSIVE_SIZE;
+    private _size: DynamicPageResponsiveSize;
 
     constructor(
         public _elementRef: ElementRef<HTMLElement>,
@@ -104,9 +96,7 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
         public scrollDispatcher: ScrollDispatcher,
         public zone: NgZone,
         public _dynamicPageService: DynamicPageService
-    ) {
-        super(_elementRef, scrollDispatcher, zone);
-    }
+    ) {}
 
     /**@hidden */
     ngOnInit(): void {
@@ -117,11 +107,6 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
         if (this.size) {
             this._setSize(this.size);
         }
-    }
-
-    /**@hidden */
-    ngOnDestroy(): void {
-        this.scrollDispatcher.deregister(this.cdkScrollable);
     }
 
     /**
@@ -136,7 +121,7 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
      * sets the style classes for background property
      * @param background
      */
-    private _setBackgroundStyles(background: BACKGROUND_TYPE): any {
+    private _setBackgroundStyles(background: DynamicPageBackgroundType): void {
         switch (background) {
             case 'transparent':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentTransparentBg);
@@ -157,7 +142,7 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
      * sets the padding classes
      * @param sizeType
      */
-    private _setSize(sizeType: RESPONSIVE_SIZE): any {
+    private _setSize(sizeType: DynamicPageResponsiveSize): void {
         switch (sizeType) {
             case 'small':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaSmall);
@@ -178,14 +163,6 @@ export class DynamicPageContentComponent extends CdkScrollable implements OnInit
     /**@hidden */
     private _removeClassNameToHostElement(className: string): void {
         this._renderer.removeClass(this._elementRef.nativeElement, className);
-    }
-    /**@hidden */
-    private _setAttributeToHostElement(attribute: string, value: any): void {
-        this._renderer.setAttribute(this._elementRef.nativeElement, attribute, value);
-    }
-    /**@hidden */
-    private _setStyleToHostElement(attribute: string, value: any): void {
-        this._renderer.setStyle(this._elementRef.nativeElement, attribute, value);
     }
 
     /**@hidden */

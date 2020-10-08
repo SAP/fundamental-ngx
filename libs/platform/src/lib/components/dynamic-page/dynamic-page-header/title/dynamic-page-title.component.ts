@@ -12,7 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { BACKGROUND_TYPE, CLASS_NAME, RESPONSIVE_SIZE } from '../../constants';
+import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement, removeClassNameFromElement } from '../../utils';
 
@@ -34,14 +34,14 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
      * Default is `solid`.
      */
     @Input()
-    set background(backgroundType: BACKGROUND_TYPE) {
+    set background(backgroundType: DynamicPageBackgroundType) {
         if (backgroundType) {
             this._background = backgroundType;
             this._setBackgroundStyles(backgroundType);
         }
     }
 
-    get background(): BACKGROUND_TYPE {
+    get background(): DynamicPageBackgroundType {
         return this._background;
     }
 
@@ -50,14 +50,14 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
      * size can be `small`, `medium`, `large`, or `extra-large`.
      */
     @Input()
-    set size(sizeType: RESPONSIVE_SIZE) {
+    set size(sizeType: DynamicPageResponsiveSize) {
         if (sizeType) {
             this._size = sizeType;
             this._setSize(sizeType);
         }
     }
 
-    get size(): RESPONSIVE_SIZE {
+    get size(): DynamicPageResponsiveSize {
         return this._size;
     }
 
@@ -65,13 +65,13 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
      * @hidden
      * tracking the background value
      */
-    private _background: BACKGROUND_TYPE;
+    private _background: DynamicPageBackgroundType;
 
     /**
      * @hidden
      * tracks the size for responsive padding
      */
-    private _size: RESPONSIVE_SIZE;
+    private _size: DynamicPageResponsiveSize;
 
     /** @hidden */
     constructor(
@@ -123,7 +123,7 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
      * sets the style classes for background property
      * @param background
      */
-    private _setBackgroundStyles(background: BACKGROUND_TYPE): any {
+    private _setBackgroundStyles(background: DynamicPageBackgroundType): any {
         switch (background) {
             case 'transparent':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleAreaTransparentBg);
@@ -145,7 +145,7 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
      * sets the padding classes
      * @param sizeType
      */
-    private _setSize(sizeType: RESPONSIVE_SIZE): any {
+    private _setSize(sizeType: DynamicPageResponsiveSize): any {
         switch (sizeType) {
             case 'small':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleAreaSmall);

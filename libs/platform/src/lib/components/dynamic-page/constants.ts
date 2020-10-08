@@ -47,8 +47,6 @@ export const CLASS_NAME = {
     dynamicPageSummarizedTitleCollapsed: 'fd-dynamic-page__summarized-title-area--collapsed'
 } as const;
 
-export const DYNAMIC_PAGE_CHILD_TOKEN = new InjectionToken<string>('DYNAMIC_PAGE_CHILD_TOKEN');
+export type DynamicPageBackgroundType = 'solid' | 'list' | 'transparent';
 
-export type BACKGROUND_TYPE = 'solid' | 'list' | 'transparent';
-
-export type RESPONSIVE_SIZE = 'small' | 'medium' | 'large' | 'extra-large';
+export type DynamicPageResponsiveSize = 'small' | 'medium' | 'large' | 'extra-large';
