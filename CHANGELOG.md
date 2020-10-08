@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.7...v0.23.0-rc.0) (2020-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove deprecated input buttonType from input-group
+
+### Bug Fixes
+
+* remove deprecated input from input group - buttonType ([#3573](https://github.com/SAP/fundamental-ngx/issues/3573)) ([5b49655](https://github.com/SAP/fundamental-ngx/commit/5b496556a9f8ad6c7a5f739913486f49b00d25fb))
+
 ### [0.22.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.6...v0.22.1-rc.7) (2020-10-07)
 
 
