@@ -8,12 +8,12 @@ const popoverPlacementMap: {[key: string]: ConnectedPosition} = {
     'bottom-start': { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' },
     'bottom': { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top' },
     'bottom-end': { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' },
-    'left-top': { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top' },
+    'left-start': { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top' },
     'left': { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center' },
-    'left-bottom': { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'bottom' },
-    'right-top': { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top' },
+    'left-end': { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'bottom' },
+    'right-start': { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top' },
     'right': { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center' },
-    'right-bottom': { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
+    'right-end': { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
 };
 
 export const DefaultPositions: ConnectedPosition[] = [

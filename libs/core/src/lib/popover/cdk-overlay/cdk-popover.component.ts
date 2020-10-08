@@ -29,7 +29,7 @@ import { BasePopoverClass } from '../base/base-popover.class';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
-import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay/position/connected-position';
+import { ConnectedOverlayPositionChange, ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
 import { DefaultPositions, Placement, PopoverPosition } from './popover-position';
 
 let popoverUniqueId = 0;
@@ -106,6 +106,7 @@ export class CdkPopoverComponent extends BasePopoverClass
         if (!this.scrollStrategy) {
             this.scrollStrategy = this._overlay.scrollStrategies.reposition();
         }
+
     }
 
     /** @hidden */
@@ -158,6 +159,7 @@ export class CdkPopoverComponent extends BasePopoverClass
     close(): void {
         if (this._overlayRef && this._overlayRef.hasAttached()) {
             this.isOpen = false;
+            this._removeArrowStyles();
             this._overlayRef.dispose();
             this._changeDetectorReference.detectChanges();
             this.isOpenChange.emit(this.isOpen);
@@ -257,6 +259,7 @@ export class CdkPopoverComponent extends BasePopoverClass
     private _getOverlayConfig(): OverlayConfig {
         const direction = this._getDirection();
         const position = this._getPositionStrategy();
+        this._listenForPositionChange(position.positionChanges);
 
         return new OverlayConfig({
             direction: direction,
@@ -275,12 +278,20 @@ export class CdkPopoverComponent extends BasePopoverClass
                     (previous, current) =>
                         previous.connectionPair === current.connectionPair
                 ))
-            .subscribe(event => {
-                this.arrowPosition = PopoverPosition.getArrowPosition(event.connectionPair);
-                this.marginStyle = PopoverPosition.getMarginStyle(this.arrowPosition);
-                this._changeDetectorReference.detectChanges();
-            })
+            .subscribe(event => this._setArrowStyles(event.connectionPair))
         ;
+    }
+
+    /** @hidden */
+    private _setArrowStyles(position: ConnectionPositionPair): void {
+        this.arrowPosition = PopoverPosition.getArrowPosition(position);
+        this.marginStyle = PopoverPosition.getMarginStyle(this.arrowPosition);
+        this._changeDetectorReference.detectChanges();
+    }
+
+    private _removeArrowStyles(): void {
+        this.arrowPosition = null;
+        this.marginStyle = null;
     }
 
     /** @hidden */
