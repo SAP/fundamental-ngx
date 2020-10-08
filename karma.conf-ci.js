@@ -32,7 +32,7 @@ module.exports = function (config) {
         },
         sl_firefox_win_10: {
             base: 'SauceLabs',
-            browserName: 'firefox',
+            browserName: 'chrome',
             version: 'latest'
         }
     };
