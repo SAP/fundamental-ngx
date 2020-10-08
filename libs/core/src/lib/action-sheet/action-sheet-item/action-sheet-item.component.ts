@@ -32,4 +32,7 @@ export class ActionSheetItemComponent {
 
     @Input()
     negative = false;
+
+    @Input()
+    compact = false;
 }

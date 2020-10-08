@@ -17,10 +17,4 @@ export class ActionSheetMobileExampleComponent {
         this.leftPlacement$ = this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'right' : 'left')));
         this.rightPlacement$ = this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left' : 'right')));
     }
-
-    list1 = [
-        { text: 'Option 1', glyph: '#' },
-        { text: 'Option 2', glyph: '#' },
-        { text: 'Option 3', glyph: '#' }
-    ];
 }

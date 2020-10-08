@@ -1,4 +1,3 @@
-
 <fd-popover *ngIf="!mobile" [isOpen]="isOpen" (isOpenChange)="handleOpenChange($event)">
 
     <fd-popover-control>
@@ -16,7 +15,7 @@
 
 <ng-template #actionSheetBody>
     <ul class="fd-action-sheet"
-        [ngClass]="{'fd-action-sheet--compact': compact, 'fd-action-sheet--mobile': mobile}">
+        [class]="{'fd-action-sheet--compact': compact, 'fd-action-sheet--mobile': mobile}">
         <ng-content select="[fd-action-sheet-item]"></ng-content>
     </ul>
 </ng-template>
