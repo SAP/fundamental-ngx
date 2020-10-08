@@ -7,7 +7,8 @@ import { ACTION_SHEET_COMPONENT, ActionSheetInterface } from '../action-sheet.in
   templateUrl: './action-sheet-mobile.component.html',
   styleUrls: ['./action-sheet-mobile.component.scss']
 })
-export class ActionSheetMobileComponent implements OnDestroy {
+export class ActionSheetMobileComponent {
+// export class ActionSheetMobileComponent implements OnDestroy {
 
     @Input()
     open = false;
@@ -27,10 +28,10 @@ export class ActionSheetMobileComponent implements OnDestroy {
 
 
 
-    /** @hidden */
-    private _listenOnActionSheetOpenChange(): void {
-        this._actionSheetComponent.isOpenChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(isOpen => this._toggleDialog(isOpen));
-    }
+    // /** @hidden */
+    // private _listenOnActionSheetOpenChange(): void {
+    //     this._actionSheetComponent.isOpenChange
+    //         .pipe(takeUntil(this._onDestroy$))
+    //         .subscribe(isOpen => this._toggleDialog(isOpen));
+    // }
 }

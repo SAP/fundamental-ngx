@@ -7,6 +7,7 @@ import { ActionSheetHeaderComponent } from './action-sheet-header/action-sheet-h
 import { ActionSheetDocsComponent } from './action-sheet-docs.component';
 import { ActionSheetCompactExampleComponent } from './examples/action-sheet-compact/action-sheet-compact-example.component';
 import { ActionSheetCosyExampleComponent } from './examples/action-sheet-cosy/action-sheet-cosy-example.component';
+import { ActionSheetMobileExampleComponent } from './examples/action-sheet-mobile/action-sheet-mobile-example.component';
 import {
     ActionSheetModule,
 } from '@fundamental-ngx/core';
@@ -33,7 +34,8 @@ const routes: Routes = [
         ActionSheetDocsComponent,
         ActionSheetHeaderComponent,
         ActionSheetCompactExampleComponent,
-        ActionSheetCosyExampleComponent
+        ActionSheetCosyExampleComponent,
+        ActionSheetMobileExampleComponent
     ]
 })
 export class ActionSheetDocsModule {}
