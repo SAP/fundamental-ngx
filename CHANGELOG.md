@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.5...v0.23.0-rc.6) (2020-10-09)
+
+
+### Features
+
+* (Core) introduce new Message Toast component ([#3572](https://github.com/SAP/fundamental-ngx/issues/3572)) ([74b98bf](https://github.com/SAP/fundamental-ngx/commit/74b98bfa11e65494316154f4b86e7873ee471e9a))
+
 ## [0.23.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.4...v0.23.0-rc.5) (2020-10-09)
 
 
