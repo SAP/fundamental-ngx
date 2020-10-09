@@ -12,7 +12,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core';
-import { ColumnAlign } from '../types';
+import { ColumnAlign } from '../enums';
 import { FdpCellDef } from '../directives/table-cell.directive';
 import { FdpHeaderCellDef } from '../directives/table-header.directive';
 
@@ -62,13 +62,13 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     @Input() set align(align: ColumnAlign) {
         let _align;
         switch (align) {
-            case 'center':
+            case ColumnAlign.CENTER:
                 _align = ColumnAlignEnum.Center;
                 break;
-            case 'end':
+            case ColumnAlign.END:
                 _align = ColumnAlignEnum.End;
                 break;
-            case 'start':
+            case ColumnAlign.START:
             default:
                 _align = ColumnAlignEnum.Start;
         }

@@ -1,17 +1,17 @@
 <ng-container *ngIf="rows && rows.length; else emptyTableTemplate">
     <ng-container *ngIf="tableToolbarComponent">
-        <ng-container *ngTemplateOutlet="tableToolbarComponent.contentTemplateRef; context: { counter: rows.length || 0, size: contentDensity }"></ng-container>
+        <ng-container *ngTemplateOutlet="tableToolbarComponent.contentTemplateRef; context: { counter: rows.length, size: contentDensity }"></ng-container>
     </ng-container>
 
     <table fd-table>
         <thead fd-table-header>
             <tr fd-table-row>
                 <th fd-table-cell
-                    [class.fd-table__cell--checkbox]="selectionMode === 'multiple'"
-                    *ngIf="selectionMode === 'single' || selectionMode === 'multiple'">
+                    [class.fd-table__cell--checkbox]="selectionMode === selectionModeOptions.MULTIPLE"
+                    *ngIf="selectionMode === selectionModeOptions.SINGLE || selectionMode === selectionModeOptions.MULTIPLE">
                     <fd-checkbox
-                        [compact]="contentDensity !== 'cozy'"
-                        *ngIf="selectionMode === 'multiple'"
+                        [compact]="contentDensity !== contentDensityOptions.COZY"
+                        *ngIf="selectionMode === selectionModeOptions.MULTIPLE"
                         [ngModel]="checkedAll"
                         (ngModelChange)="selectAll($event)"
                         (keydown)="onKeydown($event)"
@@ -34,17 +34,17 @@
                 *ngFor="let row of rows; let i = index"
                 [attr.aria-selected]="rows[i].checked">
                 <td fd-table-cell
-                    [class.fd-table__cell--checkbox]="selectionMode === 'multiple'"
-                    [class.fd-table__cell--focusable]="selectionMode === 'single'"
-                    [tabIndex]="selectionMode === 'single' ? 0 : -1"
-                    [attr.role]="selectionMode === 'single' ? 'checkbox' : 'cell'"
-                    *ngIf="selectionMode === 'single' || selectionMode === 'multiple'"
+                    [class.fd-table__cell--checkbox]="selectionMode === selectionModeOptions.MULTIPLE"
+                    [class.fd-table__cell--focusable]="selectionMode === selectionModeOptions.SINGLE"
+                    [tabIndex]="selectionMode === selectionModeOptions.SINGLE ? 0 : -1"
+                    [attr.role]="selectionMode === selectionModeOptions.SINGLE ? 'checkbox' : 'cell'"
+                    *ngIf="selectionMode === selectionModeOptions.SINGLE || selectionMode === selectionModeOptions.MULTIPLE"
                     (click)="selectSingle(i, row)"
                     (keydown)="onKeydown($event)"
                 >
                     <fd-checkbox
-                        [compact]="contentDensity !== 'cozy'"
-                        *ngIf="selectionMode === 'multiple'"
+                        [compact]="contentDensity !== contentDensityOptions.COZY"
+                        *ngIf="selectionMode === selectionModeOptions.MULTIPLE"
                         [ngModel]="row.checked"
                         (ngModelChange)="select(i, row, $event)"
                         (keydown)="onKeydown($event)"

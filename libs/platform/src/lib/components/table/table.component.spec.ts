@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableComponent } from './table.component';
+import { SelectionMode } from './enums';
 
 const ITEMS = [{
     'name': 'implementation',
@@ -107,7 +108,7 @@ describe('TableComponent', () => {
     });
 
     it('should select two rows one by one', () => {
-        component.selectionMode = 'multiple';
+        component.selectionMode = SelectionMode.MULTIPLE;
         component.ngAfterViewInit();
 
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
@@ -130,7 +131,7 @@ describe('TableComponent', () => {
     });
 
     it('should select single row', () => {
-        component.selectionMode = 'single';
+        component.selectionMode = SelectionMode.SINGLE;
         component.ngAfterViewInit();
 
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
@@ -152,7 +153,7 @@ describe('TableComponent', () => {
     });
 
     it('should unselect row on the second selection call', () => {
-        component.selectionMode = 'single';
+        component.selectionMode = SelectionMode.SINGLE;
         component.ngAfterViewInit();
 
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
@@ -175,7 +176,7 @@ describe('TableComponent', () => {
     });
 
     it('should select all rows and unselect on the second call', () => {
-        component.selectionMode = 'multiple';
+        component.selectionMode = SelectionMode.MULTIPLE;
         component.ngAfterViewInit();
 
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();

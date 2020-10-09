@@ -18,15 +18,10 @@ import { isObservable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/core';
-import { ContentDensity, SelectionMode } from './types';
+import { ContentDensity, SelectionMode } from './enums';
 import { TableColumnComponent } from './table-column/table-column.component';
 import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
-import {
-    ArrayTableDataSource,
-    isDataSource,
-    ObservableTableDataSource,
-    TableDataSource
-} from '../../../';
+import { ArrayTableDataSource, isDataSource, ObservableTableDataSource, TableDataSource } from '../../../';
 
 export type FdpTableDataSource<T> = TableDataSource<T> | T[];
 
@@ -95,10 +90,10 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     }
 
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
-    @Input() contentDensity: ContentDensity = 'cozy';
+    @Input() contentDensity: ContentDensity = ContentDensity.COZY;
 
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
-    @Input() selectionMode: SelectionMode = 'none';
+    @Input() selectionMode: SelectionMode = SelectionMode.NONE;
 
     /** Text displayed when table has no items. */
     @Input() emptyTableMessage: string;
@@ -118,13 +113,13 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     @HostBinding('class.fd-table') fdTable = true;
 
     /** @hidden */
-    @HostBinding('class.fd-table--compact') get isCompact(): boolean { return this.contentDensity === 'compact' };
+    @HostBinding('class.fd-table--compact') get isCompact(): boolean { return this.contentDensity === ContentDensity.COMPACT };
 
     /** @hidden */
-    @HostBinding('class.fd-table--condensed') get isCondensed(): boolean { return this.contentDensity === 'condensed' };
+    @HostBinding('class.fd-table--condensed') get isCondensed(): boolean { return this.contentDensity === ContentDensity.CONDENSED };
 
     /** @hidden Formatted rows data. */
-    rows: SelectableRow[];
+    rows: SelectableRow[] = [];
 
     /** @hidden */
     checkedAll = false;
@@ -136,10 +131,16 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     unchecked = [];
 
     /** @hidden */
-    protected _dataSource: FdpTableDataSource<any>;
+    contentDensityOptions = ContentDensity;
+
+    /** @hidden */
+    selectionModeOptions = SelectionMode;
 
     /** @hidden */
     readonly stateChanges: Subject<any> = new Subject<any>();
+
+    /** @hidden */
+    private _dataSource: FdpTableDataSource<any>;
 
     /** @hidden for data source handling */
     private _dsSubscription: Subscription | null;
@@ -172,7 +173,7 @@ export class TableComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden Select one row in 'single' mode. */
     selectSingle(index: number, row: SelectableRow): void {
-        if (this.selectionMode !== 'single') {
+        if (this.selectionMode !== SelectionMode.SINGLE) {
             return;
         }
 
