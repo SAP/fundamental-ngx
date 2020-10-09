@@ -218,7 +218,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     _destroyed = new Subject<void>();
 
     /** @hidden */
-    _contentDensity = this._listConfig.contentDensity;
+    _contentDensity: ContentDensity = this._listConfig.contentDensity;
 
     /**
      * @hidden
