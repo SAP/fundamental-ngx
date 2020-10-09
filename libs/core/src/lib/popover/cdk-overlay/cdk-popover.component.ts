@@ -72,36 +72,24 @@ export class CdkPopoverComponent extends BasePopoverClass
     @HostBinding('class.fd-popover-custom--disabled')
     disabled = false;
 
-    /** */
-    @Input()
-    placement: Placement;
-
-    /**
-     * Preset options for the popover body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
-     * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * Leave blank for no effect.
-     */
-    @Input()
-    fillControlMode: PopoverFillMode;
-
     /** Id of the popover. If none is provided, one will be generated. */
     @Input()
     id: string = 'fd-popover-' + popoverUniqueId++;
 
-    @Input()
-    connectTo: ElementRef;
-
     /** TODO: */
-    arrowPosition = '';
-    marginStyle = '';
+    arrowPosition: string = null;
+    marginStyle: string = null;
 
+    /** @hidden */
     private _initialised = false;
 
-    private _refreshObs: Observable<void>;
+    /** @hidden */
+    private _refresh$: Observable<void>;
 
+    /** @hidden */
     private _eventRef: Function[] = [];
 
+    /** @hidden */
     private _overlayRef: OverlayRef;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
@@ -117,7 +105,7 @@ export class CdkPopoverComponent extends BasePopoverClass
         super();
 
         /** Merge observables - close or destroy */
-        this._refreshObs = merge(this.isOpenChange, this._onDestroy$);
+        this._refresh$ = merge(this.isOpenChange, this._onDestroy$);
     }
 
     /** @hidden */
@@ -176,14 +164,14 @@ export class CdkPopoverComponent extends BasePopoverClass
 
     /** Closes the popover. */
     close(): void {
-        if (this._overlayRef && this._overlayRef.hasAttached()) {
-            console.log('closescloseclose');
-            this.isOpen = false;
-            console.log('isopenfalsed');
+        if (this._overlayRef) {
             this._removeArrowStyles();
             this._overlayRef.dispose();
             this._changeDetectorReference.detectChanges();
-            this.isOpenChange.emit(this.isOpen);
+            if (this.isOpen) {
+                this.isOpenChange.emit(false);
+            }
+            this.isOpen = false;
         }
     }
 
@@ -193,10 +181,12 @@ export class CdkPopoverComponent extends BasePopoverClass
             this._overlayRef = this._overlay.create(this._getOverlayConfig());
             this._overlayRef.attach(new TemplatePortal(this.templateRef, this.container));
 
-            this.isOpen = true;
             this._changeDetectorReference.detectChanges();
 
-            this.isOpenChange.emit(this.isOpen);
+            if (!this.isOpen) {
+                this.isOpenChange.emit(true);
+            }
+            this.isOpen = true;
 
             if (this.fillControlMode) {
                 this._listenOnResize();
@@ -227,21 +217,21 @@ export class CdkPopoverComponent extends BasePopoverClass
     /** Subscribe to close events from CDK Overlay, to throw proper events, change values */
     private _listenOnClose(): void {
         this._overlayRef.detachments()
-            .pipe(takeUntil(this._refreshObs))
-            .subscribe(() => this.close());
-
+            .pipe(takeUntil(this._refresh$))
+            .subscribe(() => this.close())
+        ;
     }
 
     /** Listener for click events */
     private _listenOnOutClicks(): void {
         this._overlayRef.backdropClick().pipe(
             filter(event => this._shouldClose(event)),
-            takeUntil(this._refreshObs)
+            takeUntil(this._refresh$)
         ).subscribe(() => this.close());
 
         this._overlayRef._outsidePointerEvents.pipe(
             filter(event => this._shouldClose(event)),
-            takeUntil(this._refreshObs)
+            takeUntil(this._refresh$)
         ).subscribe(() => this.close());
     }
 
@@ -316,14 +306,14 @@ export class CdkPopoverComponent extends BasePopoverClass
 
     /** @hidden */
     private _setArrowStyles(position: ConnectionPositionPair): void {
-        this.arrowPosition = PopoverPosition.getArrowPosition(position);
+        this.arrowPosition = PopoverPosition.getArrowPosition(position, this._getDirection() === 'rtl');
         this.marginStyle = PopoverPosition.getMarginStyle(this.arrowPosition);
         this._changeDetectorReference.detectChanges();
     }
 
     private _listenOnResize(): void {
         this._viewportRuler.change(15).pipe(
-            takeUntil(this._refreshObs),
+            takeUntil(this._refresh$),
             startWith(1)
         ).subscribe(() => this._applyWidthOverlay());
     }
@@ -342,7 +332,6 @@ export class CdkPopoverComponent extends BasePopoverClass
     }
 
     private _removeArrowStyles(): void {
-        console.log('arrowsremoved');
         this.arrowPosition = null;
         this.marginStyle = null;
     }
@@ -354,7 +343,7 @@ export class CdkPopoverComponent extends BasePopoverClass
 
         return this._overlay
             .position()
-            .flexibleConnectedTo(this.connectTo || this.triggerOrigin.elementRef)
+            .flexibleConnectedTo(this.appendTo || this.triggerOrigin.elementRef)
             .withPositions(_resPosition)
             .withPush(false);
     }

@@ -25,8 +25,8 @@ export const DefaultPositions: ConnectedPosition[] = [
     { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom' }
 ];
 
-const yPositions: YPositions[] = ['bottom', 'center', 'top'];
-const xPositions: XPositions[] = ['start', 'center', 'end'];
+
+const ARROW_SIZE  = '0.5rem';
 
 
 export type Placement = 'auto-start'
@@ -50,6 +50,7 @@ export type YPositions = 'top' | 'center' | 'bottom';
 
 export class PopoverPosition {
 
+    /**  */
     static getCdkPlacement(placement: Placement): ConnectedPosition {
         const resultCdkPlacement = popoverPlacementMap[placement];
 
@@ -60,13 +61,22 @@ export class PopoverPosition {
         return resultCdkPlacement;
     }
 
-    static getArrowPosition(position: ConnectedPosition): string {
+    static getArrowPosition(position: ConnectedPosition, rtl?: boolean): string {
         let _position = '';
 
-        if (position.overlayY !== position.originY && position.originY !== 'center') {
+        if (position.overlayY !== position.originY && position.originY !== 'center' && position.overlayY !== 'center') {
             _position = position.overlayY;
         } else if (position.overlayX !== position.originX && position.originX !== 'center') {
             _position = position.overlayX;
+
+            if (rtl) {
+                console.log('rtl');
+                if (_position === 'start') {
+                    _position = 'end';
+                } else if (_position === 'end') {
+                    _position = 'start';
+                }
+            }
         }
 
         return (_position === 'center' ? '' : _position);
@@ -82,7 +92,7 @@ export class PopoverPosition {
         if (position === 'end') {
             return 'margin-right: 0.5rem;';
         }
-        return 'margin-' + position + ': 0.5rem;';
+        return 'margin-' + position + ': ' + ARROW_SIZE + ';';
     }
 
 }

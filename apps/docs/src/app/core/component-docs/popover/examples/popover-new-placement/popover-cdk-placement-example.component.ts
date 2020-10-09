@@ -3,11 +3,10 @@ import { CdkPopoverComponent, XPositions, YPositions } from '@fundamental-ngx/co
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 
 @Component({
-    selector: 'fd-popover-new-placement-example',
-    templateUrl: './popover-placement-example.component.html',
-    styleUrls: ['popover-placement-example.component.scss']
+    selector: 'fd-popover-cdk-placement-example',
+    templateUrl: './popover-cdk-placement-example.component.html'
 })
-export class PopoverPlacementExampleComponent {
+export class PopoverCdkPlacementExampleComponent {
     list = [
         { text: 'Option 1', url: '#' },
         { text: 'Option 2', url: '#' },
@@ -19,7 +18,6 @@ export class PopoverPlacementExampleComponent {
 
     yPositions: YPositions[] = ['bottom', 'center', 'top'];
     xPositions: XPositions[] = ['start', 'center', 'end'];
-    arrowPositions = ['top', 'bottom', 'left', 'right'];
 
     originX: XPositions = 'center';
     originY: YPositions = 'center';

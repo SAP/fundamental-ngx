@@ -34,7 +34,12 @@
 
 <br><br><br>
 
-<label fd-form-label>Reposition Scroll strategy</label>
+<label fd-form-label style="display: inline-block;">Reposition Scroll strategy</label>
+<fd-checkbox
+    [(ngModel)]="autoClose"
+    (ngModelChange)="refreshRepositionScrollStrategy()">
+    Close the overlay once the user has scrolled away completely?
+</fd-checkbox>
 <fd-popover [scrollStrategy]="repositionScrollStrategy">
     <fd-popover-control><button fd-button label="This popover will follow this button on scroll"></button></fd-popover-control>
     <fd-popover-body>

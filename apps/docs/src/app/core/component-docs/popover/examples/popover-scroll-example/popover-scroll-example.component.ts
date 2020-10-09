@@ -21,6 +21,8 @@ export class PopoverScrollExampleComponent implements OnInit {
     /** Block scrolling. */
     blockScrollStrategy: ScrollStrategy;
 
+    /** Whether to close the overlay once the user has scrolled away completely. */
+    autoClose = false;
 
     /**
      * Update the overlay's position on scroll.
@@ -35,9 +37,13 @@ export class PopoverScrollExampleComponent implements OnInit {
 
     ngOnInit(): void {
         this.blockScrollStrategy = this._overlay.scrollStrategies.block();
-        this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition();
+        this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: this.autoClose });
         this.noopScrollStrategy = this._overlay.scrollStrategies.noop();
-        this.closeScrollStrategy = this._overlay.scrollStrategies.close();
+        this.closeScrollStrategy = this._overlay.scrollStrategies.close( );
+    }
+
+    refreshRepositionScrollStrategy(): void {
+        this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: this.autoClose });
     }
 
 }
