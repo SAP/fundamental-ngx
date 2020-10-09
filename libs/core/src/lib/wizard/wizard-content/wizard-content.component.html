@@ -1,0 +1,12 @@
+<ng-template #contentTemplate>
+    <section
+        class="fd-wizard__content"
+        [ngClass]="
+            (contentBackground ? 'fd-wizard__content--' + contentBackground : '') +
+            ' ' +
+            (size ? 'fd-wizard__content--' + size : '')
+        "
+    >
+        <ng-content></ng-content>
+    </section>
+</ng-template>

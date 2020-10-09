@@ -1,0 +1,39 @@
+<fd-docs-section-title id="Wizard" componentName="wizard">Default Wizard</fd-docs-section-title>
+<description>
+    The default wizard displays a walkthrough screen with forms split into sections. Once the user fills all of the
+    necessary input fields, a button is displayed to go to the next section. A Cancel button is displayed in the footer,
+    so the user can exit the wizard at any point during the process. However, if a user exits the wizard after adding
+    their input, they will receive a warning that their information will be lost.
+    <br /><br />
+    The wizard does not have any built-in functionality for moving through each step - the application developer will
+    manage this using the <code>[status]</code> input on each <code>fd-wizard-step</code>
+</description>
+<component-example>
+    <fd-wizard-example></fd-wizard-example>
+</component-example>
+<code-example [exampleFiles]="wizardExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="Wizard-Customizable" componentName="wizard">Customizable Wizard</fd-docs-section-title>
+<description>
+    The wizard component can be customized with modifier inputs.
+</description>
+<component-example>
+    <fd-wizard-customizable-example></fd-wizard-customizable-example>
+</component-example>
+<code-example [exampleFiles]="wizardCustomizableExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="Wizard-Mobile" componentName="wizard">Mobile Wizard</fd-docs-section-title>
+<description>
+    For mobile devices, use the <code>fd-bar</code> component with the
+    <code>barDesign="floating-footer"</code> modifier to achieve a floating footer. The Next Step button is placed
+    after the content whenever possible. However, it can be placed above the floating footer by adding the
+    <code>[floating]</code> input to the <code>fd-wizard-next-step</code>
+    component.
+</description>
+<component-example>
+    <fd-wizard-mobile-example></fd-wizard-mobile-example>
+</component-example>
+<code-example [exampleFiles]="wizardMobileExample"></code-example>
+<separator></separator>

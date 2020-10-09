@@ -53,12 +53,6 @@ export class PopoverComponent {
     @HostBinding('class.fd-popover-custom--disabled')
     disabled = false;
 
-    /** @deprecated
-     * Left for backward compatibility. It's going to be removed on 0.20.0
-     */
-    @Input()
-    isDropdown = false;
-
     /** The element to which the popover should be appended. */
     @Input()
     appendTo: HTMLElement | 'body';

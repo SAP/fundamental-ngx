@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.3...v0.23.0-rc.4) (2020-10-09)
+
+## [0.23.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.2...v0.23.0-rc.3) (2020-10-09)
+
+
+### Features
+
+* (Platform) add Object Marker documentation and platform library changes ([#3525](https://github.com/SAP/fundamental-ngx/issues/3525)) ([3bdaf3a](https://github.com/SAP/fundamental-ngx/commit/3bdaf3a289e3d294b81bb957768dbcc133af233f))
+
+## [0.23.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.1...v0.23.0-rc.2) (2020-10-08)
+
+
+### Features
+
+* (Core) introduce new Wizard component ([#3516](https://github.com/SAP/fundamental-ngx/issues/3516)) ([afb9398](https://github.com/SAP/fundamental-ngx/commit/afb9398d1c6929fd633b2fd16bd81d9c4db14ae7))
+
+## [0.23.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.0...v0.23.0-rc.1) (2020-10-08)
+
+## [0.23.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.7...v0.23.0-rc.0) (2020-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove deprecated input buttonType from input-group
+
+### Bug Fixes
+
+* remove deprecated input from input group - buttonType ([#3573](https://github.com/SAP/fundamental-ngx/issues/3573)) ([5b49655](https://github.com/SAP/fundamental-ngx/commit/5b496556a9f8ad6c7a5f739913486f49b00d25fb))
+
+### [0.22.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.6...v0.22.1-rc.7) (2020-10-07)
+
+
+### Bug Fixes
+
+* remove deprecated input isDropdown from popover ([#3570](https://github.com/SAP/fundamental-ngx/issues/3570)) ([9b4ad00](https://github.com/SAP/fundamental-ngx/commit/9b4ad000bcf3acddac5a4ffbc62740b6cf3f4b0a))
+
 ### [0.22.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.5...v0.22.1-rc.6) (2020-10-07)
 
 
