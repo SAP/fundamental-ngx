@@ -31,7 +31,7 @@ import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 import { ConnectedOverlayPositionChange, ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
 import { DefaultPositions, PopoverPosition } from './popover-position';
-import { KeyUtil } from '../../..';
+import { KeyUtil } from '../../utils/functions/key-util';
 
 let popoverUniqueId = 0;
 
@@ -55,6 +55,15 @@ let popoverUniqueId = 0;
 export class CdkPopoverComponent extends BasePopoverClass
     implements AfterViewInit, OnInit, OnDestroy, OnChanges {
 
+    /** Whether the popover is disabled. */
+    @Input()
+    @HostBinding('class.fd-popover-custom--disabled')
+    disabled = false;
+
+    /** Id of the popover. If none is provided, one will be generated. */
+    @Input()
+    id: string = 'fd-popover-' + popoverUniqueId++;
+
     /** @hidden */
     @ViewChild('templateRef', { read: TemplateRef })
     templateRef: TemplateRef<any>;
@@ -66,15 +75,6 @@ export class CdkPopoverComponent extends BasePopoverClass
     /** @hidden */
     @ViewChild(CdkOverlayOrigin)
     triggerOrigin: CdkOverlayOrigin;
-
-    /** Whether the popover is disabled. */
-    @Input()
-    @HostBinding('class.fd-popover-custom--disabled')
-    disabled = false;
-
-    /** Id of the popover. If none is provided, one will be generated. */
-    @Input()
-    id: string = 'fd-popover-' + popoverUniqueId++;
 
     /** TODO: */
     arrowPosition: string = null;
@@ -332,6 +332,7 @@ export class CdkPopoverComponent extends BasePopoverClass
         ).subscribe(() => this._applyWidthOverlay());
     }
 
+    /** @hidden */
     private _applyWidthOverlay(): void {
         if (this.fillControlMode === 'at-least') {
             this._overlayRef.updateSize({ minWidth: this._getTriggerWidth() });
@@ -341,10 +342,12 @@ export class CdkPopoverComponent extends BasePopoverClass
         this._changeDetectorReference.detectChanges();
     }
 
+    /** @hidden */
     private _getTriggerWidth(): number {
         return this.triggerOrigin.elementRef.nativeElement.offsetWidth;
     }
 
+    /** @hidden */
     private _removeArrowStyles(): void {
         this.arrowPosition = null;
         this.marginStyle = null;

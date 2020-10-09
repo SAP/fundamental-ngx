@@ -1,7 +1,7 @@
 import { Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
 import { Placement } from '../cdk-overlay/popover-position';
-import { PopoverFillMode } from '@fundamental-ngx/core';
+import { PopoverFillMode } from '../popover-directive/popover.directive';
 
 @Directive()
 export class BasePopoverClass {

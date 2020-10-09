@@ -3,10 +3,9 @@ import { CdkPopoverComponent } from './cdk-popover.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { DefaultPositions, PopoverPosition } from './popover-position';
-import { Subject } from 'rxjs';
 
 
-fdescribe('CdkPopoverComponent', () => {
+describe('CdkPopoverComponent', () => {
     let component: CdkPopoverComponent;
     let fixture: ComponentFixture<CdkPopoverComponent>;
 
@@ -73,13 +72,6 @@ fdescribe('CdkPopoverComponent', () => {
         expect(component['_eventRef'].length).toBe(3);
     });
 
-    it('should change trigger events on input change', () => {
-        component.triggers = ['keydown', 'mouseleave', 'mouseenter'];
-        component.ngOnChanges(<any>{ triggers: { currentValue: component.triggers } });
-        fixture.detectChanges();
-        expect(component['_eventRef'].length).toBe(3);
-    });
-
     it('should handle close event from overlay', () => {
         component.open();
 
@@ -98,6 +90,26 @@ fdescribe('CdkPopoverComponent', () => {
 
         const mouseEvent = { composedPath: () => [component.triggerOrigin.elementRef.nativeElement] };
         expect((<any>component)._shouldClose(mouseEvent)).not.toEqual(true);
+    });
+
+    it('shouldn close on escape keydown', () => {
+        component.open();
+
+        fixture.detectChanges();
+
+        spyOn(component, 'close');
+
+        component.bodyKeydownHandler(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+        expect(component.close).toHaveBeenCalled();
+    });
+
+    it('shouldn open on ArrowDown and Alt keydown', () => {
+        spyOn(component, 'open');
+
+        component.triggerKeyDownHandler(new KeyboardEvent('keydown', { key: 'ArrowDown', altKey: true }));
+
+        expect(component.open).toHaveBeenCalled();
     });
 
     it('should resize overlay body at least, on refresh position', () => {

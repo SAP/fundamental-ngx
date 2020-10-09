@@ -70,7 +70,6 @@ export class PopoverPosition {
             _position = position.overlayX;
 
             if (rtl) {
-                console.log('rtl');
                 if (_position === 'start') {
                     _position = 'end';
                 } else if (_position === 'end') {
