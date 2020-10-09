@@ -75,11 +75,11 @@ export class FormattedTextComponent implements OnInit, OnChanges {
     formattedText: SafeHtml = '';
 
     /** @hidden */
-    private htmlSanitizer!: HtmlSanitizer;
+    private _htmlSanitizer!: HtmlSanitizer;
 
     /** @hidden */
     constructor(private readonly domSanitizer: DomSanitizer) {
-        this.htmlSanitizer = new HtmlSanitizer();
+        this._htmlSanitizer = new HtmlSanitizer();
     }
 
     /** @hidden */
@@ -96,10 +96,10 @@ export class FormattedTextComponent implements OnInit, OnChanges {
 
     /** @hidden */
     private render(): void {
-        this.htmlSanitizer.extendAttrs({
+        this._htmlSanitizer.extendAttrs({
             target: this.convertedLinksDefaultTarget
         });
-        const text = this.htmlSanitizer.sanitizeHtml(this.htmlText);
+        const text = this._htmlSanitizer.sanitizeHtml(this.htmlText);
         this.formattedText = this.domSanitizer.bypassSecurityTrustHtml(text.trim());
     }
 }

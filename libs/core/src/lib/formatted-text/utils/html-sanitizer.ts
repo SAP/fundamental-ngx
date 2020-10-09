@@ -11,13 +11,13 @@ export class HtmlSanitizer {
     tagWhitelist: StringKey<boolean> = {};
     attributeWhitelist: StringKey<string | boolean> = {};
 
-    private schemaWhiteList: string[] = ['http', 'https', 'ftp', 'mailto'];
+    private _schemaWhiteList: string[] = ['http', 'https', 'ftp', 'mailto'];
 
-    private uriAttributes: StringKey<boolean> = {
+    private _uriAttributes: StringKey<boolean> = {
         href: true
     };
 
-    private safeWrapper?: SanitizeWrapper = {
+    private _safeWrapper?: SanitizeWrapper = {
         iframe: null,
         iframeDoc: null
     };
@@ -83,25 +83,25 @@ export class HtmlSanitizer {
             return '';
         }
 
-        this.safeWrapper = this.getSafeWrapper();
-        if (!this.safeWrapper) {
+        this._safeWrapper = this._getSafeWrapper();
+        if (!this._safeWrapper) {
             return '';
         }
 
-        this.safeWrapper.iframeDoc.body.innerHTML = input;
+        this._safeWrapper.iframeDoc.body.innerHTML = input;
 
-        const resultElement = this.makeSanitizedCopy(this.safeWrapper.iframeDoc.body);
-        this.removeSafeWrapper();
+        const resultElement = this._makeSanitizedCopy(this._safeWrapper.iframeDoc.body);
+        this._removeSafeWrapper();
 
         return resultElement.innerHTML;
     }
 
-    private makeSanitizedCopy(node: Node): HTMLElement {
+    private _makeSanitizedCopy(node: Node): HTMLElement {
         let newNode = node;
         if (node.nodeType === Node.TEXT_NODE) {
             newNode = node.cloneNode(true) as HTMLElement;
         } else if (node.nodeType === Node.ELEMENT_NODE && this.tagWhitelist[(node as HTMLElement).tagName]) {
-            newNode = this.extendLinkTarget(this.implementTag(node as HTMLElement));
+            newNode = this._extendLinkTarget(this._implementTag(node as HTMLElement));
         } else {
             newNode = document.createDocumentFragment();
         }
@@ -109,8 +109,8 @@ export class HtmlSanitizer {
         return newNode as HTMLElement;
     }
 
-    private implementTag(node: HTMLElement): HTMLElement {
-        const newNode = this.safeWrapper.iframeDoc.createElement(node.tagName);
+    private _implementTag(node: HTMLElement): HTMLElement {
+        const newNode = this._safeWrapper.iframeDoc.createElement(node.tagName);
 
         for (const key in this.attributeWhitelist) {
             if (this.attributeWhitelist[key]) {
@@ -118,7 +118,7 @@ export class HtmlSanitizer {
                 const origin = node.getAttribute(key);
 
                 if (key in node || key === 'class') {
-                    if (this.uriAttributes[key] && this.validateBySchema(origin)) {
+                    if (this._uriAttributes[key] && this._validateBySchema(origin)) {
                         continue;
                     }
                     switch (typeof allowed) {
@@ -135,7 +135,7 @@ export class HtmlSanitizer {
         }
 
         for (const child of Array.from(node.childNodes)) {
-            const subCopy = this.makeSanitizedCopy(child);
+            const subCopy = this._makeSanitizedCopy(child);
             if (subCopy) {
                 newNode.appendChild(subCopy);
             }
@@ -144,7 +144,7 @@ export class HtmlSanitizer {
         return newNode;
     }
 
-    private extendLinkTarget(node: HTMLElement): HTMLElement {
+    private _extendLinkTarget(node: HTMLElement): HTMLElement {
         if (node.tagName === 'A') {
             if (!node.getAttribute('href') || /^\#/.test(node.getAttribute('href'))) {
                 node.removeAttribute('target');
@@ -157,7 +157,7 @@ export class HtmlSanitizer {
         return node;
     }
 
-    private getSafeWrapper(): SanitizeWrapper {
+    private _getSafeWrapper(): SanitizeWrapper {
         const iframe = document.createElement('iframe');
         if (iframe.sandbox === undefined) {
             console.warn('Your browser does not support sandboxed iframes. Please upgrade to a modern browser.');
@@ -174,17 +174,17 @@ export class HtmlSanitizer {
         return { iframe: iframe, iframeDoc: iframeDoc };
     }
 
-    private removeSafeWrapper(): void {
-        if (this.safeWrapper.iframe) {
-            document.body.removeChild(this.safeWrapper.iframe);
+    private _removeSafeWrapper(): void {
+        if (this._safeWrapper.iframe) {
+            document.body.removeChild(this._safeWrapper.iframe);
         }
     }
 
-    private validateBySchema(value: string): boolean {
-        return !!value && value.indexOf(':') > -1 && !this.startsWithAny(value, this.schemaWhiteList);
+    private _validateBySchema(value: string): boolean {
+        return !!value && value.indexOf(':') > -1 && !this._startsWithAny(value, this._schemaWhiteList);
     }
 
-    private startsWithAny(str: string, substrings: string[]): boolean {
+    private _startsWithAny(str: string, substrings: string[]): boolean {
         return !!str && substrings.some((value) => str.indexOf(value) === 0);
     }
 }
