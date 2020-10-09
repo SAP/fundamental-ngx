@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.2...v0.23.0-rc.3) (2020-10-09)
+
+
+### Features
+
+* (Platform) add Object Marker documentation and platform library changes ([#3525](https://github.com/SAP/fundamental-ngx/issues/3525)) ([3bdaf3a](https://github.com/SAP/fundamental-ngx/commit/3bdaf3a289e3d294b81bb957768dbcc133af233f))
+
 ## [0.23.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.1...v0.23.0-rc.2) (2020-10-08)
 
 
