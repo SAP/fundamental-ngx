@@ -5,7 +5,8 @@ import {
     Input,
     OnChanges,
     HostBinding,
-    OnInit
+    OnInit,
+    SimpleChanges
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -47,11 +48,13 @@ export class FormattedTextComponent implements OnInit, OnChanges {
     /**
      * Text for formatted render.
      */
-    @Input() htmlText: string;
+    @Input()
+    htmlText: string;
     /**
      * Target attribute for included links.
      */
-    @Input() convertedLinksDefaultTarget: LinkTargetType = '_blank';
+    @Input()
+    convertedLinksDefaultTarget: LinkTargetType = '_blank';
     /**
      * Height style for component.
      */
@@ -68,7 +71,8 @@ export class FormattedTextComponent implements OnInit, OnChanges {
     width?: string;
 
     /** @hidden */
-    @HostBinding('innerHTML') formattedText: SafeHtml = '';
+    @HostBinding('innerHTML')
+    formattedText: SafeHtml = '';
 
     /** @hidden */
     private htmlSanitizer!: HtmlSanitizer;
@@ -84,8 +88,10 @@ export class FormattedTextComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.render();
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('htmlText' in changes) {
+            this.render();
+        }
     }
 
     /** @hidden */
@@ -94,8 +100,6 @@ export class FormattedTextComponent implements OnInit, OnChanges {
             target: this.convertedLinksDefaultTarget
         });
         const text = this.htmlSanitizer.sanitizeHtml(this.htmlText);
-        if (text.trim().length) {
-            this.formattedText = this.domSanitizer.bypassSecurityTrustHtml(text);
-        }
+        this.formattedText = this.domSanitizer.bypassSecurityTrustHtml(text.trim());
     }
 }

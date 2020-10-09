@@ -9,7 +9,7 @@ interface SanitizeWrapper {
 
 export class HtmlSanitizer {
     tagWhitelist: StringKey<boolean> = {};
-    attributeWhitelist: StringKey<string | boolean | Function> = {};
+    attributeWhitelist: StringKey<string | boolean> = {};
 
     private schemaWhiteList: string[] = ['http', 'https', 'ftp', 'mailto'];
 
@@ -55,7 +55,7 @@ export class HtmlSanitizer {
         };
     }
 
-    get defAttributeWhitelist(): StringKey<string | boolean | Function> {
+    get defAttributeWhitelist(): StringKey<string | boolean> {
         return {
             class: true,
             style: true,
@@ -80,10 +80,6 @@ export class HtmlSanitizer {
     sanitizeHtml(input: string): string {
         input = input.trim();
         if (input.length === 0) {
-            return '';
-        }
-
-        if (input === '<br>') {
             return '';
         }
 
@@ -128,12 +124,6 @@ export class HtmlSanitizer {
                     switch (typeof allowed) {
                         case 'string':
                             newNode.setAttribute(key, allowed);
-                            break;
-                        case 'function':
-                            const setup = allowed.call(this, node, origin);
-                            if (setup) {
-                                newNode.setAttribute(key, setup);
-                            }
                             break;
                         default:
                             if (allowed && origin) {
