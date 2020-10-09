@@ -1,10 +1,8 @@
-import { Component, Injectable } from '@angular/core';
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component } from '@angular/core';
 
 
 @Component({
     selector: 'fd-popover-container-example',
-    templateUrl: './popover-container-example.component.html',
-    styleUrls: ['./popover-container-example.component.scss'],
+    templateUrl: './popover-container-example.component.html'
 })
 export class PopoverContainerExampleComponent {}

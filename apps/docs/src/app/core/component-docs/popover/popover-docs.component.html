@@ -84,15 +84,16 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'appendTo'" [componentName]="'popover'">
-    Popover Body Container
+    Different Popover Container
 </fd-docs-section-title>
 <description>
-
+    Different element to which the popover body is attached can be added, by passing <code>[appendTo]="elementRef"</code>.
+    Otherwise the popover body is rendered out of markup, in <code>< body ></code>.
 </description>
 <component-example>
     <fd-popover-container-example></fd-popover-container-example>
 </component-example>
-<code-example [exampleFiles]="popoverFillExample"></code-example>
+<code-example [exampleFiles]="popoverContainer"></code-example>
 
 <separator></separator>
 
@@ -100,25 +101,38 @@
     Popover Focus Trap
 </fd-docs-section-title>
 <description>
-
+    To apply focus trap, you need to add <code>[focusTrapped]="true"</code>.
+    To move focus automatically into popover, when it's opened, you need to apply <code>[focusAutoCapture]="true"</code>.
+    After closing popover, focus will go to latest active element.
 </description>
 <component-example>
     <fd-popover-focus-example></fd-popover-focus-example>
 </component-example>
-<code-example [exampleFiles]="popoverFillExample"></code-example>
+<code-example [exampleFiles]="focusTrapExample"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'cd-placement'" [componentName]="'popover'">
-    Popover CDK Placenent
+<fd-docs-section-title [id]="'cdk-placement'" [componentName]="'popover'">
+    Popover CDK Placement
 </fd-docs-section-title>
 <description>
-
+    There is different way of putting placement, which is accepted by CdkOverlay. <code>[cdkPositions]</code> is the
+    property that accepts array of objects with positions related to overlay(popover-body) and origin(popover-control).
+    <ul>
+        <li>
+            For horizontal (overlayX, originX), those values are <code>'start' | 'center' | 'end'</code>.
+        </li>
+        <li>
+            For vertical (overlayY, originY), those values are <code>'bottom' | 'center' | 'top'</code>.
+        </li>
+    </ul>
+    <br><br>
+    This property accepts array, just to deal with situation, when overlay body goes beyond the screen.
 </description>
 <component-example>
     <fd-popover-cdk-placement-example></fd-popover-cdk-placement-example>
 </component-example>
-<code-example [exampleFiles]="popoverFillExample"></code-example>
+<code-example [exampleFiles]="cdkPlacementExample"></code-example>
 
 <separator></separator>
 
@@ -126,12 +140,21 @@
     Popover Scroll Example
 </fd-docs-section-title>
 <description>
-
+    There is also way to change scroll behaviour, CDK Overlay offers 4 different options
+    <ul>
+        <li>CloseScrollStrategy - popover is closed, upon scrolling.</li>
+        <li>NoopScrollStrategy and BlockScrollStrategy - popover stays in same place.</li>
+        <li>
+            RepositionScrollStrategy(default) - popover follows the element, to which is appended to.
+            There is way to apply another argument, to close popover, when it goes beyond the screen and add throttle
+            time for performance purposes.
+        </li>
+    </ul>
 </description>
 <component-example>
     <fd-popover-scroll-example></fd-popover-scroll-example>
 </component-example>
-<code-example [exampleFiles]="popoverFillExample"></code-example>
+<code-example [exampleFiles]="cdkScrollExample"></code-example>
 
 <separator></separator>
 
@@ -155,8 +178,7 @@
     Dropdown Popover
 </fd-docs-section-title>
 <description>
-    Dropdown is a composition of basic <code>popover</code> and <code>button</code> with
-    <code>[fdMenu]="true"</code>.
+    Dropdown is a composition of basic <code>popover</code> and <code>button</code> with <code>[fdMenu]="true"</code>.
 </description>
 <component-example>
     <fd-popover-dropdown-example></fd-popover-dropdown-example>

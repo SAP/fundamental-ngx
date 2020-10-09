@@ -2,7 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, ElementRef,
+    Component,
     HostBinding,
     Input,
     OnChanges,
@@ -22,7 +22,8 @@ import {
     FlexibleConnectedPositionStrategy,
     Overlay,
     OverlayConfig,
-    OverlayRef, ViewportRuler
+    OverlayRef,
+    ViewportRuler
 } from '@angular/cdk/overlay';
 import { RtlService } from '../../utils/services/rtl.service';
 import { BasePopoverClass } from '../base/base-popover.class';
@@ -76,8 +77,10 @@ export class CdkPopoverComponent extends BasePopoverClass
     @ViewChild(CdkOverlayOrigin)
     triggerOrigin: CdkOverlayOrigin;
 
-    /** TODO: */
+    /** position of arrow, passed to arrow element */
     arrowPosition: string = null;
+
+    /** Additional style to put margin into body component, to give a place for arrow */
     marginStyle: string = null;
 
     /** @hidden */
