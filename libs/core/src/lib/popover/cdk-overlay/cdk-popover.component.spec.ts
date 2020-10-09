@@ -3,6 +3,7 @@ import { CdkPopoverComponent } from './cdk-popover.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { DefaultPositions, PopoverPosition } from './popover-position';
+import { A11yModule } from '@angular/cdk/a11y';
 
 
 describe('CdkPopoverComponent', () => {
@@ -11,7 +12,7 @@ describe('CdkPopoverComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule, OverlayModule]
+            imports: [PopoverModule, OverlayModule, A11yModule]
         }).compileComponents();
     }));
 

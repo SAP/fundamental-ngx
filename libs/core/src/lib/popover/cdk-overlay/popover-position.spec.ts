@@ -27,7 +27,7 @@ describe('PopoverPosition', () => {
 
     it('should return proper arrow position and margin - start', () => {
 
-        const position: ConnectedPosition = { overlayY: 'center', overlayX: 'start', originX: 'center', originY: 'top' }
+        const position: ConnectedPosition = { overlayY: 'center', overlayX: 'start', originX: 'end', originY: 'top' }
         const arrowPosition = PopoverPosition.getArrowPosition(position);
         const margin = PopoverPosition.getMarginStyle(arrowPosition);
 
@@ -38,7 +38,7 @@ describe('PopoverPosition', () => {
 
     it('should return proper arrow position and margin - end', () => {
 
-        const position: ConnectedPosition = { overlayY: 'center', overlayX: 'end', originX: 'center', originY: 'top' }
+        const position: ConnectedPosition = { overlayY: 'center', overlayX: 'end', originX: 'start', originY: 'top' }
         const arrowPosition = PopoverPosition.getArrowPosition(position);
         const margin = PopoverPosition.getMarginStyle(arrowPosition);
 
@@ -49,7 +49,7 @@ describe('PopoverPosition', () => {
 
     it('should return proper arrow position and margin - start with rtl', () => {
 
-        const position: ConnectedPosition = { overlayY: 'center', overlayX: 'start', originX: 'center', originY: 'top' }
+        const position: ConnectedPosition = { overlayY: 'center', overlayX: 'start', originX: 'end', originY: 'top' }
         const arrowPosition = PopoverPosition.getArrowPosition(position, true);
         const margin = PopoverPosition.getMarginStyle(arrowPosition);
 
@@ -60,7 +60,7 @@ describe('PopoverPosition', () => {
 
     it('should return proper arrow position and margin - end with rtl', () => {
 
-        const position: ConnectedPosition = { overlayY: 'center', overlayX: 'start', originX: 'center', originY: 'top' }
+        const position: ConnectedPosition = { overlayY: 'center', overlayX: 'end', originX: 'start', originY: 'top' }
         const arrowPosition = PopoverPosition.getArrowPosition(position, true);
         const margin = PopoverPosition.getMarginStyle(arrowPosition);
 
