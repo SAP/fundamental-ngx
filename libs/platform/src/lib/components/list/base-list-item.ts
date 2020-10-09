@@ -235,7 +235,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     _noSeperator: boolean;
 
     /** @hidden */
-    _contentDensity = this._listConfig.contentDensity;
+    _contentDensity: ContentDensity = this._listConfig.contentDensity;
 
     /**@hidden
    * list of values, it can be of type Item or String.
