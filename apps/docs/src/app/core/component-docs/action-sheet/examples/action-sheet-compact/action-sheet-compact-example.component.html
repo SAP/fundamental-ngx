@@ -1,10 +1,16 @@
 <fd-action-sheet [compact]="true">
     <fd-action-sheet-control>
-        <button fd-button glyph="settings"></button>
+        <button
+            class="fd-button--compact"
+            fd-button
+            glyph="settings">
+        </button>
     </fd-action-sheet-control>
-    <li fd-action-sheet-item compact="true" label="Search" glyph="search"></li>
-    <li fd-action-sheet-item compact="true" label="Download" glyph="download"></li>
-    <li fd-action-sheet-item compact="true" label="Accept" glyph="accept"></li>
-    <li fd-action-sheet-item compact="true" label="Reject" glyph="cancel"></li>
-    <li fd-action-sheet-item compact="true" label="Subscribe" glyph="bell"></li>
+
+    <fd-action-sheet-item compact="true" label="Search" glyph="search"></fd-action-sheet-item>
+    <fd-action-sheet-item compact="true" label="Download" glyph="download"></fd-action-sheet-item>
+    <fd-action-sheet-item compact="true" label="Accept" glyph="accept"></fd-action-sheet-item>
+    <fd-action-sheet-item compact="true" label="Reject" glyph="cancel"></fd-action-sheet-item>
+    <fd-action-sheet-item compact="true" label="Subscribe" glyph="bell"></fd-action-sheet-item>
+
 </fd-action-sheet>

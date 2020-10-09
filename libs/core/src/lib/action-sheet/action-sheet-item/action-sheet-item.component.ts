@@ -5,15 +5,14 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
  * ```html
  * <fd-action-sheet>
  *     <fd-action-sheet-control>Control Element</fd-action-sheet-control>
- *     <li fd-action-sheet-item>Action Sheet Body</li>
- *     <li fd-action-sheet-item>Action Sheet Body</li>
- *     <li fd-action-sheet-item>Action Sheet Body</li>
+ *     <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>
+ *     <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>
+ *     <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>
  * </fd-action-sheet>
  * ```
  */
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: '[fd-action-sheet-item]',
+    selector: 'fd-action-sheet-item',
     templateUrl: './action-sheet-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

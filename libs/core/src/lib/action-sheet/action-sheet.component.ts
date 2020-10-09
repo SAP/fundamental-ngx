@@ -27,14 +27,11 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     @Input()
     compact = false;
 
-    /* TODO* */
+    /** Indicate if it's mobile mode **/
     @Input()
     mobile = false;
 
-    /* TODO */
-    @Input()
-    title: string = null;
-
+    /** Whenever links should be visible **/
     @Input()
     isOpen = false;
 
@@ -59,11 +56,15 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
         this.isOpenChange.emit(isOpen);
     }
 
+    /** Method that changes state of mobile open variable */
+    public toggleOpen(): void {
+        this.isOpen = !this.isOpen;
+    }
+
     /** @hidden */
     ngAfterContentInit(): void {
         this._setUpMobileMode();
     }
-
 
     /**
      * Function is called every time popover changes open attribute
@@ -76,7 +77,7 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     /** @hidden */
     private _setUpMobileMode(): void {
         this._dynamicComponentService.createDynamicComponent(
-            { actionSheetTemplate: this.actionSheetTemplate, title: this.title },
+            { actionSheetTemplate: this.actionSheetTemplate},
             ActionSheetMobileComponent,
             { container: this._elementRef.nativeElement },
             { injector: Injector.create({ providers: [{ provide: ACTION_SHEET_COMPONENT, useValue: this }] }) }
