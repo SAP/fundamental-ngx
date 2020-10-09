@@ -5,14 +5,14 @@ export const CLASS_NAME = {
     containerSizeSm: 'fd-dynamic-side--sm',
     containerSizeMd: 'fd-dynamic-side--md',
     containerSizeXl: 'fd-dynamic-side--xl',
-    containerSideBelow: 'fd-dynamic-side--equal-below',
+    containerSideBelow: 'fd-dynamic-side--below',
     containerSideEqual: 'fd-dynamic-side--equal-split',
 
     side: 'fd-dynamic-side__side',
     main: 'fd-dynamic-side__main'
 } as const;
 
-export type DynamicSideContentPosition = 'none' | 'left' | 'right' | 'bottom' | 'equalSplit';
+export type DynamicSideContentPosition = 'left' | 'right' | 'bottom' | 'equalSplit' | 'none';
 
 export type DynamicSideContentSize = 'sm' | 'md' | 'lg' | 'xl';
 

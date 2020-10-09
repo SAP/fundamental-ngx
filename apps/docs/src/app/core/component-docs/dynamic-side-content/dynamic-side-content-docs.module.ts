@@ -10,6 +10,8 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { DynamicSideContentHeaderComponent } from './dynamic-side-content-header/dynamic-side-content-header.component';
 import { DynamicSideContentDocsComponent } from './dynamic-side-content-docs.component';
 import { DynamicSideContentBasicExampleComponent } from './examples/dynamic-side-content-basic-example.component';
+import { DynamicSideContentPositioningExampleComponent } from './examples/dynamic-side-content-positioning-example.component';
+import { DynamicSideContentSizeExampleComponent } from './examples/dynamic-side-content-size-example.component';
 
 const routes: Routes = [
     {
@@ -28,7 +30,9 @@ const routes: Routes = [
     declarations: [
         DynamicSideContentHeaderComponent,
         DynamicSideContentDocsComponent,
-        DynamicSideContentBasicExampleComponent
+        DynamicSideContentBasicExampleComponent,
+        DynamicSideContentPositioningExampleComponent,
+        DynamicSideContentSizeExampleComponent
     ]
 })
 export class DynamicSideContentDocsModule {}

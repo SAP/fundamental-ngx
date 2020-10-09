@@ -25,7 +25,7 @@ let componentId = 0;
     ]
 })
 export class DynamicSideMainComponent implements OnInit {
-    /** Element id */
+    /** Unique element Id, by default it's auto generated */
     @Input()
     @HostBinding('attr.id')
     id = 'fd-dynamic-side-main-id-' + componentId++;

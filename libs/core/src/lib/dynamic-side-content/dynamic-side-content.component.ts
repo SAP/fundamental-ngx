@@ -35,7 +35,7 @@ let componentId = 0;
 })
 export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, OnInit, AfterContentInit {
     /**
-     * side content position can be 'left' | 'right' | 'bottom' | 'equalSplit' | 'none'
+     * Side content position, can be 'left' | 'right' | 'bottom' | 'equalSplit' | 'none'.
      */
     @Input()
     set position(position: DynamicSideContentPosition) {
@@ -45,12 +45,12 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     }
 
     /**
-     * Screen size
+     * Screen size, can be 'sm' | 'md' | 'lg' | 'xl'.
      */
     @Input()
     size: DynamicSideContentSize;
 
-    /** Card Id, it has some default value if not set,  */
+    /** Unique element Id, by default it's auto generated */
     @Input()
     @HostBinding('attr.id')
     id = 'fd-dynamic-side-content-id-' + componentId++;
@@ -95,8 +95,8 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
         this._listenToChildrenOrder();
     }
 
-    @applyCssClass
     /** @hidden */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             CLASS_NAME.container,
