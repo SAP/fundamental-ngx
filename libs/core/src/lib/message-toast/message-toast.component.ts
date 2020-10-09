@@ -164,7 +164,6 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
             this._elRef.nativeElement.classList.remove('fd-has-display-none');
             this._elRef.nativeElement.classList.add('fd-has-display-block');
         }
-
         if (this.duration >= 0) {
             this.ngZone.runOutsideAngular(() => {
                 setTimeout(() => {
