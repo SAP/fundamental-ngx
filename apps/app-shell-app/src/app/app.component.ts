@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
         this.appShell.shellBar.setTitle('One Procurement');
         this.appShell.shellBar.setSubTitle('Solution for all');
 
-        this.appShell.publisher('error:event')
-            .publish(new TextMessage('There was a error during Appinitialization'));
+        this.appShell.messageBus.sendTo('error:event',
+            new TextMessage('There was a error during Appinitialization'));
     }
 }

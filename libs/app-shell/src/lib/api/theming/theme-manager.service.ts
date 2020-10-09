@@ -1,31 +1,25 @@
 import {
     EventType,
-    MapMessage,
-    TopicPublisher,
-    TopicSubscriber
+    MapMessage
 } from '../events/message-bus';
-import {
-    Injectable,
-    OnDestroy
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MessagingService } from '../events/messaging.service';
 import { MessagingTopics } from '../../api/events/topics.service';
 
 const TOPIC_THEME_CHANGE = 'theme:change';
 
+
+/**
+ * Todo: Do we need this extra service? instead of using mesage bus directly? But always some client is helpfulll.
+ */
 @Injectable()
-export class ThemeManagerService implements OnDestroy {
+export class ThemeManagerService {
 
-    private publisher: TopicPublisher<MapMessage<string>>;
-    private subscriber: TopicSubscriber<MapMessage<string>>;
-
-    constructor(private messagingService: MessagingService, private topics: MessagingTopics) {
+    constructor(private messageBus: MessagingService, private topics: MessagingTopics) {
         this.topics.defineTopic({
             prefix: 'theme:', eventType: EventType.ONLY_LAST, name: TOPIC_THEME_CHANGE,
             shared: true
         });
-        this.subscriber = this.messagingService.createSubscriber<MapMessage<string>>(TOPIC_THEME_CHANGE,
-            EventType.ONLY_LAST);
     }
 
     themeChanged(id: string, name: string): void {
@@ -33,7 +27,7 @@ export class ThemeManagerService implements OnDestroy {
         mapMessage.set('name', name);
         mapMessage.set('id', id);
 
-        this.publisher.publish(mapMessage);
+        this.messageBus.sendTo(TOPIC_THEME_CHANGE, mapMessage);
     }
 
     /**
@@ -42,12 +36,8 @@ export class ThemeManagerService implements OnDestroy {
      * with observer and pipe it tp skip NULL
      *
      */
-    onChange(next?: (value: any) => void, error?: (error: any) => any, complete?: () => void): void {
-        this.subscriber.onMessage(next);
-    }
-
-    ngOnDestroy(): void {
-        this.subscriber.unSubscribe();
+    onChange(next?: (value: any) => void): void {
+        this.messageBus.onMessage(TOPIC_THEME_CHANGE, next);
     }
 
 }

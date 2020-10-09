@@ -17,13 +17,9 @@ import {
     EventType,
     MapMessage,
     Message,
-    TopicPublisher,
     TopicSubscriber
 } from '../events/message-bus';
-import {
-    MessagingTopics,
-    Topic
-} from '../../api/events/topics.service';
+import { MessagingTopics } from '../../api/events/topics.service';
 
 const TOPIC_SYSTEM_PLUGIN = 'system:plugin';
 
@@ -81,7 +77,6 @@ const TOPIC_SYSTEM_PLUGIN = 'system:plugin';
 @Injectable()
 export class PluginManagerService implements OnDestroy {
     private registry: Map<string, RegistrationEntry> = new Map<string, RegistrationEntry>();
-    private pluginTopic: TopicPublisher<MapMessage<string>>;
 
     constructor(private lookupService: LookupService, private messageBus: MessagingService,
                 private topics: MessagingTopics) {
@@ -89,55 +84,43 @@ export class PluginManagerService implements OnDestroy {
             prefix: 'system:', eventType: EventType.DEFAULT, name: TOPIC_SYSTEM_PLUGIN,
             shared: true
         });
-        this.pluginTopic = this.messageBus.createPublisher<MapMessage<string>>(TOPIC_SYSTEM_PLUGIN, EventType.DEFAULT);
     }
 
     loadConfiguration(plugins: Array<Partial<PluginDescriptor>>): void {
-        const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
-        m.set('type', 'configuration');
-        m.set('status', 'start');
-        this.pluginTopic.publish(m);
+        const loadStart = this.createMessage('configuration', 'start');
+        this.messageBus.sendTo(TOPIC_SYSTEM_PLUGIN, loadStart);
         plugins.forEach(c => this.lookupService.addPlugin(c));
 
-        m.set('type', 'configuration');
-        m.set('type', 'end');
-        this.pluginTopic.publish(m);
+        const loadEnd = this.createMessage('configuration', 'end');
+        this.messageBus.sendTo(TOPIC_SYSTEM_PLUGIN, loadEnd);
     }
 
+    /**
+     * Todo: Right now we create subsribers but we dont release them right away but leave this up to the MessageBus to
+     * clean up everything. Should check when registering a plugin if we already did subscription for it and do clean
+     * up before continuing
+     *
+     */
     register(descriptor: Partial<PluginDescriptor>, pluginComponent?: PluginComponent): void {
         // todo: this can be undefined too .getName()
         const name = descriptor ? descriptor.name : pluginComponent.getConfiguration().getName();
-        if (this.registry.has(name)) {
-            // we should probably clean up also possible listeners
-            const entry = this.registry.get(name);
-            if (entry.subscribers) {
-                entry.subscribers.forEach(subscriber => {
-                    subscriber.unSubscribe();
-                });
-            }
-            this.registry.delete(name);
-        }
 
-        const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
-        m.set('type', 'register');
-        m.set('status', 'start');
-        m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
+        const mesageStart = this.createMessage('register', 'start', name);
+        this.messageBus.sendTo(TOPIC_SYSTEM_PLUGIN, mesageStart);
+
         let configuration: Partial<PluginConfiguration>;
-
         if (pluginComponent) {
             configuration = pluginComponent.getConfiguration();
-            const listeners = this.doConfigureListeners(configuration, pluginComponent);
+            this.doConfigureListeners(configuration, pluginComponent);
 
-            // as part of communication strategies pass only things that are needed.
             const pluginContext = this.createPluginContext();
             pluginComponent.initialize(pluginContext);
-            this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent, listeners));
+            this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
         } else {
             this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
         }
-        m.set('type', 'register');
-        m.set('status', 'end');
-        m.set('pluginName', descriptor?.name || pluginComponent?.getConfiguration().getName());
+        const mesageEnd = this.createMessage('register', 'end', name);
+        this.messageBus.sendTo(TOPIC_SYSTEM_PLUGIN, mesageEnd);
     }
 
 
@@ -147,29 +130,13 @@ export class PluginManagerService implements OnDestroy {
     }
 
     createPluginContext(all: boolean = false): PluginContext {
-        const publishers = new Map<string, TopicPublisher<Message>>();
-        this.topics.topicsDef.forEach((t: Topic) => {
-            if (t.shared) {
-                publishers.set(t.name, this.messageBus.createPublisher(t.name, t.eventType));
-            }
-        });
-
-        const subscribers = new Map<string, TopicSubscriber<Message>>();
-        if (all) {
-            this.topics.topicsDef.forEach((t: Topic) => {
-                if (t.shared) {
-                    const subscriber = this.messageBus.createSubscriber(t.name, t.eventType);
-                    subscribers.set(t.name, subscriber);
-                }
-            });
-        }
-        const context = new PluginContext(publishers, subscribers);
+        const context = new PluginContext(this.messageBus);
         return context;
     }
 
 
     private doConfigureListeners(configuration: Partial<PluginConfiguration>,
-                                 pluginComponent?: PluginComponent): Array<TopicSubscriber<Message>> {
+                                 pluginComponent?: PluginComponent): void {
         if (!configuration.addListeners || configuration.addListeners().length === 0) {
             return;
         }
@@ -177,21 +144,21 @@ export class PluginManagerService implements OnDestroy {
         configuration.addListeners().forEach((listener: Listener) => {
             if (this.topics.hasTopic(listener.topic)) {
                 const topic = this.topics.getTopic(listener.topic);
-                const subscriber = this.messageBus.createSubscriber(listener.topic, topic.eventType,
+                this.messageBus.onMessage(topic.name, (m) => listener.onMessage(m),
                     listener.messageSelector);
-
-                subscriber.onMessage((m: Message) => {
-                    if (pluginComponent) {
-                        //  since we are wrapping rxjs we need to also pass THIS to current callback
-                        listener.onMessage.call(pluginComponent, m);
-                    } else {
-                        listener.onMessage(m);
-                    }
-                });
-                subscribers.push(subscriber);
             }
         });
-        return subscribers;
+    }
+
+    private createMessage(type: string, status: string, pluginName?: string): MapMessage<string> {
+        const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
+        m.set('type', type);
+        m.set('status', status);
+
+        if ([pluginName]) {
+            m.set('pluginName', pluginName);
+        }
+        return m;
     }
 }
 

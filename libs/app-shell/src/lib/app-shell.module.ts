@@ -99,8 +99,7 @@ export class AppShellModule {
                 {
                     provide: AppShellProviderService,
                     useClass: AppShellProviderService,
-                    deps: [NgZone, PluginManagerService, MessagingTopics, ThemeManagerService,
-                        ShellBarService]
+                    deps: [NgZone, MessagingTopics, ThemeManagerService, MessagingService, ShellBarService]
                 },
                 {
                     provide: ERROR_FORMATTER,

@@ -44,8 +44,7 @@ const TOPIC_ERROR_EVENT = 'error:event';
 export class DefaultErrorHandlerService implements ErrorHandler, OnDestroy {
     private subscriber: TopicSubscriber<Message>;
 
-    constructor(private messagingService: MessagingService,
-                private topics: MessagingTopics,
+    constructor(private messaging: MessagingService, private topics: MessagingTopics,
                 @Inject(ERROR_FORMATTER) private formatter: ErrorFormatter,
                 @Inject(ERROR_NOTIFIERS) private notifiers: ErrorNotifier[]) {
 
@@ -62,16 +61,11 @@ export class DefaultErrorHandlerService implements ErrorHandler, OnDestroy {
         this.notifiers.forEach(notifer => notifer.notify(errorMessage));
     }
 
-
-    private initializeMessagingErrors(): void {
-        this.subscriber = this.messagingService.createSubscriber(TOPIC_ERROR_EVENT, EventType.DURABLE);
-        this.subscriber.onMessage((m: Message) => {
-            this.handleError(m);
-        });
-    }
-
-
     ngOnDestroy(): void {
         this.subscriber.unSubscribe();
+    }
+
+    private initializeMessagingErrors(): void {
+        this.messaging.onMessage(TOPIC_ERROR_EVENT, (m) => this.handleError(m));
     }
 }

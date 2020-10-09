@@ -5,22 +5,16 @@ import {
 import { ThemeManagerService } from './theming/theme-manager.service';
 import { ShellBarService } from './extensions/shell-bar.service';
 import { MessagingTopics } from './events/topics.service';
-import {
-    EventType,
-    Message,
-    TopicPublisher
-} from './events/message-bus';
-import { PluginManagerService } from './extensions/plugin-manager.service';
-import { PluginContext } from './extensions/component/plugin-component';
+import { EventType } from './events/message-bus';
+import { MessagingService } from './events/messaging.service';
 
 @Injectable()
 export class AppShellProviderService {
-    pluginContext: PluginContext;
 
     constructor(private ngZone: NgZone,
-                private _pMgr: PluginManagerService,
-                public topics: MessagingTopics,
+                private topics: MessagingTopics,
                 public themeManager: ThemeManagerService,
+                public messageBus: MessagingService,
                 public shellBar?: ShellBarService
     ) {
         /**
@@ -34,22 +28,12 @@ export class AppShellProviderService {
             prefix: 'app:', eventType: EventType.ONLY_LAST, name: 'app:search',
             shared: true
         });
-        this.pluginContext = this._pMgr.createPluginContext(true);
 
         /**
          * We could also create different web workers  that can communicate with each other, but
          * as starter Window should work
          */
         window['appShellProvider'] = { ref: this, zone: ngZone };
-    }
-
-    subscriber(topic: string, onMessage: (m: Message) => void): void {
-        const topicSubscriber = this.pluginContext.subscriber(topic);
-        topicSubscriber.onMessage(onMessage);
-    }
-
-    publisher(topic: string): TopicPublisher<Message> {
-        return this.pluginContext.publisher(topic);
     }
 }
 

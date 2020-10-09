@@ -8,11 +8,7 @@
  *  router it could be defined as Application scope
  */
 import { PluginConfiguration } from './plugin-configuration.model';
-import {
-    Message,
-    TopicPublisher,
-    TopicSubscriber
-} from '../../events/message-bus';
+import { MessagingService } from '../../../..';
 
 
 export interface PluginComponent {
@@ -23,37 +19,10 @@ export interface PluginComponent {
 }
 
 export class PluginContext {
-    /**
-     * I think we want to pass only specific set of services not everything. so we can have some getters, or map
-     * and add only service that we want plugin to have.
-     *
-     * Do we want to pass services at all?
-     *
-     * Please see Configuration => Lister, what if we provide here only a list of publishers
-     * not really whole service.
-     *
-     * Map <TOPIC, TopicPublisher> ??
-     *
-     * Plus maybe inject some other services
-     */
-    constructor(private messageBusPub: Map<string, TopicPublisher<Message>>,
-                private messageBusSub?: Map<string, TopicSubscriber<Message>>) {
+
+    constructor(public messaging: MessagingService) {
     }
 
-
-    subscriber(topic: string): TopicSubscriber<Message> {
-        if (!this.messageBusSub.has(topic)) {
-            throw new Error('Invalid topic name');
-        }
-        return this.messageBusSub.get(topic);
-    }
-
-    publisher(topic: string): TopicPublisher<Message> {
-        if (!this.messageBusPub.has(topic)) {
-            throw new Error('Invalid topic name: ' + topic);
-        }
-        return this.messageBusPub.get(topic);
-    }
 }
 
 

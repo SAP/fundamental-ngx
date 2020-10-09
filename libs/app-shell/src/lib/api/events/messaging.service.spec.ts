@@ -8,9 +8,7 @@ import {
     Message,
     TextMessage
 } from './message-bus';
-import {
-    AppShellModule
-} from '../../app-shell.module';
+import { AppShellModule } from '../../app-shell.module';
 import { MessagingTopics } from '../../api/events/topics.service';
 
 
@@ -31,6 +29,26 @@ describe('MessagingService', () => {
         }
     ));
 
+    describe('Topics', () => {
+
+
+        it('should find exact match of topic if it is defined', inject(
+            [MessagingService, MessagingTopics],
+            (service: MessagingService, t: MessagingTopics) => {
+
+                t.defineTopic({
+                    name: 'system:events',
+                    eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
+                });
+                const topic = t.getTopic('system:events');
+
+
+                expect(topic).toBeDefined();
+            }
+        ));
+
+
+    });
 
     describe('Default event', () => {
 
@@ -64,6 +82,27 @@ describe('MessagingService', () => {
             }
         ));
 
+        it('onMessage(): should not receive any message when subscribing after its published', inject(
+            [MessagingService, MessagingTopics],
+            (service: MessagingService, t: MessagingTopics) => {
+
+                t.defineTopic({
+                    name: 'system:events',
+                    eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
+                });
+                const m = new TextMessage('system:events');
+                m.text = 'app registered';
+                service.sendTo('system:events', m);
+
+                let expectedMessage;
+                service.onMessage('system:events', (msg: Message) => {
+                    expectedMessage = (msg as TextMessage).text;
+                });
+                expect(expectedMessage).toBeUndefined();
+            }
+        ));
+
+
         it('should receive message by specific topic when subscribing before its published', inject(
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
@@ -87,6 +126,27 @@ describe('MessagingService', () => {
                 publisher.publish(m);
 
                 subscriber.unSubscribe();
+                expect(expectedMessage).toBe(m.text);
+            }
+        ));
+
+        it('onMessage():  should receive message by specific topic when subscribing before its published', inject(
+            [MessagingService, MessagingTopics],
+            (service: MessagingService, t: MessagingTopics) => {
+
+                t.defineTopic({
+                    name: 'system:events',
+                    eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
+                });
+                let expectedMessage = 'none';
+                service.onMessage('system:events', (msg: Message) => {
+                    expectedMessage = (msg as TextMessage).text;
+                });
+
+                const m = new TextMessage('system:events');
+                m.text = 'app registered';
+                service.sendTo('system:events', m);
+
                 expect(expectedMessage).toBe(m.text);
             }
         ));
