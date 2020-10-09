@@ -37,3 +37,15 @@
 </component-example>
 <code-example [exampleFiles]="wizardMobileExample"></code-example>
 <separator></separator>
+
+<fd-docs-section-title id="Wizard-Branching" componentName="wizard">Branching Wizard</fd-docs-section-title>
+<description>
+    A branching step connector can be used by applying the <code>[branching]</code> boolean input to the wizard step.
+    This should be used if one step may lead to two different steps afterwords. In this example, step 2 may take a user
+    to either a credit card information page or a bank transfer information page.
+</description>
+<component-example>
+    <fd-wizard-branching-example></fd-wizard-branching-example>
+</component-example>
+<code-example [exampleFiles]="wizardBranchingExample"></code-example>
+<separator></separator>
