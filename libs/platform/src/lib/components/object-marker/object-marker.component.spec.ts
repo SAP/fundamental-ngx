@@ -15,7 +15,7 @@ class TestPlatformPlatformObjectMarkerComponent {
     constructor() {}
 }
 
-fdescribe('PlatformObjectMarkerComponent', () => {
+describe('PlatformObjectMarkerComponent', () => {
     let component: PlatformObjectMarkerComponent;
     let host: TestPlatformPlatformObjectMarkerComponent;
     let fixture: ComponentFixture<TestPlatformPlatformObjectMarkerComponent>;
