@@ -43,7 +43,7 @@
                                 fd-button
                                 [compact]="true"
                                 fdType="negative"
-                                (click)="$event.stopPropagation()"
+                                (click)="closePage($event)"
                                 label="Reject"
                             ></button>
                         </fd-toolbar>
@@ -51,28 +51,18 @@
                     <fdp-dynamic-page-layout-actions>
                         <!-- layout actions -->
                         <fd-toolbar fdType="transparent" [clearBorder]="true">
-                            <button
-                                fd-button
-                                fdType="transparent"
-                                aria-label="Resize"
-                                (click)="$event.stopPropagation()"
-                            >
+                            <button fd-button fdType="transparent" aria-label="Resize" (click)="closePage($event)">
                                 <i class="sap-icon--resize"></i>
                             </button>
                             <button
                                 fd-button
                                 fdType="transparent"
                                 aria-label="Exit Fullscreen"
-                                (click)="$event.stopPropagation()"
+                                (click)="closePage($event)"
                             >
                                 <i class="sap-icon--exitfullscreen"></i>
                             </button>
-                            <button
-                                fd-button
-                                fdType="transparent"
-                                aria-label="Close"
-                                (click)="$event.stopPropagation()"
-                            >
+                            <button fd-button fdType="transparent" aria-label="Close" (click)="closePage($event)">
                                 <i class="sap-icon--decline"></i>
                             </button>
                         </fd-toolbar>
