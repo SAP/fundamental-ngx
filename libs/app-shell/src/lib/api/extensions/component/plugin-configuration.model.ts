@@ -125,9 +125,6 @@ export class Listener {
 }
 
 
-/**
- * should be expose TemplateRef?
- */
 export class Permission {
 
     constructor(public themingChange: boolean = true,

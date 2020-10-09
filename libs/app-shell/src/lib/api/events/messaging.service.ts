@@ -28,13 +28,48 @@ import { MessagingTopics } from './topics.service';
  */
 @Injectable()
 export class MessagingService implements MessageBus<Message>, OnDestroy {
-    private eventsRegistered: Map<string, EventType> = new Map<string, EventType>();
+    private publishers: Map<string, TopicPublisher<Message>> = new Map<string, TopicPublisher<Message>>();
+    private subscriptions: Array<TopicSubscriber<Message>>;
 
 
     constructor(private _config: MessagingConfig, private _pubSubService: NgxPubSubService,
                 private topics: MessagingTopics) {
+        this.subscriptions = [];
     }
 
+
+    onMessage(topic: string, event: (value: Message) => void, messageSelector?: (msg: Message) => boolean): void {
+        const topicDef = this.topics.getTopic(topic);
+        if (!topicDef) {
+            throw new Error('Invalid topic name: ' + topic);
+        }
+        const newSubscription = this.createSubscriber(topic, topicDef.eventType, messageSelector);
+        this.subscriptions.push(newSubscription);
+        newSubscription.onMessage((m: Message) => event(m));
+    }
+
+
+    sendTo(topic: string, message: Message): void {
+        const topicDef = this.topics.getTopic(topic);
+        if (!topicDef) {
+            throw new Error('Invalid topic name: ' + topic);
+        }
+
+        let publisher: TopicPublisher<Message>;
+        if (this.publishers.has(topic)) {
+            publisher = this.publishers.get(topic);
+        } else {
+            publisher = this.createPublisher(topic, topicDef.eventType);
+            this.publishers.set(topicDef.name, publisher);
+        }
+        publisher.publish(message);
+    }
+
+    /**
+     * This will became private API, please do not use. Use sentTo instead
+     * @deprecated
+     *
+     */
     createPublisher<T extends Message>(topic: string, type?: EventType): TopicPublisher<T> {
         this.assertTopicName(topic, type);
         const eventType = type || this.topics.getTopic((topic))?.eventType;
@@ -45,10 +80,15 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
         } else {
             return new NativeTopicPublisher(topic, eventType);
         }
-        this.eventsRegistered.set(topic, eventType);
     }
 
 
+    /**
+     * This will became private API, please do not use. Use onMessage instead
+     *
+     * @deprecated
+     *
+     */
     createSubscriber<T extends Message>(topic: string, type?: EventType,
                                         messageSelector?: (msg: Message) => boolean): TopicSubscriber<T> {
         this.assertTopicName(topic, type);
@@ -60,11 +100,12 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
         } else {
             return new NativeTopicSubscriber(topic, eventType);
         }
-        this.eventsRegistered.set(topic, eventType);
     }
 
     ngOnDestroy(): void {
-        this.eventsRegistered.forEach((v, k) => this._pubSubService.completeEvent(k));
+        this.subscriptions.forEach(s => s.unSubscribe());
+        this.publishers.forEach((v, k) =>
+            this._pubSubService.completeEvent(k));
     }
 
     private doCreateRxJSPublisher<T extends Message>(publisher: RxJSTopicPublisher<T>): TopicPublisher<T> {
