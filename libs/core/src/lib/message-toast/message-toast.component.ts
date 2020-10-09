@@ -185,13 +185,13 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
     }
 
     /** @hidden */
-    @HostListener('mouseenter', ['$event'])
+    @HostListener('mouseenter')
     handleMessageToastMouseEnterEvent(): void {
         this.mouseOverMessageToast = true;
     }
 
     /** @hidden */
-    @HostListener('mouseleave', ['$event'])
+    @HostListener('mouseleave')
     handleMessageToastMouseLeaveEvent(): void {
         this.mouseOverMessageToast = false;
     }
