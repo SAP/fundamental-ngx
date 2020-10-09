@@ -3,140 +3,181 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
-import { CardModule } from './card.module';
-import { CardComponent } from './card.component';
-import { CardType, CLASS_NAME } from './constants';
-import { getCardModifierClassNameByCardType } from './utils';
+import { whenStable } from '../utils/tests/when-stable';
+
+import { DynamicSideContentModule } from './dynamic-side-content.module';
+import { DynamicSideContentComponent } from './dynamic-side-content.component';
+import { DynamicSideSideComponent } from './dynamic-side-content-side.component';
+import { DynamicSideMainComponent } from './dynamic-side-content-main.component';
+import { DynamicSideContentPosition, DynamicSideContentSize, CLASS_NAME } from './constants';
 
 @Component({
     template: `
-        <fd-card [badge]="badgeText" [isLoading]="isLoading" [compact]="isCompact" [cardType]="cardType">
-            <fd-card-header>
-                <h2 fd-card-title>{{ titleText }}</h2>
-            </fd-card-header>
-            <fd-card-content>{{ contentText }}</fd-card-content>
-            <fd-card-footer>{{ footerText }}</fd-card-footer>
-
-            <fd-card-loader>{{ loaderText }}</fd-card-loader>
-        </fd-card>
+        <fd-dynamic-side [size]="size" [position]="position">
+            <fd-dynamic-side-side *ngIf="renderSideFromLeft">{{ sideTextContent }}</fd-dynamic-side-side>
+            <fd-dynamic-side-main>{{ mainTextContent }}</fd-dynamic-side-main>
+            <fd-dynamic-side-side *ngIf="!renderSideFromLeft">{{ sideTextContent }}</fd-dynamic-side-side>
+        </fd-dynamic-side>
     `
 })
-class CardHostTestComponent {
-    @ViewChild(CardComponent) card: CardComponent;
+class TestHostComponent {
+    @ViewChild(DynamicSideContentComponent) dynamicSideContent: DynamicSideContentComponent;
 
-    badgeText = 'New';
-    titleText = 'Card Title';
-    contentText = 'Card Content';
-    footerText = 'Card Footer';
-    loaderText = 'Loading...';
+    position: DynamicSideContentPosition = 'none';
+    size: DynamicSideContentSize = 'xl';
 
-    isLoading = false;
-    isCompact = false;
-    cardType: CardType = 'standard';
+    sideTextContent = 'SIDE_CONTENT_TEXT';
+    mainTextContent = 'MAIN_CONTENT_TEXT';
+
+    renderSideFromLeft = true;
 }
-describe('CardComponent', () => {
-    let fixture: ComponentFixture<CardHostTestComponent>;
-    let host: CardHostTestComponent;
-    let card: CardComponent;
+describe('DynamicSideContent', () => {
+    let fixture: ComponentFixture<TestHostComponent>;
+    let host: TestHostComponent;
+    let component: DynamicSideContentComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, CardModule],
-            declarations: [CardHostTestComponent]
+            imports: [CommonModule, DynamicSideContentModule],
+            declarations: [TestHostComponent]
         }).compileComponents();
     }));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(CardHostTestComponent);
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(TestHostComponent);
         host = fixture.componentInstance;
-        fixture.detectChanges();
-        card = host.card;
+        await whenStable(fixture);
+        component = host.dynamicSideContent;
     });
 
     it('should create', () => {
         expect(host).toBeTruthy();
     });
 
-    it('should add card className to host', () => {
-        const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
-        expect(cardDebugEl.classes[CLASS_NAME.card]).toBeTrue();
-    });
-
-    describe('badge option', () => {
+    describe('classNames on host element', () => {
         it('should has binding', () => {
-            expect(card.badge).toBe(host.badgeText);
+            expect(component.size).toBe(host.size);
         });
 
-        it('should render it in view', () => {
-            const badgeEl: HTMLElement = fixture.debugElement.query(By.css('[fd-badge]')).nativeElement;
-            expect(badgeEl?.innerText).toBe(host.badgeText);
-        });
-    });
-
-    it('should render title', () => {
-        const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
-        expect(cardEl.textContent.includes(host.titleText)).toBeTruthy();
-    });
-
-    it('should render content', () => {
-        const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
-        expect(cardEl.textContent.includes(host.contentText)).toBeTruthy();
-    });
-
-    it('should render footer', () => {
-        const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
-        expect(cardEl.textContent.includes(host.footerText)).toBeTruthy();
-    });
-
-    describe('loader', () => {
-        it('should has binding', () => {
-            expect(card.isLoading).toBe(host.isLoading);
+        it('should add container', () => {
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+            expect(componentDebugEl.classes[CLASS_NAME.container]).toBeTrue();
         });
 
-        it('should render only loader template if isLoading = true', () => {
-            host.isLoading = true;
-
+        it('should add modifier for position="equalSplit"', () => {
+            host.position = 'equalSplit';
             fixture.detectChanges();
 
-            const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+            expect(componentDebugEl.classes[CLASS_NAME.containerSideEqual]).toBeTrue();
+        });
 
-            expect(cardEl.textContent).toEqual(host.loaderText);
+        it('should add modifier for position="bottom"', () => {
+            host.position = 'bottom';
+            fixture.detectChanges();
+
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+            expect(componentDebugEl.classes[CLASS_NAME.containerSideBelow]).toBeTrue();
+        });
+
+        it('should add modifier for size option', () => {
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+
+            host.size = 'sm';
+            fixture.detectChanges();
+            expect(componentDebugEl.classes[CLASS_NAME.containerSizeSm]).toBeTrue();
+
+            host.size = 'md';
+            fixture.detectChanges();
+            expect(componentDebugEl.classes[CLASS_NAME.containerSizeMd]).toBeTrue();
+
+            host.size = 'lg';
+            fixture.detectChanges();
+            expect(componentDebugEl.classes[CLASS_NAME.containerSizeMd]).toBeTrue();
+
+            host.size = 'xl';
+            fixture.detectChanges();
+            expect(componentDebugEl.classes[CLASS_NAME.containerSizeXl]).toBeTrue();
         });
     });
 
-    describe('compact', () => {
-        it('should has binding', () => {
-            expect(card.compact).toBe(host.isCompact);
-        });
+    it('should render projected content', async () => {
+        const componentEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent))
+            .nativeElement as HTMLElement;
 
-        it('should apply corresponding className', () => {
-            host.isCompact = true;
-
-            fixture.detectChanges();
-
-            const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
-
-            expect(cardDebugEl.classes[CLASS_NAME.cardCompact]).toBeTrue();
-        });
+        expect(componentEl?.innerText).toContain(host.sideTextContent);
+        expect(componentEl?.innerText).toContain(host.mainTextContent);
     });
 
-    describe('cardType', () => {
+    describe('positioning', () => {
         it('should has binding', () => {
-            expect(card.cardType).toBe(host.cardType);
+            expect(component.position).toBe(host.position);
         });
 
-        it('should apply corresponding className and remove previous', () => {
-            const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
-
-            const prevCardType = card.cardType;
-            const prevCardTypeModifier = getCardModifierClassNameByCardType(prevCardType);
-            expect(cardDebugEl.classes[prevCardTypeModifier]).toBeTrue();
-
-            host.cardType = 'analytical';
-            const analyticalModifier = getCardModifierClassNameByCardType('analytical');
+        it('should render side content from the left if projected so', () => {
+            host.renderSideFromLeft = true; // left side-content projection
             fixture.detectChanges();
-            expect(cardDebugEl.classes[analyticalModifier]).toBeTrue();
-            expect(cardDebugEl.classes[prevCardTypeModifier]).not.toBeTrue();
+
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+        });
+
+        it('should render side content from the right if projected so', () => {
+            host.renderSideFromLeft = false; // right side-content projection
+            fixture.detectChanges();
+
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+        });
+
+        it('should render side content from the left if position="left"', () => {
+            host.renderSideFromLeft = false; // right side-content projection
+            host.position = 'left';
+            fixture.detectChanges();
+
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+        });
+
+        it('should render side content from the right if position="right"', () => {
+            host.renderSideFromLeft = true; // left side-content projection
+            host.position = 'right';
+            fixture.detectChanges();
+
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+        });
+
+        it('should render side content from the right if position="bottom"', () => {
+            host.renderSideFromLeft = true; // left side-content projection
+            host.position = 'bottom';
+            fixture.detectChanges();
+
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+        });
+
+        it('should render side content according to projection when position="equalSplit"', () => {
+            const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
+
+            host.position = 'equalSplit';
+
+            host.renderSideFromLeft = true; // left side-content projection
+            fixture.detectChanges();
+
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+
+            host.renderSideFromLeft = false; // right side-content projection
+            fixture.detectChanges();
+
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
         });
     });
 });

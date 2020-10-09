@@ -9,7 +9,8 @@ import {
     Input,
     HostBinding,
     ContentChildren,
-    QueryList
+    QueryList,
+    ChangeDetectorRef
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
@@ -42,6 +43,9 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
         this._position = position;
 
         this._calculateSidePosition();
+    }
+    get position(): DynamicSideContentPosition {
+        return this._position;
     }
 
     /**
@@ -78,7 +82,7 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     private _position: DynamicSideContentPosition = 'none';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>, private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -123,6 +127,8 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
             this._isSideProjectedAsFirst = this._children.first instanceof DynamicSideSideComponent;
 
             this._calculateSidePosition();
+
+            this._changeDetectorRef.markForCheck();
         });
     }
 
