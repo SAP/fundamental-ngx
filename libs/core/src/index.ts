@@ -61,3 +61,4 @@ export * from './lib/object-status/public_api';
 export * from './lib/wizard/public_api';
 export * from './lib/object-identifier/public_api';
 export * from './lib/card/public_api';
+export * from './lib/message-toast/public_api';
