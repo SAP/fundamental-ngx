@@ -73,6 +73,7 @@ export const API_FILES = {
         'FormSetDirective',
         'FormInputMessageGroupComponent'
     ],
+    formattedText: ['FormattedTextComponent'],
     formMessage: ['FormInputMessageGroupComponent'],
     globalConfig: [],
     icon: ['IconComponent'],
@@ -132,6 +133,7 @@ export const API_FILES = {
         'MenuKeyboardService'
     ],
     messageStrip: ['MessageStripComponent'],
+    messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
     dialog: [
         'DialogService',
         'DialogContainerComponent',
