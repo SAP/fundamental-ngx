@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.4...v0.23.0-rc.5) (2020-10-09)
+
+
+### Features
+
+* (Core) introduce Formatted text component [#3574](https://github.com/SAP/fundamental-ngx/issues/3574) ([#3574](https://github.com/SAP/fundamental-ngx/issues/3574)) ([cb343ba](https://github.com/SAP/fundamental-ngx/commit/cb343baae265de23370613df9a16a12fff7edcc8))
+
 ## [0.23.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.3...v0.23.0-rc.4) (2020-10-09)
 
 ## [0.23.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.2...v0.23.0-rc.3) (2020-10-09)
