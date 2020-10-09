@@ -35,11 +35,11 @@ export class DynamicSideSideComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this.addClassName(CLASS_NAME.side);
+        this._addClassName(CLASS_NAME.side);
     }
 
     /** @hidden */
-    private addClassName(className: string): void {
+    private _addClassName(className: string): void {
         return this._render.addClass(this._elementRef.nativeElement, className);
     }
 }
