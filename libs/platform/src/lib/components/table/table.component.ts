@@ -5,19 +5,23 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     forwardRef,
-    HostBinding,
     Input,
+    OnChanges,
     OnDestroy,
+    OnInit,
     Output,
-    QueryList
+    QueryList,
+    SimpleChanges,
+    ViewChild
 } from '@angular/core';
 
 import { isObservable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { KeyUtil } from '@fundamental-ngx/core';
+import { applyCssClass, CssClassBuilder, KeyUtil } from '@fundamental-ngx/core';
 import { ContentDensity, SelectionMode } from './enums';
 import { TableColumnComponent } from './table-column/table-column.component';
 import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
@@ -77,7 +81,7 @@ interface SelectableRow {
     templateUrl: './table.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent implements AfterViewInit, OnDestroy {
+export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy, CssClassBuilder {
     /** Data source for table data. */
     @Input()
     set dataSource(value: FdpTableDataSource<any>) {
@@ -90,16 +94,24 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     }
 
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
-    @Input() contentDensity: ContentDensity = ContentDensity.COZY;
+    @Input()
+    contentDensity: ContentDensity = ContentDensity.COZY;
 
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
-    @Input() selectionMode: SelectionMode = SelectionMode.NONE;
+    @Input()
+    selectionMode: SelectionMode = SelectionMode.NONE;
 
     /** Text displayed when table has no items. */
-    @Input() emptyTableMessage: string;
+    @Input()
+    emptyTableMessage = 'No data found';
 
     /** Event fired when table selection has changed. */
-    @Output() rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<any>> = new EventEmitter<TableRowSelectionChangeEvent<any>>();
+    @Output()
+    rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<any>> = new EventEmitter<TableRowSelectionChangeEvent<any>>();
+
+    /** @hidden */
+    @ViewChild('tableContainer')
+    tableContainer: ElementRef;
 
     /** @hidden */
     @ContentChildren(forwardRef(() => TableColumnComponent))
@@ -110,13 +122,7 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     tableToolbarComponent: TableToolbarComponent;
 
     /** @hidden */
-    @HostBinding('class.fd-table') fdTable = true;
-
-    /** @hidden */
-    @HostBinding('class.fd-table--compact') get isCompact(): boolean { return this.contentDensity === ContentDensity.COMPACT };
-
-    /** @hidden */
-    @HostBinding('class.fd-table--condensed') get isCondensed(): boolean { return this.contentDensity === ContentDensity.CONDENSED };
+    class: string;
 
     /** @hidden Formatted rows data. */
     rows: SelectableRow[] = [];
@@ -152,14 +158,39 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     constructor(private readonly _cd: ChangeDetectorRef) {}
 
     /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._cd.detectChanges();
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
+    }
+
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-table',
+            this.contentDensity === ContentDensity.COMPACT ? 'fd-table--compact' : '',
+            this.contentDensity === ContentDensity.CONDENSED ? 'fd-table--condensed' : ''
+        ];
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this.tableContainer;
     }
 
     /** @hidden Select/unselect one row in 'multiple' mode. */

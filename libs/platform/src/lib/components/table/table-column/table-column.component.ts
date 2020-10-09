@@ -49,13 +49,16 @@ enum ColumnAlignEnum {
 })
 export class TableColumnComponent implements OnInit, OnDestroy {
     /** Column unique identifier. */
-    @Input() name: string;
+    @Input()
+    name: string;
 
     /** Column data accessor. */
-    @Input() key: string;
+    @Input()
+    key: string;
 
     /** Column header label. */
-    @Input() label: string;
+    @Input()
+    label: string;
 
     /** Cell text alignment. */
     // @ts-ignore
@@ -81,11 +84,11 @@ export class TableColumnComponent implements OnInit, OnDestroy {
         return this._align;
     }
 
-    /** @hidden */
-    @ContentChild(FdpCellDef) fdpCellDef: FdpCellDef;
+    @ContentChild(FdpCellDef)
+    fdpCellDef: FdpCellDef;
 
-    /** @hidden */
-    @ContentChild(FdpHeaderCellDef) fdpHeaderCellDef: FdpHeaderCellDef;
+    @ContentChild(FdpHeaderCellDef)
+    fdpHeaderCellDef: FdpHeaderCellDef;
 
     /** @hidden */
     private _align$: BehaviorSubject<ColumnAlignEnum> = new BehaviorSubject<ColumnAlignEnum>(null);

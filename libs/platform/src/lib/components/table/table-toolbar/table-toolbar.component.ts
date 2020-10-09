@@ -27,23 +27,26 @@ import { TableToolbarActionsComponent } from '../table-toolbar-actions/table-too
 })
 export class TableToolbarComponent implements AfterViewInit {
     /** Table title. */
-    @Input() title: string;
+    @Input()
+    title: string;
 
     /** Toggle to show table item count. */
-    @Input() hideItemCount: boolean;
+    @Input()
+    hideItemCount: boolean;
 
     /** @hidden */
     @ContentChild(TableToolbarActionsComponent)
     tableToolbarActionsComponent: TableToolbarActionsComponent;
 
     /** @hidden */
-    @ViewChild(TemplateRef) contentTemplateRef: TemplateRef<any>;
+    @ViewChild(TemplateRef)
+    contentTemplateRef: TemplateRef<any>;
 
     /** @hidden */
-    constructor(private readonly cd: ChangeDetectorRef) {}
+    constructor(private readonly _cd: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.cd.detectChanges();
+        this._cd.detectChanges();
     }
 }

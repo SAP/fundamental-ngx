@@ -19,5 +19,6 @@ import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@ang
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableToolbarActionsComponent {
-    @ViewChild(TemplateRef) contentTemplateRef: TemplateRef<any>;
+    @ViewChild(TemplateRef)
+    contentTemplateRef: TemplateRef<any>;
 }
