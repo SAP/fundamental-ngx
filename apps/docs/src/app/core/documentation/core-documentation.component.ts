@@ -35,6 +35,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/icon', name: 'Icon' },
             { url: 'core/file-uploader', name: 'File Uploader' },
             { url: 'core/form-message', name: 'Form Message' },
+            { url: 'core/formatted-text', name: 'Formatted Text' },
             { url: 'core/info-label', name: 'Info Label' },
             { url: 'core/inlineHelp', name: 'Inline Help' },
             { url: 'core/input', name: 'Input' },
