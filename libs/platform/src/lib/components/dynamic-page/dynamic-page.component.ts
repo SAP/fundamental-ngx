@@ -164,7 +164,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     ngAfterViewInit(): void {
         this._setTabStyles();
         this._setToolbarStyles();
-        this._listenToChildrenQueryListChanges();
         this._setTabContainerPosition();
         this._setContainerPosition();
 
@@ -199,7 +198,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
                 // set tabs to sticky if present
                 this._setTabsPosition();
-                if (scrollPosition > 10) {
+                if (scrollPosition > 0) {
                     this._dynamicPageService.collapseHeader();
                 } else {
                     this._dynamicPageService.expandHeader();
@@ -208,7 +207,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
                     this._resetTabContainerTopPosition();
                 }
             });
-            this._setContainerPosition();
         });
     }
 
@@ -340,11 +338,14 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     /** @hidden */
     private _createContent(): void {
         const content = this.tabbedContent.toArray();
-        // reset arrays
+        // reset array
         this.tabs = [];
         if (content) {
             content.forEach((contentItem) => {
                 if (!contentItem.tabLabel) {
+                    if (this.isTabbed) {
+                        throw new Error('At least one element is already tabbed, please provide a `tabLabel`');
+                    }
                     this.isTabbed = false;
                 } else {
                     this.isTabbed = true;

@@ -144,19 +144,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     headerContent: ElementRef<HTMLElement>;
 
     /**
-     * subscription for when toggle header is called
-     */
-    _toggleSubscription: Subscription;
-    /**
-     * subscription for when expand header is called
-     */
-    _expandSubscription: Subscription;
-    /**
-     * subscription for when collapse header is called
-     */
-    _collapseSubscription: Subscription;
-
-    /**
      * tracking if pin button is pinned
      */
     pinned = false;
@@ -195,6 +182,24 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * tracks the size for responsive padding
      */
     private _size: DynamicPageResponsiveSize;
+
+    /**
+     * @hidden
+     * subscription for when toggle header is called
+     */
+    private _toggleSubscription: Subscription;
+
+    /**
+     * @hidden
+     * subscription for when expand header is called
+     */
+    private _expandSubscription: Subscription;
+
+    /**
+     * @hidden
+     * subscription for when collapse header is called
+     */
+    private _collapseSubscription: Subscription;
 
     /** @hidden */
     constructor(
