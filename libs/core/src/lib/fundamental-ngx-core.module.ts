@@ -71,6 +71,7 @@ import { ObjectIdentifierModule } from './object-identifier/object-identifier.mo
 import { ObjectMarkerModule } from './object-marker/object-marker.module';
 import { MessageToastModule } from './message-toast/message-toast.module';
 import { MessageToastService } from './message-toast/message-toast-service/message-toast.service';
+import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-content.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -140,7 +141,8 @@ import { MessageToastService } from './message-toast/message-toast-service/messa
         TokenModule,
         TreeModule,
         CardModule,
-        MessageToastModule
+        MessageToastModule,
+        DynamicSideContentModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService]
 })
