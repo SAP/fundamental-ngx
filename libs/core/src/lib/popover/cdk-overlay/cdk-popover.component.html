@@ -1,6 +1,7 @@
 <div #trigger="cdkOverlayOrigin"
      cdkOverlayOrigin
      class="fd-popover__control"
+     (keydown)="triggerKeyDownHandler($event)"
      [ngClass]="additionalTriggerClass">
     <span class="fd-popover__arrow" [ngClass]="'fd-popover__arrow--' + arrowPosition" *ngIf="!noArrow"></span>
     <ng-content select="fd-popover-control"></ng-content>
@@ -11,7 +12,10 @@
     <div class="fd-popover__popper fd-popover__popper--cdk-custom"
          [class.fd-popover__popper--no-arrow]="noArrow"
          [ngClass]="additionalBodyClass"
-         [style]="marginStyle">
+         [cdkTrapFocus]="focusTrapped"
+         [cdkTrapFocusAutoCapture]="focusAutoCapture"
+         [style]="marginStyle"
+         (keydown)="bodyKeydownHandler($event)">
         <ng-content select="fd-popover-body"></ng-content>
     </div>
 </ng-template>

@@ -31,6 +31,7 @@ import {
 } from './examples/popover-container-example/popover-container-example.component';
 import { PopoverScrollExampleComponent } from './examples/popover-scroll-example/popover-scroll-example.component';
 import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
+import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
 
 const routes: Routes = [
     {
@@ -73,7 +74,8 @@ const routes: Routes = [
         PopoverComplexExampleComponent,
         PopoverContainerExampleComponent,
         PopoverScrollExampleComponent,
-        PopoverCdkPlacementExampleComponent
+        PopoverCdkPlacementExampleComponent,
+        PopoverFocusExampleComponent
     ]
 })
 export class PopoverDocsModule {}

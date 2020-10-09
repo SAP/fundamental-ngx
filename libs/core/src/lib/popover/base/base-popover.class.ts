@@ -53,6 +53,13 @@ export class BasePopoverClass {
     focusTrapped = false;
 
     /**
+     * Whether the popover should automatically move focus into the trapped region upon
+     * initialization and return focus to the previous activeElement upon destruction.
+     */
+    @Input()
+    focusAutoCapture = false;
+
+    /**
      * Scroll strategy, there are 4 accepted
      * - CloseScrollStrategy
      * - NoopScrollStrategy

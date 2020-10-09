@@ -30,8 +30,8 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 import { ConnectedOverlayPositionChange, ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
-import { DefaultPositions, Placement, PopoverPosition } from './popover-position';
-import { PopoverFillMode } from '../../..';
+import { DefaultPositions, PopoverPosition } from './popover-position';
+import { KeyUtil } from '../../..';
 
 let popoverUniqueId = 0;
 
@@ -211,6 +211,20 @@ export class CdkPopoverComponent extends BasePopoverClass
     refreshPosition(): void {
         if (this._overlayRef) {
             this._overlayRef.updatePosition();
+        }
+    }
+
+    /** Handler for alt + arrow down keydown */
+    triggerKeyDownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKey(event, 'ArrowDown') && event.altKey && !this.isOpen) {
+            this.open();
+        }
+    }
+
+    /** Handler escape keydown */
+    bodyKeydownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKey(event, 'Escape') && this.isOpen && this.closeOnEscapeKey) {
+            this.close();
         }
     }
 

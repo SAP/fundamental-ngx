@@ -8,8 +8,8 @@ $fd-popover-arrow-width: 1rem !default;
 $fd-popover-arrow-height: 0.5rem !default;
 $fd-popover-arrow-width-half: $fd-popover-arrow-width/2 !default;
 $fd-popover-arrow-offset: 0.5rem !default;
-$fd-popover-arrow-color: var(--sapContent_ForegroundBorderColor) !default;
-$fd-popover-background-color: var(--sapGroup_ContentBackground) !default;
+$fd-popover-arrow-color: var(--sapContent_ForegroundBorderColor, #89919a) !default;
+$fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
 
 .fd-popover__arrow {
     box-sizing: border-box;
