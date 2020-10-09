@@ -1,0 +1,47 @@
+<label fd-form-label>Block Scroll strategy</label>
+<fd-popover [scrollStrategy]="blockScrollStrategy">
+    <fd-popover-control><button fd-button label="This popover will stay in same position"></button></fd-popover-control>
+    <fd-popover-body>
+        <div style="padding: 12px;">
+            Start scrolling to see behaviour
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<br><br><br>
+
+<label fd-form-label>Noop Scroll strategy</label>
+<fd-popover [scrollStrategy]="noopScrollStrategy">
+    <fd-popover-control><button fd-button label="This popover will stay in same position"></button></fd-popover-control>
+    <fd-popover-body>
+        <div style="padding: 12px;">
+            Start scrolling to see behaviour
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<br><br><br>
+
+<label fd-form-label>Close Scroll strategy</label>
+<fd-popover [scrollStrategy]="closeScrollStrategy">
+    <fd-popover-control><button fd-button label="This popover will be closed on scroll"></button></fd-popover-control>
+    <fd-popover-body>
+        <div style="padding: 12px;">
+            Start scrolling to see behaviour
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<br><br><br>
+
+<label fd-form-label>Reposition Scroll strategy</label>
+<fd-popover [scrollStrategy]="repositionScrollStrategy">
+    <fd-popover-control><button fd-button label="This popover will follow this button on scroll"></button></fd-popover-control>
+    <fd-popover-body>
+        <div style="padding: 12px;">
+            Start scrolling to see behaviour
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+

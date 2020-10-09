@@ -101,4 +101,10 @@ $fd-popover-background-color: var(--sapGroup_ContentBackground) !default;
 
 .fd-popover__popper.fd-popover__popper--cdk-custom {
     position: relative;
+    width: 100%;
 }
+
+.fd-popover-custom {
+    display: inline-block;
+}
+

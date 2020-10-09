@@ -27,6 +27,7 @@ import { PopoverComplexExampleComponent } from './examples/popover-complex-examp
 import {
     PopoverContainerExampleComponent
 } from './examples/popover-container-example/popover-container-example.component';
+import { PopoverScrollExampleComponent } from './examples/popover-scroll-example/popover-scroll-example.component';
 
 const routes: Routes = [
     {
@@ -65,7 +66,8 @@ const routes: Routes = [
         PopoverPlacementExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
         PopoverComplexExampleComponent,
-        PopoverContainerExampleComponent
+        PopoverContainerExampleComponent,
+        PopoverScrollExampleComponent
     ]
 })
 export class PopoverDocsModule {}

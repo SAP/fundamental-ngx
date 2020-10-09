@@ -1,19 +1,17 @@
-<fd-popover>
-    <fd-popover-control>
-        <div style="border: 1px dashed black; padding: 20px;">
-            Trigger
-        </div>
-    </fd-popover-control>
-    <fd-popover-body>
-        <div style="padding: 12px;">
-            <p>This is a large popover!</p>
-            <br />
-            <p>It will try to match the width of the control element.</p>
-        </div>
-    </fd-popover-body>
-</fd-popover>
 
+<div style="padding: 100px; text-align: center;">
+    <fd-popover [connectTo]="element" style="display: block">
+        <fd-popover-control>
+            <button fd-button>Trigger</button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div style="padding: 12px;">
+                This popover is connected to other element
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+</div>
 
-<div style="border: 1px dashed black; padding: 20px;" fd-popover-container>
+<div style="border: 1px dashed black; padding: 20px;" #element>
     Container
 </div>
