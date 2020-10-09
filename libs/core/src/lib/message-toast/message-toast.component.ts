@@ -46,7 +46,7 @@ let messageToastUniqueId = 0;
 export class MessageToastComponent implements OnInit, AfterViewInit {
     /** @hidden */
     constructor(
-        private elRef: ElementRef,
+        private _elRef: ElementRef,
         private cdRef: ChangeDetectorRef,
         private componentFactoryResolver: ComponentFactoryResolver,
         private ngZone: NgZone,
@@ -104,7 +104,7 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
 
     /** Event fired when the message toast is timeout. */
     @Output()
-    onTimeout: EventEmitter<undefined> = new EventEmitter<undefined>();
+    onHide: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     /** @hidden */
     mouseOverMessageToast = false;
@@ -147,10 +147,10 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
         if (this.messageToastRef) {
             this.messageToastRef.timeout();
         } else {
-            this.elRef.nativeElement.classList.add('fd-has-display-none');
-            this.elRef.nativeElement.classList.remove('fd-has-display-block');
+            this._elRef.nativeElement.classList.add('fd-has-display-none');
+            this._elRef.nativeElement.classList.remove('fd-has-display-block');
         }
-        this.onTimeout.emit();
+        this.onHide.emit();
     }
 
     /**
@@ -158,28 +158,28 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
      */
     open(): void {
         if (!this.messageToastRef) {
-            if (this.elRef.nativeElement.style.display === 'block') {
+            if (this._elRef.nativeElement.style.display === 'block') {
                 return;
             }
-            this.elRef.nativeElement.classList.remove('fd-has-display-none');
-            this.elRef.nativeElement.classList.add('fd-has-display-block');
+            this._elRef.nativeElement.classList.remove('fd-has-display-none');
+            this._elRef.nativeElement.classList.add('fd-has-display-block');
         }
 
         if (this.duration >= 0) {
             this.ngZone.runOutsideAngular(() => {
                 setTimeout(() => {
-                    if (this.mousePersist) {
-                        const wait = () => {
-                            if (this.mouseOverMessageToast === true) {
-                                setTimeout(wait, 500);
-                            } else {
-                                this.ngZone.run(() => this.close());
-                            }
-                        };
-                        wait();
-                    } else {
+                    if (!this.mousePersist) {
                         this.ngZone.run(() => this.close());
+                        return;
                     }
+                    const wait = () => {
+                        if (this.mouseOverMessageToast === true) {
+                            setTimeout(wait, 500);
+                        } else {
+                            this.ngZone.run(() => this.close());
+                        }
+                    };
+                    wait();
                 }, this.duration);
             });
         }
@@ -187,13 +187,14 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     @HostListener('mouseenter', ['$event'])
+    handleMessageToastMouseEnterEvent(): void {
+        this.mouseOverMessageToast = true;
+    }
+
+    /** @hidden */
     @HostListener('mouseleave', ['$event'])
-    handleMessageToastMouseEvent(event): void {
-        if (event.type === 'mouseenter') {
-            this.mouseOverMessageToast = true;
-        } else if (event.type === 'mouseleave') {
-            this.mouseOverMessageToast = false;
-        }
+    handleMessageToastMouseLeaveEvent(): void {
+        this.mouseOverMessageToast = false;
     }
 
     /** @hidden */

@@ -114,9 +114,9 @@ describe('MessageToastComponent', () => {
     }));
 
     it('should handle mouseenter/mouseleave events', () => {
-        component.handleMessageToastMouseEvent({ type: 'mouseenter' });
+        component.handleMessageToastMouseEnterEvent();
         expect(component.mouseOverMessageToast).toBeTruthy();
-        component.handleMessageToastMouseEvent({ type: 'mouseleave' });
+        component.handleMessageToastMouseLeaveEvent();
         expect(component.mouseOverMessageToast).toBeFalsy();
     });
 });
