@@ -12,7 +12,7 @@ import { Placement } from 'popper.js';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
 import { ACTION_SHEET_COMPONENT, ActionSheetInterface } from './action-sheet.interface';
-import {ActionSheetItemComponent, AvatarComponent} from '../..';
+import {ActionSheetItemComponent} from './action-sheet-item/action-sheet-item.component';
 
 
 @Component({
