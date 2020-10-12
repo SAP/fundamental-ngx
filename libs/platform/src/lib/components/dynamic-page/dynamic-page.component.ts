@@ -133,15 +133,14 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
         private _dynamicPageService: DynamicPageService,
-        private scrollDispatcher: ScrollDispatcher,
-        private zone: NgZone
+        private _scrollDispatcher: ScrollDispatcher,
+        private _zone: NgZone
     ) {
         super(_cd);
         this._collapseValSubscription = this._dynamicPageService.$collapseValue.subscribe((val) => {
             this._setTabsPosition();
             this._setContainerPosition();
             this._setTabContainerPosition();
-            this._resetTabContainerTopPosition();
         });
     }
 
@@ -164,6 +163,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     ngAfterViewInit(): void {
         this._setTabStyles();
         this._setToolbarStyles();
+        this._setTabsPosition();
         this._setTabContainerPosition();
         this._setContainerPosition();
 
@@ -190,21 +190,14 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * Snap the header to expand or collapse based on scrolling. Uses CDKScrollable.
      */
     snapOnScroll(): void {
-        this._scrollSubscription = this.scrollDispatcher.scrolled(10).subscribe((cdk: CdkScrollable) => {
-            this.zone.run(() => {
+        this._scrollSubscription = this._scrollDispatcher.scrolled(10).subscribe((cdk: CdkScrollable) => {
+            this._zone.run(() => {
                 const scrollPosition = cdk.measureScrollOffset('top');
                 this.header.nativeElement.style.position = 'fixed';
-                this._setTabContainerPosition();
-
-                // set tabs to sticky if present
-                this._setTabsPosition();
                 if (scrollPosition > 0) {
                     this._dynamicPageService.collapseHeader();
                 } else {
                     this._dynamicPageService.expandHeader();
-                    this._setTabContainerPosition();
-                    this._setTabsPosition();
-                    this._resetTabContainerTopPosition();
                 }
             });
         });
@@ -238,20 +231,14 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
             tabList.style.position = 'fixed';
             tabList.style.left = '0';
             tabList.style.right = '0';
+            this.tabs.forEach((element) => {
+                element.contentTop = tabList.offsetHeight + 'px';
+            });
         }
     }
     private _setTabContainerPosition(): void {
         if (this.contentContainer) {
             this.contentContainer.nativeElement.style.top = this.header.nativeElement.offsetHeight + 'px';
-        }
-    }
-
-    private _resetTabContainerTopPosition(): void {
-        const tabList: HTMLElement = this._elementRef.nativeElement.querySelector('.fd-tabs');
-        if (tabList) {
-            this.tabs.forEach((element) => {
-                element.contentTop = tabList.offsetHeight + 'px';
-            });
         }
     }
 
@@ -323,8 +310,61 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
             'fdp-dynamic-page-layout-actions .fd-toolbar'
         );
         if (layoutToolbarEl) {
-            addClassNameToElement(this._renderer, layoutToolbarEl, CLASS_NAME.dynamicPageGlobalActions);
             addClassNameToElement(this._renderer, layoutToolbarEl, CLASS_NAME.dynamicPageLayoutActions);
+        }
+
+        const actionsContainerEl = this._elementRef.nativeElement.querySelector(
+            '.' + CLASS_NAME.dynamicPageActionsContainer
+        );
+        // set toolbar sizes
+        this._setToolbarsSize(this.size, actionsContainerEl, globalToolbarEl, layoutToolbarEl);
+    }
+
+    /**
+     * @hidden
+     * add size classes to toolbars
+     * @param sizeType
+     * @param element
+     */
+    _setToolbarsSize(
+        sizeType: DynamicPageResponsiveSize,
+        actionsContainer: Element,
+        globalActions: Element,
+        layoutActions: Element
+    ): void {
+        switch (sizeType) {
+            case 'small':
+                if (globalActions) {
+                    this._addClassNameToCustomElement(globalActions, CLASS_NAME.dynamicPageGlobalActionsToolbarSmall);
+                }
+                break;
+            case 'medium':
+                if (actionsContainer) {
+                    this._addClassNameToCustomElement(actionsContainer, CLASS_NAME.dynamicPageActionsContainerMedium);
+                    const globalActionsEl: HTMLElement = actionsContainer.querySelector(
+                        'fdp-dynamic-page-global-actions'
+                    );
+                    const layoutActionsEl: HTMLElement = actionsContainer.querySelector(
+                        'fdp-dynamic-page-layout-actions'
+                    );
+                    if (globalActionsEl) {
+                        globalActionsEl.style.order = '2';
+                    }
+                    if (layoutActionsEl) {
+                        layoutActionsEl.style.order = '1';
+                    }
+                }
+                if (globalActions) {
+                    this._addClassNameToCustomElement(globalActions, CLASS_NAME.dynamicPageGlobalActionsToolbarMedium);
+                }
+                if (layoutActions) {
+                    this._addClassNameToCustomElement(layoutActions, CLASS_NAME.dynamicPageLayoutActionsToolbarMedium);
+                }
+                break;
+            case 'large':
+            case 'extra-large':
+            default:
+                break;
         }
     }
 
@@ -340,19 +380,29 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         const content = this.tabbedContent.toArray();
         // reset array
         this.tabs = [];
+        if (!this._isTabContentPresent(content)) {
+            return;
+        }
         if (content) {
             content.forEach((contentItem) => {
-                if (!contentItem.tabLabel) {
-                    if (this.isTabbed) {
-                        throw new Error('At least one element is already tabbed, please provide a `tabLabel`');
-                    }
-                    this.isTabbed = false;
+                if (!contentItem.tabLabel && this.isTabbed) {
+                    throw new Error('At least one element is already tabbed, please provide a `tabLabel`');
                 } else {
-                    this.isTabbed = true;
                     this.tabs.push(contentItem);
                 }
             });
         }
+    }
+
+    /**@hidden */
+    private _isTabContentPresent(content: DynamicPageContentComponent[]): boolean {
+        content.forEach((contentItem) => {
+            if (contentItem.tabLabel) {
+                this.isTabbed = true;
+                return;
+            }
+        });
+        return this.isTabbed;
     }
 
     /**@hidden */
