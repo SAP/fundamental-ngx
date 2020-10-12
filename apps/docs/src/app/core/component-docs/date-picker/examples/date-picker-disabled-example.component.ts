@@ -9,4 +9,5 @@ import { FdDate } from '@fundamental-ngx/core';
 })
 export class DatePickerDisabledExampleComponent {
     date = FdDate.getToday();
+    
 }
