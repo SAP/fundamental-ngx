@@ -80,12 +80,6 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
         this.onChanges();
     }
 
-    /** @hidden */
-    onChanges(): void {
-        this.buildComponentCssClass();
-        this.buildNumberPipeConfig();
-    }
-
     @applyCssClass
     /** CssClassBuilder interface implementation
      * function must return single string
@@ -101,12 +95,18 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     }
 
     /** @hidden */
-    buildNumberPipeConfig(): void {
-        this._numberPipeConfig = `0.${this.decimal}-${this.decimal}`;
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
+    private onChanges(): void {
+        this.buildComponentCssClass();
+        this.buildNumberPipeConfig();
+    }
+
+    /** @hidden */
+    private buildNumberPipeConfig(): void {
+        this._numberPipeConfig = `0.${this.decimal}-${this.decimal}`;
     }
 }
