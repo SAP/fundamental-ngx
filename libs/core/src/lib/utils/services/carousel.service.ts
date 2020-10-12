@@ -92,7 +92,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /** Change active element */
-    goToItem(item: CarouselItemInterface, smooth?: boolean): void {
+    goToItem(item: CarouselItemInterface, smooth?: boolean, languageDirection?: string): void {
         let index: number = this.getIndexOfItem(item);
         if (this.config.infinite) {
             this._centerActive(index);
@@ -100,12 +100,12 @@ export class CarouselService implements OnDestroy {
             index = this.getIndexOfItem(item);
         }
 
-        this._transitionToIndex(index, smooth);
+        this._transitionToIndex(index, smooth, languageDirection);
 
         this._previousActiveItem = item;
     }
 
-    pickNext(): void {
+    pickNext(languageDirection = 'ltr'): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
             this.active = carouselArray[0]
@@ -113,19 +113,19 @@ export class CarouselService implements OnDestroy {
         const activeItemIndex: number = carouselArray.findIndex(item => item === this.active);
 
         const itemToActivate = carouselArray[activeItemIndex + 1];
-        this.goToItem(itemToActivate, true);
+        this.goToItem(itemToActivate, true, languageDirection);
         this.active = itemToActivate
     }
 
 
-    pickPrevious(): void {
+    pickPrevious(languageDirection = 'ltr'): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
             this.active = carouselArray[2];
         }
         const activeItemIndex: number = carouselArray.findIndex(item => item === this.active);
         const itemToActivate = carouselArray[activeItemIndex - 1];
-        this.goToItem(itemToActivate, true);
+        this.goToItem(itemToActivate, true, languageDirection);
         this.active = itemToActivate
     }
 
@@ -160,8 +160,8 @@ export class CarouselService implements OnDestroy {
     }
 
     /** @hidden */
-    private _transitionToIndex(index: number, smooth?: boolean): void {
-        const transitionPx: number = this._getSize(this.items.first) * index;
+    private _transitionToIndex(index: number, smooth?: boolean, languageDirection?: string): void {
+        let transitionPx: number = this._getSize(this.items.first) * index;
 
         if (smooth) {
             this._elementRef.nativeElement.style.transitionDuration = this._getTransition();
@@ -169,7 +169,10 @@ export class CarouselService implements OnDestroy {
             this._elementRef.nativeElement.style.transitionDuration = '0s';
         }
 
-        this._transitionCarousel(-transitionPx);
+        if (languageDirection === 'ltr') {
+            transitionPx = - transitionPx;
+        }
+        this._transitionCarousel(transitionPx);
     }
 
     /** Get closes element, based on current transition */
@@ -214,7 +217,6 @@ export class CarouselService implements OnDestroy {
         if (this.config.vertical) {
             return item.getHeight();
         } else {
-            console.log('item.getWidth(): ', item.getWidth());
             return item.getWidth();
         }
     }

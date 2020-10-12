@@ -1,6 +1,5 @@
-<div class="fd-carousel" [class.fd-carousel--no-navigation]="!navigation" data-ride="carousel"
-    [style.height]="height" [style.width]="width" [attr.dir]="dir" [attr.aria-label]="ariaLabel"
-    [attr.aria-labelledby]="ariaLabelledBy" [attr.aria-describedby]="ariaDescribedBy">
+<div class="fd-carousel" [class.fd-carousel--no-navigation]="!navigation" data-ride="carousel" [style.height]="height"
+    [style.width]="width" [attr.dir]="dir">
 
     <ng-container *ngIf="pageIndicatorContainer && carouselIndicatorsOrientation === 'top'">
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>

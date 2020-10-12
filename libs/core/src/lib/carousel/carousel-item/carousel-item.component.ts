@@ -26,14 +26,17 @@ export class CarouselItemComponent implements CarouselItemInterface {
 
     /** Sets aria-label attribute for carousel item */
     @Input()
+    @HostBinding('attr.aria-label')
     ariaLabel: string;
 
     /** Sets aria-labelledby attribute for carousel item */
     @Input()
+    @HostBinding('attr.aria-labelledby')
     ariaLabelledBy: string;
 
     /** Sets aria-describedby attribute for carousel item */
     @Input()
+    @HostBinding('attr.aria-describedby')
     ariaDescribedBy: string;
 
     @HostBinding('class.fd-carousel__item')
@@ -47,6 +50,16 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @HostBinding('attr.title')
     title = 'carousel item';
 
+    /** Initial height value, needed when carousel is inside popover */
+    @Input()
+    @HostBinding('style.height')
+    initialHeight: number;
+
+    /** Initial height value, needed when carousel is inside popover */
+    @Input()
+    @HostBinding('style.width')
+    initialWidth: number;
+
     /** Value of carousel item */
     @Input()
     value: any;
@@ -55,12 +68,12 @@ export class CarouselItemComponent implements CarouselItemInterface {
 
     /** Width of element */
     getWidth(): number {
-        return this._elementRef.nativeElement.getBoundingClientRect().width;
+        return this._elementRef.nativeElement.getBoundingClientRect().width || this.initialWidth;
     }
 
     /** Height of element */
     getHeight(): number {
-        return this._elementRef.nativeElement.getBoundingClientRect().height;
+        return this._elementRef.nativeElement.getBoundingClientRect().height || this.initialHeight;
     }
 
     /** Native element  */

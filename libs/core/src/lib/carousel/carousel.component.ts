@@ -20,18 +20,15 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { RtlService } from '@fundamental-ngx/core';
 import { FdCarouselResourceStrings, CarouselResourceStringsEN } from './i18n/carousel-resources';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselService, CarouselConfig } from '../utils/services/carousel.service';
+import { RtlService } from '../utils/services/rtl.service';
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
 
-export const CarouselIndicatorsOrientation = {
-    bottom: 'bottom',
-    top: 'top'
-};
+export type CarouselIndicatorsOrientation = 'bottom' | 'top';
 
 export enum SlideDirection {
     None,
@@ -50,7 +47,8 @@ class CarouselActiveSlides {
     templateUrl: './carousel.component.html',
     styleUrls: ['./carousel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [CarouselService]
 })
 export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
     /** Id for the Carousel. */
@@ -72,7 +70,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Sets position of page indicator container. Default position is bottom. */
     @Input()
-    carouselIndicatorsOrientation = CarouselIndicatorsOrientation.bottom;
+    carouselIndicatorsOrientation: CarouselIndicatorsOrientation = 'bottom';
 
     /** Height for carousel container */
     @Input()
@@ -152,6 +150,12 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         return 0;
     }
 
+    /**
+     * Sets the overflow to auto value.
+     */
+    @HostBinding('style.overflow')
+    overflow = 'auto'
+    
     /** Is carousel is vertical. Default value is false. */
     @Input()
     vertical = false;
@@ -194,8 +198,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        private readonly _carouselService: CarouselService,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _carouselService: CarouselService,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -276,8 +280,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     public previous(): void {
         this.rightButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
-        this._carouselService.pickPrevious();
+        this._carouselService.pickPrevious(this.dir);
         this._notifySlideChange(SlideDirection.PREVIOUS);
+        this._changeDetectorRef.detectChanges();
     }
 
     /** Transitions to the next slide in the carousel. */
@@ -285,8 +290,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         // Moving to next slide
         this.leftButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.NEXT);
-        this._carouselService.pickNext();
+        this._carouselService.pickNext(this.dir);
         this._notifySlideChange(SlideDirection.NEXT);
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden Adjust position of active item, based on slide direction */

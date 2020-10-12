@@ -51,7 +51,7 @@ export const API_FILES = {
         'DateFormatParserDefault',
         'FdDate'
     ],
-    carousel: ['CarouselComponent', 'CarouselItemComponent'],
+    carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
     datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
