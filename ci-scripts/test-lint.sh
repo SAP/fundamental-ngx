@@ -34,7 +34,7 @@ if [ -z "$platform"  ]
 then
     echo There are no changes at platform
 else
-    npm run test:platform && npm run lint:platform
+    npm run lint:platform
     handle_error
 fi
 
