@@ -6,11 +6,9 @@
             [isOpen]="open && displayedValues && displayedValues.length"
             (isOpenChange)="openChangeHandle($event)"
             [triggers]="[]"
+            [focusTrapped]="true"
             [disabled]="disabled"
-            [closeOnEscapeKey]="true"
-            [closeOnOutsideClick]="true"
             [fillControlMode]="fillControlMode"
-            appendTo="body"
             class="fd-multi-input-popover-custom"
         >
             <fd-popover-control>

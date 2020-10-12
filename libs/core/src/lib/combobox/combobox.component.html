@@ -5,6 +5,7 @@
         [isOpen]="open && displayedValues && displayedValues.length"
         (isOpenChange)="isOpenChangeHandle($event)"
         [fillControlMode]="'at-least'"
+        [focusTrapped]="true"
         [triggers]="triggers"
         [disabled]="disabled || readOnly"
         [closeOnOutsideClick]="closeOnOutsideClick"

@@ -1,7 +1,7 @@
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
+    Component, ElementRef,
     EventEmitter,
     forwardRef,
     Input,
@@ -134,7 +134,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** The element to which the popover should be appended. */
     @Input()
-    appendTo: HTMLElement | 'body' = 'body';
+    appendTo: ElementRef;
 
     /** Whether the date picker is disabled. */
     @Input()

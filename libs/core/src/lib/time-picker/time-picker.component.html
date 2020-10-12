@@ -4,6 +4,7 @@
             [disabled]="disabled"
             [placement]="placement"
             [closeOnEscapeKey]="true"
+            [focusAutoCapture]="true"
             [focusTrapped]="true">
     <fd-popover-control>
         <fd-input-group
@@ -33,6 +34,7 @@
     <fd-popover-body *ngIf="displaySeconds || displayMinutes || displayHours">
         <ng-content></ng-content>
         <fd-time
+            *ngIf="isOpen"
             [tablet]="tablet"
             [compact]="compact"
             [disabled]="disabled"
