@@ -1,10 +1,10 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
-    Component, ElementRef,
+    Component, ContentChildren, ElementRef,
     EventEmitter, Injector,
     Input,
-    Optional, Output, TemplateRef, ViewChild,
+    Optional, Output, QueryList, TemplateRef, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -12,6 +12,7 @@ import { Placement } from 'popper.js';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
 import { ACTION_SHEET_COMPONENT, ActionSheetInterface } from './action-sheet.interface';
+import {ActionSheetItemComponent, AvatarComponent} from '../..';
 
 
 @Component({
@@ -23,17 +24,30 @@ import { ACTION_SHEET_COMPONENT, ActionSheetInterface } from './action-sheet.int
 })
 export class ActionSheetComponent implements AfterContentInit, ActionSheetInterface {
 
+    constructor(
+        private _elementRef: ElementRef,
+        @Optional() private _dynamicComponentService: DynamicComponentService
+    ) {}
+
+    @ContentChildren(ActionSheetItemComponent) actionSheetItems: QueryList<ActionSheetItemComponent>;
+
     /** Whenever links wrapped inside overflow should be displayed in compact mode  */
     @Input()
     compact = false;
 
     /** Indicate if it's mobile mode **/
     @Input()
-    mobile = false;
+    mobile: false;
 
     /** Whenever links should be visible **/
     @Input()
     isOpen = false;
+
+    /** To allow user to determine what event he wants to trigger the messages to show
+     * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
+     **/
+    @Input()
+    triggers: string[] = ['click'];
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -46,10 +60,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     /** @hidden */
     placement$ = new BehaviorSubject<Placement>('bottom-start');
 
-    constructor(
-        private _elementRef: ElementRef,
-        @Optional() private _dynamicComponentService: DynamicComponentService
-    ) {}
 
     handleOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
@@ -64,6 +74,8 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     /** @hidden */
     ngAfterContentInit(): void {
         this._setUpMobileMode();
+        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
+        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
     }
 
     /**
@@ -72,6 +84,7 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     public openChanged(isOpen: boolean): void {
         this.isOpenChange.emit(isOpen);
     }
+
 
 
     /** @hidden */

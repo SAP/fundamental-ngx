@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import {ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulation} from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -34,4 +34,8 @@ export class ActionSheetItemComponent {
 
     @Input()
     compact = false;
+
+    @Input()
+    mobile = false;
+
 }
