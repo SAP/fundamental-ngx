@@ -72,12 +72,12 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
 
     /** @hidden */
     ngOnChanges(): void {
-        this.onChanges();
+        this._onChanges();
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this.onChanges();
+        this._onChanges();
     }
 
     @applyCssClass
@@ -100,13 +100,13 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     }
 
     /** @hidden */
-    private onChanges(): void {
+    private _onChanges(): void {
         this.buildComponentCssClass();
-        this.buildNumberPipeConfig();
+        this._buildNumberPipeConfig();
     }
 
     /** @hidden */
-    private buildNumberPipeConfig(): void {
+    private _buildNumberPipeConfig(): void {
         this._numberPipeConfig = `0.${this.decimal}-${this.decimal}`;
     }
 }
