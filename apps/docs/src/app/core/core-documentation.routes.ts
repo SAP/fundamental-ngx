@@ -352,7 +352,7 @@ export const ROUTES: Routes = [
                 path: 'object-number',
                 loadChildren: () => import('./component-docs/object-number/object-number-docs.module').then((m) => m.ObjectNumberDocsModule)
             },
-            }
+            {
                 path: 'wizard',
                 loadChildren: () => import('./component-docs/wizard/wizard-docs.module').then((m) => m.WizardDocsModule)
             }
