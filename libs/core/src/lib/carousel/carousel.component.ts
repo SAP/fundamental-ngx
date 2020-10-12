@@ -22,7 +22,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FdCarouselResourceStrings, CarouselResourceStringsEN } from './i18n/carousel-resources';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
-import { CarouselService, CarouselConfig } from '../utils/services/carousel.service';
+import { CarouselService, CarouselConfig, PanEndOutput } from '../utils/services/carousel.service';
 import { RtlService } from '../utils/services/rtl.service';
 
 /** Page limit to switch to numerical indicator */
@@ -140,7 +140,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Is swipe enabled */
     @Input()
-    swipeEnabled = false;
+    swipeEnabled = true;
 
     /**
      * Returns the `tabIndex` of the carousel component.
@@ -154,8 +154,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
      * Sets the overflow to auto value.
      */
     @HostBinding('style.overflow')
-    overflow = 'auto'
-    
+    overflow = 'auto';
+
     /** Is carousel is vertical. Default value is false. */
     @Input()
     vertical = false;
@@ -282,7 +282,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
         this._carouselService.pickPrevious(this.dir);
         this._notifySlideChange(SlideDirection.PREVIOUS);
-        this._changeDetectorRef.detectChanges();
+        this._changeDetectorRef.markForCheck();
     }
 
     /** Transitions to the next slide in the carousel. */
@@ -292,7 +292,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._adjustActiveItemPosition(SlideDirection.NEXT);
         this._carouselService.pickNext(this.dir);
         this._notifySlideChange(SlideDirection.NEXT);
-        this._changeDetectorRef.detectChanges();
+        this._changeDetectorRef.markForCheck();
     }
 
     /** @hidden Adjust position of active item, based on slide direction */
@@ -304,37 +304,58 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         // If carousel set to loop
         if (this.loop) {
             if (this.currentActiveSlidesStartIndex < 0) {
-                this.currentActiveSlidesStartIndex = this.slides.length - 1;
-            } else if (this.currentActiveSlidesStartIndex === this.slides.length) {
+                this.currentActiveSlidesStartIndex = this.slides.length - 1 - this.visibleSlidesCount + 1;
+            } else if (this.currentActiveSlidesStartIndex + this.visibleSlidesCount - 1 === this.slides.length) {
                 this.currentActiveSlidesStartIndex = 0;
             }
         } else {
-            this._disableNavigationButton();
+            this._buttonVisibility();
         }
     }
 
-    /** @hidden Disable navigation if either side limit reached */
-    private _disableNavigationButton(): void {
-        // Need to disable navigation button if either direction limit has reached.
-        if (this.currentActiveSlidesStartIndex === 0) {
-            this.leftButtonDisabled = true;
-        } else if (this.slides.length - 1 === this.currentActiveSlidesStartIndex) {
-            this.rightButtonDisabled = true;
-        } else if (
-            this.visibleSlidesCount > 1 &&
-            this.currentActiveSlidesStartIndex + this.visibleSlidesCount === this.slides.length
-        ) {
-            this.rightButtonDisabled = true;
+    /** Handles navigation button visibility */
+    private _buttonVisibility(): void {
+        if (!this.loop) {
+            // Need to disable navigation button if either direction limit has reached.
+            if (this.currentActiveSlidesStartIndex === 0) {
+                this.leftButtonDisabled = true;
+            } else if (this.slides.length - 1 === this.currentActiveSlidesStartIndex) {
+                this.rightButtonDisabled = true;
+            } else if (
+                this.visibleSlidesCount > 1 &&
+                this.currentActiveSlidesStartIndex + this.visibleSlidesCount >= this.slides.length
+            ) {
+                this.rightButtonDisabled = true;
+            }
+
+            if (this.slides.length === 1) {
+                this.leftButtonDisabled = true;
+                this.rightButtonDisabled = true;
+            }
+            if (this.currentActiveSlidesStartIndex === 0) {
+                this.leftButtonDisabled = true;
+            } else if (this.currentActiveSlidesStartIndex === this.slides.length - 1) {
+                this.rightButtonDisabled = true;
+            }
+
+            if (this.currentActiveSlidesStartIndex > 0) {
+                this.leftButtonDisabled = false;
+            } else if (this.currentActiveSlidesStartIndex < this.slides.length - 1) {
+                this.rightButtonDisabled = false;
+            }
         }
     }
 
     /** @hidden Initialize carousel with visible items */
     private _initializeCarousel(): void {
         // Handles navigator button enabled/disabled state
-        this._initializeButtonVisibility();
+        // this._initializeButtonVisibility();
+        this._buttonVisibility();
 
         // set page indicator count with fake array, to use in template
         this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
+
+        this._carouselService.activeChange.subscribe((event) => this._slideSwiped(event));
     }
 
     /** @hidden Initialize config for Carousel service */
@@ -344,30 +365,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._config.gestureSupport = this.swipeEnabled;
         this._config.infinite = this.loop;
         this._config.transition = this.slideTransitionDuration;
-    }
-
-    /** @hidden Handles navigation button visibility */
-    private _initializeButtonVisibility(): void {
-        if (!this.loop) {
-            // Navigation will be disabled if carousel has only one element
-            if (this.slides.length === 1) {
-                this.leftButtonDisabled = true;
-                this.rightButtonDisabled = true;
-            }
-
-            if (this.currentActiveSlidesStartIndex === 0) {
-                this.leftButtonDisabled = true;
-            } else if (this.currentActiveSlidesStartIndex === this.slides.length - 1) {
-                this.rightButtonDisabled = true;
-            }
-
-            // Disables right navigation button
-            if (this.visibleSlidesCount > 1) {
-                if (this.currentActiveSlidesStartIndex + this.visibleSlidesCount >= this.slides.length - 1) {
-                    this.rightButtonDisabled = true;
-                }
-            }
-        }
     }
 
     /** @hidden Handles notification on visible slide change */
@@ -389,5 +386,19 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.dir = isRtl ? 'rtl' : 'ltr';
             this._changeDetectorRef.detectChanges();
         });
+    }
+
+    /** On Swiping of slide, manage page indicator */
+    private _slideSwiped(event: PanEndOutput): void {
+        const activeSlide = event.item;
+        const index = this.slides.toArray().findIndex((_item) => _item === activeSlide);
+
+        this.currentActiveSlidesStartIndex = index;
+
+        // handle navigation button visibility if it is available
+        if (this.navigation && !this.loop) {
+            this._buttonVisibility();
+        }
+        this._changeDetectorRef.markForCheck();
     }
 }

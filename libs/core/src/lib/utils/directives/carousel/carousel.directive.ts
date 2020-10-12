@@ -20,7 +20,6 @@ import { CarouselConfig, CarouselService, PanEndOutput } from '../../services/ca
     providers: [CarouselService]
 })
 export class CarouselDirective implements AfterContentInit {
-
     /** Configuration for carousel */
     @Input()
     config: CarouselConfig;
@@ -28,6 +27,10 @@ export class CarouselDirective implements AfterContentInit {
     /** Initial active item of carousel, position first + offset */
     @Input()
     active: CarouselItemDirective;
+
+    get carouselService(): CarouselService {
+        return this._carouselService;
+    }
 
     /** Event thrown, when active element is changed */
     @Output()
@@ -38,7 +41,7 @@ export class CarouselDirective implements AfterContentInit {
     readonly dragStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
-    @ContentChildren(CarouselItemDirective, {descendants: true})
+    @ContentChildren(CarouselItemDirective, { descendants: true })
     items: QueryList<CarouselItemDirective>;
 
     /** @hidden */
@@ -50,14 +53,10 @@ export class CarouselDirective implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._carouselService.initialise(
-            this.config,
-            this.items,
-            this._elementRef
-        );
+        this._carouselService.initialise(this.config, this.items, this._elementRef);
 
-        this._carouselService.activeChange.subscribe(event => this.activeChange.emit(event));
-        this._carouselService.dragStateChange.subscribe(event => this.dragStateChange.emit(event));
+        this._carouselService.activeChange.subscribe((event) => this.activeChange.emit(event));
+        this._carouselService.dragStateChange.subscribe((event) => this.dragStateChange.emit(event));
     }
 
     /** Change active element */

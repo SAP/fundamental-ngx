@@ -10,14 +10,13 @@ import { CarouselItemComponent } from './carousel-item/carousel-item.component';
     selector: 'fd-test-carousel',
     template: `
         <fd-carousel
-            [visibleItemsStartPosition]="visibleItemsStartPosition"
-            [visibleItemsCount]="visibleItemsCount"
-            [showPageIndicatorContainer]="showPageIndicatorContainer"
-            [showPageIndicator]="showPageIndicator"
-            [showNavigator]="showNavigator"
+            [visibleSlidesCount]="visibleItemsCount"
+            [pageIndicatorContainer]="showPageIndicatorContainer"
+            [pageIndicator]="showPageIndicator"
+            [navigation]="showNavigator"
             [navigatorInPageIndicator]="navigatorInPageIndicator"
-            [pageIndicatorContainerPlacement]="pageIndicatorContainerPlacement"
-            [isCircular]="isCircular"
+            [carouselIndicatorsOrientation]="pageIndicatorContainerPlacement"
+            [loop]="isCircular"
         >
             <fd-carousel-item>
                 Item 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus facilis doloribus repellendus
@@ -113,7 +112,6 @@ class TestCarouselComponent {
     @ViewChild(CarouselComponent)
     carousel: CarouselComponent;
 
-    visibleItemsStartPosition = 0;
     visibleItemsCount = 1;
     showPageIndicatorContainer = true;
     showPageIndicator = true;
@@ -146,12 +144,7 @@ describe('CarouselComponent', () => {
 
     it('should have 8 carousel items', async () => {
         whenStable(fixture);
-        expect(component.carousel.items.length).toEqual(8);
-    });
-
-    it('should make first item as active item', async () => {
-        whenStable(fixture);
-        expect(component.carousel.items.first.isActive).toEqual(true);
+        expect(component.carousel.slides.length).toEqual(8);
     });
 
     it('should left navigation button be disabled and right navigation button enabled on default carousel', async () => {
@@ -180,32 +173,19 @@ describe('CarouselComponent', () => {
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(true);
     });
-
-    it('should 2nd item be active on right navigation button click', async () => {
-        whenStable(fixture);
-
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(true);
-
-        // click right navigation button
-        const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
-        rightNavigationBtn.nativeElement.click();
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[1].isActive).toEqual(true);
-    });
 });
 
 @Component({
     selector: 'fd-test-multiple-active-item-carousel',
     template: `
         <fd-carousel
-            [visibleItemsStartPosition]="visibleItemsStartPosition"
-            [visibleItemsCount]="visibleItemsCount"
-            [showPageIndicatorContainer]="showPageIndicatorContainer"
-            [showPageIndicator]="showPageIndicator"
-            [showNavigator]="showNavigator"
+            [visibleSlidesCount]="visibleItemsCount"
+            [pageIndicatorContainer]="showPageIndicatorContainer"
+            [pageIndicator]="showPageIndicator"
+            [navigation]="showNavigator"
             [navigatorInPageIndicator]="navigatorInPageIndicator"
-            [pageIndicatorContainerPlacement]="pageIndicatorContainerPlacement"
-            [isCircular]="isCircular"
+            [carouselIndicatorsOrientation]="pageIndicatorContainerPlacement"
+            [loop]="isCircular"
         >
             <fd-carousel-item>
                 Item 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus facilis doloribus repellendus
@@ -301,7 +281,6 @@ class TestCarouselMultipleActiveItemComponent {
     @ViewChild(CarouselComponent)
     carousel: CarouselComponent;
 
-    visibleItemsStartPosition = 2;
     visibleItemsCount = 2;
     showPageIndicatorContainer = true;
     showPageIndicator = true;
@@ -332,28 +311,24 @@ describe('CarouselComponent Multiple Active Item', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should have 2 active items when visibleItemsCount=2', async () => {
-        whenStable(fixture);
-
-        // visibleItemsStartPosition = 2
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[1].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[2].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[3].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[4].isActive).toEqual(false);
-    });
-
     it('should have both navigation button enabled', async () => {
         whenStable(fixture);
 
         const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
         const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
 
-        expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
+        expect(leftNavigationBtn.nativeElement.disabled).toEqual(true);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
 
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
+        rightNavigationBtn.nativeElement.click();
+        rightNavigationBtn.nativeElement.click();
+
+        whenStable(fixture);
+        expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
+        expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
+
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
 
@@ -373,31 +348,17 @@ describe('CarouselComponent Multiple Active Item', () => {
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
     });
 
-    it('should have margin applied and removed as active item changes', async () => {
-        whenStable(fixture);
-
-        const items = fixture.debugElement.queryAll(By.css('.fd-carousel__item'));
-        // visibleItemsStartPosition=2
-        expect(items[2].nativeElement.classList.contains('item-margin')).toBeTruthy();
-
-        const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
-        rightNavigationBtn.nativeElement.click();
-        whenStable(fixture);
-
-        // margin moved to next item
-        expect(items[2].nativeElement.classList.contains('item-margin')).toBeFalsy();
-        expect(items[3].nativeElement.classList.contains('item-margin')).toBeTruthy();
-    });
-
     it('should make right button disabled on last item active', async () => {
         whenStable(fixture);
 
         const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
         const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
 
-        expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
+        expect(leftNavigationBtn.nativeElement.disabled).toEqual(true);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
 
+        rightNavigationBtn.nativeElement.click();
+        rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
@@ -414,55 +375,15 @@ describe('CarouselComponent Multiple Active Item', () => {
         const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
         const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
 
-        expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
-        expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
-
-        leftNavigationBtn.nativeElement.click();
-        leftNavigationBtn.nativeElement.click();
-
-        whenStable(fixture);
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(true);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
-    });
-
-    it('should change active item on left button click', async () => {
-        whenStable(fixture);
-
-        const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
-
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[1].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[2].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[3].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[4].isActive).toEqual(false);
-
-        leftNavigationBtn.nativeElement.click();
-        whenStable(fixture);
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[1].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[2].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[3].isActive).toEqual(false);
-    });
-
-    it('should change active item on right button click', async () => {
-        whenStable(fixture);
-
-        const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
-
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[1].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[2].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[3].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[4].isActive).toEqual(false);
 
         rightNavigationBtn.nativeElement.click();
+        rightNavigationBtn.nativeElement.click();
+
         whenStable(fixture);
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[1].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[2].isActive).toEqual(false);
-        expect(component.carousel.items.toArray()[3].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[4].isActive).toEqual(true);
-        expect(component.carousel.items.toArray()[5].isActive).toEqual(false);
+        expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
+        expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
     });
 });
 
@@ -470,14 +391,13 @@ describe('CarouselComponent Multiple Active Item', () => {
     selector: 'fd-test-looping-navigation-carousel',
     template: `
         <fd-carousel
-            [visibleItemsStartPosition]="visibleItemsStartPosition"
-            [visibleItemsCount]="visibleItemsCount"
-            [showPageIndicatorContainer]="showPageIndicatorContainer"
-            [showPageIndicator]="showPageIndicator"
-            [showNavigator]="showNavigator"
+            [visibleSlidesCount]="visibleItemsCount"
+            [pageIndicatorContainer]="showPageIndicatorContainer"
+            [pageIndicator]="showPageIndicator"
+            [navigation]="showNavigator"
             [navigatorInPageIndicator]="navigatorInPageIndicator"
-            [pageIndicatorContainerPlacement]="pageIndicatorContainerPlacement"
-            [isCircular]="isCircular"
+            [carouselIndicatorsOrientation]="pageIndicatorContainerPlacement"
+            [loop]="isCircular"
         >
             <fd-carousel-item>
                 Item 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus facilis doloribus repellendus
@@ -573,7 +493,6 @@ class TestCarouselLoopingNavigationComponent {
     @ViewChild(CarouselComponent)
     carousel: CarouselComponent;
 
-    visibleItemsStartPosition = 0;
     visibleItemsCount = 1;
     showPageIndicatorContainer = true;
     showPageIndicator = true;
@@ -612,55 +531,5 @@ describe('CarouselComponent looping navigation', () => {
 
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
-    });
-
-    it('should make last item as active on left button click', async () => {
-        whenStable(fixture);
-
-        const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
-
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(true);
-
-        leftNavigationBtn.nativeElement.click();
-        whenStable(fixture);
-
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(false);
-        // last carousel item will be active
-        expect(component.carousel.items.last.isActive).toEqual(true);
-
-        const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
-        rightNavigationBtn.nativeElement.click();
-        whenStable(fixture);
-        // reverse
-        expect(component.carousel.items.toArray()[0].isActive).toEqual(true);
-    });
-
-    it('should make first item as active on right button click from last item', async () => {
-        whenStable(fixture);
-
-        const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
-
-        rightNavigationBtn.nativeElement.click();
-        rightNavigationBtn.nativeElement.click();
-        rightNavigationBtn.nativeElement.click();
-        rightNavigationBtn.nativeElement.click();
-        rightNavigationBtn.nativeElement.click();
-        rightNavigationBtn.nativeElement.click();
-        rightNavigationBtn.nativeElement.click();
-        whenStable(fixture);
-        // last item is active
-        console.log('length: ', component.carousel.items.length);
-        expect(component.carousel.items.last.isActive).toEqual(true);
-
-        rightNavigationBtn.nativeElement.click();
-        whenStable(fixture);
-        expect(component.carousel.items.first.isActive).toEqual(true);
-
-        const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
-        leftNavigationBtn.nativeElement.click();
-        whenStable(fixture);
-
-        // reverse
-        expect(component.carousel.items.last.isActive).toEqual(true);
     });
 });

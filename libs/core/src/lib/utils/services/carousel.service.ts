@@ -16,7 +16,7 @@ export interface CarouselConfig {
     /** Amount of visible elements in carousel */
     elementsAtOnce?: number;
     /** Defines if support for gestures, like touch swipe or mouse drag should be enabled */
-    gestureSupport?: boolean
+    gestureSupport?: boolean;
     /** Defines if carousel should move elements to sides. It allows to slide infinitely in one direction */
     infinite?: boolean;
     /** Transition time of CSS translate, `150ms` by default */
@@ -29,10 +29,9 @@ export interface PanEndOutput {
 }
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root'
 })
 export class CarouselService implements OnDestroy {
-
     /** Configuration for carousel */
     config: CarouselConfig;
 
@@ -60,6 +59,14 @@ export class CarouselService implements OnDestroy {
     /** @hidden */
     private _currentTransitionPx = 0;
 
+    get currentTransitionPx(): number {
+        return this._currentTransitionPx;
+    }
+
+    set currentTransitionPx(currentTransitionPx: number) {
+        this._currentTransitionPx = currentTransitionPx;
+    }
+
     private _elementRef: ElementRef;
 
     items: QueryList<CarouselItemInterface>;
@@ -71,9 +78,11 @@ export class CarouselService implements OnDestroy {
         }
     }
 
-    initialise(config: CarouselConfig,
-               items: QueryList<CarouselItemInterface>,
-               listElementReference: ElementRef): void {
+    initialise(
+        config: CarouselConfig,
+        items: QueryList<CarouselItemInterface>,
+        listElementReference: ElementRef
+    ): void {
         this.config = config;
         this.setElementRef(listElementReference);
         this.setItems(items);
@@ -92,7 +101,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /** Change active element */
-    goToItem(item: CarouselItemInterface, smooth?: boolean, languageDirection?: string): void {
+    goToItem(item: CarouselItemInterface, smooth?: boolean, languageDirection: string = 'ltr'): void {
         let index: number = this.getIndexOfItem(item);
         if (this.config.infinite) {
             this._centerActive(index);
@@ -108,48 +117,46 @@ export class CarouselService implements OnDestroy {
     pickNext(languageDirection = 'ltr'): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
-            this.active = carouselArray[0]
+            this.active = carouselArray[0];
         }
-        const activeItemIndex: number = carouselArray.findIndex(item => item === this.active);
+        const activeItemIndex: number = carouselArray.findIndex((item) => item === this.active);
 
         const itemToActivate = carouselArray[activeItemIndex + 1];
         this.goToItem(itemToActivate, true, languageDirection);
-        this.active = itemToActivate
+        this.active = itemToActivate;
     }
-
 
     pickPrevious(languageDirection = 'ltr'): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
             this.active = carouselArray[2];
         }
-        const activeItemIndex: number = carouselArray.findIndex(item => item === this.active);
+        const activeItemIndex: number = carouselArray.findIndex((item) => item === this.active);
         const itemToActivate = carouselArray[activeItemIndex - 1];
         this.goToItem(itemToActivate, true, languageDirection);
-        this.active = itemToActivate
+        this.active = itemToActivate;
     }
 
     /** @hidden */
     private _centerActive(index: number): void {
         const middleIndex = Math.ceil(this.items.length / 2);
         const offset = Math.ceil(this.config.elementsAtOnce / 2);
-        const missingItems = (index + offset) - middleIndex;
+        const missingItems = index + offset - middleIndex;
         const array = this.items.toArray();
 
-
         if (missingItems > 0) {
-            for (let i = 0; i < missingItems; i ++) {
-                array.push(array.shift())
+            for (let i = 0; i < missingItems; i++) {
+                array.push(array.shift());
             }
         } else {
-            for (let i = 0; i < Math.abs(missingItems); i ++) {
-                array.unshift(array.pop())
+            for (let i = 0; i < Math.abs(missingItems); i++) {
+                array.unshift(array.pop());
             }
         }
 
         /** Changing order of elements in QueryList and Native HTML */
         this.items.reset(array);
-        this.items.forEach(item => item.getElement().parentNode.appendChild(item.getElement()));
+        this.items.forEach((item) => item.getElement().parentNode.appendChild(item.getElement()));
 
         /**
          * For proper animation it's needed to transform elements,
@@ -170,14 +177,13 @@ export class CarouselService implements OnDestroy {
         }
 
         if (languageDirection === 'ltr') {
-            transitionPx = - transitionPx;
+            transitionPx = -transitionPx;
         }
         this._transitionCarousel(transitionPx);
     }
 
     /** Get closes element, based on current transition */
     private _getClosest(): CarouselItemInterface {
-
         /** If transition is positive, it'should go to first element */
         if (this._currentTransitionPx > 0) {
             return this.items.first;
@@ -186,11 +192,7 @@ export class CarouselService implements OnDestroy {
         const size: number = this._getSize(this.items.first);
 
         /** When scroll is after half of element, then ext one should be active */
-        const halfApproached: boolean =
-            Math.abs(this._currentTransitionPx % size) >
-            size / 2
-        ;
-
+        const halfApproached: boolean = Math.abs(this._currentTransitionPx % size) > size / 2;
         /**
          * Index based on transition px divided by size of elements,
          * every element should have same width, otherwise it should be looped through all elements,
@@ -198,9 +200,9 @@ export class CarouselService implements OnDestroy {
          */
         let index: number = Math.abs(Math.ceil(this._currentTransitionPx / size));
 
+        index = index + (halfApproached ? 1 : 0);
         /** Checking if transition went out of scope of array */
         if (this.items.toArray()[index]) {
-            index = index + (halfApproached ? 1 : 0);
             return this.items.toArray()[index];
         } else {
             return this.items.last;
@@ -209,7 +211,7 @@ export class CarouselService implements OnDestroy {
 
     /** @hidden */
     private getIndexOfItem(item: CarouselItemInterface): number {
-        return this.items.toArray().findIndex(_item => _item === item);
+        return this.items.toArray().findIndex((_item) => _item === item);
     }
 
     /** Getting size of carousel, width for horizontal, height for vertical */
@@ -220,7 +222,6 @@ export class CarouselService implements OnDestroy {
             return item.getWidth();
         }
     }
-
 
     /** @hidden */
     private _handlePan(delta: number): void {
@@ -252,7 +253,6 @@ export class CarouselService implements OnDestroy {
      * Animates the carousel to the currently selected slide.
      */
     private _transitionCarousel(transitionPx: number): void {
-
         this._currentTransitionPx = transitionPx;
 
         if (this.config.vertical) {
