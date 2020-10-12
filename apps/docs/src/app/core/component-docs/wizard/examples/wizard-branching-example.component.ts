@@ -21,6 +21,8 @@ export class WizardBranchingExampleComponent {
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
 
+    step3label = 'Step 3: Payment Details';
+
     paymentSelection: any;
 
     goToStep(step: number): void {
@@ -35,6 +37,11 @@ export class WizardBranchingExampleComponent {
                 this.step1status = 'completed';
                 this.step2status = 'completed';
                 this.step3status = 'current';
+                if (this.paymentSelection === 'credit') {
+                    this.step3label = 'Step 3: Credit Card Details';
+                } else {
+                    this.step3label = 'Step 3: Bank Details';
+                }
                 break;
             }
         }
