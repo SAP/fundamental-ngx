@@ -7,6 +7,8 @@ import * as wizardCustomizableHtml from '!raw-loader!./examples/wizard-customiza
 import * as wizardCustomizableTs from '!raw-loader!./examples/wizard-customizable-example.component.ts';
 import * as wizardMobileHtml from '!raw-loader!./examples/wizard-mobile-example.component.html';
 import * as wizardMobileTs from '!raw-loader!./examples/wizard-mobile-example.component.ts';
+import * as wizardBranchingHtml from '!raw-loader!./examples/wizard-branching-example.component.html';
+import * as wizardBranchingTs from '!raw-loader!./examples/wizard-branching-example.component.ts';
 
 @Component({
     selector: 'app-wizard',
@@ -52,6 +54,20 @@ export class WizardDocsComponent {
             code: wizardMobileTs,
             fileName: 'wizard-mobile-example',
             component: 'WizardMobileExampleComponent'
+        }
+    ];
+
+    wizardBranchingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: wizardBranchingHtml,
+            fileName: 'wizard-branching-example'
+        },
+        {
+            language: 'typescript',
+            code: wizardBranchingTs,
+            fileName: 'wizard-branching-example',
+            component: 'WizardBranchingExampleComponent'
         }
     ];
 }
