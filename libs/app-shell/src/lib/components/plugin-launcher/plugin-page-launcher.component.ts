@@ -11,13 +11,12 @@ import { PluginDescriptor } from '../../api/extensions/lookup/plugin-descriptor.
 
 @Component({
     template: `
-        <fds-plugin-laucher [descriptor]="_pluginDescriptor"></fds-plugin-laucher>
+        <fds-plugin-launcher [descriptor]="_pluginDescriptor"></fds-plugin-launcher>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PluginPageLauncherComponent implements OnInit {
     _pluginDescriptor: Partial<PluginDescriptor>;
-
 
     constructor(private _cd: ChangeDetectorRef,
                 private route: ActivatedRoute,
@@ -44,7 +43,7 @@ export class PluginPageLauncherComponent implements OnInit {
 
     private initQuery(route: string): Map<string, any> {
         const query = new Map();
-        query.set('remoteRoute', route);
+        query.set('route', route);
         return query;
     }
 }

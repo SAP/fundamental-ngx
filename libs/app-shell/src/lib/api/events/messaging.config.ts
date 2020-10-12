@@ -4,7 +4,7 @@ import {
 } from './message-bus';
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MessagingConfig {
 
     deliveryMode: DeliveryModel = DeliveryModel.NON_PERSIST;

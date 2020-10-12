@@ -8,7 +8,7 @@ import { MessagingTopics } from './events/topics.service';
 import { EventType } from './events/message-bus';
 import { MessagingService } from './events/messaging.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AppShellProviderService {
 
     constructor(private ngZone: NgZone,
@@ -20,12 +20,17 @@ export class AppShellProviderService {
         /**
          * Create AppShell Level topics
          */
+        // todo_valorkin
         this.topics.defineTopic({
-            prefix: 'app:', eventType: EventType.ONLY_LAST, name: 'app:event',
+            prefix: 'app:',
+            name: 'app:event',
+            eventType: EventType.ONLY_LAST,
             shared: true
         });
         this.topics.defineTopic({
-            prefix: 'app:', eventType: EventType.ONLY_LAST, name: 'app:search',
+            prefix: 'app:',
+            name: 'app:search',
+            eventType: EventType.ONLY_LAST,
             shared: true
         });
 

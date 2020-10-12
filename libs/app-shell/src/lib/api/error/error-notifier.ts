@@ -1,24 +1,17 @@
 import {
     Injectable,
-    InjectionToken
+    InjectionToken, Injector, Optional
 } from '@angular/core';
 
-
-export const ERROR_NOTIFIERS = new InjectionToken('ERROR_NOTIFIERS');
-
+export const ERROR_NOTIFIERS = new InjectionToken<ErrorNotifier>('ERROR_NOTIFIERS');
 
 export interface ErrorNotifier {
     notify(message: string): void;
 }
 
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ConsoleErrorNotifier implements ErrorNotifier {
-    private _console: Console = console;
-
-    notify(message: string): void {
-        this._console.error(message);
-    }
+    notify = window.console.error.bind(window.console);
 }
 
 

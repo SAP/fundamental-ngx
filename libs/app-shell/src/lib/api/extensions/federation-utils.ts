@@ -1,4 +1,4 @@
-import { PluginDescriptor } from './lookup/plugin-descriptor.model';
+import { AngularIvyComponentDescriptor, PluginDescriptor } from './lookup/plugin-descriptor.model';
 
 declare const __webpack_init_sharing__: (shareScope: string) => Promise<void>;
 declare const __webpack_share_scopes__: { default: string };
@@ -47,7 +47,7 @@ async function lookupExposedModule<T>(remoteName: string, exposedModule: string)
 }
 
 
-export async function loadRemoteModule<T = any>(options: Partial<PluginDescriptor>): Promise<T> {
-    await loadRemoteEntry(options.remoteEntry);
-    return await lookupExposedModule<T>(options.remoteName, options.exposedModule);
+export async function loadRemoteModule<T = any>(options: Partial<PluginDescriptor>, module: AngularIvyComponentDescriptor): Promise<T> {
+    await loadRemoteEntry(options.uri);
+    return await lookupExposedModule<T>(options.name, module.exposedModule);
 }

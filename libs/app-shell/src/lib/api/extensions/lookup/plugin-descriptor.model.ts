@@ -24,7 +24,7 @@ export interface AngularElementComponentDescriptor {
     /** name */
     name: string;
     /** Type of a plugin module */
-    type: 'angular-element';
+    type: 'custom-element';
     /** Exposed Angular Module */
     exposedModule: string;
     /** Component name we are planning to inject */
@@ -42,9 +42,7 @@ export interface PluginDescriptor {
      * or index.html for iframes, etc. */
     uri: string;
 
-    modules: [
-            AngularIvyComponentDescriptor
-            | IframePageDescriptor
-            | AngularElementComponentDescriptor
-    ]
+    modules: Array<AngularIvyComponentDescriptor
+        | IframePageDescriptor
+        | AngularElementComponentDescriptor>
 }

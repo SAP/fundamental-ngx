@@ -26,7 +26,7 @@ import { MessagingTopics } from './topics.service';
  *  - Last Value Event:
  *  - History Value Event:
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MessagingService implements MessageBus<Message>, OnDestroy {
     private publishers: Map<string, TopicPublisher<Message>> = new Map<string, TopicPublisher<Message>>();
     private subscriptions: Array<TopicSubscriber<Message>>;
@@ -38,7 +38,7 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
     }
 
 
-    onMessage(topic: string, event: (value: Message) => void, messageSelector?: (msg: Message) => boolean): void {
+    subscribe(topic: string, event: (value: Message) => void, messageSelector?: (msg: Message) => boolean): void {
         const topicDef = this.topics.getTopic(topic);
         if (!topicDef) {
             throw new Error('Invalid topic name: ' + topic);
@@ -49,7 +49,7 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
     }
 
 
-    sendTo(topic: string, message: Message): void {
+    publish(topic: string, message: Message): void {
         const topicDef = this.topics.getTopic(topic);
         if (!topicDef) {
             throw new Error('Invalid topic name: ' + topic);
@@ -97,9 +97,9 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
         if (this._config.channel === Channel.RxJS) {
             const publisher = new RxJSTopicSubscriber<T>(topic, eventType);
             return this.doCreateRxJSSubscriber<T>(publisher);
-        } else {
-            return new NativeTopicSubscriber(topic, eventType);
         }
+
+        return new NativeTopicSubscriber(topic, eventType);
     }
 
     ngOnDestroy(): void {
