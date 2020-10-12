@@ -13,6 +13,12 @@ module.exports = function (config) {
     const build = process.env.BUILD_ID || '';
 
     const customLaunchers = {
+        sl_safari_macOS: {
+            base: 'SauceLabs',
+            browserName: 'Safari',
+            platform: 'macOS 10.15',
+            version: 'latest'
+        },
         sl_chrome_macOS: {
             base: 'SauceLabs',
             browserName: 'chrome',
@@ -20,19 +26,35 @@ module.exports = function (config) {
             version: 'latest'
         },
         sl_firefox_macOS: {
-             base: 'SauceLabs',
-             platform: 'macOS 10.15',
-             browserName: 'firefox',
-             version: 'latest'
-        },
-        sl_chrome_win_10: {
             base: 'SauceLabs',
+            platform: 'macOS 10.15',
             browserName: 'firefox',
             version: 'latest'
         },
-        sl_firefox_win_10: {
+        sl_chrome_win: {
             base: 'SauceLabs',
+            platform: 'windows 10',
+            browserName: 'firefox',
+            version: 'latest'
+        },
+        sl_firefox_win: {
+            base: 'SauceLabs',
+            platform: 'windows 10',
             browserName: 'chrome',
+            version: 'latest'
+        },
+        // IE is skiped. Run time stuck for no reason and take up to 30 min.
+        // Requires further investigation
+/*        sl_IE_win: {
+            base: 'SauceLabs',
+            platform: 'windows 10',
+            browserName: 'MicrosoftEdge',
+            version: '16.16299'
+        },*/
+        sl_Edge_win: {
+            base: 'SauceLabs',
+            platform: 'windows 10',
+            browserName: 'MicrosoftEdge',
             version: 'latest'
         }
     };
@@ -42,7 +64,6 @@ module.exports = function (config) {
         frameworks: ['jasmine', '@angular-devkit/build-angular'],
         plugins: [
             require('karma-jasmine'),
-            require('karma-chrome-launcher'),
             require('karma-jasmine-html-reporter'),
             require('karma-coverage-istanbul-reporter'),
             require('@angular-devkit/build-angular/plugins/karma'),
@@ -60,7 +81,7 @@ module.exports = function (config) {
             reports: ['html', 'lcovonly'],
             fixWebpackSourcePaths: true
         },
-        reporters: ['spec', 'progress', 'saucelabs'],
+        reporters: ['spec', 'progress', 'saucelabs','kjhtml'],
         port: 9876,
         colors: true,
         sauceLabs: {
@@ -76,6 +97,7 @@ module.exports = function (config) {
                 logfile: 'sauce_connect.log'
             },
             public: 'public',
+            idleTimeout: 10000,
             screenResolution: '1920x1080',
             customData: {
                 branch,

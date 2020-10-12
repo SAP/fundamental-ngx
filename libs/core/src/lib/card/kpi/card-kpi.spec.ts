@@ -34,7 +34,7 @@ import { CardKpiAnalyticsLabelDirective } from './card-kpi-analytics-label.direc
 })
 class CardKpiHeaderHostTestComponent {}
 
-fdescribe('CardKpiHeaderComponent', () => {
+describe('CardKpiHeaderComponent', () => {
     let fixture: ComponentFixture<CardKpiHeaderHostTestComponent>;
     let host: CardKpiHeaderHostTestComponent;
 
