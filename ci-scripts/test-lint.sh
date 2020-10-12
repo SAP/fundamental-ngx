@@ -8,7 +8,7 @@ DOCS_PATH=apps/docs/
 
 core=$(git diff --name-only ${COMMIT_RANGE_BRANCH} | sort -u | uniq | grep ${CORE_PATH})
 platform=$(git diff --name-only ${COMMIT_RANGE_BRANCH} | sort -u | uniq | grep ${PLATFORM_PATH})
-docs=$(git diff --name-only ${COMMIT_RANGE_BRANCH} | sort -u | uniq | grep ${PLATFORM_PATH})
+docs=$(git diff --name-only ${COMMIT_RANGE_BRANCH} | sort -u | uniq | grep ${DOCS_PATH})
 
 
 # Check for core
