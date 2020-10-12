@@ -35,17 +35,18 @@ export class ObjectAttributeComponent implements OnInit {
     @Output()
     objectAttributeclick: EventEmitter<ObjectAttributeClickedEvent> = new EventEmitter();
 
-    /** @hidden */
-    ngOnInit(): void {
-        this._renderer.addClass(this.el.nativeElement, 'fd-object-attribute');
-        if (this.label !== null && this.label !== undefined) {
-            this._renderer.setProperty(this.el.nativeElement, 'aria-label', this.label);
-            this._renderer.setProperty(this.el.nativeElement, 'title', this.label);
-        }
-    }
 
     /** @hidden */
-    constructor(private el: ElementRef, private _renderer: Renderer2) { }
+    constructor(private _el: ElementRef, private _renderer: Renderer2) { }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._renderer.addClass(this._el.nativeElement, 'fd-object-attribute');
+        if (this.label !== null && this.label !== undefined) {
+            this._renderer.setProperty(this._el.nativeElement, 'aria-label', this.label);
+            this._renderer.setProperty(this._el.nativeElement, 'title', this.label);
+        }
+    }
 
     /**
      *  Handles link click
