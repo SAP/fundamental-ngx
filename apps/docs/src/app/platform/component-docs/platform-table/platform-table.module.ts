@@ -6,7 +6,7 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 import { ObjectStatusModule, TableModule } from '@fundamental-ngx/core';
-import { PlatformButtonModule, PlatformTableModule } from '@fundamental-ngx/platform';
+import { PlatformButtonModule, PlatformInputModule, PlatformTableModule } from '@fundamental-ngx/platform';
 
 import { PlatformTableHeaderComponent } from './platform-table-header/platform-table-header.component';
 import { PlatformTableDocsComponent } from './platform-table-docs.component';
@@ -34,7 +34,8 @@ const routes: Routes = [
         TableModule,
         PlatformTableModule,
         PlatformButtonModule,
-        ObjectStatusModule
+        ObjectStatusModule,
+        PlatformInputModule
     ],
     exports: [RouterModule],
     declarations: [

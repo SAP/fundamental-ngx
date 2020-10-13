@@ -20,7 +20,15 @@
         name="description"
         key="description">
         <fdp-table-header *fdpHeaderCellDef>Description</fdp-table-header>
-        <fdp-table-cell *fdpCellDef="let item">{{item.description}}</fdp-table-cell>
+        <fdp-table-cell *fdpCellDef="let item">
+            <fdp-input
+                type="text"
+                name="description"
+                placeholder="Enter the description"
+                [(ngModel)]="item.description"
+            >
+            </fdp-input>
+        </fdp-table-cell>
     </fdp-column>
 
     <fdp-column
