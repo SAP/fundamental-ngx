@@ -70,7 +70,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/switch', name: 'Switch' },
             { url: 'core/token', name: 'Token' },
             { url: 'core/toolbar', name: 'Toolbar' },
-            // { url: 'core/tree', name: 'Tree' },
+            { url: 'core/object-number', name: 'Object Number' },
             { url: 'core/wizard', name: 'Wizard' }
         ];
 
