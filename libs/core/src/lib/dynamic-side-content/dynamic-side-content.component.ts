@@ -52,7 +52,7 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
      * Screen size, can be 'sm' | 'md' | 'lg' | 'xl'.
      */
     @Input()
-    size: DynamicSideContentSize;
+    size: DynamicSideContentSize = 'xl';
 
     /** Unique element Id, by default it's auto generated */
     @Input()
