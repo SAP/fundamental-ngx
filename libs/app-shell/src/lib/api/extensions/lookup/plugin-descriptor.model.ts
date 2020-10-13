@@ -6,7 +6,7 @@ export interface AngularIvyComponentDescriptor {
     /** Exposed Angular Module */
     exposedModule: string;
     /** Component name we are planning to inject */
-    componentName: string;
+    componentName?: string;
     /** most likely this property will be removed, but as for this this is a way to register route for a component*/
     route?: string;
 }
@@ -20,7 +20,7 @@ export interface IframePageDescriptor {
     html: string
 }
 
-export interface AngularElementComponentDescriptor {
+export interface CustomElementDescriptor {
     /** name */
     name: string;
     /** Type of a plugin module */
@@ -30,6 +30,10 @@ export interface AngularElementComponentDescriptor {
     /** Component name we are planning to inject */
     componentName: string;
 }
+
+export type DescriptorsModule = AngularIvyComponentDescriptor
+    | IframePageDescriptor
+    | CustomElementDescriptor;
 
 export interface PluginDescriptor {
     /** The name of the plugin */
@@ -42,7 +46,5 @@ export interface PluginDescriptor {
      * or index.html for iframes, etc. */
     uri: string;
 
-    modules: Array<AngularIvyComponentDescriptor
-        | IframePageDescriptor
-        | AngularElementComponentDescriptor>
+    modules: Array<DescriptorsModule>
 }

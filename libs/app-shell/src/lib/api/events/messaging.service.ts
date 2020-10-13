@@ -39,7 +39,7 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
 
 
     subscribe(topic: string, event: (value: Message) => void, messageSelector?: (msg: Message) => boolean): void {
-        const topicDef = this.topics.getTopic(topic);
+        const topicDef = this.topics.get(topic);
         if (!topicDef) {
             throw new Error('Invalid topic name: ' + topic);
         }
@@ -50,7 +50,7 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
 
 
     publish(topic: string, message: Message): void {
-        const topicDef = this.topics.getTopic(topic);
+        const topicDef = this.topics.get(topic);
         if (!topicDef) {
             throw new Error('Invalid topic name: ' + topic);
         }
@@ -72,7 +72,7 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
      */
     createPublisher<T extends Message>(topic: string, type?: EventType): TopicPublisher<T> {
         this.assertTopicName(topic, type);
-        const eventType = type || this.topics.getTopic((topic))?.eventType;
+        const eventType = type || this.topics.get((topic))?.eventType;
 
         if (this._config.channel === Channel.RxJS) {
             const publisher = new RxJSTopicPublisher<T>(topic, eventType);
@@ -92,7 +92,7 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
     createSubscriber<T extends Message>(topic: string, type?: EventType,
                                         messageSelector?: (msg: Message) => boolean): TopicSubscriber<T> {
         this.assertTopicName(topic, type);
-        const eventType = type || this.topics.getTopic((topic))?.eventType;
+        const eventType = type || this.topics.get((topic))?.eventType;
 
         if (this._config.channel === Channel.RxJS) {
             const publisher = new RxJSTopicSubscriber<T>(topic, eventType);
@@ -152,7 +152,7 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
         if (!topicName) {
             throw new Error('Topic is not provided!');
         }
-        if (!this.topics.hasTopic(topicName) || this.topics.getTopic(topicName).eventType !== type) {
+        if (!this.topics.has(topicName) || this.topics.get(topicName).eventType !== type) {
             throw new Error(`Incorrect Topic Type. ${topicName}`);
         }
 

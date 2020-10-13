@@ -3,10 +3,10 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
-    ComponentRef,
+    ComponentRef, ElementRef,
     Injector,
     Input,
-    OnChanges,
+    OnChanges, Renderer2,
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
@@ -31,14 +31,16 @@ export class PluginLauncherComponent implements OnChanges {
     @Input()
     module: string;
 
-    @Input()
     descriptor: Partial<PluginDescriptor>;
 
     @ViewChild('view', { read: ViewContainerRef, static: true })
     viewContainer: ViewContainerRef;
 
-    constructor(private injector: Injector, private cfr: ComponentFactoryResolver,
+    constructor(private injector: Injector,
+                private _elementRef: ElementRef,
+                private cfr: ComponentFactoryResolver,
                 private _cd: ChangeDetectorRef,
+                private _render: Renderer2,
                 private _pluginMgr: PluginManagerService,
                 private lookupService: LookupService) {
     }
@@ -59,10 +61,16 @@ export class PluginLauncherComponent implements OnChanges {
 
     async doCreateComponent(descriptor: Partial<PluginDescriptor>, moduleName: string): Promise<void> {
         const _module = descriptor.modules.find(module => module.name === moduleName);
-        if (_module.type === 'angular-ivy-component') {
-            const _component = await loadRemoteModule(descriptor, _module as AngularIvyComponentDescriptor)
-                .then(m => m[_module.name]);
+        const _component = await loadRemoteModule(descriptor, _module as AngularIvyComponentDescriptor)
+            .then(m => m[_module.name]);
 
+        if (_module.type === 'custom-element') {
+            const element = document.createElement(_component);
+            this._render.appendChild(this._elementRef.nativeElement, element);
+            return;
+        }
+
+        if (_module.type === 'angular-ivy-component') {
             const factory = this.cfr.resolveComponentFactory(_component);
             const componentRef: ComponentRef<any> = this.viewContainer.createComponent(factory, null, this.injector);
 
@@ -70,6 +78,7 @@ export class PluginLauncherComponent implements OnChanges {
                 this._pluginMgr.register(descriptor, componentRef.instance);
             }
             this._cd.detectChanges();
+            return;
         }
     }
 
