@@ -300,7 +300,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function (fdDate: FdDate): boolean {
+    disableFunction = function(fdDate: FdDate): boolean {
         return false;
     };
 
@@ -454,7 +454,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     submit(): void {
         this.selectedDate = this.tempDate;
         this.time = this.tempTime;
-        if (!this.date.isTimeValid()) {
+        if (!this.date.isTimeValid() && this.timeComponent) {
             this.time = this.timeComponent.time;
         }
         if (!this.selectedDate || !this.selectedDate.isDateValid()) {
@@ -581,5 +581,4 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.tempDate = this.selectedDate;
         this.tempTime = this.time;
     }
-
 }

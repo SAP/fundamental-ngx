@@ -73,6 +73,7 @@ export const API_FILES = {
         'FormSetDirective',
         'FormInputMessageGroupComponent'
     ],
+    formattedText: ['FormattedTextComponent'],
     formMessage: ['FormInputMessageGroupComponent'],
     globalConfig: [],
     icon: ['IconComponent'],
@@ -132,6 +133,7 @@ export const API_FILES = {
         'MenuKeyboardService'
     ],
     messageStrip: ['MessageStripComponent'],
+    messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
     dialog: [
         'DialogService',
         'DialogContainerComponent',
@@ -165,6 +167,7 @@ export const API_FILES = {
         'NotificationDefault',
         'NotificationRef'
     ],
+    objectIdentifier: ['ObjectIdentifierComponent'],
     objectMarker: ['ObjectMarkerComponent'],
     objectStatus: ['ObjectStatusModule', 'ObjectStatusComponent'],
     pagination: ['PaginationComponent', 'PaginationModel', 'PaginationService'],
@@ -179,6 +182,7 @@ export const API_FILES = {
         'PopoverBodyFooterDirective'
     ],
     popoverDirective: ['PopoverDirective'],
+    objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
     scrollSpy: ['ScrollSpyDirective'],
     select: ['SelectComponent', 'OptionComponent'],
@@ -287,5 +291,6 @@ export const API_FILES = {
         'ToolbarOverflowContentComponent',
         'ToolbarSpacerComponent'
     ],
-    tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel']
+    tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
+    wizard: ['WizardComponent']
 };

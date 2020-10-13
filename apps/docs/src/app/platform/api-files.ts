@@ -15,6 +15,7 @@ export const API_FILES = {
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
     menuButton: ['MenuButtonComponent'],
     objectStatus: ['ObjectStatusComponent'],
+    objectMarker: ['PlatformObjectMarkerComponent'],
     radioGroup: ['RadioGroupComponent'],
     searchField: ['SearchFieldComponent'],
     select: ['SelectPlatformComponent'],
