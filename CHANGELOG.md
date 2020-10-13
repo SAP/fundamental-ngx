@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.7...v0.23.0-rc.8) (2020-10-13)
+
+
+### Features
+
+* (Core) introduce Object number component ([#3567](https://github.com/SAP/fundamental-ngx/issues/3567)) ([1d56511](https://github.com/SAP/fundamental-ngx/commit/1d5651168763060765068d55d2bd45e71490111c))
+
 ## [0.23.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.6...v0.23.0-rc.7) (2020-10-11)
 
 ## [0.23.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.5...v0.23.0-rc.6) (2020-10-09)
