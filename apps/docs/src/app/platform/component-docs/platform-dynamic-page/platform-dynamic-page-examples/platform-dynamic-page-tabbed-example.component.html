@@ -238,10 +238,22 @@
                     <div fd-bar barDesign="floating-footer">
                         <div fd-bar-right>
                             <fd-bar-element>
-                                <button fd-button fdType="emphasized" [compact]="true" label="Save"></button>
+                                <button
+                                    fd-button
+                                    fdType="emphasized"
+                                    [compact]="true"
+                                    label="Save"
+                                    (click)="closePage($event)"
+                                ></button>
                             </fd-bar-element>
                             <fd-bar-element>
-                                <button fd-button fdType="transparent" [compact]="true" label="Cancel"></button>
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    [compact]="true"
+                                    label="Cancel"
+                                    (click)="closePage($event)"
+                                ></button>
                             </fd-bar-element>
                         </div>
                     </div>

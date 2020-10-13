@@ -192,7 +192,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     snapOnScroll(): void {
         this._scrollSubscription = this._scrollDispatcher.scrolled(10).subscribe((cdk: CdkScrollable) => {
             this._zone.run(() => {
-                const scrollPosition = cdk.measureScrollOffset('top');
+                const scrollPosition = cdk?.measureScrollOffset('top');
                 this.header.nativeElement.style.position = 'fixed';
                 if (scrollPosition > 0) {
                     this._dynamicPageService.collapseHeader();
@@ -381,12 +381,18 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         // reset array
         this.tabs = [];
         if (!this._isTabContentPresent(content)) {
+            if (content.length > 1) {
+                throw new Error(
+                    'Cannot have more than one content section. Use `tabLabel` to have a tabbed navigation.'
+                );
+            }
             return;
         }
+
         if (content) {
             content.forEach((contentItem) => {
                 if (!contentItem.tabLabel && this.isTabbed) {
-                    throw new Error('At least one element is already tabbed, please provide a `tabLabel`');
+                    throw new Error('At least one element is already tabbed, please provide a `tabLabel`.');
                 } else {
                     this.tabs.push(contentItem);
                 }

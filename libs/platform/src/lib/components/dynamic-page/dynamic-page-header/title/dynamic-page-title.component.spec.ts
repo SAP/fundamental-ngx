@@ -23,28 +23,6 @@ import { DynamicPageTitleComponent } from './dynamic-page-title.component';
         </fd-breadcrumb>
 
         <fdp-dynamic-page-key-info> </fdp-dynamic-page-key-info>
-
-        <fdp-dynamic-page-global-actions>
-            <fd-toolbar [fdType]="'transparent'" [clearBorder]="true">
-                <button
-                    fd-toolbar-item
-                    fd-button
-                    [compact]="true"
-                    [fdType]="'positive'"
-                    (click)="$event.stopPropagation()"
-                >
-                    Accept
-                </button>
-            </fd-toolbar>
-        </fdp-dynamic-page-global-actions>
-
-        <fdp-dynamic-page-layout-actions>
-            <fd-toolbar [fdType]="'transparent'" [clearBorder]="true">
-                <button fd-button [fdType]="'transparent'" aria-label="Resize" (click)="resizeClicked($event)">
-                    <i class="sap-icon--survey"></i>
-                </button>
-            </fd-toolbar>
-        </fdp-dynamic-page-layout-actions>
     </fdp-dynamic-page-title>`
 })
 class TestComponent {

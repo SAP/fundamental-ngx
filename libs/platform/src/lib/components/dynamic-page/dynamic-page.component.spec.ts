@@ -1,9 +1,10 @@
-import { ScrollDispatcher, ScrollingModule } from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { TabsModule, ToolbarModule } from '@fundamental-ngx/core';
 import {
     CLASS_NAME,
     DynamicPageComponent,
@@ -17,7 +18,29 @@ import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-p
 
 @Component({
     template: `<fdp-dynamic-page [size]="size" [background]="background">
-        <fdp-dynamic-page-title></fdp-dynamic-page-title>
+        <fdp-dynamic-page-title>
+            <fdp-dynamic-page-global-actions>
+                <fd-toolbar fdType="transparent" [clearBorder]="true">
+                    <button
+                        fd-toolbar-item
+                        fd-button
+                        [compact]="true"
+                        [fdType]="'positive'"
+                        (click)="$event.stopPropagation()"
+                    >
+                        Accept
+                    </button>
+                </fd-toolbar>
+            </fdp-dynamic-page-global-actions>
+            <fdp-dynamic-page-layout-actions>
+                <!-- layout actions -->
+                <fd-toolbar fdType="transparent" [clearBorder]="true">
+                    <button fd-button fdType="transparent" aria-label="Resize" (click)="closePage($event)">
+                        <i class="sap-icon--resize"></i>
+                    </button>
+                </fd-toolbar>
+            </fdp-dynamic-page-layout-actions>
+        </fdp-dynamic-page-title>
         <fdp-dynamic-page-header></fdp-dynamic-page-header>
         <fdp-dynamic-page-content>DynamicPage Content Text</fdp-dynamic-page-content>
     </fdp-dynamic-page>`
@@ -40,7 +63,7 @@ describe('DynamicPageComponent default values', () => {
     beforeEach(async(() => {
         const scrollableSpy = jasmine.createSpyObj('DynamicPageService', ['expandHeader', 'collapseHeader']);
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, ScrollingModule],
+            imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ScrollingModule],
             declarations: [TestComponent],
             providers: [{ provide: DynamicPageService, useValue: scrollableSpy }]
         }).compileComponents();
@@ -59,7 +82,8 @@ describe('DynamicPageComponent default values', () => {
 
     it('should add correct classes to host', async () => {
         fixture.detectChanges();
-        expect(dynamicPageComponent.elementRef().nativeElement.classList.contains(CLASS_NAME.dynamicPage)).toBeTruthy();
+        const headerElement = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPage));
+        expect(headerElement).toBeTruthy();
     });
 
     it('should add correct classes to title', async () => {
@@ -73,6 +97,28 @@ describe('DynamicPageComponent default values', () => {
         fixture.detectChanges();
         const headerElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'));
         expect(headerElement).toBeTruthy();
+    });
+
+    it('should add correct classes to toolbar', async () => {
+        fixture.detectChanges();
+        const toolbarContainer = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPageActionsContainer));
+        expect(toolbarContainer).toBeTruthy();
+        expect(
+            toolbarContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageActionsContainerMedium)
+        ).toBeTruthy();
+
+        const globalActionsContainer: HTMLElement = fixture.debugElement.query(
+            By.css('.' + CLASS_NAME.dynamicPageGlobalActions)
+        ).nativeElement;
+        expect(
+            globalActionsContainer.classList.contains(CLASS_NAME.dynamicPageGlobalActionsToolbarMedium)
+        ).toBeTruthy();
+
+        const layoutActionsContainer = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPageLayoutActions))
+            .nativeElement;
+        expect(
+            layoutActionsContainer.classList.contains(CLASS_NAME.dynamicPageLayoutActionsToolbarMedium)
+        ).toBeTruthy();
     });
 
     it('should add correct classes to content', async () => {
@@ -129,23 +175,67 @@ describe('DynamicPageComponent default values', () => {
         expect(contentEl.getAttribute('aria-hidden')).toBeTruthy();
     });
 
-    describe('Content scrolling', () => {
-        let scroll: ScrollDispatcher;
-        let scrollFixture: ComponentFixture<DynamicPageContentComponent>;
-
-        beforeEach(inject([ScrollDispatcher], (s: ScrollDispatcher) => {
-            scroll = s;
-
-            scrollFixture = TestBed.createComponent(DynamicPageContentComponent);
-            scrollFixture.detectChanges();
-        }));
-
-        it('should trigger the scrollable subscriptions on scrolling', fakeAsync(() => {
-            const throttleTime = 100;
-            spyOn(component.dynamicPageHeaderComponent, 'collapseHeader');
-            component.dynamicPageContentComponent._elementRef.nativeElement.dispatchEvent(new Event('scroll'));
-            tick(throttleTime);
+    it('should collapse header on scroll', fakeAsync(() => {
+        component.dynamicPage.ngAfterViewInit();
+        const throttleTime = 100;
+        document.dispatchEvent(new Event('scroll'));
+        spyOn(component.dynamicPageHeaderComponent, 'collapseHeader');
+        fixture.detectChanges();
+        tick(throttleTime);
+        fixture.whenStable().then(() => {
             expect(component.dynamicPageHeaderComponent.collapseHeader).toHaveBeenCalled();
-        }));
+        });
+    }));
+});
+
+@Component({
+    template: `<fdp-dynamic-page [size]="size" [background]="background">
+        <fdp-dynamic-page-title></fdp-dynamic-page-title>
+        <fdp-dynamic-page-header></fdp-dynamic-page-header>
+        <fdp-dynamic-page-content [tabLabel]="tabLabel1">DynamicPage Content Tabbed 1 Text</fdp-dynamic-page-content>
+        <fdp-dynamic-page-content [tabLabel]="tabLabel2">DynamicPage Content Tabbed 2 Text</fdp-dynamic-page-content>
+    </fdp-dynamic-page>`
+})
+class TestTabbedComponent {
+    size = 'medium';
+    background = '';
+    tabLabel1 = 'Tab 1';
+    tabLabel2 = 'Tab 2';
+    @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
+}
+describe('DynamicPageComponent tabbed values', () => {
+    let component: TestTabbedComponent;
+    let fixture: ComponentFixture<TestTabbedComponent>;
+    let dynamicPageComponent: DynamicPageComponent;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformDynamicPageModule, TabsModule, ScrollingModule],
+            declarations: [TestTabbedComponent],
+            providers: [{ provide: DynamicPageService }]
+        }).compileComponents();
+    }));
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestTabbedComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        dynamicPageComponent = component.dynamicPage;
+    });
+
+    it('should create', () => {
+        expect(fixture).toBeTruthy();
+    });
+
+    it('should add correct classes to tab content', async () => {
+        fixture.detectChanges();
+        const tabsContainer = fixture.debugElement.query(By.css('.fd-tabs'));
+        expect(tabsContainer).toBeTruthy();
+        expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabs)).toBeTruthy();
+        expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabsAddShadow)).toBeTruthy();
+    });
+
+    it('should set default tab size', async () => {
+        const tabsContainer = fixture.debugElement.query(By.css('.fd-tabs'));
+        expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabsMedium)).toBeTruthy();
     });
 });
