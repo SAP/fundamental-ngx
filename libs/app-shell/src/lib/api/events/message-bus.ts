@@ -51,17 +51,16 @@ export enum EventType {
     DURABLE
 }
 
-export abstract class TopicPublisher<T extends Message> {
+export class EventTopic {
     topic: string;
     eventType: EventType;
+}
 
+export abstract class TopicPublisher<T extends Message> extends EventTopic {
     abstract publish(message: T, deliveryModel?: DeliveryModel): void;
 }
 
-export abstract class TopicSubscriber<T extends Message> {
-    topic: string;
-    eventType: EventType;
-
+export abstract class TopicSubscriber<T extends Message> extends EventTopic {
     abstract onMessage(next?: (value: any) => void, error?: (error: any) => any, complete?: () => void): void;
 
     abstract asObservable(): Observable<T>;
@@ -199,7 +198,7 @@ export class MapMessage<T> extends Message {
         this._map = new Map<string, T>();
     }
 
-    itemExists(key: string): boolean {
+    has(key: string): boolean {
         return this._map.has(key);
     }
 
@@ -212,13 +211,11 @@ export class MapMessage<T> extends Message {
     }
 
     toString(): string {
-        let msg = 'MapMessage {';
-        msg += super.toString();
+        const messages: string[] = [];
         this._map.forEach((v, k) => {
-            msg += `${k} : ${v}`;
+            messages.push(`${k} : ${v}`);
         });
-        msg += '}';
-        return msg;
+        return `MapMessage {${super.toString()} ${messages.join()}}`;
     }
 }
 

@@ -2,7 +2,7 @@ import {
     ErrorHandler,
     Inject,
     Injectable,
-    OnDestroy
+    OnDestroy, Optional
 } from '@angular/core';
 import {
     EventType,
@@ -40,13 +40,13 @@ const TOPIC_ERROR_EVENT = 'error:event';
  * perform different actions ( e.g.: Console Notifier, UIMessageNotifier that could show dialog about the error,
  * AppShell notifier to send messages outside of Ariba application to the global SAP.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DefaultErrorHandlerService implements ErrorHandler, OnDestroy {
     private subscriber: TopicSubscriber<Message>;
 
     constructor(private messaging: MessagingService, private topics: MessagingTopics,
                 @Inject(ERROR_FORMATTER) private formatter: ErrorFormatter,
-                @Inject(ERROR_NOTIFIERS) private notifiers: ErrorNotifier[]) {
+                @Inject(ERROR_NOTIFIERS) @Optional() private notifiers: ErrorNotifier[]) {
 
         this.topics.defineTopic({
             prefix: 'error:', eventType: EventType.DURABLE,
@@ -66,6 +66,6 @@ export class DefaultErrorHandlerService implements ErrorHandler, OnDestroy {
     }
 
     private initializeMessagingErrors(): void {
-        this.messaging.onMessage(TOPIC_ERROR_EVENT, (m) => this.handleError(m));
+        this.messaging.subscribe(TOPIC_ERROR_EVENT, (m) => this.handleError(m));
     }
 }

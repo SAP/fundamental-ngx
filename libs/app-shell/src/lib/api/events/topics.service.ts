@@ -5,23 +5,19 @@ import { Injectable } from '@angular/core';
 /**
  * Its important to define topic first, which can set some parameters up front
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MessagingTopics {
-    public topicsDef: Array<Topic> = [];
-
-    constructor() {
-
-    }
+    public topicsDef = new Map<string, Topic>();
 
     defineTopic(topic: Topic): void {
-        const length = this.topicsDef.filter((t) => t.name === topic.name).length;
-        if (length === 0) {
-            this.topicsDef.push(topic);
+        if (this.topicsDef.has(topic.name)) {
+            return;
         }
+        this.topicsDef.set(topic.name, topic);
     }
 
     hasTopic(name: string): boolean {
-        return this.topicsDef.filter((t) => t.name === name).length > 0;
+        return this.topicsDef.has(name);
     }
 
     /**
@@ -29,8 +25,11 @@ export class MessagingTopics {
      *
      */
     getTopic(name: string): Topic {
-        const topics = this.topicsDef.filter((t) => t.name === name);
-        return topics[0];
+        if (this.topicsDef.has(name)) {
+            return this.topicsDef.get(name);
+        }
+
+        return this.topicsDef.entries().next().value;
     }
 }
 

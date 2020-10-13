@@ -74,7 +74,7 @@ const TOPIC_SYSTEM_PLUGIN = 'system:plugin';
  *
  * todo: Maybe create some factory to make the Topic Message easier.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PluginManagerService implements OnDestroy {
     private registry: Map<string, RegistrationEntry> = new Map<string, RegistrationEntry>();
 
@@ -87,16 +87,15 @@ export class PluginManagerService implements OnDestroy {
     }
 
     loadConfiguration(plugins: Array<Partial<PluginDescriptor>>): void {
-        const loadStart = this.createMessage('configuration', 'start');
-        this.messageBus.sendTo(TOPIC_SYSTEM_PLUGIN, loadStart);
+        this.messageBus.publish(TOPIC_SYSTEM_PLUGIN, createMessage('configuration', 'start'));
+
         plugins.forEach(c => this.lookupService.addPlugin(c));
 
-        const loadEnd = this.createMessage('configuration', 'end');
-        this.messageBus.sendTo(TOPIC_SYSTEM_PLUGIN, loadEnd);
+        this.messageBus.publish(TOPIC_SYSTEM_PLUGIN, createMessage('configuration', 'end'));
     }
 
     /**
-     * Todo: Right now we create subsribers but we dont release them right away but leave this up to the MessageBus to
+     * Todo: Right now we create subscribers but we dont release them right away but leave this up to the MessageBus to
      * clean up everything. Should check when registering a plugin if we already did subscription for it and do clean
      * up before continuing
      *
@@ -105,8 +104,7 @@ export class PluginManagerService implements OnDestroy {
         // todo: this can be undefined too .getName()
         const name = descriptor ? descriptor.name : pluginComponent.getConfiguration().getName();
 
-        const mesageStart = this.createMessage('register', 'start', name);
-        this.messageBus.sendTo(TOPIC_SYSTEM_PLUGIN, mesageStart);
+        this.messageBus.publish(TOPIC_SYSTEM_PLUGIN, createMessage('register', 'start', name));
 
         let configuration: Partial<PluginConfiguration>;
         if (pluginComponent) {
@@ -115,12 +113,9 @@ export class PluginManagerService implements OnDestroy {
 
             const pluginContext = this.createPluginContext();
             pluginComponent.initialize(pluginContext);
-            this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
-        } else {
-            this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
         }
-        const mesageEnd = this.createMessage('register', 'end', name);
-        this.messageBus.sendTo(TOPIC_SYSTEM_PLUGIN, mesageEnd);
+        this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
+        this.messageBus.publish(TOPIC_SYSTEM_PLUGIN, createMessage('register', 'end', name));
     }
 
 
@@ -129,9 +124,8 @@ export class PluginManagerService implements OnDestroy {
         this.registry.clear();
     }
 
-    createPluginContext(all: boolean = false): PluginContext {
-        const context = new PluginContext(this.messageBus);
-        return context;
+    createPluginContext(): PluginContext {
+        return new PluginContext(this.messageBus);
     }
 
 
@@ -140,26 +134,26 @@ export class PluginManagerService implements OnDestroy {
         if (!configuration.addListeners || configuration.addListeners().length === 0) {
             return;
         }
-        const subscribers = [];
         configuration.addListeners().forEach((listener: Listener) => {
             if (this.topics.hasTopic(listener.topic)) {
                 const topic = this.topics.getTopic(listener.topic);
-                this.messageBus.onMessage(topic.name, (m) => listener.onMessage(m),
+                this.messageBus.subscribe(topic.name, (m) => listener.onMessage(m),
                     listener.messageSelector);
             }
         });
     }
 
-    private createMessage(type: string, status: string, pluginName?: string): MapMessage<string> {
-        const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
-        m.set('type', type);
-        m.set('status', status);
+}
 
-        if ([pluginName]) {
-            m.set('pluginName', pluginName);
-        }
-        return m;
+function createMessage(type: string, status: string, pluginName?: string): MapMessage<string> {
+    const m = new MapMessage<string>(TOPIC_SYSTEM_PLUGIN);
+    m.set('type', type);
+    m.set('status', status);
+
+    if (pluginName) {
+        m.set('pluginName', pluginName);
     }
+    return m;
 }
 
 export class RegistrationEntry {

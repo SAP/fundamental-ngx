@@ -1,31 +1,48 @@
-export interface PluginDescriptor {
+export interface AngularIvyComponentDescriptor {
+    /** Uniq name of module in plugin */
     name: string;
-    provider: string
-    version: string;
-    sinceVersion: string;
-    untilVersion: string;
-    remoteEntry: string;
-    remoteName: string;
-    remoteRoute: string;
+    /** Type of a plugin module */
+    type: 'angular-ivy-component';
+    /** Exposed Angular Module */
     exposedModule: string;
-    displayName: string;
+    /** Component name we are planning to inject */
     componentName: string;
-
-    type: Scope;
-    category: string;
-    hasRoutes: boolean;
-    changeNotes: string;
+    /** most likely this property will be removed, but as for this this is a way to register route for a component*/
+    route?: string;
 }
 
-
-/**
- * The idea behind the scope is that there are components that are instantiated at the time we use Page launcher.
- * But there could be a situation, where we need to register a PLUGIN at the bootstrap at the lauch time, there we
- * have scope Application.
- * Not implemented yet default value should be as Page
- */
-export enum Scope {
-    Application = 1,
-    Page
+export interface IframePageDescriptor {
+    /** Uniq name of module in plugin */
+    name: string;
+    /** Type of a plugin module */
+    type: 'iframe';
+    /** link to html relative to URI, where uri+html should give a valid URL */
+    html: string
 }
 
+export interface AngularElementComponentDescriptor {
+    /** name */
+    name: string;
+    /** Type of a plugin module */
+    type: 'custom-element';
+    /** Exposed Angular Module */
+    exposedModule: string;
+    /** Component name we are planning to inject */
+    componentName: string;
+}
+
+export interface PluginDescriptor {
+    /** The name of the plugin */
+    name: string;
+    /** SemVersion of the plugin */
+    version: string;
+    /** Plugin provider entity (SAP, Ariba, etc. ) */
+    provider?: string;
+    /** URI to remote entry point, could be remoteEntry.js for Module Federation container
+     * or index.html for iframes, etc. */
+    uri: string;
+
+    modules: Array<AngularIvyComponentDescriptor
+        | IframePageDescriptor
+        | AngularElementComponentDescriptor>
+}

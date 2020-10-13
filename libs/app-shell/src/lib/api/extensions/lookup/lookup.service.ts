@@ -4,23 +4,20 @@ import {
 } from '@angular/core';
 import { PluginDescriptor } from './plugin-descriptor.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LookupService implements OnDestroy {
-    private pluginsRepository: Array<Partial<PluginDescriptor>>;
-
-
-    constructor() {
-        this.pluginsRepository = [];
-    }
-
+    private readonly pluginsRepository: Array<Partial<PluginDescriptor>> = [];
 
     lookup(query: Map<string, string>): LookupItem {
-        const found = this.pluginsRepository.filter((p) => {
-            let match;
-            query.forEach((v, k) => {
-                match = (match === undefined) ? p[k] === v : (match && p[k] === v);
+        const predicate = (record: Record<string, any>): boolean => {
+            let match = true;
+            query.forEach((value, key) => {
+                match = match && record[key] === value;
             });
             return match;
+        };
+        const found = this.pluginsRepository.filter((plugin) => {
+            return  predicate(plugin) || plugin.modules.some(predicate);
         });
 
         if (found.length === 0) {
@@ -45,7 +42,7 @@ export class LookupService implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.pluginsRepository = null;
+        this.pluginsRepository.length = 0;
     }
 }
 

@@ -6,23 +6,26 @@ import {
 } from '@angular/core';
 
 
-export const ERROR_FORMATTER = new InjectionToken('ERROR_FORMATTER');
+export const ERROR_FORMATTER = new InjectionToken<ErrorFormatter>('ERROR_FORMATTER',
+    { providedIn: 'root', factory: () => new DefaultFormatter() });
 
 
 export interface ErrorFormatter {
     format(error: Message | string | Error | HttpErrorResponse): string;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DefaultFormatter implements ErrorFormatter {
 
     format(error: Message | string | Error | HttpErrorResponse): string {
         if (error instanceof Message || typeof error === 'string') {
             return error.toString();
+        }
 
-        } else if (error instanceof HttpErrorResponse || error.message) {
+        if (error instanceof HttpErrorResponse || error.message) {
             return error.message;
         }
+
         return error.toString();
     }
 
