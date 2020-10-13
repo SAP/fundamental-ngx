@@ -1,5 +1,3 @@
-import { InjectionToken } from '@angular/core';
-
 export const CLASS_NAME = {
     dynamicPage: 'fd-dynamic-page',
     dynamicPageTitleArea: 'fd-dynamic-page__title-area',

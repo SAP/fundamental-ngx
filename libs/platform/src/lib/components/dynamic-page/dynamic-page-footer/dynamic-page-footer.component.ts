@@ -1,8 +1,8 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'fdp-dynamic-page-footer',
-    template: '<div style="position:relative; margin-top: 3rem"><ng-content></ng-content></div>',
+    template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicPageFooterComponent {}
