@@ -10,14 +10,16 @@ const TOPIC_THEME_CHANGE = 'theme:change';
 
 
 /**
- * Todo: Do we need this extra service? instead of using mesage bus directly? But always some client is helpfulll.
+ * Todo: Do we need this extra service? instead of using message bus directly? But always some client is helpfulll.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ThemeManagerService {
 
     constructor(private messageBus: MessagingService, private topics: MessagingTopics) {
         this.topics.defineTopic({
-            prefix: 'theme:', eventType: EventType.ONLY_LAST, name: TOPIC_THEME_CHANGE,
+            prefix: 'theme:',
+            name: TOPIC_THEME_CHANGE,
+            eventType: EventType.ONLY_LAST,
             shared: true
         });
     }
@@ -27,7 +29,7 @@ export class ThemeManagerService {
         mapMessage.set('name', name);
         mapMessage.set('id', id);
 
-        this.messageBus.sendTo(TOPIC_THEME_CHANGE, mapMessage);
+        this.messageBus.publish(TOPIC_THEME_CHANGE, mapMessage);
     }
 
     /**
@@ -37,7 +39,7 @@ export class ThemeManagerService {
      *
      */
     onChange(next?: (value: any) => void): void {
-        this.messageBus.onMessage(TOPIC_THEME_CHANGE, next);
+        this.messageBus.subscribe(TOPIC_THEME_CHANGE, next);
     }
 
 }

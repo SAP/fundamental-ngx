@@ -10,7 +10,7 @@ import {
  * Service is used by application layer in order to communicate  with the shell bar. The goal is
  * to have a Shell-bar reactive so we can easily push new items.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ShellBarService {
     readonly _productMenu$: BehaviorSubject<ShellbarMenuItem[]>;
     readonly _themeMenu$: BehaviorSubject<ThemeMenu[]>;

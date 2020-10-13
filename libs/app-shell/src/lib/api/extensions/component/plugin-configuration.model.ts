@@ -3,7 +3,6 @@ import {
     Type
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Scope } from '../lookup/plugin-descriptor.model';
 import { Message } from '../../events/message-bus';
 
 
@@ -74,7 +73,6 @@ export class Extension {
 export class ExtensionPoints {
 
     constructor(public name: string,
-                public scope: Scope,
                 public epClass?: Type<any>) {
     }
 

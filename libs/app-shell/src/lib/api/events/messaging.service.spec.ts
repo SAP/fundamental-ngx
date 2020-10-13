@@ -92,10 +92,10 @@ describe('MessagingService', () => {
                 });
                 const m = new TextMessage('system:events');
                 m.text = 'app registered';
-                service.sendTo('system:events', m);
+                service.publish('system:events', m);
 
                 let expectedMessage;
-                service.onMessage('system:events', (msg: Message) => {
+                service.subscribe('system:events', (msg: Message) => {
                     expectedMessage = (msg as TextMessage).text;
                 });
                 expect(expectedMessage).toBeUndefined();
@@ -139,13 +139,13 @@ describe('MessagingService', () => {
                     eventType: EventType.DEFAULT, shared: true, prefix: 'system:'
                 });
                 let expectedMessage = 'none';
-                service.onMessage('system:events', (msg: Message) => {
+                service.subscribe('system:events', (msg: Message) => {
                     expectedMessage = (msg as TextMessage).text;
                 });
 
                 const m = new TextMessage('system:events');
                 m.text = 'app registered';
-                service.sendTo('system:events', m);
+                service.publish('system:events', m);
 
                 expect(expectedMessage).toBe(m.text);
             }
