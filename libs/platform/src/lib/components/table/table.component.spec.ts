@@ -114,20 +114,20 @@ describe('TableComponent', () => {
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
         const emitChangeSpy = spyOn(<any>component, '_emitChange').and.stub();
 
-        component.select(0, component.rows[0], true);
+        component.select(0, (<any>component)._rows[0], true);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
         expect(component.checkedAll).toBeFalse();
-        expect(component.checked.length).toEqual(1);
+        expect((<any>component)._checked.length).toEqual(1);
 
-        component.select(1, component.rows[1], true);
+        component.select(1, (<any>component)._rows[1], true);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(1);
         expect(component.checkedAll).toBeFalse();
-        expect(component.checked.length).toEqual(1);
-        expect(component.rows.filter(r => r.checked).length).toEqual(2);
+        expect((<any>component)._checked.length).toEqual(1);
+        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(2);
     });
 
     it('should select single row', () => {
@@ -137,19 +137,19 @@ describe('TableComponent', () => {
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
         const emitChangeSpy = spyOn(<any>component, '_emitChange').and.stub();
 
-        component.selectSingle(0, component.rows[0]);
+        component.selectSingle(0, (<any>component)._rows[0]);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
-        expect(component.checked.length).toEqual(1);
-        expect(component.rows.filter(r => r.checked).length).toEqual(1);
+        expect((<any>component)._checked.length).toEqual(1);
+        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(1);
 
-        component.selectSingle(1, component.rows[1]);
+        component.selectSingle(1, (<any>component)._rows[1]);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(1);
-        expect(component.checked.length).toEqual(1);
-        expect(component.rows.filter(r => r.checked).length).toEqual(1);
+        expect((<any>component)._checked.length).toEqual(1);
+        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(1);
     });
 
     it('should unselect row on the second selection call', () => {
@@ -159,20 +159,20 @@ describe('TableComponent', () => {
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
         const emitChangeSpy = spyOn(<any>component, '_emitChange').and.stub();
 
-        component.selectSingle(0, component.rows[0]);
+        component.selectSingle(0, (<any>component)._rows[0]);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
-        expect(component.checked.length).toEqual(1);
-        expect(component.rows.filter(r => r.checked).length).toEqual(1);
+        expect((<any>component)._checked.length).toEqual(1);
+        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(1);
 
-        component.selectSingle(0, component.rows[0]);
+        component.selectSingle(0, (<any>component)._rows[0]);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
-        expect(component.checked.length).toEqual(0);
-        expect(component.unchecked.length).toEqual(1);
-        expect(component.rows.filter(r => r.checked).length).toEqual(0);
+        expect((<any>component)._checked.length).toEqual(0);
+        expect((<any>component)._unchecked.length).toEqual(1);
+        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(0);
     });
 
     it('should select all rows and unselect on the second call', () => {
@@ -190,8 +190,8 @@ describe('TableComponent', () => {
         expect(checkAllSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component.checkedAll).toBeTrue();
-        expect(component.checked.length).toEqual(component.rows.length);
-        expect(component.rows.filter(r => r.checked).length).toEqual(component.rows.length);
+        expect((<any>component)._checked.length).toEqual((<any>component)._rows.length);
+        expect((<any>component)._rows.filter(r => r.checked).length).toEqual((<any>component)._rows.length);
 
         component.selectAll(false);
 
@@ -199,12 +199,12 @@ describe('TableComponent', () => {
         expect(uncheckAllSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component.checkedAll).toBeFalse();
-        expect(component.unchecked.length).toEqual(component.rows.length);
-        expect(component.rows.filter(r => r.checked).length).toEqual(0);
+        expect((<any>component)._unchecked.length).toEqual((<any>component)._rows.length);
+        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(0);
     });
 
     it('should get nested value', () => {
-        const row = component.rows[1];
+        const row = (<any>component)._rows[1];
 
         expect(component.getCellValue('price.value', row)).toEqual(row.value['price']['value']);
         expect(component.getCellValue('status', row)).toEqual(row.value['status']);

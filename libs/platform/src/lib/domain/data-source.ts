@@ -231,7 +231,7 @@ export class ListDataSource<T> extends ComboBoxDataSource<T> {
 }
 
 export class TableDataSource<T> extends ListDataSource<T> implements DataSource<T> {
-    readonly MaxLimit = 10;
+    readonly MAX_LIMIT = 10;
 
     constructor(public dataProvider: DataProvider<any>) {
         super(dataProvider);
@@ -249,7 +249,7 @@ export class TableDataSource<T> extends ListDataSource<T> implements DataSource<
         }
 
         if (!searchParam.has('limit')) {
-            searchParam.set('limit', this.MaxLimit);
+            searchParam.set('limit', this.MAX_LIMIT);
         }
 
         this.dataProvider.fetch(searchParam).subscribe((result: T[]) => {

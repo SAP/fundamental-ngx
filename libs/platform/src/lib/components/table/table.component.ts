@@ -125,25 +125,22 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     class: string;
 
     /** @hidden Formatted rows data. */
-    rows: SelectableRow[] = [];
+    _rows: SelectableRow[] = [];
+
+    /** @hidden */
+    _contentDensityOptions = ContentDensity;
+
+    /** @hidden */
+    _selectionModeOptions = SelectionMode;
 
     /** @hidden */
     checkedAll = false;
 
     /** @hidden */
-    checked = [];
+    private _checked = [];
 
     /** @hidden */
-    unchecked = [];
-
-    /** @hidden */
-    contentDensityOptions = ContentDensity;
-
-    /** @hidden */
-    selectionModeOptions = SelectionMode;
-
-    /** @hidden */
-    readonly stateChanges: Subject<any> = new Subject<any>();
+    private _unchecked = [];
 
     /** @hidden */
     private _dataSource: FdpTableDataSource<any>;
@@ -153,6 +150,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _destroyed = new Subject<void>();
+
+    /** @hidden */
+    private readonly stateChanges: Subject<any> = new Subject<any>();
 
     /** @hidden */
     constructor(private readonly _cd: ChangeDetectorRef) {}
@@ -197,8 +197,8 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     select(index: number, row: SelectableRow, checked: boolean): void {
         this._reset();
         row.checked = checked;
-        this.checkedAll = !checked ? false : this.rows.reduce((check, r) => check && r.checked, true);
-        checked ? this.checked.push(row.value) : this.unchecked.push(row.value);
+        this.checkedAll = !checked ? false : this._rows.reduce((check, r) => check && r.checked, true);
+        checked ? this._checked.push(row.value) : this._unchecked.push(row.value);
         this._emitChange(index);
     }
 
@@ -209,20 +209,20 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         }
 
         this._reset();
-        const alreadySelected = this.rows.find(r => r.checked === true);
+        const alreadySelected = this._rows.find(r => r.checked === true);
         if (alreadySelected) {
             alreadySelected.checked = false;
         }
 
         if (alreadySelected === row) {
-            this.unchecked.push(alreadySelected.value);
+            this._unchecked.push(alreadySelected.value);
             this._emitChange(index);
 
             return;
         }
 
-        this.rows[index].checked = true;
-        this.checked.push(row.value);
+        this._rows[index].checked = true;
+        this._checked.push(row.value);
         this._emitChange(index);
     }
 
@@ -262,9 +262,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _checkAll(): void {
-        this.rows.forEach(r => {
+        this._rows.forEach(r => {
             if (!r.checked) {
-                this.checked.push(r.value);
+                this._checked.push(r.value);
             }
 
             r.checked = true;
@@ -273,9 +273,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _uncheckAll(): void {
-        this.rows.forEach(r => {
+        this._rows.forEach(r => {
             if (r.checked) {
-                this.unchecked.push(r.value);
+                this._unchecked.push(r.value);
             }
 
             r.checked = false;
@@ -284,20 +284,20 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _reset(): void {
-        this.checked = [];
-        this.unchecked = [];
+        this._checked = [];
+        this._unchecked = [];
     }
 
     /** @hidden */
     private _emitChange(index?: number): void {
-        const selected = this.rows.filter(r => r.checked).map(r => r.value);
+        const selected = this._rows.filter(r => r.checked).map(r => r.value);
         this.rowSelectionChange.emit({
             source: this,
             selection: selected,
-            added: this.checked,
-            removed: this.unchecked,
-            index: index ? [index] : this.rows.reduce((indexes, row, idx) => {
-                if (this.checked.includes(row.value) || this.unchecked.includes(row.value)) {
+            added: this._checked,
+            removed: this._unchecked,
+            index: index ? [index] : this._rows.reduce((indexes, row, idx) => {
+                if (this._checked.includes(row.value) || this._unchecked.includes(row.value)) {
                     indexes.push(idx);
                 }
 
@@ -308,7 +308,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _initializeDS(ds: FdpTableDataSource<any>): void {
-        this.rows = [];
+        this._rows = [];
         if (isDataSource(this.dataSource)) {
             this.dataSource.close();
             if (this._dsSubscription) {
@@ -335,8 +335,8 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
             .open()
             .pipe(takeUntil(this._destroyed))
             .subscribe((data) => {
-                this.rows = data.map(c => ({checked: false, value: c})) || [];
-                this.stateChanges.next(this.rows);
+                this._rows = data.map(c => ({checked: false, value: c})) || [];
+                this.stateChanges.next(this._rows);
                 this._cd.markForCheck();
             });
         // initial data fetch
