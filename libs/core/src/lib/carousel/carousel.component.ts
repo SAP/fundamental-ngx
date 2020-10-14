@@ -326,22 +326,14 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
                 this.currentActiveSlidesStartIndex + this.visibleSlidesCount >= this.slides.length
             ) {
                 this.rightButtonDisabled = true;
+            } else {
+                this.leftButtonDisabled = false;
+                this.rightButtonDisabled = false;
             }
 
             if (this.slides.length === 1) {
                 this.leftButtonDisabled = true;
                 this.rightButtonDisabled = true;
-            }
-            if (this.currentActiveSlidesStartIndex === 0) {
-                this.leftButtonDisabled = true;
-            } else if (this.currentActiveSlidesStartIndex === this.slides.length - 1) {
-                this.rightButtonDisabled = true;
-            }
-
-            if (this.currentActiveSlidesStartIndex > 0) {
-                this.leftButtonDisabled = false;
-            } else if (this.currentActiveSlidesStartIndex < this.slides.length - 1) {
-                this.rightButtonDisabled = false;
             }
         }
     }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import * as carouselOneActiveItemTs from '!raw-loader!./examples/carousel-one-active-item.component.ts';
 import * as carouselOneActiveItemHtml from '!raw-loader!./examples/carousel-one-active-item.component.html';
+import * as carouselVerticalTs from '!raw-loader!./examples/carousel-vertical-direction.component.ts';
+import * as carouselVerticalHtml from '!raw-loader!./examples/carousel-vertical-direction.component.html';
 import * as carouselMultipleActiveItemTs from '!raw-loader!./examples/carousel-multiple-active-item.component.ts';
 import * as carouselMultipleActiveItemHtml from '!raw-loader!./examples/carousel-multiple-active-item.component.html';
 import * as carouselNoIndicatorTs from '!raw-loader!./examples/carousel-no-page-indicator.component.ts';
@@ -32,6 +34,21 @@ export class CarouselDocsComponent {
             fileName: 'carousel-one-active-item',
             component: 'CarouselOneActiveItemComponent',
             code: carouselOneActiveItemTs
+        }
+    ];
+
+    carouselVertical: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'carousel-vertical-direction',
+            component: 'CarouselVerticalDirectionComponent',
+            code: carouselVerticalHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'carousel-vertical-direction',
+            component: 'CarouselVerticalDirectionComponent',
+            code: carouselVerticalTs
         }
     ];
 

@@ -200,6 +200,13 @@ export class CarouselService implements OnDestroy {
          */
         let index: number = Math.abs(Math.ceil(this._currentTransitionPx / size));
 
+        // When elementsAtOnce > 1, swiping should stop at last index - elementsAtOnce
+        if (!this.config.infinite && this.config.elementsAtOnce > 1) {
+            if (index + this.config.elementsAtOnce >= this.items.length) {
+                return this.items.toArray()[this.items.length - this.config.elementsAtOnce];
+            }
+        }
+
         index = index + (halfApproached ? 1 : 0);
         /** Checking if transition went out of scope of array */
         if (this.items.toArray()[index]) {
@@ -273,9 +280,8 @@ export class CarouselService implements OnDestroy {
     private _hammerSetup(): void {
         this._hammer = new Hammer(this._elementRef.nativeElement);
 
-        this._hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
-
         if (this.config.vertical) {
+            this._hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
             this._hammer.on('panmove', (event) => this._handlePan(event.deltaY));
             this._hammer.on('panstart', () => this._handlePanStart());
             this._hammer.on('panend', (event) => this._handlePanEnd(event.deltaY));

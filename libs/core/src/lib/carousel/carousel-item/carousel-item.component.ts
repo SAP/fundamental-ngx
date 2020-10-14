@@ -14,7 +14,6 @@ let carouselItemUniqueId = 0;
 @Component({
     selector: 'fd-carousel-item',
     templateUrl: './carousel-item.component.html',
-    styleUrls: ['./carousel-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })

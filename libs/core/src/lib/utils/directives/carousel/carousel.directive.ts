@@ -15,7 +15,7 @@ import { CarouselConfig, CarouselService, PanEndOutput } from '../../services/ca
 @Directive({
     selector: '[fdCarousel]',
     host: {
-        class: 'fd-carousel'
+        class: 'fd-carousel_'
     },
     providers: [CarouselService]
 })
