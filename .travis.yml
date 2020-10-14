@@ -25,7 +25,7 @@ jobs:
     name: Sauce Labs - Core & Platform unit tests
     env:
       - SAUCE_USERNAME=$SAUCE_USERNAME
-      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
     script:
       - npm run test:core:saucelabs
       - npm run test:platform:saucelabs

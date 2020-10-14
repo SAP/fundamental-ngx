@@ -31,13 +31,13 @@ module.exports = function (config) {
             browserName: 'firefox',
             version: 'latest'
         },
-        sl_chrome_win: {
+         sl_firefox_win: {
             base: 'SauceLabs',
             platform: 'windows 10',
             browserName: 'firefox',
             version: 'latest'
         },
-        sl_firefox_win: {
+        sl_chrome_win: {
             base: 'SauceLabs',
             platform: 'windows 10',
             browserName: 'chrome',
@@ -45,18 +45,12 @@ module.exports = function (config) {
         },
         // IE is skiped. Run time stuck for no reason and take up to 30 min.
         // Requires further investigation
-/*        sl_IE_win: {
-            base: 'SauceLabs',
-            platform: 'windows 10',
-            browserName: 'MicrosoftEdge',
-            version: '16.16299'
-        },*/
-        sl_Edge_win: {
-            base: 'SauceLabs',
-            platform: 'windows 10',
-            browserName: 'MicrosoftEdge',
-            version: 'latest'
-        }
+        /*        sl_IE_win: {
+                    base: 'SauceLabs',
+                    platform: 'windows 10',
+                    browserName: 'MicrosoftEdge',
+                    version: '16.16299'
+                },*/
     };
 
     config.set({
