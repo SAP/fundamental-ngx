@@ -58,10 +58,10 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     actionSheetTemplate: TemplateRef<any>;
 
 
-    handleOpenChange(isOpen: boolean): void {
-        this.isOpen = isOpen;
-        this.isOpenChange.emit(isOpen);
-    }
+    // handleOpenChange(isOpen: boolean): void {
+    //     this.isOpen = isOpen;
+    //     this.isOpenChange.emit(isOpen);
+    // }
 
     /** Method that changes state of mobile open variable */
      toggleOpen(): void {
@@ -78,9 +78,9 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     /**
      * Function is called every time popover changes open attribute
      */
-    openChanged(isOpen: boolean): void {
-        this.isOpenChange.emit(isOpen);
-    }
+    // openChanged(isOpen: boolean): void {
+    //     this.isOpenChange.emit(isOpen);
+    // }
 
 
 
