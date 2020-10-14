@@ -1,0 +1,72 @@
+<div class="fd-rating-indicator__container">
+    <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
+    <ng-container *ngTemplateOutlet="zeroRate"></ng-container>
+    <ng-container *ngIf="allowHalves">
+        <ng-container *ngTemplateOutlet="zeroRate; context: { halves: true }"></ng-container>
+    </ng-container>
+    <!-- Available rate values -->
+    <ng-container *ngFor="let rate of icons; index as i; trackBy: trackByFn">
+        <input
+            aria-label="{{ i + 1 }} star"
+            type="radio"
+            class="fd-rating-indicator__input"
+            [disabled]="disabled"
+            [id]="rate.id"
+            name="rating-{{ viewRatingUID }}"
+            [value]="rate.value"
+            [checked]="viewValue === rate.value"
+            (keydown.enter)="onSelect(rate.value)"
+            (keydown.space)="onSelect(rate.value)"
+        />
+        <label (click)="onSelect(rate.value)" class="fd-rating-indicator__label" [for]="rate.id">
+            <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
+            <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
+        </label>
+    </ng-container>
+</div>
+<!-- Popover if displaySumPopover is true and we have ratings object -->
+<fd-popover
+    [triggers]="['mouseenter', 'mouseleave']"
+    [noArrow]="false"
+    placement="top"
+    addContainerClass="fd-rating-indicator__popover"
+    *ngIf="displaySumPopover && ratingItems && ratingItems.length; else dynamicText"
+>
+    <fd-popover-control>
+        <span class="fd-rating-indicator__dynamic-text">
+            (<a href="javascript:;" fd-link>{{ totalRatings }}</a>)
+        </span>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div class="rate-sum-row" *ngFor="let rating of ratingItems; trackBy: trackByFn">
+            <div class="fd-rating-indicator__container rates">
+                <ng-container *ngFor="let rate of icons; trackBy: trackByFn">
+                    <span [class.fd-rating-indicator__input-checked]="rate.value === rating.rate" class="fd-rating-indicator__input"></span>
+                    <label class="fd-rating-indicator__label">
+                        <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
+                        <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
+                    </label>
+                </ng-container>
+            </div>
+            ({{ rating.total }})
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<ng-template #dynamicText>
+    <span *ngIf="totalRatings" class="fd-rating-indicator__dynamic-text">({{ totalRatings }})</span>
+    <span *ngIf="!totalRatings" class="fd-rating-indicator__dynamic-text">({{ viewValue }} of {{ indicatorCount }})</span>
+</ng-template>
+
+<ng-template #zeroRate let-halves="halves">
+    <input
+        aria-label="Reset to zero"
+        type="radio"
+        #ttt
+        class="zero-rating fd-rating-indicator__input"
+        [disabled]="disabled"
+        name="rating-{{ viewRatingUID }}{{halves ? '-halves' : '' }}"
+        [checked]="viewValue === 0"
+    />
+    <label class="zero-rating fd-rating-indicator__label"></label>
+</ng-template>

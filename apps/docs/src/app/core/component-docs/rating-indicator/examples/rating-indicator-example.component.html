@@ -1,0 +1,52 @@
+<h2>Rating indicator - disable after select rate value</h2>
+<fd-rating-indicator
+    indicatorTotal="5"
+    totalRatings="1"
+    [disabled]="isDisable"
+    (ratingChanged)="onRatingChangedWithDisable($event)"
+></fd-rating-indicator>
+<h2>Disabled Rating indicator</h2>
+<fd-rating-indicator
+    totalRatings="1"
+    value="3.34"
+    [disabled]="true"
+    [allowHalves]="true"
+    (ratingChanged)="onRatingChanged($event)"
+></fd-rating-indicator>
+<h2>Rating indicator with custom class for icon</h2>
+<fd-rating-indicator
+    totalRatings="1"
+    value="3.34"
+    [allowHalves]="true"
+    ratedIcon="sap-icon--bo-strategy-management"
+    unratedIcon="sap-icon--notification"
+></fd-rating-indicator>
+<h2>Dynamic changes</h2>
+<div>
+    <div>
+        indicatorTotal: <input [(ngModel)]="config.indicatorTotal" type="number" min="3" max="7" />
+    </div>
+    <div>
+        allowHalves: <input [(ngModel)]="config.allowHalves" type="checkbox" />
+    </div>
+    <div>
+        disabled: <input [(ngModel)]="config.disabled" type="checkbox" />
+    </div>
+    <div>
+        sizes: <select [(ngModel)]="config.size">
+            <option [value]=size *ngFor="let size of sizes; trackBy: trackByFn">{{ size }}</option>
+        </select>
+    </div>
+    <div>
+        <pre>{{ config | json}}</pre>
+    </div>
+    <fd-rating-indicator
+        [indicatorTotal]="config.indicatorTotal"
+        [allowHalves]="config.allowHalves"
+        totalRatings="1"
+        [size]="config.size"
+        [disabled]="config.disabled"
+        (ratingChanged)="onRatingChanged($event)"
+        #rate
+    ></fd-rating-indicator>
+</div>

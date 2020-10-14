@@ -258,6 +258,13 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/radio/radio-docs.module').then((m) => m.RadioDocsModule)
             },
             {
+                path: 'rating-indicator',
+                loadChildren: () =>
+                    import('./component-docs/rating-indicator/rating-indicator-docs.module').then(
+                        (m) => m.RatingIndicatorDocsModule
+                    )
+            },
+            {
                 path: 'scroll-spy',
                 loadChildren: () =>
                     import('./component-docs/scroll-spy/scroll-spy-docs.module').then((m) => m.ScrollSpyDocsModules)

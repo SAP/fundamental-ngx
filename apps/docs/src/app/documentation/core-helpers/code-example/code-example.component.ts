@@ -41,7 +41,7 @@ export class CodeExampleComponent implements OnInit {
         private copyService: CopyService,
         private alertService: AlertService,
         private stackBlitzService: StackblitzService
-    ) {}
+    ) { }
 
     openStackBlitz(): void {
         this.stackBlitzService.openCode(this.exampleFiles);
