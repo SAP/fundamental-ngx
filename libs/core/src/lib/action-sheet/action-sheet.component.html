@@ -1,11 +1,13 @@
-<fd-popover *ngIf="!mobile" [isOpen]="isOpen" (isOpenChange)="handleOpenChange($event)">
+<fd-popover *ngIf="!mobile" [isOpen]="isOpen" (isOpenChange)="handleOpenChange($event)" placement="bottom" [noArrow]="false">
     <fd-popover-control>
         <ng-content select="fd-action-sheet-control"></ng-content>
     </fd-popover-control>
 
-    <fd-popover-body >
-        <ng-container *ngTemplateOutlet="actionSheetBody"></ng-container>
-    </fd-popover-body>
+
+        <fd-popover-body>
+            <ng-container *ngTemplateOutlet="actionSheetBody"></ng-container>
+        </fd-popover-body>
+
 </fd-popover>
 
 <ng-container *ngIf="mobile">
@@ -15,7 +17,7 @@
 
     <div class="fd-action-sheet__wrapper" [class]="{'fd-action-sheet__wrapper--active': isOpen}">
         <ng-container *ngTemplateOutlet="actionSheetBody"></ng-container>
-    </div>
+    </div>aria
 </ng-container>
 
 

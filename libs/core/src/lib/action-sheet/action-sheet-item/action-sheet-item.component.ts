@@ -23,18 +23,23 @@ import {ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulati
 
 export class ActionSheetItemComponent {
 
+    /** Sets text of button. */
     @Input()
     label: string;
 
+    /** Sets icon of action item. */
     @Input()
     glyph: string;
 
+    /** Indicate state of the button.*/
     @Input()
     negative = false;
 
+    /** Indicate if items should be in compact or compare mode. **/
     @Input()
     compact = false;
 
+    /** Display the mobile view. **/
     @Input()
     mobile = false;
 

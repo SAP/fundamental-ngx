@@ -57,9 +57,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     @ViewChild('actionSheetBody', { read: TemplateRef })
     actionSheetTemplate: TemplateRef<any>;
 
-    /** @hidden */
-    placement$ = new BehaviorSubject<Placement>('bottom-start');
-
 
     handleOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
