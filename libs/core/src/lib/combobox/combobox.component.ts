@@ -485,6 +485,8 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
                 term: this.searchInputElement.nativeElement.value,
                 forceClose: false
             });
+
+            this.searchInputElement.nativeElement.focus();
         }
     }
 

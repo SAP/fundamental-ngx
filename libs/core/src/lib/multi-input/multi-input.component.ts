@@ -331,6 +331,10 @@ export class MultiInputComponent implements
         if (!this.mobile) {
             this._popoverOpenHandle(open);
         }
+
+        if (!this.open) {
+            this.searchInputElement.nativeElement.focus();
+        }
         this._changeDetRef.detectChanges();
     }
 
