@@ -24,36 +24,28 @@ export class PlatformDynamicPageDocsComponent {
         {
             language: 'html',
             code: dynamicPageBasicExample,
-            fileName: 'platform-dynamic-page-example'
+            fileName: 'platform-dynamic-page-example',
+            scssFileCode: dynamicPageSnapScrollExampleScss
         },
         {
             language: 'typescript',
             code: dynamicPageBasicExampleTsCode,
             fileName: 'platform-dynamic-page-example',
             component: 'PlatformDynamicPageExampleComponent'
-        },
-        {
-            language: 'scss',
-            code: dynamicPageSnapScrollExampleScss,
-            fileName: 'platform-dynamic-page-snap-scroll-example'
         }
     ];
     dynamicPageSnapScroll: ExampleFile[] = [
         {
             language: 'html',
             code: dynamicPageSnapScrollExample,
-            fileName: 'platform-dynamic-page-snap-scroll-example'
+            fileName: 'platform-dynamic-page-snap-scroll-example',
+            scssFileCode: dynamicPageSnapScrollExampleScss
         },
         {
             language: 'typescript',
             code: dynamicPageSnapScrollExampleTsCode,
             fileName: 'platform-dynamic-page-snap-scroll-example',
             component: 'PlatformDynamicPageSnapScrollComponent'
-        },
-        {
-            language: 'scss',
-            code: dynamicPageSnapScrollExampleScss,
-            fileName: 'platform-dynamic-page-snap-scroll-example'
         }
     ];
 
@@ -61,18 +53,14 @@ export class PlatformDynamicPageDocsComponent {
         {
             language: 'html',
             code: dynamicPageTabbedExample,
-            fileName: 'platform-dynamic-page-tabbed-example'
+            fileName: 'platform-dynamic-page-tabbed-example',
+            scssFileCode: dynamicPageSnapScrollExampleScss
         },
         {
             language: 'typescript',
             code: dynamicPageTabbedExampleTsCode,
             fileName: 'platform-dynamic-page-tabbed-example',
             component: 'PlatformDynamicPageTabbedComponent'
-        },
-        {
-            language: 'scss',
-            code: dynamicPageSnapScrollExampleScss,
-            fileName: 'platform-dynamic-page-snap-scroll-example'
         }
     ];
 
@@ -80,18 +68,14 @@ export class PlatformDynamicPageDocsComponent {
         {
             language: 'html',
             code: dynamicPageResponsivePaddingExample,
-            fileName: 'platform-dynamic-page-responsive-padding-example'
+            fileName: 'platform-dynamic-page-responsive-padding-example',
+            scssFileCode: dynamicPageSnapScrollExampleScss
         },
         {
             language: 'typescript',
             code: dynamicPageResponsivePaddingExampleTsCode,
             fileName: 'platform-dynamic-page-responsive-padding-example',
             component: 'PlatformDynamicPageResponsivePaddingComponent'
-        },
-        {
-            language: 'scss',
-            code: dynamicPageSnapScrollExampleScss,
-            fileName: 'platform-dynamic-page-snap-scroll-example'
         }
     ];
 }

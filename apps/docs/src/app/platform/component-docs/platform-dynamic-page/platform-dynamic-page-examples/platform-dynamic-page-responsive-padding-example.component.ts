@@ -4,7 +4,6 @@ import { DynamicPageCollapseChangeEvent } from '@fundamental-ngx/platform';
 @Component({
     selector: 'fdp-dynamic-page-responsive-padding-example',
     templateUrl: './platform-dynamic-page-responsive-padding-example.component.html',
-    styleUrls: ['./platform-dynamic-page-snap-scroll-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformDynamicPageResponsivePaddingExampleComponent {
