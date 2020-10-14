@@ -57,12 +57,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     @ViewChild('actionSheetBody', { read: TemplateRef })
     actionSheetTemplate: TemplateRef<any>;
 
-
-    // handleOpenChange(isOpen: boolean): void {
-    //     this.isOpen = isOpen;
-    //     this.isOpenChange.emit(isOpen);
-    // }
-
     /** Method that changes state of mobile open variable */
      toggleOpen(): void {
         this.isOpen = !this.isOpen;
@@ -74,14 +68,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
         this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
         this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
     }
-
-    /**
-     * Function is called every time popover changes open attribute
-     */
-    // openChanged(isOpen: boolean): void {
-    //     this.isOpenChange.emit(isOpen);
-    // }
-
 
 
     /** @hidden */
