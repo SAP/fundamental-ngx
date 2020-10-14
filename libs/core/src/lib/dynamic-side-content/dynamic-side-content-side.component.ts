@@ -14,21 +14,21 @@ import { CLASS_NAME, DYNAMIC_SIDE_CONTENT_CHILD_TOKEN } from './constants';
 let componentId = 0;
 
 @Component({
-    selector: 'fd-dynamic-side-side',
+    selector: 'fd-dynamic-side-content-side',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: DYNAMIC_SIDE_CONTENT_CHILD_TOKEN,
-            useExisting: forwardRef(() => DynamicSideSideComponent)
+            useExisting: forwardRef(() => DynamicSideContentSideComponent)
         }
     ]
 })
-export class DynamicSideSideComponent implements OnInit {
+export class DynamicSideContentSideComponent implements OnInit {
     /** Unique element Id, by default it's auto generated */
     @Input()
     @HostBinding('attr.id')
-    id = 'fd-dynamic-side-side-id-' + componentId++;
+    id = 'fd-dynamic-side-content-side-id-' + componentId++;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _render: Renderer2) {}

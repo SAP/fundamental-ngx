@@ -22,13 +22,13 @@ import {
     DynamicSideContentSize,
     DYNAMIC_SIDE_CONTENT_CHILD_TOKEN
 } from './constants';
-import { DynamicSideMainComponent } from './dynamic-side-content-main.component';
-import { DynamicSideSideComponent } from './dynamic-side-content-side.component';
+import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
+import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
 
 let componentId = 0;
 
 @Component({
-    selector: 'fd-dynamic-side',
+    selector: 'fd-dynamic-side-content',
     templateUrl: './dynamic-side-content.component.html',
     styleUrls: ['./dynamic-side-content.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -73,7 +73,7 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
 
     /** @hidden */
     @ContentChildren(DYNAMIC_SIDE_CONTENT_CHILD_TOKEN as any)
-    private _children: QueryList<DynamicSideMainComponent | DynamicSideSideComponent>;
+    private _children: QueryList<DynamicSideContentMainComponent | DynamicSideContentSideComponent>;
 
     /** @hidden */
     private _isSideProjectedAsFirst = false;
@@ -124,7 +124,7 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     /** @hidden */
     private _listenToChildrenOrder(): void {
         this._children.changes.pipe(startWith(this._children)).subscribe(() => {
-            this._isSideProjectedAsFirst = this._children.first instanceof DynamicSideSideComponent;
+            this._isSideProjectedAsFirst = this._children.first instanceof DynamicSideContentSideComponent;
 
             this._calculateSidePosition();
 

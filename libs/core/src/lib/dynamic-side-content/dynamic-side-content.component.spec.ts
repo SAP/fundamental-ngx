@@ -7,17 +7,17 @@ import { whenStable } from '../utils/tests/when-stable';
 
 import { DynamicSideContentModule } from './dynamic-side-content.module';
 import { DynamicSideContentComponent } from './dynamic-side-content.component';
-import { DynamicSideSideComponent } from './dynamic-side-content-side.component';
-import { DynamicSideMainComponent } from './dynamic-side-content-main.component';
+import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
+import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
 import { DynamicSideContentPosition, DynamicSideContentSize, CLASS_NAME } from './constants';
 
 @Component({
     template: `
-        <fd-dynamic-side [size]="size" [position]="position">
-            <fd-dynamic-side-side *ngIf="renderSideFromLeft">{{ sideTextContent }}</fd-dynamic-side-side>
-            <fd-dynamic-side-main>{{ mainTextContent }}</fd-dynamic-side-main>
-            <fd-dynamic-side-side *ngIf="!renderSideFromLeft">{{ sideTextContent }}</fd-dynamic-side-side>
-        </fd-dynamic-side>
+        <fd-dynamic-side-content [size]="size" [position]="position">
+            <fd-dynamic-side-content-side *ngIf="renderSideFromLeft">{{ sideTextContent }}</fd-dynamic-side-content-side>
+            <fd-dynamic-side-content-main>{{ mainTextContent }}</fd-dynamic-side-content-main>
+            <fd-dynamic-side-content-side *ngIf="!renderSideFromLeft">{{ sideTextContent }}</fd-dynamic-side-content-side>
+        </fd-dynamic-side-content>
     `
 })
 class TestHostComponent {
@@ -119,8 +119,8 @@ describe('DynamicSideContent', () => {
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
-            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
-            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideContentSideComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideContentMainComponent);
         });
 
         it('should render side content from the right if projected so', () => {
@@ -128,8 +128,8 @@ describe('DynamicSideContent', () => {
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
-            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
-            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideContentMainComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideContentSideComponent);
         });
 
         it('should render side content from the left if position="left"', () => {
@@ -138,8 +138,8 @@ describe('DynamicSideContent', () => {
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
-            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
-            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideContentSideComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideContentMainComponent);
         });
 
         it('should render side content from the right if position="right"', () => {
@@ -148,8 +148,8 @@ describe('DynamicSideContent', () => {
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
-            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
-            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideContentMainComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideContentSideComponent);
         });
 
         it('should render side content from the right if position="bottom"', () => {
@@ -158,8 +158,8 @@ describe('DynamicSideContent', () => {
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
-            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
-            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideContentMainComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideContentSideComponent);
         });
 
         it('should render side content according to projection when position="equalSplit"', () => {
@@ -170,14 +170,14 @@ describe('DynamicSideContent', () => {
             host.renderSideFromLeft = true; // left side-content projection
             fixture.detectChanges();
 
-            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
-            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideContentSideComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideContentMainComponent);
 
             host.renderSideFromLeft = false; // right side-content projection
             fixture.detectChanges();
 
-            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideMainComponent);
-            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideSideComponent);
+            expect(componentDebugEl.children[0].componentInstance).toBeInstanceOf(DynamicSideContentMainComponent);
+            expect(componentDebugEl.children[1].componentInstance).toBeInstanceOf(DynamicSideContentSideComponent);
         });
     });
 });

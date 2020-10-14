@@ -34,7 +34,7 @@ export const API_FILES = {
         'CardKpiAnalyticsLabelDirective',
         'CardKpiAnalyticsContentDirective'
     ],
-    dynamicSideContent: ['DynamicSideContentComponent', 'DynamicSideSideComponent', 'DynamicSideMainComponent'],
+    dynamicSideContent: ['DynamicSideContentComponent', 'DynamicSideContentSideComponent', 'DynamicSideContentMainComponent'],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
     button: ['ButtonComponent'],

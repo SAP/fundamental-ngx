@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
-import { DynamicSideSideComponent } from './dynamic-side-content-side.component';
+import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
 import { CLASS_NAME } from './constants';
 
-describe('DynamicSideSideComponent', () => {
-    let fixture: ComponentFixture<DynamicSideSideComponent>;
-    let component: DynamicSideSideComponent;
+describe('DynamicSideContentSideComponent', () => {
+    let fixture: ComponentFixture<DynamicSideContentSideComponent>;
+    let component: DynamicSideContentSideComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule],
-            declarations: [DynamicSideSideComponent]
+            declarations: [DynamicSideContentSideComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(DynamicSideSideComponent);
+        fixture = TestBed.createComponent(DynamicSideContentSideComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
