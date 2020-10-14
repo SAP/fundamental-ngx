@@ -80,7 +80,7 @@ export class PluginManagerService implements OnDestroy {
 
     constructor(private lookupService: LookupService, private messageBus: MessagingService,
                 private topics: MessagingTopics) {
-        this.topics.set({
+        this.topics.define({
             name: TOPIC_SYSTEM_PLUGIN,
             eventType: EventType.DEFAULT,
             shared: true

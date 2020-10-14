@@ -48,7 +48,7 @@ export class DefaultErrorHandlerService implements ErrorHandler, OnDestroy {
                 @Inject(ERROR_FORMATTER) private formatter: ErrorFormatter,
                 @Inject(ERROR_NOTIFIERS) @Optional() private notifiers: ErrorNotifier[]) {
 
-        this.topics.set({
+        this.topics.define({
             name: TOPIC_ERROR_EVENT,
             eventType: EventType.DURABLE,
             shared: true

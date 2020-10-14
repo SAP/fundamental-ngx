@@ -36,7 +36,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.set({
+                t.define({
                     name: 'system:events',
                     eventType: EventType.DEFAULT, shared: true
                 });
@@ -57,7 +57,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.set({
+                t.define({
                     name: 'system:events',
                     eventType: EventType.DEFAULT, shared: true
                 });
@@ -86,7 +86,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.set({
+                t.define({
                     name: 'system:events',
                     eventType: EventType.DEFAULT, shared: true
                 });
@@ -107,7 +107,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.set({
+                t.define({
                     name: 'system:events',
                     eventType: EventType.DEFAULT, shared: true
                 });
@@ -134,7 +134,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.set({
+                t.define({
                     name: 'system:events',
                     eventType: EventType.DEFAULT, shared: true
                 });
@@ -157,12 +157,12 @@ describe('MessagingService', () => {
                 [MessagingService, MessagingTopics],
                 (service: MessagingService, t: MessagingTopics) => {
 
-                    t.set({
+                    t.define({
                         name: 'system:events',
                         eventType: EventType.DEFAULT, shared: true
                     });
 
-                    t.set({
+                    t.define({
                         name: 'system:XXX',
                         eventType: EventType.DEFAULT, shared: true
                     });
@@ -197,7 +197,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.set({
+                t.define({
                     name: 'system:events',
                     eventType: EventType.ONLY_LAST, shared: true
                 });
@@ -232,7 +232,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.set({
+                t.define({
                     name: 'system:events',
                     eventType: EventType.ONLY_LAST, shared: true
                 });
@@ -271,7 +271,7 @@ describe('MessagingService', () => {
             [MessagingService, MessagingTopics],
             (service: MessagingService, t: MessagingTopics) => {
 
-                t.set({
+                t.define({
                     name: 'system:events',
                     eventType: EventType.DURABLE, shared: true
                 });

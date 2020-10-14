@@ -21,12 +21,12 @@ export class AppShellProviderService {
          * Create AppShell Level topics
          */
         // todo_valorkin
-        this.topics.set({
+        this.topics.define({
             name: 'app:event',
             eventType: EventType.ONLY_LAST,
             shared: true
         });
-        this.topics.set({
+        this.topics.define({
             name: 'app:search',
             eventType: EventType.ONLY_LAST,
             shared: true
