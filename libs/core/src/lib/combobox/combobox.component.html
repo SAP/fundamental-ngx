@@ -2,6 +2,7 @@
 
 <ng-template #desktopTemplate>
     <fd-popover
+        additionalBodyClass="fd-popover-custom-list"
         [isOpen]="open && displayedValues && displayedValues.length"
         (isOpenChange)="isOpenChangeHandle($event)"
         [fillControlMode]="'at-least'"

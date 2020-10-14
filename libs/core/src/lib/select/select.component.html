@@ -3,6 +3,7 @@
 <ng-template #selectDesktopTemplate>
     <fd-popover
         style="display: block"
+        additionalBodyClass="fd-popover-custom-list"
         [isOpen]="isOpen"
         [triggers]="[]"
         [focusTrapped]="true"
@@ -10,6 +11,7 @@
         [appendTo]="appendTo"
         [options]="popperOptions"
         [closeOnEscapeKey]="false"
+        [fillControlMode]="'at-least'"
         [closeOnOutsideClick]="closeOnOutsideClick"
         (isOpenChange)="popoverOpenChangeHandle($event)">
 

@@ -3,7 +3,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
-import { CdkPopoverComponent } from '@fundamental-ngx/core';
+import { CdkPopoverComponent } from '../popover/cdk-overlay/cdk-popover.component';
 
 @Component({
     template: `

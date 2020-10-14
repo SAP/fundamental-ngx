@@ -1,5 +1,5 @@
-import { ConnectedPosition } from '@angular/cdk/overlay';
 import { isDevMode } from '@angular/core';
+import { ConnectedPosition } from '@angular/cdk/overlay';
 
 const popoverPlacementMap: {[key: string]: ConnectedPosition} = {
     'top-start': { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },

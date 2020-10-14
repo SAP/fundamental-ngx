@@ -2,6 +2,7 @@
     <div class="fd-multi-input-field">
         <ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
         <fd-popover
+            additionalBodyClass="fd-popover-custom-list"
             *ngIf="!mobile"
             [isOpen]="open && displayedValues && displayedValues.length"
             (isOpenChange)="openChangeHandle($event)"
