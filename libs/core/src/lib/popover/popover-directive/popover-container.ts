@@ -15,7 +15,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import focusTrap from 'focus-trap';
+import { createFocusTrap } from 'focus-trap';
 
 /**
  * Not intended for external use.
@@ -91,7 +91,7 @@ export class PopoverContainer implements AfterViewInit, OnDestroy {
     private setupFocusTrap(): void {
         if (this.focusTrapped) {
             try {
-                this.focusTrap = focusTrap(this.elRef.nativeElement, {
+                this.focusTrap = createFocusTrap(this.elRef.nativeElement, {
                     clickOutsideDeactivates: true,
                     escapeDeactivates: false,
                     initialFocus: this.elRef.nativeElement
