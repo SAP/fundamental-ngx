@@ -9,14 +9,14 @@ import { Injectable } from '@angular/core';
 export class MessagingTopics {
     public topicsDef = new Map<string, Topic>();
 
-    defineTopic(topic: Topic): void {
+    set(topic: Topic): void {
         if (this.topicsDef.has(topic.name)) {
             return;
         }
         this.topicsDef.set(topic.name, topic);
     }
 
-    hasTopic(name: string): boolean {
+    has(name: string): boolean {
         return this.topicsDef.has(name);
     }
 
@@ -24,7 +24,7 @@ export class MessagingTopics {
      * If we dont find exact mach then go up to category
      *
      */
-    getTopic(name: string): Topic {
+    get(name: string): Topic {
         if (this.topicsDef.has(name)) {
             return this.topicsDef.get(name);
         }
@@ -35,9 +35,8 @@ export class MessagingTopics {
 
 
 export interface Topic {
-    prefix: string;
-    eventType: EventType;
     name: string;
+    eventType: EventType;
     durableEventSize?: number;
 
     /**
