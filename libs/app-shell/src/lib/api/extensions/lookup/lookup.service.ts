@@ -2,13 +2,16 @@ import {
     Injectable,
     OnDestroy
 } from '@angular/core';
-import { DescriptorsModule, PluginDescriptor } from './plugin-descriptor.model';
+import {
+    DescriptorsModule,
+    PluginDescriptor
+} from './plugin-descriptor.model';
 
 @Injectable({ providedIn: 'root' })
 export class LookupService implements OnDestroy {
     private readonly pluginsRepository: Array<Partial<PluginDescriptor>> = [];
 
-    lookup(query: Map<string, string>): LookupItem {
+    lookup(query: Map<string, string>, isRoute: boolean = false): LookupItem {
         const predicate = (record: Record<string, any>): boolean => {
             let match = true;
             query.forEach((value, key) => {
@@ -17,12 +20,13 @@ export class LookupService implements OnDestroy {
             return match;
         };
         const plugin = this.pluginsRepository.find((_plugin) => {
-            return  predicate(_plugin) || _plugin.modules.some(predicate);
+            return predicate(_plugin) || _plugin.modules.some(predicate);
         });
-
-        const module = plugin.modules.find(predicate);
-
-        if (!plugin || !module) {
+        let module;
+        if (isRoute) {
+            module = plugin.modules.find(predicate);
+        }
+        if (!plugin || (!module && isRoute)) {
             throw new Error('No Plugin found. Please check your configuration.');
         }
         const item: LookupItem = {
@@ -54,5 +58,5 @@ export interface LookupItem {
     attributes: Map<string, string>;
     version: string;
     descriptor: Partial<PluginDescriptor>;
-    module: DescriptorsModule;
+    module?: DescriptorsModule;
 }

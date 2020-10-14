@@ -28,7 +28,7 @@ export class PluginPageLauncherComponent implements OnInit {
         this.route.paramMap.subscribe(
             params => {
                 const id = params.get('remote-route');
-                const lookupItem = this.lookupService.lookup(this.initQuery(id));
+                const lookupItem = this.lookupService.lookup(this.initQuery(id), true);
                 if (!lookupItem) {
                     // Inject Router and navigate to NotFound page
                     this._plugin = null;
