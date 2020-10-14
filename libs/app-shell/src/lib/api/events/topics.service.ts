@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 export class MessagingTopics {
     public topicsDef = new Map<string, Topic>();
 
-    set(topic: Topic): void {
+    define(topic: Topic): void {
         if (this.topicsDef.has(topic.name)) {
             return;
         }

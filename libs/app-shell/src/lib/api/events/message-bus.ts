@@ -190,6 +190,9 @@ export class TextMessage extends Message {
 }
 
 
+/**
+ * Defines collection based Message
+ */
 export class MapMessage<T> extends Message {
     private _map: Map<string, T>;
 

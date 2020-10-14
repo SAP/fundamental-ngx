@@ -16,7 +16,7 @@ const TOPIC_THEME_CHANGE = 'theme:change';
 export class ThemeManagerService {
 
     constructor(private messageBus: MessagingService, private topics: MessagingTopics) {
-        this.topics.set({
+        this.topics.define({
             name: TOPIC_THEME_CHANGE,
             eventType: EventType.ONLY_LAST,
             shared: true
