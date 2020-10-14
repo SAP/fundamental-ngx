@@ -284,6 +284,7 @@ export const API_FILES = {
     timePicker: ['TimePickerComponent', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
+    slider: ['SliderComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],
     toolbar: [
         'ToolbarComponent',

@@ -355,6 +355,10 @@ export const ROUTES: Routes = [
             {
                 path: 'wizard',
                 loadChildren: () => import('./component-docs/wizard/wizard-docs.module').then((m) => m.WizardDocsModule)
+            },
+            {
+                path: 'slider',
+                loadChildren: () => import('./component-docs/slider/slider-docs.module').then((m) => m.SliderDocsModule)
             }
         ]
     }
