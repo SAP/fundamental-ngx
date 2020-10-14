@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.11...v0.23.0-rc.12) (2020-10-14)
+
+
+### Features
+
+* (Platform) introduce new Object Attribute  ([#3531](https://github.com/SAP/fundamental-ngx/issues/3531)) ([7f7b382](https://github.com/SAP/fundamental-ngx/commit/7f7b382c2e38c6a778044d3461caa0900abc8e43))
+
 ## [0.23.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.10...v0.23.0-rc.11) (2020-10-14)
 
 ## [0.23.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.9...v0.23.0-rc.10) (2020-10-14)
