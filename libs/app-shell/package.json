@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/app-shell",
-  "version": "0.2.27",
+  "version": "0.2.28",
   "schematics": "./schematics/collection.json",
   "description": "Fundamentals App Shell for microfrontend",
   "license": "Apache-2.0",
