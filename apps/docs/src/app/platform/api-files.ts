@@ -24,7 +24,12 @@ export const API_FILES = {
         'TableComponent',
         'TableToolbarComponent',
         'TableToolbarActionsComponent',
-        'TableColumnComponent'
+        'TableColumnComponent',
+        'FdpTableHeader',
+        'FdpHeaderCellDef',
+        'FdpTableCell',
+        'FdpCellDef'
+
     ],
     textarea: ['TextAreaComponent'],
     panel: [
