@@ -1,0 +1,35 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { SliderModule } from '@fundamental-ngx/core';
+
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { API_FILES } from '../../api-files';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { SliderDocsComponent } from './slider-docs.component';
+import { SliderBasicExampleComponent } from './examples/slider-example.component';
+import { SliderHeaderComponent } from './slider-header/slider-header.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+
+const routes: Routes = [
+    {
+        path: '',
+        component: SliderHeaderComponent,
+        children: [
+            { path: '', component: SliderDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.slider } }
+        ]
+    }
+];
+
+@NgModule({
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SharedDocumentationPageModule, SliderModule],
+    exports: [RouterModule],
+    declarations: [
+        SliderHeaderComponent,
+        SliderDocsComponent,
+        SliderBasicExampleComponent
+    ]
+})
+export class SliderDocsModule {
+}
