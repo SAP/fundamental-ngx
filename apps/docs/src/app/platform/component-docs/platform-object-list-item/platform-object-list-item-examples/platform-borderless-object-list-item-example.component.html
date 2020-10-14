@@ -1,6 +1,8 @@
 <h3>Cozy Mode</h3>
-<fdp-list noBorder="true" [hasObject]="true">
-    <fdp-object-list-item *ngFor="let item of items" [item]="item">
+<fdp-list [noBorder]="true" [hasObject]="true">
+    <fdp-object-list-item *ngFor="let item of items" [introductionText]="item.introductionText" [title]="item.title"
+        [currency]="item.currency" [amount]="item.amount" [decimal]="item.decimal" [image]="item.image"
+        [link]="item.link">
         <fdp-object-list-item-row [attributeLabel]="item.attribute1">
             <span fd-object-marker [glyph]="item.gylp1" aria-label="Favourite Icon with Text"></span>
         </fdp-object-list-item-row>

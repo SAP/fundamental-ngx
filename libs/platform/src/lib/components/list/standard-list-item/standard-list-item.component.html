@@ -91,20 +91,13 @@
     </div>
 </ng-template>
 <ng-template #actionsTemplate>
-    <span *ngIf="secondaryIcons!== null && secondaryIcons!== undefined">
-        <span *ngFor="let secondaryIcon of secondaryIcons">
-            <fd-icon class="fd-list__icon" *ngIf="!(secondaryIcon.isButton)" [glyph]="secondaryIcon.icon"
-                [attr.alt]="secondaryIcon.icon" role="img" (click)="_onActionButtonClick($event)">
-            </fd-icon>
-            <button fd-button *ngIf="secondaryIcon.isButton" role="button" [compact]="_isCompact" fdType="transparent"
-                [glyph]="secondaryIcon.icon" (click)="_onActionButtonClick($event)">
-            </button>
-        </span>
-    </span>
-    <button fd-button *ngIf="listType === 'detail'" role="button" [compact]="_isCompact" fdType="transparent"
-        glyph="edit" (click)="_onActionButtonClick($event)" [attr.aria-label]="'detail'">
+    <ng-content selector="#secondaryAction"></ng-content>
+    <button fd-button #edit [attr.id]="'detail-' + id" *ngIf="listType === 'detail'" role="button"
+        [compact]="_isCompact" fdType="transparent" glyph="edit" (click)="_onActionButtonClick($event,'edit')"
+        [attr.aria-label]="'detail'" (keydown)="_onKeyButtonClick($event,'edit')">
     </button>
-    <button fd-button *ngIf="selectionMode === 'delete'" role="button" [compact]="_isCompact"
-        [attr.aria-label]="'delete'" fdType="transparent" glyph="decline" (click)="_onActionButtonClick($event)">
+    <button fd-button #delete [attr.id]="'delete-' + id" *ngIf="selectionMode === 'delete'" role="button"
+        [compact]="_isCompact" [attr.aria-label]="'delete'" fdType="transparent" glyph="decline"
+        (click)="_onActionButtonClick($event,'delete')" (keydown)="_onKeyButtonClick($event,'delete')">
     </button>
 </ng-template>

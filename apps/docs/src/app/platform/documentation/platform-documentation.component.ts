@@ -45,7 +45,6 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                 { url: 'platform/action-list-item', name: 'Action List Item' },
                 { url: 'platform/display-list-item', name: 'Display List Item' },
                 { url: 'platform/object-list-item', name: 'Object List Item' }]
-
             }
         ];
 

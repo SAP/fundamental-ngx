@@ -1,13 +1,20 @@
 import {
     Component, ChangeDetectorRef, ElementRef,
-    ChangeDetectionStrategy, forwardRef, Input
+    ChangeDetectionStrategy, forwardRef, Input, Output, EventEmitter, ViewChild
 } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+
+import { KeyUtil } from '@fundamental-ngx/core';
 
 import { ListConfig } from '../list.config';
 import { BaseListItem } from '../base-list-item';
 
+export class ActionChangeEvent {
+    source: ActionListItemComponent;
+}
+
+const activeAction = 'is-active';
 @Component({
     selector: 'fdp-action-list-item',
     templateUrl: './action-list-item.component.html',
@@ -21,26 +28,45 @@ export class ActionListItemComponent extends BaseListItem {
     @Input()
     title: string;
 
-    /** @hidden */
-    /**on keydown append active styles on actionable item */
-    _onKeyDown(event: any): void {
-        if (event.keyCode === ENTER || event.keyCode === SPACE) {
-            this.itemEl.nativeElement.querySelector('button').classList.add('is-active');
-        }
-    }
+    /** Access button element*/
+    @ViewChild('action', { read: ElementRef })
+    button: ElementRef;
 
-    /** @hidden */
-    /**on keyup remove active styles from actionable item*/
-    _onKeyUp(event: any): void {
-        if (event.keyCode === ENTER || event.keyCode === SPACE) {
-            this.itemEl.nativeElement.querySelector('button').classList.remove('is-active');
-        }
-    }
+    /** Event sent when action in clicked */
+    @Output()
+    actionClicked = new EventEmitter<ActionChangeEvent>();
 
     /** @hidden */
     constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
         protected _listConfig: ListConfig, private _router: Router) {
         super(_changeDetectorRef, itemEl, _listConfig, _router);
+    }
+    /**
+     *  @hidden
+     *  Handles action click
+     */
+    _onActionClick($event: MouseEvent | KeyboardEvent | TouchEvent): void {
+        const event = new ActionChangeEvent();
+        event.source = this;
+        this.actionClicked.emit(event);
+    }
+
+    /** @hidden */
+    /**on keydown append active styles on actionable item */
+    _onKeyDown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
+            this.button.nativeElement.classList.add(activeAction);
+        }
+    }
+
+    /** @hidden */
+    /**on keyup remove active styles from actionable item*/
+    _onKeyUp(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
+            this.button.nativeElement.classList.remove(activeAction);
+            this._onActionClick(event);
+
+        }
     }
 
 }

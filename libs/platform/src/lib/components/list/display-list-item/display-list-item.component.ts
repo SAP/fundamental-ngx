@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class DisplayListItemComponent extends BaseListItem {
     /** @hidden */
-    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
+    constructor(_changeDetectorRef: ChangeDetectorRef, itemEl: ElementRef,
         protected _listConfig: ListConfig, private _router: Router) {
         super(_changeDetectorRef, itemEl, _listConfig, _router);
     }

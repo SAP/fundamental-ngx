@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fdp-object-list-item-example',
     templateUrl: './platform-object-list-item-example.component.html'
 })
-export class PlatformObjectListItemExampleComponent {
-}
-
+export class PlatformObjectListItemExampleComponent { }

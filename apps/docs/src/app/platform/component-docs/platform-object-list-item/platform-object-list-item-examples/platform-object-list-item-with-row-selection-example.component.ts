@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
-
+import {
+    ListDataSource, DataProvider,
+    SelectionChangeEvent, BaseListItem
+} from '@fundamental-ngx/platform';
 
 const LIST_ELEMENTS: Product[] = [
     {
@@ -23,7 +25,8 @@ const LIST_ELEMENTS: Product[] = [
         status2: 'informative',
         statusgyph2: '',
         statuslabel2: 'Informative',
-        inverted2: true
+        inverted2: true,
+        decimal: 2
     },
     {
         title: 'Notebook Basic 16',
@@ -43,7 +46,8 @@ const LIST_ELEMENTS: Product[] = [
         status2: '',
         statusgyph2: '',
         statuslabel2: '',
-        inverted2: false
+        inverted2: false,
+        decimal: 2
     },
     {
         title: 'Notebook Basic 17',
@@ -63,7 +67,8 @@ const LIST_ELEMENTS: Product[] = [
         status2: 'negative',
         statusgyph2: 'status-negative',
         statuslabel2: '',
-        inverted2: true
+        inverted2: true,
+        decimal: 2
     },
     {
         title: 'Notebook Basic 18',
@@ -83,7 +88,8 @@ const LIST_ELEMENTS: Product[] = [
         status2: 'informative',
         statusgyph2: 'hint',
         statuslabel2: 'Informative',
-        inverted2: true
+        inverted2: true,
+        decimal: 2
     }];
 
 export interface Product {
@@ -105,6 +111,7 @@ export interface Product {
     statusgyph2: string;
     statuslabel2: string;
     inverted2: boolean;
+    decimal: number;
 }
 
 export class ListDataProvider extends DataProvider<Product> {
@@ -126,10 +133,9 @@ export class ListDataProvider extends DataProvider<Product> {
 })
 export class PlatformObjectListItemWithRowSelectionExampleComponent {
     _dataSource = new ListDataSource<Product>(new ListDataProvider());
-    _selectedItems: any[] = [];
+    _selectedItems: BaseListItem[] = [];
 
-    _showItemInfo(event: any): void {
+    _showItemInfo(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;
     }
-
 }

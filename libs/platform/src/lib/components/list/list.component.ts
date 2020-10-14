@@ -6,11 +6,11 @@ import {
     ContentChild, Self, Optional, SkipSelf, Host, OnDestroy
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { UP_ARROW, DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Subscription, Subject, of } from 'rxjs';
 import { takeUntil, delay, tap } from 'rxjs/operators';
+import { ENTER, SPACE, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
 
 import { ListDataSource, isDataSource } from '../../domain/data-source';
 import { ContentDensity, FormFieldControl } from '../../components/form/form-control';
@@ -20,6 +20,7 @@ import { CollectionBaseInput } from '../form/collection-base.input';
 
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
+import { KeyUtil } from '@fundamental-ngx/core';
 
 
 
@@ -229,7 +230,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     * Child items of the List.
     */
     @ContentChildren(BaseListItem, { descendants: true })
-    ListItems: QueryList<BaseListItem>;
+    listItems: QueryList<BaseListItem>;
 
     /** role */
     @HostBinding('attr.role')
@@ -383,13 +384,13 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /** @hidden */
     /**Keyboard manager on list items, set values when passed via array */
     ngAfterViewInit(): void {
-        this._keyManager = new FocusKeyManager<BaseListItem>(this.ListItems).withWrap();
-        this.ListItems.forEach((item) => {
+        this._keyManager = new FocusKeyManager<BaseListItem>(this.listItems).withWrap();
+        this.listItems.forEach((item) => {
             if (item.navigationIndicator || item.listType === 'detail') {
                 this._partialNavigation = true;
             }
         });
-        this.ListItems.forEach((item) => {
+        this.listItems.forEach((item) => {
             if (!this._partialNavigation) {
                 item.navigated = this.navigated;
                 item.navigationIndicator = this.navigationIndicator;
@@ -417,17 +418,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * set values when passed via datasource
      */
     ngAfterContentInit(): void {
-        setTimeout(() => {
-            if (this.ListItems.length !== 0) {
-                this.ListItems.first.listItem.nativeElement.setAttribute('tabindex', 0);
+        this._itemsSubscription = this.listItems.changes.subscribe((items) => {
+
+            if (this.listItems.length !== 0) {
+                this.listItems.first.listItem.nativeElement.setAttribute('tabindex', 0);
             }
-        })
-        this._itemsSubscription = this.ListItems.changes.subscribe((items) => {
-            setTimeout(() => {
-                if (this.ListItems.length !== 0) {
-                    this.ListItems.first.listItem.nativeElement.setAttribute('tabindex', 0);
-                }
-            })
+
             // verfiying partial navgation set for all items in one go
             items.forEach((item) => {
                 if (item.navigationIndicator || item.listType === 'detail') {
@@ -478,9 +474,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     _handleKeyDown(event: KeyboardEvent): boolean {
         event.stopImmediatePropagation();
         if (this._keyManager) {
-            if (event.keyCode === DOWN_ARROW || event.keyCode === UP_ARROW) {
+            if (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
                 return false;
-            } else if (event.keyCode === ENTER || event.keyCode === SPACE) {
+            } else if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
                 this._updateNavigation(event);
                 return false;
             }
@@ -499,7 +495,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /** @hidden */
     /**load more on enter or space press */
     _loadOnkeyPress(event: KeyboardEvent): void {
-        if (event.keyCode === ENTER || event.keyCode === SPACE) {
+        if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
             this._getMoreData();
         }
     }
@@ -545,10 +541,11 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
     /** @hidden */
     /**  on Update navgiation styles for non navigated items
-     * event:any to avoid code duplication**/
+     * event:any to avoid code duplication
+     * seprate PR for custom event**/
     @HostListener('click', ['$event'])
     _updateNavigation(event: any): void {
-        this.ListItems.forEach((item) => {
+        this.listItems.forEach((item) => {
             if (item.anchor !== undefined) {
                 item.anchor.nativeElement.classList.remove('is-navigated');
             }
@@ -631,7 +628,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             event.target !== undefined &&
             this.selectionMode === 'single' &&
             !this.selectRow) {
-            this.ListItems.forEach((item) => {
+            this.listItems.forEach((item) => {
                 if (item.radioButtonComponent !== undefined) {
                     item.listItem.nativeElement.classList.remove('is-selected');
                 }
@@ -671,7 +668,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             }
         }
         // selecteditem changes inform parent
-        this.ListItems.forEach((item) => {
+        this.listItems.forEach((item) => {
             if (item.radioButtonComponent !== undefined) {
                 item.selectionValue = this._selectedvalue;
                 this.stateChanges.next(item);
@@ -685,20 +682,19 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
         // handles mutli select on row level without checkbox
         if (this.selectionMode === 'multi' && this.selectRow) {
-            this.ListItems.forEach((item) => {
+            this.listItems.forEach((item) => {
                 if (item._selected) {
                     this._selectionModel.select(item);
-                    this.stateChanges.next(item);
                 } else {
                     this._selectionModel.deselect(item);
-                    this.stateChanges.next(item);
                 }
+                this.stateChanges.next(item);
             });
         }
         // handles single select on row level without radiobutton
         if (this.selectionMode === 'single' && this.selectRow) {
             let selectedItemId = 0;
-            this.ListItems.forEach((item) => {
+            this.listItems.forEach((item) => {
                 if (item.anchor !== undefined) {
                     item.listItem.nativeElement.setAttribute('_selected', false);
                     item.listItem.nativeElement.setAttribute('aria-selected', false);
@@ -717,7 +713,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                     selectedItemId = event.target.getAttribute('id');
                 }
             }
-            this.ListItems.forEach((item) => {
+            this.listItems.forEach((item) => {
                 if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
                     item.listItem.nativeElement.setAttribute('_selected', true);
                     item.anchor.nativeElement.classList.add('is-selected');

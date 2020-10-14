@@ -6,7 +6,7 @@
     [attr.aria-multiselectable]="ariaMultiselectable">
     <fd-busy-indicator *ngIf="loadMore && loadOnScroll" size="l"
         class="fd-busy-indicator-custom fd-list__title--growing" [block]="true" [loading]="_loading">
-        <div fd-list fdInfiniteScroll style="overflow-y: scroll" [ngStyle]="{'max-height': maxHeight}"
+        <div fd-list fdInfiniteScroll class="fd-infinite-scroll" [ngStyle]="{'max-height': maxHeight}"
             (onScrollAction)="_scrollHandler()" [scrollPercent]="scrollOffsetPercentage">
             <ng-template *ngIf="_items.length !==0; then thenBlock else elseBlock">
             </ng-template>

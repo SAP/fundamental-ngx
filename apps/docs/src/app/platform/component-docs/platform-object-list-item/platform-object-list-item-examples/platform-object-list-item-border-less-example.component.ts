@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { Product } from './platform-object-list-item-with-row-selection-example.component';
 @Component({
     selector: 'fdp-borderless-object-list-item-example',
     templateUrl: './platform-borderless-object-list-item-example.component.html'
 })
 export class PlatformObjectListItemBorderLessExampleComponent {
-    items: any[] = [
+    items: Product[] = [
         {
             title: 'Webcam',
             introductionText: 'First product with discount',

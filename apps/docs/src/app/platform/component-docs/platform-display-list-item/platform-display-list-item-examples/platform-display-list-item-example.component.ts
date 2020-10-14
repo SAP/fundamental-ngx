@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+export interface Corona {
+    title: string;
+    secondary: string;
+}
+
 @Component({
     selector: 'fdp-display-list-item-example',
     templateUrl: './platform-display-list-item-example.component.html'
@@ -11,17 +16,17 @@ export class PlatformDisplayListItemExampleComponent { }
     templateUrl: './platform-display-list-item-with-navigation-example.component.html'
 })
 export class PlatformDisplayListItemWithNavigationExampleComponent {
-    items: any[] = [
+    items: Corona[] = [
         {
-            'title': 'Item1',
-            'secondary': 'First text first secondary text item  (Standard text item)'
+            'title': 'First Stage',
+            'secondary': 'First stage take medical help on call (Standard text)'
         },
         {
-            'title': 'Item2',
-            'secondary': 'Second text second secondary text item  (Standard text item)'
+            'title': 'Second Stage',
+            'secondary': 'Second stage take medical help in person (Standard text)'
         },
         {
-            'title': 'Item3',
-            'secondary': 'Third text third seconday text item  (Standard text item)'
+            'title': 'Third Stage',
+            'secondary': 'Third stage admit in hospital (Standard text)'
         }];
 }

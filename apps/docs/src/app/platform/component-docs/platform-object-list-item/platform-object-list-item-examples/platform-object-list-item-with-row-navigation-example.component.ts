@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
+import {
+    ListDataSource, DataProvider,
+    SelectionChangeEvent, BaseListItem
+} from '@fundamental-ngx/platform';
 
 
 const LIST_ELEMENTS: Product[] = [
@@ -135,10 +138,10 @@ export class ListDataProvider extends DataProvider<Product> {
     templateUrl: './platform-object-list-item-with-row-navigation-example.component.html'
 })
 export class PlatformObjectListItemWithRowNavigationExampleComponent {
-    _dataSource = new ListDataSource<Product>(new ListDataProvider());
-    _selectedItems: any[] = [];
+    _dataSource: ListDataSource<Product> = new ListDataSource<Product>(new ListDataProvider());
+    _selectedItems: BaseListItem[] = [];
 
-    _showItemInfo(event: any): void {
+    _showItemInfo(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;
     }
 

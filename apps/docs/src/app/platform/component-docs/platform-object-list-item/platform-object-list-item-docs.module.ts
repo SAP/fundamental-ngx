@@ -56,5 +56,4 @@ const routes: Routes = [
 
     ]
 })
-export class PlatformObjectListItemDocsModule {
-}
+export class PlatformObjectListItemDocsModule { }

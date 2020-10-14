@@ -8,6 +8,7 @@ import { ToolbarModule, DragAndDropModule } from '@fundamental-ngx/core';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
+
 import { PlatformDisplayListItemHeaderComponent } from './platform-display-list-item-header/platform-display-list-item-header.component';
 import { PlatformDisplayListItemDocsComponent } from './platform-display-list-item-docs.component';
 import {
@@ -46,5 +47,5 @@ const routes: Routes = [
         PlatformDisplayListItemWithNavigationExampleComponent
     ]
 })
-export class PlatformDisplayListItemDocsModule {
-}
+export class PlatformDisplayListItemDocsModule { }
+

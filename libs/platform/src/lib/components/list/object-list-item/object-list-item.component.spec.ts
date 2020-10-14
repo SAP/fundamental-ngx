@@ -11,9 +11,6 @@ import { ObjectListItemModule } from './object-list-item.module';
 import { ObjectListItemComponent } from './object-list-item.component';
 import { ObjectListItemRowComponent } from './object-list-item-row.component';
 
-
-
-
 @Component({
     selector: 'fdp-test-fdp-display-list-item',
     template: `

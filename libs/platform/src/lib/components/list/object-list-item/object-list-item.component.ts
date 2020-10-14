@@ -1,11 +1,11 @@
 import {
     Component, ChangeDetectorRef, ElementRef,
     forwardRef, ChangeDetectionStrategy, ViewEncapsulation,
-    ContentChildren, QueryList
+    ContentChildren, QueryList, Input
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BaseListItem } from '../base-list-item';
+import { BaseListItem, StatusType } from '../base-list-item';
 import { ListConfig } from '../list.config';
 import { ObjectListItemRowComponent } from './object-list-item-row.component';
 
@@ -21,6 +21,59 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObjectListItemComponent extends BaseListItem {
+
+
+    /** define label for screen reader */
+    @Input()
+    introductionText: string;
+
+    /** holds object number */
+    @Input()
+    amount: number;
+
+    /** holds object number unit */
+    @Input()
+    currency: string;
+
+    /** object number amount decimal limitation */
+    @Input()
+    decimal: number;
+
+    /** object number status */
+    @Input()
+    numberStatus: StatusType;
+
+    /** holds avatar label */
+    @Input()
+    label: string;
+
+    /** holds avatar icon as image */
+    @Input()
+    glyph: string;
+
+    /** Avatar to be circle or not */
+    @Input()
+    circle: boolean;
+
+    /** Is avatar has placeholder */
+    @Input()
+    placeholder: boolean;
+
+    /** Is avatar has tile */
+    @Input()
+    tile: boolean;
+
+    /** Is avatar has colorAccent */
+    @Input()
+    colorAccent: number;
+
+    /** Avatar image path */
+    @Input()
+    image: string;
+
+    /** Avatar is transparent */
+    @Input()
+    transparent: boolean;
 
     @ContentChildren(ObjectListItemRowComponent)
     children: QueryList<ObjectListItemRowComponent>;

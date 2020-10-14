@@ -10,7 +10,7 @@ import {
             <fdp-object-attribute class="fd-object-list__object-attribute"
              [islink]="islink" [label]="attributeLabel"
               [linkText]="linkedText">
-              <ng-content select="#attribute"></ng-content>
+              <ng-content select=".attribute"></ng-content>
             </fdp-object-attribute>
         </div>
     <div class="fd-object-list__row-right">
@@ -34,9 +34,4 @@ export class ObjectListItemRowComponent {
     /** object attribute is a link */
     @Input()
     islink = false;
-
-    constructor(private element: ElementRef) { }
 }
-
-
-

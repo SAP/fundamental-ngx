@@ -7,7 +7,9 @@ import { ListComponent } from '../list.component';
 import { PlatformListModule } from '../list.module';
 import { ActionListItemComponent } from './action-list-item.component';
 
-
+export interface Action {
+    title: string;
+}
 
 @Component({
     selector: 'fdp-test-fdp-action-list-item',
@@ -150,12 +152,12 @@ describe('ActionListItemComponent functions', () => {
     selector: 'fdp-test-action-list-item',
     template: `
     <fdp-list>
-    <fdp-action-list-item *ngFor="let item of items" [item]="item"></fdp-action-list-item>
+    <fdp-action-list-item *ngFor="let item of items" [title]="item.title"></fdp-action-list-item>
 </fdp-list>
     `
 })
 class TestComponentContent {
-    items: any[] = [
+    items: Action[] = [
         { 'title': 'Action 1' },
         { 'title': 'Action 2' },
         { 'title': 'Action 3' },
