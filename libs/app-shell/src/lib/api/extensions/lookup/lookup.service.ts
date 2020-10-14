@@ -2,7 +2,7 @@ import {
     Injectable,
     OnDestroy
 } from '@angular/core';
-import { PluginDescriptor } from './plugin-descriptor.model';
+import { DescriptorsModule, PluginDescriptor } from './plugin-descriptor.model';
 
 @Injectable({ providedIn: 'root' })
 export class LookupService implements OnDestroy {
@@ -16,18 +16,21 @@ export class LookupService implements OnDestroy {
             });
             return match;
         };
-        const found = this.pluginsRepository.filter((plugin) => {
-            return  predicate(plugin) || plugin.modules.some(predicate);
+        const plugin = this.pluginsRepository.find((_plugin) => {
+            return  predicate(_plugin) || _plugin.modules.some(predicate);
         });
 
-        if (found.length === 0) {
+        const module = plugin.modules.find(predicate);
+
+        if (!plugin || !module) {
             throw new Error('No Plugin found. Please check your configuration.');
         }
         const item: LookupItem = {
-            id: found[0].name,
+            id: plugin.name,
             attributes: query,
-            version: found[0].version,
-            descriptor: found[0]
+            version: plugin.version,
+            descriptor: plugin,
+            module: module
         };
 
         // take the first one.
@@ -51,4 +54,5 @@ export interface LookupItem {
     attributes: Map<string, string>;
     version: string;
     descriptor: Partial<PluginDescriptor>;
+    module: DescriptorsModule;
 }

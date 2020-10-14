@@ -80,8 +80,9 @@ export class PluginManagerService implements OnDestroy {
 
     constructor(private lookupService: LookupService, private messageBus: MessagingService,
                 private topics: MessagingTopics) {
-        this.topics.defineTopic({
-            prefix: 'system:', eventType: EventType.DEFAULT, name: TOPIC_SYSTEM_PLUGIN,
+        this.topics.set({
+            name: TOPIC_SYSTEM_PLUGIN,
+            eventType: EventType.DEFAULT,
             shared: true
         });
     }
@@ -135,8 +136,8 @@ export class PluginManagerService implements OnDestroy {
             return;
         }
         configuration.addListeners().forEach((listener: Listener) => {
-            if (this.topics.hasTopic(listener.topic)) {
-                const topic = this.topics.getTopic(listener.topic);
+            if (this.topics.has(listener.topic)) {
+                const topic = this.topics.get(listener.topic);
                 this.messageBus.subscribe(topic.name, (m) => listener.onMessage(m),
                     listener.messageSelector);
             }
