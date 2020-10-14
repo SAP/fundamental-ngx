@@ -21,7 +21,7 @@ const routes: Routes = [
         component: PlatformDynamicPageHeaderComponent,
         children: [
             { path: '', component: PlatformDynamicPageDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.panel } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.dynamicPage } }
         ]
     }
 ];

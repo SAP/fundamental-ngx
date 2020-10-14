@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fdp-dynamic-page-global-actions',
@@ -6,14 +6,4 @@ import { Component, ChangeDetectionStrategy, ElementRef, ViewEncapsulation } fro
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class DynamicPageGlobalActionsComponent {
-    /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>) {}
-
-    /**
-     * get reference to this element
-     */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
-    }
-}
+export class DynamicPageGlobalActionsComponent {}

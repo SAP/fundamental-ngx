@@ -28,13 +28,7 @@ export class DynamicPageContentComponent implements OnInit {
     tabLabel: string;
 
     /**
-     *  sets the selected tab index as the active one.
-     */
-    @Input()
-    activeTab = 0;
-
-    /**
-     * sets background for content to List, Transparent or Solid background color.
+     * sets background for content to `list`, `transparent`, or `solid` background color.
      * Default is `solid`.
      */
     @Input()
@@ -88,6 +82,7 @@ export class DynamicPageContentComponent implements OnInit {
      */
     private _size: DynamicPageResponsiveSize;
 
+    /** @hidden */
     constructor(public _elementRef: ElementRef<HTMLElement>, public _renderer: Renderer2) {}
 
     /**@hidden */

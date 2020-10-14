@@ -83,7 +83,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      */
     @Input()
     @HostBinding('attr.id')
-    id = 'fdp-dynamic-page-header-id-' + dynamicPageHeaderId++;
+    id = `fdp-dynamic-page-header-id-${dynamicPageHeaderId++}`;
 
     /**
      * aria label for header
@@ -104,7 +104,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     unpinAriaLabel: string = this._dynamicPageConfig.unpinLabel;
 
     /**
-     * sets background for content to List, Transparent or Solid background color.
+     * sets background for content to `list`, `transparent`, or `solid` background color.
      * Default is `solid`.
      */
     @Input()
@@ -146,30 +146,31 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /**
      * tracking if pin button is pinned
      */
-    pinned = false;
+    _pinned = false;
 
     /**
      * @hidden
      * pn/unpin aria label based on the current state
      */
-    pinUnpinAriaLabel: string;
-
-    /**
-     * tracking expand/collapse button
-     */
-    _collapsed = false;
-
-    /**
-     *  tracking collapsible for pinning
-     *
-     */
-    _collapsible = this.collapsible;
+    _pinUnpinAriaLabel: string;
 
     /**
      * @hidden
      * expand/collapse aria label based on the current state
      */
     _expandCollapseAriaLabel: string;
+
+    /**
+     * @hidden
+     * tracking expand/collapse button
+     */
+    private _collapsed = false;
+
+    /**
+     * @hidden
+     * tracking collapsible for pinning
+     */
+    private _collapsible = this.collapsible;
 
     /**
      * @hidden
@@ -248,6 +249,10 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         this._collapseSubscription.unsubscribe();
     }
 
+    /**
+     * collapse or expand the header
+     * @param val the collapse/expand value
+     */
     collapseHeader(val: boolean): any {
         if (this._isPinned()) {
             return;
@@ -258,7 +263,10 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         }
     }
 
-    /** Handles expanded/collapsed event */
+    /** 
+     * toggles the state of the header and
+     * handles expanded/collapsed event 
+     */
     toggleCollapse(): void {
         if (this._isPinned()) {
             return;
@@ -269,23 +277,24 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     }
 
     /**
+     * return the element reference.
+     */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
+    }
+
+    /**
+     * @hidden
      * click action on pin button
      */
-    onPinned(): void {
-        this.pinned = !this.pinned;
-        if (this.pinned) {
+    _onPinned(): void {
+        this._pinned = !this._pinned;
+        if (this._pinned) {
             this._collapsible = false;
         } else {
             this._collapsible = this.collapsible; // reset
         }
         this._calculatePinUnpinAriaLabel();
-    }
-
-    /**
-     * return the element reference.
-     */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 
     /**
@@ -322,7 +331,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * return whether the pin button is pinned
      */
     private _isPinned(): boolean {
-        return !this._collapsible && this.pinned;
+        return !this._collapsible && this._pinned;
     }
 
     /**
@@ -404,7 +413,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      * Calculate pinUnpinAriaLabel based on header
      */
     private _calculatePinUnpinAriaLabel(): void {
-        this.pinUnpinAriaLabel = this._isPinned() ? this.unpinAriaLabel : this.pinAriaLabel;
+        this._pinUnpinAriaLabel = this._isPinned() ? this.unpinAriaLabel : this.pinAriaLabel;
     }
 
     /**@hidden */

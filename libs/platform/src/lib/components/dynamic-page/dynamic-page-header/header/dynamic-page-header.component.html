@@ -23,7 +23,7 @@
                 [attr.aria-expanded]="!collapsed"
                 aria-haspopup="true"
                 [attr.aria-controls]="id"
-                *ngIf="collapsible && !pinned"
+                *ngIf="collapsible && !_pinned"
                 (click)="toggleCollapse()"
             >
                 <i *ngIf="!collapsed" class="sap-icon--slim-arrow-up"></i>
@@ -31,10 +31,10 @@
             </button>
             <button
                 class="fd-dynamic-page__pin-button fd-button fd-button--compact"
-                [attr.aria-label]="pinUnpinAriaLabel"
-                [attr.title]="pinUnpinAriaLabel"
-                [attr.aria-selected]="pinned"
-                (click)="onPinned()"
+                [attr.aria-label]="_pinUnpinAriaLabel"
+                [attr.title]="_pinUnpinAriaLabel"
+                [attr.aria-selected]="_pinned"
+                (click)="_onPinned()"
                 *ngIf="pinnable"
             >
                 <i class="sap-icon--pushpin-off"></i>

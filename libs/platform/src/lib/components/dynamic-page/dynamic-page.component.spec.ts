@@ -25,7 +25,7 @@ import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-p
                         fd-toolbar-item
                         fd-button
                         [compact]="true"
-                        [fdType]="'positive'"
+                        fdType="positive"
                         (click)="$event.stopPropagation()"
                     >
                         Accept

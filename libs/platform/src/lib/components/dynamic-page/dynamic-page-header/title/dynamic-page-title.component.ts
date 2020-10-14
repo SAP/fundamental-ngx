@@ -31,7 +31,7 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
     subtitle: string;
 
     /**
-     * sets background for content to List, Transparent or Solid background color.
+     * sets background for content to `list`, `transparent`, or `solid` background color.
      * Default is `solid`.
      */
     @Input()
@@ -85,13 +85,14 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
-        public focusMonitor: FocusMonitor,
+        private _focusMonitor: FocusMonitor,
         private _dynamicPageService: DynamicPageService,
         private _ngZone: NgZone
     ) {}
 
+    /** @hidden */
     ngAfterViewInit(): void {
-        this.focusMonitor.monitor(this._elementRef).subscribe((origin) =>
+        this._focusMonitor.monitor(this._elementRef).subscribe((origin) =>
             this._ngZone.run(() => {
                 if (origin === 'keyboard') {
                     this._dynamicPageService.expandHeader();

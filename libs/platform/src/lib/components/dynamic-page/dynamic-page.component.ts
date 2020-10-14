@@ -28,7 +28,6 @@ import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-p
 import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement } from './utils';
 
-let dynamicPageId = 0;
 @Component({
     selector: 'fdp-dynamic-page',
     templateUrl: './dynamic-page.component.html',
@@ -38,11 +37,6 @@ let dynamicPageId = 0;
     providers: [DynamicPageService]
 })
 export class DynamicPageComponent extends BaseComponent implements AfterContentInit, AfterViewInit, OnDestroy {
-    /** Dynamic Page ID with default value  */
-    @Input()
-    @HostBinding('attr.id')
-    id = 'fdp-dynamic-page-id-' + dynamicPageId++;
-
     /** Page role  */
     @Input()
     @HostBinding('attr.role')
@@ -53,7 +47,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     ariaLabel: string;
 
     /**
-     * sets background for content to List, Transparent or Solid background color.
+     * sets background for content to `list`, `transparent`, or `solid` background color.
      * Default is `solid`.
      */
     @Input()
@@ -76,7 +70,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /** reference to content component  */
     @ContentChild(DynamicPageContentComponent)
-    childcontent: DynamicPageContentComponent;
+    contentComponent: DynamicPageContentComponent;
 
     /** reference to content component to filter tabs */
     @ContentChildren(DynamicPageContentComponent, { descendants: true })
@@ -97,7 +91,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     contentContainer: ElementRef<HTMLElement>;
 
     /**
-     * track whether the header was toggled or not
+     * tracks whether the header was toggled or not
      */
     isHeaderCollapsed = false;
 
@@ -150,12 +144,12 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         if (this.background) {
             this.titleComponent.background = this.background;
             this.headerComponent.background = this.background;
-            this.childcontent.background = this.background;
+            this.contentComponent.background = this.background;
         }
         if (this.size) {
             this.titleComponent.size = this.size;
             this.headerComponent.size = this.size;
-            this.childcontent.size = this.size;
+            this.contentComponent.size = this.size;
         }
     }
 
@@ -217,13 +211,21 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         return this._elementRef;
     }
 
+    /**
+     * @hidden
+     * set top position of normal content on scrolling
+     */
     private _setContainerPosition(): void {
-        if (this.childcontent) {
-            this.childcontent.getElementRef().nativeElement.style.top = this.header.nativeElement.offsetHeight + 'px';
-            this.childcontent.getElementRef().nativeElement.style.position = 'relative';
+        if (this.contentComponent) {
+            this.contentComponent.getElementRef().nativeElement.style.top = this.header.nativeElement.offsetHeight + 'px';
+            this.contentComponent.getElementRef().nativeElement.style.position = 'relative';
         }
     }
 
+    /**
+     * @hidden
+     * set position for tabs and tabbed content's position relative to the tabs on scrolling
+     */
     private _setTabsPosition(): void {
         const tabList: HTMLElement = this._elementRef.nativeElement.querySelector('.fd-tabs');
         if (tabList) {
@@ -236,6 +238,11 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
             });
         }
     }
+
+    /**
+     * @hidden
+     * set top position of tabbed content container on scrolling
+     */
     private _setTabContainerPosition(): void {
         if (this.contentContainer) {
             this.contentContainer.nativeElement.style.top = this.header.nativeElement.offsetHeight + 'px';

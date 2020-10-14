@@ -13,7 +13,7 @@ import { addClassNameToElement } from '../utils';
 })
 export class DynamicPageTabbedContentComponent {
     /**
-     * sets background for content to List, Transparent or Solid background color.
+     * sets background for content to `list`, `transparent`, or `solid` background color.
      * Default is `solid`.
      */
     @Input()
