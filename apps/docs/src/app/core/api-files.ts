@@ -304,6 +304,7 @@ export const API_FILES = {
     title: ['TitleComponent'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
+    slider: ['SliderComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],
     toolbar: [
         'ToolbarComponent',
