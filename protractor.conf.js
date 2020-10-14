@@ -12,7 +12,7 @@ exports.config = {
     'browserName': 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'https://sap.github.io/fundamental-ngx/#',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

@@ -1,5 +1,3 @@
-
-
 describe('Test Sauclab', function() {
 
     it('should work',  async function() {
