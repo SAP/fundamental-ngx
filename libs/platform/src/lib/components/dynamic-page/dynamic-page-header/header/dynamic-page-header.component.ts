@@ -254,7 +254,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         }
         if (this.collapsed !== val) {
             this.collapsed = val;
-            this.expandCollapseActions();
+            this._expandCollapseActions();
         }
     }
 
@@ -265,7 +265,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         }
 
         this.collapsed = !this._dynamicPageService.getIsCollapsed();
-        this.expandCollapseActions();
+        this._expandCollapseActions();
     }
 
     /**
@@ -291,7 +291,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /**
      * handles actions like style changes and emit methods on expand/collapse
      */
-    private expandCollapseActions(): void {
+    private _expandCollapseActions(): void {
         if (this._isCollapsibleCollapsed()) {
             this._setStyleToHostElement('z-index', 1);
         } else {

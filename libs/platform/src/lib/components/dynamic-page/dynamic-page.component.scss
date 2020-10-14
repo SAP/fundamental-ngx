@@ -903,8 +903,9 @@
     margin: 0 0.5rem 0.5rem;
 }
 
-.sticker {
-    position: absolute;
+.tab-sticker {
     left: 0;
     right: 0;
+    position: relative;
+    top: 0;
 }

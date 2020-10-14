@@ -1,8 +1,6 @@
-import { ScrollDispatcher } from '@angular/cdk/scrolling';
-import { ChangeDetectionStrategy, Component, ElementRef, NgZone, Renderer2, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Renderer2, Input, ViewEncapsulation } from '@angular/core';
 
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize, CLASS_NAME } from '../constants';
-import { DynamicPageService } from '../dynamic-page.service';
 import { addClassNameToElement } from '../utils';
 
 @Component({
@@ -10,7 +8,8 @@ import { addClassNameToElement } from '../utils';
     template: `<div class="fd-dynamic-page__content" [style.margin-top]="contentTop">
         <ng-content></ng-content>
     </div>`,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class DynamicPageTabbedContentComponent {
     /**
@@ -77,13 +76,14 @@ export class DynamicPageTabbedContentComponent {
      */
     private _height: string;
 
-    constructor(
-        public _elementRef: ElementRef<HTMLElement>,
-        public _renderer: Renderer2,
-        public scrollDispatcher: ScrollDispatcher,
-        public zone: NgZone,
-        public _dynamicPageService: DynamicPageService
-    ) {}
+    constructor(public _elementRef: ElementRef<HTMLElement>, public _renderer: Renderer2) {}
+
+    /**
+     * get reference to this element
+     */
+    getElementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
+    }
 
     /**
      * @hidden
@@ -130,12 +130,6 @@ export class DynamicPageTabbedContentComponent {
                 this._addClassNameToCustomElement(hostElement, CLASS_NAME.dynamicPageContentAreaExtraLarge);
                 break;
         }
-    }
-    /**
-     * get reference to this element
-     */
-    getElementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 
     /**@hidden */

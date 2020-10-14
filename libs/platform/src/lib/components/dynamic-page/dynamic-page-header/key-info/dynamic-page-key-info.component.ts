@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
 
 import { CLASS_NAME } from '../../constants';
 import { addClassNameToElement } from '../../utils';
@@ -6,7 +6,8 @@ import { addClassNameToElement } from '../../utils';
 @Component({
     selector: 'fdp-dynamic-page-key-info',
     template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class DynamicPageKeyInfoComponent implements OnInit {
     /** @hidden */

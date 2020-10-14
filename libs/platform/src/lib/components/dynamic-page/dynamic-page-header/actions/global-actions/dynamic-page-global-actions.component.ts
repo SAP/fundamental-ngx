@@ -1,9 +1,10 @@
-import { Component, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ElementRef, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fdp-dynamic-page-global-actions',
     template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class DynamicPageGlobalActionsComponent {
     /** @hidden */

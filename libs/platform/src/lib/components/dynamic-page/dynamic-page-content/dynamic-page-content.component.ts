@@ -1,26 +1,24 @@
-import { ScrollDispatcher } from '@angular/cdk/scrolling';
-
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
     Input,
-    NgZone,
     OnInit,
     Renderer2,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 
 import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from '../constants';
-import { DynamicPageService } from '../dynamic-page.service';
 import { addClassNameToElement } from '../utils';
 
 @Component({
     selector: 'fdp-dynamic-page-content',
     templateUrl: './dynamic-page-content.component.html',
     styleUrls: ['./dynamic-page-content.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class DynamicPageContentComponent implements OnInit {
     /**
@@ -90,13 +88,7 @@ export class DynamicPageContentComponent implements OnInit {
      */
     private _size: DynamicPageResponsiveSize;
 
-    constructor(
-        public _elementRef: ElementRef<HTMLElement>,
-        public _renderer: Renderer2,
-        public scrollDispatcher: ScrollDispatcher,
-        public zone: NgZone,
-        public _dynamicPageService: DynamicPageService
-    ) {}
+    constructor(public _elementRef: ElementRef<HTMLElement>, public _renderer: Renderer2) {}
 
     /**@hidden */
     ngOnInit(): void {

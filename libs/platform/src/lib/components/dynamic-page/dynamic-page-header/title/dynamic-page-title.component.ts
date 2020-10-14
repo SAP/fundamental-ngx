@@ -9,6 +9,7 @@ import {
     NgZone,
     OnInit,
     Renderer2,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -73,6 +74,13 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
      */
     private _size: DynamicPageResponsiveSize;
 
+    /**
+     * @hidden
+     * the reference to breadcrumb title container
+     */
+    @ViewChild('breadcrumbTitleContainer')
+    breadcrumbTitleContainer: ElementRef<HTMLElement>;
+
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -94,6 +102,7 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         const breadcrumb = this._elementRef.nativeElement.querySelector('fd-breadcrumb');
         if (breadcrumb) {
             this._addClassNameToCustomElement(breadcrumb, CLASS_NAME.dynamicPageBreadcrumb);
+            this.breadcrumbTitleContainer.nativeElement.style.overflow = 'hidden';
         }
     }
 
