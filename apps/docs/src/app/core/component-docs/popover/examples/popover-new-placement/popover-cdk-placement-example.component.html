@@ -4,7 +4,7 @@
         <button fd-button
                 *ngFor="let option of xPositions"
                 (click)="originX = option; refresh()"
-                [class]="originX === option ? 'is-selected': ''"
+                [class.is-selected]="originX === option"
                 [label]="option">
         </button>
     </fd-segmented-button>
@@ -16,7 +16,7 @@
         <button fd-button
                 *ngFor="let option of yPositions"
                 (click)="originY = option; refresh()"
-                [class]="originY === option ? 'is-selected': ''"
+                [class.is-selected]="originY === option"
                 [label]="option">
         </button>
     </fd-segmented-button>
@@ -28,7 +28,7 @@
         <button fd-button
                 *ngFor="let option of xPositions"
                 (click)="overlayX = option; refresh()"
-                [class]="overlayX === option ? 'is-selected': ''"
+                [class.is-selected]="overlayX === option"
                 [label]="option">
         </button>
     </fd-segmented-button>
@@ -40,7 +40,7 @@
         <button fd-button
                 *ngFor="let option of yPositions"
                 (click)="overlayY = option; refresh()"
-                [class]="overlayY === option ? 'is-selected': ''"
+                [class.is-selected]="overlayY === option"
                 [label]="option">
         </button>
     </fd-segmented-button>
@@ -57,7 +57,7 @@
                     [closeOnEscapeKey]="false"
                     [closeOnOutsideClick]="false" >
         <fd-popover-control>
-            <button fd-button [glyph]="'navigation-up-arrow'"></button>
+            <button fd-button glyph="navigation-up-arrow"></button>
         </fd-popover-control>
         <fd-popover-body>
             <ul fd-list>

@@ -1,9 +1,9 @@
-import { PopoverModule } from '../popover.module';
-import { CdkPopoverComponent } from './cdk-popover.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
-import { DefaultPositions, PopoverPosition } from './popover-position';
 import { A11yModule } from '@angular/cdk/a11y';
+import { PopoverModule } from '../popover.module';
+import { DefaultPositions, PopoverPosition } from './popover-position';
+import { CdkPopoverComponent } from './cdk-popover.component';
 
 
 describe('CdkPopoverComponent', () => {

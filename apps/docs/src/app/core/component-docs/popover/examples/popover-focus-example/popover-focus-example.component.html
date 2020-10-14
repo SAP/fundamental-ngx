@@ -4,13 +4,13 @@
     </fd-popover-control>
     <fd-popover-body style="min-width: 400px;">
         <div fd-popover-body-header>
-            <div fd-bar [barDesign]="'header'">
+            <div fd-bar barDesign="header">
                 <div fd-bar-left>
                     <fd-bar-element>
                         <button
                             fd-button
-                            [fdType]="'standard'"
-                            [glyph]="'navigation-left-arrow'"
+                            fdType="standard"
+                            glyph="navigation-left-arrow"
                             [compact]="true"
                         ></button>
                     </fd-bar-element>
@@ -24,13 +24,13 @@
             </li>
         </ul>
         <div fd-popover-body-footer>
-            <div fd-bar [barDesign]="'footer'" [cosy]="true">
+            <div fd-bar barDesign="footer" [cosy]="true">
                 <div fd-bar-right>
                     <fd-bar-element>
-                        <button fd-button label="Save" [fdType]="'emphasized'" [compact]="true"></button>
+                        <button fd-button label="Save" fdType="emphasized" [compact]="true"></button>
                     </fd-bar-element>
                     <fd-bar-element>
-                        <button fd-button label="Cancel" [fdType]="'transparent'" [compact]="true"></button>
+                        <button fd-button label="Cancel" fdType="transparent" [compact]="true"></button>
                     </fd-bar-element>
                 </div>
             </div>

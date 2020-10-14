@@ -1,4 +1,19 @@
 import {
+    CdkOverlayOrigin,
+    ConnectedPosition,
+    FlexibleConnectedPositionStrategy,
+    Overlay,
+    OverlayConfig,
+    OverlayRef,
+    ViewportRuler
+} from '@angular/cdk/overlay';
+import { ConnectedOverlayPositionChange, ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
+import { TemplatePortal } from '@angular/cdk/portal';
+
+import { merge, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
+
+import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -16,21 +31,9 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import {
-    CdkOverlayOrigin,
-    ConnectedPosition,
-    FlexibleConnectedPositionStrategy,
-    Overlay,
-    OverlayConfig,
-    OverlayRef,
-    ViewportRuler
-} from '@angular/cdk/overlay';
+
 import { RtlService } from '../../utils/services/rtl.service';
 import { BasePopoverClass } from '../base/base-popover.class';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
-import { ConnectedOverlayPositionChange, ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
 import { DefaultPositions, PopoverPosition } from './popover-position';
 import { KeyUtil } from '../../utils/functions/key-util';
 
