@@ -87,9 +87,6 @@ export class PluginLauncherComponent implements OnChanges {
         if (this.name) {
             query.set('name', this.name);
         }
-        if (this.module) {
-            query.set('module', this.module);
-        }
         return query;
     }
 }
