@@ -3,9 +3,11 @@ import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 import * as dynamicPageBasicExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-example.component.html';
+import * as dynamicPageBasicExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-example.component.scss';
 import * as dynamicPageBasicExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-example.component.ts';
 
 import * as dynamicPageTabbedExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component.html';
+import * as dynamicPageTabbedExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component.scss';
 import * as dynamicPageTabbedExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component.ts';
 
 import * as dynamicPageSnapScrollExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component.html';
@@ -13,6 +15,7 @@ import * as dynamicPageSnapScrollExampleScss from '!raw-loader!./platform-dynami
 import * as dynamicPageSnapScrollExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component.ts';
 
 import * as dynamicPageResponsivePaddingExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.html';
+import * as dynamicPageResponsivePaddingExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.scss';
 import * as dynamicPageResponsivePaddingExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.ts';
 
 @Component({
@@ -25,7 +28,7 @@ export class PlatformDynamicPageDocsComponent {
             language: 'html',
             code: dynamicPageBasicExample,
             fileName: 'platform-dynamic-page-example',
-            scssFileCode: dynamicPageSnapScrollExampleScss
+            scssFileCode: dynamicPageBasicExampleScss
         },
         {
             language: 'typescript',
@@ -54,7 +57,7 @@ export class PlatformDynamicPageDocsComponent {
             language: 'html',
             code: dynamicPageTabbedExample,
             fileName: 'platform-dynamic-page-tabbed-example',
-            scssFileCode: dynamicPageSnapScrollExampleScss
+            scssFileCode: dynamicPageTabbedExampleScss
         },
         {
             language: 'typescript',
@@ -69,7 +72,7 @@ export class PlatformDynamicPageDocsComponent {
             language: 'html',
             code: dynamicPageResponsivePaddingExample,
             fileName: 'platform-dynamic-page-responsive-padding-example',
-            scssFileCode: dynamicPageSnapScrollExampleScss
+            scssFileCode: dynamicPageResponsivePaddingExampleScss
         },
         {
             language: 'typescript',
