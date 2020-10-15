@@ -25,7 +25,7 @@ import { applyCssClass, CssClassBuilder, KeyUtil } from '@fundamental-ngx/core';
 import { ContentDensity, SelectionMode } from './enums';
 import { TableColumnComponent } from './table-column/table-column.component';
 import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
-import { ArrayTableDataSource, isDataSource, ObservableTableDataSource, TableDataSource } from '../../../';
+import { ArrayTableDataSource, isDataSource, ObservableTableDataSource, TableDataSource } from '../../domain';
 
 export type FdpTableDataSource<T> = TableDataSource<T> | T[];
 
