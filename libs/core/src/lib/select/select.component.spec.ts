@@ -17,10 +17,10 @@ import { OptionComponent } from '@fundamental-ngx/core';
     `
 })
 class TestWrapperComponent {
-    @ViewChild(SelectComponent)
+    @ViewChild(SelectComponent, { static: true })
     selectComponent: SelectComponent;
 
-    @ViewChild(SelectComponent, { read: ElementRef })
+    @ViewChild(SelectComponent, { read: ElementRef, static: true })
     selectElement: ElementRef;
 
     @ViewChildren(OptionComponent)
