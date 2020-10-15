@@ -1,18 +1,20 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
     ElementRef,
     EventEmitter,
     Input,
-    OnChanges,
+    OnChanges, OnDestroy,
     Output,
     SimpleChanges,
-    ViewChild,
-    ViewEncapsulation
+    ViewChild
 } from '@angular/core';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
 import { KeyUtil } from '../../utils/public_api';
+import { WizardStepIndicatorComponent } from '../wizard-step-indicator/wizard-step-indicator.component';
+import { Subscription } from 'rxjs';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
@@ -29,7 +31,7 @@ export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
     templateUrl: './wizard-step.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WizardStepComponent implements OnChanges {
+export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy {
     /**
      * The aria-label for the step container.
      */
@@ -72,9 +74,19 @@ export class WizardStepComponent implements OnChanges {
     @Output()
     stepClicked = new EventEmitter<WizardStepComponent>();
 
+    /**
+     * Event emitted when a step indicator is clicked.
+     */
+    @Output()
+    stepIndicatorItemClicked = new EventEmitter<WizardStepComponent>();
+
     /** @hidden */
     @ContentChild(WizardContentComponent)
     content: WizardContentComponent;
+
+    /** @hidden */
+    @ContentChild(WizardStepIndicatorComponent)
+    stepIndicator: WizardStepIndicatorComponent;
 
     /** The wizard label span element. */
     @ViewChild('wizardLabel', { read: ElementRef })
@@ -87,6 +99,9 @@ export class WizardStepComponent implements OnChanges {
     visited = false;
 
     /** @hidden */
+    private _subscriptions: Subscription = new Subscription();
+
+    /** @hidden */
     constructor(private _elRef: ElementRef) {}
 
     /** @hidden */
@@ -97,13 +112,33 @@ export class WizardStepComponent implements OnChanges {
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this._subscriptions.add(
+            this.stepIndicator.stepIndicatorItemClicked.subscribe(step => {
+                this.stepIndicatorItemClicked.emit(step);
+            })
+        )
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
     stepContainerKeypress(event?: KeyboardEvent): void {
         if (event) {
             event.preventDefault();
         }
-        if (this.visited && (!event || KeyUtil.isKey(event, [' ', 'Enter']))) {
+        if (this.visited && ((!event || KeyUtil.isKey(event, [' ', 'Enter'])) && !this.stepIndicator.stackedItems.length)) {
             this.stepClicked.emit(this);
         }
+    }
+
+    /** @hidden */
+    wizardLabelClicked(event: MouseEvent): void {
+        event.preventDefault();
+        this.stepClicked.emit(this);
     }
 
     /** @hidden */

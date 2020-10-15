@@ -40,6 +40,12 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     contentTemplate: TemplateRef<any>;
 
     /** @hidden */
+    stackedStepsLeft: WizardStepComponent[] = [];
+
+    /** @hidden */
+    stackedStepsRight: WizardStepComponent[] = [];
+
+    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
@@ -93,6 +99,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 this._handleStepOrStatusChanges();
             })
         );
+        this._subscriptions.add(
+            step.stepIndicatorItemClicked.subscribe(event => {
+                this._stepClicked(event, true);
+            })
+        );
         // need to call wizardShrinking for each step < 168px on first load
         if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
             this._wizardShrinking();
@@ -141,6 +152,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 : (stepToHide = stepsArray[stepsArray.length - 1]);
             stepToHide.getClassList().add(STEP_NO_LABEL_CLASS);
             stepToHide.getClassList().add(STEP_STACKED_CLASS);
+            if (stepsArray.indexOf(stepToHide) < currentStepIndex) {
+                this.stackedStepsLeft.push(stepToHide);
+            } else if (stepsArray.indexOf(stepToHide) > currentStepIndex) {
+                this.stackedStepsRight.push(stepToHide);
+            }
             this._setStackedTop(currentStep);
         }
     }
@@ -150,7 +166,12 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         this.steps.forEach((step, index) => {
             step.getClassList().remove(STEP_STACKED_TOP_CLASS);
             if (this.steps.toArray()[index + 1] === currentStep) {
-                step.getClassList().add(STEP_STACKED_TOP_CLASS);
+                if (this.steps.length > 1) {
+                    step.getClassList().add(STEP_STACKED_TOP_CLASS);
+                }
+                step.stepIndicator.setStackedItems(this.stackedStepsLeft);
+            } else {
+                step.stepIndicator.stackedItems = [];
             }
         });
     }
@@ -174,6 +195,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _shrinkWhileAnyStepIsTooNarrow(): void {
         this._resetStepClasses();
+        this.stackedStepsLeft = [];
+        this.stackedStepsRight = [];
         let i = 0;
         while (this._anyStepIsTooNarrow() && i < this.steps.length - 1) {
             i++;
@@ -187,7 +210,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    private _stepClicked(clickedStep: WizardStepComponent): void {
+    private _stepClicked(clickedStep?: WizardStepComponent, fromMenu?: boolean): void {
+        if (!clickedStep) {
+            clickedStep = this.steps.first;
+        }
         this.steps.forEach((step) => {
             const clickedStepIndex = this.steps.toArray().indexOf(clickedStep);
             if (step === clickedStep) {
