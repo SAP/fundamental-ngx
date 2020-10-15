@@ -1,18 +1,15 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
-    Component, ContentChildren, ElementRef,
-    EventEmitter, Injector,
+    Component, ContentChild, ElementRef,
+    EventEmitter,
     Input,
-    Optional, Output, QueryList, TemplateRef, ViewChild,
+    Optional, Output,
     ViewEncapsulation
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Placement } from 'popper.js';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
 import { ACTION_SHEET_COMPONENT, ActionSheetInterface } from './action-sheet.interface';
-import {ActionSheetItemComponent} from './action-sheet-item/action-sheet-item.component';
+import {ActionSheetBodyComponent} from './action-sheet-body/action-sheet-body.component';
 
 
 @Component({
@@ -29,7 +26,7 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {}
 
-    @ContentChildren(ActionSheetItemComponent) actionSheetItems: QueryList<ActionSheetItemComponent>;
+    @ContentChild(ActionSheetBodyComponent) actionSheetBody;
 
     /** Whenever links wrapped inside overflow should be displayed in compact mode  */
     @Input()
@@ -53,10 +50,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
-    @ViewChild('actionSheetBody', { read: TemplateRef })
-    actionSheetTemplate: TemplateRef<any>;
-
     /** Method that changes state of mobile open variable */
      toggleOpen(): void {
         this.isOpen = !this.isOpen;
@@ -64,21 +57,10 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._setUpMobileMode();
-        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
-        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
+        this.actionSheetBody.mobile = this.mobile;
+        this.actionSheetBody.compact = this.compact;
+        this.actionSheetBody.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
+        this.actionSheetBody.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
+
     }
-
-
-    /** @hidden */
-    private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
-            { actionSheetTemplate: this.actionSheetTemplate},
-            ActionSheetMobileComponent,
-            { container: this._elementRef.nativeElement },
-            { injector: Injector.create({ providers: [{ provide: ACTION_SHEET_COMPONENT, useValue: this }] }) }
-
-        );
-    }
-
 }

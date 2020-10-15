@@ -1,4 +1,13 @@
-import {ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulation} from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChildren,
+    Input,
+    QueryList,
+    ViewEncapsulation, ContentChild
+} from '@angular/core';
+import {ActionSheetItemComponent} from '../../..';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -14,28 +23,13 @@ import {ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulati
  * ```
  */
 @Component({
-    selector: 'fd-action-sheet-item',
-    templateUrl: './action-sheet-item.component.html',
+    selector: 'fd-action-sheet-body',
+    templateUrl: './action-sheet-body.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    host: {
-        'class': 'fd-action-sheet__item'
-    }
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-
-export class ActionSheetItemComponent {
-
-    /** Sets text of button. */
-    @Input()
-    label: string;
-
-    /** Sets icon of action item. */
-    @Input()
-    glyph: string;
-
-    /** Indicate state of the button.*/
-    @Input()
-    negative = false;
+export class ActionSheetBodyComponent {
+    @ContentChildren(ActionSheetItemComponent) public actionSheetItems: QueryList<ActionSheetItemComponent>;
 
     /** Indicate if items should be in compact or compare mode. **/
     @Input()
@@ -43,6 +37,6 @@ export class ActionSheetItemComponent {
 
     /** Display the mobile view. **/
     @Input()
-    mobile = false;
+    mobile: false;
 
 }

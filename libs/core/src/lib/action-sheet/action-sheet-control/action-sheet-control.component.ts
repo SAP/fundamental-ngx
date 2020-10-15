@@ -5,7 +5,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
  * ```html
  * <fd-action-sheet>
  *     <fd-action-sheet-control>Control Element</fd-action-sheet-control>
- *     <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>
+ *     <fd-action-sheet-body>
+ *          <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>
+ *          <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>
+ *          <fd-action-sheet-item>Action Sheet Body</fd-action-sheet-item>
+ *     </fd-action-sheet-body>
  * </fd-action-sheet>
  * ```
  */

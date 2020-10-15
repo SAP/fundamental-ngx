@@ -17,7 +17,8 @@ export const API_FILES = {
     actionSheet: [
         'ActionSheetComponent',
         'ActionSheetControlComponent',
-        'ActionSheetItemComponent'
+        'ActionSheetItemComponent',
+        'ActionSheetBodyComponent'
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
