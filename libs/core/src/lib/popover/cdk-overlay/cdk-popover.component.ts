@@ -2,7 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
+    Component, ContentChild, ElementRef,
     HostBinding,
     Input,
     OnChanges,
@@ -36,6 +36,7 @@ import { RtlService } from '../../utils/services/rtl.service';
 import { BasePopoverClass } from '../base/base-popover.class';
 import { DefaultPositions, PopoverPosition } from './popover-position';
 import { KeyUtil } from '../../utils/functions/key-util';
+import { PopoverControlComponent } from '../../..';
 
 let popoverUniqueId = 0;
 
@@ -58,6 +59,10 @@ let popoverUniqueId = 0;
 })
 export class CdkPopoverComponent extends BasePopoverClass
     implements AfterViewInit, OnInit, OnDestroy, OnChanges {
+
+    /** Reference to popover trigger element */
+    @Input()
+    trigger: ElementRef;
 
     /** Whether the popover is disabled. */
     @Input()
@@ -234,6 +239,10 @@ export class CdkPopoverComponent extends BasePopoverClass
         }
     }
 
+    private get _triggerElement(): ElementRef<any> {
+        return this.trigger || this.triggerOrigin.elementRef;
+    }
+
     /** Subscribe to close events from CDK Overlay, to throw proper events, change values */
     private _listenOnClose(): void {
         this._overlayRef.detachments()
@@ -260,7 +269,7 @@ export class CdkPopoverComponent extends BasePopoverClass
         this._removeTriggerListeners();
         if (this.triggers && this.triggers.length > 0) {
             this.triggers.forEach(trigger => {
-                this._eventRef.push(this._renderer.listen(this.triggerOrigin.elementRef.nativeElement, trigger, () => {
+                this._eventRef.push(this._renderer.listen(this._triggerElement.nativeElement, trigger, () => {
                     this.toggle();
                 }));
             });
@@ -275,7 +284,7 @@ export class CdkPopoverComponent extends BasePopoverClass
 
     /** @hidden */
     private _triggerContainsTarget(event: Event): boolean {
-        const triggerElement = this.triggerOrigin.elementRef.nativeElement;
+        const triggerElement = this._triggerElement.nativeElement;
         return triggerElement.contains(event.composedPath()[0]);
     }
 
@@ -350,7 +359,7 @@ export class CdkPopoverComponent extends BasePopoverClass
 
     /** @hidden */
     private _getTriggerWidth(): number {
-        return this.triggerOrigin.elementRef.nativeElement.offsetWidth;
+        return this._triggerElement.nativeElement.offsetWidth;
     }
 
     /** @hidden */
@@ -366,7 +375,7 @@ export class CdkPopoverComponent extends BasePopoverClass
 
         return this._overlay
             .position()
-            .flexibleConnectedTo(this.appendTo || this.triggerOrigin.elementRef)
+            .flexibleConnectedTo(this.appendTo || this._triggerElement)
             .withPositions(_resPosition)
             .withPush(false);
     }
