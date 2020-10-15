@@ -2,8 +2,9 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 
 import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CdkPopoverComponent } from '../popover/cdk-overlay/cdk-popover.component';
+import { OptionComponent } from '@fundamental-ngx/core';
 
 @Component({
     template: `
@@ -16,18 +17,21 @@ import { CdkPopoverComponent } from '../popover/cdk-overlay/cdk-popover.componen
     `
 })
 class TestWrapperComponent {
-    @ViewChild(SelectComponent, {static: true})
+    @ViewChild(SelectComponent)
     selectComponent: SelectComponent;
 
-    @ViewChild(SelectComponent, {read: ElementRef, static: true})
+    @ViewChild(SelectComponent, { read: ElementRef })
     selectElement: ElementRef;
+
+    @ViewChildren(OptionComponent)
+    optionComponents: QueryList<OptionComponent>;
 
     value: string;
 
     optionVisible = true;
 }
 
-xdescribe('SelectComponent', () => {
+describe('SelectComponent', () => {
     let element: ElementRef;
     let component: SelectComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
@@ -38,10 +42,10 @@ xdescribe('SelectComponent', () => {
             imports: [SelectModule]
         })
             .overrideComponent(SelectComponent, {
-                set: {changeDetection: ChangeDetectionStrategy.Default}
+                set: { changeDetection: ChangeDetectionStrategy.Default }
             })
             .overrideComponent(CdkPopoverComponent, {
-                set: {changeDetection: ChangeDetectionStrategy.Default}
+                set: { changeDetection: ChangeDetectionStrategy.Default }
             })
             .compileComponents();
     }));
@@ -62,31 +66,31 @@ xdescribe('SelectComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should start closed', () => {
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
-    });
-
     it('should open', async () => {
+        spyOn(component.isOpenChange, 'emit');
         component.open();
 
-        await wait(fixture);
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeTruthy();
+        expect(component.isOpen).toBeTruthy()
+        expect(component.isOpenChange.emit).toHaveBeenCalledWith(true)
     });
 
     it('should close', async () => {
         component.open();
 
-        await wait(fixture);
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeTruthy();
-        component.close();
+        spyOn(component.isOpenChange, 'emit');
 
-        await wait(fixture);
-        fixture.detectChanges();
+        component.close()
 
+        expect(component.isOpen).toBeFalsy()
+        expect(component.isOpenChange.emit).toHaveBeenCalledWith(false)
+    });
+
+
+    it('should start closed', () => {
         expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
     });
 
@@ -97,7 +101,6 @@ xdescribe('SelectComponent', () => {
         await wait(fixture);
 
         expect(component.isOpen).toBe(true);
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeTruthy();
     });
 
     it('should close on click while open', async () => {
@@ -106,30 +109,12 @@ xdescribe('SelectComponent', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeTruthy();
         element.nativeElement.querySelector('.fd-button').click();
 
         await wait(fixture);
         fixture.detectChanges();
 
         expect(component.isOpen).toBe(false);
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
-    });
-
-    it('should close on outside click', async () => {
-        component.open();
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeTruthy();
-        fixture.nativeElement.click();
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
     });
 
     it('should select an option', async () => {
@@ -139,7 +124,7 @@ xdescribe('SelectComponent', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        fixture.nativeElement.querySelector('#option-1').click();
+        fixture.componentInstance.optionComponents.first.selectionHandler();
 
         await wait(fixture);
         fixture.detectChanges();
@@ -239,14 +224,14 @@ xdescribe('SelectComponent', () => {
 
         expect(document.activeElement).toBe(options[0].getHtmlElement());
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowDown'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 
         fixture.detectChanges();
         tick();
 
         expect(document.activeElement).toBe(options[1].getHtmlElement());
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowUp'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 
         fixture.detectChanges();
         tick();
@@ -255,19 +240,19 @@ xdescribe('SelectComponent', () => {
     }));
 
     it('Should support opening and closing with keyboard', async () => {
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: ' '}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
 
         await wait(fixture);
 
         expect(component.isOpen).toBeTrue();
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Escape'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
 
         await wait(fixture);
 
         expect(component.isOpen).toBeFalse();
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
 
         await wait(fixture);
 
@@ -275,19 +260,19 @@ xdescribe('SelectComponent', () => {
     });
 
     it('Should support alphanumerical keys selection', async () => {
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyV' }));
 
         await wait(fixture);
 
         expect(component.selected.value).toEqual('value-1');
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyV'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyV' }));
 
         await wait(fixture);
 
         expect(component.selected.value).toEqual('value-2');
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowDown'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 
         await wait(fixture);
 
@@ -301,21 +286,21 @@ xdescribe('SelectComponent', () => {
         fixture.detectChanges();
         tick();
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyT'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyT' }));
 
         fixture.detectChanges();
         tick(component.typeaheadDebounceInterval + 1);
 
         expect(document.activeElement).toBe(component['_options'][1].getHtmlElement());
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {code: 'KeyT'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyT' }));
 
         fixture.detectChanges();
         tick(component.typeaheadDebounceInterval + 1);
 
         expect(document.activeElement).toBe(component['_options'][2].getHtmlElement());
 
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowUp'}));
+        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 
         fixture.detectChanges();
         tick(component.typeaheadDebounceInterval + 1);
