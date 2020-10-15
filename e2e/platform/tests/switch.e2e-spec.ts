@@ -1,9 +1,10 @@
 import { SwitchPo } from '../pages/switch.po';
 import { getValueOfAttribute, hoverMouse } from '../helpers/common-helper';
 import switchPageContent from '../fixtures/appData/swich-page-content';
-import { browser } from 'protractor';
+import { $, $$, browser } from 'protractor';
+import { runAxeTest } from 'protractor-axe-html-report-plugin';
 
-fdescribe('Verify Switch component', function() {
+describe('Verify Switch component', function() {
     const switchPage = new SwitchPo();
     beforeAll(async () => {
         await switchPage.open();
@@ -131,6 +132,11 @@ fdescribe('Verify Switch component', function() {
         expect(alternativeTextSemanticCompactFormDisabledSwitch).toBe(switchPageContent.semantic_compact_switch_alternative_text);
     });
 
+    xit('test accessibility', async ()=> {
+        const testResult = await runAxeTest('Test Switch component', $$('.docs-tile__content.docs-tile-content-example').get(0).locator().value); // switchPage.root.locator().value
+        expect(testResult.violations.length).toBe(0);
+    });
+
     it('should have RTL orientation', async () => {
         await switchPage.exampleAreaContainersArr.each(async (area, index) => {
             expect(await area.getCssValue('direction')).toBe('ltr', 'css prop direction ' + index);
@@ -212,4 +218,3 @@ fdescribe('Verify Switch component', function() {
 
     });
 });
-
