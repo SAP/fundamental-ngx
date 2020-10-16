@@ -16,7 +16,7 @@
 <component-example>
     <fd-file-uploader-truncation-example></fd-file-uploader-truncation-example>
 </component-example>
-<code-example [exampleFiles]="fileUpladerExample"></code-example>
+<code-example [exampleFiles]="fileTruncation"></code-example>
 
 <separator></separator>
 
@@ -45,22 +45,6 @@
     <fd-file-uploader-drag-disabled-example></fd-file-uploader-drag-disabled-example>
 </component-example>
 <code-example [exampleFiles]="fileInvalidCustom"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'file-uploader-minMaxSize'" [componentName]="'file-uploader'">
-    Min and Max File Size
-</fd-docs-section-title>
-<description>
-    It is possible to control the size of the file through the input <code>minFileSize</code> and
-    <code>maxFileSize</code>. The size you can specify in Byte, KB, MB, GB, TB. This feature allows the user to specify
-    the minimum and maximum size, but someone knowledgeable enough could potentially bypass this. <br /><br />
-    <strong>NOTE: It is possible to bypass this client-side limit so a server-side check is still necessary.</strong>
-</description>
-<component-example>
-    <fd-file-uploader-min-and-max-size-example></fd-file-uploader-min-and-max-size-example>
-</component-example>
-<code-example [exampleFiles]="fileMinMaxSize"></code-example>
 
 <separator></separator>
 

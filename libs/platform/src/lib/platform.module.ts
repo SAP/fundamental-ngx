@@ -22,6 +22,9 @@ import { PlatformObjectStatusModule } from './components/object-status/object-st
 import { PlatformInputModule, PlatformStepInputModule, PlatformInputGroupModule } from './components/form/public_api';
 import { PlatformComboboxMobileModule } from './components/form/combobox/combobox-mobile/combobox-mobile.module';
 import { PlatformComboboxModule } from './components/form/combobox';
+import { PlatformThumbnailModule } from './components/thumbnail/public_api';
+import { PlatformObjectMarkerModule } from './components/object-marker/object-marker.module';
+import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -49,7 +52,10 @@ import { PlatformComboboxModule } from './components/form/combobox';
         PlatformStepInputModule,
         PlatformInputGroupModule,
         PlatformComboboxModule,
-        PlatformComboboxMobileModule
+        PlatformComboboxMobileModule,
+        PlatformThumbnailModule,
+        PlatformObjectMarkerModule,
+        PlatformObjectAttributeModule
     ]
 })
 export class FundamentalNgxPlatformModule { }

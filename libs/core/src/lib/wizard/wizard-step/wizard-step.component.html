@@ -1,0 +1,24 @@
+<div class="fd-wizard__step-wrapper">
+    <a
+        class="fd-wizard__step-container"
+        [attr.aria-label]="ariaLabel"
+        tabindex="0"
+        (click)="stepContainerKeypress()"
+        (keypress)="stepContainerKeypress($event)"
+    >
+        <ng-content select="fd-wizard-step-indicator"></ng-content>
+        <div class="fd-wizard__label-container" [class.fd-wizard__label-container--optional]="optionalText">
+            <div #wizardLabel>
+                <span class="fd-wizard__label">{{ label }}</span>
+                <span *ngIf="optionalText" class="fd-wizard__optional-text">{{ optionalText }}</span>
+            </div>
+        </div>
+    </a>
+    <span
+        *ngIf="!finalStep"
+        class="fd-wizard__connector"
+        [class.fd-wizard__connector--active]="status === 'completed'"
+        [class.fd-wizard__connector--branching]="branching"
+    >
+    </span>
+</div>

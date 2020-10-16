@@ -12,6 +12,7 @@ import {
     ComboboxModule,
     LayoutPanelModule,
     ProductSwitchModule,
+    SegmentedButtonModule,
     ShellbarModule,
     SideNavigationModule,
     TileModule
@@ -37,7 +38,8 @@ const routes: Routes = [
         SideNavigationModule,
         ProductSwitchModule,
         TileModule,
-        LayoutPanelModule
+        LayoutPanelModule,
+        SegmentedButtonModule
     ],
     exports: [RouterModule],
     declarations: [

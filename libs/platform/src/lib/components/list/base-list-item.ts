@@ -169,15 +169,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         this.link = value;
     }
 
-    /**
-    * content Density of element. 'cozy' | 'compact'
-    */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this._isCompact = contentDensity === 'compact';
-    }
-
     /**Getter and setter the list of items */
     @Input()
     set item(item: any) {
@@ -244,7 +235,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     _noSeperator: boolean;
 
     /** @hidden */
-    _contentDensity = this._listConfig.contentDensity;
+    _contentDensity: ContentDensity = this._listConfig.contentDensity;
 
     /**@hidden
    * list of values, it can be of type Item or String.

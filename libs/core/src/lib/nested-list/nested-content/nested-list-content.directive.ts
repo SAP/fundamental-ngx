@@ -13,7 +13,7 @@ import {
     Renderer2
 } from '@angular/core';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
-import { NestedListExpandIconDirective } from '../nested-list-directives';
+import { NestedListExpandIconComponent } from '../nested-list-directives';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -57,8 +57,8 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     @ContentChild(NestedLinkDirective)
     nestedLink: NestedLinkDirective;
 
-    @ContentChild(NestedListExpandIconDirective)
-    nestedExpandIcon: NestedListExpandIconDirective;
+    @ContentChild(NestedListExpandIconComponent)
+    nestedExpandIcon: NestedListExpandIconComponent;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
@@ -105,8 +105,7 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     /** Expanded state change propagation method */
     changeExpandedState(expanded: boolean): void {
         if (this.nestedExpandIcon) {
-            this.nestedExpandIcon.expanded = expanded;
-            this.changeDetRef.detectChanges();
+            this.nestedExpandIcon.changeExpandedState(expanded);
         }
     }
 

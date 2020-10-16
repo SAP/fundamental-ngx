@@ -1,4 +1,7 @@
-<fd-docs-section-title id="standard" componentName="card">
+<fd-docs-section-title
+    id="standard"
+    componentName="card"
+>
     Standard Card
 </fd-docs-section-title>
 <description>
@@ -12,7 +15,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="compact" componentName="card">
+<fd-docs-section-title
+    id="compact"
+    componentName="card"
+>
     Compact mode
 </fd-docs-section-title>
 <description> Use <code>[compact]="true"</code> option to make the card compact </description>
@@ -24,7 +30,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="loader" componentName="card">
+<fd-docs-section-title
+    id="loader"
+    componentName="card"
+>
     Card loader
 </fd-docs-section-title>
 <description>
@@ -39,7 +48,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="footer" componentName="card">
+<fd-docs-section-title
+    id="footer"
+    componentName="card"
+>
     Card footer
 </fd-docs-section-title>
 <description> Use <code>fd-card-footer</code> component to put actions in the card footer </description>
@@ -51,12 +63,16 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="kpi" componentName="card">
+<fd-docs-section-title
+    id="kpi"
+    componentName="card"
+>
     Analytical Card
 </fd-docs-section-title>
 <description>
     Use <code>fd-card-kpi-header</code> component along with <code>[cardType]="analytical"</code> to display analytical
-    data in the card header
+    data in the card header.
+    <p>Here for illustration we use <code>google charts</code> library to render a chart within the card content.</p>
 </description>
 
 <component-example>
@@ -64,7 +80,12 @@
 </component-example>
 <code-example [exampleFiles]="kpi"></code-example>
 
-<fd-docs-section-title id="table" componentName="card">
+<separator></separator>
+
+<fd-docs-section-title
+    id="table"
+    componentName="card"
+>
     Table Card
 </fd-docs-section-title>
 <description> Use <code>[cardType]="table"</code> to display table card </description>
@@ -73,3 +94,21 @@
     <fd-card-table-example></fd-card-table-example>
 </component-example>
 <code-example [exampleFiles]="table"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="chartBar"
+    componentName="card"
+>
+    Bar Chart List
+</fd-docs-section-title>
+<description>
+    In order to display bar chart list in a card we can use list styles along with a custom bar component.
+    For this example in order to display bar chart we created a simple <code>fd-card-bar</code> component.
+</description>
+
+<component-example>
+    <fd-bar-chart-list-card-example></fd-bar-chart-list-card-example>
+</component-example>
+<code-example [exampleFiles]="barChartList"></code-example>

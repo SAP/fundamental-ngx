@@ -9,7 +9,8 @@ import {
     OnInit,
     SimpleChanges,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    AfterViewInit
 } from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -37,7 +38,7 @@ export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
@@ -165,6 +166,11 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     /** @hidden */
     ngOnInit(): void {
         this._setUpTimeGrid();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.refreshTime();
     }
 
     /** @hidden */

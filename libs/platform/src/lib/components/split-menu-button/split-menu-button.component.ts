@@ -81,6 +81,9 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
      * @hidden */
     private _rtlChangeSubscription = Subscription.EMPTY;
 
+    /** Defined max width of Split menu button */
+    splitButtonMaxWidth = '12rem';
+
     constructor(protected _cd: ChangeDetectorRef, @Optional() private _rtl: RtlService) {
         super(_cd);
     }

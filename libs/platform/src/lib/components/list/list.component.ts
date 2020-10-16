@@ -67,7 +67,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
     /**Items to be loaded at once */
     @Input()
-    itemSize: number;
+    itemSize = 0;
 
     /**Enables lazy loadMore of data */
     @Input()
@@ -126,15 +126,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         }
     }
 
-    /**
-   * content Density of element. 'cozy' | 'compact'
-   */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this._isCompact = contentDensity === 'compact';
-    }
-
     /** setter and getter for _navigated */
     @Input('navigated')
     get navigated(): boolean {
@@ -179,6 +170,14 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         super.setValue(value);
     }
 
+    /**
+   * content Density of element. 'cozy' | 'compact'
+   */
+    set contentDensity(contentDensity: ContentDensity) {
+        this._contentDensity = contentDensity;
+        this._isCompact = contentDensity === 'compact';
+    }
+
     /** @hidden */
     @Output()
     selectedItemChange: EventEmitter<SelectionChangeEvent> = new EventEmitter<SelectionChangeEvent>();
@@ -219,7 +218,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     _destroyed = new Subject<void>();
 
     /** @hidden */
-    _contentDensity = this._listConfig.contentDensity;
+    _contentDensity: ContentDensity = this._listConfig.contentDensity;
 
     /**
      * @hidden
@@ -393,7 +392,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             this._itemsSubscription.unsubscribe();
         }
     }
-
 
     /** @hidden */
     /**handline keyboard operations

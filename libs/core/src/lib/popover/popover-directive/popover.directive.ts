@@ -416,13 +416,19 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     /** @hidden */
     private _containerContainsTarget(event: Event): boolean {
         const containerElement = this.containerRef.location.nativeElement;
-        return containerElement.contains(event.composedPath()[0]);
+        return containerElement.contains(this._getEventTarget(event));
     }
 
     /** @hidden */
     private _triggerContainsTarget(event: Event): boolean {
         const triggerElement = this.triggerRef.nativeElement;
-        return triggerElement.contains(event.composedPath()[0]);
+        return triggerElement.contains(this._getEventTarget(event));
+    }
+
+    private _getEventTarget(event: Event): EventTarget {
+        return event.composedPath
+            ? event.composedPath()[0]
+            : event.target;
     }
 
     /** @hidden */

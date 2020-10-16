@@ -9,7 +9,7 @@ export class FileUploaderExampleComponent {
 
     files: File[];
 
-    handleFileSection(): void {
-        alert('Files selected successfully!!!');
+    handleFileSelection(files: File[]): void {
+        alert(files.length + ' Files selected successfully!!!');
     }
 }

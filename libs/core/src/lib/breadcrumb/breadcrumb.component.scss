@@ -3,4 +3,8 @@
 .fd-breadcrumb {
     display: inline-block;
     white-space: nowrap;
+
+    .fd-breadcrumb__collapsed {
+        cursor: pointer;
+    }
 }

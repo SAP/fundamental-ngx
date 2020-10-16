@@ -15,14 +15,17 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     // tslint:disable-next-line:component-selector
     selector: '[fd-object-status]',
     template: `
-        <i class="fd-object-status__icon"
-           *ngIf="glyph"
-           [ngClass]="'sap-icon--' + glyph"
-           [attr.role]="glyphAriaLabel ? 'presentation': ''"
-           [attr.aria-label]="glyphAriaLabel"></i>
-        <span class="fd-object-status__text">
-            <ng-content></ng-content>
-        </span>
+        <i
+            class="fd-object-status__icon"
+            *ngIf="glyph"
+            [ngClass]="'sap-icon--' + glyph"
+            [attr.role]="glyphAriaLabel ? 'presentation' : ''"
+            [attr.aria-label]="glyphAriaLabel"
+        ></i>
+        <span *ngIf="label" class="fd-object-status__text">{{ label }}</span>
+
+        <!-- DEPRECATED - Remove in v0.23.0 -->
+        <ng-content></ng-content>
     `,
     styleUrls: ['./object-status.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -46,6 +49,10 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      */
     @Input()
     glyph: string;
+
+    /** Define the text content of the Object Status */
+    @Input()
+    label: string;
 
     /**
      * Label applied to glyph element, should be used when there is not text included

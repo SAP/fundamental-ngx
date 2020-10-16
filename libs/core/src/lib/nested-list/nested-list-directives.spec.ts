@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NestedListExpandIconDirective, NestedListTitleDirective, NestedListIconDirective } from './nested-list-directives';
+import { NestedListExpandIconComponent, NestedListTitleDirective, NestedListIconDirective } from './nested-list-directives';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NestedItemService } from './nested-item/nested-item.service';
 
@@ -14,8 +14,8 @@ class TestNestedContainerComponent {
     @ViewChild(NestedListTitleDirective)
     titleElement: NestedListTitleDirective;
 
-    @ViewChild(NestedListExpandIconDirective)
-    expandIconElement: NestedListExpandIconDirective;
+    @ViewChild(NestedListExpandIconComponent)
+    expandIconElement: NestedListExpandIconComponent;
 
     @ViewChild(NestedListIconDirective)
     iconElement: NestedListIconDirective;
@@ -23,7 +23,7 @@ class TestNestedContainerComponent {
 
 describe('NestedListDirectives', () => {
     let component: TestNestedContainerComponent;
-    let expandIconElement: NestedListExpandIconDirective;
+    let expandIconElement: NestedListExpandIconComponent;
     let iconElement: NestedListIconDirective;
     let titleElement: NestedListTitleDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
@@ -31,7 +31,7 @@ describe('NestedListDirectives', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                NestedListExpandIconDirective,
+                NestedListExpandIconComponent,
                 NestedListIconDirective,
                 NestedListTitleDirective,
                 TestNestedContainerComponent

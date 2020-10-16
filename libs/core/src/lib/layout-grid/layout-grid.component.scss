@@ -1,1 +1,122 @@
-@import '~fundamental-styles/dist/layout-grid';
+/*!
+ * Fundamental Library Styles v0.11.2
+ * Copyright (c) 2020 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/master/LICENSE)
+ */
+/*!
+.fd-layout-grid
+*/
+.fd-layout-grid {
+    font-size: .875rem;
+    font-size: var(--sapFontSize, 0.875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: .5rem
+}
+
+.fd-layout-grid:after, .fd-layout-grid:before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+}
+
+@media (min-width: 600px) {
+    .fd-layout-grid {
+        grid-gap: 1rem
+    }
+}
+
+.fd-layout-grid--no-gap {
+    grid-gap: 0
+}
+
+.fd-layout-grid--no-gap > * {
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.fd-layout-grid--gap-1 {
+    grid-gap: 1px
+}
+
+.fd-layout-grid--gap-1 > * {
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.fd-layout-grid--col-1 {
+    grid-template-columns: repeat(1, 1fr)
+}
+
+.fd-layout-grid--col-2 {
+    grid-template-columns: repeat(2, 1fr)
+}
+
+.fd-layout-grid--col-3 {
+    grid-template-columns: repeat(3, 1fr)
+}
+
+.fd-layout-grid--col-4 {
+    grid-template-columns: repeat(4, 1fr)
+}
+
+.fd-layout-grid--col-5 {
+    grid-template-columns: repeat(5, 1fr)
+}
+
+.fd-layout-grid--col-6 {
+    grid-template-columns: repeat(6, 1fr)
+}
+
+.fd-layout-grid__span-row-2 {
+    grid-row: span 2
+}
+
+.fd-layout-grid__span-column-2 {
+    grid-column: span 2
+}
+
+.fd-layout-grid__span-row-3 {
+    grid-row: span 3
+}
+
+.fd-layout-grid__span-column-3 {
+    grid-column: span 3
+}
+
+.fd-layout-grid__span-row-4 {
+    grid-row: span 4
+}
+
+.fd-layout-grid__span-column-4 {
+    grid-column: span 4
+}
+
+.fd-layout-grid__span-row-5 {
+    grid-row: span 5
+}
+
+.fd-layout-grid__span-column-5 {
+    grid-column: span 5
+}
+
+.fd-layout-grid__span-row-6 {
+    grid-row: span 6
+}
+
+.fd-layout-grid__span-column-6 {
+    grid-column: span 6
+}
