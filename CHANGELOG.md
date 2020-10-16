@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.14...v0.23.0-rc.15) (2020-10-16)
+
+
+### Bug Fixes
+
+* Card - hide card subtitle if it's not used ([#3636](https://github.com/SAP/fundamental-ngx/issues/3636)) ([cdf68a9](https://github.com/SAP/fundamental-ngx/commit/cdf68a9716375a45eb3b3979842fabad313949b2))
+
 ## [0.23.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.13...v0.23.0-rc.14) (2020-10-15)
 
 ## [0.23.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.12...v0.23.0-rc.13) (2020-10-15)
