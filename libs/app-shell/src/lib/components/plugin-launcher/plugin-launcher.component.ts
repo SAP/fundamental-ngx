@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
+    ComponentRef,
     ElementRef,
     Injector,
     Input,
@@ -18,6 +19,7 @@ import { AngularIvyComponentDescriptor, PluginDescriptor } from '../../api/exten
 import { LookupService } from '../../api/extensions/lookup/lookup.service';
 import { PluginManagerService } from '../../api/extensions/plugin-manager.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { isPluginComponent } from '../../api/extensions/component/plugin-component';
 
 @Component({
     selector: 'fds-plugin-launcher',
@@ -43,16 +45,18 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
     module: string;
 
     /** Iframe URI */
-    @Input() iframeUri: string;
-    @Input() iframeAttrs: Record<string, string | number>;
+    @Input()
+    iframeUri: string;
+    @Input()
+    iframeAttrs: Record<string, string | number>;
 
     @ViewChild('view', { read: ViewContainerRef, static: true })
     ngContentView: ViewContainerRef;
 
-    @ViewChild('iframe', { static: false }) iframeEl: ElementRef;
+    @ViewChild('iframe', { static: false })
+    iframeEl: ElementRef;
 
     _safeIframeUri: SafeResourceUrl;
-
     private descriptor: Partial<PluginDescriptor>;
 
     constructor(private readonly _injector: Injector,
@@ -66,6 +70,7 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
     }
 
     async ngOnChanges(changes: SimpleChanges): Promise<void> {
+        console.log('PluginLauncherComponent => ', changes);
         if ('iframeUri' in changes) {
             this._safeIframeUri = this.sanitizer.bypassSecurityTrustResourceUrl(this.iframeUri);
         }
@@ -114,7 +119,12 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         if (_module.type === 'angular-ivy-component' && this.ngContentView) {
             this.ngContentView.clear();
             const factory = this.cfr.resolveComponentFactory(_component);
-            this.ngContentView.createComponent(factory, null, this._injector);
+            const componentRef: ComponentRef<any>  = this.ngContentView
+                .createComponent(factory, null, this._injector);
+
+            if (isPluginComponent(componentRef.instance)) {
+                this._pluginMgr.register(descriptor, componentRef.instance);
+            }
             this._cd.detectChanges();
         }
     }

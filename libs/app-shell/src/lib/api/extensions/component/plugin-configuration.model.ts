@@ -46,7 +46,9 @@ export interface PluginConfiguration {
 
     /**
      *
+     * @deprecated use directly messagebus
      *  This could be a way to define different listeners
+     *
      *
      */
     addListeners(): Array<Listener>
