@@ -12,6 +12,17 @@
                  [style.left.%]="_progress"
                  (mousedown)="onHandleClick(); $event.stopPropagation()"
             ></div>
+            <div *ngIf="mode === 'range'"
+                 class="fd-slider__handle"
+                 tabindex="0"
+                 role="slider"
+                 aria-label="slider"
+                 [attr.aria-valuemin]="min"
+                 [attr.aria-valuemax]="max"
+                 [attr.aria-valuenow]="_value"
+                 [style.left.%]="_progress + 10"
+                 (mousedown)="onHandleClick(); $event.stopPropagation()"
+            ></div>
         </div>
         <div class="fd-slider__tick-wrapper">
             <div class="fd-slider__ticks" (click)="onTrackClick($event)">
@@ -24,19 +35,12 @@
                     ></div>
                 </ng-container>
             </div>
-<!--            <div class="fd-slider__labels">-->
-<!--                <div class="fd-slider__label">0</div>-->
-<!--                <div class="fd-slider__label">10</div>-->
-<!--                <div class="fd-slider__label">20</div>-->
-<!--                <div class="fd-slider__label">30</div>-->
-<!--                <div class="fd-slider__label">40</div>-->
-<!--                <div class="fd-slider__label">50</div>-->
-<!--                <div class="fd-slider__label">60</div>-->
-<!--                <div class="fd-slider__label">70</div>-->
-<!--                <div class="fd-slider__label">80</div>-->
-<!--                <div class="fd-slider__label">90</div>-->
-<!--                <div class="fd-slider__label">100</div>-->
-<!--            </div>-->
+            <div class="fd-slider__labels" *ngIf="showTicks && showTicksLabels">
+                <div
+                    *ngFor="let tick of _tickMarks"
+                    class="fd-slider__label"
+                >{{ tick.value }}</div>
+            </div>
         </div>
     </div>
 </div>
