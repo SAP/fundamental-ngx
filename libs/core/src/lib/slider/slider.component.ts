@@ -63,11 +63,15 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
 
     /** Jump value. */
     @Input()
-    mode: 'cell' | 'range' = 'cell';
+    mode: 'single' | 'range' = 'single';
 
     /** Toggles the visibility of tick marks. */
     @Input()
     showTicks = false;
+
+    /** Toggles the visibility of tick mark labels. Must be used in conjunction with 'showTicks '*/
+    @Input()
+    showTicksLabels = false;
 
     /** Hides display of colored progress bar. */
     @Input()
@@ -112,6 +116,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
 
     _value = 0;
     _progress = 0;
+    _isRange = false;
     _rangeValue: RangeSliderValue = { min: 0, max: 0 };
     _tickMarks: any[] = [];
 
@@ -129,12 +134,14 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
     ngOnChanges(): void {
         this.buildComponentCssClass();
         this._constructTickMarks();
+        this._checkIsInRangeMode();
     }
 
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
         this._constructTickMarks();
+        this._checkIsInRangeMode();
     }
 
     @applyCssClass
@@ -235,11 +242,15 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
 
     /** @hidden */
     private _constructTickMarks(): void {
-        const tickMarks = Array(Math.round(this.max / this.jump) + 1).fill(null);
+        const tickMarks = Array(Math.round((this.max - this.min) / this.jump) + 1).fill(null);
         let i = this.min;
         tickMarks.forEach((tick, _i) => {
             tickMarks[_i] = { value: i };
-            i += 10;
+            if (i + this.jump > this.max) {
+                return;
+            }
+
+            i += this.jump;
         });
         this._tickMarks = tickMarks;
         console.log('tick mark', tickMarks);
@@ -269,5 +280,9 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
         console.log('value from percentage', newValue);
 
         return Math.round(newValue);
+    }
+
+    private _checkIsInRangeMode(): void {
+        this._isRange = this.mode === 'range';
     }
 }
