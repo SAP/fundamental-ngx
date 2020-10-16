@@ -12,6 +12,8 @@ export class SliderBasicExampleComponent {
     value = 23;
     hideProgressBar = false;
     showTicks = true;
+    showTicksLabels = true;
+    range = false;
     disabled = false;
     readonly = false;
 }
