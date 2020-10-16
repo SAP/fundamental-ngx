@@ -67,15 +67,9 @@ export async function getValueOfAttribute(element: ElementFinder, attributeName)
 }
 export function getPlaceholderText(element: ElementFinder): Promise<string> {
     return getValueOfAttribute(element, 'placeholder');
-
 }
-export async function checkLinkData(element: ElementFinder) {
-    expect(await getValueOfAttribute(await element, 'type')).toEqual('text');
-    expect(await getValueOfAttribute(await element, 'aria-label')).not.toEqual(null);
-    expect(await getValueOfAttribute(await element, 'title')).not.toEqual(null);
-    expect(await getValueOfAttribute(await element, 'href')).toBeDefined();
-}
-
-export async function checkIfDisabled(element: ElementFinder, value: string) {
-    return await expect(getValueOfAttribute(element, 'ng-reflect-disabled')).toEqual(value);
+export async function checkLinkTargetDestination(element, site: string, angular: boolean = false ) {
+    await browser.waitForAngularEnabled(angular);
+    await element.click();
+    return waitForUrl(site);
 }
