@@ -10,6 +10,7 @@ import { SliderDocsComponent } from './slider-docs.component';
 import { SliderBasicExampleComponent } from './examples/slider-example.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
     {
@@ -23,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SharedDocumentationPageModule, SliderModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SharedDocumentationPageModule, SliderModule, FormsModule],
     exports: [RouterModule],
     declarations: [
         SliderHeaderComponent,
