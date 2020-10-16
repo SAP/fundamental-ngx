@@ -124,7 +124,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => {
-                console.log('test2')
                 // this._recheckLinks();
                 this._listenOnItemsClick();
             });
@@ -143,14 +142,4 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
             }
         );
     }
-
-
-
-    //
-    // /** @hidden */
-    // private _listenOnListFocusEscape(): void {
-    //     this._keyboardSupportService.focusEscapeList
-    //         .pipe(takeUntil(this._onDestroy$))
-    //         .subscribe(direction => this.focusEscapeList.emit(direction))
-    // }
 }

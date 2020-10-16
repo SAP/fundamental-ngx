@@ -144,7 +144,6 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => {
-                console.log('test2')
                 this._recheckLinks();
                 this._listenOnItemsClick();
             });

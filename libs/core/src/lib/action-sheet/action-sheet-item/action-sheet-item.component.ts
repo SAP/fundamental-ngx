@@ -5,12 +5,14 @@ import {
     EventEmitter,
     HostListener,
     Input,
-    Output,
+    Output, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
-import {KeyUtil} from '../../..';
+import {KeyUtil, RadioButtonComponent} from '../../..';
 import {startWith, takeUntil} from 'rxjs/operators';
+import { ButtonComponent } from '../../..';
+
 
 
 /**
@@ -58,6 +60,11 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     mobile = false;
 
+    /** @hidden */
+    @ViewChild(ButtonComponent)
+    buttonComponent: ButtonComponent;
+
+
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
@@ -69,7 +76,6 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     constructor(
         public elementRef: ElementRef,
     ) { }
-
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
@@ -90,19 +96,6 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
 
     /** @hidden */
     focus(): void {
-        this.elementRef.nativeElement.focus();
+        this.buttonComponent.elementRef().nativeElement.focus();
     }
-    //
-    // /** @hidden */
-    // private _listenOnLinkQueryChange(): void {
-    //     this.linkDirectives.changes.pipe(
-    //         takeUntil(this._onDestroy$),
-    //         startWith(0)
-    //     ).subscribe(() => {
-    //         this.link = this.linkDirectives.length > 0;
-    //         this._changeDetectorRef.detectChanges();
-    //     });
-    // }
-
-
 }
