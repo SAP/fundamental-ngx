@@ -1,36 +1,54 @@
 <p>Left aligned text addon</p>
-<fdp-input-group name="leftTextAddon" placeholder="Enter value">
+<fdp-input-group
+    name="leftTextAddon"
+    placeholder="Enter value"
+>
     <fdp-input-group-addon>$</fdp-input-group-addon>
     <fdp-input-group-input type="number"></fdp-input-group-input>
 </fdp-input-group>
 
 <p>Right aligned text addon</p>
-<fdp-input-group name="rightTextAddon" placeholder="Enter value">
+<fdp-input-group
+    name="rightTextAddon"
+    placeholder="Enter value"
+>
     <fdp-input-group-input type="number"></fdp-input-group-input>
     <fdp-input-group-addon>0.00</fdp-input-group-addon>
 </fdp-input-group>
 
 <p>Left and right aligned text addons</p>
-<fdp-input-group name="leftAndRightAddonsExample" placeholder="Enter value">
+<fdp-input-group
+    name="leftAndRightAddonsExample"
+    placeholder="Enter value"
+>
     <fdp-input-group-addon>$</fdp-input-group-addon>
     <fdp-input-group-input type="number"></fdp-input-group-input>
     <fdp-input-group-addon>0.00</fdp-input-group-addon>
 </fdp-input-group>
 
 <p>Button as an addon</p>
-<fdp-input-group name="donation" placeholder="Enter value">
+<fdp-input-group
+    name="donation"
+    placeholder="Enter value"
+>
     <fdp-input-group-addon>$</fdp-input-group-addon>
     <fdp-input-group-input type="number"></fdp-input-group-input>
     <fdp-input-group-addon>0.00</fdp-input-group-addon>
     <fdp-input-group-addon>
-        <fdp-button>Submit</fdp-button>
+        <fdp-button label="Submit"></fdp-button>
     </fdp-input-group-addon>
 </fdp-input-group>
 
 <p>Icon as an addon</p>
-<fdp-input-group name="employee" placeholder="Email">
+<fdp-input-group
+    name="employee"
+    placeholder="Email"
+>
     <fdp-input-group-addon>
-        <i class="sap-icon--email" title="Email" aria-hidden="true"></i>
+        <fd-icon
+            glyph="email"
+            title="Email"
+        ></fd-icon>
     </fdp-input-group-addon>
     <fdp-input-group-input type="email"></fdp-input-group-input>
 </fdp-input-group>

@@ -18,7 +18,7 @@ import { InputGroupComponent } from './input-group.component';
             <fdp-input-group-input></fdp-input-group-input>
             <fdp-input-group-addon>0.00</fdp-input-group-addon>
             <fdp-input-group-addon>
-                <fdp-button>Button</fdp-button>
+                <fdp-button label="Button"></fdp-button>
             </fdp-input-group-addon>
         </fdp-input-group>
     `
