@@ -1,1 +1,42 @@
-<p>!!!slider works!!!</p>
+<div class="fd-slider">
+    <div class="fd-slider__inner">
+        <div class="fd-slider__track" (click)="onTrackClick($event)" #track>
+            <div *ngIf="!hideProgressBar" class="fd-slider__track-range" [style.width.%]="_progress"></div>
+            <div class="fd-slider__handle"
+                 tabindex="0"
+                 role="slider"
+                 aria-label="slider"
+                 [attr.aria-valuemin]="min"
+                 [attr.aria-valuemax]="max"
+                 [attr.aria-valuenow]="_value"
+                 [style.left.%]="_progress"
+                 (mousedown)="onHandleClick(); $event.stopPropagation()"
+            ></div>
+        </div>
+        <div class="fd-slider__tick-wrapper">
+            <div class="fd-slider__ticks" (click)="onTrackClick($event)">
+                <ng-container *ngIf="showTicks">
+                    <div
+                        *ngFor="let tick of _tickMarks"
+                        class="fd-slider__tick"
+                        [attr.data-val]="tick.value"
+                        [class.fd-slider__tick--in-range]="!hideProgressBar && tick.value <= value"
+                    ></div>
+                </ng-container>
+            </div>
+<!--            <div class="fd-slider__labels">-->
+<!--                <div class="fd-slider__label">0</div>-->
+<!--                <div class="fd-slider__label">10</div>-->
+<!--                <div class="fd-slider__label">20</div>-->
+<!--                <div class="fd-slider__label">30</div>-->
+<!--                <div class="fd-slider__label">40</div>-->
+<!--                <div class="fd-slider__label">50</div>-->
+<!--                <div class="fd-slider__label">60</div>-->
+<!--                <div class="fd-slider__label">70</div>-->
+<!--                <div class="fd-slider__label">80</div>-->
+<!--                <div class="fd-slider__label">90</div>-->
+<!--                <div class="fd-slider__label">100</div>-->
+<!--            </div>-->
+        </div>
+    </div>
+</div>
