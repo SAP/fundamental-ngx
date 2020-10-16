@@ -137,12 +137,14 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _listenOnQueryChange(): void {
+        console.log(this.items.changes)
         this.items.changes
             .pipe(
                 startWith(0),
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => {
+                console.log('test2')
                 this._recheckLinks();
                 this._listenOnItemsClick();
             });

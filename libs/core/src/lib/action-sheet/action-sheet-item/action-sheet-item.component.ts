@@ -1,4 +1,17 @@
-import {ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulation} from '@angular/core';
+import {
+    ChangeDetectionStrategy, ChangeDetectorRef,
+    Component,
+    ContentChild, ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
+import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
+import {KeyUtil} from '../../..';
+import {startWith, takeUntil} from 'rxjs/operators';
+
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -23,7 +36,7 @@ import {ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulati
     }
 })
 
-export class ActionSheetItemComponent {
+export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
 
     /** Sets text of button. */
     @Input()
@@ -44,5 +57,52 @@ export class ActionSheetItemComponent {
     /** Display the mobile view. **/
     @Input()
     mobile = false;
+
+    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
+    @Output()
+    keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+
+
+    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
+    clicked = new EventEmitter<MouseEvent>();
+
+    constructor(
+        public elementRef: ElementRef,
+    ) { }
+
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keydownHandler(event: KeyboardEvent): void {
+        this.keyDown.emit(event);
+    }
+
+    /** Handler for mouse events */
+    @HostListener('click', ['$event'])
+    onClick(event: MouseEvent): void {
+        this.clicked.emit(event);
+    }
+
+    /** @hidden */
+    click(): void {
+        this.elementRef.nativeElement.click();
+    }
+
+    /** @hidden */
+    focus(): void {
+        this.elementRef.nativeElement.focus();
+    }
+    //
+    // /** @hidden */
+    // private _listenOnLinkQueryChange(): void {
+    //     this.linkDirectives.changes.pipe(
+    //         takeUntil(this._onDestroy$),
+    //         startWith(0)
+    //     ).subscribe(() => {
+    //         this.link = this.linkDirectives.length > 0;
+    //         this._changeDetectorRef.detectChanges();
+    //     });
+    // }
+
 
 }

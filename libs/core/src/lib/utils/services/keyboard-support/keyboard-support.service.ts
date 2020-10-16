@@ -37,6 +37,7 @@ export class KeyboardSupportService<T> {
 
     /** @hidden */
     onKeyDown(event: KeyboardEvent): void {
+        console.log('test3')
         this._keyManager.onKeydown(event);
     }
 
