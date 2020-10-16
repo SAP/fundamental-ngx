@@ -1,17 +1,17 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
     Component,
-    ContentChild, ElementRef,
+    ElementRef,
     EventEmitter,
     HostListener,
     Input,
-    Output, ViewChild,
+    Output,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
-import {KeyUtil, RadioButtonComponent} from '../../..';
-import {startWith, takeUntil} from 'rxjs/operators';
-import { ButtonComponent } from '../../..';
+import { ButtonComponent } from '@fundamental-ngx/core';
+
 
 
 
@@ -64,17 +64,15 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @ViewChild(ButtonComponent)
     buttonComponent: ButtonComponent;
 
-
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
 
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     clicked = new EventEmitter<MouseEvent>();
 
     constructor(
-        public elementRef: ElementRef,
+        public elementRef: ElementRef
     ) { }
 
     /** @hidden */

@@ -1,10 +1,15 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
-    Component, ContentChild, ElementRef,
-    EventEmitter, HostListener,
-    Input, OnDestroy,
-    Optional, Output,
+    Component,
+    ContentChild,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    OnDestroy,
+    Optional,
+    Output,
     ViewEncapsulation
 } from '@angular/core';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
@@ -14,7 +19,7 @@ import {
     FocusEscapeDirection,
     KeyboardSupportService
 } from '../utils/services/keyboard-support/keyboard-support.service';
-import {ActionSheetItemComponent, ListItemComponent} from '../..';
+import {ActionSheetItemComponent} from './action-sheet-item/action-sheet-item.component';
 import {startWith, takeUntil} from 'rxjs/operators';
 import {merge, Subject} from 'rxjs';
 
@@ -66,7 +71,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
-
     /** To allow user to determine what event he wants to trigger the messages to show
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
      **/
@@ -90,7 +94,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
         this.actionSheetBody.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
         this._keyboardSupportService.setKeyboardService(this.actionSheetBody.actionSheetItems, false);
         this._listenOnQueryChange();
-
     }
 
     /** @hidden */
@@ -98,7 +101,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
-
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
@@ -124,7 +126,6 @@ export class ActionSheetComponent implements AfterContentInit, ActionSheetInterf
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => {
-                // this._recheckLinks();
                 this._listenOnItemsClick();
             });
     }
