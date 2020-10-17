@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PlatformInputGroupModule, FdpFormGroupModule, PlatformStepInputModule } from '@fundamental-ngx/platform';
+import { IconModule } from '@fundamental-ngx/core';
+import { PlatformInputGroupModule, FdpFormGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
@@ -33,8 +34,9 @@ const routes: Routes = [
         SharedDocumentationModule,
         SharedDocumentationPageModule,
         FdpFormGroupModule,
+        PlatformButtonModule,
+        IconModule,
         PlatformInputGroupModule,
-        PlatformStepInputModule
     ],
     exports: [RouterModule],
     declarations: [

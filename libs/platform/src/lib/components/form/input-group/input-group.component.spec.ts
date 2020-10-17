@@ -1,12 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 
-import { ContentDensity, Status } from '../form-control';
+import { ContentDensity } from '../form-control';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
+import {PlatformButtonModule} from '../../button/button.module';
 
 import { PlatformInputGroupModule } from './input-group.module';
 import { InputGroupComponent } from './input-group.component';
@@ -18,7 +19,7 @@ import { InputGroupComponent } from './input-group.component';
             <fdp-input-group-input></fdp-input-group-input>
             <fdp-input-group-addon>0.00</fdp-input-group-addon>
             <fdp-input-group-addon>
-                <fdp-button>Button</fdp-button>
+                <fdp-button label="Button"></fdp-button>
             </fdp-input-group-addon>
         </fdp-input-group>
     `
@@ -34,9 +35,9 @@ describe('InputGroup component', () => {
     let fixture: ComponentFixture<InputGroupHostComponent>;
     let inputGroupComponent: InputGroupComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformInputGroupModule],
+            imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
             declarations: [InputGroupHostComponent]
         }).compileComponents();
     }));
@@ -101,7 +102,7 @@ describe('InputGroup component', () => {
                     <fdp-input-group-input></fdp-input-group-input>
                     <fdp-input-group-addon>0.00</fdp-input-group-addon>
                     <fdp-input-group-addon>
-                        <fdp-button>Button</fdp-button>
+                        <fdp-button label="Button"></fdp-button>
                     </fdp-input-group-addon>
                 </fdp-input-group>
             </fdp-form-field>
@@ -126,9 +127,9 @@ describe('Input group withing platform form', () => {
     let fixture: ComponentFixture<InputGroupFormTestWrapperComponent>;
     let host: InputGroupFormTestWrapperComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputGroupModule],
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule],
             declarations: [InputGroupFormTestWrapperComponent]
         }).compileComponents();
     }));
