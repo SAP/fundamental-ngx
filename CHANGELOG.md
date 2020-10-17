@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.15...v0.23.0-rc.16) (2020-10-17)
+
+
+### Bug Fixes
+
+* (platform) Input group - fix button usage ([#3639](https://github.com/SAP/fundamental-ngx/issues/3639)) ([7e9fdf9](https://github.com/SAP/fundamental-ngx/commit/7e9fdf90987ebd49cace6feb2a1803465941acda))
+
 ## [0.23.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.14...v0.23.0-rc.15) (2020-10-16)
 
 
