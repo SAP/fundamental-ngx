@@ -26,3 +26,8 @@ export * from './text-area/text-area.config';
 export * from './text-area/text-area.component';
 export * from './datetime-picker/datetime-picker.module';
 export * from './datetime-picker/datetime-picker.component';
+export * from './step-input/public_api';
+export * from './input-group/public_api';
+export * from './combobox';
+export * from './multi-input/multi-input.module';
+export * from './multi-input/multi-input.component';

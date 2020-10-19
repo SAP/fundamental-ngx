@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+
 import { FdpFormGroupModule } from './components/form/form-group/fdp-form.module';
 import { PlatformButtonModule } from './components/button/button.module';
 import { PlatformSearchFieldModule } from './components/search-field/search-field.module';
@@ -19,7 +21,12 @@ import { PlatformCheckboxGroupModule } from './components/form/checkbox-group/ch
 import { PlatformPanelModule } from './components/panel/panel.module';
 import { PlatformSwitchModule } from './components/form/switch/switch.module';
 import { PlatformObjectStatusModule } from './components/object-status/object-status.module';
-import { PlatformInputModule, PlatformStepInputModule, PlatformInputGroupModule } from './components/form/public_api';
+import {
+    PlatformInputModule,
+    PlatformStepInputModule,
+    PlatformInputGroupModule,
+    PlatformMultiInputModule
+} from './components/form/public_api';
 import { PlatformComboboxMobileModule } from './components/form/combobox/combobox-mobile/combobox-mobile.module';
 import { PlatformComboboxModule } from './components/form/combobox';
 import { PlatformThumbnailModule } from './components/thumbnail/public_api';
@@ -59,7 +66,8 @@ import { PlatformDatetimePickerModule } from './components/form/datetime-picker/
         PlatformObjectMarkerModule,
         PlatformObjectAttributeModule,
         PlatformTableModule,
-        PlatformDatetimePickerModule
+        PlatformDatetimePickerModule,
+        PlatformMultiInputModule
     ]
 })
 export class FundamentalNgxPlatformModule {}
