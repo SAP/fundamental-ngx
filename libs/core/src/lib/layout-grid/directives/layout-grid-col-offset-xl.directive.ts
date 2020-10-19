@@ -6,7 +6,6 @@ import { CSS_CLASS_NAME } from '../constants';
     selector: '[fdLayoutGridColOffsetXl]'
 })
 export class LayoutGridColOffsetXlDirective extends LayoutGridColBase implements OnInit, OnChanges {
-
     @Input('fdLayoutGridColOffsetXl')
     _numberOfColumns: number;
 
@@ -24,5 +23,4 @@ export class LayoutGridColOffsetXlDirective extends LayoutGridColBase implements
     ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
     }
-
 }

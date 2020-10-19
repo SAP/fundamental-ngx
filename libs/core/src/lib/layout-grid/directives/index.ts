@@ -14,9 +14,9 @@ export * from './layout-grid-col-md.directive';
 export * from './layout-grid-col-lg.directive';
 export * from './layout-grid-col-xl.directive';
 export * from './layout-grid-col-offset.directive';
-export *  from './layout-grid-col-offset-md.directive';
-export *  from './layout-grid-col-offset-lg.directive';
-export *  from './layout-grid-col-offset-xl.directive';
+export * from './layout-grid-col-offset-md.directive';
+export * from './layout-grid-col-offset-lg.directive';
+export * from './layout-grid-col-offset-xl.directive';
 
 export const directives = [
     LayoutGridRowDirective,
@@ -27,5 +27,5 @@ export const directives = [
     LayoutGridColOffsetDirective,
     LayoutGridColOffsetMdDirective,
     LayoutGridColOffsetLgDirective,
-    LayoutGridColOffsetXlDirective,
+    LayoutGridColOffsetXlDirective
 ];

@@ -1,5 +1,7 @@
 import {
+    LayoutGridAdjustingExampleComponent,
     LayoutGridBasicExampleComponent,
+    LayoutGridNestingExampleComponent,
     LayoutGridNoGapExampleComponent,
     LayoutGridOffsetExampleComponent,
     LayoutGridResponsiveExampleComponent,
@@ -16,5 +18,7 @@ export const examples = [
     LayoutGridBasicExampleComponent,
     LayoutGridNoGapExampleComponent,
     LayoutGridOffsetExampleComponent,
-    LayoutGridResponsiveExampleComponent
+    LayoutGridResponsiveExampleComponent,
+    LayoutGridAdjustingExampleComponent,
+    LayoutGridNestingExampleComponent
 ];

@@ -3,7 +3,6 @@ import { CSS_CLASS_NAME } from '../constants';
 
 @Directive()
 export abstract class LayoutGridColBase implements OnInit, OnChanges {
-
     /** @hidden */
     abstract _numberOfColumns: number;
 

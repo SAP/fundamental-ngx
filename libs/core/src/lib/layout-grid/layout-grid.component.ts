@@ -16,15 +16,12 @@ import { CSS_CLASS_NAME } from './constants';
  */
 @Component({
     selector: 'fd-layout-grid, [fdLayoutGrid]',
-    template: `
-        <ng-content></ng-content>
-    `,
+    template: ` <ng-content></ng-content> `,
     styleUrls: ['./layout-grid.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
-
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -40,7 +37,7 @@ export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
     private _class = '';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -60,10 +57,6 @@ export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [
-            CSS_CLASS_NAME.layoutGrid,
-            this.noGap ? CSS_CLASS_NAME.layoutGridNoGap : '',
-            this._class
-        ];
+        return [CSS_CLASS_NAME.layoutGrid, this.noGap ? CSS_CLASS_NAME.layoutGridNoGap : '', this._class];
     }
 }

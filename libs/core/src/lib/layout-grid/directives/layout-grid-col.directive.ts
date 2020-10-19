@@ -6,18 +6,25 @@ import { CSS_CLASS_NAME } from '../constants';
     selector: '[fdLayoutGridCol]'
 })
 export class LayoutGridColDirective extends LayoutGridColBase implements OnInit, OnChanges {
-
     @Input('fdLayoutGridCol')
     _numberOfColumns: number;
 
+    // Whether or not the column should fill the remaining space.
+    @Input()
+    full = false;
+
     /** @hidden */
-    constructor(elementRef: ElementRef<HTMLElement>, renderer: Renderer2) {
+    constructor(public elementRef: ElementRef<HTMLElement>, renderer: Renderer2) {
         super(renderer, elementRef, CSS_CLASS_NAME.colSizePrefix);
     }
 
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
+
+        if (this.full) {
+            this.elementRef.nativeElement.classList.add(CSS_CLASS_NAME.full);
+        }
     }
 
     /** @hidden */

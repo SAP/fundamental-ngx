@@ -13,8 +13,8 @@ const routes: Routes = [
         path: '',
         component: LayoutGridDocsHeaderComponent,
         children: [
-            {path: '', component: LayoutGridDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.layoutGrid}}
+            { path: '', component: LayoutGridDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.layoutGrid } }
         ]
     }
 ];
@@ -22,10 +22,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutGridModule],
     exports: [RouterModule],
-    declarations: [
-        examples,
-        LayoutGridDocsComponent,
-        LayoutGridDocsHeaderComponent
-    ]
+    declarations: [examples, LayoutGridDocsComponent, LayoutGridDocsHeaderComponent]
 })
 export class LayoutGridDocsModule {}

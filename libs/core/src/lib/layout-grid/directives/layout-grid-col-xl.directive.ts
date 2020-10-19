@@ -6,7 +6,6 @@ import { CSS_CLASS_NAME } from '../constants';
     selector: '[fdLayoutGridColXl]'
 })
 export class LayoutGridColXlDirective extends LayoutGridColBase implements OnInit, OnChanges {
-
     @Input('fdLayoutGridColXl')
     _numberOfColumns: number;
 

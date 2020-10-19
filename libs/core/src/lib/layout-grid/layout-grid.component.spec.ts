@@ -39,7 +39,9 @@ describe('LayoutGridComponent', () => {
     it('Should have good classes', () => {
         fixture.detectChanges();
 
-        expect((componentElement as any)._elementRef.nativeElement.classList.contains('fd-container--no-gap')).toBeTruthy();
+        expect(
+            (componentElement as any)._elementRef.nativeElement.classList.contains('fd-container--no-gap')
+        ).toBeTruthy();
         expect((componentElement as any)._elementRef.nativeElement.classList.contains('fd-container')).toBeTruthy();
     });
 });

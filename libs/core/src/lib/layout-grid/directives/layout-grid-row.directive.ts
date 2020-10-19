@@ -6,4 +6,4 @@ import { Directive } from '@angular/core';
         class: 'fd-row'
     }
 })
-export class LayoutGridRowDirective { }
+export class LayoutGridRowDirective {}

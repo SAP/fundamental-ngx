@@ -7,7 +7,7 @@ const BACKGROUND_COLORS = ['#30c5d2', '#32b5c8', '#3694b5', '#3a73a2', '#3f528f'
     selector: 'example-layout-grid-block',
     template: '<ng-content></ng-content>',
     styles: [
-            `
+        `
             :host {
                 color: white;
                 height: 4rem;
@@ -16,7 +16,7 @@ const BACKGROUND_COLORS = ['#30c5d2', '#32b5c8', '#3694b5', '#3a73a2', '#3f528f'
                 justify-content: center;
             }
         `
-    ],
+    ]
 })
 export class ExampleLayoutGridBlockComponent {
     @Input()
