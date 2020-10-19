@@ -56,7 +56,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     compact = false;
 
-    /** Display the mobile view. **/
+    /** Display in mobile view. **/
     @Input()
     mobile = false;
 

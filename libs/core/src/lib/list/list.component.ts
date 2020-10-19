@@ -137,7 +137,6 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _listenOnQueryChange(): void {
-        console.log(this.items.changes)
         this.items.changes
             .pipe(
                 startWith(0),

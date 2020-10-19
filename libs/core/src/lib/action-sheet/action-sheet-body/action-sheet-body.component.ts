@@ -28,14 +28,14 @@ import {ActionSheetItemComponent} from '../action-sheet-item/action-sheet-item.c
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetBodyComponent {
-    @ContentChildren(ActionSheetItemComponent) public actionSheetItems: QueryList<ActionSheetItemComponent>;
 
     /** Indicate if items should be in compact or compare mode. **/
     @Input()
     compact = false;
 
-    /** Display the mobile view. **/
+    /** Display in mobile view. **/
     @Input()
-    mobile: false;
+    mobile = false;
 
+    @ContentChildren(ActionSheetItemComponent) actionSheetItems: QueryList<ActionSheetItemComponent>;
 }
