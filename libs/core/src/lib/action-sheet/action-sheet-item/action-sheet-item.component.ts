@@ -10,8 +10,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
-import { ButtonComponent } from '@fundamental-ngx/core';
-
+import { ButtonComponent } from '../../button/button.component';
 
 
 
