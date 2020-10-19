@@ -11,6 +11,7 @@ import { NewComponentComponent } from './component-docs/new-component/new-compon
 import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core';
 import {
     COMBOBOX_MOBILE_CONFIG,
+    ACTION_SHEET_MOBILE_CONFIG,
     MENU_MOBILE_CONFIG,
     MULTI_INPUT_MOBILE_CONFIG,
     SELECT_MOBILE_CONFIG
@@ -25,6 +26,7 @@ import {
         {provide: MOBILE_MODE_CONFIG, useValue: MENU_MOBILE_CONFIG, multi: true},
         {provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true},
         {provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true},
+        {provide: MOBILE_MODE_CONFIG, useValue: ACTION_SHEET_MOBILE_CONFIG, multi: true},
         {provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true}
     ]
 })

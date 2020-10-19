@@ -1,11 +1,12 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
     ElementRef,
     EventEmitter,
-    HostListener,
+    HostListener, Injector,
     Input,
     OnDestroy,
     Optional,
@@ -21,6 +22,8 @@ import {
 import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
+import {ActionSheetMobileComponent} from './action-sheet-mobile/action-sheet-mobile.component';
+import {ACTION_SHEET_COMPONENT} from './action-sheet.interface';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -32,7 +35,7 @@ import { merge, Subject } from 'rxjs';
         KeyboardSupportService
     ]
 })
-export class ActionSheetComponent implements AfterContentInit, OnDestroy {
+export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
     /** Whether should be displayed in compact mode **/
     @Input()
@@ -90,6 +93,13 @@ export class ActionSheetComponent implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        if (this.mobile) {
+            this._setUpMobileMode();
+        }
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -135,6 +145,16 @@ export class ActionSheetComponent implements AfterContentInit, OnDestroy {
                     .pipe(takeUntil(refreshObs))
                     .subscribe(event => this.setItemActive(index))
             }
+        );
+    }
+
+    /** @hidden */
+    private _setUpMobileMode(): void {
+        this._dynamicComponentService.createDynamicComponent(
+            { listTemplate: this.actionSheetBody, controlTemplate: this.actionSheetBody },
+            ActionSheetMobileComponent,
+            { container: 'body' },
+            { injector: Injector.create({ providers: [{ provide: ACTION_SHEET_COMPONENT, useValue: this }] }) }
         );
     }
 }

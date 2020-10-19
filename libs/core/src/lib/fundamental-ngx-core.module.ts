@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { ActionBarModule } from './action-bar/action-bar.module';
+import { ActionSheetModule } from './action-sheet/action-sheet.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { AvatarModule } from './avatar/avatar.module';
@@ -63,6 +64,7 @@ import { ObjectStatusModule } from './object-status/object-status.module';
 import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-input-mobile.module';
 import { StepInputModule } from './step-input/step-input.module';
 import { ComboboxMobileModule } from './combobox/combobox-mobile/combobox-mobile.module';
+import { ActionSheetMobileModule } from './action-sheet/action-sheet-mobile/action-sheet-mobile.module';
 import { CarouselModule } from './utils/directives/carousel/carousel.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { CardModule } from './card/card.module';
@@ -71,6 +73,8 @@ import { CardModule } from './card/card.module';
     imports: [CommonModule, FormsModule],
     exports: [
         ActionBarModule,
+        ActionSheetModule,
+        ActionSheetMobileModule,
         AlertModule,
         AvatarModule,
         BadgeModule,

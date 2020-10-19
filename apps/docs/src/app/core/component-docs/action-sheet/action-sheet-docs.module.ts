@@ -9,7 +9,7 @@ import { ActionSheetCompactExampleComponent } from './examples/action-sheet-comp
 import { ActionSheetCosyExampleComponent } from './examples/action-sheet-cosy/action-sheet-cosy-example.component';
 import { ActionSheetMobileExampleComponent } from './examples/action-sheet-mobile/action-sheet-mobile-example.component';
 import {
-    ActionSheetModule,
+    ActionSheetModule
 } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -27,7 +27,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        ActionSheetModule,
+        ActionSheetModule
     ],
     exports: [RouterModule],
     declarations: [
