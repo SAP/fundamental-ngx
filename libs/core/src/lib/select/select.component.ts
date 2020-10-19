@@ -27,7 +27,7 @@ import { fromEvent, Subscription } from 'rxjs';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { createFocusTrap, FocusTrap } from 'focus-trap';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '../utils/functions';
 import { SelectProxy } from './select-proxy.service';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
@@ -35,6 +35,7 @@ import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
+import { DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 let selectUniqueId = 0;
 
@@ -223,25 +224,25 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, 'ArrowUp')) {
+        if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             if (this.isInteractive) {
                 this._interactWithOptions('previous');
             }
             event.preventDefault();
 
-        } else if (KeyUtil.isKey(event, 'ArrowDown')) {
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             if (this.isInteractive) {
                 this._interactWithOptions('next');
             }
             event.preventDefault();
 
-        } else if (KeyUtil.isKey(event, 'Escape')) {
+        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
             if (this.isInteractive) {
                 this.close();
             }
             event.preventDefault();
 
-        } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+        } else if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             if (this.isInteractive) {
                 this.toggle();
             }
