@@ -247,10 +247,19 @@ export class CarouselService implements OnDestroy {
 
         this.goToItem(closestItem, true);
 
-        this.activeChange.emit({
-            item: closestItem,
-            after: delta < 0
-        });
+        if (!this.active) {
+            this.active = closestItem;
+            this.activeChange.emit({
+                item: closestItem,
+                after: delta < 0
+            });
+        } else if (this.active !== closestItem) {
+            this.active = closestItem;
+            this.activeChange.emit({
+                item: closestItem,
+                after: delta < 0
+            });
+        }
 
         this.dragStateChange.emit(false);
         this._lastDistance = 0;

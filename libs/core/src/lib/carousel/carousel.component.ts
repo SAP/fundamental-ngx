@@ -22,7 +22,12 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FdCarouselResourceStrings, CarouselResourceStringsEN } from './i18n/carousel-resources';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
-import { CarouselService, CarouselConfig, PanEndOutput } from '../utils/services/carousel.service';
+import {
+    CarouselService,
+    CarouselConfig,
+    PanEndOutput,
+    CarouselItemInterface
+} from '../utils/services/carousel.service';
 import { RtlService } from '../utils/services/rtl.service';
 
 /** Page limit to switch to numerical indicator */
@@ -166,7 +171,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** An event that is emitted after a slide transition has happened */
     @Output()
-    readonly onSlideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
+    readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
 
     /** @hidden */
     @ContentChildren(CarouselItemComponent, { descendants: true })
@@ -304,8 +309,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         // If carousel set to loop
         if (this.loop) {
             if (this.currentActiveSlidesStartIndex < 0) {
-                this.currentActiveSlidesStartIndex = this.slides.length - 1 - this.visibleSlidesCount + 1;
-            } else if (this.currentActiveSlidesStartIndex + this.visibleSlidesCount - 1 === this.slides.length) {
+                this.currentActiveSlidesStartIndex = this.slides.length - 1;
+            } else if (this.currentActiveSlidesStartIndex === this.slides.length) {
                 this.currentActiveSlidesStartIndex = 0;
             }
         } else {
@@ -345,7 +350,12 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._buttonVisibility();
 
         // set page indicator count with fake array, to use in template
-        this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
+        if (this.loop && this.visibleSlidesCount > 1) {
+            // If loop with multi item visible.
+            this.pageIndicatorsCountArray = new Array(this.slides.length);
+        } else {
+            this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
+        }
 
         this._carouselService.activeChange.subscribe((event) => this._slideSwiped(event));
     }
@@ -360,16 +370,27 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** @hidden Handles notification on visible slide change */
-    private _notifySlideChange(slideDirection: SlideDirection): void {
+    private _notifySlideChange(slideDirection: SlideDirection, firstActiveSlide?: CarouselItemInterface): void {
         const activeSlides: CarouselItemComponent[] = new Array();
         const slides = this.slides.toArray();
+        let firstActiveSlideIndex: number;
+
+        if (this.loop) {
+            firstActiveSlide = this._carouselService.active;
+        }
+
+        if (firstActiveSlide) {
+            firstActiveSlideIndex = this.slides.toArray().findIndex((_item) => _item === firstActiveSlide);
+        } else {
+            firstActiveSlideIndex = this.currentActiveSlidesStartIndex;
+        }
 
         for (let activeSlideIndex = 0; activeSlideIndex < this.visibleSlidesCount; activeSlideIndex++) {
-            activeSlides.push(slides[this.currentActiveSlidesStartIndex + activeSlideIndex]);
+            activeSlides.push(slides[firstActiveSlideIndex + activeSlideIndex]);
         }
 
         const direction = slideDirection === SlideDirection.NEXT ? 'Next' : 'Previous';
-        this.onSlideChange.emit(new CarouselActiveSlides(activeSlides, direction));
+        this.slideChange.emit(new CarouselActiveSlides(activeSlides, direction));
     }
 
     /** @hidden Rtl change subscription */
@@ -382,15 +403,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** On Swiping of slide, manage page indicator */
     private _slideSwiped(event: PanEndOutput): void {
-        const activeSlide = event.item;
-        const index = this.slides.toArray().findIndex((_item) => _item === activeSlide);
-
-        this.currentActiveSlidesStartIndex = index;
-
-        // handle navigation button visibility if it is available
-        if (this.navigation && !this.loop) {
-            this._buttonVisibility();
-        }
+        const firstActiveSlide = event.item;
+        const slideDirection: SlideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
+        this._adjustActiveItemPosition(slideDirection);
+        this._notifySlideChange(slideDirection, firstActiveSlide);
         this._changeDetectorRef.markForCheck();
     }
 }
