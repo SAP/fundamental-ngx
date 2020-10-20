@@ -5,8 +5,8 @@ import { Component } from '@angular/core';
     templateUrl: './slider-basic-example.component.html'
 })
 export class SliderBasicExampleComponent {
-    min = 10;
-    max = 120;
+    min = 0;
+    max = 100;
     step = 1;
     jump = 10;
     value = 23;

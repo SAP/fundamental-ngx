@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core';
 
@@ -22,6 +22,11 @@ export const SLIDER_VALUE_ACCESSOR = {
 export interface RangeSliderValue {
     min: number;
     max: number
+}
+
+export enum RangeHandleIndex {
+    First,
+    Second
 }
 
 @Component({
@@ -61,7 +66,7 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
     @Input()
     jump = 10;
 
-    /** Jump value. */
+    /** Slider mode. */
     @Input()
     mode: 'single' | 'range' = 'single';
 
@@ -69,9 +74,17 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
     @Input()
     showTicks = false;
 
-    /** Toggles the visibility of tick mark labels. Must be used in conjunction with 'showTicks '*/
+    /** Toggles the visibility of tick mark labels. Must be used in conjunction with 'showTicks' */
     @Input()
     showTicksLabels = false;
+
+    /** Array of custom labels values to use for Slider. */
+    @Input()
+    customLabelsValues: string[] = [];
+
+    /** Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value. */
+    @Input()
+    tooltipMode: 'readonly' | 'editable' = 'readonly';
 
     /** Hides display of colored progress bar. */
     @Input()
@@ -86,25 +99,18 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
     readonly = false;
 
     @Input()
-    get value(): number {
+    get value(): number | number[] {
         return this._value;
     }
 
-    set value(val: number) {
+    set value(val: number | number[]) {
         if (this.value === val) {
             return;
         }
 
-        if (val > this.max) {
-            return;
+        if (!this._isRange && typeof val === 'number') {
+            this._progress = ((val - this.min) / (this.max - this.min)) * 100;
         }
-
-        if (val < this.min) {
-            return;
-        }
-
-        this._progress = ((val - this.min) / (this.max - this.min)) * 100;
-        console.log('progress', this._progress);
 
         this._value = val;
         this.onChange(val);
@@ -113,14 +119,19 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
     }
 
     @ViewChild('track', { read: ElementRef }) trackEl: ElementRef<any>;
+    @ViewChild('rangeHandle1', { read: ElementRef }) rangeHandle1: ElementRef<any>;
+    @ViewChild('rangeHandle2', { read: ElementRef }) rangeHandle2: ElementRef<any>;
 
-    _value = 0;
+    _value: number | number[] = 0;
     _progress = 0;
     _isRange = false;
     _rangeValue: RangeSliderValue = { min: 0, max: 0 };
+    _handle1Position = 0;
+    _handle2Position = 0;
+    _handle1Value = 0;
+    _handle2Value = 0;
+    _rangeProgress = 0;
     _tickMarks: any[] = [];
-
-    private _isHandleMoving = false;
 
     /** @hidden */
     constructor(
@@ -182,66 +193,143 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        // this.changeDetRef.detectChanges();
     }
 
     /** @hidden */
-    writeValue(value: number): void {
+    writeValue(value: number | number[]): void {
         this.value = value;
     }
 
     /** @hidden */
     onTrackClick(event: MouseEvent): void {
-        // console.log('track click, calc click position and change the value');
+        if (this._isRange) {
+            return;
+        }
+
+        console.log('track click, calc click position and change the value');
         this.writeValue(this._calculateValueFromPointerPosition(event));
-        // console.log('value =', this.value, '%');
     }
 
     /** @hidden */
-    onHandleClick(): void {
-        console.log('drag start');
-        this._isHandleMoving = true;
-        const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', event => {
-            this.writeValue(this._calculateValueFromPointerPosition(event));
-            // this._cdr.detectChanges();
+    onHandleClick(event: MouseEvent): void {
+        const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', moveEvent => {
+            if (!this._isRange) {
+                this.writeValue(this._calculateValueFromPointerPosition(moveEvent));
+                return;
+            }
+
+            const value = this._calculateValueFromPointerPosition(moveEvent);
+            let handleIndex: RangeHandleIndex;
+            if (event.target === this.rangeHandle1.nativeElement) {
+                handleIndex = RangeHandleIndex.First;
+            }
+
+            if (event.target === this.rangeHandle2.nativeElement) {
+                handleIndex = RangeHandleIndex.Second;
+            }
+
+            this._setRangeHandleValueAndPosition(handleIndex, value);
+            this.writeValue(this._constructRangeModelValue());
+            this._cdr.detectChanges();
         });
-        const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', event => {
-            this.writeValue(this._calculateValueFromPointerPosition(event));
+        const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
+            console.log('UNSUBSCRIBE FROM MOUSEMOVE');
             unsubscribeFromMousemove();
             unsubscribeFromMouseup();
-            // this._cdr.detectChanges();
         });
     }
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
+        if (event.keyCode === TAB) {
+            return;
+        }
+
         event.preventDefault();
         const diff = event.shiftKey ? this.jump : this.step;
-        let newValue: number | null = null;
+        let newValue: number;
+        let prevValue = this.value as number;
+        let handleIndex: RangeHandleIndex;
+        if (this._isRange) {
+            if (event.target === this.rangeHandle1.nativeElement) {
+                prevValue = this._handle1Value;
+                handleIndex = RangeHandleIndex.First;
+            }
+
+            if (event.target === this.rangeHandle2.nativeElement) {
+                prevValue = this._handle2Value;
+                handleIndex = RangeHandleIndex.Second;
+            }
+        }
+
         if (event.keyCode === LEFT_ARROW || event.keyCode === DOWN_ARROW) {
-            newValue = this.value - diff;
+            newValue = prevValue - diff;
         }
 
         if (event.keyCode === RIGHT_ARROW || event.keyCode === UP_ARROW) {
-            newValue = this.value + diff;
+            newValue = prevValue + diff;
         }
 
-        if (newValue !== null) {
-            if (newValue > this.max) {
-                newValue = this.max;
-            }
-
-            if (newValue < this.min) {
-                newValue = this.min;
-            }
-
-            this.value = newValue;
+        if (newValue > this.max) {
+            newValue = this.max;
         }
+
+        if (newValue < this.min) {
+            newValue = this.min;
+        }
+
+        if (!this._isRange) {
+            this.writeValue(newValue);
+            return;
+        }
+
+        this._setRangeHandleValueAndPosition(handleIndex, newValue);
+        this.writeValue(this._constructRangeModelValue());
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    private _calculateValueFromPointerPosition(event: MouseEvent): number {
+        const { x, width } = this.trackEl.nativeElement.getBoundingClientRect();
+        const percentage = ((event.clientX - x) / width);
+        const newValue = this.min + percentage * (this.max - this.min);
+
+        if (newValue > this.max) {
+            return this.max;
+        }
+
+        if (newValue < this.min) {
+            return this.min;
+        }
+
+        return Math.round(newValue);
+    }
+
+
+    private _setRangeHandleValueAndPosition(handleIndex: RangeHandleIndex, value: number): void {
+        if (handleIndex === RangeHandleIndex.First) {
+            this._handle1Value = value;
+            this._handle1Position = ((value - this.min) / (this.max - this.min)) * 100;
+        }
+
+        if (handleIndex === RangeHandleIndex.Second) {
+            this._handle2Value = value;
+            this._handle2Position = ((value - this.min) / (this.max - this.min)) * 100;
+        }
+
+        this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
+    }
+
+    private _constructRangeModelValue(): number[] {
+        return [
+            Math.min(this._handle1Value, this._handle2Value),
+            Math.max(this._handle1Value, this._handle2Value)
+        ];
     }
 
     /** @hidden */
     private _constructTickMarks(): void {
+        console.log('_constructTickMarks');
         const tickMarks = Array(Math.round((this.max - this.min) / this.jump) + 1).fill(null);
         let i = this.min;
         tickMarks.forEach((tick, _i) => {
@@ -254,32 +342,6 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
         });
         this._tickMarks = tickMarks;
         console.log('tick mark', tickMarks);
-    }
-
-
-    /** @hidden */
-    private _calculateValueFromPointerPosition(event: MouseEvent): number {
-        const { x, width } = this.trackEl.nativeElement.getBoundingClientRect();
-
-        const percentage = ((event.clientX - x) / width);
-        const newValue = this.min + percentage * (this.max - this.min);
-        this._progress = percentage * 100;
-        if (this._progress > 100) {
-            this._progress = 100;
-
-            return this.max;
-        }
-        if (this._progress < 0) {
-            this._progress = 0;
-
-            return this.min;
-        }
-
-        console.log('percentage', percentage);
-        console.log('_progress', this._progress);
-        console.log('value from percentage', newValue);
-
-        return Math.round(newValue);
     }
 
     private _checkIsInRangeMode(): void {
