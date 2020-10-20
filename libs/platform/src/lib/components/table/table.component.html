@@ -1,0 +1,72 @@
+<div #tableContainer>
+    <ng-container *ngIf="_rows && _rows.length; else emptyTableTemplate">
+        <ng-container *ngIf="tableToolbarComponent">
+            <ng-container *ngTemplateOutlet="tableToolbarComponent.contentTemplateRef; context: { counter: _rows.length, size: contentDensity }"></ng-container>
+        </ng-container>
+
+        <table fd-table>
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell
+                        [class.fd-table__cell--checkbox]="selectionMode === _selectionModeOptions.MULTIPLE"
+                        *ngIf="selectionMode === _selectionModeOptions.SINGLE || selectionMode === _selectionModeOptions.MULTIPLE">
+                        <fd-checkbox
+                            [compact]="contentDensity !== _contentDensityOptions.COZY"
+                            *ngIf="selectionMode === _selectionModeOptions.MULTIPLE"
+                            [ngModel]="checkedAll"
+                            (ngModelChange)="selectAll($event)"
+                            (keydown)="onKeydown($event)"
+                        ></fd-checkbox>
+                    </th>
+                    <th fd-table-cell
+                        [style.textAlign]="column.align"
+                        *ngFor="let column of columns">
+                        <ng-container *ngIf="column?.fdpHeaderCellDef?.templateRef; else defaultTableHeaderCellTemplate">
+                            <ng-container *ngTemplateOutlet="column.fdpHeaderCellDef.templateRef">
+                            </ng-container>
+                        </ng-container>
+
+                        <ng-template #defaultTableHeaderCellTemplate>{{ column.label }}</ng-template>
+                    </th>
+                </tr>
+            </thead>
+            <tbody fd-table-body>
+                <tr fd-table-row
+                    *ngFor="let row of _rows; let i = index"
+                    [attr.aria-selected]="_rows[i].checked">
+                    <td fd-table-cell
+                        [class.fd-table__cell--checkbox]="selectionMode === _selectionModeOptions.MULTIPLE"
+                        [class.fd-table__cell--focusable]="selectionMode === _selectionModeOptions.SINGLE"
+                        [attr.tabindex]="selectionMode === _selectionModeOptions.SINGLE ? 0 : ''"
+                        [attr.role]="selectionMode === _selectionModeOptions.SINGLE ? 'checkbox' : 'cell'"
+                        *ngIf="selectionMode === _selectionModeOptions.SINGLE || selectionMode === _selectionModeOptions.MULTIPLE"
+                        (click)="selectSingle(i, row)"
+                        (keydown)="onKeydown($event)"
+                    >
+                        <fd-checkbox
+                            [compact]="contentDensity !== _contentDensityOptions.COZY"
+                            *ngIf="selectionMode === _selectionModeOptions.MULTIPLE"
+                            [ngModel]="row.checked"
+                            (ngModelChange)="select(i, row, $event)"
+                            (keydown)="onKeydown($event)"
+                        ></fd-checkbox>
+                    </td>
+                    <td fd-table-cell
+                        [style.textAlign]="column.align"
+                        *ngFor="let column of columns">
+                        <ng-container *ngIf="column?.fdpCellDef?.templateRef; else defaultTableCellTemplate">
+                            <ng-container *ngTemplateOutlet="column.fdpCellDef.templateRef; context:{$implicit: row.value}">
+                            </ng-container>
+                        </ng-container>
+
+                        <ng-template #defaultTableCellTemplate>{{ getCellValue(column.key, row) }}</ng-template>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+</div>
+
+<ng-template #emptyTableTemplate>
+    <div i18n="@@platformTableEmptyMessage" [innerText]="emptyTableMessage"></div>
+</ng-template>

@@ -20,6 +20,17 @@ export const API_FILES = {
     searchField: ['SearchFieldComponent'],
     select: ['SelectPlatformComponent'],
     splitMenuButton: ['SplitMenuButtonComponent'],
+    table: [
+        'TableComponent',
+        'TableToolbarComponent',
+        'TableToolbarActionsComponent',
+        'TableColumnComponent',
+        'FdpTableHeader',
+        'FdpHeaderCellDef',
+        'FdpTableCell',
+        'FdpCellDef'
+
+    ],
     textarea: ['TextAreaComponent'],
     panel: [
         'PlatformPanelComponent',
