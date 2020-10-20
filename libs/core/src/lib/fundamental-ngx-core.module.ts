@@ -65,7 +65,6 @@ import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-i
 import { StepInputModule } from './step-input/step-input.module';
 import { ComboboxMobileModule } from './combobox/combobox-mobile/combobox-mobile.module';
 import { CarouselModule } from './utils/directives/carousel/carousel.module';
-import { CarouselService } from './utils/public_api';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { CardModule } from './card/card.module';
 import { ObjectIdentifierModule } from './object-identifier/object-identifier.module';
@@ -143,6 +142,6 @@ import { MessageToastService } from './message-toast/message-toast-service/messa
         CardModule,
         MessageToastModule
     ],
-    providers: [AlertService, CarouselService, DialogService, NotificationService, MessageToastService]
+    providers: [AlertService, DialogService, NotificationService, MessageToastService]
 })
 export class FundamentalNgxCoreModule {}

@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
     selector: 'fd-carousel-no-page-indicator',
     templateUrl: './carousel-no-page-indicator.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarouselNoPageIndicatorComponent {}

@@ -38,12 +38,6 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @HostBinding('attr.aria-describedby')
     ariaDescribedBy: string;
 
-    @HostBinding('class.fd-carousel__item')
-    carouselItem = 'fd-carousel__item';
-
-    @HostBinding('class.fd-carousel__item--active')
-    carouselItemActive = true;
-
     /** Sets tooltip for carousel item */
     @Input()
     @HostBinding('attr.title')
@@ -62,6 +56,12 @@ export class CarouselItemComponent implements CarouselItemInterface {
     /** Value of carousel item */
     @Input()
     value: any;
+
+    @HostBinding('class.fd-carousel__item')
+    carouselItem = 'fd-carousel__item';
+
+    @HostBinding('class.fd-carousel__item--active')
+    carouselItemActive = true;
 
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef, private readonly _elementRef: ElementRef) {}
 

@@ -133,12 +133,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         return this._resourceStrings;
     }
 
-    /**
-     * Returns the `role` attribute of the carousel.
-     */
-    @HostBinding('attr.role')
-    role = 'region';
-
     /** Sets sliding duration */
     @Input()
     slideTransitionDuration = '150ms';
@@ -146,6 +140,24 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** Is swipe enabled */
     @Input()
     swipeEnabled = true;
+
+    /** Is carousel is vertical. Default value is false. */
+    @Input()
+    vertical = false;
+
+    /** Number of items to be visible at a time */
+    @Input()
+    visibleSlidesCount = 1;
+
+    /** An event that is emitted after a slide transition has happened */
+    @Output()
+    readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
+
+    /**
+     * Returns the `role` attribute of the carousel.
+     */
+    @HostBinding('attr.role')
+    role = 'region';
 
     /**
      * Returns the `tabIndex` of the carousel component.
@@ -160,18 +172,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
      */
     @HostBinding('style.overflow')
     overflow = 'auto';
-
-    /** Is carousel is vertical. Default value is false. */
-    @Input()
-    vertical = false;
-
-    /** Number of items to be visible at a time */
-    @Input()
-    visibleSlidesCount = 1;
-
-    /** An event that is emitted after a slide transition has happened */
-    @Output()
-    readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
 
     /** @hidden */
     @ContentChildren(CarouselItemComponent, { descendants: true })
@@ -198,6 +198,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     private _resourceStrings = CarouselResourceStringsEN;
 
     private _config: CarouselConfig = {};
+
+    private _slidesCopy = [];
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -230,6 +232,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.rightButtonDisabled = true;
         }
 
+        this._slidesCopy = this.slides.toArray().slice();
         this._changeDetectorRef.markForCheck();
     }
 
@@ -301,17 +304,17 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** @hidden Adjust position of active item, based on slide direction */
-    private _adjustActiveItemPosition(slideDirection: SlideDirection): void {
+    private _adjustActiveItemPosition(slideDirection: SlideDirection, step: number = 1): void {
         // Move one step in the direction
-        const positionAdjustment = slideDirection === SlideDirection.NEXT ? 1 : -1;
+        const positionAdjustment = slideDirection === SlideDirection.NEXT ? step : -step;
         this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex + positionAdjustment;
 
         // If carousel set to loop
         if (this.loop) {
             if (this.currentActiveSlidesStartIndex < 0) {
-                this.currentActiveSlidesStartIndex = this.slides.length - 1;
-            } else if (this.currentActiveSlidesStartIndex === this.slides.length) {
-                this.currentActiveSlidesStartIndex = 0;
+                this.currentActiveSlidesStartIndex = this.slides.length + this.currentActiveSlidesStartIndex;
+            } else if (this.currentActiveSlidesStartIndex >= this.slides.length) {
+                this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex % this.slides.length;
             }
         } else {
             this._buttonVisibility();
@@ -404,9 +407,34 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** On Swiping of slide, manage page indicator */
     private _slideSwiped(event: PanEndOutput): void {
         const firstActiveSlide = event.item;
+        const actualActiveSlideIndex = this._slidesCopy.findIndex((_slide) => _slide === firstActiveSlide);
+        const stepTaken = this._getStepTaken(event, actualActiveSlideIndex);
+
         const slideDirection: SlideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
-        this._adjustActiveItemPosition(slideDirection);
+        this._adjustActiveItemPosition(slideDirection, stepTaken);
         this._notifySlideChange(slideDirection, firstActiveSlide);
         this._changeDetectorRef.markForCheck();
+    }
+
+    private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
+        let stepsCalculated: number;
+
+        if (event.after) {
+            if (actualActiveSlideIndex > this.currentActiveSlidesStartIndex) {
+                stepsCalculated = actualActiveSlideIndex - this.currentActiveSlidesStartIndex;
+            } else {
+                stepsCalculated = this.slides.length - this.currentActiveSlidesStartIndex + actualActiveSlideIndex;
+            }
+        } else {
+            // Special case, when first left swipe before slides are rotated in carousel service
+            if (actualActiveSlideIndex === 0 && this.currentActiveSlidesStartIndex === 0) {
+                stepsCalculated = 0;
+            } else if (actualActiveSlideIndex < this.currentActiveSlidesStartIndex) {
+                stepsCalculated = this.currentActiveSlidesStartIndex - actualActiveSlideIndex;
+            } else {
+                stepsCalculated = this.currentActiveSlidesStartIndex + this.slides.length - actualActiveSlideIndex;
+            }
+        }
+        return stepsCalculated;
     }
 }
