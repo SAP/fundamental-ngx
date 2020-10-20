@@ -6,6 +6,7 @@ import {
     LayoutGridNoGapExampleComponent,
     LayoutGridOffsetExampleComponent,
     LayoutGridResponsiveExampleComponent,
+    LayoutGridResponsiveOffsetExample,
     LayoutGridRowExampleComponent
 } from './layout-grid-examples.component';
 
@@ -18,7 +19,8 @@ export const examples = [
     LayoutGridBasicExampleComponent,
     LayoutGridNoGapExampleComponent,
     LayoutGridOffsetExampleComponent,
-    LayoutGridResponsiveExampleComponent,
+    LayoutGridNestingExampleComponent,
+    LayoutGridResponsiveOffsetExample,
     LayoutGridAdjustingExampleComponent,
-    LayoutGridNestingExampleComponent
+    LayoutGridResponsiveExampleComponent
 ];

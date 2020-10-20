@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import * as layoutGridBasicSrc from '!raw-loader!./examples/layout-grid-basic-example.component.html';
 import * as layoutGridOffsetSrc from '!raw-loader!./examples/layout-grid-offset-example.component.html';
 import * as layoutGridResponsiveSrc from '!raw-loader!./examples/layout-grid-responsive-example.component.html';
+import * as layoutGridResponsiveOffsetSrc from '!raw-loader!./examples/layout-grid-responsive-offset-example.component.html';
 import * as layoutGridAdjustingSrc from '!raw-loader!./examples/layout-grid-adjusting-example.component.html';
 import * as layoutGridNestingSrc from '!raw-loader!./examples/layout-grid-nesting-example.component.html';
 import * as layoutGridRowSrc from '!raw-loader!./examples/layout-grid-row-example.component.html';
@@ -68,6 +69,14 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: layoutGridNestingSrc,
             fileName: 'layout-grid-nesting-example'
+        }
+    ];
+
+    layoutGridResponsiveOffsetSrc: ExampleFile[] = [
+        {
+            language: 'html',
+            code: layoutGridNestingSrc,
+            fileName: 'layout-grid-responsive-offset-example'
         }
     ];
 }

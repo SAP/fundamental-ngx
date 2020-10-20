@@ -41,3 +41,9 @@ export class LayoutGridAdjustingExampleComponent {}
     templateUrl: './layout-grid-nesting-example.component.html'
 })
 export class LayoutGridNestingExampleComponent {}
+
+@Component({
+    selector: 'fd-layout-grid-responsive-offset-example',
+    templateUrl: './layout-grid-responsive-offset-example.component.html'
+})
+export class LayoutGridResponsiveOffsetExample {}
