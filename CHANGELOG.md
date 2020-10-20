@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.20...v0.23.0-rc.21) (2020-10-20)
+
+
+### Features
+
+* (Platform) introduce new Object List Item Component ([#3629](https://github.com/SAP/fundamental-ngx/issues/3629)) ([48ef7a8](https://github.com/SAP/fundamental-ngx/commit/48ef7a8d6f01d0a87aa7f4d61908f2b33527fab3))
+
 ## [0.23.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.19...v0.23.0-rc.20) (2020-10-19)
 
 ## [0.23.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.18...v0.23.0-rc.19) (2020-10-19)
