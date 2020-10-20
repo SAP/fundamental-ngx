@@ -1,6 +1,6 @@
-import { LayoutGridComponent } from './layout-grid-col.directive';
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { LayoutGridComponent } from './layout-grid.component';
 
 @Component({
     template: `
