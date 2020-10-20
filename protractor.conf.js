@@ -6,7 +6,7 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    './e2e/**/*.e2e-spec.ts'
+    './e2e/**/*el.e2e-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome'
@@ -21,7 +21,7 @@ exports.config = {
   },
 
     plugins: [
-        {
+    /*    {
             displayHelpUrl: true, // Displays the aXe help URL along with the error. Defaults to true.
             displayContext: true, // Displays the HTML of interest. Defaults to true.
             displayPasses: true, // Display pass results. Defaults to true.
@@ -31,7 +31,7 @@ exports.config = {
             package: 'protractor-axe-html-report-plugin',
             globalParams: {}
 
-  }],
+  }*/],
   onPrepare() {
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
