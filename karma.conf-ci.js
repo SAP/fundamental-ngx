@@ -88,7 +88,8 @@ module.exports = function (config) {
             connectOptions: {
                 user: process.env.SAUCE_USERNAME,
                 'api-key': process.env.SAUCE_ACCESS_KEY,
-                logfile: 'sauce_connect.log'
+                logfile: 'sauce_connect.log',
+                scVersion: '4.6.2',
             },
             public: 'public',
             idleTimeout: 10000,
