@@ -64,6 +64,20 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
 
     /**
      * @hidden
+     * the reference to breadcrumb title container
+     */
+    @ViewChild('breadcrumbTitleContainer')
+    breadcrumbTitleContainer: ElementRef<HTMLElement>;
+
+    /**
+     * @hidden
+     * the reference to the title element
+     */
+    @ViewChild('titleRef')
+    titleRef: ElementRef<any>;
+
+    /**
+     * @hidden
      * tracking the background value
      */
     private _background: DynamicPageBackgroundType;
@@ -74,13 +88,6 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
      */
     private _size: DynamicPageResponsiveSize;
 
-    /**
-     * @hidden
-     * the reference to breadcrumb title container
-     */
-    @ViewChild('breadcrumbTitleContainer')
-    breadcrumbTitleContainer: ElementRef<HTMLElement>;
-
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -89,6 +96,12 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         private _dynamicPageService: DynamicPageService,
         private _ngZone: NgZone
     ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleArea);
+        this._setAttributeToHostElement('tabindex', 0);
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -105,12 +118,6 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
             this._addClassNameToCustomElement(breadcrumb, CLASS_NAME.dynamicPageBreadcrumb);
             this.breadcrumbTitleContainer.nativeElement.style.overflow = 'hidden';
         }
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleArea); // not getting this to work right
-        this._setAttributeToHostElement('tabindex', 0);
 
         if (this.background) {
             this._setBackgroundStyles(this.background);
@@ -162,6 +169,9 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
                 break;
             case 'medium':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleAreaMedium);
+                if (this.titleRef) {
+                    this._addClassNameToCustomElement(this.titleRef.nativeElement, CLASS_NAME.dynamicPageTitleMedium);
+                }
                 break;
             case 'large':
                 this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleAreaLarge);

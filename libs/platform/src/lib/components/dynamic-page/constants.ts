@@ -11,6 +11,7 @@ export const CLASS_NAME = {
     dynamicPageTitleAreaCollapsed: 'fd-dynamic-page__title-area--collapsed', // need to use thiis TODO
     dynamicPageTitleContainer: 'fd-dynamic-page__title-container',
     dynamicPageTitle: 'fd-dynamic-page__title',
+    dynamicPageTitleMedium: 'fd-dynamic-page__title--md',
     dynamicPageBreadcrumb: 'fd-dynamic-page__breadcrumb',
     dynamicPageKeyInfo: 'fd-dynamic-page__title-content',
     dynamicPageGlobalActions: 'fd-dynamic-page__toolbar',
