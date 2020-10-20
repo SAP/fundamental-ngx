@@ -22,6 +22,7 @@ import {
     DynamicSideContentSize,
     DYNAMIC_SIDE_CONTENT_CHILD_TOKEN
 } from './constants';
+import { getPositionClassName, getSizeClassName } from './utils';
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
 import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
 
@@ -102,18 +103,7 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [
-            CLASS_NAME.container,
-            this.size === 'sm'
-                ? CLASS_NAME.containerSizeSm
-                : this.size === 'md' || this.size === 'lg'
-                ? CLASS_NAME.containerSizeMd
-                : this.size === 'xl'
-                ? CLASS_NAME.containerSizeXl
-                : '',
-            this._position === 'bottom' ? CLASS_NAME.containerSideBelow : '',
-            this._position === 'equalSplit' ? CLASS_NAME.containerSideEqual : ''
-        ];
+        return [CLASS_NAME.container, getSizeClassName(this.size), getPositionClassName(this.position)];
     }
 
     /** @hidden */
