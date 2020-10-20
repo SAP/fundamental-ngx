@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-fixed-card-layout-disabled-drag',
@@ -8,7 +8,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class FixedCardLayoutDisabledDragExampleComponent {
     dragDisabled = false;
 
+    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+
     public changeDragBehaviour(): void {
         this.dragDisabled = !this.dragDisabled;
+    }
+
+    public onResized(): void {
+        this._changeDetectorRef.markForCheck();
     }
 }
