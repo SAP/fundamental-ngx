@@ -38,7 +38,8 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
     }
 
 
-    subscribe(topic: string, event: (value: Message) => void, messageSelector?: (msg: Message) => boolean): void {
+    subscribe(topic: string, event: (value: Message) => void,
+              messageSelector?: (msg: Message) => boolean): TopicSubscriber<Message> {
         const topicDef = this.topics.get(topic);
         if (!topicDef) {
             throw new Error('Invalid topic name: ' + topic);
@@ -46,6 +47,8 @@ export class MessagingService implements MessageBus<Message>, OnDestroy {
         const newSubscription = this.createSubscriber(topic, topicDef.eventType, messageSelector);
         this.subscriptions.push(newSubscription);
         newSubscription.onMessage((m: Message) => event(m));
+
+        return newSubscription;
     }
 
 

@@ -13,6 +13,11 @@ export interface MessageBus<T extends Message> {
     createPublisher(topic: string, type: EventType): TopicPublisher<T>;
 
     createSubscriber(topic: string, type: EventType, messageSelector?: (msg: Message) => boolean): TopicSubscriber<T>;
+
+    subscribe(topic: string, event: (value: Message) => void,
+              messageSelector?: (msg: Message) => boolean): TopicSubscriber<Message>;
+
+    publish(topic: string, message: Message): void;
 }
 
 

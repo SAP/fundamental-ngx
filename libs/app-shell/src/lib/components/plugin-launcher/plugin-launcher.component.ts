@@ -70,7 +70,6 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
     }
 
     async ngOnChanges(changes: SimpleChanges): Promise<void> {
-        console.log('PluginLauncherComponent => ', changes);
         if ('iframeUri' in changes) {
             this._safeIframeUri = this.sanitizer.bypassSecurityTrustResourceUrl(this.iframeUri);
         }

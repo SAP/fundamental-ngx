@@ -14,7 +14,9 @@
   "peerDependencies": {
     "@angular/common": "^10.0.5",
     "@angular/core": "^10.0.5",
-    "@pscoped/ngx-pub-sub": "3.0.0"
+    "@pscoped/ngx-pub-sub": "3.0.0",
+    "worker-rpc": "^0.2.0",
+    "framebus": "^4.0.4"
   },
   "dependencies": {
     "tslib": "^2.0.0"
