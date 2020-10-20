@@ -5,18 +5,15 @@ import { CSS_CLASS_NAME } from '../constants';
 @Directive({
     selector: '[fdLayoutGridColMd]'
 })
-export class LayoutGridColMdDirective extends LayoutGridColBase implements OnInit, OnChanges {
+export class LayoutGridColMdDirective extends LayoutGridColBase implements OnChanges {
+
+    /** Defines the width of the element on the layout grid for middle-size screen devices. */
     @Input('fdLayoutGridColMd')
-    _numberOfColumns: number;
+    numberOfColumns: number;
 
     /** @hidden */
     constructor(elementRef: ElementRef<HTMLElement>, renderer: Renderer2) {
         super(renderer, elementRef, CSS_CLASS_NAME.mdColSizePrefix);
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        super.ngOnInit();
     }
 
     /** @hidden */

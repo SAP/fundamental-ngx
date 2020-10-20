@@ -1,22 +1,19 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { LayoutGridColBase } from './layout-grid-col.base';
 import { CSS_CLASS_NAME } from '../constants';
 
 @Directive({
     selector: '[fdLayoutGridColXl]'
 })
-export class LayoutGridColXlDirective extends LayoutGridColBase implements OnInit, OnChanges {
+export class LayoutGridColXlDirective extends LayoutGridColBase implements OnChanges {
+
+    /** Defines the width of the element on the layout grid for extra-large screen devices. */
     @Input('fdLayoutGridColXl')
-    _numberOfColumns: number;
+    numberOfColumns: number;
 
     /** @hidden */
     constructor(elementRef: ElementRef<HTMLElement>, renderer: Renderer2) {
         super(renderer, elementRef, CSS_CLASS_NAME.xlColSizePrefix);
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        super.ngOnInit();
     }
 
     /** @hidden */

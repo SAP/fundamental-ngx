@@ -1,3 +1,4 @@
+import { ExampleLayoutGridBlockComponent } from './example-layout-grid-block.component';
 import {
     LayoutGridAdjustingExampleComponent,
     LayoutGridBasicExampleComponent,
@@ -7,7 +8,6 @@ import {
     LayoutGridResponsiveExampleComponent,
     LayoutGridRowExampleComponent
 } from './layout-grid-examples.component';
-import { ExampleLayoutGridBlockComponent } from './example-layout-grid-block.component';
 
 export * from './layout-grid-examples.component';
 export * from './example-layout-grid-block.component';

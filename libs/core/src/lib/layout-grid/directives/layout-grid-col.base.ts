@@ -1,22 +1,17 @@
-import { Directive, ElementRef, OnChanges, OnInit, Optional, Renderer2, SimpleChanges } from '@angular/core';
-import { CSS_CLASS_NAME } from '../constants';
+import { Directive, ElementRef, OnChanges, Optional, Renderer2, SimpleChanges } from '@angular/core';
 
 @Directive()
-export abstract class LayoutGridColBase implements OnInit, OnChanges {
+export abstract class LayoutGridColBase implements OnChanges {
+
     /** @hidden */
-    abstract _numberOfColumns: number;
+    abstract numberOfColumns: number;
 
     /** @hidden */
     constructor(
-        private _renderer: Renderer2,
-        private _elementRef: ElementRef<HTMLElement>,
+        protected _renderer: Renderer2,
+        protected _elementRef: ElementRef<HTMLElement>,
         @Optional() private _colSizeClassPrefix?: string
     ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._addColClass();
-    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -33,16 +28,9 @@ export abstract class LayoutGridColBase implements OnInit, OnChanges {
         this._renderer.removeClass(this._elementRef.nativeElement, cssClass);
     }
 
-    /** @hidden Adds base grid column class */
-    private _addColClass(): void {
-        if (!this._elementRef.nativeElement.classList.contains(CSS_CLASS_NAME.col)) {
-            this._addClassToHost(CSS_CLASS_NAME.col);
-        }
-    }
-
     /** @hidden Adds grid column modifier class */
     private _addColSizeModifierClass(changes: SimpleChanges): void {
-        const gridColChange = changes._numberOfColumns;
+        const gridColChange = changes.numberOfColumns;
 
         if (this._colSizeClassPrefix && gridColChange) {
             if (!gridColChange.firstChange) {

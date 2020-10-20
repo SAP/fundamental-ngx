@@ -22,6 +22,7 @@ import { CSS_CLASS_NAME } from './constants';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
+
     /** Custom classes */
     @Input()
     set class(userClass: string) {
