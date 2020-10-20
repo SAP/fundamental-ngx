@@ -19,4 +19,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActionSheetControlComponent {}
+export class ActionSheetControlComponent {
+    // HostListener click
+    // @output clicked
+}

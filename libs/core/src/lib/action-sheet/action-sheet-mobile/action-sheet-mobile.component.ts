@@ -66,6 +66,10 @@ export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterf
         this._component.close();
     }
 
+    close(): void {
+        // TODO
+    }
+
     /** @hidden */
     private _toggleDialog(open: boolean): void {
         this.open = open;

@@ -13,7 +13,7 @@ import {
     OnDestroy,
     Optional,
     Output,
-    ViewEncapsulation, TemplateRef
+    ViewEncapsulation, TemplateRef, ContentChildren
 } from '@angular/core';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
@@ -72,9 +72,14 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     @ContentChild(ActionSheetBodyComponent) actionSheetBody;
 
+    // @ContentChildren(ActionSheetItemComponent, { descendants: true }) actionSheetBody;
+
     /** @hidden */
     @ViewChild('actionSheetBodyTemplate')
     actionSheetBodyTemplate: TemplateRef<any>;
+
+    // ContentChild action sheet control
+    // click - isOpenChangeHandle tylko dla mobila
 
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -119,6 +124,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
             this.openChange.emit(isOpen);
         }
     }
+
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
