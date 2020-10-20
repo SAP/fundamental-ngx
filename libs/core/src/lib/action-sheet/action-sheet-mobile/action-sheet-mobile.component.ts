@@ -2,7 +2,7 @@ import {
     AfterViewInit,
     Component,
     ElementRef,
-    Inject,
+    Inject, Input,
     OnDestroy,
     OnInit,
     Optional,
@@ -25,12 +25,17 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterface> implements OnInit, AfterViewInit, OnDestroy {
 
+    /** Whenever links should be visible **/
+    @Input()
+    open = false;
+
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
-    childContent: TemplateRef<any> = undefined;
-
+    childContent: {
+        actionSheetBodyTemplate: TemplateRef<any>,
+    } = null;
 
     constructor(
         elementRef: ElementRef,
@@ -43,13 +48,11 @@ export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterf
 
     /** @hidden */
     ngOnInit(): void {
-        this._listenOnActionSheetOpenChange();
+        this._listenOnOpenChange();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._openDialog();
-        this.dialogRef.hide(true);
     }
 
     /** @hidden */
@@ -64,16 +67,12 @@ export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterf
     }
 
     /** @hidden */
-    private _toggleDialog(isOpen: boolean): void {
-        if (isOpen) {
-            this.dialogRef.hide(false);
-        } else {
-            this.dialogRef.hide(true);
-        }
+    private _toggleDialog(open: boolean): void {
+        this.open = open;
     }
 
     /** @hidden */
-    private _openDialog(): void {
+    private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
             verticalPadding: false,
@@ -81,15 +80,15 @@ export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterf
             focusTrapped: false,
             escKeyCloseable: false,
             backdropClickCloseable: false,
-            container: 'body'
+            container:  this._elementRef.nativeElement
         });
     }
 
     /** @hidden Hide/Show the Dialog when Select Open/Close*/
-    private _listenOnActionSheetOpenChange(): void {
-        this._component.isOpenChange.pipe(takeUntil(this._onDestroy$))
-            .subscribe(isOpen => this._toggleDialog(isOpen)
-            );
+    private _listenOnOpenChange(): void {
+        this._component.openChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(isOpen => this._toggleDialog(isOpen));
     }
 
 

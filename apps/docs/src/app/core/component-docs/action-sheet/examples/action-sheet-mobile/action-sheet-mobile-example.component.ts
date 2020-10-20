@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
+import {MobileModeConfig} from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-action-sheet-mobile-example',
@@ -6,11 +7,8 @@ import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@ang
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetMobileExampleComponent {
-    /** Whenever links should be visible **/
-    @Input()
-    isOpen = false;
-
-    toggleOpen(): void {
-        this.isOpen = !this.isOpen;
-    }
+    // /** Whenever links should be visible **/
+    // @Input()
+    // isOpen = false;
+    //
 }

@@ -4,14 +4,16 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
+    ViewChild,
     ElementRef,
     EventEmitter,
-    HostListener, Injector,
+    HostListener,
+    Injector,
     Input,
     OnDestroy,
     Optional,
     Output,
-    ViewEncapsulation
+    ViewEncapsulation, TemplateRef
 } from '@angular/core';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
@@ -47,7 +49,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** Whenever links should be visible **/
     @Input()
-    isOpen = false;
+    open = false;
 
     /** Whether internal keyboard support should be enabled. It's enabled by default */
     @Input()
@@ -59,15 +61,20 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @Input()
     triggers: string[] = ['click'];
 
+
     /** Event thrown, when focus escapes the list */
     @Output()
     focusEscapeList = new EventEmitter<FocusEscapeDirection>();
 
-    /** Event emitted when the state of the isOpen property changes. */
+    /** Event emitted, when the combobox's popover body is opened or closed */
     @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @ContentChild(ActionSheetBodyComponent) actionSheetBody;
+
+    /** @hidden */
+    @ViewChild('actionSheetBodyTemplate')
+    actionSheetBodyTemplate: TemplateRef<any>;
 
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -105,11 +112,13 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._onDestroy$.complete();
     }
 
-    /** Method that changes state of mobile open variable */
-    toggleOpen(): void {
-        this.isOpen = !this.isOpen;
+    /** @hidden */
+    isOpenChangeHandle(isOpen: boolean): void {
+        if (this.open !== isOpen) {
+            this.open = isOpen;
+            this.openChange.emit(isOpen);
+        }
     }
-
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
@@ -151,9 +160,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     private _setUpMobileMode(): void {
         this._dynamicComponentService.createDynamicComponent(
-            { listTemplate: this.actionSheetBody, controlTemplate: this.actionSheetBody },
+            { actionSheetBodyTemplate: this.actionSheetBodyTemplate },
             ActionSheetMobileComponent,
-            { container: 'body' },
+            { container: this._elementRef.nativeElement },
             { injector: Injector.create({ providers: [{ provide: ACTION_SHEET_COMPONENT, useValue: this }] }) }
         );
     }

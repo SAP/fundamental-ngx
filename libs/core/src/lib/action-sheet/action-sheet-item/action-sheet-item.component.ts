@@ -59,6 +59,14 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     mobile = false;
 
+    /** Display in mobile view. **/
+    @Input()
+    isCloseButton = false;
+
+    /** Display in mobile view. **/
+    @Input()
+    close: any;
+
     /** @hidden */
     @ViewChild(ButtonComponent)
     buttonComponent: ButtonComponent;
@@ -66,6 +74,10 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+
+    /** Event emitted, when the combobox's popover body is opened or closed */
+    @Output()
+    readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     clicked = new EventEmitter<MouseEvent>();
@@ -83,6 +95,9 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
+        if (this.isCloseButton) {
+            this.openChange.emit(false);
+        }
         this.clicked.emit(event);
     }
 

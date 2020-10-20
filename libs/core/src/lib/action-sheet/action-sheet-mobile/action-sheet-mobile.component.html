@@ -1,11 +1,3 @@
-<div>MOBILE</div>
-<!--<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>-->
-<!--    &lt;!&ndash;    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">&ndash;&gt;-->
-
-<!--&lt;!&ndash;        <fd-dialog-body>&ndash;&gt;-->
-<!--&lt;!&ndash;            <ng-container *ngTemplateOutlet="childContent"></ng-container>&ndash;&gt;-->
-<!--&lt;!&ndash;        </fd-dialog-body>&ndash;&gt;-->
-
-
-<!--&lt;!&ndash;    </fd-dialog>&ndash;&gt;-->
-<!--</ng-template>-->
+<div *ngIf="open" class="fd-action-sheet__wrapper fd-action-sheet__wrapper--active">
+    <ng-container *ngTemplateOutlet="childContent?.actionSheetBodyTemplate"></ng-container>
+</div>

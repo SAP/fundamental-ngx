@@ -4,23 +4,23 @@
     </fd-popover-control>
 
     <fd-popover-body>
-        <ng-container *ngTemplateOutlet="actionSheetBody"></ng-container>
+        <ng-container *ngTemplateOutlet="actionSheetBodyTemplate"></ng-container>
     </fd-popover-body>
 </fd-popover>
 
 <ng-container *ngIf="mobile">
-    <fd-action-sheet-control>
-        <button fd-button glyph="settings" (click)="toggleOpen()"></button>
+    <fd-action-sheet-control *ngIf="!open">
+        <button fd-button glyph="settings" (click)="isOpenChangeHandle(true)"></button>
     </fd-action-sheet-control>
 
-    <div
-        [class.fd-action-sheet__wrapper]="true"
-        [class.fd-action-sheet__wrapper--active]="isOpen">
-        <ng-container *ngTemplateOutlet="actionSheetBody"></ng-container>
-    </div>
+<!--    <div-->
+<!--        [class.fd-action-sheet__wrapper]="true"-->
+<!--        [class.fd-action-sheet__wrapper&#45;&#45;active]="isOpen">-->
+<!--        <ng-container *ngTemplateOutlet="actionSheetBody"></ng-container>-->
+<!--    </div>-->
 </ng-container>
 
-<ng-template #actionSheetBody>
+<ng-template #actionSheetBodyTemplate>
     <ng-content select="fd-action-sheet-body"></ng-content>
 </ng-template>
 

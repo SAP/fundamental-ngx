@@ -11,7 +11,7 @@ export const ACTION_SHEET_COMPONENT = new InjectionToken<string[]>('ActionSheetC
 
 export interface ActionSheetInterface extends MobileMode {
     dialogConfig: DialogConfig;
-    isOpenChange: EventEmitter<boolean>;
+    openChange: EventEmitter<boolean>;
 
     close(): void;
 }
