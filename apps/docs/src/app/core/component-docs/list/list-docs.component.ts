@@ -20,6 +20,7 @@ import * as listFilterH from '!raw-loader!./examples/list-data-example/list-data
 import * as listSortPipe from '!raw-loader!../../../documentation/core-helpers/pipes/sort.pipe.ts';
 import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
 import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
+import * as bylineSrcHtml from '!raw-loader!./examples/list-byline-example/list-byline-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -173,6 +174,14 @@ export class ListDocsComponent {
             code: infiniteScrollSrcTs,
             fileName: 'list-infinite-scroll-example',
             component: 'ListInfiniteScrollExampleComponent'
+        }
+    ];
+
+    listByline: ExampleFile[] = [
+        {
+            language: 'html',
+            code: bylineSrcHtml,
+            fileName: 'list-byline-example'
         }
     ];
 }

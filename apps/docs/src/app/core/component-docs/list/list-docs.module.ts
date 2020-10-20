@@ -20,7 +20,7 @@ import {
     DragAndDropModule,
     BusyIndicatorModule,
     ToolbarModule,
-    InputGroupModule
+    InputGroupModule, FundamentalNgxCoreModule
 } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ListDndExampleComponent } from './examples/list-dnd-example/list-dnd-example.component';
@@ -32,6 +32,7 @@ import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/l
 import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
 import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { ListBylineExampleComponent } from './examples/list-byline-example/list-byline-example.component';
 
 const routes: Routes = [
     {
@@ -57,7 +58,8 @@ const routes: Routes = [
         BusyIndicatorModule,
         ToolbarModule,
         InputGroupModule,
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        FundamentalNgxCoreModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -75,7 +77,8 @@ const routes: Routes = [
         ListNavigationExampleComponent,
         ListKeyboardExampleComponent,
         ListNavIndicatorExampleComponent,
-        ListDataExampleComponent
+        ListDataExampleComponent,
+        ListBylineExampleComponent
     ]
 })
 export class ListDocsModule {}
