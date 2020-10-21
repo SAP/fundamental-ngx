@@ -49,3 +49,6 @@ report.*.json
 # System Files
 .DS_Store
 Thumbs.db
+
+# SauceLabs
+sauce_connect.log

@@ -8,14 +8,28 @@ addons:
 
 git:
   depth: false
+env:
+  global:
+    - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+    - BUILD_ID=$TRAVIS_BUILD_ID
+    - JOB_URL=$TRAVIS_JOB_WEB_URL
 script:
   - npm run build-all
 jobs:
   include:
   - stage: "Lint and Test"
-    if: type = pull_request
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
-    script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls && npm run build-pack-library
+    script: npm run lint && npm run test:coveralls && npm run build-pack-library
+
+  - stage: "Sauce Labs unit tests"
+    name: Sauce Labs - Core & Platform unit tests
+    env:
+      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+    script:
+      - npm run test:core:saucelabs
+      - npm run test:platform:saucelabs
+
   - stage: "Pre-release"
     if: branch = master AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
