@@ -231,7 +231,7 @@ export class ListDataSource<T> extends ComboBoxDataSource<T> {
 }
 
 export class TableDataSource<T> extends ListDataSource<T> implements DataSource<T> {
-    readonly MAX_LIMIT = 10;
+    readonly MAX_LIMIT = Number.MAX_SAFE_INTEGER;
 
     constructor(public dataProvider: DataProvider<any>) {
         super(dataProvider);
