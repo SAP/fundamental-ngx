@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.23...v0.23.0-rc.24) (2020-10-21)
+
+
+### Bug Fixes
+
+* (Core) Unify KeyUtil usages ([#3648](https://github.com/SAP/fundamental-ngx/issues/3648)) ([cc25ed7](https://github.com/SAP/fundamental-ngx/commit/cc25ed75698a3e3e464019bcd2fb29bfe342a712))
+* (Platform) keyboard handling in table ([#3656](https://github.com/SAP/fundamental-ngx/issues/3656)) ([960528a](https://github.com/SAP/fundamental-ngx/commit/960528ab81ddf1aecdd575c0323f30be43147f43))
+
 ## [0.23.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.22...v0.23.0-rc.23) (2020-10-21)
 
 
