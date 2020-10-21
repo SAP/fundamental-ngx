@@ -2,6 +2,125 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.22...v0.23.0-rc.23) (2020-10-21)
+
+
+### Features
+
+* (Platform) introduce Dynamic Page Layout component ([#3515](https://github.com/SAP/fundamental-ngx/issues/3515)) ([d66239d](https://github.com/SAP/fundamental-ngx/commit/d66239dd4966b2e727fffa6e3e57d3fcb859df12))
+
+## [0.23.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.21...v0.23.0-rc.22) (2020-10-20)
+
+
+### Features
+
+* (Platform) introduce new Table component  ([#3597](https://github.com/SAP/fundamental-ngx/issues/3597)) ([1326d3b](https://github.com/SAP/fundamental-ngx/commit/1326d3b342e1f5d86f40ba9d3ece93f4d7b2287d))
+
+## [0.23.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.20...v0.23.0-rc.21) (2020-10-20)
+
+
+### Features
+
+* (Platform) introduce new Object List Item Component ([#3629](https://github.com/SAP/fundamental-ngx/issues/3629)) ([48ef7a8](https://github.com/SAP/fundamental-ngx/commit/48ef7a8d6f01d0a87aa7f4d61908f2b33527fab3))
+
+## [0.23.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.19...v0.23.0-rc.20) (2020-10-19)
+
+## [0.23.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.18...v0.23.0-rc.19) (2020-10-19)
+
+## [0.23.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.17...v0.23.0-rc.18) (2020-10-18)
+
+## [0.23.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.16...v0.23.0-rc.17) (2020-10-18)
+
+## [0.23.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.15...v0.23.0-rc.16) (2020-10-17)
+
+
+### Bug Fixes
+
+* (platform) Input group - fix button usage ([#3639](https://github.com/SAP/fundamental-ngx/issues/3639)) ([7e9fdf9](https://github.com/SAP/fundamental-ngx/commit/7e9fdf90987ebd49cace6feb2a1803465941acda))
+
+## [0.23.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.14...v0.23.0-rc.15) (2020-10-16)
+
+
+### Bug Fixes
+
+* Card - hide card subtitle if it's not used ([#3636](https://github.com/SAP/fundamental-ngx/issues/3636)) ([cdf68a9](https://github.com/SAP/fundamental-ngx/commit/cdf68a9716375a45eb3b3979842fabad313949b2))
+
+## [0.23.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.13...v0.23.0-rc.14) (2020-10-15)
+
+## [0.23.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.12...v0.23.0-rc.13) (2020-10-15)
+
+## [0.23.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.11...v0.23.0-rc.12) (2020-10-14)
+
+
+### Features
+
+* (Platform) introduce new Object Attribute  ([#3531](https://github.com/SAP/fundamental-ngx/issues/3531)) ([7f7b382](https://github.com/SAP/fundamental-ngx/commit/7f7b382c2e38c6a778044d3461caa0900abc8e43))
+
+## [0.23.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.10...v0.23.0-rc.11) (2020-10-14)
+
+## [0.23.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.9...v0.23.0-rc.10) (2020-10-14)
+
+## [0.23.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.8...v0.23.0-rc.9) (2020-10-13)
+
+## [0.23.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.7...v0.23.0-rc.8) (2020-10-13)
+
+
+### Features
+
+* (Core) introduce Object number component ([#3567](https://github.com/SAP/fundamental-ngx/issues/3567)) ([1d56511](https://github.com/SAP/fundamental-ngx/commit/1d5651168763060765068d55d2bd45e71490111c))
+
+## [0.23.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.6...v0.23.0-rc.7) (2020-10-11)
+
+## [0.23.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.5...v0.23.0-rc.6) (2020-10-09)
+
+
+### Features
+
+* (Core) introduce new Message Toast component ([#3572](https://github.com/SAP/fundamental-ngx/issues/3572)) ([74b98bf](https://github.com/SAP/fundamental-ngx/commit/74b98bfa11e65494316154f4b86e7873ee471e9a))
+
+## [0.23.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.4...v0.23.0-rc.5) (2020-10-09)
+
+
+### Features
+
+* (Core) introduce Formatted text component [#3574](https://github.com/SAP/fundamental-ngx/issues/3574) ([#3574](https://github.com/SAP/fundamental-ngx/issues/3574)) ([cb343ba](https://github.com/SAP/fundamental-ngx/commit/cb343baae265de23370613df9a16a12fff7edcc8))
+
+## [0.23.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.3...v0.23.0-rc.4) (2020-10-09)
+
+## [0.23.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.2...v0.23.0-rc.3) (2020-10-09)
+
+
+### Features
+
+* (Platform) add Object Marker documentation and platform library changes ([#3525](https://github.com/SAP/fundamental-ngx/issues/3525)) ([3bdaf3a](https://github.com/SAP/fundamental-ngx/commit/3bdaf3a289e3d294b81bb957768dbcc133af233f))
+
+## [0.23.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.1...v0.23.0-rc.2) (2020-10-08)
+
+
+### Features
+
+* (Core) introduce new Wizard component ([#3516](https://github.com/SAP/fundamental-ngx/issues/3516)) ([afb9398](https://github.com/SAP/fundamental-ngx/commit/afb9398d1c6929fd633b2fd16bd81d9c4db14ae7))
+
+## [0.23.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.0...v0.23.0-rc.1) (2020-10-08)
+
+## [0.23.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.7...v0.23.0-rc.0) (2020-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove deprecated input buttonType from input-group
+
+### Bug Fixes
+
+* remove deprecated input from input group - buttonType ([#3573](https://github.com/SAP/fundamental-ngx/issues/3573)) ([5b49655](https://github.com/SAP/fundamental-ngx/commit/5b496556a9f8ad6c7a5f739913486f49b00d25fb))
+
+### [0.22.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.6...v0.22.1-rc.7) (2020-10-07)
+
+
+### Bug Fixes
+
+* remove deprecated input isDropdown from popover ([#3570](https://github.com/SAP/fundamental-ngx/issues/3570)) ([9b4ad00](https://github.com/SAP/fundamental-ngx/commit/9b4ad000bcf3acddac5a4ffbc62740b6cf3f4b0a))
+
 ### [0.22.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.22.1-rc.5...v0.22.1-rc.6) (2020-10-07)
 
 

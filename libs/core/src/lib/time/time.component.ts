@@ -17,7 +17,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnComponent, TimeColumnItemOutput } from './time-column/time-column.component';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '../utils/functions';
+import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -232,10 +233,10 @@ export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlV
 
     /** @hidden */
     handleKeyDownEvent(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, 'ArrowLeft')) {
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             this.handlePreviousColumnFocus(this.activeView);
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'ArrowRight')) {
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             this.handleNextColumnFocus(this.activeView);
             event.preventDefault();
         }

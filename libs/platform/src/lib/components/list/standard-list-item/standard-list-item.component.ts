@@ -2,8 +2,12 @@ import {
     Component, ChangeDetectionStrategy, ElementRef,
     ChangeDetectorRef, forwardRef
 } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { ContentDensity } from '../../form/form-control';
 import { BaseListItem } from '../base-list-item';
 import { ListConfig } from '../list.config';
+
 
 
 @Component({
@@ -20,7 +24,7 @@ export class StandardListItemComponent extends BaseListItem {
 
 
     /** @hidden */
-    _contentDensity = this._listConfig.contentDensity;
+    _contentDensity: ContentDensity = this._listConfig.contentDensity;
 
     /**
      * @hidden
@@ -30,8 +34,8 @@ export class StandardListItemComponent extends BaseListItem {
 
     /** @hidden */
     constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
-        protected _listConfig: ListConfig) {
-        super(_changeDetectorRef, itemEl, _listConfig);
+        protected _listConfig: ListConfig, _router: Router) {
+        super(_changeDetectorRef, itemEl, _listConfig, _router);
     }
 
 }

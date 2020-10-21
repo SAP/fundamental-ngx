@@ -1,0 +1,88 @@
+<fd-docs-section-title id="default-table" componentName="Table">
+    Default Table
+</fd-docs-section-title>
+<description>This example shows table default implementation </description>
+<component-example>
+    <fdp-table-default-example></fdp-table-default-example>
+</component-example>
+<code-example [exampleFiles]="defaultTable"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-columns-table" componentName="Table">
+    Custom Column
+</fd-docs-section-title>
+<description>This example shows custom column definition implementation </description>
+<component-example>
+    <fdp-table-custom-column-example></fdp-table-custom-column-example>
+</component-example>
+<code-example [exampleFiles]="customColumnTable"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="single-row-selection" componentName="Table">
+    Single Row Selection
+</fd-docs-section-title>
+<description>This example shows single row selection </description>
+<component-example>
+    <fdp-table-single-row-selection-example></fdp-table-single-row-selection-example>
+</component-example>
+<code-example [exampleFiles]="singleRowSelection"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="multiple-row-selection" componentName="Table">
+    Multiple Row Selection
+</fd-docs-section-title>
+<description>This example shows multiple row selection </description>
+<component-example>
+    <fdp-table-multiple-row-selection-example></fdp-table-multiple-row-selection-example>
+</component-example>
+<code-example [exampleFiles]="multipleRowSelection"></code-example>
+
+<separator></separator>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fdp-table
+        [dataSource]="tableData"
+        [contentDensity]="data.table.contentDensity"
+        [selectionMode]="data.table.selectionMode"
+        emptyTableMessage="No data found"
+        (rowSelectionChange)="onRowSelectionChange($event)">
+        <fdp-table-toolbar
+            [title]="data['table-toolbar'].title"
+            [hideItemCount]="data['table-toolbar'].hideItemCount">
+            <fdp-table-toolbar-actions>
+                <fdp-button label="Action One"></fdp-button>
+                <fdp-button label="Action Two"></fdp-button>
+            </fdp-table-toolbar-actions>
+        </fdp-table-toolbar>
+
+        <fdp-column
+            name="name"
+            key="name"
+            label="Name"
+            align="start">
+        </fdp-column>
+
+        <fdp-column
+            name="description"
+            key="description"
+            label="Description">
+        </fdp-column>
+
+        <fdp-column
+            name="price"
+            key="price.value"
+            label="Price"
+            align="end">
+        </fdp-column>
+
+        <fdp-column
+            name="status"
+            key="status"
+            label="Status"
+            align="center">
+        </fdp-column>
+    </fdp-table>
+</playground>

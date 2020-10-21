@@ -17,10 +17,11 @@ import {
 } from '@angular/core';
 import { CarouselConfig, CarouselDirective, PanEndOutput } from '../../utils/directives/carousel/carousel.directive';
 import { CarouselItemDirective } from '../../utils/directives/carousel/carousel-item.directive';
-import { KeyUtil } from '../../utils/functions/key-util';
+import { KeyUtil } from '../../utils/functions';
 import { TimeColumnConfig } from './time-column-config';
 import { Subject, Subscription } from 'rxjs';
 import { buffer, debounceTime, map } from 'rxjs/operators';
+import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 
 let timeColumnUniqueId = 0;
@@ -189,10 +190,10 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, 'ArrowDown')) {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             this.scrollDown();
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'ArrowUp')) {
+        } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             this.scrollUp();
             event.preventDefault();
         } else if (KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical')) {
@@ -202,7 +203,7 @@ export class TimeColumnComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** @hidden */
     spinnerButtonKeydownHandle(event: KeyboardEvent, upButton?: boolean): void {
-        if (KeyUtil.isKey(event, ' ')) {
+        if (KeyUtil.isKeyCode(event, SPACE)) {
             if (upButton) {
                 this.scrollUp();
             } else {

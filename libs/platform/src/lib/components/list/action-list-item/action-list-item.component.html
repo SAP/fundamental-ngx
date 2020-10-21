@@ -1,0 +1,7 @@
+<li #listItem fd-list-item class="fd-list__item--action" [attr.id]="id" tabindex="-1" role="listitem"
+    (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)" [attr.ariaLabelledBy]="ariaLabelledBy"
+    [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
+    <button #action class="fd-list__title" [attr.aria-label]="title" [attr.title]="title"
+        (click)="_onActionClick($event)">
+        {{title}}</button>
+</li>

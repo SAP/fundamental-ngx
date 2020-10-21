@@ -22,7 +22,9 @@ import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { DefaultMenuItem } from '../../menu/default-menu-item.class';
-import { RtlService, unifyKeyboardKey } from '../../utils/public_api';
+import { RtlService } from '../../utils/services/rtl.service';
+import { KeyUtil } from '../../utils/functions';
+import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 export type MenuSubListPosition = 'left' | 'right';
 
@@ -243,42 +245,27 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     }
 
     private _keyboardLtr(event: KeyboardEvent): void {
-        switch (this.getKeyCode(event)) {
-            case 'ArrowLeft': {
-                this._handleCloseSubList();
-                break;
-            }
-            case 'ArrowRight': {
-                this._handleOpenSubList(event);
-                break;
-            }
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
+            this._handleCloseSubList();
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
+            this._handleOpenSubList(event);
         }
     }
 
     private _keyboardRtl(event: KeyboardEvent): void {
-        switch (this.getKeyCode(event)) {
-            case 'ArrowRight': {
-                this._handleCloseSubList();
-                break;
-            }
-            case 'ArrowLeft': {
-                this._handleOpenSubList(event);
-                break;
-            }
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
+            this._handleOpenSubList(event);
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
+            this._handleCloseSubList();
         }
     }
 
     private _keyboardDefault(event: KeyboardEvent): void {
-        switch (this.getKeyCode(event)) {
-            case ' ':
-            case 'Enter': {
-                this._handleOpenSubList(event);
-                break;
-            }
-            default: {
-                event.preventDefault();
-                this.keyDown.emit(event);
-            }
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            this._handleOpenSubList(event);
+        } else {
+            event.preventDefault();
+            this.keyDown.emit(event);
         }
     }
 
@@ -294,10 +281,6 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
             this.subItems.first.focus();
         }
         event.preventDefault();
-    }
-
-    private getKeyCode(event: KeyboardEvent): string {
-        return unifyKeyboardKey(event);
     }
 
     private subscribeToRtl(): void {

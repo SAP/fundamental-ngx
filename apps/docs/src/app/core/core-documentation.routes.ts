@@ -113,6 +113,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'formatted-text',
+                loadChildren: () =>
+                    import('./component-docs/formatted-text/formatted-text-docs.module').then(
+                        (m) => m.FormattedTextDocsModule
+                    )
+            },
+            {
                 path: 'global-config',
                 loadChildren: () =>
                     import('./component-docs/global-config/global-config-docs.module').then(
@@ -190,6 +197,13 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/message-strip/message-strip-docs.module').then(
                         (m) => m.MessageStripDocsModule
+                    )
+            },
+            {
+                path: 'message-toast',
+                loadChildren: () =>
+                    import('./component-docs/message-toast/message-toast-docs.module').then(
+                        (m) => m.MessageToastDocsModule
                     )
             },
             {
@@ -340,6 +354,14 @@ export const ROUTES: Routes = [
             {
                 path: 'tree',
                 loadChildren: () => import('./component-docs/tree/tree-docs.module').then((m) => m.TreeDocsModule)
+            },
+            {
+                path: 'object-number',
+                loadChildren: () => import('./component-docs/object-number/object-number-docs.module').then((m) => m.ObjectNumberDocsModule)
+            },
+            {
+                path: 'wizard',
+                loadChildren: () => import('./component-docs/wizard/wizard-docs.module').then((m) => m.WizardDocsModule)
             }
         ]
     }

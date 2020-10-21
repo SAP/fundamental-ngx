@@ -73,6 +73,7 @@ export const API_FILES = {
         'FormSetDirective',
         'FormInputMessageGroupComponent'
     ],
+    formattedText: ['FormattedTextComponent'],
     formMessage: ['FormInputMessageGroupComponent'],
     globalConfig: [],
     icon: ['IconComponent'],
@@ -132,6 +133,7 @@ export const API_FILES = {
         'MenuKeyboardService'
     ],
     messageStrip: ['MessageStripComponent'],
+    messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
     dialog: [
         'DialogService',
         'DialogContainerComponent',
@@ -180,6 +182,7 @@ export const API_FILES = {
         'PopoverBodyFooterDirective'
     ],
     popoverDirective: ['PopoverDirective'],
+    objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
     scrollSpy: ['ScrollSpyDirective'],
     select: ['SelectComponent', 'OptionComponent'],
@@ -289,5 +292,6 @@ export const API_FILES = {
         'ToolbarSpacerComponent'
     ],
     tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
-    ratingIndicator: ['RatingIndicatorComponent']
+    ratingIndicator: ['RatingIndicatorComponent'],
+    wizard: ['WizardComponent']
 };
