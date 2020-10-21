@@ -21,7 +21,6 @@ export type Constructor<T> = new (...args: any[]) => T
 @NgModule({
     imports: [
         CommonModule,
-        BrowserModule,
         HttpClientModule,
         AppShellPageModule,
         MessagingModule,
