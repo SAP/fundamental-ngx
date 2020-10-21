@@ -127,6 +127,7 @@ export class AutoCompleteDirective {
         });
     }
 
+    /** @hidden */
     private _moveIndicatorToLastLetter(): void {
         this._elementRef.nativeElement.setSelectionRange(this.inputText.length, this.inputText.length);
     }

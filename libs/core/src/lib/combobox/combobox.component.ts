@@ -44,7 +44,8 @@ import {
     ESCAPE,
     LEFT_ARROW,
     RIGHT_ARROW,
-    SHIFT, SPACE,
+    SHIFT,
+    SPACE,
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
