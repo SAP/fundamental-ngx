@@ -65,7 +65,8 @@ module.exports = function (config) {
             require('karma-spec-reporter')
         ],
         client: {
-            clearContext: false, // leave Jasmine Spec Runner output visible in browser
+            // leave Jasmine Spec Runner output visible in browser
+            clearContext: false,
             jasmine: {
                 timeoutInterval: 20000
             }
