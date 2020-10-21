@@ -14,6 +14,7 @@ let carouselItemUniqueId = 0;
 @Component({
     selector: 'fd-carousel-item',
     templateUrl: './carousel-item.component.html',
+    styleUrls: ['carousel-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
@@ -45,12 +46,10 @@ export class CarouselItemComponent implements CarouselItemInterface {
 
     /** Initial height value, needed when carousel is inside popover */
     @Input()
-    @HostBinding('style.height')
     initialHeight: number;
 
     /** Initial height value, needed when carousel is inside popover */
     @Input()
-    @HostBinding('style.width')
     initialWidth: number;
 
     /** Value of carousel item */
@@ -62,6 +61,12 @@ export class CarouselItemComponent implements CarouselItemInterface {
 
     @HostBinding('class.fd-carousel__item--active')
     carouselItemActive = true;
+
+    /**
+     * Handling width height in IE versions.
+     */
+    @HostBinding('class.fd-carousel--ie-handling')
+    ieAutoWidth = true;
 
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef, private readonly _elementRef: ElementRef) {}
 

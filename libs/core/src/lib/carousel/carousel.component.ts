@@ -290,7 +290,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
         this._carouselService.pickPrevious(this.dir);
         this._notifySlideChange(SlideDirection.PREVIOUS);
-        this._changeDetectorRef.markForCheck();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** Transitions to the next slide in the carousel. */
@@ -300,7 +300,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._adjustActiveItemPosition(SlideDirection.NEXT);
         this._carouselService.pickNext(this.dir);
         this._notifySlideChange(SlideDirection.NEXT);
-        this._changeDetectorRef.markForCheck();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden Adjust position of active item, based on slide direction */
@@ -413,7 +413,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         const slideDirection: SlideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
         this._adjustActiveItemPosition(slideDirection, stepTaken);
         this._notifySlideChange(slideDirection, firstActiveSlide);
-        this._changeDetectorRef.markForCheck();
+        this._changeDetectorRef.detectChanges();
     }
 
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
