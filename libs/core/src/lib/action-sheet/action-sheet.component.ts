@@ -13,7 +13,7 @@ import {
     OnDestroy,
     Optional,
     Output,
-    ViewEncapsulation, TemplateRef, ContentChildren
+    ViewEncapsulation, TemplateRef, ContentChildren, ComponentRef
 } from '@angular/core';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
@@ -82,6 +82,8 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @ContentChild(ActionSheetControlComponent) actionSheetControl;
     @ContentChild(ActionSheetMobileComponent) actionSheetMobile;
 
+    @Output()
+    actionSheetMobileDynamic: ComponentRef<ActionSheetMobileComponent>;
 
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -124,9 +126,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
-
-        if (this.mobile && !this.open) {
-            this.open = isOpen;
+        this.open = isOpen;
+        if (this.mobile) {
+            this.actionSheetMobileDynamic.instance.open = this.open;
         }
 
     }
@@ -171,7 +173,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
+        this.actionSheetMobileDynamic = this._dynamicComponentService.createDynamicComponent(
             { actionSheetBodyTemplate: this.actionSheetBodyTemplate },
             ActionSheetMobileComponent,
             { container: this._elementRef.nativeElement },

@@ -10,8 +10,4 @@ import { CommonModule } from '@angular/common';
     entryComponents: [ ActionSheetMobileComponent ],
     exports: [ActionSheetMobileComponent]
 })
-export class ActionSheetMobileModule {
-    /** Whenever links should be visible **/
-    @Input()
-    open = false;
-}
+export class ActionSheetMobileModule {}

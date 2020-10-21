@@ -22,18 +22,13 @@ import {ActionSheetItemComponent} from '../../..';
 })
 export class ActionSheetControlComponent {
 
-    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
-
+    /** Whenever item is clicked **/
     @Output()
     clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-    // ??@HostBinding('class.is-opened')
-    isOpen = new EventEmitter<boolean>();
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
-        console.log('SEND')
         this.clicked.emit(true);
     }
 

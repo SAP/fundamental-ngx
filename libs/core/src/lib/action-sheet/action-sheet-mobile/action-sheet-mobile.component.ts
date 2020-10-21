@@ -1,10 +1,7 @@
 import {
-    AfterViewInit,
     Component,
     ElementRef,
     Inject, Input,
-    OnDestroy,
-    OnInit,
     Optional,
     TemplateRef,
     ViewChild
@@ -17,13 +14,12 @@ import {
     MobileModeControl,
     MobileModeConfigToken
 } from '../../utils/base-class/mobile-mode.class';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-action-sheet-mobile',
     templateUrl: './action-sheet-mobile.component.html'
 })
-export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterface> implements OnInit, AfterViewInit, OnDestroy {
+export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterface> {
 
     /** Whenever links should be visible **/
     @Input()
@@ -47,55 +43,8 @@ export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterf
     }
 
     /** @hidden */
-    ngOnInit(): void {
-        this._listenOnOpenChange();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.dialogRef.close();
-        super.onDestroy();
-    }
-
-    /** @hidden */
-    cancel(): void {
-        this._component.close();
-    }
-
     close(): void {
-        console.log('close')
-        this.open = !this.open;
+        this.open = false;
     }
-
-    /** @hidden */
-    private _toggleDialog(open: boolean): void {
-        this.open = open;
-    }
-
-    /** @hidden */
-    private _open(): void {
-        this.dialogRef = this._dialogService.open(this.dialogTemplate, {
-            mobile: true,
-            verticalPadding: false,
-            ...this.dialogConfig,
-            focusTrapped: false,
-            escKeyCloseable: false,
-            backdropClickCloseable: false,
-            container:  this._elementRef.nativeElement
-        });
-    }
-
-    /** @hidden Hide/Show the Dialog when Select Open/Close*/
-    private _listenOnOpenChange(): void {
-        this._component.openChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(isOpen => this._toggleDialog(isOpen));
-    }
-
-
 
 }
