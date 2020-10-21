@@ -4,7 +4,7 @@ import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator'
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
 
 @Directive({
-    selector: '[fdLayoutGridCol]'
+    selector: '[fd-layout-grid-col], [fdLayoutGridCol]'
 })
 export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChanges {
 

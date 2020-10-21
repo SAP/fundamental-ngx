@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-    selector: '[fdLayoutGridRow]',
+    selector: '[fd-layout-grid-row], [fdLayoutGridRow]',
     host: {
         class: 'fd-row'
     }
