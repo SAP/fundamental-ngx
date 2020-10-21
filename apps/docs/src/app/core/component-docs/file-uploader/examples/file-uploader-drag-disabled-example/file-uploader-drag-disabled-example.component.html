@@ -1,13 +1,13 @@
 <fd-file-uploader
+    ariaLabel="Choose file"
+    ariaLabelledBy="Choose file"
+    placeholder="Choose File to upload"
+    buttonLabel="Drag a .png file on me!"
+    buttonAriaLabel="browse file"
+    accept=".png"
     [(ngModel)]="files"
-    [ariaLabel]="'Choose file'"
-    [ariaLabelledBy]="'Choose file'"
-    [placeholder]="'Choose File to upload'"
-    [buttonLabel]="'Drag a .png file on me!'"
-    [buttonAriaLabel]="'browse file'"
     (selectedFilesChanged)="handleFileSelection($event)"
     (selectedInvalidFiles)="handleInvalidFiles($event)"
-    [accept]="'.png'"
 >
 </fd-file-uploader>
 
