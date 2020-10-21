@@ -9,10 +9,10 @@ import {
     Output,
     SimpleChanges,
     ViewChild,
-    ViewEncapsulation
 } from '@angular/core';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
-import { KeyUtil } from '../../utils/public_api';
+import { KeyUtil } from '../../utils/functions';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
@@ -101,7 +101,7 @@ export class WizardStepComponent implements OnChanges {
         if (event) {
             event.preventDefault();
         }
-        if (this.visited && (!event || KeyUtil.isKey(event, [' ', 'Enter']))) {
+        if (this.visited && (!event || KeyUtil.isKeyCode(event, [SPACE, ENTER]))) {
             this.stepClicked.emit(this);
         }
     }

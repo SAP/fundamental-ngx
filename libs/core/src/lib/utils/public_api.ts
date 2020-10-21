@@ -37,10 +37,6 @@ export * from './datatypes/hash.datatype';
 export * from './services/rtl.service';
 export * from './services/keyboard-support/keyboard-support.service';
 
-export * from './functions/compare-objects';
-export * from './functions/closest-element';
-export * from './functions/keyboard-unification';
-export * from './functions/uuidv4-generator';
-export * from './functions/key-util';
+export * from './functions';
 
 export * from './base-class/mobile-mode.class';
