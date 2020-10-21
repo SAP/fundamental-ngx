@@ -11,10 +11,10 @@ export class MessageToastConfig implements DynamicComponentConfig {
     data?: any;
 
     /** Duration of time *in milliseconds* that the message toast will be visible. Set to -1 for indefinite. */
-    duration = 3000;
+    duration? = 3000;
 
     /** Whether the message toast should stay visible if the cursor is over it. */
-    mousePersist = false;
+    mousePersist? = false;
 
     /** Aria label for the message toast component element. */
     ariaLabel?: string = null;
