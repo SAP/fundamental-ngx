@@ -7,7 +7,7 @@
     <!-- Available rate values -->
     <ng-container *ngFor="let rate of icons; index as i; trackBy: trackByFn">
         <input
-            aria-label="{{ i + 1 }} star"
+            [attr.aria-label]="(i + 1) + '-star'"
             type="radio"
             class="fd-rating-indicator__input"
             [disabled]="disabled"
@@ -34,7 +34,7 @@
 >
     <fd-popover-control>
         <span class="fd-rating-indicator__dynamic-text">
-            (<a href="javascript:;" fd-link>{{ totalRatings }}</a>)
+            (<span area-label="Total raiting" fd-link>{{ totalRatings }}</span>)
         </span>
     </fd-popover-control>
     <fd-popover-body>
