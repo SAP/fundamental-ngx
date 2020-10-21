@@ -17,6 +17,7 @@ import {
 } from '@angular/core';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
+import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
 import {
     FocusEscapeDirection,
     KeyboardSupportService
@@ -78,8 +79,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @ViewChild('actionSheetBodyTemplate')
     actionSheetBodyTemplate: TemplateRef<any>;
 
-    // ContentChild action sheet control
-    // click - isOpenChangeHandle tylko dla mobila
+    @ContentChild(ActionSheetControlComponent) actionSheetControl;
+    @ContentChild(ActionSheetMobileComponent) actionSheetMobile;
+
 
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -102,6 +104,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this.actionSheetBody.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
         this._keyboardSupportService.setKeyboardService(this.actionSheetBody.actionSheetItems, false);
         this._listenOnItemsChange();
+        this.actionSheetControl.clicked.subscribe((isOpen) => {
+            this.isOpenChangeHandle(isOpen);
+        })
     }
 
     /** @hidden */
@@ -119,10 +124,11 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
-        if (this.open !== isOpen) {
+
+        if (this.mobile && !this.open) {
             this.open = isOpen;
-            this.openChange.emit(isOpen);
         }
+
     }
 
     /** @hidden */

@@ -67,7 +67,8 @@ export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterf
     }
 
     close(): void {
-        // TODO
+        console.log('close')
+        this.open = !this.open;
     }
 
     /** @hidden */

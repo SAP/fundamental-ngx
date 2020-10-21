@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, ViewEncapsulation, HostListener, Output, HostBinding} from '@angular/core';
+import {ActionSheetItemComponent} from '../../..';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -20,6 +21,20 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetControlComponent {
-    // HostListener click
-    // @output clicked
+
+    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
+
+    @Output()
+    clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    // ??@HostBinding('class.is-opened')
+    isOpen = new EventEmitter<boolean>();
+
+    /** Handler for mouse events */
+    @HostListener('click', ['$event'])
+    onClick(event: MouseEvent): void {
+        console.log('SEND')
+        this.clicked.emit(true);
+    }
+
 }

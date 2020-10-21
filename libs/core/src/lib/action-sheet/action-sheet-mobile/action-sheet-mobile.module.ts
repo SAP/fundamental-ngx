@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {Input, NgModule} from '@angular/core';
 import { ActionSheetMobileComponent } from './action-sheet-mobile.component';
 import { ButtonModule } from '../../button/button.module';
 import { DialogModule } from '../../dialog/dialog.module';
@@ -10,4 +10,8 @@ import { CommonModule } from '@angular/common';
     entryComponents: [ ActionSheetMobileComponent ],
     exports: [ActionSheetMobileComponent]
 })
-export class ActionSheetMobileModule {}
+export class ActionSheetMobileModule {
+    /** Whenever links should be visible **/
+    @Input()
+    open = false;
+}
