@@ -1,17 +1,4 @@
 import { Component } from '@angular/core';
-import { RatingIndicatorOutput } from '@fundamental-ngx/core';
-
-const config = {
-    readonly: false,
-    disabled: false,
-    displayMode: false,
-    rtl: false,
-    indicatorTotal: 5,
-    totalRatings: 0.15,
-    allowHalves: false,
-    ratingAverage: null,
-    displaySumPopover: false
-};
 
 @Component({
     selector: 'app-rating-indicator-ratings',

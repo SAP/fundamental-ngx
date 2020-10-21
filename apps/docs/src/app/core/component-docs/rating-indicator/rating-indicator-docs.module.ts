@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RatingIndicatorModule, ShellbarModule } from '@fundamental-ngx/core';
+
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
-import { RatingIndicatorModule, ShellbarModule } from '@fundamental-ngx/core';
-
 import { RatingIndicatorDocsHeaderComponent } from './rating-indicator-docs-header/rating-indicator-docs-header.component';
 import { RatingIndicatorDocsComponent } from './rating-indicator-docs.component';
 

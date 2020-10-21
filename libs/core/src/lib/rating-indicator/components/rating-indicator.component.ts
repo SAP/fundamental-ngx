@@ -182,7 +182,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if ('class' in changes) {
+        if ('class' in changes || 'size' in changes) {
             this.buildComponentCssClass();
         }
         if ('value' in changes) {
@@ -195,9 +195,6 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
         }
         if ('ratedIcon' in changes || 'unratedIcon' in changes) {
             this._renderIcon();
-            this.buildComponentCssClass();
-        }
-        if ('size' in changes) {
             this.buildComponentCssClass();
         }
 
