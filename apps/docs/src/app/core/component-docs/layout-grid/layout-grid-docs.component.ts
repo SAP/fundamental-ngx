@@ -12,7 +12,12 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 @Component({
     selector: 'app-layoutGrid',
-    templateUrl: './layout-grid-docs.component.html'
+    templateUrl: './layout-grid-docs.component.html',
+    styles: [`
+        strong {
+            margin-right: 0.5rem;
+        }
+    `]
 })
 export class LayoutGridDocsComponent {
     basicLayoutGrid: ExampleFile[] = [
