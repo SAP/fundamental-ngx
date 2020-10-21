@@ -44,7 +44,7 @@ import {
     ESCAPE,
     LEFT_ARROW,
     RIGHT_ARROW,
-    SHIFT,
+    SHIFT, SPACE,
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
@@ -355,7 +355,8 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     onItemKeyDownHandler(event: KeyboardEvent, value: any): void {
-        if (KeyUtil.isKeyCode(event, ENTER)) {
+        if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
+            event.preventDefault();
             this.onMenuClickHandler(value);
         }
     }
