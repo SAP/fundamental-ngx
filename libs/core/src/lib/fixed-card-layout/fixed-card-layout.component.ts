@@ -26,7 +26,7 @@ import { RtlService } from '../utils/services/rtl.service';
 
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
 const CARD_GAP_WIDTH = 16; // gap=1rem==16px
-const DRAG_START_DELAY = 500;
+const DRAG_START_DELAY = 200;
 
 @Directive({ selector: '[fdCardDef]' })
 export class CardDefinitionDirective {
