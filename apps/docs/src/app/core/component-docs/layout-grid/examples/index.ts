@@ -1,6 +1,5 @@
 import { ExampleLayoutGridBlockComponent } from './example-layout-grid-block.component';
 import {
-    LayoutGridAdjustingExampleComponent,
     LayoutGridBasicExampleComponent,
     LayoutGridNestingExampleComponent,
     LayoutGridNoGapExampleComponent,
@@ -21,6 +20,5 @@ export const examples = [
     LayoutGridOffsetExampleComponent,
     LayoutGridNestingExampleComponent,
     LayoutGridResponsiveOffsetExample,
-    LayoutGridAdjustingExampleComponent,
     LayoutGridResponsiveExampleComponent
 ];

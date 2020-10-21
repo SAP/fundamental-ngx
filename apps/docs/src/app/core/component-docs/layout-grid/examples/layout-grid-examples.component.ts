@@ -31,12 +31,6 @@ export class LayoutGridResponsiveExampleComponent {}
 export class LayoutGridRowExampleComponent {}
 
 @Component({
-    selector: 'fd-layout-grid-adjusting-example',
-    templateUrl: './layout-grid-adjusting-example.component.html'
-})
-export class LayoutGridAdjustingExampleComponent {}
-
-@Component({
     selector: 'fd-layout-grid-nesting-example',
     templateUrl: './layout-grid-nesting-example.component.html'
 })

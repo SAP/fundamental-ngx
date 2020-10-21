@@ -4,7 +4,6 @@ import * as layoutGridBasicSrc from '!raw-loader!./examples/layout-grid-basic-ex
 import * as layoutGridOffsetSrc from '!raw-loader!./examples/layout-grid-offset-example.component.html';
 import * as layoutGridResponsiveSrc from '!raw-loader!./examples/layout-grid-responsive-example.component.html';
 import * as layoutGridResponsiveOffsetSrc from '!raw-loader!./examples/layout-grid-responsive-offset-example.component.html';
-import * as layoutGridAdjustingSrc from '!raw-loader!./examples/layout-grid-adjusting-example.component.html';
 import * as layoutGridNestingSrc from '!raw-loader!./examples/layout-grid-nesting-example.component.html';
 import * as layoutGridRowSrc from '!raw-loader!./examples/layout-grid-row-example.component.html';
 import * as layoutGridNoGapSrc from '!raw-loader!./examples/layout-grid-no-gap-example.component.html';
@@ -56,14 +55,6 @@ export class LayoutGridDocsComponent {
         }
     ];
 
-    adjustingLayoutGrid: ExampleFile[] = [
-        {
-            language: 'html',
-            code: layoutGridAdjustingSrc,
-            fileName: 'layout-grid-adjusting-example'
-        }
-    ];
-
     nestingLayoutGrid: ExampleFile[] = [
         {
             language: 'html',
@@ -72,10 +63,10 @@ export class LayoutGridDocsComponent {
         }
     ];
 
-    layoutGridResponsiveOffsetSrc: ExampleFile[] = [
+    layoutGridResponsiveOffset: ExampleFile[] = [
         {
             language: 'html',
-            code: layoutGridNestingSrc,
+            code: layoutGridResponsiveOffsetSrc,
             fileName: 'layout-grid-responsive-offset-example'
         }
     ];

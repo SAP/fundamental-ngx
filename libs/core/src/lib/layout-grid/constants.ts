@@ -1,3 +1,6 @@
+/** Describes number of columns in grid horizontal dimension */
+export const GRID_COLUMNS_NUMBER = 12;
+
 export const CSS_CLASS_NAME = {
     layoutGrid: 'fd-container',
     layoutGridNoGap: 'fd-container--no-gap',
@@ -14,5 +17,4 @@ export const CSS_CLASS_NAME = {
     lgColOffsetPrefix: 'fd-col-lg--offset-',
     xlColOffsetPrefix: 'fd-col-xl--offset-',
 
-    full: 'fd-col--full'
 } as const;
