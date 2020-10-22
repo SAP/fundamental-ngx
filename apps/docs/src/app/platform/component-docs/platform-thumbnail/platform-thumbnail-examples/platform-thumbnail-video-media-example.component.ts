@@ -8,10 +8,10 @@ import { Media } from '@fundamental-ngx/platform';
 export class PlatformThumbnailVideoMediaExampleComponent {
 
     data: Media[] = [{
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature/3',
+        thumbnailUrl: 'http://picsum.photos/id/1018/400/3',
         mediaType: 'video',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature/3',
+        alt: 'Failed to load http://picsum.photos/id/1018/400/3',
         label: 'nature'
     },
     {
@@ -36,10 +36,10 @@ export class PlatformThumbnailVideoMediaExampleComponent {
         label: 'dance'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature/7',
+        thumbnailUrl: 'http://picsum.photos/id/1018/400/7',
         mediaType: 'video',
         mediaUrl: 'https://cdn.bitdegree.org/learn/Pexels%20Videos%203373.mp4?raw=true',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature/7',
+        alt: 'Failed to load http://picsum.photos/id/1018/400/7',
         label: 'nature'
     }
     ];
