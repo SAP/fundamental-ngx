@@ -7,8 +7,8 @@ import { FeedInputComponent } from './feed-input.component';
 @Component({
     template: `
         <fd-feed-input [disabled]="disabled">
-            <textarea fd-feed-input-textarea></textarea>
-            <button fd-feed-input-button></button>
+            <textarea fdFeedInputTextarea></textarea>
+            <button fdFeedInputButton></button>
         </fd-feed-input>
     `
 })
