@@ -409,18 +409,22 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         const firstActiveSlide = event.item;
         const actualActiveSlideIndex = this._slidesCopy.findIndex((_slide) => _slide === firstActiveSlide);
         const stepTaken = this._getStepTaken(event, actualActiveSlideIndex);
+        if (stepTaken > 0) {
+            const slideDirection: SlideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
 
-        const slideDirection: SlideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
-        this._adjustActiveItemPosition(slideDirection, stepTaken);
-        this._notifySlideChange(slideDirection, firstActiveSlide);
-        this._changeDetectorRef.detectChanges();
+            this._adjustActiveItemPosition(slideDirection, stepTaken);
+            this._notifySlideChange(slideDirection, firstActiveSlide);
+            this._changeDetectorRef.detectChanges();
+        }
     }
 
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
 
         if (event.after) {
-            if (actualActiveSlideIndex > this.currentActiveSlidesStartIndex) {
+            if (actualActiveSlideIndex === 0 && this.currentActiveSlidesStartIndex === 0) {
+                stepsCalculated = 0;
+            } else if (actualActiveSlideIndex > this.currentActiveSlidesStartIndex) {
                 stepsCalculated = actualActiveSlideIndex - this.currentActiveSlidesStartIndex;
             } else {
                 stepsCalculated = this.slides.length - this.currentActiveSlidesStartIndex + actualActiveSlideIndex;
