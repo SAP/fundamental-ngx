@@ -7,14 +7,16 @@ import {
     Component,
     ContentChild,
     ContentChildren,
-    ElementRef, EventEmitter,
+    ElementRef,
+    EventEmitter,
     forwardRef,
     HostListener,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional, Output,
+    Optional,
+    Output,
     QueryList,
     Renderer2,
     ViewChild,
@@ -24,7 +26,9 @@ import { FormControlComponent } from '../form/form-control/form-control.componen
 import { TokenComponent } from './token.component';
 import { RtlService } from '../utils/services/rtl.service';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder, KeyUtil } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { KeyUtil } from '../utils/functions';
+import { A, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -285,7 +289,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number;
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
-        if (KeyUtil.isKey(event, ' ') && document.activeElement !== this.input.elementRef().nativeElement) {
+        if (KeyUtil.isKeyCode(event, SPACE) && document.activeElement !== this.input.elementRef().nativeElement) {
             const token = this.tokenList.find((element, index) => index === fromIndex);
             this.tokenList.forEach(shadowedToken => {
                 if (shadowedToken !== token) {
@@ -294,15 +298,15 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             });
             token.selected = !token.selected;
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'Enter')) {
+        } else if (KeyUtil.isKeyCode(event, ENTER)) {
             this.input.elementRef().nativeElement.focus();
-        } else if ((KeyUtil.isKey(event, 'ArrowLeft') && !rtl) || (KeyUtil.isKey(event, 'ArrowRight') && rtl)) {
+        } else if ((KeyUtil.isKeyCode(event, LEFT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, RIGHT_ARROW) && rtl)) {
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
-        } else if ((KeyUtil.isKey(event, 'ArrowRight') && !rtl) || (KeyUtil.isKey(event, 'ArrowLeft') && rtl)) {
+        } else if ((KeyUtil.isKeyCode(event, RIGHT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && rtl)) {
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
-        } else if (KeyUtil.isKey(event, 'KeyA') && this.input.elementRef().nativeElement.value === '') {
+        } else if (KeyUtil.isKeyCode(event, A) && this.input.elementRef().nativeElement.value === '') {
             if (event.ctrlKey || event.metaKey) {
                 if (!this.input.elementRef().nativeElement.value) {
                     event.preventDefault();
@@ -313,7 +317,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
         }
         if (newIndex === this.tokenList.length &&
-            ((KeyUtil.isKey(event, 'ArrowRight') && !rtl) || (KeyUtil.isKey(event, 'ArrowLeft') && rtl))
+            ((KeyUtil.isKeyCode(event, RIGHT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && rtl))
         ) {
             this.input.elementRef().nativeElement.focus();
         } else if (

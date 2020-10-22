@@ -16,9 +16,10 @@ import {
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { RtlService } from '../utils/services/rtl.service';
 import { BehaviorSubject } from 'rxjs';
-import { KeyUtil } from '../utils/public_api';
+import { KeyUtil } from '../utils/functions';
 import { MenuComponent } from '../menu/menu.component';
 import { Placement } from 'popper.js';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -101,7 +102,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
 
     /** @hidden */
     keyDownHandle(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, ['Enter', ' '])) {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this.menuComponent.toggle();
             event.preventDefault();
         }

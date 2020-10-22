@@ -19,4 +19,5 @@ export * from './lib/components/list/public_api';
 export * from './lib/components/thumbnail/public_api';
 export * from './lib/components/object-marker/public_api';
 export * from './lib/components/object-attribute/public_api';
-
+export * from './lib/components/table/public_api';
+export * from './lib/components/dynamic-page/public_api';

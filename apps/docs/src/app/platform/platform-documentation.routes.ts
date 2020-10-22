@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
@@ -38,6 +39,13 @@ export const ROUTES: Routes = [
                     import(
                         './component-docs/platform-forms/platform-checkbox-group/platform-checkbox-group-docs.module'
                     ).then((m) => m.PlatformCheckboxGroupDocsModule)
+            },
+            {
+                path: 'dynamic-page',
+                loadChildren: () =>
+                    import('./component-docs/platform-dynamic-page/platform-dynamic-page.module').then(
+                        (m) => m.PlatformDynamicPageDocsModule
+                    )
             },
             {
                 path: 'link',
@@ -89,6 +97,13 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/platform-info-label/platform-info-label-docs-module').then(
                         (m) => m.PlatformInfoLabelDocsModule
+                    )
+            },
+            {
+                path: 'table',
+                loadChildren: () =>
+                    import('./component-docs/platform-table/platform-table.module').then(
+                        (m) => m.PlatformTableDocsModule
                     )
             },
             {
@@ -180,6 +195,24 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-thumbnail/platform-thumbnail-docs.module').then(
                         (m) => m.PlatformThumbnailDocsModule
                     )
+            },
+            {
+                path: 'action-list-item',
+                loadChildren: () =>
+                    import('./component-docs/platform-action-list-item/platform-action-list-item-docs.module').then((m) =>
+                        m.PlatformActionListItemDocsModule)
+            },
+            {
+                path: 'display-list-item',
+                loadChildren: () =>
+                    import('./component-docs/platform-display-list-item/platform-display-list-item-docs.module').then((m) =>
+                        m.PlatformDisplayListItemDocsModule)
+            },
+            {
+                path: 'object-list-item',
+                loadChildren: () =>
+                    import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then((m) =>
+                        m.PlatformObjectListItemDocsModule)
             }
         ]
     }

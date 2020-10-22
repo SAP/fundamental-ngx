@@ -4,7 +4,8 @@ import { Inject, Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { NestedItemInterface } from './nested-item/nested-item.interface';
 import { NestedListInterface } from './nested-list/nested-list.interface';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '../utils/functions';
+import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 /**
  * Nested list keyboard service, which uses MenuKeyboardService, to deal with ArrowUp, ArrowDown, Space, Enter.
@@ -71,12 +72,12 @@ export class NestedListKeyboardService {
     private _handleKeyDown(keyboardEvent: KeyboardEvent, index: number, items: NestedItemInterface[]): void {
         const item: NestedItemInterface = items[index];
 
-        if (KeyUtil.isKey(keyboardEvent, 'ArrowRight')) {
+        if (KeyUtil.isKeyCode(keyboardEvent, RIGHT_ARROW)) {
             if (!item.expanded && item.hasChildren) {
                 item.triggerOpen();
             }
             keyboardEvent.preventDefault();
-        } else if (KeyUtil.isKey(keyboardEvent, 'ArrowLeft')) {
+        } else if (KeyUtil.isKeyCode(keyboardEvent, LEFT_ARROW)) {
             if (item.expanded && item.hasChildren) {
                 item.triggerClose();
             }

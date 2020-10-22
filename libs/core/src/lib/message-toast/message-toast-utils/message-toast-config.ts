@@ -1,3 +1,4 @@
+/* tslint:disable:no-inferrable-types */
 import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
 
 /**
@@ -11,10 +12,10 @@ export class MessageToastConfig implements DynamicComponentConfig {
     data?: any;
 
     /** Duration of time *in milliseconds* that the message toast will be visible. Set to -1 for indefinite. */
-    duration = 3000;
+    duration?: number = 3000;
 
     /** Whether the message toast should stay visible if the cursor is over it. */
-    mousePersist = false;
+    mousePersist?: boolean = false;
 
     /** Aria label for the message toast component element. */
     ariaLabel?: string = null;
