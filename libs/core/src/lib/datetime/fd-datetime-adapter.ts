@@ -1,6 +1,6 @@
 import { Platform } from '@angular/cdk/platform';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
-import { DatetimeAdaptor } from './datetime-adaptor';
+import { DatetimeAdapter } from './datetime-adapter';
 
 export class FdDate {
     /**
@@ -26,7 +26,7 @@ export class FdDate {
 }
 
 @Injectable()
-export class FdDatetimeAdaptor extends DatetimeAdaptor<FdDate> {
+export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
     private readonly _fixYearsRangeIssue: boolean;
 
@@ -104,7 +104,7 @@ export class FdDatetimeAdaptor extends DatetimeAdaptor<FdDate> {
 
     today(): FdDate {
         const date = new Date();
-        return new FdDate(date.getFullYear(), date.getMonth(), date.getDate());
+        return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
     }
 
     parse(value: any): FdDate | null {
@@ -118,7 +118,7 @@ export class FdDatetimeAdaptor extends DatetimeAdaptor<FdDate> {
         }
         return Number.isNaN(date?.getDate)
             ? null
-            : this.createDate(date.getFullYear(), date.getMonth(), date.getDate());
+            : this.createDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
     }
 
     format(date: FdDate, displayFormat: Object): string {
@@ -137,7 +137,7 @@ export class FdDatetimeAdaptor extends DatetimeAdaptor<FdDate> {
 
         const dateTimeFormatter = new Intl.DateTimeFormat(this.locale, displayFormat);
         return this._stripDirectionalityCharacters(
-            this._format(dateTimeFormatter, new Date(date.year, date.month, date.day))
+            this._format(dateTimeFormatter, new Date(date.year, date.month - 1, date.day))
         );
     }
 
@@ -204,7 +204,7 @@ export class FdDatetimeAdaptor extends DatetimeAdaptor<FdDate> {
         if (args[0] instanceof FdDate) {
             const fdDate = args[0];
             year = fdDate.year;
-            month = fdDate.month;
+            month = fdDate.month - 1;
             date = fdDate.day;
         }
         if (typeof args[0] === 'number') {

@@ -1,5 +1,5 @@
 /**
- * Datetime Adaptor is an abstract class that should be implemented by each adopter.
+ * Datetime Adapter is an abstract class that should be implemented by each adopter.
  * It's used to encapsulate a date/time manipulations as result
  * others places that uses it remain date type agnostic.
  *
@@ -9,7 +9,7 @@
 
 import { Observable, Subject } from 'rxjs';
 
-export abstract class DatetimeAdaptor<D> {
+export abstract class DatetimeAdapter<D> {
     /** current locale */
     protected locale: string;
 
@@ -36,14 +36,14 @@ export abstract class DatetimeAdaptor<D> {
     abstract getYear(date: D): number;
 
     /**
-     * Gets the month component of the given date.
+     * Gets the month of the given date.
      * @param date The date to extract the month from.
      * @returns The month number (min 0, max 11).
      */
     abstract getMonth(date: D): number;
 
     /**
-     * Gets the date of the month component of the given date.
+     * Gets the day of month of the given date.
      * @param date The date to extract the date of the month from.
      * @returns The date number (min 1, max 31).
      */
@@ -137,7 +137,7 @@ export abstract class DatetimeAdaptor<D> {
     /**
      * Creates a date with the given year, month, and date.
      * @param year The full year of the date. (e.g. 1989).
-     * @param month The month of the date (0-indexed, 0 = January). Must be an integer 0 - 11.
+     * @param month The month of the date (1 = January). Must be an integer 1 - 12.
      * @param date The month date. Must be an integer 1 - length of the given month.
      * @returns The new date, or null if invalid.
      */
