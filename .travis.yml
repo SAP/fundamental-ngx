@@ -23,6 +23,7 @@ jobs:
 
   - stage: "Sauce Labs Core unit tests"
     name: Sauce Labs - Core unit tests
+    if: type = pull_request
     env:
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
@@ -31,6 +32,7 @@ jobs:
 
   - stage: "Sauce Labs Platform unit tests"
     name: Sauce Labs - Platform unit tests
+    if: type = pull_request
     env:
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
