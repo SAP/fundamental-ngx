@@ -34,7 +34,7 @@
                      (keydown)="onKeyDown($event)"
                 ></div>
                 <div #rangeHandle2
-                    class="fd-slider__handle"
+                     class="fd-slider__handle"
                      tabindex="0"
                      role="slider"
                      aria-label="slider"
@@ -48,22 +48,25 @@
             </ng-container>
         </div>
         <div class="fd-slider__tick-wrapper">
-            <div class="fd-slider__ticks" (click)="onTrackClick($event)">
+            <div class="fd-slider__ticks" (click)="onTrackClick($event)" #tickMarksContainer>
                 <ng-container *ngIf="showTicks">
-                    <div
-                        *ngFor="let tick of _tickMarks"
-                        class="fd-slider__tick"
-                        [attr.data-val]="tick.value"
-                        [class.fd-slider__tick--in-range]="
+                    <ng-container *ngFor="let tick of _tickMarks; let first = first; let last = last;">
+                        <div
+                            [style.visibility]="(first || last ||_isEnoughSpaceForTickMarks) ? '' : 'hidden'"
+                            class="fd-slider__tick"
+                            [attr.data-val]="tick.value"
+                            [class.fd-slider__tick--in-range]="
                             !hideProgressBar &&
                             (_isRange ? (tick.value >= this.value[0] && tick.value <= this.value[1]) : tick.value <= value)
                         "
-                    ></div>
+                        ></div>
+                    </ng-container>
                 </ng-container>
             </div>
-            <div class="fd-slider__labels" *ngIf="showTicks && showTicksLabels">
+            <div class="fd-slider__labels" #tickLabelsContainer *ngIf="showTicks && showTicksLabels">
                 <div
-                    *ngFor="let tick of _tickMarks"
+                    *ngFor="let tick of _tickMarks; let i = index"
+                    [style.visibility]="tick.isLabelHidden ? 'hidden' : ''"
                     class="fd-slider__label"
                 >{{ tick.value }}</div>
             </div>
