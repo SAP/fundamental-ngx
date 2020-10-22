@@ -10,8 +10,8 @@
     </button>
 </fd-segmented-button>
 
-<div (resized)="onResized()" style="padding: 1rem; overflow: auto;">
-    <fd-fixed-card-layout [dragStartDelay]="300">
+<div style="padding: 1rem; overflow: auto;">
+    <fd-fixed-card-layout>
         <ng-container *ngIf="card1Visibility">
             <fd-card *fdCardDef>
                 <fd-card-header>

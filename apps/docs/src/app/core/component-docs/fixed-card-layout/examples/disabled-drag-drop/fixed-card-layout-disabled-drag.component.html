@@ -2,8 +2,8 @@
     <button fd-button (click)="changeDragBehaviour()">{{ dragDisabled ? 'Enable' : 'Disable' }} Drag</button>
 </div>
 
-<div (resized)="onResized()" style="padding: 1rem; overflow: auto;">
-    <fd-fixed-card-layout [disableDragDrop]="dragDisabled" [dragStartDelay]="300">
+<div style="padding: 1rem; overflow: auto;">
+    <fd-fixed-card-layout [disableDragDrop]="dragDisabled">
         <fd-card *fdCardDef>
             <fd-card-header>
                 <h2 fd-card-title>Card Title</h2>
