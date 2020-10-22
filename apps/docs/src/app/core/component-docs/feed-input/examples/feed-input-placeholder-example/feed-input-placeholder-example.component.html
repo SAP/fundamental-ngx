@@ -1,0 +1,26 @@
+<fd-feed-input
+    aria-label="Feed input example">
+
+    <fd-avatar
+        class="fd-feed-input__thumb"
+        [placeholder]="true"
+        glyph="person-placeholder"
+        size="s"
+        role="img"
+        aria-label="John Doe"
+        title="John Doe"></fd-avatar>
+
+    <textarea
+        fd-form-control
+        fdFeedInputTextarea
+        placeholder="Post something here"
+        aria-label="Feed message"></textarea>
+
+    <button
+        fdFeedInputButton
+        aria-label="Send"
+        title="Send">
+        <i role="presentation" class="sap-icon--feeder-arrow"></i>
+    </button>
+
+</fd-feed-input>

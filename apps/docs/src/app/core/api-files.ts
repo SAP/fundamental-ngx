@@ -63,6 +63,7 @@ export const API_FILES = {
     checkbox: ['CheckboxComponent'],
     datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
     datetimePicker: ['DatetimePickerComponent', 'FdDateTime', 'DateTimeFormatParser', 'DateTimeFormatParserDefault'],
+    feedInput: ['FeedInputComponent'],
     fileInput: ['FileInputComponent', 'FileSelectDirective', 'FileDragndropDirective'],
     fileUploader: [
         'FileUploaderComponent',
