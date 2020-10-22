@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.26...v0.23.0-rc.27) (2020-10-22)
+
+
+### Bug Fixes
+
+* (Core) add optional typing for class properties ([#3658](https://github.com/SAP/fundamental-ngx/issues/3658)) ([e9f1b28](https://github.com/SAP/fundamental-ngx/commit/e9f1b282acbd92e63b3f417788c21bf5ac739544))
+
 ## [0.23.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.25...v0.23.0-rc.26) (2020-10-22)
 
 ## [0.23.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.24...v0.23.0-rc.25) (2020-10-22)
