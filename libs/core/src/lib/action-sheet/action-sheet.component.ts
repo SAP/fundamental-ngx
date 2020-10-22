@@ -13,8 +13,13 @@ import {
     OnDestroy,
     Optional,
     Output,
-    ViewEncapsulation, TemplateRef, ContentChildren, ComponentRef
+    ViewEncapsulation,
+    TemplateRef,
+    ComponentRef,
+    ViewChildren,
+    QueryList
 } from '@angular/core';
+import { PopoverComponent } from '../popover/popover.component';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
@@ -79,8 +84,13 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @ViewChild('actionSheetBodyTemplate')
     actionSheetBodyTemplate: TemplateRef<any>;
 
+    /** @hidden need to use ViewChildren as ngIf prevents use of ViewChild */
+    @ViewChildren(PopoverComponent)
+    popoverComponents: QueryList<PopoverComponent>;
+
     @ContentChild(ActionSheetControlComponent) actionSheetControl;
     @ContentChild(ActionSheetMobileComponent) actionSheetMobile;
+
 
     @Output()
     actionSheetMobileDynamic: ComponentRef<ActionSheetMobileComponent>;
@@ -108,13 +118,20 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._listenOnItemsChange();
         this.actionSheetControl.clicked.subscribe((isOpen) => {
             this.isOpenChangeHandle(isOpen);
-        })
+        });
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.mobile) {
             this._setUpMobileMode();
+        }
+        if (this.popoverComponents && this.popoverComponents.first) {
+            this.popoverComponents.first.directiveRef.loaded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+                setTimeout(() => {
+                    this.setItemActive(0);
+                });
+            });
         }
     }
 
@@ -130,7 +147,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         if (this.mobile) {
             this.actionSheetMobileDynamic.instance.open = this.open;
         }
-
     }
 
     /** @hidden */
