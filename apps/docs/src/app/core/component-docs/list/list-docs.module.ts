@@ -32,7 +32,10 @@ import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/l
 import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
 import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
-import { ListBylineExampleComponent } from './examples/list-byline-example/list-byline-example.component';
+import { ListBylineStandardExampleComponent } from './examples/list-byline-standard-example/list-byline-standard-example.component';
+import { ListBylineNavigationExampleComponent } from './examples/list-byline-navigation-example/list-byline-navigation-example.component';
+import { ListBylineBorderlessExampleComponent } from './examples/list-byline-borderless-example/list-byline-borderless-example.component';
+import { ListBylineSelectionExampleComponent } from './examples/list-byline-selection-example/list-byline-selection-example.component';
 
 const routes: Routes = [
     {
@@ -78,7 +81,10 @@ const routes: Routes = [
         ListKeyboardExampleComponent,
         ListNavIndicatorExampleComponent,
         ListDataExampleComponent,
-        ListBylineExampleComponent
+        ListBylineStandardExampleComponent,
+        ListBylineNavigationExampleComponent,
+        ListBylineBorderlessExampleComponent,
+        ListBylineSelectionExampleComponent
     ]
 })
 export class ListDocsModule {}

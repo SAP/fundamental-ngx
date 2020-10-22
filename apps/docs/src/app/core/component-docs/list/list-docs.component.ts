@@ -20,7 +20,11 @@ import * as listFilterH from '!raw-loader!./examples/list-data-example/list-data
 import * as listSortPipe from '!raw-loader!../../../documentation/core-helpers/pipes/sort.pipe.ts';
 import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
 import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
-import * as bylineSrcHtml from '!raw-loader!./examples/list-byline-example/list-byline-example.component.html';
+import * as bylineSrcHtml from '!raw-loader!./examples/list-byline-standard-example/list-byline-standard-example.component.html';
+import * as bylineNavigationSrcHtml from '!raw-loader!./examples/list-byline-navigation-example/list-byline-navigation-example.component.html';
+import * as bylineBorderlessSrcHtml from '!raw-loader!./examples/list-byline-borderless-example/list-byline-borderless-example.component.html';
+import * as bylineSelectionSrcHtml from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.html';
+import * as bylineSelectionSrcTs from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -181,7 +185,37 @@ export class ListDocsComponent {
         {
             language: 'html',
             code: bylineSrcHtml,
-            fileName: 'list-byline-example'
+            fileName: 'list-byline-standard-example'
+        }
+    ];
+
+    listBylineNavigation: ExampleFile[] = [
+        {
+            language: 'html',
+            code: bylineNavigationSrcHtml,
+            fileName: 'list-byline-navigation-example'
+        }
+    ];
+
+    listBylineBorderless: ExampleFile[] = [
+        {
+            language: 'html',
+            code: bylineBorderlessSrcHtml,
+            fileName: 'list-byline-borderless-example'
+        }
+    ];
+
+    listBylineSelection: ExampleFile[] = [
+        {
+            language: 'html',
+            code: bylineSelectionSrcHtml,
+            fileName: 'list-byline-selection-example'
+        },
+        {
+            language: 'typescript',
+            code: bylineSelectionSrcTs,
+            fileName: 'list-byline-selection-example',
+            component: 'ListBylineSelectionExampleComponent'
         }
     ];
 }

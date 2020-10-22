@@ -1,15 +1,14 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 @Directive({
-    selector: '[fdListByline], [fd-list-byline]'
+    selector: '[fdListByline], [fd-list-byline]',
+    host: {
+        class: 'fd-list__byline',
+        '[class.fd-list__byline--2-col]': 'twoCol === true',
+    }
 })
 export class ListBylineDirective {
-    /** @hidden */
-    @HostBinding('class.fd-list__byline')
-    fdListBylineClass = true;
-
     /** Whether or not this is a 2-column byline. */
     @Input()
-    @HostBinding('fd-list__byline--2-col')
     twoCol = false;
 }

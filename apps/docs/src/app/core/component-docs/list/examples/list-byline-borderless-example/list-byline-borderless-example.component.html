@@ -1,0 +1,25 @@
+<ul fd-list [byline]="true" [noBorder]="true">
+    <li fd-list-item>
+        <span fd-list-thumbnail><fd-icon glyph="activate"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-list-title>Title</div>
+            <div fd-list-byline>Byline Text</div>
+        </div>
+    </li>
+    <li fd-list-item>
+        <span fd-list-thumbnail><fd-icon glyph="employee"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-list-title>List item with no byline</div>
+        </div>
+    </li>
+    <li fd-list-item>
+        <span fd-list-thumbnail><fd-icon glyph="calendar"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-list-title>List Item With Two-Column Byline</div>
+            <div fd-list-byline [twoCol]="true">
+                <div fd-list-byline-left>First text item in Byline (Standard text item)</div>
+                <div fd-list-byline-right>Second text item in Byline (Can be semantic (Status) or not)</div>
+            </div>
+        </div>
+    </li>
+</ul>
