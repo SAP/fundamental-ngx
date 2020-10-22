@@ -10,7 +10,8 @@ import {
 } from '@angular/core';
 import { ProductSwitchItem } from './product-switch.item';
 import { FdDropEvent } from '../../utils/drag-and-drop/dnd-list/dnd-list.directive';
-import { KeyUtil } from '../../utils/public_api';
+import { KeyUtil } from '../../utils/functions';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'fd-product-switch-body',
@@ -79,14 +80,14 @@ export class ProductSwitchBodyComponent implements OnInit {
     keyDownHandle(event: KeyboardEvent): void {
         const target = <HTMLElement>event.target;
         const i = Array.from(target.parentElement.children).indexOf(target);
-        if (!KeyUtil.isKey(event, 'Tab')) {
+        if (!KeyUtil.isKeyCode(event, TAB)) {
             event.preventDefault();
         }
-        if (KeyUtil.isKey(event, ['Enter', ' '])) {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             target.click();
         } else if (!this.isListMode()) {
             this._handleNoListKeydown(event, target, i);
-        } else if (this.isListMode() && KeyUtil.isKey(event, ['ArrowDown', 'ArrowUp'])) {
+        } else if (this.isListMode() && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             this._handleListArrowUpDown(event, target);
         }
     }
@@ -112,11 +113,11 @@ export class ProductSwitchBodyComponent implements OnInit {
 
     /** @hidden */
     private _handleNoListKeydown(event: KeyboardEvent, target: HTMLElement, i: number): void {
-        if (KeyUtil.isKey(event, 'ArrowLeft') && target.previousElementSibling) {
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW) && target.previousElementSibling) {
             (<HTMLElement>target.previousElementSibling).focus();
-        } else if (KeyUtil.isKey(event, 'ArrowRight') && target.nextElementSibling) {
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW) && target.nextElementSibling) {
             (<HTMLElement>target.nextElementSibling).focus();
-        } else if (KeyUtil.isKey(event, ['ArrowDown', 'ArrowUp'])) {
+        } else if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             if (this.products.length >= 7) {
                 this._handleNoListMoreThanSeven(event, target, i);
             } else if (this.products.length < 7) {
@@ -127,12 +128,12 @@ export class ProductSwitchBodyComponent implements OnInit {
 
     /** @hidden */
     private _handleNoListMoreThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
-        if (KeyUtil.isKey(event, 'ArrowDown')) {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             if (target.parentElement.children[i + 4]) {
                 (<HTMLElement>target.parentElement.children[i + 4]).focus();
             }
         }
-        if (KeyUtil.isKey(event, 'ArrowUp')) {
+        if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             if (target.parentElement.children[i - 4]) {
                 (<HTMLElement>target.parentElement.children[i - 4]).focus();
             }
@@ -141,12 +142,12 @@ export class ProductSwitchBodyComponent implements OnInit {
 
     /** @hidden */
     private _handleNoListLessThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
-        if (KeyUtil.isKey(event, 'ArrowDown')) {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             if (target.parentElement.children[i + 3]) {
                 (<HTMLElement>target.parentElement.children[i + 3]).focus();
             }
         }
-        if (KeyUtil.isKey(event, 'ArrowUp')) {
+        if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             if (target.parentElement.children[i - 3]) {
                 (<HTMLElement>target.parentElement.children[i - 3]).focus();
             }
@@ -155,9 +156,9 @@ export class ProductSwitchBodyComponent implements OnInit {
 
     /** @hidden */
     private _handleListArrowUpDown(event: KeyboardEvent, target: HTMLElement): void {
-        if (this.isListMode() && KeyUtil.isKey(event, 'ArrowDown') && target.nextElementSibling) {
+        if (this.isListMode() && KeyUtil.isKeyCode(event, DOWN_ARROW) && target.nextElementSibling) {
             (<HTMLElement>target.nextElementSibling).focus();
-        } else if (this.isListMode() && KeyUtil.isKey(event, 'ArrowUp') && target.previousElementSibling) {
+        } else if (this.isListMode() && KeyUtil.isKeyCode(event, UP_ARROW) && target.previousElementSibling) {
             (<HTMLElement>target.previousElementSibling).focus();
         }
     }

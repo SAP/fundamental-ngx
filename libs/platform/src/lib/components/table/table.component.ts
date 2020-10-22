@@ -17,6 +17,7 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { isObservable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -86,6 +87,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     @Input()
     set dataSource(value: FdpTableDataSource<any>) {
         if (value) {
+            this._reset();
             this._initializeDS(value);
         }
     }
@@ -254,7 +256,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         event.stopPropagation();
         const click = new MouseEvent('click');
 
-        if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.target.dispatchEvent(click);
             event.preventDefault();
         }
@@ -284,6 +286,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _reset(): void {
+        this.checkedAll = false;
         this._checked = [];
         this._unchecked = [];
     }

@@ -2,6 +2,54 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.29...v0.23.0-rc.30) (2020-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* In Bar component the Input property cosy was renamed to cozy for consistency with other components and Fiori 3 naming. Affected components: DateTime Picker, Dialog (footer and header).
+
+### Bug Fixes
+
+* (Core) unify the naming of the cozy property ([#3662](https://github.com/SAP/fundamental-ngx/issues/3662)) ([2ffd49d](https://github.com/SAP/fundamental-ngx/commit/2ffd49d3db4079a49709a68fcd37a77ee6dceabc))
+
+## [0.23.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.28...v0.23.0-rc.29) (2020-10-22)
+
+## [0.23.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.27...v0.23.0-rc.28) (2020-10-22)
+
+## [0.23.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.26...v0.23.0-rc.27) (2020-10-22)
+
+
+### Bug Fixes
+
+* (Core) add optional typing for class properties ([#3658](https://github.com/SAP/fundamental-ngx/issues/3658)) ([e9f1b28](https://github.com/SAP/fundamental-ngx/commit/e9f1b282acbd92e63b3f417788c21bf5ac739544))
+
+## [0.23.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.25...v0.23.0-rc.26) (2020-10-22)
+
+## [0.23.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.24...v0.23.0-rc.25) (2020-10-22)
+
+## [0.23.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.23...v0.23.0-rc.24) (2020-10-21)
+
+
+### Bug Fixes
+
+* (Core) Unify KeyUtil usages ([#3648](https://github.com/SAP/fundamental-ngx/issues/3648)) ([cc25ed7](https://github.com/SAP/fundamental-ngx/commit/cc25ed75698a3e3e464019bcd2fb29bfe342a712))
+* (Platform) keyboard handling in table ([#3656](https://github.com/SAP/fundamental-ngx/issues/3656)) ([960528a](https://github.com/SAP/fundamental-ngx/commit/960528ab81ddf1aecdd575c0323f30be43147f43))
+
+## [0.23.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.22...v0.23.0-rc.23) (2020-10-21)
+
+
+### Features
+
+* (Platform) introduce Dynamic Page Layout component ([#3515](https://github.com/SAP/fundamental-ngx/issues/3515)) ([d66239d](https://github.com/SAP/fundamental-ngx/commit/d66239dd4966b2e727fffa6e3e57d3fcb859df12))
+
+## [0.23.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.21...v0.23.0-rc.22) (2020-10-20)
+
+
+### Features
+
+* (Platform) introduce new Table component  ([#3597](https://github.com/SAP/fundamental-ngx/issues/3597)) ([1326d3b](https://github.com/SAP/fundamental-ngx/commit/1326d3b342e1f5d86f40ba9d3ece93f4d7b2287d))
+
 ## [0.23.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.20...v0.23.0-rc.21) (2020-10-20)
 
 
