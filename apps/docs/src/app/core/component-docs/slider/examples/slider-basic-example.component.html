@@ -1,4 +1,4 @@
-<div style="width: 50%">
+<div [style.width.%]="width">
     <fd-slider [(ngModel)]="value"
                [min]="min"
                [max]="max"
@@ -20,6 +20,7 @@
         Dirty: {{ model.dirty }}<br><br><br>
         </pre>
     <div>
+        width - <input type="number" [(ngModel)]="width"><br>
         min - <input type="number" [(ngModel)]="min"><br>
         max - <input type="number" [(ngModel)]="max"><br>
         step - <input type="number" [(ngModel)]="step"><br>
