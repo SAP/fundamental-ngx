@@ -3,7 +3,7 @@ import {
     NgZone
 } from '@angular/core';
 import { ThemeManagerService } from './theming/theme-manager.service';
-import { ShellBarService } from './extensions/shell-bar.service';
+import { ShellBarService } from './plugins/shell-bar.service';
 import { MessagingTopics } from './events/topics.service';
 import { EventType } from './events/message-bus';
 import { MessagingService } from './events/messaging.service';
@@ -20,7 +20,6 @@ export class AppShellProviderService {
         /**
          * Create AppShell Level topics
          */
-        // todo_valorkin
         this.topics.define({
             name: 'app:event',
             eventType: EventType.ONLY_LAST,

@@ -14,7 +14,7 @@ import {
     SafeResourceUrl
 } from '@angular/platform-browser';
 import { AppShellProviderService } from '../../../api/app-shell-provider.service';
-import { ShellBarService } from '../../../api/extensions/shell-bar.service';
+import { ShellBarService } from '../../../api/plugins/shell-bar.service';
 import { IS_APPSHELL_STANDALONE } from '../../../tokens';
 
 

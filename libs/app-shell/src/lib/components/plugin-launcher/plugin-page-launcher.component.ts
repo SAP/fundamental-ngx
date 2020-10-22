@@ -5,8 +5,7 @@ import {
     OnInit
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LookupService } from '../../api/extensions/lookup/lookup.service';
-import { DescriptorsModule, PluginDescriptor } from '../../api/extensions/lookup/plugin-descriptor.model';
+import { LookupService } from '../../api/plugins/lookup/lookup.service';
 
 
 @Component({

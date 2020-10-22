@@ -1,19 +1,38 @@
-import { APP_INITIALIZER, ErrorHandler, Injector, ModuleWithProviders, NgModule, Optional } from '@angular/core';
+import {
+    APP_INITIALIZER,
+    ErrorHandler,
+    Injector,
+    ModuleWithProviders,
+    NgModule,
+    Optional
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppShellPageModule } from './components/app-shell-page/app-shell-page.module';
 import { MessagingModule } from './api/events/messaging.module';
 import { PluginLauncherModule } from './components/plugin-launcher/plugin-launcher.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { PluginManagerService } from './api/extensions/plugin-manager.service';
-import { PluginDescriptor } from './api/extensions/lookup/plugin-descriptor.model';
-import { ShellBarService } from './api/extensions/shell-bar.service';
+import {
+    HttpClient,
+    HttpClientModule
+} from '@angular/common/http';
+import { PluginManagerService } from './api/plugins/plugin-manager.service';
+import { PluginDescriptor } from './api/plugins/lookup/plugin-descriptor.model';
+import { ShellBarService } from './api/plugins/shell-bar.service';
 import { MessagingService } from './api/events/messaging.service';
 
-import { CONFIG_URL, IS_APPSHELL_STANDALONE } from './tokens';
+import {
+    CONFIG_URL,
+    IS_APPSHELL_STANDALONE
+} from './tokens';
 import { MessagingTopics } from './api/events/topics.service';
-import { ERROR_FORMATTER, ErrorFormatter } from './api/error/error-formatter';
-import { ConsoleErrorNotifier, ERROR_NOTIFIERS, ErrorNotifier } from './api/error/error-notifier';
+import {
+    ERROR_FORMATTER,
+    ErrorFormatter
+} from './api/error/error-formatter';
+import {
+    ConsoleErrorNotifier,
+    ERROR_NOTIFIERS,
+    ErrorNotifier
+} from './api/error/error-notifier';
 import { DefaultErrorHandlerService } from './api/error/default-error-handler.service';
 
 export type Constructor<T> = new (...args: any[]) => T

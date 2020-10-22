@@ -4,7 +4,6 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
-    ComponentRef,
     ElementRef,
     Injector,
     Input,
@@ -14,12 +13,17 @@ import {
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
-import { loadRemoteModule } from '../../api/extensions/federation-utils';
-import { AngularIvyComponentDescriptor, PluginDescriptor } from '../../api/extensions/lookup/plugin-descriptor.model';
-import { LookupService } from '../../api/extensions/lookup/lookup.service';
-import { PluginManagerService } from '../../api/extensions/plugin-manager.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { isPluginComponent } from '../../api/extensions/component/plugin-component';
+import { loadRemoteModule } from '../../api/plugins/federation-utils';
+import {
+    AngularIvyComponentDescriptor,
+    PluginDescriptor
+} from '../../api/plugins/lookup/plugin-descriptor.model';
+import { LookupService } from '../../api/plugins/lookup/lookup.service';
+import { PluginManagerService } from '../../api/plugins/plugin-manager.service';
+import {
+    DomSanitizer,
+    SafeResourceUrl
+} from '@angular/platform-browser';
 
 @Component({
     selector: 'fds-plugin-launcher',
@@ -118,14 +122,10 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         if (_module.type === 'angular-ivy-component' && this.ngContentView) {
             this.ngContentView.clear();
             const factory = this.cfr.resolveComponentFactory(_component);
-            const componentRef: ComponentRef<any>  = this.ngContentView
-                .createComponent(factory, null, this._injector);
-
-            if (isPluginComponent(componentRef.instance)) {
-                this._pluginMgr.register(descriptor, componentRef.instance);
-            }
+            this.ngContentView.createComponent(factory, null, this._injector);
             this._cd.detectChanges();
         }
+        this._pluginMgr.register(descriptor);
     }
 
     private updateAttrs(newValue: Record<string, string | number>, oldValue?: Record<string, string>): void {

@@ -3,21 +3,12 @@ import {
     OnDestroy
 } from '@angular/core';
 import { LookupService } from './lookup/lookup.service';
-import {
-    PluginComponent,
-    PluginContext
-} from './component/plugin-component';
+
 import { MessagingService } from '../../api/events/messaging.service';
-import {
-    Listener,
-    PluginConfiguration
-} from './component/plugin-configuration.model';
 import { PluginDescriptor } from './lookup/plugin-descriptor.model';
 import {
     EventType,
-    MapMessage,
-    Message,
-    TopicSubscriber
+    MapMessage
 } from '../events/message-bus';
 import { MessagingTopics } from '../../api/events/topics.service';
 
@@ -89,33 +80,14 @@ export class PluginManagerService implements OnDestroy {
 
     loadConfiguration(plugins: Array<Partial<PluginDescriptor>>): void {
         this.messageBus.publish(TOPIC_SYSTEM_PLUGIN, createMessage('configuration', 'start'));
-
         plugins.forEach(c => this.lookupService.addPlugin(c));
-
         this.messageBus.publish(TOPIC_SYSTEM_PLUGIN, createMessage('configuration', 'end'));
     }
 
-    /**
-     * Todo: Right now we create subscribers but we dont release them right away but leave this up to the MessageBus to
-     * clean up everything. Should check when registering a plugin if we already did subscription for it and do clean
-     * up before continuing
-     *
-     */
-    register(descriptor: Partial<PluginDescriptor>, pluginComponent?: PluginComponent): void {
-        // todo: this can be undefined too .getName()
-        const name = descriptor ? descriptor.name : pluginComponent.getConfiguration().getName();
 
+    register(descriptor: Partial<PluginDescriptor>): void {
         this.messageBus.publish(TOPIC_SYSTEM_PLUGIN, createMessage('register', 'start', name));
-
-        let configuration: Partial<PluginConfiguration>;
-        if (pluginComponent) {
-            configuration = pluginComponent.getConfiguration();
-            this.doConfigureListeners(configuration, pluginComponent);
-
-            const pluginContext = this.createPluginContext();
-            pluginComponent.initialize(pluginContext);
-        }
-        this.registry.set(name, new RegistrationEntry(descriptor, configuration, pluginComponent));
+        this.registry.set(descriptor.name, new RegistrationEntry(descriptor));
         this.messageBus.publish(TOPIC_SYSTEM_PLUGIN, createMessage('register', 'end', name));
     }
 
@@ -125,24 +97,6 @@ export class PluginManagerService implements OnDestroy {
         this.registry.clear();
     }
 
-    createPluginContext(): PluginContext {
-        return new PluginContext(this.messageBus);
-    }
-
-
-    private doConfigureListeners(configuration: Partial<PluginConfiguration>,
-                                 pluginComponent?: PluginComponent): void {
-        if (!configuration.addListeners || configuration.addListeners().length === 0) {
-            return;
-        }
-        configuration.addListeners().forEach((listener: Listener) => {
-            if (this.topics.has(listener.topic)) {
-                const topic = this.topics.get(listener.topic);
-                this.messageBus.subscribe(topic.name, (m) => listener.onMessage(m),
-                    listener.messageSelector);
-            }
-        });
-    }
 
 }
 
@@ -158,7 +112,9 @@ function createMessage(type: string, status: string, pluginName?: string): MapMe
 }
 
 export class RegistrationEntry {
-    constructor(public descriptor: Partial<PluginDescriptor>, public configuration: Partial<PluginConfiguration>,
-                public pluginComponent: PluginComponent, public subscribers?: Array<TopicSubscriber<Message>>) {
+    timestamp: number;
+
+    constructor(public descriptor: Partial<PluginDescriptor>) {
+        this.timestamp = Date.now();
     }
 }
