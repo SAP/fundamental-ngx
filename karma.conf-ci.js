@@ -76,7 +76,7 @@ module.exports = function (config) {
             reports: ['html', 'lcovonly'],
             fixWebpackSourcePaths: true
         },
-        reporters: ['spec', 'progress', 'saucelabs','kjhtml'],
+        reporters: ['spec', 'dots', 'saucelabs','kjhtml'],
         port: 9876,
         colors: true,
         sauceLabs: {
@@ -100,7 +100,7 @@ module.exports = function (config) {
                 jobUrl
             }
         },
-        logLevel: config.LOG_WARN,
+        logLevel: config.LOG_ERROR,
         autoWatch: false,
         browserDisconnectTimeout : 20000, // default 2000
         browserDisconnectTolerance : 1, // default 0
