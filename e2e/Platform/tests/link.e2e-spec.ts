@@ -34,7 +34,7 @@ describe('Link component test suite', () => {
              return linkPage.iconLink.getCssValue('text-decoration');
          });
 
-        await checkIfDisabled(linkPage.iconLink, 'false');
+        await checkIfDisabled(linkPage.iconLink, 'ng-reflect-disabled', 'false');
         await checkLinkData(await linkPage.iconLink);
         await checkLinkHover(iconLinkHoverState);
         expect(iconLinkAltText).toBe(defaultLink_alt_text);
@@ -52,7 +52,7 @@ describe('Link component test suite', () => {
         linksArray.forEach(async (element, index) => {
             if (index !== 8) {  // after fix: https://github.com/SAP/fundamental-ngx/issues/3633 need to remove if statement
                 await expect(await element.getAttribute('aria-label')).toBe(standardLinksAltTextArray[index]);
-                await checkIfDisabled(element, 'false');
+                await checkIfDisabled(element, 'ng-reflect-disabled', 'false');
                 await checkLinkData(await element);
             }
         });
@@ -64,7 +64,7 @@ describe('Link component test suite', () => {
             return linkPage.emphasizedLink.getCssValue('text-decoration')
         });
 
-        await checkIfDisabled(linkPage.emphasizedLink, 'false');
+        await checkIfDisabled(linkPage.emphasizedLink, 'ng-reflect-disabled', 'false');
         expect(await getValueOfAttribute(await linkPage.emphasizedLink, 'class')).toContain('emphasized');
         await checkLinkData(await linkPage.emphasizedLink);
         await checkLinkHover(emphasizedLinkHoverState);
@@ -74,7 +74,7 @@ describe('Link component test suite', () => {
     it('should check disabled link', async () => {
         const disabledLinkAltText = await getValueOfAttribute(await linkPage.disabledLink, 'aria-label');
 
-        await checkIfDisabled(linkPage.disabledLink, 'true');
+        await checkIfDisabled(linkPage.disabledLink, 'ng-reflect-disabled', 'true');
         expect(await getValueOfAttribute(await linkPage.disabledLink, 'class')).toContain('disabled');
         await checkLinkData(await linkPage.disabledLink);
         expect(disabledLinkAltText).toBe(defaultLink_alt_text);
@@ -83,7 +83,7 @@ describe('Link component test suite', () => {
     it('should check disabled emphasized link', async () => {
         const disabledEmphasizedLinkAltText = await getValueOfAttribute(await linkPage.emphasizedDisabledLink, 'aria-label');
 
-        await checkIfDisabled(linkPage.emphasizedDisabledLink, 'true');
+        await checkIfDisabled(linkPage.emphasizedDisabledLink, 'ng-reflect-disabled', 'true');
         expect(await getValueOfAttribute(await linkPage.emphasizedDisabledLink, 'class')).toContain('disabled', 'emphasized');
         await checkLinkData(await linkPage.emphasizedDisabledLink);
         expect(disabledEmphasizedLinkAltText).toBe(defaultLink_alt_text);
@@ -95,7 +95,7 @@ describe('Link component test suite', () => {
             return linkPage.invertedLink.getCssValue('text-decoration')
         });
 
-        await checkIfDisabled(linkPage.invertedLink, 'false');
+        await checkIfDisabled(linkPage.invertedLink, 'ng-reflect-disabled', 'false');
         expect(await getValueOfAttribute(await linkPage.invertedLink, 'class')).toContain('inverted');
         await checkLinkData(await linkPage.invertedLink);
         await checkLinkHover(invertedLinkHoverState);
@@ -108,7 +108,7 @@ describe('Link component test suite', () => {
             return linkPage.truncatedLink.getCssValue('text-decoration')
         });
 
-        await checkIfDisabled(linkPage.truncatedLink, 'false');
+        await checkIfDisabled(linkPage.truncatedLink, 'ng-reflect-disabled', 'false');
         expect(await getValueOfAttribute(await linkPage.truncatedLink, 'class')).toContain('truncate');
         await checkLinkData(await linkPage.truncatedLink);
         await checkLinkHover(truncatedLinkHoverState);

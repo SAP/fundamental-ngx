@@ -73,3 +73,6 @@ export async function checkLinkTargetDestination(element, site: string, angular:
     await element.click();
     return waitForUrl(site);
 }
+export async function clickCheckbox(element: ElementFinder) {
+    await browser.actions().mouseMove(await element).click().perform();
+}
