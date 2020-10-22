@@ -1,4 +1,5 @@
 export * from './events/message-bus';
+export * from './events/default-topics';
 export * from './events/messaging.config';
 export * from './events/messaging.module';
 export * from './events/messaging.service';

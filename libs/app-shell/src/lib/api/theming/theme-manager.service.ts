@@ -1,12 +1,8 @@
-import {
-    EventType,
-    MapMessage
-} from '../events/message-bus';
+import { MapMessage } from '../events/message-bus';
 import { Injectable } from '@angular/core';
 import { MessagingService } from '../events/messaging.service';
 import { MessagingTopics } from '../../api/events/topics.service';
-
-const TOPIC_THEME_CHANGE = 'theme:change';
+import { TOPIC_THEME_CHANGE } from '../../api/events/default-topics';
 
 
 /**
@@ -16,11 +12,6 @@ const TOPIC_THEME_CHANGE = 'theme:change';
 export class ThemeManagerService {
 
     constructor(private messageBus: MessagingService, private topics: MessagingTopics) {
-        this.topics.define({
-            name: TOPIC_THEME_CHANGE,
-            eventType: EventType.ONLY_LAST,
-            shared: true
-        });
     }
 
     themeChanged(id: string, name: string): void {

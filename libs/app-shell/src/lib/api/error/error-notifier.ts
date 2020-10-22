@@ -1,6 +1,6 @@
 import {
     Injectable,
-    InjectionToken, Injector, Optional
+    InjectionToken
 } from '@angular/core';
 
 export const ERROR_NOTIFIERS = new InjectionToken<ErrorNotifier>('ERROR_NOTIFIERS');

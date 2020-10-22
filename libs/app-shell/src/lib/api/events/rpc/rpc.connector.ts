@@ -1,6 +1,6 @@
 // todo: move to app-shell
 import * as bus from 'framebus';
-import {RpcProvider} from 'worker-rpc';
+import { RpcProvider } from 'worker-rpc';
 
 const rpcChannel = 'rpc-action';
 export const rpcProvider = new RpcProvider(

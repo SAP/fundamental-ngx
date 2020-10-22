@@ -2,10 +2,10 @@ import {
     ErrorHandler,
     Inject,
     Injectable,
-    OnDestroy, Optional
+    OnDestroy,
+    Optional
 } from '@angular/core';
 import {
-    EventType,
     Message,
     TopicSubscriber
 } from '../events/message-bus';
@@ -20,8 +20,7 @@ import {
     ERROR_NOTIFIERS,
     ErrorNotifier
 } from './error-notifier';
-
-const TOPIC_ERROR_EVENT = 'error:event';
+import { TOPIC_ERROR_EVENT } from '../../api/events/default-topics';
 
 
 /**
@@ -47,12 +46,6 @@ export class DefaultErrorHandlerService implements ErrorHandler, OnDestroy {
     constructor(private messaging: MessagingService, private topics: MessagingTopics,
                 @Inject(ERROR_FORMATTER) private formatter: ErrorFormatter,
                 @Inject(ERROR_NOTIFIERS) @Optional() private notifiers: ErrorNotifier[]) {
-
-        this.topics.define({
-            name: TOPIC_ERROR_EVENT,
-            eventType: EventType.DURABLE,
-            shared: true
-        });
 
         this.initializeMessagingErrors();
     }

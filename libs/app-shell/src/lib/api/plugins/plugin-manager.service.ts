@@ -6,13 +6,9 @@ import { LookupService } from './lookup/lookup.service';
 
 import { MessagingService } from '../../api/events/messaging.service';
 import { PluginDescriptor } from './lookup/plugin-descriptor.model';
-import {
-    EventType,
-    MapMessage
-} from '../events/message-bus';
+import { MapMessage } from '../events/message-bus';
 import { MessagingTopics } from '../../api/events/topics.service';
-
-const TOPIC_SYSTEM_PLUGIN = 'system:plugin';
+import { TOPIC_SYSTEM_PLUGIN } from '../../api/events/default-topics';
 
 /**
  * Plugin is our AppShell Extensions
@@ -71,11 +67,6 @@ export class PluginManagerService implements OnDestroy {
 
     constructor(private lookupService: LookupService, private messageBus: MessagingService,
                 private topics: MessagingTopics) {
-        this.topics.define({
-            name: TOPIC_SYSTEM_PLUGIN,
-            eventType: EventType.DEFAULT,
-            shared: true
-        });
     }
 
     loadConfiguration(plugins: Array<Partial<PluginDescriptor>>): void {
