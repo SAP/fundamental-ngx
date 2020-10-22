@@ -66,7 +66,7 @@ export class InputGroupComponent implements ControlValueAccessor {
 
     /** Whether the input group is inline. */
     @Input()
-    inline: boolean;
+    inline = false;
 
     /** Placeholder for the input group. */
     @Input()
@@ -166,13 +166,13 @@ export class InputGroupComponent implements ControlValueAccessor {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
     setInShellbar(value: boolean): void {
         this.inShellbar = value;
-        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
