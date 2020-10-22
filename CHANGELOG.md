@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.29...v0.23.0-rc.30) (2020-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* In Bar component the Input property cosy was renamed to cozy for consistency with other components and Fiori 3 naming. Affected components: DateTime Picker, Dialog (footer and header).
+
+### Bug Fixes
+
+* (Core) unify the naming of the cozy property ([#3662](https://github.com/SAP/fundamental-ngx/issues/3662)) ([2ffd49d](https://github.com/SAP/fundamental-ngx/commit/2ffd49d3db4079a49709a68fcd37a77ee6dceabc))
+
 ## [0.23.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.28...v0.23.0-rc.29) (2020-10-22)
 
 ## [0.23.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.27...v0.23.0-rc.28) (2020-10-22)
