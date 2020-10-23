@@ -1,6 +1,5 @@
 @import '~fundamental-styles/dist/wizard';
 .fd-wizard__label,
 .fd-wizard__optional-text {
-    display: inline-block;
-    line-height: 1rem;
+    display: flex;
 }
