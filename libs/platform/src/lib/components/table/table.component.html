@@ -1,7 +1,16 @@
 <div #tableContainer>
     <ng-container *ngIf="_rows && _rows.length; else emptyTableTemplate">
         <ng-container *ngIf="tableToolbarComponent">
-            <ng-container *ngTemplateOutlet="tableToolbarComponent.contentTemplateRef; context: { counter: _rows.length, size: contentDensity }"></ng-container>
+            <ng-container
+                [ngTemplateOutlet]="tableToolbarComponent.contentTemplateRef"
+                [ngTemplateOutletContext]="{
+                    counter: _rows.length,
+                    size: contentDensity,
+                    isSortable: _isSortable,
+                    isFilterable: _isFilterable,
+                    isGroupable: _isGroupable
+                }"
+            ></ng-container>
         </ng-container>
 
         <table fd-table>
@@ -18,21 +27,89 @@
                             (keydown)="onKeydown($event)"
                         ></fd-checkbox>
                     </th>
-                    <th fd-table-cell
-                        [style.textAlign]="column.align"
-                        *ngFor="let column of columns">
-                        <ng-container *ngIf="column?.fdpHeaderCellDef?.templateRef; else defaultTableHeaderCellTemplate">
-                            <ng-container *ngTemplateOutlet="column.fdpHeaderCellDef.templateRef">
+
+                    <ng-container *ngFor="let column of columns; let i = index">
+                        <th fd-table-cell
+                            scope="col"
+                            [style.textAlign]="column.align">
+
+                            <fd-popover *ngIf="doesColumnHasPopover(column)"
+                                        [(isOpen)]="popoverOpen && popoverColumnName === column.name"
+                                        style="width: 100%"
+                                        fd-table-popover
+                                        [noArrow]="true">
+                                <fd-popover-control fd-table-inner (click)="popoverColumnName = column.name">
+                                    <ng-container *ngIf="column?.fdpHeaderCellDef?.templateRef; else defaultTableHeaderCellTemplate">
+                                        <ng-container *ngTemplateOutlet="column.fdpHeaderCellDef.templateRef">
+                                        </ng-container>
+                                    </ng-container>
+
+                                    <fd-icon *ngIf="column.sortable && column.name === sortColumn"
+                                             fd-table-icon
+                                             [glyph]="sortDirection === 'asc' ? 'sort-ascending' : sortDirection === 'desc' ? 'sort-descending' : ''"></fd-icon>
+                                </fd-popover-control>
+
+                                <fd-popover-body>
+                                    <ul fd-list [noBorder]="true" [compact]="true">
+                                        <li *ngIf="column.sortable"
+                                            fd-list-item
+                                            (click)="sort(column.key, 'asc', column.name)"
+                                            (keyup.enter)="sort(column.key, 'asc', column.name)">
+                                            <span fd-list-icon glyph="sort-ascending"></span>
+                                            <span fd-list-title>Sort Ascendnig</span>
+                                        </li>
+                                        <li *ngIf="column.sortable"
+                                            fd-list-item
+                                            (click)="sort(column.key, 'desc', column.name)"
+                                            (keyup.enter)="sort(column.key, 'desc', column.name)">
+                                            <span fd-list-icon glyph="sort-descending"></span>
+                                            <span fd-list-title>Sort Descending</span>
+                                        </li>
+                                        <li fd-list-item *ngIf="column.groupable">
+                                            <span fd-list-icon></span>
+                                            <span fd-list-title>Group</span>
+                                        </li>
+                                        <li fd-list-item>
+                                            <span></span>
+                                            <span fd-list-title>Freeze</span>
+                                        </li>
+                                        <li fd-list-item *ngIf="column.filterable">
+                                            <span fd-list-icon glyph="filter"></span>
+                                            <div fd-form-item [horizontal]="true">
+                                                <label fd-form-label [for]="column.name + i">Filter</label>
+                                                <!--<fdp-input [id]="column.name + i"
+                                                           [name]="column.name + ' filter'"
+                                                           contentDensity="compact"
+                                                           placeholder="placeholder">
+                                                </fdp-input>-->
+
+                                                <!--<input fd-form-control
+                                                       [compact]="true"
+                                                       [id]="column.name + i"
+                                                       (keyup)="inputKeyup($event)"
+                                                       [(ngModel)]="filterVal">-->
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </fd-popover-body>
+                            </fd-popover>
+
+                            <ng-container *ngIf="!doesColumnHasPopover(column)">
+                                <ng-container *ngIf="column?.fdpHeaderCellDef?.templateRef; else defaultTableHeaderCellTemplate">
+                                    <ng-container *ngTemplateOutlet="column.fdpHeaderCellDef.templateRef">
+                                    </ng-container>
+                                </ng-container>
                             </ng-container>
-                        </ng-container>
+                        </th>
 
                         <ng-template #defaultTableHeaderCellTemplate>{{ column.label }}</ng-template>
-                    </th>
+                    </ng-container>
                 </tr>
             </thead>
             <tbody fd-table-body>
                 <tr fd-table-row
-                    *ngFor="let row of _rows; let i = index"
+                    scope="row"
+                    *ngFor="let row of _rows | sortBy: sortDirection : sortField; let i = index"
                     [attr.aria-selected]="_rows[i].checked">
                     <td fd-table-cell
                         [class.fd-table__cell--checkbox]="selectionMode === _selectionModeOptions.MULTIPLE"

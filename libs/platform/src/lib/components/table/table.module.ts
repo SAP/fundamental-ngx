@@ -2,14 +2,29 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { CheckboxModule, TableModule, ToolbarModule } from '@fundamental-ngx/core';
+import {
+    CheckboxModule,
+    FormModule,
+    ListModule,
+    PopoverModule,
+    TableModule,
+    ToolbarModule
+} from '@fundamental-ngx/core';
+import { FdpFormGroupModule } from '../form/form-group/fdp-form.module';
+import { PlatformInputModule } from '../form/input/fdp-input.module';
+import { PlatformButtonModule } from '../button/button.module';
 
+import { TableService } from './table.service';
 import { TableComponent } from './table.component';
-import { TableColumnComponent } from './table-column/table-column.component';
-import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
-import { TableToolbarActionsComponent } from './table-toolbar-actions/table-toolbar-actions.component';
-import { FdpCellDef, FdpTableCell } from './directives/table-cell.directive';
-import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
+import {
+    TableColumnComponent,
+    TableToolbarActionsComponent,
+    TableToolbarComponent,
+    TableViewSettingsDialogComponent,
+    TableViewSettingsFilterComponent
+} from './components';
+import { FdpCellDef, FdpHeaderCellDef, FdpTableCell, FdpTableHeader } from './directives';
+import { TableSortByPipe } from './pipes';
 
 @NgModule({
     imports: [
@@ -17,7 +32,15 @@ import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.dire
         FormsModule,
         TableModule,
         ToolbarModule,
-        CheckboxModule
+        CheckboxModule,
+        PopoverModule,
+        ListModule,
+        PlatformButtonModule,
+        ListModule,
+        FormModule,
+        FdpFormGroupModule,
+        PlatformInputModule,
+        PopoverModule
     ],
     declarations: [
         TableComponent,
@@ -27,7 +50,10 @@ import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.dire
         FdpTableCell,
         FdpCellDef,
         FdpTableHeader,
-        FdpHeaderCellDef
+        FdpHeaderCellDef,
+        TableViewSettingsDialogComponent,
+        TableViewSettingsFilterComponent,
+        TableSortByPipe
     ],
     exports: [
         TableComponent,
@@ -37,8 +63,11 @@ import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.dire
         FdpTableCell,
         FdpCellDef,
         FdpTableHeader,
-        FdpHeaderCellDef
+        FdpHeaderCellDef,
+        TableViewSettingsDialogComponent,
+        TableViewSettingsFilterComponent,
+        TableSortByPipe
     ],
-    providers: []
+    providers: [ TableService ]
 })
 export class PlatformTableModule {}

@@ -23,29 +23,22 @@ import { isObservable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { applyCssClass, CssClassBuilder, KeyUtil } from '@fundamental-ngx/core';
+import { TableService } from './table.service';
+import { TableColumnComponent, TableToolbarComponent } from './components';
 import { ContentDensity, SelectionMode } from './enums';
-import { TableColumnComponent } from './table-column/table-column.component';
-import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
 import { ArrayTableDataSource, isDataSource, ObservableTableDataSource, TableDataSource } from '../../domain';
+import { CollectionSort, SelectableRow, TableState } from './interfaces';
+import {
+    TableColumnFreezeEvent,
+    TableFilterChangeEvent,
+    TableGroupChangeEvent,
+    TableRowSelectionChangeEvent,
+    TableSortChangeEvent
+} from './models';
+import { DEFAULT_TABLE_STATE } from './constants';
+import { getNestedValue } from '../../utils/object';
 
 export type FdpTableDataSource<T> = TableDataSource<T> | T[];
-
-class SelectionChangeEvent<T> {
-    selection: T[]; // currently selected items
-    added: T[];     // items added
-    removed: T[];   // items removed
-    index: number[];  // indexes location of additions or removals
-}
-
-export class TableRowSelectionChangeEvent<T> extends SelectionChangeEvent<T> {
-    source: TableComponent;
-}
-
-/** @hidden */
-interface SelectableRow {
-    checked: boolean;
-    value: any;
-}
 
 /**
  * The component that represents a table.
@@ -80,7 +73,8 @@ interface SelectableRow {
 @Component({
     selector: 'fdp-table',
     templateUrl: './table.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [ TableService ]
 })
 export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy, CssClassBuilder {
     /** Data source for table data. */
@@ -94,6 +88,31 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     get dataSource(): FdpTableDataSource<any> {
         return this._dataSource;
     }
+
+    /** Initial state of table. */
+    @Input()
+    set state(value: TableState) {
+        if (!value) {
+            this.setTableState(DEFAULT_TABLE_STATE);
+        } else {
+            this.setTableState(value);
+        }
+    }
+    get state(): TableState {
+        return this.getTableState();
+    }
+
+    /** The column `key` to freeze columns up to and including. */
+    @Input()
+    freezeColumnsTo: string;
+
+    /** Toggle for page scrolling feature. */
+    @Input()
+    pageScrolling: boolean;
+
+    /** Number of items per page. */
+    @Input()
+    pageSize: number;
 
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
     @Input()
@@ -110,6 +129,22 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     /** Event fired when table selection has changed. */
     @Output()
     rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<any>> = new EventEmitter<TableRowSelectionChangeEvent<any>>();
+
+    /** Event fired when table sort order has changed. */
+    @Output()
+    sortChange: EventEmitter<TableSortChangeEvent> = new EventEmitter<TableSortChangeEvent>();
+
+    /** Event fired when the table filter has changed. */
+    @Output()
+    filterChange: EventEmitter<TableFilterChangeEvent> = new EventEmitter<TableFilterChangeEvent>();
+
+    /** Event fired when table grouping has changed. */
+    @Output()
+    groupChange: EventEmitter<TableGroupChangeEvent> = new EventEmitter<TableGroupChangeEvent>();
+
+    /** Event fired when there is a change in the frozen column. */
+    @Output()
+    columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
 
     /** @hidden */
     @ViewChild('tableContainer')
@@ -136,6 +171,17 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     _selectionModeOptions = SelectionMode;
 
     /** @hidden */
+    popoverOpen = false;
+    /** @hidden */
+    popoverColumnName = '';
+    /** @hidden */
+    sortField: string;
+    /** @hidden */
+    sortColumn: string;
+    /** @hidden */
+    sortDirection: 'asc' | 'desc';
+
+    /** @hidden */
     checkedAll = false;
 
     /** @hidden */
@@ -143,6 +189,15 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _unchecked = [];
+
+    /** @hidden */
+    private _isSortable = false;
+
+    /** @hidden */
+    private _isFilterable = false;
+
+    /** @hidden */
+    private _isGroupable = false;
 
     /** @hidden */
     private _dataSource: FdpTableDataSource<any>;
@@ -157,7 +212,10 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     private readonly stateChanges: Subject<any> = new Subject<any>();
 
     /** @hidden */
-    constructor(private readonly _cd: ChangeDetectorRef) {}
+    constructor(
+        private readonly _tableService: TableService,
+        private readonly _cd: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -171,8 +229,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._cd.detectChanges();
         this.buildComponentCssClass();
+        this._checkColumnsAbilities();
+        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -188,6 +247,16 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
             this.contentDensity === ContentDensity.COMPACT ? 'fd-table--compact' : '',
             this.contentDensity === ContentDensity.CONDENSED ? 'fd-table--condensed' : ''
         ];
+    }
+
+    /** Get current state/settings of the Table. */
+    getTableState(): TableState {
+        return this._tableService.getTableState();
+    }
+
+    /** Set current state/settings of the Table. */
+    setTableState(state: TableState): void {
+        this._tableService.setTableState(state);
     }
 
     /** @hidden */
@@ -246,7 +315,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     getCellValue(key: string, row: SelectableRow): any {
-        return key.split('.').reduce((a, b) => a[b], row.value);
+        return getNestedValue(key, row.value);
     }
 
     /** @hidden */
@@ -260,6 +329,56 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
             event.target.dispatchEvent(click);
             event.preventDefault();
         }
+    }
+
+    sort(field: string, direction: 'asc' | 'desc', columnName: string): void {
+        if (this.sortField === field && this.sortDirection === direction) {
+            return;
+        }
+
+        this.sortField = field;
+        this.sortColumn = columnName;
+        this.sortDirection = direction;
+        const prevState = this.getTableState();
+        const prevSortBy = prevState && prevState.sortBy || [];
+        const newSortBy: CollectionSort[] = [{field: field, direction: direction}];
+        let state: TableState;
+
+        if (!prevState) {
+            state = {...DEFAULT_TABLE_STATE, sortBy: newSortBy};
+        } else {
+            state = {
+                ...prevState,
+                sortBy: prevState.sortBy.map(s => {
+                    if (s.field === newSortBy[0].field) {
+                        return newSortBy[0];
+                    }
+
+                    return s;
+                })
+            };
+        }
+
+        this.setTableState(state);
+        this.sortChange.emit(new TableSortChangeEvent(this, newSortBy, prevSortBy));
+        this.popoverOpen = false;
+    }
+
+    doesColumnHasPopover(column: TableColumnComponent): boolean {
+        if (!column) {
+            return ;
+        }
+        return column.sortable || column.filterable || column.groupable;
+    }
+
+    private _checkColumnsAbilities(): void {
+        if (!this.columns || !this.columns.length) {
+            return;
+        }
+
+        this._isSortable = this.columns.some(c => c.sortable);
+        this._isFilterable = this.columns.some(c => c.filterable);
+        this._isGroupable = this.columns.some(c => c.groupable);
     }
 
     /** @hidden */
