@@ -1,7 +1,8 @@
 import {
     Component,
     ElementRef,
-    Inject, Input,
+    Inject,
+    Input,
     Optional,
     TemplateRef,
     ViewChild
@@ -41,10 +42,11 @@ export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterf
     ) {
         super(elementRef, dialogService, actionSheetComponent, MobileModeControl.ACTION_SHEET, mobileModes);
     }
-
+    //
     /** @hidden */
-    close(): void {
+    close(e): void {
         this.open = false;
     }
+
 
 }

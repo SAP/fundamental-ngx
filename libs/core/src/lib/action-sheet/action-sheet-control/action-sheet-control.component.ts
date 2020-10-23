@@ -1,5 +1,4 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, ViewEncapsulation, HostListener, Output, HostBinding} from '@angular/core';
-import {ActionSheetItemComponent} from '../../..';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -22,7 +21,7 @@ import {ActionSheetItemComponent} from '../../..';
 })
 export class ActionSheetControlComponent {
 
-    /** Whenever item is clicked **/
+    /** Emitted event when control button is clicked **/
     @Output()
     clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 

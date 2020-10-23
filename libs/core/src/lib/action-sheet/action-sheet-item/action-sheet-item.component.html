@@ -4,6 +4,8 @@
             class="fd-button--full-width"
             [class.fd-button--compact]="compact"
             [label]="label"
-            [glyph]="glyph">
+            [glyph]="glyph"
+            (click)="preventClose($event)"
+    >
     </button>
 </li>

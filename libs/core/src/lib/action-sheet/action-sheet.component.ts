@@ -76,7 +76,13 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    @ContentChild(ActionSheetBodyComponent) actionSheetBody;
+    /** @hidden */
+    @ContentChild(ActionSheetBodyComponent)
+    actionSheetBody: ActionSheetBodyComponent;
+
+    /** @hidden */
+    @ContentChild(ActionSheetControlComponent)
+    actionSheetControl: ActionSheetControlComponent;
 
     // @ContentChildren(ActionSheetItemComponent, { descendants: true }) actionSheetBody;
 
@@ -87,10 +93,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden need to use ViewChildren as ngIf prevents use of ViewChild */
     @ViewChildren(PopoverComponent)
     popoverComponents: QueryList<PopoverComponent>;
-
-    @ContentChild(ActionSheetControlComponent) actionSheetControl;
-    @ContentChild(ActionSheetMobileComponent) actionSheetMobile;
-
 
     @Output()
     actionSheetMobileDynamic: ComponentRef<ActionSheetMobileComponent>;
@@ -169,8 +171,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
                 startWith(0),
                 takeUntil(this._onDestroy$)
             )
-            .subscribe(() => this._listenOnItemsClick()
-            );
+            .subscribe(() => this._listenOnItemsClick());
     }
 
     private _listenOnItemsClick(): void {

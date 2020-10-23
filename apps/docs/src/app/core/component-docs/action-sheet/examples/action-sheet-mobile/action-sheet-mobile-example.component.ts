@@ -1,14 +1,11 @@
-import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
-import {MobileModeConfig} from '@fundamental-ngx/core';
+import {
+    ChangeDetectionStrategy,
+    Component
+} from '@angular/core';
 
 @Component({
     selector: 'fd-action-sheet-mobile-example',
     templateUrl: './action-sheet-mobile-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActionSheetMobileExampleComponent {
-    // /** Whenever links should be visible **/
-    // @Input()
-    // isOpen = false;
-    //
-}
+export class ActionSheetMobileExampleComponent {}
