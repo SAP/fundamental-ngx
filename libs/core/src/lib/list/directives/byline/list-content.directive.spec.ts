@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ListModule } from '../list.module';
+import { ListModule } from '../../list.module';
 
 @Component({
-    template: ` <div #componentElement fd-list-byline-left>ListBylineLeftDirective</div> `
+    template: ` <div #componentElement fd-list-content>ListContentDirective</div> `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 }
 
-describe('ListBylineLeftDirective', () => {
+describe('ListContentDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -32,6 +32,6 @@ describe('ListBylineLeftDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list__byline-left');
+        expect(component.ref.nativeElement.className).toBe('fd-list__content');
     });
 });

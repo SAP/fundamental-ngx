@@ -10,11 +10,11 @@ import { ListTitleDirective } from './directives/list-title.directive';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListSecondaryDirective } from './directives/list-secondary.directive';
 import { ListIconDirective } from './directives/list-icon.directive';
-import { ListBylineDirective } from './directives/list-byline.directive';
-import { ListBylineLeftDirective } from './directives/list-byline-left.directive';
-import { ListBylineRightDirective } from './directives/list-byline-right.directive';
-import { ListContentDirective } from './directives/list-content.directive';
-import { ListThumbnailDirective } from './directives/list-thumbnail.directive';
+import { ListBylineDirective } from './directives/byline/list-byline.directive';
+import { ListBylineLeftDirective } from './directives/byline/list-byline-left.directive';
+import { ListBylineRightDirective } from './directives/byline/list-byline-right.directive';
+import { ListContentDirective } from './directives/byline/list-content.directive';
+import { ListThumbnailDirective } from './directives/byline/list-thumbnail.directive';
 @NgModule({
     declarations: [
         ListComponent,

@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ListModule } from '../list.module';
+import { ListModule } from '../../list.module';
 
 @Component({
-    template: ` <div #componentElement fd-list-content>ListContentDirective</div> `
+    template: ` <div #componentElement fd-list-thumbnail>ListThumbnailDirective</div> `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 }
 
-describe('ListContentDirective', () => {
+describe('ListThumbnailDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -32,6 +32,6 @@ describe('ListContentDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list__content');
+        expect(component.ref.nativeElement.className).toBe('fd-list__thumbnail');
     });
 });
