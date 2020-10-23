@@ -81,7 +81,7 @@ export const API_FILES = {
     infiniteScroll: ['InfiniteScrollDirective'],
     inlineHelp: ['InlineHelpComponent'],
     inputGroup: ['InputGroupComponent'],
-    layoutGrid: ['LayoutGridComponent', 'LayoutGridSpanDirective'],
+    layoutGrid: ['LayoutGridComponent', 'LayoutGridColDirective', 'LayoutGridRowDirective'],
     layoutPanel: [
         'LayoutPanelComponent',
         'LayoutPanelActionsComponent',

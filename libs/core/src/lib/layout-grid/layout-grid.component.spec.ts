@@ -1,20 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LayoutGridComponent } from './layout-grid.component';
+import { CSS_CLASS_NAME } from './constants';
 
 @Component({
-    template: `
-        <fd-layout-grid [noGap]="true">
-            <div fdLayoutGridRow>
-                <div fdLayoutGridCol="12" fdLayoutGridColMd="6" fdLayoutGridColLg="4" fdLayoutGridColXl="3">
-                    <example-layout-grid-block>Size: 3</example-layout-grid-block>
-                </div>
-            </div>
-        </fd-layout-grid>
-    `
+    template: '<fd-layout-grid [noGap]="true"></fd-layout-grid>'
 })
 class TestNestedContainerComponent {
-    @ViewChild('componentElement', { static: true, read: LayoutGridComponent })
+    @ViewChild(LayoutGridComponent, {static: true})
     componentElement: LayoutGridComponent;
 }
 
@@ -36,12 +29,10 @@ describe('LayoutGridComponent', () => {
         fixture.detectChanges();
     });
 
-    xit('Should have good classes', () => {
+    it('Should proper css classes', () => {
         fixture.detectChanges();
 
-        expect(
-            (componentElement as any)._elementRef.nativeElement.classList.contains('fd-container--no-gap')
-        ).toBeTruthy();
-        expect((componentElement as any)._elementRef.nativeElement.classList.contains('fd-container')).toBeTruthy();
+        expect(componentElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.layoutGrid)).toBeTruthy();
+        expect(componentElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.layoutGridNoGap)).toBeTruthy();
     });
 });

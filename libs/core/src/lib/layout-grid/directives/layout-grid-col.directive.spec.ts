@@ -2,6 +2,7 @@ import { LayoutGridColDirective } from './layout-grid-col.directive';
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CSS_CLASS_NAME } from '../constants';
+import { LayoutGridComponent } from '@fundamental-ngx/core';
 
 const COL_SIZE = 12;
 const MD_COL_SIZE = 6;
@@ -11,14 +12,12 @@ const XL_COL_SIZE = 3;
 @Component({
     template: `
         <fd-layout-grid>
-            <div [fdLayoutGridCol]="COL_SIZE" [colMd]="MD_COL_SIZE" [colLg]="LG_COL_SIZE" [colXl]="XL_COL_SIZE">
-                <example-layout-grid-block>Size: 3</example-layout-grid-block>
-            </div>
+            <div [fdLayoutGridCol]="COL_SIZE" [colMd]="MD_COL_SIZE" [colLg]="LG_COL_SIZE" [colXl]="XL_COL_SIZE"></div>
         </fd-layout-grid>
     `
 })
 class TestNestedContainerComponent {
-    @ViewChild(LayoutGridColDirective, { static: true })
+    @ViewChild(LayoutGridColDirective, {static: true})
     directiveElement: LayoutGridColDirective;
 
     COL_SIZE = COL_SIZE;
@@ -34,7 +33,7 @@ describe('LayoutGridColDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, LayoutGridColDirective]
+            declarations: [TestNestedContainerComponent, LayoutGridColDirective, LayoutGridComponent]
         }).compileComponents();
     }));
 
@@ -45,13 +44,13 @@ describe('LayoutGridColDirective', () => {
         fixture.detectChanges();
     });
 
-    it('Should have good classes', () => {
+    it('Should proper css classes', () => {
         fixture.detectChanges();
 
         expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.col)).toBeTruthy();
         expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.colSizePrefix + COL_SIZE)).toBeTruthy();
         expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.mdColSizePrefix + MD_COL_SIZE)).toBeTruthy();
         expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.lgColSizePrefix + LG_COL_SIZE)).toBeTruthy();
-        expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.xlColOffsetPrefix + XL_COL_SIZE)).toBeTruthy();
+        expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.xlColSizePrefix + XL_COL_SIZE)).toBeTruthy();
     });
 });
