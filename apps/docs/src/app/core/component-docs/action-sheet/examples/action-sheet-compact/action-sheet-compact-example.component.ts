@@ -5,6 +5,4 @@ import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/co
     templateUrl: './action-sheet-compact-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActionSheetCompactExampleComponent {
-
-}
+export class ActionSheetCompactExampleComponent {}

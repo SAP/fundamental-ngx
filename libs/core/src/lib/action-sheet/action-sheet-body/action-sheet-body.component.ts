@@ -36,6 +36,4 @@ export class ActionSheetBodyComponent {
     /** Display in mobile view. **/
     @Input()
     mobile = false;
-
-    @ContentChildren(ActionSheetItemComponent) actionSheetItems: QueryList<ActionSheetItemComponent>;
 }

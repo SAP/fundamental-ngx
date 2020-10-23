@@ -28,7 +28,8 @@ import { ButtonComponent } from '../../button/button.component';
  * ```
  */
 @Component({
-    selector: 'fd-action-sheet-item',
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-action-sheet-item]',
     templateUrl: './action-sheet-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

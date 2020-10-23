@@ -17,7 +17,7 @@ import {
     TemplateRef,
     ComponentRef,
     ViewChildren,
-    QueryList
+    QueryList, ContentChildren
 } from '@angular/core';
 import { PopoverComponent } from '../popover/popover.component';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
@@ -84,7 +84,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @ContentChild(ActionSheetControlComponent)
     actionSheetControl: ActionSheetControlComponent;
 
-    // @ContentChildren(ActionSheetItemComponent, { descendants: true }) actionSheetBody;
+    /** @hidden */
+    @ContentChildren(ActionSheetItemComponent, { descendants: true })
+    actionSheetItems: QueryList<ActionSheetItemComponent>;
 
     /** @hidden */
     @ViewChild('actionSheetBodyTemplate')
@@ -114,9 +116,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     ngAfterContentInit(): void {
         this.actionSheetBody.mobile = this.mobile;
         this.actionSheetBody.compact = this.compact;
-        this.actionSheetBody.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
-        this.actionSheetBody.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
-        this._keyboardSupportService.setKeyboardService(this.actionSheetBody.actionSheetItems, false);
+        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
+        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
+        this._keyboardSupportService.setKeyboardService(this.actionSheetItems, false);
         this._listenOnItemsChange();
         this.actionSheetControl.clicked.subscribe((isOpen) => {
             this.isOpenChangeHandle(isOpen);
@@ -166,7 +168,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _listenOnItemsChange(): void {
-        this.actionSheetBody.actionSheetItems.changes
+        this.actionSheetItems.changes
             .pipe(
                 startWith(0),
                 takeUntil(this._onDestroy$)
@@ -179,7 +181,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
         const refreshObs = merge(this._onRefresh$, this._onDestroy$);
-        this.actionSheetBody.actionSheetItems.forEach(
+        this.actionSheetItems.forEach(
             (item, index) => {
                 item.clicked
                     .pipe(takeUntil(refreshObs))
