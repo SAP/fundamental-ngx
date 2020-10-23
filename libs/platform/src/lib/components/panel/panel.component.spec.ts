@@ -66,7 +66,7 @@ describe('PanelComponent default values', () => {
         (panelExpandChange)="onExpandChange($event)"
     >
         <fdp-panel-actions>
-            <fdp-button>Apply</fdp-button>
+            <fdp-button label="Apply"></fdp-button>
         </fdp-panel-actions>
 
         <fdp-panel-content [contentHeight]="contentHeight">Panel Content Text</fdp-panel-content>
