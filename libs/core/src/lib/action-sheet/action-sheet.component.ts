@@ -30,8 +30,8 @@ import {
 import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
-import {ActionSheetMobileComponent} from './action-sheet-mobile/action-sheet-mobile.component';
-import {ACTION_SHEET_COMPONENT} from './action-sheet.interface';
+import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
+import { ACTION_SHEET_COMPONENT } from './action-sheet.interface';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -72,7 +72,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @Output()
     focusEscapeList = new EventEmitter<FocusEscapeDirection>();
 
-    /** Event emitted, when the combobox's popover body is opened or closed */
+    /** Event thrown, when the action sheet is opened or closed */
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -94,15 +94,16 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden need to use ViewChildren as ngIf prevents use of ViewChild */
     @ViewChildren(PopoverComponent)
-    popoverComponents: QueryList<PopoverComponent>;
+    popoverComponent: QueryList<PopoverComponent>;
 
-    @Output()
+    /** @hidden */
+    @Input()
     actionSheetMobileDynamic: ComponentRef<ActionSheetMobileComponent>;
 
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
+    /** @hidden **/
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -130,8 +131,8 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         if (this.mobile) {
             this._setUpMobileMode();
         }
-        if (this.popoverComponents && this.popoverComponents.first) {
-            this.popoverComponents.first.directiveRef.loaded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        if (this.popoverComponent && this.popoverComponent.first) {
+            this.popoverComponent.first.directiveRef.loaded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
                 setTimeout(() => {
                     this.setItemActive(0);
                 });

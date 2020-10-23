@@ -42,9 +42,9 @@ export class ActionSheetMobileComponent extends MobileModeBase<ActionSheetInterf
     ) {
         super(elementRef, dialogService, actionSheetComponent, MobileModeControl.ACTION_SHEET, mobileModes);
     }
-    //
+
     /** @hidden */
-    close(e): void {
+    close(event: Event): void {
         this.open = false;
     }
 
