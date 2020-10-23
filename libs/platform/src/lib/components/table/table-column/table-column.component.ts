@@ -61,7 +61,7 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     label: string;
 
     /** Cell text alignment. */
-    // @ts-ignore
+    /** @ts-ignore */
     @Input() set align(align: ColumnAlign) {
         let _align;
         switch (align) {
@@ -79,7 +79,7 @@ export class TableColumnComponent implements OnInit, OnDestroy {
         this._align$.next(_align);
     }
 
-    // @ts-ignore
+    /** @ts-ignore */
     get align(): string {
         return this._align;
     }
@@ -101,7 +101,7 @@ export class TableColumnComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     constructor(private readonly _rtlService: RtlService,
-                private readonly _cd: ChangeDetectorRef) { }
+        private readonly _cd: ChangeDetectorRef) { }
 
     /** @hidden */
     ngOnInit(): void {
