@@ -230,3 +230,30 @@ export class ListDataSource<T> extends ComboBoxDataSource<T> {
     }
 }
 
+export class TableDataSource<T> extends ListDataSource<T> implements DataSource<T> {
+    readonly MAX_LIMIT = Number.MAX_SAFE_INTEGER;
+
+    constructor(public dataProvider: DataProvider<any>) {
+        super(dataProvider);
+    }
+
+    match(predicate?: string | Map<string, string> | []): void {
+        const searchParam = new Map();
+
+        if (typeof predicate === 'string') {
+            searchParam.set('query', predicate);
+        } else if (predicate instanceof Map) {
+            predicate.forEach((v, k) => searchParam.set(k, v));
+        } else {
+            throw new Error('DataSource.match() predicate can only accepts string and Map');
+        }
+
+        if (!searchParam.has('limit')) {
+            searchParam.set('limit', this.MAX_LIMIT);
+        }
+
+        this.dataProvider.fetch(searchParam).subscribe((result: T[]) => {
+            this.dataChanges.next(result);
+        });
+    }
+}

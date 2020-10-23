@@ -1,0 +1,15 @@
+<a
+    fd-object-marker
+    glyph="add-favorite"
+    clickable="true"
+    aria-label="Object Maker with Text Clickable"
+    label="Favourite"
+></a>
+<a
+    fd-object-marker
+    [glyph]="glyph"
+    clickable="true"
+    aria-label="Object Maker with Text Clickable"
+    (click)="changeGlyph()"
+    label="Locked"
+></a>

@@ -44,9 +44,7 @@ import { ProductSwitchComponent } from '../../product-switch/product-switch/prod
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellbarActionsComponent implements OnInit {
-    /** @hidden */
-    actionsCollapsed = false;
+export class ShellbarActionsComponent {
 
     /** The user data. */
     @Input()
@@ -85,12 +83,6 @@ export class ShellbarActionsComponent implements OnInit {
     productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
-    @HostListener('window:resize', [])
-    onResize(): void {
-        this.actionsCollapsed = window.innerWidth < 1024;
-    }
-
-    /** @hidden */
     triggerItems(): void {
         if (this.closePopoverOnSelect) {
             if (this.userComponentView) {
@@ -100,11 +92,6 @@ export class ShellbarActionsComponent implements OnInit {
                 this.userComponent.menu.close();
             }
         }
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.onResize();
     }
 
     public get userItem(): ShellbarUser {

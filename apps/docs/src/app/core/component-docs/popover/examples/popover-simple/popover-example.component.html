@@ -1,7 +1,7 @@
 <div class="fd-docs-flex-display-helper">
     <fd-popover [placement]="leftPlacement$ | async">
         <fd-popover-control>
-            <fd-avatar size="s" [circle]="true" image="http://lorempixel.com/400/400/nature"></fd-avatar>
+            <fd-avatar size="s" [circle]="true" image="http://picsum.photos/id/1018/400"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
@@ -60,12 +60,12 @@
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <div fd-popover-body-header>
-                <div fd-bar [barDesign]="'header-with-subheader'" [cosy]="true">
+                <div fd-bar [barDesign]="'header-with-subheader'" [cozy]="true">
                     <div fd-bar-left>
-                        <fd-bar-element>Cosy Header</fd-bar-element>
+                        <fd-bar-element>Cozy Header</fd-bar-element>
                     </div>
                 </div>
-                <div fd-bar [barDesign]="'subheader'" [cosy]="true">
+                <div fd-bar [barDesign]="'subheader'" [cozy]="true">
                     <div fd-bar-middle>
                         <fd-bar-element [fullWidth]="true"
                             >SubHeader Middle section with Full Width Element
@@ -79,7 +79,7 @@
                 </li>
             </ul>
             <div fd-popover-body-footer>
-                <div fd-bar [barDesign]="'footer'" [cosy]="true">
+                <div fd-bar [barDesign]="'footer'" [cozy]="true">
                     <div fd-bar-right>
                         <fd-bar-element>
                             <button fd-button label="Save" [fdType]="'emphasized'" [compact]="true"></button>

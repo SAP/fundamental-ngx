@@ -9,10 +9,12 @@ import {
     TableModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
+import { AngularResizedEventModule } from 'angular-resize-event';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 
+import { DialogModule } from '@fundamental-ngx/core';
 import { FixedCardLayoutDocsComponent } from './fixed-card-layout-docs.component';
 import { FixedCardLayoutDocsHeaderComponent } from './fixed-card-layout-docs-header/fixed-card-layout-docs-header.component';
 import { FixedCardLayoutDisabledDragExampleComponent } from './examples/disabled-drag-drop/fixed-card-layout-disabled-drag.component';
@@ -34,7 +36,9 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
+        AngularResizedEventModule,
         CardModule,
+        DialogModule,
         FixedCardLayoutModule,
         ListModule,
         ObjectStatusModule,

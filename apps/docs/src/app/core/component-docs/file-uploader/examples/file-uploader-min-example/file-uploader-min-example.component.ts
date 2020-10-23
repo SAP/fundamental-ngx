@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-file-uploader-min-example',
     templateUrl: './file-uploader-min-example.component.html',
-    styleUrls: ['./file-uploader-min-example.component.scss']
+    styleUrls: ['./file-uploader-min-example.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploaderMinExampleComponent {
 

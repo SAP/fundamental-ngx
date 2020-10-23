@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
-import { ShellbarMenuItem, ProductSwitchItem, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core';
+import { ShellbarMenuItem, ProductSwitchItem, ShellbarUser, ShellbarUserMenu, ShellbarSizes } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-shellbar-collapsible-example',
     templateUrl: './shellbar-collapsible-example.component.html'
 })
 export class ShellbarCollapsibleExampleComponent {
+
+    currentSize: ShellbarSizes = 'm';
+
+    sizesWidth = {
+        s: 320,
+        m: 720,
+        l: 1024,
+        xl: 1400
+    };
+
     searchTerm: string;
 
     productMenuControl = 'Corporate Portal';
@@ -127,6 +137,14 @@ export class ShellbarCollapsibleExampleComponent {
             icon: 'batch-payments'
         }
     ];
+
+    changeSize(size: ShellbarSizes): void {
+        this.currentSize = size;
+    }
+
+    isSelected(size: ShellbarSizes): string {
+        return this.currentSize === size ? 'is-selected' : '';
+    }
 
     settingsCallback($event): void {
         console.log($event);

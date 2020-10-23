@@ -13,15 +13,11 @@ import { ShellbarActionsMobileComponent } from './shellbar-actions-mobile.compon
 describe('ShellbarActionsComponent', () => {
     let component: ShellbarActionsComponent;
     let fixture: ComponentFixture<ShellbarActionsComponent>;
-    const windowMock: Window = <any>{
-        innerWidth: 1024
-    };
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ShellbarActionsComponent, ShellbarActionsMobileComponent, ShellbarUserMenuComponent],
             imports: [MenuModule, PopoverModule, ButtonModule, IconModule, ProductSwitchModule],
-            providers: [{ provide: 'window', useFactory: () => windowMock }]
         }).compileComponents();
     }));
 
@@ -33,11 +29,5 @@ describe('ShellbarActionsComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should handle window resize', () => {
-        const resizeSpy = spyOn(component, 'onResize');
-        window.dispatchEvent(new Event('resize'));
-        expect(resizeSpy).toHaveBeenCalled();
     });
 });

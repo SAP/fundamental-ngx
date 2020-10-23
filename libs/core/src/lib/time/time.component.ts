@@ -9,14 +9,16 @@ import {
     OnInit,
     SimpleChanges,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    AfterViewInit
 } from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnComponent, TimeColumnItemOutput } from './time-column/time-column.component';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '../utils/functions';
+import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -37,7 +39,7 @@ export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
@@ -168,6 +170,11 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this.refreshTime();
+    }
+
+    /** @hidden */
     refreshTime(): void {
         this.columns.forEach(column => column.setValueOfActive());
     }
@@ -226,10 +233,10 @@ export class TimeComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     /** @hidden */
     handleKeyDownEvent(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, 'ArrowLeft')) {
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             this.handlePreviousColumnFocus(this.activeView);
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'ArrowRight')) {
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             this.handleNextColumnFocus(this.activeView);
             event.preventDefault();
         }

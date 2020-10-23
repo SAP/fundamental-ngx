@@ -118,6 +118,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'formatted-text',
+                loadChildren: () =>
+                    import('./component-docs/formatted-text/formatted-text-docs.module').then(
+                        (m) => m.FormattedTextDocsModule
+                    )
+            },
+            {
                 path: 'global-config',
                 loadChildren: () =>
                     import('./component-docs/global-config/global-config-docs.module').then(
@@ -198,6 +205,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'message-toast',
+                loadChildren: () =>
+                    import('./component-docs/message-toast/message-toast-docs.module').then(
+                        (m) => m.MessageToastDocsModule
+                    )
+            },
+            {
                 path: 'multi-input',
                 loadChildren: () =>
                     import('./component-docs/multi-input/multi-input-docs.module').then((m) => m.MultiInputDocsModule)
@@ -207,6 +221,20 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/notification/notification-docs.module').then(
                         (m) => m.NotificationDocsModule
+                    )
+            },
+            {
+                path: 'object-identifier',
+                loadChildren: () =>
+                    import('./component-docs/object-identifier/object-identifier-docs.module').then(
+                        (m) => m.ObjectIdentifierDocsModule
+                    )
+            },
+            {
+                path: 'object-marker',
+                loadChildren: () =>
+                    import('./component-docs/object-marker/object-marker-docs.module').then(
+                        (m) => m.ObjectMarkerDocsModule
                     )
             },
             {
@@ -324,6 +352,14 @@ export const ROUTES: Routes = [
             {
                 path: 'tree',
                 loadChildren: () => import('./component-docs/tree/tree-docs.module').then((m) => m.TreeDocsModule)
+            },
+            {
+                path: 'object-number',
+                loadChildren: () => import('./component-docs/object-number/object-number-docs.module').then((m) => m.ObjectNumberDocsModule)
+            },
+            {
+                path: 'wizard',
+                loadChildren: () => import('./component-docs/wizard/wizard-docs.module').then((m) => m.WizardDocsModule)
             }
         ]
     }
