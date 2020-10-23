@@ -92,6 +92,10 @@ export class CarouselService implements OnDestroy {
         }
     }
 
+    updateConfig(config: CarouselConfig): void {
+        this.config = config;
+    }
+
     setElementRef(elementRef: ElementRef): void {
         this._elementRef = elementRef;
     }

@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -55,7 +56,7 @@ class CarouselActiveSlides {
     encapsulation: ViewEncapsulation.None,
     providers: [CarouselService]
 })
-export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
     /** Id for the Carousel. */
     @Input()
     @HostBinding('attr.id')
@@ -201,6 +202,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     private _slidesCopy = [];
 
+    private _previousVisibleSlidesCount: number;
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -231,6 +234,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.leftButtonDisabled = true;
             this.rightButtonDisabled = true;
         }
+        this._carouselService.activeChange.subscribe((event) => this._slideSwiped(event));
 
         this._slidesCopy = this.slides.toArray().slice();
         this._changeDetectorRef.markForCheck();
@@ -240,6 +244,18 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     ngAfterViewInit(): void {
         this._initializeServiceConfig();
         this._carouselService.initialise(this._config, this.slides, this.slideContainer);
+        this._previousVisibleSlidesCount = this.visibleSlidesCount;
+    }
+
+    /** @hidden */
+    ngAfterViewChecked(): void {
+        if (this._previousVisibleSlidesCount && this._previousVisibleSlidesCount !== this.visibleSlidesCount) {
+            this._initializeCarousel();
+            this._initializeServiceConfig();
+            this._carouselService.updateConfig(this._config);
+            this._previousVisibleSlidesCount = this.visibleSlidesCount;
+            this._changeDetectorRef.detectChanges();
+        }
     }
 
     /** @hidden */
@@ -359,8 +375,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         } else {
             this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
         }
-
-        this._carouselService.activeChange.subscribe((event) => this._slideSwiped(event));
     }
 
     /** @hidden Initialize config for Carousel service */
