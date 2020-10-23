@@ -28,9 +28,9 @@
                 </fdp-textarea>
             </fdp-form-field>
 
-            <ng-template #i18n let-errros>
-                <span i18n="@@platformI18nRequiredValidation" *ngIf="errros.required"> Value is required </span>
-                <span i18n="@@platformI18nMaxlengthValidation" role="alert" aria-atomic="true" *ngIf="errros.maxlength">
+            <ng-template #i18n let-errors>
+                <span i18n="@@platformI18nRequiredValidation" *ngIf="errors.required"> Value is required </span>
+                <span i18n="@@platformI18nMaxlengthValidation" role="alert" aria-atomic="true" *ngIf="errors.maxlength">
                     Please get your character count under limit.
                 </span>
             </ng-template>
