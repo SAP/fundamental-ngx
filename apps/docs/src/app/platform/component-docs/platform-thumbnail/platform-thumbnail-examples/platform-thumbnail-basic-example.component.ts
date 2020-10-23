@@ -8,38 +8,38 @@ import { Media } from '@fundamental-ngx/platform';
 export class PlatformThumbnailBasicExampleComponent {
 
     data: Media[] = [{
-        thumbnailUrl: 'http://lorempixel.com/640/480/nature/1',
+        thumbnailUrl: 'http://picsum.photos/id/320/640/480',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/640/480/nature/1',
-        alt: 'Failed to load http://lorempixel.com/640/480/nature/1',
+        mediaUrl: 'http://picsum.photos/id/320/640/480',
+        alt: 'Failed to load http://picsum.photos/id/320/640/480',
         label: 'nature'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/480/640/animals/1',
+        thumbnailUrl: 'http://picsum.photos/id/315/640/480',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/480/640/animals/1',
-        alt: 'Failed to load http://lorempixel.com/480/640/animals/1',
+        mediaUrl: 'http://picsum.photos/id/315/640/480',
+        alt: 'Failed to load http://picsum.photos/id/315/640/480',
         label: 'animal'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/g/600/600/fashion/1',
+        thumbnailUrl: 'http://picsum.photos/id/316/600',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/g/600/600/fashion/1',
-        alt: 'Failed to load http://lorempixel.com/g/600/600/fashion/1',
+        mediaUrl: 'http://picsum.photos/id/316/600',
+        alt: 'Failed to load http://picsum.photos/id/316/600',
         label: 'culture'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/400/200/sports/1/',
+        thumbnailUrl: 'http://picsum.photos/id/316/600',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/400/200/sports/1/',
-        alt: 'Failed to load http://lorempixel.com/400/200/sports/1/',
+        mediaUrl: 'http://picsum.photos/id/316/600',
+        alt: 'Failed to load http://picsum.photos/id/316/600',
         label: 'sports'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/400/400/abstract/1',
+        thumbnailUrl: 'http://picsum.photos/id/317/600',
         mediaType: 'image',
-        mediaUrl: 'http://lorempixel.com/400/400/abstract/1',
-        alt: 'Failed to load http://lorempixel.com/400/400/abstract/1',
+        mediaUrl: 'http://picsum.photos/id/316/600',
+        alt: 'Failed to load http://picsum.photos/id/316/600',
         label: 'art'
     }
     ];

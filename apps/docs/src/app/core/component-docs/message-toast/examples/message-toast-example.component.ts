@@ -15,14 +15,14 @@ export class MessageToastExampleComponent {
             mousePersist: true,
             duration: 5000,
             maxWidth: '25rem'
-        } as MessageToastConfig);
+        });
     }
 
     openFromString(): void {
         const content = 'Message Toast created from string. Will disappear after 5000ms';
         this.messageToastService.open(content, {
             duration: 5000
-        } as MessageToastConfig);
+        });
     }
 
     openFromTemplate(template): void {
@@ -30,6 +30,6 @@ export class MessageToastExampleComponent {
             data: {
                 content: 'Message Toast created from template.'
             }
-        } as MessageToastConfig);
+        });
     }
 }
