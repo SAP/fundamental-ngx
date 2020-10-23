@@ -55,6 +55,7 @@ module.exports = function (config) {
 
     config.set({
         basePath: '',
+        concurrency: 2,
         frameworks: ['jasmine', '@angular-devkit/build-angular'],
         plugins: [
             require('karma-jasmine'),

@@ -21,15 +21,6 @@ jobs:
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     script: npm run lint && npm run test:coveralls && npm run build-pack-library
 
-  - stage: "Sauce Labs Core unit tests"
-    name: Sauce Labs - Core unit tests
-    if: type = pull_request
-    env:
-      - SAUCE_USERNAME=$SAUCE_USERNAME
-      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
-    script:
-      - npm run test:core:saucelabs
-
   - stage: "Sauce Labs Platform unit tests"
     name: Sauce Labs - Platform unit tests
     if: type = pull_request
@@ -38,6 +29,15 @@ jobs:
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
     script:
       - npm run test:platform:saucelabs
+
+  - stage: "Sauce Labs Core unit tests"
+    name: Sauce Labs - Core unit tests
+    if: type = pull_request
+    env:
+      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+    script:
+      - npm run test:core:saucelabs
 
   - stage: "Pre-release"
     if: branch = master AND type = push
