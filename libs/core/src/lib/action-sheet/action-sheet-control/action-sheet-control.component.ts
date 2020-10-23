@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, ViewEncapsulation, HostListener, Output, HostBinding} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, ViewEncapsulation, HostListener, Output} from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the action sheet.

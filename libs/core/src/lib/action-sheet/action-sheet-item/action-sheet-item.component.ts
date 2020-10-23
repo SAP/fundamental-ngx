@@ -72,15 +72,11 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
-    /** Event emitted, when the popover body is opened or closed **/
-    @Output()
-    readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
     /** @hidden **/
     clicked = new EventEmitter<MouseEvent>();
 
     constructor(
-        private elementRef: ElementRef
+        private _elementRef: ElementRef
     ) { }
 
     /** @hidden */
@@ -92,15 +88,12 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
-        if (this.isCloseButton) {
-            this.openChange.emit(false);
-        }
         this.clicked.emit(event);
     }
 
     /** @hidden */
     click(): void {
-        this.elementRef.nativeElement.click();
+        this._elementRef.nativeElement.click();
     }
 
     /** @hidden */
@@ -109,9 +102,9 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     }
 
     /** hidden **/
-    preventClose(e): void {
+    preventClose(event: Event): void {
         if (!this.isCloseButton) {
-            e.stopPropagation();
+            event.stopPropagation();
         }
     }
 }

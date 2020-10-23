@@ -1,12 +1,9 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ContentChildren,
     Input,
-    QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import {ActionSheetItemComponent} from '../action-sheet-item/action-sheet-item.component';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
