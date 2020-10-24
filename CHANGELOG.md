@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.32...v0.23.0-rc.33) (2020-10-24)
+
+
+### Bug Fixes
+
+* Remove console error on shellbar's input group ([#3667](https://github.com/SAP/fundamental-ngx/issues/3667)) ([335fffd](https://github.com/SAP/fundamental-ngx/commit/335fffd02b2610f02009e37ee7f49d963df998b8))
+
 ## [0.23.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.31...v0.23.0-rc.32) (2020-10-24)
 
 
