@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-textarea-counter-example',
     templateUrl: './platform-textarea-counter-example.component.html',
-    encapsulation: ViewEncapsulation.None
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformTextareaCounterExampleComponent implements OnInit, AfterViewInit {
     form: FormGroup;
+    value = 'Lorem ipsum, dolor sit amet';
     private textareaValidator: ValidatorFn[];
     private textareaNoCounterMessageValidator: ValidatorFn[];
     constructor(private _cd: ChangeDetectorRef) {
