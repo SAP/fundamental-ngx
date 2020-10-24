@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.36...v0.23.0-rc.37) (2020-10-24)
+
+
+### Bug Fixes
+
+* (core) Apply changes to wizard styling for IE11 ([#3682](https://github.com/SAP/fundamental-ngx/issues/3682)) ([174cac9](https://github.com/SAP/fundamental-ngx/commit/174cac9f73013a82d0413c34d3536af3b32c924c))
+
 ## [0.23.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.35...v0.23.0-rc.36) (2020-10-24)
 
 ## [0.23.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.34...v0.23.0-rc.35) (2020-10-24)
