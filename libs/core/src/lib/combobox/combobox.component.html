@@ -79,6 +79,7 @@
         fd-list
         class="fd-combobox-custom-list fd-combobox-input-menu-overflow"
         [dropdownMode]="true"
+        [compact]="compact"
         [style.maxHeight]="!mobile && maxHeight"
         [hasMessage]="listMessages && listMessages.length > 0"
         (focusEscapeList)="handleListFocusEscape($event)"

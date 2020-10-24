@@ -179,4 +179,11 @@ export class InputGroupComponent implements ControlValueAccessor {
     buttonClicked($event): void {
         this.addOnButtonClicked.emit($event);
     }
+
+    /** @hidden */
+    preventFocus(event: MouseEvent): void {
+        if (!this.buttonFocusable) {
+            event.preventDefault();
+        }
+    }
 }

@@ -70,6 +70,7 @@ export class AutoCompleteDirective {
                 this._elementRef.nativeElement.value = this.inputText;
             } else if (KeyUtil.isKeyCode(event, this._completeKeys)) {
                 this._sendCompleteEvent(true);
+                this._moveIndicatorToLastCharacter();
             } else if (KeyUtil.isKeyCode(event, this._fillKeys)) {
                 this._sendCompleteEvent(false);
             } else if (!this._isControlKey(event) && this.inputText) {
@@ -122,5 +123,10 @@ export class AutoCompleteDirective {
             term: this._elementRef.nativeElement.value,
             forceClose: forceClose
         });
+    }
+
+    /** @hidden */
+    private _moveIndicatorToLastCharacter(): void {
+        this._elementRef.nativeElement.setSelectionRange(this.inputText.length, this.inputText.length);
     }
 }
