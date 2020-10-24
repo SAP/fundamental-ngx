@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Injectable, Optional } from '@angular/core';
 import { FdDate } from './models/fd-date';
-import { FdRangeDate } from './models/fd-range-date';
+import { DateRange } from './models/date-range';
 import { RtlService } from '../utils/services/rtl.service';
 
 @Injectable()
@@ -68,7 +68,7 @@ export class CalendarService {
     /**
      * Method that check equality of 2 range dates.
      */
-    static rangeDatesEqual(dateRange1: FdRangeDate, dateRange2: FdRangeDate): boolean {
+    static rangeDatesEqual(dateRange1: DateRange, dateRange2: DateRange): boolean {
         if (!dateRange1 || !dateRange2) {
             return false;
         }
@@ -79,7 +79,7 @@ export class CalendarService {
     /**
      * Method to check if date is betweeen 2 dates
      */
-    static isBetween(dateToCheck: FdDate, dateRange: FdRangeDate): boolean {
+    static isBetween(dateToCheck: FdDate, dateRange: DateRange): boolean {
         return (
             dateRange.start &&
             dateRange.start.getTimeStamp() < dateToCheck.getTimeStamp() &&

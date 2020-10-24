@@ -1,7 +1,5 @@
-import { FdDate } from './fd-date';
-
-export interface CalendarDay {
-    date: FdDate;
+export interface CalendarDay<D> {
+    date: D;
     weekDay: number;
     weekend: boolean;
     disabled?: boolean;

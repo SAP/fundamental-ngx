@@ -18,7 +18,7 @@ import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../
 import { Placement } from '../popover/popover-position/popover-position';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarService } from '../calendar/calendar.service';
-import { FdRangeDate } from '../calendar/models/fd-range-date';
+import { FdRangeDate } from '../calendar/models/date-range';
 import { DateFormatParser } from './format/date-parser';
 import { FormStates } from '../form/form-control/form-states';
 import { CalendarYearGrid, SpecialDayRule } from '../..';
@@ -57,7 +57,7 @@ import { CalendarYearGrid, SpecialDayRule } from '../..';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatePickerComponent implements ControlValueAccessor, Validator {
+export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
     /** @hidden The value of the input */
     inputFieldDate: string = null;
 
@@ -66,7 +66,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** @hidden */
     @ViewChild(CalendarComponent)
-    calendarComponent: CalendarComponent;
+    calendarComponent: CalendarComponent<D>;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -167,7 +167,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
      */
     @Input()
-    specialDaysRules: SpecialDayRule[] = [];
+    specialDaysRules: SpecialDayRule<D>[] = [];
 
     /**
      * Object to customize year grid,
@@ -538,7 +538,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     }
 
     /** @hidden */
-    private _refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
+    private _refreshCurrentlyDisplayedCalendarDate(date: D): void {
         if (this.calendarComponent) {
             this.calendarComponent.setCurrentlyDisplayed(date);
         }

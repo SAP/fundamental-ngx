@@ -22,4 +22,4 @@ export interface DateTimeFormats {
     };
 }
 
-export const DATE_FORMATS = new InjectionToken<DateTimeFormats>('date-formats');
+export const DATE_TIME_FORMATS = new InjectionToken<DateTimeFormats>('date-formats');

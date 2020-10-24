@@ -17,7 +17,7 @@ export abstract class DatetimeAdapter<D> {
     private _localeChanges: Subject<void> = new Subject();
 
     /** locale changes stream */
-    protected localeChanges: Observable<void> = this._localeChanges.asObservable();
+    readonly localeChanges: Observable<void> = this._localeChanges.asObservable();
 
     /**
      * Sets the locale used for all dates.
@@ -105,6 +105,13 @@ export abstract class DatetimeAdapter<D> {
     abstract getYearName(date: D): string;
 
     /**
+     * Gets the name for the week of the given date.
+     * @param date The date to get the week name from.
+     * @returns The name of the the week.
+     */
+    abstract getWeekName(date: D): string;
+
+    /**
      * Gets the first day of the week.
      * @returns The first day of the week (0-indexed, 0 = Sunday).
      */
@@ -150,6 +157,44 @@ export abstract class DatetimeAdapter<D> {
     abstract today(): D;
 
     /**
+     * Adds the given number of years to the date. Years are counted as if flipping 12 pages on the
+     * calendar for each year and then finding the closest date in the new month. For example when
+     * adding 1 year to Feb 29, 2016, the resulting date will be Feb 28, 2017.
+     * @param date The date to add years to.
+     * @param years The number of years to add (may be negative).
+     * @returns A new date equal to the given one with the specified number of years added.
+     */
+    abstract addCalendarYears(date: D, years: number): D;
+
+    /**
+     * Adds the given number of months to the date. Months are counted as if flipping a page on the
+     * calendar for each month and then finding the closest date in the new month. For example when
+     * adding 1 month to Jan 31, 2017, the resulting date will be Feb 28, 2017.
+     * @param date The date to add months to.
+     * @param months The number of months to add (may be negative).
+     * @returns A new date equal to the given one with the specified number of months added.
+     */
+    abstract addCalendarMonths(date: D, months: number): D;
+
+    /**
+     * Adds the given number of days to the date. Days are counted as if moving one cell on the
+     * calendar for each day.
+     * @param date The date to add days to.
+     * @param days The number of days to add (may be negative).
+     * @returns A new date equal to the given one with the specified number of days added.
+     */
+    abstract addCalendarDays(date: D, days: number): D;
+
+    /**
+     * Get Amount of weeks in current month/year
+     * @param year The year of the date
+     * @param month The month of the date
+     * @param firstDayOfWeek The first day of week. 0 - Sunday, 1 - Monday...
+     * @returns Number of weeks in the given month
+     */
+    abstract getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number;
+
+    /**
      * Clones the given date.
      * @param date The date to clone
      * @returns A new date equal to the given date.
@@ -178,4 +223,19 @@ export abstract class DatetimeAdapter<D> {
      * @param date The date to be checked
      */
     abstract isValid(date: D): boolean;
+
+    /**
+     * Compares two dates.
+     * @param first The first date to compare.
+     * @param second The second date to compare.
+     * @returns 0 if the dates are equal, a number less than 0 if the first date is earlier,
+     *     a number greater than 0 if the first date is later.
+     */
+    compareDate(first: D, second: D): number {
+        return (
+            this.getYear(first) - this.getYear(second) ||
+            this.getMonth(first) - this.getMonth(second) ||
+            this.getDate(first) - this.getDate(second)
+        );
+    }
 }

@@ -1,5 +1,3 @@
-import { FdDate } from './fd-date';
-
 /**
  * Special days mark, it can be used by passing array of object with
  * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
@@ -7,7 +5,7 @@ import { FdDate } from './fd-date';
  * Rule accepts method with FdDate object as a parameter. ex:
  * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
  */
-export interface SpecialDayRule {
+export interface SpecialDayRule<D> {
     specialDayNumber: number;
-    rule: (fdDate: FdDate) => boolean;
+    rule: (date: D) => boolean;
 }
