@@ -23,7 +23,11 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button label="Open Calendar in landscape mobile mode" (click)="openLandScapeDialog(landScapeDialog)"></button>
+<button fd-button
+        label="Open Calendar in landscape mobile mode"
+        style="margin-right: 10px"
+        (click)="openLandScapeDialog(landScapeDialog)" >
+</button>
 
 <ng-template let-dialog let-dialogConfig="dialogConfig" #portraitDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
@@ -55,8 +59,12 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button label="Open Calendar in portrait mobile mode" (click)="openPortraitDialog(portraitDialog)"></button>
+<button fd-button
+        label="Open Calendar in portrait mobile mode"
+        style="margin-right: 10px"
+        (click)="openPortraitDialog(portraitDialog)">
+</button>
 
-<div>
-    <label fd-label>Date Picked: {{ datePicked.toDateString() }}</label>
-</div>
+<br><br>
+
+<div>Selected Date: {{ datePicked.toDateString() }}</div>

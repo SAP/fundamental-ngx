@@ -22,8 +22,9 @@ import { ListLinkDirective } from '../directives/list-link.directive';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
-import { KeyUtil } from '../../utils/functions/key-util';
+import { KeyUtil } from '../../utils/functions';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from './list-item-utils';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 /**
  * The component that represents a list item.
@@ -108,7 +109,7 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             if (this.checkbox) {
                 this.checkbox.nextValue();
                 this._muteEvent(event);

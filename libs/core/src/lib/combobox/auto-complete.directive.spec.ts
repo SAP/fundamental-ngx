@@ -42,7 +42,7 @@ describe('AutoCompleteDirective', () => {
 
         expect((<any>directive)._elementRef.nativeElement.value).toBe('Apple');
 
-        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'Enter' });
+        directive.handleKeyboardEvent(<any>{ stopPropagation: () => {}, preventDefault: () => {}, key: 'Enter' });
 
         expect(directive.onComplete.emit).toHaveBeenCalledWith({
             term: 'Apple',

@@ -10,8 +10,211 @@
     </button>
 </fd-segmented-button>
 
-<fd-fixed-card-layout>
-    <ng-container *ngIf="card1Visibility">
+<div (resized)="onResized()" style="padding: 1rem; overflow: auto;">
+    <fd-fixed-card-layout>
+        <ng-container *ngIf="card1Visibility">
+            <fd-card *fdCardDef>
+                <fd-card-header>
+                    <h2 fd-card-title>Card Title</h2>
+                </fd-card-header>
+                <fd-card-content>
+                    <ul fd-list [noBorder]="true">
+                        <li fd-list-item>
+                            <span fd-list-title>
+                                item 1
+                            </span>
+                        </li>
+                        <li fd-list-item>
+                            <span fd-list-title>
+                                item 2
+                            </span>
+                        </li>
+                        <li fd-list-item>
+                            <span fd-list-title>
+                                item 3
+                            </span>
+                        </li>
+                    </ul>
+                </fd-card-content>
+            </fd-card>
+        </ng-container>
+        <ng-container *ngIf="card2Visibility">
+            <fd-card *fdCardDef>
+                <fd-card-header>
+                    <h2 fd-card-title>Projected revenue</h2>
+                    <h3 fd-card-subtitle>Values include taxes | USD</h3>
+                    <span fd-card-counter status="informative">3 of 15</span>
+
+                    <fd-card-kpi-header>
+                        <strong fd-card-kpi-value>21.83</strong>
+                        <span fd-card-kpi-scale-icon glyph="up" fd-object-status status="positive"></span>
+                        <span fd-card-kpi-scale-text>K</span>
+
+                        <div fd-card-kpi-analytics>
+                            <label fd-card-kpi-analytics-label>Target</label>
+                            <div fd-card-kpi-analytics-content>25K</div>
+                        </div>
+                        <div fd-card-kpi-analytics>
+                            <label fd-card-kpi-analytics-label>Deviation</label>
+                            <span fd-card-kpi-analytics-content>-14.52%</span>
+                        </div>
+                    </fd-card-kpi-header>
+
+                    <h4 fd-card-second-subtitle>Q1, 2018</h4>
+                </fd-card-header>
+                <fd-card-content>
+                    <ul fd-list [noBorder]="true">
+                        <li fd-list-item>
+                            <span fd-list-title>
+                                item 1
+                            </span>
+                        </li>
+                        <li fd-list-item>
+                            <span fd-list-title>
+                                item 2
+                            </span>
+                        </li>
+                        <li fd-list-item>
+                            <span fd-list-title>
+                                item 3
+                            </span>
+                        </li>
+                    </ul>
+                </fd-card-content>
+            </fd-card>
+        </ng-container>
+        <ng-container *ngIf="card3Visibility">
+            <fd-card *fdCardDef>
+                <fd-card-header>
+                    <h2 fd-card-title>Table card</h2>
+                    <span fd-card-counter>3 of 10</span>
+                </fd-card-header>
+                <fd-card-content>
+                    <table fd-table [noBorderX]="true">
+                        <thead fd-table-header>
+                            <tr fd-table-row>
+                                <th fd-table-cell>Name</th>
+                                <th fd-table-cell>Price</th>
+                                <th fd-table-cell>Country</th>
+                                <th fd-table-cell>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody fd-table-body>
+                            <tr fd-table-row [main]="true" [activable]="true">
+                                <td fd-table-cell>
+                                    Banana
+                                </td>
+                                <td fd-table-cell>
+                                    India
+                                </td>
+                                <td fd-table-cell>
+                                    5 EUR
+                                </td>
+                                <td fd-table-cell>
+                                    <span fd-object-status status="positive">Available</span>
+                                </td>
+                            </tr>
+                            <tr fd-table-row [main]="true" [activable]="true">
+                                <td fd-table-cell>
+                                    Pineapple
+                                </td>
+                                <td fd-table-cell>
+                                    Mexico
+                                </td>
+                                <td fd-table-cell>
+                                    2 EUR
+                                </td>
+                                <td fd-table-cell>
+                                    <span fd-object-status status="negative">Out of stock</span>
+                                </td>
+                            </tr>
+                            <tr fd-table-row [main]="true" [activable]="true">
+                                <td fd-table-cell>
+                                    Orange
+                                </td>
+                                <td fd-table-cell>
+                                    Spain
+                                </td>
+                                <td fd-table-cell>
+                                    6 EUR
+                                </td>
+                                <td fd-table-cell>
+                                    <span fd-object-status status="informative">Temporary unavailable</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fd-card-content>
+            </fd-card>
+        </ng-container>
+        <fd-card *fdCardDef badge="New" cardType="list">
+            <fd-card-header>
+                <fd-avatar image="http://picsum.photos/id/1018/400"></fd-avatar>
+                <h2 fd-card-title>Card Title</h2>
+                <h3 fd-card-subtitle>Card Subtitle</h3>
+                <span fd-card-counter status="positive">3 of 10</span>
+            </fd-card-header>
+            <fd-card-content>
+                <ul fd-list [noBorder]="true">
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 1
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 2
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 3
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 4
+                        </span>
+                    </li>
+                </ul>
+            </fd-card-content>
+        </fd-card>
+        <fd-card *fdCardDef [compact]="true" cardType="list">
+            <fd-card-header>
+                <h2 fd-card-title>Card Title</h2>
+                <h3 fd-card-subtitle>Card Subtitle</h3>
+                <span fd-card-counter>3 of 10</span>
+            </fd-card-header>
+            <fd-card-content>
+                <ul fd-list [noBorder]="true" [compact]="true">
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 1
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 2
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 3
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 4
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 5
+                        </span>
+                    </li>
+                </ul>
+            </fd-card-content>
+        </fd-card>
         <fd-card *fdCardDef>
             <fd-card-header>
                 <h2 fd-card-title>Card Title</h2>
@@ -36,53 +239,6 @@
                 </ul>
             </fd-card-content>
         </fd-card>
-    </ng-container>
-    <ng-container *ngIf="card2Visibility">
-        <fd-card *fdCardDef>
-            <fd-card-header>
-                <h2 fd-card-title>Projected revenue</h2>
-                <h3 fd-card-subtitle>Values include taxes | USD</h3>
-                <span fd-card-counter status="informative">3 of 15</span>
-
-                <fd-card-kpi-header>
-                    <strong fd-card-kpi-value>21.83</strong>
-                    <span fd-card-kpi-scale-icon glyph="up" fd-object-status status="positive"></span>
-                    <span fd-card-kpi-scale-text>K</span>
-
-                    <div fd-card-kpi-analytics>
-                        <label fd-card-kpi-analytics-label>Target</label>
-                        <div fd-card-kpi-analytics-content>25K</div>
-                    </div>
-                    <div fd-card-kpi-analytics>
-                        <label fd-card-kpi-analytics-label>Deviation</label>
-                        <span fd-card-kpi-analytics-content>-14.52%</span>
-                    </div>
-                </fd-card-kpi-header>
-
-                <h4 fd-card-second-subtitle>Q1, 2018</h4>
-            </fd-card-header>
-            <fd-card-content>
-                <ul fd-list [noBorder]="true">
-                    <li fd-list-item>
-                        <span fd-list-title>
-                            item 1
-                        </span>
-                    </li>
-                    <li fd-list-item>
-                        <span fd-list-title>
-                            item 2
-                        </span>
-                    </li>
-                    <li fd-list-item>
-                        <span fd-list-title>
-                            item 3
-                        </span>
-                    </li>
-                </ul>
-            </fd-card-content>
-        </fd-card>
-    </ng-container>
-    <ng-container *ngIf="card3Visibility">
         <fd-card *fdCardDef>
             <fd-card-header>
                 <h2 fd-card-title>Table card</h2>
@@ -145,228 +301,73 @@
                 </table>
             </fd-card-content>
         </fd-card>
-    </ng-container>
-    <fd-card *fdCardDef badge="New" cardType="list">
-        <fd-card-header>
-            <fd-avatar image="http://lorempixel.com/400/400/nature/4/"></fd-avatar>
-            <h2 fd-card-title>Card Title</h2>
-            <h3 fd-card-subtitle>Card Subtitle</h3>
-            <span fd-card-counter status="positive">3 of 10</span>
-        </fd-card-header>
-        <fd-card-content>
-            <ul fd-list [noBorder]="true">
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 1
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 2
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 3
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 4
-                    </span>
-                </li>
-            </ul>
-        </fd-card-content>
-    </fd-card>
-    <fd-card *fdCardDef [compact]="true" cardType="list">
-        <fd-card-header>
-            <h2 fd-card-title>Card Title</h2>
-            <h3 fd-card-subtitle>Card Subtitle</h3>
-            <span fd-card-counter>3 of 10</span>
-        </fd-card-header>
-        <fd-card-content>
-            <ul fd-list [noBorder]="true" [compact]="true">
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 1
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 2
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 3
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 4
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 5
-                    </span>
-                </li>
-            </ul>
-        </fd-card-content>
-    </fd-card>
-    <fd-card *fdCardDef>
-        <fd-card-header>
-            <h2 fd-card-title>Card Title</h2>
-        </fd-card-header>
-        <fd-card-content>
-            <ul fd-list [noBorder]="true">
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 1
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 2
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 3
-                    </span>
-                </li>
-            </ul>
-        </fd-card-content>
-    </fd-card>
-    <fd-card *fdCardDef>
-        <fd-card-header>
-            <h2 fd-card-title>Table card</h2>
-            <span fd-card-counter>3 of 10</span>
-        </fd-card-header>
-        <fd-card-content>
-            <table fd-table [noBorderX]="true">
-                <thead fd-table-header>
-                    <tr fd-table-row>
-                        <th fd-table-cell>Name</th>
-                        <th fd-table-cell>Price</th>
-                        <th fd-table-cell>Country</th>
-                        <th fd-table-cell>Status</th>
-                    </tr>
-                </thead>
-                <tbody fd-table-body>
-                    <tr fd-table-row [main]="true" [activable]="true">
-                        <td fd-table-cell>
-                            Banana
-                        </td>
-                        <td fd-table-cell>
-                            India
-                        </td>
-                        <td fd-table-cell>
-                            5 EUR
-                        </td>
-                        <td fd-table-cell>
-                            <span fd-object-status status="positive">Available</span>
-                        </td>
-                    </tr>
-                    <tr fd-table-row [main]="true" [activable]="true">
-                        <td fd-table-cell>
-                            Pineapple
-                        </td>
-                        <td fd-table-cell>
-                            Mexico
-                        </td>
-                        <td fd-table-cell>
-                            2 EUR
-                        </td>
-                        <td fd-table-cell>
-                            <span fd-object-status status="negative">Out of stock</span>
-                        </td>
-                    </tr>
-                    <tr fd-table-row [main]="true" [activable]="true">
-                        <td fd-table-cell>
-                            Orange
-                        </td>
-                        <td fd-table-cell>
-                            Spain
-                        </td>
-                        <td fd-table-cell>
-                            6 EUR
-                        </td>
-                        <td fd-table-cell>
-                            <span fd-object-status status="informative">Temporary unavailable</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </fd-card-content>
-    </fd-card>
-    <fd-card *fdCardDef badge="New" cardType="list">
-        <fd-card-header>
-            <fd-avatar image="http://lorempixel.com/400/400/nature/4/"></fd-avatar>
-            <h2 fd-card-title>Card Title</h2>
-            <h3 fd-card-subtitle>Card Subtitle</h3>
-            <span fd-card-counter status="positive">3 of 10</span>
-        </fd-card-header>
-        <fd-card-content>
-            <ul fd-list [noBorder]="true">
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 1
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 2
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 3
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 4
-                    </span>
-                </li>
-            </ul>
-        </fd-card-content>
-    </fd-card>
-    <fd-card *fdCardDef [compact]="true" cardType="list">
-        <fd-card-header>
-            <h2 fd-card-title>Card Title</h2>
-            <h3 fd-card-subtitle>Card Subtitle</h3>
-            <span fd-card-counter>3 of 10</span>
-        </fd-card-header>
-        <fd-card-content>
-            <ul fd-list [noBorder]="true" [compact]="true">
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 1
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 2
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 3
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 4
-                    </span>
-                </li>
-                <li fd-list-item>
-                    <span fd-list-title>
-                        item 5
-                    </span>
-                </li>
-            </ul>
-        </fd-card-content>
-    </fd-card>
-
-</fd-fixed-card-layout>
+        <fd-card *fdCardDef badge="New" cardType="list">
+            <fd-card-header>
+                <fd-avatar image="http://picsum.photos/id/1018/400"></fd-avatar>
+                <h2 fd-card-title>Card Title</h2>
+                <h3 fd-card-subtitle>Card Subtitle</h3>
+                <span fd-card-counter status="positive">3 of 10</span>
+            </fd-card-header>
+            <fd-card-content>
+                <ul fd-list [noBorder]="true">
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 1
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 2
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 3
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 4
+                        </span>
+                    </li>
+                </ul>
+            </fd-card-content>
+        </fd-card>
+        <fd-card *fdCardDef [compact]="true" cardType="list">
+            <fd-card-header>
+                <h2 fd-card-title>Card Title</h2>
+                <h3 fd-card-subtitle>Card Subtitle</h3>
+                <span fd-card-counter>3 of 10</span>
+            </fd-card-header>
+            <fd-card-content>
+                <ul fd-list [noBorder]="true" [compact]="true">
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 1
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 2
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 3
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 4
+                        </span>
+                    </li>
+                    <li fd-list-item>
+                        <span fd-list-title>
+                            item 5
+                        </span>
+                    </li>
+                </ul>
+            </fd-card-content>
+        </fd-card>
+    </fd-fixed-card-layout>
+</div>

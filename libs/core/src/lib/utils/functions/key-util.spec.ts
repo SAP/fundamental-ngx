@@ -1,44 +1,45 @@
 import { KeyUtil } from './key-util';
 import { isDevMode } from '@angular/core';
+import { A, B, CONTROL, DOWN_ARROW, SHIFT, TAB, UP_ARROW, Z } from '@angular/cdk/keycodes';
 
 
 describe('KeyUtil', () => {
 
-    describe('isKey', () => {
+    describe('isKeyCode', () => {
 
         interface TestValue {
             event: KeyboardEvent,
-            key: string | string[]
+            keyCode: number | number[]
         }
 
         const positiveTestValues: TestValue[] = [
             {
                 event: {
                     ...new KeyboardEvent('ArrowUp', {key: 'ArrowUp'}),
-                    keyCode: 38
+                    keyCode: UP_ARROW
                 },
-                key: 'ArrowUp'
+                keyCode: UP_ARROW
             },
             {
                 event: {
                     ...new KeyboardEvent('ArrowUp', {key: 'Up'}),
-                    keyCode: 38
+                    keyCode: UP_ARROW
                 },
-                key: 'ArrowUp'
+                keyCode: UP_ARROW
             },
             {
                 event: {
                     ...new KeyboardEvent('ArrowUp', {key: 'Up'}),
-                    keyCode: 38
+                    keyCode: UP_ARROW
                 },
-                key: ['ArrowDown', 'ArrowUp']
+                keyCode: [DOWN_ARROW, UP_ARROW]
             },
             {
                 event: {
                     ...new KeyboardEvent('ArrowUp', {key: null}),
-                    keyCode: 38
+                    keyCode: UP_ARROW
                 },
-                key: 'ArrowUp'
+                keyCode: UP_ARROW
             }
         ];
 
@@ -46,23 +47,23 @@ describe('KeyUtil', () => {
             {
                 event: {
                     ...new KeyboardEvent('ArrowDown', {key: 'ArrowDown'}),
-                    keyCode: 40
+                    keyCode: DOWN_ARROW
                 },
-                key: 'ArrowUp'
+                keyCode: UP_ARROW
             },
             {
                 event: {
                     ...new KeyboardEvent('ArrowDown', {key: 'ArrowDown'}),
-                    keyCode: 40
+                    keyCode: DOWN_ARROW
                 },
-                key: ['ArrowUp', 'Tab']
+                keyCode: [UP_ARROW, TAB]
             },
             {
                 event: {
                     ...new KeyboardEvent('ArrowDown', {key: 'ArrowUp'}),
                     keyCode: null
                 },
-                key: 'ArrowDown'
+                keyCode: DOWN_ARROW
             }
         ];
 
@@ -72,32 +73,32 @@ describe('KeyUtil', () => {
                     ...new KeyboardEvent('MagicBananaKey', {key: 'MagicBananaKey'}),
                     keyCode: -1
                 },
-                key: 'StandardPineappleKey'
+                keyCode: -2
             },
             {
                 event: {
                     ...new KeyboardEvent('ArrowUp', {key: null}),
-                    keyCode: 38
+                    keyCode: UP_ARROW
                 },
-                key: null
+                keyCode: null
             },
             {
                 event: null,
-                key: 'ArrowDown'
+                keyCode: DOWN_ARROW
             }
         ];
 
         it('should identify positive key examples', () =>
-            positiveTestValues.forEach(example => expect(KeyUtil.isKey(example.event, example.key)).toBeTrue())
+            positiveTestValues.forEach(example => expect(KeyUtil.isKeyCode(example.event, example.keyCode)).toBeTrue())
         );
 
         it('should identify negative key examples', () =>
-            negativeTestValues.forEach(example => expect(KeyUtil.isKey(example.event, example.key)).toBeFalse())
+            negativeTestValues.forEach(example => expect(KeyUtil.isKeyCode(example.event, example.keyCode)).toBeFalse())
         );
 
         it('should throw error for broken examples', () => {
             if (isDevMode()) {
-                errorTestValues.forEach(example => expect(() => KeyUtil.isKey(example.event, example.key)).toThrow())
+                errorTestValues.forEach(example => expect(() => KeyUtil.isKeyCode(example.event, example.keyCode)).toThrow())
             }
         });
     });
@@ -113,21 +114,21 @@ describe('KeyUtil', () => {
             {
                 event: {
                     ...new KeyboardEvent('KeyA', {code: 'KeyA'}),
-                    keyCode: 65
+                    keyCode: A
                 },
                 keyType: 'alphabetical'
             },
             {
                 event: {
                     ...new KeyboardEvent('KeyB', {code: 'KeyB'}),
-                    keyCode: 66
+                    keyCode: B
                 },
                 keyType: 'alphabetical'
             },
             {
                 event: {
                     ...new KeyboardEvent('KeyZ', {code: null}),
-                    keyCode: 90
+                    keyCode: Z
                 },
                 keyType: 'alphabetical'
             },
@@ -165,14 +166,14 @@ describe('KeyUtil', () => {
             {
                 event: {
                     ...new KeyboardEvent('Shift', {code: 'Shift'}),
-                    keyCode: 16
+                    keyCode: SHIFT
                 },
                 keyType: 'alphabetical'
             },
             {
                 event: {
                     ...new KeyboardEvent('Control', {code: 'Control'}),
-                    keyCode: 17
+                    keyCode: CONTROL
                 },
                 keyType: 'numeric'
             },
@@ -193,7 +194,7 @@ describe('KeyUtil', () => {
             {
                 event: {
                     ...new KeyboardEvent('KeyB', {code: 'KeyB'}),
-                    keyCode: 66
+                    keyCode: B
                 },
                 keyType: undefined
             }
@@ -209,7 +210,7 @@ describe('KeyUtil', () => {
 
         it('should throw error for broken keyType examples', () => {
             if (isDevMode()) {
-                errorTestValues.forEach(example => expect(() => KeyUtil.isKey(example.event, example.keyType)).toThrow())
+                errorTestValues.forEach(example => expect(() => KeyUtil.isKeyType(example.event, example.keyType)).toThrow())
             }
         });
     })
