@@ -1,8 +1,8 @@
-import { LayoutGridColDirective } from './layout-grid-col.directive';
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CSS_CLASS_NAME } from '../constants';
-import { LayoutGridComponent } from '@fundamental-ngx/core';
+import { LayoutGridComponent } from '../layout-grid.component';
+import { LayoutGridColDirective } from './layout-grid-col.directive';
 
 const COL_SIZE = 12;
 const MD_COL_SIZE = 6;
