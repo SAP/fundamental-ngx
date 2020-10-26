@@ -102,4 +102,22 @@ export async function checkErrorTooltip(element, tooltipElement) {
     await hoverMouse(element);
     return await getValueOfAttribute(tooltipElement, 'innerHTML'); // todo: Anton, please take a look.
 }
-
+// tslint:disable-next-line:typedef
+export async function checkLabels(array, expectation) {
+    const labels = await array.map(async element => {
+        return await element.getText();
+    });
+    await expect(Promise.all(labels)).toEqual(expectation);
+}
+// tslint:disable-next-line:typedef
+export async function checkBorderColor(array, expectedColor) {
+    await array.forEach(async element => {
+        return await expect(await element.getCssValue('border-color')).toEqual(expectedColor);
+    });
+}
+// tslint:disable-next-line:typedef
+export async function checkOutputLabel(array, label, selections) {
+    await array.forEach(async element => {
+        await expect(element.getText()).toEqual(label + selections);
+    });
+}

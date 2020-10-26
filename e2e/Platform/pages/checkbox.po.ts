@@ -23,7 +23,7 @@ export class CheckboxPO extends BaseComponentPo {
     presenceCheckbox = $('fdp-platform-checkbox-error-handling #presence');
     errorExampleTitle = $('fdp-platform-checkbox-error-handling h3');
     submitBtn = $('fdp-platform-checkbox-error-handling button');
-    errorTooltip = $('span.fd-form-message span'); // $('[type=error]');
+    errorTooltip = $('span.fd-form-message span');
 
     accessibilityCheckboxes = $$('fdp-platform-checkbox-a11y input');
     disabledAccessibilityCheckbox = $('fdp-platform-checkbox-a11y #a11y3');
