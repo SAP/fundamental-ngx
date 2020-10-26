@@ -1,43 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PopoverComponent } from './popover.component';
 import { PopoverControlComponent } from './popover-control/popover-control.component';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
-import { PopoverDirective } from './popover-directive/popover.directive';
-import { PopoverContainer } from './popover-directive/popover-container';
-import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
 import { PopoverBodyHeaderDirective } from './popover-body/popover-body-directives/popover-body-header.directive';
 import { PopoverBodyFooterDirective } from './popover-body/popover-body-directives/popover-body-footer.directive';
 
-import { ButtonModule } from '../button/button.module';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { CdkPopoverComponent } from './cdk-overlay/cdk-popover.component';
+import { PopoverComponent } from './popover.component';
 import { A11yModule } from '@angular/cdk/a11y';
+import { PopoverDirective } from './popover-directive/popover.directive';
+import { PopoverContainer } from './popover-directive/popover-container';
 
 @NgModule({
     declarations: [
-        PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
-        PopoverDirective,
-        PopoverContainer,
-        PopoverDropdownComponent,
         PopoverBodyHeaderDirective,
         PopoverBodyFooterDirective,
-        CdkPopoverComponent
+        PopoverComponent,
+        PopoverDirective,
+        PopoverContainer
     ],
-    imports: [CommonModule, ButtonModule, OverlayModule, A11yModule],
+    imports: [CommonModule, OverlayModule, A11yModule],
     exports: [
-        PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
-        PopoverDirective,
-        PopoverDropdownComponent,
         PopoverBodyHeaderDirective,
         PopoverBodyFooterDirective,
-        CdkPopoverComponent,
+        PopoverComponent,
+        PopoverDirective,
+        PopoverContainer
     ],
-    entryComponents: [PopoverContainer]
 })
 export class PopoverModule {}

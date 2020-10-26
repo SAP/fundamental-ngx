@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
 import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
-import { Placement } from '../popover/cdk-overlay/popover-position';
+import { Placement } from '../popover/popover-position/popover-position';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarService } from '../calendar/calendar.service';
 import { FdRangeDate } from '../calendar/models/fd-range-date';

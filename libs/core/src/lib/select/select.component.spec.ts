@@ -3,7 +3,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
 import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { CdkPopoverComponent } from '../popover/cdk-overlay/cdk-popover.component';
+import { PopoverComponent } from '../popover/popover.component';
 import { OptionComponent } from '@fundamental-ngx/core';
 
 @Component({
@@ -44,7 +44,7 @@ describe('SelectComponent', () => {
             .overrideComponent(SelectComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
             })
-            .overrideComponent(CdkPopoverComponent, {
+            .overrideComponent(PopoverComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
             })
             .compileComponents();

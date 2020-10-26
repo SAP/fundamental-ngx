@@ -29,7 +29,7 @@ import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { Subscription } from 'rxjs';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
-import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
+import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { Placement, PopperOptions } from 'popper.js';
 import { RtlService } from '../utils/services/rtl.service';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';

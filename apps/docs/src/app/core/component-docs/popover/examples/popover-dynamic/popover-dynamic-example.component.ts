@@ -1,5 +1,5 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { CdkPopoverComponent, PopoverComponent } from '@fundamental-ngx/core';
+import { PopoverComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-popover-dynamic-example',
@@ -7,7 +7,7 @@ import { CdkPopoverComponent, PopoverComponent } from '@fundamental-ngx/core';
 })
 export class PopoverDynamicExampleComponent {
     @ViewChild('popoverComponent')
-    popoverComponent: CdkPopoverComponent;
+    popoverComponent: PopoverComponent;
 
     constructor(private changeDetectionRef: ChangeDetectorRef) {}
 

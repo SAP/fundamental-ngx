@@ -421,7 +421,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     handleSearchTermChange(): void {
         this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
         if (this.popoverComponent) {
-            this.popoverComponent.updatePopover();
+            this.popoverComponent.refreshPosition();
         }
     }
 

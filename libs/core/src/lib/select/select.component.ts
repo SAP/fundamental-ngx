@@ -25,7 +25,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { PopperOptions } from 'popper.js';
-import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
+import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { KeyUtil } from '../utils/functions';
 import { SelectProxy } from './select-proxy.service';
 import { buffer, debounceTime, filter, map, startWith, takeUntil } from 'rxjs/operators';
