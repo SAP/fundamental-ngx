@@ -145,7 +145,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this.actionSheetBody.mobile = this.mobile;
         this.actionSheetBody.compact = this.compact;
         this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
-        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
     }
 
     /** @hidden */
