@@ -32,6 +32,6 @@ describe('ListBylineLeftDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list__byline-left');
+        expect(component.ref.nativeElement.className).toContain('fd-list__byline-left');
     });
 });

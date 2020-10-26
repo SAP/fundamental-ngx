@@ -32,7 +32,7 @@ describe('ListBylineRightDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list__byline-right');
-        expect(component.ref.nativeElement.className).toBe('fd-list__byline-right--informative');
+        expect(component.ref.nativeElement.className).toContain('fd-list__byline-right');
+        expect(component.ref.nativeElement.className).toContain('fd-list__byline-right--informative');
     });
 });

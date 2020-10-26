@@ -32,6 +32,6 @@ describe('ListContentDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list__content');
+        expect(component.ref.nativeElement.className).toContain('fd-list__content');
     });
 });

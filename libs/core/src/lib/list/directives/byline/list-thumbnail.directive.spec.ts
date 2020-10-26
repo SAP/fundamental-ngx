@@ -32,6 +32,6 @@ describe('ListThumbnailDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list__thumbnail');
+        expect(component.ref.nativeElement.className).toContain('fd-list__thumbnail');
     });
 });
