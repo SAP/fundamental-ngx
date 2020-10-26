@@ -56,10 +56,6 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     compact = false;
 
-    /** Display in mobile view. **/
-    @Input()
-    mobile = false;
-
     /**Indicate if it's closing button **/
     @Input()
     isCloseButton = false;

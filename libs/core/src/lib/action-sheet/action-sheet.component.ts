@@ -17,7 +17,7 @@ import {
     TemplateRef,
     ComponentRef,
     ViewChildren,
-    QueryList, ContentChildren
+    QueryList, ContentChildren, Inject
 } from '@angular/core';
 import { PopoverComponent } from '../popover/popover.component';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
@@ -31,7 +31,7 @@ import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.
 import { startWith, takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
-import { ACTION_SHEET_COMPONENT } from './action-sheet.interface';
+import {ACTION_SHEET_COMPONENT, ActionSheetInterface} from './action-sheet.interface';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -43,7 +43,7 @@ import { ACTION_SHEET_COMPONENT } from './action-sheet.interface';
         KeyboardSupportService
     ]
 })
-export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy, ActionSheetInterface {
 
     /** Whether should be displayed in compact mode **/
     @Input()
@@ -66,7 +66,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
      **/
     @Input()
     triggers: string[] = ['click'];
-
 
     /** Event thrown, when focus escapes the list */
     @Output()
@@ -115,15 +114,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.actionSheetBody.mobile = this.mobile;
-        this.actionSheetBody.compact = this.compact;
-        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
-        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
+        this._initializeChildrenState();
         this._keyboardSupportService.setKeyboardService(this.actionSheetItems, false);
         this._listenOnItemsChange();
-        this.actionSheetControl.clicked.subscribe((isOpen) => {
-            this.isOpenChangeHandle(isOpen);
-        });
+        this._actionControlHandle();
     }
 
     /** @hidden */
@@ -144,6 +138,21 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+    }
+
+    /** @hidden */
+    private _initializeChildrenState(): void {
+        this.actionSheetBody.mobile = this.mobile;
+        this.actionSheetBody.compact = this.compact;
+        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
+        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.mobile = this.mobile);
+    }
+
+    /** @hidden */
+    private _actionControlHandle(): void {
+        this.actionSheetControl.clicked.subscribe((isOpen) => {
+            this.isOpenChangeHandle(isOpen);
+        });
     }
 
     /** @hidden */
@@ -175,6 +184,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => this._listenOnItemsClick());
+
     }
 
     private _listenOnItemsClick(): void {

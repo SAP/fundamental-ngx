@@ -1,7 +1,4 @@
 import { EventEmitter, InjectionToken } from '@angular/core';
-import {DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
-import { MobileMode } from '../utils/interfaces/mobile-control.interface';
-
 
 export const ACTION_SHEET_COMPONENT = new InjectionToken<string[]>('ActionSheetComponent');
 
@@ -9,9 +6,7 @@ export const ACTION_SHEET_COMPONENT = new InjectionToken<string[]>('ActionSheetC
  Control element, which will be rendered inside dialog.
  **/
 
-export interface ActionSheetInterface extends MobileMode {
-    dialogConfig: DialogConfig;
-    openChange: EventEmitter<boolean>;
+export interface ActionSheetInterface {
 
-    close(): void;
+    openChange: EventEmitter<boolean>;
 }
