@@ -66,7 +66,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
 
     /** @hidden **/
     @Output()
-    keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+    keyDown = new EventEmitter<KeyboardEvent>();
 
     /** @hidden **/
     clicked = new EventEmitter<MouseEvent>();

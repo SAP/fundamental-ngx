@@ -19,7 +19,6 @@ export enum MobileModeControl {
     SELECT = 'SELECT',
     COMBOBOX = 'COMBOBOX',
     MULTI_INPUT = 'MULTI_INPUT',
-    ACTION_SHEET = 'ACTION_SHEET'
 }
 
 export abstract class MobileModeBase<T extends MobileMode> {

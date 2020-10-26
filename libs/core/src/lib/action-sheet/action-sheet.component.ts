@@ -29,7 +29,7 @@ import {
 } from '../utils/services/keyboard-support/keyboard-support.service';
 import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { merge, Subject } from 'rxjs';
+import {merge, Observable, Subject} from 'rxjs';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
 import {ACTION_SHEET_COMPONENT, ActionSheetInterface} from './action-sheet.interface';
 
@@ -74,6 +74,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** Event thrown, when the action sheet is opened or closed */
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** @hidden **/
+    @Input()
+    refreshObs$: Observable<string>;
 
     /** @hidden */
     @ContentChild(ActionSheetBodyComponent)
@@ -190,12 +194,12 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         /** Finish all of the streams, from before */
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
-        const refreshObs = merge(this._onRefresh$, this._onDestroy$);
+        const refreshObs$ = merge(this._onRefresh$, this._onDestroy$);
         this.actionSheetItems.forEach(
-            (item, index) => {
+            (item) => {
                 item.clicked
-                    .pipe(takeUntil(refreshObs))
-                    .subscribe(event => this.setItemActive(index))
+                    .pipe(takeUntil(refreshObs$))
+                    .subscribe()
             }
         );
     }
