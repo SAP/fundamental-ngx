@@ -20,7 +20,6 @@ import {
     BarModule,
     AvatarModule,
     ListModule,
-    SelectModule,
     SegmentedButtonModule,
     FormModule,
     CheckboxModule
@@ -56,7 +55,6 @@ const routes: Routes = [
         ListModule,
         AvatarModule,
         BarModule,
-        SelectModule,
         SegmentedButtonModule,
         FormModule,
         CheckboxModule

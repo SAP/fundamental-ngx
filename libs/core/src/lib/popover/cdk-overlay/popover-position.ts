@@ -47,6 +47,7 @@ export type Placement = 'auto-start'
 
 export type XPositions = 'start' | 'center' | 'end';
 export type YPositions = 'top' | 'center' | 'bottom';
+export type ArrowPosition = 'top' | 'bottom' | 'start' | 'end';
 
 export class PopoverPosition {
 
@@ -61,12 +62,17 @@ export class PopoverPosition {
         return resultCdkPlacement;
     }
 
-    static getArrowPosition(position: ConnectedPosition, rtl?: boolean): string {
-        let _position = '';
+    static getArrowPosition(position: ConnectedPosition, rtl?: boolean): ArrowPosition {
+        let _position: ArrowPosition = null;
 
-        if (position.overlayY !== position.originY && position.originY !== 'center' && position.overlayY !== 'center') {
+        if (position.overlayY !== position.originY &&
+            position.originY !== 'center' &&
+            position.overlayY !== 'center') {
             _position = position.overlayY;
-        } else if (position.overlayX !== position.originX && position.originX !== 'center') {
+        } else if (
+            position.overlayX !== position.originX &&
+            position.overlayX !== 'center' &&
+            position.originX !== 'center') {
             _position = position.overlayX;
 
             if (rtl) {
@@ -78,10 +84,10 @@ export class PopoverPosition {
             }
         }
 
-        return (_position === 'center' ? '' : _position);
+        return _position;
     }
 
-    static getMarginStyle(position: string): string {
+    static getMarginStyle(position: ArrowPosition): string {
         if (!position) {
             return;
         }

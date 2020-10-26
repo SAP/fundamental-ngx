@@ -26,14 +26,21 @@ export class PopoverCdkPlacementExampleComponent {
 
     cdkPosition: ConnectionPositionPair[]
 
+    constructor() {
+        this.cdkPosition = this._buildCdkPositionObject();
+    }
+
     refresh(): void {
-        this.cdkPosition = [{
+        this.cdkPosition = this._buildCdkPositionObject();
+        this.popover.applyNewPosition(this.cdkPosition);
+    }
+
+    private _buildCdkPositionObject(): ConnectionPositionPair[] {
+        return [{
             originX: this.originX,
             originY: this.originY,
             overlayX: this.overlayX,
             overlayY: this.overlayY
         }];
-
-        this.popover.applyNewPosition(this.cdkPosition);
     }
 }

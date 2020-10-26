@@ -456,6 +456,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
         if (!this.open && !this.mobile) {
             this.handleBlur();
+            this.searchInputElement.nativeElement.focus();
         }
 
         this._cdRef.detectChanges();
@@ -485,8 +486,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
                 term: this.searchInputElement.nativeElement.value,
                 forceClose: false
             });
-
-            this.searchInputElement.nativeElement.focus();
         }
     }
 

@@ -44,10 +44,6 @@ export class BasePopoverClass {
     @Input()
     closeOnOutsideClick = true;
 
-    /** Event emitted when the state of the isOpen property changes. */
-    @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
     /** Whether the popover should be focusTrapped. */
     @Input()
     focusTrapped = false;
@@ -69,7 +65,12 @@ export class BasePopoverClass {
     @Input()
     scrollStrategy: ScrollStrategy;
 
-    /** Position of popover,  */
+    /**
+     * List of positions options for overlay defined by angular CDK.
+     * Positions will be taken in order, same like on array. If first position provided doesn't fit to window,
+     * another will be used
+     * More information can be found in https://material.angular.io/cdk/overlay/api
+     */
     @Input()
     cdkPositions: ConnectedPosition[];
 
@@ -97,5 +98,9 @@ export class BasePopoverClass {
     /** @deprecated */
     @Input()
     additionalClasses;
+
+    /** Event emitted when the state of the isOpen property changes. */
+    @Output()
+    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 }

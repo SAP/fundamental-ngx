@@ -114,3 +114,6 @@ $fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
     }
 }
 
+.cdk-overlay-container {
+    z-index: 1002;
+}
