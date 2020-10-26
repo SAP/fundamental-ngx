@@ -52,7 +52,6 @@ export type ArrowPosition = 'top' | 'bottom' | 'start' | 'end';
 
 export class PopoverPosition {
 
-    /**  */
     static getCdkPlacement(placement: Placement): ConnectedPosition {
         const resultCdkPlacement = popoverPlacementMap[placement];
 

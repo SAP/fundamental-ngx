@@ -49,7 +49,7 @@ let cdkPopoverUniqueId = 0;
  * PopoverComponent is an abstraction of PopoverDirective.
  */
 @Component({
-    selector: 'fd-cdk-popover, fd-popover',
+    selector: 'fd-popover',
     templateUrl: './popover.component.html',
     host: {
         '[class.fd-popover-custom]': 'true',
