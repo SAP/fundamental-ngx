@@ -1,7 +1,6 @@
 export * from './calendar.module';
 export * from './i18n/calendar-i18n';
 export * from './i18n/calendar-i18n-labels';
-export * from './models/fd-date';
 export * from './models/date-range';
 export * from './models/special-day-rule';
 export * from './models/aggregated-year';

@@ -38,7 +38,7 @@ export abstract class DatetimeAdapter<D> {
     /**
      * Gets the month of the given date.
      * @param date The date to extract the month from.
-     * @returns The month number (min 0, max 11).
+     * @returns The month number (min 1, max 12).
      */
     abstract getMonth(date: D): number;
 
@@ -52,7 +52,7 @@ export abstract class DatetimeAdapter<D> {
     /**
      * Gets the day of the week component of the given date.
      * @param date The date to extract the day of the week from.
-     * @returns The day of week number (min 0, max 6, 0 = Sunday).
+     * @returns The day of week number (min 1, max 7, 1 = Sunday).
      */
     abstract getDayOfWeek(date: D): number;
 
@@ -77,6 +77,12 @@ export abstract class DatetimeAdapter<D> {
      */
     abstract getSeconds(date: D): number;
 
+    /**
+     * Gets week number of the given date
+     * @param date The date to extract the week number from.
+     * @returns The week number (min 1, max 53).
+     */
+    abstract getWeekNumber(date: D): number;
     /**
      * Gets a list of names for the months.
      * @param style The naming style (e.g. long = 'January', short = 'Jan', narrow = 'J').
@@ -189,7 +195,7 @@ export abstract class DatetimeAdapter<D> {
      * Get Amount of weeks in current month/year
      * @param year The year of the date
      * @param month The month of the date
-     * @param firstDayOfWeek The first day of week. 0 - Sunday, 1 - Monday...
+     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday...
      * @returns Number of weeks in the given month
      */
     abstract getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number;
@@ -223,6 +229,15 @@ export abstract class DatetimeAdapter<D> {
      * @param date The date to be checked
      */
     abstract isValid(date: D): boolean;
+
+    /**
+     * Gets the RFC 3339 compatible string (https://tools.ietf.org/html/rfc3339) for the given date.
+     * This method is used to generate date strings that are compatible with native HTML attributes
+     * such as the `min` or `max` attribute of an `<input>`.
+     * @param date The date to get the ISO date string for.
+     * @returns The ISO date string date string.
+     */
+    abstract toIso8601(date: D): string;
 
     /**
      * Compares two dates.

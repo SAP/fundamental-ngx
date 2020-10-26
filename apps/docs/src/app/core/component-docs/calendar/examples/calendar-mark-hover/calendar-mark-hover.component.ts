@@ -7,7 +7,7 @@ import { FdDate, FdRangeDate } from '@fundamental-ngx/core';
 })
 export class CalendarMarkHoverComponent {
     rangeDate: FdRangeDate = {
-        start: FdDate.getToday(),
-        end: FdDate.getToday().nextDay()
+        start: new FdDate(2020, 10, 25),
+        end: new FdDate(2020, 10, 26)
     };
 }

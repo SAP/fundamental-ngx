@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class CalendarFormExamplesComponent {
     customForm = new FormGroup({
-        date: new FormControl(FdDate.getToday()),
+        date: new FormControl(new FdDate(2019, 9, 20)),
         dateRange: new FormControl({
             value: {
                 start: new FdDate(2019, 10, 11),

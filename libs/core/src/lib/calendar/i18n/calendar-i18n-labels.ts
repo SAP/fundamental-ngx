@@ -10,7 +10,7 @@ export class CalendarI18nLabels {
     readonly labelsChange: Subject<void> = new Subject<void>();
 
     /** Year selection aria label. Used on the button to navigate to the years view. */
-    yearSelectionLabel = 'Year selection';
+    yearSelectionLabel = 'Select year';
 
     /** Previous year aria label. Used on the button to switch to a previous year in the years view. */
     previousYearLabel = 'Previous year';
@@ -19,11 +19,14 @@ export class CalendarI18nLabels {
     nextYearLabel = 'Next year';
 
     /** Month selection aria label. Used on the button to navigate to the months view. */
-    monthSelectionLabel = 'Month selection';
+    monthSelectionLabel = 'Select month';
 
     /** Previous month aria label. Used on the button to switch to a previous month in the months view. */
     previousMonthLabel = 'Previous month';
 
     /** Next month aria label. Used on the button to switch to a next month in the months view. */
     nextMonthLabel = 'Next month';
+
+    /** Next month aria label. Used on the button to switch to a next month in the months view. */
+    dateSelectionLabel = 'Select date';
 }

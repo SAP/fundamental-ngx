@@ -20,6 +20,7 @@ export interface DateTimeFormats {
         monthA11yLabel: any;
         yearA11yLabel: any;
     };
+    rangeDelimiter: string;
 }
 
 export const DATE_TIME_FORMATS = new InjectionToken<DateTimeFormats>('date-formats');

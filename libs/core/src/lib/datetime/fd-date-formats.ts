@@ -3,7 +3,7 @@ import { DateTimeFormats } from './datetime-formats';
 export const FD_DATETIME_FORMATS: DateTimeFormats = {
     parse: {
         dateInput: null,
-        timeInput: 'hh:mm:ss',
+        timeInput: null,
         dateTimeInput: null
     },
     display: {
@@ -21,5 +21,6 @@ export const FD_DATETIME_FORMATS: DateTimeFormats = {
         dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
         monthA11yLabel: { month: 'long' },
         yearA11yLabel: { year: 'numeric' }
-    }
+    },
+    rangeDelimiter: ' - '
 };

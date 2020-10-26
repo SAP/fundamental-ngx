@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { DateFormatParser, FdDate, FdRangeDate } from '@fundamental-ngx/core';
+import { DateFormatParser, DateRange, DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
 
 @Injectable()
 export class DateFormatDashes extends DateFormatParser {
@@ -25,7 +25,7 @@ export class DateFormatDashes extends DateFormatParser {
     template: `
         <fd-date-picker [(ngModel)]="date" placeholder="dd-mm-yyyy"></fd-date-picker>
         <br />
-        <div>Selected Date: {{ date?.toDateString() }}</div>
+        <div>Selected Date: {{ date }}</div>
         <br />
         <fd-date-picker
             placeholder="dd-mm-yyyy to dd-mm-yyyy"
@@ -33,8 +33,8 @@ export class DateFormatDashes extends DateFormatParser {
             [(ngModel)]="selectedRange"
         ></fd-date-picker>
         <br />
-        <div>Selected First Date: {{ selectedRange?.start?.toDateString() }}</div>
-        <div>Selected Last Date: {{ selectedRange?.end?.toDateString() }}</div>
+        <div>Selected First Date: {{ selectedRange?.start }}</div>
+        <div>Selected Last Date: {{ selectedRange?.end }}</div>
     `,
     providers: [
         {
@@ -44,10 +44,15 @@ export class DateFormatDashes extends DateFormatParser {
     ]
 })
 export class DatePickerFormatExampleComponent {
-    date = FdDate.getToday();
+    date: FdDate;
+    selectedRange: DateRange<FdDate>;
 
-    selectedRange: FdRangeDate = {
-        start: FdDate.getToday(),
-        end: FdDate.getToday().nextDay()
-    };
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {
+        const today = this.datetimeAdapter.today();
+        this.date = today;
+        this.selectedRange = {
+            start: today,
+            end: this.datetimeAdapter.addCalendarDays(today, 1)
+        };
+    }
 }

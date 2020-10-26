@@ -19,7 +19,7 @@ import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { Placement } from 'popper.js';
 import { DateTimeFormatParser } from './format/datetime-parser';
-import { FdDate } from '../calendar/models/fd-date';
+import { FdDate } from '../datetime/fd-datetime-adapter';
 import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
 import { FormStates } from '../form/form-control/form-states';
@@ -61,8 +61,7 @@ import { delay, first, takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
-
+export class DatetimePickerComponent<D> implements OnInit, OnDestroy, ControlValueAccessor, Validator {
     /** Placeholder for the inner input element. */
     @Input()
     placeholder = 'mm/dd/yyyy, hh:mm:ss am';
@@ -91,7 +90,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     set meridian(value) {
         this.format = this._meridian ? 'MM/dd/yyyy, h:mm:ss a' : 'MM/dd/yyyy, H:mm:ss';
         this._meridian = value;
-    };
+    }
 
     get meridian(): boolean {
         return this._meridian;
@@ -181,7 +180,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
      */
     @Input()
-    specialDaysRules: SpecialDayRule[] = [];
+    specialDaysRules: SpecialDayRule<D>[] = [];
 
     /**
      * Object to customize year grid,
@@ -255,7 +254,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden Reference to the inner calendar component. */
     @ViewChild(CalendarComponent)
-    calendarComponent: CalendarComponent;
+    calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
     @ViewChild(PopoverComponent)
@@ -290,17 +289,17 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: any = (selected: any) => { };
+    onChange: any = (selected: any) => {};
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {};
 
     /**
      * Function used to disable certain dates in the calendar.
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function(fdDate: FdDate): boolean {
+    disableFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -310,7 +309,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         private _changeDetRef: ChangeDetectorRef,
         public dateTimeAdapter: DateTimeFormatParser,
         @Optional() private _datePipe: DatePipe
-    ) { }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -339,10 +338,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         return this.isCurrentModelValid() && !this.isInvalidDateInput
             ? null
             : {
-                dateValidation: {
-                    valid: false
-                }
-            };
+                  dateValidation: {
+                      valid: false
+                  }
+              };
     }
 
     /** Toggles the popover. */
@@ -456,7 +455,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         if (!this.date.isTimeValid() && this.timeComponent) {
             this.time = this.timeComponent.time;
         }
-        if (!this.selectedDate || !this.selectedDate.isDateValid()) {
+        if (!this.selectedDate /* || !this.selectedDate.isDateValid() */) {
             this.selectedDate = FdDate.getToday();
         }
         this.date = new FdDatetime(this.selectedDate, this.time);
@@ -541,7 +540,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     private _refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
         if (this.calendarComponent) {
-            this.calendarComponent.setCurrentlyDisplayed(date);
+            this.calendarComponent.setCurrentlyDisplayed(date as any); // TODO to be fixed
         }
     }
 

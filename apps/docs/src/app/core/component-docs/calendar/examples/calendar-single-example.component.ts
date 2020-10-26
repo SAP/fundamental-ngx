@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { CalendarYearGrid, FdDate, SpecialDayRule } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-single-example',
     template: `
-        <fd-calendar [calType]="'single'" [(ngModel)]="date" [disableFunction]="myDisableFunction"> </fd-calendar>
+        <fd-calendar [calType]="'single'" [(ngModel)]="date" [disableFunction]="myDisableFunction"></fd-calendar>
         <br />
-        <div>Selected Date: {{ date.toDateString() }}</div>
+        <div>Selected Date: {{ date }}</div>
         <button fd-button label="Disable Wednesday" (click)="disableWednesday()"></button>
     `,
     styles: [
@@ -18,17 +18,19 @@ import { CalendarYearGrid, FdDate, SpecialDayRule } from '@fundamental-ngx/core'
     ]
 })
 export class CalendarSingleExampleComponent {
-    date = FdDate.getToday();
+    date = this.datetimeAdapter.today();
 
-    myDisableFunction = function (d: FdDate): boolean {
-        const day = d.getDay();
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+
+    myDisableFunction = (date: FdDate): boolean => {
+        const day = this.datetimeAdapter.getDayOfWeek(date);
         return day === 6 || day === 7;
     };
 
-    disableWednesday(): void {
-        this.myDisableFunction = function (d: FdDate): boolean {
-            const day = d.getDay();
+    disableWednesday = (): void => {
+        this.myDisableFunction = (date: FdDate): boolean => {
+            const day = this.datetimeAdapter.getDayOfWeek(date);
             return day === 4;
         };
-    }
+    };
 }

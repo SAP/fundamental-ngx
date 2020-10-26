@@ -67,6 +67,8 @@ export class FdDate {
      * Get Luxon date object converted to string from FdDate.
      */
     toDateString(): string {
+        throw new Error('This method should not be used anymore');
+
         if (this.year && this.month && this.day && this.isDateValid()) {
             return this.toDate().toDateString();
         } else {
@@ -79,6 +81,8 @@ export class FdDate {
      * -1 is thrown when some some of properties (day,month,year) are not defined
      */
     getTimeStamp(): number {
+        throw new Error('This method should not be used anymore');
+
         if (this.year && this.month && this.day) {
             return this.toDate().getTime();
         } else {
@@ -93,6 +97,8 @@ export class FdDate {
      *
      */
     getDay(): number {
+        throw new Error('This method should not be used anymore');
+
         if (this.year && this.month && this.day) {
             return this.toDate().getDay() + 1;
         } else {
@@ -102,18 +108,22 @@ export class FdDate {
 
     /** Get next day */
     nextDay(): FdDate {
-        const maxDays = CalendarService.getDaysInMonth(this.month, this.year);
+        throw new Error('This method should not be used anymore');
+
+        /*  const maxDays = CalendarService.getDaysInMonth(this.month, this.year);
         const isNextMonth = this.day >= maxDays;
         const isNextYear = isNextMonth && this.month === 12;
 
         const day = isNextMonth ? 1 : this.day + 1;
         const month = isNextMonth ? (isNextYear ? 1 : this.month + 1) : this.month;
         const year = isNextYear ? this.year + 1 : this.year;
-        return new FdDate(year, month, day);
+        return new FdDate(year, month, day); */
     }
 
     /** Get previous day  */
     previousDay(): FdDate {
+        throw new Error('This method should not be used anymore');
+
         /** Check if should switch month to previous one */
         const prevMonth: boolean = this.day === 1;
 
@@ -124,24 +134,29 @@ export class FdDate {
         const month = prevYear ? 12 : prevMonth ? this.month - 1 : this.month;
 
         /** Amount of days in month */
-        const maxDays: number = CalendarService.getDaysInMonth(month, year);
+        /* const maxDays: number = CalendarService.getDaysInMonth(month, year);
 
         const day = this.day === 1 ? maxDays : this.day - 1;
 
-        return new FdDate(year, month, day);
+        return new FdDate(year, month, day); */
     }
 
     /**
      * Get native date object from FdDate.
      */
     toDate(): Date {
+        throw new Error('This method should not be used anymore');
+        /* 
         return new Date(this.year, this.month - 1, this.day);
+     */
     }
 
     /*
      * Get week number from a date
      */
     getWeekNumber(): number {
+        throw new Error('This method should not be used anymore');
+
         const date = this.toDate();
         date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
 
@@ -158,6 +173,8 @@ export class FdDate {
      * Method that checks validity of current FdDate object.
      */
     isDateValid(): boolean {
+        throw new Error('This method should not be used anymore');
+
         if (!this) {
             return false;
         }
@@ -177,9 +194,9 @@ export class FdDate {
             return false;
         }
 
-        if (this.day < 1 || this.day > CalendarService.getDaysInMonth(this.month, this.year)) {
+        /* if (this.day < 1 || this.day > CalendarService.getDaysInMonth(this.month, this.year)) {
             return false;
-        }
+        } */
 
         return true;
     }

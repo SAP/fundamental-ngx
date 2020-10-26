@@ -52,7 +52,7 @@ export class CustomCalendarI18n extends CalendarI18n {
 // Aria labels i18n
 @Injectable()
 export class CustomI18nLabels extends CalendarI18nLabels {
-    yearSelectionLabel = 'Sélection de l\'année';
+    yearSelectionLabel = `Sélection de l'année`;
 
     previousYearLabel = 'Année précédente';
 
@@ -82,7 +82,7 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     ]
 })
 export class CalendarI18nExampleComponent implements AfterViewInit {
-    date = FdDate.getToday();
+    date = new FdDate(2020, 10, 25);
 
     constructor(private calendarI18n: CalendarI18n, private calendarI18nLabels: CalendarI18nLabels) {}
 

@@ -4,20 +4,24 @@ import {
     Component,
     EventEmitter,
     HostBinding,
+    Inject,
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
-import { CalendarI18n } from '../i18n/calendar-i18n';
-import { FdCalendarView } from '../calendar.component';
-import { CalendarCurrent } from '../models/calendar-current';
 import { takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
+
+import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
+import { FdCalendarView } from '../calendar.component';
+import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../../datetime';
+import { createMissingDateImplementationError } from '../calendar-errors';
 
 /**
  * Internal use only.
@@ -33,7 +37,7 @@ import { CalendarService } from '../calendar.service';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarHeaderComponent implements OnDestroy, OnInit {
+export class CalendarHeaderComponent<D> implements OnDestroy, OnInit {
     /** Currently active view. Needed for a11y labels. */
     @Input()
     activeView: FdCalendarView;
@@ -80,16 +84,18 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
-        public calendarI18nLabels: CalendarI18nLabels,
-        private _calendarI18n: CalendarI18n,
+        public _calendarI18nLabels: CalendarI18nLabels,
         private _changeDetRef: ChangeDetectorRef,
-        private _calendarService: CalendarService
+        private _calendarService: CalendarService,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
     ) {
-        /** Merging 18n observables */
-        const i18nObservables = merge(this._calendarI18n.i18nChange, this.calendarI18nLabels.labelsChange);
-
-        /** Called to trigger change detection */
-        i18nObservables.pipe(takeUntil(this.onDestroy$)).subscribe(() => this._changeDetRef.markForCheck());
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
     }
 
     /** @hidden */
@@ -101,35 +107,81 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
     /** @hidden */
     ngOnInit(): void {
         this._calendarService.leftArrowId = this.id + '-left-arrow';
+
+        merge(this._calendarI18nLabels.labelsChange, this._dateTimeAdapter.localeChanges)
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => {
+                this._changeDetRef.markForCheck();
+            });
     }
 
     /** Get the aria label for the previous button. Depends on the active view. */
-    get previousLabel(): string {
-        return this.activeView !== 'year'
-            ? this.calendarI18nLabels.previousMonthLabel
-            : this.calendarI18nLabels.previousYearLabel;
+    get previousAriaLabel(): string {
+        return this.isOnDayView
+            ? this._calendarI18nLabels.previousMonthLabel
+            : this._calendarI18nLabels.previousYearLabel;
     }
 
     /** Get the aria label for the next button. Depends on the active view. */
-    get nextLabel(): string {
-        return this.activeView !== 'year'
-            ? this.calendarI18nLabels.nextMonthLabel
-            : this.calendarI18nLabels.nextMonthLabel;
+    get nextAriaLabel(): string {
+        return this.isOnDayView ? this._calendarI18nLabels.nextMonthLabel : this._calendarI18nLabels.nextYearLabel;
     }
 
-    /** Get aria label for the month shown. */
-    get monthLabel(): string {
-        return this._calendarI18n.getAllFullMonthNames()[this.currentlyDisplayed.month - 1];
+    /** Get selection month button label. */
+    get selectMonthLabel(): string {
+        const monthNames = this._dateTimeAdapter.getMonthNames('long');
+        return monthNames[this.currentlyDisplayed.month - 1];
     }
 
-    /** Get information is calendar is on month view */
-    isOnMonthView(): boolean {
-        return this.activeView === 'month';
+    /** Get selection month button aria label. */
+    get selectMonthAriaLabel(): string {
+        return this.isOnMonthView
+            ? this._calendarI18nLabels.dateSelectionLabel
+            : this._calendarI18nLabels.monthSelectionLabel;
+    }
+
+    /** Get selection year button label. */
+    get selectYearLabel(): string {
+        return this._getYearName(this.currentlyDisplayed.year);
+    }
+
+    /** Get selection year button aria label. */
+    get selectYearAriaLabel(): string {
+        return this._calendarI18nLabels.yearSelectionLabel;
+    }
+
+    /** Get selection aggregated year button label. */
+    get selectAggregatedYearLabel(): string {
+        return `${this._getYearName(this.currentlyDisplayed.year)} - ${
+            this.currentlyDisplayed.year + this.amountOfYearsPerPeriod()
+        }`;
+    }
+
+    /** Get selection aggregated year button aria label. */
+    get selectAggregatedYearAriaLabel(): string {
+        return this.isOnAggregatedYearsView
+            ? this._calendarI18nLabels.dateSelectionLabel
+            : this._calendarI18nLabels.yearSelectionLabel;
+    }
+
+    /** Get information is calendar is on aggregated years view */
+    get isOnAggregatedYearsView(): boolean {
+        return this.activeView === 'aggregatedYear';
     }
 
     /** Get information is calendar is on year view */
-    isOnYearView(): boolean {
+    get isOnYearView(): boolean {
         return this.activeView === 'year';
+    }
+
+    /** Get information is calendar is on month view */
+    get isOnMonthView(): boolean {
+        return this.activeView === 'month';
+    }
+
+    /** Get information is calendar is on day view */
+    get isOnDayView(): boolean {
+        return this.activeView === 'day';
     }
 
     /** Get information about amount of years displayed at once on year view  */
@@ -151,5 +203,10 @@ export class CalendarHeaderComponent implements OnDestroy, OnInit {
 
     emitClose(): void {
         this.closeClicked.emit();
+    }
+
+    /** @hidden */
+    private _getYearName(year: number): string {
+        return this._dateTimeAdapter.getYearName(this._dateTimeAdapter.createDate(year, 1, 1));
     }
 }

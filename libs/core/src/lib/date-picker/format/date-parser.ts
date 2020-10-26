@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FdDate } from '../../calendar/models/fd-date';
-import { DatePipe } from '@angular/common';
+import { FdDate } from '../../datetime/fd-datetime-adapter';
 
 export function DATE_FORMAT_FACTORY(): DateFormatParserDefault {
     return new DateFormatParserDefault();

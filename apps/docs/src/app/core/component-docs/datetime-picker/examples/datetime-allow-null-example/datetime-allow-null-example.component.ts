@@ -15,7 +15,7 @@ import { DatetimePickerComponent, FdDatetime } from '@fundamental-ngx/core';
     `
 })
 export class DatetimePickerAllowNullExampleComponent {
-    @ViewChild(DatetimePickerComponent) datePicker: DatetimePickerComponent;
+    @ViewChild(DatetimePickerComponent) datePicker: DatetimePickerComponent<FdDatetime>;
 
     selectedDay: FdDatetime = FdDatetime.getToday();
 

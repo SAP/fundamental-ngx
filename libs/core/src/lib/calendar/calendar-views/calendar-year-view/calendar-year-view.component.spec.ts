@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CalendarYearViewComponent } from './calendar-year-view.component';
 import { CalendarService } from '../../calendar.service';
+import { FdDate } from '../../../datetime';
 
 describe('CalendarYearViewComponent', () => {
-    let component: CalendarYearViewComponent;
-    let fixture: ComponentFixture<CalendarYearViewComponent>;
+    let component: CalendarYearViewComponent<FdDate>;
+    let fixture: ComponentFixture<CalendarYearViewComponent<FdDate>>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

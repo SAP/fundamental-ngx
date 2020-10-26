@@ -2,7 +2,7 @@
  * Default date with time model used by the fundamental components.
  */
 
-import { FdDate } from '../../calendar/models/fd-date';
+import { FdDate } from '../../datetime/fd-datetime-adapter';
 import { TimeObject } from '../../time/time-object';
 
 export class FdDatetime {
@@ -74,7 +74,7 @@ export class FdDatetime {
      * Method that checks validity of date on FdDateTime object.
      */
     public isDateValid(): boolean {
-        return this.date && this.date.isDateValid();
+        return !!this.date /* && this.date.isDateValid() */;
     }
 
     public get year(): number {

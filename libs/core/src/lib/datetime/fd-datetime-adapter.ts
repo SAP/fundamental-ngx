@@ -23,6 +23,23 @@ export class FdDate {
         this.month = month;
         this.day = day;
     }
+
+    static getToday(): FdDate {
+        const today = new Date();
+        return new FdDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
+    }
+
+    toString(): string {
+        const date = new Date();
+        date.setUTCFullYear(this.year);
+        date.setUTCMonth(this.month - 1);
+        date.setUTCDate(this.day);
+        date.setUTCHours(0);
+        date.setUTCMinutes(0);
+        date.setUTCSeconds(0);
+        date.setUTCMilliseconds(0);
+        return date.toDateString();
+    }
 }
 
 export interface FdRangeDate {
@@ -55,7 +72,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     getDayOfWeek(date: FdDate): number {
-        return this._creteDateInstanceByFdDate(date).getDay();
+        return this._creteDateInstanceByFdDate(date).getDay() + 1;
     }
 
     getHours(date: FdDate): number {
@@ -70,36 +87,55 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return null;
     }
 
+    getWeekNumber(fdDate: FdDate): number {
+        const date = this._creteDateInstanceByFdDate(fdDate);
+
+        date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
+
+        // January 4 is always in week 1.
+        const dateInFirstWeek = this._creteDateInstanceByFdDate(new FdDate(fdDate.year, 1, 4));
+
+        // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+        return (
+            1 +
+            Math.round(
+                ((date.getTime() - dateInFirstWeek.getTime()) / 86400000 - 3 + ((dateInFirstWeek.getDay() + 6) % 7)) / 7
+            )
+        );
+    }
+
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { month: style, timeZone: 'utc' });
         return range(12, (i) =>
-            this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2020, i, 1)))
+            this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, i, 1)))
         );
     }
 
     getDateNames(): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { day: 'numeric', timeZone: 'utc' });
         return range(31, (i) =>
-            this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2020, 0, i + 1)))
+            this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, 0, i + 1)))
         );
     }
 
     getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'utc' });
         return range(7, (i) =>
-            this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2020, 0, i + 1)))
+            this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, 0, i + 1)))
         );
     }
 
     getYearName(date: FdDate): string {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { year: 'numeric', timeZone: 'utc' });
-        return this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(date.year, date.month)));
+        const dateInstance = this._creteDateInstanceByFdDate(date);
+        return this._stripDirectionalityCharacters(this._format(dateTimeFormat, dateInstance));
     }
 
     getWeekName(date: FdDate): string {
+        const weekNumber = this.getWeekNumber(date);
         // Intl does not provide such functionality.
         // Simply try to localize the number as we do it for year
-        return this.getYearName(date);
+        return this.getYearName(new FdDate(weekNumber, 1, 1));
     }
 
     getFirstDayOfWeek(): number {
@@ -152,9 +188,8 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         displayFormat = { ...displayFormat, timeZone: 'utc' };
 
         const dateTimeFormatter = new Intl.DateTimeFormat(this.locale, displayFormat);
-        return this._stripDirectionalityCharacters(
-            this._format(dateTimeFormatter, new Date(date.year, date.month - 1, date.day))
-        );
+        const dateInstance = this._creteDateInstanceByFdDate(date);
+        return this._stripDirectionalityCharacters(this._format(dateTimeFormatter, dateInstance));
     }
 
     addCalendarYears(date: FdDate, years: number): FdDate {
@@ -185,7 +220,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         const firstOfMonth = new Date(year, month - 1, 1);
         const lastOfMonth = new Date(year, month, 0);
 
-        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 7) % 7;
+        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 6) % 7;
         const used = dayOffset + lastOfMonth.getDate();
 
         return Math.ceil(used / 7);
@@ -202,7 +237,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         const nativeDate = this._creteDateInstanceByFdDate(date);
         return (
             nativeDate.getFullYear() === date.year &&
-            nativeDate.getMonth() === date.month &&
+            nativeDate.getMonth() + 1 === date.month &&
             nativeDate.getDate() === date.day
         );
     }
@@ -221,6 +256,15 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return this._creteDateInstanceByFdDate(date1).getTime() === this._creteDateInstanceByFdDate(date2).getTime();
     }
 
+    toIso8601(fdDate: FdDate): string {
+        return [fdDate.year, this._2digit(fdDate.month), this._2digit(fdDate.day)].join('-');
+    }
+
+    /** Adds 0 if number is less then 10 */
+    private _2digit(value: number): string {
+        return ('00' + value).slice(-2);
+    }
+
     /**
      * Strip out unicode LTR and RTL characters. Edge and IE insert these into formatted dates while
      * other browsers do not. We remove them to make output consistent and because they interfere with
@@ -237,8 +281,16 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * @param date FdDate instance
      * @returns date Native date instance
      */
-    private _creteDateInstanceByFdDate({ year, month, day: date }: FdDate): Date {
-        return new Date(year, month, date - 1, 0, 0, 0, 0);
+    private _creteDateInstanceByFdDate({ year, month, day: dayOfMonth }: FdDate): Date {
+        const date = new Date();
+        date.setFullYear(year);
+        date.setMonth(month - 1);
+        date.setDate(dayOfMonth);
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        date.setMilliseconds(0);
+        return date;
     }
 
     /**
@@ -290,5 +342,5 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 }
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
-    return Array.from(new Array(length)).map(mapFn);
+    return Array.from(new Array(length)).map((_, index) => mapFn(index));
 }

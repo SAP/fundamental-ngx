@@ -1,5 +1,6 @@
 export interface CalendarDay<D> {
     date: D;
+    label: string;
     weekDay: number;
     weekend: boolean;
     disabled?: boolean;

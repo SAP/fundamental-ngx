@@ -96,6 +96,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     @Input()
     set selectedRangeDate(dateRange: DateRange<D>) {
         if (
+            dateRange &&
+            this.selectedRangeDate &&
             this._dateTimeAdapter.datesEqual(dateRange.start, this.selectedRangeDate.start) &&
             this._dateTimeAdapter.datesEqual(dateRange.end, this.selectedRangeDate.end)
         ) {
@@ -153,7 +155,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
      * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
      * Rule accepts method with date object as a parameter. ex:
-     * `rule: (fdDate: D) => fdDate.getDay() === 1`, which will mark all sundays as special day.
+     * `rule: (date: D) => this.dateAdapter.getDay(date) === 1`, which will mark all sundays as special day.
      */
     @Input()
     specialDaysRules: SpecialDayRule<D>[] = [];
@@ -193,7 +195,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
+     * @param date date representation
      */
     @Input()
     disableRangeStartFunction = function (date: D): boolean {
@@ -202,7 +204,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
+     * @param date date representation
      */
     @Input()
     disableRangeEndFunction = function (date: D): boolean {
@@ -217,16 +219,14 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         @Optional() public _dateTimeAdapter: DatetimeAdapter<D>
     ) {
-        if (!this._dateTimeAdapter) {
+        if (!_dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
         }
-        if (!this._dateTimeFormats) {
+        if (!_dateTimeFormats) {
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
 
-        this._dateTimeAdapter.localeChanges
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this._refreshShortWeekDays());
+        _dateTimeAdapter.localeChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => this._refreshShortWeekDays());
     }
 
     /** @hidden */
@@ -278,9 +278,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
                 } else if (this.selectCounter === 1) {
                     // Check if date picked is higher than already chosen, otherwise just reverse them
-                    if (
-                        this._dateTimeAdapter.compareDate(this.selectedRangeDate.start, this.selectedRangeDate.end) < 0
-                    ) {
+                    if (this._dateTimeAdapter.compareDate(this.selectedRangeDate.start, day.date) < 0) {
                         this._selectedRangeDate = {
                             start: this.selectedRangeDate.start,
                             end: day.date
@@ -527,7 +525,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         const month = this.currentlyDisplayed.month;
         const year = this.currentlyDisplayed.year;
         const calendarDays: CalendarDay<D>[] = [];
-        const amountOfDaysInCurrentMonth: number = CalendarService.getDaysInMonth(month, year);
+        const amountOfDaysInCurrentMonth: number = this._dateTimeAdapter.getNumDaysInMonth(
+            this._dateTimeAdapter.createDate(year, month, 1)
+        );
         for (let dayNumber = 1; dayNumber <= amountOfDaysInCurrentMonth; dayNumber++) {
             const date: D = this._dateTimeAdapter.createDate(year, month, dayNumber);
             calendarDays.push({
@@ -563,7 +563,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * @return The day of week number (1 = Sunday, 2 = Monday ...).
      */
     private _getDayOfWeek(date: D): DaysOfWeek {
-        return (this._dateTimeAdapter.getDayOfWeek(date) + 1) as DaysOfWeek;
+        return this._dateTimeAdapter.getDayOfWeek(date) as DaysOfWeek;
     }
 
     /**
@@ -575,7 +575,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * @return The number of weeks in the given month.
      */
     private _getAmountOfWeeks(year: number, month: number, firstDayOfWeek: DaysOfWeek): number {
-        return this._dateTimeAdapter.getAmountOfWeeks(year, month, firstDayOfWeek - 1);
+        return this._dateTimeAdapter.getAmountOfWeeks(year, month, firstDayOfWeek);
     }
 
     /**
@@ -585,7 +585,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * @return The day of week (1 - Sunday, 2 - Monday ...).
      */
     private _getWeekDay(date: D): DaysOfWeek {
-        return (this._dateTimeAdapter.getDayOfWeek(date) + 1) as DaysOfWeek;
+        return this._dateTimeAdapter.getDayOfWeek(date) as DaysOfWeek;
     }
 
     /**
@@ -646,13 +646,16 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     }
 
     /**
-     * Method that generates whole day model basing on fdDate, disabling functions, block functions, and actually
+     * Method that generates whole day model basing on date, disabling functions, block functions, and actually
      * chosen range / single date.
      */
     private _getDay(date: D): CalendarDay<D> {
         const weekDay = this._getWeekDay(date);
+        const dayOfMonth = this._dateTimeAdapter.getDate(date);
+        const dateNames = this._dateTimeAdapter.getDateNames();
         const day: CalendarDay<D> = {
             date: date,
+            label: dateNames[dayOfMonth - 1],
             weekDay: weekDay,
             weekend: this._isWeekendDay(weekDay),
             ariaLabel: this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateA11yLabel),
@@ -681,7 +684,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         this.changeDetRef.markForCheck();
     }
 
-    /** Gets special day number of specified fdDate model */
+    /** Gets special day number of specified date model */
     private _getSpecialDay(date: D): number | null {
         const specialDay = this.specialDaysRules.find((specialDayRule) => specialDayRule.rule(date));
         if (specialDay) {

@@ -46,7 +46,7 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
     ]
 })
 export class DatePickerComplexI18nExampleComponent {
-    @ViewChild(DatePickerComponent) datePicker: DatePickerComponent;
+    @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<FdDate>;
 
     constructor(private calendarI18nService: CalendarI18n) {
         registerLocaleData(localeFrench, 'fr');

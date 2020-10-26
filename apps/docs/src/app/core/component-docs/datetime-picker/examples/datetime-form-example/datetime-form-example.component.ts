@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { FdDate, FdDatetime } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate, FdDatetime } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-datetime-form-example',
@@ -12,11 +12,13 @@ export class DatetimeFormExampleComponent {
         disabledDate: new FormControl({ value: FdDatetime.getToday(), disabled: true })
     });
 
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+
     isValid(): boolean {
         return this.customForm.get('date').valid;
     }
 
     disableFunction = (fdDate: FdDate): boolean => {
-        return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp();
+        return this.datetimeAdapter.compareDate(FdDate.getToday(), fdDate) > 0;
     };
 }

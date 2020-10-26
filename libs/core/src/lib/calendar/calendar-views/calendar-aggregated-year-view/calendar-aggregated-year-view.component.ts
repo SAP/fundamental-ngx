@@ -3,17 +3,23 @@ import {
     Component,
     ElementRef,
     EventEmitter,
+    Inject,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
+    SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
-import { FdDate } from '../../models/fd-date';
 import { Subject } from 'rxjs';
-import { CalendarService } from '../../calendar.service';
 import { takeUntil } from 'rxjs/operators';
-import { AggregatedYear } from '../../models/aggregated-year';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../../../datetime';
+import { createMissingDateImplementationError } from '../../calendar-errors';
+
+import { CalendarService } from '../../calendar.service';
+import { AggregatedYear, CalendarAggregatedYear } from '../../models/aggregated-year';
 import { CalendarYearGrid } from '../../models/calendar-year-grid';
 
 @Component({
@@ -22,7 +28,7 @@ import { CalendarYearGrid } from '../../models/calendar-year-grid';
     styleUrls: ['./calendar-aggregated-year-view.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
+export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy, OnChanges {
     /** @hidden
      *  This variable is used to define which year from calendarYearList should be focusable by tab key
      */
@@ -30,7 +36,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
 
     /**
      *  Parameter that stores the dozen of years that are currently being displayed. */
-    calendarYearListGrid: AggregatedYear[][];
+    calendarYearListGrid: CalendarAggregatedYear[][];
 
     /**
      * @hidden
@@ -39,7 +45,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
     yearsSelected: AggregatedYear;
 
     /** Parameter storing the year of the present day. */
-    currentYear: number = FdDate.getToday().year;
+    currentYear: number;
 
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */
     @Input()
@@ -79,17 +85,46 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
     private _newFocusedYearId: string;
 
     /** @hidden */
+    private _initiated = false;
+
+    /** @hidden */
     constructor(
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _calendarService: CalendarService
-    ) {}
+        private _calendarService: CalendarService,
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+    ) {
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
+
+        // default values
+        this.currentYear = _dateTimeAdapter.getYear(_dateTimeAdapter.today());
+    }
 
     /** @hidden */
     ngOnInit(): void {
         this._setupKeyboardService();
         this._firstYearInList = this.yearSelected - this._yearsInOnePeriod();
         this._constructYearsGrid();
+        this._initiated = true;
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (
+            this._initiated &&
+            ('yearSelected' in changes ||
+                'aggregatedYearsViewGrid' in changes ||
+                'yearViewGrid' in changes ||
+                'id' in changes)
+        ) {
+            this._constructYearsGrid();
+        }
     }
 
     /** @hidden */
@@ -99,11 +134,11 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
     }
 
     /** Method that sends the year to the parent component when it is clicked. */
-    selectYear(selectedYear: AggregatedYear, event?: MouseEvent): void {
+    selectYear(selectedYear: CalendarAggregatedYear, event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
         }
-        this.yearsSelected = selectedYear;
+        this.yearsSelected = selectedYear.years;
         this.yearsClicked.emit(this.yearsSelected);
     }
 
@@ -152,26 +187,87 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
 
     private _constructYearsGrid(): void {
         const displayedYearsAmount: number = this.aggregatedYearsViewGrid.cols * this.aggregatedYearsViewGrid.rows;
-        const calendarYearList: AggregatedYear[] = [];
+        const calendarYearList: CalendarAggregatedYear[] = [];
         this.calendarYearListGrid = [];
+
         for (let index = 0; index < displayedYearsAmount; ++index) {
             /**
              * Generates object with certain period of years,
              * which depends on amount of years displayed in year view
              */
-            calendarYearList.push({
+
+            const years: AggregatedYear = {
                 startYear: this._firstYearInList + this._yearsInOnePeriod() * index,
                 endYear: this._firstYearInList + this._yearsInOnePeriod() * (index + 1) - 1
+            };
+
+            calendarYearList.push({
+                years: years,
+                label: this._getYearsName(years),
+                ariaLabel: this._getAriaYearsName(years),
+                selected: this.isBetween(years, this.yearSelected),
+                current: this.isBetween(years, this.currentYear),
+                index: index
             });
         }
+
         /** Creating 2d grid */
         while (calendarYearList.length) {
             this.calendarYearListGrid.push(calendarYearList.splice(0, this.aggregatedYearsViewGrid.cols));
         }
-        this.yearsSelected = calendarYearList.find((years) => this.isBetween(years, this.yearSelected));
+
+        const yearsCellSelected = calendarYearList.find((cell) => this.isBetween(cell.years, this.yearSelected));
+        this.yearsSelected = yearsCellSelected ? yearsCellSelected.years : null;
         this.activeYear = this._getActiveYear();
+
+        this.calendarYearListGrid.forEach((row, rowIndex) => {
+            row.forEach((cell, colIndex) => {
+                cell.id = this.getId(this.getIndex(rowIndex, colIndex));
+                cell.tabIndex = cell.years === this.activeYear ? 0 : -1;
+            });
+        });
+
         this._changeDetectorRef.detectChanges();
+
         this.focusYearElement();
+    }
+
+    /** Returns year name as a string. */
+    private _getYearsName(years: AggregatedYear): string {
+        const startYearFormatted = this._dateTimeAdapter.getYearName(
+            this._dateTimeAdapter.createDate(years.startYear, 1, 1)
+        );
+        const endYearFormatted = this._dateTimeAdapter.getYearName(
+            this._dateTimeAdapter.createDate(years.endYear, 1, 1)
+        );
+        return `${this._getYearString(years.startYear, startYearFormatted)} - ${this._getYearString(
+            years.endYear,
+            endYearFormatted
+        )}`;
+    }
+
+    /** Returns aria year name as a string. */
+    private _getAriaYearsName(years: AggregatedYear): string {
+        const startYearFormatted = this._dateTimeAdapter.format(
+            this._dateTimeAdapter.createDate(years.startYear, 1, 1),
+            this._dateTimeFormats.display.yearA11yLabel
+        );
+        const endYearFormatted = this._dateTimeAdapter.format(
+            this._dateTimeAdapter.createDate(years.startYear, 1, 1),
+            this._dateTimeFormats.display.yearA11yLabel
+        );
+        return `${this._getYearString(years.startYear, startYearFormatted)} - ${this._getYearString(
+            years.endYear,
+            endYearFormatted
+        )}`;
+    }
+
+    /** Returns year name taking into account yearMapping. */
+    private _getYearString(year: number, defaultStr: string): string {
+        if (typeof this.aggregatedYearsViewGrid.yearMapping === 'function') {
+            return this.aggregatedYearsViewGrid.yearMapping(year);
+        }
+        return defaultStr;
     }
 
     /** Amount of years displayed in year view */
@@ -195,25 +291,21 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
      * if there is no current year, or selected, return first one
      */
     private _getActiveYear(): AggregatedYear {
-        const selectedYear: AggregatedYear = this._getYearsList().find((aggregatedYears) =>
-            this.isBetween(aggregatedYears, this.yearSelected)
-        );
-        if (selectedYear) {
-            return selectedYear;
+        const selectedYearCell = this._getYearsList().find(({ years }) => this.isBetween(years, this.yearSelected));
+        if (selectedYearCell) {
+            return selectedYearCell.years;
         }
 
-        const currentYear: AggregatedYear = this._getYearsList().find((aggregatedYears) =>
-            this.isBetween(aggregatedYears, this.currentYear)
-        );
-        if (currentYear) {
-            return currentYear;
+        const currentYearCell = this._getYearsList().find(({ years }) => this.isBetween(years, this.currentYear));
+        if (currentYearCell) {
+            return currentYearCell.years;
         }
 
-        return this.calendarYearListGrid[0][0];
+        return this.calendarYearListGrid[0][0].years;
     }
 
     /** Returns transformed 1d array from 2d year grid. */
-    private _getYearsList(): AggregatedYear[] {
+    private _getYearsList(): CalendarAggregatedYear[] {
         return [].concat.apply([], this.calendarYearListGrid);
     }
 

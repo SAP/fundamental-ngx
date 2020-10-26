@@ -81,10 +81,10 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent<D>;
 
     /** @hidden */
-    @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent;
+    @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent<D>;
 
     /** @hidden */
-    @ViewChild(CalendarAggregatedYearViewComponent) aggregatedYearViewComponent: CalendarAggregatedYearViewComponent;
+    @ViewChild(CalendarAggregatedYearViewComponent) aggregatedYearViewComponent: CalendarAggregatedYearViewComponent<D>;
 
     /** @hidden */
     @HostBinding('class.fd-calendar')
@@ -165,8 +165,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     @Input()
     yearGrid: CalendarYearGrid = {
         rows: 4,
-        cols: 5,
-        yearMapping: (num: number) => num.toString()
+        cols: 5
     };
 
     /**
@@ -176,8 +175,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     @Input()
     aggregatedYearGrid: CalendarYearGrid = {
         rows: 4,
-        cols: 3,
-        yearMapping: (num: number) => num.toString()
+        cols: 3
     };
 
     /**
@@ -253,13 +251,16 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     };
 
     /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef, @Optional() private _dateAdapter: DatetimeAdapter<D>) {
-        if (!this._dateAdapter) {
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
+    ) {
+        if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateAdapter');
         }
 
         // set default value
-        this.selectedDate = this._dateAdapter.today();
+        this.selectedDate = this._dateTimeAdapter.today();
     }
 
     /** @hidden */
@@ -277,20 +278,20 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
             if (this.calType === 'single') {
                 selected = <D>selected;
 
-                valid = this._dateAdapter.isValid(selected);
+                valid = this._dateTimeAdapter.isValid(selected);
 
                 this.selectedDate = selected;
             }
             if (this.calType === 'range') {
                 selected = <DateRange<D>>selected;
 
-                if (!this._dateAdapter.isValid(selected.start) || !this._dateAdapter.isValid(selected.end)) {
+                if (!this._dateTimeAdapter.isValid(selected.start) || !this._dateTimeAdapter.isValid(selected.end)) {
                     valid = false;
                 }
 
                 this.selectedRangeDate = {
-                    start: this._dateAdapter.clone(selected.start),
-                    end: this._dateAdapter.clone(selected.end)
+                    start: this._dateTimeAdapter.clone(selected.start),
+                    end: this._dateTimeAdapter.clone(selected.end)
                 };
             }
 
@@ -464,7 +465,10 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * which are connected to days displayed
      */
     setCurrentlyDisplayed(date: D): void {
-        this.currentlyDisplayed = { month: this._dateAdapter.getMonth(date), year: this._dateAdapter.getYear(date) };
+        this.currentlyDisplayed = {
+            month: this._dateTimeAdapter.getMonth(date),
+            year: this._dateTimeAdapter.getYear(date)
+        };
     }
 
     /**
@@ -495,12 +499,13 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** Method that provides information if model selected date/dates have properly types and are valid */
     isModelValid(): boolean {
         if (this.calType === 'single') {
-            return this._dateAdapter.isValid(this.selectedDate);
+            return this._dateTimeAdapter.isValid(this.selectedDate);
         }
         if (this.calType === 'range') {
             return (
-                this._dateAdapter.isValid(this.selectedRangeDate.start) &&
-                this._dateAdapter.isValid(this.selectedRangeDate.end)
+                this.selectedRangeDate &&
+                this._dateTimeAdapter.isValid(this.selectedRangeDate.start) &&
+                this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
             );
         }
     }
@@ -511,26 +516,26 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * Day grid is based on currently displayed month and year
      */
     private _prepareDisplayedView(): void {
-        if (this.calType === 'single' && this._dateAdapter.isValid(this.selectedDate)) {
+        if (this.calType === 'single' && this._dateTimeAdapter.isValid(this.selectedDate)) {
             this.currentlyDisplayed = {
-                year: this._dateAdapter.getYear(this.selectedDate),
-                month: this._dateAdapter.getMonth(this.selectedDate)
+                year: this._dateTimeAdapter.getYear(this.selectedDate),
+                month: this._dateTimeAdapter.getMonth(this.selectedDate)
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
             this.currentlyDisplayed = {
-                year: this._dateAdapter.getYear(this.selectedRangeDate.start),
-                month: this._dateAdapter.getMonth(this.selectedRangeDate.start)
+                year: this._dateTimeAdapter.getYear(this.selectedRangeDate.start),
+                month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.start)
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.end) {
             this.currentlyDisplayed = {
-                year: this._dateAdapter.getYear(this.selectedRangeDate.end),
-                month: this._dateAdapter.getMonth(this.selectedRangeDate.end)
+                year: this._dateTimeAdapter.getYear(this.selectedRangeDate.end),
+                month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.end)
             };
         } else {
-            const today = this._dateAdapter.today();
+            const today = this._dateTimeAdapter.today();
             this.currentlyDisplayed = {
-                year: this._dateAdapter.getYear(today),
-                month: this._dateAdapter.getMonth(today)
+                year: this._dateTimeAdapter.getYear(today),
+                month: this._dateTimeAdapter.getMonth(today)
             };
         }
     }
