@@ -87,6 +87,13 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
             },
             {
+                path: 'dynamic-side-content',
+                loadChildren: () =>
+                    import('./component-docs/dynamic-side-content/dynamic-side-content-docs.module').then(
+                        (m) => m.DynamicSideContentDocsModule
+                    )
+            },
+            {
                 path: 'file-input',
                 loadChildren: () =>
                     import('./component-docs/file-input/file-input-docs.module').then((m) => m.FileInputDocsModule)
