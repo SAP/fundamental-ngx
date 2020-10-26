@@ -1,0 +1,162 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fdp-column&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>The component that represents a table column.</p>
+			<p>```html
+				<fdp-column
+				name="name"
+				key="name"
+				label="Name"
+				align="start">
+			</fdp-column></p>
+		</div>
+		<p><fdp-column
+			name="price"
+			key="price.value">
+			&lt;fdp-table-header *fdpHeaderCellDef&gt;Price</fdp-table-header>
+			&lt;fdp-table-cell *fdpCellDef=&quot;let item&quot;&gt;
+			{{item.price.value}} {{item.price.currency}}
+			</fdp-table-cell>
+		</fdp-column></p>
+		<pre><code></code></pre>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">TableColumnComponent</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="key" class="tsd-anchor"></a>
+		<h3>key</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/96d32a09/libs/platform/src/lib/components/table/table-column/table-column.component.ts#L57">libs/platform/src/lib/components/table/table-column/table-column.component.ts:57</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Column data accessor.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="label" class="tsd-anchor"></a>
+		<h3>label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/96d32a09/libs/platform/src/lib/components/table/table-column/table-column.component.ts#L61">libs/platform/src/lib/components/table/table-column/table-column.component.ts:61</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Column header label.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="name" class="tsd-anchor"></a>
+		<h3>name</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/96d32a09/libs/platform/src/lib/components/table/table-column/table-column.component.ts#L53">libs/platform/src/lib/components/table/table-column/table-column.component.ts:53</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Column unique identifier.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="align" class="tsd-anchor"></a>
+		<h3>align</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> align<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> align<span class="tsd-signature-symbol">(</span>align<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ColumnAlign</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/96d32a09/libs/platform/src/lib/components/table/table-column/table-column.component.ts#L83">libs/platform/src/lib/components/table/table-column/table-column.component.ts:83</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">ts-ignore</dt>
+						<dd></dd>
+					</dl>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/96d32a09/libs/platform/src/lib/components/table/table-column/table-column.component.ts#L65">libs/platform/src/lib/components/table/table-column/table-column.component.ts:65</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">ts-ignore</dt>
+						<dd></dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>align: <span class="tsd-signature-type">ColumnAlign</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="fdpcelldef" class="tsd-anchor"></a>
+		<h3>fdp<wbr>Cell<wbr>Def</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fdp<wbr>Cell<wbr>Def<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdpCellDef</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/96d32a09/libs/platform/src/lib/components/table/table-column/table-column.component.ts#L88">libs/platform/src/lib/components/table/table-column/table-column.component.ts:88</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="fdpheadercelldef" class="tsd-anchor"></a>
+		<h3>fdp<wbr>Header<wbr>Cell<wbr>Def</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fdp<wbr>Header<wbr>Cell<wbr>Def<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdpHeaderCellDef</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/96d32a09/libs/platform/src/lib/components/table/table-column/table-column.component.ts#L91">libs/platform/src/lib/components/table/table-column/table-column.component.ts:91</a></li>
+			</ul>
+		</aside>
+	</section>
+</section>
+</div>
