@@ -41,7 +41,13 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/input', name: 'Input' },
             { url: 'core/inputGroup', name: 'Input Group' },
             { url: 'core/link', name: 'Link' },
-            { url: 'core/list', name: 'List' },
+            {
+                name: 'List',
+                subItems: [
+                    { url: 'core/list', name: 'Standard List' },
+                    { url: 'core/list-byline', name: 'List with Byline' }
+                ]
+            },
             { url: 'core/localizationEditor', name: 'Localization Editor' },
             { url: 'core/mega-menu', name: 'Mega Menu' },
             { url: 'core/menu', name: 'Menu' },
