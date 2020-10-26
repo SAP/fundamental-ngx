@@ -26,7 +26,7 @@ import { OptionComponent } from './option/option.component';
 import { fromEvent, Subscription } from 'rxjs';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
-import focusTrap, { FocusTrap } from 'focus-trap';
+import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { KeyUtil } from '../utils/functions/key-util';
 import { SelectProxy } from './select-proxy.service';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
@@ -411,7 +411,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     /** @hidden */
     private _setupFocusTrap(): void {
         try {
-            this._focusTrap = focusTrap(this._elementRef.nativeElement, {
+            this._focusTrap = createFocusTrap(this._elementRef.nativeElement, {
                 escapeDeactivates: false,
                 clickOutsideDeactivates: true,
                 returnFocusOnDeactivate: false,

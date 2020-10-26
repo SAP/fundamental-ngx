@@ -2,10 +2,6 @@ import { browser, By, ElementFinder, ExpectedConditions as EC } from 'protractor
 
 const IMPLICITLY_WAIT = 8000;
 
-export async function isSelected(element: ElementFinder): Promise<boolean> {
-    return element.element(By.xpath('preceding-sibling::input')).isSelected();
-}
-
 export async function clickAfterWait(element: ElementFinder): Promise<void> {
     await waitForElementToBeClickable(element);
     await element.click();
@@ -29,13 +25,6 @@ export async function selectValueFromTypeahead(typeaheadInput: ElementFinder, va
     await typeaheadContainer.click();
 }
 
-export async function selectCheckbox(element: ElementFinder, select: boolean): Promise<void> {
-    if ((await isSelected(element)) === select) {
-        return;
-    }
-    await clickAfterWait(element);
-}
-
 export async function hoverMouse(element: ElementFinder): Promise<void> {
     await waitForVisible(element);
     return browser
@@ -48,8 +37,12 @@ export async function waitForVisible(element: ElementFinder, timeout = IMPLICITL
     await browser.wait(EC.visibilityOf(element), timeout);
 }
 
+export async function waitForPresence(element: ElementFinder, timeout = IMPLICITLY_WAIT): Promise<void> {
+    await browser.wait(EC.presenceOf(element), timeout);
+}
+
 export async function waitForElementToBeClickable(element: ElementFinder): Promise<void> {
-    await browser.wait(EC.elementToBeClickable(element), IMPLICITLY_WAIT);
+    await browser.wait(EC.elementToBeClickable(element), 5000);
 }
 
 export async function isClickable(element: ElementFinder): Promise<boolean> {
@@ -74,8 +67,8 @@ export async function getInputText(element: ElementFinder): Promise<string> {
     return getValueOfAttributeValue(element);
 }
 
-export async function getNestedElement(parentElement: ElementFinder, nestedElement: string): Promise<ElementFinder> {
-    return parentElement.$(nestedElement);
+export async function getNestedElement(parentElement: ElementFinder, nestedElementLocator: string): Promise<ElementFinder> {
+    return parentElement.$(nestedElementLocator);
 }
 
 export function getValueOfAttributeValue(element: ElementFinder): Promise<string> {
@@ -83,9 +76,19 @@ export function getValueOfAttributeValue(element: ElementFinder): Promise<string
 }
 
 export async function getValueOfAttribute(element: ElementFinder, attributeName): Promise<string> {
-    return element.getAttribute(attributeName);
+    return await element.getAttribute(attributeName);
 }
 
 export function getPlaceholderText(element: ElementFinder): Promise<string> {
     return getValueOfAttribute(element, 'placeholder');
+}
+
+export async function checkLinkTargetDestination(element, site: string, angular: boolean = false): Promise<void> {
+    await browser.waitForAngularEnabled(angular);
+    await element.click();
+    await waitForUrl(site);
+}
+
+export async function clickByMouseMove(element: ElementFinder): Promise<void> {
+    await browser.actions().mouseMove(await element).click().perform();
 }

@@ -35,6 +35,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/icon', name: 'Icon' },
             { url: 'core/file-uploader', name: 'File Uploader' },
             { url: 'core/form-message', name: 'Form Message' },
+            { url: 'core/formatted-text', name: 'Formatted Text' },
             { url: 'core/info-label', name: 'Info Label' },
             { url: 'core/inlineHelp', name: 'Inline Help' },
             { url: 'core/input', name: 'Input' },
@@ -45,9 +46,11 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/mega-menu', name: 'Mega Menu' },
             { url: 'core/menu', name: 'Menu' },
             { url: 'core/message-strip', name: 'Message Strip' },
+            { url: 'core/message-toast', name: 'Message Toast' },
             { url: 'core/multi-input', name: 'Multi Input' },
             { url: 'core/notification', name: 'Notification' },
             { url: 'core/object-marker', name: 'Object Marker' },
+            { url: 'core/object-identifier', name: 'Object Identifier' },
             { url: 'core/object-status', name: 'Object Status' },
             { url: 'core/pagination', name: 'Pagination' },
             { url: 'core/panel', name: 'Panel' },
@@ -66,8 +69,9 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/timePicker', name: 'Time Picker' },
             { url: 'core/switch', name: 'Switch' },
             { url: 'core/token', name: 'Token' },
-            { url: 'core/toolbar', name: 'Toolbar' }
-            // { url: 'core/tree', name: 'Tree' }
+            { url: 'core/toolbar', name: 'Toolbar' },
+            { url: 'core/object-number', name: 'Object Number' },
+            { url: 'core/wizard', name: 'Wizard' }
         ];
 
         this.layouts = [

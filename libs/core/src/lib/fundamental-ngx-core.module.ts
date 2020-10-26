@@ -19,6 +19,7 @@ import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FileInputModule } from './file-input/file-input.module';
 import { FileUploaderModule } from './file-uploader/file-uploader.module';
 import { FixedCardLayoutModule } from './fixed-card-layout/fixed-card-layout.module';
+import { FormattedTextModule } from './formatted-text/formatted-text.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
 import { InfiniteScrollModule } from './infinite-scroll/infinite-scroll.module';
@@ -66,7 +67,10 @@ import { ComboboxMobileModule } from './combobox/combobox-mobile/combobox-mobile
 import { CarouselModule } from './utils/directives/carousel/carousel.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { CardModule } from './card/card.module';
+import { ObjectIdentifierModule } from './object-identifier/object-identifier.module';
 import { ObjectMarkerModule } from './object-marker/object-marker.module';
+import { MessageToastModule } from './message-toast/message-toast.module';
+import { MessageToastService } from './message-toast/message-toast-service/message-toast.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -92,6 +96,7 @@ import { ObjectMarkerModule } from './object-marker/object-marker.module';
         FileUploaderModule,
         FixedCardLayoutModule,
         FormModule,
+        FormattedTextModule,
         IconModule,
         InfoLabelModule,
         InlineHelpModule,
@@ -110,6 +115,7 @@ import { ObjectMarkerModule } from './object-marker/object-marker.module';
         MultiInputMobileModule,
         NestedListModule,
         NotificationModule,
+        ObjectIdentifierModule,
         ObjectMarkerModule,
         ObjectStatusModule,
         PaginationModule,
@@ -133,8 +139,9 @@ import { ObjectMarkerModule } from './object-marker/object-marker.module';
         SwitchModule,
         TokenModule,
         TreeModule,
-        CardModule
+        CardModule,
+        MessageToastModule
     ],
-    providers: [AlertService, DialogService, NotificationService]
+    providers: [AlertService, DialogService, NotificationService, MessageToastService]
 })
 export class FundamentalNgxCoreModule {}

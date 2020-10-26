@@ -24,7 +24,7 @@ import { ListMessageDirective } from '../list/list-message.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';
-import focusTrap, { FocusTrap } from 'focus-trap';
+import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { GroupFunction } from '../utils/pipes/list-group.pipe';
@@ -565,7 +565,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** @hidden */
     private _setupFocusTrap(): void {
         try {
-            this.focusTrap = focusTrap(this._elementRef.nativeElement, {
+            this.focusTrap = createFocusTrap(this._elementRef.nativeElement, {
                 clickOutsideDeactivates: true,
                 escapeDeactivates: false,
                 initialFocus: this._elementRef.nativeElement

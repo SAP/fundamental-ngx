@@ -27,7 +27,9 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/menu', name: 'Menu' },
             { url: 'platform/menu-button', name: 'Menu Button' },
             { url: 'platform/panel', name: 'Panel' },
+            { url: 'platform/object-marker', name: 'Object Marker' },
             { url: 'platform/object-status', name: 'Object Status' },
+            { url: 'platform/object-attribute', name: 'Object Attribute' },
             { url: 'platform/radio-group', name: 'Radio Button Group' },
             { url: 'platform/search-field', name: 'Search Field' },
             { url: 'platform/split-menu-button', name: 'Split Menu Button' },
@@ -38,9 +40,10 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/combobox', name: 'Combobox' },
             {
                 name: 'List And Items',
-                subItems: [{ url: 'platform/list', name: 'List' },
-                { url: 'platform/standard-list-item', name: 'Standard List Item' }]
-
+                subItems: [
+                    { url: 'platform/list', name: 'List' },
+                    { url: 'platform/standard-list-item', name: 'Standard List Item' }
+                ]
             }
         ];
 

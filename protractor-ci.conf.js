@@ -16,17 +16,24 @@ exports.config = {
         {
             'browserName': 'internet explorer',
             'version': 'latest',
-            'name': 'tests-Protractor',
+            'name': 'tests-Protractor-internet-explorer',
         },
         {
             'browserName': 'chrome',
             'platform': 'MAC',
             'version': 'latest',
-            'name': 'tests-Protractor',
+            'name': 'tests-Protractor-MAC-chrome',
+        },
+        {
+            'browserName': 'firefox',
+            'platform': 'MAC',
+            'version': 'latest',
+            'name': 'tests-Protractor-MAC-firefox',
         }
+
     ],
     directConnect: false,
-    baseUrl: 'http://www.google.com',
+    baseUrl: 'http://localhost:4200/#',
     framework: 'jasmine',
     jasmineNodeOpts: {
         showColors: true,

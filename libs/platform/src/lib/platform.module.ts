@@ -23,6 +23,8 @@ import { PlatformInputModule, PlatformStepInputModule, PlatformInputGroupModule 
 import { PlatformComboboxMobileModule } from './components/form/combobox/combobox-mobile/combobox-mobile.module';
 import { PlatformComboboxModule } from './components/form/combobox';
 import { PlatformThumbnailModule } from './components/thumbnail/public_api';
+import { PlatformObjectMarkerModule } from './components/object-marker/object-marker.module';
+import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -51,7 +53,9 @@ import { PlatformThumbnailModule } from './components/thumbnail/public_api';
         PlatformInputGroupModule,
         PlatformComboboxModule,
         PlatformComboboxMobileModule,
-        PlatformThumbnailModule
+        PlatformThumbnailModule,
+        PlatformObjectMarkerModule,
+        PlatformObjectAttributeModule
     ]
 })
 export class FundamentalNgxPlatformModule { }

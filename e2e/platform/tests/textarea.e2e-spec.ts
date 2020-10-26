@@ -2,7 +2,7 @@ import { browser, Key } from 'protractor';
 import { TextareaPo } from '../pages/textarea.po';
 import textAreaPageContent from '../fixtures/appData/textarea-page-content';
 import testData from '../fixtures/testData/textarea';
-import { getValueOfAttribute, getValueOfAttributeValue, hoverMouse } from '../helpers/common-helper';
+import { getValueOfAttribute, getValueOfAttributeValue, hoverMouse, setInput } from '../helper/helper';
 
 
 describe('Verify Textarea component', function() {
@@ -18,7 +18,7 @@ describe('Verify Textarea component', function() {
 
     describe('has Textarea and', function() {
         it('should allow the user to enter multiple lines of text', async () => {
-            await textareaPage.basicTextArea.sendKeys(testData.multiple_lines_text);
+            await setInput(await textareaPage.basicTextArea, testData.multiple_lines_text);
             const textareaText = await getValueOfAttributeValue(await textareaPage.basicTextArea);
 
             expect(textareaText).toEqual(testData.multiple_lines_text);
@@ -39,9 +39,9 @@ describe('Verify Textarea component', function() {
 
         });
         // No example or no restriction
-        xit('should be able enter maximum characters (50)', async () => {
+/*        xit('should be able enter maximum characters (50)', async () => {
 
-        });
+        });*/
 
         it('should not be able enter text in the disabled textarea', async () => {
             // Is not fully valid
@@ -49,10 +49,9 @@ describe('Verify Textarea component', function() {
         });
 
         // No example
-        xit('should indicate entered invalid character with red border', async () => {
+/*        xit('should indicate entered invalid character with red border', async () => {
+        });*/
 
-        });
-        //
         it('should be able to copy paste the content into textarea', async () => {
             await textareaPage.basicTextArea.sendKeys(testData.fifty_character_string);
             await textareaPage.basicTextArea.sendKeys(Key.chord(Key[copyPasteBtn], 'a'));
@@ -73,9 +72,7 @@ describe('Verify Textarea component', function() {
             expect(textareaText).toBe(testData.fifty_character_string);
         });
         // No example
-        xit('should not accept restricted characters (maybe postponed)', async () => {
-
-        });
+/*        xit('should not accept restricted characters (maybe postponed)', async () => {});*/
 
         describe('placeholder should exhibit standard behaviour', function() {
             // The standard behaviour of place holder is under browser control, and can't be checked by webDriver,
@@ -101,9 +98,9 @@ describe('Verify Textarea component', function() {
             });
         });
 
-        xit('should, if disabled, be able to perform copy action ??? ', async () => {
-
+/*      xit('should, if disabled, be able to perform copy action ??? ', async () => {
         });
+*/
 
         it('should have focused state', async () => {
             await hoverMouse(await textareaPage.basicTextArea).then(async () => {
