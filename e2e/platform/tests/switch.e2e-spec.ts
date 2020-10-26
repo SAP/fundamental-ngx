@@ -1,7 +1,7 @@
 import { SwitchPo } from '../pages/switch.po';
 import { getValueOfAttribute, hoverMouse } from '../helpers/common-helper';
 import switchPageContent from '../fixtures/appData/swich-page-content';
-import { $, $$, browser } from 'protractor';
+import { browser } from 'protractor';
 
 describe('Verify Switch component', function() {
     const switchPage = new SwitchPo();
@@ -216,6 +216,6 @@ describe('Verify Switch component', function() {
     });
 
     xdescribe('has correct page content', function() {
-
+        // TODO: add page content checks
     });
 });

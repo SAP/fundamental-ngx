@@ -52,6 +52,10 @@ export async function waitForElementToBeClickable(element: ElementFinder): Promi
     await browser.wait(EC.elementToBeClickable(element), IMPLICITLY_WAIT);
 }
 
+export async function isClickable(element: ElementFinder): Promise<boolean> {
+    return await browser.wait(EC.elementToBeClickable(element), IMPLICITLY_WAIT);
+}
+
 export async function waitForInvisible(element: ElementFinder, timeout = IMPLICITLY_WAIT): Promise<void> {
     await browser.wait(EC.invisibilityOf(element), timeout, `Element ${element} is still visible on the page`);
 }

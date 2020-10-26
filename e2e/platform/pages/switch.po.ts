@@ -1,4 +1,4 @@
-import { $, $$, browser } from 'protractor';
+import { $, $$ } from 'protractor';
 import { waitForVisible } from '../helpers/common-helper';
 import { BaseComponentPo } from './base-component.po';
 

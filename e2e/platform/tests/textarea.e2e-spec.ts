@@ -54,7 +54,6 @@ describe('Verify Textarea component', function() {
         });
         //
         it('should be able to copy paste the content into textarea', async () => {
-            // const copyPasteBtn = process.platform === 'darwin' ? 'COMMAND' : 'CONTROL';
             await textareaPage.basicTextArea.sendKeys(testData.fifty_character_string);
             await textareaPage.basicTextArea.sendKeys(Key.chord(Key[copyPasteBtn], 'a'));
             await textareaPage.basicTextArea.sendKeys(Key.chord(Key[copyPasteBtn], 'c'));
