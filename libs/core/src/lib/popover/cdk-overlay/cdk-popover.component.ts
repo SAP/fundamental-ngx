@@ -2,7 +2,8 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, ContentChild, ElementRef,
+    Component,
+    ElementRef,
     HostBinding,
     Input,
     OnChanges,
@@ -28,6 +29,8 @@ import {
 } from '@angular/cdk/overlay';
 import { ConnectedOverlayPositionChange, ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { DOWN_ARROW, ESCAPE } from '@angular/cdk/keycodes';
+
 
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
@@ -36,7 +39,6 @@ import { RtlService } from '../../utils/services/rtl.service';
 import { BasePopoverClass } from '../base/base-popover.class';
 import { DefaultPositions, PopoverPosition } from './popover-position';
 import { KeyUtil } from '../../utils/functions/key-util';
-import { PopoverControlComponent } from '../../..';
 
 let popoverUniqueId = 0;
 
@@ -227,14 +229,14 @@ export class CdkPopoverComponent extends BasePopoverClass
 
     /** Handler for alt + arrow down keydown */
     triggerKeyDownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, 'ArrowDown') && event.altKey && !this.isOpen) {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.isOpen) {
             this.open();
         }
     }
 
     /** Handler escape keydown */
     bodyKeydownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, 'Escape') && this.isOpen && this.closeOnEscapeKey) {
+        if (KeyUtil.isKeyCode(event, ESCAPE) && this.isOpen && this.closeOnEscapeKey) {
             this.close();
         }
     }
