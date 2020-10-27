@@ -1,0 +1,328 @@
+/*
+* IMPORTANT:
+* Will implement original styles from fundamental styles repo after merge this PR
+* https://github.com/SAP/fundamental-styles/pull/1755
+*/
+
+/*!
+ * Fundamental Library Styles v0.13.0-rc.13
+ * Copyright (c) 2020 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/master/LICENSE)
+ */
+ @charset "UTF-8";
+ .fd-feed-list {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: row;
+   flex-direction: row;
+   background-color: #fff;
+   background-color: var(--sapField_Background,#fff);
+   max-width: 40rem
+ }
+ .fd-feed-list::after,
+ .fd-feed-list::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-feed-list .fd-feed-list__thumb {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   display: -webkit-inline-box;
+   display: -ms-inline-flexbox;
+   display: inline-flex;
+   margin-left: 0;
+   margin-right: .75rem
+ }
+ .fd-feed-list .fd-feed-list__thumb::after,
+ .fd-feed-list .fd-feed-list__thumb::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-feed-list .fd-feed-list__thumb[dir=rtl],
+ [dir=rtl] .fd-feed-list .fd-feed-list__thumb {
+   margin-left: .75rem;
+   margin-right: 0
+ }
+ .fd-feed-list__body {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   padding: 1rem
+ }
+ .fd-feed-list__body::after,
+ .fd-feed-list__body::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-feed-list__body + .fd-feed-list__body {
+   border-top: .0625rem solid #e4e4e4;
+   border-top: var(--sapList_BorderWidth,.0625rem) solid var(--sapList_BorderColor,#e4e4e4)
+ }
+ .fd-feed-list--no-border .fd-feed-list__body {
+   padding: 1rem 1rem .75rem;
+   border-top: none
+ }
+ .fd-feed-list--no-border .fd-feed-list__body + .fd-feed-list__body {
+   padding-top: .75rem;
+   padding-bottom: .75rem
+ }
+ .fd-feed-list--no-border .fd-feed-list__body:last-child {
+   padding-bottom: 1rem
+ }
+ .fd-feed-list__link--more {
+   text-transform: uppercase
+ }
+ .fd-feed-list__actions {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   float: right;
+   margin: .5rem;
+   position: relative;
+   top: -1rem;
+   right: -1rem
+ }
+ .fd-feed-list__actions::after,
+ .fd-feed-list__actions::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-feed-list__actions[dir=rtl],
+ [dir=rtl] .fd-feed-list__actions {
+   float: left;
+   right: 1rem;
+   left: -1rem
+ }
+ .fd-feed-list--group {
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
+   flex-direction: column
+ }
+ .fd-feed-list--link {
+   cursor: pointer
+ }
+ .fd-feed-list--link.is-focus,
+ .fd-feed-list--link:focus {
+   outline-offset: -.1875rem;
+   outline-width: .0625rem;
+   outline-width: var(--sapContent_FocusWidth,.0625rem);
+   outline-color: #000;
+   outline-color: var(--sapContent_FocusColor,#000);
+   outline-style: dotted;
+   outline-style: var(--sapContent_FocusStyle,dotted)
+ }
+ .fd-feed-list__name {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   font-weight: 700
+ }
+ .fd-feed-list__name::after,
+ .fd-feed-list__name::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-feed-list__text {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0
+ }
+ .fd-feed-list__text::after,
+ .fd-feed-list__text::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-feed-list__footer {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   padding-top: .375rem
+ }
+ .fd-feed-list__footer::after,
+ .fd-feed-list__footer::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-feed-list__footer--byline {
+   color: #6a6d70;
+   color: var(--sapNeutralTextColor,#6a6d70)
+ }
+ .fd-feed-list__footer--byline:not(:last-child)::after {
+   content: '\2022';
+   padding: 0 .25rem
+ }
+ .fd-feed-list--s .fd-feed-list__wrapper {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-pack: justify;
+   -ms-flex-pack: justify;
+   justify-content: space-between
+ }
+ .fd-feed-list--s .fd-feed-list__wrapper::after,
+ .fd-feed-list--s .fd-feed-list__wrapper::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-feed-list--s .fd-feed-list__wrapper--header {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex
+ }
+ .fd-feed-list--s .fd-feed-list__body {
+   display: block
+ }
+ .fd-feed-list--s .fd-feed-list__text {
+   padding-top: .625rem
+ }
+ .fd-feed-list--s .fd-feed-list__action {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-font-smoothing: antialiased;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   padding-left: .75rem;
+   padding-bottom: .25rem
+ }
+ .fd-feed-list--s .fd-feed-list__action::after,
+ .fd-feed-list--s .fd-feed-list__action::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-feed-list--s .fd-feed-list__action[dir=rtl],
+ [dir=rtl] .fd-feed-list--s .fd-feed-list__action {
+   padding-right: .75rem;
+   padding-bottom: initial
+ }

@@ -87,6 +87,11 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
             },
             {
+                path: 'feed-list-item',
+                loadChildren: () =>
+                    import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)
+            },
+            {
                 path: 'file-input',
                 loadChildren: () =>
                     import('./component-docs/file-input/file-input-docs.module').then((m) => m.FileInputDocsModule)

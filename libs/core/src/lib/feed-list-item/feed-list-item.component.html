@@ -1,0 +1,48 @@
+<div class="fd-feed-list__thumb" *ngIf="!!avatarTemplate">
+    <!-- Avatar place -->
+    <ng-container *ngTemplateOutlet="avatarTemplate"></ng-container>
+</div>
+
+<div class="fd-feed-list__content">
+  <div class="fd-feed-list__actions" *ngIf="!!actionTemplate">
+      <!-- Action place -->
+      <ng-container *ngTemplateOutlet="actionTemplate"></ng-container>
+  </div>
+  <p class="fd-feed-list__text">
+    <ng-container *ngIf="!isRichText">
+      <span
+        class="lineclamp"
+        #lineClamp="fdLineClamp"
+        [fdLineClamp]="isCollapsed"
+        [fdLineClampLines]="maxRows"
+        (lineCountUpdate)="checkLineCount($event)"
+      >
+          <ng-container *ngTemplateOutlet="author"></ng-container>
+          <span [fdLineClampTarget]="text" (update)="lineClamp.refreshTarget($event)"></span>
+      </span>
+      <a
+        class="fd-link fd-feed-list__link--more"
+        tabindex="0"
+        *ngIf="!isRichText && hasMore"
+        (click)="toggleTextView()"
+        [innerText]="isCollapsed ? moreLabel : lessLabel"></a>
+    </ng-container>
+    <ng-container *ngIf="isRichText">
+      <ng-container *ngTemplateOutlet="author"></ng-container>
+      <fd-formatted-text [htmlText]="text"></fd-formatted-text>
+    </ng-container>
+  </p>
+  <div class="fd-feed-list__footer" *ngIf="!!footerTemplate">
+    <!-- Footer place -->
+    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+  </div>
+</div>
+
+<ng-template #author>
+  <span class="fd-feed-list__name">
+    <a target="_blank"
+      [attr.title]="authorTitle"
+      [attr.href]="authorLink ? (authorLink | safe : 'url') : null"
+      class="fd-link fd-link--emphasized">{{ authorTitle }}</a>:
+  </span>
+</ng-template>
