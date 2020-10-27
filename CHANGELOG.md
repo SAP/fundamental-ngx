@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.23.0...v0.23.1-rc.0) (2020-10-27)
+
+
+### Features
+
+* (Core) introduce dynamic side content ([#3625](https://github.com/SAP/fundamental-ngx/issues/3625)) ([2532520](https://github.com/SAP/fundamental-ngx/commit/2532520b1a200e47e9febf7b3a0cd5c982746be7))
+
 ## [0.23.0](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.38...v0.23.0) (2020-10-26)
 
 ## [0.23.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.23.0-rc.37...v0.23.0-rc.38) (2020-10-25)
