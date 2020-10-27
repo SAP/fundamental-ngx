@@ -6,14 +6,10 @@ import { ListBylineHeaderComponent } from './list-byline-header/list-byline-head
 import { ListBylineDocsComponent } from './list-byline-docs.component';
 import {
     CheckboxModule,
-    InfiniteScrollModule,
     LinkModule,
     ListModule,
     RadioModule,
-    DragAndDropModule,
-    BusyIndicatorModule,
-    ToolbarModule,
-    InputGroupModule, FundamentalNgxCoreModule
+    FundamentalNgxCoreModule
 } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
@@ -41,11 +37,6 @@ const routes: Routes = [
         LinkModule,
         CheckboxModule,
         RadioModule,
-        InfiniteScrollModule,
-        DragAndDropModule,
-        BusyIndicatorModule,
-        ToolbarModule,
-        InputGroupModule,
         SharedDocumentationModule,
         FundamentalNgxCoreModule
     ],

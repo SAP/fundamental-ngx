@@ -12,7 +12,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './list-byline-docs.component.html'
 })
 export class ListBylineDocsComponent {
-
     listByline: ExampleFile[] = [
         {
             language: 'html',

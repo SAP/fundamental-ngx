@@ -27,6 +27,5 @@ export class ListBylineSelectionExampleComponent {
             byline: 'Byline text for item 3',
             glyph: 'employee'
         }
-    ]
-
+    ];
 }
