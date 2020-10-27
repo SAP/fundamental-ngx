@@ -72,7 +72,7 @@ const LIST_ELEMENTS: Product[] = [
         inverted1: false,
         status2: 'negative',
         statusgyph2: 'status-negative',
-        statuslabel2: '',
+        statuslabel2: 'Negative',
         inverted2: true,
         decimal: 2
     },

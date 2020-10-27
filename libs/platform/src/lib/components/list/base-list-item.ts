@@ -271,8 +271,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * @hidden
      * On item click event will be emitted */
     @HostListener('click')
-    _onItemClick($event: KeyboardEvent | MouseEvent | TouchEvent): void {
-        console.log('inside..', $event);
+    _onItemClick($event: Event): void {
         if (this.selectRow && this.selectionMode === 'multi') {
             this._selected = !this._selected;
         }

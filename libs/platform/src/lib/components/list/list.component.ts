@@ -542,9 +542,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * seprate PR for custom event**/
     @HostListener('click', ['$event'])
     _updateNavigation(event: Event): void {
+        let selectedItemId = '0';
         const el = event.target as HTMLElement;
         const parent = el.closest('.fd-list__item');
-        const selectedItemId = parent.getAttribute('id');
+        if (parent !== null && parent !== undefined) {
+            selectedItemId = parent.getAttribute('id');
+        }
 
         this.listItems.forEach((item) => {
             if (item.anchor !== undefined) {
