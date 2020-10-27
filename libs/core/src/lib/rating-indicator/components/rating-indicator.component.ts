@@ -146,7 +146,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     }[] = [];
 
     /** @hidden */
-    private _ratingUID = 0;
+    private _ratingUID = ratingUID++;
     /** @hidden */
     private _indicatorTotal = 5;
     /** @hidden */
@@ -172,8 +172,6 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     ngOnInit(): void {
-        ratingUID++;
-        this._ratingUID = ratingUID;
         this._value = this._convertToValue();
         this._icons = this._getRates();
         this.buildComponentCssClass();
@@ -296,7 +294,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     private _getRates(): { id: string; value: number }[] {
         const withHalves = this.allowHalves ? 2 : 1;
         return Array(this.indicatorCount * withHalves)
-            .fill(`rating-${ratingUID}`)
+            .fill(`rating-${this._ratingUID}`)
             .map((_name, index) => ({
                 id: `${_name}-${index + 1}`,
                 value: (index + 1) / withHalves
