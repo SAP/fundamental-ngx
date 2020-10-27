@@ -1,8 +1,7 @@
 import {
     Component,
     Input,
-    TemplateRef,
-    ViewChild
+    TemplateRef
 } from '@angular/core';
 
 @Component({
@@ -14,9 +13,6 @@ export class ActionSheetMobileComponent {
     /** Whenever links should be visible **/
     @Input()
     open = false;
-
-    /** @hidden */
-    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
     childContent: {

@@ -75,10 +75,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden **/
-    @Input()
-    refreshObs$: Observable<string>;
-
     /** @hidden */
     @ContentChild(ActionSheetBodyComponent)
     actionSheetBody: ActionSheetBodyComponent;
@@ -142,6 +138,8 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this.actionSheetControl.clicked.unsubscribe();
+        // this.actionSheetItems.unsubscribe();
     }
 
     /** @hidden */
@@ -153,17 +151,12 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _actionControlHandle(): void {
-        this.actionSheetControl.clicked.subscribe((isOpen) => {
-            this.isOpenChangeHandle(isOpen);
-        });
+        this.actionSheetControl.clicked.subscribe((isOpen) => this.isOpenChangeHandle(isOpen));
     }
 
     /** @hidden */
     private _actionItemsHandle(): void {
-        this.actionSheetItems.forEach(item =>
-            item.clicked.subscribe((isOpen) => {
-                this.isOpenChangeHandle(isOpen);
-            })
+        this.actionSheetItems.forEach(item => item.clicked.subscribe((isOpen) => this.isOpenChangeHandle(isOpen))
         );
     }
 
@@ -206,17 +199,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     }
 
     private _listenOnItemsClick(): void {
-        /** Finish all of the streams, from before */
         this._onRefresh$.next();
-        /** Merge refresh/destroy observables */
-        const refreshObs$ = merge(this._onRefresh$, this._onDestroy$);
-        this.actionSheetItems.forEach(
-            (item) => {
-                item.clicked
-                    .pipe(takeUntil(refreshObs$))
-                    .subscribe()
-            }
-        );
     }
 
     /** @hidden */
