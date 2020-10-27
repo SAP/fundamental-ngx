@@ -197,7 +197,7 @@ export class PopoverComponent extends BasePopoverClass
 
     /** Opens the popover. */
     open(): void {
-        if (!this._overlayRef || !this._overlayRef.hasAttached()) {
+        if ((!this._overlayRef || !this._overlayRef.hasAttached()) && !this.disabled) {
             this._overlayRef = this._overlay.create(this._getOverlayConfig());
             this._overlayRef.attach(new TemplatePortal(this.templateRef, this.container));
 
