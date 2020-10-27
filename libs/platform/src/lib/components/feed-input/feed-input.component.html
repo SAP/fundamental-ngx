@@ -3,6 +3,8 @@
         class="fd-feed-input__thumb"
         size="s"
         role="img"
+        aria-label="John Doe"
+        title="John Doe"
         [image]="avatarSrc"
         [class.fd-avatar--placeholder]="!avatarSrc"
         [class.sap-icon]="!avatarSrc"
@@ -15,6 +17,7 @@
         fd-form-control
         aria-required="true"
         class="fd-feed-input__textarea"
+        [disabled]="disabled"
         [placeholder]="placeholder"
         [(ngModel)]="value"
         (ngModelChange)="onChange()"
@@ -23,7 +26,7 @@
     <button
         fd-button
         class="fd-feed-input__submit-button"
-        [disabled]="!value"
+        [disabled]="!value || disabled"
         (click)="onSubmit()"
     >
         <i role="presentation" class="sap-icon--feeder-arrow"></i>

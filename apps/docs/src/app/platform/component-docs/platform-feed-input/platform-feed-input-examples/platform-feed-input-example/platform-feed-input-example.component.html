@@ -1,5 +1,8 @@
 <fdp-feed-input
     avatarSrc="https://avatars.dicebear.com/api/human/fe.svg?m=6&b=%23f5f0f0&mood[]=surprised"
     placeholder="Add a comment"
+    (submit)="onSubmit($event)"
 >
 </fdp-feed-input>
+
+<small>Value: {{ feedValue }} </small>

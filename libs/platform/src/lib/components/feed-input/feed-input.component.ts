@@ -1,11 +1,19 @@
-import { Component, ElementRef, Input, NgZone, ViewChild } from '@angular/core';
-import { take } from 'rxjs/operators';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef, EventEmitter,
+    Input,
+    Output,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 
 @Component({
-  selector: 'fdp-feed-input',
-  templateUrl: './feed-input.component.html',
-  styleUrls: ['./feed-input.component.scss']
+    selector: 'fdp-feed-input',
+    templateUrl: './feed-input.component.html',
+    styleUrls: ['./feed-input.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeedInputComponent {
     /** The user image source, If is not set, then the user image will display placeholder image.  */
@@ -28,21 +36,21 @@ export class FeedInputComponent {
     @Input()
     maxHeight: number;
 
+    @Output()
+    submit = new EventEmitter<string>();
+
     /** @hidden */
     @ViewChild('textAreaElement', { read: ElementRef })
     textarea: ElementRef;
 
     value: string | null;
 
-    constructor(private _ngZone: NgZone) {
-    }
-
     onChange(): void {
         this.resize();
     }
 
     onSubmit(): void {
-
+        this.submit.emit(this.textarea.nativeElement.value)
     }
 
     /** @hidden make to grow textarea */
