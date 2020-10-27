@@ -6,7 +6,7 @@ import { DefaultPositions, PopoverPosition } from './popover-position/popover-po
 import { PopoverComponent } from './popover.component';
 
 
-describe('CdkPopoverComponent', () => {
+describe('PopoverComponent', () => {
     let component: PopoverComponent;
     let fixture: ComponentFixture<PopoverComponent>;
 
@@ -150,8 +150,13 @@ describe('CdkPopoverComponent', () => {
         expect(component.arrowPosition).toBe(arrowPosition);
         expect(component.marginStyle).toBe(PopoverPosition.getMarginStyle(arrowPosition));
 
+        component.close();
+        fixture.detectChanges();
+
         const secondPosition: ConnectedPosition = DefaultPositions[3];
-        component.applyNewPosition([secondPosition]);
+        component.cdkPositions = [secondPosition];
+
+        component.open();
         fixture.detectChanges();
 
         const arrowSecondPosition = PopoverPosition.getArrowPosition(secondPosition);

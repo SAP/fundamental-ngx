@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, Input } from '@angular/core';
-import { PopoverComponent } from '../../popover/popover.component';
 import {Placement} from 'popper.js';
+import { BasePopoverClass } from '../../popover/base/base-popover.class';
 
 @Component({
     selector: 'fd-product-switch',
@@ -9,8 +9,8 @@ import {Placement} from 'popper.js';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductSwitchComponent extends PopoverComponent {
-    @Input () 
+export class ProductSwitchComponent extends BasePopoverClass {
+    @Input ()
     placement: Placement = 'bottom-end'
 
 
