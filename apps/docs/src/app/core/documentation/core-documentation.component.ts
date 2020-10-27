@@ -76,6 +76,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.layouts = [
+            { url: 'core/dynamic-side-content', name: 'Dynamic Side Content' },
             { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
             { url: 'core/layoutPanel', name: 'Layout Panel' },
             { url: 'core/layoutGrid', name: 'Layout Grid' }
