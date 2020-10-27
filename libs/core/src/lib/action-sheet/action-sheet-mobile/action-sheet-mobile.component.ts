@@ -20,7 +20,7 @@ export class ActionSheetMobileComponent {
     } = null;
 
     /** @hidden */
-    close(event: Event): void {
+    close(): void {
         this.open = false;
     }
 }

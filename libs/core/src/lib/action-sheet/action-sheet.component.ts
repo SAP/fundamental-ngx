@@ -29,7 +29,7 @@ import {
 } from '../utils/services/keyboard-support/keyboard-support.service';
 import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
 import { startWith, takeUntil } from 'rxjs/operators';
-import {merge, Observable, Subject} from 'rxjs';
+import { Subject} from 'rxjs';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
 import {ACTION_SHEET_COMPONENT, ActionSheetInterface} from './action-sheet.interface';
 
