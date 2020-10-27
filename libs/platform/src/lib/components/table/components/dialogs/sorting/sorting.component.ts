@@ -7,8 +7,11 @@ import { SortDirection } from '../../../enums';
     templateUrl: './sorting.component.html'
 })
 export class SortingComponent {
-    sortDirection = this.dialogRef.data.sortDirection || 'asc';
-    sortField = this.dialogRef.data.sortField || null;
+    initialDirection = this.dialogRef.data.sortDirection || 'asc';
+    initialField = this.dialogRef.data.sortField || null;
+
+    sortDirection = this.initialDirection;
+    sortField = this.initialField;
 
     readonly _sortDirections = SortDirection;
     readonly columns = this.dialogRef.data.columns;
@@ -16,7 +19,8 @@ export class SortingComponent {
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {}
 
     reset(): void {
-        this.dialogRef.close({ action: 'Reset' });
+        this.sortDirection = this.initialDirection;
+        this.sortField = this.initialField;
     }
 
     cancel(): void {

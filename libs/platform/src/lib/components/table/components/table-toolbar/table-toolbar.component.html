@@ -3,7 +3,8 @@
     let-counter="counter"
     let-isSortable="isSortable"
     let-isFilterable="isFilterable"
-    let-isGroupable="isGroupable">
+    let-isGroupable="isGroupable"
+    let-isColumnsHiddable="isColumnsHiddable">
     <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title" [size]="size !== 'cozy' ? 'compact' : 'cozy'">
         <label fd-toolbar-label>{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
 
@@ -13,13 +14,13 @@
             <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
         </ng-container>
 
-        <ng-container *ngIf="isSortable || isFilterable || isGroupable">
+        <ng-container *ngIf="isSortable || isFilterable || isGroupable || isColumnsHiddable">
             <fd-toolbar-spacer *ngIf="!tableToolbarActionsComponent"></fd-toolbar-spacer>
             <fd-toolbar-separator fd-toolbar-item *ngIf="tableToolbarActionsComponent"></fd-toolbar-separator>
             <fdp-button *ngIf="isSortable" glyph="sort" title="sorting" buttonType="transparent" (click)="openSorting()"></fdp-button>
             <fdp-button *ngIf="isFilterable" glyph="filter" title="filtering" buttonType="transparent" (click)="openFilter()"></fdp-button>
             <fdp-button *ngIf="isGroupable" glyph="group-2" title="grouping" buttonType="transparent" (click)="openGrouping()"></fdp-button>
-            <fdp-button glyph="action-settings" title="columns" buttonType="transparent" (click)="openColumns()"></fdp-button>
+            <fdp-button *ngIf="isColumnsHiddable" glyph="action-settings" title="columns" buttonType="transparent" (click)="openColumns()"></fdp-button>
         </ng-container>
     </fd-toolbar>
 </ng-template>

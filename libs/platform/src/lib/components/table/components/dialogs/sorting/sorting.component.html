@@ -8,7 +8,12 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <button fd-button fdType="transparent" compact="true" label="Reset" (click)="reset()"></button>
+                    <button fd-button
+                            fdType="transparent"
+                            [compact]="true"
+                            label="Reset"
+                            (click)="reset()"
+                            [disabled]="sortField === initialField && sortDirection === initialDirection"></button>
                 </fd-bar-element>
             </div>
         </ng-template>

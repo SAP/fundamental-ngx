@@ -1,5 +1,6 @@
 <fdp-table
        [dataSource]="source"
+       (sortChange)="logSortChange($event)"
        contentDensity="compact"
        emptyTableMessage="No data found">
 
@@ -16,20 +17,23 @@
         name="name"
         key="name"
         label="Name"
-        align="start">
+        align="start"
+        [sortable]="true">
     </fdp-column>
 
     <fdp-column
         name="description"
         key="description"
-        label="Description">
+        label="Description"
+        [sortable]="true">
     </fdp-column>
 
     <fdp-column
         name="price"
         key="price.value"
         label="Price"
-        align="end">
+        align="end"
+        [sortable]="true">
     </fdp-column>
 
     <fdp-column

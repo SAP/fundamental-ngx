@@ -81,7 +81,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     @Input()
     set dataSource(value: FdpTableDataSource<any>) {
         if (value) {
-            this._reset();
+            this._resetChecks();
             this._initializeDS(value);
         }
     }
@@ -302,7 +302,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden Select/unselect all rows in 'multiple' mode. */
     selectAll(checked: boolean): void {
-        this._reset();
+        this._resetChecks();
         this.checkedAll = checked;
 
         if (checked) {
@@ -401,9 +401,15 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _reset(): void {
-        this.checkedAll = false;
         this._checked = [];
         this._unchecked = [];
+    }
+
+    /** @hidden */
+    private _resetChecks(): void {
+        this.checkedAll = false;
+        this._rows.forEach(r => r.checked = false);
+        this._reset();
     }
 
     /** @hidden */

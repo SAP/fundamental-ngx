@@ -42,6 +42,17 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="sortable-table" componentName="Table">
+    Column Sorting
+</fd-docs-section-title>
+<description>In this example, Name, Description and Price columns can be sorted.</description>
+<component-example>
+    <fdp-table-sortable-example></fdp-table-sortable-example>
+</component-example>
+<code-example [exampleFiles]="sortableTable"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fdp-table
         [dataSource]="tableData"

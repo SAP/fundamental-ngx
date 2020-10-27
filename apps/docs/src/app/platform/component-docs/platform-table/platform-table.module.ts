@@ -14,6 +14,7 @@ import { PlatformTableDefaultExampleComponent } from './platform-table-examples/
 import { PlatformTableCustomColumnExampleComponent } from './platform-table-examples/platform-table-custom-column-example.component';
 import { PlatformTableMultipleRowSelectionExampleComponent } from './platform-table-examples/platform-table-multiple-row-selection-example.component';
 import { PlatformTableSingleRowSelectionExampleComponent } from './platform-table-examples/platform-table-single-row-selection-example.component';
+import { PlatformTableSortableExampleComponent } from './platform-table-examples/platform-table-sortable-example.component';
 
 const routes: Routes = [
     {
@@ -45,6 +46,7 @@ const routes: Routes = [
         PlatformTableCustomColumnExampleComponent,
         PlatformTableSingleRowSelectionExampleComponent,
         PlatformTableMultipleRowSelectionExampleComponent,
+        PlatformTableSortableExampleComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

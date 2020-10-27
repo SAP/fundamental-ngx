@@ -16,6 +16,8 @@ import * as platformTableSingleRowSelectionSrc from '!raw-loader!./platform-tabl
 import * as platformTableSingleRowSelectionTsSrc from '!raw-loader!./platform-table-examples/platform-table-single-row-selection-example.component.ts';
 import * as platformTableMultipleRowSelectionSrc from '!raw-loader!./platform-table-examples/platform-table-multiple-row-selection-example.component.html';
 import * as platformTableMultipleRowSelectionTsSrc from '!raw-loader!./platform-table-examples/platform-table-multiple-row-selection-example.component.ts';
+import * as platformTableSortableSrc from '!raw-loader!./platform-table-examples/platform-table-sortable-example.component.html';
+import * as platformTableSortableTsSrc from '!raw-loader!./platform-table-examples/platform-table-sortable-example.component.ts';
 
 
 @Component({
@@ -122,6 +124,20 @@ export class PlatformTableDocsComponent {
             code: platformTableMultipleRowSelectionTsSrc,
             fileName: 'platform-table-multiple-row-selection-example',
             component: 'PlatformTableMultipleRowSelectionExampleComponent'
+        }
+    ];
+
+    sortableTable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableSortableSrc,
+            fileName: 'platform-table-sortable-example'
+        },
+        {
+            language: 'typescript',
+            code: platformTableSortableTsSrc,
+            fileName: 'platform-table-sortable-example',
+            component: 'PlatformTableSortableExampleComponent'
         }
     ];
 

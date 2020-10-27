@@ -53,18 +53,4 @@ export class TableService {
         this.setTableState(state);
         this.sortChange.emit({ current: state.sortBy, previous: prevSortBy });
     }
-
-    sortReset(): void {
-        const prevState = this.getTableState();
-        const prevSortBy = prevState && prevState.sortBy || [];
-        const newSortBy = prevSortBy.slice(1);
-
-        const state: TableState = {
-            ...prevState,
-            sortBy: newSortBy
-        };
-
-        this.setTableState(state);
-        this.sortChange.emit({ current: state.sortBy, previous: prevSortBy });
-    }
 }

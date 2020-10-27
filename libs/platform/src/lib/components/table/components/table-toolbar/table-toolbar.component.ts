@@ -84,12 +84,6 @@ export class TableToolbarComponent implements AfterViewInit {
                     return;
                 }
 
-                if (action === 'Reset') {
-                    this._tableService.sortReset();
-
-                    return;
-                }
-
                 this._tableService.sort(value.field, value.direction);
             })
         );

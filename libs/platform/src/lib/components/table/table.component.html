@@ -123,7 +123,7 @@
                         <fd-checkbox
                             [compact]="contentDensity !== _contentDensityOptions.COZY"
                             *ngIf="selectionMode === _selectionModeOptions.MULTIPLE"
-                            [ngModel]="row.checked"
+                            [(ngModel)]="_rows[i].checked"
                             (ngModelChange)="select(i, row, $event)"
                             (keydown)="onKeydown($event)"
                         ></fd-checkbox>
