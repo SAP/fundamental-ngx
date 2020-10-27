@@ -169,7 +169,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
             if (this.open) {
                 this.popoverComponent.open()
             } else {
-                this.popoverComponent.close()
+                this.popoverComponent.directiveRef.close()
             }
         }
     }
