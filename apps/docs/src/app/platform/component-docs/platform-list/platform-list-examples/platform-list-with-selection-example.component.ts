@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 import { Observable, of } from 'rxjs';
+
+import { ListDataSource, DataProvider, SelectionChangeEvent } from '@fundamental-ngx/platform';
+
 
 const LIST_ELEMENTS: Address[] = [
     { name: 'Name1' },
@@ -30,9 +32,9 @@ export class ListDataProvider extends DataProvider<Address> {
 })
 export class PlatformListWithSelectionExampleComponent {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
-    _selectedItems: any[] = [];
+    _selectedItems: Address[] = [];
 
-    _showItemInfo(event: any): void {
+    _showItemInfo(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;
     }
 

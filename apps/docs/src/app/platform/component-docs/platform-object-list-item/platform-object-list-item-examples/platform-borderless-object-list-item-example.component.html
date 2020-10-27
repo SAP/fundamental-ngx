@@ -4,7 +4,8 @@
         [currency]="item.currency" [amount]="item.amount" [decimal]="item.decimal" [image]="item.image"
         [link]="item.link">
         <fdp-object-list-item-row [attributeLabel]="item.attribute1">
-            <span fd-object-marker [glyph]="item.gylp1" aria-label="Favourite Icon with Text"></span>
+            <span fd-object-marker [title]="item.tip1" [glyph]="item.gylp1"
+                aria-label="Favourite Icon with Text"></span>
         </fdp-object-list-item-row>
         <fdp-object-list-item-row [attributeLabel]="item.attribute2">
             <span fd-object-status [status]="item.status1" [glyph]="item.statusgyph1" [label]="item.statuslabel1"
