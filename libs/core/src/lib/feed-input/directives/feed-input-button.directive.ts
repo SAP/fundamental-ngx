@@ -1,17 +1,13 @@
-import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
+import { Directive, ElementRef, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[fdFeedInputButton]'
+    selector: '[fdFeedInputButton]',
+    host: {
+        '[class.fd-feed-input__submit-button]': 'true',
+        '[class.fd-button]': 'true'
+    }
 })
 export class FeedInputButtonDirective {
-    /** @hidden */
-    @HostBinding('class.fd-feed-input__submit-button')
-    baseClass = true;
-
-    /** @hidden */
-    @HostBinding('class.fd-button')
-    fdButtonClass = true;
-
     /** @hidden */
     @HostBinding('disabled')
     @HostBinding('class.is-disabled')

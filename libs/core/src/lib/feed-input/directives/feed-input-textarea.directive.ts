@@ -1,7 +1,7 @@
 import {
     Directive,
-    ElementRef, EventEmitter,
-    HostBinding,
+    ElementRef,
+    EventEmitter,
     HostListener,
     Input,
     Output
@@ -9,15 +9,14 @@ import {
 
 @Directive({
     selector: '[fdFeedInputTextarea]',
+    host: {
+        '[class.fd-feed-input__textarea]': 'true'
+    }
 })
 export class FeedInputTextareaDirective {
     /** rows are allowed to grow */
     @Input()
     fdFeedInputTextareaMaxRows: number;
-
-    /** @hidden */
-    @HostBinding('class.fd-feed-input__textarea')
-    fdTextareaClass = true;
 
     /** Event emitted when the textarea value changed */
     @Output()

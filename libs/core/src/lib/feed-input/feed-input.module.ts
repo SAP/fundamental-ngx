@@ -4,7 +4,6 @@ import { FeedInputComponent } from './feed-input.component';
 import { AvatarModule, ButtonModule, FormControlModule } from '../..';
 import { FeedInputTextareaDirective } from './directives/feed-input-textarea.directive';
 import { FeedInputButtonDirective } from './directives/feed-input-button.directive';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -12,7 +11,7 @@ import { FormsModule } from '@angular/forms';
         FeedInputTextareaDirective,
         FeedInputButtonDirective
     ],
-    imports: [CommonModule, AvatarModule, ButtonModule, FormControlModule, FormsModule],
+    imports: [CommonModule, AvatarModule, ButtonModule, FormControlModule],
     exports: [
         FeedInputComponent,
         FeedInputTextareaDirective,
