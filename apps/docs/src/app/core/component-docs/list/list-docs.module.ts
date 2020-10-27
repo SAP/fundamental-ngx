@@ -20,7 +20,7 @@ import {
     DragAndDropModule,
     BusyIndicatorModule,
     ToolbarModule,
-    InputGroupModule, FundamentalNgxCoreModule
+    InputGroupModule
 } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ListDndExampleComponent } from './examples/list-dnd-example/list-dnd-example.component';
@@ -57,8 +57,7 @@ const routes: Routes = [
         BusyIndicatorModule,
         ToolbarModule,
         InputGroupModule,
-        SharedDocumentationModule,
-        FundamentalNgxCoreModule
+        SharedDocumentationModule
     ],
     exports: [RouterModule],
     declarations: [

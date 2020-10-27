@@ -4,13 +4,7 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { ListBylineHeaderComponent } from './list-byline-header/list-byline-header.component';
 import { ListBylineDocsComponent } from './list-byline-docs.component';
-import {
-    CheckboxModule,
-    LinkModule,
-    ListModule,
-    RadioModule,
-    FundamentalNgxCoreModule
-} from '@fundamental-ngx/core';
+import { CheckboxModule, LinkModule, ListModule, RadioModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { ListBylineSelectionExampleComponent } from './examples/list-byline-selection-example/list-byline-selection-example.component';
@@ -37,8 +31,7 @@ const routes: Routes = [
         LinkModule,
         CheckboxModule,
         RadioModule,
-        SharedDocumentationModule,
-        FundamentalNgxCoreModule
+        SharedDocumentationModule
     ],
     exports: [RouterModule],
     declarations: [
