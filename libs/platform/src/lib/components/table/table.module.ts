@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
+    ButtonModule,
     CheckboxModule,
+    DialogModule,
     FormModule,
+    IconModule,
+    InputGroupModule,
     ListModule,
     PopoverModule,
+    RadioModule,
     TableModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
@@ -17,6 +22,7 @@ import { PlatformButtonModule } from '../button/button.module';
 import { TableService } from './table.service';
 import { TableComponent } from './table.component';
 import {
+    SortingComponent,
     TableColumnComponent,
     TableToolbarActionsComponent,
     TableToolbarComponent,
@@ -30,17 +36,24 @@ import { TableSortByPipe } from './pipes';
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         TableModule,
         ToolbarModule,
         CheckboxModule,
         PopoverModule,
         ListModule,
         PlatformButtonModule,
+        ButtonModule,
         ListModule,
         FormModule,
         FdpFormGroupModule,
         PlatformInputModule,
-        PopoverModule
+        PopoverModule,
+        DialogModule,
+        RadioModule,
+        IconModule,
+
+        InputGroupModule
     ],
     declarations: [
         TableComponent,
@@ -53,7 +66,9 @@ import { TableSortByPipe } from './pipes';
         FdpHeaderCellDef,
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
-        TableSortByPipe
+        TableSortByPipe,
+
+        SortingComponent
     ],
     exports: [
         TableComponent,

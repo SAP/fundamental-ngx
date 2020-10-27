@@ -20,14 +20,14 @@ import {
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { isObservable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 
 import { applyCssClass, CssClassBuilder, KeyUtil } from '@fundamental-ngx/core';
 import { TableService } from './table.service';
 import { TableColumnComponent, TableToolbarComponent } from './components';
-import { ContentDensity, SelectionMode } from './enums';
+import { ContentDensity, SelectionMode, SortDirection } from './enums';
 import { ArrayTableDataSource, isDataSource, ObservableTableDataSource, TableDataSource } from '../../domain';
-import { CollectionSort, SelectableRow, TableState } from './interfaces';
+import { SelectableRow, TableState } from './interfaces';
 import {
     TableColumnFreezeEvent,
     TableFilterChangeEvent,
@@ -171,15 +171,16 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     _selectionModeOptions = SelectionMode;
 
     /** @hidden */
+    _sortDirections = SortDirection;
+
+    /** @hidden */
     popoverOpen = false;
     /** @hidden */
-    popoverColumnName = '';
+    popoverColumnKey = '';
     /** @hidden */
     sortField: string;
     /** @hidden */
-    sortColumn: string;
-    /** @hidden */
-    sortDirection: 'asc' | 'desc';
+    sortDirection: SortDirection;
 
     /** @hidden */
     checkedAll = false;
@@ -206,15 +207,15 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     private _dsSubscription: Subscription | null;
 
     /** @hidden */
-    private _destroyed = new Subject<void>();
+    private _subscriptions = new Subscription();
 
     /** @hidden */
-    private readonly stateChanges: Subject<any> = new Subject<any>();
+    private readonly rowsStateChanges: Subject<any> = new Subject<any>();
 
     /** @hidden */
     constructor(
-        private readonly _tableService: TableService,
-        private readonly _cd: ChangeDetectorRef
+        private readonly _cd: ChangeDetectorRef,
+        private readonly _tableService: TableService
     ) {}
 
     /** @hidden */
@@ -225,10 +226,13 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+        this._onStateChanges();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._tableService.columns = this.columns;
+
         this.buildComponentCssClass();
         this._checkColumnsAbilities();
         this._cd.detectChanges();
@@ -236,8 +240,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._destroyed.next();
-        this._destroyed.complete();
+        this._subscriptions.unsubscribe();
     }
 
     @applyCssClass
@@ -331,36 +334,12 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         }
     }
 
-    sort(field: string, direction: 'asc' | 'desc', columnName: string): void {
+    sort(field: string, direction: SortDirection): void {
         if (this.sortField === field && this.sortDirection === direction) {
             return;
         }
 
-        this.sortField = field;
-        this.sortColumn = columnName;
-        this.sortDirection = direction;
-        const prevState = this.getTableState();
-        const prevSortBy = prevState && prevState.sortBy || [];
-        const newSortBy: CollectionSort[] = [{field: field, direction: direction}];
-        let state: TableState;
-
-        if (!prevState) {
-            state = {...DEFAULT_TABLE_STATE, sortBy: newSortBy};
-        } else {
-            state = {
-                ...prevState,
-                sortBy: prevState.sortBy.map(s => {
-                    if (s.field === newSortBy[0].field) {
-                        return newSortBy[0];
-                    }
-
-                    return s;
-                })
-            };
-        }
-
-        this.setTableState(state);
-        this.sortChange.emit(new TableSortChangeEvent(this, newSortBy, prevSortBy));
+        this._tableService.sort(field, direction);
         this.popoverOpen = false;
     }
 
@@ -369,6 +348,23 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
             return ;
         }
         return column.sortable || column.filterable || column.groupable;
+    }
+
+    private _onStateChanges(): void {
+        this._subscriptions.add(
+            this._tableService.tableState$
+                .pipe(filter(state => !!state), distinctUntilChanged())
+                .subscribe(state => {
+                    this.sortDirection = state.sortBy.length && state.sortBy[0].direction || null;
+                    this.sortField = state.sortBy.length && state.sortBy[0].field || null;
+                })
+        );
+
+        this._subscriptions.add(
+            this._tableService.sortChange.subscribe(event => {
+                this.sortChange.emit(new TableSortChangeEvent(this, event.current, event.previous));
+            })
+        );
     }
 
     private _checkColumnsAbilities(): void {
@@ -455,12 +451,13 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
          */
         this._dsSubscription = initDataSource
             .open()
-            .pipe(takeUntil(this._destroyed))
             .subscribe((data) => {
                 this._rows = data.map(c => ({checked: false, value: c})) || [];
-                this.stateChanges.next(this._rows);
+                this.rowsStateChanges.next(this._rows);
                 this._cd.markForCheck();
             });
+
+        this._subscriptions.add(this._dsSubscription);
         // initial data fetch
         initDataSource.match('*');
         return initDataSource;

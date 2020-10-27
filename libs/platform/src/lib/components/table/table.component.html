@@ -34,34 +34,34 @@
                             [style.textAlign]="column.align">
 
                             <fd-popover *ngIf="doesColumnHasPopover(column)"
-                                        [(isOpen)]="popoverOpen && popoverColumnName === column.name"
+                                        [(isOpen)]="popoverOpen && popoverColumnKey === column.key"
                                         style="width: 100%"
                                         fd-table-popover
                                         [noArrow]="true">
-                                <fd-popover-control fd-table-inner (click)="popoverColumnName = column.name">
+                                <fd-popover-control fd-table-inner (click)="popoverColumnKey = column.key">
                                     <ng-container *ngIf="column?.fdpHeaderCellDef?.templateRef; else defaultTableHeaderCellTemplate">
                                         <ng-container *ngTemplateOutlet="column.fdpHeaderCellDef.templateRef">
                                         </ng-container>
                                     </ng-container>
 
-                                    <fd-icon *ngIf="column.sortable && column.name === sortColumn"
+                                    <fd-icon *ngIf="column.sortable && column.key === sortField"
                                              fd-table-icon
-                                             [glyph]="sortDirection === 'asc' ? 'sort-ascending' : sortDirection === 'desc' ? 'sort-descending' : ''"></fd-icon>
+                                             [glyph]="sortDirection === _sortDirections.ASC ? 'sort-ascending' : sortDirection === _sortDirections.DESC ? 'sort-descending' : ''"></fd-icon>
                                 </fd-popover-control>
 
                                 <fd-popover-body>
                                     <ul fd-list [noBorder]="true" [compact]="true">
                                         <li *ngIf="column.sortable"
                                             fd-list-item
-                                            (click)="sort(column.key, 'asc', column.name)"
-                                            (keyup.enter)="sort(column.key, 'asc', column.name)">
+                                            (click)="sort(column.key, _sortDirections.ASC)"
+                                            (keyup.enter)="sort(column.key, _sortDirections.ASC)">
                                             <span fd-list-icon glyph="sort-ascending"></span>
-                                            <span fd-list-title>Sort Ascendnig</span>
+                                            <span fd-list-title>Sort Ascending</span>
                                         </li>
                                         <li *ngIf="column.sortable"
                                             fd-list-item
-                                            (click)="sort(column.key, 'desc', column.name)"
-                                            (keyup.enter)="sort(column.key, 'desc', column.name)">
+                                            (click)="sort(column.key, _sortDirections.DESC)"
+                                            (keyup.enter)="sort(column.key, _sortDirections.DESC)">
                                             <span fd-list-icon glyph="sort-descending"></span>
                                             <span fd-list-title>Sort Descending</span>
                                         </li>

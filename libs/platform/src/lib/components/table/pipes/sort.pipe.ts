@@ -1,6 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
 import { SelectableRow } from '../interfaces';
 import { getNestedValue } from '../../../utils/object';
+import { SortDirection } from '../enums';
+
+let defaultRows: SelectableRow[];
 
 const sort = (a, b, key?: string) => {
     if (key) {
@@ -13,11 +17,20 @@ const sort = (a, b, key?: string) => {
     }
 };
 
-@Pipe({ name: 'sortBy', pure: false })
+@Pipe({ name: 'sortBy' })
 export class TableSortByPipe implements PipeTransform {
-    transform(tableRows: SelectableRow[], direction: 'asc' | 'desc', sortKey?: string): any[] {
-        const ascModifier: number = direction === 'asc' ? 1 : -1;
+    transform(tableRows: SelectableRow[], direction: SortDirection, sortKey?: string): any[] {
+        if (!defaultRows) {
+            defaultRows = [...tableRows];
+        }
+
+        if (!direction && !sortKey) {
+            return defaultRows;
+        }
+
+        const ascModifier: number = direction === SortDirection.ASC ? 1 : -1;
         tableRows.sort((a, b) => (sort(a.value, b.value, sortKey) * ascModifier));
+
         return tableRows;
     }
 }
