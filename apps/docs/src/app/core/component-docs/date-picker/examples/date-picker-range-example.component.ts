@@ -14,9 +14,6 @@ export class DatePickerRangeExampleComponent {
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {
         const today = this.datetimeAdapter.today();
-        this.selectedRange = {
-            start: today,
-            end: this.datetimeAdapter.addCalendarDays(today, 1)
-        };
+        this.selectedRange = new DateRange(today, this.datetimeAdapter.addCalendarDays(today, 1));
     }
 }

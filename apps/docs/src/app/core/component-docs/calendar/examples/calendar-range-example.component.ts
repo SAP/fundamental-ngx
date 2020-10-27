@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FdDate, DateRange, DatetimeAdapter } from '@fundamental-ngx/core';
+import { DateRange, DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-range-example',
@@ -17,10 +17,7 @@ import { FdDate, DateRange, DatetimeAdapter } from '@fundamental-ngx/core';
         <div>Selected Last Date: {{ selected.end }}</div>`
 })
 export class CalendarRangeExampleComponent {
-    selected: DateRange<FdDate> = {
-        start: new FdDate(2019, 10, 11),
-        end: new FdDate(2019, 10, 19)
-    };
+    selected = new DateRange(new FdDate(2019, 10, 11), new FdDate(2019, 10, 19));
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
 

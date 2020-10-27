@@ -66,8 +66,6 @@ export class DatePickerComplexI18nExampleComponent {
     public date: FdDate = FdDate.getToday();
 
     public refresh(): void {
-        this.datePicker.locale = this.actualLocale;
-        this.datePicker.format = this.actualFormat;
         this.datePicker.handleSingleDateChange(this.date);
         this.calendarI18nService.i18nChange.next();
     }

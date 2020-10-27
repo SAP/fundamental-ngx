@@ -30,6 +30,10 @@ export class FdDate {
     }
 
     toString(): string {
+        if (!this.year || !this.month || !this.day) {
+            return '';
+        }
+
         const date = new Date();
         date.setUTCFullYear(this.year);
         date.setUTCMonth(this.month - 1);
@@ -40,11 +44,6 @@ export class FdDate {
         date.setUTCMilliseconds(0);
         return date.toDateString();
     }
-}
-
-export interface FdRangeDate {
-    start: FdDate;
-    end: FdDate;
 }
 
 @Injectable()

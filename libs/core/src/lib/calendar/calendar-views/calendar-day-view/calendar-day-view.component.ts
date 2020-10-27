@@ -420,12 +420,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     private _selectPreviousMonth(): void {
         const prevMonth = this._getPreviousMonth();
         this.newFocusedDayIndex -=
-            (this._getAmountOfWeeks(
+            (this._dateTimeAdapter.getAmountOfWeeks(
                 this._currentlyDisplayed.year,
                 this._currentlyDisplayed.month,
                 this.startingDayOfWeek
             ) -
-                this._getAmountOfWeeks(prevMonth.year, prevMonth.month, this.startingDayOfWeek)) *
+                this._dateTimeAdapter.getAmountOfWeeks(prevMonth.year, prevMonth.month, this.startingDayOfWeek)) *
             7;
         this._currentlyDisplayed = prevMonth;
         this._buildDayViewGrid();
@@ -557,38 +557,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     }
 
     /**
-     * @hidden
-     * Get day of week. Need it to synchronize date adapter and component API
-     * @param date D
-     * @return The day of week number (1 = Sunday, 2 = Monday ...).
-     */
-    private _getDayOfWeek(date: D): DaysOfWeek {
-        return this._dateTimeAdapter.getDayOfWeek(date) as DaysOfWeek;
-    }
-
-    /**
-     * @hidden
-     * Get amount of weeks. Need it to synchronize date adapter and component API
-     * @param year The year number
-     * @param month The month number
-     * @param firstDayOfWeek The first day of week (1 - Sunday, 2 - Monday ...)
-     * @return The number of weeks in the given month.
-     */
-    private _getAmountOfWeeks(year: number, month: number, firstDayOfWeek: DaysOfWeek): number {
-        return this._dateTimeAdapter.getAmountOfWeeks(year, month, firstDayOfWeek);
-    }
-
-    /**
-     * @hidden
-     * Get day of week. Need it to synchronize date adapter and component API
-     * @param date Date instance
-     * @return The day of week (1 - Sunday, 2 - Monday ...).
-     */
-    private _getWeekDay(date: D): DaysOfWeek {
-        return this._dateTimeAdapter.getDayOfWeek(date) as DaysOfWeek;
-    }
-
-    /**
      * Method which provides array of CalendarDay, which contains last 0-6 days of previous month/year. Theses days
      * fills the gap between starting startingDayOfWeek and first day of current month
      */
@@ -601,7 +569,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         );
         const prevMonthLastDate = this._dateTimeAdapter.createDate(year, month, amountOfDaysInCurrentMonth);
         const prevMonthLastDay = amountOfDaysInCurrentMonth;
-        let prevMonthLastWeekDay = this._getDayOfWeek(prevMonthLastDate) - this.startingDayOfWeek;
+        let prevMonthLastWeekDay = this._dateTimeAdapter.getDayOfWeek(prevMonthLastDate) - this.startingDayOfWeek;
 
         /** Checking if there are some days cut by startingDayOfWeek option
          *  If yes, there is whole week added, to avoid hiding
@@ -641,7 +609,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     }
 
     /** @hidden */
-    private _isWeekendDay(dayOfWeek: DaysOfWeek): boolean {
+    private _isWeekendDay(dayOfWeek: number): boolean {
         return dayOfWeek === 1 || dayOfWeek === 7;
     }
 
@@ -650,7 +618,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * chosen range / single date.
      */
     private _getDay(date: D): CalendarDay<D> {
-        const weekDay = this._getWeekDay(date);
+        const weekDay = this._dateTimeAdapter.getDayOfWeek(date);
         const dayOfMonth = this._dateTimeAdapter.getDate(date);
         const dateNames = this._dateTimeAdapter.getDateNames();
         const day: CalendarDay<D> = {

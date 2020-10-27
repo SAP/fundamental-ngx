@@ -22,7 +22,6 @@ import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../
 import { CalendarService } from '../calendar/calendar.service';
 import { CalendarYearGrid } from '../calendar/models/calendar-year-grid';
 import { DateRange } from '../calendar/models/date-range';
-import { DateFormatParser } from './format/date-parser';
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../datetime';
 import { createMissingDateImplementationError } from '../calendar/calendar-errors';
 
@@ -77,15 +76,7 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
 
     /** Date picker input placeholder string */
     @Input()
-    placeholder = 'mm/dd/yyyy';
-
-    /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
-    @Input()
-    format = 'MM/dd/yyyy';
-
-    /** Locale for date pipe. See more https://angular.io/guide/i18n */
-    @Input()
-    locale: string;
+    placeholder = '';
 
     /** Whether this is the compact input date picker */
     @Input()
@@ -179,8 +170,7 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
     @Input()
     yearGrid: CalendarYearGrid = {
         rows: 4,
-        cols: 5,
-        yearMapping: (num: number) => num.toString()
+        cols: 5
     };
 
     /**
@@ -190,8 +180,7 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
     @Input()
     aggregatedYearGrid: CalendarYearGrid = {
         rows: 4,
-        cols: 3,
-        yearMapping: (num: number) => num.toString()
+        cols: 3
     };
 
     /**
@@ -227,7 +216,7 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
     public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** @hidden */
-    onChange: any = (selected: any) => {};
+    onChange: any = (_: any) => {};
 
     /** @hidden */
     onTouched: any = () => {};
@@ -237,7 +226,7 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
      * @param date date representation
      */
     @Input()
-    disableFunction = function (date: D): boolean {
+    disableFunction = function (_: D): boolean {
         return false;
     };
 
@@ -246,7 +235,7 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
      * @param date date representation
      */
     @Input()
-    disableRangeStartFunction = function (date: D): boolean {
+    disableRangeStartFunction = function (_: D): boolean {
         return false;
     };
 
@@ -255,9 +244,23 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
      * @param date date representation
      */
     @Input()
-    disableRangeEndFunction = function (date: D): boolean {
+    disableRangeEndFunction = function (_: D): boolean {
         return false;
     };
+
+    /** @hidden */
+    constructor(
+        private _changeDetectionRef: ChangeDetectorRef,
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+    ) {
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
+    }
 
     /**
      * Method that handle calendar active view change and throws event.
@@ -337,22 +340,6 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
         this.dateStringUpdate(strDate);
     }
 
-    /** @hidden */
-    constructor(
-        public dateAdapter: DateFormatParser,
-        private _changeDetectionRef: ChangeDetectorRef,
-        @Optional() private _datePipe: DatePipe,
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
-    ) {
-        if (!this._dateTimeAdapter) {
-            throw createMissingDateImplementationError('DateTimeAdapter');
-        }
-        if (!this._dateTimeFormats) {
-            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
-        }
-    }
-
     /**
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
@@ -424,10 +411,7 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
 
                 if (this._isRangeModelValid(this.selectedRangeDate)) {
                     this._refreshCurrentlyDisplayedCalendarDate(selected.start);
-                    this.inputFieldDate =
-                        this._formatDate(selected.start) +
-                        this.dateAdapter.rangeDelimiter +
-                        this._formatDate(selected.end);
+                    this.inputFieldDate = this._formatDateRange(selected);
                 } else {
                     this.inputFieldDate = '';
                 }
@@ -557,33 +541,15 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
         }
     }
 
-    /**
-     * @hidden
-     * If there is any format function provided, it is used. Otherwise date format follows angular DatePipe functionality.
-     */
+    /** @hidden */
     private _formatDate(date: D): string {
-        const formattedDateStr = this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateInput);
-
-        if (formattedDateStr) {
-            return formattedDateStr;
-        } else {
-            return this._datePipe.transform(
-                new Date(
-                    this._dateTimeAdapter.getYear(date),
-                    this._dateTimeAdapter.getMonth(date),
-                    this._dateTimeAdapter.getDate(date) - 1
-                ),
-                this.format,
-                null,
-                this.locale
-            );
-        }
+        return this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateInput);
     }
 
     /** @hidden */
     private _formatDateRange(dateRange: DateRange<D>): string {
         const startDate = this._formatDate(dateRange.start);
         const endDate = this._formatDate(dateRange.end);
-        return startDate + this.dateAdapter.rangeDelimiter + endDate;
+        return startDate + this._dateTimeFormats.rangeDelimiter + endDate;
     }
 }

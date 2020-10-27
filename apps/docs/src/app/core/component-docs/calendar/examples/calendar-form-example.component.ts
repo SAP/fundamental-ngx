@@ -24,6 +24,9 @@ export class CalendarFormExamplesComponent {
     }
 
     setInvalidRange(): void {
-        this.customForm.controls['dateRange'].setValue(new FdDate(null, null, null));
+        this.customForm.controls['dateRange'].setValue({
+            start: new FdDate(null, null, null),
+            end: new FdDate(null, null, null)
+        });
     }
 }
