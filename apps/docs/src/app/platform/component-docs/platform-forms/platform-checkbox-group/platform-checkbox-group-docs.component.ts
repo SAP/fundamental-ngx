@@ -65,7 +65,7 @@ export class PlatformCheckboxGroupDocsComponent {
         {
             language: 'typescript',
             code: checkboxGroupExampleTs,
-            fileName: 'platform-checkbox-group-examples',
+            fileName: 'platform-checkbox-group-platform-platform-feed-input-examples',
             component: 'PlatformCheckboxGroupExampleComponent'
         }
     ];

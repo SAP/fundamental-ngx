@@ -1,0 +1,31 @@
+<div class="fd-feed-input" [class.is-disabled]="disabled">
+    <fd-avatar *ngIf="avatarShow"
+        class="fd-feed-input__thumb"
+        size="s"
+        role="img"
+        [image]="avatarSrc"
+        [class.fd-avatar--placeholder]="!avatarSrc"
+        [class.sap-icon]="!avatarSrc"
+        [glyph]="!avatarSrc ? 'person-placeholder' : null"
+    >
+    </fd-avatar>
+
+    <textarea
+        #textAreaElement
+        fd-form-control
+        aria-required="true"
+        class="fd-feed-input__textarea"
+        [placeholder]="placeholder"
+        [(ngModel)]="value"
+        (ngModelChange)="onChange()"
+    ></textarea>
+
+    <button
+        fd-button
+        class="fd-feed-input__submit-button"
+        [disabled]="!value"
+        (click)="onSubmit()"
+    >
+        <i role="presentation" class="sap-icon--feeder-arrow"></i>
+    </button>
+</div>

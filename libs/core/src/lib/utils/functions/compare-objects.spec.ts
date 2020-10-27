@@ -35,9 +35,9 @@ describe('compareObjects', () => {
         }
     ];
 
-    it('should identify positive examples', () =>
+    it('should identify positive platform-platform-feed-input-examples', () =>
         positiveTestValues.forEach((example) => expect(compareObjects(example.obj1, example.obj2)).toBeTrue()));
 
-    it('should identify negative examples', () =>
+    it('should identify negative platform-platform-feed-input-examples', () =>
         negativeTestValues.forEach((example) => expect(compareObjects(example.obj1, example.obj2)).toBeFalse()));
 });

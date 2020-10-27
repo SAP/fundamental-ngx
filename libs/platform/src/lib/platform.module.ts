@@ -26,6 +26,7 @@ import { PlatformThumbnailModule } from './components/thumbnail/public_api';
 import { PlatformObjectMarkerModule } from './components/object-marker/object-marker.module';
 import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
 import { PlatformTableModule } from './components/table/table.module';
+import { PlatformFeedInputModule } from './components/feed-input/feed-input.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -57,7 +58,8 @@ import { PlatformTableModule } from './components/table/table.module';
         PlatformThumbnailModule,
         PlatformObjectMarkerModule,
         PlatformObjectAttributeModule,
-        PlatformTableModule
+        PlatformTableModule,
+        PlatformFeedInputModule
     ]
 })
 export class FundamentalNgxPlatformModule { }

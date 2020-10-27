@@ -23,6 +23,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/info-label', name: 'Info Label' },
             { url: 'platform/input', name: 'Input' },
             { url: 'platform/input-group', name: 'Input Group' },
+            { url: 'platform/feed-input', name: 'Feed Input'},
             { url: 'platform/link', name: 'Link' },
             { url: 'platform/menu', name: 'Menu' },
             { url: 'platform/menu-button', name: 'Menu Button' },

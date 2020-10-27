@@ -213,6 +213,12 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then((m) =>
                         m.PlatformObjectListItemDocsModule)
+            },
+            {
+                path: 'feed-input',
+                loadChildren: () =>
+                    import('./component-docs/platform-feed-input/platform-feed-input.module').then((m) =>
+                        m.PlatformFeedInputDocsModule)
             }
         ]
     }

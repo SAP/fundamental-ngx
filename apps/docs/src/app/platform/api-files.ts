@@ -55,5 +55,6 @@ export const API_FILES = {
     objectAttribute: ['ObjectAttributeComponent'],
     actionlistitem: ['ActionListItemComponent', 'ListComponent', 'ListConfig'],
     displaylistitem: ['DisplayListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListHeader', 'ListConfig'],
-    objectlistitem: ['ObjectListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListHeader', 'ListConfig']
+    objectlistitem: ['ObjectListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListHeader', 'ListConfig'],
+    feedInput: ['FeedInputComponent']
 };
