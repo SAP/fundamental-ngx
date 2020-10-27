@@ -16,8 +16,8 @@ import {
     ViewEncapsulation,
     TemplateRef,
     ComponentRef,
-    ViewChildren,
-    QueryList, ContentChildren, Inject
+    QueryList,
+    ContentChildren
 } from '@angular/core';
 import { PopoverComponent } from '../popover/popover.component';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
@@ -95,12 +95,11 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @ViewChild('actionSheetBodyTemplate')
     actionSheetBodyTemplate: TemplateRef<any>;
 
-    /** @hidden need to use ViewChildren as ngIf prevents use of ViewChild */
-    @ViewChildren(PopoverComponent)
-    popoverComponent: QueryList<PopoverComponent>;
+    /** @hidden */
+    @ViewChild(PopoverComponent)
+    popoverComponent: PopoverComponent;
 
     /** @hidden */
-    @Input()
     actionSheetMobileDynamic: ComponentRef<ActionSheetMobileComponent>;
 
     /** @hidden **/
@@ -122,6 +121,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._keyboardSupportService.setKeyboardService(this.actionSheetItems, false);
         this._listenOnItemsChange();
         this._actionControlHandle();
+        this._actionItemsHandle();
     }
 
     /** @hidden */
@@ -129,8 +129,8 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         if (this.mobile) {
             this._setUpMobileMode();
         }
-        if (this.popoverComponent && this.popoverComponent.first) {
-            this.popoverComponent.first.directiveRef.loaded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        if (this.popoverComponent && this.popoverComponent) {
+            this.popoverComponent.directiveRef.loaded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
                 setTimeout(() => {
                     this.setItemActive(0);
                 });
@@ -159,10 +159,25 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     }
 
     /** @hidden */
+    private _actionItemsHandle(): void {
+        this.actionSheetItems.forEach(item =>
+            item.clicked.subscribe((isOpen) => {
+                this.isOpenChangeHandle(isOpen);
+            })
+        );
+    }
+
+    /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
         this.open = isOpen;
         if (this.mobile) {
             this.actionSheetMobileDynamic.instance.open = this.open;
+        } else {
+            if (this.open) {
+                this.popoverComponent.open()
+            } else {
+                this.popoverComponent.close()
+            }
         }
     }
 

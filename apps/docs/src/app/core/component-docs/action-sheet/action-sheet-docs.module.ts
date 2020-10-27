@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { API_FILES } from '../../api-files';
-import { ActionSheetHeaderComponent } from './action-sheet-header/action-sheet-header.component';
-import { ActionSheetDocsComponent } from './action-sheet-docs.component';
-import { ActionSheetCompactExampleComponent } from './examples/action-sheet-compact/action-sheet-compact-example.component';
-import { ActionSheetCosyExampleComponent } from './examples/action-sheet-cosy/action-sheet-cosy-example.component';
-import { ActionSheetMobileExampleComponent } from './examples/action-sheet-mobile/action-sheet-mobile-example.component';
+import {
+    ActionSheetCompactExampleComponent,
+    ActionSheetCosyExampleComponent,
+    ActionSheetMobileExampleComponent,
+    ActionSheetHeaderComponent,
+    ActionSheetDocsComponent,
+    ApiComponent,
+    SharedDocumentationPageModule,
+    API_FILES
+} from './index';
 import {
     ActionSheetModule
 } from '@fundamental-ngx/core';

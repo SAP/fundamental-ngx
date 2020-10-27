@@ -69,7 +69,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     keyDown = new EventEmitter<KeyboardEvent>();
 
     /** @hidden **/
-    clicked = new EventEmitter<MouseEvent>();
+    clicked = new EventEmitter<boolean>();
 
     constructor(
         private _elementRef: ElementRef
@@ -84,10 +84,14 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
-        this.clicked.emit(event);
+        this.clicked.emit(!this.isCloseButton);
+
+        if (!this.isCloseButton) {
+            event.stopPropagation();
+        }
     }
 
-    /** @hidden */
+    /** @hidden Support for KeyboardSupportItemInterface */
     click(): void {
         this._elementRef.nativeElement.click();
     }
@@ -95,12 +99,5 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** @hidden */
     focus(): void {
         this.buttonComponent.elementRef().nativeElement.focus();
-    }
-
-    /** hidden **/
-    preventClose(event: Event): void {
-        if (!this.isCloseButton) {
-            event.stopPropagation();
-        }
     }
 }

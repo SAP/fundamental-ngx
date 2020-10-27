@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    HostListener,
     Input,
     ViewEncapsulation
 } from '@angular/core';
@@ -33,4 +34,10 @@ export class ActionSheetBodyComponent {
     /** Display in mobile view. **/
     @Input()
     mobile = false;
+
+    /** Handler for mouse events */
+    @HostListener('click', ['$event'])
+    onClick(event: MouseEvent): void {
+        event.stopPropagation();
+    }
 }
