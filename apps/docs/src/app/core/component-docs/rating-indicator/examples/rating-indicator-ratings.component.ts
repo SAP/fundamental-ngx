@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-rating-indicator-ratings',
-    templateUrl: './rating-indicator-ratings.component.html'
+    templateUrl: './rating-indicator-ratings.component.html',
+    styleUrls: ['./rating-indicator-style.component.scss']
 })
 export class RatingIndicatorRatingsComponent {
     testRatingData1 = {

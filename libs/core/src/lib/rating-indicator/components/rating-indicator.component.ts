@@ -13,7 +13,6 @@ import {
 } from '@angular/core';
 
 import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
-import { RatingIndicatorOutput } from '../models/rate-indicator.output';
 import { INDICATOR_RANGE, INDICATOR_PREFIX, INDICATOR_CLASSES, RatingIndicatorSize } from '../constants';
 
 let ratingUID = 0;
@@ -129,22 +128,25 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     @Input()
     size: RatingIndicatorSize = 'md';
 
+    @Input()
+    dynamicTextIndicator = 'of';
+
     /**
      * Fired when the user sets or changes their rating.
      */
     @Output()
-    ratingChanged = new EventEmitter<RatingIndicatorOutput>();
+    ratingChanged = new EventEmitter<number>();
 
     /** @hidden */
-    icons: { id: string; value: number }[] = [];
+    _icons: { id: string; value: number }[] = [];
     /** @hidden */
-    ratingItems: {
+    _ratingItems: {
         rate: number;
         total: number;
     }[] = [];
 
     /** @hidden */
-    private ratingUID = 0;
+    private _ratingUID = 0;
     /** @hidden */
     private _indicatorTotal = 5;
     /** @hidden */
@@ -157,7 +159,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     get viewRatingUID(): number {
-        return this.ratingUID;
+        return this._ratingUID;
     }
     /** @hidden */
     get indicatorCount(): number {
@@ -171,13 +173,11 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     ngOnInit(): void {
         ratingUID++;
-        this.ratingUID = ratingUID;
-
+        this._ratingUID = ratingUID;
         this._value = this._convertToValue();
-        this.icons = this._getRates();
+        this._icons = this._getRates();
         this.buildComponentCssClass();
         this._generateRatings();
-        this._renderIcon();
     }
 
     /** @hidden */
@@ -190,11 +190,10 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
         }
         if ('indicatorTotal' in changes || 'allowHalves' in changes) {
             this._value = this._convertToValue();
-            this.icons = this._getRates();
+            this._icons = this._getRates();
             this.buildComponentCssClass();
         }
         if ('ratedIcon' in changes || 'unratedIcon' in changes) {
-            this._renderIcon();
             this.buildComponentCssClass();
         }
 
@@ -215,7 +214,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     onSelect(value: number): void {
         this.value = this._value = value;
-        this.ratingChanged.emit({ value: value });
+        this.ratingChanged.emit(value);
     }
 
     /** @hidden */
@@ -238,15 +237,6 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
             this.class
         ];
     }
-    /** @hidden */
-    private _renderIcon(): void {
-        if (!!this.ratedIcon) {
-            this._elementRef.nativeElement.style.setProperty('custom-indicator-icon-rated', `${this.ratedIcon}`);
-        }
-        if (!!this.unratedIcon) {
-            this._elementRef.nativeElement.style.setProperty('custom-indicator-icon-unrated', `${this.unratedIcon}`);
-        }
-    }
 
     /** @hidden */
     private _generateRatings(): void {
@@ -256,19 +246,22 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
             const items = [];
 
             for (const key in this.ratings) {
-                if (+key < INDICATOR_RANGE.min || +key > INDICATOR_RANGE.max) {
-                    continue;
-                }
-                if (this.ratings[key]) {
-                    sum += +key * this.ratings[key];
-                    allVoites += this.ratings[key];
-                    items.push({
-                        rate: +key,
-                        total: this.ratings[key]
-                    });
+                if (key) {
+                    const _key = +key;
+                    if (_key < INDICATOR_RANGE.min || _key > INDICATOR_RANGE.max) {
+                        continue;
+                    }
+                    if (this.ratings[key]) {
+                        sum += _key * this.ratings[key];
+                        allVoites += this.ratings[key];
+                        items.push({
+                            rate: _key,
+                            total: this.ratings[key]
+                        });
+                    }
                 }
             }
-            this.ratingItems = items;
+            this._ratingItems = items;
             this.ratingAverage = sum / allVoites * 10;
             this.totalRatings = allVoites;
             this._value = this._convertToValue();

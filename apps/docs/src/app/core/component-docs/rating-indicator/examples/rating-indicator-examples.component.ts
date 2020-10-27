@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RatingIndicatorOutput } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'app-rating-indicator-example',
-    templateUrl: './rating-indicator-example.component.html'
+    templateUrl: './rating-indicator-example.component.html',
+    styleUrls: ['./rating-indicator-style.component.scss']
 })
 export class RatingIndicatorExamplesComponent {
     config = {
@@ -16,11 +16,11 @@ export class RatingIndicatorExamplesComponent {
 
     isDisable = false;
 
-    onRatingChanged(event: RatingIndicatorOutput): void {
+    onRatingChanged(event: number): void {
         console.log(event);
     }
 
-    onRatingChangedWithDisable(event: RatingIndicatorOutput): void {
+    onRatingChangedWithDisable(event: number): void {
         console.log(event);
         this.isDisable = true;
     }

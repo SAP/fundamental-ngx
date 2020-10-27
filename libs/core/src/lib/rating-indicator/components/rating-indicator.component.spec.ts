@@ -5,7 +5,7 @@ import { RatingIndicatorComponent } from './rating-indicator.component';
 
 const prefix = 'fd-rating-indicator';
 
-fdescribe('RatingIndicatorComponent', () => {
+describe('RatingIndicatorComponent', () => {
   let elementRef: ElementRef;
   let component: RatingIndicatorComponent;
   let fixture: ComponentFixture<RatingIndicatorComponent>;
@@ -50,7 +50,7 @@ fdescribe('RatingIndicatorComponent', () => {
   it(`should have correct viewValue`, () => {
     const ratingChangedSpy = spyOn(component.ratingChanged, 'emit');
     component.onSelect(2);
-    expect(ratingChangedSpy).toHaveBeenCalledWith({ value: 2 });
+    expect(ratingChangedSpy).toHaveBeenCalledWith(2);
   });
 
   it(`should have correct indicator count from total indicator`, () => {
@@ -58,7 +58,7 @@ fdescribe('RatingIndicatorComponent', () => {
     component.allowHalves = false;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.icons.length).toEqual(4);
+    expect(component._icons.length).toEqual(4);
   });
 
   it(`should have correct indicator count from total indicator with halves`, () => {
@@ -66,7 +66,7 @@ fdescribe('RatingIndicatorComponent', () => {
     component.allowHalves = true;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.icons.length).toEqual(4 * 2);
+    expect(component._icons.length).toEqual(4 * 2);
   });
 
   it(`we should have an indicator count with a total indicator=111 (wrong count)`, () => {
@@ -74,7 +74,7 @@ fdescribe('RatingIndicatorComponent', () => {
     component.allowHalves = false;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.icons.length).toEqual(7);
+    expect(component._icons.length).toEqual(7);
   });
 
 });

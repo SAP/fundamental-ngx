@@ -5,7 +5,7 @@
         <ng-container *ngTemplateOutlet="zeroRate; context: { halves: true }"></ng-container>
     </ng-container>
     <!-- Available rate values -->
-    <ng-container *ngFor="let rate of icons; index as i; trackBy: trackByFn">
+    <ng-container *ngFor="let rate of _icons; index as i; trackBy: trackByFn">
         <input
             [attr.aria-label]="(i + 1) + '-star'"
             type="radio"
@@ -30,7 +30,7 @@
     [noArrow]="false"
     placement="top"
     addContainerClass="fd-rating-indicator__popover"
-    *ngIf="displaySumPopover && ratingItems && ratingItems.length; else dynamicText"
+    *ngIf="displaySumPopover && _ratingItems && _ratingItems.length; else dynamicText"
 >
     <fd-popover-control>
         <span class="fd-rating-indicator__dynamic-text">
@@ -38,9 +38,9 @@
         </span>
     </fd-popover-control>
     <fd-popover-body>
-        <div class="rate-sum-row" *ngFor="let rating of ratingItems; trackBy: trackByFn">
+        <div class="rate-sum-row" *ngFor="let rating of _ratingItems; trackBy: trackByFn">
             <div class="fd-rating-indicator__container rates">
-                <ng-container *ngFor="let rate of icons; trackBy: trackByFn">
+                <ng-container *ngFor="let rate of _icons; trackBy: trackByFn">
                     <span [class.fd-rating-indicator__input-checked]="rate.value === rating.rate" class="fd-rating-indicator__input"></span>
                     <label class="fd-rating-indicator__label">
                         <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
@@ -55,17 +55,17 @@
 
 <ng-template #dynamicText>
     <span *ngIf="totalRatings" class="fd-rating-indicator__dynamic-text">({{ totalRatings }})</span>
-    <span *ngIf="!totalRatings" class="fd-rating-indicator__dynamic-text">({{ viewValue }} of {{ indicatorCount }})</span>
+    <span *ngIf="!totalRatings" class="fd-rating-indicator__dynamic-text">({{ viewValue }} {{ dynamicTextIndicator }} {{ indicatorCount }})</span>
 </ng-template>
 
 <ng-template #zeroRate let-halves="halves">
     <input
         aria-label="Reset to zero"
         type="radio"
-        class="zero-rating fd-rating-indicator__input"
+        class="fd-rating-indicator__zero-rating fd-rating-indicator__input"
         [disabled]="disabled"
         name="rating-{{ viewRatingUID }}{{halves ? '-halves' : '' }}"
         [checked]="viewValue === 0"
     />
-    <label class="zero-rating fd-rating-indicator__label"></label>
+    <label class="fd-rating-indicator__zero-rating fd-rating-indicator__label"></label>
 </ng-template>

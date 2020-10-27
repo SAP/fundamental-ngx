@@ -1,7 +1,7 @@
 <h2>Rating indicator with different sizes</h2>
 <ol>
     <li *ngFor="let size of sizes; trackBy: trackByFn">
-        <div style="display: flex; align-items: flex-start; justify-content: flex-start; flex-direction: column;">
+        <div class="base-row">
             <h4>Size = {{ size || 'default' }}</h4>
             <fd-rating-indicator
                 [size]="size"
@@ -10,7 +10,7 @@
             ></fd-rating-indicator>
             Selected Rate: {{ sampleSize.viewValue }}
         </div>
-        <div style="display: flex; align-items: flex-start; justify-content: flex-start; flex-direction: column;">
+        <div class="base-row">
             <h4>And same size = {{ size || 'default' }} with halves</h4>
             <fd-rating-indicator
                 [size]="size"
