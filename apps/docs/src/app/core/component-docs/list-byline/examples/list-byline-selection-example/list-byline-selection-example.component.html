@@ -1,0 +1,41 @@
+<h4>With Checkboxes</h4>
+
+<ul fd-list [byline]="true" [selection]="true">
+    <li fd-list-item *ngFor="let item of bylineSelectionItems" [selected]="item.selected">
+        <fd-checkbox [(ngModel)]="item.selected"></fd-checkbox>
+        <span fd-list-thumbnail><fd-icon [glyph]="item.glyph"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-list-title>{{ item.title }}</div>
+            <div fd-list-byline>{{ item.byline }}</div>
+        </div>
+    </li>
+</ul>
+
+<h4>With Radio Buttons</h4>
+
+<ul fd-list [byline]="true" [selection]="true">
+    <li fd-list-item [selected]="selectionValue === 'radio1'">
+        <fd-radio-button name="radio1" id="radio1" value="radio1" [(ngModel)]="selectionValue"></fd-radio-button>
+        <span fd-list-thumbnail><fd-icon glyph="calendar"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-list-title>Title 1</div>
+            <div fd-list-byline>Byline 1</div>
+        </div>
+    </li>
+    <li fd-list-item [selected]="selectionValue === 'radio2'">
+        <fd-radio-button name="radio1" id="radio2" value="radio2" [(ngModel)]="selectionValue"></fd-radio-button>
+        <span fd-list-thumbnail><fd-icon glyph="activate"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-list-title>Title 2</div>
+            <div fd-list-byline>Byline 2</div>
+        </div>
+    </li>
+    <li fd-list-item [selected]="selectionValue === 'radio3'">
+        <fd-radio-button name="radio1" id="radio3" value="radio3" [(ngModel)]="selectionValue"></fd-radio-button>
+        <span fd-list-thumbnail><fd-icon glyph="employee"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-list-title>Title 3</div>
+            <div fd-list-byline>Byline 3</div>
+        </div>
+    </li>
+</ul>
