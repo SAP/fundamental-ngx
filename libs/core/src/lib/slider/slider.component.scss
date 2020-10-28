@@ -1,16 +1,22 @@
-.slider-tooltip {
-    border-radius: 0.25rem;
-    height: 1.375rem;
-    padding: 0.25rem;
-    font-size: .75rem;
-    line-height: 1;
-    color: #6a6d70;
-    background: #fff;
-    min-width: 2rem;
-    border: 1px solid #89919a;
-    text-align: center;
-    position: relative;
-    top: -7px;
+.slider-tooltip-wrapper {
+    input[type="text"] {
+        width: 2rem;
+    }
+
+    .slider-tooltip {
+        border-radius: 0.25rem;
+        height: 1.375rem;
+        padding: 0.25rem;
+        font-size: .75rem;
+        line-height: 1;
+        color: #6a6d70;
+        background: #fff;
+        min-width: 2rem;
+        border: 1px solid #89919a;
+        text-align: center;
+        position: relative;
+        top: -7px;
+    }
 }
 
 
@@ -21,358 +27,385 @@
  */
 @charset "UTF-8";
 .fd-slider {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  min-width: 4rem;
-  max-width: 100%;
-  padding: 1rem 0;
-  position: relative
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    min-width: 4rem;
+    max-width: 100%;
+    padding: 1rem 0;
+    position: relative
 }
+
 .fd-slider::after,
 .fd-slider::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider.is-disabled,
 .fd-slider:disabled,
 .fd-slider[aria-disabled=true] {
-  cursor: not-allowed
+    cursor: not-allowed
 }
+
 .fd-slider__inner {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  position: relative
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    position: relative
 }
+
 .fd-slider__inner::after,
 .fd-slider__inner::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider__track {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  height: .25rem;
-  height: var(--fdSlider_Track_Height,.25rem);
-  width: 100%;
-  background-color: #89919a;
-  background-color: var(--sapField_BorderColor,#89919a);
-  border-radius: .25rem;
-  border-radius: var(--fdSlider_Track_BorderRadius,.25rem);
-  position: relative;
-  z-index: 1
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    height: .25rem;
+    height: var(--fdSlider_Track_Height, .25rem);
+    width: 100%;
+    background-color: #89919a;
+    background-color: var(--sapField_BorderColor, #89919a);
+    border-radius: .25rem;
+    border-radius: var(--fdSlider_Track_BorderRadius, .25rem);
+    position: relative;
+    z-index: 1
 }
+
 .fd-slider__track::after,
 .fd-slider__track::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider__track-range {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  position: relative;
-  height: 100%;
-  border-radius: .25rem;
-  background-color: #0854a0;
-  background-color: var(--fdSlider_Track_Active_Background,var(--sapActiveColor,#0854a0));
-  border: .0625rem solid #0854a0;
-  border: .0625rem solid var(--fdSlider_Track_Active_Border,var(--sapActiveColor,#0854a0))
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    position: relative;
+    height: 100%;
+    border-radius: .25rem;
+    background-color: #0854a0;
+    background-color: var(--fdSlider_Track_Active_Background, var(--sapActiveColor, #0854a0));
+    border: .0625rem solid #0854a0;
+    border: .0625rem solid var(--fdSlider_Track_Active_Border, var(--sapActiveColor, #0854a0))
 }
+
 .fd-slider__track-range::after,
 .fd-slider__track-range::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider__tick-wrapper {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  position: absolute;
-  width: 100%;
-  top: -.4rem
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    position: absolute;
+    width: 100%;
+    top: -.4rem
 }
+
 .fd-slider__tick-wrapper::after,
 .fd-slider__tick-wrapper::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider__ticks {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between
 }
+
 .fd-slider__ticks::after,
 .fd-slider__ticks::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider__labels {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  position: relative;
-  height: 1rem;
-  top: .5rem
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    position: relative;
+    height: 1rem;
+    top: .5rem
 }
+
 .fd-slider__labels::after,
 .fd-slider__labels::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider__tick {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  position: relative;
-  width: .0625rem;
-  height: 1rem;
-  height: var(--fdSlider_Tick_Height,1rem);
-  background-color: #89919a;
-  background-color: var(--sapField_BorderColor,#89919a)
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    position: relative;
+    width: .0625rem;
+    height: 1rem;
+    height: var(--fdSlider_Tick_Height, 1rem);
+    background-color: #89919a;
+    background-color: var(--sapField_BorderColor, #89919a)
 }
+
 .fd-slider__tick::after,
 .fd-slider__tick::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider__tick--in-range {
-  background-color: #0854a0;
-  background-color: var(--fdSlider_Track_Active_Border,var(--sapActiveColor,#0854a0))
+    background-color: #0854a0;
+    background-color: var(--fdSlider_Track_Active_Border, var(--sapActiveColor, #0854a0))
 }
+
 .fd-slider__label {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  width: 0;
-  position: relative;
-  font-size: .75rem;
-  font-size: var(--sapFontSmallSize,.75rem);
-  color: #6a6d70;
-  color: var(--sapContent_LabelColor,#6a6d70)
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 0;
+    position: relative;
+    font-size: .75rem;
+    font-size: var(--sapFontSmallSize, .75rem);
+    color: #6a6d70;
+    color: var(--sapContent_LabelColor, #6a6d70)
 }
+
 .fd-slider__label::after,
 .fd-slider__label::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider__handle {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  line-height: 1.4;
-  line-height: var(--sapContent_LineHeight,1.4);
-  color: #32363a;
-  color: var(--sapTextColor,#32363a);
-  font-family: "72", "72full", Arial, Helvetica, sans-serif;
-  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  width: 1.25rem;
-  height: 1.25rem;
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 1;
-  background-color: #fff;
-  background-color: var(--sapButton_Background,#fff);
-  border: .125rem solid #89919a;
-  border: .125rem solid var(--sapField_BorderColor,#89919a)
+    font-size: .875rem;
+    font-size: var(--sapFontSize, .875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+    background-color: #fff;
+    background-color: var(--sapButton_Background, #fff);
+    border: .125rem solid #89919a;
+    border: .125rem solid var(--sapField_BorderColor, #89919a)
 }
+
 .fd-slider__handle::after,
 .fd-slider__handle::before {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-  font-size: inherit
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
 }
+
 .fd-slider__handle::before {
-  content: '';
-  width: 2rem;
-  height: 2rem;
-  position: absolute;
-  -webkit-transform: translate(-25%,-25%);
-  transform: translate(-25%,-25%)
+    content: '';
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    -webkit-transform: translate(-25%, -25%);
+    transform: translate(-25%, -25%)
 }
+
 .fd-slider__handle:focus {
-  outline: 1px dotted #0854a0;
-  outline: 1px dotted var(--sapButton_Hover_BorderColor,#0854a0);
-  outline-offset: .0625rem
+    outline: 1px dotted #0854a0;
+    outline: 1px dotted var(--sapButton_Hover_BorderColor, #0854a0);
+    outline-offset: .0625rem
 }
+
 .fd-slider__handle.is-hover,
 .fd-slider__handle:hover {
-  background: #ebf5fe;
-  background: var(--sapButton_Hover_Background,#ebf5fe);
-  border-color: #0854a0;
-  border-color: var(--sapButton_Hover_BorderColor,#0854a0)
+    background: #ebf5fe;
+    background: var(--sapButton_Hover_Background, #ebf5fe);
+    border-color: #0854a0;
+    border-color: var(--sapButton_Hover_BorderColor, #0854a0)
 }
+
 .fd-slider__handle.is-active,
 .fd-slider__handle:active {
-  background: #0854a0;
-  background: var(--sapButton_Active_Background,#0854a0);
-  border-color: #0854a0;
-  border-color: var(--sapButton_Active_BorderColor,#0854a0)
+    background: #0854a0;
+    background: var(--sapButton_Active_Background, #0854a0);
+    border-color: #0854a0;
+    border-color: var(--sapButton_Active_BorderColor, #0854a0)
 }
+
 .fd-slider__handle--lg {
-  width: 1.625rem;
-  height: 1.625rem
+    width: 1.625rem;
+    height: 1.625rem
 }
+
 .fd-slider__handle--lg::before {
-  width: 2.75rem;
-  height: 2.75rem
+    width: 2.75rem;
+    height: 2.75rem
 }

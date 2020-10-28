@@ -2,7 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
+    Component, ContentChildren,
     ElementRef,
     forwardRef, HostBinding,
     Input,
@@ -26,6 +26,12 @@ export const SLIDER_VALUE_ACCESSOR = {
 export interface RangeSliderValue {
     min: number;
     max: number
+}
+
+export enum SliderValueTargets {
+    SINGLE_SLIDER,
+    RANGE_SLIDER1,
+    RANGE_SLIDER2
 }
 
 export enum RangeHandleIndex {
@@ -127,7 +133,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             this._progress = ((val - this.min) / (this.max - this.min)) * 100;
         }
 
-        if (this._isRange && Array.isArray(val)) {
+        if (this._isRange && Array.isArray(val) && !(this._handle1Value && this._handle2Value)) {
             this._setRangeHandleValueAndPosition(RangeHandleIndex.First, val[0]);
             this._setRangeHandleValueAndPosition(RangeHandleIndex.Second, val[1]);
         }
@@ -136,6 +142,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
         this.onChange(val);
         this.onTouched();
         this._cdr.markForCheck();
+    }
+
+    get popoverValueRef(): number[] {
+        return [this.value as number, this._handle1Value, this._handle2Value];
     }
 
     @ViewChild('track', { read: ElementRef }) trackEl: ElementRef<any>;
@@ -160,6 +170,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     _tickMarks: any[] = [];
     _stepValues: number[] = [];
     _isEnoughSpaceForTickMarks = false;
+    _popoverInputFieldClass = `fd-slider-popover-input-${sliderId}`;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -275,8 +286,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
                 handleIndex = RangeHandleIndex.Second;
             }
 
-            console.log('_setRangeHandleValueAndPosition called', handleIndex, value);
-
             this._setRangeHandleValueAndPosition(handleIndex, value);
             this.writeValue(this._constructRangeModelValue());
             this._cdr.detectChanges();
@@ -352,14 +361,39 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     /** @hidden */
     _hidePopovers(): void {
         const elementsToCheck = [this.handle?.nativeElement, this.rangeHandle1?.nativeElement, this.rangeHandle2?.nativeElement];
-        if (elementsToCheck.some(el => document.activeElement === el)) {
+        if (elementsToCheck.some(el => document.activeElement === el) || document.activeElement.classList.contains(this._popoverInputFieldClass)) {
+            const unsubscribeFromBlur = this._renderer.listen(document.activeElement, 'focusout', () => {
+                setTimeout(() => {
+                    unsubscribeFromBlur();
+                    this._hidePopovers();
+                });
+            });
             return;
         }
+        console.log('hiding popovers');
         this._popovers.forEach(popover => popover.close());
     }
 
     _updatePopoversPosition(): void {
-        this._popovers.forEach(popover => popover.updatePopper())
+        this._popovers.forEach(popover => popover.updatePopper());
+    }
+
+    _updateValueFromInput(value: string, target: SliderValueTargets): void {
+        // console.log('_updateValueFromInput', value, target);
+        if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
+            this.writeValue(+value);
+            this.handle.nativeElement.focus();
+            return;
+        }
+        if (target === SliderValueTargets.RANGE_SLIDER1) {
+            this._setRangeHandleValueAndPosition(RangeHandleIndex.First, +value);
+            this.rangeHandle1.nativeElement.focus();
+        }
+        if (target === SliderValueTargets.RANGE_SLIDER2) {
+            this._setRangeHandleValueAndPosition(RangeHandleIndex.Second, +value);
+            this.rangeHandle2.nativeElement.focus();
+        }
+        this.writeValue(this._constructRangeModelValue());
     }
 
     /** @hidden */

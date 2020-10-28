@@ -96,17 +96,25 @@
 <pre>{{ value | json }}</pre>
 
 <ng-template #singleSliderPopover>
-    <ng-container *ngTemplateOutlet="popoverInner; context: { tooltipValue: value }"></ng-container>
+    <ng-container *ngTemplateOutlet="popoverInner; context: { target: 0 }"></ng-container>
 </ng-template>
 <ng-template #rangeSliderPopover1>
-    <ng-container *ngTemplateOutlet="popoverInner; context: { tooltipValue: _handle1Value }"></ng-container>
+    <ng-container *ngTemplateOutlet="popoverInner; context: { target: 1 }"></ng-container>
 </ng-template>
 <ng-template #rangeSliderPopover2>
-    <ng-container *ngTemplateOutlet="popoverInner; context: { tooltipValue: _handle2Value }"></ng-container>
+    <ng-container *ngTemplateOutlet="popoverInner; context: { target: 2 }"></ng-container>
 </ng-template>
-<ng-template #popoverInner let-tooltipValue="tooltipValue">
-    <div class="slider-tooltip-wrapper" (click)="$event.stopPropagation()">
-        <div *ngIf="tooltipMode === 'readonly'" class="slider-tooltip">{{ tooltipValue }}</div>
-        <input *ngIf="tooltipMode === 'editable'" type="text" class="fd-input slider-tooltip" [ngModel]="tooltipValue" (blur)="writeValue(tooltipValue)">
+<ng-template #popoverInner let-target="target">
+    <div class="slider-tooltip-wrapper" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+        <div *ngIf="tooltipMode === 'readonly'" class="slider-tooltip">{{ popoverValueRef[target] }}</div>
+        <input
+            #popoverInputField
+            tabindex="-1"
+            type="text"
+            class="fd-input slider-tooltip {{ _popoverInputFieldClass }}"
+            *ngIf="tooltipMode === 'editable'"
+            [(ngModel)]="popoverValueRef[target]"
+            (blur)="_updateValueFromInput(popoverInputField.value, target)"
+            (keydown.enter)="_updateValueFromInput(popoverInputField.value, target)">
     </div>
 </ng-template>
