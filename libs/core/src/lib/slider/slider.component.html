@@ -96,13 +96,13 @@
 <pre>{{ value | json }}</pre>
 
 <ng-template #singleSliderPopover>
-    <ng-container *ngTemplateOutlet="popoverInner; context: { target: 0 }"></ng-container>
+    <ng-container *ngTemplateOutlet="popoverInner; context: { target: _sliderValueTargets.SINGLE_SLIDER }"></ng-container>
 </ng-template>
 <ng-template #rangeSliderPopover1>
-    <ng-container *ngTemplateOutlet="popoverInner; context: { target: 1 }"></ng-container>
+    <ng-container *ngTemplateOutlet="popoverInner; context: { target: _sliderValueTargets.RANGE_SLIDER1 }"></ng-container>
 </ng-template>
 <ng-template #rangeSliderPopover2>
-    <ng-container *ngTemplateOutlet="popoverInner; context: { target: 2 }"></ng-container>
+    <ng-container *ngTemplateOutlet="popoverInner; context: { target: _sliderValueTargets.RANGE_SLIDER2 }"></ng-container>
 </ng-template>
 <ng-template #popoverInner let-target="target">
     <div class="slider-tooltip-wrapper" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
