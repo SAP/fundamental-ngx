@@ -13,7 +13,7 @@ const popoverPlacementMap: {[key: string]: ConnectedPosition} = {
     'left-end': { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'bottom' },
     'right-start': { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top' },
     'right': { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center' },
-    'right-end': { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
+    'right-end': { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' }
 };
 
 export const DefaultPositions: ConnectedPosition[] = [

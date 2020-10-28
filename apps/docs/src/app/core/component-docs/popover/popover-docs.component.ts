@@ -62,7 +62,7 @@ export class PopoverDocsComponent {
             language: 'html',
             code: dropdownContainerSrc,
             fileName: 'popover-container-example',
-            component: 'PopoverContainerExampleComponent',
+            component: 'PopoverContainerExampleComponent'
         }
     ];
 
@@ -71,7 +71,7 @@ export class PopoverDocsComponent {
             language: 'html',
             code: popoverTriggerSrc,
             fileName: 'popover-trigger-example',
-            component: 'PopoverTriggerExampleComponent',
+            component: 'PopoverTriggerExampleComponent'
         }
     ];
 
@@ -81,7 +81,7 @@ export class PopoverDocsComponent {
             code: popoverFocusSrcH,
             fileName: 'popover-focus-example',
             typescriptFileCode: popoverFocusSrcTs,
-            component: 'PopoverFocusExampleComponent',
+            component: 'PopoverFocusExampleComponent'
         }
     ];
 
@@ -90,13 +90,13 @@ export class PopoverDocsComponent {
             language: 'html',
             code: popoverCdkPlacementSrcH,
             fileName: 'popover-cdk-placement-example',
-            component: 'PopoverCdkPlacementExampleComponent',
+            component: 'PopoverCdkPlacementExampleComponent'
         },
         {
             language: 'typescript',
             code: popoverCdkPlacementSrcTs,
             fileName: 'popover-cdk-placement-example',
-            component: 'PopoverCdkPlacementExampleComponent',
+            component: 'PopoverCdkPlacementExampleComponent'
         }
     ];
 
@@ -105,13 +105,13 @@ export class PopoverDocsComponent {
             language: 'html',
             code: popoverCdkScrollSrcH,
             fileName: 'popover-scroll-example',
-            component: 'PopoverScrollExampleComponent',
+            component: 'PopoverScrollExampleComponent'
         },
         {
             language: 'typescript',
             code: popoverCdkScrollSrcTs,
             fileName: 'popover-scroll-example',
-            component: 'PopoverScrollExampleComponent',
+            component: 'PopoverScrollExampleComponent'
         }
     ];
 
