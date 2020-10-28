@@ -31,6 +31,12 @@ module.exports = function (config) {
             browserName: 'firefox',
             version: 'latest'
         },
+        sl_edge_macOS: {
+            base: 'SauceLabs',
+            platform: 'macOS 10.15',
+            browserName: 'MicrosoftEdge',
+            version: 'latest'
+        },
         sl_firefox_win: {
             base: 'SauceLabs',
             platform: 'windows 10',
@@ -43,14 +49,18 @@ module.exports = function (config) {
             browserName: 'chrome',
             version: 'latest'
         },
-        // IE is skiped. Run time stuck for no reason and take up to 30 min.
-        // Requires further investigation
-        /*        sl_IE_win: {
-                    base: 'SauceLabs',
-                    platform: 'windows 10',
-                    browserName: 'MicrosoftEdge',
-                    version: '16.16299'
-                },*/
+        sl_edge_win: {
+            base: 'SauceLabs',
+            platform: 'windows 10',
+            browserName: 'MicrosoftEdge',
+            version: 'latest'
+        },
+        sl_ie_win: {
+            base: 'SauceLabs',
+            platform: 'windows 10',
+            browserName: 'internet explorer',
+            version: 'latest'
+        },
     };
 
     config.set({
@@ -84,7 +94,7 @@ module.exports = function (config) {
             region: 'eu',
             startConnect: true,
             maxDuration: 10800,
-            testName: 'fundamental-ngx',
+            testName: 'fundamental-ngx' + process.env.BUILD_ID,
             recordScreenshots: false,
             connectOptions: {
                 user: process.env.SAUCE_USERNAME,
