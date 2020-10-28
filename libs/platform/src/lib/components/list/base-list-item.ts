@@ -14,7 +14,7 @@ import { BaseComponent } from '../base';
 import { ListConfig } from './list.config';
 import { ActionListItemComponent } from './action-list-item/action-list-item.component';
 
-export const ISACTIVE = 'is-active';
+export const IS_ACTIVE_CLASS = 'is-active';
 let nextListItemId = 0;
 export type StatusType = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -323,7 +323,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     _onKeyDown(event: KeyboardEvent): void {
         if (this.anchor !== undefined &&
             (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
-            this.anchor.nativeElement.classList.add(ISACTIVE);
+            this.anchor.nativeElement.classList.add(IS_ACTIVE_CLASS);
         }
     }
 
@@ -332,7 +332,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     _onKeyUp(event: KeyboardEvent): void {
         if (this.anchor !== undefined &&
             (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
-            this.anchor.nativeElement.classList.remove(ISACTIVE);
+            this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
         }
     }
 
