@@ -134,9 +134,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         return this._resourceStrings;
     }
 
-    /** Sets sliding duration */
+    /** Sets sliding duration in millie seconds. Default is 150 */
     @Input()
-    slideTransitionDuration = '150ms';
+    slideTransitionDuration = 150;
 
     /** Is swipe enabled */
     @Input()
@@ -204,6 +204,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     private _previousVisibleSlidesCount: number;
 
+    private _slideSwiped = false;
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -234,7 +236,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.leftButtonDisabled = true;
             this.rightButtonDisabled = true;
         }
-        this._carouselService.activeChange.subscribe((event) => this._slideSwiped(event));
+        this._carouselService.activeChange.subscribe((event) => this._onSlideSwipe(event));
+        this._carouselService.dragStateChange.subscribe((event) => this._onSlideDrag(event));
 
         this._slidesCopy = this.slides.toArray().slice();
         this._changeDetectorRef.markForCheck();
@@ -365,7 +368,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** @hidden Initialize carousel with visible items */
     private _initializeCarousel(): void {
         // Handles navigator button enabled/disabled state
-        // this._initializeButtonVisibility();
         this._buttonVisibility();
 
         // set page indicator count with fake array, to use in template
@@ -375,6 +377,14 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         } else {
             this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
         }
+
+        for (
+            let index = this.currentActiveSlidesStartIndex;
+            index < this.currentActiveSlidesStartIndex + this.visibleSlidesCount;
+            index++
+        ) {
+            this.slides.toArray()[index].visibility = 'visible';
+        }
     }
 
     /** @hidden Initialize config for Carousel service */
@@ -383,55 +393,13 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._config.elementsAtOnce = this.visibleSlidesCount;
         this._config.gestureSupport = this.swipeEnabled;
         this._config.infinite = this.loop;
-        this._config.transition = this.slideTransitionDuration;
+        this._config.transition = String(this.slideTransitionDuration) + 'ms';
+        // Carousel service expects transition in string format with unit.
     }
 
-    /** @hidden Handles notification on visible slide change */
-    private _notifySlideChange(slideDirection: SlideDirection, firstActiveSlide?: CarouselItemInterface): void {
-        const activeSlides: CarouselItemComponent[] = new Array();
-        const slides = this.slides.toArray();
-        let firstActiveSlideIndex: number;
-
-        if (this.loop) {
-            firstActiveSlide = this._carouselService.active;
-        }
-
-        if (firstActiveSlide) {
-            firstActiveSlideIndex = this.slides.toArray().findIndex((_item) => _item === firstActiveSlide);
-        } else {
-            firstActiveSlideIndex = this.currentActiveSlidesStartIndex;
-        }
-
-        for (let activeSlideIndex = 0; activeSlideIndex < this.visibleSlidesCount; activeSlideIndex++) {
-            activeSlides.push(slides[firstActiveSlideIndex + activeSlideIndex]);
-        }
-
-        const direction = slideDirection === SlideDirection.NEXT ? 'Next' : 'Previous';
-        this.slideChange.emit(new CarouselActiveSlides(activeSlides, direction));
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
-            this._changeDetectorRef.detectChanges();
-        });
-    }
-
-    /** On Swiping of slide, manage page indicator */
-    private _slideSwiped(event: PanEndOutput): void {
-        const firstActiveSlide = event.item;
-        const actualActiveSlideIndex = this._slidesCopy.findIndex((_slide) => _slide === firstActiveSlide);
-        const stepTaken = this._getStepTaken(event, actualActiveSlideIndex);
-        if (stepTaken > 0) {
-            const slideDirection: SlideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
-
-            this._adjustActiveItemPosition(slideDirection, stepTaken);
-            this._notifySlideChange(slideDirection, firstActiveSlide);
-            this._changeDetectorRef.detectChanges();
-        }
-    }
-
+    /**
+     * Returns the slide swapping steps
+     */
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
 
@@ -454,5 +422,90 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             }
         }
         return stepsCalculated;
+    }
+
+    /** @hidden Handles notification on visible slide change */
+    private _notifySlideChange(slideDirection: SlideDirection, firstActiveSlide?: CarouselItemInterface): void {
+        const activeSlides: CarouselItemComponent[] = new Array();
+        const slides = this.slides.toArray();
+        let firstActiveSlideIndex: number;
+
+        if (this.loop) {
+            firstActiveSlide = this._carouselService.active;
+        }
+
+        if (firstActiveSlide) {
+            firstActiveSlideIndex = this.slides.toArray().findIndex((_item) => _item === firstActiveSlide);
+        } else {
+            firstActiveSlideIndex = this.currentActiveSlidesStartIndex;
+        }
+
+        for (let activeSlideIndex = 0; activeSlideIndex < this.visibleSlidesCount; activeSlideIndex++) {
+            activeSlides.push(slides[firstActiveSlideIndex + activeSlideIndex]);
+            this.slides.toArray()[firstActiveSlideIndex + activeSlideIndex].visibility = 'visible';
+        }
+
+        this._manageSlideVisibility(firstActiveSlideIndex);
+        const direction = slideDirection === SlideDirection.NEXT ? 'Next' : 'Previous';
+        this.slideChange.emit(new CarouselActiveSlides(activeSlides, direction));
+    }
+
+    /** @hidden Manages visibility for slides. Useful in managing tab order */
+    private _manageSlideVisibility(firstActiveSlideIndex: number): void {
+        setTimeout(() => {
+            this.slides.forEach((_slides, index) => {
+                if (index >= firstActiveSlideIndex && index < firstActiveSlideIndex + this.visibleSlidesCount) {
+                    if (_slides.visibility === 'hidden') {
+                        _slides.visibility = 'visible';
+                    }
+                } else {
+                    if (_slides.visibility === 'visible') {
+                        _slides.visibility = 'hidden';
+                    }
+                }
+            });
+            this._changeDetectorRef.markForCheck();
+        }, this.slideTransitionDuration);
+    }
+
+    /** @hidden Rtl change subscription */
+    private _subscribeToRtl(): void {
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
+            this.dir = isRtl ? 'rtl' : 'ltr';
+            this._changeDetectorRef.detectChanges();
+        });
+    }
+
+    /** On Swiping of slide, manage page indicator */
+    private _onSlideSwipe(event: PanEndOutput): void {
+        this._slideSwiped = true;
+        const firstActiveSlide = event.item;
+        const actualActiveSlideIndex = this._slidesCopy.findIndex((_slide) => _slide === firstActiveSlide);
+        const stepTaken = this._getStepTaken(event, actualActiveSlideIndex);
+        if (stepTaken > 0) {
+            const slideDirection: SlideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
+
+            this._adjustActiveItemPosition(slideDirection, stepTaken);
+            this._notifySlideChange(slideDirection, firstActiveSlide);
+            this._changeDetectorRef.detectChanges();
+        }
+    }
+
+    /**
+     * @hidden Making slides visible when slides are dragged. Otherwise it looses the effect.
+     */
+    private _onSlideDrag(isDragging: boolean): void {
+        if (isDragging) {
+            this.slides.forEach((_slide) => {
+                _slide.visibility = 'visible';
+            });
+            this._slideSwiped = false;
+            this._changeDetectorRef.markForCheck();
+        } else {
+            // After slide limit reached, if dragging starts then revert visibility
+            if (!this._slideSwiped) {
+                this._manageSlideVisibility(this.currentActiveSlidesStartIndex);
+            }
+        }
     }
 }

@@ -62,6 +62,10 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @HostBinding('class.fd-carousel__item--active')
     carouselItemActive = true;
 
+    /** Hide/show slide, useful for managing tab order */
+    @HostBinding('style.visibility')
+    visibility = 'hidden';
+
     /**
      * Handling width height in IE versions.
      */
