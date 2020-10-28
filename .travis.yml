@@ -17,14 +17,14 @@ script:
   - npm run build-all
 jobs:
   include:
-  - stage: "Lint and Test"
+  - stage: "Lint and Test e2e"
     name: Sauce Labs - e2e tests
     if: branch = feature/setup-saucelabs-intergation-protractor
     env:
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
     script:
-      - npm run test:e2e:saucelabs
+      - npm run start && npm run test:e2e:saucelabs
   - stage: "Pre-release"
     if: branch = master AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
