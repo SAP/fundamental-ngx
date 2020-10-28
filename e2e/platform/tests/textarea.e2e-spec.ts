@@ -2,7 +2,13 @@ import { browser, Key } from 'protractor';
 import { TextareaPo } from '../pages/textarea.po';
 import textAreaPageContent from '../fixtures/appData/textarea-page-content';
 import testData from '../fixtures/testData/textarea';
-import { getValueOfAttribute, getValueOfAttributeValue, hoverMouse, setInput } from '../helper/helper';
+import {
+    getValueOfAttribute,
+    getValueOfAttributeValue,
+    hoverMouse,
+    setInput,
+    waitForTextToBePresentInElementValue
+} from '../helper/helper';
 
 
 describe('Verify Textarea component', function() {
@@ -53,10 +59,13 @@ describe('Verify Textarea component', function() {
         });*/
 
         it('should be able to copy paste the content into textarea', async () => {
-            await textareaPage.basicTextArea.sendKeys(testData.fifty_character_string);
+            await setInput(await textareaPage.basicTextArea, testData.fifty_character_string);
+            // await textareaPage.basicTextArea.sendKeys(testData.fifty_character_string);
+            await waitForTextToBePresentInElementValue(await textareaPage.basicTextArea, testData.fifty_character_string);
             await textareaPage.basicTextArea.sendKeys(Key.chord(Key[copyPasteBtn], 'a'));
             await textareaPage.basicTextArea.sendKeys(Key.chord(Key[copyPasteBtn], 'c'));
             await textareaPage.basicTextArea.sendKeys(Key.DELETE);
+            await waitForTextToBePresentInElementValue(await textareaPage.basicTextArea, '');
             const textareaTextBefore = await getValueOfAttributeValue(await textareaPage.basicTextArea);
             await textareaPage.basicTextArea.sendKeys(Key.chord(Key[copyPasteBtn], 'v'));
             const textareaText = await getValueOfAttributeValue(await textareaPage.basicTextArea);

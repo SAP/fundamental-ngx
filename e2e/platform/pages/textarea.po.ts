@@ -12,12 +12,9 @@ export class TextareaPo extends BaseComponentPo {
     basicTextAreaPopoverIcon = $('[for="basicTextarea"] fd-popover-control span');
     basicTextAreaPopoverBody = $('[for="basicTextarea"] fd-popover-body');
 
-
-
     readOnlyTextArea = $('#readonlyDescription');
     readOnlyTextAreaLabel = $('[for="readonlyDescription"] > span');
     readOnlyTextAreaPopoverBody = $('[for="readonlyDescription"] fd-popover-body');
-
 
     disabledTextArea = $('#disabledDescription');
     disabledTextAreaLabel = $('[for="disabledDescription"] > span');
@@ -42,7 +39,7 @@ export class TextareaPo extends BaseComponentPo {
     noPlatformsFormTextAreaLabel = $('[for="textarea-1"]');
 
     async open(): Promise<void> {
-        await  super.open(this.url);
+        await super.open(this.url);
         await waitForVisible(await this.root);
     }
 }

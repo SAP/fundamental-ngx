@@ -1,9 +1,10 @@
 import { BaseComponentPo } from './base-component.po';
-import { $, $$, browser } from 'protractor';
-
+import { $, $$ } from 'protractor';
+import { waitForVisible } from '../helper/helper';
 
 export class LinkPo extends BaseComponentPo {
     readonly url = '/link';
+    readonly root = $('#page-content');
     readonly iconLink = $('fdp-platform-link-icon-example a');
     readonly standardLinks = $$('fdp-platform-link-standard-example a');
     readonly standardImgLink = $('fdp-platform-link-standard-example #img-link');
@@ -17,6 +18,6 @@ export class LinkPo extends BaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
+        await waitForVisible(await this.root);
     }
-
 }

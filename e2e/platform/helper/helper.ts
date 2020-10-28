@@ -92,3 +92,7 @@ export async function checkLinkTargetDestination(element, site: string, angular:
 export async function clickByMouseMove(element: ElementFinder): Promise<void> {
     await browser.actions().mouseMove(await element).click().perform();
 }
+
+export async function waitForTextToBePresentInElementValue(element: ElementFinder, text: string): Promise<boolean> {
+    return  browser.wait(EC.textToBePresentInElementValue(element, text), IMPLICITLY_WAIT);
+}

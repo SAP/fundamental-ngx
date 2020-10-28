@@ -60,7 +60,7 @@ describe('Verify Panel', function() {
     });
 
     // Fixed after https://github.com/SAP/fundamental-ngx/issues/3679 release.
-    it('should action panel have clickable buttons example ', async () => {
+    xit('should action panel have clickable buttons example ', async () => {
         expect(await panelPage.actionPanelEditBtn.getCssValue('innerText')).toBe(panelPageContent.action_panel_edit_button);
         expect(await isClickable(await panelPage.actionPanelEditBtn)).toBe(true);
         expect(await panelPage.actionPanelDeleteBtn.getCssValue('innerText')).toBe(panelPageContent.action_panel_delete_button);

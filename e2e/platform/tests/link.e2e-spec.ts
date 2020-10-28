@@ -23,7 +23,7 @@ describe('Link component test suite', () => {
              return linkPage.iconLink.getCssValue('text-decoration');
          });
 
-        await checkIfDisabled(linkPage.iconLink, 'ng-reflect-disabled', 'false');
+        await checkIfDisabled(await linkPage.iconLink, 'ng-reflect-disabled', 'false');
         await checkLinkData(await linkPage.iconLink);
         await checkLinkHover(iconLinkHoverState);
         expect(iconLinkAltText).toBe(defaultLink_alt_text);
@@ -39,7 +39,8 @@ describe('Link component test suite', () => {
         expect(await standardLinkHoverState).toContain('underline solid');
 
         linksArray.forEach(async (element, index) => {
-            if (index !== 8) {  // after fix: https://github.com/SAP/fundamental-ngx/issues/3633 need to remove if statement
+            // after fix: https://github.com/SAP/fundamental-ngx/issues/3633 need to remove if statement
+            if (index !== 8) {
                 await expect(await element.getAttribute('aria-label')).toBe(standardLinksAltTextArray[index]);
                 await checkIfDisabled(element, 'ng-reflect-disabled', 'false');
                 await checkLinkData(await element);

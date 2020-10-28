@@ -30,7 +30,6 @@ exports.config = {
             'version': 'latest',
             'name': 'tests-Protractor-MAC-firefox',
         }
-
     ],
     directConnect: false,
     baseUrl: 'http://localhost:4200/#',
