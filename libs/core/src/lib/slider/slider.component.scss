@@ -1,3 +1,19 @@
+.slider-tooltip {
+    border-radius: 0.25rem;
+    height: 1.375rem;
+    padding: 0.25rem;
+    font-size: .75rem;
+    line-height: 1;
+    color: #6a6d70;
+    background: #fff;
+    min-width: 2rem;
+    border: 1px solid #89919a;
+    text-align: center;
+    position: relative;
+    top: -7px;
+}
+
+
 /*!
  * Fundamental Library Styles v0.13.0-rc.6
  * Copyright (c) 2020 SAP SE or an SAP affiliate company.

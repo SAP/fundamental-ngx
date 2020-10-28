@@ -1,12 +1,18 @@
 <div class="fd-slider">
-    <div class="fd-slider__inner">
+    <div class="fd-slider__inner" (mouseenter)="_showPopovers()" (mouseleave)="_hidePopovers()">
         <div class="fd-slider__track" (click)="onTrackClick($event)" #track>
             <ng-container *ngIf="!_isRange">
                 <div *ngIf="!hideProgressBar" class="fd-slider__track-range" [style.width.%]="_progress"></div>
-                <div class="fd-slider__handle"
+                <div #handle
+                     class="fd-slider__handle"
                      tabindex="0"
                      role="slider"
                      aria-label="slider"
+                     [fdPopover]="singleSliderPopover"
+                     [triggers]="[]"
+                     [closeOnOutsideClick]="false"
+                     [appendTo]="handle"
+                     placement="top"
                      [attr.aria-valuemin]="min"
                      [attr.aria-valuemax]="max"
                      [attr.aria-valuenow]="_value"
@@ -26,6 +32,11 @@
                      tabindex="0"
                      role="slider"
                      aria-label="slider"
+                     [fdPopover]="rangeSliderPopover1"
+                     [triggers]="[]"
+                     [closeOnOutsideClick]="false"
+                     [appendTo]="rangeHandle1"
+                     placement="top"
                      [attr.aria-valuemin]="min"
                      [attr.aria-valuemax]="max"
                      [attr.aria-valuenow]="_value"
@@ -38,6 +49,11 @@
                      tabindex="0"
                      role="slider"
                      aria-label="slider"
+                     [fdPopover]="rangeSliderPopover2"
+                     [triggers]="[]"
+                     [closeOnOutsideClick]="false"
+                     [appendTo]="rangeHandle2"
+                     placement="top"
                      [attr.aria-valuemin]="min"
                      [attr.aria-valuemax]="max"
                      [attr.aria-valuenow]="_value"
@@ -48,13 +64,14 @@
             </ng-container>
         </div>
         <div class="fd-slider__tick-wrapper">
-            <div class="fd-slider__ticks" (click)="onTrackClick($event)" #tickMarksContainer>
+            <div class="fd-slider__ticks" style="height: 1rem" (click)="onTrackClick($event)" #tickMarksContainer>
                 <ng-container *ngIf="showTicks">
                     <ng-container *ngFor="let tick of _tickMarks; let first = first; let last = last;">
                         <div
-                            [style.visibility]="(first || last ||_isEnoughSpaceForTickMarks) ? '' : 'hidden'"
                             class="fd-slider__tick"
-                            [attr.data-val]="tick.value"
+                            [style.visibility]="(first || last ||_isEnoughSpaceForTickMarks) ? '' : 'hidden'"
+                            [style.position]="'absolute'"
+                            [style.left.%]="(tick.value / (max - min)) * 100"
                             [class.fd-slider__tick--in-range]="
                             !hideProgressBar &&
                             (_isRange ? (tick.value >= this.value[0] && tick.value <= this.value[1]) : tick.value <= value)
@@ -66,10 +83,30 @@
             <div class="fd-slider__labels" #tickLabelsContainer *ngIf="showTicks && showTicksLabels">
                 <div
                     *ngFor="let tick of _tickMarks; let i = index"
-                    [style.visibility]="tick.isLabelHidden ? 'hidden' : ''"
                     class="fd-slider__label"
-                >{{ tick.value }}</div>
+                    [style.position]="'absolute'"
+                    [style.left.%]="(tick.value / (max - min)) * 100"
+                >{{ tick.label }}
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<pre>{{ value | json }}</pre>
+
+<ng-template #singleSliderPopover>
+    <ng-container *ngTemplateOutlet="popoverInner; context: { tooltipValue: value }"></ng-container>
+</ng-template>
+<ng-template #rangeSliderPopover1>
+    <ng-container *ngTemplateOutlet="popoverInner; context: { tooltipValue: _handle1Value }"></ng-container>
+</ng-template>
+<ng-template #rangeSliderPopover2>
+    <ng-container *ngTemplateOutlet="popoverInner; context: { tooltipValue: _handle2Value }"></ng-container>
+</ng-template>
+<ng-template #popoverInner let-tooltipValue="tooltipValue">
+    <div class="slider-tooltip-wrapper" (click)="$event.stopPropagation()">
+        <div *ngIf="tooltipMode === 'readonly'" class="slider-tooltip">{{ tooltipValue }}</div>
+        <input *ngIf="tooltipMode === 'editable'" type="text" class="fd-input slider-tooltip" [ngModel]="tooltipValue" (blur)="writeValue(tooltipValue)">
+    </div>
+</ng-template>
