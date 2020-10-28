@@ -23,21 +23,23 @@ export const SLIDER_VALUE_ACCESSOR = {
     multi: true
 };
 
-export interface RangeSliderValue {
-    min: number;
-    max: number
-}
-
 export enum SliderValueTargets {
     SINGLE_SLIDER,
     RANGE_SLIDER1,
     RANGE_SLIDER2
 }
 
-export enum RangeHandleIndex {
+export enum RangeHandles {
     First,
     Second
 }
+
+export interface SliderTickMark {
+    value: number;
+    label?: string;
+}
+
+const MIN_DISTANCE_BETWEEN_TICKS = 8;
 
 let sliderId = 0;
 
@@ -97,7 +99,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
 
     /** Array of custom labels values to use for Slider. */
     @Input()
-    customLabelsValues: string[] = [];
+    customLabelsValues: SliderTickMark[] = [];
 
     /** Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value. */
     @Input()
@@ -130,12 +132,12 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
         }
 
         if (!this._isRange && (typeof val === 'number')) {
-            this._progress = ((val - this.min) / (this.max - this.min)) * 100;
+            this._progress = this._calcProgress(val);
         }
 
         if (this._isRange && Array.isArray(val) && !(this._handle1Value && this._handle2Value)) {
-            this._setRangeHandleValueAndPosition(RangeHandleIndex.First, val[0]);
-            this._setRangeHandleValueAndPosition(RangeHandleIndex.Second, val[1]);
+            this._setRangeHandleValueAndPosition(RangeHandles.First, val[0]);
+            this._setRangeHandleValueAndPosition(RangeHandles.Second, val[1]);
         }
 
         this._value = val;
@@ -167,9 +169,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     _handle1Value = 0;
     _handle2Value = 0;
     _rangeProgress = 0;
-    _tickMarks: any[] = [];
-    _stepValues: number[] = [];
+    _tickMarks: SliderTickMark[] = [];
+    _valuesBySteps: number[] = [];
     _isEnoughSpaceForTickMarks = false;
+    _sliderValueTargets = SliderValueTargets;
     _popoverInputFieldClass = `fd-slider-popover-input-${sliderId}`;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
@@ -184,25 +187,26 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     }
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-        // this._constructTickMarkLabels();
-        this._checkIsInRangeMode();
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        // this._constructTickMarkLabels();
         this._checkIsInRangeMode();
         this._attachResizeListener();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._constructTickMarkLabels();
+        this._constructTickMarks();
         this._constructStepValues();
         this._checkIfEnoughSpaceForTickMarks();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+        this._checkIsInRangeMode();
+        this._constructTickMarks();
+        this._constructStepValues();
+        this._recalcHandlePositions();
     }
 
     /** @hidden */
@@ -277,13 +281,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             }
 
             const value = this._calculateValueFromPointerPosition(moveEvent);
-            let handleIndex: RangeHandleIndex;
+            let handleIndex: RangeHandles;
             if (event.target === this.rangeHandle1.nativeElement) {
-                handleIndex = RangeHandleIndex.First;
+                handleIndex = RangeHandles.First;
             }
 
             if (event.target === this.rangeHandle2.nativeElement) {
-                handleIndex = RangeHandleIndex.Second;
+                handleIndex = RangeHandles.Second;
             }
 
             this._setRangeHandleValueAndPosition(handleIndex, value);
@@ -291,7 +295,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             this._cdr.detectChanges();
         });
         const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
-            console.log('UNSUBSCRIBE FROM MOUSEMOVE');
             unsubscribeFromMousemove();
             unsubscribeFromMouseup();
         });
@@ -308,16 +311,16 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | null = null;
         let prevValue = this.value as number;
-        let handleIndex: RangeHandleIndex;
+        let handleIndex: RangeHandles;
         if (this._isRange) {
             if (event.target === this.rangeHandle1.nativeElement) {
                 prevValue = this._handle1Value;
-                handleIndex = RangeHandleIndex.First;
+                handleIndex = RangeHandles.First;
             }
 
             if (event.target === this.rangeHandle2.nativeElement) {
                 prevValue = this._handle2Value;
-                handleIndex = RangeHandleIndex.Second;
+                handleIndex = RangeHandles.Second;
             }
         }
 
@@ -370,7 +373,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             });
             return;
         }
-        console.log('hiding popovers');
+
         this._popovers.forEach(popover => popover.close());
     }
 
@@ -386,11 +389,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             return;
         }
         if (target === SliderValueTargets.RANGE_SLIDER1) {
-            this._setRangeHandleValueAndPosition(RangeHandleIndex.First, +value);
+            this._setRangeHandleValueAndPosition(RangeHandles.First, +value);
             this.rangeHandle1.nativeElement.focus();
         }
         if (target === SliderValueTargets.RANGE_SLIDER2) {
-            this._setRangeHandleValueAndPosition(RangeHandleIndex.Second, +value);
+            this._setRangeHandleValueAndPosition(RangeHandles.Second, +value);
             this.rangeHandle2.nativeElement.focus();
         }
         this.writeValue(this._constructRangeModelValue());
@@ -410,7 +413,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             return this.min;
         }
 
-        const stepDiffArray = this._stepValues
+        const stepDiffArray = this._valuesBySteps
             .map(stepValue => ({ diff: Math.abs(stepValue - newValue), value: stepValue }))
             .sort((a, b) => a.diff - b.diff);
 
@@ -418,14 +421,14 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     }
 
 
-    private _setRangeHandleValueAndPosition(handleIndex: RangeHandleIndex, value: number): void {
-        const position = ((value - this.min) / (this.max - this.min)) * 100;
-        if (handleIndex === RangeHandleIndex.First) {
+    private _setRangeHandleValueAndPosition(handleIndex: RangeHandles, value: number): void {
+        const position = this._calcProgress(value);
+        if (handleIndex === RangeHandles.First) {
             this._handle1Value = value;
             this._handle1Position = position;
         }
 
-        if (handleIndex === RangeHandleIndex.Second) {
+        if (handleIndex === RangeHandles.Second) {
             this._handle2Value = value;
             this._handle2Position = position;
         }
@@ -447,9 +450,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     }
 
     private get _maxTickMarksNumber(): number {
-        const { width } = this.trackEl.nativeElement.getBoundingClientRect();
+        if (!this.trackEl || !this.trackEl.nativeElement) {
+            return;
+        }
 
-        return Math.floor(width / 8);
+        return Math.floor(this.trackEl.nativeElement.getBoundingClientRect().width / MIN_DISTANCE_BETWEEN_TICKS);
     }
 
     private _checkIfEnoughSpaceForTickMarks(): void {
@@ -459,30 +464,56 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     }
 
     private _constructStepValues(): void {
-        this._stepValues = Array(((this.max - this.min) / this.step) + 1)
-            .fill({})
-            .map((tickMark, i) => {
-                return this.min + i * this.step;
-            });
+        try {
+            this._valuesBySteps = Array(((this.max - this.min) / this.step) + 1)
+                .fill({})
+                .map((tickMark, i) => {
+                    return this.min + i * this.step;
+                });
+        } catch (e) {}
     }
 
     /** @hidden */
-    private _constructTickMarkLabels(): void {
-        console.log('_constructTickMarkLabels');
-        console.log('maxTickMarksNumber', this._maxTickMarksNumber);
+    private _constructTickMarks(): void {
+        console.log('_constructTickMarks');
+        if (!this.showTicks) {
+
+            this._tickMarks = [];
+            return;
+
+        }
+
         if (this.customLabelsValues.length) {
             this._tickMarks = [...this.customLabelsValues];
         } else {
-            // this._tickMarks = [{ value: this.min }, { value: this.max }];
-            this._tickMarks =
-                Array(((this.max - this.min) / this.step) + 1)
-                    .fill({})
-                    .map((tickMark, i) => {
-                        return { value: this.min + i * this.step };
-                    });
+            try {
+                // this._tickMarks = [{ value: this.min }, { value: this.max }];
+                this._tickMarks =
+                    Array(((this.max - this.min) / this.step) + 1)
+                        .fill({})
+                        .map((_, i) => {
+                            return { value: this.min + i * this.step };
+                        });
+            } catch (e) {
+            }
         }
         this._cdr.detectChanges();
         console.log('tick mark', this._tickMarks);
+    }
+
+    private _calcProgress(value: number): number {
+        return (value - this.min) / (this.max - this.min) * 100;
+    }
+
+    private _recalcHandlePositions(): void {
+        if (this._isRange) {
+            this._handle1Position = this._calcProgress(this._handle1Value);
+            this._handle2Position = this._calcProgress(this._handle2Value);
+            this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
+        }
+
+        this._progress = this._calcProgress(this.value as number);
+        this._cdr.markForCheck();
     }
 
     private _checkIsInRangeMode(): void {
