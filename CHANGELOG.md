@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.1...v0.23.1-rc.2) (2020-10-28)
+
+
+### Bug Fixes
+
+* (Core) refactor Layout Grid with latest changes from fundamental-styles ([#3640](https://github.com/SAP/fundamental-ngx/issues/3640)) ([839eb0a](https://github.com/SAP/fundamental-ngx/commit/839eb0ab25437dde60297ac8d5e9bb19607438d3))
+
 ### [0.23.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.0...v0.23.1-rc.1) (2020-10-27)
 
 ### [0.23.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.23.0...v0.23.1-rc.0) (2020-10-27)
