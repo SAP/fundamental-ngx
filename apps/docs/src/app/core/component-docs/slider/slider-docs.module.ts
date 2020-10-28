@@ -7,7 +7,11 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { SliderDocsComponent } from './slider-docs.component';
-import { SliderBasicExampleComponent } from './examples/slider-example.component';
+import {
+    SliderBasicExampleComponent,
+    SliderPlaygroundExampleComponent,
+    SliderRangeExampleComponent, SliderTicksAndLabelsExampleComponent, SliderTicksExampleComponent
+} from './examples/slider-examples.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +33,11 @@ const routes: Routes = [
     declarations: [
         SliderHeaderComponent,
         SliderDocsComponent,
-        SliderBasicExampleComponent
+        SliderBasicExampleComponent,
+        SliderRangeExampleComponent,
+        SliderTicksExampleComponent,
+        SliderTicksAndLabelsExampleComponent,
+        SliderPlaygroundExampleComponent
     ]
 })
 export class SliderDocsModule {

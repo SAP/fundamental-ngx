@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SliderComponent } from './slider.component';
+import { FormsModule } from '@angular/forms';
 
+import { SliderComponent } from './slider.component';
+import { PopoverModule } from '../popover/popover.module';
 
 @NgModule({
     declarations: [SliderComponent],
     imports: [
-        CommonModule
+        CommonModule,
+        PopoverModule,
+        FormsModule
     ],
     exports: [SliderComponent]
 })

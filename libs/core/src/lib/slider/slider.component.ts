@@ -4,16 +4,16 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    forwardRef,
+    forwardRef, HostBinding,
     Input,
     OnChanges, OnDestroy,
-    OnInit, Renderer2, ViewChild,
+    OnInit, QueryList, Renderer2, ViewChild, ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core';
+import { applyCssClass, CssClassBuilder, PopoverDirective } from '@fundamental-ngx/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -33,6 +33,8 @@ export enum RangeHandleIndex {
     Second
 }
 
+let sliderId = 0;
+
 @Component({
     selector: 'fd-slider',
     templateUrl: './slider.component.html',
@@ -42,6 +44,11 @@ export enum RangeHandleIndex {
     providers: [SLIDER_VALUE_ACCESSOR]
 })
 export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor, CssClassBuilder {
+    /** Slider id, it has some default value if not set,  */
+    @Input()
+    @HostBinding('attr.id')
+    id = 'fd-slider-id-' + sliderId++;
+
     /** User's custom classes */
     @Input()
     class: string;
@@ -108,12 +115,21 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     }
 
     set value(val: number | number[]) {
+        if (typeof val === 'string') {
+            val = Number(val);
+        }
+
         if (this.value === val) {
             return;
         }
 
-        if (!this._isRange && typeof val === 'number') {
+        if (!this._isRange && (typeof val === 'number')) {
             this._progress = ((val - this.min) / (this.max - this.min)) * 100;
+        }
+
+        if (this._isRange && Array.isArray(val)) {
+            this._setRangeHandleValueAndPosition(RangeHandleIndex.First, val[0]);
+            this._setRangeHandleValueAndPosition(RangeHandleIndex.Second, val[1]);
         }
 
         this._value = val;
@@ -125,19 +141,24 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     @ViewChild('track', { read: ElementRef }) trackEl: ElementRef<any>;
     @ViewChild('tickLabelsContainer', { read: ElementRef }) tickLabelsContainer: ElementRef<any>;
     @ViewChild('tickMarksContainer', { read: ElementRef }) tickMarksContainer: ElementRef<any>;
+    @ViewChild('handle', { read: ElementRef }) handle: ElementRef<any>;
     @ViewChild('rangeHandle1', { read: ElementRef }) rangeHandle1: ElementRef<any>;
     @ViewChild('rangeHandle2', { read: ElementRef }) rangeHandle2: ElementRef<any>;
+
+    /** @hidden */
+    @ViewChildren(PopoverDirective)
+    _popovers: QueryList<PopoverDirective>;
 
     _value: number | number[] = 0;
     _progress = 0;
     _isRange = false;
-    _rangeValue: RangeSliderValue = { min: 0, max: 0 };
     _handle1Position = 0;
     _handle2Position = 0;
     _handle1Value = 0;
     _handle2Value = 0;
     _rangeProgress = 0;
     _tickMarks: any[] = [];
+    _stepValues: number[] = [];
     _isEnoughSpaceForTickMarks = false;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
@@ -169,6 +190,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     /** @hidden */
     ngAfterViewInit(): void {
         this._constructTickMarkLabels();
+        this._constructStepValues();
         this._checkIfEnoughSpaceForTickMarks();
     }
 
@@ -231,11 +253,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
 
         console.log('track click, calc click position and change the value');
         this.writeValue(this._calculateValueFromPointerPosition(event));
+        this._updatePopoversPosition();
     }
 
     /** @hidden */
     onHandleClick(event: MouseEvent): void {
         const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', moveEvent => {
+            this._updatePopoversPosition();
             if (!this._isRange) {
                 this.writeValue(this._calculateValueFromPointerPosition(moveEvent));
                 return;
@@ -251,6 +275,8 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
                 handleIndex = RangeHandleIndex.Second;
             }
 
+            console.log('_setRangeHandleValueAndPosition called', handleIndex, value);
+
             this._setRangeHandleValueAndPosition(handleIndex, value);
             this.writeValue(this._constructRangeModelValue());
             this._cdr.detectChanges();
@@ -264,13 +290,14 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
 
     /** @hidden */
     onKeyDown(event: KeyboardEvent): void {
-        if (event.keyCode === TAB) {
+        const allowedKeys = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW];
+        if (!allowedKeys.includes(event.keyCode)) {
             return;
         }
 
         event.preventDefault();
         const diff = event.shiftKey ? this.jump : this.step;
-        let newValue: number;
+        let newValue: number | null = null;
         let prevValue = this.value as number;
         let handleIndex: RangeHandleIndex;
         if (this._isRange) {
@@ -293,7 +320,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             newValue = prevValue + diff;
         }
 
-        if (!newValue) {
+        if (newValue === null) {
             return;
         }
 
@@ -307,12 +334,32 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
 
         if (!this._isRange) {
             this.writeValue(newValue);
+            this._updatePopoversPosition();
             return;
         }
 
         this._setRangeHandleValueAndPosition(handleIndex, newValue);
         this.writeValue(this._constructRangeModelValue());
+        this._updatePopoversPosition();
         this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    _showPopovers(): void {
+        this._popovers.forEach(popover => popover.open());
+    }
+
+    /** @hidden */
+    _hidePopovers(): void {
+        const elementsToCheck = [this.handle?.nativeElement, this.rangeHandle1?.nativeElement, this.rangeHandle2?.nativeElement];
+        if (elementsToCheck.some(el => document.activeElement === el)) {
+            return;
+        }
+        this._popovers.forEach(popover => popover.close());
+    }
+
+    _updatePopoversPosition(): void {
+        this._popovers.forEach(popover => popover.updatePopper())
     }
 
     /** @hidden */
@@ -329,7 +376,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             return this.min;
         }
 
-        return Math.round(newValue);
+        const stepDiffArray = this._stepValues
+            .map(stepValue => ({ diff: Math.abs(stepValue - newValue), value: stepValue }))
+            .sort((a, b) => a.diff - b.diff);
+
+        return Math.round(stepDiffArray[0].value);
     }
 
 
@@ -361,86 +412,43 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             .subscribe(() => this._checkIfEnoughSpaceForTickMarks());
     }
 
+    private get _maxTickMarksNumber(): number {
+        const { width } = this.trackEl.nativeElement.getBoundingClientRect();
+
+        return Math.floor(width / 8);
+    }
+
     private _checkIfEnoughSpaceForTickMarks(): void {
-        console.log('checking if there is enough space for tick marks');
-        const ticks: HTMLElement[] = [...this.tickMarksContainer?.nativeElement.children] || [];
-        if (ticks.length > 1) {
-            this._isEnoughSpaceForTickMarks = (ticks[1].getBoundingClientRect().x - ticks[0].getBoundingClientRect().x) >= 8;
-            this._cdr.detectChanges();
-        }
+        this._isEnoughSpaceForTickMarks = this._tickMarks.length - 1 < this._maxTickMarksNumber;
+        console.log('checking if there is enough space for tick marks... = ', this._isEnoughSpaceForTickMarks);
+        this._cdr.detectChanges();
+    }
+
+    private _constructStepValues(): void {
+        this._stepValues = Array(((this.max - this.min) / this.step) + 1)
+            .fill({})
+            .map((tickMark, i) => {
+                return this.min + i * this.step;
+            });
     }
 
     /** @hidden */
     private _constructTickMarkLabels(): void {
         console.log('_constructTickMarkLabels');
-        const tickMarks = Array(Math.round((this.max - this.min) / this.jump) + 1).fill(null);
-        let value = this.min;
-        tickMarks.forEach((tick, _i) => {
-            tickMarks[_i] = { value: value };
-            if (value + this.jump > this.max) {
-                return;
-            }
-
-            value += this.jump;
-        });
-        this._tickMarks = tickMarks;
+        console.log('maxTickMarksNumber', this._maxTickMarksNumber);
+        if (this.customLabelsValues.length) {
+            this._tickMarks = [...this.customLabelsValues];
+        } else {
+            // this._tickMarks = [{ value: this.min }, { value: this.max }];
+            this._tickMarks =
+                Array(((this.max - this.min) / this.step) + 1)
+                    .fill({})
+                    .map((tickMark, i) => {
+                        return { value: this.min + i * this.step };
+                    });
+        }
         this._cdr.detectChanges();
-
-        const labelElements: HTMLElement[] = [...this.tickLabelsContainer?.nativeElement.children] || [];
-        this._tickMarks.forEach((mark, i) => {
-            const label = labelElements[i];
-            mark.visibilityData = {
-                boundingRectX: label.getBoundingClientRect().x,
-                approximateWidth:
-                    label.textContent.length * Number(
-                    window.getComputedStyle(label).fontSize.replace('px', '')
-                    ) * 0.56,
-                overlapsNextLabel: false
-            };
-        });
         console.log('tick mark', this._tickMarks);
-        this._hideOverlappingLabels(this._tickMarks, true);
-    }
-
-    private _hideOverlappingLabels(tickMarks: any[], isFirstRun?: boolean): void {
-        // just check 2 last ones and hide the one before last of overlaps
-        if (tickMarks.length < 2) {
-            return;
-        }
-        const lastMark = tickMarks[tickMarks.length - 1];
-        const previousToLastMark = tickMarks[tickMarks.length - 2];
-        const isTwoLastLabelsOverlapping = (lastMark.visibilityData.boundingRectX - previousToLastMark.visibilityData.boundingRectX) < previousToLastMark.visibilityData.approximateWidth;
-        console.log('isTwoLastLabelsOverlapping', isTwoLastLabelsOverlapping);
-        // tickMarks.forEach((mark, i) => {
-        //     mark.visibilityData.overlapsNextLabel = false;
-        //     const nextMark = tickMarks[i + 1];
-        //     if (!nextMark) {
-        //         return;
-        //     }
-        //
-        //     mark.visibilityData.overlapsNextLabel = (nextMark.visibilityData.boundingRectX - mark.visibilityData.boundingRectX) < mark.visibilityData.approximateWidth;
-        // });
-
-        // if (true) {
-        //     return;
-        // }
-
-        // const anyLabelOverlapsOtherLabel = tickMarks.some(mark => mark.visibilityData.overlapsNextLabel);
-        if (isTwoLastLabelsOverlapping) {
-            tickMarks.forEach((mark, i) => {
-                // if (!isFirstRun && (i === 0 || i === tickMarks.length - 1)) {
-                //     mark.isLabelHidden = false;
-                //     return;
-                // }
-                mark.isLabelHidden = (i + 1) % 2 === 0;
-            });
-
-            const visibleTickMarks = tickMarks.filter(mark => !mark.isLabelHidden);
-            console.log('visibleTickMarks after hiding overlapping ones', visibleTickMarks);
-            if (visibleTickMarks.length) {
-                this._hideOverlappingLabels(visibleTickMarks);
-            }
-        }
     }
 
     private _checkIsInRangeMode(): void {
