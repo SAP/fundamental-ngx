@@ -1,4 +1,4 @@
-<div class="fd-feed-input" [class.is-disabled]="disabled">
+<div class="fd-feed-input">
     <fd-avatar *ngIf="avatarShow"
         class="fd-feed-input__thumb"
         size="s"
@@ -18,17 +18,17 @@
         aria-required="true"
         class="fd-feed-input__textarea"
         [disabled]="disabled"
+        [attr.aria-disabled]="disabled"
         [placeholder]="placeholder"
         [(ngModel)]="value"
         (ngModelChange)="onChange()"
     ></textarea>
 
-    <button
-        fd-button
+    <fdp-button
         class="fd-feed-input__submit-button"
+        glyph="feeder-arrow"
         [disabled]="!value || disabled"
         (click)="onSubmit()"
     >
-        <i role="presentation" class="sap-icon--feeder-arrow"></i>
-    </button>
+    </fdp-button>
 </div>

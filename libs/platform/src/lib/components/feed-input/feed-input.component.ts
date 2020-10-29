@@ -1,11 +1,12 @@
 import {
-    ChangeDetectionStrategy,
     Component,
-    ElementRef, EventEmitter,
+    ElementRef,
+    EventEmitter,
     Input,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    ChangeDetectionStrategy,
 } from '@angular/core';
 
 @Component({
@@ -50,19 +51,23 @@ export class FeedInputComponent {
     }
 
     onSubmit(): void {
-        this.submit.emit(this.textarea.nativeElement.value)
+        if (this.textarea.nativeElement.value) {
+            this.submit.emit(this.textarea.nativeElement.value)
+        }
     }
 
     /** @hidden make to grow textarea */
     resize(): void {
         this.textarea.nativeElement.style.height = 'inherit';
         const totalHeight = this._getTextareaTotalHeight();
+        const lineHeight = this._getTextareaLineHeight();
 
         if (this.maxHeight) {
-            this.textarea.nativeElement.style.maxHeight = this._getTextareaLineHeight() * this.maxHeight + 'px';
+            this.textarea.nativeElement.style.maxHeight = lineHeight * this.maxHeight + 'px';
         }
 
         this.textarea.nativeElement.style.height = totalHeight + 'px';
+
     }
 
     /** @hidden get line height of textarea */
