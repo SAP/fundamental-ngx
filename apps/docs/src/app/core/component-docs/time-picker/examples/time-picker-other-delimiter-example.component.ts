@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { TimeFormatParser, TimeObject } from '@fundamental-ngx/core';
+import { FdDate, TimeFormatParser, TimeObject } from '@fundamental-ngx/core';
 
 @Injectable()
 export class TimeFormatDashes extends TimeFormatParser {
@@ -116,5 +116,5 @@ export class TimeFormatDashes extends TimeFormatParser {
     ]
 })
 export class TimePickerOtherDelimiterExampleComponent {
-    timeObject = { hour: 12, minute: 0, second: 0 };
+    timeObject = new FdDate().setTime(12, 0, 0);
 }

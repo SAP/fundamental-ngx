@@ -1,5 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {
+    TimePickerModule,
+    SegmentedButtonModule,
+    FormModule,
+    SelectModule,
+    FdDatetimeModule
+} from '@fundamental-ngx/core';
+
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
@@ -15,7 +23,6 @@ import { TimePickerOnlyHoursExampleComponent } from './examples/time-picker-only
 import { TimePickerNoSecondsExampleComponent } from './examples/time-picker-no-seconds-example.component';
 import { TimePickerAllowNullExampleComponent } from './examples/time-picker-allow-null-example.component';
 import { TimePickerOtherDelimiterExampleComponent } from './examples/time-picker-other-delimiter-example.component';
-import { TimePickerModule, SegmentedButtonModule, FormModule, SelectModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -32,10 +39,11 @@ const routes: Routes = [
     imports: [
         FormModule,
         SelectModule,
+        FdDatetimeModule,
         TimePickerModule,
         SegmentedButtonModule,
         SharedDocumentationPageModule,
-        RouterModule.forChild(routes),
+        RouterModule.forChild(routes)
     ],
     exports: [RouterModule],
     declarations: [

@@ -1,5 +1,5 @@
 import { Component, Injectable, ViewChild } from '@angular/core';
-import { CalendarI18n, DatetimePickerComponent, FdDate, FdDatetime } from '@fundamental-ngx/core';
+import { CalendarI18n, DatetimePickerComponent, FdDate } from '@fundamental-ngx/core';
 
 import moment from 'moment';
 import 'moment/locale/es';
@@ -77,11 +77,12 @@ export class DatetimePickerComplexI18nExampleComponent {
 
     placeholder = 'mm/dd/yyyy, hh:mm am';
 
-    public date: FdDatetime = FdDatetime.getToday();
+    public date = FdDate.getNow();
 
     public refresh(): void {
-        this.datetimePickerComponent.locale = this.actualLocale;
-        this.datetimePickerComponent.format = this.actualFormat;
+        // "locale" and "format" is not available options
+        // this.datetimePickerComponent.locale = this.actualLocale;
+        // this.datetimePickerComponent.format = this.actualFormat;
         this.placeholder = placeholders.get(this.actualLocale);
 
         this.datetimePickerComponent.submit();

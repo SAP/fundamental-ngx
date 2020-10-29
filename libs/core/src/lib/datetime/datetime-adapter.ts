@@ -99,6 +99,18 @@ export abstract class DatetimeAdapter<D> {
     abstract setSeconds(date: D, seconds: number): D;
 
     /**
+     * Set hours, minutes and seconds at once.
+     * @param date The date to set time to.
+     * @returns The new date instance.
+     */
+    setTime(date: D, hours: number, minutes: number, seconds: number): D {
+        date = this.setHours(date, hours);
+        date = this.setMinutes(date, minutes);
+        date = this.setSeconds(date, seconds);
+        return date;
+    }
+
+    /**
      * Gets week number of the given date
      * @param date The date to extract the week number from.
      * @returns The week number (min 1, max 53).
@@ -248,11 +260,20 @@ export abstract class DatetimeAdapter<D> {
 
     /**
      * Method that check equality of 2 dates.
+     * Does not take into account time value
      * @param date1 The first date to compare with
      * @param date2 The second date to compare with
      * @returns If dates are equal or not
      */
     abstract datesEqual(date1: D, date2: D): boolean;
+
+    /**
+     * Method that check equality of 2 dates taking into account time value as well
+     * @param date1 The first date to compare with
+     * @param date2 The second date to compare with
+     * @returns If dates are equal or not
+     */
+    abstract dateTimesEqual(date1: D, date2: D): boolean;
 
     /**
      * Method to check if date is between 2 dates

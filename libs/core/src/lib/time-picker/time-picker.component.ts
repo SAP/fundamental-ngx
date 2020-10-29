@@ -21,9 +21,7 @@ import { Placement } from 'popper.js';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '../datetime';
 import { createMissingDateImplementationError } from './errors';
 
-import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
-import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
 
 @Component({
@@ -51,15 +49,10 @@ import { FormStates } from '../form/form-control/form-states';
 })
 export class TimePickerComponent<D> implements ControlValueAccessor, OnDestroy, Validator {
     /**
-     * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
-     * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59). This is the model the component consumes. Example:
-     *
-     * ```json
-     * { hour: 12, minute: 0, second: 0 }
-     * ```
+     * @Input date time object representation
      */
     @Input()
-    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+    time: D;
 
     /** @Input Uses compact time picker. */
     @Input()
@@ -161,14 +154,13 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnDestroy, 
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (_: D) => void = () => {};
     /** @hidden */
     onTouched: Function = () => {};
 
     /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
-        private _timeAdapter: TimeFormatParser,
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
@@ -207,19 +199,19 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnDestroy, 
     /**
      * Returns the current value of the time input.
      */
-    getTime(): TimeObject {
+    getTime(): D {
         return this.time;
     }
 
     /** @hidden */
     getFormattedTime(): string {
-        const formattedTime = this._timeAdapter.format(
-            this.time,
-            this.displaySeconds,
-            this.displayMinutes,
-            this.meridian
-        );
-        return formattedTime !== undefined ? formattedTime : '';
+        let formattedTime = '';
+
+        try {
+            formattedTime = this._dateTimeAdapter.format(this.time, this._dateTimeFormats.display.timeInput);
+        } catch (e) {}
+
+        return formattedTime;
     }
 
     /**
@@ -233,15 +225,17 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnDestroy, 
 
     /** @hidden */
     timeInputChanged(timeFromInput: string): void {
-        const time = this._timeAdapter.parse(timeFromInput, this.displaySeconds, this.displayMinutes, this.meridian);
-        if (time) {
+        // parse
+        const time = this._dateTimeAdapter.parse(timeFromInput, this._dateTimeFormats.parse.timeInput);
+
+        if (this._dateTimeAdapter.isValid(time)) {
             this.isInvalidTimeInput = false;
             this.time = time;
             this.onChange(time);
         } else {
             if (this.allowNull && timeFromInput === '') {
                 this.isInvalidTimeInput = false;
-                this.onChange({ hour: null, minutes: null, seconds: null });
+                this.onChange(time);
             } else {
                 this.isInvalidTimeInput = true;
                 this.onChange(time);
@@ -290,7 +284,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnDestroy, 
     }
 
     /** @hidden */
-    timeFromTimeComponentChanged(time: TimeObject): void {
+    timeFromTimeComponentChanged(time: D): void {
         Object.keys(time).forEach((key) => (time[key] = time[key] ? time[key] : 0));
         this.time = time;
         this.onChange(time);
@@ -299,7 +293,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnDestroy, 
     }
 
     /** @hidden */
-    registerOnChange(fn: (time: TimeObject) => void): void {
+    registerOnChange(fn: (time: D) => void): void {
         this.onChange = fn;
     }
 
@@ -315,9 +309,9 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnDestroy, 
     }
 
     /** @hidden */
-    writeValue(time: TimeObject): void {
+    writeValue(time: D): void {
         if (!time) {
-            this.time = { hour: null, minute: null, second: null };
+            // this.time = null; // TODO: not sure if it's possible to keep null as an object
             if (!this.allowNull) {
                 this.isInvalidTimeInput = true;
             }

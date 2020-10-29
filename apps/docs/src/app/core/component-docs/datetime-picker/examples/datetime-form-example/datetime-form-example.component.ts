@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DatetimeAdapter, FdDate, FdDatetime } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-datetime-form-example',
@@ -8,8 +8,8 @@ import { DatetimeAdapter, FdDate, FdDatetime } from '@fundamental-ngx/core';
 })
 export class DatetimeFormExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl(FdDatetime.getToday()),
-        disabledDate: new FormControl({ value: FdDatetime.getToday(), disabled: true })
+        date: new FormControl(FdDate.getNow()),
+        disabledDate: new FormControl({ value: FdDate.getNow(), disabled: true })
     });
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}

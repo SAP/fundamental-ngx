@@ -51,14 +51,6 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K>> implements 
     compact = false;
 
     /**
-     * @Input when set to true, time inputs won't allow to have 1 digit
-     * for example 9 will become 09
-     * but 12 will be kept as 12.
-     */
-    @Input()
-    keepTwoDigits = false;
-
-    /**
      * @Input When set to false, hides the buttons that increment and decrement the corresponding columns.
      */
     @Input()

@@ -261,9 +261,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         if (typeof value === 'number') {
             date = new Date(value);
         }
-        return Number.isNaN(date?.getDate)
-            ? null
-            : this.createDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+        return Number.isNaN(date?.getDate) ? null : this._creteFdDateFromDateInstance(date);
     }
 
     format(date: FdDate, displayFormat: Object): string {
@@ -346,7 +344,19 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         if (!date1 || !date2) {
             return false;
         }
-        return this._creteDateInstanceByFdDate(date1).getTime() === this._creteDateInstanceByFdDate(date2).getTime();
+        // reset time value
+        const date1Str = this.toIso8601(date1).split('T')[0];
+        const date2Str = this.toIso8601(date2).split('T')[0];
+        return date1Str === date2Str;
+    }
+
+    dateTimesEqual(date1: FdDate, date2: FdDate): boolean {
+        if (!date1 || !date2) {
+            return false;
+        }
+        const date1Str = this.toIso8601(date1).split('T');
+        const date2Str = this.toIso8601(date2).split('T');
+        return date1Str === date2Str;
     }
 
     toIso8601(fdDate: FdDate): string {
@@ -370,7 +380,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * @returns date Native date instance
      */
     private _creteDateInstanceByFdDate({ year, month, day: dayOfMonth, hour, minute, second }: FdDate): Date {
-        const date = new Date();
+        const date = new Date(2020);
         date.setFullYear(year);
         date.setMonth(month - 1);
         date.setDate(dayOfMonth);
@@ -400,7 +410,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         seconds = 0,
         milliseconds = 0
     ): Date {
-        const utcDate = new Date();
+        const utcDate = new Date(2020);
         utcDate.setUTCFullYear(year);
         utcDate.setUTCMonth(month);
         utcDate.setUTCDate(date);

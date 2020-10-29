@@ -210,10 +210,10 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (_: D | DateRange<D>) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched: () => void = () => {};
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -412,7 +412,6 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /** Function that allows to switch actual view to next month */
     displayNextMonth(): void {
-        // TODO ?
         if (this.currentlyDisplayed.month === 12) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
         } else {
@@ -422,7 +421,6 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /** Function that allows to switch actual view to previous month */
     displayPreviousMonth(): void {
-        // TODO ?
         if (this.currentlyDisplayed.month <= 1) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
         } else {

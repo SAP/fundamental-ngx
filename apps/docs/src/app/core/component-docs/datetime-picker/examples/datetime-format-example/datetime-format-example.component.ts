@@ -45,5 +45,5 @@ export class DateTimeFormatExample extends DateTimeFormatParser {
     ]
 })
 export class DatetimeFormatExampleComponent {
-    date = FdDatetime.getToday();
+    date = FdDate.getNow();
 }
