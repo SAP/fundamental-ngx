@@ -64,12 +64,11 @@
             </ng-container>
         </div>
         <div class="fd-slider__tick-wrapper">
-            <div class="fd-slider__ticks" style="height: 1rem" (click)="onTrackClick($event)" #tickMarksContainer>
+            <div class="fd-slider__ticks" style="height: 1rem" (click)="onTrackClick($event)">
                 <ng-container *ngIf="showTicks">
                     <ng-container *ngFor="let tick of _tickMarks; let first = first; let last = last;">
                         <div
                             class="fd-slider__tick"
-                            [style.visibility]="(first || last ||_isEnoughSpaceForTickMarks) ? '' : 'hidden'"
                             [style.position]="'absolute'"
                             [style.left.%]="(tick.value / (max - min)) * 100"
                             [class.fd-slider__tick--in-range]="
@@ -80,7 +79,7 @@
                     </ng-container>
                 </ng-container>
             </div>
-            <div class="fd-slider__labels" #tickLabelsContainer *ngIf="showTicks && showTicksLabels">
+            <div class="fd-slider__labels" *ngIf="showTicks && showTicksLabels">
                 <div
                     *ngFor="let tick of _tickMarks; let i = index"
                     class="fd-slider__label"
@@ -93,7 +92,7 @@
     </div>
 </div>
 
-<pre>{{ value | json }}</pre>
+<pre><b>Value:{{ value | json }}</b></pre>
 
 <ng-template #singleSliderPopover>
     <ng-container *ngTemplateOutlet="popoverInner; context: { target: _sliderValueTargets.SINGLE_SLIDER }"></ng-container>

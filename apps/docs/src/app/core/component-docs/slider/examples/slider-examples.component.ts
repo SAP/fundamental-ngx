@@ -62,6 +62,4 @@ export class SliderPlaygroundExampleComponent {
     range = false;
     disabled = false;
     readonly = false;
-    showCustomLabels = false;
-    customLabels = [];
 }

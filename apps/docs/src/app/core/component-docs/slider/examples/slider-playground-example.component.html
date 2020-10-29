@@ -8,18 +8,10 @@
                [disabled]="disabled"
                [showTicks]="showTicks"
                [showTicksLabels]="showTicksLabels"
-               [customLabelsValues]="showCustomLabels ? customLabels : []"
                [mode]="range ? 'range' : 'single'"
-               [hideProgressBar]="hideProgressBar"
-               #model="ngModel"></fd-slider>
+               [hideProgressBar]="hideProgressBar">
+    </fd-slider>
     <br>
-    <pre>
-        Slider value model: {{ value | json }}<br>
-        Touched: {{ model.touched }}<br>
-        UnTouched: {{ model.untouched }}<br>
-        Pristine: {{ model.pristine }}<br>
-        Dirty: {{ model.dirty }}<br><br><br>
-        </pre>
     <div>
         width - <input type="number" [(ngModel)]="width"><br>
         min - <input type="number" [(ngModel)]="min"><br>
@@ -30,7 +22,6 @@
         hideProgressBar - <input type="checkbox" [(ngModel)]="hideProgressBar"><br>
         showTicks - <input type="checkbox" [(ngModel)]="showTicks"><br>
         showTicksLabels - <input type="checkbox" [(ngModel)]="showTicksLabels"><br><br>
-        showCustomLabels - <input type="checkbox" [(ngModel)]="showCustomLabels"><br><br>
         disabled - <input type="checkbox" [(ngModel)]="disabled"><br>
         readonly - <input type="checkbox" [(ngModel)]="readonly"><br>
     </div>
