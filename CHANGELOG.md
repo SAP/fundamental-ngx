@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.2...v0.23.1-rc.3) (2020-10-29)
+
+
+### Features
+
+* list with byline migration ([#3678](https://github.com/SAP/fundamental-ngx/issues/3678)) ([18038cd](https://github.com/SAP/fundamental-ngx/commit/18038cd948b7478f1ae16c7540051d45ebe226a7))
+
 ### [0.23.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.1...v0.23.1-rc.2) (2020-10-28)
 
 
