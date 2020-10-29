@@ -338,13 +338,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             return;
         }
 
-        if (newValue > this.max) {
-            newValue = this.max;
-        }
-
-        if (newValue < this.min) {
-            newValue = this.min;
-        }
+        newValue = this._processNewValue(newValue);
 
         if (!this._isRange) {
             this.writeValue(newValue);
@@ -386,19 +380,20 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     }
 
     _updateValueFromInput(value: string, target: SliderValueTargets): void {
+        const newValue = this._processNewValue(+value);
         if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
-            this.writeValue(+value);
+            this.writeValue(newValue);
             this.handle.nativeElement.focus();
             return;
         }
 
         if (target === SliderValueTargets.RANGE_SLIDER1) {
-            this._setRangeHandleValueAndPosition(RangeHandles.First, +value);
+            this._setRangeHandleValueAndPosition(RangeHandles.First, newValue);
             this.rangeHandle1.nativeElement.focus();
         }
 
         if (target === SliderValueTargets.RANGE_SLIDER2) {
-            this._setRangeHandleValueAndPosition(RangeHandles.Second, +value);
+            this._setRangeHandleValueAndPosition(RangeHandles.Second, newValue);
             this.rangeHandle2.nativeElement.focus();
         }
 
@@ -411,6 +406,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
         const percentage = ((event.clientX - x) / width);
         const newValue = this.min + percentage * (this.max - this.min);
 
+        return this._processNewValue(newValue);
+    }
+
+    private _processNewValue(newValue: number): number {
         if (newValue > this.max) {
             return this.max;
         }
@@ -423,7 +422,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             .map(stepValue => ({ diff: Math.abs(stepValue - newValue), value: stepValue }))
             .sort((a, b) => a.diff - b.diff);
 
-        return Math.round(stepDiffArray[0].value);
+        return stepDiffArray[0].value;
     }
 
 
@@ -465,7 +464,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             this._valuesBySteps = Array(((this.max - this.min) / this.step) + 1)
                 .fill({})
                 .map((tickMark, i) => {
-                    return this.min + i * this.step;
+                    return Number((this.min + i * this.step).toFixed(2));
                 });
         } catch (e) {
         }
