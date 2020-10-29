@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.3...v0.23.1-rc.4) (2020-10-29)
+
+
+### Bug Fixes
+
+* Calendar range date ([#3704](https://github.com/SAP/fundamental-ngx/issues/3704)) ([ffe0841](https://github.com/SAP/fundamental-ngx/commit/ffe0841fbbbcbf138e1548a9908177c60991d61e))
+
 ### [0.23.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.2...v0.23.1-rc.3) (2020-10-29)
 
 
