@@ -73,7 +73,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
 
     constructor(
         private _eRef: ElementRef,
-        private _cdRef: ChangeDetectorRef,
+        private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
@@ -91,6 +91,11 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         this._constructMonthGrid();
         this._setupKeyboardService();
         this._initiated = true;
+
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._constructMonthGrid();
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     /** @hidden */
@@ -197,7 +202,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
             });
         });
 
-        this._cdRef.markForCheck();
+        this._changeDetectorRef.markForCheck();
     }
 
     /** Method to put configuration and listeners on calendar keyboard service */

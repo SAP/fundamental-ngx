@@ -101,10 +101,16 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
 
     /** @hidden */
     ngOnInit(): void {
+        this._initiated = true;
+
         this._setupKeyboardService();
         this.firstYearInList = this.yearSelected;
         this._constructYearGrid();
-        this._initiated = true;
+
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._constructYearGrid();
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     /** @hidden */

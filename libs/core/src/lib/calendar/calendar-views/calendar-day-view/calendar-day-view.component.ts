@@ -225,17 +225,22 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         if (!_dateTimeFormats) {
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
-
-        _dateTimeAdapter.localeChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => this._refreshShortWeekDays());
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this._setupKeyboardService();
-        this._refreshShortWeekDays();
-
         this._isInitiated = true;
+
+        this._setupKeyboardService();
+
+        this._refreshShortWeekDays();
         this._buildDayViewGrid();
+
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+            this._refreshShortWeekDays();
+            this._buildDayViewGrid();
+            this.changeDetRef.markForCheck();
+        });
     }
 
     /** @hidden */

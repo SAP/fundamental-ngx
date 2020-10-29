@@ -108,10 +108,18 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
 
     /** @hidden */
     ngOnInit(): void {
-        this._setupKeyboardService();
-        this._firstYearInList = this.yearSelected - this._yearsInOnePeriod();
-        this._constructYearsGrid();
         this._initiated = true;
+
+        this._setupKeyboardService();
+
+        this._firstYearInList = this.yearSelected - this._yearsInOnePeriod();
+
+        this._constructYearsGrid();
+
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._constructYearsGrid();
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     /** @hidden */
