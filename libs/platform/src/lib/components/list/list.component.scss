@@ -17,3 +17,8 @@
 .fd-list__item--inactive {
     pointer-events: none;
 }
+
+.fd-infinite-scroll {
+    overflow-y: scroll;
+    outline: none;
+}

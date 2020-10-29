@@ -34,6 +34,7 @@ export const API_FILES = {
         'CardKpiAnalyticsLabelDirective',
         'CardKpiAnalyticsContentDirective'
     ],
+    dynamicSideContent: ['DynamicSideContentComponent', 'DynamicSideContentSideComponent', 'DynamicSideContentMainComponent'],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
     button: ['ButtonComponent'],
@@ -81,7 +82,7 @@ export const API_FILES = {
     infiniteScroll: ['InfiniteScrollDirective'],
     inlineHelp: ['InlineHelpComponent'],
     inputGroup: ['InputGroupComponent'],
-    layoutGrid: ['LayoutGridComponent', 'LayoutGridSpanDirective'],
+    layoutGrid: ['LayoutGridComponent', 'LayoutGridColDirective', 'LayoutGridRowDirective'],
     layoutPanel: [
         'LayoutPanelComponent',
         'LayoutPanelActionsComponent',

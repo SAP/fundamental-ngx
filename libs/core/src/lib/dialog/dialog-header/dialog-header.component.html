@@ -1,6 +1,6 @@
 <header
     fd-bar
-    [cosy]="dialogConfig.mobile"
+    [cozy]="dialogConfig.mobile"
     [class]="'fd-dialog__header'"
     [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
 >
@@ -20,6 +20,6 @@
     </ng-template>
 </header>
 
-<div fd-bar *ngIf="subHeaderTemplate" class="fd-dialog__subheader" barDesign="subheader" [cosy]="dialogConfig.mobile">
+<div fd-bar *ngIf="subHeaderTemplate" class="fd-dialog__subheader" barDesign="subheader" [cozy]="dialogConfig.mobile">
     <ng-container *ngTemplateOutlet="subHeaderTemplate"></ng-container>
 </div>

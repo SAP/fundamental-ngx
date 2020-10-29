@@ -5,32 +5,32 @@ $fixedCardGroup: #{$fd-namespace}-fixed-card-group;
     &--card-layout {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
 
     &--card-layout-column {
-        flex: 1;
+        flex: 0;
         margin-right: 1rem;
-        margin-left: auto;
-        justify-content: center;
+        margin-left: 0;
 
         @at-root {
             [dir='rtl'] &,
             &[dir='rtl'] {
                 margin-left: 1rem;
-                margin-right: auto;
+                margin-right: 0;
             }
         }
     }
 
     &--card-layout-column:last-child {
-        margin-right: 0rem;
-        margin-left: auto;
+        margin-right: 0;
+        margin-left: 0;
 
         @at-root {
             [dir='rtl'] &,
             &[dir='rtl'] {
-                margin-left: 0rem;
-                margin-right: auto;
+                margin-left: 0;
+                margin-right: 0;
             }
         }
     }
@@ -39,7 +39,6 @@ $fixedCardGroup: #{$fd-namespace}-fixed-card-group;
         margin-bottom: 1rem;
         margin-right: 0;
         min-width: 20rem;
-        max-width: 25rem;
     }
 
     &--card:last-child {

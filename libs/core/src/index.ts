@@ -63,4 +63,5 @@ export * from './lib/object-identifier/public_api';
 export * from './lib/card/public_api';
 export * from './lib/object-number/public_api';
 export * from './lib/message-toast/public_api';
+export * from './lib/dynamic-side-content/public_api';
 export * from './lib/slider/public_api';

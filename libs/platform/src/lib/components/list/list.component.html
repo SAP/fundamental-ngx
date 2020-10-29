@@ -6,7 +6,7 @@
     [attr.aria-multiselectable]="ariaMultiselectable">
     <fd-busy-indicator *ngIf="loadMore && loadOnScroll" size="l"
         class="fd-busy-indicator-custom fd-list__title--growing" [block]="true" [loading]="_loading">
-        <div fd-list fdInfiniteScroll style="overflow-y: scroll" [ngStyle]="{'max-height': maxHeight}"
+        <div fd-list fdInfiniteScroll class="fd-infinite-scroll" [ngStyle]="{'max-height': maxHeight}"
             (onScrollAction)="_scrollHandler()" [scrollPercent]="scrollOffsetPercentage">
             <ng-template *ngIf="_items.length !==0; then thenBlock else elseBlock">
             </ng-template>
@@ -16,7 +16,8 @@
         <ng-template *ngIf="_items.length !==0; then thenBlock else elseBlock">
         </ng-template>
         <li #listItem *ngIf="loadMore && !loadOnScroll" (click)="_getMoreData()" fd-list-item
-            class="fd-list__item fd-list__item--action" tabindex="0" role="listitem" [attr.aria-label]="loadTitle">
+            (keydown)="_loadOnkeyPress($event)" class="fd-list__item fd-list__item--action" tabindex="0" role="button"
+            [attr.aria-label]="loadTitle">
             <button class="fd-list__title fd-list__title--growing">
                 <fd-busy-indicator size="m" class="fd-busy-indicator-custom" [block]="true" [loading]="_loading">
                 </fd-busy-indicator>

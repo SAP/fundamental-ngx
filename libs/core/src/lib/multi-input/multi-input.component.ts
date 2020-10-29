@@ -22,13 +22,15 @@ import { PopoverComponent } from '../popover/popover.component';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { FormStates } from '../form/form-control/form-states';
-import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection, KeyUtil } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection } from '../utils/public_api';
+import { KeyUtil } from '../utils/functions';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
 import { ListComponent } from '../list/list.component';
+import { BACKSPACE, DELETE, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -365,7 +367,7 @@ export class MultiInputComponent implements
     /** @hidden */
     removeSelectedTokens(event: KeyboardEvent): void {
         let allSelected = true;
-        if (KeyUtil.isKey(event, ['Delete', 'Backspace']) && !this.searchTerm) {
+        if (KeyUtil.isKeyCode(event, [DELETE, BACKSPACE]) && !this.searchTerm) {
             this.tokenizer.tokenList.forEach(token => {
                 if (token.selected || token.tokenWrapperElement.nativeElement === document.activeElement) {
                     this.handleSelect(false, token.elementRef.nativeElement.innerText);
@@ -379,7 +381,7 @@ export class MultiInputComponent implements
 
     /** @hidden */
     handleInputKeydown(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, 'ArrowDown') && !this.mobile) {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
                 this.openChangeHandle(true);
             }
@@ -389,7 +391,7 @@ export class MultiInputComponent implements
             }
         }
 
-        if (KeyUtil.isKey(event, 'Tab') && this.open) {
+        if (KeyUtil.isKeyCode(event, TAB) && this.open) {
             if (this.listComponent) {
                 this.listComponent.setItemActive(0);
                 event.preventDefault();

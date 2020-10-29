@@ -1,0 +1,37 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ListModule } from '../../list.module';
+
+@Component({
+    template: ` <div #componentElement fd-list-thumbnail>ListThumbnailDirective</div> `
+})
+class TestComponent {
+    @ViewChild('componentElement', { read: ElementRef })
+    ref: ElementRef;
+}
+
+describe('ListThumbnailDirective', () => {
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [ListModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should assign class', () => {
+        expect(component.ref.nativeElement.className).toContain('fd-list__thumbnail');
+    });
+});

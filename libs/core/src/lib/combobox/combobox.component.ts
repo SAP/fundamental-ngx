@@ -29,7 +29,7 @@ import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { GroupFunction } from '../utils/pipes/list-group.pipe';
 import { InputGroupComponent } from '../input-group/input-group.component';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '../utils/functions';
 import { AutoCompleteEvent } from './auto-complete.directive';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
@@ -37,6 +37,18 @@ import { DynamicComponentService } from '../utils/dynamic-component/dynamic-comp
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { ListComponent } from '../list/list.component';
 import { FocusEscapeDirection } from '../..';
+import {
+    CONTROL,
+    DOWN_ARROW,
+    ENTER,
+    ESCAPE,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SHIFT,
+    SPACE,
+    TAB,
+    UP_ARROW
+} from '@angular/cdk/keycodes';
 
 /**
  * Allows users to filter through results and select a value.
@@ -234,20 +246,20 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     listTemplate: TemplateRef<any>;
 
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
-    readonly nonOpeningKeys: string[] = [
-        'Escape',
-        'Enter',
-        'ArrowLeft',
-        'ArrowRight',
-        'ArrowDown',
-        'ArrowUp',
-        'Ctrl',
-        'Tab',
-        'Shift'
+    readonly nonOpeningKeys: number[] = [
+        ESCAPE,
+        ENTER,
+        LEFT_ARROW,
+        RIGHT_ARROW,
+        DOWN_ARROW,
+        UP_ARROW,
+        CONTROL,
+        TAB,
+        SHIFT
     ];
 
     /** Keys, that will close popover's body, when dispatched on search input */
-    readonly closingKeys: string[] = ['Escape'];
+    readonly closingKeys: number[] = [ESCAPE];
 
     /** Whether the combobox is opened. */
     open = false;
@@ -316,11 +328,11 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             return;
         }
 
-        if (KeyUtil.isKey(event, 'Enter')) {
+        if (KeyUtil.isKeyCode(event, ENTER)) {
             if (this.searchFn) {
                 this.searchFn();
             }
-        } else if (KeyUtil.isKey(event, 'ArrowDown')) {
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             if (event.altKey) {
                 this._resetDisplayedValues();
                 this.isOpenChangeHandle(true);
@@ -331,20 +343,21 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
                 this._chooseOtherItem(1);
             }
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'ArrowUp')) {
+        } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             this._chooseOtherItem(-1);
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, this.closingKeys)) {
+        } else if (KeyUtil.isKeyCode(event, this.closingKeys)) {
             this.isOpenChangeHandle(false);
             event.stopPropagation();
-        } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKey(event, this.nonOpeningKeys)) {
+        } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
             this.isOpenChangeHandle(true);
         }
     }
 
     /** @hidden */
     onItemKeyDownHandler(event: KeyboardEvent, value: any): void {
-        if (KeyUtil.isKey(event, 'Enter')) {
+        if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
+            event.preventDefault();
             this.onMenuClickHandler(value);
         }
     }

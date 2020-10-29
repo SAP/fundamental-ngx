@@ -2,21 +2,26 @@ import {
     ChangeDetectionStrategy, Component, Input, ViewEncapsulation,
     ContentChildren, QueryList, HostBinding, ViewChild,
     ElementRef, AfterContentInit, Output, EventEmitter,
-    HostListener, ChangeDetectorRef, OnInit, AfterViewInit, ContentChild, Self, Optional, SkipSelf, Host, OnDestroy
+    HostListener, ChangeDetectorRef, OnInit, AfterViewInit,
+    ContentChild, Self, Optional, SkipSelf, Host, OnDestroy
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { UP_ARROW, DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Subscription, Subject, of } from 'rxjs';
 import { takeUntil, delay, tap } from 'rxjs/operators';
+import { ENTER, SPACE, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
+
 import { ListDataSource, isDataSource } from '../../domain/data-source';
 import { ContentDensity, FormFieldControl } from '../../components/form/form-control';
+import { FormField } from '../form/form-field';
 import { BaseComponent } from '../base';
 import { CollectionBaseInput } from '../form/collection-base.input';
+
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
-import { FormField } from '../form/form-field';
+import { KeyUtil } from '@fundamental-ngx/core';
+
 
 
 export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
@@ -135,6 +140,10 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     set navigated(value: boolean) {
         this._navigated = value;
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--navigation');
+
+        if (this.hasObject) {
+            this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--navigation-object');
+        }
     }
 
 
@@ -160,6 +169,17 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--byline');
     }
 
+    /** setter and getter for hasObject*/
+    @Input('hasObject')
+    get hasObject(): boolean {
+        return this._hasObject;
+    }
+
+    set hasObject(value: boolean) {
+        this._hasObject = value;
+        this.itemEl.nativeElement.querySelector('ul').classList.add('fd-object-list');
+    }
+
     @Input()
     get value(): any {
         return super.getValue();
@@ -168,6 +188,23 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /** setter and getter for radio button and checkbox*/
     set value(value: any) {
         super.setValue(value);
+    }
+
+    /** setter and getter for row level Selection*/
+    @Input('rowSelection')
+    get selectRow(): boolean {
+        return this._rowSelection;
+    }
+
+    set selectRow(value: boolean) {
+        this._rowSelection = value;
+        if (this._rowSelection) {
+            this.selection = true;
+            this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--selection-row');
+            if (this.navigated && this.hasObject) {
+                this.itemEl.nativeElement.querySelector('ul').classList.remove('fd-list--selection-row');
+            }
+        }
     }
 
     /**
@@ -193,7 +230,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     * Child items of the List.
     */
     @ContentChildren(BaseListItem, { descendants: true })
-    ListItems: QueryList<BaseListItem>;
+    listItems: QueryList<BaseListItem>;
 
     /** role */
     @HostBinding('attr.role')
@@ -248,6 +285,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     private _navigated: boolean;
 
     /**@hidden
+     * Whether row level selection mode is enabled to list component
+     * for all the items
+    */
+    private _rowSelection: boolean;
+
+    /**@hidden
      * Whether Navigation mode is included to list component
      * only a subset of the list items are navigable
      * you should indicate those by displaying a navigation arrow
@@ -257,6 +300,10 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /**@hidden
      * Whether By line is present in list item*/
     private _hasByLine: boolean;
+
+    /**@hidden
+     * Whether object present in list item*/
+    private _hasObject: boolean;
 
     /** @hidden
     * To store */
@@ -283,6 +330,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     * for items impertaive and declartive approaches
     */
     private _itemsSubscription: Subscription | null;
+
+
+    /**
+    * @hidden
+    * Verfies partial navigation enabled */
+    protected _partialNavigation = false;
 
     /** @hidden */
     constructor(protected _changeDetectorRef: ChangeDetectorRef,
@@ -326,21 +379,27 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             this.selectedItemChange.emit(event);
 
         });
-
-
     }
 
     /** @hidden */
     /**Keyboard manager on list items, set values when passed via array */
     ngAfterViewInit(): void {
-        this._keyManager = new FocusKeyManager<BaseListItem>(this.ListItems).withWrap();
-        this.ListItems.forEach((item) => {
-            item.navigated = this.navigated;
-            item.navigationIndicator = this.navigationIndicator;
+        this._keyManager = new FocusKeyManager<BaseListItem>(this.listItems).withWrap();
+        this.listItems.forEach((item) => {
+            if (item.navigationIndicator || item.listType === 'detail') {
+                this._partialNavigation = true;
+            }
+        });
+        this.listItems.forEach((item) => {
+            if (!this._partialNavigation) {
+                item.navigated = this.navigated;
+                item.navigationIndicator = this.navigationIndicator;
+                item.listType = this.listType;
+            }
             item.contentDensity = this.contentDensity;
             item._isCompact = this._isCompact;
             item.selectionMode = this.selectionMode;
-            item.listType = this.listType;
+            item.selectRow = this.selectRow;
             item._hasByLine = this.hasByLine;
             item._noSeperator = this.noSeperator;
             this.stateChanges.next(item);
@@ -359,20 +418,35 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * set values when passed via datasource
      */
     ngAfterContentInit(): void {
-        this._itemsSubscription = this.ListItems.changes.subscribe((items) => {
+        this._itemsSubscription = this.listItems.changes.subscribe((items) => {
+
+            if (this.listItems.length !== 0) {
+                this.listItems.first.listItem.nativeElement.setAttribute('tabindex', 0);
+            }
+
+            // verfiying partial navgation set for all items in one go
             items.forEach((item) => {
-                item.navigated = this.navigated;
-                item.navigationIndicator = this.navigationIndicator;
+                if (item.navigationIndicator || item.listType === 'detail') {
+                    this._partialNavigation = true;
+                }
+            });
+            items.forEach((item) => {
+                if (!this._partialNavigation) {
+                    item.navigated = this.navigated;
+                    item.navigationIndicator = this.navigationIndicator;
+                    item.listType = this.listType;
+                }
                 item.contentDensity = this.contentDensity;
                 item._isCompact = this._isCompact;
+                item.selectRow = this.selectRow;
                 item.selectionMode = this.selectionMode;
-                item.listType = this.listType;
                 item._hasByLine = this.hasByLine;
                 item._noSeperator = this.noSeperator;
                 this.stateChanges.next(item);
             });
 
         });
+
     }
 
     /** @hidden */
@@ -400,9 +474,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     _handleKeyDown(event: KeyboardEvent): boolean {
         event.stopImmediatePropagation();
         if (this._keyManager) {
-            if (event.keyCode === DOWN_ARROW || event.keyCode === UP_ARROW) {
+            if (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
                 return false;
-            } else if (event.keyCode === ENTER || event.keyCode === SPACE) {
+            } else if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
                 this._updateNavigation(event);
                 return false;
             }
@@ -414,6 +488,14 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      */
     _scrollHandler(): void {
         if (!this._loading && this.loadOnScroll) {
+            this._getMoreData();
+        }
+    }
+
+    /** @hidden */
+    /**load more on enter or space press */
+    _loadOnkeyPress(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
             this._getMoreData();
         }
     }
@@ -459,19 +541,26 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
     /** @hidden */
     /**  on Update navgiation styles for non navigated items
-     * event:any to avoid code duplication**/
+     * event:any to avoid code duplication
+     * seprate PR for custom event**/
     @HostListener('click', ['$event'])
     _updateNavigation(event: any): void {
-        this.ListItems.forEach((item) => {
+        this.listItems.forEach((item) => {
             if (item.anchor !== undefined) {
                 item.anchor.nativeElement.classList.remove('is-navigated');
             }
         });
         if (event.target !== null && event.target.tagName.toLowerCase() === 'a') {
             event.target.classList.add('is-navigated');
+        } else if (event.target !== null &&
+            event.target.tagName.toLowerCase() === 'li' &&
+            event.target.querySelector('a') !== undefined &&
+            event.target.querySelector('a') !== null) {
+            event.target.querySelector('a').classList.add('is-navigated');
         }
         this._handleSingleSelect(event);
         this._handleMultiSelect(event);
+        this._handleRowSelect(event);
 
     }
 
@@ -535,8 +624,11 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      */
     private _handleSingleSelect(event: any): void {
         // clean up single selection items
-        if (event.target !== null && event.target !== undefined && this.selectionMode === 'single') {
-            this.ListItems.forEach((item) => {
+        if (event.target !== null &&
+            event.target !== undefined &&
+            this.selectionMode === 'single' &&
+            !this.selectRow) {
+            this.listItems.forEach((item) => {
                 if (item.radioButtonComponent !== undefined) {
                     item.listItem.nativeElement.classList.remove('is-selected');
                 }
@@ -576,13 +668,64 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             }
         }
         // selecteditem changes inform parent
-        this.ListItems.forEach((item) => {
+        this.listItems.forEach((item) => {
             if (item.radioButtonComponent !== undefined) {
                 item.selectionValue = this._selectedvalue;
                 this.stateChanges.next(item);
             }
         });
     }
+
+
+
+    private _handleRowSelect(event): void {
+
+        // handles mutli select on row level without checkbox
+        if (this.selectionMode === 'multi' && this.selectRow) {
+            this.listItems.forEach((item) => {
+                if (item._selected) {
+                    this._selectionModel.select(item);
+                } else {
+                    this._selectionModel.deselect(item);
+                }
+                this.stateChanges.next(item);
+            });
+        }
+        // handles single select on row level without radiobutton
+        if (this.selectionMode === 'single' && this.selectRow) {
+            let selectedItemId = 0;
+            this.listItems.forEach((item) => {
+                if (item.anchor !== undefined) {
+                    item.listItem.nativeElement.setAttribute('_selected', false);
+                    item.listItem.nativeElement.setAttribute('aria-selected', false);
+                    item.listItem.nativeElement.classList.remove('is-selected');
+                    item.anchor.nativeElement.classList.remove('is-selected');
+                    this.stateChanges.next(item);
+                }
+            });
+            this._selectionModel.clear();
+
+            if (event.target !== null && event.target !== undefined) {
+                if (event.target.tagName.toLowerCase() === 'a') {
+                    selectedItemId = event.target.parentNode.getAttribute('id');
+                }
+                if (event.target.tagName.toLowerCase() === 'li') {
+                    selectedItemId = event.target.getAttribute('id');
+                }
+            }
+            this.listItems.forEach((item) => {
+                if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
+                    item.listItem.nativeElement.setAttribute('_selected', true);
+                    item.anchor.nativeElement.classList.add('is-selected');
+                    this._selectionModel.select(item);
+                    this.stateChanges.next(item);
+                }
+            });
+            selectedItemId = 0;
+
+        }
+    }
+
 
     /** @hidden */
     /**List item with checkbox styles,check,uncheckupdates
@@ -591,7 +734,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     private _handleMultiSelect(event: any): void {
         if (event.target !== null &&
             event.target !== undefined &&
-            this.selectionMode === 'multi') {
+            this.selectionMode === 'multi' && !this.selectRow) {
             if (event.target.tagName.toLowerCase() === 'li' &&
                 event.target.querySelector('fd-checkbox') !== undefined) {
                 const checkbox1 = event.target.querySelector('fd-checkbox');
@@ -671,3 +814,4 @@ export class ListGroupHeader extends BaseListItem implements OnInit {
         this.id = `fdp-list-${nextListGrpHeaderId++}`;
     }
 }
+
