@@ -53,7 +53,7 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
     ]
 })
 export class CalendarI18nMomentExampleComponent {
-    date = FdDate.getToday();
+    date = FdDate.getNow();
 
     constructor(private calendarI18n: CalendarI18n) {
         moment.locale('en-gb');

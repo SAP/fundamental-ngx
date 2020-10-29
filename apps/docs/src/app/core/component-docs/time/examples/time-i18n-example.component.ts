@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { TimeI18n } from '@fundamental-ngx/core';
+import { FdDate, TimeI18n } from '@fundamental-ngx/core';
 
 // Aria labels i18n
 @Injectable()
@@ -30,9 +30,9 @@ export class CustomI18nLabels extends TimeI18n {
 @Component({
     selector: 'fd-time-i18n-example',
     template: `
-        <fd-time [meridian]="true" [(ngModel)]="timeObject"></fd-time>
+        <fd-time [meridian]="true" [(ngModel)]="time"></fd-time>
         <br />
-        Selected Time: {{ timeObject.hour }}h {{ timeObject.minute }}m {{ timeObject.second }}s
+        Selected Time: {{ time.hour }}h {{ time.minute }}m {{ time.second }}s
     `,
     // Note that this can be provided in the root of your application.
     providers: [
@@ -43,5 +43,5 @@ export class CustomI18nLabels extends TimeI18n {
     ]
 })
 export class TimeI18nExampleComponent {
-    timeObject = { hour: 12, minute: 0, second: 0 };
+    time = new FdDate().setTime(12, 0, 0);
 }

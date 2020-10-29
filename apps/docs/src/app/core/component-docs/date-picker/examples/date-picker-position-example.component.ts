@@ -8,5 +8,5 @@ import { FdDate } from '@fundamental-ngx/core';
         <div>Selected Date: {{ date || 'null' }}</div>`
 })
 export class DatePickerPositionExampleComponent {
-    date = FdDate.getToday();
+    date = FdDate.getNow();
 }

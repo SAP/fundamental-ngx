@@ -8,7 +8,7 @@ import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
 })
 export class DatePickerDisableFuncExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl(FdDate.getToday())
+        date: new FormControl(FdDate.getNow())
     });
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
@@ -18,6 +18,6 @@ export class DatePickerDisableFuncExampleComponent {
     }
 
     disableFunction = (fdDate: FdDate): boolean => {
-        return this.datetimeAdapter.compareDate(fdDate, FdDate.getToday()) < 0;
+        return this.datetimeAdapter.compareDate(fdDate, FdDate.getNow()) < 0;
     };
 }

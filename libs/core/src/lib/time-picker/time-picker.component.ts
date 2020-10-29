@@ -5,19 +5,26 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
+    Inject,
     Input,
     OnDestroy,
+    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { delay, first, takeUntil } from 'rxjs/operators';
+import { Placement } from 'popper.js';
+
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '../datetime';
+import { createMissingDateImplementationError } from './errors';
+
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
-import { Placement } from 'popper.js';
-import { Subject } from 'rxjs';
 
 @Component({
     selector: 'fd-time-picker',
@@ -42,8 +49,7 @@ import { Subject } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Validator {
-
+export class TimePickerComponent<D> implements ControlValueAccessor, OnDestroy, Validator {
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
      * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59). This is the model the component consumes. Example:
@@ -140,7 +146,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
 
     /** @hidden */
     @ViewChild(TimeComponent)
-    child: TimeComponent;
+    child: TimeComponent<D>;
 
     /** @hidden Whether the input time is valid(success). Internal use. */
     isInvalidTimeInput = false;
@@ -160,7 +166,19 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
     onTouched: Function = () => {};
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, private _timeAdapter: TimeFormatParser) {}
+    constructor(
+        private _cd: ChangeDetectorRef,
+        private _timeAdapter: TimeFormatParser,
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+    ) {
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
+    }
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -172,14 +190,18 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
+    validate(
+        control: AbstractControl
+    ): {
         [key: string]: any;
     } {
-        return this.isInvalidTimeInput ? {
-            timeValidation: {
-                valid: false
-            }
-        } : null;
+        return this.isInvalidTimeInput
+            ? {
+                  timeValidation: {
+                      valid: false
+                  }
+              }
+            : null;
     }
 
     /**
@@ -220,9 +242,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
             if (this.allowNull && timeFromInput === '') {
                 this.isInvalidTimeInput = false;
                 this.onChange({ hour: null, minutes: null, seconds: null });
-                if (this.child) {
-                    this.child.setDisplayedHour();
-                }
             } else {
                 this.isInvalidTimeInput = true;
                 this.onChange(time);
@@ -272,7 +291,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
 
     /** @hidden */
     timeFromTimeComponentChanged(time: TimeObject): void {
-        Object.keys(time).forEach(key => time[key] = time[key] ? time[key] : 0);
+        Object.keys(time).forEach((key) => (time[key] = time[key] ? time[key] : 0));
         this.time = time;
         this.onChange(time);
         this.isInvalidTimeInput = false;

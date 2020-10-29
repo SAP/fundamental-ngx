@@ -11,5 +11,5 @@ import { FdDate } from '@fundamental-ngx/core';
         <div>Selected Date: {{ date }}</div>`
 })
 export class DatePickerSingleExampleComponent {
-    date = FdDate.getToday();
+    date = FdDate.getNow();
 }

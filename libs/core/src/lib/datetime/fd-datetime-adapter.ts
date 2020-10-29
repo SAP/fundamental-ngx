@@ -18,15 +18,58 @@ export class FdDate {
      */
     day: number;
 
-    constructor(year: number, month: number, day: number) {
+    /**
+     * Date hours. 0 - 23.
+     */
+    hour: number;
+
+    /**
+     * Date minutes. 0 - 59.
+     */
+    minute: number;
+
+    /**
+     * Date seconds. 0 - 59.
+     */
+    second: number;
+
+    constructor(year?: number, month = 1, day = 1, hour = 0, minute = 0, second = 0) {
+        if (year == null) {
+            const now = FdDate.getNow();
+            year = now.year;
+            month = now.month;
+            day = now.day;
+            hour = now.hour;
+            minute = now.minute;
+            second = now.second;
+        }
         this.year = year;
         this.month = month;
         this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+
+        return this;
     }
 
-    static getToday(): FdDate {
+    static getNow(): FdDate {
         const today = new Date();
-        return new FdDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
+        return new FdDate(
+            today.getFullYear(),
+            today.getMonth() + 1,
+            today.getDate(),
+            today.getHours(),
+            today.getMinutes(),
+            today.getSeconds()
+        );
+    }
+
+    setTime(hour: number, minute: number, second: number): FdDate {
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+        return this;
     }
 
     toString(): string {
@@ -34,15 +77,22 @@ export class FdDate {
             return '';
         }
 
-        const date = new Date();
-        date.setUTCFullYear(this.year);
-        date.setUTCMonth(this.month - 1);
-        date.setUTCDate(this.day);
-        date.setUTCHours(0);
-        date.setUTCMinutes(0);
-        date.setUTCSeconds(0);
-        date.setUTCMilliseconds(0);
-        return date.toDateString();
+        return toIso8601(this);
+    }
+
+    toDateString(): string {
+        if (!this.year || !this.month || !this.day) {
+            return '';
+        }
+
+        return toIso8601(this).split('T')[0];
+    }
+
+    toTimeString(): string {
+        if (!this.year || !this.month || !this.day) {
+            return '';
+        }
+        return toIso8601(this).split('T')[1];
     }
 }
 
@@ -75,15 +125,15 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     getHours(date: FdDate): number {
-        return null;
+        return date.hour;
     }
 
     getMinutes(date: FdDate): number {
-        return null;
+        return date.minute;
     }
 
     getSeconds(date: FdDate): number {
-        return null;
+        return date.second;
     }
 
     getWeekNumber(fdDate: FdDate): number {
@@ -132,9 +182,54 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     getWeekName(date: FdDate): string {
         const weekNumber = this.getWeekNumber(date);
-        // Intl does not provide such functionality.
-        // Simply try to localize the number as we do it for year
-        return this.getYearName(new FdDate(weekNumber, 1, 1));
+        // Intl does not provide functionality to localize ween number.
+        return weekNumber.toLocaleString(this.locale);
+    }
+
+    getHourNames({ meridian, twoDigit }: { twoDigit: boolean; meridian: boolean }): string[] {
+        /**
+         * We can't use `new Intl.DateTimeFormat('en', {hour12: true})` approach
+         * since it appends AM/PM string as well.
+         * To retrieve hours strings we can using `Intl.DateTimeFormat.prototype.formatToParts()`
+         * but `formatToParts` is not working in IE11.
+         * In this case we simply localize a number
+         */
+        return range(24, (hour) => {
+            if (meridian) {
+                hour = hour === 0 || hour === 12 ? 12 : hour % 12;
+            }
+            return hour.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+        });
+    }
+
+    getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
+        return range(60, (hour) => {
+            return hour.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+        });
+    }
+
+    getSecondNames({ twoDigit }: { twoDigit: boolean }): string[] {
+        return range(60, (hour) => {
+            return hour.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+        });
+    }
+
+    setHours(date: FdDate, hours: number): FdDate {
+        const dateInstance = this._creteDateInstanceByFdDate(date);
+        dateInstance.setHours(hours);
+        return this._creteFdDateFromDateInstance(dateInstance);
+    }
+
+    setMinutes(date: FdDate, hours: number): FdDate {
+        const dateInstance = this._creteDateInstanceByFdDate(date);
+        dateInstance.setMinutes(hours);
+        return this._creteFdDateFromDateInstance(dateInstance);
+    }
+
+    setSeconds(date: FdDate, hours: number): FdDate {
+        const dateInstance = this._creteDateInstanceByFdDate(date);
+        dateInstance.setSeconds(hours);
+        return this._creteFdDateFromDateInstance(dateInstance);
     }
 
     getFirstDayOfWeek(): number {
@@ -149,13 +244,12 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return date.getDate();
     }
 
-    createDate(year: number, month: number, date: number): FdDate {
+    createDate(year: number, month = 1, date = 1): FdDate {
         return new FdDate(year, month, date);
     }
 
     today(): FdDate {
-        const date = new Date();
-        return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+        return FdDate.getNow();
     }
 
     parse(value: any): FdDate | null {
@@ -256,12 +350,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     toIso8601(fdDate: FdDate): string {
-        return [fdDate.year, this._2digit(fdDate.month), this._2digit(fdDate.day)].join('-');
-    }
-
-    /** Adds 0 if number is less then 10 */
-    private _2digit(value: number): string {
-        return ('00' + value).slice(-2);
+        return toIso8601(fdDate);
     }
 
     /**
@@ -280,14 +369,14 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * @param date FdDate instance
      * @returns date Native date instance
      */
-    private _creteDateInstanceByFdDate({ year, month, day: dayOfMonth }: FdDate): Date {
+    private _creteDateInstanceByFdDate({ year, month, day: dayOfMonth, hour, minute, second }: FdDate): Date {
         const date = new Date();
         date.setFullYear(year);
         date.setMonth(month - 1);
         date.setDate(dayOfMonth);
-        date.setHours(0);
-        date.setMinutes(0);
-        date.setSeconds(0);
+        date.setHours(hour);
+        date.setMinutes(minute);
+        date.setSeconds(second);
         date.setMilliseconds(0);
         return date;
     }
@@ -336,10 +425,30 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     private _creteFdDateFromDateInstance(date: Date): FdDate {
-        return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+        return new FdDate(
+            date.getFullYear(),
+            date.getMonth() + 1,
+            date.getDate(),
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds()
+        );
     }
 }
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
+}
+
+/** Adds 0 if number is less then 10 */
+function _2digit(value: number): string {
+    return ('00' + value).slice(-2);
+}
+
+function toIso8601(fdDate: FdDate): string {
+    return [
+        [fdDate.year, _2digit(fdDate.month), _2digit(fdDate.day)].join('-'),
+        'T',
+        [_2digit(fdDate.hour), _2digit(fdDate.minute), _2digit(fdDate.second)].join(':')
+    ].join('');
 }

@@ -47,8 +47,8 @@ import { FdDate } from '@fundamental-ngx/core';
 })
 export class DatePickerFormExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl(FdDate.getToday()),
-        disabledDate: new FormControl({ value: FdDate.getToday(), disabled: true })
+        date: new FormControl(FdDate.getNow()),
+        disabledDate: new FormControl({ value: FdDate.getNow(), disabled: true })
     });
 
     isValid(): boolean {

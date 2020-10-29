@@ -15,7 +15,7 @@ import { DatePickerComponent, FdDate } from '@fundamental-ngx/core';
 export class DatePickerAllowNullExampleComponent {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<FdDate>;
 
-    date = FdDate.getToday();
+    date = FdDate.getNow();
 
     isInvalid(): boolean {
         return !this.datePicker || !this.datePicker.isModelValid();

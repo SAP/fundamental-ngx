@@ -14,21 +14,22 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { delay, first, takeUntil } from 'rxjs/operators';
+import { Placement } from 'popper.js';
+
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
-import { Placement } from 'popper.js';
 import { DateTimeFormatParser } from './format/datetime-parser';
 import { FdDate } from '../datetime/fd-datetime-adapter';
 import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
 import { FormStates } from '../form/form-control/form-states';
-import { DatePipe } from '@angular/common';
 import { CalendarYearGrid, SpecialDayRule } from '../..';
 import { PopoverComponent } from '../popover/popover.component';
 import { PopoverBodyComponent } from '../popover/popover-body/popover-body.component';
-import { Subject } from 'rxjs';
-import { delay, first, takeUntil } from 'rxjs/operators';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -250,7 +251,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, ControlVal
 
     /** @hidden Reference to the inner time component. */
     @ViewChild(TimeComponent)
-    timeComponent: TimeComponent;
+    timeComponent: TimeComponent<any>; // TODO fix any
 
     /** @hidden Reference to the inner calendar component. */
     @ViewChild(CalendarComponent)
@@ -456,7 +457,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, ControlVal
             this.time = this.timeComponent.time;
         }
         if (!this.selectedDate /* || !this.selectedDate.isDateValid() */) {
-            this.selectedDate = FdDate.getToday();
+            this.selectedDate = FdDate.getNow();
         }
         this.date = new FdDatetime(this.selectedDate, this.time);
         this.isInvalidDateInput = !this.isCurrentModelValid();

@@ -63,7 +63,7 @@ export class DatePickerComplexI18nExampleComponent {
 
     actualMomentJsLang = '';
 
-    public date: FdDate = FdDate.getToday();
+    public date: FdDate = FdDate.getNow();
 
     public refresh(): void {
         this.datePicker.handleSingleDateChange(this.date);

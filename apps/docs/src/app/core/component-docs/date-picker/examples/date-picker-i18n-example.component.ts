@@ -106,7 +106,7 @@ export class CustomCalendarI18n extends CalendarI18n {
 // Aria labels i18n
 @Injectable()
 export class CustomI18nLabels extends CalendarI18nLabels {
-    yearSelectionLabel = 'Sélection de l\'année';
+    yearSelectionLabel = `Sélection de l'année`;
 
     previousYearLabel = 'Année précédente';
 
@@ -153,7 +153,7 @@ export class DatePickerI18nExampleComponent implements AfterViewInit {
         private calendarI18nLabels: CalendarI18nLabels
     ) {}
 
-    date = FdDate.getToday();
+    date = FdDate.getNow();
 
     isSelected(language: string): string {
         switch (language) {

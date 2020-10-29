@@ -1,0 +1,87 @@
+<header
+    class="fd-calendar__header"
+    aria-live="polite"
+>
+    <div
+        class="fd-calendar__navigation"
+        [class.fd-calendar__navigation--main]="mobileLandscape"
+    >
+        <div class="fd-calendar__action fd-calendar__action--arrow-left">
+            <button
+                fd-button
+                [compact]="compact"
+                fdType="transparent"
+                glyph="slim-arrow-left"
+                [id]="id + '-left-arrow'"
+                [attr.aria-label]="previousAriaLabel"
+                [attr.aria-disabled]="false"
+                type="button"
+                (click)="previousClicked.emit()"
+            ></button>
+        </div>
+        <ng-container *ngIf="isOnDayView || isOnMonthView">
+            <div class="fd-calendar__action">
+                <!-- Select month button -->
+                <button
+                    fd-button
+                    type="button"
+                    [compact]="compact"
+                    fdType="transparent"
+                    [label]="selectMonthLabel"
+                    [attr.aria-label]="selectMonthAriaLabel"
+                    (click)="processViewChange('month', $event)"
+                >
+                </button>
+            </div>
+            <div class="fd-calendar__action">
+                <!-- Select year button -->
+                <button
+                    fd-button
+                    type="button"
+                    [compact]="compact"
+                    fdType="transparent"
+                    [label]="selectYearLabel"
+                    [attr.aria-label]="selectYearAriaLabel"
+                    (click)="processViewChange('year', $event)"
+                >
+                </button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isOnAggregatedYearsView || isOnYearView">
+            <div class="fd-calendar__action">
+                <button
+                    fd-button
+                    [compact]="compact"
+                    fdType="transparent"
+                    [label]="selectAggregatedYearLabel"
+                    [attr.aria-label]="selectAggregatedYearAriaLabel"
+                    (click)="processViewChange('aggregatedYear', $event)"
+                    type="button"
+                >
+                </button>
+            </div>
+        </ng-container>
+        <div class="fd-calendar__action fd-calendar__action--arrow-right">
+            <button
+                fd-button
+                [compact]="compact"
+                fdType="transparent"
+                glyph="slim-arrow-right"
+                [attr.id]="id + '-right-arrow'"
+                [attr.aria-label]="nextAriaLabel"
+                [attr.aria-disabled]="false"
+                (click)="nextClicked.emit()"
+                type="button"
+            ></button>
+        </div>
+        <button
+            fd-button
+            *ngIf="mobileLandscape"
+            (click)="emitClose()"
+            type="button"
+            fdType="transparent"
+            class="fd-calendar__close-button fd-calendar__close-button--navigation"
+            aria-label="Close"
+        ></button>
+    </div>
+</header>

@@ -15,7 +15,7 @@ export class FdDatetime {
     static getToday(): FdDatetime {
         const date: Date = new Date();
         const time: TimeObject = { hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds() };
-        return new FdDatetime(FdDate.getToday(), time);
+        return new FdDatetime(FdDate.getNow(), time);
     }
 
     /**

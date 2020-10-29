@@ -78,6 +78,27 @@ export abstract class DatetimeAdapter<D> {
     abstract getSeconds(date: D): number;
 
     /**
+     * Set hours.
+     * @param date The date to set hours to.
+     * @returns The new date instance.
+     */
+    abstract setHours(date: D, hours: number): D;
+
+    /**
+     * Set minutes.
+     * @param date The date to set minutes to.
+     * @returns The new date instance.
+     */
+    abstract setMinutes(date: D, minutes: number): D;
+
+    /**
+     * Set seconds.
+     * @param date The date to set seconds to.
+     * @returns The new date instance.
+     */
+    abstract setSeconds(date: D, seconds: number): D;
+
+    /**
      * Gets week number of the given date
      * @param date The date to extract the week number from.
      * @returns The week number (min 1, max 53).
@@ -116,6 +137,24 @@ export abstract class DatetimeAdapter<D> {
      * @returns The name of the the week.
      */
     abstract getWeekName(date: D): string;
+
+    /**
+     * Gets a list of hour names.
+     * @returns An ordered list of all hours (0 - 24).
+     */
+    abstract getHourNames(options: { twoDigit: boolean; meridian: boolean }): string[];
+
+    /**
+     * Gets a list of minute names.
+     * @returns An ordered list of all hours (0 - 24).
+     */
+    abstract getMinuteNames(options: { twoDigit: boolean }): string[];
+
+    /**
+     * Gets a list of second names.
+     * @returns An ordered list of all hours (0 - 24).
+     */
+    abstract getSecondNames(options: { twoDigit: boolean }): string[];
 
     /**
      * Gets the first day of the week.

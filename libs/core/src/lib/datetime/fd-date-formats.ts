@@ -8,14 +8,14 @@ export const FD_DATETIME_FORMATS: DateTimeFormats = {
     },
     display: {
         dateInput: { year: 'numeric', month: 'numeric', day: 'numeric' },
-        timeInput: { hour: 'numeric', second: 'numeric', seconds: 'numeric' },
+        timeInput: { hour: '2-digit', minute: '2-digit', second: '2-digit' },
         dateTimeInput: {
             year: 'numeric',
             month: 'numeric',
             day: 'numeric',
-            hour: 'numeric',
-            second: 'numeric',
-            seconds: 'numeric'
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
         },
 
         dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
