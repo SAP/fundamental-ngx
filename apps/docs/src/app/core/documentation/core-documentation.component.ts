@@ -74,6 +74,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/tile', name: 'Tile' },
             { url: 'core/time', name: 'Time' },
             { url: 'core/timePicker', name: 'Time Picker' },
+            { url: 'core/title', name: 'Title' },
             { url: 'core/switch', name: 'Switch' },
             { url: 'core/token', name: 'Token' },
             { url: 'core/toolbar', name: 'Toolbar' },
