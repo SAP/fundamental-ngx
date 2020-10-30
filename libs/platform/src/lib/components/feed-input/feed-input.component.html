@@ -3,8 +3,8 @@
         class="fd-feed-input__thumb"
         size="s"
         role="img"
-        aria-label="John Doe"
-        title="John Doe"
+        [attr.aria-label]="title"
+        [title]="title"
         [image]="avatarSrc"
         [class.fd-avatar--placeholder]="!avatarSrc"
         [class.sap-icon]="!avatarSrc"
@@ -27,7 +27,10 @@
     <fdp-button
         class="fd-feed-input__submit-button"
         glyph="feeder-arrow"
+        title="Send"
+        ariaLabel="Send"
         [disabled]="!value || disabled"
+        [attr.aria-disabled]="!value || disabled"
         (click)="onSubmit()"
     >
     </fdp-button>

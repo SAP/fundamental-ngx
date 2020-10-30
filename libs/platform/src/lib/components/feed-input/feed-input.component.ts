@@ -29,14 +29,19 @@ export class FeedInputComponent {
     @Input()
     avatarShow = true;
 
-    /** Feed Input disabled state */
+    /** Set disabled state */
     @Input()
     disabled = false;
 
-    /** The max height allows textarea grow */
+    /** The max number of rows to allow textarea grow */
     @Input()
     maxHeight: number;
 
+    /** Set title attribute for accessibility user image */
+    @Input()
+    title: string;
+
+    /** @hidden Event emitted when user click on send button */
     @Output()
     submit = new EventEmitter<string>();
 
@@ -44,19 +49,22 @@ export class FeedInputComponent {
     @ViewChild('textAreaElement', { read: ElementRef })
     textarea: ElementRef;
 
+    /** @hidden Textarea entered value */
     value: string | null;
 
+    /** @hidden */
     onChange(): void {
         this.resize();
     }
 
+    /** @hidden Handle submit feed input value*/
     onSubmit(): void {
-        if (this.textarea.nativeElement.value) {
-            this.submit.emit(this.textarea.nativeElement.value)
+        if (this.value) {
+            this.submit.emit(this.value);
         }
     }
 
-    /** @hidden make to grow textarea */
+    /** @hidden Make grow textarea */
     resize(): void {
         this.textarea.nativeElement.style.height = 'inherit';
         const totalHeight = this._getTextareaTotalHeight();
@@ -67,20 +75,20 @@ export class FeedInputComponent {
         }
 
         this.textarea.nativeElement.style.height = totalHeight + 'px';
-
     }
 
-    /** @hidden get line height of textarea */
+    /** @hidden Get line height of textarea */
     private _getTextareaLineHeight(): number {
         if (this.textarea && this.textarea.nativeElement) {
             const computed = window.getComputedStyle(this.textarea.nativeElement);
 
             return parseInt(computed.getPropertyValue('line-height'), 10);
         }
+
         return 20;
     }
 
-    /** @hidden get the total height including borders and scroll height */
+    /** @hidden Get the total height including borders and scroll height */
     private _getTextareaTotalHeight(): number {
         const computed = window.getComputedStyle(this.textarea.nativeElement);
 

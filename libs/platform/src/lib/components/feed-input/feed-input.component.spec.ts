@@ -1,8 +1,8 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { ChangeDetectionStrategy, Component, DebugElement, Input } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { AvatarComponent, AvatarModule, FormControlModule, SelectComponent } from '@fundamental-ngx/core';
+import { AvatarModule, FormControlModule } from '@fundamental-ngx/core';
 
 import { FeedInputComponent } from './feed-input.component';
 import { PlatformButtonModule } from '../button/public_api';
@@ -65,10 +65,10 @@ describe('FeedInputComponent', () => {
     });
 
     it('should textarea grow by default', () => {
-        textareaEl.nativeElement.value = '1 \n 2 \n 3 \n 4 \n';
+        textareaEl.nativeElement.value = '1 \n 2 \n 3 \n 4';
         component.resize();
 
-        expect(textareaEl.nativeElement.style.height).toEqual('87px');
+        expect(textareaEl.nativeElement.style.height).toEqual('88px');
     });
 
     it('should set max height', () => {
@@ -77,5 +77,23 @@ describe('FeedInputComponent', () => {
 
         component.resize();
         expect(textareaEl.nativeElement.style.maxHeight).toEqual('133px');
+    });
+
+    it('should call onChange when textarea value changing', () => {
+        spyOn(component, 'onChange');
+        textareaEl.nativeElement.value = 'test';
+        textareaEl.nativeElement.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+
+        expect(component.onChange).toHaveBeenCalled();
+    });
+
+    it('should call resize when textarea value changing', () => {
+        spyOn(component, 'resize');
+        textareaEl.nativeElement.value = 'test';
+        textareaEl.nativeElement.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+
+        expect(component.resize).toHaveBeenCalled();
     })
 });
