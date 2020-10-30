@@ -11,6 +11,7 @@ import { PopoverComponent } from './popover.component';
 import { A11yModule } from '@angular/cdk/a11y';
 import { PopoverDirective } from './popover-directive/popover.directive';
 import { PopoverContainer } from './popover-directive/popover-container';
+import { PopoverTriggerDirective } from './popover-trigger.directive';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { PopoverContainer } from './popover-directive/popover-container';
         PopoverBodyFooterDirective,
         PopoverComponent,
         PopoverDirective,
-        PopoverContainer
+        PopoverContainer,
+        PopoverTriggerDirective
     ],
     imports: [CommonModule, OverlayModule, A11yModule],
     exports: [
@@ -30,7 +32,8 @@ import { PopoverContainer } from './popover-directive/popover-container';
         PopoverBodyFooterDirective,
         PopoverComponent,
         PopoverDirective,
-        PopoverContainer
+        PopoverContainer,
+        PopoverTriggerDirective
     ],
 })
 export class PopoverModule {}

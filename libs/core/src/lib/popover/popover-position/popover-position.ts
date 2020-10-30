@@ -91,13 +91,9 @@ export class PopoverPosition {
         if (!position) {
             return;
         }
-        if (position === 'start') {
-            return 'margin-left: 0.5rem;';
-        }
-        if (position === 'end') {
-            return 'margin-right: 0.5rem;';
-        }
-        return 'margin-' + position + ': ' + ARROW_SIZE + ';';
+
+        const resultPosition = position.replace('start', 'left').replace('end', 'right');
+        return 'margin-' + resultPosition + ': ' + ARROW_SIZE + ';';
     }
 
 }

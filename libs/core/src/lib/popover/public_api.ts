@@ -8,3 +8,4 @@ export * from './popover-control/popover-control.component';
 export * from './popover-control/popover-control.component';
 export * from './popover.component';
 export * from './popover-position/popover-position';
+export * from './popover-trigger.directive';
