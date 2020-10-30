@@ -1,39 +1,34 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { TitleModule } from './title.module';
 
-@Component({
-    template: `<h5 fd-title [wrap]="true">Test Title</h5>`
-})
-class TestComponent {
-    @ViewChild('directiveElement')
-    ref: ElementRef;
-}
+import { TitleComponent } from './title.component';
+import { TitleModule } from '@fundamental-ngx/core';
 
-describe('TitleTitleComponent', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
+describe('TitleComponent', () => {
+    let component: TitleComponent;
+    let fixture: ComponentFixture<TitleComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
+            declarations: [TitleComponent],
             imports: [TitleModule]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponent);
+        fixture = TestBed.createComponent(TitleComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
+        expect(component).toBeDefined();
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toContain('fd-title');
-        expect(component.ref.nativeElement.className).toContain('fd-title--h5');
-        expect(component.ref.nativeElement.className).toContain('fd-title--wrap');
+        component.headerSize = 5;
+        component.ngOnInit();
+        expect(fixture.nativeElement.classList).toContain('fd-title');
+        expect(fixture.nativeElement.classList).toContain('fd-title--h5');
     });
 });
