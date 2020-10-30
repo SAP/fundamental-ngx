@@ -151,9 +151,10 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit {
 
     /** Get selection aggregated year button label. */
     get selectAggregatedYearLabel(): string {
-        return `${this._getYearName(this.currentlyDisplayed.year)} - ${
-            this.currentlyDisplayed.year + this.amountOfYearsPerPeriod()
-        }`;
+        return `
+        ${this._getYearName(this.currentlyDisplayed.year)} 
+        - 
+        ${this._getYearName(this.currentlyDisplayed.year + this.amountOfYearsPerPeriod())}`;
     }
 
     /** Get selection aggregated year button aria label. */
