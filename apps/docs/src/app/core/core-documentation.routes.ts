@@ -61,6 +61,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/calendar/calendar-docs.module').then((m) => m.CalendarDocsModule)
             },
             {
+                path: 'carousel',
+                loadChildren: () =>
+                    import('./component-docs/carousel/carousel-docs.module').then((m) => m.CarouselDocsModule)
+            },
+            {
                 path: 'checkbox',
                 loadChildren: () =>
                     import('./component-docs/checkbox/checkbox-docs.module').then((m) => m.CheckboxDocsModule)

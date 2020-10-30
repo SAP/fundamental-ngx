@@ -25,6 +25,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/button', name: 'Button' },
             { url: 'core/card', name: 'Card' },
             { url: 'core/segmentedButton', name: 'Segmented Button' },
+            { url: 'core/carousel', name: 'Carousel' },
             { url: 'core/checkbox', name: 'Checkbox' },
             { url: 'core/splitButton', name: 'Split Button' },
             { url: 'core/calendar', name: 'Calendar' },
