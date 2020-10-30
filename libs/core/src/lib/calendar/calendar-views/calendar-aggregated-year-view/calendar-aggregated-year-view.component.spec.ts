@@ -4,7 +4,8 @@ import { CalendarAggregatedYearViewComponent } from './calendar-aggregated-year-
 import { CalendarService } from '../../calendar.service';
 import { AggregatedYear } from '../../models/aggregated-year';
 import { CommonModule } from '@angular/common';
-import { ButtonModule, IconModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '../../../button/button.module';
+import { IconModule } from '../../../icon/icon.module';
 
 describe('CalendarAggregatedYearViewComponent', () => {
     let component: CalendarAggregatedYearViewComponent;
