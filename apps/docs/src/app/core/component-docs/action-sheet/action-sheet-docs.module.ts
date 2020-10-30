@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-    ActionSheetCompactExampleComponent,
-    ActionSheetCosyExampleComponent,
-    ActionSheetMobileExampleComponent,
-    ActionSheetHeaderComponent,
-    ActionSheetDocsComponent,
-    ApiComponent,
-    SharedDocumentationPageModule,
-    API_FILES
-} from './index';
-import {
-    ActionSheetModule
-} from '@fundamental-ngx/core';
+import { ActionSheetModule } from '@fundamental-ngx/core';
+import { ActionSheetHeaderComponent } from './action-sheet-header/action-sheet-header.component';
+import { ActionSheetDocsComponent } from './action-sheet-docs.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { examples } from './examples';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { API_FILES } from '../../api-files';
 
 const routes: Routes = [
     {
@@ -35,9 +29,7 @@ const routes: Routes = [
     declarations: [
         ActionSheetDocsComponent,
         ActionSheetHeaderComponent,
-        ActionSheetCompactExampleComponent,
-        ActionSheetCosyExampleComponent,
-        ActionSheetMobileExampleComponent
+        examples
     ]
 })
 export class ActionSheetDocsModule {}

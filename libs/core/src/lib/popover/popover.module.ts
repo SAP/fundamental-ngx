@@ -32,6 +32,8 @@ import { ButtonModule } from '../button/button.module';
         PopoverDropdownComponent,
         PopoverBodyHeaderDirective,
         PopoverBodyFooterDirective,
-    ]
+        PopoverContainer
+    ],
+    entryComponents: [PopoverContainer]
 })
 export class PopoverModule {}
