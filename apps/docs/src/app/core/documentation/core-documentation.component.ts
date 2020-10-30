@@ -26,6 +26,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/button', name: 'Button' },
             { url: 'core/card', name: 'Card' },
             { url: 'core/segmentedButton', name: 'Segmented Button' },
+            { url: 'core/carousel', name: 'Carousel' },
             { url: 'core/checkbox', name: 'Checkbox' },
             { url: 'core/splitButton', name: 'Split Button' },
             { url: 'core/calendar', name: 'Calendar' },
@@ -42,7 +43,13 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/input', name: 'Input' },
             { url: 'core/inputGroup', name: 'Input Group' },
             { url: 'core/link', name: 'Link' },
-            { url: 'core/list', name: 'List' },
+            {
+                name: 'List',
+                subItems: [
+                    { url: 'core/list', name: 'Standard List' },
+                    { url: 'core/list-byline', name: 'List with Byline' }
+                ]
+            },
             { url: 'core/localizationEditor', name: 'Localization Editor' },
             { url: 'core/mega-menu', name: 'Mega Menu' },
             { url: 'core/menu', name: 'Menu' },
@@ -76,6 +83,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.layouts = [
+            { url: 'core/dynamic-side-content', name: 'Dynamic Side Content' },
             { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
             { url: 'core/layoutPanel', name: 'Layout Panel' },
             { url: 'core/layoutGrid', name: 'Layout Grid' }

@@ -66,6 +66,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/calendar/calendar-docs.module').then((m) => m.CalendarDocsModule)
             },
             {
+                path: 'carousel',
+                loadChildren: () =>
+                    import('./component-docs/carousel/carousel-docs.module').then((m) => m.CarouselDocsModule)
+            },
+            {
                 path: 'checkbox',
                 loadChildren: () =>
                     import('./component-docs/checkbox/checkbox-docs.module').then((m) => m.CheckboxDocsModule)
@@ -90,6 +95,13 @@ export const ROUTES: Routes = [
             {
                 path: 'dialog',
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
+            },
+            {
+                path: 'dynamic-side-content',
+                loadChildren: () =>
+                    import('./component-docs/dynamic-side-content/dynamic-side-content-docs.module').then(
+                        (m) => m.DynamicSideContentDocsModule
+                    )
             },
             {
                 path: 'file-input',
@@ -180,6 +192,10 @@ export const ROUTES: Routes = [
             {
                 path: 'list',
                 loadChildren: () => import('./component-docs/list/list-docs.module').then((m) => m.ListDocsModule)
+            },
+            {
+                path: 'list-byline',
+                loadChildren: () => import('./component-docs/list-byline/list-byline-docs.module').then((m) => m.ListDocsModule)
             },
             {
                 path: 'localizationEditor',

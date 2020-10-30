@@ -1,0 +1,96 @@
+<fd-docs-section-title id="carousel-default-example" componentName="carousel">
+    Carousel with one active item
+</fd-docs-section-title>
+<description>
+    By default fd-carousel displays one active item and others remains hidden. Pagination container appears on bottom
+    with dot indicators with active dot to show active item.
+</description>
+<component-example>
+    <fd-carousel-one-active-item></fd-carousel-one-active-item>
+</component-example>
+<code-example [exampleFiles]="carouselSingle"></code-example>
+
+<fd-docs-section-title id="carousel-multi-item-active" componentName="carousel">
+    Carousel with vertical direction
+</fd-docs-section-title>
+<description>
+    carousel movement is possible in vertical direction as well.
+</description>
+<component-example>
+    <fd-carousel-vertical-direction></fd-carousel-vertical-direction>
+</component-example>
+<code-example [exampleFiles]="carouselVertical"></code-example>
+
+<fd-docs-section-title id="carousel-multi-item-active" componentName="carousel">
+    Carousel with multiple active item
+</fd-docs-section-title>
+<description>
+    Carousel can display multiple active item at a time as well. On left navigation button click, right most item hides
+    and a new item is shown on left side. On right navigation button click, left most item hides and a new item is shown
+    on right side. <code>visibleSlidesCount</code> property is used to set, how many item will be active at a time. Ex.
+    <code>visibleSlidesCount=3</code>.
+</description>
+<component-example>
+    <fd-carousel-multiple-active-item></fd-carousel-multiple-active-item>
+</component-example>
+<code-example [exampleFiles]="carouselMultiItem"></code-example>
+
+<fd-docs-section-title id="carousel-no-page-indicator" componentName="carousel">
+    Carousel with no page indicator
+</fd-docs-section-title>
+<description>
+    Page indicator is optional in carousel. It has option to hide page indicator by setting
+    <code>pageIndicator=false</code>.
+</description>
+<component-example>
+    <fd-carousel-no-page-indicator></fd-carousel-no-page-indicator>
+</component-example>
+<code-example [exampleFiles]="carouselNoIndicator"></code-example>
+
+<fd-docs-section-title id="carousel-hidden-navigation" componentName="carousel">
+    Carousel with hidden navigation buttons
+</fd-docs-section-title>
+<description>
+    In Mobile display, navigation buttons are not required for carousel. Navigation will be done by swiping the active
+    item, either left side or right side.
+</description>
+<component-example>
+    <fd-carousel-hidden-navigation></fd-carousel-hidden-navigation>
+</component-example>
+<code-example [exampleFiles]="carouselHiddenNavigation"></code-example>
+
+<fd-docs-section-title id="carousel-content-navigation" componentName="carousel">
+    Carousel with navigation inside content area
+</fd-docs-section-title>
+<description>
+    Navigation buttons can be placed in page indicator as well as inside content area.By default navigation button is
+    placed inside page indicator container. For placing navigation button
+    inside content area use <code>navigatorInPageIndicator=false</code>.
+</description>
+<component-example>
+    <fd-carousel-content-navigation></fd-carousel-content-navigation>
+</component-example>
+<code-example [exampleFiles]="carouselContentNavigator"></code-example>
+
+<fd-docs-section-title id="carousel-looped-navigation" componentName="carousel">
+    Carousel with looped navigation
+</fd-docs-section-title>
+<description>
+    Carousel item navigation can be looped by setting <code>loop=true</code>. By default <code>loop</code>
+    is false and looping is not enabled on carousel.
+</description>
+<component-example>
+    <fd-carousel-looped-navigation></fd-carousel-looped-navigation>
+</component-example>
+<code-example [exampleFiles]="carouselLoopedNavigation"></code-example>
+
+<fd-docs-section-title id="carousel-error-message" componentName="carousel">
+    Carousel error message when no item is loaded
+</fd-docs-section-title>
+<description>
+    Error message can be displayed as carousel content when loading item is not successful.
+</description>
+<component-example>
+    <fd-carousel-error-message></fd-carousel-error-message>
+</component-example>
+<code-example [exampleFiles]="carouselErrorMessage"></code-example>

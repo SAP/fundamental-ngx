@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     forwardRef,
     Input,
@@ -10,14 +11,15 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
+import { DatePipe } from '@angular/common';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Placement } from 'popper.js';
+
+import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
+import { Placement } from '../popover/popover-position/popover-position';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarService } from '../calendar/calendar.service';
 import { FdRangeDate } from '../calendar/models/fd-range-date';
 import { DateFormatParser } from './format/date-parser';
-import { DatePipe } from '@angular/common';
 import { FormStates } from '../form/form-control/form-states';
 import { CalendarYearGrid, SpecialDayRule } from '../..';
 
@@ -134,7 +136,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** The element to which the popover should be appended. */
     @Input()
-    appendTo: HTMLElement | 'body' = 'body';
+    appendTo: ElementRef;
 
     /** Whether the date picker is disabled. */
     @Input()
