@@ -9,11 +9,19 @@ import {
     ChangeDetectionStrategy,
     SimpleChanges,
     HostBinding,
-    ViewEncapsulation
+    ViewEncapsulation,
+    ViewChild,
+    OnDestroy,
+    ChangeDetectorRef
 } from '@angular/core';
+import { ENTER, SPACE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { Subject, Subscription } from 'rxjs';
+import { distinctUntilChanged, debounceTime, tap } from 'rxjs/operators';
+import { PopperOptions } from 'popper.js';
 
-import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
-import { INDICATOR_RANGE, INDICATOR_PREFIX, INDICATOR_CLASSES, RatingIndicatorSize } from '../constants';
+import { CssClassBuilder, applyCssClass, KeyUtil } from '../../utils/public_api';
+import { PopoverComponent } from '../../popover/popover.component';
+import { INDICATOR_DEFAULT_TOTAL, INDICATOR_RANGE, INDICATOR_PREFIX, INDICATOR_CLASSES, RatingIndicatorSize } from '../constants';
 
 let ratingUID = 0;
 
@@ -36,7 +44,7 @@ interface NumberKey<T> {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuilder {
+export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, CssClassBuilder {
     /** User's custom classes */
     @Input()
     class: string;
@@ -68,8 +76,8 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
      */
     @Input()
     set indicatorTotal(value: number) {
-        if (isNaN(+value)) {
-            this._indicatorTotal = 5;
+        if (isNaN(value)) {
+            this._indicatorTotal = INDICATOR_DEFAULT_TOTAL;
         } else {
             this._indicatorTotal = Math.max(INDICATOR_RANGE.min, Math.min(INDICATOR_RANGE.max, +value));
         }
@@ -78,7 +86,6 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     /**
      * Whether or not to display half values.
      */
-
     @Input()
     allowHalves = false;
 
@@ -131,12 +138,21 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     @Input()
     dynamicTextIndicator = 'of';
 
+    @Input()
+    navigationNote = 'Please press enter/space for the vote.';
+
     /**
      * Fired when the user sets or changes their rating.
      */
     @Output()
     ratingChanged = new EventEmitter<number>();
 
+    /** @hidden */
+    @ViewChild(PopoverComponent, { static: false })
+    navigationArrowNote: PopoverComponent;
+
+    /** @hidden */
+    $navigationArrowNote = new Subject();
     /** @hidden */
     _icons: { id: string; value: number }[] = [];
     /** @hidden */
@@ -148,15 +164,26 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     private _ratingUID = ratingUID++;
     /** @hidden */
-    private _indicatorTotal = 5;
+    private _indicatorTotal = INDICATOR_DEFAULT_TOTAL;
     /** @hidden */
     private _value = 0;
     /** @hidden */
     private _hideDynamicText = false;
+    /** @hidden */
+    private _navigationArrowNoteSub: Subscription;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) { }
+    constructor(
+        private readonly _elementRef: ElementRef,
+        private readonly _cdr: ChangeDetectorRef
+    ) { }
 
+    /** @hidden */
+    get _arrowNavigationOptions(): PopperOptions {
+        return {
+            placement: 'top-end'
+        };
+    };
     /** @hidden */
     get viewRatingUID(): number {
         return this._ratingUID;
@@ -176,6 +203,19 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
         this._icons = this._getRates();
         this.buildComponentCssClass();
         this._generateRatings();
+        this._navigationArrowNoteSub = this.$navigationArrowNote.pipe(
+            debounceTime(100),
+            distinctUntilChanged(),
+            tap({
+                next: (state: boolean) => {
+                    if (!state) {
+                        this.navigationArrowNote.close();
+                        this._cdr.detectChanges();
+                    }
+
+                }
+            })
+        ).subscribe();
     }
 
     /** @hidden */
@@ -201,6 +241,11 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
+    ngOnDestroy(): void {
+        this._navigationArrowNoteSub.unsubscribe();
+    }
+
+    /** @hidden */
     trackByFn(index: number, item: { id: string; value: number }): number | string {
         if (item.id) {
             return item.id;
@@ -212,6 +257,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     onSelect(value: number): void {
         this.value = this._value = value;
+        this.navigationArrowNote.close();
         this.ratingChanged.emit(value);
     }
 
@@ -235,43 +281,73 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
             this.class
         ];
     }
+/** @hidden */
+    onFocus(): void {
+        this.$navigationArrowNote.next(true);
+    }
+/** @hidden */
+    onBlur(): void {
+        this.$navigationArrowNote.next(false);
+    }
+
+    onKeydown(event: KeyboardEvent, rateValue: number): void {
+        if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
+            this.navigationArrowNote.open();
+        }
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            this.onSelect(rateValue);
+        }
+    }
 
     /** @hidden */
     private _generateRatings(): void {
-        if (this.ratings) {
-            let sum = 0;
-            let allVoites = 0;
-            const items = [];
-
-            for (const key in this.ratings) {
-                if (key) {
-                    const _key = +key;
-                    if (_key < INDICATOR_RANGE.min || _key > INDICATOR_RANGE.max) {
-                        continue;
-                    }
-                    if (this.ratings[key]) {
-                        sum += _key * this.ratings[key];
-                        allVoites += this.ratings[key];
-                        items.push({
-                            rate: _key,
-                            total: this.ratings[key]
-                        });
-                    }
-                }
-            }
-            this._ratingItems = items;
-            this.ratingAverage = sum / allVoites * 10;
-            this.totalRatings = allVoites;
-            this._value = this._convertToValue();
+        if (!this.ratings) {
+            return;
         }
+        const ratings = Object.entries(this.ratings);
+        // simple validation for input rating's data
+        const isValid = ratings.some(([key, value]) => !isNaN(+key) && !isNaN(+value));
+        if (!isValid) {
+            return;
+        }
+        let sum = 0;
+        let allVotes = 0;
 
+        const items = ratings
+            .filter(([key]) => key)
+            .reduce((acc, [key, votes]) => {
+                const _key = +key;
+                if (_key < 0 || _key > INDICATOR_RANGE.max) {
+                    return acc;
+                }
+                sum += _key * votes;
+                allVotes += votes;
+                acc.push({
+                    rate: _key,
+                    total: votes
+                });
+
+                return acc;
+            }, []);
+
+        this._ratingItems = items;
+        this.ratingAverage = sum / allVotes;
+        this.totalRatings = allVotes;
+        this._value = this._convertToValue();
     }
-
+/**
+ * get converted viewValue for render in component template from original value if it still exist, or ratingAverage.
+ */
     /** @hidden */
     private _convertToValue(): number {
         return this.value ? this._parseValue(+this.value) : this._parseValue(this.ratingAverage);
     }
-
+/**
+ * get converted value from original to view value with depends on halves
+ * For example,
+ *  original value is equal to 2.34, you will get and render 2
+ *  original value is equal to 3.74, you will get and render 4
+ */
     /** @hidden */
     private _parseValue(value: number): number {
         if (value === 0) {
@@ -289,7 +365,9 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
 
         return Math.min(this.indicatorCount, v);
     }
-
+/**
+ * get rating icons array with value and unic id
+ */
     /** @hidden */
     private _getRates(): { id: string; value: number }[] {
         const withHalves = this.allowHalves ? 2 : 1;

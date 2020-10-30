@@ -1,36 +1,48 @@
-<div class="fd-rating-indicator__container">
-    <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
-    <ng-container *ngTemplateOutlet="zeroRate"></ng-container>
-    <ng-container *ngIf="allowHalves">
-        <ng-container *ngTemplateOutlet="zeroRate; context: { halves: true }"></ng-container>
-    </ng-container>
-    <!-- Available rate values -->
-    <ng-container *ngFor="let rate of _icons; index as i; trackBy: trackByFn">
-        <input
-            [attr.aria-label]="(i + 1) + '-star'"
-            type="radio"
-            class="fd-rating-indicator__input"
-            [disabled]="disabled"
-            [id]="rate.id"
-            name="rating-{{ viewRatingUID }}"
-            [value]="rate.value"
-            [checked]="viewValue === rate.value"
-            (keydown.enter)="onSelect(rate.value)"
-            (keydown.space)="onSelect(rate.value)"
-        />
-        <label (click)="onSelect(rate.value)" class="fd-rating-indicator__label" [for]="rate.id">
-            <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
-            <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
-        </label>
-    </ng-container>
-</div>
+<fd-popover
+    [triggers]="[]"
+    [noArrow]="false"
+    [closeOnOutsideClick]="false"
+    addContainerClass="fd-rating-indicator__popover-navigation"
+    [options]="_arrowNavigationOptions"
+    #navigationArrowNote
+>
+    <fd-popover-control>
+        <div class="fd-rating-indicator__container">
+            <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
+            <ng-container *ngTemplateOutlet="zeroRate"></ng-container>
+            <!-- Available rate values -->
+            <ng-container *ngFor="let rate of _icons; index as i; trackBy: trackByFn">
+                <input
+                    [attr.aria-label]="(i + 1) + '-star'"
+                    type="radio"
+                    class="fd-rating-indicator__input"
+                    [disabled]="disabled"
+                    [id]="rate.id"
+                    name="rating-{{ viewRatingUID }}"
+                    [value]="rate.value"
+                    [checked]="viewValue === rate.value"
+                    (focus)="onFocus()"
+                    (blur)="onBlur()"
+                    (keydown)="onKeydown($event, rate.value)"
+                />
+                <label (click)="onSelect(rate.value)" class="fd-rating-indicator__label" [for]="rate.id">
+                    <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
+                    <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
+                </label>
+            </ng-container>
+        </div>
+    </fd-popover-control>
+    <fd-popover-body>
+        {{ navigationNote }}
+    </fd-popover-body>
+</fd-popover>
 <!-- Popover if displaySumPopover is true and we have ratings object -->
 <fd-popover
     [triggers]="['mouseenter', 'mouseleave']"
     [noArrow]="false"
     placement="top"
     addContainerClass="fd-rating-indicator__popover"
-    *ngIf="displaySumPopover && _ratingItems && _ratingItems.length; else dynamicText"
+    *ngIf="displaySumPopover && _ratingItems?.length; else dynamicText"
 >
     <fd-popover-control>
         <span class="fd-rating-indicator__dynamic-text">
@@ -68,4 +80,11 @@
         [checked]="viewValue === 0"
     />
     <label class="fd-rating-indicator__zero-rating fd-rating-indicator__label"></label>
+</ng-template>
+
+
+<ng-template #arrowNavigationNote>
+    <div class="fd-rating-indicator__popover-navigation">
+        {{ navigationNote }}
+    </div>
 </ng-template>

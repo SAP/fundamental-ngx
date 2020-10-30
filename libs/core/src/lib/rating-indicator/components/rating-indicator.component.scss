@@ -20,6 +20,7 @@ $block: fd-rating-indicator;
     }
     .rates {
       margin-right: 0.5rem;
+      display: flex;
     }
   }
 
@@ -29,6 +30,11 @@ $block: fd-rating-indicator;
     width: 0 !important;
     overflow: hidden !important;
     opacity: 0.0001 !important;
+  }
+
+  &__popover-navigation fd-popover-body {
+    display: block;
+    padding: 0.25rem 0.5rem;
   }
 }
 

@@ -5,7 +5,7 @@ export const INDICATOR_CLASSES = {
     icon: `${INDICATOR_PREFIX}--icon`,
     hideDynamicText: `${INDICATOR_PREFIX}--hide-dynamic-text`
 };
-
+export const INDICATOR_DEFAULT_TOTAL = 5;
 export const INDICATOR_RANGE = {
     min: 3,
     max: 7

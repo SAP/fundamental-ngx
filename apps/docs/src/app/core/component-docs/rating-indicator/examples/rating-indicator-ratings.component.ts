@@ -14,10 +14,12 @@ export class RatingIndicatorRatingsComponent {
     testRatingData2 = {
         1: 1,
         2: 100,
-        5: 1
+        5: 1,
+        7: 10
     };
     testRatingData3 = {
         3: 1,
         5: 3
     };
+    testRatingData4 = [1, 2, 3, 4, 5];
 }

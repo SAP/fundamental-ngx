@@ -288,29 +288,29 @@
   overflow: hidden;
   width: .6875rem
 }
-.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: .1875rem;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse
 }
-.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   left: -.6875rem;
   position: relative
 }
-.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: 0;
   margin-left: .1875rem
 }
-.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl] [class*=sap-icon]:before,
-[dir=rtl] .fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl] [class*=sap-icon]:before,
+[dir=rtl] .fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   right: -.6875rem;
   left: auto
 }
-.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl]:last-child,
-[dir=rtl] .fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4):last-child {
+.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl]:last-child,
+[dir=rtl] .fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6):last-child {
   margin-left: 0
 }
 .fd-rating-indicator--half-star .fd-rating-indicator__label:last-child {
@@ -320,11 +320,11 @@
 [dir=rtl] .fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label {
   background-position: right
 }
-.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: right
 }
-.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: left
 }
 .fd-rating-indicator.fd-rating-indicator--icon .fd-rating-indicator__label {
@@ -385,29 +385,29 @@
   overflow: hidden;
   width: .75rem
 }
-.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: .1875rem;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse
 }
-.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   left: -.75rem;
   position: relative
 }
-.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: 0;
   margin-left: .1875rem
 }
-.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl] [class*=sap-icon]:before,
-[dir=rtl] .fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl] [class*=sap-icon]:before,
+[dir=rtl] .fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   right: -.75rem;
   left: auto
 }
-.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl]:last-child,
-[dir=rtl] .fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4):last-child {
+.fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl]:last-child,
+[dir=rtl] .fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6):last-child {
   margin-left: 0
 }
 .fd-rating-indicator--cozy.fd-rating-indicator--half-star .fd-rating-indicator__label:last-child {
@@ -417,11 +417,11 @@
 [dir=rtl] .fd-rating-indicator--cozy.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label {
   background-position: right
 }
-.fd-rating-indicator--cozy.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--cozy.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: right
 }
-.fd-rating-indicator--cozy.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--cozy.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--cozy.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--cozy.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: left
 }
 .fd-rating-indicator--cozy.fd-rating-indicator--icon .fd-rating-indicator__label {
@@ -464,29 +464,29 @@
   overflow: hidden;
   width: .5rem
 }
-.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: .125rem;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse
 }
-.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   left: -.5rem;
   position: relative
 }
-.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: 0;
   margin-left: .125rem
 }
-.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl] [class*=sap-icon]:before,
-[dir=rtl] .fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl] [class*=sap-icon]:before,
+[dir=rtl] .fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   right: -.5rem;
   left: auto
 }
-.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl]:last-child,
-[dir=rtl] .fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4):last-child {
+.fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl]:last-child,
+[dir=rtl] .fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6):last-child {
   margin-left: 0
 }
 .fd-rating-indicator--compact.fd-rating-indicator--half-star .fd-rating-indicator__label:last-child {
@@ -496,11 +496,11 @@
 [dir=rtl] .fd-rating-indicator--compact.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label {
   background-position: right
 }
-.fd-rating-indicator--compact.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--compact.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: right
 }
-.fd-rating-indicator--compact.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--compact.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--compact.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--compact.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: left
 }
 .fd-rating-indicator--compact.fd-rating-indicator--icon .fd-rating-indicator__label {
@@ -542,29 +542,29 @@
   overflow: hidden;
   width: .5rem
 }
-.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: .125rem;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse
 }
-.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   left: -.5rem;
   position: relative
 }
-.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: 0;
   margin-left: .125rem
 }
-.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl] [class*=sap-icon]:before,
-[dir=rtl] .fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl] [class*=sap-icon]:before,
+[dir=rtl] .fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   right: -.5rem;
   left: auto
 }
-.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl]:last-child,
-[dir=rtl] .fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4):last-child {
+.fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl]:last-child,
+[dir=rtl] .fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6):last-child {
   margin-left: 0
 }
 .fd-rating-indicator--condensed.fd-rating-indicator--half-star .fd-rating-indicator__label:last-child {
@@ -574,11 +574,11 @@
 [dir=rtl] .fd-rating-indicator--condensed.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label {
   background-position: right
 }
-.fd-rating-indicator--condensed.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--condensed.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: right
 }
-.fd-rating-indicator--condensed.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--condensed.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--condensed.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--condensed.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: left
 }
 .fd-rating-indicator--condensed.fd-rating-indicator--icon .fd-rating-indicator__label {
@@ -620,29 +620,29 @@
   overflow: hidden;
   width: .375rem
 }
-.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: 1px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse
 }
-.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   left: -.375rem;
   position: relative
 }
-.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: 0;
   margin-left: 1px
 }
-.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl] [class*=sap-icon]:before,
-[dir=rtl] .fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl] [class*=sap-icon]:before,
+[dir=rtl] .fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   right: -.375rem;
   left: auto
 }
-.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl]:last-child,
-[dir=rtl] .fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4):last-child {
+.fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl]:last-child,
+[dir=rtl] .fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6):last-child {
   margin-left: 0
 }
 .fd-rating-indicator--xs.fd-rating-indicator--half-star .fd-rating-indicator__label:last-child {
@@ -652,11 +652,11 @@
 [dir=rtl] .fd-rating-indicator--xs.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label {
   background-position: right
 }
-.fd-rating-indicator--xs.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--xs.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: right
 }
-.fd-rating-indicator--xs.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--xs.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--xs.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--xs.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: left
 }
 .fd-rating-indicator--xs.fd-rating-indicator--icon .fd-rating-indicator__label {
@@ -698,29 +698,29 @@
   overflow: hidden;
   width: .5rem
 }
-.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: .125rem;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse
 }
-.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   left: -.5rem;
   position: relative
 }
-.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: 0;
   margin-left: .125rem
 }
-.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl] [class*=sap-icon]:before,
-[dir=rtl] .fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl] [class*=sap-icon]:before,
+[dir=rtl] .fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   right: -.5rem;
   left: auto
 }
-.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl]:last-child,
-[dir=rtl] .fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4):last-child {
+.fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl]:last-child,
+[dir=rtl] .fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6):last-child {
   margin-left: 0
 }
 .fd-rating-indicator--sm.fd-rating-indicator--half-star .fd-rating-indicator__label:last-child {
@@ -730,11 +730,11 @@
 [dir=rtl] .fd-rating-indicator--sm.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label {
   background-position: right
 }
-.fd-rating-indicator--sm.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--sm.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: right
 }
-.fd-rating-indicator--sm.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--sm.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--sm.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--sm.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: left
 }
 .fd-rating-indicator--sm.fd-rating-indicator--icon .fd-rating-indicator__label {
@@ -776,29 +776,29 @@
   overflow: hidden;
   width: .6875rem
 }
-.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: .1875rem;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse
 }
-.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   left: -.6875rem;
   position: relative
 }
-.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: 0;
   margin-left: .1875rem
 }
-.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl] [class*=sap-icon]:before,
-[dir=rtl] .fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl] [class*=sap-icon]:before,
+[dir=rtl] .fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   right: -.6875rem;
   left: auto
 }
-.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl]:last-child,
-[dir=rtl] .fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4):last-child {
+.fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl]:last-child,
+[dir=rtl] .fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6):last-child {
   margin-left: 0
 }
 .fd-rating-indicator--md.fd-rating-indicator--half-star .fd-rating-indicator__label:last-child {
@@ -808,11 +808,11 @@
 [dir=rtl] .fd-rating-indicator--md.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label {
   background-position: right
 }
-.fd-rating-indicator--md.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--md.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: right
 }
-.fd-rating-indicator--md.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--md.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--md.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--md.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: left
 }
 .fd-rating-indicator--md.fd-rating-indicator--icon .fd-rating-indicator__label {
@@ -854,29 +854,29 @@
   overflow: hidden;
   width: 1rem
 }
-.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: .25rem;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse
 }
-.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   left: -1rem;
   position: relative
 }
-.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) {
   margin-right: 0;
   margin-left: .25rem
 }
-.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl] [class*=sap-icon]:before,
-[dir=rtl] .fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4) [class*=sap-icon]:before {
+.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl] [class*=sap-icon]:before,
+[dir=rtl] .fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6) [class*=sap-icon]:before {
   right: -1rem;
   left: auto
 }
-.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl]:last-child,
-[dir=rtl] .fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+4):last-child {
+.fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl]:last-child,
+[dir=rtl] .fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:nth-child(4n+6):last-child {
   margin-left: 0
 }
 .fd-rating-indicator--lg.fd-rating-indicator--half-star .fd-rating-indicator__label:last-child {
@@ -886,11 +886,11 @@
 [dir=rtl] .fd-rating-indicator--lg.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label {
   background-position: right
 }
-.fd-rating-indicator--lg.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--lg.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: right
 }
-.fd-rating-indicator--lg.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4)[dir=rtl],
-[dir=rtl] .fd-rating-indicator--lg.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+4) {
+.fd-rating-indicator--lg.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6)[dir=rtl],
+[dir=rtl] .fd-rating-indicator--lg.fd-rating-indicator--half-star.fd-rating-indicator--icon .fd-rating-indicator__label:nth-child(4n+6) {
   background-position: left
 }
 .fd-rating-indicator--lg.fd-rating-indicator--icon .fd-rating-indicator__label {
