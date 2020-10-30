@@ -15,7 +15,7 @@ export class FixedCardLayoutDocsComponent {
         {
             language: 'html',
             code: fixedCardLayoutH,
-            fileName: 'fixed-card-layout-platform-platform-feed-input-examples'
+            fileName: 'fixed-card-layout-examples'
         }
     ];
 
@@ -37,13 +37,13 @@ export class FixedCardLayoutDocsComponent {
         {
             language: 'html',
             code: mobileFixedCardlayoutH,
-            fileName: 'fixed-card-layout-mobile-platform-platform-feed-input-examples'
+            fileName: 'fixed-card-layout-mobile-examples'
         },
         {
             language: 'typescript',
             component: 'FixedCardLayoutMobileExampleComponent',
             code: mobileFixedCardlayoutTs,
-            fileName: 'fixed-card-layout-mobile-platform-platform-feed-input-examples'
+            fileName: 'fixed-card-layout-mobile-examples'
         }
     ];
 }

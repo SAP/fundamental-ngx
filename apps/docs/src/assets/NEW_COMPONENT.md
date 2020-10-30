@@ -158,7 +158,7 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { PosterDocsComponent } from './poster-docs.component';
-import { PosterExampleComponent } from './platform-platform-feed-input-examples/poster-example.component';
+import { PosterExampleComponent } from './examples/poster-example.component';
 import { PosterHeaderComponent } from './poster-header/poster-header.component';
 import { PosterModule } from '@fundamental-ngx/core';
 

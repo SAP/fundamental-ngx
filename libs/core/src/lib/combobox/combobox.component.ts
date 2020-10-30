@@ -87,7 +87,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     dropdownValues: any[] = [];
 
     /** Filter function. Accepts an array of objects and a search term as arguments
-     * and returns a string. See search input platform-platform-feed-input-examples for details. */
+     * and returns a string. See search input examples for details. */
     @Input()
     filterFn: Function = this._defaultFilter;
 
@@ -129,7 +129,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /**
      * The template with which to display the individual listed items.
-     * Use it by passing an ng-template with implicit content. See platform-platform-feed-input-examples for more info.
+     * Use it by passing an ng-template with implicit content. See examples for more info.
      */
     @Input()
     itemTemplate: TemplateRef<any>;
@@ -180,7 +180,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
      * An arrow function can be used to access the *this* keyword in the calling component.
-     * See search input platform-platform-feed-input-examples for details. */
+     * See search input examples for details. */
     @Input()
     displayFn: Function = this._defaultDisplay;
 

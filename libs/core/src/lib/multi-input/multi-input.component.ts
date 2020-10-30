@@ -111,20 +111,20 @@ export class MultiInputComponent implements
 
     /** Filter function. Accepts an array and a string as arguments, and outputs an array.
      * An arrow function can be used to access the *this* keyword in the calling component.
-     * See multi input platform-platform-feed-input-examples for details. */
+     * See multi input examples for details. */
     @Input()
     filterFn: Function = this.defaultFilter;
 
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
      * An arrow function can be used to access the *this* keyword in the calling component.
-     * See multi input platform-platform-feed-input-examples for details. */
+     * See multi input examples for details. */
     @Input()
     displayFn: Function = this.defaultDisplay;
 
     /** Parse function. Used for submitting new tokens. Accepts a string by default.
      * An arrow function can be used to access the *this* keyword in the calling component.
-     * See multi input platform-platform-feed-input-examples for details. */
+     * See multi input examples for details. */
     @Input()
     newTokenParseFn: Function = this.defaultParse;
 

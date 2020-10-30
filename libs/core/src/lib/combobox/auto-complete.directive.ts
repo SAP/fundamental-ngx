@@ -32,7 +32,7 @@ export class AutoCompleteDirective {
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
      * An arrow function can be used to access the *this* keyword in the calling component.
-     * See search input platform-platform-feed-input-examples for details. */
+     * See search input examples for details. */
     @Input()
     displayFn: Function = this._defaultDisplay;
 

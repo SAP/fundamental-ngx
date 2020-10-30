@@ -88,15 +88,15 @@ describe('KeyUtil', () => {
             }
         ];
 
-        it('should identify positive key platform-platform-feed-input-examples', () =>
+        it('should identify positive key examples', () =>
             positiveTestValues.forEach(example => expect(KeyUtil.isKeyCode(example.event, example.keyCode)).toBeTrue())
         );
 
-        it('should identify negative key platform-platform-feed-input-examples', () =>
+        it('should identify negative key examples', () =>
             negativeTestValues.forEach(example => expect(KeyUtil.isKeyCode(example.event, example.keyCode)).toBeFalse())
         );
 
-        it('should throw error for broken platform-platform-feed-input-examples', () => {
+        it('should throw error for broken examples', () => {
             if (isDevMode()) {
                 errorTestValues.forEach(example => expect(() => KeyUtil.isKeyCode(example.event, example.keyCode)).toThrow())
             }
@@ -200,15 +200,15 @@ describe('KeyUtil', () => {
             }
         ];
 
-        it('should identify positive keyType platform-platform-feed-input-examples', () =>
+        it('should identify positive keyType examples', () =>
             positiveTestValues.forEach(example => expect(KeyUtil.isKeyType(example.event, example.keyType)).toBeTrue())
         );
 
-        it('should identify negative keyType platform-platform-feed-input-examples', () =>
+        it('should identify negative keyType examples', () =>
             negativeTestValues.forEach(example => expect(KeyUtil.isKeyType(example.event, example.keyType)).toBeFalse())
         );
 
-        it('should throw error for broken keyType platform-platform-feed-input-examples', () => {
+        it('should throw error for broken keyType examples', () => {
             if (isDevMode()) {
                 errorTestValues.forEach(example => expect(() => KeyUtil.isKeyType(example.event, example.keyType)).toThrow())
             }

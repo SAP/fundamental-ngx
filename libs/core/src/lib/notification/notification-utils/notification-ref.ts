@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 /**
  * Reference to a notification component generated via the NotificationService.
  * It can be injected into the content component through the constructor.
- * For a template, it is declared as part of the implicit context, see platform-platform-feed-input-examples.
+ * For a template, it is declared as part of the implicit context, see examples.
  */
 export class NotificationRef {
     private readonly _afterClosed = new Subject<any>();
