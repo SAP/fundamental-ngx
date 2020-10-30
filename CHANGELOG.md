@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.8...v0.23.1-rc.9) (2020-10-30)
+
+
+### Features
+
+* (Core) migrate popper.js to cdk ([#3582](https://github.com/SAP/fundamental-ngx/issues/3582)) ([c4bb57b](https://github.com/SAP/fundamental-ngx/commit/c4bb57b752bf83fa784afadf93d90e15bf10c8ef))
+
 ### [0.23.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.7...v0.23.1-rc.8) (2020-10-30)
 
 
