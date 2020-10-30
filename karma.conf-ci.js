@@ -37,6 +37,13 @@ module.exports = function (config) {
             browserName: 'MicrosoftEdge',
             version: 'latest'
         },
+        sl_ipad_macOS: {
+            base: 'SauceLabs',
+            platform: 'macOS 10.15',
+            browserName: 'ipad',
+            deviceOrientation: 'portrait',
+            version: 'latest'
+        },
         sl_firefox_win: {
             base: 'SauceLabs',
             platform: 'windows 10',
