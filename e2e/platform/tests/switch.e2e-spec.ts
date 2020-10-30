@@ -216,7 +216,7 @@ describe('Verify Switch component', function() {
         });*/
     });
 
-    xdescribe('has correct page content', function() {
+/*    xdescribe('has correct page content', function() {
         // TODO: add page content checks
-    });
+    });*/
 });

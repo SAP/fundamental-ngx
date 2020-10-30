@@ -7,7 +7,7 @@ import {
     getValueOfAttributeValue,
     hoverMouse,
     setInput,
-    waitForTextToBePresentInElementValue
+    waitForTextToBePresentInElementValue, waitForVisible
 } from '../helper/helper';
 
 
@@ -243,6 +243,7 @@ describe('Verify Textarea component', function() {
 
             it('should have popover with text', async () => {
                 await hoverMouse(await textareaPage.basicTextAreaPopoverIcon).then(async () => {
+                    await waitForVisible(await textareaPage.basicTextAreaPopoverBody);
                     const popoverText = await textareaPage.basicTextAreaPopoverBody.getText();
                     expect(popoverText).toBe(textAreaPageContent.basic_text_area_popover);
                 });

@@ -17,8 +17,8 @@ exports.config = {
 },
   directConnect: true,
   // baseUrl: 'https://sap.github.io/fundamental-ngx/#',
-  // baseUrl: 'http://localhost:4200/#/',
-  baseUrl: 'https://fundamental-ngx.netlify.app/#/',
+   // baseUrl: 'http://localhost:4200/#/',
+    baseUrl: 'https://fundamental-ngx.netlify.app/#/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

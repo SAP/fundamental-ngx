@@ -10,7 +10,7 @@ import {
 import { checkIfDisabled } from '../helper/assertion-helper';
 import { ElementFinder } from 'protractor';
 
-describe('Link component test suite', () => {
+describe('Link component test suite', function() {
     const linkPage = new LinkPo();
 
     beforeAll(async () => {
@@ -128,7 +128,6 @@ describe('Link component test suite', () => {
     });
 
 });
-
 
 async function checkLinkData(element: ElementFinder): Promise<void> {
     expect(await getValueOfAttribute(element, 'type')).toEqual('text');
