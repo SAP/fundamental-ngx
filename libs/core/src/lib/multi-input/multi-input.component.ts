@@ -19,11 +19,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
-import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { FormStates } from '../form/form-control/form-states';
 import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection } from '../utils/public_api';
 import { KeyUtil } from '../utils/functions';
+import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
@@ -331,6 +331,10 @@ export class MultiInputComponent implements
         if (!this.mobile) {
             this._popoverOpenHandle(open);
         }
+
+        if (!this.open) {
+            this.searchInputElement.nativeElement.focus();
+        }
         this._changeDetRef.detectChanges();
     }
 
@@ -357,7 +361,7 @@ export class MultiInputComponent implements
 
         // Handle popover placement update
         if (this._shouldPopoverBeUpdated(previousLength, this.selected.length)) {
-            this.popoverRef.updatePopover();
+            this.popoverRef.refreshPosition();
         }
 
         // On Mobile mode changes are propagated only on approve.

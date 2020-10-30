@@ -35,7 +35,7 @@ export class PopoverDynamicExampleComponent {
     ];
 
     updatePopover(): void {
-        this.popoverComponent.updatePopover();
+        this.popoverComponent.refreshPosition();
         this.changeDetectionRef.detectChanges();
     }
 }

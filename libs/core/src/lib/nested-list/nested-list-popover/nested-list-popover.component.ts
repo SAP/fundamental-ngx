@@ -112,7 +112,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
         this._keyboardNestService.refresh$.subscribe(() => {
             /** Update popover position, on list of hidden items change */
             if (this.popoverComponent) {
-                this.popoverComponent.updatePopover();
+                this.popoverComponent.refreshPosition();
             }
         });
     }

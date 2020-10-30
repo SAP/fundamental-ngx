@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     HostBinding,
     HostListener,
     Input,
@@ -67,21 +68,26 @@ export class OptionComponent implements OnInit, OnDestroy {
     selected = false;
 
     /** @hidden */
+    selectionEvent = new EventEmitter<KeyboardEvent>()
+
+    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
     @HostListener('click')
     @HostListener('keydown', ['$event'])
     selectionHandler(event?: KeyboardEvent): void {
-        if (!event || event && KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
+        if (!event || (event && KeyUtil.isKeyCode(event, [SPACE, ENTER]))) {
             if (!this.disabled) {
                 this.setSelected(true, true);
             }
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+            }
         }
+        this.selectionEvent.emit(event);
     }
 
     /** @hidden */
