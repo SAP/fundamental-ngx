@@ -23,13 +23,12 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
-import { fromEvent, Subscription } from 'rxjs';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { PopperOptions } from 'popper.js';
-import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
-import { createFocusTrap, FocusTrap } from 'focus-trap';
+import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { KeyUtil } from '../utils/functions';
 import { SelectProxy } from './select-proxy.service';
-import { buffer, debounceTime, filter, map } from 'rxjs/operators';
+import { buffer, debounceTime, filter, map, startWith, takeUntil } from 'rxjs/operators';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { DIALOG_CONFIG, DialogConfig } from '../dialog/dialog-utils/dialog-config.class';
@@ -148,7 +147,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
 
     /** The element to which the popover should be appended. */
     @Input()
-    appendTo: HTMLElement | 'body';
+    appendTo: ElementRef;
 
     /**
      * If the option should be unselected and value changed to undefined, when the current value is
@@ -210,10 +209,10 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     private _options: OptionComponent[];
 
     /** @hidden */
-    private _focusTrap: FocusTrap;
-
-    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
+
+    /** An RxJS Subject that will kill the current data stream (for unsubscribing)  */
+    private readonly _refresh$ = new Subject<void>();
 
     /** @hidden */
     onChange: Function = () => {};
@@ -266,7 +265,6 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
 
     /** @hidden */
     ngOnInit(): void {
-        this._setupFocusTrap();
         this._listenOnSelectedOption();
         this._listenOptionFiltering();
     }
@@ -275,6 +273,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     ngAfterContentInit(): void {
         this.resizeScrollHandler();
         this._listenOnOptionChanges();
+        this._listenOnOptionKeydown();
         this._setSelectViewValue();
     }
 
@@ -314,7 +313,6 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
         if (this.isInteractive) {
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
-            this._focusTrap.activate();
             this._focusOption('onOpen');
             this._changeDetectorRef.markForCheck();
         }
@@ -324,7 +322,6 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     close(): void {
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);
-        this._focusTrap.deactivate();
         this.focus();
         this._changeDetectorRef.markForCheck();
     }
@@ -378,6 +375,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
                 .subscribe(_ => {
                     this._setOptionsArray();
                     this._setSelectedOption();
+                    this._listenOnOptionKeydown();
                     setTimeout(() => {
                         if (this.selected === undefined && this.unselectMissingOption) {
                             this._updateValue(undefined);
@@ -387,6 +385,20 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
                     });
                 })
         )
+    }
+
+    /** @hidden */
+    private _listenOnOptionKeydown(): void {
+        this._refresh$.next();
+
+        this.options.forEach(option => {
+            this._subscriptions.add(
+                option.selectionEvent.pipe(
+                    takeUntil(this._refresh$),
+                    filter(event => !!event)
+                ).subscribe(event => this.keydownHandler(event))
+            )
+        })
     }
 
     private _listenOnControlTouched(): void {
@@ -406,20 +418,6 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
         if (!silent) {
             this.valueChange.emit(value);
             this.onChange(value);
-        }
-    }
-
-    /** @hidden */
-    private _setupFocusTrap(): void {
-        try {
-            this._focusTrap = createFocusTrap(this._elementRef.nativeElement, {
-                escapeDeactivates: false,
-                clickOutsideDeactivates: true,
-                returnFocusOnDeactivate: false,
-                allowOutsideClick: (event: MouseEvent) => true
-            });
-        } catch (e) {
-            console.warn('Attempted to focus trap the select, but no tabbable elements were found.', e);
         }
     }
 

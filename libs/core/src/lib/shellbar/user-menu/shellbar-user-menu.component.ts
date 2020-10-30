@@ -3,7 +3,7 @@ import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { MenuComponent } from '../../menu/menu.component';
 import { Placement, PopperOptions } from 'popper.js';
-import { PopoverFillMode } from '../../..';
+import { PopoverFillMode } from '../../popover/popover-position/popover-position';
 
 /**
  * This Component extends popover component and passes all of the options and events from outside to popover component
