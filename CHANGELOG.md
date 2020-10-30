@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.7...v0.23.1-rc.8) (2020-10-30)
+
+
+### Features
+
+* (Core) introduce new Carousel component ([#3551](https://github.com/SAP/fundamental-ngx/issues/3551)) ([2c625cb](https://github.com/SAP/fundamental-ngx/commit/2c625cb895e09af75999ecbf4a36e5b0febfe050))
+
 ### [0.23.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.6...v0.23.1-rc.7) (2020-10-29)
 
 ### [0.23.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.5...v0.23.1-rc.6) (2020-10-29)
