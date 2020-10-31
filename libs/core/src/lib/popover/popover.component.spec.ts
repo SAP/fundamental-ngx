@@ -142,11 +142,13 @@ describe('PopoverComponent', () => {
     });
 
     it('should apply correct arrow and margin styles and change', () => {
-        const firstDefaultPosition: ConnectedPosition = DefaultPositions[0];
+        const firstPosition: ConnectedPosition = DefaultPositions[0];
+        component.cdkPositions = [firstPosition];
+        component.fixedPosition = true;
         component.noArrow = false;
         component.open();
         fixture.detectChanges();
-        const arrowPosition = PopoverPosition.getArrowPosition(firstDefaultPosition);
+        const arrowPosition = PopoverPosition.getArrowPosition(firstPosition);
         expect(component.arrowPosition).toBe(arrowPosition);
         expect(component.marginStyle).toBe(PopoverPosition.getMarginStyle(arrowPosition));
 
