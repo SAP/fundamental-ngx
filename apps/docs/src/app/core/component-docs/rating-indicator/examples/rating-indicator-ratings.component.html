@@ -1,8 +1,8 @@
 <div class="base-row">
-    <h2>Rating indicator - display popover with ratings data and size=xs(extra small)</h2>
-    <pre>Test Rating Data1: {{ testRatingData1 | json }}</pre>
+    <h2>Popover with ratings data and size=xs(extra small)</h2>
+    <pre>Rating Data: {{ testRatingData1 | json }}</pre>
     <fd-rating-indicator
-        indicatorTotal="5"
+        indicatorCapacity="5"
         size="xs"
         [displaySumPopover]="true"
         [ratings]="testRatingData1"
@@ -14,12 +14,12 @@
         Select rate: {{ rate1.viewValue }}
     </div>
 </div>
-<h2>Rating indicator - display popover with ratings data and size=compact</h2>
+<h2>Ppopover with ratings data and size=compact</h2>
 <hr />
 <div class="base-row">
-    <pre>Test Rating Data2: {{ testRatingData2 | json }}</pre>
+    <pre>Rating Data: {{ testRatingData2 | json }}</pre>
     <fd-rating-indicator
-        indicatorTotal="7"
+        indicatorCapacity="7"
         size="compact"
         [displaySumPopover]="true"
         [ratings]="testRatingData2"
@@ -33,10 +33,10 @@
 </div>
 <hr />
 <div class="base-row">
-    <h2>Rating indicator - display popover with ratings data and size=lg(large)</h2>
-    <pre>Test Rating Data3: {{ testRatingData3 | json }}</pre>
+    <h2>Popover with ratings data and size=lg(large)</h2>
+    <pre>Rating Data: {{ testRatingData3 | json }}</pre>
     <fd-rating-indicator
-        indicatorTotal="5"
+        indicatorCapacity="5"
         size="lg"
         [displaySumPopover]="true"
         [ratings]="testRatingData3"
@@ -50,10 +50,10 @@
 </div>
 <hr />
 <div class="base-row">
-    <h2>Rating indicator - wrong ratings data</h2>
-    <pre>Test Rating Data3: {{ testRatingData4 | json }}</pre>
+    <h2>Wrong ratings data</h2>
+    <pre>Rating Data: {{ testRatingData4 | json }}</pre>
     <fd-rating-indicator
-        indicatorTotal="5"
+        indicatorCapacity="5"
         size="lg"
         [displaySumPopover]="true"
         [ratings]="testRatingData4"

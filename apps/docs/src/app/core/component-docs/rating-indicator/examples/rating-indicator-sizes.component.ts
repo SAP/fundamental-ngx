@@ -5,10 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './rating-indicator-sizes.component.html',
     styleUrls: ['./rating-indicator-style.component.scss']
 })
-export class RatingIndicatorSizesComponent {
+export class RatingIndicatorSizesExampleComponent {
     sizes = ['xs', 'sm', 'md', 'lg', 'cozy', 'compact', 'condensed'];
-
-    trackByFn(index: number): number {
-        return index;
-    }
 }

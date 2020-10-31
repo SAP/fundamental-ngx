@@ -10,23 +10,31 @@ import {
     SimpleChanges,
     HostBinding,
     ViewEncapsulation,
-    ViewChild,
-    OnDestroy,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    forwardRef
 } from '@angular/core';
-import { ENTER, SPACE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, debounceTime, tap } from 'rxjs/operators';
-import { PopperOptions } from 'popper.js';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { CssClassBuilder, applyCssClass, KeyUtil } from '../../utils/public_api';
-import { PopoverComponent } from '../../popover/popover.component';
-import { INDICATOR_DEFAULT_TOTAL, INDICATOR_RANGE, INDICATOR_PREFIX, INDICATOR_CLASSES, RatingIndicatorSize } from '../constants';
+import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
+import {
+    INDICATOR_DEFAULT_CAPACITY,
+    INDICATOR_CAPACITY_RANGE,
+    INDICATOR_PREFIX,
+    INDICATOR_CLASSES,
+    RatingIndicatorSize,
+    RatingIndicatorSizeEnum
+} from '../constants';
 
 let ratingUID = 0;
 
 interface NumberKey<T> {
     [key: number]: T;
+}
+
+interface RatingViewItem {
+    rate: number;
+    votes: number;
 }
 
 @Component({
@@ -42,12 +50,23 @@ interface NumberKey<T> {
         './rating-indicator.css'
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => RatingIndicatorComponent),
+            multi: true
+        }
+    ]
 })
-export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, CssClassBuilder {
+export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuilder, ControlValueAccessor {
     /** User's custom classes */
     @Input()
     class: string;
+
+    /** Sets [name] property of input. */
+    @Input()
+    name: string;
 
     /** User's aria-label attr */
     @Input()
@@ -60,7 +79,6 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
     @Input()
     @HostBinding('class.is-disabled')
     @HostBinding('attr.aria-disabled')
-    @HostBinding('attr.disable')
     disabled = false;
 
     /**
@@ -72,15 +90,12 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
     displayMode = false;
 
     /**
-     * Number of stars/icons/images to display. Max value is 7 and min valud is 3
+     * Number of stars/icons/images to display. Max value is 7 and min value is 3
      */
     @Input()
-    set indicatorTotal(value: number) {
-        if (isNaN(value)) {
-            this._indicatorTotal = INDICATOR_DEFAULT_TOTAL;
-        } else {
-            this._indicatorTotal = Math.max(INDICATOR_RANGE.min, Math.min(INDICATOR_RANGE.max, +value));
-        }
+    set indicatorCapacity(value: number) {
+        const val = coerceNumberProperty(value, INDICATOR_DEFAULT_CAPACITY);
+        this._indicatorCapacity = Math.max(INDICATOR_CAPACITY_RANGE.min, Math.min(INDICATOR_CAPACITY_RANGE.max, val));
     }
 
     /**
@@ -99,20 +114,20 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
      * Total number of ratings. If provided, will display text showing the total number of ratings.
      */
     @Input()
-    totalRatings: number | null = null;
+    totalRatings: number;
 
     /**
      * Rating average
      */
     @Input()
-    ratingAverage: number | null = null;
+    ratingAverage: number;
 
     /**
      * Object containing key-value pairs where the key is the rating and the value is the total sum of those ratings.
      * Overrides totalRatings and ratingAverage.
      */
     @Input()
-    ratings: NumberKey<number> | null = null;
+    ratings: NumberKey<number>;
 
     /**
      * Whether or not to display the popover that shows the sum of each rating. Requires [ratings] object.
@@ -124,10 +139,10 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
      * Icon class from fundamental-styles lib https://sap.github.io/fundamental-styles/?path=/docs/components-icon--sizes
      */
     @Input()
-    ratedIcon: string | null = null;
+    ratedIcon: string;
 
     @Input()
-    unratedIcon: string | null = null;
+    unratedIcon: string;
 
     /**
      * Possible values are 'xs', 'sm', 'md', 'lg', 'cozy', 'compact', 'condensed'
@@ -135,11 +150,11 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
     @Input()
     size: RatingIndicatorSize = 'md';
 
+    /**
+     * Text divider label between view value and indicator count.
+     */
     @Input()
-    dynamicTextIndicator = 'of';
-
-    @Input()
-    navigationNote = 'Please press enter/space for the vote.';
+    dynamicTextIndicator = 'of'
 
     /**
      * Fired when the user sets or changes their rating.
@@ -148,49 +163,31 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
     ratingChanged = new EventEmitter<number>();
 
     /** @hidden */
-    @ViewChild(PopoverComponent, { static: false })
-    navigationArrowNote: PopoverComponent;
-
+    _rates: { id: string; value: number }[] = [];
     /** @hidden */
-    $navigationArrowNote = new Subject();
-    /** @hidden */
-    _icons: { id: string; value: number }[] = [];
-    /** @hidden */
-    _ratingItems: {
-        rate: number;
-        total: number;
-    }[] = [];
+    _ratingItems: RatingViewItem[] = [];
 
     /** @hidden */
     private _ratingUID = ratingUID++;
     /** @hidden */
-    private _indicatorTotal = INDICATOR_DEFAULT_TOTAL;
+    private _indicatorCapacity = INDICATOR_DEFAULT_CAPACITY;
     /** @hidden */
     private _value = 0;
     /** @hidden */
     private _hideDynamicText = false;
-    /** @hidden */
-    private _navigationArrowNoteSub: Subscription;
 
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
-        private readonly _cdr: ChangeDetectorRef
+        private readonly _changeDetectorRef: ChangeDetectorRef
     ) { }
-
-    /** @hidden */
-    get _arrowNavigationOptions(): PopperOptions {
-        return {
-            placement: 'top-end'
-        };
-    };
     /** @hidden */
     get viewRatingUID(): number {
         return this._ratingUID;
     }
     /** @hidden */
     get indicatorCount(): number {
-        return this._indicatorTotal;
+        return this._indicatorCapacity;
     }
     /** @hidden */
     get viewValue(): number {
@@ -198,41 +195,34 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
     }
 
     /** @hidden */
+    onChange: Function = () => { };
+    /** @hidden */
+    onTouched: Function = () => { };
+
+    /** @hidden */
     ngOnInit(): void {
         this._value = this._convertToValue();
-        this._icons = this._getRates();
+        this._rates = this._getRates();
         this.buildComponentCssClass();
         this._generateRatings();
-        this._navigationArrowNoteSub = this.$navigationArrowNote.pipe(
-            debounceTime(100),
-            distinctUntilChanged(),
-            tap({
-                next: (state: boolean) => {
-                    if (!state) {
-                        this.navigationArrowNote.close();
-                        this._cdr.detectChanges();
-                    }
-
-                }
-            })
-        ).subscribe();
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if ('class' in changes || 'size' in changes) {
+        if ('class' in changes
+            || 'size' in changes
+            || 'ratedIcon' in changes
+            || 'unratedIcon' in changes
+            || 'allowHalves' in changes
+        ) {
             this.buildComponentCssClass();
         }
         if ('value' in changes) {
             this._value = this._convertToValue();
         }
-        if ('indicatorTotal' in changes || 'allowHalves' in changes) {
+        if ('indicatorCapacity' in changes || 'allowHalves' in changes) {
             this._value = this._convertToValue();
-            this._icons = this._getRates();
-            this.buildComponentCssClass();
-        }
-        if ('ratedIcon' in changes || 'unratedIcon' in changes) {
-            this.buildComponentCssClass();
+            this._rates = this._getRates();
         }
 
         if ('ratings' in changes) {
@@ -241,8 +231,23 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        this._navigationArrowNoteSub.unsubscribe();
+    writeValue(value: number): void {
+        this._value = this._parseValue(value);
+        this._changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    /** @hidden */
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
     }
 
     /** @hidden */
@@ -257,7 +262,8 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
     /** @hidden */
     onSelect(value: number): void {
         this.value = this._value = value;
-        this.navigationArrowNote.close();
+        this.onChange(value);
+        this.onTouched();
         this.ratingChanged.emit(value);
     }
 
@@ -272,89 +278,64 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
+        const sizeClass = this._getSizeClass(this.size);
         return [
             INDICATOR_PREFIX,
-            `${INDICATOR_PREFIX}--${this.size}`,
+            sizeClass ? `${INDICATOR_PREFIX}--${sizeClass}` : '',
             this.allowHalves ? INDICATOR_CLASSES.halves : '',
             !!this.ratedIcon && !!this.unratedIcon ? INDICATOR_CLASSES.icon : '',
             this._hideDynamicText || !this._value ? INDICATOR_CLASSES.hideDynamicText : '',
             this.class
         ];
     }
-/** @hidden */
-    onFocus(): void {
-        this.$navigationArrowNote.next(true);
-    }
-/** @hidden */
-    onBlur(): void {
-        this.$navigationArrowNote.next(false);
-    }
 
-    onKeydown(event: KeyboardEvent, rateValue: number): void {
-        if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
-            this.navigationArrowNote.open();
-        }
-        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            this.onSelect(rateValue);
-        }
-    }
-
-    /** @hidden */
+    /**
+     * @hidden
+     * Generate rating items for popover content if rating object was defined
+    */
     private _generateRatings(): void {
         if (!this.ratings) {
             return;
         }
-        const ratings = Object.entries(this.ratings);
-        // simple validation for input rating's data
-        const isValid = ratings.some(([key, value]) => !isNaN(+key) && !isNaN(+value));
-        if (!isValid) {
+        const ratings = Object.entries(this.ratings)
+            .filter(([rate, vote]) => {
+                const _rate = +rate;
+                return !isNaN(_rate) && !isNaN(+vote) && _rate > 0 && _rate <= INDICATOR_CAPACITY_RANGE.max;
+            })
+            .map(([rate, votes ]) => ({ rate: +rate, votes: votes}));
+        if (ratings.length === 0) {
             return;
         }
-        let sum = 0;
-        let allVotes = 0;
+        const {totalVotes, totalRating} = ratings.reduce((total, rating) => ({ 
+            totalVotes: total.totalVotes + rating.votes,
+            totalRating: total.totalRating + rating.rate * rating.votes
+        }), { totalVotes: 0, totalRating : 0 });
 
-        const items = ratings
-            .filter(([key]) => key)
-            .reduce((acc, [key, votes]) => {
-                const _key = +key;
-                if (_key < 0 || _key > INDICATOR_RANGE.max) {
-                    return acc;
-                }
-                sum += _key * votes;
-                allVotes += votes;
-                acc.push({
-                    rate: _key,
-                    total: votes
-                });
-
-                return acc;
-            }, []);
-
-        this._ratingItems = items;
-        this.ratingAverage = sum / allVotes;
-        this.totalRatings = allVotes;
+        this._ratingItems = ratings;
+        this.ratingAverage = totalRating / totalVotes;
+        this.totalRatings = totalVotes;
         this._value = this._convertToValue();
     }
-/**
- * get converted viewValue for render in component template from original value if it still exist, or ratingAverage.
- */
-    /** @hidden */
+    /**
+     * @hidden
+     * get converted viewValue for render in component template from original value if it still exists, or ratingAverage.
+     */
     private _convertToValue(): number {
-        return this.value ? this._parseValue(+this.value) : this._parseValue(this.ratingAverage);
+        return this._parseValue(this.value || this.ratingAverage);
     }
-/**
- * get converted value from original to view value with depends on halves
- * For example,
- *  original value is equal to 2.34, you will get and render 2
- *  original value is equal to 3.74, you will get and render 4
- */
-    /** @hidden */
+    /**
+     * @hidden
+     * get converted value from original to view value with depends on halves
+     * For example,
+     *  original value is equal to 2.34, you will get and render 2
+     *  original value is equal to 3.74, you will get and render 4
+     */
     private _parseValue(value: number): number {
-        if (value === 0) {
+        if (!value || value === 0) {
             return 0;
         }
         const integer = Math.floor(value);
-        const fractional = Math.round(+value * 10) / 10 - Math.floor(value);
+        const fractional = value % 1;
         let v = integer;
 
         if (this.allowHalves && fractional > 0.25 && fractional <= 0.5) {
@@ -365,17 +346,25 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, OnDestroy, C
 
         return Math.min(this.indicatorCount, v);
     }
-/**
- * get rating icons array with value and unic id
- */
-    /** @hidden */
+    /**
+     * @hidden
+     * get rating icons array with value and unic id
+     */
     private _getRates(): { id: string; value: number }[] {
         const withHalves = this.allowHalves ? 2 : 1;
         return Array(this.indicatorCount * withHalves)
             .fill(`rating-${this._ratingUID}`)
-            .map((_name, index) => ({
-                id: `${_name}-${index + 1}`,
+            .map((name, index) => ({
+                id: `${name}-${index + 1}`,
                 value: (index + 1) / withHalves
             }));
+    }
+
+    /**
+     * @hidden
+     * get rating icons array with value and unic id
+     */
+    private _getSizeClass(size: RatingIndicatorSize): string {
+        return size in RatingIndicatorSizeEnum ? size : 'md';
     }
 }

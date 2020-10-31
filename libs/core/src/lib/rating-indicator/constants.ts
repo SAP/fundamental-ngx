@@ -5,10 +5,19 @@ export const INDICATOR_CLASSES = {
     icon: `${INDICATOR_PREFIX}--icon`,
     hideDynamicText: `${INDICATOR_PREFIX}--hide-dynamic-text`
 };
-export const INDICATOR_DEFAULT_TOTAL = 5;
-export const INDICATOR_RANGE = {
+export const INDICATOR_DEFAULT_CAPACITY = 5;
+export const INDICATOR_CAPACITY_RANGE = {
     min: 3,
     max: 7
 };
 
 export type RatingIndicatorSize = 'xs' | 'sm' | 'md' | 'lg' | 'cozy' | 'compact' | 'condensed';
+export enum RatingIndicatorSizeEnum {
+    'xs',
+    'sm',
+    'md',
+    'lg',
+    'cozy',
+    'compact',
+    'condensed'
+};

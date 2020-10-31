@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RatingIndicatorModule, ShellbarModule } from '@fundamental-ngx/core';
+import { RatingIndicatorModule } from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -22,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, RatingIndicatorModule, ShellbarModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, RatingIndicatorModule],
     exports: [RouterModule],
     declarations: [RatingIndicatorDocsComponent, RatingIndicatorDocsHeaderComponent, ...examples]
 })

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './rating-indicator-ratings.component.html',
     styleUrls: ['./rating-indicator-style.component.scss']
 })
-export class RatingIndicatorRatingsComponent {
+export class RatingIndicatorRatingsExampleComponent {
     testRatingData1 = {
         1: 50,
         4: 15,

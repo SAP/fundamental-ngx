@@ -5,7 +5,7 @@ import { RatingIndicatorComponent } from './rating-indicator.component';
 
 const prefix = 'fd-rating-indicator';
 
-describe('RatingIndicatorComponent', () => {
+fdescribe('RatingIndicatorComponent', () => {
   let elementRef: ElementRef;
   let component: RatingIndicatorComponent;
   let fixture: ComponentFixture<RatingIndicatorComponent>;
@@ -16,6 +16,11 @@ describe('RatingIndicatorComponent', () => {
     })
       .compileComponents();
   });
+
+  async function wait(componentFixture: ComponentFixture<any>): Promise<any> {
+    componentFixture.detectChanges();
+    await componentFixture.whenStable();
+  }
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RatingIndicatorComponent);
@@ -28,23 +33,23 @@ describe('RatingIndicatorComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should add class - ${prefix}--half-star`, () => {
+  it(`should have available to select halves`, () => {
     component.allowHalves = true;
     component.buildComponentCssClass();
     expect(elementRef.nativeElement.classList.contains(`${prefix}--half-star`)).toBeTrue();
   });
 
-  it(`should add class - ${prefix}--compact`, () => {
+  it(`should have compact icon`, () => {
     component.size = 'compact';
     component.buildComponentCssClass();
     expect(elementRef.nativeElement.classList.contains(`${prefix}--${component.size}`)).toBeTrue();
   });
 
-  it(`should add class - ${prefix}--icon`, () => {
-    component.ratedIcon = 'test-icon-favorite';
-    component.unratedIcon = 'test-icon-unfavorite';
-    component.buildComponentCssClass();
-    expect(elementRef.nativeElement.classList.contains(`${prefix}--icon`)).toBeTrue();
+  it(`should use custom rating icons`, () => {
+      component.ratedIcon = 'test-icon-favorite';
+      component.unratedIcon = 'test-icon-unfavorite';
+      component.buildComponentCssClass();
+      expect(elementRef.nativeElement.classList.contains(`${prefix}--icon`)).toBeTrue();
   });
 
   it(`should have correct viewValue`, () => {
@@ -53,28 +58,37 @@ describe('RatingIndicatorComponent', () => {
     expect(ratingChangedSpy).toHaveBeenCalledWith(2);
   });
 
-  it(`should have correct indicator count from total indicator`, () => {
-    component.indicatorTotal = 4;
+  it(`should have correct indicator capacity`, () => {
+    component.indicatorCapacity = 4;
     component.allowHalves = false;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component._icons.length).toEqual(4);
+    expect(component._rates.length).toEqual(4);
   });
 
-  it(`should have correct indicator count from total indicator with halves`, () => {
-    component.indicatorTotal = 4;
+  it(`should have correct indicator capacity with halves`, () => {
+    component.indicatorCapacity = 4;
     component.allowHalves = true;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component._icons.length).toEqual(4 * 2);
+    expect(component._rates.length).toEqual(4 * 2);
   });
 
-  it(`we should have an indicator count with a total indicator=111 (wrong count)`, () => {
-    component.indicatorTotal = 111;
+  it(`should have an indicator capacity with value = 111 (wrong capacity)`, () => {
+    component.indicatorCapacity = 111;
     component.allowHalves = false;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component._icons.length).toEqual(7);
+    expect(component._rates.length).toEqual(7);
   });
 
+  it(`should have value after click on rate icon`, () => {
+    component.allowHalves = false;
+    elementRef.nativeElement.querySelectorAll('.fd-rating-indicator__label')[2].click();
+
+    expect(component.value).toBe(2);
+    component.ratingChanged.subscribe((value: number) => {
+      expect(value).toBe(2);
+    });
+  });
 });

@@ -1,24 +1,22 @@
-<h2>Rating indicator with different sizes</h2>
-<ol>
-    <li *ngFor="let size of sizes; trackBy: trackByFn">
-        <div class="base-row">
-            <h4>Size = {{ size || 'default' }}</h4>
-            <fd-rating-indicator
-                [size]="size"
-                totalRatings="111"
-                #sampleSize
-            ></fd-rating-indicator>
-            Selected Rate: {{ sampleSize.viewValue }}
-        </div>
-        <div class="base-row">
-            <h4>And same size = {{ size || 'default' }} with halves</h4>
-            <fd-rating-indicator
-                [size]="size"
-                [allowHalves]="true"
-                totalRatings="555"
-                #sizeWithHalves
-            ></fd-rating-indicator>
-            Selected Rate: {{ sizeWithHalves.viewValue }}
-        </div>
-    </li>
-</ol>
+<h2>Different sizes</h2>
+<div *ngFor="let size of sizes">
+    <div class="base-row">
+        <h4>Size = {{ size || 'default' }}</h4>
+        <fd-rating-indicator
+            [size]="size"
+            totalRatings="111"
+            #sampleSize
+        ></fd-rating-indicator>
+        Selected Rate: {{ sampleSize.viewValue }}
+    </div>
+    <div class="base-row">
+        <h4>And same size = {{ size || 'default' }} with halves</h4>
+        <fd-rating-indicator
+            [size]="size"
+            [allowHalves]="true"
+            totalRatings="555"
+            #sizeWithHalves
+        ></fd-rating-indicator>
+        Selected Rate: {{ sizeWithHalves.viewValue }}
+    </div>
+</div>

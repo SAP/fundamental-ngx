@@ -1,10 +1,73 @@
-<h2>Rating indicator - disable after select rate value</h2>
-<fd-rating-indicator
-    indicatorTotal="5"
-    totalRatings="1"
-    [disabled]="isDisable"
-    (ratingChanged)="onRatingChangedWithDisable($event)"
-></fd-rating-indicator>
+<div class="base-row">
+    <fd-rating-indicator
+        indicatorCapacity="5"
+        size="xsssss"
+        value="0.1"
+        i18n-dynamicTextIndicator
+        dynamicTextIndicator="ooofff"
+        (ratingChanged)="onRatingChanged($event)"
+        #rate1></fd-rating-indicator>
+    Initial Rate: 0.1<br />
+    View rate: {{ rate1.viewValue }}
+</div>
+<div class="base-row">
+    <fd-rating-indicator
+        indicatorCapacity="5"
+        totalRatings="2"
+        size="xs"
+        name="ngmodel-rating"
+        [(ngModel)]="modelValue"
+        (ngModelChange)="onRatingChanged($event)"
+        #rateWithModel></fd-rating-indicator>
+    <div>
+        View rate: {{ rateWithModel.viewValue }}
+    </div>
+    <div>
+        <input type="number" min="0" max="10" step="0.1" name="example-rating2" [(ngModel)]="modelValue" />
+    </div>
+</div>
+<div class="base-row">
+    <fd-rating-indicator
+        indicatorCapacity="5"
+        totalRatings="2"
+        size="xs"
+        value="0.51"
+        (ratingChanged)="onRatingChanged($event)"
+        #rate3></fd-rating-indicator>
+    Initial Rate: 0.51<br />
+    View rate: {{ rate3.viewValue }}
+</div>
+<div class="base-row">
+    <fd-rating-indicator indicatorCapacity="5"
+    totalRatings="2"
+    size="xs"
+    value="2.51"
+    #rate4></fd-rating-indicator>
+    Initial Rate: 2.51<br />
+    View rate: {{ rate4.viewValue }}
+</div>
+<div class="base-row">
+    <fd-rating-indicator indicatorCapacity="5"
+    totalRatings="2"
+    size="xs"
+    value="4.99"
+    #rate5></fd-rating-indicator>
+
+    Initial Rate: 4.99<br />
+    View rate: {{ rate5.viewValue }}
+</div>
+<div class="base-row">
+    <fd-rating-indicator
+        indicatorCapacity="5"
+        totalRatings="2"
+        size="xs"
+        value="1231312312312313.99"
+        #rate6>
+    </fd-rating-indicator>
+
+    Initial Rate: 1231312312312313.99 (Wrong value)<br />
+    View rate: {{ rate6.viewValue }}
+</div>
 <h2>Disabled Rating indicator</h2>
 <fd-rating-indicator
     totalRatings="1"
@@ -13,7 +76,7 @@
     [allowHalves]="true"
     (ratingChanged)="onRatingChanged($event)"
 ></fd-rating-indicator>
-<h2>Rating indicator with custom class for icon</h2>
+<h2>Custom class for icon</h2>
 <fd-rating-indicator
     totalRatings="1"
     value="3.34"
@@ -23,8 +86,21 @@
 ></fd-rating-indicator>
 <h2>Dynamic changes</h2>
 <div class="base-row">
+    <fd-rating-indicator
+        #dynamicChangeRate
+        [indicatorCapacity]="config.indicatorCapacity"
+        [allowHalves]="config.allowHalves"
+        totalRatings="1"
+        [value]="2.5"
+        [size]="config.size"
+        [disabled]="config.disabled"
+        (ratingChanged)="onRatingChanged($event)"
+    ></fd-rating-indicator>
+    <div *ngIf="dynamicChangeRate">
+        value: {{ dynamicChangeRate.viewValue || 0 }}
+    </div>
     <div>
-        indicatorTotal: <input [(ngModel)]="config.indicatorTotal" type="number" min="3" max="7" />
+        indicatorCapacity: <input [(ngModel)]="config.indicatorCapacity" type="number" min="3" max="7" />
     </div>
     <div>
         allowHalves: <input [(ngModel)]="config.allowHalves" type="checkbox" />
@@ -34,18 +110,10 @@
     </div>
     <div>
         sizes: <select [(ngModel)]="config.size">
-            <option [value]=size *ngFor="let size of sizes; trackBy: trackByFn">{{ size }}</option>
+            <option [value]=size *ngFor="let size of sizes">{{ size }}</option>
         </select>
     </div>
     <div>
         <pre>{{ config | json}}</pre>
     </div>
-    <fd-rating-indicator
-        [indicatorTotal]="config.indicatorTotal"
-        [allowHalves]="config.allowHalves"
-        totalRatings="1"
-        [size]="config.size"
-        [disabled]="config.disabled"
-        (ratingChanged)="onRatingChanged($event)"
-    ></fd-rating-indicator>
 </div>

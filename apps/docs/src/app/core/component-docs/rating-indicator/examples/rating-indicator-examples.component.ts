@@ -5,27 +5,16 @@ import { Component } from '@angular/core';
     templateUrl: './rating-indicator-example.component.html',
     styleUrls: ['./rating-indicator-style.component.scss']
 })
-export class RatingIndicatorExamplesComponent {
+export class RatingIndicatorExampleComponent {
     config = {
-        indicatorTotal: 5,
+        indicatorCapacity: 5,
         allowHalves: false,
         disabled: false,
         size: 'md'
     };
     sizes = ['xs', 'sm', 'md', 'lg', 'cozy', 'compact', 'condensed'];
-
-    isDisable = false;
-
+    modelValue = 2.2;
     onRatingChanged(event: number): void {
         console.log(event);
-    }
-
-    onRatingChangedWithDisable(event: number): void {
-        console.log(event);
-        this.isDisable = true;
-    }
-
-    trackByFn(index: number): number {
-        return index;
     }
 }
