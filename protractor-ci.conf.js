@@ -62,9 +62,8 @@ exports.config = {
             'name': 'e2e-MAC-safari',
         },
     ],
-    directConnect: false,
     baseUrl: 'http://localhost:4200/#',
-   //  baseUrl: 'https://fundamental-ngx.netlify.app/#/',
+    // baseUrl: 'https://fundamental-ngx.netlify.app/#/',
     framework: 'jasmine',
     jasmineNodeOpts: {
         showColors: true,

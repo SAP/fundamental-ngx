@@ -24,7 +24,7 @@ jobs:
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
     script:
-      - npm run start && npm run test:e2e:saucelabs
+      - npm run e2e:ci
   - stage: "Pre-release"
     if: branch = master AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
