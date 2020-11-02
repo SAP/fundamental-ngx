@@ -54,6 +54,9 @@ export interface OptionStatusChange {
     styleUrls: ['./select.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[class.fd-combobox-custom-class]': 'true',
+    },
     providers: [
         SelectProxy,
         {

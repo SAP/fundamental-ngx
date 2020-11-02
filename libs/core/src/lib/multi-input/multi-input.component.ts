@@ -210,7 +210,7 @@ export class MultiInputComponent implements
 
     /** @hidden */
     @ViewChild(TokenizerComponent)
-    tokenizer;
+    tokenizer: TokenizerComponent;
 
     /** @hidden */
     displayedValues: any[] = [];
@@ -323,17 +323,18 @@ export class MultiInputComponent implements
         if (this.disabled) {
             return ;
         }
+
+        if (!open && this.open && !this.mobile) {
+            this.searchInputElement.nativeElement.focus();
+        }
+
         if (this.open !== open) {
             this.openChange.emit(open);
         }
-
         this.open = open;
+
         if (!this.mobile) {
             this._popoverOpenHandle(open);
-        }
-
-        if (!this.open) {
-            this.searchInputElement.nativeElement.focus();
         }
         this._changeDetRef.detectChanges();
     }
@@ -384,6 +385,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
+
     handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
@@ -405,9 +407,6 @@ export class MultiInputComponent implements
 
     /** @hidden */
     handleSearchTermChange(): void {
-        if (!this.open) {
-            this.openChangeHandle(true);
-        }
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
         this._changeDetRef.detectChanges();
@@ -466,11 +465,7 @@ export class MultiInputComponent implements
 
     /** @hidden */
     addOnButtonClicked(): void {
-        if (!this.open) {
-            this.handleSearchTermChange();
-        } else {
-            this.openChangeHandle(false);
-        }
+        this.openChangeHandle(!this.open);
     }
 
     private defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {

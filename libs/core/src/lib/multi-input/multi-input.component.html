@@ -8,6 +8,7 @@
             (isOpenChange)="openChangeHandle($event)"
             [triggers]="[]"
             [maxWidth]="600"
+            [focusTrapped]="true"
             [disabled]="disabled"
             [fillControlMode]="fillControlMode"
             class="fd-multi-input-popover-custom"
@@ -52,8 +53,7 @@
             >
                 <span [innerHtml]="token | displayFnPipe: displayFn"></span>
             </fd-token>
-            <input (focusin)="tokenizer.inputFocused = true;" (focusout)="tokenizer.inputFocused = false;"
-                   type="text"
+            <input type="text" (focusin)="tokenizer.inputFocused = true;" (focusout)="tokenizer.inputFocused = false;"
                    class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
                    fd-form-control
                    fd-input-group-input
