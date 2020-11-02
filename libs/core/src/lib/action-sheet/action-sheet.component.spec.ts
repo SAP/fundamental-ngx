@@ -30,8 +30,5 @@ describe('Action Sheet Parent Component', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
-    it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-action-sheet');
-    });
+    
 });
