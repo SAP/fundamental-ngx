@@ -1,0 +1,108 @@
+<fdp-form-group #ffg [formGroup]="datetimePickerForm" [object]="data" (onSubmit)="onSubmit()" [multiLayout]="true">
+    <fdp-form-field
+        #ffl1
+        id="simple"
+        zone="zLeft"
+        rank="1"
+        required="true"
+        [validators]="requiredDateValidator"
+        placeholder="Enter a date"
+        label="Date:"
+    >
+        <fdp-datetime-picker name="simple" [formControl]="ffl1.formControl"> </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffl2
+        id="withMeridian"
+        zone="zLeft"
+        rank="2"
+        required="true"
+        label="With Meridian:"
+        [validators]="requiredDateValidator"
+    >
+        <fdp-datetime-picker
+            name="withMeridian"
+            meridian="true"
+            placeholder="Enter a date"
+            [formControl]="ffl2.formControl"
+            (datetimeChange)="onDateChange($event)"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffl3
+        id="withAllowNull"
+        zone="zLeft"
+        rank="3"
+        label="With allowNull not enabled to disallow input from taking null value:"
+    >
+        <fdp-datetime-picker
+            name="withAllowNull"
+            [allowNull]="false"
+            contentDensity="compact"
+            placeholder="Enter a date mandatorily"
+            [formControl]="ffl3.formControl"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field #ffl4 id="formatDate" zone="zLeft" rank="4" required="true" label="With different format:">
+        <fdp-datetime-picker
+            name="formatDate"
+            format="dd-MMM-yyyy, HH:mm:ss"
+            placeholder="Select a date to display in this format: dd-MMM-yyyy, HH:mm:ss"
+            [formControl]="ffl4.formControl"
+            (isOpenChange)="onOpenChanged($event)"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+    <fdp-form-field
+        #ffl0
+        id="compactDatetime"
+        zone="zLeft"
+        rank="5"
+        required="true"
+        label="Compact datetime picker. Click on the button to change the date:"
+    >
+        <fdp-datetime-picker
+            name="compactDatetime"
+            contentDensity="compact"
+            [value]="date"
+            placeholder="Compact datetime picker"
+            [formControl]="ffl0.formControl"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+    <fdp-form-field id="changeBtn" rank="6" zone="zLeft">
+        <button fd-button name="changeBtn" (click)="changeDay()">Change datetime value</button>
+    </fdp-form-field>
+    <fdp-form-field
+        #ffl6
+        [id]="'storedDate'"
+        zone="zLeft"
+        rank="7"
+        required="true"
+        label="Passing datetime through form object:"
+    >
+        <fdp-datetime-picker
+            [name]="'storedDate'"
+            contentDensity="compact"
+            placeholder="Pre-filled datetime"
+            [formControl]="ffl6.formControl"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field id="submitBtn" rank="8" zone="zLeft">
+        <button fd-button name="submitBtn" (click)="onSubmit()">Submit</button>
+    </fdp-form-field>
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required">
+            Value is required
+        </span>
+    </ng-template>
+</fdp-form-group>
+
+<span>form status: {{ datetimePickerForm?.valid }}</span>

@@ -1,0 +1,69 @@
+<fdp-form-group [multiLayout]="true">
+    <fdp-form-field id="simple" zone="zLeft" rank="1" required="true" placeholder="Enter a date" label="Date:">
+        <fdp-datetime-picker name="simple" [(ngModel)]="simpleDate"> </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field id="withMeridian" zone="zLeft" rank="2" required="true" label="With Meridian:">
+        <fdp-datetime-picker name="withMeridian" meridian="true" [(ngModel)]="meredianDate" placeholder="Enter a date">
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        id="withAllowNull"
+        zone="zLeft"
+        rank="3"
+        label="With allowNull not enabled to disallow input from taking null value:"
+    >
+        <fdp-datetime-picker
+            name="withAllowNull"
+            [allowNull]="false"
+            contentDensity="compact"
+            placeholder="Enter a date mandatorily"
+            [(ngModel)]="allowNullDate"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field #ffl4 id="formatDate" zone="zLeft" rank="3" required="true" label="With different format:">
+        <fdp-datetime-picker
+            name="formatDate"
+            format="dd-MMM-yyyy, HH:mm:ss"
+            placeholder="Select a date to display in this format: dd-MMM-yyyy, HH:mm:ss"
+            [(ngModel)]="templateDate"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+    <fdp-form-field
+        id="compactDatetime"
+        zone="zLeft"
+        rank="4"
+        required="true"
+        label="Compact datetime picker. Click on the button to change the date:"
+    >
+        <fdp-datetime-picker
+            name="compactDatetime"
+            contentDensity="compact"
+            [(ngModel)]="date"
+            placeholder="Compact datetime picker"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+    <fdp-form-field id="changeBtn" rank="5" zone="zLeft">
+        <button fd-button name="changeBtn" (click)="changeDay()">Change datetime value</button>
+    </fdp-form-field>
+    <fdp-form-field id="storedDate" zone="zLeft" rank="6" required="true" label="Passing datetime through form object:">
+        <fdp-datetime-picker
+            name="storedDate"
+            [(ngModel)]="storedDate"
+            contentDensity="compact"
+            placeholder="Pre-filled datetime"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required">
+            Value is required
+        </span>
+    </ng-template>
+</fdp-form-group>

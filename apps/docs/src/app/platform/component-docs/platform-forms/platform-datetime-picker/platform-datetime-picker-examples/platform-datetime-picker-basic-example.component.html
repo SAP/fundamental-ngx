@@ -1,0 +1,43 @@
+<label for="simple">Simple datetime picker:</label>
+<br />
+<fdp-datetime-picker name="simple" placeholder="Enter a date"> </fdp-datetime-picker>
+<br />
+<label for="withMeridian">With Meridian:</label>
+<br />
+<fdp-datetime-picker name="withMeridian" meridian="true" placeholder="Enter a date"> </fdp-datetime-picker>
+<br />
+<label for="withAllowNull">With allowNull not enabled to disallow input from taking null value:</label>
+<br />
+<fdp-datetime-picker name="withAllowNull" [allowNull]="false" placeholder="Enter a date mandatorily">
+</fdp-datetime-picker>
+<br />
+<label for="formatDate">With different format:</label>
+<br />
+<fdp-datetime-picker
+    name="formatDate"
+    format="dd-MMM-yyyy, HH:mm:ss"
+    placeholder="Select a date to display in this format: dd-MMM-yyyy, HH:mm:ss"
+>
+</fdp-datetime-picker>
+<br />
+<label for="compactDatetime">Compact datetime picker. Click on the button to change the date:</label>
+<br />
+<fdp-datetime-picker
+    name="compactDatetime"
+    contentDensity="compact"
+    [value]="date"
+    placeholder="Compact datetime picker"
+>
+</fdp-datetime-picker>
+<br />
+<button fd-button name="changeBtn" (click)="changeDay()">Change datetime value</button>
+<br />
+<br />
+<label for="disabledDatetime">Disabled datetime picker:</label>
+<br />
+<fdp-datetime-picker name="disabledDatetime" [disabled]="true" [value]="storedDate"> </fdp-datetime-picker>
+<br />
+<label for="placementDatetime">Placement for datetime picker:</label>
+<br />
+<fdp-datetime-picker name="placementDatetime" placement="bottom-end" [value]="storedDate"> </fdp-datetime-picker>
+<br />
