@@ -285,7 +285,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     ngAfterViewInit(): void {
         this._listenOnControlTouched();
         this._setOptionsArray();
-        this._changeOptionsProperties();
+        this._setOptionsProperties();
         this._setupMobileMode();
     }
 
@@ -379,7 +379,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
             this.options.changes
                 .subscribe(_ => {
                     this._setOptionsArray();
-                    this._changeOptionsProperties();
+                    this._setOptionsProperties();
                     this._setSelectedOption();
                     this._listenOnOptionKeydown();
                     setTimeout(() => {
@@ -550,7 +550,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     }
 
     /** @hidden */
-    private _changeOptionsProperties(): void {
+    private _setOptionsProperties(): void {
         this._options.forEach(option => option.setExtendedTemplate(this.extendedBodyTemplate));
     }
 

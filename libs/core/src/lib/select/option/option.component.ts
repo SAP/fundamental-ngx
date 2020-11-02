@@ -8,7 +8,7 @@ import {
     HostListener,
     Input,
     OnDestroy,
-    OnInit, TemplateRef, ViewChild,
+    OnInit,
     ViewEncapsulation
 } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
@@ -66,10 +66,6 @@ export class OptionComponent implements OnInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.is-selected')
     selected = false;
-
-    /** @hidden */
-    @ViewChild('contentTemplateRef', { read: TemplateRef })
-    contentTemplateRef: TemplateRef<any>;
 
     /** @hidden */
     selectionEvent = new EventEmitter<KeyboardEvent>()

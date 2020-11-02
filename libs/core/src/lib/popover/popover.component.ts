@@ -42,6 +42,8 @@ import { KeyUtil } from '../utils/functions/key-util';
 
 let cdkPopoverUniqueId = 0;
 
+const MAX_BODY_SIZE = 99999999;
+
 /**
  * The popover is a wrapping component that accepts a *control* as well as a *body*.
  * The control is what will trigger the opening of the actual popover, which is called the body.
@@ -377,7 +379,7 @@ export class PopoverComponent extends BasePopoverClass
 
     /** @hidden */
     private _applyWidthOverlay(): void {
-        const maxWidthLimit = this.maxWidth ? this.maxWidth : 100000000000;
+        const maxWidthLimit = this.maxWidth ? this.maxWidth : MAX_BODY_SIZE;
         const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
         if (this.fillControlMode === 'at-least') {
             this._overlayRef.updateSize({ minWidth: width });
