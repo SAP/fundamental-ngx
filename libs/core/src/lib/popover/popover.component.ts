@@ -98,6 +98,9 @@ export class PopoverComponent extends BasePopoverClass
     marginStyle: string = null;
 
     /** @hidden */
+    directiveRef: any;
+
+    /** @hidden */
     private _initialised = false;
 
     /** @hidden */
