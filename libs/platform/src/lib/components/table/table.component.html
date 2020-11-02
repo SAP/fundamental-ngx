@@ -58,6 +58,7 @@
                                             <span fd-list-icon glyph="sort-ascending"></span>
                                             <span fd-list-title>Sort Ascending</span>
                                         </li>
+
                                         <li *ngIf="column.sortable"
                                             fd-list-item
                                             (click)="sort(column.key, _sortDirections.DESC)"
@@ -65,6 +66,7 @@
                                             <span fd-list-icon glyph="sort-descending"></span>
                                             <span fd-list-title>Sort Descending</span>
                                         </li>
+
                                         <li fd-list-item *ngIf="column.groupable">
                                             <span fd-list-icon></span>
                                             <span fd-list-title>Group</span>
@@ -73,21 +75,15 @@
                                             <span></span>
                                             <span fd-list-title>Freeze</span>
                                         </li>
-                                        <li fd-list-item *ngIf="column.filterable">
-                                            <span fd-list-icon glyph="filter"></span>
-                                            <div fd-form-item [horizontal]="true">
-                                                <label fd-form-label [for]="column.name + i">Filter</label>
-                                                <!--<fdp-input [id]="column.name + i"
-                                                           [name]="column.name + ' filter'"
-                                                           contentDensity="compact"
-                                                           placeholder="placeholder">
-                                                </fdp-input>-->
 
-                                                <!--<input fd-form-control
+                                        <li fd-list-item *ngIf="column.filterable">
+                                            <i fd-list-icon glyph="filter"></i>
+                                            <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
+                                                <label fd-form-label [for]="column.name + i">Filter</label>
+                                                <input fd-form-control
                                                        [compact]="true"
                                                        [id]="column.name + i"
-                                                       (keyup)="inputKeyup($event)"
-                                                       [(ngModel)]="filterVal">-->
+                                                       (keyup.enter)="filter(column.key, $event.target.value)">
                                             </div>
                                         </li>
                                     </ul>
@@ -109,7 +105,7 @@
             <tbody fd-table-body>
                 <tr fd-table-row
                     scope="row"
-                    *ngFor="let row of _rows | sortBy: sortDirection : sortField; let i = index"
+                    *ngFor="let row of _rows | sortBy: sortDirection : sortField | filter: filterType : filterValue; let i = index"
                     [attr.aria-selected]="_rows[i].checked">
                     <td fd-table-cell
                         [class.fd-table__cell--checkbox]="selectionMode === _selectionModeOptions.MULTIPLE"

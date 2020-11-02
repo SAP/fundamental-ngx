@@ -1,0 +1,68 @@
+<fdp-table #filterableTbl
+       [dataSource]="source"
+       (filterChange)="logFilterChange($event)"
+       contentDensity="compact"
+       emptyTableMessage="No data found">
+
+    <fdp-table-toolbar
+        title="Order Line Items"
+        [hideItemCount]="false">
+        <fdp-table-toolbar-actions>
+            <fdp-button label="Action One" contentDensity="compact"></fdp-button>
+            <fdp-button label="Action Two" contentDensity="compact"></fdp-button>
+        </fdp-table-toolbar-actions>
+    </fdp-table-toolbar>
+
+    <fdp-column
+        name="name"
+        key="name"
+        label="Name"
+        align="start"
+        [filterable]="true">
+    </fdp-column>
+
+    <fdp-column
+        name="description"
+        key="description"
+        label="Description">
+    </fdp-column>
+
+    <fdp-column
+        name="price"
+        key="price.value"
+        label="Price"
+        align="end"
+        [filterable]="true">
+    </fdp-column>
+
+    <fdp-column
+        name="status"
+        key="status"
+        label="Status"
+        align="center"
+        [filterable]="true">
+    </fdp-column>
+</fdp-table>
+
+<!-- View Settings Dialog-->
+<!--<fdp-table-view-settings-dialog [table]="filterableTbl">
+    <fdp-table-view-settings-filter
+        [column]="'name'"
+        [label]="'Name'"
+        [type]="'custom'">
+        <label>Enter name:</label><fdp-input type="text" name="name"></fdp-input>
+    </fdp-table-view-settings-filter>
+    <fdp-table-view-settings-filter
+        [column]="'price'"
+        [label]="'Price'"
+        [type]="'custom'">
+        <label>Minimum Price:</label><fdp-input type="number" name="minimumPrice"></fdp-input>
+        <label>Maximum Price:</label><fdp-input type="number" name="maximumPrice"></fdp-input>
+    </fdp-table-view-settings-filter>
+    <fdp-table-view-settings-filter
+        [column]="'status'"
+        [label]="'Status'"
+        [type]="'single-select'"
+        [values]="[{key: 'OUT_OF_STOCK', label: 'out of stock'}, { key: 'AVAILABLE', label: 'available'}]">
+    </fdp-table-view-settings-filter>
+</fdp-table-view-settings-dialog>-->

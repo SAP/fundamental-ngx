@@ -2,8 +2,8 @@ import {
     ChangeDetectionStrategy,
     Component,
     Input,
-    OnDestroy,
-    OnInit
+    TemplateRef,
+    ViewChild
 } from '@angular/core';
 
 import { SelectionValue } from '../../interfaces';
@@ -28,11 +28,11 @@ import { FilterType } from '../../enums';
  * ```
  * */
 @Component({
-    selector: 'fdp-table-view-settings-dialog',
-    template: '<ng-content></ng-content>',
+    selector: 'fdp-table-view-settings-filter',
+    template: '<ng-template><ng-content></ng-content></ng-template>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableViewSettingsFilterComponent implements OnInit, OnDestroy {
+export class TableViewSettingsFilterComponent {
     /** Column data on which to filter. */
     @Input()
     column: string;
@@ -50,11 +50,6 @@ export class TableViewSettingsFilterComponent implements OnInit, OnDestroy {
     values: SelectionValue[];
 
     /** @hidden */
-    constructor() { }
-
-    /** @hidden */
-    ngOnInit(): void {}
-
-    /** @hidden */
-    ngOnDestroy(): void {}
+    @ViewChild(TemplateRef)
+    contentTemplateRef: TemplateRef<any>;
 }

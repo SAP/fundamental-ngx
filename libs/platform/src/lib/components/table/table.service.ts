@@ -1,20 +1,24 @@
 import { EventEmitter, QueryList } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { TableColumnComponent } from './components';
-import { CollectionSort, TableState } from './interfaces';
+import { TableViewSettingsFilterComponent } from './components/table-view-settings-filter/table-view-settings-filter.component';
+import {
+    CollectionFilter,
+    CollectionSort,
+    TableState
+} from './interfaces';
 import { SortDirection } from './enums';
 import { DEFAULT_TABLE_STATE } from './constants';
-import { SortChange } from './models';
+import { FilterChange, SortChange } from './models';
 
 export class TableService {
-    tableState: TableState;
     prevTableState: TableState;
-    tableState$: BehaviorSubject<TableState> = new BehaviorSubject(null);
+    tableState$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
 
-    columns: QueryList<TableColumnComponent>;
+    filters: QueryList<TableViewSettingsFilterComponent>;
 
     readonly sortChange: EventEmitter<SortChange> = new EventEmitter<SortChange>();
+    readonly filterChange: EventEmitter<FilterChange> = new EventEmitter<FilterChange>();
 
     constructor() {}
 
@@ -26,7 +30,6 @@ export class TableService {
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
         this.prevTableState = this.getTableState();
-        this.tableState = state;
         this.tableState$.next(state);
     }
 
@@ -39,18 +42,43 @@ export class TableService {
         }
 
         const newSortBy: CollectionSort[] = [{field: field, direction: direction}];
-        let state: TableState;
-
-        if (!prevState) {
-            state = {...DEFAULT_TABLE_STATE, sortBy: newSortBy};
-        } else {
-            state = {
-                ...prevState,
-                sortBy: [...newSortBy, ...prevState.sortBy]
-            };
-        }
+        const state: TableState = {
+            ...prevState,
+            sortBy: newSortBy
+        };
 
         this.setTableState(state);
         this.sortChange.emit({ current: state.sortBy, previous: prevSortBy });
+    }
+
+    filter(filter: any /* CollectionFilter */): void {
+        const prevState = this.getTableState();
+        const prevFilterBy: any = prevState && prevState.filterBy || [];
+
+        if (!this.isFilterChanged(filter, prevFilterBy)) {
+            return;
+        }
+
+        const newFilterBy: CollectionFilter[] = [filter];
+        const state: TableState = {
+            ...prevState,
+            filterBy: newFilterBy
+        };
+
+        this.setTableState(state);
+        this.filterChange.emit({ current: state.filterBy, previous: prevFilterBy });
+    }
+
+    private isFilterChanged(filter: any, prevFilterBy: any): boolean {
+        return !(
+            prevFilterBy.length &&
+            prevFilterBy[0].field === filter.field &&
+            (
+                (prevFilterBy[0].value !== undefined && prevFilterBy[0].value === filter.value) ||
+                (prevFilterBy[0].value2 !== undefined && prevFilterBy[0].value2 === filter.value2) ||
+                (prevFilterBy[0].values !== undefined && prevFilterBy[0].values === filter.values) ||
+                (prevFilterBy[0].valueMap !== undefined && prevFilterBy[0].valueMap === filter.valueMap)
+            )
+        );
     }
 }

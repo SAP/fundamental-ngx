@@ -18,6 +18,8 @@ import * as platformTableMultipleRowSelectionSrc from '!raw-loader!./platform-ta
 import * as platformTableMultipleRowSelectionTsSrc from '!raw-loader!./platform-table-examples/platform-table-multiple-row-selection-example.component.ts';
 import * as platformTableSortableSrc from '!raw-loader!./platform-table-examples/platform-table-sortable-example.component.html';
 import * as platformTableSortableTsSrc from '!raw-loader!./platform-table-examples/platform-table-sortable-example.component.ts';
+import * as platformTableFilterableSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.html';
+import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
 
 
 @Component({
@@ -51,6 +53,21 @@ export class PlatformTableDocsComponent {
                         type: 'boolean'
                     }
                 }
+            },
+            'first-column': {
+                type: 'object',
+                properties: {
+                    align: {
+                        type: 'string',
+                        enum: ['start', 'center', 'end']
+                    },
+                    sortable: {
+                        type: 'boolean'
+                    },
+                    filterable: {
+                        type: 'boolean'
+                    }
+                }
             }
         },
         type: 'object'
@@ -65,7 +82,12 @@ export class PlatformTableDocsComponent {
         },
         'table-toolbar': {
             title: 'Order Line Items',
-            hideItemCount: false,
+            hideItemCount: false
+        },
+        'first-column': {
+            align: 'start',
+            sortable: true,
+            filterable: true
         }
     };
 
@@ -141,6 +163,20 @@ export class PlatformTableDocsComponent {
         }
     ];
 
+    filterableTable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableFilterableSrc,
+            fileName: 'platform-table-filterable-example'
+        },
+        {
+            language: 'typescript',
+            code: platformTableFilterableTsSrc,
+            fileName: 'platform-table-filterable-example',
+            component: 'PlatformTableFilterableExampleComponent'
+        }
+    ];
+
     constructor(private schemaFactory: SchemaFactoryService, private _cd: ChangeDetectorRef) {
         this.schema = this.schemaFactory.getComponent('fdp-table');
     }
@@ -156,83 +192,243 @@ export class PlatformTableDocsComponent {
 }
 
 export const ITEMS = [{
-    'name': 'implementation',
-    'description': 'sit amet consectetuer adipiscing elit',
+    'name': '10 Portable DVD player',
+    'description': 'diam neque vestibulum eget vulputate',
     'price': {
-        'value': 2.06,
-        'currency': 'IDR'
-    },
-    'status': 'valid'
-}, {
-    'name': 'moderator',
-    'description': 'luctus et ultrices posuere cubilia curae donec',
-    'price': {
-        'value': 33.34,
-        'currency': 'MZN'
-    },
-    'status': 'warning'
-}, {
-    'name': 'focus group',
-    'description': 'at velit vivamus vel nulla eget eros',
-    'price': {
-        'value': 72.12,
+        'value': 66.04,
         'currency': 'CNY'
     },
-    'status': 'error'
+    'status': 'Stocked on demand'
 }, {
-    'name': 'contingency',
-    'description': 'posuere nonummy integer',
+    'name': 'Astro Laptop 1516',
+    'description': 'pede malesuada',
     'price': {
-        'value': 6.25,
-        'currency': 'CNY'
-    },
-    'status': 'information'
-}, {
-    'name': 'matrix',
-    'description': 'congue etiam justo etiam pretium iaculis',
-    'price': {
-        'value': 54.29,
-        'currency': 'NZD'
-    },
-    'status': 'warning'
-}, {
-    'name': 'Persistent',
-    'description': 'ipsum praesent blandit',
-    'price': {
-        'value': 14.59,
-        'currency': 'UGX'
-    },
-    'status': 'information'
-}, {
-    'name': 'paradigm',
-    'description': 'nec condimentum neque',
-    'price': {
-        'value': 9.37,
-        'currency': 'IDR'
-    },
-    'status': 'warning'
-}, {
-    'name': 'content-based',
-    'description': 'non mauris morbi non lectus aliquam',
-    'price': {
-        'value': 10.17,
-        'currency': 'EGP'
-    },
-    'status': 'error'
-}, {
-    'name': 'multimedia',
-    'description': 'pede morbi porttitor lorem id ligula',
-    'price': {
-        'value': 8.06,
-        'currency': 'IDR'
-    },
-    'status': 'information'
-}, {
-    'name': 'high-level',
-    'description': 'ligula nec sem',
-    'price': {
-        'value': 27.13,
+        'value': 489.01,
         'currency': 'EUR'
     },
-    'status': 'valid'
+    'status': 'Out of stock'
+}, {
+    'name': 'Astro Phone 6',
+    'description': 'penatibus et magnis',
+    'price': {
+        'value': 154.1,
+        'currency': 'IDR'
+    },
+    'status': 'Stocked on demand'
+}, {
+    'name': 'Beam Breaker B-1',
+    'description': 'fermentum donec ut',
+    'price': {
+        'value': 36.56,
+        'currency': 'NZD'
+    },
+    'status': 'Stocked on demand'
+}, {
+    'name': 'Beam Breaker B-2',
+    'description': 'sapien in sapien iaculis congue',
+    'price': {
+        'value': 332.57,
+        'currency': 'NZD'
+    },
+    'status': 'Become out of stock'
+}, {
+    'name': 'Benda Laptop 1408',
+    'description': 'suspendisse potenti cras in',
+    'price': {
+        'value': 243.49,
+        'currency': 'CNY'
+    },
+    'status': 'Stocked on demand'
+}, {
+    'name': 'Bending Screen 21HD',
+    'description': 'nunc nisl duis bibendum',
+    'price': {
+        'value': 66.46,
+        'currency': 'EUR'
+    },
+    'status': 'Available'
+}, {
+    'name': 'Blaster Extreme',
+    'description': 'quisque ut',
+    'price': {
+        'value': 436.88,
+        'currency': 'USD'
+    },
+    'status': 'Available'
+}, {
+    'name': 'Broad Screen 22HD',
+    'description': 'ultrices posuere',
+    'price': {
+        'value': 458.18,
+        'currency': 'CNY'
+    },
+    'status': 'Available'
+}, {
+    'name': 'Camcorder View',
+    'description': 'integer ac leo pellentesque',
+    'price': {
+        'value': 300.52,
+        'currency': 'USD'
+    },
+    'status': 'Available'
+}, {
+    'name': 'Cepat Tablet 10.5',
+    'description': 'rutrum rutrum neque aenean auctor',
+    'price': {
+        'value': 365.12,
+        'currency': 'NZD'
+    },
+    'status': 'Become out of stock'
+}, {
+    'name': 'Ergo Mousepad',
+    'description': 'tortor duis mattis egestas',
+    'price': {
+        'value': 354.46,
+        'currency': 'EUR'
+    },
+    'status': 'Stocked on demand'
+}, {
+    'name': 'Ergo Screen E-I',
+    'description': 'massa quis augue luctus tincidunt',
+    'price': {
+        'value': 387.23,
+        'currency': 'NZD'
+    },
+    'status': 'Stocked on demand'
+}, {
+    'name': 'Ergo Screen E-II',
+    'description': 'orci eget',
+    'price': {
+        'value': 75.86,
+        'currency': 'EUR'
+    },
+    'status': 'Become out of stock'
+}, {
+    'name': 'Gaming Monster',
+    'description': 'cubilia curae',
+    'price': {
+        'value': 152.95,
+        'currency': 'EGP'
+    },
+    'status': 'Become out of stock'
+}, {
+    'name': 'Gaming Monster Pro',
+    'description': 'pharetra magna vestibulum aliquet',
+    'price': {
+        'value': 213.47,
+        'currency': 'MZN'
+    },
+    'status': 'Out of stock'
+}, {
+    'name': 'ITelO Vault',
+    'description': 'nisl duis',
+    'price': {
+        'value': 33.0,
+        'currency': 'EGP'
+    },
+    'status': 'Become out of stock'
+}, {
+    'name': 'ITelO Vault Net',
+    'description': 'ut odio',
+    'price': {
+        'value': 353.29,
+        'currency': 'EUR'
+    },
+    'status': 'Available'
+}, {
+    'name': 'Multi Color',
+    'description': 'cras mi pede malesuada',
+    'price': {
+        'value': 98.08,
+        'currency': 'MZN'
+    },
+    'status': 'Become out of stock'
+}, {
+    'name': 'Multi Print',
+    'description': 'ac diam cras pellentesque',
+    'price': {
+        'value': 169.13,
+        'currency': 'IDR'
+    },
+    'status': 'Available'
+}, {
+    'name': 'Mini Tablet',
+    'description': 'condimentum neque',
+    'price': {
+        'value': 196.52,
+        'currency': 'EGP'
+    },
+    'status': 'Out of stock'
+}, {
+    'name': 'Proctra X',
+    'description': 'augue vestibulum ante ipsum primis',
+    'price': {
+        'value': 275.65,
+        'currency': 'USD'
+    },
+    'status': 'Available'
+}, {
+    'name': 'Server Professional',
+    'description': 'porttitor lorem',
+    'price': {
+        'value': 456.5,
+        'currency': 'EGP'
+    },
+    'status': 'Stocked on demand'
+}, {
+    'name': 'Ultra Jet Super Color',
+    'description': 'tristique tortor',
+    'price': {
+        'value': 302.18,
+        'currency': 'EUR'
+    },
+    'status': 'Stocked on demand'
+}, {
+    'name': 'Ultra Jet Mobile',
+    'description': 'est congue elementum in hac',
+    'price': {
+        'value': 226.91,
+        'currency': 'NZD'
+    },
+    'status': 'Available'
+}, {
+    'name': 'Wireless DSL Router',
+    'description': 'ultrices aliquet maecenas leo odio',
+    'price': {
+        'value': 192.78,
+        'currency': 'USD'
+    },
+    'status': 'Become out of stock'
+}, {
+    'name': '10 Portable DVD player',
+    'description': 'cursus vestibulum proin',
+    'price': {
+        'value': 43.41,
+        'currency': 'EUR'
+    },
+    'status': 'Out of stock'
+}, {
+    'name': 'Astro Laptop 1516',
+    'description': 'justo sollicitudin ut',
+    'price': {
+        'value': 311.68,
+        'currency': 'MZN'
+    },
+    'status': 'Become out of stock'
+}, {
+    'name': 'Astro Phone 6',
+    'description': 'eget massa tempor convallis',
+    'price': {
+        'value': 326.64,
+        'currency': 'MZN'
+    },
+    'status': 'Stocked on demand'
+}, {
+    'name': 'Beam Breaker B-1',
+    'description': 'vestibulum sit',
+    'price': {
+        'value': 286.95,
+        'currency': 'IDR'
+    },
+    'status': 'Available'
 }];

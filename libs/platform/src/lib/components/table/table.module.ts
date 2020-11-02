@@ -30,7 +30,7 @@ import {
     TableViewSettingsFilterComponent
 } from './components';
 import { FdpCellDef, FdpHeaderCellDef, FdpTableCell, FdpTableHeader } from './directives';
-import { TableSortByPipe } from './pipes';
+import { TableFilterPipe, TableSortByPipe } from './pipes';
 
 @NgModule({
     imports: [
@@ -53,7 +53,8 @@ import { TableSortByPipe } from './pipes';
         RadioModule,
         IconModule,
 
-        InputGroupModule
+        InputGroupModule,
+        RadioModule
     ],
     declarations: [
         TableComponent,
@@ -67,8 +68,9 @@ import { TableSortByPipe } from './pipes';
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
         TableSortByPipe,
+        TableFilterPipe,
 
-        SortingComponent
+        SortingComponent,
     ],
     exports: [
         TableComponent,
@@ -81,7 +83,8 @@ import { TableSortByPipe } from './pipes';
         FdpHeaderCellDef,
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
-        TableSortByPipe
+        TableSortByPipe,
+        TableFilterPipe,
     ],
     providers: [ TableService ]
 })

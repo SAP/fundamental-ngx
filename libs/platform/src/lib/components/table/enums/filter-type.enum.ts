@@ -4,3 +4,12 @@ export enum FilterType {
     CATEGORY = 'category',
     CUSTOM = 'custom'
 }
+
+export enum FilterValueType {
+    STRING = 'string',
+    NUMBER = 'number',
+    BOOLEAN = 'boolean',
+    DATE = 'date',
+    SELECT = 'select',
+    CUSTOM = 'custom'
+}

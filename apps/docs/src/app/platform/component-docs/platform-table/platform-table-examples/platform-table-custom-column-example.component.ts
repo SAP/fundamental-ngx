@@ -97,7 +97,7 @@ const ITEMS = [{
     templateUrl: './platform-table-custom-column-example.component.html'
 })
 export class PlatformTableCustomColumnExampleComponent {
-    source: any[] = ITEMS;
+    source: any[] = []; // ITEMS;
 
     onRowSelectionChange(event): void {
         console.log(event);

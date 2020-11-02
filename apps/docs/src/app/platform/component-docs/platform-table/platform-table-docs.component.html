@@ -51,6 +51,15 @@
 </component-example>
 <code-example [exampleFiles]="sortableTable"></code-example>
 
+<fd-docs-section-title id="filterable-table" componentName="Table">
+    Column Filtering
+</fd-docs-section-title>
+<description>In this example, table data can be filtered by Name, Price and Status columns.</description>
+<component-example>
+    <fdp-table-filterable-example></fdp-table-filterable-example>
+</component-example>
+<code-example [exampleFiles]="filterableTable"></code-example>
+
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
@@ -73,7 +82,10 @@
             name="name"
             key="name"
             label="Name"
-            align="start">
+            [align]="data['first-column'].align"
+            [sortable]="data['first-column'].sortable"
+            [filterable]="data['first-column'].filterable"
+        >
         </fdp-column>
 
         <fdp-column

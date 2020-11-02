@@ -111,8 +111,7 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     private _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private readonly _rtlService: RtlService,
-        private readonly _cd: ChangeDetectorRef) { }
+    constructor(private readonly _rtlService: RtlService, private readonly _cd: ChangeDetectorRef) { }
 
     /** @hidden */
     ngOnInit(): void {

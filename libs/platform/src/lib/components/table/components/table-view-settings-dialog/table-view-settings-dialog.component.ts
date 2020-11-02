@@ -1,11 +1,19 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
-    Component, Input,
-    OnDestroy,
-    OnInit
+    ChangeDetectorRef,
+    Component,
+    ContentChildren,
+    forwardRef,
+    Input,
+    QueryList,
+    TemplateRef,
+    ViewChild
 } from '@angular/core';
 
 import { TableComponent } from '../../table.component';
+import { TableViewSettingsFilterComponent } from '../table-view-settings-filter/table-view-settings-filter.component';
+import { TableService } from '../../table.service';
 
 /**
  * View settings dialog component.
@@ -37,20 +45,27 @@ import { TableComponent } from '../../table.component';
  * */
 @Component({
     selector: 'fdp-table-view-settings-dialog',
-    template: '<ng-content></ng-content>',
+    template: '',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableViewSettingsDialogComponent implements OnInit, OnDestroy {
+export class TableViewSettingsDialogComponent implements AfterViewInit {
     /** Reference to table component. */
     @Input()
     table: TableComponent;
 
     /** @hidden */
-    constructor() { }
+    @ViewChild(TemplateRef)
+    contentTemplateRef: TemplateRef<any>;
 
     /** @hidden */
-    ngOnInit(): void {}
+    @ContentChildren(forwardRef(() => TableViewSettingsFilterComponent))
+    filters: QueryList<TableViewSettingsFilterComponent>;
 
     /** @hidden */
-    ngOnDestroy(): void {}
+    constructor(private readonly _cd: ChangeDetectorRef,
+                private readonly _tableService: TableService) {}
+
+    ngAfterViewInit(): void {
+        this._tableService.filters = this.filters;
+    }
 }

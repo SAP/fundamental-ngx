@@ -62,15 +62,14 @@ export class TableToolbarComponent implements AfterViewInit {
 
     /** @hidden */
     openSorting(): void {
-        const columns = this._tableService.columns;
-        const state = this._tableService.tableState;
+        const state = this._tableService.tableState$.getValue();
+        const columns = state.columns;
 
         const dialogRef = this._dialogService.open(SortingComponent, {
             responsivePadding: true,
             verticalPadding: false,
             minWidth: '30%',
             minHeight: '50%',
-            backdropClass: 'sorting-dialog',
             data: {
                 columns: columns.filter(c => c.sortable),
                 sortDirection: state && state.sortBy && state.sortBy[0] && state.sortBy[0].direction,
@@ -90,7 +89,7 @@ export class TableToolbarComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    openFilter(): void {
+    openFiltering(): void {
 
     }
 

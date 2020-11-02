@@ -25,9 +25,9 @@ import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { applyCssClass, CssClassBuilder, KeyUtil } from '@fundamental-ngx/core';
 import { TableService } from './table.service';
 import { TableColumnComponent, TableToolbarComponent } from './components';
-import { ContentDensity, SelectionMode, SortDirection } from './enums';
+import { CollectionStringFilterStrategy, ContentDensity, FilterValueType, SelectionMode, SortDirection } from './enums';
 import { ArrayTableDataSource, isDataSource, ObservableTableDataSource, TableDataSource } from '../../domain';
-import { SelectableRow, TableState } from './interfaces';
+import { CollectionFilter, CollectionStringFilter, SelectableRow, TableState } from './interfaces';
 import {
     TableColumnFreezeEvent,
     TableFilterChangeEvent,
@@ -181,6 +181,10 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     sortField: string;
     /** @hidden */
     sortDirection: SortDirection;
+    /** @hidden */
+    filterType: FilterValueType = FilterValueType.STRING;
+    /** @hidden */
+    filterValue: CollectionFilter;
 
     /** @hidden */
     checkedAll = false;
@@ -231,7 +235,8 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._tableService.columns = this.columns;
+        this._setInitialState();
+        // this._tableService.columns = this.columns;
 
         this.buildComponentCssClass();
         this._checkColumnsAbilities();
@@ -334,12 +339,19 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         }
     }
 
+    /** @hidden */
     sort(field: string, direction: SortDirection): void {
-        if (this.sortField === field && this.sortDirection === direction) {
-            return;
-        }
-
         this._tableService.sort(field, direction);
+        this.popoverOpen = false;
+    }
+
+    /** @hidden */
+    filter(field: string, value: string): void {
+        this._tableService.filter({
+            field: field,
+            value: value,
+            strategy: CollectionStringFilterStrategy.CONTAINS
+        } as CollectionFilter);
         this.popoverOpen = false;
     }
 
@@ -350,19 +362,41 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         return column.sortable || column.filterable || column.groupable;
     }
 
+    /** @hidden */
+    private _setInitialState(): void {
+        const prevState = this.getTableState();
+        this.setTableState({
+            ...prevState,
+            columns: this.columns
+        })
+    }
+
     private _onStateChanges(): void {
         this._subscriptions.add(
             this._tableService.tableState$
                 .pipe(filter(state => !!state), distinctUntilChanged())
                 .subscribe(state => {
-                    this.sortDirection = state.sortBy.length && state.sortBy[0].direction || null;
-                    this.sortField = state.sortBy.length && state.sortBy[0].field || null;
+                    if (state.sortBy.length) {
+                        this.sortDirection = state.sortBy[0].direction || null;
+                        this.sortField = state.sortBy[0].field || null;
+                    }
+
+                    const filterBy = state.filterBy;
+                    if (filterBy.length) {
+                        this.filterValue = filterBy[0] || null;
+                    }
                 })
         );
 
         this._subscriptions.add(
             this._tableService.sortChange.subscribe(event => {
                 this.sortChange.emit(new TableSortChangeEvent(this, event.current, event.previous));
+            })
+        );
+
+        this._subscriptions.add(
+            this._tableService.filterChange.subscribe(event => {
+                this.filterChange.emit(new TableFilterChangeEvent(this, event.current, event.previous));
             })
         );
     }

@@ -14,7 +14,7 @@ enum SpecificCollectionStringFilterStrategy {
     ENDS_WITH = 'ends with'
 }
 
-export type CollectionStringFilterStrategy = BaseCollectionFilterStrategy | SpecificCollectionStringFilterStrategy;
+export type CollectionStringFilterStrategy = BaseCollectionFilterStrategy & SpecificCollectionStringFilterStrategy;
 export const CollectionStringFilterStrategy = { ...BaseCollectionFilterStrategy, ...SpecificCollectionStringFilterStrategy };
 
 /** Number filter */
