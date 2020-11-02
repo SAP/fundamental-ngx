@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.15...v0.23.1-rc.16) (2020-11-02)
+
+
+### Features
+
+* introduce Title component ([#3707](https://github.com/SAP/fundamental-ngx/issues/3707)) ([250b179](https://github.com/SAP/fundamental-ngx/commit/250b1792f52233e3a5fc522cd7b2d760ab7bb8be))
+
 ### [0.23.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.14...v0.23.1-rc.15) (2020-11-01)
 
 ### [0.23.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.13...v0.23.1-rc.14) (2020-11-01)
