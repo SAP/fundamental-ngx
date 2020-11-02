@@ -81,7 +81,7 @@ export class PopoverComponent extends BasePopoverClass
     @Input()
     id: string = 'fd-popover-' + cdkPopoverUniqueId++;
 
-    /** Maximum width of popover body in px, prevent from  */
+    /** Maximum width of popover body in px, prevents from overextending body by `fillControlMode`  */
     @Input()
     maxWidth: number;
 
