@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MenuModule, PopoverModule, IconModule, RtlService } from '@fundamental-ngx/core';
+import { PopoverModule } from '../popover/popover.module';
+import { IconModule } from '../icon/icon.module';
+import { MenuModule } from '../menu/menu.module';
+import { RtlService } from '../utils/services/rtl.service';
 import { RouterModule } from '@angular/router';
 import { Component, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';

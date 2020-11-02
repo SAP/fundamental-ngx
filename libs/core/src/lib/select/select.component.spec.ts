@@ -4,7 +4,7 @@ import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
 import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { PopoverComponent } from '../popover/popover.component';
-import { OptionComponent } from '@fundamental-ngx/core';
+import { OptionComponent } from './option/option.component';
 
 @Component({
     template: `

@@ -5,7 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MenuComponent } from '../menu.component';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive'
 import { CommonModule } from '@angular/common';
-import { PopoverModule } from '@fundamental-ngx/core';
+import { PopoverModule } from '../../popover/popover.module';
 
 @Component({
     template: `

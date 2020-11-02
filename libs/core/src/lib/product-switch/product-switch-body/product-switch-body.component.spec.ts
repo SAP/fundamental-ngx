@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductSwitchBodyComponent } from './product-switch-body.component';
-import { ButtonModule, PopoverModule, ProductSwitchItem } from '@fundamental-ngx/core';
+import { ButtonModule } from '../../button/button.module';
+import { ProductSwitchItem } from './product-switch.item';
+import { PopoverModule } from '../../popover/popover.module';
 import { DragAndDropModule } from '../../utils/drag-and-drop/drag-and-drop.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component, DebugElement } from '@angular/core';

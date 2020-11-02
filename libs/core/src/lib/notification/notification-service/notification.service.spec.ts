@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { NgModule, TemplateRef, Component, ViewChild } from '@angular/core';
-import { NotificationService } from './notification.service';
+import { NotificationService } from '../notification-service/notification.service';
 import { NotificationRef } from '../notification-utils/notification-ref';
 import { NotificationModule } from '../notification.module';
 
