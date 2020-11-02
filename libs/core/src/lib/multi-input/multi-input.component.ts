@@ -385,7 +385,6 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-
     handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
@@ -407,9 +406,10 @@ export class MultiInputComponent implements
 
     /** @hidden */
     handleSearchTermChange(): void {
-        this.searchTermChange.emit(this.searchTerm);
-        this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
-        this._changeDetRef.detectChanges();
+        this._propagateSearchTermChange();
+        if (!this.open) {
+            this.openChangeHandle(true);
+        }
     }
 
     /** @hidden */
@@ -417,7 +417,7 @@ export class MultiInputComponent implements
         event.preventDefault();
         event.stopPropagation();
         this.searchTerm = '';
-        this.handleSearchTermChange();
+        this._propagateSearchTermChange();
     }
 
     /** @hidden */
@@ -427,7 +427,7 @@ export class MultiInputComponent implements
             this.dropdownValues.push(newToken);
             this.handleSelect(true, newToken);
             this.searchTerm = '';
-            this.handleSearchTermChange();
+            this._propagateSearchTermChange();
             this.open = false;
         }
     }
@@ -468,6 +468,14 @@ export class MultiInputComponent implements
         this.openChangeHandle(!this.open);
     }
 
+    /** @hidden */
+    private _propagateSearchTermChange(): void {
+        this.searchTermChange.emit(this.searchTerm);
+        this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
+        this._changeDetRef.detectChanges();
+    }
+
+    /** @hidden */
     private defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
