@@ -1,0 +1,11 @@
+<ng-container *ngIf="node">
+    <!--    {{ node.name }} <br>-->
+    <!--    {{ node.description }} <br>-->
+    <ng-container *ngIf="node.approvers?.length">
+        <fd-avatar [image]="node.approvers[0].imgUrl" size="xs" [circle]="true"></fd-avatar>
+        {{ node.approvers[0].name }} <br>
+        {{ node.approvers[0].description }} <br>
+    </ng-container>
+    <fdp-object-status [status]="node.status === 'approved' ? 'positive' : 'informative'" inverted="true">{{ node.dueDate | date }}</fdp-object-status>
+
+</ng-container>

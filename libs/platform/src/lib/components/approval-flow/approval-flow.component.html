@@ -1,1 +1,13 @@
-<p>approval-flow works!</p>
+<fd-toolbar [hasTitle]="true">
+    <h4>{{ title }}</h4>
+    <!--    <button fd-toolbar-item fd-button [compact]="true" label="Edit"></button>-->
+</fd-toolbar>
+
+<pre>{{ _approvalProcess | json }}</pre>
+
+<div class="approval-flow-watchers">
+    <p>Watchers</p>
+    <fd-avatar style="margin-right: 10px    " *ngFor="let watcher of _approvalProcess?.watchers" [image]="watcher.imgUrl" size="xs" [circle]="true"></fd-avatar>
+</div>
+
+<fdp-approval-flow-node  *ngFor="let node of _approvalProcess?.nodes" [node]="node"></fdp-approval-flow-node>

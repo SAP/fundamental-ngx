@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { ApprovalDataSource, UserDataSource } from './interfaces';
+import { ApprovalDataSource, ApprovalProcess, UserDataSource } from './interfaces';
 
 @Component({
     selector: 'fdp-approval-flow',
@@ -20,10 +20,17 @@ export class ApprovalFlowComponent implements OnInit {
     /** Data source used for selecting watchers and getting user details. */
     @Input() watcherDataSource: UserDataSource;
 
+    _approvalProcess: ApprovalProcess;
+
     constructor() {
     }
 
     ngOnInit(): void {
+        console.log('dataSource', { source: this.dataSource });
+        this.dataSource.fetch().subscribe(approvalProcess => {
+            this._approvalProcess = approvalProcess;
+            console.log('approvalProcess', approvalProcess);
+        })
     }
 
 }
