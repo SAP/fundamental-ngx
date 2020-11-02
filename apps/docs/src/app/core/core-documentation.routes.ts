@@ -352,6 +352,10 @@ export const ROUTES: Routes = [
                     import('./component-docs/time-picker/time-picker-docs.module').then((m) => m.TimePickerDocsModule)
             },
             {
+                path: 'title',
+                loadChildren: () => import('./component-docs/title/title-docs.module').then((m) => m.TitleDocsModule)
+            },
+            {
                 path: 'token',
                 loadChildren: () => import('./component-docs/token/token-docs.module').then((m) => m.TokenDocsModule)
             },
