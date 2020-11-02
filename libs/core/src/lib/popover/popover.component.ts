@@ -79,6 +79,10 @@ export class PopoverComponent extends BasePopoverClass
     @Input()
     id: string = 'fd-popover-' + cdkPopoverUniqueId++;
 
+    /** Maximum width of popover body in px, prevent from  */
+    @Input()
+    maxWidth: number;
+
     /** @hidden */
     @ViewChild('templateRef', { read: TemplateRef })
     templateRef: TemplateRef<any>;
@@ -373,10 +377,12 @@ export class PopoverComponent extends BasePopoverClass
 
     /** @hidden */
     private _applyWidthOverlay(): void {
+        const maxWidthLimit = this.maxWidth ? this.maxWidth : 100000000000;
+        const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
         if (this.fillControlMode === 'at-least') {
-            this._overlayRef.updateSize({ minWidth: this._getTriggerWidth() });
+            this._overlayRef.updateSize({ minWidth: width });
         } else if (this.fillControlMode === 'equal') {
-            this._overlayRef.updateSize({ width: this._getTriggerWidth() });
+            this._overlayRef.updateSize({ width: width });
         }
         this._changeDetectorRef.detectChanges();
     }

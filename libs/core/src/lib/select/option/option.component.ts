@@ -8,7 +8,7 @@ import {
     HostListener,
     Input,
     OnDestroy,
-    OnInit,
+    OnInit, TemplateRef, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
@@ -68,7 +68,14 @@ export class OptionComponent implements OnInit, OnDestroy {
     selected = false;
 
     /** @hidden */
+    @ViewChild('contentTemplateRef', { read: TemplateRef })
+    contentTemplateRef: TemplateRef<any>;
+
+    /** @hidden */
     selectionEvent = new EventEmitter<KeyboardEvent>()
+
+    /** @hidden Whether option contains more than basic text. */
+    extendedTemplate = false;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
@@ -133,6 +140,14 @@ export class OptionComponent implements OnInit, OnDestroy {
     /** Returns HTMLElement representation of the component. */
     getHtmlElement(): HTMLElement {
         return this._elementRef.nativeElement as HTMLElement;
+    }
+
+    /** Change extended template property */
+    setExtendedTemplate(extendedTemplate: boolean): void {
+        if (this.extendedTemplate !== extendedTemplate) {
+            this.extendedTemplate = extendedTemplate;
+            this._changeDetRef.detectChanges();
+        }
     }
 
     /** @hidden */

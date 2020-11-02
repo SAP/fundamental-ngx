@@ -15,6 +15,7 @@
          [cdkTrapFocus]="focusTrapped"
          [cdkTrapFocusAutoCapture]="focusAutoCapture"
          [style]="marginStyle"
+         [style.max-width.px]="maxWidth"
          (keydown)="bodyKeydownHandler($event)">
         <ng-content select="fd-popover-body"></ng-content>
         <ng-content></ng-content>

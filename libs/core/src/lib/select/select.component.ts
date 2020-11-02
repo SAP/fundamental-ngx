@@ -107,6 +107,10 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     @Input()
     compact = false;
 
+    /** Whether option components contain more than basic text. */
+    @Input()
+    extendedBodyTemplate = false;
+
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight: string;
@@ -133,10 +137,10 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     };
 
     /**
-     * Preset options for the popover body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
-     * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * Leave blank for no effect.
+     * Preset options for the Select body width.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the InputGroup. - Default
+     * * `equal` will apply a width to the body equivalent to the width of the InputGroup.
+     * * '' for no effect
      */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
@@ -281,6 +285,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     ngAfterViewInit(): void {
         this._listenOnControlTouched();
         this._setOptionsArray();
+        this._changeOptionsProperties();
         this._setupMobileMode();
     }
 
@@ -374,6 +379,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
             this.options.changes
                 .subscribe(_ => {
                     this._setOptionsArray();
+                    this._changeOptionsProperties();
                     this._setSelectedOption();
                     this._listenOnOptionKeydown();
                     setTimeout(() => {
@@ -541,6 +547,11 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     /** @hidden */
     private _setOptionsArray(): void {
         this._options = this.options.toArray();
+    }
+
+    /** @hidden */
+    private _changeOptionsProperties(): void {
+        this._options.forEach(option => option.setExtendedTemplate(this.extendedBodyTemplate));
     }
 
     /** @hidden */

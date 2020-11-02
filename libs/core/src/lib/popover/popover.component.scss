@@ -126,7 +126,7 @@ $fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
 
 .fd-popover-custom-list {
     .fd-list {
-        max-width: 100%;
+		overflow: auto;
     }
 }
 
@@ -138,4 +138,8 @@ $fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
     .fd-popover__control {
         cursor: auto;
     }
+}
+
+.cdk-overlay-connected-position-bounding-box {
+	height: auto !important;
 }
