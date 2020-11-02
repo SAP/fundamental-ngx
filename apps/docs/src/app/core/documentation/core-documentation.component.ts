@@ -17,6 +17,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
 
         this.components = [
             { url: 'core/action-bar', name: 'Action Bar' },
+            { url: 'core/action-sheet', name: 'Action Sheet' },
             { url: 'core/alert', name: 'Alert' },
             { url: 'core/avatar', name: 'Avatar' },
             { url: 'core/bar', name: 'Bar' },

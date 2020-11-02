@@ -17,6 +17,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/action-bar/action-bar-docs.module').then((m) => m.ActionBarDocsModule)
             },
             {
+                path: 'action-sheet',
+                loadChildren: () =>
+                    import('./component-docs/action-sheet/action-sheet-docs.module').then((m) => m.ActionSheetDocsModule)
+            },
+            {
                 path: 'alert',
                 loadChildren: () => import('./component-docs/alert/alert-docs.module').then((m) => m.AlertDocsModule)
             },
