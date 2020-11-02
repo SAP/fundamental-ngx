@@ -27,7 +27,7 @@
     "copy-hcw-theme": "cp node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3_hcw/css_variables.css apps/docs/src/assets/sap_fiori_3_hcw.css",
     "deploy-docs": "angular-cli-ghpages -d dist/apps/docs --branch gh-pages",
     "sync-versions": "./ci-scripts/sync-version.sh",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e --protractorConfig=protractor.conf.js",
     "e2e:ci": "ng e2e --protractorConfig=protractor-ci.conf.js",
     "hmr": "ng serve --hmr -e=hmr",
     "lint": "ng lint docs && ng lint core && ng lint platform",
