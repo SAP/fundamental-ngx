@@ -4,7 +4,7 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { LayoutGridDocsComponent } from './layout-grid-docs.component';
 import { LayoutGridDocsHeaderComponent } from './layout-grid-docs-header/layout-grid-docs-header.component';
-import { LayoutGridModule } from '@fundamental-ngx/core';
+import { LayoutGridModule, StepInputModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
 
@@ -20,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutGridModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutGridModule, StepInputModule],
     exports: [RouterModule],
     declarations: [examples, LayoutGridDocsComponent, LayoutGridDocsHeaderComponent]
 })
