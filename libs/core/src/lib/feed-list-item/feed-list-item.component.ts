@@ -9,13 +9,11 @@ import {
   ContentChild,
   OnInit,
   OnChanges,
-  Renderer2,
   ChangeDetectorRef
 } from '@angular/core';
 
 import { CssClassBuilder, applyCssClass } from '../utils/public_api';
-
-const componentClassPrefix = 'fd-feed-list__item';
+import { FEED_LIST_PREFIX, FEED_LIST_ITEM_PREFIX } from './feed-list-item.constant';
 
 @Component({
   selector: 'fd-feed-list-item',
@@ -74,6 +72,16 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
   */
   @Input()
   isRichText = false;
+  /**
+   * Apply mobile view
+  */
+  @Input()
+  isMobile = false;
+  /**
+   * It removes border if items are displaying in a group.
+  */
+  @Input()
+  borderLess = false;
 
   /**
    * @hidden
@@ -95,7 +103,6 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
   /** @hidden */
   constructor(
     private readonly _elementRef: ElementRef,
-    private readonly _renderer: Renderer2,
     private readonly _changeDetectorRef: ChangeDetectorRef
   ) { }
 
@@ -105,9 +112,6 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
   }
   /** @hidden */
   ngOnChanges(changes: SimpleChanges): void {
-    if ('maxRows' in changes) {
-      this._updateMaxRowClamp();
-    }
     if ('class' in changes || 'isRichText' in changes) {
       this.buildComponentCssClass();
     }
@@ -119,9 +123,11 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
    * function is responsible for order which css classes are applied
    */
   buildComponentCssClass(): string[] {
-    return [componentClassPrefix,
+    return [FEED_LIST_ITEM_PREFIX,
       this.class,
-      this.isRichText ? '' : `${componentClassPrefix}--collapsible`
+      this.isRichText ? '' : `${FEED_LIST_ITEM_PREFIX}--collapsible`,
+      this.borderLess ? `${FEED_LIST_PREFIX}--no-border` : '',
+      this.isMobile ? `${FEED_LIST_PREFIX}--s` : '',
     ];
   }
 
@@ -133,21 +139,11 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
   /** @hidden */
   toggleTextView(): void {
     this.isCollapsed = !this.isCollapsed;
-    this._updateMaxRowClamp();
   }
 
   /** @hidden */
   checkLineCount(count: number): void {
     this.hasMore = count > +this.maxRows;
     this._changeDetectorRef.detectChanges();
-  }
-
-  /** @hidden */
-  private _updateMaxRowClamp(): void {
-    if (this.isCollapsed) {
-      this._renderer.setStyle(this._elementRef.nativeElement, '--line-clamp', this.maxRows, 2);
-    } else {
-      this._renderer.setStyle(this._elementRef.nativeElement, '--line-clamp', 'inherit', 2);
-    }
   }
 }

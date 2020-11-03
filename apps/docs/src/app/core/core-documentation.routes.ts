@@ -17,6 +17,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/action-bar/action-bar-docs.module').then((m) => m.ActionBarDocsModule)
             },
             {
+                path: 'action-sheet',
+                loadChildren: () =>
+                    import('./component-docs/action-sheet/action-sheet-docs.module').then((m) => m.ActionSheetDocsModule)
+            },
+            {
                 path: 'alert',
                 loadChildren: () => import('./component-docs/alert/alert-docs.module').then((m) => m.AlertDocsModule)
             },
@@ -61,6 +66,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/calendar/calendar-docs.module').then((m) => m.CalendarDocsModule)
             },
             {
+                path: 'carousel',
+                loadChildren: () =>
+                    import('./component-docs/carousel/carousel-docs.module').then((m) => m.CarouselDocsModule)
+            },
+            {
                 path: 'checkbox',
                 loadChildren: () =>
                     import('./component-docs/checkbox/checkbox-docs.module').then((m) => m.CheckboxDocsModule)
@@ -87,9 +97,16 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
             },
             {
-                path: 'feed-list-item',
+              path: 'feed-list-item',
                 loadChildren: () =>
                     import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)
+            },
+            {
+                path: 'dynamic-side-content',
+                loadChildren: () =>
+                    import('./component-docs/dynamic-side-content/dynamic-side-content-docs.module').then(
+                        (m) => m.DynamicSideContentDocsModule
+                    )
             },
             {
                 path: 'file-input',
@@ -180,6 +197,10 @@ export const ROUTES: Routes = [
             {
                 path: 'list',
                 loadChildren: () => import('./component-docs/list/list-docs.module').then((m) => m.ListDocsModule)
+            },
+            {
+                path: 'list-byline',
+                loadChildren: () => import('./component-docs/list-byline/list-byline-docs.module').then((m) => m.ListDocsModule)
             },
             {
                 path: 'localizationEditor',
@@ -339,6 +360,10 @@ export const ROUTES: Routes = [
                 path: 'timePicker',
                 loadChildren: () =>
                     import('./component-docs/time-picker/time-picker-docs.module').then((m) => m.TimePickerDocsModule)
+            },
+            {
+                path: 'title',
+                loadChildren: () => import('./component-docs/title/title-docs.module').then((m) => m.TitleDocsModule)
             },
             {
                 path: 'token',

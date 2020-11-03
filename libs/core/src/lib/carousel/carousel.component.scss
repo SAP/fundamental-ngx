@@ -1,0 +1,11 @@
+@import '~fundamental-styles/dist/carousel';
+
+.fd-carousel-items-horizontal {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.fd-carousel-items-display {
+    overflow: hidden;
+}

@@ -1,83 +1,53 @@
-<ul class="fd-feed-list" aria-label="Feed List Item with user link example">
-    <li class="fd-feed-list__body">
-        <fd-feed-list-item
-            authorTitle="John Doe"
-            authorLink="http://example.com/"
-            text="<h4>Long text, you can toggle</h4> view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-            maxRows="2"
-            ariaLabel="Feed list item example">
-            <ng-template #avatar>
-                <div class="fd-avatar fd-avatar--s fd-avatar--thumbnail fd-feed-list--link">
-                    <img
-                        aria-label="John Doe"
-                        title="John Doe"
-                        src="https://avatars.dicebear.com/api/human/fe.svg?m=6&b=%23f5f0f0&mood[]=surprised">
-                </div>
-            </ng-template>
-            <ng-template #action>
-                <button aria-label="action" fd-button fdType="transparent" [compact]="true" glyph="overflow"></button>
-            </ng-template>
-            <ng-template #footer>
-                <small class="fd-feed-list__footer--byline">Aug 20, 2020</small>
-            </ng-template>
-        </fd-feed-list-item>
-    </li>
-</ul>
+<div class="fd-feed-list" aria-label="Feed List Item with action and footer">
+    <fd-feed-list-item
+        authorTitle="Author with very looong tiiiiiitttttttttttttttleeeeeeeeeeeeeeeeeeeeee"
+        authorLink="http://example.com/"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example">
+        <ng-template #action>
+            <button
+                aria-label="action"
+                fd-button fdType="transparent"
+                [compact]="true"
+                [fdMenuTrigger]="menu"
+                glyph="menu"></button>
+            <fd-menu #menu>
+                <li fd-menu-item>
+                    <a href="#" fd-menu-interactive>
+                        <span fd-menu-title>Option 1</span>
+                    </a>
+                </li>
+                <li fd-menu-item>
+                    <a href="#" fd-menu-interactive>
+                        <span fd-menu-title>Option 2</span>
+                    </a>
+                </li>
+                <li fd-menu-item>
+                    <a href="#" fd-menu-interactive>
+                        <span fd-menu-title>Option 3</span>
+                    </a>
+                </li>
+            </fd-menu>
+        </ng-template>
+        <ng-template #footer>
+            <small class="fd-feed-list__footer--byline">Aug 20, 2020</small>
+            <small class="fd-feed-list__footer--byline">
+                <a target="_blank" href="http://example.com/branch" class="fd-link">Reply link</a>
+            </small>
+        </ng-template>
+    </fd-feed-list-item>
+</div>
 
-<ul class="fd-feed-list" aria-label="Feed List Item with user link example">
-    <li class="fd-feed-list__body">
-        <fd-feed-list-item
-            authorTitle="Author with very looong tiiiiiitttttttttttttttleeeeeeeeeeeeeeeeeeeeee"
-            authorLink="http://example.com/"
-            text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-            maxRows="2"
-            ariaLabel="Feed list item example">
-            <ng-template #action>
-                <button
-                    aria-label="action"
-                    fd-button fdType="transparent"
-                    [compact]="true"
-                    [fdMenuTrigger]="menu"
-                    glyph="menu"></button>
-                <fd-menu #menu>
-                    <li fd-menu-item>
-                        <a href="#" fd-menu-interactive>
-                            <span fd-menu-title>Option 1</span>
-                        </a>
-                    </li>
-                    <li fd-menu-item>
-                        <a href="#" fd-menu-interactive>
-                            <span fd-menu-title>Option 2</span>
-                        </a>
-                    </li>
-                    <li fd-menu-item>
-                        <a href="#" fd-menu-interactive>
-                            <span fd-menu-title>Option 3</span>
-                        </a>
-                    </li>
-                </fd-menu>
-            </ng-template>
-            <ng-template #footer>
-                <small class="fd-feed-list__footer--byline">Aug 20, 2020</small>
-                <small class="fd-feed-list__footer--byline">
-                    <a target="_blank" href="http://example.com/branch" class="fd-link">Reply link</a>
-                </small>
-            </ng-template>
-        </fd-feed-list-item>
-    </li>
-</ul>
-
-<ul class="fd-feed-list" aria-label="Feed List Item with user link example">
-    <li class="fd-feed-list__body">
-        <fd-feed-list-item
-            authorTitle="Author without link"
-            text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-            maxRows="2"
-            ariaLabel="Feed list item example">
-            <ng-template #footer>
-                <small class="fd-feed-list__footer--byline">Aug 20, 2020</small>
-                <small class="fd-feed-list__footer--byline">Reply</small>
-            </ng-template>
-        </fd-feed-list-item>
-    </li>
-</ul>
+<div class="fd-feed-list" aria-label="Feed List Item with footer only">
+    <fd-feed-list-item
+        authorTitle="Author without link"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example">
+        <ng-template #footer>
+            <small class="fd-feed-list__footer--byline">Aug 20, 2020</small>
+            <small class="fd-feed-list__footer--byline">Reply</small>
+        </ng-template>
+    </fd-feed-list-item>
+</div>

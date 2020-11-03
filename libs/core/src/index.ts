@@ -1,5 +1,6 @@
 export * from './lib/fundamental-ngx-core.module';
 export * from './lib/action-bar/public_api';
+export * from './lib/action-sheet/public_api';
 export * from './lib/alert/public_api';
 export * from './lib/avatar/public_api';
 export * from './lib/badge/public_api';
@@ -64,3 +65,5 @@ export * from './lib/card/public_api';
 export * from './lib/object-number/public_api';
 export * from './lib/message-toast/public_api';
 export * from './lib/feed-list-item/public_api';
+export * from './lib/dynamic-side-content/public_api';
+export * from './lib/title/public_api';

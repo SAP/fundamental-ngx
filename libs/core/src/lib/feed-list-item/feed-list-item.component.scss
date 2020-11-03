@@ -10,7 +10,6 @@ $block: fd-feed-list;
     &__item {
         display: flex;
         width: 100%;
-        --line-clamp: 2;
     }
 
     &__item--collapsible {
@@ -45,6 +44,7 @@ $block: fd-feed-list;
         }
     }
     &__content {
+        width: 100%;
         flex: 1 1 auto;
     }
 }

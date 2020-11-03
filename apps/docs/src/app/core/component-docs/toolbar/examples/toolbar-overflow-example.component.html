@@ -18,9 +18,18 @@
     <button fd-toolbar-item fd-button label="Button" [compact]="true"></button>
 
     <fd-split-button fd-toolbar-item [compact]="true">
-        <ng-template fd-split-button-action-title>
-            Action
-        </ng-template>
+        <fd-menu>
+            <li fd-menu-item>
+                <div fd-menu-interactive>
+                    <span fd-menu-title>Option 1</span>
+                </div>
+            </li>
+            <li fd-menu-item>
+                <div fd-menu-interactive>
+                    <span fd-menu-title>Option 2</span>
+                </div>
+            </li>
+        </fd-menu>
     </fd-split-button>
 
     <label fd-toolbar-item fd-toolbar-label fd-form-label for="input-1">Default Input</label>

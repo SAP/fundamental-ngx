@@ -12,12 +12,14 @@ import * as fliActionT from '!raw-loader!./examples/fli-action/fli-action-exampl
 import * as fliFooterH from '!raw-loader!./examples/fli-footer/fli-footer-example.component.html';
 import * as fliFooterT from '!raw-loader!./examples/fli-footer/fli-footer-example.component.ts';
 
+import * as fliMobileH from '!raw-loader!./examples/fli-mobile/fli-mobile-example.component.html';
+import * as fliMobileT from '!raw-loader!./examples/fli-mobile/fli-mobile-example.component.ts';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-feed-list-item-doc',
-    templateUrl: './feed-list-item-docs.component.html',
-    styleUrls: ['./feed-list-item-docs.component.scss']
+    templateUrl: './feed-list-item-docs.component.html'
 })
 export class FeedListItemDocsComponent {
     fliSimpleExample: ExampleFile[] = [
@@ -73,6 +75,20 @@ export class FeedListItemDocsComponent {
             component: 'FliFooterExampleComponent',
             code: fliFooterT,
             fileName: 'fli-footer-example'
+        }
+    ];
+
+    fliMobileExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: fliMobileH,
+            fileName: 'fli-mobile-example'
+        },
+        {
+            language: 'typescript',
+            component: 'FliMobileExampleComponent',
+            code: fliMobileT,
+            fileName: 'fli-mobile-example'
         }
     ];
 }

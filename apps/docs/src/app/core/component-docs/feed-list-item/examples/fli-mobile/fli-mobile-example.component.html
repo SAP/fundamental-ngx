@@ -1,0 +1,40 @@
+<div style="max-width: 350px; position: relative">
+    <div class="fd-feed-list" aria-label="Feed List Item with mobile view">
+        <fd-feed-list-item
+            authorTitle="John Doe"
+            authorLink="http://example.com/"
+            text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            maxRows="2"
+            [isMobile]="true"
+            ariaLabel="Feed list item example">
+            <ng-template #avatar>
+                <div class="fd-avatar fd-avatar--s fd-avatar--thumbnail fd-feed-list--link">
+                    <img
+                        aria-label="John Doe"
+                        title="John Doe"
+                        src="https://avatars.dicebear.com/api/human/fe.svg?m=6&b=%23f5f0f0&mood[]=surprised">
+                </div>
+            </ng-template>
+            <ng-template #action>
+                <fd-action-sheet [mobile]="true">
+                    <fd-action-sheet-control>
+                        <button fd-button [compact]="true" glyph="overflow"></button>
+                    </fd-action-sheet-control>
+
+                    <fd-action-sheet-body>
+                        <li fd-action-sheet-item label="Button 1" glyph="attachment"></li>
+                        <li fd-action-sheet-item label="Button 2" glyph="add"></li>
+                        <li fd-action-sheet-item label="Button 3" glyph="print"></li>
+                        <li fd-action-sheet-item label="Cancel" [negative]="true" [isCloseButton]="true"></li>
+                    </fd-action-sheet-body>
+                </fd-action-sheet>
+            </ng-template>
+            <ng-template #footer>
+                <small class="fd-feed-list__footer--byline">Aug 20, 2020</small>
+                <small class="fd-feed-list__footer--byline">
+                    <a target="_blank" href="http://example.com/branch" class="fd-link">Reply link</a>
+                </small>
+            </ng-template>
+        </fd-feed-list-item>
+    </div>
+</div>

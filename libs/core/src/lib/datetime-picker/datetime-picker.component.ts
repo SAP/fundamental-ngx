@@ -80,7 +80,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** The element to which the popover should be appended. */
     @Input()
-    appendTo: HTMLElement | 'body' = 'body';
+    appendTo: ElementRef;
 
     /** Whether the time component should be meridian (am/pm). */
     /** @hidden */
@@ -368,7 +368,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.onTouched();
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
-            this._activateTimeComponent();
         }
     }
 
@@ -558,22 +557,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         } else {
             return this._datePipe.transform(fdDateTime.toDate(), this.format, null, this.locale);
         }
-    }
-
-    /** @hidden */
-    private _activateTimeComponent(): void {
-        this.popover.directiveRef.loaded
-            .pipe(
-                first(),
-                takeUntil(this._onDestroy$),
-                delay(0)
-            )
-            .subscribe(() => {
-                if (!this.timeComponent.activeView) {
-                    this.timeComponent.changeActive('hour');
-                }
-                this.timeComponent.refreshTime();
-            });
     }
 
     /** @hidden */

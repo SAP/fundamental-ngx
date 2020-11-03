@@ -1,48 +1,63 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
+import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
+import { CSS_CLASS_NAME } from './constants';
 
 /**
  * Use a layout grid to arrange components evenly in a grid layout.
  */
 @Component({
-    selector: 'fd-layout-grid',
+    selector: 'fd-layout-grid, [fdLayoutGrid]',
     template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
     styleUrls: ['./layout-grid.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutGridComponent extends AbstractFdNgxClass {
-    /** @Input Column span for the grid system */
+export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
+
+    /** Custom classes */
     @Input()
-    col: number;
+    set class(userClass: string) {
+        this._class = userClass;
+        this.buildComponentCssClass();
+    }
 
     /** Whether the grid should have a gap. */
     @Input()
-    nogap = false;
-
-    /** Whether the grid should have a gap. */
-    @Input()
-    gapSize: number;
+    noGap: boolean;
 
     /** @hidden */
-    _setProperties(): void {
-        this._addClassToElement('fd-layout-grid');
+    private _class = '';
 
-        if (this.nogap) {
-            this._addClassToElement('fd-layout-grid--no-gap');
-        }
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {}
 
-        if (this.gapSize) {
-            this._addClassToElement('fd-layout-grid--gap-' + this.gapSize);
-        }
-
-        if (this.col) {
-            this._addClassToElement('fd-layout-grid--col-' + this.col);
-        }
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef {
+        return this._elementRef;
+    }
+
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [CSS_CLASS_NAME.layoutGrid, this.noGap ? CSS_CLASS_NAME.layoutGridNoGap : '', this._class];
     }
 }

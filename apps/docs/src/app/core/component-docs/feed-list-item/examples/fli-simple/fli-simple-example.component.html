@@ -1,40 +1,47 @@
-<h6>
+<p>
     <label for="toggle-text-righ1">Toggle rich text (formatted text): <input type="checkbox" [(ngModel)]="hasFormattedText" id="toggle-text-righ1" /></label>
-</h6>
-<ul class="fd-feed-list" aria-label="Feed List Item with user link example">
-    <li class="fd-feed-list__body">
-        <fd-feed-list-item
-            authorTitle="John Doe"
-            authorLink="http://example.com/"
-            [isRichText]="hasFormattedText"
-            text="<h2>Long text, you can toggle view with more/less button.</h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            maxRows="2"
-            ariaLabel="Feed list item example with long text">
-        </fd-feed-list-item>
-    </li>
-</ul>
-<h6>Custom more/less button's text</h6>
-<ul class="fd-feed-list" aria-label="Feed List Item with user link example">
-    <li class="fd-feed-list__body">
-        <fd-feed-list-item
-            authorTitle="Author with very looong tiiitttleee"
-            authorLink="http://example.com/"
-            text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-            maxRows="2"
-            ariaLabel="Feed list item example">
-        </fd-feed-list-item>
-    </li>
-</ul>
-<h6>Custom more/less button's text</h6>
-<ul class="fd-feed-list" aria-label="Feed List Item with user link example">
-    <li class="fd-feed-list__body">
-        <fd-feed-list-item
-            authorTitle="Author without link"
-            text="<h2>Long text, you can toggle view with more/less button.</h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            maxRows="2"
-            moreLabel="Open"
-            lessLabel="Close"
-            ariaLabel="Feed list item example">
-        </fd-feed-list-item>
-    </li>
-</ul>
+</p>
+<div class="fd-feed-list" aria-label="Feed List Item with formatted text">
+    <fd-feed-list-item
+        authorTitle="John Doe"
+        authorLink="http://example.com/"
+        [isRichText]="hasFormattedText"
+        text="<h2>Long text, you can toggle view with more/less button.</h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+        maxRows="2"
+        ariaLabel="Feed list item example with long text">
+    </fd-feed-list-item>
+</div>
+<p>Custom more/less button's text</p>
+<div class="fd-feed-list" aria-label="Feed List Item with Custom more/less button's text">
+    <fd-feed-list-item
+        authorTitle="Author with very looong tiiitttleee"
+        authorLink="http://example.com/"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example">
+    </fd-feed-list-item>
+</div>
+<p>Feed list item group with borderless</p>
+<div class="fd-feed-list fd-feed-list--group" aria-label="Feed List Item with custom more/less button's text, group with borderless">
+    <fd-feed-list-item
+        authorTitle="Author 1"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example"
+        [borderLess]="true">
+    </fd-feed-list-item>
+    <fd-feed-list-item
+        authorTitle="Author 2"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example"
+        [borderLess]="true">
+    </fd-feed-list-item>
+    <fd-feed-list-item
+        authorTitle="Author 3"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example"
+        [borderLess]="true">
+    </fd-feed-list-item>
+</div>

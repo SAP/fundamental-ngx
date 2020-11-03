@@ -3,13 +3,15 @@
 <ng-template #selectDesktopTemplate>
     <fd-popover
         style="display: block"
+        additionalBodyClass="fd-popover-custom-list"
         [isOpen]="isOpen"
         [triggers]="[]"
+        [focusTrapped]="true"
         [disabled]="disabled"
         [appendTo]="appendTo"
         [options]="popperOptions"
         [closeOnEscapeKey]="false"
-        [fillControlMode]="fillControlMode"
+        [fillControlMode]="'at-least'"
         [closeOnOutsideClick]="closeOnOutsideClick"
         (isOpenChange)="popoverOpenChangeHandle($event)">
 
@@ -76,8 +78,10 @@
 <ng-template #selectOptionsListTemplate>
     <ul fd-list
         role="listbox"
+        tabindex="-1"
         [compact]="compact"
         [dropdownMode]="true"
+        [keyboardSupport]="false"
         [hasMessage]="!!stateMessage"
         [attr.id]="controlId + '-list-box'"
         [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">

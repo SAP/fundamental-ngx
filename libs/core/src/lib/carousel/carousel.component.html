@@ -1,0 +1,79 @@
+<div class="fd-carousel" [class.fd-carousel--no-navigation]="!navigation" data-ride="carousel" [style.height]="height"
+    [style.width]="width" [attr.dir]="dir">
+
+    <ng-container *ngIf="pageIndicatorContainer && carouselIndicatorsOrientation === 'top'">
+        <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
+    </ng-container>
+
+    <div class="fd-carousel__content fd-carousel-items-display" [class.fd-carousel-items-horizontal]="!vertical">
+        <ng-container *ngIf="!navigatorInPageIndicator">
+            <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
+        </ng-container>
+
+        <div #slideContainer [class.fd-carousel-items-horizontal]="!vertical">
+            <ng-content></ng-content>
+        </div>
+
+        <ng-container *ngIf="!navigatorInPageIndicator">
+            <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
+        </ng-container>
+    </div>
+
+    <ng-container *ngIf="pageIndicatorContainer && carouselIndicatorsOrientation === 'bottom'">
+        <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
+    </ng-container>
+
+    <div style="display: none;" role="region" id="id+'-accessibility'" aria-live="polite" [attr.dir]="'ltr'">
+        {{ screenReaderLabel }}
+    </div>
+</div>
+
+<ng-template #pageIndicatorContainer>
+    <div class="fd-carousel__page-indicator-container">
+        <ng-container *ngIf="navigatorInPageIndicator">
+            <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
+        </ng-container>
+
+        <ng-container *ngTemplateOutlet="pageIndicators"></ng-container>
+
+        <ng-container *ngIf="navigatorInPageIndicator">
+            <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #pageIndicators>
+    <ng-container *ngIf="numericIndicator">
+        <div class="fd-carousel__page-indicators">
+            <ng-container *ngIf="pageIndicator">
+                <div class="fd-carousel__text" [attr.dir]="'ltr'">
+                    {{getPageIndicatorLabel}}
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!numericIndicator">
+        <ol class="fd-carousel__page-indicators">
+            <ng-container *ngIf="pageIndicator">
+                <ng-container *ngFor="let item of pageIndicatorsCountArray; let i=index">
+                    <li data-slide-to="i+1" class="fd-carousel__page-indicator"
+                        [class.fd-carousel__page-indicator--active]="i===currentActiveSlidesStartIndex"></li>
+                </ng-container>
+            </ng-container>
+        </ol>
+    </ng-container>
+</ng-template>
+
+<ng-template #buttonLeft>
+    <button class="fd-button fd-carousel__button fd-carousel__button--left" [style.z-index]="1" data-slide="previous"
+        [attr.aria-label]="leftNavigationBtnLabel" (click)="previous()" [disabled]="leftButtonDisabled">
+        <i class="sap-icon--slim-arrow-left"></i>
+    </button>
+</ng-template>
+
+<ng-template #buttonRight>
+    <button class="fd-button fd-carousel__button fd-carousel__button--right" data-slide="next"
+        [attr.aria-label]="rightNavigationBtnLabel" (click)="next()" [disabled]="rightButtonDisabled">
+        <i class="sap-icon--slim-arrow-right"></i>
+    </button>
+</ng-template>
