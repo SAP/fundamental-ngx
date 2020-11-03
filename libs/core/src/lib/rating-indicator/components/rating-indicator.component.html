@@ -24,7 +24,7 @@
     [triggers]="['mouseenter', 'mouseleave']"
     [noArrow]="false"
     placement="top"
-    addContainerClass="fd-rating-indicator__popover"
+    additionalBodyClass="fd-rating-indicator__popover"
     *ngIf="displaySumPopover && _ratingItems?.length; else dynamicText">
     <fd-popover-control>
         <span class="fd-rating-indicator__dynamic-text">

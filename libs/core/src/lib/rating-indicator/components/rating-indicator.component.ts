@@ -220,7 +220,10 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
         if ('value' in changes) {
             this._value = this._convertToValue();
         }
-        if ('indicatorCapacity' in changes || 'allowHalves' in changes) {
+        if ('indicatorCapacity' in changes) {
+            this._rates = this._getRates();
+        }
+        if ('allowHalves' in changes) {
             this._value = this._convertToValue();
             this._rates = this._getRates();
         }
@@ -306,7 +309,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
         if (ratings.length === 0) {
             return;
         }
-        const {totalVotes, totalRating} = ratings.reduce((total, rating) => ({ 
+        const {totalVotes, totalRating} = ratings.reduce((total, rating) => ({
             totalVotes: total.totalVotes + rating.votes,
             totalRating: total.totalRating + rating.rate * rating.votes
         }), { totalVotes: 0, totalRating : 0 });
