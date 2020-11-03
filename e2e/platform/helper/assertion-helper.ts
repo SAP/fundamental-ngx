@@ -1,25 +1,24 @@
+import { clickByMouseMove, getValueOfAttribute, hoverMouse } from './helper';
 import { browser, ElementFinder } from 'protractor';
-import { clickCheckbox, getValueOfAttribute, hoverMouse } from './helper';
 import { checkboxErrorState, checkboxFocusStyle, checkboxHoverState } from '../fixtures/appData/checkbox-page-contents';
 
-// tslint:disable-next-line:typedef
-export async function checkIfDisabled(element: ElementFinder, attribute: string, value: string) {
-    return await expect(await getValueOfAttribute(element, attribute)).toEqual(value);
+export async function checkIfDisabled(element: ElementFinder, attribute: string, value: string): Promise<void> {
+    expect(await getValueOfAttribute(element, attribute)).toEqual(value);
 }
-// tslint:disable-next-line:typedef
-export async function getMapAttributes(array) {
+
+export async function getMapAttributes(array): Promise<string> {
     return await array.map(async element =>
         await getValueOfAttribute(await element, 'aria-checked'));
 }
-// tslint:disable-next-line:typedef
-export async function checkMarkingCheckbox(checkboxArray) {
+
+export async function checkMarkingCheckbox(checkboxArray): Promise<void> {
     const beforeClicking = await getMapAttributes(checkboxArray);
     for (const element of checkboxArray) {
-        await clickCheckbox(element);
+        await clickByMouseMove(element);
     }
     const afterClickingOnce = await getMapAttributes(checkboxArray);
     for (const element of checkboxArray) {
-        await clickCheckbox(element);
+        await clickByMouseMove(element);
     }
     const afterClickingTwice = await getMapAttributes(checkboxArray);
 
@@ -27,19 +26,18 @@ export async function checkMarkingCheckbox(checkboxArray) {
     expect(Promise.all(afterClickingTwice)).toEqual(Promise.all(beforeClicking));
 }
 
-// tslint:disable-next-line:typedef
-export async function checkTristateCheckboxMarking(checkboxArray) {
+export async function checkTristateCheckboxMarking(checkboxArray): Promise<void> {
     const beforeClicking = await getMapAttributes(checkboxArray);
     for (const element of checkboxArray) {
-        await clickCheckbox(element);
+        await clickByMouseMove(element);
     }
     const afterClickingOnce = await getMapAttributes(checkboxArray);
     for (const element of checkboxArray) {
-        await clickCheckbox(element);
+        await clickByMouseMove(element);
     }
     const afterClickingTwice = await getMapAttributes(checkboxArray);
     for (const element of checkboxArray) {
-        await clickCheckbox(element);
+        await clickByMouseMove(element);
     }
     const afterThirdClick = await getMapAttributes(checkboxArray);
 
@@ -49,19 +47,18 @@ export async function checkTristateCheckboxMarking(checkboxArray) {
     expect(Promise.all(afterThirdClick)).toEqual(Promise.all(beforeClicking));
 }
 
-// tslint:disable-next-line:typedef
-export async function checkTriStateTwoStateCheckboxMarking (checkboxArray) {
+export async function checkTriStateTwoStateCheckboxMarking (checkboxArray): Promise<void> {
     const firstState = await getMapAttributes(checkboxArray);
     for (const element of checkboxArray) {
-        await clickCheckbox(element);
+        await clickByMouseMove(element);
     }
     const secondState = await getMapAttributes(checkboxArray);
     for (const element of checkboxArray) {
-        await clickCheckbox(element);
+        await clickByMouseMove(element);
     }
     const thirdState = await getMapAttributes(checkboxArray);
     for (const element of checkboxArray) {
-        await clickCheckbox(element);
+        await clickByMouseMove(element);
     }
     const fourthState = await getMapAttributes(checkboxArray);
 
@@ -70,53 +67,50 @@ export async function checkTriStateTwoStateCheckboxMarking (checkboxArray) {
     expect(Promise.all(fourthState)).not.toEqual(Promise.all(firstState));
     expect(Promise.all(fourthState)).toEqual(Promise.all(secondState));
 }
-// tslint:disable-next-line:typedef
-export async function checkHoverState(element) {
+
+export async function checkHoverState(element): Promise<void> {
     const checkboxHover = await hoverMouse(await element).then( () => {
         return element.getCssValue('border-color');
     });
-    return await expect(checkboxHover).toContain(checkboxHoverState);
+    expect(checkboxHover).toContain(checkboxHoverState);
 }
 
-// tslint:disable-next-line:typedef
-export async function checkFocusState(element) {
-    const checkboxHover = await clickCheckbox(await element).then( () => {
+export async function checkFocusState(element): Promise<void> {
+    const checkboxHover = await clickByMouseMove(await element).then( () => {
         return element.getCssValue('outline-style');
     });
-    return await expect(checkboxHover).toContain(checkboxFocusStyle);
+    expect(checkboxHover).toContain(checkboxFocusStyle);
 }
 
-// tslint:disable-next-line:typedef
-export async function checkErrorHoverState(element) {
+export async function checkErrorHoverState(element): Promise<void> {
     await (await getValueOfAttribute(element, 'aria-checked'));
-    await clickCheckbox(element);
+    await clickByMouseMove(element);
 
     const checkboxHover = await hoverMouse(await element).then( () => {
         return element.getCssValue('border-color');
     });
-    return await expect(checkboxHover).toContain(checkboxErrorState);
+    expect(checkboxHover).toContain(checkboxErrorState);
 }
 
-// tslint:disable-next-line:typedef
-export async function checkErrorTooltip(element, tooltipElement) {
+export async function checkErrorTooltip(element, tooltipElement): Promise<string> {
     await hoverMouse(element);
-    return await getValueOfAttribute(tooltipElement, 'innerHTML'); // todo: Anton, please take a look.
+    return getValueOfAttribute(tooltipElement, 'innerHTML'); // todo: Anton, please take a look.
 }
-// tslint:disable-next-line:typedef
-export async function checkLabels(array, expectation) {
+
+export async function checkLabels(array, expectation): Promise<void> {
     const labels = await array.map(async element => {
         return await element.getText();
     });
-    await expect(Promise.all(labels)).toEqual(expectation);
+    expect(Promise.all(labels)).toEqual(expectation);
 }
-// tslint:disable-next-line:typedef
-export async function checkBorderColor(array, expectedColor) {
+
+export async function checkBorderColor(array, expectedColor): Promise<void> {
     await array.forEach(async element => {
-        return await expect(await element.getCssValue('border-color')).toEqual(expectedColor);
+        await expect(await element.getCssValue('border-color')).toEqual(expectedColor);
     });
 }
-// tslint:disable-next-line:typedef
-export async function checkOutputLabel(array, label, selections) {
+
+export async function checkOutputLabel(array, label, selections): Promise<void>  {
     await array.forEach(async element => {
         await expect(element.getText()).toEqual(label + selections);
     });
