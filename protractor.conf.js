@@ -1,3 +1,6 @@
+// Protractor configuration file, see link for more information
+// https://github.com/angular/protractor/blob/master/lib/config.ts
+
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
@@ -6,11 +9,12 @@ exports.config = {
         './e2e/**/*.e2e-spec.ts'
     ],
     capabilities: {
-        browserName: 'safari',
+        'browserName': 'chrome',
+
         chromeOptions: {
-            // 'args': ['--headless', '--window-size=1920,1080']
-            args: ['--headless', '--window-size=1920,1080']
+            args: [ "--headless", "--disable-gpu", "--window-size=800,600" ]
         }
+
     },
     directConnect: true,
     // baseUrl: 'https://sap.github.io/fundamental-ngx/#',

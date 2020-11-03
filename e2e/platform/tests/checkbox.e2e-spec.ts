@@ -19,7 +19,7 @@ import {
 } from '../fixtures/appData/checkbox-page-contents';
 import { browser } from 'protractor';
 
-fdescribe('checkbox test suite', () => {
+describe('checkbox test suite', () => {
     const checkboxPage = new CheckboxPO();
 
     beforeAll(async () => {
