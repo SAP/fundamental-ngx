@@ -2,6 +2,75 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.17...v0.23.1-rc.18) (2020-11-03)
+
+### [0.23.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.16...v0.23.1-rc.17) (2020-11-02)
+
+
+### Features
+
+* (Core) introduce Action sheet component ([#3596](https://github.com/SAP/fundamental-ngx/issues/3596)) ([5194d67](https://github.com/SAP/fundamental-ngx/commit/5194d67c6c1d901f69eb45cc32333d83d475f828))
+
+### [0.23.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.15...v0.23.1-rc.16) (2020-11-02)
+
+
+### Features
+
+* introduce Title component ([#3707](https://github.com/SAP/fundamental-ngx/issues/3707)) ([250b179](https://github.com/SAP/fundamental-ngx/commit/250b1792f52233e3a5fc522cd7b2d760ab7bb8be))
+
+### [0.23.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.14...v0.23.1-rc.15) (2020-11-01)
+
+### [0.23.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.13...v0.23.1-rc.14) (2020-11-01)
+
+### [0.23.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.12...v0.23.1-rc.13) (2020-11-01)
+
+### [0.23.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.11...v0.23.1-rc.12) (2020-11-01)
+
+### [0.23.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.10...v0.23.1-rc.11) (2020-10-31)
+
+### [0.23.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.9...v0.23.1-rc.10) (2020-10-31)
+
+### [0.23.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.8...v0.23.1-rc.9) (2020-10-30)
+
+
+### Features
+
+* (Core) migrate popper.js to cdk ([#3582](https://github.com/SAP/fundamental-ngx/issues/3582)) ([c4bb57b](https://github.com/SAP/fundamental-ngx/commit/c4bb57b752bf83fa784afadf93d90e15bf10c8ef))
+
+### [0.23.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.7...v0.23.1-rc.8) (2020-10-30)
+
+
+### Features
+
+* (Core) introduce new Carousel component ([#3551](https://github.com/SAP/fundamental-ngx/issues/3551)) ([2c625cb](https://github.com/SAP/fundamental-ngx/commit/2c625cb895e09af75999ecbf4a36e5b0febfe050))
+
+### [0.23.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.6...v0.23.1-rc.7) (2020-10-29)
+
+### [0.23.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.5...v0.23.1-rc.6) (2020-10-29)
+
+### [0.23.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.4...v0.23.1-rc.5) (2020-10-29)
+
+### [0.23.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.3...v0.23.1-rc.4) (2020-10-29)
+
+
+### Bug Fixes
+
+* Calendar range date ([#3704](https://github.com/SAP/fundamental-ngx/issues/3704)) ([ffe0841](https://github.com/SAP/fundamental-ngx/commit/ffe0841fbbbcbf138e1548a9908177c60991d61e))
+
+### [0.23.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.2...v0.23.1-rc.3) (2020-10-29)
+
+
+### Features
+
+* list with byline migration ([#3678](https://github.com/SAP/fundamental-ngx/issues/3678)) ([18038cd](https://github.com/SAP/fundamental-ngx/commit/18038cd948b7478f1ae16c7540051d45ebe226a7))
+
+### [0.23.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.1...v0.23.1-rc.2) (2020-10-28)
+
+
+### Bug Fixes
+
+* (Core) refactor Layout Grid with latest changes from fundamental-styles ([#3640](https://github.com/SAP/fundamental-ngx/issues/3640)) ([839eb0a](https://github.com/SAP/fundamental-ngx/commit/839eb0ab25437dde60297ac8d5e9bb19607438d3))
+
 ### [0.23.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.0...v0.23.1-rc.1) (2020-10-27)
 
 ### [0.23.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.23.0...v0.23.1-rc.0) (2020-10-27)

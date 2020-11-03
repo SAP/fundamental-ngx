@@ -84,6 +84,11 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     @Input()
     keyboardSupport = true;
 
+    /** Whether list should have a byline */
+    @Input()
+    @HostBinding('class.fd-list--byline')
+    byline = false;
+
     /** Event thrown, when focus escapes the list */
     @Output()
     focusEscapeList = new EventEmitter<FocusEscapeDirection>();

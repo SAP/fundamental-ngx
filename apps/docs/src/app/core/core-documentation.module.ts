@@ -15,10 +15,11 @@ import {
     MULTI_INPUT_MOBILE_CONFIG,
     SELECT_MOBILE_CONFIG
 } from '../documentation/utilities/consts';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [HomeDocsComponent, NewComponentComponent, CoreDocumentationComponent],
-    imports: [SharedDocumentationModule, MarkdownModule.forChild(), RouterModule.forChild(ROUTES)],
+    imports: [SharedDocumentationModule, MarkdownModule.forChild(), RouterModule.forChild(ROUTES), ScrollingModule],
     providers: [
         StackblitzService,
         {provide: 'CURRENT_LIB', useValue: 'core'},

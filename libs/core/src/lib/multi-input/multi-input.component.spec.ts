@@ -64,7 +64,6 @@ describe('MultiInputComponent', () => {
     it('should handle search term change', async () => {
         await fixture.whenStable();
         spyOn(component.searchTermChange, 'emit');
-        spyOn(component.popoverRef, 'updatePopover');
         spyOn(component, 'filterFn');
         spyOn(component, 'openChangeHandle');
         component.ngOnInit();
