@@ -164,7 +164,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this.isOpenChange.emit(isOpen);
 
         if (isOpen && !this.mobile) {
-            this.setItemActive(0);
+            this._setItemActive(0);
         }
         this._changeDetectionRef.detectChanges();
     }
