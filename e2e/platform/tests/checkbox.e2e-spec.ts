@@ -1,5 +1,5 @@
 import { CheckboxPO } from '../pages/checkbox.po';
-import { clickCheckbox, getValueOfAttribute } from '../helper/helper';
+import { clickByMouseMove, getValueOfAttribute } from '../helper/helper';
 import {
     checkErrorHoverState,
     checkErrorTooltip,
@@ -19,7 +19,7 @@ import {
 } from '../fixtures/appData/checkbox-page-contents';
 import { browser } from 'protractor';
 
-describe('checkbox test suite', () => {
+describe('Checkbox test suite', () => {
     const checkboxPage = new CheckboxPO();
 
     beforeAll(async () => {
@@ -63,7 +63,7 @@ describe('checkbox test suite', () => {
 
     describe('Check checkbox used without form examples', () => {
         it('should check binary checkbox with value', async () => {
-            const valueCheckbox = await (await checkboxPage.checkboxWithoutForm).slice(0, 2);
+            const valueCheckbox = (await checkboxPage.checkboxWithoutForm).slice(0, 2);
 
             await valueCheckbox.forEach(async element => {
                 await checkIfDisabled(await element, 'ng-reflect-is-disabled', 'false');
@@ -162,18 +162,18 @@ describe('checkbox test suite', () => {
              await checkFocusState(checkboxPage.termsAndConditionsCheckbox);
 
 
-            await clickCheckbox(checkboxPage.acceptAllCheckbox);
+            await clickByMouseMove(checkboxPage.acceptAllCheckbox);
             await formCheckboxes.forEach(async element => {
                 await expect(await getValueOfAttribute(await element, 'aria-checked')).toBe('true');
             });
 
-            await clickCheckbox(checkboxPage.acceptAllCheckbox);
+            await clickByMouseMove(checkboxPage.acceptAllCheckbox);
             await formCheckboxes.forEach(async element => {
                 await expect(await getValueOfAttribute(await element, 'aria-checked')).toBe('false');
             });
 
-            await clickCheckbox(checkboxPage.marketingCheckbox);
-            await clickCheckbox(checkboxPage.newsletterCheckbox);
+            await clickByMouseMove(checkboxPage.marketingCheckbox);
+            await clickByMouseMove(checkboxPage.newsletterCheckbox);
             await expect(await getValueOfAttribute(checkboxPage.acceptAllCheckbox, 'aria-checked')).toBe('mixed');
         });
         it('should check checkbox markings are centered', async () => {
@@ -191,14 +191,16 @@ describe('checkbox test suite', () => {
             });
 
             await checkErrorHoverState(await checkboxPage.presenceCheckbox);
-            await clickCheckbox(checkboxPage.errorExampleTitle); // needed for getting error tooltip in next line
-            await expect(checkErrorTooltip(await checkboxPage.presenceCheckbox, await checkboxPage.errorTooltip)).toEqual(checkboxErrorTooltip); // todo: Anton, please take a look
+            await clickByMouseMove(checkboxPage.errorExampleTitle);
+            // needed for getting error tooltip in next line
+            // todo: Anton, please take a look
+            await expect(checkErrorTooltip(await checkboxPage.presenceCheckbox, await checkboxPage.errorTooltip)).toEqual(checkboxErrorTooltip);
             await checkHoverState(errorCheckboxes[1]);
             await checkFocusState(errorCheckboxes[1]);
         });
 
         it('should check error handling form submission', async () => {
-            await clickCheckbox(checkboxPage.submitBtn);
+            await clickByMouseMove(checkboxPage.submitBtn);
             const validPopupAlert = await browser.switchTo().alert().then(async (alert) => {
                         await alert.accept();
                         return await alert.getText();
@@ -206,8 +208,8 @@ describe('checkbox test suite', () => {
             await expect(validPopupAlert).toEqual('Status: VALID');
 
             // checks with required checkbox not marked
-            await clickCheckbox(checkboxPage.presenceCheckbox);
-            await clickCheckbox(checkboxPage.submitBtn);
+            await clickByMouseMove(checkboxPage.presenceCheckbox);
+            await clickByMouseMove(checkboxPage.submitBtn);
             const invalidPopupAlert = await browser.switchTo().alert().then(async (alert) => {
                 await alert.accept();
                 return await alert.getText();

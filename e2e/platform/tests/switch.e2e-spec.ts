@@ -1,5 +1,5 @@
 import { SwitchPo } from '../pages/switch.po';
-import { getValueOfAttribute, hoverMouse } from '../helpers/common-helper';
+import { getValueOfAttribute, hoverMouse, waitForPresence } from '../helper/helper';
 import switchPageContent from '../fixtures/appData/swich-page-content';
 import { browser } from 'protractor';
 
@@ -16,6 +16,7 @@ describe('Verify Switch component', function() {
     describe('has default and compact switch and', function() {
         it('should default change something to active or inactive', async () => {
             // capture before state
+            await waitForPresence(await switchPage.defaultSwitch);
             const isCheckedBefore = await getValueOfAttribute(await switchPage.defaultSwitch, 'aria-checked');
             const handelColorBefore = await switchPage.defaultSwitchHandel.getCssValue('background-color');
             await switchPage.defaultSwitchHandel.click();
@@ -210,9 +211,9 @@ describe('Verify Switch component', function() {
         });
 
         // No example given to verify
-        xit('should be able to display 2-3 letters', async () => {
+/*        xit('should be able to display 2-3 letters', async () => {
 
-        });
+        });*/
     });
 
 /*    xdescribe('has correct page content', function() {
