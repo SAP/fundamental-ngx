@@ -1,4 +1,4 @@
-import { ElementFinder } from 'protractor';
+import { browser, ElementFinder } from 'protractor';
 import { clickCheckbox, getValueOfAttribute, hoverMouse } from './helper';
 import { checkboxErrorState, checkboxFocusStyle, checkboxHoverState } from '../fixtures/appData/checkbox-page-contents';
 
@@ -119,5 +119,52 @@ export async function checkBorderColor(array, expectedColor) {
 export async function checkOutputLabel(array, label, selections) {
     await array.forEach(async element => {
         await expect(element.getText()).toEqual(label + selections);
+    });
+}
+export async function checkMenuItemsHoverState(itemsArr, attribute, expectation): Promise<void> {
+    const menuItemsArr = await itemsArr;
+
+    menuItemsArr.forEach(async element => {
+        await hoverMouse(element);
+        await expect(await element.getCssValue(attribute)).toEqual(expectation);
+    });
+}
+
+export async function checkMenuItemsActiveState(itemsArr, attribute, expectation): Promise<void> {
+    const menuItemsArr = await itemsArr;
+
+    menuItemsArr.forEach(async element => {
+        await browser.actions().mouseDown(element).perform().then( async () => {
+            await expect(await element.getCssValue(attribute)).toEqual(expectation);
+            await browser.actions().mouseUp(element).perform();
+        });
+    });
+}
+
+export async function check2ndLvlMenuItemsHvrState(itemsArr, itemsArr2, attribute, expectation): Promise<void> {
+    const menuItemsArr = await itemsArr;
+    await hoverMouse(menuItemsArr[1]).then( async () => {
+        const menu2ndLvlItemsArr = await itemsArr2;
+
+        menu2ndLvlItemsArr.forEach(async element => {
+            await hoverMouse(element);
+            await expect(await element.getCssValue(attribute)).toEqual(expectation);
+        });
+    });
+}
+
+export async function check3rdLvlMenuItemsHvrState(itemsArr, itemsArr2, itemsArr3, attribute, expectation): Promise<void> {
+    const menuItemsArr = await itemsArr;
+    await hoverMouse(menuItemsArr[1]).then( async () => {
+        const menu2ndLvlItemsArr = await itemsArr2;
+
+        await hoverMouse(menu2ndLvlItemsArr[1]).then( async () => {
+            const menu3rdLvlItemsArr = await itemsArr3;
+
+            menu3rdLvlItemsArr.forEach(async element => {
+                await hoverMouse(element);
+                await expect(await element.getCssValue(attribute)).toEqual(expectation);
+            });
+        });
     });
 }

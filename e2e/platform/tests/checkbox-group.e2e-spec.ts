@@ -28,7 +28,7 @@ import {
 } from '../fixtures/appData/checkbox-group-page-content';
 import { clickCheckbox } from '../helper/helper';
 
-fdescribe('Checkbox group test suite', () => {
+describe('Checkbox group test suite', () => {
     const checkboxGroupPage = new CheckboxGroupPO();
 
     beforeAll(async () => {
