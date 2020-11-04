@@ -141,6 +141,22 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     @Input()
     emptyTableMessage = 'No data found';
 
+    /** Table without horizontal borders. */
+    @Input()
+    noHorizontalBorders = false;
+
+    /** Table without vertical borders. */
+    @Input()
+    noVerticalBorders = false;
+
+    /** Table without borders. */
+    @Input()
+    noBorders = false;
+
+    /** Table body without borders, but header with borders. */
+    @Input()
+    noBodyBorders = false;
+
     /** Event fired when table selection has changed. */
     @Output()
     rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<any>> = new EventEmitter<TableRowSelectionChangeEvent<any>>();
@@ -288,7 +304,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         return [
             'fd-table',
             this.contentDensity === ContentDensity.COMPACT ? 'fd-table--compact' : '',
-            this.contentDensity === ContentDensity.CONDENSED ? 'fd-table--condensed' : ''
+            this.contentDensity === ContentDensity.CONDENSED ? 'fd-table--condensed' : '',
+            this.noHorizontalBorders || this.noBorders ? 'fd-table--no-horizontal-borders ' : '',
+            this.noVerticalBorders || this.noBorders ? 'fd-table--no-vertical-borders ' : '',
         ];
     }
 

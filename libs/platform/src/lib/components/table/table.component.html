@@ -120,7 +120,9 @@
                             </ng-container>
                         </tr>
                     </thead>
-                    <tbody fd-table-body>
+                    <tbody fd-table-body
+                           [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
+                           [class.fd-table__body--no-vertical-borders]="noBodyBorders">
                         <tr fd-table-row
                             scope="row"
                             *ngFor="let row of _rows | sortBy: sortDirection : sortField | filter: filterType : filterValue; let i = index"

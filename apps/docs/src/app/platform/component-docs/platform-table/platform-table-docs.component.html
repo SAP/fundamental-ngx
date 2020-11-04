@@ -79,6 +79,10 @@
     <div style="max-width: 700px">
         <fdp-table
             [dataSource]="tableData"
+            [noBorders]="data.table.noBorders"
+            [noBodyBorders]="data.table.noBodyBorders"
+            [noHorizontalBorders]="data.table.noHorizontalBorders"
+            [noVerticalBorders]="data.table.noVerticalBorders"
             [contentDensity]="data.table.contentDensity"
             [selectionMode]="data.table.selectionMode"
             [freezeColumnsTo]="data.table.freezeColumnsTo"

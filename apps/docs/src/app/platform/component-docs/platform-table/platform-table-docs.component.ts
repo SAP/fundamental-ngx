@@ -53,7 +53,19 @@ export class PlatformTableDocsComponent {
                     freezeColumnsTo: {
                         type: 'string',
                         enum: ['name', 'description', 'price.value', 'status']
-                    }
+                    },
+                    noHorizontalBorders: {
+                        type: 'boolean'
+                    },
+                    noVerticalBorders: {
+                        type: 'boolean'
+                    },
+                    noBorders: {
+                        type: 'boolean'
+                    },
+                    noBodyBorders: {
+                        type: 'boolean'
+                    },
                 }
             },
             'table-toolbar': {
@@ -92,7 +104,11 @@ export class PlatformTableDocsComponent {
         table: {
             contentDensity: 'cozy',
             selectionMode: 'none',
-            freezeColumnsTo: null
+            freezeColumnsTo: null,
+            noHorizontalBorders: false,
+            noVerticalBorders: false,
+            noBorders: false,
+            noBodyBorders: false
         },
         'table-toolbar': {
             title: 'Order Line Items',
