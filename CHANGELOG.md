@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.21...v0.23.1-rc.22) (2020-11-04)
+
+
+### Bug Fixes
+
+* Add growing behavior to grid column ([#3730](https://github.com/SAP/fundamental-ngx/issues/3730)) ([26bd3f0](https://github.com/SAP/fundamental-ngx/commit/26bd3f00792a1914fc280d11bcc442bb72f2c19d))
+
 ### [0.23.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.20...v0.23.1-rc.21) (2020-11-04)
 
 ### [0.23.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.19...v0.23.1-rc.20) (2020-11-04)
