@@ -4,7 +4,7 @@ export class BaseComponentPo {
 
     title = $('header .header');
     async open (url: string): Promise<void> {
-        await browser.get(browser.baseUrl + 'fundamental-ngx#/platform' + url);
+        await browser.get(browser.baseUrl + '/platform' + url);
     };
 
 }

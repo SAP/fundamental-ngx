@@ -62,15 +62,13 @@ exports.config = {
             'name': 'e2e-MAC-safari',
         },
     ],
-    baseUrl: 'http://localhost:4200/#',
-    // baseUrl: 'https://fundamental-ngx.netlify.app/#/',
+     baseUrl: 'http://sap.dev:4200/fundamental-ngx#',
     framework: 'jasmine',
     jasmineNodeOpts: {
         showColors: true,
         defaultTimeoutInterval: 30000,
         print: function() {}
     },
-
 
     onPrepare: async () => {
         jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: 'none' } }));

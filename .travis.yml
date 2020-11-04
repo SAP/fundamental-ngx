@@ -5,7 +5,8 @@ cache: npm
 dist: trusty
 addons:
     chrome: stable
-
+    hosts:
+      - sap.dev
 git:
   depth: false
 env:
