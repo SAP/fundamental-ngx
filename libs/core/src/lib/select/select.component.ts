@@ -141,9 +141,9 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
 
     /**
      * Preset options for the Select body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the InputGroup. - Default
-     * * `equal` will apply a width to the body equivalent to the width of the InputGroup.
-     * * '' for no effect
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * 'default' will apply width needed to properly display items inside, independent of control.
      */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';

@@ -25,7 +25,7 @@ export const DefaultPositions: ConnectedPosition[] = [
     { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom' }
 ];
 
-export type PopoverFillMode = 'at-least' | 'equal';
+export type PopoverFillMode = 'at-least' | 'equal' | 'default';
 
 const ARROW_SIZE  = '0.5rem';
 

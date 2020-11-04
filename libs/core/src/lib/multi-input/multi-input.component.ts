@@ -134,9 +134,9 @@ export class MultiInputComponent implements
 
     /**
      * Preset options for the popover body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
      * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * Leave blank for no effect.
+     * * 'default' will apply width needed to properly display items inside, independent of control.
      */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
