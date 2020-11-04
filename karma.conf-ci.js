@@ -39,8 +39,10 @@ module.exports = function (config) {
         },
         sl_ipad_macOS: {
             base: 'SauceLabs',
-            platform: 'macOS 10.15',
-            browserName: 'ipad',
+            platformVersion: '13.2',
+            platformName: 'iOS',
+            browserName: 'Safari',
+            deviceName: 'iPad Pro (11 inch) Simulator',
             deviceOrientation: 'portrait',
             version: 'latest'
         },
