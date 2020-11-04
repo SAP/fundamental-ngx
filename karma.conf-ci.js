@@ -37,7 +37,7 @@ module.exports = function (config) {
             browserName: 'MicrosoftEdge',
             version: 'latest'
         },
-        sl_ipad_macOS: {
+/*        sl_ipad_macOS: {
             base: 'SauceLabs',
             platformVersion: '13.2',
             platformName: 'iOS',
@@ -45,7 +45,7 @@ module.exports = function (config) {
             deviceName: 'iPad Pro (11 inch) Simulator',
             deviceOrientation: 'portrait',
             version: 'latest'
-        },
+        },*/
         sl_firefox_win: {
             base: 'SauceLabs',
             platform: 'windows 10',
