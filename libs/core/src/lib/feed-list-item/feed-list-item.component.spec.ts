@@ -16,7 +16,7 @@ class FormattedTextTestComponent {
   htmlText = '';
 }
 
-fdescribe('FeedListItemComponent', () => {
+describe('FeedListItemComponent', () => {
   let component: FeedListItemComponent;
   let fixture: ComponentFixture<FeedListItemComponent>;
 

@@ -32,6 +32,7 @@
           <span [fdLineClampTarget]="text" (update)="lineClamp.refreshTarget($event)"></span>
         </span>
         <a
+          fd-link
           class="fd-link fd-feed-list__link--more"
           tabindex="0"
           *ngIf="!isRichText && hasMore"
@@ -68,6 +69,7 @@
             <span [fdLineClampTarget]="text" (update)="lineClamp.refreshTarget($event)"></span>
         </span>
         <a
+          fd-link
           class="fd-link fd-feed-list__link--more"
           tabindex="0"
           *ngIf="!isRichText && hasMore"
