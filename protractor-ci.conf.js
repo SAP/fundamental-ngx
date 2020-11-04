@@ -13,19 +13,19 @@ exports.config = {
     ],
 
     multiCapabilities: [
-        {
+/*        {
             'browserName': 'internet explorer',
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-internet-explorer',
-        },
+        },*/
         {
             'browserName': 'MicrosoftEdge',
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-edge',
         },
-        {
+/*        {
             'browserName': 'chrome',
             'version': 'latest',
             'platform': 'Windows 10',
@@ -48,19 +48,19 @@ exports.config = {
             'platform': 'MAC',
             'version': 'latest',
             'name': 'e2e-MAC-firefox',
-        },
+        },*/
         {
             'browserName': 'MicrosoftEdge',
             'platform': 'MAC',
             'version': 'latest',
             'name': 'e2e-MAC-Edge',
         },
-        {
+/*        {
             'browserName': 'safari',
             'platform': 'MAC',
             'version': 'latest',
             'name': 'e2e-MAC-safari',
-        },
+        },*/
     ],
      baseUrl: 'http://sap.dev:4200/fundamental-ngx#',
     framework: 'jasmine',
