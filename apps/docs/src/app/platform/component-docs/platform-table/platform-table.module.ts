@@ -6,7 +6,12 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 import { ObjectStatusModule, TableModule } from '@fundamental-ngx/core';
-import { PlatformButtonModule, PlatformInputModule, PlatformTableModule } from '@fundamental-ngx/platform';
+import {
+    PlatformButtonModule,
+    PlatformInputModule,
+    PlatformSearchFieldModule,
+    PlatformTableModule
+} from '@fundamental-ngx/platform';
 
 import { PlatformTableHeaderComponent } from './platform-table-header/platform-table-header.component';
 import { PlatformTableDocsComponent } from './platform-table-docs.component';
@@ -16,6 +21,7 @@ import { PlatformTableMultipleRowSelectionExampleComponent } from './platform-ta
 import { PlatformTableSingleRowSelectionExampleComponent } from './platform-table-examples/platform-table-single-row-selection-example.component';
 import { PlatformTableSortableExampleComponent } from './platform-table-examples/platform-table-sortable-example.component';
 import { PlatformTableFilterableExampleComponent } from './platform-table-examples/platform-table-filterable-example.component';
+import { PlatformTableFreezableExampleComponent } from './platform-table-examples/platform-table-freezable-example.component';
 
 const routes: Routes = [
     {
@@ -37,7 +43,8 @@ const routes: Routes = [
         PlatformTableModule,
         PlatformButtonModule,
         ObjectStatusModule,
-        PlatformInputModule
+        PlatformInputModule,
+        PlatformSearchFieldModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -48,7 +55,8 @@ const routes: Routes = [
         PlatformTableSingleRowSelectionExampleComponent,
         PlatformTableMultipleRowSelectionExampleComponent,
         PlatformTableSortableExampleComponent,
-        PlatformTableFilterableExampleComponent
+        PlatformTableFilterableExampleComponent,
+        PlatformTableFreezableExampleComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

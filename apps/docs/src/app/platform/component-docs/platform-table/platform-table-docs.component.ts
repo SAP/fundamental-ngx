@@ -1,6 +1,13 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core';
+import {
+    TableColumnFreezeEvent,
+    TableFilterChangeEvent,
+    TableGroupChangeEvent,
+    TableRowSelectionChangeEvent,
+    TableSortChangeEvent
+} from '@fundamental-ngx/platform';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Schema } from '../../../schema/models/schema.model';
@@ -20,6 +27,8 @@ import * as platformTableSortableSrc from '!raw-loader!./platform-table-examples
 import * as platformTableSortableTsSrc from '!raw-loader!./platform-table-examples/platform-table-sortable-example.component.ts';
 import * as platformTableFilterableSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.html';
 import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
+import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
+import * as platformTableFreezableTsSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.ts';
 
 
 @Component({
@@ -40,6 +49,10 @@ export class PlatformTableDocsComponent {
                     selectionMode: {
                         type: 'string',
                         enum: ['single', 'multiple', 'none']
+                    },
+                    freezeColumnsTo: {
+                        type: 'string',
+                        enum: ['name', 'description', 'price.value', 'status']
                     }
                 }
             },
@@ -78,7 +91,8 @@ export class PlatformTableDocsComponent {
     data: any = {
         table: {
             contentDensity: 'cozy',
-            selectionMode: 'none'
+            selectionMode: 'none',
+            freezeColumnsTo: null
         },
         'table-toolbar': {
             title: 'Order Line Items',
@@ -177,6 +191,20 @@ export class PlatformTableDocsComponent {
         }
     ];
 
+    freezableTable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableFreezableSrc,
+            fileName: 'platform-table-freezable-example'
+        },
+        {
+            language: 'typescript',
+            code: platformTableFreezableTsSrc,
+            fileName: 'platform-table-freezable-example',
+            component: 'PlatformTableFreezableExampleComponent'
+        }
+    ];
+
     constructor(private schemaFactory: SchemaFactoryService, private _cd: ChangeDetectorRef) {
         this.schema = this.schemaFactory.getComponent('fdp-table');
     }
@@ -186,7 +214,23 @@ export class PlatformTableDocsComponent {
         this._cd.detectChanges();
     }
 
-    onRowSelectionChange(ev): void {
+    onRowSelectionChange(ev: TableRowSelectionChangeEvent<any>): void {
+        console.log(ev);
+    }
+
+    onSortChange(ev: TableSortChangeEvent): void {
+        console.log(ev);
+    }
+
+    onFilterChange(ev: TableFilterChangeEvent): void {
+        console.log(ev);
+    }
+
+    onFreezeChange(ev: TableColumnFreezeEvent): void {
+        console.log(ev);
+    }
+
+    onGroupChange(ev: TableGroupChangeEvent): void {
         console.log(ev);
     }
 }

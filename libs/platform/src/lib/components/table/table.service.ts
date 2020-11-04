@@ -9,7 +9,7 @@ import {
 } from './interfaces';
 import { SortDirection } from './enums';
 import { DEFAULT_TABLE_STATE } from './constants';
-import { FilterChange, SortChange } from './models';
+import { FilterChange, FreezeChange, SortChange } from './models';
 
 export class TableService {
     prevTableState: TableState;
@@ -19,6 +19,7 @@ export class TableService {
 
     readonly sortChange: EventEmitter<SortChange> = new EventEmitter<SortChange>();
     readonly filterChange: EventEmitter<FilterChange> = new EventEmitter<FilterChange>();
+    readonly freezeChange: EventEmitter<FreezeChange> = new EventEmitter<FreezeChange>();
 
     constructor() {}
 
@@ -42,10 +43,7 @@ export class TableService {
         }
 
         const newSortBy: CollectionSort[] = [{field: field, direction: direction}];
-        const state: TableState = {
-            ...prevState,
-            sortBy: newSortBy
-        };
+        const state: TableState = { ...prevState, sortBy: newSortBy };
 
         this.setTableState(state);
         this.sortChange.emit({ current: state.sortBy, previous: prevSortBy });
@@ -60,13 +58,17 @@ export class TableService {
         }
 
         const newFilterBy: CollectionFilter[] = [filter];
-        const state: TableState = {
-            ...prevState,
-            filterBy: newFilterBy
-        };
+        const state: TableState = { ...prevState, filterBy: newFilterBy };
 
         this.setTableState(state);
         this.filterChange.emit({ current: state.filterBy, previous: prevFilterBy });
+    }
+
+    freezeTo(columnName: string): void {
+        const prevState = this.getTableState();
+
+        this.setTableState({ ...prevState, freezeToColumn: columnName });
+        this.freezeChange.emit({ current: columnName, previous: prevState.freezeToColumn });
     }
 
     private isFilterChanged(filter: any, prevFilterBy: any): boolean {
