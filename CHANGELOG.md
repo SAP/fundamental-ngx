@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.27...v0.23.1-rc.28) (2020-11-05)
+
+
+### Bug Fixes
+
+* Add border radius to list inside popover ([#3739](https://github.com/SAP/fundamental-ngx/issues/3739)) ([d28c61c](https://github.com/SAP/fundamental-ngx/commit/d28c61ca5e6670162d079c91a0dbab86f2b3e30b))
+
 ### [0.23.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.26...v0.23.1-rc.27) (2020-11-05)
 
 ### [0.23.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.25...v0.23.1-rc.26) (2020-11-05)
