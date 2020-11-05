@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.28...v0.23.1-rc.29) (2020-11-05)
+
+
+### Bug Fixes
+
+* (Core) add stronger selector for Message strip ([#3754](https://github.com/SAP/fundamental-ngx/issues/3754)) ([dc1a6a2](https://github.com/SAP/fundamental-ngx/commit/dc1a6a25c7316d0fc2e0bc2cac02a36de4577143))
+
 ### [0.23.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.27...v0.23.1-rc.28) (2020-11-05)
 
 
