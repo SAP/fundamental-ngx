@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.24...v0.23.1-rc.25) (2020-11-05)
+
+
+### Bug Fixes
+
+* ADd temp styles for overflow toolbar ([#3738](https://github.com/SAP/fundamental-ngx/issues/3738)) ([49f1f78](https://github.com/SAP/fundamental-ngx/commit/49f1f78268d434657d0b805cff0f102996708a0e))
+
 ### [0.23.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.23...v0.23.1-rc.24) (2020-11-05)
 
 ### [0.23.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.22...v0.23.1-rc.23) (2020-11-05)
