@@ -59,11 +59,11 @@
                    fd-input-group-input
                    #searchInputElement
                    [placeholder]="placeholder"
-                   [(ngModel)]="searchTerm"
+                   [ngModel]="searchTerm"
                    [compact]="compact"
                    [disabled]="disabled"
                    [ngClass]="{ 'fd-input--compact': compact }"
-                   (ngModelChange)="handleSearchTermChange()"
+                   (ngModelChange)="handleSearchTermChange($event)"
                    (keydown)="handleInputKeydown($event)"
                    [ngModelOptions]="{standalone: true}"
             />

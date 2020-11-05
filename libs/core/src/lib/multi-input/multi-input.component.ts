@@ -95,7 +95,7 @@ export class MultiInputComponent implements
 
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
-    searchTerm: string;
+    searchTerm = '';
 
     /** Whether the search term should be highlighted in results. */
     @Input()
@@ -405,10 +405,13 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleSearchTermChange(): void {
-        this._propagateSearchTermChange();
-        if (!this.open) {
-            this.openChangeHandle(true);
+    handleSearchTermChange(searchTerm: string): void {
+        if (this.searchTerm !== searchTerm) {
+            this.searchTerm = searchTerm;
+            this._propagateSearchTermChange();
+            if (!this.open) {
+                this.openChangeHandle(true);
+            }
         }
     }
 
@@ -452,7 +455,7 @@ export class MultiInputComponent implements
 
     /** @hidden */
     moreClicked(): void {
-        this.openChangeHandle(true);
+        // this.openChangeHandle(true);
         const newDisplayedValues: any[] = [];
         this.displayedValues.forEach(value => {
             if (this.selected.indexOf(value) !== -1) {
