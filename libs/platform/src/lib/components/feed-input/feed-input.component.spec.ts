@@ -73,6 +73,8 @@ describe('FeedInputComponent', () => {
 
     it('should set max height', () => {
         component.maxHeight = 7;
+        component.ngAfterViewInit();
+
         fixture.detectChanges();
 
         component.resize();

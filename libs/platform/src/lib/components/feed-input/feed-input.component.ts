@@ -6,7 +6,7 @@ import {
     Output,
     ViewChild,
     ViewEncapsulation,
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, OnInit, AfterViewInit, Renderer2
 } from '@angular/core';
 
 @Component({
@@ -16,7 +16,7 @@ import {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FeedInputComponent {
+export class FeedInputComponent implements AfterViewInit {
     /** The user image source, If is not set, then the user image will display placeholder image.  */
     @Input()
     avatarSrc: string;
@@ -52,6 +52,20 @@ export class FeedInputComponent {
     /** @hidden Textarea entered value */
     value: string | null;
 
+    constructor(
+        private _renderer: Renderer2
+    ) {
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        const lineHeight = this._getTextareaLineHeight();
+
+        if (this.maxHeight) {
+            this.textarea.nativeElement.style.maxHeight = lineHeight * this.maxHeight + 'px';
+        }
+    }
+
     /** @hidden */
     onChange(): void {
         this.resize();
@@ -66,26 +80,22 @@ export class FeedInputComponent {
 
     /** @hidden Make grow textarea */
     resize(): void {
-        this.textarea.nativeElement.style.height = 'inherit';
+        this._renderer.setStyle(this.textarea.nativeElement, 'height', 'inherit');
+
         const totalHeight = this._getTextareaTotalHeight();
-        const lineHeight = this._getTextareaLineHeight();
-
-        if (this.maxHeight) {
-            this.textarea.nativeElement.style.maxHeight = lineHeight * this.maxHeight + 'px';
-        }
-
-        this.textarea.nativeElement.style.height = totalHeight + 'px';
+        this._renderer.setStyle(this.textarea.nativeElement, 'height', `${ totalHeight }px`);
     }
 
-    /** @hidden Get line height of textarea */
+    /** @hidden get line height of textarea */
     private _getTextareaLineHeight(): number {
         if (this.textarea && this.textarea.nativeElement) {
-            const computed = window.getComputedStyle(this.textarea.nativeElement);
+            const lineHeight = window.getComputedStyle(this.textarea.nativeElement).getPropertyValue('line-height');
+            if (lineHeight === 'normal') {
+                return parseInt(window.getComputedStyle(this.textarea.nativeElement).getPropertyValue('font-size'), 10) * 1.1;
+            }
 
-            return parseInt(computed.getPropertyValue('line-height'), 10);
+            return parseInt(lineHeight, 10);
         }
-
-        return 20;
     }
 
     /** @hidden Get the total height including borders and scroll height */
