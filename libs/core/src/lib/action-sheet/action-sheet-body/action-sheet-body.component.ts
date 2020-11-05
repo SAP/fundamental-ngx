@@ -5,6 +5,8 @@ import {
     Input,
     ViewEncapsulation
 } from '@angular/core';
+import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
+import { KeyboardSupportService } from '../../utils/services/keyboard-support/keyboard-support.service';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -35,9 +37,21 @@ export class ActionSheetBodyComponent {
     @Input()
     mobile = false;
 
+    constructor(
+        private _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>
+    ) {}
+
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         event.stopPropagation();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keyDownHandler(event: KeyboardEvent): void {
+        if (this._keyboardSupportService.keyManager) {
+            this._keyboardSupportService.onKeyDown(event)
+        }
     }
 }
