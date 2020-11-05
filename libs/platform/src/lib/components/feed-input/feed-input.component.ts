@@ -52,6 +52,7 @@ export class FeedInputComponent implements AfterViewInit {
     /** @hidden Textarea entered value */
     value: string | null;
 
+    /** @hidden */
     constructor(
         private _renderer: Renderer2
     ) {
