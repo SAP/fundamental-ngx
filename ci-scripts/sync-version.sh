@@ -15,6 +15,7 @@ CDK_VERSION=$(node -p "require('./package.json').dependencies['@angular/cdk']")
 POPPER_VERSION=$(node -p "require('./package.json').dependencies['popper.js']")
 FDSTYLES_VERSION=$(node -p "require('./package.json').dependencies['fundamental-styles']")
 FOCUSTRAP_VERSION=$(node -p "require('./package.json').dependencies['focus-trap']")
+HAMMERJS_VERSION=$(node -p "require('./package.json').dependencies['hammerjs']")
 THEMING_VERSION=$(node -p "require('./package.json').dependencies['@sap-theming/theming-base-content']")
 
 cd ./dist
@@ -27,5 +28,6 @@ grep -rl 'POPPER_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/POPPER_VER_PLAC
 grep -rl 'FDSTYLES_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FDSTYLES_VER_PLACEHOLDER/${FDSTYLES_VERSION}/g"
 grep -rl 'FOCUSTRAP_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FOCUSTRAP_VER_PLACEHOLDER/${FOCUSTRAP_VERSION}/g"
 grep -rl 'THEMING_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/THEMING_VER_PLACEHOLDER/${THEMING_VERSION}/g"
+grep -rl 'HAMMERJS_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/HAMMERJS_VER_PLACEHOLDER/${HAMMERJS_VERSION}/g"
 
 cd ../
