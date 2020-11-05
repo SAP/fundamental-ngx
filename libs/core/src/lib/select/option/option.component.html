@@ -1,9 +1,9 @@
 <ng-template #contentTemplateRef><ng-content></ng-content></ng-template>
 
-<span *ngIf="!extendedTemplate" fd-list-title>
+<span *ngIf="!_extendedTemplate" fd-list-title>
     <ng-container *ngTemplateOutlet="contentTemplateRef"></ng-container>
 </span>
 
-<ng-container *ngIf="extendedTemplate">
+<ng-container *ngIf="_extendedTemplate">
     <ng-container *ngTemplateOutlet="contentTemplateRef"></ng-container>
 </ng-container>
