@@ -394,13 +394,16 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
         }
 
-        for (
-            let index = this.currentActiveSlidesStartIndex;
-            index < this.currentActiveSlidesStartIndex + this.visibleSlidesCount;
-            index++
-        ) {
-            this.slides.toArray()[index].visibility = 'visible';
-        }
+        this.slides.forEach((_slide, index) => {
+            if (
+                index >= this.currentActiveSlidesStartIndex &&
+                index < this.currentActiveSlidesStartIndex + this.visibleSlidesCount
+            ) {
+                _slide.visibility = 'visible';
+            } else {
+                _slide.visibility = 'hidden';
+            }
+        });
     }
 
     /** @hidden Initialize config for Carousel service */

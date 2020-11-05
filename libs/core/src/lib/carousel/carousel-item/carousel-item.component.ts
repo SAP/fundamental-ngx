@@ -64,7 +64,7 @@ export class CarouselItemComponent implements CarouselItemInterface {
 
     /** Hide/show slide, useful for managing tab order */
     @HostBinding('style.visibility')
-    visibility = 'hidden';
+    visibility = 'visible';
 
     /**
      * Handling width height in IE versions.
