@@ -4,6 +4,7 @@
     display: block;
 }
 
+// TODO: Remove after https://github.com/SAP/fundamental-styles/pull/1856 is merged
 .fd-button.fd-message-strip__close {
 	position: absolute;
 }
