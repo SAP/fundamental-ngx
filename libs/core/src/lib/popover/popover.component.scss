@@ -122,6 +122,7 @@ $fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
 
 .fd-popover-custom {
     display: inline-block;
+	max-width: 100%;
 }
 
 .fd-popover-custom-list {
