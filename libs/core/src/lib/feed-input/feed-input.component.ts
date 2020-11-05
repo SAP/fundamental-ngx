@@ -37,8 +37,8 @@ export class FeedInputComponent implements AfterContentInit, OnDestroy {
     ngAfterContentInit(): void {
         this._subscriptions.add(
             this.textareaElement.valueChange.subscribe((value => {
-            this.buttonElement.disabled = !Boolean(value);
-        })));
+            this.buttonElement.disabled = !Boolean(value)})
+        ));
     }
 
     ngOnDestroy(): void {

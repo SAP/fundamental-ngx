@@ -4,7 +4,9 @@ import {
     EventEmitter,
     HostListener,
     Input,
-    Output
+    OnInit,
+    Output,
+    Renderer2
 } from '@angular/core';
 
 @Directive({
@@ -13,7 +15,7 @@ import {
         '[class.fd-feed-input__textarea]': 'true'
     }
 })
-export class FeedInputTextareaDirective {
+export class FeedInputTextareaDirective implements OnInit {
     /** rows are allowed to grow */
     @Input()
     fdFeedInputTextareaMaxRows: number;
@@ -29,33 +31,39 @@ export class FeedInputTextareaDirective {
         this.valueChange.emit(event.target.value);
     }
 
-    constructor(private _elementRef: ElementRef) {}
+    constructor(
+        private _elementRef: ElementRef,
+        private _renderer: Renderer2
+    ) {}
 
     /** @hidden */
     get elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 
+    ngOnInit(): void {
+        if (this.fdFeedInputTextareaMaxRows) {
+            const lineHeight = this._getTextareaLineHeight();
+            this._elementRef.nativeElement.style.maxHeight = lineHeight * this.fdFeedInputTextareaMaxRows + 'px';
+        }
+    }
+
     /** @hidden make to grow textarea */
     resize(): void {
-        this._elementRef.nativeElement.style.height = 'inherit';
+        this._renderer.setStyle(this.elementRef.nativeElement, 'height', 'inherit');
+
         const totalHeight = this._getTextareaTotalHeight();
-
-        if (this.fdFeedInputTextareaMaxRows) {
-            this._elementRef.nativeElement.style.maxHeight = this._getTextareaLineHeight() * this.fdFeedInputTextareaMaxRows + 'px';
-        }
-
-        this._elementRef.nativeElement.style.height = totalHeight + 'px';
+        this._renderer.setStyle(this.elementRef.nativeElement, 'height', `${ totalHeight }px`);
     }
 
     /** @hidden get line height of textarea */
     private _getTextareaLineHeight(): number {
-        if (this._elementRef && this._elementRef.nativeElement) {
-            const computed = window.getComputedStyle(this._elementRef.nativeElement);
-
-            return parseInt(computed.getPropertyValue('line-height'), 10);
+        const lineHeight = window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height');
+        if (lineHeight === 'normal') {
+            return parseInt(window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('font-size'), 10) * 1.1;
         }
-        return 20;
+
+        return parseInt(lineHeight, 10);
     }
 
     /** @hidden get the total height including borders and scroll height */
