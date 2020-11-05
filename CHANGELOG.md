@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.22...v0.23.1-rc.23) (2020-11-05)
+
+
+### Bug Fixes
+
+* Action sheet adapt to newest CDK ([#3733](https://github.com/SAP/fundamental-ngx/issues/3733)) ([7b353e8](https://github.com/SAP/fundamental-ngx/commit/7b353e886c7f7e83812b2b06cee3bdf0979124ec))
+
 ### [0.23.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.21...v0.23.1-rc.22) (2020-11-04)
 
 
