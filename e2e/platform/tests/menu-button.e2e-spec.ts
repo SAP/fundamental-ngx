@@ -1,6 +1,6 @@
 import { MenuButtonPo } from '../pages/menu-button.po';
 import { browser } from 'protractor';
-import { clickTwice, getValueOfAttribute } from '../helper/helper';
+import { clickTwice, getValueOfAttribute, waitForVisible } from '../helper/helper';
 import MenuBtnData from '../fixtures/appData/menu-button-contents';
 
 describe('Menu button test suite', function() {
@@ -12,6 +12,7 @@ describe('Menu button test suite', function() {
 
     afterEach(async () => {
         await browser.refresh();
+        await waitForVisible(await menuBtnPage.root);
     });
 
     describe('Check general menu button states', function() {
@@ -83,7 +84,7 @@ describe('Menu button test suite', function() {
             });
             cozyBtnArr.forEach(async (element, index) => {
                 await expect(await element.getCssValue(MenuBtnData.textColorAttr))
-                    .toEqual(MenuBtnData.cozyAndCompactBtnColorArr[index]);
+                    .toContain(MenuBtnData.btnColorArr[index]);
             });
             cozyBtnArr.forEach(async element => {
                 await expect(await element.getCssValue(MenuBtnData.textAlignmentAttr)).toEqual(MenuBtnData.alignmentCenter);
@@ -99,7 +100,7 @@ describe('Menu button test suite', function() {
             });
             compactBtnArr.forEach(async (element, index) => {
                 await expect(await element.getCssValue(MenuBtnData.textColorAttr))
-                    .toEqual(MenuBtnData.cozyAndCompactBtnColorArr[index]);
+                    .toContain(MenuBtnData.btnColorArr[index]);
             });
             compactBtnArr.forEach(async element => {
                 await expect(await element.getCssValue(MenuBtnData.textAlignmentAttr)).toEqual(MenuBtnData.alignmentCenter);
