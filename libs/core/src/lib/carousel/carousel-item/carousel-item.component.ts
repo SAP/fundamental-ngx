@@ -39,6 +39,12 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @HostBinding('attr.aria-describedby')
     ariaDescribedBy: string;
 
+    /**
+     * Loading indicator when item is not yet loaded
+     */
+    @Input()
+    loading = false;
+
     /** Sets tooltip for carousel item */
     @Input()
     @HostBinding('attr.title')
