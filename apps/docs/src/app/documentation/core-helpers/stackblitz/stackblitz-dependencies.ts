@@ -19,6 +19,7 @@ export class StackblitzDependencies {
         'fundamental-styles',
         'moment',
         'popper.js',
+        'hammerjs',
         'tslib',
         'typescript'
     ];
