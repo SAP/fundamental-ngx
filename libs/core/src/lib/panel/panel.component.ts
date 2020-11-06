@@ -12,7 +12,7 @@ import {
     Output,
     ContentChild
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder, RtlService } from '../utils/public_api';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
 
 let panelUniqueId = 0;
@@ -74,7 +74,10 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit {
     panelContent: PanelContentDirective;
 
     /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef) {}
+    _rtl$ = this._rtlService.rtl;
+
+    /** @hidden */
+    constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef, private _rtlService: RtlService) {}
 
     /** @hidden */
     ngOnInit(): void {
