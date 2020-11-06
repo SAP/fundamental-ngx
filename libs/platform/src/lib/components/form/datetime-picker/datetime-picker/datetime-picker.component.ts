@@ -34,9 +34,7 @@ import { FormFieldControl, Status } from '../../public_api';
 @Component({
     selector: 'fdp-datetime-picker',
     templateUrl: './datetime-picker.component.html',
-    styleUrls: ['./datetime-picker.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: PlatformDatetimePickerComponent, multi: true }]
 })
 export class PlatformDatetimePickerComponent extends BaseInput implements OnInit, AfterViewInit, OnDestroy {

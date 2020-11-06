@@ -167,6 +167,5 @@ describe('PlatformDatetimePickerComponent', () => {
         await wait(fixture);
 
         expect(formControl.value).toBe('');
-        // expect(inputEl.nativeElement.classList.contains('is-error')).toBeTruthy();
     });
 });
