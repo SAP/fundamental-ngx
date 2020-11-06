@@ -202,12 +202,12 @@ describe('MultiInputComponent', () => {
         component.dropdownValues = ['term1', 'term2', 'value'];
         spyOn(event, 'preventDefault');
         spyOn(event, 'stopPropagation');
-        spyOn(<any>component, '_propagateSearchTermChange').and.callThrough();
+        spyOn(<any>component, '_applySearchTermChange').and.callThrough();
         component.showAllClicked(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');
         expect(component.displayedValues.length).toEqual(component.dropdownValues.length);
-        expect((<any>component)._propagateSearchTermChange).toHaveBeenCalled();
+        expect((<any>component)._applySearchTermChange).toHaveBeenCalled();
     });
 });

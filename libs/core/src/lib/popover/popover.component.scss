@@ -144,9 +144,3 @@ $fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
 .cdk-overlay-connected-position-bounding-box {
 	height: auto !important;
 }
-
-.fd-popover-custom-list,
-.fd-popover-custom-list .fd-list {
-	border-bottom-left-radius: 0.25rem;
-	border-bottom-right-radius: 0.25rem;
-}

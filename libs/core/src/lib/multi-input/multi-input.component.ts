@@ -407,8 +407,7 @@ export class MultiInputComponent implements
     /** @hidden */
     handleSearchTermChange(searchTerm: string): void {
         if (this.searchTerm !== searchTerm) {
-            this.searchTerm = searchTerm;
-            this._propagateSearchTermChange();
+            this._applySearchTermChange(searchTerm);
             if (!this.open) {
                 this.openChangeHandle(true);
             }
@@ -419,8 +418,7 @@ export class MultiInputComponent implements
     showAllClicked(event: MouseEvent): void {
         event.preventDefault();
         event.stopPropagation();
-        this.searchTerm = '';
-        this._propagateSearchTermChange();
+        this._applySearchTermChange('');
     }
 
     /** @hidden */
@@ -429,8 +427,7 @@ export class MultiInputComponent implements
             const newToken = this.newTokenParseFn(this.searchTerm);
             this.dropdownValues.push(newToken);
             this.handleSelect(true, newToken);
-            this.searchTerm = '';
-            this._propagateSearchTermChange();
+            this._applySearchTermChange('');
             this.open = false;
         }
     }
@@ -455,7 +452,7 @@ export class MultiInputComponent implements
 
     /** @hidden */
     moreClicked(): void {
-        // this.openChangeHandle(true);
+        this.openChangeHandle(true);
         const newDisplayedValues: any[] = [];
         this.displayedValues.forEach(value => {
             if (this.selected.indexOf(value) !== -1) {
@@ -472,7 +469,8 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    private _propagateSearchTermChange(): void {
+    private _applySearchTermChange(searchTerm: string): void {
+        this.searchTerm = searchTerm;
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
         this._changeDetRef.detectChanges();

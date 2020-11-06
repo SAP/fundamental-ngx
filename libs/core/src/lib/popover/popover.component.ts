@@ -103,6 +103,10 @@ export class PopoverComponent extends BasePopoverClass
     /** Additional style to put margin into body component, to give a place for arrow */
     marginStyle: string = null;
 
+    /** @hidden Properties bind to popover's body */
+    _popoverBodyWidth: number;
+    _popoverBodyMinWidth: number;
+
     /** @hidden */
     directiveRef: any;
 
@@ -382,9 +386,9 @@ export class PopoverComponent extends BasePopoverClass
         const maxWidthLimit = this.maxWidth ? this.maxWidth : MAX_BODY_SIZE;
         const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
         if (this.fillControlMode === 'at-least') {
-            this._overlayRef.updateSize({ minWidth: width });
+            this._popoverBodyMinWidth = width;
         } else if (this.fillControlMode === 'equal') {
-            this._overlayRef.updateSize({ width: width });
+            this._popoverBodyWidth = width;
         }
         this._changeDetectorRef.detectChanges();
     }

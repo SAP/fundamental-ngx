@@ -76,7 +76,8 @@ import {
     ],
     host: {
         '[class.fd-combobox-custom-class]': 'true',
-        '[class.fd-combobox-input]': 'true'
+        '[class.fd-combobox-input]': 'true',
+        '[class.fd-combobox-custom-class--mobile]': 'mobile',
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
