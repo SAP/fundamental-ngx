@@ -94,7 +94,8 @@ describe('FeedInputComponent', () => {
         expect(textareaDirective.valueChange.emit).toHaveBeenCalledWith(event.target.value)
     });
 
-    it('should textarea grow by default', () => {
+    it('should textarea grow by default with normal line height', () => {
+        textareaEl.nativeElement.style.lineHeight = 'normal';
         textareaEl.nativeElement.value = '1 \n 2 \n 3 \n 4 \n';
         textareaDirective.resize();
         fixture.detectChanges();
@@ -104,6 +105,16 @@ describe('FeedInputComponent', () => {
 
     it('should set textarea max height', () => {
         component.maxRows = 10;
+        textareaEl.nativeElement.style.lineHeight = '19px';
+        fixture.detectChanges();
+
+        textareaDirective.ngOnInit();
+        expect(textareaEl.nativeElement.style.maxHeight).toEqual('190px');
+    });
+
+    it('should set textarea max height with normal line height', () => {
+        component.maxRows = 10;
+        textareaEl.nativeElement.style.lineHeight = 'normal';
         fixture.detectChanges();
 
         textareaDirective.ngOnInit();
