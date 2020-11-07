@@ -6,10 +6,10 @@ import {
     ViewEncapsulation,
     AfterContentInit,
     forwardRef,
-    OnDestroy
+    OnDestroy,
 } from '@angular/core';
-import { FeedInputButtonDirective, FeedInputTextareaDirective } from '../..';
 import { Subscription } from 'rxjs';
+import { FeedInputButtonDirective, FeedInputTextareaDirective } from '../..';
 
 @Component({
     selector: 'fd-feed-input',
@@ -35,6 +35,10 @@ export class FeedInputComponent implements AfterContentInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     ngAfterContentInit(): void {
+        if (this.disabled) {
+            this.textareaElement.disabled = true;
+        }
+
         this._subscriptions.add(
             this.textareaElement.valueChange.subscribe((value => {
             this.buttonElement.disabled = !Boolean(value)})

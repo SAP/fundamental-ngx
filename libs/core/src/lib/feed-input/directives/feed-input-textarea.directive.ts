@@ -2,6 +2,7 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    HostBinding,
     HostListener,
     Input,
     OnInit,
@@ -12,13 +13,18 @@ import {
 @Directive({
     selector: '[fdFeedInputTextarea]',
     host: {
-        '[class.fd-feed-input__textarea]': 'true'
+        '[class.fd-feed-input__textarea]': 'true',
+        '[class.fd-textarea]': 'true'
     }
 })
 export class FeedInputTextareaDirective implements OnInit {
     /** rows are allowed to grow */
     @Input()
     fdFeedInputTextareaMaxRows: number;
+
+    @HostBinding('disabled')
+    @HostBinding('attr.aria-disabled')
+    disabled: boolean;
 
     /** Event emitted when the textarea value changed */
     @Output()
@@ -59,6 +65,7 @@ export class FeedInputTextareaDirective implements OnInit {
     /** @hidden get line height of textarea */
     private _getTextareaLineHeight(): number {
         const lineHeight = window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height');
+
         if (lineHeight === 'normal') {
             return parseInt(window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('font-size'), 10) * 1.1;
         }

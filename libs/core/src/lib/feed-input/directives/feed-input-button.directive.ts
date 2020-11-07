@@ -10,7 +10,7 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
 export class FeedInputButtonDirective {
     /** @hidden */
     @HostBinding('disabled')
-    @HostBinding('class.is-disabled')
+    @HostBinding('attr.aria-disabled')
     disabled = true;
 
     constructor(private _elementRef: ElementRef) {}

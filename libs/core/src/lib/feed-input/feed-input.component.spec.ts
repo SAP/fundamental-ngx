@@ -10,7 +10,7 @@ import { FeedInputComponent } from './feed-input.component';
 @Component({
     template: `
         <fd-feed-input [disabled]="disabled">
-            <textarea fdFeedInputTextarea></textarea>
+            <textarea fdFeedInputTextarea [fdFeedInputTextareaMaxRows]="maxRows"></textarea>
             <button fdFeedInputButton></button>
         </fd-feed-input>
     `
@@ -23,6 +23,7 @@ class TestComponent {
     buttonDirective: FeedInputButtonDirective;
 
     disabled = false;
+    maxRows: number
 }
 
 describe('FeedInputComponent', () => {
@@ -66,7 +67,7 @@ describe('FeedInputComponent', () => {
     })
 
     it('should disabled button by default', () => {
-        expect(buttonEl.classes['is-disabled']).toBeTrue();
+        expect(buttonEl.attributes['aria-disabled']).toBeTruthy();
     });
 
     it('should button enable when textarea have a value', () => {
@@ -99,5 +100,13 @@ describe('FeedInputComponent', () => {
         fixture.detectChanges();
 
         expect(textareaEl.nativeElement.style.height).toEqual('87px');
+    });
+
+    it('should set textarea max height', () => {
+        component.maxRows = 10;
+        fixture.detectChanges();
+
+        textareaDirective.ngOnInit();
+        expect(textareaEl.nativeElement.style.maxHeight).toEqual('143px');
     });
 });
