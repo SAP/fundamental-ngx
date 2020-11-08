@@ -113,14 +113,6 @@ export const API_FILES = {
         'ListFooterDirective',
         'ListMessageDirective'
     ],
-    localizationEditor: [
-        'LocalizationEditorComponent',
-        'LocalizationEditorItemComponent',
-        'LocalizationEditorMainComponent',
-        'LocalizationEditorInputDirective',
-        'LocalizationEditorTextareaDirective',
-        'LocalizationEditorLabel'
-    ],
     megaMenu: [
         'MegaMenuComponent',
         'MegaMenuGroupComponent',
