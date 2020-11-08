@@ -64,16 +64,20 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     @Input()
     class: string;
 
-    /** Sets [name] property of input. */
+    /** Sets [name] attribute of input. */
     @Input()
     name: string;
 
-    /** User's aria-label attr */
+    /**
+     * Sets the aria-label attribute to the element.
+     */
     @Input()
     @HostBinding('attr.aria-label')
     ariaLabel: string;
 
     /**
+     * Sets the aria-disabled attribute to the element.
+     * Sets the is-disabled class to the element.
      * Whether the rating indicator is disabled
      */
     @Input()
@@ -82,7 +86,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     disabled = false;
 
     /**
-     *
+     * Sets the is-display-mode class to the element.
      * Whether the rating indicator is in displayMode
      */
     @Input()
@@ -133,14 +137,16 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
      * Whether or not to display the popover that shows the sum of each rating. Requires [ratings] object.
      */
     @Input()
-    displaySumPopover = false;
+    displayAllRatings = false;
 
     /**
-     * Icon class from fundamental-styles lib https://sap.github.io/fundamental-styles/?path=/docs/components-icon--sizes
+     * Icon class for rated icon from fundamental-styles lib https://sap.github.io/fundamental-styles/?path=/docs/components-icon--sizes
      */
     @Input()
     ratedIcon: string;
-
+    /**
+     * Icon class for unrated icon from fundamental-styles lib https://sap.github.io/fundamental-styles/?path=/docs/components-icon--sizes
+     */
     @Input()
     unratedIcon: string;
 

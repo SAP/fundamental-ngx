@@ -17,11 +17,6 @@ describe('RatingIndicatorComponent', () => {
       .compileComponents();
   });
 
-  async function wait(componentFixture: ComponentFixture<any>): Promise<any> {
-    componentFixture.detectChanges();
-    await componentFixture.whenStable();
-  }
-
   beforeEach(() => {
     fixture = TestBed.createComponent(RatingIndicatorComponent);
     elementRef = fixture.componentInstance.elementRef();
@@ -90,5 +85,18 @@ describe('RatingIndicatorComponent', () => {
     component.ratingChanged.subscribe((value: number) => {
       expect(value).toBe(2);
     });
+  });
+
+  it(`should have ratings data with correct rating object`, () => {
+    component.ratings = {
+        1: 10,
+        4: 20,
+        5: 30
+    };
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(component.ratingAverage).toBe(4);
+    expect(component.totalRatings).toBe(60);
+    expect(component.viewValue).toBe(4);
   });
 });

@@ -19,13 +19,13 @@
         </label>
     </ng-container>
 </div>
-<!-- Popover if displaySumPopover is true and we have ratings object -->
+<!-- Popover if displayAllRatings is true and we have ratings object -->
 <fd-popover
     [triggers]="['mouseenter', 'mouseleave']"
     [noArrow]="false"
     placement="top"
     additionalBodyClass="fd-rating-indicator__popover"
-    *ngIf="displaySumPopover && _ratingItems?.length; else dynamicText">
+    *ngIf="displayAllRatings && _ratingItems?.length; else dynamicText">
     <fd-popover-control>
         <span class="fd-rating-indicator__dynamic-text">
             (<span area-label="Total raiting" fd-link>{{ totalRatings }}</span>)
