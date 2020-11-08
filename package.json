@@ -101,7 +101,7 @@
     "@types/node": "14.11.7",
     "angular-resize-event": "2.0.0",
     "classlist.js": "1.1.20150312",
-    "core-js": "3.6.5",
+    "core-js": "3.7.0",
     "flexboxgrid": "6.3.1",
     "focus-trap": "6.1.4",
     "fundamental-styles": "0.12.0",
