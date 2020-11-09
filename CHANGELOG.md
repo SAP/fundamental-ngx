@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.3...v0.24.0-rc.4) (2020-11-09)
+
+
+### Bug Fixes
+
+* (Core) cursor on disabled Switch should not be pointer ([#3769](https://github.com/SAP/fundamental-ngx/issues/3769)) ([c3e7ec7](https://github.com/SAP/fundamental-ngx/commit/c3e7ec7147fc193ec183dd5e485dd35b4b6ff1df))
+
 ## [0.24.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.2...v0.24.0-rc.3) (2020-11-09)
 
 
