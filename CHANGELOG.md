@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.0...v0.24.0-rc.1) (2020-11-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove deprecated component mega menu
+
+### Bug Fixes
+
+* remove depreated mega menu ([#3782](https://github.com/SAP/fundamental-ngx/issues/3782)) ([170b6e7](https://github.com/SAP/fundamental-ngx/commit/170b6e7ce677611daa0345340728589d527f2f57))
+
 ## [0.24.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.23.1-rc.35...v0.24.0-rc.0) (2020-11-09)
 
 
