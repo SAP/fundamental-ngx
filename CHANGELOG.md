@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.2...v0.24.0-rc.3) (2020-11-09)
+
+
+### Bug Fixes
+
+* (platform) platform split button icons example ([#3771](https://github.com/SAP/fundamental-ngx/issues/3771)) ([5c49fed](https://github.com/SAP/fundamental-ngx/commit/5c49fedc882a5e0c214c6ea9ee614ca333bcce7d))
+
 ## [0.24.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.1...v0.24.0-rc.2) (2020-11-09)
 
 
