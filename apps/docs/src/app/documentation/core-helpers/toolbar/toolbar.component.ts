@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
 import { ShellbarMenuItem, MenuKeyboardService, MenuComponent } from '@fundamental-ngx/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ThemesService } from '../../services/themes.service';
 
 @Component({
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.scss'],
-    providers: [MenuKeyboardService]
+    providers: [MenuKeyboardService, ThemesService]
 })
 export class ToolbarDocsComponent implements OnInit {
     @Output()
@@ -44,27 +45,11 @@ export class ToolbarDocsComponent implements OnInit {
         }
     ];
 
-    themes = [
-        {
-            id: 'sap_fiori_3',
-            name: 'Fiori 3'
-        },
-        {
-            id: 'sap_fiori_3_dark',
-            name: 'Fiori 3 Dark'
-        },
-        {
-            id: 'sap_fiori_3_hcb',
-            name: 'High Contrast Black'
-        },
-        {
-            id: 'sap_fiori_3_hcw',
-            name: 'High Contrast White'
-        }
-    ];
+    themes = this.themesService.themes;
 
     constructor(
         private routerService: Router,
+        private themesService: ThemesService,
         @Inject('CURRENT_LIB') private currentLib: Libraries,
         private menuKeyboardService: MenuKeyboardService,
         private sanitizer: DomSanitizer
@@ -93,7 +78,7 @@ export class ToolbarDocsComponent implements OnInit {
     }
 
     selectTheme(selectedTheme: string): void {
-        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/' + selectedTheme + '.css');
+        this.cssUrl = this.themesService.setTheme(selectedTheme);
     }
 
     selectVersion(version: any): void {
