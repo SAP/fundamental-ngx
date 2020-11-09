@@ -1,4 +1,4 @@
-<label class="fd-switch__label" (click)="focus()">
+<label class="fd-switch__label" (click)="focus()" [ngStyle]="{ cursor: disabled ? 'auto' : 'pointer'}">
     <span
         class="fd-switch"
         [ngClass]="{
