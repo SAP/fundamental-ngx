@@ -113,15 +113,6 @@ export const API_FILES = {
         'ListFooterDirective',
         'ListMessageDirective'
     ],
-    megaMenu: [
-        'MegaMenuComponent',
-        'MegaMenuGroupComponent',
-        'MegaMenuItemComponent',
-        'MegaMenuLinkDirective',
-        'MegaMenuTitleDirective',
-        'MegaMenuSubitemDirective',
-        'MegaMenuSublinkDirective'
-    ],
     menu: [
         'MenuAddonDirective',
         'MenuComponent',

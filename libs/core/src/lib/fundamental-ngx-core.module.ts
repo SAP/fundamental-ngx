@@ -50,7 +50,6 @@ import { TimePickerModule } from './time-picker/time-picker.module';
 import { SegmentedButtonModule } from './segmented-button/public_api';
 import { SwitchModule } from './switch/switch.module';
 import { TokenModule } from './token/token.module';
-import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { LayoutGridModule } from './layout-grid/layout-grid.module';
 import { DragAndDropModule } from './utils/drag-and-drop/drag-and-drop.module';
 import { ProductSwitchModule } from './product-switch/product-switch.module';
@@ -111,7 +110,6 @@ import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-co
         LinkModule,
         ListModule,
         MenuModule,
-        MegaMenuModule,
         DialogModule,
         MessageStripModule,
         MultiInputModule,
