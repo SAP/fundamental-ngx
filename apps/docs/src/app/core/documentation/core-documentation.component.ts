@@ -50,7 +50,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
                     { url: 'core/list-byline', name: 'List with Byline' }
                 ]
             },
-            { url: 'core/localizationEditor', name: 'Localization Editor' },
             { url: 'core/menu', name: 'Menu' },
             { url: 'core/message-strip', name: 'Message Strip' },
             { url: 'core/message-toast', name: 'Message Toast' },

@@ -198,13 +198,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/list-byline/list-byline-docs.module').then((m) => m.ListDocsModule)
             },
             {
-                path: 'localizationEditor',
-                loadChildren: () =>
-                    import('./component-docs/localization-editor/localization-editor-docs.module').then(
-                        (m) => m.LocalizationEditorDocsModule
-                    )
-            },
-            {
                 path: 'menu',
                 loadChildren: () => import('./component-docs/menu/menu-docs.module').then((m) => m.MenuDocsModule)
             },

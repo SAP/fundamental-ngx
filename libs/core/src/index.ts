@@ -26,7 +26,6 @@ export * from './lib/link/public_api';
 export * from './lib/list/public_api';
 export * from './lib/layout-grid/public_api';
 export * from './lib/layout-panel/public_api';
-export * from './lib/localizator-editor/public_api';
 export * from './lib/menu/public_api';
 export * from './lib/dialog/public_api';
 export * from './lib/multi-input/public_api';
