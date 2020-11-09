@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.1...v0.24.0-rc.2) (2020-11-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove deprecated component LocalizationEditor
+
+### Bug Fixes
+
+* remove deprecated localization editor ([#3781](https://github.com/SAP/fundamental-ngx/issues/3781)) ([5839251](https://github.com/SAP/fundamental-ngx/commit/583925161513637fd577970f7150020ffebc6824))
+
 ## [0.24.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.0...v0.24.0-rc.1) (2020-11-09)
 
 
