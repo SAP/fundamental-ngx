@@ -23,6 +23,12 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
                     name: 'Renee Miles',
                     description: 'Legal team',
                     imgUrl: 'https://randomuser.me/api/portraits/women/11.jpg'
+                },
+                {
+                    id: 'string',
+                    name: 'Renee Miles',
+                    description: 'Legal team',
+                    imgUrl: ''
                 }
             ],
             nodes: [
@@ -37,7 +43,7 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
                         imgUrl: 'https://randomuser.me/api/portraits/women/91.jpg'
                     }],
                     status: 'approved',
-                    targets: [''],
+                    targets: ['ID2', 'ID22', 'ID222'],
                     dueDate: new Date(),
                     createDate: new Date()
                 },
@@ -52,7 +58,75 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
                         imgUrl: 'https://randomuser.me/api/portraits/men/9.jpg'
                     }],
                     status: 'in progress',
-                    targets: [''],
+                    targets: ['ID3'],
+                    dueDate: new Date(),
+                    createDate: new Date()
+                },
+                {
+                    id: 'ID22',
+                    name: 'node name',
+                    description: 'node description',
+                    approvers: [{
+                        id: 'string',
+                        name: 'Salvador Duncan',
+                        description: 'Marketing team',
+                        imgUrl: 'https://randomuser.me/api/portraits/men/14.jpg'
+                    }],
+                    status: 'approved',
+                    targets: [],
+                    dueDate: new Date(),
+                    createDate: new Date()
+                },
+                {
+                    id: 'ID222',
+                    name: 'node name',
+                    description: 'node description',
+                    approvers: [
+                        {
+                            id: 'string',
+                            name: 'Salvador Duncan',
+                            description: 'Marketing team',
+                            imgUrl: 'https://randomuser.me/api/portraits/men/14.jpg'
+                        },
+                        {
+                            id: 'string',
+                            name: 'Salvador Duncan',
+                            description: 'Marketing team',
+                            imgUrl: 'https://randomuser.me/api/portraits/men/14.jpg'
+                        }
+                    ],
+                    status: 'in progress',
+                    targets: [],
+                    dueDate: new Date(),
+                    createDate: new Date()
+                },
+                {
+                    id: 'ID3',
+                    name: 'node name',
+                    description: 'node description',
+                    approvers: [{
+                        id: 'string',
+                        name: 'Julie Peters',
+                        description: 'Marketing team',
+                        imgUrl: 'https://randomuser.me/api/portraits/women/77.jpg'
+                    }],
+                    status: 'in progress',
+                    targets: ['ID4'],
+                    dueDate: new Date(),
+                    createDate: new Date()
+                },
+                {
+                    id: 'ID4',
+                    name: 'node name',
+                    description: 'node description',
+                    approvers: [{
+                        id: 'string',
+                        name: 'Fred Gibson',
+                        description: 'Marketing team',
+                        imgUrl: 'https://randomuser.me/api/portraits/men/45.jpg'
+                    }],
+                    status: 'not started',
+                    targets: [],
                     dueDate: new Date(),
                     createDate: new Date()
                 }

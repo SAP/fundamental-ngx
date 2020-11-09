@@ -1,0 +1,26 @@
+.approval-flow-watchers {
+    margin-bottom: 1rem;
+}
+
+.approval-flow-tree {
+    display: flex;
+
+    .approval-flow-section:not(:last-child) {
+        margin-right: 2rem;
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            right: -1rem;
+            top: 0;
+            height: 100%;
+            //width: 1px;
+            border-right: 1px dotted grey;
+        }
+    }
+
+    fdp-approval-flow-node + fdp-approval-flow-node:not(:last-child) {
+        margin-bottom: 0.75rem;
+    }
+}

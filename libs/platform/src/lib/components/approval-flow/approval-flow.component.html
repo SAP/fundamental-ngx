@@ -3,11 +3,16 @@
     <!--    <button fd-toolbar-item fd-button [compact]="true" label="Edit"></button>-->
 </fd-toolbar>
 
-<pre>{{ _approvalProcess | json }}</pre>
+<!--<pre>{{ _approvalProcess | json }}</pre>-->
 
 <div class="approval-flow-watchers">
     <p>Watchers</p>
-    <fd-avatar style="margin-right: 10px    " *ngFor="let watcher of _approvalProcess?.watchers" [image]="watcher.imgUrl" size="xs" [circle]="true"></fd-avatar>
+    <fd-avatar style="margin-right: 10px" *ngFor="let watcher of _approvalProcess?.watchers" [image]="watcher.imgUrl"
+               size="xs"  [label]="watcher.name" [circle]="true" ></fd-avatar>
 </div>
 
-<fdp-approval-flow-node  *ngFor="let node of _approvalProcess?.nodes" [node]="node"></fdp-approval-flow-node>
+<div class="approval-flow-tree">
+    <div class="approval-flow-section" *ngFor="let branch of _nodeTree">
+        <fdp-approval-flow-node *ngFor="let node of branch" [node]="node"></fdp-approval-flow-node>
+    </div>
+</div>
