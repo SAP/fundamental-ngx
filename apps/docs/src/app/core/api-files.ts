@@ -121,15 +121,6 @@ export const API_FILES = {
         'LocalizationEditorTextareaDirective',
         'LocalizationEditorLabel'
     ],
-    megaMenu: [
-        'MegaMenuComponent',
-        'MegaMenuGroupComponent',
-        'MegaMenuItemComponent',
-        'MegaMenuLinkDirective',
-        'MegaMenuTitleDirective',
-        'MegaMenuSubitemDirective',
-        'MegaMenuSublinkDirective'
-    ],
     menu: [
         'MenuAddonDirective',
         'MenuComponent',

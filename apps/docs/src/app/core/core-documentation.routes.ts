@@ -205,11 +205,6 @@ export const ROUTES: Routes = [
                     )
             },
             {
-                path: 'mega-menu',
-                loadChildren: () =>
-                    import('./component-docs/mega-menu/mega-menu-docs.module').then((m) => m.MegaMenuDocsModule)
-            },
-            {
                 path: 'menu',
                 loadChildren: () => import('./component-docs/menu/menu-docs.module').then((m) => m.MenuDocsModule)
             },

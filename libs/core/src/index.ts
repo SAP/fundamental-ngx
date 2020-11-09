@@ -28,7 +28,6 @@ export * from './lib/layout-grid/public_api';
 export * from './lib/layout-panel/public_api';
 export * from './lib/localizator-editor/public_api';
 export * from './lib/menu/public_api';
-export * from './lib/mega-menu/public_api';
 export * from './lib/dialog/public_api';
 export * from './lib/multi-input/public_api';
 export * from './lib/message-strip/public_api';
