@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.4...v0.24.0-rc.5) (2020-11-10)
+
+
+### Bug Fixes
+
+* (Core) issues on Popover related components ([#3723](https://github.com/SAP/fundamental-ngx/issues/3723)) ([b2a62b3](https://github.com/SAP/fundamental-ngx/commit/b2a62b37812254f10a38275a60bbf5b239db1253))
+
 ## [0.24.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.3...v0.24.0-rc.4) (2020-11-09)
 
 
