@@ -73,7 +73,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
 
     /** The element to which the popover should be appended. */
     @Input()
-    appendTo: HTMLElement | 'body' = 'body';
+    appendTo: ElementRef;
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()

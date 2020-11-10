@@ -18,6 +18,12 @@ fdp-input-message-group {
     .fd-popover-custom {
         display: block;
     }
+
+    .fd-datetime {
+        .fd-popover-custom {
+            display: inline-block;
+        }
+    }
 }
 
 .fd-popover__popper.fd-popover__popper--input-message-group {
