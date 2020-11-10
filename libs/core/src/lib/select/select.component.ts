@@ -144,7 +144,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
      * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
      * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
      * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * 'default' will apply width needed to properly display items inside, independent of control.
+     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
      */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
