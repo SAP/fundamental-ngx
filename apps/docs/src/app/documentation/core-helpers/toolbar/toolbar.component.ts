@@ -2,9 +2,9 @@ import { Component, EventEmitter, Inject, Output, OnInit, ViewChild } from '@ang
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
-import { ShellbarMenuItem, MenuKeyboardService, MenuComponent } from '@fundamental-ngx/core';
+import { ShellbarMenuItem, MenuKeyboardService, MenuComponent, ThemesService } from '@fundamental-ngx/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ThemesService } from '../../services/themes.service';
+
 
 @Component({
     selector: 'fd-docs-toolbar',

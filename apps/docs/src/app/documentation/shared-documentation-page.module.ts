@@ -22,7 +22,6 @@ import { ApiComponent } from './core-helpers/api/api.component';
 import { sharedCoreModules } from './shared-core-modules';
 import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.component';
 import { RouterModule } from '@angular/router';
-import { ThemesService } from './services/themes.service';
 
 /** THIS MODULE PROVIDES BASIC SET OF DEPENDENCIES NEEDED TO CREATE COMPONENT EXAMPLE PAGE */
 @NgModule({
@@ -49,7 +48,7 @@ import { ThemesService } from './services/themes.service';
         sharedCoreModules,
         MarkdownModule.forChild(),
     ],
-    providers: [CopyService, ApiDocsService, ThemesService],
+    providers: [CopyService, ApiDocsService],
     exports: [
         FormsModule,
         ReactiveFormsModule,

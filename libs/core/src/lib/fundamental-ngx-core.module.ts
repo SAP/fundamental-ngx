@@ -74,6 +74,7 @@ import { ObjectMarkerModule } from './object-marker/object-marker.module';
 import { MessageToastModule } from './message-toast/message-toast.module';
 import { MessageToastService } from './message-toast/message-toast-service/message-toast.service';
 import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-content.module';
+import { ThemesService } from './utils/services/themes.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -148,6 +149,6 @@ import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-co
         MessageToastModule,
         DynamicSideContentModule
     ],
-    providers: [AlertService, DialogService, NotificationService, MessageToastService]
+    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
 })
 export class FundamentalNgxCoreModule {}

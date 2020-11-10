@@ -298,7 +298,8 @@ export const API_FILES = {
         'ToolbarComponent',
         'ToolbarContentComponent',
         'ToolbarOverflowContentComponent',
-        'ToolbarSpacerComponent'
+        'ToolbarSpacerComponent',
+        'ThemesService'
     ],
     tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
     wizard: ['WizardComponent']

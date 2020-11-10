@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable()
+/**
+ * Service providing theme switcher functionality.
+ */
 export class ThemesService {
 
     themes = [
@@ -20,6 +23,10 @@ export class ThemesService {
         {
             id: 'sap_fiori_3_hcw',
             name: 'High Contrast White'
+        },
+        {
+            id: 'sap_fiori_3_light_dark',
+            name: 'Light Dark'
         }
     ];
 
