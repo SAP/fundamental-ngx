@@ -241,6 +241,12 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._carouselService.dragStateChange.subscribe((event) => this._onSlideDrag(event));
 
         this._slidesCopy = this.slides.toArray().slice();
+
+        // Disable swipe when there is no carousel item
+        if (this.slides.length === 0) {
+            this.swipeEnabled = false;
+        }
+
         this._changeDetectorRef.markForCheck();
     }
 
@@ -362,8 +368,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             // Need to disable navigation button if either direction limit has reached.
             if (this.currentActiveSlidesStartIndex === 0) {
                 this.leftButtonDisabled = true;
+                this.rightButtonDisabled = false;
             } else if (this.slides.length - 1 === this.currentActiveSlidesStartIndex) {
                 this.rightButtonDisabled = true;
+                this.leftButtonDisabled = false;
             } else if (
                 this.visibleSlidesCount > 1 &&
                 this.currentActiveSlidesStartIndex + this.visibleSlidesCount >= this.slides.length
