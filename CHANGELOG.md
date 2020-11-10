@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.6...v0.24.0-rc.7) (2020-11-10)
+
+
+### Bug Fixes
+
+* (platform) Fixing unsubscribe error onDestroy of DynamicPage component ([#3795](https://github.com/SAP/fundamental-ngx/issues/3795)) ([3b2b015](https://github.com/SAP/fundamental-ngx/commit/3b2b015123a8dffaa4e8628fa281c0b265a30bdf))
+
 ## [0.24.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.5...v0.24.0-rc.6) (2020-11-10)
 
 
