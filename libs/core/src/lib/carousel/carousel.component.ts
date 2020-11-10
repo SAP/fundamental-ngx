@@ -245,6 +245,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         // Disable swipe when there is no carousel item
         if (this.slides.length === 0) {
             this.swipeEnabled = false;
+            this.navigation = false;
         }
 
         this._changeDetectorRef.markForCheck();
