@@ -1,12 +1,12 @@
 export interface AngularIvyComponentDescriptor {
     /** Uniq name of module in plugin */
     name: string;
+    /** Component name we are planning to inject */
+    component: string;
     /** Type of a plugin module */
     type: 'angular-ivy-component';
     /** Exposed Angular Module */
     exposedModule: string;
-    /** Component name we are planning to inject */
-    componentName?: string;
     /** most likely this property will be removed, but as for this this is a way to register route for a component*/
     route?: string;
 }

@@ -2,34 +2,36 @@ import {
     AfterViewChecked,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
+    Compiler,
     Component,
     ComponentFactoryResolver,
     ElementRef,
     Injector,
     Input,
+    NgModuleFactory,
     OnChanges,
     Renderer2,
     SimpleChanges,
+    Type,
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { loadRemoteModule } from '../../api/plugins/federation-utils';
 import {
     AngularIvyComponentDescriptor,
+    DescriptorsModule,
     PluginDescriptor
 } from '../../api/plugins/lookup/plugin-descriptor.model';
 import { LookupService } from '../../api/plugins/lookup/lookup.service';
 import { PluginManagerService } from '../../api/plugins/plugin-manager.service';
-import {
-    DomSanitizer,
-    SafeResourceUrl
-} from '@angular/platform-browser';
+import { PluginLauncherModule } from './plugin-launcher.module';
 
 @Component({
     selector: 'fds-plugin-launcher',
     styleUrls: ['./plugin-launcher.component.scss'],
     template: `
-        <ng-container #view></ng-container>
+        <ng-container *ngComponentOutlet="_ngComponent; ngModuleFactory: _ngModule"></ng-container>
         <iframe
             *ngIf="_safeIframeUri"
             #iframe
@@ -54,11 +56,11 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
     @Input()
     iframeAttrs: Record<string, string | number>;
 
-    @ViewChild('view', { read: ViewContainerRef, static: true })
-    ngContentView: ViewContainerRef;
-
     @ViewChild('iframe', { static: false })
     iframeEl: ElementRef;
+
+    _ngComponent: Type<any>;
+    _ngModule: NgModuleFactory<any>;
 
     _safeIframeUri: SafeResourceUrl;
     private descriptor: Partial<PluginDescriptor>;
@@ -70,7 +72,8 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
                 private readonly _render: Renderer2,
                 private readonly _pluginMgr: PluginManagerService,
                 private readonly lookupService: LookupService,
-                private readonly sanitizer: DomSanitizer) {
+                private readonly sanitizer: DomSanitizer,
+                private readonly compiler: Compiler) {
     }
 
     async ngOnChanges(changes: SimpleChanges): Promise<void> {
@@ -98,31 +101,30 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
             return;
         }
 
-        const _module = descriptor.modules.find(module => module.name === this.module);
-        const _component = await loadRemoteModule<AngularIvyComponentDescriptor>(descriptor, _module as AngularIvyComponentDescriptor)
-            .then(m => m[_module.name])
+        const _pluginModule = descriptor.modules.find(module => module.name === this.module);
+        const _remoteModule = await loadRemoteModule<DescriptorsModule>(descriptor, _pluginModule)
             .catch(err => console.error(err));
+        const _module = _remoteModule[_pluginModule.name];
 
-        if (_module.type !== 'iframe' && !this.iframeUri) {
+        if (_pluginModule.type !== 'iframe' && !this.iframeUri) {
             this._safeIframeUri = null;
         }
 
-        if (_module.type === 'iframe') {
-            const _url = descriptor.uri + _module.html;
+        if (_pluginModule.type === 'iframe') {
+            const _url = descriptor.uri + _pluginModule.html;
             this._safeIframeUri = this.sanitizer.bypassSecurityTrustResourceUrl(_url);
             return;
         }
 
-        if (_module.type === 'custom-element') {
-            const element = document.createElement(_component);
+        if (_pluginModule.type === 'custom-element') {
+            const element = document.createElement(_module);
             this._render.appendChild(this._elementRef.nativeElement, element);
             return;
         }
 
-        if (_module.type === 'angular-ivy-component' && this.ngContentView) {
-            this.ngContentView.clear();
-            const factory = this.cfr.resolveComponentFactory(_component);
-            this.ngContentView.createComponent(factory, null, this._injector);
+        if (_pluginModule.type === 'angular-ivy-component') {
+            this._ngModule = await this.compiler.compileModuleAsync(_module);
+            this._ngComponent = _remoteModule[(_pluginModule as AngularIvyComponentDescriptor).component];
             this._cd.detectChanges();
         }
         this._pluginMgr.register(descriptor);

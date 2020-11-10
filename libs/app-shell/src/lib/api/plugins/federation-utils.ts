@@ -1,5 +1,5 @@
 import {
-    AngularIvyComponentDescriptor,
+    AngularIvyComponentDescriptor, DescriptorsModule,
     PluginDescriptor
 } from './lookup/plugin-descriptor.model';
 
@@ -53,8 +53,8 @@ async function lookupExposedModule<T>(remoteName: string, exposedModule: string)
     return Module as T;
 }
 
-export async function loadRemoteModule<T = any>(options: Partial<PluginDescriptor>, module: AngularIvyComponentDescriptor): Promise<T> {
+export async function loadRemoteModule<T = any>(options: Partial<PluginDescriptor>, module: DescriptorsModule): Promise<T> {
     await loadRemoteEntry(options.uri);
 
-    return await lookupExposedModule<T>(options.name, module.exposedModule);
+    return await lookupExposedModule<T>(options.name, (module as AngularIvyComponentDescriptor).exposedModule);
 }
