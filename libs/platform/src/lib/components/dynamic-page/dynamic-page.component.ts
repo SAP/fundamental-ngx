@@ -113,13 +113,13 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     /**
      * subscription for when collapse value has changed
      */
-    private _collapseValSubscription: Subscription;
+    private _collapseValSubscription: Subscription = new Subscription();
 
     /**
      * @hidden
      * subscription for when content is scrolled
      */
-    private _scrollSubscription: Subscription;
+    private _scrollSubscription: Subscription = new Subscription();
 
     /** @hidden */
     constructor(
@@ -131,6 +131,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         private _zone: NgZone
     ) {
         super(_cd);
+        if (this._collapseValSubscription) {
+            this._collapseValSubscription.unsubscribe();
+        }
         this._collapseValSubscription = this._dynamicPageService.$collapseValue.subscribe((val) => {
             this._setTabsPosition();
             this._setContainerPosition();
@@ -184,6 +187,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * Snap the header to expand or collapse based on scrolling. Uses CDKScrollable.
      */
     snapOnScroll(): void {
+        if (this._scrollSubscription) {
+            this._scrollSubscription.unsubscribe();
+        }
         this._scrollSubscription = this._scrollDispatcher.scrolled(10).subscribe((cdk: CdkScrollable) => {
             this._zone.run(() => {
                 const scrollPosition = cdk?.measureScrollOffset('top');
