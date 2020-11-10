@@ -146,7 +146,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     compact = false;
 
     @Input()
-    labelLayout: LabelLayout = 'vertical';
+    labelLayout: LabelLayout = 'horizontal';
 
     @Input()
     formGroup: FormGroup;
@@ -202,6 +202,13 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     set useForm(value: boolean) {
         this._useForm = coerceBooleanProperty(value);
     }
+
+    /**
+     * specify the column layout in the format `XLn-Ln-Mn-Sn` where n is the number of columns and can be different for each size.
+     * eg: XL2-L2-M2-S1 would create 2-column layouts for XL, L, and M sizes and single-column layout for S size.
+     */
+    @Input()
+    columnLayoutType: string;
 
     @ContentChild('i18n', { static: true })
     i18Template: TemplateRef<any>;
@@ -403,7 +410,12 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                     if (f.isFluid) {
                         continue;
                     }
-                    f.styleClass = `col-sm-${f.columns} col-md-${f.columns} col-lg-${f.columns}`;
+                    if (this.columnLayoutType) {
+                        // columns change as per user specification
+                        this._setUserSpecifiedLayout(f);
+                    } else {
+                        f.styleClass = `fd-col-xl--${f.columns} fd-col-md--${f.columns} fd-col-lg--${f.columns}`;
+                    }
                 }
 
                 if (indexR < right.length) {
@@ -417,8 +429,12 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                         right[indexR].renderer,
                         right[indexR].columns
                     );
-
-                    f.styleClass = `col-sm-${f.columns} col-md-${f.columns} col-lg-${f.columns}`;
+                    if (this.columnLayoutType) {
+                        // columns change as per user specification
+                        this._setUserSpecifiedLayout(f);
+                    } else {
+                        f.styleClass = `fd-col-xl--${f.columns} fd-col-md--${f.columns} fd-col-lg--${f.columns}`;
+                    }
                     merged[current++] = f;
                     indexR++;
                 }
@@ -457,6 +473,36 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
             }
         }
         return;
+    }
+
+    /**
+     * @hidden
+     * if `columnLayoutType` is given, set those column layouts appropriately
+     */
+    private _setUserSpecifiedLayout(groupField: GroupField): void {
+        const layoutString = this.columnLayoutType.split('-');
+        const xlColumnsNumber = parseInt(layoutString[0].slice(2, layoutString[0].length), 10);
+        const lgColumnsNumber = parseInt(layoutString[1].slice(1, layoutString[1].length), 10);
+        const mdColumnsNumber = parseInt(layoutString[2].slice(1, layoutString[2].length), 10);
+
+        if (isNaN(xlColumnsNumber) || isNaN(lgColumnsNumber) || isNaN(mdColumnsNumber)) {
+            throw new Error('Input a valid number for columns');
+        } else if (xlColumnsNumber > 12 || lgColumnsNumber > 12 || mdColumnsNumber > 12) {
+            throw new Error('Columns cannot be more than 12');
+        } else {
+            const lgColumns = 12 / lgColumnsNumber;
+            const mdColumns = 12 / mdColumnsNumber;
+            const xlColumns = 12 / xlColumnsNumber;
+
+            // for `lg` single-column layout, Styles does not use any class, and providing `fd-col-lg--12` has unintended side-effects
+            // therefore, we remove the lg class for single-column layout
+            if (lgColumns === 12) {
+                groupField.styleClass = `fd-col-xl--` + xlColumns + ` fd-col-md--` + mdColumns;
+            } else {
+                groupField.styleClass =
+                    `fd-col-xl--` + xlColumns + ` fd-col-md--` + mdColumns + ` fd-col-lg--` + lgColumns;
+            }
+        }
     }
 }
 

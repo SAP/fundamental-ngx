@@ -16,6 +16,7 @@ export const API_FILES = {
         'DynamicPageHeaderComponent',
         'DynamicPageContentComponent'
     ],
+    formContainer: ['FormGroupComponent, FormFieldComponent'],
     infoLabel: ['InfoLabelComponent'],
     input: ['InputComponent'],
     link: ['LinkComponent'],
@@ -36,7 +37,6 @@ export const API_FILES = {
         'FdpHeaderCellDef',
         'FdpTableCell',
         'FdpCellDef'
-
     ],
     textarea: ['TextAreaComponent'],
     panel: [
@@ -54,6 +54,20 @@ export const API_FILES = {
     thumbnail: ['ThumbnailComponent'],
     objectAttribute: ['ObjectAttributeComponent'],
     actionlistitem: ['ActionListItemComponent', 'ListComponent', 'ListConfig'],
-    displaylistitem: ['DisplayListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListHeader', 'ListConfig'],
-    objectlistitem: ['ObjectListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListHeader', 'ListConfig']
+    displaylistitem: [
+        'DisplayListItemComponent',
+        'ListComponent',
+        'ListFooter',
+        'ListGroupHeader',
+        'ListHeader',
+        'ListConfig'
+    ],
+    objectlistitem: [
+        'ObjectListItemComponent',
+        'ListComponent',
+        'ListFooter',
+        'ListGroupHeader',
+        'ListHeader',
+        'ListConfig'
+    ]
 };

@@ -1,9 +1,100 @@
 // Todo: Remove once there is responsive layout in fundamental styles.
-@import '~flexboxgrid/dist/flexboxgrid.min';
+// @import '~flexboxgrid/dist/flexboxgrid.min';
+@import '~fundamental-styles/dist/form-layout-grid';
 @import '~fundamental-styles/dist/section';
 
-.row {
-    .col-xs-12 {
-        padding: 5px;
-    }
+// revert core styles overriding the form label styles
+.fd-form-label {
+    overflow: hidden;
+}
+
+.fd-form-group--inline {
+    flex-wrap: wrap;
+}
+
+// form header styles. Remove when 0.14.0 of styles is incorporated.
+/*!
+ * Fundamental Library Styles v0.13.0-rc.48
+ * Copyright (c) 2020 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/master/LICENSE)
+ */
+@charset "UTF-8";
+/*!
+.fd-form-header
+   .fd-form-header__text
+*/
+.fd-form-header {
+    font-size: 0.875rem;
+    font-size: var(--sapFontSize, 0.875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: '72', '72full', Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, '72', '72full', Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    height: 2.75rem;
+    background-color: transparent;
+    background-color: var(--sapGroup_TitleBackground, transparent);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    -webkit-box-shadow: 0 0.0625rem 0.0625rem #d9d9d9;
+    -webkit-box-shadow: 0 var(--fdFormHeader_Border_Width, var(--sapList_BorderWidth, 0.0625rem))
+        var(--fdFormHeader_Border_Width, var(--sapList_BorderWidth, 0.0625rem))
+        var(--sapGroup_TitleBorderColor, #d9d9d9);
+    box-shadow: 0 0.0625rem 0.0625rem #d9d9d9;
+    box-shadow: 0 var(--fdFormHeader_Border_Width, var(--sapList_BorderWidth, 0.0625rem))
+        var(--fdFormHeader_Border_Width, var(--sapList_BorderWidth, 0.0625rem))
+        var(--sapGroup_TitleBorderColor, #d9d9d9);
+}
+.fd-form-header::after,
+.fd-form-header::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-form-header__text {
+    font-size: 0.875rem;
+    font-size: var(--sapFontSize, 0.875rem);
+    line-height: 1.4;
+    line-height: var(--sapContent_LineHeight, 1.4);
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+    font-family: '72', '72full', Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontFamily, '72', '72full', Arial, Helvetica, sans-serif);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: '72', '72full', Arial, Helvetica, sans-serif;
+    font-family: var(--sapFontHeaderFamily, '72', '72full', Arial, Helvetica, sans-serif);
+    font-size: 1.125rem;
+    font-size: var(--sapFontHeader4Size, 1.125rem);
+    color: #32363a;
+    color: var(--sapGroup_TitleTextColor, #32363a);
+}
+.fd-form-header__text::after,
+.fd-form-header__text::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
 }
