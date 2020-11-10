@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.9...v0.24.0-rc.10) (2020-11-10)
+
+
+### Bug Fixes
+
+* (Platform) add tooltip to the components ([#3785](https://github.com/SAP/fundamental-ngx/issues/3785)) ([1ee2824](https://github.com/SAP/fundamental-ngx/commit/1ee28244fa7a4dc7b6d9d09253dacabfc55da51b))
+
 ## [0.24.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.8...v0.24.0-rc.9) (2020-11-10)
 
 
