@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.8...v0.24.0-rc.9) (2020-11-10)
+
+
+### Bug Fixes
+
+* (Core) removed angular-resize-event from fixed card layout and documention ([#3808](https://github.com/SAP/fundamental-ngx/issues/3808)) ([dffa142](https://github.com/SAP/fundamental-ngx/commit/dffa142eff0d7cd2f89b9b377af73417cccb9ba0))
+
 ## [0.24.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.7...v0.24.0-rc.8) (2020-11-10)
 
 
