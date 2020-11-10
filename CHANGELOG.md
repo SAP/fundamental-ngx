@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.7...v0.24.0-rc.8) (2020-11-10)
+
+
+### Bug Fixes
+
+* (Core) RTL mode arrows is showing wrong in Panel ([#3770](https://github.com/SAP/fundamental-ngx/issues/3770)) ([b7bf19a](https://github.com/SAP/fundamental-ngx/commit/b7bf19a4f872b0c5fda98cdaeccf9039e8b4c1f7))
+
 ## [0.24.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.6...v0.24.0-rc.7) (2020-11-10)
 
 
