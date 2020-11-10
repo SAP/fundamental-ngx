@@ -134,11 +134,13 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
 
     /** @hidden */
     private _listenRtl(): void {
-        this._subscription.add(
-            this._rtlService.rtl.subscribe(rtl => {
-                this._rtl = rtl;
-                this._cdRef.markForCheck();
-            })
-        );
+        if (this._rtlService) {
+            this._subscription.add(
+                this._rtlService.rtl.subscribe(rtl => {
+                    this._rtl = rtl;
+                    this._cdRef.markForCheck();
+                })
+            );
+        }
     }
 }
