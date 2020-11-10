@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.5...v0.24.0-rc.6) (2020-11-10)
+
+
+### Bug Fixes
+
+* (platform) export base input class ([#3802](https://github.com/SAP/fundamental-ngx/issues/3802)) ([00136d5](https://github.com/SAP/fundamental-ngx/commit/00136d582fb1e31fcc8dc4876b9aaaf5349248b8))
+
 ## [0.24.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.4...v0.24.0-rc.5) (2020-11-10)
 
 
