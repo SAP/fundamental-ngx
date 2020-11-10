@@ -1,1 +1,8 @@
 @import '~fundamental-styles/dist/feed-input';
+
+.fd-feed-input {
+    &.is-disabled {
+        pointer-events: initial;
+        opacity: initial;
+    }
+}

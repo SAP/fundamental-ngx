@@ -1,4 +1,4 @@
-<div class="fd-feed-input">
+<div class="fd-feed-input" [class.is-disabled]="disabled">
     <fd-avatar *ngIf="avatarShow"
         class="fd-feed-input__thumb"
         size="s"
@@ -17,7 +17,6 @@
         fd-form-control
         aria-required="true"
         class="fd-feed-input__textarea"
-        [disabled]="disabled"
         [attr.aria-disabled]="disabled"
         [placeholder]="placeholder"
         [(ngModel)]="value"
@@ -29,7 +28,7 @@
         glyph="feeder-arrow"
         title="Send"
         ariaLabel="Send"
-        [disabled]="!value || disabled"
+        [disabled]="!value"
         [attr.aria-disabled]="!value || disabled"
         (click)="onSubmit()"
     >
