@@ -18,6 +18,10 @@ import * as dynamicPageResponsivePaddingExample from '!raw-loader!./platform-dyn
 import * as dynamicPageResponsivePaddingExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.scss';
 import * as dynamicPageResponsivePaddingExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.ts';
 
+import * as dynamicPageNonCollapsibleExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.html';
+import * as dynamicPageNonCollapsibleExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.scss';
+import * as dynamicPageNonCollapsibleExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.ts';
+
 @Component({
     selector: 'app-dynamic-page',
     templateUrl: './platform-dynamic-page-docs.component.html'
@@ -77,6 +81,21 @@ export class PlatformDynamicPageDocsComponent {
         {
             language: 'typescript',
             code: dynamicPageResponsivePaddingExampleTsCode,
+            fileName: 'platform-dynamic-page-responsive-padding-example',
+            component: 'PlatformDynamicPageResponsivePaddingComponent'
+        }
+    ];
+
+    dynamicPageNonCollapsible: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dynamicPageNonCollapsibleExample,
+            fileName: 'platform-dynamic-page-responsive-padding-example',
+            scssFileCode: dynamicPageNonCollapsibleExampleScss
+        },
+        {
+            language: 'typescript',
+            code: dynamicPageNonCollapsibleExampleTsCode,
             fileName: 'platform-dynamic-page-responsive-padding-example',
             component: 'PlatformDynamicPageResponsivePaddingComponent'
         }
