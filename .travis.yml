@@ -8,7 +8,7 @@ addons:
     hosts:
       - sap.dev
     sauce_connect: true
-      no_ssl_bump_domains: *
+      no_ssl_bump_domains: sap.dev
 git:
   depth: false
 env:
