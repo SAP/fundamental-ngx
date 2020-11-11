@@ -19,18 +19,18 @@ exports.config = {
             'platform': 'Windows 10',
             'name': 'e2e-win-internet-explorer',
         },*/
-        {
+/*        {
             'browserName': 'MicrosoftEdge',
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-edge',
-        },
-/*        {
+        },*/
+        {
             'browserName': 'chrome',
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-chrome',
-        },*/
+        },
 /*        {
             'browserName': 'firefox',
             'version': 'latest',
