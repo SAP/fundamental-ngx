@@ -7,6 +7,7 @@ import { ApprovalFlowComponent } from './approval-flow.component';
 import { PlatformObjectStatusModule } from '../object-status/public_api';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
+import { PlatformListModule, StandardListItemModule } from '../list/public_api';
 
 
 @NgModule({
@@ -18,7 +19,9 @@ import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/a
         ToolbarModule,
         DialogModule,
         MessageToastModule,
-        PlatformObjectStatusModule
+        PlatformObjectStatusModule,
+        PlatformListModule,
+        StandardListItemModule
     ],
     exports: [
         ApprovalFlowComponent

@@ -1,11 +1,11 @@
 <ng-container *ngIf="node">
     <ng-container *ngIf="node.approvers?.length === 1">
         <fd-avatar [image]="node.approvers[0].imgUrl" size="xs" [circle]="true"></fd-avatar>
-        <span (click)="openDialog(confirmationDialog)">{{ node.approvers[0].name }}</span>
+        <span (click)="openDialog()">{{ node.approvers[0].name }}</span>
     </ng-container>
     <ng-container *ngIf="node.approvers?.length > 1">
         <fd-avatar [label]="node.description" size="xs" [circle]="true"></fd-avatar>
-        <span (click)="openDialog(confirmationDialog)">{{ node.approvers.length }} members</span>
+        <span (click)="openDialog()">{{ node.approvers.length }} members</span>
     </ng-container>
 
     <div class="approval-flow-node__inner">

@@ -51,12 +51,15 @@ export class ApprovalFlowComponent implements OnInit {
         });
         dialogRef.afterClosed.subscribe((result) => {
             console.log(result);
+            if (Array.isArray(result)) {
+                this.sendReminders(result);
+            }
         });
     }
 
     onWatcherClick(watcher: User): void {
         console.log('open dialog', watcher);
-        const dialogRef = this._dialogService.open(ApprovalFlowUserDetailsComponent, {
+        this._dialogService.open(ApprovalFlowUserDetailsComponent, {
             data: {
                 watcher: watcher
             },
@@ -66,11 +69,11 @@ export class ApprovalFlowComponent implements OnInit {
 
     }
 
-    sendReminder(): void {
-        // const content = `Reminder has been sent to ${this.node.approvers[0].name}`;
-        // this._messageToastService.open(content, {
-        //     duration: 5000
-        // });
+    sendReminders(targets: User[]): void {
+        const content = `Reminder has been sent to ${targets.length === 1 ? targets[0].name : targets.length + ' users'}`;
+        this._messageToastService.open(content, {
+            duration: 5000
+        });
     }
 
 }
