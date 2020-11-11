@@ -24,14 +24,14 @@ exports.config = {
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-edge',
-        },
+        },*/
         {
             'browserName': 'chrome',
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-chrome',
         },
-        {
+/*        {
             'browserName': 'firefox',
             'version': 'latest',
             'platform': 'Windows 10',
@@ -54,13 +54,13 @@ exports.config = {
             'platform': 'macOS 10.15',
             'version': 'latest',
             'name': 'e2e-MAC-Edge',
-        },*/
+        },
         {
             'browserName': 'safari',
             'platform': 'macOS 10.15',
             'version': '13.1',
             'name': 'e2e-MAC-safari',
-        },
+        },*/
     ],
     baseUrl: 'http://sap.dev:4200/fundamental-ngx#',
     // baseUrl: 'http://anton.local:4200/fundamental-ngx#',
