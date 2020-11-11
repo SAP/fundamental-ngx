@@ -331,10 +331,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         if (this.loop) {
             return;
         }
-        if (this.currentActiveSlidesStartIndex === this.pageIndicatorsCountArray.length - 1) {
-            this._elementRef.nativeElement.focus({ preventScroll: true });
-        }
-        if (this.currentActiveSlidesStartIndex === 0) {
+        const isFirst = this.currentActiveSlidesStartIndex === 0;
+        const isLast = this.currentActiveSlidesStartIndex === this.pageIndicatorsCountArray.length - 1;
+        if (isFirst || isLast) {
             this._elementRef.nativeElement.focus({ preventScroll: true });
         }
     }
