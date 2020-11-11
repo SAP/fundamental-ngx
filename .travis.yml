@@ -7,10 +7,6 @@ addons:
     chrome: stable
     hosts:
       - sap.dev
-    sauce_connect:
-      username: $SAUCE_USERNAME
-      access_key: $SAUCE_ACCESS_KEY
-      no_ssl_bump_domains: sap.dev
 git:
   depth: false
 env:

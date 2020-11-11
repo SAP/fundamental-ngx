@@ -30,7 +30,7 @@
     "start-sauce-tunnel": "node e2e/sauce-tunnel.js",
     "kill-sauce-tunnel": "sh e2e/sauce-tunnel-kill.sh",
     "e2e": "ng e2e --protractorConfig=protractor.conf.js",
-    "e2e:ci": "ng serve --disable-host-check & wait-on http://localhost:4200 && node_modules/.bin/protractor protractor-ci.conf.js",
+    "e2e:ci": "npm run start-sauce-tunnel & ng serve --disable-host-check & wait-on http://localhost:4200 && node_modules/.bin/protractor protractor-ci.conf.js && npm run kill-sauce-tunnel",
     "hmr": "ng serve --hmr -e=hmr",
     "lint": "ng lint docs && ng lint core && ng lint platform",
     "lint:pre-commit": "printf \"running pre-commit lint...\"  && npm run lint && printf \"done!\n\"",
