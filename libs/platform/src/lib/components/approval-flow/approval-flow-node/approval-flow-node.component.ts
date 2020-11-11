@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { ApprovalNode, ApprovalStatus } from '@fundamental-ngx/platform';
-import { ObjectStatus } from '@fundamental-ngx/core';
+import { DialogService, MessageToastService, ObjectStatus } from '@fundamental-ngx/core';
 
 const NODE_STATUS_CLASS_MAP = {
     'approved': 'positive',
@@ -17,13 +17,18 @@ const NODE_STATUS_CLASS_MAP = {
 export class ApprovalFlowNodeComponent implements OnInit {
     @Input() node: ApprovalNode;
 
+    @Output() onNodeClick = new EventEmitter<void>();
+
     _status: ObjectStatus;
 
-    constructor() {
-    }
+    constructor() {}
 
     ngOnInit(): void {
         this._status = getNodeStatusClass(this.node.status);
+    }
+
+    openDialog(): void {
+        this.onNodeClick.emit();
     }
 
 }

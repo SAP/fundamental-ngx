@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { ApprovalDataSource, ApprovalNode, ApprovalProcess, UserDataSource } from './interfaces';
+import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User, UserDataSource } from './interfaces';
+import { DialogService, MessageToastService } from '@fundamental-ngx/core';
+import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 
 @Component({
     selector: 'fdp-approval-flow',
@@ -23,12 +25,11 @@ export class ApprovalFlowComponent implements OnInit {
     _approvalProcess: ApprovalProcess;
     _nodeTree: ApprovalNode[][];
 
-    constructor() {
+    constructor(private _dialogService: DialogService, private _messageToastService: MessageToastService) {
     }
 
     ngOnInit(): void {
         this.dataSource.fetch().subscribe(approvalProcess => {
-            // const tree: ApprovalNode[][] = [];
             const nodesMap: any = {};
             this._approvalProcess = approvalProcess;
             console.log('approvalProcess', approvalProcess);
@@ -37,10 +38,39 @@ export class ApprovalFlowComponent implements OnInit {
             console.log('nodesMap', nodesMap);
             this._nodeTree = buildNodeTree(nodes);
             console.log('tree', this._nodeTree);
-            // nodes.forEach(node => {
-            //
-            // });
         });
+    }
+
+    onNodeClick(node: ApprovalNode): void {
+        console.log('open dialog', node);
+        const dialogRef = this._dialogService.open(ApprovalFlowUserDetailsComponent, {
+            data: {
+                node: node
+            },
+            responsivePadding: true
+        });
+        dialogRef.afterClosed.subscribe((result) => {
+            console.log(result);
+        });
+    }
+
+    onWatcherClick(watcher: User): void {
+        console.log('open dialog', watcher);
+        const dialogRef = this._dialogService.open(ApprovalFlowUserDetailsComponent, {
+            data: {
+                watcher: watcher
+            },
+            responsivePadding: true
+        });
+
+
+    }
+
+    sendReminder(): void {
+        // const content = `Reminder has been sent to ${this.node.approvers[0].name}`;
+        // this._messageToastService.open(content, {
+        //     duration: 5000
+        // });
     }
 
 }
@@ -62,7 +92,7 @@ function buildNodeTree(nodes: ApprovalNode[]): ApprovalNode[][] {
     if (!rootNode) {
         return tree;
     }
-    
+
     tree[0] = [rootNode];
     let index = 1;
     let foundLastStep = false;
@@ -76,11 +106,6 @@ function buildNodeTree(nodes: ApprovalNode[]): ApprovalNode[][] {
         tree[index] = dependentNodes;
         index++;
     } while (!foundLastStep);
-
-    // tree[1] = findDependentNodes([rootNode], nodes);
-    // tree[2] = findDependentNodes(tree[1], nodes);
-    // tree[3] = findDependentNodes(tree[2], nodes);
-    // tree[4] = findDependentNodes(tree[3], nodes);
 
     return tree;
 }

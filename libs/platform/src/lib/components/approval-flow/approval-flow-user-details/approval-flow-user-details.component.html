@@ -1,0 +1,52 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <h1 fd-dialog-title>Details</h1>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+        <ng-container *ngIf="dialogRef.data.node?.approvers?.length === 1 || dialogRef.data.watcher">
+            <fd-avatar [image]="dialogRef.data.node?.approvers[0].imgUrl || dialogRef.data.watcher.imgUrl" size="s"></fd-avatar>
+            <span>{{ dialogRef.data.node?.approvers[0].name || dialogRef.data.watcher.name }}</span>
+        </ng-container>
+        <ng-container *ngIf="dialogRef.data.node?.approvers?.length > 1">
+            <fd-avatar [label]="dialogRef.data.node.description" size="s"></fd-avatar>
+            <span>{{ dialogRef.data.node.approvers.length }} members</span>
+        </ng-container>
+
+        <p>Contact info</p>
+
+        <div>Mobile <br> +001 123 4567 890</div>
+        <div>Phone <br> +001 123 4567 890</div>
+        <div>E-mail <br> sarah.smith@abccompany.com</div>
+
+        <p>Company</p>
+
+        <div>Name <br> Company A</div>
+        <div>Address <br> 481 West Street, Anytown OH, 83749, USA</div>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button *ngIf="dialogRef.data.node">
+            <button
+                fd-button
+                fd-dialog-decisive-button
+                fdType="emphasized"
+                [label]="'Send reminder' + (dialogRef.data.node.approvers?.length > 1 ? 's' : '')"
+                [compact]="true"
+                (click)="sendReminder();dialogRef.close('Send reminder')">
+            </button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fd-initial-focus
+                fd-dialog-decisive-button
+                fdType="transparent"
+                label="Cancel"
+                [compact]="true"
+                (click)="dialogRef.dismiss('Cancel')">
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>
