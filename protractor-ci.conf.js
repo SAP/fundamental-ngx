@@ -27,24 +27,24 @@ exports.config = {
             'name': 'e2e-win-edge',
         },*/
         {
-            'browserName': 'chrome',
+/*            'browserName': 'chrome',
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-chrome',
-        },
+        },*/
 /*        {
             'browserName': 'firefox',
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-firefox',
-        },
+        },*/
         {
             'browserName': 'chrome',
             'platform': 'macOS 10.15',
             'version': 'latest',
             'name': 'e2e-MAC-chrome',
         },
-        {
+/*        {
             'browserName': 'firefox',
             'platform': 'macOS 10.15',
             'version': 'latest',
