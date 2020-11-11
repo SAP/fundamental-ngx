@@ -31,6 +31,7 @@ exports.config = {
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-chrome',
+            avoidProxy: true,
         },
 /*        {
             'browserName': 'firefox',
