@@ -1,0 +1,15 @@
+/*
+* IMPORTANT:
+* Implemented original styles from fundamental styles
+* Will update after fundamental-styles will be released.
+* @import '~fundamental-styles/dist/feed-list-item';
+*/
+
+$block: fd-feed-list;
+
+.#{$block} {
+    flex-direction: column;
+    &__footer {
+        display: block;
+    }
+}

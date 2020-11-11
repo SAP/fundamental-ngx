@@ -1,10 +1,3 @@
-/*
-* IMPORTANT:
-* Implemented original styles from fundamental styles
-* Will update after fundamental-styles will be released.
-* @import '~fundamental-styles/dist/feed-list-item';
-*/
-
 $block: fd-feed-list;
 
 .#{$block} {
@@ -47,5 +40,12 @@ $block: fd-feed-list;
     &__content {
         width: 100%;
         flex: 1 1 auto;
+    }
+
+    &__link--more {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }

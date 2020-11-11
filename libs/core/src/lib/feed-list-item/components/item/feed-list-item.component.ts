@@ -2,7 +2,6 @@ import {
   Component,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  TemplateRef,
   Input,
   SimpleChanges,
   ElementRef,
@@ -12,13 +11,16 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
-import { CssClassBuilder, applyCssClass } from '../utils/public_api';
-import { FEED_LIST_PREFIX, FEED_LIST_ITEM_PREFIX } from './feed-list-item.constant';
+import { CssClassBuilder, applyCssClass } from '../../../utils/public_api';
+import { FEED_LIST_ITEM_PREFIX } from '../../constants';
+import { FeedListActionComponent } from '../feed-list-action/feed-list-action.component';
+import { FeedListAvatarComponent } from '../feed-list-avatar/feed-list-avatar.component';
+import { FeedListFooterComponent } from '../feed-list-footer/feed-list-footer.component';
 
 @Component({
   selector: 'fd-feed-list-item',
   templateUrl: './feed-list-item.component.html',
-  styleUrls: ['./original-styles.css', './feed-list-item.component.scss'],
+  styleUrls: ['./feed-list-item.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -77,25 +79,20 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
   */
   @Input()
   isMobile = false;
-  /**
-   * It removes border if items are displaying in a group.
-  */
-  @Input()
-  borderLess = false;
 
   /**
    * @hidden
    * You can use any avatar contruction, but for this block you will have place
    *
   */
-  @ContentChild('avatar')
-  avatarTemplate: TemplateRef<any>;
+  @ContentChild(FeedListAvatarComponent)
+  avatarRef: FeedListAvatarComponent;
   /** @hidden */
-  @ContentChild('action')
-  actionTemplate: TemplateRef<any>;
+  @ContentChild(FeedListActionComponent)
+  actionRef: FeedListActionComponent;
   /** @hidden */
-  @ContentChild('footer')
-  footerTemplate: TemplateRef<any>;
+  @ContentChild(FeedListFooterComponent)
+  footerRef: FeedListFooterComponent;
 
   isCollapsed = true;
   hasMore = false;
@@ -126,8 +123,6 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     return [FEED_LIST_ITEM_PREFIX,
       this.class,
       this.isRichText ? '' : `${FEED_LIST_ITEM_PREFIX}--collapsible`,
-      this.borderLess ? `${FEED_LIST_PREFIX}--no-border` : '',
-      this.isMobile ? `${FEED_LIST_PREFIX}--s` : '',
     ];
   }
 

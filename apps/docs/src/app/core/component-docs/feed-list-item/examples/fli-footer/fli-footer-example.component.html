@@ -1,11 +1,11 @@
-<div class="fd-feed-list" aria-label="Feed List Item with action and footer">
+<fd-feed-list aria-label="Feed List Item with action and footer">
     <fd-feed-list-item
         authorTitle="Author with very looong tiiiiiitttttttttttttttleeeeeeeeeeeeeeeeeeeeee"
         authorLink="http://example.com/"
         text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
         ariaLabel="Feed list item example">
-        <ng-template #action>
+        <fd-feed-list-action>
             <button
                 aria-label="action"
                 fd-button fdType="transparent"
@@ -29,25 +29,38 @@
                     </a>
                 </li>
             </fd-menu>
-        </ng-template>
-        <ng-template #footer>
+        </fd-feed-list-action>
+        <fd-feed-list-footer>
             <small class="fd-feed-list__footer--byline">Aug 20, 2020</small>
             <small class="fd-feed-list__footer--byline">
                 <a target="_blank" href="http://example.com/branch" class="fd-link">Reply link</a>
             </small>
-        </ng-template>
+        </fd-feed-list-footer>
     </fd-feed-list-item>
-</div>
+</fd-feed-list>
 
-<div class="fd-feed-list" aria-label="Feed List Item with footer only">
+<fd-feed-list aria-label="Feed List Item with footer only">
     <fd-feed-list-item
         authorTitle="Author without link"
         text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
         ariaLabel="Feed list item example">
-        <ng-template #footer>
+        <fd-feed-list-footer>
             <small class="fd-feed-list__footer--byline">Aug 20, 2020</small>
             <small class="fd-feed-list__footer--byline">Reply</small>
-        </ng-template>
+        </fd-feed-list-footer>
     </fd-feed-list-item>
-</div>
+</fd-feed-list>
+
+<fd-feed-list aria-label="Feed List Item with footer only">
+    <fd-feed-list-item
+        authorTitle="Author without link"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example">
+        <fd-feed-list-footer>
+            <hr />
+            <strong><em>Custom footer note without any styles</em></strong>
+        </fd-feed-list-footer>
+    </fd-feed-list-item>
+</fd-feed-list>

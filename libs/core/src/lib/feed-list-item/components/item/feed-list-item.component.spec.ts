@@ -2,8 +2,8 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedListItemComponent } from './feed-list-item.component';
-import { LineClampDirective, LineClampTargetDirective } from './directives/line-clamp.directive';
-import { PipeModule } from '../utils/public_api';
+import { LineClampDirective, LineClampTargetDirective } from '../../directives/line-clamp.directive';
+import { PipeModule } from '../../../utils/public_api';
 
 const componentClassPrefix = 'fd-feed-list__item';
 

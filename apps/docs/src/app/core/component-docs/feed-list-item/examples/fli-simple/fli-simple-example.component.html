@@ -1,7 +1,7 @@
 <p>
     <label for="toggle-text-righ1">Toggle rich text (formatted text): <input type="checkbox" [(ngModel)]="hasFormattedText" id="toggle-text-righ1" /></label>
 </p>
-<div class="fd-feed-list" aria-label="Feed List Item with formatted text">
+<fd-feed-list aria-label="Feed List Item with formatted text">
     <fd-feed-list-item
         authorTitle="John Doe"
         authorLink="http://example.com/"
@@ -10,38 +10,38 @@
         maxRows="4"
         ariaLabel="Feed list item example with long text">
     </fd-feed-list-item>
-</div>
+</fd-feed-list>
+
 <p>Custom more/less button's text</p>
-<div class="fd-feed-list" aria-label="Feed List Item with Custom more/less button's text">
+<fd-feed-list aria-label="Feed List Item with Custom more/less button's text">
     <fd-feed-list-item
         authorTitle="Author with very looong tiiitttleee"
         authorLink="http://example.com/"
-        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
+        moreLabel="Custom more"
+        lessLabel="Custom less"
         ariaLabel="Feed list item example">
     </fd-feed-list-item>
-</div>
+</fd-feed-list>
 <p>Feed list item group with borderless</p>
-<div class="fd-feed-list fd-feed-list--group" aria-label="Feed List Item with custom more/less button's text, group with borderless">
+<fd-feed-list aria-label="Feed List Item with custom more/less button's text, group with borderless">
     <fd-feed-list-item
         authorTitle="Author 1"
         text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
-        ariaLabel="Feed list item example"
-        [borderLess]="true">
+        ariaLabel="Feed list item example">
     </fd-feed-list-item>
     <fd-feed-list-item
         authorTitle="Author 2"
         text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
-        ariaLabel="Feed list item example"
-        [borderLess]="true">
+        ariaLabel="Feed list item example">
     </fd-feed-list-item>
     <fd-feed-list-item
         authorTitle="Author 3"
         text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
-        ariaLabel="Feed list item example"
-        [borderLess]="true">
+        ariaLabel="Feed list item example">
     </fd-feed-list-item>
-</div>
+</fd-feed-list>

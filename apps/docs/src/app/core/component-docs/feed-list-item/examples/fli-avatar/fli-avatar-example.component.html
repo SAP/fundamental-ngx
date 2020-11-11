@@ -1,23 +1,34 @@
-<div class="fd-feed-list" aria-label="Feed List Item with user link example">
+<fd-feed-list aria-label="Feed List and Item with user avatar example">
     <fd-feed-list-item
         authorTitle="John Doe"
         authorLink="http://example.com/"
         text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
         ariaLabel="Feed list item example">
-        <ng-template #avatar>
-            <div class="fd-avatar fd-avatar--s fd-avatar--thumbnail fd-feed-list--link">
-                <img
-                    aria-label="John Doe"
-                    title="John Doe"
-                    src="https://avatars.dicebear.com/api/human/fe.svg?m=6&b=%23f5f0f0&mood[]=surprised">
-            </div>
-        </ng-template>
-        <ng-template #action>
+        <fd-feed-list-avatar>
+            <fd-avatar image="https://avatars.dicebear.com/api/human/fe.svg?m=6&b=%23f5f0f0&mood[]=surprised"size="s"></fd-avatar>
+        </fd-feed-list-avatar>
+        <fd-feed-list-action>
             <button aria-label="action" fd-button fdType="transparent" [compact]="true" glyph="overflow"></button>
-        </ng-template>
-        <ng-template #footer>
+        </fd-feed-list-action>
+        <fd-feed-list-footer>
             <small class="fd-feed-list__footer--byline">Aug 20, 2020</small>
-        </ng-template>
+        </fd-feed-list-footer>
     </fd-feed-list-item>
-</div>
+    <fd-feed-list-item
+        authorTitle="John Doe 2"
+        authorLink="http://example.com/"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example">
+        <fd-feed-list-avatar>
+            <fd-avatar image="https://avatars.dicebear.com/api/human/fe.svg?m=6&b=%23f5f0f0&mood[]=surprised"size="s"></fd-avatar>
+        </fd-feed-list-avatar>
+        <fd-feed-list-action>
+            <button aria-label="action" fd-button fdType="transparent" [compact]="true" glyph="overflow"></button>
+        </fd-feed-list-action>
+        <fd-feed-list-footer>
+            <small class="fd-feed-list__footer--byline">Aug 22, 2020</small>
+        </fd-feed-list-footer>
+    </fd-feed-list-item>
+</fd-feed-list>

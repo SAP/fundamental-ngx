@@ -9,7 +9,7 @@ import { FeedListItemDocsComponent } from './feed-list-item-docs.component';
 
 import { examples } from './examples';
 
-import { FeedListItemModule, MenuModule, ActionSheetModule } from '@fundamental-ngx/core';
+import { FeedListItemModule, MenuModule, ActionSheetModule, AvatarModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -23,7 +23,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FeedListItemModule, MenuModule, ActionSheetModule],
+    imports: [
+        RouterModule.forChild(routes), SharedDocumentationPageModule,
+        FeedListItemModule,
+        MenuModule,
+        ActionSheetModule,
+        AvatarModule
+    ],
     exports: [RouterModule],
     declarations: [
         FeedListItemHeaderComponent,
