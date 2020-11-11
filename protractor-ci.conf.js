@@ -43,7 +43,10 @@ exports.config = {
             'platform': 'macOS 10.15',
             'version': 'latest',
             'name': 'e2e-MAC-chrome',
-            acceptInsecureCerts: true
+            acceptInsecureCerts: true,
+            chromeOptions: {
+                args: ['--allow-insecure-localhost', '--ignore-certificate-errors']
+            }
         },
 /*        {
             'browserName': 'firefox',
