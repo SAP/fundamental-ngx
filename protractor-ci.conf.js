@@ -43,6 +43,7 @@ exports.config = {
             'platform': 'macOS 10.15',
             'version': 'latest',
             'name': 'e2e-MAC-chrome',
+            acceptInsecureCerts: true
         },
 /*        {
             'browserName': 'firefox',
@@ -63,8 +64,8 @@ exports.config = {
             'name': 'e2e-MAC-safari',
         },*/
     ],
-    baseUrl: 'http://localhost:4200/fundamental-ngx#',
-    // baseUrl: 'http://sap.dev:4200/fundamental-ngx#',
+    // baseUrl: 'http://localhost:4200/fundamental-ngx#',
+    baseUrl: 'http://sap.dev:4200/fundamental-ngx#',
     // baseUrl: 'http://anton.local:4200/fundamental-ngx#',
     framework: 'jasmine',
     jasmineNodeOpts: {
