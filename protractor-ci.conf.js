@@ -13,7 +13,7 @@ exports.config = {
     ],
 
     multiCapabilities: [
-        {
+/*        {
             'browserName': 'internet explorer',
             'version': 'latest',
             'platform': 'Windows 10',
@@ -54,7 +54,7 @@ exports.config = {
             'platform': 'macOS 10.15',
             'version': 'latest',
             'name': 'e2e-MAC-Edge',
-        },
+        },*/
         {
             'browserName': 'safari',
             'platform': 'macOS 10.15',
