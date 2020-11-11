@@ -8,7 +8,6 @@ exports.config = {
     sauceUser: process.env.SAUCE_USERNAME,
     sauceKey: process.env.SAUCE_ACCESS_KEY,
     sauceRegion: 'eu',
-    avoidProxy: true,
     specs: [
         './e2e/**/*.e2e-spec.ts'
     ],
@@ -31,7 +30,6 @@ exports.config = {
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-chrome',
-            avoidProxy: true,
         },
 /*        {
             'browserName': 'firefox',

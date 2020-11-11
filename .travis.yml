@@ -7,6 +7,8 @@ addons:
     chrome: stable
     hosts:
       - sap.dev
+    sauce_connect: true
+      no_ssl_bump_domains: *
 git:
   depth: false
 env:
