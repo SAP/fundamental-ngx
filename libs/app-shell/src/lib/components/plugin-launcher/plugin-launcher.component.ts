@@ -104,6 +104,9 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         const _pluginModule = descriptor.modules.find(module => module.name === this.module);
         const _remoteModule = await loadRemoteModule<DescriptorsModule>(descriptor, _pluginModule)
             .catch(err => console.error(err));
+        if (!_remoteModule) {
+            return;
+        }
         const _module = _remoteModule[_pluginModule.name];
 
         if (_pluginModule.type !== 'iframe' && !this.iframeUri) {
@@ -123,8 +126,18 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         }
 
         if (_pluginModule.type === 'angular-ivy-component') {
-            this._ngModule = await this.compiler.compileModuleAsync(_module);
-            this._ngComponent = _remoteModule[(_pluginModule as AngularIvyComponentDescriptor).component];
+            const ngPluginModule = _pluginModule as AngularIvyComponentDescriptor;
+            // if provided module name and component name we bootstrap both
+            if (ngPluginModule.name && ngPluginModule.component) {
+                this._ngModule = await this.compiler.compileModuleAsync(_module);
+                this._ngComponent = _remoteModule[ngPluginModule.component];
+            }
+            // if component name is not provided, we suppose that `name` is a component name
+            if (!ngPluginModule.component) {
+                this._ngModule = void 0;
+                this._ngComponent = _remoteModule[ngPluginModule.name];
+            }
+
             this._cd.detectChanges();
         }
         this._pluginMgr.register(descriptor);

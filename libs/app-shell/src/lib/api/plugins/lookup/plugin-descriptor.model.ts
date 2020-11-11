@@ -2,7 +2,7 @@ export interface AngularIvyComponentDescriptor {
     /** Uniq name of module in plugin */
     name: string;
     /** Component name we are planning to inject */
-    component: string;
+    component?: string;
     /** Type of a plugin module */
     type: 'angular-ivy-component';
     /** Exposed Angular Module */
