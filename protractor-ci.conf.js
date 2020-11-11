@@ -26,8 +26,8 @@ exports.config = {
             'platform': 'Windows 10',
             'name': 'e2e-win-edge',
         },*/
-        {
-/*            'browserName': 'chrome',
+/*        {
+            'browserName': 'chrome',
             'version': 'latest',
             'platform': 'Windows 10',
             'name': 'e2e-win-chrome',
