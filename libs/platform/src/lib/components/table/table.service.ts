@@ -4,12 +4,13 @@ import { BehaviorSubject } from 'rxjs';
 import { TableViewSettingsFilterComponent } from './components/table-view-settings-filter/table-view-settings-filter.component';
 import {
     CollectionFilter,
+    CollectionGroup,
     CollectionSort,
     TableState
 } from './interfaces';
 import { SortDirection } from './enums';
 import { DEFAULT_TABLE_STATE } from './constants';
-import { FilterChange, FreezeChange, SortChange } from './models';
+import { FilterChange, FreezeChange, GroupChange, SortChange } from './models';
 
 export class TableService {
     prevTableState: TableState;
@@ -19,6 +20,7 @@ export class TableService {
 
     readonly sortChange: EventEmitter<SortChange> = new EventEmitter<SortChange>();
     readonly filterChange: EventEmitter<FilterChange> = new EventEmitter<FilterChange>();
+    readonly groupChange: EventEmitter<GroupChange> = new EventEmitter<GroupChange>();
     readonly freezeChange: EventEmitter<FreezeChange> = new EventEmitter<FreezeChange>();
 
     constructor() {}
@@ -62,6 +64,21 @@ export class TableService {
 
         this.setTableState(state);
         this.filterChange.emit({ current: state.filterBy, previous: prevFilterBy });
+    }
+
+    group(field: string, direction: SortDirection): void {
+        const prevState = this.getTableState();
+        const prevGroupBy = prevState && prevState.groupBy || [];
+
+        if (prevGroupBy.length && prevGroupBy[0].field === field && prevGroupBy[0].direction === direction) {
+            return;
+        }
+
+        const newGroupBy: CollectionGroup[] = [{field: field, direction: direction}];
+        const state: TableState = { ...prevState, groupBy: newGroupBy };
+
+        this.setTableState(state);
+        this.groupChange.emit({ current: state.groupBy, previous: prevGroupBy });
     }
 
     freezeTo(columnName: string): void {

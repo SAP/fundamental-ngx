@@ -5,3 +5,4 @@ export * from './table-view-settings-dialog/table-view-settings-dialog.component
 export * from './table-view-settings-filter/table-view-settings-filter.component';
 
 export * from './dialogs/sorting/sorting.component';
+export * from './dialogs/grouping/grouping.component';

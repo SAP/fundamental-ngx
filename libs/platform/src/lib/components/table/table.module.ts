@@ -10,6 +10,7 @@ import {
     IconModule,
     InputGroupModule,
     ListModule,
+    PanelModule,
     PopoverModule,
     RadioModule,
     TableModule,
@@ -22,6 +23,7 @@ import { PlatformButtonModule } from '../button/button.module';
 import { TableService } from './table.service';
 import { TableComponent } from './table.component';
 import {
+    GroupingComponent,
     SortingComponent,
     TableColumnComponent,
     TableToolbarActionsComponent,
@@ -30,7 +32,7 @@ import {
     TableViewSettingsFilterComponent
 } from './components';
 import { FdpCellDef, FdpHeaderCellDef, FdpTableCell, FdpTableHeader } from './directives';
-import { TableFilterPipe, TableSortByPipe } from './pipes';
+import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
 
 @NgModule({
     imports: [
@@ -54,7 +56,9 @@ import { TableFilterPipe, TableSortByPipe } from './pipes';
         IconModule,
 
         InputGroupModule,
-        RadioModule
+        RadioModule,
+        PanelModule,
+        IconModule
     ],
     declarations: [
         TableComponent,
@@ -69,8 +73,10 @@ import { TableFilterPipe, TableSortByPipe } from './pipes';
         TableViewSettingsFilterComponent,
         TableSortByPipe,
         TableFilterPipe,
+        CellValueByPipe,
 
         SortingComponent,
+        GroupingComponent
     ],
     exports: [
         TableComponent,
@@ -85,7 +91,8 @@ import { TableFilterPipe, TableSortByPipe } from './pipes';
         TableViewSettingsFilterComponent,
         TableSortByPipe,
         TableFilterPipe,
+        CellValueByPipe,
     ],
-    providers: [ TableService ]
+    providers: [ TableService, TableSortByPipe ]
 })
 export class PlatformTableModule {}

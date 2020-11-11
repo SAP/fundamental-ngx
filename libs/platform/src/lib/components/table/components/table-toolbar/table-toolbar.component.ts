@@ -15,7 +15,15 @@ import { filter } from 'rxjs/operators';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 import { TableToolbarActionsComponent } from '../table-toolbar-actions/table-toolbar-actions.component';
 import { SortingComponent } from '../dialogs/sorting/sorting.component';
+import { GroupingComponent } from '../dialogs/grouping/grouping.component';
 import { TableService } from '../../table.service';
+
+const dialogConfig: DialogConfig = {
+    responsivePadding: true,
+    verticalPadding: false,
+    minWidth: '30%',
+    minHeight: '50%',
+};
 
 /**
  * The component that represents a table toolbar.
@@ -48,6 +56,7 @@ export class TableToolbarComponent implements AfterViewInit {
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;
 
+    /** @hidden */
     private _subscription = new Subscription();
 
     /** @hidden */
@@ -66,16 +75,13 @@ export class TableToolbarComponent implements AfterViewInit {
         const columns = state.columns;
 
         const dialogRef = this._dialogService.open(SortingComponent, {
-            responsivePadding: true,
-            verticalPadding: false,
-            minWidth: '30%',
-            minHeight: '50%',
+            ...dialogConfig,
             data: {
                 columns: columns.filter(c => c.sortable),
                 sortDirection: state && state.sortBy && state.sortBy[0] && state.sortBy[0].direction,
                 sortField: state && state.sortBy && state.sortBy[0] && state.sortBy[0].field
             }
-        } as DialogConfig);
+        });
 
         this._subscription.add(
             dialogRef.afterClosed.pipe(filter(e => !!e)).subscribe(({action, value}) => {
@@ -95,7 +101,27 @@ export class TableToolbarComponent implements AfterViewInit {
 
     /** @hidden */
     openGrouping(): void {
+        const state = this._tableService.tableState$.getValue();
+        const columns = state.columns;
 
+        const dialogRef = this._dialogService.open(GroupingComponent, {
+            ...dialogConfig,
+            data: {
+                columns: columns.filter(c => c.groupable),
+                groupOrder: state && state.groupBy && state.groupBy[0] && state.groupBy[0].direction,
+                groupField: state && state.groupBy && state.groupBy[0] && state.groupBy[0].field
+            }
+        });
+
+        this._subscription.add(
+            dialogRef.afterClosed.pipe(filter(e => !!e)).subscribe(({action, value}) => {
+                if (!action && !value) {
+                    return;
+                }
+
+                this._tableService.group(value.field, value.direction);
+            })
+        );
     }
 
     /** @hidden */

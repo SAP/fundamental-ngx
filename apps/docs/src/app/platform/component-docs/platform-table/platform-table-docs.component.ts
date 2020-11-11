@@ -25,6 +25,8 @@ import * as platformTableMultipleRowSelectionSrc from '!raw-loader!./platform-ta
 import * as platformTableMultipleRowSelectionTsSrc from '!raw-loader!./platform-table-examples/platform-table-multiple-row-selection-example.component.ts';
 import * as platformTableSortableSrc from '!raw-loader!./platform-table-examples/platform-table-sortable-example.component.html';
 import * as platformTableSortableTsSrc from '!raw-loader!./platform-table-examples/platform-table-sortable-example.component.ts';
+import * as platformTableGroupableSrc from '!raw-loader!./platform-table-examples/platform-table-groupable-example.component.html';
+import * as platformTableGroupableTsSrc from '!raw-loader!./platform-table-examples/platform-table-groupable-example.component.ts';
 import * as platformTableFilterableSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.html';
 import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
 import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
@@ -91,6 +93,9 @@ export class PlatformTableDocsComponent {
                     },
                     filterable: {
                         type: 'boolean'
+                    },
+                    groupable: {
+                        type: 'boolean'
                     }
                 }
             }
@@ -117,7 +122,8 @@ export class PlatformTableDocsComponent {
         'first-column': {
             align: 'start',
             sortable: true,
-            filterable: true
+            filterable: true,
+            groupable: true
         }
     };
 
@@ -204,6 +210,20 @@ export class PlatformTableDocsComponent {
             code: platformTableFilterableTsSrc,
             fileName: 'platform-table-filterable-example',
             component: 'PlatformTableFilterableExampleComponent'
+        }
+    ];
+
+    groupableTable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableGroupableSrc,
+            fileName: 'platform-table-groupable-example'
+        },
+        {
+            language: 'typescript',
+            code: platformTableGroupableTsSrc,
+            fileName: 'platform-table-groupable-example',
+            component: 'PlatformTableGroupableExampleComponent'
         }
     ];
 

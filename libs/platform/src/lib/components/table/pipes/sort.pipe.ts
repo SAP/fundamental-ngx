@@ -20,7 +20,8 @@ const sort = (a, b, key?: string) => {
 @Pipe({ name: 'sortBy' })
 export class TableSortByPipe implements PipeTransform {
     transform(tableRows: SelectableRow[], direction: SortDirection, sortKey?: string): any[] {
-        if (!defaultRows) {
+        // TODO: rethink rules to defining and returning defaultRaws
+        if (!defaultRows || defaultRows.length !== tableRows.length) {
             defaultRows = [...tableRows];
         }
 

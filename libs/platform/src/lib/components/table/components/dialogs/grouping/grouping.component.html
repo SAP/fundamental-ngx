@@ -1,0 +1,99 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <h1 fd-dialog-title>Group</h1>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <button fd-button
+                            fdType="transparent"
+                            [compact]="true"
+                            label="Reset"
+                            (click)="reset()"
+                            [disabled]="groupField === initialField && groupOrder === initialOrder"></button>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body style="padding-left: 0; padding-right: 0;">
+        <ul fd-list selection="true" compact="true">
+            <li fd-list-group-header>Group Order</li>
+
+            <li fd-list-item [selected]="groupOrder === _sortDirections.ASC">
+                <fd-radio-button
+                    name="sort-order"
+                    value="asc"
+                    state="default"
+                    compact="true"
+                    [(ngModel)]="groupOrder"
+                ></fd-radio-button>
+                <span fd-list-title>Ascending</span>
+            </li>
+            <li fd-list-item [selected]="groupOrder === _sortDirections.DESC">
+                <fd-radio-button
+                    name="sort-order"
+                    value="desc"
+                    state="default"
+                    compact="true"
+                    [(ngModel)]="groupOrder"
+                ></fd-radio-button>
+                <span fd-list-title>Descending</span>
+            </li>
+        </ul>
+
+        <ul fd-list selection="true" compact="true">
+            <li fd-list-group-header>Group By</li>
+
+
+            <li fd-list-item [selected]="!groupField">
+                <fd-radio-button
+                    name="sort-by"
+                    [value]="null"
+                    state="default"
+                    compact="true"
+                    [(ngModel)]="groupField"
+                ></fd-radio-button>
+                <span fd-list-title>(Not Grouped)</span>
+            </li>
+            <li fd-list-item *ngFor="let column of columns" [selected]="column.key === groupField">
+                <fd-radio-button
+                    name="sort-by"
+                    [value]="column.key"
+                    state="default"
+                    compact="true"
+                    [(ngModel)]="groupField"
+                ></fd-radio-button>
+                <span fd-list-title [innerText]="column.label"></span>
+            </li>
+        </ul>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="emphasized"
+                fd-dialog-decisive-button
+                label="OK"
+                [compact]="true"
+                (click)="confirm()">
+            </button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="transparent"
+                fd-dialog-decisive-button
+                fd-initial-focus
+                label="Cancel"
+                [compact]="true"
+                (click)="cancel()">
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>

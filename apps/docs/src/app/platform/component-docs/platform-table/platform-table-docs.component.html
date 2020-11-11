@@ -64,6 +64,16 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="groupable-table" componentName="Table">
+    Column Grouping
+</fd-docs-section-title>
+<component-example>
+    <fdp-table-groupable-example></fdp-table-groupable-example>
+</component-example>
+<code-example [exampleFiles]="groupableTable"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="freezable-table" componentName="Table">
     Column Freeze
 </fd-docs-section-title>
@@ -109,6 +119,7 @@
                 [align]="data['first-column'].align"
                 [sortable]="data['first-column'].sortable"
                 [filterable]="data['first-column'].filterable"
+                [groupable]="data['first-column'].groupable"
             >
             </fdp-column>
 

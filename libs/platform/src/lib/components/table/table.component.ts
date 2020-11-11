@@ -12,14 +12,17 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     QueryList,
     SimpleChanges,
-    ViewChild, ViewEncapsulation
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
+import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { isObservable, Subject, Subscription } from 'rxjs';
+import { isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
 
 import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core';
@@ -37,12 +40,12 @@ import {
 } from './models';
 import {
     DEFAULT_COLUMN_WIDTH,
-    DEFAULT_TABLE_STATE,
+    DEFAULT_TABLE_STATE, ROW_HEIGHT,
     SELECTION_COLUMN_WIDTH
 } from './constants';
 import { getNestedValue } from '../../utils/object';
 
-export type FdpTableDataSource<T> = TableDataSource<T> | T[];
+export type FdpTableDataSource<T> = TableDataSource<T> | T[] | Observable<T>;
 
 /**
  * The component that represents a table.
@@ -77,16 +80,7 @@ export type FdpTableDataSource<T> = TableDataSource<T> | T[];
 @Component({
     selector: 'fdp-table',
     templateUrl: './table.component.html',
-    styles: [`        
-        .fd-table--fixed .fd-table__cell {
-            min-width: 200px;
-            max-width: 200px;
-        }
-        
-        .fd-table--fixed .fd-popover__control {
-            position: initial;
-        }
-    `],
+    styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ TableService ]
@@ -195,6 +189,11 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     /** @hidden Formatted rows data. */
     _rows: SelectableRow[] = [];
 
+    /** @hidden Grouped rows data. */
+    _groupedRows: { [key: string]: SelectableRow[] }; // KeyValue<string, SelectableRow[]>;
+    /** @hidden */
+    _groupsMeta: { [key: string]: any }; // KeyValue<string, any>;
+
     /** @hidden */
     _contentDensityOptions = ContentDensity;
 
@@ -205,46 +204,54 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     _sortDirections = SortDirection;
 
     /** @hidden */
-    popoverOpen = false;
+    _popoverOpen = false;
     /** @hidden */
-    popoverColumnKey = '';
+    _popoverColumnKey = '';
 
     /** @hidden */
-    sortField: string;
+    _sortField: string;
     /** @hidden */
-    sortDirection: SortDirection;
+    _sortDirection: SortDirection;
 
     /** @hidden */
-    filterType: FilterValueType = FilterValueType.STRING;
+    _filterType: FilterValueType = FilterValueType.STRING;
     /** @hidden */
-    filterValue: CollectionFilter;
+    _filterValue: CollectionFilter;
 
     /** @hidden */
-    freezableColumns: string[] = [];
+    _groupField: string;
     /** @hidden */
-    columnsSize = DEFAULT_COLUMN_WIDTH;
-    /** @hidden */
-    selectionColumnsSize = 0;
-    /** @hidden */
-    tablePadding = 0;
+    _groupOrder: SortDirection;
 
     /** @hidden */
-    checkedAll = false;
+    _freezableColumns: string[] = [];
+    /** @hidden */
+    _columnsSize = DEFAULT_COLUMN_WIDTH;
+    /** @hidden */
+    _selectionColumnsSize = 0;
+    /** @hidden */
+    _tablePadding = 0;
+
+    /** @hidden */
+    _checkedAll = false;
+
+    /** @hidden */
+    _isSortable = false;
+
+    /** @hidden */
+    _isFilterable = false;
+
+    /** @hidden */
+    _isGroupable = false;
+
+    /** @hidden */
+    _rtl = false;
 
     /** @hidden */
     private _checked = [];
 
     /** @hidden */
     private _unchecked = [];
-
-    /** @hidden */
-    private _isSortable = false;
-
-    /** @hidden */
-    private _isFilterable = false;
-
-    /** @hidden */
-    private _isGroupable = false;
 
     /** @hidden */
     private _dataSource: FdpTableDataSource<any>;
@@ -256,16 +263,14 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private _rtl = false;
-
-    /** @hidden */
-    private readonly rowsStateChanges: Subject<any> = new Subject<any>();
+    private readonly _rowsStateChanges: Subject<any> = new Subject<any>();
 
     /** @hidden */
     constructor(
-        private readonly _cd: ChangeDetectorRef,
         private readonly _tableService: TableService,
-        private readonly _rtlService: RtlService
+        private readonly _cd: ChangeDetectorRef,
+        private readonly _el: ElementRef,
+        @Optional() private readonly _rtlService: RtlService
     ) {}
 
     /** @hidden */
@@ -280,7 +285,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
         this._subscriptions.add(this._rtlService.rtl.pipe(distinctUntilChanged()).subscribe(rtl => {
             this._rtl = rtl;
-            this._cd.detectChanges();
+            this._cd.markForCheck();
         }));
     }
 
@@ -329,7 +334,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     select(index: number, row: SelectableRow, checked: boolean): void {
         this._reset();
         row.checked = checked;
-        this.checkedAll = !checked ? false : this._rows.reduce((check, r) => check && r.checked, true);
+        this._checkedAll = !checked ? false : this._rows.reduce((check, r) => check && r.checked, true);
         checked ? this._checked.push(row.value) : this._unchecked.push(row.value);
         this._emitChange(index);
     }
@@ -361,7 +366,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     /** @hidden Select/unselect all rows in 'multiple' mode. */
     selectAll(checked: boolean): void {
         this._resetChecks();
-        this.checkedAll = checked;
+        this._checkedAll = checked;
 
         if (checked) {
             this._checkAll();
@@ -372,11 +377,6 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
         this._uncheckAll();
         this._emitChange();
-    }
-
-    /** @hidden */
-    getCellValue(key: string, row: SelectableRow): any {
-        return getNestedValue(key, row.value);
     }
 
     /** @hidden */
@@ -395,7 +395,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     /** @hidden */
     sort(field: string, direction: SortDirection): void {
         this._tableService.sort(field, direction);
-        this.popoverOpen = false;
+        this._popoverOpen = false;
     }
 
     /** @hidden */
@@ -405,7 +405,13 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
             value: value,
             strategy: CollectionStringFilterStrategy.CONTAINS
         } as CollectionFilter);
-        this.popoverOpen = false;
+        this._popoverOpen = false;
+    }
+
+    /** @hidden */
+    group(field: string): void {
+        this._tableService.group(field, SortDirection.ASC);
+        this._popoverOpen = false;
     }
 
     /** @hidden */
@@ -417,8 +423,8 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     unfreeze(columnKey: string): void {
-        const idx = this.freezableColumns.indexOf(columnKey);
-        const freezeToKey = this.freezableColumns[idx - 1];
+        const idx = this._freezableColumns.indexOf(columnKey);
+        const freezeToKey = this._freezableColumns[idx - 1];
         this._tableService.freezeTo(freezeToKey);
         this.freezeColumnsTo = freezeToKey;
         this._setFreezableInfo();
@@ -434,25 +440,43 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     /** @hidden */
     _getFixedTableStyles(): { [klass: string]: any; } {
         const key = this._rtl ? 'padding-right.px' : 'padding-left.px';
-        return { [key]: this.tablePadding };
+        return { [key]: this._tablePadding };
     }
 
     /** @hidden */
-    _getFreezableCellStyles(idx: number): { [klass: string]: any; } {
+    _getFreezableCellStyles(colIdx: number): { [klass: string]: any; } {
         const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
-        return { [key]: this.selectionColumnsSize + idx * this.columnsSize };
+        return { [key]: this._selectionColumnsSize + colIdx * this._columnsSize };
     }
 
     /** @hidden */
     _getFreezableSelectionCellStyles(): any {
-        return { 'min-width.px': this.selectionColumnsSize, 'max-width.px': this.selectionColumnsSize };
+        return { 'min-width.px': this._selectionColumnsSize, 'max-width.px': this._selectionColumnsSize };
+    }
+
+    /** @hidden */
+    _getGroupRowHeight(): number {
+        return ROW_HEIGHT.get(this.contentDensity);
+    }
+
+    /** @hidden */
+    _keyDescOrder(a: KeyValue<string, SelectableRow[]>, b: KeyValue<string, SelectableRow[]>): number {
+        const ascModifier: number = this._groupOrder === SortDirection.ASC ? 1 : -1;
+        const aNumber = parseFloat(a.key);
+        const bNumber = parseFloat(b.key);
+
+        if (!isNaN(aNumber) && !isNaN(bNumber)) {
+            return (aNumber > bNumber ? 1 : -1) * ascModifier
+        }
+
+        return (a.key > b.key ? 1 : -1) * ascModifier;
     }
 
     /** @hidden */
     private _setFreezableInfo(): void {
-        this.freezableColumns = this._getFreezableColumn();
-        this.selectionColumnsSize = SELECTION_COLUMN_WIDTH.get(`${this.selectionMode}-${this.contentDensity}`) || 0;
-        this.tablePadding = this.selectionColumnsSize + this.columnsSize * (this.freezableColumns && this.freezableColumns.length || 0);
+        this._freezableColumns = this._getFreezableColumn();
+        this._selectionColumnsSize = SELECTION_COLUMN_WIDTH.get(`${this.selectionMode}-${this.contentDensity}`) || 0;
+        this._tablePadding = this._selectionColumnsSize + this._columnsSize * (this._freezableColumns?.length || 0);
     }
 
     /** @hidden */
@@ -491,15 +515,21 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
                 .pipe(filter(state => !!state), distinctUntilChanged())
                 .subscribe(state => {
                     // SORTING
-                    if (state.sortBy.length) {
-                        this.sortDirection = state.sortBy[0].direction || null;
-                        this.sortField = state.sortBy[0].field || null;
+                    if (state.sortBy?.length) {
+                        this._sortDirection = state.sortBy[0].direction || null;
+                        this._sortField = state.sortBy[0].field || null;
                     }
 
-                    // filtering
+                    // FILTERING
                     const filterBy = state.filterBy;
-                    if (filterBy.length) {
-                        this.filterValue = filterBy[0] || null;
+                    if (filterBy?.length) {
+                        this._filterValue = filterBy[0] || null;
+                    }
+
+                    // GROUPING
+                    if (state.groupBy?.length) {
+                        this._groupOrder = state.groupBy[0].direction || null;
+                        this._groupField = state.groupBy[0].field || null;
                     }
                 })
         );
@@ -521,6 +551,34 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
                 this.columnFreeze.emit(new TableColumnFreezeEvent(this, event.current, event.previous));
             })
         );
+
+        this._subscriptions.add(
+            this._tableService.groupChange.subscribe(event => {
+                this._groupRows();
+                this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
+            })
+        );
+    }
+
+    private _groupRows(): void {
+        if (!this._groupField) {
+            return;
+        }
+
+        this._groupsMeta = {};
+        this._groupedRows = this._rows.reduce((acc, r) => {
+            const groupKey = getNestedValue(this._groupField, r.value);
+            if (!acc[groupKey]?.length) {
+                acc[groupKey] = [];
+
+                this._groupsMeta[groupKey] = { expanded: true };
+            }
+            acc[groupKey].push(r);
+
+            return acc;
+        }, {});
+
+        this._cd.detectChanges();
     }
 
     private _checkColumnsAbilities(): void {
@@ -563,7 +621,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _resetChecks(): void {
-        this.checkedAll = false;
+        this._checkedAll = false;
         this._rows.forEach(r => r.checked = false);
         this._reset();
     }
@@ -614,8 +672,8 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         this._dsSubscription = initDataSource
             .open()
             .subscribe((data) => {
-                this._rows = data.map(c => ({checked: false, value: c})) || [];
-                this.rowsStateChanges.next(this._rows);
+                this._rows = data.map((row, index) => ({checked: false, index: index, value: row})) || [];
+                this._rowsStateChanges.next(this._rows);
                 this._cd.markForCheck();
             });
 
@@ -633,7 +691,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
             // default implementation to work on top of arrays
             return new ArrayTableDataSource<any>(ds);
         } else if (isObservable(ds)) {
-            return new ObservableTableDataSource<any>(ds);
+            return new ObservableTableDataSource<any>(ds as Observable<any>);
         }
 
         return undefined;
