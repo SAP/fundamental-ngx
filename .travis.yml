@@ -24,7 +24,7 @@ jobs:
   include:
   - stage: "Lint and Test e2e"
     name: Sauce Labs - e2e tests
-    if: branch = feature/setup-saucelabs-intergation-protractor
+    if: branch = feature/setup-saucelabs-intergation-protractor and type = push
     env:
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
