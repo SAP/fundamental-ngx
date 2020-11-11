@@ -9,9 +9,10 @@ exports.config = {
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    browserName: 'chrome',
+    browserName: 'safari',
       chromeOptions: {
-          'args': ['--headless', '--window-size=1920,1080']
+         // 'args': ['--headless', '--window-size=1920,1080']
+          args: ['--headless', '--window-size=1920,1080']
       }
 
 },
