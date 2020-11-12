@@ -42,6 +42,8 @@ import { KeyUtil } from '../utils/functions/key-util';
 
 let cdkPopoverUniqueId = 0;
 
+const MAX_BODY_SIZE = 99999999;
+
 /**
  * The popover is a wrapping component that accepts a *control* as well as a *body*.
  * The control is what will trigger the opening of the actual popover, which is called the body.
@@ -79,6 +81,10 @@ export class PopoverComponent extends BasePopoverClass
     @Input()
     id: string = 'fd-popover-' + cdkPopoverUniqueId++;
 
+    /** Maximum width of popover body in px, prevents from overextending body by `fillControlMode`  */
+    @Input()
+    maxWidth: number;
+
     /** @hidden */
     @ViewChild('templateRef', { read: TemplateRef })
     templateRef: TemplateRef<any>;
@@ -96,6 +102,10 @@ export class PopoverComponent extends BasePopoverClass
 
     /** Additional style to put margin into body component, to give a place for arrow */
     marginStyle: string = null;
+
+    /** @hidden Properties bind to popover's body */
+    _popoverBodyWidth: number;
+    _popoverBodyMinWidth: number;
 
     /** @hidden */
     directiveRef: any;
@@ -373,10 +383,12 @@ export class PopoverComponent extends BasePopoverClass
 
     /** @hidden */
     private _applyWidthOverlay(): void {
+        const maxWidthLimit = this.maxWidth ? this.maxWidth : MAX_BODY_SIZE;
+        const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
         if (this.fillControlMode === 'at-least') {
-            this._overlayRef.updateSize({ minWidth: this._getTriggerWidth() });
+            this._popoverBodyMinWidth = width;
         } else if (this.fillControlMode === 'equal') {
-            this._overlayRef.updateSize({ width: this._getTriggerWidth() });
+            this._popoverBodyWidth = width;
         }
         this._changeDetectorRef.detectChanges();
     }

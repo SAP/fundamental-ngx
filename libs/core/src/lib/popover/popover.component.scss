@@ -102,15 +102,32 @@ $fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
 .fd-popover__popper.fd-popover__popper--cdk-custom {
     position: relative;
     width: 100%;
+
+	.fd-list {
+		border-radius: 0.25rem;
+
+		.fd-list__item {
+			&:first-child {
+				border-top-left-radius: 0.25rem;
+				border-top-right-radius: 0.25rem;
+			}
+
+			&:last-child {
+				border-bottom-left-radius: 0.25rem;
+				border-bottom-right-radius: 0.25rem;
+			}
+		}
+	}
 }
 
 .fd-popover-custom {
     display: inline-block;
+	max-width: 100%;
 }
 
 .fd-popover-custom-list {
     .fd-list {
-        max-width: 100%;
+		overflow: auto;
     }
 }
 
@@ -122,4 +139,8 @@ $fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
     .fd-popover__control {
         cursor: auto;
     }
+}
+
+.cdk-overlay-connected-position-bounding-box {
+	height: auto !important;
 }

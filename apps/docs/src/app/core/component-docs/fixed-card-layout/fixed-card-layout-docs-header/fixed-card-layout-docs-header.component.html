@@ -7,11 +7,11 @@
 <import module="FixedCardLayoutModule"></import>
 
 <description>
-    <b>Notes:</b> 
-    we have used <a [routerLink]="'https://www.npmjs.com/package/angular-resize-event'">angular-resize-event</a>
-    library for detecting layout size change in documentation examples. Example: when we collapse side navigation bar,
-    available size for layout
-    changes.Using this library, we are able to detect the layout size change and then refresh the layout.
+    <b>Notes:</b> <br />
+    Layout available size change can be detected when angular triggers change detection.
+    For example <a href="https://www.npmjs.com/package/angular-resize-event/" target="_blank">angular-resize-event</a> can be used for
+    detecting layout size change and then angular can trigger change detection. Using which Fixed card layout will be
+    able to re-distribute card.
 </description>
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

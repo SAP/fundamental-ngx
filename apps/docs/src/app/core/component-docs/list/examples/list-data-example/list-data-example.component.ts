@@ -25,6 +25,8 @@ export class ListDataExampleComponent implements OnInit {
     }
 
     removeItem(index: number): void {
+        const allValuesIndex = this.items.indexOf(this.displayedItems[index]);
+        this.items.splice(allValuesIndex, 1);
         this.displayedItems.splice(index, 1);
     }
 

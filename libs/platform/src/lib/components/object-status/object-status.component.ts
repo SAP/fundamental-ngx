@@ -43,9 +43,17 @@ export class ObjectStatusComponent {
     @Input()
     large: boolean;
 
+    /** Sets control label attribute value */
+    @Input()
+    label: string = null;
+
     /** Sets control aria-label attribute value */
     @Input()
     ariaLabel: string = null;
+
+    /** Sets control aria-title to a string attribute value */
+    @Input()
+    title: string;
 
     /** Event sent when button is clicked */
     @Output()
