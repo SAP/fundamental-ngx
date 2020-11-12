@@ -17,7 +17,7 @@ Compact Split Menu Button:
     title="option with longer text gets truncated" menuTitle="More options" [fixedWidth]="false"
     (primaryButtonClick)="onPrimaryButtonClick2()">
 </fdp-split-menu-button>
-<fdp-menu #menu2 xPosition="before">
+<fdp-menu #menu2 xPosition="before" contentDensity="compact">
     <fdp-menu-item (itemSelect)="onItemSelect2('Option 1')">Option 1</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect2('Option 2 with long text')">Option 2 with long text</fdp-menu-item>
 </fdp-menu>

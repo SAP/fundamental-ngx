@@ -4,7 +4,7 @@
             fd-button
             fdType="transparent"
             class="fd-panel__button"
-            [glyph]="expanded ? 'slim-arrow-down' : 'slim-arrow-right'"
+            [glyph]="_getButtonIcon()"
             [id]="expandId"
             [compact]="compact"
             [class.is-expanded]="expanded"

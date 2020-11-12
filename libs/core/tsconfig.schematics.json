@@ -2,7 +2,10 @@
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
-        "lib": ["es2018", "dom"],
+        "lib": [
+            "es2018",
+            "dom"
+        ],
         "declaration": true,
         "module": "commonjs",
         "moduleResolution": "node",
@@ -19,8 +22,15 @@
         "sourceMap": true,
         "strictNullChecks": false,
         "target": "es6",
-        "types": ["jasmine", "node"]
+        "types": [
+            "jasmine",
+            "node"
+        ]
     },
-    "include": ["schematics/**/*"],
-    "exclude": ["schematics/*/files/**/*"]
+    "include": [
+        "schematics/**/*"
+    ],
+    "exclude": [
+        "schematics/*/files/**/*"
+    ]
 }
