@@ -8,11 +8,10 @@ exports.config = {
     sauceUser: process.env.SAUCE_USERNAME,
     sauceKey: process.env.SAUCE_ACCESS_KEY,
     sauceRegion: 'eu',
-    // sauceSeleniumUseHttp: true,
+    sauceSeleniumUseHttp: true,
     specs: [
         './e2e/**/*.e2e-spec.ts'
     ],
-
     multiCapabilities: [
 /*        {
             'browserName': 'internet explorer',
