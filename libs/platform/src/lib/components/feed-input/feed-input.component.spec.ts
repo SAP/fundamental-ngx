@@ -44,8 +44,10 @@ describe('FeedInputComponent', () => {
         component.disabled = true;
         fixture.detectChanges();
 
-        expect(textareaEl.nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(buttonEl.nativeElement.getAttribute('ng-reflect-disabled')).toEqual('true');
+        console.log(textareaEl.nativeElement);
+
+        expect(textareaEl.nativeElement.getAttribute('aria-disabled')).toEqual('true');
+        expect(buttonEl.nativeElement.getAttribute('aria-disabled')).toEqual('true');
     });
 
     it('should button disabled when textarea has not a value', () => {
