@@ -6,9 +6,6 @@ sauceConnectLauncher({
     accessKey: process.env.SAUCE_ACCESS_KEY,
     x: 'https://eu-central-1.saucelabs.com/rest/v1',
     noSslBumpDomains: 'all',
-    // noCertVerify: 'test',
-    //logfile: 'sauce_connect_e2e.log',
-    // doctor: true
 
 }, function (err, sauceConnectProcess) {
     if (err) {

@@ -8,66 +8,77 @@ exports.config = {
     sauceUser: process.env.SAUCE_USERNAME,
     sauceKey: process.env.SAUCE_ACCESS_KEY,
     sauceRegion: 'eu',
-    sauceSeleniumUseHttp: true,
     specs: [
         './e2e/**/*.e2e-spec.ts'
     ],
     multiCapabilities: [
-/*        {
-            'browserName': 'internet explorer',
-            'version': 'latest',
-            'platform': 'Windows 10',
-            'name': 'e2e-win-internet-explorer',
-        },*/
-/*        {
-            'browserName': 'MicrosoftEdge',
-            'version': 'latest',
-            'platform': 'Windows 10',
-            'name': 'e2e-win-edge',
-        },*/
-/*        {
-            'browserName': 'chrome',
-            'version': 'latest',
-            'platform': 'Windows 10',
-            'name': 'e2e-win-chrome',
-        },*/
-/*        {
-            'browserName': 'firefox',
-            'version': 'latest',
-            'platform': 'Windows 10',
-            'name': 'e2e-win-firefox',
-        },*/
         {
-            'browserName': 'chrome',
-            'platform': 'macOS 10.15',
-            'version': 'latest',
-            'name': 'e2e-MAC-chrome',
+            browserName: 'internet explorer',
+            version: 'latest',
+            platform: 'Windows 10',
+            name: 'e2e-win-internet-explorer',
             acceptInsecureCerts: true,
-            chromeOptions: {
-                args: ['--allow-insecure-localhost', '--ignore-certificate-errors']
-            }
-        },
-/*        {
-            'browserName': 'firefox',
-            'platform': 'macOS 10.15',
-            'version': 'latest',
-            'name': 'e2e-MAC-firefox',
+            tags: [ process.env.TRAVIS_BUILD_ID],
         },
         {
-            'browserName': 'MicrosoftEdge',
-            'platform': 'macOS 10.15',
-            'version': 'latest',
-            'name': 'e2e-MAC-Edge',
+            browserName: 'MicrosoftEdge',
+            version: 'latest',
+            platform: 'Windows 10',
+            name: 'e2e-win-edge',
+            acceptInsecureCerts: true,
+            tags: [ process.env.TRAVIS_BUILD_ID],
         },
         {
-            'browserName': 'safari',
-            'platform': 'macOS 10.15',
-            'version': '13.1',
-            'name': 'e2e-MAC-safari',
-        },*/
+            browserName: 'chrome',
+            version: 'latest',
+            platform: 'Windows 10',
+            name: 'e2e-win-chrome',
+            acceptInsecureCerts: true,
+            tags: [ process.env.TRAVIS_BUILD_ID],
+        },
+        {
+            browserName: 'firefox',
+            version: 'latest',
+            platform: 'Windows 10',
+            name: 'e2e-win-firefox',
+            acceptInsecureCerts: true,
+            tags: [ process.env.TRAVIS_BUILD_ID],
+        },
+        {
+            browserName: 'chrome',
+            platform: 'macOS 10.15',
+            version: 'latest',
+            name: 'e2e-MAC-chrome',
+            acceptInsecureCerts: true,
+            tags: [ process.env.TRAVIS_BUILD_ID],
+        },
+        {
+            browserName: 'firefox',
+            platform: 'macOS 10.15',
+            version: 'latest',
+            name: 'e2e-MAC-firefox',
+            acceptInsecureCerts: true,
+            tags: [ process.env.TRAVIS_BUILD_ID],
+        },
+        {
+            browserName: 'MicrosoftEdge',
+            platform: 'macOS 10.15',
+            version: 'latest',
+            name: 'e2e-MAC-Edge',
+            acceptInsecureCerts: true,
+            tags: [ process.env.TRAVIS_BUILD_ID],
+        },
+        {
+            browserName: 'safari',
+            platform: 'macOS 10.15',
+            version: '13.1',
+            name: 'e2e-MAC-safari',
+            acceptInsecureCerts: true,
+            tags: [ process.env.TRAVIS_BUILD_ID],
+        },
     ],
     // baseUrl: 'http://localhost:4200/fundamental-ngx#',
-    baseUrl: 'http://sap.dev:4200/fundamental-ngx#',
+    baseUrl: 'https://sap.dev:4200/fundamental-ngx#',
     // baseUrl: 'http://anton.local:4200/fundamental-ngx#',
     framework: 'jasmine',
     jasmineNodeOpts: {
@@ -77,7 +88,7 @@ exports.config = {
     },
 
     onPrepare: async () => {
-        jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: 'none' } }));
+        jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: 'true' } }));
         require('ts-node').register({
             project: 'e2e/tsconfig.e2e.json'
         });
