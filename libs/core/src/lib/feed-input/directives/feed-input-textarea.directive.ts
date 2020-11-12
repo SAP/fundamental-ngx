@@ -37,6 +37,7 @@ export class FeedInputTextareaDirective implements OnInit {
         this.valueChange.emit(event.target.value);
     }
 
+    /** @hidden */
     constructor(
         private _elementRef: ElementRef,
         private _renderer: Renderer2
@@ -47,6 +48,7 @@ export class FeedInputTextareaDirective implements OnInit {
         return this._elementRef;
     }
 
+    /** @hidden */
     ngOnInit(): void {
         if (this.fdFeedInputTextareaMaxRows) {
             const lineHeight = this._getTextareaLineHeight();
