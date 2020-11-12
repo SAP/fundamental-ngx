@@ -3,7 +3,7 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1 fd-dialog-title>Sort</h1>
+                    <h1 fd-dialog-title i18n="@@platformTableSortDialogHeader">Sort</h1>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -11,6 +11,7 @@
                     <button fd-button
                             fdType="transparent"
                             [compact]="true"
+                            i18n-label="@@platformTableDialogButtonReset"
                             label="Reset"
                             (click)="reset()"
                             [disabled]="sortField === initialField && sortDirection === initialDirection"></button>
@@ -21,7 +22,7 @@
 
     <fd-dialog-body style="padding-left: 0; padding-right: 0;">
         <ul fd-list selection="true" compact="true">
-            <li fd-list-group-header>Sort Order</li>
+            <li fd-list-group-header i18n="@@platformTableSortDialogSortOrderHeader">Sort Order</li>
 
             <li fd-list-item [selected]="sortDirection === _sortDirections.ASC">
                 <fd-radio-button
@@ -31,7 +32,7 @@
                     compact="true"
                     [(ngModel)]="sortDirection"
                 ></fd-radio-button>
-                <span fd-list-title>Ascending</span>
+                <span fd-list-title i18n="@@platformTableSortDialogSortOrderAsc">Ascending</span>
             </li>
             <li fd-list-item [selected]="sortDirection === _sortDirections.DESC">
                 <fd-radio-button
@@ -41,13 +42,12 @@
                     compact="true"
                     [(ngModel)]="sortDirection"
                 ></fd-radio-button>
-                <span fd-list-title>Descending</span>
+                <span fd-list-title i18n="@@platformTableSortDialogSortOrderDesc">Descending</span>
             </li>
         </ul>
 
         <ul fd-list selection="true" compact="true">
-            <li fd-list-group-header>Sorted By</li>
-
+            <li fd-list-group-header i18n="@@platformTableSortDialogSortByHeader">Sorted By</li>
 
             <li fd-list-item [selected]="!sortField">
                 <fd-radio-button
@@ -57,7 +57,7 @@
                     compact="true"
                     [(ngModel)]="sortField"
                 ></fd-radio-button>
-                <span fd-list-title>(Not Sorted)</span>
+                <span fd-list-title i18n="@@platformTableSortDialogNotSortedValue">(Not Sorted)</span>
             </li>
             <li fd-list-item *ngFor="let column of columns" [selected]="column.key === sortField">
                 <fd-radio-button
@@ -78,6 +78,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
+                i18n-label="@@platformTableDialogButtonOK"
                 label="OK"
                 [compact]="true"
                 (click)="confirm()">
@@ -90,6 +91,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
+                i18n-label="@@platformTableDialogButtonCancel"
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()">

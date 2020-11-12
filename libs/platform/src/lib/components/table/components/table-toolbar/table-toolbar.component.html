@@ -17,10 +17,34 @@
         <ng-container *ngIf="isSortable || isFilterable || isGroupable || isColumnsHiddable">
             <fd-toolbar-spacer *ngIf="!tableToolbarActionsComponent"></fd-toolbar-spacer>
             <fd-toolbar-separator fd-toolbar-item *ngIf="tableToolbarActionsComponent"></fd-toolbar-separator>
-            <fdp-button *ngIf="isSortable" glyph="sort" title="sorting" buttonType="transparent" (click)="openSorting()"></fdp-button>
-            <fdp-button *ngIf="isFilterable" glyph="filter" title="filtering" buttonType="transparent" (click)="openFiltering()"></fdp-button>
-            <fdp-button *ngIf="isGroupable" glyph="group-2" title="grouping" buttonType="transparent" (click)="openGrouping()"></fdp-button>
-            <fdp-button *ngIf="isColumnsHiddable" glyph="action-settings" title="columns" buttonType="transparent" (click)="openColumns()"></fdp-button>
+            <fdp-button *ngIf="isSortable"
+                        glyph="sort"
+                        i18n-title="@@platformTableToolbarActionButtonSort"
+                        title="sort"
+                        buttonType="transparent"
+                        (click)="openSorting()"
+            ></fdp-button>
+            <fdp-button *ngIf="isFilterable"
+                        glyph="filter"
+                        i18n-title="@@platformTableToolbarActionButtonFilter"
+                        title="filter"
+                        buttonType="transparent"
+                        (click)="openFiltering()"
+            ></fdp-button>
+            <fdp-button *ngIf="isGroupable"
+                        glyph="group-2"
+                        i18n-title="@@platformTableToolbarActionButtonGroup"
+                        title="group"
+                        buttonType="transparent"
+                        (click)="openGrouping()"
+            ></fdp-button>
+            <fdp-button *ngIf="isColumnsHiddable"
+                        glyph="action-settings"
+                        i18n-title="@@platformTableToolbarActionButtonColumns"
+                        title="columns"
+                        buttonType="transparent"
+                        (click)="openColumns()"
+            ></fdp-button>
         </ng-container>
     </fd-toolbar>
 </ng-template>

@@ -3,7 +3,7 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1 fd-dialog-title>Group</h1>
+                    <h1 fd-dialog-title i18n="@@platformTableGroupDialogHeader">Group</h1>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -11,6 +11,7 @@
                     <button fd-button
                             fdType="transparent"
                             [compact]="true"
+                            i18n-label="@@platformTableDialogButtonReset"
                             label="Reset"
                             (click)="reset()"
                             [disabled]="groupField === initialField && groupOrder === initialOrder"></button>
@@ -21,7 +22,7 @@
 
     <fd-dialog-body style="padding-left: 0; padding-right: 0;">
         <ul fd-list selection="true" compact="true">
-            <li fd-list-group-header>Group Order</li>
+            <li fd-list-group-header i18n="@@platformTableGroupDialogGroupOrderHeader">Group Order</li>
 
             <li fd-list-item [selected]="groupOrder === _sortDirections.ASC">
                 <fd-radio-button
@@ -31,7 +32,7 @@
                     compact="true"
                     [(ngModel)]="groupOrder"
                 ></fd-radio-button>
-                <span fd-list-title>Ascending</span>
+                <span fd-list-title i18n="@@platformTableGroupDialogGroupOrderAsc">Ascending</span>
             </li>
             <li fd-list-item [selected]="groupOrder === _sortDirections.DESC">
                 <fd-radio-button
@@ -41,12 +42,12 @@
                     compact="true"
                     [(ngModel)]="groupOrder"
                 ></fd-radio-button>
-                <span fd-list-title>Descending</span>
+                <span fd-list-title i18n="@@platformTableGroupDialogGroupOrderDesc">Descending</span>
             </li>
         </ul>
 
         <ul fd-list selection="true" compact="true">
-            <li fd-list-group-header>Group By</li>
+            <li fd-list-group-header i18n="@@platformTableGroupDialogGroupByHeader">Group By</li>
 
 
             <li fd-list-item [selected]="!groupField">
@@ -57,7 +58,7 @@
                     compact="true"
                     [(ngModel)]="groupField"
                 ></fd-radio-button>
-                <span fd-list-title>(Not Grouped)</span>
+                <span fd-list-title i18n="@@platformTableGroupDialogNotGroupedValue">(Not Grouped)</span>
             </li>
             <li fd-list-item *ngFor="let column of columns" [selected]="column.key === groupField">
                 <fd-radio-button
@@ -78,6 +79,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
+                i18n-label="@@platformTableDialogButtonOK"
                 label="OK"
                 [compact]="true"
                 (click)="confirm()">
@@ -90,6 +92,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
+                i18n-label="@@platformTableDialogButtonCancel"
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()">

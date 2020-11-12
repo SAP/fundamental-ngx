@@ -61,7 +61,7 @@
                                                     (click)="sort(column.key, _sortDirections.ASC)"
                                                     (keyup.enter)="sort(column.key, _sortDirections.ASC)">
                                                     <span fd-list-icon glyph="sort-ascending"></span>
-                                                    <span fd-list-title>Sort Ascending</span>
+                                                    <span fd-list-title i18n="@@platformTableHeaderMenuSortAsc">Sort Ascending</span>
                                                 </li>
 
                                                 <li *ngIf="column.sortable"
@@ -69,7 +69,7 @@
                                                     (click)="sort(column.key, _sortDirections.DESC)"
                                                     (keyup.enter)="sort(column.key, _sortDirections.DESC)">
                                                     <span fd-list-icon glyph="sort-descending"></span>
-                                                    <span fd-list-title>Sort Descending</span>
+                                                    <span fd-list-title i18n="@@platformTableHeaderMenuSortDesc">Sort Descending</span>
                                                 </li>
 
                                                 <li *ngIf="column.groupable"
@@ -77,7 +77,7 @@
                                                     (click)="group(column.key)"
                                                     (keyup.enter)="group(column.key)">
                                                     <span fd-list-icon></span>
-                                                    <span fd-list-title>Group</span>
+                                                    <span fd-list-title i18n="@@platformTableHeaderMenuGroup">Group</span>
                                                 </li>
 
                                                 <li fd-list-item
@@ -86,7 +86,7 @@
                                                     (keyup.enter)="freezeTo(column.key)"
                                                 >
                                                     <span></span>
-                                                    <span fd-list-title>Freeze</span>
+                                                    <span fd-list-title i18n="@@platformTableHeaderMenuFreeze">Freeze</span>
                                                 </li>
                                                 <li fd-list-item
                                                     *ngIf="_freezableColumns?.includes(column.key)"
@@ -94,13 +94,13 @@
                                                     (keyup.enter)="unfreeze(column.key)"
                                                 >
                                                     <span></span>
-                                                    <span fd-list-title>Unfreeze</span>
+                                                    <span fd-list-title i18n="@@platformTableHeaderMenuUnfreeze">Unfreeze</span>
                                                 </li>
 
                                                 <li fd-list-item *ngIf="column.filterable">
                                                     <i fd-list-icon glyph="filter"></i>
                                                     <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
-                                                        <label fd-form-label [for]="column.name + colIdx">Filter</label>
+                                                        <label fd-form-label [for]="column.name + colIdx" i18n="@@platformTableHeaderMenuFilter">Filter</label>
                                                         <input fd-form-control
                                                                [compact]="true"
                                                                [id]="column.name + colIdx"
