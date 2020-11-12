@@ -5,7 +5,8 @@ sauceConnectLauncher({
     username: process.env.SAUCE_USERNAME,
     accessKey: process.env.SAUCE_ACCESS_KEY,
     x: 'https://eu-central-1.saucelabs.com/rest/v1',
-    // noSslBumpDomains: 'all',
+    //noSslBumpDomains: 'all',
+    noCertVerify: ""
     // logfile: 'sauce_connect_e2e.log',
     //doctor: true
 
