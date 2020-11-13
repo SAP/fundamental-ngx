@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChildren, Inject, Optional, QueryList, TemplateRef } from '@angular/core';
 import { TemplateDirective } from '../../utils/directives/template/template.directive';
-import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog footer.

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogHeaderComponent } from './dialog-header.component';
 import { Component, Type, ViewChild } from '@angular/core';
-import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 import { TemplateModule } from '../../utils/directives/template/template.module';
 import { BarModule } from '../../bar/bar.module';
 

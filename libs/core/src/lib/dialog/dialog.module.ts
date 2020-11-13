@@ -14,7 +14,7 @@ import {
     DialogCloseButtonDirective,
     DialogDecisiveButtonDirective,
     DialogTitleDirective
-} from './dialog-utils/dialog-directives';
+} from './utils/dialog-directives';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { BarModule } from '../bar/bar.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
