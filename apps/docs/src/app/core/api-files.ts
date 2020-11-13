@@ -139,6 +139,7 @@ export const API_FILES = {
         'DialogRef'
     ],
     multiInput: ['MultiInputComponent'],
+    messageBox: [],
     notification: [
         'NotificationComponent',
         'NotificationHeaderComponent',

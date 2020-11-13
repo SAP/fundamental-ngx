@@ -1,0 +1,7 @@
+<ng-template let-messageBoxRef let-messageBoxConfig="messageBoxConfig" #confirmationDialog>
+    <fd-message-box [messageBoxConfig]="messageBoxConfig" [messageBoxRef]="messageBoxRef">
+    </fd-message-box>
+</ng-template>
+
+<button fd-button label="Open from Template" (click)="openDialog(confirmationDialog)"></button>
+<p>{{ confirmationReason }}</p>

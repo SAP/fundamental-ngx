@@ -1,7 +1,7 @@
 /* tslint:disable:no-inferrable-types */
 
 import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
-import { DialogPosition } from '../dialog-utils/dialog-position.class';
+import { DialogPosition } from '../utils/dialog-position.class';
 
 export class DialogConfigBase<T> implements DynamicComponentConfig {
     /** Id for the dialog component. If omitted, a unique one is generated. */

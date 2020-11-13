@@ -1,10 +1,10 @@
 import { DefaultDialogComponent } from './default-dialog.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from '../../button/button.module';
-import { DialogCloseButtonDirective, DialogDecisiveButtonDirective, DialogTitleDirective } from '../dialog-utils/dialog-directives';
+import { DialogCloseButtonDirective, DialogDecisiveButtonDirective, DialogTitleDirective } from '../utils/dialog-directives';
 import { DefaultDialogObject } from './default-dialog-object';
 import { DialogHeaderComponent } from '../dialog-header/dialog-header.component';
-import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 
 describe('DefaultDialogComponent', () => {
     let component: DefaultDialogComponent;

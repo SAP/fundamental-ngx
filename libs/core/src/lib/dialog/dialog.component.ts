@@ -14,12 +14,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { createFocusTrap, FocusTrap } from 'focus-trap';
-import { dialogFadeNgIf } from './dialog-utils/dialog.animations';
-import { DIALOG_CONFIG, DialogConfig } from './dialog-utils/dialog-config.class';
+import { dialogFadeNgIf } from './utils/dialog.animations';
+import { DIALOG_CONFIG, DialogConfig } from './utils/dialog-config.class';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
-import { DIALOG_REF, DialogRef } from './dialog-utils/dialog-ref.class';
+import { DIALOG_REF, DialogRef } from './utils/dialog-ref.class';
 import { fromEvent, Subscription } from 'rxjs';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
@@ -45,13 +45,13 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
         this.buildComponentCssClass();
     }
 
-    /** DialogRef - should be used for Template based Dialog implementation  */
+    /** DialogRef - should be used for Template based Dialog implementation */
     @Input('dialogRef')
     set embeddedDialogRef(value: DialogRef) {
         this._dialogRef = value;
     }
 
-    /** DialogConfig - should be used for Template based Dialog implementation  */
+    /** DialogConfig - should be used for Template based Dialog implementation */
     @Input('dialogConfig')
     set embeddedDialogConfig(value: DialogConfig) {
         this.dialogConfig = value;

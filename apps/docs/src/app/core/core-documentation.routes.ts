@@ -209,6 +209,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'message-box',
+                loadChildren: () =>
+                    import('./component-docs/message-box/message-box-docs.module').then(
+                        (m) => m.MessageBoxDocsModule
+                    )
+            },
+            {
                 path: 'message-toast',
                 loadChildren: () =>
                     import('./component-docs/message-toast/message-toast-docs.module').then(

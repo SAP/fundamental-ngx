@@ -2,10 +2,10 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 
 import { DialogService } from './dialog.service';
 import { TestBed } from '@angular/core/testing';
-import { DialogRef } from '../dialog-utils/dialog-ref.class';
+import { DialogRef } from '../utils/dialog-ref.class';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogModule } from '../dialog.module';
-import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 
 @Component({
     template: `

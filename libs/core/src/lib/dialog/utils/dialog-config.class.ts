@@ -3,7 +3,7 @@
  * Configuration for opening a dialog with the DialogService.
  */
 import { InjectionToken } from '@angular/core';
-import { DialogConfigBase } from '../base/dialog-config-base.class';
+import { DialogConfigBase } from '../base';
 
 export const DIALOG_CONFIG = new InjectionToken<string[]>('DialogConfig');
 export const DIALOG_DEFAULT_CONFIG = new InjectionToken<string[]>('Default DialogConfig');

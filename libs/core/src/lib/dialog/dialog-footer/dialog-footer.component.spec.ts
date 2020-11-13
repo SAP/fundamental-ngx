@@ -4,7 +4,7 @@ import { DialogFooterComponent } from './dialog-footer.component';
 import { Component, Type, ViewChild } from '@angular/core';
 import { BarModule } from '../../bar/bar.module';
 import { TemplateModule } from '../../utils/directives/template/template.module';
-import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 
 @Component({
     template: `

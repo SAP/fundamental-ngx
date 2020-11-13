@@ -1,6 +1,6 @@
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { InjectionToken } from '@angular/core';
-import { DialogRefBase } from '../base/dialog-ref-base.class';
+import { DialogRefBase } from '../base';
 
 /**
  * Reference to a dialog component generated via the DialogService.
