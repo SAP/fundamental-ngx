@@ -53,7 +53,7 @@ class TestDatetimePickerComponent {
     @ViewChild('ffl1') datetimePickerFormField: FormFieldComponent;
     @ViewChild('submitButton') submitButton: ElementRef<HTMLElement>;
 
-    public datetimePicker: FdDatetime = new FdDatetime(new FdDate(2008, 2, 11), new TimeObject());
+    datetimePicker: FdDatetime = new FdDatetime(new FdDate(2008, 2, 11), new TimeObject());
 
     datetimePickerForm: FormGroup;
 
@@ -65,7 +65,7 @@ class TestDatetimePickerComponent {
         });
     }
 
-    public result: any = null;
+    result: any = null;
 
     onSubmit(): void {
         this.result = this.datetimePickerForm.value;
