@@ -10,7 +10,11 @@ export const DEFAULT_TABLE_STATE: TableState = {
     },
     pageSize: null,
     columns: null,
-    freezeToColumn: null
+    freezeToColumn: null,
+    searchInput: {
+        text: '',
+        category: ''
+    }
 };
 
 // SIZES

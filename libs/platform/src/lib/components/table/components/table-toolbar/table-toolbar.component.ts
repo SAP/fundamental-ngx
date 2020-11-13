@@ -4,7 +4,9 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    EventEmitter,
     Input,
+    Output,
     TemplateRef,
     ViewChild
 } from '@angular/core';
@@ -13,6 +15,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { DialogConfig, DialogService } from '@fundamental-ngx/core';
+import { SearchInput, SuggestionItem } from '../../../search-field/search-field.component';
 import { TableToolbarActionsComponent } from '../table-toolbar-actions/table-toolbar-actions.component';
 import { SortingComponent } from '../dialogs/sorting/sorting.component';
 import { GroupingComponent } from '../dialogs/grouping/grouping.component';
@@ -46,7 +49,19 @@ export class TableToolbarComponent implements AfterViewInit {
 
     /** Toggle to show table item count. */
     @Input()
-    hideItemCount: boolean;
+    hideItemCount = false;
+
+    /** Toggle to show search input. */
+    @Input()
+    hideSearchInput = false;
+
+    /** Suggestions for search field. */
+    @Input()
+    searchSuggestions: SuggestionItem[] = [];
+
+    /** @hidden */
+    @Output()
+    searchSubmit: EventEmitter<SearchInput> = new EventEmitter();
 
     /** @hidden */
     @ContentChild(TableToolbarActionsComponent)
@@ -67,6 +82,11 @@ export class TableToolbarComponent implements AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    submitSearch(search: SearchInput): void {
+        this.searchSubmit.emit(search);
     }
 
     /** @hidden */

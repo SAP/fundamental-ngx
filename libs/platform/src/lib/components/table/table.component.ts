@@ -295,6 +295,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         this._setInitialState();
         this._checkColumnsAbilities();
         this._setFreezableInfo();
+        this._onSearchSubmit();
 
         this.buildComponentCssClass();
         this._cd.detectChanges();
@@ -564,6 +565,14 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
                 this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
             })
         );
+    }
+
+    private _onSearchSubmit(): void {
+        if (this.tableToolbarComponent) {
+            this._subscriptions.add(
+                this.tableToolbarComponent.searchSubmit.subscribe(input => this._tableService.search(input))
+            );
+        }
     }
 
     private _groupRows(): void {

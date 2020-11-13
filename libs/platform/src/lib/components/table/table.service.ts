@@ -1,6 +1,7 @@
 import { EventEmitter, QueryList } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+import { SearchInput } from '../search-field/search-field.component';
 import { TableViewSettingsFilterComponent } from './components/table-view-settings-filter/table-view-settings-filter.component';
 import {
     CollectionFilter,
@@ -86,6 +87,11 @@ export class TableService {
 
         this.setTableState({ ...prevState, freezeToColumn: columnName });
         this.freezeChange.emit({ current: columnName, previous: prevState.freezeToColumn });
+    }
+
+    search(input: SearchInput): void {
+        const prevState = this.getTableState();
+        this.setTableState({ ...prevState, searchInput: input });
     }
 
     private isFilterChanged(filter: any, prevFilterBy: any): boolean {

@@ -8,9 +8,15 @@
     <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title" [size]="size !== 'cozy' ? 'compact' : 'cozy'">
         <label fd-toolbar-label>{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
 
-        <ng-container *ngIf="tableToolbarActionsComponent">
-            <fd-toolbar-spacer></fd-toolbar-spacer>
+        <fd-toolbar-spacer></fd-toolbar-spacer>
+        <fdp-search-field *ngIf="!hideSearchInput"
+                          i18n-placeholder="@@platformTableToolbarSearchPlaceholder"
+                          placeholder="Search"
+                          [suggestions]="searchSuggestions"
+                          (searchSubmit)="submitSearch($event)"
+        ></fdp-search-field>
 
+        <ng-container *ngIf="tableToolbarActionsComponent">
             <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
         </ng-container>
 

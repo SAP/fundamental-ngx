@@ -19,6 +19,7 @@ import {
 import { FdpFormGroupModule } from '../form/form-group/fdp-form.module';
 import { PlatformInputModule } from '../form/input/fdp-input.module';
 import { PlatformButtonModule } from '../button/button.module';
+import { PlatformSearchFieldModule } from '../search-field/search-field.module';
 
 import { TableService } from './table.service';
 import { TableComponent } from './table.component';
@@ -53,7 +54,7 @@ import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
         PopoverModule,
         DialogModule,
         RadioModule,
-        IconModule,
+        PlatformSearchFieldModule,
 
         InputGroupModule,
         RadioModule,
