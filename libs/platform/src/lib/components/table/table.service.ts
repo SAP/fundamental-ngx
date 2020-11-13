@@ -12,11 +12,13 @@ import {
 import { SortDirection } from './enums';
 import { DEFAULT_TABLE_STATE } from './constants';
 import { FilterChange, FreezeChange, GroupChange, SortChange } from './models';
+import { TableColumnComponent } from '@fundamental-ngx/platform';
 
 export class TableService {
     prevTableState: TableState;
     tableState$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
 
+    columns: QueryList<TableColumnComponent>;
     filters: QueryList<TableViewSettingsFilterComponent>;
 
     readonly sortChange: EventEmitter<SortChange> = new EventEmitter<SortChange>();

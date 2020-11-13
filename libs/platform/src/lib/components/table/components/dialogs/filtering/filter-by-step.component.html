@@ -1,0 +1,58 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <h1 fd-dialog-title>Filter</h1>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <button fd-button
+                            fdType="transparent"
+                            [compact]="true"
+                            label="Reset"
+                            (click)="reset()"
+                            [disabled]="true"></button>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body style="padding-left: 0; padding-right: 0;">
+        <ul fd-list compact="true" navigationIndicator="true">
+            <li fd-list-group-header>Filter By</li>
+
+            <li fd-list-item *ngFor="let filter of filters">
+                <a fd-list-link (click)="nextStep(filter)">
+                    <span fd-list-title [innerText]="filter.label"></span>
+                </a>
+            </li>
+        </ul>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="emphasized"
+                fd-dialog-decisive-button
+                label="OK"
+                [compact]="true"
+                (click)="confirm()">
+            </button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="transparent"
+                fd-dialog-decisive-button
+                fd-initial-focus
+                label="Cancel"
+                [compact]="true"
+                (click)="cancel()">
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>

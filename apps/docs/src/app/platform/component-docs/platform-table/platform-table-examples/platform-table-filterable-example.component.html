@@ -45,7 +45,7 @@
 </fdp-table>
 
 <!-- View Settings Dialog-->
-<!--<fdp-table-view-settings-dialog [table]="filterableTbl">
+<fdp-table-view-settings-dialog [table]="filterableTbl">
     <fdp-table-view-settings-filter
         [column]="'name'"
         [label]="'Name'"
@@ -63,6 +63,12 @@
         [column]="'status'"
         [label]="'Status'"
         [type]="'single-select'"
-        [values]="[{key: 'OUT_OF_STOCK', label: 'out of stock'}, { key: 'AVAILABLE', label: 'available'}]">
+        [values]="[{value: 'OUT_OF_STOCK', label: 'out of stock'}, { value: 'AVAILABLE', label: 'available'}]">
     </fdp-table-view-settings-filter>
-</fdp-table-view-settings-dialog>-->
+    <fdp-table-view-settings-filter
+        [column]="'status'"
+        [label]="'Status 2'"
+        [type]="'multi-select'"
+        [values]="[{value: 'OUT_OF_STOCK', label: 'out of stock'}, { value: 'AVAILABLE', label: 'available'}]">
+    </fdp-table-view-settings-filter>
+</fdp-table-view-settings-dialog>

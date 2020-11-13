@@ -6,3 +6,5 @@ export * from './table-view-settings-filter/table-view-settings-filter.component
 
 export * from './dialogs/sorting/sorting.component';
 export * from './dialogs/grouping/grouping.component';
+export * from './dialogs/filtering/filter-by-step.component';
+export * from './dialogs/filtering/filters.component';

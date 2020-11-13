@@ -10,7 +10,6 @@ import {
     IconModule,
     InputGroupModule,
     ListModule,
-    PanelModule,
     PopoverModule,
     RadioModule,
     TableModule,
@@ -34,6 +33,8 @@ import {
 } from './components';
 import { FdpCellDef, FdpHeaderCellDef, FdpTableCell, FdpTableHeader } from './directives';
 import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
+import { FilterByStepComponent } from './components/dialogs/filtering/filter-by-step.component';
+import { FiltersComponent } from './components/dialogs/filtering/filters.component';
 
 @NgModule({
     imports: [
@@ -58,7 +59,6 @@ import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
 
         InputGroupModule,
         RadioModule,
-        PanelModule,
         IconModule
     ],
     declarations: [
@@ -77,7 +77,9 @@ import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
         CellValueByPipe,
 
         SortingComponent,
-        GroupingComponent
+        GroupingComponent,
+        FilterByStepComponent,
+        FiltersComponent
     ],
     exports: [
         TableComponent,

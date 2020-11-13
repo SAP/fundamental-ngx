@@ -31,7 +31,7 @@ import { TableColumnComponent, TableToolbarComponent } from './components';
 import { CollectionStringFilterStrategy, ContentDensity, FilterValueType, SelectionMode, SortDirection } from './enums';
 import { isDataSource } from '../../domain';
 import { TableDataSource } from './domain';
-import { CollectionFilter, SelectableRow, TableState } from './interfaces';
+import { CollectionFilter, CollectionStringFilter, SelectableRow, TableState } from './interfaces';
 import {
     TableColumnFreezeEvent,
     TableFilterChangeEvent,
@@ -41,7 +41,8 @@ import {
 } from './models';
 import {
     DEFAULT_COLUMN_WIDTH,
-    DEFAULT_TABLE_STATE, ROW_HEIGHT,
+    DEFAULT_TABLE_STATE,
+    ROW_HEIGHT,
     SELECTION_COLUMN_WIDTH
 } from './constants';
 import { getNestedValue } from '../../utils/object';
@@ -292,11 +293,12 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     ngAfterViewInit(): void {
+        // this._tableService.columns = this.columns;
+
         this._setInitialState();
         this._checkColumnsAbilities();
         this._setFreezableInfo();
         this._onSearchSubmit();
-
         this.buildComponentCssClass();
         this._cd.detectChanges();
     }

@@ -20,6 +20,7 @@ import { TableToolbarActionsComponent } from '../table-toolbar-actions/table-too
 import { SortingComponent } from '../dialogs/sorting/sorting.component';
 import { GroupingComponent } from '../dialogs/grouping/grouping.component';
 import { TableService } from '../../table.service';
+import { FilterByStepComponent } from '../dialogs/filtering/filter-by-step.component';
 
 const dialogConfig: DialogConfig = {
     responsivePadding: true,
@@ -116,7 +117,29 @@ export class TableToolbarComponent implements AfterViewInit {
 
     /** @hidden */
     openFiltering(): void {
+        const state = this._tableService.tableState$.getValue();
+        // const filters = this._tableService.filters;
 
+        const dialogRef = this._dialogService.open(FilterByStepComponent, {
+            responsivePadding: true,
+            verticalPadding: false,
+            minWidth: '30%',
+            minHeight: '50%',
+            data: {
+                // filters: filters,
+                filterBy: state && state.filterBy
+            }
+        } as DialogConfig);
+
+        this._subscription.add(
+            dialogRef.afterClosed.pipe(filter(e => !!e)).subscribe(({action, value}) => {
+                if (!action && !value) {
+                    return;
+                }
+
+                this._tableService.filter(value);
+            })
+        );
     }
 
     /** @hidden */
