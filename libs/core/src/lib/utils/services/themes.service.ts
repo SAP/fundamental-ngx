@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
 
 @Injectable()
 /**
@@ -30,8 +34,33 @@ export class ThemesService {
         }
     ];
 
-    constructor(private sanitizer: DomSanitizer) {}
+    /** @hidden **/
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    constructor(
+        private router: Router,
+        private sanitizer: DomSanitizer,
+        private route: ActivatedRoute
+    ) {}
+
+
+    /** Set theme according to additional URL parameter **/
+    setThemeByRoute(themeParamName): any {
+        const paramName = themeParamName || 'theme'
+        this.router.events
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.route.queryParams
+                    .pipe(takeUntil(this._onDestroy$))
+                    .subscribe(param => {
+                        this.setTheme(param[paramName])
+                });
+            }
+        })
+    };
+
+    /** Assign css file corresponding to chosen theme **/
     setTheme(theme: string): any {
         return this.sanitizer.bypassSecurityTrustResourceUrl('assets/' + theme + '.css');
     }

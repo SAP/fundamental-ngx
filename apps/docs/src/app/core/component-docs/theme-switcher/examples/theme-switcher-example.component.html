@@ -1,0 +1,3 @@
+<div *ngFor="let theme of themes">
+    <button fd-button (click)="selectTheme(theme.id)" [label]="theme.name"></button>
+</div>
