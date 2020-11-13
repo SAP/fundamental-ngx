@@ -185,7 +185,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     currentActiveSlidesStartIndex = 0;
 
     /** @hidden handles rtl service */
-    dir: string;
+    dir = 'ltr';
 
     /** @hidden Make left navigation button disabled */
     leftButtonDisabled = false;
@@ -286,14 +286,14 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @HostListener('keydown.arrowright', ['$event'])
     public onKeydownArrowRight(event: KeyboardEvent): void {
         event.preventDefault();
-        this.next();
+        this[this.dir === 'ltr' ? 'next' : 'previous']();
     }
 
     /** @hidden */
     @HostListener('keydown.arrowleft', ['$event'])
     public onKeydownArrowLeft(event: KeyboardEvent): void {
         event.preventDefault();
-        this.previous();
+        this[this.dir === 'ltr' ? 'previous' : 'next']();
     }
 
     /** Transitions to the previous slide in the carousel. */
@@ -488,6 +488,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     private _subscribeToRtl(): void {
         this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this.dir = isRtl ? 'rtl' : 'ltr';
+            if (this._carouselService.items) {
+                this._carouselService.goToItem(this._carouselService.active, false, this.dir);
+            }
             this._changeDetectorRef.detectChanges();
         });
     }
