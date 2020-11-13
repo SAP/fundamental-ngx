@@ -1,2 +1,4 @@
-export const FEED_LIST_PREFIX = 'fd-feed-list';
-export const FEED_LIST_ITEM_PREFIX = 'fd-feed-list__item';
+export const CSS_CLASS_NAME = {
+    list: 'fd-feed-list',
+    item: 'fd-feed-list__item'
+};

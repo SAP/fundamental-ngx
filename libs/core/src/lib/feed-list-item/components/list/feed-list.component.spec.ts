@@ -24,7 +24,7 @@ describe('FeedListComponent', () => {
   });
 
   it('should have mobile class', () => {
-    component.isMobile = true;
+    component.mobile = true;
     component.buildComponentCssClass();
     fixture.detectChanges();
     expect(component.elementRef().nativeElement.classList.contains('fd-feed-list--s')).toBeTruthy();

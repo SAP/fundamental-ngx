@@ -5,8 +5,8 @@ import { By } from '@angular/platform-browser';
 import { LineClampDirective, LineClampTargetDirective } from './line-clamp.directive';
 
 @Component({
-  template: `<div type="text" [fdLineClamp]="true" [fdLineClampLines]="rows">
-    <div [fdLineClampTarget]="text"></div>
+  template: `<div fd-lineclamp [fdLineClampState]="true" [fdLineClampLines]="rows">
+    <div fd-lineclamp-target [fdLineClampTargetText]="text"></div>
   </div>`
 })
 class TestComponent {

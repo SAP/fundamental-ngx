@@ -5,17 +5,13 @@ import {
   Input,
   SimpleChanges,
   ElementRef,
-  ContentChild,
   OnInit,
   OnChanges,
   ChangeDetectorRef
 } from '@angular/core';
 
 import { CssClassBuilder, applyCssClass } from '../../../utils/public_api';
-import { FEED_LIST_ITEM_PREFIX } from '../../constants';
-import { FeedListActionComponent } from '../feed-list-action/feed-list-action.component';
-import { FeedListAvatarComponent } from '../feed-list-avatar/feed-list-avatar.component';
-import { FeedListFooterComponent } from '../feed-list-footer/feed-list-footer.component';
+import { CSS_CLASS_NAME } from '../../constants';
 
 @Component({
   selector: 'fd-feed-list-item',
@@ -37,12 +33,12 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
    * Link to Author of feed
    */
   @Input()
-  authorLink: string | null = null;
+  authorLink: string;
   /**
    * Feed text
    */
   @Input()
-  text: string | null = null;
+  text: string;
   /**
    * Max preview rows of Feed text. If you have more than max rows text, you can toggle preview/full text with more/less button.
    */
@@ -57,7 +53,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
    * aria-labelledby for element describing.
    */
   @Input()
-  ariaLabelledby: string = null;
+  ariaLabelledby: string;
   /**
    * Text for more button
   */
@@ -78,23 +74,15 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
    * Apply mobile view
   */
   @Input()
-  isMobile = false;
+  mobile = false;
 
   /**
-   * @hidden
-   * You can use any avatar contruction, but for this block you will have place
-   *
-  */
-  @ContentChild(FeedListAvatarComponent)
-  avatarRef: FeedListAvatarComponent;
-  /** @hidden */
-  @ContentChild(FeedListActionComponent)
-  actionRef: FeedListActionComponent;
-  /** @hidden */
-  @ContentChild(FeedListFooterComponent)
-  footerRef: FeedListFooterComponent;
-
+   * Shows toggle state of feed text - more or less
+   */
   isCollapsed = true;
+  /**
+   * Shows have you more line than max lines
+  */
   hasMore = false;
 
   /** @hidden */
@@ -120,9 +108,9 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
    * function is responsible for order which css classes are applied
    */
   buildComponentCssClass(): string[] {
-    return [FEED_LIST_ITEM_PREFIX,
+    return [CSS_CLASS_NAME.item,
       this.class,
-      this.isRichText ? '' : `${FEED_LIST_ITEM_PREFIX}--collapsible`,
+      this.isRichText ? '' : `${CSS_CLASS_NAME.item}--collapsible`,
     ];
   }
 

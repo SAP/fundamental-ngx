@@ -1,91 +1,73 @@
-<!-- Non mobile view -->
-<div class="fd-feed-list__body" *ngIf="!isMobile">
-  <ng-container *ngIf="!!avatarRef">
-    <ng-content select="fd-feed-list-avatar"></ng-content>
-  </ng-container>
+<div class="fd-feed-list__body">
+  <ng-container *ngIf="mobile; then headerTmpl; else avatarContent"></ng-container>
   <div class="fd-feed-list__content">
-    <ng-container *ngIf="!!actionRef">
-      <ng-content select="fd-feed-list-action"></ng-content>
+    <ng-container *ngIf="!mobile">
+      <ng-container *ngTemplateOutlet="actionContent"></ng-container>
     </ng-container>
     <p class="fd-feed-list__text">
       <ng-container *ngIf="!isRichText">
-        <span
-          class="lineclamp"
-          #lineClamp="fdLineClamp"
-          [fdLineClamp]="isCollapsed"
-          [fdLineClampLines]="maxRows"
-          (lineCountUpdate)="checkLineCount($event)"
-        >
-            <ng-container *ngTemplateOutlet="author"></ng-container>
-            <span [fdLineClampTarget]="text" (update)="lineClamp.refreshTarget($event)"></span>
-        </span>
-        <a
-          fd-link
-          class="fd-feed-list__link--more"
-          *ngIf="!isRichText && hasMore"
-          (click)="toggleTextView()"
-          [innerText]="isCollapsed ? moreLabel : lessLabel"></a>
+        <ng-container *ngTemplateOutlet="feedContent, context: {$implicit: author}"></ng-container>
       </ng-container>
       <ng-container *ngIf="isRichText">
         <ng-container *ngTemplateOutlet="author"></ng-container>
         <fd-formatted-text [htmlText]="text"></fd-formatted-text>
       </ng-container>
     </p>
-    <ng-container *ngIf="!!footerRef">
-      <ng-content select="fd-feed-list-footer"></ng-content>
+    <ng-container *ngIf="!mobile">
+      <ng-container *ngTemplateOutlet="footerContent"></ng-container>
     </ng-container>
   </div>
 </div>
-<!-- Mobile view -->
-<div class="fd-feed-list__body" *ngIf="isMobile">
-  <div class="fd-feed-list__wrapper">
-    <div class="fd-feed-list__wrapper fd-feed-list__wrapper--header">
-      <ng-container *ngIf="!!avatarRef">
-        <ng-content select="fd-feed-list-avatar"></ng-content>
-      </ng-container>
-      <div>
-        <ng-container *ngTemplateOutlet="author"></ng-container>
-        <ng-container *ngIf="!!footerRef">
-          <ng-content select="fd-feed-list-footer"></ng-content>
-        </ng-container>
-      </div>
-    </div>
-    <ng-container *ngIf="!!actionRef">
-      <ng-content select="fd-feed-list-action"></ng-content>
-    </ng-container>
-  </div>
-  <div class="fd-feed-list__content">
-    <p class="fd-feed-list__text">
-      <ng-container *ngIf="!isRichText">
-        <span
-          class="lineclamp"
-          #lineClamp="fdLineClamp"
-          [fdLineClamp]="isCollapsed"
-          [fdLineClampLines]="maxRows"
-          (lineCountUpdate)="checkLineCount($event)"
-        >
-          <span [fdLineClampTarget]="text" (update)="lineClamp.refreshTarget($event)"></span>
-        </span>
-        <a
-          fd-link
-          class="fd-feed-list__link--more"
-          *ngIf="!isRichText && hasMore"
-          (click)="toggleTextView()"
-          [innerText]="isCollapsed ? moreLabel : lessLabel"></a>
-      </ng-container>
-      <ng-container *ngIf="isRichText">
-        <fd-formatted-text [htmlText]="text"></fd-formatted-text>
-      </ng-container>
-    </p>
-  </div>
-</div>
+
+<ng-template #avatarContent>
+  <ng-content select="fd-feed-list-avatar"></ng-content>
+</ng-template>
+<ng-template #actionContent>
+  <ng-content select="fd-feed-list-action"></ng-content>
+</ng-template>
+<ng-template #footerContent>
+  <ng-content select="fd-feed-list-footer"></ng-content>
+</ng-template>
 
 <ng-template #author>
   <span class="fd-feed-list__name">
     <a target="_blank"
       [attr.title]="authorTitle"
       [attr.href]="authorLink ? (authorLink | safe : 'url') : null"
-      fd-link
+      [attr.fd-link]="!!authorLink"
       [emphasized]="true">{{ authorTitle }}</a>:
   </span>
+</ng-template>
+
+<ng-template #feedContent let-param>
+  <span
+    class="lineclamp"
+    #lineClamp="fdLineClamp"
+    fd-lineclamp
+    [fdLineclampState]="isCollapsed"
+    [fdLineClampLines]="maxRows"
+    (lineCountUpdate)="checkLineCount($event)"
+  >
+      <ng-container *ngTemplateOutlet="param"></ng-container>
+      <span fd-lineclamp-target [fdLineClampTargetText]="text" (update)="lineClamp.refreshTarget($event)"></span>
+  </span>
+  <a
+    fd-link
+    class="fd-feed-list__link--more"
+    *ngIf="!isRichText && hasMore"
+    (click)="toggleTextView()"
+    [innerText]="isCollapsed ? moreLabel : lessLabel"></a>
+</ng-template>
+
+<ng-template #headerTmpl>
+  <div class="fd-feed-list__wrapper">
+    <div class="fd-feed-list__wrapper fd-feed-list__wrapper--header">
+      <ng-container *ngTemplateOutlet="avatarContent"></ng-container>
+      <div>
+        <ng-container *ngTemplateOutlet="author"></ng-container>
+        <ng-container *ngTemplateOutlet="footerContent"></ng-container>
+      </div>
+    </div>
+    <ng-container *ngTemplateOutlet="actionContent"></ng-container>
+  </div>
 </ng-template>

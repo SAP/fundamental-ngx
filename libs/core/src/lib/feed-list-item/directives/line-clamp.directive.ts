@@ -14,15 +14,25 @@ import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Directive({
-  selector: '[fdLineClampTarget]',
+  // tslint:disable-next-line:directive-selector
+  selector: '[fd-lineclamp-target]',
   exportAs: 'fdLineClampTarget'
 })
 export class LineClampTargetDirective implements OnChanges, AfterViewInit {
+  /**
+   * Target text for clamping
+   */
   @Input()
-  fdLineClampTarget: string;
+  fdLineClampTargetText: string;
+  /**
+   * Event with target instance for clamping
+   */
   @Output() update = new EventEmitter<LineClampTargetDirective>();
+  /** @hidden */
   constructor(private readonly _elementRef: ElementRef) {}
-
+  /**
+   * Native element of clamping target
+   */
   get targetElement(): HTMLElement {
     return this._elementRef.nativeElement;
   }
@@ -39,17 +49,26 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
 }
 
 @Directive({
-  selector: '[fdLineClamp]',
+  // tslint:disable-next-line:directive-selector
+  selector: '[fd-lineclamp]',
   exportAs: 'fdLineClamp'
 })
 export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
+  /**
+   * Count lines for clamping
+   */
   @Input()
   set fdLineClampLines(value: number) {
     this._lineCount = coerceNumberProperty(value);
   }
+  /**
+   * Clamping state
+   */
   @Input()
-  fdLineClamp = false;
-
+  fdLineclampState = false;
+  /**
+   * Event return count of lines from the target
+   */
   @Output()
   lineCountUpdate = new EventEmitter<number>();
 
@@ -62,12 +81,15 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
   private _isNativeSupport = true;
   /** @hidden */
   private _lineCount: number;
-
+  /** @hidden */
   constructor(
     private readonly _elementRef: ElementRef,
     private readonly _renderer: Renderer2
   ) { }
 
+  /**
+   * Root native element of clamping box
+  */
   get rootElement(): HTMLElement {
     return this._elementRef.nativeElement;
   }
@@ -109,13 +131,13 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
 
   refreshTarget(event: LineClampTargetDirective): void {
     this._lineClampTarget = event.targetElement;
-    this._originalText = event.fdLineClampTarget;
+    this._originalText = event.fdLineClampTargetText;
     this.reset();
     this.refreshClamp();
   }
 
   refreshClamp(): void {
-    if (this.fdLineClamp && this._lineCount) {
+    if (this.fdLineclampState && this._lineCount) {
       this.native();
       if (!this._isNativeSupport) {
         this._truncate();

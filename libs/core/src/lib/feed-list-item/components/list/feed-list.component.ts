@@ -4,18 +4,18 @@ import {
   Input,
   OnInit,
   OnDestroy,
-  AfterViewInit,
   OnChanges,
   SimpleChanges,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChildren,
-  QueryList
+  QueryList,
+  AfterContentChecked
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CssClassBuilder, applyCssClass } from '../../../utils/public_api';
-import { FEED_LIST_PREFIX } from '../../constants';
+import { CSS_CLASS_NAME } from '../../constants';
 import { FeedListItemComponent } from '../item/feed-list-item.component';
 
 @Component({
@@ -25,7 +25,7 @@ import { FeedListItemComponent } from '../item/feed-list-item.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FeedListComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges, CssClassBuilder {
+export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy, OnChanges, CssClassBuilder {
   /** User's custom classes */
   @Input()
   class: string;
@@ -38,12 +38,12 @@ export class FeedListComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
    * aria-labelledby for element describing.
    */
   @Input()
-  ariaLabelledby: string = null;
+  ariaLabelledby: string;
   /**
    * Apply mobile view
   */
   @Input()
-  isMobile = false;
+  mobile = false;
   /**
    * It removes border if items are displaying in a group.
   */
@@ -52,7 +52,7 @@ export class FeedListComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   /**
   * Gets feed list items
   */
-  @ContentChildren(FeedListItemComponent, { descendants: true })
+  @ContentChildren(FeedListItemComponent)
   feedItems: QueryList<FeedListItemComponent>;
 
   /** @hidden */
@@ -64,13 +64,9 @@ export class FeedListComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   ) { }
 
   /** @hidden */
-  ngAfterViewInit(): void {
-    this.$feedItemChanges = this.feedItems.changes.subscribe((feedItems: FeedListItemComponent[]) => {
-      console.log(feedItems);
-      feedItems.forEach(feedItem => {
-        feedItem.isMobile = this.isMobile;
-      });
-    });
+  ngAfterContentChecked(): void {
+    this._refreshItems();
+    this._listenOnFeedItems();
   }
   /** @hidden */
   ngOnInit(): void {
@@ -78,15 +74,18 @@ export class FeedListComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   }
   /** @hidden */
   ngOnChanges(changes: SimpleChanges): void {
-    if ('isMobile' in changes ||
+    if ('mobile' in changes ||
       'borderLess' in changes) {
         this.buildComponentCssClass();
+        this._refreshItems();
       }
   }
 
   /** @hidden */
   ngOnDestroy(): void {
-    this.$feedItemChanges.unsubscribe();
+    if (this.$feedItemChanges) {
+      this.$feedItemChanges.unsubscribe();
+    }
   }
 
   @applyCssClass
@@ -95,15 +94,26 @@ export class FeedListComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
    * function is responsible for order which css classes are applied
    */
   buildComponentCssClass(): string[] {
-    return [FEED_LIST_PREFIX,
+    return [CSS_CLASS_NAME.list,
       this.class,
-      this.borderLess ? `${FEED_LIST_PREFIX}--no-border` : '',
-      this.isMobile ? `${FEED_LIST_PREFIX}--s` : '',
+      this.borderLess ? `${CSS_CLASS_NAME.list}--no-border` : '',
+      this.mobile ? `${CSS_CLASS_NAME.list}--s` : '',
     ];
   }
 
   /** @hidden */
   elementRef(): ElementRef<any> {
     return this._elementRef;
+  }
+
+  private _listenOnFeedItems(): void {
+    this.$feedItemChanges = this.feedItems.changes.subscribe(() => this._refreshItems());
+  }
+
+  /** @hidden */
+  private _refreshItems(): void {
+    (this.feedItems || []).forEach(feedItem => {
+      feedItem.mobile = this.mobile;
+    });
   }
 }

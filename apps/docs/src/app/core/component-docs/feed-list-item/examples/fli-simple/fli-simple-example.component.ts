@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './fli-simple-example.component.html'
 })
 export class FliSimpleExampleComponent {
-    hasFormattedText = false;
+    hasFormattedText = true;
 }
