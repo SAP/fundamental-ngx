@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/core';
 import {
     TableColumnFreezeEvent,
+    TableDataSource,
     TableFilterChangeEvent,
     TableGroupChangeEvent,
     TableRowSelectionChangeEvent,
@@ -31,6 +32,7 @@ import * as platformTableFilterableSrc from '!raw-loader!./platform-table-exampl
 import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
 import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
 import * as platformTableFreezableTsSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.ts';
+import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 
 
 @Component({
@@ -126,8 +128,6 @@ export class PlatformTableDocsComponent {
             groupable: true
         }
     };
-
-    tableData = ITEMS;
 
     defaultTable: ExampleFile[] = [
         {
@@ -241,6 +241,8 @@ export class PlatformTableDocsComponent {
         }
     ];
 
+    dataSource = new TableDataSource(new TableDataProviderExample());
+
     constructor(private schemaFactory: SchemaFactoryService, private _cd: ChangeDetectorRef) {
         this.schema = this.schemaFactory.getComponent('fdp-table');
     }
@@ -271,14 +273,26 @@ export class PlatformTableDocsComponent {
     }
 }
 
-export const ITEMS = [{
+export interface ItemInterface {
+    name: string;
+    description: string;
+    price: {
+        value: number;
+        currency: string;
+    };
+    status: string;
+    statusColor?: string;
+}
+
+export const ITEMS: ItemInterface[] = [{
     'name': '10 Portable DVD player',
     'description': 'diam neque vestibulum eget vulputate',
     'price': {
         'value': 66.04,
         'currency': 'CNY'
     },
-    'status': 'Stocked on demand'
+    'status': 'Stocked on demand',
+    'statusColor': 'informative'
 }, {
     'name': 'Astro Laptop 1516',
     'description': 'pede malesuada',
@@ -286,7 +300,8 @@ export const ITEMS = [{
         'value': 489.01,
         'currency': 'EUR'
     },
-    'status': 'Out of stock'
+    'status': 'Out of stock',
+    'statusColor': 'negative'
 }, {
     'name': 'Astro Phone 6',
     'description': 'penatibus et magnis',
@@ -294,7 +309,8 @@ export const ITEMS = [{
         'value': 154.1,
         'currency': 'IDR'
     },
-    'status': 'Stocked on demand'
+    'status': 'Stocked on demand',
+    'statusColor': 'informative'
 }, {
     'name': 'Beam Breaker B-1',
     'description': 'fermentum donec ut',
@@ -302,7 +318,8 @@ export const ITEMS = [{
         'value': 36.56,
         'currency': 'NZD'
     },
-    'status': 'Stocked on demand'
+    'status': 'Stocked on demand',
+    'statusColor': 'informative'
 }, {
     'name': 'Beam Breaker B-2',
     'description': 'sapien in sapien iaculis congue',
@@ -310,7 +327,7 @@ export const ITEMS = [{
         'value': 332.57,
         'currency': 'NZD'
     },
-    'status': 'Become out of stock'
+    'status': 'No info'
 }, {
     'name': 'Benda Laptop 1408',
     'description': 'suspendisse potenti cras in',
@@ -318,7 +335,8 @@ export const ITEMS = [{
         'value': 243.49,
         'currency': 'CNY'
     },
-    'status': 'Stocked on demand'
+    'status': 'Stocked on demand',
+    'statusColor': 'informative'
 }, {
     'name': 'Bending Screen 21HD',
     'description': 'nunc nisl duis bibendum',
@@ -326,7 +344,8 @@ export const ITEMS = [{
         'value': 66.46,
         'currency': 'EUR'
     },
-    'status': 'Available'
+    'status': 'Available',
+    'statusColor': 'positive'
 }, {
     'name': 'Blaster Extreme',
     'description': 'quisque ut',
@@ -334,7 +353,8 @@ export const ITEMS = [{
         'value': 436.88,
         'currency': 'USD'
     },
-    'status': 'Available'
+    'status': 'Available',
+    'statusColor': 'positive'
 }, {
     'name': 'Broad Screen 22HD',
     'description': 'ultrices posuere',
@@ -342,7 +362,8 @@ export const ITEMS = [{
         'value': 458.18,
         'currency': 'CNY'
     },
-    'status': 'Available'
+    'status': 'Available',
+    'statusColor': 'positive'
 }, {
     'name': 'Camcorder View',
     'description': 'integer ac leo pellentesque',
@@ -350,7 +371,8 @@ export const ITEMS = [{
         'value': 300.52,
         'currency': 'USD'
     },
-    'status': 'Available'
+    'status': 'Available',
+    'statusColor': 'positive'
 }, {
     'name': 'Cepat Tablet 10.5',
     'description': 'rutrum rutrum neque aenean auctor',
@@ -358,7 +380,7 @@ export const ITEMS = [{
         'value': 365.12,
         'currency': 'NZD'
     },
-    'status': 'Become out of stock'
+    'status': 'No info'
 }, {
     'name': 'Ergo Mousepad',
     'description': 'tortor duis mattis egestas',
@@ -366,7 +388,8 @@ export const ITEMS = [{
         'value': 354.46,
         'currency': 'EUR'
     },
-    'status': 'Stocked on demand'
+    'status': 'Stocked on demand',
+    'statusColor': 'informative'
 }, {
     'name': 'Ergo Screen E-I',
     'description': 'massa quis augue luctus tincidunt',
@@ -374,7 +397,8 @@ export const ITEMS = [{
         'value': 387.23,
         'currency': 'NZD'
     },
-    'status': 'Stocked on demand'
+    'status': 'Stocked on demand',
+    'statusColor': 'informative'
 }, {
     'name': 'Ergo Screen E-II',
     'description': 'orci eget',
@@ -382,7 +406,7 @@ export const ITEMS = [{
         'value': 75.86,
         'currency': 'EUR'
     },
-    'status': 'Become out of stock'
+    'status': 'No info'
 }, {
     'name': 'Gaming Monster',
     'description': 'cubilia curae',
@@ -390,7 +414,7 @@ export const ITEMS = [{
         'value': 152.95,
         'currency': 'EGP'
     },
-    'status': 'Become out of stock'
+    'status': 'No info'
 }, {
     'name': 'Gaming Monster Pro',
     'description': 'pharetra magna vestibulum aliquet',
@@ -398,7 +422,8 @@ export const ITEMS = [{
         'value': 213.47,
         'currency': 'MZN'
     },
-    'status': 'Out of stock'
+    'status': 'Out of stock',
+    'statusColor': 'negative'
 }, {
     'name': 'ITelO Vault',
     'description': 'nisl duis',
@@ -406,7 +431,8 @@ export const ITEMS = [{
         'value': 33.0,
         'currency': 'EGP'
     },
-    'status': 'Become out of stock'
+    'status': 'Become out of stock',
+    'statusColor': 'critical'
 }, {
     'name': 'ITelO Vault Net',
     'description': 'ut odio',
@@ -414,7 +440,8 @@ export const ITEMS = [{
         'value': 353.29,
         'currency': 'EUR'
     },
-    'status': 'Available'
+    'status': 'Available',
+    'statusColor': 'positive'
 }, {
     'name': 'Multi Color',
     'description': 'cras mi pede malesuada',
@@ -422,7 +449,8 @@ export const ITEMS = [{
         'value': 98.08,
         'currency': 'MZN'
     },
-    'status': 'Become out of stock'
+    'status': 'Become out of stock',
+    'statusColor': 'critical'
 }, {
     'name': 'Multi Print',
     'description': 'ac diam cras pellentesque',
@@ -430,7 +458,8 @@ export const ITEMS = [{
         'value': 169.13,
         'currency': 'IDR'
     },
-    'status': 'Available'
+    'status': 'Available',
+    'statusColor': 'positive'
 }, {
     'name': 'Mini Tablet',
     'description': 'condimentum neque',
@@ -438,7 +467,8 @@ export const ITEMS = [{
         'value': 196.52,
         'currency': 'EGP'
     },
-    'status': 'Out of stock'
+    'status': 'Out of stock',
+    'statusColor': 'negative'
 }, {
     'name': 'Proctra X',
     'description': 'augue vestibulum ante ipsum primis',
@@ -446,7 +476,8 @@ export const ITEMS = [{
         'value': 275.65,
         'currency': 'USD'
     },
-    'status': 'Available'
+    'status': 'Available',
+    'statusColor': 'positive'
 }, {
     'name': 'Server Professional',
     'description': 'porttitor lorem',
@@ -454,7 +485,8 @@ export const ITEMS = [{
         'value': 456.5,
         'currency': 'EGP'
     },
-    'status': 'Stocked on demand'
+    'status': 'Stocked on demand',
+    'statusColor': 'informative'
 }, {
     'name': 'Ultra Jet Super Color',
     'description': 'tristique tortor',
@@ -462,7 +494,8 @@ export const ITEMS = [{
         'value': 302.18,
         'currency': 'EUR'
     },
-    'status': 'Stocked on demand'
+    'status': 'Stocked on demand',
+    'statusColor': 'informative'
 }, {
     'name': 'Ultra Jet Mobile',
     'description': 'est congue elementum in hac',
@@ -470,7 +503,8 @@ export const ITEMS = [{
         'value': 226.91,
         'currency': 'NZD'
     },
-    'status': 'Available'
+    'status': 'Available',
+    'statusColor': 'positive'
 }, {
     'name': 'Wireless DSL Router',
     'description': 'ultrices aliquet maecenas leo odio',
@@ -478,7 +512,8 @@ export const ITEMS = [{
         'value': 192.78,
         'currency': 'USD'
     },
-    'status': 'Become out of stock'
+    'status': 'Become out of stock',
+    'statusColor': 'critical'
 }, {
     'name': '10 Portable DVD player',
     'description': 'cursus vestibulum proin',
@@ -486,7 +521,8 @@ export const ITEMS = [{
         'value': 43.41,
         'currency': 'EUR'
     },
-    'status': 'Out of stock'
+    'status': 'Out of stock',
+    'statusColor': 'negative'
 }, {
     'name': 'Astro Laptop 1516',
     'description': 'justo sollicitudin ut',
@@ -494,7 +530,8 @@ export const ITEMS = [{
         'value': 311.68,
         'currency': 'MZN'
     },
-    'status': 'Become out of stock'
+    'status': 'Become out of stock',
+    'statusColor': 'critical'
 }, {
     'name': 'Astro Phone 6',
     'description': 'eget massa tempor convallis',
@@ -502,7 +539,8 @@ export const ITEMS = [{
         'value': 326.64,
         'currency': 'MZN'
     },
-    'status': 'Stocked on demand'
+    'status': 'Stocked on demand',
+    'statusColor': 'informative'
 }, {
     'name': 'Beam Breaker B-1',
     'description': 'vestibulum sit',
@@ -510,5 +548,6 @@ export const ITEMS = [{
         'value': 286.95,
         'currency': 'IDR'
     },
-    'status': 'Available'
+    'status': 'Available',
+    'statusColor': 'positive'
 }];

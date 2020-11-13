@@ -22,14 +22,15 @@ import {
 import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { distinctUntilChanged, filter, skip } from 'rxjs/operators';
 
 import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core';
 import { TableService } from './table.service';
 import { TableColumnComponent, TableToolbarComponent } from './components';
 import { CollectionStringFilterStrategy, ContentDensity, FilterValueType, SelectionMode, SortDirection } from './enums';
-import { ArrayTableDataSource, isDataSource, ObservableTableDataSource, TableDataSource } from '../../domain';
+import { isDataSource } from '../../domain';
+import { TableDataSource } from './domain';
 import { CollectionFilter, SelectableRow, TableState } from './interfaces';
 import {
     TableColumnFreezeEvent,
@@ -45,7 +46,7 @@ import {
 } from './constants';
 import { getNestedValue } from '../../utils/object';
 
-export type FdpTableDataSource<T> = TableDataSource<T> | T[] | Observable<T>;
+export type FdpTableDataSource<T> = TableDataSource<T>; // | T[] | Observable<T>;
 
 /**
  * The component that represents a table.
@@ -190,9 +191,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     _rows: SelectableRow[] = [];
 
     /** @hidden Grouped rows data. */
-    _groupedRows: { [key: string]: SelectableRow[] }; // KeyValue<string, SelectableRow[]>;
+    _groupedRows: { [key: string]: SelectableRow[] };
     /** @hidden */
-    _groupsMeta: { [key: string]: any }; // KeyValue<string, any>;
+    _groupsMeta: { [key: string]: any };
 
     /** @hidden */
     _contentDensityOptions = ContentDensity;
@@ -336,7 +337,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         row.checked = checked;
         this._checkedAll = !checked ? false : this._rows.reduce((check, r) => check && r.checked, true);
         checked ? this._checked.push(row.value) : this._unchecked.push(row.value);
-        this._emitChange(index);
+        this._emitSelectionChange(index);
     }
 
     /** @hidden Select one row in 'single' mode. */
@@ -353,14 +354,14 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
         if (alreadySelected === row) {
             this._unchecked.push(alreadySelected.value);
-            this._emitChange(index);
+            this._emitSelectionChange(index);
 
             return;
         }
 
         this._rows[index].checked = true;
         this._checked.push(row.value);
-        this._emitChange(index);
+        this._emitSelectionChange(index);
     }
 
     /** @hidden Select/unselect all rows in 'multiple' mode. */
@@ -370,13 +371,13 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
         if (checked) {
             this._checkAll();
-            this._emitChange();
+            this._emitSelectionChange();
 
             return;
         }
 
         this._uncheckAll();
-        this._emitChange();
+        this._emitSelectionChange();
     }
 
     /** @hidden */
@@ -432,7 +433,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /*doesColumnHasPopover(column: TableColumnComponent): boolean {
         if (!column) {
-            return;
+            return false;
         }
         return column.sortable || column.filterable || column.groupable || this._isFreezable;
     }*/
@@ -512,26 +513,31 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     private _onStateChanges(): void {
         this._subscriptions.add(
             this._tableService.tableState$
-                .pipe(filter(state => !!state), distinctUntilChanged())
-                .subscribe(state => {
-                    // SORTING
-                    if (state.sortBy?.length) {
-                        this._sortDirection = state.sortBy[0].direction || null;
-                        this._sortField = state.sortBy[0].field || null;
-                    }
+                .pipe(
+                    filter(state => !!state),
+                    skip(2), // skipping setting default and initial state with columns
+                    distinctUntilChanged()
+                ).subscribe(state => {
+                this.dataSource.fetch(state);
 
-                    // FILTERING
-                    const filterBy = state.filterBy;
-                    if (filterBy?.length) {
-                        this._filterValue = filterBy[0] || null;
-                    }
+                // SORTING
+                if (state.sortBy?.length) {
+                    this._sortDirection = state.sortBy[0].direction || null;
+                    this._sortField = state.sortBy[0].field || null;
+                }
 
-                    // GROUPING
-                    if (state.groupBy?.length) {
-                        this._groupOrder = state.groupBy[0].direction || null;
-                        this._groupField = state.groupBy[0].field || null;
-                    }
-                })
+                // FILTERING
+                const filterBy = state.filterBy;
+                if (filterBy?.length) {
+                    this._filterValue = filterBy[0] || null;
+                }
+
+                // GROUPING
+                if (state.groupBy?.length) {
+                    this._groupOrder = state.groupBy[0].direction || null;
+                    this._groupField = state.groupBy[0].field || null;
+                }
+            })
         );
 
         this._subscriptions.add(
@@ -627,7 +633,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     }
 
     /** @hidden */
-    private _emitChange(index?: number): void {
+    private _emitSelectionChange(index?: number): void {
         const selected = this._rows.filter(r => r.checked).map(r => r.value);
         this.rowSelectionChange.emit({
             source: this,
@@ -669,17 +675,15 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
          * places. If any new data comes in either you do a search and you want to pass initial data
          * its here.
          */
-        this._dsSubscription = initDataSource
-            .open()
-            .subscribe((data) => {
-                this._rows = data.map((row, index) => ({checked: false, index: index, value: row})) || [];
-                this._rowsStateChanges.next(this._rows);
-                this._cd.markForCheck();
-            });
+        this._dsSubscription = initDataSource.open().subscribe(rows => {
+            this._rows = rows.map((row, index) => ({ checked: false, index: index, value: row })) || [];
+            this._rowsStateChanges.next(this._rows);
+            this._cd.markForCheck();
+        });
 
         this._subscriptions.add(this._dsSubscription);
         // initial data fetch
-        initDataSource.match('*');
+        initDataSource.fetch(this.getTableState());
         return initDataSource;
     }
 
@@ -687,11 +691,6 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     private _toDataStream(ds: FdpTableDataSource<any>): TableDataSource<any> {
         if (isDataSource(ds)) {
             return ds as TableDataSource<any>;
-        } else if (Array.isArray(ds)) {
-            // default implementation to work on top of arrays
-            return new ArrayTableDataSource<any>(ds);
-        } else if (isObservable(ds)) {
-            return new ObservableTableDataSource<any>(ds as Observable<any>);
         }
 
         return undefined;

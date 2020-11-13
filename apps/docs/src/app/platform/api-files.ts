@@ -36,7 +36,9 @@ export const API_FILES = {
         'FdpTableHeader',
         'FdpHeaderCellDef',
         'FdpTableCell',
-        'FdpCellDef'
+        'FdpCellDef',
+        'TableDataSource',
+        'TableDataProvider',
     ],
     textarea: ['TextAreaComponent'],
     panel: [

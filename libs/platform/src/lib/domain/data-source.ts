@@ -68,7 +68,6 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { InjectionToken } from '@angular/core';
 import { MatchingStrategy } from '../components/form/combobox/combobox.config';
-import { TableState } from '../components/table/interfaces';
 
 export const DATA_PROVIDERS = new InjectionToken<Map<string, DataProvider<any>>>('DataProviderRegistry');
 
@@ -228,68 +227,5 @@ export class ListDataSource<T> extends ComboBoxDataSource<T> {
             sortedList[x] = list[x];
         });
         return sortedList;
-    }
-}
-
-/*export class TableDataSource<T> extends ListDataSource<T> implements DataSource<T> {
-    readonly MAX_LIMIT = Number.MAX_SAFE_INTEGER;
-
-    constructor(public dataProvider: DataProvider<any>) {
-        super(dataProvider);
-    }
-
-    match(predicate?: string | Map<string, string> | []): void {
-        const searchParam = new Map();
-
-        if (typeof predicate === 'string') {
-            searchParam.set('query', predicate);
-        } else if (predicate instanceof Map) {
-            predicate.forEach((v, k) => searchParam.set(k, v));
-        } else {
-            throw new Error('DataSource.match() predicate can only accepts string and Map');
-        }
-
-        if (!searchParam.has('limit')) {
-            searchParam.set('limit', this.MAX_LIMIT);
-        }
-
-        this.dataProvider.fetch(searchParam).subscribe((result: T[]) => {
-            this.dataChanges.next(result);
-        });
-    }
-}*/
-
-export class TableDataSource<T> implements DataSource<T> {
-    readonly MAX_LIMIT = Number.MAX_SAFE_INTEGER;
-    protected dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-
-    constructor(public dataProvider: DataProvider<any>) { }
-
-    fetch(state: TableState): void { }
-
-    open(): Observable<T[]> {
-        return this.dataChanges.asObservable();
-    }
-
-    close(): void { }
-
-    match(predicate?: string | Map<string, string> | []): void {
-        const searchParam = new Map();
-
-        if (typeof predicate === 'string') {
-            searchParam.set('query', predicate);
-        } else if (predicate instanceof Map) {
-            predicate.forEach((v, k) => searchParam.set(k, v));
-        } else {
-            throw new Error('DataSource.match() predicate can only accepts string and Map');
-        }
-
-        if (!searchParam.has('limit')) {
-            searchParam.set('limit', this.MAX_LIMIT);
-        }
-
-        this.dataProvider.fetch(searchParam).subscribe((result: T[]) => {
-            this.dataChanges.next(result);
-        });
     }
 }
