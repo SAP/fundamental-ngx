@@ -367,7 +367,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden Select/unselect all rows in 'multiple' mode. */
     selectAll(checked: boolean): void {
-        this._resetChecks();
+        this._reset();
         this._checkedAll = checked;
 
         if (checked) {

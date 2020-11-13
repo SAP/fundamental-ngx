@@ -56,7 +56,7 @@ export class TableService {
         const prevState = this.getTableState();
         const prevFilterBy: any = prevState && prevState.filterBy || [];
 
-        if (!this.isFilterChanged(filter, prevFilterBy)) {
+        if (!this._isFilterChanged(filter, prevFilterBy)) {
             return;
         }
 
@@ -94,7 +94,7 @@ export class TableService {
         this.setTableState({ ...prevState, searchInput: input });
     }
 
-    private isFilterChanged(filter: any, prevFilterBy: any): boolean {
+    private _isFilterChanged(filter: any, prevFilterBy: any): boolean {
         return !(
             prevFilterBy.length &&
             prevFilterBy[0].field === filter.field &&
