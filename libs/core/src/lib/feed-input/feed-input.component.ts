@@ -19,7 +19,7 @@ import { ButtonComponent, FeedInputButtonDirective, FeedInputTextareaDirective }
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeedInputComponent implements AfterContentInit, OnDestroy {
-    /** component disable state */
+    /** Component disable state */
     @Input()
     disabled = false;
 

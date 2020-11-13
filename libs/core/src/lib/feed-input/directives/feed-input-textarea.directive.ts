@@ -10,6 +10,9 @@ import {
     Renderer2
 } from '@angular/core';
 
+/**
+ * Applies text area auto resize and set maximum rows to grow
+ */
 @Directive({
     selector: '[fdFeedInputTextarea]',
     host: {
@@ -18,10 +21,11 @@ import {
     }
 })
 export class FeedInputTextareaDirective implements OnInit {
-    /** rows are allowed to grow */
+    /** The maximum rows allowed to grow */
     @Input()
     fdFeedInputTextareaMaxRows: number;
 
+    /** @hidden */
     @HostBinding('disabled')
     @HostBinding('attr.aria-disabled')
     disabled: boolean;

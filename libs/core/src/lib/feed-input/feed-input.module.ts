@@ -4,18 +4,21 @@ import { FeedInputComponent } from './feed-input.component';
 import { AvatarModule, ButtonModule, FormControlModule } from '../..';
 import { FeedInputTextareaDirective } from './directives/feed-input-textarea.directive';
 import { FeedInputButtonDirective } from './directives/feed-input-button.directive';
+import { FeedInputAvatarDirective } from './directives/feed-input-avatar.directive';
 
 @NgModule({
     declarations: [
         FeedInputComponent,
         FeedInputTextareaDirective,
-        FeedInputButtonDirective
+        FeedInputButtonDirective,
+        FeedInputAvatarDirective
     ],
     imports: [CommonModule, AvatarModule, ButtonModule, FormControlModule],
     exports: [
         FeedInputComponent,
         FeedInputTextareaDirective,
-        FeedInputButtonDirective
+        FeedInputButtonDirective,
+        FeedInputAvatarDirective
     ]
 })
 export class FeedInputModule { }
