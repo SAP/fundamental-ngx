@@ -124,7 +124,7 @@
     "@angular-devkit/core": "~10.2.0",
     "@angular/cli": "~10.2.0",
     "@angular/compiler-cli": "~10.2.1",
-    "@angular/language-service": "~10.2.1",
+    "@angular/language-service": "~11.0.0",
     "@angularclass/hmr": "3.0.0",
     "@babel/core": "7.11.6",
     "@nrwl/schematics": "8.12.11",
