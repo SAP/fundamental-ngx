@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Injectable, LOCALE_ID } from '@angular/core';
+import { Component, Injectable, LOCALE_ID } from '@angular/core';
 import { DatetimeAdapter, FdDatetimeAdapter, CalendarI18nLabels, FdDate } from '@fundamental-ngx/core';
 
 // i18n aria labels service provider
@@ -22,10 +22,9 @@ export class CalendarI18nChineseLabels extends CalendarI18nLabels {
 @Component({
     selector: 'fd-calendar-i18n-example',
     template: ` <fd-calendar [(ngModel)]="date"></fd-calendar>`,
-
-    // Note that this is usually provided in the root of your application.
-    // but due to the limit of this example we must provide it on this level.
     providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
         {
             provide: LOCALE_ID,
             useValue: 'zh'

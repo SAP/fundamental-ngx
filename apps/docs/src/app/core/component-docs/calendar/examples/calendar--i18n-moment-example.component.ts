@@ -1,5 +1,16 @@
-import { Component, Injectable } from '@angular/core';
-import { CalendarI18n, DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
+import moment from 'moment';
+
+// Import moment locale data required for this example
+import 'moment/locale/en-gb';
+import 'moment/locale/fa';
+import 'moment/locale/de';
+import 'moment/locale/es';
+import 'moment/locale/bg';
+import 'moment/locale/ja';
+import 'moment/locale/tr';
+import 'moment/locale/zh-cn';
 
 @Component({
     selector: 'fd-calendar-i18n-moment-example',
@@ -17,7 +28,7 @@ import { CalendarI18n, DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
         <fd-calendar [(ngModel)]="date"></fd-calendar>`
 })
 export class CalendarI18nMomentExampleComponent {
-    date = FdDate.getNow();
+    date = moment();
     locale: string;
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {

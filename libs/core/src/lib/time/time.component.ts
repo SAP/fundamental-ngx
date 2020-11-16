@@ -11,17 +11,20 @@ import {
     ViewChildren,
     ViewEncapsulation,
     AfterViewInit,
-    Optional
+    Optional,
+    OnDestroy
 } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { DatetimeAdapter } from '../datetime';
-import { SelectableViewItem } from './time-object';
+import { SelectableViewItem } from './models';
 import { createMissingDateImplementationError } from './errors';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
-import { TimeColumnComponent, TimeColumnItemOutput } from './time-column/time-column.component';
+import { TimeColumnComponent } from './time-column/time-column.component';
 import { KeyUtil } from '../utils/functions';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
@@ -52,7 +55,7 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TimeComponent<D> implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
+export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor {
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
@@ -166,9 +169,12 @@ export class TimeComponent<D> implements OnInit, OnChanges, AfterViewInit, Contr
     activeMeridianViewItem: MeridianViewItem;
 
     /** @hidden */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
     constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
         private _timeI18nLabels: TimeI18n,
-        private _changeDetRef: ChangeDetectorRef,
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
     ) {
         if (!_dateTimeAdapter) {
@@ -190,7 +196,18 @@ export class TimeComponent<D> implements OnInit, OnChanges, AfterViewInit, Contr
 
     /** @hidden */
     ngOnInit(): void {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._setUpViewGrid();
+            this._changeDetectorRef.detectChanges();
+        });
+
         this._setUpViewGrid();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -217,7 +234,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, AfterViewInit, Contr
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this._changeDetRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
@@ -325,13 +342,13 @@ export class TimeComponent<D> implements OnInit, OnChanges, AfterViewInit, Contr
 
         this._setUpActiveViewItems();
 
-        this._changeDetRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
     changeActive(view: FdTimeActiveView): void {
         this.activeView = view;
-        this._changeDetRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
@@ -434,9 +451,10 @@ export class TimeComponent<D> implements OnInit, OnChanges, AfterViewInit, Contr
 
     /** @hidden */
     private _constructMeridianViewItems(): void {
+        const [amLabel, pmLabel] = this._dateTimeAdapter.getDayPeriodNames();
         this.meridianViewItems = [
-            { value: Meridian.AM, label: this._timeI18nLabels.meridianAm },
-            { value: Meridian.PM, label: this._timeI18nLabels.meridianPm }
+            { value: Meridian.AM, label: amLabel },
+            { value: Meridian.PM, label: pmLabel }
         ];
     }
 

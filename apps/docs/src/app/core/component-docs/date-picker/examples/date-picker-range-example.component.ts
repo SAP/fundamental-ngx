@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FdDate, DateRange, DatetimeAdapter } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-date-picker-range-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: ` <fd-date-picker type="range" [(ngModel)]="selectedRange"> </fd-date-picker>
         <br />
-        <div>Selected First Date: {{ this.selectedRange.start || 'null' }}</div>
+        <div>Selected First Date: {{ this.selectedRange?.start?.toDateString() || 'null' }}</div>
         <br />
-        <div>Selected Last Date: {{ this.selectedRange.end || 'null' }}</div>`
+        <div>Selected Last Date: {{ this.selectedRange?.end?.toDateString() || 'null' }}</div>`
 })
 export class DatePickerRangeExampleComponent {
     selectedRange: DateRange<FdDate>;

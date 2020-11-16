@@ -1,5 +1,5 @@
-import { Component, Injectable } from '@angular/core';
-import { FdDate, TimeI18n } from '@fundamental-ngx/core';
+import { Component, Injectable, LOCALE_ID } from '@angular/core';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter, TimeI18n } from '@fundamental-ngx/core';
 
 // Aria labels i18n
 @Injectable()
@@ -22,20 +22,27 @@ export class CustomI18nLabels extends TimeI18n {
 
     decreaseSecondsLabel = 'Disminuir segundos';
 
-    meridianAm = 'vorm.';
-
-    meridianPm = 'nachm.';
+    periodLabel = 'Período';
 }
 
 @Component({
     selector: 'fd-time-i18n-example',
     template: `
-        <fd-time [meridian]="true" [(ngModel)]="time"></fd-time>
+        <fd-time [(ngModel)]="time"></fd-time>
         <br />
         Selected Time: {{ time.hour }}h {{ time.minute }}m {{ time.second }}s
     `,
-    // Note that this can be provided in the root of your application.
     providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
+        {
+            provide: LOCALE_ID,
+            useValue: 'es'
+        },
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
         {
             provide: TimeI18n,
             useClass: CustomI18nLabels

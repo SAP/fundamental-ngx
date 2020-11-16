@@ -28,10 +28,6 @@ export class CalendarService {
 
     constructor(@Optional() private _rtlService: RtlService) {}
 
-    static datesEqual(...args: any[]): boolean {
-        return false;
-    }
-
     /**
      * Standardized method to calculate grid [x][y] to index number
      */

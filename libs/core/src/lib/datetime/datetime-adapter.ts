@@ -169,6 +169,12 @@ export abstract class DatetimeAdapter<D> {
     abstract getSecondNames(options: { twoDigit: boolean }): string[];
 
     /**
+     * Gets a list of day periods.
+     * @returns List of day periods, starts from AM ['AM', 'PM'].
+     */
+    abstract getDayPeriodNames(): [string, string];
+
+    /**
      * Gets the first day of the week.
      * @returns The first day of the week (0-indexed, 0 = Sunday).
      */
@@ -298,6 +304,34 @@ export abstract class DatetimeAdapter<D> {
      * @returns The ISO date string date string.
      */
     abstract toIso8601(date: D): string;
+
+    /**
+     * Format option includes period info.
+     * @param displayFormat The format to use to display the date as a string.
+     * @returns If time format includes period info.
+     */
+    abstract isTimeFormatIncludesDayPeriod(displayFormat: any): boolean;
+
+    /**
+     * Format option includes hours info.
+     * @param displayFormat The format to use to display the date as a string.
+     * @returns If time format includes minutes info.
+     */
+    abstract isTimeFormatIncludesHours(displayFormat: any): boolean;
+
+    /**
+     * Format option includes minutes info.
+     * @param displayFormat The format to use to display the date as a string.
+     * @returns If time format includes minutes info.
+     */
+    abstract isTimeFormatIncludesMinutes(displayFormat: any): boolean;
+
+    /**
+     * Format option includes seconds info.
+     * @param displayFormat The format to use to display the date as a string.
+     * @returns If time format includes seconds info.
+     */
+    abstract isTimeFormatIncludesSeconds(displayFormat: any): boolean;
 
     /**
      * Compares two dates.

@@ -7,6 +7,8 @@ import {
     forwardRef,
     Inject,
     Input,
+    OnDestroy,
+    OnInit,
     Optional,
     Output,
     ViewChild,
@@ -14,12 +16,13 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { Placement } from '../popover/popover-position/popover-position';
 import { FormStates } from '../form/form-control/form-states';
 import { SpecialDayRule } from '../calendar/models/special-day-rule';
 import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
-import { CalendarService } from '../calendar/calendar.service';
 import { CalendarYearGrid } from '../calendar/models/calendar-year-grid';
 import { DateRange } from '../calendar/models/date-range';
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../datetime';
@@ -59,7 +62,7 @@ import { createMissingDateImplementationError } from './errors';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
+export class DatePickerComponent<D> implements OnInit, OnDestroy, ControlValueAccessor, Validator {
     /** @hidden The value of the input */
     inputFieldDate: string = null;
 
@@ -88,7 +91,7 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
-    public selectedRangeDate: DateRange<D> = { start: null, end: null };
+    selectedRangeDate: DateRange<D> = { start: null, end: null };
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
@@ -119,7 +122,7 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
-    public activeView: FdCalendarView = 'day';
+    activeView: FdCalendarView = 'day';
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
@@ -216,6 +219,9 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
     public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** @hidden */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
     onChange: any = (_: any) => {};
 
     /** @hidden */
@@ -262,6 +268,19 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
         }
     }
 
+    ngOnInit(): void {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this.formatInputDate(this.selectedDate);
+            this._changeDetectionRef.detectChanges();
+        });
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
+
     /**
      * Method that handle calendar active view change and throws event.
      */
@@ -306,11 +325,21 @@ export class DatePickerComponent<D> implements ControlValueAccessor, Validator {
      */
     public handleSingleDateChange(date: D): void {
         if (date) {
-            this.inputFieldDate = this._formatDate(date);
             this.selectedDate = date;
             this.selectedDateChange.emit(date);
             this.onChange(date);
+            this.formatInputDate(date);
             this.isInvalidDateInput = !this.isModelValid();
+        }
+    }
+
+    /**
+     * @hidden
+     * Method that is triggered date formatting in the date control
+     */
+    public formatInputDate(date: D): void {
+        if (date) {
+            this.inputFieldDate = this._formatDate(date);
         }
     }
 

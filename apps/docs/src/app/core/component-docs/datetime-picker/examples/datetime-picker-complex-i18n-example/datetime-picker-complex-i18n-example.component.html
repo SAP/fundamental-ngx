@@ -3,7 +3,7 @@
   <fd-select
     (valueChange)="setLocale($event)"
     placeholder="Select an option"
-    [(value)]="selectedLocale"
+    [(value)]="locale"
   >
     <fd-option
       *ngFor="let option of ['en-ca','fr','de','bg','pl']"
@@ -14,7 +14,5 @@
 
 <fd-datetime-picker
   [placeholder]="placeholder"
-  [meridian]="meridian"
-  [displaySeconds]="false"
   [(ngModel)]="date"
 ></fd-datetime-picker>

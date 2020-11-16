@@ -1,5 +1,7 @@
 import { Platform } from '@angular/cdk/platform';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
+import { LETTERS_UNICODE_RANGE } from '../utils/consts/unicode-letters.regex';
+
 import { DatetimeAdapter } from './datetime-adapter';
 
 export class FdDate {
@@ -96,6 +98,14 @@ export class FdDate {
     }
 }
 
+const AM_DAY_PERIOD_DEFAULT = 'AM';
+const PM_DAY_PERIOD_DEFAULT = 'PM';
+
+/**
+ * FdDatetimeAdapter implementation
+ *
+ */
+
 @Injectable()
 export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
@@ -103,6 +113,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
         super();
+
         super.setLocale(localeId);
 
         this._fixYearsRangeIssue = platform.TRIDENT || platform.EDGE;
@@ -182,18 +193,10 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     getWeekName(date: FdDate): string {
         const weekNumber = this.getWeekNumber(date);
-        // Intl does not provide functionality to localize ween number.
         return weekNumber.toLocaleString(this.locale);
     }
 
     getHourNames({ meridian, twoDigit }: { twoDigit: boolean; meridian: boolean }): string[] {
-        /**
-         * We can't use `new Intl.DateTimeFormat('en', {hour12: true})` approach
-         * since it appends AM/PM string as well.
-         * To retrieve hours strings we can using `Intl.DateTimeFormat.prototype.formatToParts()`
-         * but `formatToParts` is not working in IE11.
-         * In this case we simply localize a number
-         */
         return range(24, (hour) => {
             if (meridian) {
                 hour = hour === 0 || hour === 12 ? 12 : hour % 12;
@@ -203,15 +206,40 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
-        return range(60, (hour) => {
-            return hour.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+        return range(60, (minute) => {
+            return minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
         });
     }
 
     getSecondNames({ twoDigit }: { twoDigit: boolean }): string[] {
-        return range(60, (hour) => {
-            return hour.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+        return range(60, (second) => {
+            return second.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
         });
+    }
+
+    getDayPeriodNames(): [string, string] {
+        const DEFAULT_PERIODS: [string, string] = [AM_DAY_PERIOD_DEFAULT, PM_DAY_PERIOD_DEFAULT];
+
+        const formatter = new Intl.DateTimeFormat(this.locale, {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+        });
+
+        try {
+            const am = formatter.formatToParts(new Date(2020, 0, 1, 6)).find(({ type }) => type === 'dayPeriod').value;
+            const pm = formatter.formatToParts(new Date(2020, 0, 1, 16)).find(({ type }) => type === 'dayPeriod').value;
+
+            return am && pm ? [am, pm] : DEFAULT_PERIODS;
+        } catch (e) {
+            const dayPeriodRegexp = new RegExp(`(${LETTERS_UNICODE_RANGE}+\\.*)+`, 'g');
+            const amRegExpMatch = formatter.format(new Date(2020, 0, 1, 6)).match(dayPeriodRegexp);
+            const pmRegExpMatch = formatter.format(new Date(2020, 0, 1, 16)).match(dayPeriodRegexp);
+
+            return amRegExpMatch && pmRegExpMatch
+                ? [amRegExpMatch[0], pmRegExpMatch[0]]
+                : [AM_DAY_PERIOD_DEFAULT, PM_DAY_PERIOD_DEFAULT];
+        }
     }
 
     setHours(date: FdDate, hours: number): FdDate {
@@ -361,6 +389,27 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     toIso8601(fdDate: FdDate): string {
         return toIso8601(fdDate);
+    }
+
+    isTimeFormatIncludesDayPeriod(displayFormat: any): boolean {
+        if (typeof displayFormat?.hour12 === 'boolean') {
+            return displayFormat.hour12;
+        }
+        const formattedDateNoPeriodOption = this.format(this.createDate(2020), displayFormat);
+        const formattedDateWithPeriodOption = this.format(this.createDate(2020), { ...displayFormat, hour12: true });
+        return formattedDateWithPeriodOption === formattedDateNoPeriodOption;
+    }
+
+    isTimeFormatIncludesHours(displayFormat: any): boolean {
+        return typeof displayFormat?.hour === 'string';
+    }
+
+    isTimeFormatIncludesMinutes(displayFormat: any): boolean {
+        return typeof displayFormat?.minute === 'string';
+    }
+
+    isTimeFormatIncludesSeconds(displayFormat: any): boolean {
+        return typeof displayFormat?.second === 'string';
     }
 
     /**

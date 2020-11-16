@@ -6,7 +6,7 @@ import { PopoverModule } from '../popover/popover.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 
 import { TimePickerComponent } from './time-picker.component';
-import { TimeObject } from '../time/time-object';
+import { TimeObject } from '../time/models';
 import { ButtonModule } from '../button/button.module';
 import { TimeModule } from '../time/time.module';
 

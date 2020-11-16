@@ -81,25 +81,37 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     @Input()
     appendTo: ElementRef;
 
-    /** Whether the time component should be meridian (am/pm). */
-    @Input()
-    meridian: boolean;
-
     /** Whether the component is disabled. */
     @Input()
     disabled: boolean;
 
-    /** Whether the time component shows seconds. */
+    /**
+     * Whether the time component should be meridian (am/pm).
+     * Default value based on the current locale format option
+     * */
     @Input()
-    displaySeconds = true;
+    meridian: boolean;
 
-    /** Whether the time component shows minutes. */
+    /**
+     * Whether the time component shows seconds.
+     * Default value based on the current locale format option
+     * */
     @Input()
-    displayMinutes = true;
+    displaySeconds: boolean;
 
-    /** Whether the time component shows hours. */
+    /**
+     * Whether the time component shows minutes.
+     * Default value based on the current locale format option
+     * */
     @Input()
-    displayHours = true;
+    displayMinutes: boolean;
+
+    /**
+     * Whether the time component shows hours.
+     * Default value based on the current locale format option
+     * */
+    @Input()
+    displayHours: boolean;
 
     /** Whether to perform visual validation on the picker input. */
     @Input()
@@ -259,6 +271,18 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     tempDate: D;
 
     /** @hidden */
+    _meridian: boolean;
+
+    /** @hidden */
+    _displaySeconds: boolean;
+
+    /** @hidden */
+    _displayMinutes: boolean;
+
+    /** @hidden */
+    _displayHours: boolean;
+
+    /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
@@ -299,6 +323,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         if (changes.date) {
             this._setTempDateTime();
         }
+
+        if (['displayHours', 'displayMinutes', 'displaySeconds', 'meridian'].some((input) => input in changes)) {
+            this._calculateTimeOptions();
+        }
     }
 
     /** @hidden */
@@ -306,6 +334,12 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         if (this.date) {
             this._setTempDateTime();
         }
+
+        this._calculateTimeOptions();
+
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._setInput(this.date);
+        });
     }
 
     /** @hidden */
@@ -541,5 +575,38 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     private _setTempDateTime(): void {
         this.tempDate = this.date;
         this.tempTime = this.date;
+    }
+
+    /** @hidden */
+    private _calculateTimeOptions(): void {
+        const format = this._dateTimeFormats.display.dateTimeInput;
+
+        if (this.meridian == null) {
+            // default meridian option based on format option
+            this._meridian = this._dateTimeAdapter.isTimeFormatIncludesDayPeriod(format);
+        } else {
+            this._meridian = this.meridian;
+        }
+
+        if (this.displaySeconds == null) {
+            // default seconds option based on format option
+            this._displaySeconds = this._dateTimeAdapter.isTimeFormatIncludesSeconds(format);
+        } else {
+            this._displaySeconds = this.displaySeconds;
+        }
+
+        if (this.displayMinutes == null) {
+            // default minutes option based on format option
+            this._displayMinutes = this._dateTimeAdapter.isTimeFormatIncludesMinutes(format);
+        } else {
+            this._displayMinutes = this.displayMinutes;
+        }
+
+        if (this.displayHours == null) {
+            // default hours option based on format option
+            this._displayHours = this._dateTimeAdapter.isTimeFormatIncludesHours(format);
+        } else {
+            this._displayHours = this.displayHours;
+        }
     }
 }

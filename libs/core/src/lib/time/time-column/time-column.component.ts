@@ -25,7 +25,7 @@ import { KeyUtil } from '../../utils/functions';
 import { CarouselConfig, PanEndOutput } from '../../utils/services/carousel.service';
 import { TimeColumnConfig } from './time-column-config';
 
-import { SelectableViewItem } from '../time-object';
+import { SelectableViewItem } from '../models';
 
 let timeColumnUniqueId = 0;
 

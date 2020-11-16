@@ -15,7 +15,6 @@ import { DatetimePickerHeaderComponent } from './datetime-picker-header/datetime
 import { DatetimePickerDocsComponent } from './datetime-picker-docs.component';
 import { DatetimePickerComplexI18nExampleComponent } from './examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
 import { DatetimeExampleComponent } from './examples/datetime-example/datetime-example.component';
-import { DatetimeNonMeridianExampleComponent } from './examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
 import { DatetimeProgramExampleComponent } from './examples/datetime-program-example/datetime-program-example.component';
 import { DatetimeFormatExampleComponent } from './examples/datetime-format-example/datetime-format-example.component';
 import { DatetimeFormExampleComponent } from './examples/datetime-form-example/datetime-form-example.component';
@@ -54,7 +53,6 @@ const routes: Routes = [
         DatetimeFormatExampleComponent,
         DatetimeProgramExampleComponent,
         DatetimeDisabledExampleComponent,
-        DatetimeNonMeridianExampleComponent,
         DatetimePickerAllowNullExampleComponent,
         DatetimePickerComplexI18nExampleComponent
     ]

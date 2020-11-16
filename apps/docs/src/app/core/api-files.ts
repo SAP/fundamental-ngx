@@ -40,7 +40,11 @@ export const API_FILES = {
         'CardKpiAnalyticsLabelDirective',
         'CardKpiAnalyticsContentDirective'
     ],
-    dynamicSideContent: ['DynamicSideContentComponent', 'DynamicSideContentSideComponent', 'DynamicSideContentMainComponent'],
+    dynamicSideContent: [
+        'DynamicSideContentComponent',
+        'DynamicSideContentSideComponent',
+        'DynamicSideContentMainComponent'
+    ],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
     button: ['ButtonComponent'],
@@ -271,16 +275,8 @@ export const API_FILES = {
         'NumericContentScaleDirective',
         'NumericContentScaleTextDirective'
     ],
-    time: [
-        'TimeComponent',
-        'TimeI18nLabels',
-        'TimeFormatParser',
-        'TimeFormatParserDefault',
-        'TimeObject',
-        'TimeColumnComponent'
-    ],
-    timePicker: ['TimePickerComponent', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
-    title: ['TitleComponent'],
+    time: ['TimeComponent', 'TimeI18nLabels', 'TimeColumnComponent'],
+    timePicker: ['TimePickerComponent'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],

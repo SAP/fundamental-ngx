@@ -8,9 +8,12 @@ import { FD_DATETIME_FORMATS } from './fd-date-formats';
 
 @NgModule({
     imports: [PlatformModule],
-    providers: [
-        { provide: DatetimeAdapter, useClass: FdDatetimeAdapter },
-        { provide: DATE_TIME_FORMATS, useValue: FD_DATETIME_FORMATS }
-    ]
+    providers: [{ provide: DatetimeAdapter, useClass: FdDatetimeAdapter }]
+})
+export class FdDatetimeAdapterModule {}
+
+@NgModule({
+    imports: [FdDatetimeAdapterModule],
+    providers: [{ provide: DATE_TIME_FORMATS, useValue: FD_DATETIME_FORMATS }]
 })
 export class FdDatetimeModule {}
