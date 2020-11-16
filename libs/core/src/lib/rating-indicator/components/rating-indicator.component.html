@@ -20,31 +20,32 @@
     </ng-container>
 </div>
 <!-- Popover if displayAllRatings is true and we have ratings object -->
+<span
+    [fdPopoverTrigger]="allRatingContent"
+    *ngIf="displayAllRatings && _ratingItems?.length; else dynamicText"
+    class="fd-rating-indicator__dynamic-text"
+>
+    (<span area-label="Total raiting" fd-link>{{ totalRatings }}</span>)
+</span>
 <fd-popover
+    #allRatingContent
     [triggers]="['mouseenter', 'mouseleave']"
     [noArrow]="false"
     placement="top"
     additionalBodyClass="fd-rating-indicator__popover"
-    *ngIf="displayAllRatings && _ratingItems?.length; else dynamicText">
-    <fd-popover-control>
-        <span class="fd-rating-indicator__dynamic-text">
-            (<span area-label="Total raiting" fd-link>{{ totalRatings }}</span>)
-        </span>
-    </fd-popover-control>
-    <fd-popover-body>
-        <div class="rate-sum-row" *ngFor="let rating of _ratingItems; trackBy: trackByFn">
-            <div class="fd-rating-indicator__container rates">
-                <ng-container *ngFor="let rate of _rates; trackBy: trackByFn">
-                    <span [class.fd-rating-indicator__input-checked]="rate.value === rating.rate" class="fd-rating-indicator__input"></span>
-                    <label class="fd-rating-indicator__label">
-                        <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
-                        <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
-                    </label>
-                </ng-container>
-            </div>
-            ({{ rating.votes }})
+>
+    <div class="rate-sum-row" [ngClass]="sizeClass" *ngFor="let rating of _ratingItems; trackBy: trackByFn">
+        <div class="fd-rating-indicator__container rates">
+            <ng-container *ngFor="let rate of _rates; trackBy: trackByFn">
+                <span [class.fd-rating-indicator__input-checked]="rate.value === rating.rate" class="fd-rating-indicator__input"></span>
+                <label class="fd-rating-indicator__label">
+                    <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
+                    <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
+                </label>
+            </ng-container>
         </div>
-    </fd-popover-body>
+        ({{ rating.votes }})
+    </div>
 </fd-popover>
 
 <ng-template #dynamicText>

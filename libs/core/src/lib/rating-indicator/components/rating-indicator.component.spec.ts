@@ -5,7 +5,7 @@ import { RatingIndicatorComponent } from './rating-indicator.component';
 
 const prefix = 'fd-rating-indicator';
 
-describe('RatingIndicatorComponent', () => {
+fdescribe('RatingIndicatorComponent', () => {
   let elementRef: ElementRef;
   let component: RatingIndicatorComponent;
   let fixture: ComponentFixture<RatingIndicatorComponent>;
@@ -69,12 +69,12 @@ describe('RatingIndicatorComponent', () => {
     expect(component._rates.length).toEqual(4 * 2);
   });
 
-  it(`should have an indicator capacity with value = 111 (wrong capacity)`, () => {
-    component.indicatorCapacity = 111;
+  it(`should have an indicator capacity with value = 5`, () => {
+    component.indicatorCapacity = 0;
     component.allowHalves = false;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component._rates.length).toEqual(7);
+    expect(component._rates.length).toEqual(5);
   });
 
   it(`should have value after click on rate icon`, () => {

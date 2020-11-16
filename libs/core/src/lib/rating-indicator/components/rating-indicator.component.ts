@@ -19,7 +19,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
 import {
     INDICATOR_DEFAULT_CAPACITY,
-    INDICATOR_CAPACITY_RANGE,
     INDICATOR_PREFIX,
     INDICATOR_CLASSES,
     RatingIndicatorSize,
@@ -94,12 +93,12 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     displayMode = false;
 
     /**
-     * Number of stars/icons/images to display. Max value is 7 and min value is 3
+     * Number of rates to display
      */
     @Input()
     set indicatorCapacity(value: number) {
         const val = coerceNumberProperty(value, INDICATOR_DEFAULT_CAPACITY);
-        this._indicatorCapacity = Math.max(INDICATOR_CAPACITY_RANGE.min, Math.min(INDICATOR_CAPACITY_RANGE.max, val));
+        this._indicatorCapacity = val < 1 ? INDICATOR_DEFAULT_CAPACITY : val;
     }
 
     /**
@@ -168,6 +167,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     @Output()
     ratingChanged = new EventEmitter<number>();
 
+    sizeClass = this._getSizeClass(this.size);
     /** @hidden */
     _rates: { id: string; value: number }[] = [];
     /** @hidden */
@@ -287,10 +287,11 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        const sizeClass = this._getSizeClass(this.size);
+        this.sizeClass = this._getSizeClass(this.size);
+
         return [
             INDICATOR_PREFIX,
-            sizeClass ? `${INDICATOR_PREFIX}--${sizeClass}` : '',
+            this.sizeClass,
             this.allowHalves ? INDICATOR_CLASSES.halves : '',
             !!this.ratedIcon && !!this.unratedIcon ? INDICATOR_CLASSES.icon : '',
             this._hideDynamicText || !this._value ? INDICATOR_CLASSES.hideDynamicText : '',
@@ -309,7 +310,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
         const ratings = Object.entries(this.ratings)
             .filter(([rate, vote]) => {
                 const _rate = +rate;
-                return !isNaN(_rate) && !isNaN(+vote) && _rate > 0 && _rate <= INDICATOR_CAPACITY_RANGE.max;
+                return !isNaN(_rate) && !isNaN(+vote) && _rate > 0;
             })
             .map(([rate, votes ]) => ({ rate: +rate, votes: votes}));
         if (ratings.length === 0) {
@@ -374,6 +375,6 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
      * get rating icons array with value and unic id
      */
     private _getSizeClass(size: RatingIndicatorSize): string {
-        return size in RatingIndicatorSizeEnum ? size : 'md';
+        return `${INDICATOR_PREFIX}--${size in RatingIndicatorSizeEnum ? size : 'md'}`;
     }
 }

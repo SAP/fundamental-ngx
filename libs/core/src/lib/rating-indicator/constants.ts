@@ -6,10 +6,6 @@ export const INDICATOR_CLASSES = {
     hideDynamicText: `${INDICATOR_PREFIX}--hide-dynamic-text`
 };
 export const INDICATOR_DEFAULT_CAPACITY = 5;
-export const INDICATOR_CAPACITY_RANGE = {
-    min: 3,
-    max: 7
-};
 
 export type RatingIndicatorSize = 'xs' | 'sm' | 'md' | 'lg' | 'cozy' | 'compact' | 'condensed';
 export enum RatingIndicatorSizeEnum {
