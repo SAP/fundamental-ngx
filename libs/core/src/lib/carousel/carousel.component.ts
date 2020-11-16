@@ -286,14 +286,14 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @HostListener('keydown.arrowright', ['$event'])
     public onKeydownArrowRight(event: KeyboardEvent): void {
         event.preventDefault();
-        this[this.dir === 'ltr' ? 'next' : 'previous']();
+        this.next();
     }
 
     /** @hidden */
     @HostListener('keydown.arrowleft', ['$event'])
     public onKeydownArrowLeft(event: KeyboardEvent): void {
         event.preventDefault();
-        this[this.dir === 'ltr' ? 'previous' : 'next']();
+        this.previous();
     }
 
     /** Transitions to the previous slide in the carousel. */
@@ -486,13 +486,15 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
+        const refreshDirection = () => {
+            this.dir = this._rtlService?.rtl.getValue() ? 'rtl' : 'ltr';
             if (this._carouselService.items) {
                 this._carouselService.goToItem(this._carouselService.active, false, this.dir);
             }
             this._changeDetectorRef.detectChanges();
-        });
+        }
+        refreshDirection();
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe(() => refreshDirection());
     }
 
     /** On Swiping of slide, manage page indicator */

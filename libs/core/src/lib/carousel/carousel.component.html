@@ -29,7 +29,7 @@
 </div>
 
 <ng-template #pageIndicatorContainer>
-    <div class="fd-carousel__page-indicator-container">
+    <div class="fd-carousel__page-indicator-container" [attr.dir]="'ltr'">
         <ng-container *ngIf="navigatorInPageIndicator">
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
@@ -53,7 +53,7 @@
         </div>
     </ng-container>
     <ng-container *ngIf="!numericIndicator">
-        <ol class="fd-carousel__page-indicators">
+        <ol class="fd-carousel__page-indicators" [attr.dir]="dir">
             <ng-container *ngIf="pageIndicator">
                 <ng-container *ngFor="let item of pageIndicatorsCountArray; let i=index">
                     <li data-slide-to="i+1" class="fd-carousel__page-indicator"
