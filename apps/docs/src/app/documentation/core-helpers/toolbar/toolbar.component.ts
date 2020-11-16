@@ -36,28 +36,28 @@ export class ToolbarDocsComponent implements OnInit {
         {
             name: 'Core Docs',
             callback: () => {
-                this.routerService.navigate(['core/home']);
+                this._routerService.navigate(['core/home']);
             }
         },
         {
             name: 'Platform Docs',
             callback: () => {
-                this.routerService.navigate(['platform/home']);
+                this._routerService.navigate(['platform/home']);
             }
         }
     ];
 
-    themes = this.themesService.themes;
+    themes = this._themesService.themes;
 
     constructor(
-        private routerService: Router,
-        private themesService: ThemesService,
-        private docsThemeService: DocsThemeService,
-        @Inject('CURRENT_LIB') private currentLib: Libraries,
+        private _routerService: Router,
+        private _themesService: ThemesService,
+        private _docsThemeService: DocsThemeService,
+        @Inject('CURRENT_LIB') private _currentLib: Libraries,
     ) {
-        this.library = routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
+        this.library = _routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
 
-        this.docsThemeService.onThemeChange.subscribe(theme => {
+        this._docsThemeService.onThemeChange.subscribe(theme => {
             this.cssUrl = theme.themeUrl;
             this.customCssUrl = theme.customThemeUrl;
         })
@@ -82,8 +82,8 @@ export class ToolbarDocsComponent implements OnInit {
     }
 
     selectTheme(selectedTheme: string): void {
-        this.cssUrl = this.themesService.setTheme(selectedTheme);
-        this.customCssUrl = this.themesService.setCustomTheme(selectedTheme);
+        this.cssUrl = this._themesService.setTheme(selectedTheme);
+        this.customCssUrl = this._themesService.setCustomTheme(selectedTheme);
     }
 
     selectVersion(version: any): void {

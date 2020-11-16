@@ -9,6 +9,11 @@ export interface ThemeServiceOutput {
     customThemeUrl: SafeResourceUrl;
 }
 
+export interface Theme {
+    id: string,
+    name: string
+}
+
 
 @Injectable()
 /**
@@ -16,7 +21,8 @@ export interface ThemeServiceOutput {
  */
 export class ThemesService {
 
-    themes = [
+    /** Available themes */
+    themes: Theme[] = [
         {
             id: 'sap_fiori_3',
             name: 'Fiori 3'
@@ -39,7 +45,7 @@ export class ThemesService {
         }
     ];
 
-    /** @hidden */
+    /** Subject triggered, when the theming is changed by URL parameter */
     readonly onThemeQueryParamChange: Subject<ThemeServiceOutput> = new Subject<ThemeServiceOutput>();
 
     /** @hidden **/
@@ -47,31 +53,33 @@ export class ThemesService {
 
     constructor(
         @Optional() private _activatedRoute: ActivatedRoute,
-        private sanitizer: DomSanitizer,
+        private _sanitizer: DomSanitizer,
     ) {}
 
 
-    /** Set theme according to additional URL parameter **/
-    setThemeByRoute(themeParamName: string): void {
+    /**
+     * Set theme according to additional URL parameter.
+     * This parameter can be changed in function argument.
+     * By default it's `theme`.
+     **/
+    setThemeByRoute(themeParamName?: string): void {
         const paramName = themeParamName || 'theme'
         this._activatedRoute.queryParams
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(param => {
-                this.onThemeQueryParamChange.next({
-                    themeUrl: this.setTheme(param[paramName]),
-                    customThemeUrl: this.setCustomTheme(param[paramName])
-                })
+            .subscribe(param => this.onThemeQueryParamChange.next({
+                themeUrl: this.setTheme(param[paramName]),
+                customThemeUrl: this.setCustomTheme(param[paramName])
             })
-        ;
+        );
     };
 
-    /** Assign css file corresponding to chosen theme **/
+    /** Assign css file corresponding to chosen theme from @sap-theming **/
     setTheme(theme: string): SafeResourceUrl {
-        return this.sanitizer.bypassSecurityTrustResourceUrl('assets/theming-base/' + theme + '/css_variables.css');
+        return this._sanitizer.bypassSecurityTrustResourceUrl('assets/theming-base/' + theme + '/css_variables.css');
     }
 
-    /** Assign css file corresponding to chosen theme **/
+    /** Assign css file corresponding to chosen theme fundamental-styles **/
     setCustomTheme(theme: string): SafeResourceUrl {
-        return this.sanitizer.bypassSecurityTrustResourceUrl('assets/fundamental-styles-theming/' + theme + '.css');
+        return this._sanitizer.bypassSecurityTrustResourceUrl('assets/fundamental-styles-theming/' + theme + '.css');
     }
 }
