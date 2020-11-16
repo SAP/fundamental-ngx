@@ -4,6 +4,7 @@ export * from './checkbox-group/checkbox-group.module';
 export * from './checkbox-group/checkbox-group.component';
 export * from './combobox';
 export * from './form-control';
+export * from './base.input';
 export * from './form-options';
 export * from './form-field';
 export * from './form-group';

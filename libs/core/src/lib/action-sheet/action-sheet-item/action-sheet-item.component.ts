@@ -12,7 +12,9 @@ import {
 import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
 import { ButtonComponent } from '../../button/button.component';
 
-
+export interface ActionSheetClickEvent {
+    shouldClose: boolean;
+}
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -69,11 +71,11 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     keyDown = new EventEmitter<KeyboardEvent>();
 
     /** @hidden **/
-    clicked = new EventEmitter<boolean>();
+    clicked = new EventEmitter<ActionSheetClickEvent>();
 
     constructor(
         private _elementRef: ElementRef
-    ) { }
+    ) {}
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
@@ -84,11 +86,9 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
-        this.clicked.emit(!this.isCloseButton);
-
-        if (!this.isCloseButton) {
-            event.stopPropagation();
-        }
+        this.clicked.emit({
+            shouldClose: this.isCloseButton
+        });
     }
 
     /** @hidden Support for KeyboardSupportItemInterface */

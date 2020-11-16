@@ -25,28 +25,32 @@
     display: block;
 }
 
-.fd-multi-input-popover-custom {
-    display: block;
-    width: 100%;
+.fd-multi-input-popover-custom.fd-popover-custom {
+	max-width: 100%;
+	display: block;
+
     .fd-tokenizer {
         height: 100%;
     }
 }
 
 .fd-multi-input-menu-overflow {
-    max-width: 100%;
+    max-width: 37.5rem;
     overflow: auto;
-    
-    // TODO: Remove after adjusting in styles
-    .fd-multi-input-list-item-custom {
-        height: 2.5rem;
 
-        .fd-checkbox__label {
-            padding-top: 0.5625rem;
-            padding-bottom: 0.5625rem;
+    // TODO: Remove after adjusting in styles
+    &:not(.fd-list--compact) {
+        .fd-list__item {
+            height: 2.5rem;
+
+            .fd-checkbox__label {
+                padding-top: 0.5625rem;
+                padding-bottom: 0.5625rem;
+            }
         }
     }
 }
+
 .fd-input {
     &.fd-multi-input-tokenizer-input {
         margin-top: 0;
