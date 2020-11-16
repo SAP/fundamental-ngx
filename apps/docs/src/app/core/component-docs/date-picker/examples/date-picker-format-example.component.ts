@@ -32,7 +32,7 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
     template: `
         <fd-date-picker [(ngModel)]="date" placeholder="dd-mm-yyyy"></fd-date-picker>
         <br />
-        <div>Selected Date: {{ date }}</div>
+        <div>Selected Date: {{ date?.toDateString() }}</div>
         <br />
         <fd-date-picker placeholder="mm/dd/yy to mm/dd/yy" type="range" [(ngModel)]="selectedRange"></fd-date-picker>
         <br />

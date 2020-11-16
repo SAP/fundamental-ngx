@@ -66,8 +66,9 @@
     Formatting
 </fd-docs-section-title>
 <description>
-    Providing a custom format for the dates is possible through providing a service. Note that when providing a custom
-    format, the <code>[placeholder]</code> input should be set to match the new format as well.
+    Providing a custom format for the dates is possible through providing <code>DATE_TIME_FORMATS</code> config. Note
+    that when providing a custom format, the <code>[placeholder]</code> input should be set to match the new format as
+    well.
 </description>
 <component-example>
     <fd-date-picker-format-example></fd-date-picker-format-example>
@@ -182,7 +183,7 @@
 </component-example>
 <code-example [exampleFiles]="datePickerDisabled"></code-example>
 
-<!-- Moment example example is commented due to lack of DatetimeAdapter<Moment> implementation  -->
+<!-- Moment example is commented due to the lack of DatetimeAdapter<Moment> implementation  -->
 <!-- <separator></separator>
 
 <fd-docs-section-title

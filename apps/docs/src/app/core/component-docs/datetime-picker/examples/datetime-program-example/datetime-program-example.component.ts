@@ -9,6 +9,6 @@ export class DatetimeProgramExampleComponent {
     date = FdDate.getNow();
 
     changeDay(): void {
-        this.date = new FdDate(2018, 10, 10, this.date.hour, this.date.minute, this.date.second);
+        this.date = new FdDate(2018, 10, 5, 15, 30);
     }
 }

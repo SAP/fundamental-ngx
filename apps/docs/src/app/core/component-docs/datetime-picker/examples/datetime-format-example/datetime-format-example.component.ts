@@ -22,7 +22,8 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
             month: 'short',
             day: 'numeric',
             hour: '2-digit',
-            minute: '2-digit'
+            minute: '2-digit',
+            hour12: false
         }
     }
 };

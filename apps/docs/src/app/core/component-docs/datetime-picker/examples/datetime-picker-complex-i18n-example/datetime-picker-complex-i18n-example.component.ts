@@ -4,7 +4,7 @@ import { DatetimePickerComponent, FdDate, DatetimeAdapter, FdDatetimeAdapter } f
 const placeholders = new Map([
     ['en-ca', 'mm/dd/yyyy, hh:mm a'],
     ['fr', 'dd/mm/yyyy  hh:mm'],
-    ['bg', 'дд/мм/гг чч:мм'],
+    ['bg', 'дд.мм.гг чч:мм'],
     ['de', 'dd.mm.yy, hh:mm'],
     ['pl', 'dd.mm.yyyy, hh:mm']
 ]);

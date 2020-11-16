@@ -64,7 +64,7 @@ import { createMissingDateImplementationError } from './errors';
 export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges, ControlValueAccessor, Validator {
     /** Placeholder for the inner input element. */
     @Input()
-    placeholder: string; // = 'mm/dd/yyyy, hh:mm:ss am';
+    placeholder = '';
 
     /** Whether the component should be in compact mode. */
     @Input()
@@ -87,28 +87,28 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
     /**
      * Whether the time component should be meridian (am/pm).
-     * Default value based on the current locale format option
+     * Default value is based on the current locale format option
      * */
     @Input()
     meridian: boolean;
 
     /**
      * Whether the time component shows seconds.
-     * Default value based on the current locale format option
+     * Default value is based on the current locale format option
      * */
     @Input()
     displaySeconds: boolean;
 
     /**
      * Whether the time component shows minutes.
-     * Default value based on the current locale format option
+     * Default value is based on the current locale format option
      * */
     @Input()
     displayMinutes: boolean;
 
     /**
      * Whether the time component shows hours.
-     * Default value based on the current locale format option
+     * Default value is based on the current locale format option
      * */
     @Input()
     displayHours: boolean;
@@ -339,6 +339,8 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._setInput(this.date);
+            this._calculateTimeOptions();
+            this._changeDetRef.detectChanges();
         });
     }
 

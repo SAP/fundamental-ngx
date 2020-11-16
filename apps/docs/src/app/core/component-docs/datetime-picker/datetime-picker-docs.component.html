@@ -13,7 +13,8 @@
     The value for the input only changes the model on blur or an enter/return keystroke.
 </description>
 <description>
-    Some default options such as <code>[displaySeconds]</code>, <code>[displayMinutes]</code>,
+    Some default options that belong to the <code>time</code> component such as <code>[displaySeconds]</code>,
+    <code>[displayMinutes]</code>,
     <code>[displayHours]</code> and <code>[meridian]</code> are based on the
     <code>DateTimeFormats.display.dateTimeInput</code> options.
     <br />
@@ -21,7 +22,8 @@
     options will be the next:
     <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="true"</code>, <code>[displayHours]="true"</code> and
     <code>[meridian]="true"</code>.
-    The listed above options are applied to the Time component (used internally) only and can be defined explicitly
+    The listed above options are applied to the <code>time</code> component only (used internally) and can be defined
+    explicitly
     if needed.
 </description>
 <component-example>
@@ -70,8 +72,8 @@
 </fd-docs-section-title>
 <description>
     Providing a custom format for the dates is possible through providing <code>DATE_TIME_FORMATS</code> config. Note
-    that when providing a custom
-    format, the <code>[placeholder]</code> input should be set to match the new format as well.
+    that when providing a custom format, the <code>[placeholder]</code> input should be set to match the new format as
+    well.
 </description>
 <component-example>
     <fd-datetime-format-example></fd-datetime-format-example>

@@ -15,10 +15,10 @@ import { FdDate } from '@fundamental-ngx/core';
             Valid: {{ customForm.controls.dates.valid }}<br />
 
             Range Start Date:
-            {{ customForm.controls.dates.value.start || 'null' }}
+            {{ customForm.controls.dates.value?.start?.toDateString() || 'null' }}
             <br />
             Range End Date:
-            {{ customForm.controls.dates.value.end || 'null' }}
+            {{ customForm.controls.dates.value?.end?.toDateString() || 'null' }}
         </div>
     `
 })
