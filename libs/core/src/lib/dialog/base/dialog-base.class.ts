@@ -32,28 +32,33 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
+    abstract get _ref(): DialogRefBase;
+
+    /** @hidden */
+    abstract get _config(): DialogConfigBase<any>;
+
     /** @hidden Listen and close dialog on Escape key */
     @HostListener('keyup', ['$event'])
     closeDialogEsc(event: KeyboardEvent): void {
-        if (this._dialogConfigBase.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE)) {
-            this._dialogRefBase.dismiss('escape');
+        if (this._config.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE)) {
+            this._ref.dismiss('escape');
         }
     }
 
     /** @hidden Listen and close dialog on Backdrop click */
     @HostListener('mousedown', ['$event.target'])
     closeDialog(target: ElementRef): void {
-        if (this._dialogConfigBase.backdropClickCloseable && target === this._elementRef.nativeElement) {
-            this._dialogRefBase.dismiss('backdrop');
+        if (this._config.backdropClickCloseable && target === this._elementRef.nativeElement) {
+            this._ref.dismiss('backdrop');
         }
     }
+
 
     constructor(
         protected _router: Router,
         protected _elementRef: ElementRef,
         protected _changeDetectorRef: ChangeDetectorRef,
-        private _dialogRefBase: DialogRefBase,
-        private _dialogConfigBase: DialogConfigBase<any>
     ) {}
 
     /** @hidden */
@@ -67,7 +72,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
         this._setPosition();
         this._setWidthHeight();
         this._listenOnWindowResize();
-        this._dialogRefBase.loaded();
+        this._ref.loaded();
     }
 
     /** @hidden */
@@ -79,7 +84,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden Determine dialog padding size based on dialogs window width */
     adjustResponsivePadding(): void {
-        if (this._dialogConfigBase.responsivePadding) {
+        if (this._config.responsivePadding) {
             const dialogWidth = this.dialogWindow.nativeElement.getBoundingClientRect().width;
             this.dialogPaddingSize = dialogWidthToSize(dialogWidth);
             this._changeDetectorRef.detectChanges();
@@ -91,18 +96,18 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
         if (this._router) {
             this._subscriptions.add(
                 this._router.events.pipe(
-                    filter(event => event instanceof NavigationStart && this._dialogConfigBase.closeOnNavigation)
-                ).subscribe(event => this._dialogRefBase.dismiss())
+                    filter(event => event instanceof NavigationStart && this._config.closeOnNavigation)
+                ).subscribe(event => this._ref.dismiss())
             );
         }
     }
 
     /** @hidden Trap focus inside dialog window */
     private _trapFocus(): void {
-        if (this._dialogConfigBase.focusTrapped) {
+        if (this._config.focusTrapped) {
             try {
                 this._focusTrap = createFocusTrap(this.dialogWindow.nativeElement, {
-                    clickOutsideDeactivates: this._dialogConfigBase.backdropClickCloseable && this._dialogConfigBase.hasBackdrop,
+                    clickOutsideDeactivates: this._config.backdropClickCloseable && this._config.hasBackdrop,
                     escapeDeactivates: false,
                     allowOutsideClick: (event: MouseEvent) => true
                 });
@@ -122,11 +127,11 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden Set dialog window position */
     private _setPosition(): void {
-        if (this._dialogConfigBase.position) {
-            this.dialogWindow.nativeElement.style.top = this._dialogConfigBase.position.top;
-            this.dialogWindow.nativeElement.style.bottom = this._dialogConfigBase.position.bottom;
-            this.dialogWindow.nativeElement.style.left = this._dialogConfigBase.position.left;
-            this.dialogWindow.nativeElement.style.right = this._dialogConfigBase.position.right;
+        if (this._config.position) {
+            this.dialogWindow.nativeElement.style.top = this._config.position.top;
+            this.dialogWindow.nativeElement.style.bottom = this._config.position.bottom;
+            this.dialogWindow.nativeElement.style.left = this._config.position.left;
+            this.dialogWindow.nativeElement.style.right = this._config.position.right;
         } else {
             this.dialogWindow.nativeElement.style.position = 'relative';
         }
@@ -134,17 +139,17 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden Set dialog window width and height */
     private _setWidthHeight(): void {
-        this.dialogWindow.nativeElement.style.width = this._dialogConfigBase.width;
-        this.dialogWindow.nativeElement.style.height = this._dialogConfigBase.height;
-        this.dialogWindow.nativeElement.style.minWidth = this._dialogConfigBase.minWidth;
-        this.dialogWindow.nativeElement.style.minHeight = this._dialogConfigBase.minHeight;
-        this.dialogWindow.nativeElement.style.maxWidth = this._dialogConfigBase.maxWidth;
-        this.dialogWindow.nativeElement.style.maxHeight = this._dialogConfigBase.maxHeight;
+        this.dialogWindow.nativeElement.style.width = this._config.width;
+        this.dialogWindow.nativeElement.style.height = this._config.height;
+        this.dialogWindow.nativeElement.style.minWidth = this._config.minWidth;
+        this.dialogWindow.nativeElement.style.minHeight = this._config.minHeight;
+        this.dialogWindow.nativeElement.style.maxWidth = this._config.maxWidth;
+        this.dialogWindow.nativeElement.style.maxHeight = this._config.maxHeight;
     }
 
     /** @hidden Listen on window resize and adjust padding */
     private _listenOnWindowResize(): void {
-        if (this._dialogConfigBase.responsivePadding) {
+        if (this._config.responsivePadding) {
             this._subscriptions.add(
                 fromEvent(window, 'resize')
                     .pipe(
