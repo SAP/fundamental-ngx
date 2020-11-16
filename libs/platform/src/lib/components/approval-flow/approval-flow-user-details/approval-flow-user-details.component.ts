@@ -17,6 +17,7 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     _isMultipleMode = false;
 
     _dataSource: ListDataSource<User>;
+    _selectedItems: any[] = [];
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
     }
@@ -28,10 +29,6 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
         if (this._isMultipleMode) {
             this._dataSource = new ListDataSource<User>(new ListDataProvider(this.dialogRef.data.node?.approvers));
         }
-    }
-
-    sendReminder(): void {
-        this.onSendReminder.emit();
     }
 
 }

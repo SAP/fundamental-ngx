@@ -4,6 +4,8 @@ import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User, UserDataSource
 import { DialogService, MessageToastService } from '@fundamental-ngx/core';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 
+type ApprovalGraphNode = ApprovalNode | { blank: true };
+
 @Component({
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',
@@ -23,7 +25,7 @@ export class ApprovalFlowComponent implements OnInit {
     @Input() watcherDataSource: UserDataSource;
 
     _approvalProcess: ApprovalProcess;
-    _nodeTree: ApprovalNode[][];
+    _nodeTree: ApprovalGraphNode[][];
 
     constructor(private _dialogService: DialogService, private _messageToastService: MessageToastService) {
     }
@@ -52,7 +54,7 @@ export class ApprovalFlowComponent implements OnInit {
         dialogRef.afterClosed.subscribe((result) => {
             console.log(result);
             if (Array.isArray(result)) {
-                this.sendReminders(result);
+                this.sendReminders(result, node);
             }
         });
     }
@@ -69,7 +71,8 @@ export class ApprovalFlowComponent implements OnInit {
 
     }
 
-    sendReminders(targets: User[]): void {
+    sendReminders(targets: User[], node: ApprovalNode): void {
+        this.dataSource.sendReminders(targets, node);
         const content = `Reminder has been sent to ${targets.length === 1 ? targets[0].name : targets.length + ' users'}`;
         this._messageToastService.open(content, {
             duration: 5000
@@ -100,14 +103,37 @@ function buildNodeTree(nodes: ApprovalNode[]): ApprovalNode[][] {
     let index = 1;
     let foundLastStep = false;
     do {
-        const dependentNodes = findDependentNodes(tree[index - 1], nodes);
+        // const dependentNodes = findDependentNodes(tree[index - 1], nodes);
+        const dependentNodes: ApprovalNode[] = [];
+        tree[index - 1].forEach(node => {
+            const _dependentNodes = findDependentNodes([node], nodes);
+            // dependentNodes.forEach(dependentNode => dependentNode.parent = node)
+            dependentNodes.push(..._dependentNodes);
+        });
         foundLastStep = dependentNodes.length === 0;
         if (foundLastStep) {
             break;
         }
 
-        tree[index] = dependentNodes;
-        index++;
+        const nodesWithoutTarget = dependentNodes.filter(node => !node.targets.length);
+        const nodesWithTarget = dependentNodes.filter(node => node.targets.length);
+
+        const isMixed = dependentNodes.length > 1 && nodesWithoutTarget.length && nodesWithoutTarget.length !== dependentNodes.length;
+        if (isMixed) {
+            console.log('found mixed tree', dependentNodes);
+            const nodesWithBlankSpaces: ApprovalGraphNode[] = [...dependentNodes];
+            nodesWithBlankSpaces.forEach((node, i) => {
+                if (nodesWithTarget.includes(node as ApprovalNode)) {
+                    nodesWithBlankSpaces[i] = { blank: true };
+                }
+            });
+            tree[index] = nodesWithBlankSpaces as ApprovalNode[];
+            tree[index + 1] = nodesWithTarget;
+            index += 2;
+        } else {
+            tree[index] = dependentNodes;
+            index++;
+        }
     } while (!foundLastStep);
 
     return tree;

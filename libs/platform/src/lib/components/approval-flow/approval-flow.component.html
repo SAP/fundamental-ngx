@@ -13,6 +13,8 @@
 
 <div class="approval-flow-tree">
     <div class="approval-flow-section" *ngFor="let branch of _nodeTree">
-        <fdp-approval-flow-node *ngFor="let node of branch" [node]="node" (onNodeClick)="onNodeClick(node)"></fdp-approval-flow-node>
+        <ng-container *ngFor="let node of branch">
+            <fdp-approval-flow-node [node]="node" [blank]="node.blank" (onNodeClick)="onNodeClick(node)"></fdp-approval-flow-node>
+        </ng-container>
     </div>
 </div>

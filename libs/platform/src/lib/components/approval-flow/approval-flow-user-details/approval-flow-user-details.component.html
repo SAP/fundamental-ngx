@@ -27,8 +27,10 @@
             <div>Address <br> 481 West Street, Anytown OH, 83749, USA</div>
         </ng-container>
         <ng-container *ngIf="_isMultipleMode">
-            <fdp-list selection="true" [dataSource]="_dataSource" selectionMode="multi"
-                       [hasByLine]="true">
+            <fdp-list [selection]="true" [dataSource]="_dataSource" selectionMode="multi"
+                      [(ngModel)]="_selectedItems"
+                      (selectedItemChange)="_selectedItems = $event.selectedItems"
+                      [hasByLine]="true">
                 <fdp-standard-list-item *fdpItemDef="let user" [avatarSrc]="user.imgUrl"
                                         [avatarTitle]="user.name"
                                         [description]="user.description"
@@ -46,7 +48,7 @@
                 fdType="emphasized"
                 [label]="'Send reminder' + (dialogRef.data.node.approvers?.length > 1 ? 's' : '')"
                 [compact]="true"
-                (click)="dialogRef.close(dialogRef.data.node.approvers)">
+                (click)="dialogRef.close(_isMultipleMode ? _selectedItems : dialogRef.data.node.approvers)">
             </button>
         </fd-dialog-footer-button>
 

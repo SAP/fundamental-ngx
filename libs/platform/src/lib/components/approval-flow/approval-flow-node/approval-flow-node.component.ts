@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { ApprovalNode, ApprovalStatus } from '@fundamental-ngx/platform';
 import { DialogService, MessageToastService, ObjectStatus } from '@fundamental-ngx/core';
 
@@ -16,6 +16,9 @@ const NODE_STATUS_CLASS_MAP = {
 })
 export class ApprovalFlowNodeComponent implements OnInit {
     @Input() node: ApprovalNode;
+
+    @HostBinding('class.blank')
+    @Input() blank: boolean;
 
     @Output() onNodeClick = new EventEmitter<void>();
 

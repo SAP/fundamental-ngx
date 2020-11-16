@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { AvatarModule, ButtonModule, DialogModule, MessageToastModule, ToolbarModule } from '@fundamental-ngx/core';
 
@@ -14,6 +15,7 @@ import { PlatformListModule, StandardListItemModule } from '../list/public_api';
     declarations: [ApprovalFlowComponent, ApprovalFlowNodeComponent, ApprovalFlowUserDetailsComponent],
     imports: [
         CommonModule,
+        FormsModule,
         AvatarModule,
         ButtonModule,
         ToolbarModule,
