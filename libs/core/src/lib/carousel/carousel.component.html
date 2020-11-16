@@ -23,18 +23,20 @@
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
     </ng-container>
 
-    <div style="display: none;" role="region" id="id+'-accessibility'" aria-live="polite" [attr.dir]="'ltr'">
+    <div style="display: none;" role="region" [attr.id]="id+'-accessibility'" aria-live="polite" dir="ltr">
         {{ screenReaderLabel }}
     </div>
 </div>
 
 <ng-template #pageIndicatorContainer>
-    <div class="fd-carousel__page-indicator-container" [attr.dir]="'ltr'">
+    <div class="fd-carousel__page-indicator-container" dir="ltr">
         <ng-container *ngIf="navigatorInPageIndicator">
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
-        <ng-container *ngTemplateOutlet="pageIndicators"></ng-container>
+        <ng-container *ngIf="pageIndicator">
+            <ng-container *ngTemplateOutlet="pageIndicators"></ng-container>
+        </ng-container>
 
         <ng-container *ngIf="navigatorInPageIndicator">
             <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
@@ -45,20 +47,16 @@
 <ng-template #pageIndicators>
     <ng-container *ngIf="numericIndicator">
         <div class="fd-carousel__page-indicators">
-            <ng-container *ngIf="pageIndicator">
-                <div class="fd-carousel__text" [attr.dir]="'ltr'">
-                    {{getPageIndicatorLabel}}
-                </div>
-            </ng-container>
+            <div class="fd-carousel__text" dir="ltr">
+                {{getPageIndicatorLabel}}
+            </div>
         </div>
     </ng-container>
     <ng-container *ngIf="!numericIndicator">
         <ol class="fd-carousel__page-indicators" [attr.dir]="dir">
-            <ng-container *ngIf="pageIndicator">
-                <ng-container *ngFor="let item of pageIndicatorsCountArray; let i=index">
-                    <li data-slide-to="i+1" class="fd-carousel__page-indicator"
-                        [class.fd-carousel__page-indicator--active]="i===currentActiveSlidesStartIndex"></li>
-                </ng-container>
+            <ng-container *ngFor="let item of pageIndicatorsCountArray; let i=index">
+                <li [attr.data-slide-to]="i+1" class="fd-carousel__page-indicator"
+                    [class.fd-carousel__page-indicator--active]="i===currentActiveSlidesStartIndex"></li>
             </ng-container>
         </ol>
     </ng-container>
