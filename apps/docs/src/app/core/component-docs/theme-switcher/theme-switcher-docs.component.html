@@ -5,8 +5,10 @@
     Css files are switched via choosing option.
 </description>
 <component-example>
-    <fd-theme-switcher-example></fd-theme-switcher-example>
+    <fd-theme-switcher-example (themeChanged)="handleThemeChanged($event)"></fd-theme-switcher-example>
 </component-example>
+<code-example [exampleFiles]="themeSwitcherExample"></code-example>
+
 
 <separator></separator>
 
@@ -18,7 +20,7 @@
     See example by adding <code>?customQueryParam=sap_fiori_3_dark</code> to URL.
 </description>
 <component-example>
-    <fd-theme-url-example></fd-theme-url-example>
+    <fd-theme-url-example (themeChanged)="handleThemeChanged($event)"></fd-theme-url-example>
 </component-example>
-<fd-code-snippet [file]="themeUrlCode" [standAlone]="true"></fd-code-snippet>
+<code-example [exampleFiles]="themeUrlExample"></code-example>
 

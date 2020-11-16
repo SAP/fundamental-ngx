@@ -1,19 +1,36 @@
-import { Component } from '@angular/core';
-import { ThemesService } from '@fundamental-ngx/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ThemeServiceOutput, ThemesService } from '@fundamental-ngx/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-theme-switcher-example',
     templateUrl: './theme-switcher-example.component.html'
 })
-
 export class ThemeSwitcherExampleComponent {
-    themes = this.themesService.themes;
-    cssUrl: SafeResourceUrl;
+    /** This is for internal usage, can be removed, when used in standalone application */
+    @Output()
+    themeChanged = new EventEmitter<ThemeServiceOutput>();
 
-    constructor (private themesService: ThemesService) {}
+    themes = this._themesService.themes;
+    cssUrl: SafeResourceUrl;
+    cssCustomUrl: SafeResourceUrl;
+
+    constructor (
+        private _themesService: ThemesService
+    ) {
+        this._themesService.onThemeQueryParamChange.subscribe(theme => {
+            this.cssCustomUrl = theme.customThemeUrl;
+            this.cssUrl = theme.themeUrl;
+        })
+    }
 
     selectTheme(selectedTheme: string): void {
-        this.cssUrl = this.themesService.setTheme(selectedTheme);
+        this.cssUrl = this._themesService.setTheme(selectedTheme);
+        this.cssCustomUrl = this._themesService.setCustomTheme(selectedTheme);
+
+        this.themeChanged.emit({
+            themeUrl: this.cssCustomUrl,
+            customThemeUrl: this.cssUrl
+        })
     }
 }

@@ -6,6 +6,7 @@ import { ThemeSwitcherHeaderComponent } from './theme-switcher-header/theme-swit
 import { ThemeSwitcherDocsComponent } from './theme-switcher-docs.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
+import { ObjectStatusModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -19,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ObjectStatusModule],
     exports: [RouterModule],
     declarations: [
         ThemeSwitcherDocsComponent,

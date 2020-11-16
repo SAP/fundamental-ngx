@@ -1,8 +1,13 @@
-import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Injectable, Optional } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+
+export interface ThemeServiceOutput {
+    themeUrl: SafeResourceUrl;
+    customThemeUrl: SafeResourceUrl;
+}
 
 
 @Injectable()
@@ -34,34 +39,39 @@ export class ThemesService {
         }
     ];
 
+    /** @hidden */
+    readonly onThemeQueryParamChange: Subject<ThemeServiceOutput> = new Subject<ThemeServiceOutput>();
+
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
-        private router: Router,
+        @Optional() private _activatedRoute: ActivatedRoute,
         private sanitizer: DomSanitizer,
-        private route: ActivatedRoute
     ) {}
 
 
     /** Set theme according to additional URL parameter **/
-    setThemeByRoute(themeParamName): any {
+    setThemeByRoute(themeParamName: string): void {
         const paramName = themeParamName || 'theme'
-        this.router.events
+        this._activatedRoute.queryParams
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                this.route.queryParams
-                    .pipe(takeUntil(this._onDestroy$))
-                    .subscribe(param => {
-                        this.setTheme(param[paramName])
-                });
-            }
-        })
+            .subscribe(param => {
+                this.onThemeQueryParamChange.next({
+                    themeUrl: this.setTheme(param[paramName]),
+                    customThemeUrl: this.setCustomTheme(param[paramName])
+                })
+            })
+        ;
     };
 
     /** Assign css file corresponding to chosen theme **/
-    setTheme(theme: string): any {
-        return this.sanitizer.bypassSecurityTrustResourceUrl('assets/' + theme + '.css');
+    setTheme(theme: string): SafeResourceUrl {
+        return this.sanitizer.bypassSecurityTrustResourceUrl('assets/theming-base/' + theme + '/css_variables.css');
+    }
+
+    /** Assign css file corresponding to chosen theme **/
+    setCustomTheme(theme: string): SafeResourceUrl {
+        return this.sanitizer.bypassSecurityTrustResourceUrl('assets/custom-theming/' + theme + '.css');
     }
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
 import { ShellbarMenuItem, MenuKeyboardService, MenuComponent, ThemesService } from '@fundamental-ngx/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DocsThemeService } from '../../services/docs-theme.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ToolbarDocsComponent implements OnInit {
     themeMenu: MenuComponent;
 
     cssUrl: SafeResourceUrl;
+    customCssUrl: SafeResourceUrl;
 
     library: string;
 
@@ -50,16 +52,18 @@ export class ToolbarDocsComponent implements OnInit {
     constructor(
         private routerService: Router,
         private themesService: ThemesService,
+        private docsThemeService: DocsThemeService,
         @Inject('CURRENT_LIB') private currentLib: Libraries,
-        private menuKeyboardService: MenuKeyboardService,
-        private sanitizer: DomSanitizer
     ) {
         this.library = routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
+
+        this.docsThemeService.onThemeChange.subscribe(theme => {
+            this.cssUrl = theme.themeUrl;
+            this.customCssUrl = theme.customThemeUrl;
+        })
     }
 
     ngOnInit(): void {
-        this.cssUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/sap_fiori_3.css');
-
         this.versions = [
             {id: '0.21.0', url: 'https://5f355f63718e9200075585e1--fundamental-ngx.netlify.app/'},
             {id: '0.20.0', url: 'https://5f0630964a7a370007f93dc4--fundamental-ngx.netlify.app/'},
@@ -79,6 +83,7 @@ export class ToolbarDocsComponent implements OnInit {
 
     selectTheme(selectedTheme: string): void {
         this.cssUrl = this.themesService.setTheme(selectedTheme);
+        this.customCssUrl = this.themesService.setCustomTheme(selectedTheme);
     }
 
     selectVersion(version: any): void {
