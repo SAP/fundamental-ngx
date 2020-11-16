@@ -72,6 +72,6 @@ export class ThemesService {
 
     /** Assign css file corresponding to chosen theme **/
     setCustomTheme(theme: string): SafeResourceUrl {
-        return this.sanitizer.bypassSecurityTrustResourceUrl('assets/custom-theming/' + theme + '.css');
+        return this.sanitizer.bypassSecurityTrustResourceUrl('assets/fundamental-styles-theming/' + theme + '.css');
     }
 }

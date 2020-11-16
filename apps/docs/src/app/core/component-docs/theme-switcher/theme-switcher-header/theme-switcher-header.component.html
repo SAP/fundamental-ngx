@@ -1,7 +1,13 @@
 <header>Theme Switcher API</header>
 <description>
-    Theme switcher API allows user to set specific theme programatically. There is no longer need for each application to implement its own theme switcher code.
+    Theme switcher API allows user to set specific theme programmatically.
+    There is no longer need for each application to implement its own theme switcher code.
+    Theme switcher requires additional assets from <code>@sap-theming</code> and <code>fundamental-styles</code> libraries.
+    To add them properly, add those objects to assets array in <code>angular.json</code>:<br/>
+
+    <fd-code-snippet [file]="file"></fd-code-snippet>
 </description>
+<import module="ThemeService"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>
