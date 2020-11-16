@@ -17,12 +17,7 @@ export class ThemeSwitcherExampleComponent {
 
     constructor (
         private _themesService: ThemesService
-    ) {
-        this._themesService.onThemeQueryParamChange.subscribe(theme => {
-            this.cssCustomUrl = theme.customThemeUrl;
-            this.cssUrl = theme.themeUrl;
-        })
-    }
+    ) {}
 
     selectTheme(selectedTheme: string): void {
         this.cssUrl = this._themesService.setTheme(selectedTheme);
