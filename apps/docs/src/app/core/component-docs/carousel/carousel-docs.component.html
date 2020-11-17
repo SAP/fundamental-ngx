@@ -4,6 +4,15 @@
 <description>
     By default fd-carousel displays one active item and others remains hidden. Pagination container appears on bottom
     with dot indicators with active dot to show active item.
+    <br />
+    <br />
+    <b>Notes:</b><br />
+    By Default images used as carousel item will drag on non-touch devices, instead of swiping. To achieve swiping behavior for these images,
+    below solutions can be applied.
+    <ul>
+        <li>use css solution. <code> pointer-events: none</code> </li>
+        <li>use javascript solution. <code> draggable="false" ondragstart="return false;"</code></li>
+    </ul>
 </description>
 <component-example>
     <fd-carousel-one-active-item></fd-carousel-one-active-item>
