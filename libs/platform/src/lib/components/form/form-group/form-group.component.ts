@@ -480,10 +480,10 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * if `columnLayoutType` is given, set those column layouts appropriately
      */
     private _setUserSpecifiedLayout(groupField: GroupField): void {
-        const layoutString = this.columnLayoutType.split('-');
-        const xlColumnsNumber = parseInt(layoutString[0].slice(2, layoutString[0].length), 10);
-        const lgColumnsNumber = parseInt(layoutString[1].slice(1, layoutString[1].length), 10);
-        const mdColumnsNumber = parseInt(layoutString[2].slice(1, layoutString[2].length), 10);
+        const [xl, lg, md] = this.columnLayoutType.split('-');
+        const xlColumnsNumber = parseInt(xl.slice(2, xl.length), 10);
+        const lgColumnsNumber = parseInt(lg.slice(1, lg.length), 10);
+        const mdColumnsNumber = parseInt(md.slice(1, md.length), 10);
 
         if (isNaN(xlColumnsNumber) || isNaN(lgColumnsNumber) || isNaN(mdColumnsNumber)) {
             throw new Error('Input a valid number for columns');
@@ -497,10 +497,9 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
             // for `lg` single-column layout, Styles does not use any class, and providing `fd-col-lg--12` has unintended side-effects
             // therefore, we remove the lg class for single-column layout
             if (lgColumns === 12) {
-                groupField.styleClass = `fd-col-xl--` + xlColumns + ` fd-col-md--` + mdColumns;
+                groupField.styleClass = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns}`;
             } else {
-                groupField.styleClass =
-                    `fd-col-xl--` + xlColumns + ` fd-col-md--` + mdColumns + ` fd-col-lg--` + lgColumns;
+                groupField.styleClass = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns} fd-col-lg--${lgColumns}`;
             }
         }
     }
