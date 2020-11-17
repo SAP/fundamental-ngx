@@ -13,8 +13,7 @@ import {
     Output,
     Self,
     SkipSelf,
-    ViewChild,
-    ViewEncapsulation
+    ViewChild
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import {
@@ -27,9 +26,9 @@ import {
     SpecialDayRule
 } from '@fundamental-ngx/core';
 import { Placement } from 'popper.js';
-import { BaseInput } from '../../base.input';
-import { FormField } from '../../form-field';
-import { FormFieldControl, Status } from '../../public_api';
+import { BaseInput } from '../base.input';
+import { FormField } from '../form-field';
+import { FormFieldControl, Status } from '../public_api';
 
 @Component({
     selector: 'fdp-datetime-picker',
