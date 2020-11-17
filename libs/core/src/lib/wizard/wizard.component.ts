@@ -6,9 +6,12 @@ import {
     ContentChildren,
     ElementRef,
     HostListener,
+    Input,
     OnDestroy,
     QueryList,
+    Renderer2,
     TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
@@ -24,6 +27,8 @@ export const CURRENT_STEP_STATUS = 'current';
 export const UPCOMING_STEP_STATUS = 'upcoming';
 export const COMPLETED_STEP_STATUS = 'completed';
 
+export const HEADER_HEIGHT = 64;
+
 @Component({
     selector: 'fd-wizard',
     templateUrl: './wizard.component.html',
@@ -32,12 +37,23 @@ export const COMPLETED_STEP_STATUS = 'completed';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardComponent implements AfterViewInit, OnDestroy {
+    /**
+     * Whether or not to append the step to the wizard. If false, each step will be displayed on a different page.
+     * Default is true.
+     */
+    @Input()
+    appendToWizard = true;
+
     /** @hidden */
     @ContentChildren(WizardStepComponent, { descendants: true })
     steps: QueryList<WizardStepComponent>;
 
     /** @hidden */
-    contentTemplate: TemplateRef<any>;
+    @ViewChild('wrapperContainer')
+    wrapperContainer: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    contentTemplates: TemplateRef<any>[] = [];
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
@@ -45,7 +61,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _previousWidth: number;
 
-    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
+    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef, private _renderer: Renderer2) {}
 
     /** @hidden */
     @HostListener('window:resize')
@@ -63,7 +79,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         setTimeout(() => {
             // fixes ExpressionChangedAfterItHasBeenCheckedError
-            this._setContentTemplate();
+            this._setContentTemplates();
             this._subscriptions.add(
                 this.steps.changes.subscribe(() => {
                     this._handleStepOrStatusChanges();
@@ -112,15 +128,41 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    private _setContentTemplate(): void {
+    private _setContentTemplates(): void {
+        const templatesLength = this.contentTemplates.length;
+        this.contentTemplates = [];
+        let stepId = 0;
         this.steps.forEach((step) => {
+            step.stepId = stepId;
+            stepId++;
             step.finalStep = false;
-            if (step.status === CURRENT_STEP_STATUS && step.content) {
+            if (
+                step.visited ||
+                ((step.status === CURRENT_STEP_STATUS || step.status === COMPLETED_STEP_STATUS) && step.content)
+            ) {
                 step.visited = true;
-                this.contentTemplate = step.content.contentTemplate;
+                if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
+                    this.contentTemplates = [step.content.contentTemplate];
+                } else {
+                    this.contentTemplates.push(step.content.contentTemplate);
+                }
             }
         });
         this.steps.last.finalStep = true;
+    }
+
+    /** @hidden */
+    private _scrollToCurrentStep(): void {
+        let child: HTMLElement;
+        this.steps.forEach((step, index) => {
+            if (step.status === CURRENT_STEP_STATUS) {
+                child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
+                this.wrapperContainer.nativeElement.scrollTo({
+                    top: child.offsetTop - HEADER_HEIGHT,
+                    behavior: 'smooth'
+                });
+            }
+        });
     }
 
     /** @hidden */
@@ -166,9 +208,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
-        this._setContentTemplate();
+        this._setContentTemplates();
         this._shrinkWhileAnyStepIsTooNarrow();
         this._cdRef.detectChanges();
+        this._scrollToCurrentStep();
     }
 
     /** @hidden */
@@ -183,7 +226,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _anyStepIsTooNarrow(): boolean {
-        return this.steps.some(step => step.getStepClientWidth() < STEP_MIN_WIDTH);
+        return this.steps.some((step) => step.getStepClientWidth() < STEP_MIN_WIDTH);
     }
 
     /** @hidden */

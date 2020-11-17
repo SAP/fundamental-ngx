@@ -8,7 +8,7 @@ import {
     OnChanges,
     Output,
     SimpleChanges,
-    ViewChild,
+    ViewChild
 } from '@angular/core';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
 import { KeyUtil } from '../../utils/functions';
@@ -27,6 +27,7 @@ export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
         '[class.fd-wizard__step--active]': 'status === "active"'
     },
     templateUrl: './wizard-step.component.html',
+
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardStepComponent implements OnChanges {
@@ -85,6 +86,9 @@ export class WizardStepComponent implements OnChanges {
 
     /** @hidden */
     visited = false;
+
+    /** @hidden */
+    stepId: number;
 
     /** @hidden */
     constructor(private _elRef: ElementRef) {}

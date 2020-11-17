@@ -4,3 +4,9 @@
     display: block;
     display: -webkit-box;
 }
+.fd-wizard-container-wrapper {
+    height: calc(100vh - 144px); /* 144px is the combined height of the shellbar, wizard header and wizard footer */
+    height: -webkit-calc(100vh - 144px); /* google, safari */
+    height: -moz-calc(100vh - 144px); /* firefox */
+    overflow-y: scroll;
+}
