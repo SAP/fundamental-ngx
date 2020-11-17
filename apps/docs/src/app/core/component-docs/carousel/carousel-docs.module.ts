@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BusyIndicatorModule, ButtonModule, CarouselModule, CardModule, ListModule, TableModule } from '@fundamental-ngx/core';
+import { BusyIndicatorModule, CarouselModule, CardModule, ListModule, TableModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -14,7 +14,7 @@ import { CarouselHiddenNavigationComponent } from './examples/carousel-hidden-na
 import { CarouselContentNavigationComponent } from './examples/carousel-content-navigation.component';
 import { CarouselLoopedNavigationComponent } from './examples/carousel-looped-navigation.component';
 import { CarouselErrorMessageComponent } from './examples/carousel-error-message.component';
-import { CarouselLoadingContentComponent } from './examples/carousel-loading-content.component';
+import { CarouselLoadingContentExampleComponent } from './examples/carousel-loading-content-example.component';
 
 const routes: Routes = [
     {
@@ -32,7 +32,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         BusyIndicatorModule,
-        ButtonModule,
         CarouselModule,
         CardModule,
         ListModule,
@@ -50,7 +49,7 @@ const routes: Routes = [
         CarouselContentNavigationComponent,
         CarouselLoopedNavigationComponent,
         CarouselErrorMessageComponent,
-        CarouselLoadingContentComponent
+        CarouselLoadingContentExampleComponent
     ]
 })
 export class CarouselDocsModule {}
