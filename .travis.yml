@@ -26,15 +26,15 @@ jobs:
     script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls && npm run build-pack-library
   - stage: "Test e2e"
     name: Sauce Labs - e2e tests
-    if: branch = feature/e2e-and-unit-test-setup
+    if: type = pull_request
     script: npm run e2e:ci
   - stage: "Sauce Labs unit tests"
     name: Sauce Labs - unit tests
-    if: branch = feature/e2e-and-unit-test-setup
+    if: type = pull_request
     script: npm run test:platform:saucelabs
   - stage: "Sauce Labs unit tests"
     name: Sauce Labs - unit tests
-    if: branch = feature/e2e-and-unit-test-setup
+    if: type = pull_request
     script: npm run test:core:saucelabs
   - stage: "Pre-release"
     if: branch = master AND type = push
