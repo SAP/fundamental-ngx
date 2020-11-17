@@ -1,5 +1,5 @@
 @import '~fundamental-styles/dist/popover';
-
+@import "~@angular/cdk/overlay-prebuilt";
 
 $fd-popover-arrow-top-back: -0.5rem !default;
 $fd-popover-arrow-top-front: calc(-0.5rem + 1px) !default;
