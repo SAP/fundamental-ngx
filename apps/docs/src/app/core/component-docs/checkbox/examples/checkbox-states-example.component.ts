@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-checkbox-states-example',
     template: `
+        <div fd-form-header>Checkbox States Examples</div>
         <div>
             States:
             <fd-checkbox [(ngModel)]="checkboxValue1" label="No state"></fd-checkbox>
