@@ -30,7 +30,6 @@
     "start-sauce-tunnel": "node e2e/sauce-tunnel.js",
     "kill-sauce-tunnel": "sh e2e/sauce-tunnel-kill.sh",
     "e2e": "ng e2e --protractorConfig=protractor.conf.js",
-
     "hmr": "ng serve --hmr -e=hmr",
     "lint": "npm run lint:docs && npm run lint:core && npm run lint:platform",
     "lint:core": "ng lint core",
