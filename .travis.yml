@@ -9,13 +9,6 @@ addons:
       - sap.dev
 git:
   depth: false
-env:
-  global:
-    - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
-    - BUILD_ID=$TRAVIS_BUILD_ID
-    - JOB_URL=$TRAVIS_JOB_WEB_UR
-    - SAUCE_USERNAME=$SAUCE_USERNAME
-    - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
 script:
   - npm run build-all
 jobs:
@@ -23,17 +16,35 @@ jobs:
   - stage: "Lint and Test"
     if: type = pull_request
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
+    env:
+      - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+      - BUILD_ID=$TRAVIS_BUILD_ID
+      - JOB_URL=$TRAVIS_JOB_WEB_UR
+      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
     script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls && npm run build-pack-library
-  - stage: "Test e2e"
+  - stage: "Test"
     name: Sauce Labs - e2e tests
     if: type = pull_request
+    env:
+      - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+      - BUILD_ID=$TRAVIS_BUILD_ID
+      - JOB_URL=$TRAVIS_JOB_WEB_UR
+      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
     script: npm run e2e:ci
-  - stage: "Sauce Labs unit tests"
-    name: Sauce Labs - unit tests
+  - stage: "Test"
+    name: Sauce Labs - unit tests platform
     if: type = pull_request
+    env:
+      - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+      - BUILD_ID=$TRAVIS_BUILD_ID
+      - JOB_URL=$TRAVIS_JOB_WEB_UR
+      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
     script: npm run test:platform:saucelabs
-  - stage: "Sauce Labs unit tests"
-    name: Sauce Labs - unit tests
+  - stage: "Test"
+    name: Sauce Labs - unit tests core
     if: type = pull_request
     script: npm run test:core:saucelabs
   - stage: "Pre-release"
