@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
-import { DynamicComponentContainer } from '../../utils/dynamic-component';
+import { DynamicComponentContainer } from '../../utils/dynamic-component/';
 import { MESSAGE_BOX_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
 import { MESSAGE_BOX_REF, MessageBoxRef } from '../utils/message-box-ref.class';
 

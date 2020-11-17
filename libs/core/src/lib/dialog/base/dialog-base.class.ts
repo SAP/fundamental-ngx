@@ -1,5 +1,3 @@
-import { createFocusTrap, FocusTrap } from 'focus-trap';
-import { fromEvent, Subscription } from 'rxjs';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -10,12 +8,16 @@ import {
     OnInit
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+
+import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter, startWith } from 'rxjs/operators';
+import { ESCAPE } from '@angular/cdk/keycodes';
+import { createFocusTrap, FocusTrap } from 'focus-trap';
+
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
 import { KeyUtil } from '../../utils/functions/key-util';
-import { ESCAPE } from '@angular/cdk/keycodes';
 
 @Directive()
 export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {

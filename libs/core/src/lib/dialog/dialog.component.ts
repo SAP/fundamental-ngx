@@ -13,6 +13,11 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
+
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { dialogFadeNgIf } from './utils/dialog.animations';
 import { DIALOG_CONFIG, DialogConfig } from './utils/dialog-config.class';
@@ -20,11 +25,8 @@ import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DIALOG_REF, DialogRef } from './utils/dialog-ref.class';
-import { fromEvent, Subscription } from 'rxjs';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
-import { debounceTime } from 'rxjs/operators';
-import { NavigationStart, Router } from '@angular/router';
 
 @Component({
     selector: 'fd-dialog',

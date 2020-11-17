@@ -31,10 +31,10 @@ import { Component } from '@angular/core';
 // import * as objectDialogTs from '!raw-loader!./examples/dialog-object-example/dialog-object-example.component.ts';
 // import * as objectDialogHtml from '!raw-loader!./examples/dialog-object-example/dialog-object-example.component.html';
 
-import { DialogService } from '@fundamental-ngx/core';
-import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-import { Schema } from '../../../schema/models/schema.model';
+// import { DialogService } from '@fundamental-ngx/core';
+// import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+// import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
+// import { Schema } from '../../../schema/models/schema.model';
 
 @Component({
     selector: 'app-dialog',
