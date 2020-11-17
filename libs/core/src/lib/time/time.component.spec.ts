@@ -58,7 +58,7 @@ describe('TimeComponent', () => {
 
     it('should keep active view items up to date', () => {
         component.time = new FdDate().setTime(15, 30, 45);
-        fixture.detectChanges();
+        (<any>component)._setUpViewGrid();
         expect(component.activeHourViewItem.value).toBe(15);
         expect(component.activeMinuteViewItem.value).toBe(30);
         expect(component.activeSecondViewItem.value).toBe(45);

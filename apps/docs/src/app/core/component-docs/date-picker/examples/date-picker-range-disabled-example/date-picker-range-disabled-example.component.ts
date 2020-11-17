@@ -9,8 +9,8 @@ import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
 export class DatePickerRangeDisabledExampleComponent {
     customForm = new FormGroup({
         dates: new FormControl({
-            start: FdDate.getNow(),
-            end: this.datetimeAdapter.addCalendarDays(FdDate.getNow(), 1)
+            start: this._getTodayDate(),
+            end: this.datetimeAdapter.addCalendarDays(this._getTodayDate(), 1)
         })
     });
 
@@ -22,15 +22,15 @@ export class DatePickerRangeDisabledExampleComponent {
 
     disabledEndFunction = (fdDate: FdDate): boolean => {
         return (
-            this.datetimeAdapter.compareDate(FdDate.getNow(), fdDate) > 0 ||
-            this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(FdDate.getNow())) > 0
+            this.datetimeAdapter.compareDate(this._getTodayDate(), fdDate) > 0 ||
+            this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(this._getTodayDate())) > 0
         );
     };
 
     disabledStartFunction = (fdDate: FdDate): boolean => {
         return (
-            this.datetimeAdapter.compareDate(FdDate.getNow(), fdDate) > 0 ||
-            this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(FdDate.getNow())) > 0
+            this.datetimeAdapter.compareDate(this._getTodayDate(), fdDate) > 0 ||
+            this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(this._getTodayDate())) > 0
         );
     };
 
@@ -41,5 +41,9 @@ export class DatePickerRangeDisabledExampleComponent {
             fdDate = this.datetimeAdapter.addCalendarDays(fdDate, 1);
         }
         return fdDate;
+    }
+
+    private _getTodayDate(): FdDate {
+        return FdDate.getNow().setTime(0, 0, 0);
     }
 }

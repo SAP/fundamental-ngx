@@ -59,11 +59,11 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** Currently chosen, centered time column item */
     @Input()
-    set activeValue(value: T) {
-        if (this._initialized && this._activeValue !== value) {
-            this._pickTime(this._getItem(value), true);
+    set activeValue(activeItem: T) {
+        if (this._initialized && this._activeValue !== activeItem) {
+            this._pickTime(this._getItem(activeItem), true);
         }
-        this._activeValue = value;
+        this._activeValue = activeItem;
     }
 
     get activeValue(): T {
@@ -208,7 +208,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     }
 
     /** @hidden */
-    public setValueOfActive(): void {
+    setValueOfActive(): void {
         if (this._active) {
             this._setUpInitialValue();
         }
@@ -314,8 +314,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     }
 
     /** Returns item with passed value */
-    private _getItem(value: T): CarouselItemDirective {
-        return this.items.find((item) => item.value === value);
+    private _getItem(_item: T): CarouselItemDirective {
+        return this.items.find((item) => item.value === _item);
     }
 
     /** @hidden */

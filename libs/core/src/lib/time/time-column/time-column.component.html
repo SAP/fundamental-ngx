@@ -26,7 +26,7 @@
             class="fd-time__item"
             fdCarouselItem
             *ngFor="let row of rows; let index = index"
-            #item=fdCarouselItem
+            #item="fdCarouselItem"
             [id]="_createColumnItemIdByIndex(index)"
             [value]="row"
         >

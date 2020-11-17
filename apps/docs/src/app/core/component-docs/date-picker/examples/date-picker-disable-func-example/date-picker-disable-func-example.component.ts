@@ -18,6 +18,6 @@ export class DatePickerDisableFuncExampleComponent {
     }
 
     disableFunction = (fdDate: FdDate): boolean => {
-        return this.datetimeAdapter.compareDate(fdDate, FdDate.getNow()) < 0;
+        return this.datetimeAdapter.compareDate(fdDate, FdDate.getNow().setTime(0, 0, 0)) < 0;
     };
 }

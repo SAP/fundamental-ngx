@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-time-picker-locale-example',
     templateUrl: './time-picker-locale-example.component.html',
-    styleUrls: ['./time-picker-locale-example.component.scss']
+    styleUrls: ['./time-picker-locale-example.component.scss'],
+    providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        }
+    ]
 })
 export class TimePickerLocaleExampleComponent implements OnInit {
     time = new FdDate().setTime(15, 30, 0);

@@ -10,7 +10,9 @@ import {
     ViewEncapsulation,
     AfterViewInit,
     Optional,
-    OnDestroy
+    OnDestroy,
+    OnChanges,
+    SimpleChanges
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -49,19 +51,13 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TimeComponent<D> implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor {
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
      */
     @Input()
-    set meridian(meridian: boolean) {
-        this._meridian = meridian;
-        this._setUpViewGrid();
-    }
-    get meridian(): boolean {
-        return this._meridian;
-    }
+    meridian = false;
 
     /**
      *  @Input When set to false, does not set the input field to invalid state on invalid entry.
@@ -111,13 +107,7 @@ export class TimeComponent<D> implements OnInit, OnDestroy, AfterViewInit, Contr
      * @Input An object that contains datetime representation
      */
     @Input()
-    set time(time: D) {
-        this._time = time;
-        this._setUpViewGrid();
-    }
-    get time(): D {
-        return this._time;
-    }
+    time: D;
 
     /** @Input Whether to show spinner buttons */
     @Input()
@@ -178,12 +168,6 @@ export class TimeComponent<D> implements OnInit, OnDestroy, AfterViewInit, Contr
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    private _meridian = false;
-
-    /** @hidden */
-    private _time: D;
-
-    /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _timeI18nLabels: TimeI18n,
@@ -205,6 +189,15 @@ export class TimeComponent<D> implements OnInit, OnDestroy, AfterViewInit, Contr
         });
 
         this._setUpViewGrid();
+    }
+
+    /** @hidden
+     * Reacts only when there is meridian or time input change
+     */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.meridian || changes.time) {
+            this._setUpViewGrid();
+        }
     }
 
     /** @hidden */
