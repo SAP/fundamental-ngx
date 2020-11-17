@@ -1,271 +1,123 @@
 import { Component } from '@angular/core';
 
-// import * as templateBasedDialogTs from '!raw-loader!./examples/template-based/template-based-dialog-example.component.ts';
-// import * as templateBasedDialogHtml from '!raw-loader!./examples/template-based/template-based-dialog-example.component.html';
-//
-// import * as componentBasedDialogTs from '!raw-loader!./examples/component-based/component-based-dialog-example.component.ts';
-// import * as componentBasedDialogExampleTs from '!raw-loader!./examples/component-based/dialog-example.component.ts';
-//
-// import * as customConfigurationDialogTs from '!raw-loader!./examples/dialog-configuration/dialog-configuration-example.component.ts';
-// import * as customConfigurationDialogHtml from '!raw-loader!./examples/dialog-configuration/dialog-configuration-example.component.html';
-//
-// import * as stateDialogTs from '!raw-loader!./examples/dialog-state/dialog-state-example.component.ts';
-// import * as stateDialogHtml from '!raw-loader!./examples/dialog-state/dialog-state-example.component.html';
-//
-// import * as positionHtml from '!raw-loader!./examples/dialog-position/dialog-position-example.component.html';
-// import * as positionTs from '!raw-loader!./examples/dialog-position/dialog-position-example.component.ts';
-//
-// import * as dialogMobileHtml from '!raw-loader!./examples/dialog-mobile/dialog-mobile-example.component.html';
-// import * as dialogMobileTs from '!raw-loader!./examples/dialog-mobile/dialog-mobile-example.component.ts';
-//
-// import * as dialogStackedTs from '!raw-loader!./examples/stacked-dialogs/dialog-stacked-example.component.ts';
-// import * as firstDialogStackedTs from '!raw-loader!./examples/stacked-dialogs/first-dialog-example.component.ts';
-// import * as secondDialogStackedTs from '!raw-loader!./examples/stacked-dialogs/second-dialog-example.component.ts';
-//
-// import * as backdropContainerTs from '!raw-loader!./examples/dialog-backdrop-container/dialog-backdrop-container-example.component.ts';
-// import * as backdropContainerHtml from '!raw-loader!./examples/dialog-backdrop-container/dialog-backdrop-container-example.component.html';
-//
+import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+
+import * as templateBasedTs from '!raw-loader!./examples/template-based/template-based-message-box-example.component.ts';
+import * as templateBasedHtml from '!raw-loader!./examples/template-based/template-based-message-box-example.component.html';
+
+import * as componentBasedTs from '!raw-loader!./examples/component-based/component-based-message-box-example.component.ts';
+import * as componentBasedExampleTs from '!raw-loader!./examples/component-based/message-box-example.component.ts';
+
+import * as objectBasedTs from '!raw-loader!./examples/object-based/object-based-message-box-example.component.ts';
+import * as objectBasedHtml from '!raw-loader!./examples/object-based/object-based-message-box-example.component.html';
+
+import * as semanticTypesTs from '!raw-loader!./examples/semantic-types/semantic-types-example.component.ts';
+import * as semanticTypesHtml from '!raw-loader!./examples/semantic-types/semantic-types-example.component.html';
+
+import * as customPositionHtml from '!raw-loader!./examples/custom-position/message-box-position-example.component.html';
+import * as customPositionTs from '!raw-loader!./examples/custom-position/message-box-position-example.component.ts';
+
+import * as mobileModeHtml from '!raw-loader!./examples/mobile-mode/message-box-mobile-example.component.html';
+import * as mobileModeTs from '!raw-loader!./examples/mobile-mode/message-box-mobile-example.component.ts';
+
 // import * as complexDialogTs from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.ts';
 // import * as complexDialogHtml from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.html';
-//
-// import * as objectDialogTs from '!raw-loader!./examples/dialog-object-example/dialog-object-example.component.ts';
-// import * as objectDialogHtml from '!raw-loader!./examples/dialog-object-example/dialog-object-example.component.html';
 
-// import { DialogService } from '@fundamental-ngx/core';
-// import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-// import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-// import { Schema } from '../../../schema/models/schema.model';
 
 @Component({
     selector: 'app-dialog',
     templateUrl: './message-box-docs.component.html'
 })
 export class MessageBoxDocsComponent {
-    // static schema: any = {
-    //     properties: {
-    //         properties: {
-    //             type: 'object',
-    //             properties: {
-    //                 hasBackdrop: {
-    //                     type: 'boolean'
-    //                 },
-    //                 backdropClickCloseable: {
-    //                     type: 'boolean'
-    //                 },
-    //                 escKeyCloseable: {
-    //                     type: 'boolean'
-    //                 },
-    //                 focusTrapped: {
-    //                     type: 'boolean'
-    //                 },
-    //                 fullScreen: {
-    //                     type: 'boolean'
-    //                 },
-    //                 mobile: {
-    //                     type: 'boolean'
-    //                 },
-    //                 mobileOuterSpacing: {
-    //                     type: 'boolean'
-    //                 },
-    //                 draggable: {
-    //                     type: 'boolean'
-    //                 },
-    //                 resizable: {
-    //                     type: 'boolean'
-    //                 },
-    //                 verticalPadding: {
-    //                     type: 'boolean'
-    //                 },
-    //                 width: {
-    //                     type: 'string'
-    //                 },
-    //                 height: {
-    //                     type: 'string'
-    //                 },
-    //                 minHeight: {
-    //                     type: 'string'
-    //                 },
-    //                 maxHeight: {
-    //                     type: 'string'
-    //                 },
-    //                 minWidth: {
-    //                     type: 'string'
-    //                 },
-    //                 maxWidth: {
-    //                     type: 'string'
-    //                 }
-    //             }
-    //         }
-    //     },
-    //     type: 'object'
-    // };
-    //
-    // schema: Schema;
-    //
-    // data: any = {
-    //     properties: {
-    //         hasBackdrop: true,
-    //         backdropClickCloseable: true,
-    //         escKeyCloseable: true,
-    //         focusTrapped: true,
-    //         fullScreen: false,
-    //         mobile: false,
-    //         mobileOuterSpacing: false,
-    //         draggable: false,
-    //         resizable: false,
-    //         verticalPadding: true,
-    //         width: '',
-    //         height: '',
-    //         minHeight: '',
-    //         maxHeight: '',
-    //         minWidth: '',
-    //         maxWidth: ''
-    //     }
-    // };
-    //
-    // templateDialog: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: templateBasedDialogHtml,
-    //         fileName: 'template-based-dialog-example'
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: templateBasedDialogTs,
-    //         fileName: 'template-based-dialog-example',
-    //         component: 'TemplateBasedDialogExampleComponent'
-    //     }
-    // ];
-    //
-    // stateDialog: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: stateDialogHtml,
-    //         fileName: 'dialog-state-example'
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: stateDialogTs,
-    //         fileName: 'dialog-state-example',
-    //         component: 'DialogStateExample'
-    //     }
-    // ];
-    //
-    // objectDialog: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: objectDialogHtml,
-    //         fileName: 'dialog-object'
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: objectDialogTs,
-    //         fileName: 'dialog-object',
-    //         component: 'DialogObjectComponent'
-    //     }
-    // ];
-    //
-    // componentAsContentSource: ExampleFile[] = [
-    //     {
-    //         language: 'typescript',
-    //         code: componentBasedDialogExampleTs,
-    //         name: 'Dialog Content',
-    //         fileName: 'dialog-example',
-    //         component: 'DialogExampleComponent',
-    //         entryComponent: true
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: componentBasedDialogTs,
-    //         entryComponent: true,
-    //         main: true,
-    //         fileName: 'component-based-dialog-example',
-    //         component: 'ComponentBasedDialogExampleComponent'
-    //     }
-    // ];
-    //
-    // customConfiguration: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: customConfigurationDialogHtml,
-    //         fileName: 'dialog-configuration-example'
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: customConfigurationDialogTs,
-    //         fileName: 'dialog-configuration-example',
-    //         component: 'DialogConfigurationExample'
-    //     }
-    // ];
-    //
-    // stackedDialogs: ExampleFile[] = [
-    //     {
-    //         language: 'typescript',
-    //         code: secondDialogStackedTs,
-    //         name: 'Second Dialog',
-    //         fileName: 'second-dialog-example',
-    //         component: 'SecondDialogExample',
-    //         entryComponent: true
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: firstDialogStackedTs,
-    //         name: 'First Dialog',
-    //         fileName: 'first-dialog-example',
-    //         component: 'FirstDialogExample',
-    //         entryComponent: true
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: dialogStackedTs,
-    //         fileName: 'dialog-stacked-example',
-    //         component: 'DialogStackedExample',
-    //         main: true
-    //     }
-    // ];
-    //
-    // dialogMobile: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: dialogMobileHtml,
-    //         fileName: 'dialog-mobile-example'
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: dialogMobileTs,
-    //         fileName: 'dialog-mobile-example',
-    //         component: 'DialogMobileExampleComponent'
-    //     }
-    // ];
-    //
-    // customBackdropContainer: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: backdropContainerHtml,
-    //         fileName: 'dialog-backdrop-container-example'
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: backdropContainerTs,
-    //         fileName: 'dialog-backdrop-container-example',
-    //         component: 'DialogBackdropContainerExampleComponent'
-    //     }
-    // ];
-    //
-    // dialogPosition: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: positionHtml,
-    //         fileName: 'dialog-position-example'
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: positionTs,
-    //         fileName: 'dialog-position-example',
-    //         component: 'DialogPositionExampleComponent'
-    //     }
-    // ];
-    //
+    objectBased: ExampleFile[] = [
+        {
+            language: 'html',
+            code: objectBasedHtml,
+            fileName: 'object-based-message-box-example'
+        },
+        {
+            language: 'typescript',
+            code: objectBasedTs,
+            fileName: 'object-based-message-box-example',
+            component: 'ObjectBasedMessageBoxExampleComponent'
+        }
+    ];
+
+    templateBased: ExampleFile[] = [
+        {
+            language: 'html',
+            code: templateBasedHtml,
+            fileName: 'template-based-message-box-example'
+        },
+        {
+            language: 'typescript',
+            code: templateBasedTs,
+            fileName: 'template-based-message-box-example',
+            component: 'TemplateBasedMessageBoxExampleComponent'
+        }
+    ];
+
+    componentBased: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: componentBasedTs,
+            name: 'Message box content',
+            fileName: 'message-box-example',
+            component: 'MessageBoxExampleComponent',
+            entryComponent: true
+        },
+        {
+            language: 'typescript',
+            code: componentBasedExampleTs,
+            entryComponent: true,
+            main: true,
+            fileName: 'component-based-message-box-example',
+            component: 'ComponentBasedMessageBoxExampleComponent'
+        }
+    ];
+
+    semanticTypes: ExampleFile[] = [
+        {
+            language: 'html',
+            code: semanticTypesHtml,
+            fileName: 'semantic-types-example'
+        },
+        {
+            language: 'typescript',
+            code: semanticTypesTs,
+            fileName: 'semantic-types-example',
+            component: 'SemanticTypesExampleComponent'
+        }
+    ];
+
+    mobileMode: ExampleFile[] = [
+        {
+            language: 'html',
+            code: mobileModeHtml,
+            fileName: 'message-box-mobile-example'
+        },
+        {
+            language: 'typescript',
+            code: mobileModeTs,
+            fileName: 'message-box-mobile-example',
+            component: 'MessageBoxMobileExampleComponent'
+        }
+    ];
+
+    customPosition: ExampleFile[] = [
+        {
+            language: 'html',
+            code: customPositionHtml,
+            fileName: 'message-box-position-example'
+        },
+        {
+            language: 'typescript',
+            code: customPositionTs,
+            fileName: 'message-box-position-example',
+            component: 'MessageBoxPositionExampleComponent'
+        }
+    ];
+
     // complexDialog: ExampleFile[] = [
     //     {
     //         language: 'html',
@@ -280,15 +132,4 @@ export class MessageBoxDocsComponent {
     //     }
     // ];
     //
-    // constructor(private _schemaFactory: SchemaFactoryService, private _dialogService: DialogService) {
-    //     this.schema = this._schemaFactory.getComponent('dialog');
-    // }
-    //
-    // onSchemaValues(data): void {
-    //     this.data = data;
-    // }
-    //
-    // openDialog(template): void {
-    //     this._dialogService.open(template, this.data.properties);
-    // }
 }

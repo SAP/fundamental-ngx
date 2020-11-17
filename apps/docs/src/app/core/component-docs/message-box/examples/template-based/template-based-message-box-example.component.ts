@@ -10,10 +10,10 @@ export class TemplateBasedMessageBoxExampleComponent {
 
     constructor(private _messageBoxService: MessageBoxService) {}
 
-    openDialog(messageBox: TemplateRef<any>): void {
-        const dialogRef = this._messageBoxService.open(messageBox, { responsivePadding: true });
+    openMessageBox(messageBox: TemplateRef<any>): void {
+        const messageBoxRef = this._messageBoxService.open(messageBox);
 
-        dialogRef.afterClosed.subscribe(
+        messageBoxRef.afterClosed.subscribe(
             (result) => {
                 this.confirmationReason = 'Message box closed with result: ' + result;
             },

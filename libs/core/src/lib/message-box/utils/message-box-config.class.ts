@@ -14,6 +14,6 @@ export interface MessageBoxConfigurableElement {
 }
 
 export class MessageBoxConfig<T = any> extends DialogConfigBase<T> {
-    type?: MessageBoxType;
+    type?: MessageBoxType = 'confirmation';
     responsivePadding?: boolean = true;
 }

@@ -7,22 +7,33 @@ import { MessageBoxService } from './services/message-box.service';
 import { MessageBoxBodyComponent } from './message-box-body/message-box-body.component';
 import { MessageBoxFooterComponent } from './message-box-footer/message-box-footer.component';
 import { MessageBoxHeaderComponent } from './message-box-header/message-box-header.component';
+import { MessageBoxCloseIconDirective } from './directives/message-box-close-button.directive';
+import { MessageBoxDecisiveButton } from './directives/message-box-decisive-button.directive';
+import { MessageBoxTitle } from './directives/message-box-title.directive';
 import { BarModule } from '../bar/bar.module';
+import { ButtonModule } from '../button/button.module';
+import { IconModule } from '../icon/icon.module';
+import { TitleModule } from '../title/title.module';
+import { MessageBoxDefaultComponent } from './message-box-default/message-box-default.component';
 
 export const components = [
     MessageBoxContainerComponent,
     MessageBoxFooterComponent,
     MessageBoxHeaderComponent,
     MessageBoxBodyComponent,
-    MessageBoxComponent
+    MessageBoxComponent,
+    MessageBoxCloseIconDirective,
+    MessageBoxDefaultComponent,
+    MessageBoxDecisiveButton,
+    MessageBoxTitle,
 ];
 
 @NgModule({
     declarations: [components],
-    imports: [CommonModule, BarModule],
-    exports: [components, BarModule],
+    imports: [CommonModule, IconModule, BarModule, TitleModule, ButtonModule],
+    exports: [components, IconModule, BarModule, TitleModule, ButtonModule],
     providers: [MessageBoxService, DynamicComponentService],
-    entryComponents: [MessageBoxContainerComponent],
+    entryComponents: [MessageBoxContainerComponent, MessageBoxDefaultComponent]
 })
 export class MessageBoxModule {
 }

@@ -1,0 +1,34 @@
+<fd-message-box>
+    <fd-message-box-header>
+        <h1 fd-title>{{ messageBoxContent.title }}</h1>
+        <fd-message-box-close-icon
+            [mobile]="messageBoxConfig.mobile"
+            (click)="onCloseButton()">
+        </fd-message-box-close-icon>
+    </fd-message-box-header>
+    <fd-message-box-body>
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </fd-message-box-body>
+    <fd-message-box-footer>
+        <button
+            fd-button
+            fd-message-box-decisive-button
+            fdType="emphasized"
+            [label]="messageBoxContent.approveButton"
+            [compact]="!messageBoxConfig.mobile"
+            (click)="onApproveButton()">
+        </button>
+        <button
+            fd-button
+            fd-message-box-decisive-button
+            fdType="transparent"
+            [label]="messageBoxContent.cancelButton"
+            [compact]="!messageBoxConfig.mobile"
+            (click)="onCancelButton()">
+        </button>
+    </fd-message-box-footer>
+</fd-message-box>
+
+<ng-template #textContent>
+    {{ messageBoxContent.content }}
+</ng-template>
