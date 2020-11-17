@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core';
+import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 /**
  * Applies a thumb styles
@@ -7,7 +7,7 @@ import { applyCssClass } from '@fundamental-ngx/core';
 @Directive({
     selector: '[fdFeedInputAvatar]',
 })
-export class FeedInputAvatarDirective implements OnInit, OnChanges {
+export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
     @Input()
     class: string;

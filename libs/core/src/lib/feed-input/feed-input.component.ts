@@ -6,10 +6,11 @@ import {
     ViewEncapsulation,
     AfterContentInit,
     forwardRef,
-    OnDestroy, ViewChild
+    OnDestroy
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ButtonComponent, FeedInputButtonDirective, FeedInputTextareaDirective } from '../..';
+import { FeedInputTextareaDirective } from './directives/feed-input-textarea.directive';
+import { FeedInputButtonDirective } from './directives/feed-input-button.directive';
 
 @Component({
     selector: 'fd-feed-input',
