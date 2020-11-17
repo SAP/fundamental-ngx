@@ -41,10 +41,11 @@ export interface TimeColumnItemOutput<T> {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TimeColumnComponent<K, T extends SelectableViewItem<K>> implements AfterViewInit, OnInit, OnDestroy {
+export class TimeColumnComponent<K, T extends SelectableViewItem<K> = SelectableViewItem<K>>
+    implements AfterViewInit, OnInit, OnDestroy {
     /** items in row */
     @Input()
-    rows: T[];
+    rows: T[] = [];
 
     /** items in row */
     @Input()

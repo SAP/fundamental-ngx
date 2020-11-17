@@ -255,6 +255,11 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, ControlValueAc
     };
 
     /** @hidden */
+    get rangeDelimiter(): string {
+        return this._dateTimeFormats.rangeDelimiter;
+    }
+
+    /** @hidden */
     constructor(
         private _changeDetectionRef: ChangeDetectorRef,
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
@@ -482,7 +487,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, ControlValueAc
 
             /** Case when there is range mode */
         } else {
-            const [startDateStr, endDateStr] = dateStr.split(this._dateTimeFormats.rangeDelimiter);
+            const [startDateStr, endDateStr] = dateStr.split(this.rangeDelimiter);
             const startDate = this._dateTimeAdapter.parse(startDateStr, this._dateTimeFormats.parse.dateInput);
             const endDate = this._dateTimeAdapter.parse(endDateStr, this._dateTimeFormats.parse.dateInput);
 
@@ -498,8 +503,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, ControlValueAc
 
                 /** If the end date is before the start date, there is need to replace them  */
                 if (
-                    this._dateTimeAdapter.compareDate(startDate, endDate) > 0 &&
-                    this._dateTimeAdapter.isValid(endDate)
+                    this._dateTimeAdapter.isValid(startDate) &&
+                    this._dateTimeAdapter.isValid(endDate) &&
+                    this._dateTimeAdapter.compareDate(startDate, endDate) > 0
                 ) {
                     selectedRangeDate = { start: endDate, end: startDate };
                 } else {
@@ -579,6 +585,6 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, ControlValueAc
     private _formatDateRange(dateRange: DateRange<D>): string {
         const startDate = this._formatDate(dateRange.start);
         const endDate = this._formatDate(dateRange.end);
-        return startDate + this._dateTimeFormats.rangeDelimiter + endDate;
+        return startDate + this.rangeDelimiter + endDate;
     }
 }

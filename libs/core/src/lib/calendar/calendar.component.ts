@@ -290,8 +290,8 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
                 }
 
                 this.selectedRangeDate = {
-                    start: this._dateTimeAdapter.clone(selected.start),
-                    end: this._dateTimeAdapter.clone(selected.end)
+                    start: selected.start,
+                    end: selected.end
                 };
             }
 

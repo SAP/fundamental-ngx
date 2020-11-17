@@ -583,32 +583,24 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     private _calculateTimeOptions(): void {
         const format = this._dateTimeFormats.display.dateTimeInput;
 
-        if (this.meridian == null) {
-            // default meridian option based on format option
-            this._meridian = this._dateTimeAdapter.isTimeFormatIncludesDayPeriod(format);
-        } else {
-            this._meridian = this.meridian;
-        }
+        // default meridian option based on format option
+        this._meridian =
+            this.meridian != null ? this.meridian : this._dateTimeAdapter.isTimeFormatIncludesDayPeriod(format);
 
-        if (this.displaySeconds == null) {
-            // default seconds option based on format option
-            this._displaySeconds = this._dateTimeAdapter.isTimeFormatIncludesSeconds(format);
-        } else {
-            this._displaySeconds = this.displaySeconds;
-        }
+        // default seconds option based on format option
+        this._displaySeconds =
+            this.displaySeconds != null
+                ? this.displaySeconds
+                : this._dateTimeAdapter.isTimeFormatIncludesSeconds(format);
 
-        if (this.displayMinutes == null) {
-            // default minutes option based on format option
-            this._displayMinutes = this._dateTimeAdapter.isTimeFormatIncludesMinutes(format);
-        } else {
-            this._displayMinutes = this.displayMinutes;
-        }
+        // default minutes option based on format option
+        this._displayMinutes =
+            this.displayMinutes != null
+                ? this.displayMinutes
+                : this._dateTimeAdapter.isTimeFormatIncludesMinutes(format);
 
-        if (this.displayHours == null) {
-            // default hours option based on format option
-            this._displayHours = this._dateTimeAdapter.isTimeFormatIncludesHours(format);
-        } else {
-            this._displayHours = this.displayHours;
-        }
+        // default hours option based on format option
+        this._displayHours =
+            this.displayHours != null ? this.displayHours : this._dateTimeAdapter.isTimeFormatIncludesHours(format);
     }
 }

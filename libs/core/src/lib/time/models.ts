@@ -3,3 +3,8 @@ export class SelectableViewItem<T> {
     label: string;
     index?: number;
 }
+
+export const enum Meridian {
+    AM = 'AM',
+    PM = 'PM'
+}

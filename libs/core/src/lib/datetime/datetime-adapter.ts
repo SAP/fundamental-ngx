@@ -344,7 +344,10 @@ export abstract class DatetimeAdapter<D> {
         return (
             this.getYear(first) - this.getYear(second) ||
             this.getMonth(first) - this.getMonth(second) ||
-            this.getDate(first) - this.getDate(second)
+            this.getDate(first) - this.getDate(second) ||
+            this.getHours(first) - this.getHours(second) ||
+            this.getMinutes(first) - this.getMinutes(second) ||
+            this.getSeconds(first) - this.getSeconds(second)
         );
     }
 }

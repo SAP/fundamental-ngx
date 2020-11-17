@@ -5,9 +5,7 @@ import {
     forwardRef,
     Input,
     QueryList,
-    OnChanges,
     OnInit,
-    SimpleChanges,
     ViewChildren,
     ViewEncapsulation,
     AfterViewInit,
@@ -20,7 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { DatetimeAdapter } from '../datetime';
-import { SelectableViewItem } from './models';
+import { Meridian, SelectableViewItem } from './models';
 import { createMissingDateImplementationError } from './errors';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
@@ -28,10 +26,6 @@ import { TimeColumnComponent } from './time-column/time-column.component';
 import { KeyUtil } from '../utils/functions';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
-export const enum Meridian {
-    AM = 'AM',
-    PM = 'PM'
-}
 
 type HourViewItem = SelectableViewItem<number>;
 type MinuteViewItem = SelectableViewItem<number>;
@@ -55,13 +49,19 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class TimeComponent<D> implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
      */
     @Input()
-    meridian = false;
+    set meridian(meridian: boolean) {
+        this._meridian = meridian;
+        this._setUpViewGrid();
+    }
+    get meridian(): boolean {
+        return this._meridian;
+    }
 
     /**
      *  @Input When set to false, does not set the input field to invalid state on invalid entry.
@@ -111,7 +111,13 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      * @Input An object that contains datetime representation
      */
     @Input()
-    time: D;
+    set time(time: D) {
+        this._time = time;
+        this._setUpViewGrid();
+    }
+    get time(): D {
+        return this._time;
+    }
 
     /** @Input Whether to show spinner buttons */
     @Input()
@@ -172,6 +178,12 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private _meridian = false;
+
+    /** @hidden */
+    private _time: D;
+
+    /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _timeI18nLabels: TimeI18n,
@@ -183,15 +195,6 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
         // Set default time 00:00:00
         this.time = _dateTimeAdapter.createDate(_dateTimeAdapter.getYear(_dateTimeAdapter.today()), 1, 1);
-    }
-
-    /** @hidden
-     * Reacts only when there is meridian or time input change
-     */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.meridian || changes.time) {
-            this._setUpViewGrid();
-        }
     }
 
     /** @hidden */
@@ -242,7 +245,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this.columns.forEach((column) => column.setValueOfActive());
     }
 
-    /** @hidden
+    /**
+     * @hidden
      * Handles meridian change.
      * This implicitly changes hours by +/- 12
      */
@@ -268,7 +272,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this.onChange(this.time);
     }
 
-    /** @hidden
+    /**
+     * @hidden
      * Handles changes of displayed hour value from template.
      */
     handleHourChange(hour: number): void {
@@ -420,9 +425,6 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
                     label: name
                 };
             });
-
-        // for carousel we need to keep more than 24 items, 48 items should be enough
-        // this.hourViewItems = [...hoursViewItems, ...hoursViewItems].map((item, index) => ({ ...item, index: index }));
     }
 
     /** @hidden */
@@ -478,7 +480,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @hidden */
     private _calculateActiveMeridianViewItem(): void {
-        const meridian = this._calculateMeridianPeriod();
+        const meridian = this._getDayPeriodByHour();
         this.activeMeridianViewItem = this.meridianViewItems.find(({ value }) => value === meridian);
     }
 
@@ -510,14 +512,11 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      * @hidden
      * Get meridian period based on a given hours
      */
-    private _calculateMeridianPeriod(hour = this._getModelHour()): Meridian {
+    private _getDayPeriodByHour(hour = this._getModelHour()): Meridian {
         return this._isPm(hour) ? Meridian.PM : Meridian.AM;
     }
 
-    /**
-     * @hidden
-     * Defines if period is PM, Considers the fact that period should be case sensitive
-     */
+    /** @hidden */
     private _isPm(hours: number = this._getModelHour()): boolean {
         return hours >= 12;
     }

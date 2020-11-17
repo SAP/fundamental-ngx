@@ -3,101 +3,8 @@ import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 import { LETTERS_UNICODE_RANGE } from '../utils/consts/unicode-letters.regex';
 
 import { DatetimeAdapter } from './datetime-adapter';
+import { FdDate } from './fd-date';
 import { range, toIso8601 } from './fd-date.utils';
-
-export class FdDate {
-    /**
-     * The year of the date.
-     */
-    year: number;
-
-    /**
-     * The month of the date. 1 = January, 12 = December.
-     */
-    month: number;
-
-    /**
-     * Day of the date. Starts at 1.
-     */
-    day: number;
-
-    /**
-     * Date hours. 0 - 23.
-     */
-    hour: number;
-
-    /**
-     * Date minutes. 0 - 59.
-     */
-    minute: number;
-
-    /**
-     * Date seconds. 0 - 59.
-     */
-    second: number;
-
-    constructor(year?: number, month = 1, day = 1, hour = 0, minute = 0, second = 0) {
-        if (year == null) {
-            const now = FdDate.getNow();
-            year = now.year;
-            month = now.month;
-            day = now.day;
-            hour = now.hour;
-            minute = now.minute;
-            second = now.second;
-        }
-        this.year = year;
-        this.month = month;
-        this.day = day;
-        this.hour = hour;
-        this.minute = minute;
-        this.second = second;
-
-        return this;
-    }
-
-    static getNow(): FdDate {
-        const today = new Date();
-        return new FdDate(
-            today.getFullYear(),
-            today.getMonth() + 1,
-            today.getDate(),
-            today.getHours(),
-            today.getMinutes(),
-            today.getSeconds()
-        );
-    }
-
-    setTime(hour: number, minute: number, second: number): FdDate {
-        this.hour = hour;
-        this.minute = minute;
-        this.second = second;
-        return this;
-    }
-
-    toString(): string {
-        if (!this.year || !this.month || !this.day) {
-            return '';
-        }
-
-        return toIso8601(this);
-    }
-
-    toDateString(): string {
-        if (!this.year || !this.month || !this.day) {
-            return '';
-        }
-
-        return toIso8601(this).split('T')[0];
-    }
-
-    toTimeString(): string {
-        if (!this.year || !this.month || !this.day) {
-            return '';
-        }
-        return toIso8601(this).split('T')[1];
-    }
-}
 
 const AM_DAY_PERIOD_DEFAULT = 'AM';
 const PM_DAY_PERIOD_DEFAULT = 'PM';
@@ -282,6 +189,9 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     parse(value: any): FdDate | null {
+        if (value instanceof FdDate) {
+            return this.clone(value);
+        }
         /**
          * We have no way using the native JS Date to set the parse format or locale,
          * so we ignore these parameters.
@@ -290,7 +200,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         if (typeof value === 'number') {
             date = new Date(value);
         }
-        return Number.isNaN(date?.getDate) ? null : this._creteFdDateFromDateInstance(date);
+        return Number.isNaN(date.valueOf()) ? null : this._creteFdDateFromDateInstance(date);
     }
 
     format(date: FdDate, displayFormat: Object): string {
@@ -323,7 +233,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
         // It's possible to wind up in the wrong month if the original month has more days than the new
         // month. In this case we want to go to the last day of the desired month.
-        if (date.getDay() !== fdDate.day) {
+        if (date.getDate() !== fdDate.day) {
             date.setDate(0);
         }
 
@@ -347,7 +257,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     clone(date: FdDate): FdDate {
-        return new FdDate(date.year, date.month, date.day);
+        return new FdDate(date.year, date.month, date.day, date.hour, date.minute, date.second);
     }
 
     isValid(date: FdDate): boolean {

@@ -40,8 +40,6 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     private readonly _amountOfColPerRow: number = 3;
     private readonly _amountOfRows: number = 4;
 
-    private _monthNames: string[][];
-
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -161,11 +159,6 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     /** Method that check if this is selected month */
     isSelected(id: number): boolean {
         return id + this._monthOffset === this.monthSelected;
-    }
-
-    /** Method that returns grid of short month names from currently provided */
-    get monthNames(): string[][] {
-        return this._monthNames;
     }
 
     /** Method that create month grid with required meta data */
