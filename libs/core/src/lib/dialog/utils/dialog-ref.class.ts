@@ -11,7 +11,7 @@ import { DialogRefBase } from '../base/dialog-ref-base.class';
 /** DialogRef injection token */
 export const DIALOG_REF = new InjectionToken<string[]>('DialogRef');
 
-export class DialogRef extends DialogRefBase {
+export class DialogRef<T = any> extends DialogRefBase<T> {
     private readonly _onHide = new BehaviorSubject<boolean>(false);
     private readonly _onLoading = new BehaviorSubject<boolean>(false);
 

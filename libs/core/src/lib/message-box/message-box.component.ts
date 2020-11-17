@@ -29,6 +29,7 @@ import { MESSAGE_BOX_REF, MessageBoxRef } from './utils/message-box-ref.class';
 
 import { DialogBase } from '../dialog/base/dialog-base.class';
 import { dialogFadeNgIf } from '../dialog/utils/dialog.animations';
+import { CSS_CLASS_NAME } from './utils/const';
 
 @Component({
     selector: 'fd-message-box',
@@ -42,7 +43,6 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
     @Input()
     set class(userClass: string) {
         this._class = userClass;
-        this.buildComponentCssClass();
     }
 
     /** MessageBoxRef - should be used for Template based Dialog implementation  */
@@ -94,6 +94,7 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
+        this.buildComponentCssClass();
     }
 
     ngOnChanges(): void {
@@ -114,16 +115,34 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
-            'fd-message-box--active',
-
-            this._messageBoxConfig.hasBackdrop ? 'fd-message-box' : '',
+            CSS_CLASS_NAME.messageBoxActive,
+            this._messageBoxTypeClass,
+            this._messageBoxConfig.hasBackdrop ? CSS_CLASS_NAME.messageBox : '',
+            this._messageBoxConfig.backdropClass ? this._messageBoxConfig.backdropClass : '',
             this._class,
-            this._messageBoxConfig.backdropClass ? this._messageBoxConfig.backdropClass : ''
         ];
     }
 
     /** @hidden */
     elementRef(): ElementRef {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    private get _messageBoxTypeClass(): string {
+        switch (this._config.type) {
+            case 'error':
+                return CSS_CLASS_NAME.messageBoxTypeError;
+            case 'success':
+                return CSS_CLASS_NAME.messageBoxTypeSuccess;
+            case 'warning':
+                return CSS_CLASS_NAME.messageBoxTypeWarning;
+            case 'information':
+                return CSS_CLASS_NAME.messageBoxTypeInformation;
+            case 'confirmation':
+                return CSS_CLASS_NAME.messageBoxTypeConfirmation;
+            default:
+                return '';
+        }
     }
 }

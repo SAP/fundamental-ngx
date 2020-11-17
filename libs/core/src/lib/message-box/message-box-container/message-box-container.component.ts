@@ -16,8 +16,10 @@ import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interf
 import { DynamicComponentContainer } from '../../utils/dynamic-component/';
 import { MESSAGE_BOX_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
 import { MESSAGE_BOX_REF, MessageBoxRef } from '../utils/message-box-ref.class';
+import { MessageBoxContent } from '../utils/message-box-content.interface';
+import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
 
-type ContentType = Type<any> | TemplateRef<any>
+type ContentType = Type<any> | TemplateRef<any> | MessageBoxContent;
 
 @Component({
     selector: 'fd-message-box-container',
@@ -76,7 +78,7 @@ export class MessageBoxContainerComponent extends DynamicComponentContainer<Cont
         } else if (this.childContent instanceof TemplateRef) {
             this._createFromTemplate(this.childContent, this._templateContext());
         } else {
-            // this._createFromDefaultConfiguration(this.childContent);
+            this._createFromDefaultMessageBox(this.childContent);
         }
         this._changeDetectorRef.detectChanges();
     }
@@ -87,10 +89,10 @@ export class MessageBoxContainerComponent extends DynamicComponentContainer<Cont
     }
 
     /** @hidden Load Dialog component from passed object */
-    // private _createFromDefaultConfiguration(config: DefaultDialogObject): void {
-    //     this.containerRef.clear();
-    //     const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DefaultDialogComponent);
-    //     this._componentRef = this.containerRef.createComponent(componentFactory);
-    //     this._componentRef.instance.defaultDialogConfig = config;
-    // }
+    private _createFromDefaultMessageBox(content: MessageBoxContent): void {
+        this.containerRef.clear();
+        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(MessageBoxDefaultComponent);
+        this._componentRef = this.containerRef.createComponent(componentFactory);
+        this._componentRef.instance.messageBoxContent = content;
+    }
 }

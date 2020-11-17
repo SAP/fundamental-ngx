@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 
-export class DialogRefBase {
+export class DialogRefBase<T> {
     protected readonly _afterClosed = new Subject<any>();
     protected readonly _afterLoaded = new Subject<any>();
 

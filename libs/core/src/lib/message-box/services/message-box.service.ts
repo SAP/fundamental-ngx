@@ -4,6 +4,7 @@ import { MESSAGE_BOX_CONFIG, MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from
 import { MESSAGE_BOX_REF, MessageBoxRef } from '../utils/message-box-ref.class';
 import { DialogBaseService } from '../../dialog/base/dialog-base.service';
 import { MessageBoxContainerComponent } from '../message-box-container/message-box-container.component';
+import { MessageBoxContent } from '../utils/message-box-content.interface';
 
 @Injectable()
 export class MessageBoxService extends DialogBaseService<MessageBoxContainerComponent> {
@@ -17,10 +18,10 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
 
     /**
      * Opens a message box component with provided content.
-     * @param contentType Content of the message box component.
+     * @param content Content of the message box component.
      * @param config Configuration of the message box component.
      */
-    public open(contentType: Type<any> | TemplateRef<any>, config?: MessageBoxConfig): MessageBoxRef {
+    public open(content: Type<any> | TemplateRef<any> | MessageBoxContent, config?: MessageBoxConfig): MessageBoxRef {
         const messageBoxRef = new MessageBoxRef();
 
         config = this._applyDefaultConfig(config, this._defaultConfig || new MessageBoxConfig());
@@ -35,7 +36,7 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
 
         const component = this._dynamicComponentService.createDynamicComponent<MessageBoxContainerComponent>
         (
-            contentType,
+            content,
             MessageBoxContainerComponent,
             config,
             { injector: injector }

@@ -35,7 +35,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    abstract get _ref(): DialogRefBase;
+    abstract get _ref(): DialogRefBase<any>;
 
     /** @hidden */
     abstract get _config(): DialogConfigBase<any>;
@@ -55,7 +55,6 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
             this._ref.dismiss('backdrop');
         }
     }
-
 
     constructor(
         protected _router: Router,
