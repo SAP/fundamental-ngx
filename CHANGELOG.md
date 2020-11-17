@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.3...v0.24.1-rc.4) (2020-11-17)
+
+
+### Bug Fixes
+
+* (core) Add overlay css to popover ([#3883](https://github.com/SAP/fundamental-ngx/issues/3883)) ([c026fde](https://github.com/SAP/fundamental-ngx/commit/c026fde6e4ca35b414caaa3e590ed52b66ce7a63))
+
 ### [0.24.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.2...v0.24.1-rc.3) (2020-11-16)
 
 ### [0.24.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.1...v0.24.1-rc.2) (2020-11-16)
