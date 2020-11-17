@@ -536,7 +536,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this._changeDetectorRef.markForCheck();
         } else {
             // After slide limit reached, if dragging starts then revert visibility
-            if (!this._slideSwiped) {
+            if (!this._slideSwiped && !this.loop) {
                 this._manageSlideVisibility(this.currentActiveSlidesStartIndex);
             }
         }

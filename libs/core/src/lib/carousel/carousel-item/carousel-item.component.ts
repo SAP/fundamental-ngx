@@ -62,18 +62,20 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @Input()
     value: any;
 
+    /** @hidden */
     @HostBinding('class.fd-carousel__item')
-    carouselItem = 'fd-carousel__item';
+    carouselItem = true;
 
+    /** @hidden */
     @HostBinding('class.fd-carousel__item--active')
     carouselItemActive = true;
 
-    /** Hide/show slide, useful for managing tab order */
+    /** @hidden Hide/show slide, useful for managing tab order */
     @HostBinding('style.visibility')
     visibility = 'visible';
 
     /**
-     * Handling width height in IE versions.
+     * @hidden Handling width height in IE versions.
      */
     @HostBinding('class.fd-carousel--ie-handling')
     ieAutoWidth = true;
