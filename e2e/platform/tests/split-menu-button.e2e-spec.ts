@@ -1,7 +1,7 @@
 import { SplitMenuButtonPo } from '../pages/split-menu-button.po';
 import { browser } from 'protractor';
 import SMBData from '../fixtures/appData/split-menu-button-page-contents';
-import { getText, getValueOfAttribute, hoverMouse } from '../helper/helper';
+import { getText, getValueOfAttribute, hoverMouse } from '../../helper/helper';
 
 describe('Split menu button test suite', function() {
     const spMenuBtnPage = new SplitMenuButtonPo();

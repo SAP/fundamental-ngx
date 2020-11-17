@@ -1,6 +1,6 @@
 import { BaseComponentPo } from './base-component.po';
 import { $, $$ } from 'protractor';
-import { waitForVisible } from '../helper/helper';
+import { waitForVisible } from '../../helper/helper';
 
 export class LinkPo extends BaseComponentPo {
     readonly url = '/link';

@@ -1,5 +1,5 @@
 import { SwitchPo } from '../pages/switch.po';
-import { getValueOfAttribute, hoverMouse, waitForPresence } from '../helper/helper';
+import { getValueOfAttribute, hoverMouse, waitForPresence } from '../../helper/helper';
 import switchPageContent from '../fixtures/appData/swich-page-content';
 import { browser } from 'protractor';
 

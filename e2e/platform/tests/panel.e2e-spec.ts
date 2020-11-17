@@ -1,7 +1,7 @@
 import { browser } from 'protractor';
 import { PanelPo } from '../pages/panel.po';
 import panelPageContent from '../fixtures/appData/panel-page-content';
-import { isClickable } from '../helper/helper';
+import { isClickable } from '../../helper/helper';
 
 describe('Verify Panel', function() {
     const panelPage = new PanelPo();

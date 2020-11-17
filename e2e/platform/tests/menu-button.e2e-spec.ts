@@ -1,6 +1,6 @@
 import { MenuButtonPo } from '../pages/menu-button.po';
 import { browser } from 'protractor';
-import { clickTwice, getValueOfAttribute, waitForVisible } from '../helper/helper';
+import { clickTwice, getValueOfAttribute, waitForVisible } from '../../helper/helper';
 import MenuBtnData from '../fixtures/appData/menu-button-contents';
 
 describe('Menu button test suite', function() {

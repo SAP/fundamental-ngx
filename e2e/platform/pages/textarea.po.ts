@@ -1,6 +1,6 @@
 import { BaseComponentPo } from './base-component.po';
 import { $, $$, by, element } from 'protractor';
-import { waitForVisible } from '../helper/helper';
+import { waitForVisible } from '../../helper/helper';
 
 export class TextareaPo extends BaseComponentPo {
     url = '/textarea';

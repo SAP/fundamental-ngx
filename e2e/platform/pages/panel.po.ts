@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForVisible } from '../helper/helper';
+import { waitForVisible } from '../../helper/helper';
 import { $, $$ } from 'protractor';
 
 export class PanelPo extends BaseComponentPo {
