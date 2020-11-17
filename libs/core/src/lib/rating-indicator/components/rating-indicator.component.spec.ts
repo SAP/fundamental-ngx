@@ -5,7 +5,7 @@ import { RatingIndicatorComponent } from './rating-indicator.component';
 
 const prefix = 'fd-rating-indicator';
 
-fdescribe('RatingIndicatorComponent', () => {
+describe('RatingIndicatorComponent', () => {
   let elementRef: ElementRef;
   let component: RatingIndicatorComponent;
   let fixture: ComponentFixture<RatingIndicatorComponent>;
