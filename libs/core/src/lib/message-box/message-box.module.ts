@@ -22,7 +22,7 @@ export const components = [
     imports: [CommonModule, BarModule],
     exports: [components, BarModule],
     providers: [MessageBoxService, DynamicComponentService],
-    entryComponents: [MessageBoxComponent, MessageBoxContainerComponent],
+    entryComponents: [MessageBoxContainerComponent],
 })
 export class MessageBoxModule {
 }

@@ -1,6 +1,6 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { MESSAGE_BOX_CONFIG, MESSAGE_BOX_CONFIGURABLE_ELEMENT, MessageBoxConfig } from '../utils/message-box-config.class';
-import { DialogFooterBase } from '../../dialog/base';
+import { DialogFooterBase } from '../../dialog/base/dialog-footer-base.class';
 
 @Component({
     selector: 'fd-message-box-footer',

@@ -14,10 +14,10 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
-import { Router } from '@angular/router';
 import {
     MESSAGE_BOX_CONFIG,
     MESSAGE_BOX_CONFIGURABLE_ELEMENT,
@@ -74,7 +74,7 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
     private _class = '';
 
     constructor(
-        @Optional() @Inject(MESSAGE_BOX_CONFIG) private _messageBoxConfig: MessageBoxConfig,
+        @Optional() @Inject(MESSAGE_BOX_CONFIG) public _messageBoxConfig: MessageBoxConfig,
         @Optional() @Inject(MESSAGE_BOX_REF) private _messageBoxRef: MessageBoxRef,
         @Optional() router: Router,
         changeDetectorRef: ChangeDetectorRef,
