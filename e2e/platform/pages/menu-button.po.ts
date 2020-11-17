@@ -1,6 +1,6 @@
 import { BaseComponentPo } from './base-component.po';
 import { $, $$ } from 'protractor';
-import { waitForVisible } from '../helper/helper';
+import { waitForVisible } from '../../helper/helper';
 
 export class MenuButtonPo extends BaseComponentPo {
     private url = '/menu-button';

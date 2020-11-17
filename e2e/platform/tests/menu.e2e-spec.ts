@@ -1,13 +1,13 @@
 import { MenuPo } from '../pages/menu.po';
 import { browser, protractor } from 'protractor';
 import MenuData from '../fixtures/appData/menu-contents'
-import { clickTwice, getValueOfAttribute, hoverMouse } from '../helper/helper';
+import { clickTwice, getValueOfAttribute, hoverMouse } from '../../helper/helper';
 import {
     check2ndLvlMenuItemsHvrState,
     check3rdLvlMenuItemsHvrState,
     checkMenuItemsActiveState,
     checkMenuItemsHoverState
-} from '../helper/assertion-helper';
+} from '../../helper/assertion-helper';
 
 describe('Menu component test suite', function() {
     const menuPage = new MenuPo();
@@ -41,8 +41,9 @@ describe('Menu component test suite', function() {
             });
 
             basicMenuBtnArr.forEach(async element => {
-                await hoverMouse(element);
-                await expect(await element.getCssValue(MenuData.bgColorAttribute)).toEqual(MenuData.menuBtnHoverColor)
+                await hoverMouse(element).then( async () => {
+                    await expect(await element.getCssValue(MenuData.bgColorAttribute)).toEqual(MenuData.menuBtnHoverColor);
+                });
             });
 
             await menuPage.firstMenuBtn.sendKeys(protractor.Key.TAB).then( async () => {
@@ -59,7 +60,7 @@ describe('Menu component test suite', function() {
 
             // checks horizontal example.
             await clickTwice(menuPage.menuHorizontalAvatarBtn);
-            // fails because of issue #3734
+            // todo: fails because of issue #3734
             // await expect(await menuPage.menuHorizontalAvatarBtn.getCssValue(MenuData.menuAvatarFocusAttr)).toEqual(MenuData.menuAvatarFocusColor);
             await expect(await getValueOfAttribute(menuPage.menuHorizontalAvatarBtn, 'image')).not.toBe(null);
 

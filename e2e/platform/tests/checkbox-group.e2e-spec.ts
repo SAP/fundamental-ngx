@@ -8,9 +8,9 @@ import {
     checkIfDisabled,
     checkLabels,
     checkMarkingCheckbox, checkOutputLabel
-} from '../helper/assertion-helper';
+} from '../../helper/assertion-helper';
 import checkboxGPData from '../fixtures/appData/checkbox-group-page-content';
-import { clickByMouseMove } from '../helper/helper';
+import { clickByMouseMove } from '../../helper/helper';
 
 describe('Checkbox group test suite', () => {
     const checkboxGroupPage = new CheckboxGroupPO();

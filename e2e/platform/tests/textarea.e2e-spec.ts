@@ -8,7 +8,7 @@ import {
     hoverMouse,
     setInput,
     waitForTextToBePresentInElementValue, waitForVisible
-} from '../helper/helper';
+} from '../../helper/helper';
 
 
 describe('Verify Textarea component', function() {

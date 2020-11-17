@@ -1,5 +1,5 @@
 import { $, $$ } from 'protractor';
-import { waitForVisible } from '../helper/helper';
+import { waitForVisible } from '../../helper/helper';
 import { BaseComponentPo } from './base-component.po';
 
 export class SwitchPo extends BaseComponentPo {
