@@ -1,0 +1,15 @@
+<button fd-button (click)="vhd.open()">Open value help dialog</button>
+<fdp-value-help-dialog #vhd
+    dialogTitle="Simple value help dialog"
+    [dataSource]="dataSource"
+    [multiSelection]="true"
+>
+    <fdp-value-help-dialog-filter
+        *ngFor="let filter of filters"
+        [key]="filter.key"
+        [label]="filter.label"
+        [advanced]="filter.advanced || hasAdvanced"
+        [include]="filter.include"
+        [exclude]="filter.exclude"
+    ></fdp-value-help-dialog-filter>
+</fdp-value-help-dialog>
