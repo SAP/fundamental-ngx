@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.4...v0.24.1-rc.5) (2020-11-18)
+
+
+### Bug Fixes
+
+* (Core)  arrow keys in Core carousel component ([#3774](https://github.com/SAP/fundamental-ngx/issues/3774)) ([204edd3](https://github.com/SAP/fundamental-ngx/commit/204edd341497fba97ea9508d74bc5cb7cb438bcc))
+
 ### [0.24.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.3...v0.24.1-rc.4) (2020-11-17)
 
 
