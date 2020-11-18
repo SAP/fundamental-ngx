@@ -11,7 +11,7 @@ import { MessageBoxDocsHeaderComponent } from './message-box-docs-header/message
 const routes: Routes = [
     {
         path: '',
-        component: MessageBoxDocsComponent,
+        component: MessageBoxDocsHeaderComponent,
         children: [
             { path: '', component: MessageBoxDocsComponent },
             { path: 'api', component: ApiComponent, data: { content: API_FILES.messageBox } }
@@ -29,7 +29,7 @@ const routes: Routes = [
     declarations: [
         examples,
         MessageBoxDocsComponent,
-        MessageBoxDocsHeaderComponent
+        MessageBoxDocsHeaderComponent,
     ],
     entryComponents: [entryComponents]
 })

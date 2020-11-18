@@ -13,10 +13,10 @@ import { TitleComponent } from '../../title/title.component';
 @Directive()
 export abstract class DialogHeaderBase implements AfterContentInit {
     /** @hidden */
-    _headerTemplate: TemplateRef<any>;
+    headerTemplate: TemplateRef<any>;
 
     /** @hidden */
-    _subHeaderTemplate: TemplateRef<any>;
+    subHeaderTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ContentChild(TitleComponent)
@@ -29,7 +29,7 @@ export abstract class DialogHeaderBase implements AfterContentInit {
 
     /** @hidden */
     @ContentChildren(TemplateDirective)
-    private _customTemplates: QueryList<TemplateDirective>;
+    customTemplates: QueryList<TemplateDirective>;
 
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
@@ -40,13 +40,13 @@ export abstract class DialogHeaderBase implements AfterContentInit {
 
     /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
-        this._customTemplates.forEach(template => {
+        this.customTemplates.forEach(template => {
             switch (template.getName()) {
                 case 'header':
-                    this._headerTemplate = template.templateRef;
+                    this.headerTemplate = template.templateRef;
                     break;
                 case 'subheader':
-                    this._subHeaderTemplate = template.templateRef;
+                    this.subHeaderTemplate = template.templateRef;
                     break;
             }
         });

@@ -14,12 +14,8 @@ export class TemplateBasedMessageBoxExampleComponent {
         const messageBoxRef = this._messageBoxService.open(messageBox);
 
         messageBoxRef.afterClosed.subscribe(
-            (result) => {
-                this.confirmationReason = 'Message box closed with result: ' + result;
-            },
-            (error) => {
-                this.confirmationReason = 'Message box dismissed with result: ' + error;
-            }
+            (result) => { this.confirmationReason = 'Message box closed with result: ' + result; },
+            (error) => { this.confirmationReason = 'Message box dismissed with result: ' + error; }
         );
     }
 }

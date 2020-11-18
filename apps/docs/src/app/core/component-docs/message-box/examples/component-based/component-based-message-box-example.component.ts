@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { MessageBoxExampleComponent } from './message-box-example.component';
 import { MessageBoxService } from '@fundamental-ngx/core';
 
+export interface TextData {
+    title: string;
+    text: string;
+}
+
 @Component({
     selector: 'fd-component-based-message-box-example',
     template: `
@@ -15,7 +20,7 @@ export class ComponentBasedMessageBoxExampleComponent {
     constructor(private _messageBoxService: MessageBoxService) {}
 
     open(): void {
-        const messageBoxRef = this._messageBoxService.open(MessageBoxExampleComponent, {
+        const messageBoxRef = this._messageBoxService.open<TextData>(MessageBoxExampleComponent, {
             data: {
                 title: 'Fruit facts',
                 text: 'Coffee beans aren\'t beans. They are fruit pits.'
@@ -24,12 +29,8 @@ export class ComponentBasedMessageBoxExampleComponent {
         });
 
         messageBoxRef.afterClosed.subscribe(
-            (result) => {
-                this.closeReason = 'Message box closed with result: ' + result;
-            },
-            (error) => {
-                this.closeReason = 'Message box dismissed with result: ' + error;
-            }
+            (result) => { this.closeReason = 'Message box closed with result: ' + result; },
+            (error) => { this.closeReason = 'Message box dismissed with result: ' + error; }
         );
     }
 }

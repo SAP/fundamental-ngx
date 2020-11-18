@@ -20,9 +20,8 @@ import * as customPositionTs from '!raw-loader!./examples/custom-position/messag
 import * as mobileModeHtml from '!raw-loader!./examples/mobile-mode/message-box-mobile-example.component.html';
 import * as mobileModeTs from '!raw-loader!./examples/mobile-mode/message-box-mobile-example.component.ts';
 
-// import * as complexDialogTs from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.ts';
-// import * as complexDialogHtml from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.html';
-
+import * as complexTemplateTs from '!raw-loader!./examples/complex-template/complex-template-example.component.ts';
+import * as complexTemplateExampleTs from '!raw-loader!./examples/complex-template/message-box-complex-example.component.ts';
 
 @Component({
     selector: 'app-dialog',
@@ -118,18 +117,23 @@ export class MessageBoxDocsComponent {
         }
     ];
 
-    // complexDialog: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: complexDialogHtml,
-    //         fileName: 'dialog-complex-example'
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: complexDialogTs,
-    //         fileName: 'dialog-complex-example',
-    //         component: 'DialogComplexExampleComponent'
-    //     }
-    // ];
-    //
+    complexTemplate: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: complexTemplateTs,
+            name: 'Message box complex',
+            fileName: 'complex-template-example',
+            component: 'ComplexTemplateExampleComponent',
+            entryComponent: true
+        },
+        {
+            language: 'typescript',
+            code: complexTemplateExampleTs,
+            entryComponent: true,
+            main: true,
+            fileName: 'message-box-complex-example',
+            component: 'MessageBoxComplexExampleComponent'
+        }
+    ];
+
 }

@@ -1,21 +1,19 @@
 <header>Message Box</header>
+<import module="MessageBoxModule"></import>
+
 <description>
     <p>
-        The dialog is used as a container to be displayed in response to an action. It is commonly used to collect
-        simple information with a short form, to get confirmation or display contextual information that does not
-        require a page.
+        The message box is a special dialog that allows you to display messages to the user.You can use the message box
+        to display messages that are not related to a field on the UI, such as technical errors.
     </p>
     <p>
-        Dialogs make use of a singleton service called <code>DialogService</code>. It provides the ability to
-        <code>open()</code> dialog windows.
+        Message box make use of a service called <code>MessageBoxService</code>. It provides the ability to
+        <code>open()</code> message box windows.
     </p>
     <p>
-        The <code>open()</code> method accepts either a <code>TemplateRef</code> or <code>Component</code> as dialog
-        content. In addition, you may also provide a <code>DialogConfig</code> object to override some system-default
-        dialog window behaviours.
-    </p>
-    <p>
-        When a dialog window is opened, the content is positioned in a parent element that is appended to the body.
+        The <code>open()</code> method accepts either a <code>MessageBoxContent</code> object, <code>TemplateRef</code>
+        or <code>Component</code> as the message box content. In addition, you may also provide a
+        <code>MessageBoxConfig</code> object to override some default message box behaviours.
     </p>
     <p>
         Importing either <code>BrowserAnimationsModule</code> or <code>NoopAnimationsModule</code> is required.
@@ -23,8 +21,22 @@
         <code>NoopAnimationsModule</code> mocks the animations and does not render them, potentially increasing
         performance.
     </p>
+
+    <h2 fd-title [headerSize]="5">Use the message box if:</h2>
+    <ul>
+        <li>You want to interrupt the user while he or she performs an action.</li>
+        <li>You want to display error, warning, success, confirmation, or information messages.</li>
+        <li>You need to interrupt the user for some other reason.</li>
+        <li>You need the user to acknowledge the message.</li>
+        <li>You need the user to make a decision.</li>
+    </ul>
+
+    <h2 fd-title [headerSize]="5">Don't use the message box if:</h2>
+    <ul>
+        <li>You want to display a short success message. Instead, use Message Toast.</li>
+        <li>You can show the message directly in a form field.</li>
+    </ul>
 </description>
-<import module="MessageBoxModule"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

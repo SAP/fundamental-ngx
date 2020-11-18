@@ -1,10 +1,10 @@
 <header
     fd-bar
-    [cozy]="_messageBoxConfig.mobile"
     class="fd-message-box__header"
-    [barDesign]="_subHeaderTemplate ? 'header-with-subheader' : 'header'"
+    [cozy]="_messageBoxConfig.mobile"
+    [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
 >
-    <ng-container *ngTemplateOutlet="_headerTemplate ? _headerTemplate : defaultTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="headerTemplate ? headerTemplate : defaultTemplate"></ng-container>
 
     <ng-template #defaultTemplate>
         <div fd-bar-left>
@@ -20,6 +20,6 @@
     </ng-template>
 </header>
 
-<div fd-bar *ngIf="_subHeaderTemplate" class="fd-message-box__subheader" barDesign="subheader" [cozy]="_messageBoxConfig.mobile">
-    <ng-container *ngTemplateOutlet="_subHeaderTemplate"></ng-container>
+<div fd-bar *ngIf="subHeaderTemplate" class="fd-message-box__subheader" barDesign="subheader" [cozy]="_messageBoxConfig.mobile">
+    <ng-container *ngTemplateOutlet="subHeaderTemplate"></ng-container>
 </div>

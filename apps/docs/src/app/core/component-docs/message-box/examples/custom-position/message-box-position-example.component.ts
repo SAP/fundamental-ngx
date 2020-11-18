@@ -9,7 +9,7 @@ export class MessageBoxPositionExampleComponent {
 
     constructor(private _messageBoxService: MessageBoxService) {}
 
-    openMessageBox(): void {
+    open(): void {
         const content: MessageBoxContent = {
             title: 'Fruit facts',
             content: 'Strawberries have more vitamin C than oranges.',

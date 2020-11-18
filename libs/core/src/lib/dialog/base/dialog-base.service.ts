@@ -25,7 +25,7 @@ export abstract class DialogBaseService<T> {
         this._dialogs.forEach(item => this._destroyDialog(item));
     }
 
-    abstract open(content: unknown, config: DialogConfigBase<any>): DialogRefBase<any>;
+    abstract open<D>(content: unknown, config: DialogConfigBase<D>): DialogRefBase<D>;
 
     /** @hidden Extends configuration using default values*/
     protected _applyDefaultConfig(config: DialogConfig, defaultConfig: DialogConfig): DialogConfig {
