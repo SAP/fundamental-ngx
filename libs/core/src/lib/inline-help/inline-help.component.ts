@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Placement } from 'popper.js';
 /**
+ * @deprecated
  * The component that represents an inline-help.
  * Inline help is used to display help text in a popover, often inline with headers, body text and form labels.
  *

@@ -56,8 +56,6 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges 
         switch (this._getElementTag()) {
             case 'input':
                 return 'fd-input';
-            case 'select':
-                return 'fd-form-select';
             case 'textarea':
                 return 'fd-textarea';
         }
