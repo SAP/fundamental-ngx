@@ -1,5 +1,5 @@
-import { AfterContentInit, Component, Inject, Optional } from '@angular/core';
-import { MESSAGE_BOX_CONFIG, MESSAGE_BOX_CONFIGURABLE_ELEMENT, MessageBoxConfig } from '../utils/message-box-config.class';
+import { AfterContentInit, Component, Optional } from '@angular/core';
+import { MESSAGE_BOX_CONFIGURABLE_ELEMENT, MessageBoxConfig } from '../utils/message-box-config.class';
 import { DialogFooterBase } from '../../dialog/base/dialog-footer-base.class';
 
 @Component({
@@ -10,7 +10,7 @@ import { DialogFooterBase } from '../../dialog/base/dialog-footer-base.class';
     ]
 })
 export class MessageBoxFooterComponent extends DialogFooterBase implements AfterContentInit {
-    constructor(@Optional() @Inject(MESSAGE_BOX_CONFIG) public _messageBoxConfig: MessageBoxConfig) {
+    constructor(@Optional() public _messageBoxConfig: MessageBoxConfig) {
         super();
         this._messageBoxConfig = this._messageBoxConfig || {};
     }

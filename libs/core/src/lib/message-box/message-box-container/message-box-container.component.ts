@@ -14,8 +14,8 @@ import {
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
 import { DynamicComponentContainer } from '../../utils/dynamic-component/';
-import { MESSAGE_BOX_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
-import { MESSAGE_BOX_REF, MessageBoxRef } from '../utils/message-box-ref.class';
+import { MessageBoxConfig } from '../utils/message-box-config.class';
+import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContent } from '../utils/message-box-content.interface';
 import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
 
@@ -43,8 +43,8 @@ export class MessageBoxContainerComponent extends DynamicComponentContainer<Cont
 
     /** @hidden */
     constructor(
-        @Inject(MESSAGE_BOX_CONFIG) public messageBoxConfig: MessageBoxConfig,
-        @Inject(MESSAGE_BOX_REF) private _messageBoxRef: MessageBoxRef,
+        public messageBoxConfig: MessageBoxConfig,
+        private _messageBoxRef: MessageBoxRef,
         elementRef: ElementRef,
         componentFactoryResolver: ComponentFactoryResolver,
         private _changeDetectorRef: ChangeDetectorRef

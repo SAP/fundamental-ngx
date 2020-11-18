@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MESSAGE_BOX_REF, MessageBoxRef } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
+import { MessageBoxRef } from '@fundamental-ngx/core';
 import { TextData } from './component-based-message-box-example.component';
 
 @Component({
@@ -34,5 +34,5 @@ import { TextData } from './component-based-message-box-example.component';
     `
 })
 export class MessageBoxExampleComponent {
-    constructor(@Inject(MESSAGE_BOX_REF) public messageBoxRef: MessageBoxRef<TextData>) {}
+    constructor(public messageBoxRef: MessageBoxRef<TextData>) {}
 }

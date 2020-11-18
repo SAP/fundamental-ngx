@@ -19,13 +19,12 @@ import { Router } from '@angular/router';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 import {
-    MESSAGE_BOX_CONFIG,
     MESSAGE_BOX_CONFIGURABLE_ELEMENT,
     MessageBoxConfig,
     MessageBoxConfigurableElement
 } from './utils/message-box-config.class';
 
-import { MESSAGE_BOX_REF, MessageBoxRef } from './utils/message-box-ref.class';
+import { MessageBoxRef } from './utils/message-box-ref.class';
 
 import { DialogBase } from '../dialog/base/dialog-base.class';
 import { dialogFadeNgIf } from '../dialog/utils/dialog.animations';
@@ -74,8 +73,8 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
     private _class = '';
 
     constructor(
-        @Optional() @Inject(MESSAGE_BOX_CONFIG) public _messageBoxConfig: MessageBoxConfig,
-        @Optional() @Inject(MESSAGE_BOX_REF) private _messageBoxRef: MessageBoxRef,
+        @Optional() public _messageBoxConfig: MessageBoxConfig,
+        @Optional() private _messageBoxRef: MessageBoxRef,
         @Optional() router: Router,
         changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef
