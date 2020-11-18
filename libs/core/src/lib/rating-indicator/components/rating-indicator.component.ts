@@ -246,12 +246,12 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: Function): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: Function): void {
         this.onTouched = fn;
     }
     /** @hidden */
