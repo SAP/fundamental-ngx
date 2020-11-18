@@ -34,9 +34,7 @@
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
-        <ng-container *ngIf="pageIndicator">
-            <ng-container *ngTemplateOutlet="pageIndicators"></ng-container>
-        </ng-container>
+        <ng-container *ngTemplateOutlet="pageIndicators"></ng-container>
 
         <ng-container *ngIf="navigatorInPageIndicator">
             <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
@@ -47,16 +45,20 @@
 <ng-template #pageIndicators>
     <ng-container *ngIf="numericIndicator">
         <div class="fd-carousel__page-indicators">
-            <div class="fd-carousel__text" dir="ltr">
-                {{getPageIndicatorLabel}}
-            </div>
+            <ng-container *ngIf="pageIndicator">
+                <div class="fd-carousel__text" dir="ltr">
+                    {{getPageIndicatorLabel}}
+                </div>
+            </ng-container>
         </div>
     </ng-container>
     <ng-container *ngIf="!numericIndicator">
         <ol class="fd-carousel__page-indicators" [attr.dir]="dir">
-            <ng-container *ngFor="let item of pageIndicatorsCountArray; let i=index">
-                <li [attr.data-slide-to]="i+1" class="fd-carousel__page-indicator"
-                    [class.fd-carousel__page-indicator--active]="i===currentActiveSlidesStartIndex"></li>
+            <ng-container *ngIf="pageIndicator">
+                <ng-container *ngFor="let item of pageIndicatorsCountArray; let i=index">
+                    <li [attr.data-slide-to]="i+1" class="fd-carousel__page-indicator"
+                        [class.fd-carousel__page-indicator--active]="i===currentActiveSlidesStartIndex"></li>
+                </ng-container>
             </ng-container>
         </ol>
     </ng-container>
