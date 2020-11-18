@@ -77,7 +77,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="message-box-position" componentName="message-box">
+<fd-docs-section-title id="custom-position" componentName="message-box">
     Message box positioning
 </fd-docs-section-title>
 <description>
@@ -103,3 +103,24 @@
     <fd-message-box-mobile-example></fd-message-box-mobile-example>
 </component-example>
 <code-example [exampleFiles]="mobileMode"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="complex-template" componentName="message-box">
+    Complex template
+</fd-docs-section-title>
+<description>
+    To create more complex message box it is possible to provide custom header, subheader and footer templates.
+    To provide these custom templates, create an element with one of the following directives:
+    <ul>
+        <li>Header - fdTemplate="header"</li>
+        <li>Subheader - fdTemplate="subheader"</li>
+        <li>Footer - fdTemplate="footer"</li>
+    </ul>
+    Custom templates are embedded views for the Bar Component so it is possible to use Bar Component features inside
+    them. For complex templates you may use the fd-bar-element as an equivalent of the fd-message-box-footer-button.
+</description>
+<component-example>
+    <fd-complex-template-example></fd-complex-template-example>
+</component-example>
+<code-example [exampleFiles]="complexTemplate"></code-example>

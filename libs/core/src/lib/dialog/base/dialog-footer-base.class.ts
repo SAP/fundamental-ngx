@@ -5,11 +5,11 @@ import { TemplateDirective } from '../../utils/directives/template/template.dire
 export abstract class DialogFooterBase implements AfterContentInit {
 
     /** @hidden */
-    _footerTemplate: TemplateRef<any>;
+    footerTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ContentChildren(TemplateDirective)
-    private _customTemplates: QueryList<TemplateDirective>;
+    customTemplates: QueryList<TemplateDirective>;
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -18,7 +18,7 @@ export abstract class DialogFooterBase implements AfterContentInit {
 
     /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
-        const footerTemplate = this._customTemplates.find((template) => template.getName() === 'footer');
-        this._footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
+        const footerTemplate = this.customTemplates.find(template => template.getName() === 'footer');
+        this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
     }
 }

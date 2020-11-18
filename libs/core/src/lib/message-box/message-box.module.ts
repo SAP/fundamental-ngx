@@ -15,6 +15,7 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { TitleModule } from '../title/title.module';
 import { MessageBoxDefaultComponent } from './message-box-default/message-box-default.component';
+import { TemplateModule } from '../utils/directives/template/template.module';
 
 export const components = [
     MessageBoxContainerComponent,
@@ -25,13 +26,13 @@ export const components = [
     MessageBoxCloseIconDirective,
     MessageBoxDefaultComponent,
     MessageBoxDecisiveButton,
-    MessageBoxTitle,
+    MessageBoxTitle
 ];
 
 @NgModule({
     declarations: [components],
-    imports: [CommonModule, IconModule, BarModule, TitleModule, ButtonModule],
-    exports: [components, IconModule, BarModule, TitleModule, ButtonModule],
+    imports: [CommonModule, IconModule, TemplateModule, BarModule, TitleModule, ButtonModule],
+    exports: [components, IconModule, TemplateModule, BarModule, TitleModule, ButtonModule],
     providers: [MessageBoxService, DynamicComponentService],
     entryComponents: [MessageBoxContainerComponent, MessageBoxDefaultComponent]
 })

@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MESSAGE_BOX_REF, MessageBoxRef } from '@fundamental-ngx/core';
+import { TextData } from './component-based-message-box-example.component';
 
 @Component({
     template: `
@@ -18,7 +19,7 @@ import { MESSAGE_BOX_REF, MessageBoxRef } from '@fundamental-ngx/core';
                     fdType="emphasized"
                     label="Ok"
                     [compact]="true"
-                    (click)="this.messageBoxRef.close('Continue')">
+                    (click)="messageBoxRef.close('Ok')">
                 </button>
                 <button
                     fd-button
@@ -26,12 +27,12 @@ import { MESSAGE_BOX_REF, MessageBoxRef } from '@fundamental-ngx/core';
                     fdType="transparent"
                     label="Cancel"
                     [compact]="true"
-                    (click)="this.messageBoxRef.dismiss('Cancel')">
+                    (click)="messageBoxRef.dismiss('Cancel')">
                 </button>
             </fd-message-box-footer>
         </fd-message-box>
     `
 })
 export class MessageBoxExampleComponent {
-    constructor(@Inject(MESSAGE_BOX_REF) public messageBoxRef: MessageBoxRef) {}
+    constructor(@Inject(MESSAGE_BOX_REF) public messageBoxRef: MessageBoxRef<TextData>) {}
 }

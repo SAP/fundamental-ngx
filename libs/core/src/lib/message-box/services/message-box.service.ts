@@ -21,7 +21,7 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
      * @param content Content of the message box component.
      * @param config Configuration of the message box component.
      */
-    public open(content: Type<any> | TemplateRef<any> | MessageBoxContent, config?: MessageBoxConfig): MessageBoxRef {
+    public open<T = any>(content: Type<any> | TemplateRef<any> | MessageBoxContent, config?: MessageBoxConfig<T>): MessageBoxRef<T> {
         const messageBoxRef = new MessageBoxRef();
 
         config = this._applyDefaultConfig(config, this._defaultConfig || new MessageBoxConfig());

@@ -1,4 +1,5 @@
 import {
+    AfterContentInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -22,7 +23,7 @@ import {
         { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxHeaderComponent, multi: true }
     ]
 })
-export class MessageBoxHeaderComponent extends DialogHeaderBase {
+export class MessageBoxHeaderComponent extends DialogHeaderBase implements AfterContentInit {
 
     constructor(
         @Optional() @Inject(MESSAGE_BOX_CONFIG) public _messageBoxConfig: MessageBoxConfig,
@@ -31,4 +32,9 @@ export class MessageBoxHeaderComponent extends DialogHeaderBase {
         super(changeDetectorRef);
         this._messageBoxConfig = this._messageBoxConfig || {};
     }
+
+    ngAfterContentInit(): void {
+        super.ngAfterContentInit();
+    }
+
 }
