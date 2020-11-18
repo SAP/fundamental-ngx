@@ -1,12 +1,11 @@
 @import '~fundamental-styles/dist/dialog';
-@import '~fundamental-styles/dist/title';
 
 .fd-dialog {
     z-index: 1000;
 }
 
 .fd-dialog__resize-handle {
-    z-index: 100;
+    z-index: 1001;
 }
 
 .fd-dialog__content {
