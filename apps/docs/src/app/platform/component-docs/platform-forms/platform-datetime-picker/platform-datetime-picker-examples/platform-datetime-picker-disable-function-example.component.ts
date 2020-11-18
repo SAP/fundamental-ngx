@@ -11,15 +11,11 @@ import { PlatformDatetimePickerComponent } from '@fundamental-ngx/platform';
 export class PlatformDatetimePickerDisableFunctionExampleComponent {
     @ViewChild(PlatformDatetimePickerComponent) datePicker: PlatformDatetimePickerComponent;
 
-    public datetimePickerForm = new FormGroup({});
+    datetimePickerForm = new FormGroup({});
 
-    requiredDateValidator: ValidatorFn[];
+    requiredDateValidator: ValidatorFn[] = [Validators.required];
 
     date = FdDatetime.getToday();
-
-    constructor() {
-        this.requiredDateValidator = [Validators.required];
-    }
 
     disableFunction = (fdDate: FdDate): boolean => {
         return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp();

@@ -11,18 +11,17 @@ export class PlatformDatetimePickerReactiveExampleComponent {
     storedDate: FdDatetime = FdDatetime.getToday();
     date = FdDatetime.getToday();
 
-    public datetimePickerForm = new FormGroup({});
-    requiredDateValidator: ValidatorFn[];
+    datetimePickerForm = new FormGroup({});
+    requiredDateValidator: ValidatorFn[] = [Validators.required];
 
     data: StoredDatetimeObject;
 
     constructor() {
         this.storedDate = new FdDatetime(new FdDate(2008, 2, 11), this.storedDate.time);
         this.data = new StoredDatetimeObject(this.storedDate);
-        this.requiredDateValidator = [Validators.required];
     }
 
-    public onSubmit(): void {
+    onSubmit(): void {
         if (this.datetimePickerForm.valid) {
             alert('Form Value: ' + this.datetimePickerForm.value);
         } else {

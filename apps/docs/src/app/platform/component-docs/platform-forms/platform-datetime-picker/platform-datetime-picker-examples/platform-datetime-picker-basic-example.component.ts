@@ -24,7 +24,7 @@ export class PlatformDatetimePickerBasicExampleComponent {
         this.requiredDateValidator = [Validators.required];
     }
 
-    public save(value: any): void {
+    save(value: any): void {
         alert('Form Value: ' + value);
     }
 

@@ -10,7 +10,7 @@ import { FdDate, FdDatetime } from '@fundamental-ngx/core';
 export class PlatformDatetimePickerTemplateExampleComponent {
     storedDate: FdDatetime = FdDatetime.getToday();
 
-    requiredDateValidator: ValidatorFn[];
+    requiredDateValidator: ValidatorFn[] = [Validators.required];
 
     date = FdDatetime.getToday();
 
@@ -21,7 +21,6 @@ export class PlatformDatetimePickerTemplateExampleComponent {
 
     constructor() {
         this.storedDate = new FdDatetime(new FdDate(2008, 2, 11), this.storedDate.time);
-        this.requiredDateValidator = [Validators.required];
     }
 
     changeDay(): void {

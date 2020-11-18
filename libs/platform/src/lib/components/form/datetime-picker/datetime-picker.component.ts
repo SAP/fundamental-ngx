@@ -48,16 +48,9 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
         super.setValue(value);
     }
 
-    /** Setter for the _meridian property. */
+    /** value for the meridian property. */
     @Input()
-    set meridian(value: boolean) {
-        this.format = this._meridian ? 'MM/dd/yyyy, h:mm:ss a' : 'MM/dd/yyyy, H:mm:ss';
-        this._meridian = value;
-    }
-
-    get meridian(): boolean {
-        return this._meridian;
-    }
+    meridian: boolean;
 
     /** Whether the component should be in compact mode. */
     @Input()
@@ -135,11 +128,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
 
     @Input()
     set state(state: Status) {
-        if (state) {
-            this._state = state;
-        } else {
-            this._state = 'default';
-        }
+        this._state = state ? state : 'default';
     }
 
     get state(): Status {
@@ -230,10 +219,6 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
     @ViewChild(DatetimePickerComponent)
     dateTimePickerComponent: DatetimePickerComponent;
 
-    /** Whether the time component should be meridian (am/pm). */
-    /** @hidden */
-    private _meridian: boolean;
-
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -248,7 +233,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function (fdDate: FdDate): boolean {
+    disableFunction = (fdDate: FdDate): boolean => {
         return false;
     };
 
@@ -322,13 +307,13 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
     /**
      * Method that handles changes when popover is opened or closed.
      */
-    public handleOpenChange = (open: boolean): void => {
+    handleOpenChange = (open: boolean): void => {
         this.isOpenChange.emit(open);
     };
     /**
      * Method that handle calendar active view change and throws event.
      */
-    public handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
+    handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
         this.activeViewChange.emit(fdCalendarView);
     };
 
