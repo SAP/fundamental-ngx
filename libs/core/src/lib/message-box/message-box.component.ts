@@ -4,7 +4,6 @@ import {
     Component,
     ContentChildren,
     ElementRef,
-    Inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -34,6 +33,7 @@ import { CSS_CLASS_NAME } from './utils/const';
     selector: 'fd-message-box',
     templateUrl: './message-box.component.html',
     styleUrls: ['./message-box.component.scss'],
+    host: { tabindex: '-1' },
     encapsulation: ViewEncapsulation.None,
     animations: [dialogFadeNgIf]
 })
@@ -60,13 +60,13 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
     @ViewChild('dialogWindow')
     dialogWindow: ElementRef;
 
-    /** @hidden If dialog subcomponents didn't receive DialogConfig from Injector, DialogConfig is passed from parent.
-     * This is necessary when dialog has been passed as TemplateRef and created as EmbeddedView.
-     * In such case parent injector of DialogComponent is the component that DECLARED the TemplateRef.
+    /** @hidden If message box sub-components didn't receive MessageBoxConfig from Injector, MessageBoxConfig is passed
+     * from parent. This is necessary when message box has been passed as TemplateRef and created as EmbeddedView.
+     * In such case parent injector of MessageBoxComponent is the component that DECLARED the TemplateRef.
      **/
     @ContentChildren(MESSAGE_BOX_CONFIGURABLE_ELEMENT)
     set messageBox(elements: QueryList<MessageBoxConfigurableElement>) {
-        elements.forEach(element => element._messageBoxConfig = this._messageBoxConfig);
+        elements.forEach(element => element.messageBoxConfig = this._messageBoxConfig);
     }
 
     /** @hidden */
@@ -118,7 +118,7 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
             this._messageBoxTypeClass,
             this._messageBoxConfig.hasBackdrop ? CSS_CLASS_NAME.messageBox : '',
             this._messageBoxConfig.backdropClass ? this._messageBoxConfig.backdropClass : '',
-            this._class,
+            this._class
         ];
     }
 

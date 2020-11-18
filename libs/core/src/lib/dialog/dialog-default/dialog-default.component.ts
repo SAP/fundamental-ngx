@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DefaultDialogObject } from './default-dialog-object';
+import { DialogDefaultContent } from '../utils/dialog-default-content';
 
 @Component({
-    selector: 'fd-default-dialog',
-    templateUrl: './default-dialog.component.html',
+    selector: 'fd-dialog-default',
+    templateUrl: './dialog-default.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultDialogComponent {
+export class DialogDefaultComponent {
 
     /** @hidden */
-    defaultDialogConfig: DefaultDialogObject;
+    defaultDialogConfig: DialogDefaultContent;
 
     /** Whether there is a approve button, or cancel button text */
     showFooter(): boolean {

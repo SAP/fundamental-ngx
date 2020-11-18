@@ -4,9 +4,9 @@ import { DIALOG_CONFIG, DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dia
 import { DynamicComponentService } from '../../utils/dynamic-component';
 import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
 import { DialogBaseService } from '../base/dialog-base.service';
-import { DefaultDialogObject } from '../default-dialog/default-dialog-object';
+import { DialogDefaultContent } from '../utils/dialog-default-content';
 
-/** Service used to dynamically generate a dialog. */
+/** Service used to create a dialog. */
 @Injectable()
 export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
@@ -19,16 +19,16 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
     /**
      * Opens a dialog component with with provided content.
-     * @param contentType Content of the dialog component.
+     * @param content Content of the dialog component.
      * @param dialogConfig Configuration of the dialog component.
      */
-    public open(contentType: Type<any> | TemplateRef<any> | DefaultDialogObject, dialogConfig?: DialogConfig): DialogRef {
+    public open<T = any>(content: Type<any> | TemplateRef<any> | DialogDefaultContent, dialogConfig?: DialogConfig<T>): DialogRef<T> {
         const dialogRef = new DialogRef();
 
         dialogConfig = this._applyDefaultConfig(dialogConfig, this._defaultConfig || new DialogConfig());
         dialogRef.data = dialogConfig.data;
 
-        const dialogInjector = Injector.create({
+        const injector = Injector.create({
             providers: [
                 { provide: DIALOG_CONFIG, useValue: dialogConfig },
                 { provide: DIALOG_REF, useValue: dialogRef }
@@ -37,10 +37,10 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
         const component = this._dynamicComponentService.createDynamicComponent<DialogContainerComponent>
         (
-            contentType,
+            content,
             DialogContainerComponent,
             dialogConfig,
-            { injector: dialogInjector }
+            { injector: injector }
         );
 
         this._dialogs.push(component);

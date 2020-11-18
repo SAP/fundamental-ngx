@@ -1,23 +1,23 @@
-import { DefaultDialogComponent } from './default-dialog.component';
+import { DialogDefaultComponent } from './dialog-default.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from '../../button/button.module';
-import { DialogCloseButtonDirective, DialogDecisiveButtonDirective, DialogTitleDirective } from '../utils/dialog-directives';
-import { DefaultDialogObject } from './default-dialog-object';
+import { DialogDecisiveButtonDirective } from '../directives/dialog-decisive-button.directive';
+import { DialogDefaultContent } from '../utils/dialog-default-content';
 import { DialogHeaderComponent } from '../dialog-header/dialog-header.component';
+import { DialogCloseButtonComponent } from '../dialog-close-button/dialog-close-button.component';
 import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 
 describe('DefaultDialogComponent', () => {
-    let component: DefaultDialogComponent;
-    let fixture: ComponentFixture<DefaultDialogComponent>;
-    let object: DefaultDialogObject;
+    let component: DialogDefaultComponent;
+    let fixture: ComponentFixture<DialogDefaultComponent>;
+    let object: DialogDefaultContent;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule],
             declarations: [
-                DefaultDialogComponent,
-                DialogTitleDirective,
-                DialogCloseButtonDirective,
+                DialogDefaultComponent,
+                DialogCloseButtonComponent,
                 DialogDecisiveButtonDirective,
                 DialogHeaderComponent
             ],
@@ -36,7 +36,7 @@ describe('DefaultDialogComponent', () => {
             closeButtonCallback: () => {
             }
         };
-        fixture = TestBed.createComponent(DefaultDialogComponent);
+        fixture = TestBed.createComponent(DialogDefaultComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

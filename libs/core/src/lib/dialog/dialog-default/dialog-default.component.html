@@ -1,6 +1,6 @@
 <fd-dialog>
     <fd-dialog-header>
-        <h1 fd-dialog-title>{{ defaultDialogConfig?.title }}</h1>
+        <h1 fd-title>{{ defaultDialogConfig?.title }}</h1>
         <button fd-dialog-close-button
                 *ngIf="defaultDialogConfig?.closeButtonCallback"
                 (click)="closeButtonClicked()">

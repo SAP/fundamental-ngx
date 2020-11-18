@@ -6,6 +6,7 @@ import { DialogBaseService } from '../../dialog/base/dialog-base.service';
 import { MessageBoxContainerComponent } from '../message-box-container/message-box-container.component';
 import { MessageBoxContent } from '../utils/message-box-content.interface';
 
+/** Service used to create a message box. */
 @Injectable()
 export class MessageBoxService extends DialogBaseService<MessageBoxContainerComponent> {
 
@@ -53,5 +54,4 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
 
         return messageBoxRef;
     }
-
 }

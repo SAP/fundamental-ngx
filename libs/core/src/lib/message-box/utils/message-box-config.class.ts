@@ -9,7 +9,7 @@ export const MESSAGE_BOX_CONFIGURABLE_ELEMENT = new InjectionToken<MessageBoxCon
 export type MessageBoxType = 'error' | 'success' | 'warning' | 'information' | 'confirmation';
 
 export interface MessageBoxConfigurableElement {
-    _messageBoxConfig: MessageBoxConfig
+    messageBoxConfig: MessageBoxConfig
 }
 
 @Injectable()
