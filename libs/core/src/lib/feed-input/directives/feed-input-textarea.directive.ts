@@ -43,12 +43,12 @@ export class FeedInputTextareaDirective implements OnInit {
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
+        private readonly _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2
     ) {}
 
     /** @hidden */
-    get elementRef(): ElementRef<any> {
+    get elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 

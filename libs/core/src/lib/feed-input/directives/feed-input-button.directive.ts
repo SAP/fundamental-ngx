@@ -17,7 +17,7 @@ export class FeedInputButtonDirective implements OnInit {
     disabled = true;
 
     constructor(
-        private _elementRef: ElementRef,
+        private readonly _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2
     ) {
     }
@@ -28,7 +28,7 @@ export class FeedInputButtonDirective implements OnInit {
     }
 
     /** @hidden */
-    get elementRef(): ElementRef<any> {
+    get elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 

@@ -33,7 +33,7 @@ export class FeedInputComponent implements AfterContentInit, OnDestroy {
     buttonElement: FeedInputButtonDirective;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    private readonly _subscriptions = new Subscription();
 
     /** @hidden */
     ngAfterContentInit(): void {

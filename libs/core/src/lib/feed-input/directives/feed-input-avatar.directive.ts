@@ -16,7 +16,7 @@ export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuil
     @Input()
     placeholder: boolean;
 
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private readonly _elementRef: ElementRef<HTMLElement>) { }
 
     /** @hidden */
     ngOnInit(): void {
@@ -39,7 +39,7 @@ export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 }
