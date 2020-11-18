@@ -177,6 +177,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 });
             }
         });
+        this._setUpScrollListener();
+    }
+
+    /** @hidden */
+    private _setUpScrollListener(): void {
         let timer = null;
         this.wrapperContainer.nativeElement.addEventListener('scroll', () => {
             if (timer !== null) {
@@ -254,8 +259,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _stepClicked(clickedStep: WizardStepComponent): void {
+        const clickedStepIndex = this.steps.toArray().indexOf(clickedStep);
         this.steps.forEach((step) => {
-            const clickedStepIndex = this.steps.toArray().indexOf(clickedStep);
             if (step === clickedStep) {
                 step.status = CURRENT_STEP_STATUS;
                 step.statusChange.emit(CURRENT_STEP_STATUS);

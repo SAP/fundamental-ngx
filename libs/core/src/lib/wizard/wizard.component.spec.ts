@@ -11,7 +11,11 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angu
                 <ul fd-wizard-progress-bar>
                     <li fd-wizard-step status="completed" label="Step 1: One Line">
                         <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
-                        <fd-wizard-content> Wizard Content for step 1 </fd-wizard-content>
+                        <fd-wizard-content> Wizard Content for step 1
+                            <fd-wizard-next-step>
+                                Next step
+                            </fd-wizard-next-step>
+                        </fd-wizard-content>
                     </li>
                     <li
                         fd-wizard-step
@@ -19,7 +23,11 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angu
                         label="Step 2: Very long label that truncates on the second line"
                     >
                         <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
-                        <fd-wizard-content> Wizard Content for step 2 </fd-wizard-content>
+                        <fd-wizard-content> Wizard Content for step 2
+                            <fd-wizard-next-step>
+                                Next step
+                            </fd-wizard-next-step>
+                        </fd-wizard-content>
                     </li>
                     <li
                         fd-wizard-step
@@ -30,11 +38,19 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angu
                         #step3
                     >
                         <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
-                        <fd-wizard-content> Wizard Content for step 3 </fd-wizard-content>
+                        <fd-wizard-content> Wizard Content for step 3
+                            <fd-wizard-next-step>
+                                Next step
+                            </fd-wizard-next-step>
+                        </fd-wizard-content>
                     </li>
                     <li fd-wizard-step status="upcoming" label="Step 4: Future Step">
                         <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
-                        <fd-wizard-content> Wizard Content for step 4 </fd-wizard-content>
+                        <fd-wizard-content> Wizard Content for step 4
+                            <fd-wizard-next-step>
+                                Next step
+                            </fd-wizard-next-step>
+                        </fd-wizard-content>
                     </li>
                 </ul>
             </fd-wizard-navigation>
@@ -104,5 +120,35 @@ describe('WizardComponent', () => {
         expect(component.steps.first.getClassList().contains('fd-wizard__step--no-label')).toBeFalsy();
         expect(component.steps.first.getClassList().contains('fd-wizard__step--stacked')).toBeFalsy();
         expect(component.steps.toArray()[1].getClassList().contains('fd-wizard__step--stacked-top')).toBeFalsy();
+    });
+
+    it('should setContentTemplates', async () => {
+        component.ngAfterViewInit();
+
+        await wait(fixture);
+
+        expect(component.steps.first.stepId).toBe(0);
+        expect(component.steps.last.stepId).toBe(3);
+        expect(component.steps.first.content.wizardContentId).toBe('0');
+        expect(component.steps.first.visited).toBeTruthy();
+        expect(component.steps.last.finalStep).toBeTruthy();
+    });
+
+    it('should handleStepOrStatusChanges', fakeAsync (() => {
+        spyOn(component.wrapperContainer.nativeElement, 'scrollTo');
+        component.ngAfterViewInit();
+        tick();
+        component.steps.first.statusChange.emit();
+        tick();
+
+        expect(component.wrapperContainer.nativeElement.scrollTo).toHaveBeenCalled();
+    }));
+
+    it('should handleScrollSpyChange', async () => {
+        component.ngAfterViewInit();
+        await wait(fixture);
+        component.scrollSpyChange('2');
+        expect(component.steps.first.status).toBe('completed');
+        expect(component.steps.last.status).toBe('upcoming');
     });
 });
