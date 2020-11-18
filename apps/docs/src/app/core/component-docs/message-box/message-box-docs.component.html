@@ -23,20 +23,20 @@
         <li>MessageBoxRef - <code>implicit</code></li>
         <li>MessageBoxConfig - <code>messageBoxConfig</code></li>
     </ul>
-    <b> The MessageBoxRef and MessageBoxConfig references need to be passed to the message box component</b> when using
+    The MessageBoxRef and MessageBoxConfig references need to be passed to the message box component when using
     template based message box. To receive message box dismiss/close reasons subscribe to the <code>afterClosed</code>
     observable.
-    <!--    <ul>-->
-    <!--        <li>Use <code>fd-dialog-footer-button</code> to wrap footer buttons and create space between them.</li>-->
-    <!--        <li>-->
-    <!--            Add <code>fd-dialog-decisive-button</code> to key dialog buttons like "Save" or "Cancel" to add proper-->
-    <!--            styles.-->
-    <!--        </li>-->
-    <!--        <li>-->
-    <!--            By default after opening the Dialog first focusable element will be focused. To focus specific element after-->
-    <!--            opening the Dialog, use <code>fd-initial-focus</code> directive.-->
-    <!--        </li>-->
-    <!--    </ul>-->
+    <ul>
+        <li>Use <code>fd-message-box-footer-button</code> to wrap footer buttons and create space between them.</li>
+        <li>
+            Add <code>fd-message-box-decisive-button</code> to key buttons like "Save" or "Cancel" to add proper
+            styles.
+        </li>
+        <li>
+            By default after opening the message box first focusable element will be focused. To focus specific
+            element after opening the message box, use <code>fd-initial-focus</code> directive.
+        </li>
+    </ul>
 </description>
 <component-example>
     <fd-message-box-open-template-example></fd-message-box-open-template-example>
@@ -111,12 +111,12 @@
     To create more complex message box it is possible to provide custom header, subheader and footer templates.
     To provide these custom templates, create an element with one of the following directives:
     <ul>
-        <li>Header - fdTemplate="header"</li>
-        <li>Subheader - fdTemplate="subheader"</li>
-        <li>Footer - fdTemplate="footer"</li>
+        <li>Header - <code>fdTemplate="header"</code></li>
+        <li>Subheader - <code>fdTemplate="subheader"</code></li>
+        <li>Footer - <code>fdTemplate="footer"</code></li>
     </ul>
     Custom templates are embedded views for the Bar Component so it is possible to use Bar Component features inside
-    them. For complex templates you may use the fd-bar-element as an equivalent of the fd-message-box-footer-button.
+    them. For complex templates you may use the <code>fd-bar-element</code> as an equivalent of the <code>fd-message-box-footer-button</code>.
 </description>
 <component-example>
     <fd-complex-template-example></fd-complex-template-example>
