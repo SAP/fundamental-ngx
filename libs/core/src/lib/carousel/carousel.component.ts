@@ -185,7 +185,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     currentActiveSlidesStartIndex = 0;
 
     /** @hidden handles rtl service */
-    dir: string;
+    dir = 'ltr';
 
     /** @hidden Make left navigation button disabled */
     leftButtonDisabled = false;
@@ -210,6 +210,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
+        private readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _carouselService: CarouselService,
         @Optional() private readonly _rtlService: RtlService
@@ -283,30 +284,26 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden */
     @HostListener('keydown.arrowright', ['$event'])
-    public onKeydownArrowRight(event): void {
+    public onKeydownArrowRight(event: KeyboardEvent): void {
         event.preventDefault();
-        if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
-            return;
-        } else {
-            this.next();
-        }
+        this.next();
     }
 
     /** @hidden */
     @HostListener('keydown.arrowleft', ['$event'])
-    public onKeydownArrowLeft(event): void {
+    public onKeydownArrowLeft(event: KeyboardEvent): void {
         event.preventDefault();
-        if (!this.loop && this.currentActiveSlidesStartIndex <= 0) {
-            return;
-        } else {
-            this.previous();
-        }
+        this.previous();
     }
 
     /** Transitions to the previous slide in the carousel. */
     public previous(): void {
+        if (!this.loop && this.currentActiveSlidesStartIndex <= 0) {
+            return;
+        }
         this.rightButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
+        this.preventDefaultBtnFocus();
         this._carouselService.pickPrevious(this.dir);
         this._notifySlideChange(SlideDirection.PREVIOUS);
         this._changeDetectorRef.detectChanges();
@@ -314,12 +311,31 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Transitions to the next slide in the carousel. */
     public next(): void {
+        if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
+            return;
+        }
         // Moving to next slide
         this.leftButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.NEXT);
+        this.preventDefaultBtnFocus();
         this._carouselService.pickNext(this.dir);
         this._notifySlideChange(SlideDirection.NEXT);
         this._changeDetectorRef.detectChanges();
+    }
+
+    /** @hidden
+    * Prevent native focus flow related to button, if button will be disable on focus state.
+    * It works only if carousel is not in circular loop.
+    */
+    private preventDefaultBtnFocus(): void {
+        if (this.loop) {
+            return;
+        }
+        const isFirst = this.currentActiveSlidesStartIndex === 0;
+        const isLast = this.currentActiveSlidesStartIndex === this.pageIndicatorsCountArray.length - 1;
+        if (isFirst || isLast) {
+            this._elementRef.nativeElement.focus({ preventScroll: true });
+        }
     }
 
     /** @hidden Adjust position of active item, based on slide direction */
@@ -470,10 +486,15 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
+        const refreshDirection = () => {
+            this.dir = this._rtlService?.rtl.getValue() ? 'rtl' : 'ltr';
+            if (this._carouselService.items) {
+                this._carouselService.goToItem(this._carouselService.active, false, this.dir);
+            }
             this._changeDetectorRef.detectChanges();
-        });
+        }
+        refreshDirection();
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe(() => refreshDirection());
     }
 
     /** On Swiping of slide, manage page indicator */
