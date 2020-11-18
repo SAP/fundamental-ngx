@@ -1,13 +1,13 @@
 import {
     Directive,
-    ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
     Input,
-    OnInit,
     Output,
-    Renderer2
+    OnInit,
+    Renderer2,
+    ElementRef
 } from '@angular/core';
 
 /**
