@@ -9,7 +9,7 @@ export class SemanticTypesExampleComponent {
 
     constructor(private _messageBoxService: MessageBoxService) {}
 
-    openMessageBox(type: MessageBoxType): void {
+    open(type: MessageBoxType): void {
         const messageBoxRef = this._messageBoxService.open(
             {
                 title: 'Fruit facts',

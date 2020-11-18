@@ -24,7 +24,7 @@ import * as complexTemplateTs from '!raw-loader!./examples/complex-template/comp
 import * as complexTemplateExampleTs from '!raw-loader!./examples/complex-template/message-box-complex-example.component.ts';
 
 @Component({
-    selector: 'app-dialog',
+    selector: 'app-message-box-docs',
     templateUrl: './message-box-docs.component.html'
 })
 export class MessageBoxDocsComponent {

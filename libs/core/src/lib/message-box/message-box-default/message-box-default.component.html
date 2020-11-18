@@ -12,8 +12,9 @@
     <fd-message-box-footer>
         <button
             fd-button
-            fd-message-box-decisive-button
+            fd-initial-focus
             fdType="emphasized"
+            fd-message-box-decisive-button
             [label]="messageBoxContent.approveButton"
             [compact]="!messageBoxConfig.mobile"
             (click)="onApproveButton()">

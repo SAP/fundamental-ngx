@@ -16,6 +16,7 @@ import { IconModule } from '../icon/icon.module';
 import { TitleModule } from '../title/title.module';
 import { MessageBoxDefaultComponent } from './message-box-default/message-box-default.component';
 import { TemplateModule } from '../utils/directives/template/template.module';
+import { InitialFocusModule } from '../utils/directives/initial-focus/initial-focus.module';
 
 export const components = [
     MessageBoxContainerComponent,
@@ -31,8 +32,8 @@ export const components = [
 
 @NgModule({
     declarations: [components],
-    imports: [CommonModule, IconModule, TemplateModule, BarModule, TitleModule, ButtonModule],
-    exports: [components, IconModule, TemplateModule, BarModule, TitleModule, ButtonModule],
+    imports: [CommonModule, IconModule, InitialFocusModule, TemplateModule, BarModule, TitleModule, ButtonModule],
+    exports: [components, IconModule, TemplateModule, InitialFocusModule, BarModule, TitleModule, ButtonModule],
     providers: [MessageBoxService, DynamicComponentService],
     entryComponents: [MessageBoxContainerComponent, MessageBoxDefaultComponent]
 })

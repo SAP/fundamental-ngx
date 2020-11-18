@@ -1,4 +1,4 @@
-<ng-template let-messageBox let-messageBoxConfig="messageBoxConfig" #confirmationDialog>
+<ng-template let-messageBox let-messageBoxConfig="messageBoxConfig" #messageBoxTemplate>
     <fd-message-box [messageBoxConfig]="messageBoxConfig" [messageBoxRef]="messageBox">
         <fd-message-box-header>
             <h1 fd-title>Fruit facts</h1>
@@ -10,6 +10,7 @@
         <fd-message-box-footer>
                 <button
                     fd-button
+                    fd-initial-focus
                     fd-message-box-decisive-button
                     fdType="emphasized"
                     label="Ok"
@@ -28,5 +29,5 @@
     </fd-message-box>
 </ng-template>
 
-<button fd-button label="Open from Template" (click)="openMessageBox(confirmationDialog)"></button>
+<button fd-button label="Open from Template" (click)="open(messageBoxTemplate)"></button>
 <p>{{ confirmationReason }}</p>

@@ -10,7 +10,7 @@ export class TemplateBasedMessageBoxExampleComponent {
 
     constructor(private _messageBoxService: MessageBoxService) {}
 
-    openMessageBox(messageBox: TemplateRef<any>): void {
+    open(messageBox: TemplateRef<any>): void {
         const messageBoxRef = this._messageBoxService.open(messageBox);
 
         messageBoxRef.afterClosed.subscribe(
