@@ -3,7 +3,7 @@ import { InjectionToken } from '@angular/core';
 import { DialogRefBase } from '../base/dialog-ref-base.class';
 
 /**
- * Reference to a dialog component generated via the DialogService.
+ * Reference to a dialog component
  * It can be injected into the content component through the constructor.
  * For a template, it is declared as part of the implicit context, see examples.
  */

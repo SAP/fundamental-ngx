@@ -7,7 +7,7 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <h1 fd-dialog-title>Table Customization</h1>
+                <h1 fd-title>Table Customization</h1>
                 <ng-template fdTemplate="subheader">
                     <div fd-bar-middle>
                         <fd-bar-element>

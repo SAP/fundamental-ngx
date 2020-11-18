@@ -36,7 +36,8 @@ export class MessageBoxContainerComponent extends DynamicComponentContainer<Cont
     }
 
     /** @hidden */
-    @ViewChild('contentContainer', { read: ViewContainerRef }) containerRef: ViewContainerRef;
+    @ViewChild('contentContainer', { read: ViewContainerRef })
+    containerRef: ViewContainerRef;
 
     /** @hidden */
     private _class = '';

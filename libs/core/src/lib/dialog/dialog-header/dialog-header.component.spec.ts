@@ -33,7 +33,7 @@ class CustomHeaderTestComponent {
 @Component({
     template: `
         <fd-dialog-header>
-            <h1 fd-dialog-title>Default Title</h1>
+            <h1 fd-title>Default Title</h1>
             <button fd-dialog-close-button></button>
         </fd-dialog-header>
     `

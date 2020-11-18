@@ -15,11 +15,11 @@ import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
 import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
-import { DefaultDialogObject } from '../default-dialog/default-dialog-object';
-import { DefaultDialogComponent } from '../default-dialog/default-dialog.component';
 import { DynamicComponentContainer } from '../../utils/dynamic-component';
+import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
+import { DialogDefaultContent } from '../utils/dialog-default-content';
 
-type ContentType = TemplateRef<any> | Type<any> | DefaultDialogObject;
+type ContentType = TemplateRef<any> | Type<any> | DialogDefaultContent;
 
 @Component({
     selector: 'fd-dialog-container',
@@ -34,7 +34,8 @@ export class DialogContainerComponent extends DynamicComponentContainer<ContentT
     }
 
     /** @hidden */
-    @ViewChild('contentContainer', { read: ViewContainerRef }) containerRef: ViewContainerRef;
+    @ViewChild('contentContainer', { read: ViewContainerRef })
+    containerRef: ViewContainerRef;
 
     /** @hidden */
     private _class = '';
@@ -76,7 +77,7 @@ export class DialogContainerComponent extends DynamicComponentContainer<ContentT
         } else if (this.childContent instanceof TemplateRef) {
             this._createFromTemplate(this.childContent, this._templateContext());
         } else {
-            this._createFromDefaultConfiguration(this.childContent);
+            this._createFromDefaultDialog(this.childContent);
         }
         this._changeDetectorRef.detectChanges();
     }
@@ -87,9 +88,9 @@ export class DialogContainerComponent extends DynamicComponentContainer<ContentT
     }
 
     /** @hidden Load Dialog component from passed object */
-    private _createFromDefaultConfiguration(config: DefaultDialogObject): void {
+    private _createFromDefaultDialog(config: DialogDefaultContent): void {
         this.containerRef.clear();
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DefaultDialogComponent);
+        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DialogDefaultComponent);
         this._componentRef = this.containerRef.createComponent(componentFactory);
         this._componentRef.instance.defaultDialogConfig = config;
     }

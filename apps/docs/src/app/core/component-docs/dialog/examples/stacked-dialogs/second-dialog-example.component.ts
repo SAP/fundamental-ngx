@@ -5,7 +5,7 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <h1 fd-dialog-title>Second Dialog</h1>
+                <h1 fd-title>Second Dialog</h1>
                 <button fd-dialog-close-button (click)="dialogRef.dismiss()"></button>
             </fd-dialog-header>
 

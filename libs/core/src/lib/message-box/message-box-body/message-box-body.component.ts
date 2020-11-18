@@ -1,7 +1,8 @@
 import { Component, Optional } from '@angular/core';
 import {
     MESSAGE_BOX_CONFIGURABLE_ELEMENT,
-    MessageBoxConfig
+    MessageBoxConfig,
+    MessageBoxConfigurableElement
 } from '../utils/message-box-config.class';
 
 
@@ -10,12 +11,12 @@ import {
     template: '<ng-content></ng-content>',
     host: {
         '[class.fd-message-box__body]': 'true',
-        '[class.fd-message-box__body--no-vertical-padding]': '!_messageBoxConfig.verticalPadding'
+        '[class.fd-message-box__body--no-vertical-padding]': '!messageBoxConfig.verticalPadding'
     },
     providers: [
         { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxBodyComponent, multi: true }
     ]
 })
-export class MessageBoxBodyComponent {
-    constructor(@Optional() public _messageBoxConfig: MessageBoxConfig) {}
+export class MessageBoxBodyComponent implements MessageBoxConfigurableElement {
+    constructor(@Optional() public messageBoxConfig: MessageBoxConfig) {}
 }

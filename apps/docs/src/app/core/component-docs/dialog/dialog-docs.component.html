@@ -50,7 +50,7 @@
     Object Based Dialog
 </fd-docs-section-title>
 <description>
-    The Dialog can be declared inside the <code>DefaultDialogObject</code> and opened with DialogService using the object
+    The Dialog can be declared inside the <code>DialogDefaultContent</code> and opened with DialogService using the object
     reference. This allows you to easily create dialogs with customizable optional properties for the following:
     <ul>
         <li>title</li>
@@ -202,7 +202,7 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #playgroundDialog>
     <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
         <fd-dialog-header>
-            <h1 fd-dialog-title>Playground Dialog</h1>
+            <h1 fd-title>Playground Dialog</h1>
             <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
         </fd-dialog-header>
 

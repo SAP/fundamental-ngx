@@ -19,7 +19,7 @@ import { InitialFocusModule } from '../utils/directives/initial-focus/initial-fo
 import { MessageBoxFooterButtonComponent } from './message-box-footer-button/message-box-footer-button.component';
 import { MessageBoxCloseIconComponent } from './message-box-close-icon/message-box-close-icon.component';
 
-export const components = [
+const declarations = [
     MessageBoxFooterButtonComponent,
     MessageBoxCloseIconComponent,
     MessageBoxContainerComponent,
@@ -33,9 +33,9 @@ export const components = [
 ];
 
 @NgModule({
-    declarations: [components],
+    declarations: [declarations],
     imports: [CommonModule, IconModule, InitialFocusModule, TemplateModule, BarModule, TitleModule, ButtonModule],
-    exports: [components, IconModule, TemplateModule, InitialFocusModule, BarModule, TitleModule, ButtonModule],
+    exports: [declarations, IconModule, TemplateModule, InitialFocusModule, BarModule, TitleModule, ButtonModule],
     providers: [MessageBoxService, DynamicComponentService],
     entryComponents: [MessageBoxContainerComponent, MessageBoxDefaultComponent]
 })
