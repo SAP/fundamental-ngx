@@ -11,9 +11,6 @@ import { WizardStepStatus } from '@fundamental-ngx/core';
                 max-width: 300px;
                 margin-bottom: 2rem;
             }
-            .fd-wizard-mobile-docs .fd-wizard__content {
-                min-height: 300px;
-            }
         `
     ],
     host: {

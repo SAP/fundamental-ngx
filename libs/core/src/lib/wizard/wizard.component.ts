@@ -133,13 +133,23 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         this.contentTemplates = [];
         let stepId = 0;
         this.steps.forEach((step) => {
+            if (step.content) {
+                step.content.tallContent = false;
+                step.content.wizardContentId = stepId.toString();
+            }
             step.stepId = stepId;
             stepId++;
             step.finalStep = false;
+            if (step.visited) {
+                step.content.nextStep.getElRef().nativeElement.style.display = 'none';
+            }
             if (
                 step.visited ||
                 ((step.status === CURRENT_STEP_STATUS || step.status === COMPLETED_STEP_STATUS) && step.content)
             ) {
+                if (step.status === CURRENT_STEP_STATUS && !step.visited) {
+                    step.content.tallContent = true;
+                }
                 step.visited = true;
                 if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
                     this.contentTemplates = [step.content.contentTemplate];
@@ -244,6 +254,19 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                     step.status = UPCOMING_STEP_STATUS;
                     step.statusChange.emit(UPCOMING_STEP_STATUS);
                 }
+            }
+        });
+    }
+
+    /** @hidden */
+    scrollSpyChange($event: string): void {
+        this.steps.forEach((step) => {
+            if (step.stepId.toString() === $event) {
+                step.status = CURRENT_STEP_STATUS;
+            } else if (step.stepId < parseInt($event, 10)) {
+                step.status = COMPLETED_STEP_STATUS;
+            } else {
+                step.status = UPCOMING_STEP_STATUS;
             }
         });
     }

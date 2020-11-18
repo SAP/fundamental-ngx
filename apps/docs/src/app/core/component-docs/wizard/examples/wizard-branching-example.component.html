@@ -40,6 +40,7 @@
                                 id="radio-1"
                                 name="radio-name-1"
                                 [(ngModel)]="paymentSelection"
+                                [disabled]="step2status === 'completed'"
                             >
                                 Bank Transfer
                             </fd-radio-button>
@@ -50,6 +51,7 @@
                                 id="radio-2"
                                 name="radio-name-2"
                                 [(ngModel)]="paymentSelection"
+                                [disabled]="step2status === 'completed'"
                             >
                                 Credit Card
                             </fd-radio-button>

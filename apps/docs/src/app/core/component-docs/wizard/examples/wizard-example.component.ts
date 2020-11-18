@@ -5,13 +5,6 @@ import { WizardStepStatus } from '@fundamental-ngx/core';
     selector: 'fd-wizard-example',
     templateUrl: './wizard-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    styles: [
-        `
-            .fd-wizard-example .fd-message-strip {
-                margin-top: 1rem;
-            }
-        `
-    ],
     host: {
         class: 'fd-wizard-example'
     }

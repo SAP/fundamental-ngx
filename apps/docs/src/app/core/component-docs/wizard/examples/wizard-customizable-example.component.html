@@ -1,4 +1,4 @@
-<fd-wizard>
+<fd-wizard [appendToWizard]="false">
     <fd-wizard-navigation>
         <ul fd-wizard-progress-bar size="sm">
             <li fd-wizard-step [status]="step1status" (statusChange)="step1status = $event" label="Step 1: One Line">

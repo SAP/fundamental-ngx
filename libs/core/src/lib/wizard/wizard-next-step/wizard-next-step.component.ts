@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
 
 @Component({
     selector: 'fd-wizard-next-step',
@@ -11,4 +11,14 @@ export class WizardNextStepComponent {
      */
     @Input()
     floating = false;
+
+    /** @hidden */
+    displayed = true;
+
+    constructor(private _elRef: ElementRef) {}
+
+    /** @hidden */
+    getElRef(): ElementRef {
+        return this._elRef;
+    }
 }
