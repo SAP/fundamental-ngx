@@ -61,6 +61,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _previousWidth: number;
 
+    /** @hidden */
+    private _fromScrollToCurrentStep = false;
+
     constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef, private _renderer: Renderer2) {}
 
     /** @hidden */
@@ -163,6 +166,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _scrollToCurrentStep(): void {
+        this._fromScrollToCurrentStep = true;
         let child: HTMLElement;
         this.steps.forEach((step, index) => {
             if (step.status === CURRENT_STEP_STATUS) {
@@ -173,6 +177,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 });
             }
         });
+        let timer = null;
+        this.wrapperContainer.nativeElement.addEventListener('scroll', () => {
+            if (timer !== null) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => {
+                this._fromScrollToCurrentStep = false;
+            }, 150);
+        }, false);
     }
 
     /** @hidden */
@@ -260,14 +273,16 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     scrollSpyChange($event: string): void {
-        this.steps.forEach((step) => {
-            if (step.stepId.toString() === $event) {
-                step.status = CURRENT_STEP_STATUS;
-            } else if (step.stepId < parseInt($event, 10)) {
-                step.status = COMPLETED_STEP_STATUS;
-            } else {
-                step.status = UPCOMING_STEP_STATUS;
-            }
-        });
+        if (!this._fromScrollToCurrentStep) {
+            this.steps.forEach((step) => {
+                if (step.stepId.toString() === $event) {
+                    step.status = CURRENT_STEP_STATUS;
+                } else if (step.stepId < parseInt($event, 10)) {
+                    step.status = COMPLETED_STEP_STATUS;
+                } else {
+                    step.status = UPCOMING_STEP_STATUS;
+                }
+            });
+        }
     }
 }
