@@ -30,6 +30,7 @@ import { MessageBoxRef } from '@fundamental-ngx/core';
                         <fd-bar-element>
                             <button
                                 fd-button
+                                fd-initial-focus
                                 fd-message-box-decisive-button
                                 fdType="emphasized"
                                 label="Ok"

@@ -15,6 +15,7 @@ import { TextData } from './component-based-message-box-example.component';
             <fd-message-box-footer>
                 <button
                     fd-button
+                    fd-initial-focus
                     fd-message-box-decisive-button
                     fdType="emphasized"
                     label="Ok"
