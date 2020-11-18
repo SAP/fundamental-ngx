@@ -4,7 +4,8 @@ import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User, UserDataSource
 import { DialogService, MessageToastService } from '@fundamental-ngx/core';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 
-type ApprovalGraphNode = ApprovalNode | { blank: true };
+type ApprovalGraphNode = ApprovalNode & { parent?: ApprovalNode, blank?: true };
+type ApprovalFlowGraph = { nodes: ApprovalGraphNode[], index?: number, isPartial?: boolean }[];
 
 @Component({
     selector: 'fdp-approval-flow',
@@ -25,7 +26,7 @@ export class ApprovalFlowComponent implements OnInit {
     @Input() watcherDataSource: UserDataSource;
 
     _approvalProcess: ApprovalProcess;
-    _nodeTree: ApprovalGraphNode[][];
+    _approvalFlowGraph: ApprovalFlowGraph;
 
     constructor(private _dialogService: DialogService, private _messageToastService: MessageToastService) {
     }
@@ -38,8 +39,8 @@ export class ApprovalFlowComponent implements OnInit {
             const { nodes } = approvalProcess;
             nodes.forEach(node => nodesMap[node.id] = node);
             console.log('nodesMap', nodesMap);
-            this._nodeTree = buildNodeTree(nodes);
-            console.log('tree', this._nodeTree);
+            this._approvalFlowGraph = buildNodeTree(nodes);
+            console.log('tree', this._approvalFlowGraph);
         });
     }
 
@@ -85,29 +86,28 @@ function findRootNode(nodes: ApprovalNode[]): ApprovalNode {
     return nodes.find(node => nodes.every(n => !n.targets.includes(node.id)));
 }
 
-function findDependentNodes(rootNodes: ApprovalNode[], nodes: ApprovalNode[]): ApprovalNode[] {
+function findDependentNodes(rootNodes: ApprovalGraphNode[], nodes: ApprovalNode[]): ApprovalNode[] {
     const rootNodeTargetIds: string[] = [];
     rootNodes.forEach(node => rootNodeTargetIds.push(...node.targets));
 
     return nodes.filter(node => rootNodeTargetIds.includes(node.id));
 }
 
-function buildNodeTree(nodes: ApprovalNode[]): ApprovalNode[][] {
-    const tree: ApprovalNode[][] = [];
+function buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
+    const graph: ApprovalFlowGraph = [];
     const rootNode = findRootNode(nodes);
     if (!rootNode) {
-        return tree;
+        return graph;
     }
 
-    tree[0] = [rootNode];
+    graph[0] = { nodes: [rootNode] };
     let index = 1;
     let foundLastStep = false;
     do {
-        // const dependentNodes = findDependentNodes(tree[index - 1], nodes);
         const dependentNodes: ApprovalNode[] = [];
-        tree[index - 1].forEach(node => {
+        graph[index - 1].nodes.forEach(node => {
             const _dependentNodes = findDependentNodes([node], nodes);
-            // dependentNodes.forEach(dependentNode => dependentNode.parent = node)
+            _dependentNodes.forEach(dependentNode => (dependentNode as ApprovalGraphNode).parent = node);
             dependentNodes.push(..._dependentNodes);
         });
         foundLastStep = dependentNodes.length === 0;
@@ -119,22 +119,22 @@ function buildNodeTree(nodes: ApprovalNode[]): ApprovalNode[][] {
         const nodesWithTarget = dependentNodes.filter(node => node.targets.length);
 
         const isMixed = dependentNodes.length > 1 && nodesWithoutTarget.length && nodesWithoutTarget.length !== dependentNodes.length;
-        if (isMixed) {
-            console.log('found mixed tree', dependentNodes);
+        if (isMixed && graph[index - 1].nodes.length > 1) {
+            console.log('found mixed column', dependentNodes);
             const nodesWithBlankSpaces: ApprovalGraphNode[] = [...dependentNodes];
             nodesWithBlankSpaces.forEach((node, i) => {
                 if (nodesWithTarget.includes(node as ApprovalNode)) {
-                    nodesWithBlankSpaces[i] = { blank: true };
+                    nodesWithBlankSpaces[i] = { id: '', name: '', targets: [], approvers: [], status: 'not started',  blank: true };
                 }
             });
-            tree[index] = nodesWithBlankSpaces as ApprovalNode[];
-            tree[index + 1] = nodesWithTarget;
+            graph[index] = { nodes: nodesWithBlankSpaces as ApprovalNode[], isPartial: true };
+            graph[index + 1] = { nodes: nodesWithTarget as ApprovalNode[] };
             index += 2;
         } else {
-            tree[index] = dependentNodes;
+            graph[index] = { nodes: dependentNodes as ApprovalNode[] };
             index++;
         }
     } while (!foundLastStep);
 
-    return tree;
+    return graph;
 }

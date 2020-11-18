@@ -1,20 +1,30 @@
 <fd-toolbar [hasTitle]="true">
     <h4>{{ title }}</h4>
-    <!--    <button fd-toolbar-item fd-button [compact]="true" label="Edit"></button>-->
 </fd-toolbar>
-
-<!--<pre>{{ _approvalProcess | json }}</pre>-->
 
 <div class="approval-flow-watchers">
     <p>Watchers</p>
-    <fd-avatar style="margin-right: 10px" *ngFor="let watcher of _approvalProcess?.watchers" [image]="watcher.imgUrl"
-               size="xs"  [label]="watcher.name" [circle]="true" (click)="onWatcherClick(watcher)"></fd-avatar>
+    <fd-avatar style="margin-right: 10px"
+               *ngFor="let watcher of _approvalProcess?.watchers"
+               size="xs"
+               [image]="watcher.imgUrl"
+               [label]="watcher.name"
+               [circle]="true"
+               (click)="onWatcherClick(watcher)"></fd-avatar>
 </div>
 
 <div class="approval-flow-tree">
-    <div class="approval-flow-section" *ngFor="let branch of _nodeTree">
-        <ng-container *ngFor="let node of branch">
-            <fdp-approval-flow-node [node]="node" [blank]="node.blank" (onNodeClick)="onNodeClick(node)"></fdp-approval-flow-node>
+    <div class="approval-flow-column"
+         *ngFor="let column of _approvalFlowGraph; let columnIndex = index"
+         [class.vertical-line-before]="column.nodes.length > 1 && !column.isPartial"
+         [class.vertical-line-after]="column.isPartial"
+    >
+        <ng-container *ngFor="let node of column.nodes">
+            <fdp-approval-flow-node
+                [node]="node"
+                [renderArrow]="columnIndex > 0"
+                [blank]="node.blank"
+                (onNodeClick)="onNodeClick(node)"></fdp-approval-flow-node>
         </ng-container>
     </div>
 </div>

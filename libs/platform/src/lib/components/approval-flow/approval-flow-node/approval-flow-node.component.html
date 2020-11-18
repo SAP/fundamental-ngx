@@ -1,20 +1,23 @@
 <ng-container *ngIf="node && !blank">
+    <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
     <span style="position: absolute; font-size: 12px; right: 0; top: 0; ">{{ node.id }} </span>
-    <ng-container *ngIf="node.approvers?.length === 1">
+    <span *ngIf="node['parent']"
+          style="position: absolute; font-size: 12px; left: 0; top: 0; ">Parent - {{ node['parent']?.id }} </span>
+    <ng-container *ngIf="node.approvers.length === 1">
         <fd-avatar [image]="node.approvers[0].imgUrl" size="xs" [circle]="true"></fd-avatar>
         <span class="approval-flow-node__name" (click)="openDialog()">{{ node.approvers[0].name }}</span>
     </ng-container>
-    <ng-container *ngIf="node.approvers?.length > 1">
+    <ng-container *ngIf="node.approvers.length > 1">
         <fd-avatar [label]="node.description" size="xs" [circle]="true"></fd-avatar>
         <span class="approval-flow-node__name" (click)="openDialog()">{{ node.approvers.length }} members</span>
     </ng-container>
 
     <div class="approval-flow-node__inner">
         <div
-            class="approval-flow-node__description">{{ node.approvers?.length > 1 ? node.description : node.approvers[0].description }}
-            <br></div>
+            class="approval-flow-node__description">{{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
+        </div>
         <fdp-object-status [status]="_status"
                            inverted="true">{{ node.status }}</fdp-object-status>
     </div>
-    <span style="position: absolute; font-size: 12px; right: 0; bottom: 0; color: orange">{{ node.targets }}</span>
+    <span *ngIf="node.targets.length" style="position: absolute; font-size: 12px; right: 0; bottom: 0; color: orange">Targets - {{ node.targets }}</span>
 </ng-container>

@@ -369,6 +369,8 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
      * Fetch of approval process data.
      */
     fetch(): Observable<ApprovalProcess> {
+        // return of(simplestGraph);
+        // return of(mediumComplexityGraph);
         return of(complexGraph);
     }
 

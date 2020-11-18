@@ -5,17 +5,24 @@
 .approval-flow-tree {
     display: flex;
 
-    .approval-flow-section:not(:last-child) {
-        margin-right: 2rem;
+    .approval-flow-column:not(:last-child) {
+        margin-right: 4rem;
         position: relative;
 
-        &:after {
+        &.vertical-line-before:before, &.vertical-line-after:after {
             content: '';
             position: absolute;
-            right: -1rem;
-            top: 0;
-            height: 100%;
-            border-right: 1px dotted grey;
+            top: 48px;
+            height: calc(100% - 111px);
+            border-right: 1px solid grey;
+        }
+
+        &.vertical-line-before:before {
+            left: -2rem;
+        }
+
+        &.vertical-line-after:after {
+            right: -2rem;
         }
     }
 
