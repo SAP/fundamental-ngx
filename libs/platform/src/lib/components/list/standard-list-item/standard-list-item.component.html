@@ -1,9 +1,9 @@
 <!--  list item navigation with Arrow-->
 <ng-container *ngIf="navigationIndicator || navigated && !(noDataText!==null && noDataText!== undefined) ">
     <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" tabindex="-1" [attr.aria-selected]="_selected"
-        (click)="_onItemClick($event)" (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)"
-        class="fd-list__item--link" role="listitem" [class.fd-list__item--inactive]="listType === 'inactive'"
-        [attr.ariaLabelledBy]="ariaLabelledBy" [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
+        (click)="_onItemClick()" (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)" class="fd-list__item--link"
+        role="listitem" [class.fd-list__item--inactive]="listType === 'inactive'" [attr.ariaLabelledBy]="ariaLabelledBy"
+        [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
         <ng-container *ngTemplateOutlet=" selectionTemplate">
         </ng-container>
         <a #link fd-list-link [routerLink]="routerLink" [navigationIndicator]="navigationIndicator"
@@ -18,7 +18,7 @@
     <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" (keydown)="_onKeyDown($event)" tabindex="-1"
         role="listitem" (keyup)="_onKeyUp($event)" [attr.ariaLabelledBy]="ariaLabelledBy" [attr.aria-level]="ariaLevel"
         [attr.aria-posinet]="ariaPosinet" [class.fd-list__item--inactive]="listType === 'inactive'"
-        (click)="_onItemClick($event)">
+        (click)="_onItemClick()">
         <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
         <ng-container *ngTemplateOutlet="_hasByLine ? byLineTemplate: commonTemplate"></ng-container>
     </li>
@@ -95,11 +95,11 @@
 <ng-template #actionsTemplate>
     <ng-content selector="#secondaryAction"></ng-content>
     <button fd-button #edit [attr.id]="'detail-' + id" *ngIf="listType === 'detail'" role="button"
-        [compact]="_isCompact" fdType="transparent" glyph="edit" (click)="_onActionButtonClick($event,'edit')"
+        [compact]="_isCompact" fdType="transparent" glyph="edit" (click)="_onActionButtonClick('edit')"
         [attr.aria-label]="'detail'" (keydown)="_onKeyButtonClick($event,'edit')">
     </button>
     <button fd-button #delete [attr.id]="'delete-' + id" *ngIf="selectionMode === 'delete'" role="button"
         [compact]="_isCompact" [attr.aria-label]="'delete'" fdType="transparent" glyph="decline"
-        (click)="_onActionButtonClick($event,'delete')" (keydown)="_onKeyButtonClick($event,'delete')">
+        (click)="_onActionButtonClick('delete')" (keydown)="_onKeyButtonClick($event,'delete')">
     </button>
 </ng-template>

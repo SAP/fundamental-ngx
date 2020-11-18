@@ -20,7 +20,7 @@ import { CollectionBaseInput } from '../form/collection-base.input';
 
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
-import { KeyUtil } from '@fundamental-ngx/core';
+import { KeyUtil, closestElement } from '@fundamental-ngx/core';
 
 
 
@@ -226,6 +226,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
     @ContentChild(ListItemDef)
     listItemDef: ListItemDef;
+
+    @ContentChild('#listItem', { read: ElementRef })
+    li: ElementRef;
 
     /**
     * Child items of the List.
@@ -544,7 +547,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     _updateNavigation(event: Event): void {
         let selectedItemId = '0';
         const el = event.target as HTMLElement;
-        const parent = el.closest('.fd-list__item');
+        const parent = closestElement('.fd-list__item', event.target);
         if (parent !== null && parent !== undefined) {
             selectedItemId = parent.getAttribute('id');
         }
@@ -633,8 +636,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * event:any to avoid code duplication
      */
     private _handleSingleSelect(event: Event, selectedItemId: string): void {
-        const singleSelect = event.target as Element;
-        const parent = singleSelect.closest('.fd-list__item');
+        const parent = closestElement('.fd-list__item', event.target);
         const radio = parent ? parent.querySelector('input') : null;
         this._selectedvalue = radio ? radio.getAttribute('ng-reflect-value') : null;
 

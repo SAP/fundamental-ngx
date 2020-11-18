@@ -271,7 +271,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * @hidden
      * On item click event will be emitted */
     @HostListener('click')
-    _onItemClick($event: Event): void {
+    _onItemClick(): void {
         if (this.selectRow && this.selectionMode === 'multi') {
             this._selected = !this._selected;
         }
@@ -340,7 +340,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      *  @hidden
      *  Handles action button click
      */
-    _onActionButtonClick($event: Event, action: 'delete' | 'edit'): void {
+    _onActionButtonClick(action: 'delete' | 'edit'): void {
         const event = new ModifyItemEvent();
         event.source = this;
         event.action = action;
@@ -353,7 +353,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     */
     _onKeyButtonClick(event: KeyboardEvent, action: 'delete' | 'edit'): void {
         if ((KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
-            this._onActionButtonClick(event, action);
+            this._onActionButtonClick(action);
         }
     }
 
