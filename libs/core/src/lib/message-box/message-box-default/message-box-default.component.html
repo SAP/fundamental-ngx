@@ -1,32 +1,33 @@
 <fd-message-box>
     <fd-message-box-header>
         <h1 fd-title>{{ messageBoxContent.title }}</h1>
-        <fd-message-box-close-icon
-            [mobile]="messageBoxConfig.mobile"
-            (click)="onCloseButton()">
-        </fd-message-box-close-icon>
+        <fd-message-box-close-icon (click)="onCloseButton()"></fd-message-box-close-icon>
     </fd-message-box-header>
     <fd-message-box-body>
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </fd-message-box-body>
     <fd-message-box-footer>
-        <button
-            fd-button
-            fd-initial-focus
-            fdType="emphasized"
-            fd-message-box-decisive-button
-            [label]="messageBoxContent.approveButton"
-            [compact]="!messageBoxConfig.mobile"
-            (click)="onApproveButton()">
-        </button>
-        <button
-            fd-button
-            fd-message-box-decisive-button
-            fdType="transparent"
-            [label]="messageBoxContent.cancelButton"
-            [compact]="!messageBoxConfig.mobile"
-            (click)="onCancelButton()">
-        </button>
+        <fd-message-box-footer-button>
+            <button
+                fd-button
+                fd-initial-focus
+                fdType="emphasized"
+                fd-message-box-decisive-button
+                [label]="messageBoxContent.approveButton"
+                [compact]="!messageBoxConfig.mobile"
+                (click)="onApproveButton()">
+            </button>
+        </fd-message-box-footer-button>
+        <fd-message-box-footer-button>
+            <button
+                fd-button
+                fdType="transparent"
+                fd-message-box-decisive-button
+                [label]="messageBoxContent.cancelButton"
+                [compact]="!messageBoxConfig.mobile"
+                (click)="onCancelButton()">
+            </button>
+        </fd-message-box-footer-button>
     </fd-message-box-footer>
 </fd-message-box>
 
