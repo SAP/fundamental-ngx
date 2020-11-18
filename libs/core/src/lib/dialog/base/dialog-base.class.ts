@@ -10,7 +10,7 @@ import {
 import { NavigationStart, Router } from '@angular/router';
 
 import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, filter, startWith } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { createFocusTrap, FocusTrap } from 'focus-trap';
 
@@ -59,7 +59,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     constructor(
         protected _router: Router,
         protected _elementRef: ElementRef,
-        protected _changeDetectorRef: ChangeDetectorRef,
+        protected _changeDetectorRef: ChangeDetectorRef
     ) {}
 
     /** @hidden */
@@ -69,6 +69,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this.adjustResponsivePadding();
         this._trapFocus();
         this._setPosition();
         this._setWidthHeight();
@@ -153,10 +154,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
         if (this._config.responsivePadding) {
             this._subscriptions.add(
                 fromEvent(window, 'resize')
-                    .pipe(
-                        startWith(),
-                        debounceTime(100),
-                    )
+                    .pipe(debounceTime(100))
                     .subscribe(() => this.adjustResponsivePadding())
             );
         }
