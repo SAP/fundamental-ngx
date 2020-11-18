@@ -66,9 +66,8 @@ export class FdDate {
         this.year = year;
         this.month = month;
         this.day = day;
-        this.hour = hour;
-        this.minute = minute;
-        this.second = second;
+
+        this.setTime(hour, minute, second);
 
         return this;
     }
@@ -87,13 +86,13 @@ export class FdDate {
 
     setTime(hour: number, minute: number, second: number): FdDate {
         if (hour < 0 || hour > 23) {
-            throw Error('FdDate.setTime hour must be between 0 and 23');
+            throw Error(`FdDate hour must be between 0 and 23 but got "${hour}"`);
         }
         if (minute < 0 || minute > 59) {
-            throw Error('FdDate.setTime minute must be between 0 and 59');
+            throw Error(`FdDate minute must be between 0 and 59 but got "${minute}"`);
         }
         if (second < 0 || second > 59) {
-            throw Error('FdDate.setTime second must be between 0 and 59');
+            throw Error(`FdDate second must be between 0 and 59 but got "${second}"`);
         }
 
         this.hour = hour;
