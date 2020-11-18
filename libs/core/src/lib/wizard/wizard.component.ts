@@ -44,6 +44,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     @Input()
     appendToWizard = true;
 
+    /**
+     * Custom height to use for the wizard's content pane. By default, this value is calc(100vh - 144px), where 144px
+     * is the combined height of the shellbar, wizard header and wizard footer.
+     */
+    @Input()
+    contentHeight: string;
+
     /** @hidden */
     @ContentChildren(WizardStepComponent, { descendants: true })
     steps: QueryList<WizardStepComponent>;
@@ -76,6 +83,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             this._shrinkWhileAnyStepIsTooNarrow();
         }
         this._previousWidth = wizardWidth;
+        if (this.contentHeight) {
+            document.querySelector<HTMLElement>('.fd-wizard-tall-content').style.height = this.contentHeight;
+            document.querySelector<HTMLElement>('.fd-wizard-container-wrapper').style.height = this.contentHeight;
+        }
     }
 
     /** @hidden */

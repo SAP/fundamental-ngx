@@ -7,6 +7,10 @@
     <br /><br />
     The wizard does not have any built-in functionality for moving through each step - the application developer will
     manage this using the <code>[status]</code> input on each <code>fd-wizard-step</code>
+    <br/><br/>
+    By default, the wizard content's height will be the viewport height, minus the height of the shellbar, wizard header
+    and wizard footer. If the application developer wishes to use a custom height, a CSS value can be passed to the
+    <code>[contentHeight]</code> input.
 </description>
 <component-example>
     <fd-wizard-example></fd-wizard-example>
