@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Inject, Output, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Output, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
 import { ShellbarMenuItem, MenuKeyboardService, MenuComponent, ThemesService } from '@fundamental-ngx/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { DocsThemeService } from '../../services/docs-theme.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -13,7 +15,7 @@ import { DocsThemeService } from '../../services/docs-theme.service';
     styleUrls: ['./toolbar.component.scss'],
     providers: [MenuKeyboardService, ThemesService]
 })
-export class ToolbarDocsComponent implements OnInit {
+export class ToolbarDocsComponent implements OnInit, OnDestroy {
     @Output()
     btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
 
@@ -49,6 +51,9 @@ export class ToolbarDocsComponent implements OnInit {
 
     themes = this._themesService.themes;
 
+    /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
     constructor(
         private _routerService: Router,
         private _themesService: ThemesService,
@@ -57,7 +62,9 @@ export class ToolbarDocsComponent implements OnInit {
     ) {
         this.library = _routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
 
-        this._docsThemeService.onThemeChange.subscribe(theme => {
+        this._docsThemeService.onThemeChange.pipe(
+            takeUntil(this._onDestroy$)
+        ).subscribe(theme => {
             this.cssUrl = theme.themeUrl;
             this.customCssUrl = theme.customThemeUrl;
         })
@@ -79,6 +86,11 @@ export class ToolbarDocsComponent implements OnInit {
         ];
 
         this.versions.unshift(this.version);
+    }
+
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     selectTheme(selectedTheme: string): void {
