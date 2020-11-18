@@ -1,6 +1,5 @@
 import { DialogRefBase } from '../../dialog/base/dialog-ref-base.class';
-import { InjectionToken } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-export const MESSAGE_BOX_REF = new InjectionToken<string[]>('MessageBoxRef');
-
+@Injectable()
 export class MessageBoxRef<T = any> extends DialogRefBase<T> {}

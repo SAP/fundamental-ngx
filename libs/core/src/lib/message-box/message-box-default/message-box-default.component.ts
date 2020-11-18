@@ -1,10 +1,18 @@
-import { AfterViewInit, Component, Inject, TemplateRef, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
 import { MessageBoxContent } from '../utils/message-box-content.interface';
-import { MESSAGE_BOX_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
+import { MessageBoxConfig } from '../utils/message-box-config.class';
 
 @Component({
     selector: 'fd-message-box-default',
-    templateUrl: './message-box-default.component.html'
+    templateUrl: './message-box-default.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageBoxDefaultComponent implements AfterViewInit {
 
@@ -19,7 +27,7 @@ export class MessageBoxDefaultComponent implements AfterViewInit {
     messageBoxContent: MessageBoxContent;
 
     /** @hidden */
-    constructor(@Inject(MESSAGE_BOX_CONFIG) public messageBoxConfig: MessageBoxConfig) { }
+    constructor(public messageBoxConfig: MessageBoxConfig, private _changeDetectorRef: ChangeDetectorRef) { }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -45,6 +53,8 @@ export class MessageBoxDefaultComponent implements AfterViewInit {
     private _setContentTemplate(): void {
         this.contentTemplate = this.messageBoxContent.content instanceof TemplateRef
             ? this.messageBoxContent.content
-            : this.textContentTemplate
+            : this.textContentTemplate;
+
+        this._changeDetectorRef.detectChanges();
     }
 }

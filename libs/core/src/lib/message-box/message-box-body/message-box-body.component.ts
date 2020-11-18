@@ -1,6 +1,5 @@
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, Optional } from '@angular/core';
 import {
-    MESSAGE_BOX_CONFIG,
     MESSAGE_BOX_CONFIGURABLE_ELEMENT,
     MessageBoxConfig
 } from '../utils/message-box-config.class';
@@ -18,5 +17,5 @@ import {
     ]
 })
 export class MessageBoxBodyComponent {
-    constructor(@Optional() @Inject(MESSAGE_BOX_CONFIG) public _messageBoxConfig: MessageBoxConfig) {}
+    constructor(@Optional() public _messageBoxConfig: MessageBoxConfig) {}
 }

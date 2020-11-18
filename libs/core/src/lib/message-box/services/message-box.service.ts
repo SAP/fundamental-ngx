@@ -1,7 +1,7 @@
 import { Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
 import { DynamicComponentService } from '../../utils/dynamic-component';
-import { MESSAGE_BOX_CONFIG, MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
-import { MESSAGE_BOX_REF, MessageBoxRef } from '../utils/message-box-ref.class';
+import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
+import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { DialogBaseService } from '../../dialog/base/dialog-base.service';
 import { MessageBoxContainerComponent } from '../message-box-container/message-box-container.component';
 import { MessageBoxContent } from '../utils/message-box-content.interface';
@@ -29,8 +29,8 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
 
         const injector = Injector.create({
             providers: [
-                { provide: MESSAGE_BOX_CONFIG, useValue: config },
-                { provide: MESSAGE_BOX_REF, useValue: messageBoxRef }
+                { provide: MessageBoxConfig, useValue: config },
+                { provide: MessageBoxRef, useValue: messageBoxRef }
             ]
         });
 
