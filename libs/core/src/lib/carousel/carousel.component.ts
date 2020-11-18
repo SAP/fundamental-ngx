@@ -34,7 +34,7 @@ import { RtlService } from '../utils/services/rtl.service';
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
 
-export type CarouselIndicatorsOrientation = 'bottom' | 'top';
+export type PageIndicatorsOrientation = 'bottom' | 'top';
 
 export enum SlideDirection {
     None,
@@ -76,7 +76,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Sets position of page indicator container. Default position is bottom. */
     @Input()
-    carouselIndicatorsOrientation: CarouselIndicatorsOrientation = 'bottom';
+    pageIndicatorsOrientation: PageIndicatorsOrientation = 'bottom';
 
     /** Height for carousel container */
     @Input()
@@ -155,13 +155,13 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
 
     /**
-     * Returns the `role` attribute of the carousel.
+     * @hidden Returns the `role` attribute of the carousel.
      */
     @HostBinding('attr.role')
     role = 'region';
 
     /**
-     * Returns the `tabIndex` of the carousel component.
+     * @hidden Returns the `tabIndex` of the carousel component.
      */
     @HostBinding('attr.tabindex')
     get tabIndex(): number {
@@ -169,7 +169,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * Sets the overflow to auto value.
+     * @hidden Sets the overflow to auto value.
      */
     @HostBinding('style.overflow')
     overflow = 'auto';
@@ -178,6 +178,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @ContentChildren(CarouselItemComponent, { descendants: true })
     slides: QueryList<CarouselItemComponent>;
 
+    /** @hidden */
     @ViewChild('slideContainer')
     slideContainer: ElementRef;
 
