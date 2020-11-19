@@ -84,8 +84,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
         this._previousWidth = wizardWidth;
         if (this.contentHeight) {
-            document.querySelector<HTMLElement>('.fd-wizard-tall-content').style.height = this.contentHeight;
-            document.querySelector<HTMLElement>('.fd-wizard-container-wrapper').style.height = this.contentHeight;
+            this._elRef.nativeElement.querySelector('.fd-wizard-tall-content').style.height = this.contentHeight;
+            this._elRef.nativeElement.querySelector('.fd-wizard-container-wrapper').style.height = this.contentHeight;
         }
     }
 
@@ -103,6 +103,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 this._setupStepEvents(step);
             });
             this._cdRef.detectChanges();
+            this.resizeHandler();
         });
     }
 
