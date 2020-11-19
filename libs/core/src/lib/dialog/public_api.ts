@@ -12,4 +12,4 @@ export * from './directives/dialog-decisive-button.directive';
 export * from './utils/dialog-ref.class';
 export * from './utils/dialog-config.class';
 export * from './utils/dialog-position.class';
-export * from './utils/dialog-default-content';
+export * from './utils/dialog-default-content.class';

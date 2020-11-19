@@ -1,25 +1,38 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { MessageBoxDefaultComponent } from './message-box-default.component';
+import { MessageBoxContent } from '../utils/message-box-content.class';
+import { MessageBoxConfig } from '../utils/message-box-config.class';
+import createSpy = jasmine.createSpy;
 
 describe('MessageBoxDefaultComponent', () => {
-  let component: MessageBoxDefaultComponent;
-  let fixture: ComponentFixture<MessageBoxDefaultComponent>;
+    let component: MessageBoxDefaultComponent;
+    const changeDetectorRefMock = { detectChanges: () => {} } as ChangeDetectorRef;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ MessageBoxDefaultComponent ]
-    })
-    .compileComponents();
-  });
+    beforeEach(() => {
+        component = new MessageBoxDefaultComponent(new MessageBoxConfig(), changeDetectorRefMock);
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(MessageBoxDefaultComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should call callbacks', () => {
+        const messageBoxContent: MessageBoxContent = {
+            closeButtonCallback: createSpy(),
+            cancelButtonCallback: createSpy(),
+            approveButtonCallback: createSpy()
+        };
+
+        component.messageBoxContent = messageBoxContent;
+
+        component.onCloseButton();
+        expect(messageBoxContent.closeButtonCallback).toHaveBeenCalled();
+
+        component.onCancelButton();
+        expect(messageBoxContent.cancelButtonCallback).toHaveBeenCalled();
+
+        component.onApproveButton();
+        expect(messageBoxContent.approveButtonCallback).toHaveBeenCalled();
+    });
 });

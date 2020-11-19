@@ -4,7 +4,6 @@ import {
     Component,
     ComponentFactoryResolver,
     ElementRef,
-    Inject,
     Input,
     TemplateRef,
     Type,
@@ -16,7 +15,7 @@ import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interf
 import { DynamicComponentContainer } from '../../utils/dynamic-component/';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
-import { MessageBoxContent } from '../utils/message-box-content.interface';
+import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
 
 type ContentType = Type<any> | TemplateRef<any> | MessageBoxContent;

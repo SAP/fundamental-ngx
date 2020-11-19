@@ -6,7 +6,7 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { MessageBoxContent } from '../utils/message-box-content.interface';
+import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
 
 @Component({

@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { DialogDefaultContent } from '../utils/dialog-default-content';
+import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 
 @Component({
     selector: 'fd-dialog-default',
