@@ -69,11 +69,11 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.adjustResponsivePadding();
         this._trapFocus();
         this._setPosition();
         this._setWidthHeight();
         this._listenOnWindowResize();
+        this.adjustResponsivePadding();
         this._ref.loaded();
     }
 

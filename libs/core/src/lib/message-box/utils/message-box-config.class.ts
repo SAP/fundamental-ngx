@@ -15,5 +15,4 @@ export interface MessageBoxConfigurableElement {
 @Injectable()
 export class MessageBoxConfig<T = any> extends DialogConfigBase<T> {
     type?: MessageBoxType = 'confirmation';
-    responsivePadding?: boolean = true;
 }

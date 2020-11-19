@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { DialogDefaultContent } from '../utils/dialog-default-content';
 
 @Component({
@@ -6,10 +6,17 @@ import { DialogDefaultContent } from '../utils/dialog-default-content';
     templateUrl: './dialog-default.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DialogDefaultComponent {
+export class DialogDefaultComponent implements AfterViewInit {
 
     /** @hidden */
     defaultDialogConfig: DialogDefaultContent;
+
+    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+
+    /* TODO: Inspect why DialogDefaultComponents needs change detection re-run to render adjusted content (dialog header title) */
+    ngAfterViewInit(): void {
+        this._changeDetectorRef.detectChanges();
+    }
 
     /** Whether there is a approve button, or cancel button text */
     showFooter(): boolean {
