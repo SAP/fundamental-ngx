@@ -299,6 +299,7 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+        this._addCloseIcon();
     }
 
     @applyCssClass
@@ -313,6 +314,14 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    private _addCloseIcon(): void {
+        const element = document.createElement('i');
+        element.setAttribute('role', 'presentation');
+        element.classList.add('sap-icon--decline');
+        this._elementRef.nativeElement.appendChild(element);
     }
 }
 
@@ -334,6 +343,7 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+        this._addIndicatorIcon();
     }
 
     @applyCssClass
@@ -348,6 +358,14 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    private _addIndicatorIcon(): void {
+        const element = document.createElement('i');
+        element.setAttribute('role', 'presentation');
+        element.classList.add('sap-icon--overflow');
+        this._elementRef.nativeElement.appendChild(element);
     }
 }
 
