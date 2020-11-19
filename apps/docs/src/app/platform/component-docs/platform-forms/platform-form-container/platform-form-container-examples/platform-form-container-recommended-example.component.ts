@@ -7,15 +7,9 @@ import { FormGroup } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformFormContainerRecommendedExampleComponent {
-    form: FormGroup;
-    form1: FormGroup;
-    form2: FormGroup;
+    form: FormGroup = new FormGroup({});
+    form1: FormGroup = new FormGroup({});
+    form2: FormGroup = new FormGroup({});
 
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
-
-    constructor() {
-        this.form = new FormGroup({});
-        this.form1 = new FormGroup({});
-        this.form2 = new FormGroup({});
-    }
 }
