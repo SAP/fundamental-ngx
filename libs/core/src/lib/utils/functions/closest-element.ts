@@ -9,7 +9,7 @@ export function closestElement(selector, element): Element | null {
     do {
         matched = false;
 
-        for (let i = matches.item.length; i >= 0; i--) {
+        for (let i = matches.length; i >= 0; i--) {
             if (matches.item(i) === element) {
                 matched = true;
                 break;
