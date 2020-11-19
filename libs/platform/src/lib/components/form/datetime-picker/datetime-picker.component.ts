@@ -104,7 +104,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
-    public activeView: FdCalendarView = 'day';
+    activeView: FdCalendarView = 'day';
 
     /** Aria label for the datetime picker input. */
     @Input()
@@ -135,10 +135,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
             // if any other error from core dtp
             return 'error';
         }
-        if (this.status) {
-            return this.status;
-        }
-        return this._state;
+        return this.status || this._state;
     }
 
     /**
@@ -201,15 +198,15 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
-    isOpenChange = new EventEmitter<boolean>();
+    readonly isOpenChange = new EventEmitter<boolean>();
 
     /** Event thrown every time calendar active view is changed */
     @Output()
-    public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
+    readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** Event emitted when the date changes. This can be a time or day change. */
     @Output()
-    datetimeChange: EventEmitter<FdDatetime> = new EventEmitter<FdDatetime>();
+    readonly datetimeChange: EventEmitter<FdDatetime> = new EventEmitter<FdDatetime>();
 
     /** Event emitted when popover closes. */
     @Output()
