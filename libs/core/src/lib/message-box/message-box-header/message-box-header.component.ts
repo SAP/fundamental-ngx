@@ -7,12 +7,18 @@ import {
 } from '../utils/message-box-config.class';
 
 /**
- * Applies fundamental layout and styling to the contents of a message box header.
+ * Building block of the message box used to create message box header.
  *
  * ```html
  * <fd-message-box-header>
- *     <h1 fd-title>Title</h1>
+ *     <h1 fd-title><!-- Content --></h1>
  *     <fd-message-box-close-icon></fd-message-box-close-icon>
+ * </fd-message-box-header>
+ *
+ * Complex header:
+ * <fd-message-box-header>
+ *     <ng-template fdTemplate="header"><!--Content--></ng-template>
+ *     <ng-template fdTemplate="subheader"><!--Content--></ng-template>
  * </fd-message-box-header>
  * ```
  */
@@ -26,6 +32,7 @@ import {
 })
 export class MessageBoxHeaderComponent extends DialogHeaderBase implements AfterContentInit, MessageBoxConfigurableElement {
 
+    /** @hidden */
     constructor(
         @Optional() public messageBoxConfig: MessageBoxConfig,
         changeDetectorRef: ChangeDetectorRef
@@ -34,6 +41,7 @@ export class MessageBoxHeaderComponent extends DialogHeaderBase implements After
         this.messageBoxConfig = this.messageBoxConfig || {};
     }
 
+    /** @hidden */
     ngAfterContentInit(): void {
         super.ngAfterContentInit();
     }

@@ -20,6 +20,7 @@ import { MessageBoxDefaultComponent } from '../message-box-default/message-box-d
 
 type ContentType = Type<any> | TemplateRef<any> | MessageBoxContent;
 
+/** Message box container where the message box content is embedded. */
 @Component({
     selector: 'fd-message-box-container',
     template: '<ng-container #contentContainer></ng-container>'

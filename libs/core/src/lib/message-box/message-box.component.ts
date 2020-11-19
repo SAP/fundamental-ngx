@@ -29,6 +29,17 @@ import { DialogBase } from '../dialog/base/dialog-base.class';
 import { dialogFadeNgIf } from '../dialog/utils/dialog.animations';
 import { CSS_CLASS_NAME } from './utils/const';
 
+/**
+ * Message box component.
+ *
+ * ```html
+ * <fd-message-box>
+ *      <fd-message-box-header></fd-message-box-header>
+ *      <fd-message-box-body></fd-message-box-body>
+ *      <fd-message-box-footer></fd-message-box-footer>
+ * </fd-message-box>
+ * ```
+ */
 @Component({
     selector: 'fd-message-box',
     templateUrl: './message-box.component.html',
@@ -72,6 +83,7 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
     /** @hidden */
     private _class = '';
 
+    /** @hidden */
     constructor(
         @Optional() public _messageBoxConfig: MessageBoxConfig,
         @Optional() private _messageBoxRef: MessageBoxRef,
@@ -82,10 +94,12 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
         super(router, elementRef, changeDetectorRef);
     }
 
+    /** @hidden */
     get _config(): MessageBoxConfig {
         return this._messageBoxConfig;
     }
 
+    /** @hidden */
     get _ref(): MessageBoxRef {
         return this._messageBoxRef;
     }
@@ -96,6 +110,7 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
         this.buildComponentCssClass();
     }
 
+    /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }

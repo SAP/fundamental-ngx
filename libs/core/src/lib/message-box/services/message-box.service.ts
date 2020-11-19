@@ -10,6 +10,7 @@ import { MessageBoxContent } from '../utils/message-box-content.class';
 @Injectable()
 export class MessageBoxService extends DialogBaseService<MessageBoxContainerComponent> {
 
+    /** @hidden */
     constructor(
         dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(MESSAGE_BOX_DEFAULT_CONFIG) private _defaultConfig: MessageBoxConfig
