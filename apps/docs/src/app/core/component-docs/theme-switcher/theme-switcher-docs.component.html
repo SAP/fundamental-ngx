@@ -1,0 +1,26 @@
+<fd-docs-section-title>
+    Theme switcher
+</fd-docs-section-title>
+<description>
+    Css files are switched via choosing option.
+</description>
+<component-example>
+    <fd-theme-switcher-example (themeChanged)="handleThemeChanged($event)"></fd-theme-switcher-example>
+</component-example>
+<code-example [exampleFiles]="themeSwitcherExample"></code-example>
+
+
+<separator></separator>
+
+<fd-docs-section-title>
+    Setting theme via url
+</fd-docs-section-title>
+<description>
+    Theme can be set by adding property in URL providing name of the theme like in the following example. Parameter is configurable, it can be set by calling <code>setThemeByRoute</code>.
+    See example by adding <code>?customQueryParam=sap_fiori_3_dark</code> to URL.
+</description>
+<component-example>
+    <fd-theme-url-example (themeChanged)="handleThemeChanged($event)"></fd-theme-url-example>
+</component-example>
+<code-example [exampleFiles]="themeUrlExample"></code-example>
+

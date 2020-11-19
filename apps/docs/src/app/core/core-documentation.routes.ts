@@ -332,6 +332,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/textarea/textarea-docs.module').then((m) => m.TextareaDocsModule)
             },
             {
+                path: 'theme-switcher',
+                loadChildren: () =>
+                    import('./component-docs/theme-switcher/theme-switcher-docs.module').then(
+                        (m) => m.ThemeSwitcherDocsModule
+                    )
+            },
+            {
                 path: 'tile',
                 loadChildren: () => import('./component-docs/tile/tile-docs.module').then((m) => m.TileDocsModule)
             },
