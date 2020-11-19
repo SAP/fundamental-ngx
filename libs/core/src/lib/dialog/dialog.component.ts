@@ -26,6 +26,17 @@ import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 import { DialogBase } from './base/dialog-base.class';
 
+/**
+ * Dialog component.
+ *
+ * ```html
+ * <fd-dialog>
+ *      <fd-dialog-header></fd-dialog-header>
+ *      <fd-dialog-body></fd-dialog-body>
+ *      <fd-dialog-footer></fd-dialog-footer>
+ * </fd-dialog>
+ * ```
+ */
 @Component({
     selector: 'fd-dialog',
     styleUrls: ['dialog.component.scss'],
@@ -100,6 +111,7 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     /** @hidden */
     private _onHidden: Subscription;
 
+    /** @hidden */
     constructor(
         @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         @Optional() @Inject(DIALOG_REF) private _dialogRef: DialogRef,

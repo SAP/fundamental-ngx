@@ -18,6 +18,7 @@ import { DialogHeaderBase } from '../base/dialog-header-base.class';
 })
 export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {
 
+    /** @hidden */
     constructor(
         @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         changeDetectorRef: ChangeDetectorRef

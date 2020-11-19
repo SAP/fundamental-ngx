@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 
+/** Dialog component used to create the dialog in object based approach */
 @Component({
     selector: 'fd-dialog-default',
     templateUrl: './dialog-default.component.html',

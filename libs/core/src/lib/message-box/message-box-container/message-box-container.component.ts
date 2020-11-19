@@ -17,15 +17,15 @@ import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
+import { MessageBoxContentType } from '../services/message-box.service';
 
-type ContentType = Type<any> | TemplateRef<any> | MessageBoxContent;
 
 /** Message box container where the message box content is embedded. */
 @Component({
     selector: 'fd-message-box-container',
     template: '<ng-container #contentContainer></ng-container>'
 })
-export class MessageBoxContainerComponent extends DynamicComponentContainer<ContentType>
+export class MessageBoxContainerComponent extends DynamicComponentContainer<MessageBoxContentType>
     implements AfterViewInit, CssClassBuilder {
 
     /** Custom classes */

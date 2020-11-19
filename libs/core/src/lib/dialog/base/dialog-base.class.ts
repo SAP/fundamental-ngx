@@ -56,6 +56,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
+    /** @hidden */
     constructor(
         protected _router: Router,
         protected _elementRef: ElementRef,

@@ -18,14 +18,14 @@ import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interf
 import { DynamicComponentContainer } from '../../utils/dynamic-component';
 import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
+import { DialogContentType } from '../dialog-service/dialog.service';
 
-type ContentType = TemplateRef<any> | Type<any> | DialogDefaultContent;
-
+/** Dialog container where the dialog content is embedded. */
 @Component({
     selector: 'fd-dialog-container',
     template: '<ng-container #contentContainer></ng-container>'
 })
-export class DialogContainerComponent extends DynamicComponentContainer<ContentType> implements AfterViewInit, CssClassBuilder {
+export class DialogContainerComponent extends DynamicComponentContainer<DialogContentType> implements AfterViewInit, CssClassBuilder {
     /** Custom classes */
     @Input()
     set class(userClass: string) {

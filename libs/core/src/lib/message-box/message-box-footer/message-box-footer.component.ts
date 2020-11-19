@@ -7,7 +7,7 @@ import {
 import { DialogFooterBase } from '../../dialog/base/dialog-footer-base.class';
 
 /**
- * Message box component used to create the message box in object based approach
+ * Building block of the message box used to create message box header.
  *
  * ```html
  * <fd-message-box-footer><!--Content--></fd-message-box-footer>

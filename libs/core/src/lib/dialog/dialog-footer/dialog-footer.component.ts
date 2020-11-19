@@ -2,11 +2,25 @@ import { AfterContentInit, Component, Inject, Optional } from '@angular/core';
 import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 import { DialogFooterBase } from '../base/dialog-footer-base.class';
 
+/**
+ * Building block of the dialog used to create dialog button.
+ *
+ * ```html
+ * <fd-dialog-footer><!--Content--></fd-dialog-footer>
+ *
+ * Complex footer:
+ * <fd-dialog-footer>
+ *     <ng-template fdTemplate="footer"><!--Content--></ng-template>
+ * </fd-dialog-footer>
+ * ```
+ * */
 @Component({
     selector: 'fd-dialog-footer',
     templateUrl: './dialog-footer.component.html'
 })
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit {
+
+    /** @hidden */
     constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {
         super();
         this.dialogConfig = this.dialogConfig || {};

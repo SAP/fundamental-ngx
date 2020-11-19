@@ -21,6 +21,7 @@ export class DialogRef<T = any> extends DialogRefBase<T> {
     /** Observable that is triggered whenever the dialog should be displayed in loading state.*/
     public onLoading: Observable<boolean> = this._onLoading.asObservable();
 
+    /** @hidden */
     constructor() {
         super();
     }
