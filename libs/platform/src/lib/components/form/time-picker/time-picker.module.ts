@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PlatformTimePickerComponent } from './time-picker.component';
 import { TimePickerModule } from '@fundamental-ngx/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [PlatformTimePickerComponent],
@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
         TimePickerModule
-    ]
+    ],
+    exports: [PlatformTimePickerComponent]
 })
-export class PlatformTimePickerModule {
-}
+export class PlatformTimePickerModule {}

@@ -1,33 +1,24 @@
 import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
-    Output,
     EventEmitter,
     Input,
-    ViewChild,
-    ChangeDetectionStrategy,
-    ViewEncapsulation,
-    ChangeDetectorRef,
-    ElementRef,
-    Optional,
-    Self,
-    SkipSelf,
-    Host,
+    OnDestroy,
     OnInit,
-    AfterViewInit,
-    OnDestroy
+    Output,
+    ViewChild
 } from '@angular/core';
 import { Placement } from 'popper.js';
 
 import { BaseInput } from '../base.input';
 import { TimeObject, TimePickerComponent } from '@fundamental-ngx/core';
-import { FormField, FormFieldControl, Status } from '@fundamental-ngx/platform';
-import { NgControl, NgForm } from '@angular/forms';
+import { FormFieldControl, Status } from '../form-control';
 
 @Component({
     selector: 'fdp-time-picker',
     templateUrl: './time-picker.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: PlatformTimePickerComponent, multi: true }]
 })
 export class PlatformTimePickerComponent extends BaseInput implements OnInit, AfterViewInit, OnDestroy {
@@ -59,10 +50,6 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
      * and does not display a period control. */
     @Input()
     meridian = false;
-
-    /** @Input Disables the component. */
-    @Input()
-    disabled: boolean;
 
     /** @Input Whether to show spinner buttons */
     @Input()
@@ -107,11 +94,7 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
 
     @Input()
     set state(state: Status) {
-        if (state) {
-            this._state = state;
-        } else {
-            this._state = 'default';
-        }
+        this._state = state ? state : 'default';
     }
 
     get state(): Status {
@@ -147,15 +130,16 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
     timePickerComponent: TimePickerComponent;
 
     /**
-     *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     * @hidden
+     * The state of the form control - applies css classes.
+     * Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     private _state: Status;
 
     /**
      * Method that handles changes when popover is opened or closed.
      */
-    public handleOpenChange(open: boolean): void {
+    handleOpenChange(open: boolean): void {
         this.isOpenChange.emit(open);
     };
 
@@ -198,52 +182,5 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
         }
 
         return retVal;
-    }
-
-    /**
-     * ??????????????????
-     * ??????????????????
-     * ??????????????????
-     * ??????????????????
-     */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        readonly elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @Self() readonly ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
-    ) {
-        super(_cd, ngControl, ngForm, formField, formControl);
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        super.ngOnInit();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.ngOnDestroy();
-        this.timePickerComponent?.ngOnDestroy();
-    }
-
-    /** @hidden */
-    writeValue(value: TimeObject): void {
-        super.writeValue(value);
-    }
-
-    /**
-     * @hidden
-     * override base functionality to catch new disabled state
-     */
-    setDisabledState(disabled: boolean): void {
-        super.setDisabledState(disabled);
-        this.timePickerComponent?.setDisabledState(disabled);
     }
 }
