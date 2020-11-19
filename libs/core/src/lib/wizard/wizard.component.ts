@@ -22,6 +22,14 @@ export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
 export const STEP_STACKED_CLASS = 'fd-wizard__step--stacked';
 export const STEP_NO_LABEL_CLASS = 'fd-wizard__step--no-label';
 
+export const WIZARD_CLASS = 'fd-wizard';
+export const WIZARD_NAVIGATION_CLASS = 'fd-wizard__navigation';
+export const WIZARD_CONTENT_CLASS = 'fd-wizard__content';
+export const WIZARD_CONTAINER_WRAPPER_CLASS = 'fd-wizard-container-wrapper';
+export const WIZARD_TALL_CONTENT_CLASS = 'fd-wizard-tall-content';
+export const SHELLBAR_CLASS = 'fd-shellbar';
+export const BAR_FOOTER_CLASS = 'fd-bar--footer';
+
 export const ACTIVE_STEP_STATUS = 'active';
 export const CURRENT_STEP_STATUS = 'current';
 export const UPCOMING_STEP_STATUS = 'upcoming';
@@ -84,8 +92,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
         this._previousWidth = wizardWidth;
         if (this.contentHeight) {
-            this._elRef.nativeElement.querySelector('.fd-wizard-tall-content').style.height = this.contentHeight;
-            this._elRef.nativeElement.querySelector('.fd-wizard-container-wrapper').style.height = this.contentHeight;
+            this._elRef.nativeElement.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).style.height = this.contentHeight;
+        } else {
+            this._setContainerAndTallContentHeight();
         }
     }
 
@@ -103,13 +112,49 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 this._setupStepEvents(step);
             });
             this._cdRef.detectChanges();
-            this.resizeHandler();
         });
+        this.resizeHandler();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+    }
+
+    /**
+     * @hidden
+     * @private
+     * This function determines the height of the wizard content by looking for the document's shellbar, the wizard
+     * navigation and the wizard footer, and calculating the height based on their presence.
+     */
+    private _calculateContentHeight(): number {
+        let shellbarHeight = 0, wizardNavHeight = 0, wizardFooterHeight = 0;
+        if (document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS)) {
+            shellbarHeight = document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS).clientHeight;
+        }
+        const wizard = this._elRef.nativeElement.querySelector('.' + WIZARD_CLASS);
+        if (wizard.querySelector('.' + WIZARD_NAVIGATION_CLASS)) {
+            wizardNavHeight = wizard.querySelector('.' + WIZARD_NAVIGATION_CLASS).clientHeight;
+        }
+        if (wizard.querySelector('.' + BAR_FOOTER_CLASS)) {
+            wizardFooterHeight = wizard.querySelector('.' + BAR_FOOTER_CLASS).clientHeight;
+        }
+        return shellbarHeight + wizardNavHeight + wizardFooterHeight;
+    }
+
+    /** @hidden */
+    private _setContainerAndTallContentHeight(): void {
+        const wizard = this._elRef.nativeElement.querySelector('.' + WIZARD_CLASS);
+        const combinedHeight = this._calculateContentHeight();
+        if (wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS)) {
+            wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).style.height = 'calc(100vh - ' + combinedHeight + 'px)';
+        }
+        wizard.querySelectorAll('.' + WIZARD_CONTENT_CLASS).forEach(node => {
+            node.style.height = 'auto'
+        });
+        if (wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS)) {
+            wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS).style.height = 'calc(100vh - ' + combinedHeight + 'px)';
+        }
     }
 
     /** @hidden */
@@ -173,6 +218,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 }
             }
         });
+        if (this.steps.last.content) {
+            this.steps.last.content.tallContent = true;
+        }
         this.steps.last.finalStep = true;
     }
 
@@ -251,6 +299,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         this._setContentTemplates();
         this._shrinkWhileAnyStepIsTooNarrow();
         this._cdRef.detectChanges();
+        this._setContainerAndTallContentHeight();
         this._scrollToCurrentStep();
     }
 
