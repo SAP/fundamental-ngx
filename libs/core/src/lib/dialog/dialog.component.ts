@@ -110,10 +110,12 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
         super(router, elementRef, changeDetectorRef);
     }
 
+    /** @hidden */
     get _config(): DialogConfig {
         return this.dialogConfig;
     }
 
+    /** @hidden */
     get _ref(): DialogRef {
         return this._dialogRef;
     }
@@ -125,6 +127,7 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
         this.buildComponentCssClass();
     }
 
+    /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }

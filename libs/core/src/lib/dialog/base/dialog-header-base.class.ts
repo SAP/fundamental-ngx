@@ -31,6 +31,7 @@ export abstract class DialogHeaderBase implements AfterContentInit {
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
+    /** @hidden */
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */

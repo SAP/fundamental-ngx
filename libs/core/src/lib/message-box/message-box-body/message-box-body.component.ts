@@ -5,7 +5,13 @@ import {
     MessageBoxConfigurableElement
 } from '../utils/message-box-config.class';
 
-
+/**
+ * Building block of the message box used to create message box body.
+ *
+ * ```html
+ * <fd-message-box-body></fd-message-box-body>
+ * ```
+ */
 @Component({
     selector: 'fd-message-box-body',
     template: '<ng-content></ng-content>',
@@ -18,6 +24,8 @@ import {
     ]
 })
 export class MessageBoxBodyComponent implements MessageBoxConfigurableElement {
+
+    /** @hidden */
     constructor(@Optional() public messageBoxConfig: MessageBoxConfig) {
         this.messageBoxConfig = this.messageBoxConfig || {};
     }

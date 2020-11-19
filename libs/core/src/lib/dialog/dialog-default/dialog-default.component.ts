@@ -11,9 +11,12 @@ export class DialogDefaultComponent implements AfterViewInit {
     /** @hidden */
     defaultDialogConfig: DialogDefaultContent;
 
+    /** @hidden */
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
-    /* TODO: Inspect why DialogDefaultComponents needs change detection re-run to render adjusted content (dialog header title) */
+    /** @hidden
+     * TODO: Inspect why DialogDefaultComponents needs change detection re-run to render adjusted content (dialog header title)
+     * */
     ngAfterViewInit(): void {
         this._changeDetectorRef.detectChanges();
     }

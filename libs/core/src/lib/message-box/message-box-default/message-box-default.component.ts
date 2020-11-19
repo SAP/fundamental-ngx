@@ -9,6 +9,7 @@ import {
 import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
 
+/** Message box component used to create the message box in object based approach */
 @Component({
     selector: 'fd-message-box-default',
     templateUrl: './message-box-default.component.html',
