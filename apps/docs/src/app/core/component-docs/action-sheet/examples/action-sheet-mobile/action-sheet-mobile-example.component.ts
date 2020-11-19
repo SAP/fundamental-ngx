@@ -14,7 +14,7 @@ export class ActionSheetMobileExampleComponent {
     @ViewChild(ActionSheetComponent)
     actionSheetComponent: ActionSheetComponent;
 
-    constructor(public messageToastService: MessageToastService) {}
+    constructor(private _messageToastService: MessageToastService) {}
 
     actionPicked(action: string): void {
         this.openMessageToast(action);
@@ -22,8 +22,8 @@ export class ActionSheetMobileExampleComponent {
     }
 
     openMessageToast(action: string): void {
-        const content = action +  ' action performed';
-        this.messageToastService.open(content, {
+        const content = `${action} action performed`;
+        this._messageToastService.open(content, {
             duration: 5000
         });
     }
