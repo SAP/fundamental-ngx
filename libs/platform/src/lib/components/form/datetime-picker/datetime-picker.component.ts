@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -36,15 +35,15 @@ import { FormFieldControl, Status } from '../public_api';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FormFieldControl, useExisting: PlatformDatetimePickerComponent, multi: true }]
 })
-export class PlatformDatetimePickerComponent extends BaseInput implements OnInit, AfterViewInit, OnDestroy {
+export class PlatformDatetimePickerComponent extends BaseInput implements OnInit, OnDestroy {
     /**
-     * value for datetime in string
+     * value for datetime
      */
     @Input()
-    get value(): string {
+    get value(): FdDatetime {
         return super.getValue();
     }
-    set value(value: string) {
+    set value(value: FdDatetime) {
         super.setValue(value);
     }
 
@@ -255,10 +254,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
             this.placeholder = this.format;
         }
     }
-    /** @hidden */
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
-    }
+
     /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
@@ -287,7 +283,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
      * logic to handle validation from both platform forms and core datetiimepicker
      * @param value inputted
      */
-    handleDatetimeInputChange(value: string): void {
+    handleDatetimeInputChange(value: FdDatetime): void {
         if (this.dateTimePickerComponent) {
             if (this.dateTimePickerComponent.isInvalidDateInput) {
                 this.state = 'error';
@@ -298,7 +294,11 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
                     this.state = undefined; // resetting to default state
                 }
             }
-            this.value = value;
+            // only set the value if it is a valid datetime object
+            if (this.dateTimePickerComponent.inputFieldDate) {
+                this.value = value;
+            }
+
             this.stateChanges.next('datetime picker: handleDatetimeInputChange');
         }
         this.onTouched();

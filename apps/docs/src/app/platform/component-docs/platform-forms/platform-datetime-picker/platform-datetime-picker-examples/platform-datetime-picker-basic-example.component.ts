@@ -12,7 +12,7 @@ export class PlatformDatetimePickerBasicExampleComponent {
 
     datetimePickerForm = new FormGroup({});
 
-    requiredDateValidator: ValidatorFn[];
+    requiredDateValidator: ValidatorFn[] = [Validators.required];
 
     date = FdDatetime.getToday();
 
@@ -21,7 +21,6 @@ export class PlatformDatetimePickerBasicExampleComponent {
     constructor() {
         this.storedDate = new FdDatetime(new FdDate(2008, 2, 11), this.storedDate.time);
         this.data = new StoredDatetimeObject(this.storedDate);
-        this.requiredDateValidator = [Validators.required];
     }
 
     save(value: any): void {

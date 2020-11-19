@@ -10,8 +10,6 @@ import { FdDate, FdDatetime } from '@fundamental-ngx/core';
 export class PlatformDatetimePickerTemplateExampleComponent {
     storedDate: FdDatetime = FdDatetime.getToday();
 
-    requiredDateValidator: ValidatorFn[] = [Validators.required];
-
     date = FdDatetime.getToday();
 
     templateDate = '';
