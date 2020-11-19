@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.8...v0.24.1-rc.9) (2020-11-19)
+
+
+### Bug Fixes
+
+* (core) Add raw values for IE11 into popover arrow styles ([#3891](https://github.com/SAP/fundamental-ngx/issues/3891)) ([8a24a10](https://github.com/SAP/fundamental-ngx/commit/8a24a1063714674e81271961c5e7364d68be218c))
+
 ### [0.24.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.7...v0.24.1-rc.8) (2020-11-19)
 
 
