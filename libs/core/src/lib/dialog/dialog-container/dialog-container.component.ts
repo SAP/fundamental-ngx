@@ -17,7 +17,7 @@ import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator'
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
 import { DynamicComponentContainer } from '../../utils/dynamic-component';
 import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
-import { DialogDefaultContent } from '../utils/dialog-default-content';
+import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 
 type ContentType = TemplateRef<any> | Type<any> | DialogDefaultContent;
 

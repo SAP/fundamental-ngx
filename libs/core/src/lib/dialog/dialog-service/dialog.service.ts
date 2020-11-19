@@ -4,7 +4,7 @@ import { DIALOG_CONFIG, DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dia
 import { DynamicComponentService } from '../../utils/dynamic-component';
 import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
 import { DialogBaseService } from '../base/dialog-base.service';
-import { DialogDefaultContent } from '../utils/dialog-default-content';
+import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 
 /** Service used to create a dialog. */
 @Injectable()

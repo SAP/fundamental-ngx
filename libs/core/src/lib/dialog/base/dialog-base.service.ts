@@ -41,6 +41,8 @@ export abstract class DialogBaseService<T> {
         }
 
         this._dynamicComponentService.destroyComponent(dialog);
-        this._dialogs.splice(index, 1);
+
+        this._dialogs[index] = null;
+        this._dialogs = this._dialogs.filter(item => item);
     }
 }

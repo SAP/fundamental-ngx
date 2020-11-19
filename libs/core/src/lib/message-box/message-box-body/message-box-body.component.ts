@@ -18,5 +18,7 @@ import {
     ]
 })
 export class MessageBoxBodyComponent implements MessageBoxConfigurableElement {
-    constructor(@Optional() public messageBoxConfig: MessageBoxConfig) {}
+    constructor(@Optional() public messageBoxConfig: MessageBoxConfig) {
+        this.messageBoxConfig = this.messageBoxConfig || {};
+    }
 }

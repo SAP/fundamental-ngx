@@ -1,4 +1,4 @@
-export interface DialogContentBase {
+export class DialogContentBase {
 
     /** Dialog Title */
     title?: string;

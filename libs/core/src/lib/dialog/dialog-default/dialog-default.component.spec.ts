@@ -2,7 +2,7 @@ import { DialogDefaultComponent } from './dialog-default.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from '../../button/button.module';
 import { DialogDecisiveButtonDirective } from '../directives/dialog-decisive-button.directive';
-import { DialogDefaultContent } from '../utils/dialog-default-content';
+import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogHeaderComponent } from '../dialog-header/dialog-header.component';
 import { DialogCloseButtonComponent } from '../dialog-close-button/dialog-close-button.component';
 import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';

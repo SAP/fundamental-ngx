@@ -8,7 +8,6 @@ import { MessageBoxBodyComponent } from './message-box-body/message-box-body.com
 import { MessageBoxFooterComponent } from './message-box-footer/message-box-footer.component';
 import { MessageBoxHeaderComponent } from './message-box-header/message-box-header.component';
 import { MessageBoxDecisiveButton } from './directives/message-box-decisive-button.directive';
-import { MessageBoxTitle } from './directives/message-box-title.directive';
 import { BarModule } from '../bar/bar.module';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
@@ -29,7 +28,6 @@ const declarations = [
     MessageBoxDecisiveButton,
     MessageBoxBodyComponent,
     MessageBoxComponent,
-    MessageBoxTitle
 ];
 
 @NgModule({

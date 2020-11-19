@@ -4,7 +4,7 @@ import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '../utils/message-b
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { DialogBaseService } from '../../dialog/base/dialog-base.service';
 import { MessageBoxContainerComponent } from '../message-box-container/message-box-container.component';
-import { MessageBoxContent } from '../utils/message-box-content.interface';
+import { MessageBoxContent } from '../utils/message-box-content.class';
 
 /** Service used to create a message box. */
 @Injectable()
