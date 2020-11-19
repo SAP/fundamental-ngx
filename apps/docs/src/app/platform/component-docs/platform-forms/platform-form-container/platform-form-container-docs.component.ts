@@ -11,10 +11,10 @@ import * as platformComplexFormContainerSrc from '!raw-loader!./platform-form-co
 import * as platformComplexFormContainerTsCode from '!raw-loader!./platform-form-container-examples/platform-form-container-complex-example.component.ts';
 
 @Component({
-    selector: 'app-textarea',
+    selector: 'app-form-container',
     templateUrl: './platform-form-container-docs.component.html'
 })
-export class PlatformFormContainerDocsComponent implements OnInit {
+export class PlatformFormContainerDocsComponent {
     formContainerRecommended: ExampleFile[] = [
         {
             language: 'html',
@@ -69,5 +69,4 @@ export class PlatformFormContainerDocsComponent implements OnInit {
             component: 'PlatformFormContainerComplexExampleComponent'
         }
     ];
-    ngOnInit(): void {}
 }
