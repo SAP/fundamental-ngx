@@ -145,7 +145,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _setContainerAndTallContentHeight(): void {
         const wizard = this._elRef.nativeElement.querySelector('.' + WIZARD_CLASS);
-        const combinedHeight = this._calculateContentHeight();
+        const combinedHeight = this.contentHeight ? this.contentHeight : this._calculateContentHeight();
         if (wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS)) {
             wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).style.height = 'calc(100vh - ' + combinedHeight + 'px)';
         }
