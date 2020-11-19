@@ -7,7 +7,7 @@ import { DIALOG_REF, DialogRef } from '../../dialog/utils/dialog-ref.class';
  *
  * ```html
  * <fd-dialog-body>
- *     <div>Dialog body content</div>
+ *     <!-- Content -->
  * </fd-dialog-body>
  * ```
  */
@@ -20,6 +20,8 @@ import { DIALOG_REF, DialogRef } from '../../dialog/utils/dialog-ref.class';
     }
 })
 export class DialogBodyComponent {
+
+    /** @hidden */
     constructor(
         @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         @Optional() @Inject(DIALOG_REF) public dialogRef: DialogRef

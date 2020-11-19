@@ -33,7 +33,7 @@ const declarations = [
 @NgModule({
     declarations: [declarations],
     imports: [CommonModule, IconModule, InitialFocusModule, TemplateModule, BarModule, TitleModule, ButtonModule],
-    exports: [declarations, IconModule, TemplateModule, InitialFocusModule, BarModule, TitleModule, ButtonModule],
+    exports: [declarations, TemplateModule, InitialFocusModule, TitleModule],
     providers: [MessageBoxService, DynamicComponentService],
     entryComponents: [MessageBoxContainerComponent, MessageBoxDefaultComponent]
 })
