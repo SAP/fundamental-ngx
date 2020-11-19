@@ -56,7 +56,7 @@ class TestTimePickerComponent {
     }
 }
 
-fdescribe('PlatformTimePickerComponent', () => {
+describe('PlatformTimePickerComponent', () => {
     let component: TestTimePickerComponent;
     let fixture: ComponentFixture<TestTimePickerComponent>;
 

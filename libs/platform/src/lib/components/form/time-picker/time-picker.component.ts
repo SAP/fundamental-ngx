@@ -71,7 +71,7 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
      * Otherwise It can be set to a default value
      */
     @Input()
-    placeholder: string = this.getPlaceholder();
+    placeholder: string = this._getPlaceholder();
 
     /** Aria label for the time picker input. */
     @Input()
@@ -152,11 +152,7 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
             if (this.timePickerComponent.isInvalidTimeInput) {
                 this.state = 'error';
             } else {
-                if (!this.timePickerComponent.time && !this.allowNull) {
-                    this.state = 'error'; // null value in not allowNull should throw error
-                } else {
-                    this.state = undefined; // resetting to default state
-                }
+                this.state = !this.timePickerComponent.time && !this.allowNull ? 'error' : undefined;
             }
             this.value = value;
             this.stateChanges.next('time picker: handleTimeInputChange');
@@ -165,7 +161,7 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
     }
 
     /** @hidden */
-    getPlaceholder(): string {
+    _getPlaceholder(): string {
         let retVal = '';
         if (this.displayHours) {
             retVal = retVal + 'hh';
