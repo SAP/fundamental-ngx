@@ -19,6 +19,8 @@ exports.config = {
             name: 'e2e-win-internet-explorer',
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
+            screenResolution: '1920x1080',
+            RequireWindowFocus: 'True'  // fixes mouseMove, element focus etc.
         },
         {
             browserName: 'MicrosoftEdge',
@@ -27,6 +29,7 @@ exports.config = {
             name: 'e2e-win-edge',
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
+            screenResolution: '1920x1080',
         },
         {
             browserName: 'chrome',
@@ -35,6 +38,7 @@ exports.config = {
             name: 'e2e-win-chrome',
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
+            screenResolution: '1920x1080',
         },
         {
             browserName: 'firefox',
@@ -43,14 +47,18 @@ exports.config = {
             name: 'e2e-win-firefox',
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
-        },
-        {
+            screenResolution: '1920x1080',
+            '-enablePassThrough': 'false' // [WIP] should fix mouse actions
+
+         },
+         {
             browserName: 'chrome',
             platform: 'macOS 10.15',
             version: 'latest',
             name: 'e2e-MAC-chrome',
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
+            screenResolution: '1920x1440',
         },
         {
             browserName: 'firefox',
@@ -59,6 +67,7 @@ exports.config = {
             name: 'e2e-MAC-firefox',
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
+            screenResolution: '1920x1440',
         },
         {
             browserName: 'MicrosoftEdge',
@@ -67,6 +76,7 @@ exports.config = {
             name: 'e2e-MAC-Edge',
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
+            screenResolution: '1920x1440',
         },
         {
             browserName: 'safari',
@@ -75,6 +85,7 @@ exports.config = {
             name: 'e2e-MAC-safari',
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
+            screenResolution: '1920x1440',
         },
     ],
     // baseUrl: 'http://localhost:4200/fundamental-ngx#',
@@ -92,6 +103,10 @@ exports.config = {
         require('ts-node').register({
             project: 'e2e/tsconfig.json'
         });
+
+        // fixes issue with loading URL on Safari
+        browser.resetUrl = 'about:blank';
+
         // Set some config data
         const processedConfig = await browser.getProcessedConfig();
 
