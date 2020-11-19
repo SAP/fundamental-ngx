@@ -1,21 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
-import { TimeObject } from '@fundamental-ngx/core';
-
 @Component({
     selector: 'fdp-time-picker-reactive-example',
     templateUrl: './platform-time-picker-reactive-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformTimePickerReactiveExampleComponent {
-    storedDate: TimeObject = { hour: 0, minute: 0, second: 0 };
-
     requiredTimeValidator: ValidatorFn[] = [Validators.required];
-    data: StoredTimeObject = new StoredTimeObject(this.storedDate);
 
-    timePickerForm = new FormGroup({
-        disableExample: new FormControl({ value: '', disabled: true })
+    timePickerForm: FormGroup = new FormGroup({
+        disableExample: new FormControl({ value: '', disabled: true }),
+        nullValidity: new FormControl({ hour: 0, minute: 0, second: 0 })
     });
 
     onSubmit(): void {
@@ -25,8 +21,22 @@ export class PlatformTimePickerReactiveExampleComponent {
             alert('Form invalid');
         }
     }
-}
 
-class StoredTimeObject {
-    constructor(public storedTime: TimeObject) {}
+    setNull(): void {
+        this.timePickerForm.get('nullValidity').setValue(null);
+        this.markControlAsTouched('nullValidity');
+    }
+
+    setValid(): void {
+        this.timePickerForm.get('nullValidity').setValue({ hour: 0, minute: 0, second: 0 });
+        this.markControlAsTouched('nullValidity');
+    }
+
+    private markControlAsTouched(controlName: string): void {
+        const control = this.timePickerForm.get(controlName);
+
+        if (control.untouched) {
+            control.markAsTouched();
+        }
+    }
 }

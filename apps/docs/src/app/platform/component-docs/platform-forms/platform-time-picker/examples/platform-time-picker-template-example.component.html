@@ -41,7 +41,7 @@
         rank="1"
         label="Null Validity:"
     >
-        <fdp-time-picker name="allow-null" [allowNull]="false" [(ngModel)]="timeAllowNull"></fdp-time-picker>
+        <fdp-time-picker name="null-validity" [allowNull]="false" [(ngModel)]="timeAllowNull"></fdp-time-picker>
 
         <br>
         <br>
@@ -52,12 +52,12 @@
     </fdp-form-field>
 
     <fdp-form-field
-        id="disabled"
+        id="disableExample"
         zone="zLeft"
         rank="1"
         label="Disabled Time Picker:"
     >
-        <fdp-time-picker name="disabled" [disabled]="true" [(ngModel)]="timeDisabled"></fdp-time-picker>
+        <fdp-time-picker name="disableExample" [disabled]="true" [(ngModel)]="timeDisabled"></fdp-time-picker>
     </fdp-form-field>
 
     <ng-template #i18n let-errors>

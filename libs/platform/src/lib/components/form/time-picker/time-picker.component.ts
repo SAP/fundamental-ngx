@@ -124,7 +124,7 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
-    isOpenChange = new EventEmitter<boolean>();
+    readonly isOpenChange = new EventEmitter<boolean>();
 
     @ViewChild(TimePickerComponent)
     timePickerComponent: TimePickerComponent;
@@ -144,7 +144,6 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
     };
 
     /**
-     * @hidden
      * logic to handle validation from both platform forms and core datetiimepicker
      * @param value inputted
      */
