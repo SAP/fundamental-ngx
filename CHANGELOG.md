@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.7...v0.24.1-rc.8) (2020-11-19)
+
+
+### Bug Fixes
+
+* (Core) Popover sides position ([#3889](https://github.com/SAP/fundamental-ngx/issues/3889)) ([cd7a6ac](https://github.com/SAP/fundamental-ngx/commit/cd7a6ac3e76cddfa629735180a36afd40bc3ddc1))
+
 ### [0.24.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.6...v0.24.1-rc.7) (2020-11-19)
 
 
