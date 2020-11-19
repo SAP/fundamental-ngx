@@ -1,12 +1,11 @@
-import { OverlayContainer } from '@angular/cdk/overlay/overlay-container';
 import { CommonModule } from '@angular/common';
-import { Component, Input, TemplateRef, OnInit, ViewChild } from '@angular/core';
-import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { DynamicComponentService } from '@fundamental-ngx/core';
-import { Observable, of } from 'rxjs';
-import { DataProvider, DATA_PROVIDERS, ListDataSource } from '../../../domain';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core';
+
+import { DataProvider, DATA_PROVIDERS } from '../../../domain';
 import { PlatformListModule } from '../../list/list.module';
 import { StandardListItemModule } from '../../list/standard-list-item/standard-list-item.module';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
@@ -22,7 +21,7 @@ import { PlatformMultiInputModule } from './multi-input.module';
                 label="Default Multi Input Field"
                 id="input-simple"
                 name="reactiveFormInput"
-                zone="“zLeft”"
+                zone="zLeft"
                 rank="1"
                 placeholder="Field placeholder text"
             >
@@ -65,7 +64,7 @@ describe('PlatformMultiInputComponent', () => {
                 StandardListItemModule,
                 RouterTestingModule
             ],
-            providers: [DynamicComponentService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
+            providers: [DynamicComponentService, RtlService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
         }).compileComponents();
     });
 

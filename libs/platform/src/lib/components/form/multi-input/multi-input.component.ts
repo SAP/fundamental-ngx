@@ -1,4 +1,6 @@
+import { Direction } from '@angular/cdk/bidi';
 import { BACKSPACE, DELETE, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,17 +9,42 @@ import {
     EventEmitter,
     forwardRef,
     Input,
-    Output
+    Output,
+    OnInit,
+    AfterViewInit,
+    ChangeDetectorRef,
+    ElementRef,
+    Host,
+    Inject,
+    Optional,
+    Self,
+    SkipSelf,
+    Injector,
+    TemplateRef
 } from '@angular/core';
+import { NgControl, NgForm } from '@angular/forms';
 
-import { TokenizerComponent, KeyUtil } from '@fundamental-ngx/core';
+import {
+    TokenizerComponent,
+    KeyUtil,
+    DialogConfig,
+    DIALOG_CONFIG,
+    DynamicComponentService,
+    RtlService
+} from '@fundamental-ngx/core';
 import { Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DATA_PROVIDERS, DataProvider, ListDataSource } from '../../../domain';
 import { MultiInputOption } from '../../../domain/data-model';
 import { ListComponent, SelectionType } from '../../list/list.component';
+import { ListConfig } from '../../list/public_api';
 
 import { FormFieldControl } from '../form-control';
+import { FormField } from '../form-field';
 import { InputType } from '../input/input.component';
 import { BaseMultiInput, MultiInputSelectionChangeEvent } from './base-multi-input';
+import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
+import { MULTIINPUT_COMPONENT } from './multi-input.interface';
 
 @Component({
     selector: 'fdp-multi-input',
@@ -33,7 +60,7 @@ import { BaseMultiInput, MultiInputSelectionChangeEvent } from './base-multi-inp
         }
     ]
 })
-export class PlatformMultiInputComponent extends BaseMultiInput {
+export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
     /** type Represent the type of input used for the multi Input */
     @Input()
     type: InputType;
@@ -58,11 +85,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput {
     get isGroup(): boolean {
         return !!(this.group && this.groupKey);
     }
-
-    /** listTemplate represent list tempate injected from the user end */
-    @Input()
-    listTemplate: ListComponent;
-
     /** Whether the input is disabled. */
     protected _disabled = false;
 
@@ -90,6 +112,18 @@ export class PlatformMultiInputComponent extends BaseMultiInput {
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
 
+    /** @hidden */
+    @ViewChild('controlTemplate')
+    controlTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('listTemplate')
+    listTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild(CdkConnectedOverlay)
+    _connectedOverlay: CdkConnectedOverlay;
+
     /** @hidden Emits event when the menu is opened/closed */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -102,7 +136,54 @@ export class PlatformMultiInputComponent extends BaseMultiInput {
      */
     isOpen = false;
 
+    /** @hidden */
+    private _direction: Direction = 'ltr';
+
     private _selectedListVariable: any;
+
+    constructor(
+        readonly cd: ChangeDetectorRef,
+        readonly elementRef: ElementRef,
+        @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @Self() readonly ngForm: NgForm,
+        @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
+        readonly _dynamicComponentService: DynamicComponentService,
+        @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
+        readonly _listConfig: ListConfig,
+        private _rtlService: RtlService,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+    ) {
+        super(cd, elementRef, ngControl, ngForm, dialogConfig, _listConfig, formField, formControl);
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        const providers = this.providers.size === 0 ? this._listConfig.providers : this.providers;
+        // if we have both prefer dataSource
+        if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
+            this.dataSource = new ListDataSource(providers.get(this.entityClass));
+        }
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        super.ngAfterViewInit();
+
+        this._rtlService.rtl
+            .pipe(takeUntil(this._destroyed))
+            .subscribe((isRtl) => (this._direction = isRtl ? 'rtl' : 'ltr'));
+
+        if (this._connectedOverlay) {
+            this._connectedOverlay.attach
+                .pipe(takeUntil(this._destroyed))
+                .subscribe(() => this._connectedOverlay.overlayRef.setDirection(this._direction));
+        }
+
+        if (this.mobile) {
+            this._setUpMobileMode();
+        }
+    }
 
     addToArray($select: any): void {
         this.selected.push($select);
@@ -239,5 +320,37 @@ export class PlatformMultiInputComponent extends BaseMultiInput {
         this.value = value;
 
         this.emitChangeEvent(value ? value : null);
+    }
+
+    /** @hidden */
+    private _setUpMobileMode(): void {
+        this._dynamicComponentService.createDynamicComponent(
+            { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
+            PlatformMultiInputMobileComponent,
+            { container: this.elementRef.nativeElement },
+            { injector: Injector.create({ providers: [{ provide: MULTIINPUT_COMPONENT, useValue: this }] }) }
+        );
+    }
+    /** Handle dialog dismissing, closes popover and sets backup data. */
+    dialogDismiss(term: string): void {
+        if (this.selectedValue && term !== this.selectedValue.label) {
+            this.selectedValue = this._getSelectedOptionItem(term);
+        }
+
+        this.inputText = term;
+        this.showList(false);
+    }
+
+    /** Handle dialog approval, closes popover and propagates data changes. */
+    dialogApprove(): void {
+        if (this.selected && this.selectedValue.label === this.inputText) {
+            this._updateModel(this.selectedValue.value);
+        } else {
+            const optionItem = this._getSelectedOptionItem(this.inputText);
+
+            this._updateModel(optionItem ? optionItem.value : this.inputText);
+        }
+
+        this.showList(false);
     }
 }

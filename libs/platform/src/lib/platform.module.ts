@@ -34,6 +34,7 @@ import { PlatformObjectMarkerModule } from './components/object-marker/object-ma
 import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
 import { PlatformTableModule } from './components/table/table.module';
 import { PlatformDatetimePickerModule } from './components/form/datetime-picker/datetime-picker.module';
+import { PlatformMultiInputMobileModule } from './components/form/multi-input/multi-input-mobile/multi-input-mobile.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -67,7 +68,9 @@ import { PlatformDatetimePickerModule } from './components/form/datetime-picker/
         PlatformObjectAttributeModule,
         PlatformTableModule,
         PlatformDatetimePickerModule,
-        PlatformMultiInputModule
+        PlatformMultiInputModule,
+        PlatformMultiInputModule,
+        PlatformMultiInputMobileModule
     ]
 })
 export class FundamentalNgxPlatformModule {}

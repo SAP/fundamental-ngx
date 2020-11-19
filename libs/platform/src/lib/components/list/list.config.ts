@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ContentDensity } from '../../components/form/form-control';
+import { DataProvider } from '../../domain';
 
 export enum MatchingStrategy {
     STARTS_WITH = 'starts with',
@@ -19,6 +20,11 @@ export class ListConfig {
      * String matching strategy for typeahead list. Default: 'starts with'
      */
     matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
+
+    /**
+     * Maps data providers
+     */
+    providers: Map<string, DataProvider<any>> | null = new Map();
 
     /**
      * Create Provider factory function

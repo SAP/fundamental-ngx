@@ -10,6 +10,8 @@ import * as platformMultiInputDeclineExample from '!raw-loader!./platform-mulit-
 import * as platformMultiInputDeclineExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-decline-example.component.ts';
 import * as platformMultiInputDisableExample from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-disabled.component.html';
 import * as platformMultiInputDisableExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-disabled.component.ts';
+import * as platformMultiInputMobileExample from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-mobile-example.component.html';
+import * as platformMultiInputMobileExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-mobile-example.component.ts';
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -81,6 +83,19 @@ export class PlatformMultiInputDocsComponent {
             code: platformMultiInputDisableExampleTs,
             fileName: 'platform-mulit-input-disabled',
             component: 'platformMultiInputDisabledExample'
+        }
+    ];
+    mulitiInputMobile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformMultiInputMobileExample,
+            fileName: 'platform-mulit-input-mobile-example'
+        },
+        {
+            language: 'typescript',
+            code: platformMultiInputMobileExampleTs,
+            fileName: 'platform-mulit-input-mobile-example',
+            component: 'platformMultiInputMobileExample'
         }
     ];
 }

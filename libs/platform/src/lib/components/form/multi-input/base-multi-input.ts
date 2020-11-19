@@ -108,7 +108,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Input()
     entityClass: string;
 
-    /** Whether the combobox should be built on mobile mode */
+    /** Whether the Multi Input should be built on mobile mode */
     @Input()
     mobile = false;
 
@@ -116,7 +116,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Input()
     mobileConfig: MobileModeConfig;
 
-    /** Tells the combo if we need to group items */
+    /** Tells the multi input if we need to group items */
     @Input()
     group = false;
 
@@ -206,6 +206,9 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden */
     controlTemplate: TemplateRef<any>;
 
+    /** @hidden */
+    listTemplate: TemplateRef<any>;
+
     /** Get the input text of the input. */
     get inputText(): string {
         return this._inputTextValue;
@@ -218,7 +221,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.onTouched();
     }
 
-    /** Whether the combobox is opened. */
+    /** Whether the Multi Input is opened. */
     isOpen = false;
 
     get canClose(): boolean {
@@ -376,9 +379,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         const map = new Map();
         map.set('query', text);
         map.set('limit', 12);
-        console.log('map', map);
-
         this.ds.match(map);
+        this.cd.detectChanges();
     }
 
     /** @hidden */
@@ -475,7 +477,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     /** @hidden
-     * Method that picks other value moved from current one by offset, called only when combobox is closed */
+     * Method that picks other value moved from current one by offset, called only when Multi Input is closed */
     private _chooseOtherItem(offset: number): void {
         const activeValue: MultiInputOption = this._getSelectItemByValue(this.inputText);
         const index: number = this._suggestions.findIndex((value) => value === activeValue);
