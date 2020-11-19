@@ -9,7 +9,6 @@ import {
     Input,
     OnDestroy,
     QueryList,
-    Renderer2,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -36,6 +35,17 @@ export const UPCOMING_STEP_STATUS = 'upcoming';
 export const COMPLETED_STEP_STATUS = 'completed';
 
 export const HEADER_HEIGHT = 64;
+
+export let _fromScrollToCurrentStep;
+export let timer = null;
+export const handleTimeoutReference = () => {
+    if (timer !== null) {
+        clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+        _fromScrollToCurrentStep = false;
+    }, 150);
+};
 
 @Component({
     selector: 'fd-wizard',
@@ -76,10 +86,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _previousWidth: number;
 
-    /** @hidden */
-    private _fromScrollToCurrentStep = false;
-
-    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef, private _renderer: Renderer2) {}
+    constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */
     @HostListener('window:resize')
@@ -92,7 +99,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
         this._previousWidth = wizardWidth;
         if (this.contentHeight) {
-            this._elRef.nativeElement.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).style.height = this.contentHeight;
+            this._elRef.nativeElement.querySelector(
+                '.' + WIZARD_CONTAINER_WRAPPER_CLASS
+            ).style.height = this.contentHeight;
         } else {
             this._setContainerAndTallContentHeight();
         }
@@ -119,6 +128,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+        this.wrapperContainer.nativeElement.removeEventListener('scroll', handleTimeoutReference);
     }
 
     /**
@@ -128,7 +138,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * navigation and the wizard footer, and calculating the height based on their presence.
      */
     private _calculateContentHeight(): number {
-        let shellbarHeight = 0, wizardNavHeight = 0, wizardFooterHeight = 0;
+        let shellbarHeight = 0,
+            wizardNavHeight = 0,
+            wizardFooterHeight = 0;
         if (document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS)) {
             shellbarHeight = document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS).clientHeight;
         }
@@ -147,13 +159,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const wizard = this._elRef.nativeElement.querySelector('.' + WIZARD_CLASS);
         const combinedHeight = this.contentHeight ? this.contentHeight : this._calculateContentHeight();
         if (wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS)) {
-            wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).style.height = 'calc(100vh - ' + combinedHeight + 'px)';
+            wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).style.height =
+                'calc(100vh - ' + combinedHeight + 'px)';
         }
-        wizard.querySelectorAll('.' + WIZARD_CONTENT_CLASS).forEach(node => {
-            node.style.height = 'auto'
+        wizard.querySelectorAll('.' + WIZARD_CONTENT_CLASS).forEach((node) => {
+            node.style.height = 'auto';
         });
         if (wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS)) {
-            wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS).style.height = 'calc(100vh - ' + combinedHeight + 'px)';
+            wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS).style.height =
+                'calc(100vh - ' + combinedHeight + 'px)';
         }
     }
 
@@ -191,23 +205,23 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     private _setContentTemplates(): void {
         const templatesLength = this.contentTemplates.length;
         this.contentTemplates = [];
-        let stepId = 0;
+        let _stepId = 0;
         this.steps.forEach((step) => {
             if (step.content) {
                 step.content.tallContent = false;
-                step.content.wizardContentId = stepId.toString();
+                step.content.wizardContentId = _stepId.toString();
             }
-            step.stepId = stepId;
-            stepId++;
+            step._stepId = _stepId;
+            _stepId++;
             step.finalStep = false;
-            if (step.visited) {
-                step.content.nextStep.getElRef().nativeElement.style.display = 'none';
+            if (step.completed) {
+                step.content.nextStep._getElRef().nativeElement.style.display = 'none';
             }
             if (
                 step.visited ||
                 ((step.status === CURRENT_STEP_STATUS || step.status === COMPLETED_STEP_STATUS) && step.content)
             ) {
-                if (step.status === CURRENT_STEP_STATUS && !step.visited) {
+                if (step.status === CURRENT_STEP_STATUS && !step.completed) {
                     step.content.tallContent = true;
                 }
                 step.visited = true;
@@ -226,7 +240,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _scrollToCurrentStep(): void {
-        this._fromScrollToCurrentStep = true;
+        _fromScrollToCurrentStep = true;
         let child: HTMLElement;
         this.steps.forEach((step, index) => {
             if (step.status === CURRENT_STEP_STATUS) {
@@ -242,15 +256,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _setUpScrollListener(): void {
-        let timer = null;
-        this.wrapperContainer.nativeElement.addEventListener('scroll', () => {
-            if (timer !== null) {
-                clearTimeout(timer);
-            }
-            timer = setTimeout(() => {
-                this._fromScrollToCurrentStep = false;
-            }, 150);
-        }, false);
+        this.wrapperContainer.nativeElement.addEventListener('scroll', handleTimeoutReference, false);
     }
 
     /** @hidden */
@@ -339,11 +345,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     scrollSpyChange($event: string): void {
-        if (!this._fromScrollToCurrentStep) {
+        if (!_fromScrollToCurrentStep) {
             this.steps.forEach((step) => {
-                if (step.stepId.toString() === $event) {
+                if (step._stepId.toString() === $event) {
                     step.status = CURRENT_STEP_STATUS;
-                } else if (step.stepId < parseInt($event, 10)) {
+                } else if (step._stepId < parseInt($event, 10)) {
                     step.status = COMPLETED_STEP_STATUS;
                 } else {
                     step.status = UPCOMING_STEP_STATUS;

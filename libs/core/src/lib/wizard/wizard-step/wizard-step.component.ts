@@ -16,6 +16,9 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
+export const CURRENT_STEP_STATUS = 'current';
+export const COMPLETED_STEP_STATUS = 'completed';
+
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-wizard-step]',
@@ -88,7 +91,10 @@ export class WizardStepComponent implements OnChanges {
     visited = false;
 
     /** @hidden */
-    stepId: number;
+    completed = false;
+
+    /** @hidden */
+    _stepId: number;
 
     /** @hidden */
     constructor(private _elRef: ElementRef) {}
@@ -96,6 +102,12 @@ export class WizardStepComponent implements OnChanges {
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes && changes.status) {
+            if (
+                changes.status.previousValue === CURRENT_STEP_STATUS &&
+                changes.status.currentValue === COMPLETED_STEP_STATUS
+            ) {
+                this.completed = true;
+            }
             this.statusChange.emit(this.status);
         }
     }

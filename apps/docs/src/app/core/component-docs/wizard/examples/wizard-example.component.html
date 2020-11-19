@@ -5,7 +5,7 @@
                 <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
                 <fd-wizard-content>
                     <h3 fd-title>1. Product Type</h3>
-                    <fd-message-strip [type]="'information'" [dismissible]="false">
+                    <fd-message-strip type="information" [dismissible]="false">
                         The Wizard control is supposed to break down large tasks, into smaller steps, easier for the
                         user to work with.
                     </fd-message-strip>
@@ -26,11 +26,16 @@
                     </fd-wizard-next-step>
                 </fd-wizard-content>
             </li>
-            <li fd-wizard-step [status]="step2status" (statusChange)="step2status = $event" label="Customer Information">
+            <li
+                fd-wizard-step
+                [status]="step2status"
+                (statusChange)="step2status = $event"
+                label="Customer Information"
+            >
                 <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
                 <fd-wizard-content>
                     <h3 fd-title>2. Customer Information</h3>
-                    <fd-message-strip [type]="'information'" [dismissible]="false">
+                    <fd-message-strip type="information" [dismissible]="false">
                         As the developer, you are in charge of whether or not to disable the next step button depending
                         on if the user has provided all required information.
                     </fd-message-strip>
@@ -49,18 +54,40 @@
                     </p>
                     <div fd-form-item>
                         <label fd-form-label [required]="true" for="input-1">Full Name:</label>
-                        <input fd-form-control type="text" id="input-1" placeholder="Name" aria-required="true" [(ngModel)]="name" autocomplete="off"/>
+                        <input
+                            fd-form-control
+                            type="text"
+                            id="input-1"
+                            placeholder="Name"
+                            aria-required="true"
+                            [(ngModel)]="name"
+                            autocomplete="off"
+                        />
                     </div>
                     <div fd-form-item>
                         <label fd-form-label [required]="true" for="input-2">Address Line 1:</label>
-                        <input fd-form-control type="text" id="input-2" placeholder="Name" aria-required="true" [(ngModel)]="addressLine1" autocomplete="off"/>
+                        <input
+                            fd-form-control
+                            type="text"
+                            id="input-2"
+                            placeholder="Name"
+                            aria-required="true"
+                            [(ngModel)]="addressLine1"
+                            autocomplete="off"
+                        />
                     </div>
                     <div fd-form-item>
                         <label fd-form-label for="input-3">Address Line 2:</label>
-                        <input fd-form-control type="text" id="input-3" placeholder="Name" autocomplete="off"/>
+                        <input fd-form-control type="text" id="input-3" placeholder="Name" autocomplete="off" />
                     </div>
                     <fd-wizard-next-step>
-                        <button fd-button [disabled]="name === '' || addressLine1 === ''" [compact]="true" fdType="emphasized" (click)="goToStep(3)">
+                        <button
+                            fd-button
+                            [disabled]="name === '' || addressLine1 === ''"
+                            [compact]="true"
+                            fdType="emphasized"
+                            (click)="goToStep(3)"
+                        >
                             Go to Step 3
                         </button>
                     </fd-wizard-next-step>
@@ -76,7 +103,7 @@
                 <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
                 <fd-wizard-content>
                     <h3 fd-title>3. Additional Information</h3>
-                    <fd-message-strip [type]="'information'" [dismissible]="false">
+                    <fd-message-strip type="information" [dismissible]="false">
                         Some steps may not require any input from the customer to progress to the next step.
                     </fd-message-strip>
                     <p>

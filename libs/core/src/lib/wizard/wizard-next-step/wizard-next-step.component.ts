@@ -12,13 +12,10 @@ export class WizardNextStepComponent {
     @Input()
     floating = false;
 
-    /** @hidden */
-    displayed = true;
-
     constructor(private _elRef: ElementRef) {}
 
     /** @hidden */
-    getElRef(): ElementRef {
+    _getElRef(): ElementRef {
         return this._elRef;
     }
 }
