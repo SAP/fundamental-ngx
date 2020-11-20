@@ -15,7 +15,7 @@ import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
 import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
-import { DynamicComponentContainer } from '../../utils/dynamic-component';
+import { DynamicComponentContainer } from '../../utils/dynamic-component/dynamic-component-container';
 import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogContentType } from '../dialog-service/dialog.service';

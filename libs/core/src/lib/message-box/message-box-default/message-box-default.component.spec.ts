@@ -24,15 +24,15 @@ describe('MessageBoxDefaultComponent', () => {
             approveButtonCallback: createSpy()
         };
 
-        component.messageBoxContent = messageBoxContent;
+        component._messageBoxContent = messageBoxContent;
 
-        component.onCloseButton();
+        component._onCloseButton();
         expect(messageBoxContent.closeButtonCallback).toHaveBeenCalled();
 
-        component.onCancelButton();
+        component._onCancelButton();
         expect(messageBoxContent.cancelButtonCallback).toHaveBeenCalled();
 
-        component.onApproveButton();
+        component._onApproveButton();
         expect(messageBoxContent.approveButtonCallback).toHaveBeenCalled();
     });
 });

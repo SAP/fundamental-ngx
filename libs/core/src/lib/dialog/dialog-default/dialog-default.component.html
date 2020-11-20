@@ -1,42 +1,42 @@
 <fd-dialog>
     <fd-dialog-header>
-        <h1 fd-title>{{ defaultDialogConfig?.title }}</h1>
+        <h1 fd-title>{{ _defaultDialogConfig?.title }}</h1>
         <button fd-dialog-close-button
-                *ngIf="defaultDialogConfig?.closeButtonCallback"
-                (click)="closeButtonClicked()">
+                *ngIf="_defaultDialogConfig?.closeButtonCallback"
+                (click)="_closeButtonClicked()">
         </button>
-        <ng-container *ngIf="defaultDialogConfig?.subHeader">
+        <ng-container *ngIf="_defaultDialogConfig?.subHeader">
             <ng-template fdTemplate="subheader">
-                <ng-container *ngTemplateOutlet="defaultDialogConfig.subHeader"></ng-container>
+                <ng-container *ngTemplateOutlet="_defaultDialogConfig.subHeader"></ng-container>
             </ng-template>
         </ng-container>
     </fd-dialog-header>
 
-    <fd-dialog-body *ngIf="defaultDialogConfig?.content">
-        <ng-container *ngTemplateOutlet="defaultDialogConfig?.content"></ng-container>
+    <fd-dialog-body *ngIf="_defaultDialogConfig?.content">
+        <ng-container *ngTemplateOutlet="_defaultDialogConfig?.content"></ng-container>
     </fd-dialog-body>
 
-    <fd-dialog-footer *ngIf="showFooter()">
-        <fd-dialog-footer-button *ngIf="defaultDialogConfig?.approveButton">
+    <fd-dialog-footer *ngIf="_showFooter()">
+        <fd-dialog-footer-button *ngIf="_defaultDialogConfig?.approveButton">
             <button
                 fd-button
                 fdType="emphasized"
                 fd-initial-focus
                 fd-dialog-decisive-button
                 [compact]="true"
-                [label]="defaultDialogConfig?.approveButton"
-                (click)="approveButtonClicked()">
+                [label]="_defaultDialogConfig?.approveButton"
+                (click)="_approveButtonClicked()">
             </button>
         </fd-dialog-footer-button>
 
-        <fd-dialog-footer-button *ngIf="defaultDialogConfig?.cancelButton">
+        <fd-dialog-footer-button *ngIf="_defaultDialogConfig?.cancelButton">
             <button
                 fd-button
                 fdType="transparent"
                 fd-dialog-decisive-button
                 [compact]="true"
-                [label]="defaultDialogConfig?.cancelButton"
-                (click)="cancelButtonClicked()">
+                [label]="_defaultDialogConfig?.cancelButton"
+                (click)="_cancelButtonClicked()">
             </button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>

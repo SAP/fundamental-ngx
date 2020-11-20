@@ -42,36 +42,36 @@ describe('DefaultDialogComponent', () => {
     });
 
     it('should create', () => {
-        component.defaultDialogConfig = object;
+        component._defaultDialogConfig = object;
         expect(component).toBeTruthy();
     });
 
     it('should have footer', () => {
-        component.defaultDialogConfig = object;
+        component._defaultDialogConfig = object;
         fixture.detectChanges();
-        expect(component.showFooter()).toBeTruthy();
+        expect(component._showFooter()).toBeTruthy();
     });
 
     it('should not have footer', () => {
-        component.defaultDialogConfig = { ...object, cancelButton: null, approveButton: null };
+        component._defaultDialogConfig = { ...object, cancelButton: null, approveButton: null };
         fixture.detectChanges();
-        expect(component.showFooter()).toBeFalsy();
+        expect(component._showFooter()).toBeFalsy();
     });
 
     it('should handle callback', () => {
         let cancelClicked = false;
         let approveClicked = false;
         let closeClicked = false;
-        component.defaultDialogConfig = {
-            ...component.defaultDialogConfig,
+        component._defaultDialogConfig = {
+            ...component._defaultDialogConfig,
             closeButtonCallback: () => closeClicked = true,
             cancelButtonCallback: () => cancelClicked = true,
             approveButtonCallback: () => approveClicked = true
         };
 
-        component.approveButtonClicked();
-        component.cancelButtonClicked();
-        component.closeButtonClicked();
+        component._approveButtonClicked();
+        component._cancelButtonClicked();
+        component._closeButtonClicked();
 
         expect(cancelClicked).toBeTruthy();
         expect(closeClicked).toBeTruthy();

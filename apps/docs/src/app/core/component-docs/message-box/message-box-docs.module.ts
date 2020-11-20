@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MessageBoxModule } from '@fundamental-ngx/core';
+import { BarModule, MessageBoxModule } from '@fundamental-ngx/core';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -23,7 +23,8 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        MessageBoxModule
+        MessageBoxModule,
+        BarModule
     ],
     exports: [RouterModule],
     declarations: [

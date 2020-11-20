@@ -10,7 +10,7 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 export class DialogDefaultComponent implements AfterViewInit {
 
     /** @hidden */
-    defaultDialogConfig: DialogDefaultContent;
+    _defaultDialogConfig: DialogDefaultContent;
 
     /** @hidden */
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
@@ -23,24 +23,24 @@ export class DialogDefaultComponent implements AfterViewInit {
     }
 
     /** Whether there is a approve button, or cancel button text */
-    showFooter(): boolean {
-        return this.defaultDialogConfig &&
-            !!(this.defaultDialogConfig.cancelButton || this.defaultDialogConfig.approveButton)
+    _showFooter(): boolean {
+        return this._defaultDialogConfig &&
+            !!(this._defaultDialogConfig.cancelButton || this._defaultDialogConfig.approveButton)
         ;
     }
 
     /** @hidden */
-    closeButtonClicked(): void {
-        this.defaultDialogConfig.closeButtonCallback();
+    _closeButtonClicked(): void {
+        this._defaultDialogConfig.closeButtonCallback();
     }
 
     /** @hidden */
-    approveButtonClicked(): void {
-        this.defaultDialogConfig.approveButtonCallback();
+    _approveButtonClicked(): void {
+        this._defaultDialogConfig.approveButtonCallback();
     }
 
     /** @hidden */
-    cancelButtonClicked(): void {
-        this.defaultDialogConfig.cancelButtonCallback();
+    _cancelButtonClicked(): void {
+        this._defaultDialogConfig.cancelButtonCallback();
     }
 }

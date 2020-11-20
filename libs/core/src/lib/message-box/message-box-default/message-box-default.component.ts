@@ -19,16 +19,16 @@ export class MessageBoxDefaultComponent implements AfterViewInit {
 
     /** @hidden */
     @ViewChild('textContent')
-    textContentTemplate: TemplateRef<any>;
+    _textContentTemplate: TemplateRef<any>;
 
     /** @hidden */
-    contentTemplate: TemplateRef<any>;
+    _contentTemplate: TemplateRef<any>;
 
     /** @hidden */
-    messageBoxContent: MessageBoxContent;
+    _messageBoxContent: MessageBoxContent;
 
     /** @hidden */
-    constructor(public messageBoxConfig: MessageBoxConfig, private _changeDetectorRef: ChangeDetectorRef) { }
+    constructor(public _messageBoxConfig: MessageBoxConfig, private _changeDetectorRef: ChangeDetectorRef) { }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -36,25 +36,25 @@ export class MessageBoxDefaultComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    onCloseButton(): void {
-        this.messageBoxContent.closeButtonCallback();
+    _onCloseButton(): void {
+        this._messageBoxContent.closeButtonCallback();
     }
 
     /** @hidden */
-    onApproveButton(): void {
-        this.messageBoxContent.approveButtonCallback();
+    _onApproveButton(): void {
+        this._messageBoxContent.approveButtonCallback();
     }
 
     /** @hidden */
-    onCancelButton(): void {
-        this.messageBoxContent.cancelButtonCallback();
+    _onCancelButton(): void {
+        this._messageBoxContent.cancelButtonCallback();
     }
 
     /** @hidden */
     private _setContentTemplate(): void {
-        this.contentTemplate = this.messageBoxContent.content instanceof TemplateRef
-            ? this.messageBoxContent.content
-            : this.textContentTemplate;
+        this._contentTemplate = this._messageBoxContent.content instanceof TemplateRef
+            ? this._messageBoxContent.content
+            : this._textContentTemplate;
 
         this._changeDetectorRef.detectChanges();
     }
