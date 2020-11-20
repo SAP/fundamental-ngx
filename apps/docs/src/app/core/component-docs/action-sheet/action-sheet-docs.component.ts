@@ -18,7 +18,11 @@ export class ActionSheetDocsComponent {
             language: 'html',
             code: actionSheetCompactSrc,
             fileName: 'action-sheet-compact-example',
-            typescriptFileCode: actionSheetCompactSrcTs,
+        },
+        {
+            language: 'typescript',
+            code: actionSheetCompactSrcTs,
+            fileName: 'action-sheet-compact-example',
             component: 'ActionSheetCompactExampleComponent'
         }
     ];
@@ -28,7 +32,11 @@ export class ActionSheetDocsComponent {
             language: 'html',
             code: actionSheetCosySrc,
             fileName: 'action-sheet-cosy-example',
-            typescriptFileCode: actionSheetCosySrcTs,
+        },
+        {
+            language: 'html',
+            code: actionSheetCosySrcTs,
+            fileName: 'action-sheet-cosy-example',
             component: 'ActionSheetCosyExampleComponent'
         }
     ];
@@ -38,7 +46,11 @@ export class ActionSheetDocsComponent {
             language: 'html',
             code: actionSheetMobileSrc,
             fileName: 'action-sheet-mobile-example',
-            typescriptFileCode: actionSheetMobileSrcTs,
+        },
+        {
+            language: 'html',
+            code: actionSheetMobileSrcTs,
+            fileName: 'action-sheet-mobile-example',
             component: 'ActionSheetMobileExampleComponent'
         }
     ];
