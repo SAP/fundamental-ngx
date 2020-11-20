@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.10...v0.24.1-rc.11) (2020-11-20)
+
+
+### Features
+
+* (Platform) introduce DateTime Picker component in Platform  ([#3724](https://github.com/SAP/fundamental-ngx/issues/3724)) ([dc28271](https://github.com/SAP/fundamental-ngx/commit/dc28271e420b75c9cc3c0868b9d959f7634a34a2))
+
 ### [0.24.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.9...v0.24.1-rc.10) (2020-11-19)
 
 
