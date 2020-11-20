@@ -2,6 +2,79 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.12...v0.24.1-rc.13) (2020-11-20)
+
+
+### Bug Fixes
+
+* (Core) Shellbar IE11 shrink ([#3900](https://github.com/SAP/fundamental-ngx/issues/3900)) ([fd556c8](https://github.com/SAP/fundamental-ngx/commit/fd556c84b597cfee7289c4c4ae5e14c81616502b))
+
+### [0.24.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.11...v0.24.1-rc.12) (2020-11-20)
+
+### [0.24.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.10...v0.24.1-rc.11) (2020-11-20)
+
+
+### Features
+
+* (Platform) introduce DateTime Picker component in Platform  ([#3724](https://github.com/SAP/fundamental-ngx/issues/3724)) ([dc28271](https://github.com/SAP/fundamental-ngx/commit/dc28271e420b75c9cc3c0868b9d959f7634a34a2))
+
+### [0.24.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.9...v0.24.1-rc.10) (2020-11-19)
+
+
+### Bug Fixes
+
+* (Core) add styles to shellbar elements ([#3892](https://github.com/SAP/fundamental-ngx/issues/3892)) ([26ab22e](https://github.com/SAP/fundamental-ngx/commit/26ab22e578815a46ccb412fc421d73fbf232dbe6))
+
+### [0.24.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.8...v0.24.1-rc.9) (2020-11-19)
+
+
+### Bug Fixes
+
+* (core) Add raw values for IE11 into popover arrow styles ([#3891](https://github.com/SAP/fundamental-ngx/issues/3891)) ([8a24a10](https://github.com/SAP/fundamental-ngx/commit/8a24a1063714674e81271961c5e7364d68be218c))
+
+### [0.24.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.7...v0.24.1-rc.8) (2020-11-19)
+
+
+### Bug Fixes
+
+* (Core) Popover sides position ([#3889](https://github.com/SAP/fundamental-ngx/issues/3889)) ([cd7a6ac](https://github.com/SAP/fundamental-ngx/commit/cd7a6ac3e76cddfa629735180a36afd40bc3ddc1))
+
+### [0.24.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.6...v0.24.1-rc.7) (2020-11-19)
+
+
+### Bug Fixes
+
+* (core) fix closestElement ([#3894](https://github.com/SAP/fundamental-ngx/issues/3894)) ([915570f](https://github.com/SAP/fundamental-ngx/commit/915570ff7e4a871e9e710515318ed59454a7dde2))
+
+### [0.24.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.5...v0.24.1-rc.6) (2020-11-19)
+
+
+### Features
+
+* (Core) add theme switcher API service ([#3784](https://github.com/SAP/fundamental-ngx/issues/3784)) ([d2d0035](https://github.com/SAP/fundamental-ngx/commit/d2d00356680204b298d3f3a4f0acfe35991e7800))
+
+### [0.24.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.4...v0.24.1-rc.5) (2020-11-18)
+
+
+### Bug Fixes
+
+* (Core)  arrow keys in Core carousel component ([#3774](https://github.com/SAP/fundamental-ngx/issues/3774)) ([204edd3](https://github.com/SAP/fundamental-ngx/commit/204edd341497fba97ea9508d74bc5cb7cb438bcc))
+
+### [0.24.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.3...v0.24.1-rc.4) (2020-11-17)
+
+
+### Bug Fixes
+
+* (core) Add overlay css to popover ([#3883](https://github.com/SAP/fundamental-ngx/issues/3883)) ([c026fde](https://github.com/SAP/fundamental-ngx/commit/c026fde6e4ca35b414caaa3e590ed52b66ce7a63))
+
+### [0.24.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.2...v0.24.1-rc.3) (2020-11-16)
+
+### [0.24.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.1...v0.24.1-rc.2) (2020-11-16)
+
+### [0.24.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.0...v0.24.1-rc.1) (2020-11-16)
+
+### [0.24.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.24.0...v0.24.1-rc.0) (2020-11-16)
+
 ## [0.24.0](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.11...v0.24.0) (2020-11-10)
 
 ## [0.24.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.24.0-rc.10...v0.24.0-rc.11) (2020-11-10)

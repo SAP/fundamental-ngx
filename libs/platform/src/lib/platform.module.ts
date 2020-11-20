@@ -26,6 +26,7 @@ import { PlatformThumbnailModule } from './components/thumbnail/public_api';
 import { PlatformObjectMarkerModule } from './components/object-marker/object-marker.module';
 import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
 import { PlatformTableModule } from './components/table/table.module';
+import { PlatformDatetimePickerModule } from './components/form/datetime-picker/datetime-picker.module';
 import { PlatformFeedInputModule } from './components/feed-input/feed-input.module';
 
 @NgModule({
@@ -59,7 +60,8 @@ import { PlatformFeedInputModule } from './components/feed-input/feed-input.modu
         PlatformObjectMarkerModule,
         PlatformObjectAttributeModule,
         PlatformTableModule,
+        PlatformDatetimePickerModule,
         PlatformFeedInputModule
     ]
 })
-export class FundamentalNgxPlatformModule { }
+export class FundamentalNgxPlatformModule {}
