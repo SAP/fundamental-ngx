@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.12...v0.24.1-rc.13) (2020-11-20)
+
+
+### Bug Fixes
+
+* (Core) Shellbar IE11 shrink ([#3900](https://github.com/SAP/fundamental-ngx/issues/3900)) ([fd556c8](https://github.com/SAP/fundamental-ngx/commit/fd556c84b597cfee7289c4c4ae5e14c81616502b))
+
 ### [0.24.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.11...v0.24.1-rc.12) (2020-11-20)
 
 ### [0.24.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.10...v0.24.1-rc.11) (2020-11-20)
