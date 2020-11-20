@@ -6,7 +6,9 @@ import {
     Output,
     ViewChild,
     ViewEncapsulation,
-    ChangeDetectionStrategy, OnInit, AfterViewInit, Renderer2
+    ChangeDetectionStrategy,
+    AfterViewInit,
+    Renderer2
 } from '@angular/core';
 
 @Component({
