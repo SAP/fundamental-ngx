@@ -1,8 +1,8 @@
 <!--  list item navigation with Arrow-->
 <ng-container *ngIf="navigationIndicator || navigated && !(noDataText!==null && noDataText!== undefined) ">
     <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" tabindex="-1" [attr.aria-selected]="_selected"
-        (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)" class="fd-list__item--link" role="listitem"
-        [class.fd-list__item--inactive]="listType === 'inactive'" [attr.ariaLabelledBy]="ariaLabelledBy"
+        (click)="_onItemClick()" (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)" class="fd-list__item--link"
+        role="listitem" [class.fd-list__item--inactive]="listType === 'inactive'" [attr.ariaLabelledBy]="ariaLabelledBy"
         [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
         <ng-container *ngTemplateOutlet=" selectionTemplate">
         </ng-container>
@@ -17,7 +17,8 @@
 <ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText!==null && noDataText!== undefined)">
     <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" (keydown)="_onKeyDown($event)" tabindex="-1"
         role="listitem" (keyup)="_onKeyUp($event)" [attr.ariaLabelledBy]="ariaLabelledBy" [attr.aria-level]="ariaLevel"
-        [attr.aria-posinet]="ariaPosinet" [class.fd-list__item--inactive]="listType === 'inactive'">
+        [attr.aria-posinet]="ariaPosinet" [class.fd-list__item--inactive]="listType === 'inactive'"
+        (click)="_onItemClick()">
         <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
         <ng-container *ngTemplateOutlet="_hasByLine ? byLineTemplate: commonTemplate"></ng-container>
     </li>
@@ -81,7 +82,8 @@
 </ng-template>
 
 <ng-template #selectionTemplate>
-    <div fd-form-item class="fd-list__form-item" *ngIf="selectionMode === 'multi' || selectionMode === 'single'">
+    <div fd-form-item class="fd-list__form-item"
+        *ngIf="(selectionMode === 'multi' || selectionMode === 'single') && !selectRow">
         <fd-checkbox #checkbox *ngIf="selectionMode === 'multi'" [attr.aria-checked]="_selected" role="checkbox"
             [compact]="_isCompact" [(ngModel)]="_selected">
         </fd-checkbox>
@@ -93,11 +95,11 @@
 <ng-template #actionsTemplate>
     <ng-content selector="#secondaryAction"></ng-content>
     <button fd-button #edit [attr.id]="'detail-' + id" *ngIf="listType === 'detail'" role="button"
-        [compact]="_isCompact" fdType="transparent" glyph="edit" (click)="_onActionButtonClick($event,'edit')"
+        [compact]="_isCompact" fdType="transparent" glyph="edit" (click)="_onActionButtonClick('edit')"
         [attr.aria-label]="'detail'" (keydown)="_onKeyButtonClick($event,'edit')">
     </button>
     <button fd-button #delete [attr.id]="'delete-' + id" *ngIf="selectionMode === 'delete'" role="button"
         [compact]="_isCompact" [attr.aria-label]="'delete'" fdType="transparent" glyph="decline"
-        (click)="_onActionButtonClick($event,'delete')" (keydown)="_onKeyButtonClick($event,'delete')">
+        (click)="_onActionButtonClick('delete')" (keydown)="_onKeyButtonClick($event,'delete')">
     </button>
 </ng-template>
