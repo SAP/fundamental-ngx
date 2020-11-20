@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BusyIndicatorModule, CarouselModule, CardModule, ListModule, TableModule } from '@fundamental-ngx/core';
+import { CarouselModule, CardModule, ListModule, TableModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -31,7 +31,6 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        BusyIndicatorModule,
         CarouselModule,
         CardModule,
         ListModule,
